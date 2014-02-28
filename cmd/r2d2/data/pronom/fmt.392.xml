@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1140</FormatID>
+      <FormatName>MrSID Image Format (Multi-resolution Seamless Image Database)</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Raster)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>MrSID is an acronym that stands for Multiresolution Seamless Image Database. It is a wavelet-based file format developed and patented by LizardTech designed to enable portability of massive bit-mapped (raster) images, such as orthophotos. MrSID was originally developed for Geographic Information Systems (GIS). With this format, large raster image files such as aerial photographs or satellite imagery are compressed and can be quickly viewed without having to decompress the entire file. There is no open source implementation of the MrSID format. Some open source GIS systems can read MrSID files, including MapWindow GIS and those based on GDAL. The Decode Software Development Kit (SDK) is made available as a free download from developer.lizardtech.com. This enables the capability to implement MrSID reading capability in any application.</FormatDescription>
+      <BinaryFileFormat>Binary</BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>25 Nov 2011</ProvenanceSourceDate>
+      <ProvenanceDescription>Format description information supplied by the Geospatial Multistate Access and Preservation Partnership (GeoMAPP), a grant funded collaboration sponsored by the National Digital Information Infrastructure Preservation Program (NDIIPP) of the Library of Congress, involving archives staff from North Carolina, Kentucky, Montana, and Utah state archives.</ProvenanceDescription>
+      <LastUpdatedDate>25 Nov 2011</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/392</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>177</DeveloperID>
+        <DeveloperName>LizardTech</DeveloperName>
+        <OrganisationName>LizardTech</OrganisationName>
+        <DeveloperCompoundName>LizardTech / LizardTech</DeveloperCompoundName>
+      </Developers>
+      <ExternalSignature>
+        <ExternalSignatureID>1182</ExternalSignatureID>
+        <Signature>sid</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>578</SignatureID>
+        <SignatureName>MrSID Image Format (Multi-resolution Seamless Image Database)</SignatureName>
+        <SignatureNote>Header ASCII: msid. Footer ASCII: ÿÒÿ¡</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>714</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>6D736964</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>715</ByteSequenceID>
+          <PositionType>Absolute from EOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>FFD2FFA1</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>
