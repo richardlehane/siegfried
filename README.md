@@ -10,9 +10,9 @@ Siegfried is a signature-based file identification tool.
 
 With go installed: 
 
-go get github.com/richardlehane/siegfried/cmd/siegfried
+    go get github.com/richardlehane/siegfried/cmd/siegfried
 
-go get github.com/richardlehane/siegfried/cmd/rd2d
+    go get github.com/richardlehane/siegfried/cmd/rd2d
 
 Or:
 
