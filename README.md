@@ -11,18 +11,22 @@ Siegfried is a signature-based file identification tool.
 With go installed: 
 
 go get github.com/richardlehane/siegfried/cmd/siegfried
+
 go get github.com/richardlehane/siegfried/cmd/rd2d
 
 Or:
+
 Download this pre-built Win64 package <https://dl.dropboxusercontent.com/u/48160346/Siegfried-0_1-Win64.zip>
 
-Before using Siegfried, you must download current Pronom reports and generate a signature file. To do this:
+Before using Siegfried, you must download current Pronom reports and generate a signature file.
 
-	1) Get Droid signature and container files. These are available for download from this page: http://www.nationalarchives.gov.uk/aboutapps/pronom/droid-signature-files.htm. If these aren't the same as the defaults in the r2d2 tool (use the r2d2 -defaults command to check), you will need to supply the names of your updated files with additional flags to the relevant R2D2 commands
+To do this:
 
-	2) Harvest Pronom reports with the R2D2 tool (./r2d2 -harvest)
+- Get Droid signature and container files. These are available for download from this page: http://www.nationalarchives.gov.uk/aboutapps/pronom/droid-signature-files.htm. If these aren't the same as the defaults in the r2d2 tool (use the r2d2 -defaults command to check), you will need to supply the names of your updated files with additional flags to the relevant R2D2 commands
 
-	3) Build a Siegfried signature file with the R2D2 build command (./r2d2 -build)
+- Harvest Pronom reports with the R2D2 tool (./r2d2 -harvest)
+
+- Build a Siegfried signature file with the R2D2 build command (./r2d2 -build)
 
 ## Usage
 
@@ -39,21 +43,21 @@ Before using Siegfried, you must download current Pronom reports and generate a 
 
 ## TODO
 
-### V 0.2 (March 2014)
+### Version 0.2 (March 2014)
 
 - begin optimising. e.g. replace stop the world, full buffer, recursive frame matching with goroutines, channels and limited buffers
 - implement an Identifier type that controls the matching process and stops on best possible match (i.e. no longer require a full file scan for all files)
 - name/extension matching
 
-### V 0.3 (April 2014)
+### Version 0.3 (April 2014)
 
 - container matching (see github.com/richardlehane/mscfb)
 
-### V 0.4 (May 2014)
+### Version 0.4 (May 2014)
 
 - server mode
 
-### V 0.5 (July 2014)
+### Version 0.5 (July 2014)
 
 - HTML GUI
 
@@ -83,7 +87,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ## Changes
 
-### V 0.1 (28/02/2014)
+### Version 0.1 (28/02/2014)
 
 First release. Parses PRONOM signatures and performs byte matching. Bare bones CLI. Glacially slow!
 
@@ -91,4 +95,5 @@ First release. Parses PRONOM signatures and performs byte matching. Bare bones C
 ## Thanks
 
 Thanks TNA for http://www.nationalarchives.gov.uk/pronom/ and http://www.nationalarchives.gov.uk/information-management/projects-and-work/droid.htm
+
 Thanks Ross for https://github.com/exponential-decay/skeleton-test-suite-generator, very handy!
