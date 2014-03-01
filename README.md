@@ -2,11 +2,12 @@
 
 Siegfried is a signature-based file identification tool.
 
-[![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried)
-
 ## Version
 
 0.1
+
+[![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried)
+
 
 ## Install
 
