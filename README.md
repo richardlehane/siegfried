@@ -1,5 +1,6 @@
 # Siegfried
 
+[![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried)
 Siegfried is a signature-based file identification tool.
 
 ## Version
