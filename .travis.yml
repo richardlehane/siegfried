@@ -1,1 +1,9 @@
 language: go
+
+install: 
+  - go get github.com/richardlehane/siegfried/pkg/core/bytematcher
+  - go get github.com/richardlehane/siegfried/pkg/pronom
+
+script:
+  - go test github.com/richardlehane/siegfried/pkg/core/bytematcher
+  - go test github.com/richardlehane/siegfried/pkg/pronom
