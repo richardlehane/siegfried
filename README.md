@@ -32,7 +32,7 @@ You can also build your own signature file using the R2D2 tool (it talks to Droi
 
 To do this:
 
-- get recent Droid signature and container files. These are available for download from this page: [http://www.nationalarchives.gov.uk/aboutapps/pronom/droid-signature-files.html](http://www.nationalarchives.gov.uk/aboutapps/pronom/droid-signature-files.html). If these aren't the same as the defaults in the r2d2 tool (use the r2d2 -defaults command to check), you will need to supply the names of your updated files with additional flags to the relevant R2D2 commands
+- get recent Droid signature and container files. These are available for download from this page: [http://www.nationalarchives.gov.uk/aboutapps/pronom/droid-signature-files.html](http://www.nationalarchives.gov.uk/aboutapps/pronom/droid-signature-files.html). If these aren't the same as the defaults in the R2D2 tool (use the r2d2 -defaults command to check), you will need to supply the names of your updated files with additional flags to the relevant R2D2 commands
 
 - harvest Pronom reports with R2D2 (./r2d2 -harvest)
 
