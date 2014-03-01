@@ -14,19 +14,29 @@ With go installed:
 
     go get github.com/richardlehane/siegfried/cmd/rd2d
 
-Or:
+Or download a pre-built package:
 
-Download this pre-built Win64 package <https://dl.dropboxusercontent.com/u/48160346/Siegfried-0_1-Win64.zip>
+- [Windows (64)](https://dl.dropboxusercontent.com/u/48160346/Releases/Win64/Siegfried_Win64_0_1.zip)
 
-Before using Siegfried, you must download current Pronom reports and generate a signature file.
+- [OSX (64)](https://dl.dropboxusercontent.com/u/48160346/Releases/Darwin/Siegfried_OSX64_0_1.zip)
+
+- [Linux (64)](https://dl.dropboxusercontent.com/u/48160346/Releases/Linux/Siegfried_Linux64_0_1.zip)
+
+### Signature file
+
+To run Siegfried, you need to have an up-to-date signature file (for a description of the Siegfried signature format, see [this wiki page](https://github.com/richardlehane/siegfried/wiki/Siegfried-signature-format)).
+
+The pre-built packages come with a signature file (pronom.gob) built from Droid v73 signatures. Keep this file in the same directory that you run Siegfried from.
+
+You can also build your own signature file using the R2D2 tool (it talks to Droid, get it!... and, yes, a protocol droid would have been more appropriate but that name was already taken :().
 
 To do this:
 
-- Get Droid signature and container files. These are available for download from this page: http://www.nationalarchives.gov.uk/aboutapps/pronom/droid-signature-files.htm. If these aren't the same as the defaults in the r2d2 tool (use the r2d2 -defaults command to check), you will need to supply the names of your updated files with additional flags to the relevant R2D2 commands
+- get recent Droid signature and container files. These are available for download from this page: [http://www.nationalarchives.gov.uk/aboutapps/pronom/droid-signature-files.html](http://www.nationalarchives.gov.uk/aboutapps/pronom/droid-signature-files.html). If these aren't the same as the defaults in the r2d2 tool (use the r2d2 -defaults command to check), you will need to supply the names of your updated files with additional flags to the relevant R2D2 commands
 
-- Harvest Pronom reports with the R2D2 tool (./r2d2 -harvest)
+- harvest Pronom reports with R2D2 (./r2d2 -harvest)
 
-- Build a Siegfried signature file with the R2D2 build command (./r2d2 -build)
+- run the R2D2 build command (./r2d2 -build)
 
 ## Usage
 
@@ -41,7 +51,13 @@ To do this:
     ./r2d2 -printdroid
     ./r2d2 -defaults
 
-## TODO
+## Package Documentation
+
+- [Bytematcher package](http://godoc.org/github.com/richardlehane/siegfried/pkg/core/bytematcher)
+
+- [Pronom package](http://godoc.org/github.com/richardlehane/siegfried/pkg/pronom)
+
+## Roadmap
 
 ### Version 0.2 (March 2014)
 
