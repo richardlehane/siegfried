@@ -27,11 +27,11 @@ Or download a pre-built package:
 
 ### Signature file
 
-To run Siegfried, you need to have an up-to-date signature file (for a description of the Siegfried signature format, see [this wiki page](https://github.com/richardlehane/siegfried/wiki/Siegfried-signature-format)).
+To run Siegfried, you need to have an up-to-date signature file (for a description of the Siegfried signature format, see [this wiki page](https://github.com/richardlehane/siegfried/wiki/Siegfried-signature-format)), a Droid signature file, and a directory of pronom reports.
 
-The pre-built packages come with a signature file (pronom.gob) built from Droid v73 signatures. Keep this file in the same directory that you run Siegfried from.
+The pre-built packages come with all necessary files. Move the siegfried directory (containing these files) into your home directory. If you are not happy with that, you can provide alternative file locations with the relevant flags for the siegfried executable.
 
-You can also build your own signature file using the R2D2 tool (it talks to Droid, get it!... and, yes, a protocol droid would have been more appropriate but that name was already taken :().
+You can also build your own signature file and harvest Pronom reports using the R2D2 tool (it talks to Droid, get it!... and, yes, a protocol droid would have been more appropriate but that name was already taken :().
 
 To do this:
 
