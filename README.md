@@ -21,15 +21,21 @@ Or download a pre-built package:
 
 - [Windows (64)](https://dl.dropboxusercontent.com/u/48160346/Releases/Win64/Siegfried_Win64_0_1.zip)
 
-- [OSX (64)]()
+- [OSX (64)](https://dl.dropboxusercontent.com/u/48160346/Releases/Darwin/Siegfried_OSX64_0_1.zip)
 
-- [Linux (64)]()
+- [Linux (64)](https://dl.dropboxusercontent.com/u/48160346/Releases/Linux/Siegfried_Linux64_0_1.zip)
 
 ### Signature file
 
-To run Siegfried, you need to have an up-to-date signature file (for a description of the Siegfried signature format, see [this wiki page](https://github.com/richardlehane/siegfried/wiki/Siegfried-signature-format)), a Droid signature file, and a directory of pronom reports.
+To run Siegfried, you need to have:
 
-The pre-built packages come with all necessary files. Move the siegfried directory (containing these files) into your home directory. If you are not happy with that, you can provide alternative file locations with the relevant flags for the siegfried executable.
+-  an up-to-date signature file (for a description of the Siegfried signature format, see [this wiki page](https://github.com/richardlehane/siegfried/wiki/Siegfried-signature-format))
+- a Droid signature file 
+- and a directory containing Pronom reports.
+
+The pre-built packages come with all these necessary files. 
+
+To install Siegfried,  copy the siegfried directory (containing these files) into your home directory. Alternatively, you can provide different file locations as flags to the Siegfried executable.
 
 You can also build your own signature file and harvest Pronom reports using the R2D2 tool (it talks to Droid, get it!... and, yes, a protocol droid would have been more appropriate but that name was already taken :().
 
