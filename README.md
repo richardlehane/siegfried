@@ -21,9 +21,9 @@ Or download a pre-built package:
 
 - [Windows (64)](https://dl.dropboxusercontent.com/u/48160346/Releases/Win64/Siegfried_Win64_0_1.zip)
 
-- [OSX (64)](https://dl.dropboxusercontent.com/u/48160346/Releases/Darwin/Siegfried_OSX64_0_1.zip)
+- [OSX (64)]()
 
-- [Linux (64)](https://dl.dropboxusercontent.com/u/48160346/Releases/Linux/Siegfried_Linux64_0_1.zip)
+- [Linux (64)]()
 
 ### Signature file
 

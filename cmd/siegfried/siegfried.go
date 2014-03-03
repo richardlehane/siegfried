@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/user"
 	"path/filepath"
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
@@ -14,16 +15,32 @@ import (
 var _ = pronom.Droid{} // import for side effects
 
 var (
-	defaultSigs    = filepath.Join(".", "pronom.gob")
-	defaultDroid   = filepath.Join(".", "DROID_SignatureFile_V72.xml")
-	defaultReports = filepath.Join(".", "pronom")
+	sigfile string
+	droid   string
+	reports string
 )
 
 var (
-	sigfile = flag.String("sigs", defaultSigs, "path to Siegfried signature file")
-	droid   = flag.String("droid", defaultDroid, "path to Droid signature file")
-	reports = flag.String("reports", defaultReports, "path to Pronom reports directory")
+	defaultSigs    = "pronom.gob"
+	defaultDroid   = "DROID_SignatureFile_V73.xml"
+	defaultReports = "pronom"
 )
+
+func init() {
+	current, err := user.Current()
+	if err != nil {
+		log.Fatal(err)
+	}
+	defaultSigs = filepath.Join(current.HomeDir, "siegfried", defaultSigs)
+	defaultDroid = filepath.Join(current.HomeDir, "siegfried", defaultDroid)
+	defaultReports = filepath.Join(current.HomeDir, "siegfried", defaultReports)
+
+	flag.StringVar(&sigfile, "sigs", defaultSigs, "path to Siegfried signature file")
+	flag.StringVar(&droid, "droid", defaultDroid, "path to Droid signature file")
+	flag.StringVar(&reports, "reports", defaultReports, "path to Pronom reports directory")
+}
+
+var ()
 
 var puids []string
 
@@ -93,6 +110,7 @@ func multiIdentifyP(b *bytematcher.Bytematcher, r string) error {
 }
 
 func main() {
+
 	flag.Parse()
 
 	if flag.NArg() != 1 {
@@ -100,7 +118,10 @@ func main() {
 	}
 
 	var err error
-	puids, err = pronom.PuidsFromDroid(*droid, *reports)
+	puids, err = pronom.PuidsFromDroid(droid, reports)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	file, err := os.Open(flag.Arg(0))
 	if err != nil {
@@ -111,7 +132,11 @@ func main() {
 		log.Fatal(err)
 	}
 
-	b, err := load(*sigfile)
+	b, err := load(sigfile)
+	if err != nil {
+		log.Fatal(err)
+
+	}
 
 	if info.IsDir() {
 		file.Close()
