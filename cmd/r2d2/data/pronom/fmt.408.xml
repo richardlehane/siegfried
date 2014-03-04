@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1156</FormatID>
+      <FormatName>Portable Pixel Map - Binary</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>
+      </FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <BinaryFileFormat>Binary</BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>165</ProvenanceSourceID>
+      <ProvenanceName>Georgia Tech Research Institute / Georgia Tech Research Institute</ProvenanceName>
+      <ProvenanceSourceDate>16 Mar 2012</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>16 Mar 2012</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/408</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>1187</ExternalSignatureID>
+        <Signature>ppm</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1188</ExternalSignatureID>
+        <Signature>ppmb</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>586</SignatureID>
+        <SignatureName>Portable Pixel Map - Binary with comment</SignatureName>
+        <SignatureNote>“P6” followed by comment, followed by width, height, colour.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>727</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>5036(20|0D|0A)(30|31|32|33|34|35|36|37|38|39|20|0A|0D)(30|31|32|33|34|35|36|37|38|39|20|0A|0D)(30|31|32|33|34|35|36|37|38|39|20|0A|0D)(30|31|32|33|34|35|36|37|38|39|20|0A|0D)(30|31|32|33|34|35|36|37|38|39|20|0A|0D)(30|31|32|33|34|35|36|37|38|39|20|0A|0D)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>626</SignatureID>
+        <SignatureName>Portable Pixel Map - Binary without comment</SignatureName>
+        <SignatureNote>“P6” followed by width, height.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>773</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>5036(20|0D|0A){0-2}23{0-70}0A(30|31|32|33|34|35|36|37|38|39|20|0A|0D)(30|31|32|33|34|35|36|37|38|39|20|0A|0D)(30|31|32|33|34|35|36|37|38|39|20|0A|0D)(30|31|32|33|34|35|36|37|38|39|20|0A|0D)(30|31|32|33|34|35|36|37|38|39|20|0A|0D)(30|31|32|33|34|35|36|37|38|39|20|0A|0D)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

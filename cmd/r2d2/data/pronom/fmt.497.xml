@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1284</FormatID>
+      <FormatName>Wireless Bitmap</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Raster)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The Wireless Application Protocol Bitmap format, or Wireless Bitmap, is a monochrome image format optimised for use on the mobile web.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>26 Feb 2013</ProvenanceSourceDate>
+      <ProvenanceDescription>The format structure is as follows:
+The first two bytes are both '00'. The next two bytes represent the width, then height of the image in pixels. The remaining bytes represent the image data. Further information regarding the format can be found on the Wikipedia page: http://en.wikipedia.org/wiki/Wireless_Application_Protocol_Bitmap_Format
+The file format specification is available here: http://web.archive.org/web/20010605024138/http://www.wapforum.org/what/technical/SPEC-WAESpec-19990524.pdf
+
+It is not possible to create a strong binary signature for this format, since the only constant bytes are the first two, both '00', which would cause an identification clash with many other formats.</ProvenanceDescription>
+      <LastUpdatedDate>26 Feb 2013</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/497</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>1310</ExternalSignatureID>
+        <Signature>wbmp</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

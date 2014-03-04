@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1298</FormatID>
+      <FormatName>PowerProject</FormatName>
+      <FormatVersion>7</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Database</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Asta PowerProject is a proprietary project management suite.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>189</ProvenanceSourceID>
+      <ProvenanceName>Asta Development / Asta Development</ProvenanceName>
+      <ProvenanceSourceDate>01 May 2013</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>01 May 2013</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/511</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>189</DeveloperID>
+        <DeveloperName>Asta Development</DeveloperName>
+        <OrganisationName>Asta Development</OrganisationName>
+        <DeveloperCompoundName>Asta Development / Asta Development</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>189</SupportID>
+        <SupportName>Asta Development</SupportName>
+        <OrganisationName>Asta Development</OrganisationName>
+        <SupportCompoundName>Asta Development / Asta Development</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>1328</ExternalSignatureID>
+        <Signature>pp</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>804</SignatureID>
+        <SignatureName>PowerProject v7</SignatureName>
+        <SignatureNote>..00000007006 {13}//dodl version and file id..</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1009</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>0000303030303030303730303620{13}2F2F646F646C2076657273696F6E20616E642066696C652069640D0A</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>1299</RelatedFormatID>
+        <RelatedFormatName>PowerProject</RelatedFormatName>
+        <RelatedFormatVersion>8</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>1300</RelatedFormatID>
+        <RelatedFormatName>PowerProject</RelatedFormatName>
+        <RelatedFormatVersion>9</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>1301</RelatedFormatID>
+        <RelatedFormatName>PowerProject</RelatedFormatName>
+        <RelatedFormatVersion>10</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>1302</RelatedFormatID>
+        <RelatedFormatName>PowerProject</RelatedFormatName>
+        <RelatedFormatVersion>11</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>1303</RelatedFormatID>
+        <RelatedFormatName>PowerProject</RelatedFormatName>
+        <RelatedFormatVersion>12.0.01</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>1304</RelatedFormatID>
+        <RelatedFormatName>PowerProject</RelatedFormatName>
+        <RelatedFormatVersion>12.0.02+</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>1297</RelatedFormatID>
+        <RelatedFormatName>PowerProject Teamplan</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

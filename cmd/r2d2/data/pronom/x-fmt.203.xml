@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>281</FormatID>
+      <FormatName>WordPerfect for Windows Document</FormatName>
+      <FormatVersion>5.2</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Word Processor</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <BinaryFileFormat>Text</BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>30 Nov 1992</ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/vnd.wordperfect</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>x-fmt/203</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Document>
+        <DocumentID>4</DocumentID>
+        <DisplayText>Born, G, 1995, The file formats handbook, International Thompson Computer Press</DisplayText>
+        <DocumentType>Informative</DocumentType>
+        <AvailabilityDescription>Public</AvailabilityDescription>
+        <AvailabilityNote>
+        </AvailabilityNote>
+        <PublicationDate>01 Jan 1995</PublicationDate>
+        <TitleText>The file formats handbook</TitleText>
+        <DocumentIPR>
+        </DocumentIPR>
+        <DocumentNote>
+        </DocumentNote>
+        <DocumentIdentifier>
+          <Identifier>1-85032-117-5</Identifier>
+          <IdentifierType>ISBN</IdentifierType>
+        </DocumentIdentifier>
+        <Author>
+          <AuthorID>115</AuthorID>
+          <AuthorName>
+          </AuthorName>
+          <OrganisationName>Gunter Born</OrganisationName>
+          <AuthorCompoundName>Gunter Born</AuthorCompoundName>
+        </Author>
+        <Publisher>
+          <PublisherID>117</PublisherID>
+          <PublisherName>
+          </PublisherName>
+          <OrganisationName>International Thompson Computer Press</OrganisationName>
+          <PublisherCompoundName>International Thompson Computer Press</PublisherCompoundName>
+        </Publisher>
+      </Document>
+      <ExternalSignature>
+        <ExternalSignatureID>584</ExternalSignatureID>
+        <Signature>w52</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>646</ExternalSignatureID>
+        <Signature>wp</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>675</ExternalSignatureID>
+        <Signature>wpd</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>706</ExternalSignatureID>
+        <Signature>wp5</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>75</RelatedFormatID>
+        <RelatedFormatName>WordPerfect for MS-DOS/Windows Document</RelatedFormatName>
+        <RelatedFormatVersion>6.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>737</RelatedFormatID>
+        <RelatedFormatName>WordPerfect for MS-DOS/Windows Document</RelatedFormatName>
+        <RelatedFormatVersion>5.1</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

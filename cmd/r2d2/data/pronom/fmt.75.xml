@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>721</FormatID>
+      <FormatName>Drawing Interchange File Format (ASCII)</FormatName>
+      <FormatVersion>R11/12</FormatVersion>
+      <FormatAliases>ASCII DXF (R11/12)</FormatAliases>
+      <FormatFamilies>DXF</FormatFamilies>
+      <FormatTypes>Image (Vector)</FormatTypes>
+      <FormatDisclosure>Full</FormatDisclosure>
+      <FormatDescription>ASCII DXF format is the ASCII encoded variant of the Drawing Interchange File Format, an exchange format for vector graphics developed by AutoDesk. They are probably the widely-used formats for exchanging vector data, and have become a de-facto industry standard. The format is owned by AutoDesk and typically changes with each release of their AutoCAD family of products. DXF files contain a tagged representation of the vector data. The structure comprises a Header section, followed by sections containing data on Classes, Tables, Blocks, Entities and, optionally, thumbnail images. Each section contains a series of data elements. each preceded by a group code tag, which indicates the type of data element. ASCII DXF version 11/12 is the version of the format associated with Releases 11 and 12 of the AutoCAD family of software products.</FormatDescription>
+      <BinaryFileFormat>Text</BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>01 Oct 1990</ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>11 Mar 2005</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/75</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>image/vnd.dxf</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <Document>
+        <DocumentID>34</DocumentID>
+        <DisplayText>Autodesk Corporation, 1992, Drawing Interchange and File Formats, Release 12</DisplayText>
+        <DocumentType>Authoritative</DocumentType>
+        <AvailabilityDescription>Public</AvailabilityDescription>
+        <AvailabilityNote>
+        </AvailabilityNote>
+        <PublicationDate>01 Jan 1992</PublicationDate>
+        <TitleText>Drawing Interchange and File Formats, Release 12</TitleText>
+        <DocumentIPR>
+        </DocumentIPR>
+        <DocumentNote>
+        </DocumentNote>
+        <Author>
+          <AuthorID>18</AuthorID>
+          <AuthorName>
+          </AuthorName>
+          <OrganisationName>Autodesk Corporation</OrganisationName>
+          <AuthorCompoundName>Autodesk Corporation</AuthorCompoundName>
+        </Author>
+        <Publisher>
+          <PublisherID>18</PublisherID>
+          <PublisherName>
+          </PublisherName>
+          <OrganisationName>Autodesk Corporation</OrganisationName>
+          <PublisherCompoundName>Autodesk Corporation</PublisherCompoundName>
+        </Publisher>
+      </Document>
+      <ExternalSignature>
+        <ExternalSignatureID>638</ExternalSignatureID>
+        <Signature>dxf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>110</SignatureID>
+        <SignatureName>Drawing Interchange File Format R11/12</SignatureName>
+        <SignatureNote>Header section with $ACADVER group code, EOF marker</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>27</ByteSequenceID>
+          <PositionType>Variable</PositionType>
+          <Offset>
+          </Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>30(0D0A|0A)53454354494F4E(0D0A|0A)202032(0D0A|0A)484541444552(0D0A|0A)*39(0D0A|0A)2441434144564552(0D0A|0A)202031(0D0A|0A)414331303039(0D0A|0A)*30(0D0A|0A)454E44534543(0D0A|0A)</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>28</ByteSequenceID>
+          <PositionType>Absolute from EOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>30(0D0A|0A)454F46(0D0A|0A)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Equivalent to</RelationshipType>
+        <RelatedFormatID>740</RelatedFormatID>
+        <RelatedFormatName>Drawing Interchange File Format (Binary)</RelatedFormatName>
+        <RelatedFormatVersion>R11/12</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>705</RelatedFormatID>
+        <RelatedFormatName>AutoCAD Drawing</RelatedFormatName>
+        <RelatedFormatVersion>R11/12</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>766</RelatedFormatID>
+        <RelatedFormatName>Drawing Interchange File Format (ASCII)</RelatedFormatName>
+        <RelatedFormatVersion>Generic</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>722</RelatedFormatID>
+        <RelatedFormatName>Drawing Interchange File Format (ASCII)</RelatedFormatName>
+        <RelatedFormatVersion>R13</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>720</RelatedFormatID>
+        <RelatedFormatName>Drawing Interchange File Format (ASCII)</RelatedFormatName>
+        <RelatedFormatVersion>R10</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

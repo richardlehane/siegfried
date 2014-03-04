@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1121</FormatID>
+      <FormatName>Microsoft Visual FoxPro Database Table File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Database</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>This is a generic record for several versions of the Microsoft Visual Fox Pro database format, which at the moment we are unable to identify down to version level. This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <BinaryFileFormat>Text</BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>04 Nov 2011</ProvenanceSourceDate>
+      <ProvenanceDescription>Further information about the FoxPro Database format, can be obtained at http://www.digitalpreservation.gov/formats/fdd/fdd000325.shtml</ProvenanceDescription>
+      <LastUpdatedDate>04 Nov 2011</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/374</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>1156</ExternalSignatureID>
+        <Signature>dbf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>552</SignatureID>
+        <SignatureName>Microsoft Visual FoxPro Database table file</SignatureName>
+        <SignatureNote>Header sequence: Version number, Date of last update MMDD, First upper or lowercase character of field name, field type (B, C, D, F, I, L, M, N, P, T, Y).</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>683</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>30??[01:0C][01:1F]{28}([41:5A]|[61:7A]){10}(42|43|44|49|4C|4D|4E|50|54|59)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>553</SignatureID>
+        <SignatureName>Microsoft Visual FoxPro Database table file, autoincrement enabled</SignatureName>
+        <SignatureNote>Header sequence: Version number, Date of last update MMDD, First upper or lowercase character of field name, field type (B, C, D, F, I, L, M, N, P, T, Y).</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>684</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>31??[01:0C][01:1F]{28}([41:5A]|[61:7A]){10}(42|43|44|49|4C|4D|4E|50|54|59)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>554</SignatureID>
+        <SignatureName>Microsoft Visual FoxPro Database table file, with field type Varchar or Varbinary</SignatureName>
+        <SignatureNote>Header sequence: Version number, Date of last update MMDD, First upper or lowercase character of field name, field type (B, C, D, F, I, L, M, N, P, T, Y).</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>685</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>32??[01:0C][01:1F]{28}([41:5A]|[61:7A]){10}(42|43|44|49|4C|4D|4E|50|54|59)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1124</RelatedFormatID>
+        <RelatedFormatName>Microsoft Visual FoxPro Report</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1126</RelatedFormatID>
+        <RelatedFormatName>Microsoft Visual FoxPro Class Library</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1127</RelatedFormatID>
+        <RelatedFormatName>Microsoft Visual FoxPro Project</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1129</RelatedFormatID>
+        <RelatedFormatName>Microsoft Visual FoxPro database container (table files)</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

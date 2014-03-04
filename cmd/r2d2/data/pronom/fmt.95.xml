@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>770</FormatID>
+      <FormatName>Acrobat PDF/A - Portable Document Format</FormatName>
+      <FormatVersion>1a</FormatVersion>
+      <FormatAliases>PDF/A (1)</FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Page Description</FormatTypes>
+      <FormatDisclosure>Full</FormatDisclosure>
+      <FormatDescription>The Portable Document Format/ Archive is a format designed for long term preservation by Adobe Systems. PDF/A is a simplified version of PDF 1.4, with all of the features from PDF 1.4 that would impede long term preservation removed. Removed features include Javascript, Audio/Visual content, LZW compression and encryption. A major principle of PDF/A is that it is self contained and not reliant on externalities thus all font and colour information is encoded into the file. PDF/A files are larger than other types of PDF files due to the need for embedded information.
+PDF/A supports two levels of compliance PDF/A1-a (Accessible) and PDF/A1-b (Basic). PDF/A1-a is fully ISO 19005-1:2005 (PDF/A-1) compliant whereas PDF/A1-b is less stringent and not compliant. PDF/A1-a requires tagged PDF and Unicode whereas PDF/A1-b does not.</FormatDescription>
+      <BinaryFileFormat>Binary</BinaryFileFormat>
+      <ByteOrders>Big-endian (Motorola)</ByteOrders>
+      <ReleaseDate>01 Oct 2005</ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>17 Dec 2005</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>22 Oct 2009</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/pdf</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>com.adobe.pdf</Identifier>
+        <IdentifierType>Apple Uniform Type Identifier</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/95</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Document>
+        <DocumentID>68</DocumentID>
+        <DisplayText>ISO 19005-1:2005 - Document management - Electronic document file format for long-term preservation - Part 1: Use of PDF 1.4 (PDF/A-1)</DisplayText>
+        <DocumentType>Authoritative</DocumentType>
+        <AvailabilityDescription>Public</AvailabilityDescription>
+        <AvailabilityNote>
+        </AvailabilityNote>
+        <PublicationDate>01 Oct 2005</PublicationDate>
+        <TitleText>ISO 19005-1:2005 - Document management - Electronic document file format for long-term preservation - Part 1: Use of PDF 1.4 (PDF/A-1)</TitleText>
+        <DocumentIPR>
+        </DocumentIPR>
+        <DocumentNote>
+        </DocumentNote>
+        <DocumentIdentifier>
+          <Identifier>0 580 46855 0</Identifier>
+          <IdentifierType>ISBN</IdentifierType>
+        </DocumentIdentifier>
+        <Author>
+          <AuthorID>112</AuthorID>
+          <AuthorName>
+          </AuthorName>
+          <OrganisationName>International Standards Organisation</OrganisationName>
+          <AuthorCompoundName>International Standards Organisation</AuthorCompoundName>
+        </Author>
+        <Publisher>
+          <PublisherID>112</PublisherID>
+          <PublisherName>
+          </PublisherName>
+          <OrganisationName>International Standards Organisation</OrganisationName>
+          <PublisherCompoundName>International Standards Organisation</PublisherCompoundName>
+        </Publisher>
+      </Document>
+      <ExternalSignature>
+        <ExternalSignatureID>768</ExternalSignatureID>
+        <Signature>pdf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>264</SignatureID>
+        <SignatureName>Acrobat PDF/A-1a</SignatureName>
+        <SignatureNote>Describes a signature for the PDF/A-1a form. Identifies the byte sequence which equals - xmlns:pdfaid="http://www.aiim.org/pdfa/ns/id/ which is the PDF/A identification namespace within the PDF/A meta-data, followed by &lt;pdfaid:part&gt;1&lt;pdfaid:part&gt; and &lt;pdfaid:conformance&gt;A&lt;pdfaid:conformance&gt;, which are the two mandatory elements and values for PDFA/1a. See ISO 19005-1:2005 and Technical Corrigendum 1 for further information.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>336</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>Little-endian</Endianness>
+          <ByteSequenceValue>255044462D312E34</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>337</ByteSequenceID>
+          <PositionType>Variable</PositionType>
+          <Offset>
+          </Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>Little-endian</Endianness>
+          <ByteSequenceValue>786D6C6E733A7064666169643D(22|27)687474703A2F2F7777772E6169696D2E6F72672F706466612F6E732F6964{0-20}7064666169643A70617274(3D22|3D27|3E)31(22|27|3C2F7064666169643A706172743E){0-11}7064666169643A636F6E666F726D616E6365(3E|3D22|3D27)41(22|27|3C2F7064666169643A636F6E666F726D616E63653E)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>617</RelatedFormatID>
+        <RelatedFormatName>Acrobat PDF 1.4 - Portable Document Format</RelatedFormatName>
+        <RelatedFormatVersion>1.4</RelatedFormatVersion>
+      </RelatedFormat>
+      <FormatProperties>
+        <FormatProperty>
+          <PropertyName>Creation Date</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Encrypted</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Number of Pages</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Number of Images</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Creating Application</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Title</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Creator</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Subject</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+      </FormatProperties>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

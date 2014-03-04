@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>678</FormatID>
+      <FormatName>Microsoft Excel 2.x Worksheet (xls)</FormatName>
+      <FormatVersion>2</FormatVersion>
+      <FormatAliases>Microsoft Excel Worksheet (2.1)</FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Spreadsheet</FormatTypes>
+      <FormatDisclosure>None</FormatDisclosure>
+      <FormatDescription>The Binary Interchange File Format (BIFF) is a spreadsheet file format developed by Microsoft. BIFF 2 is the native file format of Microsoft Excel 2.1 for Windows. The format is proprietary and Microsoft does not make details of its structure public. The information contained here is derived primarily from OpenOffice.org's reverse-engineered documentation of the format, and should not therefore be regarded as definitive. BIFF is a stream based format, and a BIFF 2 file comprises a single worksheet stream, containing a Beginning of File (BOF) record, followed by a series of Worksheet records, and terminated by an End of File (EOF) record.</FormatDescription>
+      <BinaryFileFormat>Binary</BinaryFileFormat>
+      <ByteOrders>Little-endian (Intel)</ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>11 Mar 2005</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>19 Jul 2013</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/vnd.ms-excel</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>com.microsoft.excel.xls</Identifier>
+        <IdentifierType>Apple Uniform Type Identifier</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/55</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>93</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <DeveloperCompoundName>Microsoft Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>93</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <SupportCompoundName>Microsoft Corporation</SupportCompoundName>
+      </Support>
+      <Document>
+        <DocumentID>10</DocumentID>
+        <DisplayText>OpenOffice.org, 2004, OpenOffice.org's documentation of the Microsoft Excel file format: Excel versions 2, 3, 4, 5, 95, 97, 2000, XP, 2003</DisplayText>
+        <DocumentType>Speculative</DocumentType>
+        <AvailabilityDescription>Public</AvailabilityDescription>
+        <AvailabilityNote>
+        </AvailabilityNote>
+        <PublicationDate>25 Nov 2004</PublicationDate>
+        <TitleText>OpenOffice.org's documentation of the Microsoft Excel file format: Excel versions 2, 3, 4, 5, 95, 97, 2000, XP, 2003</TitleText>
+        <DocumentIPR>
+        </DocumentIPR>
+        <DocumentNote>
+        </DocumentNote>
+        <DocumentIdentifier>
+          <Identifier>sc.openoffice.org/excelfileformat.pdf</Identifier>
+          <IdentifierType>URL</IdentifierType>
+        </DocumentIdentifier>
+        <Author>
+          <AuthorID>103</AuthorID>
+          <AuthorName>
+          </AuthorName>
+          <OrganisationName>OpenOffice.org</OrganisationName>
+          <AuthorCompoundName>OpenOffice.org</AuthorCompoundName>
+        </Author>
+        <Publisher>
+          <PublisherID>103</PublisherID>
+          <PublisherName>
+          </PublisherName>
+          <OrganisationName>OpenOffice.org</OrganisationName>
+          <PublisherCompoundName>OpenOffice.org</PublisherCompoundName>
+        </Publisher>
+      </Document>
+      <ExternalSignature>
+        <ExternalSignatureID>574</ExternalSignatureID>
+        <Signature>xls</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>72</SignatureID>
+        <SignatureName>BIFF 2 Worksheet</SignatureName>
+        <SignatureNote>BIFF2: BOF hex 0900. record length hex 0400, BIFF version (not used), filetype=worksheet=1000</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>177</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>09000400{2}1000</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>679</RelatedFormatID>
+        <RelatedFormatName>Microsoft Excel 3.0 Worksheet (xls)</RelatedFormatName>
+        <RelatedFormatVersion>3</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>1341</RelatedFormatID>
+        <RelatedFormatName>Microsoft Excel Chart</RelatedFormatName>
+        <RelatedFormatVersion>2.x</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>1343</RelatedFormatID>
+        <RelatedFormatName>Microsoft Excel Macro</RelatedFormatName>
+        <RelatedFormatVersion>2.x</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

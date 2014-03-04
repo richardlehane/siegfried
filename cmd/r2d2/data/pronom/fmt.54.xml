@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>761</FormatID>
+      <FormatName>Drawing Interchange Binary Format</FormatName>
+      <FormatVersion>1.0</FormatVersion>
+      <FormatAliases>DXB (1.0)</FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Vector)</FormatTypes>
+      <FormatDisclosure>Full</FormatDisclosure>
+      <FormatDescription>The Drawing Interchange Binary Format (DXB) is a vector graphics format developed by AutoDesk for its AutoCAD family of products. A DXB file comprises a file header followed by zero or more data records. Each data record begins with a single byte identifying the record type, followed by one or more data items. The DXB format should not be confused with the binary encoded version of the Drawing Interchange File Format (DXF) - DXB is an entirely separate format, being much simpler and more compact.</FormatDescription>
+      <BinaryFileFormat>Binary</BinaryFileFormat>
+      <ByteOrders>Little-endian (Intel)</ByteOrders>
+      <ReleaseDate>01 Oct 1990</ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>22 Apr 2005</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/54</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Document>
+        <DocumentID>32</DocumentID>
+        <DisplayText>Autodesk Corporation, nd, The DXB File Format</DisplayText>
+        <DocumentType>Authoritative</DocumentType>
+        <AvailabilityDescription>Public</AvailabilityDescription>
+        <AvailabilityNote>
+        </AvailabilityNote>
+        <PublicationDate>
+        </PublicationDate>
+        <TitleText>The DXB File Format</TitleText>
+        <DocumentIPR>
+        </DocumentIPR>
+        <DocumentNote>
+        </DocumentNote>
+        <DocumentIdentifier>
+          <Identifier>www.autodesk.com/techpubs/autocad/acadr14/dxf/the_dxb_file_format_al_u05_b.htm</Identifier>
+          <IdentifierType>URL</IdentifierType>
+        </DocumentIdentifier>
+        <Author>
+          <AuthorID>18</AuthorID>
+          <AuthorName>
+          </AuthorName>
+          <OrganisationName>Autodesk Corporation</OrganisationName>
+          <AuthorCompoundName>Autodesk Corporation</AuthorCompoundName>
+        </Author>
+        <Publisher>
+          <PublisherID>18</PublisherID>
+          <PublisherName>
+          </PublisherName>
+          <OrganisationName>Autodesk Corporation</OrganisationName>
+          <PublisherCompoundName>Autodesk Corporation</PublisherCompoundName>
+        </Publisher>
+      </Document>
+      <ExternalSignature>
+        <ExternalSignatureID>717</ExternalSignatureID>
+        <Signature>dxb</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>166</SignatureID>
+        <SignatureName>DXB 1.0</SignatureName>
+        <SignatureNote>File header and file terminator.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4175746F4341442044584220312E300D0A1A00</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>196</ByteSequenceID>
+          <PositionType>Absolute from EOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>00</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

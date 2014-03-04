@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1194</FormatID>
+      <FormatName>Cinema 4D</FormatName>
+      <FormatVersion>4.x</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>CINEMA 4D is a 3D modeling, animation and rendering application developed by MAXON Computer GmbH. CINEMA 4D doesn’t use separate files for material, object and scene information. Instead CINEMA 4D uses one file format which can contain all these elements. That means one editor where animation, modeling, texturing and rendering can be done at the same time. CINEMA 4D uses IFF, which means Interchange File Format“. IFF is a chunk based format. IFF allows you to read only those structures of a file which your application can handle.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>165</ProvenanceSourceID>
+      <ProvenanceName>Georgia Tech Research Institute / Georgia Tech Research Institute</ProvenanceName>
+      <ProvenanceSourceDate>11 Jun 2012</ProvenanceSourceDate>
+      <ProvenanceDescription>Specification Link: http://paulbourke.net/dataformats/cinema4d/cinema4d.pdf
+As quoted by Wikipedia Cinema 4D Version 1.0 was released in 1993.</ProvenanceDescription>
+      <LastUpdatedDate>19 Jul 2013</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/415</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>1236</ExternalSignatureID>
+        <Signature>c4d</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>846</SignatureID>
+        <SignatureName>Cinema 4D 4.x</SignatureName>
+        <SignatureNote>Header is 12 bytes: IFF Identifier = “FORM”, Long integer = File size’ Cinema 4d Identifier = “MC4D”</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1070</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>464F524D{4}4D433444</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>221</RelatedFormatID>
+        <RelatedFormatName>Interchange File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>1327</RelatedFormatID>
+        <RelatedFormatName>Cinema 4D</RelatedFormatName>
+        <RelatedFormatVersion>5.x</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

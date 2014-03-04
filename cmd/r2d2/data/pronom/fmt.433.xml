@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1220</FormatID>
+      <FormatName>Drawing Interchange File Format (ASCII)</FormatName>
+      <FormatVersion>2007/2008/2009</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Vector)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>181</ProvenanceSourceID>
+      <ProvenanceName>Museum of London / Museum of London</ProvenanceName>
+      <ProvenanceSourceDate>11 Jun 2012</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>11 Jun 2012</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/433</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>image/vnd.dxf</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>18</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Autodesk Corporation</OrganisationName>
+        <DeveloperCompoundName>Autodesk Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>18</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Autodesk Corporation</OrganisationName>
+        <SupportCompoundName>Autodesk Corporation</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>1221</ExternalSignatureID>
+        <Signature>dxf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>689</SignatureID>
+        <SignatureName>Drawing Interchange File Format (ASCII) 2007/2008/2009</SignatureName>
+        <SignatureNote>Header section with $ACADVER group code ACII: AC10201, EOF marker</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>853</ByteSequenceID>
+          <PositionType>Variable</PositionType>
+          <Offset>
+          </Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>300D0A53454354494F4E0D0A2020320D0A4845414445520D0A*390D0A24414341445645520D0A2020310D0A4143313032310D0A*300D0A454E445345430D0A</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>854</ByteSequenceID>
+          <PositionType>Absolute from EOF</PositionType>
+          <Offset>
+          </Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>300D0A454F460D0A</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>766</RelatedFormatID>
+        <RelatedFormatName>Drawing Interchange File Format (ASCII)</RelatedFormatName>
+        <RelatedFormatVersion>Generic</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

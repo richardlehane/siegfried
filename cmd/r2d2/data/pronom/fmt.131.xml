@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>691</FormatID>
+      <FormatName>Advanced Systems Format</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>ASF</FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Audio, Image (Raster), Video</FormatTypes>
+      <FormatDisclosure>Full</FormatDisclosure>
+      <FormatDescription>The Advanced Systems Format is an extensible file format developed by Microsoft for storing multimedia data streams. It comprises a Header Object, which describes the properties of the data streams, a Data Object, which contains the actual data streams stored in Data Packets and, optionally, one or more Index Objects. ASF files can contain audio, video and still image data streams, and the format supports streaming across networks. ASF supports a variety of audio, video and still image compression types, although it is most widely used for storing Windows Media Audio and Video encoded data.</FormatDescription>
+      <BinaryFileFormat>Binary</BinaryFileFormat>
+      <ByteOrders>Little-endian (Intel)</ByteOrders>
+      <ReleaseDate>01 Nov 2004</ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>11 Mar 2005</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/vnd.ms-asf</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>com.microsoft.advanced-systems-format</Identifier>
+        <IdentifierType>Apple Uniform Type Identifier</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/131</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>93</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <DeveloperCompoundName>Microsoft Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>93</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <SupportCompoundName>Microsoft Corporation</SupportCompoundName>
+      </Support>
+      <Document>
+        <DocumentID>3</DocumentID>
+        <DisplayText>Microsoft Corporation, 2004, Advanced Systems Format (ASF) Specification: Revision 01.20.03</DisplayText>
+        <DocumentType>Authoritative</DocumentType>
+        <AvailabilityDescription>Public</AvailabilityDescription>
+        <AvailabilityNote>
+        </AvailabilityNote>
+        <PublicationDate>01 Dec 2004</PublicationDate>
+        <TitleText>Advanced Systems Format (ASF) Specification: Revision 01.20.03</TitleText>
+        <DocumentIPR>
+        </DocumentIPR>
+        <DocumentNote>
+        </DocumentNote>
+        <DocumentIdentifier>
+          <Identifier>www.microsoft.com/windows/windowsmedia/format/asfspec.aspx</Identifier>
+          <IdentifierType>URL</IdentifierType>
+        </DocumentIdentifier>
+        <Author>
+          <AuthorID>93</AuthorID>
+          <AuthorName>
+          </AuthorName>
+          <OrganisationName>Microsoft Corporation</OrganisationName>
+          <AuthorCompoundName>Microsoft Corporation</AuthorCompoundName>
+        </Author>
+        <Publisher>
+          <PublisherID>93</PublisherID>
+          <PublisherName>
+          </PublisherName>
+          <OrganisationName>Microsoft Corporation</OrganisationName>
+          <PublisherCompoundName>Microsoft Corporation</PublisherCompoundName>
+        </Publisher>
+      </Document>
+      <ExternalSignature>
+        <ExternalSignatureID>676</ExternalSignatureID>
+        <Signature>asf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>80</SignatureID>
+        <SignatureName>Advanced Systems Format</SignatureName>
+        <SignatureNote>Header Object</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>147</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3026B2758E66CF11A6D900AA0062CE6C{12}0102</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>692</RelatedFormatID>
+        <RelatedFormatName>Windows Media Audio</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>693</RelatedFormatID>
+        <RelatedFormatName>Windows Media Video</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1228</RelatedFormatID>
+        <RelatedFormatName>Windows Media Video 9 Advanced Profile (WVC1)</RelatedFormatName>
+        <RelatedFormatVersion>9 Advanced Profile (WVC1)</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>692</RelatedFormatID>
+        <RelatedFormatName>Windows Media Audio</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>693</RelatedFormatID>
+        <RelatedFormatName>Windows Media Video</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

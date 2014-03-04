@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>743</FormatID>
+      <FormatName>Drawing Interchange File Format (Binary)</FormatName>
+      <FormatVersion>2000-2002</FormatVersion>
+      <FormatAliases>Binary DXF (2000-2002)</FormatAliases>
+      <FormatFamilies>DXF</FormatFamilies>
+      <FormatTypes>Image (Vector)</FormatTypes>
+      <FormatDisclosure>Full</FormatDisclosure>
+      <FormatDescription>Binary DXF format is the binary encoded variant of the Drawing Interchange File Format, an exchange format for vector graphics developed by AutoDesk. They are probably the widely-used formats for exchanging vector data, and have become a de-facto industry standard. The format is owned by AutoDesk and typically changes with each release of their AutoCAD family of products. DXF files contain a tagged representation of the vector data. The structure comprises a Header section, followed by sections containing data on Classes, Tables, Blocks, Entities and, optionally, thumbnail images. Each section contains a series of data elements. each preceded by a group code tag, which indicates the type of data element. Binary DXF was first developed in AutoCAD Release 10. It should not be confused with the DXB format - this is an entirely separate AutoDesk format for binary encoding vector graphics. Binary DXF 2000-2002 is the version of the format associated with Versions 2000, 2000i and 2002 of the</FormatDescription>
+      <BinaryFileFormat>Binary</BinaryFileFormat>
+      <ByteOrders>Little-endian (Intel)</ByteOrders>
+      <ReleaseDate>01 Mar 1999</ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>11 Mar 2005</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/84</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>image/vnd.dxf</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <Document>
+        <DocumentID>8</DocumentID>
+        <DisplayText>Autodesk Corporation, 2001, AutoCAD 2002: DXF reference guide</DisplayText>
+        <DocumentType>Authoritative</DocumentType>
+        <AvailabilityDescription>Public</AvailabilityDescription>
+        <AvailabilityNote>
+        </AvailabilityNote>
+        <PublicationDate>01 Jan 2001</PublicationDate>
+        <TitleText>AutoCAD 2002: DXF reference guide</TitleText>
+        <DocumentIPR>
+        </DocumentIPR>
+        <DocumentNote>
+        </DocumentNote>
+        <Author>
+          <AuthorID>18</AuthorID>
+          <AuthorName>
+          </AuthorName>
+          <OrganisationName>Autodesk Corporation</OrganisationName>
+          <AuthorCompoundName>Autodesk Corporation</AuthorCompoundName>
+        </Author>
+        <Publisher>
+          <PublisherID>18</PublisherID>
+          <PublisherName>
+          </PublisherName>
+          <OrganisationName>Autodesk Corporation</OrganisationName>
+          <PublisherCompoundName>Autodesk Corporation</PublisherCompoundName>
+        </Publisher>
+      </Document>
+      <ExternalSignature>
+        <ExternalSignatureID>668</ExternalSignatureID>
+        <Signature>dxf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>137</SignatureID>
+        <SignatureName>Binary DXF 2000-2002</SignatureName>
+        <SignatureNote>File header, header section with $ACADVER group code, EOF marker</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>80</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4175746F4341442042696E617279204458460D0A1A00*000053454354494F4E00020048454144455200*0900244143414456455200010041433130313500*0000454E4453454300</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>81</ByteSequenceID>
+          <PositionType>Absolute from EOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>0000454F4600</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Equivalent to</RelationshipType>
+        <RelatedFormatID>724</RelatedFormatID>
+        <RelatedFormatName>Drawing Interchange File Format (ASCII)</RelatedFormatName>
+        <RelatedFormatVersion>2000-2002</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>744</RelatedFormatID>
+        <RelatedFormatName>Drawing Interchange File Format (Binary)</RelatedFormatName>
+        <RelatedFormatVersion>2004-2005</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>742</RelatedFormatID>
+        <RelatedFormatName>Drawing Interchange File Format (Binary)</RelatedFormatName>
+        <RelatedFormatVersion>R14</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

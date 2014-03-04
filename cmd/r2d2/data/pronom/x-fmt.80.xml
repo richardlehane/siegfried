@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>122</FormatID>
+      <FormatName>Macintosh PICT Image</FormatName>
+      <FormatVersion>1.0</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Raster), Image (Vector)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <BinaryFileFormat>Text</BinaryFileFormat>
+      <ByteOrders>Big-endian (Motorola)</ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>165</ProvenanceSourceID>
+      <ProvenanceName>Georgia Tech Research Institute / Georgia Tech Research Institute</ProvenanceName>
+      <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>19 Jul 2013</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>com.apple.pict</Identifier>
+        <IdentifierType>Apple Uniform Type Identifier</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>image/x-pict</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>x-fmt/80</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>15</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Apple Computer, Inc.</OrganisationName>
+        <DeveloperCompoundName>Apple Computer, Inc.</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>15</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Apple Computer, Inc.</OrganisationName>
+        <SupportCompoundName>Apple Computer, Inc.</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>116</ExternalSignatureID>
+        <Signature>pct</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>237</ExternalSignatureID>
+        <Signature>pict</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>859</SignatureID>
+        <SignatureName>Macintosh PICT Image 1.0 v1</SignatureName>
+        <SignatureNote>512 byte header beginning with DRWG(MD|D2); At decimal location 522 (hex 20A) 1 byte opcode for “picversion” hex 11; next byte version number hex 01</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1083</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>44525747(4D44|4432){516}1101</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>860</SignatureID>
+        <SignatureName>Macintosh PICT Image 1.0 v2</SignatureName>
+        <SignatureNote>512 byte header consisting of all nulls;At decimal location 522 (hex 20A) 1 byte opcode for “picversion” hex 11; next byte version number hex 01</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1084</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>000000000000{516}1101</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>1086</RelatedFormatID>
+        <RelatedFormatName>Macintosh PICT Image</RelatedFormatName>
+        <RelatedFormatVersion>2.0</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

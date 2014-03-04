@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>86</FormatID>
+      <FormatName>Encapsulated PostScript File Format</FormatName>
+      <FormatVersion>1.2</FormatVersion>
+      <FormatAliases>EPS (1.2)</FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Page Description</FormatTypes>
+      <FormatDisclosure>Full</FormatDisclosure>
+      <FormatDescription>Encapsulated Postscript (EPS) is a page description format, developed by Adobe Systems Incorporated. Version 1.2, the first version of the format, was developed in 1987. An EPS file comprises a header section followed by a PostScript document. An EPS can optionally include a preview raster image, in which case a binary header is prepended to the header.</FormatDescription>
+      <BinaryFileFormat>Text</BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>12 Mar 1987</ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/postscript</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>com.adobe.encapsulated-postscript</Identifier>
+        <IdentifierType>Apple Uniform Type Identifier</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/122</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>7</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Adobe Systems Incorporated</OrganisationName>
+        <DeveloperCompoundName>Adobe Systems Incorporated</DeveloperCompoundName>
+      </Developers>
+      <Document>
+        <DocumentID>62</DocumentID>
+        <DisplayText>Adobe Systems Incorporated, 1987, Encapsulated PostScript File Format: EPSF Version 1.2</DisplayText>
+        <DocumentType>Authoritative</DocumentType>
+        <AvailabilityDescription>Public</AvailabilityDescription>
+        <AvailabilityNote>
+        </AvailabilityNote>
+        <PublicationDate>12 Mar 1987</PublicationDate>
+        <TitleText>Encapsulated PostScript File Format: EPSF Version 1.2</TitleText>
+        <DocumentIPR>
+        </DocumentIPR>
+        <DocumentNote>
+        </DocumentNote>
+        <Author>
+          <AuthorID>7</AuthorID>
+          <AuthorName>
+          </AuthorName>
+          <OrganisationName>Adobe Systems Incorporated</OrganisationName>
+          <AuthorCompoundName>Adobe Systems Incorporated</AuthorCompoundName>
+        </Author>
+        <Publisher>
+          <PublisherID>7</PublisherID>
+          <PublisherName>
+          </PublisherName>
+          <OrganisationName>Adobe Systems Incorporated</OrganisationName>
+          <PublisherCompoundName>Adobe Systems Incorporated</PublisherCompoundName>
+        </Publisher>
+      </Document>
+      <ExternalSignature>
+        <ExternalSignatureID>80</ExternalSignatureID>
+        <Signature>eps</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>763</ExternalSignatureID>
+        <Signature>epsf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>173</SignatureID>
+        <SignatureName>EPS 1.2</SignatureName>
+        <SignatureNote>Version comment</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>205</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>252150532D41646F62652D322E3020455053462D312E32(0D|0A|0D0A|0A0D)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>174</SignatureID>
+        <SignatureName>EPS 1.2 Preview</SignatureName>
+        <SignatureNote>Version comment</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>206</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>C5D0D3C6</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>207</ByteSequenceID>
+          <PositionType>Variable</PositionType>
+          <Offset>
+          </Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>252150532D41646F62652D322E3020455053462D312E32(0D|0A|0D0A|0A0D)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>49</RelatedFormatID>
+        <RelatedFormatName>Adobe Illustrator</RelatedFormatName>
+        <RelatedFormatVersion>1.0 / 1.1</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1199</RelatedFormatID>
+        <RelatedFormatName>Adobe Illustrator</RelatedFormatName>
+        <RelatedFormatVersion>88</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1200</RelatedFormatID>
+        <RelatedFormatName>Adobe Illustrator</RelatedFormatName>
+        <RelatedFormatVersion>3.0 / 3.2</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1201</RelatedFormatID>
+        <RelatedFormatName>Adobe Illustrator</RelatedFormatName>
+        <RelatedFormatVersion>4.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1202</RelatedFormatID>
+        <RelatedFormatName>Adobe Illustrator</RelatedFormatName>
+        <RelatedFormatVersion>5.0 / 5.5</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1204</RelatedFormatID>
+        <RelatedFormatName>Adobe Illustrator</RelatedFormatName>
+        <RelatedFormatVersion>6.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1205</RelatedFormatID>
+        <RelatedFormatName>Adobe Illustrator</RelatedFormatName>
+        <RelatedFormatVersion>7.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1345</RelatedFormatID>
+        <RelatedFormatName>Adobe Illustrator</RelatedFormatName>
+        <RelatedFormatVersion>8.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>138</RelatedFormatID>
+        <RelatedFormatName>Postscript</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>771</RelatedFormatID>
+        <RelatedFormatName>PostScript</RelatedFormatName>
+        <RelatedFormatVersion>2.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>772</RelatedFormatID>
+        <RelatedFormatName>PostScript</RelatedFormatName>
+        <RelatedFormatVersion>2.1</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>773</RelatedFormatID>
+        <RelatedFormatName>PostScript</RelatedFormatName>
+        <RelatedFormatVersion>3.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>1073</RelatedFormatID>
+        <RelatedFormatName>EndNote Import File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>332</RelatedFormatID>
+        <RelatedFormatName>Encapsulated PostScript File Format</RelatedFormatName>
+        <RelatedFormatVersion>2.0</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>
