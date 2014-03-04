@@ -104,25 +104,6 @@ func TestSuite(t *testing.T) {
 	}
 }
 
-func TestBrokenTravis(t *testing.T) {
-	matches, err := identify(b, filepath.Join(root, "fmt", "fmt-288-signature-id-304.nul"))
-	if err != nil {
-		t.Fatal(err)
-	}
-	if len(matches) == 0 {
-		t.Fatal("Expected fmt/288, got no results")
-	}
-	var match bool
-	for _, v := range matches {
-		if puids[v] == "fmt/288" {
-			match = true
-		}
-	}
-	if !match {
-		t.Errorf("Expected fmt/288, got %v", matches)
-	}
-}
-
 // Benchmarks
 func BenchmarkNew(bench *testing.B) {
 	for i := 0; i < bench.N; i++ {
