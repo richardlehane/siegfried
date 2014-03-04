@@ -1,0 +1,20 @@
+# Set default behaviour, in case users don't have core.autocrlf set.
+* text=auto
+
+# Don't mess with certain files in the test suite
+*.nul binary
+*.apr binary
+*.pdx binary
+*.cat binary
+*.stp binary
+*.plc binary
+*.ddd binary
+*.did binary
+*.did binary
+*.wld binary
+*.pdd binary
+*.msc binary
+*.slk binary
+*.stb binary
+*.ctb binary
+*.pc3 binary
