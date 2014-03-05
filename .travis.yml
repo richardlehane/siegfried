@@ -5,6 +5,10 @@ go:
 branches:
   only:
     - master
+install:
+  - go install github.com/richardlehane/siegfried/pkg/core/bytematcher
+  - go install github.com/richardlehane/siegfried/pkg/pronom
+  - go install github.com/richardlehane/siegfried/cmd/siegfried
 script:
   - go test github.com/richardlehane/siegfried/pkg/core/bytematcher
   - go test github.com/richardlehane/siegfried/pkg/pronom
