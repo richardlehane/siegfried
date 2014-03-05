@@ -1,11 +1,14 @@
 package bytematcher
 
+import "sync"
+
 // MUTABLE
 type matcher struct {
 	b                *Bytematcher
 	r                chan int
 	n                []byte
 	partialKeyframes map[[2]int][][2]int // map of a keyframe to a slice of offsets and lengths where it has matched
+	wg               *sync.WaitGroup
 }
 
 type partial struct {
@@ -15,11 +18,12 @@ type partial struct {
 	rdistances []int
 }
 
-func NewMatcher(b *Bytematcher, r chan int, n []byte) *matcher {
-	return &matcher{b, r, n, make(map[[2]int][][2]int)}
+func NewMatcher(b *Bytematcher, r chan int, n []byte, wg *sync.WaitGroup) *matcher {
+	return &matcher{b, r, n, make(map[[2]int][][2]int), wg}
 }
 
 func (m *matcher) match(tti, o, l int, rev bool) {
+	defer m.wg.Done()
 	// the offsets we record are always BOF offsets - these can be interpreted as EOF offsets when necessary
 	if rev {
 		o = len(m.n) - o - l

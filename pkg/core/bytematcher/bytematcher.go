@@ -9,6 +9,7 @@ import (
 	"os"
 
 	"github.com/richardlehane/ac"
+	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
 type Bytematcher struct {
@@ -26,7 +27,7 @@ type Bytematcher struct {
 	eAho *ac.Ac
 	vAho *ac.Ac
 
-	buf *bytes.Buffer
+	rdr *siegreader.Reader
 }
 
 func Signatures(sigs []Signature, opts ...int) (*Bytematcher, error) {
@@ -59,44 +60,17 @@ func Signatures(sigs []Signature, opts ...int) (*Bytematcher, error) {
 	return b, nil
 }
 
-func Load(path string) (*Bytematcher, error) {
-	c, err := ioutil.ReadFile(path)
-	if err != nil {
-		return nil, err
-	}
-	buf := bytes.NewBuffer(c)
-	dec := gob.NewDecoder(buf)
-	var b Bytematcher
-	err = dec.Decode(&b)
-	if err != nil {
-		return nil, err
-	}
+func (b *Bytematcher) Start() {
 	b.bAho = ac.NewFixed(b.BofSeqs.Set)
 	b.eAho = ac.NewFixed(b.EofSeqs.Set)
 	b.vAho = ac.New(b.VarSeqs.Set)
-	b.buf = new(bytes.Buffer)
-	return &b, nil
 }
 
-func (b *Bytematcher) Save(path string) error {
-	buf := new(bytes.Buffer)
-	enc := gob.NewEncoder(buf)
-	err := enc.Encode(b)
-	if err != nil {
-		return err
-	}
-	return ioutil.WriteFile(path, buf.Bytes(), os.ModeExclusive)
-}
-
-func (b *Bytematcher) Identify(i io.Reader) (chan int, error) {
+func (b *Bytematcher) Identify(r *siegreader.Reader) chan int {
 	ret := make(chan int)
-	b.buf.Reset()
-	_, err := b.buf.ReadFrom(i)
-	if err != nil {
-		return nil, err
-	}
+	b.rdr = r
 	go b.identify(ret)
-	return ret, nil
+	return ret
 }
 
 func (b *Bytematcher) Stats() string {

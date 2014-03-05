@@ -8,22 +8,15 @@ import (
 	"os/user"
 	"path/filepath"
 
+	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
-var _ = pronom.Droid{} // import for side effects
-
 var (
 	sigfile string
-	droid   string
-	reports string
-)
 
-var (
-	defaultSigs    = "pronom.gob"
-	defaultDroid   = "DROID_SignatureFile_V73.xml"
-	defaultReports = "pronom"
+	defaultSigs = "pronom.gob"
 )
 
 func init() {
@@ -32,34 +25,32 @@ func init() {
 		log.Fatal(err)
 	}
 	defaultSigs = filepath.Join(current.HomeDir, "siegfried", defaultSigs)
-	defaultDroid = filepath.Join(current.HomeDir, "siegfried", defaultDroid)
-	defaultReports = filepath.Join(current.HomeDir, "siegfried", defaultReports)
 
 	flag.StringVar(&sigfile, "sigs", defaultSigs, "path to Siegfried signature file")
-	flag.StringVar(&droid, "droid", defaultDroid, "path to Droid signature file")
-	flag.StringVar(&reports, "reports", defaultReports, "path to Pronom reports directory")
 }
 
-var ()
-
-var puids []string
-
-func load(sigs string) (*bytematcher.Bytematcher, error) {
-	return bytematcher.Load(sigs)
+func load(sigs string) (*core.Siegfried, error) {
+	s := core.NewSiegfried()
+	p, err := pronom.Load(sigs)
+	if err != nil {
+		return nil, err
+	}
+	s.AddIdentifier(p)
+	return s, nil
 }
 
-func identify(b *bytematcher.Bytematcher, p string) ([]int, error) {
-	ids := make([]int, 0)
+func identify(s *core.Siegfried, p string) ([]string, error) {
+	ids := make([]string, 0)
 	file, err := os.Open(p)
 	if err != nil {
 		return nil, err
 	}
-	c, err := b.Identify(file)
+	c, err := s.Identify(file)
 	if err != nil {
 		return nil, fmt.Errorf("Error with file %v; error: %v", p, err)
 	}
 	for i := range c {
-		ids = append(ids, i)
+		ids = append(ids, i.String())
 	}
 	err = file.Close()
 	if err != nil {
@@ -68,13 +59,13 @@ func identify(b *bytematcher.Bytematcher, p string) ([]int, error) {
 	return ids, nil
 }
 
-func multiIdentify(b *bytematcher.Bytematcher, r string) ([][]int, error) {
-	set := make([][]int, 0)
+func multiIdentify(s *core.Siegfried, r string) ([][]string, error) {
+	set := make([][]string, 0)
 	wf := func(path string, info os.FileInfo, err error) error {
 		if info.IsDir() {
 			return nil
 		}
-		ids, err := identify(b, path)
+		ids, err := identify(s, path)
 		if err != nil {
 			return err
 		}
@@ -85,7 +76,7 @@ func multiIdentify(b *bytematcher.Bytematcher, r string) ([][]int, error) {
 	return set, err
 }
 
-func multiIdentifyP(b *bytematcher.Bytematcher, r string) error {
+func multiIdentifyP(s *core.Siegfried, r string) error {
 	wf := func(path string, info os.FileInfo, err error) error {
 		if info.IsDir() {
 			return nil
@@ -94,13 +85,13 @@ func multiIdentifyP(b *bytematcher.Bytematcher, r string) error {
 		if err != nil {
 			return err
 		}
-		c, err := b.Identify(file)
+		c, err := s.Identify(file)
 		if err != nil {
 			return err
 		}
 		fmt.Println(path)
 		for i := range c {
-			fmt.Println(puids[i])
+			fmt.Println(i)
 		}
 		fmt.Println()
 		file.Close()
@@ -118,11 +109,6 @@ func main() {
 	}
 
 	var err error
-	puids, err = pronom.PuidsFromDroid(droid, reports)
-	if err != nil {
-		log.Fatal(err)
-	}
-
 	file, err := os.Open(flag.Arg(0))
 	if err != nil {
 		log.Fatal(err)
@@ -132,7 +118,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	b, err := load(sigfile)
+	s, err := load(sigfile)
 	if err != nil {
 		log.Fatal(err)
 
@@ -140,20 +126,20 @@ func main() {
 
 	if info.IsDir() {
 		file.Close()
-		err = multiIdentifyP(b, flag.Arg(0))
+		err = multiIdentifyP(s, flag.Arg(0))
 		if err != nil {
 			log.Fatal(err)
 		}
 		os.Exit(0)
 	}
 
-	c, err := b.Identify(file)
+	c, err := s.Identify(file)
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Println(flag.Arg(0))
 	for i := range c {
-		fmt.Println(puids[i])
+		fmt.Println(i)
 	}
 	file.Close()
 

@@ -56,19 +56,11 @@ func savereps() error {
 }
 
 func makegob() error {
-	p, err := pronom.New(*droid, *container, *reports)
+	p, err := pronom.NewIdentifier(*droid, *container, *reports)
 	if err != nil {
 		return err
 	}
-	sigs, err := p.Parse()
-	if err != nil {
-		return err
-	}
-	b, err := bytematcher.Signatures(sigs)
-	if err != nil {
-		return err
-	}
-	return b.Save(*sigfile)
+	return p.Save(*sigfile)
 }
 
 func stats() error {
