@@ -3,7 +3,9 @@ go:
   - 1.2
   - tip
 install: 
-  - go get github.com/richardlehane/siegfried
+  - go get github.com/richardlehane/siegfried/pkg/core/bytematcher
+  - go get github.com/richardlehane/siegfried/pkg/pronom
+  - go get github.com/richardlehane/siegfried/cmd/siegfried
 script:
   - go test github.com/richardlehane/siegfried/pkg/core/bytematcher
   - go test github.com/richardlehane/siegfried/pkg/pronom
