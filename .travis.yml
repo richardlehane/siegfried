@@ -2,8 +2,9 @@ language: go
 go:
   - 1.2
   - tip
-install: 
-- git clone -b master github.com/richardlehane/siegfried
+branches:
+  only:
+    - master
 script:
   - go test github.com/richardlehane/siegfried/pkg/core/bytematcher
   - go test github.com/richardlehane/siegfried/pkg/pronom
