@@ -10,8 +10,11 @@ var readSz int64 = 4096
 
 type Buffer struct {
 	eof  chan struct{}
+	cont chan struct{}
+	quit chan struct{}
 	src  io.Reader
-	main []byte
+	w    int
+	buf  []byte
 	tail []byte
 }
 
@@ -40,8 +43,42 @@ func (b *Buffer) grow(n int) int {
 	return b.off + m
 }
 
+func (b *Buffer) fill() error {
+	for {
+		select {
+		case <-b.quit:
+			return nil
+		case <-b.cont:
+		}
+		if len(b.buf)-readSz < b.w {
+			b.buf.grow(readSz)
+		}
+		i, err := b.src.Read(b.buf[w : w+readSz])
+		if err != nil {
+			return err
+		}
+	}
+}
+
+func (b *Buffer) Slice(s, e int) []byte {
+
+}
+
 func (b *Buffer) ReadFrom(i io.Reader) (int64, error) {
 	file, ok := i.(os.File)
+	if ok {
+		info, err := file.Stat()
+		if err != nil {
+			return 0, nil
+		}
+		l := info.Size()
+		if int(l) > readSz {
+
+		}
+
+	} else {
+
+	}
 
 }
 
@@ -50,26 +87,38 @@ type Reader struct {
 	b *Buffer
 }
 
-func (b *Buffer) NewReader() {
-
+func (b *Buffer) NewReader() *Reader {
+	return &Reader{0, b}
 }
+
+
+func (b *Buffer) ReadByte() *Reader {
+	if b.w + readSz > len(b.buf) {
+		b.cont <- 
+	}
 
 type ReverseReader struct {
 	i int
-	b []byte
+	b *Buffer
 }
 
-func (r *reverseReader) ReadByte() (byte, error) {
+func (b *Buffer) NewReverseReader() *ReverseReader {
+	return &ReverseReader{0, b}
+}
+
+func (r *ReverseReader) ReadByte() (byte, error) {
+	// block if a stream, not a file
 	if r.eof != nil {
 		<-r.eof
 	}
-	if r.i < 1 {
+
+	if r.i > readSz {
 		return 0, io.EOF
 	}
-	r.i--
-	return r.b[r.i], nil
-}
-
-func NewReverseReader(r *Reader, l int) *ReverseReader {
-	return &reverseReader{len(buf), buf}
+	r.i++
+	if len(b.tail) > 0 {
+		return b.tail[len(b.tail)-r.i], nil
+	} else {
+		return b.buf[len(b.buf)-r.i], nil
+	}
 }
