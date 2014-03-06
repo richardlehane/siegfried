@@ -19,14 +19,13 @@ func (s *Siegfried) AddIdentifier(i Identifier) {
 }
 
 func (s *Siegfried) Identify(r io.Reader) (chan Identification, error) {
-	err := s.buffer.Reader(r)
+	err := s.buffer.ReadFrom(r)
 	if err != nil {
 		return err, nil
 	}
 	ret := make(chan Identification)
 	for _, v := range s.identifiers {
-		sr := siegreader.NewReader(s.buffer)
-		go v.Identify(sr, ret)
+		go v.Identify(s.buffer, ret)
 	}
 	return ret, nil
 }
