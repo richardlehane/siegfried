@@ -13,7 +13,9 @@ import (
 )
 
 type Bytematcher struct {
-	Sigs    [][]keyFrame
+	Sigs       [][]keyFrame
+	Priorities [][]int // given a match sig X, should we await any other signatures with a greater priority?
+
 	TestSet []*testTree
 
 	BofSeqs *seqSet
@@ -58,6 +60,10 @@ func Signatures(sigs []Signature, opts ...int) (*Bytematcher, error) {
 	b.eAho = ac.NewFixed(b.EofSeqs.Set)
 	b.vAho = ac.New(b.VarSeqs.Set)
 	return b, nil
+}
+
+func (b *Bytematcher) SetPriorities(p [][]int) {
+	b.Priorities = p
 }
 
 func (b *Bytematcher) Start() {
