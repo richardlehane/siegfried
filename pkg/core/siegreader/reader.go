@@ -1,12 +1,5 @@
 package siegreader
 
-// Slice
-
-func (b *Buffer) Slice(s, e int) ([]byte, error) {
-	// block until the slice is available
-
-}
-
 // Reader
 
 type Reader struct {
@@ -20,14 +13,13 @@ func (r *Buffer) NewReader() *Reader {
 }
 
 func (r *Reader) Read(b []byte) (int, error) {
-
+	slc, err := r.b.Slice(r.i, len(b))
+	copy(b, slc)
+	return len(slc), err
 }
 
 func (r *Reader) ReadByte() (byte, error) {
-	if b.w+readSz > len(b.buf) {
-		b.cont <- struct{}{}
-	}
-	b
+
 	r.i++
 }
 
@@ -67,9 +59,9 @@ type EOFReader struct {
 	b *Buffer
 }
 
-func (b *Buffer) NewEOFReader() *ReverseReader {
+func (b *Buffer) NewEOFReader() *EofReader {
 	// fill the EOF now, if possible and not already done
-	return &ReverseReader{0, b}
+	return &EofReader{0, b}
 }
 
 func (r *ReverseReader) Read(b []byte) (int, error) {
@@ -77,18 +69,5 @@ func (r *ReverseReader) Read(b []byte) (int, error) {
 }
 
 func (r *ReverseReader) ReadByte() (byte, error) {
-	// block if a stream, not a file
-	if r.eof != nil {
-		<-r.eof
-	}
 
-	if r.i > readSz {
-		return 0, io.EOF
-	}
-	r.i++
-	if len(b.tail) > 0 {
-		return b.tail[len(b.tail)-r.i], nil
-	} else {
-		return b.buf[len(b.buf)-r.i], nil
-	}
 }

@@ -130,3 +130,47 @@ func (b *Buffer) fillEof() {
 	}
 	close(b.eofc)
 }
+
+// Slice
+
+func (b *Buffer) Slice(s, e int) ([]byte, error) {
+	// block until the slice is available
+	if b.w+readSz > len(b.buf) {
+		b.cont <- struct{}{}
+	}
+	b
+}
+
+func (b *Buffer) EndSlice(s, e int) ([]byte, error) {
+	// block until the slice is available
+	if b.w+readSz > len(b.buf) {
+		b.cont <- struct{}{}
+	}
+	b
+}
+
+func (b *Buffer) Byte(o int) (byte, error) {
+
+}
+
+func (b *Buffer) EndByte(o int) (byte, error) {
+	// block if a stream, not a file
+	if r.eof != nil {
+		<-r.eof
+	}
+
+	if r.i > readSz {
+		return 0, io.EOF
+	}
+	r.i++
+	if len(b.tail) > 0 {
+		return b.tail[len(b.tail)-r.i], nil
+	} else {
+		return b.buf[len(b.buf)-r.i], nil
+	}
+
+}
+
+func (b *Buffer) Seek(o int) (bool, error) {
+
+}
