@@ -1,14 +1,13 @@
 package siegreader
 
 import (
-	"io"
-	"path/filepath"
+	"os"
 	"strings"
 	"testing"
 )
 
 func TestRead(t *testing.T) {
-	b := setup(strings.NewReader(teststring))
+	b := setup(strings.NewReader(teststring), t)
 	r := b.NewReader()
 	buf := make([]byte, 11)
 	i, err := r.Read(buf)
@@ -23,9 +22,7 @@ func TestRead(t *testing.T) {
 	}
 }
 
-func TestReadAt(t *testing.T) {
-	b := setup(strings.NewReader(teststring))
-	r := b.NewReader()
+func readAt(t *testing.T, r *Reader) {
 	buf := make([]byte, 5)
 	i, err := r.ReadAt(buf, 4)
 	if err != nil {
@@ -39,9 +36,13 @@ func TestReadAt(t *testing.T) {
 	}
 }
 
-func TestReadByte(t *testing.T) {
-	b := setup(strings.NewReader(teststring))
+func TestReadAt(t *testing.T) {
+	b := setup(strings.NewReader(teststring), t)
 	r := b.NewReader()
+	readAt(t, r)
+}
+
+func readByte(t *testing.T, r *Reader) {
 	c, err := r.ReadByte()
 	if err != nil {
 		t.Errorf("Read error: %v", err)
@@ -58,9 +59,13 @@ func TestReadByte(t *testing.T) {
 	}
 }
 
-func TestSeek(t *testing.T) {
-	b := setup(strings.NewReader(teststring))
+func TestReadByte(t *testing.T) {
+	b := setup(strings.NewReader(teststring), t)
 	r := b.NewReader()
+	readByte(t, r)
+}
+
+func seek(t *testing.T, r *Reader) {
 	_, err := r.Seek(6, 0)
 	if err != nil {
 		t.Errorf("Read error: %v", err)
@@ -71,5 +76,81 @@ func TestSeek(t *testing.T) {
 	}
 	if c != 'd' {
 		t.Errorf("Read error: expecting 'd', got %v", c)
+	}
+
+}
+
+func TestSeek(t *testing.T) {
+	b := setup(strings.NewReader(teststring), t)
+	r := b.NewReader()
+	seek(t, r)
+}
+
+func TestReuse(t *testing.T) {
+	r, err := os.Open(testfile)
+	if err != nil {
+		t.Fatal(err)
+	}
+	b := setup(r, t)
+	r.Close()
+	nr := strings.NewReader(teststring)
+	err = b.SetSource(nr)
+	if err != nil {
+		t.Errorf("Read error: %v", err)
+	}
+	reuse := b.NewReader()
+	readByte(t, reuse)
+	seek(t, reuse)
+}
+
+func drain(r *Reader, results chan int) {
+	var i int
+	for _, e := r.ReadByte(); e == nil; _, e = r.ReadByte() {
+		i++
+	}
+	results <- i
+}
+
+func TestDrain(t *testing.T) {
+	b := setup(strings.NewReader(teststring), t)
+	r := b.NewReader()
+	results := make(chan int)
+	go drain(r, results)
+	if i := <-results; i != 11 {
+		t.Errorf("Expecting 11, got %v", i)
+	}
+}
+
+func TestDrainFile(t *testing.T) {
+	r, err := os.Open(testfile)
+	if err != nil {
+		t.Fatal(err)
+	}
+	b := setup(r, t)
+	first := b.NewReader()
+	results := make(chan int)
+	go drain(first, results)
+	if i := <-results; i != 24040 {
+		t.Errorf("Expecting 24040, got %v", i)
+	}
+	r.Close()
+}
+
+func TestMultiple(t *testing.T) {
+	r, err := os.Open(testfile)
+	if err != nil {
+		t.Fatal(err)
+	}
+	b := setup(r, t)
+	first := b.NewReader()
+	second := b.NewReader()
+	results := make(chan int)
+	go drain(first, results)
+	go drain(second, results)
+	if i := <-results; i != 24040 {
+		t.Errorf("Expecting 24040, got %v", i)
+	}
+	if i := <-results; i != 24040 {
+		t.Errorf("Expecting 24040, got %v", i)
 	}
 }

@@ -1,176 +1,213 @@
 package siegreader
 
 import (
-	"bytes"
 	"io"
 	"os"
 	"sync"
 )
 
-var readSz int = 8192
+var (
+	readSz      = 4096
+	initialRead = readSz * 3
+)
 
 type protected struct {
-	sync.RWMutex
-	sz int64
-	w  int
+	sync.Mutex
+	val     int
+	eofRead bool
 }
 
-// Buffer
-
+// Siegreader Buffer supports multiple concurrent Readers, including Readers reading from the end of the stream (ReverseReaders)
 type Buffer struct {
-	eofc  chan struct{} // signals if EOF bytes are available. When EOF bytes are available, this chan is closed
-	contc chan struct{} // communicate with the fill goroutine. Nil the chan to halt, send an empty struct to continue.
-	src   io.Reader
-
-	prot protected
-
-	buf []byte
-	eof []byte
+	src      io.Reader
+	buf, eof []byte
+	eofc     chan struct{} // signals if EOF bytes are available. When EOF bytes are available, this chan is closed
+	sz       int64
+	w        protected // index of latest write
 }
 
 func New() *Buffer {
 	b := new(Buffer)
-	b.buf, b.tail = make([]byte, readSz*2), make([]byte, readSz)
-	b.cont = make(chan struct{})
-	go b.fill()
+	b.buf, b.eof = make([]byte, initialRead), make([]byte, readSz)
 	return b
 }
 
 func (b *Buffer) reset() {
-	b.eof = make(chan struct{})
-	b.buf = b.buf[:readSz*2]
-	b.prot.Lock()
-	b.w, b.sz = 0, 0
-	b.prot.Unlock()
+	b.eofc = make(chan struct{})
+	b.sz = 0
+	b.w.Lock()
+	b.w.val = 0
+	b.w.eofRead = false
+	b.w.Unlock()
 }
 
 // Set the buffer's source.
 // Can be any io.Reader. If it is an os.File, will load EOF buffer early. Otherwise waits for a complete read.
-func (b *Buffer) SetSource(i io.Reader) error {
+func (b *Buffer) SetSource(r io.Reader) error {
 	b.reset()
-	b.src = i
-	file, ok := i.(os.File)
+	b.src = r
+	file, ok := r.(*os.File)
 	if ok {
 		info, err := file.Stat()
 		if err != nil {
-			return 0, err
+			return err
 		}
 		b.sz = info.Size()
-		if b.sz > readSz*3 {
-			b.tail = b.tail[:int(readSz)]
+		if b.sz > int64(initialRead) {
+			b.eof = b.eof[:cap(b.eof)]
 		} else {
-			b.tail = b.tail[:0]
+			b.eof = b.eof[:0]
 		}
 	} else {
 		b.sz = 0
-		b.tail = b.tail[:0]
+		b.eof = b.eof[:0]
 	}
-	return nil
+	_, err := b.fill() // initial fill
+	return err
 }
 
 func (b *Buffer) grow() {
 	// Rules for growing:
-	// - if we need to grow, we have passed the BOF and can assume we will need whole file so, if we have a sz grow to it straight away
+	// - if we need to grow, we have passed the initial read and can assume we will need whole file so, if we have a sz grow to it straight away
 	// - otherwise, double capacity each time
 	var buf []byte
-	if sz > 0 {
-		buf = make([]byte, int(sz))
+	if b.sz > 0 {
+		buf = make([]byte, int(b.sz))
 	} else {
 		buf = make([]byte, cap(b.buf)*2)
 	}
-	copy(buf, b.buf[:b.w])
+	copy(buf, b.buf[:b.w.val]) // don't care about unlocking as grow() is only called by fill()
 	b.buf = buf
 }
 
-func (b *Buffer) fill() {
-	// Rules for filling:
-	// - if we have a sz greater than 0, if there is stuff in the eof buffer, and if we are less than readSz from the end, copy across from the eof buffer
-	// - read readsz * 2 at a time
-
-	for {
-		<-b.cont // wait for a continue signal
-		if len(b.buf)-readSz < b.w {
-			b.buf.grow(readSz)
-		}
-		i, err := b.src.Read(b.buf[w : w+readSz])
-		if err != nil {
-			if err == io.EOF {
-				switch {
-				case <-b.eof:
-					return
-				}
-				close(b.eof)
-			}
-			return
-		}
+// Rules for filling:
+// - if we have a sz greater than 0, if there is stuff in the eof buffer, and if we are less than readSz from the end, copy across from the eof buffer
+// - read readsz * 2 at a time
+func (b *Buffer) fill() (int, error) {
+	// if we've run out of room, grow the buffer
+	if len(b.buf)-readSz < b.w.val {
+		b.grow()
 	}
-}
-
-func (b *Buffer) fillEof() {
-	if len(b.eof) < int(readSz) {
-		return
+	// if we have an eof buffer, and we are near the end of the file, avoid an extra read by copying straight into the main buffer
+	if len(b.eof) > 0 && b.w.val+readSz >= int(b.sz) {
+		lr := int(b.sz) - b.w.val
+		b.w.val += copy(b.buf[b.w.val:b.w.val+lr], b.eof[readSz-lr:])
+		return b.w.val, io.EOF
 	}
-	_, err := b.src.Seek(readSz, 2)
-	if err != nil {
-		panic(err)
-	}
-	i, err := b.src.Read(b.eof)
+	// otherwise, let's read
+	i, err := b.src.Read(b.buf[b.w.val : b.w.val+readSz])
 	if err != nil {
 		if err == io.EOF {
-			if int64(i) < readSz {
-				b.eof = b.eof[:i]
+			b.w.val += i
+			// if we haven't got an eof buf already
+			if len(b.eof) < readSz {
+				b.sz = int64(b.w.val)
+				close(b.eofc)
 			}
-		} else {
-			panic(err)
 		}
+		return b.w.val, err
 	}
-	_, err = b.src.Seek(int64(b.w), 0)
+	b.w.val += i
+	return b.w.val, nil
+}
+
+func (b *Buffer) fillEof() error {
+	// return nil for a non-file or small file reader
+	if len(b.eof) < readSz {
+		return nil
+	}
+	b.w.Lock()
+	defer b.w.Unlock()
+	if b.w.eofRead {
+		return nil // another reverse reader has already filled the buffer
+	}
+	rs := b.src.(io.ReadSeeker)
+	_, err := rs.Seek(int64(readSz), 2)
 	if err != nil {
-		panic(err)
+		return err
+	}
+	_, err = rs.Read(b.eof)
+	if err != nil {
+		return err
+	}
+	_, err = rs.Seek(int64(b.w.val), 0)
+	if err != nil {
+		return err
 	}
 	close(b.eofc)
+	b.w.eofRead = true
+	return nil
 }
 
-// Slice
-
-func (b *Buffer) Slice(s, e int) ([]byte, error) {
+// Return a slice from the buffer that begins at offset s of length l
+func (b *Buffer) Slice(s, l int) ([]byte, error) {
 	// block until the slice is available
-	if b.w+readSz > len(b.buf) {
-		b.cont <- struct{}{}
+	b.w.Lock()
+	defer b.w.Unlock()
+	var err error
+	var bound int
+	if s+l > b.w.val {
+		for bound, err = b.fill(); s+l > bound && err == nil; bound, err = b.fill() {
+		}
 	}
-	b
+	if err == nil {
+		return b.buf[s : s+l], nil
+	}
+	if err == io.EOF {
+		if s+l > b.w.val {
+			if s > b.w.val {
+				return []byte{}, err
+			}
+			return b.buf[s:b.w.val], err
+		}
+	}
+	return nil, err
 }
 
-func (b *Buffer) EndSlice(s, e int) ([]byte, error) {
-	// block until the slice is available
-	if b.w+readSz > len(b.buf) {
-		b.cont <- struct{}{}
-	}
-	b
-}
-
-func (b *Buffer) Byte(o int) (byte, error) {
-
-}
-
-func (b *Buffer) EndByte(o int) (byte, error) {
-	// block if a stream, not a file
-	if r.eof != nil {
-		<-r.eof
-	}
-
-	if r.i > readSz {
-		return 0, io.EOF
-	}
-	r.i++
-	if len(b.tail) > 0 {
-		return b.tail[len(b.tail)-r.i], nil
+func (b *Buffer) eofSlice(s, l int) ([]byte, error) {
+	// block until the EOF is available
+	<-b.eofc
+	var buf []byte
+	if len(b.eof) > 0 {
+		buf = b.eof
 	} else {
-		return b.buf[len(b.buf)-r.i], nil
+		buf = b.buf
 	}
-
+	if s+l > len(buf) {
+		if s > len(buf) {
+			return nil, io.EOF
+		}
+		return buf[:len(buf)-s], io.EOF
+	}
+	return buf[len(buf)-(s+l) : len(buf)-s], nil
 }
 
-func (b *Buffer) Seek(o int) (bool, error) {
-
+// block until a seek to a particular offset is possible, then return true, if it is impossible return false
+func (b *Buffer) canSeek(o int64, rev bool) (bool, error) {
+	if rev {
+		if b.sz > 0 {
+			o = b.sz - o
+		} else {
+			<-b.eofc
+			o = b.sz - o
+		}
+	}
+	b.w.Lock()
+	defer b.w.Unlock()
+	var err error
+	for bound := b.w.val; o > int64(bound); bound, err = b.fill() {
+		if err != nil {
+			break
+		}
+	}
+	if err == nil {
+		return true, nil
+	}
+	if err == io.EOF {
+		if o > int64(b.w.val) {
+			return false, err
+		}
+		return true, nil
+	}
+	return false, err
 }

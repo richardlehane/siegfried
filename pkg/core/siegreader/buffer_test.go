@@ -10,7 +10,7 @@ import (
 
 var teststring = "abracadabra"
 
-var _ = filepath.Join("..", "..", "..", "cmd", "siegfried", "testdata", "benchmark", "Benchmark")
+var testfile = filepath.Join("..", "..", "..", "cmd", "siegfried", "testdata", "benchmark", "Benchmark.docx")
 
 func TestNew(t *testing.T) {
 	b := New()
@@ -19,7 +19,7 @@ func TestNew(t *testing.T) {
 	}
 }
 
-func setup(r io.Reader) *Buffer {
+func setup(r io.Reader, t *testing.T) *Buffer {
 	b := New()
 	err := b.SetSource(r)
 	if err != nil {
@@ -29,9 +29,15 @@ func setup(r io.Reader) *Buffer {
 }
 
 func TestStrSource(t *testing.T) {
-
+	r := strings.NewReader(teststring)
+	setup(r, t)
 }
 
 func TestFileSource(t *testing.T) {
-
+	r, err := os.Open(testfile)
+	if err != nil {
+		t.Fatal(err)
+	}
+	setup(r, t)
+	r.Close()
 }
