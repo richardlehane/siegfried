@@ -141,7 +141,6 @@ func (b *Buffer) fillEof() error {
 
 // Return a slice from the buffer that begins at offset s of length l
 func (b *Buffer) Slice(s, l int) ([]byte, error) {
-	// block until the slice is available
 	b.w.Lock()
 	defer b.w.Unlock()
 	var err error
@@ -171,9 +170,9 @@ func (b *Buffer) eofSlice(s, l int) ([]byte, error) {
 	if len(b.eof) > 0 {
 		buf = b.eof
 	} else {
-		buf = b.buf
+		buf = b.buf[:int(b.sz)]
 	}
-	if s+l > len(buf) {
+	if s+l >= len(buf) {
 		if s > len(buf) {
 			return nil, io.EOF
 		}
@@ -195,9 +194,9 @@ func (b *Buffer) canSeek(o int64, rev bool) (bool, error) {
 	b.w.Lock()
 	defer b.w.Unlock()
 	var err error
-	for bound := b.w.val; o > int64(bound); bound, err = b.fill() {
-		if err != nil {
-			break
+	var bound int
+	if o > int64(b.w.val) {
+		for bound, err = b.fill(); o > int64(bound) && err == nil; bound, err = b.fill() {
 		}
 	}
 	if err == nil {

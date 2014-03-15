@@ -154,3 +154,29 @@ func TestMultiple(t *testing.T) {
 		t.Errorf("Expecting 24040, got %v", i)
 	}
 }
+
+func TestReverse(t *testing.T) {
+	b := setup(strings.NewReader(teststring), t)
+	r, err := b.NewReverseReader()
+	if err != nil {
+		t.Errorf("Read error: %v", err)
+	}
+	first := b.NewReader()
+	results := make(chan int)
+	go drain(first, results)
+	<-results
+	c, err := r.ReadByte()
+	if err != nil {
+		t.Errorf("Read error: %v", err)
+	}
+	if c != 'a' {
+		t.Errorf("Read error: expecting 'a', got %v", c)
+	}
+	c, err = r.ReadByte()
+	if err != nil {
+		t.Errorf("Read error: %v", err)
+	}
+	if c != 'r' {
+		t.Errorf("Read error: expecting 'r', got %v", c)
+	}
+}
