@@ -184,7 +184,7 @@ func (b *Buffer) EofSlice(s, l int) ([]byte, error) {
 	}
 	if s+l >= len(buf) {
 		if s > len(buf) {
-			return nil, io.EOF
+			return []byte{}, io.EOF
 		}
 		return buf[:len(buf)-s], io.EOF
 	}
