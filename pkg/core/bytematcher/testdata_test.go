@@ -1,5 +1,7 @@
 package bytematcher
 
+import "github.com/richardlehane/siegfried/pkg/core/siegreader"
+
 // Stubs used by multiple test files within the bytematcher package and subpackages.
 
 // Pattern
@@ -90,6 +92,8 @@ var bmStub *Bytematcher = &Bytematcher{
 	BofSeqs: &seqSet{},
 	EofSeqs: &seqSet{},
 	VarSeqs: &seqSet{},
+
+	buf: siegreader.New(),
 }
 
 // Matcher
@@ -97,7 +101,6 @@ var mStub = []byte{'t', 'e', 's', 't', 'y', 'A', 'T', 'E', 'S', 'T', 'M', 'A', '
 var matcherStub *matcher = &matcher{
 	b:                bmStub,
 	r:                make(chan int),
-	n:                mStub,
 	partialKeyframes: make(map[[2]int][][2]int),
 }
 

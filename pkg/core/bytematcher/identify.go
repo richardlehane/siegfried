@@ -1,19 +1,22 @@
 package bytematcher
 
 import (
-	"bytes"
 	"sync"
 )
 
-func (b *Bytematcher) identify(r chan int) {
+func (b *Bytematcher) identify(r chan int) error {
 	var wg sync.WaitGroup
-	m := NewMatcher(b, r, b.buf.Bytes(), &wg)
-	bchan := b.bAho.IndexFixed(bytes.NewReader(b.buf.Bytes()))
-	vchan := b.vAho.Index(bytes.NewReader(b.buf.Bytes()))
-	echan := b.eAho.IndexFixed(newReverseReader(b.buf.Bytes()))
+	m := NewMatcher(b, r, &wg)
+	bchan := b.bAho.IndexFixed(b.buf.NewReader())
+	vchan := b.vAho.Index(b.buf.NewReader())
+	rr, err := b.buf.NewReverseReader()
+	if err != nil {
+		return err
+	}
+	echan := b.eAho.IndexFixed(rr)
 
 	for i, f := range b.BofFrames.Set {
-		if match, matches := f.Match(b.buf.Bytes()); match {
+		if match, matches := f.Match(b.buf.MustSlice(0, TotalLength(f), false)); match {
 			min, _ := f.Length()
 			for _, off := range matches {
 				wg.Add(1)
@@ -22,7 +25,7 @@ func (b *Bytematcher) identify(r chan int) {
 		}
 	}
 	for i, f := range b.EofFrames.Set {
-		if match, matches := f.MatchR(b.buf.Bytes()); match {
+		if match, matches := f.MatchR(b.buf.MustSlice(0, TotalLength(f), true)); match {
 			for _, off := range matches {
 				wg.Add(1)
 				go m.match(b.EofFrames.TestTreeIndex[i], off, 0, true)
@@ -59,4 +62,5 @@ func (b *Bytematcher) identify(r chan int) {
 	}
 	wg.Wait()
 	close(r)
+	return nil
 }

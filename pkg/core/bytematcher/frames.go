@@ -12,21 +12,6 @@ func init() {
 	gob.Register(WildMin{})
 }
 
-type Matchling struct {
-	Offset  int
-	Typ     OffType
-	Reverse bool
-}
-
-var FAIL = Matchling{-1, -1, false}
-
-func (m Matchling) Pass() bool {
-	if m.Offset < 0 {
-		return false
-	}
-	return true
-}
-
 type Frame interface {
 	Match([]byte) (bool, []int)
 	MatchR([]byte) (bool, []int)
@@ -129,6 +114,11 @@ func NonZero(f Frame) bool {
 		}
 	}
 	return true
+}
+
+func TotalLength(f Frame) int {
+	_, l := f.Length()
+	return l + f.Max()
 }
 
 // e.g. 0

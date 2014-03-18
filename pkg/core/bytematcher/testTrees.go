@@ -4,10 +4,12 @@ package bytematcher
 // further test to perform. Follow-up tests may be required to the left or to the right of the match.
 
 type testTree struct {
-	Complete   []keyframeID
-	Incomplete []followUp
-	Left       []*testNode
-	Right      []*testNode
+	Complete         []keyframeID
+	Incomplete       []followUp
+	MaxLeftDistance  int
+	MaxRightDistance int
+	Left             []*testNode
+	Right            []*testNode
 }
 
 type followUp struct {
@@ -76,6 +78,7 @@ func newTestTree() *testTree {
 	return &testTree{
 		make([]keyframeID, 0),
 		make([]followUp, 0),
+		0, 0,
 		make([]*testNode, 0),
 		make([]*testNode, 0),
 	}

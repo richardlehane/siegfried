@@ -4,7 +4,7 @@ import (
 	"strconv"
 )
 
-// Each segment in a signature is represented by a single keyframe. A slice of keyframes therefore represents a full signature. The Keyframes type is a slice of these slices.
+// Each segment in a signature is represented by a single keyframe. A slice of keyframes represents a full signature. The Keyframes type is a slice of these slices.
 // The keyframe includes the range of offsets that need to match for a successful hit.
 type keyFrame struct {
 	Typ OffType // defined in frames.go

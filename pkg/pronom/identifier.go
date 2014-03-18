@@ -1,6 +1,9 @@
 package pronom
 
 import (
+	"encoding/gob"
+	"fmt"
+
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
@@ -24,7 +27,7 @@ func (pid PronomIdentification) Certainty() float64 {
 	return pid.certainty
 }
 
-func (pi *PronomIdentifier) Identify(r siegreader.Reader, c chan core.Identification) {
+func (pi *PronomIdentifier) Identify(b *siegreader.Buffer, c chan core.Identification) {
 	ids, err := pi.Bm.Identify(r)
 	if err != nil {
 		return nil, fmt.Errorf("Error with file %v; error: %v", p, err)

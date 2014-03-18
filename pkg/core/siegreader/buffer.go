@@ -2,6 +2,7 @@ package siegreader
 
 import (
 	"io"
+	"log"
 	"os"
 	"sync"
 )
@@ -19,11 +20,12 @@ type protected struct {
 
 // Siegreader Buffer supports multiple concurrent Readers, including Readers reading from the end of the stream (ReverseReaders)
 type Buffer struct {
-	src      io.Reader
-	buf, eof []byte
-	eofc     chan struct{} // signals if EOF bytes are available. When EOF bytes are available, this chan is closed
-	sz       int64
-	w        protected // index of latest write
+	src       io.Reader
+	buf, eof  []byte
+	eofc      chan struct{} // signals if EOF bytes are available. When EOF bytes are available, this chan is closed
+	completec chan struct{} // signals when the file has been completely read, allows EOF scanning beyond the small buffer
+	sz        int64
+	w         protected // index of latest write
 }
 
 func New() *Buffer {
@@ -33,7 +35,7 @@ func New() *Buffer {
 }
 
 func (b *Buffer) reset() {
-	b.eofc = make(chan struct{})
+	b.eofc, b.completec = make(chan struct{}), make(chan struct{})
 	b.sz = 0
 	b.w.Lock()
 	b.w.val = 0
@@ -64,6 +66,12 @@ func (b *Buffer) SetSource(r io.Reader) error {
 	}
 	_, err := b.fill() // initial fill
 	return err
+}
+
+// return the buffer's size, available immediately for files. Must wait for full read for streams.
+func (b *Buffer) Size() int {
+	<-b.eofc
+	return int(b.sz)
 }
 
 func (b *Buffer) grow() {
@@ -98,6 +106,7 @@ func (b *Buffer) fill() (int, error) {
 	i, err := b.src.Read(b.buf[b.w.val : b.w.val+readSz])
 	if err != nil {
 		if err == io.EOF {
+			close(b.completec)
 			b.w.val += i
 			// if we haven't got an eof buf already
 			if len(b.eof) < readSz {
@@ -163,13 +172,14 @@ func (b *Buffer) Slice(s, l int) ([]byte, error) {
 	return nil, err
 }
 
-func (b *Buffer) eofSlice(s, l int) ([]byte, error) {
+func (b *Buffer) EofSlice(s, l int) ([]byte, error) {
 	// block until the EOF is available
 	<-b.eofc
 	var buf []byte
-	if len(b.eof) > 0 {
+	if len(b.eof) > 0 && s+l <= len(b.eof) {
 		buf = b.eof
 	} else {
+		<-b.completec
 		buf = b.buf[:int(b.sz)]
 	}
 	if s+l >= len(buf) {
@@ -181,7 +191,21 @@ func (b *Buffer) eofSlice(s, l int) ([]byte, error) {
 	return buf[len(buf)-(s+l) : len(buf)-s], nil
 }
 
-// block until a seek to a particular offset is possible, then return true, if it is impossible return false
+func (b *Buffer) MustSlice(s, l int, rev bool) []byte {
+	var slc []byte
+	var err error
+	if rev {
+		slc, err = b.EofSlice(s, l)
+	} else {
+		slc, err = b.Slice(s, l)
+	}
+	if err != nil && err != io.EOF {
+		log.Printf("SIEGREADER WARNING: FAILED TO SLICE FROM %v TO %v; REVERSE IS %v", s, l, rev)
+	}
+	return slc
+}
+
+// fill until a seek to a particular offset is possible, then return true, if it is impossible return false
 func (b *Buffer) canSeek(o int64, rev bool) (bool, error) {
 	if rev {
 		if b.sz > 0 {

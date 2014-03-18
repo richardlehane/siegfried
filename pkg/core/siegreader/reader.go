@@ -123,7 +123,7 @@ func (b *Buffer) NewReverseReader() (*ReverseReader, error) {
 
 func (r *ReverseReader) setBuf(o int) error {
 	var err error
-	r.scratch, err = r.eofSlice(o, readSz)
+	r.scratch, err = r.EofSlice(o, readSz)
 	if err == io.EOF {
 		r.end = true
 	}
@@ -138,7 +138,7 @@ func (r *ReverseReader) Read(b []byte) (int, error) {
 	var slc []byte
 	var err error
 	if len(b) > len(r.scratch)-r.j {
-		slc, err = r.eofSlice(r.i, len(b))
+		slc, err = r.EofSlice(r.i, len(b))
 		if err != nil {
 			if err != io.EOF {
 				return 0, err

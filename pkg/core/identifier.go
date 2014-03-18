@@ -3,7 +3,7 @@ package core
 import "github.com/richardlehane/siegfried/pkg/core/siegreader"
 
 type Identifier interface {
-	Identify(siegreader.Reader, chan Identification)
+	Identify(*siegreader.Buffer, chan Identification)
 }
 
 type Identification interface {

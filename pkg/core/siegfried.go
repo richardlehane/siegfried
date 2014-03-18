@@ -19,7 +19,7 @@ func (s *Siegfried) AddIdentifier(i Identifier) {
 }
 
 func (s *Siegfried) Identify(r io.Reader) (chan Identification, error) {
-	err := s.buffer.ReadFrom(r)
+	err := s.buffer.SetSource(r)
 	if err != nil {
 		return err, nil
 	}

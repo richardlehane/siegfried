@@ -1,20 +1,14 @@
 package bytematcher
 
 import (
-	"bytes"
-	"encoding/gob"
 	"fmt"
-	"io"
-	"io/ioutil"
-	"os"
 
 	"github.com/richardlehane/ac"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
 type Bytematcher struct {
-	Sigs       [][]keyFrame
-	Priorities [][]int // given a match sig X, should we await any other signatures with a greater priority?
+	Sigs [][]keyFrame
 
 	TestSet []*testTree
 
@@ -29,16 +23,20 @@ type Bytematcher struct {
 	eAho *ac.Ac
 	vAho *ac.Ac
 
-	rdr *siegreader.Reader
+	buf *siegreader.Buffer
 }
 
+// Create a new Bytematcher from a slice of signatures.
+// Can give optional distance, range, choice, variable sequence length values to override the defaults of 8192, 2048, 64.
+// The distance and range values dictate how signatures are segmented during processing.
+// The choices value controls how signature segments are converted into simple byte sequences during processing.
+// The varlen value controls what is the minimum length sequence acceptable for the variable Aho Corasick tree. The longer this length, the fewer false matches you will get during searching.
 func Signatures(sigs []Signature, opts ...int) (*Bytematcher, error) {
 	b := newBytematcher()
-	n := make([][]keyFrame, len(b.Sigs)+len(sigs))
-	copy(n, b.Sigs)
-	b.Sigs = n
+	b.Sigs = make([][]keyFrame, len(sigs))
 	se := make(sigErrors, 0)
-	var distance, rng, choices = 8192, 2048, 64
+	var distance, rng, choices, varlen = 8192, 2048, 64, 1
+	// override defaults if distance, range or choices values are given
 	switch len(opts) {
 	case 1:
 		distance = opts[0]
@@ -46,9 +44,12 @@ func Signatures(sigs []Signature, opts ...int) (*Bytematcher, error) {
 		distance, rng = opts[0], opts[1]
 	case 3:
 		distance, rng, choices = opts[0], opts[1], opts[2]
+	case 4:
+		distance, rng, choices, varlen = opts[0], opts[1], opts[2], opts[3]
 	}
+	// process each of the sigs, adding them to b.Sigs and the various seq/frame/testTree sets
 	for i, sig := range sigs {
-		err := b.process(sig, distance, rng, choices, i)
+		err := b.process(sig, i, distance, rng, choices, varlen)
 		if err != nil {
 			se = append(se, err.(sigError))
 		}
@@ -56,25 +57,28 @@ func Signatures(sigs []Signature, opts ...int) (*Bytematcher, error) {
 	if len(se) > 0 {
 		return b, se
 	}
+	// set the maximum distances for this test tree so can properly size slices for matching
+	for _, t := range b.TestSet {
+		t.MaxLeftDistance = maxLength(t.Left)
+		t.MaxRightDistance = maxLength(t.Right)
+	}
+	// create aho corasick search trees for the lists of sequences (BOF, EOF and variable)
 	b.bAho = ac.NewFixed(b.BofSeqs.Set)
 	b.eAho = ac.NewFixed(b.EofSeqs.Set)
 	b.vAho = ac.New(b.VarSeqs.Set)
 	return b, nil
 }
 
-func (b *Bytematcher) SetPriorities(p [][]int) {
-	b.Priorities = p
-}
-
+// After loading a bytematcher, create the aho corasick search trees
 func (b *Bytematcher) Start() {
 	b.bAho = ac.NewFixed(b.BofSeqs.Set)
 	b.eAho = ac.NewFixed(b.EofSeqs.Set)
 	b.vAho = ac.New(b.VarSeqs.Set)
 }
 
-func (b *Bytematcher) Identify(r *siegreader.Reader) chan int {
+func (b *Bytematcher) Identify(sb *siegreader.Buffer) chan int {
 	ret := make(chan int)
-	b.rdr = r
+	b.buf = sb
 	go b.identify(ret)
 	return ret
 }
@@ -91,12 +95,12 @@ func (b *Bytematcher) Stats() string {
 		c += len(t.Complete)
 		ic += len(t.Incomplete)
 		l += len(t.Left)
-		if ml < maxLength(t.Left) {
-			ml = maxLength(t.Left)
+		if ml < t.MaxLeftDistance {
+			ml = t.MaxLeftDistance
 		}
 		r += len(t.Right)
-		if mr < maxLength(t.Right) {
-			mr = maxLength(t.Right)
+		if mr < t.MaxRightDistance {
+			mr = t.MaxRightDistance
 		}
 	}
 	str += fmt.Sprintf("Complete Tests: %v\n", c)
@@ -124,7 +128,7 @@ func (b *Bytematcher) KeyFrames() []string {
 
 func newBytematcher() *Bytematcher {
 	return &Bytematcher{
-		make([][]keyFrame, 0),
+		nil,
 		make([]*testTree, 0),
 		newSeqSet(),
 		newSeqSet(),
@@ -134,7 +138,7 @@ func newBytematcher() *Bytematcher {
 		&ac.Ac{},
 		&ac.Ac{},
 		&ac.Ac{},
-		new(bytes.Buffer),
+		nil,
 	}
 }
 
@@ -189,7 +193,7 @@ func (b *Bytematcher) processSeg(seg Signature, idx, i, l, x, y int, rev bool, s
 	return k
 }
 
-func (b *Bytematcher) process(sig Signature, distance, rng, choices, idx int) error {
+func (b *Bytematcher) process(sig Signature, idx, distance, rng, choices, varlen int) error {
 	// We start by segmenting the signature
 	segs := segment(sig, distance, rng)
 	// Our goal is to turn a signature into a set of keyframes
@@ -211,7 +215,7 @@ func (b *Bytematcher) process(sig Signature, distance, rng, choices, idx int) er
 			kf[i] = b.processSeg(seg, idx, i, l, x, y, false, b.VarSeqs, b.EofFrames, len(seg)-1, len(seg))
 		default:
 			l, x, y := varLength(seg, choices)
-			if l < 1 {
+			if l < varlen {
 				return fmt.Errorf("Variable offset segment encountered that can't be turned into a sequence: signature %d, segment %d", idx, i)
 			}
 			kf[i] = b.processSeg(seg, idx, i, l, x, y, false, b.VarSeqs, b.BofFrames, 0, 1)
