@@ -1,5 +1,7 @@
 package bytematcher
 
+import . "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+
 // Test trees link byte sequence and frame matches (from the sequence and frame sets) to keyframes. This link is sometimes direct if there are no
 // further test to perform. Follow-up tests may be required to the left or to the right of the match.
 

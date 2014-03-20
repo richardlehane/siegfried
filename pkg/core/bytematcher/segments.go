@@ -1,5 +1,10 @@
 package bytematcher
 
+import (
+	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
+)
+
 // Signatures are split into segments (which are themselves signatures).
 // This separation happens on wildcards or when the distance between frames is deemed too great.
 // E.g. a signature of [BOF 0: "ABCD"][PREV 0-20: "EFG"][PREV Wild: "HI"][EOF 0: "XYZ"]

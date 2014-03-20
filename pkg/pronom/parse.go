@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
 )
 
 const (
@@ -18,7 +19,7 @@ const (
 // an intermediary structure before creating a bytematcher.Frame
 type token struct {
 	min, max int
-	pat      bytematcher.Pattern
+	pat      patterns.Pattern
 }
 
 // helper funcs

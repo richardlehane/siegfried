@@ -6,7 +6,7 @@ import (
 	"encoding/gob"
 	"strconv"
 
-	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
 )
 
 func init() {
@@ -37,7 +37,7 @@ func (ns NotSequence) TestR(b []byte) (bool, int) {
 	return true, len(ns)
 }
 
-func (ns NotSequence) Equals(pat bytematcher.Pattern) bool {
+func (ns NotSequence) Equals(pat patterns.Pattern) bool {
 	ns2, ok := pat.(NotSequence)
 	if ok {
 		return bytes.Equal(ns, ns2)
@@ -56,18 +56,18 @@ func (ns NotSequence) NumSequences() int {
 	return 0
 }
 
-func (ns NotSequence) Sequences() []bytematcher.Sequence {
+func (ns NotSequence) Sequences() []patterns.Sequence {
 	num := ns.NumSequences()
-	seqs := make([]bytematcher.Sequence, num)
+	seqs := make([]patterns.Sequence, num)
 	if num < 1 {
 		return seqs
 	}
 	b := int(ns[0])
 	for i := 0; i < b; i++ {
-		seqs[i] = bytematcher.Sequence{byte(i)}
+		seqs[i] = patterns.Sequence{byte(i)}
 	}
 	for i := b + 1; i < 256; i++ {
-		seqs[i-1] = bytematcher.Sequence{byte(i)}
+		seqs[i-1] = patterns.Sequence{byte(i)}
 	}
 	return seqs
 }
@@ -120,7 +120,7 @@ func (r Range) TestR(b []byte) (bool, int) {
 	return false, 1
 }
 
-func (r Range) Equals(pat bytematcher.Pattern) bool {
+func (r Range) Equals(pat patterns.Pattern) bool {
 	rng, ok := pat.(Range)
 	if ok {
 		if bytes.Equal(rng.From, r.From) {
@@ -150,31 +150,31 @@ func (r Range) NumSequences() int {
 	return int(r.To[0]-r.From[0]) + 1
 }
 
-func (r Range) Sequences() []bytematcher.Sequence {
+func (r Range) Sequences() []patterns.Sequence {
 	num := r.NumSequences()
-	seqs := make([]bytematcher.Sequence, num)
+	seqs := make([]patterns.Sequence, num)
 	if num < 1 {
 		return seqs
 	}
 	if len(r.From) == 2 {
 		if r.From[0] == r.To[0] {
 			for i := 0; i < num; i++ {
-				seqs[i] = bytematcher.Sequence{r.From[0], r.From[1] + byte(i)}
+				seqs[i] = patterns.Sequence{r.From[0], r.From[1] + byte(i)}
 			}
 			return seqs
 		}
 		max := 256 - int(r.From[1])
 		for i := 0; i < max; i++ {
-			seqs[i] = bytematcher.Sequence{r.From[0], r.From[1] + byte(i)}
+			seqs[i] = patterns.Sequence{r.From[0], r.From[1] + byte(i)}
 		}
 		for i := 0; max < num; max++ {
-			seqs[max] = bytematcher.Sequence{r.To[0], byte(0 + i)}
+			seqs[max] = patterns.Sequence{r.To[0], byte(0 + i)}
 			i++
 		}
 		return seqs
 	}
 	for i := 0; i < num; i++ {
-		seqs[i] = bytematcher.Sequence{r.From[0] + byte(i)}
+		seqs[i] = patterns.Sequence{r.From[0] + byte(i)}
 	}
 	return seqs
 }
@@ -226,7 +226,7 @@ func (nr NotRange) TestR(b []byte) (bool, int) {
 	return true, len(nr.From)
 }
 
-func (nr NotRange) Equals(pat bytematcher.Pattern) bool {
+func (nr NotRange) Equals(pat patterns.Pattern) bool {
 	not, ok := pat.(NotRange)
 	if ok {
 		if bytes.Equal(nr.From, not.From) {
@@ -250,18 +250,18 @@ func (nr NotRange) NumSequences() int {
 	return int(nr.From[0] + 255 - nr.To[0])
 }
 
-func (nr NotRange) Sequences() []bytematcher.Sequence {
+func (nr NotRange) Sequences() []patterns.Sequence {
 	num := nr.NumSequences()
-	seqs := make([]bytematcher.Sequence, num)
+	seqs := make([]patterns.Sequence, num)
 	if num < 1 {
 		return seqs
 	}
 	j := 1
 	for i := 0; i < num; i++ {
 		if i < int(nr.From[0]) {
-			seqs[i] = bytematcher.Sequence{byte(i)}
+			seqs[i] = patterns.Sequence{byte(i)}
 		} else {
-			seqs[i] = bytematcher.Sequence{nr.To[0] + byte(j)}
+			seqs[i] = patterns.Sequence{nr.To[0] + byte(j)}
 			j++
 		}
 	}

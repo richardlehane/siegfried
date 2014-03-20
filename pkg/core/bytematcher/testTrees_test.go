@@ -1,6 +1,10 @@
 package bytematcher
 
-import "testing"
+import (
+	"testing"
+
+	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+)
 
 func TestMaxLength(t *testing.T) {
 	tStub := newTestTree()

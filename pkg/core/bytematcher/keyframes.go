@@ -2,6 +2,8 @@ package bytematcher
 
 import (
 	"strconv"
+
+	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 )
 
 // Each segment in a signature is represented by a single keyframe. A slice of keyframes represents a full signature. The Keyframes type is a slice of these slices.

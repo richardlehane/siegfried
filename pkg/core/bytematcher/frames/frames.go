@@ -1,8 +1,10 @@
-package bytematcher
+package frames
 
 import (
 	"encoding/gob"
 	"strconv"
+
+	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
 )
 
 func init() {

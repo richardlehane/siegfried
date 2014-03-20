@@ -1,8 +1,13 @@
 package bytematcher
 
-import "github.com/richardlehane/siegfried/pkg/core/siegreader"
+import (
+	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 
-// Stubs used by multiple test files within the bytematcher package and subpackages.
+	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
+)
+
+// Stubs used by multiple test files within the bytematcher package
 
 // Pattern
 var (

@@ -1,5 +1,7 @@
 package bytematcher
 
+import . "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+
 // Sequence Sets and Frame Sets
 
 // As far as possible, signatures are flattened into simple byte sequences grouped into three sets: BOF, EOF and variable offset sets.

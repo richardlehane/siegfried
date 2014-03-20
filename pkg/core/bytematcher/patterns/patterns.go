@@ -1,4 +1,4 @@
-package bytematcher
+package patterns
 
 import (
 	"bytes"
