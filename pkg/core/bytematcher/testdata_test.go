@@ -74,8 +74,10 @@ var (
 				R:  true,
 			},
 		},
-		Left:  []*testNode{testNodeStub},
-		Right: []*testNode{testNodeStub3},
+		MaxLeftDistance:  10,
+		MaxRightDistance: 30,
+		Left:             []*testNode{testNodeStub},
+		Right:            []*testNode{testNodeStub3},
 	}
 )
 

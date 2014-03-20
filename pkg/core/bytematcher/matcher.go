@@ -59,7 +59,7 @@ func (m *matcher) match(tti, o, l int, rev bool) {
 		lslc = m.b.buf.MustSlice(lpos, llen, false)
 		rslc = m.b.buf.MustSlice(o+l, t.MaxRightDistance, false)
 	}
-	left := matches(t.Left, lslc, true)
+	left := matchTestNodes(t.Left, lslc, true)
 	for _, lp := range left {
 		if partials[lp.followUp].l {
 			partials[lp.followUp].ldistances = append(partials[lp.followUp].ldistances, lp.distances...)
@@ -68,7 +68,7 @@ func (m *matcher) match(tti, o, l int, rev bool) {
 			partials[lp.followUp].ldistances = lp.distances
 		}
 	}
-	right := matches(t.Right, rslc, false)
+	right := matchTestNodes(t.Right, rslc, false)
 	for _, rp := range right {
 		if partials[rp.followUp].r {
 			partials[rp.followUp].rdistances = append(partials[rp.followUp].rdistances, rp.distances...)

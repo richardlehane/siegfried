@@ -12,7 +12,7 @@ func TestMaxLength(t *testing.T) {
 }
 
 func TestMatchLeft(t *testing.T) {
-	left := matches(testTreeStub.Left, mStub[:10], true)
+	left := matchTestNodes(testTreeStub.Left, mStub[:10], true)
 	if len(left) != 1 {
 		t.Errorf("expecting one match, got %v", len(left))
 	}
@@ -22,7 +22,7 @@ func TestMatchLeft(t *testing.T) {
 }
 
 func TestMatchRight(t *testing.T) {
-	right := matches(testTreeStub.Right, mStub[10+5:], false)
+	right := matchTestNodes(testTreeStub.Right, mStub[10+5:], false)
 	if len(right) != 1 {
 		t.Errorf("expecting one match, got %v", len(right))
 	}
