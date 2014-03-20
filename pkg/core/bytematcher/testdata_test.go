@@ -99,14 +99,13 @@ var bmStub *Bytematcher = &Bytematcher{
 	BofSeqs: &seqSet{},
 	EofSeqs: &seqSet{},
 	VarSeqs: &seqSet{},
-
-	buf: siegreader.New(),
 }
 
 // Matcher
 var mStub = []byte{'t', 'e', 's', 't', 'y', 'A', 'T', 'E', 'S', 'T', 'M', 'A', 'T', 'C', 'H', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 't', 'e', 's', 't', 'y', 'Y', 'N', 'E', 'S', 'S'}
 var matcherStub *matcher = &matcher{
 	b:                bmStub,
+	buf:              siegreader.New(),
 	r:                make(chan int),
 	partialKeyframes: make(map[[2]int][][2]int),
 }

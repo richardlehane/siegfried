@@ -25,8 +25,6 @@ type Bytematcher struct {
 	bAho *ac.Ac
 	eAho *ac.Ac
 	vAho *ac.Ac
-
-	buf *siegreader.Buffer
 }
 
 // Create a new Bytematcher from a slice of signatures.
@@ -79,11 +77,10 @@ func (b *Bytematcher) Start() {
 	b.vAho = ac.New(b.VarSeqs.Set)
 }
 
-func (b *Bytematcher) Identify(sb *siegreader.Buffer) chan int {
-	ret := make(chan int)
-	b.buf = sb
-	go b.identify(ret)
-	return ret
+func (b *Bytematcher) Identify(sb *siegreader.Buffer) (chan int, chan []int) {
+	ret, limit := make(chan int), make(chan []int)
+	go b.identify(sb, ret, limit)
+	return ret, limit
 }
 
 func (b *Bytematcher) Stats() string {
@@ -115,20 +112,6 @@ func (b *Bytematcher) Stats() string {
 	return str
 }
 
-func (b *Bytematcher) KeyFrames() []string {
-	strs := make([]string, len(b.Sigs))
-	for i, sig := range b.Sigs {
-		str := "\n["
-		for _, kf := range sig[:len(sig)-1] {
-			str += kf.String() + ", "
-		}
-		str += sig[len(sig)-1].String()
-		str += "]"
-		strs[i] = str
-	}
-	return strs
-}
-
 func newBytematcher() *Bytematcher {
 	return &Bytematcher{
 		nil,
@@ -141,7 +124,6 @@ func newBytematcher() *Bytematcher {
 		&ac.Ac{},
 		&ac.Ac{},
 		&ac.Ac{},
-		nil,
 	}
 }
 
@@ -232,19 +214,19 @@ func (b *Bytematcher) process(sig Signature, idx, distance, rng, choices, varlen
 
 // Identify function
 
-func (b *Bytematcher) identify(r chan int) error {
+func (b *Bytematcher) identify(buf *siegreader.Buffer, r chan int, l chan []int) error {
 	var wg sync.WaitGroup
-	m := NewMatcher(b, r, &wg)
-	bchan := b.bAho.IndexFixed(b.buf.NewReader())
-	vchan := b.vAho.Index(b.buf.NewReader())
-	rr, err := b.buf.NewReverseReader()
+	m := NewMatcher(b, buf, r, &wg)
+	bchan := b.bAho.IndexFixed(buf.NewReader())
+	vchan := b.vAho.Index(buf.NewReader())
+	rr, err := buf.NewReverseReader()
 	if err != nil {
 		return err
 	}
 	echan := b.eAho.IndexFixed(rr)
 
 	for i, f := range b.BofFrames.Set {
-		if match, matches := f.Match(b.buf.MustSlice(0, TotalLength(f), false)); match {
+		if match, matches := f.Match(buf.MustSlice(0, TotalLength(f), false)); match {
 			min, _ := f.Length()
 			for _, off := range matches {
 				wg.Add(1)
@@ -253,7 +235,7 @@ func (b *Bytematcher) identify(r chan int) error {
 		}
 	}
 	for i, f := range b.EofFrames.Set {
-		if match, matches := f.MatchR(b.buf.MustSlice(0, TotalLength(f), true)); match {
+		if match, matches := f.MatchR(buf.MustSlice(0, TotalLength(f), true)); match {
 			for _, off := range matches {
 				wg.Add(1)
 				go m.match(b.EofFrames.TestTreeIndex[i], off, 0, true)

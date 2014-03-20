@@ -1,13 +1,13 @@
 package pronom
 
-import "github.com/richardlehane/siegfried/pkg/core/bytematcher"
+import "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 
 // This file a work in progress...
 
 type Format struct {
 }
 
-func (f *Format) Signatures() []bytematcher.Signature {
+func (f *Format) Signatures() []frames.Signature {
 	return nil
 }
 

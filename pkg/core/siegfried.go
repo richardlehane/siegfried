@@ -1,6 +1,9 @@
 package core
 
-import "github.com/richardlehane/siegfried/pkg/core/siegreader"
+import (
+	"github.com/richardlehane/siegfried/pkg/core/siegreader"
+	"io"
+)
 
 type Siegfried struct {
 	identifiers []Identifier
@@ -21,7 +24,7 @@ func (s *Siegfried) AddIdentifier(i Identifier) {
 func (s *Siegfried) Identify(r io.Reader) (chan Identification, error) {
 	err := s.buffer.SetSource(r)
 	if err != nil {
-		return err, nil
+		return nil, err
 	}
 	ret := make(chan Identification)
 	for _, v := range s.identifiers {

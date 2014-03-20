@@ -1,10 +1,15 @@
 package bytematcher
 
-import "sync"
+import (
+	"sync"
+
+	"github.com/richardlehane/siegfried/pkg/core/siegreader"
+)
 
 // MUTABLE
 type matcher struct {
 	b                *Bytematcher
+	buf              *siegreader.Buffer
 	r                chan int
 	partialKeyframes map[[2]int][][2]int // map of a keyframe to a slice of offsets and lengths where it has matched
 	wg               *sync.WaitGroup
@@ -17,8 +22,8 @@ type partial struct {
 	rdistances []int
 }
 
-func NewMatcher(b *Bytematcher, r chan int, wg *sync.WaitGroup) *matcher {
-	return &matcher{b, r, make(map[[2]int][][2]int), wg}
+func NewMatcher(b *Bytematcher, buf *siegreader.Buffer, r chan int, wg *sync.WaitGroup) *matcher {
+	return &matcher{b, buf, r, make(map[[2]int][][2]int), wg}
 }
 
 func (m *matcher) match(tti, o, l int, rev bool) {
@@ -26,7 +31,7 @@ func (m *matcher) match(tti, o, l int, rev bool) {
 	// the offsets we record are always BOF offsets - these can be interpreted as EOF offsets when necessary
 	var off int
 	if rev {
-		off = m.b.buf.Size() - o - l
+		off = m.buf.Size() - o - l
 	} else {
 		off = o
 	}
@@ -48,16 +53,16 @@ func (m *matcher) match(tti, o, l int, rev bool) {
 			rlen = rlen + rpos
 			rpos = 0
 		}
-		rslc = m.b.buf.MustSlice(rpos, rlen, true)
-		lslc = m.b.buf.MustSlice(o+l, t.MaxLeftDistance, true)
+		rslc = m.buf.MustSlice(rpos, rlen, true)
+		lslc = m.buf.MustSlice(o+l, t.MaxLeftDistance, true)
 	} else {
 		lpos, llen := o-t.MaxLeftDistance, t.MaxLeftDistance
 		if lpos < 0 {
 			llen = llen + lpos
 			lpos = 0
 		}
-		lslc = m.b.buf.MustSlice(lpos, llen, false)
-		rslc = m.b.buf.MustSlice(o+l, t.MaxRightDistance, false)
+		lslc = m.buf.MustSlice(lpos, llen, false)
+		rslc = m.buf.MustSlice(o+l, t.MaxRightDistance, false)
 	}
 	left := matchTestNodes(t.Left, lslc, true)
 	for _, lp := range left {
@@ -102,7 +107,7 @@ func (m *matcher) match(tti, o, l int, rev bool) {
 
 func (m *matcher) applyKeyFrame(kfID keyframeID, o, l int) bool {
 	kf := m.b.Sigs[kfID[0]]
-	if kf[kfID[1]].check(o, l, m.b.buf.Size()) {
+	if kf[kfID[1]].check(o, l, m.buf.Size()) {
 		if len(kf) == 1 {
 			return true
 		}

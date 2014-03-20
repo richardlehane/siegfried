@@ -1,8 +1,10 @@
 package pronom
 
 import (
+	"bytes"
 	"encoding/gob"
-	"fmt"
+	"io/ioutil"
+	"os"
 
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
@@ -15,23 +17,20 @@ type PronomIdentifier struct {
 }
 
 type PronomIdentification struct {
-	puid      string
-	certainty float64
+	puid       string
+	confidence float64
 }
 
 func (pid PronomIdentification) String() string {
 	return pid.puid
 }
 
-func (pid PronomIdentification) Certainty() float64 {
-	return pid.certainty
+func (pid PronomIdentification) Confidence() float64 {
+	return pid.confidence
 }
 
 func (pi *PronomIdentifier) Identify(b *siegreader.Buffer, c chan core.Identification) {
-	ids, err := pi.Bm.Identify(r)
-	if err != nil {
-		return nil, fmt.Errorf("Error with file %v; error: %v", p, err)
-	}
+	ids, _ := pi.Bm.Identify(b)
 	for i := range ids {
 		c <- PronomIdentification{pi.Puids[i], 0.9}
 	}

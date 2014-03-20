@@ -10,7 +10,7 @@ func TestMatch(t *testing.T) {
 	var wg sync.WaitGroup
 	matcherStub.wg = &wg
 	wg.Add(1)
-	err := matcherStub.b.buf.SetSource(bytes.NewBuffer(mStub))
+	err := matcherStub.buf.SetSource(bytes.NewBuffer(mStub))
 	if err != nil {
 		t.Errorf("matcher fail: error setting siegreader source")
 	}
