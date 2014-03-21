@@ -1,6 +1,8 @@
 package bytematcher
 
 import (
+	"sync"
+
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 
 	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
@@ -108,6 +110,8 @@ var matcherStub *matcher = &matcher{
 	buf:              siegreader.New(),
 	r:                make(chan int),
 	partialKeyframes: make(map[[2]int][][2]int),
+	limit:            nil,
+	limitm:           &sync.RWMutex{},
 }
 
 // Keyframes

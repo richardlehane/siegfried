@@ -9,8 +9,9 @@ import (
 )
 
 type PronomIdentifier struct {
-	Bm    *bytematcher.Bytematcher
-	Puids []string
+	Bm         *bytematcher.Bytematcher
+	Puids      []string
+	Priorities map[string][]int
 }
 
 type PronomIdentification struct {
@@ -27,9 +28,17 @@ func (pid PronomIdentification) Confidence() float64 {
 }
 
 func (pi *PronomIdentifier) Identify(b *siegreader.Buffer, c chan core.Identification, wg *sync.WaitGroup) {
-	ids, _ := pi.Bm.Identify(b)
+	ids, limit := pi.Bm.Identify(b)
 	for i := range ids {
-		c <- PronomIdentification{pi.Puids[i], 0.9}
+		puid := pi.Puids[i]
+		c <- PronomIdentification{puid, 0.9}
+		l, ok := pi.Priorities[puid]
+		if !ok {
+			close(limit)
+			break
+		} else {
+			limit <- l
+		}
 	}
 	wg.Done()
 }

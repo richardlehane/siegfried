@@ -1,6 +1,7 @@
 package bytematcher
 
 import (
+	"sort"
 	"sync"
 
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
@@ -13,6 +14,8 @@ type matcher struct {
 	r                chan int
 	partialKeyframes map[[2]int][][2]int // map of a keyframe to a slice of offsets and lengths where it has matched
 	wg               *sync.WaitGroup
+	limit            []int
+	limitm           *sync.RWMutex
 }
 
 type partial struct {
@@ -23,7 +26,26 @@ type partial struct {
 }
 
 func NewMatcher(b *Bytematcher, buf *siegreader.Buffer, r chan int, wg *sync.WaitGroup) *matcher {
-	return &matcher{b, buf, r, make(map[[2]int][][2]int), wg}
+	return &matcher{b, buf, r, make(map[[2]int][][2]int), wg, nil, &sync.RWMutex{}}
+}
+
+func (m *matcher) setLimit(l []int) {
+	m.limitm.Lock()
+	m.limit = l
+	m.limitm.Unlock()
+}
+
+func (m *matcher) checkLimit(i int) bool {
+	m.limitm.RLock()
+	defer m.limitm.RUnlock()
+	if m.limit == nil {
+		return true
+	}
+	idx := sort.SearchInts(m.limit, i)
+	if idx == len(m.limit) || m.limit[idx] != i {
+		return false
+	}
+	return true
 }
 
 func (m *matcher) match(tti, o, l int, rev bool) {
@@ -45,41 +67,63 @@ func (m *matcher) match(tti, o, l int, rev bool) {
 	if len(t.Incomplete) < 0 {
 		return
 	}
+	var checkl, checkr bool
+	for _, v := range t.Incomplete {
+		if checkl && checkr {
+			break
+		}
+		if m.checkLimit(v.Kf[0]) {
+			if v.L {
+				checkl = true
+			}
+			if v.R {
+				checkr = true
+			}
+		}
+	}
+	if !checkl && !checkr {
+		return
+	}
 	partials := make([]partial, len(t.Incomplete))
 	var lslc, rslc []byte
+	var lpos, llen, rpos, rlen int
 	if rev {
-		rpos, rlen := o-t.MaxRightDistance, t.MaxRightDistance
+		lpos, llen = o+l, t.MaxLeftDistance
+		rpos, rlen = o-t.MaxRightDistance, t.MaxRightDistance
 		if rpos < 0 {
 			rlen = rlen + rpos
 			rpos = 0
 		}
-		rslc = m.buf.MustSlice(rpos, rlen, true)
-		lslc = m.buf.MustSlice(o+l, t.MaxLeftDistance, true)
 	} else {
-		lpos, llen := o-t.MaxLeftDistance, t.MaxLeftDistance
+		lpos, llen = o-t.MaxLeftDistance, t.MaxLeftDistance
+		rpos, rlen = o+l, t.MaxRightDistance
 		if lpos < 0 {
 			llen = llen + lpos
 			lpos = 0
 		}
-		lslc = m.buf.MustSlice(lpos, llen, false)
-		rslc = m.buf.MustSlice(o+l, t.MaxRightDistance, false)
 	}
-	left := matchTestNodes(t.Left, lslc, true)
-	for _, lp := range left {
-		if partials[lp.followUp].l {
-			partials[lp.followUp].ldistances = append(partials[lp.followUp].ldistances, lp.distances...)
-		} else {
-			partials[lp.followUp].l = true
-			partials[lp.followUp].ldistances = lp.distances
+	if checkl {
+		lslc = m.buf.MustSlice(lpos, llen, rev)
+		left := matchTestNodes(t.Left, lslc, true)
+		for _, lp := range left {
+			if partials[lp.followUp].l {
+				partials[lp.followUp].ldistances = append(partials[lp.followUp].ldistances, lp.distances...)
+			} else {
+				partials[lp.followUp].l = true
+				partials[lp.followUp].ldistances = lp.distances
+			}
 		}
 	}
-	right := matchTestNodes(t.Right, rslc, false)
-	for _, rp := range right {
-		if partials[rp.followUp].r {
-			partials[rp.followUp].rdistances = append(partials[rp.followUp].rdistances, rp.distances...)
-		} else {
-			partials[rp.followUp].r = true
-			partials[rp.followUp].rdistances = rp.distances
+	if checkr {
+		rslc = m.buf.MustSlice(rpos, rlen, rev)
+		right := matchTestNodes(t.Right, rslc, false)
+		for _, rp := range right {
+			if partials[rp.followUp].r {
+				partials[rp.followUp].rdistances = append(partials[rp.followUp].rdistances, rp.distances...)
+			} else {
+				partials[rp.followUp].r = true
+				partials[rp.followUp].rdistances = rp.distances
+			}
 		}
 	}
 	for i, p := range partials {

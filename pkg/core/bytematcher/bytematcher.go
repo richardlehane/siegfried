@@ -37,7 +37,7 @@ func Signatures(sigs []Signature, opts ...int) (*Bytematcher, error) {
 	b := newBytematcher()
 	b.Sigs = make([][]keyFrame, len(sigs))
 	se := make(sigErrors, 0)
-	var distance, rng, choices, varlen = 8192, 2048, 64, 1
+	var distance, rng, choices, varlen = 8192, 2049, 64, 1
 	// override defaults if distance, range or choices values are given
 	switch len(opts) {
 	case 1:
@@ -79,7 +79,7 @@ func (b *Bytematcher) Start() {
 }
 
 func (b *Bytematcher) Identify(sb *siegreader.Buffer) (chan int, chan []int) {
-	ret, limit := make(chan int), make(chan []int)
+	ret, limit := make(chan int), make(chan []int, 50)
 	go b.identify(sb, ret, limit)
 	return ret, limit
 }
@@ -213,13 +213,6 @@ func (b *Bytematcher) process(sig Signature, idx, distance, rng, choices, varlen
 func (b *Bytematcher) identify(buf *siegreader.Buffer, r chan int, l chan []int) {
 	var wg sync.WaitGroup
 	m := NewMatcher(b, buf, r, &wg)
-	bchan := b.bAho.IndexFixed(buf.NewReader())
-	vchan := b.vAho.Index(buf.NewReader())
-	rr, err := buf.NewReverseReader()
-	if err != nil && err != io.EOF {
-		panic(err)
-	}
-	echan := b.eAho.IndexFixed(rr)
 
 	for i, f := range b.BofFrames.Set {
 		if match, matches := f.Match(buf.MustSlice(0, TotalLength(f), false)); match {
@@ -238,14 +231,30 @@ func (b *Bytematcher) identify(buf *siegreader.Buffer, r chan int, l chan []int)
 			}
 		}
 	}
+
+	bchan := b.bAho.IndexFixed(buf.NewReader())
+	for bi := range bchan {
+		wg.Add(1)
+		go m.match(b.BofSeqs.TestTreeIndex[bi], 0, len(b.BofSeqs.Set[bi]), false)
+	}
+
+	quit := make(chan struct{})
+	vchan := b.vAho.IndexQ(buf.NewReader(), quit)
+	rr, err := buf.NewReverseReader()
+	if err != nil && err != io.EOF {
+		panic(err)
+	}
+	echan := b.eAho.IndexFixedQ(rr, quit)
 	for {
 		select {
-		case bi, ok := <-bchan:
+		case limit, ok := <-l:
 			if !ok {
-				bchan = nil
+				close(quit)
+				vchan = nil
+				echan = nil
+				break
 			} else {
-				wg.Add(1)
-				go m.match(b.BofSeqs.TestTreeIndex[bi], 0, len(b.BofSeqs.Set[bi]), false)
+				m.setLimit(limit)
 			}
 		case vi, ok := <-vchan:
 			if !ok {
@@ -262,7 +271,7 @@ func (b *Bytematcher) identify(buf *siegreader.Buffer, r chan int, l chan []int)
 				go m.match(b.EofSeqs.TestTreeIndex[ei], 0, len(b.EofSeqs.Set[ei]), true)
 			}
 		}
-		if bchan == nil && vchan == nil && echan == nil {
+		if vchan == nil && echan == nil {
 			break
 		}
 	}

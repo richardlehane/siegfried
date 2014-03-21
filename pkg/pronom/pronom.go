@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 	"sync"
 	"time"
@@ -78,6 +79,7 @@ type pronom struct {
 	droid     *Droid
 	container *Container
 	puids     map[string]int
+	ids       map[int]string
 }
 
 func (p pronom) String() string {
@@ -87,6 +89,7 @@ func (p pronom) String() string {
 func (p *pronom) identifier() (*PronomIdentifier, error) {
 	pi := new(PronomIdentifier)
 	pi.Puids = p.getPuids()
+	pi.Priorities = p.priorities()
 	sigs, err := p.parse()
 	if err != nil {
 		return nil, err
@@ -114,6 +117,29 @@ func (p pronom) getPuids() []string {
 		}
 	}
 	return puids
+}
+
+func (p pronom) priorities() map[string][]int {
+	var iter int
+	priorities := make(map[string][]int)
+	for _, f := range p.droid.FileFormats {
+		for _ = range f.Signatures {
+			for _, v := range f.Priorities {
+				puid := p.ids[v]
+				_, ok := priorities[puid]
+				if ok {
+					priorities[puid] = append(priorities[puid], iter)
+				} else {
+					priorities[puid] = []int{iter}
+				}
+			}
+			iter++
+		}
+	}
+	for k := range priorities {
+		sort.Ints(priorities[k])
+	}
+	return priorities
 }
 
 // newPronom creates a pronom object. It takes as arguments the paths to a Droid signature file, a container file, and a base directory or base url for Pronom reports.
@@ -160,8 +186,10 @@ func (p *pronom) setDroid(path string) error {
 		return err
 	}
 	p.puids = make(map[string]int)
+	p.ids = make(map[int]string)
 	for i, v := range p.droid.FileFormats {
 		p.puids[v.Puid] = i
+		p.ids[v.ID] = v.Puid
 	}
 	return nil
 }
