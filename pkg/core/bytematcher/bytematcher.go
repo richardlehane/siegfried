@@ -2,6 +2,7 @@ package bytematcher
 
 import (
 	"fmt"
+	"io"
 	"sync"
 
 	"github.com/richardlehane/ac"
@@ -52,7 +53,7 @@ func Signatures(sigs []Signature, opts ...int) (*Bytematcher, error) {
 	for i, sig := range sigs {
 		err := b.process(sig, i, distance, rng, choices, varlen)
 		if err != nil {
-			se = append(se, err.(sigError))
+			se = append(se, err)
 		}
 	}
 	if len(se) > 0 {
@@ -127,18 +128,13 @@ func newBytematcher() *Bytematcher {
 	}
 }
 
-type sigError int
-
-func (se sigError) Error() string {
-	return fmt.Sprintf("Problem with signature %v\n", se)
-}
-
-type sigErrors []sigError
+type sigErrors []error
 
 func (se sigErrors) Error() string {
 	str := "bytematcher.Signatures errors:"
-	for _, i := range se {
-		str += fmt.Sprintf("Problem with signature %v\n", i)
+	for _, v := range se {
+		str += v.Error()
+		str += "\n"
 	}
 	return str
 }
@@ -214,14 +210,14 @@ func (b *Bytematcher) process(sig Signature, idx, distance, rng, choices, varlen
 
 // Identify function
 
-func (b *Bytematcher) identify(buf *siegreader.Buffer, r chan int, l chan []int) error {
+func (b *Bytematcher) identify(buf *siegreader.Buffer, r chan int, l chan []int) {
 	var wg sync.WaitGroup
 	m := NewMatcher(b, buf, r, &wg)
 	bchan := b.bAho.IndexFixed(buf.NewReader())
 	vchan := b.vAho.Index(buf.NewReader())
 	rr, err := buf.NewReverseReader()
-	if err != nil {
-		return err
+	if err != nil && err != io.EOF {
+		panic(err)
 	}
 	echan := b.eAho.IndexFixed(rr)
 
@@ -272,5 +268,4 @@ func (b *Bytematcher) identify(buf *siegreader.Buffer, r chan int, l chan []int)
 	}
 	wg.Wait()
 	close(r)
-	return nil
 }

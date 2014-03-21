@@ -59,6 +59,9 @@ func (r *Reader) ReadByte() (byte, error) {
 		if err != nil && err != io.EOF {
 			return 0, err
 		}
+		if len(r.scratch) == 0 {
+			return 0, io.EOF
+		}
 		r.j = 0
 	}
 	b := r.scratch[r.j]
@@ -70,7 +73,8 @@ func (r *Reader) ReadByte() (byte, error) {
 func (r *Reader) ReadAt(b []byte, off int64) (int, error) {
 	var slc []byte
 	var err error
-	if r.i > int(off) && r.i-r.j <= int(off) && len(b)+int(off) <= r.i-r.j+readSz {
+	// if b is already covered by the scratch slice
+	if int(off) >= r.i-r.j && int(off)+len(b) <= r.i-r.j+len(r.scratch) {
 		s := int(off) - (r.i - r.j)
 		slc = r.scratch[s : s+len(b)]
 	} else {
@@ -133,7 +137,6 @@ func (r *ReverseReader) setBuf(o int) error {
 func (r *ReverseReader) Read(b []byte) (int, error) {
 	if r.i == 0 {
 		r.setBuf(0)
-
 	}
 	var slc []byte
 	var err error

@@ -32,7 +32,7 @@ func readAt(t *testing.T, r *Reader) {
 		t.Errorf("Read error: expecting a read length of 5, got %v", i)
 	}
 	if string(buf) != "cadab" {
-		t.Errorf("Read error: %v should equal %v", buf, teststring)
+		t.Errorf("Read error: %v should equal %v", buf, "cadab")
 	}
 }
 

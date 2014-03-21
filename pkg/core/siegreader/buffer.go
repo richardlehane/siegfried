@@ -24,6 +24,7 @@ type Buffer struct {
 	buf, eof  []byte
 	eofc      chan struct{} // signals if EOF bytes are available. When EOF bytes are available, this chan is closed
 	completec chan struct{} // signals when the file has been completely read, allows EOF scanning beyond the small buffer
+	complete  bool          // marks that the file has been completely read
 	sz        int64
 	w         protected // index of latest write
 }
@@ -36,6 +37,7 @@ func New() *Buffer {
 
 func (b *Buffer) reset() {
 	b.eofc, b.completec = make(chan struct{}), make(chan struct{})
+	b.complete = false
 	b.sz = 0
 	b.w.Lock()
 	b.w.val = 0
@@ -107,6 +109,7 @@ func (b *Buffer) fill() (int, error) {
 	if err != nil {
 		if err == io.EOF {
 			close(b.completec)
+			b.complete = true
 			b.w.val += i
 			// if we haven't got an eof buf already
 			if len(b.eof) < readSz {
@@ -131,7 +134,7 @@ func (b *Buffer) fillEof() error {
 		return nil // another reverse reader has already filled the buffer
 	}
 	rs := b.src.(io.ReadSeeker)
-	_, err := rs.Seek(int64(readSz), 2)
+	_, err := rs.Seek(0-int64(readSz), 2)
 	if err != nil {
 		return err
 	}
@@ -154,19 +157,21 @@ func (b *Buffer) Slice(s, l int) ([]byte, error) {
 	defer b.w.Unlock()
 	var err error
 	var bound int
-	if s+l > b.w.val {
+	if s+l > b.w.val && !b.complete {
 		for bound, err = b.fill(); s+l > bound && err == nil; bound, err = b.fill() {
 		}
 	}
-	if err == nil {
+	if err == nil && !b.complete {
 		return b.buf[s : s+l], nil
 	}
-	if err == io.EOF {
+	if err == io.EOF || b.complete {
 		if s+l > b.w.val {
 			if s > b.w.val {
 				return []byte{}, err
 			}
 			return b.buf[s:b.w.val], err
+		} else {
+			return b.buf[s : s+l], nil
 		}
 	}
 	return nil, err
@@ -200,7 +205,7 @@ func (b *Buffer) MustSlice(s, l int, rev bool) []byte {
 		slc, err = b.Slice(s, l)
 	}
 	if err != nil && err != io.EOF {
-		log.Printf("SIEGREADER WARNING: FAILED TO SLICE FROM %v TO %v; REVERSE IS %v", s, l, rev)
+		log.Printf("SIEGREADER WARNING: FAILED TO SLICE FROM %v FOR LENGTH %v; SLICE LENGTH IS %v; REVERSE IS %v", s, l, len(slc), rev)
 	}
 	return slc
 }

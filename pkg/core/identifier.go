@@ -1,9 +1,13 @@
 package core
 
-import "github.com/richardlehane/siegfried/pkg/core/siegreader"
+import (
+	"sync"
+
+	"github.com/richardlehane/siegfried/pkg/core/siegreader"
+)
 
 type Identifier interface {
-	Identify(*siegreader.Buffer, chan Identification)
+	Identify(*siegreader.Buffer, chan Identification, *sync.WaitGroup)
 }
 
 type Identification interface {

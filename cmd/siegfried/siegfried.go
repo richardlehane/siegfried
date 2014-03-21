@@ -9,7 +9,6 @@ import (
 	"path/filepath"
 
 	"github.com/richardlehane/siegfried/pkg/core"
-	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 

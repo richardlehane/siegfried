@@ -126,7 +126,7 @@ func TestParseHex(t *testing.T) {
 }
 
 func TestParse(t *testing.T) {
-	sigs, err := pStub.Parse()
+	sigs, err := pStub.parse()
 	if err != nil {
 		t.Error(err)
 	}

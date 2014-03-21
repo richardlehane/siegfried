@@ -110,8 +110,7 @@ func (t *testTree) add(kf keyframeID, l []Frame, r []Frame) {
 }
 
 func (t *testNode) length() int {
-	_, l := t.Frame.Length()
-	return l + t.Frame.Max()
+	return TotalLength(t.Frame)
 }
 
 func maxLength(ts []*testNode) int {

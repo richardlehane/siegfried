@@ -8,8 +8,6 @@ import (
 	"testing"
 
 	"github.com/richardlehane/siegfried/pkg/core"
-	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
-	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
 var testSigs = filepath.Join("..", "r2d2", "data", "pronom.gob")
@@ -79,7 +77,7 @@ func TestSuite(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	matches, err := multiIdentify(b, root)
+	matches, err := multiIdentify(s, root)
 	if err != nil {
 		t.Fatal(err)
 	}

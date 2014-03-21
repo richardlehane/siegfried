@@ -1,8 +1,10 @@
 package core
 
 import (
-	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 	"io"
+	"sync"
+
+	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
 type Siegfried struct {
@@ -27,8 +29,16 @@ func (s *Siegfried) Identify(r io.Reader) (chan Identification, error) {
 		return nil, err
 	}
 	ret := make(chan Identification)
-	for _, v := range s.identifiers {
-		go v.Identify(s.buffer, ret)
-	}
+	go s.identify(ret)
 	return ret, nil
+}
+
+func (s *Siegfried) identify(ret chan Identification) {
+	var wg sync.WaitGroup
+	for _, v := range s.identifiers {
+		wg.Add(1)
+		go v.Identify(s.buffer, ret, &wg)
+	}
+	wg.Wait()
+	close(ret)
 }
