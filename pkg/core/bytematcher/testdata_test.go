@@ -1,6 +1,15 @@
 package bytematcher
 
-// Stubs used by multiple test files within the bytematcher package and subpackages.
+import (
+	"sync"
+
+	"github.com/richardlehane/siegfried/pkg/core/siegreader"
+
+	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
+)
+
+// Stubs used by multiple test files within the bytematcher package
 
 // Pattern
 var (
@@ -72,8 +81,10 @@ var (
 				R:  true,
 			},
 		},
-		Left:  []*testNode{testNodeStub},
-		Right: []*testNode{testNodeStub3},
+		MaxLeftDistance:  10,
+		MaxRightDistance: 30,
+		Left:             []*testNode{testNodeStub},
+		Right:            []*testNode{testNodeStub3},
 	}
 )
 
@@ -96,9 +107,14 @@ var bmStub *Bytematcher = &Bytematcher{
 var mStub = []byte{'t', 'e', 's', 't', 'y', 'A', 'T', 'E', 'S', 'T', 'M', 'A', 'T', 'C', 'H', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 't', 'e', 's', 't', 'y', 'Y', 'N', 'E', 'S', 'S'}
 var matcherStub *matcher = &matcher{
 	b:                bmStub,
+	buf:              siegreader.New(),
 	r:                make(chan int),
-	n:                mStub,
 	partialKeyframes: make(map[[2]int][][2]int),
+	limit:            nil,
+	limitm:           &sync.RWMutex{},
+	limitc:           nil,
+	incoming:         make(chan strike),
+	quit:             make(chan struct{}),
 }
 
 // Keyframes

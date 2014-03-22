@@ -3,7 +3,7 @@ package pronom
 import (
 	"testing"
 
-	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
 )
 
 var bsStub1 = ByteSequence{
@@ -114,19 +114,19 @@ func TestParseHex(t *testing.T) {
 	if tok.min != 5 || tok.max != -1 {
 		t.Error("Parse items: Expecting 5-0, got", tok.min, tok.max)
 	}
-	if !tok.pat.Equals(bytematcher.Sequence(decodeHex("7E41"))) {
+	if !tok.pat.Equals(patterns.Sequence(decodeHex("7E41"))) {
 		t.Error("Parse items: Expecting 7E41, got", tok.pat)
 	}
 	ts, _, _, err = parseHex("x-fmt/317", bsStub6.Hex)
 	seqs := ts[2].pat.Sequences()
-	if !seqs[0].Equals(bytematcher.Sequence(decodeHex("0D0A"))) {
+	if !seqs[0].Equals(patterns.Sequence(decodeHex("0D0A"))) {
 		t.Error("Parse items: Expecting [13 10], got", []byte(seqs[0]))
 	}
 
 }
 
 func TestParse(t *testing.T) {
-	sigs, err := pStub.Parse()
+	sigs, err := pStub.parse()
 	if err != nil {
 		t.Error(err)
 	}

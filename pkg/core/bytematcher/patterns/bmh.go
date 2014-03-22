@@ -1,4 +1,4 @@
-package bytematcher
+package patterns
 
 // THIS FILE IS NOT YET IMPLEMENTED
 // IT IS AN OPTIMISATION THAT CAN BE DEFERRED

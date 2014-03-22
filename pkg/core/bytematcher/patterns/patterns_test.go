@@ -1,6 +1,13 @@
-package bytematcher
+package patterns
 
 import "testing"
+
+var (
+	seqStub     = Sequence{'t', 'e', 's', 't', 'y'}
+	seqStub2    = Sequence{'t', 'e', 's', 't', 'y'}
+	choiceStub  = Choice{Sequence{'t', 'e', 's', 't', 'y'}, Sequence{'t', 'e', 's', 't'}}
+	choiceStub2 = Choice{Sequence{'t', 'e', 's', 't'}, Sequence{'t', 'e', 's', 't', 'y'}}
+)
 
 func TestSequence(t *testing.T) {
 	if !seqStub.Equals(seqStub2) {

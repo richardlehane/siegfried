@@ -1,23 +1,25 @@
 package bytematcher
 
 import (
+	"bytes"
 	"testing"
-	"time"
 )
 
 func TestMatch(t *testing.T) {
-	timeout := make(chan bool, 1)
-	go func() {
-		time.Sleep(1 * time.Second)
-		timeout <- true
-	}()
-	go matcherStub.match(0, 10, 5, false)
-	select {
-	case i := <-matcherStub.r:
-		if i != 1 {
-			t.Errorf("matcher fail: expecting 1, got %d", i)
+	err := matcherStub.buf.SetSource(bytes.NewBuffer(mStub))
+	if err != nil {
+		t.Errorf("matcher fail: error setting siegreader source")
+	}
+
+	go matcherStub.match()
+	for {
+		select {
+		case matcherStub.incoming <- strike{0, 10, 5, false, false}:
+		case i := <-matcherStub.r:
+			if i != 1 {
+				t.Errorf("matcher fail: expecting 1, got %d", i)
+			}
+			return
 		}
-	case <-timeout:
-		t.Errorf("matcher fail: timeout")
 	}
 }

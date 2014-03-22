@@ -7,22 +7,16 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
-	"github.com/richardlehane/siegfried/pkg/pronom"
+	"github.com/richardlehane/siegfried/pkg/core"
 )
 
 var testSigs = filepath.Join("..", "r2d2", "data", "pronom.gob")
 
-var b *bytematcher.Bytematcher
+var s *core.Siegfried
 
 func init() {
 	var err error
-	droid, _, reports := pronom.ConfigPaths()
-	puids, err = pronom.PuidsFromDroid(droid, reports)
-	if err != nil {
-		panic(err)
-	}
-	b, err = load(testSigs)
+	s, err = load(testSigs)
 	if err != nil {
 		panic(err)
 	}
@@ -37,19 +31,19 @@ func TestLoad(t *testing.T) {
 	}
 }
 
-func check(i string, j []int) bool {
+func check(i string, j []string) bool {
 	for _, v := range j {
-		if i == puids[v] {
+		if i == v {
 			return true
 		}
 	}
 	return false
 }
 
-func matchString(i []int) string {
+func matchString(i []string) string {
 	str := "[ "
 	for _, v := range i {
-		str += puids[v]
+		str += v
 		str += " "
 	}
 	return str + "]"
@@ -83,7 +77,7 @@ func TestSuite(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	matches, err := multiIdentify(b, root)
+	matches, err := multiIdentify(s, root)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -114,7 +108,7 @@ func BenchmarkNew(bench *testing.B) {
 func benchidentify(ext string) {
 	file := filepath.Join(".", "testdata", "benchmark", "Benchmark")
 	file += "." + ext
-	identify(b, file)
+	identify(s, file)
 }
 
 func BenchmarkACCDB(bench *testing.B) {

@@ -1,14 +1,20 @@
 package pronom
 
 import (
+	"bytes"
+	"encoding/gob"
 	"encoding/xml"
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
 )
 
 var Config = struct {
@@ -35,13 +41,64 @@ func ConfigPaths() (string, string, string) {
 		filepath.Join(Config.Data, Config.Reports)
 }
 
+func NewIdentifier(droid, container, reports string) (*PronomIdentifier, error) {
+	pronom, err := newPronom(droid, container, reports)
+	if err != nil {
+		return nil, err
+	}
+	return pronom.identifier()
+}
+
+func Load(path string) (*PronomIdentifier, error) {
+	c, err := ioutil.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+	buf := bytes.NewBuffer(c)
+	dec := gob.NewDecoder(buf)
+	var p PronomIdentifier
+	err = dec.Decode(&p)
+	if err != nil {
+		return nil, err
+	}
+	p.Bm.Start()
+	return &p, nil
+}
+
+func (p *PronomIdentifier) Save(path string) error {
+	buf := new(bytes.Buffer)
+	enc := gob.NewEncoder(buf)
+	err := enc.Encode(p)
+	if err != nil {
+		return err
+	}
+	return ioutil.WriteFile(path, buf.Bytes(), os.ModeExclusive)
+}
+
 type pronom struct {
 	droid     *Droid
 	container *Container
 	puids     map[string]int
+	ids       map[int]string
 }
 
-func (p pronom) Signatures() []Signature {
+func (p pronom) String() string {
+	return p.droid.String()
+}
+
+func (p *pronom) identifier() (*PronomIdentifier, error) {
+	pi := new(PronomIdentifier)
+	pi.Puids = p.getPuids()
+	pi.Priorities = p.priorities()
+	sigs, err := p.parse()
+	if err != nil {
+		return nil, err
+	}
+	pi.Bm, err = bytematcher.Signatures(sigs)
+	return pi, err
+}
+
+func (p pronom) signatures() []Signature {
 	sigs := make([]Signature, 0, 1000)
 	for _, f := range p.droid.FileFormats {
 		sigs = append(sigs, f.Signatures...)
@@ -49,9 +106,9 @@ func (p pronom) Signatures() []Signature {
 	return sigs
 }
 
-func (p pronom) Puids() []string {
+func (p pronom) getPuids() []string {
 	var iter int
-	puids := make([]string, len(p.Signatures()))
+	puids := make([]string, len(p.signatures()))
 	for _, f := range p.droid.FileFormats {
 		rng := iter + len(f.Signatures)
 		for iter < rng {
@@ -62,28 +119,31 @@ func (p pronom) Puids() []string {
 	return puids
 }
 
-func PuidsFromDroid(droid, reports string) ([]string, error) {
-	p := new(pronom)
-	if err := p.setDroid(droid); err != nil {
-		return nil, err
-	}
-	errs := p.setReports(reports)
-	if len(errs) > 0 {
-		var str string
-		for _, e := range errs {
-			str += fmt.Sprintln(e)
+func (p pronom) priorities() map[string][]int {
+	var iter int
+	priorities := make(map[string][]int)
+	for _, f := range p.droid.FileFormats {
+		for _ = range f.Signatures {
+			for _, v := range f.Priorities {
+				puid := p.ids[v]
+				_, ok := priorities[puid]
+				if ok {
+					priorities[puid] = append(priorities[puid], iter)
+				} else {
+					priorities[puid] = []int{iter}
+				}
+			}
+			iter++
 		}
-		return nil, fmt.Errorf(str)
 	}
-	return p.Puids(), nil
+	for k := range priorities {
+		sort.Ints(priorities[k])
+	}
+	return priorities
 }
 
-func (p pronom) String() string {
-	return p.droid.String()
-}
-
-// New creates a pronom object. It takes as arguments the paths to a Droid signature file, a container file, and a base directory or base url for Pronom reports.
-func New(droid, container, reports string) (*pronom, error) {
+// newPronom creates a pronom object. It takes as arguments the paths to a Droid signature file, a container file, and a base directory or base url for Pronom reports.
+func newPronom(droid, container, reports string) (*pronom, error) {
 	p := new(pronom)
 	if err := p.setDroid(droid); err != nil {
 		return p, err
@@ -126,8 +186,10 @@ func (p *pronom) setDroid(path string) error {
 		return err
 	}
 	p.puids = make(map[string]int)
+	p.ids = make(map[int]string)
 	for i, v := range p.droid.FileFormats {
 		p.puids[v.Puid] = i
+		p.ids[v.ID] = v.Puid
 	}
 	return nil
 }

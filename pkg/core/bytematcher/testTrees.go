@@ -1,13 +1,17 @@
 package bytematcher
 
+import . "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+
 // Test trees link byte sequence and frame matches (from the sequence and frame sets) to keyframes. This link is sometimes direct if there are no
 // further test to perform. Follow-up tests may be required to the left or to the right of the match.
 
 type testTree struct {
-	Complete   []keyframeID
-	Incomplete []followUp
-	Left       []*testNode
-	Right      []*testNode
+	Complete         []keyframeID
+	Incomplete       []followUp
+	MaxLeftDistance  int
+	MaxRightDistance int
+	Left             []*testNode
+	Right            []*testNode
 }
 
 type followUp struct {
@@ -76,6 +80,7 @@ func newTestTree() *testTree {
 	return &testTree{
 		make([]keyframeID, 0),
 		make([]followUp, 0),
+		0, 0,
 		make([]*testNode, 0),
 		make([]*testNode, 0),
 	}
@@ -105,8 +110,7 @@ func (t *testTree) add(kf keyframeID, l []Frame, r []Frame) {
 }
 
 func (t *testNode) length() int {
-	_, l := t.Frame.Length()
-	return l + t.Frame.Max()
+	return TotalLength(t.Frame)
 }
 
 func maxLength(ts []*testNode) int {
@@ -128,7 +132,7 @@ func maxLength(ts []*testNode) int {
 	return max
 }
 
-func matches(ts []*testNode, b []byte, rev bool) []followupMatch {
+func matchTestNodes(ts []*testNode, b []byte, rev bool) []followupMatch {
 	ret := make([]followupMatch, 0)
 	var match func(t *testNode, o int)
 	match = func(t *testNode, o int) {

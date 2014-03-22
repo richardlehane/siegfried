@@ -6,7 +6,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
 )
 
 const (
@@ -18,7 +19,7 @@ const (
 // an intermediary structure before creating a bytematcher.Frame
 type token struct {
 	min, max int
-	pat      bytematcher.Pattern
+	pat      patterns.Pattern
 }
 
 // helper funcs
@@ -37,7 +38,7 @@ func decodeNum(num string) (int, error) {
 // parse hexstrings
 func parseHex(puid, hx string) ([]token, int, int, error) {
 	tokens := make([]token, 0, 10)
-	var choice bytematcher.Choice // common bucket for stuffing choices into
+	var choice patterns.Choice // common bucket for stuffing choices into
 	var rangeStart string
 	var min, max int
 	l := sigLex(puid, hx)
@@ -47,7 +48,7 @@ func parseHex(puid, hx string) ([]token, int, int, error) {
 			return nil, 0, 0, errors.New(i.String())
 		// parse simple types
 		case itemText:
-			tokens = append(tokens, token{min, max, bytematcher.Sequence(decodeHex(i.val))})
+			tokens = append(tokens, token{min, max, patterns.Sequence(decodeHex(i.val))})
 		case itemNotText:
 			tokens = append(tokens, token{min, max, NotSequence(decodeHex(i.val))})
 		// parse range types
@@ -59,9 +60,9 @@ func parseHex(puid, hx string) ([]token, int, int, error) {
 			tokens = append(tokens, token{min, max, NotRange{decodeHex(rangeStart), decodeHex(i.val)}})
 		// parse choice types
 		case itemParensLeft:
-			choice = make(bytematcher.Choice, 0, 2)
+			choice = make(patterns.Choice, 0, 2)
 		case itemTextChoice:
-			choice = append(choice, bytematcher.Sequence(decodeHex(i.val)))
+			choice = append(choice, patterns.Sequence(decodeHex(i.val)))
 		case itemNotTextChoice:
 			choice = append(choice, NotSequence(decodeHex(i.val)))
 		case itemRangeEndChoice:
@@ -98,7 +99,7 @@ func parseHex(puid, hx string) ([]token, int, int, error) {
 	return tokens, min, max, nil
 }
 
-func appendSig(s1, s2 bytematcher.Signature, pos string) bytematcher.Signature {
+func appendSig(s1, s2 frames.Signature, pos string) frames.Signature {
 	if len(s1) == 0 {
 		return s2
 	}
@@ -107,8 +108,8 @@ func appendSig(s1, s2 bytematcher.Signature, pos string) bytematcher.Signature {
 	}
 	for i, f := range s1 {
 		orientation := f.Orientation()
-		if orientation == bytematcher.SUCC || orientation == bytematcher.EOF {
-			s3 := make(bytematcher.Signature, len(s1)+len(s2))
+		if orientation == frames.SUCC || orientation == frames.EOF {
+			s3 := make(frames.Signature, len(s1)+len(s2))
 			copy(s3, s1[:i])
 			copy(s3[i:], s2)
 			copy(s3[i+len(s2):], s1[i:])
@@ -118,12 +119,12 @@ func appendSig(s1, s2 bytematcher.Signature, pos string) bytematcher.Signature {
 	return append(s1, s2...)
 }
 
-func (p *pronom) Parse() ([]bytematcher.Signature, error) {
-	sigs := make([]bytematcher.Signature, 0, 700)
+func (p *pronom) parse() ([]frames.Signature, error) {
+	sigs := make([]frames.Signature, 0, 700)
 	for _, f := range p.droid.FileFormats {
 		puid := f.Puid
 		for _, s := range f.Signatures {
-			sig := make(bytematcher.Signature, 0, 1)
+			sig := make(frames.Signature, 0, 1)
 			for _, bs := range s.ByteSequences {
 				// check if <Offset> or <MaxOffset> elements are present
 				min, err := decodeNum(bs.Offset)
@@ -143,17 +144,17 @@ func (p *pronom) Parse() ([]bytematcher.Signature, error) {
 					return nil, err
 				}
 				// create a new signature for this set of tokens
-				tokSig := make(bytematcher.Signature, len(toks))
+				tokSig := make(frames.Signature, len(toks))
 				// check position and add patterns to signature
 				switch bs.Position {
 				case bofstring:
 					if toks[0].min == 0 && toks[0].max == 0 {
 						toks[0].min, toks[0].max = min, max
 					}
-					tokSig[0] = bytematcher.NewFrame(bytematcher.BOF, toks[0].pat, toks[0].min, toks[0].max)
+					tokSig[0] = frames.NewFrame(frames.BOF, toks[0].pat, toks[0].min, toks[0].max)
 					if len(toks) > 1 {
 						for i, tok := range toks[1:] {
-							tokSig[i+1] = bytematcher.NewFrame(bytematcher.PREV, tok.pat, tok.min, tok.max)
+							tokSig[i+1] = frames.NewFrame(frames.PREV, tok.pat, tok.min, tok.max)
 						}
 					}
 				case varstring:
@@ -166,23 +167,23 @@ func (p *pronom) Parse() ([]bytematcher.Signature, error) {
 					if toks[0].min == toks[0].max {
 						toks[0].max = -1
 					}
-					tokSig[0] = bytematcher.NewFrame(bytematcher.BOF, toks[0].pat, toks[0].min, toks[0].max)
+					tokSig[0] = frames.NewFrame(frames.BOF, toks[0].pat, toks[0].min, toks[0].max)
 					if len(toks) > 1 {
 						for i, tok := range toks[1:] {
-							tokSig[i+1] = bytematcher.NewFrame(bytematcher.PREV, tok.pat, tok.min, tok.max)
+							tokSig[i+1] = frames.NewFrame(frames.PREV, tok.pat, tok.min, tok.max)
 						}
 					}
 				case eofstring:
 					if len(toks) > 1 {
 						for i, tok := range toks[:len(toks)-1] {
-							tokSig[i] = bytematcher.NewFrame(bytematcher.SUCC, tok.pat, toks[i+1].min, toks[i+1].max)
+							tokSig[i] = frames.NewFrame(frames.SUCC, tok.pat, toks[i+1].min, toks[i+1].max)
 						}
 					}
 					// handle edge case where there is a {x-y} at end of EOF seq e.g. x-fmt/263
 					if lmin != 0 || lmax != 0 {
 						min, max = lmin, lmax
 					}
-					tokSig[len(toks)-1] = bytematcher.NewFrame(bytematcher.EOF, toks[len(toks)-1].pat, min, max)
+					tokSig[len(toks)-1] = frames.NewFrame(frames.EOF, toks[len(toks)-1].pat, min, max)
 				default:
 					return nil, errors.New("Pronom parse error: invalid ByteSequence position " + bs.Position)
 				}

@@ -1,6 +1,26 @@
-package bytematcher
+package frames
 
-import "testing"
+import (
+	"testing"
+
+	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
+)
+
+// Pattern
+var (
+	seqStub  = Sequence{'t', 'e', 's', 't', 'y'}
+	seqStub2 = Sequence{'t', 'e', 's', 't', 'y'}
+	seqStub3 = Sequence{'T', 'E', 'S', 'T'}
+)
+
+//Frame
+var (
+	fixedStub   = Fixed{BOF, 0, seqStub}
+	fixedStub3  = Fixed{SUCC, 0, seqStub3}
+	windowStub  = Window{BOF, 0, 5, seqStub}
+	wildStub    = Wild{BOF, seqStub}
+	wildMinStub = WildMin{BOF, 5, seqStub}
+)
 
 func TestFixed(t *testing.T) {
 	f2 := NewFrame(BOF, seqStub2, 0, 0)

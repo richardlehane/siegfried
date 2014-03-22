@@ -1,27 +1,44 @@
 package pronom
 
-// This file a work in progress...
+import (
+	"sync"
 
-/*
+	"github.com/richardlehane/siegfried/pkg/core"
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
+	"github.com/richardlehane/siegfried/pkg/core/siegreader"
+)
+
 type PronomIdentifier struct {
-	hints     []bool
-	positives []bool
-	negatives []bool
-	formats   []Format
-	matchers  []Matcher
+	Bm         *bytematcher.Bytematcher
+	Puids      []string
+	Priorities map[string][]int
 }
 
-func (c *PronomIdentifier) RegisterMatcher(Matcher) {
-
+type PronomIdentification struct {
+	puid       string
+	confidence float64
 }
 
-func (c *PronomIdentifier) RegisterFormat(Format) {
-
+func (pid PronomIdentification) String() string {
+	return pid.puid
 }
 
-func (c *PronomIdentifier) Analyze(stream io.ReadSeeker, name string, res chan Format) {
-
+func (pid PronomIdentification) Confidence() float64 {
+	return pid.confidence
 }
 
-func (c *PronomIdentifier) Reset() {}
-*/
+func (pi *PronomIdentifier) Identify(b *siegreader.Buffer, c chan core.Identification, wg *sync.WaitGroup) {
+	ids, limit := pi.Bm.Identify(b)
+	for i := range ids {
+		puid := pi.Puids[i]
+		c <- PronomIdentification{puid, 0.9}
+		l, ok := pi.Priorities[puid]
+		if !ok {
+			close(limit)
+			break
+		} else {
+			limit <- l
+		}
+	}
+	wg.Done()
+}
