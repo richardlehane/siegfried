@@ -13,9 +13,19 @@ type matcher struct {
 	buf              *siegreader.Buffer
 	r                chan int
 	partialKeyframes map[[2]int][][2]int // map of a keyframe to a slice of offsets and lengths where it has matched
-	wg               *sync.WaitGroup
 	limit            []int
 	limitm           *sync.RWMutex
+	limitc           chan []int
+	incoming         chan strike
+	quit             chan struct{}
+}
+
+type strike struct {
+	tti     int
+	offset  int
+	length  int
+	reverse bool
+	frame   bool
 }
 
 type partial struct {
@@ -25,8 +35,8 @@ type partial struct {
 	rdistances []int
 }
 
-func NewMatcher(b *Bytematcher, buf *siegreader.Buffer, r chan int, wg *sync.WaitGroup) *matcher {
-	return &matcher{b, buf, r, make(map[[2]int][][2]int), wg, nil, &sync.RWMutex{}}
+func NewMatcher(b *Bytematcher, buf *siegreader.Buffer, r chan int, l chan []int) *matcher {
+	return &matcher{b, buf, r, make(map[[2]int][][2]int), nil, &sync.RWMutex{}, l, make(chan strike), make(chan struct{})}
 }
 
 func (m *matcher) setLimit(l []int) {
@@ -48,39 +58,47 @@ func (m *matcher) checkLimit(i int) bool {
 	return true
 }
 
-func (m *matcher) match(tti, o, l int, rev bool) {
-	defer m.wg.Done()
-	// the offsets we record are always BOF offsets - these can be interpreted as EOF offsets when necessary
-	var off int
-	if rev {
-		off = m.buf.Size() - o - l
-	} else {
-		off = o
+func (m *matcher) match() {
+	for {
+		select {
+		case l, ok := <-m.limitc:
+			if !ok {
+				close(m.quit)
+				m.limitc = nil
+			}
+			m.setLimit(l)
+		case in, ok := <-m.incoming:
+			if !ok {
+				close(m.r)
+				return
+			}
+			m.tryStrike(in.tti, in.offset, in.length, in.reverse, in.frame)
+		}
 	}
+}
+
+func (m *matcher) tryStrike(tti, o, l int, rev, frame bool) {
+	// the offsets we record are always BOF offsets - these can be interpreted as EOF offsets when necessary
+	off := m.calcOffset(o, l, rev)
+
+	// grab the relevant testTree
 	t := m.b.TestSet[tti]
+
+	// immediately apply key frames for the completes
 	for _, kf := range t.Complete {
-		complete := m.applyKeyFrame(kf, off, l)
-		if complete {
+		success := m.applyKeyFrame(kf, off, l)
+		if success {
 			m.r <- kf[0]
 		}
 	}
-	if len(t.Incomplete) < 0 {
+
+	// if there are no incompletes, we are done
+	if len(t.Incomplete) < 1 {
 		return
 	}
-	var checkl, checkr bool
-	for _, v := range t.Incomplete {
-		if checkl && checkr {
-			break
-		}
-		if m.checkLimit(v.Kf[0]) {
-			if v.L {
-				checkl = true
-			}
-			if v.R {
-				checkr = true
-			}
-		}
-	}
+
+	// see what incompletes are worth pursuing
+	checkl, checkr := m.checkLR(t, off, rev, frame)
 	if !checkl && !checkr {
 		return
 	}
@@ -149,9 +167,53 @@ func (m *matcher) match(tti, o, l int, rev bool) {
 	}
 }
 
+func (m *matcher) calcOffset(o, l int, r bool) int {
+	if !r {
+		return o
+	}
+	return m.buf.Size() - o - l
+}
+
+func (m *matcher) checkLR(t *testTree, o int, rev, frame bool) (bool, bool) {
+	var checkl, checkr bool
+	for _, v := range t.Incomplete {
+		if checkl && checkr {
+			break
+		}
+		if m.checkLimit(v.Kf[0]) && m.aliveKeyFrame(v.Kf, o, rev, frame) {
+			if v.L {
+				checkl = true
+			}
+			if v.R {
+				checkr = true
+			}
+		}
+	}
+	return checkl, checkr
+}
+
+func (m *matcher) aliveKeyFrame(kfID keyframeID, o int, rev, frame bool) bool {
+	// if we are doing BOF frame matching, we must assume that there might be sequences yet to be matched
+	if frame {
+		return true
+	}
+	j := kfID[1]
+	for i := 0; i < j; i++ {
+		kf := m.b.Sigs[kfID[0]][i]
+		if !kf.mustExist(o, rev) {
+			return true
+		}
+		_, ok := m.partialKeyframes[[2]int{kfID[0], i}]
+		if !ok {
+			return false
+		}
+	}
+	return true
+}
+
 func (m *matcher) applyKeyFrame(kfID keyframeID, o, l int) bool {
 	kf := m.b.Sigs[kfID[0]]
-	if kf[kfID[1]].check(o, l, m.buf.Size()) {
+	if kf[kfID[1]].check(o, l, m.buf) {
 		if len(kf) == 1 {
 			return true
 		}
@@ -168,16 +230,17 @@ func (m *matcher) applyKeyFrame(kfID keyframeID, o, l int) bool {
 
 func (m *matcher) checkKeyFrames(i int) bool {
 	kfs := m.b.Sigs[i]
-	prevOff, ok := m.partialKeyframes[[2]int{i, 0}]
-	if !ok {
-		return false
-	}
-	prevKf := kfs[0]
-	for j, kf := range kfs[1:] {
-		thisOff, ok := m.partialKeyframes[[2]int{i, j + 1}]
+	for j := range kfs {
+		_, ok := m.partialKeyframes[[2]int{i, j}]
 		if !ok {
 			return false
 		}
+	}
+	prevOff := m.partialKeyframes[[2]int{i, 0}]
+	prevKf := kfs[0]
+	var ok bool
+	for j, kf := range kfs[1:] {
+		thisOff := m.partialKeyframes[[2]int{i, j + 1}]
 		prevOff, ok = kf.checkRelated(prevKf, thisOff, prevOff)
 		if !ok {
 			return false

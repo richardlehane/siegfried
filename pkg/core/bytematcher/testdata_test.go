@@ -112,6 +112,9 @@ var matcherStub *matcher = &matcher{
 	partialKeyframes: make(map[[2]int][][2]int),
 	limit:            nil,
 	limitm:           &sync.RWMutex{},
+	limitc:           nil,
+	incoming:         make(chan strike),
+	quit:             make(chan struct{}),
 }
 
 // Keyframes

@@ -72,6 +72,9 @@ func (b *Buffer) SetSource(r io.Reader) error {
 
 // return the buffer's size, available immediately for files. Must wait for full read for streams.
 func (b *Buffer) Size() int {
+	if b.sz > 0 {
+		return int(b.sz)
+	}
 	<-b.eofc
 	return int(b.sz)
 }

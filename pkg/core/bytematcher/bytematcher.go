@@ -3,7 +3,6 @@ package bytematcher
 import (
 	"fmt"
 	"io"
-	"sync"
 
 	"github.com/richardlehane/ac"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
@@ -208,73 +207,89 @@ func (b *Bytematcher) process(sig Signature, idx, distance, rng, choices, varlen
 	return nil
 }
 
+func (m *matcher) sendStrike(s strike) bool {
+	select {
+	case <-m.quit:
+		close(m.incoming)
+		return false
+	case m.incoming <- s:
+		return true
+	}
+}
+
 // Identify function
 
 func (b *Bytematcher) identify(buf *siegreader.Buffer, r chan int, l chan []int) {
-	var wg sync.WaitGroup
-	m := NewMatcher(b, buf, r, &wg)
-
+	m := NewMatcher(b, buf, r, l)
+	go m.match()
+	// Test any BOF Frames
 	for i, f := range b.BofFrames.Set {
 		if match, matches := f.Match(buf.MustSlice(0, TotalLength(f), false)); match {
 			min, _ := f.Length()
 			for _, off := range matches {
-				wg.Add(1)
-				go m.match(b.BofFrames.TestTreeIndex[i], off-min, min, false)
+				if !m.sendStrike(strike{b.BofFrames.TestTreeIndex[i], off - min, min, false, true}) {
+					return
+				}
 			}
 		}
 	}
+	// Test any EOF Frames (at this stage, there shouldn't be any)
 	for i, f := range b.EofFrames.Set {
 		if match, matches := f.MatchR(buf.MustSlice(0, TotalLength(f), true)); match {
 			for _, off := range matches {
-				wg.Add(1)
-				go m.match(b.EofFrames.TestTreeIndex[i], off, 0, true)
+				if !m.sendStrike(strike{b.EofFrames.TestTreeIndex[i], off, 0, true, true}) {
+					return
+				}
 			}
 		}
 	}
-
+	// Test absolute BOF sequences
 	bchan := b.bAho.IndexFixed(buf.NewReader())
 	for bi := range bchan {
-		wg.Add(1)
-		go m.match(b.BofSeqs.TestTreeIndex[bi], 0, len(b.BofSeqs.Set[bi]), false)
+		if !m.sendStrike(strike{b.BofSeqs.TestTreeIndex[bi], 0, len(b.BofSeqs.Set[bi]), false, false}) {
+			return
+		}
 	}
 
-	quit := make(chan struct{})
-	vchan := b.vAho.IndexQ(buf.NewReader(), quit)
+	select {
+	case <-m.quit:
+		close(m.incoming)
+		return
+	default:
+	}
+
+	// Start the variable length aho-corasick search
+	vchan := b.vAho.IndexQ(buf.NewReader(), m.quit)
+
+	// Setup a reverse reader and start the EOF aho-corasick search
 	rr, err := buf.NewReverseReader()
 	if err != nil && err != io.EOF {
 		panic(err)
 	}
-	echan := b.eAho.IndexFixedQ(rr, quit)
+	echan := b.eAho.IndexFixedQ(rr, m.quit)
+
 	for {
 		select {
-		case limit, ok := <-l:
-			if !ok {
-				close(quit)
-				vchan = nil
-				echan = nil
-				break
-			} else {
-				m.setLimit(limit)
-			}
 		case vi, ok := <-vchan:
 			if !ok {
 				vchan = nil
 			} else {
-				wg.Add(1)
-				go m.match(b.VarSeqs.TestTreeIndex[vi.Index], vi.Offset, len(b.VarSeqs.Set[vi.Index]), false)
+				if !m.sendStrike(strike{b.VarSeqs.TestTreeIndex[vi.Index], vi.Offset, len(b.VarSeqs.Set[vi.Index]), false, false}) {
+					return
+				}
 			}
 		case ei, ok := <-echan:
 			if !ok {
 				echan = nil
 			} else {
-				wg.Add(1)
-				go m.match(b.EofSeqs.TestTreeIndex[ei], 0, len(b.EofSeqs.Set[ei]), true)
+				if !m.sendStrike(strike{b.EofSeqs.TestTreeIndex[ei], 0, len(b.EofSeqs.Set[ei]), true, false}) {
+					return
+				}
 			}
 		}
 		if vchan == nil && echan == nil {
 			break
 		}
 	}
-	wg.Wait()
-	close(r)
+	close(m.incoming)
 }

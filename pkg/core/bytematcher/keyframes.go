@@ -3,6 +3,8 @@ package bytematcher
 import (
 	"strconv"
 
+	"github.com/richardlehane/siegfried/pkg/core/siegreader"
+
 	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 )
 
@@ -50,11 +52,28 @@ func keyframe(seg Signature, x, y int) (keyFrame, []Frame, []Frame) {
 	return keyFrame{typ, min, max}, l, r
 }
 
+// at a given offset, must a keyframe have already appeared?
+func (kf keyFrame) mustExist(o int, rev bool) bool {
+	switch kf.Typ {
+	case BOF:
+		// could be that we are searching the EOF and a VAR BOF has not yet appeared
+		if rev && kf.Max > 0 {
+			return false
+		}
+		if o < kf.Min || (kf.Max > -1 && o > kf.Max) {
+			return true
+		}
+		return false
+	default:
+		return false
+	}
+}
+
 // quick check performed before applying a keyFrame ID
-func (kf keyFrame) check(o, l, buflen int) bool {
+func (kf keyFrame) check(o, l int, buf *siegreader.Buffer) bool {
 	switch kf.Typ {
 	case EOF:
-		o = buflen - l - o
+		o = buf.Size() - l - o
 		fallthrough
 	case BOF:
 		if o < kf.Min || (kf.Max > -1 && o > kf.Max) {
