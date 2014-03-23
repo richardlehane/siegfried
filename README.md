@@ -118,7 +118,7 @@ First release. Parses PRONOM signatures and performs byte matching. Bare bones C
 
 ## Hacking
 
-Have a peek at upcoming features, planned optimisations and known bugs on the [trello list](https://trello.com/b/ABXkGk6T/siegfried). Get in touch if you'd like to take any of it on.
+Have a peek at upcoming features, planned optimisations and known bugs on the [trello list](https://trello.com/b/ABXkGk6T/siegfried). Please get in touch if you'd like to take any of it on.
 
 ## Thanks
 
