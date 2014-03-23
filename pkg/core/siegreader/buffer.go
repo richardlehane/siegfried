@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	readSz      = 4096
+	readSz      = 4096 //* 2
 	initialRead = readSz * 3
 )
 

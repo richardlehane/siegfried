@@ -27,16 +27,19 @@ func NewBMHSequence(s Sequence) *BMHSequence {
 }
 
 func (s *BMHSequence) Test(b []byte) (bool, int) {
-	if bytes.Equal(s.seq, b) {
-		return true, len(s.seq)
+	if len(b) < len(s.seq) {
+		return false, 0
+	}
+	scan := len(s.seq) - 1
+	for ; b[scan] == s.seq[scan]; scan-- {
+		if scan == 0 {
+			return true, len(s.seq)
+		}
 	}
 	return false, 1
 }
 
 func (s *BMHSequence) TestR(b []byte) (bool, int) {
-	if bytes.Equal(s.seq, b) {
-		return true, len(s.seq)
-	}
 	return false, 1
 }
 

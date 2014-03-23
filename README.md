@@ -116,6 +116,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 First release. Parses PRONOM signatures and performs byte matching. Bare bones CLI. Glacially slow!
 
+## Hacking
+
+Have a peek at upcoming features, planned optimisations and known bugs on the [trello list](https://trello.com/b/ABXkGk6T/siegfried). Get in touch if you'd like to take any of it on.
 
 ## Thanks
 
