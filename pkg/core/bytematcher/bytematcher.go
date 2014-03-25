@@ -10,7 +10,7 @@ import (
 	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 )
 
-type Bytematcher struct {
+type ByteMatcher struct {
 	Sigs [][]keyFrame
 
 	TestSet []*testTree
@@ -32,8 +32,8 @@ type Bytematcher struct {
 // The distance and range values dictate how signatures are segmented during processing.
 // The choices value controls how signature segments are converted into simple byte sequences during processing.
 // The varlen value controls what is the minimum length sequence acceptable for the variable Aho Corasick tree. The longer this length, the fewer false matches you will get during searching.
-func Signatures(sigs []Signature, opts ...int) (*Bytematcher, error) {
-	b := newBytematcher()
+func Signatures(sigs []Signature, opts ...int) (*ByteMatcher, error) {
+	b := newByteMatcher()
 	b.Sigs = make([][]keyFrame, len(sigs))
 	se := make(sigErrors, 0)
 	var distance, rng, choices, varlen = 8192, 2049, 64, 1
@@ -71,19 +71,19 @@ func Signatures(sigs []Signature, opts ...int) (*Bytematcher, error) {
 }
 
 // After loading a bytematcher, create the aho corasick search trees
-func (b *Bytematcher) Start() {
+func (b *ByteMatcher) Start() {
 	b.bAho = ac.NewFixed(b.BofSeqs.Set)
 	b.eAho = ac.NewFixed(b.EofSeqs.Set)
 	b.vAho = ac.New(b.VarSeqs.Set)
 }
 
-func (b *Bytematcher) Identify(sb *siegreader.Buffer) (chan int, chan []int) {
+func (b *ByteMatcher) Identify(sb *siegreader.Buffer) (chan int, chan []int) {
 	ret, limit := make(chan int), make(chan []int, 50)
 	go b.identify(sb, ret, limit)
 	return ret, limit
 }
 
-func (b *Bytematcher) Stats() string {
+func (b *ByteMatcher) Stats() string {
 	str := fmt.Sprintf("BOF seqs: %v\n", len(b.BofSeqs.Set))
 	str += fmt.Sprintf("EOF seqs: %v\n", len(b.EofSeqs.Set))
 	str += fmt.Sprintf("BOF frames: %v\n", len(b.BofFrames.Set))
@@ -112,8 +112,8 @@ func (b *Bytematcher) Stats() string {
 	return str
 }
 
-func newBytematcher() *Bytematcher {
-	return &Bytematcher{
+func newByteMatcher() *ByteMatcher {
+	return &ByteMatcher{
 		nil,
 		make([]*testTree, 0),
 		newSeqSet(),
@@ -140,7 +140,7 @@ func (se sigErrors) Error() string {
 
 // Signature processing functions
 
-func (b *Bytematcher) processSeg(seg Signature, idx, i, l, x, y int, rev bool, ss *seqSet, fs *frameSet, fb, fe int) keyFrame {
+func (b *ByteMatcher) processSeg(seg Signature, idx, i, l, x, y int, rev bool, ss *seqSet, fs *frameSet, fb, fe int) keyFrame {
 	var k keyFrame
 	var left, right []Frame
 	if l > 0 {
@@ -175,7 +175,7 @@ func (b *Bytematcher) processSeg(seg Signature, idx, i, l, x, y int, rev bool, s
 	return k
 }
 
-func (b *Bytematcher) process(sig Signature, idx, distance, rng, choices, varlen int) error {
+func (b *ByteMatcher) process(sig Signature, idx, distance, rng, choices, varlen int) error {
 	// We start by segmenting the signature
 	segs := segment(sig, distance, rng)
 	// Our goal is to turn a signature into a set of keyframes
@@ -219,7 +219,7 @@ func (m *matcher) sendStrike(s strike) bool {
 
 // Identify function
 
-func (b *Bytematcher) identify(buf *siegreader.Buffer, r chan int, l chan []int) {
+func (b *ByteMatcher) identify(buf *siegreader.Buffer, r chan int, l chan []int) {
 	m := NewMatcher(b, buf, r, l)
 	go m.match()
 	// Test any BOF Frames

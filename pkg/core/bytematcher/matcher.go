@@ -9,7 +9,7 @@ import (
 
 // MUTABLE
 type matcher struct {
-	b                *Bytematcher
+	b                *ByteMatcher
 	buf              *siegreader.Buffer
 	r                chan int
 	partialKeyframes map[[2]int][][2]int // map of a keyframe to a slice of offsets and lengths where it has matched
@@ -35,7 +35,7 @@ type partial struct {
 	rdistances []int
 }
 
-func NewMatcher(b *Bytematcher, buf *siegreader.Buffer, r chan int, l chan []int) *matcher {
+func NewMatcher(b *ByteMatcher, buf *siegreader.Buffer, r chan int, l chan []int) *matcher {
 	return &matcher{b, buf, r, make(map[[2]int][][2]int), nil, &sync.RWMutex{}, l, make(chan strike), make(chan struct{})}
 }
 

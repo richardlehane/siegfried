@@ -19,19 +19,19 @@ ok  	github.com/richardlehane/siegfried/cmd/siegfried	53.551s
 
 25 March 2014
 PASS
-BenchmarkNew	      20	  82558255 ns/op
-BenchmarkACCDB	       1	3941394100 ns/op
-BenchmarkBMP	   20000	    135963 ns/op
-BenchmarkDOCX	    1000	   2087208 ns/op
-BenchmarkGIF	   10000	    173017 ns/op
-BenchmarkJPG	    1000	   1499149 ns/op
-BenchmarkMSG	     100	  16191619 ns/op
-BenchmarkODT	    1000	   2357235 ns/op
-BenchmarkPDF	     200	   8120812 ns/op
-BenchmarkPNG	    1000	   2836283 ns/op
-BenchmarkPPTX	     100	  15641564 ns/op
-BenchmarkRTF	      50	  47844784 ns/op
-BenchmarkTIF	       1	1378137800 ns/op
-BenchmarkXLSX	     100	  11821182 ns/op
-BenchmarkXML	   10000	    171217 ns/op
-ok  	github.com/richardlehane/siegfried/cmd/siegfried	35.614s
+BenchmarkNew	      20	  83258325 ns/op
+BenchmarkACCDB	       1	3165316500 ns/op
+BenchmarkBMP	   10000	    139713 ns/op
+BenchmarkDOCX	    1000	   2091209 ns/op
+BenchmarkGIF	   10000	    176417 ns/op
+BenchmarkJPG	    1000	   1522152 ns/op
+BenchmarkMSG	     100	  15751575 ns/op
+BenchmarkODT	    1000	   2355235 ns/op
+BenchmarkPDF	     200	   8195819 ns/op
+BenchmarkPNG	    1000	   2815281 ns/op
+BenchmarkPPTX	     100	  15171517 ns/op
+BenchmarkRTF	      50	  47984798 ns/op
+BenchmarkTIF	       1	1278127800 ns/op
+BenchmarkXLSX	     100	  11501150 ns/op
+BenchmarkXML	   10000	    171917 ns/op
+	ok  	github.com/richardlehane/siegfried/cmd/sieg	31.459s

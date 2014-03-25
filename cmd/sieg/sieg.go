@@ -44,7 +44,7 @@ func identify(s *core.Siegfried, p string) ([]string, error) {
 	if err != nil {
 		return nil, err
 	}
-	c, err := s.Identify(file)
+	c, err := s.Identify(file, p)
 	if err != nil {
 		return nil, fmt.Errorf("Error with file %v; error: %v", p, err)
 	}
@@ -84,7 +84,7 @@ func multiIdentifyP(s *core.Siegfried, r string) error {
 		if err != nil {
 			return err
 		}
-		c, err := s.Identify(file)
+		c, err := s.Identify(file, path)
 		if err != nil {
 			return err
 		}
@@ -132,7 +132,7 @@ func main() {
 		os.Exit(0)
 	}
 
-	c, err := s.Identify(file)
+	c, err := s.Identify(file, flag.Arg(0))
 	if err != nil {
 		log.Fatal(err)
 	}

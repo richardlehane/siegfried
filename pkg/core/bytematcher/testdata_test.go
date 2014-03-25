@@ -89,7 +89,7 @@ var (
 )
 
 // Bytematcher
-var bmStub *Bytematcher = &Bytematcher{
+var bmStub *ByteMatcher = &ByteMatcher{
 	Sigs: [][]keyFrame{
 		[]keyFrame{},
 		[]keyFrame{

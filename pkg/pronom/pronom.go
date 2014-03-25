@@ -15,6 +15,7 @@ import (
 	"time"
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
+	"github.com/richardlehane/siegfried/pkg/core/namematcher"
 
 	. "github.com/richardlehane/siegfried/pkg/pronom/mappings"
 )
@@ -64,6 +65,7 @@ func Load(path string) (*PronomIdentifier, error) {
 		return nil, err
 	}
 	p.Bm.Start()
+	p.ids = make(pids, 20)
 	return &p, nil
 }
 
@@ -90,8 +92,10 @@ func (p pronom) String() string {
 
 func (p *pronom) identifier() (*PronomIdentifier, error) {
 	pi := new(PronomIdentifier)
-	pi.Puids = p.getPuids()
+	pi.ids = make(pids, 20)
+	pi.BPuids = p.getPuids()
 	pi.Priorities = p.priorities()
+	pi.Em, pi.EPuids = p.extensionMatcher()
 	sigs, err := p.parse()
 	if err != nil {
 		return nil, err
@@ -119,6 +123,18 @@ func (p pronom) getPuids() []string {
 		}
 	}
 	return puids
+}
+
+func (p pronom) extensionMatcher() (namematcher.ExtensionMatcher, []string) {
+	em := namematcher.NewExtensionMatcher()
+	epuids := make([]string, len(p.droid.FileFormats))
+	for i, f := range p.droid.FileFormats {
+		epuids[i] = f.Puid
+		for _, v := range f.Extensions {
+			em.Add(v, i)
+		}
+	}
+	return em, epuids
 }
 
 func (p pronom) priorities() map[string][]int {

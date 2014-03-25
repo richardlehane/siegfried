@@ -2,18 +2,16 @@ package namematcher
 
 import (
 	"path/filepath"
-
-	"github.com/richardlehane/siegfried/pkg/core"
+	"strings"
 )
 
 type ExtensionMatcher map[string][]int
 
-func NewExtensionMatcher() *ExtensionMatcher {
-	em := make(map[string][]int)
-	return &em
+func NewExtensionMatcher() ExtensionMatcher {
+	return make(ExtensionMatcher)
 }
 
-func (e *ExtensionMatcher) Add(ext string, fmt int) {
+func (e ExtensionMatcher) Add(ext string, fmt int) {
 	_, ok := e[ext]
 	if ok {
 		e[ext] = append(e[ext], fmt)
@@ -22,21 +20,13 @@ func (e *ExtensionMatcher) Add(ext string, fmt int) {
 	e[ext] = []int{fmt}
 }
 
-func (e *ExtensionMatcher) Identify(name string) chan int {
-	ext := filepath.Ext(e.name)
-	ch := make(chan core.Result)
+func (e ExtensionMatcher) Identify(name string) []int {
+	ext := filepath.Ext(name)
 	if len(ext) > 0 {
-		fmts, ok := e.m[ext]
+		fmts, ok := e[strings.TrimPrefix(ext, ".")]
 		if ok {
-			go func() {
-				for _, v := range fmts {
-					ch <- core.Result(v)
-				}
-				close(ch)
-			}()
-			return ch
+			return fmts
 		}
 	}
-	close(ch)
-	return ch
+	return []int{}
 }

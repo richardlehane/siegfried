@@ -6,29 +6,33 @@ var fmts = []string{"wav", "doc", "xls", "pdf", "ppt"}
 
 var em = NewExtensionMatcher()
 
-func TestWavMatch(t *testing.T) {
+func init() {
 	for i, v := range fmts {
 		em.Add(v, i)
 	}
-	em.SetName("hello/apple.wav")
-	res := em.Match()
-	if i := <-res; i != 0 {
-		t.Errorf("Expecting 0, got %v", i)
+}
+
+func TestWavMatch(t *testing.T) {
+	res := em.Identify("hello/apple.wav")
+	if len(res) != 1 {
+		t.Fatalf("Expecting a length of 1, got %v", len(res))
+	}
+
+	if res[0] != 0 {
+		t.Errorf("Expecting 0, got %v", res[0])
 	}
 }
 
 func TestNoMatch(t *testing.T) {
-	em.SetName("hello/apple.tty")
-	res := em.Match()
-	for r := range res {
-		t.Errorf("Should not match, got %v", r)
+	res := em.Identify("hello/apple.tty")
+	if len(res) > 0 {
+		t.Errorf("Should not match, got %v", len(res))
 	}
 }
 
 func TestNoExt(t *testing.T) {
-	em.SetName("hello/apple")
-	res := em.Match()
-	for r := range res {
-		t.Errorf("Should not match, got %v", r)
+	res := em.Identify("hello/apple")
+	if len(res) > 0 {
+		t.Errorf("Should not match, got %v", len(res))
 	}
 }
