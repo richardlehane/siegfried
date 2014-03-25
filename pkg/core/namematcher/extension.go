@@ -6,29 +6,23 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core"
 )
 
-type ExtensionMatcher struct {
-	m    map[string][]int
-	name string
-}
+type ExtensionMatcher map[string][]int
 
 func NewExtensionMatcher() *ExtensionMatcher {
-	return &ExtensionMatcher{m: make(map[string][]int)}
+	em := make(map[string][]int)
+	return &em
 }
 
 func (e *ExtensionMatcher) Add(ext string, fmt int) {
-	_, ok := e.m[ext]
+	_, ok := e[ext]
 	if ok {
-		e.m[ext] = append(e.m[ext], fmt)
+		e[ext] = append(e[ext], fmt)
 		return
 	}
-	e.m[ext] = []int{fmt}
+	e[ext] = []int{fmt}
 }
 
-func (e *ExtensionMatcher) SetName(name string) {
-	e.name = name
-}
-
-func (e *ExtensionMatcher) Match() chan core.Result {
+func (e *ExtensionMatcher) Identify(name string) chan int {
 	ext := filepath.Ext(e.name)
 	ch := make(chan core.Result)
 	if len(ext) > 0 {

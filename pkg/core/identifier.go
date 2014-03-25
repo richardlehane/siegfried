@@ -7,7 +7,7 @@ import (
 )
 
 type Identifier interface {
-	Identify(*siegreader.Buffer, chan Identification, *sync.WaitGroup)
+	Identify(*siegreader.Buffer, string, chan Identification, *sync.WaitGroup)
 }
 
 type Identification interface {

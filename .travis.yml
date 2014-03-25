@@ -9,8 +9,8 @@ install:
   - go get github.com/richardlehane/ac
   - go install github.com/richardlehane/siegfried/pkg/core/bytematcher
   - go install github.com/richardlehane/siegfried/pkg/pronom
-  - go install github.com/richardlehane/siegfried/cmd/siegfried
+  - go install github.com/richardlehane/siegfried/cmd/sieg
 script:
   - go test github.com/richardlehane/siegfried/pkg/core/bytematcher
   - go test github.com/richardlehane/siegfried/pkg/pronom
-  - go test github.com/richardlehane/siegfried/cmd/siegfried
+  - go test github.com/richardlehane/siegfried/cmd/sieg

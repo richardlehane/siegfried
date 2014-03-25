@@ -27,7 +27,10 @@ func (pid PronomIdentification) Confidence() float64 {
 	return pid.confidence
 }
 
-func (pi *PronomIdentifier) Identify(b *siegreader.Buffer, c chan core.Identification, wg *sync.WaitGroup) {
+func (pi *PronomIdentifier) Identify(b *siegreader.Buffer, n string, c chan core.Identification, wg *sync.WaitGroup) {
+	if len(n) > 0 {
+
+	}
 	ids, limit := pi.Bm.Identify(b)
 	for i := range ids {
 		puid := pi.Puids[i]

@@ -4,7 +4,7 @@ Siegfried is a signature-based file identification tool.
 
 ## Version
 
-0.1
+0.2
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried)
 
@@ -13,9 +13,7 @@ Siegfried is a signature-based file identification tool.
 
 With go installed: 
 
-    go get github.com/richardlehane/siegfried/cmd/siegfried
-
-    go get github.com/richardlehane/siegfried/cmd/rd2d
+    go get github.com/richardlehane/siegfried/cmd/sieg
 
 Or download a pre-built package:
 
@@ -29,17 +27,13 @@ Or download a pre-built package:
 
 To run Siegfried, you need to have:
 
--  an up-to-date signature file (for a description of the Siegfried signature format, see [this wiki page](https://github.com/richardlehane/siegfried/wiki/Siegfried-signature-format))
-- a Droid signature file 
-- and a directory containing Pronom reports.
-
-The pre-built packages come with all these necessary files. 
-
-To install Siegfried,  copy the siegfried directory (containing these files) into your home directory. Alternatively, you can provide different file locations as flags to the Siegfried executable.
+-  an up-to-date signature file (for a description of the Siegfried signature format, see [this wiki page](https://github.com/richardlehane/siegfried/wiki/Siegfried-signature-format)). The pre-built packages come with this file ("pronom.gob"). The signature file should be copied to a "siegfried" directory within your computer's home directory. Alternatively, you can provide a different file location as a flag when using the sieg executable.
 
 You can also build your own signature file and harvest Pronom reports using the R2D2 tool (it talks to Droid, get it!... and, yes, a protocol droid would have been more appropriate but that name was already taken :().
 
 To do this:
+
+- install r2d2 (go get github.com/richardlehane/cmd/r2d2)
 
 - get recent Droid signature and container files. These are available for download from this page: [http://www.nationalarchives.gov.uk/aboutapps/pronom/droid-signature-files.html](http://www.nationalarchives.gov.uk/aboutapps/pronom/droid-signature-files.html). If these aren't the same as the defaults in the R2D2 tool (use the r2d2 -defaults command to check), you will need to supply the names of your updated files with additional flags to the relevant R2D2 commands
 
@@ -51,14 +45,8 @@ To do this:
 
 ### Command line
 
-    ./siegfried file.ext
-    ./siegfried /DIR
-
-    ./r2d2 -harvest
-    ./r2d2 -build 
-    ./r2d2 -stats
-    ./r2d2 -printdroid
-    ./r2d2 -defaults
+    ./sieg file.ext
+    ./sieg /DIR
 
 ## Package Documentation
 
@@ -67,12 +55,6 @@ To do this:
 - [Pronom package](http://godoc.org/github.com/richardlehane/siegfried/pkg/pronom)
 
 ## Roadmap
-
-### Version 0.2 (March 2014)
-
-- begin optimising. e.g. replace stop the world, full buffer, recursive frame matching with goroutines, channels and limited buffers
-- implement an Identifier type that controls the matching process and stops on best possible match (i.e. no longer require a full file scan for all files)
-- name/extension matching
 
 ### Version 0.3 (April 2014)
 
@@ -111,6 +93,14 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ## Changes
+### Version 0.2 (25/03/2014)
+
+- benchmarks (cmd/sieg/testdata)
+- an Identifier type that controls the matching process and stops on best possible match (i.e. no longer require a full file scan for all files)
+- name/extension matching
+- a custom reader (pkg/core/siegreader)
+- simplifications to the sieg command and signature file
+- optimisations that have boosted performance (see cmd/sieg/testdata/bench_results.txt). But still too slow!
 
 ### Version 0.1 (28/02/2014)
 
