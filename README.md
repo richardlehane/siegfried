@@ -8,6 +8,12 @@ Siegfried is a signature-based file identification tool.
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried)
 
+## Usage
+
+### Command line
+
+    ./sieg file.ext
+    ./sieg /DIR
 
 ## Install
 
@@ -23,11 +29,12 @@ Or download a pre-built package:
 
 - [Linux (64)](https://dl.dropboxusercontent.com/u/48160346/Releases/Linux/Siegfried_Linux64_0_1.zip)
 
+
 ### Signature file
 
 To run Siegfried, you need to have:
 
--  an up-to-date signature file (for a description of the Siegfried signature format, see [this wiki page](https://github.com/richardlehane/siegfried/wiki/Siegfried-signature-format)). The pre-built packages come with this file ("pronom.gob"). The signature file should be copied to a "siegfried" directory within your computer's home directory. Alternatively, you can provide a different file location as a flag when using the sieg executable.
+-  an up-to-date signature file (for a description of the Siegfried signature format, see [this wiki page](https://github.com/richardlehane/siegfried/wiki/Siegfried-signature-format)). The pre-built packages come with this ("pronom.gob"). The signature file should be copied to a "siegfried" directory within your computer's home directory (e.g. ~/siegfried or c:\users\richardl\siegfried). Alternatively, you can provide a different file location as a flag when using the sieg executable.
 
 You can also build your own signature file and harvest Pronom reports using the R2D2 tool (it talks to Droid, get it!... and, yes, a protocol droid would have been more appropriate but that name was already taken :().
 
@@ -41,16 +48,19 @@ To do this:
 
 - run the R2D2 build command (./r2d2 -build)
 
-## Usage
-
-### Command line
-
-    ./sieg file.ext
-    ./sieg /DIR
-
 ## Package Documentation
 
+- [Siegfried package](http://godoc.org/github.com/richardlehane/siegfried/pkg/core)
+
+- [Namematcher package](http://godoc.org/github.com/richardlehane/siegfried/pkg/core/namematcher)
+
 - [Bytematcher package](http://godoc.org/github.com/richardlehane/siegfried/pkg/core/bytematcher)
+
+	- [Patterns package](http://godoc.org/github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns)
+
+	- [Frames package](http://godoc.org/github.com/richardlehane/siegfried/pkg/core/bytematcher/frames)
+
+- [Siegreader package](http://godoc.org/github.com/richardlehane/siegfried/pkg/core/siegreader)
 
 - [Pronom package](http://godoc.org/github.com/richardlehane/siegfried/pkg/pronom)
 
