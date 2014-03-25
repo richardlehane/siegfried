@@ -4,6 +4,8 @@ import (
 	"testing"
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
+
+	. "github.com/richardlehane/siegfried/pkg/pronom/mappings"
 )
 
 var bsStub1 = ByteSequence{

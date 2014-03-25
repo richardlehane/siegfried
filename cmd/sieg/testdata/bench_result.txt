@@ -1,0 +1,37 @@
+04 March 2014
+PASS
+BenchmarkNew	      20	  83000000 ns/op
+BenchmarkACCDB	       1	11298000000 ns/op
+BenchmarkBMP	       1	2964000000 ns/op
+BenchmarkDOCX	      50	  41440000 ns/op
+BenchmarkGIF	    2000	    822500 ns/op
+BenchmarkJPG	     500	   3348000 ns/op
+BenchmarkMSG	       5	 321800000 ns/op
+BenchmarkODT	      50	  37080000 ns/op
+BenchmarkPDF	     100	  23340000 ns/op
+BenchmarkPNG	      50	  41580000 ns/op
+BenchmarkPPTX	       5	 275400000 ns/op
+BenchmarkRTF	     100	  14200000 ns/op
+BenchmarkTIF	       1	2982000000 ns/op
+BenchmarkXLSX	      10	 177000000 ns/op
+BenchmarkXML	       1	1920000000 ns/op
+ok  	github.com/richardlehane/siegfried/cmd/siegfried	53.551s
+
+25 March 2014
+PASS
+BenchmarkNew	      20	  82558255 ns/op
+BenchmarkACCDB	       1	3941394100 ns/op
+BenchmarkBMP	   20000	    135963 ns/op
+BenchmarkDOCX	    1000	   2087208 ns/op
+BenchmarkGIF	   10000	    173017 ns/op
+BenchmarkJPG	    1000	   1499149 ns/op
+BenchmarkMSG	     100	  16191619 ns/op
+BenchmarkODT	    1000	   2357235 ns/op
+BenchmarkPDF	     200	   8120812 ns/op
+BenchmarkPNG	    1000	   2836283 ns/op
+BenchmarkPPTX	     100	  15641564 ns/op
+BenchmarkRTF	      50	  47844784 ns/op
+BenchmarkTIF	       1	1378137800 ns/op
+BenchmarkXLSX	     100	  11821182 ns/op
+BenchmarkXML	   10000	    171217 ns/op
+ok  	github.com/richardlehane/siegfried/cmd/siegfried	35.614s

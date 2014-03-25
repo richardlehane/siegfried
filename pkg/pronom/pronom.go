@@ -15,6 +15,8 @@ import (
 	"time"
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
+
+	. "github.com/richardlehane/siegfried/pkg/pronom/mappings"
 )
 
 var Config = struct {
