@@ -21,7 +21,7 @@ With go installed:
 
     go get github.com/richardlehane/siegfried/cmd/sieg
 
-Or download a pre-built package:
+Or download a pre-built binary and signature file:
 
 - [Windows (64)](https://dl.dropboxusercontent.com/u/48160346/Releases/Win64/Siegfried_Win64_0_1.zip)
 
@@ -34,9 +34,9 @@ Or download a pre-built package:
 
 To run Siegfried, you need to have:
 
--  an up-to-date signature file (for a description of the Siegfried signature format, see [this wiki page](https://github.com/richardlehane/siegfried/wiki/Siegfried-signature-format)). The pre-built packages come with this ("pronom.gob"). The signature file should be copied to a "siegfried" directory within your computer's home directory (e.g. ~/siegfried or c:\users\richardl\siegfried). Alternatively, you can provide a different file location as a flag when using the sieg executable.
+-  an up-to-date signature file (for a description of the Siegfried signature format, see [this wiki page](https://github.com/richardlehane/siegfried/wiki/Siegfried-signature-format)). The pre-built packages come with a signature file built against Droid v73, "pronom.gob". This file should be copied to a "siegfried" directory within your computer's home directory (e.g. ~/siegfried or c:\users\richardl\siegfried). Alternatively, you can provide a different file location as a flag when using the sieg executable.
 
-You can also build your own signature file and harvest Pronom reports using the R2D2 tool (it talks to Droid, get it!... and, yes, a protocol droid would have been more appropriate but that name was already taken :().
+You can also build your own signature file using the R2D2 tool (it talks to Droid, get it!... and, yes, a protocol droid would have been more appropriate but that name was already taken :().
 
 To do this:
 
