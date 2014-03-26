@@ -21,19 +21,11 @@ With go installed:
 
     go get github.com/richardlehane/siegfried/cmd/sieg
 
-Or download a pre-built binary and signature file.
+Or download a pre-built binary and signature file from the [releases page](https://github.com/richardlehane/siegfried/releases/tag/v0.2).
 
-The following binaries are available. Copy the binary to any location you like (preferably in your system's path):
+Binaries for 64-bit Windows, OSX and Linux are available. Copy the binary to any location you like (preferably in your system's path).
 
-- [Windows (64)](https://dl.dropboxusercontent.com/u/48160346/Releases/v%200_2/Win64/sieg.exe)
-
-- [OSX (64)](https://dl.dropboxusercontent.com/u/48160346/Releases/Darwin/sieg)
-
-- [Linux (64)](https://dl.dropboxusercontent.com/u/48160346/Releases/Linux/sieg)
-
-You also need a signature file. This file should be copied to a "siegfried" directory within your computer's home directory (e.g. ~/siegfried or c:\users\richardl\siegfried). Alternatively, you can provide a different file location as a flag when using the sieg executable. The following signature file was built against Droid v73:
-
-- [pronom.gob](https://dl.dropboxusercontent.com/u/48160346/Releases/v%200_2/siegfried/pronom.gob)
+The signature file (pronom.gob) should be copied to a "siegfried" directory within your computer's home directory (e.g. ~/siegfried or c:\users\richardl\siegfried). Alternatively, you can provide a different file location as a flag when using the sieg executable.
 
 ### Signature file
 
@@ -106,7 +98,7 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ## Changes
-### Version 0.2 (25/03/2014)
+### Version 0.2 (26/03/2014)
 
 - benchmarks (cmd/sieg/testdata)
 - an Identifier type that controls the matching process and stops on best possible match (i.e. no longer require a full file scan for all files)
