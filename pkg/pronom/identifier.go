@@ -39,18 +39,30 @@ func (pi *PronomIdentifier) Identify(b *siegreader.Buffer, n string, c chan core
 			pi.ids = add(pi.ids, pi.EPuids[v], 0.1)
 		}
 	}
+
+	var currLimit []int
+	var cscore float64 = 0.1
+
 	ids, limit := pi.Bm.Identify(b)
+
 	for i := range ids {
+		if !checkLimit(i, currLimit) {
+			continue
+		}
+		cscore *= 1.1
 		puid := pi.BPuids[i]
-		pi.ids = add(pi.ids, puid, 0.2)
+		pi.ids = add(pi.ids, puid, cscore)
+
 		l, ok := pi.Priorities[puid]
 		if !ok {
 			close(limit)
 			break
 		} else {
 			limit <- l
+			currLimit = l
 		}
 	}
+
 	if len(pi.ids) > 0 {
 		sort.Sort(pi.ids)
 		conf := pi.ids[0].confidence
@@ -66,6 +78,18 @@ func (pi *PronomIdentifier) Identify(b *siegreader.Buffer, n string, c chan core
 		}
 	}
 	wg.Done()
+}
+
+// Messy duplicating this function here (it is also in bytematcher) - this is to get around a particular race condition
+func checkLimit(i int, l []int) bool {
+	if l == nil {
+		return true
+	}
+	idx := sort.SearchInts(l, i)
+	if idx == len(l) || l[idx] != i {
+		return false
+	}
+	return true
 }
 
 type pids []PronomIdentification

@@ -21,20 +21,21 @@ With go installed:
 
     go get github.com/richardlehane/siegfried/cmd/sieg
 
-Or download a pre-built binary and signature file:
+Or download a pre-built binary and signature file.
 
-- [Windows (64)](https://dl.dropboxusercontent.com/u/48160346/Releases/Win64/Siegfried_Win64_0_1.zip)
+The following binaries are available. Copy the binary to any location you like (preferably in your system's path):
 
-- [OSX (64)](https://dl.dropboxusercontent.com/u/48160346/Releases/Darwin/Siegfried_OSX64_0_1.zip)
+- [Windows (64)](https://dl.dropboxusercontent.com/u/48160346/Releases/v%200_2/Win64/sieg.exe)
 
-- [Linux (64)](https://dl.dropboxusercontent.com/u/48160346/Releases/Linux/Siegfried_Linux64_0_1.zip)
+- [OSX (64)](https://dl.dropboxusercontent.com/u/48160346/Releases/Darwin/sieg)
 
+- [Linux (64)](https://dl.dropboxusercontent.com/u/48160346/Releases/Linux/sieg)
+
+You also need a signature file. This file should be copied to a "siegfried" directory within your computer's home directory (e.g. ~/siegfried or c:\users\richardl\siegfried). Alternatively, you can provide a different file location as a flag when using the sieg executable. The following signature file was built against Droid v73:
+
+- [pronom.gob](https://dl.dropboxusercontent.com/u/48160346/Releases/v%200_2/siegfried/pronom.gob)
 
 ### Signature file
-
-To run Siegfried, you need to have:
-
--  an up-to-date signature file (for a description of the Siegfried signature format, see [this wiki page](https://github.com/richardlehane/siegfried/wiki/Siegfried-signature-format)). The pre-built packages come with a signature file built against Droid v73, "pronom.gob". This file should be copied to a "siegfried" directory within your computer's home directory (e.g. ~/siegfried or c:\users\richardl\siegfried). Alternatively, you can provide a different file location as a flag when using the sieg executable.
 
 You can also build your own signature file using the R2D2 tool (it talks to Droid, get it!... and, yes, a protocol droid would have been more appropriate but that name was already taken :().
 
@@ -47,6 +48,8 @@ To do this:
 - harvest Pronom reports with R2D2 (./r2d2 -harvest)
 
 - run the R2D2 build command (./r2d2 -build)
+
+For more information about Siegfried's signature file format, see [this wiki page](https://github.com/richardlehane/siegfried/wiki/Siegfried-signature-format). 
 
 ## Package Documentation
 
