@@ -63,15 +63,19 @@ For more information about Siegfried's signature file format, see [this wiki pag
 
 ### Version 0.3 (April 2014)
 
-- container matching (see github.com/richardlehane/mscfb)
+- upgrade Aho-Corasick matching engine to a generalized AC algorithm along the lines of [Lee's proposal for Clam AV](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?reload=true&arnumber=4317914)
 
 ### Version 0.4 (May 2014)
 
-- server mode
+- container matching (see [https://www.github.com/richardlehane/mscfb](https://www.github.com/richardlehane/mscfb))
 
 ### Version 0.5 (July 2014)
 
-- HTML GUI
+- basis mode (provide grounds for a format match)
+
+### Version 0.6 (August 2014)
+
+- server mode
 
 ## Rights
 

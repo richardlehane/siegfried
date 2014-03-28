@@ -21,7 +21,7 @@ var (
 func init() {
 	current, err := user.Current()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Sieg error: can't obtain a current user %v", err)
 	}
 	defaultSigs = filepath.Join(current.HomeDir, "siegfried", defaultSigs)
 
@@ -42,11 +42,11 @@ func identify(s *core.Siegfried, p string) ([]string, error) {
 	ids := make([]string, 0)
 	file, err := os.Open(p)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to open %v, got: %v", p, err)
 	}
 	c, err := s.Identify(file, p)
 	if err != nil {
-		return nil, fmt.Errorf("Error with file %v; error: %v", p, err)
+		return nil, fmt.Errorf("failed to identify %v, got: %v", p, err)
 	}
 	for i := range c {
 		ids = append(ids, i.String())
@@ -104,22 +104,22 @@ func main() {
 	flag.Parse()
 
 	if flag.NArg() != 1 {
-		log.Fatal("Error: expecting a single file or directory argument")
+		log.Fatal("Sieg error: expecting a single file or directory argument")
 	}
 
 	var err error
 	file, err := os.Open(flag.Arg(0))
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Sieg error: error opening %v, got: %v", flag.Arg(0), err)
 	}
 	info, err := file.Stat()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Sieg error: error getting info for %v, got: %v", flag.Arg(0), err)
 	}
 
 	s, err := load(sigfile)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Sieg error: error loading signature file, got: %v", err)
 
 	}
 
@@ -127,14 +127,14 @@ func main() {
 		file.Close()
 		err = multiIdentifyP(s, flag.Arg(0))
 		if err != nil {
-			log.Fatal(err)
+			log.Fatalf("Sieg error: %v", err)
 		}
 		os.Exit(0)
 	}
 
 	c, err := s.Identify(file, flag.Arg(0))
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Sieg error: %v", err)
 	}
 	fmt.Println(flag.Arg(0))
 	for i := range c {
