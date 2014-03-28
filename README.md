@@ -15,6 +15,8 @@ Siegfried is a signature-based file identification tool.
     ./sieg file.ext
     ./sieg /DIR
 
+![Usage](usage.gif)
+
 ## Install
 
 With go installed: 
