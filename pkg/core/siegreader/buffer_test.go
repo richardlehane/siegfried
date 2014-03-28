@@ -10,7 +10,7 @@ import (
 
 var teststring = "abracadabra"
 
-var testfile = filepath.Join("..", "..", "..", "cmd", "siegfried", "testdata", "benchmark", "Benchmark.docx")
+var testfile = filepath.Join("..", "..", "..", "cmd", "sieg", "testdata", "benchmark", "Benchmark.docx")
 
 func TestNew(t *testing.T) {
 	b := New()

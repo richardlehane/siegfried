@@ -170,7 +170,10 @@ func (b *Buffer) Slice(s, l int) ([]byte, error) {
 	if err == io.EOF || b.complete {
 		if s+l > b.w.val {
 			if s > b.w.val {
-				return []byte{}, err
+				return nil, err
+			}
+			if b.Size() == 0 {
+				return nil, io.EOF
 			}
 			return b.buf[s:b.w.val], err
 		} else {
@@ -192,7 +195,7 @@ func (b *Buffer) EofSlice(s, l int) ([]byte, error) {
 	}
 	if s+l >= len(buf) {
 		if s > len(buf) {
-			return []byte{}, io.EOF
+			return nil, io.EOF
 		}
 		return buf[:len(buf)-s], io.EOF
 	}

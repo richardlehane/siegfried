@@ -26,7 +26,7 @@ func (s *Siegfried) AddIdentifier(i Identifier) {
 
 func (s *Siegfried) Identify(r io.Reader, n string) (chan Identification, error) {
 	err := s.buffer.SetSource(r)
-	if err != nil {
+	if err != nil && err != io.EOF {
 		return nil, err
 	}
 	s.name = n

@@ -161,7 +161,8 @@ func (r *ReverseReader) ReadByte() (byte, error) {
 	var err error
 	if r.i == 0 {
 		r.setBuf(0)
-	} else if r.j >= len(r.scratch) {
+	}
+	if r.j >= len(r.scratch) {
 		if r.end {
 			return 0, io.EOF
 		}

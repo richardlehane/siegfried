@@ -82,11 +82,11 @@ func multiIdentifyP(s *core.Siegfried, r string) error {
 		}
 		file, err := os.Open(path)
 		if err != nil {
-			return err
+			return fmt.Errorf("failed to open %v, got: %v", path, err)
 		}
 		c, err := s.Identify(file, path)
 		if err != nil {
-			return err
+			return fmt.Errorf("failed to identify %v, got: %v", path, err)
 		}
 		fmt.Println(path)
 		for i := range c {
