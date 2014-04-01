@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1354</FormatID>
+      <FormatName>WebP</FormatName>
+      <FormatVersion>Lossy</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Raster)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>WebP is a raster image format developed by Google that uses the Resource Interchange File Format as a container. WebP's lossy compression algorithm is based on the intra-frame coding of the VP8 video format.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>19 Jul 2013</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>19 Jul 2013</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/566</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>141</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Google</OrganisationName>
+        <DeveloperCompoundName>Google</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>141</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Google</OrganisationName>
+        <SupportCompoundName>Google</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>1391</ExternalSignatureID>
+        <Signature>webp</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>902</SignatureID>
+        <SignatureName>WebP Lossy</SignatureName>
+        <SignatureNote>RIFF{4}WEBPVP8</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1126</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>52494646{4}5745425056503820</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

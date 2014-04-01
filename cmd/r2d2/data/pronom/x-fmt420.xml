@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>807</FormatID>
+      <FormatName>Windows Setup File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Windows Setup File or Installer Script.</FormatDescription>
+      <BinaryFileFormat>Text</BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>02 Feb 2007</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>02 Feb 2007</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/inf</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>x-fmt/420</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>813</ExternalSignatureID>
+        <Signature>inf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>441</SignatureID>
+        <SignatureName>Setup Information File 1</SignatureName>
+        <SignatureNote>ASCII: [Version]..Signature="$CHICAGO$". By convention, the Version section appears first in INF files, although this is not always the case in practice. Every Windows INF file must have this section. This version of the inf file can appear in all Windows operating systems</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>556</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>1024</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>5B(56|76)657273696F6E5D0D0A(53|73)69676E6174757265{0-1}3D{0-2}24(4368696361676F|4348494341474F)24{0-1}0D0A</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>442</SignatureID>
+        <SignatureName>Setup Information File 2</SignatureName>
+        <SignatureNote>ASCII: [Version]..Signature="$WINDOWS NT$". By convention, the Version section appears first in INF files, although this is not always the case in practice. Every Windows INF file must have this section. This version of the inf file can appear in all Windows NT based operating systems</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>557</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>1024</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>5B(56|76)657273696F6E5D0D0A(53|73)69676E6174757265{0-3}3D{0-1}2224(57494E444F5753|57696E646F7773)204E5424220D0A</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>443</SignatureID>
+        <SignatureName>Setup Information File 3</SignatureName>
+        <SignatureNote>ASCII: [Version]..Signature="$Windows 95$". By convention, the Version section appears first in INF files, although this is not always the case in practice. Every Windows INF file must have this section. This version of the inf file can appear in all Windows 9x/ME operating systems</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>558</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>1024</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>5B(56|76)657273696F6E5D0D0A(53|73)69676E6174757265{0-3}3D{0-1}2224(57494E444F5753|57696E646F7773)20393524220D0A</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

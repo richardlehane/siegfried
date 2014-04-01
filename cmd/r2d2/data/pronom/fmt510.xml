@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1297</FormatID>
+      <FormatName>PowerProject Teamplan</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Database</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Early format for Asta PowerProject project management software. Superceded by later .pp format. .pdb files are viewable in the free 'Project Viewer' software available here: http://www.astadev.com/free-project-viewer/</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>188</ProvenanceSourceID>
+      <ProvenanceName>The Borthwick Institute for Archives / The Borthwick Institute for Archives</ProvenanceName>
+      <ProvenanceSourceDate>01 May 2013</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>01 May 2013</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/510</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>189</DeveloperID>
+        <DeveloperName>Asta Development</DeveloperName>
+        <OrganisationName>Asta Development</OrganisationName>
+        <DeveloperCompoundName>Asta Development / Asta Development</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>189</SupportID>
+        <SupportName>Asta Development</SupportName>
+        <OrganisationName>Asta Development</OrganisationName>
+        <SupportCompoundName>Asta Development / Asta Development</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>1327</ExternalSignatureID>
+        <Signature>pdb</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>803</SignatureID>
+        <SignatureName>PowerProject Teamplan</SignatureName>
+        <SignatureNote>40 byte Project Title (+1 byte spacing)
+32 byte Version String (+1 byte spacing)
+2 byte magic number (0x61EA)</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1008</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>43</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>44617461626173652056657273696F6E{15}61EA</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>1298</RelatedFormatID>
+        <RelatedFormatName>PowerProject</RelatedFormatName>
+        <RelatedFormatVersion>7</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1234</FormatID>
+      <FormatName>Adobe Portable Document Catalog Index File</FormatName>
+      <FormatVersion>3.0</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>
+      </FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>28 Aug 2012</ProvenanceSourceDate>
+      <ProvenanceDescription>PDX is Adobe Acrobat Catalog Index file, available in Adobe Acrobat versions 2 and later. 
+When created, a PDF Catalog Index will also create a number of dependent sub-files of specific filetypes. 
+The extensions for these filetypes within earlier versions of .pdx are .wld, .abt, .did, .ddd, .pdd, .plc, .cat, .trn. 
+In later versions only .idx files are created. 
+The Catalog Index creates a fully text-searchable relationship between the indexed pdf files.</ProvenanceDescription>
+      <LastUpdatedDate>28 Aug 2012</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/447</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>1250</ExternalSignatureID>
+        <Signature>pdx</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>699</SignatureID>
+        <SignatureName>Adobe PDX 3.0</SignatureName>
+        <SignatureNote>BOF first 31 bytes: %PDX-3.0.%âãÏÓ..1 0 obj&lt;&lt;/PDX&lt;&lt;
+EOF last 11 bytes &gt;&gt;..%%EOF..</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>872</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>255044582D332E300D25E2E3CFD30D0A312030206F626A3C3C2F5044583C3C</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>873</ByteSequenceID>
+          <PositionType>Absolute from EOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3E3E0D0A2525454F460D0A</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

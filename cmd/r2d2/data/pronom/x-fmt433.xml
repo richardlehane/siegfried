@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>827</FormatID>
+      <FormatName>3DM</FormatName>
+      <FormatVersion>1</FormatVersion>
+      <FormatAliases>Rhino 3D Model (1), openNURBS (1)</FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Vector)</FormatTypes>
+      <FormatDisclosure>Full</FormatDisclosure>
+      <FormatDescription>The 3DM (openNURBS) format is a 3D model representation based on non-uniform rational B-Splines (NURBS). The file format is defined by an open source C++ toolkit that reads and writes openNURBS models.</FormatDescription>
+      <BinaryFileFormat>Binary</BinaryFileFormat>
+      <ByteOrders>Little-endian (Intel)</ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>131</ProvenanceSourceID>
+      <ProvenanceName>Digital Library Research Group / MIT Libraries</ProvenanceName>
+      <ProvenanceSourceDate>22 Oct 2008</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>22 Oct 2008</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>x-fmt/433</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>130</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Robert McNeel &amp; Associates</OrganisationName>
+        <DeveloperCompoundName>Robert McNeel &amp; Associates</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>130</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Robert McNeel &amp; Associates</OrganisationName>
+        <SupportCompoundName>Robert McNeel &amp; Associates</SupportCompoundName>
+      </Support>
+      <Document>
+        <DocumentID>82</DocumentID>
+        <DisplayText>Robert McNeel &amp; Associates (n.d.) openNURBS Toolkit</DisplayText>
+        <DocumentType>Authoritative</DocumentType>
+        <AvailabilityDescription>Public</AvailabilityDescription>
+        <AvailabilityNote>
+        </AvailabilityNote>
+        <PublicationDate>
+        </PublicationDate>
+        <TitleText>openNURBS Toolkit</TitleText>
+        <DocumentIPR>
+        </DocumentIPR>
+        <DocumentNote>
+        </DocumentNote>
+        <DocumentIdentifier>
+          <Identifier>www.opennurbs.org</Identifier>
+          <IdentifierType>URL</IdentifierType>
+        </DocumentIdentifier>
+        <Author>
+          <AuthorID>130</AuthorID>
+          <AuthorName>
+          </AuthorName>
+          <OrganisationName>Robert McNeel &amp; Associates</OrganisationName>
+          <AuthorCompoundName>Robert McNeel &amp; Associates</AuthorCompoundName>
+        </Author>
+        <Publisher>
+          <PublisherID>130</PublisherID>
+          <PublisherName>
+          </PublisherName>
+          <OrganisationName>Robert McNeel &amp; Associates</OrganisationName>
+          <PublisherCompoundName>Robert McNeel &amp; Associates</PublisherCompoundName>
+        </Publisher>
+      </Document>
+      <ExternalSignature>
+        <ExternalSignatureID>839</ExternalSignatureID>
+        <Signature>3dm</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>215</SignatureID>
+        <SignatureName>3DM 1</SignatureName>
+        <SignatureNote>Header with version no.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>300</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>Little-endian</Endianness>
+          <ByteSequenceValue>33442047656F6D657472792046696C6520466F726D617420202020202020203101000000</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>828</RelatedFormatID>
+        <RelatedFormatName>3DM</RelatedFormatName>
+        <RelatedFormatVersion>2</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

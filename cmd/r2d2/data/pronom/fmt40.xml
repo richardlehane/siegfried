@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>690</FormatID>
+      <FormatName>Microsoft Word Document</FormatName>
+      <FormatVersion>97-2003</FormatVersion>
+      <FormatAliases>Microsoft Word for Windows Document (97-XP)</FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Word Processor</FormatTypes>
+      <FormatDisclosure>None</FormatDisclosure>
+      <FormatDescription>With the release of Word 97, Microsoft revised the native binary word processing format, which is based on its generic OLE2 Compound Document Format. The format is proprietary and Microsoft does not make details of its structure public. The information here is derived primarily from OpenOffice.org's reverse-engineered documentation of the format and should not therefore be regarded as definitive. A Word document is stored as a ‘WordDocument’ stream within a Compound Document Format file. The format remained unchanged with the releases of Word 2000, 2002 and 2003.</FormatDescription>
+      <BinaryFileFormat>Binary</BinaryFileFormat>
+      <ByteOrders>Little-endian (Intel)</ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>11 Mar 2005</ProvenanceSourceDate>
+      <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
+      <LastUpdatedDate>19 Apr 2012</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/msword</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>com.microsoft.word.doc</Identifier>
+        <IdentifierType>Apple Uniform Type Identifier</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/40</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>93</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <DeveloperCompoundName>Microsoft Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>93</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <SupportCompoundName>Microsoft Corporation</SupportCompoundName>
+      </Support>
+      <Document>
+        <DocumentID>11</DocumentID>
+        <DisplayText>OpenOffice.org, 2004, OpenOffice.org's documentation of the Microsoft Compound Document file format</DisplayText>
+        <DocumentType>Speculative</DocumentType>
+        <AvailabilityDescription>Public</AvailabilityDescription>
+        <AvailabilityNote>
+        </AvailabilityNote>
+        <PublicationDate>15 Sep 2004</PublicationDate>
+        <TitleText>OpenOffice.org's documentation of the Microsoft Compound Document file format</TitleText>
+        <DocumentIPR>
+        </DocumentIPR>
+        <DocumentNote>
+        </DocumentNote>
+        <DocumentIdentifier>
+          <Identifier>sc.openoffice.org/compdocfileformat.pdf</Identifier>
+          <IdentifierType>URL</IdentifierType>
+        </DocumentIdentifier>
+        <Author>
+          <AuthorID>103</AuthorID>
+          <AuthorName>
+          </AuthorName>
+          <OrganisationName>OpenOffice.org</OrganisationName>
+          <AuthorCompoundName>OpenOffice.org</AuthorCompoundName>
+        </Author>
+        <Publisher>
+          <PublisherID>103</PublisherID>
+          <PublisherName>
+          </PublisherName>
+          <OrganisationName>OpenOffice.org</OrganisationName>
+          <PublisherCompoundName>OpenOffice.org</PublisherCompoundName>
+        </Publisher>
+      </Document>
+      <ExternalSignature>
+        <ExternalSignatureID>703</ExternalSignatureID>
+        <Signature>doc</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>182</SignatureID>
+        <SignatureName>Microsoft Word for Windows 97 - 2002</SignatureName>
+        <SignatureNote>Compound document header + WordDocument user stream + version number</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>222</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>D0CF11E0A1B11AE1{20}FEFF</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>223</ByteSequenceID>
+          <PositionType>Variable</PositionType>
+          <Offset>
+          </Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>57006F007200640044006F00630075006D0065006E007400{42}02(00|01)</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>224</ByteSequenceID>
+          <PositionType>Variable</PositionType>
+          <Offset>
+          </Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4D6963726F736F667420576F7264(20382E30|20392E30|2031302E30|2D446F6B756D656E74)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>767</RelatedFormatID>
+        <RelatedFormatName>OLE2 Compound Document Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>1401</RelatedFormatID>
+        <RelatedFormatName>Microsoft Word (Generic)</RelatedFormatName>
+        <RelatedFormatVersion>6.0-2003</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>688</RelatedFormatID>
+        <RelatedFormatName>Microsoft Word Document</RelatedFormatName>
+        <RelatedFormatVersion>6.0/95</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subtype of</RelationshipType>
+        <RelatedFormatID>767</RelatedFormatID>
+        <RelatedFormatName>OLE2 Compound Document Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <FormatProperties>
+        <FormatProperty>
+          <PropertyName>Creation Date</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Number of Pages</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Creating Application</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Title</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Creator</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Subject</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Comments</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Encrypted</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Word Count</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Character Count</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+      </FormatProperties>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

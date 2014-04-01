@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>843</FormatID>
+      <FormatName>CATIA Model</FormatName>
+      <FormatVersion>4</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>
+      </FormatTypes>
+      <FormatDisclosure>Full</FormatDisclosure>
+      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <BinaryFileFormat>Binary</BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>131</ProvenanceSourceID>
+      <ProvenanceName>Digital Library Research Group / MIT Libraries</ProvenanceName>
+      <ProvenanceSourceDate>06 Apr 2009</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>06 May 2009</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/octet-stream</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>x-fmt/436</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>135</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Dassault Systems</OrganisationName>
+        <DeveloperCompoundName>Dassault Systems</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>135</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Dassault Systems</OrganisationName>
+        <SupportCompoundName>Dassault Systems</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>843</ExternalSignatureID>
+        <Signature>mod</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>844</ExternalSignatureID>
+        <Signature>model</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>344</SignatureID>
+        <SignatureName>CATIA Model V4</SignatureName>
+        <SignatureNote>In the file header, the current level of CATIA used to create the model.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>441</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>80</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4341544941202020{2024}434154494120534F4C5554494F4E53205634{6}52454C4541534520</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>133</FormatID>
+      <FormatName>Microsoft Powerpoint Presentation</FormatName>
+      <FormatVersion>4.0</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Presentation</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <BinaryFileFormat>Text</BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/vnd.ms-powerpoint</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>com.microsoft.powerpoint.ppt</Identifier>
+        <IdentifierType>Apple Uniform Type Identifier</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>x-fmt/88</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>127</ExternalSignatureID>
+        <Signature>ppt</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>181</SignatureID>
+        <SignatureName>PowerPoint 4.0</SignatureName>
+        <SignatureNote>Compound document header + PowerPoint Document user stream + version number (pp40)</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>218</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>D0CF11E0A1B11AE1{20}FEFF</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>219</ByteSequenceID>
+          <PositionType>Variable</PositionType>
+          <Offset>
+          </Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>5000500034003000</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>220</ByteSequenceID>
+          <PositionType>Variable</PositionType>
+          <Offset>
+          </Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4D6963726F736F667420506F776572506F696E74</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>135</RelatedFormatID>
+        <RelatedFormatName>Microsoft Powerpoint Presentation</RelatedFormatName>
+        <RelatedFormatVersion>97-2002</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>767</RelatedFormatID>
+        <RelatedFormatName>OLE2 Compound Document Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>134</RelatedFormatID>
+        <RelatedFormatName>Microsoft Powerpoint Presentation</RelatedFormatName>
+        <RelatedFormatVersion>95</RelatedFormatVersion>
+      </RelatedFormat>
+      <FormatProperties>
+        <FormatProperty>
+          <PropertyName>Creation Date</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Number of Pages</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Creating Application</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Title</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Creator</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Subject</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Comments</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Encrypted</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Word Count</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Character Count</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+      </FormatProperties>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

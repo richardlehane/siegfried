@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1057</FormatID>
+      <FormatName>Open Financial Exchange</FormatName>
+      <FormatVersion>2.0.3</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Mark-up)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Open Financial Exchange is a unified specification for the electronic exchange of financial data between financial institutions, businesses and consumers via the Internet. The first verison was released in 1997, and was a result of colloborative work between CheckFree Corp., Intuit Inc., and Microsoft. Version 2.03 is a XML version of the format.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>01 May 2006</ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>03 Dec 2010</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>03 Dec 2010</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/x-ofx</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/312</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>167</DeveloperID>
+        <DeveloperName>CheckFree Corp</DeveloperName>
+        <OrganisationName>CheckFree Corp</OrganisationName>
+        <DeveloperCompoundName>CheckFree Corp / CheckFree Corp</DeveloperCompoundName>
+      </Developers>
+      <Developers>
+        <DeveloperID>51</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Intuit Inc.</OrganisationName>
+        <DeveloperCompoundName>Intuit Inc.</DeveloperCompoundName>
+      </Developers>
+      <Developers>
+        <DeveloperID>93</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <DeveloperCompoundName>Microsoft Corporation</DeveloperCompoundName>
+      </Developers>
+      <ExternalSignature>
+        <ExternalSignatureID>1055</ExternalSignatureID>
+        <Signature>ofx</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1056</ExternalSignatureID>
+        <Signature>qfx</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>404</SignatureID>
+        <SignatureName>Open Financial Exchange 2.03</SignatureName>
+        <SignatureNote>The first entry will always be OFXHEADER with a version number. This entry identifies the contents as an Open Financial Exchange file and provides the version number of the Open Financial Exchange headers that follow (not the version number of the contents). For example:OFXHEADER="200" Open Financial Exchange headers must contain the following tags, seperated by CRLF VERSION="203" SECURITY="" OLDFILEUID="" NEWFILEUID=""</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>510</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>1024</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4F46584845414445523D(22|27)323030(22|27)0D0A56455253494F4E3D(22|27)323033(22|27)0D0A53454355524954593D(22|27)*(22|27)0D0A4F4C4446494C455549443D(22|27)*(22|27)0D0A4E455746494C455549443D</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

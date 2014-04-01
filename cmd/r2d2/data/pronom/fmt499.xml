@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1286</FormatID>
+      <FormatName>VivoActive</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Video</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>VivoActive is an audio/video format created by Vivo Software, acquired by RealNetworks in 1997. It uses H.263 video and G.723 ADPCM audio. VivoActive uses inter-frame coding, but does not insert any key frames, except at the beginning of the clip, which effectively disables the possibility of seeking to specific locations in the stream. The VivoActive technology was integrated to the RealMedia, the .viv format was replaced by .rm (RealMedia).</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>187</ProvenanceSourceID>
+      <ProvenanceName>l'Institut national de l' Audiovisuel / l'Institut national de l' Audiovisuel</ProvenanceName>
+      <ProvenanceSourceDate>26 Feb 2013</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>26 Feb 2013</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/499</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>1312</ExternalSignatureID>
+        <Signature>viv</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>774</SignatureID>
+        <SignatureName>Vivo Active V1</SignatureName>
+        <SignatureNote>BOF offset 3 ..Version:Vivo/1.00</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>975</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>3</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>0D0A56657273696F6E3A5669766F2F312E3030</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>775</SignatureID>
+        <SignatureName>Vivo Active V2</SignatureName>
+        <SignatureNote>BOF offset 3 ..Version:Vivo/2.00</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>976</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>3</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>0D0A56657273696F6E3A5669766F2F322E3030</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1137</FormatID>
+      <FormatName>Log ASCII Standard Format</FormatName>
+      <FormatVersion>1.2</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured), Dataset</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <BinaryFileFormat>Text</BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>01 Sep 1990</ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>25 Nov 2011</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>25 Nov 2011</LastUpdatedDate>
+      <FormatNote>Specifications available at: 
+http://www.cwls.org/las_info.php</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/389</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>176</DeveloperID>
+        <DeveloperName>Canadian Well Logging Society</DeveloperName>
+        <OrganisationName>Canadian Well Logging Society</OrganisationName>
+        <DeveloperCompoundName>Canadian Well Logging Society / Canadian Well Logging Society</DeveloperCompoundName>
+      </Developers>
+      <ExternalSignature>
+        <ExternalSignatureID>1179</ExternalSignatureID>
+        <Signature>las</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>575</SignatureID>
+        <SignatureName>Log ASCII Standard 1.2</SignatureName>
+        <SignatureNote>Header ASCII: ~V followed by version and standard information  (VERS.      1.2     CWLS (LOG ASCII STANDARD|LAS)  V(ERSION|ersion) 1.2) and then mandatory logging data recorded in Well Information Section (~W), Curve Information section (~C), and ASCII Log Data section (~A).</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>711</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>7E56*564552532E*312E32{0-1}3A{0-3}43574C5320(4C4F47204153434949205354414E44415244|4C6F67204153434949205374616E64617264|4C4153){1-3}56(455253494F4E|657273696F6E)20312E32*7E57*7E43*7E41</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>1138</RelatedFormatID>
+        <RelatedFormatName>Log ASCII Standard Format</RelatedFormatName>
+        <RelatedFormatVersion>2.0</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

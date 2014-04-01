@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>555</FormatID>
+      <FormatName>Paint Shop Pro Image</FormatName>
+      <FormatVersion>4.00</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Raster)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The Paint Shop Pro (PSP) file format is an extremely rich graphics file format that is capable of describing a multi-layered image document in minute detail. The format facilitates the retention of a great deal of information, including layer bitmaps, layer masks, layer vector data, layer adjustment data, layer grouping information, multiple sample thumbnails, multiple sample composite images, image dimension, image resolution, creator name, copyright owner, image description, masks, selections, alpha channels, etc. The PSP format supports storing image bitmaps in an uncompressed format or, to reduce the size of the file, in either Run Length Encoding (RLE) or LZ77 compressed format. As each of these is a lossless storage method, the PSP format always maintains the original quality of stored image documents. Finally, the PSP format supports storing image bitmaps at a variety of bit depths, including 24-bit colour (16.7 million colours), 8-bit colour (256 colour), 8-bit greyscale (256 greys), 4-bit colour (16 colours), and 1-bit colour (2 colours).</FormatDescription>
+      <BinaryFileFormat>Text</BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>10 Oct 2003</ProvenanceSourceDate>
+      <ProvenanceDescription>Specifications link: http://www.telegraphics.com.au/svn/pspformat/trunk/psp6spec.pdf</ProvenanceDescription>
+      <LastUpdatedDate>11 Jun 2012</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>x-fmt/377</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>542</ExternalSignatureID>
+        <Signature>psp</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>509</SignatureID>
+        <SignatureName>Paint Shop Pro Image 4</SignatureName>
+        <SignatureNote>Header 32 byte PSP signature (ASCII: Paint Shop Pro Image File); followed by 2 byte little-endian major version</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>630</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>5061696E742053686F702050726F20496D6167652046696C650A1A00000000000400</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>326</RelatedFormatID>
+        <RelatedFormatName>Paint Shop Pro Image</RelatedFormatName>
+        <RelatedFormatVersion>5.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>325</RelatedFormatID>
+        <RelatedFormatName>Paint Shop Pro Image</RelatedFormatName>
+        <RelatedFormatVersion>3.0</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

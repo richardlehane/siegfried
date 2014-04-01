@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>402</FormatID>
+      <FormatName>OS/2 Bitmap</FormatName>
+      <FormatVersion>2.0</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Raster)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <BinaryFileFormat>Text</BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>image/bmp</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>x-fmt/270</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>389</ExternalSignatureID>
+        <Signature>bmp</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>505</SignatureID>
+        <SignatureName>OS/2 Bitmap 2.0</SignatureName>
+        <SignatureNote>2-byte file type identifier ASCII “BM” at beginning of a 14-byte file header; offset 14 little-endian long integer size of bitmap header (16, 64); offset 26 2-byte little-endian number of bit planes (always 1). 
+The 2 byte file type identifier BM indicates that the BMP was created by OS/2 or Windows. Windows 3.x, Windows NT, and OS/2 2.x BMP files only vary in the number of fields in the bitmap header and in the interpretation of the compression field. Bitmap headerSize is 12 for Windows 2.x BMP and OS/2 1.x BMP, 40 for Windows 3.x and Windows NT BMP, 12 to 64 for OS/2 2.x BMP, and 108 for Windows 4.x BMP. Only OS/2 2.x bitmaps have Bitmap header size of 16 and 64. If Bitmap header size is 40, only OS/2 Bitmaps can use 24-bit RLE compression on 24-bit pixel bitmaps and only oS/2 bitmaps can use Huffman 1D compression on 1-bit per pixel (monochrome) bitmaps.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>626</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>424D{12}(10|30|40)000000{8}0100</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>506</SignatureID>
+        <SignatureName>OS/2 Bitmap 2.0 (24-bit RLE compression)</SignatureName>
+        <SignatureNote>2-byte magic number ASCII “BM” at beginning of a 14-byte file header; offset 14 little-endian long integer size of bitmap header (40); offset 26 2-byte little-endian number of bit planes (always 1); offset 28 24-bits per pixel (1800); offset 30 Compression type 24-bit RLE (0400).</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>627</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>424D{12}28000000{8}0100180004000000</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>507</SignatureID>
+        <SignatureName>OS/2 Bitmap 2.0 (Huffman 1D compression)</SignatureName>
+        <SignatureNote>2-byte magic number ASCII “BM” at beginning of a 14-byte file header; offset 14 little-endian long integer size of bitmap header (40); offset 26 2-byte little-endian number of bit planes (always 1); offset 28 1-bit perpixel (0100); offset 30 huffman 1D compression (0300)</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>628</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>424D{12}28000000{8}0100010003000000</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

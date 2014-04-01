@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1116</FormatID>
+      <FormatName>ASPRS Lidar Data Exchange Format</FormatName>
+      <FormatVersion>1.1</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>GIS, Image (Raster)</FormatTypes>
+      <FormatDisclosure>Full</FormatDisclosure>
+      <FormatDescription>The Lidar Data Exchange Format is a binary file format for the interchange of LIDAR (Light Detection and Ranging) optical remote sensing data. 
+Specifications available at http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html</FormatDescription>
+      <BinaryFileFormat>Binary</BinaryFileFormat>
+      <ByteOrders>Little-endian (Intel)</ByteOrders>
+      <ReleaseDate>07 Mar 2005</ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>03 Nov 2011</ProvenanceSourceDate>
+      <ProvenanceDescription>Format information supplied by the Geospatial Multistate Access and Preservation Partnership (GeoMAPP), a grant funded collaboration involving North Carolina, Kentucky, Utah, and Montana state archives, and sponsored by the National Digital Information Infrastructure Preservation Program (NDIIPP) of the Library of Congress.</ProvenanceDescription>
+      <LastUpdatedDate>03 Nov 2011</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/369</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>173</DeveloperID>
+        <DeveloperName>American Soc. For Photogrammetry &amp; Remote Sensing</DeveloperName>
+        <OrganisationName>American Soc. for Photogrammetry &amp; Remote Sensing</OrganisationName>
+        <DeveloperCompoundName>American Soc. For Photogrammetry &amp; Remote Sensing / American Soc. for Photogrammetry &amp; Remote Sensing</DeveloperCompoundName>
+      </Developers>
+      <ExternalSignature>
+        <ExternalSignatureID>1149</ExternalSignatureID>
+        <Signature>las</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1150</ExternalSignatureID>
+        <Signature>laz</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>540</SignatureID>
+        <SignatureName>ASPRS Lidar Data Exchange Format 1.1</SignatureName>
+        <SignatureNote>ASCII header: LASF, followed after 20 bytes by version number 1.1</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>670</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4C415346{20}0101{78}[00:99]</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>1117</RelatedFormatID>
+        <RelatedFormatName>ASPRS Lidar Data Exchange Format</RelatedFormatName>
+        <RelatedFormatVersion>1.2</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>1115</RelatedFormatID>
+        <RelatedFormatName>ASPRS Lidar Data Exchange Format</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

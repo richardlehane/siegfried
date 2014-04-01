@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1110</FormatID>
+      <FormatName>SEG Y Data Exchange Format</FormatName>
+      <FormatVersion>Generic</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>
+      </FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>170</ProvenanceSourceID>
+      <ProvenanceName>Archaeology Data Service / Archaeology Data Service</ProvenanceName>
+      <ProvenanceSourceDate>19 Aug 2011</ProvenanceSourceDate>
+      <ProvenanceDescription>Submitted by Archaeology Data Service</ProvenanceDescription>
+      <LastUpdatedDate>19 Aug 2011</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/363</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>1133</ExternalSignatureID>
+        <Signature>segy</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>532</SignatureID>
+        <SignatureName>SEG Y Data Exchange Format (Generic 1)</SignatureName>
+        <SignatureNote>Signature based on recurring sequences observed in sample of 25 files from various web based sources, and with reference to the SEG Y Rev 1 Data Exchange Format SEG Technical Standards Committee paper, May 2002, available at http://www.seg.org/resources/publications/misc/technical-standards</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>659</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>320</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>40404040404040404040404040404040404040404040</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>660</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>3200</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>0000{15}[!00]{3}[!00]{2}(0100|00[01:08])</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>533</SignatureID>
+        <SignatureName>SEG Y Data Exchange Format (Generic 2)</SignatureName>
+        <SignatureNote>Signature based on recurring sequences observed in sample of 25 files from various web based sources, and with reference to the SEG Y Rev 1 Data Exchange Format SEG Technical Standards Committee paper, May 2002, available at http://www.seg.org/resources/publications/misc/technical-standards</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>661</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>320</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>40404040404040404040404040404040404040404040</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>662</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>3600</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>0000{15}[!00]{3}[!00]{2}(0100|00[01:08])</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

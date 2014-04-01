@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>876</FormatID>
+      <FormatName>SIARD (Software-Independent Archiving of Relational Databases)</FormatName>
+      <FormatVersion>1.0</FormatVersion>
+      <FormatAliases>SIARD (2.0)</FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Database</FormatTypes>
+      <FormatDisclosure>Full</FormatDisclosure>
+      <FormatDescription>Software-Independent Archiving of Relational Databases is a format for storing content of relational databases in files for long-term preservation e.g. in archives. The format was developed by the Swiss Federal Archives. It is an open standard and is supported by the SIARD software of the Swiss Federal Archives. SIARD format is a ZIP file (based on the 64 bit extension of the  ZIP format introduced by PkWare Inc. with version 4.5 of the ZIP format definition in order to avoid size limitations which are unrealistic for databases). The ZIP file contains an XML file describing the database structure (database metadata) as well as a collection of XML files describing the table content (database primary data) as well as - optionally - some text files and some binary files representing database large objects (BLOBs and CLOBs). SIARD format is used for archiving databases adhering to the SQL (ideally SQL:1999 core) standard.</FormatDescription>
+      <BinaryFileFormat>Binary</BinaryFileFormat>
+      <ByteOrders>Little-endian (Intel)</ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>143</ProvenanceSourceID>
+      <ProvenanceName>Swiss Federal Archives / Swiss Federal Archives</ProvenanceName>
+      <ProvenanceSourceDate>03 Feb 2009</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>22 Jul 2010</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/161</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>143</DeveloperID>
+        <DeveloperName>Swiss Federal Archives</DeveloperName>
+        <OrganisationName>Swiss Federal Archives</OrganisationName>
+        <DeveloperCompoundName>Swiss Federal Archives / Swiss Federal Archives</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>143</SupportID>
+        <SupportName>Swiss Federal Archives</SupportName>
+        <OrganisationName>Swiss Federal Archives</OrganisationName>
+        <SupportCompoundName>Swiss Federal Archives / Swiss Federal Archives</SupportCompoundName>
+      </Support>
+      <Document>
+        <DocumentID>87</DocumentID>
+        <DisplayText>SIARD Format Description.</DisplayText>
+        <DocumentType>Authoritative</DocumentType>
+        <AvailabilityDescription>Public</AvailabilityDescription>
+        <AvailabilityNote>http://www.bar.admin.ch/</AvailabilityNote>
+        <PublicationDate>01 Sep 2008</PublicationDate>
+        <TitleText>SIARD Format Description</TitleText>
+        <DocumentIPR>
+        </DocumentIPR>
+        <DocumentNote>
+        </DocumentNote>
+        <Author>
+          <AuthorID>143</AuthorID>
+          <AuthorName>Swiss Federal Archives</AuthorName>
+          <OrganisationName>Swiss Federal Archives</OrganisationName>
+          <AuthorCompoundName>Swiss Federal Archives / Swiss Federal Archives</AuthorCompoundName>
+        </Author>
+        <Publisher>
+          <PublisherID>143</PublisherID>
+          <PublisherName>Swiss Federal Archives</PublisherName>
+          <OrganisationName>Swiss Federal Archives</OrganisationName>
+          <PublisherCompoundName>Swiss Federal Archives / Swiss Federal Archives</PublisherCompoundName>
+        </Publisher>
+      </Document>
+      <ExternalSignature>
+        <ExternalSignatureID>866</ExternalSignatureID>
+        <Signature>siard</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>292</SignatureID>
+        <SignatureName>SIARD</SignatureName>
+        <SignatureNote>Signature for SIARD, combining that of a standard ZIP file and the expected XMLNS string: xmlns=“http://www.bar.admin.ch/xmlns/siard/1.0/metadata.xsd“ - Offset currently set to 1024 bytes but it is expected that this could be improved given further test data.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>389</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>504B0304*504B0304*786D6C6E733D22687474703A2F2F7777772E6261722E61646D696E2E63682F786D6C6E732F73696172642F312E302F6D657461646174612E78736422</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>390</ByteSequenceID>
+          <PositionType>Absolute from EOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>504B01{43-65531}504B0506{18-65531}</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>382</RelatedFormatID>
+        <RelatedFormatName>ZIP Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1114</FormatID>
+      <FormatName>ESRI World File Format</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>A world file is a plain text computer data file used by geographic information systems to georeference raster map images, which may be produced in several of the basic image formats. The file specification was introduced by Esri. World files establish an image-to-world transformation that converts the image coordinates in raster data to real-world coordinates, where each cell in the image has a row and column number.  Some image formats will store their georeferencing information in a separate file, rather than in the header. World Files do not specify a coordinate system, but contain six-line files that provide the georeferencing information. Furthe information can be found at http://webhelp.esri.com/arcgiSDEsktop/9.3/index.cfm?TopicName=World_files_for_raster_datasets and http://webhelp.esri.com/arcims/9.2/general/topics/author_world_files.htm</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>170</ProvenanceSourceID>
+      <ProvenanceName>Archaeology Data Service / Archaeology Data Service</ProvenanceName>
+      <ProvenanceSourceDate>19 Aug 2011</ProvenanceSourceDate>
+      <ProvenanceDescription>Submitted by Archaeology Data Service. Format description information supplied by the Geospatial Multistate Access and Preservation Partnership (GeoMAPP), a grant funded collaboration sponsored by the National Digital Information Infrastructure Preservation Program (NDIIPP) of the Library of Congress, involving archives staff from North Carolina, Kentucky, Montana, and Utah state archives.</ProvenanceDescription>
+      <LastUpdatedDate>19 Aug 2011</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/367</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>1137</ExternalSignatureID>
+        <Signature>tfw</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1138</ExternalSignatureID>
+        <Signature>jgw</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1139</ExternalSignatureID>
+        <Signature>pgw</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1140</ExternalSignatureID>
+        <Signature>bpw</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1141</ExternalSignatureID>
+        <Signature>tifw</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1142</ExternalSignatureID>
+        <Signature>blw</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1143</ExternalSignatureID>
+        <Signature>bilw</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1144</ExternalSignatureID>
+        <Signature>jpgw</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1145</ExternalSignatureID>
+        <Signature>rasterw</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1146</ExternalSignatureID>
+        <Signature>btw</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

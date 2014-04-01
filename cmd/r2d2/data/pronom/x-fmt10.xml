@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>20</FormatID>
+      <FormatName>dBASE Database</FormatName>
+      <FormatVersion>IV</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Database</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <BinaryFileFormat>Text</BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>10 Oct 2003</ProvenanceSourceDate>
+      <ProvenanceDescription>Further information about the dBASE file format can be obtained at http://www.digitalpreservation.gov/formats/fdd/fdd000325.shtml</ProvenanceDescription>
+      <LastUpdatedDate>03 Nov 2011</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/dbase</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>x-fmt/10</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>18</ExternalSignatureID>
+        <Signature>dbf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>544</SignatureID>
+        <SignatureName>dBASE Database IV without memo</SignatureName>
+        <SignatureNote>Header sequence: Version number (04), Date of last update MMDD, First upper or lowercase character of field name, field type (C, D, F, L, N).</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>675</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>04??[01:0C][01:1F]{28}([41:5A]|[61:7A]){10}(43|44|46|4C|4E)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>545</SignatureID>
+        <SignatureName>dBASE Database IV SQL table files, no memo</SignatureName>
+        <SignatureNote>Header sequence: Version number, Date of last update MMDD, First upper or lowercase character of field name, field type (C, D, F, L, N).</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>676</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>43??[01:0C][01:1F]{28}([41:5A]|[61:7A]){10}(43|44|46|4C|4E)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>546</SignatureID>
+        <SignatureName>dBASE Database IV SQL system files, no memo</SignatureName>
+        <SignatureNote>Header sequence: Version number, Date of last update MMDD, First upper or lowercase character of field name, field type (C, D, F, L, N).</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>677</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>63??[01:0C][01:1F]{28}([41:5A]|[61:7A]){10}(43|44|46|4C|4E)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>547</SignatureID>
+        <SignatureName>dBASE Database IV SQL table files, with memo</SignatureName>
+        <SignatureNote>Header sequence: Version number, Date of last update MMDD, First upper or lowercase character of field name, field type (C, D, F, L, M, N).</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>678</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>CB??[01:0C][01:1F]{28}([41:5A]|[61:7A]){10}(43|44|46|4C|4D|4E)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>548</SignatureID>
+        <SignatureName>dBASE Database IV, with memo (7B byte)</SignatureName>
+        <SignatureNote>Header sequence: Version number, Date of last update MMDD, First upper or lowercase character of field name, field type (C, D, F, L, M, N).</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>679</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>7B??[01:0C][01:1F]{28}([41:5A]|[61:7A]){10}(43|44|46|4C|4D|4E)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>549</SignatureID>
+        <SignatureName>dBASE Database IV, with memo (8B byte)</SignatureName>
+        <SignatureNote>Header sequence: Version number, Date of last update MMDD, First upper or lowercase character of field name, field type (C, D, F, L, M, N).</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>680</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>8B??[01:0C][01:1F]{28}([41:5A]|[61:7A]){10}(43|44|46|4C|4D|4E)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>550</SignatureID>
+        <SignatureName>dBASE Database IV, with SQL</SignatureName>
+        <SignatureNote>Header sequence: Version number, Date of last update MMDD, First upper or lowercase character of field name, field type (C, D, F, L, M, N).</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>681</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>8E??[01:0C][01:1F]{28}([41:5A]|[61:7A]){10}(43|44|46|4C|4D|4E)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

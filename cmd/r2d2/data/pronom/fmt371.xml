@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1118</FormatID>
+      <FormatName>Enhanced Compression Wavelet</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Raster)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>ECW (Enhanced Compression Wavelet) is a proprietary wavelet compression image format optimized for geospatial imagery, which can quickly compress and decompress huge images, especially aerial and satellite imagery. It was developed by Earth Resource Mapping, and is now owned by ERDAS, which is owned by Leica Geosystems. The requirement of using the ECWP format for any application is that it requires the user to download and install enabling software in the form of a plug-in or in the case of the Java applet, a Java runtime environment (JRE).</FormatDescription>
+      <BinaryFileFormat>Text</BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>03 Nov 2011</ProvenanceSourceDate>
+      <ProvenanceDescription>Format information supplied by the Geospatial Multistate Access and Preservation Partnership (GeoMAPP), a grant funded collaboration involving North Carolina, Kentucky, Utah, and Montana state archives, and sponsored by the National Digital Information Infrastructure Preservation Program (NDIIPP) of the Library of Congress.</ProvenanceDescription>
+      <LastUpdatedDate>03 Nov 2011</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/371</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>174</DeveloperID>
+        <DeveloperName>Earth Resource Mapping, Inc.</DeveloperName>
+        <OrganisationName>Earth Resource Mapping, Inc.</OrganisationName>
+        <DeveloperCompoundName>Earth Resource Mapping, Inc. / Earth Resource Mapping, Inc.</DeveloperCompoundName>
+      </Developers>
+      <ExternalSignature>
+        <ExternalSignatureID>1153</ExternalSignatureID>
+        <Signature>ecw</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>542</SignatureID>
+        <SignatureName>Enhanced Compression Wavelet</SignatureName>
+        <SignatureNote>Regularly recurring header sequence</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>672</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>65020102{1}040000{2}0000{2}00030001</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

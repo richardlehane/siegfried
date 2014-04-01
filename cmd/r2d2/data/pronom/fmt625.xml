@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1424</FormatID>
+      <FormatName>Apple Disk Copy Image</FormatName>
+      <FormatVersion>4.2</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Disk Copy 4.2 (DC42) is the common name used to refer to disk images of floppy disks created by the 4.2 version of Disk Copy provided by the Mac Operating System.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>204</ProvenanceSourceID>
+      <ProvenanceName>Yale University Library / Yale University Library</ProvenanceName>
+      <ProvenanceSourceDate>14 Feb 2014</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>14 Feb 2014</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/625</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>1467</ExternalSignatureID>
+        <Signature>dmg</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1468</ExternalSignatureID>
+        <Signature>smi</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1469</ExternalSignatureID>
+        <Signature>img</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1487</ExternalSignatureID>
+        <Signature>image</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>958</SignatureID>
+        <SignatureName>Apple Disk Copy Image</SignatureName>
+        <SignatureNote>The byte at position 0x50 defines the disk encoding. Byte 0x51 defines the 'format byte'. Bytes 0x52-53 are the private word/magic number used for identification. Further information is found here: http://68kmla.org/wiki/index.php/DiskCopy_4.2_format_specification</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1181</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>80</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>(00|01|02|03)(02|12|22|24|96)0100</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

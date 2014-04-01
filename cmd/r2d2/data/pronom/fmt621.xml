@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1417</FormatID>
+      <FormatName>GeoGebra</FormatName>
+      <FormatVersion>4</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Vector)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>GeoGebra is a mathematics software package.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>202</ProvenanceSourceID>
+      <ProvenanceName>KULeuven - LIBIS / KULeuven - LIBIS</ProvenanceName>
+      <ProvenanceSourceDate>14 Feb 2014</ProvenanceSourceDate>
+      <ProvenanceDescription>This format is identifiable via a container signature in DROID 6 and later.</ProvenanceDescription>
+      <LastUpdatedDate>14 Feb 2014</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/621</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>203</DeveloperID>
+        <DeveloperName>International GeoGebra Institute</DeveloperName>
+        <OrganisationName>International GeoGebra Institute</OrganisationName>
+        <DeveloperCompoundName>International GeoGebra Institute / International GeoGebra Institute</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>203</SupportID>
+        <SupportName>International GeoGebra Institute</SupportName>
+        <OrganisationName>International GeoGebra Institute</OrganisationName>
+        <SupportCompoundName>International GeoGebra Institute / International GeoGebra Institute</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>1463</ExternalSignatureID>
+        <Signature>ggb</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>1418</RelatedFormatID>
+        <RelatedFormatName>GeoGebra</RelatedFormatName>
+        <RelatedFormatVersion>5</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>1416</RelatedFormatID>
+        <RelatedFormatName>GeoGebra</RelatedFormatName>
+        <RelatedFormatVersion>3</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>
