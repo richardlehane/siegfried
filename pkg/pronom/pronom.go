@@ -29,7 +29,7 @@ var Config = struct {
 	Timeout   time.Duration
 	Transport http.Transport
 }{
-	"DROID_SignatureFile_V73.xml",
+	"DROID_SignatureFile_V74.xml",
 	"container-signature-20140227.xml",
 	"pronom",
 	filepath.Join("..", "..", "cmd", "r2d2", "data"),
@@ -79,17 +79,6 @@ func (p *PronomIdentifier) Save(path string) error {
 	return ioutil.WriteFile(path, buf.Bytes(), os.ModeExclusive)
 }
 
-type pronom struct {
-	droid     *Droid
-	container *Container
-	puids     map[string]int
-	ids       map[int]string
-}
-
-func (p pronom) String() string {
-	return p.droid.String()
-}
-
 func (p *pronom) identifier() (*PronomIdentifier, error) {
 	pi := new(PronomIdentifier)
 	pi.ids = make(pids, 20)
@@ -104,6 +93,17 @@ func (p *pronom) identifier() (*PronomIdentifier, error) {
 	return pi, err
 }
 
+type pronom struct {
+	droid     *Droid
+	container *Container
+	puids     map[string]int // map of puids to File Format indexes
+	ids       map[int]string // map of droid FileFormatIDs to puids
+}
+
+func (p pronom) String() string {
+	return p.droid.String()
+}
+
 func (p pronom) signatures() []Signature {
 	sigs := make([]Signature, 0, 1000)
 	for _, f := range p.droid.FileFormats {
@@ -112,6 +112,7 @@ func (p pronom) signatures() []Signature {
 	return sigs
 }
 
+// returns a slice of puid strings that correspondes to indexes of byte signatures
 func (p pronom) getPuids() []string {
 	var iter int
 	puids := make([]string, len(p.signatures()))
@@ -137,6 +138,66 @@ func (p pronom) extensionMatcher() (namematcher.ExtensionMatcher, []string) {
 	return em, epuids
 }
 
+func containsStr(ss []string, s string) bool {
+	for _, v := range ss {
+		if v == s {
+			return true
+		}
+	}
+	return false
+}
+
+func containsInt(is []int, i int) bool {
+	for _, v := range is {
+		if v == i {
+			return true
+		}
+	}
+	return false
+}
+
+func extras(a []int, b []int) []int {
+	ret := make([]int, 0)
+	for _, v := range a {
+		var exists bool
+		for _, v1 := range b {
+			if v == v1 {
+				exists = true
+				break
+			}
+		}
+		if !exists {
+			ret = append(ret, v)
+		}
+	}
+	return ret
+}
+
+func priorityWalk(k string, ps map[string][]int, puids []string) []int {
+	tried := make([]string, 0)
+	ret := make([]int, 0)
+	var walkFn func(string)
+	walkFn = func(p string) {
+		vals, ok := ps[p]
+		if !ok {
+			return
+		}
+		for _, v := range vals {
+			puid := puids[v]
+			if containsStr(tried, puid) {
+				continue
+			}
+			tried = append(tried, puid)
+			priorityPriorities := ps[puid]
+			ret = append(ret, extras(priorityPriorities, vals)...)
+			walkFn(puid)
+		}
+	}
+	walkFn(k)
+	return ret
+}
+
+// returns a map of puids and the indexes of byte signatures that those puids should give priority to
 func (p pronom) priorities() map[string][]int {
 	var iter int
 	priorities := make(map[string][]int)
@@ -154,6 +215,18 @@ func (p pronom) priorities() map[string][]int {
 			iter++
 		}
 	}
+
+	// now check the priority tree to make sure that it is consistent,
+	// i.e. that for any format with a superior fmt, then anything superior
+	// to that superior fmt is also marked as superior to the base fmt, all the way down the tree
+	puids := p.getPuids()
+	for k, _ := range priorities {
+		extras := priorityWalk(k, priorities, puids)
+		if len(extras) > 0 {
+			priorities[k] = append(priorities[k], extras...)
+		}
+	}
+
 	for k := range priorities {
 		sort.Ints(priorities[k])
 	}
@@ -271,6 +344,7 @@ func getHttp(url string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
+	req.Header.Add("User-Agent", "siegfried/r2d2bot (+https://github.com/richardlehane/siegfried)")
 	timer := time.AfterFunc(Config.Timeout, func() {
 		Config.Transport.CancelRequest(req)
 	})
@@ -288,7 +362,7 @@ func getHttp(url string) ([]byte, error) {
 
 func get(path string, puid string, local bool) ([]byte, error) {
 	if local {
-		return ioutil.ReadFile(filepath.Join(path, strings.Replace(puid, "/", ".", 1)+".xml"))
+		return ioutil.ReadFile(filepath.Join(path, strings.Replace(puid, "/", "", 1)+".xml"))
 	}
 	return getHttp(path + puid + ".xml")
 }
@@ -298,5 +372,5 @@ func save(puid, url, path string) error {
 	if err != nil {
 		return err
 	}
-	return ioutil.WriteFile(filepath.Join(path, strings.Replace(puid, "/", ".", 1)+".xml"), b, 0644)
+	return ioutil.WriteFile(filepath.Join(path, strings.Replace(puid, "/", "", 1)+".xml"), b, 0644)
 }

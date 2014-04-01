@@ -29,7 +29,7 @@ var (
 	reports   string
 
 	defaultSigPath       = "pronom.gob"
-	defaultDroidPath     = "DROID_SignatureFile_V73.xml"
+	defaultDroidPath     = "DROID_SignatureFile_V74.xml"
 	defaultContainerPath = "container-signature-20140227.xml"
 	defaultReportsPath   = "pronom"
 )
