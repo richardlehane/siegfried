@@ -74,12 +74,11 @@ var OffString = map[OffType]string{
 	EOF:  "E",
 }
 
-// Generates Fixed, Window, Wild and WildMin frames.
-// The offsets argument controls what type of frame is created.
-// - for a Wild frame, give no offsets or give a max offset of < 0 and a min of < 1
-// - for a WildMin frame, give one offset, or give a max offset of < 0 and a min of > 0
-// - for a Fixed frame, give two offsets that are both >= 0 and that are equal to each other
-// - for a Window frame, give two offsets that are both >= 0 and that are not equal to each other.
+// Generates Fixed, Window, Wild and WildMin frames. The offsets argument controls what type of frame is created:
+// 	- for a Wild frame, give no offsets or give a max offset of < 0 and a min of < 1
+// 	- for a WildMin frame, give one offset, or give a max offset of < 0 and a min of > 0
+// 	- for a Fixed frame, give two offsets that are both >= 0 and that are equal to each other
+// 	- for a Window frame, give two offsets that are both >= 0 and that are not equal to each other.
 func NewFrame(typ OffType, pat Pattern, offsets ...int) Frame {
 	switch len(offsets) {
 	case 0:
