@@ -1,3 +1,5 @@
+// Package frames describes the Frame interface.
+// A set of standard frames are also defined in this package. These are: Fixed, Window, Wild and WildMin.
 package frames
 
 import (
@@ -14,9 +16,10 @@ func init() {
 	gob.Register(WildMin{})
 }
 
+// Frame encapsulates a pattern with offset information, mediating between the pattern and the bytestream.
 type Frame interface {
-	Match([]byte) (bool, []int)
-	MatchR([]byte) (bool, []int)
+	Match([]byte) (bool, []int)  // Match the byte sequence in a L-R direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
+	MatchR([]byte) (bool, []int) // Match the byte seqeuence in a R-L direction.
 	Equals(Frame) bool
 	String() string
 	Linked(Frame, int, int) bool // Is a frame linked to a preceding frame (by a preceding or succeding relationship) with an offset and range that is less than the supplied ints?
@@ -38,16 +41,21 @@ type Frame interface {
 type OffType int
 
 const (
-	BOF  OffType = iota // beginning of file offset                 // end of file offset
+	BOF  OffType = iota // beginning of file offset
 	PREV                // offset from previous frame
-	SUCC
-	EOF // offset from successive frame
+	SUCC                // offset from successive frame
+	EOF                 // end of file offset
 )
 
+// Orientation returns the offset type of the frame which must be either BOF, PREV, SUCC or EOF
 func (o OffType) Orientation() OffType {
 	return o
 }
 
+// Switchoff returns a new offset type according to a given set of rules. These are:
+// PREV -> SUCC
+// SUCC and EOF -> PREV
+// This is helpful when changing the orientation of a frame (for example to allow right-left searching)
 func (o OffType) SwitchOff() OffType {
 	switch o {
 	case PREV:
@@ -99,10 +107,12 @@ func NewFrame(typ OffType, pat Pattern, offsets ...int) Frame {
 	return Frame(Window{typ, offsets[0], offsets[1], pat})
 }
 
+// SwitchFrame returns a new frame with a different orientation (for example to allow right-left searching)
 func SwitchFrame(f Frame, p Pattern) Frame {
 	return NewFrame(f.SwitchOff(), p, f.Min(), f.Max())
 }
 
+// NonZero checks whether, when converted to simple byte sequences, this frame's pattern is all 0 bytes.
 func NonZero(f Frame) bool {
 	for _, seq := range f.Sequences() {
 		allzeros := true
@@ -118,12 +128,13 @@ func NonZero(f Frame) bool {
 	return true
 }
 
+// Total length is sum of the maximum length of the enclosed pattern and the maximum offset.
 func TotalLength(f Frame) int {
 	_, l := f.Length()
 	return l + f.Max()
 }
 
-// e.g. 0
+// Fixed frames are at a fixed offset e.g. 0 or 10 from the BOF, EOF or a preceding or succeeding frame.
 type Fixed struct {
 	OffType
 	Off int
@@ -193,7 +204,7 @@ func (f Fixed) Pat() Pattern {
 	return f.Pattern
 }
 
-// e.g. 1-1500
+// Window frames are at a range of offsets e.g. e.g. 1-1500 from the BOF, EOF or a preceding or succeeding frame.
 type Window struct {
 	OffType
 	MinOff int
@@ -296,7 +307,7 @@ func (w Window) Pat() Pattern {
 	return w.Pattern
 }
 
-// *
+// Wild frames can be at any offset (i.e. 0 to the end of the file) relative to the BOF, EOF or a preceding or succeeding frame.
 type Wild struct {
 	OffType
 	Pattern
@@ -382,7 +393,7 @@ func (w Wild) Pat() Pattern {
 	return w.Pattern
 }
 
-// 200-*
+// WildMin frames have a minimum but no maximum offset (e.g. 200-*) relative to the BOF, EOF or a preceding or succeeding frame.
 type WildMin struct {
 	OffType
 	MinOff int

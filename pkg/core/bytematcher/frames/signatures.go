@@ -1,6 +1,6 @@
 package frames
 
-// A signature is a slice of frames
+// Signatures are just slices of frames
 type Signature []Frame
 
 func (s Signature) String() string {
