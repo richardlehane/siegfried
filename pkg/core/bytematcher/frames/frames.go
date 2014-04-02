@@ -53,8 +53,8 @@ func (o OffType) Orientation() OffType {
 }
 
 // Switchoff returns a new offset type according to a given set of rules. These are:
-// PREV -> SUCC
-// SUCC and EOF -> PREV
+// 	- PREV -> SUCC
+// 	- SUCC and EOF -> PREV
 // This is helpful when changing the orientation of a frame (for example to allow right-left searching)
 func (o OffType) SwitchOff() OffType {
 	switch o {
