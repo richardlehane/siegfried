@@ -1,3 +1,5 @@
+// Package patterns describes the Patter interface.
+// Two standard frames are also defined in this package, Sequence and Choice.
 package patterns
 
 import (
@@ -25,7 +27,7 @@ type Pattern interface {
 	String() string
 }
 
-// A sequence is a matching sequence of bytes.
+// Sequence is a matching sequence of bytes.
 type Sequence []byte
 
 func (s Sequence) Test(b []byte) (bool, int) {
@@ -88,7 +90,7 @@ func (s Sequence) Reverse() Sequence {
 	return p
 }
 
-// A choice is a slice of patterns, any of which can test true for the pattern to succeed. Returns the longest matching pattern
+// Choice is a slice of patterns, any of which can test true for the pattern to succeed. Returns the longest matching pattern
 type Choice []Pattern
 
 func (c Choice) test(b []byte, f func(Pattern, []byte) (bool, int)) (bool, int) {

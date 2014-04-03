@@ -1,14 +1,12 @@
 package patterns
 
-// THIS FILE IS NOT YET IMPLEMENTED
-// IT IS AN OPTIMISATION THAT CAN BE DEFERRED
-
 import (
 	"bytes"
 	"strconv"
 )
 
-// A BMH Sequence is an optimised version of the regular Sequence pattern
+// BMH Sequence is an optimised version of the regular Sequence pattern.
+// It is used behind the scenes in the Bytematcher package to speed up matching and should not be used directly in other packages (use the plain Sequence instead).
 type BMHSequence struct {
 	seq Sequence
 	bmh [256]int
