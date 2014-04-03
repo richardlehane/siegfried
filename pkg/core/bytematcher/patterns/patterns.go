@@ -1,5 +1,5 @@
-// Package patterns describes the Patter interface.
-// Two standard frames are also defined in this package, Sequence and Choice.
+// Package patterns describes the Pattern interface.
+// Two standard patterns are also defined in this package, Sequence and Choice.
 package patterns
 
 import (
