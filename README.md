@@ -65,7 +65,9 @@ For more information about Siegfried's signature file format, see [this wiki pag
 
 ### Version 0.3 (April 2014)
 
-- upgrade Aho-Corasick matching engine to a generalized AC algorithm along the lines of [Lee's proposal for Clam AV](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?reload=true&arnumber=4317914)
+- upgrade Aho-Corasick matching engine
+- additional optimisations
+- prep work for container matching
 
 ### Version 0.4 (May 2014)
 
