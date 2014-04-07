@@ -1,3 +1,4 @@
+// Package Bytematcher builds a matching engine from a set of signatures and performs concurrent matching against an input reader.
 package bytematcher
 
 import (
