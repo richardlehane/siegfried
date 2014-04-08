@@ -1,4 +1,4 @@
-// Package Bytematcher builds a matching engine from a set of signatures and performs concurrent matching against an input reader.
+// Package Bytematcher builds a matching engine from a set of signatures and performs concurrent matching against an input siegfried.Buffer.
 package bytematcher
 
 import (
@@ -11,6 +11,7 @@ import (
 	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 )
 
+// Bytematcher structure. Clients shouldn't need to get or set these fields directly, they are only exported so that this structure can be serialised and deserialised by encoding/gob.
 type ByteMatcher struct {
 	Sigs [][]keyFrame
 
@@ -30,9 +31,12 @@ type ByteMatcher struct {
 
 // Create a new Bytematcher from a slice of signatures.
 // Can give optional distance, range, choice, variable sequence length values to override the defaults of 8192, 2048, 64.
-// The distance and range values dictate how signatures are segmented during processing.
-// The choices value controls how signature segments are converted into simple byte sequences during processing.
-// The varlen value controls what is the minimum length sequence acceptable for the variable Aho Corasick tree. The longer this length, the fewer false matches you will get during searching.
+//   - the distance and range values dictate how signatures are segmented during processing
+//   - the choices value controls how signature segments are converted into simple byte sequences during processing
+//   - the varlen value controls what is the minimum length sequence acceptable for the variable Aho Corasick tree. The longer this length, the fewer false matches you will get during searching.
+//
+// Example:
+//   bm, err := Signatures([]Signature{Signature{NewFrame(BOF, Sequence{'p','d','f'}, 0, 0)}})
 func Signatures(sigs []Signature, opts ...int) (*ByteMatcher, error) {
 	b := newByteMatcher()
 	b.Sigs = make([][]keyFrame, len(sigs))
@@ -71,19 +75,31 @@ func Signatures(sigs []Signature, opts ...int) (*ByteMatcher, error) {
 	return b, nil
 }
 
-// After loading a bytematcher, create the aho corasick search trees
+// Start initialises the aho corasick search trees after a Bytematcher has been loaded.
 func (b *ByteMatcher) Start() {
 	b.bAho = ac.NewFixed(b.BofSeqs.Set)
 	b.eAho = ac.NewFixed(b.EofSeqs.Set)
 	b.vAho = ac.New(b.VarSeqs.Set)
 }
 
+// Identify matches a Bytematcher's signatures against the input siegfried.Buffer.
+// Results are passed on the returned int channel. These ints are the indexes of the matching signatures.
+// A limit channel is also returned. This channel can be used to instruct the Bytematcher to ignore all matches except for the supplied slice of signature indexes.
+//
+// Example:
+//   ret, limit := bm.Identify(buf)
+//   for v := range ret {
+//     if v == 0 {
+//       limit <- []int{2,3}
+//     }
+//   }
 func (b *ByteMatcher) Identify(sb *siegreader.Buffer) (chan int, chan []int) {
 	ret, limit := make(chan int), make(chan []int, 50)
 	go b.identify(sb, ret, limit)
 	return ret, limit
 }
 
+// Stats returns information about the sending Bytematcher including the number of BOF, VAR and EOF sequences, the number of BOF and EOF frames, and the total number of tests.
 func (b *ByteMatcher) Stats() string {
 	str := fmt.Sprintf("BOF seqs: %v\n", len(b.BofSeqs.Set))
 	str += fmt.Sprintf("EOF seqs: %v\n", len(b.EofSeqs.Set))
