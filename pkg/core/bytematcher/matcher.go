@@ -35,7 +35,7 @@ type partial struct {
 	rdistances []int
 }
 
-func NewMatcher(b *ByteMatcher, buf *siegreader.Buffer, r chan int, l chan []int) *matcher {
+func newMatcher(b *ByteMatcher, buf *siegreader.Buffer, r chan int, l chan []int) *matcher {
 	return &matcher{b, buf, r, make(map[[2]int][][2]int), nil, &sync.RWMutex{}, l, make(chan strike), make(chan struct{})}
 }
 

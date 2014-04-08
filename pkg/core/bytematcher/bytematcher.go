@@ -1,4 +1,4 @@
-// Package Bytematcher builds a matching engine from a set of signatures and performs concurrent matching against an input siegfried.Buffer.
+// Package Bytematcher builds a matching engine from a set of signatures and performs concurrent matching against an input siegreader.Buffer.
 package bytematcher
 
 import (
@@ -82,7 +82,7 @@ func (b *ByteMatcher) Start() {
 	b.vAho = ac.New(b.VarSeqs.Set)
 }
 
-// Identify matches a Bytematcher's signatures against the input siegfried.Buffer.
+// Identify matches a Bytematcher's signatures against the input siegreader.Buffer.
 // Results are passed on the returned int channel. These ints are the indexes of the matching signatures.
 // A limit channel is also returned. This channel can be used to instruct the Bytematcher to ignore all matches except for the supplied slice of signature indexes.
 //
@@ -237,7 +237,7 @@ func (m *matcher) sendStrike(s strike) bool {
 // Identify function
 
 func (b *ByteMatcher) identify(buf *siegreader.Buffer, r chan int, l chan []int) {
-	m := NewMatcher(b, buf, r, l)
+	m := newMatcher(b, buf, r, l)
 	go m.match()
 	// Test any BOF Frames
 	for i, f := range b.BofFrames.Set {
