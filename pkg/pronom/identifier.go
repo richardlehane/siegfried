@@ -32,6 +32,10 @@ func (pid PronomIdentification) Confidence() float64 {
 	return pid.confidence
 }
 
+func (pid PronomIdentification) Basis() string {
+	return "because I said so" //obviously this needs to be changed!
+}
+
 func (pi *PronomIdentifier) Identify(b *siegreader.Buffer, n string, c chan core.Identification, wg *sync.WaitGroup) {
 	pi.ids = pi.ids[:0]
 	if len(n) > 0 {
