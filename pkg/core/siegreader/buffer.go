@@ -1,8 +1,9 @@
-// Package siegreader implements multiple, concurrent-safe independent Readers (and ReverseReaders) from a single source buffer.
+// Package siegreader implements multiple independent Readers (and ReverseReaders) from a single Buffer.
 //
 // Example:
 //   buf := siegreader.New()
-//	 if err := buf.SetSource(ioReader); err != nil {
+//	 err := buf.SetSource(ioReader)
+//   if err != nil {
 //     log.Fatal(err)
 //   }
 //   rdr := buf.Reader()
