@@ -1,4 +1,5 @@
 // Package core defines the Siegfried struct and Identifier/Identification interfaces.
+// The packages within core (bytematcher and namematcher) provide a toolkit for building identifiers based on different sets of signatures (such as PRONOM).
 package core
 
 import (

@@ -1,3 +1,19 @@
+// Package siegreader implements multiple, concurrent-safe independent Readers (and ReverseReaders) from a single source buffer.
+//
+// Example:
+//   buf := siegreader.New()
+//	 if err := buf.SetSource(ioReader); err != nil {
+//     log.Fatal(err)
+//   }
+//   rdr := buf.Reader()
+//	 second_rdr := buf.Reader()
+//   reverse_rdr, err := buf.ReverseReader()
+//   if err != nil {
+//	   log.Fatal(err)
+//   }
+//   i, _ := rdr.Read(slc)
+//   i2, _ := second_rdr.Read(slc2)
+//   i3, _ := reverse_rdr.Read(slc3)
 package siegreader
 
 import (
@@ -18,7 +34,8 @@ type protected struct {
 	eofRead bool
 }
 
-// Siegreader Buffer supports multiple concurrent Readers, including Readers reading from the end of the stream (ReverseReaders)
+// Buffer wraps an io.Reader, buffering its contents in byte slices that will keep growing until IO.EOF.
+// It supports multiple concurrent Readers, including Readers reading from the end of the stream (ReverseReaders)
 type Buffer struct {
 	src       io.Reader
 	buf, eof  []byte
@@ -29,6 +46,7 @@ type Buffer struct {
 	w         protected // index of latest write
 }
 
+// New instatatiates a new Buffer with a buf size of 4096*3, and an end-of-file buf size of 4096
 func New() *Buffer {
 	b := new(Buffer)
 	b.buf, b.eof = make([]byte, initialRead), make([]byte, readSz)
@@ -45,8 +63,9 @@ func (b *Buffer) reset() {
 	b.w.Unlock()
 }
 
-// Set the buffer's source.
+// SetSource sets the buffer's source.
 // Can be any io.Reader. If it is an os.File, will load EOF buffer early. Otherwise waits for a complete read.
+// The source can be reset to recycle an existing Buffer.
 func (b *Buffer) SetSource(r io.Reader) error {
 	b.reset()
 	b.src = r
@@ -70,7 +89,7 @@ func (b *Buffer) SetSource(r io.Reader) error {
 	return err
 }
 
-// return the buffer's size, available immediately for files. Must wait for full read for streams.
+// Size returns the buffer's size, which is available immediately for files. Must wait for full read for streams.
 func (b *Buffer) Size() int {
 	if b.sz > 0 {
 		return int(b.sz)
@@ -154,7 +173,7 @@ func (b *Buffer) fillEof() error {
 	return nil
 }
 
-// Return a slice from the buffer that begins at offset s of length l
+// Return a slice from the buffer that begins at offset s and has length l
 func (b *Buffer) Slice(s, l int) ([]byte, error) {
 	b.w.Lock()
 	defer b.w.Unlock()
@@ -183,6 +202,8 @@ func (b *Buffer) Slice(s, l int) ([]byte, error) {
 	return nil, err
 }
 
+// Return a slice from the end of the buffer that begins at offset s and has length l.
+// This will block until the slice is available (which may be until the full stream is read).
 func (b *Buffer) EofSlice(s, l int) ([]byte, error) {
 	// block until the EOF is available
 	<-b.eofc
@@ -202,6 +223,8 @@ func (b *Buffer) EofSlice(s, l int) ([]byte, error) {
 	return buf[len(buf)-(s+l) : len(buf)-s], nil
 }
 
+// MustSlice calls Slice or EofSlice (which one depends on the rev argument: true for EofSlice) and suppresses the error.
+// If a non io.EOF error is encountered, it will be logged as a warning.
 func (b *Buffer) MustSlice(s, l int, rev bool) []byte {
 	var slc []byte
 	var err error

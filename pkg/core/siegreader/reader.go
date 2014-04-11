@@ -5,8 +5,8 @@ import (
 	"io"
 )
 
-// Reader
-
+// Reader implements the io.Reader, io.Seeker, io.ByteReader and io.ReaderAt interfaces
+// The special thing about a siegreader.Reader is that you can have a bunch of them all reading independently from the one buffer.
 type Reader struct {
 	i, j    int
 	scratch []byte
@@ -110,8 +110,8 @@ func (r *Reader) Seek(offset int64, whence int) (int64, error) {
 	return 0, err
 }
 
-// Reverse Reader
-
+// ReverseReader implements the io.Reader and io.ByteReader interfaces, but for each it does so from the end of the io source working backwards.
+// Like Readers, you can have multiple ReverseReaders all reading independently from the same buffer.
 type ReverseReader struct {
 	i, j    int
 	scratch []byte
