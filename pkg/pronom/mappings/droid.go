@@ -25,6 +25,7 @@ func (d Droid) String() string {
 }
 
 type FileFormat struct {
+	XMLName    xml.Name `xml:"FileFormat"`
 	ID         int      `xml:",attr"`
 	Puid       string   `xml:"PUID,attr"`
 	Name       string   `xml:",attr"`
