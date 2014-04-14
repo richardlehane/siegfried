@@ -1,5 +1,5 @@
 // Package core defines the Siegfried struct and Identifier/Identification interfaces.
-// The packages within core (bytematcher and namematcher) provide a toolkit for building identifiers based on different sets of signatures (such as PRONOM).
+// The packages within core (bytematcher and namematcher) provide a toolkit for building identifiers based on different signature formats (such as PRONOM).
 package core
 
 import (
@@ -15,12 +15,14 @@ type Siegfried struct {
 	name        string
 }
 
+// Identifiers can be defined for different signature formats. E.g. there is a PRONOM identifier that implements the TNA's format.
 type Identifier interface {
 	Identify(*siegreader.Buffer, string, chan Identification, *sync.WaitGroup)
 }
 
+// Identifications are sent by identifiers when a format matches
 type Identification interface {
-	String() string
+	String() string      // text that should be displayed to indicate the format match
 	Confidence() float64 // how certain is this identification?
 	Basis() string       // on what grounds was this identification made?
 }
