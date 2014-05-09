@@ -63,23 +63,19 @@ For more information about Siegfried's signature file format, see [this wiki pag
 
 ## Roadmap
 
-### Version 0.3 (May 2014)
+### Next up: version 0.3 (June 2014)
 
-- upgrade Aho-Corasick matching engine
-- additional optimisations
-- prep work for container matching
+- upgraded Aho-Corasick matching engine
 
-### Version 0.4 (June 2014)
+### Thereafter...
 
 - container matching (see [https://www.github.com/richardlehane/mscfb](https://www.github.com/richardlehane/mscfb))
 
-### Version 0.5 (July 2014)
-
 - basis mode (provide grounds for a format match)
 
-### Version 0.6 (August 2014)
-
 - server mode
+
+- html gui 
 
 ## Rights
 
