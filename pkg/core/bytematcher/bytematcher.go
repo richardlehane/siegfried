@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/richardlehane/ac"
+	"github.com/richardlehane/match/ac"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 
 	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
