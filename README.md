@@ -63,7 +63,7 @@ For more information about Siegfried's signature file format, see [this wiki pag
 
 ## Roadmap
 
-### Next up: version 0.3 (June 2014)
+### Next up: version 0.3 (July 2014)
 
 - upgraded Aho-Corasick matching engine
 
