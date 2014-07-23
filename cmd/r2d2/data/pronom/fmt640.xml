@@ -13,7 +13,7 @@
       <FormatTypes>Video</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>An elementary stream as defined by MPEG communication protocol is usually the output of an audio or video encoder. The elementary stream contains only one kind of data, e.g. audio, video or closed caption. The format of the elementary stream depends upon the codec or data carried in the stream, but will often carry a common header when packetized into a packetized elementary stream.</FormatDescription>
+      <FormatDescription>MPEG-2 is a lossy compression standard (an improvement and expansion of the MPEG-1 standard) designed for the generic coding of video and audio and intended to cover a wide scope of application, including: video production, broadcast and editing. Streams are at potentially higher bitrates than MPEG-1 but more efficient compression making it suited to High Definition video. MPEG-2 Video supports both 'progressive' and 'interlaced' frame video. An MPG2 ‘Elementary’ stream (ES) file (*.m2v) contains either a single video or audio stream. ES files are generally intended for video editing or other intermediate use, where separate audio content can be ultimately blended ('interleaved' or ‘muxed’) with a video stream to produce an output file containing both audio and video for synchronised playback.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -42,11 +42,20 @@
         <Signature>mpg</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1514</ExternalSignatureID>
+        <Signature>mpeg</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1515</ExternalSignatureID>
+        <Signature>m2v</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
       <InternalSignature>
         <SignatureID>969</SignatureID>
         <SignatureName>MPEG-2 Elementary Stream</SignatureName>
-        <SignatureNote>
-        </SignatureNote>
+        <SignatureNote>BOF: ...³</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1191</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -58,13 +67,13 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>000001B3{64-128}000001B8</ByteSequenceValue>
+          <ByteSequenceValue>000001B3{8-256}000001B5{6-256}000001B8</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
         <RelationshipType>Can be contained by</RelationshipType>
         <RelatedFormatID>660</RelatedFormatID>
-        <RelatedFormatName>MPEG-2 Video Format</RelatedFormatName>
+        <RelatedFormatName>MPEG-2 Program Stream</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

@@ -13,7 +13,7 @@
       <FormatTypes>Image (Vector), Text (Mark-up)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>Vector Markup Language (VML) is an XML-based file format for two-dimensional vector graphics.</FormatDescription>
+      <FormatDescription>Vector Markup Language (VML) is an XML-based file format for two-dimensional vector graphics.VML is used by most Microsoft Office applications, such as Microsoft Word and Microsoft Visio, within HTML files created using the 'Save As HTML' option.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -26,7 +26,7 @@
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>28 Aug 2013</ProvenanceSourceDate>
       <ProvenanceDescription>http://msdn.microsoft.com/en-us/library/ee384217(v=vs.85).aspx
-http://www.w3.org/TR/NOTE-VML#h2:specification</ProvenanceDescription>
+http://www.w3.org/TR/NOTE-VML#h2:specification                http://en.wikipedia.org/wiki/Vector_Markup_Language</ProvenanceDescription>
       <LastUpdatedDate>28 Aug 2013</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
@@ -57,6 +57,16 @@ http://www.w3.org/TR/NOTE-VML#h2:specification</ProvenanceDescription>
         <Signature>vml</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1522</ExternalSignatureID>
+        <Signature>html</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1523</ExternalSignatureID>
+        <Signature>htm</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
       <InternalSignature>
         <SignatureID>925</SignatureID>
         <SignatureName>Vector Markup Language</SignatureName>
@@ -80,6 +90,13 @@ http://www.w3.org/TR/NOTE-VML#h2:specification</ProvenanceDescription>
         <RelatedFormatID>638</RelatedFormatID>
         <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
         <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>645</RelatedFormatID>
+        <RelatedFormatName>Hypertext Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>

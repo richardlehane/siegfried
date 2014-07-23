@@ -76,7 +76,7 @@
           <ByteSequenceID>175</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>16000</MaxOffset>
+          <MaxOffset>65536</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
@@ -161,6 +161,12 @@ EOF: EOI marker (FF|D9) with a large offset due to the amount of photoshop metad
         <RelatedFormatID>751</RelatedFormatID>
         <RelatedFormatName>Exchangeable Image File Format (Compressed)</RelatedFormatName>
         <RelatedFormatVersion>2.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1444</RelatedFormatID>
+        <RelatedFormatName>Exchangeable Image File Format (Compressed)</RelatedFormatName>
+        <RelatedFormatVersion>2.2.1</RelatedFormatVersion>
       </RelatedFormat>
       <FormatProperties>
         <FormatProperty>

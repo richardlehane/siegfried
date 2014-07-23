@@ -59,7 +59,7 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>909</SignatureID>
-        <SignatureName>Domino XML Document Export</SignatureName>
+        <SignatureName>Domino XML Document Export V1</SignatureName>
         <SignatureNote>&lt;document form=('|"){0-32}&gt;('|")&lt;noteinfo noteid=('|"){0-32}('|")unid=('|"){32}('|")</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1133</ByteSequenceID>
@@ -75,6 +75,12 @@
           <ByteSequenceValue>3C646F63756D656E7420666F726D3D(22|27){0-32}(22|27)3E{0-32}3C6E6F7465696E666F206E6F746569643D(22|27){0-32}(22|27){0-32}756E69643D(22|27){32}(22|27)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>638</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

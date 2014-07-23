@@ -78,6 +78,24 @@
           <ByteSequenceValue>3C3F786D6C2076657273696F6E3D(22|27)312E30(22|27){1-64}3C21444F4354595045206461746162617365{1-64}3C646174616261736520786D6C6E733D22687474703A2F2F7777772E6C6F7475732E636F6D2F64786C22</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <InternalSignature>
+        <SignatureID>978</SignatureID>
+        <SignatureName>Domino XML Document Export 2</SignatureName>
+        <SignatureNote>BOF: &lt;?xml version=("|')1.0("|'){1-64}&lt;document xmlns=("|')http://www.lotus.com/dxl("|')</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1206</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C3F786D6C2076657273696F6E3D(22|27)312E30(22|27)20{1-64}3C646F63756D656E7420786D6C6E733D(22|27)687474703A2F2F7777772E6C6F7475732E636F6D2F64786C(22|27)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>638</RelatedFormatID>

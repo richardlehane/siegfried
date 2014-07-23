@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>1373</FormatID>
-      <FormatName>MPEG 2 Transport Stream</FormatName>
+      <FormatName>MPEG-2 Transport Stream</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
@@ -13,7 +13,7 @@
       <FormatTypes>Video</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>MPEG transport stream is a format for transmission and storage of audio, video, and Program and System Information Protocol (PSIP) data.</FormatDescription>
+      <FormatDescription>MPEG-2 is a lossy compression standard (an improvement and expansion of the MPEG-1 standard) designed for the generic coding of video and audio and intended to cover a wide scope of application, including: video production, broadcast and editing. Streams are at potentially higher bitrates than MPEG-1 but more efficient compression making it suited to High Definition video. MPEG-2 Video supports both 'progressive' and 'interlaced' frame video. An MPEG-2 'Transport' stream file (TS) file (*.ts, *.m2ts) is designed for low-latency, real-time transmission and is used in broadcasting. It can contain multiple programmes, not necessarily intended for synchronised playback. TS incorporates features that can allow flexible access to and playback of stream content.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -27,7 +27,7 @@
       <ProvenanceSourceDate>28 Aug 2013</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>28 Aug 2013</LastUpdatedDate>
+      <LastUpdatedDate>07 Jul 2014</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -43,9 +43,19 @@
         <Signature>m2t</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1520</ExternalSignatureID>
+        <Signature>ts</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1521</ExternalSignatureID>
+        <Signature>m2ts</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
       <InternalSignature>
         <SignatureID>927</SignatureID>
-        <SignatureName>MPEG 2 Transport Stream</SignatureName>
+        <SignatureName>MPEG-2 Transport Stream</SignatureName>
         <SignatureNote>Packets of 188 bytes each, each packet beginning with 0x47. This signature may be strengthened with a better understanding of the make-up of these packets.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1147</ByteSequenceID>

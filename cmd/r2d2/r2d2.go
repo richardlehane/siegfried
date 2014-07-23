@@ -20,7 +20,7 @@ var (
 	timeout  = flag.Duration("timeout", 120*time.Second, "set duration before timing-out harvesting requests e.g. 120s")
 )
 
-var pronom_url = "http://www.nationalarchives.gov.uk/pronom/"
+var pronom_url = "http://apps.nationalarchives.gov.uk/pronom/"
 
 var (
 	sigfile   string
@@ -29,8 +29,8 @@ var (
 	reports   string
 
 	defaultSigPath       = "pronom.gob"
-	defaultDroidPath     = "DROID_SignatureFile_V74.xml"
-	defaultContainerPath = "container-signature-20140227.xml"
+	defaultDroidPath     = "DROID_SignatureFile_V77.xml"
+	defaultContainerPath = "container-signature-20140717.xml"
 	defaultReportsPath   = "pronom"
 )
 

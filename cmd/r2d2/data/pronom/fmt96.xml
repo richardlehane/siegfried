@@ -55,7 +55,7 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>41</SignatureID>
-        <SignatureName>HTML pre-2.0</SignatureName>
+        <SignatureName>HTML pre-2.0 1</SignatureName>
         <SignatureNote>Signature for pre-2.0 HTML, or non-valid HTML (no DOCTYPE declaration). EOF character sequence: &lt;/(HTML|html|BODY|body)&gt;{0-1024}</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>270</ByteSequenceID>
@@ -82,6 +82,37 @@
           <Endianness>
           </Endianness>
           <ByteSequenceValue>3C2F(48544D4C|68746D6C|424F4459|626F6479)3E</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>990</SignatureID>
+        <SignatureName>HTML pre 2.0 2</SignatureName>
+        <SignatureNote>BOF (Max offset 2084: &lt;.(H.T.M.L.|h.t.m.l.)                                                                                             EOF: {0-2048} &lt;./.(H.T.M.L.|h.t.m.l|B.O.D.Y.|b.o.d.y.)&gt;.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1222</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>2048</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C00(480054004D004C00|680074006D006C00)</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>1223</ByteSequenceID>
+          <PositionType>Absolute from EOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>2048</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C002F00(480054004D004C00|680074006D006C00|42004F0044005900|62006F0064007900)3E00</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
@@ -167,8 +198,29 @@
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1269</RelatedFormatID>
+        <RelatedFormatName>Apple iBook format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1270</RelatedFormatID>
+        <RelatedFormatName>ePub format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1287</RelatedFormatID>
         <RelatedFormatName>Internet Explorer for Mac cache file</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1371</RelatedFormatID>
+        <RelatedFormatName>Vector Markup Language</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

@@ -79,23 +79,9 @@
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
-        <RelationshipType>Has lower priority than</RelationshipType>
-        <RelatedFormatID>659</RelatedFormatID>
-        <RelatedFormatName>MPEG-1 Video Format</RelatedFormatName>
-        <RelatedFormatVersion>
-        </RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Has lower priority than</RelationshipType>
-        <RelatedFormatID>660</RelatedFormatID>
-        <RelatedFormatName>MPEG-2 Video Format</RelatedFormatName>
-        <RelatedFormatVersion>
-        </RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
         <RelationshipType>Is subtype of</RelationshipType>
         <RelatedFormatID>660</RelatedFormatID>
-        <RelatedFormatName>MPEG-2 Video Format</RelatedFormatName>
+        <RelatedFormatName>MPEG-2 Program Stream</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

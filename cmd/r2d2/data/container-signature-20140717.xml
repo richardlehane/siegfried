@@ -645,7 +645,7 @@
 			</File>
 		</Files>
 	</ContainerSignature>
-        <ContainerSignature Id="4000" ContainerType="OLE2">
+    <ContainerSignature Id="4000" ContainerType="OLE2">
             <Description>Microsoft Project 4.0 OLE2</Description>
             <Files>
                 <File>
@@ -1674,6 +1674,35 @@
                 </File>
             </Files>
         </ContainerSignature>
+
+        <ContainerSignature Id="20000" ContainerType="ZIP">
+            <Description>Open XML Paper Specification</Description>
+            <Files>
+                <File>
+                    <Path>FixedDocumentSequence.fdseq</Path>
+				</File>
+			</Files>
+		</ContainerSignature>
+		
+		<ContainerSignature Id="21000" ContainerType="ZIP">
+		<Description>Apple iWorks Keynote 09</Description> 
+		<Files>
+			<File>
+				<Path>index.apxl</Path> 
+				<BinarySignatures>
+					<InternalSignatureCollection>
+						<InternalSignature ID="21000">
+							<ByteSequence>
+								<SubSequence Position="1" SubSeqMinOffset="0" SubSeqMaxOffset="200">
+									<Sequence>'xmlns:key="http://developer.apple.com/namespaces/keynote2" key:version="92008102400"'</Sequence> 
+								</SubSequence>
+							</ByteSequence>
+						</InternalSignature>
+					</InternalSignatureCollection>
+				</BinarySignatures>
+			</File>
+		</Files>
+	</ContainerSignature>
     </ContainerSignatures>
     <FileFormatMappings>
     
@@ -1841,6 +1870,12 @@
         <FileFormatMapping signatureId="19050" Puid="fmt/274"/>
 	<!--  SPSS Output File (spv) (ZIP)-->
         <FileFormatMapping signatureId="19060" Puid="fmt/274"/>
+
+	<!--  Open XML Paper Specification (ZIP)-->
+        <FileFormatMapping signatureId="20000" Puid="fmt/657"/>
+		
+	<!--  Apple iWorks Keynote 09 (ZIP)-->
+	<FileFormatMapping signatureId="21000" Puid="fmt/646" />	
 
     </FileFormatMappings>
   

@@ -65,7 +65,7 @@ Since the method of identifying and distinguishing specific types of OOXML docum
       </Support>
       <ExternalSignature>
         <ExternalSignatureID>1305</ExternalSignatureID>
-        <Signature>xslx</Signature>
+        <Signature>xlsx</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <ExternalSignature>

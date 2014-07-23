@@ -109,7 +109,7 @@
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>135</RelatedFormatID>
         <RelatedFormatName>Microsoft Powerpoint Presentation</RelatedFormatName>
-        <RelatedFormatVersion>97-2002</RelatedFormatVersion>
+        <RelatedFormatVersion>97-2003</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
@@ -194,7 +194,7 @@
         <RelationshipType>Is supertype of</RelationshipType>
         <RelatedFormatID>135</RelatedFormatID>
         <RelatedFormatName>Microsoft Powerpoint Presentation</RelatedFormatName>
-        <RelatedFormatVersion>97-2002</RelatedFormatVersion>
+        <RelatedFormatVersion>97-2003</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Is supertype of</RelationshipType>

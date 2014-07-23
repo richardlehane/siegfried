@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1448</FormatID>
+      <FormatName>MPEG-1 Elementary Stream</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Video</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>MPEG-1 is a lossy compression standard for video and audio, intended for use in Digital Storage Media (DSM) such as VideoCD and DVD (at the same encoding standard as VCD). It is designed to handle video frame-sizes of 352 x 288px, at a frame-rate of 25 frames per second (PAL) and a data rate of around 1.2Mbits/s; audio: up to 320 kbits/s (MPEG-1 Audio Layer III, *.mp3). MPEG-1 supports random access to stream content on playback. MPEG-1 Video supports only 'progressive' frame video. MPEG-1 compression can be relatively inefficient by modern standards. An MPG-1 ‘Elementary’ stream (ES) file (*.m1v) contains either a single video or audio stream (e.g. *.mp3). ES files are generally intended for video editing or other intermediate use, where separate audio content can be ultimately blended ('interleaved' or ‘muxed’) with a video stream to produce an output file containing both audio and video for synchronised playback.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>14 Jul 2014</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>14 Jul 2014</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/649</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>1498</ExternalSignatureID>
+        <Signature>mpg</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1499</ExternalSignatureID>
+        <Signature>mpeg</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1519</ExternalSignatureID>
+        <Signature>m1v</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>977</SignatureID>
+        <SignatureName>MPEG-1 Elementary Stream</SignatureName>
+        <SignatureNote>BOF: ...³{8}...µ</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1205</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>
+          </Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>000001B3{8}000001B8</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

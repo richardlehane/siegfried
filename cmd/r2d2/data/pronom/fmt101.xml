@@ -193,6 +193,13 @@
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1359</RelatedFormatID>
+        <RelatedFormatName>Domino XML Document Export</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1360</RelatedFormatID>
         <RelatedFormatName>Domino XML Database Export</RelatedFormatName>
         <RelatedFormatVersion>
@@ -226,6 +233,13 @@
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1371</RelatedFormatID>
         <RelatedFormatName>Vector Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1452</RelatedFormatID>
+        <RelatedFormatName>INTERLIS 2 Transfer File</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

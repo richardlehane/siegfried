@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>660</FormatID>
-      <FormatName>MPEG-2 Video Format</FormatName>
+      <FormatName>MPEG-2 Program Stream</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
@@ -13,7 +13,7 @@
       <FormatTypes>Video</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>MPEG-2 is a lossy compression standard (an improvement and expansion of the MPEG-1 standard) designed for the generic coding of video and audio and intended to cover a wide scope of application, including: video production, broadcast and editing. Streams are at potentially higher bitrates than MPEG-1 but more efficient compression making it suited to High Definition video. MPEG-2 Video supports both 'progressive' and 'interlaced' frame video. An MPG-2 ‘Program’ stream (PS) file (*.mpg, *.mpeg) generally contain both video and audio streams, generally for synchronised playback, and may carry a variety of other data (e.g. video captions).</FormatDescription>
       <BinaryFileFormat>Binary</BinaryFileFormat>
       <ByteOrders>Big-endian (Motorola)</ByteOrders>
       <ReleaseDate>
@@ -25,7 +25,7 @@
       <ProvenanceSourceDate>11 Mar 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <LastUpdatedDate>07 Jul 2014</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -56,8 +56,8 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>655</SignatureID>
-        <SignatureName>MPEG-2 Video</SignatureName>
-        <SignatureNote>Pack Header Start Code (where the 4th byte represents the version) + System Header Start Code</SignatureNote>
+        <SignatureName>MPEG-2 Program Stream</SignatureName>
+        <SignatureNote>Pack Header Start Code + System Header Start Code</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>800</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -69,7 +69,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>000001BA[40:7F]{7-11}000001BB</ByteSequenceValue>
+          <ByteSequenceValue>000001BA{8-12}000001BB{8-65536}000001B3{8-128}000001B5</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
@@ -81,8 +81,8 @@
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
-        <RelatedFormatID>1207</RelatedFormatID>
-        <RelatedFormatName>Video Object File (MPEG-2 subset)</RelatedFormatName>
+        <RelatedFormatID>659</RelatedFormatID>
+        <RelatedFormatName>MPEG-1 Program Stream</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1452</FormatID>
+      <FormatName>INTERLIS 2 Transfer File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Mark-up)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>INTERLIS is a description and transfer mechanism for spatial data . INTERLIS 2 Transfer files are XML files that contain data, e.g. geodata, which is structured according to certain rules. These rules are described in another file (or multiple files) called a model file.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>206</ProvenanceSourceID>
+      <ProvenanceName>Swiss Federal Office of Topography / Federal Office of Topography</ProvenanceName>
+      <ProvenanceSourceDate>14 Jul 2014</ProvenanceSourceDate>
+      <ProvenanceDescription>http://www.interlis.ch</ProvenanceDescription>
+      <LastUpdatedDate>14 Jul 2014</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/653</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>1510</ExternalSignatureID>
+        <Signature>xtf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>986</SignatureID>
+        <SignatureName>INTERLIS 2 Transfer File</SignatureName>
+        <SignatureNote>BOF: &lt;?xml version=('|")1.0('|") encoding=('|")UTF-8('|")?&gt;{0-5}&lt;TRANSFER xmlns=('|")http://www.interlis.ch/INTERLIS2.3('|")&gt;{0-5}..&lt;HEADERSECTION SENDER=('|")ili2fme-5.8.0-20131209('|") VERSION="2.3('|")&gt;</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1218</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>3</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C3F786D6C2076657273696F6E3D(22|27)312E30(22|27)20656E636F64696E673D(22|27)5554462D38(22|27)3F3E{0-5}3C5452414E5346455220786D6C6E733D(22|27)687474703A2F2F7777772E696E7465726C69732E63682F494E5445524C4953322E33(22|27)3E{0-5}3C48454144455253454354494F4E2053454E4445523D22696C6932666D652D352E382E302D3230313331323039(22|27)2056455253494F4E3D(22|27)322E33(22|27)3E</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>638</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

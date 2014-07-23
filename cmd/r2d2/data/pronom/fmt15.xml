@@ -56,7 +56,7 @@
       <InternalSignature>
         <SignatureID>124</SignatureID>
         <SignatureName>PDF 1.1</SignatureName>
-        <SignatureNote>Header and footer</SignatureNote>
+        <SignatureNote>BOF: %PDF-1.1 EOF (offset up to 1024 bytes): %%EOF</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>60</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -75,7 +75,7 @@
           <ByteSequenceID>61</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>4</MaxOffset>
+          <MaxOffset>1024</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

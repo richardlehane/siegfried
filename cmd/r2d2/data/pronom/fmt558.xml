@@ -77,7 +77,20 @@ Beginning with version 9, the Adobe Illustrated ai file format included both a p
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>255044462D312E(33|34)*252150532D41646F62652D332E30{128-1024}254149355F46696C65466F726D61742035</ByteSequenceValue>
+          <ByteSequenceValue>255044462D312E(33|34)</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>1226</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>32000</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>252150532D41646F62652D332E30{128-1024}254149355F46696C65466F726D61742035</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
