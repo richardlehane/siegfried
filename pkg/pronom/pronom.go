@@ -29,8 +29,8 @@ var Config = struct {
 	Timeout   time.Duration
 	Transport http.Transport
 }{
-	"DROID_SignatureFile_V74.xml",
-	"container-signature-20140227.xml",
+	"DROID_SignatureFile_V77.xml",
+	"container-signature-20140717.xml",
 	"pronom",
 	filepath.Join("..", "..", "cmd", "r2d2", "data"),
 
