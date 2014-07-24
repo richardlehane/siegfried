@@ -35,3 +35,41 @@ BenchmarkTIF	       1	1289000000 ns/op
 BenchmarkXLSX	     200	  11690000 ns/op
 BenchmarkXML	   10000	    165800 ns/op
 ok  	github.com/richardlehane/siegfried/cmd/sieg	36.246s
+
+24 July 2014 (no change)
+PASS
+BenchmarkNew          20      88441155 ns/op
+BenchmarkACCDB         1    3199680000 ns/op
+BenchmarkBMP       10000        132086 ns/op
+BenchmarkDOCX       1000       2077792 ns/op
+BenchmarkGIF       10000        170082 ns/op
+BenchmarkJPG        1000       1567843 ns/op
+BenchmarkMSG         100      16268373 ns/op
+BenchmarkODT        1000       2384761 ns/op
+BenchmarkPDF         200       8269173 ns/op
+BenchmarkPNG        1000       2819718 ns/op
+BenchmarkPPTX        100      15268473 ns/op
+BenchmarkRTF          50      48255174 ns/op
+BenchmarkTIF           1    1266873300 ns/op
+BenchmarkXLSX        100      12228777 ns/op
+BenchmarkXML       10000        169883 ns/op
+ok      github.com/richardlehane/siegfried/cmd/sieg 36.082s
+
+24 July 2014 (upgrade to Go 1.3)
+PASS
+BenchmarkNew          20      81100000 ns/op
+BenchmarkACCDB         1    2851000000 ns/op
+BenchmarkBMP       10000        112500 ns/op
+BenchmarkDOCX       1000       1994000 ns/op
+BenchmarkGIF       10000        148200 ns/op
+BenchmarkJPG        2000       1510000 ns/op
+BenchmarkMSG         100      13930000 ns/op
+BenchmarkODT        1000       2339000 ns/op
+BenchmarkPDF         200       8250000 ns/op
+BenchmarkPNG        1000       2685000 ns/op
+BenchmarkPPTX        100      14040000 ns/op
+BenchmarkRTF          50      50440000 ns/op
+BenchmarkTIF           1    1102000000 ns/op
+BenchmarkXLSX        100      10490000 ns/op
+BenchmarkXML       10000        150600 ns/op
+ok      github.com/richardlehane/siegfried/cmd/sieg 35.107s
