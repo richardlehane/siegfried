@@ -52,21 +52,14 @@ func NewIdentifier(droid, container, reports string) (*PronomIdentifier, error) 
 	return pronom.identifier()
 }
 
-func Load(path string) (*PronomIdentifier, error) {
-	c, err := ioutil.ReadFile(path)
-	if err != nil {
-		return nil, err
-	}
-	buf := bytes.NewBuffer(c)
-	dec := gob.NewDecoder(buf)
-	var p PronomIdentifier
-	err = dec.Decode(&p)
-	if err != nil {
-		return nil, err
-	}
-	p.Bm.Start()
-	p.ids = make(pids, 20)
-	return &p, nil
+type Header struct {
+	PSize int
+	BSize int
+	ESize int
+}
+
+func (h Header) String() string {
+	return fmt.Sprintf("Pronom ID size: %v; Bytematcher size: %v; Extension matcher size: %v", h.PSize, h.BSize, h.ESize)
 }
 
 func (p *PronomIdentifier) Save(path string) error {
@@ -76,20 +69,84 @@ func (p *PronomIdentifier) Save(path string) error {
 	if err != nil {
 		return err
 	}
-	return ioutil.WriteFile(path, buf.Bytes(), os.ModeExclusive)
+	psz := buf.Len()
+	bsz, err := p.bm.Save(buf)
+	if err != nil {
+		return err
+	}
+	esz, err := p.em.Save(buf)
+	if err != nil {
+		return err
+	}
+	hbuf := new(bytes.Buffer)
+	henc := gob.NewEncoder(hbuf)
+	err = henc.Encode(Header{psz, bsz, esz})
+	f, err := os.Create(path)
+	defer f.Close()
+	if err != nil {
+		return err
+	}
+	_, err = f.Write(hbuf.Bytes())
+	if err != nil {
+		return err
+	}
+	_, err = f.Write(buf.Bytes())
+	if err != nil {
+		return err
+	}
+	fmt.Print(Header{psz, bsz, esz})
+	return nil
+}
+
+func Load(path string) (*PronomIdentifier, error) {
+	c, err := ioutil.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+	buf := bytes.NewBuffer(c)
+	dec := gob.NewDecoder(buf)
+	var h Header
+	err = dec.Decode(&h)
+	if err != nil {
+		return nil, err
+	}
+	pstart := len(c) - h.PSize - h.BSize - h.ESize
+	bstart := len(c) - h.ESize - h.BSize
+	estart := len(c) - h.ESize
+	pbuf := bytes.NewBuffer(c[pstart : pstart+h.PSize])
+	bbuf := bytes.NewBuffer(c[bstart : bstart+h.BSize])
+	ebuf := bytes.NewBuffer(c[estart : estart+h.ESize])
+	pdec := gob.NewDecoder(pbuf)
+	var p PronomIdentifier
+	err = pdec.Decode(&p)
+	if err != nil {
+		return nil, err
+	}
+	bm, err := bytematcher.Load(bbuf)
+	if err != nil {
+		return nil, err
+	}
+	em, err := namematcher.Load(ebuf)
+	if err != nil {
+		return nil, err
+	}
+	p.bm = bm
+	p.em = em
+	p.ids = make(pids, 20)
+	return &p, nil
 }
 
 func (p *pronom) identifier() (*PronomIdentifier, error) {
 	pi := new(PronomIdentifier)
 	pi.ids = make(pids, 20)
-	pi.BPuids = p.getPuids()
+	pi.BPuids, pi.PuidsB = p.getPuids()
 	pi.Priorities = p.priorities()
-	pi.Em, pi.EPuids = p.extensionMatcher()
+	pi.em, pi.EPuids = p.extensionMatcher()
 	sigs, err := p.parse()
 	if err != nil {
 		return nil, err
 	}
-	pi.Bm, err = bytematcher.Signatures(sigs)
+	pi.bm, err = bytematcher.Signatures(sigs)
 	return pi, err
 }
 
@@ -113,17 +170,24 @@ func (p pronom) signatures() []Signature {
 }
 
 // returns a slice of puid strings that correspondes to indexes of byte signatures
-func (p pronom) getPuids() []string {
+func (p pronom) getPuids() ([]string, map[string][]int) {
 	var iter int
 	puids := make([]string, len(p.signatures()))
+	bids := make(map[string][]int)
 	for _, f := range p.droid.FileFormats {
 		rng := iter + len(f.Signatures)
 		for iter < rng {
 			puids[iter] = f.Puid
+			_, ok := bids[f.Puid]
+			if ok {
+				bids[f.Puid] = append(bids[f.Puid], iter)
+			} else {
+				bids[f.Puid] = []int{iter}
+			}
 			iter++
 		}
 	}
-	return puids
+	return puids, bids
 }
 
 func (p pronom) extensionMatcher() (namematcher.ExtensionMatcher, []string) {
@@ -219,7 +283,7 @@ func (p pronom) priorities() map[string][]int {
 	// now check the priority tree to make sure that it is consistent,
 	// i.e. that for any format with a superior fmt, then anything superior
 	// to that superior fmt is also marked as superior to the base fmt, all the way down the tree
-	puids := p.getPuids()
+	puids, _ := p.getPuids()
 	for k, _ := range priorities {
 		extras := priorityWalk(k, priorities, puids)
 		if len(extras) > 0 {

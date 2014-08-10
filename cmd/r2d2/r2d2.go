@@ -15,7 +15,7 @@ import (
 var (
 	harvest  = flag.Bool("harvest", false, "harvest Pronom reports")
 	build    = flag.Bool("build", false, "build a Siegfried signature file")
-	statsf   = flag.Bool("stats", false, "describe a Siegfried signature file")
+	inspect  = flag.Bool("inspect", false, "describe a Siegfried signature file")
 	defaults = flag.Bool("defaults", false, "print the default paths and settings")
 	timeout  = flag.Duration("timeout", 120*time.Second, "set duration before timing-out harvesting requests e.g. 120s")
 )
@@ -78,12 +78,12 @@ func makegob() error {
 	return p.Save(sigfile)
 }
 
-func stats() error {
+func inspectPronom() error {
 	p, err := pronom.Load(sigfile)
 	if err != nil {
 		return err
 	}
-	fmt.Print(p.Bm.Stats())
+	fmt.Print(p)
 	return nil
 }
 
@@ -97,8 +97,8 @@ func main() {
 		err = savereps()
 	case *build:
 		err = makegob()
-	case *statsf:
-		err = stats()
+	case *inspect:
+		err = inspectPronom()
 	case *defaults:
 		fmt.Println(droid)
 		fmt.Println(container)

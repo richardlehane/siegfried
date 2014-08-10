@@ -2,32 +2,132 @@ package bytematcher
 
 import (
 	"sort"
-	"sync"
 
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher/process"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
 // MUTABLE
 type matcher struct {
-	b                *ByteMatcher
-	buf              *siegreader.Buffer
-	r                chan int
-	partialKeyframes map[[2]int][][2]int // map of a keyframe to a slice of offsets and lengths where it has matched
-	limit            []int
-	limitm           *sync.RWMutex
-	limitc           chan []int
-	incoming         chan strike
-	quit             chan struct{}
+	b              *ByteMatcher
+	buf            *siegreader.Buffer
+	r              chan int
+	partialMatches map[[2]int][][2]int // map of a keyframe to a slice of offsets and lengths where it has matched
+	incoming       chan strike
+	quit           chan struct{}
+	bofProgress    chan int
+	bofOff         int
+	eofProgress    chan int
+	eofOff         int
+	waitc          chan []int
+	wait           []int
+	strikeCache    map[int]*cacheItem
+}
+
+func (b *ByteMatcher) newMatcher(buf *siegreader.Buffer, q chan struct{}, r, bprog, eprog chan int, wait chan []int) *matcher {
+	return &matcher{
+		b,
+		buf,
+		r,
+		make(map[[2]int][][2]int),
+		make(chan strike, 100),
+		q,
+		bprog,
+		0,
+		eprog,
+		0,
+		wait,
+		nil,
+		make(map[int]*cacheItem),
+	}
+}
+
+func (m *matcher) match() {
+	for {
+		select {
+		case in, ok := <-m.incoming:
+			// this happens when all of our matchers reach EOF
+			if !ok {
+				m.finalise()
+				return
+			}
+			if halt := m.processStrike(in); halt {
+				return
+			}
+		case bp := <-m.bofProgress:
+			m.bofOff = bp
+			if m.wait != nil {
+				// check if anything we are waiting on is still alive
+			}
+		case ep := <-m.eofProgress:
+			m.eofOff = ep
+			if m.wait != nil {
+				// check if anything we are waiting on is still alive
+			}
+		}
+
+	}
+}
+
+func (m *matcher) sendResult(res int) bool {
+	m.r <- res
+	w := <-m.waitc // every result sent must result in a new priority list being returned & we need to drain this or it will block
+	// nothing more to wait for
+	if len(w) == 0 {
+		return m.finalise()
+	}
+	m.wait = w
+	return false
+}
+
+func (m *matcher) finalise() bool {
+	close(m.quit)
+	/*
+		try to break deadlock
+		for _ = range m.incoming {
+		}
+	*/
+	close(m.r)
+	return true
+}
+
+type cacheItem struct {
+	finalised bool
+	strikes   []strike
+}
+
+// cache strikes until we have all sequences in a cluster (group of frames with a single BOF or EOF anchor)
+func (m *matcher) stash(s strike) (bool, []strike) {
+	stashed, ok := m.strikeCache[s.idxa]
+	if ok && stashed.finalised {
+		return true, []strike{s}
+	}
+	if s.final {
+		if !ok {
+			return true, []strike{s}
+		}
+		stashed.finalised = true
+		return true, append(stashed.strikes, s)
+	}
+	if !ok {
+		m.strikeCache[s.idxa] = &cacheItem{false, []strike{s}}
+	} else {
+		m.strikeCache[s.idxa].strikes = append(m.strikeCache[s.idxa].strikes, s)
+	}
+	return false, nil
 }
 
 type strike struct {
-	tti     int
-	offset  int
+	idxa    int
+	idxb    int // a test tree index = idxa + idxb
+	offset  int // offset of match
 	length  int
 	reverse bool
-	frame   bool
+	frame   bool // is it a frameset match?
+	final   bool // last in a sequence of strikes?
 }
 
+// a partial
 type partial struct {
 	l          bool
 	r          bool
@@ -35,115 +135,112 @@ type partial struct {
 	rdistances []int
 }
 
-func newMatcher(b *ByteMatcher, buf *siegreader.Buffer, r chan int, l chan []int) *matcher {
-	return &matcher{b, buf, r, make(map[[2]int][][2]int), nil, &sync.RWMutex{}, l, make(chan strike), make(chan struct{})}
-}
-
-func (m *matcher) setLimit(l []int) {
-	m.limitm.Lock()
-	m.limit = l
-	m.limitm.Unlock()
-}
-
-func (m *matcher) checkLimit(i int) bool {
-	m.limitm.RLock()
-	defer m.limitm.RUnlock()
-	if m.limit == nil {
-		return true
+func (m *matcher) processStrike(s strike) bool {
+	if s.frame {
+		return m.tryStrike(s)
 	}
-	idx := sort.SearchInts(m.limit, i)
-	if idx == len(m.limit) || m.limit[idx] != i {
-		return false
-	}
-	return true
-}
-
-func (m *matcher) match() {
-	for {
-		select {
-		case l, ok := <-m.limitc:
-			if !ok {
-				close(m.quit)
-				m.limitc = nil
+	st, strks := m.stash(s)
+	if st {
+		for _, v := range strks {
+			if halt := m.tryStrike(v); halt {
+				return true
 			}
-			m.setLimit(l)
-		case in, ok := <-m.incoming:
-			if !ok {
-				close(m.r)
-				return
-			}
-			m.tryStrike(in.tti, in.offset, in.length, in.reverse, in.frame)
 		}
 	}
+	return false
 }
 
-func (m *matcher) tryStrike(tti, o, l int, rev, frame bool) {
-	// the offsets we record are always BOF offsets - these can be interpreted as EOF offsets when necessary
-	off := m.calcOffset(o, l, rev)
+func (m *matcher) tryStrike(s strike) bool {
+	// the offsets we *record* are always BOF offsets - these can be interpreted as EOF offsets when necessary
+	off := m.calcOffset(s)
 
 	// grab the relevant testTree
-	t := m.b.TestSet[tti]
+	t := m.b.Tests[s.idxa+s.idxb]
 
 	// immediately apply key frames for the completes
 	for _, kf := range t.Complete {
-		success := m.applyKeyFrame(kf, off, l)
+		success := m.applyKeyFrame(kf, off, s.length)
 		if success {
-			m.r <- kf[0]
+			if halt := m.sendResult(kf[0]); halt {
+				return true
+			}
 		}
 	}
 
 	// if there are no incompletes, we are done
 	if len(t.Incomplete) < 1 {
-		return
+		return false
 	}
 
 	// see what incompletes are worth pursuing
-	checkl, checkr := m.checkLR(t, off, rev, frame)
-	if !checkl && !checkr {
-		return
+	var checkl, checkr bool
+	for _, v := range t.Incomplete {
+		if checkl && checkr {
+			break
+		}
+		if m.checkWait(v.Kf[0]) && m.aliveKeyFrame(v.Kf, s) {
+			if v.L {
+				checkl = true
+			}
+			if v.R {
+				checkr = true
+			}
+		}
 	}
-	partials := make([]partial, len(t.Incomplete))
+	if !checkl && !checkr {
+		return false
+	}
+
+	// calculate the offset and lengths for the left and right test slices
 	var lslc, rslc []byte
 	var lpos, llen, rpos, rlen int
-	if rev {
-		lpos, llen = o+l, t.MaxLeftDistance
-		rpos, rlen = o-t.MaxRightDistance, t.MaxRightDistance
+	if s.reverse {
+		lpos, llen = s.offset+s.length, t.MaxLeftDistance
+		rpos, rlen = s.offset-t.MaxRightDistance, t.MaxRightDistance
 		if rpos < 0 {
 			rlen = rlen + rpos
 			rpos = 0
 		}
 	} else {
-		lpos, llen = o-t.MaxLeftDistance, t.MaxLeftDistance
-		rpos, rlen = o+l, t.MaxRightDistance
+		lpos, llen = s.offset-t.MaxLeftDistance, t.MaxLeftDistance
+		rpos, rlen = s.offset+s.length, t.MaxRightDistance
 		if lpos < 0 {
 			llen = llen + lpos
 			lpos = 0
 		}
 	}
+
+	//  the partials slice has a mirror entry for each of the testTree incompletes
+	partials := make([]partial, len(t.Incomplete))
+
+	// test left (if there are valid left tests to try)
 	if checkl {
-		lslc = m.buf.MustSlice(lpos, llen, rev)
-		left := matchTestNodes(t.Left, lslc, true)
+		lslc = m.buf.MustSlice(lpos, llen, s.reverse)
+		left := process.MatchTestNodes(t.Left, lslc, true)
 		for _, lp := range left {
-			if partials[lp.followUp].l {
-				partials[lp.followUp].ldistances = append(partials[lp.followUp].ldistances, lp.distances...)
+			if partials[lp.FollowUp].l {
+				partials[lp.FollowUp].ldistances = append(partials[lp.FollowUp].ldistances, lp.Distances...)
 			} else {
-				partials[lp.followUp].l = true
-				partials[lp.followUp].ldistances = lp.distances
+				partials[lp.FollowUp].l = true
+				partials[lp.FollowUp].ldistances = lp.Distances
 			}
 		}
 	}
+	// test right (if there are valid left tests to try)
 	if checkr {
-		rslc = m.buf.MustSlice(rpos, rlen, rev)
-		right := matchTestNodes(t.Right, rslc, false)
+		rslc = m.buf.MustSlice(rpos, rlen, s.reverse)
+		right := process.MatchTestNodes(t.Right, rslc, false)
 		for _, rp := range right {
-			if partials[rp.followUp].r {
-				partials[rp.followUp].rdistances = append(partials[rp.followUp].rdistances, rp.distances...)
+			if partials[rp.FollowUp].r {
+				partials[rp.FollowUp].rdistances = append(partials[rp.FollowUp].rdistances, rp.Distances...)
 			} else {
-				partials[rp.followUp].r = true
-				partials[rp.followUp].rdistances = rp.distances
+				partials[rp.FollowUp].r = true
+				partials[rp.FollowUp].rdistances = rp.Distances
 			}
 		}
 	}
+
+	// now iterate through the partials, checking whether they fulfil any of the incompletes
 	for i, p := range partials {
 		if p.l == t.Incomplete[i].L && p.r == t.Incomplete[i].R {
 			kf := t.Incomplete[i].Kf
@@ -156,54 +253,47 @@ func (m *matcher) tryStrike(tti, o, l int, rev, frame bool) {
 			for _, ldistance := range p.ldistances {
 				for _, rdistance := range p.rdistances {
 					moff := off - ldistance
-					length := ldistance + l + rdistance
+					length := ldistance + s.length + rdistance
 					complete := m.applyKeyFrame(kf, moff, length)
 					if complete {
-						m.r <- kf[0]
+						if halt := m.sendResult(kf[0]); halt {
+							return true
+						}
 					}
 				}
 			}
 		}
 	}
+	return false
 }
 
-func (m *matcher) calcOffset(o, l int, r bool) int {
-	if !r {
-		return o
+func (m *matcher) calcOffset(s strike) int {
+	if !s.reverse {
+		return s.offset
 	}
-	return m.buf.Size() - o - l
+	return m.buf.Size() - s.offset - s.length
 }
 
-func (m *matcher) checkLR(t *testTree, o int, rev, frame bool) (bool, bool) {
-	var checkl, checkr bool
-	for _, v := range t.Incomplete {
-		if checkl && checkr {
-			break
-		}
-		if m.checkLimit(v.Kf[0]) && m.aliveKeyFrame(v.Kf, o, rev, frame) {
-			if v.L {
-				checkl = true
-			}
-			if v.R {
-				checkr = true
-			}
-		}
-	}
-	return checkl, checkr
-}
-
-func (m *matcher) aliveKeyFrame(kfID keyframeID, o int, rev, frame bool) bool {
-	// if we are doing BOF frame matching, we must assume that there might be sequences yet to be matched
-	if frame {
+// check a signature ID against the priority list
+func (m *matcher) checkWait(i int) bool {
+	if m.wait == nil {
 		return true
 	}
+	idx := sort.SearchInts(m.wait, i)
+	if idx == len(m.wait) || m.wait[idx] != i {
+		return false
+	}
+	return true
+}
+
+func (m *matcher) aliveKeyFrame(kfID process.KeyFrameID, s strike) bool {
 	j := kfID[1]
 	for i := 0; i < j; i++ {
-		kf := m.b.Sigs[kfID[0]][i]
-		if !kf.mustExist(o, rev) {
+		kf := m.b.KeyFrames[kfID[0]][i]
+		if !kf.MustExist(s.offset, s.reverse) {
 			return true
 		}
-		_, ok := m.partialKeyframes[[2]int{kfID[0], i}]
+		_, ok := m.partialMatches[[2]int{kfID[0], i}]
 		if !ok {
 			return false
 		}
@@ -211,37 +301,38 @@ func (m *matcher) aliveKeyFrame(kfID keyframeID, o int, rev, frame bool) bool {
 	return true
 }
 
-func (m *matcher) applyKeyFrame(kfID keyframeID, o, l int) bool {
-	kf := m.b.Sigs[kfID[0]]
-	if kf[kfID[1]].check(o, l, m.buf) {
+func (m *matcher) applyKeyFrame(kfID process.KeyFrameID, o, l int) bool {
+	kf := m.b.KeyFrames[kfID[0]]
+	if kf[kfID[1]].Check(o, l, m.buf) {
 		if len(kf) == 1 {
 			return true
 		}
 	} else {
 		return false
 	}
-	if _, ok := m.partialKeyframes[kfID]; ok {
-		m.partialKeyframes[kfID] = append(m.partialKeyframes[kfID], [2]int{o, l})
+	if _, ok := m.partialMatches[kfID]; ok {
+		m.partialMatches[kfID] = append(m.partialMatches[kfID], [2]int{o, l})
 	} else {
-		m.partialKeyframes[kfID] = [][2]int{[2]int{o, l}}
+		m.partialMatches[kfID] = [][2]int{[2]int{o, l}}
 	}
 	return m.checkKeyFrames(kfID[0])
 }
 
+// check key frames checks the relationships between neighbouring frames
 func (m *matcher) checkKeyFrames(i int) bool {
-	kfs := m.b.Sigs[i]
+	kfs := m.b.KeyFrames[i]
 	for j := range kfs {
-		_, ok := m.partialKeyframes[[2]int{i, j}]
+		_, ok := m.partialMatches[[2]int{i, j}]
 		if !ok {
 			return false
 		}
 	}
-	prevOff := m.partialKeyframes[[2]int{i, 0}]
+	prevOff := m.partialMatches[[2]int{i, 0}]
 	prevKf := kfs[0]
 	var ok bool
 	for j, kf := range kfs[1:] {
-		thisOff := m.partialKeyframes[[2]int{i, j + 1}]
-		prevOff, ok = kf.checkRelated(prevKf, thisOff, prevOff)
+		thisOff := m.partialMatches[[2]int{i, j + 1}]
+		prevOff, ok = kf.CheckRelated(prevKf, thisOff, prevOff)
 		if !ok {
 			return false
 		}

@@ -1,37 +1,47 @@
-package bytematcher
+package process
 
-import . "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+import "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 
 // Test trees link byte sequence and frame matches (from the sequence and frame sets) to keyframes. This link is sometimes direct if there are no
 // further test to perform. Follow-up tests may be required to the left or to the right of the match.
 
 type testTree struct {
-	Complete         []keyframeID
-	Incomplete       []followUp
+	Complete         []KeyFrameID
+	Incomplete       []FollowUp
 	MaxLeftDistance  int
 	MaxRightDistance int
 	Left             []*testNode
 	Right            []*testNode
 }
 
-type followUp struct {
-	Kf keyframeID
+func newTestTree() *testTree {
+	return &testTree{
+		make([]KeyFrameID, 0),
+		make([]FollowUp, 0),
+		0, 0,
+		make([]*testNode, 0),
+		make([]*testNode, 0),
+	}
+}
+
+type FollowUp struct {
+	Kf KeyFrameID
 	L  bool // have a left test
 	R  bool // have a right test
 }
 
 type followupMatch struct {
-	followUp  int
-	distances []int
+	FollowUp  int
+	Distances []int
 }
 
 type testNode struct {
-	Frame
+	frames.Frame
 	Success []int // followUp id
 	Tests   []*testNode
 }
 
-func newTestNode(f Frame) *testNode {
+func newtestNode(f frames.Frame) *testNode {
 	t := new(testNode)
 	t.Frame = f
 	t.Success = make([]int, 0)
@@ -39,7 +49,7 @@ func newTestNode(f Frame) *testNode {
 	return t
 }
 
-func hasTest(t []*testNode, f Frame) (*testNode, bool) {
+func hasTest(t []*testNode, f frames.Frame) (*testNode, bool) {
 	for _, nt := range t {
 		if nt.Frame.Equals(f) {
 			return nt, true
@@ -48,7 +58,7 @@ func hasTest(t []*testNode, f Frame) (*testNode, bool) {
 	return nil, false
 }
 
-func appendTests(ts []*testNode, f []Frame, fu int) []*testNode {
+func appendTests(ts []*testNode, f []frames.Frame, fu int) []*testNode {
 	if len(f) < 1 {
 		return ts
 	}
@@ -58,7 +68,7 @@ func appendTests(ts []*testNode, f []Frame, fu int) []*testNode {
 	if nt, ok := hasTest(nts, f[0]); ok {
 		t = nt
 	} else {
-		t = newTestNode(f[0])
+		t = newtestNode(f[0])
 		nts = append(nts, t)
 	}
 	if len(f) > 1 {
@@ -66,7 +76,7 @@ func appendTests(ts []*testNode, f []Frame, fu int) []*testNode {
 			if nt, ok := hasTest(t.Tests, f1); ok {
 				t = nt
 			} else {
-				nt := newTestNode(f1)
+				nt := newtestNode(f1)
 				t.Tests = append(t.Tests, nt)
 				t = nt
 			}
@@ -76,17 +86,7 @@ func appendTests(ts []*testNode, f []Frame, fu int) []*testNode {
 	return nts
 }
 
-func newTestTree() *testTree {
-	return &testTree{
-		make([]keyframeID, 0),
-		make([]followUp, 0),
-		0, 0,
-		make([]*testNode, 0),
-		make([]*testNode, 0),
-	}
-}
-
-func (t *testTree) add(kf keyframeID, l []Frame, r []Frame) {
+func (t *testTree) add(kf KeyFrameID, l []frames.Frame, r []frames.Frame) {
 	if len(l) == 0 && len(r) == 0 {
 		t.Complete = append(t.Complete, kf)
 		return
@@ -98,7 +98,7 @@ func (t *testTree) add(kf keyframeID, l []Frame, r []Frame) {
 	if len(r) > 0 {
 		fr = true
 	}
-	t.Incomplete = append(t.Incomplete, followUp{kf, fl, fr})
+	t.Incomplete = append(t.Incomplete, FollowUp{kf, fl, fr})
 	fu := len(t.Incomplete) - 1
 	if fl {
 		t.Left = appendTests(t.Left, l, fu)
@@ -110,10 +110,10 @@ func (t *testTree) add(kf keyframeID, l []Frame, r []Frame) {
 }
 
 func (t *testNode) length() int {
-	return TotalLength(t.Frame)
+	return frames.TotalLength(t.Frame)
 }
 
-func maxLength(ts []*testNode) int {
+func MaxLength(ts []*testNode) int {
 	var max int
 	var delve func(t *testNode, this int)
 	delve = func(t *testNode, this int) {
@@ -132,7 +132,7 @@ func maxLength(ts []*testNode) int {
 	return max
 }
 
-func matchTestNodes(ts []*testNode, b []byte, rev bool) []followupMatch {
+func MatchTestNodes(ts []*testNode, b []byte, rev bool) []followupMatch {
 	ret := make([]followupMatch, 0)
 	var match func(t *testNode, o int)
 	match = func(t *testNode, o int) {

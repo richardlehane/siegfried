@@ -21,7 +21,9 @@ func TestNew(t *testing.T) {
 
 func setup(r io.Reader, t *testing.T) *Buffer {
 	b := New()
+	q := make(chan struct{})
 	err := b.SetSource(r)
+	b.SetQuit(q)
 	if err != nil {
 		t.Errorf("Read error: %v", err)
 	}

@@ -6,7 +6,7 @@ import (
 	"encoding/gob"
 	"strconv"
 
-	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
 )
 
 func init() {
@@ -25,7 +25,7 @@ type Frame interface {
 	Linked(Frame, int, int) bool // Is a frame linked to a preceding frame (by a preceding or succeding relationship) with an offset and range that is less than the supplied ints?
 	Min() int                    // minimum offset
 	Max() int                    // maximum offset. Return -1 for no limit (wildcard, *)
-	Pat() Pattern
+	Pat() patterns.Pattern
 
 	// The following methods are inherited from the enclosed OffType
 	Orientation() OffType
@@ -34,7 +34,7 @@ type Frame interface {
 	// The following methods are inherited from the enclosed pattern
 	Length() (int, int) // min and max lengths of the enclosed pattern
 	NumSequences() int  // // the number of simple sequences that the enclosed pattern can be represented by. Return 0 if the pattern cannot be represented by a defined number of simple sequence (e.g. for an indirect offset pattern) or, if in your opinion, the number of sequences is unreasonably large.
-	Sequences() []Sequence
+	Sequences() []patterns.Sequence
 	ValidBytes(i int) []byte
 }
 
@@ -79,7 +79,7 @@ var OffString = map[OffType]string{
 // 	- for a WildMin frame, give one offset, or give a max offset of < 0 and a min of > 0
 // 	- for a Fixed frame, give two offsets that are both >= 0 and that are equal to each other
 // 	- for a Window frame, give two offsets that are both >= 0 and that are not equal to each other.
-func NewFrame(typ OffType, pat Pattern, offsets ...int) Frame {
+func NewFrame(typ OffType, pat patterns.Pattern, offsets ...int) Frame {
 	switch len(offsets) {
 	case 0:
 		return Frame(Wild{typ, pat})
@@ -107,7 +107,7 @@ func NewFrame(typ OffType, pat Pattern, offsets ...int) Frame {
 }
 
 // SwitchFrame returns a new frame with a different orientation (for example to allow right-left searching)
-func SwitchFrame(f Frame, p Pattern) Frame {
+func SwitchFrame(f Frame, p patterns.Pattern) Frame {
 	return NewFrame(f.SwitchOff(), p, f.Min(), f.Max())
 }
 
@@ -137,7 +137,7 @@ func TotalLength(f Frame) int {
 type Fixed struct {
 	OffType
 	Off int
-	Pattern
+	patterns.Pattern
 }
 
 func (f Fixed) Match(b []byte) (bool, []int) {
@@ -199,7 +199,7 @@ func (f Fixed) Linked(prev Frame, maxDistance, maxRange int) bool {
 	}
 }
 
-func (f Fixed) Pat() Pattern {
+func (f Fixed) Pat() patterns.Pattern {
 	return f.Pattern
 }
 
@@ -208,7 +208,7 @@ type Window struct {
 	OffType
 	MinOff int
 	MaxOff int
-	Pattern
+	patterns.Pattern
 }
 
 func (w Window) Match(b []byte) (bool, []int) {
@@ -302,14 +302,14 @@ func (w Window) Linked(prev Frame, maxDistance, maxRange int) bool {
 	}
 }
 
-func (w Window) Pat() Pattern {
+func (w Window) Pat() patterns.Pattern {
 	return w.Pattern
 }
 
 // Wild frames can be at any offset (i.e. 0 to the end of the file) relative to the BOF, EOF or a preceding or succeeding frame.
 type Wild struct {
 	OffType
-	Pattern
+	patterns.Pattern
 }
 
 func (w Wild) Match(b []byte) (bool, []int) {
@@ -388,7 +388,7 @@ func (w Wild) Linked(prev Frame, maxDistance, maxRange int) bool {
 	}
 }
 
-func (w Wild) Pat() Pattern {
+func (w Wild) Pat() patterns.Pattern {
 	return w.Pattern
 }
 
@@ -396,7 +396,7 @@ func (w Wild) Pat() Pattern {
 type WildMin struct {
 	OffType
 	MinOff int
-	Pattern
+	patterns.Pattern
 }
 
 func (w WildMin) Match(b []byte) (bool, []int) {
@@ -475,6 +475,6 @@ func (w WildMin) Linked(prev Frame, maxDistance, maxRange int) bool {
 	}
 }
 
-func (w WildMin) Pat() Pattern {
+func (w WildMin) Pat() patterns.Pattern {
 	return w.Pattern
 }

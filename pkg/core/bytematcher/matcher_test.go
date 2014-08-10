@@ -1,9 +1,25 @@
 package bytematcher
 
+/*
 import (
 	"bytes"
 	"testing"
 )
+
+/*
+// Matcher
+var MStub = []byte{'t', 'e', 's', 't', 'y', 'A', 'T', 'E', 'S', 'T', 'M', 'A', 'T', 'C', 'H', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 't', 'e', 's', 't', 'y', 'Y', 'N', 'E', 'S', 'S'}
+var MatcherStub *process.Matcher = &process.Matcher{
+	b:                BmStub,
+	buf:              siegreader.New(),
+	r:                make(chan int),
+	partialKeyframes: make(map[[2]int][][2]int),
+	limit:            nil,
+	limitm:           &sync.RWMutex{},
+	limitc:           nil,
+	incoming:         make(chan strike),
+	quit:             make(chan struct{}),
+}
 
 func TestMatch(t *testing.T) {
 	err := matcherStub.buf.SetSource(bytes.NewBuffer(mStub))
@@ -23,3 +39,4 @@ func TestMatch(t *testing.T) {
 		}
 	}
 }
+*/

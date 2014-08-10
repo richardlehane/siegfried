@@ -15,7 +15,7 @@ func TestNew(t *testing.T) {
 	}
 }
 
-/*These seems to work but takes a while, so left out of routine testing
+/*These seem to work but takes a while, so left out of routine testing
 func TestSaveReports(t *testing.T) {
 	errs := SaveReports(filepath.Join(Config.Data, Config.Droid), "http://www.nationalarchives.gov.uk/pronom/", filepath.Join(Config.Data, Config.Reports))
 	if len(errs) != 0 {

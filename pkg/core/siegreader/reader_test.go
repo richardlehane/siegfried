@@ -94,7 +94,9 @@ func TestReuse(t *testing.T) {
 	b := setup(r, t)
 	r.Close()
 	nr := strings.NewReader(teststring)
+	q := make(chan struct{})
 	err = b.SetSource(nr)
+	b.SetQuit(q)
 	if err != nil {
 		t.Errorf("Read error: %v", err)
 	}

@@ -18,6 +18,7 @@
 package siegreader
 
 import (
+	"fmt"
 	"io"
 	"log"
 	"os"
@@ -27,6 +28,7 @@ import (
 var (
 	readSz      = 4096 //* 2
 	initialRead = readSz * 3
+	quitError   = fmt.Errorf("Quit chan closed while awaiting EOF")
 )
 
 type protected struct {
@@ -38,6 +40,7 @@ type protected struct {
 // Buffer wraps an io.Reader, buffering its contents in byte slices that will keep growing until IO.EOF.
 // It supports multiple concurrent Readers, including Readers reading from the end of the stream (ReverseReaders)
 type Buffer struct {
+	quit      chan struct{} // allows quittting - otherwise will block forever while awaiting EOF
 	src       io.Reader
 	buf, eof  []byte
 	eofc      chan struct{} // signals if EOF bytes are available. When EOF bytes are available, this chan is closed
@@ -67,6 +70,7 @@ func (b *Buffer) reset() {
 // SetSource sets the buffer's source.
 // Can be any io.Reader. If it is an os.File, will load EOF buffer early. Otherwise waits for a complete read.
 // The source can be reset to recycle an existing Buffer.
+// Siegreader blocks on EOF reads or Size() calls when the reader isn't a file or the stream isn't completely read. The quit channel overrides this block.
 func (b *Buffer) SetSource(r io.Reader) error {
 	b.reset()
 	b.src = r
@@ -90,13 +94,21 @@ func (b *Buffer) SetSource(r io.Reader) error {
 	return err
 }
 
+func (b *Buffer) SetQuit(q chan struct{}) {
+	b.quit = q
+}
+
 // Size returns the buffer's size, which is available immediately for files. Must wait for full read for streams.
 func (b *Buffer) Size() int {
 	if b.sz > 0 {
 		return int(b.sz)
 	}
-	<-b.eofc
-	return int(b.sz)
+	select {
+	case <-b.eofc:
+		return int(b.sz)
+	case <-b.quit:
+		return 0
+	}
 }
 
 func (b *Buffer) grow() {
@@ -207,12 +219,20 @@ func (b *Buffer) Slice(s, l int) ([]byte, error) {
 // This will block until the slice is available (which may be until the full stream is read).
 func (b *Buffer) EofSlice(s, l int) ([]byte, error) {
 	// block until the EOF is available
-	<-b.eofc
+	select {
+	case <-b.quit:
+		return []byte{}, quitError
+	case <-b.eofc:
+	}
 	var buf []byte
 	if len(b.eof) > 0 && s+l <= len(b.eof) {
 		buf = b.eof
 	} else {
-		<-b.completec
+		select {
+		case <-b.quit:
+			return []byte{}, quitError
+		case <-b.completec:
+		}
 		buf = b.buf[:int(b.sz)]
 	}
 	if s+l >= len(buf) {
@@ -246,7 +266,11 @@ func (b *Buffer) canSeek(o int64, rev bool) (bool, error) {
 		if b.sz > 0 {
 			o = b.sz - o
 		} else {
-			<-b.eofc
+			select {
+			case <-b.quit:
+				return false, quitError
+			case <-b.eofc:
+			}
 			o = b.sz - o
 		}
 	}

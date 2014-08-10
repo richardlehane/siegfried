@@ -11,11 +11,12 @@ import (
 )
 
 type PronomIdentifier struct {
-	Bm         *bytematcher.ByteMatcher
-	BPuids     []string
-	Em         namematcher.ExtensionMatcher
-	EPuids     []string
-	Priorities map[string][]int
+	BPuids     []string         // slice of puids that corresponds to the bytematcher's int signatures
+	PuidsB     map[string][]int // map of puids to slices of bytematcher int signatures
+	EPuids     []string         // slice of puids that corresponds to the extension matcher's int signatures
+	Priorities map[string][]int // map of priorities - puids to bytematcher int signatures
+	bm         bytematcher.Matcher
+	em         namematcher.Matcher
 	ids        pids
 }
 
@@ -38,33 +39,22 @@ func (pid PronomIdentification) Basis() string {
 
 func (pi *PronomIdentifier) Identify(b *siegreader.Buffer, n string, c chan core.Identification, wg *sync.WaitGroup) {
 	pi.ids = pi.ids[:0]
+	var ems []int
 	if len(n) > 0 {
-		for _, v := range pi.Em.Identify(n) {
+		ems = pi.em.Identify(n)
+		for _, v := range ems {
 			pi.ids = add(pi.ids, pi.EPuids[v], 0.1)
 		}
 	}
 
-	var currLimit []int
 	var cscore float64 = 0.1
-
-	ids, limit := pi.Bm.Identify(b)
+	ids, wait := pi.bm.Identify(b)
 
 	for i := range ids {
-		if !checkLimit(i, currLimit) {
-			continue
-		}
 		cscore *= 1.1
 		puid := pi.BPuids[i]
 		pi.ids = add(pi.ids, puid, cscore)
-
-		l, ok := pi.Priorities[puid]
-		if !ok {
-			close(limit)
-			break
-		} else {
-			limit <- l
-			currLimit = l
-		}
+		wait <- pi.priorities(i, ems)
 	}
 
 	if len(pi.ids) > 0 {
@@ -84,18 +74,6 @@ func (pi *PronomIdentifier) Identify(b *siegreader.Buffer, n string, c chan core
 	wg.Done()
 }
 
-// Messy duplicating this function here (it is also in bytematcher) - this is to get around a particular race condition
-func checkLimit(i int, l []int) bool {
-	if l == nil {
-		return true
-	}
-	idx := sort.SearchInts(l, i)
-	if idx == len(l) || l[idx] != i {
-		return false
-	}
-	return true
-}
-
 type pids []PronomIdentification
 
 func (p pids) Len() int { return len(p) }
@@ -112,4 +90,35 @@ func add(p pids, f string, c float64) pids {
 		}
 	}
 	return append(p, PronomIdentification{f, c})
+}
+
+// Deal with non-explicity priorities
+// This is where there is no HasPriority relation but we should still wait anyway as we have an extension match
+// Rule:-
+// - for each extension match
+// 	 - if the ID in question is not a priority of that extension match
+//   - add BMIds to the wait list for that extension
+func (pi *PronomIdentifier) priorities(id int, ems []int) []int {
+	w, ok := pi.Priorities[pi.BPuids[id]]
+	if !ok {
+		w = []int{}
+	}
+	for _, v := range ems {
+		ps := pi.Priorities[pi.EPuids[v]]
+		var junior bool
+		for _, psv := range ps {
+			if psv == id {
+				junior = true
+			}
+		}
+		if !junior {
+			w = append(w, pi.PuidsB[pi.EPuids[v]]...)
+		}
+	}
+	sort.Ints(w)
+	return w
+}
+
+func (pi *PronomIdentifier) String() string {
+	return pi.bm.String()
 }
