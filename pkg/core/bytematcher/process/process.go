@@ -38,8 +38,8 @@ func New() *Process {
 		make([]*testTree, 0),
 		newFrameSet(),
 		newFrameSet(),
-		newseqSet(),
-		newseqSet(),
+		newSeqSet(),
+		newSeqSet(),
 		0,
 		Defaults,
 	}
@@ -87,27 +87,38 @@ func (p *Process) AddSignature(sig frames.Signature) error {
 			case bofZero, bofWindow, bofWild:
 				clstr = clstr.commit()
 				kf[i] = clstr.add(segment, i, pos)
-				clstr.max = kf[i].Seg.PMax
+				clstr.max = kf[i].Key.PMax
 			case prev:
 				kf[i] = clstr.add(segment, i, pos)
+				if len(clstr.w.Choices) == 1 {
+					// occurs if a BOF frame precedes this
+					updatePositions(kf)
+					clstr.max = kf[i].Key.PMax
+				}
 			case succ:
 				if !clstr.rev {
 					clstr = clstr.commit()
 					clstr.rev = true
 				}
 				kf[i] = clstr.add(segment, i, pos)
+				if len(clstr.w.Choices) == 1 {
+					// occurs if an EOF frame precedes this
+					updatePositions(kf)
+					clstr.max = kf[i].Key.PMax
+				}
 			case eofZero, eofWindow, eofWild:
 				if !clstr.rev {
 					clstr = clstr.commit()
 					clstr.rev = true
 				}
 				kf[i] = clstr.add(segment, i, pos)
-				clstr.max = kf[i].Seg.PMax
+				clstr.max = kf[i].Key.PMax
 				clstr = clstr.commit()
 				clstr.rev = true
 			}
 		}
 	}
+	clstr.commit()
 	updatePositions(kf)
 	p.MaxEOF = maxEOF(p.MaxEOF, kf)
 	p.KeyFrames = append(p.KeyFrames, kf)
@@ -170,6 +181,7 @@ func (c *cluster) commit() *cluster {
 	} else {
 		ss = c.p.BOFSeq
 	}
+	c.w.Max = c.max
 	hi := ss.add(c.w, len(c.p.Tests))
 	l := len(c.ks)
 	if hi == len(c.p.Tests) {
@@ -178,7 +190,7 @@ func (c *cluster) commit() *cluster {
 		}
 	}
 	for i := 0; i < l; i++ {
-		c.p.Tests[i].add([2]int{len(c.p.KeyFrames), c.ks[i]}, c.lefts[i], c.rights[i])
+		c.p.Tests[hi+i].add([2]int{len(c.p.KeyFrames), c.ks[i]}, c.lefts[i], c.rights[i])
 	}
 	return newCluster(c.p)
 }

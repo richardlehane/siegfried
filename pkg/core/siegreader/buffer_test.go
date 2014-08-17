@@ -1,6 +1,7 @@
 package siegreader
 
 import (
+	"bytes"
 	"io"
 	"os"
 	"path/filepath"
@@ -9,6 +10,8 @@ import (
 )
 
 var teststring = "abracadabra"
+
+var testbytes = []byte("test12345678910YNESSjunktestyjunktestytest12345678910111223")
 
 var testfile = filepath.Join("..", "..", "..", "cmd", "sieg", "testdata", "benchmark", "Benchmark.docx")
 
@@ -22,9 +25,9 @@ func TestNew(t *testing.T) {
 func setup(r io.Reader, t *testing.T) *Buffer {
 	b := New()
 	q := make(chan struct{})
-	err := b.SetSource(r)
 	b.SetQuit(q)
-	if err != nil {
+	err := b.SetSource(r)
+	if err != nil && err != io.EOF {
 		t.Errorf("Read error: %v", err)
 	}
 	return b
@@ -32,7 +35,18 @@ func setup(r io.Reader, t *testing.T) *Buffer {
 
 func TestStrSource(t *testing.T) {
 	r := strings.NewReader(teststring)
-	setup(r, t)
+	b := setup(r, t)
+	if b.Size() != len(teststring) {
+		t.Error("String read: size error")
+	}
+}
+
+func TestBytSource(t *testing.T) {
+	r := bytes.NewBuffer(testbytes)
+	b := setup(r, t)
+	if b.Size() != len(testbytes) {
+		t.Error("String read: size error")
+	}
 }
 
 func TestFileSource(t *testing.T) {

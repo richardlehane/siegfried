@@ -110,4 +110,4 @@ var TestProcessObj = &Process{
 	EOFSeq:    nil,
 }
 
-var Sample = []byte{'t', 'e', 's', 't', 'T', 'E', 'S', 'T', 'M', 'A', 'T', 'C', 'H', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'Y', 'N', 'E', 'S', 'S', 't', 'e', 's', 't', 'y'}
+var Sample = []byte("testTESTMATCHAAAAAAAAAAAYNESStesty")

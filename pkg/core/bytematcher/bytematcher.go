@@ -41,7 +41,7 @@ func Load(r io.Reader) (Matcher, error) {
 	if err != nil {
 		return nil, err
 	}
-	b.Start()
+	b.start()
 	return b, nil
 }
 
@@ -99,12 +99,12 @@ func Signatures(sigs []frames.Signature, opts ...int) (*ByteMatcher, error) {
 		t.MaxRightDistance = process.MaxLength(t.Right)
 	}
 	// create aho corasick search trees for the lists of sequences (BOF, EOF and variable)
-	b.Start()
+	b.start()
 	return b, nil
 }
 
 // Start initialises the aho corasick search trees after a Bytematcher has been loaded.
-func (b *ByteMatcher) Start() {
+func (b *ByteMatcher) start() {
 	b.bAho = wac.New(b.BOFSeq.Set)
 	b.eAho = wac.New(b.EOFSeq.Set)
 }

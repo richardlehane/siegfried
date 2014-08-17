@@ -6,10 +6,9 @@ import (
 	"testing"
 )
 
-/*
+
 // Matcher
-var MStub = []byte{'t', 'e', 's', 't', 'y', 'A', 'T', 'E', 'S', 'T', 'M', 'A', 'T', 'C', 'H', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 't', 'e', 's', 't', 'y', 'Y', 'N', 'E', 'S', 'S'}
-var MatcherStub *process.Matcher = &process.Matcher{
+var TestMatcher *matcher = &matcher{
 	b:                BmStub,
 	buf:              siegreader.New(),
 	r:                make(chan int),

@@ -15,8 +15,8 @@ func TestKeyFrame(t *testing.T) {
 	if seq[0][1] != 'e' {
 		t.Error("KeyFrame: expecting the left frame's pattern to have been reversed")
 	}
-	if len(right) != 3 {
-		t.Error("KeyFrame: expecting three frames on the right")
+	if len(right) != 4 {
+		t.Errorf("KeyFrame: expecting three frames on the right, got %d", len(right))
 	}
 }
 

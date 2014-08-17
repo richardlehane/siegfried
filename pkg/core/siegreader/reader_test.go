@@ -1,6 +1,7 @@
 package siegreader
 
 import (
+	"io"
 	"os"
 	"strings"
 	"testing"
@@ -97,7 +98,7 @@ func TestReuse(t *testing.T) {
 	q := make(chan struct{})
 	err = b.SetSource(nr)
 	b.SetQuit(q)
-	if err != nil {
+	if err != nil && err != io.EOF {
 		t.Errorf("Read error: %v", err)
 	}
 	reuse := b.NewReader()

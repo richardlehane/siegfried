@@ -14,6 +14,27 @@ type testTree struct {
 	Right            []*testNode
 }
 
+func (t *testTree) String() string {
+	str := "{TEST TREE Completes:"
+	for i, v := range t.Complete {
+		str += v.String()
+		if i < len(t.Complete)-1 {
+			str += ", "
+		}
+	}
+	if len(t.Incomplete) < 1 {
+		return str + "}"
+	}
+	str += " Incompletes:"
+	for i, v := range t.Incomplete {
+		str += v.Kf.String()
+		if i < len(t.Incomplete)-1 {
+			str += ", "
+		}
+	}
+	return str + "}"
+}
+
 func newTestTree() *testTree {
 	return &testTree{
 		make([]KeyFrameID, 0),

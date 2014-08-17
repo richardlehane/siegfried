@@ -1,10 +1,9 @@
 package process
 
 import (
-	"strconv"
+	"fmt"
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
-	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
 type keyFramePos struct {
@@ -33,12 +32,16 @@ type keyFrame struct {
 }
 
 func (kf keyFrame) String() string {
-	return frames.OffString[kf.Typ] + " Min:" + strconv.Itoa(kf.Seg.PMin) + " Max:" + strconv.Itoa(kf.Seg.PMax)
+	return fmt.Sprintf("%s Min:%d Max:%d", frames.OffString[kf.Typ], kf.Seg.PMin, kf.Seg.PMax)
 }
 
 // A double index: the first int is for the signature's position within the set of all signatures,
 // the second int is for the keyFrames position within the segments of the signature.
 type KeyFrameID [2]int
+
+func (kf KeyFrameID) String() string {
+	return fmt.Sprintf("[%d:%d]", kf[0], kf[1])
+}
 
 // Turn a signature segment into a keyFrame and left and right frame slices.
 func toKeyFrame(seg frames.Signature, pos position) (keyFrame, []frames.Frame, []frames.Frame) {
@@ -148,42 +151,32 @@ func maxEOF(max int, ks []keyFrame) int {
 	return max
 }
 
-// at a given offset, must a keyFrame have already appeared?
-// rev = true for EOF matching
-// Just uses BOF:
-// - doesn't do anything for PREV/SUCC
-// - doesn't do anything for EOF??
-func (kf keyFrame) MustExist(o int, rev bool) bool {
-	switch kf.Typ {
-	case frames.BOF:
-		// it could be that we are searching the EOF and a VAR BOF has not yet appeared
-		if rev && kf.Seg.PMax > 0 {
-			return false
-		}
-		if o > kf.Seg.PMin && (kf.Seg.PMax > -1 && o > kf.Seg.PMax) {
-			return true
-		}
-		return false
-	default:
+// quick check performed before applying a keyFrame ID
+func (kf keyFrame) Check(o int) bool {
+	if kf.Key.PMin > o {
 		return false
 	}
+	if kf.Key.PMax == -1 {
+		return true
+	}
+	if kf.Key.PMax < o {
+		return false
+	}
+	return true
 }
 
-// REPLACE WITH MORE ACCURATE ONE THAT USES NEW KF POSITION INFO + STRIKE
-// quick check performed before applying a keyFrame ID
-func (kf keyFrame) Check(o, l int, buf *siegreader.Buffer) bool {
-	switch kf.Typ {
-	case frames.EOF:
-		o = buf.Size() - l - o
-		fallthrough
-	case frames.BOF:
-		if o < kf.Seg.PMin || (kf.Seg.PMax > -1 && o > kf.Seg.PMax) {
-			return false
-		}
-		return true
-	default:
+// proper segment check before committing an incomplete keyframe (necessary when there are left or right tests)
+func (kf keyFrame) CheckSeg(o int) bool {
+	if kf.Seg.PMin > o {
+		return false
+	}
+	if kf.Seg.PMax == -1 {
 		return true
 	}
+	if kf.Seg.PMax < o {
+		return false
+	}
+	return true
 }
 
 // test two key frames (current and previous) to see if they are connected and, if so, at what offsets

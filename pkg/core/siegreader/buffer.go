@@ -135,16 +135,21 @@ func (b *Buffer) fill() (int, error) {
 	}
 	// if we have an eof buffer, and we are near the end of the file, avoid an extra read by copying straight into the main buffer
 	if len(b.eof) > 0 && b.w.val+readSz >= int(b.sz) {
+		close(b.completec)
+		b.complete = true
 		lr := int(b.sz) - b.w.val
 		b.w.val += copy(b.buf[b.w.val:b.w.val+lr], b.eof[readSz-lr:])
 		return b.w.val, io.EOF
 	}
 	// otherwise, let's read
 	i, err := b.src.Read(b.buf[b.w.val : b.w.val+readSz])
+	if i < readSz {
+		err = io.EOF // Readers can give EOF or nil here
+	}
 	if err != nil {
+		close(b.completec)
+		b.complete = true
 		if err == io.EOF {
-			close(b.completec)
-			b.complete = true
 			b.w.val += i
 			// if we haven't got an eof buf already
 			if len(b.eof) < readSz {
@@ -218,7 +223,7 @@ func (b *Buffer) Slice(s, l int) ([]byte, error) {
 // Return a slice from the end of the buffer that begins at offset s and has length l.
 // This will block until the slice is available (which may be until the full stream is read).
 func (b *Buffer) EofSlice(s, l int) ([]byte, error) {
-	// block until the EOF is available
+	// block until the EOF is available or we quit
 	select {
 	case <-b.quit:
 		return []byte{}, quitError
@@ -242,6 +247,16 @@ func (b *Buffer) EofSlice(s, l int) ([]byte, error) {
 		return buf[:len(buf)-s], io.EOF
 	}
 	return buf[len(buf)-(s+l) : len(buf)-s], nil
+}
+
+// MustSlice calls Slice or EofSlice (which one depends on the rev argument: true for EofSlice) and suppresses the error.
+// If a non io.EOF error is encountered, it will be logged as a warning.
+func (b *Buffer) SafeSlice(s, l int, rev bool) ([]byte, error) {
+	if rev {
+		return b.EofSlice(s, l)
+	} else {
+		return b.Slice(s, l)
+	}
 }
 
 // MustSlice calls Slice or EofSlice (which one depends on the rev argument: true for EofSlice) and suppresses the error.

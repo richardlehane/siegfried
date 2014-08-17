@@ -15,14 +15,14 @@ type seqSet struct {
 	TestTreeIndex []int // The index of the testTree for the first choices. For subsequence choices, add the index of that choice to the test tree index.
 }
 
-func newseqSet() *seqSet {
+func newSeqSet() *seqSet {
 	return &seqSet{make([]wac.Seq, 0), make([]int, 0)}
 }
 
 // helper funcs to test equality of wac.Seq
 func choiceExists(a []byte, b wac.Choice) bool {
-	for _, bc := range b {
-		if string(a) == string(bc) {
+	for _, v := range b {
+		if string(a) == string(v) {
 			return true
 		}
 	}
@@ -33,12 +33,12 @@ func seqEquals(a wac.Seq, b wac.Seq) bool {
 	if a.Max != b.Max || len(a.Choices) != len(b.Choices) {
 		return false
 	}
-	for i, ac := range a.Choices {
-		if len(ac) != len(b.Choices[i]) {
+	for i := range a.Choices {
+		if len(a.Choices[i]) != len(b.Choices[i]) {
 			return false
 		}
-		for _, aac := range ac {
-			if !choiceExists(aac, b.Choices[i]) {
+		for _, v := range a.Choices[i] {
+			if !choiceExists(v, b.Choices[i]) {
 				return false
 			}
 		}

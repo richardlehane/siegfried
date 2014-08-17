@@ -1,6 +1,8 @@
 package process
 
 import (
+	"fmt"
+
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 )
 
@@ -74,11 +76,15 @@ func characterise(seg frames.Signature) sigType {
 	return bofWindow
 }
 
-// the position of a key frame in a sequence: the length (number of frames), start and end indexes
+// the position of a key frame in a sequence: the length (minimum length in bytes), start and end indexes
 type position struct {
 	length int
 	start  int
 	end    int
+}
+
+func (p position) String() string {
+	return fmt.Sprintf("POS Length: %d; Start: %d; End: %d", p.length, p.start, p.end)
 }
 
 func varLength(seg frames.Signature, max int) position {
