@@ -8,6 +8,7 @@ import (
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
+	"github.com/richardlehane/siegfried/pkg/pronom/mappings"
 )
 
 const (
@@ -124,74 +125,82 @@ func (p *pronom) parse() ([]frames.Signature, error) {
 	for _, f := range p.droid.FileFormats {
 		puid := f.Puid
 		for _, s := range f.Signatures {
-			sig := make(frames.Signature, 0, 1)
-			for _, bs := range s.ByteSequences {
-				// check if <Offset> or <MaxOffset> elements are present
-				min, err := decodeNum(bs.Offset)
-				if err != nil {
-					return nil, err
-				}
-				max, err := decodeNum(bs.MaxOffset)
-				if err != nil {
-					return nil, err
-				}
-				if max == 0 {
-					max = min
-				}
-				// parse the hexstring
-				toks, lmin, lmax, err := parseHex(puid, bs.Hex)
-				if err != nil {
-					return nil, err
-				}
-				// create a new signature for this set of tokens
-				tokSig := make(frames.Signature, len(toks))
-				// check position and add patterns to signature
-				switch bs.Position {
-				case bofstring:
-					if toks[0].min == 0 && toks[0].max == 0 {
-						toks[0].min, toks[0].max = min, max
-					}
-					tokSig[0] = frames.NewFrame(frames.BOF, toks[0].pat, toks[0].min, toks[0].max)
-					if len(toks) > 1 {
-						for i, tok := range toks[1:] {
-							tokSig[i+1] = frames.NewFrame(frames.PREV, tok.pat, tok.min, tok.max)
-						}
-					}
-				case varstring:
-					if max == 0 {
-						max = -1
-					}
-					if toks[0].min == 0 && toks[0].max == 0 {
-						toks[0].min, toks[0].max = min, max
-					}
-					if toks[0].min == toks[0].max {
-						toks[0].max = -1
-					}
-					tokSig[0] = frames.NewFrame(frames.BOF, toks[0].pat, toks[0].min, toks[0].max)
-					if len(toks) > 1 {
-						for i, tok := range toks[1:] {
-							tokSig[i+1] = frames.NewFrame(frames.PREV, tok.pat, tok.min, tok.max)
-						}
-					}
-				case eofstring:
-					if len(toks) > 1 {
-						for i, tok := range toks[:len(toks)-1] {
-							tokSig[i] = frames.NewFrame(frames.SUCC, tok.pat, toks[i+1].min, toks[i+1].max)
-						}
-					}
-					// handle edge case where there is a {x-y} at end of EOF seq e.g. x-fmt/263
-					if lmin != 0 || lmax != 0 {
-						min, max = lmin, lmax
-					}
-					tokSig[len(toks)-1] = frames.NewFrame(frames.EOF, toks[len(toks)-1].pat, min, max)
-				default:
-					return nil, errors.New("Pronom parse error: invalid ByteSequence position " + bs.Position)
-				}
-				// add the segment (tokens signature) to the complete signature
-				sig = appendSig(sig, tokSig, bs.Position)
+			sig, err := parseSig(puid, s)
+			if err != nil {
+				return nil, err
 			}
 			sigs = append(sigs, sig)
 		}
 	}
 	return sigs, nil
+}
+
+func parseSig(puid string, s mappings.Signature) (frames.Signature, error) {
+	sig := make(frames.Signature, 0, 1)
+	for _, bs := range s.ByteSequences {
+		// check if <Offset> or <MaxOffset> elements are present
+		min, err := decodeNum(bs.Offset)
+		if err != nil {
+			return nil, err
+		}
+		max, err := decodeNum(bs.MaxOffset)
+		if err != nil {
+			return nil, err
+		}
+		if max == 0 {
+			max = min
+		}
+		// parse the hexstring
+		toks, lmin, lmax, err := parseHex(puid, bs.Hex)
+		if err != nil {
+			return nil, err
+		}
+		// create a new signature for this set of tokens
+		tokSig := make(frames.Signature, len(toks))
+		// check position and add patterns to signature
+		switch bs.Position {
+		case bofstring:
+			if toks[0].min == 0 && toks[0].max == 0 {
+				toks[0].min, toks[0].max = min, max
+			}
+			tokSig[0] = frames.NewFrame(frames.BOF, toks[0].pat, toks[0].min, toks[0].max)
+			if len(toks) > 1 {
+				for i, tok := range toks[1:] {
+					tokSig[i+1] = frames.NewFrame(frames.PREV, tok.pat, tok.min, tok.max)
+				}
+			}
+		case varstring:
+			if max == 0 {
+				max = -1
+			}
+			if toks[0].min == 0 && toks[0].max == 0 {
+				toks[0].min, toks[0].max = min, max
+			}
+			if toks[0].min == toks[0].max {
+				toks[0].max = -1
+			}
+			tokSig[0] = frames.NewFrame(frames.BOF, toks[0].pat, toks[0].min, toks[0].max)
+			if len(toks) > 1 {
+				for i, tok := range toks[1:] {
+					tokSig[i+1] = frames.NewFrame(frames.PREV, tok.pat, tok.min, tok.max)
+				}
+			}
+		case eofstring:
+			if len(toks) > 1 {
+				for i, tok := range toks[:len(toks)-1] {
+					tokSig[i] = frames.NewFrame(frames.SUCC, tok.pat, toks[i+1].min, toks[i+1].max)
+				}
+			}
+			// handle edge case where there is a {x-y} at end of EOF seq e.g. x-fmt/263
+			if lmin != 0 || lmax != 0 {
+				min, max = lmin, lmax
+			}
+			tokSig[len(toks)-1] = frames.NewFrame(frames.EOF, toks[len(toks)-1].pat, min, max)
+		default:
+			return nil, errors.New("Pronom parse error: invalid ByteSequence position " + bs.Position)
+		}
+		// add the segment (tokens signature) to the complete signature
+		sig = appendSig(sig, tokSig, bs.Position)
+	}
+	return sig, nil
 }

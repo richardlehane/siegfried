@@ -9,10 +9,12 @@ import (
 	"path/filepath"
 	"time"
 
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
 var (
+	view     = flag.String("view", "", "view a Pronom signature e.g. fmt/161")
 	harvest  = flag.Bool("harvest", false, "harvest Pronom reports")
 	build    = flag.Bool("build", false, "build a Siegfried signature file")
 	inspect  = flag.Bool("inspect", false, "describe a Siegfried signature file")
@@ -87,6 +89,45 @@ func inspectPronom() error {
 	return nil
 }
 
+func viewSig(f string) error {
+	sigs, err := pronom.ParsePuid(f, reports)
+	if err != nil {
+		return err
+	}
+	fmt.Println("Signatures:")
+	for _, s := range sigs {
+		fmt.Println(s)
+	}
+	bm, err := bytematcher.Signatures(sigs)
+	if err != nil {
+		return err
+	}
+	fmt.Println("\nKeyframes:")
+	for _, kf := range bm.KeyFrames {
+		fmt.Println(kf)
+	}
+	fmt.Println("\nTests:")
+	for _, test := range bm.Tests {
+		fmt.Println(test)
+	}
+	if len(bm.BOFSeq.Set) > 0 {
+		fmt.Println("\nBOF seqs:")
+		for _, seq := range bm.BOFSeq.Set {
+			fmt.Println(seq)
+		}
+	}
+	if len(bm.EOFSeq.Set) > 0 {
+		fmt.Println("\nEOF seqs:")
+		for _, seq := range bm.EOFSeq.Set {
+			fmt.Println(seq)
+		}
+	}
+	fmt.Println("\nBytematcher:")
+
+	fmt.Println(bm)
+	return nil
+}
+
 func main() {
 	flag.Parse()
 
@@ -99,6 +140,8 @@ func main() {
 		err = makegob()
 	case *inspect:
 		err = inspectPronom()
+	case *view != "":
+		err = viewSig(*view)
 	case *defaults:
 		fmt.Println(droid)
 		fmt.Println(container)

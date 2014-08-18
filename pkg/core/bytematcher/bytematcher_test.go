@@ -41,6 +41,21 @@ func TestIO(t *testing.T) {
 	}
 }
 
+func contains(a, b []int) bool {
+	for _, v := range a {
+		var present bool
+		for _, w := range b {
+			if v == w {
+				present = true
+			}
+		}
+		if !present {
+			return false
+		}
+	}
+	return true
+}
+
 func TestMatch(t *testing.T) {
 	bm, err := Signatures(frames.TestSignatures, 8192, 2059, 9, 1)
 	if err != nil {
@@ -57,8 +72,8 @@ func TestMatch(t *testing.T) {
 		wait <- []int{0, 1, 2, 3, 4}
 		results = append(results, i)
 	}
-	if len(results) != 7 {
-		t.Errorf("Expecting 7 results, got: %v; the BM is \n%v", results, bm)
+	if !contains(results, []int{0, 2, 3, 4}) {
+		t.Errorf("Missing result, got: %v, expecting:%v\n", results, bm)
 	}
 	err = buf.SetSource(bytes.NewBuffer(TestSample2))
 	if err != nil && err != io.EOF {
@@ -70,7 +85,7 @@ func TestMatch(t *testing.T) {
 		wait <- []int{0, 1, 2, 3, 4}
 		results = append(results, i)
 	}
-	if len(results) != 7 {
-		t.Errorf("Expecting 7 results, got: %v; the BM is \n%v", results, bm)
+	if !contains(results, []int{0, 1, 2, 3, 4}) {
+		t.Errorf("Missing result, got: %v, expecting:%v\n", results, bm)
 	}
 }

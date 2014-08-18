@@ -1,6 +1,8 @@
 package process
 
 import (
+	"bytes"
+
 	"github.com/richardlehane/match/wac"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
@@ -22,7 +24,7 @@ func newSeqSet() *seqSet {
 // helper funcs to test equality of wac.Seq
 func choiceExists(a []byte, b wac.Choice) bool {
 	for _, v := range b {
-		if string(a) == string(v) {
+		if bytes.Equal(a, v) {
 			return true
 		}
 	}

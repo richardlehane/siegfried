@@ -209,6 +209,7 @@ func (b *Buffer) Slice(s, l int) ([]byte, error) {
 			if s > b.w.val {
 				return nil, err
 			}
+			// in the case of an empty file
 			if b.Size() == 0 {
 				return nil, io.EOF
 			}
@@ -226,7 +227,7 @@ func (b *Buffer) EofSlice(s, l int) ([]byte, error) {
 	// block until the EOF is available or we quit
 	select {
 	case <-b.quit:
-		return []byte{}, quitError
+		return nil, quitError
 	case <-b.eofc:
 	}
 	var buf []byte
@@ -235,7 +236,7 @@ func (b *Buffer) EofSlice(s, l int) ([]byte, error) {
 	} else {
 		select {
 		case <-b.quit:
-			return []byte{}, quitError
+			return nil, quitError
 		case <-b.completec:
 		}
 		buf = b.buf[:int(b.sz)]

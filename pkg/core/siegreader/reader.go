@@ -175,5 +175,5 @@ func (r *ReverseReader) ReadByte() (byte, error) {
 	b := r.scratch[len(r.scratch)-r.j-1]
 	r.i++
 	r.j++
-	return b, err
+	return b, nil
 }

@@ -19,15 +19,3 @@ func TestKeyFrame(t *testing.T) {
 		t.Errorf("KeyFrame: expecting three frames on the right, got %d", len(right))
 	}
 }
-
-func TestMustExist(t *testing.T) {
-	if TestKeyFrames[0].MustExist(5, false) {
-		t.Error("KeyFrame: BOF KeyFrame does not have to exist at offset 5")
-	}
-	if TestKeyFrames[0].MustExist(10, false) {
-		t.Error("KeyFrame: BOF KeyFrame does not have to exist at offset 10")
-	}
-	if !TestKeyFrames[0].MustExist(15, false) {
-		t.Error("KeyFrame: BOF KeyFrame must exist at offset 15")
-	}
-}

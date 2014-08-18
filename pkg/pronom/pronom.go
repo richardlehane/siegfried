@@ -15,6 +15,7 @@ import (
 	"time"
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/namematcher"
 
 	. "github.com/richardlehane/siegfried/pkg/pronom/mappings"
@@ -134,6 +135,26 @@ func Load(path string) (*PronomIdentifier, error) {
 	p.em = em
 	p.ids = make(pids, 20)
 	return &p, nil
+}
+
+func ParsePuid(f, reports string) ([]frames.Signature, error) {
+	buf, err := get(reports, f, true)
+	if err != nil {
+		return nil, err
+	}
+	rep := new(Report)
+	if err = xml.Unmarshal(buf, rep); err != nil {
+		return nil, err
+	}
+	sigs := make([]frames.Signature, len(rep.Signatures))
+	for i, v := range rep.Signatures {
+		s, err := parseSig(f, v)
+		if err != nil {
+			return nil, err
+		}
+		sigs[i] = s
+	}
+	return sigs, nil
 }
 
 func (p *pronom) identifier() (*PronomIdentifier, error) {

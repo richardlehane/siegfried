@@ -177,7 +177,6 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 
 	// calculate the offset and lengths for the left and right test slices
 	var lslc, rslc []byte
-	var err error
 	var lpos, llen, rpos, rlen int
 	if s.reverse {
 		lpos, llen = s.offset+s.length, t.MaxLeftDistance
@@ -200,9 +199,9 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 
 	// test left (if there are valid left tests to try)
 	if checkl {
-		lslc, err = m.buf.SafeSlice(lpos, llen, s.reverse)
-		// if we've quit already, we'll return an error
-		if err != nil {
+		lslc, _ = m.buf.SafeSlice(lpos, llen, s.reverse)
+		// if we've quit already, we'll return a nil slice
+		if lslc == nil {
 			return
 		}
 		left := process.MatchTestNodes(t.Left, lslc, true)
@@ -217,9 +216,9 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 	}
 	// test right (if there are valid left tests to try)
 	if checkr {
-		rslc, err = m.buf.SafeSlice(rpos, rlen, s.reverse)
-		// if we've quit already, we'll return an error
-		if err != nil {
+		rslc, _ = m.buf.SafeSlice(rpos, rlen, s.reverse)
+		// if we've quit already, we'll return a nil slice
+		if rslc == nil {
 			return
 		}
 		right := process.MatchTestNodes(t.Right, rslc, false)
