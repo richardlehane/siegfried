@@ -100,6 +100,12 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ## Changes
+### Version 0.3 (19/08/2014)
+- replaced ac matcher with wac matcher
+- re-write of bytematcher code
+- some benchmarks slower but fewer really poor edge cases (see cmd/sieg/testdata/bench_results.txt)... so a win!
+- but still too slow!
+
 ### Version 0.2 (26/03/2014)
 
 - benchmarks (cmd/sieg/testdata)
