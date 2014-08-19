@@ -32,11 +32,11 @@ func TestProcess(t *testing.T) {
 	if len(p.BOFSeq.Set) != 3 {
 		t.Errorf("Expecting three BOF seqs, got %d", len(p.BOFSeq.Set))
 	}
-	e1 := wac.Seq{0, []wac.Choice{wac.Choice{[]byte{'t', 'e', 's', 't'}}}}
+	e1 := wac.Seq{[]int{0}, []wac.Choice{wac.Choice{[]byte{'t', 'e', 's', 't'}}}}
 	if !seqEquals(p.BOFSeq.Set[0], e1) {
 		t.Errorf("Expecting %v to equal %v", p.BOFSeq.Set[0], e1)
 	}
-	e2 := wac.Seq{-1, []wac.Choice{wac.Choice{[]byte{'t', 'e', 's', 't'}}}}
+	e2 := wac.Seq{[]int{-1}, []wac.Choice{wac.Choice{[]byte{'t', 'e', 's', 't'}}}}
 	if seqEquals(p.BOFSeq.Set[0], e2) {
 		t.Errorf("Not expecting %v to equal %v", p.BOFSeq.Set[0], e2)
 	}

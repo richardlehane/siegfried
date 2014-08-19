@@ -12,10 +12,10 @@ func TestseqSet(t *testing.T) {
 	if s == nil {
 		t.Error("Failed to create  new seqSet")
 	}
-	c1 := wac.Seq{0, []wac.Choice{wac.Choice{[]byte{'a', 'p', 'p', 'l', 'e'}}}}
-	c2 := wac.Seq{0, []wac.Choice{wac.Choice{[]byte{'a', 'p', 'p', 'l', 'e'}}}}
-	c3 := wac.Seq{1, []wac.Choice{wac.Choice{[]byte{'a', 'p', 'p', 'l', 'e'}}}}
-	c4 := wac.Seq{1, []wac.Choice{wac.Choice{[]byte{'a', 'p', 'p', 'l', 'e', 's'}}}}
+	c1 := wac.Seq{[]int{0}, []wac.Choice{wac.Choice{[]byte{'a', 'p', 'p', 'l', 'e'}}}}
+	c2 := wac.Seq{[]int{0}, []wac.Choice{wac.Choice{[]byte{'a', 'p', 'p', 'l', 'e'}}}}
+	c3 := wac.Seq{[]int{-1}, []wac.Choice{wac.Choice{[]byte{'a', 'p', 'p', 'l', 'e'}}}}
+	c4 := wac.Seq{[]int{-1}, []wac.Choice{wac.Choice{[]byte{'a', 'p', 'p', 'l', 'e', 's'}}}}
 	s.add(c1, 0)
 	i := s.add(c2, 1)
 	if i != 0 {

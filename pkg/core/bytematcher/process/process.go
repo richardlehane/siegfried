@@ -87,32 +87,20 @@ func (p *Process) AddSignature(sig frames.Signature) error {
 			case bofZero, bofWindow, bofWild:
 				clstr = clstr.commit()
 				kf[i] = clstr.add(segment, i, pos)
-				clstr.max = kf[i].Key.PMax
 			case prev:
 				kf[i] = clstr.add(segment, i, pos)
-				if len(clstr.w.Choices) == 1 {
-					// occurs if a BOF frame precedes this
-					updatePositions(kf)
-					clstr.max = kf[i].Key.PMax
-				}
 			case succ:
 				if !clstr.rev {
 					clstr = clstr.commit()
 					clstr.rev = true
 				}
 				kf[i] = clstr.add(segment, i, pos)
-				if len(clstr.w.Choices) == 1 {
-					// occurs if an EOF frame precedes this
-					updatePositions(kf)
-					clstr.max = kf[i].Key.PMax
-				}
 			case eofZero, eofWindow, eofWild:
 				if !clstr.rev {
 					clstr = clstr.commit()
 					clstr.rev = true
 				}
 				kf[i] = clstr.add(segment, i, pos)
-				clstr.max = kf[i].Key.PMax
 				clstr = clstr.commit()
 				clstr.rev = true
 			}
@@ -127,7 +115,7 @@ func (p *Process) AddSignature(sig frames.Signature) error {
 
 type cluster struct {
 	rev    bool
-	max    int
+	kfs    []keyFrame
 	p      *Process
 	w      wac.Seq
 	ks     []int
@@ -137,6 +125,7 @@ type cluster struct {
 
 func newCluster(p *Process) *cluster {
 	c := new(cluster)
+	c.kfs = make([]keyFrame, 0)
 	c.p = p
 	c.w.Choices = make([]wac.Choice, 0)
 	c.ks = make([]int, 0)
@@ -148,6 +137,7 @@ func newCluster(p *Process) *cluster {
 func (c *cluster) add(seg frames.Signature, i int, pos position) keyFrame {
 	sequences := frames.NewSequencer(c.rev)
 	k, left, right := toKeyFrame(seg, pos)
+	c.kfs = append(c.kfs, k)
 	var seqs [][]byte
 	// do it all backwards
 	if c.rev {
@@ -175,13 +165,23 @@ func (c *cluster) commit() *cluster {
 	if len(c.w.Choices) == 0 {
 		return newCluster(c.p)
 	}
+	updatePositions(c.kfs)
+	c.w.MaxOffsets = make([]int, len(c.kfs))
+	if c.rev {
+		for i := range c.w.MaxOffsets {
+			c.w.MaxOffsets[i] = c.kfs[len(c.kfs)-1-i].Key.PMax
+		}
+	} else {
+		for i, v := range c.kfs {
+			c.w.MaxOffsets[i] = v.Key.PMax
+		}
+	}
 	var ss *seqSet
 	if c.rev {
 		ss = c.p.EOFSeq
 	} else {
 		ss = c.p.BOFSeq
 	}
-	c.w.Max = c.max
 	hi := ss.add(c.w, len(c.p.Tests))
 	l := len(c.ks)
 	if hi == len(c.p.Tests) {

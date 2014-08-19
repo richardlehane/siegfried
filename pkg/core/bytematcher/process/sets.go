@@ -32,8 +32,13 @@ func choiceExists(a []byte, b wac.Choice) bool {
 }
 
 func seqEquals(a wac.Seq, b wac.Seq) bool {
-	if a.Max != b.Max || len(a.Choices) != len(b.Choices) {
+	if len(a.MaxOffsets) != len(b.MaxOffsets) || len(a.Choices) != len(b.Choices) {
 		return false
+	}
+	for i := range a.MaxOffsets {
+		if a.MaxOffsets[i] != b.MaxOffsets[i] {
+			return false
+		}
 	}
 	for i := range a.Choices {
 		if len(a.Choices[i]) != len(b.Choices[i]) {
