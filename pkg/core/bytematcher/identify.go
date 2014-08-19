@@ -1,6 +1,8 @@
 package bytematcher
 
 import (
+	//"fmt"
+
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
@@ -38,12 +40,14 @@ func (b *ByteMatcher) identify(buf *siegreader.Buffer, quit chan struct{}, r cha
 			if !ok {
 				bchan = nil
 			} else {
+				//fmt.Println(strike{b.BOFSeq.TestTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false, br.Final}) // testing
 				incoming <- strike{b.BOFSeq.TestTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false, br.Final}
 			}
 		case er, ok := <-echan:
 			if !ok {
 				echan = nil
 			} else {
+				//fmt.Println(strike{b.EOFSeq.TestTreeIndex[er.Index[0]], er.Index[1], er.Offset, er.Length, true, false, er.Final}) // testing
 				incoming <- strike{b.EOFSeq.TestTreeIndex[er.Index[0]], er.Index[1], er.Offset, er.Length, true, false, er.Final}
 			}
 		}

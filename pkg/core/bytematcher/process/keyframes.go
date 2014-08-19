@@ -181,6 +181,10 @@ func (kf keyFrame) CheckSeg(o int) bool {
 
 // test two key frames (current and previous) to see if they are connected and, if so, at what offsets
 func (kf keyFrame) CheckRelated(prevKf keyFrame, thisOff, prevOff [][2]int) ([][2]int, bool) {
+	// quick test for wild kf
+	if prevKf.Seg.PMax == -1 && prevKf.Seg.PMin == 0 {
+		return thisOff, true
+	}
 	switch kf.Typ {
 	case frames.BOF:
 		return thisOff, true

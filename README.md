@@ -4,7 +4,7 @@ Siegfried is a signature-based file identification tool.
 
 ## Version
 
-0.2
+0.3
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried)
 
@@ -63,13 +63,11 @@ For more information about Siegfried's signature file format, see [this wiki pag
 
 ## Roadmap
 
-### Next up: version 0.3 (July 2014)
-
-- upgraded Aho-Corasick matching engine
-
-### Thereafter...
+### Next up: version 0.4 (September 2014)
 
 - container matching (see [https://www.github.com/richardlehane/mscfb](https://www.github.com/richardlehane/mscfb))
+
+### Thereafter...
 
 - basis mode (provide grounds for a format match)
 

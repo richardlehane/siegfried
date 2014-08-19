@@ -14,6 +14,8 @@ import (
 )
 
 var (
+	blame    = flag.Int("blame", -1, "identify a signature from an initial test tree index")
+	compile  = flag.String("compile", "", "compile a single Pronom signature (for testing)")
 	view     = flag.String("view", "", "view a Pronom signature e.g. fmt/161")
 	harvest  = flag.Bool("harvest", false, "harvest Pronom reports")
 	build    = flag.Bool("build", false, "build a Siegfried signature file")
@@ -89,6 +91,39 @@ func inspectPronom() error {
 	return nil
 }
 
+func blameSig(i int) error {
+	p, err := pronom.NewPronom(droid, container, reports)
+	if err != nil {
+		return err
+	}
+	sigs, err := p.Parse()
+	if err != nil {
+		return err
+	}
+	bm, err := bytematcher.Signatures(sigs)
+	if err != nil {
+		return err
+	}
+	if i > len(bm.Tests)-1 {
+		return fmt.Errorf("Test index out of range: got %d, have %d tests", i, len(bm.Tests))
+	}
+	puids, _ := p.GetPuids()
+	tn := bm.Tests[i]
+	if len(tn.Complete) > 0 {
+		fmt.Println("Completes:")
+	}
+	for _, v := range tn.Complete {
+		fmt.Println(puids[v[0]])
+	}
+	if len(tn.Incomplete) > 0 {
+		fmt.Println("Incompletes:")
+	}
+	for _, v := range tn.Incomplete {
+		fmt.Println(puids[v.Kf[0]])
+	}
+	return nil
+}
+
 func viewSig(f string) error {
 	sigs, err := pronom.ParsePuid(f, reports)
 	if err != nil {
@@ -128,6 +163,19 @@ func viewSig(f string) error {
 	return nil
 }
 
+func compileSig(f string) error {
+	sigs, err := pronom.ParsePuid(f, reports)
+	if err != nil {
+		return err
+	}
+	bm, err := bytematcher.Signatures(sigs)
+	if err != nil {
+		return err
+	}
+	pi := pronom.NewFromBM(bm, len(sigs), f)
+	return pi.Save(sigfile)
+}
+
 func main() {
 	flag.Parse()
 
@@ -140,8 +188,12 @@ func main() {
 		err = makegob()
 	case *inspect:
 		err = inspectPronom()
+	case *compile != "":
+		err = compileSig(*compile)
 	case *view != "":
 		err = viewSig(*view)
+	case *blame > -1:
+		err = blameSig(*blame)
 	case *defaults:
 		fmt.Println(droid)
 		fmt.Println(container)

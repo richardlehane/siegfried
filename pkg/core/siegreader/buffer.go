@@ -240,8 +240,11 @@ func (b *Buffer) EofSlice(s, l int) ([]byte, error) {
 		case <-b.completec:
 		}
 		buf = b.buf[:int(b.sz)]
+		if s+l == len(buf) {
+			return buf[:len(buf)-s], io.EOF
+		}
 	}
-	if s+l >= len(buf) {
+	if s+l > len(buf) {
 		if s > len(buf) {
 			return nil, io.EOF
 		}

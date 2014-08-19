@@ -120,7 +120,7 @@ func appendSig(s1, s2 frames.Signature, pos string) frames.Signature {
 	return append(s1, s2...)
 }
 
-func (p *pronom) parse() ([]frames.Signature, error) {
+func (p *pronom) Parse() ([]frames.Signature, error) {
 	sigs := make([]frames.Signature, 0, 700)
 	for _, f := range p.droid.FileFormats {
 		puid := f.Puid

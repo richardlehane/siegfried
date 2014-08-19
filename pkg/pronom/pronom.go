@@ -46,7 +46,7 @@ func ConfigPaths() (string, string, string) {
 }
 
 func NewIdentifier(droid, container, reports string) (*PronomIdentifier, error) {
-	pronom, err := newPronom(droid, container, reports)
+	pronom, err := NewPronom(droid, container, reports)
 	if err != nil {
 		return nil, err
 	}
@@ -157,13 +157,29 @@ func ParsePuid(f, reports string) ([]frames.Signature, error) {
 	return sigs, nil
 }
 
+func NewFromBM(bm bytematcher.Matcher, i int, puid string) *PronomIdentifier {
+	pi := new(PronomIdentifier)
+	pi.bm = bm
+	pi.em = namematcher.NewExtensionMatcher()
+	sigs := make([]int, i)
+	for idx := range sigs {
+		sigs[idx] = idx
+	}
+	pi.BPuids = make([]string, i)
+	for idx := range pi.BPuids {
+		pi.BPuids[idx] = puid
+	}
+	pi.Priorities = make(map[string][]int)
+	return pi
+}
+
 func (p *pronom) identifier() (*PronomIdentifier, error) {
 	pi := new(PronomIdentifier)
 	pi.ids = make(pids, 20)
-	pi.BPuids, pi.PuidsB = p.getPuids()
+	pi.BPuids, pi.PuidsB = p.GetPuids()
 	pi.Priorities = p.priorities()
 	pi.em, pi.EPuids = p.extensionMatcher()
-	sigs, err := p.parse()
+	sigs, err := p.Parse()
 	if err != nil {
 		return nil, err
 	}
@@ -191,7 +207,7 @@ func (p pronom) signatures() []Signature {
 }
 
 // returns a slice of puid strings that correspondes to indexes of byte signatures
-func (p pronom) getPuids() ([]string, map[string][]int) {
+func (p pronom) GetPuids() ([]string, map[string][]int) {
 	var iter int
 	puids := make([]string, len(p.signatures()))
 	bids := make(map[string][]int)
@@ -304,7 +320,7 @@ func (p pronom) priorities() map[string][]int {
 	// now check the priority tree to make sure that it is consistent,
 	// i.e. that for any format with a superior fmt, then anything superior
 	// to that superior fmt is also marked as superior to the base fmt, all the way down the tree
-	puids, _ := p.getPuids()
+	puids, _ := p.GetPuids()
 	for k, _ := range priorities {
 		extras := priorityWalk(k, priorities, puids)
 		if len(extras) > 0 {
@@ -319,7 +335,7 @@ func (p pronom) priorities() map[string][]int {
 }
 
 // newPronom creates a pronom object. It takes as arguments the paths to a Droid signature file, a container file, and a base directory or base url for Pronom reports.
-func newPronom(droid, container, reports string) (*pronom, error) {
+func NewPronom(droid, container, reports string) (*pronom, error) {
 	p := new(pronom)
 	if err := p.setDroid(droid); err != nil {
 		return p, err

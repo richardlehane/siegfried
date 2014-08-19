@@ -106,7 +106,7 @@ func TestReuse(t *testing.T) {
 	seek(t, reuse)
 }
 
-func drain(r *Reader, results chan int) {
+func drain(r io.ByteReader, results chan int) {
 	var i int
 	for _, e := r.ReadByte(); e == nil; _, e = r.ReadByte() {
 		i++
@@ -182,4 +182,24 @@ func TestReverse(t *testing.T) {
 	if c != 'r' {
 		t.Errorf("Read error: expecting 'r', got %v", c)
 	}
+}
+
+func TestReverseDrainFile(t *testing.T) {
+	r, err := os.Open(testfile)
+	if err != nil {
+		t.Fatal(err)
+	}
+	b := setup(r, t)
+	quit := make(chan struct{})
+	b.SetQuit(quit)
+	first := b.NewReader()
+	firstResults := make(chan int, 24040)
+	last, _ := b.NewReverseReader()
+	lastResults := make(chan int)
+	go drain(first, firstResults)
+	go drain(last, lastResults)
+	if i := <-lastResults; i != 24040 {
+		t.Errorf("Expecting 24040, got %v", i)
+	}
+	r.Close()
 }

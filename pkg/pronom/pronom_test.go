@@ -9,7 +9,7 @@ var p *pronom
 
 func TestNew(t *testing.T) {
 	var err error
-	p, err = newPronom(ConfigPaths())
+	p, err = NewPronom(ConfigPaths())
 	if err != nil {
 		t.Error("New fail: ", err)
 	}
