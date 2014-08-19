@@ -7,11 +7,6 @@ branches:
   only:
     - master
 install:
-  - go get github.com/richardlehane/match/ac
-  - go install github.com/richardlehane/siegfried/pkg/core/bytematcher
-  - go install github.com/richardlehane/siegfried/pkg/pronom
   - go install github.com/richardlehane/siegfried/cmd/sieg
 script:
-  - go test github.com/richardlehane/siegfried/pkg/core/bytematcher
-  - go test github.com/richardlehane/siegfried/pkg/pronom
   - go test github.com/richardlehane/siegfried/cmd/sieg
