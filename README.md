@@ -22,44 +22,13 @@ Siegfried is a signature-based file identification tool.
 With go installed: 
 
     go get github.com/richardlehane/siegfried/cmd/sieg
+    go install github.com/richardlehane/siegfried/cmd/sieg
 
-Or download a pre-built binary and signature file from the [releases page](https://github.com/richardlehane/siegfried/releases/tag/v0.2).
+Or download a pre-built binary and signature file from the [releases page](https://github.com/richardlehane/siegfried/releases/tag/v0.3).
 
-Binaries for 64-bit Windows, OSX and Linux are available. Copy the binary to any location you like (preferably in your system's path).
+Binaries for Windows, OSX and Linux are available. Copy the binary to any location you like (preferably in your system's path).
 
-The signature file (pronom.gob) should be copied to a "siegfried" directory within your computer's home directory (e.g. ~/siegfried or c:\users\richardl\siegfried). Alternatively, you can provide a different file location as a flag when using the sieg executable.
-
-### Signature file
-
-You can also build your own signature file using the R2D2 tool (it talks to Droid, get it!... and, yes, a protocol droid would have been more appropriate but that name was already taken :().
-
-To do this:
-
-- install r2d2 (go get github.com/richardlehane/cmd/r2d2)
-
-- get recent Droid signature and container files. These are available for download from this page: [http://www.nationalarchives.gov.uk/aboutapps/pronom/droid-signature-files.html](http://www.nationalarchives.gov.uk/aboutapps/pronom/droid-signature-files.html). If these aren't the same as the defaults in the R2D2 tool (use the r2d2 -defaults command to check), you will need to supply the names of your updated files with additional flags to the relevant R2D2 commands
-
-- harvest Pronom reports with R2D2 (./r2d2 -harvest)
-
-- run the R2D2 build command (./r2d2 -build)
-
-For more information about Siegfried's signature file format, see [this wiki page](https://github.com/richardlehane/siegfried/wiki/Siegfried-signature-format). 
-
-## Package Documentation
-
-- [Siegfried package](http://godoc.org/github.com/richardlehane/siegfried/pkg/core)
-
-- [Namematcher package](http://godoc.org/github.com/richardlehane/siegfried/pkg/core/namematcher)
-
-- [Bytematcher package](http://godoc.org/github.com/richardlehane/siegfried/pkg/core/bytematcher)
-
-	- [Patterns package](http://godoc.org/github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns)
-
-	- [Frames package](http://godoc.org/github.com/richardlehane/siegfried/pkg/core/bytematcher/frames)
-
-- [Siegreader package](http://godoc.org/github.com/richardlehane/siegfried/pkg/core/siegreader)
-
-- [Pronom package](http://godoc.org/github.com/richardlehane/siegfried/pkg/pronom)
+The signature file (pronom.gob) should be copied to a "siegfried" directory within your computer's home directory (e.g. ~/siegfried or c:\users\richardl\siegfried).
 
 ## Roadmap
 
@@ -72,8 +41,6 @@ For more information about Siegfried's signature file format, see [this wiki pag
 - basis mode (provide grounds for a format match)
 
 - server mode
-
-- html gui 
 
 ## Rights
 
@@ -121,7 +88,7 @@ First release. Parses PRONOM signatures and performs byte matching. Bare bones C
 
 ## Hacking
 
-Have a peek at upcoming features, planned optimisations and known bugs on the [trello list](https://trello.com/b/ABXkGk6T/siegfried). Please get in touch if you'd like to take any of it on.
+Have a peek at upcoming features, planned optimisations and known bugs on the [trello list](https://trello.com/b/ABXkGk6T/siegfried).
 
 ## Thanks
 
