@@ -12,8 +12,8 @@ Siegfried is a signature-based file identification tool.
 
 ### Command line
 
-    ./sieg file.ext
-    ./sieg /DIR
+    sieg file.ext
+    sieg /DIR
 
 ![Usage](usage.gif)
 
