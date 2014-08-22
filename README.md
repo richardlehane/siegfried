@@ -19,16 +19,15 @@ Siegfried is a signature-based file identification tool.
 
 ## Install
 
-With go installed: 
+### With go installed: 
 
     go get github.com/richardlehane/siegfried/cmd/sieg
-    go install github.com/richardlehane/siegfried/cmd/sieg
 
-Or download a pre-built binary and signature file from the [releases page](https://github.com/richardlehane/siegfried/releases/tag/v0.3).
+Then simply copy the signature file (pronom.gob) from the [releases page](https://github.com/richardlehane/siegfried/releases) into a "siegfried" folder within your $HOME directory (e.g. ~/siegfried or c:\users\richardl\siegfried).
 
-Binaries for Windows, OSX and Linux are available. Copy the binary to any location you like (preferably in your system's path).
+### Or, without go installed:
 
-The signature file (pronom.gob) should be copied to a "siegfried" directory within your computer's home directory (e.g. ~/siegfried or c:\users\richardl\siegfried).
+Download a pre-built binary and signature file from the [releases page](https://github.com/richardlehane/siegfried/releases). Binaries for Windows, OSX and Linux are available. Copy the binary to any location in your system's path (e.g. usr/local/bin). Copy the signature file (pronom.gob) from the [releases page](https://github.com/richardlehane/siegfried/releases) into a "siegfried" folder within your $HOME directory (e.g. ~/siegfried or c:\users\richardl\siegfried).
 
 ## Roadmap
 
