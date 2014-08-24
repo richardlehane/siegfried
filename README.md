@@ -4,7 +4,7 @@ Siegfried is a signature-based file identification tool.
 
 ## Version
 
-0.3
+0.4
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried/pkg/core?status.svg)](https://godoc.org/github.com/richardlehane/siegfried/pkg/core)
 
@@ -23,15 +23,18 @@ Siegfried is a signature-based file identification tool.
 
     go get github.com/richardlehane/siegfried/cmd/sieg
 
-Then simply copy the signature file (pronom.gob) from the [releases page](https://github.com/richardlehane/siegfried/releases) into a "siegfried" folder within your $HOME directory (e.g. ~/siegfried or c:\users\richardl\siegfried).
+    sieg -update
+
 
 ### Or, without go installed:
 
-Download a pre-built binary and signature file from the [releases page](https://github.com/richardlehane/siegfried/releases). Binaries for Windows, OSX and Linux are available. Copy the binary to any location in your system's path (e.g. usr/local/bin). Copy the signature file (pronom.gob) from the [releases page](https://github.com/richardlehane/siegfried/releases) into a "siegfried" folder within your $HOME directory (e.g. ~/siegfried or c:\users\richardl\siegfried).
+Download a pre-built binary from the [releases page](https://github.com/richardlehane/siegfried/releases). Unzip to a location in your system path. Then run:
+
+	sieg -update
 
 ## Roadmap
 
-### Next up: version 0.4 (September 2014)
+### Next up: version 0.5 (September 2014)
 
 - container matching (see [https://www.github.com/richardlehane/mscfb](https://www.github.com/richardlehane/mscfb))
 
@@ -66,6 +69,10 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ## Changes
+### Version 0.4 (24/08/2014)
+- sieg command line changes: -version and -update flags now enabled
+- over-the-wire updates of signature files from www.itforarchivists.com/siegfried
+
 ### Version 0.3 (19/08/2014)
 - replaced ac matcher with wac matcher
 - re-write of bytematcher code

@@ -21,20 +21,26 @@ import (
 	. "github.com/richardlehane/siegfried/pkg/pronom/mappings"
 )
 
-var Config = struct {
-	Droid     string
-	Container string
-	Reports   string
-	Data      string
+type SigVersion struct {
+	Gob        int
+	Droid      string
+	Containers string
+}
 
-	Timeout   time.Duration
-	Transport http.Transport
+var Config = struct {
+	GobVersion int
+	Droid      string
+	Container  string
+	Reports    string
+	Data       string
+	Timeout    time.Duration
+	Transport  http.Transport
 }{
+	1,
 	"DROID_SignatureFile_V77.xml",
 	"container-signature-20140717.xml",
 	"pronom",
 	filepath.Join("..", "..", "cmd", "r2d2", "data"),
-
 	120 * time.Second,
 	http.Transport{Proxy: http.ProxyFromEnvironment},
 }
@@ -175,6 +181,7 @@ func NewFromBM(bm bytematcher.Matcher, i int, puid string) *PronomIdentifier {
 
 func (p *pronom) identifier() (*PronomIdentifier, error) {
 	pi := new(PronomIdentifier)
+	pi.SigVersion = SigVersion{Config.GobVersion, Config.Droid, Config.Container}
 	pi.ids = make(pids, 20)
 	pi.BPuids, pi.PuidsB = p.GetPuids()
 	pi.Priorities = p.priorities()
@@ -473,5 +480,5 @@ func save(puid, url, path string) error {
 	if err != nil {
 		return err
 	}
-	return ioutil.WriteFile(filepath.Join(path, strings.Replace(puid, "/", "", 1)+".xml"), b, 0644)
+	return ioutil.WriteFile(filepath.Join(path, strings.Replace(puid, "/", "", 1)+".xml"), b, os.ModePerm)
 }

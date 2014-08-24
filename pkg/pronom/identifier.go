@@ -1,6 +1,7 @@
 package pronom
 
 import (
+	"fmt"
 	"sort"
 	"sync"
 
@@ -11,6 +12,7 @@ import (
 )
 
 type PronomIdentifier struct {
+	SigVersion SigVersion
 	BPuids     []string         // slice of puids that corresponds to the bytematcher's int signatures
 	PuidsB     map[string][]int // map of puids to slices of bytematcher int signatures
 	EPuids     []string         // slice of puids that corresponds to the extension matcher's int signatures
@@ -35,6 +37,14 @@ func (pid PronomIdentification) Confidence() float64 {
 
 func (pid PronomIdentification) Basis() string {
 	return "because I said so" //obviously this needs to be changed!
+}
+
+func (pi *PronomIdentifier) Version() string {
+	return fmt.Sprintf("Signature version: %d; based on droid sig: %s; and container sig: %s", pi.SigVersion.Gob, pi.SigVersion.Droid, pi.SigVersion.Containers)
+}
+
+func (pi *PronomIdentifier) Update(i int) bool {
+	return i > pi.SigVersion.Gob
 }
 
 func (pi *PronomIdentifier) Identify(b *siegreader.Buffer, n string, c chan core.Identification, wg *sync.WaitGroup) {

@@ -44,10 +44,10 @@ func init() {
 		log.Fatal(err)
 	}
 
-	defaultSigs := filepath.Join(current.HomeDir, "siegfried", defaultSigPath)
-	defaultDroid := filepath.Join(current.HomeDir, "siegfried", defaultDroidPath)
-	defaultContainer := filepath.Join(current.HomeDir, "siegfried", defaultContainerPath)
-	defaultReports := filepath.Join(current.HomeDir, "siegfried", defaultReportsPath)
+	defaultSigs := filepath.Join(current.HomeDir, ".siegfried", defaultSigPath)
+	defaultDroid := filepath.Join(current.HomeDir, ".siegfried", defaultDroidPath)
+	defaultContainer := filepath.Join(current.HomeDir, ".siegfried", defaultContainerPath)
+	defaultReports := filepath.Join(current.HomeDir, ".siegfried", defaultReportsPath)
 
 	flag.StringVar(&sigfile, "sigs", defaultSigs, "set path to Siegfried signature file")
 	flag.StringVar(&droid, "droid", defaultDroid, "set path to Droid signature file")

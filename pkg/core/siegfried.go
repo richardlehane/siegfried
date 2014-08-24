@@ -18,6 +18,8 @@ type Siegfried struct {
 // Identifiers can be defined for different signature formats. E.g. there is a PRONOM identifier that implements the TNA's format.
 type Identifier interface {
 	Identify(*siegreader.Buffer, string, chan Identification, *sync.WaitGroup)
+	Version() string
+	Update(i int) bool
 }
 
 // Identifications are sent by identifiers when a format matches
