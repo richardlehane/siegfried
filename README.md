@@ -1,6 +1,6 @@
 # Siegfried
 
-Siegfried is a signature-based file identification tool.
+[Siegfried](http://www.itforarchivists.com/siegfried) is a signature-based file identification tool.
 
 ## Version
 
