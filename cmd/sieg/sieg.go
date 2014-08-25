@@ -25,7 +25,7 @@ var (
 	updateUrl   = "http://www.itforarchivists.com/siegfried/update"
 	latestUrl   = "http://www.itforarchivists.com/siegfried/latest"
 	timeout     = 30 * time.Second
-	transport   = http.Transport{Proxy: http.ProxyFromEnvironment}
+	transport   = &http.Transport{Proxy: http.ProxyFromEnvironment}
 )
 
 func init() {
@@ -55,7 +55,7 @@ func getHttp(url string) ([]byte, error) {
 	})
 	defer timer.Stop()
 	client := http.Client{
-		Transport: &transport,
+		Transport: transport,
 	}
 	resp, err := client.Do(req)
 	if err != nil {

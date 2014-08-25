@@ -34,7 +34,7 @@ var Config = struct {
 	Reports    string
 	Data       string
 	Timeout    time.Duration
-	Transport  http.Transport
+	Transport  *http.Transport
 }{
 	1,
 	"DROID_SignatureFile_V77.xml",
@@ -42,7 +42,7 @@ var Config = struct {
 	"pronom",
 	filepath.Join("..", "..", "cmd", "r2d2", "data"),
 	120 * time.Second,
-	http.Transport{Proxy: http.ProxyFromEnvironment},
+	&http.Transport{Proxy: http.ProxyFromEnvironment},
 }
 
 func ConfigPaths() (string, string, string) {
@@ -458,7 +458,7 @@ func getHttp(url string) ([]byte, error) {
 	})
 	defer timer.Stop()
 	client := http.Client{
-		Transport: &Config.Transport,
+		Transport: Config.Transport,
 	}
 	resp, err := client.Do(req)
 	if err != nil {
