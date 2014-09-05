@@ -5,7 +5,23 @@ import (
 
 	"github.com/richardlehane/match/wac"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames_common"
 )
+
+var TestSeqSetBof = &seqSet{
+	Set:           []wac.Seq{},
+	TestTreeIndex: []int{},
+}
+
+var TestSeqSetEof = &seqSet{
+	Set:           []wac.Seq{},
+	TestTreeIndex: []int{},
+}
+
+var TestFrameSetBof = &frameSet{
+	Set:           []frames.Frame{},
+	TestTreeIndex: []int{},
+}
 
 func TestseqSet(t *testing.T) {
 	s := newSeqSet()
@@ -40,8 +56,8 @@ func TestFrameSet(t *testing.T) {
 	if f == nil {
 		t.Error("Failed to create  new seqSet")
 	}
-	f.add(frames.TestFrames[0], 0)
-	i := f.add(frames.TestFrames[0], 1)
+	f.add(frames_common.TestFrames[0], 0)
+	i := f.add(frames_common.TestFrames[0], 1)
 	if i != 0 {
 		t.Error("Adding identical frame sequences should return a single TestTree index")
 	}

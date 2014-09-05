@@ -1,13 +1,15 @@
-package patterns
+package patterns_common
+
+import . "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
 
 // Shared test sequences (exported so they can be used by the other bytematcher packages)
 var TestSequences = []Sequence{
-	Sequence{'t', 'e', 's', 't'},
-	Sequence{'t', 'e', 's', 't'},
-	Sequence{'t', 'e', 's', 't', 'y'},
-	Sequence{'T', 'E', 'S', 'T'},
-	Sequence{'T', 'E', 'S', 'T', 'Y'},
-	Sequence{'Y', 'N', 'E', 'S', 'S'}, //5
+	Sequence("test"),
+	Sequence("test"),
+	Sequence("testy"),
+	Sequence("TEST"),
+	Sequence("TESTY"),
+	Sequence("YNESS"), //5
 	Sequence{'a'},
 	Sequence{'b'},
 	Sequence{'c'},
@@ -18,8 +20,8 @@ var TestSequences = []Sequence{
 	Sequence{'h'},
 	Sequence{'i'},
 	Sequence{'j'},
-	Sequence{'j', 'u', 'n', 'k'}, // 16
-	Sequence{'2', '3'},
+	Sequence("junk"), // 16
+	Sequence("23"),
 }
 
 // Shared test choices (exported so they can be used by the other bytematcher packages)

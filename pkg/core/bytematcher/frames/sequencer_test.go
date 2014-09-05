@@ -1,6 +1,11 @@
-package frames
+package frames_test
 
-import "testing"
+import (
+	"testing"
+
+	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames_common"
+)
 
 func TestSequencer(t *testing.T) {
 	sequencer := NewSequencer(false)

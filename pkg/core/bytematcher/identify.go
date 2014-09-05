@@ -11,11 +11,16 @@ func (b *ByteMatcher) identify(buf *siegreader.Buffer, quit chan struct{}, r cha
 	buf.SetQuit(quit)
 	bprog, eprog := make(chan int), make(chan int)
 	incoming := b.newMatcher(buf, quit, r, bprog, eprog, wait)
+
+	// Test BOF/EOF sequences
+	bchan := b.bAho.Index(buf.NewReader(), bprog, quit)
+	// Do an initial check of BOF sequences here - until first or second send on bprog
+	// TODO
+
 	// Test BOF/EOF frames
 	bfchan := b.BOFFrames.Index(buf, false, quit)
 	efchan := b.EOFFrames.Index(buf, true, quit)
-	// Test BOF/EOF sequences
-	bchan := b.bAho.Index(buf.NewReader(), bprog, quit)
+	// Test EOF sequences
 	rrdr, err := buf.NewReverseReader()
 	if err != nil {
 		close(incoming)

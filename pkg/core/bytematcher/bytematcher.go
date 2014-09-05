@@ -14,6 +14,7 @@ import (
 )
 
 type Matcher interface {
+	Start()
 	Identify(*siegreader.Buffer) (chan int, chan []int)
 	String() string
 	Save(io.Writer) (int, error)
@@ -22,8 +23,9 @@ type Matcher interface {
 // Bytematcher structure. Clients shouldn't need to get or set these fields directly, they are only exported so that this structure can be serialised and deserialised by encoding/gob.
 type ByteMatcher struct {
 	*process.Process
-	bAho *wac.Wac
-	eAho *wac.Wac
+	bAho    *wac.Wac
+	eAho    *wac.Wac
+	started bool
 }
 
 func New() *ByteMatcher {
@@ -31,6 +33,7 @@ func New() *ByteMatcher {
 		process.New(),
 		&wac.Wac{},
 		&wac.Wac{},
+		false,
 	}
 }
 
@@ -41,7 +44,6 @@ func Load(r io.Reader) (Matcher, error) {
 	if err != nil {
 		return nil, err
 	}
-	b.start()
 	return b, nil
 }
 
@@ -98,15 +100,17 @@ func Signatures(sigs []frames.Signature, opts ...int) (*ByteMatcher, error) {
 		t.MaxLeftDistance = process.MaxLength(t.Left)
 		t.MaxRightDistance = process.MaxLength(t.Right)
 	}
-	// create aho corasick search trees for the lists of sequences (BOF, EOF and variable)
-	b.start()
 	return b, nil
 }
 
 // Start initialises the aho corasick search trees after a Bytematcher has been loaded.
-func (b *ByteMatcher) start() {
+func (b *ByteMatcher) Start() {
+	if b.started {
+		return
+	}
 	b.bAho = wac.New(b.BOFSeq.Set)
 	b.eAho = wac.New(b.EOFSeq.Set)
+	b.started = true
 }
 
 // Identify matches a Bytematcher's signatures against the input siegreader.Buffer.
@@ -152,6 +156,7 @@ func (b *ByteMatcher) String() string {
 	str += fmt.Sprintf("Right Tests: %v\n", r)
 	str += fmt.Sprintf("Maximum Left Distance: %v\n", ml)
 	str += fmt.Sprintf("Maximum Right Distance: %v\n", mr)
+	str += fmt.Sprintf("Maximum BOF Distance: %v\n", b.MaxBOF)
 	str += fmt.Sprintf("Maximum EOF Distance: %v\n", b.MaxEOF)
 	return str
 }

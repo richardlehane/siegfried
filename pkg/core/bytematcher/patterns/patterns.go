@@ -11,6 +11,8 @@ import (
 func init() {
 	gob.Register(Sequence{})
 	gob.Register(Choice{})
+	gob.Register(&BMHSequence{})
+	gob.Register(&RBMHSequence{})
 }
 
 // Patterns are the smallest building blocks of a format signature.

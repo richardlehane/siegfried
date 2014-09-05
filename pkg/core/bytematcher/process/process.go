@@ -28,6 +28,7 @@ type Process struct {
 	EOFFrames *frameSet
 	BOFSeq    *seqSet
 	EOFSeq    *seqSet
+	MaxBOF    int
 	MaxEOF    int
 	Options
 }
@@ -40,6 +41,7 @@ func New() *Process {
 		newFrameSet(),
 		newSeqSet(),
 		newSeqSet(),
+		0,
 		0,
 		Defaults,
 	}
@@ -108,6 +110,7 @@ func (p *Process) AddSignature(sig frames.Signature) error {
 	}
 	clstr.commit()
 	updatePositions(kf)
+	p.MaxBOF = maxBOF(p.MaxBOF, kf)
 	p.MaxEOF = maxEOF(p.MaxEOF, kf)
 	p.KeyFrames = append(p.KeyFrames, kf)
 	return nil

@@ -44,6 +44,7 @@ func (kf KeyFrameID) String() string {
 }
 
 // Turn a signature segment into a keyFrame and left and right frame slices.
+// The left and right frame slices are converted into BMH sequences where possible
 func toKeyFrame(seg frames.Signature, pos position) (keyFrame, []frames.Frame, []frames.Frame) {
 	left, right := make([]frames.Frame, 0), make([]frames.Frame, 0)
 	var typ frames.OffType
@@ -69,7 +70,7 @@ func toKeyFrame(seg frames.Signature, pos position) (keyFrame, []frames.Frame, [
 		if pos.end < len(seg) {
 			right = seg[pos.end:]
 		}
-		return keyFrame{typ, segPos, keyPos}, left, right
+		return keyFrame{typ, segPos, keyPos}, frames.BMHConvert(left, true), frames.BMHConvert(right, false)
 	}
 	// EOF and SUCC segments
 	typ, segPos.PMin, segPos.PMax = seg[len(seg)-1].Orientation(), seg[len(seg)-1].Min(), seg[len(seg)-1].Max()
@@ -89,7 +90,7 @@ func toKeyFrame(seg frames.Signature, pos position) (keyFrame, []frames.Frame, [
 	for _, f := range seg[:pos.start] {
 		left = append([]frames.Frame{f}, left...)
 	}
-	return keyFrame{typ, segPos, keyPos}, left, right
+	return keyFrame{typ, segPos, keyPos}, frames.BMHConvert(left, true), frames.BMHConvert(right, false)
 }
 
 func calcMinMax(min, max int, sp keyFramePos) (int, int) {
@@ -132,6 +133,23 @@ func updatePositions(ks []keyFrame) {
 			min, max = calcMinMax(min, max, ks[i].Seg)
 		}
 	}
+}
+
+func maxBOF(max int, ks []keyFrame) int {
+	if max < 0 {
+		return -1
+	}
+	for _, v := range ks {
+		if v.Typ < frames.SUCC {
+			if v.Key.PMax < 0 {
+				return -1
+			}
+			if v.Key.PMax+v.Key.LMax > max {
+				max = v.Key.PMax + v.Key.LMax
+			}
+		}
+	}
+	return max
 }
 
 func maxEOF(max int, ks []keyFrame) int {

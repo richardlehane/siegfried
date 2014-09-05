@@ -59,6 +59,7 @@ func (pi *PronomIdentifier) Identify(b *siegreader.Buffer, n string, c chan core
 	}
 
 	var cscore float64 = 0.1
+	pi.bm.Start()
 	ids, wait := pi.bm.Identify(b)
 
 	for i := range ids {

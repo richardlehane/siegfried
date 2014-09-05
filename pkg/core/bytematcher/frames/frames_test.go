@@ -1,14 +1,16 @@
-package frames
+package frames_test
 
 import (
 	"testing"
 
-	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
+	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames_common"
+	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns_common"
 )
 
 func TestFixed(t *testing.T) {
-	f2 := NewFrame(BOF, patterns.TestSequences[0], 0, 0)
-	f3 := NewFrame(BOF, patterns.TestSequences[0], 0)
+	f2 := NewFrame(BOF, TestSequences[0], 0, 0)
+	f3 := NewFrame(BOF, TestSequences[0], 0)
 	if !TestFrames[0].Equals(f2) {
 		t.Error("Fixed fail: Equality")
 	}
@@ -21,8 +23,8 @@ func TestFixed(t *testing.T) {
 }
 
 func TestWindow(t *testing.T) {
-	w2 := NewFrame(BOF, patterns.TestSequences[0], 0, 5)
-	w3 := NewFrame(BOF, patterns.TestSequences[0], 0)
+	w2 := NewFrame(BOF, TestSequences[0], 0, 5)
+	w3 := NewFrame(BOF, TestSequences[0], 0)
 	if !TestFrames[5].Equals(w2) {
 		t.Error("Window fail: Equality")
 	}
@@ -32,8 +34,8 @@ func TestWindow(t *testing.T) {
 }
 
 func TestWild(t *testing.T) {
-	w2 := NewFrame(BOF, patterns.TestSequences[0])
-	w3 := NewFrame(BOF, patterns.TestSequences[0], 1)
+	w2 := NewFrame(BOF, TestSequences[0])
+	w3 := NewFrame(BOF, TestSequences[0], 1)
 	if !TestFrames[9].Equals(w2) {
 		t.Error("Wild fail: Equality")
 	}
@@ -43,8 +45,8 @@ func TestWild(t *testing.T) {
 }
 
 func TestWildMin(t *testing.T) {
-	w2 := NewFrame(BOF, patterns.TestSequences[0], 5)
-	w3 := NewFrame(BOF, patterns.TestSequences[0], 0, 5)
+	w2 := NewFrame(BOF, TestSequences[0], 5)
+	w3 := NewFrame(BOF, TestSequences[0], 0, 5)
 	if !TestFrames[11].Equals(w2) {
 		t.Error("Wild fail: Equality")
 	}

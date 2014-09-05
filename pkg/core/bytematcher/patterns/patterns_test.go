@@ -1,6 +1,10 @@
-package patterns
+package patterns_test
 
-import "testing"
+import (
+	"testing"
+
+	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns_common"
+)
 
 func TestSequence(t *testing.T) {
 	if !TestSequences[0].Equals(TestSequences[1]) {

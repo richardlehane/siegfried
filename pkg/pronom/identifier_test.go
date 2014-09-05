@@ -19,6 +19,8 @@ func (t testBMatcher) Save(w io.Writer) (int, error) {
 	return 0, nil
 }
 
+func (t testBMatcher) Start() {}
+
 func (t testBMatcher) Identify(sb *siegreader.Buffer) (chan int, chan []int) {
 	ret, wait := make(chan int), make(chan []int)
 	go func() {

@@ -19,7 +19,7 @@ func init() {
 // Frame encapsulates a pattern with offset information, mediating between the pattern and the bytestream.
 type Frame interface {
 	Match([]byte) (bool, []int)  // Match the byte sequence in a L-R direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
-	MatchR([]byte) (bool, []int) // Match the byte seqeuence in a R-L direction.
+	MatchR([]byte) (bool, []int) // Match the byte seqeuence in a reverse (R-L) direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
 	Equals(Frame) bool
 	String() string
 	Linked(Frame, int, int) bool // Is a frame linked to a preceding frame (by a preceding or succeding relationship) with an offset and range that is less than the supplied ints?
@@ -109,6 +109,15 @@ func NewFrame(typ OffType, pat patterns.Pattern, offsets ...int) Frame {
 // SwitchFrame returns a new frame with a different orientation (for example to allow right-left searching)
 func SwitchFrame(f Frame, p patterns.Pattern) Frame {
 	return NewFrame(f.SwitchOff(), p, f.Min(), f.Max())
+}
+
+// BMHConvert converts the patterns within a slice of frames to BMH sequences if possible
+func BMHConvert(fs []Frame, rev bool) []Frame {
+	nfs := make([]Frame, len(fs))
+	for i, f := range fs {
+		nfs[i] = NewFrame(f.Orientation(), patterns.BMH(f.Pat(), rev), f.Min(), f.Max())
+	}
+	return nfs
 }
 
 // NonZero checks whether, when converted to simple byte sequences, this frame's pattern is all 0 bytes.

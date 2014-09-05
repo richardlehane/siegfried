@@ -1,27 +1,30 @@
-package frames
+package frames_common
 
-import "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
+import (
+	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns_common"
+)
 
 // Shared test frames (exported so they can be used by the other bytematcher packages)
 var TestFrames = []Frame{
-	Fixed{BOF, 0, patterns.TestSequences[0]},      //0 test
-	Fixed{BOF, 0, patterns.TestSequences[1]},      // test
-	Fixed{SUCC, 0, patterns.TestSequences[2]},     // testy
-	Fixed{PREV, 0, patterns.TestSequences[3]},     // TEST
-	Fixed{SUCC, 1, patterns.TestSequences[0]},     // test
-	Window{BOF, 0, 5, patterns.TestSequences[0]},  //5 test
-	Window{PREV, 10, 20, patterns.TestChoices[2]}, // TESTY | YNESS
-	Window{EOF, 10, 20, patterns.TestChoices[0]},  // test | testy
-	Window{PREV, 0, 1, patterns.TestSequences[3]}, // TEST
-	Wild{BOF, patterns.TestSequences[0]},          // test
-	Wild{SUCC, patterns.TestChoices[0]},           //10 test | testy
-	WildMin{BOF, 5, patterns.TestSequences[0]},    // test
-	WildMin{EOF, 5, patterns.TestSequences[0]},    // test
-	Window{BOF, 0, 5, patterns.TestChoices[4]},    // a | b
-	Wild{PREV, patterns.TestSequences[0]},         // test
-	Wild{BOF, patterns.TestSequences[0]},          //15
-	Wild{BOF, patterns.TestSequences[16]},
-	Fixed{EOF, 0, patterns.TestSequences[17]},
+	Fixed{BOF, 0, TestSequences[0]},      //0 test
+	Fixed{BOF, 0, TestSequences[1]},      // test
+	Fixed{SUCC, 0, TestSequences[2]},     // testy
+	Fixed{PREV, 0, TestSequences[3]},     // TEST
+	Fixed{SUCC, 1, TestSequences[0]},     // test
+	Window{BOF, 0, 5, TestSequences[0]},  //5 test
+	Window{PREV, 10, 20, TestChoices[2]}, // TESTY | YNESS
+	Window{EOF, 10, 20, TestChoices[0]},  // test | testy
+	Window{PREV, 0, 1, TestSequences[3]}, // TEST
+	Wild{BOF, TestSequences[0]},          // test
+	Wild{SUCC, TestChoices[0]},           //10 test | testy
+	WildMin{BOF, 5, TestSequences[0]},    // test
+	WildMin{EOF, 5, TestSequences[0]},    // test
+	Window{BOF, 0, 5, TestChoices[4]},    // a | b
+	Wild{PREV, TestSequences[0]},         // test
+	Wild{BOF, TestSequences[0]},          //15
+	Wild{BOF, TestSequences[16]},
+	Fixed{EOF, 0, TestSequences[17]},
 }
 
 // Shared test signatures (exported so they can be used by the other bytematcher packages)

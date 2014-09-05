@@ -5,7 +5,7 @@ import (
 	"io"
 	"testing"
 
-	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames_common"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
@@ -18,7 +18,7 @@ func TestNew(t *testing.T) {
 }
 
 func TestIO(t *testing.T) {
-	bm, err := Signatures(frames.TestSignatures)
+	bm, err := Signatures(frames_common.TestSignatures)
 	if err != nil {
 		t.Error(err)
 	}
@@ -57,7 +57,7 @@ func contains(a, b []int) bool {
 }
 
 func TestMatch(t *testing.T) {
-	bm, err := Signatures(frames.TestSignatures, 8192, 2059, 9, 1)
+	bm, err := Signatures(frames_common.TestSignatures, 8192, 2059, 9, 1)
 	if err != nil {
 		t.Error(err)
 	}
@@ -66,6 +66,7 @@ func TestMatch(t *testing.T) {
 	if err != nil && err != io.EOF {
 		t.Error(err)
 	}
+	bm.Start()
 	res, wait := bm.Identify(buf)
 	results := make([]int, 0)
 	for i := range res {
