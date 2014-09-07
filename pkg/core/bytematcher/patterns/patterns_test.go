@@ -3,7 +3,7 @@ package patterns_test
 import (
 	"testing"
 
-	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns_common"
+	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns/tests"
 )
 
 func TestSequence(t *testing.T) {

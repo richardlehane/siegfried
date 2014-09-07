@@ -4,8 +4,8 @@ import (
 	"testing"
 
 	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
-	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames_common"
-	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns_common"
+	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames/tests"
+	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns/tests"
 )
 
 func TestFixed(t *testing.T) {

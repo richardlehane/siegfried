@@ -1,4 +1,4 @@
-package patterns_common
+package tests
 
 import . "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
 

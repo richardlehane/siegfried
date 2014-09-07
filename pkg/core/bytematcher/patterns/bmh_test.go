@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
-	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns_common"
+	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns/tests"
 )
 
 func TestBMH(t *testing.T) {

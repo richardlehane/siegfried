@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
-	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames_common"
+	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames/tests"
 )
 
 func TestSequencer(t *testing.T) {

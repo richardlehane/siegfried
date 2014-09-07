@@ -1,8 +1,8 @@
-package frames_common
+package tests
 
 import (
 	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
-	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns_common"
+	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns/tests"
 )
 
 // Shared test frames (exported so they can be used by the other bytematcher packages)
