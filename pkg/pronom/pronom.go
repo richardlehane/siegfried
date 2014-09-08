@@ -213,7 +213,7 @@ func (p pronom) signatures() []Signature {
 	return sigs
 }
 
-// returns a slice of puid strings that correspondes to indexes of byte signatures
+// returns a slice of puid strings that corresponds to indexes of byte signatures
 func (p pronom) GetPuids() ([]string, map[string][]int) {
 	var iter int
 	puids := make([]string, len(p.signatures()))

@@ -15,12 +15,13 @@ type matcher struct {
 	buf            *siegreader.Buffer
 	bofProgress    chan int
 	eofProgress    chan int
+	gate           chan struct{}
 	partialMatches map[[2]int][][2]int // map of a keyframe to a slice of offsets and lengths where it has matched
 	strikeCache    map[int]*cacheItem
 	*tally
 }
 
-func (b *ByteMatcher) newMatcher(buf *siegreader.Buffer, q chan struct{}, r, bprog, eprog chan int, wait chan []int) chan strike {
+func (b *ByteMatcher) newMatcher(buf *siegreader.Buffer, q chan struct{}, r, bprog, eprog chan int, wait chan []int, gate chan struct{}) chan strike {
 	incoming := make(chan strike, 100)
 	m := &matcher{
 		incoming:       incoming,
@@ -28,6 +29,7 @@ func (b *ByteMatcher) newMatcher(buf *siegreader.Buffer, q chan struct{}, r, bpr
 		buf:            buf,
 		bofProgress:    bprog,
 		eofProgress:    eprog,
+		gate:           gate,
 		partialMatches: make(map[[2]int][][2]int),
 		strikeCache:    make(map[int]*cacheItem),
 	}
@@ -46,7 +48,10 @@ func (m *matcher) match() {
 				return
 			}
 			m.processStrike(in)
-		case _ = <-m.bofProgress:
+		case p := <-m.bofProgress:
+			if p == 12*1024 {
+				close(m.gate)
+			}
 		case _ = <-m.eofProgress:
 		}
 	}

@@ -6,27 +6,22 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 )
 
+// positioning information: min/max offsets (in relation to BOF or EOF) and min/max lengths
 type keyFramePos struct {
-	PMin int // Minimum and maximum position
+	// Minimum and maximum position
+	PMin int
 	PMax int
-	LMin int // Minimum and maximum length
+	// Minimum and maximum length
+	LMin int
 	LMax int
 }
 
-func calcLen(fs []frames.Frame) (int, int) {
-	var min, max int
-	for _, f := range fs {
-		fmin, fmax := f.Length()
-		min += fmin
-		max += fmax
-	}
-	return min, max
-}
-
-// Each segment in a signature is represented by a single keyFrame. A slice of keyFrames represents a full signature. The keyFrames type is a slice of these slices.
+// Each segment in a signature is represented by a single keyFrame. A slice of keyFrames represents a full signature.
 // The keyFrame includes the range of offsets that need to match for a successful hit.
+// The segment (Seg) offsets are relative (to preceding/succeding segments or to BOF/EOF if the first or last segment).
+// The keyframe (Key) offsets are absolute to the BOF or EOF.
 type keyFrame struct {
-	Typ frames.OffType // defined in frames.go
+	Typ frames.OffType // BOF|PREV|SUCC|EOF
 	Seg keyFramePos    // positioning info for segment as a whole (min/max length and offset in relation to BOF/EOF/PREV/SUCC)
 	Key keyFramePos    // positioning info for keyFrame portion of segment (min/max length and offset in relation to BOF/EOF)
 }
@@ -93,6 +88,17 @@ func toKeyFrame(seg frames.Signature, pos position) (keyFrame, []frames.Frame, [
 	return keyFrame{typ, segPos, keyPos}, frames.BMHConvert(left, true), frames.BMHConvert(right, false)
 }
 
+// calculate minimum and maximum lengths for a segment (slice of frames)
+func calcLen(fs []frames.Frame) (int, int) {
+	var min, max int
+	for _, f := range fs {
+		fmin, fmax := f.Length()
+		min += fmin
+		max += fmax
+	}
+	return min, max
+}
+
 func calcMinMax(min, max int, sp keyFramePos) (int, int) {
 	min = min + sp.PMin + sp.LMin
 	if max < 0 || sp.PMax < 0 {
@@ -102,8 +108,11 @@ func calcMinMax(min, max int, sp keyFramePos) (int, int) {
 	return min, max
 }
 
+// update the absolute positional information (distance from the BOF or EOF)
+// for keyFrames based on the other keyFrames in the signature
 func updatePositions(ks []keyFrame) {
 	var min, max int
+	// first forwards, for BOF and PREV
 	for i := range ks {
 		if ks[i].Typ == frames.BOF {
 			min, max = calcMinMax(0, 0, ks[i].Seg)
@@ -118,6 +127,7 @@ func updatePositions(ks []keyFrame) {
 			min, max = calcMinMax(min, max, ks[i].Seg)
 		}
 	}
+	// now backwards for EOF and SUCC
 	min, max = 0, 0
 	for i := len(ks) - 1; i >= 0; i-- {
 		if ks[i].Typ == frames.EOF {
@@ -135,6 +145,8 @@ func updatePositions(ks []keyFrame) {
 	}
 }
 
+// for doing a running totally of the maxBOF:
+// is the maxBOF we already have, further from the BOF than the maxBOF of the current signature?
 func maxBOF(max int, ks []keyFrame) int {
 	if max < 0 {
 		return -1

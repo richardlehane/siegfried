@@ -134,7 +134,7 @@ func (b *Buffer) fill() (int, error) {
 		b.grow()
 	}
 	// if we have an eof buffer, and we are near the end of the file, avoid an extra read by copying straight into the main buffer
-	if len(b.eof) > 0 && b.w.val+readSz >= int(b.sz) {
+	if len(b.eof) > 0 && b.w.eofRead && b.w.val+readSz >= int(b.sz) {
 		close(b.completec)
 		b.complete = true
 		lr := int(b.sz) - b.w.val
@@ -142,7 +142,11 @@ func (b *Buffer) fill() (int, error) {
 		return b.w.val, io.EOF
 	}
 	// otherwise, let's read
-	i, err := b.src.Read(b.buf[b.w.val : b.w.val+readSz])
+	e := b.w.val + readSz
+	if e > len(b.buf) {
+		e = len(b.buf)
+	}
+	i, err := b.src.Read(b.buf[b.w.val:e])
 	if i < readSz {
 		err = io.EOF // Readers can give EOF or nil here
 	}

@@ -203,3 +203,26 @@ func TestReverseDrainFile(t *testing.T) {
 	}
 	r.Close()
 }
+
+func TestLimit(t *testing.T) {
+	b := setup(strings.NewReader(teststring), t)
+	r := b.NewLimitReader(5)
+	results := make(chan int)
+	go drain(r, results)
+	if i := <-results; i != 5 {
+		t.Errorf("Expecting 5, got %d", i)
+	}
+}
+
+func TestReverseLimit(t *testing.T) {
+	b := setup(strings.NewReader(teststring), t)
+	r, err := b.NewLimitReverseReader(5)
+	if err != nil {
+		t.Errorf("Read error: %v", err)
+	}
+	results := make(chan int)
+	go drain(r, results)
+	if i := <-results; i != 5 {
+		t.Errorf("Expecting 5, got %d", i)
+	}
+}

@@ -2,6 +2,7 @@ package bytematcher
 
 import (
 	//"fmt"
+	"io"
 
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
@@ -10,18 +11,51 @@ import (
 func (b *ByteMatcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan int, wait chan []int) {
 	buf.SetQuit(quit)
 	bprog, eprog := make(chan int), make(chan int)
-	incoming := b.newMatcher(buf, quit, r, bprog, eprog, wait)
+	gate := make(chan struct{})
+	incoming := b.newMatcher(buf, quit, r, bprog, eprog, wait, gate)
 
 	// Test BOF/EOF sequences
-	bchan := b.bAho.Index(buf.NewReader(), bprog, quit)
-	// Do an initial check of BOF sequences here - until first or second send on bprog
-	// TODO
-
+	var rdr io.ByteReader
+	if b.MaxBOF > 0 {
+		rdr = buf.NewLimitReader(b.MaxBOF)
+	} else {
+		rdr = buf.NewReader()
+	}
+	bchan := b.bAho.Index(rdr, bprog, quit)
+	// Do an initial check of BOF sequences
+Loop:
+	for {
+		select {
+		case br, ok := <-bchan:
+			if !ok {
+				select {
+				case <-quit:
+					// the matcher has called quit
+					close(incoming)
+					return
+				default:
+					//	we've reached the EOF but haven't got a final match
+					break Loop
+				}
+			} else {
+				//fmt.Println(strike{b.BOFSeq.TestTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false, br.Final})
+				incoming <- strike{b.BOFSeq.TestTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false, br.Final}
+			}
+		case <-gate:
+			break Loop
+		}
+	}
 	// Test BOF/EOF frames
 	bfchan := b.BOFFrames.Index(buf, false, quit)
 	efchan := b.EOFFrames.Index(buf, true, quit)
 	// Test EOF sequences
-	rrdr, err := buf.NewReverseReader()
+	var rrdr io.ByteReader
+	var err error
+	if b.MaxEOF > 0 {
+		rrdr, err = buf.NewLimitReverseReader(b.MaxEOF)
+	} else {
+		rrdr, err = buf.NewReverseReader()
+	}
 	if err != nil {
 		close(incoming)
 		return
@@ -58,7 +92,7 @@ func (b *ByteMatcher) identify(buf *siegreader.Buffer, quit chan struct{}, r cha
 		}
 		if bfchan == nil && efchan == nil && bchan == nil && echan == nil {
 			close(incoming)
-			break
+			return
 		}
 	}
 }

@@ -50,14 +50,14 @@ func (pi *PronomIdentifier) Update(i int) bool {
 func (pi *PronomIdentifier) Identify(b *siegreader.Buffer, n string, c chan core.Identification, wg *sync.WaitGroup) {
 	pi.ids = pi.ids[:0]
 	var ems []int
-
-	if len(n) > 0 {
-		ems = pi.em.Identify(n)
-		for _, v := range ems {
-			pi.ids = add(pi.ids, pi.EPuids[v], 0.1)
+	/*
+		if len(n) > 0 {
+			ems = pi.em.Identify(n)
+			for _, v := range ems {
+				pi.ids = add(pi.ids, pi.EPuids[v], 0.1)
+			}
 		}
-	}
-
+	*/
 	var cscore float64 = 0.1
 	pi.bm.Start()
 	ids, wait := pi.bm.Identify(b)

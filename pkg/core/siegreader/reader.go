@@ -177,3 +177,73 @@ func (r *ReverseReader) ReadByte() (byte, error) {
 	r.j++
 	return b, nil
 }
+
+type LimitReader struct {
+	limit int
+	*Reader
+}
+
+func (b *Buffer) NewLimitReader(l int) *LimitReader {
+	// A BOF reader may not have been used, trigger a fill if necessary.
+	r := &Reader{0, 0, nil, false, b}
+	r.setBuf(0) // ignoring the error here is safe because we've successfully set the source
+	return &LimitReader{l, r}
+}
+
+func (r *LimitReader) ReadByte() (byte, error) {
+	if r.i >= r.limit {
+		return 0, io.EOF
+	}
+	if r.j >= len(r.scratch) {
+		if r.end {
+			return 0, io.EOF
+		}
+		err := r.setBuf(r.i)
+		if err != nil && err != io.EOF {
+			return 0, err
+		}
+		if len(r.scratch) == 0 {
+			return 0, io.EOF
+		}
+		r.j = 0
+	}
+	b := r.scratch[r.j]
+	r.i++
+	r.j++
+	return b, nil
+}
+
+type LimitReverseReader struct {
+	limit int
+	*ReverseReader
+}
+
+func (b *Buffer) NewLimitReverseReader(l int) (*LimitReverseReader, error) {
+	// fill the EOF now, if possible and not already done
+	err := b.fillEof()
+	return &LimitReverseReader{l, &ReverseReader{0, 0, nil, false, b}}, err
+}
+
+func (r *LimitReverseReader) ReadByte() (byte, error) {
+	if r.i >= r.limit {
+		return 0, io.EOF
+	}
+	var err error
+	if r.i == 0 {
+		r.setBuf(0)
+	}
+	if r.j >= len(r.scratch) {
+		if r.end {
+			return 0, io.EOF
+		}
+		err = r.setBuf(r.i)
+		if err != nil && err != io.EOF {
+			return 0, err
+		}
+		r.j = 0
+	}
+	b := r.scratch[len(r.scratch)-r.j-1]
+	r.i++
+	r.j++
+	return b, nil
+}
