@@ -148,3 +148,19 @@ func (t *tally) checkWait(i int) bool {
 	}
 	return true
 }
+
+// check to see whether should still wait for signatures in the priority list, given the offset
+// trim the wait list if possible
+// An issue is the buffering we do with wacs: how can we know that an incoming strike isn't just in transit, even though earlier than the reported offset?
+// Perhaps change WAC so progress is set as a special Result{progress: true}, that way they can still be buffered but are in order
+// This would simplify the initial Identify loop: rather than waiting for gate to close, can just listen for progress results in that loop
+func (t *tally) continueWait(o int) bool {
+	t.waitM.Lock()
+	defer t.waitM.Unlock()
+	if t.waitList == nil {
+		// if we don't have a wait list, we've got no matches and must continue
+		return true
+	}
+	// check the strikecache ??
+	return true
+}

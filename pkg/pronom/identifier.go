@@ -50,14 +50,13 @@ func (pi *PronomIdentifier) Update(i int) bool {
 func (pi *PronomIdentifier) Identify(b *siegreader.Buffer, n string, c chan core.Identification, wg *sync.WaitGroup) {
 	pi.ids = pi.ids[:0]
 	var ems []int
-	/*
-		if len(n) > 0 {
-			ems = pi.em.Identify(n)
-			for _, v := range ems {
-				pi.ids = add(pi.ids, pi.EPuids[v], 0.1)
-			}
+	// NameMatcher
+	if len(n) > 0 {
+		ems = pi.em.Identify(n)
+		for _, v := range ems {
+			pi.ids = add(pi.ids, pi.EPuids[v], 0.1)
 		}
-	*/
+	}
 	var cscore float64 = 0.1
 	pi.bm.Start()
 	ids, wait := pi.bm.Identify(b)
@@ -104,7 +103,7 @@ func add(p pids, f string, c float64) pids {
 	return append(p, PronomIdentification{f, c})
 }
 
-// Deal with non-explicity priorities
+// Deal with non-explicit priorities?
 // This is where there is no HasPriority relation but we should still wait anyway as we have an extension match
 // Rule:-
 // - for each extension match
@@ -115,6 +114,7 @@ func (pi *PronomIdentifier) priorities(id int, ems []int) []int {
 	if !ok {
 		w = []int{}
 	}
+	/* This adds substantially to benchmarks e.g. XML... needs more work*/
 	for _, v := range ems {
 		ps := pi.Priorities[pi.EPuids[v]]
 		var junior bool

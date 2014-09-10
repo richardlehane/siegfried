@@ -1,3 +1,22 @@
+10 September 2014
+PASS
+BenchmarkNew         100      21190000 ns/op
+BenchmarkACCDB        50      46120000 ns/op
+BenchmarkBMP          50      50860000 ns/op
+BenchmarkDOCX        500       4822000 ns/op
+BenchmarkGIF        1000       1752000 ns/op
+BenchmarkJPG        1000       2450000 ns/op
+BenchmarkMSG         500       4038000 ns/op
+BenchmarkODT         500       3540000 ns/op
+BenchmarkPDF         100      11900000 ns/op
+BenchmarkPNG         500       3744000 ns/op
+BenchmarkPPTX        500       3596000 ns/op
+BenchmarkRTF          50      54000000 ns/op
+BenchmarkTIF          50      50680000 ns/op
+BenchmarkXLSX       1000       2874000 ns/op
+BenchmarkXML          20      80200000 ns/op
+ok      github.com/richardlehane/siegfried/cmd/sieg 39.166s
+
 22 August 2014
 PASS
 BenchmarkNew          20      70607060 ns/op

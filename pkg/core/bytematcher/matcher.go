@@ -22,7 +22,7 @@ type matcher struct {
 }
 
 func (b *ByteMatcher) newMatcher(buf *siegreader.Buffer, q chan struct{}, r, bprog, eprog chan int, wait chan []int, gate chan struct{}) chan strike {
-	incoming := make(chan strike, 100)
+	incoming := make(chan strike) //, 100)
 	m := &matcher{
 		incoming:       incoming,
 		bm:             b,
@@ -51,6 +51,10 @@ func (m *matcher) match() {
 		case p := <-m.bofProgress:
 			if p == 12*1024 {
 				close(m.gate)
+			}
+			if p%4096 == 0 {
+				m.bofQueue.Wait()
+				// see if need to continue here
 			}
 		case _ = <-m.eofProgress:
 		}
