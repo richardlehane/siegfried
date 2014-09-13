@@ -122,9 +122,20 @@ func (pid PronomIdentification) String() string {
 	return pid.puid
 }
 
+func quoteText(s string) string {
+	if len(s) == 0 {
+		return s
+	}
+	return "\"" + s + "\""
+}
+
 func (pid PronomIdentification) Details() string {
+	var basis string
+	if len(pid.basis) > 0 {
+		basis = quoteText(strings.Join(pid.basis, "; "))
+	}
 	return fmt.Sprintf("  - puid    : %v\n    format  : %v\n    version : %v\n    mime    : %v\n    basis   : %v\n    warning : %v\n",
-		pid.puid, pid.name, pid.version, pid.mime, strings.Join(pid.basis, "; "), pid.warning)
+		pid.puid, quoteText(pid.name), quoteText(pid.version), quoteText(pid.mime), basis, quoteText(pid.warning))
 }
 
 func (pid PronomIdentification) Confidence() float64 {

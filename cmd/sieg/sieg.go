@@ -187,7 +187,7 @@ func PrintSieg(s *core.Siegfried) {
 
 func PrintFile(name string, sz int64) {
 	fmt.Println("---")
-	fmt.Printf("filename : %v\n", name)
+	fmt.Printf("filename : \"%v\"\n", name)
 	fmt.Printf("filesize : %d\n", sz)
 	fmt.Print("matches  :\n")
 }
@@ -196,7 +196,7 @@ func PrintUnknown(u bool) {
 	if !u {
 		return
 	}
-	fmt.Print("  - puid    : UNKNOWN\n    format  : \n    version : \n    mime    : \n    basis   : \n  - warning: no match\n")
+	fmt.Print("  - puid    : UNKNOWN\n    format  : \n    version : \n    mime    : \n    basis   : \n  - warning: \"no match\"\n")
 }
 
 func PrintError(err error) {
