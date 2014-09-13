@@ -44,7 +44,7 @@ var Config = struct {
 	Transport  *http.Transport
 }{
 	"pronom",
-	1,
+	2,
 	"DROID_SignatureFile_V77.xml",
 	"container-signature-20140717.xml",
 	"pronom",

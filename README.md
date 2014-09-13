@@ -4,7 +4,7 @@
 
 ## Version
 
-0.4
+0.4.1
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried/pkg/core?status.svg)](https://godoc.org/github.com/richardlehane/siegfried/pkg/core)
 
@@ -40,8 +40,6 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 ### Thereafter...
 
-- basis mode (provide grounds for a format match)
-
 - server mode
 
 ## Rights
@@ -69,6 +67,10 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ## Changes
+### Version 0.4.1 (14/09/2014)
+- sieg command line: descriptive output in YAML, including basis for matches
+- optimisations inc. initial BOF loop before main matching loop
+
 ### Version 0.4 (24/08/2014)
 - sieg command line changes: -version and -update flags now enabled
 - over-the-wire updates of signature files from www.itforarchivists.com/siegfried
