@@ -4,6 +4,7 @@ package core
 
 import (
 	"io"
+	"strings"
 	"sync"
 
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
@@ -19,14 +20,15 @@ type Siegfried struct {
 type Identifier interface {
 	Identify(*siegreader.Buffer, string, chan Identification, *sync.WaitGroup)
 	Version() string
+	Details() string // long test to describe the identifier (e.g. name, date created etc.)
 	Update(i int) bool
 }
 
 // Identifications are sent by identifiers when a format matches
 type Identification interface {
-	String() string      // text that should be displayed to indicate the format match
+	String() string      // short text that should be displayed to indicate the format match
+	Details() string     // long text that should be displayed to indicate the format match
 	Confidence() float64 // how certain is this identification?
-	Basis() string       // on what grounds was this identification made?
 }
 
 func NewSiegfried() *Siegfried {
@@ -60,4 +62,12 @@ func (s *Siegfried) identify(ret chan Identification) {
 	}
 	wg.Wait()
 	close(ret)
+}
+
+func (s *Siegfried) String() string {
+	ids := make([]string, len(s.identifiers))
+	for i, v := range s.identifiers {
+		ids[i] = v.Details()
+	}
+	return strings.Join(ids, "\n")
 }

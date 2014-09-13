@@ -15,7 +15,7 @@ import (
 
 type Matcher interface {
 	Start()
-	Identify(*siegreader.Buffer) (chan int, chan []int)
+	Identify(*siegreader.Buffer) (chan Result, chan []int)
 	String() string
 	Save(io.Writer) (int, error)
 }
@@ -113,6 +113,11 @@ func (b *ByteMatcher) Start() {
 	b.started = true
 }
 
+type Result struct {
+	Index int
+	Basis string
+}
+
 // Identify matches a Bytematcher's signatures against the input siegreader.Buffer.
 // Results are passed on the first returned int channel. These ints are the indexes of the matching signatures.
 // The second and third int channels report on the Bytematcher's progress: returning offets from the beginning of the file and the end of the file.
@@ -124,8 +129,8 @@ func (b *ByteMatcher) Start() {
 //       fmt.Print("Success! It is signature 0!")
 //     }
 //   }
-func (b *ByteMatcher) Identify(sb *siegreader.Buffer) (chan int, chan []int) {
-	quit, ret, wait := make(chan struct{}), make(chan int), make(chan []int)
+func (b *ByteMatcher) Identify(sb *siegreader.Buffer) (chan Result, chan []int) {
+	quit, ret, wait := make(chan struct{}), make(chan Result), make(chan []int)
 	go b.identify(sb, quit, ret, wait)
 	return ret, wait
 }

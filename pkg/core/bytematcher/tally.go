@@ -9,7 +9,7 @@ import (
 
 type tally struct {
 	*matcher
-	results chan int
+	results chan Result
 	quit    chan struct{}
 	wait    chan []int
 
@@ -28,7 +28,7 @@ type tally struct {
 	halt   chan bool
 }
 
-func newTally(r chan int, q chan struct{}, w chan []int, m *matcher) *tally {
+func newTally(r chan Result, q chan struct{}, w chan []int, m *matcher) *tally {
 	t := &tally{
 		matcher:  m,
 		results:  r,
@@ -92,10 +92,11 @@ func (t *tally) filterHits() {
 	var satisfied bool
 	for {
 		select {
-		case _ = <-t.stop:
+		case <-t.stop:
 			return
 		case hit := <-t.kfHits:
 			if satisfied {
+				// the halt channel tells the matcher to continuing checking complete/incomplete tests for the strike
 				t.halt <- true
 				continue
 			}
@@ -104,9 +105,9 @@ func (t *tally) filterHits() {
 				t.halt <- false
 				continue
 			}
-			success := t.applyKeyFrame(hit.id, hit.offset, hit.length)
+			success, basis := t.applyKeyFrame(hit.id, hit.offset, hit.length)
 			if success {
-				if h := t.sendResult(hit.id[0]); h {
+				if h := t.sendResult(hit.id[0], basis); h {
 					t.halt <- true
 					satisfied = true
 					t.shutdown(false)
@@ -118,8 +119,8 @@ func (t *tally) filterHits() {
 	}
 }
 
-func (t *tally) sendResult(res int) bool {
-	t.results <- res
+func (t *tally) sendResult(idx int, basis string) bool {
+	t.results <- Result{idx, basis}
 	w := <-t.wait // every result sent must result in a new priority list being returned & we need to drain this or it will block
 	// nothing more to wait for
 	if len(w) == 0 {

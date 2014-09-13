@@ -41,11 +41,11 @@ func TestIO(t *testing.T) {
 	}
 }
 
-func contains(a, b []int) bool {
+func contains(a []Result, b []int) bool {
 	for _, v := range a {
 		var present bool
 		for _, w := range b {
-			if v == w {
+			if v.Index == w {
 				present = true
 			}
 		}
@@ -68,7 +68,7 @@ func TestMatch(t *testing.T) {
 	}
 	bm.Start()
 	res, wait := bm.Identify(buf)
-	results := make([]int, 0)
+	results := make([]Result, 0)
 	for i := range res {
 		wait <- []int{0, 1, 2, 3, 4}
 		results = append(results, i)

@@ -8,9 +8,10 @@ import (
 // PRONOM Report
 
 type Report struct {
-	XMLName     xml.Name    `xml:"PRONOM-Report"`
-	Description string      `xml:"report_format_detail>FileFormat>FormatDescription"`
-	Signatures  []Signature `xml:"report_format_detail>FileFormat>InternalSignature"`
+	XMLName     xml.Name        `xml:"PRONOM-Report"`
+	Description string          `xml:"report_format_detail>FileFormat>FormatDescription"`
+	Signatures  []Signature     `xml:"report_format_detail>FileFormat>InternalSignature"`
+	Relations   []RelatedFormat `xml:"report_format_detail>FileFormat>RelatedFormat"`
 }
 
 type Signature struct {
@@ -48,4 +49,9 @@ func trim(label, s string) string {
 
 func (bs ByteSequence) String() string {
 	return trim("Pos", bs.Position) + trim("Off", bs.Offset) + trim("Max", bs.MaxOffset) + trim("Hex", bs.Hex)
+}
+
+type RelatedFormat struct {
+	Type string `xml:"RelationshipType"`
+	ID   int    `xml:"RelatedFormatID"`
 }

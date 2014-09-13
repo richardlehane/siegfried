@@ -9,7 +9,6 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
-	"sort"
 	"strings"
 	"sync"
 	"time"
@@ -22,12 +21,20 @@ import (
 )
 
 type SigVersion struct {
+	Name       string
+	Date       time.Time
 	Gob        int
 	Droid      string
 	Containers string
 }
 
+func (sv SigVersion) String() string {
+	return fmt.Sprintf("  - name    : %v\n    details : v%d; %v; %v\n    created : %v\n",
+		sv.Name, sv.Gob, sv.Droid, sv.Containers, sv.Date)
+}
+
 var Config = struct {
+	Name       string
 	GobVersion int
 	Droid      string
 	Container  string
@@ -36,6 +43,7 @@ var Config = struct {
 	Timeout    time.Duration
 	Transport  *http.Transport
 }{
+	"pronom",
 	1,
 	"DROID_SignatureFile_V77.xml",
 	"container-signature-20140717.xml",
@@ -181,8 +189,9 @@ func NewFromBM(bm bytematcher.Matcher, i int, puid string) *PronomIdentifier {
 
 func (p *pronom) identifier() (*PronomIdentifier, error) {
 	pi := new(PronomIdentifier)
-	pi.SigVersion = SigVersion{Config.GobVersion, Config.Droid, Config.Container}
+	pi.SigVersion = SigVersion{Config.Name, time.Now(), Config.GobVersion, Config.Droid, Config.Container}
 	pi.ids = make(pids, 20)
+	pi.Infos = p.GetInfos()
 	pi.BPuids, pi.PuidsB = p.GetPuids()
 	pi.Priorities = p.priorities()
 	pi.em, pi.EPuids = p.extensionMatcher()
@@ -211,6 +220,14 @@ func (p pronom) signatures() []Signature {
 		sigs = append(sigs, f.Signatures...)
 	}
 	return sigs
+}
+
+func (p pronom) GetInfos() map[string]FormatInfo {
+	infos := make(map[string]FormatInfo)
+	for _, f := range p.droid.FileFormats {
+		infos[f.Puid] = FormatInfo{f.Name, f.Version, f.MIMEType}
+	}
+	return infos
 }
 
 // returns a slice of puid strings that corresponds to indexes of byte signatures
@@ -244,101 +261,6 @@ func (p pronom) extensionMatcher() (namematcher.ExtensionMatcher, []string) {
 		}
 	}
 	return em, epuids
-}
-
-func containsStr(ss []string, s string) bool {
-	for _, v := range ss {
-		if v == s {
-			return true
-		}
-	}
-	return false
-}
-
-func containsInt(is []int, i int) bool {
-	for _, v := range is {
-		if v == i {
-			return true
-		}
-	}
-	return false
-}
-
-func extras(a []int, b []int) []int {
-	ret := make([]int, 0)
-	for _, v := range a {
-		var exists bool
-		for _, v1 := range b {
-			if v == v1 {
-				exists = true
-				break
-			}
-		}
-		if !exists {
-			ret = append(ret, v)
-		}
-	}
-	return ret
-}
-
-func priorityWalk(k string, ps map[string][]int, puids []string) []int {
-	tried := make([]string, 0)
-	ret := make([]int, 0)
-	var walkFn func(string)
-	walkFn = func(p string) {
-		vals, ok := ps[p]
-		if !ok {
-			return
-		}
-		for _, v := range vals {
-			puid := puids[v]
-			if containsStr(tried, puid) {
-				continue
-			}
-			tried = append(tried, puid)
-			priorityPriorities := ps[puid]
-			ret = append(ret, extras(priorityPriorities, vals)...)
-			walkFn(puid)
-		}
-	}
-	walkFn(k)
-	return ret
-}
-
-// returns a map of puids and the indexes of byte signatures that those puids should give priority to
-func (p pronom) priorities() map[string][]int {
-	var iter int
-	priorities := make(map[string][]int)
-	for _, f := range p.droid.FileFormats {
-		for _ = range f.Signatures {
-			for _, v := range f.Priorities {
-				puid := p.ids[v]
-				_, ok := priorities[puid]
-				if ok {
-					priorities[puid] = append(priorities[puid], iter)
-				} else {
-					priorities[puid] = []int{iter}
-				}
-			}
-			iter++
-		}
-	}
-
-	// now check the priority tree to make sure that it is consistent,
-	// i.e. that for any format with a superior fmt, then anything superior
-	// to that superior fmt is also marked as superior to the base fmt, all the way down the tree
-	puids, _ := p.GetPuids()
-	for k, _ := range priorities {
-		extras := priorityWalk(k, priorities, puids)
-		if len(extras) > 0 {
-			priorities[k] = append(priorities[k], extras...)
-		}
-	}
-
-	for k := range priorities {
-		sort.Ints(priorities[k])
-	}
-	return priorities
 }
 
 // newPronom creates a pronom object. It takes as arguments the paths to a Droid signature file, a container file, and a base directory or base url for Pronom reports.

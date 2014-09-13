@@ -17,7 +17,7 @@ import (
 )
 
 var (
-	thisVersion = [2]int{0, 4}
+	thisVersion = [3]int{0, 4, 0}
 	sigfile     string
 	update      = flag.Bool("update", false, "update or install a Siegfried signature file")
 	version     = flag.Bool("version", false, "display version information")
@@ -39,7 +39,7 @@ func init() {
 }
 
 type Update struct {
-	SiegVersion   [2]int
+	SiegVersion   [3]int
 	PronomVersion int
 	GobSize       int
 }
@@ -164,15 +164,45 @@ func multiIdentifyP(s *core.Siegfried, r string) error {
 		if err != nil {
 			return fmt.Errorf("failed to identify %v, got: %v", path, err)
 		}
-		fmt.Println(path)
+		PrintFile(path, info.Size())
+		unknown := true
 		for i := range c {
-			fmt.Println(i)
+			unknown = false
+			fmt.Print(i.Details())
 		}
-		fmt.Println()
+		PrintUnknown(unknown)
 		file.Close()
 		return nil
 	}
 	return filepath.Walk(r, wf)
+}
+
+func PrintSieg(s *core.Siegfried) {
+	fmt.Println("---")
+	fmt.Printf("siegfried   : %d.%d.%d\n", thisVersion[0], thisVersion[1], thisVersion[2])
+	fmt.Printf("scanDate    : %v\n", time.Now())
+	fmt.Print("identifiers : \n")
+	fmt.Print(s)
+}
+
+func PrintFile(name string, sz int64) {
+	fmt.Println("---")
+	fmt.Printf("filename : %v\n", name)
+	fmt.Printf("filesize : %d\n", sz)
+	fmt.Print("matches  :\n")
+}
+
+func PrintUnknown(u bool) {
+	if !u {
+		return
+	}
+	fmt.Print("  - puid    : UNKNOWN\n    format  : \n    version : \n    mime    : \n    basis   : \n  - warning: no match\n")
+}
+
+func PrintError(err error) {
+	fmt.Println("---")
+	fmt.Printf("Error : %v", err)
+	fmt.Println("---")
 }
 
 func main() {
@@ -182,7 +212,7 @@ func main() {
 	if *version {
 		p, err := pronom.Load(sigfile)
 		if err != nil {
-			log.Fatalf("Sieg error: error loading signature file, got: %v\nIf you haven't installed a signature file yet, run sieg -update.", err)
+			log.Fatalf("Error: error loading signature file, got: %v\nIf you haven't installed a signature file yet, run sieg -update.", err)
 		}
 		fmt.Printf("Siegfried version: %d.%d; %s\n", thisVersion[0], thisVersion[1], p.Version())
 		return
@@ -191,49 +221,56 @@ func main() {
 	if *update {
 		msg, err := updateSigs()
 		if err != nil {
-			log.Fatalf("Sieg error: error updating signature file, %v", err)
+			log.Fatalf("Error: error updating signature file, %v", err)
 		}
 		fmt.Println(msg)
 		return
 	}
 
 	if flag.NArg() != 1 {
-		log.Fatal("Sieg error: expecting a single file or directory argument")
+		log.Fatal("Error: expecting a single file or directory argument")
 	}
 
 	var err error
 	file, err := os.Open(flag.Arg(0))
 	if err != nil {
-		log.Fatalf("Sieg error: error opening %v, got: %v", flag.Arg(0), err)
+		log.Fatalf("Error: error opening %v, got: %v", flag.Arg(0), err)
 	}
 	info, err := file.Stat()
 	if err != nil {
-		log.Fatalf("Sieg error: error getting info for %v, got: %v", flag.Arg(0), err)
+		log.Fatalf("Error: error getting info for %v, got: %v", flag.Arg(0), err)
 	}
 
 	s, err := load(sigfile)
 	if err != nil {
-		log.Fatalf("Sieg error: error loading signature file, got: %v", err)
+		log.Fatalf("Error: error loading signature file, got: %v", err)
 
 	}
 
 	if info.IsDir() {
 		file.Close()
+		PrintSieg(s)
 		err = multiIdentifyP(s, flag.Arg(0))
 		if err != nil {
-			log.Fatalf("Sieg error: %v", err)
+			PrintError(err)
+			return
 		}
 		os.Exit(0)
 	}
 
+	PrintSieg(s)
 	c, err := s.Identify(file, flag.Arg(0))
 	if err != nil {
-		log.Fatalf("Sieg error: %v", err)
+		PrintError(err)
+		return
 	}
-	fmt.Println(flag.Arg(0))
+	PrintFile(flag.Arg(0), info.Size())
+	unknown := true
 	for i := range c {
-		fmt.Println(i)
+		unknown = false
+		fmt.Print(i.Details())
 	}
+	PrintUnknown(unknown)
 	file.Close()
 
 	os.Exit(0)

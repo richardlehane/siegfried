@@ -21,8 +21,8 @@ type matcher struct {
 	*tally
 }
 
-func (b *ByteMatcher) newMatcher(buf *siegreader.Buffer, q chan struct{}, r, bprog, eprog chan int, wait chan []int, gate chan struct{}) chan strike {
-	incoming := make(chan strike) //, 100)
+func (b *ByteMatcher) newMatcher(buf *siegreader.Buffer, q chan struct{}, r chan Result, bprog, eprog chan int, wait chan []int, gate chan struct{}) chan strike {
+	incoming := make(chan strike) // buffer ? Use benchmarks to check
 	m := &matcher{
 		incoming:       incoming,
 		bm:             b,
@@ -273,10 +273,10 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 	}
 }
 
-func (m *matcher) applyKeyFrame(kfID process.KeyFrameID, o, l int) bool {
+func (m *matcher) applyKeyFrame(kfID process.KeyFrameID, o, l int) (bool, string) {
 	kf := m.bm.KeyFrames[kfID[0]]
 	if len(kf) == 1 {
-		return true
+		return true, fmt.Sprintf("byte match at %d, %d", o, l)
 	}
 	if _, ok := m.partialMatches[kfID]; ok {
 		m.partialMatches[kfID] = append(m.partialMatches[kfID], [2]int{o, l})
@@ -287,24 +287,27 @@ func (m *matcher) applyKeyFrame(kfID process.KeyFrameID, o, l int) bool {
 }
 
 // check key frames checks the relationships between neighbouring frames
-func (m *matcher) checkKeyFrames(i int) bool {
+func (m *matcher) checkKeyFrames(i int) (bool, string) {
 	kfs := m.bm.KeyFrames[i]
 	for j := range kfs {
 		_, ok := m.partialMatches[[2]int{i, j}]
 		if !ok {
-			return false
+			return false, ""
 		}
 	}
 	prevOff := m.partialMatches[[2]int{i, 0}]
+	basis := make([][][2]int, len(kfs))
+	basis[0] = prevOff
 	prevKf := kfs[0]
 	var ok bool
 	for j, kf := range kfs[1:] {
 		thisOff := m.partialMatches[[2]int{i, j + 1}]
 		prevOff, ok = kf.CheckRelated(prevKf, thisOff, prevOff)
 		if !ok {
-			return false
+			return false, ""
 		}
+		basis[j+1] = prevOff
 		prevKf = kf
 	}
-	return true
+	return true, fmt.Sprintf("byte match at %v", basis)
 }

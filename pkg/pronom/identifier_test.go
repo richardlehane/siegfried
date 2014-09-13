@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"github.com/richardlehane/siegfried/pkg/core"
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
@@ -21,12 +22,12 @@ func (t testBMatcher) Save(w io.Writer) (int, error) {
 
 func (t testBMatcher) Start() {}
 
-func (t testBMatcher) Identify(sb *siegreader.Buffer) (chan int, chan []int) {
-	ret, wait := make(chan int), make(chan []int)
+func (t testBMatcher) Identify(sb *siegreader.Buffer) (chan bytematcher.Result, chan []int) {
+	ret, wait := make(chan bytematcher.Result), make(chan []int)
 	go func() {
-		ret <- 1
+		ret <- bytematcher.Result{1, ""}
 		<-wait
-		ret <- 2
+		ret <- bytematcher.Result{2, ""}
 		<-wait
 		close(ret)
 	}()
