@@ -214,7 +214,7 @@ func main() {
 		if err != nil {
 			log.Fatalf("Error: error loading signature file, got: %v\nIf you haven't installed a signature file yet, run sieg -update.", err)
 		}
-		fmt.Printf("Siegfried version: %d.%d; %s\n", thisVersion[0], thisVersion[1], p.Version())
+		fmt.Printf("Siegfried version: %d.%d.%d; %s\n", thisVersion[0], thisVersion[1], thisVersion[2], p.Version())
 		return
 	}
 
