@@ -45,6 +45,7 @@ Loop:
 			break Loop
 		}
 	}
+	//fmt.Println("Proceeding")
 	// Test BOF/EOF frames
 	bfchan := b.BOFFrames.Index(buf, false, quit)
 	efchan := b.EOFFrames.Index(buf, true, quit)

@@ -116,7 +116,7 @@ func varLength(seg frames.Signature, max int) position {
 				}
 			} else {
 				num = f.NumSequences()
-				if num > 0 && num <= max && frames.NonZero(seg[0]) {
+				if num > 0 && num <= max && frames.NonZero(seg[i+1]) {
 					current.length, _ = f.Length()
 					current.start, current.end = i+1, i+2
 					cur = num
