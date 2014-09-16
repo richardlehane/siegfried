@@ -406,7 +406,7 @@ func conText(l *lexer) stateFn {
 		l.emit(itemEOF)
 		return nil
 	case leftBracket:
-		l.emit(itemBracketLeft) // should probably do much more here but am not really sure of the proper semantics for the container file format so will just have raw tokens for now
+		l.emit(itemBracketLeft) // two types: [22 27] set & ['a'-'z'] range
 		return conText
 	case rightBracket:
 		l.emit(itemBracketRight)
