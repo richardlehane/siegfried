@@ -12,8 +12,8 @@
 
 ### Command line
 
-    sieg file.ext
-    sieg /DIR
+    sf file.ext
+    sf /DIR
 
 ![Usage](usage.gif)
 
@@ -21,16 +21,16 @@
 
 ### With go installed: 
 
-    go get github.com/richardlehane/siegfried/cmd/sieg
+    go get github.com/richardlehane/siegfried/cmd/sf
 
-    sieg -update
+    sf -update
 
 
 ### Or, without go installed:
 
 Download a pre-built binary from the [releases page](https://github.com/richardlehane/siegfried/releases). Unzip to a location in your system path. Then run:
 
-	sieg -update
+	sf -update
 
 ## Roadmap
 
@@ -71,11 +71,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 - bug in processing code caused really bad matching profile for MP3 sigs. No need to update the tool for this, but please do a sieg -update to get the latest signature file.
 
 ### Version 0.4.1 (14/09/2014)
-- sieg command line: descriptive output in YAML, including basis for matches
+- sf command line: descriptive output in YAML, including basis for matches
 - optimisations inc. initial BOF loop before main matching loop
 
 ### Version 0.4 (24/08/2014)
-- sieg command line changes: -version and -update flags now enabled
+- sf command line changes: -version and -update flags now enabled
 - over-the-wire updates of signature files from www.itforarchivists.com/siegfried
 
 ### Version 0.3 (19/08/2014)
