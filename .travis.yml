@@ -7,6 +7,6 @@ branches:
   only:
     - master
 install:
-  - go get github.com/richardlehane/siegfried/cmd/sieg
+  - go get github.com/richardlehane/siegfried/cmd/sf
 script:
-  - go test github.com/richardlehane/siegfried/cmd/sieg
+  - go test github.com/richardlehane/siegfried/cmd/sf
