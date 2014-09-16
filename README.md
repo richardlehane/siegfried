@@ -67,6 +67,9 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ## Changes
+### Version 0.4.2 (16/09/2014)
+- bug in processing code caused really bad matching profile for MP3 sigs. No need to update the tool for this, but please do a sieg -update to get the latest signature file.
+
 ### Version 0.4.1 (14/09/2014)
 - sieg command line: descriptive output in YAML, including basis for matches
 - optimisations inc. initial BOF loop before main matching loop
