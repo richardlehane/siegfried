@@ -17,6 +17,21 @@ const (
 	varstring = "Variable"
 )
 
+func (p *pronom) Parse() ([]frames.Signature, error) {
+	sigs := make([]frames.Signature, 0, 700)
+	for _, f := range p.droid.FileFormats {
+		puid := f.Puid
+		for _, s := range f.Signatures {
+			sig, err := parseSig(puid, s)
+			if err != nil {
+				return nil, err
+			}
+			sigs = append(sigs, sig)
+		}
+	}
+	return sigs, nil
+}
+
 // an intermediary structure before creating a bytematcher.Frame
 type token struct {
 	min, max int
@@ -36,7 +51,7 @@ func decodeNum(num string) (int, error) {
 	return strconv.Atoi(num)
 }
 
-// parse hexstrings
+// parse hexstrings - puids are passed in for error reporting
 func parseHex(puid, hx string) ([]token, int, int, error) {
 	tokens := make([]token, 0, 10)
 	var choice patterns.Choice // common bucket for stuffing choices into
@@ -100,13 +115,16 @@ func parseHex(puid, hx string) ([]token, int, int, error) {
 	return tokens, min, max, nil
 }
 
+// merge two segments into a signature. Provide s2's pos
 func appendSig(s1, s2 frames.Signature, pos string) frames.Signature {
 	if len(s1) == 0 {
 		return s2
 	}
+	// if s2 is an EOF - just append it
 	if pos == eofstring {
 		return append(s1, s2...)
 	}
+	// if s1 already has an EOF segment, prepend that s2 segment before it, but after any preceding segments
 	for i, f := range s1 {
 		orientation := f.Orientation()
 		if orientation == frames.SUCC || orientation == frames.EOF {
@@ -117,22 +135,8 @@ func appendSig(s1, s2 frames.Signature, pos string) frames.Signature {
 			return s3
 		}
 	}
+	// default is just to append it
 	return append(s1, s2...)
-}
-
-func (p *pronom) Parse() ([]frames.Signature, error) {
-	sigs := make([]frames.Signature, 0, 700)
-	for _, f := range p.droid.FileFormats {
-		puid := f.Puid
-		for _, s := range f.Signatures {
-			sig, err := parseSig(puid, s)
-			if err != nil {
-				return nil, err
-			}
-			sigs = append(sigs, sig)
-		}
-	}
-	return sigs, nil
 }
 
 func parseSig(puid string, s mappings.Signature) (frames.Signature, error) {
@@ -147,6 +151,7 @@ func parseSig(puid string, s mappings.Signature) (frames.Signature, error) {
 		if err != nil {
 			return nil, err
 		}
+		// lack of a max offset implies a fixed offset for BOF and EOF seqs (not VAR)
 		if max == 0 {
 			max = min
 		}
@@ -201,6 +206,33 @@ func parseSig(puid string, s mappings.Signature) (frames.Signature, error) {
 		}
 		// add the segment (tokens signature) to the complete signature
 		sig = appendSig(sig, tokSig, bs.Position)
+	}
+	return sig, nil
+}
+
+// Container signatures are simpler than regular Droid signatures
+// No BOF/EOF/VAR - all are BOF.
+// Min and Max Offsets usually provided. Lack of a Max Offset implies a Variable sequence.
+// No wildcards within sequences: multiple subsequences with new offsets are used instead.
+func parseContainerSig(puid string, s mappings.InternalSignature) (frames.Signature, error) {
+	sig := make(frames.Signature, 0, 1)
+	// Return an error for multiple byte sequences
+	if len(s.ByteSequences) > 1 {
+		return nil, errors.New("Pronom parse error: unexpected multiple byte sequences in container sig for puid " + puid)
+	}
+	bs := s.ByteSequences[0]
+	// Return an error for non-BOF sequence
+	if bs.Reference != "" && bs.Reference != "BOFoffset" {
+		return nil, errors.New("Pronom parse error: unexpected reference in container sig for puid " + puid + "; bad reference is " + bs.Reference)
+	}
+	var prevPos int
+	for _, sub := range bs.SubSequences {
+		// Return an error if the positions don't increment.
+		if sub.Position < prevPos {
+			return nil, errors.New("Pronom parse error: container sub-sequences out of order for puid " + puid)
+		}
+		prevPos = sub.Position
+
 	}
 	return sig, nil
 }

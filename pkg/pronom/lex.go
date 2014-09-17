@@ -63,6 +63,7 @@ const (
 	itemSpace
 	itemQuote
 	itemQuoteText
+	itemCharText
 )
 
 const digits = "0123456789"
