@@ -50,6 +50,37 @@ var bsStub6 = ByteSequence{
 	Hex:       "2F322E[30:33](0D0A|0A)2850726F6A6563742E31(0D0A|0A)094E616D653A0922",
 }
 
+var csStub = SubSequence{
+	Position:        1,
+	SubSeqMinOffset: "0",
+	SubSeqMaxOffset: "128",
+	Sequence:        "'office:document-content'",
+}
+
+var csStub1 = SubSequence{
+	Position:        2,
+	SubSeqMinOffset: "0",
+	SubSeqMaxOffset: "",
+	Sequence:        "'office:version=' [22 27] '1.0' [22 27]",
+}
+
+var csStub3 = SubSequence{
+	Position:        1,
+	SubSeqMinOffset: "40",
+	SubSeqMaxOffset: "1064",
+	Sequence:        "0F 00 00 00 'MSProject.MPP9' 00",
+}
+
+var ciStub = InternalSignature{
+	ByteSequences: []ByteSeq{ByteSeq{
+		SubSequences: []SubSequence{csStub, csStub1}}},
+}
+
+var ciStub1 = InternalSignature{
+	ByteSequences: []ByteSeq{ByteSeq{
+		SubSequences: []SubSequence{csStub3}}},
+}
+
 var sStub1 = Signature{[]ByteSequence{bsStub1}}
 
 var sStub2 = Signature{[]ByteSequence{bsStub2}}
@@ -134,5 +165,22 @@ func TestParse(t *testing.T) {
 	}
 	if len(sigs) < 2 {
 		t.Error("Expecting more patterns than that! Got ", len(sigs))
+	}
+}
+
+func TestParseContainer(t *testing.T) {
+	sig, err := parseContainerSig("fmt/123", ciStub)
+	if err != nil {
+		t.Error(err)
+	}
+	if len(sig) != 5 {
+		t.Error("Expecting 5 patterns! Got ", sig)
+	}
+	sig, err = parseContainerSig("fmt/123", ciStub1)
+	if err != nil {
+		t.Error(err)
+	}
+	if min, _ := sig[0].Length(); min != 19 {
+		t.Error("Expecting a sequence with a length of 19! Got ", sig)
 	}
 }

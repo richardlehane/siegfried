@@ -210,6 +210,75 @@ func parseSig(puid string, s mappings.Signature) (frames.Signature, error) {
 	return sig, nil
 }
 
+func parseContainerSeq(puid, seq string) ([]patterns.Pattern, error) {
+	pats := make([]patterns.Pattern, 0, 10)
+	var insideBracket bool
+	var choiceMode bool
+	var rangeMode bool
+	var choice patterns.Choice // common bucket for stuffing choices into
+	var firstBit []byte        // first text within brackets (could be a range or a choice)
+	sequence := make(patterns.Sequence, 0)
+	l := conLex(puid, seq)
+	for i := l.nextItem(); i.typ != itemEOF; i = l.nextItem() {
+		switch i.typ {
+		case itemError:
+			return nil, errors.New(i.String())
+		case itemText:
+			if insideBracket {
+				if choiceMode {
+					choice = append(choice, patterns.Sequence(decodeHex(i.val)))
+				} else if rangeMode {
+					pats = append(pats, Range{firstBit, decodeHex(i.val)})
+				} else {
+					firstBit = decodeHex(i.val)
+				}
+			} else {
+				sequence = append(sequence, decodeHex(i.val)...)
+			}
+		case itemQuoteText:
+			if insideBracket {
+				if choiceMode {
+					choice = append(choice, patterns.Sequence(i.val))
+				} else if rangeMode {
+					pats = append(pats, Range{firstBit, []byte(i.val)})
+				} else {
+					firstBit = []byte(i.val)
+				}
+			} else {
+				sequence = append(sequence, []byte(i.val)...)
+			}
+		case itemSpace:
+			if insideBracket {
+				if !choiceMode {
+					choiceMode = true
+					choice = patterns.Choice{patterns.Sequence(firstBit)}
+				}
+			}
+		case itemSlash:
+			if insideBracket {
+				rangeMode = true
+			} else {
+				return nil, errors.New("Pronom parse error: unexpected slash in container (appears outside brackets)")
+			}
+		case itemBracketLeft:
+			if len(sequence) > 0 {
+				pats = append(pats, sequence)
+				sequence = make(patterns.Sequence, 0)
+			}
+			insideBracket = true
+		case itemBracketRight:
+			if choiceMode {
+				pats = append(pats, choice)
+			}
+			insideBracket, choiceMode, rangeMode = false, false, false
+		}
+	}
+	if len(sequence) > 0 {
+		pats = append(pats, sequence)
+	}
+	return pats, nil
+}
+
 // Container signatures are simpler than regular Droid signatures
 // No BOF/EOF/VAR - all are BOF.
 // Min and Max Offsets usually provided. Lack of a Max Offset implies a Variable sequence.
@@ -226,13 +295,35 @@ func parseContainerSig(puid string, s mappings.InternalSignature) (frames.Signat
 		return nil, errors.New("Pronom parse error: unexpected reference in container sig for puid " + puid + "; bad reference is " + bs.Reference)
 	}
 	var prevPos int
-	for _, sub := range bs.SubSequences {
+	for i, sub := range bs.SubSequences {
 		// Return an error if the positions don't increment.
 		if sub.Position < prevPos {
 			return nil, errors.New("Pronom parse error: container sub-sequences out of order for puid " + puid)
 		}
 		prevPos = sub.Position
-
+		var typ frames.OffType
+		if i == 0 {
+			typ = frames.BOF
+		} else {
+			typ = frames.PREV
+		}
+		var min, max int
+		min, _ = decodeNum(sub.SubSeqMinOffset)
+		if sub.SubSeqMaxOffset == "" {
+			max = -1
+		} else {
+			max, _ = decodeNum(sub.SubSeqMaxOffset)
+		}
+		pats, err := parseContainerSeq(puid, sub.Sequence)
+		if err != nil {
+			return nil, err
+		}
+		sig = append(sig, frames.NewFrame(typ, pats[0], min, max))
+		if len(pats) > 1 {
+			for _, v := range pats[1:] {
+				sig = append(sig, frames.NewFrame(frames.PREV, v, 0, 0))
+			}
+		}
 	}
 	return sig, nil
 }
