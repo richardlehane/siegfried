@@ -4,28 +4,28 @@ import (
 	"testing"
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
-	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames_common"
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames/tests"
 )
 
 // Shared test testNodes (exported so they can be used by the other bytematcher packages)
 var TesttestNodes = []*testNode{
 	&testNode{
-		Frame:   frames_common.TestFrames[3],
+		Frame:   tests.TestFrames[3],
 		Success: []int{},
 		Tests: []*testNode{
 			&testNode{
-				Frame:   frames_common.TestFrames[1],
+				Frame:   tests.TestFrames[1],
 				Success: []int{0},
 				Tests:   []*testNode{},
 			},
 		},
 	},
 	&testNode{
-		Frame:   frames_common.TestFrames[6],
+		Frame:   tests.TestFrames[6],
 		Success: []int{},
 		Tests: []*testNode{
 			&testNode{
-				Frame:   frames_common.TestFrames[2],
+				Frame:   tests.TestFrames[2],
 				Success: []int{0},
 				Tests:   []*testNode{},
 			},
@@ -51,8 +51,8 @@ var TestTestTree = &testTree{
 
 func TestMaxLength(t *testing.T) {
 	test := newTestTree()
-	test.add([2]int{0, 0}, []frames.Frame{}, []frames.Frame{frames_common.TestFrames[0], frames_common.TestFrames[3], frames_common.TestFrames[6]})
-	test.add([2]int{0, 0}, []frames.Frame{}, []frames.Frame{frames_common.TestFrames[1], frames_common.TestFrames[3]})
+	test.add([2]int{0, 0}, []frames.Frame{}, []frames.Frame{tests.TestFrames[0], tests.TestFrames[3], tests.TestFrames[6]})
+	test.add([2]int{0, 0}, []frames.Frame{}, []frames.Frame{tests.TestFrames[1], tests.TestFrames[3]})
 	if MaxLength(test.Right) != 33 {
 		t.Errorf("maxLength fail: expecting 33 got %v", MaxLength(test.Right))
 	}

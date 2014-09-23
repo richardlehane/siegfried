@@ -4,7 +4,7 @@
 
 ## Version
 
-0.4.2
+0.4.3
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried/pkg/core?status.svg)](https://godoc.org/github.com/richardlehane/siegfried/pkg/core)
 
@@ -67,6 +67,9 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ## Changes
+### Version 0.4.2 (23/09/2014)
+- cross-compile was broken (because of use of os/user). Now doing native builds on the three platforms so the download binaries should all work now.
+
 ### Version 0.4.2 (16/09/2014)
 - bug in processing code caused really bad matching profile for MP3 sigs. No need to update the tool for this, but please do a sieg -update to get the latest signature file.
 

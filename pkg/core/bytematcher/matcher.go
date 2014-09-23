@@ -21,7 +21,7 @@ type matcher struct {
 	*tally
 }
 
-func (b *ByteMatcher) newMatcher(buf *siegreader.Buffer, q chan struct{}, r chan Result, bprog, eprog chan int, wait chan []int, gate chan struct{}) chan strike {
+func (b *ByteMatcher) newMatcher(buf *siegreader.Buffer, q chan struct{}, r chan Result, bprog, eprog chan int, gate chan struct{}) chan strike {
 	incoming := make(chan strike) // buffer ? Use benchmarks to check
 	m := &matcher{
 		incoming:       incoming,
@@ -33,7 +33,7 @@ func (b *ByteMatcher) newMatcher(buf *siegreader.Buffer, q chan struct{}, r chan
 		partialMatches: make(map[[2]int][][2]int),
 		strikeCache:    make(map[int]*cacheItem),
 	}
-	m.tally = newTally(r, q, wait, m)
+	m.tally = newTally(r, q, m)
 	go m.match()
 	return incoming
 }

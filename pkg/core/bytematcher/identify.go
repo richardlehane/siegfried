@@ -8,11 +8,11 @@ import (
 )
 
 // Identify function - brings a new matcher into existence
-func (b *ByteMatcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan Result, wait chan []int) {
+func (b *ByteMatcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan Result) {
 	buf.SetQuit(quit)
 	bprog, eprog := make(chan int), make(chan int)
 	gate := make(chan struct{})
-	incoming := b.newMatcher(buf, quit, r, bprog, eprog, wait, gate)
+	incoming := b.newMatcher(buf, quit, r, bprog, eprog, gate)
 
 	// Test BOF/EOF sequences
 	var rdr io.ByteReader

@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
-	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames_common"
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames/tests"
 )
 
 var TestKeyFrames = []keyFrame{
@@ -46,7 +46,7 @@ var TestKeyFrames = []keyFrame{
 }
 
 func TestKeyFrame(t *testing.T) {
-	_, left, right := toKeyFrame(frames_common.TestSignatures[1], position{1, 1, 2})
+	_, left, right := toKeyFrame(tests.TestSignatures[1], position{1, 1, 2})
 	if len(left) != 1 {
 		t.Error("KeyFrame: expecting only one frame on the left")
 	}

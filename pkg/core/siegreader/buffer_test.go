@@ -13,7 +13,7 @@ var teststring = "abracadabra"
 
 var testbytes = []byte("test12345678910YNESSjunktestyjunktestytest12345678910111223")
 
-var testfile = filepath.Join("..", "..", "..", "cmd", "sieg", "testdata", "benchmark", "Benchmark.docx")
+var testfile = filepath.Join("..", "..", "..", "cmd", "sf", "testdata", "benchmark", "Benchmark.docx")
 
 func TestNew(t *testing.T) {
 	b := New()

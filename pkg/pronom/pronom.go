@@ -183,7 +183,6 @@ func NewFromBM(bm bytematcher.Matcher, i int, puid string) *PronomIdentifier {
 	for idx := range pi.BPuids {
 		pi.BPuids[idx] = puid
 	}
-	pi.Priorities = make(map[string][]int)
 	return pi
 }
 
@@ -193,13 +192,17 @@ func (p *pronom) identifier() (*PronomIdentifier, error) {
 	pi.ids = make(pids, 20)
 	pi.Infos = p.GetInfos()
 	pi.BPuids, pi.PuidsB = p.GetPuids()
-	pi.Priorities = p.priorities()
+	priorities := p.priorities(pi.BPuids)
 	pi.em, pi.EPuids = p.extensionMatcher()
 	sigs, err := p.Parse()
 	if err != nil {
 		return nil, err
 	}
 	pi.bm, err = bytematcher.Signatures(sigs)
+	if err != nil {
+		return nil, err
+	}
+	pi.bm.SetPriorities(priorities.List(pi.BPuids))
 	return pi, err
 }
 

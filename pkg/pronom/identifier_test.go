@@ -7,6 +7,7 @@ import (
 
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
+	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
@@ -20,18 +21,17 @@ func (t testBMatcher) Save(w io.Writer) (int, error) {
 	return 0, nil
 }
 
-func (t testBMatcher) Start() {}
+func (t testBMatcher) Start()                        {}
+func (t testBMatcher) SetPriorities(l priority.List) {}
 
-func (t testBMatcher) Identify(sb *siegreader.Buffer) (chan bytematcher.Result, chan []int) {
-	ret, wait := make(chan bytematcher.Result), make(chan []int)
+func (t testBMatcher) Identify(sb *siegreader.Buffer) chan bytematcher.Result {
+	ret := make(chan bytematcher.Result)
 	go func() {
 		ret <- bytematcher.Result{1, ""}
-		<-wait
 		ret <- bytematcher.Result{2, ""}
-		<-wait
 		close(ret)
 	}()
-	return ret, wait
+	return ret
 }
 
 type testNMatcher struct{}
@@ -49,13 +49,12 @@ func (t testNMatcher) Save(w io.Writer) (int, error) {
 }
 
 var testIdentifier = &PronomIdentifier{
-	BPuids:     []string{"fmt/1", "fmt/2", "fmt/3"},
-	PuidsB:     map[string][]int{"fmt/1": []int{0}, "fmt/2": []int{1}, "fmt/3": []int{2}},
-	EPuids:     []string{"fmt/1", "fmt/2", "fmt/3"},
-	Priorities: map[string][]int{"fmt/2": []int{2}, "fmt/1": []int{}},
-	bm:         testBMatcher{},
-	em:         testNMatcher{},
-	ids:        pids{},
+	BPuids: []string{"fmt/1", "fmt/2", "fmt/3"},
+	PuidsB: map[string][]int{"fmt/1": []int{0}, "fmt/2": []int{1}, "fmt/3": []int{2}},
+	EPuids: []string{"fmt/1", "fmt/2", "fmt/3"},
+	bm:     testBMatcher{},
+	em:     testNMatcher{},
+	ids:    pids{},
 }
 
 func TestIdentify(t *testing.T) {

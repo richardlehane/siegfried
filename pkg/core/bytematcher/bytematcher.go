@@ -10,12 +10,14 @@ import (
 	"github.com/richardlehane/match/wac"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/process"
+	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
 type Matcher interface {
 	Start()
-	Identify(*siegreader.Buffer) (chan Result, chan []int)
+	SetPriorities(priority.List)
+	Identify(*siegreader.Buffer) chan Result
 	String() string
 	Save(io.Writer) (int, error)
 }
@@ -23,14 +25,16 @@ type Matcher interface {
 // Bytematcher structure. Clients shouldn't need to get or set these fields directly, they are only exported so that this structure can be serialised and deserialised by encoding/gob.
 type ByteMatcher struct {
 	*process.Process
-	bAho    *wac.Wac
-	eAho    *wac.Wac
-	started bool
+	Priorities priority.List
+	bAho       *wac.Wac
+	eAho       *wac.Wac
+	started    bool
 }
 
 func New() *ByteMatcher {
 	return &ByteMatcher{
 		process.New(),
+		nil,
 		&wac.Wac{},
 		&wac.Wac{},
 		false,
@@ -40,7 +44,7 @@ func New() *ByteMatcher {
 func Load(r io.Reader) (Matcher, error) {
 	b := New()
 	dec := gob.NewDecoder(r)
-	err := dec.Decode(b.Process)
+	err := dec.Decode(b)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +54,7 @@ func Load(r io.Reader) (Matcher, error) {
 func (b *ByteMatcher) Save(w io.Writer) (int, error) {
 	buf := &bytes.Buffer{}
 	enc := gob.NewEncoder(buf)
-	err := enc.Encode(b.Process)
+	err := enc.Encode(b)
 	if err != nil {
 		return 0, err
 	}
@@ -103,6 +107,10 @@ func Signatures(sigs []frames.Signature, opts ...int) (*ByteMatcher, error) {
 	return b, nil
 }
 
+func (b *ByteMatcher) SetPriorities(l priority.List) {
+	b.Priorities = l
+}
+
 // Start initialises the aho corasick search trees after a Bytematcher has been loaded.
 func (b *ByteMatcher) Start() {
 	if b.started {
@@ -129,10 +137,10 @@ type Result struct {
 //       fmt.Print("Success! It is signature 0!")
 //     }
 //   }
-func (b *ByteMatcher) Identify(sb *siegreader.Buffer) (chan Result, chan []int) {
-	quit, ret, wait := make(chan struct{}), make(chan Result), make(chan []int)
-	go b.identify(sb, quit, ret, wait)
-	return ret, wait
+func (b *ByteMatcher) Identify(sb *siegreader.Buffer) chan Result {
+	quit, ret := make(chan struct{}), make(chan Result)
+	go b.identify(sb, quit, ret)
+	return ret
 }
 
 // Returns information about the Bytematcher including the number of BOF, VAR and EOF sequences, the number of BOF and EOF frames, and the total number of tests.
@@ -163,5 +171,6 @@ func (b *ByteMatcher) String() string {
 	str += fmt.Sprintf("Maximum Right Distance: %v\n", mr)
 	str += fmt.Sprintf("Maximum BOF Distance: %v\n", b.MaxBOF)
 	str += fmt.Sprintf("Maximum EOF Distance: %v\n", b.MaxEOF)
+	str += fmt.Sprintf("Priorities: %v\n", b.Priorities)
 	return str
 }

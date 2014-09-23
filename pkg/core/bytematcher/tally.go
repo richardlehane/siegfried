@@ -11,7 +11,6 @@ type tally struct {
 	*matcher
 	results chan Result
 	quit    chan struct{}
-	wait    chan []int
 
 	once     *sync.Once
 	bofQueue *sync.WaitGroup
@@ -28,12 +27,11 @@ type tally struct {
 	halt   chan bool
 }
 
-func newTally(r chan Result, q chan struct{}, w chan []int, m *matcher) *tally {
+func newTally(r chan Result, q chan struct{}, m *matcher) *tally {
 	t := &tally{
 		matcher:  m,
 		results:  r,
 		quit:     q,
-		wait:     w,
 		once:     &sync.Once{},
 		bofQueue: &sync.WaitGroup{},
 		eofQueue: &sync.WaitGroup{},
@@ -121,8 +119,10 @@ func (t *tally) filterHits() {
 
 func (t *tally) sendResult(idx int, basis string) bool {
 	t.results <- Result{idx, basis}
-	w := <-t.wait // every result sent must result in a new priority list being returned & we need to drain this or it will block
-	// nothing more to wait for
+	if t.bm.Priorities == nil {
+		return false
+	}
+	w := t.bm.Priorities[idx]
 	if len(w) == 0 {
 		return true
 	}

@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/richardlehane/match/wac"
-	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames_common"
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames/tests"
 )
 
 var TestProcessObj = &Process{
@@ -21,7 +21,7 @@ var Sample = []byte("testTESTMATCHAAAAAAAAAAAYNESStesty")
 func TestProcess(t *testing.T) {
 	p := New()
 	p.SetOptions(8192, 2059, 9, 1)
-	for i, v := range frames_common.TestSignatures {
+	for i, v := range tests.TestSignatures {
 		err := p.AddSignature(v)
 		if err != nil {
 			t.Errorf("Unexpected error adding signature; sig %v; error %v", i, v)

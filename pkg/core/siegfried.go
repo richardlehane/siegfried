@@ -71,3 +71,8 @@ func (s *Siegfried) String() string {
 	}
 	return strings.Join(ids, "\n")
 }
+
+type Result struct {
+	Index int
+	Basis string
+}

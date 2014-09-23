@@ -111,6 +111,23 @@ func (b *Buffer) Size() int {
 	}
 }
 
+// non-blocking Size(), for use with zip reader
+func (b *Buffer) SizeNow() int64 {
+	if b.sz > 0 {
+		return b.sz
+	}
+	b.w.Lock()
+	defer b.w.Unlock()
+	var err error
+	for _, err = b.fill(); err == nil; _, err = b.fill() {
+	}
+	if err != io.EOF {
+		log.Printf("SIEGREADER WARNING: FAILED TO READ FULL STREAM, ERROR MESSAGE %v", err)
+		return 0
+	}
+	return b.sz
+}
+
 func (b *Buffer) grow() {
 	// Rules for growing:
 	// - if we need to grow, we have passed the initial read and can assume we will need whole file so, if we have a sz grow to it straight away

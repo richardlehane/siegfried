@@ -24,7 +24,6 @@ type PronomIdentifier struct {
 	BPuids     []string         // slice of puids that corresponds to the bytematcher's int signatures
 	PuidsB     map[string][]int // map of puids to slices of bytematcher int signatures
 	EPuids     []string         // slice of puids that corresponds to the extension matcher's int signatures
-	Priorities map[string][]int // map of priorities - puids to bytematcher int signatures
 	bm         bytematcher.Matcher
 	em         namematcher.Matcher
 	ids        pids
@@ -58,17 +57,12 @@ func (pi *PronomIdentifier) Identify(b *siegreader.Buffer, n string, c chan core
 	}
 	var cscore float64 = 0.1
 	pi.bm.Start()
-	ids, wait := pi.bm.Identify(b)
+	ids := pi.bm.Identify(b)
 
 	for r := range ids {
 		i := r.Index
 		cscore *= 1.1
 		pi.ids = add(pi.ids, pi.BPuids[i], pi.Infos[pi.BPuids[i]], r.Basis, cscore)
-		w, ok := pi.Priorities[pi.BPuids[i]]
-		if !ok {
-			w = []int{}
-		}
-		wait <- w // consider use of addExtensionPriorities
 	}
 
 	if len(pi.ids) > 0 {

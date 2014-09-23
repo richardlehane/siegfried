@@ -67,10 +67,9 @@ func TestMatch(t *testing.T) {
 		t.Error(err)
 	}
 	bm.Start()
-	res, wait := bm.Identify(buf)
+	res := bm.Identify(buf)
 	results := make([]Result, 0)
 	for i := range res {
-		wait <- []int{0, 1, 2, 3, 4}
 		results = append(results, i)
 	}
 	if !contains(results, []int{0, 2, 3, 4}) {
@@ -80,10 +79,9 @@ func TestMatch(t *testing.T) {
 	if err != nil && err != io.EOF {
 		t.Error(err)
 	}
-	res, wait = bm.Identify(buf)
+	res = bm.Identify(buf)
 	results = results[:0]
 	for i := range res {
-		wait <- []int{0, 1, 2, 3, 4}
 		results = append(results, i)
 	}
 	if !contains(results, []int{0, 1, 2, 3, 4}) {
