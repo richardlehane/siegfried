@@ -6,8 +6,6 @@ import (
 	"testing"
 
 	"github.com/richardlehane/siegfried/pkg/core"
-	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
-	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
@@ -21,23 +19,43 @@ func (t testBMatcher) Save(w io.Writer) (int, error) {
 	return 0, nil
 }
 
-func (t testBMatcher) Start()                        {}
-func (t testBMatcher) SetPriorities(l priority.List) {}
+type tResult int
 
-func (t testBMatcher) Identify(sb *siegreader.Buffer) chan bytematcher.Result {
-	ret := make(chan bytematcher.Result)
+func (tr tResult) Index() int {
+	return int(tr)
+}
+
+func (tr tResult) Basis() string {
+	return ""
+}
+
+func (t testBMatcher) Identify(nm string, sb *siegreader.Buffer) chan core.Result {
+	ret := make(chan core.Result)
 	go func() {
-		ret <- bytematcher.Result{1, ""}
-		ret <- bytematcher.Result{2, ""}
+		ret <- tResult(1)
+		ret <- tResult(2)
 		close(ret)
 	}()
 	return ret
 }
 
+func (t testBMatcher) Priority() bool {
+	return false
+}
+
+func (t testNMatcher) Priority() bool {
+	return false
+}
+
 type testNMatcher struct{}
 
-func (t testNMatcher) Identify(n string) []int {
-	return []int{0}
+func (t testNMatcher) Identify(n string, sb *siegreader.Buffer) chan core.Result {
+	ret := make(chan core.Result)
+	go func() {
+		ret <- tResult(0)
+		close(ret)
+	}()
+	return ret
 }
 
 func (t testNMatcher) String() string {

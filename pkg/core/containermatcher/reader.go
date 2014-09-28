@@ -1,10 +1,10 @@
 package containermatcher
 
-import "github.com/richardlehane/siegfried/core/siegreader"
+import "github.com/richardlehane/siegfried/pkg/core/siegreader"
 
 type Reader interface {
 	Next() error  // when finished, should return io.EOF
 	Name() string // return name of the object with paths concatenated with / character
 	SetSource(*siegreader.Buffer) error
-	Quit() // close any unclosed files
+	Close() // close files
 }

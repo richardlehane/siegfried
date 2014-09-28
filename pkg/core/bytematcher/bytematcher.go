@@ -8,40 +8,35 @@ import (
 	"io"
 
 	"github.com/richardlehane/match/wac"
+	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/process"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
-type Matcher interface {
-	Start()
-	SetPriorities(priority.List)
-	Identify(*siegreader.Buffer) chan Result
-	String() string
-	Save(io.Writer) (int, error)
-}
-
 // Bytematcher structure. Clients shouldn't need to get or set these fields directly, they are only exported so that this structure can be serialised and deserialised by encoding/gob.
-type ByteMatcher struct {
+type Matcher struct {
 	*process.Process
 	Priorities priority.List
 	bAho       *wac.Wac
 	eAho       *wac.Wac
-	started    bool
+	bstarted   bool
+	estarted   bool
 }
 
-func New() *ByteMatcher {
-	return &ByteMatcher{
+func New() *Matcher {
+	return &Matcher{
 		process.New(),
 		nil,
 		&wac.Wac{},
 		&wac.Wac{},
 		false,
+		false,
 	}
 }
 
-func Load(r io.Reader) (Matcher, error) {
+func Load(r io.Reader) (core.Matcher, error) {
 	b := New()
 	dec := gob.NewDecoder(r)
 	err := dec.Decode(b)
@@ -51,7 +46,7 @@ func Load(r io.Reader) (Matcher, error) {
 	return b, nil
 }
 
-func (b *ByteMatcher) Save(w io.Writer) (int, error) {
+func (b *Matcher) Save(w io.Writer) (int, error) {
 	buf := &bytes.Buffer{}
 	enc := gob.NewEncoder(buf)
 	err := enc.Encode(b)
@@ -85,10 +80,10 @@ func (se sigErrors) Error() string {
 //
 // Example:
 //   bm, err := Signatures([]Signature{Signature{NewFrame(BOF, Sequence{'p','d','f'}, 0, 0)}})
-func Signatures(sigs []frames.Signature, opts ...int) (*ByteMatcher, error) {
+func Signatures(sigs []frames.Signature, opts ...int) (*Matcher, error) {
 	b := New()
 	b.SetOptions(opts...)
-	se := make(sigErrors, 0)
+	var se sigErrors
 	// process each of the sigs, adding them to b.Sigs and the various seq/frame/testTree sets
 	for _, sig := range sigs {
 		err := b.AddSignature(sig)
@@ -107,23 +102,21 @@ func Signatures(sigs []frames.Signature, opts ...int) (*ByteMatcher, error) {
 	return b, nil
 }
 
-func (b *ByteMatcher) SetPriorities(l priority.List) {
-	b.Priorities = l
-}
-
-// Start initialises the aho corasick search trees after a Bytematcher has been loaded.
-func (b *ByteMatcher) Start() {
-	if b.started {
-		return
-	}
-	b.bAho = wac.New(b.BOFSeq.Set)
-	b.eAho = wac.New(b.EOFSeq.Set)
-	b.started = true
+func (b *Matcher) Priority() bool {
+	return b.Priorities != nil
 }
 
 type Result struct {
-	Index int
-	Basis string
+	index int
+	basis string
+}
+
+func (r Result) Index() int {
+	return r.index
+}
+
+func (r Result) Basis() string {
+	return r.basis
 }
 
 // Identify matches a Bytematcher's signatures against the input siegreader.Buffer.
@@ -137,14 +130,14 @@ type Result struct {
 //       fmt.Print("Success! It is signature 0!")
 //     }
 //   }
-func (b *ByteMatcher) Identify(sb *siegreader.Buffer) chan Result {
-	quit, ret := make(chan struct{}), make(chan Result)
+func (b *Matcher) Identify(name string, sb *siegreader.Buffer) chan core.Result {
+	quit, ret := make(chan struct{}), make(chan core.Result)
 	go b.identify(sb, quit, ret)
 	return ret
 }
 
 // Returns information about the Bytematcher including the number of BOF, VAR and EOF sequences, the number of BOF and EOF frames, and the total number of tests.
-func (b *ByteMatcher) String() string {
+func (b *Matcher) String() string {
 	str := fmt.Sprintf("BOF seqs: %v\n", len(b.BOFSeq.Set))
 	str += fmt.Sprintf("EOF seqs: %v\n", len(b.EOFSeq.Set))
 	str += fmt.Sprintf("BOF frames: %v\n", len(b.BOFFrames.Set))

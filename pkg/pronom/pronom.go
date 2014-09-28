@@ -15,7 +15,7 @@ import (
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
-	"github.com/richardlehane/siegfried/pkg/core/namematcher"
+	"github.com/richardlehane/siegfried/pkg/core/extensionmatcher"
 
 	. "github.com/richardlehane/siegfried/pkg/pronom/mappings"
 )
@@ -141,7 +141,7 @@ func Load(path string) (*PronomIdentifier, error) {
 	if err != nil {
 		return nil, err
 	}
-	em, err := namematcher.Load(ebuf)
+	em, err := extensionmatcher.Load(ebuf)
 	if err != nil {
 		return nil, err
 	}
@@ -171,10 +171,10 @@ func ParsePuid(f, reports string) ([]frames.Signature, error) {
 	return sigs, nil
 }
 
-func NewFromBM(bm bytematcher.Matcher, i int, puid string) *PronomIdentifier {
+func NewFromBM(bm *bytematcher.Matcher, i int, puid string) *PronomIdentifier {
 	pi := new(PronomIdentifier)
 	pi.bm = bm
-	pi.em = namematcher.NewExtensionMatcher()
+	pi.em = extensionmatcher.New()
 	sigs := make([]int, i)
 	for idx := range sigs {
 		sigs[idx] = idx
@@ -193,16 +193,17 @@ func (p *pronom) identifier() (*PronomIdentifier, error) {
 	pi.Infos = p.GetInfos()
 	pi.BPuids, pi.PuidsB = p.GetPuids()
 	priorities := p.priorities(pi.BPuids)
-	pi.em, pi.EPuids = p.extensionMatcher()
+	pi.em, pi.EPuids = p.extMatcher()
 	sigs, err := p.Parse()
 	if err != nil {
 		return nil, err
 	}
-	pi.bm, err = bytematcher.Signatures(sigs)
+	bm, err := bytematcher.Signatures(sigs)
 	if err != nil {
 		return nil, err
 	}
-	pi.bm.SetPriorities(priorities.List(pi.BPuids))
+	bm.Priorities = priorities.List(pi.BPuids)
+	pi.bm = bm
 	return pi, err
 }
 
@@ -254,8 +255,8 @@ func (p pronom) GetPuids() ([]string, map[string][]int) {
 	return puids, bids
 }
 
-func (p pronom) extensionMatcher() (namematcher.ExtensionMatcher, []string) {
-	em := namematcher.NewExtensionMatcher()
+func (p pronom) extMatcher() (extensionmatcher.Matcher, []string) {
+	em := extensionmatcher.New()
 	epuids := make([]string, len(p.droid.FileFormats))
 	for i, f := range p.droid.FileFormats {
 		epuids[i] = f.Puid
@@ -365,7 +366,7 @@ func (p *pronom) applyAll(apply func(p *pronom, puid string) error) []error {
 	}
 	wg.Wait()
 	close(ch)
-	errors := make([]error, 0)
+	var errors []error
 	for err := range ch {
 		errors = append(errors, err)
 	}

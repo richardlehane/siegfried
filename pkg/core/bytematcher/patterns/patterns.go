@@ -183,7 +183,7 @@ func (c Choice) Sequences() []Sequence {
 }
 
 func (c Choice) ValidBytes(i int) []byte {
-	res := make([]byte, 0)
+	var res []byte
 	for _, pat := range c {
 		byts := pat.ValidBytes(i)
 		for _, b := range byts {

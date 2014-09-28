@@ -50,7 +50,7 @@ var TestTestTree = &testTree{
 }
 
 func TestMaxLength(t *testing.T) {
-	test := newTestTree()
+	test := &testTree{}
 	test.add([2]int{0, 0}, []frames.Frame{}, []frames.Frame{tests.TestFrames[0], tests.TestFrames[3], tests.TestFrames[6]})
 	test.add([2]int{0, 0}, []frames.Frame{}, []frames.Frame{tests.TestFrames[1], tests.TestFrames[3]})
 	if MaxLength(test.Right) != 33 {

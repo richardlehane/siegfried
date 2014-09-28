@@ -35,16 +35,6 @@ func (t *testTree) String() string {
 	return str + "}"
 }
 
-func newTestTree() *testTree {
-	return &testTree{
-		make([]KeyFrameID, 0),
-		make([]FollowUp, 0),
-		0, 0,
-		make([]*testNode, 0),
-		make([]*testNode, 0),
-	}
-}
-
 type FollowUp struct {
 	Kf KeyFrameID
 	L  bool // have a left test

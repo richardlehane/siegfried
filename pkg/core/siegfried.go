@@ -31,6 +31,20 @@ type Identification interface {
 	Confidence() float64 // how certain is this identification?
 }
 
+// Matchers do the matching (against the name or the byte stream) and send results
+type Matcher interface {
+	Identify(string, *siegreader.Buffer) chan Result
+	String() string
+	Save(io.Writer) (int, error)
+	Priority() bool // does this Matcher have priority relationships defined?
+}
+
+// Results are sent by matchers to the Identifier
+type Result interface {
+	Index() int
+	Basis() string
+}
+
 func NewSiegfried() *Siegfried {
 	s := new(Siegfried)
 	s.identifiers = make([]Identifier, 0, 1)
@@ -70,9 +84,4 @@ func (s *Siegfried) String() string {
 		ids[i] = v.Details()
 	}
 	return strings.Join(ids, "\n")
-}
-
-type Result struct {
-	Index int
-	Basis string
 }

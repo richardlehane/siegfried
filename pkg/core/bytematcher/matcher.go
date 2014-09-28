@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"sync"
 
+	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/process"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
@@ -11,7 +12,7 @@ import (
 // MUTABLE
 type matcher struct {
 	incoming       chan strike
-	bm             *ByteMatcher
+	bm             *Matcher
 	buf            *siegreader.Buffer
 	bofProgress    chan int
 	eofProgress    chan int
@@ -21,7 +22,7 @@ type matcher struct {
 	*tally
 }
 
-func (b *ByteMatcher) newMatcher(buf *siegreader.Buffer, q chan struct{}, r chan Result, bprog, eprog chan int, gate chan struct{}) chan strike {
+func (b *Matcher) newMatcher(buf *siegreader.Buffer, q chan struct{}, r chan core.Result, bprog, eprog chan int, gate chan struct{}) chan strike {
 	incoming := make(chan strike) // buffer ? Use benchmarks to check
 	m := &matcher{
 		incoming:       incoming,

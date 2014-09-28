@@ -4,11 +4,13 @@ import (
 	//"fmt"
 	"io"
 
+	"github.com/richardlehane/match/wac"
+	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
 // Identify function - brings a new matcher into existence
-func (b *ByteMatcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan Result) {
+func (b *Matcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan core.Result) {
 	buf.SetQuit(quit)
 	bprog, eprog := make(chan int), make(chan int)
 	gate := make(chan struct{})
@@ -20,6 +22,11 @@ func (b *ByteMatcher) identify(buf *siegreader.Buffer, quit chan struct{}, r cha
 		rdr = buf.NewLimitReader(b.MaxBOF)
 	} else {
 		rdr = buf.NewReader()
+	}
+	// start bof matcher if not yet started
+	if !b.bstarted {
+		b.bAho = wac.New(b.BOFSeq.Set)
+		b.bstarted = true
 	}
 	bchan := b.bAho.Index(rdr, bprog, quit)
 	// Do an initial check of BOF sequences
@@ -60,6 +67,11 @@ Loop:
 	if err != nil {
 		close(incoming)
 		return
+	}
+	// start EOF matcher if not yet started
+	if !b.estarted {
+		b.eAho = wac.New(b.EOFSeq.Set)
+		b.estarted = true
 	}
 	echan := b.eAho.Index(rrdr, eprog, quit)
 	for {

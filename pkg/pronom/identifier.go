@@ -7,8 +7,6 @@ import (
 	"sync"
 
 	"github.com/richardlehane/siegfried/pkg/core"
-	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
-	"github.com/richardlehane/siegfried/pkg/core/namematcher"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
@@ -24,8 +22,8 @@ type PronomIdentifier struct {
 	BPuids     []string         // slice of puids that corresponds to the bytematcher's int signatures
 	PuidsB     map[string][]int // map of puids to slices of bytematcher int signatures
 	EPuids     []string         // slice of puids that corresponds to the extension matcher's int signatures
-	bm         bytematcher.Matcher
-	em         namematcher.Matcher
+	bm         core.Matcher
+	em         core.Matcher
 	ids        pids
 }
 
@@ -47,22 +45,20 @@ func (pi *PronomIdentifier) Update(i int) bool {
 
 func (pi *PronomIdentifier) Identify(b *siegreader.Buffer, n string, c chan core.Identification, wg *sync.WaitGroup) {
 	pi.ids = pi.ids[:0]
-	var ems []int
 	// NameMatcher
 	if len(n) > 0 {
-		ems = pi.em.Identify(n)
-		for _, v := range ems {
-			pi.ids = add(pi.ids, pi.EPuids[v], pi.Infos[pi.EPuids[v]], "extension match", 0.1)
+		ems := pi.em.Identify(n, nil)
+		for v := range ems {
+			pi.ids = add(pi.ids, pi.EPuids[v.Index()], pi.Infos[pi.EPuids[v.Index()]], v.Basis(), 0.1)
 		}
 	}
 	var cscore float64 = 0.1
-	pi.bm.Start()
-	ids := pi.bm.Identify(b)
+	ids := pi.bm.Identify("", b)
 
 	for r := range ids {
-		i := r.Index
+		i := r.Index()
 		cscore *= 1.1
-		pi.ids = add(pi.ids, pi.BPuids[i], pi.Infos[pi.BPuids[i]], r.Basis, cscore)
+		pi.ids = add(pi.ids, pi.BPuids[i], pi.Infos[pi.BPuids[i]], r.Basis(), cscore)
 	}
 
 	if len(pi.ids) > 0 {

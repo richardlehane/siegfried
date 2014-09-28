@@ -72,6 +72,9 @@ func (b *Buffer) reset() {
 // The source can be reset to recycle an existing Buffer.
 // Siegreader blocks on EOF reads or Size() calls when the reader isn't a file or the stream isn't completely read. The quit channel overrides this block.
 func (b *Buffer) SetSource(r io.Reader) error {
+	if b == nil {
+		return fmt.Errorf("Siegreader: attempt to SetSource on a nil buffer")
+	}
 	b.reset()
 	b.src = r
 	file, ok := r.(*os.File)

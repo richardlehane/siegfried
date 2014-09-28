@@ -35,15 +35,11 @@ type Process struct {
 
 func New() *Process {
 	return &Process{
-		make([][]keyFrame, 0),
-		make([]*testTree, 0),
-		newFrameSet(),
-		newFrameSet(),
-		newSeqSet(),
-		newSeqSet(),
-		0,
-		0,
-		Defaults,
+		BOFFrames: &frameSet{},
+		EOFFrames: &frameSet{},
+		BOFSeq:    &seqSet{},
+		EOFSeq:    &seqSet{},
+		Options:   Defaults,
 	}
 }
 
@@ -127,14 +123,7 @@ type cluster struct {
 }
 
 func newCluster(p *Process) *cluster {
-	c := new(cluster)
-	c.kfs = make([]keyFrame, 0)
-	c.p = p
-	c.w.Choices = make([]wac.Choice, 0)
-	c.ks = make([]int, 0)
-	c.lefts = make([][]frames.Frame, 0)
-	c.rights = make([][]frames.Frame, 0)
-	return c
+	return &cluster{p: p}
 }
 
 func (c *cluster) add(seg frames.Signature, i int, pos position) keyFrame {
@@ -189,7 +178,7 @@ func (c *cluster) commit() *cluster {
 	l := len(c.ks)
 	if hi == len(c.p.Tests) {
 		for i := 0; i < l; i++ {
-			c.p.Tests = append(c.p.Tests, newTestTree())
+			c.p.Tests = append(c.p.Tests, &testTree{})
 		}
 	}
 	for i := 0; i < l; i++ {
@@ -202,7 +191,7 @@ func (p *Process) addToFrameSet(segment frames.Signature, i int, fs *frameSet, s
 	k, left, right := toKeyFrame(segment, position{0, start, end})
 	hi := fs.add(segment[start], len(p.Tests))
 	if hi == len(p.Tests) {
-		p.Tests = append(p.Tests, newTestTree())
+		p.Tests = append(p.Tests, &testTree{})
 	}
 	p.Tests[hi].add([2]int{len(p.KeyFrames), i}, left, right)
 	return k

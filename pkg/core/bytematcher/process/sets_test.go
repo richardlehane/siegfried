@@ -24,10 +24,7 @@ var TestFrameSetBof = &frameSet{
 }
 
 func TestseqSet(t *testing.T) {
-	s := newSeqSet()
-	if s == nil {
-		t.Error("Failed to create  new seqSet")
-	}
+	s := &seqSet{}
 	c1 := wac.Seq{[]int{0}, []wac.Choice{wac.Choice{[]byte{'a', 'p', 'p', 'l', 'e'}}}}
 	c2 := wac.Seq{[]int{0}, []wac.Choice{wac.Choice{[]byte{'a', 'p', 'p', 'l', 'e'}}}}
 	c3 := wac.Seq{[]int{-1}, []wac.Choice{wac.Choice{[]byte{'a', 'p', 'p', 'l', 'e'}}}}
@@ -52,10 +49,7 @@ func TestseqSet(t *testing.T) {
 }
 
 func TestFrameSet(t *testing.T) {
-	f := newFrameSet()
-	if f == nil {
-		t.Error("Failed to create  new seqSet")
-	}
+	f := &frameSet{}
 	f.add(tests.TestFrames[0], 0)
 	i := f.add(tests.TestFrames[0], 1)
 	if i != 0 {

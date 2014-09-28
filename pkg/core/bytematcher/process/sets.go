@@ -17,10 +17,6 @@ type seqSet struct {
 	TestTreeIndex []int // The index of the testTree for the first choices. For subsequence choices, add the index of that choice to the test tree index.
 }
 
-func newSeqSet() *seqSet {
-	return &seqSet{make([]wac.Seq, 0), make([]int, 0)}
-}
-
 // helper funcs to test equality of wac.Seq
 func choiceExists(a []byte, b wac.Choice) bool {
 	for _, v := range b {
@@ -78,10 +74,6 @@ func (ss *seqSet) add(seq wac.Seq, hi int) int {
 type frameSet struct {
 	Set           []frames.Frame
 	TestTreeIndex []int
-}
-
-func newFrameSet() *frameSet {
-	return &frameSet{make([]frames.Frame, 0), make([]int, 0)}
 }
 
 // Add frame to set. Provides current testerIndex, returns actual testerIndex for hit insertion.

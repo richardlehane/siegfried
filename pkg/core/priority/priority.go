@@ -125,6 +125,9 @@ func (m Map) List(keys []string) List {
 type List [][]int
 
 func (l List) Subset(indexes []int) List {
+	if l == nil {
+		return nil
+	}
 	subset := make(List, len(indexes))
 	for i, v := range indexes {
 		subset[i] = l[v]

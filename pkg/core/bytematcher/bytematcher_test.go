@@ -5,6 +5,7 @@ import (
 	"io"
 	"testing"
 
+	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames/tests"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
@@ -41,11 +42,11 @@ func TestIO(t *testing.T) {
 	}
 }
 
-func contains(a []Result, b []int) bool {
+func contains(a []core.Result, b []int) bool {
 	for _, v := range a {
 		var present bool
 		for _, w := range b {
-			if v.Index == w {
+			if v.Index() == w {
 				present = true
 			}
 		}
@@ -66,9 +67,8 @@ func TestMatch(t *testing.T) {
 	if err != nil && err != io.EOF {
 		t.Error(err)
 	}
-	bm.Start()
-	res := bm.Identify(buf)
-	results := make([]Result, 0)
+	res := bm.Identify("", buf)
+	results := make([]core.Result, 0)
 	for i := range res {
 		results = append(results, i)
 	}
@@ -79,7 +79,7 @@ func TestMatch(t *testing.T) {
 	if err != nil && err != io.EOF {
 		t.Error(err)
 	}
-	res = bm.Identify(buf)
+	res = bm.Identify("", buf)
 	results = results[:0]
 	for i := range res {
 		results = append(results, i)

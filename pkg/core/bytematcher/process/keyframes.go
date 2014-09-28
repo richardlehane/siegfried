@@ -41,7 +41,7 @@ func (kf KeyFrameID) String() string {
 // Turn a signature segment into a keyFrame and left and right frame slices.
 // The left and right frame slices are converted into BMH sequences where possible
 func toKeyFrame(seg frames.Signature, pos position) (keyFrame, []frames.Frame, []frames.Frame) {
-	left, right := make([]frames.Frame, 0), make([]frames.Frame, 0)
+	var left, right []frames.Frame
 	var typ frames.OffType
 	var segPos, keyPos keyFramePos
 	segPos.LMin, segPos.LMax = calcLen(seg)

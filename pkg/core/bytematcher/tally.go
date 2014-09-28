@@ -4,12 +4,13 @@ import (
 	"sort"
 	"sync"
 
+	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/process"
 )
 
 type tally struct {
 	*matcher
-	results chan Result
+	results chan core.Result
 	quit    chan struct{}
 
 	once     *sync.Once
@@ -27,7 +28,7 @@ type tally struct {
 	halt   chan bool
 }
 
-func newTally(r chan Result, q chan struct{}, m *matcher) *tally {
+func newTally(r chan core.Result, q chan struct{}, m *matcher) *tally {
 	t := &tally{
 		matcher:  m,
 		results:  r,
