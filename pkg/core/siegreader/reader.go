@@ -30,26 +30,6 @@ func (r *Reader) setBuf(o int) error {
 	return err
 }
 
-func (r *Reader) Read(b []byte) (int, error) {
-	var slc []byte
-	var err error
-	if len(b) > len(r.scratch)-r.j {
-		slc, err = r.Slice(r.i, len(b))
-		if err != nil {
-			if err != io.EOF {
-				return 0, err
-			}
-			r.end = true
-		}
-	} else {
-		slc = r.scratch[r.j : r.j+len(b)]
-	}
-	n := copy(b, slc)
-	r.i += n
-	r.j += n
-	return len(slc), err
-}
-
 func (r *Reader) ReadByte() (byte, error) {
 	if r.j >= len(r.scratch) {
 		if r.end {
@@ -70,6 +50,26 @@ func (r *Reader) ReadByte() (byte, error) {
 	return b, nil
 }
 
+func (r *Reader) Read(b []byte) (int, error) {
+	var slc []byte
+	var err error
+	if len(b) > len(r.scratch)-r.j {
+		slc, err = r.Slice(r.i, len(b))
+		if err != nil {
+			if err != io.EOF {
+				return 0, err
+			}
+			r.end = true
+		}
+	} else {
+		slc = r.scratch[r.j : r.j+len(b)]
+	}
+	n := copy(b, slc)
+	r.i += n
+	r.j += n
+	return len(slc), err
+}
+
 func (r *Reader) ReadAt(b []byte, off int64) (int, error) {
 	var slc []byte
 	var err error
@@ -79,8 +79,11 @@ func (r *Reader) ReadAt(b []byte, off int64) (int, error) {
 		slc = r.scratch[s : s+len(b)]
 	} else {
 		slc, err = r.Slice(int(off), len(b))
-		if err != nil && err != io.EOF {
-			return 0, err
+		if err != nil {
+			if err != io.EOF {
+				return 0, err
+			}
+			r.end = true
 		}
 	}
 	copy(b, slc)
@@ -103,8 +106,9 @@ func (r *Reader) Seek(offset int64, whence int) (int64, error) {
 		if rev {
 			offset = r.sz - offset
 		}
+		d := int(offset) - r.i
 		r.i = int(offset)
-		r.j = r.i % readSz
+		r.j += d // add the jump distance to r.j
 		return offset, err
 	}
 	return 0, err

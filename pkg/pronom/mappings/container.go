@@ -19,9 +19,8 @@ type ContainerSignature struct {
 }
 
 type File struct {
-	Required  bool `xml:",attr"`
 	Path      string
-	Signature InternalSignature `xml:"BinarySignatures>InternalSignatureCollection"`
+	Signature InternalSignature `xml:"BinarySignatures>InternalSignatureCollection>InternalSignature"`
 }
 
 type InternalSignature struct {
@@ -43,7 +42,7 @@ type SubSequence struct {
 }
 
 type FormatMapping struct {
-	Id   string `xml:"signatureId,attr"`
+	Id   int    `xml:"signatureId,attr"`
 	Puid string `xml:",attr"`
 }
 

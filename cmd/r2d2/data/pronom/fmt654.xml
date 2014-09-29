@@ -4,8 +4,7 @@
     <FileFormat>
       <FormatID>1453</FormatID>
       <FormatName>INTERLIS Model File</FormatName>
-      <FormatVersion>
-      </FormatVersion>
+      <FormatVersion>2.3</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -44,13 +43,13 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>987</SignatureID>
-        <SignatureName>INTERLIS Model File</SignatureName>
-        <SignatureNote>BOF (Max Offset 1024): INTERLIS 2.3;.{1024}MODEL{1-64}AT{1-64}VERSION</SignatureNote>
+        <SignatureName>INTERLIS 2.3 Model File</SignatureName>
+        <SignatureNote>BOF (Max Offset 4096): INTERLIS 2.3;.{1024}MODEL{1-64}AT{1-64}VERSION</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1219</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>1024</MaxOffset>
+          <MaxOffset>4096</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

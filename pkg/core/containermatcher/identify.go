@@ -10,15 +10,15 @@ import (
 )
 
 func (m Matcher) Identify(n string, b *siegreader.Buffer) chan core.Result {
+	res := make(chan core.Result)
 	// check trigger
 	buf, err := b.Slice(0, 8)
 	if err != nil {
-		return nil
+		close(res)
+		return res
 	}
-	var res chan core.Result
 	for _, c := range m {
 		if c.trigger(buf) {
-			res = make(chan core.Result)
 			if q, i := c.defaultMatch(n); q {
 				go func() {
 					res <- defaultHit(i)
@@ -35,7 +35,9 @@ func (m Matcher) Identify(n string, b *siegreader.Buffer) chan core.Result {
 			return res
 		}
 	}
-	return nil
+	// nothing ... move on
+	close(res)
+	return res
 }
 
 func (c *ContainerMatcher) defaultMatch(n string) (bool, int) {
@@ -45,7 +47,7 @@ func (c *ContainerMatcher) defaultMatch(n string) (bool, int) {
 	ext := filepath.Ext(n)
 	if len(ext) > 0 && strings.TrimPrefix(ext, ".") == c.Default {
 		// the default is always the last container sig
-		return true, len(c.Parts) - 1
+		return true, c.Sindex + len(c.Parts) - 1
 	}
 	return false, 0
 }
@@ -70,7 +72,8 @@ func (c *ContainerMatcher) identify(rdr Reader, res chan core.Result) {
 		c.hits = make([]hit, 0, 20) // shared hits buffer to avoid allocs
 		c.started = true
 	}
-	for err := rdr.Next(); err == nil; err = rdr.Next() {
+	var err error
+	for err = rdr.Next(); err == nil; err = rdr.Next() {
 		ct, ok := c.NameCTest[rdr.Name()]
 		if !ok {
 			continue
@@ -117,12 +120,11 @@ func (c *ContainerMatcher) processHits(hits []hit, ct *CTest, name string, res c
 		}
 		return false
 	}
-
 	for _, h := range hits {
 		c.partsMatched[h.id] = append(c.partsMatched[h.id], h)
 		if len(c.partsMatched[h.id]) == c.Parts[h.id] {
 			if c.checkWait(h.id) {
-				res <- result(c.partsMatched[h.id]) // send a Result here
+				res <- toResult(c.Sindex, c.partsMatched[h.id]) // send a Result here
 				if c.Priorities != nil {
 					if len(c.Priorities[h.id]) == 0 {
 						return true
@@ -146,6 +148,10 @@ func (c *ContainerMatcher) processHits(hits []hit, ct *CTest, name string, res c
 		if len(c.partsMatched[v]) == 0 || c.partsMatched[v][len(c.partsMatched[v])-1].name != name {
 			c.ruledOut[v] = true
 		}
+	}
+	// if we haven't got a waitList yet, then we should return false
+	if c.waitList == nil {
+		return false
 	}
 	// loop over the wait list, seeing if they are all ruled out
 	var satisfied = true
@@ -184,6 +190,14 @@ func (c *ContainerMatcher) checkWait(i int) bool {
 	return true
 }
 
+func toResult(i int, h []hit) result {
+	if len(h) == 0 {
+		return result(h)
+	}
+	h[0].id += i
+	return result(h)
+}
+
 type result []hit
 
 func (r result) Index() int {
@@ -196,10 +210,12 @@ func (r result) Index() int {
 func (r result) Basis() string {
 	var basis string
 	for i, v := range r {
-		if i > 0 {
+		if i < 1 {
+			basis += "container "
+		} else {
 			basis += "; "
 		}
-		basis += "container name " + v.name
+		basis += "name " + v.name
 		if len(v.basis) > 0 {
 			basis += " with " + v.basis
 		}

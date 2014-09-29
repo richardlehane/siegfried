@@ -46,7 +46,8 @@
       <InternalSignature>
         <SignatureID>976</SignatureID>
         <SignatureName>Media View Pro</SignatureName>
-        <SignatureNote>BOF: 030i (OFFSET 4)    EOF: Svar (Offset 62)    EOF: 030i (OFFSET 8)</SignatureNote>
+        <SignatureNote>BOF: 030i (offset 4)
+EOF: Svar {8-34} 030i (offset 8)</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1202</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -73,20 +74,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>30333069</ByteSequenceValue>
-        </ByteSequence>
-        <ByteSequence>
-          <ByteSequenceID>1204</ByteSequenceID>
-          <PositionType>Absolute from EOF</PositionType>
-          <Offset>20</Offset>
-          <MaxOffset>46</MaxOffset>
-          <IndirectOffsetLocation>
-          </IndirectOffsetLocation>
-          <IndirectOffsetLength>
-          </IndirectOffsetLength>
-          <Endianness>
-          </Endianness>
-          <ByteSequenceValue>53566172</ByteSequenceValue>
+          <ByteSequenceValue>53566172{8-34}30333069</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

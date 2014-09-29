@@ -239,7 +239,13 @@
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1452</RelatedFormatID>
-        <RelatedFormatName>INTERLIS 2 Transfer File</RelatedFormatName>
+        <RelatedFormatName>INTERLIS Transfer File</RelatedFormatName>
+        <RelatedFormatVersion>2.3</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1462</RelatedFormatID>
+        <RelatedFormatName>Industry Foundation Classes XML</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

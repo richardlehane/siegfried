@@ -17,6 +17,57 @@ import (
 
 type Matcher []*ContainerMatcher
 
+func New() Matcher {
+	m := make(Matcher, 2)
+	m[0] = NewZip()
+	m[1] = NewMscfb()
+	return m
+}
+
+func (m Matcher) AddZip(nameParts [][]string, sigParts [][]frames.Signature) error {
+	return m.addSigs(0, nameParts, sigParts)
+}
+
+func (m Matcher) AddMscfb(nameParts [][]string, sigParts [][]frames.Signature) error {
+	return m.addSigs(1, nameParts, sigParts)
+}
+
+func (m Matcher) addSigs(i int, nameParts [][]string, sigParts [][]frames.Signature) error {
+	if len(m) < i+1 {
+		return fmt.Errorf("Container: missing container matcher")
+	}
+	var err error
+	if len(nameParts) != len(sigParts) {
+		return fmt.Errorf("Container: expecting equal name and signature parts")
+	}
+	for j := range nameParts {
+		err = m[i].AddSignature(nameParts[j], sigParts[j])
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func (m Matcher) Commit(s []string, p []priority.List) error {
+	if len(s) != len(p) {
+		return fmt.Errorf("Container: expect both default values and priority lists in commit")
+	}
+	for i, v := range s {
+		m[i].Priorities = p[i]
+		err := m[i].Commit(v)
+		if err != nil {
+			return err
+		}
+	}
+	var tally int
+	for _, c := range m {
+		c.Sindex = tally
+		tally += len(c.Parts)
+	}
+	return nil
+}
+
 func (m Matcher) String() string {
 	var str string
 	for _, c := range m {
@@ -64,6 +115,7 @@ func (m Matcher) Save(w io.Writer) (int, error) {
 
 type ContainerMatcher struct {
 	ctype
+	Sindex     int // added to hits - this places all container matches in a single slice
 	CType      int
 	NameCTest  map[string]*CTest
 	Parts      []int // corresponds with each signature: represents the number of CTests for each sig
@@ -181,7 +233,7 @@ type CTest struct {
 	Satisfied   []int              // satisfied signatures are immediately matched: i.e. a name without a required bitstream
 	Unsatisfied []int              // unsatisfied signatures depend on bitstreams as well as names matching
 	buffer      []frames.Signature // temporary - used while creating CTests
-	BM          *bytematcher.ByteMatcher
+	BM          *bytematcher.Matcher
 }
 
 func (ct *CTest) add(s frames.Signature, t int) {

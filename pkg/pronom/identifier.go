@@ -21,14 +21,16 @@ type PronomIdentifier struct {
 	Infos      map[string]FormatInfo
 	BPuids     []string         // slice of puids that corresponds to the bytematcher's int signatures
 	PuidsB     map[string][]int // map of puids to slices of bytematcher int signatures
-	EPuids     []string         // slice of puids that corresponds to the extension matcher's int signatures
-	bm         core.Matcher
-	em         core.Matcher
+	CPuids     []string
+	EPuids     []string     // slice of puids that corresponds to the extension matcher's int signatures
+	em         core.Matcher // extensionmatcher
+	cm         core.Matcher // containermatcher
+	bm         core.Matcher // bytematcher
 	ids        pids
 }
 
 func (pi *PronomIdentifier) String() string {
-	return pi.bm.String()
+	return pi.bm.String() + "\n---------\n\nContainer matcher\n" + pi.cm.String()
 }
 
 func (pi *PronomIdentifier) Details() string {
@@ -45,22 +47,32 @@ func (pi *PronomIdentifier) Update(i int) bool {
 
 func (pi *PronomIdentifier) Identify(b *siegreader.Buffer, n string, c chan core.Identification, wg *sync.WaitGroup) {
 	pi.ids = pi.ids[:0]
-	// NameMatcher
+	// Extension Matcher
 	if len(n) > 0 {
 		ems := pi.em.Identify(n, nil)
 		for v := range ems {
 			pi.ids = add(pi.ids, pi.EPuids[v.Index()], pi.Infos[pi.EPuids[v.Index()]], v.Basis(), 0.1)
 		}
 	}
-	var cscore float64 = 0.1
-	ids := pi.bm.Identify("", b)
+	var cscore float64 = 0.1 //confidence score
 
-	for r := range ids {
-		i := r.Index()
-		cscore *= 1.1
-		pi.ids = add(pi.ids, pi.BPuids[i], pi.Infos[pi.BPuids[i]], r.Basis(), cscore)
+	// Container Matcher
+	if pi.cm != nil {
+		cms := pi.cm.Identify(n, b)
+		for v := range cms {
+			cscore *= 1.1
+			pi.ids = add(pi.ids, pi.CPuids[v.Index()], pi.Infos[pi.CPuids[v.Index()]], v.Basis(), cscore)
+		}
 	}
-
+	// Byte Matcher (skip if a container matched and cscore changed)
+	if cscore == 0.1 {
+		ids := pi.bm.Identify("", b)
+		for r := range ids {
+			i := r.Index()
+			cscore *= 1.1
+			pi.ids = add(pi.ids, pi.BPuids[i], pi.Infos[pi.BPuids[i]], r.Basis(), cscore)
+		}
+	}
 	if len(pi.ids) > 0 {
 		sort.Sort(pi.ids)
 		conf := pi.ids[0].confidence

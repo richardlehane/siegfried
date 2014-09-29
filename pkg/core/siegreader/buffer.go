@@ -231,13 +231,13 @@ func (b *Buffer) Slice(s, l int) ([]byte, error) {
 	if err == io.EOF || b.complete {
 		if s+l > b.w.val {
 			if s > b.w.val {
-				return nil, err
+				return nil, io.EOF
 			}
 			// in the case of an empty file
 			if b.Size() == 0 {
 				return nil, io.EOF
 			}
-			return b.buf[s:b.w.val], err
+			return b.buf[s:b.w.val], io.EOF
 		} else {
 			return b.buf[s : s+l], nil
 		}
@@ -308,13 +308,21 @@ func (b *Buffer) canSeek(o int64, rev bool) (bool, error) {
 	if rev {
 		if b.sz > 0 {
 			o = b.sz - o
-		} else {
-			select {
-			case <-b.quit:
-				return false, quitError
-			case <-b.eofc:
+			if o < 0 {
+				return false, nil
 			}
-			o = b.sz - o
+			// continue on to fill below
+		} else {
+			var err error
+			for _, err = b.fill(); err == nil; _, err = b.fill() {
+			}
+			if err != io.EOF {
+				return false, err
+			}
+			if b.sz-o < 0 {
+				return false, nil
+			}
+			return true, nil
 		}
 	}
 	b.w.Lock()

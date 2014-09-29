@@ -62,6 +62,11 @@
         <Signature>xtg</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1549</ExternalSignatureID>
+        <Signature>qxp%20report</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
       <InternalSignature>
         <SignatureID>979</SignatureID>
         <SignatureName>QuarkXpress Report 1</SignatureName>
@@ -103,7 +108,7 @@
       <InternalSignature>
         <SignatureID>981</SignatureID>
         <SignatureName>QuarkXpress Report 3</SignatureName>
-        <SignatureNote>BOF: &lt;v1.60&gt;&lt;e0&gt;.{512}Document has been saved by the following versions of QuarkXPress</SignatureNote>
+        <SignatureNote>BOF: &lt;v1.60&gt;&lt;e0&gt;.{1-512}Document has been saved by the following versions of QuarkXPress</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1209</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -117,7 +122,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>3C76312E36303E3C65(30|31)3E0D{512}446F63756D656E7420686173206265656E2073617665642062792074686520666F6C6C6F77696E672076657273696F6E73206F6620517561726B585072657373</ByteSequenceValue>
+          <ByteSequenceValue>3C76312E36303E3C65(30|31)3E0D{1-512}446F63756D656E7420686173206265656E2073617665642062792074686520666F6C6C6F77696E672076657273696F6E73206F6620517561726B585072657373</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

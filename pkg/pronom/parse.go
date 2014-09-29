@@ -260,6 +260,12 @@ func parseContainerSeq(puid, seq string) ([]patterns.Pattern, error) {
 			} else {
 				return nil, errors.New("Pronom parse error: unexpected slash in container (appears outside brackets)")
 			}
+		case itemColon:
+			if insideBracket {
+				rangeMode = true
+			} else {
+				return nil, errors.New("Pronom parse error: unexpected colon in container (appears outside brackets)")
+			}
 		case itemBracketLeft:
 			if len(sequence) > 0 {
 				pats = append(pats, sequence)
@@ -284,6 +290,10 @@ func parseContainerSeq(puid, seq string) ([]patterns.Pattern, error) {
 // Min and Max Offsets usually provided. Lack of a Max Offset implies a Variable sequence.
 // No wildcards within sequences: multiple subsequences with new offsets are used instead.
 func parseContainerSig(puid string, s mappings.InternalSignature) (frames.Signature, error) {
+	// some sigs only have paths, this is OK
+	if s.ByteSequences == nil {
+		return nil, nil
+	}
 	sig := make(frames.Signature, 0, 1)
 	// Return an error for multiple byte sequences
 	if len(s.ByteSequences) > 1 {

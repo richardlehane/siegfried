@@ -14,6 +14,8 @@ type zipReader struct {
 }
 
 func (z *zipReader) Next() error {
+	// proceed
+	z.idx++
 	// scan past directories
 	for ; z.idx < len(z.rdr.File) && z.rdr.File[z.idx].CompressedSize64 <= 0; z.idx++ {
 	}
@@ -42,5 +44,5 @@ func (z *zipReader) Close() {
 
 func newZip(b *siegreader.Buffer) (Reader, error) {
 	r, err := zip.NewReader(b.NewReader(), b.SizeNow())
-	return &zipReader{rdr: r}, err
+	return &zipReader{idx: -1, rdr: r}, err
 }

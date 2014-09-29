@@ -68,6 +68,24 @@
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>656</RelatedFormatID>
+        <RelatedFormatName>Broadcast WAVE</RelatedFormatName>
+        <RelatedFormatVersion>1</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>735</RelatedFormatID>
+        <RelatedFormatName>Broadcast WAVE</RelatedFormatName>
+        <RelatedFormatVersion>0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1314</RelatedFormatID>
+        <RelatedFormatName>Broadcast WAVE</RelatedFormatName>
+        <RelatedFormatVersion>2</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>654</RelatedFormatID>
         <RelatedFormatName>Waveform Audio</RelatedFormatName>

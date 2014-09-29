@@ -15,7 +15,9 @@ import (
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+	"github.com/richardlehane/siegfried/pkg/core/containermatcher"
 	"github.com/richardlehane/siegfried/pkg/core/extensionmatcher"
+	"github.com/richardlehane/siegfried/pkg/core/priority"
 
 	. "github.com/richardlehane/siegfried/pkg/pronom/mappings"
 )
@@ -45,8 +47,8 @@ var Config = struct {
 }{
 	"pronom",
 	3,
-	"DROID_SignatureFile_V77.xml",
-	"container-signature-20140717.xml",
+	"DROID_SignatureFile_V78.xml",
+	"container-signature-20140923.xml",
 	"pronom",
 	filepath.Join("..", "..", "cmd", "r2d2", "data"),
 	120 * time.Second,
@@ -70,11 +72,12 @@ func NewIdentifier(droid, container, reports string) (*PronomIdentifier, error) 
 type Header struct {
 	PSize int
 	BSize int
+	CSize int
 	ESize int
 }
 
 func (h Header) String() string {
-	return fmt.Sprintf("Pronom ID size: %v; Bytematcher size: %v; Extension matcher size: %v", h.PSize, h.BSize, h.ESize)
+	return fmt.Sprintf("Pronom ID size: %d; Bytematcher size: %d; Containermatcher Size: %d; Extension matcher size: %d", h.PSize, h.BSize, h.CSize, h.ESize)
 }
 
 func (p *PronomIdentifier) Save(path string) error {
@@ -89,13 +92,17 @@ func (p *PronomIdentifier) Save(path string) error {
 	if err != nil {
 		return err
 	}
+	csz, err := p.cm.Save(buf)
+	if err != nil {
+		return err
+	}
 	esz, err := p.em.Save(buf)
 	if err != nil {
 		return err
 	}
 	hbuf := new(bytes.Buffer)
 	henc := gob.NewEncoder(hbuf)
-	err = henc.Encode(Header{psz, bsz, esz})
+	err = henc.Encode(Header{psz, bsz, csz, esz})
 	f, err := os.Create(path)
 	defer f.Close()
 	if err != nil {
@@ -109,7 +116,7 @@ func (p *PronomIdentifier) Save(path string) error {
 	if err != nil {
 		return err
 	}
-	fmt.Print(Header{psz, bsz, esz})
+	fmt.Print(Header{psz, bsz, csz, esz})
 	return nil
 }
 
@@ -125,11 +132,13 @@ func Load(path string) (*PronomIdentifier, error) {
 	if err != nil {
 		return nil, err
 	}
-	pstart := len(c) - h.PSize - h.BSize - h.ESize
-	bstart := len(c) - h.ESize - h.BSize
+	pstart := len(c) - h.PSize - h.BSize - h.CSize - h.ESize
+	bstart := len(c) - h.ESize - h.CSize - h.BSize
+	cstart := len(c) - h.ESize - h.CSize
 	estart := len(c) - h.ESize
 	pbuf := bytes.NewBuffer(c[pstart : pstart+h.PSize])
 	bbuf := bytes.NewBuffer(c[bstart : bstart+h.BSize])
+	cbuf := bytes.NewBuffer(c[cstart : cstart+h.CSize])
 	ebuf := bytes.NewBuffer(c[estart : estart+h.ESize])
 	pdec := gob.NewDecoder(pbuf)
 	var p PronomIdentifier
@@ -141,11 +150,16 @@ func Load(path string) (*PronomIdentifier, error) {
 	if err != nil {
 		return nil, err
 	}
+	cm, err := containermatcher.Load(cbuf)
+	if err != nil {
+		return nil, err
+	}
 	em, err := extensionmatcher.Load(ebuf)
 	if err != nil {
 		return nil, err
 	}
 	p.bm = bm
+	p.cm = cm
 	p.em = em
 	p.ids = make(pids, 20)
 	return &p, nil
@@ -175,6 +189,7 @@ func NewFromBM(bm *bytematcher.Matcher, i int, puid string) *PronomIdentifier {
 	pi := new(PronomIdentifier)
 	pi.bm = bm
 	pi.em = extensionmatcher.New()
+	pi.cm = containermatcher.New()
 	sigs := make([]int, i)
 	for idx := range sigs {
 		sigs[idx] = idx
@@ -194,6 +209,13 @@ func (p *pronom) identifier() (*PronomIdentifier, error) {
 	pi.BPuids, pi.PuidsB = p.GetPuids()
 	priorities := p.priorities(pi.BPuids)
 	pi.em, pi.EPuids = p.extMatcher()
+	//containermatcher
+	var err error
+	pi.cm, pi.CPuids, err = p.contMatcher(priorities)
+	if err != nil {
+		return nil, err
+	}
+	// bytematcher
 	sigs, err := p.Parse()
 	if err != nil {
 		return nil, err
@@ -265,6 +287,59 @@ func (p pronom) extMatcher() (extensionmatcher.Matcher, []string) {
 		}
 	}
 	return em, epuids
+}
+
+func (p pronom) contMatcher(ps priority.Map) (containermatcher.Matcher, []string, error) {
+	var zpuids, mpuids []string
+	var zsigs, msigs [][]frames.Signature
+	var znames, mnames [][]string
+	cpuids := make(map[int]string)
+	for _, fm := range p.container.FormatMappings {
+		cpuids[fm.Id] = fm.Puid
+	}
+	for _, c := range p.container.ContainerSignatures {
+		puid := cpuids[c.Id]
+		typ := c.ContainerType
+		names := make([]string, 0, 1)
+		sigs := make([]frames.Signature, 0, 1)
+		for _, f := range c.Files {
+			names = append(names, f.Path)
+			sig, err := parseContainerSig(puid, f.Signature)
+			if err != nil {
+				return nil, nil, err
+			}
+			sigs = append(sigs, sig)
+		}
+		switch typ {
+		case "ZIP":
+			zpuids = append(zpuids, puid)
+			znames = append(znames, names)
+			zsigs = append(zsigs, sigs)
+		case "OLE2":
+			mpuids = append(mpuids, puid)
+			mnames = append(mnames, names)
+			msigs = append(msigs, sigs)
+		default:
+			return nil, nil, fmt.Errorf("pronom: container parsing - unknown type %s", typ)
+		}
+	}
+	cm := containermatcher.New()
+	err := cm.AddZip(znames, zsigs)
+	if err != nil {
+		return nil, nil, err
+	}
+	err = cm.AddMscfb(mnames, msigs)
+	if err != nil {
+		return nil, nil, err
+	}
+	// now add the zip default and build priority lists from the puids
+	err = cm.Commit([]string{"zip", ""}, []priority.List{ps.List(zpuids), ps.List(mpuids)})
+	if err != nil {
+		return nil, nil, err
+	}
+	// add zip default
+	zpuids = append(zpuids, "x-fmt/263")
+	return cm, append(zpuids, mpuids...), nil
 }
 
 // newPronom creates a pronom object. It takes as arguments the paths to a Droid signature file, a container file, and a base directory or base url for Pronom reports.
@@ -355,13 +430,16 @@ func openXML(path string, els interface{}) error {
 func (p *pronom) applyAll(apply func(p *pronom, puid string) error) []error {
 	ch := make(chan error, len(p.puids))
 	wg := sync.WaitGroup{}
+	queue := make(chan struct{}, 200)
 	for puid := range p.puids {
 		wg.Add(1)
 		go func(puid string) {
+			queue <- struct{}{}
 			defer wg.Done()
 			if err := apply(p, puid); err != nil {
 				ch <- err
 			}
+			<-queue
 		}(puid)
 	}
 	wg.Wait()

@@ -33,8 +33,8 @@ func (m *mscfbReader) Name() string {
 	if m.entry == nil {
 		return ""
 	}
-	m.entry.Path = append(m.entry.Path, m.entry.Name)
-	return strings.Join(m.entry.Path, "/")
+	path := append(m.entry.Path, m.entry.Name)
+	return strings.Join(path, "/")
 }
 
 func (m *mscfbReader) SetSource(b *siegreader.Buffer) error {

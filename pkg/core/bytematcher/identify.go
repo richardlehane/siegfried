@@ -20,36 +20,39 @@ func (b *Matcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan co
 	var rdr io.ByteReader
 	if b.MaxBOF > 0 {
 		rdr = buf.NewLimitReader(b.MaxBOF)
-	} else {
+	} else if b.MaxBOF < 0 {
 		rdr = buf.NewReader()
 	}
 	// start bof matcher if not yet started
-	if !b.bstarted {
+	if rdr != nil && !b.bstarted {
 		b.bAho = wac.New(b.BOFSeq.Set)
 		b.bstarted = true
 	}
-	bchan := b.bAho.Index(rdr, bprog, quit)
-	// Do an initial check of BOF sequences
-Loop:
-	for {
-		select {
-		case br, ok := <-bchan:
-			if !ok {
-				select {
-				case <-quit:
-					// the matcher has called quit
-					close(incoming)
-					return
-				default:
-					//	we've reached the EOF but haven't got a final match
-					break Loop
+	var bchan chan wac.Result
+	if rdr != nil {
+		bchan = b.bAho.Index(rdr, bprog, quit)
+		// Do an initial check of BOF sequences
+	Loop:
+		for {
+			select {
+			case br, ok := <-bchan:
+				if !ok {
+					select {
+					case <-quit:
+						// the matcher has called quit
+						close(incoming)
+						return
+					default:
+						//	we've reached the EOF but haven't got a final match
+						break Loop
+					}
+				} else {
+					//fmt.Println(strike{b.BOFSeq.TestTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false, br.Final})
+					incoming <- strike{b.BOFSeq.TestTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false, br.Final}
 				}
-			} else {
-				//fmt.Println(strike{b.BOFSeq.TestTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false, br.Final})
-				incoming <- strike{b.BOFSeq.TestTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false, br.Final}
+			case <-gate:
+				break Loop
 			}
-		case <-gate:
-			break Loop
 		}
 	}
 	//fmt.Println("Proceeding")
@@ -61,7 +64,7 @@ Loop:
 	var err error
 	if b.MaxEOF > 0 {
 		rrdr, err = buf.NewLimitReverseReader(b.MaxEOF)
-	} else {
+	} else if b.MaxEOF < 0 {
 		rrdr, err = buf.NewReverseReader()
 	}
 	if err != nil {
@@ -69,11 +72,14 @@ Loop:
 		return
 	}
 	// start EOF matcher if not yet started
-	if !b.estarted {
+	if rrdr != nil && !b.estarted {
 		b.eAho = wac.New(b.EOFSeq.Set)
 		b.estarted = true
 	}
-	echan := b.eAho.Index(rrdr, eprog, quit)
+	var echan chan wac.Result
+	if rrdr != nil {
+		echan = b.eAho.Index(rrdr, eprog, quit)
+	}
 	for {
 		select {
 		case bf, ok := <-bfchan:

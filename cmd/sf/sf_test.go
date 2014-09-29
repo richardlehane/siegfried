@@ -58,7 +58,11 @@ func TestSuite(t *testing.T) {
 		}
 		last := strings.Split(path, string(os.PathSeparator))
 		path = last[len(last)-1]
-		idx := strings.Index(path, "signature")
+		var idx int
+		idx = strings.Index(path, "container")
+		if idx < 0 {
+			idx = strings.Index(path, "signature")
+		}
 		if idx < 0 {
 			idx = len(path)
 		}

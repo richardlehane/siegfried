@@ -306,6 +306,24 @@
           <ByteSequenceValue>52494646{4}57415645666D7420280000005000{38}6661637404000000{4}6D6578740C000000{12}*62657874{350}0100</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1007</SignatureID>
+        <SignatureName>BWAVE WAVEFORMATEXTENSIBLE 1 variant</SignatureName>
+        <SignatureNote>RIFF header, WAVE ID, Format chunk (WAVEFORMATEXTENSIBLE), BEXT chunk (Version=1)</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1248</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>52494646{4}57415645666D7420{4}FEFF{38-1000}64617461*62657874{350}0100</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>654</RelatedFormatID>
@@ -317,6 +335,13 @@
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>784</RelatedFormatID>
         <RelatedFormatName>Waveform Audio (PCMWAVEFORMAT)</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>786</RelatedFormatID>
+        <RelatedFormatName>Waveform Audio (WAVEFORMATEXTENSIBLE)</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

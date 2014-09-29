@@ -79,6 +79,20 @@
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>659</RelatedFormatID>
+        <RelatedFormatName>MPEG-1 Program Stream</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>660</RelatedFormatID>
+        <RelatedFormatName>MPEG-2 Program Stream</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Is subtype of</RelationshipType>
         <RelatedFormatID>660</RelatedFormatID>
         <RelatedFormatName>MPEG-2 Program Stream</RelatedFormatName>

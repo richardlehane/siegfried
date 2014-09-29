@@ -80,6 +80,13 @@
         </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1207</RelatedFormatID>
+        <RelatedFormatName>Video Object File (MPEG-2 subset)</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>659</RelatedFormatID>
         <RelatedFormatName>MPEG-1 Program Stream</RelatedFormatName>

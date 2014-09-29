@@ -407,10 +407,13 @@ func conText(l *lexer) stateFn {
 		l.emit(itemEOF)
 		return nil
 	case leftBracket:
-		l.emit(itemBracketLeft) // two types: [22 27] set & ['a'-'z'] range
+		l.emit(itemBracketLeft) // two types: [22 27] set & ['a'-'z'] range & : range
 		return conText
 	case rightBracket:
 		l.emit(itemBracketRight)
+		return conText
+	case colon:
+		l.emit(itemColon)
 		return conText
 	case slash:
 		l.emit(itemSlash)

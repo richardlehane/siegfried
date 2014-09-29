@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1481</FormatID>
+      <FormatName>Thumbs DB file</FormatName>
+      <FormatVersion>XP</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Raster), Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>A thumbs.db file is generated automatically within Microsoft Windows environments (although the automatic creation behaviour can be turned off). It is generally a hidden system file and its purpose is to hold thumbnail images of any images stored within a given folder. This format is based on the OLE2 Compound Document Format and can be identified in DROID 6 and later via a container signature. Structurally it holds a Catalog file that indexes the thumbnails, and a file per image that contains the image data in a JPEG format with additional data preceeding the image data. At this time the signature is the result of reverse engineering work conducted by Ross Spencer, Richard Lehane and others. The Catalog file consists of a 4 byte opening sequence that appears to act as an identifier and database version number, followed by two bytes indicating the number of images within the thumbs.db file, followed by information relating to the resolution of the images. This signature is likely to be improved with further research and a better understanding of the format structure. This particular format is known to be produced in Windows XP environments, but may also apply to other Windows operating systems. Later thumbs.db files hold a different structure which cannot yet be suitably represented within a DROID container signature.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>178</ProvenanceSourceID>
+      <ProvenanceName>National Library of New Zealand / National Library of New Zealand</ProvenanceName>
+      <ProvenanceSourceDate>20 Sep 2014</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>20 Sep 2014</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/682</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>93</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <DeveloperCompoundName>Microsoft Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>93</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <SupportCompoundName>Microsoft Corporation</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>1546</ExternalSignatureID>
+        <Signature>db</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>
