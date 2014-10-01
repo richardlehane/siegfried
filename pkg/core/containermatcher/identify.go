@@ -97,6 +97,7 @@ func (ct *CTest) identify(c *ContainerMatcher, rdr Reader, name string) []hit {
 	if ct.Unsatisfied != nil {
 		rdr.SetSource(c.entryBuf)
 		for r := range ct.BM.Identify("", c.entryBuf) {
+
 			h := ct.Unsatisfied[r.Index()]
 			if c.checkWait(h) && c.checkHits(h) {
 				c.hits = append(c.hits, hit{h, name, r.Basis()})

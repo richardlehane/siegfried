@@ -207,7 +207,7 @@ func (p *pronom) identifier() (*PronomIdentifier, error) {
 	pi.ids = make(pids, 20)
 	pi.Infos = p.GetInfos()
 	pi.BPuids, pi.PuidsB = p.GetPuids()
-	priorities := p.priorities(pi.BPuids)
+	priorities := p.priorities()
 	pi.em, pi.EPuids = p.extMatcher()
 	//containermatcher
 	var err error

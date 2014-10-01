@@ -13,3 +13,15 @@ func (s Signature) String() string {
 	}
 	return "(" + str + ")"
 }
+
+func (s Signature) Equals(s1 Signature) bool {
+	if len(s) != len(s1) {
+		return false
+	}
+	for i, v := range s {
+		if !v.Equals(s1[i]) {
+			return false
+		}
+	}
+	return true
+}

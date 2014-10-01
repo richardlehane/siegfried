@@ -125,23 +125,36 @@ func (m Map) List(keys []string) List {
 type List [][]int
 
 func (l List) Subset(indexes []int) List {
+	submap := make(map[int]int)
+	for i, v := range indexes {
+		submap[v] = i
+	}
 	if l == nil {
 		return nil
 	}
 	subset := make(List, len(indexes))
 	for i, v := range indexes {
-		subset[i] = l[v]
+		ns := make([]int, 0, len(l[v]))
+		for _, w := range l[v] {
+			if idx, ok := submap[w]; ok {
+				ns = append(ns, idx)
+			}
+		}
+		subset[i] = ns
 	}
 	return subset
 }
 
 func (l List) String() string {
 	if l == nil {
-		return "0 priorities defined"
+		return "nil priorities defined"
 	}
 	var total int
 	for _, v := range l {
 		total += len(v)
 	}
-	return fmt.Sprintf("%d priorities defined", total)
+	if total < 10 {
+		return fmt.Sprintf("priority list: %v", [][]int(l))
+	}
+	return fmt.Sprintf("%d priorities defined, for ", total)
 }

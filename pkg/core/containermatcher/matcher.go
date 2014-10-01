@@ -255,6 +255,17 @@ func (ct *CTest) commit(p priority.List) error {
 		return err
 	}
 	ct.BM = bm
+	for i, v := range ct.buffer {
+		if i == len(ct.buffer)-1 {
+			break
+		}
+		for _, v2 := range ct.buffer[i+1:] {
+			// don't set priorities if any of the signatures are identical
+			if v.Equals(v2) {
+				return nil
+			}
+		}
+	}
 	ct.BM.Priorities = p.Subset(ct.Unsatisfied)
 	return nil
 }

@@ -39,6 +39,13 @@ type SubSequence struct {
 	SubSeqMinOffset string `xml:",attr"` // and empty int values are unmarshalled to 0
 	SubSeqMaxOffset string `xml:",attr"` // uses string rather than int because value might be empty
 	Sequence        string
+	RightFragment   Fragment `xml:"RightFragment"`
+}
+
+type Fragment struct {
+	Value     string `xml:",chardata"`
+	MinOffset string `xml:",attr"`
+	MaxOffset string `xml:",attr"`
 }
 
 type FormatMapping struct {

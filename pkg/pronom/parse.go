@@ -334,6 +334,25 @@ func parseContainerSig(puid string, s mappings.InternalSignature) (frames.Signat
 				sig = append(sig, frames.NewFrame(frames.PREV, v, 0, 0))
 			}
 		}
+		if sub.RightFragment.Value != "" {
+			min, _ = decodeNum(sub.RightFragment.MinOffset)
+			if sub.RightFragment.MinOffset == "" {
+				max = -1
+			} else {
+				max, _ = decodeNum(sub.RightFragment.MaxOffset)
+			}
+			fragpats, err := parseContainerSeq(puid, sub.RightFragment.Value)
+			if err != nil {
+				return nil, err
+			}
+			sig = append(sig, frames.NewFrame(frames.PREV, fragpats[0], min, max))
+			if len(fragpats) > 1 {
+				for _, v := range fragpats[1:] {
+					sig = append(sig, frames.NewFrame(frames.PREV, v, 0, 0))
+				}
+			}
+		}
+
 	}
 	return sig, nil
 }
