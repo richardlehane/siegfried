@@ -4,7 +4,7 @@
 
 ## Version
 
-0.4.3
+0.5.0
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried/pkg/core?status.svg)](https://godoc.org/github.com/richardlehane/siegfried/pkg/core)
 
@@ -34,12 +34,10 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 ## Roadmap
 
-### Next up: version 0.5 (September 2014)
+### Road to 1.0 (early 2015)
 
-- container matching (see [https://www.github.com/richardlehane/mscfb](https://www.github.com/richardlehane/mscfb))
-
-### Thereafter...
-
+- optimisations (load time, mmap, multi-thread)
+- documentation & tests
 - server mode
 
 ## Rights
@@ -67,6 +65,9 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ## Changes
+### Version 0.5.0 (1/10/2014)
+- container matching
+
 ### Version 0.4.2 (23/09/2014)
 - cross-compile was broken (because of use of os/user). Now doing native builds on the three platforms so the download binaries should all work now.
 

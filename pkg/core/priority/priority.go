@@ -156,5 +156,5 @@ func (l List) String() string {
 	if total < 10 {
 		return fmt.Sprintf("priority list: %v", [][]int(l))
 	}
-	return fmt.Sprintf("%d priorities defined, for ", total)
+	return fmt.Sprintf("%d priorities defined", total)
 }

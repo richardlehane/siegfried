@@ -17,7 +17,7 @@ import (
 )
 
 var (
-	thisVersion = [3]int{0, 4, 3}
+	thisVersion = [3]int{0, 5, 0}
 	sigfile     string
 	update      = flag.Bool("update", false, "update or install a Siegfried signature file")
 	version     = flag.Bool("version", false, "display version information")
