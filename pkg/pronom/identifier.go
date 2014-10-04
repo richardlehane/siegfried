@@ -1,6 +1,7 @@
 package pronom
 
 import (
+	"encoding/json"
 	"fmt"
 	"sort"
 	"strings"
@@ -138,6 +139,33 @@ func (pid PronomIdentification) Details() string {
 	}
 	return fmt.Sprintf("  - puid    : %v\n    format  : %v\n    version : %v\n    mime    : %v\n    basis   : %v\n    warning : %v\n",
 		pid.puid, quoteText(pid.name), quoteText(pid.version), quoteText(pid.mime), basis, quoteText(pid.warning))
+}
+
+func (pid PronomIdentification) Json() string {
+	type jsonid struct {
+		Puid    string `json:"puid"`
+		Name    string `json:"name"`
+		Version string `json:"version"`
+		Mime    string `json:"mime"`
+		Basis   string `json:"basis"`
+		Warning string `json:"warning"`
+	}
+	var basis string
+	if len(pid.basis) > 0 {
+		basis = strings.Join(pid.basis, "; ")
+	}
+	b, err := json.Marshal(jsonid{pid.puid, pid.name, pid.version, pid.mime, basis, pid.warning})
+	if err != nil {
+		return `{
+			"puid": "",
+			"name": "",
+			"version": "",
+			"mime": "",
+			"basis": "",
+			"warning": "json encoding error"
+			}`
+	}
+	return string(b)
 }
 
 func (pid PronomIdentification) Confidence() float64 {

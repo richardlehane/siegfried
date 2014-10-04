@@ -42,3 +42,7 @@ func (m *mscfbReader) SetSource(b *siegreader.Buffer) error {
 }
 
 func (m *mscfbReader) Close() {}
+
+func (m *mscfbReader) Quit() {
+	m.rdr.Quit()
+}

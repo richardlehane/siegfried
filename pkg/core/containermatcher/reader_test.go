@@ -36,6 +36,8 @@ func (tr *testReader) SetSource(b *siegreader.Buffer) error {
 
 func (tr *testReader) Close() {}
 
+func (tr *testReader) Quit() {}
+
 var ns []*node = []*node{
 	&node{
 		"one",

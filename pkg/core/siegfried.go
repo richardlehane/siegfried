@@ -28,6 +28,7 @@ type Identifier interface {
 type Identification interface {
 	String() string      // short text that should be displayed to indicate the format match
 	Details() string     // long text that should be displayed to indicate the format match
+	Json() string        // JSON match response
 	Confidence() float64 // how certain is this identification?
 }
 
