@@ -1,0 +1,13 @@
+Index: siegfried-0.5.0/cmd/sf/sf.go
+===================================================================
+--- siegfried-0.5.0.orig/cmd/sf/sf.go	2014-10-01 04:18:31.000000000 -0700
++++ siegfried-0.5.0/cmd/sf/sf.go	2014-10-10 16:58:24.417162857 -0700
+@@ -33,7 +33,7 @@
+ 	if err != nil {
+ 		log.Fatalf("sf error: can't obtain a current user %v", err)
+ 	}
+-	defaultSigs = filepath.Join(current.HomeDir, ".siegfried", defaultSigs)
++	defaultSigs = filepath.Join("/usr/share/siegfried", defaultSigs)
+ 
+ 	flag.StringVar(&sigfile, "sigs", defaultSigs, "path to Siegfried signature file")
+ }
