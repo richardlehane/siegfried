@@ -4,7 +4,7 @@
 
 ## Version
 
-0.5.0
+0.6.0
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried/pkg/core?status.svg)](https://godoc.org/github.com/richardlehane/siegfried/pkg/core)
 
@@ -28,6 +28,18 @@
 
 ### Or, without go installed:
 
+For OS X:
+
+    brew install mistydemeo/digipres/siegfried
+
+For Ubuntu:
+
+    sudo add-apt-repository ppa:archivematica/externals-dev
+    sudo apt-get update
+    sudo apt-get install siegfried
+
+For Win:
+
 Download a pre-built binary from the [releases page](https://github.com/richardlehane/siegfried/releases). Unzip to a location in your system path. Then run:
 
 	sf -update
@@ -37,7 +49,7 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 ### Road to 1.0 (early 2015)
 
 - optimisations (load time, mmap, multi-thread)
-- documentation & tests
+- additional documentation & tests
 - server mode
 
 ## Rights
@@ -65,6 +77,12 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ## Changes
+### Version 0.6.0 (9/11/2014)
+- support multiple identifiers
+- config package
+- mscfb bugfix
+- license info in srcs (no change to license; this allows for attributing authorship for non-Richard contribs)
+
 ### Version 0.5.0 (1/10/2014)
 - container matching
 
@@ -110,3 +128,5 @@ Have a peek at upcoming features, planned optimisations and known bugs on the [t
 Thanks TNA for http://www.nationalarchives.gov.uk/pronom/ and http://www.nationalarchives.gov.uk/information-management/projects-and-work/droid.htm
 
 Thanks Ross for https://github.com/exponential-decay/skeleton-test-suite-generator, very handy!
+
+Thanks Misty for the brew and ubuntu packaging

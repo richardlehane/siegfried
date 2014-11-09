@@ -1,10 +1,26 @@
+// Copyright 2014 Richard Lehane. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 // Package priority creates a subordinate-superiors map of identifications.
 // These maps can be flattened into sorted lists for use by the bytematcher and containermatcher engines.
+// Multiple priority lists can be added to priority sets. These contain the priorities of different identifiers within a bytematcher or containermatcher.
 package priority
 
 import (
 	"fmt"
 	"sort"
+	"sync"
 )
 
 // a priority map links subordinate results to a list of priority restuls
@@ -87,7 +103,9 @@ func (m Map) Complete() {
 	}
 }
 
+// because keys can be duplicated in the slice given to List(), the list of superior indexes may be larger than the list of superior keys
 func (m Map) expand(key string, iMap map[string][]int) []int {
+	// use an empty, rather than nil slice for ret. This means a priority.List will never contain a nil slice.
 	ret := make([]int, 0)
 	superiors := m[key]
 	for _, k := range superiors {
@@ -107,7 +125,7 @@ func (m Map) List(keys []string) List {
 		if ok {
 			continue
 		}
-		indexes := make([]int, 0)
+		var indexes []int
 		for i, v := range keys {
 			if v == k {
 				indexes = append(indexes, i)
@@ -124,18 +142,20 @@ func (m Map) List(keys []string) List {
 
 type List [][]int
 
-func (l List) Subset(indexes []int) List {
-	submap := make(map[int]int)
-	for i, v := range indexes {
-		submap[v] = i
-	}
+// take a list of indexes, subtract the length of the previous priority list in a set (or 0) to get relative indexes,
+// then map those against a priority list. Re-number according to indexes and return the common subset.
+func (l List) Subset(indexes []int, prev int) List {
 	if l == nil {
 		return nil
 	}
+	submap := make(map[int]int)
+	for i, v := range indexes {
+		submap[v-prev] = i
+	}
 	subset := make(List, len(indexes))
 	for i, v := range indexes {
-		ns := make([]int, 0, len(l[v]))
-		for _, w := range l[v] {
+		ns := make([]int, 0, len(l[v-prev]))
+		for _, w := range l[v-prev] {
 			if idx, ok := submap[w]; ok {
 				ns = append(ns, idx)
 			}
@@ -147,14 +167,140 @@ func (l List) Subset(indexes []int) List {
 
 func (l List) String() string {
 	if l == nil {
-		return "nil priorities defined"
+		return "priority list: nil"
 	}
-	var total int
-	for _, v := range l {
-		total += len(v)
+	return fmt.Sprintf("priority list: %v", [][]int(l))
+}
+
+// A priority set holds a number of priority lists
+// Fields exported so gobbable
+type Set struct {
+	Idx   []int
+	Lists []List
+}
+
+// Add a priority list to a set. The length is the number of signatures the priority list applies to, not the length of the priority list.
+// This length will only differ when no priorities are set for a given set of signatures.
+func (s *Set) Add(l List, length int) {
+	var last int
+	if len(s.Idx) > 0 {
+		last = s.Idx[len(s.Idx)-1]
 	}
-	if total < 10 {
-		return fmt.Sprintf("priority list: %v", [][]int(l))
+	s.Idx = append(s.Idx, length+last)
+	s.Lists = append(s.Lists, l)
+}
+
+func (s *Set) list(i, j int) []int {
+	if s.Lists[i] == nil {
+		return nil
+	} else {
+		l := s.Lists[i][j]
+		if l == nil {
+			l = make([]int, 0)
+		}
+		return l
 	}
-	return fmt.Sprintf("%d priorities defined", total)
+}
+
+// return the index of the s.Lists for the wait list, and return the previous tally
+// previous tally is necessary for adding to the values in the priority list to give real priorities
+func (s *Set) Index(i int) (int, int) {
+	var prev int
+	for idx, v := range s.Idx {
+		if i < v {
+			return idx, prev
+		}
+		prev = v
+	}
+	// should never get here. Signal error
+	return -1, -1
+}
+
+// A wait set is a mutating structure that holds the set of indexes that should be waited for while matching underway
+type WaitSet struct {
+	*Set
+	wait [][]int
+	m    *sync.RWMutex
+}
+
+func (s *Set) WaitSet() *WaitSet {
+	return &WaitSet{
+		s,
+		make([][]int, len(s.Lists)),
+		&sync.RWMutex{},
+	}
+}
+
+// Set the priority list & return a boolean indicating whether the WaitSet is satisfied such that matching can stop (i.e. no priority list is nil, and all are empty)
+func (w *WaitSet) Put(i int) bool {
+	idx, prev := w.Index(i)
+	l := w.list(idx, i-prev)
+	// no priorities for this set, return false immediately
+	if l == nil {
+		return false
+	}
+	w.m.Lock()
+	defer w.m.Unlock()
+	w.wait[idx] = l
+	// if we have any priorities, then we aren't satisified
+	if len(l) > 0 {
+		return false
+	}
+	// if l is 0 and we have only one priority set, then we are satisfied
+	if len(w.wait) == 1 {
+		return true
+	}
+	// otherwise, let's check all the other priority sets
+	for i, v := range w.wait {
+		if i == idx {
+			continue
+		}
+		if v == nil {
+			return false
+		}
+		if len(v) > 0 {
+			return false
+		}
+	}
+	return true
+}
+
+// check a signature index against the appropriate priority list. Should we continue trying to match this signature?
+func (w *WaitSet) Check(i int) bool {
+	idx, prev := w.Index(i)
+	w.m.RLock()
+	defer w.m.RUnlock()
+	if w.wait[idx] == nil {
+		return true
+	}
+	j := sort.SearchInts(w.wait[idx], i-prev)
+	if j == len(w.wait[idx]) || w.wait[idx][j] != i-prev {
+		return false
+	}
+	return true
+}
+
+// For periodic checking - what signatures are we currently waiting on?
+// Accumulates values from all the priority lists within the set.
+// Returns nil if *any* of the priority lists is nil.
+func (w *WaitSet) WaitingOn() []int {
+	w.m.RLock()
+	defer w.m.RUnlock()
+	var l int
+	for _, v := range w.wait {
+		if v == nil {
+			return nil
+		}
+		l = l + len(v)
+	}
+	ret := make([]int, l)
+	var prev, j int
+	for i, v := range w.wait {
+		for _, w := range v {
+			ret[j] = w + prev
+			j++
+		}
+		prev = w.Idx[i]
+	}
+	return ret
 }

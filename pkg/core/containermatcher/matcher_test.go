@@ -6,6 +6,7 @@ import (
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames/tests"
+	"github.com/richardlehane/siegfried/pkg/core/priority"
 )
 
 func testTrigger([]byte) bool {
@@ -13,9 +14,11 @@ func testTrigger([]byte) bool {
 }
 
 var testContainerMatcher *ContainerMatcher = &ContainerMatcher{
-	ctype:     ctype{testTrigger, newTestReader},
-	CType:     2,
-	NameCTest: make(map[string]*CTest),
+	ctype:      ctype{testTrigger, newTestReader},
+	CType:      2,
+	NameCTest:  make(map[string]*CTest),
+	Priorities: &priority.Set{},
+	Sindexes:   []int{0},
 }
 
 var testMatcher Matcher = []*ContainerMatcher{testContainerMatcher}
@@ -23,18 +26,20 @@ var testMatcher Matcher = []*ContainerMatcher{testContainerMatcher}
 func TestMatcher(t *testing.T) {
 	ctypes = append(ctypes, ctype{testTrigger, newTestReader})
 	// test adding
-	err := testContainerMatcher.AddSignature([]string{"one", "two"}, []frames.Signature{tests.TestSignatures[3], tests.TestSignatures[4]})
+	err := testContainerMatcher.addSignature([]string{"one", "two"}, []frames.Signature{tests.TestSignatures[3], tests.TestSignatures[4]})
 	if err != nil {
 		t.Fatal(err)
 	}
-	err = testContainerMatcher.AddSignature([]string{"one"}, []frames.Signature{tests.TestSignatures[2]})
+	err = testContainerMatcher.addSignature([]string{"one"}, []frames.Signature{tests.TestSignatures[2]})
 	if err != nil {
 		t.Fatal(err)
 	}
-	// test committing
-	err = testContainerMatcher.Commit("test")
-	if err != nil {
-		t.Fatal(err)
+	testContainerMatcher.Priorities.Add(nil, 2)
+	for _, v := range testContainerMatcher.NameCTest {
+		err = v.commit(nil, 0)
+		if err != nil {
+			t.Fatal(err)
+		}
 	}
 	// test IO
 	str := testMatcher.String()

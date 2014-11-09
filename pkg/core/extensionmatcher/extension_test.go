@@ -5,14 +5,12 @@ import (
 	"testing"
 )
 
-var fmts = []string{"wav", "doc", "xls", "pdf", "ppt"}
+var fmts = SignatureSet{[]string{"wav"}, []string{"doc"}, []string{"xls"}, []string{"pdf"}, []string{"ppt"}}
 
 var em = New()
 
 func init() {
-	for i, v := range fmts {
-		em.Add(v, i)
-	}
+	em.Add(fmts, nil)
 }
 
 func TestWavMatch(t *testing.T) {
@@ -45,8 +43,7 @@ func TestNoExt(t *testing.T) {
 
 func TestIO(t *testing.T) {
 	em := New()
-	em.Add(".doc", 1)
-	em.Add(".ppt", 2)
+	em.Add(SignatureSet{[]string{".bla"}, []string{".doc"}, []string{".ppt"}}, nil)
 	str := em.String()
 	buf := &bytes.Buffer{}
 	sz, err := em.Save(buf)

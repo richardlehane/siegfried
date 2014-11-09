@@ -1,8 +1,21 @@
+// Copyright 2014 Richard Lehane. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package containermatcher
 
 import (
 	"path/filepath"
-	"sort"
 	"strings"
 
 	"github.com/richardlehane/siegfried/pkg/core"
@@ -46,8 +59,8 @@ func (c *ContainerMatcher) defaultMatch(n string) (bool, int) {
 	}
 	ext := filepath.Ext(n)
 	if len(ext) > 0 && strings.TrimPrefix(ext, ".") == c.Default {
-		// the default is always the last container sig
-		return true, c.Sindex + len(c.Parts) - 1
+		// the default is a negative value calculated from the CType
+		return true, -1 - int(c.CType)
 	}
 	return false, 0
 }
@@ -59,8 +72,8 @@ func (c *ContainerMatcher) identify(rdr Reader, res chan core.Result) {
 		return
 	}
 	// reset
+	c.waitSet = c.Priorities.WaitSet()
 	if c.started {
-		c.waitList = nil
 		for i := range c.partsMatched {
 			c.partsMatched[i] = c.partsMatched[i][:0]
 			c.ruledOut[i] = false
@@ -79,6 +92,8 @@ func (c *ContainerMatcher) identify(rdr Reader, res chan core.Result) {
 			continue
 		}
 		// name has matched, lets test the CTests
+		// ct.identify will generate a slice of hits which pass to
+		// processHits which will return true if we can stop
 		if c.processHits(ct.identify(c, rdr, rdr.Name()), ct, rdr.Name(), res) {
 			break
 		}
@@ -91,16 +106,15 @@ func (ct *CTest) identify(c *ContainerMatcher, rdr Reader, name string) []hit {
 	// reset hits
 	c.hits = c.hits[:0]
 	for _, h := range ct.Satisfied {
-		if c.checkWait(h) {
+		if c.waitSet.Check(h) {
 			c.hits = append(c.hits, hit{h, name, "name only"})
 		}
 	}
 	if ct.Unsatisfied != nil {
 		rdr.SetSource(c.entryBuf)
 		for r := range ct.BM.Identify("", c.entryBuf) {
-
 			h := ct.Unsatisfied[r.Index()]
-			if c.checkWait(h) && c.checkHits(h) {
+			if c.waitSet.Check(h) && c.checkHits(h) {
 				c.hits = append(c.hits, hit{h, name, r.Basis()})
 			}
 		}
@@ -125,18 +139,17 @@ func (c *ContainerMatcher) processHits(hits []hit, ct *CTest, name string, res c
 	for _, h := range hits {
 		c.partsMatched[h.id] = append(c.partsMatched[h.id], h)
 		if len(c.partsMatched[h.id]) == c.Parts[h.id] {
-			if c.checkWait(h.id) {
-				res <- toResult(c.Sindex, c.partsMatched[h.id]) // send a Result here
-				if c.Priorities != nil {
-					if len(c.Priorities[h.id]) == 0 {
-						return true
-					}
-					c.waitList = c.Priorities[h.id]
+			if c.waitSet.Check(h.id) {
+				idx, _ := c.Priorities.Index(h.id)
+				res <- toResult(c.Sindexes[idx], c.partsMatched[h.id]) // send a Result here
+				// set a priority list and return early if can
+				if c.waitSet.Put(h.id) {
+					return true
 				}
 			}
 		}
 	}
-	// if nothing ruled out but this test, then we must continue
+	// if nothing ruled out by this test, then we must continue
 	if len(hits) == len(ct.Satisfied)+len(ct.Unsatisfied) {
 		return false
 	}
@@ -152,19 +165,17 @@ func (c *ContainerMatcher) processHits(hits []hit, ct *CTest, name string, res c
 		}
 	}
 	// if we haven't got a waitList yet, then we should return false
-	if c.waitList == nil {
+	waitingOn := c.waitSet.WaitingOn()
+	if waitingOn == nil {
 		return false
 	}
 	// loop over the wait list, seeing if they are all ruled out
-	var satisfied = true
-	// assume we're satisfied & look for a living priority
-	for _, v := range c.waitList {
+	for _, v := range waitingOn {
 		if !c.ruledOut[v] {
-			satisfied = false
-			break
+			return false
 		}
 	}
-	return satisfied
+	return true
 }
 
 // eliminate duplicate hits - must do this since rely on number of matches for each sig as test for full match
@@ -174,21 +185,6 @@ func (c *ContainerMatcher) checkHits(i int) bool {
 			return false
 		}
 	}
-	return true
-}
-
-// is this match one we are waiting for?
-func (c *ContainerMatcher) checkWait(i int) bool {
-	// if there are no priorities set, we let it through
-	if c.waitList == nil {
-		return true
-	}
-	idx := sort.SearchInts(c.waitList, i)
-	// if we have a wait list, and we aren't waiting for this match, we should filter it out
-	if idx == len(c.waitList) || c.waitList[idx] != i {
-		return false
-	}
-	// yes, this match is on the list
 	return true
 }
 

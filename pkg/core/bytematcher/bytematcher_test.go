@@ -19,7 +19,8 @@ func TestNew(t *testing.T) {
 }
 
 func TestIO(t *testing.T) {
-	bm, err := Signatures(tests.TestSignatures)
+	bm := New()
+	_, err := bm.Add(SignatureSet(tests.TestSignatures), nil)
 	if err != nil {
 		t.Error(err)
 	}
@@ -58,7 +59,8 @@ func contains(a []core.Result, b []int) bool {
 }
 
 func TestMatch(t *testing.T) {
-	bm, err := Signatures(tests.TestSignatures, 8192, 2059, 9, 1)
+	bm := New()
+	_, err := bm.Add(SignatureSet(tests.TestSignatures), nil)
 	if err != nil {
 		t.Error(err)
 	}

@@ -1,8 +1,21 @@
+// Copyright 2014 Richard Lehane. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Package pronom implements the TNA's PRONOM signatures as a siegfried identifier
 package pronom
 
 import (
-	"bytes"
-	"encoding/gob"
 	"encoding/xml"
 	"fmt"
 	"io/ioutil"
@@ -13,6 +26,8 @@ import (
 	"sync"
 	"time"
 
+	"github.com/richardlehane/siegfried/config"
+	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/containermatcher"
@@ -22,222 +37,70 @@ import (
 	. "github.com/richardlehane/siegfried/pkg/pronom/mappings"
 )
 
-type SigVersion struct {
-	Name       string
-	Date       time.Time
-	Gob        int
-	Droid      string
-	Containers string
-}
-
-func (sv SigVersion) String() string {
-	return fmt.Sprintf("  - name    : %v\n    details : v%d; %v; %v\n    created : %v\n",
-		sv.Name, sv.Gob, sv.Droid, sv.Containers, sv.Date)
-}
-
-var Config = struct {
-	Name       string
-	GobVersion int
-	Droid      string
-	Container  string
-	Reports    string
-	Data       string
-	Timeout    time.Duration
-	Transport  *http.Transport
-}{
-	"pronom",
-	4,
-	"DROID_SignatureFile_V78.xml",
-	"container-signature-20140923.xml",
-	"pronom",
-	filepath.Join("..", "..", "cmd", "r2d2", "data"),
-	120 * time.Second,
-	&http.Transport{Proxy: http.ProxyFromEnvironment},
-}
-
-func ConfigPaths() (string, string, string) {
-	return filepath.Join(Config.Data, Config.Droid),
-		filepath.Join(Config.Data, Config.Container),
-		filepath.Join(Config.Data, Config.Reports)
-}
-
-func NewIdentifier(droid, container, reports string) (*PronomIdentifier, error) {
-	pronom, err := NewPronom(droid, container, reports)
-	if err != nil {
-		return nil, err
-	}
-	return pronom.identifier()
-}
-
-type Header struct {
-	PSize int
-	BSize int
-	CSize int
-	ESize int
-}
-
-func (h Header) String() string {
-	return fmt.Sprintf("Pronom ID size: %d; Bytematcher size: %d; Containermatcher Size: %d; Extension matcher size: %d", h.PSize, h.BSize, h.CSize, h.ESize)
-}
-
-func (p *PronomIdentifier) Save(path string) error {
-	buf := new(bytes.Buffer)
-	enc := gob.NewEncoder(buf)
-	err := enc.Encode(p)
-	if err != nil {
-		return err
-	}
-	psz := buf.Len()
-	bsz, err := p.bm.Save(buf)
-	if err != nil {
-		return err
-	}
-	csz, err := p.cm.Save(buf)
-	if err != nil {
-		return err
-	}
-	esz, err := p.em.Save(buf)
-	if err != nil {
-		return err
-	}
-	hbuf := new(bytes.Buffer)
-	henc := gob.NewEncoder(hbuf)
-	err = henc.Encode(Header{psz, bsz, csz, esz})
-	f, err := os.Create(path)
-	defer f.Close()
-	if err != nil {
-		return err
-	}
-	_, err = f.Write(hbuf.Bytes())
-	if err != nil {
-		return err
-	}
-	_, err = f.Write(buf.Bytes())
-	if err != nil {
-		return err
-	}
-	fmt.Print(Header{psz, bsz, csz, esz})
-	return nil
-}
-
-func Load(path string) (*PronomIdentifier, error) {
-	c, err := ioutil.ReadFile(path)
-	if err != nil {
-		return nil, err
-	}
-	buf := bytes.NewBuffer(c)
-	dec := gob.NewDecoder(buf)
-	var h Header
-	err = dec.Decode(&h)
-	if err != nil {
-		return nil, err
-	}
-	pstart := len(c) - h.PSize - h.BSize - h.CSize - h.ESize
-	bstart := len(c) - h.ESize - h.CSize - h.BSize
-	cstart := len(c) - h.ESize - h.CSize
-	estart := len(c) - h.ESize
-	pbuf := bytes.NewBuffer(c[pstart : pstart+h.PSize])
-	bbuf := bytes.NewBuffer(c[bstart : bstart+h.BSize])
-	cbuf := bytes.NewBuffer(c[cstart : cstart+h.CSize])
-	ebuf := bytes.NewBuffer(c[estart : estart+h.ESize])
-	pdec := gob.NewDecoder(pbuf)
-	var p PronomIdentifier
-	err = pdec.Decode(&p)
-	if err != nil {
-		return nil, err
-	}
-	bm, err := bytematcher.Load(bbuf)
-	if err != nil {
-		return nil, err
-	}
-	cm, err := containermatcher.Load(cbuf)
-	if err != nil {
-		return nil, err
-	}
-	em, err := extensionmatcher.Load(ebuf)
-	if err != nil {
-		return nil, err
-	}
-	p.bm = bm
-	p.cm = cm
-	p.em = em
-	p.ids = make(pids, 20)
-	return &p, nil
-}
-
-func ParsePuid(f, reports string) ([]frames.Signature, error) {
-	buf, err := get(reports, f, true)
-	if err != nil {
-		return nil, err
-	}
-	rep := new(Report)
-	if err = xml.Unmarshal(buf, rep); err != nil {
-		return nil, err
-	}
-	sigs := make([]frames.Signature, len(rep.Signatures))
-	for i, v := range rep.Signatures {
-		s, err := parseSig(f, v)
-		if err != nil {
-			return nil, err
-		}
-		sigs[i] = s
-	}
-	return sigs, nil
-}
-
-func NewFromBM(bm *bytematcher.Matcher, i int, puid string) *PronomIdentifier {
-	pi := new(PronomIdentifier)
-	pi.bm = bm
-	pi.em = extensionmatcher.New()
-	pi.cm = containermatcher.New()
-	sigs := make([]int, i)
-	for idx := range sigs {
-		sigs[idx] = idx
-	}
-	pi.BPuids = make([]string, i)
-	for idx := range pi.BPuids {
-		pi.BPuids[idx] = puid
-	}
-	return pi
-}
-
-func (p *pronom) identifier() (*PronomIdentifier, error) {
-	pi := new(PronomIdentifier)
-	pi.SigVersion = SigVersion{Config.Name, time.Now(), Config.GobVersion, Config.Droid, Config.Container}
-	pi.ids = make(pids, 20)
-	pi.Infos = p.GetInfos()
-	pi.BPuids, pi.PuidsB = p.GetPuids()
-	priorities := p.priorities()
-	pi.em, pi.EPuids = p.extMatcher()
-	//containermatcher
-	var err error
-	pi.cm, pi.CPuids, err = p.contMatcher(priorities)
-	if err != nil {
-		return nil, err
-	}
-	// bytematcher
-	sigs, err := p.Parse()
-	if err != nil {
-		return nil, err
-	}
-	bm, err := bytematcher.Signatures(sigs)
-	if err != nil {
-		return nil, err
-	}
-	bm.Priorities = priorities.List(pi.BPuids)
-	pi.bm = bm
-	return pi, err
-}
-
 type pronom struct {
+	*Identifier
 	droid     *Droid
 	container *Container
 	puids     map[string]int // map of puids to File Format indexes
 	ids       map[int]string // map of droid FileFormatIDs to puids
+	ps        priority.Map
 }
 
 func (p pronom) String() string {
 	return p.droid.String()
+}
+
+// newPronom creates a pronom object.
+func NewPronom() (*pronom, error) {
+	p := new(pronom)
+	if err := p.setDroid(); err != nil {
+		return p, err
+	}
+	if err := p.setContainers(); err != nil {
+		return p, err
+	}
+	errs := p.setReports()
+	if len(errs) > 0 {
+		var str string
+		for _, e := range errs {
+			str += fmt.Sprintln(e)
+		}
+		return p, fmt.Errorf(str)
+	}
+	p.ps = p.priorities()
+	return p, nil
+}
+
+func (p *pronom) identifier() *Identifier {
+	i := &Identifier{p: p}
+	i.Name = config.Identifier.Name
+	i.Details = config.Details()
+	i.Infos = p.GetInfos()
+	i.BPuids, i.PuidsB = p.GetPuids()
+	p.Identifier = i
+	return i
+}
+
+func (p *pronom) add(t core.MatcherType, m core.Matcher) error {
+	switch t {
+	default:
+		return fmt.Errorf("Pronom: unknown matcher type %v", t)
+	case core.ExtensionMatcher:
+		return p.extMatcher(m)
+	case core.ContainerMatcher:
+		return p.contMatcher(m)
+	case core.ByteMatcher:
+		sigs, err := p.Parse()
+		if err != nil {
+			return err
+		}
+		l, err := m.Add(bytematcher.SignatureSet(sigs), p.ps.List(p.BPuids))
+		if err != nil {
+			return err
+		}
+		p.BStart = l - len(p.BPuids)
+	}
+	return nil
 }
 
 func (p pronom) signatures() []Signature {
@@ -277,19 +140,41 @@ func (p pronom) GetPuids() ([]string, map[string][]int) {
 	return puids, bids
 }
 
-func (p pronom) extMatcher() (extensionmatcher.Matcher, []string) {
-	em := extensionmatcher.New()
+func ParsePuid(f string) ([]frames.Signature, error) {
+	buf, err := get(f)
+	if err != nil {
+		return nil, err
+	}
+	rep := new(Report)
+	if err = xml.Unmarshal(buf, rep); err != nil {
+		return nil, err
+	}
+	sigs := make([]frames.Signature, len(rep.Signatures))
+	for i, v := range rep.Signatures {
+		s, err := parseSig(f, v)
+		if err != nil {
+			return nil, err
+		}
+		sigs[i] = s
+	}
+	return sigs, nil
+}
+func (p pronom) extMatcher(m core.Matcher) error {
 	epuids := make([]string, len(p.droid.FileFormats))
+	es := make(extensionmatcher.SignatureSet, len(p.droid.FileFormats))
 	for i, f := range p.droid.FileFormats {
 		epuids[i] = f.Puid
-		for _, v := range f.Extensions {
-			em.Add(v, i)
-		}
+		es[i] = f.Extensions
 	}
-	return em, epuids
+	l, err := m.Add(es, nil)
+	if err != nil {
+		return err
+	}
+	p.EStart = l - len(p.EPuids)
+	return nil
 }
 
-func (p pronom) contMatcher(ps priority.Map) (containermatcher.Matcher, []string, error) {
+func (p pronom) contMatcher(m core.Matcher) error {
 	var zpuids, mpuids []string
 	var zsigs, msigs [][]frames.Signature
 	var znames, mnames [][]string
@@ -306,7 +191,7 @@ func (p pronom) contMatcher(ps priority.Map) (containermatcher.Matcher, []string
 			names = append(names, f.Path)
 			sig, err := parseContainerSig(puid, f.Signature)
 			if err != nil {
-				return nil, nil, err
+				return err
 			}
 			sigs = append(sigs, sig)
 		}
@@ -320,56 +205,30 @@ func (p pronom) contMatcher(ps priority.Map) (containermatcher.Matcher, []string
 			mnames = append(mnames, names)
 			msigs = append(msigs, sigs)
 		default:
-			return nil, nil, fmt.Errorf("pronom: container parsing - unknown type %s", typ)
+			return fmt.Errorf("Pronom: container parsing - unknown type %s", typ)
 		}
 	}
-	cm := containermatcher.New()
-	err := cm.AddZip(znames, zsigs)
+	_, err := m.Add(containermatcher.SignatureSet{containermatcher.Zip, znames, zsigs}, p.ps.List(zpuids))
 	if err != nil {
-		return nil, nil, err
+		return err
 	}
-	err = cm.AddMscfb(mnames, msigs)
+	l, err := m.Add(containermatcher.SignatureSet{containermatcher.Mscfb, mnames, msigs}, p.ps.List(mpuids))
 	if err != nil {
-		return nil, nil, err
+		return err
 	}
-	// now add the zip default and build priority lists from the puids
-	err = cm.Commit([]string{"zip", ""}, []priority.List{ps.List(zpuids), ps.List(mpuids)})
-	if err != nil {
-		return nil, nil, err
-	}
-	// add zip default
-	zpuids = append(zpuids, "x-fmt/263")
-	return cm, append(zpuids, mpuids...), nil
+	p.CPuids = append(zpuids, mpuids...)
+	p.CStart = l - len(p.CPuids)
+	return nil
 }
 
-// newPronom creates a pronom object. It takes as arguments the paths to a Droid signature file, a container file, and a base directory or base url for Pronom reports.
-func NewPronom(droid, container, reports string) (*pronom, error) {
+// SaveReports fetches pronom reports listed in the given droid file.
+func SaveReports() []error {
 	p := new(pronom)
-	if err := p.setDroid(droid); err != nil {
-		return p, err
-	}
-	if err := p.setContainers(container); err != nil {
-		return p, err
-	}
-	errs := p.setReports(reports)
-	if len(errs) > 0 {
-		var str string
-		for _, e := range errs {
-			str += fmt.Sprintln(e)
-		}
-		return p, fmt.Errorf(str)
-	}
-	return p, nil
-}
-
-// SaveReports fetches pronom reports listed in the given droid file. It fetches over http (from the given base url) and writes them to disk (at the path argument).
-func SaveReports(droid, url, path string) []error {
-	p := new(pronom)
-	if err := p.setDroid(droid); err != nil {
+	if err := p.setDroid(); err != nil {
 		return []error{err}
 	}
 	apply := func(p *pronom, puid string) error {
-		return save(puid, url, path)
+		return save(puid, config.Pronom.HarvestUrl, config.Reports())
 	}
 	return p.applyAll(apply)
 }
@@ -380,9 +239,9 @@ func SaveReport(puid, url, path string) error {
 }
 
 // setDroid adds a Droid file to a pronom object and sets the list of puids.
-func (p *pronom) setDroid(path string) error {
+func (p *pronom) setDroid() error {
 	p.droid = new(Droid)
-	if err := openXML(path, p.droid); err != nil {
+	if err := openXML(config.Droid(), p.droid); err != nil {
 		return err
 	}
 	p.puids = make(map[string]int)
@@ -395,21 +254,16 @@ func (p *pronom) setDroid(path string) error {
 }
 
 // setContainers adds containers to a pronom object. It takes as an argument the path to a container signature file
-func (p *pronom) setContainers(path string) error {
+func (p *pronom) setContainers() error {
 	p.container = new(Container)
-	return openXML(path, p.container)
+	return openXML(config.Container(), p.container)
 }
 
-// setReports adds pronom reports to a pronom object.
 // These reports are either fetched over http or from a local directory, depending on whether the path given is prefixed with 'http'.
-func (p *pronom) setReports(path string) []error {
-	var local bool
-	if !strings.HasPrefix(path, "http") {
-		local = true
-	}
+func (p *pronom) setReports() []error {
 	apply := func(p *pronom, puid string) error {
 		idx := p.puids[puid]
-		buf, err := get(path, puid, local)
+		buf, err := get(puid)
 		if err != nil {
 			return err
 		}
@@ -457,12 +311,12 @@ func getHttp(url string) ([]byte, error) {
 		return nil, err
 	}
 	req.Header.Add("User-Agent", "siegfried/r2d2bot (+https://github.com/richardlehane/siegfried)")
-	timer := time.AfterFunc(Config.Timeout, func() {
-		Config.Transport.CancelRequest(req)
+	timer := time.AfterFunc(config.Pronom.HarvestTimeout, func() {
+		config.Pronom.HarvestTransport.CancelRequest(req)
 	})
 	defer timer.Stop()
 	client := http.Client{
-		Transport: Config.Transport,
+		Transport: config.Pronom.HarvestTransport,
 	}
 	resp, err := client.Do(req)
 	if err != nil {
@@ -472,11 +326,8 @@ func getHttp(url string) ([]byte, error) {
 	return ioutil.ReadAll(resp.Body)
 }
 
-func get(path string, puid string, local bool) ([]byte, error) {
-	if local {
-		return ioutil.ReadFile(filepath.Join(path, strings.Replace(puid, "/", "", 1)+".xml"))
-	}
-	return getHttp(path + puid + ".xml")
+func get(puid string) ([]byte, error) {
+	return ioutil.ReadFile(filepath.Join(config.Reports(), strings.Replace(puid, "/", "", 1)+".xml"))
 }
 
 func save(puid, url, path string) error {

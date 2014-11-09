@@ -1,9 +1,24 @@
+// Copyright 2014 Richard Lehane. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package process
 
 import (
 	"fmt"
 
 	"github.com/richardlehane/match/wac"
+	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 )
 
@@ -12,13 +27,6 @@ type Options struct {
 	Range     int
 	Choices   int
 	VarLength int
-}
-
-var Defaults = Options{
-	Distance:  8192,
-	Range:     2049,
-	Choices:   64,
-	VarLength: 1,
 }
 
 type Process struct {
@@ -39,20 +47,7 @@ func New() *Process {
 		EOFFrames: &frameSet{},
 		BOFSeq:    &seqSet{},
 		EOFSeq:    &seqSet{},
-		Options:   Defaults,
-	}
-}
-
-func (p *Process) SetOptions(opts ...int) {
-	switch len(opts) {
-	case 1:
-		p.Options.Distance = opts[0]
-	case 2:
-		p.Options.Distance, p.Options.Range = opts[0], opts[1]
-	case 3:
-		p.Options.Distance, p.Options.Range, p.Options.Choices = opts[0], opts[1], opts[2]
-	case 4:
-		p.Options.Distance, p.Options.Range, p.Options.Choices, p.Options.VarLength = opts[0], opts[1], opts[2], opts[3]
+		Options:   Options{config.Siegfried.Distance, config.Siegfried.Range, config.Siegfried.Choices, config.Siegfried.VarLength},
 	}
 }
 

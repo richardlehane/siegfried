@@ -1,11 +1,25 @@
+// Copyright 2014 Richard Lehane. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package bytematcher
 
 import (
-	"sort"
 	"sync"
 
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/process"
+	"github.com/richardlehane/siegfried/pkg/core/priority"
 )
 
 type tally struct {
@@ -21,8 +35,7 @@ type tally struct {
 	bofOff int
 	eofOff int
 
-	waitList []int
-	waitM    *sync.RWMutex
+	waitSet *priority.WaitSet
 
 	kfHits chan kfHit
 	halt   chan bool
@@ -37,8 +50,7 @@ func newTally(r chan core.Result, q chan struct{}, m *matcher) *tally {
 		bofQueue: &sync.WaitGroup{},
 		eofQueue: &sync.WaitGroup{},
 		stop:     make(chan struct{}),
-		waitList: nil,
-		waitM:    &sync.RWMutex{},
+		waitSet:  m.bm.Priorities.WaitSet(),
 		kfHits:   make(chan kfHit),
 		halt:     make(chan bool),
 	}
@@ -100,7 +112,7 @@ func (t *tally) filterHits() {
 				continue
 			}
 			// in case of a race
-			if !t.checkWait(hit.id[0]) {
+			if !t.waitSet.Check(hit.id[0]) {
 				t.halt <- false
 				continue
 			}
@@ -120,35 +132,7 @@ func (t *tally) filterHits() {
 
 func (t *tally) sendResult(idx int, basis string) bool {
 	t.results <- Result{idx, basis}
-	if t.bm.Priorities == nil {
-		return false
-	}
-	w := t.bm.Priorities[idx]
-	if len(w) == 0 {
-		return true
-	}
-	t.setWait(w)
-	return false
-}
-
-func (t *tally) setWait(w []int) {
-	t.waitM.Lock()
-	t.waitList = w
-	t.waitM.Unlock()
-}
-
-// check a signature ID against the priority list
-func (t *tally) checkWait(i int) bool {
-	t.waitM.RLock()
-	defer t.waitM.RUnlock()
-	if t.waitList == nil {
-		return true
-	}
-	idx := sort.SearchInts(t.waitList, i)
-	if idx == len(t.waitList) || t.waitList[idx] != i {
-		return false
-	}
-	return true
+	return t.waitSet.Put(idx)
 }
 
 // check to see whether should still wait for signatures in the priority list, given the offset
@@ -157,12 +141,14 @@ func (t *tally) checkWait(i int) bool {
 // Perhaps change WAC so progress is set as a special Result{progress: true}, that way they can still be buffered but are in order
 // This would simplify the initial Identify loop: rather than waiting for gate to close, can just listen for progress results in that loop
 func (t *tally) continueWait(o int) bool {
-	t.waitM.Lock()
-	defer t.waitM.Unlock()
-	if t.waitList == nil {
-		// if we don't have a wait list, we've got no matches and must continue
-		return true
-	}
+	/*
+		t.waitM.Lock()
+		defer t.waitM.Unlock()
+		if t.waitList == nil {
+			// if we don't have a wait list, we've got no matches and must continue
+			return true
+		}
+	*/
 	// check the strikecache ??
 	return true
 }

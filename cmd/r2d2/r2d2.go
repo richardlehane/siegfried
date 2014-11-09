@@ -1,3 +1,17 @@
+// Copyright 2014 Richard Lehane. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package main
 
 import (
@@ -5,66 +19,37 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"os/user"
-	"path/filepath"
-	"time"
 
+	"github.com/richardlehane/siegfried"
+	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
 var (
-	blame    = flag.Int("blame", -1, "identify a signature from an initial test tree index")
-	compile  = flag.String("compile", "", "compile a single Pronom signature (for testing)")
-	view     = flag.String("view", "", "view a Pronom signature e.g. fmt/161")
-	harvest  = flag.Bool("harvest", false, "harvest Pronom reports")
-	build    = flag.Bool("build", false, "build a Siegfried signature file")
-	inspect  = flag.Bool("inspect", false, "describe a Siegfried signature file")
-	defaults = flag.Bool("defaults", false, "print the default paths and settings")
-	timeout  = flag.Duration("timeout", 120*time.Second, "set duration before timing-out harvesting requests e.g. 120s")
+	blame     = flag.Int("blame", -1, "identify a signature from an initial test tree index")
+	compile   = flag.String("compile", "", "compile a single Pronom signature (for testing)")
+	view      = flag.String("view", "", "view a Pronom signature e.g. fmt/161")
+	harvest   = flag.Bool("harvest", false, "harvest Pronom reports")
+	build     = flag.String("build", "false", "build a Siegfried signature file; give a label for the identifier e.g. 'pronom'")
+	inspect   = flag.Bool("inspect", false, "describe a Siegfried signature file")
+	timeout   = flag.Duration("timeout", config.Pronom.HarvestTimeout, "set duration before timing-out harvesting requests e.g. 120s")
+	sigfile   = flag.String("sig", config.Siegfried.Signature, "set path to Siegfried signature file")
+	droid     = flag.String("droid", config.Pronom.Droid, "set path to Droid signature file")
+	container = flag.String("container", config.Pronom.Container, "set path to Droid Container signature file")
+	reports   = flag.String("reports", config.Pronom.Reports, "set path to Pronom reports directory")
 )
-
-var pronom_url = "http://apps.nationalarchives.gov.uk/pronom/"
-
-var (
-	sigfile   string
-	droid     string
-	container string
-	reports   string
-
-	defaultSigPath       = "pronom.gob"
-	defaultDroidPath     = "DROID_SignatureFile_V78.xml"
-	defaultContainerPath = "container-signature-20140923.xml"
-	defaultReportsPath   = "pronom"
-)
-
-func init() {
-	current, err := user.Current()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	defaultSigs := filepath.Join(current.HomeDir, ".siegfried", defaultSigPath)
-	defaultDroid := filepath.Join(current.HomeDir, ".siegfried", defaultDroidPath)
-	defaultContainer := filepath.Join(current.HomeDir, ".siegfried", defaultContainerPath)
-	defaultReports := filepath.Join(current.HomeDir, ".siegfried", defaultReportsPath)
-
-	flag.StringVar(&sigfile, "sigs", defaultSigs, "set path to Siegfried signature file")
-	flag.StringVar(&droid, "droid", defaultDroid, "set path to Droid signature file")
-	flag.StringVar(&container, "container", defaultContainer, "set path to Droid Container signature file")
-	flag.StringVar(&reports, "reports", defaultReports, "set path to Pronom reports directory")
-}
 
 func savereps() error {
-	file, err := os.Open(reports)
+	file, err := os.Open(config.Pronom.Reports)
 	if err != nil {
-		err = os.Mkdir(reports, os.ModeDir)
+		err = os.Mkdir(config.Pronom.Reports, os.ModeDir)
 		if err != nil {
 			log.Fatal(err)
 		}
 	}
 	file.Close()
-	errs := pronom.SaveReports(droid, pronom_url, reports)
+	errs := pronom.SaveReports()
 	for _, e := range errs {
 		fmt.Print(e)
 	}
@@ -75,24 +60,25 @@ func savereps() error {
 }
 
 func makegob() error {
-	p, err := pronom.NewIdentifier(droid, container, reports)
+	s := siegfried.New()
+	err := s.Add(siegfried.Pronom)
 	if err != nil {
 		return err
 	}
-	return p.Save(sigfile)
+	return s.Save(config.Signature())
 }
 
 func inspectPronom() error {
-	p, err := pronom.Load(sigfile)
+	s, err := siegfried.Load(config.Signature())
 	if err != nil {
 		return err
 	}
-	fmt.Print(p)
+	fmt.Print(s)
 	return nil
 }
 
 func blameSig(i int) error {
-	p, err := pronom.NewPronom(droid, container, reports)
+	p, err := pronom.NewPronom()
 	if err != nil {
 		return err
 	}
@@ -100,7 +86,8 @@ func blameSig(i int) error {
 	if err != nil {
 		return err
 	}
-	bm, err := bytematcher.Signatures(sigs)
+	bm := bytematcher.New()
+	_, err = bm.Add(bytematcher.SignatureSet(sigs), nil)
 	if err != nil {
 		return err
 	}
@@ -125,7 +112,7 @@ func blameSig(i int) error {
 }
 
 func viewSig(f string) error {
-	sigs, err := pronom.ParsePuid(f, reports)
+	sigs, err := pronom.ParsePuid(f)
 	if err != nil {
 		return err
 	}
@@ -133,7 +120,8 @@ func viewSig(f string) error {
 	for _, s := range sigs {
 		fmt.Println(s)
 	}
-	bm, err := bytematcher.Signatures(sigs)
+	bm := bytematcher.New()
+	_, err = bm.Add(bytematcher.SignatureSet(sigs), nil)
 	if err != nil {
 		return err
 	}
@@ -163,43 +151,23 @@ func viewSig(f string) error {
 	return nil
 }
 
-func compileSig(f string) error {
-	sigs, err := pronom.ParsePuid(f, reports)
-	if err != nil {
-		return err
-	}
-	bm, err := bytematcher.Signatures(sigs)
-	if err != nil {
-		return err
-	}
-	pi := pronom.NewFromBM(bm, len(sigs), f)
-	return pi.Save(sigfile)
-}
-
 func main() {
 	flag.Parse()
 
-	pronom.Config.Timeout = *timeout
+	config.Pronom.HarvestTimeout = *timeout
+	config.SetLatest()
 	var err error
 	switch {
 	case *harvest:
 		err = savereps()
-	case *build:
+	case *build != "false":
 		err = makegob()
 	case *inspect:
 		err = inspectPronom()
-	case *compile != "":
-		err = compileSig(*compile)
 	case *view != "":
 		err = viewSig(*view)
 	case *blame > -1:
 		err = blameSig(*blame)
-	case *defaults:
-		fmt.Println(droid)
-		fmt.Println(container)
-		fmt.Println(reports)
-		fmt.Println(sigfile)
-		fmt.Println(*timeout)
 	}
 	if err != nil {
 		log.Fatal(err)

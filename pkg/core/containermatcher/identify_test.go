@@ -14,18 +14,20 @@ import (
 func TestIdentify(t *testing.T) {
 	ctypes = append(ctypes, ctype{testTrigger, newTestReader})
 	// test adding
-	err := testContainerMatcher.AddSignature([]string{"one", "two"}, []frames.Signature{tests.TestSignatures[3], tests.TestSignatures[4]})
+	err := testContainerMatcher.addSignature([]string{"one", "two"}, []frames.Signature{tests.TestSignatures[3], tests.TestSignatures[4]})
 	if err != nil {
 		t.Fatal(err)
 	}
-	err = testContainerMatcher.AddSignature([]string{"one"}, []frames.Signature{tests.TestSignatures[4]})
+	err = testContainerMatcher.addSignature([]string{"one"}, []frames.Signature{tests.TestSignatures[4]})
 	if err != nil {
 		t.Fatal(err)
 	}
-	// test committing
-	err = testContainerMatcher.Commit("test")
-	if err != nil {
-		t.Fatal(err)
+	testContainerMatcher.Priorities.Add(nil, 2)
+	for _, v := range testContainerMatcher.NameCTest {
+		err = v.commit(nil, 0)
+		if err != nil {
+			t.Fatal(err)
+		}
 	}
 	r := bytes.NewBuffer([]byte("012345678"))
 	b := siegreader.New()

@@ -1,3 +1,17 @@
+// Copyright 2014 Richard Lehane. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package bytematcher
 
 import (
@@ -153,7 +167,7 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 
 	// immediately apply key frames for the completes
 	for _, kf := range t.Complete {
-		if m.bm.KeyFrames[kf[0]][kf[1]].Check(s.offset) && m.checkWait(kf[0]) {
+		if m.bm.KeyFrames[kf[0]][kf[1]].Check(s.offset) && m.waitSet.Check(kf[0]) {
 			m.kfHits <- kfHit{kf, off, s.length}
 			if <-m.halt {
 				return
@@ -172,7 +186,7 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 		if checkl && checkr {
 			break
 		}
-		if m.bm.KeyFrames[v.Kf[0]][v.Kf[1]].Check(s.offset) && m.checkWait(v.Kf[0]) {
+		if m.bm.KeyFrames[v.Kf[0]][v.Kf[1]].Check(s.offset) && m.waitSet.Check(v.Kf[0]) {
 			if v.L {
 				checkl = true
 			}
@@ -246,7 +260,7 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 	for i, p := range partials {
 		if p.l == t.Incomplete[i].L && p.r == t.Incomplete[i].R {
 			kf := t.Incomplete[i].Kf
-			if m.bm.KeyFrames[kf[0]][kf[1]].Check(s.offset) && m.checkWait(kf[0]) {
+			if m.bm.KeyFrames[kf[0]][kf[1]].Check(s.offset) && m.waitSet.Check(kf[0]) {
 				if !p.l {
 					p.ldistances = []int{0}
 				}

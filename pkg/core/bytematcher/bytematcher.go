@@ -1,3 +1,17 @@
+// Copyright 2014 Richard Lehane. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 // Package Bytematcher builds a matching engine from a set of signatures and performs concurrent matching against an input siegreader.Buffer.
 package bytematcher
 
@@ -18,7 +32,7 @@ import (
 // Bytematcher structure. Clients shouldn't need to get or set these fields directly, they are only exported so that this structure can be serialised and deserialised by encoding/gob.
 type Matcher struct {
 	*process.Process
-	Priorities priority.List
+	Priorities *priority.Set
 	bAho       *wac.Wac
 	eAho       *wac.Wac
 	bstarted   bool
@@ -28,13 +42,15 @@ type Matcher struct {
 func New() *Matcher {
 	return &Matcher{
 		process.New(),
-		nil,
+		&priority.Set{},
 		&wac.Wac{},
 		&wac.Wac{},
 		false,
 		false,
 	}
 }
+
+type SignatureSet []frames.Signature
 
 func Load(r io.Reader) (core.Matcher, error) {
 	b := New()
@@ -72,17 +88,20 @@ func (se sigErrors) Error() string {
 	return str
 }
 
-// Create a new Bytematcher from a slice of signatures.
+// Add a set of signatures to a bytematcher.
+// The priorities should be a list of equal length to the signatures, or nil (if no priorities are to be set)
 // Can give optional distance, range, choice, variable sequence length values to override the defaults of 8192, 2048, 64.
 //   - the distance and range values dictate how signatures are segmented during processing
 //   - the choices value controls how signature segments are converted into simple byte sequences during processing
 //   - the varlen value controls what is the minimum length sequence acceptable for the variable Aho Corasick tree. The longer this length, the fewer false matches you will get during searching.
 //
 // Example:
-//   bm, err := Signatures([]Signature{Signature{NewFrame(BOF, Sequence{'p','d','f'}, 0, 0)}})
-func Signatures(sigs []frames.Signature, opts ...int) (*Matcher, error) {
-	b := New()
-	b.SetOptions(opts...)
+//   err := Add([]Signature{Signature{NewFrame(BOF, Sequence{'p','d','f'}, nil, 0, 0)}})
+func (b *Matcher) Add(ss core.SignatureSet, priorities priority.List) (int, error) {
+	sigs, ok := ss.(SignatureSet)
+	if !ok {
+		return -1, fmt.Errorf("Byte matcher: can't convert signature set to BM signature set")
+	}
 	var se sigErrors
 	// process each of the sigs, adding them to b.Sigs and the various seq/frame/testTree sets
 	for _, sig := range sigs {
@@ -92,18 +111,16 @@ func Signatures(sigs []frames.Signature, opts ...int) (*Matcher, error) {
 		}
 	}
 	if len(se) > 0 {
-		return b, se
+		return -1, se
 	}
 	// set the maximum distances for this test tree so can properly size slices for matching
 	for _, t := range b.Tests {
 		t.MaxLeftDistance = process.MaxLength(t.Left)
 		t.MaxRightDistance = process.MaxLength(t.Right)
 	}
-	return b, nil
-}
-
-func (b *Matcher) Priority() bool {
-	return b.Priorities != nil
+	// add the priorities to the priority set
+	b.Priorities.Add(priorities, len(sigs))
+	return len(b.KeyFrames), nil
 }
 
 type Result struct {

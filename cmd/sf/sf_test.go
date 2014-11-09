@@ -2,30 +2,30 @@ package main
 
 import (
 	"errors"
+	"flag"
 	"os"
 	"path/filepath"
 	"strings"
 	"testing"
 
-	"github.com/richardlehane/siegfried/pkg/core"
+	"github.com/richardlehane/siegfried"
+	"github.com/richardlehane/siegfried/config"
 )
 
-var testSigs = filepath.Join("..", "r2d2", "data", "pronom.gob")
+var testhome = flag.String("testhome", filepath.Join("..", "r2d2", "data"), "override the default home directory")
+var testdata = flag.String("testdata", filepath.Join(".", "testdata"), "override the default test data directory")
 
-var s *core.Siegfried
+var s *siegfried.Siegfried
 
-func init() {
+func setup() error {
 	var err error
-	s, err = load(testSigs)
-	if err != nil {
-		panic(err)
-	}
+	config.Siegfried.Home = *testhome
+	s, err = load("pronom.gob")
+	return err
 }
 
-var root = filepath.Join(".", "testdata", "skeleton-suite")
-
 func TestLoad(t *testing.T) {
-	_, err := load(testSigs)
+	err := setup()
 	if err != nil {
 		t.Error(err)
 	}
@@ -50,6 +50,10 @@ func matchString(i []string) string {
 }
 
 func TestSuite(t *testing.T) {
+	err := setup()
+	if err != nil {
+		t.Error(err)
+	}
 	expect := make([]string, 0)
 	names := make([]string, 0)
 	wf := func(path string, info os.FileInfo, err error) error {
@@ -77,11 +81,12 @@ func TestSuite(t *testing.T) {
 		names = append(names, path)
 		return nil
 	}
-	err := filepath.Walk(root, wf)
+	suite := filepath.Join(*testdata, "skeleton-suite")
+	err = filepath.Walk(suite, wf)
 	if err != nil {
 		t.Fatal(err)
 	}
-	matches, err := multiIdentify(s, root)
+	matches, err := multiIdentify(s, suite)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -105,12 +110,12 @@ func TestSuite(t *testing.T) {
 // Benchmarks
 func BenchmarkNew(bench *testing.B) {
 	for i := 0; i < bench.N; i++ {
-		load(testSigs)
+		setup()
 	}
 }
 
 func benchidentify(ext string) {
-	file := filepath.Join(".", "testdata", "benchmark", "Benchmark")
+	file := filepath.Join(*testdata, "benchmark", "Benchmark")
 	file += "." + ext
 	identify(s, file)
 }

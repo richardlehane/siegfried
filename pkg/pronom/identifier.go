@@ -1,14 +1,29 @@
+// Copyright 2014 Richard Lehane. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package pronom
 
 import (
+	"bytes"
+	"encoding/gob"
 	"encoding/json"
 	"fmt"
+	"io"
 	"sort"
 	"strings"
-	"sync"
 
 	"github.com/richardlehane/siegfried/pkg/core"
-	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
 type FormatInfo struct {
@@ -17,101 +32,159 @@ type FormatInfo struct {
 	MIMEType string
 }
 
-type PronomIdentifier struct {
-	SigVersion SigVersion
-	Infos      map[string]FormatInfo
-	BPuids     []string         // slice of puids that corresponds to the bytematcher's int signatures
-	PuidsB     map[string][]int // map of puids to slices of bytematcher int signatures
-	CPuids     []string
-	EPuids     []string     // slice of puids that corresponds to the extension matcher's int signatures
-	em         core.Matcher // extensionmatcher
-	cm         core.Matcher // containermatcher
-	bm         core.Matcher // bytematcher
-	ids        pids
+type Identifier struct {
+	p       *pronom
+	Name    string
+	Details string
+	Infos   map[string]FormatInfo
+
+	EStart int
+	EPuids []string // slice of puids that corresponds to the extension matcher's int signatures
+	CStart int
+	CPuids []string
+	BStart int
+	BPuids []string         // slice of puids that corresponds to the bytematcher's int signatures
+	PuidsB map[string][]int // map of puids to slices of bytematcher int signatures
 }
 
-func (pi *PronomIdentifier) String() string {
-	return pi.bm.String() + "\n---------\n\nContainer matcher\n" + pi.cm.String()
+func New() (*Identifier, error) {
+	pronom, err := NewPronom()
+	if err != nil {
+		return nil, err
+	}
+	return pronom.identifier(), nil
 }
 
-func (pi *PronomIdentifier) Details() string {
-	return pi.SigVersion.String()
+func (i *Identifier) Add(t core.MatcherType, m core.Matcher) error {
+	return i.p.add(t, m)
 }
 
-func (pi *PronomIdentifier) Version() string {
-	return fmt.Sprintf("Signature version: %d; based on droid sig: %s; and container sig: %s", pi.SigVersion.Gob, pi.SigVersion.Droid, pi.SigVersion.Containers)
+func (i *Identifier) Yaml() string {
+	return fmt.Sprintf(" - name : %v\n details : %v\n",
+		i.Name, i.Details)
 }
 
-func (pi *PronomIdentifier) Update(i int) bool {
-	return i > pi.SigVersion.Gob
+func (i *Identifier) Save(w io.Writer) (int, error) {
+	buf := &bytes.Buffer{}
+	enc := gob.NewEncoder(buf)
+	err := enc.Encode(i)
+	if err != nil {
+		return 0, err
+	}
+	sz := buf.Len()
+	_, err = buf.WriteTo(w)
+	if err != nil {
+		return 0, err
+	}
+	return sz, nil
 }
 
-func (pi *PronomIdentifier) Identify(b *siegreader.Buffer, n string, c chan core.Identification, wg *sync.WaitGroup) {
-	pi.ids = pi.ids[:0]
-	// Extension Matcher
-	if len(n) > 0 {
-		ems := pi.em.Identify(n, nil)
-		for v := range ems {
-			pi.ids = add(pi.ids, pi.EPuids[v.Index()], pi.Infos[pi.EPuids[v.Index()]], v.Basis(), 0.1)
+func Load(r io.Reader) (*Identifier, error) {
+	i := &Identifier{}
+	dec := gob.NewDecoder(r)
+	err := dec.Decode(i)
+	if err != nil {
+		return nil, err
+	}
+	return i, nil
+}
+
+func (i *Identifier) Recorder() core.Recorder {
+	return &Recorder{i, make(pids, 0, 10), 0.1}
+}
+
+type Recorder struct {
+	*Identifier
+	ids    pids
+	cscore float64
+}
+
+func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
+
+	switch m {
+	default:
+		return false
+	case core.ExtensionMatcher:
+		if res.Index() >= r.EStart && res.Index() < r.EStart+len(r.EPuids) {
+			idx := res.Index() - r.EStart
+			r.ids = add(r.ids, r.EPuids[idx], r.Infos[r.EPuids[idx]], res.Basis(), r.cscore)
+			return true
+		} else {
+			return false
+		}
+	case core.ContainerMatcher:
+		// add zip default
+		if res.Index() < 0 {
+			r.cscore *= 1.1
+			r.ids = add(r.ids, "x-fmt/263", r.Infos["x-fmt/263"], res.Basis(), r.cscore) // not great to have this hardcoded
+			return false
+		}
+		if res.Index() >= r.CStart && res.Index() < r.CStart+len(r.CPuids) {
+			idx := res.Index() - r.CStart
+			r.cscore *= 1.1
+			r.ids = add(r.ids, r.CPuids[idx], r.Infos[r.CPuids[idx]], res.Basis(), r.cscore)
+			return true
+		} else {
+			return false
+		}
+	case core.ByteMatcher:
+		if res.Index() >= r.BStart && res.Index() < r.BStart+len(r.BPuids) {
+			idx := res.Index() - r.BStart
+			r.cscore *= 1.1
+			r.ids = add(r.ids, r.BPuids[idx], r.Infos[r.BPuids[idx]], res.Basis(), r.cscore)
+			return true
+		} else {
+			return false
 		}
 	}
-	var cscore float64 = 0.1 //confidence score
+}
 
-	// Container Matcher
-	if pi.cm != nil {
-		cms := pi.cm.Identify(n, b)
-		for v := range cms {
-			cscore *= 1.1
-			pi.ids = add(pi.ids, pi.CPuids[v.Index()], pi.Infos[pi.CPuids[v.Index()]], v.Basis(), cscore)
-		}
+func (r *Recorder) Satisfied() bool {
+	if r.cscore == 0.1 {
+		return false
 	}
-	// Byte Matcher (skip if a container matched and cscore changed)
-	if cscore == 0.1 {
-		ids := pi.bm.Identify("", b)
-		for r := range ids {
-			i := r.Index()
-			cscore *= 1.1
-			pi.ids = add(pi.ids, pi.BPuids[i], pi.Infos[pi.BPuids[i]], r.Basis(), cscore)
-		}
-	}
-	if len(pi.ids) > 0 {
-		sort.Sort(pi.ids)
-		conf := pi.ids[0].confidence
+	return true
+}
+
+func (r *Recorder) Report(res chan core.Identification) {
+	if len(r.ids) > 0 {
+		sort.Sort(r.ids)
+		conf := r.ids[0].confidence
 		// if we've only got extension matches, check if those matches are ruled out by lack of byte match
 		// add warnings too
 		if conf == 0.1 {
-			nids := make([]PronomIdentification, 0, len(pi.ids))
-			for _, v := range pi.ids {
-				if _, ok := pi.PuidsB[v.puid]; !ok {
+			nids := make([]Identification, 0, len(r.ids))
+			for _, v := range r.ids {
+				if _, ok := r.PuidsB[v.puid]; !ok {
 					v.warning = "match on extension only"
 					nids = append(nids, v)
 				}
 			}
 			if len(nids) == 0 {
-				poss := make([]string, len(pi.ids))
-				for i, v := range pi.ids {
+				poss := make([]string, len(r.ids))
+				for i, v := range r.ids {
 					poss[i] = v.puid
 				}
-				nids = []PronomIdentification{PronomIdentification{"UNKNOWN", "", "", "", nil, fmt.Sprintf("no match; possibilities based on extension are %v", strings.Join(poss, ", ")), 0}}
+				nids = []Identification{Identification{"UNKNOWN", "", "", "", nil, fmt.Sprintf("no match; possibilities based on extension are %v", strings.Join(poss, ", ")), 0}}
 			}
-			pi.ids = nids
+			r.ids = nids
 		}
-
-		c <- pi.ids[0]
-		if len(pi.ids) > 1 {
-			for i, v := range pi.ids[1:] {
+		res <- r.ids[0]
+		if len(r.ids) > 1 {
+			for i, v := range r.ids[1:] {
 				if v.confidence == conf {
-					c <- pi.ids[i+1]
+					res <- r.ids[i+1]
 				} else {
 					break
 				}
 			}
 		}
+	} else {
+		res <- Identification{"UNKNOWN", "", "", "", nil, "warning: \"no match\"", 0}
 	}
-	wg.Done()
 }
 
-type PronomIdentification struct {
+type Identification struct {
 	puid       string
 	name       string
 	version    string
@@ -121,8 +194,8 @@ type PronomIdentification struct {
 	confidence float64
 }
 
-func (pid PronomIdentification) String() string {
-	return pid.puid
+func (id Identification) String() string {
+	return id.puid
 }
 
 func quoteText(s string) string {
@@ -132,16 +205,16 @@ func quoteText(s string) string {
 	return "\"" + s + "\""
 }
 
-func (pid PronomIdentification) Details() string {
+func (id Identification) Yaml() string {
 	var basis string
-	if len(pid.basis) > 0 {
-		basis = quoteText(strings.Join(pid.basis, "; "))
+	if len(id.basis) > 0 {
+		basis = quoteText(strings.Join(id.basis, "; "))
 	}
 	return fmt.Sprintf("  - puid    : %v\n    format  : %v\n    version : %v\n    mime    : %v\n    basis   : %v\n    warning : %v\n",
-		pid.puid, quoteText(pid.name), quoteText(pid.version), quoteText(pid.mime), basis, quoteText(pid.warning))
+		id.puid, quoteText(id.name), quoteText(id.version), quoteText(id.mime), basis, quoteText(id.warning))
 }
 
-func (pid PronomIdentification) Json() string {
+func (id Identification) Json() string {
 	type jsonid struct {
 		Puid    string `json:"puid"`
 		Name    string `json:"name"`
@@ -151,10 +224,10 @@ func (pid PronomIdentification) Json() string {
 		Warning string `json:"warning"`
 	}
 	var basis string
-	if len(pid.basis) > 0 {
-		basis = strings.Join(pid.basis, "; ")
+	if len(id.basis) > 0 {
+		basis = strings.Join(id.basis, "; ")
 	}
-	b, err := json.Marshal(jsonid{pid.puid, pid.name, pid.version, pid.mime, basis, pid.warning})
+	b, err := json.Marshal(jsonid{id.puid, id.name, id.version, id.mime, basis, id.warning})
 	if err != nil {
 		return `{
 			"puid": "",
@@ -168,11 +241,7 @@ func (pid PronomIdentification) Json() string {
 	return string(b)
 }
 
-func (pid PronomIdentification) Confidence() float64 {
-	return pid.confidence
-}
-
-type pids []PronomIdentification
+type pids []Identification
 
 func (p pids) Len() int { return len(p) }
 
@@ -188,5 +257,5 @@ func add(p pids, f string, info FormatInfo, basis string, c float64) pids {
 			return p
 		}
 	}
-	return append(p, PronomIdentification{f, info.Name, info.Version, info.MIMEType, []string{basis}, "", c})
+	return append(p, Identification{f, info.Name, info.Version, info.MIMEType, []string{basis}, "", c})
 }

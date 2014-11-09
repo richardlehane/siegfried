@@ -1,3 +1,17 @@
+// Copyright 2014 Richard Lehane. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package main
 
 import (
@@ -8,41 +22,20 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"os/user"
 	"path/filepath"
 	"time"
 
-	"github.com/richardlehane/siegfried/pkg/core"
-	"github.com/richardlehane/siegfried/pkg/pronom"
+	"github.com/richardlehane/siegfried"
+	"github.com/richardlehane/siegfried/config"
 )
 
 var (
-	thisVersion = [3]int{0, 5, 0}
-	sigfile     string
-	update      = flag.Bool("update", false, "update or install a Siegfried signature file")
-	version     = flag.Bool("version", false, "display version information")
-	defaultSigs = "pronom.gob"
-	updateUrl   = "http://www.itforarchivists.com/siegfried/update"
-	latestUrl   = "http://www.itforarchivists.com/siegfried/latest"
-	timeout     = 30 * time.Second
-	transport   = &http.Transport{Proxy: http.ProxyFromEnvironment}
+	update  = flag.Bool("update", false, "update or install the default signature file")
+	version = flag.Bool("version", false, "display version information")
+	sigfile = flag.String("sigfile", config.Siegfried.Signature, "set the signature file")
+	home    = flag.String("home", config.Siegfried.Home, "override the default home directory")
+	serve   = flag.String("serve", "false", "not yet implemented - coming with v1")
 )
-
-func init() {
-	current, err := user.Current()
-	if err != nil {
-		log.Fatalf("sf error: can't obtain a current user %v", err)
-	}
-	defaultSigs = filepath.Join(current.HomeDir, ".siegfried", defaultSigs)
-
-	flag.StringVar(&sigfile, "sigs", defaultSigs, "path to Siegfried signature file")
-}
-
-type Update struct {
-	SfVersion     [3]int
-	PronomVersion int
-	GobSize       int
-}
 
 func getHttp(url string) ([]byte, error) {
 	req, err := http.NewRequest("GET", url, nil)
@@ -51,12 +44,12 @@ func getHttp(url string) ([]byte, error) {
 	}
 	req.Header.Add("User-Agent", "siegfried/siegbot (+https://github.com/richardlehane/siegfried)")
 	req.Header.Add("Cache-Control", "no-cache")
-	timer := time.AfterFunc(timeout, func() {
-		transport.CancelRequest(req)
+	timer := time.AfterFunc(config.Siegfried.UpdateTimeout, func() {
+		config.Siegfried.UpdateTransport.CancelRequest(req)
 	})
 	defer timer.Stop()
 	client := http.Client{
-		Transport: transport,
+		Transport: config.Siegfried.UpdateTransport,
 	}
 	resp, err := client.Do(req)
 	if err != nil {
@@ -66,8 +59,15 @@ func getHttp(url string) ([]byte, error) {
 	return ioutil.ReadAll(resp.Body)
 }
 
+type Update struct {
+	SfVersion  [3]int
+	SigVersion int
+	GobSize    int
+	UpdateURL  string
+}
+
 func updateSigs() (string, error) {
-	response, err := getHttp(updateUrl)
+	response, err := getHttp(config.Siegfried.UpdateURL)
 	if err != nil {
 		return "", err
 	}
@@ -75,47 +75,46 @@ func updateSigs() (string, error) {
 	if err := json.Unmarshal(response, &u); err != nil {
 		return "", err
 	}
-	if thisVersion[0] < u.SfVersion[0] || (u.SfVersion[0] == thisVersion[0] && thisVersion[1] < u.SfVersion[1]) {
+	if config.Siegfried.Version[0] < u.SfVersion[0] || (u.SfVersion[0] == config.Siegfried.Version[0] && config.Siegfried.Version[1] < u.SfVersion[1]) {
 		return "Your version of Siegfried is out of date; please install latest from http://www.itforarchivists.com/siegfried before continuing.", nil
 	}
-	p, err := pronom.Load(sigfile)
+	s, err := siegfried.Load(config.Signature())
 	if err == nil {
-		if !p.Update(u.PronomVersion) {
+		if !s.Update(u.SigVersion) {
 			return "You are already up to date!", nil
 		}
 	} else {
-		err = os.MkdirAll(filepath.Dir(sigfile), os.ModePerm)
+		err = os.MkdirAll(config.Siegfried.Home, os.ModePerm)
 		if err != nil {
 			return "", err
 		}
 	}
 	fmt.Println("... downloading latest signature file ...")
-	response, err = getHttp(latestUrl)
+	response, err = getHttp(u.UpdateURL)
 	if err != nil {
 		return "", err
 	}
 	if len(response) != u.GobSize {
 		return "", fmt.Errorf("Error retrieving pronom.gob; expecting %d bytes, got %d bytes", u.GobSize, len(response))
 	}
-	err = ioutil.WriteFile(sigfile, response, os.ModePerm)
+	err = ioutil.WriteFile(config.Signature(), response, os.ModePerm)
 	if err != nil {
 		return "", err
 	}
-	fmt.Printf("... writing %s ...\n", sigfile)
+	fmt.Printf("... writing %s ...\n", config.Signature())
 	return "Your signature file has been updated", nil
 }
 
-func load(sigs string) (*core.Siegfried, error) {
-	s := core.NewSiegfried()
-	p, err := pronom.Load(sigs)
+func load(sig string) (*siegfried.Siegfried, error) {
+	config.Siegfried.Signature = sig
+	s, err := siegfried.Load(config.Signature())
 	if err != nil {
 		return nil, err
 	}
-	s.AddIdentifier(p)
 	return s, nil
 }
 
-func identify(s *core.Siegfried, p string) ([]string, error) {
+func identify(s *siegfried.Siegfried, p string) ([]string, error) {
 	ids := make([]string, 0)
 	file, err := os.Open(p)
 	if err != nil {
@@ -135,7 +134,7 @@ func identify(s *core.Siegfried, p string) ([]string, error) {
 	return ids, nil
 }
 
-func multiIdentify(s *core.Siegfried, r string) ([][]string, error) {
+func multiIdentify(s *siegfried.Siegfried, r string) ([][]string, error) {
 	set := make([][]string, 0)
 	wf := func(path string, info os.FileInfo, err error) error {
 		if info.IsDir() {
@@ -152,7 +151,7 @@ func multiIdentify(s *core.Siegfried, r string) ([][]string, error) {
 	return set, err
 }
 
-func multiIdentifyP(s *core.Siegfried, r string) error {
+func multiIdentifyP(s *siegfried.Siegfried, r string) error {
 	wf := func(path string, info os.FileInfo, err error) error {
 		if info.IsDir() {
 			return nil
@@ -163,27 +162,17 @@ func multiIdentifyP(s *core.Siegfried, r string) error {
 		}
 		c, err := s.Identify(file, path)
 		if err != nil {
+			file.Close()
 			return fmt.Errorf("failed to identify %v, got: %v", path, err)
 		}
 		PrintFile(path, info.Size())
-		unknown := true
 		for i := range c {
-			unknown = false
-			fmt.Print(i.Details())
+			fmt.Print(i.Yaml())
 		}
-		PrintUnknown(unknown)
 		file.Close()
 		return nil
 	}
 	return filepath.Walk(r, wf)
-}
-
-func PrintSiegfried(s *core.Siegfried) {
-	fmt.Println("---")
-	fmt.Printf("siegfried   : %d.%d.%d\n", thisVersion[0], thisVersion[1], thisVersion[2])
-	fmt.Printf("scanDate    : %v\n", time.Now())
-	fmt.Print("identifiers : \n")
-	fmt.Print(s)
 }
 
 func PrintFile(name string, sz int64) {
@@ -191,13 +180,6 @@ func PrintFile(name string, sz int64) {
 	fmt.Printf("filename : \"%v\"\n", name)
 	fmt.Printf("filesize : %d\n", sz)
 	fmt.Print("matches  :\n")
-}
-
-func PrintUnknown(u bool) {
-	if !u {
-		return
-	}
-	fmt.Print("  - puid    : UNKNOWN\n    format  : \n    version : \n    mime    : \n    basis   : \n  - warning: \"no match\"\n")
 }
 
 func PrintError(err error) {
@@ -210,12 +192,12 @@ func main() {
 
 	flag.Parse()
 
+	if *home != config.Siegfried.Home {
+		config.Siegfried.Home = *home
+	}
+
 	if *version {
-		p, err := pronom.Load(sigfile)
-		if err != nil {
-			log.Fatalf("Error: error loading signature file, got: %v\nIf you haven't installed a signature file yet, run sf -update.", err)
-		}
-		fmt.Printf("Siegfried version: %d.%d.%d; %s\n", thisVersion[0], thisVersion[1], thisVersion[2], p.Version())
+		fmt.Printf("Siegfried version: %d.%d.%d\n", config.Siegfried.Version[0], config.Siegfried.Version[1], config.Siegfried.Version[2])
 		return
 	}
 
@@ -226,6 +208,10 @@ func main() {
 		}
 		fmt.Println(msg)
 		return
+	}
+
+	if *serve != "false" {
+		fmt.Println("sf server not yet implemented; expect by v1")
 	}
 
 	if flag.NArg() != 1 {
@@ -242,7 +228,7 @@ func main() {
 		log.Fatalf("Error: error getting info for %v, got: %v", flag.Arg(0), err)
 	}
 
-	s, err := load(sigfile)
+	s, err := load(*sigfile)
 	if err != nil {
 		log.Fatalf("Error: error loading signature file, got: %v", err)
 
@@ -250,28 +236,26 @@ func main() {
 
 	if info.IsDir() {
 		file.Close()
-		PrintSiegfried(s)
+		fmt.Print(s.Yaml())
 		err = multiIdentifyP(s, flag.Arg(0))
 		if err != nil {
 			PrintError(err)
-			return
+			os.Exit(1)
 		}
 		os.Exit(0)
 	}
 
-	PrintSiegfried(s)
+	fmt.Print(s.Yaml())
 	c, err := s.Identify(file, flag.Arg(0))
 	if err != nil {
 		PrintError(err)
-		return
+		file.Close()
+		os.Exit(1)
 	}
 	PrintFile(flag.Arg(0), info.Size())
-	unknown := true
 	for i := range c {
-		unknown = false
-		fmt.Print(i.Details())
+		fmt.Print(i.Yaml())
 	}
-	PrintUnknown(unknown)
 	file.Close()
 
 	os.Exit(0)
