@@ -22,7 +22,7 @@ import (
 	"path/filepath"
 )
 
-// the default Home location is a ".siegfried" folder in the user's $HOME
+// the default Home location is a "siegfried" folder in the user's $HOME
 func init() {
 	current, err := user.Current()
 	if err != nil {
