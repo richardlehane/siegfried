@@ -27,23 +27,24 @@ import (
 )
 
 var (
-	blame     = flag.Int("blame", -1, "identify a signature from an initial test tree index")
-	compile   = flag.String("compile", "", "compile a single Pronom signature (for testing)")
-	view      = flag.String("view", "", "view a Pronom signature e.g. fmt/161")
-	harvest   = flag.Bool("harvest", false, "harvest Pronom reports")
-	build     = flag.String("build", "false", "build a Siegfried signature file; give a label for the identifier e.g. 'pronom'")
-	inspect   = flag.Bool("inspect", false, "describe a Siegfried signature file")
-	timeout   = flag.Duration("timeout", config.Pronom.HarvestTimeout, "set duration before timing-out harvesting requests e.g. 120s")
-	sigfile   = flag.String("sig", config.Siegfried.Signature, "set path to Siegfried signature file")
-	droid     = flag.String("droid", config.Pronom.Droid, "set path to Droid signature file")
-	container = flag.String("container", config.Pronom.Container, "set path to Droid Container signature file")
-	reports   = flag.String("reports", config.Pronom.Reports, "set path to Pronom reports directory")
+	blame          = flag.Int("blame", -1, "identify a signature from an initial test tree index")
+	compile        = flag.String("compile", "", "compile a single Pronom signature (for testing)")
+	view           = flag.String("view", "", "view a Pronom signature e.g. fmt/161")
+	harvest        = flag.Bool("harvest", false, "harvest Pronom reports")
+	build          = flag.String("build", "false", "build a Siegfried signature file; give a label for the identifier e.g. 'pronom'")
+	inspect        = flag.Bool("inspect", false, "describe a Siegfried signature file")
+	_, htimeout, _ = config.HarvestOptions()
+	timeout        = flag.Duration("timeout", htimeout, "set duration before timing-out harvesting requests e.g. 120s")
+	sigfile        = flag.String("sig", config.Signature(), "set path to Siegfried signature file")
+	droid          = flag.String("droid", config.Droid(), "set path to Droid signature file")
+	container      = flag.String("container", config.Container(), "set path to Droid Container signature file")
+	reports        = flag.String("reports", config.Reports(), "set path to Pronom reports directory")
 )
 
 func savereps() error {
-	file, err := os.Open(config.Pronom.Reports)
+	file, err := os.Open(config.Reports())
 	if err != nil {
-		err = os.Mkdir(config.Pronom.Reports, os.ModeDir)
+		err = os.Mkdir(config.Reports(), os.ModePerm)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -61,7 +62,11 @@ func savereps() error {
 
 func makegob() error {
 	s := siegfried.New()
-	err := s.Add(siegfried.Pronom)
+	p, err := pronom.New()
+	if err != nil {
+		return err
+	}
+	err = s.Add(p)
 	if err != nil {
 		return err
 	}
@@ -154,8 +159,7 @@ func viewSig(f string) error {
 func main() {
 	flag.Parse()
 
-	config.Pronom.HarvestTimeout = *timeout
-	config.SetLatest()
+	config.SetHarvestTimeOut(*timeout)
 	var err error
 	switch {
 	case *harvest:

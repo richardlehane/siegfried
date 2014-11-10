@@ -116,11 +116,11 @@
         </ByteSequence>
       </InternalSignature>
       <InternalSignature>
-        <SignatureID>1007</SignatureID>
-        <SignatureName>BWAVE WAVEFORMATEXTENSIBLE 1 variant</SignatureName>
-        <SignatureNote>RIFF header, WAVE ID, Format chunk (WAVEFORMATEXTENSIBLE), BEXT chunk (Version=1)</SignatureNote>
+        <SignatureID>1008</SignatureID>
+        <SignatureName>BWAVE WAVEFORMATEXTENSIBLE 2 variant</SignatureName>
+        <SignatureNote>RIFF header, WAVE ID, Format chunk (WAVEFORMATEXTENSIBLE), BEXT chunk (Version=2)</SignatureNote>
         <ByteSequence>
-          <ByteSequenceID>1248</ByteSequenceID>
+          <ByteSequenceID>1247</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
           <MaxOffset>0</MaxOffset>
@@ -130,7 +130,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>52494646{4}57415645666D7420{4}FEFF{38-1000}64617461*62657874{350}0100</ByteSequenceValue>
+          <ByteSequenceValue>52494646{4}57415645666D7420{4}FEFF{38-1000}64617461*62657874{350}0200</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

@@ -85,9 +85,9 @@ func (p *pronom) add(m core.Matcher) error {
 	switch t := m.(type) {
 	default:
 		return fmt.Errorf("Pronom: unknown matcher type %T", t)
-	case *extensionmatcher.Matcher:
+	case extensionmatcher.Matcher:
 		return p.extMatcher(m)
-	case *containermatcher.Matcher:
+	case containermatcher.Matcher:
 		return p.contMatcher(m)
 	case *bytematcher.Matcher:
 		sigs, err := p.Parse()

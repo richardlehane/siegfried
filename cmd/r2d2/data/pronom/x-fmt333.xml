@@ -12,7 +12,7 @@
       <FormatTypes>Database</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Lotus Approach is a relational database management system included in IBM's Lotus SmartSuite for Microsoft Windows.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -25,7 +25,7 @@
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <LastUpdatedDate>06 Nov 2014</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -33,13 +33,27 @@
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
-        <Identifier>vnd.lotus-approach</Identifier>
+        <Identifier>application/vnd.lotus-approach</Identifier>
         <IdentifierType>MIME</IdentifierType>
       </FileFormatIdentifier>
       <FileFormatIdentifier>
         <Identifier>x-fmt/333</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>95</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Lotus Corporation</OrganisationName>
+        <DeveloperCompoundName>Lotus Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>95</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Lotus Corporation</OrganisationName>
+        <SupportCompoundName>Lotus Corporation</SupportCompoundName>
+      </Support>
       <ExternalSignature>
         <ExternalSignatureID>483</ExternalSignatureID>
         <Signature>apr</Signature>

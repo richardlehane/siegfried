@@ -5,9 +5,11 @@ import (
 	"io"
 	"testing"
 
+	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
+	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
 type testNMatcher struct{}
@@ -88,5 +90,17 @@ func TestIdentify(t *testing.T) {
 	i := <-c
 	if i.String() != "fmt/3" {
 		t.Error("expecting fmt/3")
+	}
+}
+
+func TestLoad(t *testing.T) {
+	s := New()
+	p, err := pronom.New(config.SetHome("./cmd/r2d2/data"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	err = s.Add(p)
+	if err != nil {
+		t.Fatal(err)
 	}
 }

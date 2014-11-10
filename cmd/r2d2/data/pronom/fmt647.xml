@@ -59,7 +59,7 @@
       <InternalSignature>
         <SignatureID>975</SignatureID>
         <SignatureName>Microsoft Expression Media 2</SignatureName>
-        <SignatureNote>BOF: 025i (Offset 4)    EOF: Svar (max Offset 62)    EOF: 025i (Max Offset 8)</SignatureNote>
+        <SignatureNote>BOF: 025i (Offset 4)                                                                                                                              EOF: Svar{8-54}025i(Max Offset 8)</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1199</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -77,19 +77,6 @@
         <ByteSequence>
           <ByteSequenceID>1200</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
-          <Offset>16</Offset>
-          <MaxOffset>46</MaxOffset>
-          <IndirectOffsetLocation>
-          </IndirectOffsetLocation>
-          <IndirectOffsetLength>
-          </IndirectOffsetLength>
-          <Endianness>
-          </Endianness>
-          <ByteSequenceValue>53566172</ByteSequenceValue>
-        </ByteSequence>
-        <ByteSequence>
-          <ByteSequenceID>1201</ByteSequenceID>
-          <PositionType>Absolute from EOF</PositionType>
           <Offset>4</Offset>
           <MaxOffset>
           </MaxOffset>
@@ -99,7 +86,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>30323569</ByteSequenceValue>
+          <ByteSequenceValue>53566172{8-54}30323569</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

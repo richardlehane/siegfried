@@ -39,7 +39,7 @@
       </FileFormatIdentifier>
       <ExternalSignature>
         <ExternalSignatureID>800</ExternalSignatureID>
-        <Signature>.jls</Signature>
+        <Signature>jls</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
     </FileFormat>

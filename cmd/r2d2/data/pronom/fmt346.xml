@@ -12,7 +12,7 @@
       <FormatTypes>Word Processor</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Microsoft Word for Macintosh Document is a Graphical User Interface word processor designed to be used Mac operating systems.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -23,7 +23,7 @@
       <ProvenanceName>Georgia Tech Research Institute / Georgia Tech Research Institute</ProvenanceName>
       <ProvenanceSourceDate>21 Apr 2011</ProvenanceSourceDate>
       <ProvenanceDescription>Submitted by Georgia Tech Research Institute</ProvenanceDescription>
-      <LastUpdatedDate>21 Apr 2011</LastUpdatedDate>
+      <LastUpdatedDate>06 Nov 2014</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -31,9 +31,31 @@
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
+        <Identifier>application/msword</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>com.microsoft.word.doc</Identifier>
+        <IdentifierType>Apple Uniform Type Identifier</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
         <Identifier>fmt/346</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>93</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <DeveloperCompoundName>Microsoft Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>93</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <SupportCompoundName>Microsoft Corporation</SupportCompoundName>
+      </Support>
       <ExternalSignature>
         <ExternalSignatureID>1108</ExternalSignatureID>
         <Signature>mcw</Signature>

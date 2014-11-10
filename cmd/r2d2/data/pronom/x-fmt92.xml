@@ -13,7 +13,7 @@
       <FormatTypes>Image (Raster)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Adobe Photoshop is a raster graphics editor developed and published by Adobe Systems for Windows and OS X.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -26,7 +26,7 @@
       <ProvenanceSourceDate>23 Sep 2003</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <LastUpdatedDate>06 Nov 2014</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -35,7 +35,7 @@
       </TechnicalEnvironment>
       <FileFormatIdentifier>
         <Identifier>com.adobe.photoshop-image</Identifier>
-        <IdentifierType>MIME</IdentifierType>
+        <IdentifierType>Apple Uniform Type Identifier</IdentifierType>
       </FileFormatIdentifier>
       <FileFormatIdentifier>
         <Identifier>image/vnd.adobe.photoshop</Identifier>
@@ -45,6 +45,20 @@
         <Identifier>x-fmt/92</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>7</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Adobe Systems Incorporated</OrganisationName>
+        <DeveloperCompoundName>Adobe Systems Incorporated</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>7</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Adobe Systems Incorporated</OrganisationName>
+        <SupportCompoundName>Adobe Systems Incorporated</SupportCompoundName>
+      </Support>
       <ExternalSignature>
         <ExternalSignatureID>133</ExternalSignatureID>
         <Signature>psd</Signature>

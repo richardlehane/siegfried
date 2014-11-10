@@ -8,17 +8,18 @@ import (
 
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/config"
+	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
 var testhome = flag.String("testhome", "data", "override the default home directory")
 
 func TestMakeGob(t *testing.T) {
-	config.Siegfried.Home = *testhome
-	if err := config.SetLatest(); err != nil {
+	s := siegfried.New()
+	p, err := pronom.New(config.SetHome(*testhome))
+	if err != nil {
 		t.Fatal(err)
 	}
-	s := siegfried.New()
-	err := s.Add(siegfried.Pronom)
+	err = s.Add(p)
 	if err != nil {
 		t.Fatal(err)
 	}

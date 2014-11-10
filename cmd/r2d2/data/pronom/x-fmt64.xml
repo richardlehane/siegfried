@@ -12,7 +12,7 @@
       <FormatTypes>Word Processor</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Microsoft Word for Macintosh Document is a Graphical User Interface word processor designed to be used Mac operating systems.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -25,7 +25,7 @@
       <ProvenanceSourceDate>23 Sep 2003</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <LastUpdatedDate>06 Nov 2014</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -38,12 +38,26 @@
       </FileFormatIdentifier>
       <FileFormatIdentifier>
         <Identifier>com.microsoft.word.doc</Identifier>
-        <IdentifierType>MIME</IdentifierType>
+        <IdentifierType>Apple Uniform Type Identifier</IdentifierType>
       </FileFormatIdentifier>
       <FileFormatIdentifier>
         <Identifier>x-fmt/64</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>93</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <DeveloperCompoundName>Microsoft Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>93</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <SupportCompoundName>Microsoft Corporation</SupportCompoundName>
+      </Support>
       <ExternalSignature>
         <ExternalSignatureID>99</ExternalSignatureID>
         <Signature>mcw</Signature>

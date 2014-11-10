@@ -10,7 +10,7 @@
       </FormatFamilies>
       <FormatTypes>Word Processor</FormatTypes>
       <FormatDisclosure>None</FormatDisclosure>
-      <FormatDescription>With the release of Word 97, Microsoft revised the native binary word processing format, which is based on its generic OLE2 Compound Document Format. The format is proprietary and Microsoft does not make details of its structure public. The information here is derived primarily from OpenOffice.org's reverse-engineered documentation of the format and should not therefore be regarded as definitive. A Word document is stored as a ‘WordDocument’ stream within a Compound Document Format file. The format remained unchanged with the releases of Word 2000, 2002 and 2003.</FormatDescription>
+      <FormatDescription>With the release of Word 97, Microsoft revised the native binary word processing format, which is based on its generic OLE2 Compound Document Format. The format is proprietary and Microsoft does not make details of its structure public. The information here is derived primarily from OpenOffice.org's reverse-engineered documentation of the format and should not therefore be regarded as definitive. A Word document is stored as a ‘WordDocument’ stream within a Compound Document Format file. The format remained unchanged with the releases of Word 2000, 2002 and 2003. An alternative extension of .wbk refers to a backup file of a Word document, however there is no material or structural difference between a .wbk file and the .doc file it is a backup of.</FormatDescription>
       <BinaryFileFormat>Binary</BinaryFileFormat>
       <ByteOrders>Little-endian (Intel)</ByteOrders>
       <ReleaseDate>
@@ -89,6 +89,11 @@
       <ExternalSignature>
         <ExternalSignatureID>703</ExternalSignatureID>
         <Signature>doc</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1557</ExternalSignatureID>
+        <Signature>wbk</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <InternalSignature>
