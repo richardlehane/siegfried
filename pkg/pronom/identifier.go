@@ -64,7 +64,7 @@ func (i *Identifier) Add(m core.Matcher) error {
 }
 
 func (i *Identifier) Yaml() string {
-	return fmt.Sprintf(" - name : %v\n details : %v\n",
+	return fmt.Sprintf("  - name    : %v\n    details : %v\n",
 		i.Name, i.Details)
 }
 
@@ -111,7 +111,7 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 	case core.ExtensionMatcher:
 		if res.Index() >= r.EStart && res.Index() < r.EStart+len(r.EPuids) {
 			idx := res.Index() - r.EStart
-			r.ids = add(r.ids, r.EPuids[idx], r.Infos[r.EPuids[idx]], res.Basis(), r.cscore)
+			r.ids = add(r.ids, r.Name, r.EPuids[idx], r.Infos[r.EPuids[idx]], res.Basis(), r.cscore)
 			return true
 		} else {
 			return false
@@ -120,13 +120,13 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 		// add zip default
 		if res.Index() < 0 {
 			r.cscore *= 1.1
-			r.ids = add(r.ids, "x-fmt/263", r.Infos["x-fmt/263"], res.Basis(), r.cscore) // not great to have this hardcoded
+			r.ids = add(r.ids, r.Name, "x-fmt/263", r.Infos["x-fmt/263"], res.Basis(), r.cscore) // not great to have this hardcoded
 			return false
 		}
 		if res.Index() >= r.CStart && res.Index() < r.CStart+len(r.CPuids) {
 			idx := res.Index() - r.CStart
 			r.cscore *= 1.1
-			r.ids = add(r.ids, r.CPuids[idx], r.Infos[r.CPuids[idx]], res.Basis(), r.cscore)
+			r.ids = add(r.ids, r.Name, r.CPuids[idx], r.Infos[r.CPuids[idx]], res.Basis(), r.cscore)
 			return true
 		} else {
 			return false
@@ -135,7 +135,7 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 		if res.Index() >= r.BStart && res.Index() < r.BStart+len(r.BPuids) {
 			idx := res.Index() - r.BStart
 			r.cscore *= 1.1
-			r.ids = add(r.ids, r.BPuids[idx], r.Infos[r.BPuids[idx]], res.Basis(), r.cscore)
+			r.ids = add(r.ids, r.Name, r.BPuids[idx], r.Infos[r.BPuids[idx]], res.Basis(), r.cscore)
 			return true
 		} else {
 			return false
@@ -169,7 +169,7 @@ func (r *Recorder) Report(res chan core.Identification) {
 				for i, v := range r.ids {
 					poss[i] = v.puid
 				}
-				nids = []Identification{Identification{"UNKNOWN", "", "", "", nil, fmt.Sprintf("no match; possibilities based on extension are %v", strings.Join(poss, ", ")), 0}}
+				nids = []Identification{Identification{r.Name, "UNKNOWN", "", "", "", nil, fmt.Sprintf("no match; possibilities based on extension are %v", strings.Join(poss, ", ")), 0}}
 			}
 			r.ids = nids
 		}
@@ -184,11 +184,12 @@ func (r *Recorder) Report(res chan core.Identification) {
 			}
 		}
 	} else {
-		res <- Identification{"UNKNOWN", "", "", "", nil, "warning: \"no match\"", 0}
+		res <- Identification{r.Name, "UNKNOWN", "", "", "", nil, "no match", 0}
 	}
 }
 
 type Identification struct {
+	identifier string
 	puid       string
 	name       string
 	version    string
@@ -214,8 +215,8 @@ func (id Identification) Yaml() string {
 	if len(id.basis) > 0 {
 		basis = quoteText(strings.Join(id.basis, "; "))
 	}
-	return fmt.Sprintf("  - puid    : %v\n    format  : %v\n    version : %v\n    mime    : %v\n    basis   : %v\n    warning : %v\n",
-		id.puid, quoteText(id.name), quoteText(id.version), quoteText(id.mime), basis, quoteText(id.warning))
+	return fmt.Sprintf("  - id      : %v\n    puid    : %v\n    format  : %v\n    version : %v\n    mime    : %v\n    basis   : %v\n    warning : %v\n",
+		id.identifier, id.puid, quoteText(id.name), quoteText(id.version), quoteText(id.mime), basis, quoteText(id.warning))
 }
 
 func (id Identification) Json() string {
@@ -253,7 +254,7 @@ func (p pids) Less(i, j int) bool { return p[j].confidence < p[i].confidence }
 
 func (p pids) Swap(i, j int) { p[i], p[j] = p[j], p[i] }
 
-func add(p pids, f string, info FormatInfo, basis string, c float64) pids {
+func add(p pids, id string, f string, info FormatInfo, basis string, c float64) pids {
 	for i, v := range p {
 		if v.puid == f {
 			p[i].confidence += c
@@ -261,5 +262,5 @@ func add(p pids, f string, info FormatInfo, basis string, c float64) pids {
 			return p
 		}
 	}
-	return append(p, Identification{f, info.Name, info.Version, info.MIMEType, []string{basis}, "", c})
+	return append(p, Identification{id, f, info.Name, info.Version, info.MIMEType, []string{basis}, "", c})
 }
