@@ -90,9 +90,16 @@ func updateSigs() (string, error) {
 			return "You are already up to date!", nil
 		}
 	} else {
-		err = os.MkdirAll(config.Home(), os.ModePerm)
-		if err != nil {
-			return "", err
+		// this hairy bit of golang exception handling is thanks to Ross! :)
+		if _, err = os.Stat(config.Home()); err != nil {
+			if os.IsNotExist(err) {
+				err = os.MkdirAll(config.Home(), os.ModePerm)
+				if err != nil {
+					return "", fmt.Errorf("Siegfried: cannot create home directory %s, %v", config.Home(), err)
+				}
+			} else {
+				return "", fmt.Errorf("Siegfried: error opening directory %s, %v", config.Home(), err)
+			}
 		}
 	}
 	fmt.Println("... downloading latest signature file ...")
@@ -105,7 +112,7 @@ func updateSigs() (string, error) {
 	}
 	err = ioutil.WriteFile(config.Signature(), response, os.ModePerm)
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("Siegfried: error writing to directory, %v", err)
 	}
 	fmt.Printf("... writing %s ...\n", config.Signature())
 	return "Your signature file has been updated", nil
