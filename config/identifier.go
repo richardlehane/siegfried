@@ -43,9 +43,9 @@ func Details() string {
 		return identifier.details
 	}
 	// ... otherwise create a default string based on the identifier settings chosen
-	str := fmt.Sprintf("v%d; %s", siegfried.signatureVersion, pronom.droid)
+	str := fmt.Sprintf("v%d; %s", siegfried.signatureVersion, DroidBase())
 	if !identifier.noContainer {
-		str += "; " + pronom.container
+		str += "; " + ContainerBase()
 	}
 	if identifier.maxBOF > 0 {
 		str += fmt.Sprintf("; max BOF %d", identifier.maxBOF)

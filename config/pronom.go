@@ -54,6 +54,17 @@ func Droid() string {
 	return pronom.droid
 }
 
+func DroidBase() string {
+	if pronom.droid == "" {
+		droid, err := latest("DROID_SignatureFile_V", ".xml")
+		if err != nil {
+			return ""
+		}
+		return droid
+	}
+	return pronom.droid
+}
+
 func Container() string {
 	if pronom.container == "" {
 		container, err := latest("container-signature-", ".xml")
@@ -64,6 +75,17 @@ func Container() string {
 	}
 	if filepath.Dir(pronom.container) == "." {
 		return filepath.Join(siegfried.home, pronom.container)
+	}
+	return pronom.container
+}
+
+func ContainerBase() string {
+	if pronom.container == "" {
+		container, err := latest("container-signature-", ".xml")
+		if err != nil {
+			return ""
+		}
+		return container
 	}
 	return pronom.container
 }
