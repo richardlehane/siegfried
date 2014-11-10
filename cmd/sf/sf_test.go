@@ -19,8 +19,8 @@ var s *siegfried.Siegfried
 
 func setup() error {
 	var err error
-	config.Siegfried.Home = *testhome
-	s, err = load("pronom.gob")
+	config.SetHome(*testhome)()
+	s, err = load()
 	return err
 }
 

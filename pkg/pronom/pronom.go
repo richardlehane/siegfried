@@ -73,7 +73,7 @@ func NewPronom() (*pronom, error) {
 
 func (p *pronom) identifier() *Identifier {
 	i := &Identifier{p: p}
-	i.Name = config.Identifier.Name
+	i.Name = config.Name()
 	i.Details = config.Details()
 	i.Infos = p.GetInfos()
 	i.BPuids, i.PuidsB = p.GetPuids()
@@ -81,15 +81,15 @@ func (p *pronom) identifier() *Identifier {
 	return i
 }
 
-func (p *pronom) add(t core.MatcherType, m core.Matcher) error {
-	switch t {
+func (p *pronom) add(m core.Matcher) error {
+	switch t := m.(type) {
 	default:
-		return fmt.Errorf("Pronom: unknown matcher type %v", t)
-	case core.ExtensionMatcher:
+		return fmt.Errorf("Pronom: unknown matcher type %T", t)
+	case *extensionmatcher.Matcher:
 		return p.extMatcher(m)
-	case core.ContainerMatcher:
+	case *containermatcher.Matcher:
 		return p.contMatcher(m)
-	case core.ByteMatcher:
+	case *bytematcher.Matcher:
 		sigs, err := p.Parse()
 		if err != nil {
 			return err
@@ -228,7 +228,8 @@ func SaveReports() []error {
 		return []error{err}
 	}
 	apply := func(p *pronom, puid string) error {
-		return save(puid, config.Pronom.HarvestUrl, config.Reports())
+		url, _, _ := config.HarvestOptions()
+		return save(puid, url, config.Reports())
 	}
 	return p.applyAll(apply)
 }
@@ -310,13 +311,14 @@ func getHttp(url string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
+	_, timeout, transport := config.HarvestOptions()
 	req.Header.Add("User-Agent", "siegfried/r2d2bot (+https://github.com/richardlehane/siegfried)")
-	timer := time.AfterFunc(config.Pronom.HarvestTimeout, func() {
-		config.Pronom.HarvestTransport.CancelRequest(req)
+	timer := time.AfterFunc(timeout, func() {
+		transport.CancelRequest(req)
 	})
 	defer timer.Stop()
 	client := http.Client{
-		Transport: config.Pronom.HarvestTransport,
+		Transport: transport,
 	}
 	resp, err := client.Do(req)
 	if err != nil {

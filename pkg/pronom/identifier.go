@@ -23,6 +23,7 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 )
 
@@ -47,7 +48,10 @@ type Identifier struct {
 	PuidsB map[string][]int // map of puids to slices of bytematcher int signatures
 }
 
-func New() (*Identifier, error) {
+func New(opts ...config.Option) (*Identifier, error) {
+	for _, v := range opts {
+		v()
+	}
 	pronom, err := NewPronom()
 	if err != nil {
 		return nil, err
@@ -55,8 +59,8 @@ func New() (*Identifier, error) {
 	return pronom.identifier(), nil
 }
 
-func (i *Identifier) Add(t core.MatcherType, m core.Matcher) error {
-	return i.p.add(t, m)
+func (i *Identifier) Add(m core.Matcher) error {
+	return i.p.add(m)
 }
 
 func (i *Identifier) Yaml() string {

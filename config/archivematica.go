@@ -3,8 +3,8 @@
 package config
 
 func init() {
-	Siegfried.Home = "/usr/share/siegfried"
-	Siegfried.Signature = "archivematica.gob"
-	Siegfried.SignatureVersion = 1
-	Identifier.Name = "archivematica"
+	siegfried.home = "/usr/share/siegfried"
+	siegfried.signature = "archivematica.gob"
+	siegfried.signatureVersion = 1
+	identifier.name = "archivematica"
 }

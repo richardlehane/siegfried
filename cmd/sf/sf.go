@@ -32,8 +32,8 @@ import (
 var (
 	update  = flag.Bool("update", false, "update or install the default signature file")
 	version = flag.Bool("version", false, "display version information")
-	sigfile = flag.String("sigfile", config.Siegfried.Signature, "set the signature file")
-	home    = flag.String("home", config.Siegfried.Home, "override the default home directory")
+	sig     = flag.String("sig", config.Signature(), "set the signature file")
+	home    = flag.String("home", config.Home(), "override the default home directory")
 	serve   = flag.String("serve", "false", "not yet implemented - coming with v1")
 )
 
@@ -42,14 +42,15 @@ func getHttp(url string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
+	_, timeout, transport := config.UpdateOptions()
 	req.Header.Add("User-Agent", "siegfried/siegbot (+https://github.com/richardlehane/siegfried)")
 	req.Header.Add("Cache-Control", "no-cache")
-	timer := time.AfterFunc(config.Siegfried.UpdateTimeout, func() {
-		config.Siegfried.UpdateTransport.CancelRequest(req)
+	timer := time.AfterFunc(timeout, func() {
+		transport.CancelRequest(req)
 	})
 	defer timer.Stop()
 	client := http.Client{
-		Transport: config.Siegfried.UpdateTransport,
+		Transport: transport,
 	}
 	resp, err := client.Do(req)
 	if err != nil {
@@ -67,7 +68,11 @@ type Update struct {
 }
 
 func updateSigs() (string, error) {
-	response, err := getHttp(config.Siegfried.UpdateURL)
+	url, _, _ := config.UpdateOptions()
+	if url == "" {
+		return "Update is not available for this distribution of Siegfried", nil
+	}
+	response, err := getHttp(url)
 	if err != nil {
 		return "", err
 	}
@@ -75,7 +80,8 @@ func updateSigs() (string, error) {
 	if err := json.Unmarshal(response, &u); err != nil {
 		return "", err
 	}
-	if config.Siegfried.Version[0] < u.SfVersion[0] || (u.SfVersion[0] == config.Siegfried.Version[0] && config.Siegfried.Version[1] < u.SfVersion[1]) {
+	version := config.Version()
+	if version[0] < u.SfVersion[0] || (u.SfVersion[0] == version[0] && version[1] < u.SfVersion[1]) {
 		return "Your version of Siegfried is out of date; please install latest from http://www.itforarchivists.com/siegfried before continuing.", nil
 	}
 	s, err := siegfried.Load(config.Signature())
@@ -84,7 +90,7 @@ func updateSigs() (string, error) {
 			return "You are already up to date!", nil
 		}
 	} else {
-		err = os.MkdirAll(config.Siegfried.Home, os.ModePerm)
+		err = os.MkdirAll(config.Home(), os.ModePerm)
 		if err != nil {
 			return "", err
 		}
@@ -105,8 +111,7 @@ func updateSigs() (string, error) {
 	return "Your signature file has been updated", nil
 }
 
-func load(sig string) (*siegfried.Siegfried, error) {
-	config.Siegfried.Signature = sig
+func load() (*siegfried.Siegfried, error) {
 	s, err := siegfried.Load(config.Signature())
 	if err != nil {
 		return nil, err
@@ -192,12 +197,17 @@ func main() {
 
 	flag.Parse()
 
-	if *home != config.Siegfried.Home {
-		config.Siegfried.Home = *home
+	if *home != config.Home() {
+		config.SetHome(*home)()
+	}
+
+	if *sig != config.SignatureBase() {
+		config.SetSignature(*sig)()
 	}
 
 	if *version {
-		fmt.Printf("Siegfried version: %d.%d.%d\n", config.Siegfried.Version[0], config.Siegfried.Version[1], config.Siegfried.Version[2])
+		version := config.Version()
+		fmt.Printf("Siegfried version: %d.%d.%d\n", version[0], version[1], version[2])
 		return
 	}
 
@@ -228,7 +238,7 @@ func main() {
 		log.Fatalf("Error: error getting info for %v, got: %v", flag.Arg(0), err)
 	}
 
-	s, err := load(*sigfile)
+	s, err := load()
 	if err != nil {
 		log.Fatalf("Error: error loading signature file, got: %v", err)
 

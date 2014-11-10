@@ -18,7 +18,6 @@ import (
 	"fmt"
 
 	"github.com/richardlehane/match/wac"
-	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 )
 
@@ -47,7 +46,6 @@ func New() *Process {
 		EOFFrames: &frameSet{},
 		BOFSeq:    &seqSet{},
 		EOFSeq:    &seqSet{},
-		Options:   Options{config.Siegfried.Distance, config.Siegfried.Range, config.Siegfried.Choices, config.Siegfried.VarLength},
 	}
 }
 

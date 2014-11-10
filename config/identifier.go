@@ -19,42 +19,119 @@ import (
 )
 
 // Name of the default identifier as well as settings for how a new identifer will be built
-var Identifier = struct {
-	Name        string // Name of the default identifier
-	Details     string // a short string describing the signature e.g. with what DROID and container file versions was it built?
-	MaxBOF      int
-	MaxEOF      int
-	NoEOF       bool
-	NoContainer bool
-	NoPriority  bool
+var identifier = struct {
+	name        string // Name of the default identifier
+	details     string // a short string describing the signature e.g. with what DROID and container file versions was it built?
+	maxBOF      int
+	maxEOF      int
+	noEOF       bool
+	noContainer bool
+	noPriority  bool
 }{
-	Name: "pronom",
+	name: "pronom",
+}
+
+// GETTERS
+
+func Name() string {
+	return identifier.name
 }
 
 func Details() string {
 	// if the details string has been explicitly set, return it
-	if len(Identifier.Details) > 0 {
-		return Identifier.Details
+	if len(identifier.details) > 0 {
+		return identifier.details
 	}
 	// ... otherwise create a default string based on the identifier settings chosen
-	str := fmt.Sprintf("v%d; %s", Siegfried.SignatureVersion, Pronom.Droid)
-	if !Identifier.NoContainer {
-		str += "; " + Pronom.Container
+	str := fmt.Sprintf("v%d; %s", siegfried.signatureVersion, pronom.droid)
+	if !identifier.noContainer {
+		str += "; " + pronom.container
 	}
-	if Identifier.MaxBOF > 0 {
-		str += fmt.Sprintf("; max BOF %d", Identifier.MaxBOF)
+	if identifier.maxBOF > 0 {
+		str += fmt.Sprintf("; max BOF %d", identifier.maxBOF)
 	}
-	if Identifier.MaxEOF > 0 {
-		str += fmt.Sprintf("; max EOF %d", Identifier.MaxEOF)
+	if identifier.maxEOF > 0 {
+		str += fmt.Sprintf("; max EOF %d", identifier.maxEOF)
 	}
-	if Identifier.NoEOF {
+	if identifier.noEOF {
 		str += "; no EOF signature parts"
 	}
-	if Identifier.NoContainer {
+	if identifier.noContainer {
 		str += "; no container signatures"
 	}
-	if Identifier.NoPriority {
+	if identifier.noPriority {
 		str += "; no priorities"
 	}
 	return str
+}
+
+func MaxBOF() int {
+	return identifier.maxBOF
+}
+
+func MaxEOF() int {
+	return identifier.maxEOF
+}
+
+func NoEOF() bool {
+	return identifier.noEOF
+}
+
+func NoContainer() bool {
+	return identifier.noContainer
+}
+
+func NoPriority() bool {
+	return identifier.noPriority
+}
+
+// SETTERS
+
+func SetName(n string) func() private {
+	return func() private {
+		identifier.name = n
+		return private{}
+	}
+}
+
+func SetDetails(d string) func() private {
+	return func() private {
+		identifier.details = d
+		return private{}
+	}
+}
+
+func SetBOF(b int) func() private {
+	return func() private {
+		identifier.maxBOF = b
+		return private{}
+	}
+}
+
+func SetEOF(e int) func() private {
+	return func() private {
+		identifier.maxEOF = e
+		return private{}
+	}
+}
+
+func SetNoEOF() func() private {
+	return func() private {
+		identifier.noEOF = true
+		return private{}
+	}
+}
+
+func SetNoContainer() func() private {
+	return func() private {
+		identifier.noContainer = true
+		return private{}
+	}
+}
+
+func SetNoPriority() func() private {
+	return func() private {
+		identifier.noPriority = true
+		return private{}
+	}
 }

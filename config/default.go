@@ -28,5 +28,5 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	Siegfried.Home = filepath.Join(current.HomeDir, "siegfried")
+	siegfried.home = filepath.Join(current.HomeDir, "siegfried")
 }

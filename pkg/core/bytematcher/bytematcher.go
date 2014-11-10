@@ -22,6 +22,7 @@ import (
 	"io"
 
 	"github.com/richardlehane/match/wac"
+	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/process"
@@ -102,6 +103,8 @@ func (b *Matcher) Add(ss core.SignatureSet, priorities priority.List) (int, erro
 	if !ok {
 		return -1, fmt.Errorf("Byte matcher: can't convert signature set to BM signature set")
 	}
+	// set the options
+	b.Distance, b.Range, b.Choices, b.VarLength = config.BMOptions()
 	var se sigErrors
 	// process each of the sigs, adding them to b.Sigs and the various seq/frame/testTree sets
 	for _, sig := range sigs {

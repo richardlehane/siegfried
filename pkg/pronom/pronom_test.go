@@ -10,12 +10,8 @@ import (
 var p *pronom
 
 func TestNew(t *testing.T) {
-	config.Siegfried.Home = filepath.Join("..", "..", "cmd", "r2d2", "data")
-	err := config.SetLatest()
-	if err != nil {
-		t.Error(err)
-	}
-	p, err = NewPronom()
+	config.SetHome(filepath.Join("..", "..", "cmd", "r2d2", "data"))()
+	_, err := NewPronom()
 	if err != nil {
 		t.Error(err)
 	}

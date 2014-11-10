@@ -46,7 +46,7 @@ type Siegfried struct {
 
 func New() *Siegfried {
 	s := &Siegfried{}
-	s.V = Version{config.Siegfried.SignatureVersion, time.Now()}
+	s.V = Version{config.SignatureVersion(), time.Now()}
 	s.em = extensionmatcher.New()
 	s.cm = containermatcher.New()
 	s.bm = bytematcher.New()
@@ -54,23 +54,21 @@ func New() *Siegfried {
 	return s
 }
 
-func (s *Siegfried) Add(t identifierType) error {
-	switch t {
-	case Pronom:
-		p, err := pronom.New()
-		if err != nil {
+func (s *Siegfried) Add(i core.Identifier) error {
+	switch i := i.(type) {
+	default:
+		return fmt.Errorf("Siegfried: unknown identifier type %T", i)
+	case *pronom.Identifier:
+		if err := i.Add(s.em); err != nil {
 			return err
 		}
-		if err := p.Add(core.ExtensionMatcher, s.em); err != nil {
+		if err := i.Add(s.cm); err != nil {
 			return err
 		}
-		if err := p.Add(core.ContainerMatcher, s.cm); err != nil {
+		if err := i.Add(s.bm); err != nil {
 			return err
 		}
-		if err := p.Add(core.ByteMatcher, s.bm); err != nil {
-			return err
-		}
-		s.ids = append(s.ids, p)
+		s.ids = append(s.ids, i)
 	}
 	return nil
 }
@@ -94,10 +92,11 @@ type Version struct {
 }
 
 func (sv Version) Yaml() string {
+	version := config.Version()
 	return fmt.Sprintf("---\nsiegfried   : %d.%d.%d\nscanDate    : %v\nsignatures  : %s\ncreated     : %v\nidentifiers : \n",
-		config.Siegfried.Version[0], config.Siegfried.Version[1], config.Siegfried.Version[2],
+		version[0], version[1], version[2],
 		time.Now(),
-		config.Siegfried.Signature,
+		config.SignatureBase(),
 		sv.Created)
 }
 

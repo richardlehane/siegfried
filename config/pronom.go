@@ -24,53 +24,54 @@ import (
 	"time"
 )
 
-var Pronom = struct {
-	Droid            string // name of droid file e.g. DROID_SignatureFile_V78.xml
-	Container        string // e.g. container-signature-19770502.xml
-	Reports          string // directory, within home, where PRONOM reports are stored
-	HarvestUrl       string
-	HarvestTimeout   time.Duration
-	HarvestTransport *http.Transport
+var pronom = struct {
+	droid            string // name of droid file e.g. DROID_SignatureFile_V78.xml
+	container        string // e.g. container-signature-19770502.xml
+	reports          string // directory where PRONOM reports are stored
+	harvestURL       string
+	harvestTimeout   time.Duration
+	harvestTransport *http.Transport
 }{
-	Reports:          "pronom",
-	HarvestUrl:       "http://apps.nationalarchives.gov.uk/pronom/",
-	HarvestTimeout:   120 * time.Second,
-	HarvestTransport: &http.Transport{Proxy: http.ProxyFromEnvironment},
+	reports:          "pronom",
+	harvestURL:       "http://apps.nationalarchives.gov.uk/pronom/",
+	harvestTimeout:   120 * time.Second,
+	harvestTransport: &http.Transport{Proxy: http.ProxyFromEnvironment},
 }
 
-// Convenience funcs to give full paths to Droid, Container and Reports
+// GETTERS
 
 func Droid() string {
-	return filepath.Join(Siegfried.Home, Pronom.Droid)
+	if pronom.droid == "" {
+		droid, err := latest("DROID_SignatureFile_V", ".xml")
+		if err != nil {
+			return ""
+		}
+		return filepath.Join(siegfried.home, droid)
+	}
+	if filepath.Dir(pronom.droid) == "." {
+		return filepath.Join(siegfried.home, pronom.droid)
+	}
+	return pronom.droid
 }
 
 func Container() string {
-	return filepath.Join(Siegfried.Home, Pronom.Container)
-}
-
-func Reports() string {
-	return filepath.Join(Siegfried.Home, Pronom.Reports)
-}
-
-// Scan the Home directory for the most recent DROID & container files
-func SetLatest() error {
-	droid, err := latest("DROID_SignatureFile_V", ".xml")
-	if err != nil {
-		return err
+	if pronom.container == "" {
+		container, err := latest("container-signature-", ".xml")
+		if err != nil {
+			return ""
+		}
+		return filepath.Join(siegfried.home, container)
 	}
-	Pronom.Droid = droid
-	container, err := latest("container-signature-", ".xml")
-	if err != nil {
-		return err
+	if filepath.Dir(pronom.container) == "." {
+		return filepath.Join(siegfried.home, pronom.container)
 	}
-	Pronom.Container = container
-	return nil
+	return pronom.container
 }
 
 func latest(prefix, suffix string) (string, error) {
 	var hits []string
 	var ids []int
-	files, err := ioutil.ReadDir(Siegfried.Home)
+	files, err := ioutil.ReadDir(siegfried.home)
 	if err != nil {
 		return "", err
 	}
@@ -86,7 +87,7 @@ func latest(prefix, suffix string) (string, error) {
 		}
 	}
 	if len(hits) == 0 {
-		return "", fmt.Errorf("Config: no file in %s with prefix %s", Siegfried.Home, prefix)
+		return "", fmt.Errorf("Config: no file in %s with prefix %s", siegfried.home, prefix)
 	}
 	if len(hits) == 1 {
 		return hits[0], nil
@@ -99,4 +100,48 @@ func latest(prefix, suffix string) (string, error) {
 		}
 	}
 	return hits[idx], nil
+}
+
+func Reports() string {
+	if filepath.Dir(pronom.reports) == "." {
+		return filepath.Join(siegfried.home, pronom.reports)
+	}
+	return pronom.reports
+}
+
+func HarvestOptions() (string, time.Duration, *http.Transport) {
+	return pronom.harvestURL, pronom.harvestTimeout, pronom.harvestTransport
+}
+
+// SETTERS
+
+func SetDroid(d string) func() private {
+	return func() private {
+		pronom.droid = d
+		return private{}
+	}
+}
+
+func SetContainer(c string) func() private {
+	return func() private {
+		pronom.container = c
+		return private{}
+	}
+}
+
+func SetReports(r string) func() private {
+	return func() private {
+		pronom.reports = r
+		return private{}
+	}
+}
+
+// unlike other setters, these are only relevant in the r2d2 tool so can't be converted to the Option type
+
+func SetHarvestTimeOut(d time.Duration) {
+	pronom.harvestTimeout = d
+}
+
+func SetHarvestTransport(t *http.Transport) {
+	pronom.harvestTransport = t
 }
