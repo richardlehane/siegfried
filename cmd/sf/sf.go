@@ -64,7 +64,7 @@ type Update struct {
 	SfVersion  [3]int
 	SigVersion int
 	GobSize    int
-	UpdateURL  string
+	LatestURL  string
 }
 
 func updateSigs() (string, error) {
@@ -103,12 +103,12 @@ func updateSigs() (string, error) {
 		}
 	}
 	fmt.Println("... downloading latest signature file ...")
-	response, err = getHttp(u.UpdateURL)
+	response, err = getHttp(u.LatestURL)
 	if err != nil {
 		return "", err
 	}
 	if len(response) != u.GobSize {
-		return "", fmt.Errorf("Error retrieving pronom.gob; expecting %d bytes, got %d bytes", u.GobSize, len(response))
+		return "", fmt.Errorf("Siegfried: error retrieving pronom.gob; expecting %d bytes, got %d bytes", u.GobSize, len(response))
 	}
 	err = ioutil.WriteFile(config.Signature(), response, os.ModePerm)
 	if err != nil {
@@ -221,7 +221,7 @@ func main() {
 	if *update {
 		msg, err := updateSigs()
 		if err != nil {
-			log.Fatalf("Error: error updating signature file, %v", err)
+			log.Fatalf("Siegfried: error updating signature file, %v", err)
 		}
 		fmt.Println(msg)
 		return
