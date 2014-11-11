@@ -111,7 +111,7 @@ func (ct *CTest) identify(c *ContainerMatcher, rdr Reader, name string) []hit {
 		}
 	}
 	if ct.Unsatisfied != nil {
-		rdr.SetSource(c.entryBuf)
+		rdr.SetSource(c.entryBuf) // NOTE: an error is ignored here.
 		for r := range ct.BM.Identify("", c.entryBuf) {
 			h := ct.Unsatisfied[r.Index()]
 			if c.waitSet.Check(h) && c.checkHits(h) {

@@ -132,7 +132,7 @@ func identify(s *siegfried.Siegfried, p string) ([]string, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to open %v, got: %v", p, err)
 	}
-	c, err := s.Identify(file, p)
+	c, err := s.Identify(p, file)
 	if err != nil {
 		return nil, fmt.Errorf("failed to identify %v, got: %v", p, err)
 	}
@@ -172,7 +172,7 @@ func multiIdentifyP(s *siegfried.Siegfried, r string) error {
 		if err != nil {
 			return fmt.Errorf("failed to open %v, got: %v", path, err)
 		}
-		c, err := s.Identify(file, path)
+		c, err := s.Identify(path, file)
 		if err != nil {
 			file.Close()
 			return fmt.Errorf("failed to identify %v, got: %v", path, err)
@@ -263,7 +263,7 @@ func main() {
 	}
 
 	fmt.Print(s.Yaml())
-	c, err := s.Identify(file, flag.Arg(0))
+	c, err := s.Identify(flag.Arg(0), file)
 	if err != nil {
 		PrintError(err)
 		file.Close()

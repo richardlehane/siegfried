@@ -104,7 +104,6 @@ type Recorder struct {
 }
 
 func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
-
 	switch m {
 	default:
 		return false
@@ -126,7 +125,12 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 		if res.Index() >= r.CStart && res.Index() < r.CStart+len(r.CPuids) {
 			idx := res.Index() - r.CStart
 			r.cscore *= 1.1
-			r.ids = add(r.ids, r.Name, r.CPuids[idx], r.Infos[r.CPuids[idx]], res.Basis(), r.cscore)
+			basis := res.Basis()
+			p, t := place(idx, r.CPuids)
+			if t > 1 {
+				basis = basis + fmt.Sprintf(" (signature %d/%d)", p, t)
+			}
+			r.ids = add(r.ids, r.Name, r.CPuids[idx], r.Infos[r.CPuids[idx]], basis, r.cscore)
 			return true
 		} else {
 			return false
@@ -135,12 +139,29 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 		if res.Index() >= r.BStart && res.Index() < r.BStart+len(r.BPuids) {
 			idx := res.Index() - r.BStart
 			r.cscore *= 1.1
+			basis := res.Basis()
+			p, t := place(idx, r.BPuids)
+			if t > 1 {
+				basis = basis + fmt.Sprintf(" (signature %d/%d)", p, t)
+			}
 			r.ids = add(r.ids, r.Name, r.BPuids[idx], r.Infos[r.BPuids[idx]], res.Basis(), r.cscore)
 			return true
 		} else {
 			return false
 		}
 	}
+}
+
+func place(idx int, ids []string) (int, int) {
+	puid := ids[idx]
+	var prev, post int
+	for i := idx - 1; i > -1 && ids[i] == puid; i-- {
+		prev++
+	}
+	for i := idx + 1; i < len(ids) && ids[i] == puid; i++ {
+		post++
+	}
+	return prev + 1, prev + post + 1
 }
 
 func (r *Recorder) Satisfied() bool {

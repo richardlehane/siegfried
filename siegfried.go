@@ -246,7 +246,7 @@ func Load(path string) (*Siegfried, error) {
 	return &s, nil
 }
 
-func (s *Siegfried) Identify(r io.Reader, n string) (chan core.Identification, error) {
+func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, error) {
 	err := s.buffer.SetSource(r)
 	if err != nil && err != io.EOF {
 		return nil, fmt.Errorf("Siegfried: error reading input, got %v", err)

@@ -160,10 +160,10 @@ func ParsePuid(f string) ([]frames.Signature, error) {
 	return sigs, nil
 }
 func (p pronom) extMatcher(m core.Matcher) error {
-	epuids := make([]string, len(p.droid.FileFormats))
+	p.EPuids = make([]string, len(p.droid.FileFormats))
 	es := make(extensionmatcher.SignatureSet, len(p.droid.FileFormats))
 	for i, f := range p.droid.FileFormats {
-		epuids[i] = f.Puid
+		p.EPuids[i] = f.Puid
 		es[i] = f.Extensions
 	}
 	l, err := m.Add(es, nil)
