@@ -77,11 +77,12 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ## Changes
-### Version 0.6.0 (9/11/2014)
+### Version 0.6.0 (11/11/2014)
 - support multiple identifiers
 - config package
-- mscfb bugfix
+- mscfb bugfixes
 - license info in srcs (no change to license; this allows for attributing authorship for non-Richard contribs)
+- default home change to "$HOME/siegfried" (no longer ".siegfried")
 
 ### Version 0.5.0 (1/10/2014)
 - container matching
