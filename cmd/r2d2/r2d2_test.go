@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"path/filepath"
 	"testing"
 
@@ -23,7 +22,6 @@ func TestMakeGob(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	fmt.Println(s)
 	sigs := filepath.Join("data", "pronom.gob")
 	err = s.Save(sigs)
 	if err != nil {

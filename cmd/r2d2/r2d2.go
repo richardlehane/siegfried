@@ -27,18 +27,33 @@ import (
 )
 
 var (
-	blame          = flag.Int("blame", -1, "identify a signature from an initial test tree index")
-	compile        = flag.String("compile", "", "compile a single Pronom signature (for testing)")
-	view           = flag.String("view", "", "view a Pronom signature e.g. fmt/161")
-	harvest        = flag.Bool("harvest", false, "harvest Pronom reports")
-	build          = flag.String("build", "false", "build a Siegfried signature file; give a label for the identifier e.g. 'pronom'")
-	inspect        = flag.Bool("inspect", false, "describe a Siegfried signature file")
+	// BUILD, ADD flag sets
+	build       = flag.NewFlagSet("build | add", flag.ExitOnError)
+	home        = build.String("home", config.Home(), "override the default home directory")
+	droid       = build.String("droid", config.Droid(), "set name/path for Droid signature file")
+	container   = build.String("container", config.Container(), "set name/path for Droid Container signature file")
+	reports     = build.String("reports", config.Reports(), "set path for Pronom reports directory")
+	name        = build.String("name", config.Name(), "set identifier name")
+	details     = build.String("details", config.Details(), "set identifier details")
+	extend      = build.String("extend", "", "comma separated list of additional signatures")
+	bof         = build.Int("bof", 0, "define a maximum BOF offset")
+	eof         = build.Int("eof", 0, "define a maximum EOF offset")
+	noeof       = build.Bool("noeof", false, "ignore EOF segments in signatures")
+	nopriority  = build.Bool("nopriority", false, "ignore priority rules when recording results")
+	nocontainer = build.Bool("nocontainer", false, "skip container signatures")
+
+	// HARVEST
+	harvest        = flag.NewFlagSet("harvest", flag.ExitOnError)
+	harvestHome    = harvest.String("home", config.Home(), "override the default home directory")
+	harvestDroid   = harvest.String("droid", config.Droid(), "set name/path for Droid signature file")
+	harvestReports = harvest.String("reports", config.Reports(), "set path for Pronom reports directory")
 	_, htimeout, _ = config.HarvestOptions()
 	timeout        = flag.Duration("timeout", htimeout, "set duration before timing-out harvesting requests e.g. 120s")
-	sigfile        = flag.String("sig", config.Signature(), "set path to Siegfried signature file")
-	droid          = flag.String("droid", config.Droid(), "set path to Droid signature file")
-	container      = flag.String("container", config.Container(), "set path to Droid Container signature file")
-	reports        = flag.String("reports", config.Reports(), "set path to Pronom reports directory")
+
+	// INSPECT (r2d2 inspect | r2d2 inspect fmt/121 | r2d2 inspect usr/local/mysig.gob | r2d2 inspect 10)
+	inspect        = flag.NewFlagSet("inspect", flag.ExitOnError)
+	inspectHome    = inspect.String("home", config.Home(), "override the default home directory")
+	inspectReports = inspect.String("reports", config.Reports(), "set path for Pronom reports directory")
 )
 
 func savereps() error {
@@ -46,23 +61,19 @@ func savereps() error {
 	if err != nil {
 		err = os.Mkdir(config.Reports(), os.ModePerm)
 		if err != nil {
-			log.Fatal(err)
+			return fmt.Errorf("R2D2: error making reports directory")
 		}
 	}
 	file.Close()
 	errs := pronom.SaveReports()
-	for _, e := range errs {
-		fmt.Print(e)
-	}
 	if len(errs) > 0 {
-		return fmt.Errorf("Errors saving reports to disk")
+		return fmt.Errorf("R2D2: errors saving reports to disk")
 	}
 	return nil
 }
 
-func makegob() error {
-	s := siegfried.New()
-	p, err := pronom.New()
+func makegob(s *siegfried.Siegfried, opts []config.Option) error {
+	p, err := pronom.New(opts...)
 	if err != nil {
 		return err
 	}
@@ -156,24 +167,124 @@ func viewSig(f string) error {
 	return nil
 }
 
-func main() {
-	flag.Parse()
+func buildOptions() []config.Option {
+	opts := []config.Option{}
+	if *home != config.Home() {
+		opts = append(opts, config.SetHome(*home))
+	}
+	if *droid != config.Droid() {
+		opts = append(opts, config.SetDroid(*droid))
+	}
+	if *container != config.Container() {
+		opts = append(opts, config.SetContainer(*container))
+	}
+	if *reports != config.Reports() {
+		opts = append(opts, config.SetReports(*reports))
+	}
+	if *name != config.Name() {
+		opts = append(opts, config.SetName(*name))
+	}
+	if *details != config.Details() {
+		opts = append(opts, config.SetDetails(*details))
+	}
+	if *extend != "" {
+		opts = append(opts, config.SetExtend(*extend))
+	}
+	if *bof != 0 {
+		opts = append(opts, config.SetBOF(*bof))
+	}
+	if *eof != 0 {
+		opts = append(opts, config.SetEOF(*eof))
+	}
+	if *noeof {
+		opts = append(opts, config.SetNoEOF())
+	}
+	if *nopriority {
+		opts = append(opts, config.SetNoPriority())
+	}
+	if *nocontainer {
+		opts = append(opts, config.SetNoContainer())
+	}
+	return opts
+}
 
-	config.SetHarvestTimeOut(*timeout)
+func setHarvestOptions() {
+	if *harvestHome != config.Home() {
+		config.SetHome(*harvestHome)()
+	}
+	if *harvestDroid != config.Droid() {
+		config.SetDroid(*harvestDroid)()
+	}
+	if *harvestReports != config.Reports() {
+		config.SetReports(*harvestReports)()
+	}
+	if *timeout != htimeout {
+		config.SetHarvestTimeout(*timeout)
+	}
+}
+
+func setInspectOptions() {
+	if *inspectHome != config.Home() {
+		config.SetHome(*inspectHome)()
+	}
+	if *inspectReports != config.Reports() {
+		config.SetReports(*inspectReports)()
+	}
+}
+
+var usage = `
+Usage
+   r2d2 build 
+   r2d2 add -name version76 
+   r2d2 harvest
+   r2d2 inspect 
+`
+
+func main() {
 	var err error
-	switch {
-	case *harvest:
-		err = savereps()
-	case *build != "false":
-		err = makegob()
-	case *inspect:
-		err = inspectPronom()
-	case *view != "":
-		err = viewSig(*view)
-	case *blame > -1:
-		err = blameSig(*blame)
+	switch os.Args[1] {
+	case "build":
+		err = build.Parse(os.Args[2:])
+		if err == nil {
+			if build.Arg(0) != "" {
+				config.SetSignature(build.Arg(0))
+			}
+			s := siegfried.New()
+			err = makegob(s, buildOptions())
+		}
+	case "add":
+		err = build.Parse(os.Args[2:])
+		if err == nil {
+			if build.Arg(0) != "" {
+				config.SetSignature(build.Arg(0))
+			}
+			var s *siegfried.Siegfried
+			s, err = siegfried.Load(config.Signature())
+			if err == nil {
+				err = makegob(s, buildOptions())
+			}
+		}
+	case "harvest":
+		err = harvest.Parse(os.Args[2:])
+		if err == nil {
+			setHarvestOptions()
+			err = savereps()
+		}
+	case "inspect":
+		err = inspect.Parse(os.Args[2:])
+		if err == nil {
+			setInspectOptions()
+			switch inspect.Arg(0) {
+			case "":
+				fmt.Println("almost there")
+			}
+
+		}
+	default:
+		log.Fatal(usage)
 	}
 	if err != nil {
 		log.Fatal(err)
 	}
+	os.Exit(0)
 }

@@ -28,6 +28,7 @@ var pronom = struct {
 	droid            string // name of droid file e.g. DROID_SignatureFile_V78.xml
 	container        string // e.g. container-signature-19770502.xml
 	reports          string // directory where PRONOM reports are stored
+	extend           []string
 	harvestURL       string
 	harvestTimeout   time.Duration
 	harvestTransport *http.Transport
@@ -131,6 +132,18 @@ func Reports() string {
 	return pronom.reports
 }
 
+func Extend() []string {
+	ret := make([]string, len(pronom.extend))
+	for i, v := range pronom.extend {
+		if filepath.Dir(v) == "." {
+			ret[i] = filepath.Join(Reports(), v)
+		} else {
+			ret[i] = v
+		}
+	}
+	return ret
+}
+
 func HarvestOptions() (string, time.Duration, *http.Transport) {
 	return pronom.harvestURL, pronom.harvestTimeout, pronom.harvestTransport
 }
@@ -158,9 +171,16 @@ func SetReports(r string) func() private {
 	}
 }
 
+func SetExtend(e string) func() private {
+	return func() private {
+		pronom.extend = strings.Split(e, ",")
+		return private{}
+	}
+}
+
 // unlike other setters, these are only relevant in the r2d2 tool so can't be converted to the Option type
 
-func SetHarvestTimeOut(d time.Duration) {
+func SetHarvestTimeout(d time.Duration) {
 	pronom.harvestTimeout = d
 }
 

@@ -22,10 +22,13 @@ import (
 // PRONOM Report
 
 type Report struct {
-	XMLName     xml.Name        `xml:"PRONOM-Report"`
-	Description string          `xml:"report_format_detail>FileFormat>FormatDescription"`
-	Signatures  []Signature     `xml:"report_format_detail>FileFormat>InternalSignature"`
-	Relations   []RelatedFormat `xml:"report_format_detail>FileFormat>RelatedFormat"`
+	XMLName     xml.Name           `xml:"PRONOM-Report"`
+	Name        string             `xml:"report_format_detail>FileFormat>FormatName"`
+	Description string             `xml:"report_format_detail>FileFormat>FormatDescription"`
+	Identifiers []FormatIdentifier `xml:"report_format_detail>FileFormat>FormatIdentifier"`
+	Signatures  []Signature        `xml:"report_format_detail>FileFormat>InternalSignature"`
+	Extensions  []string           `xml:"report_format_detail>FileFormat>ExternalSignature>Signature"`
+	Relations   []RelatedFormat    `xml:"report_format_detail>FileFormat>RelatedFormat"`
 }
 
 type Signature struct {
@@ -68,4 +71,9 @@ func (bs ByteSequence) String() string {
 type RelatedFormat struct {
 	Type string `xml:"RelationshipType"`
 	ID   int    `xml:"RelatedFormatID"`
+}
+
+type FormatIdentifier struct {
+	Type string `xml:"IdentifierType"`
+	ID   string `xml:"Identifier"`
 }
