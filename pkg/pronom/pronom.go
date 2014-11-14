@@ -92,15 +92,16 @@ func (p *pronom) add(m core.Matcher) error {
 	case containermatcher.Matcher:
 		return p.contMatcher(m)
 	case *bytematcher.Matcher:
-		sigs, err := p.Parse()
-		if err != nil {
-			return err
-		}
-		l, err := m.Add(bytematcher.SignatureSet(sigs), p.ps.List(p.BPuids))
-		if err != nil {
-			return err
-		}
-		p.BStart = l - len(p.BPuids)
+		/*
+			sigs, _, _, _, _, _, err := p.Parse()
+			if err != nil {
+				return err
+			}
+			l, err := m.Add(bytematcher.SignatureSet(sigs), p.ps.List(p.BPuids))
+			if err != nil {
+				return err
+			}
+			p.BStart = l - len(p.BPuids)*/
 	}
 	return nil
 }

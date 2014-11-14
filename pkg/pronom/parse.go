@@ -71,25 +71,8 @@ func ParseDroid(d *mappings.Droid, ids map[int]string) ([]frames.Signature, []st
 }
 
 // Returns slice of bytematcher signatures, slice of bytematcher puids, slice of extensions, slice of extensionmatcher puids, a priority map, and a format info map
-func ParseReport(r *mappings.Report) ([]frames.Signature, []string, [][]string, []string, priority.Map, map[string]FormatInfo) {
+func ParseReports(r *mappings.Report) ([]frames.Signature, []string, [][]string, []string, priority.Map, map[string]FormatInfo) {
 	return nil, nil, nil, nil, nil, nil
-}
-
-func (p *pronom) Parse() ([]frames.Signature, error) {
-	sigs := make([]frames.Signature, 0, 700)
-	/*
-		for _, f := range p.droid.FileFormats {
-			puid := f.Puid
-			for _, s := range f.Signatures {
-				sig, err := parseSig(puid, s)
-				if err != nil {
-					return nil, err
-				}
-				sigs = append(sigs, sig)
-			}
-		}
-	*/
-	return sigs, nil
 }
 
 func ParsePuid(f string) ([]frames.Signature, error) {
@@ -104,6 +87,24 @@ func ParsePuid(f string) ([]frames.Signature, error) {
 	sigs := make([]frames.Signature, len(rep.Signatures))
 	for i, v := range rep.Signatures {
 		s, err := parseSig(f, v)
+		if err != nil {
+			return nil, err
+		}
+		sigs[i] = s
+	}
+	return sigs, nil
+}
+
+func ParseReport(rep *mappings.Report) ([]frames.Signature, error) {
+	var puid string
+	for _, id := range rep.Identifiers {
+		if id.Type == "PUID" {
+			puid = id.ID
+		}
+	}
+	sigs := make([]frames.Signature, len(rep.Signatures))
+	for i, v := range rep.Signatures {
+		s, err := parseSig(puid, v)
 		if err != nil {
 			return nil, err
 		}
