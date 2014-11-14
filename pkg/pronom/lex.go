@@ -169,6 +169,11 @@ func conLex(name, input string) *lexer {
 	return lex(name, input, conText)
 }
 
+// lexer for DROID signature files
+func droidLex(name, input string) *lexer {
+	return lex(name, input, droidText)
+}
+
 // lex creates a new scanner for the input string.
 func lex(name, input string, start stateFn) *lexer {
 	l := &lexer{
@@ -409,7 +414,7 @@ func sigInsideWild(l *lexer) stateFn {
 	return l.errorf("expecting a closing bracket, got %q", r)
 }
 
-// container lex states
+// Container signature lex states
 
 func conText(l *lexer) stateFn {
 	l.acceptRun(hexadecimal)
@@ -455,4 +460,81 @@ func conInsideQuote(l *lexer) stateFn {
 		return conText
 	}
 	return l.errorf("expected closing quote, reached end of string")
+}
+
+// DROID signature lexer
+
+func droidText(l *lexer) stateFn {
+	l.acceptRun(hexadecimal)
+	if l.pos > l.start {
+		l.emit(itemText)
+	}
+	r := l.next()
+	switch r {
+	case eof:
+		l.emit(itemEOF)
+		return nil
+	}
+	return l.errorf("encountered invalid character %q", r)
+}
+
+func droidLeftBracket(l *lexer) stateFn {
+	if l.peek() == not {
+		l.next()
+		l.emit(itemNot)
+		return droidNot
+	}
+	return droidInsideRange
+}
+
+func droidNot(l *lexer) stateFn {
+	l.acceptRun(hexadecimal)
+	if l.peek() == colon {
+		if l.pos > l.start {
+			l.emit(itemNotRangeStart)
+		}
+		l.next()
+		l.emit(itemColon)
+		l.acceptRun(hexadecimal)
+		if l.pos > l.start {
+			l.emit(itemNotRangeEnd)
+		}
+	} else {
+		if l.pos > l.start {
+			l.emit(itemNotText)
+		}
+	}
+	r := l.next()
+	if r == rightBracket {
+		l.emit(itemBracketRight)
+		return droidText
+	}
+	return l.errorf("expecting a closing bracket, got %q", r)
+}
+
+func droidInsideRange(l *lexer) stateFn {
+	l.acceptRun(hexadecimal)
+	if l.peek() == colon {
+		if l.pos > l.start {
+			l.emit(itemRangeStart)
+		} else {
+			return l.errorf("missing start value for range")
+		}
+		l.next()
+		l.emit(itemColon)
+	} else {
+		return l.errorf("expecting a colon, got %q", l.peek())
+	}
+	l.acceptRun(hexadecimal)
+	if l.pos > l.start {
+		l.emit(itemRangeEnd)
+	} else {
+		return l.errorf("missing end value for range")
+	}
+	r := l.next()
+	if r == rightBracket {
+		l.emit(itemBracketRight)
+		return droidText
+	}
+	return l.errorf("expecting a closing bracket, got %q", r)
 }

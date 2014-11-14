@@ -16,12 +16,14 @@ package pronom
 
 import (
 	"encoding/hex"
+	"encoding/xml"
 	"errors"
 	"strconv"
 	"strings"
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
+	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/pronom/mappings"
 )
 
@@ -30,6 +32,46 @@ const (
 	eofstring = "Absolute from EOF"
 	varstring = "Variable"
 )
+
+// Returns slice of bytematcher signatures, slice of bytematcher puids, slice of extensions, slice of extensionmatcher puids, a priority map, and a format info map
+func ParseDroid(d *mappings.Droid, ids map[int]string) ([]frames.Signature, []string, [][]string, []string, priority.Map, map[string]FormatInfo, error) {
+	sigs := make([]frames.Signature, 0, 700)
+	bpuids := make([]string, 0, 700)
+	exts := make([][]string, 0, 700)
+	epuids := make([]string, 0, 700)
+	pMap := make(priority.Map)
+	infos := make(map[string]FormatInfo)
+	for _, f := range d.FileFormats {
+		// Bytematcher & bytematcher puids
+		puid := f.Puid
+		for _, s := range f.Signatures {
+			sig, err := parseSig(puid, s)
+			if err != nil {
+				return nil, nil, nil, nil, nil, nil, err
+			}
+			sigs = append(sigs, sig)
+			bpuids = append(bpuids, puid)
+		}
+		// Extension & extensionmatcher puids
+		if len(f.Extensions) > 0 {
+			exts = append(exts, f.Extensions)
+			epuids = append(epuids, puid)
+		}
+		// Priorities
+		for _, v := range f.Priorities {
+			subordinate := ids[v]
+			pMap.Add(subordinate, puid)
+		}
+		// Format infos
+		infos[f.Puid] = FormatInfo{f.Name, f.Version, f.MIMEType}
+	}
+	return sigs, bpuids, exts, epuids, pMap, infos, nil
+}
+
+// Returns slice of bytematcher signatures, slice of bytematcher puids, slice of extensions, slice of extensionmatcher puids, a priority map, and a format info map
+func ParseReport(r *mappings.Report) ([]frames.Signature, []string, [][]string, []string, priority.Map, map[string]FormatInfo) {
+	return nil, nil, nil, nil, nil, nil
+}
 
 func (p *pronom) Parse() ([]frames.Signature, error) {
 	sigs := make([]frames.Signature, 0, 700)
@@ -42,6 +84,26 @@ func (p *pronom) Parse() ([]frames.Signature, error) {
 			}
 			sigs = append(sigs, sig)
 		}
+	}
+	return sigs, nil
+}
+
+func ParsePuid(f string) ([]frames.Signature, error) {
+	buf, err := get(f)
+	if err != nil {
+		return nil, err
+	}
+	rep := new(mappings.Report)
+	if err = xml.Unmarshal(buf, rep); err != nil {
+		return nil, err
+	}
+	sigs := make([]frames.Signature, len(rep.Signatures))
+	for i, v := range rep.Signatures {
+		s, err := parseSig(f, v)
+		if err != nil {
+			return nil, err
+		}
+		sigs[i] = s
 	}
 	return sigs, nil
 }
@@ -370,3 +432,314 @@ func parseContainerSig(puid string, s mappings.InternalSignature) (frames.Signat
 	}
 	return sig, nil
 }
+
+func parseDroidSeq(puid, seq string, eof false) ([]frames.Frame, error) {
+	typ := frames.PREV
+	if eof {
+		typ = frames.SUCC
+	}
+	frames := make([]frames.Frame, 0, 10)
+	var rangeStart string
+	l := droidLex(puid, seq)
+	for i := l.nextItem(); i.typ != itemEOF; i = l.nextItem() {
+		switch i.typ {
+		default:
+			return nil, errors.New(i.String())
+		case itemError:
+			return nil, errors.New(i.String())
+		// parse simple types
+		case itemText:
+			frames = append(frames, frames.NewFrame(typ, patterns.Sequence(decodeHex(i.val)), 0, 0))
+		case itemNotText:
+			frames = append(frames, frames.NewFrame(typ, NotSequence(decodeHex(i.val)), 0, 0))
+		// parse range types
+		case itemRangeStart, itemNotRangeStart:
+			rangeStart = i.val
+		case itemRangeEnd:
+			frames = append(frames, frames.NewFrame(typ, Range{decodeHex(rangeStart), decodeHex(i.val)}, 0, 0))
+		case itemNotRangeEnd:
+			frames = append(frames, frames.NewFrame(typ, NotRange{decodeHex(rangeStart), decodeHex(i.val)}, 0, 0))
+		}
+	}
+	return frames, nil
+}
+
+func groupFragments(puid string, fs []Fragment) ([][]Fragment, error) {
+	var min, max string
+	var maxPos int
+	for _, f := range fs {
+		if f.Position == 0 {
+			return nil, errors.New("Pronom: encountered fragment without a position, puid " + puid)
+		}
+		if f.Position > maxPos {
+			maxPos = f.Position
+		}
+	}
+	ret := make([][]Fragment, maxPos)
+	for _, f := range fs {
+		ret[f.Position] = append(ret[f.Position], f)
+	}
+	for _, r := range ret {
+		max, min := r[0].MaxOffset, r[0].MinOffset
+		for _, v := range r {
+			if v.MaxOffset != max || v.MinOffset != min {
+				return nil, errors.New("Pronom: encountered fragments at same positions with different offsets, puid " + puid)
+			}
+		}
+	}
+	return ret, nil
+}
+
+func appendFragments(puid string, f []frames.Frame, frags []Fragment, left, eof bool) ([]frames.Frame, err) {
+	fs, err := groupFragments(puid, frags)
+	if err != nil {
+		return nil, err
+	}
+	typ := frames.PREV
+	if eof {
+		typ = frames.SUCC
+	}
+	var choice patterns.Choice
+	offs := make([][2]int, len(fs))
+	nfs := make([][]frames.Frame, len(fs))
+	l := len(f)
+	for i, v := range fs {
+		if len(v) > 1 {
+			choice = patterns.Choice{}
+			for _, c := range v {
+				pats, err := parseDroidSeq(puid, c.Value, eof)
+				if pats > 1 {
+					return nil, errors.New("Pronom: encountered multiple patterns within a single choice, puid " + puid)
+				}
+				choice = append(choice, pats[0].Pat())
+			}
+			nfs[i] = []frames.Frame{frames.New(typ, choice, 0, 0)}
+			l++ // only one choice added
+		} else {
+			pats, err := parseDroidSeq(puid, v[0].Value, eof)
+			if err != nil {
+				return nil, err
+			}
+			nfs[i] = pats
+			l += len(pats)
+		}
+		min, err := decodeNum(v[0].MinOffset)
+		if err != nil {
+			return nil, err
+		}
+		var max int
+		if v[0].MaxOffset == "" {
+			max = -1
+		} else {
+			max, err = decodeNum(v[0].MaxOffset)
+			if err != nil {
+				return nil, err
+			}
+		}
+		offs[i] = [2]int{min, max}
+	}
+	// Now make the frames by adding in offset information (if left fragments, this needs to be taken from their neighbour)
+	if left {
+
+	} else {
+
+	}
+
+	ret := make([]frames.Frame, l)
+	return ret, nil
+}
+
+// Container signatures are simpler than regular Droid signatures
+// No BOF/EOF/VAR - all are BOF.
+// Min and Max Offsets usually provided. Lack of a Max Offset implies a Variable sequence.
+// No wildcards within sequences: multiple subsequences with new offsets are used instead.
+func parseDroidSig(puid string, s mappings.InternalSignature) (frames.Signature, error) {
+	sig := make(frames.Signature, 0, 1)
+	// Return an error for multiple byte sequences
+	bs := s.ByteSequences[0]
+	// Return an error for non-BOF sequence
+	if bs.Reference != "" && bs.Reference != "BOFoffset" {
+		return nil, errors.New("Pronom parse error: unexpected reference in container sig for puid " + puid + "; bad reference is " + bs.Reference)
+	}
+	var prevPos int
+	for i, sub := range bs.SubSequences {
+		// Return an error if the positions don't increment.
+		if sub.Position < prevPos {
+			return nil, errors.New("Pronom parse error: container sub-sequences out of order for puid " + puid)
+		}
+		prevPos = sub.Position
+		var typ frames.OffType
+		if i == 0 {
+			typ = frames.BOF
+		} else {
+			typ = frames.PREV
+		}
+		var min, max int
+		min, _ = decodeNum(sub.SubSeqMinOffset)
+		if sub.SubSeqMaxOffset == "" {
+			max = -1
+		} else {
+			max, _ = decodeNum(sub.SubSeqMaxOffset)
+		}
+		pats, err := parseContainerSeq(puid, sub.Sequence)
+		if err != nil {
+			return nil, err
+		}
+		sig = append(sig, frames.NewFrame(typ, pats[0], min, max))
+		if len(pats) > 1 {
+			for _, v := range pats[1:] {
+				sig = append(sig, frames.NewFrame(frames.PREV, v, 0, 0))
+			}
+		}
+		if sub.RightFragment.Value != "" {
+			min, _ = decodeNum(sub.RightFragment.MinOffset)
+			if sub.RightFragment.MinOffset == "" {
+				max = -1
+			} else {
+				max, _ = decodeNum(sub.RightFragment.MaxOffset)
+			}
+			fragpats, err := parseContainerSeq(puid, sub.RightFragment.Value)
+			if err != nil {
+				return nil, err
+			}
+			sig = append(sig, frames.NewFrame(frames.PREV, fragpats[0], min, max))
+			if len(fragpats) > 1 {
+				for _, v := range fragpats[1:] {
+					sig = append(sig, frames.NewFrame(frames.PREV, v, 0, 0))
+				}
+			}
+		}
+
+	}
+	return sig, nil
+}
+
+/*
+7B5C7274(66|6631)5C(616E7369|6D6163|7063|706361)5C616E7369637067{3-*}5C737473686664626368{1-4}5C73747368666C6F6368{1-4}5C737473686668696368{1-4}5C73747368666269
+
+ <InternalSignature ID="26" Specificity="Specific">
+            <ByteSequence Reference="BOFoffset">
+                <SubSequence MinFragLength="8" Position="1"
+                    SubSeqMaxOffset="0" SubSeqMinOffset="0">
+                    <Sequence>5C616E7369637067</Sequence>
+                    <DefaultShift>9</DefaultShift>
+                    <Shift Byte="5C">8</Shift>
+                    <Shift Byte="61">7</Shift>
+                    <Shift Byte="63">3</Shift>
+                    <Shift Byte="67">1</Shift>
+                    <Shift Byte="69">4</Shift>
+                    <Shift Byte="6E">6</Shift>
+                    <Shift Byte="70">2</Shift>
+                    <Shift Byte="73">5</Shift>
+                    <LeftFragment MaxOffset="0" MinOffset="0" Position="1">616E7369</LeftFragment>
+                    <LeftFragment MaxOffset="0" MinOffset="0" Position="1">6D6163</LeftFragment>
+                    <LeftFragment MaxOffset="0" MinOffset="0" Position="1">7063</LeftFragment>
+                    <LeftFragment MaxOffset="0" MinOffset="0" Position="1">706361</LeftFragment>
+                    <LeftFragment MaxOffset="0" MinOffset="0" Position="2">5C</LeftFragment>
+                    <LeftFragment MaxOffset="0" MinOffset="0" Position="3">66</LeftFragment>
+                    <LeftFragment MaxOffset="0" MinOffset="0" Position="3">6631</LeftFragment>
+                    <LeftFragment MaxOffset="0" MinOffset="0" Position="4">7B5C7274</LeftFragment>
+                </SubSequence>
+                <SubSequence MinFragLength="0" Position="2" SubSeqMinOffset="3">
+                    <Sequence>5C737473686664626368</Sequence>
+                    <DefaultShift>11</DefaultShift>
+                    <Shift Byte="5C">10</Shift>
+                    <Shift Byte="62">3</Shift>
+                    <Shift Byte="63">2</Shift>
+                    <Shift Byte="64">4</Shift>
+                    <Shift Byte="66">5</Shift>
+                    <Shift Byte="68">1</Shift>
+                    <Shift Byte="73">7</Shift>
+                    <Shift Byte="74">8</Shift>
+                    <RightFragment MaxOffset="4" MinOffset="1" Position="1">5C73747368666C6F6368</RightFragment>
+                    <RightFragment MaxOffset="4" MinOffset="1" Position="2">5C737473686668696368</RightFragment>
+                    <RightFragment MaxOffset="4" MinOffset="1" Position="3">5C73747368666269</RightFragment>
+                </SubSequence>
+            </ByteSequence>
+
+
+ 	3C2F(48544D4C|68746D6C|424F4459|626F6479)3E
+
+            <InternalSignature ID="41" Specificity="Specific">
+            <ByteSequence Reference="BOFoffset">
+                <SubSequence MinFragLength="0" Position="1"
+                    SubSeqMaxOffset="1024" SubSeqMinOffset="0">
+                    <Sequence>3C</Sequence>
+                    <DefaultShift>2</DefaultShift>
+                    <Shift Byte="3C">1</Shift>
+                    <RightFragment MaxOffset="0" MinOffset="0" Position="1">48544D4C</RightFragment>
+                    <RightFragment MaxOffset="0" MinOffset="0" Position="1">68746D6C</RightFragment>
+                </SubSequence>
+            </ByteSequence>
+            <ByteSequence Reference="EOFoffset">
+                <SubSequence MinFragLength="5" Position="1"
+                    SubSeqMaxOffset="1024" SubSeqMinOffset="0">
+                    <Sequence>3C2F</Sequence>
+                    <DefaultShift>-3</DefaultShift>
+                    <Shift Byte="2F">-2</Shift>
+                    <Shift Byte="3C">-1</Shift>
+                    <RightFragment MaxOffset="0" MinOffset="0" Position="1">424F4459</RightFragment>
+                    <RightFragment MaxOffset="0" MinOffset="0" Position="1">48544D4C</RightFragment>
+                    <RightFragment MaxOffset="0" MinOffset="0" Position="1">626F6479</RightFragment>
+                    <RightFragment MaxOffset="0" MinOffset="0" Position="1">68746D6C</RightFragment>
+                    <RightFragment MaxOffset="0" MinOffset="0" Position="2">3E</RightFragment>
+                </SubSequence>
+            </ByteSequence>
+        </InternalSignature>
+
+        <InternalSignature ID="105" Specificity="Specific">
+            <ByteSequence>
+                <SubSequence MinFragLength="0" Position="1" SubSeqMinOffset="0">
+                    <Sequence>300D0A53454354494F4E0D0A2020320D0A4845414445520D0A</Sequence>
+                    <DefaultShift>26</DefaultShift>
+                    <Shift Byte="0A">1</Shift>
+                    <Shift Byte="0D">2</Shift>
+                    <Shift Byte="20">12</Shift>
+                    <Shift Byte="30">25</Shift>
+                    <Shift Byte="32">11</Shift>
+                    <Shift Byte="41">6</Shift>
+                    <Shift Byte="43">20</Shift>
+                    <Shift Byte="44">5</Shift>
+                    <Shift Byte="45">4</Shift>
+                    <Shift Byte="48">8</Shift>
+                    <Shift Byte="49">18</Shift>
+                    <Shift Byte="4E">16</Shift>
+                    <Shift Byte="4F">17</Shift>
+                    <Shift Byte="52">3</Shift>
+                    <Shift Byte="53">22</Shift>
+                    <Shift Byte="54">19</Shift>
+                </SubSequence>
+                <SubSequence MinFragLength="0" Position="2" SubSeqMinOffset="0">
+                    <Sequence>390D0A24414341445645520D0A2020310D0A4143</Sequence>
+                    <DefaultShift>21</DefaultShift>
+                    <Shift Byte="0A">3</Shift>
+                    <Shift Byte="0D">4</Shift>
+                    <Shift Byte="20">6</Shift>
+                    <Shift Byte="24">17</Shift>
+                    <Shift Byte="31">5</Shift>
+                    <Shift Byte="39">20</Shift>
+                    <Shift Byte="41">2</Shift>
+                    <Shift Byte="43">1</Shift>
+                    <Shift Byte="44">13</Shift>
+                    <Shift Byte="45">11</Shift>
+                    <Shift Byte="52">10</Shift>
+                    <Shift Byte="56">12</Shift>
+                    <RightFragment MaxOffset="0" MinOffset="0" Position="1">31303031</RightFragment>
+                    <RightFragment MaxOffset="0" MinOffset="0" Position="1">322E3231</RightFragment>
+                    <RightFragment MaxOffset="0" MinOffset="0" Position="1">322E3232</RightFragment>
+                    <RightFragment MaxOffset="0" MinOffset="0" Position="2">0D0A</RightFragment>
+                </SubSequence>
+                <SubSequence MinFragLength="0" Position="3" SubSeqMinOffset="0">
+                    <Sequence>300D0A454E445345430D0A</Sequence>
+                    <DefaultShift>12</DefaultShift>
+                    <Shift Byte="0A">1</Shift>
+                    <Shift Byte="0D">2</Shift>
+                    <Shift Byte="30">11</Shift>
+                    <Shift Byte="43">3</Shift>
+                    <Shift Byte="44">6</Shift>
+                    <Shift Byte="45">4</Shift>
+                    <Shift Byte="4E">7</Shift>
+                    <Shift Byte="53">5</Shift>
+                </SubSequence>
+            </ByteSequence>
+*/

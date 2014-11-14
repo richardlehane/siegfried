@@ -41,6 +41,7 @@ type pronom struct {
 	*Identifier
 	droid     *Droid
 	container *Container
+	reports   []*Report
 	puids     map[string]int // map of puids to File Format indexes
 	ids       map[int]string // map of droid FileFormatIDs to puids
 	ps        priority.Map
@@ -75,6 +76,7 @@ func (p *pronom) identifier() *Identifier {
 	i := &Identifier{p: p}
 	i.Name = config.Name()
 	i.Details = config.Details()
+	i.NoPriority = config.NoPriority()
 	i.Infos = p.GetInfos()
 	i.BPuids, i.PuidsB = p.GetPuids()
 	p.Identifier = i
@@ -140,25 +142,6 @@ func (p pronom) GetPuids() ([]string, map[string][]int) {
 	return puids, bids
 }
 
-func ParsePuid(f string) ([]frames.Signature, error) {
-	buf, err := get(f)
-	if err != nil {
-		return nil, err
-	}
-	rep := new(Report)
-	if err = xml.Unmarshal(buf, rep); err != nil {
-		return nil, err
-	}
-	sigs := make([]frames.Signature, len(rep.Signatures))
-	for i, v := range rep.Signatures {
-		s, err := parseSig(f, v)
-		if err != nil {
-			return nil, err
-		}
-		sigs[i] = s
-	}
-	return sigs, nil
-}
 func (p pronom) extMatcher(m core.Matcher) error {
 	p.EPuids = make([]string, len(p.droid.FileFormats))
 	es := make(extensionmatcher.SignatureSet, len(p.droid.FileFormats))
@@ -222,7 +205,7 @@ func (p pronom) contMatcher(m core.Matcher) error {
 }
 
 // SaveReports fetches pronom reports listed in the given droid file.
-func SaveReports() []error {
+func FetchReports() []error {
 	p := new(pronom)
 	if err := p.setDroid(); err != nil {
 		return []error{err}
@@ -235,7 +218,7 @@ func SaveReports() []error {
 }
 
 // SaveReport fetches and saves a given puid from the base URL and writes to disk at the given path.
-func SaveReport(puid, url, path string) error {
+func FetchReport(puid, url, path string) error {
 	return save(puid, url, path)
 }
 
@@ -260,16 +243,16 @@ func (p *pronom) setContainers() error {
 	return openXML(config.Container(), p.container)
 }
 
-// These reports are either fetched over http or from a local directory, depending on whether the path given is prefixed with 'http'.
 func (p *pronom) setReports() []error {
+	p.reports = make([]*Report, len(p.puids))
 	apply := func(p *pronom, puid string) error {
 		idx := p.puids[puid]
 		buf, err := get(puid)
 		if err != nil {
 			return err
 		}
-		p.droid.FileFormats[idx].Report = new(Report)
-		return xml.Unmarshal(buf, p.droid.FileFormats[idx].Report)
+		p.reports[idx] = &Report{}
+		return xml.Unmarshal(buf, p.reports[idx])
 	}
 	return p.applyAll(apply)
 }

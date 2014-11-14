@@ -16,6 +16,7 @@ package config
 
 import (
 	"fmt"
+	"strings"
 )
 
 // Name of the default identifier as well as settings for how a new identifer will be built
@@ -61,6 +62,9 @@ func Details() string {
 	}
 	if identifier.noPriority {
 		str += "; no priorities"
+	}
+	if len(pronom.extend) > 0 {
+		str += "; extensions: " + strings.Join(pronom.extend, ", ")
 	}
 	return str
 }

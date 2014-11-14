@@ -34,10 +34,11 @@ type FormatInfo struct {
 }
 
 type Identifier struct {
-	p       *pronom
-	Name    string
-	Details string
-	Infos   map[string]FormatInfo
+	p          *pronom
+	Name       string
+	Details    string
+	NoPriority bool // was noPriority set when built?
+	Infos      map[string]FormatInfo
 
 	EStart int
 	EPuids []string // slice of puids that corresponds to the extension matcher's int signatures
@@ -118,13 +119,17 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 	case core.ContainerMatcher:
 		// add zip default
 		if res.Index() < 0 {
-			r.cscore *= 1.1
+			if !r.NoPriority {
+				r.cscore *= 1.1
+			}
 			r.ids = add(r.ids, r.Name, "x-fmt/263", r.Infos["x-fmt/263"], res.Basis(), r.cscore) // not great to have this hardcoded
 			return false
 		}
 		if res.Index() >= r.CStart && res.Index() < r.CStart+len(r.CPuids) {
 			idx := res.Index() - r.CStart
-			r.cscore *= 1.1
+			if !r.NoPriority {
+				r.cscore *= 1.1
+			}
 			basis := res.Basis()
 			p, t := place(idx, r.CPuids)
 			if t > 1 {
@@ -138,7 +143,9 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 	case core.ByteMatcher:
 		if res.Index() >= r.BStart && res.Index() < r.BStart+len(r.BPuids) {
 			idx := res.Index() - r.BStart
-			r.cscore *= 1.1
+			if !r.NoPriority {
+				r.cscore *= 1.1
+			}
 			basis := res.Basis()
 			p, t := place(idx, r.BPuids)
 			if t > 1 {
@@ -177,7 +184,11 @@ func (r *Recorder) Report(res chan core.Identification) {
 		conf := r.ids[0].confidence
 		// if we've only got extension matches, check if those matches are ruled out by lack of byte match
 		// add warnings too
-		if conf == 0.1 {
+		if r.NoPriority {
+			for i := range r.ids {
+				r.ids[i].warning = "no priority set for this identifier"
+			}
+		} else if conf == 0.1 {
 			nids := make([]Identification, 0, len(r.ids))
 			for _, v := range r.ids {
 				if _, ok := r.PuidsB[v.puid]; !ok {

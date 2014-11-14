@@ -34,32 +34,7 @@ type ContainerSignature struct {
 
 type File struct {
 	Path      string
-	Signature InternalSignature `xml:"BinarySignatures>InternalSignatureCollection>InternalSignature"`
-}
-
-type InternalSignature struct {
-	Id            int       `xml:"ID,attr"`
-	Specificity   string    `xml:",attr"`
-	ByteSequences []ByteSeq `xml:"ByteSequence"`
-}
-
-type ByteSeq struct {
-	Reference    string        `xml:"Reference,attr"`
-	SubSequences []SubSequence `xml:"SubSequence"`
-}
-
-type SubSequence struct {
-	Position        int    `xml:",attr"`
-	SubSeqMinOffset string `xml:",attr"` // and empty int values are unmarshalled to 0
-	SubSeqMaxOffset string `xml:",attr"` // uses string rather than int because value might be empty
-	Sequence        string
-	RightFragment   Fragment `xml:"RightFragment"`
-}
-
-type Fragment struct {
-	Value     string `xml:",chardata"`
-	MinOffset string `xml:",attr"`
-	MaxOffset string `xml:",attr"`
+	Signature InternalSignature `xml:"BinarySignatures>InternalSignatureCollection>InternalSignature"` // see Droid mapping file
 }
 
 type FormatMapping struct {

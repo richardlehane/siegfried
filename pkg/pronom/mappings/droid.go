@@ -27,6 +27,7 @@ import (
 type Droid struct {
 	XMLName     xml.Name     `xml:"FFSignatureFile"`
 	Version     int          `xml:",attr"`
+	Signatures  []Signature  `xml:"InternalSignatureCollection>InternalSignature"`
 	FileFormats []FileFormat `xml:"FileFormatCollection>FileFormat"`
 }
 
@@ -38,16 +39,42 @@ func (d Droid) String() string {
 	return buf.String()
 }
 
+type InternalSignature struct {
+	Id            int       `xml:"ID,attr"`
+	Specificity   string    `xml:",attr"`
+	ByteSequences []ByteSeq `xml:"ByteSequence"`
+}
+
+type ByteSeq struct {
+	Reference    string        `xml:"Reference,attr"`
+	SubSequences []SubSequence `xml:"SubSequence"`
+}
+
+type SubSequence struct {
+	Position        int    `xml:",attr"`
+	SubSeqMinOffset string `xml:",attr"` // and empty int values are unmarshalled to 0
+	SubSeqMaxOffset string `xml:",attr"` // uses string rather than int because value might be empty
+	Sequence        string
+	LeftFragments   []Fragment `xml:"LeftFragment"`
+	RightFragments  []Fragment `xml:"RightFragment"`
+}
+
+type Fragment struct {
+	Value     string `xml:",chardata"`
+	MinOffset string `xml:",attr"`
+	MaxOffset string `xml:",attr"`
+	Position  int    `xml:",attr"`
+}
+
 type FileFormat struct {
 	XMLName    xml.Name `xml:"FileFormat"`
-	ID         int      `xml:",attr"`
+	Id         int      `xml:",attr"`
 	Puid       string   `xml:"PUID,attr"`
 	Name       string   `xml:",attr"`
 	Version    string   `xml:",attr"`
 	MIMEType   string   `xml:",attr"`
 	Extensions []string `xml:"Extension"`
 	Priorities []int    `xml:"HasPriorityOverFileFormatID"`
-	*Report
 }
 
 func (f FileFormat) String() string {
@@ -60,13 +87,5 @@ func (f FileFormat) String() string {
 	buf := new(bytes.Buffer)
 	fmt.Fprintf(buf, "Puid: %s; Name: %s; Version: %s; Ext(s): %s\n", f.Puid, f.Name, f.Version, strings.Join(f.Extensions, ", "))
 	fmt.Fprintln(buf, f.Description)
-	for _, v := range f.Signatures {
-		fmt.Fprint(buf, "Signature\n")
-		for _, v1 := range v.ByteSequences {
-			fmt.Fprintf(buf, "Position: %s, Offset: %s, MaxOffset: %s, IndirectLoc: %s, IndirectLen: %s, Endianness: %s\n",
-				null(v1.Position), null(v1.Offset), null(v1.MaxOffset), null(v1.IndirectLoc), null(v1.IndirectLen), null(v1.Endianness))
-			fmt.Fprintln(buf, v1.Hex)
-		}
-	}
 	return buf.String()
 }
