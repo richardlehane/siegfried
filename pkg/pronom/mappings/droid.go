@@ -74,18 +74,10 @@ type FileFormat struct {
 	Version    string   `xml:",attr"`
 	MIMEType   string   `xml:",attr"`
 	Extensions []string `xml:"Extension"`
+	Signatures []int    `xml:"InternalSignatureID"`
 	Priorities []int    `xml:"HasPriorityOverFileFormatID"`
 }
 
 func (f FileFormat) String() string {
-	null := func(s string) string {
-		if strings.TrimSpace(s) == "" {
-			return "NULL"
-		}
-		return s
-	}
-	buf := new(bytes.Buffer)
-	fmt.Fprintf(buf, "Puid: %s; Name: %s; Version: %s; Ext(s): %s\n", f.Puid, f.Name, f.Version, strings.Join(f.Extensions, ", "))
-	fmt.Fprintln(buf, f.Description)
-	return buf.String()
+	return fmt.Sprintf("Puid: %s; Name: %s; Version: %s; Ext(s): %s\n", f.Puid, f.Name, f.Version, strings.Join(f.Extensions, ", "))
 }

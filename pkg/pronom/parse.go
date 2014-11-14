@@ -41,30 +41,32 @@ func ParseDroid(d *mappings.Droid, ids map[int]string) ([]frames.Signature, []st
 	epuids := make([]string, 0, 700)
 	pMap := make(priority.Map)
 	infos := make(map[string]FormatInfo)
-	for _, f := range d.FileFormats {
-		// Bytematcher & bytematcher puids
-		puid := f.Puid
-		for _, s := range f.Signatures {
-			sig, err := parseSig(puid, s)
-			if err != nil {
-				return nil, nil, nil, nil, nil, nil, err
+	/*
+		for _, f := range d.FileFormats {
+			// Bytematcher & bytematcher puids
+			puid := f.Puid
+			for _, s := range f.Signatures {
+				sig, err := parseSig(puid, s)
+				if err != nil {
+					return nil, nil, nil, nil, nil, nil, err
+				}
+				sigs = append(sigs, sig)
+				bpuids = append(bpuids, puid)
 			}
-			sigs = append(sigs, sig)
-			bpuids = append(bpuids, puid)
+			// Extension & extensionmatcher puids
+			if len(f.Extensions) > 0 {
+				exts = append(exts, f.Extensions)
+				epuids = append(epuids, puid)
+			}
+			// Priorities
+			for _, v := range f.Priorities {
+				subordinate := ids[v]
+				pMap.Add(subordinate, puid)
+			}
+			// Format infos
+			infos[f.Puid] = FormatInfo{f.Name, f.Version, f.MIMEType}
 		}
-		// Extension & extensionmatcher puids
-		if len(f.Extensions) > 0 {
-			exts = append(exts, f.Extensions)
-			epuids = append(epuids, puid)
-		}
-		// Priorities
-		for _, v := range f.Priorities {
-			subordinate := ids[v]
-			pMap.Add(subordinate, puid)
-		}
-		// Format infos
-		infos[f.Puid] = FormatInfo{f.Name, f.Version, f.MIMEType}
-	}
+	*/
 	return sigs, bpuids, exts, epuids, pMap, infos, nil
 }
 
@@ -75,16 +77,18 @@ func ParseReport(r *mappings.Report) ([]frames.Signature, []string, [][]string, 
 
 func (p *pronom) Parse() ([]frames.Signature, error) {
 	sigs := make([]frames.Signature, 0, 700)
-	for _, f := range p.droid.FileFormats {
-		puid := f.Puid
-		for _, s := range f.Signatures {
-			sig, err := parseSig(puid, s)
-			if err != nil {
-				return nil, err
+	/*
+		for _, f := range p.droid.FileFormats {
+			puid := f.Puid
+			for _, s := range f.Signatures {
+				sig, err := parseSig(puid, s)
+				if err != nil {
+					return nil, err
+				}
+				sigs = append(sigs, sig)
 			}
-			sigs = append(sigs, sig)
 		}
-	}
+	*/
 	return sigs, nil
 }
 
@@ -410,14 +414,14 @@ func parseContainerSig(puid string, s mappings.InternalSignature) (frames.Signat
 				sig = append(sig, frames.NewFrame(frames.PREV, v, 0, 0))
 			}
 		}
-		if sub.RightFragment.Value != "" {
-			min, _ = decodeNum(sub.RightFragment.MinOffset)
-			if sub.RightFragment.MinOffset == "" {
+		if len(sub.RightFragments) > 0 {
+			min, _ = decodeNum(sub.RightFragments[0].MinOffset)
+			if sub.RightFragments[0].MinOffset == "" {
 				max = -1
 			} else {
-				max, _ = decodeNum(sub.RightFragment.MaxOffset)
+				max, _ = decodeNum(sub.RightFragments[0].MaxOffset)
 			}
-			fragpats, err := parseContainerSeq(puid, sub.RightFragment.Value)
+			fragpats, err := parseContainerSeq(puid, sub.RightFragments[0].Value)
 			if err != nil {
 				return nil, err
 			}
@@ -433,12 +437,12 @@ func parseContainerSig(puid string, s mappings.InternalSignature) (frames.Signat
 	return sig, nil
 }
 
-func parseDroidSeq(puid, seq string, eof false) ([]frames.Frame, error) {
+func parseDroidSeq(puid, seq string, eof bool) ([]frames.Frame, error) {
 	typ := frames.PREV
 	if eof {
 		typ = frames.SUCC
 	}
-	frames := make([]frames.Frame, 0, 10)
+	fs := make([]frames.Frame, 0, 10)
 	var rangeStart string
 	l := droidLex(puid, seq)
 	for i := l.nextItem(); i.typ != itemEOF; i = l.nextItem() {
@@ -449,23 +453,23 @@ func parseDroidSeq(puid, seq string, eof false) ([]frames.Frame, error) {
 			return nil, errors.New(i.String())
 		// parse simple types
 		case itemText:
-			frames = append(frames, frames.NewFrame(typ, patterns.Sequence(decodeHex(i.val)), 0, 0))
+			fs = append(fs, frames.NewFrame(typ, patterns.Sequence(decodeHex(i.val)), 0, 0))
 		case itemNotText:
-			frames = append(frames, frames.NewFrame(typ, NotSequence(decodeHex(i.val)), 0, 0))
+			fs = append(fs, frames.NewFrame(typ, NotSequence(decodeHex(i.val)), 0, 0))
 		// parse range types
 		case itemRangeStart, itemNotRangeStart:
 			rangeStart = i.val
 		case itemRangeEnd:
-			frames = append(frames, frames.NewFrame(typ, Range{decodeHex(rangeStart), decodeHex(i.val)}, 0, 0))
+			fs = append(fs, frames.NewFrame(typ, Range{decodeHex(rangeStart), decodeHex(i.val)}, 0, 0))
 		case itemNotRangeEnd:
-			frames = append(frames, frames.NewFrame(typ, NotRange{decodeHex(rangeStart), decodeHex(i.val)}, 0, 0))
+			fs = append(fs, frames.NewFrame(typ, NotRange{decodeHex(rangeStart), decodeHex(i.val)}, 0, 0))
 		}
 	}
-	return frames, nil
+	return fs, nil
 }
 
-func groupFragments(puid string, fs []Fragment) ([][]Fragment, error) {
-	var min, max string
+func groupFragments(puid string, fs []mappings.Fragment) ([][]mappings.Fragment, error) {
+	//var min, max string
 	var maxPos int
 	for _, f := range fs {
 		if f.Position == 0 {
@@ -475,7 +479,7 @@ func groupFragments(puid string, fs []Fragment) ([][]Fragment, error) {
 			maxPos = f.Position
 		}
 	}
-	ret := make([][]Fragment, maxPos)
+	ret := make([][]mappings.Fragment, maxPos)
 	for _, f := range fs {
 		ret[f.Position] = append(ret[f.Position], f)
 	}
@@ -490,7 +494,7 @@ func groupFragments(puid string, fs []Fragment) ([][]Fragment, error) {
 	return ret, nil
 }
 
-func appendFragments(puid string, f []frames.Frame, frags []Fragment, left, eof bool) ([]frames.Frame, err) {
+func appendFragments(puid string, f []frames.Frame, frags []mappings.Fragment, left, eof bool) ([]frames.Frame, error) {
 	fs, err := groupFragments(puid, frags)
 	if err != nil {
 		return nil, err
@@ -508,12 +512,15 @@ func appendFragments(puid string, f []frames.Frame, frags []Fragment, left, eof 
 			choice = patterns.Choice{}
 			for _, c := range v {
 				pats, err := parseDroidSeq(puid, c.Value, eof)
-				if pats > 1 {
+				if err != nil {
+					return nil, err
+				}
+				if len(pats) > 1 {
 					return nil, errors.New("Pronom: encountered multiple patterns within a single choice, puid " + puid)
 				}
 				choice = append(choice, pats[0].Pat())
 			}
-			nfs[i] = []frames.Frame{frames.New(typ, choice, 0, 0)}
+			nfs[i] = []frames.Frame{frames.NewFrame(typ, choice, 0, 0)}
 			l++ // only one choice added
 		} else {
 			pats, err := parseDroidSeq(puid, v[0].Value, eof)
@@ -554,64 +561,65 @@ func appendFragments(puid string, f []frames.Frame, frags []Fragment, left, eof 
 // Min and Max Offsets usually provided. Lack of a Max Offset implies a Variable sequence.
 // No wildcards within sequences: multiple subsequences with new offsets are used instead.
 func parseDroidSig(puid string, s mappings.InternalSignature) (frames.Signature, error) {
-	sig := make(frames.Signature, 0, 1)
-	// Return an error for multiple byte sequences
-	bs := s.ByteSequences[0]
-	// Return an error for non-BOF sequence
-	if bs.Reference != "" && bs.Reference != "BOFoffset" {
-		return nil, errors.New("Pronom parse error: unexpected reference in container sig for puid " + puid + "; bad reference is " + bs.Reference)
-	}
-	var prevPos int
-	for i, sub := range bs.SubSequences {
-		// Return an error if the positions don't increment.
-		if sub.Position < prevPos {
-			return nil, errors.New("Pronom parse error: container sub-sequences out of order for puid " + puid)
+	/*
+		sig := make(frames.Signature, 0, 1)
+		// Return an error for multiple byte sequences
+		bs := s.ByteSequences[0]
+		// Return an error for non-BOF sequence
+		if bs.Reference != "" && bs.Reference != "BOFoffset" {
+			return nil, errors.New("Pronom parse error: unexpected reference in container sig for puid " + puid + "; bad reference is " + bs.Reference)
 		}
-		prevPos = sub.Position
-		var typ frames.OffType
-		if i == 0 {
-			typ = frames.BOF
-		} else {
-			typ = frames.PREV
-		}
-		var min, max int
-		min, _ = decodeNum(sub.SubSeqMinOffset)
-		if sub.SubSeqMaxOffset == "" {
-			max = -1
-		} else {
-			max, _ = decodeNum(sub.SubSeqMaxOffset)
-		}
-		pats, err := parseContainerSeq(puid, sub.Sequence)
-		if err != nil {
-			return nil, err
-		}
-		sig = append(sig, frames.NewFrame(typ, pats[0], min, max))
-		if len(pats) > 1 {
-			for _, v := range pats[1:] {
-				sig = append(sig, frames.NewFrame(frames.PREV, v, 0, 0))
+		var prevPos int
+		for i, sub := range bs.SubSequences {
+			// Return an error if the positions don't increment.
+			if sub.Position < prevPos {
+				return nil, errors.New("Pronom parse error: container sub-sequences out of order for puid " + puid)
 			}
-		}
-		if sub.RightFragment.Value != "" {
-			min, _ = decodeNum(sub.RightFragment.MinOffset)
-			if sub.RightFragment.MinOffset == "" {
+			prevPos = sub.Position
+			var typ frames.OffType
+			if i == 0 {
+				typ = frames.BOF
+			} else {
+				typ = frames.PREV
+			}
+			var min, max int
+			min, _ = decodeNum(sub.SubSeqMinOffset)
+			if sub.SubSeqMaxOffset == "" {
 				max = -1
 			} else {
-				max, _ = decodeNum(sub.RightFragment.MaxOffset)
+				max, _ = decodeNum(sub.SubSeqMaxOffset)
 			}
-			fragpats, err := parseContainerSeq(puid, sub.RightFragment.Value)
+			pats, err := parseContainerSeq(puid, sub.Sequence)
 			if err != nil {
 				return nil, err
 			}
-			sig = append(sig, frames.NewFrame(frames.PREV, fragpats[0], min, max))
-			if len(fragpats) > 1 {
-				for _, v := range fragpats[1:] {
+			sig = append(sig, frames.NewFrame(typ, pats[0], min, max))
+			if len(pats) > 1 {
+				for _, v := range pats[1:] {
 					sig = append(sig, frames.NewFrame(frames.PREV, v, 0, 0))
 				}
 			}
-		}
+			if sub.RightFragment.Value != "" {
+				min, _ = decodeNum(sub.RightFragment.MinOffset)
+				if sub.RightFragment.MinOffset == "" {
+					max = -1
+				} else {
+					max, _ = decodeNum(sub.RightFragment.MaxOffset)
+				}
+				fragpats, err := parseContainerSeq(puid, sub.RightFragment.Value)
+				if err != nil {
+					return nil, err
+				}
+				sig = append(sig, frames.NewFrame(frames.PREV, fragpats[0], min, max))
+				if len(fragpats) > 1 {
+					for _, v := range fragpats[1:] {
+						sig = append(sig, frames.NewFrame(frames.PREV, v, 0, 0))
+					}
+				}
+			}
 
-	}
-	return sig, nil
+		}*/
+	return nil, nil
 }
 
 /*

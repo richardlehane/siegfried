@@ -107,9 +107,9 @@ func (p *pronom) add(m core.Matcher) error {
 
 func (p pronom) signatures() []Signature {
 	sigs := make([]Signature, 0, 1000)
-	for _, f := range p.droid.FileFormats {
-		sigs = append(sigs, f.Signatures...)
-	}
+	//for _, f := range p.droid.FileFormats {
+	//	sigs = append(sigs, f.Signatures...)
+	//}
 	return sigs
 }
 
@@ -232,7 +232,7 @@ func (p *pronom) setDroid() error {
 	p.ids = make(map[int]string)
 	for i, v := range p.droid.FileFormats {
 		p.puids[v.Puid] = i
-		p.ids[v.ID] = v.Puid
+		p.ids[v.Id] = v.Puid
 	}
 	return nil
 }

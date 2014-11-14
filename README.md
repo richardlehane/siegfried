@@ -54,11 +54,16 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 ## Rights
 
-Copyright 2014 Richard Lehane. 
+Copyright 2014 Richard Lehane 
 
 Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
 
 ## Changes
+### Version 0.6.1 (15/11/2014)
+- roy (r2d2 renamed) signature customisation
+- parse Droid signature (not just PRONOM reports)
+- support extension signatures
+
 ### Version 0.6.0 (11/11/2014)
 - support multiple identifiers
 - config package
