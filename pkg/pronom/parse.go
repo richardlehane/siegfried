@@ -16,7 +16,6 @@ package pronom
 
 import (
 	"encoding/hex"
-	"encoding/xml"
 	"errors"
 	"strconv"
 	"strings"
@@ -27,90 +26,211 @@ import (
 	"github.com/richardlehane/siegfried/pkg/pronom/mappings"
 )
 
+type parseable interface {
+	puids() []string
+	infos() map[string]FormatInfo
+	extensions() ([][]string, []string)
+	signatures() ([]frames.Signature, []string, error)
+	priorities() priority.Map
+}
+
+// JOINT
+
+// joint allows two parseables to be logically joined (we want to merge droid signatures with pronom report signatures)
+type joint struct {
+	a, b parseable
+}
+
+func join(a, b parseable) *joint {
+	return &joint{a, b}
+}
+
+func (j *joint) puids() []string {
+	return append(j.a.puids(), j.b.puids()...)
+}
+
+func (j *joint) infos() map[string]FormatInfo {
+	infos := j.a.infos()
+	for k, v := range j.b.infos() {
+		infos[k] = v
+	}
+	return infos
+}
+
+func (j *joint) extensions() ([][]string, []string) {
+	e, p := j.a.extensions()
+	f, q := j.b.extensions()
+	return append(e, f...), append(p, q...)
+}
+
+func (j *joint) signatures() ([]frames.Signature, []string, error) {
+	s, p, err := j.a.signatures()
+	if err != nil {
+		return nil, nil, err
+	}
+	t, q, err := j.b.signatures()
+	if err != nil {
+		return nil, nil, err
+	}
+	return append(s, t...), append(p, q...), nil
+}
+
+func (j *joint) priorities() priority.Map {
+	ps := j.a.priorities()
+	for k, v := range j.b.priorities() {
+		for _, w := range v {
+			ps.Add(k, w)
+		}
+	}
+	return ps
+}
+
+// REPORTS
+
+type reports struct {
+	p  []string
+	r  []*mappings.Report
+	ip map[int]string
+}
+
+func (r *reports) puids() []string {
+	return r.p
+}
+
+func (r *reports) infos() map[string]FormatInfo {
+	infos := make(map[string]FormatInfo)
+	for i, v := range r.r {
+		infos[r.p[i]] = FormatInfo{v.Name, v.Version, v.MIME()}
+	}
+	return infos
+}
+
+func (r *reports) extensions() ([][]string, []string) {
+	exts := make([][]string, len(r.r))
+	for i, v := range r.r {
+		exts[i] = v.Extensions
+	}
+	return exts, r.p
+}
+
+func (r *reports) idsPuids() map[int]string {
+	if r.ip != nil {
+		return r.ip
+	}
+	idsPuids := make(map[int]string)
+	for i, v := range r.r {
+		idsPuids[v.Id] = r.p[i]
+	}
+	return idsPuids
+}
+
+func (r *reports) priorities() priority.Map {
+	idsPuids := r.idsPuids()
+	pMap := make(priority.Map)
+	for i, v := range r.r {
+		this := r.p[i]
+		for _, sub := range v.Subordinates() {
+			pMap.Add(idsPuids[sub], this)
+		}
+		for _, sup := range v.Superiors() {
+			pMap.Add(this, idsPuids[sup])
+		}
+	}
+	return pMap
+}
+
+func (r *reports) signatures() ([]frames.Signature, []string, error) {
+	sigs, puids := make([]frames.Signature, 0, len(r.r)*2), make([]string, 0, len(r.r)*2)
+	for i, rep := range r.r {
+		puid := r.p[i]
+		for _, v := range rep.Signatures {
+			s, err := parseSig(puid, v)
+			if err != nil {
+				return nil, nil, err
+			}
+			sigs = append(sigs, s)
+			puids = append(puids, puid)
+		}
+	}
+	return sigs, puids, nil
+}
+
 const (
 	bofstring = "Absolute from BOF"
 	eofstring = "Absolute from EOF"
 	varstring = "Variable"
 )
 
-// Returns slice of bytematcher signatures, slice of bytematcher puids, slice of extensions, slice of extensionmatcher puids, a priority map, and a format info map
-func ParseDroid(d *mappings.Droid, ids map[int]string) ([]frames.Signature, []string, [][]string, []string, priority.Map, map[string]FormatInfo, error) {
-	sigs := make([]frames.Signature, 0, 700)
-	bpuids := make([]string, 0, 700)
-	exts := make([][]string, 0, 700)
-	epuids := make([]string, 0, 700)
-	pMap := make(priority.Map)
-	infos := make(map[string]FormatInfo)
-	/*
-		for _, f := range d.FileFormats {
-			// Bytematcher & bytematcher puids
-			puid := f.Puid
-			for _, s := range f.Signatures {
-				sig, err := parseSig(puid, s)
-				if err != nil {
-					return nil, nil, nil, nil, nil, nil, err
+// parse sig takes a signature from a report and returns a BM signature
+func parseSig(puid string, s mappings.Signature) (frames.Signature, error) {
+	sig := make(frames.Signature, 0, 1)
+	for _, bs := range s.ByteSequences {
+		// check if <Offset> or <MaxOffset> elements are present
+		min, err := decodeNum(bs.Offset)
+		if err != nil {
+			return nil, err
+		}
+		max, err := decodeNum(bs.MaxOffset)
+		if err != nil {
+			return nil, err
+		}
+		// lack of a max offset implies a fixed offset for BOF and EOF seqs (not VAR)
+		if max == 0 {
+			max = min
+		}
+		// parse the hexstring
+		toks, lmin, lmax, err := parseHex(puid, bs.Hex)
+		if err != nil {
+			return nil, err
+		}
+		// create a new signature for this set of tokens
+		tokSig := make(frames.Signature, len(toks))
+		// check position and add patterns to signature
+		switch bs.Position {
+		case bofstring:
+			if toks[0].min == 0 && toks[0].max == 0 {
+				toks[0].min, toks[0].max = min, max
+			}
+			tokSig[0] = frames.NewFrame(frames.BOF, toks[0].pat, toks[0].min, toks[0].max)
+			if len(toks) > 1 {
+				for i, tok := range toks[1:] {
+					tokSig[i+1] = frames.NewFrame(frames.PREV, tok.pat, tok.min, tok.max)
 				}
-				sigs = append(sigs, sig)
-				bpuids = append(bpuids, puid)
 			}
-			// Extension & extensionmatcher puids
-			if len(f.Extensions) > 0 {
-				exts = append(exts, f.Extensions)
-				epuids = append(epuids, puid)
+		case varstring:
+			if max == 0 {
+				max = -1
 			}
-			// Priorities
-			for _, v := range f.Priorities {
-				subordinate := ids[v]
-				pMap.Add(subordinate, puid)
+			if toks[0].min == 0 && toks[0].max == 0 {
+				toks[0].min, toks[0].max = min, max
 			}
-			// Format infos
-			infos[f.Puid] = FormatInfo{f.Name, f.Version, f.MIMEType}
+			if toks[0].min == toks[0].max {
+				toks[0].max = -1
+			}
+			tokSig[0] = frames.NewFrame(frames.BOF, toks[0].pat, toks[0].min, toks[0].max)
+			if len(toks) > 1 {
+				for i, tok := range toks[1:] {
+					tokSig[i+1] = frames.NewFrame(frames.PREV, tok.pat, tok.min, tok.max)
+				}
+			}
+		case eofstring:
+			if len(toks) > 1 {
+				for i, tok := range toks[:len(toks)-1] {
+					tokSig[i] = frames.NewFrame(frames.SUCC, tok.pat, toks[i+1].min, toks[i+1].max)
+				}
+			}
+			// handle edge case where there is a {x-y} at end of EOF seq e.g. x-fmt/263
+			if lmin != 0 || lmax != 0 {
+				min, max = lmin, lmax
+			}
+			tokSig[len(toks)-1] = frames.NewFrame(frames.EOF, toks[len(toks)-1].pat, min, max)
+		default:
+			return nil, errors.New("Pronom parse error: invalid ByteSequence position " + bs.Position)
 		}
-	*/
-	return sigs, bpuids, exts, epuids, pMap, infos, nil
-}
-
-// Returns slice of bytematcher signatures, slice of bytematcher puids, slice of extensions, slice of extensionmatcher puids, a priority map, and a format info map
-func ParseReports(r *mappings.Report) ([]frames.Signature, []string, [][]string, []string, priority.Map, map[string]FormatInfo) {
-	return nil, nil, nil, nil, nil, nil
-}
-
-func ParsePuid(f string) ([]frames.Signature, error) {
-	buf, err := get(f)
-	if err != nil {
-		return nil, err
+		// add the segment (tokens signature) to the complete signature
+		sig = appendSig(sig, tokSig, bs.Position)
 	}
-	rep := new(mappings.Report)
-	if err = xml.Unmarshal(buf, rep); err != nil {
-		return nil, err
-	}
-	sigs := make([]frames.Signature, len(rep.Signatures))
-	for i, v := range rep.Signatures {
-		s, err := parseSig(f, v)
-		if err != nil {
-			return nil, err
-		}
-		sigs[i] = s
-	}
-	return sigs, nil
-}
-
-func ParseReport(rep *mappings.Report) ([]frames.Signature, error) {
-	var puid string
-	for _, id := range rep.Identifiers {
-		if id.Type == "PUID" {
-			puid = id.ID
-		}
-	}
-	sigs := make([]frames.Signature, len(rep.Signatures))
-	for i, v := range rep.Signatures {
-		s, err := parseSig(puid, v)
-		if err != nil {
-			return nil, err
-		}
-		sigs[i] = s
-	}
-	return sigs, nil
+	return sig, nil
 }
 
 // an intermediary structure before creating a bytematcher.Frame
@@ -205,7 +325,7 @@ func appendSig(s1, s2 frames.Signature, pos string) frames.Signature {
 	if pos == eofstring {
 		return append(s1, s2...)
 	}
-	// if s1 already has an EOF segment, prepend that s2 segment before it, but after any preceding segments
+	// if s1 has an EOF segment, and s2 is a BOF or Var, prepend that s2 segment before it, but after any preceding segments
 	for i, f := range s1 {
 		orientation := f.Orientation()
 		if orientation == frames.SUCC || orientation == frames.EOF {
@@ -220,76 +340,222 @@ func appendSig(s1, s2 frames.Signature, pos string) frames.Signature {
 	return append(s1, s2...)
 }
 
-func parseSig(puid string, s mappings.Signature) (frames.Signature, error) {
-	sig := make(frames.Signature, 0, 1)
-	for _, bs := range s.ByteSequences {
-		// check if <Offset> or <MaxOffset> elements are present
-		min, err := decodeNum(bs.Offset)
-		if err != nil {
-			return nil, err
-		}
-		max, err := decodeNum(bs.MaxOffset)
-		if err != nil {
-			return nil, err
-		}
-		// lack of a max offset implies a fixed offset for BOF and EOF seqs (not VAR)
-		if max == 0 {
-			max = min
-		}
-		// parse the hexstring
-		toks, lmin, lmax, err := parseHex(puid, bs.Hex)
-		if err != nil {
-			return nil, err
-		}
-		// create a new signature for this set of tokens
-		tokSig := make(frames.Signature, len(toks))
-		// check position and add patterns to signature
-		switch bs.Position {
-		case bofstring:
-			if toks[0].min == 0 && toks[0].max == 0 {
-				toks[0].min, toks[0].max = min, max
-			}
-			tokSig[0] = frames.NewFrame(frames.BOF, toks[0].pat, toks[0].min, toks[0].max)
-			if len(toks) > 1 {
-				for i, tok := range toks[1:] {
-					tokSig[i+1] = frames.NewFrame(frames.PREV, tok.pat, tok.min, tok.max)
-				}
-			}
-		case varstring:
-			if max == 0 {
-				max = -1
-			}
-			if toks[0].min == 0 && toks[0].max == 0 {
-				toks[0].min, toks[0].max = min, max
-			}
-			if toks[0].min == toks[0].max {
-				toks[0].max = -1
-			}
-			tokSig[0] = frames.NewFrame(frames.BOF, toks[0].pat, toks[0].min, toks[0].max)
-			if len(toks) > 1 {
-				for i, tok := range toks[1:] {
-					tokSig[i+1] = frames.NewFrame(frames.PREV, tok.pat, tok.min, tok.max)
-				}
-			}
-		case eofstring:
-			if len(toks) > 1 {
-				for i, tok := range toks[:len(toks)-1] {
-					tokSig[i] = frames.NewFrame(frames.SUCC, tok.pat, toks[i+1].min, toks[i+1].max)
-				}
-			}
-			// handle edge case where there is a {x-y} at end of EOF seq e.g. x-fmt/263
-			if lmin != 0 || lmax != 0 {
-				min, max = lmin, lmax
-			}
-			tokSig[len(toks)-1] = frames.NewFrame(frames.EOF, toks[len(toks)-1].pat, min, max)
-		default:
-			return nil, errors.New("Pronom parse error: invalid ByteSequence position " + bs.Position)
-		}
-		// add the segment (tokens signature) to the complete signature
-		sig = appendSig(sig, tokSig, bs.Position)
-	}
-	return sig, nil
+// DROID
+
+type droid struct {
+	*mappings.Droid
 }
+
+func (d *droid) puids() []string {
+	puids := make([]string, len(d.FileFormats))
+	for i, v := range d.FileFormats {
+		puids[i] = v.Puid
+	}
+	return puids
+}
+
+func (d *droid) infos() map[string]FormatInfo {
+	infos := make(map[string]FormatInfo)
+	for _, v := range d.FileFormats {
+		infos[v.Puid] = FormatInfo{v.Name, v.Version, v.MIMEType}
+	}
+	return infos
+}
+
+func (d *droid) extensions() ([][]string, []string) {
+	exts := make([][]string, len(d.FileFormats))
+	for i, v := range d.FileFormats {
+		exts[i] = v.Extensions
+	}
+	return exts, d.puids()
+}
+
+func (d *droid) idsPuids() map[int]string {
+	idsPuids := make(map[int]string)
+	for _, v := range d.FileFormats {
+		idsPuids[v.Id] = v.Puid
+	}
+	return idsPuids
+}
+
+func (d *droid) puidsInternalIds() map[string][]int {
+	puidsIIds := make(map[string][]int)
+	for _, v := range d.FileFormats {
+		if len(v.Signatures) > 0 {
+			sigs := make([]int, len(v.Signatures))
+			for j, w := range v.Signatures {
+				sigs[j] = w
+			}
+			puidsIIds[v.Puid] = sigs
+		}
+	}
+	return puidsIIds
+}
+
+func (d *droid) priorities() priority.Map {
+	idsPuids := d.idsPuids()
+	pMap := make(priority.Map)
+	for _, v := range d.FileFormats {
+		superior := v.Puid
+		for _, w := range v.Priorities {
+			subordinate := idsPuids[w]
+			pMap.Add(subordinate, superior)
+		}
+	}
+	pMap.Complete()
+	return pMap
+}
+
+func (d *droid) signatures() ([]frames.Signature, []string, error) {
+	sigs, puids := make([]frames.Signature, len(d.Signatures)), make([]string, len(d.Signatures))
+	// first a map of internal sig ids to bytesequences
+	seqs := make(map[int][]mappings.ByteSeq)
+	for _, v := range d.Signatures {
+		seqs[v.Id] = v.ByteSequences
+	}
+	m := d.puidsInternalIds()
+	var i int
+	var err error
+	for _, v := range d.puids() {
+		for _, w := range m[v] {
+			sigs[i], err = parseByteSeqs(v, seqs[w])
+			if err != nil {
+				return nil, nil, err
+			}
+			puids[i] = v
+			i++
+		}
+	}
+	return sigs, puids, err
+}
+
+func parseByteSeqs(puid string, bs []mappings.ByteSeq) (frames.Signature, error) {
+	return nil, nil
+}
+
+func parseSeq(puid, seq string, eof bool) ([]frames.Frame, error) {
+	typ := frames.PREV
+	if eof {
+		typ = frames.SUCC
+	}
+	fs := make([]frames.Frame, 0, 10)
+	var rangeStart string
+	l := droidLex(puid, seq)
+	for i := l.nextItem(); i.typ != itemEOF; i = l.nextItem() {
+		switch i.typ {
+		default:
+			return nil, errors.New(i.String())
+		case itemError:
+			return nil, errors.New(i.String())
+		// parse simple types
+		case itemText:
+			fs = append(fs, frames.NewFrame(typ, patterns.Sequence(decodeHex(i.val)), 0, 0))
+		case itemNotText:
+			fs = append(fs, frames.NewFrame(typ, NotSequence(decodeHex(i.val)), 0, 0))
+		// parse range types
+		case itemRangeStart, itemNotRangeStart:
+			rangeStart = i.val
+		case itemRangeEnd:
+			fs = append(fs, frames.NewFrame(typ, Range{decodeHex(rangeStart), decodeHex(i.val)}, 0, 0))
+		case itemNotRangeEnd:
+			fs = append(fs, frames.NewFrame(typ, NotRange{decodeHex(rangeStart), decodeHex(i.val)}, 0, 0))
+		}
+	}
+	return fs, nil
+}
+
+// droid fragments (right or left) can share positions. If such fragments have same offsets, they are a patterns.Choice. If not, then err.
+func groupFragments(puid string, fs []mappings.Fragment) ([][]mappings.Fragment, error) {
+	//var min, max string
+	var maxPos int
+	for _, f := range fs {
+		if f.Position == 0 {
+			return nil, errors.New("Pronom: encountered fragment without a position, puid " + puid)
+		}
+		if f.Position > maxPos {
+			maxPos = f.Position
+		}
+	}
+	ret := make([][]mappings.Fragment, maxPos)
+	for _, f := range fs {
+		ret[f.Position] = append(ret[f.Position], f)
+	}
+	for _, r := range ret {
+		max, min := r[0].MaxOffset, r[0].MinOffset
+		for _, v := range r {
+			if v.MaxOffset != max || v.MinOffset != min {
+				return nil, errors.New("Pronom: encountered fragments at same positions with different offsets, puid " + puid)
+			}
+		}
+	}
+	return ret, nil
+}
+
+// append a slice of fragments (left or right) to the central droid sequence
+func appendFragments(puid string, f []frames.Frame, frags []mappings.Fragment, left, eof bool) ([]frames.Frame, error) {
+	fs, err := groupFragments(puid, frags)
+	if err != nil {
+		return nil, err
+	}
+	typ := frames.PREV
+	if eof {
+		typ = frames.SUCC
+	}
+	var choice patterns.Choice
+	offs := make([][2]int, len(fs))
+	nfs := make([][]frames.Frame, len(fs))
+	l := len(f)
+	// iterate over the grouped fragments
+	for i, v := range fs {
+		if len(v) > 1 {
+			choice = patterns.Choice{}
+			for _, c := range v {
+				pats, err := parseSeq(puid, c.Value, eof)
+				if err != nil {
+					return nil, err
+				}
+				if len(pats) > 1 {
+					return nil, errors.New("Pronom: encountered multiple patterns within a single choice, puid " + puid)
+				}
+				choice = append(choice, pats[0].Pat())
+			}
+			nfs[i] = []frames.Frame{frames.NewFrame(typ, choice, 0, 0)}
+			l++ // only one choice added
+		} else {
+			pats, err := parseSeq(puid, v[0].Value, eof)
+			if err != nil {
+				return nil, err
+			}
+			nfs[i] = pats
+			l += len(pats) // can have multiple patterns within a fragment
+		}
+		min, err := decodeNum(v[0].MinOffset)
+		if err != nil {
+			return nil, err
+		}
+		var max int
+		if v[0].MaxOffset == "" {
+			max = -1
+		} else {
+			max, err = decodeNum(v[0].MaxOffset)
+			if err != nil {
+				return nil, err
+			}
+		}
+		offs[i] = [2]int{min, max}
+	}
+	// Now make the frames by adding in offset information (if left fragments, this needs to be taken from their neighbour)
+	if left {
+
+	} else {
+
+	}
+
+	ret := make([]frames.Frame, l)
+	return ret, nil
+}
+
+// CONTAINER
 
 func parseContainerSeq(puid, seq string) ([]patterns.Pattern, error) {
 	pats := make([]patterns.Pattern, 0, 10)
@@ -437,318 +703,3 @@ func parseContainerSig(puid string, s mappings.InternalSignature) (frames.Signat
 	}
 	return sig, nil
 }
-
-func parseDroidSeq(puid, seq string, eof bool) ([]frames.Frame, error) {
-	typ := frames.PREV
-	if eof {
-		typ = frames.SUCC
-	}
-	fs := make([]frames.Frame, 0, 10)
-	var rangeStart string
-	l := droidLex(puid, seq)
-	for i := l.nextItem(); i.typ != itemEOF; i = l.nextItem() {
-		switch i.typ {
-		default:
-			return nil, errors.New(i.String())
-		case itemError:
-			return nil, errors.New(i.String())
-		// parse simple types
-		case itemText:
-			fs = append(fs, frames.NewFrame(typ, patterns.Sequence(decodeHex(i.val)), 0, 0))
-		case itemNotText:
-			fs = append(fs, frames.NewFrame(typ, NotSequence(decodeHex(i.val)), 0, 0))
-		// parse range types
-		case itemRangeStart, itemNotRangeStart:
-			rangeStart = i.val
-		case itemRangeEnd:
-			fs = append(fs, frames.NewFrame(typ, Range{decodeHex(rangeStart), decodeHex(i.val)}, 0, 0))
-		case itemNotRangeEnd:
-			fs = append(fs, frames.NewFrame(typ, NotRange{decodeHex(rangeStart), decodeHex(i.val)}, 0, 0))
-		}
-	}
-	return fs, nil
-}
-
-func groupFragments(puid string, fs []mappings.Fragment) ([][]mappings.Fragment, error) {
-	//var min, max string
-	var maxPos int
-	for _, f := range fs {
-		if f.Position == 0 {
-			return nil, errors.New("Pronom: encountered fragment without a position, puid " + puid)
-		}
-		if f.Position > maxPos {
-			maxPos = f.Position
-		}
-	}
-	ret := make([][]mappings.Fragment, maxPos)
-	for _, f := range fs {
-		ret[f.Position] = append(ret[f.Position], f)
-	}
-	for _, r := range ret {
-		max, min := r[0].MaxOffset, r[0].MinOffset
-		for _, v := range r {
-			if v.MaxOffset != max || v.MinOffset != min {
-				return nil, errors.New("Pronom: encountered fragments at same positions with different offsets, puid " + puid)
-			}
-		}
-	}
-	return ret, nil
-}
-
-func appendFragments(puid string, f []frames.Frame, frags []mappings.Fragment, left, eof bool) ([]frames.Frame, error) {
-	fs, err := groupFragments(puid, frags)
-	if err != nil {
-		return nil, err
-	}
-	typ := frames.PREV
-	if eof {
-		typ = frames.SUCC
-	}
-	var choice patterns.Choice
-	offs := make([][2]int, len(fs))
-	nfs := make([][]frames.Frame, len(fs))
-	l := len(f)
-	for i, v := range fs {
-		if len(v) > 1 {
-			choice = patterns.Choice{}
-			for _, c := range v {
-				pats, err := parseDroidSeq(puid, c.Value, eof)
-				if err != nil {
-					return nil, err
-				}
-				if len(pats) > 1 {
-					return nil, errors.New("Pronom: encountered multiple patterns within a single choice, puid " + puid)
-				}
-				choice = append(choice, pats[0].Pat())
-			}
-			nfs[i] = []frames.Frame{frames.NewFrame(typ, choice, 0, 0)}
-			l++ // only one choice added
-		} else {
-			pats, err := parseDroidSeq(puid, v[0].Value, eof)
-			if err != nil {
-				return nil, err
-			}
-			nfs[i] = pats
-			l += len(pats)
-		}
-		min, err := decodeNum(v[0].MinOffset)
-		if err != nil {
-			return nil, err
-		}
-		var max int
-		if v[0].MaxOffset == "" {
-			max = -1
-		} else {
-			max, err = decodeNum(v[0].MaxOffset)
-			if err != nil {
-				return nil, err
-			}
-		}
-		offs[i] = [2]int{min, max}
-	}
-	// Now make the frames by adding in offset information (if left fragments, this needs to be taken from their neighbour)
-	if left {
-
-	} else {
-
-	}
-
-	ret := make([]frames.Frame, l)
-	return ret, nil
-}
-
-// Container signatures are simpler than regular Droid signatures
-// No BOF/EOF/VAR - all are BOF.
-// Min and Max Offsets usually provided. Lack of a Max Offset implies a Variable sequence.
-// No wildcards within sequences: multiple subsequences with new offsets are used instead.
-func parseDroidSig(puid string, s mappings.InternalSignature) (frames.Signature, error) {
-	/*
-		sig := make(frames.Signature, 0, 1)
-		// Return an error for multiple byte sequences
-		bs := s.ByteSequences[0]
-		// Return an error for non-BOF sequence
-		if bs.Reference != "" && bs.Reference != "BOFoffset" {
-			return nil, errors.New("Pronom parse error: unexpected reference in container sig for puid " + puid + "; bad reference is " + bs.Reference)
-		}
-		var prevPos int
-		for i, sub := range bs.SubSequences {
-			// Return an error if the positions don't increment.
-			if sub.Position < prevPos {
-				return nil, errors.New("Pronom parse error: container sub-sequences out of order for puid " + puid)
-			}
-			prevPos = sub.Position
-			var typ frames.OffType
-			if i == 0 {
-				typ = frames.BOF
-			} else {
-				typ = frames.PREV
-			}
-			var min, max int
-			min, _ = decodeNum(sub.SubSeqMinOffset)
-			if sub.SubSeqMaxOffset == "" {
-				max = -1
-			} else {
-				max, _ = decodeNum(sub.SubSeqMaxOffset)
-			}
-			pats, err := parseContainerSeq(puid, sub.Sequence)
-			if err != nil {
-				return nil, err
-			}
-			sig = append(sig, frames.NewFrame(typ, pats[0], min, max))
-			if len(pats) > 1 {
-				for _, v := range pats[1:] {
-					sig = append(sig, frames.NewFrame(frames.PREV, v, 0, 0))
-				}
-			}
-			if sub.RightFragment.Value != "" {
-				min, _ = decodeNum(sub.RightFragment.MinOffset)
-				if sub.RightFragment.MinOffset == "" {
-					max = -1
-				} else {
-					max, _ = decodeNum(sub.RightFragment.MaxOffset)
-				}
-				fragpats, err := parseContainerSeq(puid, sub.RightFragment.Value)
-				if err != nil {
-					return nil, err
-				}
-				sig = append(sig, frames.NewFrame(frames.PREV, fragpats[0], min, max))
-				if len(fragpats) > 1 {
-					for _, v := range fragpats[1:] {
-						sig = append(sig, frames.NewFrame(frames.PREV, v, 0, 0))
-					}
-				}
-			}
-
-		}*/
-	return nil, nil
-}
-
-/*
-7B5C7274(66|6631)5C(616E7369|6D6163|7063|706361)5C616E7369637067{3-*}5C737473686664626368{1-4}5C73747368666C6F6368{1-4}5C737473686668696368{1-4}5C73747368666269
-
- <InternalSignature ID="26" Specificity="Specific">
-            <ByteSequence Reference="BOFoffset">
-                <SubSequence MinFragLength="8" Position="1"
-                    SubSeqMaxOffset="0" SubSeqMinOffset="0">
-                    <Sequence>5C616E7369637067</Sequence>
-                    <DefaultShift>9</DefaultShift>
-                    <Shift Byte="5C">8</Shift>
-                    <Shift Byte="61">7</Shift>
-                    <Shift Byte="63">3</Shift>
-                    <Shift Byte="67">1</Shift>
-                    <Shift Byte="69">4</Shift>
-                    <Shift Byte="6E">6</Shift>
-                    <Shift Byte="70">2</Shift>
-                    <Shift Byte="73">5</Shift>
-                    <LeftFragment MaxOffset="0" MinOffset="0" Position="1">616E7369</LeftFragment>
-                    <LeftFragment MaxOffset="0" MinOffset="0" Position="1">6D6163</LeftFragment>
-                    <LeftFragment MaxOffset="0" MinOffset="0" Position="1">7063</LeftFragment>
-                    <LeftFragment MaxOffset="0" MinOffset="0" Position="1">706361</LeftFragment>
-                    <LeftFragment MaxOffset="0" MinOffset="0" Position="2">5C</LeftFragment>
-                    <LeftFragment MaxOffset="0" MinOffset="0" Position="3">66</LeftFragment>
-                    <LeftFragment MaxOffset="0" MinOffset="0" Position="3">6631</LeftFragment>
-                    <LeftFragment MaxOffset="0" MinOffset="0" Position="4">7B5C7274</LeftFragment>
-                </SubSequence>
-                <SubSequence MinFragLength="0" Position="2" SubSeqMinOffset="3">
-                    <Sequence>5C737473686664626368</Sequence>
-                    <DefaultShift>11</DefaultShift>
-                    <Shift Byte="5C">10</Shift>
-                    <Shift Byte="62">3</Shift>
-                    <Shift Byte="63">2</Shift>
-                    <Shift Byte="64">4</Shift>
-                    <Shift Byte="66">5</Shift>
-                    <Shift Byte="68">1</Shift>
-                    <Shift Byte="73">7</Shift>
-                    <Shift Byte="74">8</Shift>
-                    <RightFragment MaxOffset="4" MinOffset="1" Position="1">5C73747368666C6F6368</RightFragment>
-                    <RightFragment MaxOffset="4" MinOffset="1" Position="2">5C737473686668696368</RightFragment>
-                    <RightFragment MaxOffset="4" MinOffset="1" Position="3">5C73747368666269</RightFragment>
-                </SubSequence>
-            </ByteSequence>
-
-
- 	3C2F(48544D4C|68746D6C|424F4459|626F6479)3E
-
-            <InternalSignature ID="41" Specificity="Specific">
-            <ByteSequence Reference="BOFoffset">
-                <SubSequence MinFragLength="0" Position="1"
-                    SubSeqMaxOffset="1024" SubSeqMinOffset="0">
-                    <Sequence>3C</Sequence>
-                    <DefaultShift>2</DefaultShift>
-                    <Shift Byte="3C">1</Shift>
-                    <RightFragment MaxOffset="0" MinOffset="0" Position="1">48544D4C</RightFragment>
-                    <RightFragment MaxOffset="0" MinOffset="0" Position="1">68746D6C</RightFragment>
-                </SubSequence>
-            </ByteSequence>
-            <ByteSequence Reference="EOFoffset">
-                <SubSequence MinFragLength="5" Position="1"
-                    SubSeqMaxOffset="1024" SubSeqMinOffset="0">
-                    <Sequence>3C2F</Sequence>
-                    <DefaultShift>-3</DefaultShift>
-                    <Shift Byte="2F">-2</Shift>
-                    <Shift Byte="3C">-1</Shift>
-                    <RightFragment MaxOffset="0" MinOffset="0" Position="1">424F4459</RightFragment>
-                    <RightFragment MaxOffset="0" MinOffset="0" Position="1">48544D4C</RightFragment>
-                    <RightFragment MaxOffset="0" MinOffset="0" Position="1">626F6479</RightFragment>
-                    <RightFragment MaxOffset="0" MinOffset="0" Position="1">68746D6C</RightFragment>
-                    <RightFragment MaxOffset="0" MinOffset="0" Position="2">3E</RightFragment>
-                </SubSequence>
-            </ByteSequence>
-        </InternalSignature>
-
-        <InternalSignature ID="105" Specificity="Specific">
-            <ByteSequence>
-                <SubSequence MinFragLength="0" Position="1" SubSeqMinOffset="0">
-                    <Sequence>300D0A53454354494F4E0D0A2020320D0A4845414445520D0A</Sequence>
-                    <DefaultShift>26</DefaultShift>
-                    <Shift Byte="0A">1</Shift>
-                    <Shift Byte="0D">2</Shift>
-                    <Shift Byte="20">12</Shift>
-                    <Shift Byte="30">25</Shift>
-                    <Shift Byte="32">11</Shift>
-                    <Shift Byte="41">6</Shift>
-                    <Shift Byte="43">20</Shift>
-                    <Shift Byte="44">5</Shift>
-                    <Shift Byte="45">4</Shift>
-                    <Shift Byte="48">8</Shift>
-                    <Shift Byte="49">18</Shift>
-                    <Shift Byte="4E">16</Shift>
-                    <Shift Byte="4F">17</Shift>
-                    <Shift Byte="52">3</Shift>
-                    <Shift Byte="53">22</Shift>
-                    <Shift Byte="54">19</Shift>
-                </SubSequence>
-                <SubSequence MinFragLength="0" Position="2" SubSeqMinOffset="0">
-                    <Sequence>390D0A24414341445645520D0A2020310D0A4143</Sequence>
-                    <DefaultShift>21</DefaultShift>
-                    <Shift Byte="0A">3</Shift>
-                    <Shift Byte="0D">4</Shift>
-                    <Shift Byte="20">6</Shift>
-                    <Shift Byte="24">17</Shift>
-                    <Shift Byte="31">5</Shift>
-                    <Shift Byte="39">20</Shift>
-                    <Shift Byte="41">2</Shift>
-                    <Shift Byte="43">1</Shift>
-                    <Shift Byte="44">13</Shift>
-                    <Shift Byte="45">11</Shift>
-                    <Shift Byte="52">10</Shift>
-                    <Shift Byte="56">12</Shift>
-                    <RightFragment MaxOffset="0" MinOffset="0" Position="1">31303031</RightFragment>
-                    <RightFragment MaxOffset="0" MinOffset="0" Position="1">322E3231</RightFragment>
-                    <RightFragment MaxOffset="0" MinOffset="0" Position="1">322E3232</RightFragment>
-                    <RightFragment MaxOffset="0" MinOffset="0" Position="2">0D0A</RightFragment>
-                </SubSequence>
-                <SubSequence MinFragLength="0" Position="3" SubSeqMinOffset="0">
-                    <Sequence>300D0A454E445345430D0A</Sequence>
-                    <DefaultShift>12</DefaultShift>
-                    <Shift Byte="0A">1</Shift>
-                    <Shift Byte="0D">2</Shift>
-                    <Shift Byte="30">11</Shift>
-                    <Shift Byte="43">3</Shift>
-                    <Shift Byte="44">6</Shift>
-                    <Shift Byte="45">4</Shift>
-                    <Shift Byte="4E">7</Shift>
-                    <Shift Byte="53">5</Shift>
-                </SubSequence>
-            </ByteSequence>
-*/

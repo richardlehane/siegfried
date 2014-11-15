@@ -29,6 +29,7 @@ var pronom = struct {
 	container        string // e.g. container-signature-19770502.xml
 	reports          string // directory where PRONOM reports are stored
 	extend           []string
+	single           string
 	harvestURL       string
 	harvestTimeout   time.Duration
 	harvestTransport *http.Transport
@@ -144,6 +145,13 @@ func Extend() []string {
 	return ret
 }
 
+func Single() (bool, string) {
+	if pronom.single == "" {
+		return false, ""
+	}
+	return true, pronom.single
+}
+
 func HarvestOptions() (string, time.Duration, *http.Transport) {
 	return pronom.harvestURL, pronom.harvestTimeout, pronom.harvestTransport
 }
@@ -178,7 +186,14 @@ func SetExtend(e string) func() private {
 	}
 }
 
-// unlike other setters, these are only relevant in the r2d2 tool so can't be converted to the Option type
+func SetSingle(s string) func() private {
+	return func() private {
+		pronom.single = s
+		return private{}
+	}
+}
+
+// unlike other setters, these are only relevant in the roy tool so can't be converted to the Option type
 
 func SetHarvestTimeout(d time.Duration) {
 	pronom.harvestTimeout = d

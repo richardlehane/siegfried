@@ -16,32 +16,20 @@
 package mappings
 
 import (
-	"bytes"
 	"encoding/xml"
-	"fmt"
-	"strings"
 )
 
 // Droid Signature File
 
 type Droid struct {
-	XMLName     xml.Name     `xml:"FFSignatureFile"`
-	Version     int          `xml:",attr"`
-	Signatures  []Signature  `xml:"InternalSignatureCollection>InternalSignature"`
-	FileFormats []FileFormat `xml:"FileFormatCollection>FileFormat"`
-}
-
-func (d Droid) String() string {
-	buf := new(bytes.Buffer)
-	for _, v := range d.FileFormats {
-		fmt.Fprintln(buf, v)
-	}
-	return buf.String()
+	XMLName     xml.Name            `xml:"FFSignatureFile"`
+	Version     int                 `xml:",attr"`
+	Signatures  []InternalSignature `xml:"InternalSignatureCollection>InternalSignature"`
+	FileFormats []FileFormat        `xml:"FileFormatCollection>FileFormat"`
 }
 
 type InternalSignature struct {
 	Id            int       `xml:"ID,attr"`
-	Specificity   string    `xml:",attr"`
 	ByteSequences []ByteSeq `xml:"ByteSequence"`
 }
 
@@ -68,7 +56,7 @@ type Fragment struct {
 
 type FileFormat struct {
 	XMLName    xml.Name `xml:"FileFormat"`
-	Id         int      `xml:",attr"`
+	Id         int      `xml:"ID,attr"`
 	Puid       string   `xml:"PUID,attr"`
 	Name       string   `xml:",attr"`
 	Version    string   `xml:",attr"`
@@ -76,8 +64,4 @@ type FileFormat struct {
 	Extensions []string `xml:"Extension"`
 	Signatures []int    `xml:"InternalSignatureID"`
 	Priorities []int    `xml:"HasPriorityOverFileFormatID"`
-}
-
-func (f FileFormat) String() string {
-	return fmt.Sprintf("Puid: %s; Name: %s; Version: %s; Ext(s): %s\n", f.Puid, f.Name, f.Version, strings.Join(f.Extensions, ", "))
 }

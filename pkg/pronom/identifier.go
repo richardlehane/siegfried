@@ -27,12 +27,6 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core"
 )
 
-type FormatInfo struct {
-	Name     string
-	Version  string
-	MIMEType string
-}
-
 type Identifier struct {
 	p          *pronom
 	Name       string
@@ -49,11 +43,17 @@ type Identifier struct {
 	PuidsB map[string][]int // map of puids to slices of bytematcher int signatures
 }
 
+type FormatInfo struct {
+	Name     string
+	Version  string
+	MIMEType string
+}
+
 func New(opts ...config.Option) (*Identifier, error) {
 	for _, v := range opts {
 		v()
 	}
-	pronom, err := NewPronom()
+	pronom, err := newPronom()
 	if err != nil {
 		return nil, err
 	}
@@ -67,6 +67,10 @@ func (i *Identifier) Add(m core.Matcher) error {
 func (i *Identifier) Yaml() string {
 	return fmt.Sprintf("  - name    : %v\n    details : %v\n",
 		i.Name, i.Details)
+}
+
+func (i *Identifier) String() string {
+	return ""
 }
 
 func (i *Identifier) Save(w io.Writer) (int, error) {

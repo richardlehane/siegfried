@@ -90,13 +90,13 @@ var sStub4 = mappings.Signature{[]mappings.ByteSequence{bsStub5}}
 
 var sStub5 = mappings.Signature{[]mappings.ByteSequence{bsStub6}}
 
-var rStub1 = &mappings.Report{Signatures: []mappings.Signature{sStub1, sStub2}, Identifiers: []mappings.FormatIdentifier{mappings.FormatIdentifier{Type: "PUID", ID: "x-fmt/8"}}}
+var rStub1 = &mappings.Report{Signatures: []mappings.Signature{sStub1, sStub2}, Identifiers: []mappings.FormatIdentifier{mappings.FormatIdentifier{Typ: "PUID", Id: "x-fmt/8"}}}
 
-var rStub2 = &mappings.Report{Signatures: []mappings.Signature{sStub3}, Identifiers: []mappings.FormatIdentifier{mappings.FormatIdentifier{Type: "PUID", ID: "x-fmt/178"}}}
+var rStub2 = &mappings.Report{Signatures: []mappings.Signature{sStub3}, Identifiers: []mappings.FormatIdentifier{mappings.FormatIdentifier{Typ: "PUID", Id: "x-fmt/178"}}}
 
-var rStub3 = &mappings.Report{Signatures: []mappings.Signature{sStub4}, Identifiers: []mappings.FormatIdentifier{mappings.FormatIdentifier{Type: "PUID", ID: "fmt/390"}}}
+var rStub3 = &mappings.Report{Signatures: []mappings.Signature{sStub4}, Identifiers: []mappings.FormatIdentifier{mappings.FormatIdentifier{Typ: "PUID", Id: "fmt/390"}}}
 
-var rStub4 = &mappings.Report{Signatures: []mappings.Signature{sStub5}, Identifiers: []mappings.FormatIdentifier{mappings.FormatIdentifier{Type: "PUID", ID: "x-fmt/317"}}}
+var rStub4 = &mappings.Report{Signatures: []mappings.Signature{sStub5}, Identifiers: []mappings.FormatIdentifier{mappings.FormatIdentifier{Typ: "PUID", Id: "x-fmt/317"}}}
 
 func TestParseHex(t *testing.T) {
 	ts, _, _, err := parseHex("x-fmt/8", bsStub1.Hex)
@@ -134,19 +134,8 @@ func TestParseHex(t *testing.T) {
 }
 
 func TestParseReports(t *testing.T) {
-	_, err := ParseReport(rStub1)
-	if err != nil {
-		t.Error(err)
-	}
-	_, err = ParseReport(rStub2)
-	if err != nil {
-		t.Error(err)
-	}
-	_, err = ParseReport(rStub3)
-	if err != nil {
-		t.Error(err)
-	}
-	_, err = ParseReport(rStub4)
+	r := &reports{[]string{"test1", "test2", "test3", "test4"}, []*mappings.Report{rStub1, rStub2, rStub3, rStub4}, nil}
+	_, _, err := r.signatures()
 	if err != nil {
 		t.Error(err)
 	}

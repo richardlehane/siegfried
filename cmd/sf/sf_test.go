@@ -12,7 +12,7 @@ import (
 	"github.com/richardlehane/siegfried/config"
 )
 
-var testhome = flag.String("testhome", filepath.Join("..", "r2d2", "data"), "override the default home directory")
+var testhome = flag.String("testhome", filepath.Join("..", "roy", "data"), "override the default home directory")
 var testdata = flag.String("testdata", filepath.Join(".", "testdata"), "override the default test data directory")
 
 var s *siegfried.Siegfried

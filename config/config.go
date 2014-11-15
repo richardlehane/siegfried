@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package config sets up defaults used by both the SF and R2D2 tools
+// Package config sets up defaults used by both the SF and roy tools
 // Config options can be overriden with build flags e.g. the brew and archivematica files.
 package config
 

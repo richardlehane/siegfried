@@ -54,6 +54,18 @@ func New() *Siegfried {
 	return s
 }
 
+func (s *Siegfried) String() string {
+	var str string
+	str += s.em.String()
+	str += s.cm.String()
+	str += s.bm.String()
+	return str
+}
+
+func (s *Siegfried) InspectTTI(tti int) string {
+	return ""
+}
+
 func (s *Siegfried) Add(i core.Identifier) error {
 	switch i := i.(type) {
 	default:
@@ -303,12 +315,4 @@ func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, e
 		close(res)
 	}()
 	return res, nil
-}
-
-func (s *Siegfried) String() string {
-	var str string
-	str += s.em.String()
-	str += s.cm.String()
-	str += s.bm.String()
-	return str
 }

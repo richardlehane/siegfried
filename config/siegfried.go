@@ -23,7 +23,7 @@ import (
 
 var siegfried = struct {
 	version          [3]int // Siegfried version (i.e. of the sf tool)
-	home             string // Home directory used by both sf and r2d2 tools
+	home             string // Home directory used by both sf and roy tools
 	signature        string // Name of signature file
 	signatureVersion int    // Version of the signature file (this is used for the update service)
 	// Defaults for processing bytematcher signatures. These control the segmentation.

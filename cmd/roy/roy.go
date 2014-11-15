@@ -22,7 +22,6 @@ import (
 
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/config"
-	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
@@ -50,7 +49,7 @@ var (
 	_, htimeout, _ = config.HarvestOptions()
 	timeout        = flag.Duration("timeout", htimeout, "set duration before timing-out harvesting requests e.g. 120s")
 
-	// INSPECT (r2d2 inspect | r2d2 inspect fmt/121 | r2d2 inspect usr/local/mysig.gob | r2d2 inspect 10)
+	// INSPECT (roy inspect | roy inspect fmt/121 | roy inspect usr/local/mysig.gob | roy inspect 10)
 	inspect        = flag.NewFlagSet("inspect", flag.ExitOnError)
 	inspectHome    = inspect.String("home", config.Home(), "override the default home directory")
 	inspectReports = inspect.String("reports", config.Reports(), "set path for Pronom reports directory")
@@ -61,13 +60,13 @@ func savereps() error {
 	if err != nil {
 		err = os.Mkdir(config.Reports(), os.ModePerm)
 		if err != nil {
-			return fmt.Errorf("R2D2: error making reports directory")
+			return fmt.Errorf("roy: error making reports directory")
 		}
 	}
 	file.Close()
-	errs := pronom.SaveReports()
+	errs := pronom.Harvest()
 	if len(errs) > 0 {
-		return fmt.Errorf("R2D2: errors saving reports to disk")
+		return fmt.Errorf("roy: errors saving reports to disk")
 	}
 	return nil
 }
@@ -94,76 +93,57 @@ func inspectPronom() error {
 }
 
 func blameSig(i int) error {
-	p, err := pronom.NewPronom()
+	s, err := siegfried.Load(config.Signature())
 	if err != nil {
 		return err
 	}
-	sigs, err := p.Parse()
-	if err != nil {
-		return err
-	}
-	bm := bytematcher.New()
-	_, err = bm.Add(bytematcher.SignatureSet(sigs), nil)
-	if err != nil {
-		return err
-	}
-	if i > len(bm.Tests)-1 {
-		return fmt.Errorf("Test index out of range: got %d, have %d tests", i, len(bm.Tests))
-	}
-	puids, _ := p.GetPuids()
-	tn := bm.Tests[i]
-	if len(tn.Complete) > 0 {
-		fmt.Println("Completes:")
-	}
-	for _, v := range tn.Complete {
-		fmt.Println(puids[v[0]])
-	}
-	if len(tn.Incomplete) > 0 {
-		fmt.Println("Incompletes:")
-	}
-	for _, v := range tn.Incomplete {
-		fmt.Println(puids[v.Kf[0]])
-	}
+	fmt.Println(s.InspectTTI(i))
+	/*
+		p, err := pronom.NewPronom()
+		if err != nil {
+			return err
+		}
+		sigs, err := p.Parse()
+		if err != nil {
+			return err
+		}
+		bm := bytematcher.New()
+		_, err = bm.Add(bytematcher.SignatureSet(sigs), nil)
+		if err != nil {
+			return err
+		}
+		if i > len(bm.Tests)-1 {
+			return fmt.Errorf("Test index out of range: got %d, have %d tests", i, len(bm.Tests))
+		}
+		puids, _ := p.GetPuids()
+		tn := bm.Tests[i]
+		if len(tn.Complete) > 0 {
+			fmt.Println("Completes:")
+		}
+		for _, v := range tn.Complete {
+			fmt.Println(puids[v[0]])
+		}
+		if len(tn.Incomplete) > 0 {
+			fmt.Println("Incompletes:")
+		}
+		for _, v := range tn.Incomplete {
+			fmt.Println(puids[v.Kf[0]])
+		}
+	*/
 	return nil
 }
 
 func viewSig(f string) error {
-	sigs, err := pronom.ParsePuid(f)
+	p, err := pronom.New(config.SetSingle(f))
 	if err != nil {
 		return err
 	}
-	fmt.Println("Signatures:")
-	for _, s := range sigs {
-		fmt.Println(s)
-	}
-	bm := bytematcher.New()
-	_, err = bm.Add(bytematcher.SignatureSet(sigs), nil)
+	s := siegfried.New()
+	err = s.Add(p)
 	if err != nil {
 		return err
 	}
-	fmt.Println("\nKeyframes:")
-	for _, kf := range bm.KeyFrames {
-		fmt.Println(kf)
-	}
-	fmt.Println("\nTests:")
-	for _, test := range bm.Tests {
-		fmt.Println(test)
-	}
-	if len(bm.BOFSeq.Set) > 0 {
-		fmt.Println("\nBOF seqs:")
-		for _, seq := range bm.BOFSeq.Set {
-			fmt.Println(seq)
-		}
-	}
-	if len(bm.EOFSeq.Set) > 0 {
-		fmt.Println("\nEOF seqs:")
-		for _, seq := range bm.EOFSeq.Set {
-			fmt.Println(seq)
-		}
-	}
-	fmt.Println("\nBytematcher:")
-
-	fmt.Println(bm)
+	fmt.Println(s)
 	return nil
 }
 
@@ -234,10 +214,10 @@ func setInspectOptions() {
 
 var usage = `
 Usage
-   r2d2 build 
-   r2d2 add -name version76 
-   r2d2 harvest
-   r2d2 inspect 
+   roy build 
+   roy add -name version76 
+   roy harvest
+   roy inspect 
 `
 
 func main() {
@@ -276,7 +256,7 @@ func main() {
 			setInspectOptions()
 			switch inspect.Arg(0) {
 			case "":
-				fmt.Println("almost there")
+				err = inspectPronom()
 			}
 
 		}

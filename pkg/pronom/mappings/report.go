@@ -23,7 +23,9 @@ import (
 
 type Report struct {
 	XMLName     xml.Name           `xml:"PRONOM-Report"`
+	Id          int                `xml:"report_format_detail>FileFormat>FormatID"`
 	Name        string             `xml:"report_format_detail>FileFormat>FormatName"`
+	Version     string             `xml:"report_format_detail>FileFormat>FormatVersion"`
 	Description string             `xml:"report_format_detail>FileFormat>FormatDescription"`
 	Identifiers []FormatIdentifier `xml:"report_format_detail>FileFormat>FormatIdentifier"`
 	Signatures  []Signature        `xml:"report_format_detail>FileFormat>InternalSignature"`
@@ -65,15 +67,44 @@ func trim(label, s string) string {
 }
 
 func (bs ByteSequence) String() string {
-	return trim("Pos", bs.Position) + trim("Off", bs.Offset) + trim("Max", bs.MaxOffset) + trim("Hex", bs.Hex)
+	return trim("Pos", bs.Position) + trim("Min", bs.Offset) + trim("Max", bs.MaxOffset) + trim("Hex", bs.Hex)
 }
 
 type RelatedFormat struct {
-	Type string `xml:"RelationshipType"`
-	ID   int    `xml:"RelatedFormatID"`
+	Typ string `xml:"RelationshipType"`
+	Id  int    `xml:"RelatedFormatID"`
+}
+
+func (r *Report) Superiors() []int {
+	sups := []int{}
+	for _, v := range r.Relations {
+		if v.Typ == "Has lower priority than" {
+			sups = append(sups, v.Id)
+		}
+	}
+	return sups
+}
+
+func (r *Report) Subordinates() []int {
+	subs := []int{}
+	for _, v := range r.Relations {
+		if v.Typ == "Has priority over" {
+			subs = append(subs, v.Id)
+		}
+	}
+	return subs
 }
 
 type FormatIdentifier struct {
-	Type string `xml:"IdentifierType"`
-	ID   string `xml:"Identifier"`
+	Typ string `xml:"IdentifierType"`
+	Id  string `xml:"Identifier"`
+}
+
+func (r *Report) MIME() string {
+	for _, v := range r.Identifiers {
+		if v.Typ == "MIME" {
+			return v.Id
+		}
+	}
+	return ""
 }
