@@ -59,8 +59,8 @@ Copyright 2014 Richard Lehane
 Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
 
 ## Changes
-### Version 0.6.1 (15/11/2014)
-- roy (r2d2 renamed) signature customisation
+### Version 0.6.1 (21/11/2014)
+- roy (r2d2 rename) signature customisation
 - parse Droid signature (not just PRONOM reports)
 - support extension signatures
 
