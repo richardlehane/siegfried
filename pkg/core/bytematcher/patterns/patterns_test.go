@@ -37,3 +37,19 @@ func TestChoice(t *testing.T) {
 		t.Error("Choice fail: Sequences; expecting t, t got ", seqs[0][0], seqs[1][0])
 	}
 }
+
+func TestList(t *testing.T) {
+	if TestLists[0].Equals(TestLists[1]) {
+		t.Error("List fail: equality")
+	}
+	if _, l := TestLists[0].Test([]byte{'t', 'e', 's', 't', 't', 'e', 's', 't', 'y'}); l != 9 {
+		t.Error("List test fail: Test")
+	}
+	if TestLists[0].NumSequences() != 1 {
+		t.Error("List fail: NumSequences; expecting 1 got", TestLists[0].NumSequences())
+	}
+	seqs := TestLists[0].Sequences()
+	if seqs[0][0] != 't' || seqs[0][8] != 'y' {
+		t.Error("List fail: Sequences; expecting t, y got ", seqs[0][0], seqs[0][8])
+	}
+}

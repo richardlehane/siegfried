@@ -157,3 +157,39 @@ func TestParseContainer(t *testing.T) {
 		t.Error("Expecting a sequence with a length of 19! Got ", sig)
 	}
 }
+
+// DROID parsing is tested by comparing it against Report parsing
+func TestParseDroid(t *testing.T) {
+	d, err := newDroid()
+	if err != nil {
+		t.Fatal(err)
+	}
+	r, err := newReports(d.puids(), d.idsPuids())
+	if err != nil {
+		t.Fatal(err)
+	}
+	dsigs, dpuids, err := d.signatures()
+	if err != nil {
+		t.Fatal(err)
+	}
+	rsigs, rpuids, err := r.signatures()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(dpuids) != len(rpuids) {
+		t.Errorf("Parse Droid: Expecting length of reports and droid to be same, got %d, %d, %s", len(rpuids), len(dpuids), dpuids[len(dpuids)-8])
+	}
+	for i, v := range rpuids {
+		if v != dpuids[i] {
+			t.Errorf("Parse Droid: Expecting slices of puids to be identical but at index %d, got %s for reports and %s for droid", i, v, dpuids[i])
+		}
+	}
+	if len(dsigs) != len(rsigs) {
+		t.Errorf("Parse Droid: Expecting sig length of reports and droid to be same, got %d, %d", len(rsigs), len(dsigs))
+	}
+	for i, v := range rsigs {
+		if !v.Equals(dsigs[i]) {
+			t.Errorf("Parse Droid: Expecting slice of sigs to be identical but at index %d, puid %s, got %s for reports and %s for droid", i, rpuids[i], v, dsigs[i])
+		}
+	}
+}

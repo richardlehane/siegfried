@@ -47,7 +47,7 @@ type pronom struct {
 // Pronom creates a pronom object
 func newPronom() (*pronom, error) {
 	p := &pronom{}
-	if err := p.setJoint(); err != nil {
+	if err := p.setParseables(); err != nil {
 		return nil, err
 	}
 	if !config.NoPriority() {
@@ -70,8 +70,8 @@ func (p *pronom) identifier() *Identifier {
 	return i
 }
 
-// set joint joins signatures in the DROID signature file with any extra reports and adds that to the pronom object
-func (p *pronom) setJoint() error {
+// set parseables joins signatures in the DROID signature file with any extra reports and adds that to the pronom object
+func (p *pronom) setParseables() error {
 	d, err := newDroid()
 	if err != nil {
 		return err

@@ -26,6 +26,8 @@ import (
 	"github.com/richardlehane/siegfried/pkg/pronom/mappings"
 )
 
+// a parseable is something we can parse (either a DROID signature file or PRONOM report file)
+// to derive extension and bytematcher signatures
 type parseable interface {
 	puids() []string
 	infos() map[string]FormatInfo
@@ -159,6 +161,8 @@ const (
 	bofstring = "Absolute from BOF"
 	eofstring = "Absolute from EOF"
 	varstring = "Variable"
+	droidbof  = "BOFOffset"
+	droideof  = "EOFOffset"
 )
 
 // parse sig takes a signature from a report and returns a BM signature
@@ -256,13 +260,14 @@ func decodeNum(num string) (int, error) {
 func parseHex(puid, hx string) ([]token, int, int, error) {
 	tokens := make([]token, 0, 10)
 	var choice patterns.Choice // common bucket for stuffing choices into
+	var list patterns.List     // common bucket for stuffing lists within choices
 	var rangeStart string
 	var min, max int
 	l := sigLex(puid, hx)
 	for i := l.nextItem(); i.typ != itemEOF; i = l.nextItem() {
 		switch i.typ {
 		case itemError:
-			return nil, 0, 0, errors.New(i.String())
+			return nil, 0, 0, errors.New("parse error " + puid + ": " + i.String())
 		// parse simple types
 		case itemText:
 			tokens = append(tokens, token{min, max, patterns.Sequence(decodeHex(i.val))})
@@ -278,15 +283,34 @@ func parseHex(puid, hx string) ([]token, int, int, error) {
 		// parse choice types
 		case itemParensLeft:
 			choice = make(patterns.Choice, 0, 2)
+			list = make(patterns.List, 0, 1)
 		case itemTextChoice:
-			choice = append(choice, patterns.Sequence(decodeHex(i.val)))
+			list = append(list, patterns.Sequence(decodeHex(i.val)))
 		case itemNotTextChoice:
-			choice = append(choice, NotSequence(decodeHex(i.val)))
+			list = append(list, NotSequence(decodeHex(i.val)))
 		case itemRangeEndChoice:
-			choice = append(choice, Range{decodeHex(rangeStart), decodeHex(i.val)})
+			list = append(list, Range{decodeHex(rangeStart), decodeHex(i.val)})
 		case itemNotRangeEndChoice:
-			choice = append(choice, NotRange{decodeHex(rangeStart), decodeHex(i.val)})
+			list = append(list, NotRange{decodeHex(rangeStart), decodeHex(i.val)})
+		case itemPipe:
+			if len(list) == 0 {
+				return nil, 0, 0, errors.New("parse error " + puid + ": no choices before pipe")
+			}
+			if len(list) > 1 {
+				choice = append(choice, list)
+			} else {
+				choice = append(choice, list[0])
+			}
+			list = make(patterns.List, 0, 1)
 		case itemParensRight:
+			if len(list) == 0 {
+				return nil, 0, 0, errors.New("parse error " + puid + ": no choices closing parens")
+			}
+			if len(list) > 1 {
+				choice = append(choice, list)
+			} else {
+				choice = append(choice, list[0])
+			}
 			tokens = append(tokens, token{min, max, choice})
 		// parse wild cards
 		case itemWildSingle:
@@ -322,7 +346,7 @@ func appendSig(s1, s2 frames.Signature, pos string) frames.Signature {
 		return s2
 	}
 	// if s2 is an EOF - just append it
-	if pos == eofstring {
+	if pos == eofstring || pos == droideof {
 		return append(s1, s2...)
 	}
 	// if s1 has an EOF segment, and s2 is a BOF or Var, prepend that s2 segment before it, but after any preceding segments
@@ -426,25 +450,85 @@ func (d *droid) signatures() ([]frames.Signature, []string, error) {
 			i++
 		}
 	}
-	return sigs, puids, err
+	// appear to be some (7) unused sigs... so slice to real length
+	return sigs[:i], puids[:i], err
 }
 
 func parseByteSeqs(puid string, bs []mappings.ByteSeq) (frames.Signature, error) {
-	return nil, nil
+	var sig frames.Signature
+	var eof bool
+	for _, b := range bs {
+		ref := b.Reference
+		if ref == droideof {
+			eof = true
+		}
+		for _, ss := range b.SubSequences {
+			ns, err := parseSubSequence(puid, ss, eof)
+			if err != nil {
+				return nil, err
+			}
+			sig = appendSig(sig, ns, ref)
+		}
+	}
+	return sig, nil
 }
 
-func parseSeq(puid, seq string, eof bool) ([]frames.Frame, error) {
+func parseSubSequence(puid string, ss mappings.SubSequence, eof bool) (frames.Signature, error) {
+	sig, err := parseSeq(puid, ss.Sequence, eof)
+	if err != nil {
+		return nil, err
+	}
+	if len(ss.LeftFragments) > 0 {
+		sig, err = appendFragments(puid, sig, ss.LeftFragments, true, eof)
+		if err != nil {
+			return nil, err
+		}
+	}
+	if len(ss.RightFragments) > 0 {
+		sig, err = appendFragments(puid, sig, ss.RightFragments, false, eof)
+		if err != nil {
+			return nil, err
+		}
+	}
+	min, err := decodeNum(ss.SubSeqMinOffset)
+	if err != nil {
+		return nil, err
+	}
+	var max int
+	if ss.SubSeqMaxOffset == "" {
+		max = -1
+	} else {
+		max, err = decodeNum(ss.SubSeqMaxOffset)
+		if err != nil {
+			return nil, err
+		}
+	}
+	if eof {
+		if ss.Position == 1 {
+			sig[len(sig)-1] = frames.NewFrame(frames.EOF, sig[len(sig)-1].Pat(), min, max)
+		} else {
+			sig[len(sig)-1] = frames.NewFrame(frames.SUCC, sig[len(sig)-1].Pat(), min, max)
+		}
+	} else {
+		if ss.Position == 1 {
+			sig[0] = frames.NewFrame(frames.BOF, sig[0].Pat(), min, max)
+		} else {
+			sig[0] = frames.NewFrame(frames.PREV, sig[0].Pat(), min, max)
+		}
+	}
+	return sig, nil
+}
+
+func parseSeq(puid, seq string, eof bool) (frames.Signature, error) {
 	typ := frames.PREV
 	if eof {
 		typ = frames.SUCC
 	}
-	fs := make([]frames.Frame, 0, 10)
+	fs := make(frames.Signature, 0, 10)
 	var rangeStart string
 	l := droidLex(puid, seq)
 	for i := l.nextItem(); i.typ != itemEOF; i = l.nextItem() {
 		switch i.typ {
-		default:
-			return nil, errors.New(i.String())
 		case itemError:
 			return nil, errors.New(i.String())
 		// parse simple types
@@ -464,35 +548,8 @@ func parseSeq(puid, seq string, eof bool) ([]frames.Frame, error) {
 	return fs, nil
 }
 
-// droid fragments (right or left) can share positions. If such fragments have same offsets, they are a patterns.Choice. If not, then err.
-func groupFragments(puid string, fs []mappings.Fragment) ([][]mappings.Fragment, error) {
-	//var min, max string
-	var maxPos int
-	for _, f := range fs {
-		if f.Position == 0 {
-			return nil, errors.New("Pronom: encountered fragment without a position, puid " + puid)
-		}
-		if f.Position > maxPos {
-			maxPos = f.Position
-		}
-	}
-	ret := make([][]mappings.Fragment, maxPos)
-	for _, f := range fs {
-		ret[f.Position] = append(ret[f.Position], f)
-	}
-	for _, r := range ret {
-		max, min := r[0].MaxOffset, r[0].MinOffset
-		for _, v := range r {
-			if v.MaxOffset != max || v.MinOffset != min {
-				return nil, errors.New("Pronom: encountered fragments at same positions with different offsets, puid " + puid)
-			}
-		}
-	}
-	return ret, nil
-}
-
 // append a slice of fragments (left or right) to the central droid sequence
-func appendFragments(puid string, f []frames.Frame, frags []mappings.Fragment, left, eof bool) ([]frames.Frame, error) {
+func appendFragments(puid string, sig frames.Signature, frags []mappings.Fragment, left, eof bool) (frames.Signature, error) {
 	fs, err := groupFragments(puid, frags)
 	if err != nil {
 		return nil, err
@@ -503,8 +560,8 @@ func appendFragments(puid string, f []frames.Frame, frags []mappings.Fragment, l
 	}
 	var choice patterns.Choice
 	offs := make([][2]int, len(fs))
-	nfs := make([][]frames.Frame, len(fs))
-	l := len(f)
+	ns := make([]frames.Signature, len(fs))
+	//l := len(sig)
 	// iterate over the grouped fragments
 	for i, v := range fs {
 		if len(v) > 1 {
@@ -515,19 +572,24 @@ func appendFragments(puid string, f []frames.Frame, frags []mappings.Fragment, l
 					return nil, err
 				}
 				if len(pats) > 1 {
-					return nil, errors.New("Pronom: encountered multiple patterns within a single choice, puid " + puid)
+					list := make(patterns.List, len(pats))
+					for i, v := range pats {
+						list[i] = v.Pat()
+					}
+					choice = append(choice, list)
+				} else {
+					choice = append(choice, pats[0].Pat())
 				}
-				choice = append(choice, pats[0].Pat())
 			}
-			nfs[i] = []frames.Frame{frames.NewFrame(typ, choice, 0, 0)}
-			l++ // only one choice added
+			ns[i] = frames.Signature{frames.NewFrame(typ, choice, 0, 0)}
+			//	l++ // only one choice added
 		} else {
 			pats, err := parseSeq(puid, v[0].Value, eof)
 			if err != nil {
 				return nil, err
 			}
-			nfs[i] = pats
-			l += len(pats) // can have multiple patterns within a fragment
+			ns[i] = pats
+			//l += len(pats) // can have multiple patterns within a fragment
 		}
 		min, err := decodeNum(v[0].MinOffset)
 		if err != nil {
@@ -546,12 +608,58 @@ func appendFragments(puid string, f []frames.Frame, frags []mappings.Fragment, l
 	}
 	// Now make the frames by adding in offset information (if left fragments, this needs to be taken from their neighbour)
 	if left {
-
+		if eof {
+			for i, v := range ns {
+				v[len(v)-1] = frames.NewFrame(frames.SUCC, v[len(v)-1].Pat(), offs[i][0], offs[i][1])
+				sig = append(v, sig...)
+			}
+		} else {
+			for i, v := range ns {
+				sig[0] = frames.NewFrame(frames.PREV, sig[0].Pat(), offs[i][0], offs[i][1])
+				sig = append(v, sig...)
+			}
+		}
 	} else {
+		if eof {
+			for i, v := range ns {
+				sig[len(sig)-1] = frames.NewFrame(frames.SUCC, sig[len(sig)-1].Pat(), offs[i][0], offs[i][1])
+				sig = append(sig, v...)
+			}
 
+		} else {
+			for i, v := range ns {
+				v[0] = frames.NewFrame(frames.PREV, v[0].Pat(), offs[i][0], offs[i][1])
+				sig = append(sig, v...)
+			}
+		}
 	}
+	return sig, nil
+}
 
-	ret := make([]frames.Frame, l)
+// droid fragments (right or left) can share positions. If such fragments have same offsets, they are a patterns.Choice. If not, then err.
+func groupFragments(puid string, fs []mappings.Fragment) ([][]mappings.Fragment, error) {
+	//var min, max string
+	var maxPos int
+	for _, f := range fs {
+		if f.Position == 0 {
+			return nil, errors.New("Pronom: encountered fragment without a position, puid " + puid)
+		}
+		if f.Position > maxPos {
+			maxPos = f.Position
+		}
+	}
+	ret := make([][]mappings.Fragment, maxPos)
+	for _, f := range fs {
+		ret[f.Position-1] = append(ret[f.Position-1], f)
+	}
+	for _, r := range ret {
+		max, min := r[0].MaxOffset, r[0].MinOffset
+		for _, v := range r {
+			if v.MaxOffset != max || v.MinOffset != min {
+				return nil, errors.New("Pronom: encountered fragments at same positions with different offsets, puid " + puid)
+			}
+		}
+	}
 	return ret, nil
 }
 

@@ -219,3 +219,122 @@ func (c Choice) String() string {
 	}
 	return s + "]"
 }
+
+// List is a slice of patterns, all of which must test true sequentially in order for the pattern to succeed.
+type List []Pattern
+
+func (l List) Test(b []byte) (bool, int) {
+	if len(l) < 1 {
+		return false, 0
+	}
+	success, first := l[0].Test(b)
+	if !success {
+		return false, first
+	}
+	total := first
+	if len(l) > 1 {
+		for _, p := range l[1:] {
+			if len(b) <= total {
+				return false, 0
+			}
+			success, le := p.Test(b[total:])
+			if !success {
+				return false, first
+			}
+			total += le
+		}
+	}
+	return true, total
+}
+
+func (l List) TestR(b []byte) (bool, int) {
+	if len(l) < 1 {
+		return false, 0
+	}
+	success, first := l[len(l)-1].TestR(b)
+	if !success {
+		return false, first
+	}
+	total := first
+	if len(l) > 1 {
+		for i := len(l) - 2; i >= 0; i-- {
+			if len(b) <= total {
+				return false, 0
+			}
+			success, le := l[i].TestR(b[:len(b)-total])
+			if !success {
+				return false, first
+			}
+			total += le
+		}
+	}
+	return true, total
+}
+
+func (l List) Equals(pat Pattern) bool {
+	l2, ok := pat.(List)
+	if ok {
+		if len(l) == len(l2) {
+			for i, p := range l {
+				if !p.Equals(l2[i]) {
+					return false
+				}
+			}
+		}
+	}
+	return true
+}
+
+func (l List) Length() (int, int) {
+	var min, max int
+	for _, pat := range l {
+		pmin, pmax := pat.Length()
+		min += pmin
+		max += pmax
+	}
+	return min, max
+}
+
+func (l List) NumSequences() int {
+	s := 1
+	for _, pat := range l {
+		num := pat.NumSequences()
+		if num == 0 { // if any of the patterns can't be converted to sequences, don't return any
+			return 0
+		}
+		s *= num
+	}
+	return s
+}
+
+func (l List) Sequences() []Sequence {
+	total := l.NumSequences()
+	seqs := make([]Sequence, total)
+	for _, pat := range l {
+		num := pat.NumSequences()
+		times := total / num
+		idx := 0
+		for _, seq := range pat.Sequences() {
+			for i := 0; i < times; i++ {
+				seqs[idx] = append(seqs[idx], seq...)
+				idx++
+			}
+		}
+	}
+	return seqs
+}
+
+func (l List) ValidBytes(i int) []byte {
+	return nil
+}
+
+func (l List) String() string {
+	s := "l["
+	for i, pat := range l {
+		s += pat.String()
+		if i < len(l)-1 {
+			s += ","
+		}
+	}
+	return s + "]"
+}

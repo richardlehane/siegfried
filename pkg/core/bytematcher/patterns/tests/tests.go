@@ -24,6 +24,11 @@ var TestSequences = []Sequence{
 	Sequence("23"),
 }
 
+var TestLists = []List{
+	List{TestSequences[0], TestSequences[2]},
+	List{TestSequences[3], TestSequences[4]},
+}
+
 // Shared test choices (exported so they can be used by the other bytematcher packages)
 var TestChoices = []Choice{
 	Choice{TestSequences[0], TestSequences[2]},
@@ -42,4 +47,5 @@ var TestChoices = []Choice{
 		TestSequences[14],
 		TestSequences[15],
 	},
+	Choice{TestSequences[0], TestLists[0]},
 }

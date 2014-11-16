@@ -474,6 +474,9 @@ func droidText(l *lexer) stateFn {
 	case eof:
 		l.emit(itemEOF)
 		return nil
+	case leftBracket:
+		l.emit(itemBracketLeft)
+		return droidLeftBracket
 	}
 	return l.errorf("encountered invalid character %q", r)
 }

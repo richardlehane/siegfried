@@ -29,30 +29,35 @@ var (
 	// BUILD, ADD flag sets
 	build       = flag.NewFlagSet("build | add", flag.ExitOnError)
 	home        = build.String("home", config.Home(), "override the default home directory")
-	droid       = build.String("droid", config.Droid(), "set name/path for Droid signature file")
+	droid       = build.String("droid", config.Droid(), "set name/path for DROID signature file")
 	container   = build.String("container", config.Container(), "set name/path for Droid Container signature file")
-	reports     = build.String("reports", config.Reports(), "set path for Pronom reports directory")
+	reports     = build.String("reports", config.Reports(), "set path for PRONOM reports directory")
 	name        = build.String("name", config.Name(), "set identifier name")
 	details     = build.String("details", config.Details(), "set identifier details")
 	extend      = build.String("extend", "", "comma separated list of additional signatures")
+	single      = build.String("single", "", "compile a single PRONOM report")
 	bof         = build.Int("bof", 0, "define a maximum BOF offset")
 	eof         = build.Int("eof", 0, "define a maximum EOF offset")
 	noeof       = build.Bool("noeof", false, "ignore EOF segments in signatures")
 	nopriority  = build.Bool("nopriority", false, "ignore priority rules when recording results")
 	nocontainer = build.Bool("nocontainer", false, "skip container signatures")
+	rng         = build.Int("range", config.Range(), "define a maximum range for segmentation")
+	distance    = build.Int("distance", config.Distance(), "define a maximum distance for segmentation")
+	varLength   = build.Int("varlen", config.VarLength(), "define a maximum length for variable offset search sequences")
+	choices     = build.Int("choices", config.Choices(), "define a maximum number of choices for segmentation")
 
 	// HARVEST
 	harvest        = flag.NewFlagSet("harvest", flag.ExitOnError)
 	harvestHome    = harvest.String("home", config.Home(), "override the default home directory")
-	harvestDroid   = harvest.String("droid", config.Droid(), "set name/path for Droid signature file")
-	harvestReports = harvest.String("reports", config.Reports(), "set path for Pronom reports directory")
+	harvestDroid   = harvest.String("droid", config.Droid(), "set name/path for DROID signature file")
+	harvestReports = harvest.String("reports", config.Reports(), "set path for PRONOM reports directory")
 	_, htimeout, _ = config.HarvestOptions()
 	timeout        = flag.Duration("timeout", htimeout, "set duration before timing-out harvesting requests e.g. 120s")
 
 	// INSPECT (roy inspect | roy inspect fmt/121 | roy inspect usr/local/mysig.gob | roy inspect 10)
 	inspect        = flag.NewFlagSet("inspect", flag.ExitOnError)
 	inspectHome    = inspect.String("home", config.Home(), "override the default home directory")
-	inspectReports = inspect.String("reports", config.Reports(), "set path for Pronom reports directory")
+	inspectReports = inspect.String("reports", config.Reports(), "set path for PRONOM reports directory")
 )
 
 func savereps() error {
@@ -169,6 +174,9 @@ func buildOptions() []config.Option {
 	}
 	if *extend != "" {
 		opts = append(opts, config.SetExtend(*extend))
+	}
+	if *single != "" {
+		opts = append(opts, config.SetSingle(*single))
 	}
 	if *bof != 0 {
 		opts = append(opts, config.SetBOF(*bof))
