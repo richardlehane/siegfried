@@ -189,7 +189,7 @@ func TestParseDroid(t *testing.T) {
 	}
 	for i, v := range rsigs {
 		if !v.Equals(dsigs[i]) {
-			t.Errorf("Parse Droid: Expecting slice of sigs to be identical but at index %d, puid %s, got %s for reports and %s for droid", i, rpuids[i], v, dsigs[i])
+			t.Errorf("Parse Droid: signatures for %s are not equal:\nReports: %s\n  Droid: %s", rpuids[i], v, dsigs[i])
 		}
 	}
 }

@@ -161,8 +161,6 @@ const (
 	bofstring = "Absolute from BOF"
 	eofstring = "Absolute from EOF"
 	varstring = "Variable"
-	droidbof  = "BOFOffset"
-	droideof  = "EOFOffset"
 )
 
 // parse sig takes a signature from a report and returns a BM signature
@@ -454,16 +452,23 @@ func (d *droid) signatures() ([]frames.Signature, []string, error) {
 	return sigs[:i], puids[:i], err
 }
 
+const (
+	droidbof = "BOFoffset"
+	droideof = "EOFoffset"
+)
+
 func parseByteSeqs(puid string, bs []mappings.ByteSeq) (frames.Signature, error) {
 	var sig frames.Signature
-	var eof bool
 	for _, b := range bs {
+		var eof, vry bool
 		ref := b.Reference
 		if ref == droideof {
 			eof = true
+		} else if ref == "" {
+			vry = true
 		}
 		for _, ss := range b.SubSequences {
-			ns, err := parseSubSequence(puid, ss, eof)
+			ns, err := parseSubSequence(puid, ss, eof, vry)
 			if err != nil {
 				return nil, err
 			}
@@ -473,7 +478,25 @@ func parseByteSeqs(puid string, bs []mappings.ByteSeq) (frames.Signature, error)
 	return sig, nil
 }
 
-func parseSubSequence(puid string, ss mappings.SubSequence, eof bool) (frames.Signature, error) {
+func calcOffset(minS, maxS string, vry bool) (int, int, error) {
+	min, err := decodeNum(minS)
+	if err != nil {
+		return 0, 0, err
+	}
+	if maxS == "" {
+		if vry {
+			return min, -1, nil
+		}
+		return min, 0, nil
+	}
+	max, err := decodeNum(maxS)
+	if err != nil {
+		return 0, 0, err
+	}
+	return min, max, nil
+}
+
+func parseSubSequence(puid string, ss mappings.SubSequence, eof, vry bool) (frames.Signature, error) {
 	sig, err := parseSeq(puid, ss.Sequence, eof)
 	if err != nil {
 		return nil, err
@@ -490,18 +513,12 @@ func parseSubSequence(puid string, ss mappings.SubSequence, eof bool) (frames.Si
 			return nil, err
 		}
 	}
-	min, err := decodeNum(ss.SubSeqMinOffset)
+	if ss.Position > 1 {
+		vry = true
+	}
+	min, max, err := calcOffset(ss.SubSeqMinOffset, ss.SubSeqMaxOffset, vry)
 	if err != nil {
 		return nil, err
-	}
-	var max int
-	if ss.SubSeqMaxOffset == "" {
-		max = -1
-	} else {
-		max, err = decodeNum(ss.SubSeqMaxOffset)
-		if err != nil {
-			return nil, err
-		}
 	}
 	if eof {
 		if ss.Position == 1 {
