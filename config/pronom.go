@@ -28,13 +28,14 @@ var pronom = struct {
 	droid            string // name of droid file e.g. DROID_SignatureFile_V78.xml
 	container        string // e.g. container-signature-19770502.xml
 	reports          string // directory where PRONOM reports are stored
+	extensions       string // directory where custom signature extensions are stored
 	extend           []string
-	single           string
 	harvestURL       string
 	harvestTimeout   time.Duration
 	harvestTransport *http.Transport
 }{
 	reports:          "pronom",
+	extensions:       "custom",
 	harvestURL:       "http://apps.nationalarchives.gov.uk/pronom/",
 	harvestTimeout:   120 * time.Second,
 	harvestTransport: &http.Transport{Proxy: http.ProxyFromEnvironment},
@@ -127,6 +128,10 @@ func latest(prefix, suffix string) (string, error) {
 }
 
 func Reports() string {
+	// set reports to an empty string to force building signatures from DROID signature file rather than PRONOM reports
+	if pronom.reports == "" {
+		return ""
+	}
 	if filepath.Dir(pronom.reports) == "." {
 		return filepath.Join(siegfried.home, pronom.reports)
 	}
@@ -143,13 +148,6 @@ func Extend() []string {
 		}
 	}
 	return ret
-}
-
-func Single() (bool, string) {
-	if pronom.single == "" {
-		return false, ""
-	}
-	return true, pronom.single
 }
 
 func HarvestOptions() (string, time.Duration, *http.Transport) {
@@ -182,13 +180,6 @@ func SetReports(r string) func() private {
 func SetExtend(e string) func() private {
 	return func() private {
 		pronom.extend = strings.Split(e, ",")
-		return private{}
-	}
-}
-
-func SetSingle(s string) func() private {
-	return func() private {
-		pronom.single = s
 		return private{}
 	}
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FFSignatureFile xmlns="http://www.nationalarchives.gov.uk/pronom/SignatureFile" Version="1" DateCreated="2014-11-17T03:25:58+00:00">
+  <InternalSignatureCollection>
+  <InternalSignature ID="1" Specificity="Specific">
+  <ByteSequence Reference="BOFoffset">
+    <SubSequence MinFragLength="0" Position="1" SubSeqMaxOffset="0" SubSeqMinOffset="0">
+      <Sequence>41445345474D454E54454446494C45</Sequence>
+      <DefaultShift>16</DefaultShift>
+      <Shift Byte="41">15</Shift>
+      <Shift Byte="44">5</Shift>
+      <Shift Byte="53">13</Shift>
+      <Shift Byte="45">1</Shift>
+      <Shift Byte="47">11</Shift>
+      <Shift Byte="4D">10</Shift>
+      <Shift Byte="4E">8</Shift>
+      <Shift Byte="54">7</Shift>
+      <Shift Byte="46">4</Shift>
+      <Shift Byte="49">3</Shift>
+      <Shift Byte="4C">2</Shift>
+    </SubSequence>
+  </ByteSequence>
+</InternalSignature>
+</InternalSignatureCollection>
+<FileFormatCollection>
+  <FileFormat ID="1" Name="AccessData AD1 Disk Image" PUID="archivematica-fmt/2" Version="" MIMEType="">
+    <InternalSignatureID>1</InternalSignatureID>
+    <Extension>ad1</Extension>
+  </FileFormat>
+</FileFormatCollection></FFSignatureFile>

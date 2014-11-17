@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FFSignatureFile xmlns="http://www.nationalarchives.gov.uk/pronom/SignatureFile" Version="1" DateCreated="2014-11-17T03:30:58+00:00">
+<FileFormatCollection>
+  <FileFormat ID="1" Name="Raw disk image" PUID="archivematica-fmt/4" Version="" MIMEType="">
+    <InternalSignatureID>1</InternalSignatureID>
+    <Extension>dd</Extension>
+    <Extension>dd.001</Extension>
+    <Extension>dd.001</Extension>
+  </FileFormat>
+</FileFormatCollection></FFSignatureFile>

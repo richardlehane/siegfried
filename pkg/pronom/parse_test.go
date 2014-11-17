@@ -1,8 +1,10 @@
 package pronom
 
 import (
+	"path/filepath"
 	"testing"
 
+	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
 	"github.com/richardlehane/siegfried/pkg/pronom/mappings"
 )
@@ -160,6 +162,7 @@ func TestParseContainer(t *testing.T) {
 
 // DROID parsing is tested by comparing it against Report parsing
 func TestParseDroid(t *testing.T) {
+	config.SetHome(filepath.Join("..", "..", "cmd", "roy", "data"))()
 	d, err := newDroid()
 	if err != nil {
 		t.Fatal(err)

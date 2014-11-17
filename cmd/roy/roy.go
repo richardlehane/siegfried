@@ -35,7 +35,6 @@ var (
 	name        = build.String("name", config.Name(), "set identifier name")
 	details     = build.String("details", config.Details(), "set identifier details")
 	extend      = build.String("extend", "", "comma separated list of additional signatures")
-	single      = build.String("single", "", "compile a single PRONOM report")
 	bof         = build.Int("bof", 0, "define a maximum BOF offset")
 	eof         = build.Int("eof", 0, "define a maximum EOF offset")
 	noeof       = build.Bool("noeof", false, "ignore EOF segments in signatures")
@@ -175,9 +174,6 @@ func buildOptions() []config.Option {
 	if *extend != "" {
 		opts = append(opts, config.SetExtend(*extend))
 	}
-	if *single != "" {
-		opts = append(opts, config.SetSingle(*single))
-	}
 	if *bof != 0 {
 		opts = append(opts, config.SetBOF(*bof))
 	}
@@ -192,6 +188,18 @@ func buildOptions() []config.Option {
 	}
 	if *nocontainer {
 		opts = append(opts, config.SetNoContainer())
+	}
+	if *rng != config.Range() {
+		opts = append(opts, config.SetRange(*rng))
+	}
+	if *distance != config.Distance() {
+		opts = append(opts, config.SetDistance(*distance))
+	}
+	if *varLength != config.VarLength() {
+		opts = append(opts, config.SetVarLength(*varLength))
+	}
+	if *choices != config.Choices() {
+		opts = append(opts, config.SetChoices(*choices))
 	}
 	return opts
 }
@@ -222,10 +230,10 @@ func setInspectOptions() {
 
 var usage = `
 Usage
-   roy build 
-   roy add -name version76 
-   roy harvest
-   roy inspect 
+   roy build -help
+   roy add -help 
+   roy harvest -help
+   roy inspect -help
 `
 
 func main() {

@@ -33,7 +33,6 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/containermatcher"
 	"github.com/richardlehane/siegfried/pkg/core/extensionmatcher"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
-
 	"github.com/richardlehane/siegfried/pkg/pronom/mappings"
 )
 
@@ -102,13 +101,9 @@ func newReports(reps []string, idsPuids map[int]string) (*reports, error) {
 	}
 	r := &reports{reps, make([]*mappings.Report, len(reps)), idsPuids}
 	apply := func(puid string) error {
-		buf, err := get(puid)
-		if err != nil {
-			return err
-		}
 		idx := indexes[puid]
 		r.r[idx] = &mappings.Report{}
-		return xml.Unmarshal(buf, r.r[idx])
+		return openXML(reportPath(puid), r.r[idx])
 	}
 	errs := applyAll(reps, apply)
 	if len(errs) > 0 {
@@ -119,6 +114,10 @@ func newReports(reps []string, idsPuids map[int]string) (*reports, error) {
 		return nil, fmt.Errorf(strings.Join(strs, "\n"))
 	}
 	return r, nil
+}
+
+func reportPath(puid string) string {
+	return filepath.Join(config.Reports(), strings.Replace(puid, "/", "", 1)+".xml")
 }
 
 // setContainers adds containers to a pronom object. It takes as an argument the path to a container signature file
@@ -287,10 +286,6 @@ func getHttp(url string) ([]byte, error) {
 	}
 	defer resp.Body.Close()
 	return ioutil.ReadAll(resp.Body)
-}
-
-func get(puid string) ([]byte, error) {
-	return ioutil.ReadFile(filepath.Join(config.Reports(), strings.Replace(puid, "/", "", 1)+".xml"))
 }
 
 func save(puid, url, path string) error {
