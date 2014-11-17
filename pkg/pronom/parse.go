@@ -430,7 +430,7 @@ func (d *droid) priorities() priority.Map {
 
 func (d *droid) signatures() ([]frames.Signature, []string, error) {
 	if len(d.Signatures) == 0 {
-		return nil, nil
+		return nil, nil, nil
 	}
 	sigs, puids := make([]frames.Signature, len(d.Signatures)), make([]string, len(d.Signatures))
 	// first a map of internal sig ids to bytesequences
