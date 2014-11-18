@@ -47,17 +47,17 @@ type pronom struct {
 func newPronom() (*pronom, error) {
 	p := &pronom{}
 	// if we are just inspecting a single report file
-	if config.Report() != "" {
-		r, err := newReports([]string{config.Report()}, nil)
+	if config.Inspect() {
+		r, err := newReports(config.Include(), nil)
 		if err != nil {
 			return nil, err
 		}
-		sigs, _, err := r.signatures()
+		sigs, puids, err := r.signatures()
 		if err != nil {
 			return nil, err
 		}
-		for _, sig := range sigs {
-			fmt.Println("Byte signatures: ")
+		for i, sig := range sigs {
+			fmt.Printf("Byte signatures for %s: \n", puids[i])
 			fmt.Println(sig)
 		}
 		p.j = r
