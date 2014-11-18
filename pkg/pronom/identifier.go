@@ -85,20 +85,20 @@ func (i *Identifier) Recognise(m core.MatcherType, idx int) (bool, string) {
 	case core.ExtensionMatcher:
 		if idx >= i.EStart && idx < i.EStart+len(i.EPuids) {
 			idx = idx - i.EStart
-			return true, i.EPuids[idx]
+			return true, i.Name + ": " + i.EPuids[idx]
 		} else {
 			return false, ""
 		}
 	case core.ContainerMatcher:
 		if idx >= i.CStart && idx < i.CStart+len(i.CPuids) {
 			idx = idx - i.CStart
-			return true, i.CPuids[idx]
+			return true, i.Name + ": " + i.CPuids[idx]
 		} else {
 			return false, ""
 		}
 	case core.ByteMatcher:
 		if idx >= i.BStart && idx < i.BStart+len(i.BPuids) {
-			return true, i.BPuids[idx]
+			return true, i.Name + ": " + i.BPuids[idx]
 		} else {
 			return false, ""
 		}

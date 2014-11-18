@@ -15,10 +15,11 @@
 package bytematcher
 
 import (
-	//"fmt"
+	"fmt"
 	"io"
 
 	"github.com/richardlehane/match/wac"
+	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
@@ -61,7 +62,9 @@ func (b *Matcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan co
 						break Loop
 					}
 				} else {
-					//fmt.Println(strike{b.BOFSeq.TestTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false, br.Final})
+					if config.Debug() {
+						fmt.Println(strike{b.BOFSeq.TestTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false, br.Final})
+					}
 					incoming <- strike{b.BOFSeq.TestTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false, br.Final}
 				}
 			case <-gate:
@@ -69,7 +72,6 @@ func (b *Matcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan co
 			}
 		}
 	}
-	//fmt.Println("Proceeding")
 	// Test BOF/EOF frames
 	bfchan := b.BOFFrames.Index(buf, false, quit)
 	efchan := b.EOFFrames.Index(buf, true, quit)
@@ -100,26 +102,36 @@ func (b *Matcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan co
 			if !ok {
 				bfchan = nil
 			} else {
+				if config.Debug() {
+					fmt.Println(strike{b.BOFFrames.TestTreeIndex[bf.Idx], 0, bf.Off, bf.Length, false, true, true})
+				}
 				incoming <- strike{b.BOFFrames.TestTreeIndex[bf.Idx], 0, bf.Off, bf.Length, false, true, true}
 			}
 		case ef, ok := <-efchan:
 			if !ok {
 				efchan = nil
 			} else {
+				if config.Debug() {
+					fmt.Println(strike{b.EOFFrames.TestTreeIndex[ef.Idx], 0, ef.Off, ef.Length, true, true, true})
+				}
 				incoming <- strike{b.EOFFrames.TestTreeIndex[ef.Idx], 0, ef.Off, ef.Length, true, true, true}
 			}
 		case br, ok := <-bchan:
 			if !ok {
 				bchan = nil
 			} else {
-				//fmt.Println(strike{b.BOFSeq.TestTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false, br.Final}) // testing
+				if config.Debug() {
+					fmt.Println(strike{b.BOFSeq.TestTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false, br.Final})
+				}
 				incoming <- strike{b.BOFSeq.TestTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false, br.Final}
 			}
 		case er, ok := <-echan:
 			if !ok {
 				echan = nil
 			} else {
-				//fmt.Println(strike{b.EOFSeq.TestTreeIndex[er.Index[0]], er.Index[1], er.Offset, er.Length, true, false, er.Final}) // testing
+				if config.Debug() {
+					fmt.Println(strike{b.EOFSeq.TestTreeIndex[er.Index[0]], er.Index[1], er.Offset, er.Length, true, false, er.Final})
+				}
 				incoming <- strike{b.EOFSeq.TestTreeIndex[er.Index[0]], er.Index[1], er.Offset, er.Length, true, false, er.Final}
 			}
 		}

@@ -35,6 +35,8 @@ var siegfried = struct {
 	updateURL       string // URL for the update service (a JSON file that indicates whether update necessary and where can be found)
 	updateTimeout   time.Duration
 	updateTransport *http.Transport
+	// DEBUG mode
+	debug bool
 }{
 	version:          [3]int{0, 6, 0},
 	signature:        "pronom.gob",
@@ -97,6 +99,10 @@ func UpdateOptions() (string, time.Duration, *http.Transport) {
 	return siegfried.updateURL, siegfried.updateTimeout, siegfried.updateTransport
 }
 
+func Debug() bool {
+	return siegfried.debug
+}
+
 // SETTERS
 
 func SetHome(h string) func() private {
@@ -139,4 +145,8 @@ func SetVarLength(i int) func() private {
 		siegfried.varLength = i
 		return private{}
 	}
+}
+
+func SetDebug() {
+	siegfried.debug = true
 }

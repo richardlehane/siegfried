@@ -32,6 +32,7 @@ import (
 var (
 	update  = flag.Bool("update", false, "update or install the default signature file")
 	version = flag.Bool("version", false, "display version information")
+	debug   = flag.Bool("debug", false, "scan in debug mode")
 	sig     = flag.String("sig", config.Signature(), "set the signature file")
 	home    = flag.String("home", config.Home(), "override the default home directory")
 	serve   = flag.String("serve", "false", "not yet implemented - coming with v1")
@@ -179,7 +180,9 @@ func multiIdentifyP(s *siegfried.Siegfried, r string) error {
 		}
 		PrintFile(path, info.Size())
 		for i := range c {
-			fmt.Print(i.Yaml())
+			if !config.Debug() {
+				fmt.Print(i.Yaml())
+			}
 		}
 		file.Close()
 		return nil
@@ -191,7 +194,9 @@ func PrintFile(name string, sz int64) {
 	fmt.Println("---")
 	fmt.Printf("filename : \"%v\"\n", name)
 	fmt.Printf("filesize : %d\n", sz)
-	fmt.Print("matches  :\n")
+	if !config.Debug() {
+		fmt.Print("matches  :\n")
+	}
 }
 
 func PrintError(err error) {
@@ -216,6 +221,10 @@ func main() {
 		version := config.Version()
 		fmt.Printf("Siegfried version: %d.%d.%d\n", version[0], version[1], version[2])
 		return
+	}
+
+	if *debug {
+		config.SetDebug()
 	}
 
 	if *update {
@@ -271,7 +280,10 @@ func main() {
 	}
 	PrintFile(flag.Arg(0), info.Size())
 	for i := range c {
-		fmt.Print(i.Yaml())
+		if !config.Debug() {
+			fmt.Print(i.Yaml())
+		}
+
 	}
 	file.Close()
 

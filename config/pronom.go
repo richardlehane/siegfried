@@ -29,6 +29,7 @@ var pronom = struct {
 	container        string // e.g. container-signature-19770502.xml
 	reports          string // directory where PRONOM reports are stored
 	noreports        bool   // build signature directly from DROID file rather than PRONOM reports
+	report           string // set a single report to be inspected e.g. `inspect fmt/198`
 	extensions       string // directory where custom signature extensions are stored
 	extend           []string
 	harvestURL       string
@@ -142,7 +143,7 @@ func Extend() []string {
 	ret := make([]string, len(pronom.extend))
 	for i, v := range pronom.extend {
 		if filepath.Dir(v) == "." {
-			ret[i] = filepath.Join(Reports(), v)
+			ret[i] = filepath.Join(pronom.extensions, v)
 		} else {
 			ret[i] = v
 		}
@@ -152,6 +153,10 @@ func Extend() []string {
 
 func HarvestOptions() (string, time.Duration, *http.Transport) {
 	return pronom.harvestURL, pronom.harvestTimeout, pronom.harvestTransport
+}
+
+func Report() string {
+	return pronom.report
 }
 
 // SETTERS
@@ -180,6 +185,13 @@ func SetReports(r string) func() private {
 func SetNoReports() func() private {
 	return func() private {
 		pronom.noreports = true
+		return private{}
+	}
+}
+
+func SetReport(r string) func() private {
+	return func() private {
+		pronom.report = r
 		return private{}
 	}
 }

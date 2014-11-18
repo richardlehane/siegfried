@@ -19,6 +19,8 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
+	"path/filepath"
 
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/config"
@@ -88,12 +90,26 @@ func makegob(s *siegfried.Siegfried, opts []config.Option) error {
 	return s.Save(config.Signature())
 }
 
-func inspectPronom() error {
+func inspectGob() error {
 	s, err := siegfried.Load(config.Signature())
 	if err != nil {
 		return err
 	}
 	fmt.Print(s)
+	return nil
+}
+
+func inspectSig(f string) error {
+	p, err := pronom.New(config.SetSingle(f))
+	if err != nil {
+		return err
+	}
+	s := siegfried.New()
+	err = s.Add(p)
+	if err != nil {
+		return err
+	}
+	fmt.Println(s)
 	return nil
 }
 
@@ -135,20 +151,6 @@ func blameSig(i int) error {
 			fmt.Println(puids[v.Kf[0]])
 		}
 	*/
-	return nil
-}
-
-func viewSig(f string) error {
-	p, err := pronom.New(config.SetSingle(f))
-	if err != nil {
-		return err
-	}
-	s := siegfried.New()
-	err = s.Add(p)
-	if err != nil {
-		return err
-	}
-	fmt.Println(s)
 	return nil
 }
 
@@ -274,10 +276,17 @@ func main() {
 		err = inspect.Parse(os.Args[2:])
 		if err == nil {
 			setInspectOptions()
-			switch inspect.Arg(0) {
-			case "":
-				err = inspectPronom()
+			input := inspect.Arg(0)
+			switch {
+			case input == "":
+				err = inspectGob()
+			case filepath.Ext(input) == ".gob":
+				config.SetSignature(input)
+				err = inspectGob()
+			case i, err := strconv.Atoi(input); err != nil:
+			
 			}
+			
 
 		}
 	default:

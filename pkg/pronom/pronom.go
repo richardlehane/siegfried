@@ -46,6 +46,23 @@ type pronom struct {
 // Pronom creates a pronom object
 func newPronom() (*pronom, error) {
 	p := &pronom{}
+	// if we are just inspecting a single report file
+	if config.Report() != "" {
+		r, err := newReports([]string{config.Report()}, nil)
+		if err != nil {
+			return nil, err
+		}
+		sigs, _, err := r.signatures()
+		if err != nil {
+			return nil, err
+		}
+		for _, sig := range sigs {
+			fmt.Println("Byte signatures: ")
+			fmt.Println(sig)
+		}
+		p.j = r
+		return p, nil
+	}
 	if err := p.setParseables(); err != nil {
 		return nil, err
 	}
@@ -75,21 +92,40 @@ func (p *pronom) identifier() *Identifier {
 
 // set parseables joins signatures in the DROID signature file with any extra reports and adds that to the pronom object
 func (p *pronom) setParseables() error {
-	d, err := newDroid()
+	d, err := newDroid(config.Droid())
 	if err != nil {
 		return err
+	}
+	// if noreports set
+	if config.Reports() == "" {
+		p.j = d
+		for _, v := range config.Extend() {
+			e, err := newDroid(v)
+			if err != nil {
+				return err
+			}
+			p.j = join(p.j, e)
+		}
+		return nil
 	}
 	r, err := newReports(d.puids(), d.idsPuids())
 	if err != nil {
 		return err
 	}
-	p.j = r //join(d, r)
+	p.j = r
+	for _, v := range config.Extend() {
+		e, err := newDroid(v)
+		if err != nil {
+			return err
+		}
+		p.j = join(p.j, e)
+	}
 	return nil
 }
 
-func newDroid() (*droid, error) {
+func newDroid(path string) (*droid, error) {
 	d := &mappings.Droid{}
-	if err := openXML(config.Droid(), d); err != nil {
+	if err := openXML(path, d); err != nil {
 		return nil, err
 	}
 	return &droid{d}, nil
@@ -227,7 +263,7 @@ func (p pronom) contMatcher(m core.Matcher) error {
 
 // Harvest fetches PRONOM reports listed in the DROID file
 func Harvest() []error {
-	d, err := newDroid()
+	d, err := newDroid(config.Droid())
 	if err != nil {
 		return []error{err}
 	}
