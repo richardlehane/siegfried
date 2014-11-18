@@ -147,7 +147,7 @@ func Inspect() bool {
 
 func Include(puids []string) []string {
 	ret := make([]string, 0, len(pronom.include))
-	for _, v := range include {
+	for _, v := range pronom.include {
 		for _, w := range puids {
 			if v == w {
 				ret = append(ret, v)

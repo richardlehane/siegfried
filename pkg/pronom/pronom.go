@@ -46,25 +46,11 @@ type pronom struct {
 // Pronom creates a pronom object
 func newPronom() (*pronom, error) {
 	p := &pronom{}
-	// if we are just inspecting a single report file
-	if config.Inspect() {
-		r, err := newReports(config.Include(), nil)
-		if err != nil {
-			return nil, err
-		}
-		sigs, puids, err := r.signatures()
-		if err != nil {
-			return nil, err
-		}
-		for i, sig := range sigs {
-			fmt.Printf("Byte signatures for %s: \n", puids[i])
-			fmt.Println(sig)
-		}
-		p.j = r
-		return p, nil
-	}
 	if err := p.setParseables(); err != nil {
 		return nil, err
+	}
+	if config.Inspect() {
+		return p, nil
 	}
 	// apply noPriority rule
 	if !config.NoPriority() {
@@ -95,6 +81,23 @@ func (p *pronom) setParseables() error {
 	d, err := newDroid(config.Droid())
 	if err != nil {
 		return err
+	}
+	// if we are just inspecting a single report file
+	if config.Inspect() {
+		r, err := newReports(config.Include(d.puids()), nil)
+		if err != nil {
+			return err
+		}
+		sigs, puids, err := r.signatures()
+		if err != nil {
+			return err
+		}
+		for i, sig := range sigs {
+			fmt.Printf("Byte signatures for %s: \n", puids[i])
+			fmt.Println(sig)
+		}
+		p.j = r
+		return nil
 	}
 	// if noreports set
 	if config.Reports() == "" {
