@@ -18,6 +18,7 @@ import (
 	"fmt"
 
 	"github.com/richardlehane/match/wac"
+	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 )
 
@@ -51,6 +52,25 @@ func New() *Process {
 
 func (p *Process) AddSignature(sig frames.Signature) error {
 	segments := p.splitSegments(sig)
+	// apply config no eof option
+	if config.NoEOF() {
+		var hasEof bool
+		var x int
+		for i, segment := range segments {
+			c := characterise(segment)
+			if c > prev {
+				hasEof = true
+				x = i
+				break
+			}
+		}
+		if hasEof {
+			if x == 0 {
+				return nil // This means that the entire signature consists only of EOF segments so should be skipped entirely
+			}
+			segments = segments[:x] // Otherwise trim segments to the first SUCC/EOF segment
+		}
+	}
 	kf := make([]keyFrame, len(segments))
 	clstr := newCluster(p)
 	for i, segment := range segments {

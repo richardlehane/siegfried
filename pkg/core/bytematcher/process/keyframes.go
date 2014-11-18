@@ -17,6 +17,7 @@ package process
 import (
 	"fmt"
 
+	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 )
 
@@ -36,8 +37,8 @@ type keyFramePos struct {
 // The keyframe (Key) offsets are absolute to the BOF or EOF.
 type keyFrame struct {
 	Typ frames.OffType // BOF|PREV|SUCC|EOF
-	Seg keyFramePos    // positioning info for segment as a whole (min/max length and offset in relation to BOF/EOF/PREV/SUCC)
-	Key keyFramePos    // positioning info for keyFrame portion of segment (min/max length and offset in relation to BOF/EOF)
+	Seg keyFramePos    // relative positioning info for segment as a whole (min/max length and offset in relation to BOF/EOF/PREV/SUCC)
+	Key keyFramePos    // absolute positioning info for keyFrame portion of segment (min/max length and offset in relation to BOF/EOF)
 }
 
 func (kf keyFrame) String() string {
@@ -124,6 +125,8 @@ func calcMinMax(min, max int, sp keyFramePos) (int, int) {
 
 // update the absolute positional information (distance from the BOF or EOF)
 // for keyFrames based on the other keyFrames in the signature
+// This function is also responsible for applying MAX BOF and MAX EOF settings from config
+// MAX BOF and MAX EOF don't affect segment offsets (relative to other segments), just affect the Abs position offsets
 func updatePositions(ks []keyFrame) {
 	var min, max int
 	// first forwards, for BOF and PREV
@@ -139,6 +142,12 @@ func updatePositions(ks []keyFrame) {
 				ks[i].Key.PMax = -1
 			}
 			min, max = calcMinMax(min, max, ks[i].Seg)
+		}
+		// Apply config max bof setting (if any) to PMax
+		if config.MaxBOF() > 0 {
+			if ks[i].Key.PMax < 0 || ks[i].Key.PMax > config.MaxBOF() {
+				ks[i].Key.PMax = config.MaxBOF()
+			}
 		}
 	}
 	// now backwards for EOF and SUCC
@@ -156,10 +165,16 @@ func updatePositions(ks []keyFrame) {
 			}
 			min, max = calcMinMax(min, max, ks[i].Seg)
 		}
+		// Apply config max eof setting (if any) to PMax
+		if config.MaxEOF() > 0 {
+			if ks[i].Key.PMax < 0 || ks[i].Key.PMax > config.MaxEOF() {
+				ks[i].Key.PMax = config.MaxEOF()
+			}
+		}
 	}
 }
 
-// for doing a running totally of the maxBOF:
+// for doing a running total of the maxBOF:
 // is the maxBOF we already have, further from the BOF than the maxBOF of the current signature?
 func maxBOF(max int, ks []keyFrame) int {
 	if max < 0 {

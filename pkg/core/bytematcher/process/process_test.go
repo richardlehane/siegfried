@@ -20,7 +20,7 @@ var Sample = []byte("testTESTMATCHAAAAAAAAAAAYNESStesty")
 
 func TestProcess(t *testing.T) {
 	p := New()
-	p.SetOptions(8192, 2059, 9, 1)
+	p.Options = Options{8192, 2059, 9, 1}
 	for i, v := range tests.TestSignatures {
 		err := p.AddSignature(v)
 		if err != nil {
