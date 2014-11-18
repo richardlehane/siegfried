@@ -70,7 +70,39 @@ func (i *Identifier) Yaml() string {
 }
 
 func (i *Identifier) String() string {
-	return ""
+	str := i.Name + "\n"
+	str += i.Details + "\n"
+	str += fmt.Sprintf("Extension signatures: %d \n", len(i.EPuids))
+	str += fmt.Sprintf("Container signatures: %d \n", len(i.CPuids))
+	str += fmt.Sprintf("Byte signatures: %d \n", len(i.BPuids))
+	return str
+}
+
+func (i *Identifier) Recognise(m core.MatcherType, idx int) (bool, string) {
+	switch m {
+	default:
+		return false, ""
+	case core.ExtensionMatcher:
+		if idx >= i.EStart && idx < i.EStart+len(i.EPuids) {
+			idx = idx - i.EStart
+			return true, i.EPuids[idx]
+		} else {
+			return false, ""
+		}
+	case core.ContainerMatcher:
+		if idx >= i.CStart && idx < i.CStart+len(i.CPuids) {
+			idx = idx - i.CStart
+			return true, i.CPuids[idx]
+		} else {
+			return false, ""
+		}
+	case core.ByteMatcher:
+		if idx >= i.BStart && idx < i.BStart+len(i.BPuids) {
+			return true, i.BPuids[idx]
+		} else {
+			return false, ""
+		}
+	}
 }
 
 func (i *Identifier) Save(w io.Writer) (int, error) {

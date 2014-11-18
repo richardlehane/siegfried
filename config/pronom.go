@@ -28,6 +28,7 @@ var pronom = struct {
 	droid            string // name of droid file e.g. DROID_SignatureFile_V78.xml
 	container        string // e.g. container-signature-19770502.xml
 	reports          string // directory where PRONOM reports are stored
+	noreports        bool   // build signature directly from DROID file rather than PRONOM reports
 	extensions       string // directory where custom signature extensions are stored
 	extend           []string
 	harvestURL       string
@@ -128,8 +129,7 @@ func latest(prefix, suffix string) (string, error) {
 }
 
 func Reports() string {
-	// set reports to an empty string to force building signatures from DROID signature file rather than PRONOM reports
-	if pronom.reports == "" {
+	if pronom.noreports || pronom.reports == "" {
 		return ""
 	}
 	if filepath.Dir(pronom.reports) == "." {
@@ -173,6 +173,13 @@ func SetContainer(c string) func() private {
 func SetReports(r string) func() private {
 	return func() private {
 		pronom.reports = r
+		return private{}
+	}
+}
+
+func SetNoReports() func() private {
+	return func() private {
+		pronom.noreports = true
 		return private{}
 	}
 }

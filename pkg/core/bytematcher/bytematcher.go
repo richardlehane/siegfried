@@ -187,3 +187,15 @@ func (b *Matcher) String() string {
 	str += fmt.Sprintf("Priorities: %v\n", b.Priorities)
 	return str
 }
+
+func (b *Matcher) InspectTTI(i int) []int {
+	t := b.Tests[i]
+	res := make([]int, len(t.Complete)+len(t.Incomplete))
+	for i, v := range t.Complete {
+		res[i] = v[0]
+	}
+	for i, v := range t.Incomplete {
+		res[i+len(t.Complete)] = v.Kf[0]
+	}
+	return res
+}

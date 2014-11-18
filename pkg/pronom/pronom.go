@@ -49,12 +49,16 @@ func newPronom() (*pronom, error) {
 	if err := p.setParseables(); err != nil {
 		return nil, err
 	}
+	// apply noPriority rule
 	if !config.NoPriority() {
 		p.pm = p.j.priorities()
 		p.pm.Complete()
 	}
-	if err := p.setContainers(); err != nil {
-		return nil, err
+	// apply no container rule
+	if !config.NoContainer() {
+		if err := p.setContainers(); err != nil {
+			return nil, err
+		}
 	}
 	return p, nil
 }

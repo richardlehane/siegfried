@@ -61,6 +61,10 @@ func (t testIdentifier) Save(w io.Writer) (int, error) { return 0, nil }
 
 func (t testIdentifier) Recorder() core.Recorder { return testRecorder{} }
 
+func (t testIdentifier) Recognise(m core.MatcherType, i int) (bool, string) { return false, "" }
+
+func (t testIdentifier) String() string { return "" }
+
 type testRecorder struct{}
 
 func (t testRecorder) Record(m core.MatcherType, r core.Result) bool { return true }
@@ -95,7 +99,7 @@ func TestIdentify(t *testing.T) {
 
 func TestLoad(t *testing.T) {
 	s := New()
-	p, err := pronom.New(config.SetHome("./cmd/r2d2/data"))
+	p, err := pronom.New(config.SetHome("./cmd/roy/data"))
 	if err != nil {
 		t.Fatal(err)
 	}
