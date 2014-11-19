@@ -63,6 +63,15 @@ func Details() string {
 	if identifier.noPriority {
 		str += "; no priorities"
 	}
+	if pronom.noreports {
+		str += "; built from DROID signature, without using reports"
+	}
+	if HasInclude() {
+		str += "; limited to puids: " + strings.Join(pronom.include, ", ")
+	}
+	if HasExclude() {
+		str += "; excluding puids: " + strings.Join(pronom.exclude, ", ")
+	}
 	if len(pronom.extend) > 0 {
 		str += "; extensions: " + strings.Join(pronom.extend, ", ")
 	}
