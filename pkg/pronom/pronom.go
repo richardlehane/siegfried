@@ -92,10 +92,16 @@ func (p *pronom) setParseables() error {
 		if err != nil {
 			return err
 		}
+		var puid string
+		fmt.Println("BYTE SIGNATURES")
 		for i, sig := range sigs {
-			fmt.Printf("Byte signatures for %s: \n", puids[i])
+			if puids[i] != puid {
+				puid = puids[i]
+				fmt.Printf("For %s: \n", puids[i])
+			}
 			fmt.Println(sig)
 		}
+		fmt.Println()
 		p.j = r
 		return nil
 	}
@@ -222,6 +228,10 @@ func puidsB(puids []string) map[string][]int {
 }
 
 func (p pronom) contMatcher(m core.Matcher) error {
+	// when no container is set
+	if p.c == nil {
+		return nil
+	}
 	var zpuids, mpuids []string
 	var zsigs, msigs [][]frames.Signature
 	var znames, mnames [][]string

@@ -58,13 +58,13 @@ func New() *Siegfried {
 func (s *Siegfried) String() string {
 	str := "IDENTIFIERS\n"
 	for _, i := range s.ids {
-		str += i.String() + "\n"
+		str += i.String()
 	}
-	str += "\n\nEXTENSION MATCHER\n"
+	str += "\nEXTENSION MATCHER\n"
 	str += s.em.String()
-	str += "\n\nCONTAINER MATCHER\n"
+	str += "\nCONTAINER MATCHER\n"
 	str += s.cm.String()
-	str += "\n\nCONTAINER MATCHER\n"
+	str += "\nBYTE MATCHER\n"
 	str += s.bm.String()
 	return str
 }
@@ -72,6 +72,9 @@ func (s *Siegfried) String() string {
 func (s *Siegfried) InspectTTI(tti int) string {
 	bm := s.bm.(*bytematcher.Matcher)
 	idxs := bm.InspectTTI(tti)
+	if idxs == nil {
+		return "No test tree at this index"
+	}
 	res := make([]string, len(idxs))
 	for i, v := range idxs {
 		for _, id := range s.ids {

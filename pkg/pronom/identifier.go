@@ -70,11 +70,10 @@ func (i *Identifier) Yaml() string {
 }
 
 func (i *Identifier) String() string {
-	str := i.Name + "\n"
-	str += i.Details + "\n"
-	str += fmt.Sprintf("Extension signatures: %d \n", len(i.EPuids))
-	str += fmt.Sprintf("Container signatures: %d \n", len(i.CPuids))
-	str += fmt.Sprintf("Byte signatures: %d \n", len(i.BPuids))
+	str := fmt.Sprintf("Name: %s\nDetails: %s\n", i.Name, i.Details)
+	str += fmt.Sprintf("Number of extension signatures: %d \n", len(i.EPuids))
+	str += fmt.Sprintf("Number of container signatures: %d \n", len(i.CPuids))
+	str += fmt.Sprintf("Number of byte signatures: %d \n", len(i.BPuids))
 	return str
 }
 

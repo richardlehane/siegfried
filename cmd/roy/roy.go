@@ -103,7 +103,7 @@ func inspectGob() error {
 }
 
 func inspectSig(f string) error {
-	p, err := pronom.New(config.SetInclude(f), config.SetInspect())
+	p, err := pronom.New(config.SetInclude(f), config.SetInspect(), config.SetNoContainer())
 	if err != nil {
 		return err
 	}

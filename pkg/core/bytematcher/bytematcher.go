@@ -189,6 +189,9 @@ func (b *Matcher) String() string {
 }
 
 func (b *Matcher) InspectTTI(i int) []int {
+	if i < 0 || i >= len(b.Tests) {
+		return nil
+	}
 	t := b.Tests[i]
 	res := make([]int, len(t.Complete)+len(t.Incomplete))
 	for i, v := range t.Complete {

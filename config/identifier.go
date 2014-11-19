@@ -44,7 +44,7 @@ func Details() string {
 		return identifier.details
 	}
 	// ... otherwise create a default string based on the identifier settings chosen
-	str := fmt.Sprintf("v%d; %s", siegfried.signatureVersion, DroidBase())
+	str := fmt.Sprintf("signature v. %d; %s", siegfried.signatureVersion, DroidBase())
 	if !identifier.noContainer {
 		str += "; " + ContainerBase()
 	}
