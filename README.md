@@ -107,9 +107,9 @@ Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/
 
 First release. Parses PRONOM signatures and performs byte matching. Bare bones CLI. Glacially slow!
 
-## Hacking
+## Contributing
 
-Have a peek at upcoming features, planned optimisations and known bugs on the [trello list](https://trello.com/b/ABXkGk6T/siegfried).
+Like Siegfried and want to get involved? That'd be fantastic! I've started to jot some notes about contributing on the [wiki](https://github.com/richardlehane/siegfried/wiki).
 
 ## Thanks
 
