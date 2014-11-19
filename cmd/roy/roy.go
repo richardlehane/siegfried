@@ -19,8 +19,9 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"strconv"
 	"path/filepath"
+	"strconv"
+	"strings"
 
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/config"
@@ -37,6 +38,8 @@ var (
 	name        = build.String("name", config.Name(), "set identifier name")
 	details     = build.String("details", config.Details(), "set identifier details")
 	extend      = build.String("extend", "", "comma separated list of additional signatures")
+	include     = build.String("limit", "", "comma separated list of PRONOM signatures to include")
+	exclude     = build.String("exclude", "", "comma separated list of PRONOM signatures to exclude")
 	bof         = build.Int("bof", 0, "define a maximum BOF offset")
 	eof         = build.Int("eof", 0, "define a maximum EOF offset")
 	noeof       = build.Bool("noeof", false, "ignore EOF segments in signatures")
@@ -100,7 +103,7 @@ func inspectGob() error {
 }
 
 func inspectSig(f string) error {
-	p, err := pronom.New(config.SetSingle(f))
+	p, err := pronom.New(config.SetInclude(f), config.SetInspect())
 	if err != nil {
 		return err
 	}
@@ -119,38 +122,6 @@ func blameSig(i int) error {
 		return err
 	}
 	fmt.Println(s.InspectTTI(i))
-	/*
-		p, err := pronom.NewPronom()
-		if err != nil {
-			return err
-		}
-		sigs, err := p.Parse()
-		if err != nil {
-			return err
-		}
-		bm := bytematcher.New()
-		_, err = bm.Add(bytematcher.SignatureSet(sigs), nil)
-		if err != nil {
-			return err
-		}
-		if i > len(bm.Tests)-1 {
-			return fmt.Errorf("Test index out of range: got %d, have %d tests", i, len(bm.Tests))
-		}
-		puids, _ := p.GetPuids()
-		tn := bm.Tests[i]
-		if len(tn.Complete) > 0 {
-			fmt.Println("Completes:")
-		}
-		for _, v := range tn.Complete {
-			fmt.Println(puids[v[0]])
-		}
-		if len(tn.Incomplete) > 0 {
-			fmt.Println("Incompletes:")
-		}
-		for _, v := range tn.Incomplete {
-			fmt.Println(puids[v.Kf[0]])
-		}
-	*/
 	return nil
 }
 
@@ -177,6 +148,12 @@ func buildOptions() []config.Option {
 	if *extend != "" {
 		opts = append(opts, config.SetExtend(*extend))
 	}
+	if *include != "" {
+		opts = append(opts, config.SetInclude(*include))
+	}
+	if *exclude != "" {
+		opts = append(opts, config.SetExclude(*exclude))
+	}
 	if *bof != 0 {
 		opts = append(opts, config.SetBOF(*bof))
 	}
@@ -192,7 +169,7 @@ func buildOptions() []config.Option {
 	if *nocontainer {
 		opts = append(opts, config.SetNoContainer())
 	}
-	if *reports {
+	if *noreports {
 		opts = append(opts, config.SetNoReports())
 	}
 	if *rng != config.Range() {
@@ -283,11 +260,15 @@ func main() {
 			case filepath.Ext(input) == ".gob":
 				config.SetSignature(input)
 				err = inspectGob()
-			case i, err := strconv.Atoi(input); err != nil:
-			
+			case strings.Contains(input, "fmt"):
+				err = inspectSig(input)
+			default:
+				i, err := strconv.Atoi(input)
+				if err != nil {
+					log.Fatal(err)
+				}
+				err = blameSig(i)
 			}
-			
-
 		}
 	default:
 		log.Fatal(usage)

@@ -145,6 +145,10 @@ func Inspect() bool {
 	return pronom.inspect
 }
 
+func HasInclude() bool {
+	return len(pronom.include) > 0
+}
+
 func Include(puids []string) []string {
 	ret := make([]string, 0, len(pronom.include))
 	for _, v := range pronom.include {
@@ -155,6 +159,10 @@ func Include(puids []string) []string {
 		}
 	}
 	return ret
+}
+
+func HasExclude() bool {
+	return len(pronom.exclude) > 0
 }
 
 func Exclude(puids []string) []string {

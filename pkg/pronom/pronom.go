@@ -111,7 +111,13 @@ func (p *pronom) setParseables() error {
 		}
 		return nil
 	}
-	r, err := newReports(d.puids(), d.idsPuids())
+	puids := d.puids()
+	if config.HasInclude() {
+		puids = config.Include(puids)
+	} else if config.HasExclude() {
+		puids = config.Exclude(puids)
+	}
+	r, err := newReports(puids, d.idsPuids())
 	if err != nil {
 		return err
 	}
