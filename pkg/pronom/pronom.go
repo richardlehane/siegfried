@@ -206,7 +206,11 @@ func (p *pronom) add(m core.Matcher) error {
 			return err
 		}
 		p.PuidsB = puidsB(p.BPuids)
-		l, err := m.Add(bytematcher.SignatureSet(sigs), p.pm.List(p.BPuids))
+		var plist priority.List
+		if !config.NoPriority() {
+			plist = p.pm.List(p.BPuids)
+		}
+		l, err := m.Add(bytematcher.SignatureSet(sigs), plist)
 		if err != nil {
 			return err
 		}
@@ -266,11 +270,16 @@ func (p pronom) contMatcher(m core.Matcher) error {
 			return fmt.Errorf("Pronom: container parsing - unknown type %s", typ)
 		}
 	}
-	_, err := m.Add(containermatcher.SignatureSet{containermatcher.Zip, znames, zsigs}, p.pm.List(zpuids))
+	// apply no priority config
+	var zplist, mplist priority.List
+	if !config.NoPriority() {
+		zplist, mplist = p.pm.List(zpuids), p.pm.List(mpuids)
+	}
+	_, err := m.Add(containermatcher.SignatureSet{containermatcher.Zip, znames, zsigs}, zplist)
 	if err != nil {
 		return err
 	}
-	l, err := m.Add(containermatcher.SignatureSet{containermatcher.Mscfb, mnames, msigs}, p.pm.List(mpuids))
+	l, err := m.Add(containermatcher.SignatureSet{containermatcher.Mscfb, mnames, msigs}, mplist)
 	if err != nil {
 		return err
 	}

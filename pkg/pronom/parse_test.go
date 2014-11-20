@@ -162,7 +162,7 @@ func TestParseContainer(t *testing.T) {
 
 // DROID parsing is tested by comparing it against Report parsing
 func TestParseDroid(t *testing.T) {
-	config.SetHome(filepath.Join("..", "..", "cmd", "roy", "data"))()
+	config.SetHome(filepath.Join("..", "..", "cmd", "roy", "data"))
 	d, err := newDroid(config.Droid())
 	if err != nil {
 		t.Fatal(err)
