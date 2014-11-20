@@ -125,14 +125,18 @@ func calcMinMax(min, max int, sp keyFramePos) (int, int) {
 
 // update the absolute positional information (distance from the BOF or EOF)
 // for keyFrames based on the other keyFrames in the signature
-// This function is also responsible for applying MAX BOF and MAX EOF settings from config
-// MAX BOF and MAX EOF don't affect segment offsets (relative to other segments), just affect the Abs position offsets
 func updatePositions(ks []keyFrame) {
 	var min, max int
 	// first forwards, for BOF and PREV
 	for i := range ks {
 		if ks[i].Typ == frames.BOF {
 			min, max = calcMinMax(0, 0, ks[i].Seg)
+			// Apply max bof
+			if config.MaxBOF() > 0 {
+				if ks[i].Key.PMax < 0 || ks[i].Key.PMax > config.MaxBOF() {
+					ks[i].Key.PMax = config.MaxBOF()
+				}
+			}
 		}
 		if ks[i].Typ == frames.PREV {
 			ks[i].Key.PMin = min + ks[i].Key.PMin
@@ -142,11 +146,11 @@ func updatePositions(ks []keyFrame) {
 				ks[i].Key.PMax = -1
 			}
 			min, max = calcMinMax(min, max, ks[i].Seg)
-		}
-		// Apply config max bof setting (if any) to PMax
-		if config.MaxBOF() > 0 {
-			if ks[i].Key.PMax < 0 || ks[i].Key.PMax > config.MaxBOF() {
-				ks[i].Key.PMax = config.MaxBOF()
+			// Apply max bof
+			if config.MaxBOF() > 0 {
+				if ks[i].Key.PMax < 0 || ks[i].Key.PMax > config.MaxBOF() {
+					ks[i].Key.PMax = config.MaxBOF()
+				}
 			}
 		}
 	}
@@ -155,6 +159,12 @@ func updatePositions(ks []keyFrame) {
 	for i := len(ks) - 1; i >= 0; i-- {
 		if ks[i].Typ == frames.EOF {
 			min, max = calcMinMax(0, 0, ks[i].Seg)
+			// apply max eof
+			if config.MaxEOF() > 0 {
+				if ks[i].Key.PMax < 0 || ks[i].Key.PMax > config.MaxEOF() {
+					ks[i].Key.PMax = config.MaxEOF()
+				}
+			}
 		}
 		if ks[i].Typ == frames.SUCC {
 			ks[i].Key.PMin = min + ks[i].Key.PMin
@@ -164,11 +174,11 @@ func updatePositions(ks []keyFrame) {
 				ks[i].Key.PMax = -1
 			}
 			min, max = calcMinMax(min, max, ks[i].Seg)
-		}
-		// Apply config max eof setting (if any) to PMax
-		if config.MaxEOF() > 0 {
-			if ks[i].Key.PMax < 0 || ks[i].Key.PMax > config.MaxEOF() {
-				ks[i].Key.PMax = config.MaxEOF()
+			// apply max eof
+			if config.MaxEOF() > 0 {
+				if ks[i].Key.PMax < 0 || ks[i].Key.PMax > config.MaxEOF() {
+					ks[i].Key.PMax = config.MaxEOF()
+				}
 			}
 		}
 	}
