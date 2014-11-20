@@ -44,7 +44,7 @@ func Details() string {
 		return identifier.details
 	}
 	// ... otherwise create a default string based on the identifier settings chosen
-	str := fmt.Sprintf("signature v. %d; %s", siegfried.signatureVersion, DroidBase())
+	str := DroidBase()
 	if !identifier.noContainer {
 		str += "; " + ContainerBase()
 	}
@@ -64,7 +64,7 @@ func Details() string {
 		str += "; no priorities"
 	}
 	if pronom.noreports {
-		str += "; built from DROID signature, without using reports"
+		str += "; built without reports"
 	}
 	if HasInclude() {
 		str += "; limited to puids: " + strings.Join(pronom.include, ", ")

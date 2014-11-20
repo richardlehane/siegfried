@@ -60,7 +60,7 @@ func newPronom() (*pronom, error) {
 	// apply no container rule
 	if !config.NoContainer() {
 		if err := p.setContainers(); err != nil {
-			return nil, err
+			return nil, fmt.Errorf("Pronom: error loading containers; got %s\nUnless you have set `-nocontainer` you need to download a container signature file", err)
 		}
 	}
 	return p, nil
@@ -80,17 +80,17 @@ func (p *pronom) identifier() *Identifier {
 func (p *pronom) setParseables() error {
 	d, err := newDroid(config.Droid())
 	if err != nil {
-		return err
+		return fmt.Errorf("Pronom: error loading Droid file; got %s\nYou must have a Droid file to build a signature", err)
 	}
 	// if we are just inspecting a single report file
 	if config.Inspect() {
 		r, err := newReports(config.Include(d.puids()), nil)
 		if err != nil {
-			return err
+			return fmt.Errorf("Pronom: error loading reports; got %s\nYou must download PRONOM reports to build a signature (unless you use the -noreports flag). You can use `roy harvest` to download reports", err)
 		}
 		sigs, puids, err := r.signatures()
 		if err != nil {
-			return err
+			return fmt.Errorf("Pronom: parsing signatures; got %s", err)
 		}
 		var puid string
 		fmt.Println("BYTE SIGNATURES")
@@ -108,10 +108,11 @@ func (p *pronom) setParseables() error {
 	// if noreports set
 	if config.Reports() == "" {
 		p.j = d
+		// if any extensions
 		for _, v := range config.Extend() {
 			e, err := newDroid(v)
 			if err != nil {
-				return err
+				return fmt.Errorf("Pronom: error loading extension file; got %s", err)
 			}
 			p.j = join(p.j, e)
 		}
@@ -125,13 +126,13 @@ func (p *pronom) setParseables() error {
 	}
 	r, err := newReports(puids, d.idsPuids())
 	if err != nil {
-		return err
+		return fmt.Errorf("Pronom: error loading reports; got %s\nYou must download PRONOM reports to build a signature (unless you use the -noreports flag). You can use `roy harvest` to download reports", err)
 	}
 	p.j = r
 	for _, v := range config.Extend() {
 		e, err := newDroid(v)
 		if err != nil {
-			return err
+			return fmt.Errorf("Pronom: error loading extension file; got %s", err)
 		}
 		p.j = join(p.j, e)
 	}

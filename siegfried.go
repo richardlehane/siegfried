@@ -127,10 +127,11 @@ type Version struct {
 
 func (sv Version) Yaml() string {
 	version := config.Version()
-	return fmt.Sprintf("---\nsiegfried   : %d.%d.%d\nscanDate    : %v\nsignatures  : %s\ncreated     : %v\nidentifiers : \n",
+	return fmt.Sprintf("---\nsiegfried   : %d.%d.%d\nscan date   : %v\nsignature   : %s\nsig version : %d\ncreated     : %v\nidentifiers : \n",
 		version[0], version[1], version[2],
 		time.Now(),
 		config.SignatureBase(),
+		sv.Version,
 		sv.Created)
 }
 
@@ -219,14 +220,14 @@ func (s *Siegfried) Save(path string) error {
 func Load(path string) (*Siegfried, error) {
 	c, err := ioutil.ReadFile(path)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Siegfried: error opening signature file; got %s\nTry running `sf -update`", err)
 	}
 	buf := bytes.NewBuffer(c)
 	dec := gob.NewDecoder(buf)
 	var h Header
 	err = dec.Decode(&h)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Siegfried: error reading signature file; got %s\nTry running `sf -update`", err)
 	}
 	iSize := identifierSz(h.Ids)
 	sstart := len(c) - h.SSize - h.BSize - h.CSize - h.ESize - iSize
@@ -246,15 +247,15 @@ func Load(path string) (*Siegfried, error) {
 	}
 	bm, err := bytematcher.Load(bbuf)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Siegfried: error loading bytematcher; got %s", err)
 	}
 	cm, err := containermatcher.Load(cbuf)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Siegfried: error loading containermatcher; got %s", err)
 	}
 	em, err := extensionmatcher.Load(ebuf)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Siegfried: error loading extensionmatcher; got %s", err)
 	}
 	s.bm = bm
 	s.cm = cm
@@ -270,7 +271,7 @@ func Load(path string) (*Siegfried, error) {
 		case Pronom:
 			id, err = pronom.Load(ibuf)
 			if err != nil {
-				return nil, err
+				return nil, fmt.Errorf("Siegfried: loading PRONOM identifier; got %s", err)
 			}
 		}
 		s.ids[i] = id

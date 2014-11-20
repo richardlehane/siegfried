@@ -19,7 +19,7 @@ var s *siegfried.Siegfried
 
 func setup() error {
 	var err error
-	config.SetHome(*testhome)()
+	config.SetHome(*testhome)
 	s, err = load()
 	return err
 }

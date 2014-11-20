@@ -66,7 +66,7 @@ func (i *Identifier) Add(m core.Matcher) error {
 
 func (i *Identifier) Yaml() string {
 	return fmt.Sprintf("  - name    : %v\n    details : %v\n",
-		i.Name, i.Details)
+		i.Name, quoteText(i.Details))
 }
 
 func (i *Identifier) String() string {

@@ -32,6 +32,7 @@ var (
 	// BUILD, ADD flag sets
 	build       = flag.NewFlagSet("build | add", flag.ExitOnError)
 	home        = build.String("home", config.Home(), "override the default home directory")
+	version     = build.Int("version", config.SignatureVersion(), "set signature version (used for update service)")
 	droid       = build.String("droid", config.Droid(), "set name/path for DROID signature file")
 	container   = build.String("container", config.Container(), "set name/path for Droid Container signature file")
 	reports     = build.String("reports", config.Reports(), "set path for PRONOM reports directory")
@@ -126,10 +127,10 @@ func blameSig(i int) error {
 }
 
 func buildOptions() []config.Option {
-	opts := []config.Option{}
 	if *home != config.Home() {
-		opts = append(opts, config.SetHome(*home))
+		config.SetHome(*home)
 	}
+	opts := []config.Option{}
 	if *droid != config.Droid() {
 		opts = append(opts, config.SetDroid(*droid))
 	}
@@ -189,7 +190,7 @@ func buildOptions() []config.Option {
 
 func setHarvestOptions() {
 	if *harvestHome != config.Home() {
-		config.SetHome(*harvestHome)()
+		config.SetHome(*harvestHome)
 	}
 	if *harvestDroid != config.Droid() {
 		config.SetDroid(*harvestDroid)()
@@ -204,7 +205,7 @@ func setHarvestOptions() {
 
 func setInspectOptions() {
 	if *inspectHome != config.Home() {
-		config.SetHome(*inspectHome)()
+		config.SetHome(*inspectHome)
 	}
 	if *inspectReports != config.Reports() {
 		config.SetReports(*inspectReports)()
@@ -227,6 +228,9 @@ func main() {
 		if err == nil {
 			if build.Arg(0) != "" {
 				config.SetSignature(build.Arg(0))
+			}
+			if *version != config.SignatureVersion() {
+				config.SetVersion(*version)
 			}
 			s := siegfried.New()
 			err = makegob(s, buildOptions())
@@ -263,7 +267,8 @@ func main() {
 			case strings.Contains(input, "fmt"):
 				err = inspectSig(input)
 			default:
-				i, err := strconv.Atoi(input)
+				var i int
+				i, err = strconv.Atoi(input)
 				if err != nil {
 					log.Fatal(err)
 				}

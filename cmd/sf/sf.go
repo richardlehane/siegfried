@@ -210,11 +210,11 @@ func main() {
 	flag.Parse()
 
 	if *home != config.Home() {
-		config.SetHome(*home)()
+		config.SetHome(*home)
 	}
 
 	if *sig != config.SignatureBase() {
-		config.SetSignature(*sig)()
+		config.SetSignature(*sig)
 	}
 
 	if *version {

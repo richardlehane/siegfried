@@ -14,7 +14,8 @@ var testhome = flag.String("testhome", "data", "override the default home direct
 
 func TestMakeGob(t *testing.T) {
 	s := siegfried.New()
-	p, err := pronom.New(config.SetHome(*testhome))
+	config.SetHome(*testhome)
+	p, err := pronom.New()
 	if err != nil {
 		t.Fatal(err)
 	}

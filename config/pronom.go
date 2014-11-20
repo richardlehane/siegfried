@@ -125,7 +125,7 @@ func latest(prefix, suffix string) (string, error) {
 	for i, v := range ids[1:] {
 		if v > max {
 			max = v
-			idx = i
+			idx = i + 1
 		}
 	}
 	return hits[idx], nil
@@ -186,7 +186,7 @@ func Extend() []string {
 	ret := make([]string, len(pronom.extend))
 	for i, v := range pronom.extend {
 		if filepath.Dir(v) == "." {
-			ret[i] = filepath.Join(pronom.extensions, v)
+			ret[i] = filepath.Join(siegfried.home, pronom.extensions, v)
 		} else {
 			ret[i] = v
 		}

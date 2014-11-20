@@ -7,5 +7,5 @@ func init() {
 	siegfried.signature = "archivematica.gob"
 	siegfried.signatureVersion = 1
 	identifier.name = "archivematica"
-	pronom.extend = []string{"archivematica-fmt/2", "archivematica-fmt/3", "archivematica-fmt/4", "archivematica-fmt/5"}
+	pronom.extend = []string{"archivematica-fmt2.xml", "archivematica-fmt3.xml", "archivematica-fmt4.xml", "archivematica-fmt5.xml"}
 }

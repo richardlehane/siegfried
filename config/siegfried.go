@@ -38,16 +38,15 @@ var siegfried = struct {
 	// DEBUG mode
 	debug bool
 }{
-	version:          [3]int{0, 6, 0},
-	signature:        "pronom.gob",
-	signatureVersion: 5,
-	distance:         8192,
-	rng:              2049,
-	choices:          64,
-	varLength:        1,
-	updateURL:        "http://www.itforarchivists.com/siegfried/update",
-	updateTimeout:    30 * time.Second,
-	updateTransport:  &http.Transport{Proxy: http.ProxyFromEnvironment},
+	version:         [3]int{0, 6, 0},
+	signature:       "pronom.gob",
+	distance:        8192,
+	rng:             2049,
+	choices:         64,
+	varLength:       1,
+	updateURL:       "http://www.itforarchivists.com/siegfried/update",
+	updateTimeout:   30 * time.Second,
+	updateTransport: &http.Transport{Proxy: http.ProxyFromEnvironment},
 }
 
 // GETTERS
@@ -105,18 +104,16 @@ func Debug() bool {
 
 // SETTERS
 
-func SetHome(h string) func() private {
-	return func() private {
-		siegfried.home = h
-		return private{}
-	}
+func SetHome(h string) {
+	siegfried.home = h
 }
 
-func SetSignature(s string) func() private {
-	return func() private {
-		siegfried.signature = s
-		return private{}
-	}
+func SetVersion(i int) {
+	siegfried.signatureVersion = i
+}
+
+func SetSignature(s string) {
+	siegfried.signature = s
 }
 
 func SetDistance(i int) func() private {

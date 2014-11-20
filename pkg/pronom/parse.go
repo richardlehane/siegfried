@@ -432,27 +432,25 @@ func (d *droid) signatures() ([]frames.Signature, []string, error) {
 	if len(d.Signatures) == 0 {
 		return nil, nil, nil
 	}
-	sigs, puids := make([]frames.Signature, len(d.Signatures)), make([]string, len(d.Signatures))
+	sigs, puids := make([]frames.Signature, 0, len(d.Signatures)), make([]string, 0, len(d.Signatures))
 	// first a map of internal sig ids to bytesequences
 	seqs := make(map[int][]mappings.ByteSeq)
 	for _, v := range d.Signatures {
 		seqs[v.Id] = v.ByteSequences
 	}
 	m := d.puidsInternalIds()
-	var i int
 	var err error
 	for _, v := range d.puids() {
 		for _, w := range m[v] {
-			sigs[i], err = parseByteSeqs(v, seqs[w])
+			sig, err := parseByteSeqs(v, seqs[w])
 			if err != nil {
 				return nil, nil, err
 			}
-			puids[i] = v
-			i++
+			sigs = append(sigs, sig)
+			puids = append(puids, v)
 		}
 	}
-	// appear to be some (7) unused sigs... so slice to real length
-	return sigs[:i], puids[:i], err
+	return sigs, puids, err
 }
 
 const (
