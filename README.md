@@ -60,7 +60,7 @@ Copyright 2014 Richard Lehane
 
 Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
 
-## Changes
+## Recent Changes
 ### Version 0.6.1 (21/11/2014)
 - roy (r2d2 rename) signature customisation
 - parse Droid signature (not just PRONOM reports)
@@ -72,42 +72,6 @@ Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/
 - mscfb bugfixes
 - license info in srcs (no change to license; this allows for attributing authorship for non-Richard contribs)
 - default home change to "$HOME/siegfried" (no longer ".siegfried")
-
-### Version 0.5.0 (1/10/2014)
-- container matching
-
-### Version 0.4.2 (23/09/2014)
-- cross-compile was broken (because of use of os/user). Now doing native builds on the three platforms so the download binaries should all work now.
-
-### Version 0.4.2 (16/09/2014)
-- bug in processing code caused really bad matching profile for MP3 sigs. No need to update the tool for this, but please do a sieg -update to get the latest signature file.
-
-### Version 0.4.1 (14/09/2014)
-- sf command line: descriptive output in YAML, including basis for matches
-- optimisations inc. initial BOF loop before main matching loop
-
-### Version 0.4 (24/08/2014)
-- sf command line changes: -version and -update flags now enabled
-- over-the-wire updates of signature files from www.itforarchivists.com/siegfried
-
-### Version 0.3 (19/08/2014)
-- replaced ac matcher with wac matcher
-- re-write of bytematcher code
-- some benchmarks slower but fewer really poor edge cases (see cmd/sieg/testdata/bench_results.txt)... so a win!
-- but still too slow!
-
-### Version 0.2 (26/03/2014)
-
-- benchmarks (cmd/sieg/testdata)
-- an Identifier type that controls the matching process and stops on best possible match (i.e. no longer require a full file scan for all files)
-- name/extension matching
-- a custom reader (pkg/core/siegreader)
-- simplifications to the sieg command and signature file
-- optimisations that have boosted performance (see cmd/sieg/testdata/bench_results.txt). But still too slow!
-
-### Version 0.1 (28/02/2014)
-
-First release. Parses PRONOM signatures and performs byte matching. Bare bones CLI. Glacially slow!
 
 ## Contributing
 
