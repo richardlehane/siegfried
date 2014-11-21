@@ -23,7 +23,7 @@ Key features are:
 
 ![Usage](usage.gif)
 
-By default, siegfried uses latest DROID and container signature with no buffer limits. You can customise your signature file by using the [roy tool](https://github.com/richardlehane/siegfried/wiki/Building-a-signature-file-with-ROY).
+By default, siegfried uses the latest PRONOM and container signatures with no buffer limits. You can customise your signature file by using the [roy tool](https://github.com/richardlehane/siegfried/wiki/Building-a-signature-file-with-ROY).
 
 ## Install
 
