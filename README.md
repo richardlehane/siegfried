@@ -17,6 +17,8 @@
 
 ![Usage](usage.gif)
 
+By default, siegfried uses latest DROID and container signature with no buffer limits. You can customise your signature file by using the [roy](https://github.com/richardlehane/siegfried/wiki/Building-a-signature-file-with-ROY) tool.
+
 ## Install
 
 ### With go installed: 
