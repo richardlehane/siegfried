@@ -4,9 +4,9 @@
 
 Key features are:
 
-    implements [PRONOM signatures](http://www.nationalarchives.gov.uk/aboutapps/pronom/)
-    simple command line interface
-    decent speeds without limiting the number of bytes scanned
+  - implements [PRONOM signatures](http://www.nationalarchives.gov.uk/aboutapps/pronom/)
+  - simple command line interface
+  - decent speeds without limiting the number of bytes scanned
 
 ## Version
 
