@@ -2,6 +2,12 @@
 
 [Siegfried](http://www.itforarchivists.com/siegfried) is a signature-based file identification tool.
 
+Key features are:
+
+    implements [PRONOM signatures](http://www.nationalarchives.gov.uk/aboutapps/pronom/)
+    simple command line interface
+    decent speeds without limiting the number of bytes scanned
+
 ## Version
 
 0.6.1
@@ -54,12 +60,6 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 - additional documentation & tests
 - server mode
 
-## Rights
-
-Copyright 2014 Richard Lehane 
-
-Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
-
 ## Recent Changes
 ### Version 0.6.1 (21/11/2014)
 - roy (r2d2 rename) signature customisation
@@ -72,6 +72,14 @@ Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/
 - mscfb bugfixes
 - license info in srcs (no change to license; this allows for attributing authorship for non-Richard contribs)
 - default home change to "$HOME/siegfried" (no longer ".siegfried")
+
+[Full change history](https://github.com/richardlehane/siegfried/wiki/Change-history)
+
+## Rights
+
+Copyright 2014 Richard Lehane 
+
+Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
 
 ## Contributing
 
