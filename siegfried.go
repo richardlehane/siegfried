@@ -129,10 +129,10 @@ func (sv Version) Yaml() string {
 	version := config.Version()
 	return fmt.Sprintf("---\nsiegfried   : %d.%d.%d\nscan date   : %v\nsignature   : %s\nsig version : %d\ncreated     : %v\nidentifiers : \n",
 		version[0], version[1], version[2],
-		time.Now(),
+		time.Now().Format(time.RFC3339),
 		config.SignatureBase(),
 		sv.Version,
-		sv.Created)
+		sv.Created.Format(time.RFC3339))
 }
 
 type Header struct {

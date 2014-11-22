@@ -102,7 +102,7 @@ func (r *reports) puids() []string {
 func (r *reports) infos() map[string]FormatInfo {
 	infos := make(map[string]FormatInfo)
 	for i, v := range r.r {
-		infos[r.p[i]] = FormatInfo{v.Name, v.Version, v.MIME()}
+		infos[r.p[i]] = FormatInfo{v.Name, strings.TrimSpace(v.Version), v.MIME()}
 	}
 	return infos
 }
