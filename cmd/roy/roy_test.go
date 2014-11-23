@@ -29,3 +29,24 @@ func TestMakeGob(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestMakeArchivematica(t *testing.T) {
+	s := siegfried.New()
+	config.SetHome(*testhome)
+	config.SetVersion(1)
+	p, err := pronom.New(
+		config.SetName("archivematica"),
+		config.SetExtend("archivematica-fmt2.xml,archivematica-fmt3.xml,archivematica-fmt4.xml,archivematica-fmt5.xml"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	err = s.Add(p)
+	if err != nil {
+		t.Fatal(err)
+	}
+	sigs := filepath.Join("data", "archivematica.gob")
+	err = s.Save(sigs)
+	if err != nil {
+		t.Fatal(err)
+	}
+}
