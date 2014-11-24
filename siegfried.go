@@ -110,7 +110,7 @@ func (s *Siegfried) Add(i core.Identifier) error {
 func (s *Siegfried) Yaml() string {
 	version := config.Version()
 	str := fmt.Sprintf(
-		"---\nsiegfried   : %d.%d.%d\nscan date   : %v\nsignature   : %s\ncreated     : %v\nidentifiers : \n",
+		"---\nsiegfried   : %d.%d.%d\nscandate    : %v\nsignature   : %s\ncreated     : %v\nidentifiers : \n",
 		version[0], version[1], version[2],
 		time.Now().Format(time.RFC3339),
 		config.SignatureBase(),
