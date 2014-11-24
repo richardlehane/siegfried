@@ -40,7 +40,6 @@ type Pattern interface {
 	Length() (int, int)       // Minimum and maximum lengths of the pattern
 	NumSequences() int        // Number of simple sequences represented by a pattern. Return 0 if the pattern cannot be represented by a defined number of simple sequence (e.g. for an indirect offset pattern) or, if in your opinion, the number of sequences is unreasonably large.
 	Sequences() []Sequence    // Convert the pattern to a slice of sequences. Return an empty slice if the pattern cannot be represented by a defined number of simple sequences.
-	ValidBytes(int) []byte    // Valid (matching) bytes at a particular offset of the pattern
 	String() string
 }
 
@@ -85,13 +84,6 @@ func (s Sequence) NumSequences() int {
 
 func (s Sequence) Sequences() []Sequence {
 	return []Sequence{s}
-}
-
-func (s Sequence) ValidBytes(i int) []byte {
-	if i < len(s) {
-		return []byte{s[i]}
-	}
-	return []byte{}
 }
 
 func (s Sequence) String() string {
@@ -195,19 +187,6 @@ func (c Choice) Sequences() []Sequence {
 		seqs = append(seqs, pat.Sequences()...)
 	}
 	return seqs
-}
-
-func (c Choice) ValidBytes(i int) []byte {
-	var res []byte
-	for _, pat := range c {
-		byts := pat.ValidBytes(i)
-		for _, b := range byts {
-			if bytes.IndexByte(res, b) < 0 {
-				res = append(res, b)
-			}
-		}
-	}
-	return res
 }
 
 func (c Choice) String() string {
@@ -323,10 +302,6 @@ func (l List) Sequences() []Sequence {
 		}
 	}
 	return seqs
-}
-
-func (l List) ValidBytes(i int) []byte {
-	return nil
 }
 
 func (l List) String() string {

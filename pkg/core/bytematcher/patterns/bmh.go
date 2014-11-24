@@ -93,13 +93,6 @@ func (s *BMHSequence) Sequences() []Sequence {
 	return []Sequence{s.Seq}
 }
 
-func (s *BMHSequence) ValidBytes(i int) []byte {
-	if i < len(s.Seq) {
-		return []byte{s.Seq[i]}
-	}
-	return []byte{}
-}
-
 func (s *BMHSequence) String() string {
 	return "seq" + strconv.Itoa(len(s.Seq))
 }
@@ -164,13 +157,6 @@ func (s *RBMHSequence) NumSequences() int {
 
 func (s *RBMHSequence) Sequences() []Sequence {
 	return []Sequence{s.Seq}
-}
-
-func (s *RBMHSequence) ValidBytes(i int) []byte {
-	if i < len(s.Seq) {
-		return []byte{s.Seq[i]}
-	}
-	return []byte{}
 }
 
 func (s *RBMHSequence) String() string {

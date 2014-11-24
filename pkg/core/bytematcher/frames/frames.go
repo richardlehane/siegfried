@@ -49,7 +49,6 @@ type Frame interface {
 	Length() (int, int) // min and max lengths of the enclosed pattern
 	NumSequences() int  // // the number of simple sequences that the enclosed pattern can be represented by. Return 0 if the pattern cannot be represented by a defined number of simple sequence (e.g. for an indirect offset pattern) or, if in your opinion, the number of sequences is unreasonably large.
 	Sequences() []patterns.Sequence
-	ValidBytes(i int) []byte
 }
 
 type OffType int
