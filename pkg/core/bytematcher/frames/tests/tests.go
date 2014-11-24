@@ -25,6 +25,7 @@ var TestFrames = []Frame{
 	Wild{BOF, TestSequences[0]},          //15
 	Wild{BOF, TestSequences[16]},
 	Fixed{EOF, 0, TestSequences[17]},
+	Fixed{BOF, 0, TestLists[0]},
 }
 
 // Shared test signatures (exported so they can be used by the other bytematcher packages)
@@ -34,4 +35,5 @@ var TestSignatures = []Signature{
 	Signature{TestFrames[13], TestFrames[14]},                                                             // [BOF 0-5:a|b|c..j], [P *:test] 2 segments
 	Signature{TestFrames[1], TestFrames[6], TestFrames[15]},                                               // [BOF 0:test], [P 10-20:TESTY|YNESS], [BOF *:test] 2 segments
 	Signature{TestFrames[16]},                                                                             // [BOF *:junk]
+	Signature{TestFrames[18]},
 }

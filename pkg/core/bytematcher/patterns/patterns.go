@@ -25,6 +25,7 @@ import (
 func init() {
 	gob.Register(Sequence{})
 	gob.Register(Choice{})
+	gob.Register(List{})
 	gob.Register(&BMHSequence{})
 	gob.Register(&RBMHSequence{})
 }
