@@ -36,7 +36,7 @@ import (
 )
 
 type Siegfried struct {
-	V  Version
+	C  time.Time
 	em core.Matcher // extensionmatcher
 	cm core.Matcher // containermatcher
 	bm core.Matcher // bytematcher
@@ -47,7 +47,7 @@ type Siegfried struct {
 
 func New() *Siegfried {
 	s := &Siegfried{}
-	s.V = Version{config.SignatureVersion(), time.Now()}
+	s.C = time.Now()
 	s.em = extensionmatcher.New()
 	s.cm = containermatcher.New()
 	s.bm = bytematcher.New()
@@ -108,31 +108,25 @@ func (s *Siegfried) Add(i core.Identifier) error {
 }
 
 func (s *Siegfried) Yaml() string {
-	str := s.V.Yaml()
+	version := config.Version()
+	str := fmt.Sprintf(
+		"---\nsiegfried   : %d.%d.%d\nscan date   : %v\nsignature   : %s\ncreated     : %v\nidentifiers : \n",
+		version[0], version[1], version[2],
+		time.Now().Format(time.RFC3339),
+		config.SignatureBase(),
+		s.C.Format(time.RFC3339))
 	for _, id := range s.ids {
 		str += id.Yaml()
 	}
 	return str
 }
 
-func (s *Siegfried) Update(i int) bool {
-	return i > s.V.Version
-}
-
-// Version info about the signature file
-type Version struct {
-	Version int
-	Created time.Time
-}
-
-func (sv Version) Yaml() string {
-	version := config.Version()
-	return fmt.Sprintf("---\nsiegfried   : %d.%d.%d\nscan date   : %v\nsignature   : %s\nsig version : %d\ncreated     : %v\nidentifiers : \n",
-		version[0], version[1], version[2],
-		time.Now().Format(time.RFC3339),
-		config.SignatureBase(),
-		sv.Version,
-		sv.Created.Format(time.RFC3339))
+func (s *Siegfried) Update(t string) bool {
+	tm, err := time.Parse(time.RFC3339, t)
+	if err != nil {
+		return false
+	}
+	return tm.After(s.C)
 }
 
 type Header struct {

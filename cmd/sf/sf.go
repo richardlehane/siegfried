@@ -63,7 +63,7 @@ func getHttp(url string) ([]byte, error) {
 
 type Update struct {
 	SfVersion  [3]int
-	SigVersion int
+	SigCreated string
 	GobSize    int
 	LatestURL  string
 }
@@ -87,7 +87,7 @@ func updateSigs() (string, error) {
 	}
 	s, err := siegfried.Load(config.Signature())
 	if err == nil {
-		if !s.Update(u.SigVersion) {
+		if !s.Update(u.SigCreated) {
 			return "You are already up to date!", nil
 		}
 	} else {

@@ -33,7 +33,6 @@ func TestMakeGob(t *testing.T) {
 func TestMakeArchivematica(t *testing.T) {
 	s := siegfried.New()
 	config.SetHome(*testhome)
-	config.SetVersion(1)
 	p, err := pronom.New(
 		config.SetName("archivematica"),
 		config.SetExtend("archivematica-fmt2.xml,archivematica-fmt3.xml,archivematica-fmt4.xml,archivematica-fmt5.xml"))

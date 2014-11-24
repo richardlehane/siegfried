@@ -99,7 +99,8 @@ func TestIdentify(t *testing.T) {
 
 func TestLoad(t *testing.T) {
 	s := New()
-	p, err := pronom.New(config.SetHome("./cmd/roy/data"))
+	config.SetHome("./cmd/roy/data")
+	p, err := pronom.New()
 	if err != nil {
 		t.Fatal(err)
 	}

@@ -32,7 +32,6 @@ var (
 	// BUILD, ADD flag sets
 	build       = flag.NewFlagSet("build | add", flag.ExitOnError)
 	home        = build.String("home", config.Home(), "override the default home directory")
-	version     = build.Int("version", config.SignatureVersion(), "set signature version (used for update service)")
 	droid       = build.String("droid", config.Droid(), "set name/path for DROID signature file")
 	container   = build.String("container", config.Container(), "set name/path for Droid Container signature file")
 	reports     = build.String("reports", config.Reports(), "set path for PRONOM reports directory")
@@ -228,9 +227,6 @@ func main() {
 		if err == nil {
 			if build.Arg(0) != "" {
 				config.SetSignature(build.Arg(0))
-			}
-			if *version != config.SignatureVersion() {
-				config.SetVersion(*version)
 			}
 			s := siegfried.New()
 			err = makegob(s, buildOptions())
