@@ -36,7 +36,7 @@ import (
 )
 
 type Siegfried struct {
-	C  time.Time
+	C  time.Time    // signature create time
 	em core.Matcher // extensionmatcher
 	cm core.Matcher // containermatcher
 	bm core.Matcher // bytematcher

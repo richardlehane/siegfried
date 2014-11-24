@@ -10,7 +10,7 @@ Key features are:
 
 ## Version
 
-0.6.1
+0.7.0
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried/pkg/core?status.svg)](https://godoc.org/github.com/richardlehane/siegfried/pkg/core)
 
@@ -61,6 +61,9 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 - server mode
 
 ## Recent Changes
+### Version 0.7.0 (24/11/2014)
+- change to signature file format
+
 ### Version 0.6.1 (21/11/2014)
 - roy (r2d2 rename) signature customisation
 - parse Droid signature (not just PRONOM reports)
