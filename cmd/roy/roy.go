@@ -221,6 +221,10 @@ Usage
 
 func main() {
 	var err error
+	if len(os.Args) < 2 {
+		log.Fatal(usage)
+	}
+
 	switch os.Args[1] {
 	case "build":
 		err = build.Parse(os.Args[2:])
