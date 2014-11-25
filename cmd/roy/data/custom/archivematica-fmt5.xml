@@ -4,16 +4,15 @@
   <InternalSignature ID="1" Specificity="Specific">
   <ByteSequence Reference="BOFoffset">
     <SubSequence MinFragLength="0" Position="1" SubSeqMaxOffset="0" SubSeqMinOffset="0">
-      <Sequence>41464631305C725C6E5C783030</Sequence>
-      <DefaultShift>14</DefaultShift>
-      <Shift Byte="41">13</Shift>
-      <Shift Byte="46">11</Shift>
-      <Shift Byte="31">10</Shift>
-      <Shift Byte="30">1</Shift>
-      <Shift Byte="5C">4</Shift>
-      <Shift Byte="72">7</Shift>
-      <Shift Byte="6E">5</Shift>
-      <Shift Byte="78">3</Shift>
+      <Sequence>41464631300D0A00</Sequence>
+      <DefaultShift>9</DefaultShift>
+      <Shift Byte="41">8</Shift>
+      <Shift Byte="46">6</Shift>
+      <Shift Byte="31">5</Shift>
+      <Shift Byte="30">4</Shift>
+      <Shift Byte="0D">3</Shift>
+      <Shift Byte="0A">2</Shift>
+      <Shift Byte="00">1</Shift>
     </SubSequence>
   </ByteSequence>
 </InternalSignature>
