@@ -86,12 +86,12 @@ Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/
 
 ## Contributing
 
-Like Siegfried and want to get involved? That'd be fantastic! I've started to jot some notes about contributing on the [wiki](https://github.com/richardlehane/siegfried/wiki).
+Like Siegfried and want to be involved in its development? That'd be wonderful! There are some notes on the [wiki](https://github.com/richardlehane/siegfried/wiki) to get you started, and please get in touch.
 
 ## Thanks
 
 Thanks TNA for http://www.nationalarchives.gov.uk/pronom/ and http://www.nationalarchives.gov.uk/information-management/projects-and-work/droid.htm
 
-Thanks Ross for https://github.com/exponential-decay/skeleton-test-suite-generator, very handy!
+Thanks Ross for https://github.com/exponential-decay/skeleton-test-suite-generator and http://exponentialdecay.co.uk/sd/index.htm, both are very handy!
 
 Thanks Misty for the brew and ubuntu packaging
