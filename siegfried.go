@@ -15,16 +15,19 @@
 // Package siegfried identifies file formats
 //
 // Example:
-//   s, _ := siegfried.Load("pronom.gob")
-//	 f, _ := os.Open("file")
-//	 defer f.Close()
-//	 c, err := s.Identify("filename", f)
-//	 if err != nil {
-//	   return nil, fmt.Errorf("failed to identify %v, got: %v", "filename", err)
-//	 }
-//	 for id := range c {
-//	   fmt.Print(id.Yaml())
-//	 }
+//  s, err := siegfried.Load("pronom.gob")
+//  if err != nil {
+//  	// handle err
+//  }
+//  f, _ := os.Open("file")
+//  defer f.Close()
+//  c, err := s.Identify("filename", f)
+//  if err != nil {
+//  	// handle err
+//  }
+//  for id := range c {
+//  	fmt.Print(id.Yaml())
+//  }
 package siegfried
 
 import (
