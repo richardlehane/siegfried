@@ -12,8 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package siegfried describes the layout of the Siegfried signature file.
-// This signature file contains the siegfried object that performs identification
+// Package siegfried identifies file formats
+//
+// Example:
+//   s, _ := siegfried.Load("pronom.gob")
+//	 f, _ := os.Open("file")
+//	 defer f.Close()
+//	 c, err := s.Identify("filename", f)
+//	 if err != nil {
+//	   return nil, fmt.Errorf("failed to identify %v, got: %v", "filename", err)
+//	 }
+//	 for id := range c {
+//	   fmt.Print(id.Yaml())
+//	 }
 package siegfried
 
 import (
