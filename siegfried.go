@@ -49,16 +49,34 @@ import (
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
+// Siegfried structs are persisent objects that can be serialised to disk (using encoding/gob).
+// The private fields are the three matchers (extension, container, byte) and the identifiers.
 type Siegfried struct {
 	C  time.Time    // signature create time
 	em core.Matcher // extensionmatcher
 	cm core.Matcher // containermatcher
 	bm core.Matcher // bytematcher
 	// mutatable fields follow
-	ids    []core.Identifier // at present only one identifier (the PRONOM identifier) is used, but can add other identifiers e.g. for FILE sigs
+	ids    []core.Identifier // identifiers
 	buffer *siegreader.Buffer
 }
 
+// New creates a new Siegfried. It sets the create time to time.Now() and initializes the three matchers
+//
+// Example:
+//  s := New() // create a new Siegfried
+//  p, err := pronom.New() // create a new PRONOM identifier
+//  if err != nil {
+//  	// handle err
+//  }
+//  err = s.Add(p) // add the identifier to the Siegfried
+//  if err != nil {
+//  	// handle err
+//  }
+//  err = s.Save("signature.gob") // save the Siegfried
+//  if err != nil {
+//  	// handle err
+//  }
 func New() *Siegfried {
 	s := &Siegfried{}
 	s.C = time.Now()
@@ -69,6 +87,7 @@ func New() *Siegfried {
 	return s
 }
 
+// String representation of a Siegfried
 func (s *Siegfried) String() string {
 	str := "IDENTIFIERS\n"
 	for _, i := range s.ids {
@@ -83,6 +102,9 @@ func (s *Siegfried) String() string {
 	return str
 }
 
+// InspectTTI checks with the byte matcher to see what identification results subscribe to a particular test
+// tree index. It can be used when identifying in a debug mode to check which identification results trigger
+// which strikes
 func (s *Siegfried) InspectTTI(tti int) string {
 	bm := s.bm.(*bytematcher.Matcher)
 	idxs := bm.InspectTTI(tti)
@@ -102,6 +124,8 @@ func (s *Siegfried) InspectTTI(tti int) string {
 	return "Test tree indexes match:\n" + strings.Join(res, "\n")
 }
 
+// Add adds an identifier to a Siegfried.
+// The identifer is type switched to test if it is supported. At present, only PRONOM identifiers are supported
 func (s *Siegfried) Add(i core.Identifier) error {
 	switch i := i.(type) {
 	default:
@@ -121,6 +145,7 @@ func (s *Siegfried) Add(i core.Identifier) error {
 	return nil
 }
 
+// YAML representation of a Siegfried
 func (s *Siegfried) Yaml() string {
 	version := config.Version()
 	str := fmt.Sprintf(
@@ -135,6 +160,8 @@ func (s *Siegfried) Yaml() string {
 	return str
 }
 
+// Update checks whether a Siegfried is due for update, by testing whether the time given is after the time
+// the signature was created
 func (s *Siegfried) Update(t string) bool {
 	tm, err := time.Parse(time.RFC3339, t)
 	if err != nil {
