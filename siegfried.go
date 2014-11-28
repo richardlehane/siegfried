@@ -170,6 +170,7 @@ func (s *Siegfried) Update(t string) bool {
 	return tm.After(s.C)
 }
 
+// Headers are used for serialization/deserialization. Only exported so as to be gobbable.
 type Header struct {
 	SSize int                // sigversion
 	BSize int                // bytematcher
@@ -178,6 +179,7 @@ type Header struct {
 	Ids   []IdentifierHeader // size and types of identifiers
 }
 
+// IdentifierHeaders are used for serialization/deserialization. Only exported so as to be gobbable.
 type IdentifierHeader struct {
 	Typ identifierType
 	Sz  int
@@ -198,6 +200,7 @@ func identifierSz(ids []IdentifierHeader) int {
 	return sz
 }
 
+// Write a Siegfried signature file
 func (s *Siegfried) Save(path string) error {
 	buf := new(bytes.Buffer)
 	enc := gob.NewEncoder(buf)
@@ -252,6 +255,7 @@ func (s *Siegfried) Save(path string) error {
 	return nil
 }
 
+// Load a Siegfried signature file
 func Load(path string) (*Siegfried, error) {
 	c, err := ioutil.ReadFile(path)
 	if err != nil {
@@ -316,6 +320,9 @@ func Load(path string) (*Siegfried, error) {
 	return &s, nil
 }
 
+// Identify identifies a stream or file object.
+// It takes the name of the file/stream (if unknown, give an empty string) and an io.Reader
+// It returns a channel of identifications and an error
 func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, error) {
 	err := s.buffer.SetSource(r)
 	if err != nil && err != io.EOF {
