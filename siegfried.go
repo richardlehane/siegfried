@@ -145,7 +145,8 @@ func (s *Siegfried) Add(i core.Identifier) error {
 	return nil
 }
 
-// YAML representation of a Siegfried
+// Yaml representation of a Siegfried
+// This is the provenace block at the beginning of siegfried results and includes Yaml descriptions for each identifier.
 func (s *Siegfried) Yaml() string {
 	version := config.Version()
 	str := fmt.Sprintf(
@@ -200,7 +201,7 @@ func identifierSz(ids []IdentifierHeader) int {
 	return sz
 }
 
-// Write a Siegfried signature file
+// Save a Siegfried signature file
 func (s *Siegfried) Save(path string) error {
 	buf := new(bytes.Buffer)
 	enc := gob.NewEncoder(buf)
