@@ -171,7 +171,7 @@ func (s *Siegfried) Update(t string) bool {
 	return tm.After(s.C)
 }
 
-// Headers are used for serialization/deserialization. Only exported so as to be gobbable.
+// Header structs are used for serialization/deserialization. Only exported so as to be gobbable.
 type Header struct {
 	SSize int                // sigversion
 	BSize int                // bytematcher
@@ -180,7 +180,7 @@ type Header struct {
 	Ids   []IdentifierHeader // size and types of identifiers
 }
 
-// IdentifierHeaders are used for serialization/deserialization. Only exported so as to be gobbable.
+// IdentifierHeader structs are used for serialization/deserialization. Only exported so as to be gobbable.
 type IdentifierHeader struct {
 	Typ identifierType
 	Sz  int
