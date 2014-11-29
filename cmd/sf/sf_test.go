@@ -203,3 +203,10 @@ func BenchmarkXML(bench *testing.B) {
 		benchidentify("xml")
 	}
 }
+
+func BenchmarkMulti(bench *testing.B) {
+	dir := filepath.Join(*testdata, "benchmark")
+	for i := 0; i < bench.N; i++ {
+		multiIdentify(s, dir)
+	}
+}
