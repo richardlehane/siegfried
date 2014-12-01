@@ -28,23 +28,17 @@ type matcher struct {
 	incoming       chan strike
 	bm             *Matcher
 	buf            *siegreader.Buffer
-	bofProgress    chan int
-	eofProgress    chan int
-	gate           chan struct{}
 	partialMatches map[[2]int][][2]int // map of a keyframe to a slice of offsets and lengths where it has matched
 	strikeCache    map[int]*cacheItem
 	*tally
 }
 
-func (b *Matcher) newMatcher(buf *siegreader.Buffer, q chan struct{}, r chan core.Result, bprog, eprog chan int, gate chan struct{}) chan strike {
+func (b *Matcher) newMatcher(buf *siegreader.Buffer, q chan struct{}, r chan core.Result) chan strike {
 	incoming := make(chan strike) // buffer ? Use benchmarks to check
 	m := &matcher{
 		incoming:       incoming,
 		bm:             b,
 		buf:            buf,
-		bofProgress:    bprog,
-		eofProgress:    eprog,
-		gate:           gate,
 		partialMatches: make(map[[2]int][][2]int),
 		strikeCache:    make(map[int]*cacheItem),
 	}
@@ -54,26 +48,24 @@ func (b *Matcher) newMatcher(buf *siegreader.Buffer, q chan struct{}, r chan cor
 }
 
 func (m *matcher) match() {
-	for {
-		select {
-		case in, ok := <-m.incoming:
-			// this happens when all of our matchers reach EOF
-			if !ok {
-				m.shutdown(true)
-				return
-			}
-			m.processStrike(in)
-		case p := <-m.bofProgress:
-			if p == 12*1024 {
-				close(m.gate)
-			}
-			if p%4096 == 0 {
+	for in := range m.incoming {
+		if in.idxa == -1 {
+			if in.reverse {
+				m.eofQueue.Wait()
+				if !m.continueWait(in.offset, false) {
+					break
+				}
+			} else {
 				m.bofQueue.Wait()
-				// see if need to continue here
+				if !m.continueWait(in.offset, false) {
+					break
+				}
 			}
-		case _ = <-m.eofProgress:
+		} else {
+			m.processStrike(in)
 		}
 	}
+	m.shutdown(true)
 }
 
 type strike struct {
@@ -84,6 +76,12 @@ type strike struct {
 	reverse bool
 	frame   bool // is it a frameset match?
 	final   bool // last in a sequence of strikes?
+}
+
+var progressStrike = strike{
+	idxa:  -1,
+	idxb:  -1,
+	final: true,
 }
 
 func (s strike) String() string {

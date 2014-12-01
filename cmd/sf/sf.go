@@ -178,7 +178,9 @@ func multiIdentifyP(s *siegfried.Siegfried, r string) error {
 			file.Close()
 			return fmt.Errorf("failed to identify %v, got: %v", path, err)
 		}
-		PrintFile(path, info.Size())
+		if !config.Debug() {
+			PrintFile(path, info.Size())
+		}
 		for i := range c {
 			if !config.Debug() {
 				fmt.Print(i.Yaml())
@@ -262,7 +264,9 @@ func main() {
 
 	if info.IsDir() {
 		file.Close()
-		fmt.Print(s.Yaml())
+		if !config.Debug() {
+			fmt.Print(s.Yaml())
+		}
 		err = multiIdentifyP(s, flag.Arg(0))
 		if err != nil {
 			PrintError(err)
@@ -270,15 +274,16 @@ func main() {
 		}
 		os.Exit(0)
 	}
-
-	fmt.Print(s.Yaml())
 	c, err := s.Identify(flag.Arg(0), file)
 	if err != nil {
 		PrintError(err)
 		file.Close()
 		os.Exit(1)
 	}
-	PrintFile(flag.Arg(0), info.Size())
+	if !config.Debug() {
+		fmt.Print(s.Yaml())
+		PrintFile(flag.Arg(0), info.Size())
+	}
 	for i := range c {
 		if !config.Debug() {
 			fmt.Print(i.Yaml())

@@ -66,7 +66,8 @@ func (p *Process) AddSignature(sig frames.Signature) error {
 		}
 		if hasEof {
 			if x == 0 {
-				return nil // This means that the entire signature consists only of EOF segments so should be skipped entirely
+				p.KeyFrames = append(p.KeyFrames, []keyFrame{})
+				return nil
 			}
 			segments = segments[:x] // Otherwise trim segments to the first SUCC/EOF segment
 		}

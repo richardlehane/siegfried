@@ -18,6 +18,7 @@ import (
 	"sync"
 
 	"github.com/richardlehane/siegfried/pkg/core"
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/process"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
 )
@@ -31,9 +32,6 @@ type tally struct {
 	bofQueue *sync.WaitGroup
 	eofQueue *sync.WaitGroup
 	stop     chan struct{}
-
-	bofOff int
-	eofOff int
 
 	waitSet *priority.WaitSet
 
@@ -68,29 +66,15 @@ func (t *tally) finalise(eof bool) {
 		t.eofQueue.Wait()
 	}
 	close(t.quit)
-	t.drain()
+	// drain any remaining matches
+	for _ = range t.incoming {
+	}
 	if !eof {
 		t.bofQueue.Wait()
 		t.eofQueue.Wait()
 	}
 	close(t.results)
 	close(t.stop)
-}
-
-func (t *tally) drain() {
-	for {
-		select {
-		case _, ok := <-t.incoming:
-			if !ok {
-				t.incoming = nil
-			}
-		case _ = <-t.bofProgress:
-		case _ = <-t.eofProgress:
-		}
-		if t.incoming == nil {
-			return
-		}
-	}
 }
 
 type kfHit struct {
@@ -136,19 +120,30 @@ func (t *tally) sendResult(idx int, basis string) bool {
 }
 
 // check to see whether should still wait for signatures in the priority list, given the offset
-// trim the wait list if possible
-// An issue is the buffering we do with wacs: how can we know that an incoming strike isn't just in transit, even though earlier than the reported offset?
-// Perhaps change WAC so progress is set as a special Result{progress: true}, that way they can still be buffered but are in order
-// This would simplify the initial Identify loop: rather than waiting for gate to close, can just listen for progress results in that loop
-func (t *tally) continueWait(o int) bool {
-	/*
-		t.waitM.Lock()
-		defer t.waitM.Unlock()
-		if t.waitList == nil {
-			// if we don't have a wait list, we've got no matches and must continue
-			return true
+func (t *tally) continueWait(o int, rev bool) bool {
+	w := t.waitSet.WaitingOn()
+	// must continue if any of the waitlists are nil
+	if w == nil {
+		return true
+	}
+	for _, v := range w {
+		kf := t.bm.KeyFrames[v]
+		if rev {
+			for i := len(kf) - 1; i >= 0 && kf[i].Typ > frames.PREV; i-- {
+				if kf[i].Key.PMax == -1 || kf[i].Key.PMax+kf[i].Key.LMax > o {
+					return true
+				}
+			}
+		} else {
+			for _, f := range kf {
+				if f.Typ > frames.PREV {
+					break
+				}
+				if f.Key.PMax == -1 || f.Key.PMax+f.Key.LMax > o {
+					return true
+				}
+			}
 		}
-	*/
-	// check the strikecache ??
-	return true
+	}
+	return false
 }
