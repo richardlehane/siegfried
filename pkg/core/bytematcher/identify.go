@@ -50,7 +50,7 @@ func (b *Matcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan co
 			if br.Index[0] == -1 {
 				progressStrike.offset = br.Offset
 				incoming <- progressStrike
-				if br.Offset > 8192 {
+				if br.Offset > 4096 {
 					break
 				}
 			} else {
@@ -66,10 +66,9 @@ func (b *Matcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan co
 			close(incoming)
 			return
 		default:
-			//	we've reached the EOF but haven't got a final match
-			break
 		}
 	}
+
 	// Test BOF/EOF frames
 	bfchan := b.BOFFrames.Index(buf, false, quit)
 	efchan := b.EOFFrames.Index(buf, true, quit)

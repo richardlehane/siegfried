@@ -35,5 +35,5 @@ var TestSignatures = []Signature{
 	Signature{TestFrames[13], TestFrames[14]},                                                             // [BOF 0-5:a|b|c..j], [P *:test] 2 segments
 	Signature{TestFrames[1], TestFrames[6], TestFrames[15]},                                               // [BOF 0:test], [P 10-20:TESTY|YNESS], [BOF *:test] 2 segments
 	Signature{TestFrames[16]},                                                                             // [BOF *:junk]
-	Signature{TestFrames[18]},
+	Signature{TestFrames[18]},                                                                             // [BOF 0:List(test,testy)]
 }

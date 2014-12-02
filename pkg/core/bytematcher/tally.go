@@ -126,6 +126,25 @@ func (t *tally) continueWait(o int, rev bool) bool {
 	if w == nil {
 		return true
 	}
+	if len(w) == 0 {
+		return false
+	}
+	// for all the unsatisfied hits in the strike cache, mark them as potential keyframe matches
+	pendingStrikes := make(map[[2]int]bool)
+	for _, s := range t.strikeCache {
+		if s.finalised {
+			continue
+		}
+		for _, v := range s.strikes {
+			tt := t.bm.Tests[v.idxa+v.idxb]
+			for _, c := range tt.Complete {
+				pendingStrikes[[2]int{c[0], c[1]}] = true
+			}
+			for _, ic := range tt.Incomplete {
+				pendingStrikes[[2]int{ic.Kf[0], ic.Kf[1]}] = true
+			}
+		}
+	}
 	for _, v := range w {
 		kf := t.bm.KeyFrames[v]
 		if rev {
@@ -133,15 +152,29 @@ func (t *tally) continueWait(o int, rev bool) bool {
 				if kf[i].Key.PMax == -1 || kf[i].Key.PMax+kf[i].Key.LMax > o {
 					return true
 				}
+				if _, ok := t.partialMatches[[2]int{v, i}]; ok {
+					continue
+				}
+				if _, ok := pendingStrikes[[2]int{v, i}]; ok {
+					continue
+				}
+				break
 			}
 		} else {
-			for _, f := range kf {
+			for i, f := range kf {
 				if f.Typ > frames.PREV {
 					break
 				}
 				if f.Key.PMax == -1 || f.Key.PMax+f.Key.LMax > o {
 					return true
 				}
+				if _, ok := t.partialMatches[[2]int{v, i}]; ok {
+					continue
+				}
+				if _, ok := pendingStrikes[[2]int{v, i}]; ok {
+					continue
+				}
+				break
 			}
 		}
 	}

@@ -42,7 +42,7 @@ type keyFrame struct {
 }
 
 func (kf keyFrame) String() string {
-	return fmt.Sprintf("%s Min:%d Max:%d", frames.OffString[kf.Typ], kf.Seg.PMin, kf.Seg.PMax)
+	return fmt.Sprintf("%s Seg Min:%d Seg Max:%d; Abs Min:%d Abs Max:%d", frames.OffString[kf.Typ], kf.Seg.PMin, kf.Seg.PMax, kf.Key.PMin, kf.Key.PMax)
 }
 
 // A double index: the first int is for the signature's position within the set of all signatures,
@@ -218,6 +218,16 @@ func maxEOF(max int, ks []keyFrame) int {
 		}
 	}
 	return max
+}
+
+func crossOver(a, b keyFrame) bool {
+	if a.Key.PMax == -1 {
+		return true
+	}
+	if a.Key.PMax+a.Key.LMax > b.Key.PMin {
+		return true
+	}
+	return false
 }
 
 // quick check performed before applying a keyFrame ID

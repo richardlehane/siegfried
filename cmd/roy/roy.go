@@ -103,16 +103,10 @@ func inspectGob() error {
 }
 
 func inspectSig(f string) error {
-	p, err := pronom.New(config.SetInclude(f), config.SetInspect(), config.SetNoContainer())
+	_, err := pronom.New(config.SetInclude(f), config.SetInspect(), config.SetNoContainer())
 	if err != nil {
 		return err
 	}
-	s := siegfried.New()
-	err = s.Add(p)
-	if err != nil {
-		return err
-	}
-	fmt.Println(s)
 	return nil
 }
 

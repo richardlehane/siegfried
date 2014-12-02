@@ -36,9 +36,7 @@ func mscfbRdr(b *siegreader.Buffer) (Reader, error) {
 
 func (m *mscfbReader) Next() error {
 	var err error
-	// scan to stream or error
-	for m.entry, err = m.rdr.Next(); err == nil && !m.entry.Stream; m.entry, err = m.rdr.Next() {
-	}
+	m.entry, err = m.rdr.Next()
 	return err
 }
 
@@ -51,6 +49,9 @@ func (m *mscfbReader) Name() string {
 }
 
 func (m *mscfbReader) SetSource(b *siegreader.Buffer) error {
+	if !m.entry.Stream {
+		return b.SetSource(strings.NewReader(""))
+	}
 	return b.SetSource(m.rdr)
 }
 

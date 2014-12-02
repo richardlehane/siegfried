@@ -96,8 +96,18 @@ func (p *Process) AddSignature(sig frames.Signature) error {
 			}
 		} else {
 			switch c {
-			case bofZero, bofWindow, bofWild:
+			case bofZero, bofWild:
 				clstr = clstr.commit()
+				kf[i] = clstr.add(segment, i, pos)
+			case bofWindow:
+				if i > 0 {
+					kfB, _, _ := toKeyFrame(segment, pos)
+					if crossOver(kf[i-1], kfB) {
+						clstr = clstr.commit()
+					}
+				} else {
+					clstr = clstr.commit()
+				}
 				kf[i] = clstr.add(segment, i, pos)
 			case prev:
 				kf[i] = clstr.add(segment, i, pos)

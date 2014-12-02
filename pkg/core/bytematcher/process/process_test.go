@@ -27,21 +27,21 @@ func TestProcess(t *testing.T) {
 			t.Errorf("Unexpected error adding signature; sig %v; error %v", i, v)
 		}
 	}
-	if len(p.KeyFrames) != 5 {
-		t.Errorf("Expecting 5 keyframe slices, got %d", len(p.KeyFrames))
+	if len(p.KeyFrames) != 6 {
+		t.Errorf("Expecting 6 keyframe slices, got %d", len(p.KeyFrames))
 	}
 	var tl int
 	for _, v := range p.KeyFrames {
 		tl += len(v)
 	}
-	if tl != 11 {
-		t.Errorf("Expecting a total of 11 keyframes, got %d", tl)
+	if tl != 12 {
+		t.Errorf("Expecting a total of 12 keyframes, got %d", tl)
 	}
-	if len(p.Tests) != 8 {
-		t.Errorf("Expecting a total of 8 tests, got %d", len(p.Tests))
+	if len(p.Tests) != 9 {
+		t.Errorf("Expecting a total of 9 tests, got %d", len(p.Tests))
 	}
-	if len(p.BOFSeq.Set) != 3 {
-		t.Errorf("Expecting three BOF seqs, got %d", len(p.BOFSeq.Set))
+	if len(p.BOFSeq.Set) != 4 {
+		t.Errorf("Expecting 4 BOF seqs, got %d", len(p.BOFSeq.Set))
 	}
 	e1 := wac.Seq{[]int{0}, []wac.Choice{wac.Choice{[]byte{'t', 'e', 's', 't'}}}}
 	if !seqEquals(p.BOFSeq.Set[0], e1) {

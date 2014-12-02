@@ -30,7 +30,7 @@ import (
 // The Distance and Range options control the allowable distance and range between frames
 // (i.e. a fixed offset of 5000 distant might be acceptable, where a range of 1-2000 might not be).
 func (p *Process) splitSegments(sig frames.Signature) []frames.Signature {
-	if len(sig) < 2 {
+	if len(sig) <= 1 {
 		return []frames.Signature{sig}
 	}
 	segments := make([]frames.Signature, 0, 1)
@@ -185,7 +185,7 @@ func eofLength(seg frames.Signature, max int) position {
 		cur = num
 	}
 	if len(seg) > 1 {
-		for i := len(seg) - 2; i > -1; i-- {
+		for i := len(seg) - 2; i >= 0; i-- {
 			f := seg[i]
 			if seg[i+1].Linked(f, 0, 0) {
 				num = f.NumSequences()
