@@ -1,3 +1,25 @@
+2 December 2014
+PASS
+BenchmarkNew	     100	  21341964 ns/op
+BenchmarkACCDB	     100	  24320792 ns/op
+BenchmarkBMP	    5000	    355084 ns/op
+BenchmarkDOCX	   10000	    153725 ns/op
+BenchmarkGIF	    2000	    908599 ns/op
+BenchmarkJPG	    2000	   1202425 ns/op
+BenchmarkMSG	    5000	    371864 ns/op
+BenchmarkODT	     200	   8813946 ns/op
+BenchmarkPDF	     100	  10112538 ns/op
+BenchmarkPNG	    1000	   2878373 ns/op
+BenchmarkPPTX	   10000	    259657 ns/op
+BenchmarkRTF	      50	  45667202 ns/op
+BenchmarkTIF	     100	  17836788 ns/op
+BenchmarkXLSX	   10000	    168245 ns/op
+BenchmarkXML	   10000	    200060 ns/op
+BenchmarkMulti	      20	 111840986 ns/op
+ok  	github.com/richardlehane/siegfried/cmd/sf	36.410s
+
+Dropbox scan: 2m49s [3.6Gb]
+
 29 November 2014 (changed machine to i7 6GB ubuntu)
 PASS
 BenchmarkNew	     100	  22384304 ns/op
