@@ -44,6 +44,7 @@ type Identification interface {
 	String() string // short text that should be displayed to indicate the format match
 	Yaml() string   // long text that should be displayed to indicate the format match
 	Json() string   // JSON match response
+	Csv() []string  // CSV match response
 }
 
 // Matcher does the matching (against the name or the byte stream) and sends results

@@ -15,6 +15,7 @@
 package main
 
 import (
+	"encoding/csv"
 	"encoding/json"
 	"flag"
 	"fmt"
@@ -23,6 +24,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strconv"
 	"time"
 
 	"github.com/richardlehane/siegfried"
@@ -33,10 +35,14 @@ var (
 	update  = flag.Bool("update", false, "update or install the default signature file")
 	version = flag.Bool("version", false, "display version information")
 	debug   = flag.Bool("debug", false, "scan in debug mode")
+	nr      = flag.Bool("nr", false, "prevent automatic directory recursion")
+	csvo    = flag.Bool("csv", false, "CSV output format")
 	sig     = flag.String("sig", config.Signature(), "set the signature file")
 	home    = flag.String("home", config.Home(), "override the default home directory")
 	serve   = flag.String("serve", "false", "not yet implemented - coming with v1")
 )
+
+var csvWriter *csv.Writer
 
 func getHttp(url string) ([]byte, error) {
 	req, err := http.NewRequest("GET", url, nil)
@@ -151,6 +157,9 @@ func multiIdentify(s *siegfried.Siegfried, r string) ([][]string, error) {
 	set := make([][]string, 0)
 	wf := func(path string, info os.FileInfo, err error) error {
 		if info.IsDir() {
+			if *nr && path != r {
+				return filepath.SkipDir
+			}
 			return nil
 		}
 		ids, err := identify(s, path)
@@ -165,8 +174,15 @@ func multiIdentify(s *siegfried.Siegfried, r string) ([][]string, error) {
 }
 
 func multiIdentifyP(s *siegfried.Siegfried, r string) error {
+	var csvRecord []string
+	if *csvo {
+		csvRecord = make([]string, 9)
+	}
 	wf := func(path string, info os.FileInfo, err error) error {
 		if info.IsDir() {
+			if *nr && path != r {
+				return filepath.SkipDir
+			}
 			return nil
 		}
 		file, err := os.Open(path)
@@ -178,11 +194,17 @@ func multiIdentifyP(s *siegfried.Siegfried, r string) error {
 			file.Close()
 			return fmt.Errorf("failed to identify %v, got: %v", path, err)
 		}
-		if !config.Debug() {
+		if !config.Debug() && !*csvo {
 			PrintFile(path, info.Size())
 		}
 		for i := range c {
-			if !config.Debug() {
+			switch {
+			case config.Debug():
+			case *csvo:
+				csvRecord[0], csvRecord[1] = path, strconv.Itoa(int(info.Size()))
+				copy(csvRecord[2:], i.Csv())
+				csvWriter.Write(csvRecord)
+			default:
 				fmt.Print(i.Yaml())
 			}
 		}
@@ -210,6 +232,11 @@ func PrintError(err error) {
 func main() {
 
 	flag.Parse()
+
+	if *csvo {
+		csvWriter = csv.NewWriter(os.Stdout)
+		csvWriter.Write([]string{"filename", "filesize", "identifier", "id", "format name", "format version", "mimetype", "basis", "warning"})
+	}
 
 	if *home != config.Home() {
 		config.SetHome(*home)
@@ -264,13 +291,16 @@ func main() {
 
 	if info.IsDir() {
 		file.Close()
-		if !config.Debug() {
+		if !config.Debug() && !*csvo {
 			fmt.Print(s.Yaml())
 		}
 		err = multiIdentifyP(s, flag.Arg(0))
 		if err != nil {
 			PrintError(err)
 			os.Exit(1)
+		}
+		if *csvo {
+			csvWriter.Flush()
 		}
 		os.Exit(0)
 	}
@@ -280,17 +310,29 @@ func main() {
 		file.Close()
 		os.Exit(1)
 	}
-	if !config.Debug() {
+	if !config.Debug() && !*csvo {
 		fmt.Print(s.Yaml())
 		PrintFile(flag.Arg(0), info.Size())
 	}
+	var csvRecord []string
+	if *csvo {
+		csvRecord = make([]string, 9)
+	}
 	for i := range c {
-		if !config.Debug() {
+		switch {
+		case config.Debug():
+		case *csvo:
+			csvRecord[0], csvRecord[1] = flag.Arg(0), strconv.Itoa(int(info.Size()))
+			copy(csvRecord[2:], i.Csv())
+			csvWriter.Write(csvRecord)
+		default:
 			fmt.Print(i.Yaml())
 		}
-
 	}
 	file.Close()
+	if *csvo {
+		csvWriter.Flush()
+	}
 
 	os.Exit(0)
 }

@@ -313,6 +313,22 @@ func (id Identification) Json() string {
 	return string(b)
 }
 
+func (id Identification) Csv() []string {
+	var basis string
+	if len(id.basis) > 0 {
+		basis = strings.Join(id.basis, "; ")
+	}
+	return []string{
+		id.identifier,
+		id.puid,
+		id.name,
+		id.version,
+		id.mime,
+		basis,
+		id.warning,
+	}
+}
+
 type pids []Identification
 
 func (p pids) Len() int { return len(p) }

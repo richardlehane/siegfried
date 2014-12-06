@@ -12,6 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// Scenarios:
+// a) Stream - just copy into a big buffer as at present
+// b) File
+//    b i)   Satisifed with small read beginning and end
+//    b ii)  Small enough for full read
+//    b iii) Mmap
+//    b iv) Too big for MMap - small buffers and expose ReaderAt
+
 // Package siegreader implements multiple independent Readers (and ReverseReaders) from a single Buffer.
 //
 // Example:
@@ -32,7 +40,7 @@
 package siegreader
 
 import (
-	"fmt"
+	"errors"
 	"io"
 	"log"
 	"os"
@@ -40,9 +48,9 @@ import (
 )
 
 var (
-	readSz      = 4096 //* 2
+	readSz      = 4096
 	initialRead = readSz * 3
-	quitError   = fmt.Errorf("Quit chan closed while awaiting EOF")
+	quitError   = errors.New("Siegreader: quit chan closed while awaiting EOF")
 )
 
 type protected struct {
@@ -87,7 +95,7 @@ func (b *Buffer) reset() {
 // Siegreader blocks on EOF reads or Size() calls when the reader isn't a file or the stream isn't completely read. The quit channel overrides this block.
 func (b *Buffer) SetSource(r io.Reader) error {
 	if b == nil {
-		return fmt.Errorf("Siegreader: attempt to SetSource on a nil buffer")
+		return errors.New("Siegreader: attempt to SetSource on a nil buffer")
 	}
 	b.reset()
 	b.src = r
