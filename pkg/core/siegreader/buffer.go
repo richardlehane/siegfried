@@ -13,7 +13,7 @@
 // limitations under the License.
 
 // Scenarios:
-// a) Stream - just copy into a big buffer as at present
+// a) Stream - just copy into a big buffer as at present (... but if there is a MaxBof??)
 // b) File
 //    b i)   Satisifed with small read beginning and end
 //    b ii)  Small enough for full read

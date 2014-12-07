@@ -106,10 +106,27 @@ func toKeyFrame(seg frames.Signature, pos position) (keyFrame, []frames.Frame, [
 // calculate minimum and maximum lengths for a segment (slice of frames)
 func calcLen(fs []frames.Frame) (int, int) {
 	var min, max int
-	for _, f := range fs {
+	if fs[0].Orientation() < frames.SUCC {
+		for i, f := range fs {
+			fmin, fmax := f.Length()
+			min += fmin
+			max += fmax
+			if i > 0 {
+				min += f.Min()
+				max += f.Max()
+			}
+		}
+		return min, max
+	}
+	for i := len(fs) - 1; i > -1; i-- {
+		f := fs[i]
 		fmin, fmax := f.Length()
 		min += fmin
 		max += fmax
+		if i < len(fs)-1 {
+			min += f.Min()
+			max += f.Max()
+		}
 	}
 	return min, max
 }

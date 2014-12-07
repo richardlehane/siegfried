@@ -2,6 +2,7 @@ package tests
 
 import (
 	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
 	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns/tests"
 )
 
@@ -26,6 +27,33 @@ var TestFrames = []Frame{
 	Wild{BOF, TestSequences[16]},
 	Fixed{EOF, 0, TestSequences[17]},
 	Fixed{BOF, 0, TestLists[0]},
+}
+
+var TestFmts = map[int]Signature{
+	134: Signature{
+		Fixed{BOF, 0, patterns.Sequence{255, 254}},
+		Fixed{PREV, 0, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}}}, // This pattern is actually a range 10:EB but simplified here
+		Window{PREV, 46, 1439, patterns.Sequence{255, 254}},
+		Fixed{PREV, 0, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}}},
+		Window{PREV, 46, 1439, patterns.Sequence{255, 254}},
+		Fixed{PREV, 0, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}}},
+		Window{PREV, 46, 1439, patterns.Sequence{255, 254}},
+		Fixed{PREV, 0, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}}},
+		Window{PREV, 46, 1439, patterns.Sequence{255, 254}},
+		Fixed{PREV, 0, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}}},
+		Window{PREV, 46, 1439, patterns.Sequence{255, 254}},
+		Fixed{PREV, 0, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}}},
+		Window{PREV, 46, 1439, patterns.Sequence{255, 254}},
+		Fixed{PREV, 0, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}}},
+		Window{PREV, 46, 1439, patterns.Sequence{255, 254}},
+		Fixed{PREV, 0, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}}},
+	},
+	418: Signature{
+		Fixed{BOF, 0, patterns.Sequence("%!PS-Adobe-2.0")},
+		Window{PREV, 16, 512, patterns.Sequence("%%DocumentNeededResources:")},
+		Window{PREV, 1, 512, patterns.Sequence("%%+ procset Adobe_Illustrator")},
+		Fixed{PREV, 0, patterns.Choice{patterns.Sequence("_AI3"), patterns.Sequence("A_AI3")}},
+	},
 }
 
 // Shared test signatures (exported so they can be used by the other bytematcher packages)

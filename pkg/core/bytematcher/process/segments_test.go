@@ -139,3 +139,27 @@ func TestSignatureFour(t *testing.T) {
 		t.Errorf("varLength fail: expecting position %v, to equal %v", varLength(s[1], 64), pos)
 	}
 }
+
+func TestFmt418(t *testing.T) {
+	p := New()
+	p.Options = Options{2000, 500, 10, 1}
+	s := p.splitSegments(tests.TestFmts[418])
+	if len(s) != 2 {
+		t.Errorf("fmt418 fail: expecting 2 segments, got %d", len(s))
+	}
+	if characterise(s[0]) != bofZero {
+		t.Errorf("fmt418 fail: expecting the first segment to be bofzero, got %v", characterise(s[0]))
+	}
+	pos := position{14, 0, 1}
+	if bofLength(s[0], 2) != pos {
+		t.Errorf("fmt418 fail: expecting the first segment to have pos %v, got %v", pos, bofLength(s[0], 2))
+	}
+	if characterise(s[1]) != prev {
+		t.Errorf("fmt418 fail: expecting the second segment to be prev, got %v", characterise(s[1]))
+	}
+	pos = position{33, 0, 2}
+	if varLength(s[1], 2) != pos {
+		t.Errorf("fmt418 fail: expecting the second segment to have pos %v, got %v", pos, bofLength(s[1], 2))
+		t.Error(s[1])
+	}
+}
