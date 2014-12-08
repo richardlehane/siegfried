@@ -49,7 +49,7 @@ import (
 
 var (
 	readSz      = 4096
-	initialRead = readSz * 3
+	initialRead = readSz * 2
 	quitError   = errors.New("Siegreader: quit chan closed while awaiting EOF")
 )
 
@@ -63,6 +63,7 @@ type protected struct {
 // It supports multiple concurrent Readers, including Readers reading from the end of the stream (ReverseReaders)
 type Buffer struct {
 	quit      chan struct{} // allows quittting - otherwise will block forever while awaiting EOF
+	drain     bool          // Does this Buffer have a regular reader that we can expect will read to the EOF (and hence allow ReverseReaders to wait)
 	src       io.Reader
 	buf, eof  []byte
 	eofc      chan struct{} // signals if EOF bytes are available. When EOF bytes are available, this chan is closed
@@ -299,8 +300,7 @@ func (b *Buffer) EofSlice(s, l int) ([]byte, error) {
 	return buf[len(buf)-(s+l) : len(buf)-s], nil
 }
 
-// MustSlice calls Slice or EofSlice (which one depends on the rev argument: true for EofSlice) and suppresses the error.
-// If a non io.EOF error is encountered, it will be logged as a warning.
+// SafeSlice calls Slice or EofSlice (which one depends on the rev argument: true for EofSlice)
 func (b *Buffer) SafeSlice(s, l int, rev bool) ([]byte, error) {
 	if rev {
 		return b.EofSlice(s, l)

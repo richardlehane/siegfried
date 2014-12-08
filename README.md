@@ -10,7 +10,7 @@ Key features are:
 
 ## Version
 
-0.7.0
+0.7.1
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried/pkg/core?status.svg)](https://godoc.org/github.com/richardlehane/siegfried/pkg/core)
 
@@ -19,7 +19,17 @@ Key features are:
 ### Command line
 
     sf file.ext
-    sf /DIR
+    sf DIR
+
+#### Options
+
+    sf -csv file.ext                              // Output CSV rather than YAML text
+    sf -nr DIR                                    // Prevent recursion into subdirectories
+    sf -sig my_custom_signature_file.gob file.ext // Define a custom signature file
+    sf -home c:\junk -sig custom.gob file.ext     // Define a custom home directory
+    sf -debug file.ext                            // Scan in debug mode
+    sf -version                                   // Display version information
+
 
 ![Usage](usage.gif)
 
@@ -56,11 +66,16 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 ### Road to 1.0 (early 2015)
 
-- optimisations (load time, mmap, multi-thread)
+- optimisations (mmap, multi-thread)
 - additional documentation & tests
 - server mode
 
 ## Recent Changes
+### Version 0.7.1 (9/12/2014)
+- csv output
+- periodic priority checking to stop searches earlier
+- range/distance/choices bugfix
+
 ### Version 0.7.0 (24/11/2014)
 - change to signature file format
 
