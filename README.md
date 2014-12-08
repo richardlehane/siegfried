@@ -23,12 +23,12 @@ Key features are:
 
 #### Options
 
-    sf -csv file.ext                              // Output CSV rather than YAML text
-    sf -nr DIR                                    // Prevent recursion into subdirectories
-    sf -sig my_custom_signature_file.gob file.ext // Define a custom signature file
-    sf -home c:\junk -sig custom.gob file.ext     // Define a custom home directory
-    sf -debug file.ext                            // Scan in debug mode
-    sf -version                                   // Display version information
+    sf -csv file.ext                           // Output CSV rather than YAML
+    sf -nr DIR                                 // Don't scan subdirectories
+    sf -sig custom.gob file.ext                // Use a custom signature file
+    sf -home c:\junk -sig custom.gob file.ext  // Use a custom home directory
+    sf -debug file.ext                         // Scan in debug mode
+    sf -version                                // Display version information
 
 
 ![Usage](usage.gif)
