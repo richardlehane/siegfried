@@ -236,7 +236,7 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 			}
 		}
 	}
-	// test right (if there are valid left tests to try)
+	// test right (if there are valid right tests to try)
 	if checkr {
 		rslc, _ = m.buf.SafeSlice(rpos, rlen, s.reverse)
 		// if we've quit already, we'll return a nil slice
@@ -267,17 +267,12 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 				}
 				for _, ldistance := range p.ldistances {
 					for _, rdistance := range p.rdistances {
-						toff := s.offset - ldistance
-						if s.reverse {
-							toff = s.offset - rdistance
-						}
-						if m.bm.KeyFrames[kf[0]][kf[1]].CheckSeg(toff) {
-							moff := off - ldistance
-							length := ldistance + s.length + rdistance
-							m.kfHits <- kfHit{kf, moff, length}
-							if <-m.halt {
-								return
-							}
+						moff := off - ldistance
+						length := ldistance + s.length + rdistance
+
+						m.kfHits <- kfHit{kf, moff, length}
+						if <-m.halt {
+							return
 						}
 					}
 				}

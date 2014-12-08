@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// +build win
+// +build windows
 
 package siegreader
 
@@ -25,7 +25,7 @@ func mmapFile(f *os.File) mmapData {
 	if size == 0 {
 		return mmapData{f, nil}
 	}
-	h, err := syscall.CreateFileMapping(f.Fd(), nil, syscall.PAGE_READONLY, uint32(size>>32), uint32(size), nil)
+	h, err := syscall.CreateFileMapping(syscall.Handle(f.Fd()), nil, syscall.PAGE_READONLY, uint32(size>>32), uint32(size), nil)
 	if err != nil {
 		log.Fatalf("CreateFileMapping %s: %v", f.Name(), err)
 	}

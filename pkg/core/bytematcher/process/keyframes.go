@@ -261,20 +261,6 @@ func (kf keyFrame) Check(o int) bool {
 	return true
 }
 
-// proper segment check before committing an incomplete keyframe (necessary when there are left or right tests)
-func (kf keyFrame) CheckSeg(o int) bool {
-	if kf.Seg.PMin > o {
-		return false
-	}
-	if kf.Seg.PMax == -1 {
-		return true
-	}
-	if kf.Seg.PMax < o {
-		return false
-	}
-	return true
-}
-
 // test two key frames (current and previous) to see if they are connected and, if so, at what offsets
 func (kf keyFrame) CheckRelated(prevKf keyFrame, thisOff, prevOff [][2]int) ([][2]int, bool) {
 	// quick test for wild kf

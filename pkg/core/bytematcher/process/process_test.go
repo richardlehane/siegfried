@@ -84,4 +84,14 @@ func TestProcessFmt134(t *testing.T) {
 			t.Errorf("%s\n", v)
 		}
 	}
+	for _, t := range p.Tests {
+		t.MaxLeftDistance = MaxLength(t.Left)
+		t.MaxRightDistance = MaxLength(t.Right)
+	}
+	if len(p.Tests) != 8 {
+		for _, v := range p.Tests {
+			t.Error(v.MaxRightDistance)
+			t.Error(v.Right)
+		}
+	}
 }
