@@ -98,7 +98,6 @@ func (c *ContainerMatcher) identify(rdr Reader, res chan core.Result) {
 			break
 		}
 	}
-	rdr.Quit()
 	close(res)
 }
 

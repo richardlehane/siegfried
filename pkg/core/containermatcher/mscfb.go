@@ -23,7 +23,7 @@ import (
 
 type mscfbReader struct {
 	rdr   *mscfb.Reader
-	entry *mscfb.DirectoryEntry
+	entry *mscfb.File
 }
 
 func mscfbRdr(b *siegreader.Buffer) (Reader, error) {
@@ -49,14 +49,7 @@ func (m *mscfbReader) Name() string {
 }
 
 func (m *mscfbReader) SetSource(b *siegreader.Buffer) error {
-	if !m.entry.Stream {
-		return b.SetSource(strings.NewReader(""))
-	}
-	return b.SetSource(m.rdr)
+	return b.SetSource(m.entry)
 }
 
 func (m *mscfbReader) Close() {}
-
-func (m *mscfbReader) Quit() {
-	m.rdr.Quit()
-}

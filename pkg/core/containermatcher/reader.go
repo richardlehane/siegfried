@@ -21,5 +21,4 @@ type Reader interface {
 	Name() string // return name of the object with paths concatenated with / character
 	SetSource(*siegreader.Buffer) error
 	Close() // close files
-	Quit()  // close down reader
 }

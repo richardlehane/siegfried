@@ -56,8 +56,6 @@ func (z *zipReader) Close() {
 	z.rc.Close()
 }
 
-func (z *zipReader) Quit() {}
-
 func zipRdr(b *siegreader.Buffer) (Reader, error) {
 	r, err := zip.NewReader(b.NewReader(), b.SizeNow())
 	return &zipReader{idx: -1, rdr: r}, err
