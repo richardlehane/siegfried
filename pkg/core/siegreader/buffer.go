@@ -24,7 +24,7 @@
 //
 // Example:
 //   buf := siegreader.New()
-//	 err := buf.SetSource(ioReader)
+//	 err := buf.SetSource(io.Reader)
 //   if err != nil {
 //     log.Fatal(err)
 //   }
