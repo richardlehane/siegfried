@@ -12,31 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Scenarios:
-// a) Stream - just copy into a big buffer as at present (... but if there is a MaxBof??)
-// b) File
-//    b i)   Satisifed with small read beginning
-//    b ii)  Small enough for full read
-//    b iii) Mmap
-//    b iv) Too big for MMap - small buffers and expose ReaderAt
-
-// Package siegreader implements multiple independent Readers (and ReverseReaders) from a single Buffer.
-//
-// Example:
-//   buf := siegreader.New()
-//	 err := buf.SetSource(io.Reader)
-//   if err != nil {
-//     log.Fatal(err)
-//   }
-//   rdr := buf.Reader()
-//	 second_rdr := buf.Reader()
-//   reverse_rdr, err := buf.ReverseReader()
-//   if err != nil {
-//	   log.Fatal(err)
-//   }
-//   i, _ := rdr.Read(slc)
-//   i2, _ := second_rdr.Read(slc2)
-//   i3, _ := reverse_rdr.Read(slc3)
 package siegreader
 
 import (
@@ -47,33 +22,7 @@ import (
 	"sync"
 )
 
-type Buf interface {
-	SetQuit(chan struct{})
-	Size() int64
-	SizeNow() int64
-	Slice(off int64, length int, whence bool) ([]byte, error)
-	canSeek(off int64, whence bool) (bool, error)
-}
-
-type Buffers struct {
-	fpool *sync.Pool // Pool of file buffers
-	spool *sync.Pool // Pool of stream buffers
-}
-
-func (bs *Buffers) New(src io.Reader) *Buffer {
-	return &Buffer{}
-}
-
-var (
-	ErrQuit = errors.New("siegreader: quit chan closed while awaiting EOF")
-)
-
-var (
-	readSz      = 4096
-	initialRead = readSz * 2
-)
-
-type protected struct {
+type sfprotected struct {
 	sync.Mutex
 	val     int
 	eofRead bool
@@ -81,7 +30,7 @@ type protected struct {
 
 // Buffer wraps an io.Reader, buffering its contents in byte slices that will keep growing until IO.EOF.
 // It supports multiple concurrent Readers, including Readers reading from the end of the stream (ReverseReaders)
-type Buffer struct {
+type SmallFile struct {
 	quit      chan struct{} // allows quittting - otherwise will block forever while awaiting EOF
 	drain     bool          // Does this Buffer have a regular reader that we can expect will read to the EOF (and hence allow ReverseReaders to wait)
 	src       io.Reader
@@ -90,17 +39,17 @@ type Buffer struct {
 	completec chan struct{} // signals when the file has been completely read, allows EOF scanning beyond the small buffer
 	complete  bool          // marks that the file has been completely read
 	sz        int64
-	w         protected // index of latest write
+	w         sfprotected // index of latest write
 }
 
 // New instatatiates a new Buffer with a buf size of 4096*3, and an end-of-file buf size of 4096
-func New() *Buffer {
-	b := new(Buffer)
+func NewSF() *SmallFile {
+	b := &SmallFile{}
 	b.buf, b.eof = make([]byte, initialRead), make([]byte, readSz)
 	return b
 }
 
-func (b *Buffer) reset() {
+func (b *SmallFile) reset() {
 	b.eofc, b.completec = make(chan struct{}), make(chan struct{})
 	b.complete = false
 	b.sz = 0
@@ -114,7 +63,7 @@ func (b *Buffer) reset() {
 // Can be any io.Reader. If it is an os.File, will load EOF buffer early. Otherwise waits for a complete read.
 // The source can be reset to recycle an existing Buffer.
 // Siegreader blocks on EOF reads or Size() calls when the reader isn't a file or the stream isn't completely read. The quit channel overrides this block.
-func (b *Buffer) SetSource(r io.Reader) error {
+func (b *SmallFile) SetSource(r io.Reader) error {
 	if b == nil {
 		return errors.New("Siegreader: attempt to SetSource on a nil buffer")
 	}
@@ -140,12 +89,12 @@ func (b *Buffer) SetSource(r io.Reader) error {
 	return err
 }
 
-func (b *Buffer) SetQuit(q chan struct{}) {
+func (b *SmallFile) SetQuit(q chan struct{}) {
 	b.quit = q
 }
 
 // Size returns the buffer's size, which is available immediately for files. Must wait for full read for streams.
-func (b *Buffer) Size() int {
+func (b *SmallFile) Size() int {
 	if b.sz > 0 {
 		return int(b.sz)
 	}
@@ -158,7 +107,7 @@ func (b *Buffer) Size() int {
 }
 
 // non-blocking Size(), for use with zip reader
-func (b *Buffer) SizeNow() int64 {
+func (b *SmallFile) SizeNow() int64 {
 	if b.sz > 0 {
 		return b.sz
 	}
@@ -174,7 +123,7 @@ func (b *Buffer) SizeNow() int64 {
 	return b.sz
 }
 
-func (b *Buffer) grow() {
+func (b *SmallFile) grow() {
 	// Rules for growing:
 	// - if we need to grow, we have passed the initial read and can assume we will need whole file so, if we have a sz grow to it straight away
 	// - otherwise, double capacity each time
@@ -191,7 +140,7 @@ func (b *Buffer) grow() {
 // Rules for filling:
 // - if we have a sz greater than 0, if there is stuff in the eof buffer, and if we are less than readSz from the end, copy across from the eof buffer
 // - read readsz * 2 at a time
-func (b *Buffer) fill() (int, error) {
+func (b *SmallFile) fill() (int, error) {
 	// if we've run out of room, grow the buffer
 	if len(b.buf)-readSz < b.w.val {
 		b.grow()
@@ -230,7 +179,7 @@ func (b *Buffer) fill() (int, error) {
 	return b.w.val, nil
 }
 
-func (b *Buffer) fillEof() error {
+func (b *SmallFile) fillEof() error {
 	// return nil for a non-file or small file reader
 	if len(b.eof) < readSz {
 		return nil
@@ -259,7 +208,7 @@ func (b *Buffer) fillEof() error {
 }
 
 // Return a slice from the buffer that begins at offset s and has length l
-func (b *Buffer) Slice(s, l int) ([]byte, error) {
+func (b *SmallFile) Slice(s, l int) ([]byte, error) {
 	b.w.Lock()
 	defer b.w.Unlock()
 	var err error
@@ -290,7 +239,7 @@ func (b *Buffer) Slice(s, l int) ([]byte, error) {
 
 // Return a slice from the end of the buffer that begins at offset s and has length l.
 // This will block until the slice is available (which may be until the full stream is read).
-func (b *Buffer) EofSlice(s, l int) ([]byte, error) {
+func (b *SmallFile) EofSlice(s, l int) ([]byte, error) {
 	// block until the EOF is available or we quit
 	select {
 	case <-b.quit:
@@ -321,7 +270,7 @@ func (b *Buffer) EofSlice(s, l int) ([]byte, error) {
 }
 
 // SafeSlice calls Slice or EofSlice (which one depends on the rev argument: true for EofSlice)
-func (b *Buffer) SafeSlice(s, l int, rev bool) ([]byte, error) {
+func (b *SmallFile) SafeSlice(s, l int, rev bool) ([]byte, error) {
 	if rev {
 		return b.EofSlice(s, l)
 	} else {
@@ -331,7 +280,7 @@ func (b *Buffer) SafeSlice(s, l int, rev bool) ([]byte, error) {
 
 // MustSlice calls Slice or EofSlice (which one depends on the rev argument: true for EofSlice) and suppresses the error.
 // If a non io.EOF error is encountered, it will be logged as a warning.
-func (b *Buffer) MustSlice(s, l int, rev bool) []byte {
+func (b *SmallFile) MustSlice(s, l int, rev bool) []byte {
 	var slc []byte
 	var err error
 	if rev {
@@ -346,7 +295,7 @@ func (b *Buffer) MustSlice(s, l int, rev bool) []byte {
 }
 
 // fill until a seek to a particular offset is possible, then return true, if it is impossible return false
-func (b *Buffer) canSeek(o int64, rev bool) (bool, error) {
+func (b *SmallFile) canSeek(o int64, rev bool) (bool, error) {
 	if rev {
 		if b.sz > 0 {
 			o = b.sz - o

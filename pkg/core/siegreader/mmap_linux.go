@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// +build linux,!appengine
+// +build linux,darwin,dragonfly,freebsd,netbsd,openbsd,!appengine
 
 package siegreader
 
@@ -10,9 +10,11 @@ import (
 	"log"
 	"os"
 	"syscall"
+
+	"golang.org/x/sys/unix"
 )
 
-func mmapFile(f *os.File) mmapData {
+func mmapFile(f *os.File) []byte {
 	st, err := f.Stat()
 	if err != nil {
 		log.Fatal(err)

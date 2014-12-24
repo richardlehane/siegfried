@@ -9,9 +9,9 @@ import (
 	"testing"
 )
 
-var teststring = "abracadabra"
+const testString = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-var testbytes = []byte("test12345678910YNESSjunktestyjunktestytest12345678910111223")
+var testBytes = []byte(testString)
 
 var testfile = filepath.Join("..", "..", "..", "cmd", "sf", "testdata", "benchmark", "Benchmark.docx")
 
@@ -34,17 +34,17 @@ func setup(r io.Reader, t *testing.T) *Buffer {
 }
 
 func TestStrSource(t *testing.T) {
-	r := strings.NewReader(teststring)
+	r := strings.NewReader(testString)
 	b := setup(r, t)
-	if b.Size() != len(teststring) {
+	if b.Size() != len(testString) {
 		t.Error("String read: size error")
 	}
 }
 
 func TestBytSource(t *testing.T) {
-	r := bytes.NewBuffer(testbytes)
+	r := bytes.NewBuffer(testBytes)
 	b := setup(r, t)
-	if b.Size() != len(testbytes) {
+	if b.Size() != len(testBytes) {
 		t.Error("String read: size error")
 	}
 }

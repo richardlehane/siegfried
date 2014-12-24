@@ -115,7 +115,7 @@ func (s *stream) EofSlice(o, l int) ([]byte, error) {
 	// block until the EOF is available or we quit
 	select {
 	case <-s.b.quit:
-		return nil, quitError
+		return nil, ErrQuit
 	case <-s.eofc:
 	}
 	if o+l > len(s.buf) {
