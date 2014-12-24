@@ -49,23 +49,16 @@ import (
 
 type Buf interface {
 	SetQuit(chan struct{})
+	SetSource(io.Reader) error
 	Size() int64
 	SizeNow() int64
 	Slice(off int64, length int, whence bool) ([]byte, error)
 	canSeek(off int64, whence bool) (bool, error)
 }
 
-type Buffers struct {
-	fpool *sync.Pool // Pool of file buffers
-	spool *sync.Pool // Pool of stream buffers
-}
-
-func (bs *Buffers) New(src io.Reader) *Buffer {
-	return &Buffer{}
-}
-
 var (
-	ErrQuit = errors.New("siegreader: quit chan closed while awaiting EOF")
+	ErrQuit      = errors.New("siegreader: quit chan closed while awaiting EOF")
+	ErrNilBuffer = errors.New("siegreader: attempt to SetSource on a nil buffer")
 )
 
 var (

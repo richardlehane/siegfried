@@ -15,7 +15,6 @@
 package siegreader
 
 import (
-	"errors"
 	"io"
 	"log"
 	"os"
@@ -32,10 +31,8 @@ type sfprotected struct {
 // It supports multiple concurrent Readers, including Readers reading from the end of the stream (ReverseReaders)
 type SmallFile struct {
 	quit      chan struct{} // allows quittting - otherwise will block forever while awaiting EOF
-	drain     bool          // Does this Buffer have a regular reader that we can expect will read to the EOF (and hence allow ReverseReaders to wait)
 	src       io.Reader
 	buf, eof  []byte
-	eofc      chan struct{} // signals if EOF bytes are available. When EOF bytes are available, this chan is closed
 	completec chan struct{} // signals when the file has been completely read, allows EOF scanning beyond the small buffer
 	complete  bool          // marks that the file has been completely read
 	sz        int64
@@ -50,7 +47,7 @@ func NewSF() *SmallFile {
 }
 
 func (b *SmallFile) reset() {
-	b.eofc, b.completec = make(chan struct{}), make(chan struct{})
+	b.completec = make(chan struct{})
 	b.complete = false
 	b.sz = 0
 	b.w.Lock()
@@ -65,76 +62,46 @@ func (b *SmallFile) reset() {
 // Siegreader blocks on EOF reads or Size() calls when the reader isn't a file or the stream isn't completely read. The quit channel overrides this block.
 func (b *SmallFile) SetSource(r io.Reader) error {
 	if b == nil {
-		return errors.New("Siegreader: attempt to SetSource on a nil buffer")
+		return ErrNilBuffer
 	}
 	b.reset()
 	b.src = r
-	file, ok := r.(*os.File)
-	if ok {
-		info, err := file.Stat()
-		if err != nil {
-			return err
-		}
-		b.sz = info.Size()
-		if b.sz > int64(initialRead) {
-			b.eof = b.eof[:cap(b.eof)]
-		} else {
-			b.eof = b.eof[:0]
-		}
+	file := r.(*os.File)
+	info, err := file.Stat()
+	if err != nil {
+		return err
+	}
+	b.sz = info.Size()
+	if b.sz > int64(initialRead) {
+		b.eof = b.eof[:cap(b.eof)]
 	} else {
-		b.sz = 0
 		b.eof = b.eof[:0]
 	}
-	_, err := b.fill() // initial fill
+	_, err = b.fill() // initial fill
 	return err
 }
 
-func (b *SmallFile) SetQuit(q chan struct{}) {
-	b.quit = q
+func (sf *SmallFile) SetQuit(q chan struct{}) {
+	sf.quit = q
 }
 
 // Size returns the buffer's size, which is available immediately for files. Must wait for full read for streams.
-func (b *SmallFile) Size() int {
-	if b.sz > 0 {
-		return int(b.sz)
-	}
-	select {
-	case <-b.eofc:
-		return int(b.sz)
-	case <-b.quit:
-		return 0
-	}
+func (sf *SmallFile) Size() int64 {
+	return sf.sz
 }
 
 // non-blocking Size(), for use with zip reader
-func (b *SmallFile) SizeNow() int64 {
-	if b.sz > 0 {
-		return b.sz
-	}
-	b.w.Lock()
-	defer b.w.Unlock()
-	var err error
-	for _, err = b.fill(); err == nil; _, err = b.fill() {
-	}
-	if err != io.EOF {
-		log.Printf("SIEGREADER WARNING: FAILED TO READ FULL STREAM, ERROR MESSAGE %v", err)
-		return 0
-	}
-	return b.sz
+func (sf *SmallFile) SizeNow() int64 {
+	return sf.sz
 }
 
-func (b *SmallFile) grow() {
+func (sf *SmallFile) grow() {
 	// Rules for growing:
 	// - if we need to grow, we have passed the initial read and can assume we will need whole file so, if we have a sz grow to it straight away
 	// - otherwise, double capacity each time
-	var buf []byte
-	if b.sz > 0 {
-		buf = make([]byte, int(b.sz))
-	} else {
-		buf = make([]byte, cap(b.buf)*2)
-	}
-	copy(buf, b.buf[:b.w.val]) // don't care about unlocking as grow() is only called by fill()
-	b.buf = buf
+	buf := make([]byte, int(sf.sz))
+	copy(buf, sf.buf[:sf.w.val]) // don't care about unlocking as grow() is only called by fill()
+	sf.buf = buf
 }
 
 // Rules for filling:
@@ -170,7 +137,6 @@ func (b *SmallFile) fill() (int, error) {
 			// if we haven't got an eof buf already
 			if len(b.eof) < readSz {
 				b.sz = int64(b.w.val)
-				close(b.eofc)
 			}
 		}
 		return b.w.val, err
@@ -202,7 +168,6 @@ func (b *SmallFile) fillEof() error {
 	if err != nil {
 		return err
 	}
-	close(b.eofc)
 	b.w.eofRead = true
 	return nil
 }
@@ -244,7 +209,6 @@ func (b *SmallFile) EofSlice(s, l int) ([]byte, error) {
 	select {
 	case <-b.quit:
 		return nil, ErrQuit
-	case <-b.eofc:
 	}
 	var buf []byte
 	if len(b.eof) > 0 && s+l <= len(b.eof) {
