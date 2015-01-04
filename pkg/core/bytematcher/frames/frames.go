@@ -60,6 +60,8 @@ const (
 	EOF                 // end of file offset
 )
 
+var OffString = [...]string{"B", "P", "S", "E"}
+
 // Orientation returns the offset type of the frame which must be either BOF, PREV, SUCC or EOF
 func (o OffType) Orientation() OffType {
 	return o
@@ -78,13 +80,6 @@ func (o OffType) SwitchOff() OffType {
 	default:
 		return o
 	}
-}
-
-var OffString = map[OffType]string{
-	BOF:  "B",
-	PREV: "P",
-	SUCC: "S",
-	EOF:  "E",
 }
 
 // Generates Fixed, Window, Wild and WildMin frames. The offsets argument controls what type of frame is created:

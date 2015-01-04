@@ -3,7 +3,7 @@ package siegreader
 // big file data
 
 const (
-	bfWindow = 256000
+	window = readSz * 3
 )
 
 // A big file gets read into a sliding window
