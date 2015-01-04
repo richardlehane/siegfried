@@ -61,7 +61,7 @@ var (
 	ErrNilBuffer = errors.New("siegreader: attempt to SetSource on a nil buffer")
 )
 
-var (
+const (
 	readSz      = 4096
 	initialRead = readSz * 2
 )
