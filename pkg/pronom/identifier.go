@@ -216,7 +216,7 @@ func (r *Recorder) Satisfied() bool {
 func (r *Recorder) Report(res chan core.Identification) {
 	if len(r.ids) > 0 {
 		sort.Sort(r.ids)
-		conf := r.ids[0].Confidence
+		conf := r.ids[0].confidence
 		// if we've only got extension matches, check if those matches are ruled out by lack of byte match
 		// add warnings too
 		if r.NoPriority {
@@ -243,7 +243,7 @@ func (r *Recorder) Report(res chan core.Identification) {
 		res <- r.ids[0]
 		if len(r.ids) > 1 {
 			for i, v := range r.ids[1:] {
-				if v.Confidence == conf {
+				if v.confidence == conf {
 					res <- r.ids[i+1]
 				} else {
 					break
@@ -263,7 +263,7 @@ type Identification struct {
 	Mime       string
 	Basis      []string
 	Warning    string
-	Confidence float64
+	confidence float64
 }
 
 func (id Identification) String() string {
@@ -333,14 +333,14 @@ type pids []Identification
 
 func (p pids) Len() int { return len(p) }
 
-func (p pids) Less(i, j int) bool { return p[j].Confidence < p[i].Confidence }
+func (p pids) Less(i, j int) bool { return p[j].confidence < p[i].confidence }
 
 func (p pids) Swap(i, j int) { p[i], p[j] = p[j], p[i] }
 
 func add(p pids, id string, f string, info FormatInfo, basis string, c float64) pids {
 	for i, v := range p {
 		if v.Puid == f {
-			p[i].Confidence += c
+			p[i].confidence += c
 			p[i].Basis = append(p[i].Basis, basis)
 			return p
 		}
