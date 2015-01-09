@@ -221,20 +221,20 @@ func (r *Recorder) Report(res chan core.Identification) {
 		// add warnings too
 		if r.NoPriority {
 			for i := range r.ids {
-				r.ids[i].warning = "no priority set for this identifier"
+				r.ids[i].Warning = "no priority set for this identifier"
 			}
 		} else if conf == 0.1 {
 			nids := make([]Identification, 0, len(r.ids))
 			for _, v := range r.ids {
-				if _, ok := r.PuidsB[v.puid]; !ok {
-					v.warning = "match on extension only"
+				if _, ok := r.PuidsB[v.Puid]; !ok {
+					v.Warning = "match on extension only"
 					nids = append(nids, v)
 				}
 			}
 			if len(nids) == 0 {
 				poss := make([]string, len(r.ids))
 				for i, v := range r.ids {
-					poss[i] = v.puid
+					poss[i] = v.Puid
 				}
 				nids = []Identification{Identification{r.Name, "UNKNOWN", "", "", "", nil, fmt.Sprintf("no match; possibilities based on extension are %v", strings.Join(poss, ", ")), 0}}
 			}
@@ -256,18 +256,18 @@ func (r *Recorder) Report(res chan core.Identification) {
 }
 
 type Identification struct {
-	identifier string
-	puid       string
-	name       string
-	version    string
-	mime       string
-	basis      []string
-	warning    string
+	Identifier string
+	Puid       string
+	Name       string
+	Version    string
+	Mime       string
+	Basis      []string
+	Warning    string
 	confidence float64
 }
 
 func (id Identification) String() string {
-	return id.puid
+	return id.Puid
 }
 
 func quoteText(s string) string {
@@ -279,11 +279,11 @@ func quoteText(s string) string {
 
 func (id Identification) Yaml() string {
 	var basis string
-	if len(id.basis) > 0 {
-		basis = quoteText(strings.Join(id.basis, "; "))
+	if len(id.Basis) > 0 {
+		basis = quoteText(strings.Join(id.Basis, "; "))
 	}
 	return fmt.Sprintf("  - id      : %v\n    puid    : %v\n    format  : %v\n    version : %v\n    mime    : %v\n    basis   : %v\n    warning : %v\n",
-		id.identifier, id.puid, quoteText(id.name), quoteText(id.version), quoteText(id.mime), basis, quoteText(id.warning))
+		id.Identifier, id.Puid, quoteText(id.Name), quoteText(id.Version), quoteText(id.Mime), basis, quoteText(id.Warning))
 }
 
 func (id Identification) Json() string {
@@ -296,10 +296,10 @@ func (id Identification) Json() string {
 		Warning string `json:"warning"`
 	}
 	var basis string
-	if len(id.basis) > 0 {
-		basis = strings.Join(id.basis, "; ")
+	if len(id.Basis) > 0 {
+		basis = strings.Join(id.Basis, "; ")
 	}
-	b, err := json.Marshal(jsonid{id.puid, id.name, id.version, id.mime, basis, id.warning})
+	b, err := json.Marshal(jsonid{id.Puid, id.Name, id.Version, id.Mime, basis, id.Warning})
 	if err != nil {
 		return `{
 			"puid": "",
@@ -315,17 +315,17 @@ func (id Identification) Json() string {
 
 func (id Identification) Csv() []string {
 	var basis string
-	if len(id.basis) > 0 {
-		basis = strings.Join(id.basis, "; ")
+	if len(id.Basis) > 0 {
+		basis = strings.Join(id.Basis, "; ")
 	}
 	return []string{
-		id.identifier,
-		id.puid,
-		id.name,
-		id.version,
-		id.mime,
+		id.Identifier,
+		id.Puid,
+		id.Name,
+		id.Version,
+		id.Mime,
 		basis,
-		id.warning,
+		id.Warning,
 	}
 }
 
@@ -339,9 +339,9 @@ func (p pids) Swap(i, j int) { p[i], p[j] = p[j], p[i] }
 
 func add(p pids, id string, f string, info FormatInfo, basis string, c float64) pids {
 	for i, v := range p {
-		if v.puid == f {
+		if v.Puid == f {
 			p[i].confidence += c
-			p[i].basis = append(p[i].basis, basis)
+			p[i].Basis = append(p[i].Basis, basis)
 			return p
 		}
 	}
