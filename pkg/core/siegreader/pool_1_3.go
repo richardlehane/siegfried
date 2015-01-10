@@ -21,11 +21,35 @@ import (
 	"sync"
 )
 
+func Pool() *Buffers {
+	return &Buffers{}
+}
+
 type Buffers struct {
 	fpool *sync.Pool // Pool of file buffers
 	spool *sync.Pool // Pool of stream buffers
+	*datas
 }
 
-func (bs *Buffers) New(src io.Reader) *Buffer {
-	return &Buffer{}
+func (b *Buffers) Get(src io.Reader) Buffer {
+	return Buffer{}
+}
+
+func (b *Buffers) Put(i Buffer) Buffer {
+	return Buffer{}
+}
+
+// Data pool (used by file)
+
+type datas struct {
+	bfpool *sync.Pool
+	mpool  *sync.Pool
+}
+
+func (d *datas) get(sz int64) data {
+	return &bigfile{}
+}
+
+func (d *datas) put(i data) {
+
 }

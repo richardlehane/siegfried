@@ -62,8 +62,7 @@ var (
 )
 
 const (
-	readSz      = 4096
-	initialRead = readSz * 2
+	readSz = 4096
 )
 
 type protected struct {
@@ -354,7 +353,7 @@ func (b *Buffer) canSeek(o int64, rev bool) (bool, error) {
 			if err != io.EOF {
 				return false, err
 			}
-			if b.sz-o < 0 {
+			if b.sz < o {
 				return false, nil
 			}
 			return true, nil

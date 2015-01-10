@@ -12,39 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// +build !go1.3
+// +build appengine
 
 package siegreader
 
-import (
-	"io"
-)
-
-type buffers struct {
-	fpool chan *file   // Pool of file buffers
-	spool chan *stream // Pool of stream buffers
-	*datas
+// no mmap on appengine
+func mmapable(sz int64) bool {
+	return false
 }
 
-func (b *buffers) get(src io.Reader) Buffer {
-	return Buffer{}
-}
-
-func (b *buffers) put(i buffer) Buffer {
-	return Buffer{}
-}
-
-// Data pool (used by file)
-
-type datas struct {
-	bfpool chan *bigfile
-	mpool  chan *mmap
-}
-
-func (d *datas) get(sz int64) data {
-	return &bigfile{}
-}
-
-func (d *datas) put(i data) {
-
+func mmapFile(f *os.File) []byte {
+	return nil
 }

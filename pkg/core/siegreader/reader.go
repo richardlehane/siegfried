@@ -122,7 +122,7 @@ func (r *Reader) Seek(offset int64, whence int) (int64, error) {
 		}
 		d := int(offset) - r.i
 		r.i = int(offset)
-		r.j += d // add the jump distance to r.j
+		r.j += d // add the jump distance to r.j PROBLEM - WHAT IF r.j < 0!!
 		return offset, err
 	}
 	return 0, err
