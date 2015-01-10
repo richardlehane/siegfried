@@ -36,6 +36,8 @@ func (b *buffers) put(i buffer) Buffer {
 
 // Data pool (used by file)
 
+type mmap struct{}
+
 type datas struct {
 	bfpool chan *bigfile
 	mpool  chan *mmap

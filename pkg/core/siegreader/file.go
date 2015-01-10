@@ -52,17 +52,10 @@ func (f *file) Size() int64 { return f.sz }
 
 func (f *file) SizeNow() int64 { return f.sz }
 
-func (f *file) Slice(off int64, length int, whence bool) ([]byte, error) {
+func (f *file) Slice(off int64, length int) ([]byte, error) {
 	// return EOF if offset is larger than the file size
 	if off >= f.sz {
 		return nil, io.EOF
-	}
-	// if an EOF slice, convert to BOF
-	if !whence {
-		off = f.sz - off - int64(length)
-		if off < 0 {
-			off = 0
-		}
 	}
 	// the slice falls entirely in the rem segment
 	if off > int64(initialRead) {
@@ -91,6 +84,10 @@ func (f *file) Slice(off int64, length int, whence bool) ([]byte, error) {
 	slc, _ := f.slice(off, length)
 	copy(ret[start:], slc)
 	return ret, err
+}
+
+func (f *file) EofSlice(off int64, l int) ([]byte, error) {
+	return nil, nil
 }
 
 func (f *file) canSeek(off int64, whence bool) (bool, error) {

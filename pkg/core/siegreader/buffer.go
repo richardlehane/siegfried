@@ -52,8 +52,9 @@ type Buf interface {
 	SetSource(io.Reader) error
 	Size() int64
 	SizeNow() int64
-	Slice(off int64, length int, whence bool) ([]byte, error)
-	canSeek(off int64, whence bool) (bool, error)
+	Slice(off int64, length int) ([]byte, error)
+	EofSlice(off int64, l int) ([]byte, error)
+	canSeek(off int64, rev bool) (bool, error)
 }
 
 var (
