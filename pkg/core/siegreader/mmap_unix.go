@@ -2,14 +2,13 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// +build linux,darwin,dragonfly,freebsd,netbsd,openbsd,!appengine
+// +build linux,!appengine darwin dragonfly freebsd netbsd openbsd
 
 package siegreader
 
 import (
 	"log"
 	"os"
-	"syscall"
 
 	"golang.org/x/sys/unix"
 )
@@ -32,7 +31,7 @@ func mmapFile(f *os.File, sz int64) []byte {
 	if n == 0 {
 		return nil
 	}
-	data, err := syscall.Mmap(int(f.Fd()), 0, (n+4095)&^4095, syscall.PROT_READ, syscall.MAP_SHARED)
+	data, err := unix.Mmap(int(f.Fd()), 0, (n+4095)&^4095, unix.PROT_READ, unix.MAP_SHARED)
 	if err != nil {
 		log.Fatalf("mmap %s: %v", f.Name(), err)
 	}
