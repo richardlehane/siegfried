@@ -39,8 +39,8 @@ var (
 const (
 	readSz      int = 4096
 	initialRead     = readSz * 2
-	wheelSz         = readSz * 32
-	eofSz           = readSz * 32
+	wheelSz         = readSz * 2
+	eofSz           = readSz * 2
 	smallFileSz     = readSz * 16
 )
 

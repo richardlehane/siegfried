@@ -30,7 +30,11 @@ func (f *file) setLimit() {
 
 func (f *file) waitLimit() {
 	if f.limited {
-		<-f.limit
+		select {
+		case <-f.limit:
+		case <-f.quit:
+		}
+
 	}
 }
 
@@ -42,6 +46,8 @@ func newFile() interface{} { return &file{} }
 func (f *file) setSource(src *os.File, p *datas) error {
 	// reset
 	f.data = nil
+	f.limit = nil
+	f.limited = false
 
 	f.pool = p
 	f.src = src

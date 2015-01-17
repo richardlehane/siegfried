@@ -44,7 +44,7 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 			if br.Index[0] == -1 {
 				progressStrike.offset = br.Offset
 				incoming <- progressStrike
-				if br.Offset > 4096 {
+				if br.Offset > 2048 {
 					break
 				}
 			} else {

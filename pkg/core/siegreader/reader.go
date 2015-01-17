@@ -205,9 +205,8 @@ type LimitReader struct {
 func LimitReaderFrom(b Buffer, l int) *LimitReader {
 	// A BOF reader may not have been used, trigger a fill if necessary.
 	r := &Reader{0, 0, nil, false, b}
-	if l > 0 {
-		b.setLimit()
-	}
+	b.setLimit()
+
 	return &LimitReader{l, r}
 }
 
@@ -219,13 +218,16 @@ func (l *LimitReader) ReadByte() (byte, error) {
 	}
 	if l.j >= len(l.scratch) {
 		if l.end {
+			l.reachedLimit()
 			return 0, io.EOF
 		}
 		err := l.setBuf(l.i)
 		if err != nil && err != io.EOF {
+			l.reachedLimit()
 			return 0, err
 		}
 		if len(l.scratch) == 0 {
+			l.reachedLimit()
 			return 0, io.EOF
 		}
 		l.j = 0
@@ -271,7 +273,7 @@ func (r *LimitReverseReader) ReadByte() (byte, error) {
 			return 0, io.EOF
 		}
 		err = r.setBuf(r.i)
-		if err != nil && err != io.EOF {
+		if err != nil && err != io.EOF || len(r.scratch) == 0 {
 			return 0, err
 		}
 		r.j = 0

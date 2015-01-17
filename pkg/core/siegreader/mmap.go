@@ -16,9 +16,6 @@ func newMmap() interface{} {
 func (m *mmap) setSource(f *file) {
 	m.file = f
 	err := m.mapFile()
-	if m.src.Name() == "testdata/skeleton-suite/fmt/fmt-355-signature-id-522.rtf" {
-		log.Fatalf("mapped %d", len(m.buf))
-	}
 	if err != nil {
 		log.Fatalf("Siegreader fatal error while attempting to mmap: %s; error: %v\n", m.src.Name(), err)
 	}
