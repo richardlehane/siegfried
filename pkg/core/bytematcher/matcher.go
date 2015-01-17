@@ -222,9 +222,9 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 	// test left (if there are valid left tests to try)
 	if checkl {
 		if s.reverse {
-			lslc, _ = m.buf.Slice(int64(lpos), llen)
-		} else {
 			lslc, _ = m.buf.EofSlice(int64(lpos), llen)
+		} else {
+			lslc, _ = m.buf.Slice(int64(lpos), llen)
 		}
 
 		// if we've quit already, we'll return a nil slice

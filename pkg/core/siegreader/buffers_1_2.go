@@ -16,10 +16,6 @@
 
 package siegreader
 
-import (
-	"io"
-)
-
 type pool struct {
 	fn   func() interface{}
 	vals chan interface{}
