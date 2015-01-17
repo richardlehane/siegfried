@@ -226,11 +226,6 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 		} else {
 			lslc, _ = m.buf.Slice(int64(lpos), llen)
 		}
-
-		// if we've quit already, we'll return a nil slice
-		if lslc == nil {
-			return
-		}
 		left := process.MatchTestNodes(t.Left, lslc, true)
 		for _, lp := range left {
 			if partials[lp.FollowUp].l {
@@ -247,10 +242,6 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 			rslc, _ = m.buf.EofSlice(int64(rpos), rlen)
 		} else {
 			rslc, _ = m.buf.Slice(int64(rpos), rlen)
-		}
-		// if we've quit already, we'll return a nil slice
-		if rslc == nil {
-			return
 		}
 		right := process.MatchTestNodes(t.Right, rslc, false)
 		for _, rp := range right {
@@ -278,8 +269,8 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 					for _, rdistance := range p.rdistances {
 						moff := off - ldistance
 						length := ldistance + s.length + rdistance
-
 						m.kfHits <- kfHit{kf, moff, length}
+
 						if <-m.halt {
 							return
 						}

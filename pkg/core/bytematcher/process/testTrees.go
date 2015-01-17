@@ -158,7 +158,10 @@ func MaxLength(ts []*testNode) int {
 }
 
 func MatchTestNodes(ts []*testNode, b []byte, rev bool) []followupMatch {
-	ret := make([]followupMatch, 0)
+	ret := []followupMatch{}
+	if b == nil {
+		return ret
+	}
 	var match func(t *testNode, o int)
 	match = func(t *testNode, o int) {
 		if o >= len(b) {
