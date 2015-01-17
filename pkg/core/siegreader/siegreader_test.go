@@ -15,38 +15,43 @@ var testBytes = []byte(testString)
 
 var testfile = filepath.Join("..", "..", "..", "cmd", "sf", "testdata", "benchmark", "Benchmark.docx")
 
+var bufs = New()
+
 func TestNew(t *testing.T) {
 	b := New()
 	if b == nil {
-		t.Error("Buffer is nil")
+		t.Error("New is nil")
 	}
 }
 
-func setup(r io.Reader, t *testing.T) *Buffer {
-	b := New()
-	q := make(chan struct{})
-	b.SetQuit(q)
-	err := b.SetSource(r)
+func setup(r io.Reader, t *testing.T) Buffer {
+	buf, err := bufs.Get(r)
 	if err != nil && err != io.EOF {
 		t.Errorf("Read error: %v", err)
 	}
-	return b
+	q := make(chan struct{})
+	buf.SetQuit(q)
+	return buf
 }
 
 func TestStrSource(t *testing.T) {
 	r := strings.NewReader(testString)
 	b := setup(r, t)
-	if b.Size() != len(testString) {
-		t.Error("String read: size error")
+	b.Slice(0, readSz)
+	if b.Size() != int64(len(testString)) {
+		t.Errorf("String read: size error, expecting %d got %d", b.Size(), int64(len(testString)))
 	}
+	bufs.Put(b)
 }
 
 func TestBytSource(t *testing.T) {
 	r := bytes.NewBuffer(testBytes)
 	b := setup(r, t)
-	if b.Size() != len(testBytes) {
+	b.Slice(0, readSz)
+	if b.Size() != int64(len(testBytes)) {
 		t.Error("String read: size error")
 	}
+	bufs.Put(b)
 }
 
 func TestFileSource(t *testing.T) {
@@ -54,6 +59,7 @@ func TestFileSource(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	setup(r, t)
+	b := setup(r, t)
 	r.Close()
+	bufs.Put(b)
 }

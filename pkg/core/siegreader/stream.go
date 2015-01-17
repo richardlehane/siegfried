@@ -1,29 +1,63 @@
 package siegreader
 
-//import "sync"
+import (
+	"io"
+	"sync"
+)
 
-import "io"
-
-//type protected struct {
-//	sync.Mutex
-//	val int
-//}
-
-// Scenarios:
-// a) Stream - just copy into a big buffer as at present (... but if there is a MaxBof??)
 type stream struct {
+	src  io.Reader
 	buf  []byte
-	w    protected
 	eofc chan struct{}
-	b    *Buffer
+	quit chan struct{}
+
+	limited bool
+	limit   chan struct{}
+
+	mu  sync.Mutex
+	i   int
+	eof bool
+}
+
+func newStream() interface{} {
+	return &stream{buf: make([]byte, readSz*16)}
+}
+
+func (s *stream) setSource(src io.Reader) {
+	s.src = src
+	s.eofc = make(chan struct{})
+	s.quit = nil
+	s.limited = false
+	s.limit = nil
+	s.i = 0
+	s.eof = false
+}
+
+func (s *stream) SetQuit(q chan struct{}) {
+	s.quit = q
+}
+
+func (s *stream) setLimit() {
+	s.limited = true
+	s.limit = make(chan struct{})
+}
+
+func (s *stream) waitLimit() {
+	if s.limited {
+		<-s.limit
+	}
+}
+
+func (s *stream) reachedLimit() {
+	close(s.limit)
 }
 
 // Size returns the buffer's size, which is available immediately for files. Must wait for full read for streams.
-func (s *stream) Size() int {
+func (s *stream) Size() int64 {
 	select {
 	case <-s.eofc:
-		return len(s.buf)
-	case <-s.b.quit:
+		return int64(s.i)
+	case <-s.quit:
 		return 0
 	}
 }
@@ -33,7 +67,7 @@ func (s *stream) SizeNow() int64 {
 	var err error
 	for _, err = s.fill(); err == nil; _, err = s.fill() {
 	}
-	return int64(len(s.buf))
+	return int64(s.i)
 }
 
 func (s *stream) grow() {
@@ -42,7 +76,7 @@ func (s *stream) grow() {
 	// - otherwise, double capacity each time
 	var buf []byte
 	buf = make([]byte, cap(s.buf)*2)
-	copy(buf, s.buf[:s.w.val]) // don't care about unlocking as grow() is only called by fill()
+	copy(buf, s.buf[:s.i]) // don't care about unlocking as grow() is only called by fill()
 	s.buf = buf
 }
 
@@ -50,42 +84,42 @@ func (s *stream) grow() {
 // - if we have a sz greater than 0, if there is stuff in the eof buffer, and if we are less than readSz from the end, copy across from the eof buffer
 // - read readsz * 2 at a time
 func (s *stream) fill() (int, error) {
+	if s.eof {
+		return s.i, io.EOF
+	}
 	// if we've run out of room, grow the buffer
-	if len(s.buf)-readSz < s.w.val {
+	if len(s.buf)-readSz < s.i {
 		s.grow()
 	}
 	// otherwise, let's read
-	e := s.w.val + readSz
+	e := s.i + readSz
 	if e > len(s.buf) {
 		e = len(s.buf)
 	}
-	i, err := s.b.src.Read(s.buf[s.w.val:e])
+	i, err := s.src.Read(s.buf[s.i:e])
 	if i < readSz {
 		err = io.EOF // Readers can give EOF or nil here
 	}
 	if err != nil {
 		close(s.eofc)
+		s.eof = true
 		if err == io.EOF {
-			s.w.val += i
+			s.i += i
 		}
-		return s.w.val, err
+		return s.i, err
 	}
-	s.w.val += i
-	return s.w.val, nil
-}
-
-func (s *stream) fillEof() error {
-	// return nil
-	return nil
+	s.i += i
+	return s.i, nil
 }
 
 // Return a slice from the buffer that begins at offset s and has length l
-func (s *stream) Slice(o, l int) ([]byte, error) {
-	s.w.Lock()
-	defer s.w.Unlock()
+func (s *stream) Slice(off int64, l int) ([]byte, error) {
+	o := int(off)
+	s.mu.Lock()
+	defer s.mu.Unlock()
 	var err error
 	var bound int
-	if o+l > s.w.val {
+	if o+l > s.i {
 		for bound, err = s.fill(); o+l > bound && err == nil; bound, err = s.fill() {
 		}
 	}
@@ -93,15 +127,15 @@ func (s *stream) Slice(o, l int) ([]byte, error) {
 		return s.buf[o : o+l], nil
 	}
 	if err == io.EOF {
-		if o+l > s.w.val {
-			if o > s.w.val {
+		if o+l > s.i {
+			if o > s.i {
 				return nil, io.EOF
 			}
 			// in the case of an empty file
 			if len(s.buf) == 0 {
 				return nil, io.EOF
 			}
-			return s.buf[o:s.w.val], io.EOF
+			return s.buf[o:s.i], io.EOF
 		} else {
 			return s.buf[o : o+l], nil
 		}
@@ -111,20 +145,22 @@ func (s *stream) Slice(o, l int) ([]byte, error) {
 
 // Return a slice from the end of the buffer that begins at offset s and has length l.
 // This will block until the slice is available (which may be until the full stream is read).
-func (s *stream) EofSlice(o, l int) ([]byte, error) {
+func (s *stream) EofSlice(o int64, l int) ([]byte, error) {
 	// block until the EOF is available or we quit
 	select {
-	case <-s.b.quit:
+	case <-s.quit:
 		return nil, ErrQuit
 	case <-s.eofc:
 	}
-	if o+l > len(s.buf) {
-		if o > len(s.buf) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	if int(o)+l > s.i {
+		if int(o) >= s.i {
 			return nil, io.EOF
 		}
-		return s.buf[:len(s.buf)-o], io.EOF
+		return s.buf[:s.i-int(o)], io.EOF
 	}
-	return s.buf[len(s.buf)-(o+l) : len(s.buf)-o], nil
+	return s.buf[s.i-(int(o)+l) : s.i-int(o)], nil
 }
 
 // fill until a seek to a particular offset is possible, then return true, if it is impossible return false
@@ -141,11 +177,11 @@ func (s *stream) canSeek(o int64, rev bool) (bool, error) {
 		}
 		return true, nil
 	}
-	s.w.Lock()
-	defer s.w.Unlock()
+	s.mu.Lock()
+	defer s.mu.Unlock()
 	var err error
 	var bound int
-	if o > int64(s.w.val) {
+	if o > int64(s.i) {
 		for bound, err = s.fill(); o > int64(bound) && err == nil; bound, err = s.fill() {
 		}
 	}
@@ -153,7 +189,7 @@ func (s *stream) canSeek(o int64, rev bool) (bool, error) {
 		return true, nil
 	}
 	if err == io.EOF {
-		if o > int64(s.w.val) {
+		if o > int64(s.i) {
 			return false, err
 		}
 		return true, nil

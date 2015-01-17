@@ -108,7 +108,7 @@ type Fsmatch struct {
 	Length int
 }
 
-func (fs *frameSet) Index(buf *siegreader.Buffer, rev bool, quit chan struct{}) chan Fsmatch {
+func (fs *frameSet) Index(buf siegreader.Buffer, rev bool, quit chan struct{}) chan Fsmatch {
 	ret := make(chan Fsmatch)
 	go func() {
 		var i int
@@ -134,7 +134,12 @@ func (fs *frameSet) Index(buf *siegreader.Buffer, rev bool, quit chan struct{}) 
 				}
 				match, matches = f.MatchR(slc)
 			} else {
-				match, matches = f.Match(buf.MustSlice(0, frames.TotalLength(f), false))
+				slc, err := buf.Slice(0, frames.TotalLength(f))
+				if err != nil {
+					close(ret)
+					return
+				}
+				match, matches = f.Match(slc)
 			}
 			if match {
 				var min int

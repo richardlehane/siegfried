@@ -150,7 +150,7 @@ func (r Result) Basis() string {
 //       fmt.Print("Success! It is signature 0!")
 //     }
 //   }
-func (b *Matcher) Identify(name string, sb *siegreader.Buffer) chan core.Result {
+func (b *Matcher) Identify(name string, sb siegreader.Buffer) chan core.Result {
 	quit, ret := make(chan struct{}), make(chan core.Result)
 	go b.identify(sb, quit, ret)
 	return ret

@@ -150,9 +150,9 @@ type ContainerMatcher struct {
 	// this prevents delving through zip files that will be recursed anyway
 	// temp stuff used during identification
 	started      bool
-	entryBuf     *siegreader.Buffer // shared buffer used by each entry in a container
-	partsMatched [][]hit            // hits for parts
-	ruledOut     []bool             // mark additional signatures as negatively matched
+	entryBufs    *siegreader.Buffers // shared buffer used by each entry in a container
+	partsMatched [][]hit             // hits for parts
+	ruledOut     []bool              // mark additional signatures as negatively matched
 	waitSet      *priority.WaitSet
 	hits         []hit // shared buffer of hits used when matching
 
@@ -185,7 +185,7 @@ func (c *ContainerMatcher) String() string {
 
 type ctype struct {
 	trigger func([]byte) bool
-	rdr     func(*siegreader.Buffer) (Reader, error)
+	rdr     func(siegreader.Buffer) (Reader, error)
 }
 
 var ctypes = []ctype{

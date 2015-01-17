@@ -27,13 +27,13 @@ import (
 type matcher struct {
 	incoming       chan strike
 	bm             *Matcher
-	buf            *siegreader.Buffer
+	buf            siegreader.Buffer
 	partialMatches map[[2]int][][2]int // map of a keyframe to a slice of offsets and lengths where it has matched
 	strikeCache    map[int]*cacheItem
 	*tally
 }
 
-func (b *Matcher) newMatcher(buf *siegreader.Buffer, q chan struct{}, r chan core.Result) chan strike {
+func (b *Matcher) newMatcher(buf siegreader.Buffer, q chan struct{}, r chan core.Result) chan strike {
 	incoming := make(chan strike) // buffer ? Use benchmarks to check
 	m := &matcher{
 		incoming:       incoming,
@@ -148,7 +148,7 @@ func (m *matcher) calcOffset(s strike) int {
 	if !s.reverse {
 		return s.offset
 	}
-	return m.buf.Size() - s.offset - s.length
+	return int(m.buf.Size()) - s.offset - s.length
 }
 
 func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
@@ -221,7 +221,12 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 
 	// test left (if there are valid left tests to try)
 	if checkl {
-		lslc, _ = m.buf.SafeSlice(lpos, llen, s.reverse)
+		if s.reverse {
+			lslc, _ = m.buf.Slice(int64(lpos), llen)
+		} else {
+			lslc, _ = m.buf.EofSlice(int64(lpos), llen)
+		}
+
 		// if we've quit already, we'll return a nil slice
 		if lslc == nil {
 			return
@@ -238,7 +243,11 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 	}
 	// test right (if there are valid right tests to try)
 	if checkr {
-		rslc, _ = m.buf.SafeSlice(rpos, rlen, s.reverse)
+		if s.reverse {
+			rslc, _ = m.buf.EofSlice(int64(rpos), rlen)
+		} else {
+			rslc, _ = m.buf.Slice(int64(rpos), rlen)
+		}
 		// if we've quit already, we'll return a nil slice
 		if rslc == nil {
 			return

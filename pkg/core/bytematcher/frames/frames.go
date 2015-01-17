@@ -51,7 +51,7 @@ type Frame interface {
 	Sequences() []patterns.Sequence
 }
 
-type OffType int
+type OffType uint8
 
 const (
 	BOF  OffType = iota // beginning of file offset

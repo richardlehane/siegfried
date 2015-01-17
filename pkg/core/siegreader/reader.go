@@ -19,23 +19,29 @@ import (
 	"io"
 )
 
+/*
+//   rdr := siegreader.ReaderFrom(buffer)
+//	 second_rdr := siegreader.ReaderFrom(buffer)
+//   brdr := siegreader.ByteReaderFrom(buffer, -1)
+//   rrdr := siegreader.ReverseByteReaderFrom(buffer, 16000)
+*/
+
 // Reader implements the io.Reader, io.Seeker, io.ByteReader and io.ReaderAt interfaces
 // The special thing about a siegreader.Reader is that you can have a bunch of them all reading independently from the one buffer.
 type Reader struct {
-	i, j    int
+	i       int64
+	j       int
 	scratch []byte
 	end     bool // buffer adjoins the end of the file
-	*Buffer
+	Buffer
 }
 
-func (b *Buffer) NewReader() *Reader {
+func ReaderFrom(b Buffer) *Reader {
 	// A BOF reader may not have been used, trigger a fill if necessary.
-	r := &Reader{0, 0, nil, false, b}
-	r.setBuf(0) // ignoring the error here is safe because we've successfully set the source
-	return r
+	return &Reader{0, 0, nil, false, b}
 }
 
-func (r *Reader) setBuf(o int) error {
+func (r *Reader) setBuf(o int64) error {
 	var err error
 	r.scratch, err = r.Slice(o, readSz)
 	if err == io.EOF {
@@ -79,7 +85,7 @@ func (r *Reader) Read(b []byte) (int, error) {
 		slc = r.scratch[r.j : r.j+len(b)]
 	}
 	n := copy(b, slc)
-	r.i += n
+	r.i += int64(n)
 	r.j += n
 	return len(slc), err
 }
@@ -88,11 +94,11 @@ func (r *Reader) ReadAt(b []byte, off int64) (int, error) {
 	var slc []byte
 	var err error
 	// if b is already covered by the scratch slice
-	if int(off) >= r.i-r.j && int(off)+len(b) <= r.i-r.j+len(r.scratch) {
-		s := int(off) - (r.i - r.j)
+	if off >= r.i-int64(r.j) && off+int64(len(b)) <= r.i-int64(r.j+len(r.scratch)) {
+		s := int(off-r.i) - r.j
 		slc = r.scratch[s : s+len(b)]
 	} else {
-		slc, err = r.Slice(int(off), len(b))
+		slc, err = r.Slice(off, len(b))
 		if err != nil {
 			if err != io.EOF {
 				return 0, err
@@ -118,11 +124,11 @@ func (r *Reader) Seek(offset int64, whence int) (int64, error) {
 	success, err := r.canSeek(offset, rev)
 	if success {
 		if rev {
-			offset = r.sz - offset
+			offset = r.Size() - offset
 		}
-		d := int(offset) - r.i
-		r.i = int(offset)
-		r.j += d // add the jump distance to r.j PROBLEM - WHAT IF r.j < 0!!
+		d := offset - r.i
+		r.i = offset
+		r.j += int(d) // add the jump distance to r.j PROBLEM - WHAT IF r.j < 0!!
 		return offset, err
 	}
 	return 0, err
@@ -131,19 +137,18 @@ func (r *Reader) Seek(offset int64, whence int) (int64, error) {
 // ReverseReader implements the io.Reader and io.ByteReader interfaces, but for each it does so from the end of the io source working backwards.
 // Like Readers, you can have multiple ReverseReaders all reading independently from the same buffer.
 type ReverseReader struct {
-	i, j    int
+	i       int64
+	j       int
 	scratch []byte
 	end     bool // if buffer is adjacent to the BOF, i.e. we have scanned all the way back to the beginning
-	*Buffer
+	Buffer
 }
 
-func (b *Buffer) NewReverseReader() (*ReverseReader, error) {
-	// fill the EOF now, if possible and not already done
-	err := b.fillEof()
-	return &ReverseReader{0, 0, nil, false, b}, err
+func ReverseReaderFrom(b Buffer) *ReverseReader {
+	return &ReverseReader{0, 0, nil, false, b}
 }
 
-func (r *ReverseReader) setBuf(o int) error {
+func (r *ReverseReader) setBuf(o int64) error {
 	var err error
 	r.scratch, err = r.EofSlice(o, readSz)
 	if err == io.EOF {
@@ -170,21 +175,17 @@ func (r *ReverseReader) Read(b []byte) (int, error) {
 		slc = r.scratch[len(r.scratch)-len(b) : len(r.scratch)-r.j]
 	}
 	n := copy(b, slc)
-	r.i += n
+	r.i += int64(n)
 	r.j += n
 	return len(slc), err
 }
 
 func (r *ReverseReader) ReadByte() (byte, error) {
-	var err error
-	if r.i == 0 {
-		r.setBuf(0)
-	}
 	if r.j >= len(r.scratch) {
 		if r.end {
 			return 0, io.EOF
 		}
-		err = r.setBuf(r.i)
+		err := r.setBuf(r.i)
 		if err != nil && err != io.EOF {
 			return 0, err
 		}
@@ -201,33 +202,37 @@ type LimitReader struct {
 	*Reader
 }
 
-func (b *Buffer) NewLimitReader(l int) *LimitReader {
+func LimitReaderFrom(b Buffer, l int) *LimitReader {
 	// A BOF reader may not have been used, trigger a fill if necessary.
 	r := &Reader{0, 0, nil, false, b}
-	r.setBuf(0) // ignoring the error here is safe because we've successfully set the source
+	if l > 0 {
+		b.setLimit()
+	}
 	return &LimitReader{l, r}
 }
 
-func (r *LimitReader) ReadByte() (byte, error) {
-	if r.i >= r.limit {
+func (l *LimitReader) ReadByte() (byte, error) {
+	if l.limit > 0 && l.i >= int64(l.limit) {
+		l.reachedLimit()
+		l.limit = -1 // only run once
 		return 0, io.EOF
 	}
-	if r.j >= len(r.scratch) {
-		if r.end {
+	if l.j >= len(l.scratch) {
+		if l.end {
 			return 0, io.EOF
 		}
-		err := r.setBuf(r.i)
+		err := l.setBuf(l.i)
 		if err != nil && err != io.EOF {
 			return 0, err
 		}
-		if len(r.scratch) == 0 {
+		if len(l.scratch) == 0 {
 			return 0, io.EOF
 		}
-		r.j = 0
+		l.j = 0
 	}
-	b := r.scratch[r.j]
-	r.i++
-	r.j++
+	b := l.scratch[l.j]
+	l.i++
+	l.j++
 	return b, nil
 }
 
@@ -236,14 +241,25 @@ type LimitReverseReader struct {
 	*ReverseReader
 }
 
-func (b *Buffer) NewLimitReverseReader(l int) (*LimitReverseReader, error) {
+func (l *LimitReverseReader) setBuf(o int64) error {
+	var err error
+	if o >= int64(eofSz) {
+		l.waitLimit()
+	}
+	l.scratch, err = l.EofSlice(o, readSz)
+	if err == io.EOF {
+		l.end = true
+	}
+	return err
+}
+
+func LimitReverseReaderFrom(b Buffer, l int) *LimitReverseReader {
 	// fill the EOF now, if possible and not already done
-	err := b.fillEof()
-	return &LimitReverseReader{l, &ReverseReader{0, 0, nil, false, b}}, err
+	return &LimitReverseReader{l, &ReverseReader{0, 0, nil, false, b}}
 }
 
 func (r *LimitReverseReader) ReadByte() (byte, error) {
-	if r.i >= r.limit {
+	if r.i >= int64(r.limit) {
 		return 0, io.EOF
 	}
 	var err error

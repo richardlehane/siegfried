@@ -49,7 +49,7 @@ type Identification interface {
 
 // Matcher does the matching (against the name or the byte stream) and sends results
 type Matcher interface {
-	Identify(string, *siegreader.Buffer) chan Result
+	Identify(string, siegreader.Buffer) chan Result
 	Add(SignatureSet, priority.List) (int, error) // add a signature set, return total number of signatures in a matcher
 	String() string
 	Save(io.Writer) (int, error)

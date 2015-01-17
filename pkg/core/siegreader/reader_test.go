@@ -9,7 +9,7 @@ import (
 
 func TestRead(t *testing.T) {
 	b := setup(strings.NewReader(testString), t)
-	r := b.NewReader()
+	r := ReaderFrom(b)
 	buf := make([]byte, 62)
 	i, err := r.Read(buf)
 	if err != nil {
@@ -21,6 +21,7 @@ func TestRead(t *testing.T) {
 	if string(buf) != testString {
 		t.Errorf("Read error: %s should equal %s", string(buf), testString)
 	}
+	bufs.Put(b)
 }
 
 func readAt(t *testing.T, r *Reader) {
@@ -39,8 +40,9 @@ func readAt(t *testing.T, r *Reader) {
 
 func TestReadAt(t *testing.T) {
 	b := setup(strings.NewReader(testString), t)
-	r := b.NewReader()
+	r := ReaderFrom(b)
 	readAt(t, r)
+	bufs.Put(b)
 }
 
 func readByte(t *testing.T, r *Reader) {
@@ -62,8 +64,9 @@ func readByte(t *testing.T, r *Reader) {
 
 func TestReadByte(t *testing.T) {
 	b := setup(strings.NewReader(testString), t)
-	r := b.NewReader()
+	r := ReaderFrom(b)
 	readByte(t, r)
+	bufs.Put(b)
 }
 
 func seek(t *testing.T, r *Reader) {
@@ -83,8 +86,9 @@ func seek(t *testing.T, r *Reader) {
 
 func TestSeek(t *testing.T) {
 	b := setup(strings.NewReader(testString), t)
-	r := b.NewReader()
+	r := ReaderFrom(b)
 	seek(t, r)
+	bufs.Put(b)
 }
 
 func TestReuse(t *testing.T) {
@@ -92,18 +96,26 @@ func TestReuse(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	b := setup(r, t)
+	b, err := bufs.Get(r)
+	if err != nil {
+		t.Fatal(err)
+	}
+	bufs.Put(b)
 	r.Close()
 	nr := strings.NewReader(testString)
 	q := make(chan struct{})
-	err = b.SetSource(nr)
+	b, err = bufs.Get(nr)
+	if err != nil {
+		t.Fatal(err)
+	}
 	b.SetQuit(q)
 	if err != nil && err != io.EOF {
 		t.Errorf("Read error: %v", err)
 	}
-	reuse := b.NewReader()
+	reuse := ReaderFrom(b)
 	readByte(t, reuse)
 	seek(t, reuse)
+	bufs.Put(b)
 }
 
 func drain(r io.ByteReader, results chan int) {
@@ -116,12 +128,13 @@ func drain(r io.ByteReader, results chan int) {
 
 func TestDrain(t *testing.T) {
 	b := setup(strings.NewReader(testString), t)
-	r := b.NewReader()
+	r := ReaderFrom(b)
 	results := make(chan int)
 	go drain(r, results)
 	if i := <-results; i != 62 {
 		t.Errorf("Expecting 62, got %v", i)
 	}
+	bufs.Put(b)
 }
 
 func TestDrainFile(t *testing.T) {
@@ -130,13 +143,14 @@ func TestDrainFile(t *testing.T) {
 		t.Fatal(err)
 	}
 	b := setup(r, t)
-	first := b.NewReader()
+	first := ReaderFrom(b)
 	results := make(chan int)
 	go drain(first, results)
 	if i := <-results; i != 24040 {
 		t.Errorf("Expecting 24040, got %v", i)
 	}
 	r.Close()
+	bufs.Put(b)
 }
 
 func TestMultiple(t *testing.T) {
@@ -145,8 +159,8 @@ func TestMultiple(t *testing.T) {
 		t.Fatal(err)
 	}
 	b := setup(r, t)
-	first := b.NewReader()
-	second := b.NewReader()
+	first := ReaderFrom(b)
+	second := ReaderFrom(b)
 	results := make(chan int)
 	go drain(first, results)
 	go drain(second, results)
@@ -156,32 +170,31 @@ func TestMultiple(t *testing.T) {
 	if i := <-results; i != 24040 {
 		t.Errorf("Expecting 24040, got %v", i)
 	}
+	bufs.Put(b)
 }
 
 func TestReverse(t *testing.T) {
 	b := setup(strings.NewReader(testString), t)
-	r, err := b.NewReverseReader()
-	if err != nil {
-		t.Errorf("Read error: %v", err)
-	}
-	first := b.NewReader()
+	r := ReverseReaderFrom(b)
+	first := ReaderFrom(b)
 	results := make(chan int)
 	go drain(first, results)
 	<-results
 	c, err := r.ReadByte()
 	if err != nil {
-		t.Errorf("Read error: %v", err)
+		t.Fatalf("Read error: %v", err)
 	}
 	if c != 'Z' {
-		t.Errorf("Read error: expecting 'Z', got %s", string(c))
+		t.Fatalf("Read error: expecting 'Z', got %s", string(c))
 	}
 	c, err = r.ReadByte()
 	if err != nil {
-		t.Errorf("Read error: %v", err)
+		t.Fatalf("Read error: %v", err)
 	}
 	if c != 'Y' {
-		t.Errorf("Read error: expecting 'Y', got %s", string(c))
+		t.Fatalf("Read error: expecting 'Y', got %s", string(c))
 	}
+	bufs.Put(b)
 }
 
 func TestReverseDrainFile(t *testing.T) {
@@ -192,9 +205,9 @@ func TestReverseDrainFile(t *testing.T) {
 	b := setup(r, t)
 	quit := make(chan struct{})
 	b.SetQuit(quit)
-	first := b.NewReader()
-	firstResults := make(chan int, 24040)
-	last, _ := b.NewReverseReader()
+	first := ReaderFrom(b)
+	firstResults := make(chan int, 1)
+	last := ReverseReaderFrom(b)
 	lastResults := make(chan int)
 	go drain(first, firstResults)
 	go drain(last, lastResults)
@@ -202,27 +215,30 @@ func TestReverseDrainFile(t *testing.T) {
 		t.Errorf("Expecting 24040, got %v", i)
 	}
 	r.Close()
+	bufs.Put(b)
 }
 
 func TestLimit(t *testing.T) {
 	b := setup(strings.NewReader(testString), t)
-	r := b.NewLimitReader(5)
+	r := LimitReaderFrom(b, 5)
 	results := make(chan int)
 	go drain(r, results)
 	if i := <-results; i != 5 {
 		t.Errorf("Expecting 5, got %d", i)
 	}
+	bufs.Put(b)
 }
 
 func TestReverseLimit(t *testing.T) {
 	b := setup(strings.NewReader(testString), t)
-	r, err := b.NewLimitReverseReader(5)
-	if err != nil {
-		t.Errorf("Read error: %v", err)
-	}
+	l := LimitReaderFrom(b, -1)
+	firstResults := make(chan int, 1)
+	go drain(l, firstResults)
+	r := LimitReverseReaderFrom(b, 5)
 	results := make(chan int)
 	go drain(r, results)
 	if i := <-results; i != 5 {
 		t.Errorf("Expecting 5, got %d", i)
 	}
+	bufs.Put(b)
 }

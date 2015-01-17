@@ -41,13 +41,13 @@ func (z *zipReader) Next() error {
 func (z *zipReader) Name() string {
 	return z.rdr.File[z.idx].Name
 }
-func (z *zipReader) SetSource(b *siegreader.Buffer) error {
+func (z *zipReader) SetSource(bufs *siegreader.Buffers) (siegreader.Buffer, error) {
 	var err error
 	z.rc, err = z.rdr.File[z.idx].Open()
 	if err != nil {
-		return err
+		return nil, err
 	}
-	return b.SetSource(z.rc)
+	return bufs.Get(z.rc)
 }
 func (z *zipReader) Close() {
 	if z.rc == nil {
@@ -56,7 +56,7 @@ func (z *zipReader) Close() {
 	z.rc.Close()
 }
 
-func zipRdr(b *siegreader.Buffer) (Reader, error) {
-	r, err := zip.NewReader(b.NewReader(), b.SizeNow())
+func zipRdr(b siegreader.Buffer) (Reader, error) {
+	r, err := zip.NewReader(siegreader.ReaderFrom(b), b.SizeNow())
 	return &zipReader{idx: -1, rdr: r}, err
 }

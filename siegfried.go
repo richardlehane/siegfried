@@ -57,8 +57,8 @@ type Siegfried struct {
 	cm core.Matcher // containermatcher
 	bm core.Matcher // bytematcher
 	// mutatable fields follow
-	ids    []core.Identifier // identifiers
-	buffer *siegreader.Buffer
+	ids     []core.Identifier // identifiers
+	buffers *siegreader.Buffers
 }
 
 // New creates a new Siegfried. It sets the create time to time.Now() and initializes the three matchers
@@ -83,7 +83,7 @@ func New() *Siegfried {
 	s.em = extensionmatcher.New()
 	s.cm = containermatcher.New()
 	s.bm = bytematcher.New()
-	s.buffer = siegreader.New()
+	s.buffers = siegreader.New()
 	return s
 }
 
@@ -317,7 +317,7 @@ func Load(path string) (*Siegfried, error) {
 		s.ids[i] = id
 		istart += v.Sz
 	}
-	s.buffer = siegreader.New()
+	s.buffers = siegreader.New()
 	return &s, nil
 }
 
@@ -325,7 +325,7 @@ func Load(path string) (*Siegfried, error) {
 // It takes the name of the file/stream (if unknown, give an empty string) and an io.Reader
 // It returns a channel of identifications and an error
 func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, error) {
-	err := s.buffer.SetSource(r)
+	buffer, err := s.buffers.Get(r)
 	if err != nil && err != io.EOF {
 		return nil, fmt.Errorf("Siegfried: error reading input, got %v", err)
 	}
@@ -348,7 +348,7 @@ func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, e
 
 	// Container Matcher
 	if s.cm != nil {
-		cms := s.cm.Identify(n, s.buffer)
+		cms := s.cm.Identify(n, buffer)
 		for v := range cms {
 			for _, rec := range recs {
 				if rec.Record(core.ContainerMatcher, v) {
@@ -365,7 +365,7 @@ func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, e
 	}
 	// Byte Matcher
 	if !satisfied {
-		ids := s.bm.Identify("", s.buffer)
+		ids := s.bm.Identify("", buffer)
 		for v := range ids {
 			for _, rec := range recs {
 				if rec.Record(core.ByteMatcher, v) {
@@ -374,6 +374,7 @@ func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, e
 			}
 		}
 	}
+	s.buffers.Put(buffer)
 	go func() {
 		for _, rec := range recs {
 			rec.Report(res)

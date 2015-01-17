@@ -64,8 +64,8 @@ func TestMatch(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	buf := siegreader.New()
-	err = buf.SetSource(bytes.NewBuffer(TestSample1))
+	bufs := siegreader.New()
+	buf, err := bufs.Get(bytes.NewBuffer(TestSample1))
 	if err != nil && err != io.EOF {
 		t.Error(err)
 	}
@@ -77,7 +77,7 @@ func TestMatch(t *testing.T) {
 	if !contains(results, []int{0, 2, 3, 4}) {
 		t.Errorf("Missing result, got: %v, expecting:%v\n", results, bm)
 	}
-	err = buf.SetSource(bytes.NewBuffer(TestSample2))
+	buf, err = bufs.Get(bytes.NewBuffer(TestSample2))
 	if err != nil && err != io.EOF {
 		t.Error(err)
 	}

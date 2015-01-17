@@ -30,8 +30,8 @@ func (tr *testReader) Name() string {
 	return tr.nodes[tr.idx].name
 }
 
-func (tr *testReader) SetSource(b *siegreader.Buffer) error {
-	return b.SetSource(bytes.NewReader(tr.nodes[tr.idx].stream))
+func (tr *testReader) SetSource(b *siegreader.Buffers) (siegreader.Buffer, error) {
+	return b.Get(bytes.NewReader(tr.nodes[tr.idx].stream))
 }
 
 func (tr *testReader) Close() {}
@@ -55,7 +55,7 @@ var ns []*node = []*node{
 
 var tr *testReader = &testReader{nodes: ns}
 
-func newTestReader(buf *siegreader.Buffer) (Reader, error) {
+func newTestReader(buf siegreader.Buffer) (Reader, error) {
 	tr.idx = -1
 	return tr, nil
 }

@@ -22,7 +22,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
-func (m Matcher) Identify(n string, b *siegreader.Buffer) chan core.Result {
+func (m Matcher) Identify(n string, b siegreader.Buffer) chan core.Result {
 	res := make(chan core.Result)
 	// check trigger
 	buf, err := b.Slice(0, 8)
@@ -79,7 +79,7 @@ func (c *ContainerMatcher) identify(rdr Reader, res chan core.Result) {
 			c.ruledOut[i] = false
 		}
 	} else {
-		c.entryBuf = siegreader.New()
+		c.entryBufs = siegreader.New()
 		c.partsMatched = make([][]hit, len(c.Parts))
 		c.ruledOut = make([]bool, len(c.Parts))
 		c.hits = make([]hit, 0, 20) // shared hits buffer to avoid allocs
@@ -110,14 +110,15 @@ func (ct *CTest) identify(c *ContainerMatcher, rdr Reader, name string) []hit {
 		}
 	}
 	if ct.Unsatisfied != nil {
-		rdr.SetSource(c.entryBuf) // NOTE: an error is ignored here.
-		for r := range ct.BM.Identify("", c.entryBuf) {
+		buf, _ := rdr.SetSource(c.entryBufs) // NOTE: an error is ignored here.
+		for r := range ct.BM.Identify("", buf) {
 			h := ct.Unsatisfied[r.Index()]
 			if c.waitSet.Check(h) && c.checkHits(h) {
 				c.hits = append(c.hits, hit{h, name, r.Basis()})
 			}
 		}
 		rdr.Close()
+		c.entryBufs.Put(buf)
 	}
 	return c.hits
 }

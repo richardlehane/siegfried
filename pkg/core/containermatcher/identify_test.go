@@ -30,8 +30,8 @@ func TestIdentify(t *testing.T) {
 		}
 	}
 	r := bytes.NewBuffer([]byte("012345678"))
-	b := siegreader.New()
-	err = b.SetSource(r)
+	bufs := siegreader.New()
+	b, err := bufs.Get(r)
 	if err != nil && err != io.EOF {
 		t.Fatal(err)
 	}

@@ -16,40 +16,39 @@
 
 package siegreader
 
-import (
-	"io"
-	"sync"
-)
+import "sync"
 
-func Pool() *Buffers {
-	return &Buffers{}
+func New() *Buffers {
+	return &Buffers{
+		&sync.Pool{
+			New: newStream,
+		},
+		&sync.Pool{
+			New: newFile,
+		},
+		&datas{
+			&sync.Pool{
+				New: newBigFile,
+			},
+			&sync.Pool{
+				New: newSmallFile,
+			},
+			&sync.Pool{
+				New: newMmap,
+			},
+		},
+	}
 }
 
 type Buffers struct {
-	fpool *sync.Pool // Pool of file buffers
-	spool *sync.Pool // Pool of stream buffers
-	*datas
-}
-
-func (b *Buffers) Get(src io.Reader) Buffer {
-	return Buffer{}
-}
-
-func (b *Buffers) Put(i Buffer) Buffer {
-	return Buffer{}
+	spool  *sync.Pool // Pool of stream Buffers
+	fpool  *sync.Pool // Pool of file Buffers
+	fdatas *datas
 }
 
 // Data pool (used by file)
-
 type datas struct {
 	bfpool *sync.Pool
+	sfpool *sync.Pool
 	mpool  *sync.Pool
-}
-
-func (d *datas) get(sz int64) data {
-	return &bigfile{}
-}
-
-func (d *datas) put(i data) {
-
 }

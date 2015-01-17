@@ -16,7 +16,6 @@ package bytematcher
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/richardlehane/match/wac"
 	"github.com/richardlehane/siegfried/config"
@@ -25,17 +24,12 @@ import (
 )
 
 // Identify function - brings a new matcher into existence
-func (b *Matcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan core.Result) {
+func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan core.Result) {
 	buf.SetQuit(quit)
 	incoming := b.newMatcher(buf, quit, r)
 
 	// Test BOF/EOF sequences
-	var rdr io.ByteReader
-	if b.MaxBOF > 0 {
-		rdr = buf.NewLimitReader(b.MaxBOF)
-	} else if b.MaxBOF < 0 {
-		rdr = buf.NewReader()
-	}
+	rdr := siegreader.LimitReaderFrom(buf, b.MaxBOF)
 	// start bof matcher if not yet started
 	if rdr != nil && !b.bstarted {
 		b.bAho = wac.New(b.BOFSeq.Set)
@@ -73,17 +67,7 @@ func (b *Matcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan co
 	bfchan := b.BOFFrames.Index(buf, false, quit)
 	efchan := b.EOFFrames.Index(buf, true, quit)
 	// Test EOF sequences
-	var rrdr io.ByteReader
-	var err error
-	if b.MaxEOF > 0 {
-		rrdr, err = buf.NewLimitReverseReader(b.MaxEOF)
-	} else if b.MaxEOF < 0 {
-		rrdr, err = buf.NewReverseReader()
-	}
-	if err != nil {
-		close(incoming)
-		return
-	}
+	rrdr := siegreader.LimitReverseReaderFrom(buf, b.MaxEOF)
 	// start EOF matcher if not yet started
 	if rrdr != nil && !b.estarted {
 		b.eAho = wac.New(b.EOFSeq.Set)

@@ -26,8 +26,8 @@ type mscfbReader struct {
 	entry *mscfb.File
 }
 
-func mscfbRdr(b *siegreader.Buffer) (Reader, error) {
-	m, err := mscfb.New(b.NewReader())
+func mscfbRdr(b siegreader.Buffer) (Reader, error) {
+	m, err := mscfb.New(siegreader.ReaderFrom(b))
 	if err != nil {
 		return nil, err
 	}
@@ -48,8 +48,8 @@ func (m *mscfbReader) Name() string {
 	return strings.Join(path, "/")
 }
 
-func (m *mscfbReader) SetSource(b *siegreader.Buffer) error {
-	return b.SetSource(m.entry)
+func (m *mscfbReader) SetSource(b *siegreader.Buffers) (siegreader.Buffer, error) {
+	return b.Get(m.entry)
 }
 
 func (m *mscfbReader) Close() {}

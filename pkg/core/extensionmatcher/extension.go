@@ -80,7 +80,7 @@ func (e Matcher) add(ext string, fmt int) {
 	e[ext] = []Result{Result(fmt)}
 }
 
-func (e Matcher) Identify(name string, na *siegreader.Buffer) chan core.Result {
+func (e Matcher) Identify(name string, na siegreader.Buffer) chan core.Result {
 	res := make(chan core.Result, 10)
 	go func() {
 		ext := filepath.Ext(name)

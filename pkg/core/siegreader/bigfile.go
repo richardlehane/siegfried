@@ -1,12 +1,45 @@
+// Copyright 2015 Richard Lehane. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package siegreader
 
 import "sync"
 
-// big file data
-const (
-	wheelSz = readSz * 16
-	eofSz   = readSz * 2
-)
+type bigfile struct {
+	*file
+	eof   [eofSz]byte
+	wheel [wheelSz]byte
+
+	mu               sync.Mutex
+	i                int // wheel offset for next write
+	start, end, last int64
+}
+
+func newBigFile() interface{} {
+	return &bigfile{last: int64(readSz)}
+}
+
+func (bf *bigfile) setSource(f *file) {
+	bf.file = f
+	// fill the EOF slice
+	bf.src.ReadAt(bf.eof[:], bf.sz-int64(eofSz))
+}
+
+func (bf *bigfile) reset() {
+	bf.i = 0
+	bf.last = 0
+}
 
 type enc uint8
 
@@ -16,52 +49,71 @@ const (
 	eofEnc
 )
 
-// A big file gets read into a sliding window
-// If slices are requested, they are copied into new slices (either from the window,  or by exposing underlying reader at)
-// should jump into the EOF slice as well (to cover PDF/A etc which can have markers near end)
-// If an adjacent slice of size readSz is requested, it is copied into the wheel. Otherwise it is made fresh.
-// Possibility of collision (two clients requesting adjacent windows, causing race) unlikely because of size of wheel (i.e. may get one or two collisions but unlikely to get 16 in a row)
-type bigfile struct {
-	*file
-
-	mu   sync.Mutex
-	i    int   // wheel offset for next write
-	last int64 // file offset of last write to allow test for adjacency
-
-	broken bool // is the wheel broken (two legitimate adjacent requests)?
-	eof    [eofSz]byte
-	wheel  [wheelSz]byte
-}
-
-func (b *bigfile) adjacent(o int64, l int) bool {
-	return l == readSz && o == b.last+int64(readSz)
-}
-
 // is the requested slice in the wheel or the eof?
-func (b *bigfile) enclosed(o int64, l int) enc {
-	if int(b.sz-o) <= eofSz {
+func (bf *bigfile) enclosed(o int64, l int) enc {
+	if int(bf.sz-o) <= eofSz {
 		return eofEnc
 	}
-	if o < b.last && l <= wheelSz && int(b.last-o) <= l {
+	if o >= bf.start && o+int64(l) <= bf.end {
 		return wheelEnc
 	}
 	return notEnc
 }
 
-func (b *bigfile) slice(o int64, l int) ([]byte, error) {
-	if b.adjacent(o, l) {
-		// safe to send direct reference
-		return b.wheel[:], nil
+func (bf *bigfile) adjacent(o int64, l int) bool {
+	if l != readSz {
+		return false
+	}
+	if bf.last == o {
+		return true
+	}
+	return false
+}
+
+func (bf *bigfile) progressSlice(o int64) []byte {
+	if bf.i == 0 {
+		bf.start = o
+		i, _ := bf.src.Read(bf.wheel[:])
+		bf.end = bf.start + int64(i)
+		if i < readSz {
+			return nil
+		}
+	}
+	slc := bf.wheel[bf.i : bf.i+readSz]
+	bf.i += readSz
+	return slc
+}
+
+func (bf *bigfile) slice(o int64, l int) []byte {
+	bf.mu.Lock()
+	defer bf.mu.Unlock()
+	if bf.adjacent(o, l) {
+		bf.last += int64(readSz)
+		return bf.progressSlice(o)
 	}
 	ret := make([]byte, l)
 	// if within the wheel copy
-	switch b.enclosed(o, l) {
+	switch bf.enclosed(o, l) {
 	case eofEnc:
+		x := eofSz - int(bf.sz-o)
+		copy(ret, bf.eof[x:x+l])
+		return ret
 	case wheelEnc:
-		copy(ret, b.wheel[:])
-		return ret, nil
+		copy(ret, bf.wheel[int(o-bf.start):int(o-bf.start)+l])
+		return ret
 	}
 	// otherwise we just expose the underlying reader at
-	b.src.ReadAt(ret, o)
-	return ret, nil
+	bf.src.ReadAt(ret, o)
+	return ret
+}
+
+func (bf *bigfile) eofSlice(o int64, l int) []byte {
+	if int(o)+l > eofSz {
+		ret := make([]byte, l)
+		bf.mu.Lock()
+		defer bf.mu.Unlock()
+		bf.src.ReadAt(ret, bf.sz-o-int64(l))
+		return ret
+	}
+	return bf.eof[eofSz-int(o)-l : eofSz-int(o)]
 }
