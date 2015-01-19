@@ -27,7 +27,7 @@ type Report struct {
 	Name        string             `xml:"report_format_detail>FileFormat>FormatName"`
 	Version     string             `xml:"report_format_detail>FileFormat>FormatVersion"`
 	Description string             `xml:"report_format_detail>FileFormat>FormatDescription"`
-	Identifiers []FormatIdentifier `xml:"report_format_detail>FileFormat>FormatIdentifier"`
+	Identifiers []FormatIdentifier `xml:"report_format_detail>FileFormat>FileFormatIdentifier"`
 	Signatures  []Signature        `xml:"report_format_detail>FileFormat>InternalSignature"`
 	Extensions  []string           `xml:"report_format_detail>FileFormat>ExternalSignature>Signature"`
 	Relations   []RelatedFormat    `xml:"report_format_detail>FileFormat>RelatedFormat"`
