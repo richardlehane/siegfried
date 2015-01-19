@@ -24,11 +24,13 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"runtime"
 	"strconv"
 	"time"
 
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/config"
+	"github.com/richardlehane/siegfried/pkg/core"
 )
 
 var (
@@ -173,11 +175,46 @@ func multiIdentify(s *siegfried.Siegfried, r string) ([][]string, error) {
 	return set, err
 }
 
-func multiIdentifyP(s *siegfried.Siegfried, r string) error {
-	var csvRecord []string
-	if *csvo {
-		csvRecord = make([]string, 9)
+type res struct {
+	path string
+	sz   int64
+	c    []core.Identification
+	err  error
+}
+
+func printer(resc chan chan res, e chan error) {
+	for rr := range resc {
+		r := <-rr
+		if r.err != nil {
+			e <- r.err
+		}
+		if !config.Debug() && !*csvo {
+			PrintFile(r.path, r.sz)
+		}
+		var csvRecord []string
+		if *csvo {
+			csvRecord = make([]string, 9)
+		}
+		for _, v := range r.c {
+			switch {
+			case config.Debug():
+			case *csvo:
+				csvRecord[0], csvRecord[1] = r.path, strconv.Itoa(int(r.sz))
+				copy(csvRecord[2:], v.Csv())
+				csvWriter.Write(csvRecord)
+			default:
+				fmt.Print(v.Yaml())
+			}
+		}
 	}
+	e <- nil
+}
+
+func multiIdentifyP(s *siegfried.Siegfried, r string) error {
+	runtime.GOMAXPROCS(-1)
+	resc := make(chan chan res, 16)
+	errc := make(chan error)
+	go printer(resc, errc)
 	wf := func(path string, info os.FileInfo, err error) error {
 		if info.IsDir() {
 			if *nr && path != r {
@@ -185,33 +222,32 @@ func multiIdentifyP(s *siegfried.Siegfried, r string) error {
 			}
 			return nil
 		}
-		file, err := os.Open(path)
-		if err != nil {
-			return fmt.Errorf("failed to open %v, got: %v", path, err)
-		}
-		c, err := s.Identify(path, file)
-		if err != nil {
-			file.Close()
-			return fmt.Errorf("failed to identify %v, got: %v", path, err)
-		}
-		if !config.Debug() && !*csvo {
-			PrintFile(path, info.Size())
-		}
-		for i := range c {
-			switch {
-			case config.Debug():
-			case *csvo:
-				csvRecord[0], csvRecord[1] = path, strconv.Itoa(int(info.Size()))
-				copy(csvRecord[2:], i.Csv())
-				csvWriter.Write(csvRecord)
-			default:
-				fmt.Print(i.Yaml())
+		rchan := make(chan res, 1)
+		resc <- rchan
+		go func() {
+			file, err := os.Open(path)
+			if err != nil {
+				rchan <- res{"", 0, nil, fmt.Errorf("failed to open %v, got: %v", path, err)}
+				return
 			}
-		}
-		file.Close()
+			c, err := s.Identify(path, file)
+			if err != nil {
+				file.Close()
+				rchan <- res{"", 0, nil, fmt.Errorf("failed to identify %v, got: %v", path, err)}
+				return
+			}
+			ids := make([]core.Identification, 0, 1)
+			for id := range c {
+				ids = append(ids, id)
+			}
+			rchan <- res{path, info.Size(), ids, nil}
+			file.Close()
+		}()
 		return nil
 	}
-	return filepath.Walk(r, wf)
+	filepath.Walk(r, wf)
+	close(resc)
+	return <-errc
 }
 
 func PrintFile(name string, sz int64) {
