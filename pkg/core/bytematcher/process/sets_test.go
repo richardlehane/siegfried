@@ -25,10 +25,10 @@ var TestFrameSetBof = &frameSet{
 
 func TestseqSet(t *testing.T) {
 	s := &seqSet{}
-	c1 := wac.Seq{[]int{0}, []wac.Choice{wac.Choice{[]byte{'a', 'p', 'p', 'l', 'e'}}}}
-	c2 := wac.Seq{[]int{0}, []wac.Choice{wac.Choice{[]byte{'a', 'p', 'p', 'l', 'e'}}}}
-	c3 := wac.Seq{[]int{-1}, []wac.Choice{wac.Choice{[]byte{'a', 'p', 'p', 'l', 'e'}}}}
-	c4 := wac.Seq{[]int{-1}, []wac.Choice{wac.Choice{[]byte{'a', 'p', 'p', 'l', 'e', 's'}}}}
+	c1 := wac.Seq{[]int64{0}, []wac.Choice{wac.Choice{[]byte{'a', 'p', 'p', 'l', 'e'}}}}
+	c2 := wac.Seq{[]int64{0}, []wac.Choice{wac.Choice{[]byte{'a', 'p', 'p', 'l', 'e'}}}}
+	c3 := wac.Seq{[]int64{-1}, []wac.Choice{wac.Choice{[]byte{'a', 'p', 'p', 'l', 'e'}}}}
+	c4 := wac.Seq{[]int64{-1}, []wac.Choice{wac.Choice{[]byte{'a', 'p', 'p', 'l', 'e', 's'}}}}
 	s.add(c1, 0)
 	i := s.add(c2, 1)
 	if i != 0 {

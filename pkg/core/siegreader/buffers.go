@@ -45,16 +45,14 @@ func (b *Buffers) Put(i Buffer) {
 
 // Data pool (used by file)
 func (d *datas) get(f *file) data {
-	/*
-		if f.sz <= int64(smallFileSz) {
-			sf := d.sfpool.Get().(*smallfile)
-			sf.setSource(f)
-			return sf
-		}*/
 	if mmapable(f.sz) {
 		m := d.mpool.Get().(*mmap)
 		m.setSource(f)
 		return m
+	} else if f.sz <= int64(smallFileSz) {
+		sf := d.sfpool.Get().(*smallfile)
+		sf.setSource(f)
+		return sf
 	}
 	bf := d.bfpool.Get().(*bigfile)
 	bf.setSource(f)

@@ -187,6 +187,7 @@ func printer(resc chan chan res, e chan error) {
 		r := <-rr
 		if r.err != nil {
 			e <- r.err
+			return
 		}
 		if !config.Debug() && !*csvo {
 			PrintFile(r.path, r.sz)

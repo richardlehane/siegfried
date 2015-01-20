@@ -104,7 +104,7 @@ func (fs *frameSet) add(f frames.Frame, hi int) int {
 
 type Fsmatch struct {
 	Idx    int
-	Off    int
+	Off    int64
 	Length int
 }
 
@@ -147,7 +147,7 @@ func (fs *frameSet) Index(buf siegreader.Buffer, rev bool, quit chan struct{}) c
 					min, _ = f.Length()
 				}
 				for _, off := range matches {
-					ret <- Fsmatch{i, off - min, min}
+					ret <- Fsmatch{i, int64(off - min), min}
 				}
 			}
 			i++

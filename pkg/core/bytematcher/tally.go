@@ -79,7 +79,7 @@ func (t *tally) finalise(eof bool) {
 
 type kfHit struct {
 	id     process.KeyFrameID
-	offset int
+	offset int64
 	length int
 }
 
@@ -120,7 +120,7 @@ func (t *tally) sendResult(idx int, basis string) bool {
 }
 
 // check to see whether should still wait for signatures in the priority list, given the offset
-func (t *tally) continueWait(o int, rev bool) bool {
+func (t *tally) continueWait(o int64, rev bool) bool {
 	w := t.waitSet.WaitingOn()
 	// must continue if any of the waitlists are nil
 	if w == nil {
@@ -149,7 +149,7 @@ func (t *tally) continueWait(o int, rev bool) bool {
 		kf := t.bm.KeyFrames[v]
 		if rev {
 			for i := len(kf) - 1; i >= 0 && kf[i].Typ > frames.PREV; i-- {
-				if kf[i].Key.PMax == -1 || kf[i].Key.PMax+kf[i].Key.LMax > o {
+				if kf[i].Key.PMax == -1 || kf[i].Key.PMax+int64(kf[i].Key.LMax) > o {
 					return true
 				}
 				if _, ok := t.partialMatches[[2]int{v, i}]; ok {
@@ -165,7 +165,7 @@ func (t *tally) continueWait(o int, rev bool) bool {
 				if f.Typ > frames.PREV {
 					break
 				}
-				if f.Key.PMax == -1 || f.Key.PMax+f.Key.LMax > o {
+				if f.Key.PMax == -1 || f.Key.PMax+int64(f.Key.LMax) > o {
 					return true
 				}
 				if _, ok := t.partialMatches[[2]int{v, i}]; ok {

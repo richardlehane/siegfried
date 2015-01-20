@@ -28,7 +28,7 @@ type matcher struct {
 	incoming       chan strike
 	bm             *Matcher
 	buf            siegreader.Buffer
-	partialMatches map[[2]int][][2]int // map of a keyframe to a slice of offsets and lengths where it has matched
+	partialMatches map[[2]int][][2]int64 // map of a keyframe to a slice of offsets and lengths where it has matched
 	strikeCache    map[int]*cacheItem
 	*tally
 }
@@ -39,7 +39,7 @@ func (b *Matcher) newMatcher(buf siegreader.Buffer, q chan struct{}, r chan core
 		incoming:       incoming,
 		bm:             b,
 		buf:            buf,
-		partialMatches: make(map[[2]int][][2]int),
+		partialMatches: make(map[[2]int][][2]int64),
 		strikeCache:    make(map[int]*cacheItem),
 	}
 	m.tally = newTally(r, q, m)
@@ -70,8 +70,8 @@ func (m *matcher) match() {
 
 type strike struct {
 	idxa    int
-	idxb    int // a test tree index = idxa + idxb
-	offset  int // offset of match
+	idxb    int   // a test tree index = idxa + idxb
+	offset  int64 // offset of match
 	length  int
 	reverse bool
 	frame   bool // is it a frameset match?
@@ -144,11 +144,11 @@ func (m *matcher) processStrike(s strike) {
 }
 
 // this will block until quit if EOF is inaccessible
-func (m *matcher) calcOffset(s strike) int {
+func (m *matcher) calcOffset(s strike) int64 {
 	if !s.reverse {
 		return s.offset
 	}
-	return int(m.buf.Size()) - s.offset - s.length
+	return m.buf.Size() - s.offset - int64(s.length)
 }
 
 func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
@@ -199,19 +199,20 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 
 	// calculate the offset and lengths for the left and right test slices
 	var lslc, rslc []byte
-	var lpos, llen, rpos, rlen int
+	var lpos, rpos int64
+	var llen, rlen int
 	if s.reverse {
-		lpos, llen = s.offset+s.length, t.MaxLeftDistance
-		rpos, rlen = s.offset-t.MaxRightDistance, t.MaxRightDistance
+		lpos, llen = s.offset+int64(s.length), t.MaxLeftDistance
+		rpos, rlen = s.offset-int64(t.MaxRightDistance), t.MaxRightDistance
 		if rpos < 0 {
-			rlen = rlen + rpos
+			rlen = rlen + int(rpos)
 			rpos = 0
 		}
 	} else {
-		lpos, llen = s.offset-t.MaxLeftDistance, t.MaxLeftDistance
-		rpos, rlen = s.offset+s.length, t.MaxRightDistance
+		lpos, llen = s.offset-int64(t.MaxLeftDistance), t.MaxLeftDistance
+		rpos, rlen = s.offset+int64(s.length), t.MaxRightDistance
 		if lpos < 0 {
-			llen = llen + lpos
+			llen = llen + int(lpos)
 			lpos = 0
 		}
 	}
@@ -222,9 +223,9 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 	// test left (if there are valid left tests to try)
 	if checkl {
 		if s.reverse {
-			lslc, _ = m.buf.EofSlice(int64(lpos), llen)
+			lslc, _ = m.buf.EofSlice(lpos, llen)
 		} else {
-			lslc, _ = m.buf.Slice(int64(lpos), llen)
+			lslc, _ = m.buf.Slice(lpos, llen)
 		}
 		left := process.MatchTestNodes(t.Left, lslc, true)
 		for _, lp := range left {
@@ -239,9 +240,9 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 	// test right (if there are valid right tests to try)
 	if checkr {
 		if s.reverse {
-			rslc, _ = m.buf.EofSlice(int64(rpos), rlen)
+			rslc, _ = m.buf.EofSlice(rpos, rlen)
 		} else {
-			rslc, _ = m.buf.Slice(int64(rpos), rlen)
+			rslc, _ = m.buf.Slice(rpos, rlen)
 		}
 		right := process.MatchTestNodes(t.Right, rslc, false)
 		for _, rp := range right {
@@ -267,7 +268,7 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 				}
 				for _, ldistance := range p.ldistances {
 					for _, rdistance := range p.rdistances {
-						moff := off - ldistance
+						moff := off - int64(ldistance)
 						length := ldistance + s.length + rdistance
 						m.kfHits <- kfHit{kf, moff, length}
 
@@ -281,15 +282,15 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 	}
 }
 
-func (m *matcher) applyKeyFrame(kfID process.KeyFrameID, o, l int) (bool, string) {
+func (m *matcher) applyKeyFrame(kfID process.KeyFrameID, o int64, l int) (bool, string) {
 	kf := m.bm.KeyFrames[kfID[0]]
 	if len(kf) == 1 {
 		return true, fmt.Sprintf("byte match at %d, %d", o, l)
 	}
 	if _, ok := m.partialMatches[kfID]; ok {
-		m.partialMatches[kfID] = append(m.partialMatches[kfID], [2]int{o, l})
+		m.partialMatches[kfID] = append(m.partialMatches[kfID], [2]int64{o, int64(l)})
 	} else {
-		m.partialMatches[kfID] = [][2]int{[2]int{o, l}}
+		m.partialMatches[kfID] = [][2]int64{[2]int64{o, int64(l)}}
 	}
 	return m.checkKeyFrames(kfID[0])
 }
@@ -304,7 +305,7 @@ func (m *matcher) checkKeyFrames(i int) (bool, string) {
 		}
 	}
 	prevOff := m.partialMatches[[2]int{i, 0}]
-	basis := make([][][2]int, len(kfs))
+	basis := make([][][2]int64, len(kfs))
 	basis[0] = prevOff
 	prevKf := kfs[0]
 	var ok bool

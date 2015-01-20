@@ -182,7 +182,7 @@ func (c *cluster) commit() *cluster {
 		return newCluster(c.p)
 	}
 	updatePositions(c.kfs)
-	c.w.MaxOffsets = make([]int, len(c.kfs))
+	c.w.MaxOffsets = make([]int64, len(c.kfs))
 	if c.rev {
 		for i := range c.w.MaxOffsets {
 			c.w.MaxOffsets[i] = c.kfs[len(c.kfs)-1-i].Key.PMax
