@@ -39,7 +39,7 @@ var (
 	debug   = flag.Bool("debug", false, "scan in debug mode")
 	nr      = flag.Bool("nr", false, "prevent automatic directory recursion")
 	csvo    = flag.Bool("csv", false, "CSV output format")
-	sig     = flag.String("sig", config.Signature(), "set the signature file")
+	sig     = flag.String("sig", config.SignatureBase(), "set the signature file")
 	home    = flag.String("home", config.Home(), "override the default home directory")
 	serve   = flag.String("serve", "false", "not yet implemented - coming with v1")
 )
