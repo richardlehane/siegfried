@@ -32,7 +32,7 @@ import (
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 
-	"github.com/pkg/profile"
+	//"github.com/pkg/profile"
 )
 
 const (
@@ -264,7 +264,7 @@ func PrintFile(name string, sz int64, err error) {
 }
 
 func main() {
-	defer profile.Start(profile.MemProfile).Stop()
+	//defer profile.Start(profile.MemProfile).Stop()
 
 	flag.Parse()
 
