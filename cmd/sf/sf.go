@@ -31,6 +31,13 @@ import (
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
+
+	"github.com/pkg/profile"
+)
+
+const (
+	CONCURRENT = 32
+	PROCS      = -1
 )
 
 var (
@@ -142,7 +149,7 @@ func identify(s *siegfried.Siegfried, p string) ([]string, error) {
 		return nil, fmt.Errorf("failed to open %v, got: %v", p, err)
 	}
 	c, err := s.Identify(p, file)
-	if err != nil {
+	if c == nil {
 		return nil, fmt.Errorf("failed to identify %v, got: %v", p, err)
 	}
 	for i := range c {
@@ -182,15 +189,11 @@ type res struct {
 	err  error
 }
 
-func printer(resc chan chan res, e chan error) {
+func printer(resc chan chan res) {
 	for rr := range resc {
 		r := <-rr
-		if r.err != nil {
-			e <- r.err
-			return
-		}
 		if !config.Debug() && !*csvo {
-			PrintFile(r.path, r.sz)
+			PrintFile(r.path, r.sz, r.err)
 		}
 		var csvRecord []string
 		if *csvo {
@@ -208,14 +211,12 @@ func printer(resc chan chan res, e chan error) {
 			}
 		}
 	}
-	e <- nil
 }
 
-func multiIdentifyP(s *siegfried.Siegfried, r string) error {
-	runtime.GOMAXPROCS(-1)
-	resc := make(chan chan res, 16)
-	errc := make(chan error)
-	go printer(resc, errc)
+func multiIdentifyP(s *siegfried.Siegfried, r string) {
+	runtime.GOMAXPROCS(PROCS)
+	resc := make(chan chan res, CONCURRENT)
+	go printer(resc)
 	wf := func(path string, info os.FileInfo, err error) error {
 		if info.IsDir() {
 			if *nr && path != r {
@@ -232,7 +233,7 @@ func multiIdentifyP(s *siegfried.Siegfried, r string) error {
 				return
 			}
 			c, err := s.Identify(path, file)
-			if err != nil {
+			if c == nil {
 				file.Close()
 				rchan <- res{"", 0, nil, fmt.Errorf("failed to identify %v, got: %v", path, err)}
 				return
@@ -241,32 +242,29 @@ func multiIdentifyP(s *siegfried.Siegfried, r string) error {
 			for id := range c {
 				ids = append(ids, id)
 			}
-			rchan <- res{path, info.Size(), ids, nil}
+			rchan <- res{path, info.Size(), ids, err}
 			file.Close()
 		}()
 		return nil
 	}
 	filepath.Walk(r, wf)
 	close(resc)
-	return <-errc
 }
 
-func PrintFile(name string, sz int64) {
+func PrintFile(name string, sz int64, err error) {
 	fmt.Println("---")
 	fmt.Printf("filename : \"%v\"\n", name)
 	fmt.Printf("filesize : %d\n", sz)
+	if err != nil {
+		fmt.Printf("errors   : %v\n", err)
+	}
 	if !config.Debug() {
 		fmt.Print("matches  :\n")
 	}
 }
 
-func PrintError(err error) {
-	fmt.Println("---")
-	fmt.Printf("Error : %v", err)
-	fmt.Println("---")
-}
-
 func main() {
+	defer profile.Start(profile.MemProfile).Stop()
 
 	flag.Parse()
 
@@ -331,25 +329,20 @@ func main() {
 		if !config.Debug() && !*csvo {
 			fmt.Print(s.Yaml())
 		}
-		err = multiIdentifyP(s, flag.Arg(0))
-		if err != nil {
-			PrintError(err)
-			os.Exit(1)
-		}
+		multiIdentifyP(s, flag.Arg(0))
 		if *csvo {
 			csvWriter.Flush()
 		}
 		os.Exit(0)
 	}
 	c, err := s.Identify(flag.Arg(0), file)
-	if err != nil {
-		PrintError(err)
+	if c == nil {
 		file.Close()
-		os.Exit(1)
+		log.Fatal(err)
 	}
 	if !config.Debug() && !*csvo {
 		fmt.Print(s.Yaml())
-		PrintFile(flag.Arg(0), info.Size())
+		PrintFile(flag.Arg(0), info.Size(), err)
 	}
 	var csvRecord []string
 	if *csvo {

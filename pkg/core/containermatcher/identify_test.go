@@ -35,7 +35,7 @@ func TestIdentify(t *testing.T) {
 	if err != nil && err != io.EOF {
 		t.Fatal(err)
 	}
-	res := testMatcher.Identify("example.tt", b)
+	res, _ := testMatcher.Identify("example.tt", b)
 	var collect []core.Result
 	for r := range res {
 		collect = append(collect, r)

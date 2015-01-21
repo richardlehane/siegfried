@@ -14,7 +14,7 @@ func init() {
 }
 
 func TestWavMatch(t *testing.T) {
-	res := em.Identify("hello/apple.wav", nil)
+	res, _ := em.Identify("hello/apple.wav", nil)
 	e := <-res
 	if e.Index() != 0 {
 		t.Errorf("Expecting 0, got %v", e)
@@ -26,7 +26,7 @@ func TestWavMatch(t *testing.T) {
 }
 
 func TestNoMatch(t *testing.T) {
-	res := em.Identify("hello/apple.tty", nil)
+	res, _ := em.Identify("hello/apple.tty", nil)
 	_, ok := <-res
 	if ok {
 		t.Error("Should not match")
@@ -34,7 +34,7 @@ func TestNoMatch(t *testing.T) {
 }
 
 func TestNoExt(t *testing.T) {
-	res := em.Identify("hello/apple", nil)
+	res, _ := em.Identify("hello/apple", nil)
 	_, ok := <-res
 	if ok {
 		t.Error("Should not match")

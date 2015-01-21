@@ -37,7 +37,7 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 	}
 	var bchan chan wac.Result
 	if rdr != nil {
-		bchan = b.bAho.Index(rdr, quit)
+		bchan = b.bAho.Index(rdr)
 
 		// Do an initial check of BOF sequences
 		for br := range bchan {
@@ -75,7 +75,7 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 	}
 	var echan chan wac.Result
 	if rrdr != nil {
-		echan = b.eAho.Index(rrdr, quit)
+		echan = b.eAho.Index(rrdr)
 	}
 	for {
 		select {

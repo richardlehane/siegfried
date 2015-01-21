@@ -34,8 +34,16 @@ func (f *file) waitLimit() {
 		case <-f.limit:
 		case <-f.quit:
 		}
-
 	}
+}
+
+func (f *file) hasQuit() bool {
+	select {
+	case <-f.quit:
+		return true
+	default:
+	}
+	return false
 }
 
 func (f *file) reachedLimit() {

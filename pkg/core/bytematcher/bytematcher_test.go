@@ -69,7 +69,7 @@ func TestMatch(t *testing.T) {
 	if err != nil && err != io.EOF {
 		t.Error(err)
 	}
-	res := bm.Identify("", buf)
+	res, _ := bm.Identify("", buf)
 	results := make([]core.Result, 0)
 	for i := range res {
 		results = append(results, i)
@@ -81,7 +81,7 @@ func TestMatch(t *testing.T) {
 	if err != nil && err != io.EOF {
 		t.Error(err)
 	}
-	res = bm.Identify("", buf)
+	res, _ = bm.Identify("", buf)
 	results = results[:0]
 	for i := range res {
 		results = append(results, i)

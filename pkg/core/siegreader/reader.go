@@ -221,6 +221,10 @@ func (l *LimitReader) ReadByte() (byte, error) {
 			l.reachedLimit()
 			return 0, io.EOF
 		}
+		if l.hasQuit() {
+			l.reachedLimit()
+			return 0, io.EOF
+		}
 		err := l.setBuf(l.i)
 		if err != nil && err != io.EOF {
 			l.reachedLimit()
@@ -243,18 +247,6 @@ type LimitReverseReader struct {
 	*ReverseReader
 }
 
-func (l *LimitReverseReader) setBuf(o int64) error {
-	var err error
-	if o >= int64(eofSz) {
-		l.waitLimit()
-	}
-	l.scratch, err = l.EofSlice(o, readSz)
-	if err == io.EOF {
-		l.end = true
-	}
-	return err
-}
-
 func LimitReverseReaderFrom(b Buffer, l int) *LimitReverseReader {
 	// fill the EOF now, if possible and not already done
 	return &LimitReverseReader{l, &ReverseReader{0, 0, nil, false, b}}
@@ -264,15 +256,17 @@ func (r *LimitReverseReader) ReadByte() (byte, error) {
 	if r.i >= int64(r.limit) {
 		return 0, io.EOF
 	}
-	var err error
-	if r.i == 0 {
-		r.setBuf(0)
-	}
 	if r.j >= len(r.scratch) {
 		if r.end {
 			return 0, io.EOF
 		}
-		err = r.setBuf(r.i)
+		if r.i >= int64(eofSz) {
+			r.waitLimit()
+		}
+		if r.hasQuit() {
+			return 0, io.EOF
+		}
+		err := r.setBuf(r.i)
 		if err != nil && err != io.EOF || len(r.scratch) == 0 {
 			return 0, err
 		}

@@ -327,7 +327,7 @@ func Load(path string) (*Siegfried, error) {
 func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, error) {
 	buffer, err := s.buffers.Get(r)
 	if err != nil && err != io.EOF {
-		return nil, fmt.Errorf("Siegfried: error reading input, got %v", err)
+		return nil, fmt.Errorf("error reading file: %v", err)
 	}
 	res := make(chan core.Identification)
 	recs := make([]core.Recorder, len(s.ids))
@@ -336,7 +336,7 @@ func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, e
 	}
 	// Extension Matcher
 	if len(n) > 0 {
-		ems := s.em.Identify(n, nil)
+		ems, _ := s.em.Identify(n, nil) // we don't care about an error here
 		for v := range ems {
 			for _, rec := range recs {
 				if rec.Record(core.ExtensionMatcher, v) {
@@ -345,10 +345,9 @@ func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, e
 			}
 		}
 	}
-
 	// Container Matcher
 	if s.cm != nil {
-		cms := s.cm.Identify(n, buffer)
+		cms, cerr := s.cm.Identify(n, buffer)
 		for v := range cms {
 			for _, rec := range recs {
 				if rec.Record(core.ContainerMatcher, v) {
@@ -356,6 +355,7 @@ func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, e
 				}
 			}
 		}
+		err = cerr
 	}
 	satisfied := true
 	for _, rec := range recs {
@@ -365,7 +365,7 @@ func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, e
 	}
 	// Byte Matcher
 	if !satisfied {
-		ids := s.bm.Identify("", buffer)
+		ids, _ := s.bm.Identify("", buffer) // we don't care about an error here
 		for v := range ids {
 			for _, rec := range recs {
 				if rec.Record(core.ByteMatcher, v) {
@@ -381,5 +381,5 @@ func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, e
 		}
 		close(res)
 	}()
-	return res, nil
+	return res, err
 }

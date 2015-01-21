@@ -48,6 +48,7 @@ type Buffer interface {
 	Slice(off int64, l int) ([]byte, error)
 	EofSlice(off int64, l int) ([]byte, error)
 	SetQuit(chan struct{})
+	hasQuit() bool
 	Size() int64
 	SizeNow() int64
 	canSeek(off int64, rev bool) (bool, error)

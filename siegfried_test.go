@@ -14,13 +14,13 @@ import (
 
 type testNMatcher struct{}
 
-func (t testNMatcher) Identify(n string, sb *siegreader.Buffer) chan core.Result {
+func (t testNMatcher) Identify(n string, sb siegreader.Buffer) (chan core.Result, error) {
 	ret := make(chan core.Result)
 	go func() {
 		ret <- testResult(0)
 		close(ret)
 	}()
-	return ret
+	return ret, nil
 }
 
 func (t testNMatcher) String() string { return "" }
@@ -31,14 +31,14 @@ func (t testNMatcher) Add(ss core.SignatureSet, l priority.List) (int, error) { 
 
 type testBMatcher struct{}
 
-func (t testBMatcher) Identify(nm string, sb *siegreader.Buffer) chan core.Result {
+func (t testBMatcher) Identify(nm string, sb siegreader.Buffer) (chan core.Result, error) {
 	ret := make(chan core.Result)
 	go func() {
 		ret <- testResult(1)
 		ret <- testResult(2)
 		close(ret)
 	}()
-	return ret
+	return ret, nil
 }
 
 func (t testBMatcher) String() string { return "" }
@@ -80,6 +80,8 @@ func (t testIdentification) String() string { return "fmt/3" }
 func (t testIdentification) Yaml() string { return "" }
 
 func (t testIdentification) Json() string { return "" }
+
+func (t testIdentification) Csv() []string { return nil }
 
 func TestIdentify(t *testing.T) {
 	s := New()

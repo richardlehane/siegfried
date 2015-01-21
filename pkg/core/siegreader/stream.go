@@ -48,6 +48,15 @@ func (s *stream) waitLimit() {
 	}
 }
 
+func (s *stream) hasQuit() bool {
+	select {
+	case <-s.quit:
+		return true
+	default:
+	}
+	return false
+}
+
 func (s *stream) reachedLimit() {
 	close(s.limit)
 }

@@ -150,10 +150,10 @@ func (r Result) Basis() string {
 //       fmt.Print("Success! It is signature 0!")
 //     }
 //   }
-func (b *Matcher) Identify(name string, sb siegreader.Buffer) chan core.Result {
+func (b *Matcher) Identify(name string, sb siegreader.Buffer) (chan core.Result, error) {
 	quit, ret := make(chan struct{}), make(chan core.Result)
 	go b.identify(sb, quit, ret)
-	return ret
+	return ret, nil
 }
 
 // Returns information about the Bytematcher including the number of BOF, VAR and EOF sequences, the number of BOF and EOF frames, and the total number of tests.

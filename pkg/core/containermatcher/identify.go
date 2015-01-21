@@ -22,13 +22,13 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
-func (m Matcher) Identify(n string, b siegreader.Buffer) chan core.Result {
+func (m Matcher) Identify(n string, b siegreader.Buffer) (chan core.Result, error) {
 	res := make(chan core.Result)
 	// check trigger
 	buf, err := b.Slice(0, 8)
 	if err != nil {
 		close(res)
-		return res
+		return res, nil
 	}
 	for _, c := range m {
 		if c.trigger(buf) {
@@ -37,20 +37,20 @@ func (m Matcher) Identify(n string, b siegreader.Buffer) chan core.Result {
 					res <- defaultHit(i)
 					close(res)
 				}()
-				return res
+				return res, nil
 			}
 			rdr, err := c.rdr(b)
 			if err != nil {
 				close(res)
-				return res
+				return res, err
 			}
 			go c.identify(rdr, res)
-			return res
+			return res, nil
 		}
 	}
 	// nothing ... move on
 	close(res)
-	return res
+	return res, nil
 }
 
 func (c *ContainerMatcher) defaultMatch(n string) (bool, int) {
@@ -111,7 +111,8 @@ func (ct *CTest) identify(c *ContainerMatcher, rdr Reader, name string) []hit {
 	}
 	if ct.Unsatisfied != nil {
 		buf, _ := rdr.SetSource(c.entryBufs) // NOTE: an error is ignored here.
-		for r := range ct.BM.Identify("", buf) {
+		bmc, _ := ct.BM.Identify("", buf)
+		for r := range bmc {
 			h := ct.Unsatisfied[r.Index()]
 			if c.waitSet.Check(h) && c.checkHits(h) {
 				c.hits = append(c.hits, hit{h, name, r.Basis()})
