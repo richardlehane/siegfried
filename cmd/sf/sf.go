@@ -15,6 +15,7 @@
 package main
 
 import (
+	"bufio"
 	"encoding/csv"
 	"encoding/json"
 	"flag"
@@ -26,6 +27,7 @@ import (
 	"path/filepath"
 	"runtime"
 	"strconv"
+	"sync"
 	"time"
 
 	"github.com/richardlehane/siegfried"
@@ -51,7 +53,10 @@ var (
 	serve   = flag.String("serve", "false", "not yet implemented - coming with v1")
 )
 
-var csvWriter *csv.Writer
+var (
+	csvWriter  *csv.Writer
+	yamlWriter *bufio.Writer
+)
 
 func getHttp(url string) ([]byte, error) {
 	req, err := http.NewRequest("GET", url, nil)
@@ -189,34 +194,40 @@ type res struct {
 	err  error
 }
 
-func printer(resc chan chan res) {
+func printer(resc chan chan res, wg *sync.WaitGroup) {
+	var csvRecord []string
+	if *csvo {
+		csvRecord = make([]string, 10)
+	}
 	for rr := range resc {
 		r := <-rr
 		if !config.Debug() && !*csvo {
-			PrintFile(r.path, r.sz, r.err)
-		}
-		var csvRecord []string
-		if *csvo {
-			csvRecord = make([]string, 9)
+			yamlWriter.WriteString(fileString(r.path, r.sz, r.err))
 		}
 		for _, v := range r.c {
 			switch {
 			case config.Debug():
 			case *csvo:
-				csvRecord[0], csvRecord[1] = r.path, strconv.Itoa(int(r.sz))
-				copy(csvRecord[2:], v.Csv())
+				var errStr string
+				if r.err != nil {
+					errStr = r.err.Error()
+				}
+				csvRecord[0], csvRecord[1], csvRecord[2] = r.path, strconv.Itoa(int(r.sz)), errStr
+				copy(csvRecord[3:], v.Csv())
 				csvWriter.Write(csvRecord)
 			default:
-				fmt.Print(v.Yaml())
+				yamlWriter.WriteString(v.Yaml())
 			}
 		}
+		wg.Done()
 	}
 }
 
 func multiIdentifyP(s *siegfried.Siegfried, r string) {
+	wg := &sync.WaitGroup{}
 	runtime.GOMAXPROCS(PROCS)
 	resc := make(chan chan res, CONCURRENT)
-	go printer(resc)
+	go printer(resc, wg)
 	wf := func(path string, info os.FileInfo, err error) error {
 		if info.IsDir() {
 			if *nr && path != r {
@@ -224,6 +235,7 @@ func multiIdentifyP(s *siegfried.Siegfried, r string) {
 			}
 			return nil
 		}
+		wg.Add(1)
 		rchan := make(chan res, 1)
 		resc <- rchan
 		go func() {
@@ -248,19 +260,20 @@ func multiIdentifyP(s *siegfried.Siegfried, r string) {
 		return nil
 	}
 	filepath.Walk(r, wf)
+	wg.Wait()
 	close(resc)
 }
 
 func PrintFile(name string, sz int64, err error) {
-	fmt.Println("---")
-	fmt.Printf("filename : \"%v\"\n", name)
-	fmt.Printf("filesize : %d\n", sz)
+	fmt.Print(fileString(name, sz, err))
+}
+
+func fileString(name string, sz int64, err error) string {
+	var errStr string
 	if err != nil {
-		fmt.Printf("errors   : %v\n", err)
+		errStr = err.Error()
 	}
-	if !config.Debug() {
-		fmt.Print("matches  :\n")
-	}
+	return fmt.Sprintf("---\nfilename : \"%s\"\nfilesize : %d\nerrors   : %s\nmatches  :\n", name, sz, errStr)
 }
 
 func main() {
@@ -270,7 +283,9 @@ func main() {
 
 	if *csvo {
 		csvWriter = csv.NewWriter(os.Stdout)
-		csvWriter.Write([]string{"filename", "filesize", "identifier", "id", "format name", "format version", "mimetype", "basis", "warning"})
+		csvWriter.Write([]string{"filename", "filesize", "errors", "identifier", "id", "format name", "format version", "mimetype", "basis", "warning"})
+	} else {
+		yamlWriter = bufio.NewWriter(os.Stdout)
 	}
 
 	if *home != config.Home() {
@@ -324,12 +339,17 @@ func main() {
 	}
 	if info.IsDir() {
 		file.Close()
-		if !config.Debug() && !*csvo {
-			fmt.Print(s.Yaml())
+		if config.Debug() {
+			log.Fatalln("Error: when scanning in debug mode, give a file rather than a directory argument")
+		}
+		if !*csvo {
+			yamlWriter.WriteString(s.Yaml())
 		}
 		multiIdentifyP(s, flag.Arg(0))
 		if *csvo {
 			csvWriter.Flush()
+		} else {
+			yamlWriter.Flush()
 		}
 		os.Exit(0)
 	}
@@ -344,14 +364,18 @@ func main() {
 	}
 	var csvRecord []string
 	if *csvo {
-		csvRecord = make([]string, 9)
+		csvRecord = make([]string, 10)
 	}
 	for i := range c {
 		switch {
 		case config.Debug():
 		case *csvo:
-			csvRecord[0], csvRecord[1] = flag.Arg(0), strconv.Itoa(int(info.Size()))
-			copy(csvRecord[2:], i.Csv())
+			var errStr string
+			if err != nil {
+				errStr = err.Error()
+			}
+			csvRecord[0], csvRecord[1], csvRecord[2] = flag.Arg(0), strconv.Itoa(int(info.Size())), errStr
+			copy(csvRecord[3:], i.Csv())
 			csvWriter.Write(csvRecord)
 		default:
 			fmt.Print(i.Yaml())
