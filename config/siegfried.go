@@ -37,12 +37,12 @@ var siegfried = struct {
 	// DEBUG mode
 	debug bool
 }{
-	version:         [3]int{0, 7, 1},
+	version:         [3]int{0, 8, 0},
 	signature:       "pronom.gob",
 	distance:        8192,
-	rng:             2049,
-	choices:         64,
-	varLength:       1,
+	rng:             512,
+	choices:         128,
+	varLength:       2,
 	updateURL:       "http://www.itforarchivists.com/siegfried/update",
 	updateTimeout:   30 * time.Second,
 	updateTransport: &http.Transport{Proxy: http.ProxyFromEnvironment},

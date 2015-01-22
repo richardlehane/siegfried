@@ -36,7 +36,7 @@ import (
 )
 
 const (
-	CONCURRENT = 32
+	CONCURRENT = 4
 	PROCS      = -1
 )
 
@@ -317,13 +317,11 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error: error getting info for %v, got: %v", flag.Arg(0), err)
 	}
-
 	s, err := load()
 	if err != nil {
 		log.Fatalf("Error: error loading signature file, got: %v", err)
 
 	}
-
 	if info.IsDir() {
 		file.Close()
 		if !config.Debug() && !*csvo {

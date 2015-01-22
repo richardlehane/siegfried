@@ -207,7 +207,7 @@ func (f Fixed) Linked(prev Frame, maxDistance, maxRange int) bool {
 		}
 		return true
 	case SUCC, EOF:
-		if prev.Orientation() != SUCC || prev.Max() < 0 || prev.Max() > maxDistance {
+		if prev.Orientation() != SUCC || prev.Max() < 0 || prev.Max() > maxDistance || prev.Max()-prev.Min() > maxRange {
 			return false
 		}
 		return true

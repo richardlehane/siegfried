@@ -1,3 +1,26 @@
+21 January 2015
+
+PASS
+BenchmarkNew	     100	  21801899 ns/op
+BenchmarkACCDB	     200	   9386484 ns/op
+BenchmarkBMP	   10000	    274678 ns/op
+BenchmarkDOCX	   10000	    130677 ns/op
+BenchmarkGIF	    5000	    415457 ns/op
+BenchmarkJPG	    5000	    526367 ns/op
+BenchmarkMSG	   20000	     82353 ns/op
+BenchmarkODT	     500	   3850344 ns/op
+BenchmarkPDF	     500	   4073473 ns/op
+BenchmarkPNG	    2000	   1210026 ns/op
+BenchmarkPPTX	   10000	    192319 ns/op
+BenchmarkRTF	     100	  16982556 ns/op
+BenchmarkTIF	     100	  11295053 ns/op
+BenchmarkXLSX	   10000	    142691 ns/op
+BenchmarkXML	   10000	    109626 ns/op
+BenchmarkMulti	      50	  48642657 ns/op
+ok  	github.com/richardlehane/siegfried/cmd/sf	35.154s
+
+Dropbox scan: 1m10s [3.6Gb]
+
 2 December 2014
 PASS
 BenchmarkNew	     100	  21341964 ns/op

@@ -57,6 +57,8 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 		select {
 		case <-quit:
 			// the matcher has called quit
+			for _ = range bchan {
+			} // drain first
 			close(incoming)
 			return
 		default:
