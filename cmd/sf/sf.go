@@ -245,7 +245,7 @@ func multiIdentifyP(s *siegfried.Siegfried, r string) {
 			}
 			return nil
 		}
-		lastPath = path
+		//lastPath = path
 		wg.Add(1)
 		rchan := make(chan res, 1)
 		resc <- rchan
