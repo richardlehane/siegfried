@@ -223,6 +223,7 @@ func printer(resc chan chan res, wg *sync.WaitGroup) {
 	}
 }
 
+/*
 var lastPath string
 
 func quitter() {
@@ -230,9 +231,9 @@ func quitter() {
 	<-timer.C
 	panic(lastPath)
 }
-
+*/
 func multiIdentifyP(s *siegfried.Siegfried, r string) {
-	go quitter()
+	//go quitter()
 	wg := &sync.WaitGroup{}
 	runtime.GOMAXPROCS(PROCS)
 	resc := make(chan chan res, CONCURRENT)
