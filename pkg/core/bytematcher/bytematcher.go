@@ -38,6 +38,7 @@ type Matcher struct {
 	eAho       *wac.Wac
 	bstarted   bool
 	estarted   bool
+	lowmem     bool
 }
 
 func New() *Matcher {
@@ -46,6 +47,7 @@ func New() *Matcher {
 		&priority.Set{},
 		&wac.Wac{},
 		&wac.Wac{},
+		false,
 		false,
 		false,
 	}
@@ -201,4 +203,8 @@ func (b *Matcher) InspectTTI(i int) []int {
 		res[i+len(t.Complete)] = v.Kf[0]
 	}
 	return res
+}
+
+func (b *Matcher) SetLowMem() {
+	b.lowmem = true
 }

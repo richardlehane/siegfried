@@ -148,14 +148,8 @@ type ContainerMatcher struct {
 	Priorities *priority.Set
 	Default    string // the default is an extension which when matched signals that the container matcher should quit
 	// this prevents delving through zip files that will be recursed anyway
-	// temp stuff used during identification
-	started      bool
-	entryBufs    *siegreader.Buffers // shared buffer used by each entry in a container
-	partsMatched [][]hit             // hits for parts
-	ruledOut     []bool              // mark additional signatures as negatively matched
-	waitSet      *priority.WaitSet
-	hits         []hit // shared buffer of hits used when matching
-
+	started   bool
+	entryBufs *siegreader.Buffers // shared buffer used by each entry in a container
 }
 
 func (c *ContainerMatcher) String() string {
@@ -258,6 +252,7 @@ func (ct *CTest) add(s frames.Signature, t int) {
 	// if we haven't created a BM for this node yet, do it now
 	if ct.BM == nil {
 		ct.BM = bytematcher.New()
+		ct.BM.SetLowMem()
 	}
 	ct.Unsatisfied = append(ct.Unsatisfied, t)
 	ct.buffer = append(ct.buffer, s)

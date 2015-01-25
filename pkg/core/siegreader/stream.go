@@ -20,7 +20,7 @@ type stream struct {
 }
 
 func newStream() interface{} {
-	return &stream{buf: make([]byte, readSz*16)}
+	return &stream{buf: make([]byte, readSz*2)}
 }
 
 func (s *stream) setSource(src io.Reader) {

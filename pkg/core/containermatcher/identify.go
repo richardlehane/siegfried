@@ -19,6 +19,7 @@ import (
 	"strings"
 
 	"github.com/richardlehane/siegfried/pkg/core"
+	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
@@ -65,26 +66,32 @@ func (c *ContainerMatcher) defaultMatch(n string) (bool, int) {
 	return false, 0
 }
 
+type identifier struct {
+	partsMatched [][]hit // hits for parts
+	ruledOut     []bool  // mark additional signatures as negatively matched
+	waitSet      *priority.WaitSet
+	hits         []hit // shared buffer of hits used when matching
+}
+
+func (c *ContainerMatcher) newIdentifier(numParts int) *identifier {
+	return &identifier{
+		make([][]hit, numParts),
+		make([]bool, numParts),
+		c.Priorities.WaitSet(),
+		make([]hit, 0, 1),
+	}
+}
+
 func (c *ContainerMatcher) identify(rdr Reader, res chan core.Result) {
 	// safe to call on a nil matcher
 	if c == nil {
 		close(res)
 		return
 	}
-	// reset
-	c.waitSet = c.Priorities.WaitSet()
-	if c.started {
-		for i := range c.partsMatched {
-			c.partsMatched[i] = c.partsMatched[i][:0]
-			c.ruledOut[i] = false
-		}
-	} else {
+	if !c.started {
 		c.entryBufs = siegreader.New()
-		c.partsMatched = make([][]hit, len(c.Parts))
-		c.ruledOut = make([]bool, len(c.Parts))
-		c.hits = make([]hit, 0, 20) // shared hits buffer to avoid allocs
-		c.started = true
 	}
+	id := c.newIdentifier(len(c.Parts))
 	var err error
 	for err = rdr.Next(); err == nil; err = rdr.Next() {
 		ct, ok := c.NameCTest[rdr.Name()]
@@ -94,19 +101,19 @@ func (c *ContainerMatcher) identify(rdr Reader, res chan core.Result) {
 		// name has matched, lets test the CTests
 		// ct.identify will generate a slice of hits which pass to
 		// processHits which will return true if we can stop
-		if c.processHits(ct.identify(c, rdr, rdr.Name()), ct, rdr.Name(), res) {
+		if c.processHits(ct.identify(c, id, rdr, rdr.Name()), id, ct, rdr.Name(), res) {
 			break
 		}
 	}
 	close(res)
 }
 
-func (ct *CTest) identify(c *ContainerMatcher, rdr Reader, name string) []hit {
+func (ct *CTest) identify(c *ContainerMatcher, id *identifier, rdr Reader, name string) []hit {
 	// reset hits
-	c.hits = c.hits[:0]
+	id.hits = id.hits[:0]
 	for _, h := range ct.Satisfied {
-		if c.waitSet.Check(h) {
-			c.hits = append(c.hits, hit{h, name, "name only"})
+		if id.waitSet.Check(h) {
+			id.hits = append(id.hits, hit{h, name, "name only"})
 		}
 	}
 	if ct.Unsatisfied != nil {
@@ -114,37 +121,37 @@ func (ct *CTest) identify(c *ContainerMatcher, rdr Reader, name string) []hit {
 		bmc, _ := ct.BM.Identify("", buf)
 		for r := range bmc {
 			h := ct.Unsatisfied[r.Index()]
-			if c.waitSet.Check(h) && c.checkHits(h) {
-				c.hits = append(c.hits, hit{h, name, r.Basis()})
+			if id.waitSet.Check(h) && id.checkHits(h) {
+				id.hits = append(id.hits, hit{h, name, r.Basis()})
 			}
 		}
 		rdr.Close()
 		c.entryBufs.Put(buf)
 	}
-	return c.hits
+	return id.hits
 }
 
 // process the hits from the ctest: adding hits to the parts matched, checking priorities
 // return true if satisfied and can quit
-func (c *ContainerMatcher) processHits(hits []hit, ct *CTest, name string, res chan core.Result) bool {
+func (c *ContainerMatcher) processHits(hits []hit, id *identifier, ct *CTest, name string, res chan core.Result) bool {
 	// if there are no hits, rule out any sigs in the ctest
 	if len(hits) == 0 {
 		for _, v := range ct.Satisfied {
-			c.ruledOut[v] = true
+			id.ruledOut[v] = true
 		}
 		for _, v := range ct.Unsatisfied {
-			c.ruledOut[v] = true
+			id.ruledOut[v] = true
 		}
 		return false
 	}
 	for _, h := range hits {
-		c.partsMatched[h.id] = append(c.partsMatched[h.id], h)
-		if len(c.partsMatched[h.id]) == c.Parts[h.id] {
-			if c.waitSet.Check(h.id) {
+		id.partsMatched[h.id] = append(id.partsMatched[h.id], h)
+		if len(id.partsMatched[h.id]) == c.Parts[h.id] {
+			if id.waitSet.Check(h.id) {
 				idx, _ := c.Priorities.Index(h.id)
-				res <- toResult(c.Sindexes[idx], c.partsMatched[h.id]) // send a Result here
+				res <- toResult(c.Sindexes[idx], id.partsMatched[h.id]) // send a Result here
 				// set a priority list and return early if can
-				if c.waitSet.Put(h.id) {
+				if id.waitSet.Put(h.id) {
 					return true
 				}
 			}
@@ -156,23 +163,23 @@ func (c *ContainerMatcher) processHits(hits []hit, ct *CTest, name string, res c
 	}
 	// we can rule some possible matches out...
 	for _, v := range ct.Satisfied {
-		if len(c.partsMatched[v]) == 0 || c.partsMatched[v][len(c.partsMatched[v])-1].name != name {
-			c.ruledOut[v] = true
+		if len(id.partsMatched[v]) == 0 || id.partsMatched[v][len(id.partsMatched[v])-1].name != name {
+			id.ruledOut[v] = true
 		}
 	}
 	for _, v := range ct.Unsatisfied {
-		if len(c.partsMatched[v]) == 0 || c.partsMatched[v][len(c.partsMatched[v])-1].name != name {
-			c.ruledOut[v] = true
+		if len(id.partsMatched[v]) == 0 || id.partsMatched[v][len(id.partsMatched[v])-1].name != name {
+			id.ruledOut[v] = true
 		}
 	}
 	// if we haven't got a waitList yet, then we should return false
-	waitingOn := c.waitSet.WaitingOn()
+	waitingOn := id.waitSet.WaitingOn()
 	if waitingOn == nil {
 		return false
 	}
 	// loop over the wait list, seeing if they are all ruled out
 	for _, v := range waitingOn {
-		if !c.ruledOut[v] {
+		if !id.ruledOut[v] {
 			return false
 		}
 	}
@@ -180,8 +187,8 @@ func (c *ContainerMatcher) processHits(hits []hit, ct *CTest, name string, res c
 }
 
 // eliminate duplicate hits - must do this since rely on number of matches for each sig as test for full match
-func (c *ContainerMatcher) checkHits(i int) bool {
-	for _, h := range c.hits {
+func (id *identifier) checkHits(i int) bool {
+	for _, h := range id.hits {
 		if i == h.id {
 			return false
 		}

@@ -32,7 +32,11 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 	rdr := siegreader.LimitReaderFrom(buf, b.MaxBOF)
 	// start bof matcher if not yet started
 	if rdr != nil && !b.bstarted {
-		b.bAho = wac.New(b.BOFSeq.Set)
+		if b.lowmem {
+			b.bAho = wac.NewLowMem(b.BOFSeq.Set)
+		} else {
+			b.bAho = wac.New(b.BOFSeq.Set)
+		}
 		b.bstarted = true
 	}
 	var bchan chan wac.Result
@@ -72,7 +76,11 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 	rrdr := siegreader.LimitReverseReaderFrom(buf, b.MaxEOF)
 	// start EOF matcher if not yet started
 	if rrdr != nil && !b.estarted {
-		b.eAho = wac.New(b.EOFSeq.Set)
+		if b.lowmem {
+			b.eAho = wac.NewLowMem(b.EOFSeq.Set)
+		} else {
+			b.eAho = wac.New(b.EOFSeq.Set)
+		}
 		b.estarted = true
 	}
 	var echan chan wac.Result

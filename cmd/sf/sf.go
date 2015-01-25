@@ -34,7 +34,7 @@ import (
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 
-	//"github.com/pkg/profile"
+	//_ "net/http/pprof"
 )
 
 const (
@@ -223,7 +223,16 @@ func printer(resc chan chan res, wg *sync.WaitGroup) {
 	}
 }
 
+var lastPath string
+
+func quitter() {
+	timer := time.NewTimer(time.Minute * 25)
+	<-timer.C
+	panic(lastPath)
+}
+
 func multiIdentifyP(s *siegfried.Siegfried, r string) {
+	go quitter()
 	wg := &sync.WaitGroup{}
 	runtime.GOMAXPROCS(PROCS)
 	resc := make(chan chan res, CONCURRENT)
@@ -235,6 +244,7 @@ func multiIdentifyP(s *siegfried.Siegfried, r string) {
 			}
 			return nil
 		}
+		lastPath = path
 		wg.Add(1)
 		rchan := make(chan res, 1)
 		resc <- rchan
@@ -271,14 +281,17 @@ func PrintFile(name string, sz int64, err error) {
 func fileString(name string, sz int64, err error) string {
 	var errStr string
 	if err != nil {
-		errStr = err.Error()
+		errStr = fmt.Sprintf("\"%s\"", err.Error())
 	}
 	return fmt.Sprintf("---\nfilename : \"%s\"\nfilesize : %d\nerrors   : %s\nmatches  :\n", name, sz, errStr)
 }
 
 func main() {
-	//defer profile.Start(profile.MemProfile).Stop()
-
+	/*
+		go func() {
+			log.Println(http.ListenAndServe("localhost:6060", nil))
+		}()
+	*/
 	flag.Parse()
 
 	if *csvo {
