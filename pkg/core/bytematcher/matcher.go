@@ -271,7 +271,6 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 						moff := off - int64(ldistance)
 						length := ldistance + s.length + rdistance
 						m.kfHits <- kfHit{kf, moff, length}
-
 						if <-m.halt {
 							return
 						}
