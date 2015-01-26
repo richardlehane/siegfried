@@ -16,8 +16,6 @@
 
 package siegreader
 
-import "os"
-
 // no mmap on appengine
 func mmapable(sz int64) bool {
 	return false
