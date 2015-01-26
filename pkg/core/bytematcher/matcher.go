@@ -177,7 +177,9 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 	if len(t.Incomplete) < 1 {
 		return
 	}
-
+	/*
+		TODO: HANDLE INCOMPLETE CHECKS AS GOROUTINE
+	*/
 	// see what incompletes are worth pursuing
 	var checkl, checkr bool
 	for _, v := range t.Incomplete {

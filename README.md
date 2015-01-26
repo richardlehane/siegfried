@@ -10,7 +10,7 @@ Key features are:
 
 ## Version
 
-0.7.1
+0.8.0
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried/pkg/core?status.svg)](https://godoc.org/github.com/richardlehane/siegfried/pkg/core)
 
@@ -66,11 +66,13 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 ### Road to 1.0 (early 2015)
 
-- optimisations (mmap, multi-thread)
 - additional documentation & tests
 - server mode
 
 ## Recent Changes
+### Version 0.8.0 (26/1/2015)
+- optimisations (mmap, multithread, etc.)
+
 ### Version 0.7.1 (9/12/2014)
 - csv output
 - periodic priority checking to stop searches earlier

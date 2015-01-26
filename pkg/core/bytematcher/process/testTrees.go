@@ -157,6 +157,7 @@ func MaxLength(ts []*testNode) int {
 	return max
 }
 
+// TODO: This recursive function can overload the stack. Replace with a linear goroutine approach
 func MatchTestNodes(ts []*testNode, b []byte, rev bool) []followupMatch {
 	ret := []followupMatch{}
 	if b == nil {
