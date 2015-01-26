@@ -23,6 +23,10 @@ func mmapable(sz int64) bool {
 	return false
 }
 
-func mmapFile(f *os.File) []byte {
+func (m *mmap) mapFile() error {
+	return nil
+}
+
+func (m *mmap) unmap() error {
 	return nil
 }
