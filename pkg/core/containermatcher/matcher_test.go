@@ -7,6 +7,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames/tests"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
+	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
 func testTrigger([]byte) bool {
@@ -19,6 +20,7 @@ var testContainerMatcher *ContainerMatcher = &ContainerMatcher{
 	NameCTest:  make(map[string]*CTest),
 	Priorities: &priority.Set{},
 	Sindexes:   []int{0},
+	entryBufs:  siegreader.New(),
 }
 
 var testMatcher Matcher = []*ContainerMatcher{testContainerMatcher}

@@ -54,6 +54,7 @@ func Load(r io.Reader) (core.Matcher, error) {
 	}
 	for _, c := range m {
 		c.ctype = ctypes[c.CType]
+		c.entryBufs = siegreader.New()
 	}
 	return m, nil
 }
@@ -147,9 +148,7 @@ type ContainerMatcher struct {
 	Parts      []int // corresponds with each signature: represents the number of CTests for each sig
 	Priorities *priority.Set
 	Default    string // the default is an extension which when matched signals that the container matcher should quit
-	// this prevents delving through zip files that will be recursed anyway
-	started   bool
-	entryBufs *siegreader.Buffers // shared buffer used by each entry in a container
+	entryBufs  *siegreader.Buffers
 }
 
 func (c *ContainerMatcher) String() string {
@@ -204,6 +203,7 @@ func newZip() *ContainerMatcher {
 		NameCTest:  make(map[string]*CTest),
 		Priorities: &priority.Set{},
 		Default:    "zip", // zip has a default, mscfb does not
+		entryBufs:  siegreader.New(),
 	}
 }
 
@@ -217,6 +217,7 @@ func newMscfb() *ContainerMatcher {
 		CType:      Mscfb,
 		NameCTest:  make(map[string]*CTest),
 		Priorities: &priority.Set{},
+		entryBufs:  siegreader.New(),
 	}
 }
 

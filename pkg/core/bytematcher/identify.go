@@ -23,6 +23,39 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
+func (b *Matcher) start(bof bool) {
+	if bof {
+		if b.bAho != nil {
+			return
+		}
+	} else {
+		if b.eAho != nil {
+			return
+		}
+	}
+	b.mu.Lock()
+	defer b.mu.Unlock()
+	if bof {
+		if b.bAho != nil {
+			return
+		}
+		if b.lowmem {
+			b.bAho = wac.NewLowMem(b.BOFSeq.Set)
+			return
+		}
+		b.bAho = wac.New(b.BOFSeq.Set)
+		return
+	}
+	if b.eAho != nil {
+		return
+	}
+	if b.lowmem {
+		b.eAho = wac.NewLowMem(b.EOFSeq.Set)
+		return
+	}
+	b.eAho = wac.New(b.EOFSeq.Set)
+}
+
 // Identify function - brings a new matcher into existence
 func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan core.Result) {
 	buf.SetQuit(quit)
@@ -31,14 +64,7 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 	// Test BOF/EOF sequences
 	rdr := siegreader.LimitReaderFrom(buf, b.MaxBOF)
 	// start bof matcher if not yet started
-	if rdr != nil && !b.bstarted {
-		if b.lowmem {
-			b.bAho = wac.NewLowMem(b.BOFSeq.Set)
-		} else {
-			b.bAho = wac.New(b.BOFSeq.Set)
-		}
-		b.bstarted = true
-	}
+	b.start(true)
 	var bchan chan wac.Result
 	if rdr != nil {
 		bchan = b.bAho.Index(rdr)
@@ -69,24 +95,17 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 		}
 	}
 
-	// Test BOF/EOF frames
+	// Setup BOF/EOF frame tests
 	bfchan := b.BOFFrames.Index(buf, false, quit)
 	efchan := b.EOFFrames.Index(buf, true, quit)
-	// Test EOF sequences
+
+	// Setup EOF sequences test
 	rrdr := siegreader.LimitReverseReaderFrom(buf, b.MaxEOF)
-	// start EOF matcher if not yet started
-	if rrdr != nil && !b.estarted {
-		if b.lowmem {
-			b.eAho = wac.NewLowMem(b.EOFSeq.Set)
-		} else {
-			b.eAho = wac.New(b.EOFSeq.Set)
-		}
-		b.estarted = true
-	}
+	b.start(false)
 	var echan chan wac.Result
-	if rrdr != nil {
-		echan = b.eAho.Index(rrdr)
-	}
+	echan = b.eAho.Index(rrdr)
+
+	// Now enter main search loop
 	for {
 		select {
 		case bf, ok := <-bfchan:

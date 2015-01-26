@@ -83,13 +83,10 @@ func (c *ContainerMatcher) newIdentifier(numParts int) *identifier {
 }
 
 func (c *ContainerMatcher) identify(rdr Reader, res chan core.Result) {
-	// safe to call on a nil matcher
+	// safe to call on a nil matcher (i.e. container matching switched off)
 	if c == nil {
 		close(res)
 		return
-	}
-	if !c.started {
-		c.entryBufs = siegreader.New()
 	}
 	id := c.newIdentifier(len(c.Parts))
 	var err error
@@ -118,6 +115,7 @@ func (ct *CTest) identify(c *ContainerMatcher, id *identifier, rdr Reader, name 
 	}
 	if ct.Unsatisfied != nil {
 		buf, _ := rdr.SetSource(c.entryBufs) // NOTE: an error is ignored here.
+		ct.BM.SetMu()
 		bmc, _ := ct.BM.Identify("", buf)
 		for r := range bmc {
 			h := ct.Unsatisfied[r.Index()]

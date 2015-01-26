@@ -20,6 +20,7 @@ import (
 	"encoding/gob"
 	"fmt"
 	"io"
+	"sync"
 
 	"github.com/richardlehane/match/wac"
 	"github.com/richardlehane/siegfried/config"
@@ -34,10 +35,9 @@ import (
 type Matcher struct {
 	*process.Process
 	Priorities *priority.Set
+	mu         *sync.Mutex
 	bAho       *wac.Wac
 	eAho       *wac.Wac
-	bstarted   bool
-	estarted   bool
 	lowmem     bool
 }
 
@@ -45,10 +45,9 @@ func New() *Matcher {
 	return &Matcher{
 		process.New(),
 		&priority.Set{},
-		&wac.Wac{},
-		&wac.Wac{},
-		false,
-		false,
+		&sync.Mutex{},
+		nil,
+		nil,
 		false,
 	}
 }
@@ -63,6 +62,14 @@ func Load(r io.Reader) (core.Matcher, error) {
 		return nil, err
 	}
 	return b, nil
+}
+
+// used by container matcher
+func (b *Matcher) SetMu() {
+	if b.mu != nil {
+		return
+	}
+	b.mu = &sync.Mutex{}
 }
 
 func (b *Matcher) Save(w io.Writer) (int, error) {

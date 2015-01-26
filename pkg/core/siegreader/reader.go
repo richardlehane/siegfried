@@ -206,12 +206,11 @@ func LimitReaderFrom(b Buffer, l int) *LimitReader {
 	// A BOF reader may not have been used, trigger a fill if necessary.
 	r := &Reader{0, 0, nil, false, b}
 	b.setLimit()
-
 	return &LimitReader{l, r}
 }
 
 func (l *LimitReader) ReadByte() (byte, error) {
-	if l.limit > 0 && l.i >= int64(l.limit) {
+	if l.limit >= 0 && l.i >= int64(l.limit) {
 		l.reachedLimit()
 		l.limit = -1 // only run once
 		return 0, io.EOF
