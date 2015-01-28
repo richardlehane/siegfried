@@ -40,7 +40,7 @@ var siegfried = struct {
 	version:         [3]int{0, 8, 0},
 	signature:       "pronom.gob",
 	distance:        8192,
-	rng:             2049,
+	rng:             512,
 	choices:         64,
 	varLength:       2,
 	updateURL:       "http://www.itforarchivists.com/siegfried/update",
