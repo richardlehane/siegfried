@@ -65,7 +65,7 @@ func (i *Identifier) Add(m core.Matcher) error {
 }
 
 func (i *Identifier) Yaml() string {
-	return fmt.Sprintf("\n  - name    : %v\n    details : %v",
+	return fmt.Sprintf("  - name    : %v\n    details : %v\n",
 		i.Name, quoteText(i.Details))
 }
 
@@ -284,7 +284,7 @@ func (id Identification) Yaml() string {
 	if len(id.Basis) > 0 {
 		basis = quoteText(strings.Join(id.Basis, "; "))
 	}
-	return fmt.Sprintf("\n  - id      : %v\n    puid    : %v\n    format  : %v\n    version : %v\n    mime    : %v\n    basis   : %v\n    warning : %v",
+	return fmt.Sprintf("  - id      : %v\n    puid    : %v\n    format  : %v\n    version : %v\n    mime    : %v\n    basis   : %v\n    warning : %v\n",
 		id.Identifier, id.Puid, quoteText(id.Name), quoteText(id.Version), quoteText(id.Mime), basis, quoteText(id.Warning))
 }
 

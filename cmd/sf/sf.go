@@ -286,7 +286,7 @@ func fileString(name string, sz int64, err error) string {
 	if err != nil {
 		errStr = fmt.Sprintf("\"%s\"", err.Error())
 	}
-	return fmt.Sprintf("\n---\nfilename : '%s'\nfilesize : %d\nerrors   : %s\nmatches  :", replacer.Replace(name), sz, errStr)
+	return fmt.Sprintf("---\nfilename : '%s'\nfilesize : %d\nerrors   : %s\nmatches  :\n", replacer.Replace(name), sz, errStr)
 }
 
 func main() {
