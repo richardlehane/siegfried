@@ -41,7 +41,7 @@ type Recorder interface {
 
 // Identification is sent by an identifier when a format matches
 type Identification interface {
-	String() string // short text that should be displayed to indicate the format match
+	String() string // short text that is displayed to indicate the format match
 	Yaml() string   // long text that should be displayed to indicate the format match
 	Json() string   // JSON match response
 	Csv() []string  // CSV match response

@@ -27,6 +27,7 @@ import (
 	"path/filepath"
 	"runtime"
 	"strconv"
+	"strings"
 	"sync"
 	"time"
 
@@ -56,6 +57,7 @@ var (
 var (
 	csvWriter  *csv.Writer
 	yamlWriter *bufio.Writer
+	replacer   = strings.NewReplacer("'", "''")
 )
 
 func getHttp(url string) ([]byte, error) {
@@ -284,15 +286,13 @@ func fileString(name string, sz int64, err error) string {
 	if err != nil {
 		errStr = fmt.Sprintf("\"%s\"", err.Error())
 	}
-	return fmt.Sprintf("---\nfilename : \"%s\"\nfilesize : %d\nerrors   : %s\nmatches  :\n", name, sz, errStr)
+	return fmt.Sprintf("\n---\nfilename : '%s'\nfilesize : %d\nerrors   : %s\nmatches  :", replacer.Replace(name), sz, errStr)
 }
 
 func main() {
-	/*
-		go func() {
-			log.Println(http.ListenAndServe("localhost:6060", nil))
-		}()
-	*/
+	//go func() {
+	//	log.Println(http.ListenAndServe("localhost:6060", nil))
+	//}()
 	flag.Parse()
 
 	if *csvo {

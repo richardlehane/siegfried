@@ -65,7 +65,7 @@ func (i *Identifier) Add(m core.Matcher) error {
 }
 
 func (i *Identifier) Yaml() string {
-	return fmt.Sprintf("  - name    : %v\n    details : %v\n",
+	return fmt.Sprintf("\n  - name    : %v\n    details : %v",
 		i.Name, quoteText(i.Details))
 }
 
@@ -270,11 +270,13 @@ func (id Identification) String() string {
 	return id.Puid
 }
 
+// YAML output
+
 func quoteText(s string) string {
 	if len(s) == 0 {
 		return s
 	}
-	return "\"" + s + "\""
+	return "'" + s + "'"
 }
 
 func (id Identification) Yaml() string {
@@ -282,33 +284,38 @@ func (id Identification) Yaml() string {
 	if len(id.Basis) > 0 {
 		basis = quoteText(strings.Join(id.Basis, "; "))
 	}
-	return fmt.Sprintf("  - id      : %v\n    puid    : %v\n    format  : %v\n    version : %v\n    mime    : %v\n    basis   : %v\n    warning : %v\n",
+	return fmt.Sprintf("\n  - id      : %v\n    puid    : %v\n    format  : %v\n    version : %v\n    mime    : %v\n    basis   : %v\n    warning : %v",
 		id.Identifier, id.Puid, quoteText(id.Name), quoteText(id.Version), quoteText(id.Mime), basis, quoteText(id.Warning))
 }
 
+// JSON output
+
+type jsonid struct {
+	Puid    string `json:"puid"`
+	Name    string `json:"name"`
+	Version string `json:"version"`
+	Mime    string `json:"mime"`
+	Basis   string `json:"basis"`
+	Warning string `json:"warning"`
+}
+
+const jsonErr = `{
+		"puid": "",
+		"name": "",
+		"version": "",
+		"mime": "",
+		"basis": "",
+		"warning": "json encoding error"
+	}`
+
 func (id Identification) Json() string {
-	type jsonid struct {
-		Puid    string `json:"puid"`
-		Name    string `json:"name"`
-		Version string `json:"version"`
-		Mime    string `json:"mime"`
-		Basis   string `json:"basis"`
-		Warning string `json:"warning"`
-	}
 	var basis string
 	if len(id.Basis) > 0 {
 		basis = strings.Join(id.Basis, "; ")
 	}
 	b, err := json.Marshal(jsonid{id.Puid, id.Name, id.Version, id.Mime, basis, id.Warning})
 	if err != nil {
-		return `{
-			"puid": "",
-			"name": "",
-			"version": "",
-			"mime": "",
-			"basis": "",
-			"warning": "json encoding error"
-			}`
+		return jsonErr
 	}
 	return string(b)
 }
