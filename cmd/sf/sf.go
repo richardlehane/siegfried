@@ -17,25 +17,22 @@ package main
 import (
 	"bufio"
 	"encoding/csv"
-	"encoding/json"
 	"flag"
 	"fmt"
-	"io/ioutil"
 	"log"
-	"net/http"
 	"os"
 	"path/filepath"
 	"runtime"
 	"strconv"
 	"strings"
 	"sync"
-	"time"
 
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 
 	//_ "net/http/pprof"
+	//"net/http"
 )
 
 const (
@@ -43,6 +40,7 @@ const (
 	PROCS      = -1
 )
 
+// flags
 var (
 	update  = flag.Bool("update", false, "update or install the default signature file")
 	version = flag.Bool("version", false, "display version information")
@@ -59,135 +57,6 @@ var (
 	yamlWriter *bufio.Writer
 	replacer   = strings.NewReplacer("'", "''")
 )
-
-func getHttp(url string) ([]byte, error) {
-	req, err := http.NewRequest("GET", url, nil)
-	if err != nil {
-		return nil, err
-	}
-	_, timeout, transport := config.UpdateOptions()
-	req.Header.Add("User-Agent", "siegfried/siegbot (+https://github.com/richardlehane/siegfried)")
-	req.Header.Add("Cache-Control", "no-cache")
-	timer := time.AfterFunc(timeout, func() {
-		transport.CancelRequest(req)
-	})
-	defer timer.Stop()
-	client := http.Client{
-		Transport: transport,
-	}
-	resp, err := client.Do(req)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-	return ioutil.ReadAll(resp.Body)
-}
-
-type Update struct {
-	SfVersion  [3]int
-	SigCreated string
-	GobSize    int
-	LatestURL  string
-}
-
-func updateSigs() (string, error) {
-	url, _, _ := config.UpdateOptions()
-	if url == "" {
-		return "Update is not available for this distribution of Siegfried", nil
-	}
-	response, err := getHttp(url)
-	if err != nil {
-		return "", err
-	}
-	var u Update
-	if err := json.Unmarshal(response, &u); err != nil {
-		return "", err
-	}
-	version := config.Version()
-	if version[0] < u.SfVersion[0] || (u.SfVersion[0] == version[0] && version[1] < u.SfVersion[1]) {
-		return "Your version of Siegfried is out of date; please install latest from http://www.itforarchivists.com/siegfried before continuing.", nil
-	}
-	s, err := siegfried.Load(config.Signature())
-	if err == nil {
-		if !s.Update(u.SigCreated) {
-			return "You are already up to date!", nil
-		}
-	} else {
-		// this hairy bit of golang exception handling is thanks to Ross! :)
-		if _, err = os.Stat(config.Home()); err != nil {
-			if os.IsNotExist(err) {
-				err = os.MkdirAll(config.Home(), os.ModePerm)
-				if err != nil {
-					return "", fmt.Errorf("Siegfried: cannot create home directory %s, %v", config.Home(), err)
-				}
-			} else {
-				return "", fmt.Errorf("Siegfried: error opening directory %s, %v", config.Home(), err)
-			}
-		}
-	}
-	fmt.Println("... downloading latest signature file ...")
-	response, err = getHttp(u.LatestURL)
-	if err != nil {
-		return "", err
-	}
-	if len(response) != u.GobSize {
-		return "", fmt.Errorf("Siegfried: error retrieving pronom.gob; expecting %d bytes, got %d bytes", u.GobSize, len(response))
-	}
-	err = ioutil.WriteFile(config.Signature(), response, os.ModePerm)
-	if err != nil {
-		return "", fmt.Errorf("Siegfried: error writing to directory, %v", err)
-	}
-	fmt.Printf("... writing %s ...\n", config.Signature())
-	return "Your signature file has been updated", nil
-}
-
-func load() (*siegfried.Siegfried, error) {
-	s, err := siegfried.Load(config.Signature())
-	if err != nil {
-		return nil, err
-	}
-	return s, nil
-}
-
-func identify(s *siegfried.Siegfried, p string) ([]string, error) {
-	ids := make([]string, 0)
-	file, err := os.Open(p)
-	if err != nil {
-		return nil, fmt.Errorf("failed to open %v, got: %v", p, err)
-	}
-	c, err := s.Identify(p, file)
-	if c == nil {
-		return nil, fmt.Errorf("failed to identify %v, got: %v", p, err)
-	}
-	for i := range c {
-		ids = append(ids, i.String())
-	}
-	err = file.Close()
-	if err != nil {
-		return nil, err
-	}
-	return ids, nil
-}
-
-func multiIdentify(s *siegfried.Siegfried, r string) ([][]string, error) {
-	set := make([][]string, 0)
-	wf := func(path string, info os.FileInfo, err error) error {
-		if info.IsDir() {
-			if *nr && path != r {
-				return filepath.SkipDir
-			}
-			return nil
-		}
-		ids, err := identify(s, path)
-		if err != nil {
-			return err
-		}
-		set = append(set, ids)
-		return nil
-	}
-	err := filepath.Walk(r, wf)
-	return set, err
-}
 
 type res struct {
 	path string
@@ -225,17 +94,7 @@ func printer(resc chan chan res, wg *sync.WaitGroup) {
 	}
 }
 
-/*
-var lastPath string
-
-func quitter() {
-	timer := time.NewTimer(time.Minute * 25)
-	<-timer.C
-	panic(lastPath)
-}
-*/
 func multiIdentifyP(s *siegfried.Siegfried, r string) {
-	//go quitter()
 	wg := &sync.WaitGroup{}
 	runtime.GOMAXPROCS(PROCS)
 	resc := make(chan chan res, CONCURRENT)
@@ -247,7 +106,6 @@ func multiIdentifyP(s *siegfried.Siegfried, r string) {
 			}
 			return nil
 		}
-		//lastPath = path
 		wg.Add(1)
 		rchan := make(chan res, 1)
 		resc <- rchan
@@ -277,10 +135,6 @@ func multiIdentifyP(s *siegfried.Siegfried, r string) {
 	close(resc)
 }
 
-func PrintFile(name string, sz int64, err error) {
-	fmt.Print(fileString(name, sz, err))
-}
-
 func fileString(name string, sz int64, err error) string {
 	var errStr string
 	if err != nil {
@@ -290,9 +144,11 @@ func fileString(name string, sz int64, err error) string {
 }
 
 func main() {
-	//go func() {
-	//	log.Println(http.ListenAndServe("localhost:6060", nil))
-	//}()
+	/*
+		go func() {
+			log.Println(http.ListenAndServe("localhost:6060", nil))
+		}()
+	*/
 	flag.Parse()
 
 	if *csvo {
@@ -346,7 +202,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error: error getting info for %v, got: %v", flag.Arg(0), err)
 	}
-	s, err := load()
+	s, err := siegfried.Load(config.Signature())
 	if err != nil {
 		log.Fatalf("Error: error loading signature file, got: %v", err)
 
@@ -374,7 +230,7 @@ func main() {
 	}
 	if !config.Debug() && !*csvo {
 		fmt.Print(s.Yaml())
-		PrintFile(flag.Arg(0), info.Size(), err)
+		fmt.Print(fileString(flag.Arg(0), info.Size(), err))
 	}
 	var csvRecord []string
 	if *csvo {

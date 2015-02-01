@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"flag"
+	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -20,8 +21,48 @@ var s *siegfried.Siegfried
 func setup() error {
 	var err error
 	config.SetHome(*testhome)
-	s, err = load()
+	s, err = siegfried.Load(config.Signature())
 	return err
+}
+
+func identify(s *siegfried.Siegfried, p string) ([]string, error) {
+	ids := make([]string, 0)
+	file, err := os.Open(p)
+	if err != nil {
+		return nil, fmt.Errorf("failed to open %v, got: %v", p, err)
+	}
+	c, err := s.Identify(p, file)
+	if c == nil {
+		return nil, fmt.Errorf("failed to identify %v, got: %v", p, err)
+	}
+	for i := range c {
+		ids = append(ids, i.String())
+	}
+	err = file.Close()
+	if err != nil {
+		return nil, err
+	}
+	return ids, nil
+}
+
+func multiIdentify(s *siegfried.Siegfried, r string) ([][]string, error) {
+	set := make([][]string, 0)
+	wf := func(path string, info os.FileInfo, err error) error {
+		if info.IsDir() {
+			if *nr && path != r {
+				return filepath.SkipDir
+			}
+			return nil
+		}
+		ids, err := identify(s, path)
+		if err != nil {
+			return err
+		}
+		set = append(set, ids)
+		return nil
+	}
+	err := filepath.Walk(r, wf)
+	return set, err
 }
 
 func TestLoad(t *testing.T) {
