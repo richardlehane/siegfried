@@ -24,7 +24,7 @@ import (
 )
 
 type tally struct {
-	*matcher
+	*scorer
 	results chan core.Result
 	quit    chan struct{}
 
@@ -39,16 +39,16 @@ type tally struct {
 	halt   chan bool
 }
 
-func newTally(r chan core.Result, q chan struct{}, m *matcher) *tally {
+func newTally(r chan core.Result, q chan struct{}, s *scorer) *tally {
 	t := &tally{
-		matcher:  m,
+		scorer:   s,
 		results:  r,
 		quit:     q,
 		once:     &sync.Once{},
 		bofQueue: &sync.WaitGroup{},
 		eofQueue: &sync.WaitGroup{},
 		stop:     make(chan struct{}),
-		waitSet:  m.bm.Priorities.WaitSet(),
+		waitSet:  s.bm.Priorities.WaitSet(),
 		kfHits:   make(chan kfHit),
 		halt:     make(chan bool),
 	}

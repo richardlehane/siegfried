@@ -64,7 +64,7 @@ func Load(r io.Reader) (core.Matcher, error) {
 	return b, nil
 }
 
-// used by container matcher TODO: This is hackish and not threadsafe. Better loading strategy for container matcher would create mu then
+// used by container matcher. TODO: different loading strategy for CM?
 func (b *Matcher) SetMu() {
 	if b.mu != nil {
 		return

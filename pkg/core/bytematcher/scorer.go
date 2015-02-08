@@ -24,48 +24,50 @@ import (
 )
 
 // MUTABLE
-type matcher struct {
+type scorer struct {
 	incoming       chan strike
 	bm             *Matcher
 	buf            siegreader.Buffer
 	partialMatches map[[2]int][][2]int64 // map of a keyframe to a slice of offsets and lengths where it has matched
+	partialStrikes map[[2]int]int        // represents complete/incomplete keyframe hits
 	strikeCache    map[int]*cacheItem
 	*tally
 }
 
-func (b *Matcher) newMatcher(buf siegreader.Buffer, q chan struct{}, r chan core.Result) chan strike {
+func (b *Matcher) newScorer(buf siegreader.Buffer, q chan struct{}, r chan core.Result) chan strike {
 	incoming := make(chan strike) // buffer ? Use benchmarks to check
-	m := &matcher{
+	s := &scorer{
 		incoming:       incoming,
 		bm:             b,
 		buf:            buf,
 		partialMatches: make(map[[2]int][][2]int64),
+		partialStrikes: make(map[[2]int]int),
 		strikeCache:    make(map[int]*cacheItem),
 	}
-	m.tally = newTally(r, q, m)
-	go m.match()
+	s.tally = newTally(r, q, s)
+	go s.score()
 	return incoming
 }
 
-func (m *matcher) match() {
-	for in := range m.incoming {
+func (s *scorer) score() {
+	for in := range s.incoming {
 		if in.idxa == -1 {
 			if in.reverse {
-				m.eofQueue.Wait()
-				if !m.continueWait(in.offset, false) {
+				s.eofQueue.Wait()
+				if !s.continueWait(in.offset, false) {
 					break
 				}
 			} else {
-				m.bofQueue.Wait()
-				if !m.continueWait(in.offset, false) {
+				s.bofQueue.Wait()
+				if !s.continueWait(in.offset, false) {
 					break
 				}
 			}
 		} else {
-			m.processStrike(in)
+			s.processStrike(in)
 		}
 	}
-	m.shutdown(true)
+	s.shutdown(true)
 }
 
 type strike struct {
@@ -94,22 +96,22 @@ type cacheItem struct {
 }
 
 // cache strikes until we have all sequences in a cluster (group of frames with a single BOF or EOF anchor)
-func (m *matcher) stash(s strike) (bool, []strike) {
-	stashed, ok := m.strikeCache[s.idxa]
+func (s *scorer) stash(st strike) (bool, []strike) {
+	stashed, ok := s.strikeCache[st.idxa]
 	if ok && stashed.finalised {
-		return true, []strike{s}
+		return true, []strike{st}
 	}
-	if s.final {
+	if st.final {
 		if !ok {
-			return true, []strike{s}
+			return true, []strike{st}
 		}
 		stashed.finalised = true
-		return true, append(stashed.strikes, s)
+		return true, append(stashed.strikes, st)
 	}
 	if !ok {
-		m.strikeCache[s.idxa] = &cacheItem{false, []strike{s}}
+		s.strikeCache[st.idxa] = &cacheItem{false, []strike{st}}
 	} else {
-		m.strikeCache[s.idxa].strikes = append(m.strikeCache[s.idxa].strikes, s)
+		s.strikeCache[st.idxa].strikes = append(s.strikeCache[st.idxa].strikes, st)
 	}
 	return false, nil
 }
@@ -122,52 +124,52 @@ type partial struct {
 	rdistances []int
 }
 
-func (m *matcher) processStrike(s strike) {
+func (s *scorer) processStrike(st strike) {
 	var queue *sync.WaitGroup
-	if s.reverse {
-		queue = m.eofQueue
+	if st.reverse {
+		queue = s.eofQueue
 	} else {
-		queue = m.bofQueue
+		queue = s.bofQueue
 	}
-	if s.frame {
+	if st.frame {
 		queue.Add(1)
-		go m.tryStrike(s, queue)
+		go s.tryStrike(st, queue)
 		return
 	}
-	st, strks := m.stash(s)
-	if st {
+	ok, strks := s.stash(st)
+	if ok {
 		for _, v := range strks {
 			queue.Add(1)
-			go m.tryStrike(v, queue)
+			go s.tryStrike(v, queue)
 		}
 	}
 }
 
 // this will block until quit if EOF is inaccessible
-func (m *matcher) calcOffset(s strike) int64 {
-	if !s.reverse {
-		return s.offset
+func (s *scorer) calcOffset(st strike) int64 {
+	if !st.reverse {
+		return st.offset
 	}
-	return m.buf.Size() - s.offset - int64(s.length)
+	return s.buf.Size() - st.offset - int64(st.length)
 }
 
-func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
+func (s *scorer) tryStrike(st strike, queue *sync.WaitGroup) {
 	defer queue.Done()
 	// the offsets we *record* are always BOF offsets - these can be interpreted as EOF offsets when necessary
-	off := m.calcOffset(s)
+	off := s.calcOffset(st)
 	// if we've quitted, the calculated offset will be a negative int
 	if off < 0 {
 		return
 	}
 
 	// grab the relevant testTree
-	t := m.bm.Tests[s.idxa+s.idxb]
+	t := s.bm.Tests[st.idxa+st.idxb]
 
 	// immediately apply key frames for the completes
 	for _, kf := range t.Complete {
-		if m.bm.KeyFrames[kf[0]][kf[1]].Check(s.offset) && m.waitSet.Check(kf[0]) {
-			m.kfHits <- kfHit{kf, off, s.length}
-			if <-m.halt {
+		if s.bm.KeyFrames[kf[0]][kf[1]].Check(st.offset) && s.waitSet.Check(kf[0]) {
+			s.kfHits <- kfHit{kf, off, st.length}
+			if <-s.halt {
 				return
 			}
 		}
@@ -186,7 +188,7 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 		if checkl && checkr {
 			break
 		}
-		if m.bm.KeyFrames[v.Kf[0]][v.Kf[1]].Check(s.offset) && m.waitSet.Check(v.Kf[0]) {
+		if s.bm.KeyFrames[v.Kf[0]][v.Kf[1]].Check(st.offset) && s.waitSet.Check(v.Kf[0]) {
 			if v.L {
 				checkl = true
 			}
@@ -203,16 +205,16 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 	var lslc, rslc []byte
 	var lpos, rpos int64
 	var llen, rlen int
-	if s.reverse {
-		lpos, llen = s.offset+int64(s.length), t.MaxLeftDistance
-		rpos, rlen = s.offset-int64(t.MaxRightDistance), t.MaxRightDistance
+	if st.reverse {
+		lpos, llen = st.offset+int64(st.length), t.MaxLeftDistance
+		rpos, rlen = st.offset-int64(t.MaxRightDistance), t.MaxRightDistance
 		if rpos < 0 {
 			rlen = rlen + int(rpos)
 			rpos = 0
 		}
 	} else {
-		lpos, llen = s.offset-int64(t.MaxLeftDistance), t.MaxLeftDistance
-		rpos, rlen = s.offset+int64(s.length), t.MaxRightDistance
+		lpos, llen = st.offset-int64(t.MaxLeftDistance), t.MaxLeftDistance
+		rpos, rlen = st.offset+int64(st.length), t.MaxRightDistance
 		if lpos < 0 {
 			llen = llen + int(lpos)
 			lpos = 0
@@ -224,10 +226,10 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 
 	// test left (if there are valid left tests to try)
 	if checkl {
-		if s.reverse {
-			lslc, _ = m.buf.EofSlice(lpos, llen)
+		if st.reverse {
+			lslc, _ = s.buf.EofSlice(lpos, llen)
 		} else {
-			lslc, _ = m.buf.Slice(lpos, llen)
+			lslc, _ = s.buf.Slice(lpos, llen)
 		}
 		left := process.MatchTestNodes(t.Left, lslc, true)
 		for _, lp := range left {
@@ -241,10 +243,10 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 	}
 	// test right (if there are valid right tests to try)
 	if checkr {
-		if s.reverse {
-			rslc, _ = m.buf.EofSlice(rpos, rlen)
+		if st.reverse {
+			rslc, _ = s.buf.EofSlice(rpos, rlen)
 		} else {
-			rslc, _ = m.buf.Slice(rpos, rlen)
+			rslc, _ = s.buf.Slice(rpos, rlen)
 		}
 		right := process.MatchTestNodes(t.Right, rslc, false)
 		for _, rp := range right {
@@ -261,7 +263,7 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 	for i, p := range partials {
 		if p.l == t.Incomplete[i].L && p.r == t.Incomplete[i].R {
 			kf := t.Incomplete[i].Kf
-			if m.bm.KeyFrames[kf[0]][kf[1]].Check(s.offset) && m.waitSet.Check(kf[0]) {
+			if s.bm.KeyFrames[kf[0]][kf[1]].Check(st.offset) && s.waitSet.Check(kf[0]) {
 				if !p.l {
 					p.ldistances = []int{0}
 				}
@@ -271,9 +273,9 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 				for _, ldistance := range p.ldistances {
 					for _, rdistance := range p.rdistances {
 						moff := off - int64(ldistance)
-						length := ldistance + s.length + rdistance
-						m.kfHits <- kfHit{kf, moff, length}
-						if <-m.halt {
+						length := ldistance + st.length + rdistance
+						s.kfHits <- kfHit{kf, moff, length}
+						if <-s.halt {
 							return
 						}
 					}
@@ -283,35 +285,35 @@ func (m *matcher) tryStrike(s strike, queue *sync.WaitGroup) {
 	}
 }
 
-func (m *matcher) applyKeyFrame(kfID process.KeyFrameID, o int64, l int) (bool, string) {
-	kf := m.bm.KeyFrames[kfID[0]]
+func (s *scorer) applyKeyFrame(kfID process.KeyFrameID, o int64, l int) (bool, string) {
+	kf := s.bm.KeyFrames[kfID[0]]
 	if len(kf) == 1 {
 		return true, fmt.Sprintf("byte match at %d, %d", o, l)
 	}
-	if _, ok := m.partialMatches[kfID]; ok {
-		m.partialMatches[kfID] = append(m.partialMatches[kfID], [2]int64{o, int64(l)})
+	if _, ok := s.partialMatches[kfID]; ok {
+		s.partialMatches[kfID] = append(s.partialMatches[kfID], [2]int64{o, int64(l)})
 	} else {
-		m.partialMatches[kfID] = [][2]int64{[2]int64{o, int64(l)}}
+		s.partialMatches[kfID] = [][2]int64{[2]int64{o, int64(l)}}
 	}
-	return m.checkKeyFrames(kfID[0])
+	return s.checkKeyFrames(kfID[0])
 }
 
 // check key frames checks the relationships between neighbouring frames
-func (m *matcher) checkKeyFrames(i int) (bool, string) {
-	kfs := m.bm.KeyFrames[i]
+func (s *scorer) checkKeyFrames(i int) (bool, string) {
+	kfs := s.bm.KeyFrames[i]
 	for j := range kfs {
-		_, ok := m.partialMatches[[2]int{i, j}]
+		_, ok := s.partialMatches[[2]int{i, j}]
 		if !ok {
 			return false, ""
 		}
 	}
-	prevOff := m.partialMatches[[2]int{i, 0}]
+	prevOff := s.partialMatches[[2]int{i, 0}]
 	basis := make([][][2]int64, len(kfs))
 	basis[0] = prevOff
 	prevKf := kfs[0]
 	var ok bool
 	for j, kf := range kfs[1:] {
-		thisOff := m.partialMatches[[2]int{i, j + 1}]
+		thisOff := s.partialMatches[[2]int{i, j + 1}]
 		prevOff, ok = kf.CheckRelated(prevKf, thisOff, prevOff)
 		if !ok {
 			return false, ""

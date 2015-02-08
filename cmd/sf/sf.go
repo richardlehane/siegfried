@@ -31,14 +31,11 @@ import (
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 
-	//_ "net/http/pprof"
-	//"net/http"
+	"net/http"
+	_ "net/http/pprof"
 )
 
-const (
-	CONCURRENT = 4
-	PROCS      = -1
-)
+const PROCS = -1
 
 // flags
 var (
@@ -50,6 +47,8 @@ var (
 	sig     = flag.String("sig", config.SignatureBase(), "set the signature file")
 	home    = flag.String("home", config.Home(), "override the default home directory")
 	serve   = flag.String("serve", "false", "not yet implemented - coming with v1")
+	multi   = flag.Int("multi", 1, "set number of file ID processes")
+	profile = flag.Bool("profile", false, "run a profile on localhost:6060")
 )
 
 var (
@@ -75,6 +74,19 @@ func printer(resc chan chan res, wg *sync.WaitGroup) {
 		if !config.Debug() && !*csvo {
 			yamlWriter.WriteString(fileString(r.path, r.sz, r.err))
 		}
+		if r.c == nil {
+			if *csvo {
+				var errStr string
+				if r.err != nil {
+					errStr = r.err.Error()
+				}
+				empty := make([]string, 7)
+				csvRecord[0], csvRecord[1], csvRecord[2] = r.path, strconv.Itoa(int(r.sz)), errStr
+				copy(csvRecord[3:], empty)
+				csvWriter.Write(csvRecord)
+			}
+			continue
+		}
 		for _, v := range r.c {
 			switch {
 			case config.Debug():
@@ -97,7 +109,7 @@ func printer(resc chan chan res, wg *sync.WaitGroup) {
 func multiIdentifyP(s *siegfried.Siegfried, r string) {
 	wg := &sync.WaitGroup{}
 	runtime.GOMAXPROCS(PROCS)
-	resc := make(chan chan res, CONCURRENT)
+	resc := make(chan chan res, *multi)
 	go printer(resc, wg)
 	wf := func(path string, info os.FileInfo, err error) error {
 		if info.IsDir() {
@@ -125,14 +137,77 @@ func multiIdentifyP(s *siegfried.Siegfried, r string) {
 			for id := range c {
 				ids = append(ids, id)
 			}
+			cerr := file.Close()
+			if err == nil {
+				err = cerr
+			}
 			rchan <- res{path, info.Size(), ids, err}
-			file.Close()
 		}()
 		return nil
 	}
 	filepath.Walk(r, wf)
 	wg.Wait()
 	close(resc)
+}
+
+func multiIdentifyS(s *siegfried.Siegfried, r string) error {
+	var csvRecord []string
+	if *csvo {
+		csvRecord = make([]string, 10)
+	}
+	wf := func(path string, info os.FileInfo, err error) error {
+		if info.IsDir() {
+			if *nr && path != r {
+				return filepath.SkipDir
+			}
+			return nil
+		}
+		file, err := os.Open(path)
+		if err != nil {
+			if !*csvo {
+				yamlWriter.WriteString(fileString(path, info.Size(), fmt.Errorf("failed to open %s, got: %v", path, err)))
+				return nil
+			}
+			empty := make([]string, 7)
+			csvRecord[0], csvRecord[1], csvRecord[2] = path, strconv.Itoa(int(info.Size())), fmt.Sprintf("failed to open %s, got: %v", path, err)
+			copy(csvRecord[3:], empty)
+			csvWriter.Write(csvRecord)
+			return nil
+		}
+		c, err := s.Identify(path, file)
+		if c == nil {
+			file.Close()
+			if !*csvo {
+				yamlWriter.WriteString(fileString(path, info.Size(), fmt.Errorf("failed to identify %s, got: %v", path, err)))
+				return nil
+			}
+			empty := make([]string, 7)
+			csvRecord[0], csvRecord[1], csvRecord[2] = path, strconv.Itoa(int(info.Size())), fmt.Sprintf("failed to identify %s, got: %v", path, err)
+			copy(csvRecord[3:], empty)
+			csvWriter.Write(csvRecord)
+			return nil
+		}
+		if !config.Debug() && !*csvo {
+			yamlWriter.WriteString(fileString(path, info.Size(), err))
+		}
+		for i := range c {
+			switch {
+			case config.Debug():
+			case *csvo:
+				var errStr string
+				if err != nil {
+					errStr = err.Error()
+				}
+				csvRecord[0], csvRecord[1], csvRecord[2] = path, strconv.Itoa(int(info.Size())), errStr
+				copy(csvRecord[3:], i.Csv())
+				csvWriter.Write(csvRecord)
+			default:
+				yamlWriter.WriteString(i.Yaml())
+			}
+		}
+		return file.Close() // this op is unreasonably slow on OSX
+	}
+	return filepath.Walk(r, wf)
 }
 
 func fileString(name string, sz int64, err error) string {
@@ -144,13 +219,13 @@ func fileString(name string, sz int64, err error) string {
 }
 
 func main() {
-	/*
+
+	flag.Parse()
+	if *profile {
 		go func() {
 			log.Println(http.ListenAndServe("localhost:6060", nil))
 		}()
-	*/
-	flag.Parse()
-
+	}
 	if *csvo {
 		csvWriter = csv.NewWriter(os.Stdout)
 		csvWriter.Write([]string{"filename", "filesize", "errors", "identifier", "id", "format name", "format version", "mimetype", "basis", "warning"})
@@ -215,7 +290,14 @@ func main() {
 		if !*csvo {
 			yamlWriter.WriteString(s.Yaml())
 		}
-		multiIdentifyP(s, flag.Arg(0))
+		if *multi > 16 {
+			*multi = 16
+		}
+		if *multi > 1 {
+			multiIdentifyP(s, flag.Arg(0))
+		} else {
+			multiIdentifyS(s, flag.Arg(0))
+		}
 		if *csvo {
 			csvWriter.Flush()
 		} else {
@@ -251,6 +333,7 @@ func main() {
 			fmt.Print(i.Yaml())
 		}
 	}
+
 	file.Close()
 	if *csvo {
 		csvWriter.Flush()

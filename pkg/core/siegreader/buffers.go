@@ -39,6 +39,7 @@ func (b *Buffers) Put(i Buffer) {
 		b.spool.Put(i)
 	case *file:
 		b.fdatas.put(i.(*file).data)
+		i.(*file).src = nil
 		b.fpool.Put(i)
 	}
 }

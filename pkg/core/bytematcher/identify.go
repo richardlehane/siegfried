@@ -59,7 +59,7 @@ func (b *Matcher) start(bof bool) {
 // Identify function - brings a new matcher into existence
 func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan core.Result) {
 	buf.SetQuit(quit)
-	incoming := b.newMatcher(buf, quit, r)
+	incoming := b.newScorer(buf, quit, r)
 
 	// Test BOF/EOF sequences
 	rdr := siegreader.LimitReaderFrom(buf, b.MaxBOF)
