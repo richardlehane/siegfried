@@ -227,6 +227,7 @@ func (s *scorer) satisfy(c *cacheItem) {
 			if !s.retainsPotential(pots) {
 				c.mu.Lock()
 				c.strikeIdx-- // backup
+				c.satisfying = false
 				c.mu.Unlock()
 				return
 			}
@@ -235,6 +236,22 @@ func (s *scorer) satisfy(c *cacheItem) {
 			}
 		}
 	}()
+}
+
+// returns true for try, false for stash - give c.first.idxa + c.first.idxb
+func (s *scorer) satisfyPotentials(pots []process.KeyFrameID) {
+	s.tally.mu.Lock()
+	for _, kf := range pots {
+		if s.tally.completes(kf[0], len(s.bm.KeyFrames[kf[0]])) {
+			for i := 0; i < len(s.bm.KeyFrames[kf[0]]); i++ {
+				idx, ok := s.tally.potentialMatches[[2]int{kf[0], i}]
+				if ok {
+					s.satisfy(s.strikeCache[idx])
+				}
+			}
+		}
+	}
+	s.tally.mu.Unlock()
 }
 
 // Tally
@@ -270,22 +287,6 @@ func (s *scorer) markPotentials(pots []process.KeyFrameID, idx int) {
 	s.tally.mu.Lock()
 	for _, kf := range pots {
 		s.tally.potentialMatches[[2]int{kf[0], kf[1]}] = idx
-	}
-	s.tally.mu.Unlock()
-}
-
-// returns true for try, false for stash - give c.first.idxa + c.first.idxb
-func (s *scorer) satisfyPotentials(pots []process.KeyFrameID) {
-	s.tally.mu.Lock()
-	for _, kf := range pots {
-		if s.tally.completes(kf[0], len(s.bm.KeyFrames[kf[0]])) {
-			for i := 0; i < len(s.bm.KeyFrames[kf[0]]); i++ {
-				idx, ok := s.tally.potentialMatches[[2]int{kf[0], i}]
-				if ok {
-					s.satisfy(s.strikeCache[idx])
-				}
-			}
-		}
 	}
 	s.tally.mu.Unlock()
 }
