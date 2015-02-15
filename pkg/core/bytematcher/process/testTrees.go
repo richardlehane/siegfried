@@ -49,6 +49,16 @@ func (t *testTree) String() string {
 	return str + "}"
 }
 
+// KeyFrames returns a list of all KeyFrameIDs that are included in the test tree, including completes and incompletes
+func (t *testTree) KeyFrames() []KeyFrameID {
+	ret := make([]KeyFrameID, len(t.Complete), len(t.Complete)+len(t.Incomplete))
+	copy(ret, t.Complete)
+	for _, v := range t.Incomplete {
+		ret = append(ret, v.Kf)
+	}
+	return ret
+}
+
 type FollowUp struct {
 	Kf KeyFrameID
 	L  bool // have a left test

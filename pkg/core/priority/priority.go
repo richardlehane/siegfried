@@ -21,6 +21,8 @@ import (
 	"fmt"
 	"sort"
 	"sync"
+
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher/process"
 )
 
 // a priority map links subordinate results to a list of priority restuls
@@ -265,11 +267,15 @@ func (w *WaitSet) Put(i int) bool {
 	return true
 }
 
-// check a signature index against the appropriate priority list. Should we continue trying to match this signature?
+// Check a signature index against the appropriate priority list. Should we continue trying to match this signature?
 func (w *WaitSet) Check(i int) bool {
 	idx, prev := w.Index(i)
 	w.m.RLock()
 	defer w.m.RUnlock()
+	return w.check(i, idx, prev)
+}
+
+func (w *WaitSet) check(i, idx, prev int) bool {
 	if w.wait[idx] == nil {
 		return true
 	}
@@ -278,6 +284,40 @@ func (w *WaitSet) Check(i int) bool {
 		return false
 	}
 	return true
+}
+
+// filter a waitset with a list of potential matches, return only those still waiting on. Return nil if none.
+func (w *WaitSet) Filter(l []int) []int {
+	ret := make([]int, 0, len(l))
+	w.m.RLock()
+	defer w.m.RUnlock()
+	for _, v := range l {
+		idx, prev := w.Index(v)
+		if w.check(v, idx, prev) {
+			ret = append(ret, v)
+		}
+	}
+	if len(ret) == 0 {
+		return nil
+	}
+	return ret
+}
+
+// filter a waitset with a list of potential matches, return only those still waiting on. Return nil if none.
+func (w *WaitSet) FilterKfID(l []process.KeyFrameID) []process.KeyFrameID {
+	ret := make([]process.KeyFrameID, 0, len(l))
+	w.m.RLock()
+	defer w.m.RUnlock()
+	for _, v := range l {
+		idx, prev := w.Index(v[0])
+		if w.check(v[0], idx, prev) {
+			ret = append(ret, v)
+		}
+	}
+	if len(ret) == 0 {
+		return nil
+	}
+	return ret
 }
 
 // For periodic checking - what signatures are we currently waiting on?

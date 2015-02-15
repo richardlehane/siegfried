@@ -60,7 +60,7 @@ func TestSubset(t *testing.T) {
 	m.Add("banana", "grapefruit")
 	m.Complete()
 	list := m.List([]string{"apple", "grapes", "grapes", "banana", "banana", "apple"})
-	sub := list.Subset([]int{0, 3, 5})
+	sub := list.Subset([]int{0, 3, 5}, 0)
 	if len(sub) != 3 {
 		t.Errorf("Priority: expecting 3 in the subset list, got %d", len(sub))
 	}
@@ -105,5 +105,16 @@ func TestSet(t *testing.T) {
 	}
 	if wo[0] != 6 {
 		t.Error("Priority: expecting to be waiting on grapefruits")
+	}
+	l := w.Filter([]int{5, 6})
+	if len(l) != 1 {
+		t.Error("Priority: bad filter, expecting to be waiting on grapefruits")
+	}
+	if l[0] != 6 {
+		t.Error("Priority: bad filter, expecting to be waiting on grapefruits")
+	}
+	l = w.Filter([]int{1, 2})
+	if l != nil {
+		t.Error("Priority: bad filter, nil list")
 	}
 }
