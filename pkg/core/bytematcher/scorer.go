@@ -225,6 +225,12 @@ func (s *scorer) satisfy(c *cacheItem) {
 				return
 			}
 			if !s.retainsPotential(pots) {
+				c.mu.Lock()
+				c.strikeIdx-- // backup
+				c.mu.Unlock()
+				return
+			}
+			if s.testStrike(strike) {
 				return
 			}
 		}
