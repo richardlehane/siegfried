@@ -261,7 +261,13 @@ func main() {
 	}
 
 	if *serve != "false" {
-		fmt.Println("sf server not yet implemented; expect by v1")
+		/*s, err := siegfried.Load(config.Signature())
+		if err != nil {
+			log.Fatalf("Error: error loading signature file, got: %v", err)
+
+		}
+		//server(*serve, s)
+		*/return
 	}
 
 	if flag.NArg() != 1 {

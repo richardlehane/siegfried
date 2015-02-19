@@ -3,14 +3,14 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>975</FormatID>
-      <FormatName>Keyhole Markup Language</FormatName>
+      <FormatName>Keyhole Markup Language (XML)</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Text (Mark-up)</FormatTypes>
+      <FormatTypes>GIS, Text (Mark-up)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
       <FormatDescription>KML is an Open Geospatial Consortium (OGC) sponsored xml schema file format used to display geographic data in an earth browser, such as Google Earth, Google Maps, and Google Maps for mobile. A KML file is processed in much the same way that HTML (and XML) files are processed by web browsers. Like HTML, KML has a tag-based structure with names and attributes used for specific display purposes. Thus, Google Earth and Maps act as browsers for KML files.
@@ -37,14 +37,23 @@ Full specifications available at: http://www.opengeospatial.org/standards/kml</F
         <Identifier>fmt/244</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>141</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Google</OrganisationName>
+        <DeveloperCompoundName>Google</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>141</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Google</OrganisationName>
+        <SupportCompoundName>Google</SupportCompoundName>
+      </Support>
       <ExternalSignature>
         <ExternalSignatureID>965</ExternalSignatureID>
         <Signature>kml</Signature>
-        <SignatureType>File extension</SignatureType>
-      </ExternalSignature>
-      <ExternalSignature>
-        <ExternalSignatureID>966</ExternalSignatureID>
-        <Signature>kmz</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <InternalSignature>
@@ -78,6 +87,13 @@ Full specifications available at: http://www.opengeospatial.org/standards/kml</F
           <ByteSequenceValue>3C2F6B6D6C3E</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Equivalent to</RelationshipType>
+        <RelatedFormatID>1523</RelatedFormatID>
+        <RelatedFormatName>Keyhole Markup Language (Container)</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>638</RelatedFormatID>

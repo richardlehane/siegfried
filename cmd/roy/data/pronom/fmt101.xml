@@ -154,7 +154,7 @@
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>975</RelatedFormatID>
-        <RelatedFormatName>Keyhole Markup Language</RelatedFormatName>
+        <RelatedFormatName>Keyhole Markup Language (XML)</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>
@@ -246,6 +246,13 @@
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1462</RelatedFormatID>
         <RelatedFormatName>Industry Foundation Classes XML</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1496</RelatedFormatID>
+        <RelatedFormatName>Additive Manufacturing File Format</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

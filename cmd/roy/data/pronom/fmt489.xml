@@ -35,6 +35,10 @@
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
+        <Identifier>application/pdf</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
         <Identifier>fmt/489</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>

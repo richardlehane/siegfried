@@ -4,8 +4,7 @@
     <FileFormat>
       <FormatID>1458</FormatID>
       <FormatName>Industry Foundation Classes</FormatName>
-      <FormatVersion>
-      </FormatVersion>
+      <FormatVersion>2x2</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -46,9 +45,8 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>991</SignatureID>
-        <SignatureName>Industry Foundation Classes</SignatureName>
-        <SignatureNote>BOF: 
-ISO-10303-21;..HEADER;</SignatureNote>
+        <SignatureName>Industry Foundation Classes 2x2</SignatureName>
+        <SignatureNote>BOF: ISO-10303-21{0-4096}FILE_SCHEMA{0-1}({0-1}('IFC2X2</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1224</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -60,9 +58,16 @@ ISO-10303-21;..HEADER;</SignatureNote>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>49534F2D31303330332D32313B0D0A4845414445523B</ByteSequenceValue>
+          <ByteSequenceValue>49534F2D31303330332D3231{0-4096}46494C455F534348454D41{0-1}28{0-1}2827494643325832</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>1497</RelatedFormatID>
+        <RelatedFormatName>Standard for the Exchange of Product model data</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

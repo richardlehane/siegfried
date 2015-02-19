@@ -149,6 +149,13 @@
       </InternalSignature>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>927</RelatedFormatID>
+        <RelatedFormatName>Nikon Digital SLR Camera Raw Image File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1223</RelatedFormatID>
         <RelatedFormatName>Digital Negative Format (DNG)</RelatedFormatName>
         <RelatedFormatVersion>1.0</RelatedFormatVersion>

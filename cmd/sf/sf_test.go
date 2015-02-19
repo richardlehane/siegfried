@@ -25,7 +25,7 @@ func setup() error {
 	return err
 }
 
-func identify(s *siegfried.Siegfried, p string) ([]string, error) {
+func identifyT(s *siegfried.Siegfried, p string) ([]string, error) {
 	ids := make([]string, 0)
 	file, err := os.Open(p)
 	if err != nil {
@@ -45,7 +45,7 @@ func identify(s *siegfried.Siegfried, p string) ([]string, error) {
 	return ids, nil
 }
 
-func multiIdentify(s *siegfried.Siegfried, r string) ([][]string, error) {
+func multiIdentifyT(s *siegfried.Siegfried, r string) ([][]string, error) {
 	set := make([][]string, 0)
 	wf := func(path string, info os.FileInfo, err error) error {
 		if info.IsDir() {
@@ -54,7 +54,7 @@ func multiIdentify(s *siegfried.Siegfried, r string) ([][]string, error) {
 			}
 			return nil
 		}
-		ids, err := identify(s, path)
+		ids, err := identifyT(s, path)
 		if err != nil {
 			return err
 		}
@@ -127,7 +127,7 @@ func TestSuite(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	matches, err := multiIdentify(s, suite)
+	matches, err := multiIdentifyT(s, suite)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -158,7 +158,7 @@ func BenchmarkNew(bench *testing.B) {
 func benchidentify(ext string) {
 	file := filepath.Join(*testdata, "benchmark", "Benchmark")
 	file += "." + ext
-	identify(s, file)
+	identifyT(s, file)
 }
 
 func BenchmarkACCDB(bench *testing.B) {
@@ -248,6 +248,6 @@ func BenchmarkXML(bench *testing.B) {
 func BenchmarkMulti(bench *testing.B) {
 	dir := filepath.Join(*testdata, "benchmark")
 	for i := 0; i < bench.N; i++ {
-		multiIdentify(s, dir)
+		multiIdentifyT(s, dir)
 	}
 }

@@ -69,7 +69,7 @@
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>656</RelatedFormatID>
         <RelatedFormatName>Broadcast WAVE</RelatedFormatName>
-        <RelatedFormatVersion>1</RelatedFormatVersion>
+        <RelatedFormatVersion>1 Generic</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
@@ -81,7 +81,7 @@
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>735</RelatedFormatID>
         <RelatedFormatName>Broadcast WAVE</RelatedFormatName>
-        <RelatedFormatVersion>0</RelatedFormatVersion>
+        <RelatedFormatVersion>0 Generic</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
@@ -120,7 +120,61 @@
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1314</RelatedFormatID>
         <RelatedFormatName>Broadcast WAVE</RelatedFormatName>
-        <RelatedFormatVersion>2</RelatedFormatVersion>
+        <RelatedFormatVersion>2 Generic</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1502</RelatedFormatID>
+        <RelatedFormatName>Broadcast WAVE</RelatedFormatName>
+        <RelatedFormatVersion>0 PCM Encoding</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1503</RelatedFormatID>
+        <RelatedFormatName>Broadcast WAVE</RelatedFormatName>
+        <RelatedFormatVersion>1 PCM Encoding</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1504</RelatedFormatID>
+        <RelatedFormatName>Broadcast WAVE</RelatedFormatName>
+        <RelatedFormatVersion>2 PCM Encoding</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1505</RelatedFormatID>
+        <RelatedFormatName>Broadcast WAVE</RelatedFormatName>
+        <RelatedFormatVersion>0 MPEG Encoding</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1506</RelatedFormatID>
+        <RelatedFormatName>Broadcast WAVE</RelatedFormatName>
+        <RelatedFormatVersion>1 MPEG Encoding</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1507</RelatedFormatID>
+        <RelatedFormatName>Broadcast WAVE</RelatedFormatName>
+        <RelatedFormatVersion>2 MPEG Encoding</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1508</RelatedFormatID>
+        <RelatedFormatName>Broadcast WAVE</RelatedFormatName>
+        <RelatedFormatVersion>0 WAVEFORMATEXTENSIBLE Encoding</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1509</RelatedFormatID>
+        <RelatedFormatName>Broadcast WAVE</RelatedFormatName>
+        <RelatedFormatVersion>1 WAVEFORMATEXTENSIBLE Encoding</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1510</RelatedFormatID>
+        <RelatedFormatName>Broadcast WAVE</RelatedFormatName>
+        <RelatedFormatVersion>2 WAVEFORMATEXTENSIBLE Encoding</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Is previous version of</RelationshipType>

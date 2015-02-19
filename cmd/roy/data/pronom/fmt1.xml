@@ -4,12 +4,12 @@
     <FileFormat>
       <FormatID>735</FormatID>
       <FormatName>Broadcast WAVE</FormatName>
-      <FormatVersion>0</FormatVersion>
-      <FormatAliases>BWAVE (0)</FormatAliases>
+      <FormatVersion>0 Generic</FormatVersion>
+      <FormatAliases>BWAVE (0), BWF (0)</FormatAliases>
       <FormatFamilies>WAVE</FormatFamilies>
       <FormatTypes>Audio</FormatTypes>
       <FormatDisclosure>Full</FormatDisclosure>
-      <FormatDescription>Broadcast WAVE is a chunk-based audio format developed by the European Broadcasting Union, and based on the Microsoft WAVE format, which is in turn based on the generic Resource Interchange File Format (RIFF) specification developed by Microsoft and IBM. Structurally, a BWAVE file is composed of a number of chunks, each comprising a four character code chunk identifier, the chunk size, and the chunk data. It comprises a RIFF header with a WAVE data type identifier, followed by a series of chunks. Every file must include a Broadcast Audio Extension chunk, containing metadata required for exchange of information between broadcasters, a Format chunk, which describes the format of the audio data, and a Data chunk, containing the audio data itself. BWAVE files which contain MPEG-encoded audio data must also include a Fact chunk, containing file-dependent information about the audio data, and an MPEG Audio Extension chunk, containing extra information required to describe the MPEG encoding. </FormatDescription>
+      <FormatDescription>Broadcast WAVE is a chunk-based audio format developed by the European Broadcasting Union, and based on the Microsoft WAVE format, which is in turn based on the generic Resource Interchange File Format (RIFF) specification developed by Microsoft and IBM. Structurally, a BWAVE file is composed of a number of chunks, each comprising a four character code chunk identifier, the chunk size, and the chunk data. It comprises a RIFF header with a WAVE data type identifier, followed by a series of chunks. Every file must include a Broadcast Audio Extension chunk, containing metadata required for exchange of information between broadcasters, a Format chunk, which describes the format of the audio data, and a Data chunk, containing the audio data itself. BWAVE files which contain MPEG-encoded audio data must also include a Fact chunk, containing file-dependent information about the audio data, and an MPEG Audio Extension chunk, containing extra information required to describe the MPEG encoding.  A BWAVE identified as generic by DROID likely uses an encoding format unknown to PRONOM, or perhaps a structural difference, and users are encouraged to let the PRONOM team know should this occur.</FormatDescription>
       <BinaryFileFormat>Binary</BinaryFileFormat>
       <ByteOrders>Little-endian (Intel)</ByteOrders>
       <ReleaseDate>01 Jan 1997</ReleaseDate>
@@ -232,49 +232,11 @@
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <InternalSignature>
-        <SignatureID>129</SignatureID>
-        <SignatureName>BWAVE PCM 0</SignatureName>
-        <SignatureNote>RIFF header, WAVE ID, BEXT chunk (Version=0), Format chunk and Data chunk</SignatureNote>
+        <SignatureID>1032</SignatureID>
+        <SignatureName>BWAVE Generic 0</SignatureName>
+        <SignatureNote>RIFF header, WAVE ID, BEXT chunk (Version=0)</SignatureNote>
         <ByteSequence>
-          <ByteSequenceID>68</ByteSequenceID>
-          <PositionType>Absolute from BOF</PositionType>
-          <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
-          <IndirectOffsetLocation>
-          </IndirectOffsetLocation>
-          <IndirectOffsetLength>
-          </IndirectOffsetLength>
-          <Endianness>
-          </Endianness>
-          <ByteSequenceValue>52494646{4}57415645*62657874{350}0000{254-*}666D7420100000000100{14-*}64617461</ByteSequenceValue>
-        </ByteSequence>
-      </InternalSignature>
-      <InternalSignature>
-        <SignatureID>159</SignatureID>
-        <SignatureName>BWAVE MPEG 0</SignatureName>
-        <SignatureNote>RIFF header, WAVE ID, BEXT chunk (Version=0), Format chunk, Fact chunk, MEXT chunk and Data chunk</SignatureNote>
-        <ByteSequence>
-          <ByteSequenceID>110</ByteSequenceID>
-          <PositionType>Absolute from BOF</PositionType>
-          <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
-          <IndirectOffsetLocation>
-          </IndirectOffsetLocation>
-          <IndirectOffsetLength>
-          </IndirectOffsetLength>
-          <Endianness>
-          </Endianness>
-          <ByteSequenceValue>52494646{4}57415645*62657874{350}0000{254-*}666D7420280000005000{38}6661637404000000{4}6D6578740C000000{12}64617461</ByteSequenceValue>
-        </ByteSequence>
-      </InternalSignature>
-      <InternalSignature>
-        <SignatureID>826</SignatureID>
-        <SignatureName>BWAVE PCM 0 variant</SignatureName>
-        <SignatureNote>RIFF header, WAVE ID, Format chunk, BEXT chunk (Version=0)</SignatureNote>
-        <ByteSequence>
-          <ByteSequenceID>1031</ByteSequenceID>
+          <ByteSequenceID>1273</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
           <MaxOffset>0</MaxOffset>
@@ -284,45 +246,27 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>52494646{4}57415645666D7420100000000100*62657874{350}0000</ByteSequenceValue>
+          <ByteSequenceValue>52494646{4}57415645*62657874{350}0000</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
-      <InternalSignature>
-        <SignatureID>827</SignatureID>
-        <SignatureName>BWAVE MPEG 0 variant</SignatureName>
-        <SignatureNote>RIFF header, WAVE ID, Format chunk, BEXT chunk (Version=0)</SignatureNote>
-        <ByteSequence>
-          <ByteSequenceID>1032</ByteSequenceID>
-          <PositionType>Absolute from BOF</PositionType>
-          <Offset>0</Offset>
-          <MaxOffset>0</MaxOffset>
-          <IndirectOffsetLocation>
-          </IndirectOffsetLocation>
-          <IndirectOffsetLength>
-          </IndirectOffsetLength>
-          <Endianness>
-          </Endianness>
-          <ByteSequenceValue>52494646{4}57415645666D7420280000005000{38}6661637404000000{4}6D6578740C000000{12}*62657874{350}0000</ByteSequenceValue>
-        </ByteSequence>
-      </InternalSignature>
-      <InternalSignature>
-        <SignatureID>1006</SignatureID>
-        <SignatureName>BWAVE WAVEFORMATEXTENSIBLE 0 variant</SignatureName>
-        <SignatureNote>RIFF header, WAVE ID, Format chunk (WAVEFORMATEXTENSIBLE), BEXT chunk (Version=0)</SignatureNote>
-        <ByteSequence>
-          <ByteSequenceID>1240</ByteSequenceID>
-          <PositionType>Absolute from BOF</PositionType>
-          <Offset>0</Offset>
-          <MaxOffset>0</MaxOffset>
-          <IndirectOffsetLocation>
-          </IndirectOffsetLocation>
-          <IndirectOffsetLength>
-          </IndirectOffsetLength>
-          <Endianness>
-          </Endianness>
-          <ByteSequenceValue>52494646{4}57415645666D7420{4}FEFF{38-1000}64617461*62657874{350}0000</ByteSequenceValue>
-        </ByteSequence>
-      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1502</RelatedFormatID>
+        <RelatedFormatName>Broadcast WAVE</RelatedFormatName>
+        <RelatedFormatVersion>0 PCM Encoding</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1505</RelatedFormatID>
+        <RelatedFormatName>Broadcast WAVE</RelatedFormatName>
+        <RelatedFormatVersion>0 MPEG Encoding</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1508</RelatedFormatID>
+        <RelatedFormatName>Broadcast WAVE</RelatedFormatName>
+        <RelatedFormatVersion>0 WAVEFORMATEXTENSIBLE Encoding</RelatedFormatVersion>
+      </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>654</RelatedFormatID>
@@ -348,7 +292,7 @@
         <RelationshipType>Is previous version of</RelationshipType>
         <RelatedFormatID>656</RelatedFormatID>
         <RelatedFormatName>Broadcast WAVE</RelatedFormatName>
-        <RelatedFormatVersion>1</RelatedFormatVersion>
+        <RelatedFormatVersion>1 Generic</RelatedFormatVersion>
       </RelatedFormat>
       <CompressionType>
         <CompressionID>3</CompressionID>

@@ -122,9 +122,9 @@ type cacheItem struct {
 	first      strike
 
 	mu         *sync.Mutex
-	satisfying bool    // state when a cacheItem is currently trying a strike - only the main thread checks/ changes this so no need to mutex
-	successive []int64 // just cache the offsets of successive matches
-	strikeIdx  int     // -1 signals that the strike is in the first position
+	satisfying bool       // state when a cacheItem is currently trying a strike - only the main thread checks/ changes this so no need to mutex
+	successive [][2]int64 // just cache the offsets of successive matches
+	strikeIdx  int        // -1 signals that the strike is in the first position
 }
 
 func (s *scorer) newCacheItem(st strike) *cacheItem {
@@ -142,11 +142,11 @@ func (c *cacheItem) push(st strike) bool {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	if c.successive == nil {
-		c.successive = make([]int64, 1, 10)
-		c.successive[0] = st.offset
+		c.successive = make([][2]int64, 1, 10)
+		c.successive[0][0], c.successive[0][1] = st.offset, int64(st.length)
 		return c.satisfying
 	}
-	c.successive = append(c.successive, st.offset)
+	c.successive = append(c.successive, [2]int64{st.offset, int64(st.length)})
 	return c.satisfying
 }
 
@@ -160,7 +160,7 @@ func (c *cacheItem) pop() (strike, bool) {
 			c.satisfying = false // mark that no longer in a satisfying state - side effect ok as only satisfy loop calls pop
 			return ret, false
 		}
-		ret.offset = c.successive[c.strikeIdx]
+		ret.offset, ret.length = c.successive[c.strikeIdx][0], int(c.successive[c.strikeIdx][1])
 	}
 	c.strikeIdx++
 	return ret, true
