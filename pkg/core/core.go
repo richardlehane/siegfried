@@ -26,7 +26,7 @@ import (
 // Identifier describes different signature formats. E.g. there is a PRONOM identifier that implements the TNA's format.
 type Identifier interface {
 	Recorder() Recorder
-	Yaml() string // Describe yourself, identifier
+	Describe() [2]string
 	Save(io.Writer) (int, error)
 	String() string
 	Recognise(MatcherType, int) (bool, string) // do you recognise this index

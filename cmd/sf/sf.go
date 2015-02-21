@@ -15,16 +15,12 @@
 package main
 
 import (
-	"bufio"
-	"encoding/csv"
 	"flag"
 	"fmt"
 	"log"
 	"os"
 	"path/filepath"
 	"runtime"
-	"strconv"
-	"strings"
 	"sync"
 
 	"github.com/richardlehane/siegfried"
@@ -44,17 +40,12 @@ var (
 	debug   = flag.Bool("debug", false, "scan in debug mode")
 	nr      = flag.Bool("nr", false, "prevent automatic directory recursion")
 	csvo    = flag.Bool("csv", false, "CSV output format")
+	jsono   = flag.Bool("json", false, "JSON output format")
 	sig     = flag.String("sig", config.SignatureBase(), "set the signature file")
 	home    = flag.String("home", config.Home(), "override the default home directory")
 	serve   = flag.String("serve", "false", "not yet implemented - coming with v1")
 	multi   = flag.Int("multi", 1, "set number of file ID processes")
 	profile = flag.Bool("profile", false, "run a profile on localhost:6060")
-)
-
-var (
-	csvWriter  *csv.Writer
-	yamlWriter *bufio.Writer
-	replacer   = strings.NewReplacer("'", "''")
 )
 
 type res struct {
@@ -64,56 +55,22 @@ type res struct {
 	err  error
 }
 
-func printer(resc chan chan res, wg *sync.WaitGroup) {
-	var csvRecord []string
-	if *csvo {
-		csvRecord = make([]string, 10)
-	}
+func printer(w writer, resc chan chan res, wg *sync.WaitGroup) {
 	for rr := range resc {
 		r := <-rr
-		if !config.Debug() && !*csvo {
-			yamlWriter.WriteString(fileString(r.path, r.sz, r.err))
-		}
-		if r.c == nil {
-			if *csvo {
-				var errStr string
-				if r.err != nil {
-					errStr = r.err.Error()
-				}
-				empty := make([]string, 7)
-				csvRecord[0], csvRecord[1], csvRecord[2] = r.path, strconv.Itoa(int(r.sz)), errStr
-				copy(csvRecord[3:], empty)
-				csvWriter.Write(csvRecord)
-			}
-			continue
-		}
-		for _, v := range r.c {
-			switch {
-			case config.Debug():
-			case *csvo:
-				var errStr string
-				if r.err != nil {
-					errStr = r.err.Error()
-				}
-				csvRecord[0], csvRecord[1], csvRecord[2] = r.path, strconv.Itoa(int(r.sz)), errStr
-				copy(csvRecord[3:], v.Csv())
-				csvWriter.Write(csvRecord)
-			default:
-				yamlWriter.WriteString(v.Yaml())
-			}
-		}
+		w.writeFile(r.path, r.sz, r.err, &idSlice{0, r.c})
 		wg.Done()
 	}
 }
 
-func multiIdentifyP(s *siegfried.Siegfried, r string) {
+func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) {
 	wg := &sync.WaitGroup{}
 	runtime.GOMAXPROCS(PROCS)
 	resc := make(chan chan res, *multi)
-	go printer(resc, wg)
+	go printer(w, resc, wg)
 	wf := func(path string, info os.FileInfo, err error) error {
 		if info.IsDir() {
-			if *nr && path != r {
+			if norecurse && path != r {
 				return filepath.SkipDir
 			}
 			return nil
@@ -150,72 +107,33 @@ func multiIdentifyP(s *siegfried.Siegfried, r string) {
 	close(resc)
 }
 
-func multiIdentifyS(s *siegfried.Siegfried, r string) error {
-	var csvRecord []string
-	if *csvo {
-		csvRecord = make([]string, 10)
-	}
+func multiIdentifyS(w writer, s *siegfried.Siegfried, r string, norecurse bool) error {
 	wf := func(path string, info os.FileInfo, err error) error {
 		if info.IsDir() {
-			if *nr && path != r {
+			if norecurse && path != r {
 				return filepath.SkipDir
 			}
 			return nil
 		}
-		file, err := os.Open(path)
-		if err != nil {
-			if !*csvo {
-				yamlWriter.WriteString(fileString(path, info.Size(), fmt.Errorf("failed to open %s, got: %v", path, err)))
-				return nil
-			}
-			empty := make([]string, 7)
-			csvRecord[0], csvRecord[1], csvRecord[2] = path, strconv.Itoa(int(info.Size())), fmt.Sprintf("failed to open %s, got: %v", path, err)
-			copy(csvRecord[3:], empty)
-			csvWriter.Write(csvRecord)
-			return nil
-		}
-		c, err := s.Identify(path, file)
-		if c == nil {
-			file.Close()
-			if !*csvo {
-				yamlWriter.WriteString(fileString(path, info.Size(), fmt.Errorf("failed to identify %s, got: %v", path, err)))
-				return nil
-			}
-			empty := make([]string, 7)
-			csvRecord[0], csvRecord[1], csvRecord[2] = path, strconv.Itoa(int(info.Size())), fmt.Sprintf("failed to identify %s, got: %v", path, err)
-			copy(csvRecord[3:], empty)
-			csvWriter.Write(csvRecord)
-			return nil
-		}
-		if !config.Debug() && !*csvo {
-			yamlWriter.WriteString(fileString(path, info.Size(), err))
-		}
-		for i := range c {
-			switch {
-			case config.Debug():
-			case *csvo:
-				var errStr string
-				if err != nil {
-					errStr = err.Error()
-				}
-				csvRecord[0], csvRecord[1], csvRecord[2] = path, strconv.Itoa(int(info.Size())), errStr
-				copy(csvRecord[3:], i.Csv())
-				csvWriter.Write(csvRecord)
-			default:
-				yamlWriter.WriteString(i.Yaml())
-			}
-		}
-		return file.Close() // this op is unreasonably slow on OSX
+		identifyFile(w, s, path, info.Size())
+		return nil
 	}
 	return filepath.Walk(r, wf)
 }
 
-func fileString(name string, sz int64, err error) string {
-	var errStr string
+func identifyFile(w writer, s *siegfried.Siegfried, path string, sz int64) {
+	file, err := os.Open(path)
 	if err != nil {
-		errStr = fmt.Sprintf("\"%s\"", err.Error())
+		w.writeFile(path, sz, fmt.Errorf("failed to open %s, got: %v", path, err), nil)
+		return
 	}
-	return fmt.Sprintf("---\nfilename : '%s'\nfilesize : %d\nerrors   : %s\nmatches  :\n", replacer.Replace(name), sz, errStr)
+	defer file.Close()
+	c, err := s.Identify(path, file)
+	if c == nil {
+		w.writeFile(path, sz, fmt.Errorf("failed to identify %s, got: %v", path, err), nil)
+		return
+	}
+	w.writeFile(path, sz, err, idChan(c))
 }
 
 func main() {
@@ -225,12 +143,6 @@ func main() {
 		go func() {
 			log.Println(http.ListenAndServe("localhost:6060", nil))
 		}()
-	}
-	if *csvo {
-		csvWriter = csv.NewWriter(os.Stdout)
-		csvWriter.Write([]string{"filename", "filesize", "errors", "identifier", "id", "format name", "format version", "mimetype", "basis", "warning"})
-	} else {
-		yamlWriter = bufio.NewWriter(os.Stdout)
 	}
 
 	if *home != config.Home() {
@@ -247,10 +159,6 @@ func main() {
 		return
 	}
 
-	if *debug {
-		config.SetDebug()
-	}
-
 	if *update {
 		msg, err := updateSigs()
 		if err != nil {
@@ -261,25 +169,22 @@ func main() {
 	}
 
 	if *serve != "false" {
-		/*s, err := siegfried.Load(config.Signature())
+		s, err := siegfried.Load(config.Signature())
 		if err != nil {
 			log.Fatalf("Error: error loading signature file, got: %v", err)
 
 		}
-		//server(*serve, s)
-		*/return
+		log.Printf("Starting server at %s. Use CTRL-C to quit.\n", *serve)
+		listen(*serve, s)
+		return
 	}
 
 	if flag.NArg() != 1 {
-		log.Fatal("Error: expecting a single file or directory argument")
+		log.Fatalln("Error: expecting a single file or directory argument")
 	}
 
 	var err error
-	file, err := os.Open(flag.Arg(0))
-	if err != nil {
-		log.Fatalf("Error: error opening %v, got: %v", flag.Arg(0), err)
-	}
-	info, err := file.Stat()
+	info, err := os.Stat(flag.Arg(0))
 	if err != nil {
 		log.Fatalf("Error: error getting info for %v, got: %v", flag.Arg(0), err)
 	}
@@ -288,62 +193,39 @@ func main() {
 		log.Fatalf("Error: error loading signature file, got: %v", err)
 
 	}
+
+	var w writer
+	switch {
+	case *debug:
+		config.SetDebug()
+		w = debugWriter{}
+	case *csvo:
+		w = newCsv(os.Stdout)
+	case *jsono:
+		w = newJson(os.Stdout)
+	default:
+		w = newYaml(os.Stdout)
+	}
+
 	if info.IsDir() {
-		file.Close()
 		if config.Debug() {
 			log.Fatalln("Error: when scanning in debug mode, give a file rather than a directory argument")
 		}
-		if !*csvo {
-			yamlWriter.WriteString(s.Yaml())
-		}
+		w.writeHead(s)
 		if *multi > 16 {
 			*multi = 16
 		}
 		if *multi > 1 {
-			multiIdentifyP(s, flag.Arg(0))
+			multiIdentifyP(w, s, flag.Arg(0), *nr)
 		} else {
-			multiIdentifyS(s, flag.Arg(0))
+			multiIdentifyS(w, s, flag.Arg(0), *nr)
 		}
-		if *csvo {
-			csvWriter.Flush()
-		} else {
-			yamlWriter.Flush()
-		}
+		w.writeTail()
 		os.Exit(0)
 	}
-	c, err := s.Identify(flag.Arg(0), file)
-	if c == nil {
-		file.Close()
-		log.Fatal(err)
-	}
-	if !config.Debug() && !*csvo {
-		fmt.Print(s.Yaml())
-		fmt.Print(fileString(flag.Arg(0), info.Size(), err))
-	}
-	var csvRecord []string
-	if *csvo {
-		csvRecord = make([]string, 10)
-	}
-	for i := range c {
-		switch {
-		case config.Debug():
-		case *csvo:
-			var errStr string
-			if err != nil {
-				errStr = err.Error()
-			}
-			csvRecord[0], csvRecord[1], csvRecord[2] = flag.Arg(0), strconv.Itoa(int(info.Size())), errStr
-			copy(csvRecord[3:], i.Csv())
-			csvWriter.Write(csvRecord)
-		default:
-			fmt.Print(i.Yaml())
-		}
-	}
 
-	file.Close()
-	if *csvo {
-		csvWriter.Flush()
-	}
-
+	w.writeHead(s)
+	identifyFile(w, s, flag.Arg(0), info.Size())
+	w.writeTail()
 	os.Exit(0)
 }

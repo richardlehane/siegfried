@@ -17,7 +17,6 @@ package pronom
 import (
 	"bytes"
 	"encoding/gob"
-	"encoding/json"
 	"fmt"
 	"io"
 	"sort"
@@ -64,9 +63,8 @@ func (i *Identifier) Add(m core.Matcher) error {
 	return i.p.add(m)
 }
 
-func (i *Identifier) Yaml() string {
-	return fmt.Sprintf("  - name    : %v\n    details : %v\n",
-		i.Name, quoteText(i.Details))
+func (i *Identifier) Describe() [2]string {
+	return [2]string{i.Name, i.Details}
 }
 
 func (i *Identifier) String() string {
@@ -291,33 +289,22 @@ func (id Identification) Yaml() string {
 // JSON output
 
 type jsonid struct {
-	Puid    string `json:"puid"`
-	Name    string `json:"name"`
-	Version string `json:"version"`
-	Mime    string `json:"mime"`
-	Basis   string `json:"basis"`
-	Warning string `json:"warning"`
+	Identifier string `json:"id"`
+	Puid       string `json:"puid"`
+	Name       string `json:"format"`
+	Version    string `json:"version"`
+	Mime       string `json:"mime"`
+	Basis      string `json:"basis"`
+	Warning    string `json:"warning"`
 }
-
-const jsonErr = `{
-		"puid": "",
-		"name": "",
-		"version": "",
-		"mime": "",
-		"basis": "",
-		"warning": "json encoding error"
-	}`
 
 func (id Identification) Json() string {
 	var basis string
 	if len(id.Basis) > 0 {
 		basis = strings.Join(id.Basis, "; ")
 	}
-	b, err := json.Marshal(jsonid{id.Puid, id.Name, id.Version, id.Mime, basis, id.Warning})
-	if err != nil {
-		return jsonErr
-	}
-	return string(b)
+	return fmt.Sprintf("{\"id:\":\"%s\",\"puid\":\"%s\",\"format\":\"%s\",\"version\":\"%s\",\"mime\":\"%s\",\"basis\":\"%s\",\"warning\":\"%s\"}",
+		id.Identifier, id.Puid, id.Name, id.Version, id.Mime, basis, id.Warning)
 }
 
 func (id Identification) Csv() []string {
