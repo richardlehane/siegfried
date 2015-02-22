@@ -27,8 +27,9 @@ import (
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 
-	"net/http"
-	_ "net/http/pprof"
+	// Uncomment to build with profiler
+	//"net/http"
+	//_ "net/http/pprof"
 )
 
 const PROCS = -1
@@ -45,7 +46,7 @@ var (
 	home    = flag.String("home", config.Home(), "override the default home directory")
 	serve   = flag.String("serve", "false", "not yet implemented - coming with v1")
 	multi   = flag.Int("multi", 1, "set number of file ID processes")
-	profile = flag.Bool("profile", false, "run a profile on localhost:6060")
+	//profile = flag.Bool("profile", false, "run a profile on localhost:6060")
 )
 
 type res struct {
@@ -139,11 +140,13 @@ func identifyFile(w writer, s *siegfried.Siegfried, path string, sz int64) {
 func main() {
 
 	flag.Parse()
-	if *profile {
-		go func() {
-			log.Println(http.ListenAndServe("localhost:6060", nil))
-		}()
-	}
+	/*
+		if *profile {
+			go func() {
+				log.Println(http.ListenAndServe("localhost:6060", nil))
+			}()
+		}
+	*/
 
 	if *home != config.Home() {
 		config.SetHome(*home)

@@ -37,7 +37,7 @@ var siegfried = struct {
 	// DEBUG mode
 	debug bool
 }{
-	version:         [3]int{0, 8, 1},
+	version:         [3]int{0, 8, 2},
 	signature:       "pronom.gob",
 	distance:        8192,
 	rng:             512,

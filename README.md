@@ -10,7 +10,7 @@ Key features are:
 
 ## Version
 
-0.8.1
+0.8.2
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried/pkg/core?status.svg)](https://godoc.org/github.com/richardlehane/siegfried/pkg/core)
 
@@ -24,11 +24,13 @@ Key features are:
 #### Options
 
     sf -csv file.ext                           // Output CSV rather than YAML
+    sf -json file.ext                          // Output JSON rather than YAML
     sf -nr DIR                                 // Don't scan subdirectories
     sf -sig custom.gob file.ext                // Use a custom signature file
     sf -home c:\junk -sig custom.gob file.ext  // Use a custom home directory
     sf -debug file.ext                         // Scan in debug mode
     sf -version                                // Display version information
+    sf -serve hostname:port                    // Server mode
 
 
 ![Usage](usage.gif)
@@ -64,12 +66,15 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 ## Roadmap
 
-### Road to 1.0 (early 2015)
+### Road to 1.0 (March 2015)
 
 - additional documentation & tests
-- server mode
 
 ## Recent Changes
+### Version 0.8.2 (22/2/2015)
+- json output
+- server mode
+
 ### Version 0.8.1 (1/2/2015)
 - bugfix: single quote YAML output
 
@@ -83,18 +88,6 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 ### Version 0.7.0 (24/11/2014)
 - change to signature file format
-
-### Version 0.6.1 (21/11/2014)
-- roy (r2d2 rename) signature customisation
-- parse Droid signature (not just PRONOM reports)
-- support extension signatures
-
-### Version 0.6.0 (11/11/2014)
-- support multiple identifiers
-- config package
-- mscfb bugfixes
-- license info in srcs (no change to license; this allows for attributing authorship for non-Richard contribs)
-- default home change to "$HOME/siegfried" (no longer ".siegfried")
 
 [Full change history](https://github.com/richardlehane/siegfried/wiki/Change-history)
 

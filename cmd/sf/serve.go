@@ -14,14 +14,6 @@
 
 package main
 
-/*
-simple HTTP protocol a la webdis. Single /identify route. Can do GET /identify/base64filename or POST /identify with file=file.
-Params ?recurse=false&format=csv|yaml|json
-/version
-/identify/NAME?nr& GET
-/identify/NAME?nr PUT file=body
-*/
-
 import (
 	"encoding/base64"
 	"fmt"
@@ -137,16 +129,25 @@ func identify(s *siegfried.Siegfried) func(w http.ResponseWriter, r *http.Reques
 	}
 }
 
-const welcome = `
+const usage = `
 	<html>
 		<head>
 			<title>Siegfried server</title>
 		</head>
 		<body>
 			<h1>Siegfried server usage</h1>
+			<p>The siegfried server has two modes of identification: GET request, where a file or directory path is given in the URL and the server retrieves the file(s); or POST request, where the file is sent over the network as form-data.</p> 
+			<h2>GET request</h2>
 			<p><strong>GET</strong> <i>/identify/[<a href="https://tools.ietf.org/html/rfc4648#section-5">URL-safe base64 encoded</a> file name or folder name](?nr=true&format=csv|yaml|json)</i></p>
-			<p><strong>POST</strong> <i>/identify(?format=csv|yaml|json)</i></p>
-			<p>If using POST, attach a file as form-data with the key "file". E.g. <i>curl localhost:8080/identify -F file=@myfile.doc</i></p>
+			<p>E.g. http://localhost:8080/identify/YzpcTXkgRG9jdW1lbnRzXGhlbGxvX3dvcmxkLmRvYw==</p>
+			<h3>Parameters</h3>
+			<p><i>nr</i> (optional) - this parameter can be used to stop sub-directory recursion when a directory path is given.</p>
+			<p><i>format</i> (optional) - this parameter can be used to select the output format (csv, yaml, json). Default is json. Alternatively, HTTP content negotiation can be used.</p>
+			<h2>POST request</h2>
+			<p><strong>POST</strong> <i>/identify(?format=csv|yaml|json)</i> Attach a file as form-data with the key "file".</p>
+			<p>E.g. curl localhost:8080/identify -F file=@myfile.doc</i>
+			<h3>Parameters</h3>
+			<p><i>format</i> (optional) - this parameter can be used to select the output format (csv, yaml, json). Default is json. Alternatively, HTTP content negotiation can be used.</p>
 		</body>
 	</html>
 `
@@ -157,7 +158,7 @@ func handleMain(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Content-Type", "text/html")
-	io.WriteString(w, welcome)
+	io.WriteString(w, usage)
 }
 
 func listen(port string, s *siegfried.Siegfried) {
