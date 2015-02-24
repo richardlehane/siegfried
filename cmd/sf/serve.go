@@ -139,13 +139,13 @@ const usage = `
 			<p>The siegfried server has two modes of identification: GET request, where a file or directory path is given in the URL and the server retrieves the file(s); or POST request, where the file is sent over the network as form-data.</p> 
 			<h2>GET request</h2>
 			<p><strong>GET</strong> <i>/identify/[<a href="https://tools.ietf.org/html/rfc4648#section-5">URL-safe base64 encoded</a> file name or folder name](?nr=true&format=csv|yaml|json)</i></p>
-			<p>E.g. http://localhost:8080/identify/YzpcTXkgRG9jdW1lbnRzXGhlbGxvX3dvcmxkLmRvYw==</p>
+			<p>E.g. http://localhost:5138/identify/YzpcTXkgRG9jdW1lbnRzXGhlbGxvX3dvcmxkLmRvYw==</p>
 			<h3>Parameters</h3>
 			<p><i>nr</i> (optional) - this parameter can be used to stop sub-directory recursion when a directory path is given.</p>
 			<p><i>format</i> (optional) - this parameter can be used to select the output format (csv, yaml, json). Default is json. Alternatively, HTTP content negotiation can be used.</p>
 			<h2>POST request</h2>
 			<p><strong>POST</strong> <i>/identify(?format=csv|yaml|json)</i> Attach a file as form-data with the key "file".</p>
-			<p>E.g. curl localhost:8080/identify -F file=@myfile.doc</i>
+			<p>E.g. curl localhost:5138/identify -F file=@myfile.doc</i>
 			<h3>Parameters</h3>
 			<p><i>format</i> (optional) - this parameter can be used to select the output format (csv, yaml, json). Default is json. Alternatively, HTTP content negotiation can be used.</p>
 		</body>

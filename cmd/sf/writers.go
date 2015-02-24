@@ -136,7 +136,7 @@ type jsonWriter struct {
 }
 
 func newJson(w io.Writer) *jsonWriter {
-	return &jsonWriter{false, strings.NewReplacer(`"`, `\"`), bufio.NewWriter(w)}
+	return &jsonWriter{false, strings.NewReplacer(`"`, `\"`, `\\`, `\\`, `\`, `\\`), bufio.NewWriter(w)}
 }
 
 func (j *jsonWriter) writeHead(s *siegfried.Siegfried) {

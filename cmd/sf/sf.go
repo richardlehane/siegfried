@@ -44,7 +44,7 @@ var (
 	jsono   = flag.Bool("json", false, "JSON output format")
 	sig     = flag.String("sig", config.SignatureBase(), "set the signature file")
 	home    = flag.String("home", config.Home(), "override the default home directory")
-	serve   = flag.String("serve", "false", "not yet implemented - coming with v1")
+	serve   = flag.String("serve", "false", "start siegfried server e.g. -serve localhost:5138")
 	multi   = flag.Int("multi", 1, "set number of file ID processes")
 	//profile = flag.Bool("profile", false, "run a profile on localhost:6060")
 )
