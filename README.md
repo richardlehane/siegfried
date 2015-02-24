@@ -10,7 +10,7 @@ Key features are:
 
 ## Version
 
-0.8.2
+0.8.3
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried/pkg/core?status.svg)](https://godoc.org/github.com/richardlehane/siegfried/pkg/core)
 
@@ -71,6 +71,9 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 - additional documentation & tests
 
 ## Recent Changes
+### Version 0.8.3 (24/2/2015)
+- json string escaping
+
 ### Version 0.8.2 (22/2/2015)
 - json output
 - server mode
@@ -93,7 +96,7 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 ## Rights
 
-Copyright 2014 Richard Lehane 
+Copyright 2015 Richard Lehane 
 
 Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
 

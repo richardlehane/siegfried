@@ -268,8 +268,6 @@ func (id Identification) String() string {
 	return id.Puid
 }
 
-// YAML output
-
 func quoteText(s string) string {
 	if len(s) == 0 {
 		return s
@@ -284,18 +282,6 @@ func (id Identification) Yaml() string {
 	}
 	return fmt.Sprintf("  - id      : %v\n    puid    : %v\n    format  : %v\n    version : %v\n    mime    : %v\n    basis   : %v\n    warning : %v\n",
 		id.Identifier, id.Puid, quoteText(id.Name), quoteText(id.Version), quoteText(id.Mime), basis, quoteText(id.Warning))
-}
-
-// JSON output
-
-type jsonid struct {
-	Identifier string `json:"id"`
-	Puid       string `json:"puid"`
-	Name       string `json:"format"`
-	Version    string `json:"version"`
-	Mime       string `json:"mime"`
-	Basis      string `json:"basis"`
-	Warning    string `json:"warning"`
 }
 
 func (id Identification) Json() string {
