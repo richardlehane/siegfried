@@ -4,12 +4,12 @@
 
 Key features are:
 
-    - complete implementation of [PRONOM](http://apps.nationalarchives.gov.uk/pronom) (byte and container signatures)
-    - fast matching without limiting the number of bytes scanned
-    - detailed information about the basis for format matches
-    - simple command line interface with a choice of outputs
-    - a built-in server for integrating with workflows and language inter-op
-    - power options including debug mode, signature modification, and multiple identifiers
+  - complete implementation of [PRONOM](http://apps.nationalarchives.gov.uk/pronom) (byte and container signatures)
+  - fast matching without limiting the number of bytes scanned
+  - detailed information about the basis for format matches
+  - simple command line interface with a choice of outputs
+  - a built-in server for integrating with workflows and language inter-op
+  - power options including debug mode, signature modification, and multiple identifiers
 
 ## Version
 
