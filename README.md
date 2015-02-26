@@ -8,8 +8,8 @@ Key features are:
   - fast matching without limiting the number of bytes scanned
   - detailed information about the basis for format matches
   - simple command line interface with a choice of outputs
-  - a built-in server for integrating with workflows and language inter-op
-  - power options including debug mode, signature modification, and multiple identifiers
+  - a [built-in server](https://github.com/richardlehane/siegfried/wiki/Using-the-siegfried-server) for integrating with workflows and language inter-op
+  - power options including [debug mode](https://github.com/richardlehane/siegfried/wiki/Debug-and-Inspect), [signature modification](https://github.com/richardlehane/siegfried/wiki/Building-a-signature-file-with-ROY), and [multiple identifiers](https://github.com/richardlehane/siegfried/wiki/Building-a-signature-file-with-ROY#one-signature-file-multiple-identifiers)
 
 ## Version
 
