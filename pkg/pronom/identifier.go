@@ -289,7 +289,7 @@ func (id Identification) Json() string {
 	if len(id.Basis) > 0 {
 		basis = strings.Join(id.Basis, "; ")
 	}
-	return fmt.Sprintf("{\"id:\":\"%s\",\"puid\":\"%s\",\"format\":\"%s\",\"version\":\"%s\",\"mime\":\"%s\",\"basis\":\"%s\",\"warning\":\"%s\"}",
+	return fmt.Sprintf("{\"id\":\"%s\",\"puid\":\"%s\",\"format\":\"%s\",\"version\":\"%s\",\"mime\":\"%s\",\"basis\":\"%s\",\"warning\":\"%s\"}",
 		id.Identifier, id.Puid, id.Name, id.Version, id.Mime, basis, id.Warning)
 }
 
