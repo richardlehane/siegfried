@@ -18,7 +18,6 @@ package pronom
 import (
 	"bytes"
 	"encoding/gob"
-	"strconv"
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
 )
@@ -86,24 +85,8 @@ func (ns NotSequence) Sequences() []patterns.Sequence {
 	return seqs
 }
 
-func (ns NotSequence) ValidBytes(i int) []byte {
-	if i < len(ns) {
-		b := ns[i]
-		ret := make([]byte, 255)
-		for j := 0; j < 256; j++ {
-			if j < int(b) {
-				ret[j] = byte(j)
-			} else if j > int(b) {
-				ret[j-1] = byte(j)
-			}
-		}
-		return ret
-	}
-	return []byte{}
-}
-
 func (ns NotSequence) String() string {
-	return "ns" + strconv.Itoa(len(ns))
+	return "nseq " + patterns.Stringify(ns)
 }
 
 type Range struct {
@@ -193,22 +176,8 @@ func (r Range) Sequences() []patterns.Sequence {
 	return seqs
 }
 
-func (r Range) ValidBytes(i int) []byte {
-	var f, t byte
-	if i < len(r.From) {
-		f = r.From[i]
-		t = r.To[i]
-		ret := make([]byte, int(t-f+1))
-		for i, _ := range ret {
-			ret[i] = f + byte(i)
-		}
-		return ret
-	}
-	return []byte{}
-}
-
 func (r Range) String() string {
-	return "r" + strconv.Itoa(len(r.From))
+	return "r " + patterns.Stringify(r.From) + " - " + patterns.Stringify(r.To)
 }
 
 // Implemented for completeness, have not seen any of these actually used
@@ -282,24 +251,6 @@ func (nr NotRange) Sequences() []patterns.Sequence {
 	return seqs
 }
 
-func (nr NotRange) ValidBytes(i int) []byte {
-	var f, t byte
-	if i < len(nr.From) {
-		f = nr.From[i]
-		t = nr.To[i]
-		ret := make([]byte, int(255-t+f))
-		for i, _ := range ret {
-			if i < int(f) {
-				ret[i] = byte(i)
-			} else {
-				ret[i] = t - f + byte(i+1)
-			}
-		}
-		return ret
-	}
-	return []byte{}
-}
-
 func (nr NotRange) String() string {
-	return "nr" + strconv.Itoa(len(nr.From))
+	return "nr " + patterns.Stringify(nr.From) + " - " + patterns.Stringify(nr.To)
 }

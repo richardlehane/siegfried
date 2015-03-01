@@ -14,10 +14,7 @@
 
 package patterns
 
-import (
-	"bytes"
-	"strconv"
-)
+import "bytes"
 
 // Helper func to turn patterns into BMH sequences if possible
 func BMH(p Pattern, rev bool) Pattern {
@@ -94,7 +91,7 @@ func (s *BMHSequence) Sequences() []Sequence {
 }
 
 func (s *BMHSequence) String() string {
-	return "seq" + strconv.Itoa(len(s.Seq))
+	return "seq " + Stringify(s.Seq)
 }
 
 // RBMH Sequence is a variant of the BMH sequence designed for reverse (R-L) matching.
@@ -160,5 +157,5 @@ func (s *RBMHSequence) Sequences() []Sequence {
 }
 
 func (s *RBMHSequence) String() string {
-	return "seq" + strconv.Itoa(len(s.Seq))
+	return "seq " + Stringify(s.Seq)
 }

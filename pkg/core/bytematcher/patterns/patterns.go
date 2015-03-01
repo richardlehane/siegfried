@@ -19,7 +19,9 @@ package patterns
 import (
 	"bytes"
 	"encoding/gob"
+	"encoding/hex"
 	"strconv"
+	"unicode/utf8"
 )
 
 func init() {
@@ -28,6 +30,13 @@ func init() {
 	gob.Register(List{})
 	gob.Register(&BMHSequence{})
 	gob.Register(&RBMHSequence{})
+}
+
+func Stringify(b []byte) string {
+	if utf8.Valid(b) {
+		return strconv.QuoteToASCII(string(b))
+	}
+	return hex.EncodeToString(b)
 }
 
 // Patterns are the smallest building blocks of a format signature.
@@ -87,7 +96,7 @@ func (s Sequence) Sequences() []Sequence {
 }
 
 func (s Sequence) String() string {
-	return "seq" + strconv.Itoa(len(s))
+	return "seq " + Stringify(s)
 }
 
 // The Reverse method is unique to this pattern. It is used for the EOF byte sequence set

@@ -88,16 +88,16 @@ func (p *pronom) setParseables() error {
 		if err != nil {
 			return fmt.Errorf("Pronom: error loading reports; got %s\nYou must download PRONOM reports to build a signature (unless you use the -noreports flag). You can use `roy harvest` to download reports", err)
 		}
+		infos := r.infos()
 		sigs, puids, err := r.signatures()
 		if err != nil {
 			return fmt.Errorf("Pronom: parsing signatures; got %s", err)
 		}
 		var puid string
-		fmt.Println("BYTE SIGNATURES")
 		for i, sig := range sigs {
 			if puids[i] != puid {
 				puid = puids[i]
-				fmt.Printf("For %s: \n", puids[i])
+				fmt.Printf("%s: \n", infos[puid].Name)
 			}
 			fmt.Println(sig)
 		}
