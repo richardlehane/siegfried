@@ -1,13 +1,41 @@
-Index: siegfried-0.5.0/cmd/sf/sf.go
+Index: siegfried-0.7.0/config/default.go
 ===================================================================
---- siegfried-0.5.0.orig/cmd/sf/sf.go	2014-10-01 04:18:31.000000000 -0700
-+++ siegfried-0.5.0/cmd/sf/sf.go	2014-10-10 16:58:24.417162857 -0700
-@@ -33,7 +33,7 @@
- 	if err != nil {
- 		log.Fatalf("sf error: can't obtain a current user %v", err)
- 	}
--	defaultSigs = filepath.Join(current.HomeDir, ".siegfried", defaultSigs)
-+	defaultSigs = filepath.Join("/usr/share/siegfried", defaultSigs)
+--- siegfried-0.7.0.orig/config/default.go	2014-11-24 02:04:25.000000000 -0800
++++ siegfried-0.7.0/config/default.go	2014-11-25 09:39:26.146183694 -0800
+@@ -1,32 +1,10 @@
+ // +build !brew,!archivematica,!appengine
  
- 	flag.StringVar(&sigfile, "sigs", defaultSigs, "path to Siegfried signature file")
+-// Copyright 2014 Richard Lehane. All rights reserved.
+-//
+-// Licensed under the Apache License, Version 2.0 (the "License");
+-// you may not use this file except in compliance with the License.
+-// You may obtain a copy of the License at
+-//
+-//     http://www.apache.org/licenses/LICENSE-2.0
+-//
+-// Unless required by applicable law or agreed to in writing, software
+-// distributed under the License is distributed on an "AS IS" BASIS,
+-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-// See the License for the specific language governing permissions and
+-// limitations under the License.
+-
+ package config
+ 
+-import (
+-	"log"
+-	"os/user"
+-	"path/filepath"
+-)
+-
+-// the default Home location is a "siegfried" folder in the user's $HOME
+ func init() {
+-	current, err := user.Current()
+-	if err != nil {
+-		log.Fatal(err)
+-	}
+-	siegfried.home = filepath.Join(current.HomeDir, "siegfried")
++	siegfried.home = "/usr/share/siegfried"
++	siegfried.signature = "archivematica.gob"
++	identifier.name = "archivematica"
++	pronom.extend = []string{"archivematica-fmt2.xml", "archivematica-fmt3.xml", "archivematica-fmt4.xml", "archivematica-fmt5.xml"}
  }
