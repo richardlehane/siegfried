@@ -24,15 +24,6 @@ import (
 )
 
 func (b *Matcher) start(bof bool) {
-	if bof {
-		if b.bAho != nil {
-			return
-		}
-	} else {
-		if b.eAho != nil {
-			return
-		}
-	}
 	b.mu.Lock()
 	defer b.mu.Unlock()
 	if bof {
@@ -68,12 +59,10 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 	var bchan chan wac.Result
 	if rdr != nil {
 		bchan = b.bAho.Index(rdr)
-
 		// Do an initial check of BOF sequences
 		for br := range bchan {
 			if br.Index[0] == -1 {
-				progressStrike.offset = br.Offset
-				incoming <- progressStrike
+				incoming <- progressStrike(br.Offset, false)
 				if br.Offset > 2048 {
 					break
 				}
@@ -100,10 +89,9 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 	efchan := b.EOFFrames.Index(buf, true, quit)
 
 	// Setup EOF sequences test
-	rrdr := siegreader.LimitReverseReaderFrom(buf, b.MaxEOF)
 	b.start(false)
-	var echan chan wac.Result
-	echan = b.eAho.Index(rrdr)
+	rrdr := siegreader.LimitReverseReaderFrom(buf, b.MaxEOF)
+	echan := b.eAho.Index(rrdr)
 
 	// Now enter main search loop
 	for {
@@ -131,8 +119,7 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 				bchan = nil
 			} else {
 				if br.Index[0] == -1 {
-					progressStrike.offset = br.Offset
-					incoming <- progressStrike
+					incoming <- progressStrike(br.Offset, false)
 				} else {
 					if config.Debug() {
 						fmt.Println(strike{b.BOFSeq.TestTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false, br.Final})
@@ -145,11 +132,9 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 				echan = nil
 			} else {
 				if er.Index[0] == -1 {
-					progressStrike.offset = er.Offset
-					progressStrike.reverse = true
-					incoming <- progressStrike
+					incoming <- progressStrike(er.Offset, true)
 				} else {
-					if config.Debug() && er.Index[0] != -1 {
+					if config.Debug() {
 						fmt.Println(strike{b.EOFSeq.TestTreeIndex[er.Index[0]], er.Index[1], er.Offset, er.Length, true, false, er.Final})
 					}
 					incoming <- strike{b.EOFSeq.TestTreeIndex[er.Index[0]], er.Index[1], er.Offset, er.Length, true, false, er.Final}

@@ -105,10 +105,14 @@ func (st strike) String() string {
 }
 
 // progress strikes are special results from the WAC matchers that periodically report on progress, these aren't hits
-var progressStrike = strike{
-	idxa:  -1,
-	idxb:  -1,
-	final: true,
+func progressStrike(off int64, rev bool) strike {
+	return strike{
+		idxa:    -1,
+		idxb:    -1,
+		offset:  off,
+		reverse: rev,
+		final:   true,
+	}
 }
 
 // Cache Strikes

@@ -149,7 +149,7 @@ func newDroid(path string) (*droid, error) {
 
 func newReports(reps []string, idsPuids map[int]string) (*reports, error) {
 	if len(reps) == 0 {
-		return nil, nil
+		return nil, fmt.Errorf("no valid PRONOM reports given")
 	}
 	indexes := make(map[string]int)
 	for i, v := range reps {
@@ -205,7 +205,6 @@ func (p *pronom) add(m core.Matcher) error {
 		if err != nil {
 			return err
 		}
-		p.PuidsB = puidsB(p.BPuids)
 		var plist priority.List
 		if !config.NoPriority() {
 			plist = p.pm.List(p.BPuids)
@@ -217,19 +216,6 @@ func (p *pronom) add(m core.Matcher) error {
 		p.BStart = l - len(p.BPuids)
 	}
 	return nil
-}
-
-func puidsB(puids []string) map[string][]int {
-	pb := make(map[string][]int)
-	for i, v := range puids {
-		_, ok := pb[v]
-		if ok {
-			pb[v] = append(pb[v], i)
-		} else {
-			pb[v] = []int{i}
-		}
-	}
-	return pb
 }
 
 func (p pronom) contMatcher(m core.Matcher) error {

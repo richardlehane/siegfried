@@ -38,8 +38,7 @@ type Identifier struct {
 	CStart int
 	CPuids []string
 	BStart int
-	BPuids []string         // slice of puids that corresponds to the bytematcher's int signatures
-	PuidsB map[string][]int // map of puids to slices of bytematcher int signatures
+	BPuids []string // slice of puids that corresponds to the bytematcher's int signatures
 }
 
 type FormatInfo struct {
@@ -128,13 +127,13 @@ func Load(r io.Reader) (*Identifier, error) {
 }
 
 func (i *Identifier) Recorder() core.Recorder {
-	return &Recorder{i, make(pids, 0, 10), 0.1}
+	return &Recorder{i, make(pids, 0, 10), 1}
 }
 
 type Recorder struct {
 	*Identifier
 	ids    pids
-	cscore float64
+	cscore int
 }
 
 func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
@@ -153,7 +152,7 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 		// add zip default
 		if res.Index() < 0 {
 			if !r.NoPriority {
-				r.cscore *= 1.1
+				r.cscore *= 2
 			}
 			r.ids = add(r.ids, r.Name, "x-fmt/263", r.Infos["x-fmt/263"], res.Basis(), r.cscore) // not great to have this hardcoded
 			return false
@@ -161,7 +160,7 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 		if res.Index() >= r.CStart && res.Index() < r.CStart+len(r.CPuids) {
 			idx := res.Index() - r.CStart
 			if !r.NoPriority {
-				r.cscore *= 1.1
+				r.cscore *= 2
 			}
 			basis := res.Basis()
 			p, t := place(idx, r.CPuids)
@@ -177,7 +176,7 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 		if res.Index() >= r.BStart && res.Index() < r.BStart+len(r.BPuids) {
 			idx := res.Index() - r.BStart
 			if !r.NoPriority {
-				r.cscore *= 1.1
+				r.cscore *= 2
 			}
 			basis := res.Basis()
 			p, t := place(idx, r.BPuids)
@@ -205,7 +204,7 @@ func place(idx int, ids []string) (int, int) {
 }
 
 func (r *Recorder) Satisfied() bool {
-	if r.cscore == 0.1 {
+	if r.cscore == 1 {
 		return false
 	}
 	return true
@@ -221,10 +220,10 @@ func (r *Recorder) Report(res chan core.Identification) {
 			for i := range r.ids {
 				r.ids[i].Warning = "no priority set for this identifier"
 			}
-		} else if conf == 0.1 {
+		} else if conf == 1 {
 			nids := make([]Identification, 0, len(r.ids))
 			for _, v := range r.ids {
-				if _, ok := r.PuidsB[v.Puid]; !ok {
+				if ok := r.hasSig(v.Puid); !ok {
 					v.Warning = "match on extension only"
 					nids = append(nids, v)
 				}
@@ -238,11 +237,11 @@ func (r *Recorder) Report(res chan core.Identification) {
 			}
 			r.ids = nids
 		}
-		res <- r.ids[0]
+		res <- r.checkExt(r.ids[0])
 		if len(r.ids) > 1 {
 			for i, v := range r.ids[1:] {
 				if v.confidence == conf {
-					res <- r.ids[i+1]
+					res <- r.checkExt(r.ids[i+1])
 				} else {
 					break
 				}
@@ -253,6 +252,36 @@ func (r *Recorder) Report(res chan core.Identification) {
 	}
 }
 
+func (r *Recorder) checkExt(i Identification) Identification {
+	if i.confidence%2 == 0 {
+		for _, v := range r.EPuids {
+			if i.Puid == v {
+				if len(i.Warning) > 0 {
+					i.Warning += "; extension mismatch"
+				} else {
+					i.Warning = "extension mismatch"
+				}
+				return i
+			}
+		}
+	}
+	return i
+}
+
+func (r *Recorder) hasSig(puid string) bool {
+	for _, v := range r.CPuids {
+		if puid == v {
+			return true
+		}
+	}
+	for _, v := range r.BPuids {
+		if puid == v {
+			return true
+		}
+	}
+	return false
+}
+
 type Identification struct {
 	Identifier string
 	Puid       string
@@ -261,7 +290,7 @@ type Identification struct {
 	Mime       string
 	Basis      []string
 	Warning    string
-	confidence float64
+	confidence int
 }
 
 func (id Identification) String() string {
@@ -317,7 +346,7 @@ func (p pids) Less(i, j int) bool { return p[j].confidence < p[i].confidence }
 
 func (p pids) Swap(i, j int) { p[i], p[j] = p[j], p[i] }
 
-func add(p pids, id string, f string, info FormatInfo, basis string, c float64) pids {
+func add(p pids, id string, f string, info FormatInfo, basis string, c int) pids {
 	for i, v := range p {
 		if v.Puid == f {
 			p[i].confidence += c

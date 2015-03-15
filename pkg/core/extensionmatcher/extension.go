@@ -85,7 +85,7 @@ func (e Matcher) Identify(name string, na siegreader.Buffer) (chan core.Result, 
 	go func() {
 		ext := filepath.Ext(name)
 		if len(ext) > 0 {
-			fmts, ok := e[strings.TrimPrefix(ext, ".")]
+			fmts, ok := e[strings.ToLower(strings.TrimPrefix(ext, "."))]
 			if ok {
 				for _, v := range fmts {
 					res <- v
