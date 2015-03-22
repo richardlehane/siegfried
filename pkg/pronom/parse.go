@@ -108,11 +108,15 @@ func (r *reports) infos() map[string]FormatInfo {
 }
 
 func (r *reports) extensions() ([][]string, []string) {
-	exts := make([][]string, len(r.r))
+	exts := make([][]string, 0, len(r.r))
+	puids := make([]string, 0, len(r.p))
 	for i, v := range r.r {
-		exts[i] = v.Extensions
+		if len(v.Extensions) > 0 {
+			exts = append(exts, v.Extensions)
+			puids = append(puids, r.p[i])
+		}
 	}
-	return exts, r.p
+	return exts, puids
 }
 
 func (r *reports) idsPuids() map[int]string {
@@ -385,11 +389,16 @@ func (d *droid) infos() map[string]FormatInfo {
 }
 
 func (d *droid) extensions() ([][]string, []string) {
-	exts := make([][]string, len(d.FileFormats))
+	p := d.puids()
+	exts := make([][]string, 0, len(d.FileFormats))
+	puids := make([]string, 0, len(p))
 	for i, v := range d.FileFormats {
-		exts[i] = v.Extensions
+		if len(v.Extensions) > 0 {
+			exts = append(exts, v.Extensions)
+			puids = append(puids, p[i])
+		}
 	}
-	return exts, d.puids()
+	return exts, puids
 }
 
 func (d *droid) idsPuids() map[int]string {
