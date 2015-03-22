@@ -75,11 +75,20 @@ type RelatedFormat struct {
 	Id  int    `xml:"RelatedFormatID"`
 }
 
+func appendUniq(is []int, i int) []int {
+	for _, v := range is {
+		if i == v {
+			return is
+		}
+	}
+	return append(is, i)
+}
+
 func (r *Report) Superiors() []int {
 	sups := []int{}
 	for _, v := range r.Relations {
-		if v.Typ == "Has lower priority than" {
-			sups = append(sups, v.Id)
+		if v.Typ == "Has lower priority than" || v.Typ == "Is supertype of" {
+			sups = appendUniq(sups, v.Id)
 		}
 	}
 	return sups
@@ -88,8 +97,8 @@ func (r *Report) Superiors() []int {
 func (r *Report) Subordinates() []int {
 	subs := []int{}
 	for _, v := range r.Relations {
-		if v.Typ == "Has priority over" {
-			subs = append(subs, v.Id)
+		if v.Typ == "Has priority over" || v.Typ == "Is subtype of" {
+			subs = appendUniq(subs, v.Id)
 		}
 	}
 	return subs
