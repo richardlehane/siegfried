@@ -13,7 +13,7 @@ Key features are:
 
 ## Version
 
-0.8.3
+1.0.0
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried/pkg/core?status.svg)](https://godoc.org/github.com/richardlehane/siegfried/pkg/core)
 
@@ -67,13 +67,12 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 	sf -update
 
-## Roadmap
-
-### Road to 1.0 (March 2015)
-
-- additional documentation & tests
-
 ## Recent Changes
+### Version 1.0.0 (22/3/2015)
+- [user documentation](http://github.com/richardlehane/siegfried/wiki)
+- bugfixes (mscfb, match/wac and sf)
+- QA using [comparator](http://github.com/richardlehane/comparator)
+
 ### Version 0.8.3 (24/2/2015)
 - json string escaping
 
