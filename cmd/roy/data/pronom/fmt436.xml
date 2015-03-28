@@ -169,6 +169,13 @@ This initial version accompanied the launch of DNG and related products. It was 
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>927</RelatedFormatID>
+        <RelatedFormatName>Nikon Digital SLR Camera Raw Image File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>1099</RelatedFormatID>
         <RelatedFormatName>Tagged Image File Format</RelatedFormatName>
         <RelatedFormatVersion>

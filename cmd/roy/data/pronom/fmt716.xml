@@ -51,7 +51,8 @@
           <ByteSequenceID>1283</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>1080</Offset>
-          <MaxOffset>0</MaxOffset>
+          <MaxOffset>
+          </MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

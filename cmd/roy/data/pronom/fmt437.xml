@@ -166,6 +166,13 @@ This version, published May 2008, was based on experience and feedback from othe
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>927</RelatedFormatID>
+        <RelatedFormatName>Nikon Digital SLR Camera Raw Image File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>1099</RelatedFormatID>
         <RelatedFormatName>Tagged Image File Format</RelatedFormatName>
         <RelatedFormatVersion>

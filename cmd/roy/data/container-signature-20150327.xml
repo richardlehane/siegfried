@@ -752,6 +752,35 @@
             </Files>
         </ContainerSignature>
 
+		<ContainerSignature Id="4070" ContainerType="OLE2">
+            <Description>Microsoft Project 2010 OLE2</Description>
+            <Files>
+                <File>
+                    <Path>Props14</Path>
+				</File>
+			</Files>
+		</ContainerSignature>
+		
+		<ContainerSignature Id="4080" ContainerType="OLE2">
+			<Description>Microsoft Project 2010 OLE2</Description>
+			<Files>
+				<File>
+                    <Path>CompObj</Path>
+                    <BinarySignatures>
+                        <InternalSignatureCollection>
+	                        <InternalSignature ID="4080">
+	                            <ByteSequence Reference="BOFoffset">
+	                                <SubSequence Position="1" SubSeqMinOffset="40" SubSeqMaxOffset="1064">
+	                                    <Sequence>0F 00 00 00 'MSProject.MPP14' 00</Sequence>
+	                                </SubSequence>
+	                            </ByteSequence>
+	                        </InternalSignature>
+	                    </InternalSignatureCollection>
+                    </BinarySignatures>
+                </File>
+            </Files>
+        </ContainerSignature>
+
         <ContainerSignature Id="5000" ContainerType="OLE2">
             <Description>Microsoft Publisher 1.0 OLE2</Description>
             <Files>
@@ -2070,6 +2099,10 @@
 	<FileFormatMapping signatureId="4050" Puid="fmt/440"/>
         <!-- Microsoft Project 2007 (OLE2)-->
 	<FileFormatMapping signatureId="4060" Puid="fmt/440"/>
+        <!-- Microsoft Project 2010 (OLE2)-->
+	<FileFormatMapping signatureId="4070" Puid="fmt/725"/>
+        <!-- Microsoft Project 2010 (OLE2)-->
+	<FileFormatMapping signatureId="4080" Puid="fmt/725"/>
 		
         <!-- Microsoft Publisher 1.0 (OLE2)-->
         <FileFormatMapping signatureId="5000" Puid="x-fmt/252"/>

@@ -161,7 +161,7 @@ func newReports(reps []string, idsPuids map[int]string) (*reports, error) {
 		r.r[idx] = &mappings.Report{}
 		return openXML(reportPath(puid), r.r[idx])
 	}
-	errs := applyAll(reps, apply)
+	errs := applyAll(200, reps, apply)
 	if len(errs) > 0 {
 		strs := make([]string, len(errs))
 		for i, v := range errs {
@@ -286,7 +286,7 @@ func Harvest() []error {
 		url, _, _ := config.HarvestOptions()
 		return save(puid, url, config.Reports())
 	}
-	return applyAll(d.puids(), apply)
+	return applyAll(5, d.puids(), apply)
 }
 
 func openXML(path string, els interface{}) error {
@@ -297,10 +297,10 @@ func openXML(path string, els interface{}) error {
 	return xml.Unmarshal(buf, els)
 }
 
-func applyAll(reps []string, apply func(puid string) error) []error {
+func applyAll(max int, reps []string, apply func(puid string) error) []error {
 	ch := make(chan error, len(reps))
 	wg := sync.WaitGroup{}
-	queue := make(chan struct{}, 200) // to prevent exhausting all the file descriptors
+	queue := make(chan struct{}, max) // to avoid hammering TNA
 	for _, puid := range reps {
 		wg.Add(1)
 		go func(puid string) {
