@@ -55,9 +55,10 @@ For OS X:
 
     brew install mistydemeo/digipres/siegfried
 
-For Ubuntu:
+For Ubuntu/Debian:
 
-    sudo add-apt-repository ppa:archivematica/externals-dev
+    wget -qO - https://bintray.com/user/downloadSubjectPublicKey?username=bintray | sudo apt-key add -
+    echo "deb http://dl.bintray.com/siegfried/debian wheezy main" | sudo tee -a /etc/apt/sources.list
     sudo apt-get update
     sudo apt-get install siegfried
 
