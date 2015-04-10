@@ -183,6 +183,8 @@ func parseSig(puid string, s mappings.Signature) (frames.Signature, error) {
 		// lack of a max offset implies a fixed offset for BOF and EOF seqs (not VAR)
 		if max == 0 {
 			max = min
+		} else {
+			max = max + min // the max offset in a PRONOM report is relative to the "offset" value, not to the BOF/EOF
 		}
 		// parse the hexstring
 		toks, lmin, lmax, err := parseHex(puid, bs.Hex)
