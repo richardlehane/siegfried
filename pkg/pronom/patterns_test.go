@@ -2,36 +2,9 @@ package pronom
 
 import (
 	"testing"
-)
 
-func TestNotSequence(t *testing.T) {
-	seq := NotSequence{'t', 'e', 's', 't'}
-	seq2 := NotSequence{'t', 'e', 's', 't'}
-	seq3 := NotSequence{255}
-	seq4 := NotSequence{0}
-	seq5 := NotSequence{10}
-	if !seq.Equals(seq2) {
-		t.Error("NotSequence fail: Equality test")
-	}
-	if r, _ := seq.Test([]byte{'t', 'e', 's', 't'}); r {
-		t.Error("NotSequence fail: Test")
-	}
-	if _, l := seq.Test([]byte{'t', 'o', 'o', 't'}); l != 4 {
-		t.Error("NotSequence fail: Test")
-	}
-	seqs := seq3.Sequences()
-	if len(seqs) != 255 {
-		t.Error("NotSequence fail: Sequences")
-	}
-	seqs = seq4.Sequences()
-	if len(seqs) != 255 {
-		t.Error("NotSequence fail: Sequences")
-	}
-	seqs = seq5.Sequences()
-	if len(seqs) != 255 {
-		t.Error("NotSequence fail: Sequences")
-	}
-}
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
+)
 
 func TestRange(t *testing.T) {
 	rng := Range{[]byte{1}, []byte{3}}
@@ -64,8 +37,8 @@ func TestRange(t *testing.T) {
 }
 
 func TestNotRange(t *testing.T) {
-	rng := NotRange{[]byte{1}, []byte{3}}
-	rng2 := NotRange{[]byte{1}, []byte{3}}
+	rng := patterns.Not{Range{[]byte{1}, []byte{3}}}
+	rng2 := patterns.Not{Range{[]byte{1}, []byte{3}}}
 	if !rng.Equals(rng2) {
 		t.Error("NotRange fail: Equality")
 	}

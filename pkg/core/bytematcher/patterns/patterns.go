@@ -28,6 +28,7 @@ func init() {
 	gob.Register(Sequence{})
 	gob.Register(Choice{})
 	gob.Register(List{})
+	gob.Register(&Not{})
 	gob.Register(&BMHSequence{})
 	gob.Register(&RBMHSequence{})
 }
@@ -322,4 +323,86 @@ func (l List) String() string {
 		}
 	}
 	return s + "]"
+}
+
+type Not struct{ Pattern }
+
+func (n Not) Test(b []byte) (bool, int) {
+	min, _ := n.Pattern.Length()
+	if len(b) < min {
+		return false, 0
+	}
+	ok, _ := n.Pattern.Test(b)
+	if !ok {
+		return true, min
+	}
+	return false, 1
+}
+
+func (n Not) TestR(b []byte) (bool, int) {
+	min, _ := n.Pattern.Length()
+	if len(b) < min {
+		return false, 0
+	}
+	ok, _ := n.Pattern.TestR(b)
+	if !ok {
+		return true, min
+	}
+	return false, 1
+}
+
+func (n Not) Equals(pat Pattern) bool {
+	n2, ok := pat.(Not)
+	if ok {
+		return n.Pattern.Equals(n2.Pattern)
+	}
+	return false
+}
+
+func (n Not) Length() (int, int) {
+	min, _ := n.Pattern.Length()
+	return min, min
+}
+
+func (n Not) NumSequences() int {
+	_, max := n.Pattern.Length()
+	if max > 1 {
+		return 0
+	}
+	num := n.Pattern.NumSequences()
+	if num == 0 {
+		return 0
+	}
+	return 256 - num
+}
+
+func (n Not) Sequences() []Sequence {
+	num := n.NumSequences()
+	if num < 1 {
+		return nil
+	}
+	seqs := make([]Sequence, 0, num)
+	pseqs := n.Pattern.Sequences()
+	allBytes := make([]Sequence, 256)
+	for i := 0; i < 256; i++ {
+		allBytes[i] = Sequence{byte(i)}
+	}
+	for _, v := range allBytes {
+		eq := false
+		for _, w := range pseqs {
+			if v.Equals(w) {
+				eq = true
+				break
+			}
+		}
+		if eq {
+			continue
+		}
+		seqs = append(seqs, v)
+	}
+	return seqs
+}
+
+func (n Not) String() string {
+	return "not[" + n.Pattern.String() + "]"
 }

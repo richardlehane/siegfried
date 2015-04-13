@@ -24,6 +24,14 @@ var TestSequences = []Sequence{
 	Sequence("23"),
 }
 
+var TestNotSequences = []Not{
+	Not{Sequence("test")},
+	Not{Sequence("test")},
+	Not{Sequence{255}},
+	Not{Sequence{0}},
+	Not{Sequence{10}},
+}
+
 var TestLists = []List{
 	List{TestSequences[0], TestSequences[2]},
 	List{TestSequences[3], TestSequences[4]},

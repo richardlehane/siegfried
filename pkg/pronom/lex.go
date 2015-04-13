@@ -20,6 +20,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// todo - a single lexing routine that will work for a single parse function for reports, droid and container
+
 package pronom
 
 import (

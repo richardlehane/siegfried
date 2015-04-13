@@ -18,75 +18,13 @@ package pronom
 import (
 	"bytes"
 	"encoding/gob"
+	"fmt"
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
 )
 
 func init() {
-	gob.Register(NotSequence{})
 	gob.Register(&Range{})
-	gob.Register(&NotRange{})
-}
-
-type NotSequence []byte
-
-func (ns NotSequence) Test(b []byte) (bool, int) {
-	if len(b) < len(ns) {
-		return false, 0
-	}
-	if bytes.Equal(ns, b[:len(ns)]) {
-		return false, 1
-	}
-	return true, len(ns)
-}
-
-func (ns NotSequence) TestR(b []byte) (bool, int) {
-	if len(b) < len(ns) {
-		return false, 0
-	}
-	if bytes.Equal(ns, b[len(b)-len(ns):]) {
-		return false, 1
-	}
-	return true, len(ns)
-}
-
-func (ns NotSequence) Equals(pat patterns.Pattern) bool {
-	ns2, ok := pat.(NotSequence)
-	if ok {
-		return bytes.Equal(ns, ns2)
-	}
-	return false
-}
-
-func (ns NotSequence) Length() (int, int) {
-	return len(ns), len(ns)
-}
-
-func (ns NotSequence) NumSequences() int {
-	if len(ns) == 1 {
-		return 255
-	}
-	return 0
-}
-
-func (ns NotSequence) Sequences() []patterns.Sequence {
-	num := ns.NumSequences()
-	seqs := make([]patterns.Sequence, num)
-	if num < 1 {
-		return seqs
-	}
-	b := int(ns[0])
-	for i := 0; i < b; i++ {
-		seqs[i] = patterns.Sequence{byte(i)}
-	}
-	for i := b + 1; i < 256; i++ {
-		seqs[i-1] = patterns.Sequence{byte(i)}
-	}
-	return seqs
-}
-
-func (ns NotSequence) String() string {
-	return "nseq " + patterns.Stringify(ns)
 }
 
 type Range struct {
@@ -180,77 +118,127 @@ func (r Range) String() string {
 	return "r " + patterns.Stringify(r.From) + " - " + patterns.Stringify(r.To)
 }
 
-// Implemented for completeness, have not seen any of these actually used
-type NotRange struct {
-	From, To []byte
-}
+type Mask byte
 
-func (nr NotRange) Test(b []byte) (bool, int) {
-	if len(b) < len(nr.From) || len(b) < len(nr.To) {
+func (m Mask) Test(b []byte) (bool, int) {
+	if len(b) == 0 {
 		return false, 0
 	}
-	if bytes.Compare(nr.From, b) < 1 {
-		if bytes.Compare(nr.To, b) > -1 {
-			return false, 1
-		}
+	if byte(m)&b[0] == byte(m) {
+		return true, 1
 	}
-	return true, len(nr.From)
+	return false, 1
 }
 
-func (nr NotRange) TestR(b []byte) (bool, int) {
-	if len(b) < len(nr.From) || len(b) < len(nr.To) {
+func (m Mask) TestR(b []byte) (bool, int) {
+	if len(b) == 0 {
 		return false, 0
 	}
-	if bytes.Compare(nr.From, b[len(b)-len(nr.From):]) < 1 {
-		if bytes.Compare(nr.To, b[len(b)-len(nr.To):]) > -1 {
-			return false, 1
-		}
+	if byte(m)&b[len(b)-1] == byte(m) {
+		return true, 1
 	}
-	return true, len(nr.From)
+	return false, 1
 }
 
-func (nr NotRange) Equals(pat patterns.Pattern) bool {
-	not, ok := pat.(NotRange)
+func (m Mask) Equals(pat patterns.Pattern) bool {
+	msk, ok := pat.(Mask)
 	if ok {
-		if bytes.Equal(nr.From, not.From) {
-			if bytes.Equal(nr.To, not.To) {
-				return true
-			}
+		if m == msk {
+			return true
 		}
 	}
 	return false
 }
 
-func (n NotRange) Length() (int, int) {
-	return len(n.From), len(n.From)
+func (m Mask) Length() (int, int) {
+	return 1, 1
 }
 
-func (nr NotRange) NumSequences() int {
-	_, l := nr.Length()
-	if l != 1 {
-		return 0
+func countBits(b byte) int {
+	var count uint
+	for b > 0 {
+		b &= b - 1
+		count++
 	}
-	return int(nr.From[0] + 255 - nr.To[0])
+	return 256 / (1 << count)
 }
 
-func (nr NotRange) Sequences() []patterns.Sequence {
-	num := nr.NumSequences()
-	seqs := make([]patterns.Sequence, num)
-	if num < 1 {
-		return seqs
+func allBytes() []byte {
+	all := make([]byte, 256)
+	for i := range all {
+		all[i] = byte(i)
 	}
-	j := 1
-	for i := 0; i < num; i++ {
-		if i < int(nr.From[0]) {
-			seqs[i] = patterns.Sequence{byte(i)}
-		} else {
-			seqs[i] = patterns.Sequence{nr.To[0] + byte(j)}
-			j++
+	return all
+}
+
+func (m Mask) NumSequences() int {
+	return countBits(byte(m))
+}
+
+func (m Mask) Sequences() []patterns.Sequence {
+	seqs := make([]patterns.Sequence, 0, m.NumSequences())
+	for _, b := range allBytes() {
+		if byte(m)&b == byte(m) {
+			seqs = append(seqs, patterns.Sequence{b})
 		}
 	}
 	return seqs
 }
 
-func (nr NotRange) String() string {
-	return "nr " + patterns.Stringify(nr.From) + " - " + patterns.Stringify(nr.To)
+func (m Mask) String() string {
+	return fmt.Sprintf("m %#x", byte(m))
+}
+
+type AnyMask byte
+
+func (am AnyMask) Test(b []byte) (bool, int) {
+	if len(b) == 0 {
+		return false, 0
+	}
+	if byte(am)&b[0] != 0 {
+		return true, 1
+	}
+	return false, 1
+}
+
+func (am AnyMask) TestR(b []byte) (bool, int) {
+	if len(b) == 0 {
+		return false, 0
+	}
+	if byte(am)&b[len(b)-1] != 0 {
+		return true, 1
+	}
+	return false, 1
+}
+
+func (am AnyMask) Equals(pat patterns.Pattern) bool {
+	amsk, ok := pat.(AnyMask)
+	if ok {
+		if am == amsk {
+			return true
+		}
+	}
+	return false
+}
+
+func (am AnyMask) Length() (int, int) {
+	return 1, 1
+}
+
+func (am AnyMask) NumSequences() int {
+	return 256 - countBits(byte(am))
+}
+
+func (am AnyMask) Sequences() []patterns.Sequence {
+	seqs := make([]patterns.Sequence, 0, am.NumSequences())
+	for _, b := range allBytes() {
+		if byte(am)&b != 0 {
+			seqs = append(seqs, patterns.Sequence{b})
+		}
+	}
+	return seqs
+}
+
+func (am AnyMask) String() string {
+	return fmt.Sprintf("am %#x", byte(am))
 }

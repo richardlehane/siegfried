@@ -53,3 +53,27 @@ func TestList(t *testing.T) {
 		t.Error("List fail: Sequences; expecting t, y got ", seqs[0][0], seqs[0][8])
 	}
 }
+
+func TestNotSequence(t *testing.T) {
+	if !TestNotSequences[0].Equals(TestNotSequences[1]) {
+		t.Error("NotSequence fail: Equality test")
+	}
+	if r, _ := TestNotSequences[0].Test([]byte{'t', 'e', 's', 't'}); r {
+		t.Error("NotSequence fail: Test")
+	}
+	if _, l := TestNotSequences[0].Test([]byte{'t', 'o', 'o', 't'}); l != 4 {
+		t.Error("NotSequence fail: Test")
+	}
+	seqs := TestNotSequences[2].Sequences()
+	if len(seqs) != 255 {
+		t.Error("NotSequence fail: Sequences")
+	}
+	seqs = TestNotSequences[3].Sequences()
+	if len(seqs) != 255 {
+		t.Error("NotSequence fail: Sequences")
+	}
+	seqs = TestNotSequences[4].Sequences()
+	if len(seqs) != 255 {
+		t.Error("NotSequence fail: Sequences")
+	}
+}

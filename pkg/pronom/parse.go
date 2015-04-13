@@ -276,14 +276,14 @@ func parseHex(puid, hx string) ([]token, int, int, error) {
 		case itemText:
 			tokens = append(tokens, token{min, max, patterns.Sequence(decodeHex(i.val))})
 		case itemNotText:
-			tokens = append(tokens, token{min, max, NotSequence(decodeHex(i.val))})
+			tokens = append(tokens, token{min, max, patterns.Not{patterns.Sequence(decodeHex(i.val))}})
 		// parse range types
 		case itemRangeStart, itemNotRangeStart, itemRangeStartChoice, itemNotRangeStartChoice:
 			rangeStart = i.val
 		case itemRangeEnd:
 			tokens = append(tokens, token{min, max, Range{decodeHex(rangeStart), decodeHex(i.val)}})
 		case itemNotRangeEnd:
-			tokens = append(tokens, token{min, max, NotRange{decodeHex(rangeStart), decodeHex(i.val)}})
+			tokens = append(tokens, token{min, max, patterns.Not{Range{decodeHex(rangeStart), decodeHex(i.val)}}})
 		// parse choice types
 		case itemParensLeft:
 			choice = make(patterns.Choice, 0, 2)
@@ -291,11 +291,11 @@ func parseHex(puid, hx string) ([]token, int, int, error) {
 		case itemTextChoice:
 			list = append(list, patterns.Sequence(decodeHex(i.val)))
 		case itemNotTextChoice:
-			list = append(list, NotSequence(decodeHex(i.val)))
+			list = append(list, patterns.Not{patterns.Sequence(decodeHex(i.val))})
 		case itemRangeEndChoice:
 			list = append(list, Range{decodeHex(rangeStart), decodeHex(i.val)})
 		case itemNotRangeEndChoice:
-			list = append(list, NotRange{decodeHex(rangeStart), decodeHex(i.val)})
+			list = append(list, patterns.Not{Range{decodeHex(rangeStart), decodeHex(i.val)}})
 		case itemPipe:
 			if len(list) == 0 {
 				return nil, 0, 0, errors.New("parse error " + puid + ": no choices before pipe")
@@ -564,14 +564,14 @@ func parseSeq(puid, seq string, eof bool) (frames.Signature, error) {
 		case itemText:
 			fs = append(fs, frames.NewFrame(typ, patterns.Sequence(decodeHex(i.val)), 0, 0))
 		case itemNotText:
-			fs = append(fs, frames.NewFrame(typ, NotSequence(decodeHex(i.val)), 0, 0))
+			fs = append(fs, frames.NewFrame(typ, patterns.Not{patterns.Sequence(decodeHex(i.val))}, 0, 0))
 		// parse range types
 		case itemRangeStart, itemNotRangeStart:
 			rangeStart = i.val
 		case itemRangeEnd:
 			fs = append(fs, frames.NewFrame(typ, Range{decodeHex(rangeStart), decodeHex(i.val)}, 0, 0))
 		case itemNotRangeEnd:
-			fs = append(fs, frames.NewFrame(typ, NotRange{decodeHex(rangeStart), decodeHex(i.val)}, 0, 0))
+			fs = append(fs, frames.NewFrame(typ, patterns.Not{Range{decodeHex(rangeStart), decodeHex(i.val)}}, 0, 0))
 		}
 	}
 	return fs, nil
@@ -738,17 +738,11 @@ func parseContainerSeq(puid, seq string) ([]patterns.Pattern, error) {
 					choice = patterns.Choice{patterns.Sequence(firstBit)}
 				}
 			}
-		case itemSlash:
+		case itemSlash, itemColon:
 			if insideBracket {
 				rangeMode = true
 			} else {
-				return nil, errors.New("Pronom parse error: unexpected slash in container (appears outside brackets)")
-			}
-		case itemColon:
-			if insideBracket {
-				rangeMode = true
-			} else {
-				return nil, errors.New("Pronom parse error: unexpected colon in container (appears outside brackets)")
+				return nil, errors.New("Pronom parse error: unexpected colon/slash in container (appears outside brackets)")
 			}
 		case itemBracketLeft:
 			if len(sequence) > 0 {
@@ -778,6 +772,8 @@ func parseContainerSig(puid string, s mappings.InternalSignature) (frames.Signat
 	if s.ByteSequences == nil {
 		return nil, nil
 	}
+	// return parseByteSeqs(puid, s.ByteSequencees)
+
 	sig := make(frames.Signature, 0, 1)
 	// Return an error for multiple byte sequences
 	if len(s.ByteSequences) > 1 {
