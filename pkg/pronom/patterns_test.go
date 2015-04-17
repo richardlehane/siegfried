@@ -62,3 +62,11 @@ func TestNotRange(t *testing.T) {
 		t.Error("Not Range fail: Sequences")
 	}
 }
+
+func TestMask(t *testing.T) {
+	mask := Mask(1)
+	if r, _ := mask.Test([]byte{0xF1}); !r {
+		t.Errorf("Mask fail")
+	}
+
+}
