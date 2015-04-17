@@ -237,7 +237,7 @@ func (p pronom) contMatcher(m core.Matcher) error {
 		sigs := make([]frames.Signature, 0, 1)
 		for _, f := range c.Files {
 			names = append(names, f.Path)
-			sig, err := parseContainerSig(puid, f.Signature)
+			sig, err := processContainer(puid, f.Signature)
 			if err != nil {
 				return err
 			}

@@ -25,6 +25,8 @@ import (
 
 func init() {
 	gob.Register(&Range{})
+	gob.Register(Mask(0))
+	gob.Register(AnyMask(0))
 }
 
 type Range struct {

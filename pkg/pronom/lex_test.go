@@ -46,38 +46,8 @@ var good = []testpattern{
 	},
 	{
 		"rangechoice",
-		"1991(65|[01:02])",
+		"1991(6500|52[01:02])", // with a list
 	},
-}
-
-var bad = []testpattern{
-	{
-		"badchar",
-		"1991[!4001C80000000000]y",
-	},
-	{
-		"badrange",
-		"1991[:61]",
-	},
-	{
-		"singlewild",
-		"1991?ACCD",
-	},
-	{
-		"badwild",
-		"1991{ABCD}ABDC",
-	},
-	{
-		"doublenegative",
-		"1991[!!ABCD]",
-	},
-	{
-		"unclosed",
-		"1991[!4001",
-	},
-}
-
-var goodContainer = []testpattern{
 	{
 		"OOXML",
 		`'C'00 'o'00 'n'00 't'00 'e'00 'n'00 't'00 'T'00 'y'00 'p'00 'e'00 '='00 '"'00 'a'00 'p'00 'p'00 'l'00 'i'00 'c'00 'a'00 't'00 'i'00 'o'00 'n'00 '/'00 'v'00 'n'00 'd'00 '.'00 'o'00 'p'00 'e'00 'n'00 'x'00 'm'00 'l'00 'f'00 'o'00 'r'00 'm'00 'a'00 't'00 's'00 '-'00 'o'00 'f'00 'f'00 'i'00 'c'00 'e'00 'd'00 'o'00 'c'00 'u'00 'm'00 'e'00 'n'00 't'00 '.'00 'w'00 'o'00 'r'00 'd'00 'p'00 'r'00 'o'00 'c'00 'e'00 's'00 's'00 'i'00 'n'00 'g'00 'm'00 'l'00 '.'00 'd'00 'o'00 'c'00 'u'00 'm'00 'e'00 'n'00 't'00 '.'00 'm'00 'a'00 'i'00 'n'00 '+'00 'x'00 'm'00 'l'00 '"'00`,
@@ -96,9 +66,28 @@ var goodContainer = []testpattern{
 	},
 }
 
+var bad = []testpattern{
+	{
+		"badchar",
+		"1991[!4001C80000000000]y",
+	},
+	{
+		"singlewild",
+		"1991?ACCD",
+	},
+	{
+		"badwild",
+		"1991{ABCD}ABDC",
+	},
+	{
+		"unclosed",
+		"1991[!4001",
+	},
+}
+
 func TestGood(t *testing.T) {
 	for _, v := range good {
-		l := sigLex(v.name, v.pattern)
+		l := lexPRONOM(v.name, v.pattern)
 		for i := l.nextItem(); i.typ != itemEOF; i = l.nextItem() {
 			if i.typ == itemError {
 				t.Error(i)
@@ -110,7 +99,7 @@ func TestGood(t *testing.T) {
 
 func TestBad(t *testing.T) {
 	for _, v := range bad {
-		l := sigLex(v.name, v.pattern)
+		l := lexPRONOM(v.name, v.pattern)
 		i := l.nextItem()
 		for ; i.typ != itemEOF; i = l.nextItem() {
 			if i.typ == itemError {
@@ -118,19 +107,25 @@ func TestBad(t *testing.T) {
 			}
 		}
 		if i.typ != itemError {
-			t.Error(i)
+			t.Error(v.name)
 		}
 	}
 }
 
-func TestContainerGood(t *testing.T) {
-	for _, v := range goodContainer {
-		l := conLex(v.name, v.pattern)
-		for i := l.nextItem(); i.typ != itemEOF; i = l.nextItem() {
-			if i.typ == itemError {
-				t.Error(i)
-				break
-			}
-		}
+func TestAcceptText(t *testing.T) {
+	test := `'C'00 'o'00 'n'00 't'00 'e'00 'n'00 't'00 'T'00 'y'00 'p'00 'e'00 '='00 '"'00 'a'00 'p'00 'p'00 'l'00 'i'00 'c'00 'a'00 't'00 'i'00 'o'00 'n'00 '/'00 'v'00 'n'00 'd'00 '.'00 'o'00 'p'00 'e'00 'n'00 'x'00 'm'00 'l'00 'f'00 'o'00 'r'00 'm'00 'a'00 't'00 's'00 '-'00 'o'00 'f'00 'f'00 'i'00 'c'00 'e'00 'd'00 'o'00 'c'00 'u'00 'm'00 'e'00 'n'00 't'00 '.'00 'w'00 'o'00 'r'00 'd'00 'p'00 'r'00 'o'00 'c'00 'e'00 's'00 's'00 'i'00 'n'00 'g'00 'm'00 'l'00 '.'00 'd'00 'o'00 'c'00 'u'00 'm'00 'e'00 'n'00 't'00 '.'00 'm'00 'a'00 'i'00 'n'00 '+'00 'x'00 'm'00 'l'00 '"'00 `
+	l := &lexer{
+		name:  "test",
+		input: test,
+		items: make(chan item, 1),
+	}
+	e := l.acceptText(false)
+	if e != nil {
+		t.Error(e)
+	}
+	l.emit(itemUnprocessedText)
+	i := <-l.items
+	if i.val != test {
+		t.Errorf("Expecting %s, got %s", test, i.val)
 	}
 }

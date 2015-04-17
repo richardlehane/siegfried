@@ -51,25 +51,6 @@ type itemType int
 const (
 	itemError itemType = iota
 	itemEOF
-	itemText //Sequence
-	itemBracketLeft
-	itemBracketRight
-	itemNot
-	itemNotText       //NotSequence
-	itemNotRangeStart //NotRange
-	itemNotRangeEnd   //NotRange
-	itemColon
-	itemRangeStart //Range
-	itemRangeEnd   //Range
-	itemParensLeft
-	itemParensRight
-	itemTextChoice          //Sequence
-	itemRangeStartChoice    //Range
-	itemRangeEndChoice      //Range
-	itemNotTextChoice       //NotSequence
-	itemNotRangeStartChoice //NotRange
-	itemNotRangeEndChoice   //NotRange
-	itemPipe
 	itemCurlyLeft
 	itemCurlyRight
 	itemWildStart
@@ -77,15 +58,45 @@ const (
 	itemWildEnd
 	itemWildSingle //??
 	itemWild       //*
-	itemSpace
-	itemQuote
+	itemUnprocessedText
+	itemEnterGroup
+	itemExitGroup
+	itemChoiceMarker
+	itemNotMarker
+	itemRangeMarker
+	itemMaskMarker
+	itemAnyMaskMarker
+	itemHexText
 	itemQuoteText
-	itemCharText
+	itemQuote
+	itemSpace
+)
+
+const (
+	leftBracket  = '['
+	rightBracket = ']'
+	leftParens   = '('
+	rightParens  = ')'
+	leftCurly    = '{'
+	rightCurly   = '}'
+	wildSingle   = '?'
+	wild         = '*'
+	not          = '!'
+	colon        = ':'
+	slash        = '-'
+	pipe         = '|'
+	quot         = '\''
+	space        = ' '
+	tab          = '\t'
+	amp          = '&'
+	tilda        = '~'
 )
 
 const digits = "0123456789"
 
 const hexadecimal = digits + "abcdefABCDEF"
+
+const hexnonquote = hexadecimal + " "
 
 const digitswild = digits + "*"
 
@@ -147,6 +158,28 @@ func (l *lexer) acceptRun(valid string) {
 	l.backup()
 }
 
+// acceptText consumes a run of runes that are deemed to be plain sequences (hex or quoted values)
+func (l *lexer) acceptText(group bool) error {
+	valid := hexnonquote
+	if group {
+		valid = hexadecimal
+	}
+	for {
+		l.acceptRun(valid)
+		switch l.peek() {
+		default:
+			return nil
+		case quot:
+			r := l.next()
+			for r = l.next(); r != eof && r != quot; r = l.next() {
+			}
+			if r != quot {
+				return fmt.Errorf("expected closing quote, got %v", r)
+			}
+		}
+	}
+}
+
 // errorf returns an error token and terminates the scan by passing
 // back a nil pointer that will be the next state, terminating l.nextItem.
 func (l *lexer) errorf(format string, args ...interface{}) stateFn {
@@ -159,21 +192,6 @@ func (l *lexer) nextItem() item {
 	item := <-l.items
 	l.lastPos = item.pos
 	return item
-}
-
-// lexer for PRONOM signature files
-func sigLex(name, input string) *lexer {
-	return lex(name, input, sigText)
-}
-
-// lexer for TNA container files
-func conLex(name, input string) *lexer {
-	return lex(name, input, conText)
-}
-
-// lexer for DROID signature files
-func droidLex(name, input string) *lexer {
-	return lex(name, input, droidText)
 }
 
 // lex creates a new scanner for the input string.
@@ -194,208 +212,105 @@ func (l *lexer) run(start stateFn) {
 	}
 }
 
-const (
-	leftBracket  = '['
-	rightBracket = ']'
-	leftParens   = '('
-	rightParens  = ')'
-	leftCurly    = '{'
-	rightCurly   = '}'
-	wildSingle   = '?'
-	wild         = '*'
-	not          = '!'
-	colon        = ':'
-	slash        = '-'
-	pipe         = '|'
-	quot         = '\''
-	space        = ' '
-	tab          = '\t'
-)
+// lexer for PRONOM signature files - reports, container and droid
+func lexPRONOM(name, input string) *lexer {
+	return lex(name, input, insideText)
+}
 
-// PRONOM signature lex states
-
-func sigText(l *lexer) stateFn {
-	l.acceptRun(hexadecimal)
+func insideText(l *lexer) stateFn {
+	if err := l.acceptText(false); err != nil {
+		return l.errorf(err.Error())
+	}
 	if l.pos > l.start {
-		l.emit(itemText)
+		l.emit(itemUnprocessedText)
 	}
 	r := l.next()
 	switch r {
+	default:
+		return l.errorf("encountered invalid character %q", r)
 	case eof:
 		l.emit(itemEOF)
 		return nil
 	case leftBracket:
-		l.emit(itemBracketLeft)
-		return sigLeftBracket
+		l.emit(itemEnterGroup)
+		return insideLeftBracket
 	case leftParens:
-		l.emit(itemParensLeft)
-		return sigInsideChoice
+		l.emit(itemEnterGroup)
+		return insideLeftParens
 	case leftCurly:
 		l.emit(itemCurlyLeft)
-		return sigInsideWild
+		return insideWild
 	case wildSingle:
-		return sigWildSingle
+		return insideWildSingle
 	case wild:
 		l.emit(itemWild)
-		return sigText
+		return insideText
 	}
-	return l.errorf("encountered invalid character %q", r)
 }
 
-func sigWildSingle(l *lexer) stateFn {
+func (l *lexer) insideGroup(boundary itemType) stateFn {
+	depth := 1
+	for {
+		if err := l.acceptText(true); err != nil {
+			return l.errorf(err.Error())
+		}
+		if l.pos > l.start {
+			l.emit(itemUnprocessedText)
+		}
+		r := l.next()
+		switch r {
+		default:
+			return l.errorf("encountered invalid character %q", r)
+		case leftBracket:
+			l.emit(itemEnterGroup)
+			depth++
+		case rightBracket:
+			l.emit(itemExitGroup)
+			depth--
+			if depth == 0 {
+				if boundary != rightBracket {
+					return l.errorf("expected group to close with %q, got %q", boundary, r)
+				}
+				return insideText
+			}
+		case rightParens:
+			if boundary != rightParens {
+				return l.errorf("expected group to close with %q, got %q", boundary, r)
+			}
+			l.emit(itemExitGroup)
+			return insideText
+		case not:
+			l.emit(itemNotMarker)
+		case pipe, space, tab:
+			l.emit(itemChoiceMarker)
+		case colon, slash:
+			l.emit(itemRangeMarker)
+		case amp:
+			l.emit(itemMaskMarker)
+		case tilda:
+			l.emit(itemAnyMaskMarker)
+		}
+	}
+}
+
+func insideLeftBracket(l *lexer) stateFn {
+	return l.insideGroup(rightBracket)
+}
+
+func insideLeftParens(l *lexer) stateFn {
+	return l.insideGroup(rightParens)
+}
+
+func insideWildSingle(l *lexer) stateFn {
 	r := l.next()
 	if r == wildSingle {
 		l.emit(itemWildSingle)
-		return sigText
+		return insideText
 	}
 	return l.errorf("expecting a double '?', got %q", r)
 }
 
-func sigLeftBracket(l *lexer) stateFn {
-	if l.peek() == not {
-		l.next()
-		l.emit(itemNot)
-		return sigNot
-	}
-	return sigInsideRange
-}
-
-func sigNot(l *lexer) stateFn {
-	l.acceptRun(hexadecimal)
-	if l.peek() == colon {
-		if l.pos > l.start {
-			l.emit(itemNotRangeStart)
-		}
-		l.next()
-		l.emit(itemColon)
-		l.acceptRun(hexadecimal)
-		if l.pos > l.start {
-			l.emit(itemNotRangeEnd)
-		}
-	} else {
-		if l.pos > l.start {
-			l.emit(itemNotText)
-		}
-	}
-	r := l.next()
-	if r == rightBracket {
-		l.emit(itemBracketRight)
-		return sigText
-	}
-	return l.errorf("expecting a closing bracket, got %q", r)
-}
-
-func sigInsideRange(l *lexer) stateFn {
-	l.acceptRun(hexadecimal)
-	if l.peek() == colon {
-		if l.pos > l.start {
-			l.emit(itemRangeStart)
-		} else {
-			return l.errorf("missing start value for range")
-		}
-		l.next()
-		l.emit(itemColon)
-	} else {
-		return l.errorf("expecting a colon, got %q", l.peek())
-	}
-	l.acceptRun(hexadecimal)
-	if l.pos > l.start {
-		l.emit(itemRangeEnd)
-	} else {
-		return l.errorf("missing end value for range")
-	}
-	r := l.next()
-	if r == rightBracket {
-		l.emit(itemBracketRight)
-		return sigText
-	}
-	return l.errorf("expecting a closing bracket, got %q", r)
-}
-
-func sigInsideChoice(l *lexer) stateFn {
-	for {
-		l.acceptRun(hexadecimal)
-		if l.pos > l.start {
-			l.emit(itemTextChoice)
-		}
-		r := l.next()
-		switch r {
-		case leftBracket:
-			l.emit(itemBracketLeft)
-			return sigLeftBracketChoice
-		case not:
-			l.emit(itemNot)
-			return sigNotChoice
-		case rightParens:
-			l.emit(itemParensRight)
-			return sigText
-		case pipe:
-			l.emit(itemPipe)
-		default:
-			return l.errorf("expecting a closing parens, got %q", r)
-		}
-	}
-}
-
-func sigLeftBracketChoice(l *lexer) stateFn {
-	if l.peek() == not {
-		l.next()
-		l.emit(itemNot)
-		return sigNotChoice
-	}
-	return sigInsideRangeChoice
-}
-
-func sigNotChoice(l *lexer) stateFn {
-	l.acceptRun(hexadecimal)
-	if l.peek() == colon {
-		if l.pos > l.start {
-			l.emit(itemNotRangeStartChoice)
-		}
-		l.next()
-		l.emit(itemColon)
-		l.acceptRun(hexadecimal)
-		if l.pos > l.start {
-			l.emit(itemNotRangeEndChoice)
-		}
-	} else {
-		if l.pos > l.start {
-			l.emit(itemNotTextChoice)
-			return sigInsideChoice
-		}
-	}
-	r := l.next()
-	if r == rightBracket {
-		l.emit(itemBracketRight)
-		return sigInsideChoice
-	}
-	return l.errorf("expecting a closing bracket, got %q", r)
-}
-
-func sigInsideRangeChoice(l *lexer) stateFn {
-	l.acceptRun(hexadecimal)
-	if l.peek() == colon {
-		if l.pos > l.start {
-			l.emit(itemRangeStartChoice)
-		}
-		l.next()
-		l.emit(itemColon)
-	} else {
-		l.errorf("expecting a colon, got %q", l.peek())
-	}
-	l.acceptRun(hexadecimal)
-	if l.pos > l.start {
-		l.emit(itemRangeEndChoice)
-	}
-	r := l.next()
-	if r == rightBracket {
-		l.emit(itemBracketRight)
-		return sigInsideChoice
-	}
-	return l.errorf("expecting a closing bracket, got %q", r)
-}
-
-func sigInsideWild(l *lexer) stateFn {
+func insideWild(l *lexer) stateFn {
 	l.acceptRun(digits) // don't accept a '*' as start of range
 	if l.pos > l.start {
 		l.emit(itemWildStart)
@@ -411,46 +326,39 @@ func sigInsideWild(l *lexer) stateFn {
 	}
 	if r == rightCurly {
 		l.emit(itemCurlyRight)
-		return sigText
+		return insideText
 	}
 	return l.errorf("expecting a closing bracket, got %q", r)
 }
 
-// Container signature lex states
-
-func conText(l *lexer) stateFn {
-	l.acceptRun(hexadecimal)
-	if l.pos > l.start {
-		l.emit(itemText)
-	}
-	r := l.next()
-	switch r {
-	case eof:
-		l.emit(itemEOF)
-		return nil
-	case leftBracket:
-		l.emit(itemBracketLeft) // two types: [22 27] set & ['a'-'z'] range & : range
-		return conText
-	case rightBracket:
-		l.emit(itemBracketRight)
-		return conText
-	case colon:
-		l.emit(itemColon)
-		return conText
-	case slash:
-		l.emit(itemSlash)
-		return conText
-	case quot:
-		l.emit(itemQuote)
-		return conInsideQuote
-	case tab, space:
-		l.emit(itemSpace)
-		return conText
-	}
-	return l.errorf("encountered invalid character %q", r)
+// text lexer
+func lexText(input string) *lexer {
+	return lex("textProcessor", input, insideUnprocessedText)
 }
 
-func conInsideQuote(l *lexer) stateFn {
+func insideUnprocessedText(l *lexer) stateFn {
+	for {
+		l.acceptRun(hexadecimal)
+		if l.pos > l.start {
+			l.emit(itemHexText)
+		}
+		switch l.next() {
+		default:
+			l.backup()
+			return l.errorf("unexpected character in text: %q", l.next())
+		case eof:
+			l.emit(itemEOF)
+			return nil
+		case quot:
+			l.emit(itemQuote)
+			return insideQuoteText
+		case space, tab:
+			l.emit(itemSpace)
+		}
+	}
+}
+
+func insideQuoteText(l *lexer) stateFn {
 	r := l.next()
 	for ; r != eof && r != quot; r = l.next() {
 	}
@@ -459,87 +367,7 @@ func conInsideQuote(l *lexer) stateFn {
 		l.emit(itemQuoteText)
 		l.next()
 		l.emit(itemQuote)
-		return conText
+		return insideUnprocessedText
 	}
 	return l.errorf("expected closing quote, reached end of string")
-}
-
-// DROID signature lexer
-
-func droidText(l *lexer) stateFn {
-	l.acceptRun(hexadecimal)
-	if l.pos > l.start {
-		l.emit(itemText)
-	}
-	r := l.next()
-	switch r {
-	case eof:
-		l.emit(itemEOF)
-		return nil
-	case leftBracket:
-		l.emit(itemBracketLeft)
-		return droidLeftBracket
-	}
-	return l.errorf("encountered invalid character %q", r)
-}
-
-func droidLeftBracket(l *lexer) stateFn {
-	if l.peek() == not {
-		l.next()
-		l.emit(itemNot)
-		return droidNot
-	}
-	return droidInsideRange
-}
-
-func droidNot(l *lexer) stateFn {
-	l.acceptRun(hexadecimal)
-	if l.peek() == colon {
-		if l.pos > l.start {
-			l.emit(itemNotRangeStart)
-		}
-		l.next()
-		l.emit(itemColon)
-		l.acceptRun(hexadecimal)
-		if l.pos > l.start {
-			l.emit(itemNotRangeEnd)
-		}
-	} else {
-		if l.pos > l.start {
-			l.emit(itemNotText)
-		}
-	}
-	r := l.next()
-	if r == rightBracket {
-		l.emit(itemBracketRight)
-		return droidText
-	}
-	return l.errorf("expecting a closing bracket, got %q", r)
-}
-
-func droidInsideRange(l *lexer) stateFn {
-	l.acceptRun(hexadecimal)
-	if l.peek() == colon {
-		if l.pos > l.start {
-			l.emit(itemRangeStart)
-		} else {
-			return l.errorf("missing start value for range")
-		}
-		l.next()
-		l.emit(itemColon)
-	} else {
-		return l.errorf("expecting a colon, got %q", l.peek())
-	}
-	l.acceptRun(hexadecimal)
-	if l.pos > l.start {
-		l.emit(itemRangeEnd)
-	} else {
-		return l.errorf("missing end value for range")
-	}
-	r := l.next()
-	if r == rightBracket {
-		l.emit(itemBracketRight)
-		return droidText
-	}
-	return l.errorf("expecting a closing bracket, got %q", r)
 }

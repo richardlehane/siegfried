@@ -1,6 +1,7 @@
 package pronom
 
 import (
+	"bytes"
 	"path/filepath"
 	"testing"
 
@@ -100,8 +101,60 @@ var rStub3 = &mappings.Report{Signatures: []mappings.Signature{sStub4}, Identifi
 
 var rStub4 = &mappings.Report{Signatures: []mappings.Signature{sStub5}, Identifiers: []mappings.FormatIdentifier{mappings.FormatIdentifier{Typ: "PUID", Id: "x-fmt/317"}}}
 
+func TestProcessText(t *testing.T) {
+	byts := processText(csStub3.Sequence)
+	if !bytes.Equal(byts, []byte{15, 0, 0, 0, 77, 83, 80, 114, 111, 106, 101, 99, 116, 46, 77, 80, 80, 57, 0}) {
+		t.Fatalf("Got %v", byts)
+	}
+}
+
+func TestProcessGroup(t *testing.T) {
+	// try PRONOM form
+	l := lexPRONOM("test", "(FF|10[!00:10])")
+	<-l.items // discard group entry
+	pat, err := processGroup(l)
+	if err != nil {
+		t.Fatal(err)
+	}
+	expect := patterns.Choice{
+		patterns.Sequence([]byte{255}),
+		patterns.List{
+			patterns.Sequence([]byte{16}),
+			patterns.Not{Range{[]byte{0}, []byte{16}}},
+		},
+	}
+	if !pat.Equals(expect) {
+		t.Errorf("expecting %v, got %v", expect, pat)
+	}
+	// try container form
+	l = lexPRONOM("test2", "[10 'cats']")
+	<-l.items
+	pat, err = processGroup(l)
+	if err != nil {
+		t.Fatal(err)
+	}
+	expect = patterns.Choice{
+		patterns.Sequence([]byte{16}),
+		patterns.Sequence([]byte("cats")),
+	}
+	if !pat.Equals(expect) {
+		t.Errorf("expecting %v, got %v", expect, pat)
+	}
+	// try simple
+	l = lexPRONOM("test3", "[00:10]")
+	<-l.items
+	pat, err = processGroup(l)
+	if err != nil {
+		t.Fatal(err)
+	}
+	rng := Range{[]byte{0}, []byte{16}}
+	if !pat.Equals(rng) {
+		t.Errorf("expecting %v, got %v", expect, rng)
+	}
+}
+
 func TestParseHex(t *testing.T) {
-	ts, _, _, err := parseHex("x-fmt/8", bsStub1.Hex)
+	ts, _, _, err := process("x-fmt/8", bsStub1.Hex, false)
 	if err != nil {
 		t.Error("Parse items: Error", err)
 	}
@@ -109,27 +162,27 @@ func TestParseHex(t *testing.T) {
 		t.Error("Parse items: Expecting 6 patterns, got", len(ts))
 	}
 	tok := ts[5]
-	if tok.min != 10 || tok.max != 10 {
-		t.Error("Parse items: Expecting 10,10, got", tok.min, tok.max)
+	if tok.Min() != 10 || tok.Max() != 10 {
+		t.Error("Parse items: Expecting 10,10, got", tok.Min(), tok.Max())
 	}
 	tok = ts[3]
-	if tok.min != 2 || tok.max != 2 {
-		t.Error("Parse items: Expecting 2,2, got", tok.min, tok.max)
+	if tok.Min() != 2 || tok.Max() != 2 {
+		t.Error("Parse items: Expecting 2,2, got", tok.Min(), tok.Max())
 	}
-	if !tok.pat.Equals(Range{[]byte{0}, []byte{3}}) {
-		t.Error("Parse items: Expecting [00:03], got", tok.pat)
+	if !tok.Pat().Equals(Range{[]byte{0}, []byte{3}}) {
+		t.Error("Parse items: Expecting [00:03], got", tok.Pat())
 	}
-	ts, _, _, err = parseHex("fmt/390", bsStub5.Hex)
+	ts, _, _, err = process("fmt/390", bsStub5.Hex, false)
 	tok = ts[12]
-	if tok.min != 5 || tok.max != -1 {
-		t.Error("Parse items: Expecting 5-0, got", tok.min, tok.max)
+	if tok.Min() != 5 || tok.Max() != -1 {
+		t.Error("Parse items: Expecting 5-0, got", tok.Min(), tok.Max())
 	}
-	if !tok.pat.Equals(patterns.Sequence(decodeHex("7E41"))) {
-		t.Error("Parse items: Expecting 7E41, got", tok.pat)
+	if !tok.Pat().Equals(patterns.Sequence(processText("7E41"))) {
+		t.Error("Parse items: Expecting 7E41, got", tok.Pat())
 	}
-	ts, _, _, err = parseHex("x-fmt/317", bsStub6.Hex)
-	seqs := ts[2].pat.Sequences()
-	if !seqs[0].Equals(patterns.Sequence(decodeHex("0D0A"))) {
+	ts, _, _, err = process("x-fmt/317", bsStub6.Hex, false)
+	seqs := ts[2].Pat().Sequences()
+	if !seqs[0].Equals(patterns.Sequence(processText("0D0A"))) {
 		t.Error("Parse items: Expecting [13 10], got", []byte(seqs[0]))
 	}
 
@@ -144,14 +197,14 @@ func TestParseReports(t *testing.T) {
 }
 
 func TestParseContainer(t *testing.T) {
-	sig, err := parseContainerSig("fmt/123", ciStub)
+	sig, err := processContainer("fmt/123", ciStub)
 	if err != nil {
 		t.Error(err)
 	}
 	if len(sig) != 5 {
 		t.Error("Expecting 5 patterns! Got ", sig)
 	}
-	sig, err = parseContainerSig("fmt/123", ciStub1)
+	sig, err = processContainer("fmt/123", ciStub1)
 	if err != nil {
 		t.Error(err)
 	}
