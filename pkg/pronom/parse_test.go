@@ -197,14 +197,14 @@ func TestParseReports(t *testing.T) {
 }
 
 func TestParseContainer(t *testing.T) {
-	sig, err := processContainer("fmt/123", ciStub)
+	sig, err := processDROID("fmt/123", ciStub.ByteSequences)
 	if err != nil {
 		t.Error(err)
 	}
 	if len(sig) != 5 {
 		t.Error("Expecting 5 patterns! Got ", sig)
 	}
-	sig, err = processContainer("fmt/123", ciStub1)
+	sig, err = processDROID("fmt/123", ciStub1.ByteSequences)
 	if err != nil {
 		t.Error(err)
 	}

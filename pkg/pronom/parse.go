@@ -363,15 +363,6 @@ func appendSig(s1, s2 frames.Signature, pos string) frames.Signature {
 	return append(s1, s2...)
 }
 
-// process Container Signature file
-func processContainer(puid string, s mappings.InternalSignature) (frames.Signature, error) {
-	// some sigs only have paths, this is OK
-	if s.ByteSequences == nil {
-		return nil, nil
-	}
-	return processDROID(puid, s.ByteSequences)
-}
-
 func processDROID(puid string, s []mappings.ByteSeq) (frames.Signature, error) {
 	var sig frames.Signature
 	for _, b := range s {
