@@ -66,8 +66,8 @@ func Details() string {
 	if pronom.noreports {
 		str += "; built without reports"
 	}
-	if HasInclude() {
-		str += "; limited to puids: " + strings.Join(pronom.include, ", ")
+	if HasLimit() {
+		str += "; limited to puids: " + strings.Join(pronom.limit, ", ")
 	}
 	if HasExclude() {
 		str += "; excluding puids: " + strings.Join(pronom.exclude, ", ")

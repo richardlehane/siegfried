@@ -1,0 +1,8 @@
+pdf:
+  - fmt/16
+  - fmt/17
+  - fmt/18
+  - pdfa
+pdfa:
+  - fmt/117
+  - fmt/118

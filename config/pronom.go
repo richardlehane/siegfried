@@ -30,7 +30,7 @@ var pronom = struct {
 	reports          string   // directory where PRONOM reports are stored
 	noreports        bool     // build signature directly from DROID file rather than PRONOM reports
 	inspect          bool     // setting for inspecting PRONOM signatures
-	include          []string // limit signature to a set of included PRONOM reports
+	limit            []string // limit signature to a set of included PRONOM reports
 	exclude          []string // exclude a set of PRONOM reports from the signature
 	extensions       string   // directory where custom signature extensions are stored
 	extend           []string
@@ -145,13 +145,13 @@ func Inspect() bool {
 	return pronom.inspect
 }
 
-func HasInclude() bool {
-	return len(pronom.include) > 0
+func HasLimit() bool {
+	return len(pronom.limit) > 0
 }
 
-func Include(puids []string) []string {
-	ret := make([]string, 0, len(pronom.include))
-	for _, v := range pronom.include {
+func Limit(puids []string) []string {
+	ret := make([]string, 0, len(pronom.limit))
+	for _, v := range pronom.limit {
 		for _, w := range puids {
 			if v == w {
 				ret = append(ret, v)
@@ -235,9 +235,9 @@ func SetInspect() func() private {
 	}
 }
 
-func SetInclude(i string) func() private {
+func SetLimit(i string) func() private {
 	return func() private {
-		pronom.include = strings.Split(i, ",")
+		pronom.limit = strings.Split(i, ",")
 		return private{}
 	}
 }

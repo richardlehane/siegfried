@@ -84,7 +84,7 @@ func (p *pronom) setParseables() error {
 	}
 	// if we are just inspecting a single report file
 	if config.Inspect() {
-		r, err := newReports(config.Include(d.puids()), nil)
+		r, err := newReports(config.Limit(d.puids()), nil)
 		if err != nil {
 			return fmt.Errorf("Pronom: error loading reports; got %s\nYou must download PRONOM reports to build a signature (unless you use the -noreports flag). You can use `roy harvest` to download reports", err)
 		}
@@ -108,6 +108,7 @@ func (p *pronom) setParseables() error {
 	// if noreports set
 	if config.Reports() == "" {
 		p.j = d
+		// todo: exclude/include in noreports mode - just change d.puids() so applies the config rules below
 		// if any extensions
 		for _, v := range config.Extend() {
 			e, err := newDroid(v)
@@ -119,8 +120,8 @@ func (p *pronom) setParseables() error {
 		return nil
 	}
 	puids := d.puids()
-	if config.HasInclude() {
-		puids = config.Include(puids)
+	if config.HasLimit() {
+		puids = config.Limit(puids)
 	} else if config.HasExclude() {
 		puids = config.Exclude(puids)
 	}

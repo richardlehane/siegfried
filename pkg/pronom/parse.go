@@ -363,6 +363,7 @@ func appendSig(s1, s2 frames.Signature, pos string) frames.Signature {
 	return append(s1, s2...)
 }
 
+// DROID & Container
 func processDROID(puid string, s []mappings.ByteSeq) (frames.Signature, error) {
 	var sig frames.Signature
 	for _, b := range s {
@@ -374,7 +375,7 @@ func processDROID(puid string, s []mappings.ByteSeq) (frames.Signature, error) {
 			vry = true
 		}
 		for _, ss := range b.SubSequences {
-			ns, err := parseSubSequence(puid, ss, eof, vry)
+			ns, err := processSubSequence(puid, ss, eof, vry)
 			if err != nil {
 				return nil, err
 			}
@@ -384,7 +385,7 @@ func processDROID(puid string, s []mappings.ByteSeq) (frames.Signature, error) {
 	return sig, nil
 }
 
-func parseSubSequence(puid string, ss mappings.SubSequence, eof, vry bool) (frames.Signature, error) {
+func processSubSequence(puid string, ss mappings.SubSequence, eof, vry bool) (frames.Signature, error) {
 	sig, _, _, err := process(puid, ss.Sequence, eof)
 	if err != nil {
 		return nil, err
