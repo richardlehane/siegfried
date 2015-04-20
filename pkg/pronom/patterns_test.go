@@ -71,6 +71,22 @@ func TestMask(t *testing.T) {
 	if r, _ := mask.Test([]byte{0x0A}); r {
 		t.Errorf("mask fail: expected 0x0A not to match!")
 	}
+	num := mask.NumSequences()
+	if num != 16 {
+		t.Fatal("mask fail: expecting 16 sequences")
+	}
+	seqs := mask.Sequences()
+	if len(seqs) != 16 {
+		t.Fatal("mask fail: expecting 16 sequences")
+	}
+	for i, v := range seqs {
+		if v[0] == 0xEE {
+			break
+		}
+		if i == len(seqs)-1 {
+			t.Fatal("mask fail: expecting 0xEE amongst sequences")
+		}
+	}
 }
 
 func TestAnyMask(t *testing.T) {
@@ -80,5 +96,21 @@ func TestAnyMask(t *testing.T) {
 	}
 	if r, _ := amask.Test([]byte{5}); r {
 		t.Errorf("any mask fail: expected 5 not to match!")
+	}
+	num := amask.NumSequences()
+	if num != 240 {
+		t.Fatal("any mask fail: expecting 240 sequences")
+	}
+	seqs := amask.Sequences()
+	if len(seqs) != 240 {
+		t.Fatal("any mask fail: expecting 240 sequences")
+	}
+	for i, v := range seqs {
+		if v[0] == 0x0A {
+			break
+		}
+		if i == len(seqs)-1 {
+			t.Fatal("any mask fail: expecting 0x0A amongst sequences")
+		}
 	}
 }
