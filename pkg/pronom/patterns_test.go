@@ -64,9 +64,21 @@ func TestNotRange(t *testing.T) {
 }
 
 func TestMask(t *testing.T) {
-	mask := Mask(1)
-	if r, _ := mask.Test([]byte{0xF1}); !r {
-		t.Errorf("Mask fail")
+	mask := Mask(0xAA)
+	if r, _ := mask.Test([]byte{0xEE}); !r {
+		t.Errorf("mask fail: 0xEE should match")
 	}
+	if r, _ := mask.Test([]byte{0x0A}); r {
+		t.Errorf("mask fail: expected 0x0A not to match!")
+	}
+}
 
+func TestAnyMask(t *testing.T) {
+	amask := AnyMask(0xAA)
+	if r, _ := amask.Test([]byte{0x0A}); !r {
+		t.Errorf("any mask fail: 0x0A should match")
+	}
+	if r, _ := amask.Test([]byte{5}); r {
+		t.Errorf("any mask fail: expected 5 not to match!")
+	}
 }
