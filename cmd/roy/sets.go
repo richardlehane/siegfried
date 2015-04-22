@@ -15,19 +15,20 @@
 package main
 
 import (
+	"encoding/json"
 	"errors"
 	"io/ioutil"
+	"log"
 	"os"
 	"path/filepath"
 	"sort"
+	"strconv"
 	"strings"
-
-	"gopkg.in/yaml.v2"
 
 	"github.com/richardlehane/siegfried/config"
 )
 
-func replaceKeys(l string) string {
+func expandSets(l string) string {
 	uniqs := make(map[string]struct{})
 	items := strings.Split(l, ",")
 	for _, v := range items {
@@ -35,12 +36,12 @@ func replaceKeys(l string) string {
 		if strings.HasPrefix(item, "@") {
 			if sets == nil {
 				if err := initSets(); err != nil {
-					panic(err)
+					log.Fatalf("error loading sets: %v", err)
 				}
 			}
 			list, err := getSets(strings.TrimPrefix(item, "@"))
 			if err != nil {
-				panic(err)
+				log.Fatalf("error interpreting sets: %v", err)
 			}
 			for _, v := range list {
 				uniqs[v] = struct{}{}
@@ -53,8 +54,46 @@ func replaceKeys(l string) string {
 	for k := range uniqs {
 		ret = append(ret, k)
 	}
-	sort.Strings(ret)
+	ret = sortFmts(ret)
 	return strings.Join(ret, ",")
+}
+
+func sortFmts(s []string) []string {
+	fmts := make(map[string][]int)
+	others := []string{}
+	addFmt := func(str, prefix string) bool {
+		if strings.HasPrefix(str, prefix+"/") {
+			no, err := strconv.Atoi(strings.TrimPrefix(str, prefix+"/"))
+			if err == nil {
+				fmts[prefix] = append(fmts[prefix], no)
+			} else {
+				others = append(others, str)
+			}
+			return true
+		}
+		return false
+	}
+	for _, v := range s {
+		if !addFmt(v, "fmt") {
+			if !addFmt(v, "x-fmt") {
+				others = append(others, v)
+			}
+		}
+	}
+	var ret []string
+	appendFmts := func(prefix string) {
+		f, ok := fmts[prefix]
+		if ok {
+			sort.Ints(f)
+			for _, i := range f {
+				ret = append(ret, prefix+"/"+strconv.Itoa(i))
+			}
+		}
+	}
+	appendFmts("fmt")
+	appendFmts("x-fmt")
+	sort.Strings(others)
+	return append(ret, others...)
 }
 
 var sets map[string][]string
@@ -72,13 +111,16 @@ func getSets(key string) ([]string, error) {
 		if !ok {
 			return nil, errors.New("sets: unknown key " + k)
 		}
-		for _, k2 := range l {
+		for i, k2 := range l {
 			if strings.HasPrefix(k2, "@") {
 				l2, err := f(strings.TrimPrefix(k2, "@"))
-				if err != nil || l2 == nil {
+				if err != nil {
 					return nil, err
 				}
-				l = append(l, l2...)
+				l = append(l[:i], l[i+1:]...)
+				if l2 != nil {
+					l = append(l, l2...)
+				}
 			}
 		}
 		return l, nil
@@ -87,7 +129,7 @@ func getSets(key string) ([]string, error) {
 }
 
 func initSets() error {
-	//  load all yaml files in the sets directory and add them to a single map
+	//  load all json files in the sets directory and add them to a single map
 	sets = make(map[string][]string)
 	wf := func(path string, info os.FileInfo, err error) error {
 		if info.IsDir() {
@@ -96,16 +138,16 @@ func initSets() error {
 		switch filepath.Ext(path) {
 		default:
 			return nil
-		case "yml", "yaml":
+		case ".json":
 		}
 		set := make(map[string][]string)
 		byts, err := ioutil.ReadFile(path)
 		if err != nil {
-			return err
+			return errors.New("error loading " + path + " " + err.Error())
 		}
-		err = yaml.Unmarshal(byts, &set)
+		err = json.Unmarshal(byts, &set)
 		if err != nil {
-			return err
+			return errors.New("error unmarshalling " + path + " " + err.Error())
 		}
 		for k, v := range set {
 			sort.Strings(v)
