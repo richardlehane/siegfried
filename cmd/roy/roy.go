@@ -103,7 +103,7 @@ func inspectGob() error {
 }
 
 func inspectSig(f string) error {
-	_, err := pronom.New(config.SetInclude(f), config.SetInspect(), config.SetNoContainer())
+	_, err := pronom.New(config.SetLimit(f), config.SetInspect(), config.SetNoContainer())
 	if err != nil {
 		return err
 	}
@@ -143,7 +143,7 @@ func buildOptions() []config.Option {
 		opts = append(opts, config.SetExtend(*extend))
 	}
 	if *include != "" {
-		opts = append(opts, config.SetInclude(*include))
+		opts = append(opts, config.SetLimit(*include))
 	}
 	if *exclude != "" {
 		opts = append(opts, config.SetExclude(*exclude))
