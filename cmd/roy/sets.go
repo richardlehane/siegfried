@@ -28,7 +28,7 @@ import (
 	"github.com/richardlehane/siegfried/config"
 )
 
-func expandSets(l string) string {
+func expandSets(l string) []string {
 	uniqs := make(map[string]struct{})
 	items := strings.Split(l, ",")
 	for _, v := range items {
@@ -54,8 +54,7 @@ func expandSets(l string) string {
 	for k := range uniqs {
 		ret = append(ret, k)
 	}
-	ret = sortFmts(ret)
-	return strings.Join(ret, ",")
+	return sortFmts(ret)
 }
 
 func sortFmts(s []string) []string {
