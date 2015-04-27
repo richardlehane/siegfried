@@ -38,6 +38,7 @@ var (
 	name        = build.String("name", config.Name(), "set identifier name")
 	details     = build.String("details", config.Details(), "set identifier details")
 	extend      = build.String("extend", "", "comma separated list of additional signatures")
+	extendc     = build.String("extendc", "", "comma separated list of additional container signatures")
 	include     = build.String("limit", "", "comma separated list of PRONOM signatures to include")
 	exclude     = build.String("exclude", "", "comma separated list of PRONOM signatures to exclude")
 	bof         = build.Int("bof", 0, "define a maximum BOF offset")
@@ -103,7 +104,7 @@ func inspectGob() error {
 }
 
 func inspectSig(f string) error {
-	_, err := pronom.New(config.SetLimit(f), config.SetInspect(), config.SetNoContainer())
+	_, err := pronom.New(config.SetLimit(expandSets(f)), config.SetInspect(), config.SetNoContainer())
 	if err != nil {
 		return err
 	}
@@ -140,13 +141,16 @@ func buildOptions() []config.Option {
 		opts = append(opts, config.SetDetails(*details))
 	}
 	if *extend != "" {
-		opts = append(opts, config.SetExtend(*extend))
+		opts = append(opts, config.SetExtend(expandSets(*extend)))
+	}
+	if *extendc != "" {
+		opts = append(opts, config.SetExtendC(expandSets(*extendc)))
 	}
 	if *include != "" {
-		opts = append(opts, config.SetLimit(*include))
+		opts = append(opts, config.SetLimit(expandSets(*include)))
 	}
 	if *exclude != "" {
-		opts = append(opts, config.SetExclude(*exclude))
+		opts = append(opts, config.SetExclude(expandSets(*exclude)))
 	}
 	if *bof != 0 {
 		opts = append(opts, config.SetBOF(*bof))

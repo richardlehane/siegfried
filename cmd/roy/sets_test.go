@@ -15,4 +15,9 @@ func TestSets(t *testing.T) {
 	if res != expect {
 		t.Errorf("expecting %s, got %s", expect, res)
 	}
+	pdfs := strings.Join(expandSets("@pdf"), ",")
+	expect = "fmt/14,fmt/15,fmt/16,fmt/17,fmt/18,fmt/19,fmt/20,fmt/95,fmt/144,fmt/145,fmt/146,fmt/147,fmt/148,fmt/157,fmt/158,fmt/276,fmt/354,fmt/476,fmt/477,fmt/478,fmt/479,fmt/480,fmt/481,fmt/488,fmt/489,fmt/490,fmt/491,fmt/492,fmt/493"
+	if pdfs != expect {
+		t.Errorf("expecting %s, got %s", expect, pdfs)
+	}
 }

@@ -46,6 +46,9 @@ func addStr(ss []string, s string) []string {
 
 // add a subordinate-superior relationship to the priority map
 func (m Map) Add(subordinate string, superior string) {
+	if subordinate == "" || superior == "" {
+		return
+	}
 	_, ok := m[subordinate]
 	if ok {
 		m[subordinate] = addStr(m[subordinate], superior)
@@ -114,6 +117,24 @@ func (m Map) expand(key string, iMap map[string][]int) []int {
 		ret = append(ret, iMap[k]...)
 	}
 	sort.Ints(ret)
+	return ret
+}
+
+func (m Map) Filter(puids []string) Map {
+	ret := make(Map)
+	for _, v := range puids {
+		l := m[v]
+		n := []string{}
+		for _, w := range l {
+			for _, x := range puids {
+				if w == x {
+					n = append(n, w)
+					break
+				}
+			}
+		}
+		ret[v] = n
+	}
 	return ret
 }
 

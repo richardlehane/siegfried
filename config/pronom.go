@@ -34,6 +34,7 @@ var pronom = struct {
 	exclude          []string // exclude a set of PRONOM reports from the signature
 	extensions       string   // directory where custom signature extensions are stored
 	extend           []string
+	extendc          []string //container extensions
 	harvestURL       string
 	harvestTimeout   time.Duration
 	harvestTransport *http.Transport
@@ -149,6 +150,7 @@ func HasLimit() bool {
 	return len(pronom.limit) > 0
 }
 
+// takes a slice of puids and returns only those that are also in the pronom.limit slice
 func Limit(puids []string) []string {
 	ret := make([]string, 0, len(pronom.limit))
 	for _, v := range pronom.limit {
@@ -165,6 +167,7 @@ func HasExclude() bool {
 	return len(pronom.exclude) > 0
 }
 
+// takes a slice of puids and omits those that are also in the pronom.exclude slice
 func Exclude(puids []string) []string {
 	ret := make([]string, 0, len(puids)-len(pronom.exclude))
 	for _, v := range puids {
@@ -182,9 +185,9 @@ func Exclude(puids []string) []string {
 	return ret
 }
 
-func Extend() []string {
-	ret := make([]string, len(pronom.extend))
-	for i, v := range pronom.extend {
+func extensionPaths(e []string) []string {
+	ret := make([]string, len(e))
+	for i, v := range e {
 		if filepath.Dir(v) == "." {
 			ret[i] = filepath.Join(siegfried.home, pronom.extensions, v)
 		} else {
@@ -192,6 +195,14 @@ func Extend() []string {
 		}
 	}
 	return ret
+}
+
+func Extend() []string {
+	return extensionPaths(pronom.extend)
+}
+
+func ExtendC() []string {
+	return extensionPaths(pronom.extendc)
 }
 
 func HarvestOptions() (string, time.Duration, *http.Transport) {
@@ -235,23 +246,30 @@ func SetInspect() func() private {
 	}
 }
 
-func SetLimit(i string) func() private {
+func SetLimit(l []string) func() private {
 	return func() private {
-		pronom.limit = strings.Split(i, ",")
+		pronom.limit = l
 		return private{}
 	}
 }
 
-func SetExclude(e string) func() private {
+func SetExclude(l []string) func() private {
 	return func() private {
-		pronom.exclude = strings.Split(e, ",")
+		pronom.exclude = l
 		return private{}
 	}
 }
 
-func SetExtend(e string) func() private {
+func SetExtend(l []string) func() private {
 	return func() private {
-		pronom.extend = strings.Split(e, ",")
+		pronom.extend = l
+		return private{}
+	}
+}
+
+func SetExtendC(l []string) func() private {
+	return func() private {
+		pronom.extendc = l
 		return private{}
 	}
 }

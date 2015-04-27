@@ -86,6 +86,74 @@ func (j *joint) priorities() priority.Map {
 	return ps
 }
 
+// FILTERS
+// limit and exclude filters control what parts of a parseable we show
+type filter struct {
+	ids []string
+	p   parseable
+}
+
+func applyFilter(puids []string, p parseable) *filter {
+	return &filter{puids, p}
+}
+
+func (f *filter) puids() []string {
+	ret := make([]string, 0, len(f.ids))
+	for _, v := range f.p.puids() {
+		for _, w := range f.ids {
+			if v == w {
+				ret = append(ret, v)
+				break
+			}
+		}
+	}
+	return ret
+}
+
+func (f *filter) infos() map[string]FormatInfo {
+	ret, infos := make(map[string]FormatInfo), f.p.infos()
+	for _, v := range f.puids() {
+		ret[v] = infos[v]
+	}
+	return ret
+}
+
+func (f *filter) extensions() ([][]string, []string) {
+	ret, retp := make([][]string, 0, len(f.puids())), make([]string, 0, len(f.puids()))
+	e, p := f.p.extensions()
+	for i, v := range p {
+		for _, w := range f.puids() {
+			if v == w {
+				ret, retp = append(ret, e[i]), append(retp, v)
+				break
+			}
+		}
+	}
+	return ret, retp
+}
+
+func (f *filter) signatures() ([]frames.Signature, []string, error) {
+	s, p, err := f.p.signatures()
+	if err != nil {
+		return nil, nil, err
+	}
+	ret, retp := make([]frames.Signature, 0, len(f.puids())), make([]string, 0, len(f.puids()))
+	for i, v := range p {
+		for _, w := range f.puids() {
+			if v == w {
+				ret, retp = append(ret, s[i]), append(retp, v)
+				break
+			}
+		}
+	}
+	return ret, retp, nil
+}
+
+func (f *filter) priorities() priority.Map {
+	m := f.p.priorities()
+	return m.Filter(f.puids())
+}
+
 // REPORTS
 type reports struct {
 	p  []string

@@ -105,31 +105,28 @@ func (p *pronom) setParseables() error {
 		p.j = r
 		return nil
 	}
-	// if noreports set
-	if config.Reports() == "" {
-		p.j = d
-		// todo: exclude/include in noreports mode - just change d.puids() so applies the config rules below
-		// if any extensions
-		for _, v := range config.Extend() {
-			e, err := newDroid(v)
-			if err != nil {
-				return fmt.Errorf("Pronom: error loading extension file; got %s", err)
-			}
-			p.j = join(p.j, e)
-		}
-		return nil
-	}
+	// apply limit or exclude filters (only one can be applied)
 	puids := d.puids()
 	if config.HasLimit() {
 		puids = config.Limit(puids)
 	} else if config.HasExclude() {
 		puids = config.Exclude(puids)
 	}
-	r, err := newReports(puids, d.idsPuids())
-	if err != nil {
-		return fmt.Errorf("Pronom: error loading reports; got %s\nYou must download PRONOM reports to build a signature (unless you use the -noreports flag). You can use `roy harvest` to download reports", err)
+	// if noreports set
+	if config.Reports() == "" {
+		p.j = d
+		// apply filter
+		if config.HasLimit() || config.HasExclude() {
+			p.j = applyFilter(puids, p.j)
+		}
+	} else { // otherwise build from reports
+		r, err := newReports(puids, d.idsPuids())
+		if err != nil {
+			return fmt.Errorf("Pronom: error loading reports; got %s\nYou must download PRONOM reports to build a signature (unless you use the -noreports flag). You can use `roy harvest` to download reports", err)
+		}
+		p.j = r
 	}
-	p.j = r
+	// add extensions
 	for _, v := range config.Extend() {
 		e, err := newDroid(v)
 		if err != nil {
@@ -180,7 +177,20 @@ func reportPath(puid string) string {
 // setContainers adds containers to a pronom object. It takes as an argument the path to a container signature file
 func (p *pronom) setContainers() error {
 	p.c = &mappings.Container{}
-	return openXML(config.Container(), p.c)
+	err := openXML(config.Container(), p.c)
+	if err != nil {
+		return err
+	}
+	for _, ex := range config.ExtendC() {
+		c := &mappings.Container{}
+		err = openXML(ex, c)
+		if err != nil {
+			return err
+		}
+		p.c.ContainerSignatures = append(p.c.ContainerSignatures, c.ContainerSignatures...)
+		p.c.FormatMappings = append(p.c.FormatMappings, c.FormatMappings...)
+	}
+	return nil
 }
 
 // add adds extension, bytematcher or containermatcher signatures to the identifier
@@ -219,6 +229,16 @@ func (p *pronom) add(m core.Matcher) error {
 	return nil
 }
 
+// for limit/exclude filtering of containers
+func (p pronom) hasPuid(puid string) bool {
+	for _, v := range p.j.puids() {
+		if puid == v {
+			return true
+		}
+	}
+	return false
+}
+
 func (p pronom) contMatcher(m core.Matcher) error {
 	// when no container is set
 	if p.c == nil {
@@ -233,6 +253,9 @@ func (p pronom) contMatcher(m core.Matcher) error {
 	}
 	for _, c := range p.c.ContainerSignatures {
 		puid := cpuids[c.Id]
+		if !p.hasPuid(puid) {
+			continue
+		}
 		typ := c.ContainerType
 		names := make([]string, 0, 1)
 		sigs := make([]frames.Signature, 0, 1)

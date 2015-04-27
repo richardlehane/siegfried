@@ -110,19 +110,19 @@ func getSets(key string) ([]string, error) {
 		if !ok {
 			return nil, errors.New("sets: unknown key " + k)
 		}
-		for i, k2 := range l {
+		var nl []string
+		for _, k2 := range l {
 			if strings.HasPrefix(k2, "@") {
 				l2, err := f(strings.TrimPrefix(k2, "@"))
 				if err != nil {
 					return nil, err
 				}
-				l = append(l[:i], l[i+1:]...)
-				if l2 != nil {
-					l = append(l, l2...)
-				}
+				nl = append(nl, l2...)
+			} else {
+				nl = append(nl, k2)
 			}
 		}
-		return l, nil
+		return nl, nil
 	}
 	return f(key)
 }
@@ -131,6 +131,9 @@ func initSets() error {
 	//  load all json files in the sets directory and add them to a single map
 	sets = make(map[string][]string)
 	wf := func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
 		if info.IsDir() {
 			return nil
 		}
