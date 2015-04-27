@@ -5,7 +5,7 @@ go:
   - 1.3
   - 1.4
   - tip
-  - +3887950
+  - +3787950
 branches:
   only:
     - master
