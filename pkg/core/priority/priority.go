@@ -120,13 +120,14 @@ func (m Map) expand(key string, iMap map[string][]int) []int {
 	return ret
 }
 
-func (m Map) Filter(puids []string) Map {
+// Filter returns a new Priority Map that just contains formats in the provided slice
+func (m Map) Filter(fmts []string) Map {
 	ret := make(Map)
-	for _, v := range puids {
+	for _, v := range fmts {
 		l := m[v]
 		n := []string{}
 		for _, w := range l {
-			for _, x := range puids {
+			for _, x := range fmts {
 				if w == x {
 					n = append(n, w)
 					break
@@ -307,7 +308,7 @@ func (w *WaitSet) check(i, idx, prev int) bool {
 	return true
 }
 
-// filter a waitset with a list of potential matches, return only those still waiting on. Return nil if none.
+// Filter a waitset with a list of potential matches, return only those that we are still waiting on. Return nil if none.
 func (w *WaitSet) Filter(l []int) []int {
 	ret := make([]int, 0, len(l))
 	w.m.RLock()
@@ -324,7 +325,8 @@ func (w *WaitSet) Filter(l []int) []int {
 	return ret
 }
 
-// filter a waitset with a list of potential matches, return only those still waiting on. Return nil if none.
+// Filter a waitset with a list of potential matches, return only those still waiting on. Return nil if none.
+// This a convenience method that takes key frame IDs rather than sig IDs.
 func (w *WaitSet) FilterKfID(l []process.KeyFrameID) []process.KeyFrameID {
 	ret := make([]process.KeyFrameID, 0, len(l))
 	w.m.RLock()

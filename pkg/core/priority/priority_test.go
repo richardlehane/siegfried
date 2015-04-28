@@ -23,11 +23,11 @@ func TestComplete(t *testing.T) {
 	m.Complete()
 	l := m["apple"]
 	if len(l) != 4 {
-		t.Errorf("Priority: expecting two superiors, got %d", len(l))
+		t.Errorf("Priority: expecting four superiors, got %d", len(l))
 	}
 	l = m["orange"]
 	if len(l) != 3 {
-		t.Errorf("Priority: expecting two superiors, got %d", len(l))
+		t.Errorf("Priority: expecting three superiors, got %d", len(l))
 	}
 }
 
@@ -116,5 +116,28 @@ func TestSet(t *testing.T) {
 	l = w.Filter([]int{1, 2})
 	if l != nil {
 		t.Error("Priority: bad filter, nil list")
+	}
+}
+
+	m := make(Map)
+	m.Add("apple", "orange")
+	m.Add("orange", "banana")
+	m.Add("orange", "grapes")
+	m.Add("banana", "grapes")
+	m.Add("banana", "grapefruit")
+	m.Add("grapes", "grapefruit")
+	m.Complete()
+	m = m.Filter([]string{"apple", "orange", "banana"})
+	l := m["banana"]
+	if len(l) != 0 {
+		t.Errorf("Not expecting any superiors for banana got %v", l)
+	}
+	l = m["apple"]
+	if len(l) != 2 {
+		t.Errorf("Expecting 2 superiors for apple got %v", l)
+	}
+	_, ok := m["grapes"]
+	if ok {
+		t.Errorf("not expecting any grapes")
 	}
 }

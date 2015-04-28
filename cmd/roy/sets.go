@@ -28,8 +28,11 @@ import (
 	"github.com/richardlehane/siegfried/config"
 )
 
+// take a comma separated string of puids and sets (e.g. fmt/1,@pdf,fmt/2) and expand any sets within.
+// Also split, trim, sort and de-dupe.
+// return a slice of puids
 func expandSets(l string) []string {
-	uniqs := make(map[string]struct{})
+	uniqs := make(map[string]struct{}) // drop any duplicates with this map
 	items := strings.Split(l, ",")
 	for _, v := range items {
 		item := strings.TrimSpace(v)
@@ -57,6 +60,7 @@ func expandSets(l string) []string {
 	return sortFmts(ret)
 }
 
+// a plain string sort doesn't work e.g. get fmt/1,fmt/111/fmt/2 - need to sort on ints
 func sortFmts(s []string) []string {
 	fmts := make(map[string][]int)
 	others := []string{}
@@ -98,8 +102,8 @@ func sortFmts(s []string) []string {
 var sets map[string][]string
 
 func getSets(key string) ([]string, error) {
-	// recursively build a list of all values for the key; prevent cycles by bookkeeping with attempted map
-	attempted := make(map[string]bool)
+	// recursively build a list of all values for the key
+	attempted := make(map[string]bool) // prevent cycles by bookkeeping with attempted map
 	var f func(string) ([]string, error)
 	f = func(k string) ([]string, error) {
 		if ok := attempted[k]; ok {
@@ -132,14 +136,14 @@ func initSets() error {
 	sets = make(map[string][]string)
 	wf := func(path string, info os.FileInfo, err error) error {
 		if err != nil {
-			return err
+			return errors.New("error walking sets directory, must have a 'sets' directory in siegfried home: " + err.Error())
 		}
 		if info.IsDir() {
 			return nil
 		}
 		switch filepath.Ext(path) {
 		default:
-			return nil
+			return nil // ignore non json files
 		case ".json":
 		}
 		set := make(map[string][]string)

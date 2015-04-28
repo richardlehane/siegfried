@@ -21,3 +21,18 @@ func TestSets(t *testing.T) {
 		t.Errorf("expecting %s, got %s", expect, pdfs)
 	}
 }
+
+var testSet = map[string][]string{
+	"t": []string{"a", "a", "b", "c"},
+	"u": []string{"b", "d"},
+	"v": []string{"@t", "@u"},
+}
+
+func TestDupeSets(t *testing.T) {
+	sets = testSet
+	expect := "a,b,c,d"
+	res := strings.Join(expandSets("@v"), ",")
+	if res != expect {
+		t.Errorf("expecting %s, got %s", expect, res)
+	}
+}
