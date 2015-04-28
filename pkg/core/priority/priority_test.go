@@ -119,6 +119,7 @@ func TestSet(t *testing.T) {
 	}
 }
 
+func TestMapFilter(t *testing.T) {
 	m := make(Map)
 	m.Add("apple", "orange")
 	m.Add("orange", "banana")
