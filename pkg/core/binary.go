@@ -19,6 +19,8 @@ package core
 
 // type PatternLoader func(*core.LoadSaver) patterns.Pattern
 // And for save - just add a Save(*core.LoadSaver) method to Patterns interface
+// LoadBytematcher(*core.LoadSaver) core.Matcher
+// And for save - Save(*core.LoadSaver) method on core.Matcher
 
 import (
 	"encoding/binary"
@@ -28,7 +30,7 @@ import (
 type LoadSaver struct {
 	buf []byte
 	i   int
-	e   error
+	Err error
 }
 
 func NewLoadSaver(b []byte) *LoadSaver {
@@ -47,11 +49,11 @@ func (l *LoadSaver) Bytes() []byte {
 }
 
 func (l *LoadSaver) read(i int) []byte {
-	if l.e != nil {
+	if l.Err != nil {
 		return nil
 	}
 	if l.i+i > len(l.buf) {
-		l.e = errors.New("error loading signature file, overflowed")
+		l.Err = errors.New("error loading signature file, overflowed")
 		return nil
 	}
 	l.i += i
@@ -59,7 +61,7 @@ func (l *LoadSaver) read(i int) []byte {
 }
 
 func (l *LoadSaver) write(b []byte) {
-	if l.e != nil {
+	if l.Err != nil {
 		return
 	}
 	if len(b)+l.i > len(l.buf) {
@@ -109,7 +111,7 @@ func (l *LoadSaver) LoadTinyInt() int {
 
 func (l *LoadSaver) SaveTinyInt(i int) {
 	if i <= -128 || i >= 128 {
-		l.e = errors.New("int overflows byte")
+		l.Err = errors.New("int overflows byte")
 		return
 	}
 	l.SaveByte(byte(i))
@@ -121,7 +123,7 @@ func (l *LoadSaver) LoadTinyUInt() int {
 
 func (l *LoadSaver) SaveTinyUInt(i int) {
 	if i < 0 || i >= 256 {
-		l.e = errors.New("int overflows byte as a uint")
+		l.Err = errors.New("int overflows byte as a uint")
 		return
 	}
 	l.SaveByte(byte(i))
@@ -141,7 +143,7 @@ func (l *LoadSaver) LoadSmallInt() int {
 
 func (l *LoadSaver) SaveSmallInt(i int) {
 	if i <= -32768 || i >= 32768 {
-		l.e = errors.New("int overflows uint16")
+		l.Err = errors.New("int overflows uint16")
 		return
 	}
 	buf := make([]byte, 2)
@@ -163,7 +165,7 @@ func (l *LoadSaver) LoadInt() int {
 
 func (l *LoadSaver) SaveInt(i int) {
 	if int64(i) <= -2147483648 || int64(i) >= 2147483648 {
-		l.e = errors.New("int overflows uint32")
+		l.Err = errors.New("int overflows uint32")
 		return
 	}
 	buf := make([]byte, 4)
