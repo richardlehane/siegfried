@@ -21,13 +21,24 @@ import (
 	"fmt"
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
+	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
 func init() {
 	gob.Register(&Range{})
 	gob.Register(Mask(0))
 	gob.Register(AnyMask(0))
+
+	patterns.Register(rangeLoader, loadRange)
+	patterns.Register(maskLoader, loadMask)
+	patterns.Register(anyMaskLoader, loadAnyMask)
 }
+
+const (
+	rangeLoader byte = iota + 8
+	maskLoader
+	anyMaskLoader
+)
 
 type Range struct {
 	From, To []byte
@@ -120,6 +131,19 @@ func (r Range) String() string {
 	return "r " + patterns.Stringify(r.From) + " - " + patterns.Stringify(r.To)
 }
 
+func (r Range) Save(ls *signature.LoadSaver) {
+	ls.SaveByte(rangeLoader)
+	ls.SaveBytes(r.From)
+	ls.SaveBytes(r.To)
+}
+
+func loadRange(ls *signature.LoadSaver) patterns.Pattern {
+	return Range{
+		ls.LoadBytes(),
+		ls.LoadBytes(),
+	}
+}
+
 type Mask byte
 
 func (m Mask) Test(b []byte) (bool, int) {
@@ -191,6 +215,15 @@ func (m Mask) String() string {
 	return fmt.Sprintf("m %#x", byte(m))
 }
 
+func (m Mask) Save(ls *signature.LoadSaver) {
+	ls.SaveByte(maskLoader)
+	ls.SaveByte(byte(m))
+}
+
+func loadMask(ls *signature.LoadSaver) patterns.Pattern {
+	return Mask(ls.LoadByte())
+}
+
 type AnyMask byte
 
 func (am AnyMask) Test(b []byte) (bool, int) {
@@ -243,4 +276,13 @@ func (am AnyMask) Sequences() []patterns.Sequence {
 
 func (am AnyMask) String() string {
 	return fmt.Sprintf("am %#x", byte(am))
+}
+
+func (am AnyMask) Save(ls *signature.LoadSaver) {
+	ls.SaveByte(anyMaskLoader)
+	ls.SaveByte(byte(am))
+}
+
+func loadAnyMask(ls *signature.LoadSaver) patterns.Pattern {
+	return AnyMask(ls.LoadByte())
 }

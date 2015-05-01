@@ -14,7 +14,11 @@
 
 package patterns
 
-import "bytes"
+import (
+	"bytes"
+
+	"github.com/richardlehane/siegfried/pkg/core/signature"
+)
 
 // Helper func to turn patterns into BMH sequences if possible
 func BMH(p Pattern, rev bool) Pattern {
@@ -94,6 +98,23 @@ func (s *BMHSequence) String() string {
 	return "seq " + Stringify(s.Seq)
 }
 
+func (s *BMHSequence) Save(ls *signature.LoadSaver) {
+	ls.SaveByte(bmhLoader)
+	ls.SaveBytes(s.Seq)
+	for _, v := range s.Shift {
+		ls.SaveSmallInt(v)
+	}
+}
+
+func loadBMH(ls *signature.LoadSaver) Pattern {
+	bmh := &BMHSequence{}
+	bmh.Seq = Sequence(ls.LoadBytes())
+	for i := range bmh.Shift {
+		bmh.Shift[i] = ls.LoadSmallInt()
+	}
+	return bmh
+}
+
 // RBMH Sequence is a variant of the BMH sequence designed for reverse (R-L) matching.
 // It is used behind the scenes in the Bytematcher package to speed up matching and should not be used directly in other packages (use the plain Sequence instead).
 type RBMHSequence struct {
@@ -158,4 +179,21 @@ func (s *RBMHSequence) Sequences() []Sequence {
 
 func (s *RBMHSequence) String() string {
 	return "seq " + Stringify(s.Seq)
+}
+
+func (s *RBMHSequence) Save(ls *signature.LoadSaver) {
+	ls.SaveByte(rbmhLoader)
+	ls.SaveBytes(s.Seq)
+	for _, v := range s.Shift {
+		ls.SaveSmallInt(v)
+	}
+}
+
+func loadRBMH(ls *signature.LoadSaver) Pattern {
+	rbmh := &RBMHSequence{}
+	rbmh.Seq = Sequence(ls.LoadBytes())
+	for i := range rbmh.Shift {
+		rbmh.Shift[i] = ls.LoadSmallInt()
+	}
+	return rbmh
 }

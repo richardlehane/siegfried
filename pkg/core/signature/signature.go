@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package core has core siegfried functionality
-package core
+// Package signature defines how siegfried marshals and unmarshals signatures as binary data
+package signature
 
 // todo - look at BinaryMarshaler and BinaryUnmarshaler in "encoding"
 

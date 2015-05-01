@@ -18,9 +18,11 @@ package frames
 
 import (
 	"encoding/gob"
+	"errors"
 	"strconv"
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
+	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
 func init() {
@@ -40,6 +42,7 @@ type Frame interface {
 	Min() int                    // minimum offset
 	Max() int                    // maximum offset. Return -1 for no limit (wildcard, *)
 	Pat() patterns.Pattern
+	Save(*signature.LoadSaver)
 
 	// The following methods are inherited from the enclosed OffType
 	Orientation() OffType
@@ -49,6 +52,33 @@ type Frame interface {
 	Length() (int, int) // min and max lengths of the enclosed pattern
 	NumSequences() int  // // the number of simple sequences that the enclosed pattern can be represented by. Return 0 if the pattern cannot be represented by a defined number of simple sequence (e.g. for an indirect offset pattern) or, if in your opinion, the number of sequences is unreasonably large.
 	Sequences() []patterns.Sequence
+}
+
+type Loader func(*signature.LoadSaver) Frame
+
+const (
+	fixedLoader byte = iota
+	windowLoader
+	wildLoader
+	wildMinLoader
+)
+
+var loaders = [8]Loader{loadFixed, loadWindow, loadWild, loadWildMin, nil, nil, nil, nil}
+
+func Register(id byte, l Loader) {
+	loaders[int(id)] = l
+}
+
+func Load(ls *signature.LoadSaver) Frame {
+	id := ls.LoadByte()
+	l := loaders[int(id)]
+	if l == nil {
+		if ls.Err == nil {
+			ls.Err = errors.New("bad frame loader")
+		}
+		return nil
+	}
+	return l(ls)
 }
 
 type OffType uint8
@@ -220,6 +250,21 @@ func (f Fixed) Pat() patterns.Pattern {
 	return f.Pattern
 }
 
+func (f Fixed) Save(ls *signature.LoadSaver) {
+	ls.SaveByte(fixedLoader)
+	ls.SaveByte(byte(f.OffType))
+	ls.SaveInt(f.Off)
+	f.Pattern.Save(ls)
+}
+
+func loadFixed(ls *signature.LoadSaver) Frame {
+	return Fixed{
+		OffType(ls.LoadByte()),
+		ls.LoadInt(),
+		patterns.Load(ls),
+	}
+}
+
 // Window frames are at a range of offsets e.g. e.g. 1-1500 from the BOF, EOF or a preceding or succeeding frame.
 type Window struct {
 	OffType
@@ -323,6 +368,23 @@ func (w Window) Pat() patterns.Pattern {
 	return w.Pattern
 }
 
+func (w Window) Save(ls *signature.LoadSaver) {
+	ls.SaveByte(windowLoader)
+	ls.SaveByte(byte(w.OffType))
+	ls.SaveInt(w.MinOff)
+	ls.SaveInt(w.MaxOff)
+	w.Pattern.Save(ls)
+}
+
+func loadWindow(ls *signature.LoadSaver) Frame {
+	return Window{
+		OffType(ls.LoadByte()),
+		ls.LoadInt(),
+		ls.LoadInt(),
+		patterns.Load(ls),
+	}
+}
+
 // Wild frames can be at any offset (i.e. 0 to the end of the file) relative to the BOF, EOF or a preceding or succeeding frame.
 type Wild struct {
 	OffType
@@ -407,6 +469,19 @@ func (w Wild) Linked(prev Frame, maxDistance, maxRange int) bool {
 
 func (w Wild) Pat() patterns.Pattern {
 	return w.Pattern
+}
+
+func (w Wild) Save(ls *signature.LoadSaver) {
+	ls.SaveByte(wildLoader)
+	ls.SaveByte(byte(w.OffType))
+	w.Pattern.Save(ls)
+}
+
+func loadWild(ls *signature.LoadSaver) Frame {
+	return Wild{
+		OffType(ls.LoadByte()),
+		patterns.Load(ls),
+	}
 }
 
 // WildMin frames have a minimum but no maximum offset (e.g. 200-*) relative to the BOF, EOF or a preceding or succeeding frame.
@@ -494,4 +569,19 @@ func (w WildMin) Linked(prev Frame, maxDistance, maxRange int) bool {
 
 func (w WildMin) Pat() patterns.Pattern {
 	return w.Pattern
+}
+
+func (w WildMin) Save(ls *signature.LoadSaver) {
+	ls.SaveByte(wildMinLoader)
+	ls.SaveByte(byte(w.OffType))
+	ls.SaveInt(w.MinOff)
+	w.Pattern.Save(ls)
+}
+
+func loadWildMin(ls *signature.LoadSaver) Frame {
+	return WildMin{
+		OffType(ls.LoadByte()),
+		ls.LoadInt(),
+		patterns.Load(ls),
+	}
 }
