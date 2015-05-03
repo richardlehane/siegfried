@@ -8,6 +8,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames/tests"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
+	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
 var TestSample1 = []byte("test12345678910YNESSjunktestyjunktestytest12345678910111223") // should match sigs 0, 1 and 2
@@ -24,22 +25,19 @@ func TestIO(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	str := bm.String()
-	buf := &bytes.Buffer{}
-	sz, err := bm.Save(buf)
-	if err != nil {
-		t.Error(err)
+	saver := signature.NewLoadSaver(nil)
+	bm.Save(saver)
+	if len(saver.Bytes()) < 100 {
+		t.Errorf("Save bytematcher: too small, only got %v", len(saver.Bytes()))
 	}
-	if sz < 100 {
-		t.Errorf("Save bytematcher: too small, only got %v", sz)
+	newbm := Load(signature.NewLoadSaver(saver.Bytes()))
+	nsaver := signature.NewLoadSaver(nil)
+	newbm.Save(nsaver)
+	if len(nsaver.Bytes()) != len(saver.Bytes()) {
+		t.Fatalf("expecting the bms to match length: %d and %d", len(saver.Bytes()), len(nsaver.Bytes()))
 	}
-	newbm, err := Load(buf)
-	if err != nil {
-		t.Error(err)
-	}
-	str2 := newbm.String()
-	if str != str2 {
-		t.Errorf("Load bytematcher: expecting first bytematcher (%v), to equal second bytematcher (%v)", str, str2)
+	if string(nsaver.Bytes()) != string(saver.Bytes()) {
+		t.Errorf("Load bytematcher: expecting first bytematcher (%v), to equal second bytematcher (%v)", bm.String(), newbm.String())
 	}
 }
 

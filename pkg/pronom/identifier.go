@@ -15,16 +15,18 @@
 package pronom
 
 import (
-	"bytes"
-	"encoding/gob"
 	"fmt"
-	"io"
 	"sort"
 	"strings"
 
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
+	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
+
+func init() {
+	core.RegisterIdentifier(core.Pronom, Load)
+}
 
 type Identifier struct {
 	p          *pronom
@@ -45,6 +47,49 @@ type FormatInfo struct {
 	Name     string
 	Version  string
 	MIMEType string
+}
+
+func (i *Identifier) Save(ls *signature.LoadSaver) {
+	ls.SaveByte(core.Pronom)
+	ls.SaveString(i.Name)
+	ls.SaveString(i.Details)
+	ls.SaveBool(i.NoPriority)
+	ls.SaveSmallInt(len(i.Infos))
+	for k, v := range i.Infos {
+		ls.SaveString(k)
+		ls.SaveString(v.Name)
+		ls.SaveString(v.Version)
+		ls.SaveString(v.MIMEType)
+	}
+	ls.SaveInt(i.EStart)
+	ls.SaveStrings(i.EPuids)
+	ls.SaveInt(i.CStart)
+	ls.SaveStrings(i.CPuids)
+	ls.SaveInt(i.BStart)
+	ls.SaveStrings(i.BPuids)
+}
+
+func Load(ls *signature.LoadSaver) core.Identifier {
+	i := &Identifier{}
+	i.Name = ls.LoadString()
+	i.Details = ls.LoadString()
+	i.NoPriority = ls.LoadBool()
+	i.Infos = make(map[string]FormatInfo)
+	le := ls.LoadSmallInt()
+	for j := 0; j < le; j++ {
+		i.Infos[ls.LoadString()] = FormatInfo{
+			ls.LoadString(),
+			ls.LoadString(),
+			ls.LoadString(),
+		}
+	}
+	i.EStart = ls.LoadInt()
+	i.EPuids = ls.LoadStrings()
+	i.CStart = ls.LoadInt()
+	i.CPuids = ls.LoadStrings()
+	i.BStart = ls.LoadInt()
+	i.BPuids = ls.LoadStrings()
+	return i
 }
 
 func New(opts ...config.Option) (*Identifier, error) {
@@ -99,31 +144,6 @@ func (i *Identifier) Recognise(m core.MatcherType, idx int) (bool, string) {
 			return false, ""
 		}
 	}
-}
-
-func (i *Identifier) Save(w io.Writer) (int, error) {
-	buf := &bytes.Buffer{}
-	enc := gob.NewEncoder(buf)
-	err := enc.Encode(i)
-	if err != nil {
-		return 0, err
-	}
-	sz := buf.Len()
-	_, err = buf.WriteTo(w)
-	if err != nil {
-		return 0, err
-	}
-	return sz, nil
-}
-
-func Load(r io.Reader) (*Identifier, error) {
-	i := &Identifier{}
-	dec := gob.NewDecoder(r)
-	err := dec.Decode(i)
-	if err != nil {
-		return nil, err
-	}
-	return i, nil
 }
 
 func (i *Identifier) Recorder() core.Recorder {

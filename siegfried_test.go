@@ -2,13 +2,13 @@ package siegfried
 
 import (
 	"bytes"
-	"io"
 	"testing"
 
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
+	"github.com/richardlehane/siegfried/pkg/core/signature"
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
@@ -25,7 +25,7 @@ func (t testNMatcher) Identify(n string, sb siegreader.Buffer) (chan core.Result
 
 func (t testNMatcher) String() string { return "" }
 
-func (t testNMatcher) Save(w io.Writer) (int, error) { return 0, nil }
+func (t testNMatcher) Save(l *signature.LoadSaver) {}
 
 func (t testNMatcher) Add(ss core.SignatureSet, l priority.List) (int, error) { return 0, nil }
 
@@ -43,7 +43,7 @@ func (t testBMatcher) Identify(nm string, sb siegreader.Buffer) (chan core.Resul
 
 func (t testBMatcher) String() string { return "" }
 
-func (t testBMatcher) Save(w io.Writer) (int, error) { return 0, nil }
+func (t testBMatcher) Save(l *signature.LoadSaver) {}
 
 func (t testBMatcher) Add(ss core.SignatureSet, l priority.List) (int, error) { return 0, nil }
 
@@ -57,7 +57,9 @@ type testIdentifier struct{}
 
 func (t testIdentifier) Yaml() string { return "" }
 
-func (t testIdentifier) Save(w io.Writer) (int, error) { return 0, nil }
+func (t testIdentifier) Describe() [2]string { return [2]string{"a", "b"} }
+
+func (t testIdentifier) Save(l *signature.LoadSaver) {}
 
 func (t testIdentifier) Recorder() core.Recorder { return testRecorder{} }
 

@@ -115,7 +115,6 @@ func (ct *CTest) identify(c *ContainerMatcher, id *identifier, rdr Reader, name 
 	}
 	if ct.Unsatisfied != nil {
 		buf, _ := rdr.SetSource(c.entryBufs) // NOTE: an error is ignored here.
-		ct.BM.SetMu()
 		bmc, _ := ct.BM.Identify("", buf)
 		for r := range bmc {
 			h := ct.Unsatisfied[r.Index()]

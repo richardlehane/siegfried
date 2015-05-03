@@ -15,10 +15,7 @@
 package extensionmatcher
 
 import (
-	"bytes"
-	"encoding/gob"
 	"fmt"
-	"io"
 	"path/filepath"
 	"sort"
 	"strings"
@@ -26,9 +23,38 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
+	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
 type Matcher map[string][]Result
+
+func Load(ls *signature.LoadSaver) Matcher {
+	le := ls.LoadSmallInt()
+	if le == 0 {
+		return nil
+	}
+	ret := make(Matcher)
+	for i := 0; i < le; i++ {
+		k := ls.LoadString()
+		r := make([]Result, ls.LoadSmallInt())
+		for j := range r {
+			r[j] = Result(ls.LoadSmallInt())
+		}
+		ret[k] = r
+	}
+	return ret
+}
+
+func (m Matcher) Save(ls *signature.LoadSaver) {
+	ls.SaveSmallInt(len(m))
+	for k, v := range m {
+		ls.SaveString(k)
+		ls.SaveSmallInt(len(v))
+		for _, w := range v {
+			ls.SaveSmallInt(int(w))
+		}
+	}
+}
 
 func New() Matcher {
 	return make(Matcher)
@@ -95,31 +121,6 @@ func (e Matcher) Identify(name string, na siegreader.Buffer) (chan core.Result, 
 		close(res)
 	}()
 	return res, nil
-}
-
-func Load(r io.Reader) (core.Matcher, error) {
-	e := New()
-	dec := gob.NewDecoder(r)
-	err := dec.Decode(&e)
-	if err != nil {
-		return nil, err
-	}
-	return e, nil
-}
-
-func (e Matcher) Save(w io.Writer) (int, error) {
-	buf := &bytes.Buffer{}
-	enc := gob.NewEncoder(buf)
-	err := enc.Encode(e)
-	if err != nil {
-		return 0, err
-	}
-	sz := buf.Len()
-	_, err = buf.WriteTo(w)
-	if err != nil {
-		return 0, err
-	}
-	return sz, nil
 }
 
 func (e Matcher) String() string {

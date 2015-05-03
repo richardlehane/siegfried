@@ -14,7 +14,10 @@
 
 package signature
 
-import "testing"
+import (
+	"testing"
+	"time"
+)
 
 func TestByte(t *testing.T) {
 	saver := NewLoadSaver(nil)
@@ -159,5 +162,16 @@ func TestStrings(t *testing.T) {
 	}
 	if ss[1] != "orange" {
 		t.Errorf("expecting %s, got %s", "orange", ss[1])
+	}
+}
+
+func TestTime(t *testing.T) {
+	saver := NewLoadSaver(nil)
+	now := time.Now()
+	saver.SaveTime(now)
+	loader := NewLoadSaver(saver.Bytes())
+	then := loader.LoadTime()
+	if now.String() != then.String() {
+		t.Errorf("expecting %s to equal %s, errs %v & %v, raw: %v", now, then, loader.Err, saver.Err, saver.Bytes())
 	}
 }

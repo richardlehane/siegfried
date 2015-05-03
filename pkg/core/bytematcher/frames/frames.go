@@ -17,20 +17,12 @@
 package frames
 
 import (
-	"encoding/gob"
 	"errors"
 	"strconv"
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
 	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
-
-func init() {
-	gob.Register(Fixed{})
-	gob.Register(Window{})
-	gob.Register(Wild{})
-	gob.Register(WildMin{})
-}
 
 // Frame encapsulates a pattern with offset information, mediating between the pattern and the bytestream.
 type Frame interface {

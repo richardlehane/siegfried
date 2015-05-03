@@ -19,6 +19,7 @@ import (
 
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
 // positioning information: min/max offsets (in relation to BOF or EOF) and min/max lengths
@@ -39,6 +40,44 @@ type keyFrame struct {
 	Typ frames.OffType // BOF|PREV|SUCC|EOF
 	Seg keyFramePos    // relative positioning info for segment as a whole (min/max length and offset in relation to BOF/EOF/PREV/SUCC)
 	Key keyFramePos    // absolute positioning info for keyFrame portion of segment (min/max length and offset in relation to BOF/EOF)
+}
+
+func loadKeyFrames(ls *signature.LoadSaver) [][]keyFrame {
+	kfs := make([][]keyFrame, ls.LoadSmallInt())
+	for i := range kfs {
+		kfs[i] = make([]keyFrame, ls.LoadSmallInt())
+		for j := range kfs[i] {
+			kfs[i][j].Typ = frames.OffType(ls.LoadByte())
+			kfs[i][j].Seg.PMin = int64(ls.LoadInt())
+			kfs[i][j].Seg.PMax = int64(ls.LoadInt())
+			kfs[i][j].Seg.LMin = ls.LoadInt()
+			kfs[i][j].Seg.LMax = ls.LoadInt()
+			kfs[i][j].Key.PMin = int64(ls.LoadInt())
+			kfs[i][j].Key.PMax = int64(ls.LoadInt())
+			kfs[i][j].Key.LMin = ls.LoadInt()
+			kfs[i][j].Key.LMax = ls.LoadInt()
+		}
+	}
+	return kfs
+}
+
+func saveKeyFrames(ls *signature.LoadSaver, kfs [][]keyFrame) {
+	ls.SaveSmallInt(len(kfs))
+	for _, v := range kfs {
+		ls.SaveSmallInt(len(v))
+		for _, kf := range v {
+			ls.SaveByte(byte(kf.Typ))
+			ls.SaveInt(int(kf.Seg.PMin))
+			ls.SaveInt(int(kf.Seg.PMax))
+			ls.SaveInt(kf.Seg.LMin)
+			ls.SaveInt(kf.Seg.LMax)
+			ls.SaveInt(int(kf.Key.PMin))
+			ls.SaveInt(int(kf.Key.PMax))
+			ls.SaveInt(kf.Key.LMin)
+			ls.SaveInt(kf.Key.LMax)
+		}
+	}
+
 }
 
 func (kf keyFrame) String() string {

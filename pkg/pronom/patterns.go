@@ -17,7 +17,6 @@ package pronom
 
 import (
 	"bytes"
-	"encoding/gob"
 	"fmt"
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
@@ -25,10 +24,6 @@ import (
 )
 
 func init() {
-	gob.Register(&Range{})
-	gob.Register(Mask(0))
-	gob.Register(AnyMask(0))
-
 	patterns.Register(rangeLoader, loadRange)
 	patterns.Register(maskLoader, loadMask)
 	patterns.Register(anyMaskLoader, loadAnyMask)

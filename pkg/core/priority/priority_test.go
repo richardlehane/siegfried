@@ -1,6 +1,10 @@
 package priority
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/richardlehane/siegfried/pkg/core/signature"
+)
 
 func TestAdd(t *testing.T) {
 	m := make(Map)
@@ -85,6 +89,12 @@ func TestSet(t *testing.T) {
 	s := &Set{}
 	s.Add(list, len(list))
 	s.Add(list2, len(list2))
+	// test save/load
+	saver := signature.NewLoadSaver(nil)
+	s.Save(saver)
+	loader := signature.NewLoadSaver(saver.Bytes())
+	s = Load(loader)
+	// now test the waitset
 	w := s.WaitSet()
 	if !w.Check(8) {
 		t.Error("Priority: should get continue signal")

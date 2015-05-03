@@ -5,6 +5,7 @@ import (
 
 	"github.com/richardlehane/match/wac"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames/tests"
+	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
 var TestProcessObj = &Process{
@@ -27,6 +28,10 @@ func TestProcess(t *testing.T) {
 			t.Errorf("Unexpected error adding signature; sig %v; error %v", i, v)
 		}
 	}
+	saver := signature.NewLoadSaver(nil)
+	p.Save(saver)
+	loader := signature.NewLoadSaver(saver.Bytes())
+	p = Load(loader)
 	if len(p.KeyFrames) != 6 {
 		t.Errorf("Expecting 6 keyframe slices, got %d", len(p.KeyFrames))
 	}
@@ -66,6 +71,10 @@ func TestProcessFmt418(t *testing.T) {
 	p := New()
 	p.Options = Options{2000, 500, 10, 1}
 	p.AddSignature(tests.TestFmts[418])
+	saver := signature.NewLoadSaver(nil)
+	p.Save(saver)
+	loader := signature.NewLoadSaver(saver.Bytes())
+	p = Load(loader)
 	if len(p.KeyFrames[0]) != 2 {
 		for _, v := range p.KeyFrames[0] {
 			t.Errorf("%s\n", v)
@@ -79,6 +88,10 @@ func TestProcessFmt134(t *testing.T) {
 	p := New()
 	p.Options = Options{1000, 500, 3, 1}
 	p.AddSignature(tests.TestFmts[134])
+	saver := signature.NewLoadSaver(nil)
+	p.Save(saver)
+	loader := signature.NewLoadSaver(saver.Bytes())
+	p = Load(loader)
 	if len(p.KeyFrames[0]) != 8 {
 		for _, v := range p.KeyFrames[0] {
 			t.Errorf("%s\n", v)

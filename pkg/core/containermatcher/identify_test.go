@@ -12,22 +12,19 @@ import (
 )
 
 func TestIdentify(t *testing.T) {
-	ctypes = append(ctypes, ctype{testTrigger, newTestReader})
+	ctypes = []ctype{ctype{testTrigger, newTestReader}}
 	// test adding
-	err := testContainerMatcher.addSignature([]string{"one", "two"}, []frames.Signature{tests.TestSignatures[3], tests.TestSignatures[4]})
+	count++
+	_, err := testMatcher.Add(
+		SignatureSet{
+			0,
+			[][]string{[]string{"one", "two"}, []string{"one"}},
+			[][]frames.Signature{[]frames.Signature{tests.TestSignatures[3], tests.TestSignatures[4]}, []frames.Signature{tests.TestSignatures[2]}},
+		},
+		nil,
+	)
 	if err != nil {
 		t.Fatal(err)
-	}
-	err = testContainerMatcher.addSignature([]string{"one"}, []frames.Signature{tests.TestSignatures[4]})
-	if err != nil {
-		t.Fatal(err)
-	}
-	testContainerMatcher.Priorities.Add(nil, 2)
-	for _, v := range testContainerMatcher.NameCTest {
-		err = v.commit(nil, 0)
-		if err != nil {
-			t.Fatal(err)
-		}
 	}
 	r := bytes.NewBuffer([]byte("012345678"))
 	bufs := siegreader.New()
@@ -40,8 +37,9 @@ func TestIdentify(t *testing.T) {
 	for r := range res {
 		collect = append(collect, r)
 	}
-	if len(collect) != 2 {
-		t.Errorf("Expecting 2 results, got %v", len(collect))
+	expect := count * 2
+	if len(collect) != expect {
+		t.Errorf("Expecting %d results, got %d", expect, len(collect))
 		for _, r := range collect {
 			t.Error(r.Basis())
 		}

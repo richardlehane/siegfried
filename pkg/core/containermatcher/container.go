@@ -15,18 +15,16 @@
 package containermatcher
 
 import (
-	"bytes"
 	"encoding/binary"
-	"encoding/gob"
 	"errors"
 	"fmt"
-	"io"
 
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
+	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
 type containerType int
@@ -38,40 +36,28 @@ const (
 
 type Matcher []*ContainerMatcher
 
+func Load(ls *signature.LoadSaver) Matcher {
+	ret := make(Matcher, ls.LoadTinyUInt())
+	for i := range ret {
+		ret[i] = loadCM(ls)
+		ret[i].ctype = ctypes[ret[i].CType]
+		ret[i].entryBufs = siegreader.New()
+	}
+	return ret
+}
+
+func (m Matcher) Save(ls *signature.LoadSaver) {
+	ls.SaveTinyUInt(len(m))
+	for _, v := range m {
+		v.save(ls)
+	}
+}
+
 func New() Matcher {
 	m := make(Matcher, 2)
 	m[0] = newZip()
 	m[1] = newMscfb()
 	return m
-}
-
-func Load(r io.Reader) (core.Matcher, error) {
-	var m Matcher
-	dec := gob.NewDecoder(r)
-	err := dec.Decode(&m)
-	if err != nil {
-		return nil, err
-	}
-	for _, c := range m {
-		c.ctype = ctypes[c.CType]
-		c.entryBufs = siegreader.New()
-	}
-	return m, nil
-}
-
-func (m Matcher) Save(w io.Writer) (int, error) {
-	buf := &bytes.Buffer{}
-	enc := gob.NewEncoder(buf)
-	err := enc.Encode(m)
-	if err != nil {
-		return 0, err
-	}
-	sz := buf.Len()
-	_, err = buf.WriteTo(w)
-	if err != nil {
-		return 0, err
-	}
-	return sz, nil
 }
 
 type SignatureSet struct {
@@ -149,6 +135,26 @@ type ContainerMatcher struct {
 	Priorities *priority.Set
 	Default    string // the default is an extension which when matched signals that the container matcher should quit
 	entryBufs  *siegreader.Buffers
+}
+
+func loadCM(ls *signature.LoadSaver) *ContainerMatcher {
+	return &ContainerMatcher{
+		Sindexes:   ls.LoadSmallInts(),
+		CType:      containerType(ls.LoadTinyUInt()),
+		NameCTest:  loadCTests(ls),
+		Parts:      ls.LoadSmallInts(),
+		Priorities: priority.Load(ls),
+		Default:    ls.LoadString(),
+	}
+}
+
+func (c *ContainerMatcher) save(ls *signature.LoadSaver) {
+	ls.SaveSmallInts(c.Sindexes)
+	ls.SaveTinyUInt(int(c.CType))
+	saveCTests(ls, c.NameCTest)
+	ls.SaveSmallInts(c.Parts)
+	c.Priorities.Save(ls)
+	ls.SaveString(c.Default)
 }
 
 func (c *ContainerMatcher) String() string {
@@ -245,6 +251,34 @@ type CTest struct {
 	BM          *bytematcher.Matcher
 }
 
+//map[string]*CTest
+
+func loadCTests(ls *signature.LoadSaver) map[string]*CTest {
+	ret := make(map[string]*CTest)
+	l := ls.LoadSmallInt()
+	if l == 0 {
+		return nil
+	}
+	for i := 0; i < l; i++ {
+		ret[ls.LoadString()] = &CTest{
+			Satisfied:   ls.LoadSmallInts(),
+			Unsatisfied: ls.LoadSmallInts(),
+			BM:          bytematcher.Load(ls),
+		}
+	}
+	return ret
+}
+
+func saveCTests(ls *signature.LoadSaver, ct map[string]*CTest) {
+	ls.SaveSmallInt(len(ct))
+	for k, v := range ct {
+		ls.SaveString(k)
+		ls.SaveSmallInts(v.Satisfied)
+		ls.SaveSmallInts(v.Unsatisfied)
+		v.BM.Save(ls)
+	}
+}
+
 func (ct *CTest) add(s frames.Signature, t int) {
 	if s == nil {
 		ct.Satisfied = append(ct.Satisfied, t)
@@ -279,8 +313,10 @@ func (ct *CTest) commit(p priority.List, prev int) error {
 	}
 	if dupes {
 		_, err := ct.BM.Add(bytematcher.SignatureSet(ct.buffer), nil)
+		ct.buffer = nil
 		return err
 	}
 	_, err := ct.BM.Add(bytematcher.SignatureSet(ct.buffer), p.Subset(ct.Unsatisfied[len(ct.Unsatisfied)-len(ct.buffer):], prev))
+	ct.buffer = nil
 	return err
 }

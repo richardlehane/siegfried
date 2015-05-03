@@ -20,6 +20,7 @@ import (
 	"github.com/richardlehane/match/wac"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
+	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
 // Sequence Sets and Frame Sets
@@ -29,6 +30,43 @@ import (
 type seqSet struct {
 	Set           []wac.Seq
 	TestTreeIndex []int // The index of the testTree for the first choices. For subsequence choices, add the index of that choice to the test tree index.
+}
+
+func (ss *seqSet) save(ls *signature.LoadSaver) {
+	ls.SaveSmallInt(len(ss.Set))
+	for _, v := range ss.Set {
+		ls.SaveBigInts(v.MaxOffsets)
+		ls.SaveSmallInt(len(v.Choices))
+		for _, w := range v.Choices {
+			ls.SaveSmallInt(len(w))
+			for _, x := range w {
+				ls.SaveBytes(x)
+			}
+		}
+	}
+	ls.SaveSmallInts(ss.TestTreeIndex)
+}
+
+func loadSeqSet(ls *signature.LoadSaver) *seqSet {
+	ret := &seqSet{}
+	le := ls.LoadSmallInt()
+	if le == 0 {
+		_ = ls.LoadSmallInts() // discard the empty testtreeindex list too
+		return ret
+	}
+	ret.Set = make([]wac.Seq, le)
+	for i := range ret.Set {
+		ret.Set[i].MaxOffsets = ls.LoadBigInts()
+		ret.Set[i].Choices = make([]wac.Choice, ls.LoadSmallInt())
+		for j := range ret.Set[i].Choices {
+			ret.Set[i].Choices[j] = make(wac.Choice, ls.LoadSmallInt())
+			for k := range ret.Set[i].Choices[j] {
+				ret.Set[i].Choices[j][k] = ls.LoadBytes()
+			}
+		}
+	}
+	ret.TestTreeIndex = ls.LoadSmallInts()
+	return ret
 }
 
 // helper funcs to test equality of wac.Seq
@@ -88,6 +126,29 @@ func (ss *seqSet) add(seq wac.Seq, hi int) int {
 type frameSet struct {
 	Set           []frames.Frame
 	TestTreeIndex []int
+}
+
+func (fs *frameSet) save(ls *signature.LoadSaver) {
+	ls.SaveSmallInt(len(fs.Set))
+	for _, f := range fs.Set {
+		f.Save(ls)
+	}
+	ls.SaveSmallInts(fs.TestTreeIndex)
+}
+
+func loadFrameSet(ls *signature.LoadSaver) *frameSet {
+	ret := &frameSet{}
+	le := ls.LoadSmallInt()
+	if le == 0 {
+		_ = ls.LoadSmallInts()
+		return ret
+	}
+	ret.Set = make([]frames.Frame, le)
+	for i := range ret.Set {
+		ret.Set[i] = frames.Load(ls)
+	}
+	ret.TestTreeIndex = ls.LoadSmallInts()
+	return ret
 }
 
 // Add frame to set. Provides current testerIndex, returns actual testerIndex for hit insertion.

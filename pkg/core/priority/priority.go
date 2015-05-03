@@ -23,6 +23,7 @@ import (
 	"sync"
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/process"
+	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
 // a priority map links subordinate results to a list of priority restuls
@@ -201,6 +202,46 @@ func (l List) String() string {
 type Set struct {
 	Idx   []int
 	Lists []List
+}
+
+func (s *Set) Save(ls *signature.LoadSaver) {
+	if s == nil {
+		ls.SaveBool(false)
+		return
+	}
+	ls.SaveBool(true)
+	ls.SaveSmallInts(s.Idx)
+	ls.SaveSmallInt(len(s.Lists))
+	for _, v := range s.Lists {
+		ls.SaveSmallInt(len(v))
+		for _, w := range v {
+			ls.SaveSmallInts(w)
+		}
+	}
+}
+
+func Load(ls *signature.LoadSaver) *Set {
+	if !ls.LoadBool() {
+		return nil
+	}
+	set := &Set{}
+	set.Idx = ls.LoadSmallInts()
+	if set.Idx == nil {
+		_ = ls.LoadSmallInt() // discard the empty list too
+		return set
+	}
+	set.Lists = make([]List, ls.LoadSmallInt())
+	for i := range set.Lists {
+		le := ls.LoadSmallInt()
+		if le == 0 {
+			continue
+		}
+		set.Lists[i] = make(List, le)
+		for j := range set.Lists[i] {
+			set.Lists[i][j] = ls.LoadSmallInts()
+		}
+	}
+	return set
 }
 
 // Add a priority list to a set. The length is the number of signatures the priority list applies to, not the length of the priority list.

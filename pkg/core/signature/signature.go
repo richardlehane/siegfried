@@ -25,6 +25,7 @@ package signature
 import (
 	"encoding/binary"
 	"errors"
+	"time"
 )
 
 type LoadSaver struct {
@@ -49,7 +50,7 @@ func (l *LoadSaver) Bytes() []byte {
 }
 
 func (l *LoadSaver) read(i int) []byte {
-	if l.Err != nil {
+	if l.Err != nil || i == 0 {
 		return nil
 	}
 	if l.i+i > len(l.buf) {
@@ -117,6 +118,25 @@ func (l *LoadSaver) SaveTinyInt(i int) {
 	l.SaveByte(byte(i))
 }
 
+func (l *LoadSaver) LoadTinyInts() []int {
+	le := l.LoadTinyUInt()
+	if le == 0 {
+		return nil
+	}
+	ret := make([]int, le)
+	for i := range ret {
+		ret[i] = l.LoadTinyInt()
+	}
+	return ret
+}
+
+func (l *LoadSaver) SaveTinyInts(i []int) {
+	l.SaveTinyUInt(len(i))
+	for _, v := range i {
+		l.SaveTinyInt(v)
+	}
+}
+
 func (l *LoadSaver) LoadTinyUInt() int {
 	return int(l.LoadByte())
 }
@@ -127,6 +147,25 @@ func (l *LoadSaver) SaveTinyUInt(i int) {
 		return
 	}
 	l.SaveByte(byte(i))
+}
+
+func (l *LoadSaver) LoadTinyUInts() []int {
+	le := l.LoadTinyUInt()
+	if le == 0 {
+		return nil
+	}
+	ret := make([]int, le)
+	for i := range ret {
+		ret[i] = l.LoadTinyUInt()
+	}
+	return ret
+}
+
+func (l *LoadSaver) SaveTinyUInts(i []int) {
+	l.SaveTinyUInt(len(i))
+	for _, v := range i {
+		l.SaveTinyUInt(v)
+	}
 }
 
 func (l *LoadSaver) LoadSmallInt() int {
@@ -151,6 +190,25 @@ func (l *LoadSaver) SaveSmallInt(i int) {
 	l.write(buf)
 }
 
+func (l *LoadSaver) LoadSmallInts() []int {
+	le := l.LoadSmallInt()
+	if le == 0 {
+		return nil
+	}
+	ret := make([]int, le)
+	for i := range ret {
+		ret[i] = l.LoadSmallInt()
+	}
+	return ret
+}
+
+func (l *LoadSaver) SaveSmallInts(i []int) {
+	l.SaveSmallInt(len(i))
+	for _, v := range i {
+		l.SaveSmallInt(v)
+	}
+}
+
 func (l *LoadSaver) LoadInt() int {
 	le := l.read(4)
 	if le == nil {
@@ -173,12 +231,46 @@ func (l *LoadSaver) SaveInt(i int) {
 	l.write(buf)
 }
 
-func (l *LoadSaver) LoadBytes() []byte {
-	i := l.LoadSmallInt()
-	if i == 0 {
+func (l *LoadSaver) LoadInts() []int {
+	le := l.LoadSmallInt()
+	if le == 0 {
 		return nil
 	}
-	return l.read(i)
+	ret := make([]int, le)
+	for i := range ret {
+		ret[i] = l.LoadInt()
+	}
+	return ret
+}
+
+func (l *LoadSaver) SaveInts(i []int) {
+	l.SaveSmallInt(len(i))
+	for _, v := range i {
+		l.SaveInt(v)
+	}
+}
+
+func (l *LoadSaver) LoadBigInts() []int64 {
+	le := l.LoadSmallInt()
+	if le == 0 {
+		return nil
+	}
+	ret := make([]int64, le)
+	for i := range ret {
+		ret[i] = int64(l.LoadInt())
+	}
+	return ret
+}
+
+func (l *LoadSaver) SaveBigInts(i []int64) {
+	l.SaveSmallInt(len(i))
+	for _, v := range i {
+		l.SaveInt(int(v))
+	}
+}
+
+func (l *LoadSaver) LoadBytes() []byte {
+	return l.read(l.LoadSmallInt())
 }
 
 func (l *LoadSaver) SaveBytes(b []byte) {
@@ -195,11 +287,11 @@ func (l *LoadSaver) SaveString(s string) {
 }
 
 func (l *LoadSaver) LoadStrings() []string {
-	ssl := l.LoadSmallInt()
-	if ssl == 0 {
+	le := l.LoadSmallInt()
+	if le == 0 {
 		return nil
 	}
-	ret := make([]string, ssl)
+	ret := make([]string, le)
 	for i := range ret {
 		ret[i] = l.LoadString()
 	}
@@ -211,4 +303,20 @@ func (l *LoadSaver) SaveStrings(ss []string) {
 	for _, s := range ss {
 		l.SaveString(s)
 	}
+}
+
+func (l *LoadSaver) SaveTime(t time.Time) {
+	byts, err := t.MarshalBinary()
+	if err != nil {
+		l.Err = err
+		return
+	}
+	l.write(byts)
+}
+
+func (l *LoadSaver) LoadTime() time.Time {
+	buf := l.read(15)
+	t := &time.Time{}
+	l.Err = t.UnmarshalBinary(buf)
+	return *t
 }

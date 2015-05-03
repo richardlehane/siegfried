@@ -18,7 +18,6 @@ package patterns
 
 import (
 	"bytes"
-	"encoding/gob"
 	"encoding/hex"
 	"errors"
 	"strconv"
@@ -28,13 +27,6 @@ import (
 )
 
 func init() {
-	gob.Register(Sequence{})
-	gob.Register(Choice{})
-	gob.Register(List{})
-	gob.Register(&Not{})
-	gob.Register(&BMHSequence{})
-	gob.Register(&RBMHSequence{})
-
 	Register(sequenceLoader, loadSequence)
 	Register(choiceLoader, loadChoice)
 	Register(listLoader, loadList)

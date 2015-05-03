@@ -14,7 +14,10 @@
 
 package process
 
-import "github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+import (
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+	"github.com/richardlehane/siegfried/pkg/core/signature"
+)
 
 // Test trees link byte sequence and frame matches (from the sequence and frame sets) to keyframes. This link is sometimes direct if there are no
 // further test to perform. Follow-up tests may be required to the left or to the right of the match.
@@ -26,6 +29,53 @@ type testTree struct {
 	MaxRightDistance int
 	Left             []*testNode
 	Right            []*testNode
+}
+
+func saveTests(ls *signature.LoadSaver, tts []*testTree) {
+	ls.SaveSmallInt(len(tts))
+	for _, tt := range tts {
+		ls.SaveSmallInt(len(tt.Complete))
+		for _, kfid := range tt.Complete {
+			ls.SaveSmallInt(kfid[0])
+			ls.SaveSmallInt(kfid[1])
+		}
+		ls.SaveSmallInt(len(tt.Incomplete))
+		for _, fu := range tt.Incomplete {
+			ls.SaveSmallInt(fu.Kf[0])
+			ls.SaveSmallInt(fu.Kf[1])
+			ls.SaveBool(fu.L)
+			ls.SaveBool(fu.R)
+		}
+		ls.SaveInt(tt.MaxLeftDistance)
+		ls.SaveInt(tt.MaxRightDistance)
+		saveTestNodes(ls, tt.Left)
+		saveTestNodes(ls, tt.Right)
+	}
+}
+
+func loadTests(ls *signature.LoadSaver) []*testTree {
+	l := ls.LoadSmallInt()
+	ret := make([]*testTree, l)
+	for i := range ret {
+		ret[i] = &testTree{}
+		ret[i].Complete = make([]KeyFrameID, ls.LoadSmallInt())
+		for j := range ret[i].Complete {
+			ret[i].Complete[j][0] = ls.LoadSmallInt()
+			ret[i].Complete[j][1] = ls.LoadSmallInt()
+		}
+		ret[i].Incomplete = make([]FollowUp, ls.LoadSmallInt())
+		for j := range ret[i].Incomplete {
+			ret[i].Incomplete[j].Kf[0] = ls.LoadSmallInt()
+			ret[i].Incomplete[j].Kf[1] = ls.LoadSmallInt()
+			ret[i].Incomplete[j].L = ls.LoadBool()
+			ret[i].Incomplete[j].R = ls.LoadBool()
+		}
+		ret[i].MaxLeftDistance = ls.LoadInt()
+		ret[i].MaxRightDistance = ls.LoadInt()
+		ret[i].Left = loadTestNodes(ls)
+		ret[i].Right = loadTestNodes(ls)
+	}
+	return ret
 }
 
 func (t *testTree) String() string {
@@ -76,12 +126,35 @@ type testNode struct {
 	Tests   []*testNode
 }
 
+func saveTestNodes(ls *signature.LoadSaver, tns []*testNode) {
+	ls.SaveSmallInt(len(tns))
+	for _, n := range tns {
+		n.Frame.Save(ls)
+		ls.SaveSmallInts(n.Success)
+		saveTestNodes(ls, n.Tests)
+	}
+}
+
+func loadTestNodes(ls *signature.LoadSaver) []*testNode {
+	l := ls.LoadSmallInt()
+	if l == 0 {
+		return nil
+	}
+	ret := make([]*testNode, l)
+	for i := range ret {
+		ret[i] = &testNode{
+			frames.Load(ls),
+			ls.LoadSmallInts(),
+			loadTestNodes(ls),
+		}
+	}
+	return ret
+}
+
 func newtestNode(f frames.Frame) *testNode {
-	t := new(testNode)
-	t.Frame = f
-	t.Success = make([]int, 0)
-	t.Tests = make([]*testNode, 0)
-	return t
+	return &testNode{
+		Frame: f,
+	}
 }
 
 func hasTest(t []*testNode, f frames.Frame) (*testNode, bool) {

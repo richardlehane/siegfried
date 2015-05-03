@@ -20,6 +20,7 @@ import (
 	"github.com/richardlehane/match/wac"
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
 type Options struct {
@@ -47,6 +48,40 @@ func New() *Process {
 		EOFFrames: &frameSet{},
 		BOFSeq:    &seqSet{},
 		EOFSeq:    &seqSet{},
+	}
+}
+
+func (p *Process) Save(ls *signature.LoadSaver) {
+	saveKeyFrames(ls, p.KeyFrames)
+	saveTests(ls, p.Tests)
+	p.BOFFrames.save(ls)
+	p.EOFFrames.save(ls)
+	p.BOFSeq.save(ls)
+	p.EOFSeq.save(ls)
+	ls.SaveInt(p.MaxBOF)
+	ls.SaveInt(p.MaxEOF)
+	ls.SaveInt(p.Options.Distance)
+	ls.SaveInt(p.Options.Range)
+	ls.SaveInt(p.Options.Choices)
+	ls.SaveInt(p.Options.VarLength)
+}
+
+func Load(ls *signature.LoadSaver) *Process {
+	return &Process{
+		loadKeyFrames(ls),
+		loadTests(ls),
+		loadFrameSet(ls),
+		loadFrameSet(ls),
+		loadSeqSet(ls),
+		loadSeqSet(ls),
+		ls.LoadInt(),
+		ls.LoadInt(),
+		Options{
+			ls.LoadInt(),
+			ls.LoadInt(),
+			ls.LoadInt(),
+			ls.LoadInt(),
+		},
 	}
 }
 

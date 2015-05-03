@@ -16,10 +16,7 @@
 package bytematcher
 
 import (
-	"bytes"
-	"encoding/gob"
 	"fmt"
-	"io"
 	"sync"
 
 	"github.com/richardlehane/match/wac"
@@ -29,6 +26,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/process"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
+	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
 // Bytematcher structure. Clients shouldn't need to get or set these fields directly, they are only exported so that this structure can be serialised and deserialised by encoding/gob.
@@ -54,37 +52,25 @@ func New() *Matcher {
 
 type SignatureSet []frames.Signature
 
-func Load(r io.Reader) (core.Matcher, error) {
-	b := New()
-	dec := gob.NewDecoder(r)
-	err := dec.Decode(b)
-	if err != nil {
-		return nil, err
+func Load(ls *signature.LoadSaver) *Matcher {
+	if !ls.LoadBool() {
+		return nil
 	}
-	return b, nil
+	return &Matcher{
+		Process:    process.Load(ls),
+		Priorities: priority.Load(ls),
+		mu:         &sync.Mutex{},
+	}
 }
 
-// used by container matcher. TODO: different loading strategy for CM?
-func (b *Matcher) SetMu() {
-	if b.mu != nil {
+func (b *Matcher) Save(ls *signature.LoadSaver) {
+	if b == nil {
+		ls.SaveBool(false)
 		return
 	}
-	b.mu = &sync.Mutex{}
-}
-
-func (b *Matcher) Save(w io.Writer) (int, error) {
-	buf := &bytes.Buffer{}
-	enc := gob.NewEncoder(buf)
-	err := enc.Encode(b)
-	if err != nil {
-		return 0, err
-	}
-	sz := buf.Len()
-	_, err = buf.WriteTo(w)
-	if err != nil {
-		return 0, err
-	}
-	return sz, nil
+	ls.SaveBool(true)
+	b.Process.Save(ls)
+	b.Priorities.Save(ls)
 }
 
 type sigErrors []error
