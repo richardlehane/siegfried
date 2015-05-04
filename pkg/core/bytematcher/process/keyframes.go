@@ -50,12 +50,12 @@ func loadKeyFrames(ls *signature.LoadSaver) [][]keyFrame {
 			kfs[i][j].Typ = frames.OffType(ls.LoadByte())
 			kfs[i][j].Seg.PMin = int64(ls.LoadInt())
 			kfs[i][j].Seg.PMax = int64(ls.LoadInt())
-			kfs[i][j].Seg.LMin = ls.LoadInt()
-			kfs[i][j].Seg.LMax = ls.LoadInt()
+			kfs[i][j].Seg.LMin = ls.LoadSmallInt()
+			kfs[i][j].Seg.LMax = ls.LoadSmallInt()
 			kfs[i][j].Key.PMin = int64(ls.LoadInt())
 			kfs[i][j].Key.PMax = int64(ls.LoadInt())
-			kfs[i][j].Key.LMin = ls.LoadInt()
-			kfs[i][j].Key.LMax = ls.LoadInt()
+			kfs[i][j].Key.LMin = ls.LoadSmallInt()
+			kfs[i][j].Key.LMax = ls.LoadSmallInt()
 		}
 	}
 	return kfs
@@ -69,12 +69,12 @@ func saveKeyFrames(ls *signature.LoadSaver, kfs [][]keyFrame) {
 			ls.SaveByte(byte(kf.Typ))
 			ls.SaveInt(int(kf.Seg.PMin))
 			ls.SaveInt(int(kf.Seg.PMax))
-			ls.SaveInt(kf.Seg.LMin)
-			ls.SaveInt(kf.Seg.LMax)
+			ls.SaveSmallInt(kf.Seg.LMin)
+			ls.SaveSmallInt(kf.Seg.LMax)
 			ls.SaveInt(int(kf.Key.PMin))
 			ls.SaveInt(int(kf.Key.PMax))
-			ls.SaveInt(kf.Key.LMin)
-			ls.SaveInt(kf.Key.LMax)
+			ls.SaveSmallInt(kf.Key.LMin)
+			ls.SaveSmallInt(kf.Key.LMax)
 		}
 	}
 

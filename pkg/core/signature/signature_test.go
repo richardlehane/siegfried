@@ -76,6 +76,7 @@ func TestSmallInt(t *testing.T) {
 	saver.SaveSmallInt(32767)
 	saver.SaveSmallInt(0)
 	saver.SaveSmallInt(-32767)
+	saver.SaveSmallInts([]int{-1, 32767, 0, -32767})
 	loader := NewLoadSaver(saver.Bytes())
 	i := loader.LoadSmallInt()
 	if i != 5 {
@@ -97,6 +98,22 @@ func TestSmallInt(t *testing.T) {
 	if i != -32767 {
 		t.Errorf("expecting %d, got %d", -32767, i)
 	}
+	c := loader.LoadSmallInts()
+	if len(c) != 4 {
+		t.Fatalf("expecting 4 results got %v", c)
+	}
+	if c[0] != -1 {
+		t.Errorf("expecting -1, got %v", c[0])
+	}
+	if c[1] != 32767 {
+		t.Errorf("expecting 32767, got %v", c[1])
+	}
+	if c[2] != 0 {
+		t.Errorf("expecting 0, got %v", c[2])
+	}
+	if c[3] != -32767 {
+		t.Errorf("expecting -32767, got %v", c[3])
+	}
 }
 
 func TestInt(t *testing.T) {
@@ -106,6 +123,7 @@ func TestInt(t *testing.T) {
 	saver.SaveInt(2147483647)
 	saver.SaveInt(0)
 	saver.SaveInt(-2147483647)
+	saver.SaveInts([]int{5, -2147483647, 2147483647, 0})
 	loader := NewLoadSaver(saver.Bytes())
 	i := loader.LoadInt()
 	if i != 5 {
@@ -126,6 +144,23 @@ func TestInt(t *testing.T) {
 	i = loader.LoadInt()
 	if i != -2147483647 {
 		t.Errorf("expecting %d, got %d", -2147483647, i)
+	}
+
+	c := loader.LoadInts()
+	if len(c) != 4 {
+		t.Fatalf("expecting 4 results got %v", c)
+	}
+	if c[0] != 5 {
+		t.Errorf("expecting 5, got %v", c[0])
+	}
+	if c[1] != -2147483647 {
+		t.Errorf("expecting -1, got %v", c[1])
+	}
+	if c[2] != 2147483647 {
+		t.Errorf("expecting 2147483647, got %v", c[2])
+	}
+	if c[3] != 0 {
+		t.Errorf("expecting 0, got %v", c[3])
 	}
 }
 
@@ -148,6 +183,7 @@ func TestStrings(t *testing.T) {
 	saver := NewLoadSaver(nil)
 	saver.SaveString("apple")
 	saver.SaveStrings([]string{"banana", "orange"})
+	saver.SaveStrings([]string{"banana", "grapefruit"})
 	loader := NewLoadSaver(saver.Bytes())
 	s := loader.LoadString()
 	if s != "apple" {
@@ -162,6 +198,16 @@ func TestStrings(t *testing.T) {
 	}
 	if ss[1] != "orange" {
 		t.Errorf("expecting %s, got %s", "orange", ss[1])
+	}
+	s2 := loader.LoadStrings()
+	if len(s2) != 2 {
+		t.Errorf("expecting a slice of two strings got %v", s2)
+	}
+	if s2[0] != "banana" {
+		t.Errorf("expecting %s, got %s", "banana", s2[0])
+	}
+	if s2[1] != "grapefruit" {
+		t.Errorf("expecting %s, got %s", "grapefruit", s2[1])
 	}
 }
 

@@ -205,11 +205,6 @@ type Set struct {
 }
 
 func (s *Set) Save(ls *signature.LoadSaver) {
-	if s == nil {
-		ls.SaveBool(false)
-		return
-	}
-	ls.SaveBool(true)
 	ls.SaveSmallInts(s.Idx)
 	ls.SaveSmallInt(len(s.Lists))
 	for _, v := range s.Lists {
@@ -221,9 +216,6 @@ func (s *Set) Save(ls *signature.LoadSaver) {
 }
 
 func Load(ls *signature.LoadSaver) *Set {
-	if !ls.LoadBool() {
-		return nil
-	}
 	set := &Set{}
 	set.Idx = ls.LoadSmallInts()
 	if set.Idx == nil {
