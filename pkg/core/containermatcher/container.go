@@ -256,9 +256,6 @@ type CTest struct {
 func loadCTests(ls *signature.LoadSaver) map[string]*CTest {
 	ret := make(map[string]*CTest)
 	l := ls.LoadSmallInt()
-	if l == 0 {
-		return nil
-	}
 	for i := 0; i < l; i++ {
 		ret[ls.LoadString()] = &CTest{
 			Satisfied:   ls.LoadSmallInts(),

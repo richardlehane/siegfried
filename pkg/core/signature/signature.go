@@ -272,6 +272,9 @@ func (l *LoadSaver) convertSmallInts(i []int) []byte {
 }
 
 func makeSmallInts(b []byte) []int {
+	if len(b) == 0 {
+		return nil
+	}
 	ret := make([]int, len(b)/2)
 	for i := range ret {
 		ret[i] = int(binary.LittleEndian.Uint16(b[i*2:]))
