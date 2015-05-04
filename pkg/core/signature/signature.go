@@ -152,7 +152,7 @@ func (l *LoadSaver) SaveBool(b bool) {
 func (l *LoadSaver) LoadTinyInt() int {
 	i := int(l.LoadByte())
 	if i > 128 {
-		return -256 + i
+		return i - 256
 	}
 	return i
 }
@@ -182,7 +182,7 @@ func makeTinyInts(b []byte) []int {
 	for i := range ret {
 		n := int(b[i])
 		if n > 128 {
-			n -= -256
+			n -= 256
 		}
 		ret[i] = n
 	}
@@ -244,7 +244,7 @@ func (l *LoadSaver) LoadSmallInt() int {
 	}
 	i := int(binary.LittleEndian.Uint16(le))
 	if i > 32768 {
-		return -65536 + i
+		return i - 65536
 	}
 	return i
 }
@@ -276,7 +276,7 @@ func makeSmallInts(b []byte) []int {
 	for i := range ret {
 		ret[i] = int(binary.LittleEndian.Uint16(b[i*2:]))
 		if ret[i] > 32768 {
-			ret[i] = -65536 + ret[i]
+			ret[i] -= 65536
 		}
 	}
 	return ret
@@ -297,7 +297,7 @@ func (l *LoadSaver) LoadInt() int {
 	}
 	i := int64(binary.LittleEndian.Uint32(le))
 	if i > 2147483648 {
-		return int(-4294967296 + i)
+		return int(i - 4294967296)
 	}
 	return int(i)
 }
@@ -329,7 +329,7 @@ func makeInts(b []byte) []int {
 	for i := range ret {
 		n := int64(binary.LittleEndian.Uint32(b[i*4:]))
 		if n > 2147483648 {
-			n = -4294967296 + n
+			n -= 4294967296
 		}
 		ret[i] = int(n)
 	}
@@ -349,7 +349,7 @@ func makeBigInts(b []byte) []int64 {
 	for i := range ret {
 		ret[i] = int64(binary.LittleEndian.Uint32(b[i*4:]))
 		if ret[i] > 2147483648 {
-			ret[i] = -4294967296 + ret[i]
+			ret[i] -= -4294967296
 		}
 	}
 	return ret
