@@ -16,6 +16,7 @@ package process
 
 import (
 	"bytes"
+	"fmt"
 
 	"github.com/richardlehane/match/wac"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
@@ -44,14 +45,14 @@ func (ss *seqSet) save(ls *signature.LoadSaver) {
 			}
 		}
 	}
-	ls.SaveSmallInts(ss.TestTreeIndex)
+	ls.SaveInts(ss.TestTreeIndex)
 }
 
 func loadSeqSet(ls *signature.LoadSaver) *seqSet {
 	ret := &seqSet{}
 	le := ls.LoadSmallInt()
 	if le == 0 {
-		_ = ls.LoadSmallInts() // discard the empty testtreeindex list too
+		_ = ls.LoadInts() // discard the empty testtreeindex list too
 		return ret
 	}
 	ret.Set = make([]wac.Seq, le)
@@ -64,8 +65,12 @@ func loadSeqSet(ls *signature.LoadSaver) *seqSet {
 				ret.Set[i].Choices[j][k] = ls.LoadBytes()
 			}
 		}
+		if len(ret.Set[i].MaxOffsets) != len(ret.Set[i].Choices) {
+			fmt.Printf("Bad load: %d; %d\n%v\n%v\n", len(ret.Set[i].MaxOffsets), len(ret.Set[i].Choices), ret.Set[i].MaxOffsets, ret.Set[i].Choices)
+			panic("dang!")
+		}
 	}
-	ret.TestTreeIndex = ls.LoadSmallInts()
+	ret.TestTreeIndex = ls.LoadInts()
 	return ret
 }
 
@@ -133,21 +138,21 @@ func (fs *frameSet) save(ls *signature.LoadSaver) {
 	for _, f := range fs.Set {
 		f.Save(ls)
 	}
-	ls.SaveSmallInts(fs.TestTreeIndex)
+	ls.SaveInts(fs.TestTreeIndex)
 }
 
 func loadFrameSet(ls *signature.LoadSaver) *frameSet {
 	ret := &frameSet{}
 	le := ls.LoadSmallInt()
 	if le == 0 {
-		_ = ls.LoadSmallInts()
+		_ = ls.LoadInts()
 		return ret
 	}
 	ret.Set = make([]frames.Frame, le)
 	for i := range ret.Set {
 		ret.Set[i] = frames.Load(ls)
 	}
-	ret.TestTreeIndex = ls.LoadSmallInts()
+	ret.TestTreeIndex = ls.LoadInts()
 	return ret
 }
 

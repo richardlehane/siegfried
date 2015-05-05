@@ -130,7 +130,7 @@ func saveTestNodes(ls *signature.LoadSaver, tns []*testNode) {
 	ls.SaveSmallInt(len(tns))
 	for _, n := range tns {
 		n.Frame.Save(ls)
-		ls.SaveSmallInts(n.Success)
+		ls.SaveInts(n.Success)
 		saveTestNodes(ls, n.Tests)
 	}
 }
@@ -144,7 +144,7 @@ func loadTestNodes(ls *signature.LoadSaver) []*testNode {
 	for i := range ret {
 		ret[i] = &testNode{
 			frames.Load(ls),
-			ls.LoadSmallInts(),
+			ls.LoadInts(),
 			loadTestNodes(ls),
 		}
 	}

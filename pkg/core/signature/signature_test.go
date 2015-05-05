@@ -46,6 +46,7 @@ func TestTinyInt(t *testing.T) {
 	saver.SaveTinyInt(127)
 	saver.SaveTinyInt(0)
 	saver.SaveTinyInt(-127)
+	saver.SaveInts([]int{5, -1, 127, 0, -127})
 	loader := NewLoadSaver(saver.Bytes())
 	i := loader.LoadTinyInt()
 	if i != 5 {
@@ -67,6 +68,22 @@ func TestTinyInt(t *testing.T) {
 	if i != -127 {
 		t.Errorf("expecting %d, got %d", -127, i)
 	}
+	is := loader.LoadInts()
+	if len(is) != 5 {
+		t.Errorf("expecting 5 ints got %d", len(is))
+	}
+	switch {
+	case is[0] != 5:
+		t.Errorf("expecting 5, got %d", is[0])
+	case is[1] != -1:
+		t.Errorf("expecting -1, got %d", is[1])
+	case is[2] != 127:
+		t.Errorf("expecting 127, got %d", is[2])
+	case is[3] != 0:
+		t.Errorf("expecting 0, got %d", is[3])
+	case is[4] != -127:
+		t.Errorf("expecting -127, got %d", is[4])
+	}
 }
 
 func TestSmallInt(t *testing.T) {
@@ -76,7 +93,7 @@ func TestSmallInt(t *testing.T) {
 	saver.SaveSmallInt(32767)
 	saver.SaveSmallInt(0)
 	saver.SaveSmallInt(-32767)
-	saver.SaveSmallInts([]int{-1, 32767, 0, -32767})
+	saver.SaveInts([]int{-1, 32767, 0, -32767})
 	loader := NewLoadSaver(saver.Bytes())
 	i := loader.LoadSmallInt()
 	if i != 5 {
@@ -98,7 +115,7 @@ func TestSmallInt(t *testing.T) {
 	if i != -32767 {
 		t.Errorf("expecting %d, got %d", -32767, i)
 	}
-	c := loader.LoadSmallInts()
+	c := loader.LoadInts()
 	if len(c) != 4 {
 		t.Fatalf("expecting 4 results got %v", c)
 	}

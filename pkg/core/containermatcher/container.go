@@ -139,20 +139,20 @@ type ContainerMatcher struct {
 
 func loadCM(ls *signature.LoadSaver) *ContainerMatcher {
 	return &ContainerMatcher{
-		Sindexes:   ls.LoadSmallInts(),
+		Sindexes:   ls.LoadInts(),
 		CType:      containerType(ls.LoadTinyUInt()),
 		NameCTest:  loadCTests(ls),
-		Parts:      ls.LoadSmallInts(),
+		Parts:      ls.LoadInts(),
 		Priorities: priority.Load(ls),
 		Default:    ls.LoadString(),
 	}
 }
 
 func (c *ContainerMatcher) save(ls *signature.LoadSaver) {
-	ls.SaveSmallInts(c.Sindexes)
+	ls.SaveInts(c.Sindexes)
 	ls.SaveTinyUInt(int(c.CType))
 	saveCTests(ls, c.NameCTest)
-	ls.SaveSmallInts(c.Parts)
+	ls.SaveInts(c.Parts)
 	c.Priorities.Save(ls)
 	ls.SaveString(c.Default)
 }
@@ -258,8 +258,8 @@ func loadCTests(ls *signature.LoadSaver) map[string]*CTest {
 	l := ls.LoadSmallInt()
 	for i := 0; i < l; i++ {
 		ret[ls.LoadString()] = &CTest{
-			Satisfied:   ls.LoadSmallInts(),
-			Unsatisfied: ls.LoadSmallInts(),
+			Satisfied:   ls.LoadInts(),
+			Unsatisfied: ls.LoadInts(),
 			BM:          bytematcher.Load(ls),
 		}
 	}
@@ -270,8 +270,8 @@ func saveCTests(ls *signature.LoadSaver, ct map[string]*CTest) {
 	ls.SaveSmallInt(len(ct))
 	for k, v := range ct {
 		ls.SaveString(k)
-		ls.SaveSmallInts(v.Satisfied)
-		ls.SaveSmallInts(v.Unsatisfied)
+		ls.SaveInts(v.Satisfied)
+		ls.SaveInts(v.Unsatisfied)
 		v.BM.Save(ls)
 	}
 }

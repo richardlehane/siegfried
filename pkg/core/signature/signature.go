@@ -28,24 +28,6 @@ import (
 	"time"
 )
 
-const MAXUINT23 = 256 * 256 * 128 // = approx 8mb address space
-
-func getRef(b []byte) (int, bool) {
-	return int(b[2]&^0x80)<<16 | int(b[1])<<8 | int(b[0]), b[2]&0x80 == 0x80
-}
-
-func (l *LoadSaver) makeRef(i int, ref bool) []byte {
-	if i < 0 || i >= MAXUINT23 {
-		l.Err = errors.New("cannot coerce integer to an unsigned 23bit")
-		return nil
-	}
-	b := []byte{byte(i), byte(i >> 8), byte(i >> 16)}
-	if ref {
-		b[2] = b[2] | 0x80
-	}
-	return b
-}
-
 type LoadSaver struct {
 	buf   []byte
 	i     int
@@ -92,6 +74,41 @@ func (l *LoadSaver) put(b []byte) {
 	}
 	copy(l.buf[l.i:len(b)+l.i], b)
 	l.i += len(b)
+}
+
+const (
+	_int8 byte = iota
+	_uint8
+	_int16
+	_uint16
+	_int32
+	_uint32
+)
+
+const (
+	min8, max8   = -128, 128
+	maxu8        = 256
+	min16, max16 = -32768, 32768
+	maxu16       = 65536
+	min32, max32 = -2147483648, 2147483648
+	maxu32       = 4294967296
+	maxu23       = 256 * 256 * 128 // used by collection refs = approx 8mb address space
+)
+
+func getRef(b []byte) (int, bool) {
+	return int(b[2]&^0x80)<<16 | int(b[1])<<8 | int(b[0]), b[2]&0x80 == 0x80
+}
+
+func (l *LoadSaver) makeRef(i int, ref bool) []byte {
+	if i < 0 || i >= maxu23 {
+		l.Err = errors.New("cannot coerce integer to an unsigned 23bit")
+		return nil
+	}
+	b := []byte{byte(i), byte(i >> 8), byte(i >> 16)}
+	if ref {
+		b[2] = b[2] | 0x80
+	}
+	return b
 }
 
 func (l *LoadSaver) getCollection() []byte {
@@ -151,50 +168,18 @@ func (l *LoadSaver) SaveBool(b bool) {
 
 func (l *LoadSaver) LoadTinyInt() int {
 	i := int(l.LoadByte())
-	if i > 128 {
-		return i - 256
+	if i > max8 {
+		return i - maxu8
 	}
 	return i
 }
 
 func (l *LoadSaver) SaveTinyInt(i int) {
-	if i <= -128 || i >= 128 {
+	if i <= min8 || i >= max8 {
 		l.Err = errors.New("int overflows byte")
 		return
 	}
 	l.SaveByte(byte(i))
-}
-
-func (l *LoadSaver) convertTinyInts(i []int) []byte {
-	ret := make([]byte, len(i))
-	for j := range ret {
-		if i[j] <= -128 || i[j] >= 128 {
-			l.Err = errors.New("int overflows byte: need a tiny int")
-			return nil
-		}
-		ret[j] = byte(i[j])
-	}
-	return ret
-}
-
-func makeTinyInts(b []byte) []int {
-	ret := make([]int, len(b))
-	for i := range ret {
-		n := int(b[i])
-		if n > 128 {
-			n -= 256
-		}
-		ret[i] = n
-	}
-	return ret
-}
-
-func (l *LoadSaver) LoadTinyInts() []int {
-	return makeTinyInts(l.getCollection())
-}
-
-func (l *LoadSaver) SaveTinyInts(i []int) {
-	l.putCollection(l.convertTinyInts(i))
 }
 
 func (l *LoadSaver) LoadTinyUInt() int {
@@ -202,39 +187,11 @@ func (l *LoadSaver) LoadTinyUInt() int {
 }
 
 func (l *LoadSaver) SaveTinyUInt(i int) {
-	if i < 0 || i >= 256 {
+	if i < 0 || i >= maxu8 {
 		l.Err = errors.New("int overflows byte as a uint")
 		return
 	}
 	l.SaveByte(byte(i))
-}
-
-func (l *LoadSaver) convertTinyUInts(i []int) []byte {
-	ret := make([]byte, len(i))
-	for j := range ret {
-		if i[j] < 0 || i[j] >= 256 {
-			l.Err = errors.New("int overflows byte: need a tiny uint")
-			return nil
-		}
-		ret[j] = byte(i[j])
-	}
-	return ret
-}
-
-func makeTinyUInts(b []byte) []int {
-	ret := make([]int, len(b))
-	for i := range ret {
-		ret[i] = int(b[i])
-	}
-	return ret
-}
-
-func (l *LoadSaver) LoadTinyUInts() []int {
-	return makeTinyUInts(l.getCollection())
-}
-
-func (l *LoadSaver) SaveTinyUInts(i []int) {
-	l.putCollection(l.convertTinyUInts(i))
 }
 
 func (l *LoadSaver) LoadSmallInt() int {
@@ -243,14 +200,14 @@ func (l *LoadSaver) LoadSmallInt() int {
 		return 0
 	}
 	i := int(binary.LittleEndian.Uint16(le))
-	if i > 32768 {
-		return i - 65536
+	if i > max16 {
+		return i - maxu16
 	}
 	return i
 }
 
 func (l *LoadSaver) SaveSmallInt(i int) {
-	if i <= -32768 || i >= 32768 {
+	if i <= min16 || i >= max16 {
 		l.Err = errors.New("int overflows int16")
 		return
 	}
@@ -259,54 +216,20 @@ func (l *LoadSaver) SaveSmallInt(i int) {
 	l.put(buf)
 }
 
-func (l *LoadSaver) convertSmallInts(i []int) []byte {
-	ret := make([]byte, len(i)*2)
-	for j := range i {
-		if i[j] <= -32768 || i[j] >= 32768 {
-			l.Err = errors.New("int overflows int16")
-			return nil
-		}
-		binary.LittleEndian.PutUint16(ret[j*2:], uint16(i[j]))
-	}
-	return ret
-}
-
-func makeSmallInts(b []byte) []int {
-	if len(b) == 0 {
-		return nil
-	}
-	ret := make([]int, len(b)/2)
-	for i := range ret {
-		ret[i] = int(binary.LittleEndian.Uint16(b[i*2:]))
-		if ret[i] > 32768 {
-			ret[i] -= 65536
-		}
-	}
-	return ret
-}
-
-func (l *LoadSaver) LoadSmallInts() []int {
-	return makeSmallInts(l.getCollection())
-}
-
-func (l *LoadSaver) SaveSmallInts(i []int) {
-	l.putCollection(l.convertSmallInts(i))
-}
-
 func (l *LoadSaver) LoadInt() int {
 	le := l.get(4)
 	if le == nil {
 		return 0
 	}
 	i := int64(binary.LittleEndian.Uint32(le))
-	if i > 2147483648 {
-		return int(i - 4294967296)
+	if i > max32 {
+		return int(i - maxu32)
 	}
 	return int(i)
 }
 
 func (l *LoadSaver) SaveInt(i int) {
-	if int64(i) <= -2147483648 || int64(i) >= 2147483648 {
+	if int64(i) <= min32 || int64(i) >= max32 {
 		l.Err = errors.New("int overflows uint32")
 		return
 	}
@@ -315,26 +238,117 @@ func (l *LoadSaver) SaveInt(i int) {
 	l.put(buf)
 }
 
-func (l *LoadSaver) convertInts(i []int) []byte {
-	ret := make([]byte, len(i)*4)
-	for j := range i {
-		if i[j] <= -2147483648 || i[j] >= 2147483648 {
-			l.Err = errors.New("int overflows int32")
-			return nil
+func characterise(is []int) (byte, error) {
+	f := func(i, max int, sign bool) (int, bool) {
+		if i < 0 {
+			sign = true
+			i *= -1
 		}
-		binary.LittleEndian.PutUint32(ret[j*4:], uint32(i[j]))
+		if i > max {
+			return i, sign
+		}
+		return max, sign
 	}
-	return ret
+	var m int
+	var s bool
+	for _, v := range is {
+		m, s = f(v, m, s)
+	}
+	switch {
+	case m < max8:
+		return _int8, nil
+	case m < maxu8 && !s:
+		return _uint8, nil
+	case m < max16:
+		return _int16, nil
+	case m < maxu16 && !s:
+		return _uint16, nil
+	case int64(m) < max32:
+		return _int32, nil
+	case int64(m) < maxu32 && !s:
+		return _uint32, nil
+	default:
+		return 0, errors.New("integer overflow when building signature - need 64 bit int types!")
+	}
+}
+
+func (l *LoadSaver) convertInts(is []int) []byte {
+	if len(is) == 0 {
+		return nil
+	}
+	typ, err := characterise(is)
+	if err != nil {
+		l.Err = err
+		return nil
+	}
+	var ret []byte
+	switch typ {
+	case _int8, _uint8:
+		ret = make([]byte, len(is))
+		for i := range ret {
+			ret[i] = byte(is[i])
+		}
+	case _int16, _uint16:
+		ret = make([]byte, len(is)*2)
+		for i := range is {
+			binary.LittleEndian.PutUint16(ret[i*2:], uint16(is[i]))
+		}
+	case _int32, _uint32:
+		ret = make([]byte, len(is)*4)
+		for i := range is {
+			binary.LittleEndian.PutUint32(ret[i*4:], uint32(is[i]))
+		}
+	}
+	return append([]byte{typ}, ret...)
 }
 
 func makeInts(b []byte) []int {
-	ret := make([]int, len(b)/4)
-	for i := range ret {
-		n := int64(binary.LittleEndian.Uint32(b[i*4:]))
-		if n > 2147483648 {
-			n -= 4294967296
+	if len(b) == 0 {
+		return nil
+	}
+	var ret []int
+	typ := b[0]
+	b = b[1:]
+	switch typ {
+	case _int8:
+		ret = make([]int, len(b))
+		for i := range ret {
+			ret[i] = int(b[i])
+			if ret[i] > max8 {
+				ret[i] -= maxu8
+			}
 		}
-		ret[i] = int(n)
+	case _uint8:
+		ret = make([]int, len(b))
+		for i := range ret {
+			ret[i] = int(b[i])
+		}
+	case _int16:
+		ret = make([]int, len(b)/2)
+		for i := range ret {
+			ret[i] = int(binary.LittleEndian.Uint16(b[i*2:]))
+			if ret[i] > max16 {
+				ret[i] -= maxu16
+			}
+		}
+	case _uint16:
+		for i := range ret {
+			ret[i] = int(binary.LittleEndian.Uint16(b[i*2:]))
+		}
+	case _int32:
+		ret = make([]int, len(b)/4)
+		for i := range ret {
+			n := int64(binary.LittleEndian.Uint32(b[i*4:]))
+			if n > max32 {
+				n -= maxu32
+			}
+			ret[i] = int(n)
+		}
+	case _uint32:
+		ret = make([]int, len(b)/4)
+		for i := range ret {
+			ret[i] = int(binary.LittleEndian.Uint32(b[i*4:]))
+		}
 	}
 	return ret
 }
@@ -351,21 +365,29 @@ func makeBigInts(b []byte) []int64 {
 	ret := make([]int64, len(b)/4)
 	for i := range ret {
 		ret[i] = int64(binary.LittleEndian.Uint32(b[i*4:]))
-		if ret[i] > 2147483648 {
-			ret[i] -= -4294967296
+		if ret[i] > max32 {
+			ret[i] -= maxu32
 		}
 	}
 	return ret
 }
 
 func (l *LoadSaver) LoadBigInts() []int64 {
-	return makeBigInts(l.getCollection())
+	is := makeInts(l.getCollection())
+	if is == nil {
+		return nil
+	}
+	ret := make([]int64, len(is))
+	for i := range is {
+		ret[i] = int64(is[i])
+	}
+	return ret
 }
 
-func (l *LoadSaver) SaveBigInts(i []int64) {
-	n := make([]int, len(i))
-	for j := range i {
-		n[j] = int(i[j])
+func (l *LoadSaver) SaveBigInts(is []int64) {
+	n := make([]int, len(is))
+	for i := range is {
+		n[i] = int(is[i])
 	}
 	l.SaveInts(n)
 }

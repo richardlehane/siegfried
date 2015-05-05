@@ -205,19 +205,19 @@ type Set struct {
 }
 
 func (s *Set) Save(ls *signature.LoadSaver) {
-	ls.SaveSmallInts(s.Idx)
+	ls.SaveInts(s.Idx)
 	ls.SaveSmallInt(len(s.Lists))
 	for _, v := range s.Lists {
 		ls.SaveSmallInt(len(v))
 		for _, w := range v {
-			ls.SaveSmallInts(w)
+			ls.SaveInts(w)
 		}
 	}
 }
 
 func Load(ls *signature.LoadSaver) *Set {
 	set := &Set{}
-	set.Idx = ls.LoadSmallInts()
+	set.Idx = ls.LoadInts()
 	if set.Idx == nil {
 		_ = ls.LoadSmallInt() // discard the empty list too
 		return set
@@ -230,7 +230,7 @@ func Load(ls *signature.LoadSaver) *Set {
 		}
 		set.Lists[i] = make(List, le)
 		for j := range set.Lists[i] {
-			set.Lists[i][j] = ls.LoadSmallInts()
+			set.Lists[i][j] = ls.LoadInts()
 		}
 	}
 	return set
