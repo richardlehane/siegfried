@@ -31,6 +31,7 @@
 package siegfried
 
 import (
+	"archive/zip"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -111,6 +112,69 @@ func (s *Siegfried) Save(path string) error {
 		return err
 	}
 	return nil
+}
+
+// Save a Siegfried signature file
+func (s *Siegfried) SaveC(path string) error {
+	ls := signature.NewLoadSaver(nil)
+	ls.SaveString("siegfried")
+	ls.SaveTime(s.C)
+	s.em.Save(ls)
+	s.cm.Save(ls)
+	s.bm.Save(ls)
+	ls.SaveTinyUInt(len(s.ids))
+	for _, i := range s.ids {
+		i.Save(ls)
+	}
+	if ls.Err != nil {
+		return ls.Err
+	}
+	f, err := os.Create(path)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	z := zip.NewWriter(f)
+	zw, err := z.Create("siegfried")
+	if err != nil {
+		return err
+	}
+	_, err = zw.Write(ls.Bytes())
+	if err != nil {
+		return err
+	}
+	z.Close()
+	return nil
+}
+
+// Load a Siegfried signature file
+func LoadC(path string) (*Siegfried, error) {
+	r, err := zip.OpenReader(path)
+	if err != nil {
+		return nil, err
+	}
+	defer r.Close()
+	rc, err := r.File[0].Open()
+	if err != nil {
+		return nil, err
+	}
+	defer rc.Close()
+	buf, err := ioutil.ReadAll(rc)
+	if err != nil {
+		return nil, fmt.Errorf("Siegfried: error opening signature file; got %s\nTry running `sf -update`", err)
+	}
+	ls := signature.NewLoadSaver(buf)
+	if ls.LoadString() != "siegfried" {
+		return nil, fmt.Errorf("Siegfried: not a siegfried signature file")
+	}
+	return &Siegfried{
+		C:       ls.LoadTime(),
+		em:      extensionmatcher.Load(ls),
+		cm:      containermatcher.Load(ls),
+		bm:      bytematcher.Load(ls),
+		ids:     loadIDs(ls),
+		buffers: siegreader.New(),
+	}, ls.Err
 }
 
 // Load a Siegfried signature file

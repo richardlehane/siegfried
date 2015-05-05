@@ -36,16 +36,17 @@ const PROCS = -1
 
 // flags
 var (
-	update  = flag.Bool("update", false, "update or install the default signature file")
-	version = flag.Bool("version", false, "display version information")
-	debug   = flag.Bool("debug", false, "scan in debug mode")
-	nr      = flag.Bool("nr", false, "prevent automatic directory recursion")
-	csvo    = flag.Bool("csv", false, "CSV output format")
-	jsono   = flag.Bool("json", false, "JSON output format")
-	sig     = flag.String("sig", config.SignatureBase(), "set the signature file")
-	home    = flag.String("home", config.Home(), "override the default home directory")
-	serve   = flag.String("serve", "false", "start siegfried server e.g. -serve localhost:5138")
-	multi   = flag.Int("multi", 1, "set number of file ID processes")
+	update   = flag.Bool("update", false, "update or install the default signature file")
+	version  = flag.Bool("version", false, "display version information")
+	debug    = flag.Bool("debug", false, "scan in debug mode")
+	nr       = flag.Bool("nr", false, "prevent automatic directory recursion")
+	csvo     = flag.Bool("csv", false, "CSV output format")
+	jsono    = flag.Bool("json", false, "JSON output format")
+	sig      = flag.String("sig", config.SignatureBase(), "set the signature file")
+	home     = flag.String("home", config.Home(), "override the default home directory")
+	serve    = flag.String("serve", "false", "start siegfried server e.g. -serve localhost:5138")
+	multi    = flag.Int("multi", 1, "set number of file ID processes")
+	compress = flag.Bool("compress", false, "load compressed signature file")
 	//profile = flag.Bool("profile", false, "run a profile on localhost:6060")
 )
 
@@ -191,7 +192,12 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error: error getting info for %v, got: %v", flag.Arg(0), err)
 	}
-	s, err := siegfried.Load(config.Signature())
+	var s *siegfried.Siegfried
+	if *compress {
+		s, err = siegfried.LoadC(config.Signature())
+	} else {
+		s, err = siegfried.Load(config.Signature())
+	}
 	if err != nil {
 		log.Fatalf("Error: error loading signature file, got: %v", err)
 
