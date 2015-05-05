@@ -16,7 +16,6 @@ package process
 
 import (
 	"bytes"
-	"fmt"
 
 	"github.com/richardlehane/match/wac"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
@@ -64,10 +63,6 @@ func loadSeqSet(ls *signature.LoadSaver) *seqSet {
 			for k := range ret.Set[i].Choices[j] {
 				ret.Set[i].Choices[j][k] = ls.LoadBytes()
 			}
-		}
-		if len(ret.Set[i].MaxOffsets) != len(ret.Set[i].Choices) {
-			fmt.Printf("Bad load: %d; %d\n%v\n%v\n", len(ret.Set[i].MaxOffsets), len(ret.Set[i].Choices), ret.Set[i].MaxOffsets, ret.Set[i].Choices)
-			panic("dang!")
 		}
 	}
 	ret.TestTreeIndex = ls.LoadInts()

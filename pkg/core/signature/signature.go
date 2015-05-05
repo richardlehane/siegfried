@@ -95,49 +95,6 @@ const (
 	maxu23       = 256 * 256 * 128 // used by collection refs = approx 8mb address space
 )
 
-func getRef(b []byte) (int, bool) {
-	return int(b[2]&^0x80)<<16 | int(b[1])<<8 | int(b[0]), b[2]&0x80 == 0x80
-}
-
-func (l *LoadSaver) makeRef(i int, ref bool) []byte {
-	if i < 0 || i >= maxu23 {
-		l.Err = errors.New("cannot coerce integer to an unsigned 23bit")
-		return nil
-	}
-	b := []byte{byte(i), byte(i >> 8), byte(i >> 16)}
-	if ref {
-		b[2] = b[2] | 0x80
-	}
-	return b
-}
-
-func (l *LoadSaver) getCollection() []byte {
-	if l.Err != nil {
-		return nil
-	}
-	byts := l.get(3)
-	i, ref := getRef(byts)
-	if ref {
-		j, _ := getRef(l.buf[i : i+3])
-		return l.buf[i+3 : i+3+j]
-	}
-	return l.get(i)
-}
-
-func (l *LoadSaver) putCollection(b []byte) {
-	if l.Err != nil {
-		return
-	}
-	i, ok := l.uniqs[string(append(l.makeRef(len(b), false), b...))]
-	if !ok {
-		l.put(l.makeRef(len(b), false))
-		l.put(b)
-		l.uniqs[string(append(l.makeRef(len(b), false), b...))] = l.i - len(b) - 3
-	} else {
-		l.put(l.makeRef(i, true))
-	}
-}
-
 func (l *LoadSaver) LoadByte() byte {
 	le := l.get(1)
 	if le == nil {
@@ -238,6 +195,49 @@ func (l *LoadSaver) SaveInt(i int) {
 	l.put(buf)
 }
 
+func getRef(b []byte) (int, bool) {
+	return int(b[2]&^0x80)<<16 | int(b[1])<<8 | int(b[0]), b[2]&0x80 == 0x80
+}
+
+func (l *LoadSaver) makeRef(i int, ref bool) []byte {
+	if i < 0 || i >= maxu23 {
+		l.Err = errors.New("cannot coerce integer to an unsigned 23bit")
+		return nil
+	}
+	b := []byte{byte(i), byte(i >> 8), byte(i >> 16)}
+	if ref {
+		b[2] = b[2] | 0x80
+	}
+	return b
+}
+
+func (l *LoadSaver) getCollection() []byte {
+	if l.Err != nil {
+		return nil
+	}
+	byts := l.get(3)
+	i, ref := getRef(byts)
+	if ref {
+		j, _ := getRef(l.buf[i : i+3])
+		return l.buf[i+3 : i+3+j]
+	}
+	return l.get(i)
+}
+
+func (l *LoadSaver) putCollection(b []byte) {
+	if l.Err != nil {
+		return
+	}
+	i, ok := l.uniqs[string(append(l.makeRef(len(b), false), b...))]
+	if !ok {
+		l.put(l.makeRef(len(b), false))
+		l.put(b)
+		l.uniqs[string(append(l.makeRef(len(b), false), b...))] = l.i - len(b) - 3
+	} else {
+		l.put(l.makeRef(i, true))
+	}
+}
+
 func characterise(is []int) (byte, error) {
 	f := func(i, max int, sign bool) (int, bool) {
 		if i < 0 {
@@ -332,6 +332,7 @@ func makeInts(b []byte) []int {
 			}
 		}
 	case _uint16:
+		ret = make([]int, len(b)/2)
 		for i := range ret {
 			ret[i] = int(binary.LittleEndian.Uint16(b[i*2:]))
 		}
@@ -359,17 +360,6 @@ func (l *LoadSaver) LoadInts() []int {
 
 func (l *LoadSaver) SaveInts(i []int) {
 	l.putCollection(l.convertInts(i))
-}
-
-func makeBigInts(b []byte) []int64 {
-	ret := make([]int64, len(b)/4)
-	for i := range ret {
-		ret[i] = int64(binary.LittleEndian.Uint32(b[i*4:]))
-		if ret[i] > max32 {
-			ret[i] -= maxu32
-		}
-	}
-	return ret
 }
 
 func (l *LoadSaver) LoadBigInts() []int64 {
