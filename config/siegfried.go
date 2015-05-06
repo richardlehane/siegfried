@@ -25,6 +25,7 @@ var siegfried = struct {
 	version   [3]int // Siegfried version (i.e. of the sf tool)
 	home      string // Home directory used by both sf and roy tools
 	signature string // Name of signature file
+	magic     []byte // Magic bytes to ID signature file
 	// Defaults for processing bytematcher signatures. These control the segmentation.
 	distance  int // The acceptable distance between two frames before they will be segmented (default is 8192)
 	rng       int // The acceptable range between two frames before they will be segmented (default is 0-2049)
@@ -37,8 +38,9 @@ var siegfried = struct {
 	// DEBUG mode
 	debug bool
 }{
-	version:         [3]int{1, 0, 0},
-	signature:       "pronom.gob",
+	version:         [3]int{1, 1, 0},
+	signature:       "pronom.sig",
+	magic:           []byte{'s', 'f', 0xFF, 0xFF},
 	distance:        8192,
 	rng:             512,
 	choices:         64,
@@ -67,6 +69,10 @@ func Signature() string {
 
 func SignatureBase() string {
 	return siegfried.signature
+}
+
+func Magic() []byte {
+	return siegfried.magic
 }
 
 func Distance() int {

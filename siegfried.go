@@ -31,7 +31,8 @@
 package siegfried
 
 import (
-	"archive/zip"
+	"bytes"
+	"compress/flate"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -90,7 +91,6 @@ func New() *Siegfried {
 // Save a Siegfried signature file
 func (s *Siegfried) Save(path string) error {
 	ls := signature.NewLoadSaver(nil)
-	ls.SaveString("siegfried")
 	ls.SaveTime(s.C)
 	s.em.Save(ls)
 	s.cm.Save(ls)
@@ -104,6 +104,10 @@ func (s *Siegfried) Save(path string) error {
 	}
 	f, err := os.Create(path)
 	defer f.Close()
+	if err != nil {
+		return err
+	}
+	_, err = f.Write(config.Magic())
 	if err != nil {
 		return err
 	}
@@ -134,12 +138,15 @@ func (s *Siegfried) SaveC(path string) error {
 		return err
 	}
 	defer f.Close()
-	z := zip.NewWriter(f)
-	zw, err := z.Create("siegfried")
+	_, err = f.Write(config.Magic())
 	if err != nil {
 		return err
 	}
-	_, err = zw.Write(ls.Bytes())
+	z, err := flate.NewWriter(f, 1)
+	if err != nil {
+		return err
+	}
+	_, err = z.Write(ls.Bytes())
 	if err != nil {
 		return err
 	}
@@ -149,15 +156,15 @@ func (s *Siegfried) SaveC(path string) error {
 
 // Load a Siegfried signature file
 func LoadC(path string) (*Siegfried, error) {
-	r, err := zip.OpenReader(path)
+	fbuf, err := ioutil.ReadFile(path)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Siegfried: error opening signature file; got %s\nTry running `sf -update`", err)
 	}
-	defer r.Close()
-	rc, err := r.File[0].Open()
-	if err != nil {
-		return nil, err
+	if string(fbuf[:len(config.Magic())]) != string(config.Magic()) {
+		return nil, fmt.Errorf("Siegfried: not a siegfried signature file")
 	}
+	r := bytes.NewBuffer(fbuf[len(config.Magic()):])
+	rc := flate.NewReader(r)
 	defer rc.Close()
 	buf, err := ioutil.ReadAll(rc)
 	if err != nil {
@@ -183,10 +190,10 @@ func Load(path string) (*Siegfried, error) {
 	if err != nil {
 		return nil, fmt.Errorf("Siegfried: error opening signature file; got %s\nTry running `sf -update`", err)
 	}
-	ls := signature.NewLoadSaver(buf)
-	if ls.LoadString() != "siegfried" {
+	if string(buf[:len(config.Magic())]) != string(config.Magic()) {
 		return nil, fmt.Errorf("Siegfried: not a siegfried signature file")
 	}
+	ls := signature.NewLoadSaver(buf[len(config.Magic()):])
 	return &Siegfried{
 		C:       ls.LoadTime(),
 		em:      extensionmatcher.Load(ls),

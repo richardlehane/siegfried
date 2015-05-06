@@ -23,7 +23,7 @@ func TestMakeGob(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	sigs := filepath.Join("data", "pronom.gob")
+	sigs := filepath.Join("data", config.SignatureBase())
 	err = s.Save(sigs)
 	if err != nil {
 		t.Fatal(err)
@@ -43,7 +43,7 @@ func TestMakeArchivematica(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	sigs := filepath.Join("data", "archivematica.gob")
+	sigs := filepath.Join("data", "archivematica.sig")
 	err = s.Save(sigs)
 	if err != nil {
 		t.Fatal(err)
