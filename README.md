@@ -13,7 +13,7 @@ Key features are:
 
 ## Version
 
-1.0.0
+1.1.0
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried/pkg/core?status.svg)](https://godoc.org/github.com/richardlehane/siegfried/pkg/core)
 
@@ -29,8 +29,8 @@ Key features are:
     sf -csv file.ext                           // Output CSV rather than YAML
     sf -json file.ext                          // Output JSON rather than YAML
     sf -nr DIR                                 // Don't scan subdirectories
-    sf -sig custom.gob file.ext                // Use a custom signature file
-    sf -home c:\junk -sig custom.gob file.ext  // Use a custom home directory
+    sf -sig custom.sig file.ext                // Use a custom signature file
+    sf -home c:\junk -sig custom.sig file.ext  // Use a custom home directory
     sf -debug file.ext                         // Scan in debug mode
     sf -version                                // Display version information
     sf -serve hostname:port                    // Server mode
@@ -59,8 +59,7 @@ For Ubuntu/Debian:
 
     wget -qO - https://bintray.com/user/downloadSubjectPublicKey?username=bintray | sudo apt-key add -
     echo "deb http://dl.bintray.com/siegfried/debian wheezy main" | sudo tee -a /etc/apt/sources.list
-    sudo apt-get update
-    sudo apt-get install siegfried
+    sudo apt-get update && sudo apt-get install siegfried
 
 For Win:
 
@@ -69,6 +68,11 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 	sf -update
 
 ## Recent Changes
+### Version 1.1.0 (forthcoming)
+- format sets
+- smaller, faster signature format
+- bugfix ([mscfb](https://github.com/richardlehane/mscfb/commit/22552265cefc80b400ff64156155f53a5d5751e6)) Thanks [Pascal Aantz](https://github.com/richardlehane/siegfried/issues/32)
+
 ### Version 1.0.0 (22/3/2015)
 - [user documentation](http://github.com/richardlehane/siegfried/wiki)
 - bugfixes (mscfb, match/wac and sf)
