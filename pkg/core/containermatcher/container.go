@@ -133,7 +133,7 @@ type ContainerMatcher struct {
 	NameCTest  map[string]*CTest
 	Parts      []int // corresponds with each signature: represents the number of CTests for each sig
 	Priorities *priority.Set
-	Default    string // the default is an extension which when matched signals that the container matcher should quit
+	Default    bool // if no container signature matches, should a default result be returned?
 	entryBufs  *siegreader.Buffers
 }
 
@@ -144,7 +144,7 @@ func loadCM(ls *signature.LoadSaver) *ContainerMatcher {
 		NameCTest:  loadCTests(ls),
 		Parts:      ls.LoadInts(),
 		Priorities: priority.Load(ls),
-		Default:    ls.LoadString(),
+		Default:    ls.LoadBool(),
 	}
 }
 
@@ -154,17 +154,17 @@ func (c *ContainerMatcher) save(ls *signature.LoadSaver) {
 	saveCTests(ls, c.NameCTest)
 	ls.SaveInts(c.Parts)
 	c.Priorities.Save(ls)
-	ls.SaveString(c.Default)
+	ls.SaveBool(c.Default)
 }
 
 func (c *ContainerMatcher) String() string {
 	str := "\nContainer matcher:\n"
 	str += fmt.Sprintf("Type: %d\n", c.CType)
 	str += "Default: "
-	if c.Default == "" {
+	if c.Default == false {
 		str += "none\n"
 	} else {
-		str += c.Default + "\n"
+		str += "has default\n"
 	}
 	str += fmt.Sprintf("Priorities: %v\n", c.Priorities)
 	str += fmt.Sprintf("Parts: %v\n", c.Parts)
@@ -208,7 +208,7 @@ func newZip() *ContainerMatcher {
 		CType:      Zip,
 		NameCTest:  make(map[string]*CTest),
 		Priorities: &priority.Set{},
-		Default:    "zip", // zip has a default, mscfb does not
+		Default:    true, // zip has a default, mscfb does not
 		entryBufs:  siegreader.New(),
 	}
 }
