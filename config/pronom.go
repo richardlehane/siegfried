@@ -38,12 +38,19 @@ var pronom = struct {
 	harvestURL       string
 	harvestTimeout   time.Duration
 	harvestTransport *http.Transport
+	// archive puids
+	zip  string
+	tar  string
+	gzip string
 }{
 	reports:          "pronom",
 	extensions:       "custom",
 	harvestURL:       "http://apps.nationalarchives.gov.uk/pronom/",
 	harvestTimeout:   120 * time.Second,
 	harvestTransport: &http.Transport{Proxy: http.ProxyFromEnvironment},
+	zip:              "x-fmt/263",
+	tar:              "x-fmt/265",
+	gzip:             "x-fmt/266",
 }
 
 // GETTERS

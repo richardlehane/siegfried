@@ -75,6 +75,8 @@ func (t testRecorder) Satisfied() bool { return false }
 
 func (t testRecorder) Report(c chan core.Identification) { c <- testIdentification{} }
 
+func (t testRecorder) Compress() bool { return false }
+
 type testIdentification struct{}
 
 func (t testIdentification) String() string { return "fmt/3" }

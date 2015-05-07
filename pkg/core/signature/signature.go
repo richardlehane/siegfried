@@ -29,10 +29,9 @@ import (
 )
 
 type LoadSaver struct {
-	buf   []byte
-	i     int
-	uniqs map[string]int
-	Err   error
+	buf []byte
+	i   int
+	Err error
 }
 
 func NewLoadSaver(b []byte) *LoadSaver {
@@ -42,7 +41,6 @@ func NewLoadSaver(b []byte) *LoadSaver {
 	return &LoadSaver{
 		b,
 		0,
-		make(map[string]int),
 		nil,
 	}
 }
@@ -195,47 +193,20 @@ func (l *LoadSaver) SaveInt(i int) {
 	l.put(buf)
 }
 
-func getRef(b []byte) (int, bool) {
-	return int(b[2]&^0x80)<<16 | int(b[1])<<8 | int(b[0]), b[2]&0x80 == 0x80
-}
-
-func (l *LoadSaver) makeRef(i int, ref bool) []byte {
-	if i < 0 || i >= maxu23 {
-		l.Err = errors.New("cannot coerce integer to an unsigned 23bit")
-		return nil
-	}
-	b := []byte{byte(i), byte(i >> 8), byte(i >> 16)}
-	if ref {
-		b[2] = b[2] | 0x80
-	}
-	return b
-}
-
 func (l *LoadSaver) getCollection() []byte {
 	if l.Err != nil {
 		return nil
 	}
-	byts := l.get(3)
-	i, ref := getRef(byts)
-	if ref {
-		j, _ := getRef(l.buf[i : i+3])
-		return l.buf[i+3 : i+3+j]
-	}
-	return l.get(i)
+	le := l.LoadSmallInt()
+	return l.get(le)
 }
 
 func (l *LoadSaver) putCollection(b []byte) {
 	if l.Err != nil {
 		return
 	}
-	i, ok := l.uniqs[string(append(l.makeRef(len(b), false), b...))]
-	if !ok {
-		l.put(l.makeRef(len(b), false))
-		l.put(b)
-		l.uniqs[string(append(l.makeRef(len(b), false), b...))] = l.i - len(b) - 3
-	} else {
-		l.put(l.makeRef(i, true))
-	}
+	l.SaveSmallInt(len(b))
+	l.put(b)
 }
 
 func characterise(is []int) (byte, error) {

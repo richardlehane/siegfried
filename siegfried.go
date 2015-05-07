@@ -60,6 +60,7 @@ type Siegfried struct {
 	// mutatable fields follow
 	ids     []core.Identifier // identifiers
 	buffers *siegreader.Buffers
+	borrow  chan siegreader.Buffer
 }
 
 // New creates a new Siegfried. It sets the create time to time.Now() and initializes the three matchers
@@ -369,12 +370,37 @@ func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, e
 			}
 		}
 	}
-	s.buffers.Put(buffer)
+	// check if we are in decompress mode and if the format is an archive format
+	var compress bool
+	if config.Decompress() {
+		for _, rec := range recs {
+			if rec.Compress() {
+				compress = true
+				break
+			}
+		}
+	}
+	if compress {
+		go func() { s.borrow <- buffer }()
+	} else {
+		s.buffers.Put(buffer)
+	}
 	go func() {
 		for _, rec := range recs {
 			rec.Report(res)
+			if rec.Compress() {
+				compress = true
+			}
 		}
 		close(res)
 	}()
 	return res, err
+}
+
+func (s *Siegfried) Buffer() siegreader.Buffer {
+	return <-s.borrow
+}
+
+func (s *Siegfried) ReturnBuffer(b siegreader.Buffer) {
+	s.buffers.Put(b)
 }

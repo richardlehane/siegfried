@@ -302,6 +302,10 @@ func (r *Recorder) hasSig(puid string) bool {
 	return false
 }
 
+func (r *Recorder) Compress() bool {
+	return false
+}
+
 type Identification struct {
 	Identifier string
 	Puid       string
