@@ -15,8 +15,6 @@
 package containermatcher
 
 import (
-	"strings"
-
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
