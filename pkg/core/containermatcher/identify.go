@@ -15,9 +15,6 @@
 package containermatcher
 
 import (
-	"path/filepath"
-	"strings"
-
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
@@ -33,13 +30,6 @@ func (m Matcher) Identify(n string, b siegreader.Buffer) (chan core.Result, erro
 	}
 	for _, c := range m {
 		if c.trigger(buf) {
-			if q, i := c.defaultMatch(n); q {
-				go func() {
-					res <- defaultHit(i)
-					close(res)
-				}()
-				return res, nil
-			}
 			rdr, err := c.rdr(b)
 			if err != nil {
 				close(res)
@@ -52,18 +42,6 @@ func (m Matcher) Identify(n string, b siegreader.Buffer) (chan core.Result, erro
 	// nothing ... move on
 	close(res)
 	return res, nil
-}
-
-func (c *ContainerMatcher) defaultMatch(n string) (bool, int) {
-	if c.Default == "" {
-		return false, 0
-	}
-	ext := filepath.Ext(n)
-	if len(ext) > 0 && strings.TrimPrefix(ext, ".") == c.Default {
-		// the default is a negative value calculated from the CType
-		return true, -1 - int(c.CType)
-	}
-	return false, 0
 }
 
 type identifier struct {
@@ -90,6 +68,7 @@ func (c *ContainerMatcher) identify(rdr Reader, res chan core.Result) {
 	}
 	id := c.newIdentifier(len(c.Parts))
 	var err error
+	var hit bool
 	for err = rdr.Next(); err == nil; err = rdr.Next() {
 		ct, ok := c.NameCTest[rdr.Name()]
 		if !ok {
@@ -99,8 +78,14 @@ func (c *ContainerMatcher) identify(rdr Reader, res chan core.Result) {
 		// ct.identify will generate a slice of hits which pass to
 		// processHits which will return true if we can stop
 		if c.processHits(ct.identify(c, id, rdr, rdr.Name()), id, ct, rdr.Name(), res) {
+			hit = true
 			break
 		}
+	}
+	// if we have no hits and a default value for this matcher, send it
+	if !hit && c.Default {
+		// the default is a negative value calculated from the CType
+		res <- defaultHit(-1 - int(c.CType))
 	}
 	close(res)
 }
