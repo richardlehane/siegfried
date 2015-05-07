@@ -69,7 +69,8 @@ func (c *ContainerMatcher) identify(rdr Reader, res chan core.Result) {
 		return
 	}
 	id := c.newIdentifier(len(c.Parts))
-	var err, hit error, bool
+	var err error
+	var hit bool
 	for err = rdr.Next(); err == nil; err = rdr.Next() {
 		ct, ok := c.NameCTest[rdr.Name()]
 		if !ok {
