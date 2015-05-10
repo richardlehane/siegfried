@@ -75,7 +75,7 @@ func (t testRecorder) Satisfied() bool { return false }
 
 func (t testRecorder) Report(c chan core.Identification) { c <- testIdentification{} }
 
-func (t testRecorder) Compress() bool { return false }
+func (t testRecorder) Archive() bool { return false }
 
 type testIdentification struct{}
 
@@ -86,6 +86,8 @@ func (t testIdentification) Yaml() string { return "" }
 func (t testIdentification) Json() string { return "" }
 
 func (t testIdentification) Csv() []string { return nil }
+
+func (t testIdentification) Archive() config.Archive { return 0 }
 
 func TestIdentify(t *testing.T) {
 	s := New()

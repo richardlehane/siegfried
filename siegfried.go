@@ -370,34 +370,26 @@ func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, e
 			}
 		}
 	}
-	// check if we are in decompress mode and if the format is an archive format
-	var compress bool
-	if config.Decompress() {
-		for _, rec := range recs {
-			if rec.Compress() {
-				compress = true
-				break
-			}
-		}
-	}
-	if compress {
-		go func() { s.borrow <- buffer }()
-	} else {
-		s.buffers.Put(buffer)
-	}
 	go func() {
+		var archive bool
 		for _, rec := range recs {
 			rec.Report(res)
-			if rec.Compress() {
-				compress = true
+			if rec.Archive() {
+				archive = true
 			}
 		}
 		close(res)
+		// check if we are in decompress mode and if the format is an archive format
+		if config.Decompress() && archive {
+			s.borrow <- buffer
+		} else {
+			s.buffers.Put(buffer)
+		}
 	}()
 	return res, err
 }
 
-func (s *Siegfried) Buffer() siegreader.Buffer {
+func (s *Siegfried) BorrowBuffer() siegreader.Buffer {
 	return <-s.borrow
 }
 

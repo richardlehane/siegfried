@@ -19,6 +19,7 @@ package core
 import (
 	"errors"
 
+	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 	"github.com/richardlehane/siegfried/pkg/core/signature"
@@ -63,15 +64,16 @@ type Recorder interface {
 	Record(MatcherType, Result) bool // Record results for each matcher; return true if match recorded (siegfried will iterate through the identifiers until an identifier returns true)
 	Satisfied() bool                 // Called after matchers - should we continue with further matchers?
 	Report(chan Identification)      // Now send results
-	Compress() bool                  // Is this a compressed format?
+	Archive() bool                   // Is this an archive format? (zip, gzip, tar)
 }
 
 // Identification is sent by an identifier when a format matches
 type Identification interface {
-	String() string // short text that is displayed to indicate the format match
-	Yaml() string   // long text that should be displayed to indicate the format match
-	Json() string   // JSON match response
-	Csv() []string  // CSV match response
+	String() string          // short text that is displayed to indicate the format match
+	Yaml() string            // long text that should be displayed to indicate the format match
+	Json() string            // JSON match response
+	Csv() []string           // CSV match response
+	Archive() config.Archive // does this format match any of the archive formats (zip, gzip, tar)
 }
 
 // Matcher does the matching (against the name or the byte stream) and sends results

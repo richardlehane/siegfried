@@ -216,6 +216,18 @@ func HarvestOptions() (string, time.Duration, *http.Transport) {
 	return pronom.harvestURL, pronom.harvestTimeout, pronom.harvestTransport
 }
 
+func IsArchive(p string) Archive {
+	switch p {
+	case pronom.zip:
+		return Zip
+	case pronom.gzip:
+		return Gzip
+	case pronom.tar:
+		return Tar
+	}
+	return None
+}
+
 // SETTERS
 
 func SetDroid(d string) func() private {

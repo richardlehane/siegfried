@@ -68,7 +68,6 @@ func (c *ContainerMatcher) identify(rdr Reader, res chan core.Result) {
 	}
 	id := c.newIdentifier(len(c.Parts))
 	var err error
-	var hit bool
 	for err = rdr.Next(); err == nil; err = rdr.Next() {
 		ct, ok := c.NameCTest[rdr.Name()]
 		if !ok {
@@ -78,14 +77,8 @@ func (c *ContainerMatcher) identify(rdr Reader, res chan core.Result) {
 		// ct.identify will generate a slice of hits which pass to
 		// processHits which will return true if we can stop
 		if c.processHits(ct.identify(c, id, rdr, rdr.Name()), id, ct, rdr.Name(), res) {
-			hit = true
 			break
 		}
-	}
-	// if we have no hits and a default value for this matcher, send it
-	if !hit && c.Default {
-		// the default is a negative value calculated from the CType
-		res <- defaultHit(-1 - int(c.CType))
 	}
 	close(res)
 }

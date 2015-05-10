@@ -12,28 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package config
+package main
 
-type Archive int
-
-const (
-	None Archive = iota
-	Zip
-	Gzip
-	Tar
+/*
+import (
+	"archive/tar"
+	"archive/zip"
+	"compress/gzip"
 )
-
-var decompress bool
-
-func Decompress() bool {
-	return decompress
-}
-
-// SETTERS
-
-func SetDecompress() func() private {
-	return func() private {
-		decompress = true
-		return private{}
-	}
-}
+*/

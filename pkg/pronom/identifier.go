@@ -147,13 +147,14 @@ func (i *Identifier) Recognise(m core.MatcherType, idx int) (bool, string) {
 }
 
 func (i *Identifier) Recorder() core.Recorder {
-	return &Recorder{i, make(pids, 0, 10), 1}
+	return &Recorder{i, make(pids, 0, 10), 1, false}
 }
 
 type Recorder struct {
 	*Identifier
-	ids    pids
-	cscore int
+	ids     pids
+	cscore  int
+	archive bool
 }
 
 func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
@@ -169,14 +170,6 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 			return false
 		}
 	case core.ContainerMatcher:
-		// add zip default
-		if res.Index() < 0 {
-			if !r.NoPriority {
-				r.cscore *= 2
-			}
-			r.ids = add(r.ids, r.Name, "x-fmt/263", r.Infos["x-fmt/263"], res.Basis(), r.cscore) // not great to have this hardcoded
-			return false
-		}
 		if res.Index() >= r.CStart && res.Index() < r.CStart+len(r.CPuids) {
 			idx := res.Index() - r.CStart
 			if !r.NoPriority {
@@ -253,9 +246,13 @@ func (r *Recorder) Report(res chan core.Identification) {
 				for i, v := range r.ids {
 					poss[i] = v.Puid
 				}
-				nids = []Identification{Identification{r.Name, "UNKNOWN", "", "", "", nil, fmt.Sprintf("no match; possibilities based on extension are %v", strings.Join(poss, ", ")), 0}}
+				nids = []Identification{Identification{r.Name, "UNKNOWN", "", "", "", nil, fmt.Sprintf("no match; possibilities based on extension are %v", strings.Join(poss, ", ")), 0, 0}}
 			}
 			r.ids = nids
+		}
+		// mark whether an archive format based on first result
+		if r.ids[0].Archive() > 0 {
+			r.archive = true
 		}
 		res <- r.checkExt(r.ids[0])
 		if len(r.ids) > 1 {
@@ -268,7 +265,7 @@ func (r *Recorder) Report(res chan core.Identification) {
 			}
 		}
 	} else {
-		res <- Identification{r.Name, "UNKNOWN", "", "", "", nil, "no match", 0}
+		res <- Identification{r.Name, "UNKNOWN", "", "", "", nil, "no match", 0, 0}
 	}
 }
 
@@ -302,8 +299,8 @@ func (r *Recorder) hasSig(puid string) bool {
 	return false
 }
 
-func (r *Recorder) Compress() bool {
-	return false
+func (r *Recorder) Archive() bool {
+	return r.archive
 }
 
 type Identification struct {
@@ -314,6 +311,7 @@ type Identification struct {
 	Mime       string
 	Basis      []string
 	Warning    string
+	archive    config.Archive
 	confidence int
 }
 
@@ -362,6 +360,10 @@ func (id Identification) Csv() []string {
 	}
 }
 
+func (id Identification) Archive() config.Archive {
+	return id.archive
+}
+
 type pids []Identification
 
 func (p pids) Len() int { return len(p) }
@@ -378,5 +380,5 @@ func add(p pids, id string, f string, info FormatInfo, basis string, c int) pids
 			return p
 		}
 	}
-	return append(p, Identification{id, f, info.Name, info.Version, info.MIMEType, []string{basis}, "", c})
+	return append(p, Identification{id, f, info.Name, info.Version, info.MIMEType, []string{basis}, "", config.IsArchive(f), c})
 }

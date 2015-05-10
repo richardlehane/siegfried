@@ -133,7 +133,6 @@ type ContainerMatcher struct {
 	NameCTest  map[string]*CTest
 	Parts      []int // corresponds with each signature: represents the number of CTests for each sig
 	Priorities *priority.Set
-	Default    bool // if no container signature matches, should a default result be returned?
 	entryBufs  *siegreader.Buffers
 }
 
@@ -144,7 +143,6 @@ func loadCM(ls *signature.LoadSaver) *ContainerMatcher {
 		NameCTest:  loadCTests(ls),
 		Parts:      ls.LoadInts(),
 		Priorities: priority.Load(ls),
-		Default:    ls.LoadBool(),
 	}
 }
 
@@ -154,18 +152,11 @@ func (c *ContainerMatcher) save(ls *signature.LoadSaver) {
 	saveCTests(ls, c.NameCTest)
 	ls.SaveInts(c.Parts)
 	c.Priorities.Save(ls)
-	ls.SaveBool(c.Default)
 }
 
 func (c *ContainerMatcher) String() string {
 	str := "\nContainer matcher:\n"
 	str += fmt.Sprintf("Type: %d\n", c.CType)
-	str += "Default: "
-	if c.Default == false {
-		str += "none\n"
-	} else {
-		str += "has default\n"
-	}
 	str += fmt.Sprintf("Priorities: %v\n", c.Priorities)
 	str += fmt.Sprintf("Parts: %v\n", c.Parts)
 	for k, v := range c.NameCTest {
@@ -208,7 +199,6 @@ func newZip() *ContainerMatcher {
 		CType:      Zip,
 		NameCTest:  make(map[string]*CTest),
 		Priorities: &priority.Set{},
-		Default:    true, // zip has a default, mscfb does not
 		entryBufs:  siegreader.New(),
 	}
 }
