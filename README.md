@@ -69,8 +69,10 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 ## Recent Changes
 ### Version 1.1.0 (forthcoming)
-- format sets
+- scan within archive formats (zip, tar, gzip) with -z flag
+- format sets (e.g. roy build -exclude @pdfa)
 - smaller, faster signature format
+- support bitmask patterns
 - bugfix ([mscfb](https://github.com/richardlehane/mscfb/commit/22552265cefc80b400ff64156155f53a5d5751e6)) Thanks [Pascal Aantz](https://github.com/richardlehane/siegfried/issues/32)
 
 ### Version 1.0.0 (22/3/2015)
