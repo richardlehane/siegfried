@@ -64,7 +64,6 @@ type Recorder interface {
 	Record(MatcherType, Result) bool // Record results for each matcher; return true if match recorded (siegfried will iterate through the identifiers until an identifier returns true)
 	Satisfied() bool                 // Called after matchers - should we continue with further matchers?
 	Report(chan Identification)      // Now send results
-	Archive() bool                   // Is this an archive format? (zip, gzip, tar)
 }
 
 // Identification is sent by an identifier when a format matches

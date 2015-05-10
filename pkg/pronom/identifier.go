@@ -147,14 +147,13 @@ func (i *Identifier) Recognise(m core.MatcherType, idx int) (bool, string) {
 }
 
 func (i *Identifier) Recorder() core.Recorder {
-	return &Recorder{i, make(pids, 0, 10), 1, false}
+	return &Recorder{i, make(pids, 0, 10), 1}
 }
 
 type Recorder struct {
 	*Identifier
-	ids     pids
-	cscore  int
-	archive bool
+	ids    pids
+	cscore int
 }
 
 func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
@@ -250,10 +249,6 @@ func (r *Recorder) Report(res chan core.Identification) {
 			}
 			r.ids = nids
 		}
-		// mark whether an archive format based on first result
-		if r.ids[0].Archive() > 0 {
-			r.archive = true
-		}
 		res <- r.checkExt(r.ids[0])
 		if len(r.ids) > 1 {
 			for i, v := range r.ids[1:] {
@@ -297,10 +292,6 @@ func (r *Recorder) hasSig(puid string) bool {
 		}
 	}
 	return false
-}
-
-func (r *Recorder) Archive() bool {
-	return r.archive
 }
 
 type Identification struct {

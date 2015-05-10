@@ -24,6 +24,7 @@ import (
 	"strings"
 
 	"github.com/richardlehane/siegfried"
+	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 )
 
@@ -56,15 +57,17 @@ func (is *idSlice) next() core.Identification {
 
 type writer interface {
 	writeHead(s *siegfried.Siegfried)
-	writeFile(name string, sz int64, err error, ids iterableID)
+	writeFile(name string, sz int64, err error, ids iterableID) config.Archive
 	writeTail()
 }
 
 type debugWriter struct{}
 
-func (d debugWriter) writeHead(s *siegfried.Siegfried)                           {}
-func (d debugWriter) writeFile(name string, sz int64, err error, ids iterableID) {}
-func (d debugWriter) writeTail()                                                 {}
+func (d debugWriter) writeHead(s *siegfried.Siegfried) {}
+func (d debugWriter) writeFile(name string, sz int64, err error, ids iterableID) config.Archive {
+	return 0
+}
+func (d debugWriter) writeTail() {}
 
 type csvWriter struct {
 	rec []string
@@ -79,7 +82,7 @@ func (c *csvWriter) writeHead(s *siegfried.Siegfried) {
 	c.w.Write([]string{"filename", "filesize", "errors", "identifier", "id", "format name", "format version", "mimetype", "basis", "warning"})
 }
 
-func (c *csvWriter) writeFile(name string, sz int64, err error, ids iterableID) {
+func (c *csvWriter) writeFile(name string, sz int64, err error, ids iterableID) config.Archive {
 	var errStr string
 	if err != nil {
 		errStr = err.Error()
@@ -89,13 +92,18 @@ func (c *csvWriter) writeFile(name string, sz int64, err error, ids iterableID) 
 		c.rec[0], c.rec[1], c.rec[2] = name, strconv.Itoa(int(sz)), errStr
 		copy(c.rec[3:], empty)
 		c.w.Write(c.rec)
-		return
+		return 0
 	}
+	var archive config.Archive
 	for id := ids.next(); id != nil; id = ids.next() {
+		if id.Archive() > archive {
+			archive = id.Archive()
+		}
 		c.rec[0], c.rec[1], c.rec[2] = name, strconv.Itoa(int(sz)), errStr
 		copy(c.rec[3:], id.Csv())
 		c.w.Write(c.rec)
 	}
+	return archive
 }
 
 func (c *csvWriter) writeTail() { c.w.Flush() }
@@ -113,18 +121,23 @@ func (y *yamlWriter) writeHead(s *siegfried.Siegfried) {
 	y.w.WriteString(s.Yaml())
 }
 
-func (y *yamlWriter) writeFile(name string, sz int64, err error, ids iterableID) {
+func (y *yamlWriter) writeFile(name string, sz int64, err error, ids iterableID) config.Archive {
 	var errStr string
 	if err != nil {
 		errStr = fmt.Sprintf("'%s'", err.Error())
 	}
 	fmt.Fprintf(y.w, "---\nfilename : '%s'\nfilesize : %d\nerrors   : %s\nmatches  :\n", y.replacer.Replace(name), sz, errStr)
 	if ids == nil {
-		return
+		return 0
 	}
+	var archive config.Archive
 	for id := ids.next(); id != nil; id = ids.next() {
+		if id.Archive() > archive {
+			archive = id.Archive()
+		}
 		y.w.WriteString(id.Yaml())
 	}
+	return archive
 }
 
 func (y *yamlWriter) writeTail() { y.w.Flush() }
@@ -144,7 +157,7 @@ func (j *jsonWriter) writeHead(s *siegfried.Siegfried) {
 	j.w.WriteString("\"files\":[")
 }
 
-func (j *jsonWriter) writeFile(name string, sz int64, err error, ids iterableID) {
+func (j *jsonWriter) writeFile(name string, sz int64, err error, ids iterableID) config.Archive {
 	if j.subs {
 		j.w.WriteString(",")
 	}
@@ -154,10 +167,14 @@ func (j *jsonWriter) writeFile(name string, sz int64, err error, ids iterableID)
 	}
 	fmt.Fprintf(j.w, "{\"filename\":\"%s\",\"filesize\": %d,\"errors\": \"%s\",\"matches\": [", j.replacer.Replace(name), sz, errStr)
 	if ids == nil {
-		return
+		return 0
 	}
 	var subs bool
+	var archive config.Archive
 	for id := ids.next(); id != nil; id = ids.next() {
+		if id.Archive() > archive {
+			archive = id.Archive()
+		}
 		if subs {
 			j.w.WriteString(",")
 		}
@@ -166,6 +183,7 @@ func (j *jsonWriter) writeFile(name string, sz int64, err error, ids iterableID)
 	}
 	j.w.WriteString("]}")
 	j.subs = true
+	return archive
 }
 
 func (j *jsonWriter) writeTail() {

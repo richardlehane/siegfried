@@ -135,7 +135,14 @@ func identifyFile(w writer, s *siegfried.Siegfried, path string, sz int64) {
 		w.writeFile(path, sz, fmt.Errorf("failed to identify %s, got: %v", path, err), nil)
 		return
 	}
-	w.writeFile(path, sz, err, idChan(c))
+	a := w.writeFile(path, sz, err, idChan(c))
+	if config.Decompress() {
+		switch a {
+		case config.Zip:
+		case config.Gzip:
+		case config.Tar:
+		}
+	}
 }
 
 func main() {
