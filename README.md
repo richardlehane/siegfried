@@ -73,7 +73,7 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 - format sets (e.g. roy build -exclude @pdfa)
 - smaller, faster signature format
 - support bitmask patterns
-- bugfix ([mscfb](https://github.com/richardlehane/mscfb/commit/22552265cefc80b400ff64156155f53a5d5751e6)) Thanks [Pascal Aantz](https://github.com/richardlehane/siegfried/issues/32)
+- bugfix ([mscfb](https://github.com/richardlehane/mscfb/commit/22552265cefc80b400ff64156155f53a5d5751e6)) reported by [Pascal Aantz](https://github.com/richardlehane/siegfried/issues/32)
 
 ### Version 1.0.0 (22/3/2015)
 - [user documentation](http://github.com/richardlehane/siegfried/wiki)
