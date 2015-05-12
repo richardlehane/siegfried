@@ -15,6 +15,8 @@
 package containermatcher
 
 import (
+	//"path/filepath"
+
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
@@ -30,6 +32,14 @@ func (m Matcher) Identify(n string, b siegreader.Buffer) (chan core.Result, erro
 	}
 	for _, c := range m {
 		if c.trigger(buf) {
+			/*
+				if filepath.Ext(n) == ".zip" {
+					go func() {
+						res <- defaultHit(1)
+						close(res)
+					}()
+					return res, nil
+				}*/
 			rdr, err := c.rdr(b)
 			if err != nil {
 				close(res)
