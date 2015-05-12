@@ -19,14 +19,34 @@ import (
 	"os"
 )
 
+type Buffers struct {
+	spool  *pool // Pool of stream Buffers
+	fpool  *pool // Pool of file Buffers
+	fdatas *datas
+	last   *pool
+}
+
+func New() *Buffers {
+	return &Buffers{
+		newPool(newStream),
+		newPool(newFile),
+		&datas{
+			newPool(newBigFile),
+			newPool(newSmallFile),
+			newPool(newMmap),
+		},
+		nil,
+	}
+}
+
 func (b *Buffers) Get(src io.Reader) (Buffer, error) {
 	f, ok := src.(*os.File)
 	if !ok {
-		stream := b.spool.Get().(*stream)
+		stream := b.spool.get().(*stream)
 		stream.setSource(src)
 		return stream, nil
 	}
-	buf := b.fpool.Get().(*file)
+	buf := b.fpool.get().(*file)
 	err := buf.setSource(f, b.fdatas)
 	return buf, err
 }
@@ -36,26 +56,41 @@ func (b *Buffers) Put(i Buffer) {
 	default:
 		panic("Siegreader: unknown buffer type")
 	case *stream:
-		b.spool.Put(i)
+		b.spool.put(i)
+		b.last = b.spool
 	case *file:
 		b.fdatas.put(i.(*file).data)
-		i.(*file).src = nil
-		b.fpool.Put(i)
+		b.fpool.put(i)
+		b.last = b.fpool
 	}
+}
+
+func (b *Buffers) Last() Buffer {
+	if b.last == nil {
+		return nil
+	}
+	return b.last.get().(Buffer)
+}
+
+// Data pool (used by file)
+type datas struct {
+	bfpool *pool
+	sfpool *pool
+	mpool  *pool
 }
 
 // Data pool (used by file)
 func (d *datas) get(f *file) data {
 	if mmapable(f.sz) {
-		m := d.mpool.Get().(*mmap)
+		m := d.mpool.get().(*mmap)
 		m.setSource(f)
 		return m
 	} else if f.sz <= int64(smallFileSz) {
-		sf := d.sfpool.Get().(*smallfile)
+		sf := d.sfpool.get().(*smallfile)
 		sf.setSource(f)
 		return sf
 	}
-	bf := d.bfpool.Get().(*bigfile)
+	bf := d.bfpool.get().(*bigfile)
 	bf.setSource(f)
 	return bf
 }
@@ -68,12 +103,12 @@ func (d *datas) put(i data) {
 	default:
 		panic("Siegreader: unknown data type")
 	case *bigfile:
-		d.bfpool.Put(i)
+		d.bfpool.put(i)
 	case *smallfile:
-		d.sfpool.Put(i)
+		d.sfpool.put(i)
 	case *mmap:
-		i.(*mmap).reset()
-		d.mpool.Put(i)
+		//i.(*mmap).reset() test resetting on setsource rather than put
+		d.mpool.put(i)
 	}
 	return
 }

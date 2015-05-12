@@ -22,25 +22,28 @@ import (
 )
 
 type zipReader struct {
-	idx int
-	rdr *zip.Reader
-	rc  io.ReadCloser
+	idx     int
+	rdr     *zip.Reader
+	expired bool
+	rc      io.ReadCloser
 }
 
 func (z *zipReader) Next() error {
 	// proceed
 	z.idx++
 	// scan past directories
-	for ; z.idx < len(z.rdr.File) && z.rdr.File[z.idx].CompressedSize64 <= 0; z.idx++ {
+	for ; z.idx < len(z.rdr.File) && z.rdr.File[z.idx].FileHeader.FileInfo().IsDir(); z.idx++ {
 	}
 	if z.idx >= len(z.rdr.File) {
 		return io.EOF
 	}
 	return nil
 }
+
 func (z *zipReader) Name() string {
 	return z.rdr.File[z.idx].Name
 }
+
 func (z *zipReader) SetSource(bufs *siegreader.Buffers) (siegreader.Buffer, error) {
 	var err error
 	z.rc, err = z.rdr.File[z.idx].Open()
@@ -49,6 +52,7 @@ func (z *zipReader) SetSource(bufs *siegreader.Buffers) (siegreader.Buffer, erro
 	}
 	return bufs.Get(z.rc)
 }
+
 func (z *zipReader) Close() {
 	if z.rc == nil {
 		return

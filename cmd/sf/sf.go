@@ -17,6 +17,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io"
 	"log"
 	"os"
 	"path/filepath"
@@ -26,6 +27,7 @@ import (
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
+	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 
 	// Uncomment to build with profiler
 	//"net/http"
@@ -47,6 +49,7 @@ var (
 	serve    = flag.String("serve", "false", "start siegfried server e.g. -serve localhost:5138")
 	multi    = flag.Int("multi", 1, "set number of file ID processes")
 	compress = flag.Bool("compress", false, "load compressed signature file")
+	archive  = flag.Bool("z", false, "scan archive formats (zip, tar, gzip)")
 	//profile = flag.Bool("profile", false, "run a profile on localhost:6060")
 )
 
@@ -81,14 +84,14 @@ func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 		rchan := make(chan res, 1)
 		resc <- rchan
 		go func() {
-			file, err := os.Open(path)
+			f, err := os.Open(path)
 			if err != nil {
 				rchan <- res{"", 0, nil, fmt.Errorf("failed to open %v, got: %v", path, err)}
 				return
 			}
-			c, err := s.Identify(path, file)
+			c, err := s.Identify(path, f)
 			if c == nil {
-				file.Close()
+				f.Close()
 				rchan <- res{"", 0, nil, fmt.Errorf("failed to identify %v, got: %v", path, err)}
 				return
 			}
@@ -96,7 +99,7 @@ func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 			for id := range c {
 				ids = append(ids, id)
 			}
-			cerr := file.Close()
+			cerr := f.Close()
 			if err == nil {
 				err = cerr
 			}
@@ -124,24 +127,41 @@ func multiIdentifyS(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 }
 
 func identifyFile(w writer, s *siegfried.Siegfried, path string, sz int64) {
-	file, err := os.Open(path)
+	f, err := os.Open(path)
 	if err != nil {
 		w.writeFile(path, sz, fmt.Errorf("failed to open %s, got: %v", path, err), nil)
 		return
 	}
-	defer file.Close()
-	c, err := s.Identify(path, file)
+	identifyRdr(w, s, f, path, sz)
+	f.Close()
+}
+
+func identifyRdr(w writer, s *siegfried.Siegfried, r io.Reader, path string, sz int64) {
+	c, err := s.Identify(path, r)
 	if c == nil {
 		w.writeFile(path, sz, fmt.Errorf("failed to identify %s, got: %v", path, err), nil)
 		return
 	}
 	a := w.writeFile(path, sz, err, idChan(c))
-	if config.Decompress() {
-		switch a {
-		case config.Zip:
-		case config.Gzip:
-		case config.Tar:
-		}
+	if !*archive || a == config.None {
+		return
+	}
+	var d decompressor
+	b := s.Buffer()
+	switch a {
+	case config.Zip:
+		d, err = newZip(siegreader.ReaderFrom(b), path, sz)
+	case config.Gzip:
+		d, err = newGzip(b, path)
+	case config.Tar:
+		d, err = newTar(siegreader.ReaderFrom(b), path)
+	}
+	if err != nil {
+		w.writeFile(path, sz, fmt.Errorf("failed to decompress %s, got: %v", path, err), nil)
+		return
+	}
+	for err = d.next(); err == nil; err = d.next() {
+		identifyRdr(w, s, d.reader(), d.path(), d.size())
 	}
 }
 
@@ -194,11 +214,11 @@ func main() {
 		log.Fatalln("Error: expecting a single file or directory argument")
 	}
 
-	var err error
-	info, err := os.Stat(flag.Arg(0))
-	if err != nil {
-		log.Fatalf("Error: error getting info for %v, got: %v", flag.Arg(0), err)
+	if *archive && *multi > 1 {
+		log.Fatalln("Error: cannot scan archive formats when running in parallel mode")
 	}
+
+	var err error
 	var s *siegfried.Siegfried
 	if *compress {
 		s, err = siegfried.LoadC(config.Signature())
@@ -221,6 +241,19 @@ func main() {
 		w = newJson(os.Stdout)
 	default:
 		w = newYaml(os.Stdout)
+	}
+
+	// support reading from stdin
+	if flag.Arg(0) == "-" {
+		w.writeHead(s)
+		identifyRdr(w, s, os.Stdin, "", 0)
+		w.writeTail()
+		os.Exit(0)
+	}
+
+	info, err := os.Stat(flag.Arg(0))
+	if err != nil {
+		log.Fatalf("Error: error getting info for %v, got: %v", flag.Arg(0), err)
 	}
 
 	if info.IsDir() {

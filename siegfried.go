@@ -378,3 +378,8 @@ func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, e
 	}()
 	return res, err
 }
+
+// Buffer returns the last buffer inspected
+func (s *Siegfried) Buffer() siegreader.Buffer {
+	return s.buffers.Last()
+}

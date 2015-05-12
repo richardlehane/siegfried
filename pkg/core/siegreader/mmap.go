@@ -14,6 +14,7 @@ func newMmap() interface{} {
 }
 
 func (m *mmap) setSource(f *file) {
+	m.reset() // reset here rather than on put
 	m.file = f
 	err := m.mapFile()
 	if err != nil {

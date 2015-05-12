@@ -22,18 +22,3 @@ const (
 	Gzip
 	Tar
 )
-
-var decompress bool
-
-func Decompress() bool {
-	return decompress
-}
-
-// SETTERS
-
-func SetDecompress() func() private {
-	return func() private {
-		decompress = true
-		return private{}
-	}
-}

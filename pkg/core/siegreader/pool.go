@@ -1,4 +1,4 @@
-// Copyright 2014 Richard Lehane. All rights reserved.
+// Copyright 2015 Richard Lehane. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,59 +12,42 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// +build !go1.3
-
 package siegreader
 
+import "sync"
+
+// pool of precons - just a simple free list
 type pool struct {
+	mu   *sync.Mutex
 	fn   func() interface{}
-	vals chan interface{}
+	head *item
+}
+
+type item struct {
+	next *item
+	val  interface{}
 }
 
 func newPool(f func() interface{}) *pool {
 	return &pool{
-		fn:   f,
-		vals: make(chan interface{}, 5),
+		mu: &sync.Mutex{},
+		fn: f,
 	}
 }
 
-func (p *pool) Get() interface{} {
-	select {
-	case v := <-p.vals:
-		return v
-	default:
+func (p *pool) get() interface{} {
+	p.mu.Lock()
+	defer p.mu.Unlock()
+	if p.head == nil {
 		return p.fn()
 	}
+	ret := p.head.val
+	p.head = p.head.next
+	return ret
 }
 
-func (p *pool) Put(v interface{}) {
-	select {
-	case p.vals <- v:
-	default:
-	}
-}
-
-func New() *Buffers {
-	return &Buffers{
-		newPool(newStream),
-		newPool(newFile),
-		&datas{
-			newPool(newBigFile),
-			newPool(newSmallFile),
-			newPool(newMmap),
-		},
-	}
-}
-
-type Buffers struct {
-	spool  *pool // Pool of stream Buffers
-	fpool  *pool // Pool of file Buffers
-	fdatas *datas
-}
-
-// Data pool (used by file)
-type datas struct {
-	bfpool *pool
-	sfpool *pool
-	mpool  *pool
+func (p *pool) put(v interface{}) {
+	p.mu.Lock()
+	p.head = &item{p.head, v}
+	p.mu.Unlock()
 }
