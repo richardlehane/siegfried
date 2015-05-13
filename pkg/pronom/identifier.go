@@ -169,6 +169,14 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 			return false
 		}
 	case core.ContainerMatcher:
+		// add zip default
+		if res.Index() < 0 {
+			if !r.NoPriority {
+				r.cscore *= 2
+			}
+			r.ids = add(r.ids, r.Name, "x-fmt/263", r.Infos["x-fmt/263"], res.Basis(), r.cscore) // not great to have this hardcoded
+			return false
+		}
 		if res.Index() >= r.CStart && res.Index() < r.CStart+len(r.CPuids) {
 			idx := res.Index() - r.CStart
 			if !r.NoPriority {

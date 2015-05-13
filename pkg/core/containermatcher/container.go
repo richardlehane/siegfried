@@ -133,6 +133,7 @@ type ContainerMatcher struct {
 	NameCTest  map[string]*CTest
 	Parts      []int // corresponds with each signature: represents the number of CTests for each sig
 	Priorities *priority.Set
+	extension  string
 	entryBufs  *siegreader.Buffers
 }
 
@@ -143,6 +144,7 @@ func loadCM(ls *signature.LoadSaver) *ContainerMatcher {
 		NameCTest:  loadCTests(ls),
 		Parts:      ls.LoadInts(),
 		Priorities: priority.Load(ls),
+		extension:  ls.LoadString(),
 	}
 }
 
@@ -152,6 +154,7 @@ func (c *ContainerMatcher) save(ls *signature.LoadSaver) {
 	saveCTests(ls, c.NameCTest)
 	ls.SaveInts(c.Parts)
 	c.Priorities.Save(ls)
+	ls.SaveString(c.extension)
 }
 
 func (c *ContainerMatcher) String() string {
@@ -199,6 +202,7 @@ func newZip() *ContainerMatcher {
 		CType:      Zip,
 		NameCTest:  make(map[string]*CTest),
 		Priorities: &priority.Set{},
+		extension:  "zip",
 		entryBufs:  siegreader.New(),
 	}
 }

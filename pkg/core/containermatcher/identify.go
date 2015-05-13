@@ -15,7 +15,7 @@
 package containermatcher
 
 import (
-	//"path/filepath"
+	"path/filepath"
 
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
@@ -32,20 +32,12 @@ func (m Matcher) Identify(n string, b siegreader.Buffer) (chan core.Result, erro
 	}
 	for _, c := range m {
 		if c.trigger(buf) {
-			/*
-				if filepath.Ext(n) == ".zip" {
-					go func() {
-						res <- defaultHit(1)
-						close(res)
-					}()
-					return res, nil
-				}*/
 			rdr, err := c.rdr(b)
 			if err != nil {
 				close(res)
 				return res, err
 			}
-			go c.identify(rdr, res)
+			go c.identify(n, rdr, res)
 			return res, nil
 		}
 	}
@@ -59,6 +51,7 @@ type identifier struct {
 	ruledOut     []bool  // mark additional signatures as negatively matched
 	waitSet      *priority.WaitSet
 	hits         []hit // shared buffer of hits used when matching
+	result       bool
 }
 
 func (c *ContainerMatcher) newIdentifier(numParts int) *identifier {
@@ -67,10 +60,11 @@ func (c *ContainerMatcher) newIdentifier(numParts int) *identifier {
 		make([]bool, numParts),
 		c.Priorities.WaitSet(),
 		make([]hit, 0, 1),
+		false,
 	}
 }
 
-func (c *ContainerMatcher) identify(rdr Reader, res chan core.Result) {
+func (c *ContainerMatcher) identify(n string, rdr Reader, res chan core.Result) {
 	// safe to call on a nil matcher (i.e. container matching switched off)
 	if c == nil {
 		close(res)
@@ -83,12 +77,16 @@ func (c *ContainerMatcher) identify(rdr Reader, res chan core.Result) {
 		if !ok {
 			continue
 		}
-		// name has matched, lets test the CTests
+		// name has matched, let's test the CTests
 		// ct.identify will generate a slice of hits which pass to
 		// processHits which will return true if we can stop
 		if c.processHits(ct.identify(c, id, rdr, rdr.Name()), id, ct, rdr.Name(), res) {
 			break
 		}
+	}
+	// send a default hit if no result and extension matches
+	if c.extension != "" && !id.result && filepath.Ext(n) == "."+c.extension {
+		res <- defaultHit(-1 - int(c.CType))
 	}
 	close(res)
 }
@@ -135,6 +133,7 @@ func (c *ContainerMatcher) processHits(hits []hit, id *identifier, ct *CTest, na
 			if id.waitSet.Check(h.id) {
 				idx, _ := c.Priorities.Index(h.id)
 				res <- toResult(c.Sindexes[idx], id.partsMatched[h.id]) // send a Result here
+				id.result = true                                        // mark id as having a result (for zip default)
 				// set a priority list and return early if can
 				if id.waitSet.Put(h.id) {
 					return true

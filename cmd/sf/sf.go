@@ -199,14 +199,19 @@ func main() {
 		return
 	}
 
-	if *serve != "false" {
+	if *serve != "false" || *fprflag != "false" {
 		s, err := siegfried.Load(config.Signature())
 		if err != nil {
 			log.Fatalf("Error: error loading signature file, got: %v", err)
 
 		}
-		log.Printf("Starting server at %s. Use CTRL-C to quit.\n", *serve)
-		listen(*serve, s)
+		if *serve != "false" {
+			log.Printf("Starting server at %s. Use CTRL-C to quit.\n", *serve)
+			listen(*serve, s)
+			return
+		}
+		log.Printf("Starting fpr server at %s. Use CTRL-C to quit.\n", *fprflag)
+		serveFpr(*fprflag, s)
 		return
 	}
 
