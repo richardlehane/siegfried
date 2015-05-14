@@ -1,4 +1,4 @@
-// +build !fpr !go1.4
+// +build !archivematica !linux
 
 // Copyright 2015 Richard Lehane. All rights reserved.
 //
@@ -23,4 +23,4 @@ var (
 	fprflag    *string = &fprcontent
 )
 
-func serveFpr(port string, s *siegfried.Siegfried) {}
+func serveFpr(addr string, s *siegfried.Siegfried) {}

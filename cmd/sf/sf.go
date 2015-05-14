@@ -210,8 +210,12 @@ func main() {
 			listen(*serve, s)
 			return
 		}
-		log.Printf("Starting fpr server at %s. Use CTRL-C to quit.\n", *fprflag)
-		serveFpr(*fprflag, s)
+		fpraddr := "/tmp/siegfried/fpr"
+		if *fprflag != "" {
+			fpraddr = *fprflag
+		}
+		log.Printf("Starting fpr server at %s. Use CTRL-C to quit.\n", fpraddr)
+		serveFpr(fpraddr, s)
 		return
 	}
 

@@ -1,4 +1,4 @@
-// +build fpr,go1.4
+// +build archivematica,linux
 
 // Copyright 2015 Richard Lehane. All rights reserved.
 //
@@ -23,36 +23,28 @@ import (
 	"os"
 	"strings"
 
-	"golang.org/x/net/context"
-	"google.golang.org/grpc"
-
 	"github.com/richardlehane/siegfried"
-	"github.com/richardlehane/siegfried/cmd/sf/fpr"
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
-var fprflag = flag.String("fpr", "false", "start siegfried fpr server e.g. -fpr localhost:5138")
+var fprflag = flag.String("fpr", "false", "start siegfried fpr server e.g. -fpr /tmp/siegfried/fpr")
 
-type fprServer struct {
-	*siegfried.Siegfried
+func reply(s string) []byte {
+	if len(s) > 1024 {
+		return []byte(s[:1024])
+	}
+	return []byte(s)
 }
 
-func reply(p, e string) (*fpr.Reply, error) {
-	return &fpr.Reply{
-		p,
-		e,
-	}, nil
-}
-
-func (f *fprServer) Identify(ctx context.Context, in *fpr.Request) (*fpr.Reply, error) {
-	fi, err := os.Open(in.Path)
+func fpridentify(s *siegfried.Siegfried, path string) []byte {
+	fi, err := os.Open(path)
 	defer fi.Close()
 	if err != nil {
-		return reply("", "Error opening "+in.Path+"; error message: "+err.Error())
+		return reply("Error: failed to open " + path + "; error message: " + err.Error())
 	}
-	c, err := f.Siegfried.Identify(in.Path, fi)
+	c, err := s.Identify(path, fi)
 	if err != nil {
-		return reply("", "Error scanning "+in.Path+"; error message: "+err.Error())
+		return reply("Error: failed to scan " + path + "; error message: " + err.Error())
 	}
 	var ids []string
 	var warn string
@@ -64,23 +56,42 @@ func (f *fprServer) Identify(ctx context.Context, in *fpr.Request) (*fpr.Reply, 
 	}
 	switch len(ids) {
 	case 0:
-		return reply("", "Error scanning "+in.Path+": no puids returned")
+		return reply("Error: scanning " + path + ": no puids returned")
 	case 1:
 		if ids[0] == "UNKNOWN" {
-			return reply("", "Unknown format: "+warn)
+			return reply("Error: format unknown; message: " + warn)
 		}
-		return reply(ids[0], "")
+		return reply(ids[0])
 	default:
-		return reply("", "Multiple formats returned: "+strings.Join(ids, ", "))
+		return reply("Error: multiple formats returned; message : " + strings.Join(ids, ", "))
 	}
 }
 
-func serveFpr(port string, s *siegfried.Siegfried) {
-	lis, err := net.Listen("tcp", port)
-	if err != nil {
-		log.Fatalf("Error: failed to listen: %v", err)
+func serveFpr(addr string, s *siegfried.Siegfried) {
+	// remove the address if it exists
+	if _, err := os.Stat(addr); err == nil {
+		os.Remove(addr)
 	}
-	g := grpc.NewServer()
-	fpr.RegisterFprServer(g, &fprServer{s})
-	g.Serve(lis)
+	uaddr, err := net.ResolveUnixAddr("unix", addr)
+	if err != nil {
+		log.Fatalf("FPR error: failed to get address: %v", err)
+	}
+	lis, err := net.ListenUnix("unix", uaddr)
+	if err != nil {
+		log.Fatalf("FPR error: failed to listen: %v", err)
+	}
+	defer os.Remove(addr)
+	buf := make([]byte, 4024)
+	for {
+		conn, err := lis.Accept()
+		if err != nil {
+			log.Fatalf("FPR error: bad connection: %v", err)
+		}
+		l, err := conn.Read(buf)
+		if err != nil {
+			conn.Write([]byte("Error: " + err.Error()))
+		}
+		conn.Write(fpridentify(s, string(buf[:l])))
+		conn.Close()
+	}
 }
