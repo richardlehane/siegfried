@@ -134,6 +134,10 @@ func (p *pronom) setParseables() error {
 		}
 		p.j = join(p.j, e)
 	}
+	// mirror PREV wild segments into EOF if maxBof and maxEOF set
+	if config.MaxBOF() > 0 && config.MaxEOF() > 0 {
+		p.j = &mirror{p.j}
+	}
 	return nil
 }
 
@@ -253,6 +257,7 @@ func (p pronom) contMatcher(m core.Matcher) error {
 	}
 	for _, c := range p.c.ContainerSignatures {
 		puid := cpuids[c.Id]
+		// only include the included fmts
 		if !p.hasPuid(puid) {
 			continue
 		}

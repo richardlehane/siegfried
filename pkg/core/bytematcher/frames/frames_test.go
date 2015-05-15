@@ -54,3 +54,10 @@ func TestWildMin(t *testing.T) {
 		t.Error("Wild fail: Equality")
 	}
 }
+
+func TestMirror(t *testing.T) {
+	mirror := TestSignatures[2].Mirror()
+	if mirror[1].Orientation() != EOF {
+		t.Errorf("Mirror fail: got %v", mirror)
+	}
+}

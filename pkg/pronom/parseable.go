@@ -150,6 +150,28 @@ func (f *filter) priorities() priority.Map {
 	return m.Filter(f.puids())
 }
 
+// a mirror parseable mirrors the PREV wild segments within signatures as SUCC/EOF wild segments so they match at EOF as well as BOF
+type mirror struct{ parseable }
+
+func (m *mirror) signatures() ([]frames.Signature, []string, error) {
+	sigs, puids, err := m.parseable.signatures()
+	if err != nil {
+		return sigs, puids, err
+	}
+	rsigs := make([]frames.Signature, 0, len(sigs)+100)
+	rpuids := make([]string, 0, len(sigs)+100)
+	for i, v := range sigs {
+		rsigs = append(rsigs, v)
+		rpuids = append(rpuids, puids[i])
+		mirror := v.Mirror()
+		if mirror != nil {
+			rsigs = append(rsigs, mirror)
+			rpuids = append(rpuids, puids[i])
+		}
+	}
+	return rsigs, rpuids, nil
+}
+
 // REPORTS
 type reports struct {
 	p  []string

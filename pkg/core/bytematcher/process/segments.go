@@ -20,30 +20,8 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 )
 
-// Signatures are divided into signature segments.
-// This separation happens on wildcards or when the distance between frames is deemed too great.
-// E.g. a signature of [BOF 0: "ABCD"][PREV 0-20: "EFG"][PREV Wild: "HI"][EOF 0: "XYZ"]
-// has three segments:
-// 1. [BOF 0: "ABCD"][PREV 0-20: "EFG"]
-// 2. [PREV Wild: "HI"]
-// 3. [EOF 0: "XYZ"]
-// The Distance and Range options control the allowable distance and range between frames
-// (i.e. a fixed offset of 5000 distant might be acceptable, where a range of 1-2000 might not be).
 func (p *Process) splitSegments(sig frames.Signature) []frames.Signature {
-	if len(sig) <= 1 {
-		return []frames.Signature{sig}
-	}
-	segments := make([]frames.Signature, 0, 1)
-	segment := frames.Signature{sig[0]}
-	for i, frame := range sig[1:] {
-		if frame.Linked(sig[i], p.Distance, p.Range) {
-			segment = append(segment, frame)
-		} else {
-			segments = append(segments, segment)
-			segment = frames.Signature{frame}
-		}
-	}
-	return append(segments, segment)
+	return sig.Segment(p.Distance, p.Range)
 }
 
 type sigType int
