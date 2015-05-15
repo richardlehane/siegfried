@@ -24,10 +24,11 @@ import (
 	"strings"
 
 	"github.com/richardlehane/siegfried"
+	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
-var fprflag = flag.String("fpr", "false", "start siegfried fpr server e.g. -fpr /tmp/siegfried/fpr")
+var fprflag = flag.Bool("fpr", false, "start siegfried fpr server at "+config.Fpr())
 
 func reply(s string) []byte {
 	if len(s) > 1024 {
@@ -40,11 +41,11 @@ func fpridentify(s *siegfried.Siegfried, path string) []byte {
 	fi, err := os.Open(path)
 	defer fi.Close()
 	if err != nil {
-		return reply("Error: failed to open " + path + "; error message: " + err.Error())
+		return reply("error: failed to open " + path + "; got " + err.Error())
 	}
 	c, err := s.Identify(path, fi)
 	if err != nil {
-		return reply("Error: failed to scan " + path + "; error message: " + err.Error())
+		return reply("error: failed to scan " + path + "; got " + err.Error())
 	}
 	var ids []string
 	var warn string
@@ -56,14 +57,14 @@ func fpridentify(s *siegfried.Siegfried, path string) []byte {
 	}
 	switch len(ids) {
 	case 0:
-		return reply("Error: scanning " + path + ": no puids returned")
+		return reply("error: scanning " + path + ": no puids returned")
 	case 1:
 		if ids[0] == "UNKNOWN" {
-			return reply("Error: format unknown; message: " + warn)
+			return reply("error: format unknown; got " + warn)
 		}
 		return reply(ids[0])
 	default:
-		return reply("Error: multiple formats returned; message : " + strings.Join(ids, ", "))
+		return reply("error: multiple formats returned; got " + strings.Join(ids, ", "))
 	}
 }
 
@@ -89,7 +90,7 @@ func serveFpr(addr string, s *siegfried.Siegfried) {
 		}
 		l, err := conn.Read(buf)
 		if err != nil {
-			conn.Write([]byte("Error: " + err.Error()))
+			conn.Write([]byte("error reading from connection: " + err.Error()))
 		}
 		conn.Write(fpridentify(s, string(buf[:l])))
 		conn.Close()

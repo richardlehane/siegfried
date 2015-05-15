@@ -35,6 +35,8 @@ var siegfried = struct {
 	updateURL       string // URL for the update service (a JSON file that indicates whether update necessary and where can be found)
 	updateTimeout   time.Duration
 	updateTransport *http.Transport
+	// Archivematica format policy registry service
+	fpr string
 	// DEBUG mode
 	debug bool
 }{
@@ -97,6 +99,10 @@ func BMOptions() (int, int, int, int) {
 
 func UpdateOptions() (string, time.Duration, *http.Transport) {
 	return siegfried.updateURL, siegfried.updateTimeout, siegfried.updateTransport
+}
+
+func Fpr() string {
+	return siegfried.fpr
 }
 
 func Debug() bool {

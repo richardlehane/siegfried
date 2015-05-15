@@ -15,6 +15,7 @@
 package main
 
 import (
+	"bufio"
 	"flag"
 	"fmt"
 	"io"
@@ -46,7 +47,7 @@ var (
 	jsono    = flag.Bool("json", false, "JSON output format")
 	sig      = flag.String("sig", config.SignatureBase(), "set the signature file")
 	home     = flag.String("home", config.Home(), "override the default home directory")
-	serve    = flag.String("serve", "false", "start siegfried server e.g. -serve localhost:5138")
+	serve    = flag.String("serve", "", "start siegfried server e.g. -serve localhost:5138")
 	multi    = flag.Int("multi", 1, "set number of file ID processes")
 	compress = flag.Bool("compress", false, "load compressed signature file")
 	archive  = flag.Bool("z", false, "scan archive formats (zip, tar, gzip)")
@@ -199,23 +200,19 @@ func main() {
 		return
 	}
 
-	if *serve != "false" || *fprflag != "false" {
+	if *serve != "" || *fprflag {
 		s, err := siegfried.Load(config.Signature())
 		if err != nil {
 			log.Fatalf("Error: error loading signature file, got: %v", err)
 
 		}
-		if *serve != "false" {
+		if *serve != "" {
 			log.Printf("Starting server at %s. Use CTRL-C to quit.\n", *serve)
 			listen(*serve, s)
 			return
 		}
-		fpraddr := "/tmp/siegfried/fpr"
-		if *fprflag != "" {
-			fpraddr = *fprflag
-		}
-		log.Printf("Starting fpr server at %s. Use CTRL-C to quit.\n", fpraddr)
-		serveFpr(fpraddr, s)
+		log.Printf("FPR server started at %s. Use CTRL-C to quit.\n", config.Fpr())
+		serveFpr(config.Fpr(), s)
 		return
 	}
 
@@ -252,10 +249,18 @@ func main() {
 		w = newYaml(os.Stdout)
 	}
 
-	// support reading from stdin
+	// support reading list files from stdin
 	if flag.Arg(0) == "-" {
 		w.writeHead(s)
-		identifyRdr(w, s, os.Stdin, "", 0)
+		scanner := bufio.NewScanner(os.Stdin)
+		for scanner.Scan() {
+			info, err := os.Stat(scanner.Text())
+			if err != nil || info.IsDir() {
+				w.writeFile(scanner.Text(), 0, fmt.Errorf("failed to identify %s (in scanning mode, inputs must all be files and not directories), got: %v", scanner.Text(), err), nil)
+			} else {
+				identifyFile(w, s, scanner.Text(), info.Size())
+			}
+		}
 		w.writeTail()
 		os.Exit(0)
 	}

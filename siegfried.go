@@ -381,5 +381,7 @@ func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, e
 
 // Buffer returns the last buffer inspected
 func (s *Siegfried) Buffer() siegreader.Buffer {
-	return s.buffers.Last()
+	last := s.buffers.Last()
+	last.SetQuit(make(chan struct{})) // may have already closed the quit channel
+	return last
 }
