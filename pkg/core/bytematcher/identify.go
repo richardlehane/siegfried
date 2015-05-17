@@ -83,7 +83,6 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 		default:
 		}
 	}
-
 	// Setup BOF/EOF frame tests
 	bfchan := b.BOFFrames.Index(buf, false, quit)
 	efchan := b.EOFFrames.Index(buf, true, quit)

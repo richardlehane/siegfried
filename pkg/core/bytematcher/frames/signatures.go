@@ -67,7 +67,7 @@ func (s Signature) Segment(dist, rng int) []Signature {
 }
 
 // turn a wild prev into a succ segment
-func (s Signature) reverse(last bool) Signature {
+func (s Signature) reverse(last bool, min int) Signature {
 	ret := make(Signature, len(s))
 	for i := range s[:len(s)-1] {
 		ret[i] = SwitchFrame(s[i+1], s[i].Pat())
@@ -76,7 +76,7 @@ func (s Signature) reverse(last bool) Signature {
 	if last {
 		typ = EOF
 	}
-	ret[len(ret)-1] = NewFrame(typ, s[len(s)-1].Pat())
+	ret[len(ret)-1] = NewFrame(typ, s[len(s)-1].Pat(), min)
 	return ret
 }
 
@@ -84,23 +84,35 @@ func (s Signature) reverse(last bool) Signature {
 func (s Signature) Mirror() Signature {
 	bignum := 1000000
 	segments := s.Segment(bignum, bignum)
-	var hasWild bool
-	for _, v := range segments {
-		if v[0].Orientation() < SUCC && v[0].Min() == 0 && v[0].Max() == -1 {
-			hasWild = true
+	var hasWild = -1
+	for i, v := range segments {
+		if v[0].Orientation() < SUCC && v[0].Max() == -1 {
+			if v[0].Orientation() < PREV && v[0].Min() > 0 {
+				hasWild = -1 // reset on BOF min wild
+			} else {
+				if hasWild < 0 {
+					hasWild = i // get the first wild segment
+				}
+			}
 		}
 	}
-	if !hasWild {
+	if hasWild < 0 {
 		return nil
 	}
 	ret := make(Signature, 0, len(s))
 	for i, v := range segments {
-		if v[0].Orientation() < SUCC && v[0].Min() == 0 && v[0].Max() == -1 {
+		if i >= hasWild && v[0].Orientation() < SUCC && v[0].Max() == -1 {
 			var last bool
+			var min int
 			if i == len(segments)-1 {
 				last = true
+			} else {
+				next := segments[i+1][0]
+				if next.Orientation() < SUCC {
+					min = next.Min()
+				}
 			}
-			ret = append(ret, v.reverse(last)...)
+			ret = append(ret, v.reverse(last, min)...)
 		} else {
 			ret = append(ret, v...)
 		}

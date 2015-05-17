@@ -46,7 +46,7 @@ type scorer struct {
 }
 
 func (b *Matcher) newScorer(buf siegreader.Buffer, q chan struct{}, r chan core.Result) chan strike {
-	incoming := make(chan strike) // buffer ? Use benchmarks to check
+	incoming := make(chan strike) // buffer this chan?
 	s := &scorer{
 		bm:       b,
 		buf:      buf,
@@ -64,8 +64,8 @@ func (b *Matcher) newScorer(buf siegreader.Buffer, q chan struct{}, r chan core.
 
 		tally: &tally{&sync.Mutex{}, make(map[[2]int][][2]int64), make(map[[2]int]int)},
 	}
-	go s.filterHits()
-	go s.score()
+	go s.filterHits() // this goroutine is a gateway that takes all keyframe hits and reports results on the results channel
+	go s.score()      // this is the main goroutine: it ranges on incoming, routing strikes
 	return incoming
 }
 
@@ -76,20 +76,21 @@ func (s *scorer) score() {
 			return
 		default:
 		}
-		if in.idxa == -1 {
+		if in.idxa == -1 { // check whether should keep waiting for progress strikes
 			if !s.continueWait(in.offset, in.reverse) {
 				break
 			}
 		} else {
-			s.stash(in)
+			s.stash(in) // stash the strike
 		}
 	}
-	s.shutdown(true)
+	s.shutdown(true) // shutdown at eof
 }
 
 // Strikes
 
 // strike is a raw hit from either the WAC matchers or the BOF/EOF frame matchers
+// progress strikes aren't hits: and have -1 for idxa, they just report how far we have scanned
 type strike struct {
 	idxa    int
 	idxb    int   // a test tree index = idxa + idxb
@@ -123,12 +124,12 @@ type strikeCache map[int]*cacheItem
 type cacheItem struct {
 	finalised  bool
 	potentials []process.KeyFrameID // list of sigs this might match
-	first      strike
+	first      strike               // full details for the first match
 
 	mu         *sync.Mutex
-	satisfying bool       // state when a cacheItem is currently trying a strike - only the main thread checks/ changes this so no need to mutex
 	successive [][2]int64 // just cache the offsets of successive matches
-	strikeIdx  int        // -1 signals that the strike is in the first position
+	strikeIdx  int        // -1 signals that the strike is in the first position, otherwise an index into the successive slice
+	satisfying bool       // state when a cacheItem is currently trying a strike
 }
 
 func (s *scorer) newCacheItem(st strike) *cacheItem {
@@ -141,7 +142,7 @@ func (s *scorer) newCacheItem(st strike) *cacheItem {
 	}
 }
 
-// returns the satisfying state
+// adds a new strike to an existing cache item, returns the current satisfying state
 func (c *cacheItem) push(st strike) bool {
 	c.mu.Lock()
 	defer c.mu.Unlock()
@@ -154,6 +155,7 @@ func (c *cacheItem) push(st strike) bool {
 	return c.satisfying
 }
 
+// pops a strike from the item. Changes the satisfying state if returning the first strike. Returns strike and the satisfying state.
 func (c *cacheItem) pop() (strike, bool) {
 	ret := c.first
 	c.mu.Lock()
@@ -170,6 +172,9 @@ func (c *cacheItem) pop() (strike, bool) {
 	return ret, true
 }
 
+// 1. push the strike to the strike cache.
+// 2. mark potentials: a slice marking which keyframes are potentially matched
+// 3. filter those potentials (keyframes) against the waitset, and attempt to satisfy those that we are waiting on
 func (s *scorer) stash(st strike) {
 	stashed := s.strikeCache[st.idxa+st.idxb]
 	if stashed == nil {
@@ -199,6 +204,22 @@ func (s *scorer) stash(st strike) {
 	s.satisfyPotentials(pots)
 }
 
+// range through the potentials, continuing for those keyframes that are potentially complete (all segments in the signature have strikes)
+func (s *scorer) satisfyPotentials(pots []process.KeyFrameID) {
+	s.tally.mu.Lock() // during this phase - hold a lock on the tally
+	for _, kf := range pots {
+		if s.tally.completes(kf[0], len(s.bm.KeyFrames[kf[0]])) {
+			for i := 0; i < len(s.bm.KeyFrames[kf[0]]); i++ {
+				idx, ok := s.tally.potentialMatches[[2]int{kf[0], i}]
+				if ok {
+					s.satisfy(s.strikeCache[idx])
+				}
+			}
+		}
+	}
+	s.tally.mu.Unlock()
+}
+
 func (s *scorer) satisfy(c *cacheItem) {
 	c.mu.Lock()
 	if c.satisfying {
@@ -207,8 +228,8 @@ func (s *scorer) satisfy(c *cacheItem) {
 	}
 	c.satisfying = true
 	c.mu.Unlock()
+	s.queue.Add(1)
 	go func() {
-		s.queue.Add(1)
 		defer s.queue.Done()
 		strike, ok := c.pop()
 		if !ok {
@@ -240,22 +261,6 @@ func (s *scorer) satisfy(c *cacheItem) {
 			}
 		}
 	}()
-}
-
-// returns true for try, false for stash - give c.first.idxa + c.first.idxb
-func (s *scorer) satisfyPotentials(pots []process.KeyFrameID) {
-	s.tally.mu.Lock()
-	for _, kf := range pots {
-		if s.tally.completes(kf[0], len(s.bm.KeyFrames[kf[0]])) {
-			for i := 0; i < len(s.bm.KeyFrames[kf[0]]); i++ {
-				idx, ok := s.tally.potentialMatches[[2]int{kf[0], i}]
-				if ok {
-					s.satisfy(s.strikeCache[idx])
-				}
-			}
-		}
-	}
-	s.tally.mu.Unlock()
 }
 
 // Tally

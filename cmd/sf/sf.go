@@ -39,18 +39,17 @@ const PROCS = -1
 
 // flags
 var (
-	update   = flag.Bool("update", false, "update or install the default signature file")
-	version  = flag.Bool("version", false, "display version information")
-	debug    = flag.Bool("debug", false, "scan in debug mode")
-	nr       = flag.Bool("nr", false, "prevent automatic directory recursion")
-	csvo     = flag.Bool("csv", false, "CSV output format")
-	jsono    = flag.Bool("json", false, "JSON output format")
-	sig      = flag.String("sig", config.SignatureBase(), "set the signature file")
-	home     = flag.String("home", config.Home(), "override the default home directory")
-	serve    = flag.String("serve", "", "start siegfried server e.g. -serve localhost:5138")
-	multi    = flag.Int("multi", 1, "set number of file ID processes")
-	compress = flag.Bool("compress", false, "load compressed signature file")
-	archive  = flag.Bool("z", false, "scan archive formats (zip, tar, gzip)")
+	update  = flag.Bool("update", false, "update or install the default signature file")
+	version = flag.Bool("version", false, "display version information")
+	debug   = flag.Bool("debug", false, "scan in debug mode")
+	nr      = flag.Bool("nr", false, "prevent automatic directory recursion")
+	csvo    = flag.Bool("csv", false, "CSV output format")
+	jsono   = flag.Bool("json", false, "JSON output format")
+	sig     = flag.String("sig", config.SignatureBase(), "set the signature file")
+	home    = flag.String("home", config.Home(), "override the default home directory")
+	serve   = flag.String("serve", "", "start siegfried server e.g. -serve localhost:5138")
+	multi   = flag.Int("multi", 1, "set number of file ID processes")
+	archive = flag.Bool("z", false, "scan archive formats (zip, tar, gzip)")
 	//profile = flag.Bool("profile", false, "run a profile on localhost:6060")
 )
 
@@ -224,13 +223,7 @@ func main() {
 		log.Fatalln("Error: cannot scan archive formats when running in parallel mode")
 	}
 
-	var err error
-	var s *siegfried.Siegfried
-	if *compress {
-		s, err = siegfried.LoadC(config.Signature())
-	} else {
-		s, err = siegfried.Load(config.Signature())
-	}
+	s, err := siegfried.Load(config.Signature())
 	if err != nil {
 		log.Fatalf("Error: error loading signature file, got: %v", err)
 

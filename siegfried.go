@@ -91,36 +91,6 @@ func New() *Siegfried {
 // Save a Siegfried signature file
 func (s *Siegfried) Save(path string) error {
 	ls := signature.NewLoadSaver(nil)
-	ls.SaveTime(s.C)
-	s.em.Save(ls)
-	s.cm.Save(ls)
-	s.bm.Save(ls)
-	ls.SaveTinyUInt(len(s.ids))
-	for _, i := range s.ids {
-		i.Save(ls)
-	}
-	if ls.Err != nil {
-		return ls.Err
-	}
-	f, err := os.Create(path)
-	defer f.Close()
-	if err != nil {
-		return err
-	}
-	_, err = f.Write(config.Magic())
-	if err != nil {
-		return err
-	}
-	_, err = f.Write(ls.Bytes())
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-// Save a Siegfried signature file
-func (s *Siegfried) SaveC(path string) error {
-	ls := signature.NewLoadSaver(nil)
 	ls.SaveString("siegfried")
 	ls.SaveTime(s.C)
 	s.em.Save(ls)
@@ -155,7 +125,7 @@ func (s *Siegfried) SaveC(path string) error {
 }
 
 // Load a Siegfried signature file
-func LoadC(path string) (*Siegfried, error) {
+func Load(path string) (*Siegfried, error) {
 	fbuf, err := ioutil.ReadFile(path)
 	if err != nil {
 		return nil, fmt.Errorf("Siegfried: error opening signature file; got %s\nTry running `sf -update`", err)
@@ -174,26 +144,6 @@ func LoadC(path string) (*Siegfried, error) {
 	if ls.LoadString() != "siegfried" {
 		return nil, fmt.Errorf("Siegfried: not a siegfried signature file")
 	}
-	return &Siegfried{
-		C:       ls.LoadTime(),
-		em:      extensionmatcher.Load(ls),
-		cm:      containermatcher.Load(ls),
-		bm:      bytematcher.Load(ls),
-		ids:     loadIDs(ls),
-		buffers: siegreader.New(),
-	}, ls.Err
-}
-
-// Load a Siegfried signature file
-func Load(path string) (*Siegfried, error) {
-	buf, err := ioutil.ReadFile(path)
-	if err != nil {
-		return nil, fmt.Errorf("Siegfried: error opening signature file; got %s\nTry running `sf -update`", err)
-	}
-	if string(buf[:len(config.Magic())]) != string(config.Magic()) {
-		return nil, fmt.Errorf("Siegfried: not a siegfried signature file")
-	}
-	ls := signature.NewLoadSaver(buf[len(config.Magic()):])
 	return &Siegfried{
 		C:       ls.LoadTime(),
 		em:      extensionmatcher.Load(ls),

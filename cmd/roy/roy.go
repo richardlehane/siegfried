@@ -51,7 +51,6 @@ var (
 	distance    = build.Int("distance", config.Distance(), "define a maximum distance for segmentation")
 	varLength   = build.Int("varlen", config.VarLength(), "define a maximum length for variable offset search sequences")
 	choices     = build.Int("choices", config.Choices(), "define a maximum number of choices for segmentation")
-	compress    = build.Bool("compress", false, "compress signature file")
 
 	// HARVEST
 	harvest        = flag.NewFlagSet("harvest", flag.ExitOnError)
@@ -91,9 +90,6 @@ func makegob(s *siegfried.Siegfried, opts []config.Option) error {
 	err = s.Add(p)
 	if err != nil {
 		return err
-	}
-	if *compress {
-		return s.SaveC(config.Signature())
 	}
 	return s.Save(config.Signature())
 }
