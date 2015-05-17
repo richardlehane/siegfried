@@ -26,9 +26,11 @@ Key features are:
 
 #### Options
 
-    sf -csv file.ext                           // Output CSV rather than YAML
-    sf -json file.ext                          // Output JSON rather than YAML
+    sf -csv file.ext | DIR                     // Output CSV rather than YAML
+    sf -json file.ext | DIR                    // Output JSON rather than YAML
+    sf -                                       // Read list of files piped to stdin
     sf -nr DIR                                 // Don't scan subdirectories
+    sf -z file.zip | DIR                       // Decompress and scan zip, tar, gzip
     sf -sig custom.sig file.ext                // Use a custom signature file
     sf -home c:\junk -sig custom.sig file.ext  // Use a custom home directory
     sf -debug file.ext                         // Scan in debug mode
@@ -68,12 +70,16 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 	sf -update
 
 ## Recent Changes
-### Version 1.1.0 (forthcoming)
+### Version 1.1.0 (17/5/2015)
 - scan within archive formats (zip, tar, gzip) with -z flag
 - format sets (e.g. roy build -exclude @pdfa)
-- smaller, faster signature format
+- leaner, faster signature format
 - support bitmask patterns
-- bugfix ([mscfb](https://github.com/richardlehane/mscfb/commit/22552265cefc80b400ff64156155f53a5d5751e6)) reported by [Pascal Aantz](https://github.com/richardlehane/siegfried/issues/32)
+- mirror bof patterns as eof patterns where both roy -bof and -eof limits set
+- 'sf -' reads files piped to stdin
+- bugfix: ([mscfb](https://github.com/richardlehane/mscfb/commit/22552265cefc80b400ff64156155f53a5d5751e6)) reported by [Pascal Aantz](https://github.com/richardlehane/siegfried/issues/32)
+- bufix: race condition in scorer (affected tip golang)
+- archivematica build: fpr server
 
 ### Version 1.0.0 (22/3/2015)
 - [user documentation](http://github.com/richardlehane/siegfried/wiki)
@@ -93,14 +99,6 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 ### Version 0.8.0 (26/1/2015)
 - optimisations (mmap, multithread, etc.)
 
-### Version 0.7.1 (9/12/2014)
-- csv output
-- periodic priority checking to stop searches earlier
-- range/distance/choices bugfix
-
-### Version 0.7.0 (24/11/2014)
-- change to signature file format
-
 [Full change history](https://github.com/richardlehane/siegfried/wiki/Change-history)
 
 ## Rights
@@ -111,7 +109,7 @@ Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/
 
 ## Contributing
 
-Like Siegfried and want to be involved in its development? That'd be wonderful! There are some notes on the [wiki](https://github.com/richardlehane/siegfried/wiki) to get you started, and please get in touch.
+Like Siegfried and want to get involved in its development? That'd be wonderful! There are some notes on the [wiki](https://github.com/richardlehane/siegfried/wiki) to get you started, and please get in touch.
 
 ## Thanks
 
