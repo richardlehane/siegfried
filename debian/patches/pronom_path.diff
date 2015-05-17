@@ -35,7 +35,7 @@ Index: siegfried-0.7.0/config/default.go
 -	}
 -	siegfried.home = filepath.Join(current.HomeDir, "siegfried")
 +	siegfried.home = "/usr/share/siegfried"
-+	siegfried.signature = "archivematica.gob"
++	siegfried.signature = "archivematica.sig"
 +	identifier.name = "archivematica"
 +	pronom.extend = []string{"archivematica-fmt2.xml", "archivematica-fmt3.xml", "archivematica-fmt4.xml", "archivematica-fmt5.xml"}
  }
