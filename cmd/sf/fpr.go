@@ -1,4 +1,4 @@
-// +build archivematica,linux
+// +build !windows
 
 // Copyright 2015 Richard Lehane. All rights reserved.
 //

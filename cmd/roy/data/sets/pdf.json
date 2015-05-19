@@ -1,9 +1,7 @@
 {
   "pdf":[
     "@pdfcore",
-    "@pdfa",
-    "@pdfe",
-    "@pdfx"
+    "@pdfextra"
   ],
   "pdfcore":[
     "fmt/14",
@@ -14,6 +12,11 @@
     "fmt/19",
     "fmt/20",
     "fmt/276"
+  ],
+  "pdfextra":[
+    "@pdfa",
+    "@pdfe",
+    "@pdfx"
   ],
   "pdfa":[
     "fmt/95",
