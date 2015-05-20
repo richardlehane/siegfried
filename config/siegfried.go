@@ -50,6 +50,7 @@ var siegfried = struct {
 	updateURL:       "http://www.itforarchivists.com/siegfried/update",
 	updateTimeout:   30 * time.Second,
 	updateTransport: &http.Transport{Proxy: http.ProxyFromEnvironment},
+	fpr:             "/tmp/siegfried",
 }
 
 // GETTERS
