@@ -43,10 +43,12 @@ type IdentifierLoader func(*signature.LoadSaver) Identifier
 
 var loaders = [8]IdentifierLoader{nil, nil, nil, nil, nil, nil, nil, nil}
 
+// RegisterIdentifier allows external packages to add new IdentifierLoader funcs
 func RegisterIdentifier(id byte, l IdentifierLoader) {
 	loaders[int(id)] = l
 }
 
+// LoadIdentifier applies the appropriate IdentifierLoader func to load an identifier
 func LoadIdentifier(ls *signature.LoadSaver) Identifier {
 	id := ls.LoadByte()
 	l := loaders[int(id)]

@@ -15,7 +15,7 @@
 // Package siegfried identifies file formats
 //
 // Example:
-//  s, err := siegfried.Load("pronom.gob")
+//  s, err := siegfried.Load("pronom.sig")
 //  if err != nil {
 //  	// handle err
 //  }
@@ -26,7 +26,7 @@
 //  	// handle err
 //  }
 //  for id := range c {
-//  	fmt.Print(id.Yaml())
+//  	fmt.Print(id)
 //  }
 package siegfried
 
@@ -237,6 +237,8 @@ func (s *Siegfried) Yaml() string {
 	return str
 }
 
+// JSON representation of a Siegfried
+// This is the provenace block at the beginning of siegfried results and includes descriptions for each identifier.
 func (s *Siegfried) Json() string {
 	version := config.Version()
 	str := fmt.Sprintf(

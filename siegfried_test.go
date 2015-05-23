@@ -12,6 +12,37 @@ import (
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
+func TestLoad(t *testing.T) {
+	s := New()
+	config.SetHome("./cmd/roy/data")
+	p, err := pronom.New()
+	if err != nil {
+		t.Fatal(err)
+	}
+	err = s.Add(p)
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestIdentify(t *testing.T) {
+	s := New()
+	s.em = testNMatcher{}
+	s.bm = testBMatcher{}
+	s.cm = nil
+	s.ids = append(s.ids, testIdentifier{})
+	c, err := s.Identify("test.doc", bytes.NewBufferString("test"))
+	if err != nil {
+		t.Error(err)
+	}
+	i := <-c
+	if i.String() != "fmt/3" {
+		t.Error("expecting fmt/3")
+	}
+}
+
+// name matcher test stub
+
 type testNMatcher struct{}
 
 func (t testNMatcher) Identify(n string, sb siegreader.Buffer) (chan core.Result, error) {
@@ -28,6 +59,8 @@ func (t testNMatcher) String() string { return "" }
 func (t testNMatcher) Save(l *signature.LoadSaver) {}
 
 func (t testNMatcher) Add(ss core.SignatureSet, l priority.List) (int, error) { return 0, nil }
+
+// byte matcher test stub
 
 type testBMatcher struct{}
 
@@ -53,6 +86,8 @@ func (tr testResult) Index() int { return int(tr) }
 
 func (tr testResult) Basis() string { return "" }
 
+// identifier test stub
+
 type testIdentifier struct{}
 
 func (t testIdentifier) Yaml() string { return "" }
@@ -67,6 +102,8 @@ func (t testIdentifier) Recognise(m core.MatcherType, i int) (bool, string) { re
 
 func (t testIdentifier) String() string { return "" }
 
+// recorder test stub
+
 type testRecorder struct{}
 
 func (t testRecorder) Record(m core.MatcherType, r core.Result) bool { return true }
@@ -74,6 +111,8 @@ func (t testRecorder) Record(m core.MatcherType, r core.Result) bool { return tr
 func (t testRecorder) Satisfied() bool { return false }
 
 func (t testRecorder) Report(c chan core.Identification) { c <- testIdentification{} }
+
+// identification test stub
 
 type testIdentification struct{}
 
@@ -86,32 +125,3 @@ func (t testIdentification) Json() string { return "" }
 func (t testIdentification) Csv() []string { return nil }
 
 func (t testIdentification) Archive() config.Archive { return 0 }
-
-func TestIdentify(t *testing.T) {
-	s := New()
-	s.em = testNMatcher{}
-	s.bm = testBMatcher{}
-	s.cm = nil
-	s.ids = append(s.ids, testIdentifier{})
-	c, err := s.Identify("test.doc", bytes.NewBufferString("test"))
-	if err != nil {
-		t.Error(err)
-	}
-	i := <-c
-	if i.String() != "fmt/3" {
-		t.Error("expecting fmt/3")
-	}
-}
-
-func TestLoad(t *testing.T) {
-	s := New()
-	config.SetHome("./cmd/roy/data")
-	p, err := pronom.New()
-	if err != nil {
-		t.Fatal(err)
-	}
-	err = s.Add(p)
-	if err != nil {
-		t.Fatal(err)
-	}
-}

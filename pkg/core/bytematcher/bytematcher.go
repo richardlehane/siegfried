@@ -29,10 +29,10 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
-// Bytematcher structure. Clients shouldn't need to get or set these fields directly, they are only exported so that this structure can be serialised and deserialised by encoding/gob.
+// Bytematcher structure.
 type Matcher struct {
 	*process.Process
-	Priorities *priority.Set
+	priorities *priority.Set
 	mu         *sync.Mutex
 	bAho       *wac.Wac
 	eAho       *wac.Wac
@@ -58,7 +58,7 @@ func Load(ls *signature.LoadSaver) *Matcher {
 	}
 	return &Matcher{
 		Process:    process.Load(ls),
-		Priorities: priority.Load(ls),
+		priorities: priority.Load(ls),
 		mu:         &sync.Mutex{},
 	}
 }
@@ -70,7 +70,7 @@ func (b *Matcher) Save(ls *signature.LoadSaver) {
 	}
 	ls.SaveBool(true)
 	b.Process.Save(ls)
-	b.Priorities.Save(ls)
+	b.priorities.Save(ls)
 }
 
 type sigErrors []error
@@ -117,7 +117,7 @@ func (b *Matcher) Add(ss core.SignatureSet, priorities priority.List) (int, erro
 		t.MaxRightDistance = process.MaxLength(t.Right)
 	}
 	// add the priorities to the priority set
-	b.Priorities.Add(priorities, len(sigs))
+	b.priorities.Add(priorities, len(sigs))
 	return len(b.KeyFrames), nil
 }
 
@@ -179,7 +179,7 @@ func (b *Matcher) String() string {
 	str += fmt.Sprintf("Maximum Right Distance: %v\n", mr)
 	str += fmt.Sprintf("Maximum BOF Distance: %v\n", b.MaxBOF)
 	str += fmt.Sprintf("Maximum EOF Distance: %v\n", b.MaxEOF)
-	str += fmt.Sprintf("Priorities: %v\n", b.Priorities)
+	str += fmt.Sprintf("priorities: %v\n", b.priorities)
 	return str
 }
 

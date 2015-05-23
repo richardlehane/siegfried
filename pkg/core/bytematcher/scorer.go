@@ -56,7 +56,7 @@ func (b *Matcher) newScorer(buf siegreader.Buffer, q chan struct{}, r chan core.
 
 		strikeCache: make(strikeCache),
 		kfHits:      make(chan kfHit),
-		waitSet:     b.Priorities.WaitSet(),
+		waitSet:     b.priorities.WaitSet(),
 		queue:       &sync.WaitGroup{},
 		once:        &sync.Once{},
 		stop:        make(chan struct{}),
