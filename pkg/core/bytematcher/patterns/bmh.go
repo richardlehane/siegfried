@@ -17,7 +17,7 @@ package patterns
 import (
 	"bytes"
 
-	"github.com/richardlehane/siegfried/pkg/core/signature"
+	"github.com/richardlehane/siegfried/pkg/core/persist"
 )
 
 // Helper func to turn patterns into BMH sequences if possible
@@ -98,7 +98,7 @@ func (s *BMHSequence) String() string {
 	return "seq " + Stringify(s.Seq)
 }
 
-func (s *BMHSequence) Save(ls *signature.LoadSaver) {
+func (s *BMHSequence) Save(ls *persist.LoadSaver) {
 	ls.SaveByte(bmhLoader)
 	ls.SaveBytes(s.Seq)
 	for _, v := range s.Shift {
@@ -106,7 +106,7 @@ func (s *BMHSequence) Save(ls *signature.LoadSaver) {
 	}
 }
 
-func loadBMH(ls *signature.LoadSaver) Pattern {
+func loadBMH(ls *persist.LoadSaver) Pattern {
 	bmh := &BMHSequence{}
 	bmh.Seq = Sequence(ls.LoadBytes())
 	for i := range bmh.Shift {
@@ -181,7 +181,7 @@ func (s *RBMHSequence) String() string {
 	return "seq " + Stringify(s.Seq)
 }
 
-func (s *RBMHSequence) Save(ls *signature.LoadSaver) {
+func (s *RBMHSequence) Save(ls *persist.LoadSaver) {
 	ls.SaveByte(rbmhLoader)
 	ls.SaveBytes(s.Seq)
 	for _, v := range s.Shift {
@@ -189,7 +189,7 @@ func (s *RBMHSequence) Save(ls *signature.LoadSaver) {
 	}
 }
 
-func loadRBMH(ls *signature.LoadSaver) Pattern {
+func loadRBMH(ls *persist.LoadSaver) Pattern {
 	rbmh := &RBMHSequence{}
 	rbmh.Seq = Sequence(ls.LoadBytes())
 	for i := range rbmh.Shift {

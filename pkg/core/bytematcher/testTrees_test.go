@@ -5,7 +5,7 @@ import (
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames/tests"
-	"github.com/richardlehane/siegfried/pkg/core/signature"
+	"github.com/richardlehane/siegfried/pkg/core/persist"
 )
 
 // Shared test testNodes
@@ -54,9 +54,9 @@ func TestMaxLength(t *testing.T) {
 	test := &testTree{}
 	test.add([2]int{0, 0}, []frames.Frame{}, []frames.Frame{tests.TestFrames[0], tests.TestFrames[3], tests.TestFrames[6]})
 	test.add([2]int{0, 0}, []frames.Frame{}, []frames.Frame{tests.TestFrames[1], tests.TestFrames[3]})
-	saver := signature.NewLoadSaver(nil)
+	saver := persist.NewLoadSaver(nil)
 	saveTests(saver, []*testTree{test, test})
-	loader := signature.NewLoadSaver(saver.Bytes())
+	loader := persist.NewLoadSaver(saver.Bytes())
 	tests := loadTests(loader)
 	test = tests[1]
 	if maxLength(test.right) != 33 {

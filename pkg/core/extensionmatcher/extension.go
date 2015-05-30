@@ -21,14 +21,14 @@ import (
 	"strings"
 
 	"github.com/richardlehane/siegfried/pkg/core"
+	"github.com/richardlehane/siegfried/pkg/core/persist"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
-	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
 type Matcher map[string][]Result
 
-func Load(ls *signature.LoadSaver) Matcher {
+func Load(ls *persist.LoadSaver) Matcher {
 	le := ls.LoadSmallInt()
 	if le == 0 {
 		return nil
@@ -45,7 +45,7 @@ func Load(ls *signature.LoadSaver) Matcher {
 	return ret
 }
 
-func (m Matcher) Save(ls *signature.LoadSaver) {
+func (m Matcher) Save(ls *persist.LoadSaver) {
 	ls.SaveSmallInt(len(m))
 	for k, v := range m {
 		ls.SaveString(k)
@@ -75,7 +75,7 @@ func (r Result) Basis() string {
 func (e Matcher) Add(ss core.SignatureSet, p priority.List) (int, error) {
 	sigs, ok := ss.(SignatureSet)
 	if !ok {
-		return -1, fmt.Errorf("Extension matcher: can't cast signature set as an EM ss")
+		return -1, fmt.Errorf("Extension matcher: can't cast persist set as an EM ss")
 	}
 	var length int
 	// unless it is a new matcher, calculate current length by iterating through all the Result values

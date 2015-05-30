@@ -22,7 +22,7 @@ import (
 	"sort"
 	"sync"
 
-	"github.com/richardlehane/siegfried/pkg/core/signature"
+	"github.com/richardlehane/siegfried/pkg/core/persist"
 )
 
 // a priority map links subordinate results to a list of priority restuls
@@ -203,7 +203,7 @@ type Set struct {
 	Lists []List
 }
 
-func (s *Set) Save(ls *signature.LoadSaver) {
+func (s *Set) Save(ls *persist.LoadSaver) {
 	ls.SaveInts(s.Idx)
 	ls.SaveSmallInt(len(s.Lists))
 	for _, v := range s.Lists {
@@ -214,7 +214,7 @@ func (s *Set) Save(ls *signature.LoadSaver) {
 	}
 }
 
-func Load(ls *signature.LoadSaver) *Set {
+func Load(ls *persist.LoadSaver) *Set {
 	set := &Set{}
 	set.Idx = ls.LoadInts()
 	if set.Idx == nil {
@@ -235,8 +235,8 @@ func Load(ls *signature.LoadSaver) *Set {
 	return set
 }
 
-// Add a priority list to a set. The length is the number of signatures the priority list applies to, not the length of the priority list.
-// This length will only differ when no priorities are set for a given set of signatures.
+// Add a priority list to a set. The length is the number of persists the priority list applies to, not the length of the priority list.
+// This length will only differ when no priorities are set for a given set of persists.
 func (s *Set) Add(l List, length int) {
 	var last int
 	if len(s.Idx) > 0 {
@@ -321,7 +321,7 @@ func (w *WaitSet) Put(i int) bool {
 	return true
 }
 
-// Check a signature index against the appropriate priority list. Should we continue trying to match this signature?
+// Check a persist index against the appropriate priority list. Should we continue trying to match this persist?
 func (w *WaitSet) Check(i int) bool {
 	idx, prev := w.Index(i)
 	w.m.RLock()
@@ -371,7 +371,7 @@ func (w *WaitSet) ApplyFilter(f Filterable) {
 	}
 }
 
-// For periodic checking - what signatures are we currently waiting on?
+// For periodic checking - what persists are we currently waiting on?
 // Accumulates values from all the priority lists within the set.
 // Returns nil if *any* of the priority lists is nil.
 func (w *WaitSet) WaitingOn() []int {

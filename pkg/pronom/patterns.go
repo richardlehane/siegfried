@@ -20,7 +20,7 @@ import (
 	"fmt"
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
-	"github.com/richardlehane/siegfried/pkg/core/signature"
+	"github.com/richardlehane/siegfried/pkg/core/persist"
 )
 
 func init() {
@@ -126,13 +126,13 @@ func (r Range) String() string {
 	return "r " + patterns.Stringify(r.From) + " - " + patterns.Stringify(r.To)
 }
 
-func (r Range) Save(ls *signature.LoadSaver) {
+func (r Range) Save(ls *persist.LoadSaver) {
 	ls.SaveByte(rangeLoader)
 	ls.SaveBytes(r.From)
 	ls.SaveBytes(r.To)
 }
 
-func loadRange(ls *signature.LoadSaver) patterns.Pattern {
+func loadRange(ls *persist.LoadSaver) patterns.Pattern {
 	return Range{
 		ls.LoadBytes(),
 		ls.LoadBytes(),
@@ -210,12 +210,12 @@ func (m Mask) String() string {
 	return fmt.Sprintf("m %#x", byte(m))
 }
 
-func (m Mask) Save(ls *signature.LoadSaver) {
+func (m Mask) Save(ls *persist.LoadSaver) {
 	ls.SaveByte(maskLoader)
 	ls.SaveByte(byte(m))
 }
 
-func loadMask(ls *signature.LoadSaver) patterns.Pattern {
+func loadMask(ls *persist.LoadSaver) patterns.Pattern {
 	return Mask(ls.LoadByte())
 }
 
@@ -273,11 +273,11 @@ func (am AnyMask) String() string {
 	return fmt.Sprintf("am %#x", byte(am))
 }
 
-func (am AnyMask) Save(ls *signature.LoadSaver) {
+func (am AnyMask) Save(ls *persist.LoadSaver) {
 	ls.SaveByte(anyMaskLoader)
 	ls.SaveByte(byte(am))
 }
 
-func loadAnyMask(ls *signature.LoadSaver) patterns.Pattern {
+func loadAnyMask(ls *persist.LoadSaver) patterns.Pattern {
 	return AnyMask(ls.LoadByte())
 }

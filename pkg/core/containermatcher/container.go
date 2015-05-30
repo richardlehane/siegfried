@@ -22,9 +22,9 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+	"github.com/richardlehane/siegfried/pkg/core/persist"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
-	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
 type containerType int
@@ -36,7 +36,7 @@ const (
 
 type Matcher []*ContainerMatcher
 
-func Load(ls *signature.LoadSaver) Matcher {
+func Load(ls *persist.LoadSaver) Matcher {
 	ret := make(Matcher, ls.LoadTinyUInt())
 	for i := range ret {
 		ret[i] = loadCM(ls)
@@ -46,7 +46,7 @@ func Load(ls *signature.LoadSaver) Matcher {
 	return ret
 }
 
-func (m Matcher) Save(ls *signature.LoadSaver) {
+func (m Matcher) Save(ls *persist.LoadSaver) {
 	ls.SaveTinyUInt(len(m))
 	for _, v := range m {
 		v.save(ls)
@@ -69,7 +69,7 @@ type SignatureSet struct {
 func (m Matcher) Add(ss core.SignatureSet, l priority.List) (int, error) {
 	sigs, ok := ss.(SignatureSet)
 	if !ok {
-		return 0, fmt.Errorf("Container matcher error: cannot convert signature set to CM signature set")
+		return 0, fmt.Errorf("Container matcher error: cannot convert persist set to CM persist set")
 	}
 	err := m.addSigs(int(sigs.Typ), sigs.NameParts, sigs.SigParts, l)
 	if err != nil {
@@ -78,7 +78,7 @@ func (m Matcher) Add(ss core.SignatureSet, l priority.List) (int, error) {
 	return m.total(-1), nil
 }
 
-// calculate total number of signatures present in the matcher. Provide -1 to get the total sum, or supply an index of an individual matcher to exclude that matcher's total
+// calculate total number of persists present in the matcher. Provide -1 to get the total sum, or supply an index of an individual matcher to exclude that matcher's total
 func (m Matcher) total(i int) int {
 	var t int
 	for j, v := range m {
@@ -97,9 +97,9 @@ func (m Matcher) addSigs(i int, nameParts [][]string, sigParts [][]frames.Signat
 	}
 	var err error
 	if len(nameParts) != len(sigParts) {
-		return fmt.Errorf("Container: expecting equal name and signature parts")
+		return fmt.Errorf("Container: expecting equal name and persist parts")
 	}
-	// give as a starting index the current total of signatures in the matcher, except those in the ContainerMatcher in question
+	// give as a starting index the current total of persists in the matcher, except those in the ContainerMatcher in question
 	m[i].Sindexes = append(m[i].Sindexes, m.total(i))
 	prev := len(m[i].Parts)
 	for j, n := range nameParts {
@@ -131,13 +131,13 @@ type ContainerMatcher struct {
 	Sindexes   []int // start indexes, added to hits - these place all container matches in a single slice
 	CType      containerType
 	NameCTest  map[string]*CTest
-	Parts      []int // corresponds with each signature: represents the number of CTests for each sig
+	Parts      []int // corresponds with each persist: represents the number of CTests for each sig
 	Priorities *priority.Set
 	extension  string
 	entryBufs  *siegreader.Buffers
 }
 
-func loadCM(ls *signature.LoadSaver) *ContainerMatcher {
+func loadCM(ls *persist.LoadSaver) *ContainerMatcher {
 	return &ContainerMatcher{
 		Sindexes:   ls.LoadInts(),
 		CType:      containerType(ls.LoadTinyUInt()),
@@ -148,7 +148,7 @@ func loadCM(ls *signature.LoadSaver) *ContainerMatcher {
 	}
 }
 
-func (c *ContainerMatcher) save(ls *signature.LoadSaver) {
+func (c *ContainerMatcher) save(ls *persist.LoadSaver) {
 	ls.SaveInts(c.Sindexes)
 	ls.SaveTinyUInt(int(c.CType))
 	saveCTests(ls, c.NameCTest)
@@ -239,15 +239,15 @@ func (c *ContainerMatcher) addSignature(nameParts []string, sigParts []frames.Si
 
 // a container test is a the basic element of container matching
 type CTest struct {
-	Satisfied   []int              // satisfied signatures are immediately matched: i.e. a name without a required bitstream
-	Unsatisfied []int              // unsatisfied signatures depend on bitstreams as well as names matching
+	Satisfied   []int              // satisfied persists are immediately matched: i.e. a name without a required bitstream
+	Unsatisfied []int              // unsatisfied persists depend on bitstreams as well as names matching
 	buffer      []frames.Signature // temporary - used while creating CTests
 	BM          *bytematcher.Matcher
 }
 
 //map[string]*CTest
 
-func loadCTests(ls *signature.LoadSaver) map[string]*CTest {
+func loadCTests(ls *persist.LoadSaver) map[string]*CTest {
 	ret := make(map[string]*CTest)
 	l := ls.LoadSmallInt()
 	for i := 0; i < l; i++ {
@@ -260,7 +260,7 @@ func loadCTests(ls *signature.LoadSaver) map[string]*CTest {
 	return ret
 }
 
-func saveCTests(ls *signature.LoadSaver, ct map[string]*CTest) {
+func saveCTests(ls *persist.LoadSaver, ct map[string]*CTest) {
 	ls.SaveSmallInt(len(ct))
 	for k, v := range ct {
 		ls.SaveString(k)
@@ -284,12 +284,12 @@ func (ct *CTest) add(s frames.Signature, t int) {
 	ct.buffer = append(ct.buffer, s)
 }
 
-// call for each key after all signatures added
+// call for each key after all persists added
 func (ct *CTest) commit(p priority.List, prev int) error {
 	if ct.buffer == nil {
 		return nil
 	}
-	// don't set priorities if any of the signatures are identical
+	// don't set priorities if any of the persists are identical
 	var dupes bool
 	for i, v := range ct.buffer {
 		if i == len(ct.buffer)-1 {

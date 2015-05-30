@@ -19,8 +19,8 @@ import (
 
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+	"github.com/richardlehane/siegfried/pkg/core/persist"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
-	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
 // positioning information: min/max offsets (in relation to BOF or EOF) and min/max lengths
@@ -43,7 +43,7 @@ type keyFrame struct {
 	key keyFramePos    // absolute positioning info for keyFrame portion of segment (min/max length and offset in relation to BOF/EOF)
 }
 
-func loadKeyFrames(ls *signature.LoadSaver) [][]keyFrame {
+func loadKeyFrames(ls *persist.LoadSaver) [][]keyFrame {
 	kfs := make([][]keyFrame, ls.LoadSmallInt())
 	for i := range kfs {
 		kfs[i] = make([]keyFrame, ls.LoadSmallInt())
@@ -62,7 +62,7 @@ func loadKeyFrames(ls *signature.LoadSaver) [][]keyFrame {
 	return kfs
 }
 
-func saveKeyFrames(ls *signature.LoadSaver, kfs [][]keyFrame) {
+func saveKeyFrames(ls *persist.LoadSaver, kfs [][]keyFrame) {
 	ls.SaveSmallInt(len(kfs))
 	for _, v := range kfs {
 		ls.SaveSmallInt(len(v))

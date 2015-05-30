@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"errors"
 	"flag"
 	"fmt"
@@ -145,6 +146,35 @@ func TestSuite(t *testing.T) {
 	}
 	if iter != len(expect) {
 		t.Errorf("Matched %v out of %v signatures", iter, len(expect))
+	}
+}
+
+func TestTip(t *testing.T) {
+	expect := "fmt/669"
+	err := setup()
+	if err != nil {
+		t.Error(err)
+	}
+	buf := bytes.NewReader([]byte{0x00, 0x4d, 0x52, 0x4d, 0x00})
+	c, err := s.Identify("test.mrw", buf)
+	for i := range c {
+		if i.String() != expect {
+			t.Errorf("First buffer: expecting %s, got %s", expect, i)
+		}
+	}
+	buf = bytes.NewReader([]byte{0x00, 0x4d, 0x52, 0x4d, 0x00})
+	c, err = s.Identify("test.mrw", buf)
+	for i := range c {
+		if i.String() != expect {
+			t.Errorf("Second buffer: expecting %s, got %s", expect, i)
+		}
+	}
+	buf = bytes.NewReader([]byte{0x00, 0x4d, 0x52, 0x4d, 0x00})
+	c, err = s.Identify("test.mrw", buf)
+	for i := range c {
+		if i.String() != expect {
+			t.Errorf("Third buffer: expecting %s, got %s", expect, i)
+		}
 	}
 }
 

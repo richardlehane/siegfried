@@ -16,7 +16,7 @@ package bytematcher
 
 import (
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
-	"github.com/richardlehane/siegfried/pkg/core/signature"
+	"github.com/richardlehane/siegfried/pkg/core/persist"
 )
 
 // Test trees link byte sequence and frame matches (from the sequence and frame sets) to keyframes. This link is sometimes direct if there are no
@@ -31,7 +31,7 @@ type testTree struct {
 	right            []*testNode
 }
 
-func saveTests(ls *signature.LoadSaver, tts []*testTree) {
+func saveTests(ls *persist.LoadSaver, tts []*testTree) {
 	ls.SaveSmallInt(len(tts))
 	for _, tt := range tts {
 		ls.SaveSmallInt(len(tt.complete))
@@ -53,7 +53,7 @@ func saveTests(ls *signature.LoadSaver, tts []*testTree) {
 	}
 }
 
-func loadTests(ls *signature.LoadSaver) []*testTree {
+func loadTests(ls *persist.LoadSaver) []*testTree {
 	l := ls.LoadSmallInt()
 	ret := make([]*testTree, l)
 	for i := range ret {
@@ -126,7 +126,7 @@ type testNode struct {
 	tests   []*testNode
 }
 
-func saveTestNodes(ls *signature.LoadSaver, tns []*testNode) {
+func saveTestNodes(ls *persist.LoadSaver, tns []*testNode) {
 	ls.SaveSmallInt(len(tns))
 	for _, n := range tns {
 		n.Frame.Save(ls)
@@ -135,7 +135,7 @@ func saveTestNodes(ls *signature.LoadSaver, tns []*testNode) {
 	}
 }
 
-func loadTestNodes(ls *signature.LoadSaver) []*testNode {
+func loadTestNodes(ls *persist.LoadSaver) []*testNode {
 	l := ls.LoadSmallInt()
 	if l == 0 {
 		return nil

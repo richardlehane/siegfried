@@ -69,7 +69,7 @@ func fpridentify(s *siegfried.Siegfried, path string) []byte {
 }
 
 func serveFpr(addr string, s *siegfried.Siegfried) {
-	// remove the address if it exists
+	// remove the socket file if it exists
 	if _, err := os.Stat(addr); err == nil {
 		os.Remove(addr)
 	}
@@ -81,7 +81,6 @@ func serveFpr(addr string, s *siegfried.Siegfried) {
 	if err != nil {
 		log.Fatalf("FPR error: failed to listen: %v", err)
 	}
-	defer os.Remove(addr)
 	buf := make([]byte, 4024)
 	for {
 		conn, err := lis.Accept()

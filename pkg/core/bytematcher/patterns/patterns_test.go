@@ -3,7 +3,7 @@ package patterns_test
 import (
 	"testing"
 
-	"github.com/richardlehane/siegfried/pkg/core/signature"
+	"github.com/richardlehane/siegfried/pkg/core/persist"
 
 	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns/tests"
 )
@@ -22,9 +22,9 @@ func TestSequence(t *testing.T) {
 	if reverseSeq[1] != 't' || reverseSeq[2] != 's' || reverseSeq[3] != 'e' || reverseSeq[4] != 't' {
 		t.Error("Sequence fail: Reverse")
 	}
-	saver := signature.NewLoadSaver(nil)
+	saver := persist.NewLoadSaver(nil)
 	TestSequences[0].Save(saver)
-	loader := signature.NewLoadSaver(saver.Bytes())
+	loader := persist.NewLoadSaver(saver.Bytes())
 	_ = loader.LoadByte()
 	p := loader.LoadBytes()
 	if len(p) != 4 {

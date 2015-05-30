@@ -45,8 +45,8 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
 	"github.com/richardlehane/siegfried/pkg/core/containermatcher"
 	"github.com/richardlehane/siegfried/pkg/core/extensionmatcher"
+	"github.com/richardlehane/siegfried/pkg/core/persist"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
-	"github.com/richardlehane/siegfried/pkg/core/signature"
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
@@ -88,9 +88,9 @@ func New() *Siegfried {
 	return s
 }
 
-// Save a Siegfried signature file
+// Save a Siegfried persist file
 func (s *Siegfried) Save(path string) error {
-	ls := signature.NewLoadSaver(nil)
+	ls := persist.NewLoadSaver(nil)
 	ls.SaveString("siegfried")
 	ls.SaveTime(s.C)
 	s.em.Save(ls)
@@ -124,25 +124,25 @@ func (s *Siegfried) Save(path string) error {
 	return nil
 }
 
-// Load a Siegfried signature file
+// Load a Siegfried persist file
 func Load(path string) (*Siegfried, error) {
 	fbuf, err := ioutil.ReadFile(path)
 	if err != nil {
-		return nil, fmt.Errorf("Siegfried: error opening signature file; got %s\nTry running `sf -update`", err)
+		return nil, fmt.Errorf("Siegfried: error opening persist file; got %s\nTry running `sf -update`", err)
 	}
 	if string(fbuf[:len(config.Magic())]) != string(config.Magic()) {
-		return nil, fmt.Errorf("Siegfried: not a siegfried signature file")
+		return nil, fmt.Errorf("Siegfried: not a siegfried persist file")
 	}
 	r := bytes.NewBuffer(fbuf[len(config.Magic()):])
 	rc := flate.NewReader(r)
 	defer rc.Close()
 	buf, err := ioutil.ReadAll(rc)
 	if err != nil {
-		return nil, fmt.Errorf("Siegfried: error opening signature file; got %s\nTry running `sf -update`", err)
+		return nil, fmt.Errorf("Siegfried: error opening persist file; got %s\nTry running `sf -update`", err)
 	}
-	ls := signature.NewLoadSaver(buf)
+	ls := persist.NewLoadSaver(buf)
 	if ls.LoadString() != "siegfried" {
-		return nil, fmt.Errorf("Siegfried: not a siegfried signature file")
+		return nil, fmt.Errorf("Siegfried: not a siegfried persist file")
 	}
 	return &Siegfried{
 		C:       ls.LoadTime(),
@@ -154,7 +154,7 @@ func Load(path string) (*Siegfried, error) {
 	}, ls.Err
 }
 
-func loadIDs(ls *signature.LoadSaver) []core.Identifier {
+func loadIDs(ls *persist.LoadSaver) []core.Identifier {
 	ids := make([]core.Identifier, ls.LoadTinyUInt())
 	for i := range ids {
 		ids[i] = core.LoadIdentifier(ls)
@@ -225,7 +225,7 @@ func (s *Siegfried) Add(i core.Identifier) error {
 func (s *Siegfried) Yaml() string {
 	version := config.Version()
 	str := fmt.Sprintf(
-		"---\nsiegfried   : %d.%d.%d\nscandate    : %v\nsignature   : %s\ncreated     : %v\nidentifiers : \n",
+		"---\nsiegfried   : %d.%d.%d\nscandate    : %v\npersist   : %s\ncreated     : %v\nidentifiers : \n",
 		version[0], version[1], version[2],
 		time.Now().Format(time.RFC3339),
 		config.SignatureBase(),
@@ -242,7 +242,7 @@ func (s *Siegfried) Yaml() string {
 func (s *Siegfried) Json() string {
 	version := config.Version()
 	str := fmt.Sprintf(
-		"{\"siegfried\":\"%d.%d.%d\",\"scandate\":\"%v\",\"signature\":\"%s\",\"created\":\"%v\",\"identifiers\":[",
+		"{\"siegfried\":\"%d.%d.%d\",\"scandate\":\"%v\",\"persist\":\"%s\",\"created\":\"%v\",\"identifiers\":[",
 		version[0], version[1], version[2],
 		time.Now().Format(time.RFC3339),
 		config.SignatureBase(),
@@ -259,7 +259,7 @@ func (s *Siegfried) Json() string {
 }
 
 // Update checks whether a Siegfried is due for update, by testing whether the time given is after the time
-// the signature was created
+// the persist was created
 func (s *Siegfried) Update(t string) bool {
 	tm, err := time.Parse(time.RFC3339, t)
 	if err != nil {

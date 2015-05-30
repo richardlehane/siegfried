@@ -19,8 +19,8 @@ import (
 
 	"github.com/richardlehane/match/wac"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+	"github.com/richardlehane/siegfried/pkg/core/persist"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
-	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
 // Sequence Sets and Frame Sets
@@ -32,7 +32,7 @@ type seqSet struct {
 	testTreeIndex []int // The index of the testTree for the first choices. For subsequence choices, add the index of that choice to the test tree index.
 }
 
-func (ss *seqSet) save(ls *signature.LoadSaver) {
+func (ss *seqSet) save(ls *persist.LoadSaver) {
 	ls.SaveSmallInt(len(ss.set))
 	for _, v := range ss.set {
 		ls.SaveBigInts(v.MaxOffsets)
@@ -47,7 +47,7 @@ func (ss *seqSet) save(ls *signature.LoadSaver) {
 	ls.SaveInts(ss.testTreeIndex)
 }
 
-func loadSeqSet(ls *signature.LoadSaver) *seqSet {
+func loadSeqSet(ls *persist.LoadSaver) *seqSet {
 	ret := &seqSet{}
 	le := ls.LoadSmallInt()
 	if le == 0 {
@@ -128,7 +128,7 @@ type frameSet struct {
 	testTreeIndex []int
 }
 
-func (fs *frameSet) save(ls *signature.LoadSaver) {
+func (fs *frameSet) save(ls *persist.LoadSaver) {
 	ls.SaveSmallInt(len(fs.set))
 	for _, f := range fs.set {
 		f.Save(ls)
@@ -136,7 +136,7 @@ func (fs *frameSet) save(ls *signature.LoadSaver) {
 	ls.SaveInts(fs.testTreeIndex)
 }
 
-func loadFrameSet(ls *signature.LoadSaver) *frameSet {
+func loadFrameSet(ls *persist.LoadSaver) *frameSet {
 	ret := &frameSet{}
 	le := ls.LoadSmallInt()
 	if le == 0 {
