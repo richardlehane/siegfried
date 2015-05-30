@@ -22,7 +22,6 @@ import (
 	"sort"
 	"sync"
 
-	"github.com/richardlehane/siegfried/pkg/core/bytematcher/process"
 	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
@@ -358,22 +357,18 @@ func (w *WaitSet) Filter(l []int) []int {
 	return ret
 }
 
-// Filter a waitset with a list of potential matches, return only those still waiting on. Return nil if none.
-// This a convenience method that takes key frame IDs rather than sig IDs.
-func (w *WaitSet) FilterKfID(l []process.KeyFrameID) []process.KeyFrameID {
-	ret := make([]process.KeyFrameID, 0, len(l))
+type Filterable interface {
+	Next() int
+	Mark(bool)
+}
+
+func (w *WaitSet) ApplyFilter(f Filterable) {
 	w.m.RLock()
 	defer w.m.RUnlock()
-	for _, v := range l {
-		idx, prev := w.Index(v[0])
-		if w.check(v[0], idx, prev) {
-			ret = append(ret, v)
-		}
+	for i := f.Next(); i > -1; i = f.Next() {
+		idx, prev := w.Index(i)
+		f.Mark(w.check(i, idx, prev))
 	}
-	if len(ret) == 0 {
-		return nil
-	}
-	return ret
 }
 
 // For periodic checking - what signatures are we currently waiting on?

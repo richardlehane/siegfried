@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package process
+package bytematcher
 
 import (
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
@@ -23,33 +23,33 @@ import (
 // further test to perform. Follow-up tests may be required to the left or to the right of the match.
 
 type testTree struct {
-	Complete         []KeyFrameID
-	Incomplete       []FollowUp
-	MaxLeftDistance  int
-	MaxRightDistance int
-	Left             []*testNode
-	Right            []*testNode
+	complete         []keyFrameID
+	incomplete       []followUp
+	maxLeftDistance  int
+	maxRightDistance int
+	left             []*testNode
+	right            []*testNode
 }
 
 func saveTests(ls *signature.LoadSaver, tts []*testTree) {
 	ls.SaveSmallInt(len(tts))
 	for _, tt := range tts {
-		ls.SaveSmallInt(len(tt.Complete))
-		for _, kfid := range tt.Complete {
+		ls.SaveSmallInt(len(tt.complete))
+		for _, kfid := range tt.complete {
 			ls.SaveSmallInt(kfid[0])
 			ls.SaveSmallInt(kfid[1])
 		}
-		ls.SaveSmallInt(len(tt.Incomplete))
-		for _, fu := range tt.Incomplete {
-			ls.SaveSmallInt(fu.Kf[0])
-			ls.SaveSmallInt(fu.Kf[1])
-			ls.SaveBool(fu.L)
-			ls.SaveBool(fu.R)
+		ls.SaveSmallInt(len(tt.incomplete))
+		for _, fu := range tt.incomplete {
+			ls.SaveSmallInt(fu.kf[0])
+			ls.SaveSmallInt(fu.kf[1])
+			ls.SaveBool(fu.l)
+			ls.SaveBool(fu.r)
 		}
-		ls.SaveInt(tt.MaxLeftDistance)
-		ls.SaveInt(tt.MaxRightDistance)
-		saveTestNodes(ls, tt.Left)
-		saveTestNodes(ls, tt.Right)
+		ls.SaveInt(tt.maxLeftDistance)
+		ls.SaveInt(tt.maxRightDistance)
+		saveTestNodes(ls, tt.left)
+		saveTestNodes(ls, tt.right)
 	}
 }
 
@@ -58,41 +58,41 @@ func loadTests(ls *signature.LoadSaver) []*testTree {
 	ret := make([]*testTree, l)
 	for i := range ret {
 		ret[i] = &testTree{}
-		ret[i].Complete = make([]KeyFrameID, ls.LoadSmallInt())
-		for j := range ret[i].Complete {
-			ret[i].Complete[j][0] = ls.LoadSmallInt()
-			ret[i].Complete[j][1] = ls.LoadSmallInt()
+		ret[i].complete = make([]keyFrameID, ls.LoadSmallInt())
+		for j := range ret[i].complete {
+			ret[i].complete[j][0] = ls.LoadSmallInt()
+			ret[i].complete[j][1] = ls.LoadSmallInt()
 		}
-		ret[i].Incomplete = make([]FollowUp, ls.LoadSmallInt())
-		for j := range ret[i].Incomplete {
-			ret[i].Incomplete[j].Kf[0] = ls.LoadSmallInt()
-			ret[i].Incomplete[j].Kf[1] = ls.LoadSmallInt()
-			ret[i].Incomplete[j].L = ls.LoadBool()
-			ret[i].Incomplete[j].R = ls.LoadBool()
+		ret[i].incomplete = make([]followUp, ls.LoadSmallInt())
+		for j := range ret[i].incomplete {
+			ret[i].incomplete[j].kf[0] = ls.LoadSmallInt()
+			ret[i].incomplete[j].kf[1] = ls.LoadSmallInt()
+			ret[i].incomplete[j].l = ls.LoadBool()
+			ret[i].incomplete[j].r = ls.LoadBool()
 		}
-		ret[i].MaxLeftDistance = ls.LoadInt()
-		ret[i].MaxRightDistance = ls.LoadInt()
-		ret[i].Left = loadTestNodes(ls)
-		ret[i].Right = loadTestNodes(ls)
+		ret[i].maxLeftDistance = ls.LoadInt()
+		ret[i].maxRightDistance = ls.LoadInt()
+		ret[i].left = loadTestNodes(ls)
+		ret[i].right = loadTestNodes(ls)
 	}
 	return ret
 }
 
 func (t *testTree) String() string {
 	str := "{TEST TREE Completes:"
-	for i, v := range t.Complete {
+	for i, v := range t.complete {
 		str += v.String()
-		if i < len(t.Complete)-1 {
+		if i < len(t.complete)-1 {
 			str += ", "
 		}
 	}
-	if len(t.Incomplete) < 1 {
+	if len(t.incomplete) < 1 {
 		return str + "}"
 	}
 	str += " Incompletes:"
-	for i, v := range t.Incomplete {
-		str += v.Kf.String()
-		if i < len(t.Incomplete)-1 {
+	for i, v := range t.incomplete {
+		str += v.kf.String()
+		if i < len(t.incomplete)-1 {
 			str += ", "
 		}
 	}
@@ -100,38 +100,38 @@ func (t *testTree) String() string {
 }
 
 // KeyFrames returns a list of all KeyFrameIDs that are included in the test tree, including completes and incompletes
-func (t *testTree) KeyFrames() []KeyFrameID {
-	ret := make([]KeyFrameID, len(t.Complete), len(t.Complete)+len(t.Incomplete))
-	copy(ret, t.Complete)
-	for _, v := range t.Incomplete {
-		ret = append(ret, v.Kf)
+func (t *testTree) keyFrames() []keyFrameID {
+	ret := make([]keyFrameID, len(t.complete), len(t.complete)+len(t.incomplete))
+	copy(ret, t.complete)
+	for _, v := range t.incomplete {
+		ret = append(ret, v.kf)
 	}
 	return ret
 }
 
-type FollowUp struct {
-	Kf KeyFrameID
-	L  bool // have a left test
-	R  bool // have a right test
+type followUp struct {
+	kf keyFrameID
+	l  bool // have a left test
+	r  bool // have a right test
 }
 
 type followupMatch struct {
-	FollowUp  int
-	Distances []int
+	followUp  int
+	distances []int
 }
 
 type testNode struct {
 	frames.Frame
-	Success []int // followUp id
-	Tests   []*testNode
+	success []int // followUp id
+	tests   []*testNode
 }
 
 func saveTestNodes(ls *signature.LoadSaver, tns []*testNode) {
 	ls.SaveSmallInt(len(tns))
 	for _, n := range tns {
 		n.Frame.Save(ls)
-		ls.SaveInts(n.Success)
-		saveTestNodes(ls, n.Tests)
+		ls.SaveInts(n.success)
+		saveTestNodes(ls, n.tests)
 	}
 }
 
@@ -181,22 +181,22 @@ func appendTests(ts []*testNode, f []frames.Frame, fu int) []*testNode {
 	}
 	if len(f) > 1 {
 		for _, f1 := range f[1:] {
-			if nt, ok := hasTest(t.Tests, f1); ok {
+			if nt, ok := hasTest(t.tests, f1); ok {
 				t = nt
 			} else {
 				nt := newtestNode(f1)
-				t.Tests = append(t.Tests, nt)
+				t.tests = append(t.tests, nt)
 				t = nt
 			}
 		}
 	}
-	t.Success = append(t.Success, fu)
+	t.success = append(t.success, fu)
 	return nts
 }
 
-func (t *testTree) add(kf KeyFrameID, l []frames.Frame, r []frames.Frame) {
+func (t *testTree) add(kf keyFrameID, l []frames.Frame, r []frames.Frame) {
 	if len(l) == 0 && len(r) == 0 {
-		t.Complete = append(t.Complete, kf)
+		t.complete = append(t.complete, kf)
 		return
 	}
 	var fl, fr bool
@@ -206,13 +206,13 @@ func (t *testTree) add(kf KeyFrameID, l []frames.Frame, r []frames.Frame) {
 	if len(r) > 0 {
 		fr = true
 	}
-	t.Incomplete = append(t.Incomplete, FollowUp{kf, fl, fr})
-	fu := len(t.Incomplete) - 1
+	t.incomplete = append(t.incomplete, followUp{kf, fl, fr})
+	fu := len(t.incomplete) - 1
 	if fl {
-		t.Left = appendTests(t.Left, l, fu)
+		t.left = appendTests(t.left, l, fu)
 	}
 	if fr {
-		t.Right = appendTests(t.Right, r, fu)
+		t.right = appendTests(t.right, r, fu)
 	}
 	return
 }
@@ -221,16 +221,16 @@ func (t *testNode) length() int {
 	return frames.TotalLength(t.Frame)
 }
 
-func MaxLength(ts []*testNode) int {
+func maxLength(ts []*testNode) int {
 	var max int
 	var delve func(t *testNode, this int)
 	delve = func(t *testNode, this int) {
-		if len(t.Tests) == 0 {
+		if len(t.tests) == 0 {
 			if this+t.length() > max {
 				max = this + t.length()
 			}
 		}
-		for _, nt := range t.Tests {
+		for _, nt := range t.tests {
 			delve(nt, this+t.length())
 		}
 	}
@@ -241,7 +241,7 @@ func MaxLength(ts []*testNode) int {
 }
 
 // TODO: This recursive function can overload the stack. Replace with a linear goroutine approach
-func MatchTestNodes(ts []*testNode, b []byte, rev bool) []followupMatch {
+func matchTestNodes(ts []*testNode, b []byte, rev bool) []followupMatch {
 	ret := []followupMatch{}
 	if b == nil {
 		return ret
@@ -262,11 +262,11 @@ func MatchTestNodes(ts []*testNode, b []byte, rev bool) []followupMatch {
 			for i, _ := range offs {
 				offs[i] = offs[i] + o
 			}
-			for _, s := range t.Success {
+			for _, s := range t.success {
 				ret = append(ret, followupMatch{s, offs})
 			}
 			for _, off := range offs {
-				for _, test := range t.Tests {
+				for _, test := range t.tests {
 					match(test, off)
 				}
 			}

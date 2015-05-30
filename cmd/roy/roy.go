@@ -49,7 +49,6 @@ var (
 	noreports   = build.Bool("noreports", false, "build directly from DROID file rather than PRONOM reports")
 	rng         = build.Int("range", config.Range(), "define a maximum range for segmentation")
 	distance    = build.Int("distance", config.Distance(), "define a maximum distance for segmentation")
-	varLength   = build.Int("varlen", config.VarLength(), "define a maximum length for variable offset search sequences")
 	choices     = build.Int("choices", config.Choices(), "define a maximum number of choices for segmentation")
 
 	// HARVEST
@@ -175,9 +174,6 @@ func buildOptions() []config.Option {
 	}
 	if *distance != config.Distance() {
 		opts = append(opts, config.SetDistance(*distance))
-	}
-	if *varLength != config.VarLength() {
-		opts = append(opts, config.SetVarLength(*varLength))
 	}
 	if *choices != config.Choices() {
 		opts = append(opts, config.SetChoices(*choices))

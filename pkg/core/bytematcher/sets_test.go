@@ -1,4 +1,4 @@
-package process
+package bytematcher
 
 import (
 	"testing"
@@ -9,18 +9,18 @@ import (
 )
 
 var TestSeqSetBof = &seqSet{
-	Set:           []wac.Seq{},
-	TestTreeIndex: []int{},
+	set:           []wac.Seq{},
+	testTreeIndex: []int{},
 }
 
 var TestSeqSetEof = &seqSet{
-	Set:           []wac.Seq{},
-	TestTreeIndex: []int{},
+	set:           []wac.Seq{},
+	testTreeIndex: []int{},
 }
 
 var TestFrameSetBof = &frameSet{
-	Set:           []frames.Frame{},
-	TestTreeIndex: []int{},
+	set:           []frames.Frame{},
+	testTreeIndex: []int{},
 }
 
 func TestseqSet(t *testing.T) {

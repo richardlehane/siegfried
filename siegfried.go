@@ -50,7 +50,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
-// Siegfried structs are persisent objects that can be serialised to disk (using encoding/gob).
+// Siegfried structs are persisent objects that can be serialised to disk.
 // The private fields are the three matchers (extension, container, byte) and the identifiers.
 type Siegfried struct {
 	C  time.Time    // signature create time
@@ -74,7 +74,7 @@ type Siegfried struct {
 //  if err != nil {
 //  	// handle err
 //  }
-//  err = s.Save("signature.gob") // save the Siegfried
+//  err = s.Save("pronom.sig") // save the Siegfried
 //  if err != nil {
 //  	// handle err
 //  }
@@ -220,7 +220,7 @@ func (s *Siegfried) Add(i core.Identifier) error {
 	return nil
 }
 
-// Yaml representation of a Siegfried
+// Yaml representation of a Siegfried.
 // This is the provenace block at the beginning of siegfried results and includes Yaml descriptions for each identifier.
 func (s *Siegfried) Yaml() string {
 	version := config.Version()
@@ -237,7 +237,7 @@ func (s *Siegfried) Yaml() string {
 	return str
 }
 
-// JSON representation of a Siegfried
+// JSON representation of a Siegfried.
 // This is the provenace block at the beginning of siegfried results and includes descriptions for each identifier.
 func (s *Siegfried) Json() string {
 	version := config.Version()

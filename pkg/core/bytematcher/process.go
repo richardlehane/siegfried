@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package process
+package bytematcher
 
 import (
 	"fmt"
@@ -20,73 +20,10 @@ import (
 	"github.com/richardlehane/match/wac"
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
-	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
-type Options struct {
-	Distance  int
-	Range     int
-	Choices   int
-	VarLength int
-}
-
-type Process struct {
-	KeyFrames [][]keyFrame
-	Tests     []*testTree
-	BOFFrames *frameSet
-	EOFFrames *frameSet
-	BOFSeq    *seqSet
-	EOFSeq    *seqSet
-	MaxBOF    int
-	MaxEOF    int
-	Options
-}
-
-func New() *Process {
-	return &Process{
-		BOFFrames: &frameSet{},
-		EOFFrames: &frameSet{},
-		BOFSeq:    &seqSet{},
-		EOFSeq:    &seqSet{},
-	}
-}
-
-func (p *Process) Save(ls *signature.LoadSaver) {
-	saveKeyFrames(ls, p.KeyFrames)
-	saveTests(ls, p.Tests)
-	p.BOFFrames.save(ls)
-	p.EOFFrames.save(ls)
-	p.BOFSeq.save(ls)
-	p.EOFSeq.save(ls)
-	ls.SaveInt(p.MaxBOF)
-	ls.SaveInt(p.MaxEOF)
-	ls.SaveInt(p.Options.Distance)
-	ls.SaveInt(p.Options.Range)
-	ls.SaveInt(p.Options.Choices)
-	ls.SaveInt(p.Options.VarLength)
-}
-
-func Load(ls *signature.LoadSaver) *Process {
-	return &Process{
-		loadKeyFrames(ls),
-		loadTests(ls),
-		loadFrameSet(ls),
-		loadFrameSet(ls),
-		loadSeqSet(ls),
-		loadSeqSet(ls),
-		ls.LoadInt(),
-		ls.LoadInt(),
-		Options{
-			ls.LoadInt(),
-			ls.LoadInt(),
-			ls.LoadInt(),
-			ls.LoadInt(),
-		},
-	}
-}
-
-func (p *Process) AddSignature(sig frames.Signature) error {
-	segments := p.splitSegments(sig)
+func (b *Matcher) addSignature(sig frames.Signature) error {
+	segments := sig.Segment(config.Distance(), config.Range())
 	// apply config no eof option
 	if config.NoEOF() {
 		var hasEof bool
@@ -101,33 +38,33 @@ func (p *Process) AddSignature(sig frames.Signature) error {
 		}
 		if hasEof {
 			if x == 0 {
-				p.KeyFrames = append(p.KeyFrames, []keyFrame{})
+				b.keyFrames = append(b.keyFrames, []keyFrame{})
 				return nil
 			}
 			segments = segments[:x] // Otherwise trim segments to the first SUCC/EOF segment
 		}
 	}
 	kf := make([]keyFrame, len(segments))
-	clstr := newCluster(p)
+	clstr := newCluster(b)
 	for i, segment := range segments {
 		var pos position
 		c := characterise(segment)
 		switch c {
 		case bofZero:
-			pos = bofLength(segment, p.Choices)
+			pos = bofLength(segment, config.Choices())
 		case eofZero:
-			pos = eofLength(segment, p.Choices)
+			pos = eofLength(segment, config.Choices())
 		default:
-			pos = varLength(segment, p.Choices)
+			pos = varLength(segment, config.Choices())
 		}
 		if pos.length < 1 {
 			switch c {
 			case bofZero, bofWindow:
-				kf[i] = p.addToFrameSet(segment, i, p.BOFFrames, 0, 1)
+				kf[i] = b.addToFrameSet(segment, i, b.bofFrames, 0, 1)
 			case eofZero, eofWindow:
-				kf[i] = p.addToFrameSet(segment, i, p.EOFFrames, len(segment)-1, len(segment))
+				kf[i] = b.addToFrameSet(segment, i, b.eofFrames, len(segment)-1, len(segment))
 			default:
-				return fmt.Errorf("Variable offset segment encountered that can't be turned into a sequence: signature %d, segment %d", len(p.KeyFrames), i)
+				return fmt.Errorf("Variable offset segment encountered that can't be turned into a sequence: signature %d, segment %d", len(b.keyFrames), i)
 			}
 		} else {
 			switch c {
@@ -165,24 +102,24 @@ func (p *Process) AddSignature(sig frames.Signature) error {
 	}
 	clstr.commit()
 	updatePositions(kf)
-	p.MaxBOF = maxBOF(p.MaxBOF, kf)
-	p.MaxEOF = maxEOF(p.MaxEOF, kf)
-	p.KeyFrames = append(p.KeyFrames, kf)
+	b.maxBOF = maxBOF(b.maxBOF, kf)
+	b.maxEOF = maxEOF(b.maxEOF, kf)
+	b.keyFrames = append(b.keyFrames, kf)
 	return nil
 }
 
 type cluster struct {
 	rev    bool
 	kfs    []keyFrame
-	p      *Process
+	b      *Matcher
 	w      wac.Seq
 	ks     []int
 	lefts  [][]frames.Frame
 	rights [][]frames.Frame
 }
 
-func newCluster(p *Process) *cluster {
-	return &cluster{p: p}
+func newCluster(b *Matcher) *cluster {
+	return &cluster{b: b}
 }
 
 func (c *cluster) add(seg frames.Signature, i int, pos position) keyFrame {
@@ -214,44 +151,44 @@ func (c *cluster) add(seg frames.Signature, i int, pos position) keyFrame {
 func (c *cluster) commit() *cluster {
 	// commit nothing if the cluster is empty
 	if len(c.w.Choices) == 0 {
-		return newCluster(c.p)
+		return newCluster(c.b)
 	}
 	updatePositions(c.kfs)
 	c.w.MaxOffsets = make([]int64, len(c.kfs))
 	if c.rev {
 		for i := range c.w.MaxOffsets {
-			c.w.MaxOffsets[i] = c.kfs[len(c.kfs)-1-i].Key.PMax
+			c.w.MaxOffsets[i] = c.kfs[len(c.kfs)-1-i].key.pMax
 		}
 	} else {
 		for i, v := range c.kfs {
-			c.w.MaxOffsets[i] = v.Key.PMax
+			c.w.MaxOffsets[i] = v.key.pMax
 		}
 	}
 	var ss *seqSet
 	if c.rev {
-		ss = c.p.EOFSeq
+		ss = c.b.eofSeq
 	} else {
-		ss = c.p.BOFSeq
+		ss = c.b.bofSeq
 	}
-	hi := ss.add(c.w, len(c.p.Tests))
+	hi := ss.add(c.w, len(c.b.tests))
 	l := len(c.ks)
-	if hi == len(c.p.Tests) {
+	if hi == len(c.b.tests) {
 		for i := 0; i < l; i++ {
-			c.p.Tests = append(c.p.Tests, &testTree{})
+			c.b.tests = append(c.b.tests, &testTree{})
 		}
 	}
 	for i := 0; i < l; i++ {
-		c.p.Tests[hi+i].add([2]int{len(c.p.KeyFrames), c.ks[i]}, c.lefts[i], c.rights[i])
+		c.b.tests[hi+i].add([2]int{len(c.b.keyFrames), c.ks[i]}, c.lefts[i], c.rights[i])
 	}
-	return newCluster(c.p)
+	return newCluster(c.b)
 }
 
-func (p *Process) addToFrameSet(segment frames.Signature, i int, fs *frameSet, start, end int) keyFrame {
+func (b *Matcher) addToFrameSet(segment frames.Signature, i int, fs *frameSet, start, end int) keyFrame {
 	k, left, right := toKeyFrame(segment, position{0, start, end})
-	hi := fs.add(segment[start], len(p.Tests))
-	if hi == len(p.Tests) {
-		p.Tests = append(p.Tests, &testTree{})
+	hi := fs.add(segment[start], len(b.tests))
+	if hi == len(b.tests) {
+		b.tests = append(b.tests, &testTree{})
 	}
-	p.Tests[hi].add([2]int{len(p.KeyFrames), i}, left, right)
+	b.tests[hi].add([2]int{len(b.keyFrames), i}, left, right)
 	return k
 }

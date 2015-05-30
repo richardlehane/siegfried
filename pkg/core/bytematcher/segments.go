@@ -12,17 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package process
+package bytematcher
 
 import (
 	"fmt"
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 )
-
-func (p *Process) splitSegments(sig frames.Signature) []frames.Signature {
-	return sig.Segment(p.Distance, p.Range)
-}
 
 type sigType int
 

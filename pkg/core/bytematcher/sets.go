@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package process
+package bytematcher
 
 import (
 	"bytes"
@@ -28,13 +28,13 @@ import (
 // As far as possible, signatures are flattened into simple byte sequences grouped into two sets: BOF and EOF sets.
 // When a byte sequence is matched, the TestTree is examined for keyframe matches and to conduct further tests.
 type seqSet struct {
-	Set           []wac.Seq
-	TestTreeIndex []int // The index of the testTree for the first choices. For subsequence choices, add the index of that choice to the test tree index.
+	set           []wac.Seq
+	testTreeIndex []int // The index of the testTree for the first choices. For subsequence choices, add the index of that choice to the test tree index.
 }
 
 func (ss *seqSet) save(ls *signature.LoadSaver) {
-	ls.SaveSmallInt(len(ss.Set))
-	for _, v := range ss.Set {
+	ls.SaveSmallInt(len(ss.set))
+	for _, v := range ss.set {
 		ls.SaveBigInts(v.MaxOffsets)
 		ls.SaveSmallInt(len(v.Choices))
 		for _, w := range v.Choices {
@@ -44,7 +44,7 @@ func (ss *seqSet) save(ls *signature.LoadSaver) {
 			}
 		}
 	}
-	ls.SaveInts(ss.TestTreeIndex)
+	ls.SaveInts(ss.testTreeIndex)
 }
 
 func loadSeqSet(ls *signature.LoadSaver) *seqSet {
@@ -54,18 +54,18 @@ func loadSeqSet(ls *signature.LoadSaver) *seqSet {
 		_ = ls.LoadInts() // discard the empty testtreeindex list too
 		return ret
 	}
-	ret.Set = make([]wac.Seq, le)
-	for i := range ret.Set {
-		ret.Set[i].MaxOffsets = ls.LoadBigInts()
-		ret.Set[i].Choices = make([]wac.Choice, ls.LoadSmallInt())
-		for j := range ret.Set[i].Choices {
-			ret.Set[i].Choices[j] = make(wac.Choice, ls.LoadSmallInt())
-			for k := range ret.Set[i].Choices[j] {
-				ret.Set[i].Choices[j][k] = ls.LoadBytes()
+	ret.set = make([]wac.Seq, le)
+	for i := range ret.set {
+		ret.set[i].MaxOffsets = ls.LoadBigInts()
+		ret.set[i].Choices = make([]wac.Choice, ls.LoadSmallInt())
+		for j := range ret.set[i].Choices {
+			ret.set[i].Choices[j] = make(wac.Choice, ls.LoadSmallInt())
+			for k := range ret.set[i].Choices[j] {
+				ret.set[i].Choices[j][k] = ls.LoadBytes()
 			}
 		}
 	}
-	ret.TestTreeIndex = ls.LoadInts()
+	ret.testTreeIndex = ls.LoadInts()
 	return ret
 }
 
@@ -102,7 +102,7 @@ func seqEquals(a wac.Seq, b wac.Seq) bool {
 }
 
 func (ss *seqSet) exists(seq wac.Seq) (int, bool) {
-	for i, v := range ss.Set {
+	for i, v := range ss.set {
 		if seqEquals(seq, v) {
 			return i, true
 		}
@@ -110,30 +110,30 @@ func (ss *seqSet) exists(seq wac.Seq) (int, bool) {
 	return -1, false
 }
 
-// Add sequence to set. Provides latest TestTreeIndex, returns actual TestTreeIndex for hit insertion.
+// Add sequence to set. Provides latest testTreeIndex, returns actual testTreeIndex for hit insertion.
 func (ss *seqSet) add(seq wac.Seq, hi int) int {
 	i, ok := ss.exists(seq)
 	if ok {
-		return ss.TestTreeIndex[i]
+		return ss.testTreeIndex[i]
 	}
-	ss.Set = append(ss.Set, seq)
-	ss.TestTreeIndex = append(ss.TestTreeIndex, hi)
+	ss.set = append(ss.set, seq)
+	ss.testTreeIndex = append(ss.testTreeIndex, hi)
 	return hi
 }
 
 // Some signatures cannot be represented by simple byte sequences. The first or last frames from these sequences are added to the BOF or EOF frame sets.
 // Like sequences, frame matches are referred to the TestTree for further testing.
 type frameSet struct {
-	Set           []frames.Frame
-	TestTreeIndex []int
+	set           []frames.Frame
+	testTreeIndex []int
 }
 
 func (fs *frameSet) save(ls *signature.LoadSaver) {
-	ls.SaveSmallInt(len(fs.Set))
-	for _, f := range fs.Set {
+	ls.SaveSmallInt(len(fs.set))
+	for _, f := range fs.set {
 		f.Save(ls)
 	}
-	ls.SaveInts(fs.TestTreeIndex)
+	ls.SaveInts(fs.testTreeIndex)
 }
 
 func loadFrameSet(ls *signature.LoadSaver) *frameSet {
@@ -143,34 +143,34 @@ func loadFrameSet(ls *signature.LoadSaver) *frameSet {
 		_ = ls.LoadInts()
 		return ret
 	}
-	ret.Set = make([]frames.Frame, le)
-	for i := range ret.Set {
-		ret.Set[i] = frames.Load(ls)
+	ret.set = make([]frames.Frame, le)
+	for i := range ret.set {
+		ret.set[i] = frames.Load(ls)
 	}
-	ret.TestTreeIndex = ls.LoadInts()
+	ret.testTreeIndex = ls.LoadInts()
 	return ret
 }
 
 // Add frame to set. Provides current testerIndex, returns actual testerIndex for hit insertion.
 func (fs *frameSet) add(f frames.Frame, hi int) int {
-	for i, f1 := range fs.Set {
+	for i, f1 := range fs.set {
 		if f1.Equals(f) {
-			return fs.TestTreeIndex[i]
+			return fs.testTreeIndex[i]
 		}
 	}
-	fs.Set = append(fs.Set, f)
-	fs.TestTreeIndex = append(fs.TestTreeIndex, hi)
+	fs.set = append(fs.set, f)
+	fs.testTreeIndex = append(fs.testTreeIndex, hi)
 	return hi
 }
 
-type Fsmatch struct {
-	Idx    int
-	Off    int64
-	Length int
+type fsmatch struct {
+	idx    int
+	off    int64
+	length int
 }
 
-func (fs *frameSet) Index(buf siegreader.Buffer, rev bool, quit chan struct{}) chan Fsmatch {
-	ret := make(chan Fsmatch)
+func (fs *frameSet) index(buf siegreader.Buffer, rev bool, quit chan struct{}) chan fsmatch {
+	ret := make(chan fsmatch)
 	go func() {
 		var i int
 		for {
@@ -180,11 +180,11 @@ func (fs *frameSet) Index(buf siegreader.Buffer, rev bool, quit chan struct{}) c
 				return
 			default:
 			}
-			if i >= len(fs.Set) {
+			if i >= len(fs.set) {
 				close(ret)
 				return
 			}
-			f := fs.Set[i]
+			f := fs.set[i]
 			var match bool
 			var matches []int
 			if rev {
@@ -208,7 +208,7 @@ func (fs *frameSet) Index(buf siegreader.Buffer, rev bool, quit chan struct{}) c
 					min, _ = f.Length()
 				}
 				for _, off := range matches {
-					ret <- Fsmatch{i, int64(off - min), min}
+					ret <- fsmatch{i, int64(off - min), min}
 				}
 			}
 			i++

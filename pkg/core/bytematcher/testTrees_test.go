@@ -1,4 +1,4 @@
-package process
+package bytematcher
 
 import (
 	"testing"
@@ -8,27 +8,27 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
-// Shared test testNodes (exported so they can be used by the other bytematcher packages)
+// Shared test testNodes
 var TesttestNodes = []*testNode{
 	&testNode{
 		Frame:   tests.TestFrames[3],
-		Success: []int{},
-		Tests: []*testNode{
+		success: []int{},
+		tests: []*testNode{
 			&testNode{
 				Frame:   tests.TestFrames[1],
-				Success: []int{0},
-				Tests:   []*testNode{},
+				success: []int{0},
+				tests:   []*testNode{},
 			},
 		},
 	},
 	&testNode{
 		Frame:   tests.TestFrames[6],
-		Success: []int{},
-		Tests: []*testNode{
+		success: []int{},
+		tests: []*testNode{
 			&testNode{
 				Frame:   tests.TestFrames[2],
-				Success: []int{0},
-				Tests:   []*testNode{},
+				success: []int{0},
+				tests:   []*testNode{},
 			},
 		},
 	},
@@ -36,18 +36,18 @@ var TesttestNodes = []*testNode{
 
 // Shared test testTree (exported so they can be used by the other bytematcher packages)
 var TestTestTree = &testTree{
-	Complete: []KeyFrameID{},
-	Incomplete: []FollowUp{
-		FollowUp{
-			Kf: KeyFrameID{1, 0},
-			L:  true,
-			R:  true,
+	complete: []keyFrameID{},
+	incomplete: []followUp{
+		followUp{
+			kf: keyFrameID{1, 0},
+			l:  true,
+			r:  true,
 		},
 	},
-	MaxLeftDistance:  10,
-	MaxRightDistance: 30,
-	Left:             []*testNode{TesttestNodes[0]},
-	Right:            []*testNode{TesttestNodes[1]},
+	maxLeftDistance:  10,
+	maxRightDistance: 30,
+	left:             []*testNode{TesttestNodes[0]},
+	right:            []*testNode{TesttestNodes[1]},
 }
 
 func TestMaxLength(t *testing.T) {
@@ -59,27 +59,27 @@ func TestMaxLength(t *testing.T) {
 	loader := signature.NewLoadSaver(saver.Bytes())
 	tests := loadTests(loader)
 	test = tests[1]
-	if MaxLength(test.Right) != 33 {
-		t.Errorf("maxLength fail: expecting 33 got %v", MaxLength(test.Right))
+	if maxLength(test.right) != 33 {
+		t.Errorf("maxLength fail: expecting 33 got %v", maxLength(test.right))
 	}
 }
 
 func TestMatchLeft(t *testing.T) {
-	left := MatchTestNodes(TestTestTree.Left, Sample[:8], true)
+	left := matchTestNodes(TestTestTree.left, Sample[:8], true)
 	if len(left) != 1 {
 		t.Errorf("expecting one match, got %v", len(left))
 	}
-	if left[0].FollowUp != 0 {
-		t.Errorf("expecting 0, got %v", left[0].FollowUp)
+	if left[0].followUp != 0 {
+		t.Errorf("expecting 0, got %v", left[0].followUp)
 	}
 }
 
 func TestMatchRight(t *testing.T) {
-	right := MatchTestNodes(TestTestTree.Right, Sample[8+5:], false)
+	right := matchTestNodes(TestTestTree.right, Sample[8+5:], false)
 	if len(right) != 1 {
 		t.Errorf("expecting one match, got %v", len(right))
 	}
-	if right[0].FollowUp != 0 {
-		t.Errorf("expecting 0, got %v", right[0].FollowUp)
+	if right[0].followUp != 0 {
+		t.Errorf("expecting 0, got %v", right[0].followUp)
 	}
 }

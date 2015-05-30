@@ -20,10 +20,8 @@ import (
 	"sync"
 
 	"github.com/richardlehane/match/wac"
-	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
-	"github.com/richardlehane/siegfried/pkg/core/bytematcher/process"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 	"github.com/richardlehane/siegfried/pkg/core/signature"
@@ -31,22 +29,31 @@ import (
 
 // Bytematcher structure.
 type Matcher struct {
-	*process.Process
+	// the following fields are persisted
+	keyFrames  [][]keyFrame
+	tests      []*testTree
+	bofFrames  *frameSet
+	eofFrames  *frameSet
+	bofSeq     *seqSet
+	eofSeq     *seqSet
+	maxBOF     int
+	maxEOF     int
 	priorities *priority.Set
-	mu         *sync.Mutex
-	bAho       *wac.Wac
-	eAho       *wac.Wac
-	lowmem     bool
+	// remaining fields are not persisted
+	mu     *sync.Mutex
+	bAho   *wac.Wac
+	eAho   *wac.Wac
+	lowmem bool
 }
 
 func New() *Matcher {
 	return &Matcher{
-		process.New(),
-		&priority.Set{},
-		&sync.Mutex{},
-		nil,
-		nil,
-		false,
+		bofFrames:  &frameSet{},
+		eofFrames:  &frameSet{},
+		bofSeq:     &seqSet{},
+		eofSeq:     &seqSet{},
+		priorities: &priority.Set{},
+		mu:         &sync.Mutex{},
 	}
 }
 
@@ -57,7 +64,14 @@ func Load(ls *signature.LoadSaver) *Matcher {
 		return nil
 	}
 	return &Matcher{
-		Process:    process.Load(ls),
+		keyFrames:  loadKeyFrames(ls),
+		tests:      loadTests(ls),
+		bofFrames:  loadFrameSet(ls),
+		eofFrames:  loadFrameSet(ls),
+		bofSeq:     loadSeqSet(ls),
+		eofSeq:     loadSeqSet(ls),
+		maxBOF:     ls.LoadInt(),
+		maxEOF:     ls.LoadInt(),
 		priorities: priority.Load(ls),
 		mu:         &sync.Mutex{},
 	}
@@ -69,7 +83,14 @@ func (b *Matcher) Save(ls *signature.LoadSaver) {
 		return
 	}
 	ls.SaveBool(true)
-	b.Process.Save(ls)
+	saveKeyFrames(ls, b.keyFrames)
+	saveTests(ls, b.tests)
+	b.bofFrames.save(ls)
+	b.eofFrames.save(ls)
+	b.bofSeq.save(ls)
+	b.eofSeq.save(ls)
+	ls.SaveInt(b.maxBOF)
+	ls.SaveInt(b.maxEOF)
 	b.priorities.Save(ls)
 }
 
@@ -98,12 +119,10 @@ func (b *Matcher) Add(ss core.SignatureSet, priorities priority.List) (int, erro
 	if !ok {
 		return -1, fmt.Errorf("Byte matcher: can't convert signature set to BM signature set")
 	}
-	// set the options
-	b.Distance, b.Range, b.Choices, b.VarLength = config.BMOptions()
 	var se sigErrors
 	// process each of the sigs, adding them to b.Sigs and the various seq/frame/testTree sets
 	for _, sig := range sigs {
-		err := b.AddSignature(sig)
+		err := b.addSignature(sig)
 		if err != nil {
 			se = append(se, err)
 		}
@@ -112,26 +131,13 @@ func (b *Matcher) Add(ss core.SignatureSet, priorities priority.List) (int, erro
 		return -1, se
 	}
 	// set the maximum distances for this test tree so can properly size slices for matching
-	for _, t := range b.Tests {
-		t.MaxLeftDistance = process.MaxLength(t.Left)
-		t.MaxRightDistance = process.MaxLength(t.Right)
+	for _, t := range b.tests {
+		t.maxLeftDistance = maxLength(t.left)
+		t.maxRightDistance = maxLength(t.right)
 	}
 	// add the priorities to the priority set
 	b.priorities.Add(priorities, len(sigs))
-	return len(b.KeyFrames), nil
-}
-
-type Result struct {
-	index int
-	basis string
-}
-
-func (r Result) Index() int {
-	return r.index
-}
-
-func (r Result) Basis() string {
-	return r.basis
+	return len(b.keyFrames), nil
 }
 
 // Identify matches a Bytematcher's signatures against the input siegreader.Buffer.
@@ -153,22 +159,22 @@ func (b *Matcher) Identify(name string, sb siegreader.Buffer) (chan core.Result,
 
 // Returns information about the Bytematcher including the number of BOF, VAR and EOF sequences, the number of BOF and EOF frames, and the total number of tests.
 func (b *Matcher) String() string {
-	str := fmt.Sprintf("BOF seqs: %v\n", len(b.BOFSeq.Set))
-	str += fmt.Sprintf("EOF seqs: %v\n", len(b.EOFSeq.Set))
-	str += fmt.Sprintf("BOF frames: %v\n", len(b.BOFFrames.Set))
-	str += fmt.Sprintf("EOF frames: %v\n", len(b.EOFFrames.Set))
-	str += fmt.Sprintf("Total Tests: %v\n", len(b.Tests))
+	str := fmt.Sprintf("BOF seqs: %v\n", len(b.bofSeq.set))
+	str += fmt.Sprintf("EOF seqs: %v\n", len(b.eofSeq.set))
+	str += fmt.Sprintf("BOF frames: %v\n", len(b.bofFrames.set))
+	str += fmt.Sprintf("EOF frames: %v\n", len(b.eofFrames.set))
+	str += fmt.Sprintf("Total Tests: %v\n", len(b.tests))
 	var c, ic, l, r, ml, mr int
-	for _, t := range b.Tests {
-		c += len(t.Complete)
-		ic += len(t.Incomplete)
-		l += len(t.Left)
-		if ml < t.MaxLeftDistance {
-			ml = t.MaxLeftDistance
+	for _, t := range b.tests {
+		c += len(t.complete)
+		ic += len(t.incomplete)
+		l += len(t.left)
+		if ml < t.maxLeftDistance {
+			ml = t.maxLeftDistance
 		}
-		r += len(t.Right)
-		if mr < t.MaxRightDistance {
-			mr = t.MaxRightDistance
+		r += len(t.right)
+		if mr < t.maxRightDistance {
+			mr = t.maxRightDistance
 		}
 	}
 	str += fmt.Sprintf("Complete Tests: %v\n", c)
@@ -177,23 +183,23 @@ func (b *Matcher) String() string {
 	str += fmt.Sprintf("Right Tests: %v\n", r)
 	str += fmt.Sprintf("Maximum Left Distance: %v\n", ml)
 	str += fmt.Sprintf("Maximum Right Distance: %v\n", mr)
-	str += fmt.Sprintf("Maximum BOF Distance: %v\n", b.MaxBOF)
-	str += fmt.Sprintf("Maximum EOF Distance: %v\n", b.MaxEOF)
+	str += fmt.Sprintf("Maximum BOF Distance: %v\n", b.maxBOF)
+	str += fmt.Sprintf("Maximum EOF Distance: %v\n", b.maxEOF)
 	str += fmt.Sprintf("priorities: %v\n", b.priorities)
 	return str
 }
 
 func (b *Matcher) InspectTTI(i int) []int {
-	if i < 0 || i >= len(b.Tests) {
+	if i < 0 || i >= len(b.tests) {
 		return nil
 	}
-	t := b.Tests[i]
-	res := make([]int, len(t.Complete)+len(t.Incomplete))
-	for i, v := range t.Complete {
+	t := b.tests[i]
+	res := make([]int, len(t.complete)+len(t.incomplete))
+	for i, v := range t.complete {
 		res[i] = v[0]
 	}
-	for i, v := range t.Incomplete {
-		res[i+len(t.Complete)] = v.Kf[0]
+	for i, v := range t.incomplete {
+		res[i+len(t.complete)] = v.kf[0]
 	}
 	return res
 }
