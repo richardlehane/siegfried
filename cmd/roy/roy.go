@@ -115,7 +115,7 @@ func blameSig(i int) error {
 	if err != nil {
 		return err
 	}
-	fmt.Println(s.InspectTTI(i))
+	fmt.Println(s.InspectTestTree(i))
 	return nil
 }
 

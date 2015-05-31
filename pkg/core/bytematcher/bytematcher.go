@@ -189,7 +189,7 @@ func (b *Matcher) String() string {
 	return str
 }
 
-func (b *Matcher) InspectTTI(i int) []int {
+func (b *Matcher) InspectTestTree(i int) []int {
 	if i < 0 || i >= len(b.tests) {
 		return nil
 	}

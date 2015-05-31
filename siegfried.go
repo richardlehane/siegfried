@@ -177,12 +177,12 @@ func (s *Siegfried) String() string {
 	return str
 }
 
-// InspectTTI checks with the byte matcher to see what identification results subscribe to a particular test
+// InspectTestTree checks with the byte matcher to see what identification results subscribe to a particular test
 // tree index. It can be used when identifying in a debug mode to check which identification results trigger
 // which strikes
-func (s *Siegfried) InspectTTI(tti int) string {
+func (s *Siegfried) InspectTestTree(tti int) string {
 	bm := s.bm.(*bytematcher.Matcher)
-	idxs := bm.InspectTTI(tti)
+	idxs := bm.InspectTestTree(tti)
 	if idxs == nil {
 		return "No test tree at this index"
 	}
