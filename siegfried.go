@@ -124,25 +124,25 @@ func (s *Siegfried) Save(path string) error {
 	return nil
 }
 
-// Load a Siegfried persist file
+// Load a Siegfried signature file
 func Load(path string) (*Siegfried, error) {
 	fbuf, err := ioutil.ReadFile(path)
 	if err != nil {
-		return nil, fmt.Errorf("Siegfried: error opening persist file; got %s\nTry running `sf -update`", err)
+		return nil, fmt.Errorf("Siegfried: error opening signature file; got %s\nTry running `sf -update`", err)
 	}
 	if string(fbuf[:len(config.Magic())]) != string(config.Magic()) {
-		return nil, fmt.Errorf("Siegfried: not a siegfried persist file")
+		return nil, fmt.Errorf("Siegfried: not a siegfried signature file")
 	}
 	r := bytes.NewBuffer(fbuf[len(config.Magic()):])
 	rc := flate.NewReader(r)
 	defer rc.Close()
 	buf, err := ioutil.ReadAll(rc)
 	if err != nil {
-		return nil, fmt.Errorf("Siegfried: error opening persist file; got %s\nTry running `sf -update`", err)
+		return nil, fmt.Errorf("Siegfried: error opening signature file; got %s\nTry running `sf -update`", err)
 	}
 	ls := persist.NewLoadSaver(buf)
 	if ls.LoadString() != "siegfried" {
-		return nil, fmt.Errorf("Siegfried: not a siegfried persist file")
+		return nil, fmt.Errorf("Siegfried: not a siegfried signature file")
 	}
 	return &Siegfried{
 		C:       ls.LoadTime(),
@@ -259,7 +259,7 @@ func (s *Siegfried) Json() string {
 }
 
 // Update checks whether a Siegfried is due for update, by testing whether the time given is after the time
-// the persist was created
+// the signature was created
 func (s *Siegfried) Update(t string) bool {
 	tm, err := time.Parse(time.RFC3339, t)
 	if err != nil {
@@ -332,6 +332,7 @@ func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, e
 }
 
 // Buffer returns the last buffer inspected
+// The purpose is to prevent unnecessary double-up of IO e.g. when unzipping files post-identification
 func (s *Siegfried) Buffer() siegreader.Buffer {
 	last := s.buffers.Last()
 	last.SetQuit(make(chan struct{})) // may have already closed the quit channel

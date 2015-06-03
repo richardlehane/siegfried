@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package core defines the Siegfried struct and Identifier/Identification interfaces.
-// The packages within core (bytematcher and namematcher) provide a toolkit for building identifiers based on different persist formats (such as PRONOM).
+// Package core defines the Identifier, Identification, Recorder, Matcher and Result interfaces.
+// The packages within core (bytematcher, containermatcher, etc.) provide a toolkit for building identifiers based on different signature formats (such as PRONOM).
 package core
 
 import (
@@ -25,7 +25,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
-// Identifier describes different signature formats. E.g. there is a PRONOM identifier that implements the TNA's format.
+// Identifier describes the implementation of a signature format. E.g. there is a PRONOM identifier that implements the TNA's PRONOM format.
 type Identifier interface {
 	Recorder() Recorder
 	Describe() [2]string
@@ -80,7 +80,7 @@ type Identification interface {
 // Matcher does the matching (against the name or the byte stream) and sends results
 type Matcher interface {
 	Identify(string, siegreader.Buffer) (chan Result, error)
-	Add(SignatureSet, priority.List) (int, error) // add a persist set, return total number of persists in a matcher
+	Add(SignatureSet, priority.List) (int, error) // add a signature set, return total number of signatures in a matcher
 	String() string
 	Save(*persist.LoadSaver)
 }

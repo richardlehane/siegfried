@@ -12,15 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package persist defines how siegfried marshals and unmarshals signatures as binary data
+// Package persist marshals and unmarshals siegfried signatures as binary data
 package persist
-
-// todo - look at BinaryMarshaler and BinaryUnmarshaler in "encoding"
-
-// type PatternLoader func(*core.LoadSaver) patterns.Pattern
-// And for save - just add a Save(*core.LoadSaver) method to Patterns interface
-// LoadBytematcher(*core.LoadSaver) core.Matcher
-// And for save - Save(*core.LoadSaver) method on core.Matcher
 
 import (
 	"encoding/binary"
