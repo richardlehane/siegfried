@@ -13,23 +13,23 @@
 // limitations under the License.
 
 // Package core defines the Siegfried struct and Identifier/Identification interfaces.
-// The packages within core (bytematcher and namematcher) provide a toolkit for building identifiers based on different persist formats (such as PRONOM).
+// The packages within core (bytematcher and namematcher) provide a toolkit for building identifiers based on different signature formats (such as PRONOM).
 package core
 
 import (
 	"errors"
 
 	"github.com/richardlehane/siegfried/config"
-	"github.com/richardlehane/siegfried/pkg/core/persist"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
+	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
 // Identifier describes different signature formats. E.g. there is a PRONOM identifier that implements the TNA's format.
 type Identifier interface {
 	Recorder() Recorder
 	Describe() [2]string
-	Save(*persist.LoadSaver)
+	Save(*signature.LoadSaver)
 	String() string
 	Recognise(MatcherType, int) (bool, string) // do you recognise this index
 }
@@ -39,17 +39,15 @@ const (
 	Pronom byte = iota
 )
 
-type IdentifierLoader func(*persist.LoadSaver) Identifier
+type IdentifierLoader func(*signature.LoadSaver) Identifier
 
 var loaders = [8]IdentifierLoader{nil, nil, nil, nil, nil, nil, nil, nil}
 
-// RegisterIdentifier allows external packages to add new IdentifierLoader funcs
 func RegisterIdentifier(id byte, l IdentifierLoader) {
 	loaders[int(id)] = l
 }
 
-// LoadIdentifier applies the appropriate IdentifierLoader func to load an identifier
-func LoadIdentifier(ls *persist.LoadSaver) Identifier {
+func LoadIdentifier(ls *signature.LoadSaver) Identifier {
 	id := ls.LoadByte()
 	l := loaders[int(id)]
 	if l == nil {
@@ -80,9 +78,9 @@ type Identification interface {
 // Matcher does the matching (against the name or the byte stream) and sends results
 type Matcher interface {
 	Identify(string, siegreader.Buffer) (chan Result, error)
-	Add(SignatureSet, priority.List) (int, error) // add a persist set, return total number of persists in a matcher
+	Add(SignatureSet, priority.List) (int, error) // add a signature set, return total number of signatures in a matcher
 	String() string
-	Save(*persist.LoadSaver)
+	Save(*signature.LoadSaver)
 }
 
 // MatcherType is used by recorders to tell which type of matcher has sent a result

@@ -20,6 +20,7 @@ import (
 
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher/process"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
@@ -55,7 +56,7 @@ func (b *Matcher) newScorer(buf siegreader.Buffer, q chan struct{}, r chan core.
 
 		strikeCache: make(strikeCache),
 		kfHits:      make(chan kfHit),
-		waitSet:     b.priorities.WaitSet(),
+		waitSet:     b.Priorities.WaitSet(),
 		queue:       &sync.WaitGroup{},
 		once:        &sync.Once{},
 		stop:        make(chan struct{}),
@@ -122,8 +123,8 @@ type strikeCache map[int]*cacheItem
 
 type cacheItem struct {
 	finalised  bool
-	potentials []keyFrameID // list of sigs this might match
-	first      strike       // full details for the first match
+	potentials []process.KeyFrameID // list of sigs this might match
+	first      strike               // full details for the first match
 
 	mu         *sync.Mutex
 	successive [][2]int64 // just cache the offsets of successive matches
@@ -134,7 +135,7 @@ type cacheItem struct {
 func (s *scorer) newCacheItem(st strike) *cacheItem {
 	return &cacheItem{
 		finalised:  st.final,
-		potentials: s.bm.tests[st.idxa+st.idxb].keyFrames(),
+		potentials: s.bm.Tests[st.idxa+st.idxb].KeyFrames(),
 		first:      st,
 		mu:         &sync.Mutex{},
 		strikeIdx:  -1,
@@ -196,19 +197,19 @@ func (s *scorer) stash(st strike) {
 	if !stashed.finalised {
 		return
 	}
-	pots := filterKF(stashed.potentials, s.waitSet)
-	if len(pots) == 0 {
+	pots := s.waitSet.FilterKfID(stashed.potentials)
+	if pots == nil {
 		return
 	}
 	s.satisfyPotentials(pots)
 }
 
 // range through the potentials, continuing for those keyframes that are potentially complete (all segments in the signature have strikes)
-func (s *scorer) satisfyPotentials(pots []keyFrameID) {
+func (s *scorer) satisfyPotentials(pots []process.KeyFrameID) {
 	s.tally.mu.Lock() // during this phase - hold a lock on the tally
 	for _, kf := range pots {
-		if s.tally.completes(kf[0], len(s.bm.keyFrames[kf[0]])) {
-			for i := 0; i < len(s.bm.keyFrames[kf[0]]); i++ {
+		if s.tally.completes(kf[0], len(s.bm.KeyFrames[kf[0]])) {
+			for i := 0; i < len(s.bm.KeyFrames[kf[0]]); i++ {
 				idx, ok := s.tally.potentialMatches[[2]int{kf[0], i}]
 				if ok {
 					s.satisfy(s.strikeCache[idx])
@@ -244,8 +245,8 @@ func (s *scorer) satisfy(c *cacheItem) {
 				s.unmarkPotentials(c.potentials)
 				return
 			}
-			pots := filterKF(c.potentials, s.waitSet)
-			if len(pots) == 0 {
+			pots := s.waitSet.FilterKfID(c.potentials)
+			if pots == nil {
 				return
 			}
 			if !s.retainsPotential(pots) {
@@ -283,7 +284,7 @@ func (t *tally) completes(a, l int) bool {
 	return true
 }
 
-func (s *scorer) unmarkPotentials(pots []keyFrameID) {
+func (s *scorer) unmarkPotentials(pots []process.KeyFrameID) {
 	s.tally.mu.Lock()
 	for _, kf := range pots {
 		delete(s.tally.potentialMatches, [2]int{kf[0], kf[1]})
@@ -291,7 +292,7 @@ func (s *scorer) unmarkPotentials(pots []keyFrameID) {
 	s.tally.mu.Unlock()
 }
 
-func (s *scorer) markPotentials(pots []keyFrameID, idx int) {
+func (s *scorer) markPotentials(pots []process.KeyFrameID, idx int) {
 	s.tally.mu.Lock()
 	for _, kf := range pots {
 		s.tally.potentialMatches[[2]int{kf[0], kf[1]}] = idx
@@ -299,19 +300,19 @@ func (s *scorer) markPotentials(pots []keyFrameID, idx int) {
 	s.tally.mu.Unlock()
 }
 
-func (s *scorer) retainsPotential(pots []keyFrameID) bool {
+func (s *scorer) retainsPotential(pots []process.KeyFrameID) bool {
 	s.tally.mu.Lock()
 	defer s.tally.mu.Unlock()
 	for _, kf := range pots {
-		if s.tally.completes(kf[0], len(s.bm.keyFrames[kf[0]])) {
+		if s.tally.completes(kf[0], len(s.bm.KeyFrames[kf[0]])) {
 			return true
 		}
 	}
 	return false
 }
 
-func (s *scorer) applyKeyFrame(kfID keyFrameID, o int64, l int) (bool, string) {
-	kf := s.bm.keyFrames[kfID[0]]
+func (s *scorer) applyKeyFrame(kfID process.KeyFrameID, o int64, l int) (bool, string) {
+	kf := s.bm.KeyFrames[kfID[0]]
 	if len(kf) == 1 {
 		return true, fmt.Sprintf("byte match at %d, %d", o, l)
 	}
@@ -327,7 +328,7 @@ func (s *scorer) applyKeyFrame(kfID keyFrameID, o int64, l int) (bool, string) {
 
 // check key frames checks the relationships between neighbouring frames
 func (s *scorer) checkKeyFrames(i int) (bool, string) {
-	kfs := s.bm.keyFrames[i]
+	kfs := s.bm.KeyFrames[i]
 	for j := range kfs {
 		_, ok := s.tally.partialMatches[[2]int{i, j}]
 		if !ok {
@@ -341,7 +342,7 @@ func (s *scorer) checkKeyFrames(i int) (bool, string) {
 	var ok bool
 	for j, kf := range kfs[1:] {
 		thisOff := s.tally.partialMatches[[2]int{i, j + 1}]
-		prevOff, ok = kf.checkRelated(prevKf, thisOff, prevOff)
+		prevOff, ok = kf.CheckRelated(prevKf, thisOff, prevOff)
 		if !ok {
 			return false, ""
 		}
@@ -379,11 +380,11 @@ func (s *scorer) testStrike(st strike) bool {
 	}
 
 	// grab the relevant testTree
-	t := s.bm.tests[st.idxa+st.idxb]
+	t := s.bm.Tests[st.idxa+st.idxb]
 
 	// immediately apply key frames for the completes
-	for _, kf := range t.complete {
-		if s.bm.keyFrames[kf[0]][kf[1]].check(st.offset) && s.waitSet.Check(kf[0]) {
+	for _, kf := range t.Complete {
+		if s.bm.KeyFrames[kf[0]][kf[1]].Check(st.offset) && s.waitSet.Check(kf[0]) {
 			s.kfHits <- kfHit{kf, off, st.length}
 			if <-s.halt {
 				return true
@@ -392,22 +393,22 @@ func (s *scorer) testStrike(st strike) bool {
 	}
 
 	// if there are no incompletes, we are done
-	if len(t.incomplete) < 1 {
+	if len(t.Incomplete) < 1 {
 		return false
 	}
 
 	// see what incompletes are worth pursuing
 	//TODO: HANDLE INCOMPLETE CHECKS AS GOROUTINE
 	var checkl, checkr bool
-	for _, v := range t.incomplete {
+	for _, v := range t.Incomplete {
 		if checkl && checkr {
 			break
 		}
-		if s.bm.keyFrames[v.kf[0]][v.kf[1]].check(st.offset) && s.waitSet.Check(v.kf[0]) {
-			if v.l {
+		if s.bm.KeyFrames[v.Kf[0]][v.Kf[1]].Check(st.offset) && s.waitSet.Check(v.Kf[0]) {
+			if v.L {
 				checkl = true
 			}
-			if v.r {
+			if v.R {
 				checkr = true
 			}
 		}
@@ -421,15 +422,15 @@ func (s *scorer) testStrike(st strike) bool {
 	var lpos, rpos int64
 	var llen, rlen int
 	if st.reverse {
-		lpos, llen = st.offset+int64(st.length), t.maxLeftDistance
-		rpos, rlen = st.offset-int64(t.maxRightDistance), t.maxRightDistance
+		lpos, llen = st.offset+int64(st.length), t.MaxLeftDistance
+		rpos, rlen = st.offset-int64(t.MaxRightDistance), t.MaxRightDistance
 		if rpos < 0 {
 			rlen = rlen + int(rpos)
 			rpos = 0
 		}
 	} else {
-		lpos, llen = st.offset-int64(t.maxLeftDistance), t.maxLeftDistance
-		rpos, rlen = st.offset+int64(st.length), t.maxRightDistance
+		lpos, llen = st.offset-int64(t.MaxLeftDistance), t.MaxLeftDistance
+		rpos, rlen = st.offset+int64(st.length), t.MaxRightDistance
 		if lpos < 0 {
 			llen = llen + int(lpos)
 			lpos = 0
@@ -437,7 +438,7 @@ func (s *scorer) testStrike(st strike) bool {
 	}
 
 	//  the partials slice has a mirror entry for each of the testTree incompletes
-	partials := make([]partial, len(t.incomplete))
+	partials := make([]partial, len(t.Incomplete))
 
 	// test left (if there are valid left tests to try)
 	if checkl {
@@ -446,13 +447,13 @@ func (s *scorer) testStrike(st strike) bool {
 		} else {
 			lslc, _ = s.buf.Slice(lpos, llen)
 		}
-		left := matchTestNodes(t.left, lslc, true)
+		left := process.MatchTestNodes(t.Left, lslc, true)
 		for _, lp := range left {
-			if partials[lp.followUp].l {
-				partials[lp.followUp].ldistances = append(partials[lp.followUp].ldistances, lp.distances...)
+			if partials[lp.FollowUp].l {
+				partials[lp.FollowUp].ldistances = append(partials[lp.FollowUp].ldistances, lp.Distances...)
 			} else {
-				partials[lp.followUp].l = true
-				partials[lp.followUp].ldistances = lp.distances
+				partials[lp.FollowUp].l = true
+				partials[lp.FollowUp].ldistances = lp.Distances
 			}
 		}
 	}
@@ -463,22 +464,22 @@ func (s *scorer) testStrike(st strike) bool {
 		} else {
 			rslc, _ = s.buf.Slice(rpos, rlen)
 		}
-		right := matchTestNodes(t.right, rslc, false)
+		right := process.MatchTestNodes(t.Right, rslc, false)
 		for _, rp := range right {
-			if partials[rp.followUp].r {
-				partials[rp.followUp].rdistances = append(partials[rp.followUp].rdistances, rp.distances...)
+			if partials[rp.FollowUp].r {
+				partials[rp.FollowUp].rdistances = append(partials[rp.FollowUp].rdistances, rp.Distances...)
 			} else {
-				partials[rp.followUp].r = true
-				partials[rp.followUp].rdistances = rp.distances
+				partials[rp.FollowUp].r = true
+				partials[rp.FollowUp].rdistances = rp.Distances
 			}
 		}
 	}
 
 	// now iterate through the partials, checking whether they fulfil any of the incompletes
 	for i, p := range partials {
-		if p.l == t.incomplete[i].l && p.r == t.incomplete[i].r {
-			kf := t.incomplete[i].kf
-			if s.bm.keyFrames[kf[0]][kf[1]].check(st.offset) && s.waitSet.Check(kf[0]) {
+		if p.l == t.Incomplete[i].L && p.r == t.Incomplete[i].R {
+			kf := t.Incomplete[i].Kf
+			if s.bm.KeyFrames[kf[0]][kf[1]].Check(st.offset) && s.waitSet.Check(kf[0]) {
 				if !p.l {
 					p.ldistances = []int{0}
 				}
@@ -523,7 +524,7 @@ func (s *scorer) finalise(eof bool) {
 }
 
 type kfHit struct {
-	id     keyFrameID
+	id     process.KeyFrameID
 	offset int64
 	length int
 }
@@ -560,21 +561,8 @@ func (s *scorer) filterHits() {
 	}
 }
 
-type result struct {
-	index int
-	basis string
-}
-
-func (r result) Index() int {
-	return r.index
-}
-
-func (r result) Basis() string {
-	return r.basis
-}
-
 func (s *scorer) sendResult(idx int, basis string) bool {
-	s.results <- result{idx, basis}
+	s.results <- Result{idx, basis}
 	return s.waitSet.Put(idx)
 }
 
@@ -592,10 +580,10 @@ func (s *scorer) continueWait(o int64, rev bool) bool {
 	s.tally.mu.Lock()
 	defer s.tally.mu.Unlock()
 	for _, v := range w {
-		kf := s.bm.keyFrames[v]
+		kf := s.bm.KeyFrames[v]
 		if rev {
-			for i := len(kf) - 1; i >= 0 && kf[i].typ > frames.PREV; i-- {
-				if kf[i].key.pMax == -1 || kf[i].key.pMax+int64(kf[i].key.lMax) > o {
+			for i := len(kf) - 1; i >= 0 && kf[i].Typ > frames.PREV; i-- {
+				if kf[i].Key.PMax == -1 || kf[i].Key.PMax+int64(kf[i].Key.LMax) > o {
 					return true
 				}
 				if _, ok := s.tally.partialMatches[[2]int{v, i}]; ok {
@@ -609,10 +597,10 @@ func (s *scorer) continueWait(o int64, rev bool) bool {
 			}
 		} else {
 			for i, f := range kf {
-				if f.typ > frames.PREV {
+				if f.Typ > frames.PREV {
 					break
 				}
-				if f.key.pMax == -1 || f.key.pMax+int64(f.key.lMax) > o {
+				if f.Key.PMax == -1 || f.Key.PMax+int64(f.Key.LMax) > o {
 					return true
 				}
 				if _, ok := s.tally.partialMatches[[2]int{v, i}]; ok {

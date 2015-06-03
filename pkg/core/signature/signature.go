@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package persist defines how siegfried marshals and unmarshals signatures as binary data
-package persist
+// Package signature defines how siegfried marshals and unmarshals signatures as binary data
+package signature
 
 // todo - look at BinaryMarshaler and BinaryUnmarshaler in "encoding"
 

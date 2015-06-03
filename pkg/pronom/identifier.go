@@ -21,7 +21,7 @@ import (
 
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
-	"github.com/richardlehane/siegfried/pkg/core/persist"
+	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
 func init() {
@@ -36,11 +36,11 @@ type Identifier struct {
 	Infos      map[string]FormatInfo
 
 	EStart int
-	EPuids []string // slice of puids that corresponds to the extension matcher's int persists
+	EPuids []string // slice of puids that corresponds to the extension matcher's int signatures
 	CStart int
 	CPuids []string
 	BStart int
-	BPuids []string // slice of puids that corresponds to the bytematcher's int persists
+	BPuids []string // slice of puids that corresponds to the bytematcher's int signatures
 }
 
 type FormatInfo struct {
@@ -49,7 +49,7 @@ type FormatInfo struct {
 	MIMEType string
 }
 
-func (i *Identifier) Save(ls *persist.LoadSaver) {
+func (i *Identifier) Save(ls *signature.LoadSaver) {
 	ls.SaveByte(core.Pronom)
 	ls.SaveString(i.Name)
 	ls.SaveString(i.Details)
@@ -69,7 +69,7 @@ func (i *Identifier) Save(ls *persist.LoadSaver) {
 	ls.SaveStrings(i.BPuids)
 }
 
-func Load(ls *persist.LoadSaver) core.Identifier {
+func Load(ls *signature.LoadSaver) core.Identifier {
 	i := &Identifier{}
 	i.Name = ls.LoadString()
 	i.Details = ls.LoadString()
@@ -113,9 +113,9 @@ func (i *Identifier) Describe() [2]string {
 
 func (i *Identifier) String() string {
 	str := fmt.Sprintf("Name: %s\nDetails: %s\n", i.Name, i.Details)
-	str += fmt.Sprintf("Number of extension persists: %d \n", len(i.EPuids))
-	str += fmt.Sprintf("Number of container persists: %d \n", len(i.CPuids))
-	str += fmt.Sprintf("Number of byte persists: %d \n", len(i.BPuids))
+	str += fmt.Sprintf("Number of extension signatures: %d \n", len(i.EPuids))
+	str += fmt.Sprintf("Number of container signatures: %d \n", len(i.CPuids))
+	str += fmt.Sprintf("Number of byte signatures: %d \n", len(i.BPuids))
 	return str
 }
 
@@ -185,7 +185,7 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 			basis := res.Basis()
 			p, t := place(idx, r.CPuids)
 			if t > 1 {
-				basis = basis + fmt.Sprintf(" (persist %d/%d)", p, t)
+				basis = basis + fmt.Sprintf(" (signature %d/%d)", p, t)
 			}
 			r.ids = add(r.ids, r.Name, r.CPuids[idx], r.Infos[r.CPuids[idx]], basis, r.cscore)
 			return true
@@ -201,7 +201,7 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 			basis := res.Basis()
 			p, t := place(idx, r.BPuids)
 			if t > 1 {
-				basis = basis + fmt.Sprintf(" (persist %d/%d)", p, t)
+				basis = basis + fmt.Sprintf(" (signature %d/%d)", p, t)
 			}
 			r.ids = add(r.ids, r.Name, r.BPuids[idx], r.Infos[r.BPuids[idx]], res.Basis(), r.cscore)
 			return true

@@ -27,9 +27,10 @@ var siegfried = struct {
 	signature string // Name of signature file
 	magic     []byte // Magic bytes to ID signature file
 	// Defaults for processing bytematcher signatures. These control the segmentation.
-	distance int // The acceptable distance between two frames before they will be segmented (default is 8192)
-	rng      int // The acceptable range between two frames before they will be segmented (default is 0-2049)
-	choices  int // The acceptable number of plain sequences generated from a single segment
+	distance  int // The acceptable distance between two frames before they will be segmented (default is 8192)
+	rng       int // The acceptable range between two frames before they will be segmented (default is 0-2049)
+	choices   int // The acceptable number of plain sequences generated from a single segment
+	varLength int // The acceptable length of a variable byte sequence (longer the better to reduce false matches)
 	// Config for using the update service.
 	updateURL       string // URL for the update service (a JSON file that indicates whether update necessary and where can be found)
 	updateTimeout   time.Duration
@@ -45,10 +46,10 @@ var siegfried = struct {
 	distance:        8192,
 	rng:             512,
 	choices:         64,
+	varLength:       2,
 	updateURL:       "http://www.itforarchivists.com/siegfried/update",
 	updateTimeout:   30 * time.Second,
 	updateTransport: &http.Transport{Proxy: http.ProxyFromEnvironment},
-	fpr:             "/tmp/siegfried",
 }
 
 // GETTERS
@@ -86,6 +87,14 @@ func Range() int {
 
 func Choices() int {
 	return siegfried.choices
+}
+
+func VarLength() int {
+	return siegfried.varLength
+}
+
+func BMOptions() (int, int, int, int) {
+	return siegfried.distance, siegfried.rng, siegfried.choices, siegfried.varLength
 }
 
 func UpdateOptions() (string, time.Duration, *http.Transport) {
@@ -127,6 +136,13 @@ func SetRange(i int) func() private {
 func SetChoices(i int) func() private {
 	return func() private {
 		siegfried.choices = i
+		return private{}
+	}
+}
+
+func SetVarLength(i int) func() private {
+	return func() private {
+		siegfried.varLength = i
 		return private{}
 	}
 }

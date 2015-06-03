@@ -12,25 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package bytematcher
+package process
 
 import (
 	"fmt"
 
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
-	"github.com/richardlehane/siegfried/pkg/core/persist"
-	"github.com/richardlehane/siegfried/pkg/core/priority"
+	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
 // positioning information: min/max offsets (in relation to BOF or EOF) and min/max lengths
 type keyFramePos struct {
 	// Minimum and maximum position
-	pMin int64
-	pMax int64
+	PMin int64
+	PMax int64
 	// Minimum and maximum length
-	lMin int
-	lMax int
+	LMin int
+	LMax int
 }
 
 // Each segment in a signature is represented by a single keyFrame. A slice of keyFrames represents a full signature.
@@ -38,86 +37,59 @@ type keyFramePos struct {
 // The segment (Seg) offsets are relative (to preceding/succeding segments or to BOF/EOF if the first or last segment).
 // The keyframe (Key) offsets are absolute to the BOF or EOF.
 type keyFrame struct {
-	typ frames.OffType // BOF|PREV|SUCC|EOF
-	seg keyFramePos    // relative positioning info for segment as a whole (min/max length and offset in relation to BOF/EOF/PREV/SUCC)
-	key keyFramePos    // absolute positioning info for keyFrame portion of segment (min/max length and offset in relation to BOF/EOF)
+	Typ frames.OffType // BOF|PREV|SUCC|EOF
+	Seg keyFramePos    // relative positioning info for segment as a whole (min/max length and offset in relation to BOF/EOF/PREV/SUCC)
+	Key keyFramePos    // absolute positioning info for keyFrame portion of segment (min/max length and offset in relation to BOF/EOF)
 }
 
-func loadKeyFrames(ls *persist.LoadSaver) [][]keyFrame {
+func loadKeyFrames(ls *signature.LoadSaver) [][]keyFrame {
 	kfs := make([][]keyFrame, ls.LoadSmallInt())
 	for i := range kfs {
 		kfs[i] = make([]keyFrame, ls.LoadSmallInt())
 		for j := range kfs[i] {
-			kfs[i][j].typ = frames.OffType(ls.LoadByte())
-			kfs[i][j].seg.pMin = int64(ls.LoadInt())
-			kfs[i][j].seg.pMax = int64(ls.LoadInt())
-			kfs[i][j].seg.lMin = ls.LoadSmallInt()
-			kfs[i][j].seg.lMax = ls.LoadSmallInt()
-			kfs[i][j].key.pMin = int64(ls.LoadInt())
-			kfs[i][j].key.pMax = int64(ls.LoadInt())
-			kfs[i][j].key.lMin = ls.LoadSmallInt()
-			kfs[i][j].key.lMax = ls.LoadSmallInt()
+			kfs[i][j].Typ = frames.OffType(ls.LoadByte())
+			kfs[i][j].Seg.PMin = int64(ls.LoadInt())
+			kfs[i][j].Seg.PMax = int64(ls.LoadInt())
+			kfs[i][j].Seg.LMin = ls.LoadSmallInt()
+			kfs[i][j].Seg.LMax = ls.LoadSmallInt()
+			kfs[i][j].Key.PMin = int64(ls.LoadInt())
+			kfs[i][j].Key.PMax = int64(ls.LoadInt())
+			kfs[i][j].Key.LMin = ls.LoadSmallInt()
+			kfs[i][j].Key.LMax = ls.LoadSmallInt()
 		}
 	}
 	return kfs
 }
 
-func saveKeyFrames(ls *persist.LoadSaver, kfs [][]keyFrame) {
+func saveKeyFrames(ls *signature.LoadSaver, kfs [][]keyFrame) {
 	ls.SaveSmallInt(len(kfs))
 	for _, v := range kfs {
 		ls.SaveSmallInt(len(v))
 		for _, kf := range v {
-			ls.SaveByte(byte(kf.typ))
-			ls.SaveInt(int(kf.seg.pMin))
-			ls.SaveInt(int(kf.seg.pMax))
-			ls.SaveSmallInt(kf.seg.lMin)
-			ls.SaveSmallInt(kf.seg.lMax)
-			ls.SaveInt(int(kf.key.pMin))
-			ls.SaveInt(int(kf.key.pMax))
-			ls.SaveSmallInt(kf.key.lMin)
-			ls.SaveSmallInt(kf.key.lMax)
+			ls.SaveByte(byte(kf.Typ))
+			ls.SaveInt(int(kf.Seg.PMin))
+			ls.SaveInt(int(kf.Seg.PMax))
+			ls.SaveSmallInt(kf.Seg.LMin)
+			ls.SaveSmallInt(kf.Seg.LMax)
+			ls.SaveInt(int(kf.Key.PMin))
+			ls.SaveInt(int(kf.Key.PMax))
+			ls.SaveSmallInt(kf.Key.LMin)
+			ls.SaveSmallInt(kf.Key.LMax)
 		}
 	}
 
 }
 
 func (kf keyFrame) String() string {
-	return fmt.Sprintf("%s Seg Min:%d Seg Max:%d; Abs Min:%d Abs Max:%d", frames.OffString[kf.typ], kf.seg.pMin, kf.seg.pMax, kf.key.pMin, kf.key.pMax)
+	return fmt.Sprintf("%s Seg Min:%d Seg Max:%d; Abs Min:%d Abs Max:%d", frames.OffString[kf.Typ], kf.Seg.PMin, kf.Seg.PMax, kf.Key.PMin, kf.Key.PMax)
 }
 
 // A double index: the first int is for the signature's position within the set of all signatures,
 // the second int is for the keyFrames position within the segments of the signature.
-type keyFrameID [2]int
+type KeyFrameID [2]int
 
-func (kf keyFrameID) String() string {
+func (kf KeyFrameID) String() string {
 	return fmt.Sprintf("[%d:%d]", kf[0], kf[1])
-}
-
-type kfFilter struct {
-	idx int
-	fdx int
-	kfs []keyFrameID
-}
-
-func (k *kfFilter) Next() int {
-	if k.idx >= len(k.kfs) {
-		return -1
-	}
-	k.idx++
-	return k.kfs[k.idx-1][0]
-}
-
-func (k *kfFilter) Mark(t bool) {
-	if t {
-		k.kfs[k.fdx] = k.kfs[k.idx-1]
-		k.fdx++
-	}
-}
-
-func filterKF(kfs []keyFrameID, ws *priority.WaitSet) []keyFrameID {
-	f := &kfFilter{kfs: kfs}
-	ws.ApplyFilter(f)
-	return f.kfs[:f.fdx]
 }
 
 // Turn a signature segment into a keyFrame and left and right frame slices.
@@ -126,20 +98,20 @@ func toKeyFrame(seg frames.Signature, pos position) (keyFrame, []frames.Frame, [
 	var left, right []frames.Frame
 	var typ frames.OffType
 	var segPos, keyPos keyFramePos
-	segPos.lMin, segPos.lMax = calcLen(seg)
-	keyPos.lMin, keyPos.lMax = calcLen(seg[pos.start:pos.end])
+	segPos.LMin, segPos.LMax = calcLen(seg)
+	keyPos.LMin, keyPos.LMax = calcLen(seg[pos.start:pos.end])
 	// BOF and PREV segments
 	if seg[0].Orientation() < frames.SUCC {
-		typ, segPos.pMin, segPos.pMax = seg[0].Orientation(), int64(seg[0].Min()), int64(seg[0].Max())
-		keyPos.pMin, keyPos.pMax = segPos.pMin, segPos.pMax
+		typ, segPos.PMin, segPos.PMax = seg[0].Orientation(), int64(seg[0].Min()), int64(seg[0].Max())
+		keyPos.PMin, keyPos.PMax = segPos.PMin, segPos.PMax
 		for i, f := range seg[:pos.start+1] {
 			if pos.start > i {
 				min, max := f.Length()
-				keyPos.pMin += int64(min)
-				keyPos.pMin += int64(seg[i+1].Min())
-				if keyPos.pMax > -1 {
-					keyPos.pMax += int64(max)
-					keyPos.pMax += int64(seg[i+1].Max())
+				keyPos.PMin += int64(min)
+				keyPos.PMin += int64(seg[i+1].Min())
+				if keyPos.PMax > -1 {
+					keyPos.PMax += int64(max)
+					keyPos.PMax += int64(seg[i+1].Max())
 				}
 				left = append([]frames.Frame{frames.SwitchFrame(seg[i+1], f.Pat())}, left...)
 			}
@@ -150,16 +122,16 @@ func toKeyFrame(seg frames.Signature, pos position) (keyFrame, []frames.Frame, [
 		return keyFrame{typ, segPos, keyPos}, frames.BMHConvert(left, true), frames.BMHConvert(right, false)
 	}
 	// EOF and SUCC segments
-	typ, segPos.pMin, segPos.pMax = seg[len(seg)-1].Orientation(), int64(seg[len(seg)-1].Min()), int64(seg[len(seg)-1].Max())
-	keyPos.pMin, keyPos.pMax = segPos.pMin, segPos.pMax
+	typ, segPos.PMin, segPos.PMax = seg[len(seg)-1].Orientation(), int64(seg[len(seg)-1].Min()), int64(seg[len(seg)-1].Max())
+	keyPos.PMin, keyPos.PMax = segPos.PMin, segPos.PMax
 	if pos.end < len(seg) {
 		for i, f := range seg[pos.end:] {
 			min, max := f.Length()
-			keyPos.pMin += int64(min)
-			keyPos.pMin += int64(seg[pos.end+i-1].Min())
-			if keyPos.pMax > -1 {
-				keyPos.pMax += int64(max)
-				keyPos.pMax += int64(seg[pos.end+i-1].Max())
+			keyPos.PMin += int64(min)
+			keyPos.PMin += int64(seg[pos.end+i-1].Min())
+			if keyPos.PMax > -1 {
+				keyPos.PMax += int64(max)
+				keyPos.PMax += int64(seg[pos.end+i-1].Max())
 			}
 			right = append(right, frames.SwitchFrame(seg[pos.end+i-1], f.Pat()))
 		}
@@ -199,11 +171,11 @@ func calcLen(fs []frames.Frame) (int, int) {
 }
 
 func calcMinMax(min, max int64, sp keyFramePos) (int64, int64) {
-	min = min + sp.pMin + int64(sp.lMin)
-	if max < 0 || sp.pMax < 0 {
+	min = min + sp.PMin + int64(sp.LMin)
+	if max < 0 || sp.PMax < 0 {
 		return min, -1
 	}
-	max = max + sp.pMax + int64(sp.lMax)
+	max = max + sp.PMax + int64(sp.LMax)
 	return min, max
 }
 
@@ -213,27 +185,27 @@ func updatePositions(ks []keyFrame) {
 	var min, max int64
 	// first forwards, for BOF and PREV
 	for i := range ks {
-		if ks[i].typ == frames.BOF {
-			min, max = calcMinMax(0, 0, ks[i].seg)
+		if ks[i].Typ == frames.BOF {
+			min, max = calcMinMax(0, 0, ks[i].Seg)
 			// Apply max bof
 			if config.MaxBOF() > 0 {
-				if ks[i].key.pMax < 0 || ks[i].key.pMax > int64(config.MaxBOF()) {
-					ks[i].key.pMax = int64(config.MaxBOF())
+				if ks[i].Key.PMax < 0 || ks[i].Key.PMax > int64(config.MaxBOF()) {
+					ks[i].Key.PMax = int64(config.MaxBOF())
 				}
 			}
 		}
-		if ks[i].typ == frames.PREV {
-			ks[i].key.pMin = min + ks[i].key.pMin
-			if max > -1 && ks[i].key.pMax > -1 {
-				ks[i].key.pMax = max + ks[i].key.pMax
+		if ks[i].Typ == frames.PREV {
+			ks[i].Key.PMin = min + ks[i].Key.PMin
+			if max > -1 && ks[i].Key.PMax > -1 {
+				ks[i].Key.PMax = max + ks[i].Key.PMax
 			} else {
-				ks[i].key.pMax = -1
+				ks[i].Key.PMax = -1
 			}
-			min, max = calcMinMax(min, max, ks[i].seg)
+			min, max = calcMinMax(min, max, ks[i].Seg)
 			// Apply max bof
 			if config.MaxBOF() > 0 {
-				if ks[i].key.pMax < 0 || ks[i].key.pMax > int64(config.MaxBOF()) {
-					ks[i].key.pMax = int64(config.MaxBOF())
+				if ks[i].Key.PMax < 0 || ks[i].Key.PMax > int64(config.MaxBOF()) {
+					ks[i].Key.PMax = int64(config.MaxBOF())
 				}
 			}
 		}
@@ -241,27 +213,27 @@ func updatePositions(ks []keyFrame) {
 	// now backwards for EOF and SUCC
 	min, max = 0, 0
 	for i := len(ks) - 1; i >= 0; i-- {
-		if ks[i].typ == frames.EOF {
-			min, max = calcMinMax(0, 0, ks[i].seg)
+		if ks[i].Typ == frames.EOF {
+			min, max = calcMinMax(0, 0, ks[i].Seg)
 			// apply max eof
 			if config.MaxEOF() > 0 {
-				if ks[i].key.pMax < 0 || ks[i].key.pMax > int64(config.MaxEOF()) {
-					ks[i].key.pMax = int64(config.MaxEOF())
+				if ks[i].Key.PMax < 0 || ks[i].Key.PMax > int64(config.MaxEOF()) {
+					ks[i].Key.PMax = int64(config.MaxEOF())
 				}
 			}
 		}
-		if ks[i].typ == frames.SUCC {
-			ks[i].key.pMin = min + ks[i].key.pMin
-			if max > -1 && ks[i].key.pMax > -1 {
-				ks[i].key.pMax = max + ks[i].key.pMax
+		if ks[i].Typ == frames.SUCC {
+			ks[i].Key.PMin = min + ks[i].Key.PMin
+			if max > -1 && ks[i].Key.PMax > -1 {
+				ks[i].Key.PMax = max + ks[i].Key.PMax
 			} else {
-				ks[i].key.pMax = -1
+				ks[i].Key.PMax = -1
 			}
-			min, max = calcMinMax(min, max, ks[i].seg)
+			min, max = calcMinMax(min, max, ks[i].Seg)
 			// apply max eof
 			if config.MaxEOF() > 0 {
-				if ks[i].key.pMax < 0 || ks[i].key.pMax > int64(config.MaxEOF()) {
-					ks[i].key.pMax = int64(config.MaxEOF())
+				if ks[i].Key.PMax < 0 || ks[i].Key.PMax > int64(config.MaxEOF()) {
+					ks[i].Key.PMax = int64(config.MaxEOF())
 				}
 			}
 		}
@@ -275,12 +247,12 @@ func maxBOF(max int, ks []keyFrame) int {
 		return -1
 	}
 	for _, v := range ks {
-		if v.typ < frames.SUCC {
-			if v.key.pMax < 0 {
+		if v.Typ < frames.SUCC {
+			if v.Key.PMax < 0 {
 				return -1
 			}
-			if int(v.key.pMax)+v.key.lMax > max {
-				max = int(v.key.pMax) + v.key.lMax
+			if int(v.Key.PMax)+v.Key.LMax > max {
+				max = int(v.Key.PMax) + v.Key.LMax
 			}
 		}
 	}
@@ -292,12 +264,12 @@ func maxEOF(max int, ks []keyFrame) int {
 		return -1
 	}
 	for _, v := range ks {
-		if v.typ > frames.PREV {
-			if v.key.pMax < 0 {
+		if v.Typ > frames.PREV {
+			if v.Key.PMax < 0 {
 				return -1
 			}
-			if int(v.key.pMax)+v.key.lMax > max {
-				max = int(v.key.pMax) + v.key.lMax
+			if int(v.Key.PMax)+v.Key.LMax > max {
+				max = int(v.Key.PMax) + v.Key.LMax
 			}
 		}
 	}
@@ -305,47 +277,47 @@ func maxEOF(max int, ks []keyFrame) int {
 }
 
 func crossOver(a, b keyFrame) bool {
-	if a.key.pMax == -1 {
+	if a.Key.PMax == -1 {
 		return true
 	}
-	if a.key.pMax+int64(a.key.lMax) > b.key.pMin {
+	if a.Key.PMax+int64(a.Key.LMax) > b.Key.PMin {
 		return true
 	}
 	return false
 }
 
 // quick check performed before applying a keyFrame ID
-func (kf keyFrame) check(o int64) bool {
-	if kf.key.pMin > o {
+func (kf keyFrame) Check(o int64) bool {
+	if kf.Key.PMin > o {
 		return false
 	}
-	if kf.key.pMax == -1 {
+	if kf.Key.PMax == -1 {
 		return true
 	}
-	if kf.key.pMax < o {
+	if kf.Key.PMax < o {
 		return false
 	}
 	return true
 }
 
 // test two key frames (current and previous) to see if they are connected and, if so, at what offsets
-func (kf keyFrame) checkRelated(prevKf keyFrame, thisOff, prevOff [][2]int64) ([][2]int64, bool) {
-	// quick test por wild kp
-	if prevKf.seg.pMax == -1 && prevKf.seg.pMin == 0 {
+func (kf keyFrame) CheckRelated(prevKf keyFrame, thisOff, prevOff [][2]int64) ([][2]int64, bool) {
+	// quick test for wild kf
+	if prevKf.Seg.PMax == -1 && prevKf.Seg.PMin == 0 {
 		return thisOff, true
 	}
-	switch kf.typ {
+	switch kf.Typ {
 	case frames.BOF:
 		return thisOff, true
 	case frames.EOF, frames.SUCC:
-		if prevKf.typ == frames.SUCC {
+		if prevKf.Typ == frames.SUCC {
 			ret := make([][2]int64, 0, len(thisOff))
 			success := false
 			for _, v := range thisOff {
 				for _, v1 := range prevOff {
 					dif := v[0] - v1[0] - v1[1]
 					if dif > -1 {
-						if dif < prevKf.seg.pMin || (prevKf.seg.pMax > -1 && dif > prevKf.seg.pMax) {
+						if dif < prevKf.Seg.PMin || (prevKf.Seg.PMax > -1 && dif > prevKf.Seg.PMax) {
 							continue
 						} else {
 							ret = append(ret, v)
@@ -365,7 +337,7 @@ func (kf keyFrame) checkRelated(prevKf keyFrame, thisOff, prevOff [][2]int64) ([
 			for _, v1 := range prevOff {
 				dif := v[0] - v1[0] - v1[1] // current offset, minus previous offset, minus previous length
 				if dif > -1 {
-					if dif < kf.seg.pMin || (kf.seg.pMax > -1 && dif > kf.seg.pMax) {
+					if dif < kf.Seg.PMin || (kf.Seg.PMax > -1 && dif > kf.Seg.PMax) {
 						continue
 					} else {
 						ret = append(ret, v)

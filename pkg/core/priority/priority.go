@@ -22,7 +22,8 @@ import (
 	"sort"
 	"sync"
 
-	"github.com/richardlehane/siegfried/pkg/core/persist"
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher/process"
+	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
 // a priority map links subordinate results to a list of priority restuls
@@ -203,7 +204,7 @@ type Set struct {
 	Lists []List
 }
 
-func (s *Set) Save(ls *persist.LoadSaver) {
+func (s *Set) Save(ls *signature.LoadSaver) {
 	ls.SaveInts(s.Idx)
 	ls.SaveSmallInt(len(s.Lists))
 	for _, v := range s.Lists {
@@ -214,7 +215,7 @@ func (s *Set) Save(ls *persist.LoadSaver) {
 	}
 }
 
-func Load(ls *persist.LoadSaver) *Set {
+func Load(ls *signature.LoadSaver) *Set {
 	set := &Set{}
 	set.Idx = ls.LoadInts()
 	if set.Idx == nil {
@@ -235,8 +236,8 @@ func Load(ls *persist.LoadSaver) *Set {
 	return set
 }
 
-// Add a priority list to a set. The length is the number of persists the priority list applies to, not the length of the priority list.
-// This length will only differ when no priorities are set for a given set of persists.
+// Add a priority list to a set. The length is the number of signatures the priority list applies to, not the length of the priority list.
+// This length will only differ when no priorities are set for a given set of signatures.
 func (s *Set) Add(l List, length int) {
 	var last int
 	if len(s.Idx) > 0 {
@@ -321,7 +322,7 @@ func (w *WaitSet) Put(i int) bool {
 	return true
 }
 
-// Check a persist index against the appropriate priority list. Should we continue trying to match this persist?
+// Check a signature index against the appropriate priority list. Should we continue trying to match this signature?
 func (w *WaitSet) Check(i int) bool {
 	idx, prev := w.Index(i)
 	w.m.RLock()
@@ -357,21 +358,25 @@ func (w *WaitSet) Filter(l []int) []int {
 	return ret
 }
 
-type Filterable interface {
-	Next() int
-	Mark(bool)
-}
-
-func (w *WaitSet) ApplyFilter(f Filterable) {
+// Filter a waitset with a list of potential matches, return only those still waiting on. Return nil if none.
+// This a convenience method that takes key frame IDs rather than sig IDs.
+func (w *WaitSet) FilterKfID(l []process.KeyFrameID) []process.KeyFrameID {
+	ret := make([]process.KeyFrameID, 0, len(l))
 	w.m.RLock()
 	defer w.m.RUnlock()
-	for i := f.Next(); i > -1; i = f.Next() {
-		idx, prev := w.Index(i)
-		f.Mark(w.check(i, idx, prev))
+	for _, v := range l {
+		idx, prev := w.Index(v[0])
+		if w.check(v[0], idx, prev) {
+			ret = append(ret, v)
+		}
 	}
+	if len(ret) == 0 {
+		return nil
+	}
+	return ret
 }
 
-// For periodic checking - what persists are we currently waiting on?
+// For periodic checking - what signatures are we currently waiting on?
 // Accumulates values from all the priority lists within the set.
 // Returns nil if *any* of the priority lists is nil.
 func (w *WaitSet) WaitingOn() []int {

@@ -15,7 +15,7 @@
 // Package siegfried identifies file formats
 //
 // Example:
-//  s, err := siegfried.Load("pronom.sig")
+//  s, err := siegfried.Load("pronom.gob")
 //  if err != nil {
 //  	// handle err
 //  }
@@ -26,7 +26,7 @@
 //  	// handle err
 //  }
 //  for id := range c {
-//  	fmt.Print(id)
+//  	fmt.Print(id.Yaml())
 //  }
 package siegfried
 
@@ -45,12 +45,12 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
 	"github.com/richardlehane/siegfried/pkg/core/containermatcher"
 	"github.com/richardlehane/siegfried/pkg/core/extensionmatcher"
-	"github.com/richardlehane/siegfried/pkg/core/persist"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
+	"github.com/richardlehane/siegfried/pkg/core/signature"
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
-// Siegfried structs are persisent objects that can be serialised to disk.
+// Siegfried structs are persisent objects that can be serialised to disk (using encoding/gob).
 // The private fields are the three matchers (extension, container, byte) and the identifiers.
 type Siegfried struct {
 	C  time.Time    // signature create time
@@ -74,7 +74,7 @@ type Siegfried struct {
 //  if err != nil {
 //  	// handle err
 //  }
-//  err = s.Save("pronom.sig") // save the Siegfried
+//  err = s.Save("signature.gob") // save the Siegfried
 //  if err != nil {
 //  	// handle err
 //  }
@@ -88,9 +88,9 @@ func New() *Siegfried {
 	return s
 }
 
-// Save a Siegfried persist file
+// Save a Siegfried signature file
 func (s *Siegfried) Save(path string) error {
-	ls := persist.NewLoadSaver(nil)
+	ls := signature.NewLoadSaver(nil)
 	ls.SaveString("siegfried")
 	ls.SaveTime(s.C)
 	s.em.Save(ls)
@@ -124,25 +124,25 @@ func (s *Siegfried) Save(path string) error {
 	return nil
 }
 
-// Load a Siegfried persist file
+// Load a Siegfried signature file
 func Load(path string) (*Siegfried, error) {
 	fbuf, err := ioutil.ReadFile(path)
 	if err != nil {
-		return nil, fmt.Errorf("Siegfried: error opening persist file; got %s\nTry running `sf -update`", err)
+		return nil, fmt.Errorf("Siegfried: error opening signature file; got %s\nTry running `sf -update`", err)
 	}
 	if string(fbuf[:len(config.Magic())]) != string(config.Magic()) {
-		return nil, fmt.Errorf("Siegfried: not a siegfried persist file")
+		return nil, fmt.Errorf("Siegfried: not a siegfried signature file")
 	}
 	r := bytes.NewBuffer(fbuf[len(config.Magic()):])
 	rc := flate.NewReader(r)
 	defer rc.Close()
 	buf, err := ioutil.ReadAll(rc)
 	if err != nil {
-		return nil, fmt.Errorf("Siegfried: error opening persist file; got %s\nTry running `sf -update`", err)
+		return nil, fmt.Errorf("Siegfried: error opening signature file; got %s\nTry running `sf -update`", err)
 	}
-	ls := persist.NewLoadSaver(buf)
+	ls := signature.NewLoadSaver(buf)
 	if ls.LoadString() != "siegfried" {
-		return nil, fmt.Errorf("Siegfried: not a siegfried persist file")
+		return nil, fmt.Errorf("Siegfried: not a siegfried signature file")
 	}
 	return &Siegfried{
 		C:       ls.LoadTime(),
@@ -154,7 +154,7 @@ func Load(path string) (*Siegfried, error) {
 	}, ls.Err
 }
 
-func loadIDs(ls *persist.LoadSaver) []core.Identifier {
+func loadIDs(ls *signature.LoadSaver) []core.Identifier {
 	ids := make([]core.Identifier, ls.LoadTinyUInt())
 	for i := range ids {
 		ids[i] = core.LoadIdentifier(ls)
@@ -177,12 +177,12 @@ func (s *Siegfried) String() string {
 	return str
 }
 
-// InspectTestTree checks with the byte matcher to see what identification results subscribe to a particular test
+// InspectTTI checks with the byte matcher to see what identification results subscribe to a particular test
 // tree index. It can be used when identifying in a debug mode to check which identification results trigger
 // which strikes
-func (s *Siegfried) InspectTestTree(tti int) string {
+func (s *Siegfried) InspectTTI(tti int) string {
 	bm := s.bm.(*bytematcher.Matcher)
-	idxs := bm.InspectTestTree(tti)
+	idxs := bm.InspectTTI(tti)
 	if idxs == nil {
 		return "No test tree at this index"
 	}
@@ -220,12 +220,12 @@ func (s *Siegfried) Add(i core.Identifier) error {
 	return nil
 }
 
-// Yaml representation of a Siegfried.
+// Yaml representation of a Siegfried
 // This is the provenace block at the beginning of siegfried results and includes Yaml descriptions for each identifier.
 func (s *Siegfried) Yaml() string {
 	version := config.Version()
 	str := fmt.Sprintf(
-		"---\nsiegfried   : %d.%d.%d\nscandate    : %v\npersist   : %s\ncreated     : %v\nidentifiers : \n",
+		"---\nsiegfried   : %d.%d.%d\nscandate    : %v\nsignature   : %s\ncreated     : %v\nidentifiers : \n",
 		version[0], version[1], version[2],
 		time.Now().Format(time.RFC3339),
 		config.SignatureBase(),
@@ -237,12 +237,10 @@ func (s *Siegfried) Yaml() string {
 	return str
 }
 
-// JSON representation of a Siegfried.
-// This is the provenace block at the beginning of siegfried results and includes descriptions for each identifier.
 func (s *Siegfried) Json() string {
 	version := config.Version()
 	str := fmt.Sprintf(
-		"{\"siegfried\":\"%d.%d.%d\",\"scandate\":\"%v\",\"persist\":\"%s\",\"created\":\"%v\",\"identifiers\":[",
+		"{\"siegfried\":\"%d.%d.%d\",\"scandate\":\"%v\",\"signature\":\"%s\",\"created\":\"%v\",\"identifiers\":[",
 		version[0], version[1], version[2],
 		time.Now().Format(time.RFC3339),
 		config.SignatureBase(),
@@ -259,7 +257,7 @@ func (s *Siegfried) Json() string {
 }
 
 // Update checks whether a Siegfried is due for update, by testing whether the time given is after the time
-// the persist was created
+// the signature was created
 func (s *Siegfried) Update(t string) bool {
 	tm, err := time.Parse(time.RFC3339, t)
 	if err != nil {

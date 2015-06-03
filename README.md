@@ -15,7 +15,7 @@ Key features are:
 
 1.1.0
 
-[![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried)
+[![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried/pkg/core?status.svg)](https://godoc.org/github.com/richardlehane/siegfried/pkg/core)
 
 ## Usage
 
@@ -78,7 +78,7 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 - mirror bof patterns as eof patterns where both roy -bof and -eof limits set
 - 'sf -' reads files piped to stdin
 - bugfix: ([mscfb](https://github.com/richardlehane/mscfb/commit/22552265cefc80b400ff64156155f53a5d5751e6)) reported by [Pascal Aantz](https://github.com/richardlehane/siegfried/issues/32)
-- bugfix: race condition in scorer (affected tip golang)
+- bufix: race condition in scorer (affected tip golang)
 - archivematica build: fpr server
 
 ### Version 1.0.0 (22/3/2015)

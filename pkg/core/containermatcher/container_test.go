@@ -5,9 +5,9 @@ import (
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames/tests"
-	"github.com/richardlehane/siegfried/pkg/core/persist"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
+	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
 func testTrigger([]byte) bool {
@@ -44,12 +44,12 @@ func TestMatcher(t *testing.T) {
 	}
 	// test IO
 	str := testMatcher.String()
-	saver := persist.NewLoadSaver(nil)
+	saver := signature.NewLoadSaver(nil)
 	testMatcher.Save(saver)
 	if len(saver.Bytes()) < 100 {
 		t.Errorf("Save container: too small, only got %v", len(saver.Bytes()))
 	}
-	newcm := Load(persist.NewLoadSaver(saver.Bytes()))
+	newcm := Load(signature.NewLoadSaver(saver.Bytes()))
 	str2 := newcm.String()
 	if len(str) != len(str2) {
 		t.Errorf("Load container: expecting first matcher (%v), to equal second matcher (%v)", str, str2)

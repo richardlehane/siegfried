@@ -3,7 +3,7 @@ package extensionmatcher
 import (
 	"testing"
 
-	"github.com/richardlehane/siegfried/pkg/core/persist"
+	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
 var fmts = SignatureSet{[]string{"wav"}, []string{"doc"}, []string{"xls"}, []string{"pdf"}, []string{"ppt"}}
@@ -46,12 +46,12 @@ func TestIO(t *testing.T) {
 	em := New()
 	em.Add(SignatureSet{[]string{".bla"}, []string{".doc"}, []string{".ppt"}}, nil)
 	str := em.String()
-	saver := persist.NewLoadSaver(nil)
+	saver := signature.NewLoadSaver(nil)
 	em.Save(saver)
 	if len(saver.Bytes()) < 10 {
 		t.Errorf("Save extension matcher: too small, only got %v", saver.Bytes())
 	}
-	loader := persist.NewLoadSaver(saver.Bytes())
+	loader := signature.NewLoadSaver(saver.Bytes())
 	newem := Load(loader)
 	str2 := newem.String()
 	if str != str2 {

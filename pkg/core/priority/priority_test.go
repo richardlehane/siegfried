@@ -3,7 +3,7 @@ package priority
 import (
 	"testing"
 
-	"github.com/richardlehane/siegfried/pkg/core/persist"
+	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
 func TestAdd(t *testing.T) {
@@ -90,9 +90,9 @@ func TestSet(t *testing.T) {
 	s.Add(list, len(list))
 	s.Add(list2, len(list2))
 	// test save/load
-	saver := persist.NewLoadSaver(nil)
+	saver := signature.NewLoadSaver(nil)
 	s.Save(saver)
-	loader := persist.NewLoadSaver(saver.Bytes())
+	loader := signature.NewLoadSaver(saver.Bytes())
 	s = Load(loader)
 	// now test the waitset
 	w := s.WaitSet()

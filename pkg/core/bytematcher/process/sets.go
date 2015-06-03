@@ -12,15 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package bytematcher
+package process
 
 import (
 	"bytes"
 
 	"github.com/richardlehane/match/wac"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
-	"github.com/richardlehane/siegfried/pkg/core/persist"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
+	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
 // Sequence Sets and Frame Sets
@@ -28,13 +28,13 @@ import (
 // As far as possible, signatures are flattened into simple byte sequences grouped into two sets: BOF and EOF sets.
 // When a byte sequence is matched, the TestTree is examined for keyframe matches and to conduct further tests.
 type seqSet struct {
-	set           []wac.Seq
-	testTreeIndex []int // The index of the testTree for the first choices. For subsequence choices, add the index of that choice to the test tree index.
+	Set           []wac.Seq
+	TestTreeIndex []int // The index of the testTree for the first choices. For subsequence choices, add the index of that choice to the test tree index.
 }
 
-func (ss *seqSet) save(ls *persist.LoadSaver) {
-	ls.SaveSmallInt(len(ss.set))
-	for _, v := range ss.set {
+func (ss *seqSet) save(ls *signature.LoadSaver) {
+	ls.SaveSmallInt(len(ss.Set))
+	for _, v := range ss.Set {
 		ls.SaveBigInts(v.MaxOffsets)
 		ls.SaveSmallInt(len(v.Choices))
 		for _, w := range v.Choices {
@@ -44,28 +44,28 @@ func (ss *seqSet) save(ls *persist.LoadSaver) {
 			}
 		}
 	}
-	ls.SaveInts(ss.testTreeIndex)
+	ls.SaveInts(ss.TestTreeIndex)
 }
 
-func loadSeqSet(ls *persist.LoadSaver) *seqSet {
+func loadSeqSet(ls *signature.LoadSaver) *seqSet {
 	ret := &seqSet{}
 	le := ls.LoadSmallInt()
 	if le == 0 {
 		_ = ls.LoadInts() // discard the empty testtreeindex list too
 		return ret
 	}
-	ret.set = make([]wac.Seq, le)
-	for i := range ret.set {
-		ret.set[i].MaxOffsets = ls.LoadBigInts()
-		ret.set[i].Choices = make([]wac.Choice, ls.LoadSmallInt())
-		for j := range ret.set[i].Choices {
-			ret.set[i].Choices[j] = make(wac.Choice, ls.LoadSmallInt())
-			for k := range ret.set[i].Choices[j] {
-				ret.set[i].Choices[j][k] = ls.LoadBytes()
+	ret.Set = make([]wac.Seq, le)
+	for i := range ret.Set {
+		ret.Set[i].MaxOffsets = ls.LoadBigInts()
+		ret.Set[i].Choices = make([]wac.Choice, ls.LoadSmallInt())
+		for j := range ret.Set[i].Choices {
+			ret.Set[i].Choices[j] = make(wac.Choice, ls.LoadSmallInt())
+			for k := range ret.Set[i].Choices[j] {
+				ret.Set[i].Choices[j][k] = ls.LoadBytes()
 			}
 		}
 	}
-	ret.testTreeIndex = ls.LoadInts()
+	ret.TestTreeIndex = ls.LoadInts()
 	return ret
 }
 
@@ -102,7 +102,7 @@ func seqEquals(a wac.Seq, b wac.Seq) bool {
 }
 
 func (ss *seqSet) exists(seq wac.Seq) (int, bool) {
-	for i, v := range ss.set {
+	for i, v := range ss.Set {
 		if seqEquals(seq, v) {
 			return i, true
 		}
@@ -110,67 +110,67 @@ func (ss *seqSet) exists(seq wac.Seq) (int, bool) {
 	return -1, false
 }
 
-// Add sequence to set. Provides latest testTreeIndex, returns actual testTreeIndex for hit insertion.
+// Add sequence to set. Provides latest TestTreeIndex, returns actual TestTreeIndex for hit insertion.
 func (ss *seqSet) add(seq wac.Seq, hi int) int {
 	i, ok := ss.exists(seq)
 	if ok {
-		return ss.testTreeIndex[i]
+		return ss.TestTreeIndex[i]
 	}
-	ss.set = append(ss.set, seq)
-	ss.testTreeIndex = append(ss.testTreeIndex, hi)
+	ss.Set = append(ss.Set, seq)
+	ss.TestTreeIndex = append(ss.TestTreeIndex, hi)
 	return hi
 }
 
 // Some signatures cannot be represented by simple byte sequences. The first or last frames from these sequences are added to the BOF or EOF frame sets.
 // Like sequences, frame matches are referred to the TestTree for further testing.
 type frameSet struct {
-	set           []frames.Frame
-	testTreeIndex []int
+	Set           []frames.Frame
+	TestTreeIndex []int
 }
 
-func (fs *frameSet) save(ls *persist.LoadSaver) {
-	ls.SaveSmallInt(len(fs.set))
-	for _, f := range fs.set {
+func (fs *frameSet) save(ls *signature.LoadSaver) {
+	ls.SaveSmallInt(len(fs.Set))
+	for _, f := range fs.Set {
 		f.Save(ls)
 	}
-	ls.SaveInts(fs.testTreeIndex)
+	ls.SaveInts(fs.TestTreeIndex)
 }
 
-func loadFrameSet(ls *persist.LoadSaver) *frameSet {
+func loadFrameSet(ls *signature.LoadSaver) *frameSet {
 	ret := &frameSet{}
 	le := ls.LoadSmallInt()
 	if le == 0 {
 		_ = ls.LoadInts()
 		return ret
 	}
-	ret.set = make([]frames.Frame, le)
-	for i := range ret.set {
-		ret.set[i] = frames.Load(ls)
+	ret.Set = make([]frames.Frame, le)
+	for i := range ret.Set {
+		ret.Set[i] = frames.Load(ls)
 	}
-	ret.testTreeIndex = ls.LoadInts()
+	ret.TestTreeIndex = ls.LoadInts()
 	return ret
 }
 
 // Add frame to set. Provides current testerIndex, returns actual testerIndex for hit insertion.
 func (fs *frameSet) add(f frames.Frame, hi int) int {
-	for i, f1 := range fs.set {
+	for i, f1 := range fs.Set {
 		if f1.Equals(f) {
-			return fs.testTreeIndex[i]
+			return fs.TestTreeIndex[i]
 		}
 	}
-	fs.set = append(fs.set, f)
-	fs.testTreeIndex = append(fs.testTreeIndex, hi)
+	fs.Set = append(fs.Set, f)
+	fs.TestTreeIndex = append(fs.TestTreeIndex, hi)
 	return hi
 }
 
-type fsmatch struct {
-	idx    int
-	off    int64
-	length int
+type Fsmatch struct {
+	Idx    int
+	Off    int64
+	Length int
 }
 
-func (fs *frameSet) index(buf siegreader.Buffer, rev bool, quit chan struct{}) chan fsmatch {
-	ret := make(chan fsmatch)
+func (fs *frameSet) Index(buf siegreader.Buffer, rev bool, quit chan struct{}) chan Fsmatch {
+	ret := make(chan Fsmatch)
 	go func() {
 		var i int
 		for {
@@ -180,11 +180,11 @@ func (fs *frameSet) index(buf siegreader.Buffer, rev bool, quit chan struct{}) c
 				return
 			default:
 			}
-			if i >= len(fs.set) {
+			if i >= len(fs.Set) {
 				close(ret)
 				return
 			}
-			f := fs.set[i]
+			f := fs.Set[i]
 			var match bool
 			var matches []int
 			if rev {
@@ -208,7 +208,7 @@ func (fs *frameSet) index(buf siegreader.Buffer, rev bool, quit chan struct{}) c
 					min, _ = f.Length()
 				}
 				for _, off := range matches {
-					ret <- fsmatch{i, int64(off - min), min}
+					ret <- Fsmatch{i, int64(off - min), min}
 				}
 			}
 			i++

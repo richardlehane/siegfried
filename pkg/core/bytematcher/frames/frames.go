@@ -21,7 +21,7 @@ import (
 	"strconv"
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
-	"github.com/richardlehane/siegfried/pkg/core/persist"
+	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
 // Frame encapsulates a pattern with offset information, mediating between the pattern and the bytestream.
@@ -34,7 +34,7 @@ type Frame interface {
 	Min() int                    // minimum offset
 	Max() int                    // maximum offset. Return -1 for no limit (wildcard, *)
 	Pat() patterns.Pattern
-	Save(*persist.LoadSaver)
+	Save(*signature.LoadSaver)
 
 	// The following methods are inherited from the enclosed OffType
 	Orientation() OffType
@@ -46,7 +46,7 @@ type Frame interface {
 	Sequences() []patterns.Sequence
 }
 
-type Loader func(*persist.LoadSaver) Frame
+type Loader func(*signature.LoadSaver) Frame
 
 const (
 	fixedLoader byte = iota
@@ -61,7 +61,7 @@ func Register(id byte, l Loader) {
 	loaders[int(id)] = l
 }
 
-func Load(ls *persist.LoadSaver) Frame {
+func Load(ls *signature.LoadSaver) Frame {
 	id := ls.LoadByte()
 	l := loaders[int(id)]
 	if l == nil {
@@ -242,14 +242,14 @@ func (f Fixed) Pat() patterns.Pattern {
 	return f.Pattern
 }
 
-func (f Fixed) Save(ls *persist.LoadSaver) {
+func (f Fixed) Save(ls *signature.LoadSaver) {
 	ls.SaveByte(fixedLoader)
 	ls.SaveByte(byte(f.OffType))
 	ls.SaveInt(f.Off)
 	f.Pattern.Save(ls)
 }
 
-func loadFixed(ls *persist.LoadSaver) Frame {
+func loadFixed(ls *signature.LoadSaver) Frame {
 	return Fixed{
 		OffType(ls.LoadByte()),
 		ls.LoadInt(),
@@ -360,7 +360,7 @@ func (w Window) Pat() patterns.Pattern {
 	return w.Pattern
 }
 
-func (w Window) Save(ls *persist.LoadSaver) {
+func (w Window) Save(ls *signature.LoadSaver) {
 	ls.SaveByte(windowLoader)
 	ls.SaveByte(byte(w.OffType))
 	ls.SaveInt(w.MinOff)
@@ -368,7 +368,7 @@ func (w Window) Save(ls *persist.LoadSaver) {
 	w.Pattern.Save(ls)
 }
 
-func loadWindow(ls *persist.LoadSaver) Frame {
+func loadWindow(ls *signature.LoadSaver) Frame {
 	return Window{
 		OffType(ls.LoadByte()),
 		ls.LoadInt(),
@@ -463,13 +463,13 @@ func (w Wild) Pat() patterns.Pattern {
 	return w.Pattern
 }
 
-func (w Wild) Save(ls *persist.LoadSaver) {
+func (w Wild) Save(ls *signature.LoadSaver) {
 	ls.SaveByte(wildLoader)
 	ls.SaveByte(byte(w.OffType))
 	w.Pattern.Save(ls)
 }
 
-func loadWild(ls *persist.LoadSaver) Frame {
+func loadWild(ls *signature.LoadSaver) Frame {
 	return Wild{
 		OffType(ls.LoadByte()),
 		patterns.Load(ls),
@@ -563,14 +563,14 @@ func (w WildMin) Pat() patterns.Pattern {
 	return w.Pattern
 }
 
-func (w WildMin) Save(ls *persist.LoadSaver) {
+func (w WildMin) Save(ls *signature.LoadSaver) {
 	ls.SaveByte(wildMinLoader)
 	ls.SaveByte(byte(w.OffType))
 	ls.SaveInt(w.MinOff)
 	w.Pattern.Save(ls)
 }
 
-func loadWildMin(ls *persist.LoadSaver) Frame {
+func loadWildMin(ls *signature.LoadSaver) Frame {
 	return WildMin{
 		OffType(ls.LoadByte()),
 		ls.LoadInt(),

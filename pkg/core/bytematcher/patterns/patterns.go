@@ -23,7 +23,7 @@ import (
 	"strconv"
 	"unicode/utf8"
 
-	"github.com/richardlehane/siegfried/pkg/core/persist"
+	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
 func init() {
@@ -54,10 +54,10 @@ type Pattern interface {
 	NumSequences() int        // Number of simple sequences represented by a pattern. Return 0 if the pattern cannot be represented by a defined number of simple sequence (e.g. for an indirect offset pattern) or, if in your opinion, the number of sequences is unreasonably large.
 	Sequences() []Sequence    // Convert the pattern to a slice of sequences. Return an empty slice if the pattern cannot be represented by a defined number of simple sequences.
 	String() string
-	Save(*persist.LoadSaver) // encode the pattern into bytes for saving in a persist file
+	Save(*signature.LoadSaver) // encode the pattern into bytes for saving in a signature file
 }
 
-type Loader func(*persist.LoadSaver) Pattern
+type Loader func(*signature.LoadSaver) Pattern
 
 const (
 	sequenceLoader byte = iota
@@ -74,7 +74,7 @@ func Register(id byte, l Loader) {
 	loaders[int(id)] = l
 }
 
-func Load(ls *persist.LoadSaver) Pattern {
+func Load(ls *signature.LoadSaver) Pattern {
 	id := ls.LoadByte()
 	l := loaders[int(id)]
 	if l == nil {
@@ -142,12 +142,12 @@ func (s Sequence) Reverse() Sequence {
 	return p
 }
 
-func (s Sequence) Save(ls *persist.LoadSaver) {
+func (s Sequence) Save(ls *signature.LoadSaver) {
 	ls.SaveByte(sequenceLoader)
 	ls.SaveBytes(s)
 }
 
-func loadSequence(ls *persist.LoadSaver) Pattern {
+func loadSequence(ls *signature.LoadSaver) Pattern {
 	return Sequence(ls.LoadBytes())
 }
 
@@ -252,7 +252,7 @@ func (c Choice) String() string {
 	return s + "]"
 }
 
-func (c Choice) Save(ls *persist.LoadSaver) {
+func (c Choice) Save(ls *signature.LoadSaver) {
 	ls.SaveByte(choiceLoader)
 	ls.SaveSmallInt(len(c))
 	for _, pat := range c {
@@ -260,7 +260,7 @@ func (c Choice) Save(ls *persist.LoadSaver) {
 	}
 }
 
-func loadChoice(ls *persist.LoadSaver) Pattern {
+func loadChoice(ls *signature.LoadSaver) Pattern {
 	l := ls.LoadSmallInt()
 	choices := make(Choice, l)
 	for i := range choices {
@@ -384,7 +384,7 @@ func (l List) String() string {
 	return s + "]"
 }
 
-func (l List) Save(ls *persist.LoadSaver) {
+func (l List) Save(ls *signature.LoadSaver) {
 	ls.SaveByte(listLoader)
 	ls.SaveSmallInt(len(l))
 	for _, pat := range l {
@@ -392,7 +392,7 @@ func (l List) Save(ls *persist.LoadSaver) {
 	}
 }
 
-func loadList(ls *persist.LoadSaver) Pattern {
+func loadList(ls *signature.LoadSaver) Pattern {
 	le := ls.LoadSmallInt()
 	list := make(List, le)
 	for i := range list {
@@ -483,11 +483,11 @@ func (n Not) String() string {
 	return "not[" + n.Pattern.String() + "]"
 }
 
-func (n Not) Save(ls *persist.LoadSaver) {
+func (n Not) Save(ls *signature.LoadSaver) {
 	ls.SaveByte(notLoader)
 	n.Pattern.Save(ls)
 }
 
-func loadNot(ls *persist.LoadSaver) Pattern {
+func loadNot(ls *signature.LoadSaver) Pattern {
 	return Not{Load(ls)}
 }

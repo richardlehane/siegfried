@@ -1,4 +1,4 @@
-package bytematcher
+package process
 
 import (
 	"testing"
@@ -9,38 +9,38 @@ import (
 
 var TestKeyFrames = []keyFrame{
 	keyFrame{
-		typ: frames.BOF,
-		seg: keyFramePos{
-			pMin: 8,
-			pMax: 12,
+		Typ: frames.BOF,
+		Seg: keyFramePos{
+			PMin: 8,
+			PMax: 12,
 		},
 	},
 	keyFrame{
-		typ: frames.PREV,
-		seg: keyFramePos{
-			pMin: 5,
-			pMax: 5,
+		Typ: frames.PREV,
+		Seg: keyFramePos{
+			PMin: 5,
+			PMax: 5,
 		},
 	},
 	keyFrame{
-		typ: frames.PREV,
-		seg: keyFramePos{
-			pMin: 0,
-			pMax: -1,
+		Typ: frames.PREV,
+		Seg: keyFramePos{
+			PMin: 0,
+			PMax: -1,
 		},
 	},
 	keyFrame{
-		typ: frames.SUCC,
-		seg: keyFramePos{
-			pMin: 5,
-			pMax: 10,
+		Typ: frames.SUCC,
+		Seg: keyFramePos{
+			PMin: 5,
+			PMax: 10,
 		},
 	},
 	keyFrame{
-		typ: frames.EOF,
-		seg: keyFramePos{
-			pMin: 0,
-			pMax: 0,
+		Typ: frames.EOF,
+		Seg: keyFramePos{
+			PMin: 0,
+			PMax: 0,
 		},
 	},
 }

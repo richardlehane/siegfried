@@ -1,8 +1,8 @@
-Index: siegfried-1.1.0/config/default.go
+Index: siegfried-0.7.0/config/default.go
 ===================================================================
---- siegfried-1.1.0.orig/config/default.go
-+++ siegfried-1.1.0/config/default.go
-@@ -1,32 +1,11 @@
+--- siegfried-0.7.0.orig/config/default.go	2014-11-24 02:04:25.000000000 -0800
++++ siegfried-0.7.0/config/default.go	2014-11-25 09:39:26.146183694 -0800
+@@ -1,32 +1,10 @@
  // +build !brew,!archivematica,!appengine
  
 -// Copyright 2014 Richard Lehane. All rights reserved.
@@ -35,8 +35,7 @@ Index: siegfried-1.1.0/config/default.go
 -	}
 -	siegfried.home = filepath.Join(current.HomeDir, "siegfried")
 +	siegfried.home = "/usr/share/siegfried"
-+	siegfried.signature = "archivematica.sig"
-+	siegfried.fpr = "/tmp/siegfried"
++	siegfried.signature = "archivematica.gob"
 +	identifier.name = "archivematica"
 +	pronom.extend = []string{"archivematica-fmt2.xml", "archivematica-fmt3.xml", "archivematica-fmt4.xml", "archivematica-fmt5.xml"}
  }

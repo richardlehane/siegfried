@@ -7,8 +7,8 @@ import (
 
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames/tests"
-	"github.com/richardlehane/siegfried/pkg/core/persist"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
+	"github.com/richardlehane/siegfried/pkg/core/signature"
 )
 
 var TestSample1 = []byte("test12345678910YNESSjunktestyjunktestytest12345678910111223") // should match sigs 0, 1 and 2
@@ -25,13 +25,13 @@ func TestIO(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	saver := persist.NewLoadSaver(nil)
+	saver := signature.NewLoadSaver(nil)
 	bm.Save(saver)
 	if len(saver.Bytes()) < 100 {
 		t.Errorf("Save bytematcher: too small, only got %v", len(saver.Bytes()))
 	}
-	newbm := Load(persist.NewLoadSaver(saver.Bytes()))
-	nsaver := persist.NewLoadSaver(nil)
+	newbm := Load(signature.NewLoadSaver(saver.Bytes()))
+	nsaver := signature.NewLoadSaver(nil)
 	newbm.Save(nsaver)
 	if len(nsaver.Bytes()) != len(saver.Bytes()) {
 		t.Fatalf("expecting the bms to match length: %d and %d", len(saver.Bytes()), len(nsaver.Bytes()))
