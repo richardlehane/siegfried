@@ -13,7 +13,7 @@ Key features are:
 
 ## Version
 
-1.1.0
+1.2.0
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried)
 
@@ -70,6 +70,10 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 	sf -update
 
 ## Recent Changes
+### Version 1.2.0 (forthcoming)
+- text matcher
+- code tidy and doco
+
 ### Version 1.1.0 (17/5/2015)
 - scan within archive formats (zip, tar, gzip) with -z flag
 - format sets (e.g. roy build -exclude @pdfa)
@@ -85,19 +89,6 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 - [user documentation](http://github.com/richardlehane/siegfried/wiki)
 - bugfixes (mscfb, match/wac and sf)
 - QA using [comparator](http://github.com/richardlehane/comparator)
-
-### Version 0.8.3 (24/2/2015)
-- json string escaping
-
-### Version 0.8.2 (22/2/2015)
-- json output
-- server mode
-
-### Version 0.8.1 (1/2/2015)
-- bugfix: single quote YAML output
-
-### Version 0.8.0 (26/1/2015)
-- optimisations (mmap, multithread, etc.)
 
 [Full change history](https://github.com/richardlehane/siegfried/wiki/Change-history)
 
