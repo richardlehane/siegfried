@@ -15,7 +15,7 @@
 // Package siegreader implements multiple independent Readers (and ReverseReaders) from a single Buffer.
 //
 // Example:
-//   buffers := siegreader.Buffers()
+//   buffers := siegreader.New()
 //   buffer, err := buffers.Get(io.Reader)
 //   if err != nil {
 //     log.Fatal(err)

@@ -71,10 +71,12 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 	sf -update
 
 ## Recent Changes
-### Version 1.2.0 (forthcoming)
+### Version 1.2.0 (forthcoming - July'ish)
+- code sanitation: tidy, documentation, examples, tests
 - text matcher
 - droid flag to mimic droid output (including MD5 hash)
-- code tidy and doco
+- support -z parameter in server mode
+- more helpful error text on failed -update
 
 ### Version 1.1.0 (17/5/2015)
 - scan within archive formats (zip, tar, gzip) with -z flag
