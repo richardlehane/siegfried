@@ -51,6 +51,9 @@ func TestBytSource(t *testing.T) {
 	if b.Size() != int64(len(testBytes)) {
 		t.Error("String read: size error")
 	}
+	if len(Bytes(b)) != len(testBytes) {
+		t.Error("String read: Bytes() error")
+	}
 	bufs.Put(b)
 }
 
@@ -60,6 +63,10 @@ func TestFileSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	b := setup(r, t)
+	stat, _ := r.Stat()
+	if len(Bytes(b)) != int(stat.Size()) {
+		t.Error("File read: Bytes() error")
+	}
 	r.Close()
 	bufs.Put(b)
 }

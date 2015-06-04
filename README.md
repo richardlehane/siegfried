@@ -28,6 +28,7 @@ Key features are:
 
     sf -csv file.ext | DIR                     // Output CSV rather than YAML
     sf -json file.ext | DIR                    // Output JSON rather than YAML
+    sf -droid file.ext | DIR                   // Output DROID CSV rather than YAML
     sf -                                       // Read list of files piped to stdin
     sf -nr DIR                                 // Don't scan subdirectories
     sf -z file.zip | DIR                       // Decompress and scan zip, tar, gzip
@@ -72,6 +73,7 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 ## Recent Changes
 ### Version 1.2.0 (forthcoming)
 - text matcher
+- droid flag to mimic droid output (including MD5 hash)
 - code tidy and doco
 
 ### Version 1.1.0 (17/5/2015)
@@ -100,7 +102,7 @@ Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/
 
 ## Contributing
 
-Like Siegfried and want to get involved in its development? That'd be wonderful! There are some notes on the [wiki](https://github.com/richardlehane/siegfried/wiki) to get you started, and please get in touch.
+Like siegfried and want to get involved in its development? That'd be wonderful! There are some notes on the [wiki](https://github.com/richardlehane/siegfried/wiki) to get you started, and please get in touch.
 
 ## Thanks
 

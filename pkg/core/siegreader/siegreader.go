@@ -56,3 +56,18 @@ type Buffer interface {
 	waitLimit()
 	reachedLimit()
 }
+
+// Bytes returns a byte slice for a full read of the buffered file or stream.
+// Returns nil on error
+func Bytes(b Buffer) []byte {
+	sz := b.SizeNow()
+	// check for int overflow
+	if int64(int(sz)) != sz {
+		return nil
+	}
+	s, err := b.Slice(0, int(sz))
+	if err != nil {
+		return nil
+	}
+	return s
+}

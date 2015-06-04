@@ -62,10 +62,10 @@ type Siegfried struct {
 	buffers *siegreader.Buffers
 }
 
-// New creates a new Siegfried. It sets the create time to time.Now() and initializes the three matchers
+// New creates a new Siegfried struct. It sets the create time to time.Now() and initializes the three matchers
 //
 // Example:
-//  s := New() // create a new Siegfried
+//  s := New()
 //  p, err := pronom.New() // create a new PRONOM identifier
 //  if err != nil {
 //  	// handle err

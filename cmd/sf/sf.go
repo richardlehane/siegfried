@@ -16,6 +16,7 @@ package main
 
 import (
 	"bufio"
+	"crypto/md5"
 	"flag"
 	"fmt"
 	"io"
@@ -34,6 +35,8 @@ import (
 	//"net/http"
 	//_ "net/http/pprof"
 )
+
+var _ = md5.BlockSize
 
 const PROCS = -1
 
