@@ -17,13 +17,16 @@
 // Example:
 //  s, err := siegfried.Load("pronom.sig")
 //  if err != nil {
-//  	// handle err
+//  	log.Fatal(err)
 //  }
-//  f, _ := os.Open("file")
+//  f, err := os.Open("file")
+//  if err != nil {
+//  	log.Fatal(err)
+//  }
 //  defer f.Close()
 //  c, err := s.Identify("filename", f)
 //  if err != nil {
-//  	// handle err
+//  	log.Fatal(err)
 //  }
 //  for id := range c {
 //  	fmt.Print(id)
@@ -62,7 +65,7 @@ type Siegfried struct {
 	buffers *siegreader.Buffers
 }
 
-// New creates a new Siegfried struct. It sets the create time to time.Now() and initializes the three matchers
+// New creates a new Siegfried struct. It sets the create time to time.Now() and initializes the three matchers.
 //
 // Example:
 //  s := New()
@@ -88,7 +91,28 @@ func New() *Siegfried {
 	return s
 }
 
-// Save a Siegfried persist file
+// Add adds an identifier to a Siegfried struct.
+// The identifer is type switched to test if it is supported. At present, only PRONOM identifiers are supported
+func (s *Siegfried) Add(i core.Identifier) error {
+	switch i := i.(type) {
+	default:
+		return fmt.Errorf("siegfried: unknown identifier type %T", i)
+	case *pronom.Identifier:
+		if err := i.Add(s.em); err != nil {
+			return err
+		}
+		if err := i.Add(s.cm); err != nil {
+			return err
+		}
+		if err := i.Add(s.bm); err != nil {
+			return err
+		}
+		s.ids = append(s.ids, i)
+	}
+	return nil
+}
+
+// Save persists a Siegfried struct to disk (path)
 func (s *Siegfried) Save(path string) error {
 	ls := persist.NewLoadSaver(nil)
 	ls.SaveString("siegfried")
@@ -124,45 +148,45 @@ func (s *Siegfried) Save(path string) error {
 	return nil
 }
 
-// Load a Siegfried signature file
+// Load creates a Siegfried struct and loads content from path
 func Load(path string) (*Siegfried, error) {
+	errOpening := "siegfried: error opening signature file; got %v\nTry running `sf -update`"
+	errNotSig := "siegfried: not a siegfried signature file"
 	fbuf, err := ioutil.ReadFile(path)
 	if err != nil {
-		return nil, fmt.Errorf("Siegfried: error opening signature file; got %s\nTry running `sf -update`", err)
+		return nil, fmt.Errorf(errOpening, err)
 	}
 	if string(fbuf[:len(config.Magic())]) != string(config.Magic()) {
-		return nil, fmt.Errorf("Siegfried: not a siegfried signature file")
+		return nil, fmt.Errorf(errNotSig)
 	}
 	r := bytes.NewBuffer(fbuf[len(config.Magic()):])
 	rc := flate.NewReader(r)
 	defer rc.Close()
 	buf, err := ioutil.ReadAll(rc)
 	if err != nil {
-		return nil, fmt.Errorf("Siegfried: error opening signature file; got %s\nTry running `sf -update`", err)
+		return nil, fmt.Errorf(errOpening, err)
 	}
 	ls := persist.NewLoadSaver(buf)
 	if ls.LoadString() != "siegfried" {
-		return nil, fmt.Errorf("Siegfried: not a siegfried signature file")
+		return nil, fmt.Errorf(errNotSig)
 	}
 	return &Siegfried{
-		C:       ls.LoadTime(),
-		em:      extensionmatcher.Load(ls),
-		cm:      containermatcher.Load(ls),
-		bm:      bytematcher.Load(ls),
-		ids:     loadIDs(ls),
+		C:  ls.LoadTime(),
+		em: extensionmatcher.Load(ls),
+		cm: containermatcher.Load(ls),
+		bm: bytematcher.Load(ls),
+		ids: func(li *persist.LoadSaver) []core.Identifier {
+			ids := make([]core.Identifier, li.LoadTinyUInt())
+			for i := range ids {
+				ids[i] = core.LoadIdentifier(li)
+			}
+			return ids
+		}(ls),
 		buffers: siegreader.New(),
 	}, ls.Err
 }
 
-func loadIDs(ls *persist.LoadSaver) []core.Identifier {
-	ids := make([]core.Identifier, ls.LoadTinyUInt())
-	for i := range ids {
-		ids[i] = core.LoadIdentifier(ls)
-	}
-	return ids
-}
-
-// String representation of a Siegfried
+// String representation of a Siegfried struct
 func (s *Siegfried) String() string {
 	str := "IDENTIFIERS\n"
 	for _, i := range s.ids {
@@ -177,51 +201,8 @@ func (s *Siegfried) String() string {
 	return str
 }
 
-// InspectTestTree checks with the byte matcher to see what identification results subscribe to a particular test
-// tree index. It can be used when identifying in a debug mode to check which identification results trigger
-// which strikes
-func (s *Siegfried) InspectTestTree(tti int) string {
-	bm := s.bm.(*bytematcher.Matcher)
-	idxs := bm.InspectTestTree(tti)
-	if idxs == nil {
-		return "No test tree at this index"
-	}
-	res := make([]string, len(idxs))
-	for i, v := range idxs {
-		for _, id := range s.ids {
-			ok, str := id.Recognise(core.ByteMatcher, v)
-			if ok {
-				res[i] = str
-				break
-			}
-		}
-	}
-	return "Test tree indexes match:\n" + strings.Join(res, "\n")
-}
-
-// Add adds an identifier to a Siegfried.
-// The identifer is type switched to test if it is supported. At present, only PRONOM identifiers are supported
-func (s *Siegfried) Add(i core.Identifier) error {
-	switch i := i.(type) {
-	default:
-		return fmt.Errorf("Siegfried: unknown identifier type %T", i)
-	case *pronom.Identifier:
-		if err := i.Add(s.em); err != nil {
-			return err
-		}
-		if err := i.Add(s.cm); err != nil {
-			return err
-		}
-		if err := i.Add(s.bm); err != nil {
-			return err
-		}
-		s.ids = append(s.ids, i)
-	}
-	return nil
-}
-
-// Yaml representation of a Siegfried.
-// This is the provenace block at the beginning of siegfried results and includes Yaml descriptions for each identifier.
+// Yaml representation of a Siegfried struct.
+// This is the provenace block at the beginning of sf results and includes Yaml descriptions for each identifier.
 func (s *Siegfried) Yaml() string {
 	version := config.Version()
 	str := fmt.Sprintf(
@@ -237,8 +218,8 @@ func (s *Siegfried) Yaml() string {
 	return str
 }
 
-// JSON representation of a Siegfried.
-// This is the provenace block at the beginning of siegfried results and includes descriptions for each identifier.
+// JSON representation of a Siegfried struct.
+// This is the provenace block at the beginning of sf results and includes descriptions for each identifier.
 func (s *Siegfried) Json() string {
 	version := config.Version()
 	str := fmt.Sprintf(
@@ -258,23 +239,13 @@ func (s *Siegfried) Json() string {
 	return str
 }
 
-// Update checks whether a Siegfried is due for update, by testing whether the time given is after the time
-// the signature was created
-func (s *Siegfried) Update(t string) bool {
-	tm, err := time.Parse(time.RFC3339, t)
-	if err != nil {
-		return false
-	}
-	return tm.After(s.C)
-}
-
 // Identify identifies a stream or file object.
 // It takes the name of the file/stream (if unknown, give an empty string) and an io.Reader
 // It returns a channel of identifications and an error
 func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, error) {
 	buffer, err := s.buffers.Get(r)
 	if err != nil && err != io.EOF {
-		return nil, fmt.Errorf("error reading file: %v", err)
+		return nil, fmt.Errorf("siegfried: error reading file; got %v", err)
 	}
 	res := make(chan core.Identification)
 	recs := make([]core.Recorder, len(s.ids))
@@ -331,10 +302,42 @@ func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, e
 	return res, err
 }
 
+// InspectTestTree checks with the byte matcher to see what identification results subscribe to a particular test
+// tree index. It can be used when identifying in a debug mode to check which identification results trigger
+// which strikes
+func (s *Siegfried) InspectTestTree(tti int) string {
+	bm := s.bm.(*bytematcher.Matcher)
+	idxs := bm.InspectTestTree(tti)
+	if idxs == nil {
+		return "No test tree at this index"
+	}
+	res := make([]string, len(idxs))
+	for i, v := range idxs {
+		for _, id := range s.ids {
+			ok, str := id.Recognise(core.ByteMatcher, v)
+			if ok {
+				res[i] = str
+				break
+			}
+		}
+	}
+	return "Test tree indexes match:\n" + strings.Join(res, "\n")
+}
+
 // Buffer returns the last buffer inspected
 // The purpose is to prevent unnecessary double-up of IO e.g. when unzipping files post-identification
 func (s *Siegfried) Buffer() siegreader.Buffer {
 	last := s.buffers.Last()
 	last.SetQuit(make(chan struct{})) // may have already closed the quit channel
 	return last
+}
+
+// Update checks whether a Siegfried struct is due for update, by testing whether the time given is after the time
+// the signature was created
+func (s *Siegfried) Update(t string) bool {
+	tm, err := time.Parse(time.RFC3339, t)
+	if err != nil {
+		return false
+	}
+	return tm.After(s.C)
 }

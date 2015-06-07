@@ -74,7 +74,7 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 ### Version 1.2.0 (forthcoming - July'ish)
 - code sanitation: tidy, documentation, examples, tests
 - text matcher
-- droid flag to mimic droid output (including MD5 hash)
+- -droid flag to mimic droid output (including MD5 hash)
 - support -z parameter in server mode
 - more helpful error text on failed -update
 

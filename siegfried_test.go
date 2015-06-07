@@ -27,7 +27,7 @@ func TestLoad(t *testing.T) {
 
 func TestIdentify(t *testing.T) {
 	s := New()
-	s.em = testNMatcher{}
+	s.em = testEMatcher{}
 	s.bm = testBMatcher{}
 	s.cm = nil
 	s.ids = append(s.ids, testIdentifier{})
@@ -41,11 +41,11 @@ func TestIdentify(t *testing.T) {
 	}
 }
 
-// name matcher test stub
+// extension matcher test stub
 
-type testNMatcher struct{}
+type testEMatcher struct{}
 
-func (t testNMatcher) Identify(n string, sb siegreader.Buffer) (chan core.Result, error) {
+func (t testEMatcher) Identify(n string, sb siegreader.Buffer) (chan core.Result, error) {
 	ret := make(chan core.Result)
 	go func() {
 		ret <- testResult(0)
@@ -54,11 +54,11 @@ func (t testNMatcher) Identify(n string, sb siegreader.Buffer) (chan core.Result
 	return ret, nil
 }
 
-func (t testNMatcher) String() string { return "" }
+func (t testEMatcher) String() string { return "" }
 
-func (t testNMatcher) Save(l *persist.LoadSaver) {}
+func (t testEMatcher) Save(l *persist.LoadSaver) {}
 
-func (t testNMatcher) Add(ss core.SignatureSet, l priority.List) (int, error) { return 0, nil }
+func (t testEMatcher) Add(ss core.SignatureSet, l priority.List) (int, error) { return 0, nil }
 
 // byte matcher test stub
 
