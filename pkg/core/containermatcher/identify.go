@@ -58,7 +58,7 @@ func (c *ContainerMatcher) newIdentifier(numParts int) *identifier {
 	return &identifier{
 		make([][]hit, numParts),
 		make([]bool, numParts),
-		c.Priorities.WaitSet(),
+		c.priorities.WaitSet(),
 		make([]hit, 0, 1),
 		false,
 	}
@@ -70,10 +70,10 @@ func (c *ContainerMatcher) identify(n string, rdr Reader, res chan core.Result) 
 		close(res)
 		return
 	}
-	id := c.newIdentifier(len(c.Parts))
+	id := c.newIdentifier(len(c.parts))
 	var err error
 	for err = rdr.Next(); err == nil; err = rdr.Next() {
-		ct, ok := c.NameCTest[rdr.Name()]
+		ct, ok := c.nameCTest[rdr.Name()]
 		if !ok {
 			continue
 		}
@@ -86,24 +86,24 @@ func (c *ContainerMatcher) identify(n string, rdr Reader, res chan core.Result) 
 	}
 	// send a default hit if no result and extension matches
 	if c.extension != "" && !id.result && filepath.Ext(n) == "."+c.extension {
-		res <- defaultHit(-1 - int(c.CType))
+		res <- defaultHit(-1 - int(c.conType))
 	}
 	close(res)
 }
 
-func (ct *CTest) identify(c *ContainerMatcher, id *identifier, rdr Reader, name string) []hit {
+func (ct *cTest) identify(c *ContainerMatcher, id *identifier, rdr Reader, name string) []hit {
 	// reset hits
 	id.hits = id.hits[:0]
-	for _, h := range ct.Satisfied {
+	for _, h := range ct.satisfied {
 		if id.waitSet.Check(h) {
 			id.hits = append(id.hits, hit{h, name, "name only"})
 		}
 	}
-	if ct.Unsatisfied != nil {
+	if ct.unsatisfied != nil {
 		buf, _ := rdr.SetSource(c.entryBufs) // NOTE: an error is ignored here.
-		bmc, _ := ct.BM.Identify("", buf)
+		bmc, _ := ct.bm.Identify("", buf)
 		for r := range bmc {
-			h := ct.Unsatisfied[r.Index()]
+			h := ct.unsatisfied[r.Index()]
 			if id.waitSet.Check(h) && id.checkHits(h) {
 				id.hits = append(id.hits, hit{h, name, r.Basis()})
 			}
@@ -116,24 +116,24 @@ func (ct *CTest) identify(c *ContainerMatcher, id *identifier, rdr Reader, name 
 
 // process the hits from the ctest: adding hits to the parts matched, checking priorities
 // return true if satisfied and can quit
-func (c *ContainerMatcher) processHits(hits []hit, id *identifier, ct *CTest, name string, res chan core.Result) bool {
+func (c *ContainerMatcher) processHits(hits []hit, id *identifier, ct *cTest, name string, res chan core.Result) bool {
 	// if there are no hits, rule out any sigs in the ctest
 	if len(hits) == 0 {
-		for _, v := range ct.Satisfied {
+		for _, v := range ct.satisfied {
 			id.ruledOut[v] = true
 		}
-		for _, v := range ct.Unsatisfied {
+		for _, v := range ct.unsatisfied {
 			id.ruledOut[v] = true
 		}
 		return false
 	}
 	for _, h := range hits {
 		id.partsMatched[h.id] = append(id.partsMatched[h.id], h)
-		if len(id.partsMatched[h.id]) == c.Parts[h.id] {
+		if len(id.partsMatched[h.id]) == c.parts[h.id] {
 			if id.waitSet.Check(h.id) {
-				idx, _ := c.Priorities.Index(h.id)
-				res <- toResult(c.Sindexes[idx], id.partsMatched[h.id]) // send a Result here
-				id.result = true                                        // mark id as having a result (for zip default)
+				idx, _ := c.priorities.Index(h.id)
+				res <- toResult(c.startIndexes[idx], id.partsMatched[h.id]) // send a Result here
+				id.result = true                                            // mark id as having a result (for zip default)
 				// set a priority list and return early if can
 				if id.waitSet.Put(h.id) {
 					return true
@@ -142,16 +142,16 @@ func (c *ContainerMatcher) processHits(hits []hit, id *identifier, ct *CTest, na
 		}
 	}
 	// if nothing ruled out by this test, then we must continue
-	if len(hits) == len(ct.Satisfied)+len(ct.Unsatisfied) {
+	if len(hits) == len(ct.satisfied)+len(ct.unsatisfied) {
 		return false
 	}
 	// we can rule some possible matches out...
-	for _, v := range ct.Satisfied {
+	for _, v := range ct.satisfied {
 		if len(id.partsMatched[v]) == 0 || id.partsMatched[v][len(id.partsMatched[v])-1].name != name {
 			id.ruledOut[v] = true
 		}
 	}
-	for _, v := range ct.Unsatisfied {
+	for _, v := range ct.unsatisfied {
 		if len(id.partsMatched[v]) == 0 || id.partsMatched[v][len(id.partsMatched[v])-1].name != name {
 			id.ruledOut[v] = true
 		}

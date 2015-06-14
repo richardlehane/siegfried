@@ -74,7 +74,7 @@ type csvWriter struct {
 	w   *csv.Writer
 }
 
-func newCsv(w io.Writer) *csvWriter {
+func newCSV(w io.Writer) *csvWriter {
 	return &csvWriter{make([]string, 10), csv.NewWriter(os.Stdout)}
 }
 
@@ -100,7 +100,7 @@ func (c *csvWriter) writeFile(name string, sz int64, err error, ids iterableID) 
 			archive = id.Archive()
 		}
 		c.rec[0], c.rec[1], c.rec[2] = name, strconv.Itoa(int(sz)), errStr
-		copy(c.rec[3:], id.Csv())
+		copy(c.rec[3:], id.CSV())
 		c.w.Write(c.rec)
 	}
 	return archive
@@ -113,12 +113,12 @@ type yamlWriter struct {
 	w        *bufio.Writer
 }
 
-func newYaml(w io.Writer) *yamlWriter {
+func newYAML(w io.Writer) *yamlWriter {
 	return &yamlWriter{strings.NewReplacer("'", "''"), bufio.NewWriter(w)}
 }
 
 func (y *yamlWriter) writeHead(s *siegfried.Siegfried) {
-	y.w.WriteString(s.Yaml())
+	y.w.WriteString(s.YAML())
 }
 
 func (y *yamlWriter) writeFile(name string, sz int64, err error, ids iterableID) config.Archive {
@@ -135,7 +135,7 @@ func (y *yamlWriter) writeFile(name string, sz int64, err error, ids iterableID)
 		if id.Archive() > archive {
 			archive = id.Archive()
 		}
-		y.w.WriteString(id.Yaml())
+		y.w.WriteString(id.YAML())
 	}
 	return archive
 }
@@ -148,12 +148,12 @@ type jsonWriter struct {
 	w        *bufio.Writer
 }
 
-func newJson(w io.Writer) *jsonWriter {
+func newJSON(w io.Writer) *jsonWriter {
 	return &jsonWriter{false, strings.NewReplacer(`"`, `\"`, `\\`, `\\`, `\`, `\\`), bufio.NewWriter(w)}
 }
 
 func (j *jsonWriter) writeHead(s *siegfried.Siegfried) {
-	j.w.WriteString(s.Json())
+	j.w.WriteString(s.JSON())
 	j.w.WriteString("\"files\":[")
 }
 
@@ -178,7 +178,7 @@ func (j *jsonWriter) writeFile(name string, sz int64, err error, ids iterableID)
 		if subs {
 			j.w.WriteString(",")
 		}
-		j.w.WriteString(id.Json())
+		j.w.WriteString(id.JSON())
 		subs = true
 	}
 	j.w.WriteString("]}")

@@ -238,11 +238,11 @@ func main() {
 		config.SetDebug()
 		w = debugWriter{}
 	case *csvo:
-		w = newCsv(os.Stdout)
+		w = newCSV(os.Stdout)
 	case *jsono:
-		w = newJson(os.Stdout)
+		w = newJSON(os.Stdout)
 	default:
-		w = newYaml(os.Stdout)
+		w = newYAML(os.Stdout)
 	}
 
 	// support reading list files from stdin

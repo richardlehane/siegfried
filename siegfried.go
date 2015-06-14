@@ -53,8 +53,10 @@ import (
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
-// Siegfried structs are persisent objects that can be serialised to disk.
-// The private fields are the three matchers (extension, container, byte) and the identifiers.
+// Siegfried structs are persisent objects that can be serialised to disk and
+// used to identify file formats.
+// They contain three matchers as well as a slice of identifiers. When identifiers
+// are added to a Siegfried struct, they are registered with each matcher.
 type Siegfried struct {
 	C  time.Time    // signature create time
 	em core.Matcher // extensionmatcher
@@ -141,11 +143,8 @@ func (s *Siegfried) Save(path string) error {
 		return err
 	}
 	_, err = z.Write(ls.Bytes())
-	if err != nil {
-		return err
-	}
 	z.Close()
-	return nil
+	return err
 }
 
 // Load creates a Siegfried struct and loads content from path
@@ -175,35 +174,35 @@ func Load(path string) (*Siegfried, error) {
 		em: extensionmatcher.Load(ls),
 		cm: containermatcher.Load(ls),
 		bm: bytematcher.Load(ls),
-		ids: func(li *persist.LoadSaver) []core.Identifier {
-			ids := make([]core.Identifier, li.LoadTinyUInt())
+		ids: func() []core.Identifier {
+			ids := make([]core.Identifier, ls.LoadTinyUInt())
 			for i := range ids {
-				ids[i] = core.LoadIdentifier(li)
+				ids[i] = core.LoadIdentifier(ls)
 			}
 			return ids
-		}(ls),
+		}(),
 		buffers: siegreader.New(),
 	}, ls.Err
 }
 
 // String representation of a Siegfried struct
 func (s *Siegfried) String() string {
-	str := "IDENTIFIERS\n"
-	for _, i := range s.ids {
-		str += i.String()
-	}
-	str += "\nEXTENSION MATCHER\n"
-	str += s.em.String()
-	str += "\nCONTAINER MATCHER\n"
-	str += s.cm.String()
-	str += "\nBYTE MATCHER\n"
-	str += s.bm.String()
-	return str
+	return fmt.Sprintf("Identifiers\n%s\nExtension Matcher\n%s\nContainer Matcher\n%s\nByte Matcher\n%s",
+		func() string {
+			var str string
+			for _, i := range s.ids {
+				str += i.String()
+			}
+			return str
+		}(),
+		s.em.String(),
+		s.cm.String(),
+		s.bm.String())
 }
 
-// Yaml representation of a Siegfried struct.
-// This is the provenace block at the beginning of sf results and includes Yaml descriptions for each identifier.
-func (s *Siegfried) Yaml() string {
+// YAML representation of a Siegfried struct.
+// This is the provenace block at the beginning of sf results and includes descriptions for each identifier.
+func (s *Siegfried) YAML() string {
 	version := config.Version()
 	str := fmt.Sprintf(
 		"---\nsiegfried   : %d.%d.%d\nscandate    : %v\npersist   : %s\ncreated     : %v\nidentifiers : \n",
@@ -220,7 +219,7 @@ func (s *Siegfried) Yaml() string {
 
 // JSON representation of a Siegfried struct.
 // This is the provenace block at the beginning of sf results and includes descriptions for each identifier.
-func (s *Siegfried) Json() string {
+func (s *Siegfried) JSON() string {
 	version := config.Version()
 	str := fmt.Sprintf(
 		"{\"siegfried\":\"%d.%d.%d\",\"scandate\":\"%v\",\"persist\":\"%s\",\"created\":\"%v\",\"identifiers\":[",

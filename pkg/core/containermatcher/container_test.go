@@ -15,12 +15,12 @@ func testTrigger([]byte) bool {
 }
 
 var testContainerMatcher *ContainerMatcher = &ContainerMatcher{
-	ctype:      ctype{testTrigger, newTestReader},
-	CType:      0,
-	NameCTest:  make(map[string]*CTest),
-	Priorities: &priority.Set{},
-	Sindexes:   []int{0},
-	entryBufs:  siegreader.New(),
+	ctype:        ctype{testTrigger, newTestReader},
+	conType:      0,
+	nameCTest:    make(map[string]*cTest),
+	priorities:   &priority.Set{},
+	startIndexes: []int{0},
+	entryBufs:    siegreader.New(),
 }
 
 var testMatcher Matcher = []*ContainerMatcher{testContainerMatcher}

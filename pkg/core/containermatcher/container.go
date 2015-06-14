@@ -40,7 +40,7 @@ func Load(ls *persist.LoadSaver) Matcher {
 	ret := make(Matcher, ls.LoadTinyUInt())
 	for i := range ret {
 		ret[i] = loadCM(ls)
-		ret[i].ctype = ctypes[ret[i].CType]
+		ret[i].ctype = ctypes[ret[i].conType]
 		ret[i].entryBufs = siegreader.New()
 	}
 	return ret
@@ -86,7 +86,7 @@ func (m Matcher) total(i int) int {
 		if i > -1 && j == i {
 			continue
 		}
-		t += len(v.Parts)
+		t += len(v.parts)
 	}
 	return t
 }
@@ -100,16 +100,16 @@ func (m Matcher) addSigs(i int, nameParts [][]string, sigParts [][]frames.Signat
 		return fmt.Errorf("Container: expecting equal name and persist parts")
 	}
 	// give as a starting index the current total of persists in the matcher, except those in the ContainerMatcher in question
-	m[i].Sindexes = append(m[i].Sindexes, m.total(i))
-	prev := len(m[i].Parts)
+	m[i].startIndexes = append(m[i].startIndexes, m.total(i))
+	prev := len(m[i].parts)
 	for j, n := range nameParts {
 		err = m[i].addSignature(n, sigParts[j])
 		if err != nil {
 			return err
 		}
 	}
-	m[i].Priorities.Add(l, len(nameParts))
-	for _, v := range m[i].NameCTest {
+	m[i].priorities.Add(l, len(nameParts))
+	for _, v := range m[i].nameCTest {
 		err := v.commit(l, prev)
 		if err != nil {
 			return err
@@ -128,49 +128,49 @@ func (m Matcher) String() string {
 
 type ContainerMatcher struct {
 	ctype
-	Sindexes   []int // start indexes, added to hits - these place all container matches in a single slice
-	CType      containerType
-	NameCTest  map[string]*CTest
-	Parts      []int // corresponds with each persist: represents the number of CTests for each sig
-	Priorities *priority.Set
-	extension  string
-	entryBufs  *siegreader.Buffers
+	startIndexes []int //  added to hits - these place all container matches in a single slice
+	conType      containerType
+	nameCTest    map[string]*cTest
+	parts        []int // corresponds with each persist: represents the number of CTests for each sig
+	priorities   *priority.Set
+	extension    string
+	entryBufs    *siegreader.Buffers
 }
 
 func loadCM(ls *persist.LoadSaver) *ContainerMatcher {
 	return &ContainerMatcher{
-		Sindexes:   ls.LoadInts(),
-		CType:      containerType(ls.LoadTinyUInt()),
-		NameCTest:  loadCTests(ls),
-		Parts:      ls.LoadInts(),
-		Priorities: priority.Load(ls),
-		extension:  ls.LoadString(),
+		startIndexes: ls.LoadInts(),
+		conType:      containerType(ls.LoadTinyUInt()),
+		nameCTest:    loadCTests(ls),
+		parts:        ls.LoadInts(),
+		priorities:   priority.Load(ls),
+		extension:    ls.LoadString(),
 	}
 }
 
 func (c *ContainerMatcher) save(ls *persist.LoadSaver) {
-	ls.SaveInts(c.Sindexes)
-	ls.SaveTinyUInt(int(c.CType))
-	saveCTests(ls, c.NameCTest)
-	ls.SaveInts(c.Parts)
-	c.Priorities.Save(ls)
+	ls.SaveInts(c.startIndexes)
+	ls.SaveTinyUInt(int(c.conType))
+	saveCTests(ls, c.nameCTest)
+	ls.SaveInts(c.parts)
+	c.priorities.Save(ls)
 	ls.SaveString(c.extension)
 }
 
 func (c *ContainerMatcher) String() string {
 	str := "\nContainer matcher:\n"
-	str += fmt.Sprintf("Type: %d\n", c.CType)
-	str += fmt.Sprintf("Priorities: %v\n", c.Priorities)
-	str += fmt.Sprintf("Parts: %v\n", c.Parts)
-	for k, v := range c.NameCTest {
+	str += fmt.Sprintf("Type: %d\n", c.conType)
+	str += fmt.Sprintf("Priorities: %v\n", c.priorities)
+	str += fmt.Sprintf("Parts: %v\n", c.parts)
+	for k, v := range c.nameCTest {
 		str += "-----------\n"
 		str += fmt.Sprintf("Name: %v\n", k)
-		str += fmt.Sprintf("Satisfied: %v\n", v.Satisfied)
-		str += fmt.Sprintf("Unsatisfied: %v\n", v.Unsatisfied)
-		if v.BM == nil {
+		str += fmt.Sprintf("Satisfied: %v\n", v.satisfied)
+		str += fmt.Sprintf("Unsatisfied: %v\n", v.unsatisfied)
+		if v.bm == nil {
 			str += "Bytematcher: None\n"
 		} else {
-			str += "Bytematcher:\n" + v.BM.String()
+			str += "Bytematcher:\n" + v.bm.String()
 		}
 	}
 	return str
@@ -199,9 +199,9 @@ func zipTrigger(b []byte) bool {
 func newZip() *ContainerMatcher {
 	return &ContainerMatcher{
 		ctype:      ctypes[0],
-		CType:      Zip,
-		NameCTest:  make(map[string]*CTest),
-		Priorities: &priority.Set{},
+		conType:    Zip,
+		nameCTest:  make(map[string]*cTest),
+		priorities: &priority.Set{},
 		extension:  "zip",
 		entryBufs:  siegreader.New(),
 	}
@@ -214,9 +214,9 @@ func mscfbTrigger(b []byte) bool {
 func newMscfb() *ContainerMatcher {
 	return &ContainerMatcher{
 		ctype:      ctypes[1],
-		CType:      Mscfb,
-		NameCTest:  make(map[string]*CTest),
-		Priorities: &priority.Set{},
+		conType:    Mscfb,
+		nameCTest:  make(map[string]*cTest),
+		priorities: &priority.Set{},
 		entryBufs:  siegreader.New(),
 	}
 }
@@ -225,67 +225,67 @@ func (c *ContainerMatcher) addSignature(nameParts []string, sigParts []frames.Si
 	if len(nameParts) != len(sigParts) {
 		return errors.New("Container matcher: nameParts and sigParts must be equal")
 	}
-	c.Parts = append(c.Parts, len(nameParts))
+	c.parts = append(c.parts, len(nameParts))
 	for i, nm := range nameParts {
-		ct, ok := c.NameCTest[nm]
+		ct, ok := c.nameCTest[nm]
 		if !ok {
-			ct = &CTest{}
-			c.NameCTest[nm] = ct
+			ct = &cTest{}
+			c.nameCTest[nm] = ct
 		}
-		ct.add(sigParts[i], len(c.Parts)-1)
+		ct.add(sigParts[i], len(c.parts)-1)
 	}
 	return nil
 }
 
 // a container test is a the basic element of container matching
-type CTest struct {
-	Satisfied   []int              // satisfied persists are immediately matched: i.e. a name without a required bitstream
-	Unsatisfied []int              // unsatisfied persists depend on bitstreams as well as names matching
+type cTest struct {
+	satisfied   []int              // satisfied persists are immediately matched: i.e. a name without a required bitstream
+	unsatisfied []int              // unsatisfied persists depend on bitstreams as well as names matching
 	buffer      []frames.Signature // temporary - used while creating CTests
-	BM          *bytematcher.Matcher
+	bm          *bytematcher.Matcher
 }
 
 //map[string]*CTest
 
-func loadCTests(ls *persist.LoadSaver) map[string]*CTest {
-	ret := make(map[string]*CTest)
+func loadCTests(ls *persist.LoadSaver) map[string]*cTest {
+	ret := make(map[string]*cTest)
 	l := ls.LoadSmallInt()
 	for i := 0; i < l; i++ {
-		ret[ls.LoadString()] = &CTest{
-			Satisfied:   ls.LoadInts(),
-			Unsatisfied: ls.LoadInts(),
-			BM:          bytematcher.Load(ls),
+		ret[ls.LoadString()] = &cTest{
+			satisfied:   ls.LoadInts(),
+			unsatisfied: ls.LoadInts(),
+			bm:          bytematcher.Load(ls),
 		}
 	}
 	return ret
 }
 
-func saveCTests(ls *persist.LoadSaver, ct map[string]*CTest) {
+func saveCTests(ls *persist.LoadSaver, ct map[string]*cTest) {
 	ls.SaveSmallInt(len(ct))
 	for k, v := range ct {
 		ls.SaveString(k)
-		ls.SaveInts(v.Satisfied)
-		ls.SaveInts(v.Unsatisfied)
-		v.BM.Save(ls)
+		ls.SaveInts(v.satisfied)
+		ls.SaveInts(v.unsatisfied)
+		v.bm.Save(ls)
 	}
 }
 
-func (ct *CTest) add(s frames.Signature, t int) {
+func (ct *cTest) add(s frames.Signature, t int) {
 	if s == nil {
-		ct.Satisfied = append(ct.Satisfied, t)
+		ct.satisfied = append(ct.satisfied, t)
 		return
 	}
 	// if we haven't created a BM for this node yet, do it now
-	if ct.BM == nil {
-		ct.BM = bytematcher.New()
-		ct.BM.SetLowMem()
+	if ct.bm == nil {
+		ct.bm = bytematcher.New()
+		ct.bm.SetLowMem()
 	}
-	ct.Unsatisfied = append(ct.Unsatisfied, t)
+	ct.unsatisfied = append(ct.unsatisfied, t)
 	ct.buffer = append(ct.buffer, s)
 }
 
 // call for each key after all persists added
-func (ct *CTest) commit(p priority.List, prev int) error {
+func (ct *cTest) commit(p priority.List, prev int) error {
 	if ct.buffer == nil {
 		return nil
 	}
@@ -303,11 +303,11 @@ func (ct *CTest) commit(p priority.List, prev int) error {
 		}
 	}
 	if dupes {
-		_, err := ct.BM.Add(bytematcher.SignatureSet(ct.buffer), nil)
+		_, err := ct.bm.Add(bytematcher.SignatureSet(ct.buffer), nil)
 		ct.buffer = nil
 		return err
 	}
-	_, err := ct.BM.Add(bytematcher.SignatureSet(ct.buffer), p.Subset(ct.Unsatisfied[len(ct.Unsatisfied)-len(ct.buffer):], prev))
+	_, err := ct.bm.Add(bytematcher.SignatureSet(ct.buffer), p.Subset(ct.unsatisfied[len(ct.unsatisfied)-len(ct.buffer):], prev))
 	ct.buffer = nil
 	return err
 }

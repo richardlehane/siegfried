@@ -39,6 +39,7 @@ const (
 	Pronom byte = iota
 )
 
+// IdentifierLoader is a func that unmarshals an Identifer from a LoadSaver
 type IdentifierLoader func(*persist.LoadSaver) Identifier
 
 var loaders = [8]IdentifierLoader{nil, nil, nil, nil, nil, nil, nil, nil}
@@ -71,9 +72,9 @@ type Recorder interface {
 // Identification is sent by an identifier when a format matches
 type Identification interface {
 	String() string          // short text that is displayed to indicate the format match
-	Yaml() string            // long text that should be displayed to indicate the format match
-	Json() string            // JSON match response
-	Csv() []string           // CSV match response
+	YAML() string            // long text that should be displayed to indicate the format match
+	JSON() string            // JSON match response
+	CSV() []string           // CSV match response
 	Archive() config.Archive // does this format match any of the archive formats (zip, gzip, tar)
 }
 
@@ -88,6 +89,7 @@ type Matcher interface {
 // MatcherType is used by recorders to tell which type of matcher has sent a result
 type MatcherType int
 
+// Add additional Matchers here
 const (
 	ExtensionMatcher MatcherType = iota
 	ContainerMatcher

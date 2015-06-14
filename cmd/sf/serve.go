@@ -52,24 +52,24 @@ func parseRequest(w http.ResponseWriter, r *http.Request) (string, writer, bool)
 	if format, ok := vals["format"]; ok && len(format) > 0 {
 		switch format[0] {
 		case "json":
-			return "application/json", newJson(w), nr
+			return "application/json", newJSON(w), nr
 		case "csv":
-			return "text/csv", newCsv(w), nr
+			return "text/csv", newCSV(w), nr
 		case "yaml":
-			return "application/x-yaml", newYaml(w), nr
+			return "application/x-yaml", newYAML(w), nr
 		}
 	}
 	if accept := r.Header.Get("Accept"); accept != "" {
 		switch accept {
 		case "application/json":
-			return "application/json", newJson(w), nr
+			return "application/json", newJSON(w), nr
 		case "text/csv", "application/csv":
-			return "text/csv", newCsv(w), nr
+			return "text/csv", newCSV(w), nr
 		case "application/x-yaml":
-			return "application/x-yaml", newYaml(w), nr
+			return "application/x-yaml", newYAML(w), nr
 		}
 	}
-	return "application/json", newJson(w), nr
+	return "application/json", newJSON(w), nr
 }
 
 func identify(s *siegfried.Siegfried) func(w http.ResponseWriter, r *http.Request) {

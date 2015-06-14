@@ -90,7 +90,7 @@ func (tr testResult) Basis() string { return "" }
 
 type testIdentifier struct{}
 
-func (t testIdentifier) Yaml() string { return "" }
+func (t testIdentifier) YAML() string { return "" }
 
 func (t testIdentifier) Describe() [2]string { return [2]string{"a", "b"} }
 
@@ -118,10 +118,10 @@ type testIdentification struct{}
 
 func (t testIdentification) String() string { return "fmt/3" }
 
-func (t testIdentification) Yaml() string { return "" }
+func (t testIdentification) YAML() string { return "" }
 
-func (t testIdentification) Json() string { return "" }
+func (t testIdentification) JSON() string { return "" }
 
-func (t testIdentification) Csv() []string { return nil }
+func (t testIdentification) CSV() []string { return nil }
 
 func (t testIdentification) Archive() config.Archive { return 0 }

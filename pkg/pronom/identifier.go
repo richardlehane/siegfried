@@ -325,7 +325,7 @@ func quoteText(s string) string {
 	return "'" + s + "'"
 }
 
-func (id Identification) Yaml() string {
+func (id Identification) YAML() string {
 	var basis string
 	if len(id.Basis) > 0 {
 		basis = quoteText(strings.Join(id.Basis, "; "))
@@ -334,7 +334,7 @@ func (id Identification) Yaml() string {
 		id.Identifier, id.Puid, quoteText(id.Name), quoteText(id.Version), quoteText(id.Mime), basis, quoteText(id.Warning))
 }
 
-func (id Identification) Json() string {
+func (id Identification) JSON() string {
 	var basis string
 	if len(id.Basis) > 0 {
 		basis = strings.Join(id.Basis, "; ")
@@ -343,7 +343,7 @@ func (id Identification) Json() string {
 		id.Identifier, id.Puid, id.Name, id.Version, id.Mime, basis, id.Warning)
 }
 
-func (id Identification) Csv() []string {
+func (id Identification) CSV() []string {
 	var basis string
 	if len(id.Basis) > 0 {
 		basis = strings.Join(id.Basis, "; ")
