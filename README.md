@@ -32,6 +32,7 @@ Key features are:
     sf -                                       // Read list of files piped to stdin
     sf -nr DIR                                 // Don't scan subdirectories
     sf -z file.zip | DIR                       // Decompress and scan zip, tar, gzip
+    sf -hash md5                               // Include a hash of the file contents with the output (md5, sha1, sha256, and more, supported)
     sf -sig custom.sig file.ext                // Use a custom signature file
     sf -home c:\junk -sig custom.sig file.ext  // Use a custom home directory
     sf -debug file.ext                         // Scan in debug mode
@@ -72,10 +73,10 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 ## Recent Changes
 ### Version 1.2.0 (forthcoming - July'ish)
-- code sanitation: tidy, documentation, examples, tests
 - text matcher
-- -droid flag to mimic droid output (including MD5 hash)
-- support -z parameter in server mode
+- -hash flag e.g. -hash sha1 (choice of md4, md5, sha1, sha224, sha256, sha384, sha512, ripemd160, sha3_224, sha3_256, sha3_384, sha3_512)
+- -droid flag to mimic droid output
+- -z parameter now also works in server mode
 - more helpful error text on failed -update
 
 ### Version 1.1.0 (17/5/2015)
