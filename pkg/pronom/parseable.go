@@ -26,7 +26,7 @@ import (
 // to derive extension and bytematcher signatures
 type parseable interface {
 	puids() []string
-	infos() map[string]FormatInfo
+	infos() map[string]formatInfo
 	extensions() ([][]string, []string)
 	signatures() ([]frames.Signature, []string, error)
 	priorities() priority.Map
@@ -46,7 +46,7 @@ func (j *joint) puids() []string {
 	return append(j.a.puids(), j.b.puids()...)
 }
 
-func (j *joint) infos() map[string]FormatInfo {
+func (j *joint) infos() map[string]formatInfo {
 	infos := j.a.infos()
 	for k, v := range j.b.infos() {
 		infos[k] = v
@@ -106,8 +106,8 @@ func (f *filter) puids() []string {
 	return ret
 }
 
-func (f *filter) infos() map[string]FormatInfo {
-	ret, infos := make(map[string]FormatInfo), f.p.infos()
+func (f *filter) infos() map[string]formatInfo {
+	ret, infos := make(map[string]formatInfo), f.p.infos()
 	for _, v := range f.puids() {
 		ret[v] = infos[v]
 	}
@@ -183,10 +183,10 @@ func (r *reports) puids() []string {
 	return r.p
 }
 
-func (r *reports) infos() map[string]FormatInfo {
-	infos := make(map[string]FormatInfo)
+func (r *reports) infos() map[string]formatInfo {
+	infos := make(map[string]formatInfo)
 	for i, v := range r.r {
-		infos[r.p[i]] = FormatInfo{v.Name, strings.TrimSpace(v.Version), v.MIME()}
+		infos[r.p[i]] = formatInfo{v.Name, strings.TrimSpace(v.Version), v.MIME()}
 	}
 	return infos
 }
@@ -258,10 +258,10 @@ func (d *droid) puids() []string {
 	return puids
 }
 
-func (d *droid) infos() map[string]FormatInfo {
-	infos := make(map[string]FormatInfo)
+func (d *droid) infos() map[string]formatInfo {
+	infos := make(map[string]formatInfo)
 	for _, v := range d.FileFormats {
-		infos[v.Puid] = FormatInfo{v.Name, v.Version, v.MIMEType}
+		infos[v.Puid] = formatInfo{v.Name, v.Version, v.MIMEType}
 	}
 	return infos
 }

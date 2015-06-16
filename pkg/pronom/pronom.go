@@ -67,13 +67,13 @@ func newPronom() (*pronom, error) {
 }
 
 func (p *pronom) identifier() *Identifier {
-	i := &Identifier{p: p}
-	i.Name = config.Name()
-	i.Details = config.Details()
-	i.NoPriority = config.NoPriority()
-	i.Infos = p.j.infos()
-	p.Identifier = i
-	return i
+	p.Identifier = &Identifier{p: p,
+		name:       config.Name(),
+		details:    config.Details(),
+		noPriority: config.NoPriority(),
+		infos:      p.j.infos(),
+	}
+	return p.Identifier
 }
 
 // set parseables joins signatures in the DROID signature file with any extra reports and adds that to the pronom object
@@ -97,7 +97,7 @@ func (p *pronom) setParseables() error {
 		for i, sig := range sigs {
 			if puids[i] != puid {
 				puid = puids[i]
-				fmt.Printf("%s: \n", infos[puid].Name)
+				fmt.Printf("%s: \n", infos[puid].name)
 			}
 			fmt.Println(sig)
 		}
@@ -204,31 +204,31 @@ func (p *pronom) add(m core.Matcher) error {
 		return fmt.Errorf("Pronom: unknown matcher type %T", t)
 	case extensionmatcher.Matcher:
 		var exts [][]string
-		exts, p.EPuids = p.j.extensions()
+		exts, p.ePuids = p.j.extensions()
 		l, err := m.Add(extensionmatcher.SignatureSet(exts), nil)
 		if err != nil {
 			return err
 		}
-		p.EStart = l - len(p.EPuids)
+		p.eStart = l - len(p.ePuids)
 		return nil
 	case containermatcher.Matcher:
 		return p.contMatcher(m)
 	case *bytematcher.Matcher:
 		var sigs []frames.Signature
 		var err error
-		sigs, p.BPuids, err = p.j.signatures()
+		sigs, p.bPuids, err = p.j.signatures()
 		if err != nil {
 			return err
 		}
 		var plist priority.List
 		if !config.NoPriority() {
-			plist = p.pm.List(p.BPuids)
+			plist = p.pm.List(p.bPuids)
 		}
 		l, err := m.Add(bytematcher.SignatureSet(sigs), plist)
 		if err != nil {
 			return err
 		}
-		p.BStart = l - len(p.BPuids)
+		p.bStart = l - len(p.bPuids)
 	}
 	return nil
 }
@@ -298,8 +298,8 @@ func (p pronom) contMatcher(m core.Matcher) error {
 	if err != nil {
 		return err
 	}
-	p.CPuids = append(zpuids, mpuids...)
-	p.CStart = l - len(p.CPuids)
+	p.cPuids = append(zpuids, mpuids...)
+	p.cStart = l - len(p.cPuids)
 	return nil
 }
 
