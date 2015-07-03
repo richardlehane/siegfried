@@ -35,11 +35,11 @@ type Identifier struct {
 	noPriority bool // was noPriority set when built?
 	infos      map[string]formatInfo
 	eStart     int
-	ePuids     []string // slice of puids that corresponds to the extension matcher's int persists
+	ePuids     []string // slice of puids that corresponds to the extension matcher's int slice of signatures
 	cStart     int
 	cPuids     []string
 	bStart     int
-	bPuids     []string // slice of puids that corresponds to the bytematcher's int persists
+	bPuids     []string // slice of puids that corresponds to the bytematcher's int slice of signatures
 }
 
 type formatInfo struct {

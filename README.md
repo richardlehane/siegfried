@@ -72,7 +72,7 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 	sf -update
 
 ## Recent Changes
-### Version 1.2.0 (forthcoming - July'ish)
+### Version 1.2.0 (forthcoming - August'ish)
 - text matcher
 - -hash flag e.g. -hash sha1 (choice of md4, md5, sha1, sha224, sha256, sha384, sha512, ripemd160, sha3_224, sha3_256, sha3_384, sha3_512)
 - -droid flag to mimic droid output
