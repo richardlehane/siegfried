@@ -29,7 +29,7 @@
 //  	log.Fatal(err)
 //  }
 //  for id := range c {
-//  	fmt.Print(id)
+//  	fmt.Println(id)
 //  }
 package siegfried
 
@@ -67,22 +67,19 @@ type Siegfried struct {
 	buffers *siegreader.Buffers
 }
 
-// New creates a new Siegfried struct. It sets the create time to time.Now() and initializes the three matchers.
+// New creates a new Siegfried struct. It initializes the three matchers.
 //
 // Example:
 //  s := New()
 //  p, err := pronom.New() // create a new PRONOM identifier
 //  if err != nil {
-//  	// handle err
+//  	log.Fatal(err)
 //  }
 //  err = s.Add(p) // add the identifier to the Siegfried
 //  if err != nil {
-//  	// handle err
+//  	log.Fatal(err)
 //  }
 //  err = s.Save("pronom.sig") // save the Siegfried
-//  if err != nil {
-//  	// handle err
-//  }
 func New() *Siegfried {
 	s := &Siegfried{}
 	s.C = time.Now()
@@ -205,7 +202,7 @@ func (s *Siegfried) String() string {
 func (s *Siegfried) YAML() string {
 	version := config.Version()
 	str := fmt.Sprintf(
-		"---\nsiegfried   : %d.%d.%d\nscandate    : %v\npersist   : %s\ncreated     : %v\nidentifiers : \n",
+		"---\nsiegfried   : %d.%d.%d\nscandate    : %v\nsignature   : %s\ncreated     : %v\nidentifiers : \n",
 		version[0], version[1], version[2],
 		time.Now().Format(time.RFC3339),
 		config.SignatureBase(),
@@ -222,7 +219,7 @@ func (s *Siegfried) YAML() string {
 func (s *Siegfried) JSON() string {
 	version := config.Version()
 	str := fmt.Sprintf(
-		"{\"siegfried\":\"%d.%d.%d\",\"scandate\":\"%v\",\"persist\":\"%s\",\"created\":\"%v\",\"identifiers\":[",
+		"{\"siegfried\":\"%d.%d.%d\",\"scandate\":\"%v\",\"signature\":\"%s\",\"created\":\"%v\",\"identifiers\":[",
 		version[0], version[1], version[2],
 		time.Now().Format(time.RFC3339),
 		config.SignatureBase(),
@@ -324,7 +321,7 @@ func (s *Siegfried) InspectTestTree(tti int) string {
 }
 
 // Buffer returns the last buffer inspected
-// The purpose is to prevent unnecessary double-up of IO e.g. when unzipping files post-identification
+// This prevents unnecessary double-up of IO e.g. when unzipping files post-identification
 func (s *Siegfried) Buffer() siegreader.Buffer {
 	last := s.buffers.Last()
 	last.SetQuit(make(chan struct{})) // may have already closed the quit channel

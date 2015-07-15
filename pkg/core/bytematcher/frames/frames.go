@@ -26,15 +26,15 @@ import (
 
 // Frame encapsulates a pattern with offset information, mediating between the pattern and the bytestream.
 type Frame interface {
-	Match([]byte) (bool, []int)  // Match the byte sequence in a L-R direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
-	MatchR([]byte) (bool, []int) // Match the byte seqeuence in a reverse (R-L) direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
+	Match([]byte) (bool, []int)  // Match the enclosed pattern against the byte slice in a L-R direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
+	MatchR([]byte) (bool, []int) // Match the enclosed pattern against the byte slice in a reverse (R-L) direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
 	Equals(Frame) bool
 	String() string
 	Linked(Frame, int, int) bool // Is a frame linked to a preceding frame (by a preceding or succeding relationship) with an offset and range that is less than the supplied ints?
 	Min() int                    // minimum offset
 	Max() int                    // maximum offset. Return -1 for no limit (wildcard, *)
 	Pat() patterns.Pattern
-	Save(*persist.LoadSaver)
+	Save(*persist.LoadSaver) // Save a frame to a LoadSaver. The first byte written should be the identifying byte provided to Register().
 
 	// The following methods are inherited from the enclosed OffType
 	Orientation() OffType
@@ -46,6 +46,7 @@ type Frame interface {
 	Sequences() []patterns.Sequence
 }
 
+// Loader is any function that accepts a persist.LoadSaver and returns a Frame.
 type Loader func(*persist.LoadSaver) Frame
 
 const (
@@ -57,10 +58,13 @@ const (
 
 var loaders = [8]Loader{loadFixed, loadWindow, loadWild, loadWildMin, nil, nil, nil, nil}
 
+// Register an additional Loader.
+// Must provide an integer between 4 and 7 (the first four loaders are taken by the standard four frames).
 func Register(id byte, l Loader) {
 	loaders[int(id)] = l
 }
 
+// Load a frame from a persist.LoadSaver
 func Load(ls *persist.LoadSaver) Frame {
 	id := ls.LoadByte()
 	l := loaders[int(id)]
@@ -73,8 +77,10 @@ func Load(ls *persist.LoadSaver) Frame {
 	return l(ls)
 }
 
+// OffType is the type of offset
 type OffType uint8
 
+// Four offset types are supported
 const (
 	BOF  OffType = iota // beginning of file offset
 	PREV                // offset from previous frame
@@ -82,6 +88,7 @@ const (
 	EOF                 // end of file offset
 )
 
+// OffString is an exported array of strings representing each of the four offset types
 var OffString = [...]string{"B", "P", "S", "E"}
 
 // Orientation returns the offset type of the frame which must be either BOF, PREV, SUCC or EOF
@@ -89,10 +96,10 @@ func (o OffType) Orientation() OffType {
 	return o
 }
 
-// Switchoff returns a new offset type according to a given set of rules. These are:
+// SwitchOff returns a new offset type according to a given set of rules. These are:
 // 	- PREV -> SUCC
 // 	- SUCC and EOF -> PREV
-// This is helpful when changing the orientation of a frame (for example to allow right-left searching)
+// This is helpful when changing the orientation of a frame (for example to allow right-left searching).
 func (o OffType) SwitchOff() OffType {
 	switch o {
 	case PREV:
@@ -104,7 +111,7 @@ func (o OffType) SwitchOff() OffType {
 	}
 }
 
-// Generates Fixed, Window, Wild and WildMin frames. The offsets argument controls what type of frame is created:
+// NewFrame generates Fixed, Window, Wild and WildMin frames. The offsets argument controls what type of frame is created:
 // 	- for a Wild frame, give no offsets or give a max offset of < 0 and a min of < 1
 // 	- for a WildMin frame, give one offset, or give a max offset of < 0 and a min of > 0
 // 	- for a Fixed frame, give two offsets that are both >= 0 and that are equal to each other
@@ -116,16 +123,14 @@ func NewFrame(typ OffType, pat patterns.Pattern, offsets ...int) Frame {
 	case 1:
 		if offsets[0] > 0 {
 			return Frame(WildMin{typ, offsets[0], pat})
-		} else {
-			return Frame(Wild{typ, pat})
 		}
+		return Frame(Wild{typ, pat})
 	}
 	if offsets[1] < 0 {
 		if offsets[0] > 0 {
 			return Frame(WildMin{typ, offsets[0], pat})
-		} else {
-			return Frame(Wild{typ, pat})
 		}
+		return Frame(Wild{typ, pat})
 	}
 	if offsets[0] < 0 {
 		offsets[0] = 0
@@ -166,7 +171,7 @@ func NonZero(f Frame) bool {
 	return true
 }
 
-// Total length is sum of the maximum length of the enclosed pattern and the maximum offset.
+// TotalLength is sum of the maximum length of the enclosed pattern and the maximum offset.
 func TotalLength(f Frame) int {
 	_, l := f.Length()
 	return l + f.Max()
@@ -179,6 +184,7 @@ type Fixed struct {
 	patterns.Pattern
 }
 
+// Match the enclosed pattern against the byte slice in a L-R direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
 func (f Fixed) Match(b []byte) (bool, []int) {
 	if f.Off >= len(b) {
 		return false, nil
@@ -189,6 +195,7 @@ func (f Fixed) Match(b []byte) (bool, []int) {
 	return false, nil
 }
 
+// MatchR matches the enclosed pattern against the byte slice in a reverse (R-L) direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
 func (f Fixed) MatchR(b []byte) (bool, []int) {
 	if f.Off >= len(b) {
 		return false, nil
@@ -265,6 +272,7 @@ type Window struct {
 	patterns.Pattern
 }
 
+// Match the enclosed pattern against the byte slice in a L-R direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
 func (w Window) Match(b []byte) (bool, []int) {
 	ret := make([]int, 0, 1)
 	min, max := w.MinOff, w.MaxOff
@@ -291,6 +299,7 @@ func (w Window) Match(b []byte) (bool, []int) {
 	return false, nil
 }
 
+// MatchR matches the enclosed pattern against the byte slice in a reverse (R-L) direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
 func (w Window) MatchR(b []byte) (bool, []int) {
 	ret := make([]int, 0, 1)
 	min, max := w.MinOff, w.MaxOff
@@ -383,6 +392,7 @@ type Wild struct {
 	patterns.Pattern
 }
 
+// Match the enclosed pattern against the byte slice in a L-R direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
 func (w Wild) Match(b []byte) (bool, []int) {
 	ret := make([]int, 0, 1)
 	min, max := 0, len(b)
@@ -404,6 +414,7 @@ func (w Wild) Match(b []byte) (bool, []int) {
 	return false, nil
 }
 
+// MatchR matches the enclosed pattern against the byte slice in a reverse (R-L) direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
 func (w Wild) MatchR(b []byte) (bool, []int) {
 	ret := make([]int, 0, 1)
 	min, max := 0, len(b)
@@ -483,6 +494,7 @@ type WildMin struct {
 	patterns.Pattern
 }
 
+// Match the enclosed pattern against the byte slice in a L-R direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
 func (w WildMin) Match(b []byte) (bool, []int) {
 	ret := make([]int, 0, 1)
 	min, max := w.MinOff, len(b)
@@ -504,6 +516,7 @@ func (w WildMin) Match(b []byte) (bool, []int) {
 	return false, nil
 }
 
+// MatchR matches the enclosed pattern against the byte slice in a reverse (R-L) direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
 func (w WildMin) MatchR(b []byte) (bool, []int) {
 	ret := make([]int, 0, 1)
 	min, max := w.MinOff, len(b)

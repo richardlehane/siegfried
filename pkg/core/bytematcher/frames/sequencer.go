@@ -16,16 +16,17 @@ package frames
 
 import "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
 
-// a Sequencer turns sequential frames into a set of plain byte sequences. The set represents possible choices.
+// Sequencer turns sequential frames into a set of plain byte sequences. The set represents possible choices.
 type Sequencer func(Frame) [][]byte
 
+// NewSequencer creates a Sequencer (reversed if true).
 func NewSequencer(rev bool) Sequencer {
-	ret := make([][]byte, 0)
+	var ret [][]byte
 	return func(f Frame) [][]byte {
 		var s []patterns.Sequence
 		if rev {
 			s = f.Sequences()
-			for i, _ := range s {
+			for i := range s {
 				s[i] = s[i].Reverse()
 			}
 		} else {

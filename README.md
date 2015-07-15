@@ -78,6 +78,8 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 - -droid flag to mimic droid output
 - -z parameter now also works in server mode
 - more helpful error text on failed -update
+- bugfix: [detect encoding of zip filenames]() reported by [Dragan Espenschied](https://github.com/richardlehane/siegfried/issues/42)
+- bugfix: ([mscfb](https://github.com/richardlehane/mscfb/commit/f790430b648469e862b40f599171e361e30442e7)) reported by [Dragan Espenschied](https://github.com/richardlehane/siegfried/issues/41)
 
 ### Version 1.1.0 (17/5/2015)
 - scan within archive formats (zip, tar, gzip) with -z flag

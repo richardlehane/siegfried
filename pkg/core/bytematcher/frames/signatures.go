@@ -14,7 +14,7 @@
 
 package frames
 
-// Signatures are just slices of frames
+// Signature is just a slice of frames
 type Signature []Frame
 
 func (s Signature) String() string {
@@ -28,6 +28,7 @@ func (s Signature) String() string {
 	return "(" + str + ")"
 }
 
+// Equals tests equality of two signatures
 func (s Signature) Equals(s1 Signature) bool {
 	if len(s) != len(s1) {
 		return false
@@ -40,7 +41,7 @@ func (s Signature) Equals(s1 Signature) bool {
 	return true
 }
 
-// Signatures can be divided into signature segments.
+// Segment divides signatures into signature segments.
 // This separation happens on wildcards or when the distance between frames is deemed too great.
 // E.g. a signature of [BOF 0: "ABCD"][PREV 0-20: "EFG"][PREV Wild: "HI"][EOF 0: "XYZ"]
 // has three segments:
@@ -80,7 +81,8 @@ func (s Signature) reverse(last bool, min int) Signature {
 	return ret
 }
 
-// wildcard previous segments are turned into wildcard succ/eof segments
+// Mirror returns a signature in which wildcard previous segments are turned into wildcard succ/eof segments.
+// If no wildcard previous segments are present, nil is returned.
 func (s Signature) Mirror() Signature {
 	bignum := 1000000
 	segments := s.Segment(bignum, bignum)
