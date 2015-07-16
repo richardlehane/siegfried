@@ -28,13 +28,13 @@ import (
 type Frame interface {
 	Match([]byte) (bool, []int)  // Match the enclosed pattern against the byte slice in a L-R direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
 	MatchR([]byte) (bool, []int) // Match the enclosed pattern against the byte slice in a reverse (R-L) direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
-	Equals(Frame) bool
+	Equals(Frame) bool           // Equals tests equality of two frames
 	String() string
-	Linked(Frame, int, int) bool // Is a frame linked to a preceding frame (by a preceding or succeding relationship) with an offset and range that is less than the supplied ints?
-	Min() int                    // minimum offset
-	Max() int                    // maximum offset. Return -1 for no limit (wildcard, *)
-	Pat() patterns.Pattern
-	Save(*persist.LoadSaver) // Save a frame to a LoadSaver. The first byte written should be the identifying byte provided to Register().
+	Min() int                    // Min returns the minimum offset a frame can appear at
+	Max() int                    // Max returns the maximum offset a frame can appear at. Returns -1 for no limit (wildcard, *)
+	Linked(Frame, int, int) bool // Linked tests whether a frame is linked to a preceding frame (by a preceding or succeding relationship) with an offset and range that is less than the supplied ints
+	Pat() patterns.Pattern       // Pat exposes the enclosed pattern
+	Save(*persist.LoadSaver)     // Save a frame to a LoadSaver. The first byte written should be the identifying byte provided to Register().
 
 	// The following methods are inherited from the enclosed OffType
 	Orientation() OffType
@@ -206,6 +206,7 @@ func (f Fixed) MatchR(b []byte) (bool, []int) {
 	return false, nil
 }
 
+// Equals tests equality of two frames
 func (f Fixed) Equals(frame Frame) bool {
 	f1, ok := frame.(Fixed)
 	if ok {
@@ -220,14 +221,17 @@ func (f Fixed) String() string {
 	return "F " + OffString[f.OffType] + ":" + strconv.Itoa(f.Off) + " " + f.Pattern.String()
 }
 
+// Min returns the minimum offset a frame can appear at
 func (f Fixed) Min() int {
 	return f.Off
 }
 
+// Max returns the maximum offset a frame can appear at. Returns -1 for no limit (wildcard, *)
 func (f Fixed) Max() int {
 	return f.Off
 }
 
+// Linked tests whether a frame is linked to a preceding frame (by a preceding or succeding relationship) with an offset and range that is less than the supplied ints
 func (f Fixed) Linked(prev Frame, maxDistance, maxRange int) bool {
 	switch f.OffType {
 	case PREV:
@@ -245,10 +249,12 @@ func (f Fixed) Linked(prev Frame, maxDistance, maxRange int) bool {
 	}
 }
 
+// Pat exposes the enclosed pattern
 func (f Fixed) Pat() patterns.Pattern {
 	return f.Pattern
 }
 
+// Save frame to a LoadSaver
 func (f Fixed) Save(ls *persist.LoadSaver) {
 	ls.SaveByte(fixedLoader)
 	ls.SaveByte(byte(f.OffType))
@@ -326,6 +332,7 @@ func (w Window) MatchR(b []byte) (bool, []int) {
 	return false, nil
 }
 
+// Equals tests equality of two frames
 func (w Window) Equals(frame Frame) bool {
 	w1, ok := frame.(Window)
 	if ok {
@@ -340,14 +347,17 @@ func (w Window) String() string {
 	return "WW " + OffString[w.OffType] + ":" + strconv.Itoa(w.MinOff) + "-" + strconv.Itoa(w.MaxOff) + " " + w.Pattern.String()
 }
 
+// Min returns the minimum offset a frame can appear at
 func (w Window) Min() int {
 	return w.MinOff
 }
 
+// Max returns the maximum offset a frame can appear at. Returns -1 for no limit (wildcard, *)
 func (w Window) Max() int {
 	return w.MaxOff
 }
 
+// Linked tests whether a frame is linked to a preceding frame (by a preceding or succeding relationship) with an offset and range that is less than the supplied ints
 func (w Window) Linked(prev Frame, maxDistance, maxRange int) bool {
 	switch w.OffType {
 	case PREV:
@@ -365,10 +375,12 @@ func (w Window) Linked(prev Frame, maxDistance, maxRange int) bool {
 	}
 }
 
+// Pat exposes the enclosed pattern
 func (w Window) Pat() patterns.Pattern {
 	return w.Pattern
 }
 
+// Save frame to a LoadSaver
 func (w Window) Save(ls *persist.LoadSaver) {
 	ls.SaveByte(windowLoader)
 	ls.SaveByte(byte(w.OffType))
@@ -436,6 +448,7 @@ func (w Wild) MatchR(b []byte) (bool, []int) {
 	return false, nil
 }
 
+// Equals tests equality of two frames
 func (w Wild) Equals(frame Frame) bool {
 	w1, ok := frame.(Wild)
 	if ok {
@@ -450,14 +463,17 @@ func (w Wild) String() string {
 	return "WL " + OffString[w.OffType] + " " + w.Pattern.String()
 }
 
+// Min returns the minimum offset a frame can appear at
 func (w Wild) Min() int {
 	return 0
 }
 
+// Max returns the maximum offset a frame can appear at. Returns -1 for no limit (wildcard, *)
 func (w Wild) Max() int {
 	return -1
 }
 
+// Linked tests whether a frame is linked to a preceding frame (by a preceding or succeding relationship) with an offset and range that is less than the supplied ints
 func (w Wild) Linked(prev Frame, maxDistance, maxRange int) bool {
 	switch w.OffType {
 	case SUCC, EOF:
@@ -470,10 +486,12 @@ func (w Wild) Linked(prev Frame, maxDistance, maxRange int) bool {
 	}
 }
 
+// Pat exposes the enclosed pattern
 func (w Wild) Pat() patterns.Pattern {
 	return w.Pattern
 }
 
+// Save frame to a LoadSaver
 func (w Wild) Save(ls *persist.LoadSaver) {
 	ls.SaveByte(wildLoader)
 	ls.SaveByte(byte(w.OffType))
@@ -538,6 +556,7 @@ func (w WildMin) MatchR(b []byte) (bool, []int) {
 	return false, nil
 }
 
+// Equals tests equality of two frames
 func (w WildMin) Equals(frame Frame) bool {
 	w1, ok := frame.(WildMin)
 	if ok {
@@ -552,14 +571,17 @@ func (w WildMin) String() string {
 	return "WM " + OffString[w.OffType] + ":" + strconv.Itoa(w.MinOff) + " " + w.Pattern.String()
 }
 
+// Min returns the minimum offset a frame can appear at
 func (w WildMin) Min() int {
 	return w.MinOff
 }
 
+// Max returns the maximum offset a frame can appear at. Returns -1 for no limit (wildcard, *)
 func (w WildMin) Max() int {
 	return -1
 }
 
+// Linked tests whether a frame is linked to a preceding frame (by a preceding or succeding relationship) with an offset and range that is less than the supplied ints
 func (w WildMin) Linked(prev Frame, maxDistance, maxRange int) bool {
 	switch w.OffType {
 	case SUCC, EOF:
@@ -572,10 +594,12 @@ func (w WildMin) Linked(prev Frame, maxDistance, maxRange int) bool {
 	}
 }
 
+// Pat exposes the enclosed pattern
 func (w WildMin) Pat() patterns.Pattern {
 	return w.Pattern
 }
 
+// Save frame to a LoadSaver
 func (w WildMin) Save(ls *persist.LoadSaver) {
 	ls.SaveByte(wildMinLoader)
 	ls.SaveByte(byte(w.OffType))

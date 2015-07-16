@@ -33,7 +33,6 @@ func init() {
 	Register(notLoader, loadNot)
 	Register(bmhLoader, loadBMH)
 	Register(rbmhLoader, loadRBMH)
-
 }
 
 func Stringify(b []byte) string {

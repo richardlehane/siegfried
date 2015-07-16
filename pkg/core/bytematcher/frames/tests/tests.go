@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package frames/test exports shared frames and signatures for use by the other bytematcher packages
+// Package tests exports shared frames and signatures for use by the other bytematcher packages
 package tests
 
 import (
