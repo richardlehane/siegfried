@@ -109,6 +109,9 @@ func (s *Siegfried) Add(i core.Identifier) error {
 		if err := i.Add(s.bm); err != nil {
 			return err
 		}
+		if err := i.Add(s.tm); err != nil {
+			return err
+		}
 		s.ids = append(s.ids, i)
 	}
 	return nil

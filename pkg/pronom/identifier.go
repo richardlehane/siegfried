@@ -185,6 +185,8 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 			idx := res.Index() - r.cStart
 			if !r.noPriority {
 				r.cscore *= 2
+			} else {
+				r.cscore = 2
 			}
 			basis := res.Basis()
 			p, t := place(idx, r.cPuids)
@@ -201,6 +203,8 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 			idx := res.Index() - r.bStart
 			if !r.noPriority {
 				r.cscore *= 2
+			} else {
+				r.cscore = 2
 			}
 			basis := res.Basis()
 			p, t := place(idx, r.bPuids)
@@ -214,7 +218,7 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 		}
 	case core.TextMatcher:
 		if res.Index() == r.tStart {
-			r.ids = add(r.ids, r.name, "x-fmt/111", r.infos["x-fmt/111"], res.Basis(), r.cscore)
+			r.ids = add(r.ids, r.name, "x-fmt/111", r.infos["x-fmt/111"], res.Basis(), 2)
 			return true
 		} else {
 			return false
