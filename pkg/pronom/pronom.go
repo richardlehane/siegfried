@@ -33,6 +33,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/containermatcher"
 	"github.com/richardlehane/siegfried/pkg/core/extensionmatcher"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
+	"github.com/richardlehane/siegfried/pkg/core/textmatcher"
 	"github.com/richardlehane/siegfried/pkg/pronom/mappings"
 )
 
@@ -229,6 +230,11 @@ func (p *pronom) add(m core.Matcher) error {
 			return err
 		}
 		p.bStart = l - len(p.bPuids)
+	case *textmatcher.Matcher:
+		if !config.NoText() {
+			l, _ := m.Add(textmatcher.SignatureSet{}, nil)
+			p.tStart = l
+		}
 	}
 	return nil
 }

@@ -46,6 +46,7 @@ var (
 	noeof       = build.Bool("noeof", false, "ignore EOF segments in signatures")
 	nopriority  = build.Bool("nopriority", false, "ignore priority rules when recording results")
 	nocontainer = build.Bool("nocontainer", false, "skip container signatures")
+	notext      = build.Bool("notext", false, "skip text matcher")
 	noreports   = build.Bool("noreports", false, "build directly from DROID file rather than PRONOM reports")
 	rng         = build.Int("range", config.Range(), "define a maximum range for segmentation")
 	distance    = build.Int("distance", config.Distance(), "define a maximum distance for segmentation")
@@ -165,6 +166,9 @@ func buildOptions() []config.Option {
 	}
 	if *nocontainer {
 		opts = append(opts, config.SetNoContainer())
+	}
+	if *notext {
+		opts = append(opts, config.SetNoText())
 	}
 	if *noreports {
 		opts = append(opts, config.SetNoReports())

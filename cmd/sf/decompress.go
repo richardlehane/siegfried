@@ -30,6 +30,7 @@ type decompressor interface {
 	reader() io.Reader
 	path() string
 	size() int64
+	mod() string
 }
 
 type zipD struct {
@@ -56,7 +57,7 @@ func (z *zipD) next() error {
 	// proceed
 	z.idx++
 	// scan past directories
-	for ; z.idx < len(z.rdr.File) && z.rdr.File[z.idx].FileHeader.FileInfo().IsDir(); z.idx++ {
+	for ; z.idx < len(z.rdr.File) && z.rdr.File[z.idx].FileInfo().IsDir(); z.idx++ {
 	}
 	if z.idx >= len(z.rdr.File) {
 		return io.EOF
@@ -76,6 +77,10 @@ func (z *zipD) path() string {
 
 func (z *zipD) size() int64 {
 	return int64(z.rdr.File[z.idx].UncompressedSize64)
+}
+
+func (z *zipD) mod() string {
+	return z.rdr.File[z.idx].ModTime().String()
 }
 
 type tarD struct {
@@ -106,6 +111,10 @@ func (t *tarD) path() string {
 
 func (t *tarD) size() int64 {
 	return t.hdr.Size
+}
+
+func (t *tarD) mod() string {
+	return t.hdr.ModTime.String()
 }
 
 type gzipD struct {
@@ -145,4 +154,8 @@ func (g *gzipD) path() string {
 
 func (g *gzipD) size() int64 {
 	return g.sz
+}
+
+func (g *gzipD) mod() string {
+	return g.rdr.ModTime.String()
 }

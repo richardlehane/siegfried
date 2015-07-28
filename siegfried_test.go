@@ -108,7 +108,7 @@ type testRecorder struct{}
 
 func (t testRecorder) Record(m core.MatcherType, r core.Result) bool { return true }
 
-func (t testRecorder) Satisfied() bool { return false }
+func (t testRecorder) Satisfied(m core.MatcherType) bool { return false }
 
 func (t testRecorder) Report(c chan core.Identification) { c <- testIdentification{} }
 

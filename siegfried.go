@@ -50,6 +50,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/extensionmatcher"
 	"github.com/richardlehane/siegfried/pkg/core/persist"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
+	"github.com/richardlehane/siegfried/pkg/core/textmatcher"
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
@@ -62,6 +63,7 @@ type Siegfried struct {
 	em core.Matcher // extensionmatcher
 	cm core.Matcher // containermatcher
 	bm core.Matcher // bytematcher
+	tm core.Matcher // textmatcher
 	// mutatable fields follow
 	ids     []core.Identifier // identifiers
 	buffers *siegreader.Buffers
@@ -86,6 +88,7 @@ func New() *Siegfried {
 	s.em = extensionmatcher.New()
 	s.cm = containermatcher.New()
 	s.bm = bytematcher.New()
+	s.tm = textmatcher.New()
 	s.buffers = siegreader.New()
 	return s
 }
@@ -119,6 +122,7 @@ func (s *Siegfried) Save(path string) error {
 	s.em.Save(ls)
 	s.cm.Save(ls)
 	s.bm.Save(ls)
+	s.tm.Save(ls)
 	ls.SaveTinyUInt(len(s.ids))
 	for _, i := range s.ids {
 		i.Save(ls)
@@ -171,6 +175,7 @@ func Load(path string) (*Siegfried, error) {
 		em: extensionmatcher.Load(ls),
 		cm: containermatcher.Load(ls),
 		bm: bytematcher.Load(ls),
+		tm: textmatcher.Load(ls),
 		ids: func() []core.Identifier {
 			ids := make([]core.Identifier, ls.LoadTinyUInt())
 			for i := range ids {
@@ -184,7 +189,7 @@ func Load(path string) (*Siegfried, error) {
 
 // String representation of a Siegfried struct
 func (s *Siegfried) String() string {
-	return fmt.Sprintf("Identifiers\n%s\nExtension Matcher\n%s\nContainer Matcher\n%s\nByte Matcher\n%s",
+	return fmt.Sprintf("Identifiers\n%s\nExtension Matcher\n%s\nContainer Matcher\n%s\nByte Matcher\n%sText Matcher\n%s",
 		func() string {
 			var str string
 			for _, i := range s.ids {
@@ -194,7 +199,8 @@ func (s *Siegfried) String() string {
 		}(),
 		s.em.String(),
 		s.cm.String(),
-		s.bm.String())
+		s.bm.String(),
+		s.tm.String())
 }
 
 // YAML representation of a Siegfried struct.
@@ -273,8 +279,9 @@ func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, e
 	}
 	satisfied := true
 	for _, rec := range recs {
-		if !rec.Satisfied() {
+		if !rec.Satisfied(core.ByteMatcher) {
 			satisfied = false
+			break
 		}
 	}
 	// Byte Matcher
@@ -283,6 +290,24 @@ func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, e
 		for v := range ids {
 			for _, rec := range recs {
 				if rec.Record(core.ByteMatcher, v) {
+					break
+				}
+			}
+		}
+	}
+	satisfied = true
+	for _, rec := range recs {
+		if !rec.Satisfied(core.TextMatcher) {
+			satisfied = false
+			break
+		}
+	}
+	// Text Matcher
+	if !satisfied {
+		ids, _ := s.tm.Identify("", buffer) // we don't care about an error here
+		for v := range ids {
+			for _, rec := range recs {
+				if rec.Record(core.TextMatcher, v) {
 					break
 				}
 			}

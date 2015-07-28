@@ -28,6 +28,7 @@ var identifier = struct {
 	noEOF       bool
 	noContainer bool
 	noPriority  bool
+	noText      bool
 }{
 	name: "pronom",
 }
@@ -63,6 +64,9 @@ func Details() string {
 	if identifier.noPriority {
 		str += "; no priorities"
 	}
+	if identifier.noText {
+		str += "; no text matcher"
+	}
 	if pronom.noreports {
 		str += "; built without reports"
 	}
@@ -96,6 +100,10 @@ func NoContainer() bool {
 
 func NoPriority() bool {
 	return identifier.noPriority
+}
+
+func NoText() bool {
+	return identifier.noText
 }
 
 // SETTERS
@@ -145,6 +153,13 @@ func SetNoContainer() func() private {
 func SetNoPriority() func() private {
 	return func() private {
 		identifier.noPriority = true
+		return private{}
+	}
+}
+
+func SetNoText() func() private {
+	return func() private {
+		identifier.noText = true
 		return private{}
 	}
 }

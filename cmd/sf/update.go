@@ -71,7 +71,7 @@ func updateSigs() (string, error) {
 	fmt.Println("... downloading latest signature file ...")
 	response, err = getHttp(u.LatestURL)
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("Siegfried: error retrieving pronom.gob.\nThis may be a network or firewall issue. See https://github.com/richardlehane/siegfried/wiki/Getting-started for manual instructions.\nSystem error: %v", err)
 	}
 	if len(response) != u.GobSize {
 		return "", fmt.Errorf("Siegfried: error retrieving pronom.gob; expecting %d bytes, got %d bytes", u.GobSize, len(response))

@@ -83,6 +83,7 @@ func identify(s *siegfried.Siegfried) func(w http.ResponseWriter, r *http.Reques
 			}
 			defer f.Close()
 			var sz int64
+			var mod string
 			osf, ok := f.(*os.File)
 			if ok {
 				info, err := osf.Stat()
@@ -90,6 +91,7 @@ func identify(s *siegfried.Siegfried) func(w http.ResponseWriter, r *http.Reques
 					handleErr(w, http.StatusInternalServerError, err)
 				}
 				sz = info.Size()
+				mod = info.ModTime().String()
 			} else {
 				sz = r.ContentLength
 			}
@@ -97,10 +99,10 @@ func identify(s *siegfried.Siegfried) func(w http.ResponseWriter, r *http.Reques
 			wr.writeHead(s)
 			c, err := s.Identify(h.Filename, f)
 			if c == nil {
-				wr.writeFile(h.Filename, sz, fmt.Errorf("failed to identify %s, got: %v", h.Filename, err), nil)
+				wr.writeFile(h.Filename, sz, mod, nil, fmt.Errorf("failed to identify %s, got: %v", h.Filename, err), nil)
 				return
 			}
-			wr.writeFile(h.Filename, sz, err, idChan(c))
+			wr.writeFile(h.Filename, sz, mod, nil, err, idChan(c))
 			wr.writeTail()
 			return
 		} else {
@@ -121,11 +123,10 @@ func identify(s *siegfried.Siegfried) func(w http.ResponseWriter, r *http.Reques
 				wr.writeTail()
 				return
 			}
-			identifyFile(wr, s, path, info.Size())
+			identifyFile(wr, s, path, info.Size(), info.ModTime().String())
 			wr.writeTail()
 			return
 		}
-
 	}
 }
 

@@ -26,7 +26,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
-type Matcher map[string][]Result
+type Matcher map[string][]result
 
 func Load(ls *persist.LoadSaver) Matcher {
 	le := ls.LoadSmallInt()
@@ -36,9 +36,9 @@ func Load(ls *persist.LoadSaver) Matcher {
 	ret := make(Matcher)
 	for i := 0; i < le; i++ {
 		k := ls.LoadString()
-		r := make([]Result, ls.LoadSmallInt())
+		r := make([]result, ls.LoadSmallInt())
 		for j := range r {
-			r[j] = Result(ls.LoadSmallInt())
+			r[j] = result(ls.LoadSmallInt())
 		}
 		ret[k] = r
 	}
@@ -62,13 +62,13 @@ func New() Matcher {
 
 type SignatureSet [][]string
 
-type Result int
+type result int
 
-func (r Result) Index() int {
+func (r result) Index() int {
 	return int(r)
 }
 
-func (r Result) Basis() string {
+func (r result) Basis() string {
 	return "extension match"
 }
 
@@ -78,7 +78,7 @@ func (e Matcher) Add(ss core.SignatureSet, p priority.List) (int, error) {
 		return -1, fmt.Errorf("Extension matcher: can't cast persist set as an EM ss")
 	}
 	var length int
-	// unless it is a new matcher, calculate current length by iterating through all the Result values
+	// unless it is a new matcher, calculate current length by iterating through all the result values
 	if len(e) > 0 {
 		for _, v := range e {
 			for _, w := range v {
@@ -87,7 +87,7 @@ func (e Matcher) Add(ss core.SignatureSet, p priority.List) (int, error) {
 				}
 			}
 		}
-		length++ // add one - because the Result values are indexes
+		length++ // add one - because the result values are indexes
 	}
 	for i, v := range sigs {
 		for _, w := range v {
@@ -100,26 +100,26 @@ func (e Matcher) Add(ss core.SignatureSet, p priority.List) (int, error) {
 func (e Matcher) add(ext string, fmt int) {
 	_, ok := e[ext]
 	if ok {
-		e[ext] = append(e[ext], Result(fmt))
+		e[ext] = append(e[ext], result(fmt))
 		return
 	}
-	e[ext] = []Result{Result(fmt)}
+	e[ext] = []result{result(fmt)}
 }
 
 func (e Matcher) Identify(name string, na siegreader.Buffer) (chan core.Result, error) {
-	res := make(chan core.Result, 10)
-	go func() {
-		ext := filepath.Ext(name)
-		if len(ext) > 0 {
-			fmts, ok := e[strings.ToLower(strings.TrimPrefix(ext, "."))]
-			if ok {
-				for _, v := range fmts {
-					res <- v
-				}
+	ext := filepath.Ext(name)
+	if len(ext) > 0 {
+		if fmts, ok := e[strings.ToLower(strings.TrimPrefix(ext, "."))]; ok {
+			res := make(chan core.Result, len(fmts))
+			for _, v := range fmts {
+				res <- v
 			}
+			close(res)
+			return res, nil
 		}
-		close(res)
-	}()
+	}
+	res := make(chan core.Result)
+	close(res)
 	return res, nil
 }
 

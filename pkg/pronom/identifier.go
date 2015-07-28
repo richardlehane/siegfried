@@ -40,6 +40,7 @@ type Identifier struct {
 	cPuids     []string
 	bStart     int
 	bPuids     []string // slice of puids that corresponds to the bytematcher's int slice of signatures
+	tStart     int      // index if registered for text matcher
 }
 
 type formatInfo struct {
@@ -66,6 +67,7 @@ func (i *Identifier) Save(ls *persist.LoadSaver) {
 	ls.SaveStrings(i.cPuids)
 	ls.SaveInt(i.bStart)
 	ls.SaveStrings(i.bPuids)
+	ls.SaveSmallInt(i.tStart)
 }
 
 func Load(ls *persist.LoadSaver) core.Identifier {
@@ -88,6 +90,7 @@ func Load(ls *persist.LoadSaver) core.Identifier {
 	i.cPuids = ls.LoadStrings()
 	i.bStart = ls.LoadInt()
 	i.bPuids = ls.LoadStrings()
+	i.tStart = ls.LoadSmallInt()
 	return i
 }
 
@@ -126,22 +129,24 @@ func (i *Identifier) Recognise(m core.MatcherType, idx int) (bool, string) {
 		if idx >= i.eStart && idx < i.eStart+len(i.ePuids) {
 			idx = idx - i.eStart
 			return true, i.name + ": " + i.ePuids[idx]
-		} else {
-			return false, ""
 		}
+		return false, ""
 	case core.ContainerMatcher:
 		if idx >= i.cStart && idx < i.cStart+len(i.cPuids) {
 			idx = idx - i.cStart
 			return true, i.name + ": " + i.cPuids[idx]
-		} else {
-			return false, ""
 		}
+		return false, ""
 	case core.ByteMatcher:
 		if idx >= i.bStart && idx < i.bStart+len(i.bPuids) {
 			return true, i.name + ": " + i.bPuids[idx]
-		} else {
-			return false, ""
 		}
+		return false, ""
+	case core.TextMatcher:
+		if idx == i.tStart {
+			return true, i.name + ": " + "x-fmt/111"
+		}
+		return false, ""
 	}
 }
 
@@ -207,6 +212,13 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 		} else {
 			return false
 		}
+	case core.TextMatcher:
+		if res.Index() == r.tStart {
+			r.ids = add(r.ids, r.name, "x-fmt/111", r.infos["x-fmt/111"], res.Basis(), r.cscore)
+			return true
+		} else {
+			return false
+		}
 	}
 }
 
@@ -222,9 +234,14 @@ func place(idx int, ids []string) (int, int) {
 	return prev + 1, prev + post + 1
 }
 
-func (r *Recorder) Satisfied() bool {
+func (r *Recorder) Satisfied(mt core.MatcherType) bool {
 	if r.cscore == 1 {
-		return false
+		if mt == core.ByteMatcher {
+			return false
+		}
+		if len(r.ids) == 0 || (len(r.ids) == 1 && r.ids[0].Puid == "x-fmt/111") {
+			return false
+		}
 	}
 	return true
 }
