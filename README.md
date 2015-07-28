@@ -72,12 +72,13 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 	sf -update
 
 ## Recent Changes
-### Version 1.2.0 (forthcoming - August'ish)
-- text matcher
-- -hash flag e.g. -hash sha1 (choice of md4, md5, sha1, sha224, sha256, sha384, sha512, ripemd160, sha3_224, sha3_256, sha3_384, sha3_512)
-- -droid flag to mimic droid output
-- -z parameter now also works in server mode
-- more helpful error text on failed -update
+### Version 1.2.0 (31/7/2015)
+- text matcher (i.e. sf README will now report a 'Plain Text File' result)
+Implemented using the text detection algorithm from file command.
+- -notext flag to suppress text matcher (roy build -notext)
+- all outputs now include file last modified time
+- -hash flag with choice of md5, sha1, sha256, sha512, crc (e.g. sf -hash md5 FILE)
+- -droid flag to mimic droid output (sf -droid FILE)
 - bugfix: [detect encoding of zip filenames]() reported by [Dragan Espenschied](https://github.com/richardlehane/siegfried/issues/42)
 - bugfix: ([mscfb](https://github.com/richardlehane/mscfb/commit/f790430b648469e862b40f599171e361e30442e7)) reported by [Dragan Espenschied](https://github.com/richardlehane/siegfried/issues/41)
 
