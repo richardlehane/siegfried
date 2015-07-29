@@ -3,6 +3,7 @@ package siegreader
 import (
 	"io"
 	"os"
+	"sync"
 )
 
 type file struct {
@@ -10,6 +11,7 @@ type file struct {
 	sz   int64
 	quit chan struct{}
 	src  *os.File
+	once *sync.Once
 	data
 
 	limited bool
@@ -49,10 +51,11 @@ func (f *file) hasQuit() bool {
 func (f *file) reachedLimit() {
 	close(f.limit)
 }
-func newFile() interface{} { return &file{} }
+func newFile() interface{} { return &file{once: &sync.Once{}} }
 
 func (f *file) setSource(src *os.File, p *datas) error {
 	// reset
+	f.once = &sync.Once{}
 	f.data = nil
 	f.limit = nil
 	f.limited = false
@@ -99,9 +102,7 @@ func (f *file) Slice(off int64, l int) ([]byte, error) {
 	if off+int64(l) <= int64(initialRead) {
 		return f.peek[int(off) : int(off)+l], err
 	}
-	if f.data == nil {
-		f.data = f.pool.get(f)
-	}
+	f.once.Do(func() { f.data = f.pool.get(f) })
 	ret := f.slice(off, l)
 	return ret, err
 }
@@ -121,9 +122,7 @@ func (f *file) EofSlice(off int64, l int) ([]byte, error) {
 	if int(f.sz-off) <= initialRead {
 		return f.peek[int(f.sz-off)-l : int(f.sz-off)], err
 	}
-	if f.data == nil {
-		f.data = f.pool.get(f)
-	}
+	f.once.Do(func() { f.data = f.pool.get(f) })
 	ret := f.eofSlice(off, l)
 	return ret, err
 }

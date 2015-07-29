@@ -179,6 +179,7 @@ func TestTip(t *testing.T) {
 }
 
 func Test363(t *testing.T) {
+	repetitions := 1000
 	expect := "fmt/363"
 	err := setup()
 	if err != nil {
@@ -196,7 +197,7 @@ func Test363(t *testing.T) {
 		return b
 	}
 	se := segy(3226)
-	for i := 0; i < 1000; i++ {
+	for i := 0; i < repetitions; i++ {
 		buf := bytes.NewReader(se)
 		c, _ := s.Identify("test.seg", buf)
 		for i := range c {
@@ -206,7 +207,7 @@ func Test363(t *testing.T) {
 		}
 	}
 	se = segy(3626)
-	for i := 0; i < 1000; i++ {
+	for i := 0; i < repetitions; i++ {
 		buf := bytes.NewReader(se)
 		c, _ := s.Identify("test2.seg", buf)
 		for i := range c {
