@@ -178,6 +178,45 @@ func TestTip(t *testing.T) {
 	}
 }
 
+func Test363(t *testing.T) {
+	expect := "fmt/363"
+	err := setup()
+	if err != nil {
+		t.Error(err)
+	}
+	segy := func(l int) []byte {
+		b := make([]byte, l)
+		for i := range b {
+			if i > 21 {
+				break
+			}
+			b[i] = 64
+		}
+		copy(b[l-9:], []byte{01, 00, 00, 00, 01, 00, 00, 01, 00})
+		return b
+	}
+	se := segy(3226)
+	for i := 0; i < 1000; i++ {
+		buf := bytes.NewReader(se)
+		c, _ := s.Identify("test.seg", buf)
+		for i := range c {
+			if i.String() != expect {
+				t.Errorf("First buffer: expecting %s, got %s", expect, i)
+			}
+		}
+	}
+	se = segy(3626)
+	for i := 0; i < 1000; i++ {
+		buf := bytes.NewReader(se)
+		c, _ := s.Identify("test2.seg", buf)
+		for i := range c {
+			if i.String() != expect {
+				t.Errorf("Second buffer: expecting %s, got %s", expect, i)
+			}
+		}
+	}
+}
+
 // Benchmarks
 func BenchmarkNew(bench *testing.B) {
 	for i := 0; i < bench.N; i++ {
