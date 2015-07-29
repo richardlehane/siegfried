@@ -47,19 +47,34 @@ func setHash() error {
 	return nil
 }
 
-func hashHeader() string {
+func hashHeader(pad bool) string {
 	switch *hashf {
 	default:
-		return "No_HASH"
+		return "NO"
 	case "md5", "MD5":
-		return "MD5_HASH"
+		if pad {
+			return "MD5   "
+		}
+		return "MD5"
 	case "sha1", "SHA1":
-		return "SHA1_HASH"
+		if pad {
+			return "SHA1  "
+		}
+		return "SHA1"
 	case "sha256", "SHA256":
-		return "SHA256_HASH"
+		if pad {
+			return "SHA256"
+		}
+		return "SHA256"
 	case "sha512", "SHA512":
-		return "SHA512_HASH"
+		if pad {
+			return "SH512"
+		}
+		return "SHA512"
 	case "crc", "CRC":
-		return "CRC_HASH"
+		if pad {
+			return "CRC   "
+		}
+		return "CRC"
 	}
 }

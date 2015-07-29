@@ -17,10 +17,13 @@ package main
 import (
 	"io"
 	"path/filepath"
+	"time"
 
 	"archive/tar"
 	"archive/zip"
 	"compress/gzip"
+
+	"github.com/richardlehane/characterize"
 
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
@@ -38,11 +41,12 @@ type zipD struct {
 	p   string
 	rdr *zip.Reader
 	rc  io.ReadCloser
+	w   writer
 }
 
-func newZip(ra io.ReaderAt, path string, sz int64) (decompressor, error) {
+func newZip(ra io.ReaderAt, path string, sz int64, w writer) (decompressor, error) {
 	zr, err := zip.NewReader(ra, sz)
-	return &zipD{idx: -1, p: path, rdr: zr}, err
+	return &zipD{idx: -1, p: path, rdr: zr, w: w}, err
 }
 
 func (z *zipD) close() {
@@ -58,6 +62,9 @@ func (z *zipD) next() error {
 	z.idx++
 	// scan past directories
 	for ; z.idx < len(z.rdr.File) && z.rdr.File[z.idx].FileInfo().IsDir(); z.idx++ {
+		if *droido {
+			z.w.writeFile(z.path(), -1, z.mod(), nil, nil, nil) // write directory with a -1 size for droid output only
+		}
 	}
 	if z.idx >= len(z.rdr.File) {
 		return io.EOF
@@ -72,7 +79,7 @@ func (z *zipD) reader() io.Reader {
 }
 
 func (z *zipD) path() string {
-	return z.p + string(filepath.Separator) + filepath.FromSlash(z.rdr.File[z.idx].Name)
+	return z.p + string(filepath.Separator) + filepath.FromSlash(characterize.ZipName(z.rdr.File[z.idx].Name))
 }
 
 func (z *zipD) size() int64 {
@@ -80,23 +87,27 @@ func (z *zipD) size() int64 {
 }
 
 func (z *zipD) mod() string {
-	return z.rdr.File[z.idx].ModTime().String()
+	return z.rdr.File[z.idx].ModTime().Format(time.RFC3339)
 }
 
 type tarD struct {
 	p   string
 	hdr *tar.Header
 	rdr *tar.Reader
+	w   writer
 }
 
-func newTar(r io.Reader, path string) (decompressor, error) {
-	return &tarD{p: path, rdr: tar.NewReader(r)}, nil
+func newTar(r io.Reader, path string, w writer) (decompressor, error) {
+	return &tarD{p: path, rdr: tar.NewReader(r), w: w}, nil
 }
 
 func (t *tarD) next() error {
 	var err error
 	// scan past directories
 	for t.hdr, err = t.rdr.Next(); err == nil && t.hdr.FileInfo().IsDir(); t.hdr, err = t.rdr.Next() {
+		if *droido {
+			t.w.writeFile(t.path(), -1, t.mod(), nil, nil, nil) // write directory with a -1 size for droid output only
+		}
 	}
 	return err
 }
@@ -114,7 +125,7 @@ func (t *tarD) size() int64 {
 }
 
 func (t *tarD) mod() string {
-	return t.hdr.ModTime.String()
+	return t.hdr.ModTime.Format(time.RFC3339)
 }
 
 type gzipD struct {
@@ -157,5 +168,5 @@ func (g *gzipD) size() int64 {
 }
 
 func (g *gzipD) mod() string {
-	return g.rdr.ModTime.String()
+	return g.rdr.ModTime.Format(time.RFC3339)
 }

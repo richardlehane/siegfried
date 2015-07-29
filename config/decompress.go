@@ -22,3 +22,15 @@ const (
 	Gzip
 	Tar
 )
+
+func (a Archive) String() string {
+	switch a {
+	case Zip:
+		return "zip"
+	case Gzip:
+		return "gzip"
+	case Tar:
+		return "tar"
+	}
+	return ""
+}

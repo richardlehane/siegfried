@@ -24,10 +24,10 @@ import (
 	"path/filepath"
 	"runtime"
 	"sync"
+	"time"
 
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/config"
-	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 
 	// Uncomment to build with profiler
@@ -59,14 +59,14 @@ type res struct {
 	path string
 	sz   int64
 	mod  string
-	c    []core.Identification
+	c    iterableID
 	err  error
 }
 
 func printer(w writer, resc chan chan res, wg *sync.WaitGroup) {
 	for rr := range resc {
 		r := <-rr
-		w.writeFile(r.path, r.sz, r.mod, nil, r.err, &idSlice{0, r.c})
+		w.writeFile(r.path, r.sz, r.mod, nil, r.err, r.c)
 		wg.Done()
 	}
 }
@@ -106,15 +106,12 @@ func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 				rchan <- res{"", 0, "", nil, fmt.Errorf("failed to identify %v, got: %v", path, err)}
 				return
 			}
-			ids := make([]core.Identification, 0, 1)
-			for id := range c {
-				ids = append(ids, id)
-			}
+			ids := makeIdSlice(idChan(c))
 			cerr := f.Close()
 			if err == nil {
 				err = cerr
 			}
-			rchan <- res{path, info.Size(), info.ModTime().String(), ids, err}
+			rchan <- res{path, info.Size(), info.ModTime().Format(time.RFC3339), ids, err}
 		}()
 		return nil
 	}
@@ -130,11 +127,11 @@ func multiIdentifyS(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 				return filepath.SkipDir
 			}
 			if *droido {
-				w.writeFile(path, -1, info.ModTime().String(), nil, nil, nil) // write directory with a -1 size for droid output only
+				w.writeFile(path, -1, info.ModTime().Format(time.RFC3339), nil, nil, nil) // write directory with a -1 size for droid output only
 			}
 			return nil
 		}
-		identifyFile(w, s, path, info.Size(), info.ModTime().String())
+		identifyFile(w, s, path, info.Size(), info.ModTime().Format(time.RFC3339))
 		return nil
 	}
 	return filepath.Walk(r, wf)
@@ -174,11 +171,11 @@ func identifyRdr(w writer, s *siegfried.Siegfried, r io.Reader, path string, sz 
 	}
 	switch a {
 	case config.Zip:
-		d, err = newZip(siegreader.ReaderFrom(b), path, sz)
+		d, err = newZip(siegreader.ReaderFrom(b), path, sz, w)
 	case config.Gzip:
 		d, err = newGzip(b, path)
 	case config.Tar:
-		d, err = newTar(siegreader.ReaderFrom(b), path)
+		d, err = newTar(siegreader.ReaderFrom(b), path, w)
 	}
 	if err != nil {
 		w.writeFile(path, sz, mod, nil, fmt.Errorf("failed to decompress %s, got: %v", path, err), nil)
@@ -288,7 +285,7 @@ func main() {
 			if err != nil || info.IsDir() {
 				w.writeFile(scanner.Text(), 0, "", nil, fmt.Errorf("failed to identify %s (in scanning mode, inputs must all be files and not directories), got: %v", scanner.Text(), err), nil)
 			} else {
-				identifyFile(w, s, scanner.Text(), info.Size(), info.ModTime().String())
+				identifyFile(w, s, scanner.Text(), info.Size(), info.ModTime().Format(time.RFC3339))
 			}
 		}
 		w.writeTail()
@@ -318,7 +315,7 @@ func main() {
 	}
 
 	w.writeHead(s)
-	identifyFile(w, s, flag.Arg(0), info.Size(), info.ModTime().String())
+	identifyFile(w, s, flag.Arg(0), info.Size(), info.ModTime().Format(time.RFC3339))
 	w.writeTail()
 	os.Exit(0)
 }

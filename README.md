@@ -74,13 +74,12 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 ## Recent Changes
 ### Version 1.2.0 (31/7/2015)
 - text matcher (i.e. sf README will now report a 'Plain Text File' result)
-Implemented using the text detection algorithm from file command.
 - -notext flag to suppress text matcher (roy build -notext)
 - all outputs now include file last modified time
 - -hash flag with choice of md5, sha1, sha256, sha512, crc (e.g. sf -hash md5 FILE)
 - -droid flag to mimic droid output (sf -droid FILE)
 - bugfix: [detect encoding of zip filenames]() reported by [Dragan Espenschied](https://github.com/richardlehane/siegfried/issues/42)
-- bugfix: ([mscfb](https://github.com/richardlehane/mscfb/commit/f790430b648469e862b40f599171e361e30442e7)) reported by [Dragan Espenschied](https://github.com/richardlehane/siegfried/issues/41)
+- bugfix: [mscfb](https://github.com/richardlehane/mscfb/commit/f790430b648469e862b40f599171e361e30442e7) reported by [Dragan Espenschied](https://github.com/richardlehane/siegfried/issues/41)
 
 ### Version 1.1.0 (17/5/2015)
 - scan within archive formats (zip, tar, gzip) with -z flag
@@ -89,7 +88,7 @@ Implemented using the text detection algorithm from file command.
 - support bitmask patterns
 - mirror bof patterns as eof patterns where both roy -bof and -eof limits set
 - 'sf -' reads files piped to stdin
-- bugfix: ([mscfb](https://github.com/richardlehane/mscfb/commit/22552265cefc80b400ff64156155f53a5d5751e6)) reported by [Pascal Aantz](https://github.com/richardlehane/siegfried/issues/32)
+- bugfix: [mscfb](https://github.com/richardlehane/mscfb/commit/22552265cefc80b400ff64156155f53a5d5751e6) reported by [Pascal Aantz](https://github.com/richardlehane/siegfried/issues/32)
 - bugfix: race condition in scorer (affected tip golang)
 - archivematica build: fpr server
 
