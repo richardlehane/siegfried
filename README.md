@@ -32,7 +32,7 @@ Key features are:
     sf -                                       // Read list of files piped to stdin
     sf -nr DIR                                 // Don't scan subdirectories
     sf -z file.zip | DIR                       // Decompress and scan zip, tar, gzip
-    sf -hash md5                               // Include a hash of the file contents with the output (md5, sha1, sha256, and more, supported)
+    sf -hash md5                               // Calculate md5, sha1, sha256, sha512, or crc hash
     sf -sig custom.sig file.ext                // Use a custom signature file
     sf -home c:\junk -sig custom.sig file.ext  // Use a custom home directory
     sf -debug file.ext                         // Scan in debug mode
@@ -78,7 +78,7 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 - all outputs now include file last modified time
 - -hash flag with choice of md5, sha1, sha256, sha512, crc (e.g. sf -hash md5 FILE)
 - -droid flag to mimic droid output (sf -droid FILE)
-- bugfix: [detect encoding of zip filenames]() reported by [Dragan Espenschied](https://github.com/richardlehane/siegfried/issues/42)
+- bugfix: [detect encoding of zip filenames](https://github.com/richardlehane/siegfried/commit/0c92c52d3d709e1a9b2822fa182ebd1847a6c394) reported by [Dragan Espenschied](https://github.com/richardlehane/siegfried/issues/42)
 - bugfix: [mscfb](https://github.com/richardlehane/mscfb/commit/f790430b648469e862b40f599171e361e30442e7) reported by [Dragan Espenschied](https://github.com/richardlehane/siegfried/issues/41)
 
 ### Version 1.1.0 (17/5/2015)
