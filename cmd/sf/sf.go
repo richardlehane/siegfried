@@ -171,17 +171,22 @@ func identifyRdr(w writer, s *siegfried.Siegfried, r io.Reader, path string, sz 
 	}
 	switch a {
 	case config.Zip:
-		d, err = newZip(siegreader.ReaderFrom(b), path, sz, w)
+		d, err = newZip(siegreader.ReaderFrom(b), path, sz)
 	case config.Gzip:
 		d, err = newGzip(b, path)
 	case config.Tar:
-		d, err = newTar(siegreader.ReaderFrom(b), path, w)
+		d, err = newTar(siegreader.ReaderFrom(b), path)
 	}
 	if err != nil {
 		w.writeFile(path, sz, mod, nil, fmt.Errorf("failed to decompress %s, got: %v", path, err), nil)
 		return
 	}
 	for err = d.next(); err == nil; err = d.next() {
+		if *droido {
+			for _, v := range d.dirs() {
+				w.writeFile(v, -1, "", nil, nil, nil)
+			}
+		}
 		identifyRdr(w, s, d.reader(), d.path(), d.size(), d.mod())
 	}
 }

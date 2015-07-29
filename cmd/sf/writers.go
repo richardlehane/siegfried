@@ -275,6 +275,7 @@ func (d *droidWriter) writeFile(p string, sz int64, mod string, checksum []byte,
 		} else {
 			d.rec[8], d.rec[11] = "", ""
 		}
+		d.rec[3] = clearArchivePath(d.rec[2], d.rec[3])
 		d.w.Write(d.rec)
 		return 0
 	}
@@ -291,6 +292,7 @@ func (d *droidWriter) writeFile(p string, sz int64, mod string, checksum []byte,
 	if nids.ids[0].String() == "UNKNOWN" {
 		d.rec[5], d.rec[8], d.rec[11], d.rec[13] = "", "File", "FALSE", "0"
 		d.rec[14], d.rec[15], d.rec[16], d.rec[17] = "", "", "", ""
+		d.rec[3] = clearArchivePath(d.rec[2], d.rec[3])
 		d.w.Write(d.rec)
 		return 0
 	}
@@ -306,6 +308,7 @@ func (d *droidWriter) writeFile(p string, sz int64, mod string, checksum []byte,
 		fields := id.CSV()
 		d.rec[5], d.rec[11] = getMethod(fields[5]), mismatch(fields[6])
 		d.rec[14], d.rec[15], d.rec[16], d.rec[17] = fields[1], fields[4], fields[2], fields[3]
+		d.rec[3] = clearArchivePath(d.rec[2], d.rec[3])
 		d.w.Write(d.rec)
 	}
 	return arc
@@ -315,6 +318,7 @@ func (d *droidWriter) writeTail() { d.w.Flush() }
 
 func (d *droidWriter) processPath(p string) (parent, uri, path, name, ext string) {
 	path, _ = filepath.Abs(p)
+	path = strings.TrimSuffix(path, string(filepath.Separator))
 	name = filepath.Base(path)
 	dir := filepath.Dir(path)
 	par, ok := d.parents[dir]
@@ -330,10 +334,19 @@ func (d *droidWriter) processPath(p string) (parent, uri, path, name, ext string
 }
 
 func toUri(parenturi, parentarc, base string) string {
-	if len(parentarc) < 0 {
+	if len(parentarc) > 0 {
 		parenturi = parentarc + ":" + parenturi + "!"
 	}
 	return parenturi + "/" + base
+}
+
+func clearArchivePath(uri, path string) string {
+	if strings.HasPrefix(uri, config.Zip.String()) ||
+		strings.HasPrefix(uri, config.Tar.String()) ||
+		strings.HasPrefix(uri, config.Gzip.String()) {
+		path = ""
+	}
+	return path
 }
 
 func getMethod(basis string) string {

@@ -17,6 +17,7 @@ package main
 import (
 	"io"
 	"path/filepath"
+	"strings"
 	"time"
 
 	"archive/tar"
@@ -34,19 +35,20 @@ type decompressor interface {
 	path() string
 	size() int64
 	mod() string
+	dirs() []string
 }
 
 type zipD struct {
-	idx int
-	p   string
-	rdr *zip.Reader
-	rc  io.ReadCloser
-	w   writer
+	idx     int
+	p       string
+	rdr     *zip.Reader
+	rc      io.ReadCloser
+	written map[string]bool
 }
 
-func newZip(ra io.ReaderAt, path string, sz int64, w writer) (decompressor, error) {
+func newZip(ra io.ReaderAt, path string, sz int64) (decompressor, error) {
 	zr, err := zip.NewReader(ra, sz)
-	return &zipD{idx: -1, p: path, rdr: zr, w: w}, err
+	return &zipD{idx: -1, p: path, rdr: zr}, err
 }
 
 func (z *zipD) close() {
@@ -62,9 +64,6 @@ func (z *zipD) next() error {
 	z.idx++
 	// scan past directories
 	for ; z.idx < len(z.rdr.File) && z.rdr.File[z.idx].FileInfo().IsDir(); z.idx++ {
-		if *droido {
-			z.w.writeFile(z.path(), -1, z.mod(), nil, nil, nil) // write directory with a -1 size for droid output only
-		}
 	}
 	if z.idx >= len(z.rdr.File) {
 		return io.EOF
@@ -90,24 +89,28 @@ func (z *zipD) mod() string {
 	return z.rdr.File[z.idx].ModTime().Format(time.RFC3339)
 }
 
-type tarD struct {
-	p   string
-	hdr *tar.Header
-	rdr *tar.Reader
-	w   writer
+func (z *zipD) dirs() []string {
+	if z.written == nil {
+		z.written = make(map[string]bool)
+	}
+	return dirs(z.p, characterize.ZipName(z.rdr.File[z.idx].Name), z.written)
 }
 
-func newTar(r io.Reader, path string, w writer) (decompressor, error) {
-	return &tarD{p: path, rdr: tar.NewReader(r), w: w}, nil
+type tarD struct {
+	p       string
+	hdr     *tar.Header
+	rdr     *tar.Reader
+	written map[string]bool
+}
+
+func newTar(r io.Reader, path string) (decompressor, error) {
+	return &tarD{p: path, rdr: tar.NewReader(r)}, nil
 }
 
 func (t *tarD) next() error {
 	var err error
 	// scan past directories
 	for t.hdr, err = t.rdr.Next(); err == nil && t.hdr.FileInfo().IsDir(); t.hdr, err = t.rdr.Next() {
-		if *droido {
-			t.w.writeFile(t.path(), -1, t.mod(), nil, nil, nil) // write directory with a -1 size for droid output only
-		}
 	}
 	return err
 }
@@ -126,6 +129,13 @@ func (t *tarD) size() int64 {
 
 func (t *tarD) mod() string {
 	return t.hdr.ModTime.Format(time.RFC3339)
+}
+
+func (t *tarD) dirs() []string {
+	if t.written == nil {
+		t.written = make(map[string]bool)
+	}
+	return dirs(t.p, t.hdr.Name, t.written)
 }
 
 type gzipD struct {
@@ -169,4 +179,24 @@ func (g *gzipD) size() int64 {
 
 func (g *gzipD) mod() string {
 	return g.rdr.ModTime.Format(time.RFC3339)
+}
+
+func (t *gzipD) dirs() []string {
+	return nil
+}
+
+func dirs(path, name string, written map[string]bool) []string {
+	ds := strings.Split(filepath.ToSlash(name), "/")
+	if len(ds) > 1 {
+		var ret []string
+		for _, p := range ds[:len(ds)-1] {
+			path = path + string(filepath.Separator) + p
+			if !written[path] {
+				ret = append(ret, path)
+				written[path] = true
+			}
+		}
+		return ret
+	}
+	return nil
 }
