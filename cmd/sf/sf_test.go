@@ -180,6 +180,7 @@ func TestTip(t *testing.T) {
 
 func Test363(t *testing.T) {
 	repetitions := 10000
+	iter := 0
 	expect := "fmt/363"
 	err := setup()
 	if err != nil {
@@ -201,8 +202,9 @@ func Test363(t *testing.T) {
 		buf := bytes.NewReader(se)
 		c, _ := s.Identify("test.seg", buf)
 		for i := range c {
+			iter++
 			if i.String() != expect {
-				t.Errorf("First buffer: expecting %s, got %s", expect, i)
+				t.Errorf("First buffer on %d iteration: expecting %s, got %s", iter, expect, i)
 			}
 		}
 	}
@@ -212,7 +214,7 @@ func Test363(t *testing.T) {
 		c, _ := s.Identify("test2.seg", buf)
 		for i := range c {
 			if i.String() != expect {
-				t.Errorf("Second buffer: expecting %s, got %s", expect, i)
+				t.Errorf("Second buffer on %d iteration: expecting %s, got %s", iter, expect, i)
 			}
 		}
 	}

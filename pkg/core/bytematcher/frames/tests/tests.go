@@ -70,6 +70,20 @@ var TestFmts = map[int]Signature{
 		Window{PREV, 1, 512, patterns.Sequence("%%+ procset Adobe_Illustrator")},
 		Fixed{PREV, 0, patterns.Choice{patterns.Sequence("_AI3"), patterns.Sequence("A_AI3")}},
 	},
+	363: Signature{
+		Window{BOF, 0, 320, patterns.Sequence("@@@@@@@@@@@@@@@@@@@@@@")},
+		Fixed{BOF, 3200, patterns.Sequence{0, 0}},
+		Fixed{PREV, 15, patterns.Not{patterns.Sequence{0}}},
+		Fixed{PREV, 3, patterns.Not{patterns.Sequence{0}}},
+		Fixed{PREV, 2, patterns.Choice{
+			patterns.Sequence{1, 0},
+			patterns.List{
+				patterns.Sequence{0},
+				patterns.Sequence{8}, // Actual signature has range here
+			},
+		},
+		},
+	},
 }
 
 // Shared test signatures (exported so they can be used by the other bytematcher packages)

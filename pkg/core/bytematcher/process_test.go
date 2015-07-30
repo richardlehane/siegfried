@@ -115,3 +115,23 @@ func TestProcessFmt134(t *testing.T) {
 		}
 	}
 }
+
+func TestProcessFmt363(t *testing.T) {
+	b := New()
+	b.addSignature(tests.TestFmts[363])
+	saver := persist.NewLoadSaver(nil)
+	b.Save(saver)
+	loader := persist.NewLoadSaver(saver.Bytes())
+	b = Load(loader)
+	if len(b.keyFrames[0]) != 8 {
+		for _, v := range b.keyFrames[0] {
+			t.Errorf("%s\n", v)
+		}
+	}
+	for _, te := range b.tests {
+		te.maxLeftDistance = maxLength(te.left)
+		te.maxRightDistance = maxLength(te.right)
+		t.Error(te.maxLeftDistance)
+		t.Error(te.maxRightDistance)
+	}
+}
