@@ -179,7 +179,7 @@ func TestTip(t *testing.T) {
 }
 
 func Test363(t *testing.T) {
-	repetitions := 1000
+	repetitions := 10000
 	expect := "fmt/363"
 	err := setup()
 	if err != nil {
