@@ -72,7 +72,7 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 	b.start(true) // start bof matcher if not yet started
 	var bchan chan wac.Result
 	bchan = b.bAho.Index(rdr)
-	for br := range bchan {
+	/*for br := range bchan {
 		if br.Index[0] == -1 {
 			incoming <- progressStrike(br.Offset, false)
 			if br.Offset > 2048 {
@@ -92,7 +92,7 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 		close(incoming)
 		return
 	default:
-	}
+	}*/
 
 	// Check EOF frame tests
 	efchan := b.eofFrames.index(buf, true, quit)
