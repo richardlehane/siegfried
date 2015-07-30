@@ -12,3 +12,4 @@ install:
   - go get github.com/richardlehane/siegfried/cmd/sf
 script:
   - go test github.com/richardlehane/siegfried/cmd/sf
+sudo: false
