@@ -478,7 +478,7 @@ func (s *scorer) testStrike(st strike) bool {
 	for i, p := range partials {
 		if p.l == t.incomplete[i].l && p.r == t.incomplete[i].r {
 			kf := t.incomplete[i].kf
-			if s.bm.keyFrames[kf[0]][kf[1]].check(st.offset) }// && s.waitSet.Check(kf[0]) {
+			if s.bm.keyFrames[kf[0]][kf[1]].check(st.offset) { // && s.waitSet.Check(kf[0]) {
 				if !p.l {
 					p.ldistances = []int{0}
 				}
