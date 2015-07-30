@@ -97,6 +97,7 @@ type kfFilter struct {
 	idx int
 	fdx int
 	kfs []keyFrameID
+	nfs []keyFrameID
 }
 
 func (k *kfFilter) Next() int {
@@ -109,15 +110,15 @@ func (k *kfFilter) Next() int {
 
 func (k *kfFilter) Mark(t bool) {
 	if t {
-		k.kfs[k.fdx] = k.kfs[k.idx-1]
+		k.nfs[k.fdx] = k.kfs[k.idx-1]
 		k.fdx++
 	}
 }
 
 func filterKF(kfs []keyFrameID, ws *priority.WaitSet) []keyFrameID {
-	f := &kfFilter{kfs: kfs}
+	f := &kfFilter{kfs: kfs, nfs: make([]keyFrameID, len(kfs))}
 	ws.ApplyFilter(f)
-	return f.kfs[:f.fdx]
+	return f.nfs[:f.fdx]
 }
 
 // Turn a signature segment into a keyFrame and left and right frame slices.
