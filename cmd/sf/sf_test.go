@@ -12,6 +12,7 @@ import (
 
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/config"
+	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
 var testhome = flag.String("testhome", filepath.Join("..", "roy", "data"), "override the default home directory")
@@ -204,17 +205,29 @@ func Test363(t *testing.T) {
 		for i := range c {
 			iter++
 			if i.String() != expect {
-				t.Errorf("First buffer on %d iteration: expecting %s, got %s", iter, expect, i)
+				sbuf := s.Buffer()
+				unequal := false
+				if !bytes.Equal(se, siegreader.Bytes(sbuf)) {
+					unequal = true
+				}
+				t.Errorf("First buffer on %d iteration: expecting %s, got %s, buffer equality test is %v", iter, expect, i, unequal)
 			}
 		}
 	}
+	iter = 0
 	se = segy(3626)
 	for i := 0; i < repetitions; i++ {
 		buf := bytes.NewReader(se)
 		c, _ := s.Identify("test2.seg", buf)
 		for i := range c {
+			iter++
 			if i.String() != expect {
-				t.Errorf("Second buffer on %d iteration: expecting %s, got %s", iter, expect, i)
+				sbuf := s.Buffer()
+				unequal := false
+				if !bytes.Equal(se, siegreader.Bytes(sbuf)) {
+					unequal = true
+				}
+				t.Errorf("Second buffer on %d iteration: expecting %s, got %s, buffer equality test is %v", iter, expect, i, unequal)
 			}
 		}
 	}
