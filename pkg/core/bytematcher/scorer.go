@@ -155,7 +155,7 @@ func (c *cacheItem) push(st strike) bool {
 }
 
 // pops a strike from the item. Changes the satisfying state if returning the first strike. Returns strike and the satisfying state.
-func (c *cacheItem) pop() (strike, bool) {
+func (c *cacheItem) pop(s *scorer) (strike, bool) {
 	ret := c.first
 	c.mu.Lock()
 	defer c.mu.Unlock()
@@ -163,6 +163,7 @@ func (c *cacheItem) pop() (strike, bool) {
 		// have we exhausted the cache?
 		if c.strikeIdx > len(c.successive)-1 {
 			c.satisfying = false // mark that no longer in a satisfying state - side effect ok as only satisfy loop calls pop
+			s.unmarkPotentials(c.potentials)
 			return ret, false
 		}
 		ret.offset, ret.length = c.successive[c.strikeIdx][0], int(c.successive[c.strikeIdx][1])
@@ -230,24 +231,17 @@ func (s *scorer) satisfy(c *cacheItem) {
 	s.queue.Add(1)
 	go func() {
 		defer s.queue.Done()
-		strike, ok := c.pop()
-		if !ok {
-			c.mu.Lock()
-			c.satisfying = false
-			s.unmarkPotentials(c.potentials)
-			c.mu.Unlock()
+		strike, ok := c.pop(s)
+		if !ok { // drained all in the cache
 			return
 		}
+		// match with nothing better to wait for - kill the score routine
 		if s.testStrike(strike) {
 			return
 		}
 		for {
-			strike, ok = c.pop()
+			strike, ok = c.pop(s)
 			if !ok {
-				c.mu.Lock()
-				c.satisfying = false
-				s.unmarkPotentials(c.potentials)
-				c.mu.Unlock()
 				return
 			}
 			pots := filterKF(c.potentials, s.waitSet)
