@@ -83,7 +83,7 @@ func (s *scorer) score() {
 			s.stash(in) // stash the strike
 		}
 	}
-	s.shutdown(true) // shutdown at eof
+	//s.shutdown(true) // shutdown at eof
 }
 
 // Strikes
@@ -188,10 +188,9 @@ func (s *scorer) stash(st strike) {
 		}
 		s.strikeCache[st.idxa+st.idxb] = stashed
 	} else {
-		stashed.push(st)
-		/*if stashed.push(st) {
+		if stashed.push(st) {
 			return // return early if already satisfying
-		}*/
+		}
 	}
 	s.markPotentials(stashed.potentials, st.idxa+st.idxb)
 	if !stashed.finalised {

@@ -150,7 +150,7 @@ func TestSuite(t *testing.T) {
 		t.Errorf("Matched %v out of %v signatures", iter, len(expect))
 	}
 }
-*/
+
 func TestTip(t *testing.T) {
 	expect := "fmt/669"
 	err := setup()
@@ -179,7 +179,7 @@ func TestTip(t *testing.T) {
 		}
 	}
 }
-
+*/
 func Test363(t *testing.T) {
 	repetitions := 10000
 	iter := 0
