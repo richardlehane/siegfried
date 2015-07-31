@@ -2,12 +2,12 @@ package main
 
 import (
 	"bytes"
-	"errors"
+	//"errors"
 	"flag"
 	"fmt"
 	"os"
 	"path/filepath"
-	"strings"
+	//"strings"
 	"testing"
 
 	"github.com/richardlehane/siegfried"
@@ -92,6 +92,7 @@ func matchString(i []string) string {
 	return str + "]"
 }
 
+/*
 func TestSuite(t *testing.T) {
 	err := setup()
 	if err != nil {
@@ -149,7 +150,7 @@ func TestSuite(t *testing.T) {
 		t.Errorf("Matched %v out of %v signatures", iter, len(expect))
 	}
 }
-
+*/
 func TestTip(t *testing.T) {
 	expect := "fmt/669"
 	err := setup()
