@@ -83,7 +83,7 @@ func (s *scorer) score() {
 			s.stash(in) // stash the strike
 		}
 	}
-	//s.shutdown(true) // shutdown at eof
+	s.shutdown(true) // shutdown at eof
 }
 
 // Strikes
@@ -284,11 +284,12 @@ func (t *tally) completes(a, l int) bool {
 }
 
 func (s *scorer) unmarkPotentials(pots []keyFrameID) {
-	s.tally.mu.Lock()
-	for _, kf := range pots {
-		delete(s.tally.potentialMatches, [2]int{kf[0], kf[1]})
-	}
-	s.tally.mu.Unlock()
+	/*
+		s.tally.mu.Lock()
+		for _, kf := range pots {
+			delete(s.tally.potentialMatches, [2]int{kf[0], kf[1]})
+		}
+		s.tally.mu.Unlock()*/
 }
 
 func (s *scorer) markPotentials(pots []keyFrameID, idx int) {
