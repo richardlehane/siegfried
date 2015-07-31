@@ -232,7 +232,10 @@ func (s *scorer) satisfy(c *cacheItem) {
 		defer s.queue.Done()
 		strike, ok := c.pop()
 		if !ok {
+			c.mu.Lock()
+			c.satisfying = false
 			s.unmarkPotentials(c.potentials)
+			c.mu.Unlock()
 			return
 		}
 		if s.testStrike(strike) {
@@ -241,7 +244,10 @@ func (s *scorer) satisfy(c *cacheItem) {
 		for {
 			strike, ok = c.pop()
 			if !ok {
+				c.mu.Lock()
+				c.satisfying = false
 				s.unmarkPotentials(c.potentials)
+				c.mu.Unlock()
 				return
 			}
 			pots := filterKF(c.potentials, s.waitSet)
@@ -284,12 +290,11 @@ func (t *tally) completes(a, l int) bool {
 }
 
 func (s *scorer) unmarkPotentials(pots []keyFrameID) {
-	/*
-		s.tally.mu.Lock()
-		for _, kf := range pots {
-			delete(s.tally.potentialMatches, [2]int{kf[0], kf[1]})
-		}
-		s.tally.mu.Unlock()*/
+	s.tally.mu.Lock()
+	for _, kf := range pots {
+		delete(s.tally.potentialMatches, [2]int{kf[0], kf[1]})
+	}
+	s.tally.mu.Unlock()
 }
 
 func (s *scorer) markPotentials(pots []keyFrameID, idx int) {
