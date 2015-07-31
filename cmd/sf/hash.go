@@ -50,31 +50,31 @@ func setHash() error {
 func hashHeader(pad bool) string {
 	switch *hashf {
 	default:
-		return "NO"
+		return "no"
 	case "md5", "MD5":
 		if pad {
-			return "MD5   "
+			return "md5   "
 		}
-		return "MD5"
+		return "md5"
 	case "sha1", "SHA1":
 		if pad {
-			return "SHA1  "
+			return "sha1  "
 		}
-		return "SHA1"
+		return "sha1"
 	case "sha256", "SHA256":
 		if pad {
-			return "SHA256"
+			return "sha256"
 		}
-		return "SHA256"
+		return "sha256"
 	case "sha512", "SHA512":
 		if pad {
-			return "SH512"
+			return "sha512"
 		}
-		return "SHA512"
+		return "sha512"
 	case "crc", "CRC":
 		if pad {
-			return "CRC   "
+			return "crc   "
 		}
-		return "CRC"
+		return "crc"
 	}
 }

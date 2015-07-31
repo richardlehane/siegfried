@@ -202,7 +202,7 @@ func (j *jsonWriter) writeFile(name string, sz int64, mod string, checksum []byt
 	if checksum != nil {
 		h = fmt.Sprintf("\"%s\":\"%s\",", hashHeader(false), hex.EncodeToString(checksum))
 	}
-	fmt.Fprintf(j.w, "{\"filename\":\"%s\",\"filesize\": %d,\"modified\":\"%s\",\"errors\": \"%s\",%s\"matches\": [", j.replacer.Replace(name), sz, mod, h, errStr)
+	fmt.Fprintf(j.w, "{\"filename\":\"%s\",\"filesize\": %d,\"modified\":\"%s\",\"errors\": \"%s\",%s\"matches\": [", j.replacer.Replace(name), sz, mod, errStr, h)
 	if ids == nil {
 		return 0
 	}
@@ -255,7 +255,7 @@ func (d *droidWriter) writeHead(s *siegfried.Siegfried) {
 	d.w.Write([]string{
 		"ID", "PARENT_ID", "URI", "FILE_PATH", "NAME",
 		"METHOD", "STATUS", "SIZE", "TYPE", "EXT",
-		"LAST_MODIFIED", "EXTENSION_MISMATCH", hashHeader(false) + "_HASH", "FORMAT_COUNT",
+		"LAST_MODIFIED", "EXTENSION_MISMATCH", strings.ToUpper(hashHeader(false)) + "_HASH", "FORMAT_COUNT",
 		"PUID", "MIME_TYPE", "FORMAT_NAME", "FORMAT_VERSION"})
 }
 
