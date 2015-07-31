@@ -316,25 +316,26 @@ func (s *scorer) applyKeyFrame(kfID keyFrameID, o int64, l int) (bool, string) {
 		return true, fmt.Sprintf("byte match at %d, %d", o, l)
 	}
 	s.tally.mu.Lock()
-	defer s.tally.mu.Unlock()
+
 	if _, ok := s.tally.partialMatches[kfID]; ok {
 		s.tally.partialMatches[kfID] = append(s.tally.partialMatches[kfID], [2]int64{o, int64(l)})
 	} else {
 		s.tally.partialMatches[kfID] = [][2]int64{[2]int64{o, int64(l)}}
 	}
-	return s.checkKeyFrames(kfID[0])
+	match, basis := s.checkKeyFrames(kfID[0])
+	s.tally.mu.Unlock()
+	return match, basis
 }
 
 // check key frames checks the relationships between neighbouring frames
 func (s *scorer) checkKeyFrames(i int) (bool, string) {
 	kfs := s.bm.keyFrames[i]
-	/*
-		for j := range kfs {
-			_, ok := s.tally.partialMatches[[2]int{i, j}]
-			if !ok {
-				return false, ""
-			}
-		}*/
+	for j := range kfs {
+		_, ok := s.tally.partialMatches[[2]int{i, j}]
+		if !ok {
+			return false, ""
+		}
+	}
 	prevOff := s.tally.partialMatches[[2]int{i, 0}]
 	basis := make([][][2]int64, len(kfs))
 	basis[0] = prevOff
