@@ -157,15 +157,17 @@ func (c *cacheItem) push(st strike) bool {
 // pops a strike from the item. Changes the satisfying state if returning the first strike. Returns strike and the satisfying state.
 func (c *cacheItem) pop(s *scorer) (strike, bool) {
 	ret := c.first
-	s.tally.mu.Lock() // LOOK AT THIS MORE CLOSELY - AN ORDER OF MUTEX BUG
+	s.tally.mu.Lock()
 	defer s.tally.mu.Unlock()
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	if c.strikeIdx > -1 {
 		// have we exhausted the cache?
 		if c.strikeIdx > len(c.successive)-1 {
-			c.satisfying = false             // mark that no longer in a satisfying state - side effect ok as only satisfy loop calls pop
-			s.unmarkPotentials(c.potentials) // *FROM HERE*
+			c.satisfying = false              // mark that no longer in a satisfying state
+			for _, kf := range c.potentials { // unmark the potential matches
+				delete(s.tally.potentialMatches, [2]int{kf[0], kf[1]})
+			}
 			return ret, false
 		}
 		ret.offset, ret.length = c.successive[c.strikeIdx][0], int(c.successive[c.strikeIdx][1])
@@ -216,7 +218,7 @@ func (s *scorer) stash(st strike) {
 }
 
 func (s *scorer) satisfy(c *cacheItem) {
-	c.mu.Lock() // HERE
+	c.mu.Lock()
 	if c.satisfying {
 		c.mu.Unlock()
 		return
@@ -276,12 +278,6 @@ func (t *tally) completes(a, l int) bool {
 		}
 	}
 	return true
-}
-
-func (s *scorer) unmarkPotentials(pots []keyFrameID) {
-	for _, kf := range pots {
-		delete(s.tally.potentialMatches, [2]int{kf[0], kf[1]})
-	}
 }
 
 func (s *scorer) markPotentials(pots []keyFrameID, idx int) {
