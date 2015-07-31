@@ -2,12 +2,12 @@ package main
 
 import (
 	"bytes"
-	//"errors"
+	"errors"
 	"flag"
 	"fmt"
 	"os"
 	"path/filepath"
-	//"strings"
+	"strings"
 	"testing"
 
 	"github.com/richardlehane/siegfried"
@@ -92,7 +92,6 @@ func matchString(i []string) string {
 	return str + "]"
 }
 
-/*
 func TestSuite(t *testing.T) {
 	err := setup()
 	if err != nil {
@@ -179,7 +178,7 @@ func TestTip(t *testing.T) {
 		}
 	}
 }
-*/
+
 func Test363(t *testing.T) {
 	repetitions := 10000
 	iter := 0

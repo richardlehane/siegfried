@@ -157,7 +157,7 @@ func (c *cacheItem) push(st strike) bool {
 // pops a strike from the item. Changes the satisfying state if returning the first strike. Returns strike and the satisfying state.
 func (c *cacheItem) pop(s *scorer) (strike, bool) {
 	ret := c.first
-	s.tally.mu.Lock() // HERE
+	s.tally.mu.Lock() // LOOK AT THIS MORE CLOSELY - AN ORDER OF MUTEX BUG
 	defer s.tally.mu.Unlock()
 	c.mu.Lock()
 	defer c.mu.Unlock()

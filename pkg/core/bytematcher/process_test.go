@@ -123,15 +123,9 @@ func TestProcessFmt363(t *testing.T) {
 	b.Save(saver)
 	loader := persist.NewLoadSaver(saver.Bytes())
 	b = Load(loader)
-	if len(b.keyFrames[0]) != 8 {
+	if len(b.keyFrames[0]) != 2 {
 		for _, v := range b.keyFrames[0] {
 			t.Errorf("%s\n", v)
 		}
-	}
-	for _, te := range b.tests {
-		te.maxLeftDistance = maxLength(te.left)
-		te.maxRightDistance = maxLength(te.right)
-		t.Error(te.maxLeftDistance)
-		t.Error(te.maxRightDistance)
 	}
 }
