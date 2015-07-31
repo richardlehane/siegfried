@@ -157,13 +157,15 @@ func (c *cacheItem) push(st strike) bool {
 // pops a strike from the item. Changes the satisfying state if returning the first strike. Returns strike and the satisfying state.
 func (c *cacheItem) pop(s *scorer) (strike, bool) {
 	ret := c.first
+	s.tally.mu.Lock() // HERE
+	defer s.tally.mu.Unlock()
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	if c.strikeIdx > -1 {
 		// have we exhausted the cache?
 		if c.strikeIdx > len(c.successive)-1 {
-			c.satisfying = false // mark that no longer in a satisfying state - side effect ok as only satisfy loop calls pop
-			s.unmarkPotentials(c.potentials)
+			c.satisfying = false             // mark that no longer in a satisfying state - side effect ok as only satisfy loop calls pop
+			s.unmarkPotentials(c.potentials) // *FROM HERE*
 			return ret, false
 		}
 		ret.offset, ret.length = c.successive[c.strikeIdx][0], int(c.successive[c.strikeIdx][1])
@@ -193,35 +195,28 @@ func (s *scorer) stash(st strike) {
 			return // return early if already satisfying
 		}
 	}
+	// hold lock on tally while marking and satisfying potentials
+	s.tally.mu.Lock()
+	defer s.tally.mu.Unlock()
 	s.markPotentials(stashed.potentials, st.idxa+st.idxb)
 	if !stashed.finalised {
 		return
 	}
-	pots := filterKF(stashed.potentials, s.waitSet)
-	if len(pots) == 0 {
-		return
-	}
-	s.satisfyPotentials(pots)
-}
-
-// range through the potentials, continuing for those keyframes that are potentially complete (all segments in the signature have strikes)
-func (s *scorer) satisfyPotentials(pots []keyFrameID) {
-	s.tally.mu.Lock() // during this phase - hold a lock on the tally
-	for _, kf := range pots {
-		if s.tally.completes(kf[0], len(s.bm.keyFrames[kf[0]])) {
+	// range through the potentials, continuing for those keyframes that are potentially complete (all segments in the signature have strikes)
+	for _, kf := range filterKF(stashed.potentials, s.waitSet) {
+		if s.tally.completes(kf[0], len(s.bm.keyFrames[kf[0]])) { // completes checks partial and potential matches for a signature
 			for i := 0; i < len(s.bm.keyFrames[kf[0]]); i++ {
-				idx, ok := s.tally.potentialMatches[[2]int{kf[0], i}]
+				idx, ok := s.tally.potentialMatches[[2]int{kf[0], i}] // if any part of the signature has potentials - send these
 				if ok {
-					s.satisfy(s.strikeCache[idx])
+					s.satisfy(s.strikeCache[idx]) // satisfying will drain the cache for the signature part
 				}
 			}
 		}
 	}
-	s.tally.mu.Unlock()
 }
 
 func (s *scorer) satisfy(c *cacheItem) {
-	c.mu.Lock()
+	c.mu.Lock() // HERE
 	if c.satisfying {
 		c.mu.Unlock()
 		return
@@ -284,19 +279,15 @@ func (t *tally) completes(a, l int) bool {
 }
 
 func (s *scorer) unmarkPotentials(pots []keyFrameID) {
-	s.tally.mu.Lock()
 	for _, kf := range pots {
 		delete(s.tally.potentialMatches, [2]int{kf[0], kf[1]})
 	}
-	s.tally.mu.Unlock()
 }
 
 func (s *scorer) markPotentials(pots []keyFrameID, idx int) {
-	s.tally.mu.Lock()
 	for _, kf := range pots {
 		s.tally.potentialMatches[[2]int{kf[0], kf[1]}] = idx
 	}
-	s.tally.mu.Unlock()
 }
 
 func (s *scorer) retainsPotential(pots []keyFrameID) bool {
