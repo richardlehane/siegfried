@@ -188,9 +188,10 @@ func (s *scorer) stash(st strike) {
 		}
 		s.strikeCache[st.idxa+st.idxb] = stashed
 	} else {
-		if stashed.push(st) {
+		stashed.push(st)
+		/*if stashed.push(st) {
 			return // return early if already satisfying
-		}
+		}*/
 	}
 	s.markPotentials(stashed.potentials, st.idxa+st.idxb)
 	if !stashed.finalised {
@@ -316,15 +317,13 @@ func (s *scorer) applyKeyFrame(kfID keyFrameID, o int64, l int) (bool, string) {
 		return true, fmt.Sprintf("byte match at %d, %d", o, l)
 	}
 	s.tally.mu.Lock()
-
+	defer s.tally.mu.Unlock()
 	if _, ok := s.tally.partialMatches[kfID]; ok {
 		s.tally.partialMatches[kfID] = append(s.tally.partialMatches[kfID], [2]int64{o, int64(l)})
 	} else {
 		s.tally.partialMatches[kfID] = [][2]int64{[2]int64{o, int64(l)}}
 	}
-	match, basis := s.checkKeyFrames(kfID[0])
-	s.tally.mu.Unlock()
-	return match, basis
+	return s.checkKeyFrames(kfID[0])
 }
 
 // check key frames checks the relationships between neighbouring frames
