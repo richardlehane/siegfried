@@ -32,7 +32,7 @@ Key features are:
     sf -                                       // Read list of files piped to stdin
     sf -nr DIR                                 // Don't scan subdirectories
     sf -z file.zip | DIR                       // Decompress and scan zip, tar, gzip
-    sf -hash md5                               // Calculate md5, sha1, sha256, sha512, or crc hash
+    sf -hash md5 file.ext | DIR                // Calculate md5, sha1, sha256, sha512, or crc hash
     sf -sig custom.sig file.ext                // Use a custom signature file
     sf -home c:\junk -sig custom.sig file.ext  // Use a custom home directory
     sf -debug file.ext                         // Scan in debug mode
