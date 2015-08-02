@@ -24,23 +24,23 @@ iPres showcase (dry run): 53s
 1 August 2015 [sf 1.1, go 1.4.2]
 
 PASS
-BenchmarkNew-4  	     100	  13155450 ns/op
-BenchmarkACCDB-4	     100	  14582267 ns/op
-BenchmarkBMP-4  	    5000	    539110 ns/op
-BenchmarkDOCX-4 	   10000	    318876 ns/op
-BenchmarkGIF-4  	    2000	    936649 ns/op
-BenchmarkJPG-4  	    2000	    920922 ns/op
-BenchmarkMSG-4  	   10000	    102695 ns/op
-BenchmarkODT-4  	     200	   8099441 ns/op
-BenchmarkPDF-4  	     200	   6866623 ns/op
-BenchmarkPNG-4  	    1000	   2392797 ns/op
-BenchmarkPPTX-4 	   10000	    309541 ns/op
-BenchmarkRTF-4  	      50	  28763936 ns/op
-BenchmarkTIF-4  	      30	  39173583 ns/op
-BenchmarkXLSX-4 	   10000	    316911 ns/op
-BenchmarkXML-4  	   10000	    492107 ns/op
-BenchmarkMulti-4	      10	 114029084 ns/op
-ok  	github.com/richardlehane/siegfried/cmd/sf	37.952s
+BenchmarkNew	     100	  14079020 ns/op
+BenchmarkACCDB	     100	  13827505 ns/op
+BenchmarkBMP	    5000	    260232 ns/op
+BenchmarkDOCX	   10000	    174205 ns/op
+BenchmarkGIF	    2000	    709727 ns/op
+BenchmarkJPG	    2000	    985593 ns/op
+BenchmarkMSG	   20000	     92333 ns/op
+BenchmarkODT	     300	   4871378 ns/op
+BenchmarkPDF	     300	   5161193 ns/op
+BenchmarkPNG	    1000	   1533824 ns/op
+BenchmarkPPTX	   10000	    250584 ns/op
+BenchmarkRTF	      50	  24652706 ns/op
+BenchmarkTIF	      30	  43414885 ns/op
+BenchmarkXLSX	   10000	    203807 ns/op
+BenchmarkXML	   10000	    204919 ns/op
+BenchmarkMulti	      20	  98832692 ns/op
+ok  	github.com/richardlehane/siegfried/cmd/sf	32.714s
 
 21 January 2015
 
