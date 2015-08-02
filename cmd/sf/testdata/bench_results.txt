@@ -21,6 +21,27 @@ ok  	github.com/richardlehane/siegfried/cmd/sf	34.369s
 
 iPres showcase (dry run): 53s
 
+1 August 2015 [sf 1.1, go 1.4.2]
+
+PASS
+BenchmarkNew-4  	     100	  13155450 ns/op
+BenchmarkACCDB-4	     100	  14582267 ns/op
+BenchmarkBMP-4  	    5000	    539110 ns/op
+BenchmarkDOCX-4 	   10000	    318876 ns/op
+BenchmarkGIF-4  	    2000	    936649 ns/op
+BenchmarkJPG-4  	    2000	    920922 ns/op
+BenchmarkMSG-4  	   10000	    102695 ns/op
+BenchmarkODT-4  	     200	   8099441 ns/op
+BenchmarkPDF-4  	     200	   6866623 ns/op
+BenchmarkPNG-4  	    1000	   2392797 ns/op
+BenchmarkPPTX-4 	   10000	    309541 ns/op
+BenchmarkRTF-4  	      50	  28763936 ns/op
+BenchmarkTIF-4  	      30	  39173583 ns/op
+BenchmarkXLSX-4 	   10000	    316911 ns/op
+BenchmarkXML-4  	   10000	    492107 ns/op
+BenchmarkMulti-4	      10	 114029084 ns/op
+ok  	github.com/richardlehane/siegfried/cmd/sf	37.952s
+
 21 January 2015
 
 PASS

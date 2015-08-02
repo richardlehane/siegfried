@@ -52,7 +52,6 @@ var (
 	multi   = flag.Int("multi", 1, "set number of file ID processes")
 	archive = flag.Bool("z", false, "scan archive formats (zip, tar, gzip)")
 	hashf   = flag.String("hash", "", "calculate file checksum with hash algorithm; options "+hashChoices)
-	//profile = flag.Bool("profile", false, "run a profile on localhost:6060")
 )
 
 type res struct {
@@ -195,13 +194,10 @@ func main() {
 
 	flag.Parse()
 
-	/* //UNCOMMENT TO RUN PROFILER
-	if *profile {
-		go func() {
-			log.Println(http.ListenAndServe("localhost:6060", nil))
-		}()
-	}
-	*/
+	/*//UNCOMMENT TO RUN PROFILER
+	go func() {
+		log.Println(http.ListenAndServe("localhost:6060", nil))
+	}()*/
 
 	if *home != config.Home() {
 		config.SetHome(*home)
