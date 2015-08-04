@@ -59,7 +59,7 @@ For OS X:
 
     brew install mistydemeo/digipres/siegfried
 
-For Ubuntu/Debian:
+For Ubuntu/Debian (64 bit):
 
     wget -qO - https://bintray.com/user/downloadSubjectPublicKey?username=bintray | sudo apt-key add -
     echo "deb http://dl.bintray.com/siegfried/debian wheezy main" | sudo tee -a /etc/apt/sources.list
