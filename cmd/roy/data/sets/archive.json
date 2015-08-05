@@ -1,0 +1,38 @@
+{
+  "archive (archive only)": [
+    "fmt/635 (cpio)",
+    "fmt/329 (shar)",
+    "fmt/468 (iso)",
+    "x-fmt/265 (tar)",
+    "x-fmt/267 (bz)",
+    "x-fmt/268 (bz2)",
+    "fmt/161 (siard)",
+    "x-fmt/416 (binhex binary text)",
+    "x-fmt/429 (Microsoft Web Archive)"
+  ],
+  "compression (compression only)": [
+    "x-fmt/267 (bz)",
+    "x-fmt/268 (bz2)",
+    "x-fmt/266 (gz)",
+    "fmt/626 (lha)"
+  ],
+  "arch_comp (archive and compression)": [
+    "x-fmt/263 (zip)",
+    "fmt/484 (7zip)",
+    "x-fmt/219 (arc)",
+    "fmt/410 (arc)",
+    "fmt/610 (arj)",
+    "x-fmt/414 (cab)",
+    "fmt/625 (Apple disk copy image)",
+    "x-fmt/412 (jar)",
+    "x-fmt/264 (rar)",
+    "fmt/411 (rar)",
+    "fmt/613 (rar)",
+    "fmt/639 (stuffit)",
+    "fmt/399 (stuffit)",
+    "fmt/289 (warc)",
+    "fmt/614 (Windows imaging format)",
+    "fmt/600 (xar)",
+    "x-fmt/269 (zoo)"
+  ]
+}

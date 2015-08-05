@@ -131,6 +131,23 @@ func getSets(key string) ([]string, error) {
 	return f(key)
 }
 
+func stripComment(in string) string {
+	ws := strings.Index(in, " ")
+	if ws < 0 {
+		return in
+	} else {
+		return in[:ws]
+	}
+}
+
+func stripComments(in []string) []string {
+	out := make([]string, len(in))
+	for i, v := range in {
+		out[i] = stripComment(v)
+	}
+	return out
+}
+
 func initSets() error {
 	//  load all json files in the sets directory and add them to a single map
 	sets = make(map[string][]string)
@@ -156,6 +173,8 @@ func initSets() error {
 			return errors.New("error unmarshalling " + path + " " + err.Error())
 		}
 		for k, v := range set {
+			k = stripComment(k)
+			v = stripComments(v)
 			sort.Strings(v)
 			m, ok := sets[k]
 			if !ok {

@@ -20,6 +20,11 @@ func TestSets(t *testing.T) {
 	if pdfs != expect {
 		t.Errorf("expecting %s, got %s", expect, pdfs)
 	}
+	compression := strings.Join(expandSets("@compression"), ",")
+	expect = "fmt/626,x-fmt/266,x-fmt/267,x-fmt/268"
+	if compression != expect {
+		t.Errorf("expecting %s, got %s", expect, compression)
+	}
 }
 
 var testSet = map[string][]string{
