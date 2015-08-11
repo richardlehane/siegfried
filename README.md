@@ -13,7 +13,7 @@ Key features are:
 
 ## Version
 
-1.2.0
+1.2.1
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried)
 
@@ -72,6 +72,11 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 	sf -update
 
 ## Recent Changes
+### Version 1.2.1 (11/8/2015)
+- support annotation of sets.json files; requested by Greg Lepore
+- add warning when use -extendc without -extend
+- bugfix: report container extensions in details; reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/48)
+
 ### Version 1.2.0 (31/7/2015)
 - text matcher (i.e. sf README will now report a 'Plain Text File' result)
 - -notext flag to suppress text matcher (roy build -notext)
