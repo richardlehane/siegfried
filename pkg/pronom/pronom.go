@@ -264,6 +264,7 @@ func (p pronom) contMatcher(m core.Matcher) error {
 	for _, c := range p.c.ContainerSignatures {
 		puid := cpuids[c.Id]
 		// only include the included fmts
+		// warning - this will mean no standalone container extensions
 		if !p.hasPuid(puid) {
 			continue
 		}

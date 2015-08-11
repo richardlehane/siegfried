@@ -79,6 +79,9 @@ func Details() string {
 	if len(pronom.extend) > 0 {
 		str += "; extensions: " + strings.Join(pronom.extend, ", ")
 	}
+	if len(pronom.extendc) > 0 {
+		str += "; container extensions: " + strings.Join(pronom.extendc, ", ")
+	}
 	return str
 }
 
