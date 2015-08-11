@@ -144,6 +144,12 @@ func buildOptions() []config.Option {
 		opts = append(opts, config.SetExtend(expandSets(*extend)))
 	}
 	if *extendc != "" {
+		if *extend == "" {
+			fmt.Println(
+				`roy: warning! Unless the container extension only extends formats defined in 
+the DROID signature file you should also include a regular signature extension 
+(-extend) that includes a FileFormatCollection element defining the new formats.`)
+		}
 		opts = append(opts, config.SetExtendC(expandSets(*extendc)))
 	}
 	if *include != "" {
@@ -259,7 +265,7 @@ func main() {
 			switch {
 			case input == "":
 				err = inspectGob()
-			case filepath.Ext(input) == ".gob":
+			case filepath.Ext(input) == ".sig":
 				config.SetSignature(input)
 				err = inspectGob()
 			case strings.Contains(input, "fmt"):
