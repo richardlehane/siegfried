@@ -204,14 +204,16 @@ func (p *pronom) add(m core.Matcher) error {
 	default:
 		return fmt.Errorf("Pronom: unknown matcher type %T", t)
 	case extensionmatcher.Matcher:
-		var exts [][]string
-		exts, p.ePuids = p.j.extensions()
-		l, err := m.Add(extensionmatcher.SignatureSet(exts), nil)
-		if err != nil {
-			return err
+		if !config.NoExt() {
+			var exts [][]string
+			exts, p.ePuids = p.j.extensions()
+			l, err := m.Add(extensionmatcher.SignatureSet(exts), nil)
+			if err != nil {
+				return err
+			}
+			p.eStart = l - len(p.ePuids)
+			return nil
 		}
-		p.eStart = l - len(p.ePuids)
-		return nil
 	case containermatcher.Matcher:
 		return p.contMatcher(m)
 	case *bytematcher.Matcher:

@@ -47,6 +47,7 @@ var (
 	nopriority  = build.Bool("nopriority", false, "ignore priority rules when recording results")
 	nocontainer = build.Bool("nocontainer", false, "skip container signatures")
 	notext      = build.Bool("notext", false, "skip text matcher")
+	noext       = build.Bool("noext", false, "skip extension matcher")
 	noreports   = build.Bool("noreports", false, "build directly from DROID file rather than PRONOM reports")
 	rng         = build.Int("range", config.Range(), "define a maximum range for segmentation")
 	distance    = build.Int("distance", config.Distance(), "define a maximum distance for segmentation")
@@ -175,6 +176,9 @@ the DROID signature file you should also include a regular signature extension
 	}
 	if *notext {
 		opts = append(opts, config.SetNoText())
+	}
+	if *noext {
+		opts = append(opts, config.SetNoExt())
 	}
 	if *noreports {
 		opts = append(opts, config.SetNoReports())
