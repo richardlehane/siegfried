@@ -13,7 +13,7 @@ Key features are:
 
 ## Version
 
-1.2.1
+1.2.2
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried)
 
@@ -72,6 +72,10 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 	sf -update
 
 ## Recent Changes
+### Version 1.2.2 (15/8/2015)
+- add -noext flag to roy to suppress extension matching; requested by [Greg Lepore](https://github.com/richardlehane/siegfried/issues/46)
+- -known and -unknown flags for sf to output lists of recognised and unknown files respectively; requested by [Greg Lepore](https://github.com/richardlehane/siegfried/issues/47)
+
 ### Version 1.2.1 (11/8/2015)
 - support annotation of sets.json files; requested by Greg Lepore
 - add warning when use -extendc without -extend
