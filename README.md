@@ -29,6 +29,8 @@ Key features are:
     sf -csv file.ext | DIR                     // Output CSV rather than YAML
     sf -json file.ext | DIR                    // Output JSON rather than YAML
     sf -droid file.ext | DIR                   // Output DROID CSV rather than YAML
+    sf -known file.ext | DIR                   // Output list of recognised files
+    sf -unknown file.ext | DIR                 // Output list of unrecognised files
     sf -                                       // Read list of files piped to stdin
     sf -nr DIR                                 // Don't scan subdirectories
     sf -z file.zip | DIR                       // Decompress and scan zip, tar, gzip
