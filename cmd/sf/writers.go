@@ -289,7 +289,7 @@ func (d *droidWriter) writeFile(p string, sz int64, mod string, checksum []byte,
 	var arc config.Archive
 	nids := makeIdSlice(ids)
 	// leave early for unknowns
-	if nids.ids[0].String() == "UNKNOWN" {
+	if !nids.ids[0].Known() {
 		d.rec[5], d.rec[8], d.rec[11], d.rec[13] = "", "File", "FALSE", "0"
 		d.rec[14], d.rec[15], d.rec[16], d.rec[17] = "", "", "", ""
 		d.rec[3] = clearArchivePath(d.rec[2], d.rec[3])
@@ -368,4 +368,31 @@ func mismatch(warning string) string {
 		return "TRUE"
 	}
 	return "FALSE"
+}
+
+type knownWriter struct {
+	known bool
+	w     io.Writer
+}
+
+func (k *knownWriter) writeHead(s *siegfried.Siegfried) {}
+
+func (k *knownWriter) writeTail() {}
+
+func (k *knownWriter) writeFile(p string, sz int64, mod string, checksum []byte, err error, ids iterableID) config.Archive {
+	var isKnown bool
+	var arc config.Archive
+	for id := ids.next(); id != nil; id = ids.next() {
+		if !id.Known() {
+			continue
+		}
+		isKnown = true
+		if id.Archive() > 0 {
+			arc = id.Archive()
+		}
+	}
+	if isKnown == k.known {
+		io.WriteString(k.w, p+"\n")
+	}
+	return arc
 }

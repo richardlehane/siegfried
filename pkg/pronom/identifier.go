@@ -338,6 +338,10 @@ func (id Identification) String() string {
 	return id.Puid
 }
 
+func (id Identification) Known() bool {
+	return id.Puid != "UNKNOWN"
+}
+
 func quoteText(s string) string {
 	if len(s) == 0 {
 		return s

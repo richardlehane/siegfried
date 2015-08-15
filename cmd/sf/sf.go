@@ -39,19 +39,21 @@ const PROCS = -1
 
 // flags
 var (
-	update  = flag.Bool("update", false, "update or install the default signature file")
-	version = flag.Bool("version", false, "display version information")
-	debug   = flag.Bool("debug", false, "scan in debug mode")
-	nr      = flag.Bool("nr", false, "prevent automatic directory recursion")
-	csvo    = flag.Bool("csv", false, "CSV output format")
-	jsono   = flag.Bool("json", false, "JSON output format")
-	droido  = flag.Bool("droid", false, "DROID CSV output format")
-	sig     = flag.String("sig", config.SignatureBase(), "set the signature file")
-	home    = flag.String("home", config.Home(), "override the default home directory")
-	serve   = flag.String("serve", "", "start siegfried server e.g. -serve localhost:5138")
-	multi   = flag.Int("multi", 1, "set number of file ID processes")
-	archive = flag.Bool("z", false, "scan archive formats (zip, tar, gzip)")
-	hashf   = flag.String("hash", "", "calculate file checksum with hash algorithm; options "+hashChoices)
+	update   = flag.Bool("update", false, "update or install the default signature file")
+	version  = flag.Bool("version", false, "display version information")
+	debug    = flag.Bool("debug", false, "scan in debug mode")
+	nr       = flag.Bool("nr", false, "prevent automatic directory recursion")
+	csvo     = flag.Bool("csv", false, "CSV output format")
+	jsono    = flag.Bool("json", false, "JSON output format")
+	droido   = flag.Bool("droid", false, "DROID CSV output format")
+	knowno   = flag.Bool("known", false, "Output list of known files")
+	unknowno = flag.Bool("unknown", false, "Output list of unknown files")
+	sig      = flag.String("sig", config.SignatureBase(), "set the signature file")
+	home     = flag.String("home", config.Home(), "override the default home directory")
+	serve    = flag.String("serve", "", "start siegfried server e.g. -serve localhost:5138")
+	multi    = flag.Int("multi", 1, "set number of file ID processes")
+	archive  = flag.Bool("z", false, "scan archive formats (zip, tar, gzip)")
+	hashf    = flag.String("hash", "", "calculate file checksum with hash algorithm; options "+hashChoices)
 )
 
 type res struct {
@@ -273,6 +275,10 @@ func main() {
 		w = newJSON(os.Stdout)
 	case *droido:
 		w = newDroid(os.Stdout)
+	case *knowno:
+		w = &knownWriter{true, os.Stdout}
+	case *unknowno:
+		w = &knownWriter{false, os.Stdout}
 	default:
 		w = newYAML(os.Stdout)
 	}

@@ -51,7 +51,7 @@ func fpridentify(s *siegfried.Siegfried, path string) []byte {
 	var warn string
 	for i := range c {
 		ids = append(ids, i.String())
-		if len(ids) == 1 && ids[0] == "UNKNOWN" {
+		if !i.Known() {
 			warn = i.(*pronom.Identification).Warning
 		}
 	}
@@ -59,7 +59,7 @@ func fpridentify(s *siegfried.Siegfried, path string) []byte {
 	case 0:
 		return reply("error: scanning " + path + ": no puids returned")
 	case 1:
-		if ids[0] == "UNKNOWN" {
+		if warn != "" {
 			return reply("error: format unknown; got " + warn)
 		}
 		return reply(ids[0])
