@@ -13,13 +13,10 @@ func newMmap() interface{} {
 	return &mmap{}
 }
 
-func (m *mmap) setSource(f *file) {
+func (m *mmap) setSource(f *file) error {
 	m.reset() // reset here rather than on put
 	m.file = f
-	err := m.mapFile()
-	if err != nil {
-		log.Fatalf("Siegreader fatal error while attempting to mmap: %s; error: %v\n", m.src.Name(), err)
-	}
+	return m.mapFile()
 }
 
 func (m *mmap) slice(off int64, l int) []byte {

@@ -83,9 +83,12 @@ type datas struct {
 func (d *datas) get(f *file) data {
 	if mmapable(f.sz) {
 		m := d.mpool.get().(*mmap)
-		m.setSource(f)
-		return m
-	} else if f.sz <= int64(smallFileSz) {
+		if err := m.setSource(f); err == nil {
+			return m
+		}
+		d.mpool.put(m)
+	}
+	if f.sz <= int64(smallFileSz) {
 		sf := d.sfpool.get().(*smallfile)
 		sf.setSource(f)
 		return sf
