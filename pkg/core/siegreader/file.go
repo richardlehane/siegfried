@@ -119,7 +119,7 @@ func (f *file) EofSlice(off int64, l int) ([]byte, error) {
 		err = io.EOF
 	}
 	// the slice falls entirely in the bof segment
-	if int(f.sz-off) <= initialRead {
+	if f.sz-off <= int64(initialRead) {
 		return f.peek[int(f.sz-off)-l : int(f.sz-off)], err
 	}
 	f.once.Do(func() { f.data = f.pool.get(f) })
