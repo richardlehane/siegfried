@@ -51,7 +51,7 @@ const (
 
 // is the requested slice in the wheel or the eof?
 func (bf *bigfile) enclosed(o int64, l int) enc {
-	if bf.sz-o+int64(l) <= int64(eofSz) {
+	if bf.sz-o <= int64(eofSz) {
 		return eofEnc
 	}
 	if o >= bf.start && o+int64(l) <= bf.end {
@@ -95,7 +95,7 @@ func (bf *bigfile) slice(o int64, l int) []byte {
 	// if within the wheel copy
 	switch bf.enclosed(o, l) {
 	case eofEnc:
-		x := eofSz - int(bf.sz-o) - l
+		x := eofSz - int(bf.sz-o)
 		copy(ret, bf.eof[x:x+l])
 		return ret
 	case wheelEnc:
