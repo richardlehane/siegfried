@@ -120,7 +120,6 @@ func (s *Siegfried) Add(i core.Identifier) error {
 // Save persists a Siegfried struct to disk (path)
 func (s *Siegfried) Save(path string) error {
 	ls := persist.NewLoadSaver(nil)
-	ls.SaveString("siegfried")
 	ls.SaveTime(s.C)
 	s.em.Save(ls)
 	s.cm.Save(ls)
@@ -138,7 +137,7 @@ func (s *Siegfried) Save(path string) error {
 		return err
 	}
 	defer f.Close()
-	_, err = f.Write(config.Magic())
+	_, err = f.Write(append(config.Magic(), byte(config.Version()[0]), byte(config.Version()[1])))
 	if err != nil {
 		return err
 	}
@@ -153,16 +152,23 @@ func (s *Siegfried) Save(path string) error {
 
 // Load creates a Siegfried struct and loads content from path
 func Load(path string) (*Siegfried, error) {
-	errOpening := "siegfried: error opening signature file; got %v\nTry running `sf -update`"
-	errNotSig := "siegfried: not a siegfried signature file"
+	errOpening := "siegfried: error opening signature file, got %v; try running `sf -update`"
+	errNotSig := "siegfried: not a siegfried signature file; try running `sf -update`"
+	errUpdateSig := "siegfried: signature file is incompatible with this version of sf; try running `sf -update`"
 	fbuf, err := ioutil.ReadFile(path)
 	if err != nil {
 		return nil, fmt.Errorf(errOpening, err)
 	}
+	if len(fbuf) < len(config.Magic())+2 {
+		return nil, fmt.Errorf(errNotSig)
+	}
 	if string(fbuf[:len(config.Magic())]) != string(config.Magic()) {
 		return nil, fmt.Errorf(errNotSig)
 	}
-	r := bytes.NewBuffer(fbuf[len(config.Magic()):])
+	if major, minor := fbuf[len(config.Magic())], fbuf[len(config.Magic())+1]; major < byte(config.Version()[0]) || (major == byte(config.Version()[0]) && minor < byte(config.Version()[1])) {
+		return nil, fmt.Errorf(errUpdateSig)
+	}
+	r := bytes.NewBuffer(fbuf[len(config.Magic())+2:])
 	rc := flate.NewReader(r)
 	defer rc.Close()
 	buf, err := ioutil.ReadAll(rc)
@@ -170,9 +176,6 @@ func Load(path string) (*Siegfried, error) {
 		return nil, fmt.Errorf(errOpening, err)
 	}
 	ls := persist.NewLoadSaver(buf)
-	if ls.LoadString() != "siegfried" {
-		return nil, fmt.Errorf(errNotSig)
-	}
 	return &Siegfried{
 		C:  ls.LoadTime(),
 		em: extensionmatcher.Load(ls),

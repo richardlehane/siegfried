@@ -39,9 +39,9 @@ var siegfried = struct {
 	// DEBUG mode
 	debug bool
 }{
-	version:         [3]int{1, 2, 2},
+	version:         [3]int{1, 3, 0},
 	signature:       "pronom.sig",
-	magic:           []byte{'s', 'f', 0xFF, 0xFF},
+	magic:           []byte{'s', 'f', 0x00, 0xFF},
 	distance:        8192,
 	rng:             512,
 	choices:         64,

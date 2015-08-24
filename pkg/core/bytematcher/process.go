@@ -102,6 +102,7 @@ func (b *Matcher) addSignature(sig frames.Signature) error {
 	}
 	clstr.commit()
 	updatePositions(kf)
+	b.firstBOF = firstBOF(b.firstBOF, kf)
 	b.maxBOF = maxBOF(b.maxBOF, kf)
 	b.maxEOF = maxEOF(b.maxEOF, kf)
 	b.keyFrames = append(b.keyFrames, kf)

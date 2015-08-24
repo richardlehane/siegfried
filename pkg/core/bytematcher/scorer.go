@@ -568,9 +568,72 @@ func (s *scorer) sendResult(idx int, basis string) bool {
 // check to see whether should still wait for signatures in the priority list, given the offset
 func (s *scorer) continueWait(o int64, rev bool) bool {
 	var fails int
+	var hits int
 	w := s.waitSet.WaitingOn()
-	// must continue if any of the waitlists are nil
+	// if any of the waitlists are nil, will continue - unless there are no partial or potential matches
 	if w == nil {
+		if rev || s.bm.firstBOF < 0 || o < int64(s.bm.firstBOF) {
+			return true
+		}
+		s.tally.mu.Lock()
+		defer s.tally.mu.Unlock()
+		for k := range s.tally.partialMatches {
+			if k[1] == 0 {
+				hits++
+				kf := s.bm.keyFrames[k[0]]
+				if len(kf) == 1 {
+					return true
+				}
+				for i, f := range kf[1:] {
+					if f.typ > frames.PREV {
+						break
+					}
+					if f.key.pMax == -1 || f.key.pMax+int64(f.key.lMax) > o {
+						return true
+					}
+					if _, ok := s.tally.partialMatches[[2]int{k[0], i + 1}]; ok {
+						continue
+					}
+					if _, ok := s.tally.potentialMatches[[2]int{k[0], i + 1}]; ok {
+						continue
+					}
+					fails++
+					break
+				}
+			}
+		}
+		if fails != hits {
+			return true
+		}
+		fails, hits = 0, 0
+		for k := range s.tally.potentialMatches {
+			if k[1] == 0 {
+				hits++
+				kf := s.bm.keyFrames[k[0]]
+				if len(kf) == 1 {
+					return true
+				}
+				for i, f := range kf[1:] {
+					if f.typ > frames.PREV {
+						break
+					}
+					if f.key.pMax == -1 || f.key.pMax+int64(f.key.lMax) > o {
+						return true
+					}
+					if _, ok := s.tally.partialMatches[[2]int{k[0], i + 1}]; ok {
+						continue
+					}
+					if _, ok := s.tally.potentialMatches[[2]int{k[0], i + 1}]; ok {
+						continue
+					}
+					fails++
+					break
+				}
+			}
+		}
+		if fails == hits {
+			return false
+		}
 		return true
 	}
 	if len(w) == 0 {
@@ -617,5 +680,4 @@ func (s *scorer) continueWait(o int64, rev bool) bool {
 		return false
 	}
 	return true
-
 }

@@ -269,6 +269,22 @@ func updatePositions(ks []keyFrame) {
 	}
 }
 
+// for doing a running total of the firstBOF:
+// look for the max offset for the first segment in a signature
+// if that point is greater than the current max, return it
+func firstBOF(max int, ks []keyFrame) int {
+	if max < 0 || len(ks) < 1 {
+		return max
+	}
+	if ks[0].typ > frames.BOF || ks[0].key.pMax < 0 {
+		return -1
+	}
+	if thisMax := int(ks[0].key.pMax) + ks[0].key.lMax; thisMax > max {
+		return thisMax
+	}
+	return max
+}
+
 // for doing a running total of the maxBOF:
 // is the maxBOF we already have, further from the BOF than the maxBOF of the current signature?
 func maxBOF(max int, ks []keyFrame) int {
