@@ -170,7 +170,11 @@ func (g *gzipD) reader() io.Reader {
 }
 
 func (g *gzipD) path() string {
-	return g.p + string(filepath.Separator) + g.rdr.Name
+	name := g.rdr.Name
+	if len(name) == 0 {
+		name = strings.TrimSuffix(filepath.Base(g.p), filepath.Ext(g.p))
+	}
+	return g.p + string(filepath.Separator) + name
 }
 
 func (g *gzipD) size() int64 {

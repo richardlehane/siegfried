@@ -61,7 +61,7 @@ func (b *Matcher) newScorer(buf siegreader.Buffer, q chan struct{}, r chan core.
 		stop:        make(chan struct{}),
 		halt:        make(chan bool),
 
-		tally: &tally{&sync.Mutex{}, make(map[[2]int][][2]int64), make(map[[2]int]int)},
+		tally: &tally{&sync.Mutex{}, 0, 0, make(map[[2]int][][2]int64), make(map[[2]int]int)},
 	}
 	go s.filterHits() // this goroutine is a gateway that takes all keyframe hits and reports results on the results channel
 	go s.score()      // this is the main goroutine: it ranges on incoming, routing strikes
@@ -264,6 +264,8 @@ func (s *scorer) satisfy(c *cacheItem) {
 // this structure maintains the current state including actual (partial) and potential (stashed strikes) matches
 type tally struct {
 	mu               *sync.Mutex
+	bof              int64
+	eof              int64
 	partialMatches   map[[2]int][][2]int64 // map of a keyframe to a slice of offsets and lengths where it has matched
 	potentialMatches map[[2]int]int        // represents complete/incomplete keyframe hits
 }
@@ -567,117 +569,75 @@ func (s *scorer) sendResult(idx int, basis string) bool {
 
 // check to see whether should still wait for signatures in the priority list, given the offset
 func (s *scorer) continueWait(o int64, rev bool) bool {
-	var fails int
-	var hits int
-	w := s.waitSet.WaitingOn()
-	// if any of the waitlists are nil, will continue - unless there are no partial or potential matches
-	if w == nil {
-		if rev || s.bm.firstBOF < 0 || o < int64(s.bm.firstBOF) {
-			return true
-		}
-		s.tally.mu.Lock()
-		defer s.tally.mu.Unlock()
-		for k := range s.tally.partialMatches {
-			if k[1] == 0 {
-				hits++
-				kf := s.bm.keyFrames[k[0]]
-				if len(kf) == 1 {
-					return true
-				}
-				for i, f := range kf[1:] {
-					if f.typ > frames.PREV {
-						break
-					}
-					if f.key.pMax == -1 || f.key.pMax+int64(f.key.lMax) > o {
-						return true
-					}
-					if _, ok := s.tally.partialMatches[[2]int{k[0], i + 1}]; ok {
-						continue
-					}
-					if _, ok := s.tally.potentialMatches[[2]int{k[0], i + 1}]; ok {
-						continue
-					}
-					fails++
-					break
-				}
-			}
-		}
-		if fails != hits {
-			return true
-		}
-		fails, hits = 0, 0
-		for k := range s.tally.potentialMatches {
-			if k[1] == 0 {
-				hits++
-				kf := s.bm.keyFrames[k[0]]
-				if len(kf) == 1 {
-					return true
-				}
-				for i, f := range kf[1:] {
-					if f.typ > frames.PREV {
-						break
-					}
-					if f.key.pMax == -1 || f.key.pMax+int64(f.key.lMax) > o {
-						return true
-					}
-					if _, ok := s.tally.partialMatches[[2]int{k[0], i + 1}]; ok {
-						continue
-					}
-					if _, ok := s.tally.potentialMatches[[2]int{k[0], i + 1}]; ok {
-						continue
-					}
-					fails++
-					break
-				}
-			}
-		}
-		if fails == hits {
-			return false
-		}
-		return true
+	if rev {
+		s.tally.eof = o
+	} else {
+		s.tally.bof = o
 	}
-	if len(w) == 0 {
+	w := s.waitSet.WaitingOn()
+
+	// if any of the waitlists are nil, will continue - unless there are no possible partial or potential matches
+	if w == nil {
+		// keep going if we don't have a maximum known bof, or if our current bof/eof are less than the maximum known bof/eof
+		if s.bm.knownBOF < 0 || int64(s.bm.knownBOF) > s.tally.bof || int64(s.bm.knownEOF) > s.tally.eof {
+			return true
+		}
+	} else if len(w) == 0 { // if we're not waiting on anything, we're done
 		return false
 	}
 	s.tally.mu.Lock()
 	defer s.tally.mu.Unlock()
-	for _, v := range w {
-		kf := s.bm.keyFrames[v]
-		if rev {
-			for i := len(kf) - 1; i >= 0 && kf[i].typ > frames.PREV; i-- {
-				if kf[i].key.pMax == -1 || kf[i].key.pMax+int64(kf[i].key.lMax) > o {
-					return true
-				}
-				if _, ok := s.tally.partialMatches[[2]int{v, i}]; ok {
-					continue
-				}
-				if _, ok := s.tally.potentialMatches[[2]int{v, i}]; ok {
-					continue
-				}
-				fails++
-				break
-			}
-		} else {
-			for i, f := range kf {
-				if f.typ > frames.PREV {
+	if w == nil {
+		w = make([]int, 0, len(s.tally.partialMatches)+len(s.tally.potentialMatches))
+		for k := range s.tally.partialMatches {
+			var present bool
+			for _, v := range w {
+				if v == k[0] {
+					present = true
 					break
 				}
-				if f.key.pMax == -1 || f.key.pMax+int64(f.key.lMax) > o {
-					return true
+			}
+			if !present {
+				w = append(w, k[0])
+			}
+		}
+		for k := range s.tally.potentialMatches {
+			var present bool
+			for _, v := range w {
+				if v == k[0] {
+					present = true
+					break
 				}
-				if _, ok := s.tally.partialMatches[[2]int{v, i}]; ok {
-					continue
-				}
-				if _, ok := s.tally.potentialMatches[[2]int{v, i}]; ok {
-					continue
-				}
-				fails++
-				break
+			}
+			if !present {
+				w = append(w, k[0])
 			}
 		}
 	}
-	if fails == len(w) {
-		return false
+	// now for each of the possible signatures we are waiting on, check whether there are contenders
+	for _, v := range w {
+		kf := s.bm.keyFrames[v]
+		for i, f := range kf {
+			off := s.tally.bof
+			if f.typ > frames.PREV {
+				off = s.tally.eof
+			}
+			var waitfor bool
+			if f.key.pMax == -1 || f.key.pMax+int64(f.key.lMax) > off {
+				waitfor = true
+			} else if _, ok := s.tally.partialMatches[[2]int{v, i}]; ok {
+				waitfor = true
+			} else if _, ok := s.tally.potentialMatches[[2]int{v, i}]; ok {
+				waitfor = true
+			}
+			if waitfor {
+				if i == len(kf)-1 {
+					return true
+				}
+				continue
+			}
+			break
+		}
 	}
-	return true
+	return false
 }

@@ -211,14 +211,14 @@ func main() {
 
 	if *version {
 		version := config.Version()
-		fmt.Printf("Siegfried version: %d.%d.%d\n", version[0], version[1], version[2])
+		fmt.Printf("siegfried version: %d.%d.%d\n", version[0], version[1], version[2])
 		return
 	}
 
 	if *update {
 		msg, err := updateSigs()
 		if err != nil {
-			log.Fatalf("Siegfried: error updating signature file, %v", err)
+			log.Fatalf("Error: failed to update signature file, %v", err)
 		}
 		fmt.Println(msg)
 		return

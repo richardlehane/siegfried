@@ -269,18 +269,46 @@ func updatePositions(ks []keyFrame) {
 	}
 }
 
-// for doing a running total of the firstBOF:
-// look for the max offset for the first segment in a signature
-// if that point is greater than the current max, return it
-func firstBOF(max int, ks []keyFrame) int {
-	if max < 0 || len(ks) < 1 {
-		return max
+// for doing a running total of the firstBOF and firstEOF:
+func firstBOFandEOF(bof int, eof int, ks []keyFrame) (int, int) {
+	if bof < 0 {
+		return bof, eof
 	}
-	if ks[0].typ > frames.BOF || ks[0].key.pMax < 0 {
-		return -1
+	b := getMax(-1, func(t frames.OffType) bool { return t == frames.BOF }, ks, true)
+	if b < 0 {
+		e := getMax(-1, func(t frames.OffType) bool { return t == frames.EOF }, ks, true)
+		if e < 0 {
+			return -1, -1
+		}
+		if e > eof {
+			eof = e
+		}
+		return bof, eof
 	}
-	if thisMax := int(ks[0].key.pMax) + ks[0].key.lMax; thisMax > max {
-		return thisMax
+	if b > bof {
+		bof = b
+	}
+	return bof, eof
+}
+
+func getMax(max int, t func(frames.OffType) bool, ks []keyFrame, localMin bool) int {
+	for _, v := range ks {
+		if t(v.typ) {
+			if v.key.pMax < 0 {
+				if !localMin {
+					return -1
+				}
+				continue
+			}
+			this := int(v.key.pMax) + v.key.lMax
+			if localMin {
+				if max < 0 || this < max {
+					max = this
+				}
+			} else if this > max {
+				max = this
+			}
+		}
 	}
 	return max
 }
@@ -289,36 +317,16 @@ func firstBOF(max int, ks []keyFrame) int {
 // is the maxBOF we already have, further from the BOF than the maxBOF of the current signature?
 func maxBOF(max int, ks []keyFrame) int {
 	if max < 0 {
-		return -1
+		return max
 	}
-	for _, v := range ks {
-		if v.typ < frames.SUCC {
-			if v.key.pMax < 0 {
-				return -1
-			}
-			if int(v.key.pMax)+v.key.lMax > max {
-				max = int(v.key.pMax) + v.key.lMax
-			}
-		}
-	}
-	return max
+	return getMax(max, func(t frames.OffType) bool { return t < frames.SUCC }, ks, false)
 }
 
 func maxEOF(max int, ks []keyFrame) int {
 	if max < 0 {
-		return -1
+		return max
 	}
-	for _, v := range ks {
-		if v.typ > frames.PREV {
-			if v.key.pMax < 0 {
-				return -1
-			}
-			if int(v.key.pMax)+v.key.lMax > max {
-				max = int(v.key.pMax) + v.key.lMax
-			}
-		}
-	}
-	return max
+	return getMax(max, func(t frames.OffType) bool { return t > frames.PREV }, ks, false)
 }
 
 func crossOver(a, b keyFrame) bool {

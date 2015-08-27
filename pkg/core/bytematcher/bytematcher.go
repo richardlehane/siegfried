@@ -36,7 +36,8 @@ type Matcher struct {
 	eofFrames  *frameSet
 	bofSeq     *seqSet
 	eofSeq     *seqSet
-	firstBOF   int
+	knownBOF   int
+	knownEOF   int
 	maxBOF     int
 	maxEOF     int
 	priorities *priority.Set
@@ -71,7 +72,8 @@ func Load(ls *persist.LoadSaver) *Matcher {
 		eofFrames:  loadFrameSet(ls),
 		bofSeq:     loadSeqSet(ls),
 		eofSeq:     loadSeqSet(ls),
-		firstBOF:   ls.LoadInt(),
+		knownBOF:   ls.LoadInt(),
+		knownEOF:   ls.LoadInt(),
 		maxBOF:     ls.LoadInt(),
 		maxEOF:     ls.LoadInt(),
 		priorities: priority.Load(ls),
@@ -91,7 +93,8 @@ func (b *Matcher) Save(ls *persist.LoadSaver) {
 	b.eofFrames.save(ls)
 	b.bofSeq.save(ls)
 	b.eofSeq.save(ls)
-	ls.SaveInt(b.firstBOF)
+	ls.SaveInt(b.knownBOF)
+	ls.SaveInt(b.knownEOF)
 	ls.SaveInt(b.maxBOF)
 	ls.SaveInt(b.maxEOF)
 	b.priorities.Save(ls)
@@ -186,7 +189,8 @@ func (b *Matcher) String() string {
 	str += fmt.Sprintf("Right Tests: %v\n", r)
 	str += fmt.Sprintf("Maximum Left Distance: %v\n", ml)
 	str += fmt.Sprintf("Maximum Right Distance: %v\n", mr)
-	str += fmt.Sprintf("Maximum first BOF sequence distance: %v\n", b.firstBOF)
+	str += fmt.Sprintf("Known BOF distance: %v\n", b.knownBOF)
+	str += fmt.Sprintf("Known EOF distance: %v\n", b.knownEOF)
 	str += fmt.Sprintf("Maximum BOF Distance: %v\n", b.maxBOF)
 	str += fmt.Sprintf("Maximum EOF Distance: %v\n", b.maxEOF)
 	str += fmt.Sprintf("priorities: %v\n", b.priorities)
