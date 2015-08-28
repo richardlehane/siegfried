@@ -42,6 +42,8 @@ var pronom = struct {
 	zip  string
 	tar  string
 	gzip string
+	// text puid
+	text string
 }{
 	reports:          "pronom",
 	extensions:       "custom",
@@ -51,6 +53,7 @@ var pronom = struct {
 	zip:              "x-fmt/263",
 	tar:              "x-fmt/265",
 	gzip:             "x-fmt/266",
+	text:             "x-fmt/111",
 }
 
 // GETTERS
@@ -214,6 +217,14 @@ func ExtendC() []string {
 
 func HarvestOptions() (string, time.Duration, *http.Transport) {
 	return pronom.harvestURL, pronom.harvestTimeout, pronom.harvestTransport
+}
+
+func ZipPuid() string {
+	return pronom.zip
+}
+
+func TextPuid() string {
+	return pronom.text
 }
 
 func IsArchive(p string) Archive {

@@ -575,8 +575,7 @@ func (s *scorer) continueWait(o int64, rev bool) bool {
 		s.tally.bof = o
 	}
 	w := s.waitSet.WaitingOn()
-
-	// if any of the waitlists are nil, will continue - unless there are no possible partial or potential matches
+	// if any of the waitlists are nil, we will continue - unless we are past the known bof and known eof (points at which we *should* have got at least partial matches), in which case we will check if any partial/potential matches are live
 	if w == nil {
 		// keep going if we don't have a maximum known bof, or if our current bof/eof are less than the maximum known bof/eof
 		if s.bm.knownBOF < 0 || int64(s.bm.knownBOF) > s.tally.bof || int64(s.bm.knownEOF) > s.tally.eof {
@@ -588,6 +587,7 @@ func (s *scorer) continueWait(o int64, rev bool) bool {
 	s.tally.mu.Lock()
 	defer s.tally.mu.Unlock()
 	if w == nil {
+		// if we don't have a waitlist, and we are past the known bof and known eof, grab all the partials and potentials to check if any are live
 		w = make([]int, 0, len(s.tally.partialMatches)+len(s.tally.potentialMatches))
 		for k := range s.tally.partialMatches {
 			var present bool
@@ -614,7 +614,7 @@ func (s *scorer) continueWait(o int64, rev bool) bool {
 			}
 		}
 	}
-	// now for each of the possible signatures we are waiting on, check whether there are contenders
+	// now for each of the possible signatures we are either waiting on or have partial/potential matches for, check whether there are live contenders
 	for _, v := range w {
 		kf := s.bm.keyFrames[v]
 		for i, f := range kf {
@@ -630,6 +630,7 @@ func (s *scorer) continueWait(o int64, rev bool) bool {
 			} else if _, ok := s.tally.potentialMatches[[2]int{v, i}]; ok {
 				waitfor = true
 			}
+			// if we've got to the end of the signature, and have determined this is a live one - return immediately & continue scan
 			if waitfor {
 				if i == len(kf)-1 {
 					return true
@@ -639,5 +640,6 @@ func (s *scorer) continueWait(o int64, rev bool) bool {
 			break
 		}
 	}
+	// exhausted all contenders, we can stop scanning
 	return false
 }
