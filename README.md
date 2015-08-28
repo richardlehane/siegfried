@@ -75,9 +75,9 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 ## Recent Changes
 ### Version 1.3.0 (Forthcoming)
-- scan within warc and arc files with -z flag; feature reqested by [Dragan Espenschied](https://github.com/richardlehane/siegfried/issues/43)
-- [quit scanning earlier on known unknowns](https://github.com/richardlehane/siegfried/commit/5ba4179ded4aa3b7bcd8976351fe2d3541eb2a39): if signature file is built with a limited set of signatures, and all of those signatures have segments that must appear at a fixed offset from the beginning of file (e.g. a PDF marker), calculate the last offset at which those segments must appear and quit early if no partial or potential matches by that point.
-- bugfix: upgraded versions of sf panic on attempting to read old signature files; reported by [Stefan](https://github.com/richardlehane/siegfried/issues/49) 
+- feature: scan within warc and arc files with -z flag; reqested by [Dragan Espenschied](https://github.com/richardlehane/siegfried/issues/43)
+- feature: [quit scanning earlier on known unknowns](https://github.com/richardlehane/siegfried/commit/f7fedf6b629048e1c41a694f4428e94deeffd3ee)
+- bugfix: upgraded versions of sf panic when attempting to read old signature files; reported by [Stefan](https://github.com/richardlehane/siegfried/issues/49) 
 - bugfix: panic mmap'ing files over 1GB on Win32; reported by [Duncan](https://github.com/richardlehane/siegfried/issues/50) 
 
 ### Version 1.2.2 (15/8/2015)
