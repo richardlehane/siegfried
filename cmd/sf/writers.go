@@ -270,7 +270,7 @@ func (d *droidWriter) writeFile(p string, sz int64, mod string, checksum []byte,
 	if sz < 0 || ids == nil {
 		d.rec[5], d.rec[7], d.rec[12], d.rec[13], d.rec[14], d.rec[15], d.rec[16], d.rec[17] = "", "", "", "", "", "", "", ""
 		if sz < 0 {
-			d.rec[8], d.rec[11] = "Folder", "false"
+			d.rec[8], d.rec[9], d.rec[11] = "Folder", "", "false"
 			d.parents[d.rec[3]] = parent{d.id, d.rec[2], ""}
 		} else {
 			d.rec[8], d.rec[11] = "", ""
