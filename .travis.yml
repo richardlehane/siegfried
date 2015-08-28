@@ -11,5 +11,6 @@ branches:
 install:
   - go get github.com/richardlehane/siegfried/cmd/sf
 script:
+  - go test github.com/richardlehane/siegfried/cmd/roy
   - go test github.com/richardlehane/siegfried/cmd/sf
 sudo: false
