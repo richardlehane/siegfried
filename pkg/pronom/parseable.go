@@ -150,6 +150,17 @@ func (f *filter) priorities() priority.Map {
 	return m.Filter(f.puids())
 }
 
+// a limited filter that just removes the byte signatures where container signatures are also defined
+type doublesFilter struct {
+	ids []string
+	parseable
+}
+
+func (db *doublesFilter) signatures() ([]frames.Signature, []string, error) {
+	filter := applyFilter(db.ids, db.parseable)
+	return filter.signatures()
+}
+
 // a mirror parseable mirrors the PREV wild segments within signatures as SUCC/EOF wild segments so they match at EOF as well as BOF
 type mirror struct{ parseable }
 

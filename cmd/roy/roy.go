@@ -49,6 +49,7 @@ var (
 	notext      = build.Bool("notext", false, "skip text matcher")
 	noext       = build.Bool("noext", false, "skip extension matcher")
 	noreports   = build.Bool("noreports", false, "build directly from DROID file rather than PRONOM reports")
+	doubleup    = build.Bool("doubleup", false, "include byte signatures for formats that also have container signatures")
 	rng         = build.Int("range", config.Range(), "define a maximum range for segmentation")
 	distance    = build.Int("distance", config.Distance(), "define a maximum distance for segmentation")
 	choices     = build.Int("choices", config.Choices(), "define a maximum number of choices for segmentation")
@@ -182,6 +183,9 @@ the DROID signature file you should also include a regular signature extension
 	}
 	if *noreports {
 		opts = append(opts, config.SetNoReports())
+	}
+	if *doubleup {
+		opts = append(opts, config.SetDoubleUp())
 	}
 	if *rng != config.Range() {
 		opts = append(opts, config.SetRange(*rng))

@@ -13,18 +13,24 @@ import (
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
+	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
-var testhome = flag.String("testhome", filepath.Join("..", "roy", "data"), "override the default home directory")
 var testdata = flag.String("testdata", filepath.Join(".", "testdata"), "override the default test data directory")
 
 var s *siegfried.Siegfried
 
 func setup() error {
+	if s != nil {
+		return nil
+	}
 	var err error
-	config.SetHome(*testhome)
-	s, err = siegfried.Load(config.Signature())
-	return err
+	s = siegfried.New()
+	p, err := pronom.New(config.SetDoubleUp())
+	if err != nil {
+		return err
+	}
+	return s.Add(p)
 }
 
 func identifyT(s *siegfried.Siegfried, p string) ([]string, error) {

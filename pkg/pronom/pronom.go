@@ -47,6 +47,12 @@ type pronom struct {
 // Pronom creates a pronom object
 func newPronom() (*pronom, error) {
 	p := &pronom{}
+	// apply no container rule
+	if !config.NoContainer() && !config.Inspect() {
+		if err := p.setContainers(); err != nil {
+			return nil, fmt.Errorf("Pronom: error loading containers; got %s\nUnless you have set `-nocontainer` you need to download a container signature file", err)
+		}
+	}
 	if err := p.setParseables(); err != nil {
 		return nil, err
 	}
@@ -57,12 +63,6 @@ func newPronom() (*pronom, error) {
 	if !config.NoPriority() {
 		p.pm = p.j.priorities()
 		p.pm.Complete()
-	}
-	// apply no container rule
-	if !config.NoContainer() {
-		if err := p.setContainers(); err != nil {
-			return nil, fmt.Errorf("Pronom: error loading containers; got %s\nUnless you have set `-nocontainer` you need to download a container signature file", err)
-		}
 	}
 	return p, nil
 }
@@ -126,6 +126,13 @@ func (p *pronom) setParseables() error {
 			return fmt.Errorf("Pronom: error loading reports; got %s\nYou must download PRONOM reports to build a signature (unless you use the -noreports flag). You can use `roy harvest` to download reports", err)
 		}
 		p.j = r
+	}
+	// exclude byte signatures where also have container signatures, unless doubleup set
+	if !config.DoubleUp() {
+		p.j = &doublesFilter{
+			config.ExcludeDoubles(puids, p.c.Puids()),
+			p.j,
+		}
 	}
 	// add extensions
 	for _, v := range config.Extend() {

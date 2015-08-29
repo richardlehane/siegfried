@@ -74,6 +74,9 @@ func Details() string {
 	if pronom.noreports {
 		str += "; built without reports"
 	}
+	if pronom.doubleup {
+		str += "; byte signatures included for formats that also have container signatures"
+	}
 	if HasLimit() {
 		str += "; limited to puids: " + strings.Join(pronom.limit, ", ")
 	}

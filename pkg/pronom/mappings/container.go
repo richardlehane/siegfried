@@ -46,3 +46,36 @@ type TriggerPuid struct {
 	ContainerType string `xml:",attr"`
 	Puid          string `xml:",attr"`
 }
+
+func (c *Container) Puids() []string {
+	if c == nil {
+		return []string{}
+	}
+	ids := make([]int, len(c.ContainerSignatures))
+	for i, v := range c.ContainerSignatures {
+		ids[i] = v.Id
+	}
+	hasId := func(id int) bool {
+		for _, v := range ids {
+			if id == v {
+				return true
+			}
+		}
+		return false
+	}
+	puids := make([]string, 0, len(c.FormatMappings))
+	addPuid := func(p string) {
+		for _, v := range puids {
+			if v == p {
+				return
+			}
+		}
+		puids = append(puids, p)
+	}
+	for _, v := range c.FormatMappings {
+		if hasId(v.Id) {
+			addPuid(v.Puid)
+		}
+	}
+	return puids
+}

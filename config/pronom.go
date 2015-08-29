@@ -29,6 +29,7 @@ var pronom = struct {
 	container        string   // e.g. container-signature-19770502.xml
 	reports          string   // directory where PRONOM reports are stored
 	noreports        bool     // build signature directly from DROID file rather than PRONOM reports
+	doubleup         bool     // include byte signatures for formats that also have container signatures
 	inspect          bool     // setting for inspecting PRONOM signatures
 	limit            []string // limit signature to a set of included PRONOM reports
 	exclude          []string // exclude a set of PRONOM reports from the signature
@@ -177,12 +178,11 @@ func HasExclude() bool {
 	return len(pronom.exclude) > 0
 }
 
-// takes a slice of puids and omits those that are also in the pronom.exclude slice
-func Exclude(puids []string) []string {
-	ret := make([]string, 0, len(puids)-len(pronom.exclude))
+func exclude(puids, ex []string) []string {
+	ret := make([]string, 0, len(puids))
 	for _, v := range puids {
 		excluded := false
-		for _, w := range pronom.exclude {
+		for _, w := range ex {
 			if v == w {
 				excluded = true
 				break
@@ -193,6 +193,20 @@ func Exclude(puids []string) []string {
 		}
 	}
 	return ret
+}
+
+// takes a slice of puids and omits those that are also in the pronom.exclude slice
+func Exclude(puids []string) []string {
+	return exclude(puids, pronom.exclude)
+}
+
+func DoubleUp() bool {
+	return pronom.doubleup
+}
+
+// takes a slice of puids and a slice of container puids and exludes those that are in the container slice, if nodoubles is set
+func ExcludeDoubles(puids, cont []string) []string {
+	return exclude(puids, cont)
 }
 
 func extensionPaths(e []string) []string {
@@ -265,6 +279,13 @@ func SetReports(r string) func() private {
 func SetNoReports() func() private {
 	return func() private {
 		pronom.noreports = true
+		return private{}
+	}
+}
+
+func SetDoubleUp() func() private {
+	return func() private {
+		pronom.doubleup = true
 		return private{}
 	}
 }
