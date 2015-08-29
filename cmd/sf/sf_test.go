@@ -16,7 +16,10 @@ import (
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
-var testdata = flag.String("testdata", filepath.Join(".", "testdata"), "override the default test data directory")
+var (
+	testhome = flag.String("testhome", "../roy/data", "override the default home directory")
+	testdata = flag.String("testdata", filepath.Join(".", "testdata"), "override the default test data directory")
+)
 
 var s *siegfried.Siegfried
 
@@ -26,6 +29,7 @@ func setup() error {
 	}
 	var err error
 	s = siegfried.New()
+	config.SetHome(*testhome)
 	p, err := pronom.New(config.SetDoubleUp())
 	if err != nil {
 		return err
