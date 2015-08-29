@@ -73,13 +73,6 @@ func multiIdentifyT(s *siegfried.Siegfried, r string) ([][]string, error) {
 	return set, err
 }
 
-func TestLoad(t *testing.T) {
-	err := setup()
-	if err != nil {
-		t.Error(err)
-	}
-}
-
 func check(i string, j []string) bool {
 	for _, v := range j {
 		if i == v {
