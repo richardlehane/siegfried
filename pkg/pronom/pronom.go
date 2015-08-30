@@ -68,11 +68,15 @@ func newPronom() (*pronom, error) {
 }
 
 func (p *pronom) identifier() *Identifier {
-	p.Identifier = &Identifier{p: p,
+	p.Identifier = &Identifier{
+		p:          p,
 		name:       config.Name(),
 		details:    config.Details(),
 		noPriority: config.NoPriority(),
 		infos:      p.j.infos(),
+	}
+	if p.hasPuid(config.ZipPuid()) {
+		p.Identifier.zipDefault = true
 	}
 	return p.Identifier
 }
@@ -240,7 +244,7 @@ func (p *pronom) add(m core.Matcher) error {
 		}
 		p.bStart = l - len(p.bPuids)
 	case *textmatcher.Matcher:
-		if !config.NoText() {
+		if !config.NoText() && p.hasPuid(config.TextPuid()) {
 			l, _ := m.Add(textmatcher.SignatureSet{}, nil)
 			p.tStart = l
 		}

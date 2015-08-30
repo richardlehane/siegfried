@@ -95,10 +95,10 @@ func newCSV(w io.Writer) *csvWriter {
 
 func (c *csvWriter) writeHead(s *siegfried.Siegfried) {
 	if *hashf != "" {
-		c.w.Write([]string{"filename", "filesize", "file modified", "errors", hashHeader(false), "identifier", "id", "format name", "format version", "mimetype", "basis", "warning"})
+		c.w.Write([]string{"filename", "filesize", "modified", "errors", hashHeader(false), "id", "puid", "format", "version", "mime", "basis", "warning"})
 		return
 	}
-	c.w.Write([]string{"filename", "filesize", "file modified", "errors", "identifier", "id", "format name", "format version", "mimetype", "basis", "warning"})
+	c.w.Write([]string{"filename", "filesize", "modified", "errors", "id", "puid", "format", "version", "mime", "basis", "warning"})
 }
 
 func (c *csvWriter) writeFile(name string, sz int64, mod string, checksum []byte, err error, ids iterableID) config.Archive {
