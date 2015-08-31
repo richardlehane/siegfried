@@ -154,13 +154,14 @@ func (i *Identifier) Recognise(m core.MatcherType, idx int) (bool, string) {
 }
 
 func (i *Identifier) Recorder() core.Recorder {
-	return &Recorder{i, make(pids, 0, 10), 1}
+	return &Recorder{i, make(pids, 0, 10), 1, false}
 }
 
 type Recorder struct {
 	*Identifier
-	ids    pids
-	cscore int
+	ids       pids
+	cscore    int
+	satisfied bool
 }
 
 func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
@@ -199,6 +200,9 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 		}
 	case core.ByteMatcher:
 		if res.Index() >= r.bStart && res.Index() < r.bStart+len(r.bPuids) {
+			if r.satisfied {
+				return true
+			}
 			idx := res.Index() - r.bStart
 			r.cscore *= 2
 			basis := res.Basis()
@@ -213,6 +217,9 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 		}
 	case core.TextMatcher:
 		if res.Index() == r.tStart {
+			if r.satisfied {
+				return true
+			}
 			r.ids = add(r.ids, r.name, config.TextPuid(), r.infos[config.TextPuid()], res.Basis(), 2)
 			return true
 		} else {
@@ -242,6 +249,7 @@ func (r *Recorder) Satisfied(mt core.MatcherType) bool {
 			return false
 		}
 	}
+	r.satisfied = true
 	return true
 }
 

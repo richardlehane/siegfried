@@ -287,7 +287,6 @@ func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, e
 	for _, rec := range recs {
 		if !rec.Satisfied(core.ByteMatcher) {
 			satisfied = false
-			break
 		}
 	}
 	// Byte Matcher
