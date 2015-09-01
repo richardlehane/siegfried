@@ -1,43 +1,41 @@
 package bytematcher
 
-// TODO: something!
-
-/*
 import (
 	"bytes"
 	"testing"
+
+	"github.com/richardlehane/siegfried/pkg/core"
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames/tests"
+	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
-
-// Matcher
-var TestMatcher *matcher = &matcher{
-	b:                BmStub,
-	buf:              siegreader.New(),
-	r:                make(chan int),
-	partialKeyframes: make(map[[2]int][][2]int),
-	limit:            nil,
-	limitm:           &sync.RWMutex{},
-	limitc:           nil,
-	incoming:         make(chan strike),
-	quit:             make(chan struct{}),
+func setup() (chan<- strike, <-chan core.Result) {
+	bm := New()
+	bm.Add(SignatureSet(tests.TestSignatures), nil)
+	bufs := siegreader.New()
+	buf, _ := bufs.Get(bytes.NewBuffer(TestSample1))
+	res := make(chan core.Result)
+	return bm.newScorer(buf, make(chan struct{}), res), res
 }
 
-func TestMatch(t *testing.T) {
-	err := matcherStub.buf.SetSource(bytes.NewBuffer(mStub))
-	if err != nil {
-		t.Errorf("matcher fail: error setting siegreader source")
-	}
-
-	go matcherStub.match()
-	for {
-		select {
-		case matcherStub.incoming <- strike{0, 10, 5, false, false}:
-		case i := <-matcherStub.r:
-			if i != 1 {
-				t.Errorf("matcher fail: expecting 1, got %d", i)
-			}
-			return
-		}
+func TestScorer(t *testing.T) {
+	scorer, res := setup()
+	scorer <- strike{0, 0, 0, 4, false, false, true}
+	scorer <- strike{1, 0, 17, 9, true, false, false}
+	scorer <- strike{1, 1, 30, 5, true, false, true}
+	if r := <-res; r.Index() != 0 {
+		t.Errorf("expecting result %d, got %d", 0, r.Index())
 	}
 }
-*/
+
+// 1 Sept 15 BenchmarkScorer	   10000	   3260800 ns/op
+
+func BenchmarkScorer(bench *testing.B) {
+	scorer, res := setup()
+	for i := 0; i < bench.N; i++ {
+		scorer <- strike{0, 0, 0, 4, false, false, true}
+		scorer <- strike{1, 0, 17, 9, true, false, false}
+		scorer <- strike{1, 1, 30, 5, true, false, true}
+		_ = <-res
+	}
+}

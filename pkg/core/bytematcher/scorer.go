@@ -30,7 +30,7 @@ type scorer struct {
 	bm       *Matcher
 	buf      siegreader.Buffer
 	quit     chan struct{}
-	results  chan core.Result
+	results  chan<- core.Result
 	incoming chan strike
 
 	strikeCache strikeCache
@@ -44,7 +44,7 @@ type scorer struct {
 	tally *tally
 }
 
-func (b *Matcher) newScorer(buf siegreader.Buffer, q chan struct{}, r chan core.Result) chan strike {
+func (b *Matcher) newScorer(buf siegreader.Buffer, q chan struct{}, r chan<- core.Result) chan<- strike {
 	incoming := make(chan strike) // buffer this chan?
 	s := &scorer{
 		bm:       b,
