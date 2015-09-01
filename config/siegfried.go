@@ -43,7 +43,7 @@ var siegfried = struct {
 	signature:       "pronom.sig",
 	magic:           []byte{'s', 'f', 0x00, 0xFF},
 	distance:        8192,
-	rng:             512,
+	rng:             2049,
 	choices:         64,
 	updateURL:       "http://www.itforarchivists.com/siegfried/update",
 	updateTimeout:   30 * time.Second,

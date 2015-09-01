@@ -23,14 +23,15 @@ var (
 
 var s *siegfried.Siegfried
 
-func setup() error {
-	if s != nil {
+func setup(opts ...config.Option) error {
+	if opts == nil && s != nil {
 		return nil
 	}
 	var err error
 	s = siegfried.New()
 	config.SetHome(*testhome)
-	p, err := pronom.New(config.SetDoubleUp())
+	opts = append(opts, config.SetDoubleUp())
+	p, err := pronom.New(opts...)
 	if err != nil {
 		return err
 	}
@@ -239,7 +240,7 @@ func Test363(t *testing.T) {
 // Benchmarks
 func BenchmarkNew(bench *testing.B) {
 	for i := 0; i < bench.N; i++ {
-		setup()
+		setup(config.SetNoReports(), config.SetDroid("DROID_SignatureFile_V79.xml"))
 	}
 }
 
