@@ -240,7 +240,7 @@ func Test363(t *testing.T) {
 // Benchmarks
 func BenchmarkNew(bench *testing.B) {
 	for i := 0; i < bench.N; i++ {
-		setup(config.SetNoReports(), config.SetDroid("DROID_SignatureFile_V79.xml"))
+		setup(config.SetDoubleUp())
 	}
 }
 

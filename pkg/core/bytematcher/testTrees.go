@@ -23,6 +23,9 @@ import (
 // further test to perform. Follow-up tests may be required to the left or to the right of the match.
 
 type testTree struct {
+	// keyFrames []keyFrameID
+	// incompleteIdx int
+	// incompletes []followUp L R are ints representing max length
 	complete         []keyFrameID
 	incomplete       []followUp
 	maxLeftDistance  int

@@ -28,11 +28,12 @@ func TestScorer(t *testing.T) {
 	}
 }
 
-// 1 Sept 15 BenchmarkScorer	   10000	   3260800 ns/op
-
+// 5 Sept 15 BenchmarkScorer	   20000	   117391 ns/op
 func BenchmarkScorer(bench *testing.B) {
-	scorer, res := setup()
 	for i := 0; i < bench.N; i++ {
+		bench.StopTimer()
+		scorer, res := setup()
+		bench.StartTimer()
 		scorer <- strike{0, 0, 0, 4, false, false, true}
 		scorer <- strike{1, 0, 17, 9, true, false, false}
 		scorer <- strike{1, 1, 30, 5, true, false, true}
