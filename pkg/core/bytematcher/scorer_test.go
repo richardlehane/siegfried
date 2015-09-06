@@ -14,6 +14,7 @@ func setup() (chan<- strike, <-chan core.Result) {
 	bm.Add(SignatureSet(tests.TestSignatures), nil)
 	bufs := siegreader.New()
 	buf, _ := bufs.Get(bytes.NewBuffer(TestSample1))
+	buf.SizeNow()
 	res := make(chan core.Result)
 	return bm.newScorer(buf, make(chan struct{}), res), res
 }

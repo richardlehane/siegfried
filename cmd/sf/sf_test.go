@@ -238,12 +238,6 @@ func Test363(t *testing.T) {
 }
 
 // Benchmarks
-func BenchmarkNew(bench *testing.B) {
-	for i := 0; i < bench.N; i++ {
-		setup(config.SetDoubleUp())
-	}
-}
-
 func benchidentify(ext string) {
 	file := filepath.Join(*testdata, "benchmark", "Benchmark")
 	file += "." + ext
