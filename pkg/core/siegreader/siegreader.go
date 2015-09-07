@@ -51,6 +51,7 @@ type Buffer interface {
 	hasQuit() bool
 	Size() int64
 	SizeNow() int64
+	Stream() bool
 	canSeek(off int64, rev bool) (bool, error)
 	setLimit()
 	waitLimit()

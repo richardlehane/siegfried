@@ -1,4 +1,4 @@
-// Copyright 2014 Richard Lehane. All rights reserved.
+// Copyright 2015 Richard Lehane. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,78 +16,13 @@ package bytematcher
 
 import (
 	"fmt"
-	"sync"
 
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
-	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
-// scorer is a mutable object that tallies incoming strikes (part matches) from the BOF/EOF byte and frame matchers
-// it returns results and is responsible for signalling quit if an exit condition is met - either a) satisfied or b) the incoming channel closed
-type scorer struct {
-	bm       *Matcher
-	buf      siegreader.Buffer
-	quit     chan struct{}
-	results  chan<- core.Result
-	incoming chan strike
-
-	strikeCache strikeCache
-	kfHits      chan kfHit
-	waitSet     *priority.WaitSet
-	queue       *sync.WaitGroup
-	once        *sync.Once
-	stop        chan struct{}
-	halt        chan bool
-
-	tally *tally
-}
-
-func (b *Matcher) newScorer(buf siegreader.Buffer, q chan struct{}, r chan<- core.Result) chan<- strike {
-	incoming := make(chan strike) // buffer this chan?
-	s := &scorer{
-		bm:       b,
-		buf:      buf,
-		quit:     q,
-		results:  r,
-		incoming: incoming,
-
-		strikeCache: make(strikeCache),
-		kfHits:      make(chan kfHit),
-		waitSet:     b.priorities.WaitSet(),
-		queue:       &sync.WaitGroup{},
-		once:        &sync.Once{},
-		stop:        make(chan struct{}),
-		halt:        make(chan bool),
-
-		tally: &tally{&sync.Mutex{}, 0, 0, make(map[[2]int][][2]int64), make(map[[2]int]int)},
-	}
-	go s.filterHits() // this goroutine is a gateway that takes all keyframe hits and reports results on the results channel
-	go s.score()      // this is the main goroutine: it ranges on incoming, routing strikes
-	return incoming
-}
-
-func (s *scorer) score() {
-	for in := range s.incoming {
-		select {
-		case <-s.quit:
-			return
-		default:
-		}
-		if in.idxa == -1 { // check whether should keep waiting for progress strikes
-			if !s.continueWait(in.offset, in.reverse) {
-				break
-			}
-		} else {
-			s.stash(in) // stash the strike
-		}
-	}
-	s.shutdown(true) // shutdown at eof
-}
-
 // Strikes
-
 // strike is a raw hit from either the WAC matchers or the BOF/EOF frame matchers
 // progress strikes aren't hits: and have -1 for idxa, they just report how far we have scanned
 type strike struct {
@@ -97,11 +32,18 @@ type strike struct {
 	length  int
 	reverse bool
 	frame   bool // is it a frameset match?
-	final   bool // last in a sequence of strikes?
 }
 
 func (st strike) String() string {
-	return fmt.Sprintf("{STRIKE Test: [%d:%d], Offset: %d, Length: %d, Reverse: %t, Frame: %t, Final: %t}", st.idxa, st.idxb, st.offset, st.length, st.reverse, st.frame, st.final)
+	strikeOrientation := "BOF"
+	if st.reverse {
+		strikeOrientation = "EOF"
+	}
+	strikeType := "sequence"
+	if st.frame {
+		strikeType = "frametest"
+	}
+	return fmt.Sprintf("{%s %s hit - test index: %d [%d], offset: %d, length: %d}", strikeOrientation, strikeType, st.idxa+st.idxb, st.idxb, st.offset, st.length)
 }
 
 // progress strikes are special results from the WAC matchers that periodically report on progress, these aren't hits
@@ -111,404 +53,81 @@ func progressStrike(off int64, rev bool) strike {
 		idxb:    -1,
 		offset:  off,
 		reverse: rev,
-		final:   true,
 	}
 }
 
-// Cache Strikes
-
-// strike cache holds strikes until it is necessary to evaluate them
-type strikeCache map[int]*cacheItem
-
-type cacheItem struct {
-	finalised  bool
-	potentials []keyFrameID // list of sigs this might match
-	first      strike       // full details for the first match
-
-	mu         *sync.Mutex
-	successive [][2]int64 // just cache the offsets of successive matches
-	strikeIdx  int        // -1 signals that the strike is in the first position, otherwise an index into the successive slice
-	satisfying bool       // state when a cacheItem is currently trying a strike
+// strikes are cached in a map of strike items
+type strikeItem struct {
+	first      strike
+	idx        int
+	successive [][2]int64
 }
 
-func (s *scorer) newCacheItem(st strike) *cacheItem {
-	return &cacheItem{
-		finalised:  st.final,
-		potentials: s.bm.tests[st.idxa+st.idxb].keyFrames(),
-		first:      st,
-		mu:         &sync.Mutex{},
-		strikeIdx:  -1,
+func (s *strikeItem) hasPotential() bool {
+	return s.idx+1 <= len(s.successive)
+}
+
+func (s *strikeItem) pop() strike {
+	s.idx++
+	if s.idx > 0 {
+		s.first.offset, s.first.length = s.successive[s.idx-1][0], int(s.successive[s.idx-1][1])
 	}
+	return s.first
 }
 
-// adds a new strike to an existing cache item, returns the current satisfying state
-func (c *cacheItem) push(st strike) bool {
-	c.mu.Lock()
-	defer c.mu.Unlock()
-	if c.successive == nil {
-		c.successive = make([][2]int64, 1, 10)
-		c.successive[0][0], c.successive[0][1] = st.offset, int64(st.length)
-		return c.satisfying
+// potential hits are marked in a map of hitItems
+type hitItem struct {
+	potentialIdxs []int        // indexes to the strike cache
+	partials      [][][2]int64 // for each keyframe in a signature, a slice of offsets and lengths of matches
+	matched       bool         // if we've already matched, mark so don't return
+}
+
+// return next strike to test, true if continue/false if done
+func (h *hitItem) nextPotential(s map[int]*strikeItem) (strike, bool) {
+	if h == nil || !h.potentiallyComplete(-1, s) {
+		return strike{}, false
 	}
-	c.successive = append(c.successive, [2]int64{st.offset, int64(st.length)})
-	return c.satisfying
-}
-
-// pops a strike from the item. Changes the satisfying state if returning the first strike. Returns strike and the satisfying state.
-func (c *cacheItem) pop(s *scorer) (strike, bool) {
-	ret := c.first
-	s.tally.mu.Lock()
-	defer s.tally.mu.Unlock()
-	c.mu.Lock()
-	defer c.mu.Unlock()
-	if c.strikeIdx > -1 {
-		// have we exhausted the cache?
-		if c.strikeIdx > len(c.successive)-1 {
-			c.satisfying = false              // mark that no longer in a satisfying state
-			for _, kf := range c.potentials { // unmark the potential matches
-				delete(s.tally.potentialMatches, [2]int{kf[0], kf[1]})
-			}
-			return ret, false
-		}
-		ret.offset, ret.length = c.successive[c.strikeIdx][0], int(c.successive[c.strikeIdx][1])
-	}
-	c.strikeIdx++
-	return ret, true
-}
-
-// 1. push the strike to the strike cache.
-// 2. mark potentials: a slice marking which keyframes are potentially matched
-// 3. filter those potentials (keyframes) against the waitset, and attempt to satisfy those that we are waiting on
-func (s *scorer) stash(st strike) {
-	stashed := s.strikeCache[st.idxa+st.idxb]
-	if stashed == nil {
-		stashed = s.newCacheItem(st)
-		if st.final && st.idxb > 0 {
-			if !s.strikeCache[st.idxa].finalised {
-				// if not, do so now
-				for i := st.idxb - 1; i >= 0; i-- {
-					s.strikeCache[st.idxa+i].finalised = true
-				}
-			}
-		}
-		s.strikeCache[st.idxa+st.idxb] = stashed
-	} else {
-		if stashed.push(st) {
-			return // return early if already satisfying
+	for i, v := range h.potentialIdxs {
+		// first try sending only when we don't have any corresponding partial matches
+		if v > 0 && h.partials[i] == nil && s[v-1].hasPotential() {
+			return s[v-1].pop(), true
 		}
 	}
-	// hold lock on tally while marking and satisfying potentials
-	s.tally.mu.Lock()
-	defer s.tally.mu.Unlock()
-	s.markPotentials(stashed.potentials, st.idxa+st.idxb)
-	if !stashed.finalised {
-		return
-	}
-	// range through the potentials, continuing for those keyframes that are potentially complete (all segments in the signature have strikes)
-	for _, kf := range filterKF(stashed.potentials, s.waitSet) {
-		if s.tally.completes(kf[0], len(s.bm.keyFrames[kf[0]])) { // completes checks partial and potential matches for a signature
-			for i := 0; i < len(s.bm.keyFrames[kf[0]]); i++ {
-				idx, ok := s.tally.potentialMatches[[2]int{kf[0], i}] // if any part of the signature has potentials - send these
-				if ok {
-					s.satisfy(s.strikeCache[idx]) // satisfying will drain the cache for the signature part
-				}
-			}
+	// now start retrying other potentials, starting from the left
+	for _, v := range h.potentialIdxs {
+		if v > 0 && s[v-1].hasPotential() {
+			return s[v-1].pop(), true
 		}
 	}
+	return strike{}, false
 }
 
-func (s *scorer) satisfy(c *cacheItem) {
-	c.mu.Lock()
-	if c.satisfying {
-		c.mu.Unlock()
-		return
+// is a hit item potentially complete - i.e. has at least one potential strike,
+// and either partial matches or strikes for all segments
+func (h *hitItem) potentiallyComplete(idx int, s map[int]*strikeItem) bool {
+	if h.matched {
+		return false
 	}
-	c.satisfying = true
-	c.mu.Unlock()
-	s.queue.Add(1)
-	go func() {
-		defer s.queue.Done()
-		strike, ok := c.pop(s)
-		if !ok { // drained all in the cache
-			return
+	for i, v := range h.potentialIdxs {
+		if i == idx {
+			continue
 		}
-		// match with nothing better to wait for - kill the score routine
-		if s.testStrike(strike) {
-			return
-		}
-		for {
-			strike, ok = c.pop(s)
-			if !ok {
-				return
-			}
-			pots := filterKF(c.potentials, s.waitSet)
-			if len(pots) == 0 {
-				return
-			}
-			if !s.retainsPotential(pots) {
-				c.mu.Lock()
-				c.strikeIdx-- // backup
-				c.satisfying = false
-				c.mu.Unlock()
-				return
-			}
-			if s.testStrike(strike) {
-				return
-			}
-		}
-	}()
-}
-
-// Tally
-
-// this structure maintains the current state including actual (partial) and potential (stashed strikes) matches
-type tally struct {
-	mu               *sync.Mutex
-	bof              int64
-	eof              int64
-	partialMatches   map[[2]int][][2]int64 // map of a keyframe to a slice of offsets and lengths where it has matched
-	potentialMatches map[[2]int]int        // represents complete/incomplete keyframe hits
-}
-
-// completes returns true if a strike will complete a signature (all the other parts either match or potentially match)
-func (t *tally) completes(a, l int) bool {
-	for i := 0; i < l; i++ {
-		_, partial := t.partialMatches[[2]int{a, i}]
-		_, potential := t.potentialMatches[[2]int{a, i}]
-		if !(partial || potential) {
+		if (v == 0 || !s[v-1].hasPotential()) && h.partials[i] == nil {
 			return false
 		}
 	}
 	return true
 }
 
-func (s *scorer) markPotentials(pots []keyFrameID, idx int) {
-	for _, kf := range pots {
-		s.tally.potentialMatches[[2]int{kf[0], kf[1]}] = idx
+// return list of all hits, however fragmentary
+func all(m map[int]*hitItem) []int {
+	ret := make([]int, len(m))
+	i := 0
+	for k := range m {
+		ret[i] = k
+		i++
 	}
-}
-
-func (s *scorer) retainsPotential(pots []keyFrameID) bool {
-	s.tally.mu.Lock()
-	defer s.tally.mu.Unlock()
-	for _, kf := range pots {
-		if s.tally.completes(kf[0], len(s.bm.keyFrames[kf[0]])) {
-			return true
-		}
-	}
-	return false
-}
-
-func (s *scorer) applyKeyFrame(kfID keyFrameID, o int64, l int) (bool, string) {
-	kf := s.bm.keyFrames[kfID[0]]
-	if len(kf) == 1 {
-		return true, fmt.Sprintf("byte match at %d, %d", o, l)
-	}
-	s.tally.mu.Lock()
-	defer s.tally.mu.Unlock()
-	if _, ok := s.tally.partialMatches[kfID]; ok {
-		s.tally.partialMatches[kfID] = append(s.tally.partialMatches[kfID], [2]int64{o, int64(l)})
-	} else {
-		s.tally.partialMatches[kfID] = [][2]int64{[2]int64{o, int64(l)}}
-	}
-	return s.checkKeyFrames(kfID[0])
-}
-
-// check key frames checks the relationships between neighbouring frames
-func (s *scorer) checkKeyFrames(i int) (bool, string) {
-	kfs := s.bm.keyFrames[i]
-	for j := range kfs {
-		_, ok := s.tally.partialMatches[[2]int{i, j}]
-		if !ok {
-			return false, ""
-		}
-	}
-	prevOff := s.tally.partialMatches[[2]int{i, 0}]
-	basis := make([][][2]int64, len(kfs))
-	basis[0] = prevOff
-	prevKf := kfs[0]
-	var ok bool
-	for j, kf := range kfs[1:] {
-		thisOff := s.tally.partialMatches[[2]int{i, j + 1}]
-		prevOff, ok = kf.checkRelated(prevKf, thisOff, prevOff)
-		if !ok {
-			return false, ""
-		}
-		basis[j+1] = prevOff
-		prevKf = kf
-	}
-	return true, fmt.Sprintf("byte match at %v", basis)
-}
-
-// 2. Test strikes
-
-// a partial
-type partial struct {
-	l          bool
-	r          bool
-	ldistances []int
-	rdistances []int
-}
-
-// this will block until quit if EOF is inaccessible
-func (s *scorer) calcOffset(st strike) int64 {
-	if !st.reverse {
-		return st.offset
-	}
-	return s.buf.Size() - st.offset - int64(st.length)
-}
-
-// testStrike checks a strike for a match. Return true if we can halt now (nothing better to wait for)
-func (s *scorer) testStrike(st strike) bool {
-	// the offsets we *record* are always BOF offsets - these can be interpreted as EOF offsets when necessary
-	off := s.calcOffset(st)
-	// if we've quitted, the calculated offset will be a negative int
-	if off < 0 {
-		return true
-	}
-
-	// grab the relevant testTree
-	t := s.bm.tests[st.idxa+st.idxb]
-
-	// immediately apply key frames for the completes
-	for _, kf := range t.complete {
-		if s.bm.keyFrames[kf[0]][kf[1]].check(st.offset) && s.waitSet.Check(kf[0]) {
-			s.kfHits <- kfHit{kf, off, st.length}
-			if <-s.halt {
-				return true
-			}
-		}
-	}
-
-	// if there are no incompletes, we are done
-	if len(t.incomplete) < 1 {
-		return false
-	}
-
-	// see what incompletes are worth pursuing
-	//TODO: HANDLE INCOMPLETE CHECKS AS GOROUTINE
-	var checkl, checkr bool
-	for _, v := range t.incomplete {
-		if checkl && checkr {
-			break
-		}
-		if s.bm.keyFrames[v.kf[0]][v.kf[1]].check(st.offset) && s.waitSet.Check(v.kf[0]) {
-			if v.l {
-				checkl = true
-			}
-			if v.r {
-				checkr = true
-			}
-		}
-	}
-	if !checkl && !checkr {
-		return false
-	}
-
-	// calculate the offset and lengths for the left and right test slices
-	var lslc, rslc []byte
-	var lpos, rpos int64
-	var llen, rlen int
-	if st.reverse {
-		lpos, llen = st.offset+int64(st.length), t.maxLeftDistance
-		rpos, rlen = st.offset-int64(t.maxRightDistance), t.maxRightDistance
-		if rpos < 0 {
-			rlen = rlen + int(rpos)
-			rpos = 0
-		}
-	} else {
-		lpos, llen = st.offset-int64(t.maxLeftDistance), t.maxLeftDistance
-		rpos, rlen = st.offset+int64(st.length), t.maxRightDistance
-		if lpos < 0 {
-			llen = llen + int(lpos)
-			lpos = 0
-		}
-	}
-
-	//  the partials slice has a mirror entry for each of the testTree incompletes
-	partials := make([]partial, len(t.incomplete))
-
-	// test left (if there are valid left tests to try)
-	if checkl {
-		if st.reverse {
-			lslc, _ = s.buf.EofSlice(lpos, llen)
-		} else {
-			lslc, _ = s.buf.Slice(lpos, llen)
-		}
-		left := matchTestNodes(t.left, lslc, true)
-		for _, lp := range left {
-			if partials[lp.followUp].l {
-				partials[lp.followUp].ldistances = append(partials[lp.followUp].ldistances, lp.distances...)
-			} else {
-				partials[lp.followUp].l = true
-				partials[lp.followUp].ldistances = lp.distances
-			}
-		}
-	}
-	// test right (if there are valid right tests to try)
-	if checkr {
-		if st.reverse {
-			rslc, _ = s.buf.EofSlice(rpos, rlen)
-		} else {
-			rslc, _ = s.buf.Slice(rpos, rlen)
-		}
-		right := matchTestNodes(t.right, rslc, false)
-		for _, rp := range right {
-			if partials[rp.followUp].r {
-				partials[rp.followUp].rdistances = append(partials[rp.followUp].rdistances, rp.distances...)
-			} else {
-				partials[rp.followUp].r = true
-				partials[rp.followUp].rdistances = rp.distances
-			}
-		}
-	}
-
-	// now iterate through the partials, checking whether they fulfil any of the incompletes
-	for i, p := range partials {
-		if p.l == t.incomplete[i].l && p.r == t.incomplete[i].r {
-			kf := t.incomplete[i].kf
-			if s.bm.keyFrames[kf[0]][kf[1]].check(st.offset) && s.waitSet.Check(kf[0]) {
-				if !p.l {
-					p.ldistances = []int{0}
-				}
-				if !p.r {
-					p.rdistances = []int{0}
-				}
-				for _, ldistance := range p.ldistances {
-					for _, rdistance := range p.rdistances {
-						moff := off - int64(ldistance)
-						length := ldistance + st.length + rdistance
-						s.kfHits <- kfHit{kf, moff, length}
-						if <-s.halt {
-							return true
-						}
-					}
-				}
-			}
-		}
-	}
-	return false
-}
-
-func (s *scorer) shutdown(eof bool) {
-	go s.once.Do(func() { s.finalise(eof) })
-}
-
-func (s *scorer) finalise(eof bool) {
-	// if we've reached the end of the file, need to make sure any pending tests are completed
-	if eof {
-		s.queue.Wait()
-	}
-	close(s.quit) // signals siegreaders to end
-	// drain any remaining matches
-	for _ = range s.incoming {
-	}
-	// must wait for all pending tests to complete (so that the halt signal is sent back to them)
-	if !eof {
-		s.queue.Wait()
-	}
-	close(s.results)
-	close(s.stop)
+	return ret
 }
 
 type kfHit struct {
@@ -517,36 +136,11 @@ type kfHit struct {
 	length int
 }
 
-func (s *scorer) filterHits() {
-	var satisfied bool
-	for {
-		select {
-		case <-s.stop:
-			return
-		case hit := <-s.kfHits:
-			if satisfied {
-				// the halt channel tells the testStrike goroutine
-				// to continuing checking complete/incomplete tests for the strike
-				s.halt <- true
-				continue
-			}
-			// in case of a race
-			if !s.waitSet.Check(hit.id[0]) {
-				s.halt <- false
-				continue
-			}
-			success, basis := s.applyKeyFrame(hit.id, hit.offset, hit.length)
-			if success {
-				if h := s.sendResult(hit.id[0], basis); h {
-					s.halt <- true
-					satisfied = true
-					s.shutdown(false)
-					continue
-				}
-			}
-			s.halt <- false
-		}
-	}
+type partial struct {
+	l          bool
+	r          bool
+	ldistances []int
+	rdistances []int
 }
 
 type result struct {
@@ -562,84 +156,312 @@ func (r result) Basis() string {
 	return r.basis
 }
 
-func (s *scorer) sendResult(idx int, basis string) bool {
-	s.results <- result{idx, basis}
-	return s.waitSet.Put(idx)
-}
+func (b *Matcher) scorer(buf siegreader.Buffer, q chan struct{}, r chan<- core.Result) chan<- strike {
+	incoming := make(chan strike)
+	waitSet := b.priorities.WaitSet()
+	hits := make(map[int]*hitItem)
+	strikes := make(map[int]*strikeItem)
 
-// check to see whether should still wait for signatures in the priority list, given the offset
-func (s *scorer) continueWait(o int64, rev bool) bool {
-	if rev {
-		s.tally.eof = o
-	} else {
-		s.tally.bof = o
+	var bof int64
+	var eof int64
+
+	var quitting bool
+	quit := func() {
+		close(q)
+		quitting = true
 	}
-	w := s.waitSet.WaitingOn()
-	// if any of the waitlists are nil, we will continue - unless we are past the known bof and known eof (points at which we *should* have got at least partial matches), in which case we will check if any partial/potential matches are live
-	if w == nil {
-		// keep going if we don't have a maximum known bof, or if our current bof/eof are less than the maximum known bof/eof
-		if s.bm.knownBOF < 0 || int64(s.bm.knownBOF) > s.tally.bof || int64(s.bm.knownEOF) > s.tally.eof {
-			return true
+
+	newHit := func(i int) *hitItem {
+		l := len(b.keyFrames[i])
+		hit := &hitItem{
+			potentialIdxs: make([]int, l),
+			partials:      make([][][2]int64, l),
 		}
-	} else if len(w) == 0 { // if we're not waiting on anything, we're done
+		hits[i] = hit
+		return hit
+	}
+
+	// given the current bof and eof, is there anything worth waiting for?
+	continueWaiting := func(w []int) bool {
+		// now for each of the possible signatures we are either waiting on or have partial/potential matches for, check whether there are live contenders
+		for _, v := range w {
+			kf := b.keyFrames[v]
+			for i, f := range kf {
+				off := bof
+				if f.typ > frames.PREV {
+					off = eof
+				}
+				var waitfor bool
+				if off > 0 && (f.key.pMax == -1 || f.key.pMax+int64(f.key.lMax) > off) {
+					waitfor = true
+				} else if hit, ok := hits[v]; ok && (hit.partials[i] != nil || (hit.potentialIdxs[i] > 0 && strikes[hit.potentialIdxs[i]-1].hasPotential())) {
+					waitfor = true
+				}
+				// if we've got to the end of the signature, and have determined this is a live one - return immediately & continue scan
+				if waitfor {
+					if i == len(kf)-1 {
+						return true
+					}
+					continue
+				}
+				break
+			}
+		}
 		return false
 	}
-	s.tally.mu.Lock()
-	defer s.tally.mu.Unlock()
-	if w == nil {
-		// if we don't have a waitlist, and we are past the known bof and known eof, grab all the partials and potentials to check if any are live
-		w = make([]int, 0, len(s.tally.partialMatches)+len(s.tally.potentialMatches))
-		for k := range s.tally.partialMatches {
-			var present bool
-			for _, v := range w {
-				if v == k[0] {
-					present = true
-					break
-				}
-			}
-			if !present {
-				w = append(w, k[0])
+
+	testStrike := func(st strike) []kfHit {
+		// the offsets we *record* are always BOF offsets - these can be interpreted as EOF offsets when necessary
+		off := st.offset
+		if st.reverse {
+			off = buf.Size() - st.offset - int64(st.length)
+		}
+		// grab the relevant testTree
+		t := b.tests[st.idxa+st.idxb]
+		res := make([]kfHit, 0, 10)
+		// immediately apply key frames for the completes
+		for _, kf := range t.complete {
+			if b.keyFrames[kf[0]][kf[1]].check(st.offset) && waitSet.Check(kf[0]) {
+				res = append(res, kfHit{kf, off, st.length})
 			}
 		}
-		for k := range s.tally.potentialMatches {
-			var present bool
-			for _, v := range w {
-				if v == k[0] {
-					present = true
-					break
+		// if there are no incompletes, we are done
+		if len(t.incomplete) < 1 {
+			return res
+		}
+		// see what incompletes are worth pursuing
+		var checkl, checkr bool
+		for _, v := range t.incomplete {
+			if checkl && checkr {
+				break
+			}
+			if b.keyFrames[v.kf[0]][v.kf[1]].check(st.offset) && waitSet.Check(v.kf[0]) {
+				if v.l {
+					checkl = true
+				}
+				if v.r {
+					checkr = true
 				}
 			}
-			if !present {
-				w = append(w, k[0])
+		}
+		if !checkl && !checkr {
+			return res
+		}
+		// calculate the offset and lengths for the left and right test slices
+		var lslc, rslc []byte
+		var lpos, rpos int64
+		var llen, rlen int
+		if st.reverse {
+			lpos, llen = st.offset+int64(st.length), t.maxLeftDistance
+			rpos, rlen = st.offset-int64(t.maxRightDistance), t.maxRightDistance
+			if rpos < 0 {
+				rlen = rlen + int(rpos)
+				rpos = 0
+			}
+		} else {
+			lpos, llen = st.offset-int64(t.maxLeftDistance), t.maxLeftDistance
+			rpos, rlen = st.offset+int64(st.length), t.maxRightDistance
+			if lpos < 0 {
+				llen = llen + int(lpos)
+				lpos = 0
 			}
 		}
+		//  the partials slice has a mirror entry for each of the testTree incompletes
+		partials := make([]partial, len(t.incomplete))
+		// test left (if there are valid left tests to try)
+		if checkl {
+			if st.reverse {
+				lslc, _ = buf.EofSlice(lpos, llen)
+			} else {
+				lslc, _ = buf.Slice(lpos, llen)
+			}
+			left := matchTestNodes(t.left, lslc, true)
+			for _, lp := range left {
+				if partials[lp.followUp].l {
+					partials[lp.followUp].ldistances = append(partials[lp.followUp].ldistances, lp.distances...)
+				} else {
+					partials[lp.followUp].l = true
+					partials[lp.followUp].ldistances = lp.distances
+				}
+			}
+		}
+		// test right (if there are valid right tests to try)
+		if checkr {
+			if st.reverse {
+				rslc, _ = buf.EofSlice(rpos, rlen)
+			} else {
+				rslc, _ = buf.Slice(rpos, rlen)
+			}
+			right := matchTestNodes(t.right, rslc, false)
+			for _, rp := range right {
+				if partials[rp.followUp].r {
+					partials[rp.followUp].rdistances = append(partials[rp.followUp].rdistances, rp.distances...)
+				} else {
+					partials[rp.followUp].r = true
+					partials[rp.followUp].rdistances = rp.distances
+				}
+			}
+		}
+		// now iterate through the partials, checking whether they fulfil any of the incompletes
+		for i, p := range partials {
+			if p.l == t.incomplete[i].l && p.r == t.incomplete[i].r {
+				kf := t.incomplete[i].kf
+				if b.keyFrames[kf[0]][kf[1]].check(st.offset) && waitSet.Check(kf[0]) {
+					if !p.l {
+						p.ldistances = []int{0}
+					}
+					if !p.r {
+						p.rdistances = []int{0}
+					}
+					for _, ldistance := range p.ldistances {
+						for _, rdistance := range p.rdistances {
+							moff := off - int64(ldistance)
+							length := ldistance + st.length + rdistance
+							res = append(res, kfHit{kf, moff, length})
+						}
+					}
+				}
+			}
+		}
+		return res
 	}
-	// now for each of the possible signatures we are either waiting on or have partial/potential matches for, check whether there are live contenders
-	for _, v := range w {
-		kf := s.bm.keyFrames[v]
-		for i, f := range kf {
-			off := s.tally.bof
-			if f.typ > frames.PREV {
-				off = s.tally.eof
+
+	applyKeyFrame := func(hit kfHit) (bool, string) {
+		kfs := b.keyFrames[hit.id[0]]
+		if len(kfs) == 1 {
+			return true, fmt.Sprintf("byte match at %d, %d", hit.offset, hit.length)
+		}
+		h, ok := hits[hit.id[0]]
+		if !ok {
+			h = newHit(hit.id[0])
+		}
+		if h.partials[hit.id[1]] == nil {
+			h.partials[hit.id[1]] = [][2]int64{[2]int64{hit.offset, int64(hit.length)}}
+		} else {
+			h.partials[hit.id[1]] = append(h.partials[hit.id[1]], [2]int64{hit.offset, int64(hit.length)})
+		}
+		for _, p := range h.partials {
+			if p == nil {
+				return false, ""
 			}
-			var waitfor bool
-			if f.key.pMax == -1 || f.key.pMax+int64(f.key.lMax) > off {
-				waitfor = true
-			} else if _, ok := s.tally.partialMatches[[2]int{v, i}]; ok {
-				waitfor = true
-			} else if _, ok := s.tally.potentialMatches[[2]int{v, i}]; ok {
-				waitfor = true
+		}
+		prevOff := h.partials[0]
+		basis := make([][][2]int64, len(kfs))
+		basis[0] = prevOff
+		prevKf := kfs[0]
+		ok = false
+		for i, kf := range kfs[1:] {
+			thisOff := h.partials[i+1]
+			prevOff, ok = kf.checkRelated(prevKf, thisOff, prevOff)
+			if !ok {
+				return false, ""
 			}
-			// if we've got to the end of the signature, and have determined this is a live one - return immediately & continue scan
-			if waitfor {
-				if i == len(kf)-1 {
-					return true
+			basis[i+1] = prevOff
+			prevKf = kf
+		}
+		return true, fmt.Sprintf("byte match at %v", basis)
+	}
+
+	go func() {
+		for in := range incoming {
+			// if we've got a postive result, drain any remaining strikes from the matchers
+			if quitting {
+				continue
+			}
+			// if the strike reports progress, check if we should be continuing to wait
+			if in.idxa == -1 {
+				// update with the latest offset
+				if in.reverse {
+					eof = in.offset
+				} else {
+					bof = in.offset
+				}
+				w := waitSet.WaitingOn()
+				// if any of the waitlists are nil, we will continue - unless we are past the known bof and known eof (points at which we *should* have got at least partial matches), in which case we will check if any partial/potential matches are live
+				if w == nil {
+					// keep going if we don't have a maximum known bof, or if our current bof/eof are less than the maximum known bof/eof
+					if b.knownBOF < 0 || int64(b.knownBOF) > bof || int64(b.knownEOF) > eof {
+						continue
+					}
+					// if we don't have a waitlist, and we are past the known bof and known eof, grab all the partials and potentials to check if any are live
+					w = all(hits)
+				}
+				// exhausted all contenders, we can stop scanning
+				if !continueWaiting(w) {
+					quit()
 				}
 				continue
 			}
-			break
+			// now cache or satisfy the strike
+			var hasPotential bool
+			potentials := filterKF(b.tests[in.idxa+in.idxb].keyFrames(), waitSet)
+			for _, pot := range potentials {
+				// if any of the signatures are single keyframe we can satisfy immediately and skip cache
+				if len(b.keyFrames[pot[0]]) == 1 {
+					hasPotential = true
+					break
+				}
+				if hit, ok := hits[pot[0]]; ok && hit.potentiallyComplete(pot[1], strikes) {
+					hasPotential = true
+					break
+				}
+			}
+			if !hasPotential {
+				// cache the strike
+				s, ok := strikes[in.idxa+in.idxb]
+				if !ok {
+					s = &strikeItem{in, -1, nil}
+					strikes[in.idxa+in.idxb] = s
+				} else {
+					if s.successive == nil {
+						s.successive = make([][2]int64, 0, 10)
+					}
+					s.successive = append(s.successive, [2]int64{in.offset, int64(in.length)})
+				}
+				// range over the potentials, linking to the strike
+				for _, pot := range potentials {
+					if b.keyFrames[pot[0]][pot[1]].check(in.offset) {
+						hit, ok := hits[pot[0]]
+						if !ok {
+							hit = newHit(pot[0])
+						}
+						hit.potentialIdxs[pot[1]] = in.idxa + in.idxb + 1
+					}
+				}
+				goto end
+			}
+			// satisfy the strike
+			for {
+				ks := testStrike(in)
+				for _, k := range ks {
+					if match, basis := applyKeyFrame(k); match {
+						if waitSet.Check(k.id[0]) {
+							r <- result{k.id[0], basis}
+							if waitSet.Put(k.id[0]) {
+								quit()
+								goto end
+							}
+						}
+						if h, ok := hits[k.id[0]]; ok {
+							h.matched = true
+						}
+					}
+				}
+				potentials = filterKF(potentials, waitSet)
+				var ok bool
+				for _, pot := range potentials {
+					in, ok = hits[pot[0]].nextPotential(strikes)
+					if ok {
+						break
+					}
+				}
+				if !ok {
+					break
+				}
+			}
+		end: // keep looping until incoming is closed
 		}
-	}
-	// exhausted all contenders, we can stop scanning
-	return false
+		close(r)
+	}()
+	return incoming
 }

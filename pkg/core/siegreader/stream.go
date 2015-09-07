@@ -19,6 +19,8 @@ type stream struct {
 	eof bool
 }
 
+func (s *stream) Stream() bool { return true }
+
 func newStream() interface{} {
 	return &stream{buf: make([]byte, readSz*2)}
 }

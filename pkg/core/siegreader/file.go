@@ -20,6 +20,8 @@ type file struct {
 	pool *datas // link to the data pool
 }
 
+func (f *file) Stream() bool { return false }
+
 type data interface {
 	slice(offset int64, length int) []byte
 	eofSlice(offset int64, length int) []byte

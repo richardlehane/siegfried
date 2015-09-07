@@ -259,7 +259,7 @@ func (r *LimitReverseReader) ReadByte() (byte, error) {
 		if r.end {
 			return 0, io.EOF
 		}
-		if r.i >= int64(eofSz) {
+		if r.limit < 0 && r.i >= int64(eofSz) {
 			r.waitLimit()
 		}
 		if r.hasQuit() {

@@ -50,19 +50,21 @@ func (b *Matcher) start(bof bool) {
 // Identify function - brings a new matcher into existence
 func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan core.Result) {
 	buf.SetQuit(quit)
-	incoming := b.newScorer(buf, quit, r)
+	incoming := b.scorer(buf, quit, r)
 	rdr := siegreader.LimitReaderFrom(buf, b.maxBOF)
 
 	// First test BOF frameset
 	bfchan := b.bofFrames.index(buf, false, quit)
 	for bf := range bfchan {
 		if config.Debug() {
-			fmt.Println(strike{b.bofFrames.testTreeIndex[bf.idx], 0, bf.off, bf.length, false, true, true})
+			fmt.Println(strike{b.bofFrames.testTreeIndex[bf.idx], 0, bf.off, bf.length, false, true})
 		}
-		incoming <- strike{b.bofFrames.testTreeIndex[bf.idx], 0, bf.off, bf.length, false, true, true}
+		incoming <- strike{b.bofFrames.testTreeIndex[bf.idx], 0, bf.off, bf.length, false, true}
 	}
 	select {
 	case <-quit: // the matcher has called quit
+		for _ = range bfchan {
+		} // drain first
 		close(incoming)
 		return
 	default:
@@ -75,14 +77,14 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 	for br := range bchan {
 		if br.Index[0] == -1 {
 			incoming <- progressStrike(br.Offset, false)
-			if br.Offset > 2048 {
+			if !buf.Stream() && br.Offset > 131072 {
 				break
 			}
 		} else {
 			if config.Debug() {
-				fmt.Println(strike{b.bofSeq.testTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false, br.Final})
+				fmt.Println(strike{b.bofSeq.testTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false})
 			}
-			incoming <- strike{b.bofSeq.testTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false, br.Final}
+			incoming <- strike{b.bofSeq.testTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false}
 		}
 	}
 	select {
@@ -94,21 +96,48 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 	default:
 	}
 
-	// Check EOF frame tests
+	// Setup EOF tests
 	efchan := b.eofFrames.index(buf, true, quit)
-	for ef := range efchan {
-		if config.Debug() {
-			fmt.Println(strike{b.eofFrames.testTreeIndex[ef.idx], 0, ef.off, ef.length, true, true, true})
-		}
-		incoming <- strike{b.eofFrames.testTreeIndex[ef.idx], 0, ef.off, ef.length, true, true, true}
-	}
-
-	// Setup EOF sequences test
 	b.start(false)
 	rrdr := siegreader.LimitReverseReaderFrom(buf, b.maxEOF)
 	echan := b.eAho.Index(rrdr)
 
-	// Now enter main search loop
+	// if we have a maximum value on EOF do a sequential search
+	if b.maxEOF >= 0 {
+		for ef := range efchan {
+			if config.Debug() {
+				fmt.Println(strike{b.eofFrames.testTreeIndex[ef.idx], 0, ef.off, ef.length, true, true})
+			}
+			incoming <- strike{b.eofFrames.testTreeIndex[ef.idx], 0, ef.off, ef.length, true, true}
+		}
+		// Scan complete EOF
+		for er := range echan {
+			if er.Index[0] == -1 {
+				incoming <- progressStrike(er.Offset, true)
+			} else {
+				if config.Debug() {
+					fmt.Println(strike{b.eofSeq.testTreeIndex[er.Index[0]], er.Index[1], er.Offset, er.Length, true, false})
+				}
+				incoming <- strike{b.eofSeq.testTreeIndex[er.Index[0]], er.Index[1], er.Offset, er.Length, true, false}
+			}
+		}
+		// let the scorer known we have reached the end of the EOF scan
+		incoming <- progressStrike(-1, true)
+		// Finally, finish BOF scan
+		for br := range bchan {
+			if br.Index[0] == -1 {
+				incoming <- progressStrike(br.Offset, false)
+			} else {
+				if config.Debug() {
+					fmt.Println(strike{b.bofSeq.testTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false})
+				}
+				incoming <- strike{b.bofSeq.testTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false}
+			}
+		}
+		close(incoming)
+		return
+	}
+	// If no maximum on EOF do a parallel search
 	for {
 		select {
 		case br, ok := <-bchan:
@@ -119,10 +148,19 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 					incoming <- progressStrike(br.Offset, false)
 				} else {
 					if config.Debug() {
-						fmt.Println(strike{b.bofSeq.testTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false, br.Final})
+						fmt.Println(strike{b.bofSeq.testTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false})
 					}
-					incoming <- strike{b.bofSeq.testTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false, br.Final}
+					incoming <- strike{b.bofSeq.testTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false}
 				}
+			}
+		case ef, ok := <-efchan:
+			if !ok {
+				efchan = nil
+			} else {
+				if config.Debug() {
+					fmt.Println(strike{b.eofFrames.testTreeIndex[ef.idx], 0, ef.off, ef.length, true, true})
+				}
+				incoming <- strike{b.eofFrames.testTreeIndex[ef.idx], 0, ef.off, ef.length, true, true}
 			}
 		case er, ok := <-echan:
 			if !ok {
@@ -132,13 +170,13 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 					incoming <- progressStrike(er.Offset, true)
 				} else {
 					if config.Debug() {
-						fmt.Println(strike{b.eofSeq.testTreeIndex[er.Index[0]], er.Index[1], er.Offset, er.Length, true, false, er.Final})
+						fmt.Println(strike{b.eofSeq.testTreeIndex[er.Index[0]], er.Index[1], er.Offset, er.Length, true, false})
 					}
-					incoming <- strike{b.eofSeq.testTreeIndex[er.Index[0]], er.Index[1], er.Offset, er.Length, true, false, er.Final}
+					incoming <- strike{b.eofSeq.testTreeIndex[er.Index[0]], er.Index[1], er.Offset, er.Length, true, false}
 				}
 			}
 		}
-		if bchan == nil && echan == nil {
+		if bchan == nil && efchan == nil && echan == nil {
 			close(incoming)
 			return
 		}

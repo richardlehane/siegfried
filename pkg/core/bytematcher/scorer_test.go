@@ -16,14 +16,14 @@ func setup() (chan<- strike, <-chan core.Result) {
 	buf, _ := bufs.Get(bytes.NewBuffer(TestSample1))
 	buf.SizeNow()
 	res := make(chan core.Result)
-	return bm.newScorer(buf, make(chan struct{}), res), res
+	return bm.scorer(buf, make(chan struct{}), res), res
 }
 
 func TestScorer(t *testing.T) {
 	scorer, res := setup()
-	scorer <- strike{0, 0, 0, 4, false, false, true}
-	scorer <- strike{1, 0, 17, 9, true, false, false}
-	scorer <- strike{1, 1, 30, 5, true, false, true}
+	scorer <- strike{0, 0, 0, 4, false, false}
+	scorer <- strike{1, 0, 17, 9, true, false}
+	scorer <- strike{1, 1, 30, 5, true, false}
 	if r := <-res; r.Index() != 0 {
 		t.Errorf("expecting result %d, got %d", 0, r.Index())
 	}
@@ -35,9 +35,9 @@ func BenchmarkScorer(bench *testing.B) {
 		bench.StopTimer()
 		scorer, res := setup()
 		bench.StartTimer()
-		scorer <- strike{0, 0, 0, 4, false, false, true}
-		scorer <- strike{1, 0, 17, 9, true, false, false}
-		scorer <- strike{1, 1, 30, 5, true, false, true}
+		scorer <- strike{0, 0, 0, 4, false, false}
+		scorer <- strike{1, 0, 17, 9, true, false}
+		scorer <- strike{1, 1, 30, 5, true, false}
 		_ = <-res
 	}
 }
