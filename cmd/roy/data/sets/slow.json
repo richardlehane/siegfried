@@ -1,0 +1,5 @@
+{
+  "slow": [
+    "@svg (fmt/91, fmt/92 and fmt/413 have *<svg which slows down xml identification)"
+  ]
+}

@@ -36,8 +36,10 @@ var siegfried = struct {
 	updateTransport *http.Transport
 	// Archivematica format policy registry service
 	fpr string
-	// DEBUG mode
-	debug bool
+	// DEBUG and SLOW modes
+	debug      bool
+	slow       bool
+	checkpoint int64
 }{
 	version:         [3]int{1, 3, 0},
 	signature:       "pronom.sig",
@@ -49,6 +51,7 @@ var siegfried = struct {
 	updateTimeout:   30 * time.Second,
 	updateTransport: &http.Transport{Proxy: http.ProxyFromEnvironment},
 	fpr:             "/tmp/siegfried",
+	checkpoint:      524288, // point at which to report slow signatures (must be power of two)
 }
 
 // GETTERS
@@ -100,6 +103,14 @@ func Debug() bool {
 	return siegfried.debug
 }
 
+func Slow() bool {
+	return siegfried.slow
+}
+
+func Checkpoint(i int64) bool {
+	return i == siegfried.checkpoint
+}
+
 // SETTERS
 
 func SetHome(h string) {
@@ -133,4 +144,8 @@ func SetChoices(i int) func() private {
 
 func SetDebug() {
 	siegfried.debug = true
+}
+
+func SetSlow() {
+	siegfried.slow = true
 }

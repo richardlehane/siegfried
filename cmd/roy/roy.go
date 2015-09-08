@@ -66,6 +66,8 @@ var (
 	inspect        = flag.NewFlagSet("inspect", flag.ExitOnError)
 	inspectHome    = inspect.String("home", config.Home(), "override the default home directory")
 	inspectReports = inspect.String("reports", config.Reports(), "set path for PRONOM reports directory")
+	inspectCType   = inspect.Int("ct", 0, "provide container type to inspect container hits")
+	inspectCName   = inspect.String("cn", "", "provide container name to inspect container hits")
 )
 
 func savereps() error {
@@ -118,7 +120,7 @@ func blameSig(i int) error {
 	if err != nil {
 		return err
 	}
-	fmt.Println(s.InspectTestTree(i))
+	fmt.Println(s.Blame(i, *inspectCType, *inspectCName))
 	return nil
 }
 

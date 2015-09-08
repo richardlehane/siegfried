@@ -17,6 +17,7 @@ package bytematcher
 import (
 	"fmt"
 
+	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
@@ -43,7 +44,7 @@ func (st strike) String() string {
 	if st.frame {
 		strikeType = "frametest"
 	}
-	return fmt.Sprintf("{%s %s hit - test index: %d [%d], offset: %d, length: %d}", strikeOrientation, strikeType, st.idxa+st.idxb, st.idxb, st.offset, st.length)
+	return fmt.Sprintf("{%s %s hit - index: %d [%d], offset: %d, length: %d}", strikeOrientation, strikeType, st.idxa+st.idxb, st.idxb, st.offset, st.length)
 }
 
 // progress strikes are special results from the WAC matchers that periodically report on progress, these aren't hits
@@ -183,6 +184,7 @@ func (b *Matcher) scorer(buf siegreader.Buffer, q chan struct{}, r chan<- core.R
 
 	// given the current bof and eof, is there anything worth waiting for?
 	continueWaiting := func(w []int) bool {
+		var keepScanning bool
 		// now for each of the possible signatures we are either waiting on or have partial/potential matches for, check whether there are live contenders
 		for _, v := range w {
 			kf := b.keyFrames[v]
@@ -200,14 +202,18 @@ func (b *Matcher) scorer(buf siegreader.Buffer, q chan struct{}, r chan<- core.R
 				// if we've got to the end of the signature, and have determined this is a live one - return immediately & continue scan
 				if waitfor {
 					if i == len(kf)-1 {
-						return true
+						if !config.Slow() || !config.Checkpoint(bof) {
+							return true
+						}
+						keepScanning = true
+						fmt.Printf("waiting on: %d\n", v)
 					}
 					continue
 				}
 				break
 			}
 		}
-		return false
+		return keepScanning
 	}
 
 	testStrike := func(st strike) []kfHit {

@@ -273,6 +273,9 @@ func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, e
 	}
 	// Container Matcher
 	if s.cm != nil {
+		if config.Debug() {
+			fmt.Println(">>START CONTAINER MATCHER")
+		}
 		cms, cerr := s.cm.Identify(n, buffer)
 		for v := range cms {
 			for _, rec := range recs {
@@ -291,6 +294,9 @@ func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, e
 	}
 	// Byte Matcher
 	if !satisfied {
+		if config.Debug() {
+			fmt.Println(">>START BYTE MATCHER")
+		}
 		ids, _ := s.bm.Identify("", buffer) // we don't care about an error here
 		for v := range ids {
 			for _, rec := range recs {
@@ -328,26 +334,56 @@ func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, e
 	return res, err
 }
 
-// InspectTestTree checks with the byte matcher to see what identification results subscribe to a particular test
+// Blame checks with the byte matcher to see what identification results subscribe to a particular result or test
 // tree index. It can be used when identifying in a debug mode to check which identification results trigger
 // which strikes
-func (s *Siegfried) InspectTestTree(tti int) string {
-	bm := s.bm.(*bytematcher.Matcher)
-	idxs := bm.InspectTestTree(tti)
-	if idxs == nil {
-		return "No test tree at this index"
-	}
-	res := make([]string, len(idxs))
-	for i, v := range idxs {
-		for _, id := range s.ids {
-			ok, str := id.Recognise(core.ByteMatcher, v)
-			if ok {
-				res[i] = str
+func (s *Siegfried) Blame(idx, ct int, cn string) string {
+	matcher := "BYTE MATCHER"
+	matcherType := core.ByteMatcher
+	var ttis []int
+	if cn != "" {
+		matcher = "CONTAINER MATCHER"
+		matcherType = core.ContainerMatcher
+		cm := s.cm.(containermatcher.Matcher)
+		ttis = cm.InspectTestTree(ct, cn, idx)
+		res := make([]string, len(ttis))
+		for i, v := range ttis {
+			for _, id := range s.ids {
+				if ok, str := id.Recognise(matcherType, v); ok {
+					res[i] = str
+				}
 				break
 			}
 		}
+		ttiNames := "not recognised"
+		if len(res) > 0 {
+			ttiNames = strings.Join(res, ",")
+		}
+		return fmt.Sprintf("%s\nHits at %d: %s (identifies hits reported by -debug)", matcher, idx, ttiNames)
 	}
-	return "Test tree indexes match:\n" + strings.Join(res, "\n")
+	bm := s.bm.(*bytematcher.Matcher)
+	ttis = bm.InspectTestTree(idx)
+	res := make([]string, len(ttis)+1)
+	for _, id := range s.ids {
+		if ok, str := id.Recognise(matcherType, idx); ok {
+			res[0] = str
+		}
+		for i, v := range ttis {
+			if ok, str := id.Recognise(matcherType, v); ok {
+				res[i+1] = str
+			}
+		}
+	}
+	resName := res[0]
+	if resName == "" {
+		resName = "not recognised"
+	}
+	ttiNames := "not recognised"
+	if len(res) > 1 {
+		ttiNames = strings.Join(res[1:], ",")
+	}
+	return fmt.Sprintf("%s\nResults at %d: %s (identifies results reported by -slow)\nHits at %d: %s (identifies hits reported by -debug)", matcher, idx, resName, idx, ttiNames)
+
 }
 
 // Buffer returns the last buffer inspected

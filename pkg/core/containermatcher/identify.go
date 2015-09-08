@@ -15,8 +15,10 @@
 package containermatcher
 
 import (
+	"fmt"
 	"path/filepath"
 
+	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
@@ -76,6 +78,9 @@ func (c *ContainerMatcher) identify(n string, rdr Reader, res chan core.Result) 
 		ct, ok := c.nameCTest[rdr.Name()]
 		if !ok {
 			continue
+		}
+		if config.Debug() {
+			fmt.Printf("{Name match - %s (container %d))}\n", rdr.Name(), c.conType)
 		}
 		// name has matched, let's test the CTests
 		// ct.identify will generate a slice of hits which pass to

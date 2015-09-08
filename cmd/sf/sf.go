@@ -42,6 +42,7 @@ var (
 	update   = flag.Bool("update", false, "update or install the default signature file")
 	version  = flag.Bool("version", false, "display version information")
 	debug    = flag.Bool("debug", false, "scan in debug mode")
+	slow     = flag.Bool("slow", false, "scan and report slow signatures")
 	nr       = flag.Bool("nr", false, "prevent automatic directory recursion")
 	csvo     = flag.Bool("csv", false, "CSV output format")
 	jsono    = flag.Bool("json", false, "JSON output format")
@@ -269,6 +270,9 @@ func main() {
 	case *debug:
 		config.SetDebug()
 		w = debugWriter{}
+	case *slow:
+		config.SetSlow()
+		w = &slowWriter{os.Stdout}
 	case *csvo:
 		w = newCSV(os.Stdout)
 	case *jsono:

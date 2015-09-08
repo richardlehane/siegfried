@@ -106,7 +106,6 @@ func (p *pronom) setParseables() error {
 			}
 			fmt.Println(sig)
 		}
-		fmt.Println()
 		p.j = r
 		return nil
 	}

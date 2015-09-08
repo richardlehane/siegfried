@@ -311,3 +311,21 @@ func (ct *cTest) commit(p priority.List, prev int) error {
 	ct.buffer = nil
 	return err
 }
+
+func (m Matcher) InspectTestTree(ct int, nm string, idx int) []int {
+	for _, c := range m {
+		if c.conType == containerType(ct) {
+			if ctst, ok := c.nameCTest[nm]; ok {
+				bmt := ctst.bm.InspectTestTree(idx)
+				ret := make([]int, len(bmt))
+				for i, v := range bmt {
+					s, _ := c.priorities.Index(ctst.unsatisfied[v])
+					ret[i] = ctst.unsatisfied[v] + c.startIndexes[s]
+				}
+				return ret
+			}
+			return nil
+		}
+	}
+	return nil
+}

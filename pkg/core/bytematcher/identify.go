@@ -77,7 +77,7 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 	for br := range bchan {
 		if br.Index[0] == -1 {
 			incoming <- progressStrike(br.Offset, false)
-			if !buf.Stream() && br.Offset > 131072 {
+			if !buf.Stream() && br.Offset > 131072 && (b.maxBOF < 0 || b.maxBOF > b.maxEOF*5) {
 				break
 			}
 		} else {

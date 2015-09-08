@@ -127,6 +127,7 @@
     "fmt/468 (iso)"
   ],
   "vector": [
+  	"@svg",
     "fmt/104 (swf)",
     "fmt/127 (sxd)",
     "fmt/139 (odg)",
@@ -142,8 +143,6 @@
     "fmt/612 (dat)",
     "fmt/623 (sdr)",
     "fmt/727 (cpc)",
-    "fmt/91 (svg)",
-    "x-fmt/109 (svgz)",
     "x-fmt/119 (wmf)",
     "x-fmt/142 (cgm)",
     "x-fmt/149 (dcs)",
@@ -170,5 +169,11 @@
     "x-fmt/76 (pat)",
     "x-fmt/80 (pct)",
     "x-fmt/82 (pic)"
+  ],
+  "svg": [
+    "fmt/91 (svg 1.0)",
+    "fmt/92 (svg 1.1)",
+    "fmt/413 (svg 1.2)",
+    "x-fmt/109 (svgz)"
   ]
 }
