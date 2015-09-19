@@ -25,6 +25,7 @@ import (
 
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/config"
+	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
@@ -98,16 +99,16 @@ func makegob(s *siegfried.Siegfried, opts []config.Option) error {
 	return s.Save(config.Signature())
 }
 
-func inspectGob() error {
+func inspectSig(t core.MatcherType) error {
 	s, err := siegfried.Load(config.Signature())
 	if err != nil {
 		return err
 	}
-	fmt.Print(s)
+	fmt.Print(s.Inspect(t))
 	return nil
 }
 
-func inspectSig(f string) error {
+func inspectFmt(f string) error {
 	_, err := pronom.New(config.SetLimit(expandSets(f)), config.SetInspect(), config.SetNoContainer())
 	if err != nil {
 		return err
@@ -274,12 +275,18 @@ func main() {
 			input := inspect.Arg(0)
 			switch {
 			case input == "":
-				err = inspectGob()
+				err = inspectSig(-1)
+			case input == "bytematcher", input == "bm":
+				err = inspectSig(core.ByteMatcher)
+			case input == "containermatcher", input == "cm":
+				err = inspectSig(core.ContainerMatcher)
+			case input == "extensionmatcher", input == "em":
+				err = inspectSig(core.ExtensionMatcher)
 			case filepath.Ext(input) == ".sig":
 				config.SetSignature(input)
-				err = inspectGob()
+				err = inspectSig(-1)
 			case strings.Contains(input, "fmt"):
-				err = inspectSig(input)
+				err = inspectFmt(input)
 			default:
 				var i int
 				i, err = strconv.Atoi(input)

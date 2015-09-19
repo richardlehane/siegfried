@@ -201,7 +201,7 @@ func (s *Siegfried) String() string {
 		s.C.Format(time.RFC3339))
 	for _, id := range s.ids {
 		d := id.Describe()
-		str += fmt.Sprintf("  - name: '%v'\n  - details: '%v'\n", d[0], d[1])
+		str += fmt.Sprintf("  - %v: %v\n", d[0], d[1])
 	}
 	return str
 }
@@ -399,4 +399,28 @@ func (s *Siegfried) Update(t string) bool {
 		return false
 	}
 	return tm.After(s.C)
+}
+
+// Inspect returns a string containing detail about the various matchers in the Siegfried struct.
+func (s *Siegfried) Inspect(t core.MatcherType) string {
+	switch t {
+	case core.ByteMatcher:
+		return s.bm.String()
+	case core.ExtensionMatcher:
+		return s.em.String()
+	case core.ContainerMatcher:
+		return s.cm.String()
+	}
+	return fmt.Sprintf("Identifiers\n%s\nExtension Matcher\n%s\nContainer Matcher\n%s\nByte Matcher\n%sText Matcher\n%s",
+		func() string {
+			var str string
+			for _, i := range s.ids {
+				str += i.String()
+			}
+			return str
+		}(),
+		s.em.String(),
+		s.cm.String(),
+		s.bm.String(),
+		s.tm.String())
 }
