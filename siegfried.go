@@ -195,18 +195,15 @@ func Load(path string) (*Siegfried, error) {
 
 // String representation of a Siegfried struct
 func (s *Siegfried) String() string {
-	return fmt.Sprintf("Identifiers\n%s\nExtension Matcher\n%s\nContainer Matcher\n%s\nByte Matcher\n%sText Matcher\n%s",
-		func() string {
-			var str string
-			for _, i := range s.ids {
-				str += i.String()
-			}
-			return str
-		}(),
-		s.em.String(),
-		s.cm.String(),
-		s.bm.String(),
-		s.tm.String())
+	str := fmt.Sprintf(
+		"%s (%v)\nidentifiers: \n",
+		config.Signature(),
+		s.C.Format(time.RFC3339))
+	for _, id := range s.ids {
+		d := id.Describe()
+		str += fmt.Sprintf("  - name: '%v'\n  - details: '%v'\n", d[0], d[1])
+	}
+	return str
 }
 
 // YAML representation of a Siegfried struct.

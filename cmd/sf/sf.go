@@ -202,18 +202,24 @@ func main() {
 		log.Println(http.ListenAndServe("localhost:6060", nil))
 	}()*/
 
+	if *version {
+		version := config.Version()
+		fmt.Printf("siegfried %d.%d.%d\n", version[0], version[1], version[2])
+		s, err := siegfried.Load(config.Signature())
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		fmt.Print(s)
+		return
+	}
+
 	if *home != config.Home() {
 		config.SetHome(*home)
 	}
 
 	if *sig != config.SignatureBase() {
 		config.SetSignature(*sig)
-	}
-
-	if *version {
-		version := config.Version()
-		fmt.Printf("siegfried version: %d.%d.%d\n", version[0], version[1], version[2])
-		return
 	}
 
 	if *update {
@@ -243,7 +249,6 @@ func main() {
 		s, err := siegfried.Load(config.Signature())
 		if err != nil {
 			log.Fatalf("Error: error loading signature file, got: %v", err)
-
 		}
 		if *serve != "" {
 			log.Printf("Starting server at %s. Use CTRL-C to quit.\n", *serve)
