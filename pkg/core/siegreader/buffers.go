@@ -22,6 +22,7 @@ import (
 type Buffers struct {
 	spool  *pool // Pool of stream Buffers
 	fpool  *pool // Pool of file Buffers
+	epool  *pool // Pool of external buffers
 	fdatas *datas
 	last   *pool
 }
@@ -30,6 +31,7 @@ func New() *Buffers {
 	return &Buffers{
 		newPool(newStream),
 		newPool(newFile),
+		newPool(newExternal),
 		&datas{
 			newPool(newBigFile),
 			newPool(newSmallFile),
@@ -42,9 +44,15 @@ func New() *Buffers {
 func (b *Buffers) Get(src io.Reader) (Buffer, error) {
 	f, ok := src.(*os.File)
 	if !ok {
-		stream := b.spool.get().(*stream)
-		stream.setSource(src)
-		return stream, nil
+		e, ok := src.(source)
+		if !ok {
+			stream := b.spool.get().(*stream)
+			stream.setSource(src)
+			return stream, nil
+		}
+		ext := b.epool.get().(*external)
+		ext.setSource(e)
+		return ext, nil
 	}
 	buf := b.fpool.get().(*file)
 	err := buf.setSource(f, b.fdatas)
@@ -62,6 +70,9 @@ func (b *Buffers) Put(i Buffer) {
 		b.fdatas.put(i.(*file).data)
 		b.fpool.put(i)
 		b.last = b.fpool
+	case *external:
+		b.epool.put(i)
+		b.last = b.epool
 	}
 }
 
