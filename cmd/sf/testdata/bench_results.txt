@@ -1,7 +1,26 @@
-GovDocs sf 1.3 6 Sept
-real	22m43.344s
-user	17m40.593s
+8 September 2015
 
+BenchmarkACCDB	     100	  11902365 ns/op
+BenchmarkBMP	   10000	    122129 ns/op
+BenchmarkDOCX	   10000	    177740 ns/op
+BenchmarkGIF	    3000	    507559 ns/op
+BenchmarkJPG	    2000	    641998 ns/op
+BenchmarkMSG	   20000	     90633 ns/op
+BenchmarkODT	     300	   5465670 ns/op
+BenchmarkPDF	     300	   4862543 ns/op
+BenchmarkPNG	    1000	   1428711 ns/op
+BenchmarkPPTX	   10000	    246298 ns/op
+BenchmarkRTF	     100	  22648707 ns/op
+BenchmarkTIF	     300	   4758529 ns/op
+BenchmarkXLSX	   10000	    184862 ns/op
+BenchmarkXML	   10000	    147479 ns/op
+BenchmarkMulti	      30	  53851560 ns/op
+ok  	github.com/richardlehane/siegfried/cmd/sf	35.065s
+
+iPres showcase:
+real	0m31.295s
+user	0m19.573s
+sys	0m0.480s
 
 1 August 2015 [sf 1.2, go1.4.2]
 

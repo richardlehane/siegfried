@@ -68,6 +68,10 @@ func (s *strikeItem) hasPotential() bool {
 	return s.idx+1 <= len(s.successive)
 }
 
+func (s *strikeItem) numPotentials() int {
+	return len(s.successive) - s.idx
+}
+
 func (s *strikeItem) pop() strike {
 	s.idx++
 	if s.idx > 0 {
@@ -88,19 +92,22 @@ func (h *hitItem) nextPotential(s map[int]*strikeItem) (strike, bool) {
 	if h == nil || !h.potentiallyComplete(-1, s) {
 		return strike{}, false
 	}
+	var minIdx, min int
 	for i, v := range h.potentialIdxs {
 		// first try sending only when we don't have any corresponding partial matches
-		if v > 0 && h.partials[i] == nil && s[v-1].hasPotential() {
+		if h.partials[i] == nil {
 			return s[v-1].pop(), true
 		}
-	}
-	// now start retrying other potentials, starting from the left
-	for _, v := range h.potentialIdxs {
-		if v > 0 && s[v-1].hasPotential() {
-			return s[v-1].pop(), true
+		// otherwise, if all are potential, start with the fewest potentials first (so as to exclude)
+		if v > 0 && s[v-1].hasPotential() && (min == 0 || s[v-1].numPotentials() < min) {
+			minIdx, min = v-1, s[v-1].numPotentials()
 		}
 	}
-	return strike{}, false
+	// in case we are all partials, no potentials
+	if min == 0 {
+		return strike{}, false
+	}
+	return s[minIdx].pop(), true
 }
 
 // is a hit item potentially complete - i.e. has at least one potential strike,
@@ -193,20 +200,26 @@ func (b *Matcher) scorer(buf siegreader.Buffer, q chan struct{}, r chan<- core.R
 				if f.typ > frames.PREV {
 					off = eof
 				}
-				var waitfor bool
+				var waitfor, excludable bool
 				if off > 0 && (f.key.pMax == -1 || f.key.pMax+int64(f.key.lMax) > off) {
 					waitfor = true
-				} else if hit, ok := hits[v]; ok && (hit.partials[i] != nil || (hit.potentialIdxs[i] > 0 && strikes[hit.potentialIdxs[i]-1].hasPotential())) {
-					waitfor = true
+				} else if hit, ok := hits[v]; ok {
+					if hit.partials[i] != nil {
+						waitfor = true
+					} else if hit.potentialIdxs[i] > 0 && strikes[hit.potentialIdxs[i]-1].hasPotential() {
+						waitfor, excludable = true, true
+					}
 				}
 				// if we've got to the end of the signature, and have determined this is a live one - return immediately & continue scan
 				if waitfor {
 					if i == len(kf)-1 {
-						if !config.Slow() || !config.Checkpoint(bof) {
+						if !config.Slow() || !config.Checkpoint(bof) { // || !excludable {
 							return true
 						}
+						//if config.Slow() {
 						keepScanning = true
-						fmt.Printf("waiting on: %d\n", v)
+						fmt.Printf("waiting on: %d, potentially excludable: %t\n", v, excludable)
+						//}
 					}
 					continue
 				}
