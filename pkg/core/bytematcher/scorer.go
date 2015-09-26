@@ -213,13 +213,11 @@ func (b *Matcher) scorer(buf siegreader.Buffer, q chan struct{}, r chan<- core.R
 				// if we've got to the end of the signature, and have determined this is a live one - return immediately & continue scan
 				if waitfor {
 					if i == len(kf)-1 {
-						if !config.Slow() || !config.Checkpoint(bof) { // || !excludable {
+						if !config.Slow() || !config.Checkpoint(bof) {
 							return true
 						}
-						//if config.Slow() {
 						keepScanning = true
 						fmt.Printf("waiting on: %d, potentially excludable: %t\n", v, excludable)
-						//}
 					}
 					continue
 				}

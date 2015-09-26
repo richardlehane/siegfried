@@ -25,6 +25,7 @@ import (
 	"compress/gzip"
 
 	"github.com/richardlehane/characterize"
+	"github.com/richardlehane/webarchive"
 
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
@@ -186,6 +187,58 @@ func (g *gzipD) mod() string {
 }
 
 func (t *gzipD) dirs() []string {
+	return nil
+}
+
+func trimWebPath(p string) string {
+	d, f := filepath.Split(p)
+	clean := strings.TrimSuffix(d, string(filepath.Separator))
+	_, f1 := filepath.Split(clean)
+	if f == strings.TrimSuffix(f1, filepath.Ext(clean)) {
+		return clean
+	}
+	return p
+}
+
+type wa struct {
+	p   string
+	rec webarchive.Record
+	rdr webarchive.Reader
+}
+
+func newARC(r io.Reader, path string) (decompressor, error) {
+	a, err := webarchive.NewARCReader(r)
+	return &wa{p: trimWebPath(path), rdr: a}, err
+}
+
+func newWARC(r io.Reader, path string) (decompressor, error) {
+	w, err := webarchive.NewWARCReader(r)
+	return &wa{p: trimWebPath(path), rdr: w}, err
+}
+
+func (w *wa) next() error {
+	var err error
+	w.rec, err = w.rdr.NextPayload()
+	return err
+}
+
+func (w *wa) reader() io.Reader {
+	return w.rec
+}
+
+func (w *wa) path() string {
+	return filepath.Join(w.p, w.rec.Date().Format(webarchive.ARCTime), w.rec.URL())
+}
+
+func (w *wa) size() int64 {
+	return w.rec.Size()
+}
+
+func (w *wa) mod() string {
+	return w.rec.Date().Format(time.RFC3339)
+}
+
+func (w *wa) dirs() []string {
 	return nil
 }
 

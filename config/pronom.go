@@ -40,9 +40,12 @@ var pronom = struct {
 	harvestTimeout   time.Duration
 	harvestTransport *http.Transport
 	// archive puids
-	zip  string
-	tar  string
-	gzip string
+	zip    string
+	tar    string
+	gzip   string
+	arc    string
+	arc1_1 string
+	warc   string
 	// text puid
 	text string
 }{
@@ -54,6 +57,9 @@ var pronom = struct {
 	zip:              "x-fmt/263",
 	tar:              "x-fmt/265",
 	gzip:             "x-fmt/266",
+	arc:              "x-fmt/219",
+	arc1_1:           "fmt/410",
+	warc:             "fmt/289",
 	text:             "x-fmt/111",
 }
 
@@ -249,6 +255,10 @@ func IsArchive(p string) Archive {
 		return Gzip
 	case pronom.tar:
 		return Tar
+	case pronom.arc, pronom.arc1_1:
+		return ARC
+	case pronom.warc:
+		return WARC
 	}
 	return None
 }

@@ -21,6 +21,8 @@ const (
 	Zip
 	Gzip
 	Tar
+	ARC
+	WARC
 )
 
 func (a Archive) String() string {
@@ -31,6 +33,10 @@ func (a Archive) String() string {
 		return "gzip"
 	case Tar:
 		return "tar"
+	case ARC:
+		return "ARC"
+	case WARC:
+		return "WARC"
 	}
 	return ""
 }

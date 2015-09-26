@@ -76,7 +76,7 @@ type Identification interface {
 	YAML() string            // long text that should be displayed to indicate the format match
 	JSON() string            // JSON match response
 	CSV() []string           // CSV match response
-	Archive() config.Archive // does this format match any of the archive formats (zip, gzip, tar)
+	Archive() config.Archive // does this format match any of the archive formats (zip, gzip, tar, warc, arc)
 }
 
 // Matcher does the matching (against the name or the byte stream) and sends results

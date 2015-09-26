@@ -178,6 +178,10 @@ func identifyRdr(w writer, s *siegfried.Siegfried, r io.Reader, path string, sz 
 		d, err = newGzip(b, path)
 	case config.Tar:
 		d, err = newTar(siegreader.ReaderFrom(b), path)
+	case config.ARC:
+		d, err = newARC(siegreader.ReaderFrom(b), path)
+	case config.WARC:
+		d, err = newWARC(siegreader.ReaderFrom(b), path)
 	}
 	if err != nil {
 		w.writeFile(path, sz, mod, nil, fmt.Errorf("failed to decompress %s, got: %v", path, err), nil)
@@ -267,7 +271,6 @@ func main() {
 	s, err := siegfried.Load(config.Signature())
 	if err != nil {
 		log.Fatalf("Error: error loading signature file, got: %v", err)
-
 	}
 
 	var w writer

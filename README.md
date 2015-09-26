@@ -80,6 +80,7 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 - don't include byte signatures where formats have container signatures (unless -doubleup flag is given); fixes a mis-identification reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/52)
 - sf -slow FILE | DIR reports slow signatures
 - sf -debug output simplified
+- sf -version describes signature file; requested by [Michelle Lindlar](https://github.com/richardlehane/siegfried/issues/54)
 - roy -limit and -exclude now operate on text and default zip matches
 - roy -nopriority re-configured to return more results
 - bugfix: upgraded versions of sf panic when attempting to read old signature files; reported by [Stefan](https://github.com/richardlehane/siegfried/issues/49) 
