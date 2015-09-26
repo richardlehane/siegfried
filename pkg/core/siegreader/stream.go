@@ -103,13 +103,14 @@ func (s *stream) fill() (int, error) {
 		s.grow()
 	}
 	// otherwise, let's read
-	e := s.i + readSz
-	if e > len(s.buf) {
-		e = len(s.buf)
-	}
-	i, err := s.src.Read(s.buf[s.i:e])
-	if i < readSz {
-		err = io.EOF // Readers can give EOF or nil here
+	var i, j int
+	var err error
+	for {
+		j, err = s.src.Read(s.buf[s.i+i : s.i+readSz])
+		i += j
+		if i >= readSz || err != nil {
+			break
+		}
 	}
 	if err != nil {
 		close(s.eofc)
@@ -123,7 +124,7 @@ func (s *stream) fill() (int, error) {
 	return s.i, nil
 }
 
-// Return a slice from the buffer that begins at offset s and has length l
+// Return a slice from the buffer that begins at offset off and has length l
 func (s *stream) Slice(off int64, l int) ([]byte, error) {
 	o := int(off)
 	s.mu.Lock()
