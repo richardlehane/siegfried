@@ -38,6 +38,7 @@ Key features are:
     sf -sig custom.sig file.ext                // Use a custom signature file
     sf -home c:\junk -sig custom.sig file.ext  // Use a custom home directory
     sf -debug file.ext                         // Scan in debug mode
+    sf -slow file.ext | DIR                    // Report slow signatures
     sf -version                                // Display version information
     sf -serve hostname:port                    // Server mode
 

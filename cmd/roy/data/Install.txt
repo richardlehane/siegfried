@@ -1,0 +1,3 @@
+Copy contents of the zip file into your siegfried home folder.
+
+The default location of the home folder on windows is a "siegfried" folder in your user directory e.g. c:\Users\richardl\siegfried.
