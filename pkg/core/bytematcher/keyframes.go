@@ -353,17 +353,34 @@ func (kf keyFrame) check(o int64) bool {
 	return true
 }
 
-// test two key frames (current and previous) to see if they are connected and, if so, at what offsets
-func (kf keyFrame) checkRelated(prevKf keyFrame, thisOff, prevOff [][2]int64) ([][2]int64, bool) {
-	// quick test por wild kp
-	if prevKf.seg.pMax == -1 && prevKf.seg.pMin == 0 {
-		return thisOff, true
+// can we gather just a single hit for this keyframe?
+func oneEnough(id int, kfs []keyFrame) bool {
+	kf := kfs[id]
+	if kf.typ == frames.BOF || (kf.typ == frames.PREV && kf.seg.pMax == -1 && kf.seg.pMin == 0) {
+		if id+1 < len(kfs) {
+			next := kfs[id+1]
+			if next.typ == frames.PREV && (next.seg.pMax > -1 || next.seg.pMin > 0) {
+				return false
+			}
+		}
+		return true
 	}
+	if id > 0 {
+		prev := kfs[id-1]
+		if prev.typ == frames.SUCC && (prev.seg.pMax > -1 || prev.seg.pMin > 0) {
+			return false
+		}
+	}
+	return true
+}
+
+// test two key frames (current and previous) to see if they are connected and, if so, at what offsets
+func (kf keyFrame) checkRelated(prevKf, nextKf keyFrame, thisOff, prevOff [][2]int64) ([][2]int64, bool) {
 	switch kf.typ {
 	case frames.BOF:
 		return thisOff, true
 	case frames.EOF, frames.SUCC:
-		if prevKf.typ == frames.SUCC {
+		if prevKf.typ == frames.SUCC && !(prevKf.seg.pMax == -1 && prevKf.seg.pMin == 0) {
 			ret := make([][2]int64, 0, len(thisOff))
 			success := false
 			for _, v := range thisOff {
@@ -375,6 +392,10 @@ func (kf keyFrame) checkRelated(prevKf keyFrame, thisOff, prevOff [][2]int64) ([
 						} else {
 							ret = append(ret, v)
 							success = true
+							// if this type is EOF, we only need one match
+							if kf.typ == frames.EOF {
+								return ret, success
+							}
 						}
 					}
 				}
@@ -384,6 +405,9 @@ func (kf keyFrame) checkRelated(prevKf keyFrame, thisOff, prevOff [][2]int64) ([
 			return thisOff, true
 		}
 	default:
+		if kf.seg.pMax == -1 && kf.seg.pMin == 0 {
+			return thisOff, true
+		}
 		ret := make([][2]int64, 0, len(thisOff))
 		success := false
 		for _, v := range thisOff {
@@ -395,6 +419,10 @@ func (kf keyFrame) checkRelated(prevKf keyFrame, thisOff, prevOff [][2]int64) ([
 					} else {
 						ret = append(ret, v)
 						success = true
+						// if the next type isn't a non-wild PREV, we only need one match
+						if nextKf.typ != frames.PREV || (nextKf.seg.pMax == -1 && nextKf.seg.pMin == 0) {
+							return ret, success
+						}
 					}
 				}
 			}

@@ -330,11 +330,13 @@ func (b *Matcher) scorer(buf siegreader.Buffer, q chan struct{}, r chan<- core.R
 					if !p.r {
 						p.rdistances = []int{0}
 					}
+					if oneEnough(kf[1], b.keyFrames[kf[0]]) {
+						res = append(res, kfHit{kf, off - int64(p.ldistances[0]), p.ldistances[0] + st.length + p.rdistances[0]})
+						continue
+					}
 					for _, ldistance := range p.ldistances {
 						for _, rdistance := range p.rdistances {
-							moff := off - int64(ldistance)
-							length := ldistance + st.length + rdistance
-							res = append(res, kfHit{kf, moff, length})
+							res = append(res, kfHit{kf, off - int64(ldistance), ldistance + st.length + rdistance})
 						}
 					}
 				}
@@ -368,8 +370,12 @@ func (b *Matcher) scorer(buf siegreader.Buffer, q chan struct{}, r chan<- core.R
 		prevKf := kfs[0]
 		ok = false
 		for i, kf := range kfs[1:] {
+			var nextKf keyFrame
+			if i+2 < len(kfs) {
+				nextKf = kfs[i+2]
+			}
 			thisOff := h.partials[i+1]
-			prevOff, ok = kf.checkRelated(prevKf, thisOff, prevOff)
+			prevOff, ok = kf.checkRelated(prevKf, nextKf, thisOff, prevOff)
 			if !ok {
 				return false, ""
 			}
