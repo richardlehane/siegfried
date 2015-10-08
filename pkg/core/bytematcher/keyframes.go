@@ -356,7 +356,9 @@ func (kf keyFrame) check(o int64) bool {
 // can we gather just a single hit for this keyframe?
 func oneEnough(id int, kfs []keyFrame) bool {
 	kf := kfs[id]
+	// if this is a BOF frame or a wild PREV frame we can ...
 	if kf.typ == frames.BOF || (kf.typ == frames.PREV && kf.seg.pMax == -1 && kf.seg.pMin == 0) {
+		// unless this isn't the last frame and the next frame is a non-wild PREV frame
 		if id+1 < len(kfs) {
 			next := kfs[id+1]
 			if next.typ == frames.PREV && (next.seg.pMax > -1 || next.seg.pMin > 0) {
@@ -365,7 +367,9 @@ func oneEnough(id int, kfs []keyFrame) bool {
 		}
 		return true
 	}
+	// if this is an EOF frame or SUCC frame we can ...
 	if id > 0 {
+		// so long as there isn't a previous frame that is a non-wild SUCC frame
 		prev := kfs[id-1]
 		if prev.typ == frames.SUCC && (prev.seg.pMax > -1 || prev.seg.pMin > 0) {
 			return false

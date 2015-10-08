@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package Bytematcher builds a matching engine from a set of persists and performs concurrent matching against an input siegreader.Buffer.
+// Package Bytematcher builds a matching engine from a set of signatures and performs concurrent matching against an input siegreader.Buffer.
 package bytematcher
 
 import (
@@ -111,19 +111,15 @@ func (se sigErrors) Error() string {
 	return str
 }
 
-// Add a set of persists to a bytematcher.
-// The priorities should be a list of equal length to the persists, or nil (if no priorities are to be set)
-// Can give optional distance, range, choice, variable sequence length values to override the defaults of 8192, 2048, 64.
-//   - the distance and range values dictate how persists are segmented during processing
-//   - the choices value controls how persist segments are converted into simple byte sequences during processing
-//   - the varlen value controls what is the minimum length sequence acceptable for the variable Aho Corasick tree. The longer this length, the fewer false matches you will get during searching.
+// Add a set of signatures to a bytematcher.
+// The priorities should be a list of equal length to the signatures, or nil (if no priorities are to be set)
 //
 // Example:
 //   err := Add([]Signature{Signature{NewFrame(BOF, Sequence{'p','d','f'}, nil, 0, 0)}})
 func (b *Matcher) Add(ss core.SignatureSet, priorities priority.List) (int, error) {
 	sigs, ok := ss.(SignatureSet)
 	if !ok {
-		return -1, fmt.Errorf("Byte matcher: can't convert persist set to BM persist set")
+		return -1, fmt.Errorf("Byte matcher: can't convert signature set to BM signature set")
 	}
 	var se sigErrors
 	// process each of the sigs, adding them to b.Sigs and the various seq/frame/testTree sets
@@ -146,15 +142,15 @@ func (b *Matcher) Add(ss core.SignatureSet, priorities priority.List) (int, erro
 	return len(b.keyFrames), nil
 }
 
-// Identify matches a Bytematcher's persists against the input siegreader.Buffer.
-// Results are passed on the first returned int channel. These ints are the indexes of the matching persists.
+// Identify matches a Bytematcher's signatures against the input siegreader.Buffer.
+// Results are passed on the first returned int channel. These ints are the indexes of the matching signatures.
 // The second and third int channels report on the Bytematcher's progress: returning offets from the beginning of the file and the end of the file.
 //
 // Example:
 //   ret, bprog, eprog := bm.Identify(buf, q)
 //   for v := range ret {
 //     if v == 0 {
-//       fmt.Print("Success! It is persist 0!")
+//       fmt.Print("Success! It is signature 0!")
 //     }
 //   }
 func (b *Matcher) Identify(name string, sb siegreader.Buffer) (chan core.Result, error) {
