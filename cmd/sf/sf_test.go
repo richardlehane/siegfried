@@ -239,6 +239,7 @@ func Test363(t *testing.T) {
 
 // Benchmarks
 func benchidentify(ext string) {
+	setup()
 	file := filepath.Join(*testdata, "benchmark", "Benchmark")
 	file += "." + ext
 	identifyT(s, file)
