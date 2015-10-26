@@ -4,14 +4,14 @@
     "@pdfextra"
   ],
   "pdfcore":[
-    "fmt/14",
-    "fmt/15",
-    "fmt/16",
-    "fmt/17",
-    "fmt/18",
-    "fmt/19",
-    "fmt/20",
-    "fmt/276"
+    "fmt/14 (Acrobat PDF 1.0 - Portable Document Format 1.0)",
+    "fmt/15 (Acrobat PDF 1.1 - Portable Document Format 1.1)",
+    "fmt/16 (Acrobat PDF 1.2 - Portable Document Format 1.2)",
+    "fmt/17 (Acrobat PDF 1.3 - Portable Document Format 1.3)",
+    "fmt/18 (Acrobat PDF 1.4 - Portable Document Format 1.4)",
+    "fmt/19 (Acrobat PDF 1.5 - Portable Document Format 1.5)",
+    "fmt/20 (Acrobat PDF 1.6 - Portable Document Format 1.6)",
+    "fmt/276 (Acrobat PDF 1.7 - Portable Document Format 1.7)"
   ],
   "pdfextra":[
     "@pdfa",
