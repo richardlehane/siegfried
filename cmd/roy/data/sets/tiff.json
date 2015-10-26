@@ -1,0 +1,13 @@
+{
+  "tiff": [
+    "fmt/7 (Tagged Image File Format 3)",
+    "fmt/8 (Tagged Image File Format 4)",
+    "fmt/9 (Tagged Image File Format 5)",
+    "fmt/10 (Tagged Image File Format 6)",
+    "fmt/153 (Tagged Image File Format for Image Technology (TIFF/IT))",
+    "fmt/154 (Tagged Image File Format for Electronic Photography (TIFF/EP))",
+    "fmt/155 (Geographic Tagged Image File Format (GeoTIFF))",
+    "fmt/156 (Tagged Image File Format for Internet Fax (TIFF-FX))",
+    "fmt/353 (Tagged Image File Format)"
+  ]
+}

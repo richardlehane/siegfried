@@ -161,14 +161,14 @@ func newDroid(path string) (*droid, error) {
 }
 
 func newReports(reps []string, idsPuids map[int]string) (*reports, error) {
+	r := &reports{reps, make([]*mappings.Report, len(reps)), idsPuids}
 	if len(reps) == 0 {
-		return nil, fmt.Errorf("no valid PRONOM reports given")
+		return r, nil // empty signatures
 	}
 	indexes := make(map[string]int)
 	for i, v := range reps {
 		indexes[v] = i
 	}
-	r := &reports{reps, make([]*mappings.Report, len(reps)), idsPuids}
 	apply := func(puid string) error {
 		idx := indexes[puid]
 		r.r[idx] = &mappings.Report{}

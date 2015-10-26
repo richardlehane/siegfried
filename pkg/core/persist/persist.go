@@ -55,11 +55,11 @@ func (l *LoadSaver) get(i int) []byte {
 }
 
 func (l *LoadSaver) put(b []byte) {
-	if l.Err != nil {
+	if l.Err != nil || len(b) == 0 {
 		return
 	}
 	if len(b)+l.i > len(l.buf) {
-		nbuf := make([]byte, len(l.buf)*2)
+		nbuf := make([]byte, (len(b)+l.i)*2)
 		copy(nbuf, l.buf[:l.i])
 		l.buf = nbuf
 	}
