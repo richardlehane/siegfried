@@ -200,6 +200,11 @@ func trimWebPath(p string) string {
 	return p
 }
 
+var (
+	arcReader  *webarchive.ARCReader
+	warcReader *webarchive.WARCReader
+)
+
 type wa struct {
 	p   string
 	rec webarchive.Record
@@ -207,13 +212,23 @@ type wa struct {
 }
 
 func newARC(r io.Reader, path string) (decompressor, error) {
-	a, err := webarchive.NewARCReader(r)
-	return &wa{p: trimWebPath(path), rdr: a}, err
+	var err error
+	if arcReader == nil {
+		arcReader, err = webarchive.NewARCReader(r)
+	} else {
+		err = arcReader.Reset(r)
+	}
+	return &wa{p: trimWebPath(path), rdr: arcReader}, err
 }
 
 func newWARC(r io.Reader, path string) (decompressor, error) {
-	w, err := webarchive.NewWARCReader(r)
-	return &wa{p: trimWebPath(path), rdr: w}, err
+	var err error
+	if warcReader == nil {
+		warcReader, err = webarchive.NewWARCReader(r)
+	} else {
+		err = warcReader.Reset(r)
+	}
+	return &wa{p: trimWebPath(path), rdr: warcReader}, err
 }
 
 func (w *wa) next() error {
