@@ -13,7 +13,7 @@ Key features are:
 
 ## Version
 
-1.3.0
+1.3.1
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried)
 
@@ -75,6 +75,12 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 	sf -update
 
 ## Recent Changes
+### Version 1.3.1 (29/10/2015)
+- support warc continuations
+- add all.json and tiff.json sets
+- minor speed-up
+- report less redundant basis information
+
 ### Version 1.3.0 (27/9/2015)
 - scan within warc and arc files with -z flag; reqested by [Dragan Espenschied](https://github.com/richardlehane/siegfried/issues/43)
 - [quit scanning earlier on known unknowns](https://github.com/richardlehane/siegfried/commit/f7fedf6b629048e1c41a694f4428e94deeffd3ee)
