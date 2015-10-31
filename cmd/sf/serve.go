@@ -97,7 +97,7 @@ func identify(s *siegfried.Siegfried) func(w http.ResponseWriter, r *http.Reques
 			}
 			w.Header().Set("Content-Type", mime)
 			wr.writeHead(s)
-			c, err := s.Identify(h.Filename, f)
+			c, err := s.Identify(f, h.Filename, "")
 			if c == nil {
 				wr.writeFile(h.Filename, sz, mod, nil, fmt.Errorf("failed to identify %s, got: %v", h.Filename, err), nil)
 				return

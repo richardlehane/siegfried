@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package extensionmatcher
+package stringmatcher
 
 import (
 	"fmt"
@@ -69,18 +69,18 @@ func (r result) Index() int {
 }
 
 func (r result) Basis() string {
-	return "extension match"
+	return "string match"
 }
 
-func (e Matcher) Add(ss core.SignatureSet, p priority.List) (int, error) {
+func (m Matcher) Add(ss core.SignatureSet, p priority.List) (int, error) {
 	sigs, ok := ss.(SignatureSet)
 	if !ok {
-		return -1, fmt.Errorf("Extension matcher: can't cast persist set as an EM ss")
+		return -1, fmt.Errorf("Stringmatcher: can't cast persist set")
 	}
 	var length int
 	// unless it is a new matcher, calculate current length by iterating through all the result values
-	if len(e) > 0 {
-		for _, v := range e {
+	if len(m) > 0 {
+		for _, v := range m {
 			for _, w := range v {
 				if int(w) > length {
 					length = int(w)
@@ -91,25 +91,24 @@ func (e Matcher) Add(ss core.SignatureSet, p priority.List) (int, error) {
 	}
 	for i, v := range sigs {
 		for _, w := range v {
-			e.add(w, i+length)
+			m.add(w, i+length)
 		}
 	}
 	return length + len(sigs), nil
 }
 
-func (e Matcher) add(ext string, fmt int) {
-	_, ok := e[ext]
+func (m Matcher) add(s string, fmt int) {
+	_, ok := m[s]
 	if ok {
-		e[ext] = append(e[ext], result(fmt))
+		m[s] = append(m[s], result(fmt))
 		return
 	}
-	e[ext] = []result{result(fmt)}
+	m[s] = []result{result(fmt)}
 }
 
-func (e Matcher) Identify(name string, na siegreader.Buffer) (chan core.Result, error) {
-	ext := filepath.Ext(name)
-	if len(ext) > 0 {
-		if fmts, ok := e[strings.ToLower(strings.TrimPrefix(ext, "."))]; ok {
+func (m Matcher) Identify(s string, na siegreader.Buffer) (chan core.Result, error) {
+	if len(s) > 0 {
+		if fmts, ok := m[s]; ok {
 			res := make(chan core.Result, len(fmts))
 			for _, v := range fmts {
 				res <- v
@@ -123,15 +122,42 @@ func (e Matcher) Identify(name string, na siegreader.Buffer) (chan core.Result, 
 	return res, nil
 }
 
-func (e Matcher) String() string {
+func (m Matcher) String() string {
 	var str string
 	var keys []string
-	for k := range e {
+	for k := range m {
 		keys = append(keys, k)
 	}
 	sort.Strings(keys)
 	for _, v := range keys {
-		str += fmt.Sprintf("%v: %v\n", v, e[v])
+		str += fmt.Sprintf("%v: %v\n", v, m[v])
 	}
 	return str
+}
+
+// Extension Matcher | MIME Matcher
+
+func NormaliseExt(s string) string {
+	return strings.ToLower(strings.TrimPrefix(filepath.Ext(s), "."))
+}
+
+type customResult struct {
+	idx    int
+	custom string
+}
+
+func (c customResult) Index() int {
+	return c.idx
+}
+
+func (c customResult) Basis() string {
+	return c.custom
+}
+
+func ExtResult(r core.Result, e string) core.Result {
+	return customResult{r.Index(), "extension match (" + e + ")"}
+}
+
+func MIMEResult(r core.Result, m string) core.Result {
+	return customResult{r.Index(), "MIME match (" + m + ")"}
 }

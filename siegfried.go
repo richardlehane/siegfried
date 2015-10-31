@@ -47,9 +47,9 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
 	"github.com/richardlehane/siegfried/pkg/core/containermatcher"
-	"github.com/richardlehane/siegfried/pkg/core/extensionmatcher"
 	"github.com/richardlehane/siegfried/pkg/core/persist"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
+	"github.com/richardlehane/siegfried/pkg/core/stringmatcher"
 	"github.com/richardlehane/siegfried/pkg/core/textmatcher"
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
@@ -61,6 +61,7 @@ import (
 type Siegfried struct {
 	C  time.Time    // signature create time
 	em core.Matcher // extensionmatcher
+	mm core.Matcher // mimematcher
 	cm core.Matcher // containermatcher
 	bm core.Matcher // bytematcher
 	tm core.Matcher // textmatcher
@@ -85,7 +86,8 @@ type Siegfried struct {
 func New() *Siegfried {
 	s := &Siegfried{}
 	s.C = time.Now()
-	s.em = extensionmatcher.New()
+	s.em = stringmatcher.New()
+	s.mm = stringmatcher.New()
 	s.cm = containermatcher.New()
 	s.bm = bytematcher.New()
 	s.tm = textmatcher.New()
@@ -100,16 +102,19 @@ func (s *Siegfried) Add(i core.Identifier) error {
 	default:
 		return fmt.Errorf("siegfried: unknown identifier type %T", i)
 	case *pronom.Identifier:
-		if err := i.Add(s.em); err != nil {
+		if err := i.Add(s.em, core.ExtensionMatcher); err != nil {
 			return err
 		}
-		if err := i.Add(s.cm); err != nil {
+		if err := i.Add(s.mm, core.MIMEMatcher); err != nil {
 			return err
 		}
-		if err := i.Add(s.bm); err != nil {
+		if err := i.Add(s.cm, core.ContainerMatcher); err != nil {
 			return err
 		}
-		if err := i.Add(s.tm); err != nil {
+		if err := i.Add(s.bm, core.ByteMatcher); err != nil {
+			return err
+		}
+		if err := i.Add(s.tm, core.TextMatcher); err != nil {
 			return err
 		}
 		s.ids = append(s.ids, i)
@@ -122,6 +127,7 @@ func (s *Siegfried) Save(path string) error {
 	ls := persist.NewLoadSaver(nil)
 	ls.SaveTime(s.C)
 	s.em.Save(ls)
+	s.mm.Save(ls)
 	s.cm.Save(ls)
 	s.bm.Save(ls)
 	s.tm.Save(ls)
@@ -178,7 +184,8 @@ func Load(path string) (*Siegfried, error) {
 	ls := persist.NewLoadSaver(buf)
 	return &Siegfried{
 		C:  ls.LoadTime(),
-		em: extensionmatcher.Load(ls),
+		em: stringmatcher.Load(ls),
+		mm: stringmatcher.Load(ls),
 		cm: containermatcher.Load(ls),
 		bm: bytematcher.Load(ls),
 		tm: textmatcher.Load(ls),
@@ -247,7 +254,7 @@ func (s *Siegfried) JSON() string {
 // Identify identifies a stream or file object.
 // It takes the name of the file/stream (if unknown, give an empty string) and an io.Reader
 // It returns a channel of identifications and an error
-func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, error) {
+func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identification, error) {
 	buffer, err := s.buffers.Get(r)
 	if err != nil && err != io.EOF {
 		return nil, fmt.Errorf("siegfried: error reading file; got %v", err)
@@ -258,11 +265,23 @@ func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, e
 		recs[i] = v.Recorder()
 	}
 	// Extension Matcher
-	if len(n) > 0 {
-		ems, _ := s.em.Identify(n, nil) // we don't care about an error here
+	if len(name) > 0 {
+		ext := stringmatcher.NormaliseExt(name)
+		ems, _ := s.em.Identify(ext, nil) // we don't care about an error here
 		for v := range ems {
 			for _, rec := range recs {
-				if rec.Record(core.ExtensionMatcher, v) {
+				if rec.Record(core.ExtensionMatcher, stringmatcher.ExtResult(v, ext)) {
+					break
+				}
+			}
+		}
+	}
+	// MIME Matcher
+	if len(mime) > 0 {
+		mms, _ := s.mm.Identify(mime, nil) // we don't care about an error here
+		for v := range mms {
+			for _, rec := range recs {
+				if rec.Record(core.MIMEMatcher, stringmatcher.MIMEResult(v, mime)) {
 					break
 				}
 			}
@@ -273,7 +292,7 @@ func (s *Siegfried) Identify(n string, r io.Reader) (chan core.Identification, e
 		if config.Debug() {
 			fmt.Println(">>START CONTAINER MATCHER")
 		}
-		cms, cerr := s.cm.Identify(n, buffer)
+		cms, cerr := s.cm.Identify(name, buffer)
 		for v := range cms {
 			for _, rec := range recs {
 				if rec.Record(core.ContainerMatcher, v) {
@@ -408,6 +427,8 @@ func (s *Siegfried) Inspect(t core.MatcherType) string {
 		return s.bm.String()
 	case core.ExtensionMatcher:
 		return s.em.String()
+	case core.MIMEMatcher:
+		return s.mm.String()
 	case core.ContainerMatcher:
 		return s.cm.String()
 	}

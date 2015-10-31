@@ -37,6 +37,8 @@ type Identifier struct {
 	infos      map[string]formatInfo
 	eStart     int
 	ePuids     []string // slice of puids that corresponds to the extension matcher's int slice of signatures
+	mStart     int
+	mPuids     []string
 	cStart     int
 	cPuids     []string
 	bStart     int
@@ -65,6 +67,8 @@ func (i *Identifier) Save(ls *persist.LoadSaver) {
 	}
 	ls.SaveInt(i.eStart)
 	ls.SaveStrings(i.ePuids)
+	ls.SaveInt(i.mStart)
+	ls.SaveStrings(i.mPuids)
 	ls.SaveInt(i.cStart)
 	ls.SaveStrings(i.cPuids)
 	ls.SaveInt(i.bStart)
@@ -89,6 +93,8 @@ func Load(ls *persist.LoadSaver) core.Identifier {
 	}
 	i.eStart = ls.LoadInt()
 	i.ePuids = ls.LoadStrings()
+	i.mStart = ls.LoadInt()
+	i.mPuids = ls.LoadStrings()
 	i.cStart = ls.LoadInt()
 	i.cPuids = ls.LoadStrings()
 	i.bStart = ls.LoadInt()
@@ -108,8 +114,8 @@ func New(opts ...config.Option) (*Identifier, error) {
 	return pronom.identifier(), nil
 }
 
-func (i *Identifier) Add(m core.Matcher) error {
-	return i.p.add(m)
+func (i *Identifier) Add(m core.Matcher, t core.MatcherType) error {
+	return i.p.add(m, t)
 }
 
 func (i *Identifier) Describe() [2]string {
@@ -118,9 +124,10 @@ func (i *Identifier) Describe() [2]string {
 
 func (i *Identifier) String() string {
 	str := fmt.Sprintf("Name: %s\nDetails: %s\n", i.name, i.details)
-	str += fmt.Sprintf("Number of extension persists: %d \n", len(i.ePuids))
-	str += fmt.Sprintf("Number of container persists: %d \n", len(i.cPuids))
-	str += fmt.Sprintf("Number of byte persists: %d \n", len(i.bPuids))
+	str += fmt.Sprintf("Number of extension signatures: %d \n", len(i.ePuids))
+	str += fmt.Sprintf("Number of MIME signatures: %d \n", len(i.mPuids))
+	str += fmt.Sprintf("Number of container signatures: %d \n", len(i.cPuids))
+	str += fmt.Sprintf("Number of byte signatures: %d \n", len(i.bPuids))
 	return str
 }
 
@@ -132,6 +139,12 @@ func (i *Identifier) Recognise(m core.MatcherType, idx int) (bool, string) {
 		if idx >= i.eStart && idx < i.eStart+len(i.ePuids) {
 			idx = idx - i.eStart
 			return true, i.name + ": " + i.ePuids[idx]
+		}
+		return false, ""
+	case core.MIMEMatcher:
+		if idx >= i.mStart && idx < i.mStart+len(i.mPuids) {
+			idx = idx - i.mStart
+			return true, i.name + ": " + i.mPuids[idx]
 		}
 		return false, ""
 	case core.ContainerMatcher:
@@ -154,7 +167,7 @@ func (i *Identifier) Recognise(m core.MatcherType, idx int) (bool, string) {
 }
 
 func (i *Identifier) Recorder() core.Recorder {
-	return &Recorder{i, make(pids, 0, 10), 1, false}
+	return &Recorder{i, make(pids, 0, 10), 2, false}
 }
 
 type Recorder struct {
@@ -164,6 +177,12 @@ type Recorder struct {
 	satisfied bool
 }
 
+const (
+	ExtScore  = 1
+	MIMEScore = 2
+	TextScore = 4
+)
+
 func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 	switch m {
 	default:
@@ -171,7 +190,15 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 	case core.ExtensionMatcher:
 		if res.Index() >= r.eStart && res.Index() < r.eStart+len(r.ePuids) {
 			idx := res.Index() - r.eStart
-			r.ids = add(r.ids, r.name, r.ePuids[idx], r.infos[r.ePuids[idx]], res.Basis(), r.cscore)
+			r.ids = add(r.ids, r.name, r.ePuids[idx], r.infos[r.ePuids[idx]], res.Basis(), ExtScore)
+			return true
+		} else {
+			return false
+		}
+	case core.MIMEMatcher:
+		if res.Index() >= r.mStart && res.Index() < r.mStart+len(r.mPuids) {
+			idx := res.Index() - r.mStart
+			r.ids = add(r.ids, r.name, r.mPuids[idx], r.infos[r.mPuids[idx]], res.Basis(), MIMEScore)
 			return true
 		} else {
 			return false
@@ -220,7 +247,7 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 			if r.satisfied {
 				return true
 			}
-			r.ids = add(r.ids, r.name, config.TextPuid(), r.infos[config.TextPuid()], res.Basis(), 2)
+			r.ids = add(r.ids, r.name, config.TextPuid(), r.infos[config.TextPuid()], res.Basis(), TextScore)
 			return true
 		} else {
 			return false
@@ -241,7 +268,7 @@ func place(idx int, ids []string) (int, int) {
 }
 
 func (r *Recorder) Satisfied(mt core.MatcherType) bool {
-	if r.cscore == 1 {
+	if r.cscore < 4 {
 		if mt == core.ByteMatcher {
 			return false
 		}
@@ -251,6 +278,17 @@ func (r *Recorder) Satisfied(mt core.MatcherType) bool {
 	}
 	r.satisfied = true
 	return true
+}
+
+func lowConfidence(conf int) string {
+	switch conf {
+	default:
+		return "extension"
+	case 2:
+		return "MIME"
+	case 3:
+		return "extension and MIME"
+	}
 }
 
 func (r *Recorder) Report(res chan core.Identification) {
@@ -263,16 +301,16 @@ func (r *Recorder) Report(res chan core.Identification) {
 		}
 		sort.Sort(r.ids)
 		conf := r.ids[0].confidence
-		// if we've only got extension matches, check if those matches are ruled out by lack of byte match
+		// if we've only got extension / mime matches, check if those matches are ruled out by lack of byte match
 		// add warnings too
-		if conf == 1 {
+		if conf < 4 {
 			nids := make([]Identification, 0, len(r.ids))
 			for _, v := range r.ids {
 				if ok := r.hasSig(v.Puid); !ok {
 					if len(v.Warning) > 0 {
-						v.Warning += "; match on extension only"
+						v.Warning += "; " + "match on " + lowConfidence(v.confidence) + " only"
 					} else {
-						v.Warning = "match on extension only"
+						v.Warning = "match on " + lowConfidence(v.confidence) + " only"
 					}
 					nids = append(nids, v)
 				}
@@ -282,14 +320,14 @@ func (r *Recorder) Report(res chan core.Identification) {
 				for i, v := range r.ids {
 					poss[i] = v.Puid
 				}
-				nids = []Identification{Identification{r.name, "UNKNOWN", "", "", "", nil, fmt.Sprintf("no match; possibilities based on extension are %v", strings.Join(poss, ", ")), 0, 0}}
+				nids = []Identification{Identification{r.name, "UNKNOWN", "", "", "", nil, fmt.Sprintf("no match; possibilities based on %v are %v", lowConfidence(conf), strings.Join(poss, ", ")), 0, 0}}
 			}
 			r.ids = nids
 		}
 		res <- r.checkExt(r.ids[0])
 		if len(r.ids) > 1 {
 			for i, v := range r.ids[1:] {
-				if v.confidence == conf || (r.noPriority && v.confidence > 1) {
+				if v.confidence == conf || (r.noPriority && v.confidence > 3) {
 					res <- r.checkExt(r.ids[i+1])
 				} else {
 					break

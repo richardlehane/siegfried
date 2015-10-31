@@ -30,6 +30,7 @@ var identifier = struct {
 	noPriority  bool
 	noText      bool
 	noExt       bool
+	noMIME      bool
 }{
 	name: "pronom",
 }
@@ -70,6 +71,9 @@ func Details() string {
 	}
 	if identifier.noExt {
 		str += "; no extension matcher"
+	}
+	if identifier.noMIME {
+		str += "; no MIME matcher"
 	}
 	if pronom.noreports {
 		str += "; built without reports"
@@ -118,6 +122,10 @@ func NoText() bool {
 
 func NoExt() bool {
 	return identifier.noExt
+}
+
+func NoMIME() bool {
+	return identifier.noMIME
 }
 
 // SETTERS
@@ -181,6 +189,13 @@ func SetNoText() func() private {
 func SetNoExt() func() private {
 	return func() private {
 		identifier.noExt = true
+		return private{}
+	}
+}
+
+func SetNoMIME() func() private {
+	return func() private {
+		identifier.noMIME = true
 		return private{}
 	}
 }

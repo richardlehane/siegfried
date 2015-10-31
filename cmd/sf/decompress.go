@@ -34,6 +34,7 @@ type decompressor interface {
 	next() error // when finished, should return io.EOF
 	reader() io.Reader
 	path() string
+	mime() string
 	size() int64
 	mod() string
 	dirs() []string
@@ -82,6 +83,10 @@ func (z *zipD) path() string {
 	return z.p + string(filepath.Separator) + filepath.FromSlash(characterize.ZipName(z.rdr.File[z.idx].Name))
 }
 
+func (z *zipD) mime() string {
+	return ""
+}
+
 func (z *zipD) size() int64 {
 	return int64(z.rdr.File[z.idx].UncompressedSize64)
 }
@@ -122,6 +127,10 @@ func (t *tarD) reader() io.Reader {
 
 func (t *tarD) path() string {
 	return t.p + string(filepath.Separator) + filepath.FromSlash(t.hdr.Name)
+}
+
+func (t *tarD) mime() string {
+	return ""
 }
 
 func (t *tarD) size() int64 {
@@ -176,6 +185,10 @@ func (g *gzipD) path() string {
 		name = strings.TrimSuffix(filepath.Base(g.p), filepath.Ext(g.p))
 	}
 	return g.p + string(filepath.Separator) + name
+}
+
+func (g *gzipD) mime() string {
+	return ""
 }
 
 func (g *gzipD) size() int64 {
@@ -243,6 +256,10 @@ func (w *wa) reader() io.Reader {
 
 func (w *wa) path() string {
 	return filepath.Join(w.p, w.rec.Date().Format(webarchive.ARCTime), w.rec.URL())
+}
+
+func (w *wa) mime() string {
+	return w.rec.MIME()
 }
 
 func (w *wa) size() int64 {

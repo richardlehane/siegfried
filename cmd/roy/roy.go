@@ -49,6 +49,7 @@ var (
 	nocontainer = build.Bool("nocontainer", false, "skip container signatures")
 	notext      = build.Bool("notext", false, "skip text matcher")
 	noext       = build.Bool("noext", false, "skip extension matcher")
+	nomime      = build.Bool("nomime", false, "skip MIME matcher")
 	noreports   = build.Bool("noreports", false, "build directly from DROID file rather than PRONOM reports")
 	doubleup    = build.Bool("doubleup", false, "include byte signatures for formats that also have container signatures")
 	rng         = build.Int("range", config.Range(), "define a maximum range for segmentation")
@@ -184,6 +185,9 @@ the DROID signature file you should also include a regular signature extension
 	if *noext {
 		opts = append(opts, config.SetNoExt())
 	}
+	if *nomime {
+		opts = append(opts, config.SetNoMIME())
+	}
 	if *noreports {
 		opts = append(opts, config.SetNoReports())
 	}
@@ -282,6 +286,8 @@ func main() {
 				err = inspectSig(core.ContainerMatcher)
 			case input == "extensionmatcher", input == "em":
 				err = inspectSig(core.ExtensionMatcher)
+			case input == "mimematcher", input == "mm":
+				err = inspectSig(core.MIMEMatcher)
 			case filepath.Ext(input) == ".sig":
 				config.SetSignature(input)
 				err = inspectSig(-1)

@@ -31,7 +31,7 @@ func TestIdentify(t *testing.T) {
 	s.bm = testBMatcher{}
 	s.cm = nil
 	s.ids = append(s.ids, testIdentifier{})
-	c, err := s.Identify("test.doc", bytes.NewBufferString("test"))
+	c, err := s.Identify(bytes.NewBufferString("test"), "test.doc", "")
 	if err != nil {
 		t.Error(err)
 	}

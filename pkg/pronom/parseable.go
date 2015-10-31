@@ -28,6 +28,7 @@ type parseable interface {
 	puids() []string
 	infos() map[string]formatInfo
 	extensions() ([][]string, []string)
+	mimes() ([][]string, []string)
 	signatures() ([]frames.Signature, []string, error)
 	priorities() priority.Map
 }
@@ -57,6 +58,12 @@ func (j *joint) infos() map[string]formatInfo {
 func (j *joint) extensions() ([][]string, []string) {
 	e, p := j.a.extensions()
 	f, q := j.b.extensions()
+	return append(e, f...), append(p, q...)
+}
+
+func (j *joint) mimes() ([][]string, []string) {
+	e, p := j.a.mimes()
+	f, q := j.b.mimes()
 	return append(e, f...), append(p, q...)
 }
 
@@ -117,6 +124,20 @@ func (f *filter) infos() map[string]formatInfo {
 func (f *filter) extensions() ([][]string, []string) {
 	ret, retp := make([][]string, 0, len(f.puids())), make([]string, 0, len(f.puids()))
 	e, p := f.p.extensions()
+	for i, v := range p {
+		for _, w := range f.puids() {
+			if v == w {
+				ret, retp = append(ret, e[i]), append(retp, v)
+				break
+			}
+		}
+	}
+	return ret, retp
+}
+
+func (f *filter) mimes() ([][]string, []string) {
+	ret, retp := make([][]string, 0, len(f.puids())), make([]string, 0, len(f.puids()))
+	e, p := f.p.mimes()
 	for i, v := range p {
 		for _, w := range f.puids() {
 			if v == w {
@@ -214,6 +235,18 @@ func (r *reports) extensions() ([][]string, []string) {
 	return exts, puids
 }
 
+func (r *reports) mimes() ([][]string, []string) {
+	mimes := make([][]string, 0, len(r.r))
+	puids := make([]string, 0, len(r.p))
+	for i, v := range r.r {
+		if len(v.MIME()) > 0 {
+			mimes = append(mimes, []string{v.MIME()})
+			puids = append(puids, r.p[i])
+		}
+	}
+	return mimes, puids
+}
+
 func (r *reports) idsPuids() map[int]string {
 	if r.ip != nil {
 		return r.ip
@@ -288,6 +321,19 @@ func (d *droid) extensions() ([][]string, []string) {
 		}
 	}
 	return exts, puids
+}
+
+func (d *droid) mimes() ([][]string, []string) {
+	p := d.puids()
+	mimes := make([][]string, 0, len(d.FileFormats))
+	puids := make([]string, 0, len(p))
+	for i, v := range d.FileFormats {
+		if len(v.MIMEType) > 0 {
+			mimes = append(mimes, []string{v.MIMEType})
+			puids = append(puids, p[i])
+		}
+	}
+	return mimes, puids
 }
 
 func (d *droid) idsPuids() map[int]string {

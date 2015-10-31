@@ -1,4 +1,4 @@
-package extensionmatcher
+package stringmatcher
 
 import (
 	"testing"
@@ -8,14 +8,14 @@ import (
 
 var fmts = SignatureSet{[]string{"wav"}, []string{"doc"}, []string{"xls"}, []string{"pdf"}, []string{"ppt"}}
 
-var em = New()
+var sm = New()
 
 func init() {
-	em.Add(fmts, nil)
+	sm.Add(fmts, nil)
 }
 
 func TestWavMatch(t *testing.T) {
-	res, _ := em.Identify("hello/apple.wav", nil)
+	res, _ := sm.Identify(NormaliseExt("hello/apple.wav"), nil)
 	e := <-res
 	if e.Index() != 0 {
 		t.Errorf("Expecting 0, got %v", e)
@@ -27,7 +27,7 @@ func TestWavMatch(t *testing.T) {
 }
 
 func TestNoMatch(t *testing.T) {
-	res, _ := em.Identify("hello/apple.tty", nil)
+	res, _ := sm.Identify(NormaliseExt("hello/apple.tty"), nil)
 	_, ok := <-res
 	if ok {
 		t.Error("Should not match")
@@ -35,7 +35,7 @@ func TestNoMatch(t *testing.T) {
 }
 
 func TestNoExt(t *testing.T) {
-	res, _ := em.Identify("hello/apple", nil)
+	res, _ := sm.Identify(NormaliseExt("hello/apple"), nil)
 	_, ok := <-res
 	if ok {
 		t.Error("Should not match")
@@ -43,18 +43,18 @@ func TestNoExt(t *testing.T) {
 }
 
 func TestIO(t *testing.T) {
-	em := New()
-	em.Add(SignatureSet{[]string{".bla"}, []string{".doc"}, []string{".ppt"}}, nil)
-	str := em.String()
+	sm := New()
+	sm.Add(SignatureSet{[]string{".bla"}, []string{".doc"}, []string{".ppt"}}, nil)
+	str := sm.String()
 	saver := persist.NewLoadSaver(nil)
-	em.Save(saver)
+	sm.Save(saver)
 	if len(saver.Bytes()) < 10 {
-		t.Errorf("Save extension matcher: too small, only got %v", saver.Bytes())
+		t.Errorf("Save string matcher: too small, only got %v", saver.Bytes())
 	}
 	loader := persist.NewLoadSaver(saver.Bytes())
-	newem := Load(loader)
-	str2 := newem.String()
+	newsm := Load(loader)
+	str2 := newsm.String()
 	if str != str2 {
-		t.Errorf("Load extension matcher: expecting first extension matcher (%v), to equal second extension matcher (%v)", str, str2)
+		t.Errorf("Load string matcher: expecting first matcher (%v), to equal second matcher (%v)", str, str2)
 	}
 }

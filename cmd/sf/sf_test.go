@@ -44,7 +44,7 @@ func identifyT(s *siegfried.Siegfried, p string) ([]string, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to open %v, got: %v", p, err)
 	}
-	c, err := s.Identify(p, file)
+	c, err := s.Identify(file, p, "")
 	if c == nil {
 		return nil, fmt.Errorf("failed to identify %v, got: %v", p, err)
 	}
@@ -161,21 +161,21 @@ func TestTip(t *testing.T) {
 		t.Error(err)
 	}
 	buf := bytes.NewReader([]byte{0x00, 0x4d, 0x52, 0x4d, 0x00})
-	c, err := s.Identify("test.mrw", buf)
+	c, err := s.Identify(buf, "test.mrw", "")
 	for i := range c {
 		if i.String() != expect {
 			t.Errorf("First buffer: expecting %s, got %s", expect, i)
 		}
 	}
 	buf = bytes.NewReader([]byte{0x00, 0x4d, 0x52, 0x4d, 0x00})
-	c, err = s.Identify("test.mrw", buf)
+	c, err = s.Identify(buf, "test.mrw", "")
 	for i := range c {
 		if i.String() != expect {
 			t.Errorf("Second buffer: expecting %s, got %s", expect, i)
 		}
 	}
 	buf = bytes.NewReader([]byte{0x00, 0x4d, 0x52, 0x4d, 0x00})
-	c, err = s.Identify("test.mrw", buf)
+	c, err = s.Identify(buf, "test.mrw", "")
 	for i := range c {
 		if i.String() != expect {
 			t.Errorf("Third buffer: expecting %s, got %s", expect, i)
@@ -205,7 +205,7 @@ func Test363(t *testing.T) {
 	se := segy(3226)
 	for i := 0; i < repetitions; i++ {
 		buf := bytes.NewReader(se)
-		c, _ := s.Identify("test.seg", buf)
+		c, _ := s.Identify(buf, "test.seg", "")
 		for i := range c {
 			iter++
 			if i.String() != expect {
@@ -222,7 +222,7 @@ func Test363(t *testing.T) {
 	se = segy(3626)
 	for i := 0; i < repetitions; i++ {
 		buf := bytes.NewReader(se)
-		c, _ := s.Identify("test2.seg", buf)
+		c, _ := s.Identify(buf, "test2.seg", "")
 		for i := range c {
 			iter++
 			if i.String() != expect {

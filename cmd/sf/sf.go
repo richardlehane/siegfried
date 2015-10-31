@@ -102,7 +102,7 @@ func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 				rchan <- res{"", 0, "", nil, fmt.Errorf("failed to open %v, got: %v", path, err)}
 				return
 			}
-			c, err := s.Identify(path, f)
+			c, err := s.Identify(f, path, "")
 			if c == nil {
 				f.Close()
 				rchan <- res{"", 0, "", nil, fmt.Errorf("failed to identify %v, got: %v", path, err)}
@@ -145,12 +145,12 @@ func identifyFile(w writer, s *siegfried.Siegfried, path string, sz int64, mod s
 		w.writeFile(path, sz, mod, nil, fmt.Errorf("failed to open %s, got: %v", path, err), nil)
 		return
 	}
-	identifyRdr(w, s, f, path, sz, mod)
+	identifyRdr(w, s, f, sz, path, "", mod)
 	f.Close()
 }
 
-func identifyRdr(w writer, s *siegfried.Siegfried, r io.Reader, path string, sz int64, mod string) {
-	c, err := s.Identify(path, r)
+func identifyRdr(w writer, s *siegfried.Siegfried, r io.Reader, sz int64, path, mime, mod string) {
+	c, err := s.Identify(r, path, mime)
 	if c == nil {
 		w.writeFile(path, sz, mod, nil, fmt.Errorf("failed to identify %s, got: %v", path, err), nil)
 		return
@@ -193,7 +193,7 @@ func identifyRdr(w writer, s *siegfried.Siegfried, r io.Reader, path string, sz 
 				w.writeFile(v, -1, "", nil, nil, nil)
 			}
 		}
-		identifyRdr(w, s, d.reader(), d.path(), d.size(), d.mod())
+		identifyRdr(w, s, d.reader(), d.size(), d.path(), d.mime(), d.mod())
 	}
 }
 

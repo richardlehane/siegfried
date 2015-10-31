@@ -31,8 +31,8 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/containermatcher"
-	"github.com/richardlehane/siegfried/pkg/core/extensionmatcher"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
+	"github.com/richardlehane/siegfried/pkg/core/stringmatcher"
 	"github.com/richardlehane/siegfried/pkg/core/textmatcher"
 	"github.com/richardlehane/siegfried/pkg/pronom/mappings"
 )
@@ -209,24 +209,35 @@ func (p *pronom) setContainers() error {
 }
 
 // add adds extension, bytematcher or containermatcher signatures to the identifier
-func (p *pronom) add(m core.Matcher) error {
-	switch t := m.(type) {
+func (p *pronom) add(m core.Matcher, t core.MatcherType) error {
+	switch t {
 	default:
-		return fmt.Errorf("Pronom: unknown matcher type %T", t)
-	case extensionmatcher.Matcher:
+		return fmt.Errorf("Pronom: unknown matcher type %d", t)
+	case core.ExtensionMatcher:
 		if !config.NoExt() {
 			var exts [][]string
 			exts, p.ePuids = p.j.extensions()
-			l, err := m.Add(extensionmatcher.SignatureSet(exts), nil)
+			l, err := m.Add(stringmatcher.SignatureSet(exts), nil)
 			if err != nil {
 				return err
 			}
 			p.eStart = l - len(p.ePuids)
 			return nil
 		}
-	case containermatcher.Matcher:
+	case core.MIMEMatcher:
+		if !config.NoMIME() {
+			var mimes [][]string
+			mimes, p.mPuids = p.j.mimes()
+			l, err := m.Add(stringmatcher.SignatureSet(mimes), nil)
+			if err != nil {
+				return err
+			}
+			p.mStart = l - len(p.mPuids)
+			return nil
+		}
+	case core.ContainerMatcher:
 		return p.contMatcher(m)
-	case *bytematcher.Matcher:
+	case core.ByteMatcher:
 		var sigs []frames.Signature
 		var err error
 		sigs, p.bPuids, err = p.j.signatures()
@@ -242,7 +253,7 @@ func (p *pronom) add(m core.Matcher) error {
 			return err
 		}
 		p.bStart = l - len(p.bPuids)
-	case *textmatcher.Matcher:
+	case core.TextMatcher:
 		if !config.NoText() && p.hasPuid(config.TextPuid()) {
 			l, _ := m.Add(textmatcher.SignatureSet{}, nil)
 			p.tStart = l

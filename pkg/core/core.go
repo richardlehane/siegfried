@@ -79,7 +79,7 @@ type Identification interface {
 	Archive() config.Archive // does this format match any of the archive formats (zip, gzip, tar, warc, arc)
 }
 
-// Matcher does the matching (against the name or the byte stream) and sends results
+// Matcher does the matching (against the name/mime string or the byte stream) and sends results
 type Matcher interface {
 	Identify(string, siegreader.Buffer) (chan Result, error)
 	Add(SignatureSet, priority.List) (int, error) // add a signature set, return total number of signatures in a matcher
@@ -93,6 +93,7 @@ type MatcherType int
 // Add additional Matchers here
 const (
 	ExtensionMatcher MatcherType = iota
+	MIMEMatcher
 	ContainerMatcher
 	ByteMatcher
 	TextMatcher

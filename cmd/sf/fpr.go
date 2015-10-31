@@ -43,7 +43,7 @@ func fpridentify(s *siegfried.Siegfried, path string) []byte {
 	if err != nil {
 		return reply("error: failed to open " + path + "; got " + err.Error())
 	}
-	c, err := s.Identify(path, fi)
+	c, err := s.Identify(fi, path, "")
 	if err != nil {
 		return reply("error: failed to scan " + path + "; got " + err.Error())
 	}
