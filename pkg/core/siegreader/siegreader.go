@@ -33,6 +33,7 @@ import "errors"
 
 var (
 	ErrQuit      = errors.New("siegreader: quit chan closed while awaiting EOF")
+	ErrEmpty     = errors.New("siegreader: empty source")
 	ErrNilBuffer = errors.New("siegreader: attempt to SetSource on a nil buffer")
 )
 

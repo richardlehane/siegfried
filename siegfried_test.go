@@ -106,6 +106,8 @@ func (t testIdentifier) String() string { return "" }
 
 type testRecorder struct{}
 
+func (t testRecorder) Active(m core.MatcherType) {}
+
 func (t testRecorder) Record(m core.MatcherType, r core.Result) bool { return true }
 
 func (t testRecorder) Satisfied(m core.MatcherType) bool { return false }

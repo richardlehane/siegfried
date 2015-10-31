@@ -62,16 +62,6 @@ func New() Matcher {
 
 type SignatureSet [][]string
 
-type result int
-
-func (r result) Index() int {
-	return int(r)
-}
-
-func (r result) Basis() string {
-	return "string match"
-}
-
 func (m Matcher) Add(ss core.SignatureSet, p priority.List) (int, error) {
 	sigs, ok := ss.(SignatureSet)
 	if !ok {
@@ -135,29 +125,43 @@ func (m Matcher) String() string {
 	return str
 }
 
+type result int
+
+func (r result) Index() int {
+	return int(r)
+}
+
+func (r result) Basis() string {
+	return "string match"
+}
+
 // Extension Matcher | MIME Matcher
 
 func NormaliseExt(s string) string {
-	return strings.ToLower(strings.TrimPrefix(filepath.Ext(s), "."))
+	ext := strings.ToLower(strings.TrimPrefix(filepath.Ext(s), "."))
+	idx := strings.LastIndex(ext, "?") // to get ext from URL paths, get rid of params
+	if idx > 0 {
+		ext = ext[:idx]
+	}
+	return ext
 }
 
-type customResult struct {
-	idx    int
-	custom string
+func NormaliseMIME(s string) string {
+	idx := strings.LastIndex(s, ";")
+	if idx > 0 {
+		return s[:idx]
+	}
+	return s
 }
 
-func (c customResult) Index() int {
-	return c.idx
+type ExtResult struct{ core.Result }
+
+func (_ ExtResult) Basis() string {
+	return "extension match"
 }
 
-func (c customResult) Basis() string {
-	return c.custom
-}
+type MIMEResult struct{ core.Result }
 
-func ExtResult(r core.Result, e string) core.Result {
-	return customResult{r.Index(), "extension match (" + e + ")"}
-}
-
-func MIMEResult(r core.Result, m string) core.Result {
-	return customResult{r.Index(), "MIME match (" + m + ")"}
+func (_ MIMEResult) Basis() string {
+	return "MIME match"
 }

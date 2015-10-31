@@ -167,21 +167,37 @@ func (i *Identifier) Recognise(m core.MatcherType, idx int) (bool, string) {
 }
 
 func (i *Identifier) Recorder() core.Recorder {
-	return &Recorder{i, make(pids, 0, 10), 2, false}
+	return &Recorder{i, make(pids, 0, 10), 0, false, false, false}
 }
 
 type Recorder struct {
 	*Identifier
-	ids       pids
-	cscore    int
-	satisfied bool
+	ids        pids
+	cscore     int
+	satisfied  bool
+	extActive  bool
+	mimeActive bool
 }
 
 const (
-	ExtScore  = 1
-	MIMEScore = 2
-	TextScore = 4
+	extScore  = 1
+	mimeScore = 2
+	textScore = 4
+	incScore  = 8
 )
+
+func (r *Recorder) Active(m core.MatcherType) {
+	switch m {
+	case core.ExtensionMatcher:
+		if len(r.ePuids) > 0 {
+			r.extActive = true
+		}
+	case core.MIMEMatcher:
+		if len(r.mPuids) > 0 {
+			r.mimeActive = true
+		}
+	}
+}
 
 func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 	switch m {
@@ -190,7 +206,7 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 	case core.ExtensionMatcher:
 		if res.Index() >= r.eStart && res.Index() < r.eStart+len(r.ePuids) {
 			idx := res.Index() - r.eStart
-			r.ids = add(r.ids, r.name, r.ePuids[idx], r.infos[r.ePuids[idx]], res.Basis(), ExtScore)
+			r.ids = add(r.ids, r.name, r.ePuids[idx], r.infos[r.ePuids[idx]], res.Basis(), extScore)
 			return true
 		} else {
 			return false
@@ -198,7 +214,7 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 	case core.MIMEMatcher:
 		if res.Index() >= r.mStart && res.Index() < r.mStart+len(r.mPuids) {
 			idx := res.Index() - r.mStart
-			r.ids = add(r.ids, r.name, r.mPuids[idx], r.infos[r.mPuids[idx]], res.Basis(), MIMEScore)
+			r.ids = add(r.ids, r.name, r.mPuids[idx], r.infos[r.mPuids[idx]], res.Basis(), mimeScore)
 			return true
 		} else {
 			return false
@@ -207,14 +223,14 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 		// add zip default
 		if res.Index() < 0 {
 			if r.zipDefault {
-				r.cscore *= 2
+				r.cscore += incScore
 				r.ids = add(r.ids, r.name, config.ZipPuid(), r.infos[config.ZipPuid()], res.Basis(), r.cscore)
 			}
 			return false
 		}
 		if res.Index() >= r.cStart && res.Index() < r.cStart+len(r.cPuids) {
 			idx := res.Index() - r.cStart
-			r.cscore *= 2
+			r.cscore += incScore
 			basis := res.Basis()
 			p, t := place(idx, r.cPuids)
 			if t > 1 {
@@ -231,7 +247,7 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 				return true
 			}
 			idx := res.Index() - r.bStart
-			r.cscore *= 2
+			r.cscore += incScore
 			basis := res.Basis()
 			p, t := place(idx, r.bPuids)
 			if t > 1 {
@@ -247,7 +263,7 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 			if r.satisfied {
 				return true
 			}
-			r.ids = add(r.ids, r.name, config.TextPuid(), r.infos[config.TextPuid()], res.Basis(), TextScore)
+			r.ids = add(r.ids, r.name, config.TextPuid(), r.infos[config.TextPuid()], res.Basis(), textScore)
 			return true
 		} else {
 			return false
@@ -268,12 +284,21 @@ func place(idx int, ids []string) (int, int) {
 }
 
 func (r *Recorder) Satisfied(mt core.MatcherType) bool {
-	if r.cscore < 4 {
+	if r.cscore < incScore {
 		if mt == core.ByteMatcher {
 			return false
 		}
-		if len(r.ids) == 0 || (len(r.ids) == 1 && r.ids[0].Puid == "x-fmt/111") {
+		if len(r.ids) == 0 {
 			return false
+		}
+		conf := r.ids[0].confidence
+		for _, res := range r.ids {
+			if res.confidence != conf {
+				break
+			}
+			if res.Puid == config.TextPuid() {
+				return false
+			}
 		}
 	}
 	r.satisfied = true
@@ -281,13 +306,25 @@ func (r *Recorder) Satisfied(mt core.MatcherType) bool {
 }
 
 func lowConfidence(conf int) string {
-	switch conf {
-	default:
-		return "extension"
+	var ls = make([]string, 0, 1)
+	if conf&extScore == extScore {
+		ls = append(ls, "extension")
+	}
+	if conf&mimeScore == mimeScore {
+		ls = append(ls, "MIME")
+	}
+	if conf&textScore == textScore {
+		ls = append(ls, "text")
+	}
+	switch len(ls) {
+	case 0:
+		return ""
+	case 1:
+		return ls[0]
 	case 2:
-		return "MIME"
-	case 3:
-		return "extension and MIME"
+		return ls[0] + " and " + ls[1]
+	default:
+		return strings.Join(ls[:len(ls)-1], ", ") + " and " + ls[len(ls)-1]
 	}
 }
 
@@ -303,9 +340,12 @@ func (r *Recorder) Report(res chan core.Identification) {
 		conf := r.ids[0].confidence
 		// if we've only got extension / mime matches, check if those matches are ruled out by lack of byte match
 		// add warnings too
-		if conf < 4 {
+		if conf < incScore {
 			nids := make([]Identification, 0, len(r.ids))
 			for _, v := range r.ids {
+				if v.confidence != conf {
+					break
+				}
 				if ok := r.hasSig(v.Puid); !ok {
 					if len(v.Warning) > 0 {
 						v.Warning += "; " + "match on " + lowConfidence(v.confidence) + " only"
@@ -324,11 +364,11 @@ func (r *Recorder) Report(res chan core.Identification) {
 			}
 			r.ids = nids
 		}
-		res <- r.checkExt(r.ids[0])
+		res <- r.checkActive(r.ids[0])
 		if len(r.ids) > 1 {
 			for i, v := range r.ids[1:] {
-				if v.confidence == conf || (r.noPriority && v.confidence > 3) {
-					res <- r.checkExt(r.ids[i+1])
+				if v.confidence == conf || (r.noPriority && v.confidence >= incScore) {
+					res <- r.checkActive(r.ids[i+1])
 				} else {
 					break
 				}
@@ -339,8 +379,8 @@ func (r *Recorder) Report(res chan core.Identification) {
 	}
 }
 
-func (r *Recorder) checkExt(i Identification) Identification {
-	if i.confidence%2 == 0 {
+func (r *Recorder) checkActive(i Identification) Identification {
+	if r.extActive && (i.confidence&extScore != extScore) {
 		for _, v := range r.ePuids {
 			if i.Puid == v {
 				if len(i.Warning) > 0 {
@@ -348,7 +388,19 @@ func (r *Recorder) checkExt(i Identification) Identification {
 				} else {
 					i.Warning = "extension mismatch"
 				}
-				return i
+				break
+			}
+		}
+	}
+	if r.mimeActive && (i.confidence&mimeScore != mimeScore) {
+		for _, v := range r.mPuids {
+			if i.Puid == v {
+				if len(i.Warning) > 0 {
+					i.Warning += "; MIME mismatch"
+				} else {
+					i.Warning = "MIME mismatch"
+				}
+				break
 			}
 		}
 	}

@@ -263,6 +263,12 @@ func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identifi
 	recs := make([]core.Recorder, len(s.ids))
 	for i, v := range s.ids {
 		recs[i] = v.Recorder()
+		if name != "" {
+			recs[i].Active(core.ExtensionMatcher)
+		}
+		if mime != "" {
+			recs[i].Active(core.MIMEMatcher)
+		}
 	}
 	// Extension Matcher
 	if len(name) > 0 {
@@ -270,7 +276,7 @@ func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identifi
 		ems, _ := s.em.Identify(ext, nil) // we don't care about an error here
 		for v := range ems {
 			for _, rec := range recs {
-				if rec.Record(core.ExtensionMatcher, stringmatcher.ExtResult(v, ext)) {
+				if rec.Record(core.ExtensionMatcher, stringmatcher.ExtResult{v}) {
 					break
 				}
 			}
@@ -278,10 +284,11 @@ func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identifi
 	}
 	// MIME Matcher
 	if len(mime) > 0 {
+		mime = stringmatcher.NormaliseMIME(mime)
 		mms, _ := s.mm.Identify(mime, nil) // we don't care about an error here
 		for v := range mms {
 			for _, rec := range recs {
-				if rec.Record(core.MIMEMatcher, stringmatcher.MIMEResult(v, mime)) {
+				if rec.Record(core.MIMEMatcher, stringmatcher.MIMEResult{v}) {
 					break
 				}
 			}
@@ -432,7 +439,7 @@ func (s *Siegfried) Inspect(t core.MatcherType) string {
 	case core.ContainerMatcher:
 		return s.cm.String()
 	}
-	return fmt.Sprintf("Identifiers\n%s\nExtension Matcher\n%s\nContainer Matcher\n%s\nByte Matcher\n%sText Matcher\n%s",
+	return fmt.Sprintf("Identifiers\n%s\nByte Matcher\n%sText Matcher\n%s",
 		func() string {
 			var str string
 			for _, i := range s.ids {
@@ -440,8 +447,6 @@ func (s *Siegfried) Inspect(t core.MatcherType) string {
 			}
 			return str
 		}(),
-		s.em.String(),
-		s.cm.String(),
 		s.bm.String(),
 		s.tm.String())
 }
