@@ -138,12 +138,12 @@ func (r result) Basis() string {
 // Extension Matcher | MIME Matcher
 
 func NormaliseExt(s string) string {
-	ext := strings.ToLower(strings.TrimPrefix(filepath.Ext(s), "."))
+	ext := filepath.Base(s)
 	idx := strings.LastIndex(ext, "?") // to get ext from URL paths, get rid of params
-	if idx > 0 {
+	if idx > -1 && strings.Index(ext[:idx], ".") > -1 {
 		ext = ext[:idx]
 	}
-	return ext
+	return strings.ToLower(strings.TrimPrefix(filepath.Ext(ext), "."))
 }
 
 func NormaliseMIME(s string) string {

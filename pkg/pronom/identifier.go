@@ -339,14 +339,19 @@ func (r *Recorder) Report(res chan core.Identification) {
 		sort.Sort(r.ids)
 		conf := r.ids[0].confidence
 		// if we've only got extension / mime matches, check if those matches are ruled out by lack of byte match
+		// only permit a single extension or mime only match
 		// add warnings too
-		if conf < incScore {
-			nids := make([]Identification, 0, len(r.ids))
+		if conf <= textScore {
+			nids := make([]Identification, 0, 1)
 			for _, v := range r.ids {
 				if v.confidence != conf {
 					break
 				}
 				if ok := r.hasSig(v.Puid); !ok {
+					if len(nids) > 0 {
+						nids = nids[:0]
+						break
+					}
 					if len(v.Warning) > 0 {
 						v.Warning += "; " + "match on " + lowConfidence(v.confidence) + " only"
 					} else {
@@ -355,7 +360,7 @@ func (r *Recorder) Report(res chan core.Identification) {
 					nids = append(nids, v)
 				}
 			}
-			if len(nids) == 0 {
+			if len(nids) != 1 {
 				poss := make([]string, len(r.ids))
 				for i, v := range r.ids {
 					poss[i] = v.Puid
