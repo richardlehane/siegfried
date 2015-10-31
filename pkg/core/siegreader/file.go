@@ -71,6 +71,9 @@ func (f *file) setSource(src *os.File, p *datas) error {
 	f.sz = info.Size()
 	i, err := f.src.Read(f.peek[:])
 	if err == nil && i < initialRead {
+		if i == 0 {
+			return ErrEmpty
+		}
 		return io.EOF
 	}
 	return err

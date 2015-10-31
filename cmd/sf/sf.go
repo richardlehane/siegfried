@@ -16,6 +16,7 @@ package main
 
 import (
 	"bufio"
+	"errors"
 	"flag"
 	"fmt"
 	"io"
@@ -56,6 +57,8 @@ var (
 	archive  = flag.Bool("z", false, "scan archive formats (zip, tar, gzip, warc, arc)")
 	hashf    = flag.String("hash", "", "calculate file checksum with hash algorithm; options "+hashChoices)
 )
+
+var errEmpty = errors.New("empty source")
 
 type res struct {
 	path string
@@ -105,7 +108,12 @@ func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 			c, err := s.Identify(f, path, "")
 			if c == nil {
 				f.Close()
-				rchan <- res{"", 0, "", nil, fmt.Errorf("failed to identify %v, got: %v", path, err)}
+				if err == siegreader.ErrEmpty {
+					err = errEmpty
+				} else {
+					err = fmt.Errorf("failed to identify %v, got: %v", path, err)
+				}
+				rchan <- res{"", 0, "", nil, err}
 				return
 			}
 			ids := makeIdSlice(idChan(c))
@@ -152,7 +160,12 @@ func identifyFile(w writer, s *siegfried.Siegfried, path string, sz int64, mod s
 func identifyRdr(w writer, s *siegfried.Siegfried, r io.Reader, sz int64, path, mime, mod string) {
 	c, err := s.Identify(r, path, mime)
 	if c == nil {
-		w.writeFile(path, sz, mod, nil, fmt.Errorf("failed to identify %s, got: %v", path, err), nil)
+		if err == siegreader.ErrEmpty {
+			err = errEmpty
+		} else {
+			err = fmt.Errorf("failed to identify %s, got: %v", path, err)
+		}
+		w.writeFile(path, sz, mod, nil, err, nil)
 		return
 	}
 	var b siegreader.Buffer

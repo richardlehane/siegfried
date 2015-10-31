@@ -47,12 +47,12 @@ func (b *Buffers) Get(src io.Reader) (Buffer, error) {
 		e, ok := src.(source)
 		if !ok {
 			stream := b.spool.get().(*stream)
-			stream.setSource(src)
-			return stream, nil
+			err := stream.setSource(src)
+			return stream, err
 		}
 		ext := b.epool.get().(*external)
-		ext.setSource(e)
-		return ext, nil
+		err := ext.setSource(e)
+		return ext, err
 	}
 	buf := b.fpool.get().(*file)
 	err := buf.setSource(f, b.fdatas)

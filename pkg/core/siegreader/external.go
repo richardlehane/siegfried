@@ -15,11 +15,15 @@ type external struct {
 
 func newExternal() interface{} { return &external{} }
 
-func (e *external) setSource(src source) {
+func (e *external) setSource(src source) error {
 	e.quit = nil
 	e.limited = false
 	e.limit = nil
 	e.source = src
+	if e.Size() == 0 {
+		return ErrEmpty
+	}
+	return nil
 }
 
 func (e *external) SizeNow() int64 { return e.Size() }

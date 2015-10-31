@@ -25,7 +25,7 @@ func newStream() interface{} {
 	return &stream{buf: make([]byte, readSz*2)}
 }
 
-func (s *stream) setSource(src io.Reader) {
+func (s *stream) setSource(src io.Reader) error {
 	s.src = src
 	s.eofc = make(chan struct{})
 	s.quit = nil
@@ -33,6 +33,8 @@ func (s *stream) setSource(src io.Reader) {
 	s.limit = nil
 	s.i = 0
 	s.eof = false
+	_, err := s.fill()
+	return err
 }
 
 func (s *stream) SetQuit(q chan struct{}) {
@@ -117,6 +119,9 @@ func (s *stream) fill() (int, error) {
 		s.eof = true
 		if err == io.EOF {
 			s.i += i
+			if s.i == 0 {
+				err = ErrEmpty
+			}
 		}
 		return s.i, err
 	}

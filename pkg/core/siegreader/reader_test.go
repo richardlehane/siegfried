@@ -105,7 +105,7 @@ func TestReuse(t *testing.T) {
 	nr := strings.NewReader(testString)
 	q := make(chan struct{})
 	b, err = bufs.Get(nr)
-	if err != nil {
+	if err != nil && err != io.EOF {
 		t.Fatal(err)
 	}
 	b.SetQuit(q)
