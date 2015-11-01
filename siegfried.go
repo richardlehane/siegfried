@@ -272,6 +272,11 @@ func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identifi
 		if mime != "" {
 			recs[i].Active(core.MIMEMatcher)
 		}
+		if err == nil {
+			//recs[i].Active(core.ContainerMatcher)
+			//recs[i].Active(core.ByteMatcher)
+			recs[i].Active(core.TextMatcher)
+		}
 	}
 	// Extension Matcher
 	if len(name) > 0 {

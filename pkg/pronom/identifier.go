@@ -160,14 +160,14 @@ func (i *Identifier) Recognise(m core.MatcherType, idx int) (bool, string) {
 		return false, ""
 	case core.TextMatcher:
 		if idx == i.tStart {
-			return true, i.name + ": " + "x-fmt/111"
+			return true, i.name + ": " + config.TextPuid()
 		}
 		return false, ""
 	}
 }
 
 func (i *Identifier) Recorder() core.Recorder {
-	return &Recorder{i, make(pids, 0, 10), 0, false, false, false}
+	return &Recorder{i, make(pids, 0, 10), 0, false, false, false, false}
 }
 
 type Recorder struct {
@@ -177,13 +177,14 @@ type Recorder struct {
 	satisfied  bool
 	extActive  bool
 	mimeActive bool
+	textActive bool
 }
 
 const (
-	extScore  = 1
-	mimeScore = 2
-	textScore = 4
-	incScore  = 8
+	extScore = 1 << iota
+	mimeScore
+	textScore
+	incScore
 )
 
 func (r *Recorder) Active(m core.MatcherType) {
@@ -195,6 +196,10 @@ func (r *Recorder) Active(m core.MatcherType) {
 	case core.MIMEMatcher:
 		if len(r.mPuids) > 0 {
 			r.mimeActive = true
+		}
+	case core.TextMatcher:
+		if r.tStart > 0 {
+			r.textActive = true
 		}
 	}
 }
@@ -346,6 +351,12 @@ func (r *Recorder) Report(res chan core.Identification) {
 			for _, v := range r.ids {
 				if v.confidence != conf {
 					break
+				}
+				// if we have plain text result that is based on ext or mime only,
+				// and not on a text match, and if text matcher is on for this identifier,
+				// then don't report a text match
+				if v.Puid == config.TextPuid() && conf < textScore && r.textActive {
+					continue
 				}
 				if ok := r.hasSig(v.Puid); !ok {
 					if len(nids) > 0 {

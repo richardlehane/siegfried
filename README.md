@@ -76,7 +76,8 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 ## Recent Changes
 ### Version 1.4.1
-- empty file/stream provides extension and/or mime-only matches with error and warning
+- highlight empty file/stream with error and warning
+- negative text match overrides extension-only plain text match
 
 ### Version 1.4.0 (31/10/2015)
 - new MIME matcher; requested by [Dragan Espenschied](https://github.com/richardlehane/siegfried/issues/55)
