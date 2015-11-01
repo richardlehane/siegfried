@@ -13,7 +13,7 @@ Key features are:
 
 ## Version
 
-1.4.0
+1.4.1
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried)
 
@@ -75,6 +75,9 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 	sf -update
 
 ## Recent Changes
+### Version 1.4.1
+- empty file/stream provides extension and/or mime-only matches with error and warning
+
 ### Version 1.4.0 (31/10/2015)
 - new MIME matcher; requested by [Dragan Espenschied](https://github.com/richardlehane/siegfried/issues/55)
 - support warc continuations

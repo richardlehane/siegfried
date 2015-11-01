@@ -41,7 +41,7 @@ var siegfried = struct {
 	slow       bool
 	checkpoint int64
 }{
-	version:         [3]int{1, 4, 0},
+	version:         [3]int{1, 4, 1},
 	signature:       "pronom.sig",
 	magic:           []byte{'s', 'f', 0x00, 0xFF},
 	distance:        8192,

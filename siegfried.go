@@ -256,10 +256,10 @@ func (s *Siegfried) JSON() string {
 // It returns a channel of identifications and an error
 func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identification, error) {
 	buffer, err := s.buffers.Get(r)
-	if err != nil && err != io.EOF {
-		if err == siegreader.ErrEmpty {
-			return nil, err
-		}
+	if err == io.EOF {
+		err = nil
+	}
+	if err != nil && err != siegreader.ErrEmpty {
 		return nil, fmt.Errorf("siegfried: error reading file; got %v", err)
 	}
 	res := make(chan core.Identification)
@@ -310,7 +310,9 @@ func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identifi
 				}
 			}
 		}
-		err = cerr
+		if err == nil {
+			err = cerr
+		}
 	}
 	satisfied := true
 	for _, rec := range recs {
@@ -357,7 +359,7 @@ func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identifi
 		}
 		close(res)
 	}()
-	return res, nil
+	return res, err
 }
 
 // Blame checks with the byte matcher to see what identification results subscribe to a particular result or test
