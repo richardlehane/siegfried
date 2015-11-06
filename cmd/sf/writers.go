@@ -41,6 +41,7 @@ func (ids idChan) next() core.Identification {
 	if !ok {
 		return nil
 	}
+	lg.id(id)
 	return id
 }
 
@@ -362,62 +363,16 @@ func mismatch(warning string) string {
 	return "FALSE"
 }
 
-type knownWriter struct {
-	known bool
-	w     io.Writer
-}
+type logWriter struct{}
 
-func (k *knownWriter) writeHead(s *siegfried.Siegfried) {}
-
-func (k *knownWriter) writeTail() {}
-
-func (k *knownWriter) writeFile(p string, sz int64, mod string, checksum []byte, err error, ids iterableID) config.Archive {
-	var isKnown bool
+func (l logWriter) writeHead(s *siegfried.Siegfried) {}
+func (l logWriter) writeFile(name string, sz int64, mod string, cs []byte, err error, ids iterableID) config.Archive {
 	var arc config.Archive
 	for id := ids.next(); id != nil; id = ids.next() {
-		if !id.Known() {
-			continue
-		}
-		isKnown = true
 		if id.Archive() > 0 {
 			arc = id.Archive()
 		}
 	}
-	if isKnown == k.known {
-		io.WriteString(k.w, p+"\n")
-	}
 	return arc
 }
-
-type slowWriter struct {
-	io.Writer
-}
-
-func (sw *slowWriter) writeHead(s *siegfried.Siegfried) {}
-
-func (sw *slowWriter) writeTail() {}
-
-func (sw *slowWriter) writeFile(p string, sz int64, mod string, checksum []byte, err error, ids iterableID) config.Archive {
-	var arc config.Archive
-	io.WriteString(sw, "matched: ")
-	var i int
-	for id := ids.next(); id != nil; id = ids.next() {
-		if id.Archive() > 0 {
-			arc = id.Archive()
-		}
-		if i > 0 {
-			io.WriteString(sw, ", ")
-		}
-		io.WriteString(sw, id.String())
-	}
-	io.WriteString(sw, " ("+p+")\n")
-	return arc
-}
-
-type debugWriter struct{}
-
-func (d debugWriter) writeHead(s *siegfried.Siegfried) {}
-func (d debugWriter) writeFile(name string, sz int64, mod string, cs []byte, err error, ids iterableID) config.Archive {
-	return 0
-}
-func (d debugWriter) writeTail() {}
+func (l logWriter) writeTail() {}

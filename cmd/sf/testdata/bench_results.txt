@@ -1,3 +1,28 @@
+1 November 2015 (go1.4, sf 1.4.0)
+
+PASS
+BenchmarkACCDB	     200	  10561760 ns/op
+BenchmarkBMP	   20000	    114537 ns/op
+BenchmarkDOCX	   10000	    170241 ns/op
+BenchmarkGIF	    3000	    492334 ns/op
+BenchmarkJPG	    2000	    616837 ns/op
+BenchmarkMSG	   20000	     90058 ns/op
+BenchmarkODT	     300	   5248290 ns/op
+BenchmarkPDF	     300	   4620011 ns/op
+BenchmarkPNG	    1000	   1352780 ns/op
+BenchmarkPPTX	   10000	    235942 ns/op
+BenchmarkRTF	     100	  20189582 ns/op
+BenchmarkTIF	     300	   4242513 ns/op
+BenchmarkXLSX	   10000	    177178 ns/op
+BenchmarkXML	   10000	    140440 ns/op
+BenchmarkMulti	      30	  49685984 ns/op
+ok  	github.com/richardlehane/siegfried/cmd/sf	36.064s
+
+iPres showcase:
+real	0m30.328s
+user	0m18.851s
+sys	0m0.598s
+
 8 September 2015
 
 BenchmarkACCDB	     100	  11902365 ns/op

@@ -38,13 +38,18 @@ func reply(s string) []byte {
 }
 
 func fpridentify(s *siegfried.Siegfried, path string) []byte {
+	lg.set(path)
 	fi, err := os.Open(path)
 	defer fi.Close()
 	if err != nil {
+		lg.err(err)
+		lg.reset()
 		return reply("error: failed to open " + path + "; got " + err.Error())
 	}
 	c, err := s.Identify(fi, path, "")
-	if err != nil {
+	lg.err(err)
+	if c == nil {
+		lg.reset()
 		return reply("error: failed to scan " + path + "; got " + err.Error())
 	}
 	var ids []string
@@ -54,7 +59,9 @@ func fpridentify(s *siegfried.Siegfried, path string) []byte {
 		if !i.Known() {
 			warn = i.(*pronom.Identification).Warning
 		}
+		lg.id(i)
 	}
+	lg.reset()
 	switch len(ids) {
 	case 0:
 		return reply("error: scanning " + path + ": no puids returned")
@@ -90,8 +97,9 @@ func serveFpr(addr string, s *siegfried.Siegfried) {
 		l, err := conn.Read(buf)
 		if err != nil {
 			conn.Write([]byte("error reading from connection: " + err.Error()))
+		} else {
+			conn.Write(fpridentify(s, string(buf[:l])))
 		}
-		conn.Write(fpridentify(s, string(buf[:l])))
 		conn.Close()
 	}
 }

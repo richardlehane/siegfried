@@ -74,6 +74,7 @@ type Recorder interface {
 type Identification interface {
 	String() string          // short text that is displayed to indicate the format match
 	Known() bool             // does this identifier produce a match
+	Warn() string            // identification warning message
 	YAML() string            // long text that should be displayed to indicate the format match
 	JSON() string            // JSON match response
 	CSV() []string           // CSV match response

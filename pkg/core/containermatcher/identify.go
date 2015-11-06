@@ -80,7 +80,7 @@ func (c *ContainerMatcher) identify(n string, rdr Reader, res chan core.Result) 
 			continue
 		}
 		if config.Debug() {
-			fmt.Printf("{Name match - %s (container %d))}\n", rdr.Name(), c.conType)
+			fmt.Fprintf(config.Out(), "{Name match - %s (container %d))}\n", rdr.Name(), c.conType)
 		}
 		// name has matched, let's test the CTests
 		// ct.identify will generate a slice of hits which pass to

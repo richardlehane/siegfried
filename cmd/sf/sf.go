@@ -16,7 +16,6 @@ package main
 
 import (
 	"bufio"
-	"errors"
 	"flag"
 	"fmt"
 	"io"
@@ -40,25 +39,20 @@ const PROCS = -1
 
 // flags
 var (
-	update   = flag.Bool("update", false, "update or install the default signature file")
-	version  = flag.Bool("version", false, "display version information")
-	debug    = flag.Bool("debug", false, "scan in debug mode")
-	slow     = flag.Bool("slow", false, "scan and report slow signatures")
-	nr       = flag.Bool("nr", false, "prevent automatic directory recursion")
-	csvo     = flag.Bool("csv", false, "CSV output format")
-	jsono    = flag.Bool("json", false, "JSON output format")
-	droido   = flag.Bool("droid", false, "DROID CSV output format")
-	knowno   = flag.Bool("known", false, "Output list of known files")
-	unknowno = flag.Bool("unknown", false, "Output list of unknown files")
-	sig      = flag.String("sig", config.SignatureBase(), "set the signature file")
-	home     = flag.String("home", config.Home(), "override the default home directory")
-	serve    = flag.String("serve", "", "start siegfried server e.g. -serve localhost:5138")
-	multi    = flag.Int("multi", 1, "set number of file ID processes")
-	archive  = flag.Bool("z", false, "scan archive formats (zip, tar, gzip, warc, arc)")
-	hashf    = flag.String("hash", "", "calculate file checksum with hash algorithm; options "+hashChoices)
+	update  = flag.Bool("update", false, "update or install the default signature file")
+	version = flag.Bool("version", false, "display version information")
+	logf    = flag.String("log", "", "log errors, warnings, debug or slow output, knowns or unknowns to stderr or stdout e.g. -log error,warn,unknown,stdout")
+	nr      = flag.Bool("nr", false, "prevent automatic directory recursion")
+	csvo    = flag.Bool("csv", false, "CSV output format")
+	jsono   = flag.Bool("json", false, "JSON output format")
+	droido  = flag.Bool("droid", false, "DROID CSV output format")
+	sig     = flag.String("sig", config.SignatureBase(), "set the signature file")
+	home    = flag.String("home", config.Home(), "override the default home directory")
+	serve   = flag.String("serve", "", "start siegfried server e.g. -serve localhost:5138")
+	multi   = flag.Int("multi", 1, "set number of file ID processes")
+	archive = flag.Bool("z", false, "scan archive formats (zip, tar, gzip, warc, arc)")
+	hashf   = flag.String("hash", "", "calculate file checksum with hash algorithm; options "+hashChoices)
 )
-
-var errEmpty = errors.New("empty source")
 
 type res struct {
 	path string
@@ -102,25 +96,17 @@ func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 		go func() {
 			f, err := os.Open(path)
 			if err != nil {
-				rchan <- res{"", 0, "", nil, fmt.Errorf("failed to open %v, got: %v", path, err)}
+				rchan <- res{path, 0, "", nil, err}
 				return
 			}
 			c, err := s.Identify(f, path, "")
 			if c == nil {
 				f.Close()
-				if err == siegreader.ErrEmpty {
-					err = errEmpty
-				} else {
-					err = fmt.Errorf("failed to identify %v, got: %v", path, err)
-				}
-				rchan <- res{"", 0, "", nil, err}
+				rchan <- res{path, 0, "", nil, err}
 				return
 			}
 			ids := makeIdSlice(idChan(c))
-			cerr := f.Close()
-			if err == nil {
-				err = cerr
-			}
+			f.Close()
 			rchan <- res{path, info.Size(), info.ModTime().Format(time.RFC3339), ids, err}
 		}()
 		return nil
@@ -150,7 +136,11 @@ func multiIdentifyS(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 func identifyFile(w writer, s *siegfried.Siegfried, path string, sz int64, mod string) {
 	f, err := os.Open(path)
 	if err != nil {
-		w.writeFile(path, sz, mod, nil, fmt.Errorf("failed to open %s, got: %v", path, err), nil)
+		w.writeFile(path, sz, mod, nil, err, nil)
+		// log the error too
+		lg.set(path)
+		lg.err(err)
+		lg.reset()
 		return
 	}
 	identifyRdr(w, s, f, sz, path, "", mod)
@@ -158,14 +148,12 @@ func identifyFile(w writer, s *siegfried.Siegfried, path string, sz int64, mod s
 }
 
 func identifyRdr(w writer, s *siegfried.Siegfried, r io.Reader, sz int64, path, mime, mod string) {
+	lg.set(path)
 	c, err := s.Identify(r, path, mime)
+	lg.err(err)
 	if c == nil {
-		if err == siegreader.ErrEmpty {
-			err = errEmpty
-		} else {
-			err = fmt.Errorf("failed to identify %s, got: %v", path, err)
-		}
 		w.writeFile(path, sz, mod, nil, err, nil)
+		lg.reset()
 		return
 	}
 	var b siegreader.Buffer
@@ -177,6 +165,7 @@ func identifyRdr(w writer, s *siegfried.Siegfried, r io.Reader, sz int64, path, 
 		checksum.Reset()
 	}
 	a := w.writeFile(path, sz, mod, cs, err, idChan(c))
+	lg.reset()
 	if !*archive || a == config.None {
 		return
 	}
@@ -197,7 +186,12 @@ func identifyRdr(w writer, s *siegfried.Siegfried, r io.Reader, sz int64, path, 
 		d, err = newWARC(siegreader.ReaderFrom(b), path)
 	}
 	if err != nil {
-		w.writeFile(path, sz, mod, nil, fmt.Errorf("failed to decompress %s, got: %v", path, err), nil)
+		err = fmt.Errorf("failed to decompress %s, got: %v", path, err)
+		w.writeFile(path, sz, mod, nil, err, nil)
+		// log the error
+		lg.set(path)
+		lg.err(err)
+		lg.reset()
 		return
 	}
 	for err = d.next(); err == nil; err = d.next() {
@@ -258,6 +252,15 @@ func main() {
 		}
 	}
 
+	if *logf != "" {
+		if *multi > 1 {
+			log.Fatalln("Error: cannot log when running in parallel mode")
+		}
+		if err := newLogger(*logf); err != nil {
+			log.Fatalln(err)
+		}
+	}
+
 	if err := setHash(); err != nil {
 		log.Fatal(err)
 	}
@@ -288,24 +291,18 @@ func main() {
 
 	var w writer
 	switch {
-	case *debug:
-		config.SetDebug()
-		w = debugWriter{}
-	case *slow:
-		config.SetSlow()
-		w = &slowWriter{os.Stdout}
 	case *csvo:
 		w = newCSV(os.Stdout)
 	case *jsono:
 		w = newJSON(os.Stdout)
 	case *droido:
 		w = newDroid(os.Stdout)
-	case *knowno:
-		w = &knownWriter{true, os.Stdout}
-	case *unknowno:
-		w = &knownWriter{false, os.Stdout}
 	default:
 		w = newYAML(os.Stdout)
+	}
+
+	if lg != nil && lg.w == os.Stdout {
+		w = logWriter{}
 	}
 
 	// support reading list files from stdin
@@ -315,7 +312,12 @@ func main() {
 		for scanner.Scan() {
 			info, err := os.Stat(scanner.Text())
 			if err != nil || info.IsDir() {
-				w.writeFile(scanner.Text(), 0, "", nil, fmt.Errorf("failed to identify %s (in scanning mode, inputs must all be files and not directories), got: %v", scanner.Text(), err), nil)
+				err = fmt.Errorf("failed to identify %s (in scanning mode, inputs must all be files and not directories), got: %v", scanner.Text(), err)
+				w.writeFile(scanner.Text(), 0, "", nil, err, nil)
+				// log the error
+				lg.set(scanner.Text())
+				lg.err(err)
+				lg.reset()
 			} else {
 				identifyFile(w, s, scanner.Text(), info.Size(), info.ModTime().Format(time.RFC3339))
 			}
@@ -330,9 +332,6 @@ func main() {
 	}
 
 	if info.IsDir() {
-		if config.Debug() {
-			log.Fatalln("Error: when scanning in debug mode, give a file rather than a directory argument")
-		}
 		w.writeHead(s)
 		if *multi > 16 {
 			*multi = 16
