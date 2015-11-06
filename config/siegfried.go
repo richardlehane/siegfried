@@ -16,6 +16,7 @@
 package config
 
 import (
+	"io"
 	"net/http"
 	"path/filepath"
 	"time"
@@ -39,6 +40,7 @@ var siegfried = struct {
 	// DEBUG and SLOW modes
 	debug      bool
 	slow       bool
+	out        io.Writer
 	checkpoint int64
 }{
 	version:         [3]int{1, 4, 1},
@@ -107,6 +109,10 @@ func Slow() bool {
 	return siegfried.slow
 }
 
+func Out() io.Writer {
+	return siegfried.out
+}
+
 func Checkpoint(i int64) bool {
 	return i == siegfried.checkpoint
 }
@@ -148,4 +154,8 @@ func SetDebug() {
 
 func SetSlow() {
 	siegfried.slow = true
+}
+
+func SetOut(o io.Writer) {
+	siegfried.out = o
 }

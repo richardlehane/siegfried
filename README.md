@@ -29,18 +29,20 @@ Key features are:
     sf -csv file.ext | DIR                     // Output CSV rather than YAML
     sf -json file.ext | DIR                    // Output JSON rather than YAML
     sf -droid file.ext | DIR                   // Output DROID CSV rather than YAML
-    sf -known file.ext | DIR                   // Output list of recognised files
-    sf -unknown file.ext | DIR                 // Output list of unrecognised files
     sf -                                       // Read list of files piped to stdin
     sf -nr DIR                                 // Don't scan subdirectories
     sf -z file.zip | DIR                       // Decompress and scan zip, tar, gzip, warc, arc
     sf -hash md5 file.ext | DIR                // Calculate md5, sha1, sha256, sha512, or crc hash
     sf -sig custom.sig file.ext                // Use a custom signature file
     sf -home c:\junk -sig custom.sig file.ext  // Use a custom home directory
-    sf -debug file.ext                         // Scan in debug mode
     sf -slow file.ext | DIR                    // Report slow signatures
     sf -version                                // Display version information
     sf -serve hostname:port                    // Server mode
+    sf -log [comma-sep opts] file.ext | DIR    // Log errors etc. to stderr (default) or stdout
+    sf -log e,w file.ext | DIR                 // Log errors and warnings to stderr
+    sf -log u,o file.ext | DIR                 // Log unknowns to stdout
+    sf -log d,s file.ext | DIR                 // Log debugging and slow messages to stderr
+    sf -log p DIR > results.yaml               // Log progress while redirecting results
 
 
 ![Usage](usage.gif)
@@ -76,6 +78,7 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 ## Recent Changes
 ### Version 1.4.1
+- **-log replaces -debug, -slow, -unknown and -known flags** (see usage above)
 - highlight empty file/stream with error and warning
 - negative text match overrides extension-only plain text match
 

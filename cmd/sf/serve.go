@@ -98,22 +98,32 @@ func identify(s *siegfried.Siegfried) func(w http.ResponseWriter, r *http.Reques
 			w.Header().Set("Content-Type", mime)
 			wr.writeHead(s)
 			c, err := s.Identify(f, h.Filename, "")
+			lg.set(h.Filename)
+			lg.err(err)
 			if c == nil {
-				wr.writeFile(h.Filename, sz, mod, nil, fmt.Errorf("failed to identify %s, got: %v", h.Filename, err), nil)
+				wr.writeFile(h.Filename, sz, mod, nil, err, nil)
+				lg.reset()
 				return
 			}
 			wr.writeFile(h.Filename, sz, mod, nil, err, idChan(c))
 			wr.writeTail()
+			lg.reset()
 			return
 		} else {
 			path, err := decodePath(r.URL.Path)
 			if err != nil {
 				handleErr(w, http.StatusNotFound, err)
+				lg.set(path)
+				lg.err(err)
+				lg.reset()
 				return
 			}
 			info, err := os.Stat(path)
 			if err != nil {
 				handleErr(w, http.StatusNotFound, err)
+				lg.set(path)
+				lg.err(err)
+				lg.reset()
 				return
 			}
 			w.Header().Set("Content-Type", mime)

@@ -217,7 +217,7 @@ func (b *Matcher) scorer(buf siegreader.Buffer, q chan struct{}, r chan<- core.R
 							return true
 						}
 						keepScanning = true
-						fmt.Printf("waiting on: %d, potentially excludable: %t\n", v, excludable)
+						fmt.Fprintf(config.Out(), "waiting on: %d, potentially excludable: %t\n", v, excludable)
 					}
 					continue
 				}

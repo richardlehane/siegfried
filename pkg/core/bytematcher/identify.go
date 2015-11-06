@@ -57,7 +57,7 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 	bfchan := b.bofFrames.index(buf, false, quit)
 	for bf := range bfchan {
 		if config.Debug() {
-			fmt.Println(strike{b.bofFrames.testTreeIndex[bf.idx], 0, bf.off, bf.length, false, true})
+			fmt.Fprintln(config.Out(), strike{b.bofFrames.testTreeIndex[bf.idx], 0, bf.off, bf.length, false, true})
 		}
 		incoming <- strike{b.bofFrames.testTreeIndex[bf.idx], 0, bf.off, bf.length, false, true}
 	}
@@ -82,7 +82,7 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 			}
 		} else {
 			if config.Debug() {
-				fmt.Println(strike{b.bofSeq.testTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false})
+				fmt.Fprintln(config.Out(), strike{b.bofSeq.testTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false})
 			}
 			incoming <- strike{b.bofSeq.testTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false}
 		}
@@ -106,7 +106,7 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 	if b.maxEOF >= 0 {
 		for ef := range efchan {
 			if config.Debug() {
-				fmt.Println(strike{b.eofFrames.testTreeIndex[ef.idx], 0, ef.off, ef.length, true, true})
+				fmt.Fprintln(config.Out(), strike{b.eofFrames.testTreeIndex[ef.idx], 0, ef.off, ef.length, true, true})
 			}
 			incoming <- strike{b.eofFrames.testTreeIndex[ef.idx], 0, ef.off, ef.length, true, true}
 		}
@@ -116,7 +116,7 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 				incoming <- progressStrike(er.Offset, true)
 			} else {
 				if config.Debug() {
-					fmt.Println(strike{b.eofSeq.testTreeIndex[er.Index[0]], er.Index[1], er.Offset, er.Length, true, false})
+					fmt.Fprintln(config.Out(), strike{b.eofSeq.testTreeIndex[er.Index[0]], er.Index[1], er.Offset, er.Length, true, false})
 				}
 				incoming <- strike{b.eofSeq.testTreeIndex[er.Index[0]], er.Index[1], er.Offset, er.Length, true, false}
 			}
@@ -129,7 +129,7 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 				incoming <- progressStrike(br.Offset, false)
 			} else {
 				if config.Debug() {
-					fmt.Println(strike{b.bofSeq.testTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false})
+					fmt.Fprintln(config.Out(), strike{b.bofSeq.testTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false})
 				}
 				incoming <- strike{b.bofSeq.testTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false}
 			}
@@ -148,7 +148,7 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 					incoming <- progressStrike(br.Offset, false)
 				} else {
 					if config.Debug() {
-						fmt.Println(strike{b.bofSeq.testTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false})
+						fmt.Fprintln(config.Out(), strike{b.bofSeq.testTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false})
 					}
 					incoming <- strike{b.bofSeq.testTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false}
 				}
@@ -158,7 +158,7 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 				efchan = nil
 			} else {
 				if config.Debug() {
-					fmt.Println(strike{b.eofFrames.testTreeIndex[ef.idx], 0, ef.off, ef.length, true, true})
+					fmt.Fprintln(config.Out(), strike{b.eofFrames.testTreeIndex[ef.idx], 0, ef.off, ef.length, true, true})
 				}
 				incoming <- strike{b.eofFrames.testTreeIndex[ef.idx], 0, ef.off, ef.length, true, true}
 			}
@@ -170,7 +170,7 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 					incoming <- progressStrike(er.Offset, true)
 				} else {
 					if config.Debug() {
-						fmt.Println(strike{b.eofSeq.testTreeIndex[er.Index[0]], er.Index[1], er.Offset, er.Length, true, false})
+						fmt.Fprintln(config.Out(), strike{b.eofSeq.testTreeIndex[er.Index[0]], er.Index[1], er.Offset, er.Length, true, false})
 					}
 					incoming <- strike{b.eofSeq.testTreeIndex[er.Index[0]], er.Index[1], er.Offset, er.Length, true, false}
 				}

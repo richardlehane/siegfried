@@ -457,6 +457,10 @@ func (id Identification) Known() bool {
 	return id.Puid != "UNKNOWN"
 }
 
+func (id Identification) Warn() string {
+	return id.Warning
+}
+
 func quoteText(s string) string {
 	if len(s) == 0 {
 		return s

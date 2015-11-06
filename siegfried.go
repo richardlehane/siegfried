@@ -305,7 +305,7 @@ func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identifi
 	// Container Matcher
 	if s.cm != nil {
 		if config.Debug() {
-			fmt.Println(">>START CONTAINER MATCHER")
+			fmt.Fprintln(config.Out(), ">>START CONTAINER MATCHER")
 		}
 		cms, cerr := s.cm.Identify(name, buffer)
 		for v := range cms {
@@ -328,7 +328,7 @@ func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identifi
 	// Byte Matcher
 	if !satisfied {
 		if config.Debug() {
-			fmt.Println(">>START BYTE MATCHER")
+			fmt.Fprintln(config.Out(), ">>START BYTE MATCHER")
 		}
 		ids, _ := s.bm.Identify("", buffer) // we don't care about an error here
 		for v := range ids {
