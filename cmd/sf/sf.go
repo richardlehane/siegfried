@@ -160,7 +160,14 @@ func identifyRdr(w writer, s *siegfried.Siegfried, r io.Reader, sz int64, path, 
 	var cs []byte
 	if checksum != nil {
 		b = s.Buffer()
-		checksum.Write(siegreader.Bytes(b)) // ignore error returned here
+		var i int64
+		for ; ; i += 4096 {
+			buf, _ := b.Slice(i, 4096)
+			if buf == nil {
+				break
+			}
+			checksum.Write(buf)
+		}
 		cs = checksum.Sum(nil)
 		checksum.Reset()
 	}
