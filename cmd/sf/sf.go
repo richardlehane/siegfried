@@ -161,8 +161,9 @@ func identifyRdr(w writer, s *siegfried.Siegfried, r io.Reader, sz int64, path, 
 	if checksum != nil {
 		b = s.Buffer()
 		var i int64
-		for ; ; i += 4096 {
-			buf, _ := b.Slice(i, 4096)
+		l := checksum.BlockSize()
+		for ; ; i += int64(l) {
+			buf, _ := b.Slice(i, l)
 			if buf == nil {
 				break
 			}
