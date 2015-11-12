@@ -1,5 +1,8 @@
 {
   "slow": [
-    "@svg (fmt/91, fmt/92 and fmt/413 have *<svg which slows down xml identification)"
+    "@svg (fmt/91, fmt/92 and fmt/413 have *<svg which slows down xml identification)",
+    "@pdfextra",
+    "fmt/12 (PNG 1.1 - versions 1.1 and 1.2 slow down PNG identification)",
+    "fmt/13 (PNG 1.2 - ... these aren't really format versions anway, just later versions of spec with added features)"
   ]
 }
