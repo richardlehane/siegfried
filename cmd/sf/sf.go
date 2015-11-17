@@ -23,7 +23,6 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
-	"strings"
 	"sync"
 	"time"
 
@@ -63,22 +62,6 @@ func writeError(w writer, path string, sz int64, mod string, err error) {
 	lg.reset()
 }
 
-// longpath code from https://github.com/docker/docker/tree/master/pkg/longpath
-// Prefix is the longpath prefix for Windows file paths.
-const prefix = `\\?\`
-
-func longpath(path string) string {
-	if !strings.HasPrefix(path, prefix) {
-		if strings.HasPrefix(path, `\\`) {
-			// This is a UNC path, so we need to add 'UNC' to the path as well.
-			path = prefix + `UNC` + path[1:]
-		} else {
-			path = prefix + path
-		}
-	}
-	return path
-}
-
 type res struct {
 	path string
 	sz   int64
@@ -102,10 +85,8 @@ func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 	go printer(w, resc, wg)
 	wf := func(path string, info os.FileInfo, err error) error {
 		if err != nil {
-			// may be a long path error on win
-			var lerr error
-			info, lerr = os.Stat(longpath(path))
-			if lerr != nil {
+			info, err = retryStat(path, err)
+			if err != nil {
 				wg.Add(1)
 				rchan := make(chan res, 1)
 				resc <- rchan
@@ -135,9 +116,8 @@ func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 		go func() {
 			f, err := os.Open(path)
 			if err != nil {
-				var lerr error
-				f, lerr = os.Open(longpath(path))
-				if lerr != nil {
+				f, err = retryOpen(path, err)
+				if err != nil {
 					rchan <- res{path, 0, "", nil, err}
 					return
 				}
@@ -162,10 +142,8 @@ func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 func multiIdentifyS(w writer, s *siegfried.Siegfried, r string, norecurse bool) error {
 	wf := func(path string, info os.FileInfo, err error) error {
 		if err != nil {
-			// may be a long path error on win
-			var lerr error
-			info, lerr = os.Stat(longpath(path))
-			if lerr != nil {
+			info, err = retryStat(path, err)
+			if err != nil {
 				writeError(w, path, 0, "", err)
 				return nil
 			}
@@ -188,10 +166,8 @@ func multiIdentifyS(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 func identifyFile(w writer, s *siegfried.Siegfried, path string, sz int64, mod string) {
 	f, err := os.Open(path)
 	if err != nil {
-		// may be a long path error on win
-		var lerr error
-		f, lerr = os.Open(longpath(path))
-		if lerr != nil {
+		f, err = retryOpen(path, err)
+		if err != nil {
 			writeError(w, path, sz, mod, err)
 			return
 		}
@@ -368,7 +344,7 @@ func main() {
 		for scanner.Scan() {
 			info, err := os.Stat(scanner.Text())
 			if err != nil {
-				info, err = os.Stat(longpath(scanner.Text()))
+				info, err = retryStat(scanner.Text(), err)
 			}
 			if err != nil || info.IsDir() {
 				writeError(w, scanner.Text(), 0, "", fmt.Errorf("failed to identify %s (in scanning mode, inputs must all be files and not directories), got: %v", scanner.Text(), err))
@@ -382,9 +358,8 @@ func main() {
 
 	info, err := os.Stat(flag.Arg(0))
 	if err != nil {
-		var lerr error
-		info, lerr = os.Stat(longpath(flag.Arg(0)))
-		if lerr != nil {
+		info, err = retryStat(flag.Arg(0), err)
+		if err != nil {
 			log.Fatalf("Error: error getting info for %v, got: %v", flag.Arg(0), err)
 		}
 	}
