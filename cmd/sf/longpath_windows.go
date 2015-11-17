@@ -16,11 +16,12 @@ package main
 
 import (
 	"os"
+	"path/filepath"
 	"strings"
 )
 
-// longpath code from https://github.com/docker/docker/tree/master/pkg/longpath
-// Prefix is the longpath prefix for Windows file paths.
+// longpath code derived from https://github.com/docker/docker/tree/master/pkg/longpath
+// prefix is the longpath prefix for Windows file paths.
 const prefix = `\\?\`
 
 func longpath(path string) string {
@@ -29,7 +30,11 @@ func longpath(path string) string {
 			// This is a UNC path, so we need to add 'UNC' to the path as well.
 			path = prefix + `UNC` + path[1:]
 		} else {
-			path = prefix + path
+			abs, err := filepath.Abs(path)
+			if err != nil {
+				return path
+			}
+			path = prefix + abs
 		}
 	}
 	return path
