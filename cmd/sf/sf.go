@@ -23,6 +23,7 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"strings"
 	"sync"
 	"time"
 
@@ -54,6 +55,30 @@ var (
 	hashf   = flag.String("hash", "", "calculate file checksum with hash algorithm; options "+hashChoices)
 )
 
+func writeError(w writer, path string, sz int64, mod string, err error) {
+	w.writeFile(path, sz, mod, nil, err, nil)
+	// log the error too
+	lg.set(path)
+	lg.err(err)
+	lg.reset()
+}
+
+// longpath code from https://github.com/docker/docker/tree/master/pkg/longpath
+// Prefix is the longpath prefix for Windows file paths.
+const prefix = `\\?\`
+
+func longpath(path string) string {
+	if !strings.HasPrefix(path, prefix) {
+		if strings.HasPrefix(path, `\\`) {
+			// This is a UNC path, so we need to add 'UNC' to the path as well.
+			path = prefix + `UNC` + path[1:]
+		} else {
+			path = prefix + path
+		}
+	}
+	return path
+}
+
 type res struct {
 	path string
 	sz   int64
@@ -76,6 +101,20 @@ func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 	resc := make(chan chan res, *multi)
 	go printer(w, resc, wg)
 	wf := func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			// may be a long path error on win
+			var lerr error
+			info, lerr = os.Stat(longpath(path))
+			if lerr != nil {
+				wg.Add(1)
+				rchan := make(chan res, 1)
+				resc <- rchan
+				go func() {
+					rchan <- res{path, 0, "", nil, err}
+				}()
+				return nil
+			}
+		}
 		if info.IsDir() {
 			if norecurse && path != r {
 				return filepath.SkipDir
@@ -96,8 +135,12 @@ func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 		go func() {
 			f, err := os.Open(path)
 			if err != nil {
-				rchan <- res{path, 0, "", nil, err}
-				return
+				var lerr error
+				f, lerr = os.Open(longpath(path))
+				if lerr != nil {
+					rchan <- res{path, 0, "", nil, err}
+					return
+				}
 			}
 			c, err := s.Identify(f, path, "")
 			if c == nil {
@@ -118,6 +161,15 @@ func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 
 func multiIdentifyS(w writer, s *siegfried.Siegfried, r string, norecurse bool) error {
 	wf := func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			// may be a long path error on win
+			var lerr error
+			info, lerr = os.Stat(longpath(path))
+			if lerr != nil {
+				writeError(w, path, 0, "", err)
+				return nil
+			}
+		}
 		if info.IsDir() {
 			if norecurse && path != r {
 				return filepath.SkipDir
@@ -136,12 +188,13 @@ func multiIdentifyS(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 func identifyFile(w writer, s *siegfried.Siegfried, path string, sz int64, mod string) {
 	f, err := os.Open(path)
 	if err != nil {
-		w.writeFile(path, sz, mod, nil, err, nil)
-		// log the error too
-		lg.set(path)
-		lg.err(err)
-		lg.reset()
-		return
+		// may be a long path error on win
+		var lerr error
+		f, lerr = os.Open(longpath(path))
+		if lerr != nil {
+			writeError(w, path, sz, mod, err)
+			return
+		}
 	}
 	identifyRdr(w, s, f, sz, path, "", mod)
 	f.Close()
@@ -194,12 +247,7 @@ func identifyRdr(w writer, s *siegfried.Siegfried, r io.Reader, sz int64, path, 
 		d, err = newWARC(siegreader.ReaderFrom(b), path)
 	}
 	if err != nil {
-		err = fmt.Errorf("failed to decompress %s, got: %v", path, err)
-		w.writeFile(path, sz, mod, nil, err, nil)
-		// log the error
-		lg.set(path)
-		lg.err(err)
-		lg.reset()
+		writeError(w, path, sz, mod, fmt.Errorf("failed to decompress %s, got: %v", path, err))
 		return
 	}
 	for err = d.next(); err == nil; err = d.next() {
@@ -319,13 +367,11 @@ func main() {
 		scanner := bufio.NewScanner(os.Stdin)
 		for scanner.Scan() {
 			info, err := os.Stat(scanner.Text())
+			if err != nil {
+				info, err = os.Stat(longpath(scanner.Text()))
+			}
 			if err != nil || info.IsDir() {
-				err = fmt.Errorf("failed to identify %s (in scanning mode, inputs must all be files and not directories), got: %v", scanner.Text(), err)
-				w.writeFile(scanner.Text(), 0, "", nil, err, nil)
-				// log the error
-				lg.set(scanner.Text())
-				lg.err(err)
-				lg.reset()
+				writeError(w, scanner.Text(), 0, "", fmt.Errorf("failed to identify %s (in scanning mode, inputs must all be files and not directories), got: %v", scanner.Text(), err))
 			} else {
 				identifyFile(w, s, scanner.Text(), info.Size(), info.ModTime().Format(time.RFC3339))
 			}
@@ -336,7 +382,11 @@ func main() {
 
 	info, err := os.Stat(flag.Arg(0))
 	if err != nil {
-		log.Fatalf("Error: error getting info for %v, got: %v", flag.Arg(0), err)
+		var lerr error
+		info, lerr = os.Stat(longpath(flag.Arg(0)))
+		if lerr != nil {
+			log.Fatalf("Error: error getting info for %v, got: %v", flag.Arg(0), err)
+		}
 	}
 
 	if info.IsDir() {
