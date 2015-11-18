@@ -105,7 +105,7 @@ func (c *csvWriter) writeFile(name string, sz int64, mod string, checksum []byte
 	}
 	if ids == nil {
 		empty := make([]string, 7)
-		c.rec[0], c.rec[1], c.rec[2], c.rec[3] = name, strconv.Itoa(int(sz)), mod, errStr
+		c.rec[0], c.rec[1], c.rec[2], c.rec[3] = name, strconv.FormatInt(sz, 10), mod, errStr
 		if checksum != nil {
 			c.rec[4] = ""
 		}
@@ -118,7 +118,7 @@ func (c *csvWriter) writeFile(name string, sz int64, mod string, checksum []byte
 		if id.Archive() > arc {
 			arc = id.Archive()
 		}
-		c.rec[0], c.rec[1], c.rec[2], c.rec[3] = name, strconv.Itoa(int(sz)), mod, errStr
+		c.rec[0], c.rec[1], c.rec[2], c.rec[3] = name, strconv.FormatInt(sz, 10), mod, errStr
 		if checksum != nil {
 			c.rec[4] = hex.EncodeToString(checksum)
 		}
@@ -273,7 +273,7 @@ func (d *droidWriter) writeFile(p string, sz int64, mod string, checksum []byte,
 		return 0
 	}
 	// size
-	d.rec[7] = strconv.Itoa(int(sz))
+	d.rec[7] = strconv.FormatInt(sz, 10)
 	if checksum == nil {
 		d.rec[12] = ""
 	} else {
