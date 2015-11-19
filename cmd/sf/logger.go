@@ -18,6 +18,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/richardlehane/siegfried/config"
@@ -92,7 +93,10 @@ func (l *logger) set(path string) {
 	if l == nil {
 		return
 	}
-	l.path = path
+	l.path, _ = filepath.Abs(path)
+	if l.path == "" {
+		l.path = path
+	}
 	if l.progress {
 		l.printFile()
 	}
