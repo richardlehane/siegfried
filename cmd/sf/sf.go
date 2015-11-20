@@ -41,7 +41,7 @@ const PROCS = -1
 var (
 	update  = flag.Bool("update", false, "update or install the default signature file")
 	version = flag.Bool("version", false, "display version information")
-	logf    = flag.String("log", "", "log errors, warnings, debug or slow output, knowns or unknowns to stderr or stdout e.g. -log error,warn,unknown,stdout")
+	logf    = flag.String("log", "error", "log errors, warnings, debug or slow output, knowns or unknowns to stderr or stdout e.g. -log error,warn,unknown,stdout")
 	nr      = flag.Bool("nr", false, "prevent automatic directory recursion")
 	csvo    = flag.Bool("csv", false, "CSV output format")
 	jsono   = flag.Bool("json", false, "JSON output format")

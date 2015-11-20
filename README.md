@@ -76,6 +76,11 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 	sf -update
 
 ## Recent Changes
+### Version 1.4.2 (forthcoming)
+- mscfb update: [lazy reading](https://github.com/richardlehane/mscfb/commit/f909cfa596c7880c650ed5440df90e5474f08b29) 
+- -log error is now default
+- 
+
 ### Version 1.4.1 (6/11/2015)
 - **-log replaces -debug, -slow, -unknown and -known flags** (see usage above)
 - highlight empty file/stream with error and warning
