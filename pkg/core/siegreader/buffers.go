@@ -45,7 +45,7 @@ func (b *Buffers) Get(src io.Reader) (Buffer, error) {
 	f, ok := src.(*os.File)
 	if !ok {
 		e, ok := src.(source)
-		if !ok {
+		if !ok || !e.IsSlicer() {
 			stream := b.spool.get().(*stream)
 			err := stream.setSource(src)
 			return stream, err

@@ -1,6 +1,7 @@
 package siegreader
 
 type source interface {
+	IsSlicer() bool
 	Slice(off int64, l int) ([]byte, error)
 	EofSlice(off int64, l int) ([]byte, error)
 	Size() int64

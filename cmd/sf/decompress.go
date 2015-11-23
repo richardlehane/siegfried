@@ -182,7 +182,12 @@ func (g *gzipD) reader() io.Reader {
 func (g *gzipD) path() string {
 	name := g.rdr.Name
 	if len(name) == 0 {
-		name = strings.TrimSuffix(filepath.Base(g.p), filepath.Ext(g.p))
+		switch filepath.Ext(g.p) {
+		case ".gz", ".z", ".gzip", ".zip":
+			name = strings.TrimSuffix(filepath.Base(g.p), filepath.Ext(g.p))
+		default:
+			name = filepath.Base(g.p)
+		}
 	}
 	return g.p + string(filepath.Separator) + name
 }
@@ -251,7 +256,7 @@ func (w *wa) next() error {
 }
 
 func (w *wa) reader() io.Reader {
-	return w.rec
+	return webarchive.DecodePayload(w.rec)
 }
 
 func (w *wa) path() string {
