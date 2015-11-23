@@ -13,7 +13,7 @@ Key features are:
 
 ## Version
 
-1.4.1
+1.4.2
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried)
 
@@ -37,6 +37,7 @@ Key features are:
     sf -home c:\junk -sig custom.sig file.ext  // Use a custom home directory
     sf -serve hostname:port                    // Server mode
     sf -version                                // Display version information
+    sf -throttle 50ms                          // Throttle directory scan with duration e.g. 100ms or 1s
     sf -log [comma-sep opts] file.ext | DIR    // Log errors etc. to stderr (default) or stdout
     sf -log e,w file.ext | DIR                 // Log errors and warnings to stderr
     sf -log u,o file.ext | DIR                 // Log unknowns to stdout
@@ -77,9 +78,13 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 ## Recent Changes
 ### Version 1.4.2 (forthcoming)
+- new -throttle flag; requested by [Ross Spencer]https://github.com/richardlehane/siegfried/issues/61
+- errors logged to stderr by default (to quieten use -log ""); requested by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/60)
 - mscfb update: [lazy reading](https://github.com/richardlehane/mscfb/commit/f909cfa596c7880c650ed5440df90e5474f08b29) 
-- -log error is now default
-- 
+- webarchive update: [decode Transfer-Encoding and Content-Encoding](https://github.com/richardlehane/webarchive/commit/2f125b9bece4d7d119ea029aa8c942a41962ecf4); requested by [Dragan Espenschied](https://github.com/richardlehane/siegfried/issues/55)
+- bugfix: long windows paths; reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/58)
+- bugfix: 32-bit file size overflow; reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/59)
+
 
 ### Version 1.4.1 (6/11/2015)
 - **-log replaces -debug, -slow, -unknown and -known flags** (see usage above)
