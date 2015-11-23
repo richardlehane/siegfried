@@ -145,7 +145,7 @@ func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 func multiIdentifyS(w writer, s *siegfried.Siegfried, r string, norecurse bool) error {
 	wf := func(path string, info os.FileInfo, err error) error {
 		if throttle != nil {
-			_ = <-throttle.C
+			<-throttle.C
 		}
 		if err != nil {
 			info, err = retryStat(path, err)
