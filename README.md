@@ -78,7 +78,7 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 ## Recent Changes
 ### Version 1.4.2 (forthcoming)
-- new -throttle flag; requested by [Ross Spencer]https://github.com/richardlehane/siegfried/issues/61
+- new -throttle flag; requested by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/61)
 - errors logged to stderr by default (to quieten use -log ""); requested by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/60)
 - mscfb update: [lazy reading](https://github.com/richardlehane/mscfb/commit/f909cfa596c7880c650ed5440df90e5474f08b29) 
 - webarchive update: [decode Transfer-Encoding and Content-Encoding](https://github.com/richardlehane/webarchive/commit/2f125b9bece4d7d119ea029aa8c942a41962ecf4); requested by [Dragan Espenschied](https://github.com/richardlehane/siegfried/issues/55)
