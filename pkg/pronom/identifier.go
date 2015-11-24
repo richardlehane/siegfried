@@ -296,11 +296,7 @@ func (r *Recorder) Satisfied(mt core.MatcherType) bool {
 		if len(r.ids) == 0 {
 			return false
 		}
-		conf := r.ids[0].confidence
 		for _, res := range r.ids {
-			if res.confidence != conf {
-				break
-			}
 			if res.Puid == config.TextPuid() {
 				return false
 			}
@@ -349,7 +345,8 @@ func (r *Recorder) Report(res chan core.Identification) {
 		if conf <= textScore {
 			nids := make([]Identification, 0, 1)
 			for _, v := range r.ids {
-				if v.confidence != conf {
+				// if overall confidence is greater than mime or ext only, then rule out any lesser confident matches
+				if conf > mimeScore && v.confidence != conf {
 					break
 				}
 				// if we have plain text result that is based on ext or mime only,
@@ -358,7 +355,9 @@ func (r *Recorder) Report(res chan core.Identification) {
 				if v.Puid == config.TextPuid() && conf < textScore && r.textActive {
 					continue
 				}
+				// if the match has no corresponding byte or container signature...
 				if ok := r.hasSig(v.Puid); !ok {
+					// break immediately if more than one match
 					if len(nids) > 0 {
 						nids = nids[:0]
 						break
@@ -375,6 +374,7 @@ func (r *Recorder) Report(res chan core.Identification) {
 				poss := make([]string, len(r.ids))
 				for i, v := range r.ids {
 					poss[i] = v.Puid
+					conf = conf | v.confidence
 				}
 				nids = []Identification{Identification{r.name, "UNKNOWN", "", "", "", nil, fmt.Sprintf("no match; possibilities based on %v are %v", lowConfidence(conf), strings.Join(poss, ", ")), 0, 0}}
 			}
