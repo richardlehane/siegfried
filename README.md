@@ -37,7 +37,7 @@ Key features are:
     sf -home c:\junk -sig custom.sig file.ext  // Use a custom home directory
     sf -serve hostname:port                    // Server mode
     sf -version                                // Display version information
-    sf -throttle 50ms                          // Throttle directory scan with duration e.g. 100ms or 1s
+    sf -throttle 10ms DIR                      // Pause for duration (e.g. 1s) between file scans
     sf -log [comma-sep opts] file.ext | DIR    // Log errors etc. to stderr (default) or stdout
     sf -log e,w file.ext | DIR                 // Log errors and warnings to stderr
     sf -log u,o file.ext | DIR                 // Log unknowns to stdout
