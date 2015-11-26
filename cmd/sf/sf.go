@@ -81,23 +81,20 @@ func printer(w writer, resc chan chan res, wg *sync.WaitGroup) {
 	}
 }
 
-func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) {
+func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) error {
 	wg := &sync.WaitGroup{}
 	runtime.GOMAXPROCS(PROCS)
 	resc := make(chan chan res, *multi)
 	go printer(w, resc, wg)
-	wf := func(path string, info os.FileInfo, err error) error {
+	var wf filepath.WalkFunc
+	wf = func(path string, info os.FileInfo, err error) error {
+		var retry bool
 		if err != nil {
 			info, err = retryStat(path, err)
 			if err != nil {
-				wg.Add(1)
-				rchan := make(chan res, 1)
-				resc <- rchan
-				go func() {
-					rchan <- res{path, 0, "", nil, err}
-				}()
-				return nil
+				return fmt.Errorf("walking %s; got %v", path, err) // fatal: return error and quit
 			}
+			retry = true
 		}
 		if info.IsDir() {
 			if norecurse && path != r {
@@ -110,6 +107,9 @@ func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 				go func() {
 					rchan <- res{path, -1, info.ModTime().String(), nil, nil} // write directory with a -1 size for droid output only
 				}()
+			}
+			if retry {
+				return filepath.Walk(longpath(path), wf)
 			}
 			return nil
 		}
@@ -137,22 +137,25 @@ func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 		}()
 		return nil
 	}
-	filepath.Walk(r, wf)
+	err := filepath.Walk(r, wf)
 	wg.Wait()
 	close(resc)
+	return err
 }
 
 func multiIdentifyS(w writer, s *siegfried.Siegfried, r string, norecurse bool) error {
-	wf := func(path string, info os.FileInfo, err error) error {
+	var wf filepath.WalkFunc
+	wf = func(path string, info os.FileInfo, err error) error {
+		var retry bool
 		if throttle != nil {
 			<-throttle.C
 		}
 		if err != nil {
 			info, err = retryStat(path, err)
 			if err != nil {
-				writeError(w, path, 0, "", err)
-				return nil
+				return fmt.Errorf("walking %s; got %v", path, err) // fatal: return error and quit
 			}
+			retry = true
 		}
 		if info.IsDir() {
 			if norecurse && path != r {
@@ -160,6 +163,9 @@ func multiIdentifyS(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 			}
 			if *droido {
 				w.writeFile(path, -1, info.ModTime().Format(time.RFC3339), nil, nil, nil) // write directory with a -1 size for droid output only
+			}
+			if retry {
+				return filepath.Walk(longpath(path), wf)
 			}
 			return nil
 		}
@@ -376,18 +382,20 @@ func main() {
 			*multi = 16
 		}
 		if *multi > 1 {
-			multiIdentifyP(w, s, flag.Arg(0), *nr)
+			err = multiIdentifyP(w, s, flag.Arg(0), *nr)
 		} else {
 			if *throttlef != 0 {
 				throttle = time.NewTicker(*throttlef)
 				defer throttle.Stop()
 			}
-			multiIdentifyS(w, s, flag.Arg(0), *nr)
+			err = multiIdentifyS(w, s, flag.Arg(0), *nr)
 		}
 		w.writeTail()
+		if err != nil {
+			log.Fatalf("[FATAL] %v\n", err)
+		}
 		os.Exit(0)
 	}
-
 	w.writeHead(s)
 	identifyFile(w, s, flag.Arg(0), info.Size(), info.ModTime().Format(time.RFC3339))
 	w.writeTail()

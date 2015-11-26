@@ -18,6 +18,10 @@ package main
 
 import "os"
 
+func longpath(path string) string {
+	return path
+}
+
 func retryStat(path string, err error) (os.FileInfo, error) {
 	return nil, err
 }
