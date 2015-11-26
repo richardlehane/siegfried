@@ -171,7 +171,6 @@ func multiIdentifyS(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 
 func identifyFile(w writer, s *siegfried.Siegfried, path string, sz int64, mod string) {
 	f, err := os.Open(path)
-	defer f.Close()
 	if err != nil {
 		f, err = retryOpen(path, err)
 		if err != nil {
@@ -180,6 +179,7 @@ func identifyFile(w writer, s *siegfried.Siegfried, path string, sz int64, mod s
 		}
 	}
 	identifyRdr(w, s, f, sz, path, "", mod)
+	f.Close()
 }
 
 func identifyRdr(w writer, s *siegfried.Siegfried, r io.Reader, sz int64, path, mime, mod string) {
