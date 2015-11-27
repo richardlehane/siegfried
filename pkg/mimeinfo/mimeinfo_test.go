@@ -15,7 +15,7 @@
 package mimeinfo
 
 import (
-	"fmt"
+	//"fmt"
 	"path/filepath"
 	"testing"
 
@@ -28,6 +28,9 @@ func TestNew(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
+	//for _, v := range mi {
+	//	fmt.Println(v)
+	//}
 	if len(mi) != 1495 {
 		t.Errorf("expecting %d MIMEInfos, got %d", 1495, len(mi))
 	}
