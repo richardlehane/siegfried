@@ -31,8 +31,8 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 
 	// Uncomment to build with profiler
-	//"net/http"
-	//_ "net/http/pprof"
+	"net/http"
+	_ "net/http/pprof"
 )
 
 const PROCS = -1
@@ -87,8 +87,9 @@ func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 	resc := make(chan chan res, *multi)
 	go printer(w, resc, wg)
 	var wf filepath.WalkFunc
+	var origPath string
 	wf = func(path string, info os.FileInfo, err error) error {
-		var retry bool
+		var retry, origReset bool
 		if err != nil {
 			info, err = retryStat(path, err)
 			if err != nil {
@@ -109,10 +110,19 @@ func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 				}()
 			}
 			if retry {
-				return filepath.Walk(longpath(path), wf)
+				if origPath == "" {
+					origPath = path
+					origReset = true
+				}
+				err = filepath.Walk(longpath(path), wf)
+				if origReset {
+					origPath = ""
+				}
+				return filepath.SkipDir
 			}
 			return nil
 		}
+		path = shortpath(path, origPath)
 		wg.Add(1)
 		rchan := make(chan res, 1)
 		resc <- rchan
@@ -145,8 +155,9 @@ func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 
 func multiIdentifyS(w writer, s *siegfried.Siegfried, r string, norecurse bool) error {
 	var wf filepath.WalkFunc
+	var origPath string
 	wf = func(path string, info os.FileInfo, err error) error {
-		var retry bool
+		var retry, origReset bool
 		if throttle != nil {
 			<-throttle.C
 		}
@@ -165,11 +176,19 @@ func multiIdentifyS(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 				w.writeFile(path, -1, info.ModTime().Format(time.RFC3339), nil, nil, nil) // write directory with a -1 size for droid output only
 			}
 			if retry {
-				return filepath.Walk(longpath(path), wf)
+				if origPath == "" {
+					origPath = path
+					origReset = true
+				}
+				err = filepath.Walk(longpath(path), wf)
+				if origReset {
+					origPath = ""
+				}
+				return filepath.SkipDir
 			}
 			return nil
 		}
-		identifyFile(w, s, path, info.Size(), info.ModTime().Format(time.RFC3339))
+		identifyFile(w, s, shortpath(path, origPath), info.Size(), info.ModTime().Format(time.RFC3339))
 		return nil
 	}
 	return filepath.Walk(r, wf)
@@ -252,10 +271,10 @@ func main() {
 
 	flag.Parse()
 
-	/*//UNCOMMENT TO RUN PROFILER
+	//UNCOMMENT TO RUN PROFILER
 	go func() {
 		log.Println(http.ListenAndServe("localhost:6060", nil))
-	}()*/
+	}()
 
 	if *version {
 		version := config.Version()

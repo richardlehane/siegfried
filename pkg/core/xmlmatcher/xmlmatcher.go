@@ -1,5 +1,3 @@
-// +build !windows
-
 // Copyright 2015 Richard Lehane. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,22 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main
+package xmlmatcher
 
-import "os"
-
-func longpath(path string) string {
-	return path
-}
-
-func shortpath(long, short string) string {
-	return long
-}
-
-func retryStat(path string, err error) (os.FileInfo, error) {
-	return nil, err
-}
-
-func retryOpen(path string, err error) (*os.File, error) {
-	return nil, err
-}
+type Matcher struct{}

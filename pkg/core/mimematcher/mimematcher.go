@@ -1,5 +1,3 @@
-// +build !windows
-
 // Copyright 2015 Richard Lehane. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,22 +12,29 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main
+package mimematcher
 
-import "os"
+import (
+	"strings"
 
-func longpath(path string) string {
-	return path
+	"github.com/richardlehane/siegfried/pkg/core"
+	"github.com/richardlehane/siegfried/pkg/core/priority"
+)
+
+type Matcher struct {
+	precise map[string][]int
+	general map[string][]int
+	sigsets []int // starting indexes of signature sets (so can tell if a general match from same set as a precise)
 }
 
-func shortpath(long, short string) string {
-	return long
+func (m Matcher) Add(ss core.SignatureSet, p priority.List) (int, error) {
+	return 0, nil
 }
 
-func retryStat(path string, err error) (os.FileInfo, error) {
-	return nil, err
-}
-
-func retryOpen(path string, err error) (*os.File, error) {
-	return nil, err
+func NormaliseMIME(s string) string {
+	idx := strings.LastIndex(s, ";")
+	if idx > 0 {
+		return s[:idx]
+	}
+	return s
 }
