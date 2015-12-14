@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package Bytematcher builds a matching engine from a set of signatures and performs concurrent matching against an input siegreader.Buffer.
+// Package bytematcher builds a matching engine from a set of signatures and performs concurrent matching against an input siegreader.Buffer.
 package bytematcher
 
 import (
@@ -112,10 +112,10 @@ func (se sigErrors) Error() string {
 }
 
 // Add a set of signatures to a bytematcher.
-// The priorities should be a list of equal length to the signatures, or nil (if no priorities are to be set)
+// The priority list should be of equal length to the signatures, or nil (if no priorities are to be set).
 //
 // Example:
-//   err := Add([]Signature{Signature{NewFrame(BOF, Sequence{'p','d','f'}, nil, 0, 0)}})
+//   n, err := bm.Add([]frames.Signature{frames.Signature{frames.NewFrame(frames.BOF, patterns.Sequence{'p','d','f'}, 0, 0)}}, nil)
 func (b *Matcher) Add(ss core.SignatureSet, priorities priority.List) (int, error) {
 	sigs, ok := ss.(SignatureSet)
 	if !ok {
