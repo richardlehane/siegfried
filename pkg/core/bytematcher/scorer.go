@@ -201,7 +201,7 @@ func (b *Matcher) scorer(buf siegreader.Buffer, q chan struct{}, r chan<- core.R
 					off = eof
 				}
 				var waitfor, excludable bool
-				if off > 0 && (f.key.pMax == -1 || f.key.pMax+int64(f.key.lMax) > off) {
+				if off == 0 || f.key.pMax == -1 || f.key.pMax+int64(f.key.lMax) >= off {
 					waitfor = true
 				} else if hit, ok := hits[v]; ok {
 					if hit.partials[i] != nil {
