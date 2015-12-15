@@ -77,6 +77,9 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 	sf -update
 
 ## Recent Changes
+### Version 1.5.0 (forthcoming)
+- bugfix: misidentifications e.g. TIFF due to an early halt error; [commit](https://github.com/richardlehane/siegfried/commit/00e4e3b1bdeda334da67a0e66cdbe0c507137d65)
+
 ### Version 1.4.2 (27/11/2015)
 - new -throttle flag; requested by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/61)
 - errors logged to stderr by default (to quieten use -log ""); requested by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/60)
