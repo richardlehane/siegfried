@@ -42,7 +42,7 @@ Key features are:
     sf -log e,w file.ext | DIR                 // Log errors and warnings to stderr
     sf -log u,o file.ext | DIR                 // Log unknowns to stdout
     sf -log d,s file.ext | DIR                 // Log debugging and slow messages to stderr
-    sf -log p DIR > results.yaml               // Log progress while redirecting results
+    sf -log p,t DIR > results.yaml             // Log progress and time while redirecting results
 
 
 ![Usage](usage.gif)
