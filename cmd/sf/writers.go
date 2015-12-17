@@ -73,6 +73,20 @@ type writer interface {
 	writeTail()
 }
 
+type logWriter struct{}
+
+func (l logWriter) writeHead(s *siegfried.Siegfried) {}
+func (l logWriter) writeFile(name string, sz int64, mod string, cs []byte, err error, ids iterableID) config.Archive {
+	var arc config.Archive
+	for id := ids.next(); id != nil; id = ids.next() {
+		if id.Archive() > 0 {
+			arc = id.Archive()
+		}
+	}
+	return arc
+}
+func (l logWriter) writeTail() {}
+
 type csvWriter struct {
 	rec []string
 	w   *csv.Writer
@@ -317,10 +331,10 @@ func (d *droidWriter) processPath(p string) (parent, uri, path, name, ext string
 	par, ok := d.parents[dir]
 	if ok {
 		parent = strconv.Itoa(par.id)
-		uri = toUri(par.uri, par.archive, name)
+		uri = toUri(par.uri, par.archive, escape(name))
 	} else {
-		puri := "file:/" + filepath.ToSlash(dir)
-		uri = toUri(puri, "", name)
+		puri := "file:/" + escape(filepath.ToSlash(dir))
+		uri = toUri(puri, "", escape(name))
 	}
 	ext = strings.TrimPrefix(filepath.Ext(p), ".")
 	return
@@ -331,6 +345,45 @@ func toUri(parenturi, parentarc, base string) string {
 		parenturi = parentarc + ":" + parenturi + "!"
 	}
 	return parenturi + "/" + base
+}
+
+// uri escaping adapted from https://golang.org/src/net/url/url.go
+func shouldEscape(c byte) bool {
+	if 'A' <= c && c <= 'Z' || 'a' <= c && c <= 'z' || '0' <= c && c <= '9' {
+		return false
+	}
+	switch c {
+	case '-', '_', '.', '~', '/', ':':
+		return false
+	}
+	return true
+}
+
+func escape(s string) string {
+	var hexCount int
+	for i := 0; i < len(s); i++ {
+		c := s[i]
+		if shouldEscape(c) {
+			hexCount++
+		}
+	}
+	if hexCount == 0 {
+		return s
+	}
+	t := make([]byte, len(s)+2*hexCount)
+	j := 0
+	for i := 0; i < len(s); i++ {
+		if c := s[i]; shouldEscape(c) {
+			t[j] = '%'
+			t[j+1] = "0123456789ABCDEF"[c>>4]
+			t[j+2] = "0123456789ABCDEF"[c&15]
+			j += 3
+		} else {
+			t[j] = s[i]
+			j++
+		}
+	}
+	return string(t)
 }
 
 func clearArchivePath(uri, path string) string {
@@ -362,17 +415,3 @@ func mismatch(warning string) string {
 	}
 	return "FALSE"
 }
-
-type logWriter struct{}
-
-func (l logWriter) writeHead(s *siegfried.Siegfried) {}
-func (l logWriter) writeFile(name string, sz int64, mod string, cs []byte, err error, ids iterableID) config.Archive {
-	var arc config.Archive
-	for id := ids.next(); id != nil; id = ids.next() {
-		if id.Archive() > 0 {
-			arc = id.Archive()
-		}
-	}
-	return arc
-}
-func (l logWriter) writeTail() {}
