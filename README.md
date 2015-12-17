@@ -79,6 +79,7 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 ## Recent Changes
 ### Version 1.4.3 (19/12/2015)
 - measure time elapsed with -log time
+- bugfix: [percent encode file URIs in droid output](https://github.com/richardlehane/siegfried/issues/63)
 - bugfix: long windows directory paths (further work on bug fixed in 1.4.2); reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/58)
 - bugfix: mscfb panic; reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/62)
 - bugfix: **TIFF misidentifications** due to an [early halt error](https://github.com/richardlehane/siegfried/commit/5f0ccd477c467186c350e762f8fddda888d987bf)
