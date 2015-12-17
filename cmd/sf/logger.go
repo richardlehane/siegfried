@@ -20,6 +20,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
@@ -28,15 +29,10 @@ import (
 var lg *logger
 
 type logger struct {
-	progress bool
-	e        bool
-	warn     bool
-	debug    bool
-	slow     bool
-	unknown  bool
-	known    bool
-	w        io.Writer
-	// mutate
+	progress, e, warn, debug, slow, known, unknown bool
+	w                                              io.Writer
+	start                                          time.Time
+	// mutate each file
 	path string
 	u    bool
 	fp   bool // file name already printed
@@ -51,6 +47,8 @@ func newLogger(opts string) error {
 			l.w = os.Stdout
 		case "progress", "p":
 			l.progress = true
+		case "time", "t":
+			l.start = time.Now()
 		case "error", "err", "e":
 			l.e = true
 		case "warning", "warn", "w":
@@ -80,7 +78,15 @@ var (
 	fileString = "[FILE]"
 	errString  = "[ERROR]"
 	warnString = "[WARN]"
+	timeString = "[TIME]"
 )
+
+func (l *logger) printElapsed() {
+	if l == nil || l.start.IsZero() {
+		return
+	}
+	fmt.Fprintf(l.w, "%s %v\n", timeString, time.Since(l.start))
+}
 
 func (l *logger) printFile() {
 	if !l.fp {

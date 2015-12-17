@@ -13,7 +13,7 @@ Key features are:
 
 ## Version
 
-1.4.2
+1.4.3
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried)
 
@@ -77,8 +77,11 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 	sf -update
 
 ## Recent Changes
-### Version 1.5.0 (forthcoming)
-- bugfix: misidentifications e.g. TIFF due to an early halt error; [commit](https://github.com/richardlehane/siegfried/commit/00e4e3b1bdeda334da67a0e66cdbe0c507137d65)
+### Version 1.4.3 (19/12/2015)
+- measure time elapsed with -log time
+- bugfix: long windows directory paths (further work on bug fixed in 1.4.2); reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/58)
+- bugfix: mscfb panic; reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/62)
+- bugfix: *misidentifications* due to an early halt error e.g. TIFF; [commit](https://github.com/richardlehane/siegfried/commit/5f0ccd477c467186c350e762f8fddda888d987bf)
 
 ### Version 1.4.2 (27/11/2015)
 - new -throttle flag; requested by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/61)

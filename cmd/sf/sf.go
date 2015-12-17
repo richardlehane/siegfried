@@ -30,10 +30,10 @@ import (
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 
-	// Uncomment to build with profiler
+	/*// Uncomment to build with profiler
 	"net/http"
 	_ "net/http/pprof"
-)
+	*/)
 
 const PROCS = -1
 
@@ -271,10 +271,10 @@ func main() {
 
 	flag.Parse()
 
-	//UNCOMMENT TO RUN PROFILER
+	/*//UNCOMMENT TO RUN PROFILER
 	go func() {
 		log.Println(http.ListenAndServe("localhost:6060", nil))
-	}()
+	}()*/
 
 	if *version {
 		version := config.Version()
@@ -384,6 +384,7 @@ func main() {
 			}
 		}
 		w.writeTail()
+		lg.printElapsed()
 		os.Exit(0)
 	}
 
@@ -413,10 +414,12 @@ func main() {
 		if err != nil {
 			log.Fatalf("[FATAL] %v\n", err)
 		}
+		lg.printElapsed()
 		os.Exit(0)
 	}
 	w.writeHead(s)
 	identifyFile(w, s, flag.Arg(0), info.Size(), info.ModTime().Format(time.RFC3339))
 	w.writeTail()
+	lg.printElapsed()
 	os.Exit(0)
 }
