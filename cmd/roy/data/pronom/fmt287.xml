@@ -4,7 +4,7 @@
     <FileFormat>
       <FormatID>1027</FormatID>
       <FormatName>HDF5</FormatName>
-      <FormatVersion>2.0</FormatVersion>
+      <FormatVersion>2</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -12,7 +12,7 @@
       <FormatTypes>Dataset</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>HDF5 is a data model, library, and file format for storing and managing data.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -44,6 +44,11 @@
       <ExternalSignature>
         <ExternalSignatureID>1010</ExternalSignatureID>
         <Signature>h5</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1723</ExternalSignatureID>
+        <Signature>hdf</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <InternalSignature>

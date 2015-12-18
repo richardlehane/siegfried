@@ -154,6 +154,12 @@
         <RelatedFormatVersion>97-2003</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>1553</RelatedFormatID>
+        <RelatedFormatName>Microsoft Word Document (ord proord Protected)</RelatedFormatName>
+        <RelatedFormatVersion>97-2003</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Is subsequent version of</RelationshipType>
         <RelatedFormatID>734</RelatedFormatID>
         <RelatedFormatName>Microsoft Word for Windows Document</RelatedFormatName>

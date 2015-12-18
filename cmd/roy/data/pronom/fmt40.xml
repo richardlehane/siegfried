@@ -146,6 +146,24 @@
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>76</RelatedFormatID>
+        <RelatedFormatName>Microsoft Word Document Template</RelatedFormatName>
+        <RelatedFormatVersion>97-2003</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1553</RelatedFormatID>
+        <RelatedFormatName>Microsoft Word Document (ord proord Protected)</RelatedFormatName>
+        <RelatedFormatVersion>97-2003</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1554</RelatedFormatID>
+        <RelatedFormatName>Microsoft Word Document Template (Password Protected)</RelatedFormatName>
+        <RelatedFormatVersion>97-2003</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>767</RelatedFormatID>
         <RelatedFormatName>OLE2 Compound Document Format</RelatedFormatName>

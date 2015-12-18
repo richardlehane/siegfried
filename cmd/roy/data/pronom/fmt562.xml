@@ -62,6 +62,11 @@ Beginning with version 9, the Adobe Illustrated ai file format included both a p
         <Signature>ai</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1643</ExternalSignatureID>
+        <Signature>pdf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
       <InternalSignature>
         <SignatureID>896</SignatureID>
         <SignatureName>Adobe Illustrator 13.0</SignatureName>

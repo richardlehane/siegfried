@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1560</FormatID>
+      <FormatName>Adobe Flash</FormatName>
+      <FormatVersion>15</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>
+      </FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The Adobe Flash format, SWF, previously known as Shockwave Flash or Macromedia Shockwave Flash, and alternatively known as the Small Web Format, is a file format primarily designed for creating interactive multimedia applications. The format iterates rapidly, often in line with new releases of Adobe Flash or Adobe Air. Prior to version 6 all SWF files were uncompressed, however version 6 introduced the option of using zlib compression. Version 13 introduced the option of using LZMA compression.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>07 Aug 2015</ProvenanceSourceDate>
+      <ProvenanceDescription>http://wwwimages.adobe.com/www.adobe.com/content/dam/Adobe/en/devnet/swf/pdf/swf-file-format-spec.pdf
+http://www.adobe.com/devnet/articles/flashplayer-air-feature-list.html</ProvenanceDescription>
+      <LastUpdatedDate>07 Aug 2015</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/x-shockwave-flash</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/761</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>7</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Adobe Systems Incorporated</OrganisationName>
+        <DeveloperCompoundName>Adobe Systems Incorporated</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>7</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Adobe Systems Incorporated</OrganisationName>
+        <SupportCompoundName>Adobe Systems Incorporated</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>1654</ExternalSignatureID>
+        <Signature>swf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1086</SignatureID>
+        <SignatureName>SWF 15</SignatureName>
+        <SignatureNote>Header (FWS then version number) and end tag (..)</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1334</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4657530F</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>1442</ByteSequenceID>
+          <PositionType>Absolute from EOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>0000</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1104</SignatureID>
+        <SignatureName>SWF 15 - zlib compressed</SignatureName>
+        <SignatureNote>Header (CWS then version number)</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1353</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4357530F</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1120</SignatureID>
+        <SignatureName>SWF 15 - LZMA compressed</SignatureName>
+        <SignatureNote>Header (ZWS then version number)</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1369</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>5A57530F</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>1561</RelatedFormatID>
+        <RelatedFormatName>Adobe Flash</RelatedFormatName>
+        <RelatedFormatVersion>16</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>1559</RelatedFormatID>
+        <RelatedFormatName>Adobe Flash</RelatedFormatName>
+        <RelatedFormatVersion>14</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

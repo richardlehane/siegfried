@@ -12,7 +12,7 @@
       <FormatTypes>Presentation</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>This PUID is now deprecated in favour of x-fmt/360 - StarImpress 5.x</FormatDescription>
       <BinaryFileFormat>Binary</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -40,11 +40,6 @@
         <Identifier>x-fmt/405</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
-      <ExternalSignature>
-        <ExternalSignatureID>702</ExternalSignatureID>
-        <Signature>sdd</Signature>
-        <SignatureType>File extension</SignatureType>
-      </ExternalSignature>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

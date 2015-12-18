@@ -65,6 +65,12 @@
       </ExternalSignature>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>76</RelatedFormatID>
+        <RelatedFormatName>Microsoft Word Document Template</RelatedFormatName>
+        <RelatedFormatVersion>97-2003</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>688</RelatedFormatID>
         <RelatedFormatName>Microsoft Word Document</RelatedFormatName>
         <RelatedFormatVersion>6.0/95</RelatedFormatVersion>
@@ -73,6 +79,18 @@
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>690</RelatedFormatID>
         <RelatedFormatName>Microsoft Word Document</RelatedFormatName>
+        <RelatedFormatVersion>97-2003</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1553</RelatedFormatID>
+        <RelatedFormatName>Microsoft Word Document (ord proord Protected)</RelatedFormatName>
+        <RelatedFormatVersion>97-2003</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1554</RelatedFormatID>
+        <RelatedFormatName>Microsoft Word Document Template (Password Protected)</RelatedFormatName>
         <RelatedFormatVersion>97-2003</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1580</FormatID>
+      <FormatName>Snoop Packet Capture</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>
+      </FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Snoop is a packet capture file format originally developed by Sun.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>21 Nov 2015</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>21 Nov 2015</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/781</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>71</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Sun Microsystems Incorporated</OrganisationName>
+        <DeveloperCompoundName>Sun Microsystems Incorporated</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>63</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Oracle</OrganisationName>
+        <SupportCompoundName>Oracle</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>1672</ExternalSignatureID>
+        <Signature>snoop</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1149</SignatureID>
+        <SignatureName>Snoop</SignatureName>
+        <SignatureNote>Magic: snoop... Version: 2</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1400</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>736E6F6F7000000000000002</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

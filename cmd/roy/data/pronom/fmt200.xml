@@ -4,8 +4,7 @@
     <FileFormat>
       <FormatID>925</FormatID>
       <FormatName>Material Exchange Format</FormatName>
-      <FormatVersion>
-      </FormatVersion>
+      <FormatVersion>Operational Pattern 1a</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -13,7 +12,11 @@
       <FormatTypes>Video</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>MXF is a "container" or "wrapper" format which supports a number of different streams of coded "essence", encoded with any of a variety of codecs, together with a metadata wrapper which describes the material contained within the MXF file.</FormatDescription>
+      <FormatDescription>MXF is a media container format which supports a number of different streams of coded "essence", encoded with any of a variety of codecs, together with a metadata wrapper which describes the material contained within the MXF file. 
+
+MXF allows for different degrees of complexity within the wrapper, which are standardised and defined as Operational Patterns, and this may be a consideration for an institution considering preserving the format, hence the separation of these Operational Patterns into separate PUIDs.
+
+OP1a is intended to meet the requirements of acquisition, storage and interchange applications that are satisfied by a single item of content packaged in a single essence container.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -26,7 +29,7 @@
       <ProvenanceSourceDate>21 Feb 2014</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>21 Feb 2014</LastUpdatedDate>
+      <LastUpdatedDate>23 Nov 2015</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -62,169 +65,6 @@
           <Endianness>
           </Endianness>
           <ByteSequenceValue>060E2B34020501010D0102010102{70}060E2B34040101010D0102010101</ByteSequenceValue>
-        </ByteSequence>
-      </InternalSignature>
-      <InternalSignature>
-        <SignatureID>792</SignatureID>
-        <SignatureName>MXF OP1b</SignatureName>
-        <SignatureNote>Header ..+4.......... then Operational Pattern Label ..+4..........</SignatureNote>
-        <ByteSequence>
-          <ByteSequenceID>996</ByteSequenceID>
-          <PositionType>Absolute from BOF</PositionType>
-          <Offset>0</Offset>
-          <MaxOffset>0</MaxOffset>
-          <IndirectOffsetLocation>
-          </IndirectOffsetLocation>
-          <IndirectOffsetLength>
-          </IndirectOffsetLength>
-          <Endianness>
-          </Endianness>
-          <ByteSequenceValue>060E2B34020501010D0102010102{70}060E2B34040101010D0102010102</ByteSequenceValue>
-        </ByteSequence>
-      </InternalSignature>
-      <InternalSignature>
-        <SignatureID>793</SignatureID>
-        <SignatureName>MXF OP1c</SignatureName>
-        <SignatureNote>Header ..+4.......... then Operational Pattern Label ..+4..........</SignatureNote>
-        <ByteSequence>
-          <ByteSequenceID>997</ByteSequenceID>
-          <PositionType>Absolute from BOF</PositionType>
-          <Offset>0</Offset>
-          <MaxOffset>0</MaxOffset>
-          <IndirectOffsetLocation>
-          </IndirectOffsetLocation>
-          <IndirectOffsetLength>
-          </IndirectOffsetLength>
-          <Endianness>
-          </Endianness>
-          <ByteSequenceValue>060E2B34020501010D0102010102{70}060E2B34040101010D0102010103</ByteSequenceValue>
-        </ByteSequence>
-      </InternalSignature>
-      <InternalSignature>
-        <SignatureID>794</SignatureID>
-        <SignatureName>MXF OP2a</SignatureName>
-        <SignatureNote>Header ..+4.......... then Operational Pattern Label ..+4..........</SignatureNote>
-        <ByteSequence>
-          <ByteSequenceID>998</ByteSequenceID>
-          <PositionType>Absolute from BOF</PositionType>
-          <Offset>0</Offset>
-          <MaxOffset>0</MaxOffset>
-          <IndirectOffsetLocation>
-          </IndirectOffsetLocation>
-          <IndirectOffsetLength>
-          </IndirectOffsetLength>
-          <Endianness>
-          </Endianness>
-          <ByteSequenceValue>060E2B34020501010D0102010102{70}060E2B34040101010D0102010201</ByteSequenceValue>
-        </ByteSequence>
-      </InternalSignature>
-      <InternalSignature>
-        <SignatureID>795</SignatureID>
-        <SignatureName>MXF OP2b</SignatureName>
-        <SignatureNote>Header ..+4.......... then Operational Pattern Label ..+4..........</SignatureNote>
-        <ByteSequence>
-          <ByteSequenceID>999</ByteSequenceID>
-          <PositionType>Absolute from BOF</PositionType>
-          <Offset>0</Offset>
-          <MaxOffset>0</MaxOffset>
-          <IndirectOffsetLocation>
-          </IndirectOffsetLocation>
-          <IndirectOffsetLength>
-          </IndirectOffsetLength>
-          <Endianness>
-          </Endianness>
-          <ByteSequenceValue>060E2B34020501010D0102010102{70}060E2B34040101010D0102010202</ByteSequenceValue>
-        </ByteSequence>
-      </InternalSignature>
-      <InternalSignature>
-        <SignatureID>796</SignatureID>
-        <SignatureName>MXF OP2c</SignatureName>
-        <SignatureNote>Header ..+4.......... then Operational Pattern Label ..+4..........</SignatureNote>
-        <ByteSequence>
-          <ByteSequenceID>1000</ByteSequenceID>
-          <PositionType>Absolute from BOF</PositionType>
-          <Offset>0</Offset>
-          <MaxOffset>0</MaxOffset>
-          <IndirectOffsetLocation>
-          </IndirectOffsetLocation>
-          <IndirectOffsetLength>
-          </IndirectOffsetLength>
-          <Endianness>
-          </Endianness>
-          <ByteSequenceValue>060E2B34020501010D0102010102{70}060E2B34040101010D0102010203</ByteSequenceValue>
-        </ByteSequence>
-      </InternalSignature>
-      <InternalSignature>
-        <SignatureID>797</SignatureID>
-        <SignatureName>MXF OP3a</SignatureName>
-        <SignatureNote>Header ..+4.......... then Operational Pattern Label ..+4..........</SignatureNote>
-        <ByteSequence>
-          <ByteSequenceID>1001</ByteSequenceID>
-          <PositionType>Absolute from BOF</PositionType>
-          <Offset>0</Offset>
-          <MaxOffset>0</MaxOffset>
-          <IndirectOffsetLocation>
-          </IndirectOffsetLocation>
-          <IndirectOffsetLength>
-          </IndirectOffsetLength>
-          <Endianness>
-          </Endianness>
-          <ByteSequenceValue>060E2B34020501010D0102010102{70}060E2B34040101010D0102010301</ByteSequenceValue>
-        </ByteSequence>
-      </InternalSignature>
-      <InternalSignature>
-        <SignatureID>798</SignatureID>
-        <SignatureName>MXF OP3b</SignatureName>
-        <SignatureNote>Header ..+4.......... then Operational Pattern Label ..+4..........</SignatureNote>
-        <ByteSequence>
-          <ByteSequenceID>1002</ByteSequenceID>
-          <PositionType>Absolute from BOF</PositionType>
-          <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
-          <IndirectOffsetLocation>
-          </IndirectOffsetLocation>
-          <IndirectOffsetLength>
-          </IndirectOffsetLength>
-          <Endianness>
-          </Endianness>
-          <ByteSequenceValue>060E2B34020501010D0102010102{70}060E2B34040101010D0102010302</ByteSequenceValue>
-        </ByteSequence>
-      </InternalSignature>
-      <InternalSignature>
-        <SignatureID>799</SignatureID>
-        <SignatureName>MXF OP3c</SignatureName>
-        <SignatureNote>Header ..+4.......... then Operational Pattern Label ..+4..........</SignatureNote>
-        <ByteSequence>
-          <ByteSequenceID>1003</ByteSequenceID>
-          <PositionType>Absolute from BOF</PositionType>
-          <Offset>0</Offset>
-          <MaxOffset>0</MaxOffset>
-          <IndirectOffsetLocation>
-          </IndirectOffsetLocation>
-          <IndirectOffsetLength>
-          </IndirectOffsetLength>
-          <Endianness>
-          </Endianness>
-          <ByteSequenceValue>060E2B34020501010D0102010102{70}060E2B34040101010D0102010303</ByteSequenceValue>
-        </ByteSequence>
-      </InternalSignature>
-      <InternalSignature>
-        <SignatureID>800</SignatureID>
-        <SignatureName>MXF OP-ATOM</SignatureName>
-        <SignatureNote>Header ..+4.......... then Operational Pattern Label ..+4.........</SignatureNote>
-        <ByteSequence>
-          <ByteSequenceID>1004</ByteSequenceID>
-          <PositionType>Absolute from BOF</PositionType>
-          <Offset>0</Offset>
-          <MaxOffset>0</MaxOffset>
-          <IndirectOffsetLocation>
-          </IndirectOffsetLocation>
-          <IndirectOffsetLength>
-          </IndirectOffsetLength>
-          <Endianness>
-          </Endianness>
-          <ByteSequenceValue>060E2B34020501010D0102010102{70}060E2B34040101020D01020110</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

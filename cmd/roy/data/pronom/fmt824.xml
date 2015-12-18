@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1624</FormatID>
+      <FormatName>Apple iWork Pages</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Word Processor</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Pages is a word processor application created by Apple as part of the iWork Productivity Suite.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>178</ProvenanceSourceID>
+      <ProvenanceName>National Library of New Zealand / National Library of New Zealand</ProvenanceName>
+      <ProvenanceSourceDate>16 Dec 2015</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>16 Dec 2015</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/824</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>15</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Apple Computer, Inc.</OrganisationName>
+        <DeveloperCompoundName>Apple Computer, Inc.</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>15</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Apple Computer, Inc.</OrganisationName>
+        <SupportCompoundName>Apple Computer, Inc.</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>1728</ExternalSignatureID>
+        <Signature>pages</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

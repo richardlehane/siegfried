@@ -3,9 +3,8 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>76</FormatID>
-      <FormatName>Microsoft Word Template</FormatName>
-      <FormatVersion>
-      </FormatVersion>
+      <FormatName>Microsoft Word Document Template</FormatName>
+      <FormatVersion>97-2003</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -37,11 +36,50 @@
         <Identifier>x-fmt/45</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>93</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <DeveloperCompoundName>Microsoft Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>93</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <SupportCompoundName>Microsoft Corporation</SupportCompoundName>
+      </Support>
       <ExternalSignature>
         <ExternalSignatureID>70</ExternalSignatureID>
         <Signature>dot</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1554</RelatedFormatID>
+        <RelatedFormatName>Microsoft Word Document Template (Password Protected)</RelatedFormatName>
+        <RelatedFormatVersion>97-2003</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>690</RelatedFormatID>
+        <RelatedFormatName>Microsoft Word Document</RelatedFormatName>
+        <RelatedFormatVersion>97-2003</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>767</RelatedFormatID>
+        <RelatedFormatName>OLE2 Compound Document Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>1401</RelatedFormatID>
+        <RelatedFormatName>Microsoft Word (Generic)</RelatedFormatName>
+        <RelatedFormatVersion>6.0-2003</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

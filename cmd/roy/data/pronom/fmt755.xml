@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1554</FormatID>
+      <FormatName>Microsoft Word Document Template (Password Protected)</FormatName>
+      <FormatVersion>97-2003</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Unstructured), Word Processor</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>With the release of Word 97, Microsoft revised the native binary word processing format, which is based on its generic OLE2 Compound Document Format. A Word document is stored as a ‘WordDocument’ stream within a Compound Document Format file. The format remained unchanged with the releases of Word 2000, 2002 and 2003.
+
+Within the 'WordDocument' stream, the byte at position 0x0B deals with encryption/obfuscation, as per the MS FibBase description page - https://msdn.microsoft.com/en-us/library/dd944620(v=office.12).aspx. The first bit (Least Significant Bit (LSB) ordering) specifies whether the file is encrypted, meaning that if the byte at 0x0B is an 'odd' byte (e.g. 01, 03, 05, 07, 09, 0B, 0D, 0F, 11, 13 etc.) then this indicates obfuscation/encryption is present.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>214</ProvenanceSourceID>
+      <ProvenanceName>Archives New Zealand / Archives New Zealand</ProvenanceName>
+      <ProvenanceSourceDate>07 Aug 2015</ProvenanceSourceDate>
+      <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
+      <LastUpdatedDate>07 Aug 2015</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/msword</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/755</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>93</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <DeveloperCompoundName>Microsoft Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>93</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <SupportCompoundName>Microsoft Corporation</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>1648</ExternalSignatureID>
+        <Signature>dot</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>76</RelatedFormatID>
+        <RelatedFormatName>Microsoft Word Document Template</RelatedFormatName>
+        <RelatedFormatVersion>97-2003</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>690</RelatedFormatID>
+        <RelatedFormatName>Microsoft Word Document</RelatedFormatName>
+        <RelatedFormatVersion>97-2003</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>767</RelatedFormatID>
+        <RelatedFormatName>OLE2 Compound Document Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>1401</RelatedFormatID>
+        <RelatedFormatName>Microsoft Word (Generic)</RelatedFormatName>
+        <RelatedFormatVersion>6.0-2003</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>1553</RelatedFormatID>
+        <RelatedFormatName>Microsoft Word Document (ord proord Protected)</RelatedFormatName>
+        <RelatedFormatVersion>97-2003</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subtype of</RelationshipType>
+        <RelatedFormatID>767</RelatedFormatID>
+        <RelatedFormatName>OLE2 Compound Document Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

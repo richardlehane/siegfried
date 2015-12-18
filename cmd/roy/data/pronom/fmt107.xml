@@ -12,7 +12,7 @@
       </FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>The Adobe Flash format, SWF, previously known as Shockwave Flash or Macromedia Shockwave Flash, and alternatively known as the Small Web Format, is a file format primarily designed for creating interactive multimedia applications. The format iterates rapidly, often in line with new releases of Adobe Flash or Adobe Air. Prior to version 6 all SWF files were uncompressed, however version 6 introduced the option of using zlib compression. Version 13 introduced the option of using LZMA compression.</FormatDescription>
       <BinaryFileFormat>Binary</BinaryFileFormat>
       <ByteOrders>Little-endian (Intel)</ByteOrders>
       <ReleaseDate>
@@ -22,9 +22,9 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>11 Mar 2005</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>26 Feb 2013</LastUpdatedDate>
+      <ProvenanceDescription>http://wwwimages.adobe.com/www.adobe.com/content/dam/Adobe/en/devnet/swf/pdf/swf-file-format-spec.pdf
+http://www.adobe.com/devnet/articles/flashplayer-air-feature-list.html</ProvenanceDescription>
+      <LastUpdatedDate>03 Aug 2015</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>

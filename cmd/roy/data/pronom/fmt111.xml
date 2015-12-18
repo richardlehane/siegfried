@@ -95,6 +95,12 @@
       </InternalSignature>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>76</RelatedFormatID>
+        <RelatedFormatName>Microsoft Word Document Template</RelatedFormatName>
+        <RelatedFormatVersion>97-2003</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>133</RelatedFormatID>
         <RelatedFormatName>Microsoft Powerpoint Presentation</RelatedFormatName>
         <RelatedFormatVersion>4.0</RelatedFormatVersion>
@@ -138,7 +144,7 @@
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>683</RelatedFormatID>
-        <RelatedFormatName>Microsoft Excel 95 Workbook (xls)</RelatedFormatName>
+        <RelatedFormatName>Excel 95 Workbook (xls)</RelatedFormatName>
         <RelatedFormatVersion>7</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
@@ -185,6 +191,18 @@
         <RelatedFormatVersion>2003</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1553</RelatedFormatID>
+        <RelatedFormatName>Microsoft Word Document (ord proord Protected)</RelatedFormatName>
+        <RelatedFormatVersion>97-2003</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1554</RelatedFormatID>
+        <RelatedFormatName>Microsoft Word Document Template (Password Protected)</RelatedFormatName>
+        <RelatedFormatVersion>97-2003</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Is supertype of</RelationshipType>
         <RelatedFormatID>134</RelatedFormatID>
         <RelatedFormatName>Microsoft Powerpoint Presentation</RelatedFormatName>
@@ -205,7 +223,7 @@
       <RelatedFormat>
         <RelationshipType>Is supertype of</RelationshipType>
         <RelatedFormatID>683</RelatedFormatID>
-        <RelatedFormatName>Microsoft Excel 95 Workbook (xls)</RelatedFormatName>
+        <RelatedFormatName>Excel 95 Workbook (xls)</RelatedFormatName>
         <RelatedFormatVersion>7</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
@@ -266,6 +284,18 @@
         <RelatedFormatName>Revit Project</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>1553</RelatedFormatID>
+        <RelatedFormatName>Microsoft Word Document (ord proord Protected)</RelatedFormatName>
+        <RelatedFormatVersion>97-2003</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>1554</RelatedFormatID>
+        <RelatedFormatName>Microsoft Word Document Template (Password Protected)</RelatedFormatName>
+        <RelatedFormatVersion>97-2003</RelatedFormatVersion>
       </RelatedFormat>
       <FormatProperties>
         <FormatProperty>
