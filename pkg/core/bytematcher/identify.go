@@ -121,8 +121,8 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 				incoming <- strike{b.eofSeq.testTreeIndex[er.Index[0]], er.Index[1], er.Offset, er.Length, true, false}
 			}
 		}
-		// let the scorer known we have reached the end of the EOF scan
-		incoming <- progressStrike(-1, true)
+		// send a final progress strike with the maximum EOF
+		incoming <- progressStrike(int64(b.maxEOF), true)
 		// Finally, finish BOF scan
 		for br := range bchan {
 			if br.Index[0] == -1 {
