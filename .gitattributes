@@ -1,4 +1,4 @@
-# Set default behaviour, in case users don't have core.autocrlf set.
-* text=auto
+# Set default unix line endings
+* text eol=lf
 
 # this will be overriden in the skeleton-suite directory
