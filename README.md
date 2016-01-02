@@ -59,24 +59,28 @@ By default, siegfried uses the latest PRONOM and container signatures with no bu
 
 
 ### Or, without go installed:
+#### Win:
 
-For OS X:
+Download a pre-built binary from the [releases page](https://github.com/richardlehane/siegfried/releases). Unzip to a location in your system path. Then run:
+
+    sf -update
+
+#### Mac Homebrew (or [Linuxbrew](http://brew.sh/linuxbrew/)):
 
     brew install mistydemeo/digipres/siegfried
 
-For Ubuntu/Debian (64 bit):
+#### Ubuntu/Debian (64 bit):
 
     wget -qO - https://bintray.com/user/downloadSubjectPublicKey?username=bintray | sudo apt-key add -
     echo "deb http://dl.bintray.com/siegfried/debian wheezy main" | sudo tee -a /etc/apt/sources.list
     sudo apt-get update && sudo apt-get install siegfried
 
-For Win:
-
-Download a pre-built binary from the [releases page](https://github.com/richardlehane/siegfried/releases). Unzip to a location in your system path. Then run:
-
-	sf -update
 
 ## Recent Changes
+### Version 1.4.4 (forthcoming)
+- speed-up (regression in TIFF mis-identification patch last release)
+-
+
 ### Version 1.4.3 (19/12/2015)
 - measure time elapsed with -log time
 - bugfix: [percent encode file URIs in droid output](https://github.com/richardlehane/siegfried/issues/63)
