@@ -16,6 +16,7 @@ package siegreader
 
 import "sync"
 
+// bigfile handles files that are too large to mmap (normally encountered on 32-bit machines)
 type bigfile struct {
 	*file
 	eof   [eofSz]byte
