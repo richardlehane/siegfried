@@ -4,6 +4,8 @@ import (
 	"io"
 	"os"
 	"sync"
+
+	"github.com/richardlehane/characterize"
 )
 
 type file struct {
@@ -16,6 +18,9 @@ type file struct {
 
 	limited bool
 	limit   chan struct{}
+
+	texted bool
+	text   characterize.CharType
 
 	pool *datas // link to the data pool
 }
@@ -132,4 +137,16 @@ func (f *file) EofSlice(off int64, l int) ([]byte, error) {
 	f.once.Do(func() { f.data = f.pool.get(f) })
 	ret := f.eofSlice(off, l)
 	return ret, err
+}
+
+func (f *file) Text() characterize.CharType {
+	if f.texted {
+		return f.text
+	}
+	f.texted = true
+	buf, err := f.Slice(0, readSz)
+	if err == nil || err == io.EOF {
+		f.text = characterize.Detect(buf)
+	}
+	return f.text
 }

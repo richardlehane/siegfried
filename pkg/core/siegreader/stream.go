@@ -3,6 +3,8 @@ package siegreader
 import (
 	"io"
 	"sync"
+
+	"github.com/richardlehane/characterize"
 )
 
 type stream struct {
@@ -13,6 +15,9 @@ type stream struct {
 
 	limited bool
 	limit   chan struct{}
+
+	texted bool
+	text   characterize.CharType
 
 	mu  sync.Mutex
 	i   int
@@ -31,6 +36,7 @@ func (s *stream) setSource(src io.Reader) error {
 	s.quit = nil
 	s.limited = false
 	s.limit = nil
+	s.texted = false
 	s.i = 0
 	s.eof = false
 	_, err := s.fill()
@@ -212,4 +218,16 @@ func (s *stream) canSeek(o int64, rev bool) (bool, error) {
 		return true, nil
 	}
 	return false, err
+}
+
+func (s *stream) Text() characterize.CharType {
+	if s.texted {
+		return s.text
+	}
+	s.texted = true
+	buf, err := s.Slice(0, readSz)
+	if err == nil || err == io.EOF {
+		s.text = characterize.Detect(buf)
+	}
+	return s.text
 }

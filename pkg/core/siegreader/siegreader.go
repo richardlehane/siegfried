@@ -29,7 +29,11 @@
 //   i3, err := rrdr.ReadByte()
 package siegreader
 
-import "errors"
+import (
+	"errors"
+
+	"github.com/richardlehane/characterize"
+)
 
 var (
 	ErrEmpty     = errors.New("empty source")
@@ -53,6 +57,7 @@ type Buffer interface {
 	Size() int64
 	SizeNow() int64
 	Stream() bool
+	Text() characterize.CharType
 	canSeek(off int64, rev bool) (bool, error)
 	setLimit()
 	waitLimit()

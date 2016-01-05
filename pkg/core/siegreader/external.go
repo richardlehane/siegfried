@@ -1,5 +1,11 @@
 package siegreader
 
+import (
+	"io"
+
+	"github.com/richardlehane/characterize"
+)
+
 type source interface {
 	IsSlicer() bool
 	Slice(off int64, l int) ([]byte, error)
@@ -8,9 +14,14 @@ type source interface {
 }
 
 type external struct {
-	quit    chan struct{}
+	quit chan struct{}
+
 	limited bool
 	limit   chan struct{}
+
+	texted bool
+	text   characterize.CharType
+
 	source
 }
 
@@ -63,4 +74,16 @@ func (e *external) canSeek(off int64, whence bool) (bool, error) {
 		return false, nil
 	}
 	return true, nil
+}
+
+func (e *external) Text() characterize.CharType {
+	if e.texted {
+		return e.text
+	}
+	e.texted = true
+	buf, err := e.Slice(0, readSz)
+	if err == nil || err == io.EOF {
+		e.text = characterize.Detect(buf)
+	}
+	return e.text
 }

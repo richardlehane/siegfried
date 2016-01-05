@@ -61,7 +61,7 @@ func (r result) Basis() string {
 
 func (m *Matcher) Identify(na string, buf siegreader.Buffer) (chan core.Result, error) {
 	if *m > 0 {
-		tt := characterize.Detect(siegreader.ReaderFrom(buf))
+		tt := buf.Text()
 		if tt != characterize.DATA {
 			res := make(chan core.Result, *m)
 			for i := 1; i < int(*m)+1; i++ {
