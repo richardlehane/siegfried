@@ -61,24 +61,11 @@ type bufferSrc interface {
 // Buffer allows multiple readers to read from the same source.
 // Readers include reverse (from EOF) and limit readers.
 type Buffer struct {
-	quit   chan struct{}
+	Quit   chan struct{} // when this channel is closed, readers will return io.EOF
 	texted bool
 	text   characterize.CharType
 	bufferSrc
 }
-
-func (b *Buffer) hasQuit() bool {
-	select {
-	case <-b.quit:
-		return true
-	default:
-	}
-	return false
-}
-
-// SetQuit attaches a channel to the Buffer.
-// When this channel is closed, the Buffer will return io.EOF for any further reads.
-func (b *Buffer) SetQuit(q chan struct{}) { b.quit = q }
 
 // Bytes returns a byte slice for a full read of the buffered file or stream.
 // Returns nil on error

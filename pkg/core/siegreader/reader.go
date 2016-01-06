@@ -60,8 +60,10 @@ func (r *Reader) ReadByte() (byte, error) {
 			return 0, io.EOF
 		}
 		// every slice len check on quit channel
-		if r.hasQuit() {
+		select {
+		case <-r.Quit:
 			return 0, io.EOF
+		default:
 		}
 		err := r.setBuf(r.i)
 		if err != nil && err != io.EOF {
@@ -200,8 +202,10 @@ func (r *ReverseReader) ReadByte() (byte, error) {
 			return 0, io.EOF
 		}
 		// every slice len check quit channel
-		if r.hasQuit() {
+		select {
+		case <-r.Quit:
 			return 0, io.EOF
+		default:
 		}
 		err := r.setBuf(r.i)
 		if err != nil && err != io.EOF {

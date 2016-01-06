@@ -49,7 +49,7 @@ func (b *Matcher) start(bof bool) {
 
 // Identify function - brings a new matcher into existence
 func (b *Matcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan core.Result) {
-	buf.SetQuit(quit)
+	buf.Quit = quit
 	incoming := b.scorer(buf, quit, r)
 	rdr := siegreader.LimitReaderFrom(buf, b.maxBOF)
 	// First test BOF frameset

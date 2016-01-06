@@ -35,7 +35,7 @@ func (s *stream) Size() int64 {
 	select {
 	case <-s.eofc:
 		return int64(s.i)
-	case <-s.b.quit:
+	case <-s.b.Quit:
 		return 0
 	}
 }
@@ -130,7 +130,7 @@ func (s *stream) Slice(off int64, l int) ([]byte, error) {
 func (s *stream) EofSlice(o int64, l int) ([]byte, error) {
 	// block until the EOF is available or we quit
 	select {
-	case <-s.b.quit:
+	case <-s.b.Quit:
 		return nil, ErrQuit
 	case <-s.eofc:
 	}

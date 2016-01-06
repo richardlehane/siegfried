@@ -30,7 +30,7 @@ func setup(r io.Reader, t *testing.T) *Buffer {
 		t.Errorf("Read error: %v", err)
 	}
 	q := make(chan struct{})
-	buf.SetQuit(q)
+	buf.Quit = q
 	return buf
 }
 

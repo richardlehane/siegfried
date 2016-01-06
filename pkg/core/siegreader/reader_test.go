@@ -108,7 +108,7 @@ func TestReuse(t *testing.T) {
 	if err != nil && err != io.EOF {
 		t.Fatal(err)
 	}
-	b.SetQuit(q)
+	b.Quit = q
 	if err != nil && err != io.EOF {
 		t.Errorf("Read error: %v", err)
 	}
@@ -204,7 +204,7 @@ func TestReverseDrainFile(t *testing.T) {
 	}
 	b := setup(r, t)
 	quit := make(chan struct{})
-	b.SetQuit(quit)
+	b.Quit = quit
 	first := ReaderFrom(b)
 	firstResults := make(chan int, 1)
 	last := ReverseReaderFrom(b)
