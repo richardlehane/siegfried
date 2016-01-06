@@ -77,9 +77,11 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 
 ## Recent Changes
-### Version 1.4.4 (forthcoming)
-- speed-up (regression in TIFF mis-identification patch last release)
-- textmatcher revised
+### Version 1.4.4 (9/1/2016)
+- fix speed regression in TIFF mis-identification patch last release
+- refactor textmatcher
+- refactor siegreader
+- code quality: ran go vet, golint and grind over repository
 
 ### Version 1.4.3 (19/12/2015)
 - measure time elapsed with -log time
@@ -95,7 +97,6 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 - webarchive update: [decode Transfer-Encoding and Content-Encoding](https://github.com/richardlehane/webarchive/commit/2f125b9bece4d7d119ea029aa8c942a41962ecf4); requested by [Dragan Espenschied](https://github.com/richardlehane/siegfried/issues/55)
 - bugfix: long windows paths; reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/58)
 - bugfix: 32-bit file size overflow; reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/59)
-
 
 ### Version 1.4.1 (6/11/2015)
 - **-log replaces -debug, -slow, -unknown and -known flags** (see usage above)
@@ -114,7 +115,7 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 ## Rights
 
-Copyright 2015 Richard Lehane 
+Copyright 2016 Richard Lehane 
 
 Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
 

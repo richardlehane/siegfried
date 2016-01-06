@@ -253,7 +253,7 @@ func (s *Siegfried) JSON() string {
 
 // Identify identifies a stream or file object.
 // It takes the name of the file/stream (if unknown, give an empty string) and an io.Reader
-// It returns a channel of identifications and an error
+// It returns a channel of identifications and an error.
 func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identification, error) {
 	buffer, err := s.buffers.Get(r)
 	if err == io.EOF {
@@ -369,7 +369,7 @@ func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identifi
 
 // Blame checks with the byte matcher to see what identification results subscribe to a particular result or test
 // tree index. It can be used when identifying in a debug mode to check which identification results trigger
-// which strikes
+// which strikes.
 func (s *Siegfried) Blame(idx, ct int, cn string) string {
 	matcher := "BYTE MATCHER"
 	matcherType := core.ByteMatcher
@@ -420,7 +420,7 @@ func (s *Siegfried) Blame(idx, ct int, cn string) string {
 }
 
 // Buffer returns the last buffer inspected
-// This prevents unnecessary double-up of IO e.g. when unzipping files post-identification
+// This prevents unnecessary double-up of IO e.g. when unzipping files post-identification.
 func (s *Siegfried) Buffer() *siegreader.Buffer {
 	last := s.buffers.Last()
 	last.Quit = make(chan struct{}) // may have already closed the quit channel
@@ -428,7 +428,7 @@ func (s *Siegfried) Buffer() *siegreader.Buffer {
 }
 
 // Update checks whether a Siegfried struct is due for update, by testing whether the time given is after the time
-// the signature was created
+// the signature was created.
 func (s *Siegfried) Update(t string) bool {
 	tm, err := time.Parse(time.RFC3339, t)
 	if err != nil {

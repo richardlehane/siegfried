@@ -14,10 +14,11 @@
 
 package config
 
+// Archive is a file format capable of decompression by sf.
 type Archive int
 
 const (
-	None Archive = iota
+	None Archive = iota // None means the format cannot be decompressed by sf.
 	Zip
 	Gzip
 	Tar

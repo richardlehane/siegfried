@@ -16,6 +16,7 @@
 // Config options can be overriden with build flags e.g. the brew and archivematica files.
 package config
 
+// Option is a private but exported type. It is a function that sets a siegfried option.
 type Option func() private
 
 type private struct{}
