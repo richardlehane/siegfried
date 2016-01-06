@@ -42,35 +42,6 @@ func (bf *bigfile) reset() {
 	bf.last = 0
 }
 
-type enc uint8
-
-const (
-	notEnc enc = iota
-	wheelEnc
-	eofEnc
-)
-
-// is the requested slice in the wheel or the eof?
-func (bf *bigfile) enclosed(o int64, l int) enc {
-	if bf.sz-o <= int64(eofSz) {
-		return eofEnc
-	}
-	if o >= bf.start && o+int64(l) <= bf.end {
-		return wheelEnc
-	}
-	return notEnc
-}
-
-func (bf *bigfile) adjacent(o int64, l int) bool {
-	if l != readSz {
-		return false
-	}
-	if bf.last == o {
-		return true
-	}
-	return false
-}
-
 func (bf *bigfile) progressSlice(o int64) []byte {
 	if bf.i == 0 {
 		bf.start = o
@@ -88,18 +59,18 @@ func (bf *bigfile) progressSlice(o int64) []byte {
 func (bf *bigfile) slice(o int64, l int) []byte {
 	bf.mu.Lock()
 	defer bf.mu.Unlock()
-	if bf.adjacent(o, l) {
+	if l == readSz && bf.last == o { // if adjacent to last read
 		bf.last += int64(readSz)
 		return bf.progressSlice(o)
 	}
 	ret := make([]byte, l)
-	// if within the wheel copy
-	switch bf.enclosed(o, l) {
-	case eofEnc:
+	// if within the eof or wheel copy
+	switch {
+	case bf.sz-o <= int64(eofSz): // within eof
 		x := eofSz - int(bf.sz-o)
 		copy(ret, bf.eof[x:x+l])
 		return ret
-	case wheelEnc:
+	case o >= bf.start && o+int64(l) <= bf.end: // within wheel
 		copy(ret, bf.wheel[int(o-bf.start):int(o-bf.start)+l])
 		return ret
 	}

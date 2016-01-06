@@ -19,6 +19,6 @@ import "github.com/richardlehane/siegfried/pkg/core/siegreader"
 type Reader interface {
 	Next() error  // when finished, should return io.EOF
 	Name() string // return name of the object with paths concatenated with / character
-	SetSource(*siegreader.Buffers) (siegreader.Buffer, error)
+	SetSource(*siegreader.Buffers) (*siegreader.Buffer, error)
 	Close() // close files
 }

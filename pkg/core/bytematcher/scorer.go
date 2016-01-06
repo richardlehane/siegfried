@@ -164,7 +164,7 @@ func (r result) Basis() string {
 	return r.basis
 }
 
-func (b *Matcher) scorer(buf siegreader.Buffer, q chan struct{}, r chan<- core.Result) chan<- strike {
+func (b *Matcher) scorer(buf *siegreader.Buffer, q chan struct{}, r chan<- core.Result) chan<- strike {
 	incoming := make(chan strike)
 	waitSet := b.priorities.WaitSet()
 	hits := make(map[int]*hitItem)

@@ -3,72 +3,31 @@ package siegreader
 import (
 	"io"
 	"sync"
-
-	"github.com/richardlehane/characterize"
 )
 
 type stream struct {
+	b    *Buffer
 	src  io.Reader
 	buf  []byte
 	eofc chan struct{}
-	quit chan struct{}
-
-	limited bool
-	limit   chan struct{}
-
-	texted bool
-	text   characterize.CharType
 
 	mu  sync.Mutex
 	i   int
 	eof bool
 }
 
-func (s *stream) Stream() bool { return true }
-
 func newStream() interface{} {
 	return &stream{buf: make([]byte, readSz*2)}
 }
 
-func (s *stream) setSource(src io.Reader) error {
+func (s *stream) setSource(src io.Reader, b *Buffer) error {
+	s.b = b
 	s.src = src
 	s.eofc = make(chan struct{})
-	s.quit = nil
-	s.limited = false
-	s.limit = nil
-	s.texted = false
 	s.i = 0
 	s.eof = false
 	_, err := s.fill()
 	return err
-}
-
-func (s *stream) SetQuit(q chan struct{}) {
-	s.quit = q
-}
-
-func (s *stream) setLimit() {
-	s.limited = true
-	s.limit = make(chan struct{})
-}
-
-func (s *stream) waitLimit() {
-	if s.limited {
-		<-s.limit
-	}
-}
-
-func (s *stream) hasQuit() bool {
-	select {
-	case <-s.quit:
-		return true
-	default:
-	}
-	return false
-}
-
-func (s *stream) reachedLimit() {
-	close(s.limit)
 }
 
 // Size returns the buffer's size, which is available immediately for files. Must wait for full read for streams.
@@ -76,12 +35,12 @@ func (s *stream) Size() int64 {
 	select {
 	case <-s.eofc:
 		return int64(s.i)
-	case <-s.quit:
+	case <-s.b.quit:
 		return 0
 	}
 }
 
-// non-blocking Size(), for use with zip reader
+// SizeNow is a non-blocking Size(). Will force a full read of a stream.
 func (s *stream) SizeNow() int64 {
 	var err error
 	for _, err = s.fill(); err == nil; _, err = s.fill() {
@@ -135,7 +94,7 @@ func (s *stream) fill() (int, error) {
 	return s.i, nil
 }
 
-// Return a slice from the buffer that begins at offset off and has length l
+// Slice returns a byte slice from the buffer that begins at offset off and has length l.
 func (s *stream) Slice(off int64, l int) ([]byte, error) {
 	o := int(off)
 	s.mu.Lock()
@@ -166,12 +125,12 @@ func (s *stream) Slice(off int64, l int) ([]byte, error) {
 	return nil, err
 }
 
-// Return a slice from the end of the buffer that begins at offset s and has length l.
-// This will block until the slice is available (which may be until the full stream is read).
+// EofSlice returns a slice from the end of the buffer that begins at offset s and has length l.
+// Blocks until the slice is available (which may be until the full stream is read).
 func (s *stream) EofSlice(o int64, l int) ([]byte, error) {
 	// block until the EOF is available or we quit
 	select {
-	case <-s.quit:
+	case <-s.b.quit:
 		return nil, ErrQuit
 	case <-s.eofc:
 	}
@@ -187,7 +146,10 @@ func (s *stream) EofSlice(o int64, l int) ([]byte, error) {
 }
 
 // fill until a seek to a particular offset is possible, then return true, if it is impossible return false
-func (s *stream) canSeek(o int64, rev bool) (bool, error) {
+func (s *stream) CanSeek(o int64, rev bool) (bool, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
 	if rev {
 		var err error
 		for _, err = s.fill(); err == nil; _, err = s.fill() {
@@ -200,8 +162,7 @@ func (s *stream) canSeek(o int64, rev bool) (bool, error) {
 		}
 		return true, nil
 	}
-	s.mu.Lock()
-	defer s.mu.Unlock()
+
 	var err error
 	var bound int
 	if o > int64(s.i) {
@@ -218,16 +179,4 @@ func (s *stream) canSeek(o int64, rev bool) (bool, error) {
 		return true, nil
 	}
 	return false, err
-}
-
-func (s *stream) Text() characterize.CharType {
-	if s.texted {
-		return s.text
-	}
-	s.texted = true
-	buf, err := s.Slice(0, readSz)
-	if err == nil || err == io.EOF {
-		s.text = characterize.Detect(buf)
-	}
-	return s.text
 }

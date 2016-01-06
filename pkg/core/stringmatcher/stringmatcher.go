@@ -96,7 +96,7 @@ func (m Matcher) add(s string, fmt int) {
 	m[s] = []result{result(fmt)}
 }
 
-func (m Matcher) Identify(s string, na siegreader.Buffer) (chan core.Result, error) {
+func (m Matcher) Identify(s string, na *siegreader.Buffer) (chan core.Result, error) {
 	if len(s) > 0 {
 		if fmts, ok := m[s]; ok {
 			res := make(chan core.Result, len(fmts))

@@ -48,11 +48,10 @@ func (b *Matcher) start(bof bool) {
 }
 
 // Identify function - brings a new matcher into existence
-func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan core.Result) {
+func (b *Matcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan core.Result) {
 	buf.SetQuit(quit)
 	incoming := b.scorer(buf, quit, r)
 	rdr := siegreader.LimitReaderFrom(buf, b.maxBOF)
-
 	// First test BOF frameset
 	bfchan := b.bofFrames.index(buf, false, quit)
 	for bf := range bfchan {
@@ -77,7 +76,7 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 	for br := range bchan {
 		if br.Index[0] == -1 {
 			incoming <- progressStrike(br.Offset, false)
-			if !buf.Stream() && br.Offset > 131072 && (b.maxBOF < 0 || b.maxBOF > b.maxEOF*5) {
+			if br.Offset > 131072 && (b.maxBOF < 0 || b.maxBOF > b.maxEOF*5) { // del buf.Stream
 				break
 			}
 		} else {
@@ -104,6 +103,9 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 
 	// if we have a maximum value on EOF do a sequential search
 	if b.maxEOF >= 0 {
+		if b.maxEOF != 0 {
+			_, _ = buf.CanSeek(0, true) // force a full read to enable EOF scan to proceed for streams
+		}
 		for ef := range efchan {
 			if config.Debug() {
 				fmt.Fprintln(config.Out(), strike{b.eofFrames.testTreeIndex[ef.idx], 0, ef.off, ef.length, true, true})
@@ -142,6 +144,9 @@ func (b *Matcher) identify(buf siegreader.Buffer, quit chan struct{}, r chan cor
 		select {
 		case br, ok := <-bchan:
 			if !ok {
+				if b.maxBOF < 0 && b.maxEOF != 0 {
+					_, _ = buf.CanSeek(0, true) // if we've a limit BOF reader, force a full read to enable EOF scan to proceed for streams
+				}
 				bchan = nil
 			} else {
 				if br.Index[0] == -1 {

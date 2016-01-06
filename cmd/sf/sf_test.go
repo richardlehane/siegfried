@@ -12,7 +12,6 @@ import (
 
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/config"
-	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
@@ -211,7 +210,7 @@ func Test363(t *testing.T) {
 			if i.String() != expect {
 				sbuf := s.Buffer()
 				equal := true
-				if !bytes.Equal(se, siegreader.Bytes(sbuf)) {
+				if !bytes.Equal(se, sbuf.Bytes()) {
 					equal = false
 				}
 				t.Errorf("First buffer on %d iteration: expecting %s, got %s, buffer equality test is %v", iter, expect, i, equal)
@@ -228,7 +227,7 @@ func Test363(t *testing.T) {
 			if i.String() != expect {
 				sbuf := s.Buffer()
 				equal := true
-				if !bytes.Equal(se, siegreader.Bytes(sbuf)) {
+				if !bytes.Equal(se, sbuf.Bytes()) {
 					equal = false
 				}
 				t.Errorf("Second buffer on %d iteration: expecting %s, got %s, buffer equality test is %v", iter, expect, i, equal)

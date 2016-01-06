@@ -178,7 +178,7 @@ func (c *ContainerMatcher) String() string {
 
 type ctype struct {
 	trigger func([]byte) bool
-	rdr     func(siegreader.Buffer) (Reader, error)
+	rdr     func(*siegreader.Buffer) (Reader, error)
 }
 
 var ctypes = []ctype{

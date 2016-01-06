@@ -153,7 +153,7 @@ func (b *Matcher) Add(ss core.SignatureSet, priorities priority.List) (int, erro
 //       fmt.Print("Success! It is signature 0!")
 //     }
 //   }
-func (b *Matcher) Identify(name string, sb siegreader.Buffer) (chan core.Result, error) {
+func (b *Matcher) Identify(name string, sb *siegreader.Buffer) (chan core.Result, error) {
 	quit, ret := make(chan struct{}), make(chan core.Result)
 	go b.identify(sb, quit, ret)
 	return ret, nil

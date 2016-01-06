@@ -421,7 +421,7 @@ func (s *Siegfried) Blame(idx, ct int, cn string) string {
 
 // Buffer returns the last buffer inspected
 // This prevents unnecessary double-up of IO e.g. when unzipping files post-identification
-func (s *Siegfried) Buffer() siegreader.Buffer {
+func (s *Siegfried) Buffer() *siegreader.Buffer {
 	last := s.buffers.Last()
 	last.SetQuit(make(chan struct{})) // may have already closed the quit channel
 	return last

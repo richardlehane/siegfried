@@ -78,6 +78,9 @@ type logWriter struct{}
 func (l logWriter) writeHead(s *siegfried.Siegfried) {}
 func (l logWriter) writeFile(name string, sz int64, mod string, cs []byte, err error, ids iterableID) config.Archive {
 	var arc config.Archive
+	if ids == nil {
+		return 0
+	}
 	for id := ids.next(); id != nil; id = ids.next() {
 		if id.Archive() > 0 {
 			arc = id.Archive()

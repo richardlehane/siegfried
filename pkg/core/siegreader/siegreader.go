@@ -31,6 +31,7 @@ package siegreader
 
 import (
 	"errors"
+	"io"
 
 	"github.com/richardlehane/characterize"
 )
@@ -49,24 +50,39 @@ const (
 	smallFileSz     = readSz * 16
 )
 
-type Buffer interface {
+type bufferSrc interface {
 	Slice(off int64, l int) ([]byte, error)
 	EofSlice(off int64, l int) ([]byte, error)
-	SetQuit(chan struct{})
-	hasQuit() bool
 	Size() int64
 	SizeNow() int64
-	Stream() bool
-	Text() characterize.CharType
-	canSeek(off int64, rev bool) (bool, error)
-	setLimit()
-	waitLimit()
-	reachedLimit()
+	CanSeek(off int64, rev bool) (bool, error)
 }
+
+// Buffer allows multiple readers to read from the same source.
+// Readers include reverse (from EOF) and limit readers.
+type Buffer struct {
+	quit   chan struct{}
+	texted bool
+	text   characterize.CharType
+	bufferSrc
+}
+
+func (b *Buffer) hasQuit() bool {
+	select {
+	case <-b.quit:
+		return true
+	default:
+	}
+	return false
+}
+
+// SetQuit attaches a channel to the Buffer.
+// When this channel is closed, the Buffer will return io.EOF for any further reads.
+func (b *Buffer) SetQuit(q chan struct{}) { b.quit = q }
 
 // Bytes returns a byte slice for a full read of the buffered file or stream.
 // Returns nil on error
-func Bytes(b Buffer) []byte {
+func (b *Buffer) Bytes() []byte {
 	sz := b.SizeNow()
 	// check for int overflow
 	if int64(int(sz)) != sz {
@@ -77,4 +93,17 @@ func Bytes(b Buffer) []byte {
 		return nil
 	}
 	return s
+}
+
+// Text returns the CharType of the first 4096 bytes of the Buffer.
+func (b *Buffer) Text() characterize.CharType {
+	if b.texted {
+		return b.text
+	}
+	b.texted = true
+	buf, err := b.Slice(0, readSz)
+	if err == nil || err == io.EOF {
+		b.text = characterize.Detect(buf)
+	}
+	return b.text
 }

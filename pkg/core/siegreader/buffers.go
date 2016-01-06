@@ -19,6 +19,7 @@ import (
 	"os"
 )
 
+// Buffers is a combined pool of stream, external and file buffers
 type Buffers struct {
 	spool  *pool // Pool of stream Buffers
 	fpool  *pool // Pool of file Buffers
@@ -27,6 +28,7 @@ type Buffers struct {
 	last   *pool
 }
 
+// New creates a new pool of stream, external and file buffers
 func New() *Buffers {
 	return &Buffers{
 		newPool(newStream),
@@ -41,56 +43,68 @@ func New() *Buffers {
 	}
 }
 
-func (b *Buffers) Get(src io.Reader) (Buffer, error) {
+// Get returns a Buffer reading from the provided io.Reader.
+// Get returns a Buffer backed by a stream, external or file
+// source buffer depending on the type of reader.
+// Source buffers are re-cycled where possible.
+func (b *Buffers) Get(src io.Reader) (*Buffer, error) {
 	f, ok := src.(*os.File)
 	if !ok {
 		e, ok := src.(source)
 		if !ok || !e.IsSlicer() {
 			stream := b.spool.get().(*stream)
-			err := stream.setSource(src)
-			return stream, err
+			buf := &Buffer{}
+			err := stream.setSource(src, buf)
+			buf.bufferSrc = stream
+			return buf, err
 		}
 		ext := b.epool.get().(*external)
 		err := ext.setSource(e)
-		return ext, err
+		return &Buffer{bufferSrc: ext}, err
 	}
-	buf := b.fpool.get().(*file)
-	err := buf.setSource(f, b.fdatas)
-	return buf, err
+	fbuf := b.fpool.get().(*file)
+	err := fbuf.setSource(f, b.fdatas)
+	return &Buffer{bufferSrc: fbuf}, err
 }
 
-func (b *Buffers) Put(i Buffer) {
-	switch i.(type) {
+// Put returns a Buffer to the pool for re-cycling.
+func (b *Buffers) Put(i *Buffer) {
+	switch i.bufferSrc.(type) {
 	default:
 		panic("Siegreader: unknown buffer type")
 	case *stream:
-		b.spool.put(i)
+		b.spool.put(i.bufferSrc)
 		b.last = b.spool
 	case *file:
-		b.fdatas.put(i.(*file).data)
-		b.fpool.put(i)
+		b.fdatas.put(i.bufferSrc.(*file).data)
+		b.fpool.put(i.bufferSrc)
 		b.last = b.fpool
 	case *external:
-		b.epool.put(i)
+		b.epool.put(i.bufferSrc)
 		b.last = b.epool
 	}
 }
 
-func (b *Buffers) Last() Buffer {
+// Last retrieves the last Buffer returned to the pool with Put.
+func (b *Buffers) Last() *Buffer {
 	if b.last == nil {
 		return nil
 	}
-	return b.last.get().(Buffer)
+	last := &Buffer{bufferSrc: b.last.get().(bufferSrc)}
+	if str, ok := last.bufferSrc.(*stream); ok {
+		str.b = last
+	}
+	return last
 }
 
-// Data pool (used by file)
+// data pool (used by file)
+// pool of big files, small files, and mmap files
 type datas struct {
 	bfpool *pool
 	sfpool *pool
 	mpool  *pool
 }
 
-// Data pool (used by file)
 func (d *datas) get(f *file) data {
 	if mmapable(f.sz) {
 		m := d.mpool.get().(*mmap)

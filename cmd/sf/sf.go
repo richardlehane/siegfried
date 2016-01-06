@@ -216,7 +216,7 @@ func identifyRdr(w writer, s *siegfried.Siegfried, r io.Reader, sz int64, path, 
 		lg.reset()
 		return
 	}
-	var b siegreader.Buffer
+	var b *siegreader.Buffer
 	var cs []byte
 	if checksum != nil {
 		b = s.Buffer()

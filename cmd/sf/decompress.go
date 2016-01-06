@@ -155,7 +155,7 @@ type gzipD struct {
 	rdr  *gzip.Reader
 }
 
-func newGzip(b siegreader.Buffer, path string) (decompressor, error) {
+func newGzip(b *siegreader.Buffer, path string) (decompressor, error) {
 	_ = b.SizeNow()              // in case of a stream, force full read
 	buf, err := b.EofSlice(0, 4) // gzip stores uncompressed size in last 4 bytes of the stream
 	if err != nil {

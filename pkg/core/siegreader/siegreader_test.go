@@ -24,7 +24,7 @@ func TestNew(t *testing.T) {
 	}
 }
 
-func setup(r io.Reader, t *testing.T) Buffer {
+func setup(r io.Reader, t *testing.T) *Buffer {
 	buf, err := bufs.Get(r)
 	if err != nil && err != io.EOF {
 		t.Errorf("Read error: %v", err)
@@ -51,7 +51,7 @@ func TestBytSource(t *testing.T) {
 	if b.Size() != int64(len(testBytes)) {
 		t.Error("String read: size error")
 	}
-	if len(Bytes(b)) != len(testBytes) {
+	if len(b.Bytes()) != len(testBytes) {
 		t.Error("String read: Bytes() error")
 	}
 	bufs.Put(b)
@@ -64,7 +64,7 @@ func TestFileSource(t *testing.T) {
 	}
 	b := setup(r, t)
 	stat, _ := r.Stat()
-	if len(Bytes(b)) != int(stat.Size()) {
+	if len(b.Bytes()) != int(stat.Size()) {
 		t.Error("File read: Bytes() error")
 	}
 	r.Close()

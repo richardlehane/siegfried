@@ -1,11 +1,5 @@
 package siegreader
 
-import (
-	"io"
-
-	"github.com/richardlehane/characterize"
-)
-
 type source interface {
 	IsSlicer() bool
 	Slice(off int64, l int) ([]byte, error)
@@ -13,24 +7,13 @@ type source interface {
 	Size() int64
 }
 
-type external struct {
-	quit chan struct{}
-
-	limited bool
-	limit   chan struct{}
-
-	texted bool
-	text   characterize.CharType
-
-	source
-}
+// an external buffer is a non-file stream that implements the Slice() etc. methods
+// this is used to prevent unnecessary copying of webarchive WARC/ARC readers
+type external struct{ source }
 
 func newExternal() interface{} { return &external{} }
 
 func (e *external) setSource(src source) error {
-	e.quit = nil
-	e.limited = false
-	e.limit = nil
 	e.source = src
 	if e.Size() == 0 {
 		return ErrEmpty
@@ -38,52 +21,12 @@ func (e *external) setSource(src source) error {
 	return nil
 }
 
+// SizeNow is a non-blocking Size().
 func (e *external) SizeNow() int64 { return e.Size() }
 
-func (e *external) Stream() bool { return false }
-
-func (e *external) SetQuit(q chan struct{}) { e.quit = q }
-
-func (e *external) setLimit() {
-	e.limited = true
-	e.limit = make(chan struct{})
-}
-
-func (e *external) waitLimit() {
-	if e.limited {
-		select {
-		case <-e.limit:
-		case <-e.quit:
-		}
-	}
-}
-
-func (e *external) hasQuit() bool {
-	select {
-	case <-e.quit:
-		return true
-	default:
-	}
-	return false
-}
-
-func (e *external) reachedLimit() { close(e.limit) }
-
-func (e *external) canSeek(off int64, whence bool) (bool, error) {
+func (e *external) CanSeek(off int64, whence bool) (bool, error) {
 	if e.Size() < off {
 		return false, nil
 	}
 	return true, nil
-}
-
-func (e *external) Text() characterize.CharType {
-	if e.texted {
-		return e.text
-	}
-	e.texted = true
-	buf, err := e.Slice(0, readSz)
-	if err == nil || err == io.EOF {
-		e.text = characterize.Detect(buf)
-	}
-	return e.text
 }

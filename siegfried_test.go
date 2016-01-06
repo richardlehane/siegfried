@@ -45,7 +45,7 @@ func TestIdentify(t *testing.T) {
 
 type testEMatcher struct{}
 
-func (t testEMatcher) Identify(n string, sb siegreader.Buffer) (chan core.Result, error) {
+func (t testEMatcher) Identify(n string, sb *siegreader.Buffer) (chan core.Result, error) {
 	ret := make(chan core.Result)
 	go func() {
 		ret <- testResult(0)
@@ -64,7 +64,7 @@ func (t testEMatcher) Add(ss core.SignatureSet, l priority.List) (int, error) { 
 
 type testBMatcher struct{}
 
-func (t testBMatcher) Identify(nm string, sb siegreader.Buffer) (chan core.Result, error) {
+func (t testBMatcher) Identify(nm string, sb *siegreader.Buffer) (chan core.Result, error) {
 	ret := make(chan core.Result)
 	go func() {
 		ret <- testResult(1)

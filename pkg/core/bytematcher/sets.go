@@ -169,7 +169,7 @@ type fsmatch struct {
 	length int
 }
 
-func (fs *frameSet) index(buf siegreader.Buffer, rev bool, quit chan struct{}) chan fsmatch {
+func (fs *frameSet) index(buf *siegreader.Buffer, rev bool, quit chan struct{}) chan fsmatch {
 	ret := make(chan fsmatch)
 	go func() {
 		var i int

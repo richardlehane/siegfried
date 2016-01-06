@@ -83,7 +83,7 @@ type Identification interface {
 
 // Matcher does the matching (against the name/mime string or the byte stream) and sends results
 type Matcher interface {
-	Identify(string, siegreader.Buffer) (chan Result, error)
+	Identify(string, *siegreader.Buffer) (chan Result, error)
 	Add(SignatureSet, priority.List) (int, error) // add a signature set, return total number of signatures in a matcher
 	String() string
 	Save(*persist.LoadSaver)

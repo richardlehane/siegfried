@@ -4,69 +4,29 @@ import (
 	"io"
 	"os"
 	"sync"
-
-	"github.com/richardlehane/characterize"
 )
 
 type file struct {
 	peek [initialRead]byte
 	sz   int64
-	quit chan struct{}
 	src  *os.File
 	once *sync.Once
 	data
 
-	limited bool
-	limit   chan struct{}
-
-	texted bool
-	text   characterize.CharType
-
 	pool *datas // link to the data pool
 }
 
-func (f *file) Stream() bool { return false }
+func newFile() interface{} { return &file{once: &sync.Once{}} }
 
 type data interface {
 	slice(offset int64, length int) []byte
 	eofSlice(offset int64, length int) []byte
 }
 
-func (f *file) setLimit() {
-	f.limited = true
-	f.limit = make(chan struct{})
-}
-
-func (f *file) waitLimit() {
-	if f.limited {
-		select {
-		case <-f.limit:
-		case <-f.quit:
-		}
-	}
-}
-
-func (f *file) hasQuit() bool {
-	select {
-	case <-f.quit:
-		return true
-	default:
-	}
-	return false
-}
-
-func (f *file) reachedLimit() {
-	close(f.limit)
-}
-func newFile() interface{} { return &file{once: &sync.Once{}} }
-
 func (f *file) setSource(src *os.File, p *datas) error {
 	// reset
 	f.once = &sync.Once{}
 	f.data = nil
-	f.limit = nil
-	f.limited = false
-
 	f.pool = p
 	f.src = src
 	info, err := f.src.Stat()
@@ -86,19 +46,20 @@ func (f *file) setSource(src *os.File, p *datas) error {
 	return err
 }
 
-func (f *file) SetQuit(q chan struct{}) { f.quit = q }
-
+// Size returns the buffer's size, which is available immediately for files. Must wait for full read for streams.
 func (f *file) Size() int64 { return f.sz }
 
+// SizeNow is a non-blocking Size().
 func (f *file) SizeNow() int64 { return f.sz }
 
-func (f *file) canSeek(off int64, whence bool) (bool, error) {
+func (f *file) CanSeek(off int64, whence bool) (bool, error) {
 	if f.sz < off {
 		return false, nil
 	}
 	return true, nil
 }
 
+// Slice returns a byte slice from the buffer that begins at offset off and has length l.
 func (f *file) Slice(off int64, l int) ([]byte, error) {
 	// return EOF if offset is larger than the file size
 	if off >= f.sz {
@@ -119,6 +80,8 @@ func (f *file) Slice(off int64, l int) ([]byte, error) {
 	return ret, err
 }
 
+// EofSlice returns a slice from the end of the buffer that begins at offset s and has length l.
+// May block until the slice is available.
 func (f *file) EofSlice(off int64, l int) ([]byte, error) {
 	// if the offset is larger than the file size, it is invalid
 	if off >= f.sz {
@@ -137,16 +100,4 @@ func (f *file) EofSlice(off int64, l int) ([]byte, error) {
 	f.once.Do(func() { f.data = f.pool.get(f) })
 	ret := f.eofSlice(off, l)
 	return ret, err
-}
-
-func (f *file) Text() characterize.CharType {
-	if f.texted {
-		return f.text
-	}
-	f.texted = true
-	buf, err := f.Slice(0, readSz)
-	if err == nil || err == io.EOF {
-		f.text = characterize.Detect(buf)
-	}
-	return f.text
 }
