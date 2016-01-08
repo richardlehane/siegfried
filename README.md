@@ -45,7 +45,7 @@ Key features are:
     sf -log p,t DIR > results.yaml             // Log progress and time while redirecting results
 
 
-![asciicast](https://asciinema.org/a/14.png)](https://asciinema.org/a/14)
+[![asciicast](https://asciinema.org/a/14.png)](https://asciinema.org/a/14)
 
 By default, siegfried uses the latest PRONOM and container signatures with no buffer limits. You can customise your signature file by using the [roy tool](https://github.com/richardlehane/siegfried/wiki/Building-a-signature-file-with-ROY).
 
