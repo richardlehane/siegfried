@@ -8,7 +8,6 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/persist"
 )
 
-// Shared test testNodes
 var TesttestNodes = []*testNode{
 	&testNode{
 		Frame:   tests.TestFrames[3],
@@ -34,7 +33,6 @@ var TesttestNodes = []*testNode{
 	},
 }
 
-// Shared test testTree (exported so they can be used by the other bytematcher packages)
 var TestTestTree = &testTree{
 	complete: []keyFrameID{},
 	incomplete: []followUp{

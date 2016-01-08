@@ -14,7 +14,7 @@
 
 package frames
 
-// Signature is just a slice of frames
+// Signature is just a slice of frames.
 type Signature []Frame
 
 func (s Signature) String() string {
@@ -28,7 +28,7 @@ func (s Signature) String() string {
 	return "(" + str + ")"
 }
 
-// Equals tests equality of two signatures
+// Equals tests equality of two signatures.
 func (s Signature) Equals(s1 Signature) bool {
 	if len(s) != len(s1) {
 		return false
@@ -84,7 +84,7 @@ func (s Signature) reverse(last bool, min int) Signature {
 // Mirror returns a signature in which wildcard previous segments are turned into wildcard succ/eof segments.
 // If no wildcard previous segments are present, nil is returned.
 func (s Signature) Mirror() Signature {
-	bignum := 1000000
+	const bignum = 1000000
 	segments := s.Segment(bignum, bignum)
 	var hasWild = -1
 	for i, v := range segments {

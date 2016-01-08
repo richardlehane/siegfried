@@ -21,7 +21,7 @@ import (
 	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns/tests"
 )
 
-// Shared test frames (exported so they can be used by the other bytematcher packages)
+// TestFrames are exported so they can be used by the other bytematcher packages.
 var TestFrames = []Frame{
 	Fixed{BOF, 0, TestSequences[0]},      //0 test
 	Fixed{BOF, 0, TestSequences[1]},      // test
@@ -44,7 +44,7 @@ var TestFrames = []Frame{
 	Fixed{BOF, 0, TestLists[0]},
 }
 
-// Two test signatures: fmt/134 and fmt/418 (exported so they can be used by the other bytematcher packages)
+// TestFmts tests some particularly problematic formats.
 var TestFmts = map[int]Signature{
 	134: Signature{
 		Fixed{BOF, 0, patterns.Sequence{255, 254}},
@@ -86,7 +86,7 @@ var TestFmts = map[int]Signature{
 	},
 }
 
-// Shared test signatures (exported so they can be used by the other bytematcher packages)
+// TestSignatures are exported so they can be used by the other bytematcher packages.
 var TestSignatures = []Signature{
 	Signature{TestFrames[0], TestFrames[6], TestFrames[10], TestFrames[2], TestFrames[7]},                 // [BOF 0:test], [P 10-20:TESTY|YNESS], [S *:test|testy], [S 0:testy], [E 10-20:test|testy] 3 Segments
 	Signature{TestFrames[1], TestFrames[6], TestFrames[8], TestFrames[2], TestFrames[10], TestFrames[17]}, // [BOF 0:test], [P 10-20:TESTY|YNESS], [P 0-1:TEST], [S 0:testy], [S *:test|testy], [E 0:23] 3 segments

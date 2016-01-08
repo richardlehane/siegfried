@@ -58,14 +58,17 @@ var siegfried = struct {
 
 // GETTERS
 
+// Version reports the siegfried version.
 func Version() [3]int {
 	return siegfried.version
 }
 
+// Home reports the siegfried HOME location (e.g. /usr/home/siegfried).
 func Home() string {
 	return siegfried.home
 }
 
+// Signature returns the path to the siegfried signature file.
 func Signature() string {
 	if filepath.Dir(siegfried.signature) == "." {
 		return filepath.Join(siegfried.home, siegfried.signature)
@@ -73,60 +76,83 @@ func Signature() string {
 	return siegfried.signature
 }
 
+// SignatureBase returns the filename of the siegfried signature file.
 func SignatureBase() string {
 	return siegfried.signature
 }
 
+// Magic returns the magic string encoded at the start of a siegfried signature file.
 func Magic() []byte {
 	return siegfried.magic
 }
 
+// Distance is a bytematcher setting. It controls the absolute widths at which segments in signatures are split.
+// E.g. if segments are separated by a minimum of 50 and maximum of 100 bytes, the distance is 100.
+// A short distance means a smaller Aho Corasick search tree and more patterns to follow-up.
+// A long distance means a larger Aho Corasick search tree and more signatures immediately satisfied without follow-up pattern matching.
 func Distance() int {
 	return siegfried.distance
 }
 
+// Range is a bytematcher setting. It controls the relative widths at which segments in signatures are split.
+// E.g. if segments are separated by a minimum of 50 and maximum of 100 bytes, the range is 50.
+// A small range means a smaller Aho Corasick search tree and more patterns to follow-up.
+// A large range means a larger Aho Corasick search tree and more signatures immediately satisfied without follow-up pattern matching.
 func Range() int {
 	return siegfried.rng
 }
 
+// Choices is a bytematcher setting. It controls the number of tolerable strings produced by processing signature segments.
+// E.g. signature has two adjoining frames ("PDF") and ("1.1" OR "1.2") it can be processed into two search strings: "PDF1.1" and "PDF1.2".
+// A low number of choices means a smaller Aho Corasick search tree and more patterns to follow-up.
+// A large of choices means a larger Aho Corasick search tree and more signatures immediately satisfied without follow-up pattern matching.
 func Choices() int {
 	return siegfried.choices
 }
 
+// UpdateOptions returns the update URL, timeout and transport for the sf -update command.
 func UpdateOptions() (string, time.Duration, *http.Transport) {
 	return siegfried.updateURL, siegfried.updateTimeout, siegfried.updateTransport
 }
 
+// Fpr reports whether sf is being run in -fpr (Archivematica format policy registry) mode.
 func Fpr() string {
 	return siegfried.fpr
 }
 
+// Debug reports whether debug logging is activated.
 func Debug() bool {
 	return siegfried.debug
 }
 
+// Slow reports whether slow logging is activated.
 func Slow() bool {
 	return siegfried.slow
 }
 
+// Out reports the target for logging messages (STDOUT or STDIN).
 func Out() io.Writer {
 	return siegfried.out
 }
 
+// Checkpoint reports the offset at which slow logging should trigger.
 func Checkpoint(i int64) bool {
 	return i == siegfried.checkpoint
 }
 
 // SETTERS
 
+// SetHome sets the siegfried HOME location (e.g. /usr/home/siegfried).
 func SetHome(h string) {
 	siegfried.home = h
 }
 
+// SetSignature sets the signature filename or filepath.
 func SetSignature(s string) {
 	siegfried.signature = s
 }
 
+// SetDistance sets the distance variable for the bytematcher.
 func SetDistance(i int) func() private {
 	return func() private {
 		siegfried.distance = i
@@ -134,6 +160,7 @@ func SetDistance(i int) func() private {
 	}
 }
 
+// SetRange sets the range variable for the bytematcher.
 func SetRange(i int) func() private {
 	return func() private {
 		siegfried.rng = i
@@ -141,6 +168,7 @@ func SetRange(i int) func() private {
 	}
 }
 
+// SetDistance sets the choices variable for the bytematcher.
 func SetChoices(i int) func() private {
 	return func() private {
 		siegfried.choices = i
@@ -148,14 +176,17 @@ func SetChoices(i int) func() private {
 	}
 }
 
+// SetDebug sets degub logging on.
 func SetDebug() {
 	siegfried.debug = true
 }
 
+// SetSlow sets slow logging on.
 func SetSlow() {
 	siegfried.slow = true
 }
 
+// SetOut sets the target for logging.
 func SetOut(o io.Writer) {
 	siegfried.out = o
 }

@@ -13,7 +13,7 @@
 // limitations under the License.
 
 // Package patterns describes the Pattern interface.
-// Two standard patterns are also defined in this package, Sequence and Choice.
+// Standard patterns are also defined in this package: Sequence (as well as BMH and reverse BMH Sequence), Choice, List and Not.
 package patterns
 
 import (
@@ -35,6 +35,9 @@ func init() {
 	Register(rbmhLoader, loadRBMH)
 }
 
+// Stringify returns a string version of a byte slice.
+// If all bytes are UTF8, an ASCII string is returned
+// Otherwise a hex string is returned.
 func Stringify(b []byte) string {
 	if utf8.Valid(b) {
 		return strconv.QuoteToASCII(string(b))
@@ -56,6 +59,7 @@ type Pattern interface {
 	Save(*persist.LoadSaver) // encode the pattern into bytes for saving in a persist file
 }
 
+// Loader loads a Pattern.
 type Loader func(*persist.LoadSaver) Pattern
 
 const (
@@ -69,10 +73,12 @@ const (
 
 var loaders = [32]Loader{}
 
+// Register a new Loader (provide an id higher than 16).
 func Register(id byte, l Loader) {
 	loaders[int(id)] = l
 }
 
+// Load loads the Pattern, choosing the correct Loader by the leading id byte.
 func Load(ls *persist.LoadSaver) Pattern {
 	id := ls.LoadByte()
 	l := loaders[int(id)]
@@ -88,6 +94,9 @@ func Load(ls *persist.LoadSaver) Pattern {
 // Sequence is a matching sequence of bytes.
 type Sequence []byte
 
+// Test bytes against the pattern.
+// For a positive match, the integer value represents the length of the match.
+// For a negative match, the integer represents an offset jump before a subsequent test.
 func (s Sequence) Test(b []byte) (bool, int) {
 	if len(b) < len(s) {
 		return false, 0
@@ -98,6 +107,9 @@ func (s Sequence) Test(b []byte) (bool, int) {
 	return false, 1
 }
 
+// Test bytes against the pattern in reverse.
+// For a positive match, the integer value represents the length of the match.
+// For a negative match, the integer represents an offset jump before a subsequent test.
 func (s Sequence) TestR(b []byte) (bool, int) {
 	if len(b) < len(s) {
 		return false, 0
@@ -108,6 +120,7 @@ func (s Sequence) TestR(b []byte) (bool, int) {
 	return false, 1
 }
 
+// Equals reports whether a pattern is identical to another pattern.
 func (s Sequence) Equals(pat Pattern) bool {
 	seq2, ok := pat.(Sequence)
 	if ok {
@@ -116,14 +129,17 @@ func (s Sequence) Equals(pat Pattern) bool {
 	return false
 }
 
+// Length returns a minimum and maximum length for the pattern.
 func (s Sequence) Length() (int, int) {
 	return len(s), len(s)
 }
 
+// NumSequences reports how many plain sequences are needed to represent this pattern.
 func (s Sequence) NumSequences() int {
 	return 1
 }
 
+// Sequences converts the pattern into a slice of plain sequences.
 func (s Sequence) Sequences() []Sequence {
 	return []Sequence{s}
 }
@@ -141,6 +157,7 @@ func (s Sequence) Reverse() Sequence {
 	return p
 }
 
+// Save persists the pattern.
 func (s Sequence) Save(ls *persist.LoadSaver) {
 	ls.SaveByte(sequenceLoader)
 	ls.SaveBytes(s)
@@ -173,14 +190,21 @@ func (c Choice) test(b []byte, f func(Pattern, []byte) (bool, int)) (bool, int) 
 	return r, fl
 }
 
+// Test bytes against the pattern.
+// For a positive match, the integer value represents the length of the match.
+// For a negative match, the integer represents an offset jump before a subsequent test.
 func (c Choice) Test(b []byte) (bool, int) {
 	return c.test(b, Pattern.Test)
 }
 
+// Test bytes against the pattern in reverse.
+// For a positive match, the integer value represents the length of the match.
+// For a negative match, the integer represents an offset jump before a subsequent test.
 func (c Choice) TestR(b []byte) (bool, int) {
 	return c.test(b, Pattern.TestR)
 }
 
+// Equals reports whether a pattern is identical to another pattern.
 func (c Choice) Equals(pat Pattern) bool {
 	c2, ok := pat.(Choice)
 	if ok {
@@ -202,6 +226,7 @@ func (c Choice) Equals(pat Pattern) bool {
 	return false
 }
 
+// Length returns a minimum and maximum length for the pattern.
 func (c Choice) Length() (int, int) {
 	var min, max int
 	if len(c) > 0 {
@@ -219,6 +244,7 @@ func (c Choice) Length() (int, int) {
 	return min, max
 }
 
+// NumSequences reports how many plain sequences are needed to represent this pattern.
 func (c Choice) NumSequences() int {
 	var s int
 	for _, pat := range c {
@@ -231,6 +257,7 @@ func (c Choice) NumSequences() int {
 	return s
 }
 
+// Sequences converts the pattern into a slice of plain sequences.
 func (c Choice) Sequences() []Sequence {
 	num := c.NumSequences()
 	seqs := make([]Sequence, 0, num)
@@ -251,6 +278,7 @@ func (c Choice) String() string {
 	return s + "]"
 }
 
+// Save persists the pattern.
 func (c Choice) Save(ls *persist.LoadSaver) {
 	ls.SaveByte(choiceLoader)
 	ls.SaveSmallInt(len(c))
@@ -271,6 +299,9 @@ func loadChoice(ls *persist.LoadSaver) Pattern {
 // List is a slice of patterns, all of which must test true sequentially in order for the pattern to succeed.
 type List []Pattern
 
+// Test bytes against the pattern.
+// For a positive match, the integer value represents the length of the match.
+// For a negative match, the integer represents an offset jump before a subsequent test.
 func (l List) Test(b []byte) (bool, int) {
 	if len(l) < 1 {
 		return false, 0
@@ -295,6 +326,9 @@ func (l List) Test(b []byte) (bool, int) {
 	return true, total
 }
 
+// Test bytes against the pattern in reverse.
+// For a positive match, the integer value represents the length of the match.
+// For a negative match, the integer represents an offset jump before a subsequent test.
 func (l List) TestR(b []byte) (bool, int) {
 	if len(l) < 1 {
 		return false, 0
@@ -319,6 +353,7 @@ func (l List) TestR(b []byte) (bool, int) {
 	return true, total
 }
 
+// Equals reports whether a pattern is identical to another pattern.
 func (l List) Equals(pat Pattern) bool {
 	l2, ok := pat.(List)
 	if ok {
@@ -333,6 +368,7 @@ func (l List) Equals(pat Pattern) bool {
 	return true
 }
 
+// Length returns a minimum and maximum length for the pattern.
 func (l List) Length() (int, int) {
 	var min, max int
 	for _, pat := range l {
@@ -343,6 +379,7 @@ func (l List) Length() (int, int) {
 	return min, max
 }
 
+// NumSequences reports how many plain sequences are needed to represent this pattern.
 func (l List) NumSequences() int {
 	s := 1
 	for _, pat := range l {
@@ -355,6 +392,7 @@ func (l List) NumSequences() int {
 	return s
 }
 
+// Sequences converts the pattern into a slice of plain sequences.
 func (l List) Sequences() []Sequence {
 	total := l.NumSequences()
 	seqs := make([]Sequence, total)
@@ -383,6 +421,7 @@ func (l List) String() string {
 	return s + "]"
 }
 
+// Save persists the pattern.
 func (l List) Save(ls *persist.LoadSaver) {
 	ls.SaveByte(listLoader)
 	ls.SaveSmallInt(len(l))
@@ -400,8 +439,12 @@ func loadList(ls *persist.LoadSaver) Pattern {
 	return list
 }
 
+// Not contains a pattern and reports the opposite of that pattern's result when testing.
 type Not struct{ Pattern }
 
+// Test bytes against the pattern.
+// For a positive match, the integer value represents the length of the match.
+// For a negative match, the integer represents an offset jump before a subsequent test.
 func (n Not) Test(b []byte) (bool, int) {
 	min, _ := n.Pattern.Length()
 	if len(b) < min {
@@ -414,6 +457,9 @@ func (n Not) Test(b []byte) (bool, int) {
 	return false, 1
 }
 
+// Test bytes against the pattern in reverse.
+// For a positive match, the integer value represents the length of the match.
+// For a negative match, the integer represents an offset jump before a subsequent test.
 func (n Not) TestR(b []byte) (bool, int) {
 	min, _ := n.Pattern.Length()
 	if len(b) < min {
@@ -426,6 +472,7 @@ func (n Not) TestR(b []byte) (bool, int) {
 	return false, 1
 }
 
+// Equals reports whether a pattern is identical to another pattern.
 func (n Not) Equals(pat Pattern) bool {
 	n2, ok := pat.(Not)
 	if ok {
@@ -434,11 +481,13 @@ func (n Not) Equals(pat Pattern) bool {
 	return false
 }
 
+// Length returns a minimum and maximum length for the pattern.
 func (n Not) Length() (int, int) {
 	min, _ := n.Pattern.Length()
 	return min, min
 }
 
+// NumSequences reports how many plain sequences are needed to represent this pattern.
 func (n Not) NumSequences() int {
 	_, max := n.Pattern.Length()
 	if max > 1 {
@@ -451,6 +500,7 @@ func (n Not) NumSequences() int {
 	return 256 - num
 }
 
+// Sequences converts the pattern into a slice of plain sequences.
 func (n Not) Sequences() []Sequence {
 	num := n.NumSequences()
 	if num < 1 {
@@ -482,6 +532,7 @@ func (n Not) String() string {
 	return "not[" + n.Pattern.String() + "]"
 }
 
+// Save persists the pattern.
 func (n Not) Save(ls *persist.LoadSaver) {
 	ls.SaveByte(notLoader)
 	n.Pattern.Save(ls)

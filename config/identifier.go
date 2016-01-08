@@ -23,24 +23,26 @@ import (
 var identifier = struct {
 	name        string // Name of the default identifier
 	details     string // a short string describing the signature e.g. with what DROID and container file versions was it built?
-	maxBOF      int
-	maxEOF      int
-	noEOF       bool
-	noContainer bool
-	noPriority  bool
-	noText      bool
-	noExt       bool
-	noMIME      bool
+	maxBOF      int    // maximum offset from beginning of file to scan
+	maxEOF      int    // maximum offset from end of file to scan
+	noEOF       bool   // trim end of file segments from signatures
+	noContainer bool   // don't build with container signatures
+	noPriority  bool   // ignore priority relations between signatures
+	noText      bool   // don't build with text signatures
+	noExt       bool   // don't build with extension signatures
+	noMIME      bool   // don't build with MIME signatures
 }{
 	name: "pronom",
 }
 
 // GETTERS
 
+// Name returns the name of the identifier.
 func Name() string {
 	return identifier.name
 }
 
+// Details returns a description of the identifier. This is auto-populated if not set directly.
 func Details() string {
 	// if the details string has been explicitly set, return it
 	if len(identifier.details) > 0 {
@@ -96,40 +98,49 @@ func Details() string {
 	return str
 }
 
+// MaxBOF returns any BOF buffer limit set.
 func MaxBOF() int {
 	return identifier.maxBOF
 }
 
+// MaxEOF returns any EOF buffer limit set.
 func MaxEOF() int {
 	return identifier.maxEOF
 }
 
+// NoEOF reports whether end of file segments of signatures should be trimmed.
 func NoEOF() bool {
 	return identifier.noEOF
 }
 
+// NoContainer reports whether container signatures should be omitted.
 func NoContainer() bool {
 	return identifier.noContainer
 }
 
+// NoPriority reports whether priorities between signatures should be omitted.
 func NoPriority() bool {
 	return identifier.noPriority
 }
 
+// NoText reports whether text signatures should be omitted.
 func NoText() bool {
 	return identifier.noText
 }
 
+// NoExt reports whether extension signatures should be omitted.
 func NoExt() bool {
 	return identifier.noExt
 }
 
+// NoMIME reports whether MIME signatures should be omitted.
 func NoMIME() bool {
 	return identifier.noMIME
 }
 
 // SETTERS
 
+// SetName sets the name of the identifier.
 func SetName(n string) func() private {
 	return func() private {
 		identifier.name = n
@@ -137,6 +148,8 @@ func SetName(n string) func() private {
 	}
 }
 
+// SetDetails sets the identifier's description. If not provided, this description is
+// automatically generated based on options set.
 func SetDetails(d string) func() private {
 	return func() private {
 		identifier.details = d
@@ -144,6 +157,7 @@ func SetDetails(d string) func() private {
 	}
 }
 
+// SetBOF limits the number of bytes to scan from the beginning of file.
 func SetBOF(b int) func() private {
 	return func() private {
 		identifier.maxBOF = b
@@ -151,6 +165,7 @@ func SetBOF(b int) func() private {
 	}
 }
 
+// SetEOF limits the number of bytes to scan from the end of file.
 func SetEOF(e int) func() private {
 	return func() private {
 		identifier.maxEOF = e
@@ -158,6 +173,7 @@ func SetEOF(e int) func() private {
 	}
 }
 
+// SetNoEOF will cause end of file segments to be trimmed from signatures.
 func SetNoEOF() func() private {
 	return func() private {
 		identifier.noEOF = true
@@ -165,6 +181,7 @@ func SetNoEOF() func() private {
 	}
 }
 
+// SetNoContainer will cause container signatures to be omitted.
 func SetNoContainer() func() private {
 	return func() private {
 		identifier.noContainer = true
@@ -172,6 +189,7 @@ func SetNoContainer() func() private {
 	}
 }
 
+// SetNoPriority will cause priority relations between signatures to be omitted.
 func SetNoPriority() func() private {
 	return func() private {
 		identifier.noPriority = true
@@ -179,6 +197,7 @@ func SetNoPriority() func() private {
 	}
 }
 
+// SetNoText will cause text signatures to be omitted.
 func SetNoText() func() private {
 	return func() private {
 		identifier.noText = true
@@ -186,6 +205,7 @@ func SetNoText() func() private {
 	}
 }
 
+// SetNoExt will cause extension signatures to be omitted.
 func SetNoExt() func() private {
 	return func() private {
 		identifier.noExt = true
@@ -193,6 +213,7 @@ func SetNoExt() func() private {
 	}
 }
 
+// SetNoMIME will cause MIME signatures to be omitted.
 func SetNoMIME() func() private {
 	return func() private {
 		identifier.noMIME = true

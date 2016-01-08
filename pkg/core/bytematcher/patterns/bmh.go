@@ -20,7 +20,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/persist"
 )
 
-// Helper func to turn patterns into BMH sequences if possible
+// BMH turns patterns into BMH sequences if possible.
 func BMH(p Pattern, rev bool) Pattern {
 	s, ok := p.(Sequence)
 	if !ok {
@@ -32,14 +32,14 @@ func BMH(p Pattern, rev bool) Pattern {
 	return NewBMHSequence(s)
 }
 
-// BMH Sequence is an optimised version of the regular Sequence pattern.
+// BMHSequence is an optimised version of the regular Sequence pattern.
 // It is used behind the scenes in the Bytematcher package to speed up matching and should not be used directly in other packages (use the plain Sequence instead).
 type BMHSequence struct {
 	Seq   Sequence
 	Shift [256]int
 }
 
-// Create a standard BMH sequence
+// NewBMHSequence turns a Sequence into a BMHSequence.
 func NewBMHSequence(s Sequence) *BMHSequence {
 	var shift [256]int
 	for i, _ := range shift {
@@ -52,6 +52,9 @@ func NewBMHSequence(s Sequence) *BMHSequence {
 	return &BMHSequence{s, shift}
 }
 
+// Test bytes against the pattern.
+// For a positive match, the integer value represents the length of the match.
+// For a negative match, the integer represents an offset jump before a subsequent test.
 func (s *BMHSequence) Test(b []byte) (bool, int) {
 	if len(b) < len(s.Seq) {
 		return false, 0
@@ -64,6 +67,9 @@ func (s *BMHSequence) Test(b []byte) (bool, int) {
 	return true, len(s.Seq)
 }
 
+// Test bytes against the pattern in reverse.
+// For a positive match, the integer value represents the length of the match.
+// For a negative match, the integer represents an offset jump before a subsequent test.
 func (s *BMHSequence) TestR(b []byte) (bool, int) {
 	if len(b) < len(s.Seq) {
 		return false, 0
@@ -74,6 +80,7 @@ func (s *BMHSequence) TestR(b []byte) (bool, int) {
 	return false, 1
 }
 
+// Equals reports whether a pattern is identical to another pattern.
 func (s *BMHSequence) Equals(pat Pattern) bool {
 	seq2, ok := pat.(*BMHSequence)
 	if ok {
@@ -82,14 +89,17 @@ func (s *BMHSequence) Equals(pat Pattern) bool {
 	return false
 }
 
+// Length returns a minimum and maximum length for the pattern.
 func (s *BMHSequence) Length() (int, int) {
 	return len(s.Seq), len(s.Seq)
 }
 
+// NumSequences reports how many plain sequences are needed to represent this pattern.
 func (s *BMHSequence) NumSequences() int {
 	return 1
 }
 
+// Sequences converts the pattern into a slice of plain sequences.
 func (s *BMHSequence) Sequences() []Sequence {
 	return []Sequence{s.Seq}
 }
@@ -98,6 +108,7 @@ func (s *BMHSequence) String() string {
 	return "seq " + Stringify(s.Seq)
 }
 
+// Save persists the pattern.
 func (s *BMHSequence) Save(ls *persist.LoadSaver) {
 	ls.SaveByte(bmhLoader)
 	ls.SaveBytes(s.Seq)
@@ -115,14 +126,14 @@ func loadBMH(ls *persist.LoadSaver) Pattern {
 	return bmh
 }
 
-// RBMH Sequence is a variant of the BMH sequence designed for reverse (R-L) matching.
+// RBMHSequence is a variant of the BMH sequence designed for reverse (R-L) matching.
 // It is used behind the scenes in the Bytematcher package to speed up matching and should not be used directly in other packages (use the plain Sequence instead).
 type RBMHSequence struct {
 	Seq   Sequence
 	Shift [256]int
 }
 
-// Create a reverse matching BMH sequence (apply the BMH optimisation to TestR rather than Test)
+// NewRBMHSequence create a reverse matching BMH sequence (apply the BMH optimisation to TestR rather than Test).
 func NewRBMHSequence(s Sequence) *RBMHSequence {
 	var shift [256]int
 	for i, _ := range shift {
@@ -135,6 +146,9 @@ func NewRBMHSequence(s Sequence) *RBMHSequence {
 	return &RBMHSequence{s, shift}
 }
 
+// Test bytes against the pattern.
+// For a positive match, the integer value represents the length of the match.
+// For a negative match, the integer represents an offset jump before a subsequent test.
 func (s *RBMHSequence) Test(b []byte) (bool, int) {
 	if len(b) < len(s.Seq) {
 		return false, 0
@@ -145,6 +159,9 @@ func (s *RBMHSequence) Test(b []byte) (bool, int) {
 	return false, 1
 }
 
+// Test bytes against the pattern in reverse.
+// For a positive match, the integer value represents the length of the match.
+// For a negative match, the integer represents an offset jump before a subsequent test.
 func (s *RBMHSequence) TestR(b []byte) (bool, int) {
 	if len(b) < len(s.Seq) {
 		return false, 0
@@ -157,6 +174,7 @@ func (s *RBMHSequence) TestR(b []byte) (bool, int) {
 	return true, len(s.Seq)
 }
 
+// Equals reports whether a pattern is identical to another pattern.
 func (s *RBMHSequence) Equals(pat Pattern) bool {
 	seq2, ok := pat.(*RBMHSequence)
 	if ok {
@@ -165,14 +183,17 @@ func (s *RBMHSequence) Equals(pat Pattern) bool {
 	return false
 }
 
+// Length returns a minimum and maximum length for the pattern.
 func (s *RBMHSequence) Length() (int, int) {
 	return len(s.Seq), len(s.Seq)
 }
 
+// NumSequences reports how many plain sequences are needed to represent this pattern.
 func (s *RBMHSequence) NumSequences() int {
 	return 1
 }
 
+// Sequences converts the pattern into a slice of plain sequences.
 func (s *RBMHSequence) Sequences() []Sequence {
 	return []Sequence{s.Seq}
 }
@@ -181,6 +202,7 @@ func (s *RBMHSequence) String() string {
 	return "seq " + Stringify(s.Seq)
 }
 
+// Save persists the pattern.
 func (s *RBMHSequence) Save(ls *persist.LoadSaver) {
 	ls.SaveByte(rbmhLoader)
 	ls.SaveBytes(s.Seq)

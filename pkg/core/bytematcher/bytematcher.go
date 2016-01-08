@@ -27,7 +27,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
-// Bytematcher structure.
+// Matcher matches byte signatures against the siegreader.Buffer.
 type Matcher struct {
 	// the following fields are persisted
 	keyFrames  [][]keyFrame
@@ -48,6 +48,7 @@ type Matcher struct {
 	lowmem bool
 }
 
+// New returns a new Matcher.
 func New() *Matcher {
 	return &Matcher{
 		bofFrames:  &frameSet{},
@@ -59,8 +60,10 @@ func New() *Matcher {
 	}
 }
 
+// SignatureSet for a bytematcher is a slice of frames.Signature.
 type SignatureSet []frames.Signature
 
+// Load loads a Matcher.
 func Load(ls *persist.LoadSaver) *Matcher {
 	if !ls.LoadBool() {
 		return nil
@@ -81,6 +84,7 @@ func Load(ls *persist.LoadSaver) *Matcher {
 	}
 }
 
+// Save persists a Matcher.
 func (b *Matcher) Save(ls *persist.LoadSaver) {
 	if b == nil {
 		ls.SaveBool(false)
@@ -142,14 +146,13 @@ func (b *Matcher) Add(ss core.SignatureSet, priorities priority.List) (int, erro
 	return len(b.keyFrames), nil
 }
 
-// Identify matches a Bytematcher's signatures against the input siegreader.Buffer.
-// Results are passed on the first returned int channel. These ints are the indexes of the matching signatures.
-// The second and third int channels report on the Bytematcher's progress: returning offets from the beginning of the file and the end of the file.
+// Identify matches a Matcher's signatures against the input siegreader.Buffer.
+// Results are passed on the returned channel.
 //
 // Example:
-//   ret, bprog, eprog := bm.Identify(buf, q)
+//   ret := bm.Identify("", buf)
 //   for v := range ret {
-//     if v == 0 {
+//     if v.Index() == 0 {
 //       fmt.Print("Success! It is signature 0!")
 //     }
 //   }
@@ -159,7 +162,7 @@ func (b *Matcher) Identify(name string, sb *siegreader.Buffer) (chan core.Result
 	return ret, nil
 }
 
-// Returns information about the Bytematcher including the number of BOF, VAR and EOF sequences, the number of BOF and EOF frames, and the total number of tests.
+// String returns information about the Bytematcher including the number of BOF, VAR and EOF sequences, the number of BOF and EOF frames, and the total number of tests.
 func (b *Matcher) String() string {
 	str := fmt.Sprintf("BOF seqs: %v\n", len(b.bofSeq.set))
 	str += fmt.Sprintf("EOF seqs: %v\n", len(b.eofSeq.set))
@@ -193,6 +196,8 @@ func (b *Matcher) String() string {
 	return str
 }
 
+// InspectTestTree reports which signatures are linked to a given index in the test tree.
+// This is used by the -log debug and -log slow options for sf.
 func (b *Matcher) InspectTestTree(i int) []int {
 	if i < 0 || i >= len(b.tests) {
 		return nil
@@ -208,6 +213,7 @@ func (b *Matcher) InspectTestTree(i int) []int {
 	return res
 }
 
+// SetLowMem instructs the Aho Corasick search tree to be built with a low memory opt (runs slightly slower than regular).
 func (b *Matcher) SetLowMem() {
 	b.lowmem = true
 }

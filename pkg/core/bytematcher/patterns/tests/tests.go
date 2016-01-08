@@ -17,7 +17,7 @@ package tests
 
 import . "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
 
-// Shared test sequences (exported so they can be used by the other bytematcher packages)
+// TestSequences are exported so they can be used by the other bytematcher packages.
 var TestSequences = []Sequence{
 	Sequence("test"),
 	Sequence("test"),
@@ -39,7 +39,7 @@ var TestSequences = []Sequence{
 	Sequence("23"),
 }
 
-// Shared test not sequences (exported so they can be used by the other bytematcher packages)
+// TestNotSequences are exported so they can be used by the other bytematcher packages.
 var TestNotSequences = []Not{
 	Not{Sequence("test")},
 	Not{Sequence("test")},
@@ -48,13 +48,13 @@ var TestNotSequences = []Not{
 	Not{Sequence{10}},
 }
 
-// Shared test lists (exported so they can be used by the other bytematcher packages)
+// TestLists are exported so they can be used by the other bytematcher packages.
 var TestLists = []List{
 	List{TestSequences[0], TestSequences[2]},
 	List{TestSequences[3], TestSequences[4]},
 }
 
-// Shared test choices (exported so they can be used by the other bytematcher packages)
+// Test Choices are exported so they can be used by the other bytematcher packages.
 var TestChoices = []Choice{
 	Choice{TestSequences[0], TestSequences[2]},
 	Choice{TestSequences[2], TestSequences[0]},

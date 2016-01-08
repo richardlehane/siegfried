@@ -78,10 +78,10 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 ## Recent Changes
 ### Version 1.4.4 (9/1/2016)
-- fix speed regression in TIFF mis-identification patch last release
-- refactor textmatcher
-- refactor siegreader
-- code quality: ran go vet, golint and grind over repository
+- fix: speed regression in TIFF mis-identification patch last release
+- code quality: refactor textmatcher package
+- code quality: refactor siegreader package
+- code quality: documentation
 
 ### Version 1.4.3 (19/12/2015)
 - measure time elapsed with -log time

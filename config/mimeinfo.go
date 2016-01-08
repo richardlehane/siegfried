@@ -22,6 +22,7 @@ var mimeinfo = struct {
 	mi: "tika-mimetypes.xml",
 }
 
+// MIMEInfo returns the location of the MIMEInfo signature file.
 func MIMEInfo() string {
 	return filepath.Join(siegfried.home, mimeinfo.mi)
 }

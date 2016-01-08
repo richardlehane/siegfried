@@ -151,6 +151,7 @@ type partial struct {
 	rdistances []int
 }
 
+// result is the bytematcher implementation of the Result interface.
 type result struct {
 	index int
 	basis string

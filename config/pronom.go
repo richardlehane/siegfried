@@ -65,6 +65,8 @@ var pronom = struct {
 
 // GETTERS
 
+// DROID returns the location of the DROID signature file.
+// If not set, infers the latest file.
 func Droid() string {
 	if pronom.droid == "" {
 		droid, err := latest("DROID_SignatureFile_V", ".xml")
@@ -79,6 +81,8 @@ func Droid() string {
 	return pronom.droid
 }
 
+// DROID base returns the base filename of the DROID signature file.
+// If not set, infers the latest file.
 func DroidBase() string {
 	if pronom.droid == "" {
 		droid, err := latest("DROID_SignatureFile_V", ".xml")
@@ -90,6 +94,8 @@ func DroidBase() string {
 	return pronom.droid
 }
 
+// Container returns the location of the DROID container signature file.
+// If not set, infers the latest file.
 func Container() string {
 	if pronom.container == "" {
 		container, err := latest("container-signature-", ".xml")
@@ -104,6 +110,8 @@ func Container() string {
 	return pronom.container
 }
 
+// ContainerBase returns the base filename of the DROID container signature file.
+// If not set, infers the latest file.
 func ContainerBase() string {
 	if pronom.container == "" {
 		container, err := latest("container-signature-", ".xml")
@@ -149,6 +157,7 @@ func latest(prefix, suffix string) (string, error) {
 	return hits[idx], nil
 }
 
+// Reports returns the location of the PRONOM reports directory.
 func Reports() string {
 	if pronom.noreports || pronom.reports == "" {
 		return ""
@@ -159,15 +168,17 @@ func Reports() string {
 	return pronom.reports
 }
 
+// Inspect reports whether roy is being run in inspect mode.
 func Inspect() bool {
 	return pronom.inspect
 }
 
+// HasLimit reports whether a limited set of signatures has been selected.
 func HasLimit() bool {
 	return len(pronom.limit) > 0
 }
 
-// takes a slice of puids and returns only those that are also in the pronom.limit slice
+// Limit takes a slice of puids and returns a new slice containing only those puids in the limit set.
 func Limit(puids []string) []string {
 	ret := make([]string, 0, len(pronom.limit))
 	for _, v := range pronom.limit {
@@ -180,6 +191,7 @@ func Limit(puids []string) []string {
 	return ret
 }
 
+// HasExclude reports whether an exlusion set of signatures has been provided.
 func HasExclude() bool {
 	return len(pronom.exclude) > 0
 }
@@ -201,16 +213,17 @@ func exclude(puids, ex []string) []string {
 	return ret
 }
 
-// takes a slice of puids and omits those that are also in the pronom.exclude slice
+// Exclude takes a slice of puids and omits those that are also in the pronom.exclude slice.
 func Exclude(puids []string) []string {
 	return exclude(puids, pronom.exclude)
 }
 
+// DoubleUp reports whether the doubleup flag has been set. This will cause byte signatures to be built for formats where container signatures are also provided.
 func DoubleUp() bool {
 	return pronom.doubleup
 }
 
-// takes a slice of puids and a slice of container puids and exludes those that are in the container slice, if nodoubles is set
+// ExcludeDoubles takes a slice of puids and a slice of container puids and exludes those that are in the container slice, if nodoubles is set.
 func ExcludeDoubles(puids, cont []string) []string {
 	return exclude(puids, cont)
 }
@@ -227,26 +240,32 @@ func extensionPaths(e []string) []string {
 	return ret
 }
 
+// Extend reports whether a set of signature extensions has been provided.
 func Extend() []string {
 	return extensionPaths(pronom.extend)
 }
 
+// Extend reports whether a set of container signature extensions has been provided.
 func ExtendC() []string {
 	return extensionPaths(pronom.extendc)
 }
 
+// HarvestOptions reports the PRONOM url, timeout and transport.
 func HarvestOptions() (string, time.Duration, *http.Transport) {
 	return pronom.harvestURL, pronom.harvestTimeout, pronom.harvestTransport
 }
 
+// ZipPuid reports the puid for a zip archive.
 func ZipPuid() string {
 	return pronom.zip
 }
 
+// TextPuid reports the puid for a text file.
 func TextPuid() string {
 	return pronom.text
 }
 
+// IsArchive returns an Archive that corresponds to the provided puid (or none if no match).
 func IsArchive(p string) Archive {
 	switch p {
 	case pronom.zip:
@@ -265,6 +284,8 @@ func IsArchive(p string) Archive {
 
 // SETTERS
 
+// SetDroid sets the name and/or location of the DROID signature file.
+// I.e. can provide a full path or a filename relative to the HOME directory.
 func SetDroid(d string) func() private {
 	return func() private {
 		pronom.droid = d
@@ -272,6 +293,8 @@ func SetDroid(d string) func() private {
 	}
 }
 
+// SetContainer sets the name and/or location of the DROID container signature file.
+// I.e. can provide a full path or a filename relative to the HOME directory.
 func SetContainer(c string) func() private {
 	return func() private {
 		pronom.container = c
@@ -279,6 +302,7 @@ func SetContainer(c string) func() private {
 	}
 }
 
+// SetReports sets the location of the PRONOM reports directory.
 func SetReports(r string) func() private {
 	return func() private {
 		pronom.reports = r
@@ -286,6 +310,7 @@ func SetReports(r string) func() private {
 	}
 }
 
+// SetNoReports instructs roy to build from the DROID signature file alone (and not from the PRONOM reports).
 func SetNoReports() func() private {
 	return func() private {
 		pronom.noreports = true
@@ -293,6 +318,7 @@ func SetNoReports() func() private {
 	}
 }
 
+// SetDoubleUp causes byte signatures to be built for formats where container signatures are also provided.
 func SetDoubleUp() func() private {
 	return func() private {
 		pronom.doubleup = true
@@ -300,6 +326,7 @@ func SetDoubleUp() func() private {
 	}
 }
 
+// SetInspect causes roy to run in inspect mode.
 func SetInspect() func() private {
 	return func() private {
 		pronom.inspect = true
@@ -307,6 +334,7 @@ func SetInspect() func() private {
 	}
 }
 
+// SetLimit limits the set of signatures built to the list provide.
 func SetLimit(l []string) func() private {
 	return func() private {
 		pronom.limit = l
@@ -314,6 +342,7 @@ func SetLimit(l []string) func() private {
 	}
 }
 
+// SetExclude excludes the provided signatures from those built.
 func SetExclude(l []string) func() private {
 	return func() private {
 		pronom.exclude = l
@@ -321,6 +350,7 @@ func SetExclude(l []string) func() private {
 	}
 }
 
+// SetExtend adds extension signatures to the build.
 func SetExtend(l []string) func() private {
 	return func() private {
 		pronom.extend = l
@@ -328,6 +358,7 @@ func SetExtend(l []string) func() private {
 	}
 }
 
+// SetExtendC adds container extension signatures to the build.
 func SetExtendC(l []string) func() private {
 	return func() private {
 		pronom.extendc = l
@@ -337,10 +368,12 @@ func SetExtendC(l []string) func() private {
 
 // unlike other setters, these are only relevant in the roy tool so can't be converted to the Option type
 
+// SetHarvestTimeout sets a time limit on PRONOM harvesting.
 func SetHarvestTimeout(d time.Duration) {
 	pronom.harvestTimeout = d
 }
 
+// SetHarvestTransport sets the PRONOM harvesting transport.
 func SetHarvestTransport(t *http.Transport) {
 	pronom.harvestTransport = t
 }
