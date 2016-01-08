@@ -44,6 +44,7 @@ Key features are:
     sf -log d,s file.ext | DIR                 // Log debugging and slow messages to stderr
     sf -log p,t DIR > results.yaml             // Log progress and time while redirecting results
 
+#### Example
 
 [![asciicast](https://asciinema.org/a/14.png)](https://asciinema.org/a/14)
 
