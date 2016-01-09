@@ -46,7 +46,7 @@ Key features are:
 
 #### Example
 
-[![asciicast](https://asciinema.org/a/bnczwdtxhwnxth3lqqh17qy84.png =418x)](https://asciinema.org/a/bnczwdtxhwnxth3lqqh17qy84)
+[![asciicast](https://asciinema.org/a/bnczwdtxhwnxth3lqqh17qy84.png)](https://asciinema.org/a/bnczwdtxhwnxth3lqqh17qy84)
 
 #### Signatures
 
