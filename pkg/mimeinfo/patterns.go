@@ -18,17 +18,19 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
 )
 
-type Big16 int16
+type Big16 uint16
 
-type Big32 int32
+type Big32 uint32
 
-type Little16 int16
+type Little16 uint16
 
-type Little32 int32
+type Little32 uint32
 
-type Host16 int16
+type Host16 uint16 // Implement as: Big OR Little
 
-type Host32 int32
+type Host32 uint32 // Implement as: Big OR Little
+
+type IgnoreCase []byte // @book has 16 possible values 1*2*2*2*2
 
 type Mask struct {
 	pat patterns.Pattern

@@ -84,7 +84,7 @@ func matchString(m Match) string {
 		str += ",mask:" + m.Mask
 	}
 	if len(m.Matches) > 0 {
-		str += ">"
+		str += " ==> "
 		for i, sub := range m.Matches {
 			if i > 0 {
 				str += " | "
