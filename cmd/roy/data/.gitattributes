@@ -1,0 +1,2 @@
+# Override git line endings for signature files
+*.sig binary
