@@ -188,7 +188,7 @@ func TestParseHex(t *testing.T) {
 
 func TestParseReports(t *testing.T) {
 	r := &reports{[]string{"test1", "test2", "test3", "test4"}, []*mappings.Report{rStub1, rStub2, rStub3, rStub4}, nil}
-	_, _, err := r.signatures()
+	_, _, err := r.Signatures()
 	if err != nil {
 		t.Error(err)
 	}

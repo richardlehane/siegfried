@@ -36,3 +36,14 @@ type Mask struct {
 	pat patterns.Pattern
 	val []byte // masks for numerical types can be any number; masks for strings must be in base16 and start with 0x
 }
+
+func (m Mask) Test(b []byte) (bool, int) {
+	if len(b) < len(m.val) {
+		return false, 0
+	}
+	t := make([]byte, len(m.val))
+	for i := range t {
+		t[i] = t[i] & m.val[i]
+	}
+	return m.pat.Test(t)
+}

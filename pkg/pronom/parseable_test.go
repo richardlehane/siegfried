@@ -14,15 +14,15 @@ func TestParseDroid(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	r, err := newReports(d.puids(), d.idsPuids())
+	r, err := newReports(d.IDs(), d.idsPuids())
 	if err != nil {
 		t.Fatal(err)
 	}
-	dsigs, dpuids, err := d.signatures()
+	dsigs, dpuids, err := d.Signatures()
 	if err != nil {
 		t.Fatal(err)
 	}
-	rsigs, rpuids, err := r.signatures()
+	rsigs, rpuids, err := r.Signatures()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -43,5 +43,3 @@ func TestParseDroid(t *testing.T) {
 		}
 	}
 }
-
-// TODO: tests for filters and joins (including correct priority lists)

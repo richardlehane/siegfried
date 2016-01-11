@@ -31,6 +31,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/containermatcher"
+	"github.com/richardlehane/siegfried/pkg/core/parseable"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/stringmatcher"
 	"github.com/richardlehane/siegfried/pkg/core/textmatcher"
@@ -39,7 +40,7 @@ import (
 
 type pronom struct {
 	*Identifier
-	j  parseable
+	j  parseable.Parseable
 	c  *mappings.Container
 	pm priority.Map
 }
@@ -61,7 +62,7 @@ func newPronom() (*pronom, error) {
 	}
 	// apply noPriority rule
 	if !config.NoPriority() {
-		p.pm = p.j.priorities()
+		p.pm = p.j.Priorities()
 		p.pm.Complete()
 	}
 	return p, nil
@@ -73,7 +74,7 @@ func (p *pronom) identifier() *Identifier {
 		name:       config.Name(),
 		details:    config.Details(),
 		noPriority: config.NoPriority(),
-		infos:      p.j.infos(),
+		infos:      infos(p.j.Infos()),
 	}
 	if p.hasPuid(config.ZipPuid()) {
 		p.Identifier.zipDefault = true
@@ -89,12 +90,12 @@ func (p *pronom) setParseables() error {
 	}
 	// if we are just inspecting a single report file
 	if config.Inspect() {
-		r, err := newReports(config.Limit(d.puids()), nil)
+		r, err := newReports(config.Limit(d.IDs()), nil)
 		if err != nil {
 			return fmt.Errorf("Pronom: error loading reports; got %s\nYou must download PRONOM reports to build a signature (unless you use the -noreports flag). You can use `roy harvest` to download reports", err)
 		}
-		infos := r.infos()
-		sigs, puids, err := r.signatures()
+		is := infos(r.Infos())
+		sigs, puids, err := r.Signatures()
 		if err != nil {
 			return fmt.Errorf("Pronom: parsing signatures; got %s", err)
 		}
@@ -102,7 +103,7 @@ func (p *pronom) setParseables() error {
 		for i, sig := range sigs {
 			if puids[i] != puid {
 				puid = puids[i]
-				fmt.Printf("%s: \n", infos[puid].name)
+				fmt.Printf("%s: \n", is[puid].name)
 			}
 			fmt.Println(sig)
 		}
@@ -110,7 +111,7 @@ func (p *pronom) setParseables() error {
 		return nil
 	}
 	// apply limit or exclude filters (only one can be applied)
-	puids := d.puids()
+	puids := d.IDs()
 	if config.HasLimit() {
 		puids = config.Limit(puids)
 	} else if config.HasExclude() {
@@ -121,7 +122,7 @@ func (p *pronom) setParseables() error {
 		p.j = d
 		// apply filter
 		if config.HasLimit() || config.HasExclude() {
-			p.j = applyFilter(puids, p.j)
+			p.j = parseable.Filter(puids, p.j)
 		}
 	} else { // otherwise build from reports
 		r, err := newReports(puids, d.idsPuids())
@@ -143,11 +144,11 @@ func (p *pronom) setParseables() error {
 		if err != nil {
 			return fmt.Errorf("Pronom: error loading extension file; got %s", err)
 		}
-		p.j = join(p.j, e)
+		p.j = parseable.Join(p.j, e)
 	}
 	// mirror PREV wild segments into EOF if maxBof and maxEOF set
 	if config.MaxBOF() > 0 && config.MaxEOF() > 0 {
-		p.j = &mirror{p.j}
+		p.j = &parseable.Mirror{p.j}
 	}
 	return nil
 }
@@ -216,7 +217,7 @@ func (p *pronom) add(m core.Matcher, t core.MatcherType) error {
 	case core.ExtensionMatcher:
 		if !config.NoExt() {
 			var exts [][]string
-			exts, p.ePuids = p.j.extensions()
+			exts, p.ePuids = p.j.Globs()
 			l, err := m.Add(stringmatcher.SignatureSet(exts), nil)
 			if err != nil {
 				return err
@@ -227,7 +228,7 @@ func (p *pronom) add(m core.Matcher, t core.MatcherType) error {
 	case core.MIMEMatcher:
 		if !config.NoMIME() {
 			var mimes [][]string
-			mimes, p.mPuids = p.j.mimes()
+			mimes, p.mPuids = p.j.MIMEs()
 			l, err := m.Add(stringmatcher.SignatureSet(mimes), nil)
 			if err != nil {
 				return err
@@ -240,7 +241,7 @@ func (p *pronom) add(m core.Matcher, t core.MatcherType) error {
 	case core.ByteMatcher:
 		var sigs []frames.Signature
 		var err error
-		sigs, p.bPuids, err = p.j.signatures()
+		sigs, p.bPuids, err = p.j.Signatures()
 		if err != nil {
 			return err
 		}
@@ -264,7 +265,7 @@ func (p *pronom) add(m core.Matcher, t core.MatcherType) error {
 
 // for limit/exclude filtering of containers
 func (p pronom) hasPuid(puid string) bool {
-	for _, v := range p.j.puids() {
+	for _, v := range p.j.IDs() {
 		if puid == v {
 			return true
 		}
@@ -345,7 +346,7 @@ func Harvest() []error {
 		url, _, _ := config.HarvestOptions()
 		return save(puid, url, config.Reports())
 	}
-	return applyAll(5, d.puids(), apply)
+	return applyAll(5, d.IDs(), apply)
 }
 
 func openXML(path string, els interface{}) error {
