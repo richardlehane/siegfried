@@ -15,6 +15,8 @@
 package mimeinfo
 
 import (
+	"regexp"
+
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
 )
 
@@ -29,6 +31,10 @@ type Little32 uint32
 type Host16 uint16 // Implement as: Big OR Little
 
 type Host32 uint32 // Implement as: Big OR Little
+
+type UnicodeLE []byte
+
+type Regex *regexp.Regexp // getting headache thinking about this one! Leave it out???
 
 type IgnoreCase []byte // @book has 16 possible values 1*2*2*2*2
 
@@ -46,4 +52,9 @@ func (m Mask) Test(b []byte) (bool, int) {
 		t[i] = t[i] & m.val[i]
 	}
 	return m.pat.Test(t)
+}
+
+// Unmask turns 0xFF00 masks into a slice of patterns and slice of distances between those patterns.
+func Unmask(m Mask) ([]patterns.Pattern, []int) {
+	return nil, nil
 }

@@ -28,9 +28,31 @@ func TestNew(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
+	tpmap := make(map[string]struct{})
 	for _, v := range mi {
-		fmt.Println(v)
+		//fmt.Println(v)
+		//if len(v.Magic) > 1 {
+		//	fmt.Printf("Multiple magics (%d): %s\n", len(v.Magic), v.MIME)
+		//}
+		for _, c := range v.Magic {
+			for _, d := range c.Matches {
+				tpmap[d.Typ] = struct{}{}
+				if len(d.Mask) > 0 {
+					if d.Typ == "string" {
+						fmt.Println("MAGIC: " + d.Value)
+					} else {
+						fmt.Println("Type: " + d.Typ)
+					}
+					fmt.Println("MASK: " + d.Mask)
+				}
+			}
+		}
 	}
+	/*
+		for k, _ := range tpmap {
+			fmt.Println(k)
+		}
+	*/
 	if len(mi) != 1495 {
 		t.Errorf("expecting %d MIMEInfos, got %d", 1495, len(mi))
 	}
