@@ -118,7 +118,7 @@ func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 			if err != nil {
 				f, err = retryOpen(path, err)
 				if err != nil {
-					rchan <- res{path, 0, "", nil, err}
+					rchan <- res{path, 0, "", nil, err.(*os.PathError).Err} // return summary error only
 					return
 				}
 			}
@@ -174,7 +174,7 @@ func identifyFile(w writer, s *siegfried.Siegfried, path string, sz int64, mod s
 	if err != nil {
 		f, err = retryOpen(path, err)
 		if err != nil {
-			writeError(w, path, sz, mod, err)
+			writeError(w, path, sz, mod, err.(*os.PathError).Err) // write summary error
 			return
 		}
 	}
@@ -274,7 +274,7 @@ func main() {
 	if *update {
 		msg, err := updateSigs()
 		if err != nil {
-			log.Fatalf("Error: failed to update signature file, %v", err)
+			log.Fatalf("[FATAL] failed to update signature file, %v", err)
 		}
 		fmt.Println(msg)
 		return
@@ -283,16 +283,16 @@ func main() {
 	// during parallel scanning or in server mode, unsafe to access the last read buffer - so can't unzip or hash
 	if *multi > 1 || *serve != "" {
 		if *archive {
-			log.Fatalln("Error: cannot scan archive formats when running in parallel mode")
+			log.Fatalln("[FATAL] cannot scan archive formats when running in parallel mode")
 		}
 		if *hashf != "" {
-			log.Fatalln("Error: cannot calculate file checksum when running in parallel mode")
+			log.Fatalln("[FATAL] cannot calculate file checksum when running in parallel mode")
 		}
 	}
 
 	if *logf != "" {
 		if *multi > 1 {
-			log.Fatalln("Error: cannot log when running in parallel mode")
+			log.Fatalln("[FATAL] cannot log when running in parallel mode")
 		}
 		if err := newLogger(*logf); err != nil {
 			log.Fatalln(err)
@@ -306,7 +306,7 @@ func main() {
 	if *serve != "" || *fprflag {
 		s, err := siegfried.Load(config.Signature())
 		if err != nil {
-			log.Fatalf("Error: error loading signature file, got: %v", err)
+			log.Fatalf("[FATAL] error loading signature file, got: %v", err)
 		}
 		if *serve != "" {
 			log.Printf("Starting server at %s. Use CTRL-C to quit.\n", *serve)
@@ -319,12 +319,12 @@ func main() {
 	}
 
 	if flag.NArg() != 1 {
-		log.Fatalln("Error: expecting a single file or directory argument")
+		log.Fatalln("[FATAL] expecting a single file or directory argument")
 	}
 
 	s, err := siegfried.Load(config.Signature())
 	if err != nil {
-		log.Fatalf("Error: error loading signature file, got: %v", err)
+		log.Fatalf("[FATAL] error loading signature file, got: %v", err)
 	}
 
 	var w writer
@@ -367,7 +367,7 @@ func main() {
 	if err != nil {
 		info, err = retryStat(flag.Arg(0), err)
 		if err != nil {
-			log.Fatalf("Error: error getting info for %v, got: %v", flag.Arg(0), err)
+			log.Fatalf("[FATAL] cannot get info for %v, got: %v", flag.Arg(0), err)
 		}
 	}
 
