@@ -86,16 +86,15 @@ func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 	runtime.GOMAXPROCS(PROCS)
 	resc := make(chan chan res, *multi)
 	go printer(w, resc, wg)
-	var wf filepath.WalkFunc
-	var origPath string
-	wf = func(path string, info os.FileInfo, err error) error {
-		var retry, origReset bool
+	wf := func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			info, err = retryStat(path, err)
-			if err != nil {
-				return fmt.Errorf("walking %s; got %v", path, err) // fatal: return error and quit
+			if err != nil || (info.IsDir() && !norecurse) { // fatal: return error and quit
+				if err == nil {
+					return fmt.Errorf("cannot recurse into %s; filepath too long", path)
+				}
+				return fmt.Errorf("walking %s; got %v", path, err)
 			}
-			retry = true
 		}
 		if info.IsDir() {
 			if norecurse && path != r {
@@ -109,20 +108,8 @@ func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 					rchan <- res{path, -1, info.ModTime().String(), nil, nil} // write directory with a -1 size for droid output only
 				}()
 			}
-			if retry {
-				if origPath == "" {
-					origPath = path
-					origReset = true
-				}
-				err = filepath.Walk(longpath(path), wf)
-				if origReset {
-					origPath = ""
-				}
-				return filepath.SkipDir
-			}
 			return nil
 		}
-		path = shortpath(path, origPath)
 		wg.Add(1)
 		rchan := make(chan res, 1)
 		resc <- rchan
@@ -154,19 +141,18 @@ func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 }
 
 func multiIdentifyS(w writer, s *siegfried.Siegfried, r string, norecurse bool) error {
-	var wf filepath.WalkFunc
-	var origPath string
-	wf = func(path string, info os.FileInfo, err error) error {
-		var retry, origReset bool
+	wf := func(path string, info os.FileInfo, err error) error {
 		if throttle != nil {
 			<-throttle.C
 		}
 		if err != nil {
 			info, err = retryStat(path, err)
-			if err != nil {
-				return fmt.Errorf("walking %s; got %v", path, err) // fatal: return error and quit
+			if err != nil || (info.IsDir() && !norecurse) { // fatal: return error and quit
+				if err == nil {
+					return fmt.Errorf("cannot recurse into %s; filepath too long", path)
+				}
+				return fmt.Errorf("walking %s; got %v", path, err)
 			}
-			retry = true
 		}
 		if info.IsDir() {
 			if norecurse && path != r {
@@ -175,20 +161,9 @@ func multiIdentifyS(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 			if *droido {
 				w.writeFile(path, -1, info.ModTime().Format(time.RFC3339), nil, nil, nil) // write directory with a -1 size for droid output only
 			}
-			if retry {
-				if origPath == "" {
-					origPath = path
-					origReset = true
-				}
-				err = filepath.Walk(longpath(path), wf)
-				if origReset {
-					origPath = ""
-				}
-				return filepath.SkipDir
-			}
 			return nil
 		}
-		identifyFile(w, s, shortpath(path, origPath), info.Size(), info.ModTime().Format(time.RFC3339))
+		identifyFile(w, s, path, info.Size(), info.ModTime().Format(time.RFC3339))
 		return nil
 	}
 	return filepath.Walk(r, wf)
@@ -254,7 +229,7 @@ func identifyRdr(w writer, s *siegfried.Siegfried, r io.Reader, sz int64, path, 
 		d, err = newWARC(siegreader.ReaderFrom(b), path)
 	}
 	if err != nil {
-		writeError(w, path, sz, mod, fmt.Errorf("failed to decompress %s, got: %v", path, err))
+		writeError(w, path, sz, mod, fmt.Errorf("failed to decompress, got: %v", err))
 		return
 	}
 	for err = d.next(); err == nil; err = d.next() {

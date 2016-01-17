@@ -22,10 +22,6 @@ func longpath(path string) string {
 	return path
 }
 
-func shortpath(long, short string) string {
-	return long
-}
-
 func retryStat(path string, err error) (os.FileInfo, error) {
 	return nil, err
 }
