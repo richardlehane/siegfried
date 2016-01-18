@@ -146,8 +146,8 @@ func multiIdentifyS(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 			<-throttle.C
 		}
 		if err != nil {
-			info, err = retryStat(path, err)
-			if err != nil || (info.IsDir() && !norecurse) { // fatal: return error and quit
+			info, err = retryStat(path, err)                // retry stat in case is a windows long path error
+			if err != nil || (info.IsDir() && !norecurse) { // fatal: return error and quit if still error or the path is a dir
 				if err == nil {
 					return fmt.Errorf("cannot recurse into %s; filepath too long", path)
 				}
@@ -172,7 +172,7 @@ func multiIdentifyS(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 func identifyFile(w writer, s *siegfried.Siegfried, path string, sz int64, mod string) {
 	f, err := os.Open(path)
 	if err != nil {
-		f, err = retryOpen(path, err)
+		f, err = retryOpen(path, err) // retry open in case is a windows long path error
 		if err != nil {
 			writeError(w, path, sz, mod, err.(*os.PathError).Err) // write summary error
 			return
