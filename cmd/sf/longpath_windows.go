@@ -40,6 +40,18 @@ func longpath(path string) string {
 	return path
 }
 
+// attempt to reconstitute original path
+func shortpath(long, short string) string {
+	if short == "" {
+		return long
+	}
+	i := strings.Index(long, short)
+	if i == -1 {
+		return long
+	}
+	return long[i:]
+}
+
 func retryStat(path string, err error) (os.FileInfo, error) {
 	info, e := os.Stat(longpath(path))
 	if e != nil {

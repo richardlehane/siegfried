@@ -129,7 +129,7 @@ func identify(s *siegfried.Siegfried) func(w http.ResponseWriter, r *http.Reques
 			w.Header().Set("Content-Type", mime)
 			wr.writeHead(s)
 			if info.IsDir() {
-				multiIdentifyS(wr, s, path, nr)
+				multiIdentifyS(wr, s, path, "", nr)
 				wr.writeTail()
 				return
 			}

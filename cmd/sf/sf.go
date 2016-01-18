@@ -140,33 +140,40 @@ func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 	return err
 }
 
-func multiIdentifyS(w writer, s *siegfried.Siegfried, r string, norecurse bool) error {
+func multiIdentifyS(w writer, s *siegfried.Siegfried, root, orig string, norecurse bool) error {
 	wf := func(path string, info os.FileInfo, err error) error {
+		var retry bool
 		if throttle != nil {
 			<-throttle.C
 		}
 		if err != nil {
-			info, err = retryStat(path, err)                // retry stat in case is a windows long path error
-			if err != nil || (info.IsDir() && !norecurse) { // fatal: return error and quit if still error or the path is a dir
-				if err == nil {
-					return fmt.Errorf("cannot recurse into %s; filepath too long", path)
-				}
+			info, err = retryStat(path, err) // retry stat in case is a windows long path error
+			if err != nil {                  // fatal: return error and quit
 				return fmt.Errorf("walking %s; got %v", path, err)
 			}
+			retry = true
 		}
 		if info.IsDir() {
-			if norecurse && path != r {
+			if norecurse && path != root {
 				return filepath.SkipDir
+			}
+			if retry { // if a dir long path, restart the recursion with a long path as the new root
+				if err := multiIdentifyS(w, s, longpath(path), path, norecurse); err != nil {
+					return err
+				}
 			}
 			if *droido {
 				w.writeFile(path, -1, info.ModTime().Format(time.RFC3339), nil, nil, nil) // write directory with a -1 size for droid output only
 			}
 			return nil
 		}
+		if orig != "" {
+			path = shortpath(path, orig)
+		}
 		identifyFile(w, s, path, info.Size(), info.ModTime().Format(time.RFC3339))
 		return nil
 	}
-	return filepath.Walk(r, wf)
+	return filepath.Walk(root, wf)
 }
 
 func identifyFile(w writer, s *siegfried.Siegfried, path string, sz int64, mod string) {
@@ -383,7 +390,7 @@ func main() {
 				throttle = time.NewTicker(*throttlef)
 				defer throttle.Stop()
 			}
-			err = multiIdentifyS(w, s, flag.Arg(0), *nr)
+			err = multiIdentifyS(w, s, flag.Arg(0), "", *nr)
 		}
 		w.writeTail()
 		if err != nil {
