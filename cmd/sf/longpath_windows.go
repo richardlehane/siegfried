@@ -42,6 +42,9 @@ func longpath(path string) string {
 
 // attempt to reconstitute original path
 func shortpath(long, short string) string {
+	if short == "" {
+		return long
+	}
 	i := strings.Index(long, short)
 	if i == -1 {
 		return long
@@ -53,7 +56,7 @@ func retryStat(path string, err error) (os.FileInfo, error) {
 	if strings.HasPrefix(path, prefix) { // already a long path - no point retrying
 		return nil, err
 	}
-	info, e := os.Lstat(longpath(path)) // os uses Lstat not Stat
+	info, e := os.Lstat(longpath(path)) // filepath.Walk uses Lstat not Stat
 	if e != nil {
 		return nil, err
 	}

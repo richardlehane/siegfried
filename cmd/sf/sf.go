@@ -161,14 +161,11 @@ func multiIdentifyS(w writer, s *siegfried.Siegfried, root, orig string, norecur
 				return multiIdentifyS(w, s, longpath(path), path, norecurse)
 			}
 			if *droido {
-				w.writeFile(path, -1, info.ModTime().Format(time.RFC3339), nil, nil, nil) // write directory with a -1 size for droid output only
+				w.writeFile(shortpath(path, orig), -1, info.ModTime().Format(time.RFC3339), nil, nil, nil) // write directory with a -1 size for droid output only
 			}
 			return nil
 		}
-		if orig != "" {
-			path = shortpath(path, orig)
-		}
-		identifyFile(w, s, path, info.Size(), info.ModTime().Format(time.RFC3339))
+		identifyFile(w, s, shortpath(path, orig), info.Size(), info.ModTime().Format(time.RFC3339))
 		return nil
 	}
 	return filepath.Walk(root, wf)
