@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1667</FormatID>
+      <FormatName>3DM</FormatName>
+      <FormatVersion>5</FormatVersion>
+      <FormatAliases>openNURBS (5), Rhino (5)</FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Model</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The 3DM (openNURBS) format is a 3D model representation based on non-uniform rational B-Splines (NURBS). The file format is defined by an open source C++ toolkit that reads and writes openNURBS models.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>216</ProvenanceSourceID>
+      <ProvenanceName>The Canadian Centre for Architecture / The Canadian Centre for Architecture</ProvenanceName>
+      <ProvenanceSourceDate>09 Jan 2016</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>09 Jan 2016</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/864</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>130</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Robert McNeel &amp; Associates</OrganisationName>
+        <DeveloperCompoundName>Robert McNeel &amp; Associates</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>130</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Robert McNeel &amp; Associates</OrganisationName>
+        <SupportCompoundName>Robert McNeel &amp; Associates</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>1785</ExternalSignatureID>
+        <Signature>3dm</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1225</SignatureID>
+        <SignatureName>3DM 5</SignatureName>
+        <SignatureNote>Header with version number - 3D Geometry File Format       5</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1496</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>33442047656F6D657472792046696C6520466F726D61742020202020202035</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>826</RelatedFormatID>
+        <RelatedFormatName>3DM</RelatedFormatName>
+        <RelatedFormatVersion>4</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

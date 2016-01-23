@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1664</FormatID>
+      <FormatName>Maya Binary File Format</FormatName>
+      <FormatVersion>64 Bit</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Model</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Maya is an application used to generate 3D assets for use in film, television, game development and architecture, currently developed and maintained by Autodesk.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>216</ProvenanceSourceID>
+      <ProvenanceName>The Canadian Centre for Architecture / The Canadian Centre for Architecture</ProvenanceName>
+      <ProvenanceSourceDate>09 Jan 2016</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>09 Jan 2016</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/862</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>18</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Autodesk Corporation</OrganisationName>
+        <DeveloperCompoundName>Autodesk Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>18</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Autodesk Corporation</OrganisationName>
+        <SupportCompoundName>Autodesk Corporation</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>1783</ExternalSignatureID>
+        <Signature>mb</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1222</SignatureID>
+        <SignatureName>Maya Binary 64 Bit</SignatureName>
+        <SignatureNote>BOF: FOR8{12}(Maya|MAYA)FOR8</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1494</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>464F5238{12}(4D617961|4D415941)464F5238</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

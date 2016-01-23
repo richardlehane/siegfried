@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1638</FormatID>
+      <FormatName>Quattro Pro Spreadsheet</FormatName>
+      <FormatVersion>9 onwards</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Spreadsheet</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Quattro Pro is a spreadsheet program originally developed by Borland and now part of Corel's WordPerfect Office suite.</FormatDescription>
+      <BinaryFileFormat>Text</BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>22 Dec 2015</ProvenanceSourceDate>
+      <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
+      <LastUpdatedDate>22 Dec 2015</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/837</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>35</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Corel Corporation</OrganisationName>
+        <DeveloperCompoundName>Corel Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>35</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Corel Corporation</OrganisationName>
+        <SupportCompoundName>Corel Corporation</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>1744</ExternalSignatureID>
+        <Signature>qpw</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>1637</RelatedFormatID>
+        <RelatedFormatName>Quattro Pro Spreadsheet</RelatedFormatName>
+        <RelatedFormatVersion>7-8</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

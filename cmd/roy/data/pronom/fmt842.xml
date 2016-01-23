@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1643</FormatID>
+      <FormatName>AccessData Custom Content Image</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The AccessData Custom Content Image (AD1) file format is a file-level disk image format created by AccessData's proprietary forensic software, such as FTK Imager. 
+
+An AD1 image may span multiple files, with multipart files distinguished by their incrementing file extension, e.g. .ad1, .ad2, .ad3, etc.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>195</ProvenanceSourceID>
+      <ProvenanceName>Artefactual Systems Inc / Artefactual Systems Inc</ProvenanceName>
+      <ProvenanceSourceDate>23 Dec 2015</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>23 Dec 2015</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/842</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>1749</ExternalSignatureID>
+        <Signature>ad1</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1750</ExternalSignatureID>
+        <Signature>ad2</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1751</ExternalSignatureID>
+        <Signature>ad3</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1752</ExternalSignatureID>
+        <Signature>ad4</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1753</ExternalSignatureID>
+        <Signature>ad5</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1201</SignatureID>
+        <SignatureName>AD1</SignatureName>
+        <SignatureNote>BOF: ADSEGMENTEDFILE. A single AD1 file, or the first part of a multipart AD1 will also contain the string ADLOGICALIMAGE, likely at position 0x0200</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1476</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>41445345474D454E54454446494C45</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

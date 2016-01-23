@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1669</FormatID>
+      <FormatName>STL (Standard Tessellation Language) Binary</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>Stereolithography file (Binary)</FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Model</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>STL is a 3D modelling file format created by 3D Systems. An STL file is a triangular representation of a 3-dimensional surface geometry. The surface is tessellated or broken down logically into a series of small triangles (facets). Each facet is described by a perpendicular direction and three points representing the vertices (corners) of the triangle. These data are used by a slicing algorithm to determine the cross sections of the 3-dimensional shape to be built by the fabricator.
+
+The structure of STL Binary, though well defined, makes it impossible to create an identification signature under the current PRONOM signature model. 
+
+The format consists of an 80 byte ASCII header with no formalized structure, followed by a four byte integer value representing the number of facets within the file, followed by 48 bytes of floating point values representing the 'normal' and 'vertex' coordinates within 3 dimensional space for each triangle, followed by a two byte, typically (but not exclusively) unused 'attribute byte count'.
+
+A technical specification may be found here: http://www.fabbers.com/tech/STL_Format</FormatDescription>
+      <BinaryFileFormat>Text</BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>216</ProvenanceSourceID>
+      <ProvenanceName>The Canadian Centre for Architecture / The Canadian Centre for Architecture</ProvenanceName>
+      <ProvenanceSourceDate>09 Jan 2016</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>09 Jan 2016</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/865</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>1786</ExternalSignatureID>
+        <Signature>stl</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

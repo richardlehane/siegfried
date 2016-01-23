@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1635</FormatID>
+      <FormatName>Quattro Pro Spreadsheet for Windows</FormatName>
+      <FormatVersion>1/5</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Spreadsheet</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Quattro Pro is a spreadsheet program originally developed by Borland and now part of Corel's WordPerfect Office suite.</FormatDescription>
+      <BinaryFileFormat>Text</BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>22 Dec 2015</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>22 Dec 2015</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/834</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>35</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Corel Corporation</OrganisationName>
+        <DeveloperCompoundName>Corel Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>35</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Corel Corporation</OrganisationName>
+        <SupportCompoundName>Corel Corporation</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>1741</ExternalSignatureID>
+        <Signature>wb1</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1191</SignatureID>
+        <SignatureName>Quattro Pro 1 and 5 WIN</SignatureName>
+        <SignatureNote>BOF 00000200, version 0110
+EOF: ….</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1466</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>000002000110</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>1636</RelatedFormatID>
+        <RelatedFormatName>Quattro Pro Spreadsheet for Windows</RelatedFormatName>
+        <RelatedFormatVersion>6</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

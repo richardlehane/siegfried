@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1670</FormatID>
+      <FormatName>Apple Safari Webarchive</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>These files may be produced by saving a web page in various versions of Apple's Safari Web Browser. The file is a type of Binary Property List (https://en.wikipedia.org/wiki/Property_list) and will contain the html content of the page, plus any page attachments.
+
+With further research and a better understanding of the format it may be possible to create a PRONOM identification signature, based on the 'bplist' magic number and further identifiers specific to the Apple Safari Webarchive format.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>178</ProvenanceSourceID>
+      <ProvenanceName>National Library of New Zealand / National Library of New Zealand</ProvenanceName>
+      <ProvenanceSourceDate>09 Jan 2016</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>09 Jan 2016</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/866</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>15</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Apple Computer, Inc.</OrganisationName>
+        <DeveloperCompoundName>Apple Computer, Inc.</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>15</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Apple Computer, Inc.</OrganisationName>
+        <SupportCompoundName>Apple Computer, Inc.</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>1787</ExternalSignatureID>
+        <Signature>webarchive</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>
