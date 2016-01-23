@@ -35,7 +35,7 @@ Full specifications available at: http://www.opengeospatial.org/standards/kml</F
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
-        <Identifier>application/vnd.google-earth.kml+xml</Identifier>
+        <Identifier>application/vnd.google-earth.kmz</Identifier>
         <IdentifierType>MIME</IdentifierType>
       </FileFormatIdentifier>
       <FileFormatIdentifier>

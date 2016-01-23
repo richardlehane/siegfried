@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>1530</FormatID>
-      <FormatName>Bink Video format</FormatName>
+      <FormatName>Bink Video Format</FormatName>
       <FormatVersion>1</FormatVersion>
       <FormatAliases>
       </FormatAliases>
@@ -63,7 +63,7 @@
       <RelatedFormat>
         <RelationshipType>Is previous version of</RelationshipType>
         <RelatedFormatID>1531</RelatedFormatID>
-        <RelatedFormatName>Bink Video format</RelatedFormatName>
+        <RelatedFormatName>Bink Video Format</RelatedFormatName>
         <RelatedFormatVersion>2</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>

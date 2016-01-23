@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>176</FormatID>
-      <FormatName>Quattro Pro Spreadsheet</FormatName>
+      <FormatName>Quattro Pro Spreadsheet for DOS</FormatName>
       <FormatVersion>1-4</FormatVersion>
       <FormatAliases>
       </FormatAliases>
@@ -12,7 +12,7 @@
       <FormatTypes>Spreadsheet</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Quattro Pro is a spreadsheet program originally developed by Borland and now part of Corel's WordPerfect Office suite.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>

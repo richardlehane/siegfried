@@ -37,6 +37,10 @@
         <Identifier>fmt/302</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>image/cgm</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
       <ExternalSignature>
         <ExternalSignatureID>1036</ExternalSignatureID>
         <Signature>cgm</Signature>

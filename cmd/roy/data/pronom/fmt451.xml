@@ -9,7 +9,7 @@
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Image (Vector)</FormatTypes>
+      <FormatTypes>Model</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
       <FormatDescription>Vectorworks is a proprietary Computer Aided Design and Building Information Modelling software program for both Mac and Windows operating systems. This software was previously called MiniCAD from 1985 - 1998 and  Vectorworks from 1999.</FormatDescription>
@@ -33,6 +33,10 @@
       </FormatRisk>
       <TechnicalEnvironment>
       </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/vnd.vectorworks</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
       <FileFormatIdentifier>
         <Identifier>fmt/451</Identifier>
         <IdentifierType>PUID</IdentifierType>
@@ -75,12 +79,6 @@
       </InternalSignature>
       <RelatedFormat>
         <RelationshipType>Is previous version of</RelationshipType>
-        <RelatedFormatID>1485</RelatedFormatID>
-        <RelatedFormatName>Vectorworks</RelatedFormatName>
-        <RelatedFormatVersion>2010</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Is subsequent version of</RelationshipType>
         <RelatedFormatID>1485</RelatedFormatID>
         <RelatedFormatName>Vectorworks</RelatedFormatName>
         <RelatedFormatVersion>2010</RelatedFormatVersion>

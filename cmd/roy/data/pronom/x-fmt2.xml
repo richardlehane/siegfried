@@ -9,7 +9,8 @@
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Word Processor</FormatTypes>
+      <FormatTypes>
+      </FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
       <FormatDescription>PUID deprecated. Please see fmt/39: Microsoft Word 6/95.</FormatDescription>
@@ -33,18 +34,9 @@
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
-        <Identifier>com.microsoft.word.doc</Identifier>
-        <IdentifierType>Apple Uniform Type Identifier</IdentifierType>
-      </FileFormatIdentifier>
-      <FileFormatIdentifier>
         <Identifier>x-fmt/2</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
-      <ExternalSignature>
-        <ExternalSignatureID>10</ExternalSignatureID>
-        <Signature>doc</Signature>
-        <SignatureType>File extension</SignatureType>
-      </ExternalSignature>
       <RelatedFormat>
         <RelationshipType>Is subsequent version of</RelationshipType>
         <RelatedFormatID>1091</RelatedFormatID>

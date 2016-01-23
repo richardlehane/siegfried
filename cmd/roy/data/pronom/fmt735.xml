@@ -35,6 +35,10 @@
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
+        <Identifier>audio/ac3</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
         <Identifier>fmt/735</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>

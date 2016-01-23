@@ -33,10 +33,6 @@
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
-        <Identifier>application/vnd.stardivision.calc</Identifier>
-        <IdentifierType>MIME</IdentifierType>
-      </FileFormatIdentifier>
-      <FileFormatIdentifier>
         <Identifier>x-fmt/404</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>

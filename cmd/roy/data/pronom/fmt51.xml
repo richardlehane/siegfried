@@ -5,9 +5,12 @@
       <FormatID>632</FormatID>
       <FormatName>Rich Text Format</FormatName>
       <FormatVersion>1.6</FormatVersion>
-      <FormatAliases>RTF (1.6), RTF (2000)</FormatAliases>
-      <FormatFamilies>Rich Text Format</FormatFamilies>
-      <FormatTypes>Word Processor</FormatTypes>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>
+      </FormatTypes>
       <FormatDisclosure>Partial</FormatDisclosure>
       <FormatDescription>Deprecated in favour of fmt/50</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
@@ -30,20 +33,8 @@
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
-        <Identifier>application/rtf</Identifier>
-        <IdentifierType>MIME</IdentifierType>
-      </FileFormatIdentifier>
-      <FileFormatIdentifier>
         <Identifier>fmt/51</Identifier>
         <IdentifierType>PUID</IdentifierType>
-      </FileFormatIdentifier>
-      <FileFormatIdentifier>
-        <Identifier>public.rtf</Identifier>
-        <IdentifierType>Apple Uniform Type Identifier</IdentifierType>
-      </FileFormatIdentifier>
-      <FileFormatIdentifier>
-        <Identifier>text/rtf</Identifier>
-        <IdentifierType>MIME</IdentifierType>
       </FileFormatIdentifier>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
@@ -62,36 +53,6 @@
         <RelatedFormatID>1101</RelatedFormatID>
         <RelatedFormatName>Rich Text Format</RelatedFormatName>
         <RelatedFormatVersion>1.9</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Has priority over</RelationshipType>
-        <RelatedFormatID>626</RelatedFormatID>
-        <RelatedFormatName>Rich Text Format</RelatedFormatName>
-        <RelatedFormatVersion>1.0-1.4</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Has priority over</RelationshipType>
-        <RelatedFormatID>627</RelatedFormatID>
-        <RelatedFormatName>Rich Text Format</RelatedFormatName>
-        <RelatedFormatVersion>1.1</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Has priority over</RelationshipType>
-        <RelatedFormatID>628</RelatedFormatID>
-        <RelatedFormatName>Rich Text Format</RelatedFormatName>
-        <RelatedFormatVersion>1.2</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Has priority over</RelationshipType>
-        <RelatedFormatID>629</RelatedFormatID>
-        <RelatedFormatName>Rich Text Format</RelatedFormatName>
-        <RelatedFormatVersion>1.3</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Has priority over</RelationshipType>
-        <RelatedFormatID>630</RelatedFormatID>
-        <RelatedFormatName>Rich Text Format</RelatedFormatName>
-        <RelatedFormatVersion>1.4</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Is previous version of</RelationshipType>

@@ -105,12 +105,6 @@
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
-        <RelatedFormatID>632</RelatedFormatID>
-        <RelatedFormatName>Rich Text Format</RelatedFormatName>
-        <RelatedFormatVersion>1.6</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>633</RelatedFormatID>
         <RelatedFormatName>Rich Text Format</RelatedFormatName>
         <RelatedFormatVersion>1.7</RelatedFormatVersion>

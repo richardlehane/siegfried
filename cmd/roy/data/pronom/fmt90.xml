@@ -34,6 +34,10 @@
         <Identifier>fmt/90</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>image/vnd.zbrush.pcx</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
       <ExternalSignature>
         <ExternalSignatureID>697</ExternalSignatureID>
         <Signature>pcx</Signature>

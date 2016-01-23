@@ -9,7 +9,8 @@
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Spreadsheet</FormatTypes>
+      <FormatTypes>
+      </FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
       <FormatDescription>PUID deprecated. Please see fmt/61: Microsoft Excel 97 Workbook</FormatDescription>
@@ -36,18 +37,6 @@
         <Identifier>fmt/178</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
-      <Developers>
-        <DeveloperID>93</DeveloperID>
-        <DeveloperName>
-        </DeveloperName>
-        <OrganisationName>Microsoft Corporation</OrganisationName>
-        <DeveloperCompoundName>Microsoft Corporation</DeveloperCompoundName>
-      </Developers>
-      <ExternalSignature>
-        <ExternalSignatureID>873</ExternalSignatureID>
-        <Signature>xls</Signature>
-        <SignatureType>File extension</SignatureType>
-      </ExternalSignature>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

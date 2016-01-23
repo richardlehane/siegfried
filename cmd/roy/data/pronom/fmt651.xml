@@ -149,12 +149,6 @@
         </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
-        <RelationshipType>Is previous version of</RelationshipType>
-        <RelatedFormatID>1484</RelatedFormatID>
-        <RelatedFormatName>Quark Xpress Data File</RelatedFormatName>
-        <RelatedFormatVersion>9</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
         <RelationshipType>Is subsequent version of</RelationshipType>
         <RelatedFormatID>1484</RelatedFormatID>
         <RelatedFormatName>Quark Xpress Data File</RelatedFormatName>

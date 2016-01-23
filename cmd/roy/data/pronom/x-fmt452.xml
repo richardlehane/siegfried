@@ -34,10 +34,6 @@
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
-        <Identifier>application/octet-stream</Identifier>
-        <IdentifierType>MIME</IdentifierType>
-      </FileFormatIdentifier>
-      <FileFormatIdentifier>
         <Identifier>x-fmt/452</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>

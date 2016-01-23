@@ -38,9 +38,28 @@
         <Identifier>fmt/591</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>image/vnd.radiance</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
       <ExternalSignature>
         <ExternalSignatureID>1422</ExternalSignatureID>
         <Signature>hdr</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1795</ExternalSignatureID>
+        <Signature>pic</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1796</ExternalSignatureID>
+        <Signature>rgbe</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1797</ExternalSignatureID>
+        <Signature>xyze</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <InternalSignature>

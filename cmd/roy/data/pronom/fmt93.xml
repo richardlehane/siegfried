@@ -8,8 +8,7 @@
       <FormatAliases>VRML (1.0)</FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>
-      </FormatTypes>
+      <FormatTypes>Model</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
       <FormatDescription>The Virtual Reality Modeling Language (VRML) is a language for describing multi-participant interactive simulations - virtual worlds networked via the global Internet and hyper-linked with the World Wide Web. All aspects of virtual world display, interaction and internetworking can be specified using VRML. It was created with the goal of becoming the standard language for interactive simulation within the World Wide Web. The first version of VRML allows for the creation of virtual worlds with limited interactive behaviour. These worlds can contain objects which have hyper-links to other worlds, HTML documents or other valid MIME types. Nodes are arranged in hierarchical structures called scene graphs, which also define an ordering of the nodes.</FormatDescription>

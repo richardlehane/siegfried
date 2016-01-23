@@ -42,6 +42,11 @@
         <Signature>iff</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1792</ExternalSignatureID>
+        <Signature>8svx</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
       <InternalSignature>
         <SignatureID>458</SignatureID>
         <SignatureName>Interchange Format File 8-bit Sampled Voice</SignatureName>

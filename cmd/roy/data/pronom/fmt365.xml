@@ -35,6 +35,10 @@ Community (IC) and other departments and agencies of the United States Governmen
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
+        <Identifier>application/vnd.nitf</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
         <Identifier>fmt/365</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>

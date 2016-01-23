@@ -33,6 +33,10 @@
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
+        <Identifier>application/vnd.hp-HPGL</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
         <Identifier>x-fmt/293</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>

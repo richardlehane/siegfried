@@ -9,7 +9,7 @@
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Text (Mark-up)</FormatTypes>
+      <FormatTypes>Model</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
       <FormatDescription>INTERLIS is a description and transfer mechanism for spatial data. INTERLIS 2 Model files contain the the geodata and can be converted to XML Schema (XSD) files (by using a software called INTERLIS compiler). Such models are described using a Modula-like language, which can be thought of as a superset of UML.</FormatDescription>

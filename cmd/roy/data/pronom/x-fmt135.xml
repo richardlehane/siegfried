@@ -33,10 +33,6 @@ This format is currently deprecated in favour of fmt/414 in order to remove a mu
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
-        <Identifier>audio/x-aiff</Identifier>
-        <IdentifierType>MIME</IdentifierType>
-      </FileFormatIdentifier>
-      <FileFormatIdentifier>
         <Identifier>x-fmt/135</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>

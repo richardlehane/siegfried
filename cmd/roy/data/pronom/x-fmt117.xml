@@ -91,12 +91,6 @@
         <RelatedFormatName>Lotus 1-2-3 Worksheet</RelatedFormatName>
         <RelatedFormatVersion>4-5</RelatedFormatVersion>
       </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Is previous version of</RelationshipType>
-        <RelatedFormatID>299</RelatedFormatID>
-        <RelatedFormatName>Lotus 1-2-3 Worksheet</RelatedFormatName>
-        <RelatedFormatVersion>5.0</RelatedFormatVersion>
-      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

@@ -39,6 +39,10 @@ The file format specification is available: http://graphcomp.com/info/specs/live
         <IdentifierType>Apple Uniform Type Identifier</IdentifierType>
       </FileFormatIdentifier>
       <FileFormatIdentifier>
+        <Identifier>image/vnd.fpx</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
         <Identifier>x-fmt/56</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>

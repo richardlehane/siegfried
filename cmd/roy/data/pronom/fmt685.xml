@@ -150,12 +150,6 @@
         <RelatedFormatName>Quark Xpress Data File</RelatedFormatName>
         <RelatedFormatVersion>10</RelatedFormatVersion>
       </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Is subsequent version of</RelationshipType>
-        <RelatedFormatID>1450</RelatedFormatID>
-        <RelatedFormatName>Quark Xpress Data File</RelatedFormatName>
-        <RelatedFormatVersion>10</RelatedFormatVersion>
-      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

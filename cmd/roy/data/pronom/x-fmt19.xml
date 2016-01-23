@@ -3,15 +3,14 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>48</FormatID>
-      <FormatName>3d Studio</FormatName>
+      <FormatName>3D Studio</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>
-      </FormatTypes>
+      <FormatTypes>Model</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
       <FormatDescription>3DS is one of the file formats used by the Autodesk 3ds Max 3D modeling, animation and rendering software.</FormatDescription>

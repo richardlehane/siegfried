@@ -41,6 +41,10 @@ It is not possible to create a strong binary signature for this format, since th
         <Identifier>fmt/497</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>image/vnd-wap-wbmp</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
       <ExternalSignature>
         <ExternalSignatureID>1310</ExternalSignatureID>
         <Signature>wbmp</Signature>

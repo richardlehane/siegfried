@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>1579</FormatID>
-      <FormatName>pcap Next Generation Capture</FormatName>
+      <FormatName>pcap Next Generation Packet Capture</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
@@ -36,12 +36,12 @@
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
-        <Identifier>fmt/780</Identifier>
-        <IdentifierType>PUID</IdentifierType>
+        <Identifier>application/vnd.tcpdump.pcap</Identifier>
+        <IdentifierType>MIME</IdentifierType>
       </FileFormatIdentifier>
       <FileFormatIdentifier>
-        <Identifier>vnd.tcpdump.pcap</Identifier>
-        <IdentifierType>MIME</IdentifierType>
+        <Identifier>fmt/780</Identifier>
+        <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
       <ExternalSignature>
         <ExternalSignatureID>1671</ExternalSignatureID>

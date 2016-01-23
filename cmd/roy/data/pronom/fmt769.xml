@@ -111,11 +111,11 @@ http://www.adobe.com/devnet/articles/flashplayer-air-feature-list.html</Provenan
         </ByteSequence>
       </InternalSignature>
       <InternalSignature>
-        <SignatureID>1127</SignatureID>
-        <SignatureName>SWF 22 - LZMA compressed</SignatureName>
-        <SignatureNote>Header (ZWS then version number)</SignatureNote>
+        <SignatureID>1128</SignatureID>
+        <SignatureName>SWF 23 - LZMA compressed</SignatureName>
+        <SignatureNote>Header (ZWS then version numbe</SignatureNote>
         <ByteSequence>
-          <ByteSequenceID>1376</ByteSequenceID>
+          <ByteSequenceID>1377</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
           <MaxOffset>0</MaxOffset>
@@ -125,7 +125,7 @@ http://www.adobe.com/devnet/articles/flashplayer-air-feature-list.html</Provenan
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>5A575316</ByteSequenceValue>
+          <ByteSequenceValue>5A575317</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

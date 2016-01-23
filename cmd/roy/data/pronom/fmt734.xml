@@ -3,14 +3,14 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>1533</FormatID>
-      <FormatName>SuperScape Virtual Reality format</FormatName>
+      <FormatName>SuperScape Virtual Reality Format</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Image (Vector)</FormatTypes>
+      <FormatTypes>Model</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
       <FormatDescription>SuperScape was a company that created virtual 3D modelling software. .svr was the native, proprietary format for the software, and it can be viewed with the SuperScape Viscape viewer browser plugin.</FormatDescription>

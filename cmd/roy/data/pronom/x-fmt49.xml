@@ -9,8 +9,7 @@
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>
-      </FormatTypes>
+      <FormatTypes>Model</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
       <FormatDescription>AutoCAD Design Web Format (DWF) version 6 is the publishing format of Autodesk software, especially design data, such as 2D vector data, 3D vector data, animations, and metadata.  It uses the ZIP file format as the backing store mechanism.  The content can be roughly divided into:

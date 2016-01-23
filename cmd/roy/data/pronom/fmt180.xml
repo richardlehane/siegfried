@@ -9,7 +9,8 @@
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Presentation</FormatTypes>
+      <FormatTypes>
+      </FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
       <FormatDescription>PUID deprecated. Please see fmt/126: Microsoft PowerPoint 97-2002</FormatDescription>
@@ -36,18 +37,6 @@
         <Identifier>fmt/180</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
-      <Developers>
-        <DeveloperID>93</DeveloperID>
-        <DeveloperName>
-        </DeveloperName>
-        <OrganisationName>Microsoft Corporation</OrganisationName>
-        <DeveloperCompoundName>Microsoft Corporation</DeveloperCompoundName>
-      </Developers>
-      <ExternalSignature>
-        <ExternalSignatureID>875</ExternalSignatureID>
-        <Signature>ppt</Signature>
-        <SignatureType>File extension</SignatureType>
-      </ExternalSignature>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

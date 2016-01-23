@@ -44,8 +44,10 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>609</SignatureID>
-        <SignatureName>Windows Metafile Image</SignatureName>
-        <SignatureNote>Most Microsoft Windows applications that create metafiles prepend a 22-byte header to the metafile. Magic number 0x9AC6CDD7,  2-byte handle, always 0, skip 16 bytes, File type (1 or 2), header size in words, always 9.</SignatureNote>
+        <SignatureName>Windows Metafile Image with Placeable File Header</SignatureName>
+        <SignatureNote>Many applications that create metafiles prepend a 22-byte 'Placeable File Header' to the metafile: https://msdn.microsoft.com/en-us/library/windows/desktop/ms534075(v=vs.85).aspx
+
+Magic number 0x9AC6CDD7,  2-byte handle, always 0, skip 16 bytes, File type (1 or 2), header size in words, always 9.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>754</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -59,6 +61,24 @@
           <Endianness>
           </Endianness>
           <ByteSequenceValue>D7CDC69A0000{16}01000900</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1228</SignatureID>
+        <SignatureName>Windows Metafile Image without Placeable File Header</SignatureName>
+        <SignatureNote>File type (1 or 2), header size in words, always 9. Version either 01 or 03</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1499</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>0100090000(01|03)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

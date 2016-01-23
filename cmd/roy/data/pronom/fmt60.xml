@@ -5,10 +5,12 @@
       <FormatID>683</FormatID>
       <FormatName>Excel 95 Workbook (xls)</FormatName>
       <FormatVersion>7</FormatVersion>
-      <FormatAliases>Microsoft Excel Workbook (95)</FormatAliases>
+      <FormatAliases>
+      </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Spreadsheet</FormatTypes>
+      <FormatTypes>
+      </FormatTypes>
       <FormatDisclosure>None</FormatDisclosure>
       <FormatDescription>PUID deprecated. Please see fmt/60: Microsoft Excel 5.0/95 Workbook (xls).</FormatDescription>
       <BinaryFileFormat>Binary</BinaryFileFormat>
@@ -29,14 +31,6 @@
       </FormatRisk>
       <TechnicalEnvironment>
       </TechnicalEnvironment>
-      <FileFormatIdentifier>
-        <Identifier>application/vnd.ms-excel</Identifier>
-        <IdentifierType>MIME</IdentifierType>
-      </FileFormatIdentifier>
-      <FileFormatIdentifier>
-        <Identifier>com.microsoft.excel.xls</Identifier>
-        <IdentifierType>Apple Uniform Type Identifier</IdentifierType>
-      </FileFormatIdentifier>
       <FileFormatIdentifier>
         <Identifier>fmt/60</Identifier>
         <IdentifierType>PUID</IdentifierType>
@@ -73,29 +67,11 @@
           <PublisherCompoundName>OpenOffice.org</PublisherCompoundName>
         </Publisher>
       </Document>
-      <ExternalSignature>
-        <ExternalSignatureID>681</ExternalSignatureID>
-        <Signature>xls</Signature>
-        <SignatureType>File extension</SignatureType>
-      </ExternalSignature>
-      <RelatedFormat>
-        <RelationshipType>Has priority over</RelationshipType>
-        <RelatedFormatID>767</RelatedFormatID>
-        <RelatedFormatName>OLE2 Compound Document Format</RelatedFormatName>
-        <RelatedFormatVersion>
-        </RelatedFormatVersion>
-      </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Is previous version of</RelationshipType>
         <RelatedFormatID>684</RelatedFormatID>
         <RelatedFormatName>Microsoft Excel 97 Workbook (xls)</RelatedFormatName>
         <RelatedFormatVersion>8</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Is subsequent version of</RelationshipType>
-        <RelatedFormatID>682</RelatedFormatID>
-        <RelatedFormatName>Microsoft Excel 5.0/95 Workbook (xls)</RelatedFormatName>
-        <RelatedFormatVersion>5/95</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Is subtype of</RelationshipType>
@@ -104,138 +80,6 @@
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>
-      <FormatProperties>
-        <FormatProperty>
-          <PropertyName>Creation Date</PropertyName>
-          <PropertyDescription>
-          </PropertyDescription>
-          <PropertyType>Instance</PropertyType>
-          <PropertyRiskScore>
-          </PropertyRiskScore>
-          <PropertyHighRisk>
-          </PropertyHighRisk>
-          <PropertyValueDescription>
-          </PropertyValueDescription>
-          <PropertyRisks />
-        </FormatProperty>
-        <FormatProperty>
-          <PropertyName>Number of Pages</PropertyName>
-          <PropertyDescription>
-          </PropertyDescription>
-          <PropertyType>Instance</PropertyType>
-          <PropertyRiskScore>
-          </PropertyRiskScore>
-          <PropertyHighRisk>
-          </PropertyHighRisk>
-          <PropertyValueDescription>
-          </PropertyValueDescription>
-          <PropertyRisks />
-        </FormatProperty>
-        <FormatProperty>
-          <PropertyName>Creating Application</PropertyName>
-          <PropertyDescription>
-          </PropertyDescription>
-          <PropertyType>Instance</PropertyType>
-          <PropertyRiskScore>
-          </PropertyRiskScore>
-          <PropertyHighRisk>
-          </PropertyHighRisk>
-          <PropertyValueDescription>
-          </PropertyValueDescription>
-          <PropertyRisks />
-        </FormatProperty>
-        <FormatProperty>
-          <PropertyName>Title</PropertyName>
-          <PropertyDescription>
-          </PropertyDescription>
-          <PropertyType>Instance</PropertyType>
-          <PropertyRiskScore>
-          </PropertyRiskScore>
-          <PropertyHighRisk>
-          </PropertyHighRisk>
-          <PropertyValueDescription>
-          </PropertyValueDescription>
-          <PropertyRisks />
-        </FormatProperty>
-        <FormatProperty>
-          <PropertyName>Creator</PropertyName>
-          <PropertyDescription>
-          </PropertyDescription>
-          <PropertyType>Instance</PropertyType>
-          <PropertyRiskScore>
-          </PropertyRiskScore>
-          <PropertyHighRisk>
-          </PropertyHighRisk>
-          <PropertyValueDescription>
-          </PropertyValueDescription>
-          <PropertyRisks />
-        </FormatProperty>
-        <FormatProperty>
-          <PropertyName>Subject</PropertyName>
-          <PropertyDescription>
-          </PropertyDescription>
-          <PropertyType>Instance</PropertyType>
-          <PropertyRiskScore>
-          </PropertyRiskScore>
-          <PropertyHighRisk>
-          </PropertyHighRisk>
-          <PropertyValueDescription>
-          </PropertyValueDescription>
-          <PropertyRisks />
-        </FormatProperty>
-        <FormatProperty>
-          <PropertyName>Comments</PropertyName>
-          <PropertyDescription>
-          </PropertyDescription>
-          <PropertyType>Instance</PropertyType>
-          <PropertyRiskScore>
-          </PropertyRiskScore>
-          <PropertyHighRisk>
-          </PropertyHighRisk>
-          <PropertyValueDescription>
-          </PropertyValueDescription>
-          <PropertyRisks />
-        </FormatProperty>
-        <FormatProperty>
-          <PropertyName>Encrypted</PropertyName>
-          <PropertyDescription>
-          </PropertyDescription>
-          <PropertyType>Instance</PropertyType>
-          <PropertyRiskScore>
-          </PropertyRiskScore>
-          <PropertyHighRisk>
-          </PropertyHighRisk>
-          <PropertyValueDescription>
-          </PropertyValueDescription>
-          <PropertyRisks />
-        </FormatProperty>
-        <FormatProperty>
-          <PropertyName>Word Count</PropertyName>
-          <PropertyDescription>
-          </PropertyDescription>
-          <PropertyType>Instance</PropertyType>
-          <PropertyRiskScore>
-          </PropertyRiskScore>
-          <PropertyHighRisk>
-          </PropertyHighRisk>
-          <PropertyValueDescription>
-          </PropertyValueDescription>
-          <PropertyRisks />
-        </FormatProperty>
-        <FormatProperty>
-          <PropertyName>Character Count</PropertyName>
-          <PropertyDescription>
-          </PropertyDescription>
-          <PropertyType>Instance</PropertyType>
-          <PropertyRiskScore>
-          </PropertyRiskScore>
-          <PropertyHighRisk>
-          </PropertyHighRisk>
-          <PropertyValueDescription>
-          </PropertyValueDescription>
-          <PropertyRisks />
-        </FormatProperty>
-      </FormatProperties>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

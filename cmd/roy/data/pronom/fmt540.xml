@@ -9,10 +9,10 @@
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Aggregate</FormatTypes>
+      <FormatTypes>Model</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>CINEMA 4D is a 3D modeling, animation and rendering application developed by MAXON Computer GmbH. CINEMA 4D doesn’t use separate files for material, object and scene information. Instead CINEMA 4D uses one file format which can contain all these elements. That means one editor where animation, modeling, texturing and rendering can be done at the same time. CINEMA 4D uses IFF, which means Interchange File Format“. IFF is a chunk based format. IFF allows you to read only those structures of a file which your application can handle.</FormatDescription>
+      <FormatDescription>CINEMA 4D is a 3D modeling, animation and rendering application developed by MAXON Computer GmbH.  CINEMA 4D as a file format can contain elements of animation, modeling, texturing and rendering. CINEMA 4D uses IFF, which means Interchange File Format“. IFF is a chunk based format. IFF allows you to read only those structures of a file which your application can handle.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>

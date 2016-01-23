@@ -8,7 +8,7 @@
       <FormatAliases>openNURBS (4), Rhino 3D Model (4)</FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Image (Vector)</FormatTypes>
+      <FormatTypes>Model</FormatTypes>
       <FormatDisclosure>Full</FormatDisclosure>
       <FormatDescription>The 3DM (openNURBS) format is a 3D model representation based on non-uniform rational B-Splines (NURBS). The file format is defined by an open source C++ toolkit that reads and writes openNURBS models.</FormatDescription>
       <BinaryFileFormat>Binary</BinaryFileFormat>
@@ -102,6 +102,12 @@
           <ByteSequenceValue>33442047656F6D657472792046696C6520466F726D617420202020202020203401000000</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>1667</RelatedFormatID>
+        <RelatedFormatName>3DM</RelatedFormatName>
+        <RelatedFormatVersion>5</RelatedFormatVersion>
+      </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Is subsequent version of</RelationshipType>
         <RelatedFormatID>831</RelatedFormatID>

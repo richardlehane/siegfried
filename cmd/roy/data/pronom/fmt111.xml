@@ -143,12 +143,6 @@
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
-        <RelatedFormatID>683</RelatedFormatID>
-        <RelatedFormatName>Excel 95 Workbook (xls)</RelatedFormatName>
-        <RelatedFormatVersion>7</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>684</RelatedFormatID>
         <RelatedFormatName>Microsoft Excel 97 Workbook (xls)</RelatedFormatName>
         <RelatedFormatVersion>8</RelatedFormatVersion>

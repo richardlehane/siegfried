@@ -33,10 +33,6 @@
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
-        <Identifier>application/vnd.stardivision.impress</Identifier>
-        <IdentifierType>MIME</IdentifierType>
-      </FileFormatIdentifier>
-      <FileFormatIdentifier>
         <Identifier>x-fmt/405</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>

@@ -34,6 +34,10 @@
         <Identifier>fmt/88</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>image/vnd.zbrush.pcx</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
       <ExternalSignature>
         <ExternalSignatureID>621</ExternalSignatureID>
         <Signature>pcx</Signature>

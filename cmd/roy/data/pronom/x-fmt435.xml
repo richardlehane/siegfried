@@ -8,7 +8,7 @@
       <FormatAliases>Rhino 3D Model (3), openNURBS (3)</FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Image (Vector)</FormatTypes>
+      <FormatTypes>Model</FormatTypes>
       <FormatDisclosure>Full</FormatDisclosure>
       <FormatDescription>The 3DM (openNURBS) format is a 3D model representation based on non-uniform rational B-Splines (NURBS). The file format is defined by an open source C++ toolkit that reads and writes openNURBS models.</FormatDescription>
       <BinaryFileFormat>Binary</BinaryFileFormat>

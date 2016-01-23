@@ -68,7 +68,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>424D{4}00000000{4}28000000{8}0100(01|04|08|18)00(00|01|02)000000</ByteSequenceValue>
+          <ByteSequenceValue>424D{4}00000000{4}28000000{8}0100(01|04|08|18|20)00(00|01|02)000000</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

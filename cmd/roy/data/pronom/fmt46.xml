@@ -5,9 +5,12 @@
       <FormatID>627</FormatID>
       <FormatName>Rich Text Format</FormatName>
       <FormatVersion>1.1</FormatVersion>
-      <FormatAliases>RTF (1.1)</FormatAliases>
-      <FormatFamilies>Rich Text Format</FormatFamilies>
-      <FormatTypes>Word Processor</FormatTypes>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>
+      </FormatTypes>
       <FormatDisclosure>Partial</FormatDisclosure>
       <FormatDescription>Deprecated in favour of fmt/45</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
@@ -30,32 +33,14 @@
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
-        <Identifier>application/rtf</Identifier>
-        <IdentifierType>MIME</IdentifierType>
-      </FileFormatIdentifier>
-      <FileFormatIdentifier>
         <Identifier>fmt/46</Identifier>
         <IdentifierType>PUID</IdentifierType>
-      </FileFormatIdentifier>
-      <FileFormatIdentifier>
-        <Identifier>public.rtf</Identifier>
-        <IdentifierType>Apple Uniform Type Identifier</IdentifierType>
-      </FileFormatIdentifier>
-      <FileFormatIdentifier>
-        <Identifier>text/rtf</Identifier>
-        <IdentifierType>MIME</IdentifierType>
       </FileFormatIdentifier>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>631</RelatedFormatID>
         <RelatedFormatName>Rich Text Format</RelatedFormatName>
         <RelatedFormatVersion>1.5-1.6</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Has lower priority than</RelationshipType>
-        <RelatedFormatID>632</RelatedFormatID>
-        <RelatedFormatName>Rich Text Format</RelatedFormatName>
-        <RelatedFormatVersion>1.6</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
@@ -74,12 +59,6 @@
         <RelatedFormatID>1101</RelatedFormatID>
         <RelatedFormatName>Rich Text Format</RelatedFormatName>
         <RelatedFormatVersion>1.9</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Is previous version of</RelationshipType>
-        <RelatedFormatID>628</RelatedFormatID>
-        <RelatedFormatName>Rich Text Format</RelatedFormatName>
-        <RelatedFormatVersion>1.2</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Is subsequent version of</RelationshipType>

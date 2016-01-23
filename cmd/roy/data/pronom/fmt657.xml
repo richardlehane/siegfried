@@ -48,6 +48,13 @@ This format can be identified via a container signature in DROID version 6 or la
         <Signature>xps</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1630</RelatedFormatID>
+        <RelatedFormatName>3MF 3D Manufacturing Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

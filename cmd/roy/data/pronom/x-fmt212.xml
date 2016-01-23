@@ -9,7 +9,8 @@
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Spreadsheet</FormatTypes>
+      <FormatTypes>
+      </FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
       <FormatDescription>Format deprecated in favour of x-fmt/116</FormatDescription>
@@ -32,41 +33,9 @@
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
-        <Identifier>application/vnd.lotus-1-2-3</Identifier>
-        <IdentifierType>MIME</IdentifierType>
-      </FileFormatIdentifier>
-      <FileFormatIdentifier>
-        <Identifier>application/x-123</Identifier>
-        <IdentifierType>MIME</IdentifierType>
-      </FileFormatIdentifier>
-      <FileFormatIdentifier>
         <Identifier>x-fmt/212</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
-      <RelatedFormat>
-        <RelationshipType>Is subsequent version of</RelationshipType>
-        <RelatedFormatID>166</RelatedFormatID>
-        <RelatedFormatName>Lotus 1-2-3 Worksheet</RelatedFormatName>
-        <RelatedFormatVersion>2.0</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Is subsequent version of</RelationshipType>
-        <RelatedFormatID>167</RelatedFormatID>
-        <RelatedFormatName>Lotus 1-2-3 Worksheet</RelatedFormatName>
-        <RelatedFormatVersion>3.0</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Is subsequent version of</RelationshipType>
-        <RelatedFormatID>168</RelatedFormatID>
-        <RelatedFormatName>Lotus 1-2-3 Worksheet</RelatedFormatName>
-        <RelatedFormatVersion>4-5</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Is subsequent version of</RelationshipType>
-        <RelatedFormatID>169</RelatedFormatID>
-        <RelatedFormatName>Lotus 1-2-3 Worksheet</RelatedFormatName>
-        <RelatedFormatVersion>1.0</RelatedFormatVersion>
-      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

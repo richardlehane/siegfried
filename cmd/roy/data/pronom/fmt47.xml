@@ -5,9 +5,12 @@
       <FormatID>628</FormatID>
       <FormatName>Rich Text Format</FormatName>
       <FormatVersion>1.2</FormatVersion>
-      <FormatAliases>RTF (1.2)</FormatAliases>
-      <FormatFamilies>Rich Text Format</FormatFamilies>
-      <FormatTypes>Word Processor</FormatTypes>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>
+      </FormatTypes>
       <FormatDisclosure>Full</FormatDisclosure>
       <FormatDescription>Deprecated in favour of fmt/45</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
@@ -30,61 +33,14 @@
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
-        <Identifier>application/rtf</Identifier>
-        <IdentifierType>MIME</IdentifierType>
-      </FileFormatIdentifier>
-      <FileFormatIdentifier>
         <Identifier>fmt/47</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
-      <FileFormatIdentifier>
-        <Identifier>public.rtf</Identifier>
-        <IdentifierType>Apple Uniform Type Identifier</IdentifierType>
-      </FileFormatIdentifier>
-      <FileFormatIdentifier>
-        <Identifier>text/rtf</Identifier>
-        <IdentifierType>MIME</IdentifierType>
-      </FileFormatIdentifier>
-      <Document>
-        <DocumentID>39</DocumentID>
-        <DisplayText>Microsoft, nd, Rich-Text Format Specification v. 1.2</DisplayText>
-        <DocumentType>Authoritative</DocumentType>
-        <AvailabilityDescription>Public</AvailabilityDescription>
-        <AvailabilityNote>
-        </AvailabilityNote>
-        <PublicationDate>
-        </PublicationDate>
-        <TitleText>Rich-Text Format Specification v. 1.2</TitleText>
-        <DocumentIPR>
-        </DocumentIPR>
-        <DocumentNote>
-        </DocumentNote>
-        <Author>
-          <AuthorID>93</AuthorID>
-          <AuthorName>
-          </AuthorName>
-          <OrganisationName>Microsoft Corporation</OrganisationName>
-          <AuthorCompoundName>Microsoft Corporation</AuthorCompoundName>
-        </Author>
-        <Publisher>
-          <PublisherID>93</PublisherID>
-          <PublisherName>
-          </PublisherName>
-          <OrganisationName>Microsoft Corporation</OrganisationName>
-          <PublisherCompoundName>Microsoft Corporation</PublisherCompoundName>
-        </Publisher>
-      </Document>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>631</RelatedFormatID>
         <RelatedFormatName>Rich Text Format</RelatedFormatName>
         <RelatedFormatVersion>1.5-1.6</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Has lower priority than</RelationshipType>
-        <RelatedFormatID>632</RelatedFormatID>
-        <RelatedFormatName>Rich Text Format</RelatedFormatName>
-        <RelatedFormatVersion>1.6</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
@@ -103,18 +59,6 @@
         <RelatedFormatID>1101</RelatedFormatID>
         <RelatedFormatName>Rich Text Format</RelatedFormatName>
         <RelatedFormatVersion>1.9</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Is previous version of</RelationshipType>
-        <RelatedFormatID>629</RelatedFormatID>
-        <RelatedFormatName>Rich Text Format</RelatedFormatName>
-        <RelatedFormatVersion>1.3</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Is subsequent version of</RelationshipType>
-        <RelatedFormatID>627</RelatedFormatID>
-        <RelatedFormatName>Rich Text Format</RelatedFormatName>
-        <RelatedFormatVersion>1.1</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>

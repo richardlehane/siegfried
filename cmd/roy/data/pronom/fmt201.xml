@@ -35,6 +35,10 @@
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
+        <Identifier>application/mathematica</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
         <Identifier>fmt/201</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>

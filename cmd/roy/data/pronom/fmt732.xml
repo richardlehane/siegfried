@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>1531</FormatID>
-      <FormatName>Bink Video format</FormatName>
+      <FormatName>Bink Video Format</FormatName>
       <FormatVersion>2</FormatVersion>
       <FormatAliases>
       </FormatAliases>
@@ -37,6 +37,10 @@
         <Identifier>fmt/732</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>video/vnd.radgamettools.bink</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
       <ExternalSignature>
         <ExternalSignatureID>1616</ExternalSignatureID>
         <Signature>bik2</Signature>
@@ -68,7 +72,7 @@
       <RelatedFormat>
         <RelationshipType>Is subsequent version of</RelationshipType>
         <RelatedFormatID>1530</RelatedFormatID>
-        <RelatedFormatName>Bink Video format</RelatedFormatName>
+        <RelatedFormatName>Bink Video Format</RelatedFormatName>
         <RelatedFormatVersion>1</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>

@@ -113,6 +113,13 @@
         <RelatedFormatName>Truevision TGA Bitmap</RelatedFormatName>
         <RelatedFormatVersion>2.0</RelatedFormatVersion>
       </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1672</RelatedFormatID>
+        <RelatedFormatName>MySQL Table Definition Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

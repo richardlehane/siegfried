@@ -36,6 +36,10 @@
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
+        <Identifier>application/vnd.tcpdump.pcap</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
         <Identifier>fmt/779</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>

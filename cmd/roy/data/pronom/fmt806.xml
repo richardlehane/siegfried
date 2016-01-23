@@ -44,6 +44,11 @@
         <Signature>mat</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1793</ExternalSignatureID>
+        <Signature>fig</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
       <InternalSignature>
         <SignatureID>1171</SignatureID>
         <SignatureName>Level 5 MAT-file format</SignatureName>
@@ -62,6 +67,12 @@
           <ByteSequenceValue>4D41544C414220352E30{114}(0001494D|01004D49)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>1629</RelatedFormatID>
+        <RelatedFormatName>MAT-file format</RelatedFormatName>
+        <RelatedFormatVersion>7.3</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

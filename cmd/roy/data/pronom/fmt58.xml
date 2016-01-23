@@ -95,7 +95,7 @@
       <InternalSignature>
         <SignatureID>75</SignatureID>
         <SignatureName>BIFF 4 Workbook/Workspace</SignatureName>
-        <SignatureNote>BIFF4: BOF hex 0904. record length hex 0600, BIFF version=0004, filetype=workbook=0001</SignatureNote>
+        <SignatureNote>BIFF4: BOF hex 0904. record length hex 0600, BIFF version=(0000|0004), filetype=workbook=0001</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>192</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -108,7 +108,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>0904060000040001</ByteSequenceValue>
+          <ByteSequenceValue>09040600(0000|0004)0001</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

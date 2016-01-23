@@ -38,6 +38,10 @@
         <Identifier>fmt/499</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>video/vnd-vivo</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
       <ExternalSignature>
         <ExternalSignatureID>1312</ExternalSignatureID>
         <Signature>viv</Signature>

@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>1463</FormatID>
-      <FormatName>Gerber format</FormatName>
+      <FormatName>Gerber Format</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
@@ -33,6 +33,10 @@
       </FormatRisk>
       <TechnicalEnvironment>
       </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/vnd.gerber</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
       <FileFormatIdentifier>
         <Identifier>fmt/664</Identifier>
         <IdentifierType>PUID</IdentifierType>

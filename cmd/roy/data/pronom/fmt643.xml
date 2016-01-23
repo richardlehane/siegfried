@@ -10,7 +10,7 @@
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Image (Vector)</FormatTypes>
+      <FormatTypes>Model</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
       <FormatDescription>The E57 file format is a format for storing point clouds, images, and metadata produced by 3D imaging systems.</FormatDescription>

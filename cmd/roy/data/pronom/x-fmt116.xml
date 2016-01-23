@@ -68,12 +68,6 @@
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
-        <RelationshipType>Is previous version of</RelationshipType>
-        <RelatedFormatID>299</RelatedFormatID>
-        <RelatedFormatName>Lotus 1-2-3 Worksheet</RelatedFormatName>
-        <RelatedFormatVersion>5.0</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
         <RelationshipType>Is subsequent version of</RelationshipType>
         <RelatedFormatID>166</RelatedFormatID>
         <RelatedFormatName>Lotus 1-2-3 Worksheet</RelatedFormatName>

@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>1362</FormatID>
-      <FormatName>Digital Imaging and Communications in Medicine file format</FormatName>
+      <FormatName>Digital Imaging and Communications in Medicine File Format</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
@@ -34,6 +34,10 @@
       </FormatRisk>
       <TechnicalEnvironment>
       </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/dicom</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
       <FileFormatIdentifier>
         <Identifier>fmt/574</Identifier>
         <IdentifierType>PUID</IdentifierType>
