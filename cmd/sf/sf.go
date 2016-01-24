@@ -16,6 +16,7 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"flag"
 	"fmt"
 	"io"
@@ -53,6 +54,7 @@ var (
 	archive   = flag.Bool("z", false, "scan archive formats (zip, tar, gzip, warc, arc)")
 	hashf     = flag.String("hash", "", "calculate file checksum with hash algorithm; options "+hashChoices)
 	throttlef = flag.Duration("throttle", 0, "set a time to wait between scanning files e.g. 50ms")
+	bufferf   = flag.Bool("copy", false, "copy files into memory before processing (must have enough memory)")
 )
 
 var throttle *time.Ticker
@@ -143,13 +145,34 @@ func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 func multiIdentifyS(w writer, s *siegfried.Siegfried, root, orig string, norecurse bool) error {
 	wf := func(path string, info os.FileInfo, err error) error {
 		var retry bool
+		var lp, sp string
 		if throttle != nil {
 			<-throttle.C
 		}
 		if err != nil {
 			info, err = retryStat(path, err) // retry stat in case is a windows long path error
 			if err != nil {                  // fatal: return error and quit
-				return fmt.Errorf("walking %s; got %v", path, err)
+				if throttle != nil {
+					var success bool
+					for i := 0; i < retries; i++ {
+						if i > 0 {
+							<-throttle.C
+						}
+						info, err = os.Lstat(path)
+						if err == nil {
+							success = true
+							break
+						}
+					}
+					if !success {
+						return fmt.Errorf("walking %s; got %v", path, err)
+					}
+					lp, sp = path, ""
+				} else {
+					return fmt.Errorf("walking %s; got %v", path, err)
+				}
+			} else {
+				lp, sp = longpath(path), path
 			}
 			retry = true
 		}
@@ -158,7 +181,7 @@ func multiIdentifyS(w writer, s *siegfried.Siegfried, root, orig string, norecur
 				return filepath.SkipDir
 			}
 			if retry { // if a dir long path, restart the recursion with a long path as the new root
-				return multiIdentifyS(w, s, longpath(path), path, norecurse)
+				return multiIdentifyS(w, s, lp, sp, norecurse)
 			}
 			if *droido {
 				w.writeFile(shortpath(path, orig), -1, info.ModTime().Format(time.RFC3339), nil, nil, nil) // write directory with a -1 size for droid output only
@@ -172,6 +195,10 @@ func multiIdentifyS(w writer, s *siegfried.Siegfried, root, orig string, norecur
 }
 
 func identifyFile(w writer, s *siegfried.Siegfried, path string, sz int64, mod string) {
+	if *bufferf {
+		identifyBuffer(w, s, path, sz, mod)
+		return
+	}
 	f, err := os.Open(path)
 	if err != nil {
 		f, err = retryOpen(path, err) // retry open in case is a windows long path error
@@ -285,10 +312,13 @@ func main() {
 	// during parallel scanning or in server mode, unsafe to access the last read buffer - so can't unzip or hash
 	if *multi > 1 || *serve != "" {
 		if *archive {
-			log.Fatalln("[FATAL] cannot scan archive formats when running in parallel mode")
+			log.Fatalln("[FATAL] cannot scan archive formats when running in parallel or server mode")
 		}
 		if *hashf != "" {
-			log.Fatalln("[FATAL] cannot calculate file checksum when running in parallel mode")
+			log.Fatalln("[FATAL] cannot calculate file checksum when running in parallel or server mode")
+		}
+		if *bufferf {
+			log.Fatalln("[FATAL] cannot buffer files when running in parallel or server mode")
 		}
 	}
 
@@ -327,6 +357,10 @@ func main() {
 	s, err := siegfried.Load(config.Signature())
 	if err != nil {
 		log.Fatalf("[FATAL] error loading signature file, got: %v", err)
+	}
+
+	if *bufferf {
+		fileBuffer = &buffer{&bytes.Buffer{}, nil, 0}
 	}
 
 	var w writer

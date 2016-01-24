@@ -22,7 +22,10 @@ import (
 
 // longpath code derived from https://github.com/docker/docker/tree/master/pkg/longpath
 // prefix is the longpath prefix for Windows file paths.
-const prefix = `\\?\`
+const (
+	prefix = `\\?\`
+	lplen  = 240
+)
 
 func longpath(path string) string {
 	if !strings.HasPrefix(path, prefix) {
@@ -53,7 +56,7 @@ func shortpath(long, short string) string {
 }
 
 func retryStat(path string, err error) (os.FileInfo, error) {
-	if strings.HasPrefix(path, prefix) { // already a long path - no point retrying
+	if len(path) < lplen || strings.HasPrefix(path, prefix) { // already a long path - no point retrying
 		return nil, err
 	}
 	info, e := os.Lstat(longpath(path)) // filepath.Walk uses Lstat not Stat
@@ -64,6 +67,9 @@ func retryStat(path string, err error) (os.FileInfo, error) {
 }
 
 func retryOpen(path string, err error) (*os.File, error) {
+	if len(path) < lplen || strings.HasPrefix(path, prefix) { // already a long path - no point retrying
+		return nil, err
+	}
 	file, e := os.Open(longpath(path))
 	if e != nil {
 		return nil, err
