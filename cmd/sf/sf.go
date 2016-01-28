@@ -322,8 +322,8 @@ func main() {
 	}
 
 	if *logf != "" {
-		if *multi > 1 {
-			log.Fatalln("[FATAL] cannot log when running in parallel mode")
+		if *multi > 1 && *logf != "error" {
+			log.Fatalln("[FATAL] cannot log in parallel mode")
 		}
 		if err := newLogger(*logf); err != nil {
 			log.Fatalln(err)
