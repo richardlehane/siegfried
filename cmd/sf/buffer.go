@@ -27,6 +27,7 @@ type buffer struct {
 	*bytes.Buffer
 	buf []byte
 	sz  int
+	max int // store capacity (as bytes.Buffer.Cap() needs go15+)
 }
 
 var fileBuffer *buffer
@@ -40,8 +41,9 @@ func identifyBuffer(w writer, s *siegfried.Siegfried, path string, sz int64, mod
 		writeError(w, path, sz, mod, fmt.Errorf("file too large to buffer"))
 		return
 	}
-	if fileBuffer.Cap() < fileBuffer.sz {
+	if fileBuffer.max < fileBuffer.sz {
 		fileBuffer.Buffer = bytes.NewBuffer(make([]byte, 0, fileBuffer.sz))
+		fileBuffer.max = fileBuffer.sz
 	}
 	// recover from bytes.ErrTooLarge panic
 	defer func() {

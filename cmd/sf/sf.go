@@ -146,33 +146,32 @@ func multiIdentifyS(w writer, s *siegfried.Siegfried, root, orig string, norecur
 	wf := func(path string, info os.FileInfo, err error) error {
 		var retry bool
 		var lp, sp string
-		if throttle != nil {
+		if *throttlef > 0 {
 			<-throttle.C
 		}
 		if err != nil {
 			info, err = retryStat(path, err) // retry stat in case is a windows long path error
-			if err != nil {                  // fatal: return error and quit
-				if throttle != nil {
-					var success bool
-					for i := 0; i < retries; i++ {
-						if i > 0 {
-							<-throttle.C
-						}
-						info, err = os.Lstat(path)
-						if err == nil {
-							success = true
-							break
-						}
-					}
-					if !success {
-						return fmt.Errorf("walking %s; got %v", path, err)
-					}
-					lp, sp = path, ""
-				} else {
+			if err == nil {
+				lp, sp = longpath(path), path
+			} else {
+				if *throttlef == 0 {
 					return fmt.Errorf("walking %s; got %v", path, err)
 				}
-			} else {
-				lp, sp = longpath(path), path
+				var success bool
+				for i := 0; i < retries; i++ {
+					if i > 0 {
+						<-throttle.C
+					}
+					info, err = os.Lstat(path)
+					if err == nil {
+						success = true
+						break
+					}
+				}
+				if !success {
+					return fmt.Errorf("walking %s; got %v", path, err)
+				}
+				lp, sp = path, ""
 			}
 			retry = true
 		}
@@ -360,7 +359,7 @@ func main() {
 	}
 
 	if *bufferf {
-		fileBuffer = &buffer{&bytes.Buffer{}, nil, 0}
+		fileBuffer = &buffer{&bytes.Buffer{}, nil, 0, 0}
 	}
 
 	var w writer
