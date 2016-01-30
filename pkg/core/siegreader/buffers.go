@@ -21,25 +21,27 @@ import (
 
 // Buffers is a combined pool of stream, external and file buffers
 type Buffers struct {
-	spool  *pool // Pool of stream Buffers
-	fpool  *pool // Pool of file Buffers
-	epool  *pool // Pool of external buffers
-	fdatas *datas
-	last   *pool
+	spool *pool // Pool of stream Buffers
+	fpool *pool // Pool of file Buffers
+	epool *pool // Pool of external buffers
+
+	last *pool // Keep reference to the last pool
+
+	fdatas *datas // file datas
 }
 
 // New creates a new pool of stream, external and file buffers
 func New() *Buffers {
 	return &Buffers{
-		newPool(newStream),
-		newPool(newFile),
-		newPool(newExternal),
-		&datas{
+		spool: newPool(newStream),
+		fpool: newPool(newFile),
+		epool: newPool(newExternal),
+		last:  nil,
+		fdatas: &datas{
 			newPool(newBigFile),
 			newPool(newSmallFile),
 			newPool(newMmap),
 		},
-		nil,
 	}
 }
 
@@ -93,6 +95,8 @@ func (b *Buffers) Last() *Buffer {
 	last := &Buffer{bufferSrc: b.last.get().(bufferSrc)}
 	if str, ok := last.bufferSrc.(*stream); ok {
 		str.b = last
+	} else if f, ok := last.bufferSrc.(*file); ok {
+		f.recalled = true
 	}
 	return last
 }
@@ -111,7 +115,7 @@ func (d *datas) get(f *file) data {
 		if err := m.setSource(f); err == nil {
 			return m
 		}
-		d.mpool.put(m)
+		d.mpool.put(m) // replace on error and get big file instead
 	}
 	if f.sz <= int64(smallFileSz) {
 		sf := d.sfpool.get().(*smallfile)
@@ -135,7 +139,6 @@ func (d *datas) put(i data) {
 	case *smallfile:
 		d.sfpool.put(i)
 	case *mmap:
-		//i.(*mmap).reset() test resetting on setsource rather than put
 		d.mpool.put(i)
 	}
 	return

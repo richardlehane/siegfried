@@ -33,13 +33,11 @@ func newBigFile() interface{} {
 
 func (bf *bigfile) setSource(f *file) {
 	bf.file = f
-	// fill the EOF slice
-	bf.src.ReadAt(bf.eof[:], bf.sz-int64(eofSz))
-}
-
-func (bf *bigfile) reset() {
+	// reset
 	bf.i = 0
 	bf.last = 0
+	// fill the EOF slice
+	bf.src.ReadAt(bf.eof[:], bf.sz-int64(eofSz))
 }
 
 func (bf *bigfile) progressSlice(o int64) []byte {
