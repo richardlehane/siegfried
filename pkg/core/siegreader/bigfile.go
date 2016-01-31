@@ -22,20 +22,20 @@ type bigfile struct {
 	eof   [eofSz]byte
 	wheel [wheelSz]byte
 
-	mu               sync.Mutex
-	i                int // wheel offset for next write
-	start, end, last int64
+	mu                   sync.Mutex
+	i                    int   // wheel offset for next write
+	start, end, progress int64 // start and end are file offsets for the head and tail of the wheel; progress is file offset for the last call to progressSlice
 }
 
 func newBigFile() interface{} {
-	return &bigfile{last: int64(readSz)}
+	return &bigfile{progress: int64(initialRead)}
 }
 
 func (bf *bigfile) setSource(f *file) {
 	bf.file = f
 	// reset
 	bf.i = 0
-	bf.last = 0
+	bf.progress = int64(initialRead)
 	// fill the EOF slice
 	bf.src.ReadAt(bf.eof[:], bf.sz-int64(eofSz))
 }
@@ -51,24 +51,27 @@ func (bf *bigfile) progressSlice(o int64) []byte {
 	}
 	slc := bf.wheel[bf.i : bf.i+readSz]
 	bf.i += readSz
+	if bf.i == wheelSz {
+		bf.i = 0
+	}
 	return slc
 }
 
 func (bf *bigfile) slice(o int64, l int) []byte {
+	// if within the eof, return from there
+	if bf.sz-o <= int64(eofSz) {
+		x := eofSz - int(bf.sz-o)
+		return bf.eof[x : x+l] // (l is safe because read lengths already confirmed as legal)
+	}
 	bf.mu.Lock()
 	defer bf.mu.Unlock()
-	if l == readSz && bf.last == o { // if adjacent to last read
-		bf.last += int64(readSz)
+	if l == readSz && bf.progress == o { // if adjacent to last progress read and right length, assume this is a progress read
+		bf.progress += int64(readSz)
 		return bf.progressSlice(o)
 	}
 	ret := make([]byte, l)
-	// if within the eof or wheel copy
-	switch {
-	case bf.sz-o <= int64(eofSz): // within eof
-		x := eofSz - int(bf.sz-o)
-		copy(ret, bf.eof[x:x+l])
-		return ret
-	case o >= bf.start && o+int64(l) <= bf.end: // within wheel
+	// if within the wheel, copy
+	if o >= bf.start && o+int64(l) <= bf.end { // within wheel
 		copy(ret, bf.wheel[int(o-bf.start):int(o-bf.start)+l])
 		return ret
 	}

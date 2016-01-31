@@ -45,9 +45,9 @@ var (
 const (
 	readSz      int = 4096
 	initialRead     = readSz * 2
-	wheelSz         = readSz * 2
 	eofSz           = readSz * 2
-	smallFileSz     = readSz * 16
+	wheelSz         = readSz * 16
+	smallFileSz     = readSz * 16 // 65536
 )
 
 type bufferSrc interface {
