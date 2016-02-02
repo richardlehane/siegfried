@@ -16,7 +16,6 @@ package main
 
 import (
 	"bufio"
-	"bytes"
 	"flag"
 	"fmt"
 	"io"
@@ -54,7 +53,6 @@ var (
 	archive   = flag.Bool("z", false, "scan archive formats (zip, tar, gzip, warc, arc)")
 	hashf     = flag.String("hash", "", "calculate file checksum with hash algorithm; options "+hashChoices)
 	throttlef = flag.Duration("throttle", 0, "set a time to wait between scanning files e.g. 50ms")
-	bufferf   = flag.Bool("copy", false, "copy files into memory before processing (must have enough memory)")
 )
 
 var throttle *time.Ticker
@@ -90,13 +88,7 @@ func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 	go printer(w, resc, wg)
 	wf := func(path string, info os.FileInfo, err error) error {
 		if err != nil {
-			info, err = retryStat(path, err)
-			if err != nil || (info.IsDir() && !norecurse) { // fatal: return error and quit
-				if err == nil {
-					return fmt.Errorf("cannot recurse into %s; filepath too long", path)
-				}
-				return fmt.Errorf("walking %s; got %v", path, err)
-			}
+			return fmt.Errorf("walking %s; got %v", path, err)
 		}
 		if info.IsDir() {
 			if norecurse && path != r {
@@ -118,11 +110,8 @@ func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 		go func() {
 			f, err := os.Open(path)
 			if err != nil {
-				f, err = retryOpen(path, err)
-				if err != nil {
-					rchan <- res{path, 0, "", nil, err.(*os.PathError).Err} // return summary error only
-					return
-				}
+				rchan <- res{path, 0, "", nil, err.(*os.PathError).Err} // return summary error only
+				return
 			}
 			c, err := s.Identify(f, path, "")
 			if c == nil {
@@ -142,62 +131,9 @@ func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) 
 	return err
 }
 
-func multiIdentifyS(w writer, s *siegfried.Siegfried, root, orig string, norecurse bool) error {
-	wf := func(path string, info os.FileInfo, err error) error {
-		var retry bool
-		var lp, sp string
-		if *throttlef > 0 {
-			<-throttle.C
-		}
-		if err != nil {
-			info, err = retryStat(path, err) // retry stat in case is a windows long path error
-			if err == nil {
-				lp, sp = longpath(path), path
-			} else {
-				if *throttlef == 0 {
-					return fmt.Errorf("walking %s; got %v", path, err)
-				}
-				var success bool
-				for i := 0; i < retries; i++ {
-					if i > 0 {
-						<-throttle.C
-					}
-					info, err = os.Lstat(path)
-					if err == nil {
-						success = true
-						break
-					}
-				}
-				if !success {
-					return fmt.Errorf("walking %s; got %v", path, err)
-				}
-				lp, sp = path, ""
-			}
-			retry = true
-		}
-		if info.IsDir() {
-			if norecurse && path != root {
-				return filepath.SkipDir
-			}
-			if retry { // if a dir long path, restart the recursion with a long path as the new root
-				return multiIdentifyS(w, s, lp, sp, norecurse)
-			}
-			if *droido {
-				w.writeFile(shortpath(path, orig), -1, info.ModTime().Format(time.RFC3339), nil, nil, nil) // write directory with a -1 size for droid output only
-			}
-			return nil
-		}
-		identifyFile(w, s, shortpath(path, orig), info.Size(), info.ModTime().Format(time.RFC3339))
-		return nil
-	}
-	return filepath.Walk(root, wf)
-}
+// multiIdentifyS() defined in longpath.go and longpath_windows.go
 
 func identifyFile(w writer, s *siegfried.Siegfried, path string, sz int64, mod string) {
-	if *bufferf {
-		identifyBuffer(w, s, path, sz, mod)
-		return
-	}
 	f, err := os.Open(path)
 	if err != nil {
 		f, err = retryOpen(path, err) // retry open in case is a windows long path error
@@ -316,9 +252,6 @@ func main() {
 		if *hashf != "" {
 			log.Fatalln("[FATAL] cannot calculate file checksum when running in parallel or server mode")
 		}
-		if *bufferf {
-			log.Fatalln("[FATAL] cannot buffer files when running in parallel or server mode")
-		}
 	}
 
 	if *logf != "" {
@@ -356,10 +289,6 @@ func main() {
 	s, err := siegfried.Load(config.Signature())
 	if err != nil {
 		log.Fatalf("[FATAL] error loading signature file, got: %v", err)
-	}
-
-	if *bufferf {
-		fileBuffer = &buffer{&bytes.Buffer{}, nil, 0, 0}
 	}
 
 	var w writer

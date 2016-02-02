@@ -16,18 +16,41 @@
 
 package main
 
-import "os"
+import (
+	"fmt"
+	"os"
+	"time"
 
-func longpath(path string) string {
-	return path
+	"github.com/richardlehane/siegfried"
+)
+
+func retryOpen(path string, err error) (*os.File, error) {
+	return nil, err
 }
-
-func shortpath(long, short string) string { return long }
 
 func retryStat(path string, err error) (os.FileInfo, error) {
 	return nil, err
 }
 
-func retryOpen(path string, err error) (*os.File, error) {
-	return nil, err
+func multiIdentifyS(w writer, s *siegfried.Siegfried, root, orig string, norecurse bool) error {
+	walkFunc := func(path string, info os.FileInfo, err error) error {
+		if *throttlef > 0 {
+			<-throttle.C
+		}
+		if err != nil {
+			return fmt.Errorf("walking %s; got %v", path, err)
+		}
+		if info.IsDir() {
+			if norecurse && path != root {
+				return filepath.SkipDir
+			}
+			if *droido {
+				w.writeFile(shortpath(path, orig), -1, info.ModTime().Format(time.RFC3339), nil, nil, nil) // write directory with a -1 size for droid output only
+			}
+			return nil
+		}
+		identifyFile(w, s, path, info.Size(), info.ModTime().Format(time.RFC3339))
+		return nil
+	}
+	return filepath.Walk(root, walkFunc)
 }

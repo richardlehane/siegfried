@@ -15,9 +15,13 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
+
+	"github.com/richardlehane/siegfried"
 )
 
 // longpath code derived from https://github.com/docker/docker/tree/master/pkg/longpath
@@ -75,4 +79,37 @@ func retryOpen(path string, err error) (*os.File, error) {
 		return nil, err
 	}
 	return file, nil
+}
+
+func multiIdentifyS(w writer, s *siegfried.Siegfried, root, orig string, norecurse bool) error {
+	wf := func(path string, info os.FileInfo, err error) error {
+		var retry bool
+		var lp, sp string
+		if *throttlef > 0 {
+			<-throttle.C
+		}
+		if err != nil {
+			info, err = retryStat(path, err) // retry stat in case is a windows long path error
+			if err != nil {
+				return fmt.Errorf("walking %s; got %v", path, err)
+			}
+			lp, sp = longpath(path), path
+			retry = true
+		}
+		if info.IsDir() {
+			if norecurse && path != root {
+				return filepath.SkipDir
+			}
+			if retry { // if a dir long path, restart the recursion with a long path as the new root
+				return multiIdentifyS(w, s, lp, sp, norecurse)
+			}
+			if *droido {
+				w.writeFile(shortpath(path, orig), -1, info.ModTime().Format(time.RFC3339), nil, nil, nil) // write directory with a -1 size for droid output only
+			}
+			return nil
+		}
+		identifyFile(w, s, shortpath(path, orig), info.Size(), info.ModTime().Format(time.RFC3339))
+		return nil
+	}
+	return filepath.Walk(root, wf)
 }
