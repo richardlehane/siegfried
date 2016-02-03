@@ -1,0 +1,78 @@
+WARC/1.0
+WARC-Type: response
+WARC-Record-ID: <urn:uuid:e7c9eff8-f5bc-4aeb-b3d2-9d3df99afb30>
+WARC-Date: 2008-04-30T20:48:25Z
+Content-Length: 782
+Content-Type: application/http; msgtype=response
+WARC-Block-Digest: md5:U3LINH3IBMN52DJHX5NF6SKIFY======
+WARC-Payload-Digest: md5:OG2QNABNWSQZFP3YBRSAD3RR3Y======
+WARC-IP-Address: 207.241.229.39
+WARC-Target-URI: http://www.archive.org/robots.txt
+
+HTTP/1.1 200 OK
+Date: Wed, 30 Apr 2008 20:48:24 GMT
+Server: Apache/2.0.54 (Ubuntu) PHP/5.0.5-2ubuntu1.4 mod_ssl/2.0.54 OpenSSL/0.9.7g
+Last-Modified: Sat, 02 Feb 2008 19:40:44 GMT
+ETag: "47c3-1d3-11134700"
+Accept-Ranges: bytes
+Content-Length: 467
+Connection: close
+Content-Type: text/plain; charset=UTF-8
+
+##############################################
+#
+# Welcome to the Archive!
+#
+##############################################
+# Please crawl our files.
+# We appreciate if you can crawl responsibly.
+# Stay open!
+##############################################
+User-agent: *
+Disallow: /nothing---please-crawl-us--
+
+# slow down the ask jeeves crawler which was hitting our SE a little too fast
+# via collection pages.   --Feb2008 tracey--
+User-agent: Teoma
+Crawl-Delay: 10
+
+
+WARC/1.0
+WARC-Type: response
+WARC-Record-ID: <urn:uuid:e7c9eff8-f5bc-4aeb-b3d2-9d3df99afb30>
+WARC-Date: 2008-04-30T20:48:25Z
+Content-Length: 782
+Content-Type: application/http; msgtype=response
+WARC-Block-Digest: sha1:SUCGMUVXDKVB5CS2NL4R4JABNX7K466U
+WARC-Payload-Digest: sha1:5XRCLALILFBHEHD3S5B5Z3JROYZ5ADRT
+WARC-IP-Address: 207.241.229.39
+WARC-Target-URI: http://www.archive.org/robots.txt
+
+HTTP/1.1 200 OK
+Date: Wed, 30 Apr 2008 20:48:24 GMT
+Server: Apache/2.0.54 (Ubuntu) PHP/5.0.5-2ubuntu1.4 mod_ssl/2.0.54 OpenSSL/0.9.7g
+Last-Modified: Sat, 02 Feb 2008 19:40:44 GMT
+ETag: "47c3-1d3-11134700"
+Accept-Ranges: bytes
+Content-Length: 467
+Connection: close
+Content-Type: text/plain; charset=UTF-8
+
+##############################################
+#
+# Welcome to the Archive!
+#
+##############################################
+# Please crawl our files.
+# We appreciate if you can crawl responsibly.
+# Stay open!
+##############################################
+User-agent: *
+Disallow: /nothing---please-crawl-us--
+
+# slow down the ask jeeves crawler which was hitting our SE a little too fast
+# via collection pages.   --Feb2008 tracey--
+User-agent: Teoma
+Crawl-Delay: 10
+
+

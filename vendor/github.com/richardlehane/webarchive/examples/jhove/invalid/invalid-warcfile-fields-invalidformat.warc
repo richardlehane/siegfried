@@ -1,0 +1,20 @@
+WARC/1.0
+WARC-Type: request
+WARC-Target-URI: bad_uri
+WARC-IP-Address: a.b.c.d
+WARC-Date: blue monday
+WARC-Record-ID: <zaphod>
+Content-Length: very lengthy
+Content-Type: gif\image
+WARC-Block-Digest: sharif-1; omar
+WARC-Segment-Number: one
+
+GET /robots.txt HTTP/1.0
+User-Agent: Mozilla/5.0 (compatible; heritrix/1.14.0 +http://crawler.archive.org)
+From: archive-crawler-agent@lists.sourceforge.net
+Connection: close
+Referer: http://www.archive.org/
+Host: www.archive.org
+
+
+

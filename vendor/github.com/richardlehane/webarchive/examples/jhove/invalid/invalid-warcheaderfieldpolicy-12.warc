@@ -1,0 +1,11 @@
+WARC/1.0
+WARC-Type: response
+WARC-Target-URI: http://www.archive.org/
+WARC-Date: 2008-04-30T20:48:26Z
+WARC-Payload-Digest: sha1:2WAXX5NUWNNCS2BDKCO5OVDQBJVNKIVV
+WARC-IP-Address: 207.241.229.39
+WARC-Record-ID: <urn:uuid:4042c21b-d898-43f0-9c95-b50da2d1aa42>
+WARC-Segment-Number: 1
+Content-Type: application/http; msgtype=response
+Content-Length: 693
+

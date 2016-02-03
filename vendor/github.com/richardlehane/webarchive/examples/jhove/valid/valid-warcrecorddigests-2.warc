@@ -1,0 +1,271 @@
+WARC/1.0
+WARC-Type: response
+WARC-Record-ID: <urn:uuid:e7c9eff8-f5bc-4aeb-b3d2-9d3df99afb30>
+WARC-Date: 2008-04-30T20:48:25Z
+Content-Length: 782
+Content-Type: application/http; msgtype=response
+WARC-IP-Address: 207.241.229.39
+WARC-Target-URI: http://www.archive.org/robots.txt
+
+HTTP/1.1 200 OK
+Date: Wed, 30 Apr 2008 20:48:24 GMT
+Server: Apache/2.0.54 (Ubuntu) PHP/5.0.5-2ubuntu1.4 mod_ssl/2.0.54 OpenSSL/0.9.7g
+Last-Modified: Sat, 02 Feb 2008 19:40:44 GMT
+ETag: "47c3-1d3-11134700"
+Accept-Ranges: bytes
+Content-Length: 467
+Connection: close
+Content-Type: text/plain; charset=UTF-8
+
+##############################################
+#
+# Welcome to the Archive!
+#
+##############################################
+# Please crawl our files.
+# We appreciate if you can crawl responsibly.
+# Stay open!
+##############################################
+User-agent: *
+Disallow: /nothing---please-crawl-us--
+
+# slow down the ask jeeves crawler which was hitting our SE a little too fast
+# via collection pages.   --Feb2008 tracey--
+User-agent: Teoma
+Crawl-Delay: 10
+
+
+WARC/1.0
+WARC-Type: response
+WARC-Record-ID: <urn:uuid:e7c9eff8-f5bc-4aeb-b3d2-9d3df99afb30>
+WARC-Date: 2008-04-30T20:48:25Z
+Content-Length: 782
+Content-Type: application/http; msgtype=response
+WARC-Block-Digest: md5:71B506802DB4A192BF780C6401EE31DE
+WARC-Payload-Digest: md5:A6D6869F680B1BDD0D27BF5A5F49482E
+WARC-IP-Address: 207.241.229.39
+WARC-Target-URI: http://www.archive.org/robots.txt
+
+HTTP/1.1 200 OK
+Date: Wed, 30 Apr 2008 20:48:24 GMT
+Server: Apache/2.0.54 (Ubuntu) PHP/5.0.5-2ubuntu1.4 mod_ssl/2.0.54 OpenSSL/0.9.7g
+Last-Modified: Sat, 02 Feb 2008 19:40:44 GMT
+ETag: "47c3-1d3-11134700"
+Accept-Ranges: bytes
+Content-Length: 467
+Connection: close
+Content-Type: text/plain; charset=UTF-8
+
+##############################################
+#
+# Welcome to the Archive!
+#
+##############################################
+# Please crawl our files.
+# We appreciate if you can crawl responsibly.
+# Stay open!
+##############################################
+User-agent: *
+Disallow: /nothing---please-crawl-us--
+
+# slow down the ask jeeves crawler which was hitting our SE a little too fast
+# via collection pages.   --Feb2008 tracey--
+User-agent: Teoma
+Crawl-Delay: 10
+
+
+WARC/1.0
+WARC-Type: response
+WARC-Record-ID: <urn:uuid:e7c9eff8-f5bc-4aeb-b3d2-9d3df99afb30>
+WARC-Date: 2008-04-30T20:48:25Z
+Content-Length: 782
+Content-Type: application/http; msgtype=response
+WARC-Block-Digest: md5:OG2QNABNWSQZFP3YBRSAD3RR3Y======
+WARC-Payload-Digest: md5:U3LINH3IBMN52DJHX5NF6SKIFY======
+WARC-IP-Address: 207.241.229.39
+WARC-Target-URI: http://www.archive.org/robots.txt
+
+HTTP/1.1 200 OK
+Date: Wed, 30 Apr 2008 20:48:24 GMT
+Server: Apache/2.0.54 (Ubuntu) PHP/5.0.5-2ubuntu1.4 mod_ssl/2.0.54 OpenSSL/0.9.7g
+Last-Modified: Sat, 02 Feb 2008 19:40:44 GMT
+ETag: "47c3-1d3-11134700"
+Accept-Ranges: bytes
+Content-Length: 467
+Connection: close
+Content-Type: text/plain; charset=UTF-8
+
+##############################################
+#
+# Welcome to the Archive!
+#
+##############################################
+# Please crawl our files.
+# We appreciate if you can crawl responsibly.
+# Stay open!
+##############################################
+User-agent: *
+Disallow: /nothing---please-crawl-us--
+
+# slow down the ask jeeves crawler which was hitting our SE a little too fast
+# via collection pages.   --Feb2008 tracey--
+User-agent: Teoma
+Crawl-Delay: 10
+
+
+WARC/1.0
+WARC-Type: response
+WARC-Record-ID: <urn:uuid:e7c9eff8-f5bc-4aeb-b3d2-9d3df99afb30>
+WARC-Date: 2008-04-30T20:48:25Z
+Content-Length: 782
+Content-Type: application/http; msgtype=response
+WARC-Block-Digest: md5:cbUGgC20oZK/eAxkAe4x3g==
+WARC-Payload-Digest: md5:ptaGn2gLG90NJ79aX0lILg==
+WARC-IP-Address: 207.241.229.39
+WARC-Target-URI: http://www.archive.org/robots.txt
+
+HTTP/1.1 200 OK
+Date: Wed, 30 Apr 2008 20:48:24 GMT
+Server: Apache/2.0.54 (Ubuntu) PHP/5.0.5-2ubuntu1.4 mod_ssl/2.0.54 OpenSSL/0.9.7g
+Last-Modified: Sat, 02 Feb 2008 19:40:44 GMT
+ETag: "47c3-1d3-11134700"
+Accept-Ranges: bytes
+Content-Length: 467
+Connection: close
+Content-Type: text/plain; charset=UTF-8
+
+##############################################
+#
+# Welcome to the Archive!
+#
+##############################################
+# Please crawl our files.
+# We appreciate if you can crawl responsibly.
+# Stay open!
+##############################################
+User-agent: *
+Disallow: /nothing---please-crawl-us--
+
+# slow down the ask jeeves crawler which was hitting our SE a little too fast
+# via collection pages.   --Feb2008 tracey--
+User-agent: Teoma
+Crawl-Delay: 10
+
+
+WARC/1.0
+WARC-Type: response
+WARC-Record-ID: <urn:uuid:e7c9eff8-f5bc-4aeb-b3d2-9d3df99afb30>
+WARC-Date: 2008-04-30T20:48:25Z
+Content-Length: 782
+Content-Type: application/http; msgtype=response
+WARC-Block-Digest: sha1:EDE22581685942721C7B9743DCED317633D00E33
+WARC-Payload-Digest: sha1:95046652B71AAA1E8A5A6AF91E24016DFEAE7BD4
+WARC-IP-Address: 207.241.229.39
+WARC-Target-URI: http://www.archive.org/robots.txt
+
+HTTP/1.1 200 OK
+Date: Wed, 30 Apr 2008 20:48:24 GMT
+Server: Apache/2.0.54 (Ubuntu) PHP/5.0.5-2ubuntu1.4 mod_ssl/2.0.54 OpenSSL/0.9.7g
+Last-Modified: Sat, 02 Feb 2008 19:40:44 GMT
+ETag: "47c3-1d3-11134700"
+Accept-Ranges: bytes
+Content-Length: 467
+Connection: close
+Content-Type: text/plain; charset=UTF-8
+
+##############################################
+#
+# Welcome to the Archive!
+#
+##############################################
+# Please crawl our files.
+# We appreciate if you can crawl responsibly.
+# Stay open!
+##############################################
+User-agent: *
+Disallow: /nothing---please-crawl-us--
+
+# slow down the ask jeeves crawler which was hitting our SE a little too fast
+# via collection pages.   --Feb2008 tracey--
+User-agent: Teoma
+Crawl-Delay: 10
+
+
+WARC/1.0
+WARC-Type: response
+WARC-Record-ID: <urn:uuid:e7c9eff8-f5bc-4aeb-b3d2-9d3df99afb30>
+WARC-Date: 2008-04-30T20:48:25Z
+Content-Length: 782
+Content-Type: application/http; msgtype=response
+WARC-Block-Digest: sha1:5XRCLALILFBHEHD3S5B5Z3JROYZ5ADRT
+WARC-Payload-Digest: sha1:SUCGMUVXDKVB5CS2NL4R4JABNX7K466U
+WARC-IP-Address: 207.241.229.39
+WARC-Target-URI: http://www.archive.org/robots.txt
+
+HTTP/1.1 200 OK
+Date: Wed, 30 Apr 2008 20:48:24 GMT
+Server: Apache/2.0.54 (Ubuntu) PHP/5.0.5-2ubuntu1.4 mod_ssl/2.0.54 OpenSSL/0.9.7g
+Last-Modified: Sat, 02 Feb 2008 19:40:44 GMT
+ETag: "47c3-1d3-11134700"
+Accept-Ranges: bytes
+Content-Length: 467
+Connection: close
+Content-Type: text/plain; charset=UTF-8
+
+##############################################
+#
+# Welcome to the Archive!
+#
+##############################################
+# Please crawl our files.
+# We appreciate if you can crawl responsibly.
+# Stay open!
+##############################################
+User-agent: *
+Disallow: /nothing---please-crawl-us--
+
+# slow down the ask jeeves crawler which was hitting our SE a little too fast
+# via collection pages.   --Feb2008 tracey--
+User-agent: Teoma
+Crawl-Delay: 10
+
+
+WARC/1.0
+WARC-Type: response
+WARC-Record-ID: <urn:uuid:e7c9eff8-f5bc-4aeb-b3d2-9d3df99afb30>
+WARC-Date: 2008-04-30T20:48:25Z
+Content-Length: 782
+Content-Type: application/http; msgtype=response
+WARC-Block-Digest: sha1:7eIlgWhZQnIce5dD3O0xdjPQDjM=
+WARC-Payload-Digest: sha1:lQRmUrcaqh6KWmr5HiQBbf6ue9Q=
+WARC-IP-Address: 207.241.229.39
+WARC-Target-URI: http://www.archive.org/robots.txt
+
+HTTP/1.1 200 OK
+Date: Wed, 30 Apr 2008 20:48:24 GMT
+Server: Apache/2.0.54 (Ubuntu) PHP/5.0.5-2ubuntu1.4 mod_ssl/2.0.54 OpenSSL/0.9.7g
+Last-Modified: Sat, 02 Feb 2008 19:40:44 GMT
+ETag: "47c3-1d3-11134700"
+Accept-Ranges: bytes
+Content-Length: 467
+Connection: close
+Content-Type: text/plain; charset=UTF-8
+
+##############################################
+#
+# Welcome to the Archive!
+#
+##############################################
+# Please crawl our files.
+# We appreciate if you can crawl responsibly.
+# Stay open!
+##############################################
+User-agent: *
+Disallow: /nothing---please-crawl-us--
+
+# slow down the ask jeeves crawler which was hitting our SE a little too fast
+# via collection pages.   --Feb2008 tracey--
+User-agent: Teoma
+Crawl-Delay: 10
+
+

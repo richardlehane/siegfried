@@ -1,0 +1,12 @@
+WARC/1.0
+WARC-Type: revisit
+WARC-Target-URI: http://state.tn.us/sos/rules/0240/0240-04/0240-04.htm
+WARC-Date: 2010-07-07T13:29:44Z
+WARC-Payload-Digest: sha1:TTINQ47F6426Y5KPEZOUYEKE76BBVT56
+WARC-IP-Address: 170.143.36.24
+WARC-Profile: hello kitty
+WARC-Truncated: length
+WARC-Record-ID: <urn:uuid:4b09f3c5-6aaa-460c-ba2c-b3c449394a1c>
+Content-Type: application/http; msgtype=response
+Content-Length: 206
+
