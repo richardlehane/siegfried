@@ -1,0 +1,21 @@
+[submodule "vendor/github.com/richardlehane/characterize"]
+	path = vendor/github.com/richardlehane/characterize
+	url = https://github.com/richardlehane/characterize.git
+[submodule "vendor/github.com/richardlehane/match"]
+	path = vendor/github.com/richardlehane/match
+	url = https://github.com/richardlehane/match.git
+[submodule "vendor/github.com/richardlehane/mscfb"]
+	path = vendor/github.com/richardlehane/mscfb
+	url = https://github.com/richardlehane/mscfb.git
+[submodule "vendor/github.com/richardlehane/msoleps"]
+	path = vendor/github.com/richardlehane/msoleps
+	url = https://github.com/richardlehane/msoleps.git
+[submodule "vendor/github.com/richardlehane/webarchive"]
+	path = vendor/github.com/richardlehane/webarchive
+	url = https://github.com/richardlehane/webarchive.git
+[submodule "vendor/golang.org/x/text"]
+	path = vendor/golang.org/x/text
+	url = https://go.googlesource.com/text.git
+[submodule "vendor/golang.org/x/sys"]
+	path = vendor/golang.org/x/sys
+	url = https://go.googlesource.com/sys.git
