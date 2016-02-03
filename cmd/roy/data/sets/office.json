@@ -1,9 +1,9 @@
 {
   "msoffice": [
+    "@msword",
     "fmt/214 (xlsx)",
     "fmt/215 (pptx)",
     "x-fmt/252 (pub)",
-    "fmt/412 (docx)",
     "fmt/637 (one)",
     "x-fmt/2 (doc)",
     "fmt/275 (accdb)",
@@ -14,15 +14,11 @@
     "x-fmt/243 (mpp)",
     "x-fmt/66 (mdb)",
     "x-fmt/248 (pst)",
-    "fmt/597 (dotx)",
     "x-fmt/113 (vsd)",
-    "fmt/40 (doc)",
     "fmt/487 (pptm)",
     "x-fmt/88 (ppt)",
     "fmt/628 (xlam)",
-    "x-fmt/45 (dot)",
     "fmt/598 (xltx)",
-    "fmt/523 (docm)",
     "fmt/629 (ppsx)",
     "fmt/630 (ppsm)",
     "x-fmt/106 (slk)",
@@ -33,7 +29,6 @@
     "x-fmt/125 (xlb)",
     "x-fmt/17 (xlt)",
     "fmt/600 (xar)",
-    "fmt/599 (dotm)",
     "x-fmt/84 (pot)",
     "x-fmt/123 (xla)",
     "fmt/627 (xltm)",
@@ -45,5 +40,35 @@
     "x-fmt/126 (xlc)",
     "fmt/632 (potm)",
     "fmt/636 (sldm)"
+  ],
+  "msword": [
+    "@msworddos",
+    "@msworddoc",
+    "@msworddocx",
+    "@mswordextra"
+  ],
+  "msworddos": [
+    "x-fmt/273 (3.0)",
+    "x-fmt/274 (4.0)",
+    "x-fmt/275 (5.0)",
+    "x-fmt/276 (5.5)"
+  ],
+  "msworddoc": [
+    "fmt/37 (doc 1.0)",
+    "fmt/38 (doc 2.0)",
+    "fmt/39 (doc 6.0/95)",
+    "fmt/40 (doc 97-2003)",
+    "fmt/609 (word generic)",
+    "fmt/754 (password protected)",
+    "x-fmt/45 (dot)"
+  ],
+  "msworddocx": [
+    "fmt/412 (docx)",
+    "fmt/523 (macro-enabled)",
+    "fmt/597 (dotx)",
+    "fmt/599 (macro-enabled template)"
+  ],
+  "mswordextra": [
+    "fmt/473 (ownner file)"
   ]
 }
