@@ -19,6 +19,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"time"
 
 	"github.com/richardlehane/siegfried"
@@ -45,7 +46,7 @@ func multiIdentifyS(w writer, s *siegfried.Siegfried, root, orig string, norecur
 				return filepath.SkipDir
 			}
 			if *droido {
-				w.writeFile(shortpath(path, orig), -1, info.ModTime().Format(time.RFC3339), nil, nil, nil) // write directory with a -1 size for droid output only
+				w.writeFile(path, -1, info.ModTime().Format(time.RFC3339), nil, nil, nil) // write directory with a -1 size for droid output only
 			}
 			return nil
 		}
