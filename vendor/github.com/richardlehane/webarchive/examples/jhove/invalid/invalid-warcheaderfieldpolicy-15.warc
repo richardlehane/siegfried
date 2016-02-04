@@ -1,0 +1,10 @@
+WARC/1.0
+WARC-Type: continuation
+WARC-Target-URI: http://www.archive.org/
+WARC-Date: 2008-04-30T20:48:26Z
+WARC-Payload-Digest: sha1:2WAXX5NUWNNCS2BDKCO5OVDQBJVNKIVV
+WARC-Record-ID: <urn:uuid:4042c21b-d898-43f0-9c95-b50da2d1aa42>
+WARC-Segment-Number: 1
+WARC-Segment-Origin-ID: <urn:uuid:ff728363-2d5f-4f5f-b832-9552de1a6037>
+Content-Length: 693
+

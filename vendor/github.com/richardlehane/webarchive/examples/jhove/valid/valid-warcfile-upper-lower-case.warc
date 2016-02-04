@@ -1,0 +1,71 @@
+WARC/1.0
+WARC-Type: warcinfo
+WARC-Date: 2008-04-30T20:48:25Z
+WARC-Filename: IAH-20080430204825-00000-blackbook.warc.gz
+WARC-Record-ID: <urn:uuid:35f02b38-eb19-4f0d-86e4-bfe95815069c-1>
+Content-Type: application/warc-fields
+Content-Length: 483
+
+software: Heritrix/@VERSION@ http://crawler.archive.org
+ip: 192.168.1.13
+hostname: blackbook
+format: WARC File Format 0.17
+conformsTo: http://crawler.archive.org/warc/0.17/WARC0.17ISO.doc
+operator: Admin
+isPartOf: archive.org-shallow
+created: 2008-04-30T20:48:24Z
+description: archive.org shallow
+robots: classic
+http-header-user-agent: Mozilla/5.0 (compatible; heritrix/1.14.0 +http://crawler.archive.org)
+http-header-from: archive-crawler-agent@lists.sourceforge.net
+
+
+
+warc/1.0
+warc-type: response
+warc-target-uri: dns:www.archive.org
+warc-date: 2008-04-30T20:48:25Z
+warc-ip-address: 68.87.76.178
+warc-record-id: <urn:uuid:ff728363-2d5f-4f5f-b832-9552de1a6037-2>
+content-type: text/dns
+content-length: 56
+
+20080430204825
+www.archive.org.	589	in	a	207.241.229.39
+
+WARC/1.0
+WARC-TYPE: RESPONSE
+WARC-TARGET-URI: DNS:WWW.ARCHIVE.ORG
+WARC-DATE: 2008-04-30T20:48:25Z
+WARC-IP-ADDRESS: 68.87.76.178
+WARC-RECORD-ID: <URN:UUID:FF728363-2D5F-4F5F-B832-9552DE1A6037-3>
+CONTENT-TYPE: TEXT/DNS
+CONTENT-LENGTH: 56
+
+20080430204825
+www.archive.org.	589	IN	A	207.241.229.39
+
+warc/1.0
+warc-type: RESPONSE
+warc-target-uri: DNS:WWW.ARCHIVE.ORG
+warc-date: 2008-04-30T20:48:25Z
+warc-ip-address: 68.87.76.178
+warc-record-id: <URN:UUID:FF728363-2D5F-4F5F-B832-9552DE1A6037-4>
+content-type: TEXT/DNS
+content-length: 56
+
+20080430204825
+www.archive.org.	589	IN	A	207.241.229.39
+
+WARC/1.0
+WARC-TYPE: response
+WARC-TARGET-URI: dns:www.archive.org
+WARC-DATE: 2008-04-30T20:48:25Z
+WARC-IP-ADDRESS: 68.87.76.178
+WARC-RECORD-ID: <urn:uuid:ff728363-2d5f-4f5f-b832-9552de1a6037-5>
+CONTENT-TYPE: text/dns
+CONTENT-LENGTH: 56
+
+20080430204825
+WWW.ARCHIVE.ORG.	589	IN	A	207.241.229.39
+

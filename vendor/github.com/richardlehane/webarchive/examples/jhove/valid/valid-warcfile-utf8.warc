@@ -1,0 +1,51 @@
+WARC/0.17
+WARC-Type: 
+	warcinfo
+WARC-Date: 
+	2008-04-30T20:48:25Z
+WARC-Filename: 
+	IAH-20080430204825-00000-blackbook.warc.gz
+	"Language Learning and Teaching" (more or less) in 16 or more languages
+	外国語の学習と教授
+	Language Learning and Teaching
+	Изучение и обучение иностранных языков
+	Tere Daaheng Aneng Karimah
+	語文教學・语文教学
+	Enseñanza y estudio de idiomas
+	Изучаване и Преподаване на Чужди Езици
+	ქართული ენის შესწავლა და სწავლება
+	'læŋɡwidʒ 'lɘr:niŋ ænd 'ti:tʃiŋ
+	Lus kawm thaib qhia
+	Ngôn Ngữ, Sự học,
+	‭‫ללמוד וללמד את השֵפה
+	L'enseignement et l'étude des langues
+	말배우기와 가르치기
+	Nauka języków obcych
+	Γλωσσική Εκμὰθηση και Διδασκαλία
+	‭‫ﺗﺪﺭﯾﺲ ﻭ ﯾﺎﺩﮔﯿﺮﯼ ﺯﺑﺎﻥ
+	Sprachlernen und -lehren
+	‭‫ﺗﻌﻠﻢ ﻭﺗﺪﺭﻳﺲ ﺍﻟﻌﺮﺑﻴﺔ
+	เรียนและสอนภาษา
+	Copied from <http://www.humancomp.org/unichtm/unilang8.htm> on 2003-07-24
+WARC-Record-ID: 
+	<urn:uuid:35f02b38-eb19-4f0d-86e4-bfe95815069c>
+Content-Type: 
+	application/warc-fields
+Content-Length: 
+	483
+
+software: Heritrix/@VERSION@ http://crawler.archive.org
+ip: 192.168.1.13
+hostname: blackbook
+format: WARC File Format 0.17
+conformsTo: http://crawler.archive.org/warc/0.17/WARC0.17ISO.doc
+operator: Admin
+isPartOf: archive.org-shallow
+created: 2008-04-30T20:48:24Z
+description: archive.org shallow
+robots: classic
+http-header-user-agent: Mozilla/5.0 (compatible; heritrix/1.14.0 +http://crawler.archive.org)
+http-header-from: archive-crawler-agent@lists.sourceforge.net
+
+
+

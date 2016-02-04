@@ -1,0 +1,24 @@
+WARC/0.17
+WARC-Type: 
+	metadata
+WARC-Target-URI: 
+ http://www.archive.org/robots.txt
+WARC-Date: 
+	2008-04-30T20:48:25Z
+WARC-Concurrent-To: 
+ <urn:uuid:e7c9eff8-f5bc-4aeb-b3d2-9d3df99afb30>
+WARC-Record-ID: 
+	<urn:uuid:545709ad-90c5-4c08-9eed-092bdf2e33a7>
+WARC-Refers-To: 
+ <urn:uuid:e7c9eff8-f5bc-4aeb-b3d2-9d3df99afb31>
+Content-Type: 
+	text/anvl
+Content-Length: 
+ 66
+
+via: http://www.archive.org/
+hopsFromSeed: P
+fetchTimeMs: 47
+
+
+

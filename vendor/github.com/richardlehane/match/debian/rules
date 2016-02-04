@@ -1,0 +1,8 @@
+#!/usr/bin/make -f
+
+export DH_OPTIONS
+
+export DH_GOPKG := github.com/richardlehane/match
+
+%:
+	dh $@ --buildsystem=golang --with=golang

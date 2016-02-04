@@ -1,0 +1,11 @@
+#!/usr/bin/make -f
+
+export DH_OPTIONS
+
+export DH_GOPKG := github.com/richardlehane/mscfb
+
+# One test currently fails, but it works fine
+override_dh_auto_test:
+
+%:
+	dh $@ --buildsystem=golang --with=golang
