@@ -13,7 +13,7 @@ Key features are:
 
 ## Version
 
-1.4.4
+1.4.5
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried)
 
@@ -80,6 +80,13 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 
 ## Recent Changes
+### Version 1.4.5 (6/2/2016)
+- bugfix: [big file handling](https://github.com/richardlehane/siegfried/commit/b348c4628ac8edf8e93208e9100bd15616f72e41)
+- bugfix: [file handle leak](https://github.com/richardlehane/siegfried/commit/47144fd33a4ddd260bdcd5dd15c132525c3bd113); reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/66)
+- bugfix: [mscfb](https://github.com/richardlehane/mscfb/commit/e19fa67f7571388d3dc956f7c6b4547bfb635072); reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/68)
+- summarise os errors; requested by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/65)
+- code quality: vendor external packages; implemented by [Misty de Meo](https://github.com/richardlehane/siegfried/pull/71)
+
 ### Version 1.4.4 (9/1/2016)
 - fix: speed regression in TIFF mis-identification patch last release
 - code quality: refactor textmatcher package
