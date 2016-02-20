@@ -14,4 +14,33 @@
 
 package xmlmatcher
 
-type Matcher struct{}
+import (
+	"github.com/richardlehane/siegfried/pkg/core"
+	"github.com/richardlehane/siegfried/pkg/core/persist"
+	"github.com/richardlehane/siegfried/pkg/core/priority"
+	"github.com/richardlehane/siegfried/pkg/core/siegreader"
+)
+
+type Matcher map[[2]string][]int
+
+type SignatureSet [][2]string // slice of root, namespace (both optional)
+
+func Load(ls *persist.LoadSaver) Matcher {
+	return nil
+}
+
+func (m Matcher) Save(ls *persist.LoadSaver) {}
+
+func New() Matcher {
+	return make(Matcher)
+}
+
+func (m Matcher) Add(ss core.SignatureSet, p priority.List) (int, error) {
+	return 0, nil
+}
+
+func (m Matcher) Identify(s string, na *siegreader.Buffer) (chan core.Result, error) {
+	return nil, nil
+}
+
+func (m Matcher) String() string { return "" }

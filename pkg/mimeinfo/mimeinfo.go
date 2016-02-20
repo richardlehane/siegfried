@@ -22,7 +22,11 @@ import (
 	"github.com/richardlehane/siegfried/pkg/mimeinfo/mappings"
 )
 
-func newMIMEInfo() ([]mappings.MIMEType, error) {
+type mimeinfo []mappings.MIMEType
+
+func (mi mimeinfo) identifier() *Identifier { return nil }
+
+func newMIMEInfo() (mimeinfo, error) {
 	buf, err := ioutil.ReadFile(config.MIMEInfo())
 	if err != nil {
 		return nil, err

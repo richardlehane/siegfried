@@ -28,24 +28,28 @@ func TestNew(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	tpmap := make(map[string]struct{})
+	//tpmap := make(map[string]struct{})
 	for _, v := range mi {
-		//fmt.Println(v)
-		//if len(v.Magic) > 1 {
-		//	fmt.Printf("Multiple magics (%d): %s\n", len(v.Magic), v.MIME)
-		//}
-		for _, c := range v.Magic {
-			for _, d := range c.Matches {
-				tpmap[d.Typ] = struct{}{}
-				if len(d.Mask) > 0 {
-					if d.Typ == "string" {
-						fmt.Println("MAGIC: " + d.Value)
-					} else {
-						fmt.Println("Type: " + d.Typ)
-					}
-					fmt.Println("MASK: " + d.Mask)
-				}
+		/*
+			fmt.Println(v)
+			if len(v.Magic) > 1 {
+				fmt.Printf("Multiple magics (%d): %s\n", len(v.Magic), v.MIME)
 			}
+			for _, c := range v.Magic {
+				for _, d := range c.Matches {
+					tpmap[d.Typ] = struct{}{}
+					if len(d.Mask) > 0 {
+						if d.Typ == "string" {
+							fmt.Println("MAGIC: " + d.Value)
+						} else {
+							fmt.Println("Type: " + d.Typ)
+						}
+						fmt.Println("MASK: " + d.Mask)
+					}
+				}
+			}*/
+		for _, c := range v.XMLPattern {
+			fmt.Printf("Root: %s; Namespace: %s\n", c.Local, c.NS)
 		}
 	}
 	/*
