@@ -207,8 +207,7 @@ func (s *Siegfried) String() string {
 		config.Signature(),
 		s.C.Format(time.RFC3339))
 	for _, id := range s.ids {
-		d := id.Describe()
-		str += fmt.Sprintf("  - %v: %v\n", d[0], d[1])
+		str += fmt.Sprintf("  - %v: %v\n", id.Name(), id.Details())
 	}
 	return str
 }
@@ -224,8 +223,7 @@ func (s *Siegfried) YAML() string {
 		config.SignatureBase(),
 		s.C.Format(time.RFC3339))
 	for _, id := range s.ids {
-		d := id.Describe()
-		str += fmt.Sprintf("  - name    : '%v'\n    details : '%v'\n", d[0], d[1])
+		str += fmt.Sprintf("  - name    : '%v'\n    details : '%v'\n", id.Name(), id.Details())
 	}
 	return str
 }
@@ -244,8 +242,7 @@ func (s *Siegfried) JSON() string {
 		if i > 0 {
 			str += ","
 		}
-		d := id.Describe()
-		str += fmt.Sprintf("{\"name\":\"%s\",\"details\":\"%s\"}", d[0], d[1])
+		str += fmt.Sprintf("{\"name\":\"%s\",\"details\":\"%s\"}", id.Name(), id.Details())
 	}
 	str += "],"
 	return str

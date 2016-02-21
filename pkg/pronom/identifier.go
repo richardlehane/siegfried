@@ -118,8 +118,12 @@ func (i *Identifier) Add(m core.Matcher, t core.MatcherType) error {
 	return i.p.add(m, t)
 }
 
-func (i *Identifier) Describe() [2]string {
-	return [2]string{i.name, i.details}
+func (i *Identifier) Name() string {
+	return i.name
+}
+
+func (i *Identifier) Details() string {
+	return i.details
 }
 
 func (i *Identifier) String() string {
@@ -297,7 +301,7 @@ func (r *Recorder) Satisfied(mt core.MatcherType) bool {
 			return false
 		}
 		for _, res := range r.ids {
-			if res.Puid == config.TextPuid() {
+			if res.ID == config.TextPuid() {
 				return false
 			}
 		}
@@ -352,11 +356,11 @@ func (r *Recorder) Report(res chan core.Identification) {
 				// if we have plain text result that is based on ext or mime only,
 				// and not on a text match, and if text matcher is on for this identifier,
 				// then don't report a text match
-				if v.Puid == config.TextPuid() && conf < textScore && r.textActive {
+				if v.ID == config.TextPuid() && conf < textScore && r.textActive {
 					continue
 				}
 				// if the match has no corresponding byte or container signature...
-				if ok := r.hasSig(v.Puid); !ok {
+				if ok := r.hasSig(v.ID); !ok {
 					// break immediately if more than one match
 					if len(nids) > 0 {
 						nids = nids[:0]
@@ -373,7 +377,7 @@ func (r *Recorder) Report(res chan core.Identification) {
 			if len(nids) != 1 {
 				poss := make([]string, len(r.ids))
 				for i, v := range r.ids {
-					poss[i] = v.Puid
+					poss[i] = v.ID
 					conf = conf | v.confidence
 				}
 				nids = []Identification{Identification{r.name, "UNKNOWN", "", "", "", nil, fmt.Sprintf("no match; possibilities based on %v are %v", lowConfidence(conf), strings.Join(poss, ", ")), 0, 0}}
@@ -398,7 +402,7 @@ func (r *Recorder) Report(res chan core.Identification) {
 func (r *Recorder) checkActive(i Identification) Identification {
 	if r.extActive && (i.confidence&extScore != extScore) {
 		for _, v := range r.ePuids {
-			if i.Puid == v {
+			if i.ID == v {
 				if len(i.Warning) > 0 {
 					i.Warning += "; extension mismatch"
 				} else {
@@ -410,7 +414,7 @@ func (r *Recorder) checkActive(i Identification) Identification {
 	}
 	if r.mimeActive && (i.confidence&mimeScore != mimeScore) {
 		for _, v := range r.mPuids {
-			if i.Puid == v {
+			if i.ID == v {
 				if len(i.Warning) > 0 {
 					i.Warning += "; MIME mismatch"
 				} else {
@@ -438,8 +442,8 @@ func (r *Recorder) hasSig(puid string) bool {
 }
 
 type Identification struct {
-	Identifier string
-	Puid       string
+	Namespace  string
+	ID         string
 	Name       string
 	Version    string
 	Mime       string
@@ -450,11 +454,11 @@ type Identification struct {
 }
 
 func (id Identification) String() string {
-	return id.Puid
+	return id.ID
 }
 
 func (id Identification) Known() bool {
-	return id.Puid != "UNKNOWN"
+	return id.ID != "UNKNOWN"
 }
 
 func (id Identification) Warn() string {
@@ -473,8 +477,8 @@ func (id Identification) YAML() string {
 	if len(id.Basis) > 0 {
 		basis = quoteText(strings.Join(id.Basis, "; "))
 	}
-	return fmt.Sprintf("  - id      : %v\n    puid    : %v\n    format  : %v\n    version : %v\n    mime    : %v\n    basis   : %v\n    warning : %v\n",
-		id.Identifier, id.Puid, quoteText(id.Name), quoteText(id.Version), quoteText(id.Mime), basis, quoteText(id.Warning))
+	return fmt.Sprintf("  - ns      : %v\n      id    : %v\n    format  : %v\n    version : %v\n    mime    : %v\n    basis   : %v\n    warning : %v\n",
+		id.Namespace, id.ID, quoteText(id.Name), quoteText(id.Version), quoteText(id.Mime), basis, quoteText(id.Warning))
 }
 
 func (id Identification) JSON() string {
@@ -482,8 +486,8 @@ func (id Identification) JSON() string {
 	if len(id.Basis) > 0 {
 		basis = strings.Join(id.Basis, "; ")
 	}
-	return fmt.Sprintf("{\"id\":\"%s\",\"puid\":\"%s\",\"format\":\"%s\",\"version\":\"%s\",\"mime\":\"%s\",\"basis\":\"%s\",\"warning\":\"%s\"}",
-		id.Identifier, id.Puid, id.Name, id.Version, id.Mime, basis, id.Warning)
+	return fmt.Sprintf("{\"ns\":\"%s\",\"id\":\"%s\",\"format\":\"%s\",\"version\":\"%s\",\"mime\":\"%s\",\"basis\":\"%s\",\"warning\":\"%s\"}",
+		id.Namespace, id.ID, id.Name, id.Version, id.Mime, basis, id.Warning)
 }
 
 func (id Identification) CSV() []string {
@@ -492,8 +496,8 @@ func (id Identification) CSV() []string {
 		basis = strings.Join(id.Basis, "; ")
 	}
 	return []string{
-		id.Identifier,
-		id.Puid,
+		id.Namespace,
+		id.ID,
 		id.Name,
 		id.Version,
 		id.Mime,
@@ -516,7 +520,7 @@ func (p pids) Swap(i, j int) { p[i], p[j] = p[j], p[i] }
 
 func add(p pids, id string, f string, info formatInfo, basis string, c int) pids {
 	for i, v := range p {
-		if v.Puid == f {
+		if v.ID == f {
 			p[i].confidence += c
 			p[i].Basis = append(p[i].Basis, basis)
 			return p

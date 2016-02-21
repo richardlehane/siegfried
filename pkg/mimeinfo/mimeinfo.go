@@ -19,6 +19,9 @@ import (
 	"io/ioutil"
 
 	"github.com/richardlehane/siegfried/config"
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+	"github.com/richardlehane/siegfried/pkg/core/parseable"
+	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/mimeinfo/mappings"
 )
 
@@ -38,3 +41,11 @@ func newMIMEInfo() (mimeinfo, error) {
 	}
 	return mi.MIMETypes, nil
 }
+
+func (mi mimeinfo) IDs() []string                                     { return nil }
+func (mi mimeinfo) Infos() map[string]parseable.FormatInfo            { return nil }
+func (mi mimeinfo) Globs() ([][]string, []string)                     { return nil, nil }
+func (mi mimeinfo) MIMEs() ([][]string, []string)                     { return nil, nil }
+func (mi mimeinfo) XMLs() ([][][2]string, []string)                   { return nil, nil }
+func (mi mimeinfo) Signatures() ([]frames.Signature, []string, error) { return nil, nil, nil }
+func (mi mimeinfo) Priorities() priority.Map                          { return nil }

@@ -27,8 +27,9 @@ import (
 
 // Identifier describes the implementation of a signature format. E.g. there is a PRONOM identifier that implements the TNA's PRONOM format.
 type Identifier interface {
-	Recorder() Recorder  // return a recorder for matching
-	Describe() [2]string // name and details
+	Recorder() Recorder // return a recorder for matching
+	Name() string
+	Details() string
 	Save(*persist.LoadSaver)
 	String() string
 	Recognise(MatcherType, int) (bool, string) // do you recognise this result index?

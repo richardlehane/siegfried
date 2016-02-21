@@ -43,8 +43,8 @@ var siegfried = struct {
 	out        io.Writer
 	checkpoint int64
 }{
-	version:         [3]int{1, 4, 5},
-	signature:       "pronom.sig",
+	version:         [3]int{1, 5, 0},
+	signature:       "default.sig",
 	magic:           []byte{'s', 'f', 0x00, 0xFF},
 	distance:        8192,
 	rng:             4096,
