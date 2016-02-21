@@ -51,7 +51,7 @@ Key features are:
 
 #### Signatures
 
-By default, siegfried uses the latest PRONOM and container signatures with no buffer limits. You can customise your signature file by using the [roy tool](https://github.com/richardlehane/siegfried/wiki/Building-a-signature-file-with-ROY). To use Apache Tika MIME signatures, use the `-tika` flag with the roy tool.
+By default, siegfried uses the latest PRONOM and container signatures with no buffer limits. To use Apache Tika MIME signatures, or to customise your signature file, use the [roy tool](https://github.com/richardlehane/siegfried/wiki/Building-a-signature-file-with-ROY).
 
 ## Install
 
