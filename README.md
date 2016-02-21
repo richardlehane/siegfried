@@ -5,6 +5,7 @@
 Key features are:
 
   - complete implementation of [PRONOM](http://apps.nationalarchives.gov.uk/pronom) (byte and container signatures)
+  - implementation of [Apache Tika MIME signatures](https://tika.apache.org/1.1/detection.html#Mime_Magic_Detection) (MIME-info signature file)
   - fast matching without limiting the number of bytes scanned
   - detailed information about the basis for format matches
   - simple command line interface with a choice of outputs
@@ -13,7 +14,7 @@ Key features are:
 
 ## Version
 
-1.4.5
+1.5.0
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried)
 
@@ -50,7 +51,7 @@ Key features are:
 
 #### Signatures
 
-By default, siegfried uses the latest PRONOM and container signatures with no buffer limits. You can customise your signature file by using the [roy tool](https://github.com/richardlehane/siegfried/wiki/Building-a-signature-file-with-ROY).
+By default, siegfried uses the latest PRONOM and container signatures with no buffer limits. You can customise your signature file by using the [roy tool](https://github.com/richardlehane/siegfried/wiki/Building-a-signature-file-with-ROY). To use Apache Tika MIME signatures, use the `-tika` flag with the roy tool.
 
 ## Install
 
@@ -80,6 +81,11 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 
 ## Recent Changes
+### Version 1.5.0 (7/3/2016)
+- implement Apache Tika MIME signatures
+- default signature file now "default.sig" (was "pronom.sig")
+- changes to YAML and JSON output: "ns" (for namespace) replaces "id", and "id" replaces "puid"
+
 ### Version 1.4.5 (6/2/2016)
 - bugfix: [big file handling](https://github.com/richardlehane/siegfried/commit/b348c4628ac8edf8e93208e9100bd15616f72e41)
 - bugfix: [file handle leak](https://github.com/richardlehane/siegfried/commit/47144fd33a4ddd260bdcd5dd15c132525c3bd113); reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/66)
