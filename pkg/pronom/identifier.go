@@ -335,12 +335,6 @@ func lowConfidence(conf int) string {
 
 func (r *Recorder) Report(res chan core.Identification) {
 	if len(r.ids) > 0 {
-		// if we don't have priority set, apply a warning
-		if r.noPriority {
-			for i := range r.ids {
-				r.ids[i].Warning = "no priority set for this identifier"
-			}
-		}
 		sort.Sort(r.ids)
 		conf := r.ids[0].confidence
 		// if we've only got extension / mime matches, check if those matches are ruled out by lack of byte match
