@@ -1,4 +1,4 @@
-// Copyright 2015 Richard Lehane. All rights reserved.
+// Copyright 2016 Richard Lehane. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,26 +15,139 @@
 package mimematcher
 
 import (
+	"fmt"
+	"sort"
 	"strings"
 
 	"github.com/richardlehane/siegfried/pkg/core"
+	"github.com/richardlehane/siegfried/pkg/core/persist"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
+	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
-type Matcher struct {
-	precise map[string][]int
-	general map[string][]int
-	sigsets []int // starting indexes of signature sets (so can tell if a general match from same set as a precise)
+type Matcher map[string][]int
+
+func Load(ls *persist.LoadSaver) Matcher {
+	le := ls.LoadSmallInt()
+	if le == 0 {
+		return nil
+	}
+	ret := make(Matcher)
+	for i := 0; i < le; i++ {
+		k := ls.LoadString()
+		r := make([]int, ls.LoadSmallInt())
+		for j := range r {
+			r[j] = ls.LoadSmallInt()
+		}
+		ret[k] = r
+	}
+	return ret
 }
+
+func (m Matcher) Save(ls *persist.LoadSaver) {
+	ls.SaveSmallInt(len(m))
+	for k, v := range m {
+		ls.SaveString(k)
+		ls.SaveSmallInt(len(v))
+		for _, w := range v {
+			ls.SaveSmallInt(w)
+		}
+	}
+}
+
+func New() Matcher {
+	return make(Matcher)
+}
+
+type SignatureSet [][]string
 
 func (m Matcher) Add(ss core.SignatureSet, p priority.List) (int, error) {
-	return 0, nil
+	sigs, ok := ss.(SignatureSet)
+	if !ok {
+		return -1, fmt.Errorf("Mimematcher: can't cast persist set")
+	}
+	var length int
+	// unless it is a new matcher, calculate current length by iterating through all the result values
+	if len(m) > 0 {
+		for _, v := range m {
+			for _, w := range v {
+				if int(w) > length {
+					length = int(w)
+				}
+			}
+		}
+		length++ // add one - because the result values are indexes
+	}
+	for i, v := range sigs {
+		for _, w := range v {
+			m.add(w, i+length)
+		}
+	}
+	return length + len(sigs), nil
 }
 
-func NormaliseMIME(s string) string {
-	idx := strings.LastIndex(s, ";")
-	if idx > 0 {
-		return s[:idx]
+func (m Matcher) add(s string, fmt int) {
+	_, ok := m[s]
+	if ok {
+		m[s] = append(m[s], fmt)
+		return
 	}
-	return s
+	m[s] = []int{fmt}
+}
+
+func (m Matcher) Identify(s string, na *siegreader.Buffer) (chan core.Result, error) {
+	var (
+		fmts, tfmts []int
+		idx         int
+	)
+	if len(s) > 0 {
+		fmts = m[s]
+		idx = strings.LastIndex(s, ";")
+		if idx > 0 {
+			tfmts = m[s[:idx]]
+		}
+	}
+	res := make(chan core.Result, len(fmts)+len(tfmts))
+	for _, v := range fmts {
+		res <- Result{
+			idx:  v,
+			mime: s,
+		}
+	}
+	for _, v := range tfmts {
+		res <- Result{
+			idx:     v,
+			Trimmed: true,
+			mime:    s[:idx],
+		}
+	}
+	close(res)
+	return res, nil
+}
+
+func (m Matcher) String() string {
+	var str string
+	var keys []string
+	for k := range m {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	for _, v := range keys {
+		str += fmt.Sprintf("%v: %v\n", v, m[v])
+	}
+	return str
+}
+
+type Result struct {
+	idx     int
+	Trimmed bool
+	mime    string
+}
+
+func (r Result) Index() int {
+	return r.idx
+}
+
+func (r Result) Basis() string {
+	return "mime match " + r.mime
 }

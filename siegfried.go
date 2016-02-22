@@ -47,6 +47,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
 	"github.com/richardlehane/siegfried/pkg/core/containermatcher"
+	"github.com/richardlehane/siegfried/pkg/core/mimematcher"
 	"github.com/richardlehane/siegfried/pkg/core/persist"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 	"github.com/richardlehane/siegfried/pkg/core/stringmatcher"
@@ -87,7 +88,7 @@ func New() *Siegfried {
 	s := &Siegfried{}
 	s.C = time.Now()
 	s.em = stringmatcher.New()
-	s.mm = stringmatcher.New()
+	s.mm = mimematcher.New()
 	s.cm = containermatcher.New()
 	s.bm = bytematcher.New()
 	s.tm = textmatcher.New()
@@ -185,7 +186,7 @@ func Load(path string) (*Siegfried, error) {
 	return &Siegfried{
 		C:  ls.LoadTime(),
 		em: stringmatcher.Load(ls),
-		mm: stringmatcher.Load(ls),
+		mm: mimematcher.Load(ls),
 		cm: containermatcher.Load(ls),
 		bm: bytematcher.Load(ls),
 		tm: textmatcher.Load(ls),

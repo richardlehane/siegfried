@@ -108,7 +108,7 @@ func (m Matcher) addSigs(i int, nameParts [][]string, sigParts [][]frames.Signat
 			return err
 		}
 	}
-	m[i].priorities.Add(l, len(nameParts))
+	m[i].priorities.Add(l, len(nameParts), 0, 0)
 	for _, v := range m[i].nameCTest {
 		err := v.commit(l, prev)
 		if err != nil {

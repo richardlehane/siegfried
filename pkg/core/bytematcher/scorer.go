@@ -400,7 +400,7 @@ func (b *Matcher) scorer(buf *siegreader.Buffer, q chan struct{}, r chan<- core.
 				} else {
 					bof = in.offset
 				}
-				w := waitSet.WaitingOn()
+				w := waitSet.WaitingOnAt(bof, eof)
 				// if any of the waitlists are nil, we will continue - unless we are past the known bof and known eof (points at which we *should* have got at least partial matches), in which case we will check if any partial/potential matches are live
 				if w == nil {
 					// keep going if we don't have a maximum known bof, or if our current bof/eof are less than the maximum known bof/eof
@@ -461,7 +461,7 @@ func (b *Matcher) scorer(buf *siegreader.Buffer, q chan struct{}, r chan<- core.
 					if match, basis := applyKeyFrame(k); match {
 						if waitSet.Check(k.id[0]) {
 							r <- result{k.id[0], basis}
-							if waitSet.Put(k.id[0]) {
+							if waitSet.PutAt(k.id[0], bof, eof) {
 								quit()
 								goto end
 							}

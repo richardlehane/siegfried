@@ -127,9 +127,13 @@ func (b *Matcher) Add(ss core.SignatureSet, priorities priority.List) (int, erro
 	}
 	var se sigErrors
 	// process each of the sigs, adding them to b.Sigs and the various seq/frame/testTree sets
+	var bof, eof int
 	for _, sig := range sigs {
-		err := b.addSignature(sig)
-		if err != nil {
+		if err := b.addSignature(sig); err == nil {
+			// get the local max bof and eof by popping last keyframe and testing
+			kf := b.keyFrames[len(b.keyFrames)-1]
+			bof, eof = maxBOF(bof, kf), maxEOF(eof, kf)
+		} else {
 			se = append(se, err)
 		}
 	}
@@ -142,7 +146,7 @@ func (b *Matcher) Add(ss core.SignatureSet, priorities priority.List) (int, erro
 		t.maxRightDistance = maxLength(t.right)
 	}
 	// add the priorities to the priority set
-	b.priorities.Add(priorities, len(sigs))
+	b.priorities.Add(priorities, len(sigs), bof, eof)
 	return len(b.keyFrames), nil
 }
 

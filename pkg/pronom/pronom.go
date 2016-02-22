@@ -31,6 +31,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/containermatcher"
+	"github.com/richardlehane/siegfried/pkg/core/mimematcher"
 	"github.com/richardlehane/siegfried/pkg/core/parseable"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/stringmatcher"
@@ -229,7 +230,7 @@ func (p *pronom) add(m core.Matcher, t core.MatcherType) error {
 		if !config.NoMIME() {
 			var mimes [][]string
 			mimes, p.mPuids = p.j.MIMEs()
-			l, err := m.Add(stringmatcher.SignatureSet(mimes), nil)
+			l, err := m.Add(mimematcher.SignatureSet(mimes), nil)
 			if err != nil {
 				return err
 			}

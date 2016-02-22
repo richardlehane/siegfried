@@ -197,42 +197,50 @@ func (l List) String() string {
 }
 
 // A priority set holds a number of priority lists
-// Fields exported so gobbable
 // Todo: add a slice of max BOF/ EOF offsets (so that signature sets without priorities but with bof limits/eof limits won't cause lengthy scans)
 type Set struct {
-	Idx   []int
-	Lists []List
-	// maxOffsets [][2]int
+	idx        []int
+	lists      []List
+	maxOffsets [][2]int
 }
 
 func (s *Set) Save(ls *persist.LoadSaver) {
-	ls.SaveInts(s.Idx)
-	ls.SaveSmallInt(len(s.Lists))
-	for _, v := range s.Lists {
+	ls.SaveInts(s.idx)
+	ls.SaveSmallInt(len(s.lists))
+	for _, v := range s.lists {
 		ls.SaveSmallInt(len(v))
 		for _, w := range v {
 			ls.SaveInts(w)
 		}
 	}
+	ls.SaveSmallInt(len(s.maxOffsets))
+	for _, v := range s.maxOffsets {
+		ls.SaveInt(v[0])
+		ls.SaveInt(v[1])
+	}
 }
 
 func Load(ls *persist.LoadSaver) *Set {
 	set := &Set{}
-	set.Idx = ls.LoadInts()
-	if set.Idx == nil {
+	set.idx = ls.LoadInts()
+	if set.idx == nil {
 		_ = ls.LoadSmallInt() // discard the empty list too
 		return set
 	}
-	set.Lists = make([]List, ls.LoadSmallInt())
-	for i := range set.Lists {
+	set.lists = make([]List, ls.LoadSmallInt())
+	for i := range set.lists {
 		le := ls.LoadSmallInt()
 		if le == 0 {
 			continue
 		}
-		set.Lists[i] = make(List, le)
-		for j := range set.Lists[i] {
-			set.Lists[i][j] = ls.LoadInts()
+		set.lists[i] = make(List, le)
+		for j := range set.lists[i] {
+			set.lists[i][j] = ls.LoadInts()
 		}
+	}
+	set.maxOffsets = make([][2]int, ls.LoadSmallInt())
+	for i := range set.maxOffsets {
+		set.maxOffsets[i] = [2]int{ls.LoadInt(), ls.LoadInt()}
 	}
 	return set
 }
@@ -240,32 +248,44 @@ func Load(ls *persist.LoadSaver) *Set {
 // Add a priority list to a set. The length is the number of signatures the priority list applies to, not the length of the priority list.
 // This length will only differ when no priorities are set for a given set of signatures.
 // Todo: add maxOffsets here
-func (s *Set) Add(l List, length int) {
+func (s *Set) Add(l List, length, bof, eof int) {
 	var last int
-	if len(s.Idx) > 0 {
-		last = s.Idx[len(s.Idx)-1]
+	if len(s.idx) > 0 {
+		last = s.idx[len(s.idx)-1]
 	}
-	s.Idx = append(s.Idx, length+last)
-	s.Lists = append(s.Lists, l)
+	s.idx = append(s.idx, length+last)
+	s.lists = append(s.lists, l)
+	s.maxOffsets = append(s.maxOffsets, [2]int{bof, eof})
 }
 
 func (s *Set) list(i, j int) []int {
-	if s.Lists[i] == nil {
+	if s.lists[i] == nil {
 		return nil
 	} else {
-		l := s.Lists[i][j]
+		l := s.lists[i][j]
 		if l == nil {
-			l = make([]int, 0)
+			l = []int{}
 		}
 		return l
 	}
 }
 
-// return the index of the s.Lists for the wait list, and return the previous tally
+// at given BOF and EOF offsets, should we still wait on a given priority set?
+func (s *Set) await(idx int, bof, eof int64) bool {
+	if s.maxOffsets[idx][0] < 0 || (s.maxOffsets[idx][0] > 0 && int64(s.maxOffsets[idx][0]) >= bof) {
+		return true
+	}
+	if s.maxOffsets[idx][1] < 0 || (s.maxOffsets[idx][1] > 0 && int64(s.maxOffsets[idx][1]) >= eof) {
+		return true
+	}
+	return false
+}
+
+// return the index of the s.lists for the wait list, and return the previous tally
 // previous tally is necessary for adding to the values in the priority list to give real priorities
 func (s *Set) Index(i int) (int, int) {
 	var prev int
-	for idx, v := range s.Idx {
+	for idx, v := range s.idx {
 		if i < v {
 			return idx, prev
 		}
@@ -285,13 +305,12 @@ type WaitSet struct {
 func (s *Set) WaitSet() *WaitSet {
 	return &WaitSet{
 		s,
-		make([][]int, len(s.Lists)),
+		make([][]int, len(s.lists)),
 		&sync.RWMutex{},
 	}
 }
 
 // Set the priority list & return a boolean indicating whether the WaitSet is satisfied such that matching can stop (i.e. no priority list is nil, and all are empty)
-// Todo: put bof and eof offset here - or new PutAt func?
 func (w *WaitSet) Put(i int) bool {
 	idx, prev := w.Index(i)
 	l := w.list(idx, i-prev)
@@ -320,6 +339,39 @@ func (w *WaitSet) Put(i int) bool {
 		}
 		if len(v) > 0 {
 			return false
+		}
+	}
+	return true
+}
+
+// Set the priority list & return a boolean indicating whether the WaitSet is satisfied such that matching can stop (i.e. no priority list is nil, and all are empty)
+func (w *WaitSet) PutAt(i int, bof, eof int64) bool {
+	idx, prev := w.Index(i)
+	l := w.list(idx, i-prev)
+	// no priorities for this set, return false immediately
+	if l == nil && w.await(idx, bof, eof) {
+		return false
+	}
+	w.m.Lock()
+	defer w.m.Unlock()
+	w.wait[idx] = l
+	// if we have any priorities, then we aren't satisified
+	if len(l) > 0 && w.await(idx, bof, eof) {
+		return false
+	}
+	// if l is 0 and we have only one priority set, then we are satisfied
+	if len(w.wait) == 1 {
+		return true
+	}
+	// otherwise, let's check all the other priority sets
+	for i, v := range w.wait {
+		if i == idx {
+			continue
+		}
+		if w.await(i, bof, eof) {
+			if v == nil || len(v) > 0 {
+				return false
+			}
 		}
 	}
 	return true
@@ -391,11 +443,40 @@ func (w *WaitSet) WaitingOn() []int {
 	ret := make([]int, l)
 	var prev, j int
 	for i, v := range w.wait {
-		for _, w := range v {
-			ret[j] = w + prev
+		for _, x := range v {
+			ret[j] = x + prev
 			j++
 		}
-		prev = w.Idx[i]
+		prev = w.idx[i]
+	}
+	return ret
+}
+
+// For periodic checking - what signatures are we currently waiting on, at the given offsets?
+// Accumulates values from all the priority lists within the set.
+// Returns nil if *any* of the priority lists is nil.
+func (w *WaitSet) WaitingOnAt(bof, eof int64) []int {
+	w.m.RLock()
+	defer w.m.RUnlock()
+	var l int
+	for i, v := range w.wait {
+		if w.await(i, bof, eof) {
+			if v == nil {
+				return nil
+			}
+			l = l + len(v)
+		}
+	}
+	ret := make([]int, l)
+	var prev, j int
+	for i, v := range w.wait {
+		if w.await(i, bof, eof) {
+			for _, x := range v {
+				ret[j] = x + prev
+				j++
+			}
+		}
+		prev = w.idx[i]
 	}
 	return ret
 }

@@ -87,8 +87,8 @@ func TestSet(t *testing.T) {
 	list := m.List([]string{"apple", "grapes", "grapes", "banana", "banana", "apple"})
 	list2 := m.List([]string{"grapefruit", "banana", "grapes"})
 	s := &Set{}
-	s.Add(list, len(list))
-	s.Add(list2, len(list2))
+	s.Add(list, len(list), -1, -1)
+	s.Add(list2, len(list2), -1, -1)
 	// test save/load
 	saver := persist.NewLoadSaver(nil)
 	s.Save(saver)
