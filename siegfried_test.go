@@ -27,7 +27,7 @@ func TestLoad(t *testing.T) {
 
 func TestIdentify(t *testing.T) {
 	s := New()
-	s.em = testEMatcher{}
+	s.nm = testEMatcher{}
 	s.bm = testBMatcher{}
 	s.cm = nil
 	s.ids = append(s.ids, testIdentifier{})

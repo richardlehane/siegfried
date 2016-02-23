@@ -48,9 +48,9 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
 	"github.com/richardlehane/siegfried/pkg/core/containermatcher"
 	"github.com/richardlehane/siegfried/pkg/core/mimematcher"
+	"github.com/richardlehane/siegfried/pkg/core/namematcher"
 	"github.com/richardlehane/siegfried/pkg/core/persist"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
-	"github.com/richardlehane/siegfried/pkg/core/stringmatcher"
 	"github.com/richardlehane/siegfried/pkg/core/textmatcher"
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
@@ -61,7 +61,7 @@ import (
 // are added to a Siegfried struct, they are registered with each matcher.
 type Siegfried struct {
 	C  time.Time    // signature create time
-	em core.Matcher // extensionmatcher
+	nm core.Matcher // namematcher
 	mm core.Matcher // mimematcher
 	cm core.Matcher // containermatcher
 	bm core.Matcher // bytematcher
@@ -87,7 +87,7 @@ type Siegfried struct {
 func New() *Siegfried {
 	s := &Siegfried{}
 	s.C = time.Now()
-	s.em = stringmatcher.New()
+	s.nm = namematcher.New()
 	s.mm = mimematcher.New()
 	s.cm = containermatcher.New()
 	s.bm = bytematcher.New()
@@ -103,7 +103,7 @@ func (s *Siegfried) Add(i core.Identifier) error {
 	default:
 		return fmt.Errorf("siegfried: unknown identifier type %T", i)
 	case *pronom.Identifier:
-		if err := i.Add(s.em, core.ExtensionMatcher); err != nil {
+		if err := i.Add(s.nm, core.NameMatcher); err != nil {
 			return err
 		}
 		if err := i.Add(s.mm, core.MIMEMatcher); err != nil {
@@ -127,7 +127,7 @@ func (s *Siegfried) Add(i core.Identifier) error {
 func (s *Siegfried) Save(path string) error {
 	ls := persist.NewLoadSaver(nil)
 	ls.SaveTime(s.C)
-	s.em.Save(ls)
+	s.nm.Save(ls)
 	s.mm.Save(ls)
 	s.cm.Save(ls)
 	s.bm.Save(ls)
@@ -185,7 +185,7 @@ func Load(path string) (*Siegfried, error) {
 	ls := persist.NewLoadSaver(buf)
 	return &Siegfried{
 		C:  ls.LoadTime(),
-		em: stringmatcher.Load(ls),
+		nm: namematcher.Load(ls),
 		mm: mimematcher.Load(ls),
 		cm: containermatcher.Load(ls),
 		bm: bytematcher.Load(ls),
@@ -265,7 +265,7 @@ func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identifi
 	for i, v := range s.ids {
 		recs[i] = v.Recorder()
 		if name != "" {
-			recs[i].Active(core.ExtensionMatcher)
+			recs[i].Active(core.NameMatcher)
 		}
 		if mime != "" {
 			recs[i].Active(core.MIMEMatcher)
@@ -276,13 +276,12 @@ func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identifi
 			recs[i].Active(core.TextMatcher)
 		}
 	}
-	// Extension Matcher
+	// Name Matcher
 	if len(name) > 0 {
-		ext := stringmatcher.NormaliseExt(name)
-		ems, _ := s.em.Identify(ext, nil) // we don't care about an error here
-		for v := range ems {
+		nms, _ := s.nm.Identify(name, nil) // we don't care about an error here
+		for v := range nms {
 			for _, rec := range recs {
-				if rec.Record(core.ExtensionMatcher, stringmatcher.ExtResult{v}) {
+				if rec.Record(core.NameMatcher, v) {
 					break
 				}
 			}
@@ -290,11 +289,10 @@ func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identifi
 	}
 	// MIME Matcher
 	if len(mime) > 0 {
-		mime = stringmatcher.NormaliseMIME(mime)
 		mms, _ := s.mm.Identify(mime, nil) // we don't care about an error here
 		for v := range mms {
 			for _, rec := range recs {
-				if rec.Record(core.MIMEMatcher, stringmatcher.MIMEResult{v}) {
+				if rec.Record(core.MIMEMatcher, v) {
 					break
 				}
 			}
@@ -440,8 +438,8 @@ func (s *Siegfried) Inspect(t core.MatcherType) string {
 	switch t {
 	case core.ByteMatcher:
 		return s.bm.String()
-	case core.ExtensionMatcher:
-		return s.em.String()
+	case core.NameMatcher:
+		return s.nm.String()
 	case core.MIMEMatcher:
 		return s.mm.String()
 	case core.ContainerMatcher:

@@ -139,7 +139,7 @@ func (i *Identifier) Recognise(m core.MatcherType, idx int) (bool, string) {
 	switch m {
 	default:
 		return false, ""
-	case core.ExtensionMatcher:
+	case core.NameMatcher:
 		if idx >= i.eStart && idx < i.eStart+len(i.ePuids) {
 			idx = idx - i.eStart
 			return true, i.name + ": " + i.ePuids[idx]
@@ -193,7 +193,7 @@ const (
 
 func (r *Recorder) Active(m core.MatcherType) {
 	switch m {
-	case core.ExtensionMatcher:
+	case core.NameMatcher:
 		if len(r.ePuids) > 0 {
 			r.extActive = true
 		}
@@ -212,7 +212,7 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 	switch m {
 	default:
 		return false
-	case core.ExtensionMatcher:
+	case core.NameMatcher:
 		if res.Index() >= r.eStart && res.Index() < r.eStart+len(r.ePuids) {
 			idx := res.Index() - r.eStart
 			r.ids = add(r.ids, r.name, r.ePuids[idx], r.infos[r.ePuids[idx]], res.Basis(), extScore)

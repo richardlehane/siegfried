@@ -32,9 +32,9 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/containermatcher"
 	"github.com/richardlehane/siegfried/pkg/core/mimematcher"
+	"github.com/richardlehane/siegfried/pkg/core/namematcher"
 	"github.com/richardlehane/siegfried/pkg/core/parseable"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
-	"github.com/richardlehane/siegfried/pkg/core/stringmatcher"
 	"github.com/richardlehane/siegfried/pkg/core/textmatcher"
 	"github.com/richardlehane/siegfried/pkg/pronom/mappings"
 )
@@ -215,11 +215,11 @@ func (p *pronom) add(m core.Matcher, t core.MatcherType) error {
 	switch t {
 	default:
 		return fmt.Errorf("Pronom: unknown matcher type %d", t)
-	case core.ExtensionMatcher:
+	case core.NameMatcher:
 		if !config.NoExt() {
 			var exts [][]string
 			exts, p.ePuids = p.j.Globs()
-			l, err := m.Add(stringmatcher.SignatureSet(exts), nil)
+			l, err := m.Add(namematcher.SignatureSet(exts), nil)
 			if err != nil {
 				return err
 			}

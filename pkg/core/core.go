@@ -96,7 +96,7 @@ type MatcherType int
 
 // Add additional Matchers here
 const (
-	ExtensionMatcher MatcherType = iota
+	NameMatcher MatcherType = iota
 	MIMEMatcher
 	ContainerMatcher
 	ByteMatcher

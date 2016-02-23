@@ -284,8 +284,8 @@ func main() {
 				err = inspectSig(core.ByteMatcher)
 			case input == "containermatcher", input == "cm":
 				err = inspectSig(core.ContainerMatcher)
-			case input == "extensionmatcher", input == "em":
-				err = inspectSig(core.ExtensionMatcher)
+			case input == "namematcher", input == "nm":
+				err = inspectSig(core.NameMatcher)
 			case input == "mimematcher", input == "mm":
 				err = inspectSig(core.MIMEMatcher)
 			case filepath.Ext(input) == ".sig":

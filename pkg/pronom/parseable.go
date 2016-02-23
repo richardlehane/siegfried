@@ -62,12 +62,20 @@ func (r *reports) Infos() map[string]parseable.FormatInfo {
 	return infos
 }
 
+func globify(s []string) []string {
+	ret := make([]string, len(s))
+	for i, v := range s {
+		ret[i] = "*." + v
+	}
+	return ret
+}
+
 func (r *reports) Globs() ([][]string, []string) {
 	exts := make([][]string, 0, len(r.r))
 	puids := make([]string, 0, len(r.p))
 	for i, v := range r.r {
 		if len(v.Extensions) > 0 {
-			exts = append(exts, v.Extensions)
+			exts = append(exts, globify(v.Extensions))
 			puids = append(puids, r.p[i])
 		}
 	}
@@ -159,7 +167,7 @@ func (d *droid) Globs() ([][]string, []string) {
 	puids := make([]string, 0, len(p))
 	for i, v := range d.FileFormats {
 		if len(v.Extensions) > 0 {
-			exts = append(exts, v.Extensions)
+			exts = append(exts, globify(v.Extensions))
 			puids = append(puids, p[i])
 		}
 	}
