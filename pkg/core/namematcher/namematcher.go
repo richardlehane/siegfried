@@ -14,6 +14,8 @@
 
 package namematcher
 
+// todo: add a precise map[string][]int to take out bulk of globs which are exact names e.g. README
+
 import (
 	"fmt"
 	"path/filepath"

@@ -18,6 +18,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
@@ -34,7 +35,7 @@ var (
 	}{
 		{"notXML", "this is not xml!", []int{}},
 		{"mdXML", "<MD_metadata>bla bla", []int{0}},
-		{"mdXMLns", "<MD_metadata xmlns='http://www.isotc211.org/2005/gmd'>bla bla", []int{0, 1}},
+		{"mdXMLns", "<MD_metadata xmlns='http://www.isotc211.org/2005/gmd'>bla bla", []int{1, 0}},
 		{"rssXMLns", "<atom xmlns='http://purl.org/rss/1.0/'>", []int{2}},
 	}
 )
@@ -48,7 +49,7 @@ func TestAdd(t *testing.T) {
 
 }
 
-func identifyString(m Matcher, s string) ([]int, error) {
+func identifyString(m Matcher, s string) ([]core.Result, error) {
 	rdr := strings.NewReader(s)
 	bufs := siegreader.New()
 	buf, _ := bufs.Get(rdr)
@@ -56,9 +57,9 @@ func identifyString(m Matcher, s string) ([]int, error) {
 	if err != nil {
 		return nil, err
 	}
-	ret := []int{}
+	ret := []core.Result{}
 	for r := range res {
-		ret = append(ret, r.Index())
+		ret = append(ret, r)
 	}
 	return ret, nil
 }
@@ -76,12 +77,13 @@ func TestIdentify(t *testing.T) {
 		}
 		if len(res) == len(tc.expect) {
 			for i := range res {
-				if res[i] != tc.expect[i] {
-					t.Errorf("bad results for %s: got index %d, expected %d", tc.name, res[i], tc.expect[i])
+				if res[i].Index() != tc.expect[i] {
+					t.Errorf("bad results for %s: got index %d, expected %d, basis %s", tc.name, res[i].Index(), tc.expect[i], res[i].Basis())
 				}
 			}
 		} else {
-			t.Errorf("bad results for %s: got %d results, expected %d", tc.name, len(res), len(tc.expect))
+
+			t.Errorf("bad results for %s: got %d results, expected %d %s %d %s %d ", tc.name, len(res), len(tc.expect), res[0].Basis(), res[0].Index(), res[1].Basis(), res[1].Index())
 		}
 	}
 }

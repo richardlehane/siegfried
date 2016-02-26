@@ -1,4 +1,4 @@
-// Copyright 2015 Richard Lehane. All rights reserved.
+// Copyright 2016 Richard Lehane. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,26 +15,548 @@
 package mimeinfo
 
 import (
-	"regexp"
+	"encoding/binary"
+	"encoding/hex"
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
+	"github.com/richardlehane/siegfried/pkg/core/persist"
 )
+
+func init() {
+	patterns.Register(int8Loader, loadInt8)
+	patterns.Register(big16Loader, loadBig16)
+	patterns.Register(big32Loader, loadBig32)
+	patterns.Register(little16Loader, loadLittle16)
+	patterns.Register(little32Loader, loadLittle32)
+	patterns.Register(host16Loader, loadHost16)
+	patterns.Register(host32Loader, loadHost32)
+	//patterns.Register(ignoreCaseLoader, loadIgnoreCase)
+	//patterns.Register(maskLoader, loadMask)
+}
+
+const (
+	int8Loader = iota + 16
+	big16Loader
+	big32Loader
+	little16Loader
+	little32Loader
+	host16Loader
+	host32Loader
+	//ignoreCaseLoader
+	//maskLoader
+)
+
+type Int8 byte
+
+// Test bytes against the pattern.
+// For a positive match, the integer value represents the length of the match.
+// For a negative match, the integer represents an offset jump before a subsequent test.
+func (n Int8) Test(b []byte) (bool, int) {
+	if len(b) < 1 {
+		return false, 0
+	}
+	if b[0] == byte(n) {
+		return true, 1
+	}
+	return false, 1
+}
+
+// Test bytes against the pattern in reverse.
+// For a positive match, the integer value represents the length of the match.
+// For a negative match, the integer represents an offset jump before a subsequent test.
+func (n Int8) TestR(b []byte) (bool, int) {
+	if len(b) < 1 {
+		return false, 0
+	}
+	if b[len(b)-1] == byte(n) {
+		return true, 1
+	}
+	return false, 1
+}
+
+// Equals reports whether a pattern is identical to another pattern.
+func (n Int8) Equals(pat patterns.Pattern) bool {
+	n2, ok := pat.(Int8)
+	if ok {
+		return n == n2
+	}
+	return false
+}
+
+// Length returns a minimum and maximum length for the pattern.
+func (n Int8) Length() (int, int) {
+	return 1, 1
+}
+
+// NumSequences reports how many plain sequences are needed to represent this pattern.
+func (n Int8) NumSequences() int {
+	return 1
+}
+
+// Sequences converts the pattern into a slice of plain sequences.
+func (n Int8) Sequences() []patterns.Sequence {
+	return []patterns.Sequence{patterns.Sequence{byte(n)}}
+}
+
+func (n Int8) String() string {
+	return "int8 " + hex.EncodeToString([]byte{byte(n)})
+}
+
+// Save persists the pattern.
+func (n Int8) Save(ls *persist.LoadSaver) {
+	ls.SaveByte(int8Loader)
+	ls.SaveByte(byte(n))
+}
+
+func loadInt8(ls *persist.LoadSaver) patterns.Pattern {
+	return Int8(ls.LoadByte())
+}
 
 type Big16 uint16
 
+// Test bytes against the pattern.
+// For a positive match, the integer value represents the length of the match.
+// For a negative match, the integer represents an offset jump before a subsequent test.
+func (n Big16) Test(b []byte) (bool, int) {
+	if len(b) < 2 {
+		return false, 0
+	}
+	if binary.BigEndian.Uint16(b[:2]) == uint16(n) {
+		return true, 2
+	}
+	return false, 1
+}
+
+// Test bytes against the pattern in reverse.
+// For a positive match, the integer value represents the length of the match.
+// For a negative match, the integer represents an offset jump before a subsequent test.
+func (n Big16) TestR(b []byte) (bool, int) {
+	if len(b) < 2 {
+		return false, 0
+	}
+	if binary.BigEndian.Uint16(b[len(b)-2:]) == uint16(n) {
+		return true, 2
+	}
+	return false, 1
+}
+
+// Equals reports whether a pattern is identical to another pattern.
+func (n Big16) Equals(pat patterns.Pattern) bool {
+	n2, ok := pat.(Big16)
+	if ok {
+		return n == n2
+	}
+	return false
+}
+
+// Length returns a minimum and maximum length for the pattern.
+func (n Big16) Length() (int, int) {
+	return 2, 2
+}
+
+// NumSequences reports how many plain sequences are needed to represent this pattern.
+func (n Big16) NumSequences() int {
+	return 1
+}
+
+// Sequences converts the pattern into a slice of plain sequences.
+func (n Big16) Sequences() []patterns.Sequence {
+	seq := make(patterns.Sequence, 2)
+	binary.BigEndian.PutUint16([]byte(seq), uint16(n))
+	return []patterns.Sequence{seq}
+}
+
+func (n Big16) String() string {
+	buf := make([]byte, 2)
+	binary.BigEndian.PutUint16(buf, uint16(n))
+	return "big16 " + hex.EncodeToString(buf)
+}
+
+// Save persists the pattern.
+func (n Big16) Save(ls *persist.LoadSaver) {
+	ls.SaveByte(big16Loader)
+	buf := make([]byte, 2)
+	binary.BigEndian.PutUint16(buf, uint16(n))
+	ls.SaveBytes(buf)
+}
+
+func loadBig16(ls *persist.LoadSaver) patterns.Pattern {
+	return Big16(binary.BigEndian.Uint16(ls.LoadBytes()))
+}
+
 type Big32 uint32
+
+// Test bytes against the pattern.
+// For a positive match, the integer value represents the length of the match.
+// For a negative match, the integer represents an offset jump before a subsequent test.
+func (n Big32) Test(b []byte) (bool, int) {
+	if len(b) < 4 {
+		return false, 0
+	}
+	if binary.BigEndian.Uint32(b[:4]) == uint32(n) {
+		return true, 4
+	}
+	return false, 1
+}
+
+// Test bytes against the pattern in reverse.
+// For a positive match, the integer value represents the length of the match.
+// For a negative match, the integer represents an offset jump before a subsequent test.
+func (n Big32) TestR(b []byte) (bool, int) {
+	if len(b) < 4 {
+		return false, 0
+	}
+	if binary.BigEndian.Uint32(b[len(b)-4:]) == uint32(n) {
+		return true, 4
+	}
+	return false, 1
+}
+
+// Equals reports whether a pattern is identical to another pattern.
+func (n Big32) Equals(pat patterns.Pattern) bool {
+	n2, ok := pat.(Big32)
+	if ok {
+		return n == n2
+	}
+	return false
+}
+
+// Length returns a minimum and maximum length for the pattern.
+func (n Big32) Length() (int, int) {
+	return 4, 4
+}
+
+// NumSequences reports how many plain sequences are needed to represent this pattern.
+func (n Big32) NumSequences() int {
+	return 1
+}
+
+// Sequences converts the pattern into a slice of plain sequences.
+func (n Big32) Sequences() []patterns.Sequence {
+	seq := make(patterns.Sequence, 4)
+	binary.BigEndian.PutUint32([]byte(seq), uint32(n))
+	return []patterns.Sequence{seq}
+}
+
+func (n Big32) String() string {
+	buf := make([]byte, 4)
+	binary.BigEndian.PutUint32(buf, uint32(n))
+	return "big32 " + hex.EncodeToString(buf)
+}
+
+// Save persists the pattern.
+func (n Big32) Save(ls *persist.LoadSaver) {
+	ls.SaveByte(big32Loader)
+	buf := make([]byte, 4)
+	binary.BigEndian.PutUint32(buf, uint32(n))
+	ls.SaveBytes(buf)
+}
+
+func loadBig32(ls *persist.LoadSaver) patterns.Pattern {
+	return Big32(binary.BigEndian.Uint32(ls.LoadBytes()))
+}
 
 type Little16 uint16
 
+// Test bytes against the pattern.
+// For a positive match, the integer value represents the length of the match.
+// For a negative match, the integer represents an offset jump before a subsequent test.
+func (n Little16) Test(b []byte) (bool, int) {
+	if len(b) < 2 {
+		return false, 0
+	}
+	if binary.LittleEndian.Uint16(b[:2]) == uint16(n) {
+		return true, 2
+	}
+	return false, 1
+}
+
+// Test bytes against the pattern in reverse.
+// For a positive match, the integer value represents the length of the match.
+// For a negative match, the integer represents an offset jump before a subsequent test.
+func (n Little16) TestR(b []byte) (bool, int) {
+	if len(b) < 2 {
+		return false, 0
+	}
+	if binary.LittleEndian.Uint16(b[len(b)-2:]) == uint16(n) {
+		return true, 2
+	}
+	return false, 1
+}
+
+// Equals reports whether a pattern is identical to another pattern.
+func (n Little16) Equals(pat patterns.Pattern) bool {
+	n2, ok := pat.(Little16)
+	if ok {
+		return n == n2
+	}
+	return false
+}
+
+// Length returns a minimum and maximum length for the pattern.
+func (n Little16) Length() (int, int) {
+	return 2, 2
+}
+
+// NumSequences reports how many plain sequences are needed to represent this pattern.
+func (n Little16) NumSequences() int {
+	return 1
+}
+
+// Sequences converts the pattern into a slice of plain sequences.
+func (n Little16) Sequences() []patterns.Sequence {
+	seq := make(patterns.Sequence, 2)
+	binary.LittleEndian.PutUint16([]byte(seq), uint16(n))
+	return []patterns.Sequence{seq}
+}
+
+func (n Little16) String() string {
+	buf := make([]byte, 2)
+	binary.LittleEndian.PutUint16(buf, uint16(n))
+	return "little16 " + hex.EncodeToString(buf)
+}
+
+// Save persists the pattern.
+func (n Little16) Save(ls *persist.LoadSaver) {
+	ls.SaveByte(little16Loader)
+	buf := make([]byte, 2)
+	binary.LittleEndian.PutUint16(buf, uint16(n))
+	ls.SaveBytes(buf)
+}
+
+func loadLittle16(ls *persist.LoadSaver) patterns.Pattern {
+	return Little16(binary.LittleEndian.Uint16(ls.LoadBytes()))
+}
+
 type Little32 uint32
 
-type Host16 uint16 // Implement as: Big OR Little
+// Test bytes against the pattern.
+// For a positive match, the integer value represents the length of the match.
+// For a negative match, the integer represents an offset jump before a subsequent test.
+func (n Little32) Test(b []byte) (bool, int) {
+	if len(b) < 4 {
+		return false, 0
+	}
+	if binary.LittleEndian.Uint32(b[:4]) == uint32(n) {
+		return true, 4
+	}
+	return false, 1
+}
 
-type Host32 uint32 // Implement as: Big OR Little
+// Test bytes against the pattern in reverse.
+// For a positive match, the integer value represents the length of the match.
+// For a negative match, the integer represents an offset jump before a subsequent test.
+func (n Little32) TestR(b []byte) (bool, int) {
+	if len(b) < 4 {
+		return false, 0
+	}
+	if binary.LittleEndian.Uint32(b[len(b)-4:]) == uint32(n) {
+		return true, 4
+	}
+	return false, 1
+}
 
-type UnicodeLE []byte
+// Equals reports whether a pattern is identical to another pattern.
+func (n Little32) Equals(pat patterns.Pattern) bool {
+	n2, ok := pat.(Little32)
+	if ok {
+		return n == n2
+	}
+	return false
+}
 
-type Regex *regexp.Regexp // getting headache thinking about this one! Leave it out???
+// Length returns a minimum and maximum length for the pattern.
+func (n Little32) Length() (int, int) {
+	return 4, 4
+}
+
+// NumSequences reports how many plain sequences are needed to represent this pattern.
+func (n Little32) NumSequences() int {
+	return 1
+}
+
+// Sequences converts the pattern into a slice of plain sequences.
+func (n Little32) Sequences() []patterns.Sequence {
+	seq := make(patterns.Sequence, 4)
+	binary.LittleEndian.PutUint32([]byte(seq), uint32(n))
+	return []patterns.Sequence{seq}
+}
+
+func (n Little32) String() string {
+	buf := make([]byte, 4)
+	binary.LittleEndian.PutUint32(buf, uint32(n))
+	return "little32 " + hex.EncodeToString(buf)
+}
+
+// Save persists the pattern.
+func (n Little32) Save(ls *persist.LoadSaver) {
+	ls.SaveByte(little32Loader)
+	buf := make([]byte, 4)
+	binary.LittleEndian.PutUint32(buf, uint32(n))
+	ls.SaveBytes(buf)
+}
+
+func loadLittle32(ls *persist.LoadSaver) patterns.Pattern {
+	return Little32(binary.LittleEndian.Uint32(ls.LoadBytes()))
+}
+
+type Host16 uint16
+
+// Test bytes against the pattern.
+// For a positive match, the integer value represents the length of the match.
+// For a negative match, the integer represents an offset jump before a subsequent test.
+func (n Host16) Test(b []byte) (bool, int) {
+	if len(b) < 2 {
+		return false, 0
+	}
+	if binary.LittleEndian.Uint16(b[:2]) == uint16(n) {
+		return true, 2
+	}
+	if binary.BigEndian.Uint16(b[:2]) == uint16(n) {
+		return true, 2
+	}
+	return false, 1
+}
+
+// Test bytes against the pattern in reverse.
+// For a positive match, the integer value represents the length of the match.
+// For a negative match, the integer represents an offset jump before a subsequent test.
+func (n Host16) TestR(b []byte) (bool, int) {
+	if len(b) < 2 {
+		return false, 0
+	}
+	if binary.LittleEndian.Uint16(b[len(b)-2:]) == uint16(n) {
+		return true, 2
+	}
+	if binary.BigEndian.Uint16(b[len(b)-2:]) == uint16(n) {
+		return true, 2
+	}
+	return false, 1
+}
+
+// Equals reports whether a pattern is identical to another pattern.
+func (n Host16) Equals(pat patterns.Pattern) bool {
+	n2, ok := pat.(Host16)
+	if ok {
+		return n == n2
+	}
+	return false
+}
+
+// Length returns a minimum and maximum length for the pattern.
+func (n Host16) Length() (int, int) {
+	return 2, 2
+}
+
+// NumSequences reports how many plain sequences are needed to represent this pattern.
+func (n Host16) NumSequences() int {
+	return 2
+}
+
+// Sequences converts the pattern into a slice of plain sequences.
+func (n Host16) Sequences() []patterns.Sequence {
+	seq, seq2 := make(patterns.Sequence, 2), make(patterns.Sequence, 2)
+	binary.LittleEndian.PutUint16([]byte(seq), uint16(n))
+	binary.BigEndian.PutUint16([]byte(seq2), uint16(n))
+	return []patterns.Sequence{seq, seq2}
+}
+
+func (n Host16) String() string {
+	buf := make([]byte, 2)
+	binary.BigEndian.PutUint16(buf, uint16(n))
+	return "host16 " + hex.EncodeToString(buf)
+}
+
+// Save persists the pattern.
+func (n Host16) Save(ls *persist.LoadSaver) {
+	ls.SaveByte(host16Loader)
+	buf := make([]byte, 2)
+	binary.LittleEndian.PutUint16(buf, uint16(n))
+	ls.SaveBytes(buf)
+}
+
+func loadHost16(ls *persist.LoadSaver) patterns.Pattern {
+	return Host16(binary.LittleEndian.Uint16(ls.LoadBytes()))
+}
+
+type Host32 uint32
+
+// Test bytes against the pattern.
+// For a positive match, the integer value represents the length of the match.
+// For a negative match, the integer represents an offset jump before a subsequent test.
+func (n Host32) Test(b []byte) (bool, int) {
+	if len(b) < 4 {
+		return false, 0
+	}
+	if binary.LittleEndian.Uint32(b[:4]) == uint32(n) {
+		return true, 4
+	}
+	if binary.BigEndian.Uint32(b[:4]) == uint32(n) {
+		return true, 4
+	}
+	return false, 1
+}
+
+// Test bytes against the pattern in reverse.
+// For a positive match, the integer value represents the length of the match.
+// For a negative match, the integer represents an offset jump before a subsequent test.
+func (n Host32) TestR(b []byte) (bool, int) {
+	if len(b) < 4 {
+		return false, 0
+	}
+	if binary.LittleEndian.Uint32(b[len(b)-4:]) == uint32(n) {
+		return true, 4
+	}
+	if binary.BigEndian.Uint32(b[len(b)-4:]) == uint32(n) {
+		return true, 4
+	}
+	return false, 1
+}
+
+// Equals reports whether a pattern is identical to another pattern.
+func (n Host32) Equals(pat patterns.Pattern) bool {
+	n2, ok := pat.(Host32)
+	if ok {
+		return n == n2
+	}
+	return false
+}
+
+// Length returns a minimum and maximum length for the pattern.
+func (n Host32) Length() (int, int) {
+	return 4, 4
+}
+
+// NumSequences reports how many plain sequences are needed to represent this pattern.
+func (n Host32) NumSequences() int {
+	return 2
+}
+
+// Sequences converts the pattern into a slice of plain sequences.
+func (n Host32) Sequences() []patterns.Sequence {
+	seq, seq2 := make(patterns.Sequence, 4), make(patterns.Sequence, 4)
+	binary.LittleEndian.PutUint32([]byte(seq), uint32(n))
+	binary.BigEndian.PutUint32([]byte(seq2), uint32(n))
+	return []patterns.Sequence{seq, seq2}
+}
+
+func (n Host32) String() string {
+	buf := make([]byte, 4)
+	binary.BigEndian.PutUint32(buf, uint32(n))
+	return "host32 " + hex.EncodeToString(buf)
+}
+
+// Save persists the pattern.
+func (n Host32) Save(ls *persist.LoadSaver) {
+	ls.SaveByte(host32Loader)
+	buf := make([]byte, 4)
+	binary.LittleEndian.PutUint32(buf, uint32(n))
+	ls.SaveBytes(buf)
+}
+
+func loadHost32(ls *persist.LoadSaver) patterns.Pattern {
+	return Host32(binary.LittleEndian.Uint32(ls.LoadBytes()))
+}
 
 type IgnoreCase []byte // @book has 16 possible values 1*2*2*2*2
 
