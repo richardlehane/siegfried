@@ -44,7 +44,7 @@
 
 #### Signatures
 
-By default, siegfried uses the latest PRONOM byte and container signatures with no buffer limits. To use MIME-info signatures, or to customise your signature file, use the [roy tool](https://github.com/richardlehane/siegfried/wiki/Building-a-signature-file-with-ROY).
+By default, siegfried uses the latest PRONOM signatures with no buffer limits (it will do full file scans if necessary). To use MIME-info signatures, or to customise your signature file, use the [roy tool](https://github.com/richardlehane/siegfried/wiki/Building-a-signature-file-with-ROY).
 
 ## Install
 
