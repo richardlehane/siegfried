@@ -4,13 +4,9 @@
 
 Key features are:
 
-  - complete implementation of [PRONOM](http://apps.nationalarchives.gov.uk/pronom) (byte and container signatures)
-  - implementation of [Apache Tika MIME signatures](https://tika.apache.org/1.1/detection.html#Mime_Magic_Detection) (MIME-info signature file)
-  - fast matching without limiting the number of bytes scanned
-  - detailed information about the basis for format matches
-  - simple command line interface with a choice of outputs
-  - a [built-in server](https://github.com/richardlehane/siegfried/wiki/Using-the-siegfried-server) for integrating with workflows and language inter-op
-  - power options including [debug mode](https://github.com/richardlehane/siegfried/wiki/Inspect-and-Debug), [signature modification](https://github.com/richardlehane/siegfried/wiki/Building-a-signature-file-with-ROY), and [multiple identifiers](https://github.com/richardlehane/siegfried/wiki/Building-a-signature-file-with-ROY#one-signature-file-multiple-identifiers)
+  - implements [the National Archives UK's PRONOM](http://apps.nationalarchives.gov.uk/pronom) file format signatures
+  - implements [freedesktop.org's MIME-info](https://freedesktop.org/wiki/Software/shared-mime-info/) file format signatures 
+  - power options including a [built-in server](https://github.com/richardlehane/siegfried/wiki/Using-the-siegfried-server) for integrating with workflows and language inter-op, [signature modification](https://github.com/richardlehane/siegfried/wiki/Building-a-signature-file-with-ROY), and [multiple identifiers](https://github.com/richardlehane/siegfried/wiki/Building-a-signature-file-with-ROY#one-signature-file-multiple-identifiers)
 
 ## Version
 
@@ -51,7 +47,7 @@ Key features are:
 
 #### Signatures
 
-By default, siegfried uses the latest PRONOM and container signatures with no buffer limits. To use Apache Tika MIME signatures, or to customise your signature file, use the [roy tool](https://github.com/richardlehane/siegfried/wiki/Building-a-signature-file-with-ROY).
+By default, siegfried uses the latest PRONOM byte and container signatures with no buffer limits. To use MIME-info signatures, or to customise your signature file, use the [roy tool](https://github.com/richardlehane/siegfried/wiki/Building-a-signature-file-with-ROY).
 
 ## Install
 
@@ -82,7 +78,7 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 ## Recent Changes
 ### Version 1.5.0 (7/3/2016)
-- implement Apache Tika MIME signatures
+- implement freedesktop.org MIME-info signatures (and the Apache Tika variant)
 - default signature file now "default.sig" (was "pronom.sig")
 - changes to YAML and JSON output: "ns" (for namespace) replaces "id", and "id" replaces "puid"
 
