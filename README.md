@@ -1,8 +1,6 @@
 # Siegfried
 
-[Siegfried](http://www.itforarchivists.com/siegfried) is a signature-based file format identification tool.
-
-Siegfried implements:
+[Siegfried](http://www.itforarchivists.com/siegfried) is a signature-based file format identification tool, implementing:
 
   - the National Archives UK's [PRONOM](http://apps.nationalarchives.gov.uk/pronom) file format signatures
   - freedesktop.org's [MIME-info](https://freedesktop.org/wiki/Software/shared-mime-info/) file format signatures.
