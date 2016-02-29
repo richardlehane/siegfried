@@ -15,7 +15,7 @@
 package mimeinfo
 
 import (
-	"fmt"
+	//"fmt"
 	"path/filepath"
 	"testing"
 
@@ -49,7 +49,10 @@ func TestNew(t *testing.T) {
 				}
 			}*/
 		for _, c := range v.XMLPattern {
-			fmt.Printf("Root: %s; Namespace: %s\n", c.Local, c.NS)
+			//fmt.Printf("Root: %s; Namespace: %s\n", c.Local, c.NS)
+			if c.Local == "" && c.NS == "" {
+				t.Error("xml pattern with nothing")
+			}
 		}
 	}
 	/*
