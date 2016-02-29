@@ -40,7 +40,7 @@
 
 #### Example
 
-[![asciicast](https://asciinema.org/a/bnczwdtxhwnxth3lqqh17qy84.png)](https://asciinema.org/a/bnczwdtxhwnxth3lqqh17qy84)
+[![asciicast](https://asciinema.org/a/ernm49loq5ofuj48ywlvg7xq6.png)](https://asciinema.org/a/ernm49loq5ofuj48ywlvg7xq6)
 
 #### Signatures
 
