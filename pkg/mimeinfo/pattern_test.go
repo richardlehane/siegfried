@@ -18,6 +18,7 @@ import (
 	"encoding/binary"
 	"testing"
 
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
 	"github.com/richardlehane/siegfried/pkg/core/persist"
 )
 
@@ -207,5 +208,94 @@ func TestHost32(t *testing.T) {
 	p := loadHost32(loader)
 	if !p.Equals(Host32(i32)) {
 		t.Errorf("expecting %d, got %s", i32, p)
+	}
+}
+
+func TestIgnoreCase(t *testing.T) {
+	apple := []byte("AppLe")
+	apple2 := []byte("apple")
+	if !IgnoreCase(apple).Equals(IgnoreCase(apple2)) {
+		t.Error("IgnoreCase fail: Equality")
+	}
+	if r, _ := IgnoreCase(apple).Test([]byte("banana")); r {
+		t.Error("IgnoreCase fail: shouldn't match")
+	}
+	if r, l := IgnoreCase(apple).Test(IgnoreCase(apple2)); !r || l != 5 {
+		t.Error("IgnoreCase fail: should match")
+	}
+	if r, l := IgnoreCase(apple).TestR(IgnoreCase(apple2)); !r || l != 5 {
+		t.Error("IgnoreCase fail: should match reverse")
+	}
+	if i := IgnoreCase("!bYt*e").NumSequences(); i != 16 {
+		t.Errorf("IgnoreCase fail: numsequences expected %d, got %d", 16, i)
+	}
+	saver := persist.NewLoadSaver(nil)
+	IgnoreCase(apple).Save(saver)
+	loader := persist.NewLoadSaver(saver.Bytes())
+	_ = loader.LoadByte()
+	p := loadIgnoreCase(loader)
+	if !p.Equals(IgnoreCase(apple)) {
+		t.Errorf("expecting %v, got %v", IgnoreCase(apple), p)
+	}
+	if seqs := IgnoreCase([]byte("a!cd")).Sequences(); len(seqs) != 8 {
+		t.Errorf("IgnoreCase sequences %v", seqs)
+	}
+}
+
+func TestMask(t *testing.T) {
+	apple := Mask{
+		pat: patterns.Sequence{'a', 'p', 'p', 0, 0, 'l', 'e'},
+		val: []byte{255, 255, 255, 0, 0, 255, 255},
+	}
+	apple2 := Mask{
+		pat: patterns.Sequence{'a', 'p', 'p', 0, 0, 'l', 'e'},
+		val: []byte{255, 255, 255, 0, 0, 255, 255},
+	}
+	if !apple.Equals(apple2) {
+		t.Error("Mask fail: Equality")
+	}
+	if r, _ := apple.Test([]byte("apPyzle")); r {
+		t.Error("Mask fail: shouldn't match")
+	}
+	if r, l := apple.Test([]byte("appyzle")); !r || l != 7 {
+		t.Error("Mask fail: should match")
+	}
+	if r, l := apple.TestR([]byte("appyzle")); !r || l != 7 {
+		t.Error("Mask fail: should match reverse")
+	}
+	saver := persist.NewLoadSaver(nil)
+	apple.Save(saver)
+	loader := persist.NewLoadSaver(saver.Bytes())
+	_ = loader.LoadByte()
+	p := loadMask(loader)
+	if !p.Equals(apple) {
+		t.Errorf("expecting %s, got %s", apple, p)
+	}
+	seqsTest := Mask{
+		pat: patterns.Sequence("ap"),
+		val: []byte{0xFF, 0xFE},
+	}
+	if seqs := seqsTest.Sequences(); len(seqs) != 2 || seqs[1][1] != 'q' {
+		t.Error(seqs)
+	}
+	pats, ints := unmask(apple)
+	if len(ints) != 2 || ints[0] != 0 || ints[1] != 2 {
+		t.Errorf("Unmask fail, got ints %v", ints)
+	}
+	if len(pats) != 2 || !pats[0].Equals(patterns.Sequence("app")) || !pats[1].Equals(patterns.Sequence("le")) {
+		t.Errorf("Unmask fail, got pats %v", pats)
+	}
+	pats, ints = unmask(Mask{
+		pat: patterns.Sequence{'A', 'C', '0', '0', '0', '0'},
+		val: []byte{0xFF, 0xFF, 0xF0, 0xF0, 0xF0, 0xF0},
+	})
+	if len(ints) != 2 || ints[0] != 0 || ints[1] != 0 {
+		t.Errorf("Unmask fail, got ints %v", ints)
+	}
+	if len(pats) != 2 || !pats[0].Equals(patterns.Sequence("AC")) || !pats[1].Equals(Mask{
+		pat: patterns.Sequence{'0', '0', '0', '0'},
+		val: []byte{0xF0, 0xF0, 0xF0, 0xF0},
+	}) {
+		t.Errorf("Unmask fail, got pats %v", pats)
 	}
 }

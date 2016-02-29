@@ -15,6 +15,7 @@
 package mimeinfo
 
 import (
+	"bytes"
 	"encoding/binary"
 	"encoding/hex"
 
@@ -30,8 +31,8 @@ func init() {
 	patterns.Register(little32Loader, loadLittle32)
 	patterns.Register(host16Loader, loadHost16)
 	patterns.Register(host32Loader, loadHost32)
-	//patterns.Register(ignoreCaseLoader, loadIgnoreCase)
-	//patterns.Register(maskLoader, loadMask)
+	patterns.Register(ignoreCaseLoader, loadIgnoreCase)
+	patterns.Register(maskLoader, loadMask)
 }
 
 const (
@@ -42,8 +43,8 @@ const (
 	little32Loader
 	host16Loader
 	host32Loader
-	//ignoreCaseLoader
-	//maskLoader
+	ignoreCaseLoader
+	maskLoader
 )
 
 type Int8 byte
@@ -558,7 +559,117 @@ func loadHost32(ls *persist.LoadSaver) patterns.Pattern {
 	return Host32(binary.LittleEndian.Uint32(ls.LoadBytes()))
 }
 
-type IgnoreCase []byte // @book has 16 possible values 1*2*2*2*2
+type IgnoreCase []byte
+
+func (c IgnoreCase) Test(b []byte) (bool, int) {
+	if len(b) < len(c) {
+		return false, 0
+	}
+	for i, v := range c {
+		if v != b[i] {
+			if 'a' <= v && v <= 'z' && b[i] == v-'a'-'A' {
+				continue
+			}
+
+			if 'A' <= v && v <= 'Z' && b[i] == v+'a'-'A' {
+				continue
+			}
+			return false, 1
+		}
+	}
+	return true, len(c)
+}
+
+func (c IgnoreCase) TestR(b []byte) (bool, int) {
+	if len(b) < len(c) {
+		return false, 0
+	}
+	for i, v := range c {
+		if v != b[len(b)-len(c)+i] {
+			if 'a' <= v && v <= 'z' && b[len(b)-len(c)+i] == v-'a'-'A' {
+				continue
+			}
+			if 'A' <= v && v <= 'Z' && b[len(b)-len(c)+i] == v+'a'-'A' {
+				continue
+			}
+			return false, 1
+		}
+	}
+	return true, len(c)
+}
+
+// Equals reports whether a pattern is identical to another pattern.
+func (c IgnoreCase) Equals(pat patterns.Pattern) bool {
+	c2, ok := pat.(IgnoreCase)
+	if ok && bytes.Equal(bytes.ToLower(c), bytes.ToLower(c2)) {
+		return true
+	}
+	return false
+}
+
+// Length returns a minimum and maximum length for the pattern.
+func (c IgnoreCase) Length() (int, int) {
+	return len(c), len(c)
+}
+
+// NumSequences reports how many plain sequences are needed to represent this pattern.
+func (c IgnoreCase) NumSequences() int {
+	i := 1
+	for _, v := range c {
+		if 'A' <= v && v <= 'z' {
+			i *= 2
+		}
+	}
+	return i
+}
+
+// Sequences converts the pattern into a slice of plain sequences.
+func (c IgnoreCase) Sequences() []patterns.Sequence {
+	var ret []patterns.Sequence
+	for _, v := range c {
+		switch {
+		case 'a' <= v && v <= 'z':
+			ret = sequences(ret, v, v-('a'-'A'))
+		case 'A' <= v && v <= 'Z':
+			ret = sequences(ret, v, v+('a'-'A'))
+		default:
+			ret = sequences(ret, v)
+		}
+	}
+	return ret
+}
+
+func (c IgnoreCase) String() string {
+	return "ignore case " + string(c)
+}
+
+// Save persists the pattern.
+func (c IgnoreCase) Save(ls *persist.LoadSaver) {
+	ls.SaveByte(ignoreCaseLoader)
+	ls.SaveBytes(c)
+}
+
+func loadIgnoreCase(ls *persist.LoadSaver) patterns.Pattern {
+	return IgnoreCase(ls.LoadBytes())
+}
+
+func sequences(pats []patterns.Sequence, opts ...byte) []patterns.Sequence {
+	if len(pats) == 0 {
+		pats = []patterns.Sequence{patterns.Sequence{}}
+	}
+	ret := make([]patterns.Sequence, len(opts)*len(pats))
+	var i int
+	for _, b := range opts {
+		for _, p := range pats {
+			seq := make(patterns.Sequence, len(p)+1)
+			copy(seq, p)
+			seq[len(p)] = b
+			ret[i] = seq
+			i++
+		}
+	}
+	return ret
+}
 
 type Mask struct {
 	pat patterns.Pattern
@@ -571,12 +682,138 @@ func (m Mask) Test(b []byte) (bool, int) {
 	}
 	t := make([]byte, len(m.val))
 	for i := range t {
-		t[i] = t[i] & m.val[i]
+		t[i] = b[i] & m.val[i]
 	}
 	return m.pat.Test(t)
 }
 
+func (m Mask) TestR(b []byte) (bool, int) {
+	if len(b) < len(m.val) {
+		return false, 0
+	}
+	t := make([]byte, len(m.val))
+	for i := range t {
+		t[i] = b[len(b)-len(t)+i] & m.val[i]
+	}
+	return m.pat.TestR(t)
+}
+
+// Equals reports whether a pattern is identical to another pattern.
+func (m Mask) Equals(pat patterns.Pattern) bool {
+	m2, ok := pat.(Mask)
+	if ok && m.pat.Equals(m2.pat) && bytes.Equal(m.val, m2.val) {
+		return true
+	}
+	return false
+}
+
+// Length returns a minimum and maximum length for the pattern.
+func (m Mask) Length() (int, int) {
+	return m.pat.Length()
+}
+
+func validMasks(a, b byte) []byte {
+	var ret []byte
+	var byt byte
+	for ; ; byt++ {
+		if a&byt == b {
+			ret = append(ret, byt)
+		}
+		if byt == 255 {
+			break
+		}
+	}
+	return ret
+}
+
+// NumSequences reports how many plain sequences are needed to represent this pattern.
+func (m Mask) NumSequences() int {
+	if n := m.pat.NumSequences(); n != 1 {
+		return 0
+	}
+	seq := m.pat.Sequences()[0]
+	var ret int
+	for i, b := range m.val {
+		ret *= len(validMasks(b, seq[i]))
+	}
+	return ret
+}
+
+// Sequences converts the pattern into a slice of plain sequences.
+func (m Mask) Sequences() []patterns.Sequence {
+	if n := m.pat.NumSequences(); n != 1 {
+		return nil
+	}
+	seq := m.pat.Sequences()[0]
+	var ret []patterns.Sequence
+	for i, b := range m.val {
+		ret = sequences(ret, validMasks(b, seq[i])...)
+	}
+	return ret
+}
+
+func (m Mask) String() string {
+	return "mask " + hex.EncodeToString(m.val) + "(" + m.pat.String() + ")"
+}
+
+// Save persists the pattern.
+func (m Mask) Save(ls *persist.LoadSaver) {
+	ls.SaveByte(maskLoader)
+	m.pat.Save(ls)
+	ls.SaveBytes(m.val)
+}
+
+func loadMask(ls *persist.LoadSaver) patterns.Pattern {
+	return Mask{
+		pat: patterns.Load(ls),
+		val: ls.LoadBytes(),
+	}
+}
+
 // Unmask turns 0xFF00 masks into a slice of patterns and slice of distances between those patterns.
-func Unmask(m Mask) ([]patterns.Pattern, []int) {
-	return nil, nil
+func unmask(m Mask) ([]patterns.Pattern, []int) {
+	if m.pat.NumSequences() != 1 {
+		return []patterns.Pattern{m}, []int{0}
+	}
+	seq := m.pat.Sequences()[0]
+	if len(seq) != len(m.val) {
+		return []patterns.Pattern{m}, []int{0}
+	}
+	pret, iret := []patterns.Pattern{}, []int{}
+	var slc, skip int
+	for idx, byt := range m.val {
+		switch byt {
+		case 0xFF:
+			slc++
+		case 0x00:
+			if slc > 0 {
+				pat := make(patterns.Sequence, slc)
+				copy(pat, seq[idx-slc:idx])
+				pret = append(pret, pat)
+				iret = append(iret, skip)
+				slc, skip = 0, 0
+			}
+			skip++
+		default:
+			if slc > 0 {
+				pat := make(patterns.Sequence, slc)
+				copy(pat, seq[idx-slc:idx])
+				pret = append(pret, pat)
+				iret = append(iret, skip)
+				slc, skip = 0, 0
+			}
+			pat := make(patterns.Sequence, len(m.val)-idx)
+			copy(pat, seq[idx:])
+			pret = append(pret, Mask{pat: pat, val: m.val[idx:]})
+			iret = append(iret, skip)
+			return pret, iret
+		}
+	}
+	if slc > 0 {
+		pat := make(patterns.Sequence, slc)
+		copy(pat, seq[len(m.val)-slc:])
+		pret = append(pret, pat)
+		iret = append(iret, skip)
+	}
+	return pret, iret
 }
