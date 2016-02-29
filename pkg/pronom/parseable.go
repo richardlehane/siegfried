@@ -70,31 +70,31 @@ func globify(s []string) []string {
 	return ret
 }
 
-func (r *reports) Globs() ([][]string, []string) {
-	exts := make([][]string, 0, len(r.r))
+func (r *reports) Globs() ([]string, []string) {
+	exts := make([]string, 0, len(r.r))
 	puids := make([]string, 0, len(r.p))
 	for i, v := range r.r {
 		if len(v.Extensions) > 0 {
-			exts = append(exts, globify(v.Extensions))
-			puids = append(puids, r.p[i])
+			for _, e := range globify(v.Extensions) {
+				exts = append(exts, e)
+				puids = append(puids, r.p[i])
+			}
 		}
 	}
 	return exts, puids
 }
 
-func (r *reports) MIMEs() ([][]string, []string) {
-	mimes := make([][]string, 0, len(r.r))
-	puids := make([]string, 0, len(r.p))
+func (r *reports) MIMEs() ([]string, []string) {
+	mimes, puids := make([]string, 0, len(r.r)), make([]string, 0, len(r.p))
 	for i, v := range r.r {
 		if len(v.MIME()) > 0 {
-			mimes = append(mimes, []string{v.MIME()})
-			puids = append(puids, r.p[i])
+			mimes, puids = append(mimes, v.MIME()), append(puids, r.p[i])
 		}
 	}
 	return mimes, puids
 }
 
-func (r *reports) XMLs() ([][][2]string, []string) {
+func (r *reports) XMLs() ([][2]string, []string) {
 	return nil, nil
 }
 
@@ -161,33 +161,32 @@ func (d *droid) Infos() map[string]parseable.FormatInfo {
 	return infos
 }
 
-func (d *droid) Globs() ([][]string, []string) {
+func (d *droid) Globs() ([]string, []string) {
 	p := d.IDs()
-	exts := make([][]string, 0, len(d.FileFormats))
-	puids := make([]string, 0, len(p))
+	exts, puids := make([]string, 0, len(d.FileFormats)), make([]string, 0, len(p))
 	for i, v := range d.FileFormats {
 		if len(v.Extensions) > 0 {
-			exts = append(exts, globify(v.Extensions))
-			puids = append(puids, p[i])
+			for _, e := range globify(v.Extensions) {
+				exts = append(exts, e)
+				puids = append(puids, p[i])
+			}
 		}
 	}
 	return exts, puids
 }
 
-func (d *droid) MIMEs() ([][]string, []string) {
+func (d *droid) MIMEs() ([]string, []string) {
 	p := d.IDs()
-	mimes := make([][]string, 0, len(d.FileFormats))
-	puids := make([]string, 0, len(p))
+	mimes, puids := make([]string, 0, len(d.FileFormats)), make([]string, 0, len(p))
 	for i, v := range d.FileFormats {
 		if len(v.MIMEType) > 0 {
-			mimes = append(mimes, []string{v.MIMEType})
-			puids = append(puids, p[i])
+			mimes, puids = append(mimes, v.MIMEType), append(puids, p[i])
 		}
 	}
 	return mimes, puids
 }
 
-func (d *droid) XMLs() ([][][2]string, []string) {
+func (d *droid) XMLs() ([][2]string, []string) {
 	return nil, nil
 }
 

@@ -6,7 +6,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/persist"
 )
 
-var fmts = SignatureSet{[]string{"wav"}, []string{"doc"}, []string{"xls"}, []string{"pdf"}, []string{"ppt"}}
+var fmts = SignatureSet{"wav", "doc", "xls", "pdf", "ppt"}
 
 var sm = New()
 
@@ -44,7 +44,7 @@ func TestNoExt(t *testing.T) {
 
 func TestIO(t *testing.T) {
 	sm := New()
-	sm.Add(SignatureSet{[]string{".bla"}, []string{".doc"}, []string{".ppt"}}, nil)
+	sm.Add(SignatureSet{".bla", ".doc", ".ppt"}, nil)
 	str := sm.String()
 	saver := persist.NewLoadSaver(nil)
 	sm.Save(saver)

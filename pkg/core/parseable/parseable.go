@@ -26,9 +26,9 @@ type FormatInfo interface{}
 type Parseable interface {
 	IDs() []string                                     // list of all IDs in identifier
 	Infos() map[string]FormatInfo                      // identifier specific information
-	Globs() ([][]string, []string)                     // signature set and corresponding IDs for globmatcher
-	MIMEs() ([][]string, []string)                     // signature set and corresponding IDs for mimematcher
-	XMLs() ([][][2]string, []string)                   // signature set and corresponding IDs for xmlmatcher
+	Globs() ([]string, []string)                       // signature set and corresponding IDs for globmatcher
+	MIMEs() ([]string, []string)                       // signature set and corresponding IDs for mimematcher
+	XMLs() ([][2]string, []string)                     // signature set and corresponding IDs for xmlmatcher
 	Signatures() ([]frames.Signature, []string, error) // signature set and corresponding IDs for bytematcher
 	Priorities() priority.Map                          // priority map
 }
@@ -57,24 +57,24 @@ func (j *joint) Infos() map[string]FormatInfo {
 	return infos
 }
 
-func joinStrings(a func() ([][]string, []string), b func() ([][]string, []string)) ([][]string, []string) {
+func joinStrings(a func() ([]string, []string), b func() ([]string, []string)) ([]string, []string) {
 	c, d := a()
 	e, f := b()
 	return append(c, e...), append(d, f...)
 }
 
 // Globs returns a signature set with corresponding IDs for the globmatcher.
-func (j *joint) Globs() ([][]string, []string) {
+func (j *joint) Globs() ([]string, []string) {
 	return joinStrings(j.a.Globs, j.b.Globs)
 }
 
 // MIMEs returns a signature set with corresponding IDs for the mimematcher.
-func (j *joint) MIMEs() ([][]string, []string) {
+func (j *joint) MIMEs() ([]string, []string) {
 	return joinStrings(j.a.MIMEs, j.b.MIMEs)
 }
 
 // XMLs returns a signature set with corresponding IDs for the xmlmatcher.
-func (j *joint) XMLs() ([][][2]string, []string) {
+func (j *joint) XMLs() ([][2]string, []string) {
 	a, b := j.a.XMLs()
 	c, d := j.b.XMLs()
 	return append(a, c...), append(b, d...)
@@ -138,8 +138,8 @@ func (f *filtered) Infos() map[string]FormatInfo {
 	return ret
 }
 
-func filterStrings(a func() ([][]string, []string), ids []string) ([][]string, []string) {
-	ret, retp := make([][]string, 0, len(ids)), make([]string, 0, len(ids))
+func filterStrings(a func() ([]string, []string), ids []string) ([]string, []string) {
+	ret, retp := make([]string, 0, len(ids)), make([]string, 0, len(ids))
 	e, p := a()
 	for i, v := range p {
 		for _, w := range ids {
@@ -153,18 +153,18 @@ func filterStrings(a func() ([][]string, []string), ids []string) ([][]string, [
 }
 
 // Globs returns a signature set with corresponding IDs for the globmatcher.
-func (f *filtered) Globs() ([][]string, []string) {
+func (f *filtered) Globs() ([]string, []string) {
 	return filterStrings(f.p.Globs, f.IDs())
 }
 
 // MIMEs returns a signature set with corresponding IDs for the mimematcher.
-func (f *filtered) MIMEs() ([][]string, []string) {
+func (f *filtered) MIMEs() ([]string, []string) {
 	return filterStrings(f.p.MIMEs, f.IDs())
 }
 
 // XMLs returns a signature set with corresponding IDs for the xmlmatcher.
-func (f *filtered) XMLs() ([][][2]string, []string) {
-	ret, retp := make([][][2]string, 0, len(f.IDs())), make([]string, 0, len(f.IDs()))
+func (f *filtered) XMLs() ([][2]string, []string) {
+	ret, retp := make([][2]string, 0, len(f.IDs())), make([]string, 0, len(f.IDs()))
 	e, p := f.p.XMLs()
 	for i, v := range p {
 		for _, w := range f.IDs() {

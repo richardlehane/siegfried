@@ -59,7 +59,7 @@ func New() Matcher {
 	return make(Matcher)
 }
 
-type SignatureSet [][]string
+type SignatureSet []string
 
 func (m Matcher) Add(ss core.SignatureSet, p priority.List) (int, error) {
 	sigs, ok := ss.(SignatureSet)
@@ -79,9 +79,7 @@ func (m Matcher) Add(ss core.SignatureSet, p priority.List) (int, error) {
 		length++ // add one - because the result values are indexes
 	}
 	for i, v := range sigs {
-		for _, w := range v {
-			m.add(w, i+length)
-		}
+		m.add(v, i+length)
 	}
 	return length + len(sigs), nil
 }

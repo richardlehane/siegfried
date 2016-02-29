@@ -217,7 +217,7 @@ func (p *pronom) add(m core.Matcher, t core.MatcherType) error {
 		return fmt.Errorf("Pronom: unknown matcher type %d", t)
 	case core.NameMatcher:
 		if !config.NoExt() {
-			var exts [][]string
+			var exts []string
 			exts, p.ePuids = p.j.Globs()
 			l, err := m.Add(namematcher.SignatureSet(exts), nil)
 			if err != nil {
@@ -228,7 +228,7 @@ func (p *pronom) add(m core.Matcher, t core.MatcherType) error {
 		}
 	case core.MIMEMatcher:
 		if !config.NoMIME() {
-			var mimes [][]string
+			var mimes []string
 			mimes, p.mPuids = p.j.MIMEs()
 			l, err := m.Add(mimematcher.SignatureSet(mimes), nil)
 			if err != nil {

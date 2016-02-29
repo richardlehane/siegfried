@@ -6,7 +6,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/persist"
 )
 
-var fmts = SignatureSet{[]string{"*.wav"}, []string{"*.doc"}, []string{"*.xls"}, []string{"*.pdf"}, []string{"*.ppt", "*.adoc.txt"}, []string{"README"}}
+var fmts = SignatureSet{"*.wav", "*.doc", "*.xls", "*.pdf", "*.ppt", "*.adoc.txt", "README"}
 
 var sm = New()
 
@@ -29,8 +29,8 @@ func TestWavMatch(t *testing.T) {
 func TestAdocMatch(t *testing.T) {
 	res, _ := sm.Identify("hello/apple.adoc.txt", nil)
 	e := <-res
-	if e.Index() != 4 {
-		t.Errorf("Expecting 4, got %v", e)
+	if e.Index() != 5 {
+		t.Errorf("Expecting 5, got %v", e)
 	}
 	e, ok := <-res
 	if ok {
@@ -42,8 +42,8 @@ func TestREADMEMatch(t *testing.T) {
 	res, _ := sm.Identify("hello/README", nil)
 	e, ok := <-res
 	if ok {
-		if e.Index() != 5 {
-			t.Errorf("Expecting 5, got %v", e)
+		if e.Index() != 6 {
+			t.Errorf("Expecting 6, got %v", e)
 		}
 	} else {
 		t.Error("Expecting 5, got nothing")
@@ -72,7 +72,7 @@ func TestNoExt(t *testing.T) {
 
 func TestIO(t *testing.T) {
 	sm := New()
-	sm.Add(SignatureSet{[]string{"*.bla"}, []string{"*.doc"}, []string{"*.ppt"}}, nil)
+	sm.Add(SignatureSet{"*.bla", "*.doc", "*.ppt"}, nil)
 	str := sm.String()
 	saver := persist.NewLoadSaver(nil)
 	sm.Save(saver)
