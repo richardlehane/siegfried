@@ -4239,7 +4239,7 @@
     <magic priority="60">
       <!-- For a single stream file -->
       <match value="OggS\000.......................\001vorbis" type="string"
-             mask="0xFFFFFFFF00000000000000000000000000000000000000000000000000FFFFFFFFFFFF"
+             mask="0xFFFFFFFFFF00000000000000000000000000000000000000000000000000FFFFFFFFFFFF"
              offset="0"/>
     </magic>
     <glob pattern="*.ogg"/>
@@ -4275,7 +4275,7 @@
     <magic priority="60">
       <!-- For a single stream file -->
       <match value="OggS\000.......................OpusHead" type="string"
-             mask="0xFFFFFFFF00000000000000000000000000000000000000000000000000FFFFFFFFFFFFFFFF"
+             mask="0xFFFFFFFFFF00000000000000000000000000000000000000000000000000FFFFFFFFFFFFFFFF"
              offset="0"/>
     </magic>
     <glob pattern="*.opus"/>

@@ -216,7 +216,7 @@ func (p *pronom) add(m core.Matcher, t core.MatcherType) error {
 	default:
 		return fmt.Errorf("Pronom: unknown matcher type %d", t)
 	case core.NameMatcher:
-		if !config.NoExt() {
+		if !config.NoName() {
 			var exts []string
 			exts, p.ePuids = p.j.Globs()
 			l, err := m.Add(namematcher.SignatureSet(exts), nil)

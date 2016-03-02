@@ -26,6 +26,7 @@ import (
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
+	"github.com/richardlehane/siegfried/pkg/mimeinfo"
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
@@ -34,6 +35,7 @@ var (
 	build       = flag.NewFlagSet("build | add", flag.ExitOnError)
 	home        = build.String("home", config.Home(), "override the default home directory")
 	droid       = build.String("droid", config.Droid(), "set name/path for DROID signature file")
+	mi          = build.String("mi", "", "set name/path for MIMEInfo signature file")
 	container   = build.String("container", config.Container(), "set name/path for Droid Container signature file")
 	reports     = build.String("reports", config.Reports(), "set path for PRONOM reports directory")
 	name        = build.String("name", config.Name(), "set identifier name")
@@ -48,8 +50,9 @@ var (
 	nopriority  = build.Bool("nopriority", false, "ignore priority rules when recording results")
 	nocontainer = build.Bool("nocontainer", false, "skip container signatures")
 	notext      = build.Bool("notext", false, "skip text matcher")
-	noext       = build.Bool("noext", false, "skip extension matcher")
+	noname      = build.Bool("noname", false, "skip filename matcher")
 	nomime      = build.Bool("nomime", false, "skip MIME matcher")
+	noxml       = build.Bool("noxml", false, "skip XML matcher")
 	noreports   = build.Bool("noreports", false, "build directly from DROID file rather than PRONOM reports")
 	doubleup    = build.Bool("doubleup", false, "include byte signatures for formats that also have container signatures")
 	rng         = build.Int("range", config.Range(), "define a maximum range for segmentation")
@@ -89,11 +92,17 @@ func savereps() error {
 }
 
 func makegob(s *siegfried.Siegfried, opts []config.Option) error {
-	p, err := pronom.New(opts...)
+	var id core.Identifier
+	var err error
+	if *mi != "" {
+		id, err = mimeinfo.New(opts...)
+	} else {
+		id, err = pronom.New(opts...)
+	}
 	if err != nil {
 		return err
 	}
-	err = s.Add(p)
+	err = s.Add(id)
 	if err != nil {
 		return err
 	}
@@ -182,11 +191,14 @@ the DROID signature file you should also include a regular signature extension
 	if *notext {
 		opts = append(opts, config.SetNoText())
 	}
-	if *noext {
-		opts = append(opts, config.SetNoExt())
+	if *noname {
+		opts = append(opts, config.SetNoName())
 	}
 	if *nomime {
 		opts = append(opts, config.SetNoMIME())
+	}
+	if *noxml {
+		opts = append(opts, config.SetNoXML())
 	}
 	if *noreports {
 		opts = append(opts, config.SetNoReports())

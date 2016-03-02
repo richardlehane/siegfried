@@ -41,8 +41,9 @@ type MIMEType struct {
 	SuperiorClasses []struct {
 		SubClassOf string `xml:"type,attr"`
 	} `xml:"sub-class-of"`
-	Comment []string `xml:"_comment"`
-	Acronym []string `xml:"acronym"`
+	Comment  []string `xml:"_comment"`
+	Comments []string `xml:"comment"`
+	Acronym  []string `xml:"acronym"`
 }
 
 type Match struct {

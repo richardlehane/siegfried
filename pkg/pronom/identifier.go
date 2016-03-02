@@ -46,12 +46,6 @@ type Identifier struct {
 	tStart     int      // index if registered for text matcher
 }
 
-type formatInfo struct {
-	name     string
-	version  string
-	mimeType string
-}
-
 func (i *Identifier) Save(ls *persist.LoadSaver) {
 	ls.SaveByte(core.Pronom)
 	ls.SaveString(i.name)
@@ -128,7 +122,7 @@ func (i *Identifier) Details() string {
 
 func (i *Identifier) String() string {
 	str := fmt.Sprintf("Name: %s\nDetails: %s\n", i.name, i.details)
-	str += fmt.Sprintf("Number of extension signatures: %d \n", len(i.ePuids))
+	str += fmt.Sprintf("Number of filename signatures: %d \n", len(i.ePuids))
 	str += fmt.Sprintf("Number of MIME signatures: %d \n", len(i.mPuids))
 	str += fmt.Sprintf("Number of container signatures: %d \n", len(i.cPuids))
 	str += fmt.Sprintf("Number of byte signatures: %d \n", len(i.bPuids))
@@ -156,6 +150,8 @@ func (i *Identifier) Recognise(m core.MatcherType, idx int) (bool, string) {
 			idx = idx - i.cStart
 			return true, i.name + ": " + i.cPuids[idx]
 		}
+		return false, ""
+	case core.XMLMatcher:
 		return false, ""
 	case core.ByteMatcher:
 		if idx >= i.bStart && idx < i.bStart+len(i.bPuids) {

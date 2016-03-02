@@ -23,6 +23,12 @@ import (
 	"github.com/richardlehane/siegfried/pkg/pronom/mappings"
 )
 
+type formatInfo struct {
+	name     string
+	version  string
+	mimeType string
+}
+
 // turn generic FormatInfo into PRONOM formatInfo
 func infos(m map[string]parseable.FormatInfo) map[string]formatInfo {
 	i := make(map[string]formatInfo, len(m))

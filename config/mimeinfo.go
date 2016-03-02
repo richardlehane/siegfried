@@ -19,10 +19,18 @@ import "path/filepath"
 var mimeinfo = struct {
 	mi string
 }{
-	mi: "tika-mimetypes.xml",
+	mi: "freedesktop.org.xml", //"tika-mimetypes.xml",
 }
 
 // MIMEInfo returns the location of the MIMEInfo signature file.
 func MIMEInfo() string {
 	return filepath.Join(siegfried.home, mimeinfo.mi)
+}
+
+func ZipMIME() string {
+	return "application/zip"
+}
+
+func TextMIME() string {
+	return "text/plain"
 }

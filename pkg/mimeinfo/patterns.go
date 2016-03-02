@@ -753,7 +753,7 @@ func (m Mask) Sequences() []patterns.Sequence {
 }
 
 func (m Mask) String() string {
-	return "mask " + hex.EncodeToString(m.val) + "(" + m.pat.String() + ")"
+	return "mask " + hex.EncodeToString(m.val) + " (" + m.pat.String() + ")"
 }
 
 // Save persists the pattern.
@@ -770,6 +770,32 @@ func loadMask(ls *persist.LoadSaver) patterns.Pattern {
 	}
 }
 
+func repairMask(m Mask) (Mask, bool) {
+	seq := m.pat.Sequences()[0]
+	for _, b := range m.val {
+		if b != 0xFF && b != 0x00 {
+			return m, false
+		}
+	}
+	for i, b := range seq {
+		if b == '.' {
+			break
+		}
+		if i == len(seq)-1 {
+			return m, false
+		}
+	}
+	nv := make([]byte, len(seq))
+	for i, v := range seq {
+		if v == '.' {
+			nv[i] = 0x00
+		} else {
+			nv[i] = 0xFF
+		}
+	}
+	return Mask{seq, nv}, true
+}
+
 // Unmask turns 0xFF00 masks into a slice of patterns and slice of distances between those patterns.
 func unmask(m Mask) ([]patterns.Pattern, []int) {
 	if m.pat.NumSequences() != 1 {
@@ -777,7 +803,11 @@ func unmask(m Mask) ([]patterns.Pattern, []int) {
 	}
 	seq := m.pat.Sequences()[0]
 	if len(seq) != len(m.val) {
-		return []patterns.Pattern{m}, []int{0}
+		var ok bool
+		m, ok = repairMask(m)
+		if !ok {
+			return []patterns.Pattern{m}, []int{0}
+		}
 	}
 	pret, iret := []patterns.Pattern{}, []int{}
 	var slc, skip int

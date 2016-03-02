@@ -29,8 +29,9 @@ var identifier = struct {
 	noContainer bool   // don't build with container signatures
 	noPriority  bool   // ignore priority relations between signatures
 	noText      bool   // don't build with text signatures
-	noExt       bool   // don't build with extension signatures
+	noName      bool   // don't build with filename signatures
 	noMIME      bool   // don't build with MIME signatures
+	noXML       bool   // don't build with XML signatures
 }{
 	name: "pronom",
 }
@@ -71,11 +72,14 @@ func Details() string {
 	if identifier.noText {
 		str += "; no text matcher"
 	}
-	if identifier.noExt {
-		str += "; no extension matcher"
+	if identifier.noName {
+		str += "; no filename matcher"
 	}
 	if identifier.noMIME {
 		str += "; no MIME matcher"
+	}
+	if identifier.noXML {
+		str += "; no XML matcher"
 	}
 	if pronom.noreports {
 		str += "; built without reports"
@@ -128,14 +132,19 @@ func NoText() bool {
 	return identifier.noText
 }
 
-// NoExt reports whether extension signatures should be omitted.
-func NoExt() bool {
-	return identifier.noExt
+// NoName reports whether filename signatures should be omitted.
+func NoName() bool {
+	return identifier.noName
 }
 
 // NoMIME reports whether MIME signatures should be omitted.
 func NoMIME() bool {
 	return identifier.noMIME
+}
+
+// NoXML reports whether XML signatures should be omitted.
+func NoXML() bool {
+	return identifier.noXML
 }
 
 // SETTERS
@@ -205,10 +214,10 @@ func SetNoText() func() private {
 	}
 }
 
-// SetNoExt will cause extension signatures to be omitted.
-func SetNoExt() func() private {
+// SetNoName will cause extension signatures to be omitted.
+func SetNoName() func() private {
 	return func() private {
-		identifier.noExt = true
+		identifier.noName = true
 		return private{}
 	}
 }
@@ -217,6 +226,14 @@ func SetNoExt() func() private {
 func SetNoMIME() func() private {
 	return func() private {
 		identifier.noMIME = true
+		return private{}
+	}
+}
+
+// SetNoXML will cause MIME signatures to be omitted.
+func SetNoXML() func() private {
+	return func() private {
+		identifier.noXML = true
 		return private{}
 	}
 }
