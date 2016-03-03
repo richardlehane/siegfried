@@ -5,7 +5,7 @@
   - the National Archives UK's [PRONOM](http://apps.nationalarchives.gov.uk/pronom) file format signatures
   - freedesktop.org's [MIME-info](https://freedesktop.org/wiki/Software/shared-mime-info/) file format signatures.
 
-## Version
+### Version
 
 1.5.0
 
@@ -42,7 +42,7 @@
 
 [![asciicast](https://asciinema.org/a/ernm49loq5ofuj48ywlvg7xq6.png)](https://asciinema.org/a/ernm49loq5ofuj48ywlvg7xq6)
 
-#### Signatures
+#### Signature files
 
 By default, siegfried uses the latest PRONOM signatures without buffer limits (i.e. it may do full file scans). To use MIME-info signatures, or to add buffer limits or other customisations, use the [roy tool](https://github.com/richardlehane/siegfried/wiki/Building-a-signature-file-with-ROY) to build your own signature file.
 
