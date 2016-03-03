@@ -52,6 +52,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/persist"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 	"github.com/richardlehane/siegfried/pkg/core/textmatcher"
+	"github.com/richardlehane/siegfried/pkg/core/xmlmatcher"
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
@@ -64,6 +65,7 @@ type Siegfried struct {
 	nm core.Matcher // namematcher
 	mm core.Matcher // mimematcher
 	cm core.Matcher // containermatcher
+	xm core.Matcher // bytematcher
 	bm core.Matcher // bytematcher
 	tm core.Matcher // textmatcher
 	// mutatable fields follow
@@ -90,6 +92,7 @@ func New() *Siegfried {
 	s.nm = namematcher.New()
 	s.mm = mimematcher.New()
 	s.cm = containermatcher.New()
+	s.xm = xmlmatcher.New()
 	s.bm = bytematcher.New()
 	s.tm = textmatcher.New()
 	s.buffers = siegreader.New()
@@ -119,6 +122,23 @@ func (s *Siegfried) Add(i core.Identifier) error {
 			return err
 		}
 		s.ids = append(s.ids, i)
+	case *mimeinfo.Identifier:
+		if err := i.Add(s.nm, core.NameMatcher); err != nil {
+			return err
+		}
+		if err := i.Add(s.mm, core.MIMEMatcher); err != nil {
+			return err
+		}
+		if err := i.Add(s.cm, core.XMLMatcher); err != nil {
+			return err
+		}
+		if err := i.Add(s.bm, core.ByteMatcher); err != nil {
+			return err
+		}
+		if err := i.Add(s.tm, core.TextMatcher); err != nil {
+			return err
+		}
+		s.ids = append(s.ids, i)
 	}
 	return nil
 }
@@ -130,6 +150,7 @@ func (s *Siegfried) Save(path string) error {
 	s.nm.Save(ls)
 	s.mm.Save(ls)
 	s.cm.Save(ls)
+	s.xm.Save(ls)
 	s.bm.Save(ls)
 	s.tm.Save(ls)
 	ls.SaveTinyUInt(len(s.ids))
@@ -188,6 +209,7 @@ func Load(path string) (*Siegfried, error) {
 		nm: namematcher.Load(ls),
 		mm: mimematcher.Load(ls),
 		cm: containermatcher.Load(ls),
+		xm: xmlmatcher.Load(ls),
 		bm: bytematcher.Load(ls),
 		tm: textmatcher.Load(ls),
 		ids: func() []core.Identifier {
@@ -271,7 +293,7 @@ func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identifi
 			recs[i].Active(core.MIMEMatcher)
 		}
 		if err == nil {
-			//recs[i].Active(core.ContainerMatcher)
+			recs[i].Active(core.XMLMatcher)
 			//recs[i].Active(core.ByteMatcher)
 			recs[i].Active(core.TextMatcher)
 		}

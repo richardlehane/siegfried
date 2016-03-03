@@ -44,7 +44,7 @@
 
 #### Signatures
 
-By default, siegfried uses the latest PRONOM signatures with no buffer limits (it will do full file scans if necessary). To use MIME-info signatures, or to customise your signature file, use the [roy tool](https://github.com/richardlehane/siegfried/wiki/Building-a-signature-file-with-ROY).
+By default, siegfried uses the latest PRONOM signatures with no buffer limits (i.e. it may scan all of the file if necessary). To use MIME-info signatures, or to add buffer limits or other customisations, use the [roy tool](https://github.com/richardlehane/siegfried/wiki/Building-a-signature-file-with-ROY) to build a custom signature file.
 
 ## Install
 
@@ -75,7 +75,9 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 ## Recent Changes
 ### Version 1.5.0 (7/3/2016)
-- implement freedesktop.org MIME-info signatures (and the Apache Tika variant)
+- feature: implement freedesktop.org MIME-info signatures (and the Apache Tika variant)
+- feature: implement XML matcher
+- feature: file name matcher now supports glob patterns as well as file extensions
 - default signature file now "default.sig" (was "pronom.sig")
 - changes to YAML and JSON output: "ns" (for namespace) replaces "id", and "id" replaces "puid"
 
