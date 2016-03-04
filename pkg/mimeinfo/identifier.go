@@ -243,32 +243,33 @@ func (i *Identifier) Recognise(m core.MatcherType, idx int) (bool, string) {
 }
 
 func (i *Identifier) Recorder() core.Recorder {
-	return nil
+	return &Recorder{
+  Identifier: i, 
+  ids: make([]Identification, 0, 1),  
+  }
 }
 
 type Recorder struct {
 	*Identifier
-	ids        mids
-	cscore     int
+	ids        []Identification
 	satisfied  bool
 	globActive bool
 	mimeActive bool
-	xmlActive  bool
 	textActive bool
 }
 
 func (r *Recorder) Active(m core.MatcherType) {
 	switch m {
 	case core.NameMatcher:
-		if len(r.ePuids) > 0 {
+		if len(r.gids) > 0 {
 			r.extActive = true
 		}
 	case core.MIMEMatcher:
-		if len(r.mPuids) > 0 {
+		if len(r.mids) > 0 {
 			r.mimeActive = true
 		}
 	case core.TextMatcher:
-		if r.tStart > 0 {
+		if r.tstart > 0 {
 			r.textActive = true
 		}
 	}
@@ -279,71 +280,61 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 	default:
 		return false
 	case core.NameMatcher:
-		if res.Index() >= r.eStart && res.Index() < r.eStart+len(r.ePuids) {
-			idx := res.Index() - r.eStart
-			r.ids = add(r.ids, r.name, r.ePuids[idx], r.infos[r.ePuids[idx]], res.Basis(), extScore)
+		if res.Index() >= r.gstart && res.Index() < r.gstart+len(r.gids) {
+			idx := res.Index() - r.gstart
+			r.ids = add(r.ids, r.name, r.gids[idx], r.infos[r.gids[idx]], res.Basis(), core.NameMatcher, rel(idx, r.gids))
 			return true
 		} else {
 			return false
 		}
 	case core.MIMEMatcher:
-		if res.Index() >= r.mStart && res.Index() < r.mStart+len(r.mPuids) {
-			idx := res.Index() - r.mStart
-			r.ids = add(r.ids, r.name, r.mPuids[idx], r.infos[r.mPuids[idx]], res.Basis(), mimeScore)
+		if res.Index() >= r.mstart && res.Index() < r.mStart+len(r.mids) {
+			idx := res.Index() - r.mstart
+			r.ids = add(r.ids, r.name, r.mids[idx], r.infos[r.mids[idx]], res.Basis(),core.MIMEMatcher, 0)
 			return true
 		} else {
 			return false
 		}
-	case core.ContainerMatcher:
-		// add zip default
-		if res.Index() < 0 {
-			if r.zipDefault {
-				r.cscore += incScore
-				r.ids = add(r.ids, r.name, config.ZipPuid(), r.infos[config.ZipPuid()], res.Basis(), r.cscore)
-			}
-			return false
-		}
-		if res.Index() >= r.cStart && res.Index() < r.cStart+len(r.cPuids) {
-			idx := res.Index() - r.cStart
-			r.cscore += incScore
-			basis := res.Basis()
-			p, t := place(idx, r.cPuids)
-			if t > 1 {
-				basis = basis + fmt.Sprintf(" (signature %d/%d)", p, t)
-			}
-			r.ids = add(r.ids, r.name, r.cPuids[idx], r.infos[r.cPuids[idx]], basis, r.cscore)
+ 	case core.XMLMatcher:
+		if res.Index() >= r.xstart && res.Index() < r.xstart+len(r.xids) {
+			idx := res.Index() - r.xstart
+			r.ids = add(r.ids, r.name, r.xids[idx], r.infos[r.xids[idx]], res.Basis(), core.XMLMatcher, 0)
 			return true
 		} else {
 			return false
 		}
 	case core.ByteMatcher:
-		if res.Index() >= r.bStart && res.Index() < r.bStart+len(r.bPuids) {
+		if res.Index() >= r.bstart && res.Index() < r.bstart+len(r.bids) {
 			if r.satisfied {
 				return true
 			}
-			idx := res.Index() - r.bStart
-			r.cscore += incScore
+			idx := res.Index() - r.bstart
 			basis := res.Basis()
-			p, t := place(idx, r.bPuids)
+			p, t := place(idx, r.bids)
 			if t > 1 {
 				basis = basis + fmt.Sprintf(" (signature %d/%d)", p, t)
 			}
-			r.ids = add(r.ids, r.name, r.bPuids[idx], r.infos[r.bPuids[idx]], basis, r.cscore)
+			r.ids = add(r.ids, r.name, r.bPuids[idx], r.infos[r.bPuids[idx]], basis, core.ByteMatcher, p--)
 			return true
 		} else {
 			return false
 		}
 	case core.TextMatcher:
-		if res.Index() == r.tStart {
+		if res.Index() == r.tstart {
 			if r.satisfied {
 				return true
 			}
-			r.ids = add(r.ids, r.name, config.TextPuid(), r.infos[config.TextPuid()], res.Basis(), textScore)
+			r.ids = add(r.ids, r.name, config.TextPuid(), r.infos[config.TextPuid()], res.Basis(), core.TextMatcher, 0)
 			return true
 		} else {
 			return false
 		}
 	}
+}
+
+func rel(idx int, ids []string) int {
+  prev, _ := place(idx, ids)
+  return prev--
 }
 
 func place(idx int, ids []string) (int, int) {
@@ -359,67 +350,31 @@ func place(idx int, ids []string) (int, int) {
 }
 
 func (r *Recorder) Satisfied(mt core.MatcherType) bool {
-	if r.cscore < incScore {
-		if mt == core.ByteMatcher {
-			return false
-		}
-		if len(r.ids) == 0 {
-			return false
-		}
-		for _, res := range r.ids {
-			if res.ID == config.TextPuid() {
-				return false
-			}
-		}
-	}
-	r.satisfied = true
-	return true
-}
-
-func lowConfidence(conf int) string {
-	var ls = make([]string, 0, 1)
-	if conf&extScore == extScore {
-		ls = append(ls, "extension")
-	}
-	if conf&mimeScore == mimeScore {
-		ls = append(ls, "MIME")
-	}
-	if conf&textScore == textScore {
-		ls = append(ls, "text")
-	}
-	switch len(ls) {
-	case 0:
-		return ""
-	case 1:
-		return ls[0]
-	case 2:
-		return ls[0] + " and " + ls[1]
-	default:
-		return strings.Join(ls[:len(ls)-1], ", ") + " and " + ls[len(ls)-1]
-	}
+  sort.Sort(r.ids)
+	if len(r.ids) > 0 && (r.ids[0].xmlMatch || r.ids[0].magicScore > 0) {
+    return true
+  }
+	return false
 }
 
 func (r *Recorder) Report(res chan core.Identification) {
 	if len(r.ids) > 0 {
 		sort.Sort(r.ids)
-		conf := r.ids[0].confidence
-		// if we've only got extension / mime matches, check if those matches are ruled out by lack of byte match
-		// only permit a single extension or mime only match
-		// add warnings too
-		if conf <= textScore {
+    // if match is filename/mime only
+		if !r.ids[0].xmlMatch && r.ids[0].magicScore == 0 {
 			nids := make([]Identification, 0, 1)
-			for _, v := range r.ids {
-				// if overall confidence is greater than mime or ext only, then rule out any lesser confident matches
-				if conf > mimeScore && v.confidence != conf {
+			for idx, v := range r.ids {
+				// rule out any lesser confident matches
+				if idx < len(r.ids)-1 && r.ids.Less(idx, idx++) {
 					break
 				}
 				// if we have plain text result that is based on ext or mime only,
 				// and not on a text match, and if text matcher is on for this identifier,
 				// then don't report a text match
-				if v.ID == config.TextPuid() && conf < textScore && r.textActive {
+				if v.ID == config.TextPuid() && !v.textMatch && r.textActive {
 					continue
 				}
-				// if the match has no corresponding byte or container signature...
+				// if the match has no corresponding byte or xml signature...
 				if ok := r.hasSig(v.ID); !ok {
 					// break immediately if more than one match
 					if len(nids) > 0 {
@@ -427,9 +382,9 @@ func (r *Recorder) Report(res chan core.Identification) {
 						break
 					}
 					if len(v.Warning) > 0 {
-						v.Warning += "; " + "match on " + lowConfidence(v.confidence) + " only"
+						v.Warning += "; " + "match on " + lowConfidence(v) + " only"
 					} else {
-						v.Warning = "match on " + lowConfidence(v.confidence) + " only"
+						v.Warning = "match on " + lowConfidence(v) + " only"
 					}
 					nids = append(nids, v)
 				}
@@ -455,46 +410,45 @@ func (r *Recorder) Report(res chan core.Identification) {
 			}
 		}
 	} else {
-		res <- Identification{r.name, "UNKNOWN", "", "", "", nil, "no match", 0, 0}
+		res <- Identification{
+      Namespace: r.name, 
+      ID: "UNKNOWN", 
+      Warning: "no match",
+    }
 	}
 }
 
 func (r *Recorder) checkActive(i Identification) Identification {
-	if r.extActive && (i.confidence&extScore != extScore) {
-		for _, v := range r.ePuids {
+	if r.globActive && i.globScore == 0 {
+		for _, v := range r.gids {
 			if i.ID == v {
 				if len(i.Warning) > 0 {
-					i.Warning += "; extension mismatch"
+					i.Warning += "; filename mismatch"
 				} else {
-					i.Warning = "extension mismatch"
+					i.Warning = "filename mismatch"
 				}
 				break
 			}
 		}
 	}
-	if r.mimeActive && (i.confidence&mimeScore != mimeScore) {
-		for _, v := range r.mPuids {
-			if i.ID == v {
-				if len(i.Warning) > 0 {
-					i.Warning += "; MIME mismatch"
-				} else {
-					i.Warning = "MIME mismatch"
-				}
-				break
-			}
+	if r.mimeActive && !r.mimeMatch {
+		if len(i.Warning) > 0 {
+			i.Warning += "; MIME mismatch"
+		} else {
+			i.Warning = "MIME mismatch"
 		}
-	}
-	return i
+  }
+  return i
 }
 
-func (r *Recorder) hasSig(puid string) bool {
-	for _, v := range r.cPuids {
-		if puid == v {
+func (r *Recorder) hasSig(id string) bool {
+	for _, v := range r.xids {
+		if id == v {
 			return true
 		}
 	}
-	for _, v := range r.bPuids {
-		if puid == v {
+	for _, v := range r.bids {
+		if id == v {
 			return true
 		}
 	}
@@ -505,12 +459,16 @@ type Identification struct {
 	Namespace  string
 	ID         string
 	Name       string
-	Version    string
 	Mime       string
 	Basis      []string
 	Warning    string
 	archive    config.Archive
-	confidence int
+
+  xmlMatch   bool
+  magicScore int
+  globScore  int
+  mimeMatch  bool
+  textMatch  bool
 }
 
 func (id Identification) String() string {
@@ -537,8 +495,8 @@ func (id Identification) YAML() string {
 	if len(id.Basis) > 0 {
 		basis = quoteText(strings.Join(id.Basis, "; "))
 	}
-	return fmt.Sprintf("  - ns      : %v\n      id    : %v\n    format  : %v\n    version : %v\n    mime    : %v\n    basis   : %v\n    warning : %v\n",
-		id.Namespace, id.ID, quoteText(id.Name), quoteText(id.Version), quoteText(id.Mime), basis, quoteText(id.Warning))
+	return fmt.Sprintf("  - ns      : %v\n      id    : %v\n    format  : %v\n    mime    : %v\n    basis   : %v\n    warning : %v\n",
+		id.Namespace, id.ID, quoteText(id.Name), quoteText(id.Mime), basis, quoteText(id.Warning))
 }
 
 func (id Identification) JSON() string {
@@ -546,8 +504,8 @@ func (id Identification) JSON() string {
 	if len(id.Basis) > 0 {
 		basis = strings.Join(id.Basis, "; ")
 	}
-	return fmt.Sprintf("{\"ns\":\"%s\",\"id\":\"%s\",\"format\":\"%s\",\"version\":\"%s\",\"mime\":\"%s\",\"basis\":\"%s\",\"warning\":\"%s\"}",
-		id.Namespace, id.ID, id.Name, id.Version, id.Mime, basis, id.Warning)
+	return fmt.Sprintf("{\"ns\":\"%s\",\"id\":\"%s\",\"format\":\"%s\",\"mime\":\"%s\",\"basis\":\"%s\",\"warning\":\"%s\"}",
+		id.Namespace, id.ID, id.Name, id.Mime, basis, id.Warning)
 }
 
 func (id Identification) CSV() []string {
@@ -559,7 +517,6 @@ func (id Identification) CSV() []string {
 		id.Namespace,
 		id.ID,
 		id.Name,
-		id.Version,
 		id.Mime,
 		basis,
 		id.Warning,
@@ -570,21 +527,61 @@ func (id Identification) Archive() config.Archive {
 	return id.archive
 }
 
-type pids []Identification
+type ids []Identification
 
-func (p pids) Len() int { return len(p) }
+func (m ids) Len() int { return len(m) }
 
-func (p pids) Less(i, j int) bool { return p[j].confidence < p[i].confidence }
+func tieBreak(m1, m2 bool, gs1, gs2 int) bool {
+  switch {
+  case m1 && !m2:
+    return true
+  case m2 && !m1:
+    return false
+  default:
+    return m2 < m1  
+  }
+}
+ 
+func (m ids) Less(i, j int) bool { 
+  switch {
+    case m[i].xmlMatch && !m[j].xmlMatch:
+      return true
+    case !m[i].xmlMatch && m[j].xmlMatch:
+      return false
+    case m[i].xmlMatch && m[j].xmlMatch:
+      return tieBreak(m[i].mimeMatch, m[j].mimeMatch, m[i].globScore, m[j].globScore)    
+  }
+  switch {
+    case m[i].magicScore > m[j].magicScore:
+      return true
+    case m[i].magicScore < m[j].magicScore:
+      return false  
+  }
+  return tieBreak(m[i].mimeMatch, m[j].mimeMatch, m[i].globScore, m[j].globScore)
+}
+ 
+func (m ids) Swap(i, j int) { m[i], m[j] = m[j], m[i] }
 
-func (p pids) Swap(i, j int) { p[i], p[j] = p[j], p[i] }
+func applyScore(id Identification, info formatInfo, t core.MatcherType, rel int) Identification {
+  return id
+}
 
-func add(p pids, id string, f string, info formatInfo, basis string, c int) pids {
-	for i, v := range p {
-		if v.ID == f {
-			p[i].confidence += c
-			p[i].Basis = append(p[i].Basis, basis)
-			return p
+func add(m ids, ns string, id string, info formatInfo, basis string, t core.MatcherType, rel int) ids {
+	for i, v := range m {
+		if v.ID == id {
+			m[i].Basis = append(m[i].Basis, basis)
+			m[i] = applyScore(m[i],info,t, rel)
+      return m
 		}
 	}
-	return append(p, Identification{id, f, info.name, info.version, info.mimeType, []string{basis}, "", config.IsArchive(f), c})
+  md := Identification{
+    Namespace: id, 
+    ID: id, 
+    info.name, 
+    info.mimeType, 
+    []string{basis}, 
+    "", 
+    config.IsArchive(f),
+  }
+	return append(m, applyScore(md,info,t, rel))
 }
