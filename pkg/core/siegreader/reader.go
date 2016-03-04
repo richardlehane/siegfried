@@ -17,6 +17,8 @@ package siegreader
 import (
 	"fmt"
 	"io"
+
+	"github.com/richardlehane/characterize"
 )
 
 // Reader implements the io.Reader, io.Seeker, io.ByteReader and io.ReaderAt interfaces
@@ -270,4 +272,95 @@ func (r *LimitReverseReader) ReadByte() (byte, error) {
 		return 0, io.EOF
 	}
 	return r.ReverseReader.ReadByte()
+}
+
+type nullReader struct{}
+
+func (n nullReader) ReadByte() (byte, error) { return 0, io.EOF }
+
+func (n nullReader) Read(b []byte) (int, error) { return 0, io.EOF }
+
+type utf16Reader struct{ *Reader }
+
+func (u *utf16Reader) ReadByte() (byte, error) {
+	_, err := u.Reader.ReadByte()
+	if err != nil {
+		return 0, err
+	}
+	return u.Reader.ReadByte()
+}
+
+func utf16leReaderFrom(b *Buffer) *utf16Reader {
+	r := ReaderFrom(b)
+	r.ReadByte()
+	return &utf16Reader{r}
+}
+
+func utf16beReaderFrom(b *Buffer) *utf16Reader {
+	r := ReaderFrom(b)
+	r.ReadByte()
+	r.ReadByte()
+	return &utf16Reader{r}
+}
+
+func TextReaderFrom(b *Buffer) io.ByteReader {
+	switch b.Text() {
+	case characterize.ASCII, characterize.UTF8, characterize.LATIN1, characterize.EXTENDED:
+		return ReaderFrom(b)
+	case characterize.UTF16BE:
+		return utf16beReaderFrom(b)
+	case characterize.UTF16LE:
+		return utf16leReaderFrom(b)
+	case characterize.UTF8BOM:
+		r := ReaderFrom(b)
+		for i := 0; i < 3; i++ {
+			r.ReadByte()
+		}
+		return r
+	case characterize.UTF7:
+		r := ReaderFrom(b)
+		for i := 0; i < 4; i++ {
+			r.ReadByte()
+		}
+		return r
+	}
+	return nullReader{}
+}
+
+type reverseUTF16Reader struct {
+	*ReverseReader
+	first bool
+}
+
+func (u *reverseUTF16Reader) ReadByte() (byte, error) {
+	if u.first {
+		u.first = false
+		return u.ReverseReader.ReadByte()
+	}
+	if _, err := u.ReverseReader.ReadByte(); err != nil {
+		return 0, err
+	}
+	return u.ReverseReader.ReadByte()
+}
+
+func reverseUTF16leReaderFrom(b *Buffer) *reverseUTF16Reader {
+	r := ReverseReaderFrom(b)
+	r.ReadByte()
+	return &reverseUTF16Reader{r, true}
+}
+
+func reverseUTF16beReaderFrom(b *Buffer) *reverseUTF16Reader {
+	return &reverseUTF16Reader{ReverseReaderFrom(b), true}
+}
+
+func TextReverseReaderFrom(b *Buffer) io.ByteReader {
+	switch b.Text() {
+	case characterize.ASCII, characterize.UTF8, characterize.LATIN1, characterize.EXTENDED, characterize.UTF8BOM, characterize.UTF7:
+		return ReaderFrom(b)
+	case characterize.UTF16BE:
+		return reverseUTF16beReaderFrom(b)
+	case characterize.UTF16LE:
+		return reverseUTF16leReaderFrom(b)
+	}
+	return nullReader{}
 }

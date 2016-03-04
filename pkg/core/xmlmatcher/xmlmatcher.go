@@ -91,7 +91,7 @@ func (m Matcher) Add(ss core.SignatureSet, p priority.List) (int, error) {
 }
 
 func (m Matcher) Identify(s string, b *siegreader.Buffer) (chan core.Result, error) {
-	rdr := siegreader.ReaderFrom(b)
+	rdr := siegreader.TextReaderFrom(b)
 	_, root, ns, err := xmldetect.Root(rdr)
 	if err != nil {
 		res := make(chan core.Result)
