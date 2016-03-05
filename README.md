@@ -74,7 +74,7 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 
 ## Recent Changes
-### Version 1.5.0 (7/3/2016)
+### Version 1.5.0 (14/3/2016)
 - feature: implement freedesktop.org MIME-info signatures (and the Apache Tika variant)
 - feature: implement XML matcher
 - feature: file name matcher now supports glob patterns as well as file extensions

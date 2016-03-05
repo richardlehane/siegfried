@@ -130,7 +130,7 @@ func (s *Siegfried) Add(i core.Identifier) error {
 		if err := i.Add(s.mm, core.MIMEMatcher); err != nil {
 			return err
 		}
-		if err := i.Add(s.cm, core.XMLMatcher); err != nil {
+		if err := i.Add(s.xm, core.XMLMatcher); err != nil {
 			return err
 		}
 		if err := i.Add(s.bm, core.ByteMatcher); err != nil {

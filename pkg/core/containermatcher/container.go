@@ -69,7 +69,7 @@ type SignatureSet struct {
 func (m Matcher) Add(ss core.SignatureSet, l priority.List) (int, error) {
 	sigs, ok := ss.(SignatureSet)
 	if !ok {
-		return 0, fmt.Errorf("Container matcher error: cannot convert persist set to CM persist set")
+		return 0, fmt.Errorf("Container matcher error: cannot convert signature set to CM signature set")
 	}
 	err := m.addSigs(int(sigs.Typ), sigs.NameParts, sigs.SigParts, l)
 	if err != nil {
