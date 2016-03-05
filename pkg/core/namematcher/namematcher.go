@@ -39,17 +39,17 @@ func Load(ls *persist.LoadSaver) *Matcher {
 		return nil
 	}
 	le := ls.LoadSmallInt()
-	if le == 0 {
-		return nil
-	}
-	ext := make(map[string][]int)
-	for i := 0; i < le; i++ {
-		k := ls.LoadString()
-		r := make([]int, ls.LoadSmallInt())
-		for j := range r {
-			r[j] = ls.LoadSmallInt()
+	var ext map[string][]int
+	if le > 0 {
+		ext = make(map[string][]int)
+		for i := 0; i < le; i++ {
+			k := ls.LoadString()
+			r := make([]int, ls.LoadSmallInt())
+			for j := range r {
+				r[j] = ls.LoadSmallInt()
+			}
+			ext[k] = r
 		}
-		ext[k] = r
 	}
 	globs := ls.LoadStrings()
 	globIdx := make([][]int, ls.LoadSmallInt())

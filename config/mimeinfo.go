@@ -41,9 +41,9 @@ func TextMIME() string {
 func SetMIMEInfo(mi string) func() private {
 	return func() private {
 		switch mi {
-		case "tika":
+		case "tika", "tika-mimetypes.xml":
 			mimeinfo.mi = "tika-mimetypes.xml"
-		case "freedesktop":
+		case "freedesktop", "freedesktop.org.xml":
 			mimeinfo.mi = "freedesktop.org.xml"
 		}
 		return private{}

@@ -50,6 +50,8 @@ func (b *Matcher) addSignature(sig frames.Signature) error {
 		var pos position
 		c := characterise(segment)
 		switch c {
+		case unknown:
+			return fmt.Errorf("Zero length segment: signature %d, %v, segment %d", len(b.keyFrames), sig, i)
 		case bofZero:
 			pos = bofLength(segment, config.Choices())
 		case eofZero:

@@ -200,6 +200,7 @@ func (i *Identifier) Details() string {
 
 func (i *Identifier) String() string {
 	str := fmt.Sprintf("Name: %s\nDetails: %s\n", i.name, i.details)
+	str += fmt.Sprintf("Number of file infos: %d \n", len(i.infos))
 	str += fmt.Sprintf("Number of filename signatures: %d \n", len(i.gids))
 	str += fmt.Sprintf("Number of MIME signatures: %d \n", len(i.mids))
 	str += fmt.Sprintf("Number of XML signatures: %d \n", len(i.xids))
@@ -528,7 +529,7 @@ func (id Identification) YAML() string {
 	if len(id.Basis) > 0 {
 		basis = quoteText(strings.Join(id.Basis, "; "))
 	}
-	return fmt.Sprintf("  - ns      : %v\n      id    : %v\n    format  : %v\n    mime    : %v\n    basis   : %v\n    warning : %v\n",
+	return fmt.Sprintf("  - ns      : %v\n    id      : %v\n    format  : %v\n    mime    : %v\n    basis   : %v\n    warning : %v\n",
 		id.Namespace, id.ID, quoteText(id.Name), quoteText(id.Mime), basis, quoteText(id.Warning))
 }
 

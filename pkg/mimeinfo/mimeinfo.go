@@ -146,7 +146,9 @@ func (mi mimeinfo) Signatures() ([]frames.Signature, []string, error) {
 			for _, s := range w.Matches {
 				ss, err := toSigs(s)
 				for _, sig := range ss {
-					sigs, ids = append(sigs, sig), append(ids, v.MIME)
+					if sig != nil {
+						sigs, ids = append(sigs, sig), append(ids, v.MIME)
+					}
 				}
 				if err != nil {
 					errs = append(errs, err)
@@ -167,17 +169,20 @@ func (mi mimeinfo) Signatures() ([]frames.Signature, []string, error) {
 
 func toSigs(m mappings.Match) ([]frames.Signature, error) {
 	f, err := toFrames(m)
-	if err != nil {
+	if err != nil || f == nil {
 		return nil, err
 	}
 	if len(m.Matches) == 0 {
 		return []frames.Signature{frames.Signature(f)}, nil
 	}
-	subs := make([][]frames.Signature, len(m.Matches))
-	for i, m2 := range m.Matches {
-		subs[i], err = toSigs(m2)
+	subs := make([][]frames.Signature, 0, len(m.Matches))
+	for _, m2 := range m.Matches {
+		frs, err := toSigs(m2)
 		if err != nil {
 			return nil, err
+		}
+		if frs != nil {
+			subs = append(subs, frs)
 		}
 	}
 	var l, idx int

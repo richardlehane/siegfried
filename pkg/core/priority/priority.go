@@ -223,10 +223,6 @@ func (s *Set) Save(ls *persist.LoadSaver) {
 func Load(ls *persist.LoadSaver) *Set {
 	set := &Set{}
 	set.idx = ls.LoadInts()
-	if set.idx == nil {
-		_ = ls.LoadSmallInt() // discard the empty list too
-		return set
-	}
 	set.lists = make([]List, ls.LoadSmallInt())
 	for i := range set.lists {
 		le := ls.LoadSmallInt()

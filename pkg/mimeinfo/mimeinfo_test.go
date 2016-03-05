@@ -20,16 +20,33 @@ import (
 	"testing"
 
 	"github.com/richardlehane/siegfried/config"
+	"github.com/richardlehane/siegfried/pkg/core/persist"
 )
 
 func TestNew(t *testing.T) {
 	config.SetHome(filepath.Join("..", "..", "cmd", "roy", "data"))
+	config.SetMIMEInfo("tika-mimetypes.xml")()
 	mi, err := newMIMEInfo()
 	if err != nil {
 		t.Error(err)
 	}
-	_, _, err = mi.Signatures()
+	sigs, ids, err := mi.Signatures()
 	if err != nil {
 		t.Error(err)
+	}
+	for i, v := range sigs {
+		if len(v) == 0 {
+			t.Errorf("Empty signature: %s", ids[i])
+		}
+	}
+	id, err := New()
+	str := id.String()
+	saver := persist.NewLoadSaver(nil)
+	id.Save(saver)
+	loader := persist.NewLoadSaver(saver.Bytes())
+	_ = loader.LoadByte()
+	id2 := Load(loader)
+	if str == id2.String() {
+		t.Errorf("Load identifier fail: got %s, expect %s", str, id2.String())
 	}
 }

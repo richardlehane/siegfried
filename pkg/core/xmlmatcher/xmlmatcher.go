@@ -63,6 +63,9 @@ func New() Matcher {
 }
 
 func (m Matcher) Add(ss core.SignatureSet, p priority.List) (int, error) {
+	if m == nil {
+		m = make(Matcher)
+	}
 	sigs, ok := ss.(SignatureSet)
 	if !ok {
 		return -1, fmt.Errorf("Xmlmatcher: can't cast persist set")

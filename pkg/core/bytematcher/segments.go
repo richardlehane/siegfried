@@ -23,8 +23,9 @@ import (
 type sigType int
 
 const (
-	bofZero   sigType = iota // fixed offset, zero length from BOF
-	bofWindow                // offset is a window or fixed value greater than zero from BOF
+	unknown   sigType = iota
+	bofZero           // fixed offset, zero length from BOF
+	bofWindow         // offset is a window or fixed value greater than zero from BOF
 	bofWild
 	prev
 	succ
@@ -35,6 +36,9 @@ const (
 
 // Simple characterisation of a segment: is it relative to the BOF, or the EOF, or is it a prev/succ segment.
 func characterise(seg frames.Signature) sigType {
+	if len(seg) == 0 {
+		return unknown
+	}
 	switch seg[len(seg)-1].Orientation() {
 	case frames.SUCC:
 		return succ

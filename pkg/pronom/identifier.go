@@ -290,7 +290,7 @@ func place(idx int, ids []string) (int, int) {
 
 func (r *Recorder) Satisfied(mt core.MatcherType) bool {
 	if r.cscore < incScore {
-		if mt == core.ByteMatcher {
+		if mt == core.ByteMatcher || mt == core.XMLMatcher {
 			return false
 		}
 		if len(r.ids) == 0 {
@@ -467,7 +467,7 @@ func (id Identification) YAML() string {
 	if len(id.Basis) > 0 {
 		basis = quoteText(strings.Join(id.Basis, "; "))
 	}
-	return fmt.Sprintf("  - ns      : %v\n      id    : %v\n    format  : %v\n    version : %v\n    mime    : %v\n    basis   : %v\n    warning : %v\n",
+	return fmt.Sprintf("  - ns      : %v\n    id      : %v\n    format  : %v\n    version : %v\n    mime    : %v\n    basis   : %v\n    warning : %v\n",
 		id.Namespace, id.ID, quoteText(id.Name), quoteText(id.Version), quoteText(id.Mime), basis, quoteText(id.Warning))
 }
 

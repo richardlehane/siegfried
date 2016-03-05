@@ -340,6 +340,29 @@ func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identifi
 	}
 	satisfied := true
 	for _, rec := range recs {
+		if !rec.Satisfied(core.XMLMatcher) {
+			satisfied = false
+		}
+	}
+	// XML Matcher
+	if !satisfied && s.xm != nil {
+		if config.Debug() {
+			fmt.Fprintln(config.Out(), ">>START XML MATCHER")
+		}
+		xms, xerr := s.xm.Identify("", buffer)
+		for v := range xms {
+			for _, rec := range recs {
+				if rec.Record(core.XMLMatcher, v) {
+					break
+				}
+			}
+		}
+		if err == nil {
+			err = xerr
+		}
+	}
+	satisfied = true
+	for _, rec := range recs {
 		if !rec.Satisfied(core.ByteMatcher) {
 			satisfied = false
 		}
