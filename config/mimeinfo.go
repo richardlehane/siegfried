@@ -17,9 +17,12 @@ package config
 import "path/filepath"
 
 var mimeinfo = struct {
-	mi string
+	mi   string
+	zip  string
+	text string
 }{
-	mi: "freedesktop.org.xml", //"tika-mimetypes.xml",
+	zip:  "application/zip",
+	text: "text/plain",
 }
 
 // MIMEInfo returns the location of the MIMEInfo signature file.
@@ -28,9 +31,21 @@ func MIMEInfo() string {
 }
 
 func ZipMIME() string {
-	return "application/zip"
+	return mimeinfo.zip
 }
 
 func TextMIME() string {
-	return "text/plain"
+	return mimeinfo.text
+}
+
+func SetMIMEInfo(mi string) func() private {
+	return func() private {
+		switch mi {
+		case "tika":
+			mimeinfo.mi = "tika-mimetypes.xml"
+		case "freedesktop":
+			mimeinfo.mi = "freedesktop.org.xml"
+		}
+		return private{}
+	}
 }

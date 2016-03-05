@@ -149,6 +149,9 @@ func buildOptions() []config.Option {
 	if *reports != config.Reports() {
 		opts = append(opts, config.SetReports(*reports))
 	}
+	if *mi != "" {
+		opts = append(opts, config.SetMIMEInfo(*mi))
+	}
 	if *name != config.Name() {
 		opts = append(opts, config.SetName(*name))
 	}
