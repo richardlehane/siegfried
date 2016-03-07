@@ -46,7 +46,7 @@ func TestNew(t *testing.T) {
 	loader := persist.NewLoadSaver(saver.Bytes())
 	_ = loader.LoadByte()
 	id2 := Load(loader)
-	if str == id2.String() {
+	if str != id2.String() {
 		t.Errorf("Load identifier fail: got %s, expect %s", str, id2.String())
 	}
 }

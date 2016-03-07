@@ -99,7 +99,7 @@ func (mi mimeinfo) Infos() map[string]parseable.FormatInfo {
 		for _, mg := range v.Magic {
 			magicWeight += len(mg.Matches)
 		}
-		fi.globWeights, fi.magicWeights = make([]int, len(v.Globs)), make([]int, magicWeight)
+		fi.globWeights, fi.magicWeights = make([]int, len(v.Globs)), make([]int, 0, magicWeight)
 		for i, w := range v.Globs {
 			if len(w.Weight) > 0 {
 				num, err := strconv.Atoi(w.Weight)
@@ -110,18 +110,20 @@ func (mi mimeinfo) Infos() map[string]parseable.FormatInfo {
 			}
 			fi.globWeights[i] = 50
 		}
-		var iter int
 		for _, w := range v.Magic {
 			weight := 50
 			if len(w.Priority) > 0 {
-				num, err := strconv.Atoi(w.Priority)
-				if err == nil {
+				if num, err := strconv.Atoi(w.Priority); err == nil {
 					weight = num
 				}
 			}
-			for i := 0; i < len(w.Matches); i++ {
-				fi.magicWeights[iter] = weight
-				iter++
+			for _, s := range w.Matches {
+				ss, _ := toSigs(s)
+				for _, sig := range ss {
+					if sig != nil {
+						fi.magicWeights = append(fi.magicWeights, weight)
+					}
+				}
 			}
 		}
 		fmap[v.MIME] = fi
