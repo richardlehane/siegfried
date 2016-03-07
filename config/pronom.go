@@ -25,16 +25,13 @@ import (
 )
 
 var pronom = struct {
+	name             string
 	droid            string   // name of droid file e.g. DROID_SignatureFile_V78.xml
 	container        string   // e.g. container-signature-19770502.xml
 	reports          string   // directory where PRONOM reports are stored
 	noreports        bool     // build signature directly from DROID file rather than PRONOM reports
 	doubleup         bool     // include byte signatures for formats that also have container signatures
 	inspect          bool     // setting for inspecting PRONOM signatures
-	limit            []string // limit signature to a set of included PRONOM reports
-	exclude          []string // exclude a set of PRONOM reports from the signature
-	extensions       string   // directory where custom signature extensions are stored
-	extend           []string
 	extendc          []string //container extensions
 	harvestURL       string
 	harvestTimeout   time.Duration
@@ -49,8 +46,8 @@ var pronom = struct {
 	// text puid
 	text string
 }{
+	name:             "pronom",
 	reports:          "pronom",
-	extensions:       "custom",
 	harvestURL:       "http://apps.nationalarchives.gov.uk/pronom/",
 	harvestTimeout:   120 * time.Second,
 	harvestTransport: &http.Transport{Proxy: http.ProxyFromEnvironment},
@@ -173,51 +170,6 @@ func Inspect() bool {
 	return pronom.inspect
 }
 
-// HasLimit reports whether a limited set of signatures has been selected.
-func HasLimit() bool {
-	return len(pronom.limit) > 0
-}
-
-// Limit takes a slice of puids and returns a new slice containing only those puids in the limit set.
-func Limit(puids []string) []string {
-	ret := make([]string, 0, len(pronom.limit))
-	for _, v := range pronom.limit {
-		for _, w := range puids {
-			if v == w {
-				ret = append(ret, v)
-			}
-		}
-	}
-	return ret
-}
-
-// HasExclude reports whether an exlusion set of signatures has been provided.
-func HasExclude() bool {
-	return len(pronom.exclude) > 0
-}
-
-func exclude(puids, ex []string) []string {
-	ret := make([]string, 0, len(puids))
-	for _, v := range puids {
-		excluded := false
-		for _, w := range ex {
-			if v == w {
-				excluded = true
-				break
-			}
-		}
-		if !excluded {
-			ret = append(ret, v)
-		}
-	}
-	return ret
-}
-
-// Exclude takes a slice of puids and omits those that are also in the pronom.exclude slice.
-func Exclude(puids []string) []string {
-	return exclude(puids, pronom.exclude)
-}
-
 // DoubleUp reports whether the doubleup flag has been set. This will cause byte signatures to be built for formats where container signatures are also provided.
 func DoubleUp() bool {
 	return pronom.doubleup
@@ -226,23 +178,6 @@ func DoubleUp() bool {
 // ExcludeDoubles takes a slice of puids and a slice of container puids and exludes those that are in the container slice, if nodoubles is set.
 func ExcludeDoubles(puids, cont []string) []string {
 	return exclude(puids, cont)
-}
-
-func extensionPaths(e []string) []string {
-	ret := make([]string, len(e))
-	for i, v := range e {
-		if filepath.Dir(v) == "." {
-			ret[i] = filepath.Join(siegfried.home, pronom.extensions, v)
-		} else {
-			ret[i] = v
-		}
-	}
-	return ret
-}
-
-// Extend reports whether a set of signature extensions has been provided.
-func Extend() []string {
-	return extensionPaths(pronom.extend)
 }
 
 // Extend reports whether a set of container signature extensions has been provided.
@@ -263,23 +198,6 @@ func ZipPuid() string {
 // TextPuid reports the puid for a text file.
 func TextPuid() string {
 	return pronom.text
-}
-
-// IsArchive returns an Archive that corresponds to the provided puid (or none if no match).
-func IsArchive(p string) Archive {
-	switch p {
-	case pronom.zip:
-		return Zip
-	case pronom.gzip:
-		return Gzip
-	case pronom.tar:
-		return Tar
-	case pronom.arc, pronom.arc1_1:
-		return ARC
-	case pronom.warc:
-		return WARC
-	}
-	return None
 }
 
 // SETTERS
@@ -330,30 +248,6 @@ func SetDoubleUp() func() private {
 func SetInspect() func() private {
 	return func() private {
 		pronom.inspect = true
-		return private{}
-	}
-}
-
-// SetLimit limits the set of signatures built to the list provide.
-func SetLimit(l []string) func() private {
-	return func() private {
-		pronom.limit = l
-		return private{}
-	}
-}
-
-// SetExclude excludes the provided signatures from those built.
-func SetExclude(l []string) func() private {
-	return func() private {
-		pronom.exclude = l
-		return private{}
-	}
-}
-
-// SetExtend adds extension signatures to the build.
-func SetExtend(l []string) func() private {
-	return func() private {
-		pronom.extend = l
 		return private{}
 	}
 }

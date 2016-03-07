@@ -45,6 +45,21 @@ func newMIMEInfo() (mimeinfo, error) {
 	if err != nil {
 		return nil, err
 	}
+	index := make(map[string]int)
+	for i, v := range mi.MIMETypes {
+		index[v.MIME] = i
+	}
+	for i, v := range mi.MIMETypes {
+		if len(v.SuperiorClasses) == 1 {
+			sup := index[v.SuperiorClasses[0].SubClassOf]
+			if len(mi.MIMETypes[sup].XMLPattern) > 0 {
+				mi.MIMETypes[i].XMLPattern = append(mi.MIMETypes[i].XMLPattern, mi.MIMETypes[sup].XMLPattern...)
+			}
+			if len(mi.MIMETypes[sup].Magic) > 0 {
+				mi.MIMETypes[i].Magic = append(mi.MIMETypes[i].Magic, mi.MIMETypes[sup].Magic...)
+			}
+		}
+	}
 	return mi.MIMETypes, nil
 }
 
@@ -80,7 +95,11 @@ func (mi mimeinfo) Infos() map[string]parseable.FormatInfo {
 		} else if len(v.Comments) > 0 {
 			fi.comment = v.Comments[0]
 		}
-		fi.globWeights, fi.magicWeights = make([]int, len(v.Globs)), make([]int, len(v.Magic))
+		var magicWeight int
+		for _, mg := range v.Magic {
+			magicWeight += len(mg.Matches)
+		}
+		fi.globWeights, fi.magicWeights = make([]int, len(v.Globs)), make([]int, magicWeight)
 		for i, w := range v.Globs {
 			if len(w.Weight) > 0 {
 				num, err := strconv.Atoi(w.Weight)
@@ -91,15 +110,19 @@ func (mi mimeinfo) Infos() map[string]parseable.FormatInfo {
 			}
 			fi.globWeights[i] = 50
 		}
-		for i, w := range v.Magic {
+		var iter int
+		for _, w := range v.Magic {
+			weight := 50
 			if len(w.Priority) > 0 {
 				num, err := strconv.Atoi(w.Priority)
 				if err == nil {
-					fi.magicWeights[i] = num
-					continue
+					weight = num
 				}
 			}
-			fi.magicWeights[i] = 50
+			for i := 0; i < len(w.Matches); i++ {
+				fi.magicWeights[iter] = weight
+				iter++
+			}
 		}
 		fmap[v.MIME] = fi
 	}

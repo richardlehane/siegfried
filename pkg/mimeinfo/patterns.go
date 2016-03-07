@@ -732,6 +732,9 @@ func (m Mask) NumSequences() int {
 		return 0
 	}
 	seq := m.pat.Sequences()[0]
+	if len(m.val) != len(seq) {
+		return 0
+	}
 	var ret int
 	for i, b := range m.val {
 		ret *= len(validMasks(b, seq[i]))
@@ -745,6 +748,9 @@ func (m Mask) Sequences() []patterns.Sequence {
 		return nil
 	}
 	seq := m.pat.Sequences()[0]
+	if len(m.val) != len(seq) {
+		return nil
+	}
 	var ret []patterns.Sequence
 	for i, b := range m.val {
 		ret = sequences(ret, validMasks(b, seq[i])...)

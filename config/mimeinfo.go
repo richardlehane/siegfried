@@ -19,9 +19,17 @@ import "path/filepath"
 var mimeinfo = struct {
 	mi   string
 	zip  string
+	gzip string
+	tar  string
+	arc  string
+	warc string
 	text string
 }{
 	zip:  "application/zip",
+	gzip: "application/gzip",
+	tar:  "application/x-tar",
+	arc:  "application/x-arc",
+	warc: "application/x-warc",
 	text: "text/plain",
 }
 
@@ -43,8 +51,14 @@ func SetMIMEInfo(mi string) func() private {
 		switch mi {
 		case "tika", "tika-mimetypes.xml":
 			mimeinfo.mi = "tika-mimetypes.xml"
-		case "freedesktop", "freedesktop.org.xml":
+			if identifier.name == "" {
+				identifier.name = "tika"
+			}
+		case "freedesktop", "freedesktop.org", "freedesktop.org.xml":
 			mimeinfo.mi = "freedesktop.org.xml"
+			if identifier.name == "" {
+				identifier.name = "freedesktop.org"
+			}
 		}
 		return private{}
 	}

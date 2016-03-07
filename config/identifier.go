@@ -16,24 +16,29 @@ package config
 
 import (
 	"fmt"
+	"path/filepath"
 	"strings"
 )
 
 // Name of the default identifier as well as settings for how a new identifer will be built
 var identifier = struct {
-	name        string // Name of the default identifier
-	details     string // a short string describing the signature e.g. with what DROID and container file versions was it built?
-	maxBOF      int    // maximum offset from beginning of file to scan
-	maxEOF      int    // maximum offset from end of file to scan
-	noEOF       bool   // trim end of file segments from signatures
-	noContainer bool   // don't build with container signatures
-	noPriority  bool   // ignore priority relations between signatures
-	noText      bool   // don't build with text signatures
-	noName      bool   // don't build with filename signatures
-	noMIME      bool   // don't build with MIME signatures
-	noXML       bool   // don't build with XML signatures
+	name        string   // Name of the default identifier
+	details     string   // a short string describing the signature e.g. with what DROID and container file versions was it built?
+	maxBOF      int      // maximum offset from beginning of file to scan
+	maxEOF      int      // maximum offset from end of file to scan
+	noEOF       bool     // trim end of file segments from signatures
+	noContainer bool     // don't build with container signatures
+	noPriority  bool     // ignore priority relations between signatures
+	noText      bool     // don't build with text signatures
+	noName      bool     // don't build with filename signatures
+	noMIME      bool     // don't build with MIME signatures
+	noXML       bool     // don't build with XML signatures
+	limit       []string // limit signature to a set of included PRONOM reports
+	exclude     []string // exclude a set of PRONOM reports from the signature
+	extensions  string   // directory where custom signature extensions are stored
+	extend      []string
 }{
-	name: "pronom",
+	extensions: "custom",
 }
 
 // GETTERS
@@ -50,9 +55,14 @@ func Details() string {
 		return identifier.details
 	}
 	// ... otherwise create a default string based on the identifier settings chosen
-	str := DroidBase()
-	if !identifier.noContainer {
-		str += "; " + ContainerBase()
+	var str string
+	if len(mimeinfo.mi) > 0 {
+		str = mimeinfo.mi
+	} else {
+		str = DroidBase()
+		if !identifier.noContainer {
+			str += "; " + ContainerBase()
+		}
 	}
 	if identifier.maxBOF > 0 {
 		str += fmt.Sprintf("; max BOF %d", identifier.maxBOF)
@@ -88,13 +98,13 @@ func Details() string {
 		str += "; byte signatures included for formats that also have container signatures"
 	}
 	if HasLimit() {
-		str += "; limited to puids: " + strings.Join(pronom.limit, ", ")
+		str += "; limited to ids: " + strings.Join(identifier.limit, ", ")
 	}
 	if HasExclude() {
-		str += "; excluding puids: " + strings.Join(pronom.exclude, ", ")
+		str += "; excluding ids: " + strings.Join(identifier.exclude, ", ")
 	}
-	if len(pronom.extend) > 0 {
-		str += "; extensions: " + strings.Join(pronom.extend, ", ")
+	if len(identifier.extend) > 0 {
+		str += "; extensions: " + strings.Join(identifier.extend, ", ")
 	}
 	if len(pronom.extendc) > 0 {
 		str += "; container extensions: " + strings.Join(pronom.extendc, ", ")
@@ -145,6 +155,85 @@ func NoMIME() bool {
 // NoXML reports whether XML signatures should be omitted.
 func NoXML() bool {
 	return identifier.noXML
+}
+
+// HasLimit reports whether a limited set of signatures has been selected.
+func HasLimit() bool {
+	return len(identifier.limit) > 0
+}
+
+// Limit takes a slice of puids and returns a new slice containing only those puids in the limit set.
+func Limit(ids []string) []string {
+	ret := make([]string, 0, len(identifier.limit))
+	for _, v := range identifier.limit {
+		for _, w := range ids {
+			if v == w {
+				ret = append(ret, v)
+			}
+		}
+	}
+	return ret
+}
+
+// HasExclude reports whether an exlusion set of signatures has been provided.
+func HasExclude() bool {
+	return len(identifier.exclude) > 0
+}
+
+func exclude(ids, ex []string) []string {
+	ret := make([]string, 0, len(ids))
+	for _, v := range ids {
+		excluded := false
+		for _, w := range ex {
+			if v == w {
+				excluded = true
+				break
+			}
+		}
+		if !excluded {
+			ret = append(ret, v)
+		}
+	}
+	return ret
+}
+
+// Exclude takes a slice of puids and omits those that are also in the identifier.exclude slice.
+func Exclude(ids []string) []string {
+	return exclude(ids, identifier.exclude)
+}
+
+func extensionPaths(e []string) []string {
+	ret := make([]string, len(e))
+	for i, v := range e {
+		if filepath.Dir(v) == "." {
+			ret[i] = filepath.Join(siegfried.home, identifier.extensions, v)
+		} else {
+			ret[i] = v
+		}
+	}
+	return ret
+}
+
+// Extend reports whether a set of signature extensions has been provided.
+func Extend() []string {
+	return extensionPaths(identifier.extend)
+}
+
+// IsArchive returns an Archive that corresponds to the provided id (or none if no match).
+func IsArchive(id string) Archive {
+	switch id {
+	case pronom.zip, mimeinfo.zip:
+		return Zip
+	case pronom.gzip, mimeinfo.gzip:
+		return Gzip
+	case pronom.tar, mimeinfo.tar:
+		return Tar
+	case pronom.arc, pronom.arc1_1, mimeinfo.arc:
+		return ARC
+	case pronom.warc:
+		return WARC
+	}
+	return None
 }
 
 // SETTERS
@@ -234,6 +323,30 @@ func SetNoMIME() func() private {
 func SetNoXML() func() private {
 	return func() private {
 		identifier.noXML = true
+		return private{}
+	}
+}
+
+// SetLimit limits the set of signatures built to the list provide.
+func SetLimit(l []string) func() private {
+	return func() private {
+		identifier.limit = l
+		return private{}
+	}
+}
+
+// SetExclude excludes the provided signatures from those built.
+func SetExclude(l []string) func() private {
+	return func() private {
+		identifier.exclude = l
+		return private{}
+	}
+}
+
+// SetExtend adds extension signatures to the build.
+func SetExtend(l []string) func() private {
+	return func() private {
+		identifier.extend = l
 		return private{}
 	}
 }

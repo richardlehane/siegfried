@@ -327,7 +327,7 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 			if r.satisfied {
 				return true
 			}
-			r.ids = add(r.ids, r.name, config.TextPuid(), r.infos[config.TextPuid()], res.Basis(), core.TextMatcher, 0)
+			r.ids = add(r.ids, r.name, config.TextMIME(), r.infos[config.TextMIME()], res.Basis(), core.TextMatcher, 0)
 			return true
 		} else {
 			return false
@@ -493,7 +493,6 @@ type Identification struct {
 	Namespace string
 	ID        string
 	Name      string
-	Mime      string
 	Basis     []string
 	Warning   string
 	archive   config.Archive
@@ -530,7 +529,7 @@ func (id Identification) YAML() string {
 		basis = quoteText(strings.Join(id.Basis, "; "))
 	}
 	return fmt.Sprintf("  - ns      : %v\n    id      : %v\n    format  : %v\n    mime    : %v\n    basis   : %v\n    warning : %v\n",
-		id.Namespace, id.ID, quoteText(id.Name), quoteText(id.Mime), basis, quoteText(id.Warning))
+		id.Namespace, quoteText(id.ID), quoteText(id.Name), quoteText(id.ID), basis, quoteText(id.Warning))
 }
 
 func (id Identification) JSON() string {
@@ -539,7 +538,7 @@ func (id Identification) JSON() string {
 		basis = strings.Join(id.Basis, "; ")
 	}
 	return fmt.Sprintf("{\"ns\":\"%s\",\"id\":\"%s\",\"format\":\"%s\",\"mime\":\"%s\",\"basis\":\"%s\",\"warning\":\"%s\"}",
-		id.Namespace, id.ID, id.Name, id.Mime, basis, id.Warning)
+		id.Namespace, id.ID, id.Name, id.ID, basis, id.Warning)
 }
 
 func (id Identification) CSV() []string {
@@ -551,7 +550,7 @@ func (id Identification) CSV() []string {
 		id.Namespace,
 		id.ID,
 		id.Name,
-		id.Mime,
+		id.ID,
 		basis,
 		id.Warning,
 	}
@@ -630,7 +629,6 @@ func add(m ids, ns string, id string, info formatInfo, basis string, t core.Matc
 		Namespace: ns,
 		ID:        id,
 		Name:      info.comment,
-		Mime:      id,
 		Basis:     []string{basis},
 		Warning:   "",
 		archive:   config.IsArchive(id),
