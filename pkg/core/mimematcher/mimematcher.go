@@ -93,7 +93,7 @@ func (m Matcher) add(s string, fmt int) {
 	m[s] = []int{fmt}
 }
 
-func (m Matcher) Identify(s string, na *siegreader.Buffer) (chan core.Result, error) {
+func (m Matcher) Identify(s string, na *siegreader.Buffer, exclude ...int) (chan core.Result, error) {
 	var (
 		fmts, tfmts []int
 		idx         int

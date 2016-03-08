@@ -31,10 +31,7 @@ type MIMEType struct {
 		Local string `xml:"localName,attr"`
 		NS    string `xml:"namespaceURI,attr"`
 	} `xml:"root-XML"`
-	Magic []struct {
-		Matches  []Match `xml:"match"`
-		Priority string  `xml:"priority,attr"`
-	} `xml:"magic"`
+	Magic   []Magic `xml:"magic"`
 	Aliases []struct {
 		Alias string `xml:"type,attr"`
 	} `xml:"alias"`
@@ -44,6 +41,12 @@ type MIMEType struct {
 	Comment  []string `xml:"_comment"`
 	Comments []string `xml:"comment"`
 	Acronym  []string `xml:"acronym"`
+	Superior bool     `xml:"-"`
+}
+
+type Magic struct {
+	Matches  []Match `xml:"match"`
+	Priority string  `xml:"priority,attr"`
 }
 
 type Match struct {

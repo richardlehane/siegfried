@@ -56,7 +56,19 @@ func newMIMEInfo() (mimeinfo, error) {
 				mi.MIMETypes[i].XMLPattern = append(mi.MIMETypes[i].XMLPattern, mi.MIMETypes[sup].XMLPattern...)
 			}
 			if len(mi.MIMETypes[sup].Magic) > 0 {
-				mi.MIMETypes[i].Magic = append(mi.MIMETypes[i].Magic, mi.MIMETypes[sup].Magic...)
+				nm := make([]mappings.Magic, len(mi.MIMETypes[sup].Magic))
+				copy(nm, mi.MIMETypes[sup].Magic)
+				for i, w := range nm {
+					if len(w.Priority) > 0 {
+						num, err := strconv.Atoi(w.Priority)
+						if err == nil {
+							nm[i].Priority = strconv.Itoa(num - 1)
+							continue
+						}
+					}
+					nm[i].Priority = "49"
+				}
+				mi.MIMETypes[i].Magic = append(mi.MIMETypes[i].Magic, nm...)
 			}
 		}
 	}
@@ -341,6 +353,25 @@ var (
 	rgx = regexp.MustCompile(`\\([0-9]{1,3}|x[0-9A-Fa-f]{1,2})`)
 )
 
+func numReplace(b []byte) []byte {
+	var i uint64
+	var err error
+	if b[1] == 'x' {
+		i, err = strconv.ParseUint(string(b[2:]), 16, 8)
+	} else {
+		// octal
+		if len(b) == 4 {
+			i, err = strconv.ParseUint(string(b[1:]), 8, 8)
+		} else { // decimal
+			i, err = strconv.ParseUint(string(b[1:]), 10, 8)
+		}
+	}
+	if err != nil {
+		panic(b)
+	}
+	return []byte{byte(i)}
+}
+
 func unquote(input string) []byte {
 	// deal with hex first
 	if len(input) > 2 && input[:2] == "0x" {
@@ -351,26 +382,7 @@ func unquote(input string) []byte {
 			panic(input + " " + err.Error())
 		}
 	}
-	input = rpl.Replace(input)
-	for idx := rgx.FindStringIndex(input); idx != nil; idx = rgx.FindStringIndex(input) {
-		var i int64
-		var err error
-		if input[idx[0]+1] == 'x' {
-			i, err = strconv.ParseInt(input[idx[0]+2:idx[1]], 16, 16)
-		} else {
-			// octal
-			if idx[1]-idx[0]-1 == 3 {
-				i, err = strconv.ParseInt(input[idx[0]+1:idx[1]], 8, 16)
-			} else { // decimal
-				i, err = strconv.ParseInt(input[idx[0]+1:idx[1]], 10, 16)
-			}
-		}
-		if err != nil {
-			panic(input + " " + err.Error())
-		}
-		input = input[:idx[0]] + string(byte(i)) + input[idx[1]:]
-	}
-	return []byte(input)
+	return rgx.ReplaceAllFunc([]byte(rpl.Replace(input)), numReplace)
 }
 
 // we don't create a priority map for mimeinfo

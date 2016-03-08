@@ -20,6 +20,7 @@ import (
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
@@ -165,9 +166,8 @@ func (r result) Basis() string {
 	return r.basis
 }
 
-func (b *Matcher) scorer(buf *siegreader.Buffer, q chan struct{}, r chan<- core.Result) chan<- strike {
+func (b *Matcher) scorer(buf *siegreader.Buffer, waitSet *priority.WaitSet, q chan struct{}, r chan<- core.Result) chan<- strike {
 	incoming := make(chan strike)
-	waitSet := b.priorities.WaitSet()
 	hits := make(map[int]*hitItem)
 	strikes := make(map[int]*strikeItem)
 

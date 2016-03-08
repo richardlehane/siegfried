@@ -120,6 +120,10 @@ func (i *Identifier) Details() string {
 	return i.details
 }
 
+func (i *Identifier) Fields() []string {
+	return []string{"namespace", "id", "format", "version", "mime", "basis", "warning"}
+}
+
 func (i *Identifier) String() string {
 	str := fmt.Sprintf("Name: %s\nDetails: %s\n", i.name, i.details)
 	str += fmt.Sprintf("Number of filename signatures: %d \n", len(i.ePuids))
@@ -288,22 +292,25 @@ func place(idx int, ids []string) (int, int) {
 	return prev + 1, prev + post + 1
 }
 
-func (r *Recorder) Satisfied(mt core.MatcherType) bool {
+func (r *Recorder) Satisfied(mt core.MatcherType) (bool, int) {
 	if r.cscore < incScore {
 		if mt == core.ByteMatcher || mt == core.XMLMatcher {
-			return false
+			return false, 0
 		}
 		if len(r.ids) == 0 {
-			return false
+			return false, 0
 		}
 		for _, res := range r.ids {
 			if res.ID == config.TextPuid() {
-				return false
+				return false, 0
 			}
 		}
 	}
 	r.satisfied = true
-	return true
+	if mt == core.ByteMatcher {
+		return true, r.bStart
+	}
+	return true, 0
 }
 
 func lowConfidence(conf int) string {

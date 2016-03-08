@@ -103,6 +103,11 @@ func New() *Siegfried {
 // Add adds an identifier to a Siegfried struct.
 // The identifer is type switched to test if it is supported. At present, only PRONOM identifiers are supported
 func (s *Siegfried) Add(i core.Identifier) error {
+	for _, v := range s.ids {
+		if v.Name() == i.Name() {
+			return fmt.Errorf("siegfried: identifiers must have unique names, you already have an identifier named %s. Use the -name flag to assign a new name e.g. `roy add -name richard`", i.Name())
+		}
+	}
 	switch i := i.(type) {
 	default:
 		return fmt.Errorf("siegfried: unknown identifier type %T", i)
@@ -272,6 +277,15 @@ func (s *Siegfried) JSON() string {
 	return str
 }
 
+// Fields returns a slice of the names of the fields in each identifier.
+func (s *Siegfried) Fields() [][]string {
+	ret := make([][]string, len(s.ids))
+	for i, v := range s.ids {
+		ret[i] = v.Fields()
+	}
+	return ret
+}
+
 // Identify identifies a stream or file object.
 // It takes the name of the file/stream (if unknown, give an empty string) and an io.Reader
 // It returns a channel of identifications and an error.
@@ -340,7 +354,7 @@ func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identifi
 	}
 	satisfied := true
 	for _, rec := range recs {
-		if !rec.Satisfied(core.XMLMatcher) {
+		if ok, _ := rec.Satisfied(core.XMLMatcher); !ok {
 			satisfied = false
 		}
 	}
@@ -362,9 +376,13 @@ func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identifi
 		}
 	}
 	satisfied = true
+	exclude := make([]int, 0, len(recs))
 	for _, rec := range recs {
-		if !rec.Satisfied(core.ByteMatcher) {
+		ok, ex := rec.Satisfied(core.ByteMatcher)
+		if !ok {
 			satisfied = false
+		} else {
+			exclude = append(exclude, ex)
 		}
 	}
 	// Byte Matcher
@@ -372,7 +390,7 @@ func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identifi
 		if config.Debug() {
 			fmt.Fprintln(config.Out(), ">>START BYTE MATCHER")
 		}
-		ids, _ := s.bm.Identify("", buffer) // we don't care about an error here
+		ids, _ := s.bm.Identify("", buffer, exclude...) // we don't care about an error here
 		for v := range ids {
 			for _, rec := range recs {
 				if rec.Record(core.ByteMatcher, v) {
@@ -383,7 +401,7 @@ func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identifi
 	}
 	satisfied = true
 	for _, rec := range recs {
-		if !rec.Satisfied(core.TextMatcher) {
+		if ok, _ := rec.Satisfied(core.TextMatcher); !ok {
 			satisfied = false
 			break
 		}

@@ -91,24 +91,39 @@ func (l logWriter) writeFile(name string, sz int64, mod string, cs []byte, err e
 func (l logWriter) writeTail() {}
 
 type csvWriter struct {
-	rec []string
-	w   *csv.Writer
+	recs  [][]string
+	names []string
+	w     *csv.Writer
 }
 
 func newCSV(w io.Writer) *csvWriter {
-	l := 11
-	if *hashf != "" {
-		l = 12
-	}
-	return &csvWriter{make([]string, l), csv.NewWriter(os.Stdout)}
+	return &csvWriter{w: csv.NewWriter(os.Stdout)}
 }
 
 func (c *csvWriter) writeHead(s *siegfried.Siegfried) {
+	fields := s.Fields()
+	c.names = make([]string, len(fields))
+	l := 4
 	if *hashf != "" {
-		c.w.Write([]string{"filename", "filesize", "modified", "errors", hashHeader(false), "id", "puid", "format", "version", "mime", "basis", "warning"})
-		return
+		l++
 	}
-	c.w.Write([]string{"filename", "filesize", "modified", "errors", "id", "puid", "format", "version", "mime", "basis", "warning"})
+	for i, f := range fields {
+		l += len(f)
+		c.names[i] = f[0]
+	}
+	c.recs = make([][]string, 1)
+	c.recs[0] = make([]string, l)
+	c.recs[0][0], c.recs[0][1], c.recs[0][2], c.recs[0][3] = "filename", "filesize", "modified", "errors"
+	idx := 4
+	if *hashf != "" {
+		c.recs[0][4] = hashHeader(false)
+		idx++
+	}
+	for _, f := range fields {
+		copy(c.recs[0][idx:], f)
+		idx += len(f)
+	}
+	c.w.Write(c.recs[0])
 }
 
 func (c *csvWriter) writeFile(name string, sz int64, mod string, checksum []byte, err error, ids iterableID) config.Archive {
@@ -116,32 +131,49 @@ func (c *csvWriter) writeFile(name string, sz int64, mod string, checksum []byte
 	if err != nil {
 		errStr = err.Error()
 	}
-	rest := 4
+	c.recs[0][0], c.recs[0][1], c.recs[0][2], c.recs[0][3] = name, strconv.FormatInt(sz, 10), mod, errStr
+	idx := 4
 	if checksum != nil {
-		rest = 5
+		c.recs[0][4] = hex.EncodeToString(checksum)
+		idx++
 	}
 	if ids == nil {
-		empty := make([]string, 7)
-		c.rec[0], c.rec[1], c.rec[2], c.rec[3] = name, strconv.FormatInt(sz, 10), mod, errStr
+		empty := make([]string, len(c.recs[0])-idx)
 		if checksum != nil {
-			c.rec[4] = ""
+			c.recs[0][4] = ""
 		}
-		copy(c.rec[rest:], empty)
-		c.w.Write(c.rec)
+		copy(c.recs[0][idx:], empty)
+		c.w.Write(c.recs[0])
 		return 0
 	}
+
 	var arc config.Archive
+	var thisName string
+	var rowIdx, colIdx, prevLen int
+	colIdx = idx
 	for id := ids.next(); id != nil; id = ids.next() {
 		if id.Archive() > arc {
 			arc = id.Archive()
 		}
-		c.rec[0], c.rec[1], c.rec[2], c.rec[3] = name, strconv.FormatInt(sz, 10), mod, errStr
-		if checksum != nil {
-			c.rec[4] = hex.EncodeToString(checksum)
+		fields := id.CSV()
+		if thisName == fields[0] {
+			rowIdx++
+		} else {
+			thisName = fields[0]
+			rowIdx = 0
+			colIdx += prevLen
+			prevLen = len(fields)
 		}
-		copy(c.rec[rest:], id.CSV())
-		c.w.Write(c.rec)
+		if rowIdx >= len(c.recs) {
+			c.recs = append(c.recs, make([]string, len(c.recs[0])))
+			copy(c.recs[rowIdx][:idx+1], c.recs[0][:idx+1])
+		}
+		copy(c.recs[rowIdx][colIdx:], fields)
 	}
+	for _, r := range c.recs {
+		c.w.Write(r)
+	}
+	c.recs = c.recs[:1]
 	return arc
 }
 

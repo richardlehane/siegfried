@@ -298,12 +298,32 @@ type WaitSet struct {
 	m    *sync.RWMutex
 }
 
-func (s *Set) WaitSet() *WaitSet {
-	return &WaitSet{
+func (s *Set) WaitSet(exclude ...int) *WaitSet {
+	ws := &WaitSet{
 		s,
 		make([][]int, len(s.lists)),
 		&sync.RWMutex{},
 	}
+	for _, e := range exclude {
+		idx, _ := s.Index(e)
+		ws.wait[idx] = []int{}
+	}
+	return ws
+}
+
+func (w *WaitSet) MaxOffsets() (int, int) {
+	var bof, eof int
+	for i, v := range w.wait {
+		if v == nil {
+			if bof >= 0 && (w.maxOffsets[i][0] < 0 || bof < w.maxOffsets[i][0]) {
+				bof = w.maxOffsets[i][0]
+			}
+			if eof >= 0 && (w.maxOffsets[i][1] < 0 || eof < w.maxOffsets[i][1]) {
+				eof = w.maxOffsets[i][1]
+			}
+		}
+	}
+	return bof, eof
 }
 
 // Set the priority list & return a boolean indicating whether the WaitSet is satisfied such that matching can stop (i.e. no priority list is nil, and all are empty)

@@ -39,6 +39,7 @@ type Identifier struct {
 	p          parseable.Parseable
 	name       string
 	details    string
+	noPriority bool
 	zipDefault bool
 	infos      map[string]formatInfo
 	gstart     int
@@ -56,6 +57,7 @@ func (i *Identifier) Save(ls *persist.LoadSaver) {
 	ls.SaveByte(core.MIMEInfo)
 	ls.SaveString(i.name)
 	ls.SaveString(i.details)
+	ls.SaveBool(i.noPriority)
 	ls.SaveBool(i.zipDefault)
 	ls.SaveSmallInt(len(i.infos))
 	for k, v := range i.infos {
@@ -79,6 +81,7 @@ func Load(ls *persist.LoadSaver) core.Identifier {
 	i := &Identifier{}
 	i.name = ls.LoadString()
 	i.details = ls.LoadString()
+	i.noPriority = ls.LoadBool()
 	i.zipDefault = ls.LoadBool()
 	i.infos = make(map[string]formatInfo)
 	le := ls.LoadSmallInt()
@@ -196,6 +199,10 @@ func (i *Identifier) Name() string {
 
 func (i *Identifier) Details() string {
 	return i.details
+}
+
+func (i *Identifier) Fields() []string {
+	return []string{"namespace", "id", "format", "mime", "basis", "warning"}
 }
 
 func (i *Identifier) String() string {
@@ -352,12 +359,15 @@ func place(idx int, ids []string) (int, int) {
 	return prev + 1, prev + post + 1
 }
 
-func (r *Recorder) Satisfied(mt core.MatcherType) bool {
+func (r *Recorder) Satisfied(mt core.MatcherType) (bool, int) {
 	sort.Sort(r.ids)
 	if len(r.ids) > 0 && (r.ids[0].xmlMatch || r.ids[0].magicScore > 0) {
-		return true
+		if mt == core.ByteMatcher {
+			return true, r.bstart
+		}
+		return true, 0
 	}
-	return false
+	return false, 0
 }
 
 func (r *Recorder) Report(res chan core.Identification) {
@@ -570,9 +580,18 @@ func tieBreak(m1, m2 bool, gs1, gs2 int) bool {
 		return true
 	case m2 && !m1:
 		return false
-	default:
-		return gs2 < gs1
 	}
+	return gs2 < gs1
+}
+
+func multisignal(m bool, ms, gs int) bool {
+	switch {
+	case m && ms > 0:
+		return true
+	case ms > 0 && gs > 0:
+		return true
+	}
+	return false
 }
 
 func (m ids) Less(i, j int) bool {
@@ -583,6 +602,13 @@ func (m ids) Less(i, j int) bool {
 		return false
 	case m[i].xmlMatch && m[j].xmlMatch:
 		return tieBreak(m[i].mimeMatch, m[j].mimeMatch, m[i].globScore, m[j].globScore)
+	}
+	msi, msj := multisignal(m[i].mimeMatch, m[i].magicScore, m[i].globScore), multisignal(m[j].mimeMatch, m[j].magicScore, m[j].globScore)
+	switch {
+	case msi && !msj:
+		return true
+	case !msi && msj:
+		return false
 	}
 	switch {
 	case m[i].magicScore > m[j].magicScore:

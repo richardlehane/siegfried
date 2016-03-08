@@ -48,10 +48,17 @@ func (b *Matcher) start(bof bool) {
 }
 
 // identify function - brings a new matcher into existence
-func (b *Matcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan core.Result) {
+func (b *Matcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan core.Result, exclude ...int) {
 	buf.Quit = quit
-	incoming := b.scorer(buf, quit, r)
-	rdr := siegreader.LimitReaderFrom(buf, b.maxBOF)
+	waitSet := b.priorities.WaitSet()
+	var maxBOF, maxEOF int
+	if len(exclude) > 0 {
+		maxBOF, maxEOF = waitSet.MaxOffsets()
+	} else {
+		maxBOF, maxEOF = b.maxBOF, b.maxEOF
+	}
+	incoming := b.scorer(buf, waitSet, quit, r)
+	rdr := siegreader.LimitReaderFrom(buf, maxBOF)
 	// First test BOF frameset
 	bfchan := b.bofFrames.index(buf, false, quit)
 	for bf := range bfchan {
@@ -76,7 +83,7 @@ func (b *Matcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan co
 	for br := range bchan {
 		if br.Index[0] == -1 {
 			incoming <- progressStrike(br.Offset, false)
-			if br.Offset > 131072 && (b.maxBOF < 0 || b.maxBOF > b.maxEOF*5) { // del buf.Stream
+			if br.Offset > 131072 && (maxBOF < 0 || maxBOF > maxEOF*5) { // del buf.Stream
 				break
 			}
 		} else {
@@ -98,12 +105,12 @@ func (b *Matcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan co
 	// Setup EOF tests
 	efchan := b.eofFrames.index(buf, true, quit)
 	b.start(false)
-	rrdr := siegreader.LimitReverseReaderFrom(buf, b.maxEOF)
+	rrdr := siegreader.LimitReverseReaderFrom(buf, maxEOF)
 	echan := b.eAho.Index(rrdr)
 
 	// if we have a maximum value on EOF do a sequential search
-	if b.maxEOF >= 0 {
-		if b.maxEOF != 0 {
+	if maxEOF >= 0 {
+		if maxEOF != 0 {
 			_, _ = buf.CanSeek(0, true) // force a full read to enable EOF scan to proceed for streams
 		}
 		for ef := range efchan {
@@ -124,7 +131,7 @@ func (b *Matcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan co
 			}
 		}
 		// send a final progress strike with the maximum EOF
-		incoming <- progressStrike(int64(b.maxEOF), true)
+		incoming <- progressStrike(int64(maxEOF), true)
 		// Finally, finish BOF scan
 		for br := range bchan {
 			if br.Index[0] == -1 {
@@ -144,7 +151,7 @@ func (b *Matcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan co
 		select {
 		case br, ok := <-bchan:
 			if !ok {
-				if b.maxBOF < 0 && b.maxEOF != 0 {
+				if maxBOF < 0 && maxEOF != 0 {
 					_, _ = buf.CanSeek(0, true) // if we've a limit BOF reader, force a full read to enable EOF scan to proceed for streams
 				}
 				bchan = nil

@@ -45,7 +45,7 @@ func TestIdentify(t *testing.T) {
 
 type testEMatcher struct{}
 
-func (t testEMatcher) Identify(n string, sb *siegreader.Buffer) (chan core.Result, error) {
+func (t testEMatcher) Identify(n string, sb *siegreader.Buffer, exclude ...int) (chan core.Result, error) {
 	ret := make(chan core.Result)
 	go func() {
 		ret <- testResult(0)
@@ -62,7 +62,7 @@ func (t testEMatcher) Add(ss core.SignatureSet, l priority.List) (int, error) { 
 
 type testBMatcher struct{}
 
-func (t testBMatcher) Identify(nm string, sb *siegreader.Buffer) (chan core.Result, error) {
+func (t testBMatcher) Identify(nm string, sb *siegreader.Buffer, exclude ...int) (chan core.Result, error) {
 	ret := make(chan core.Result)
 	go func() {
 		ret <- testResult(1)
@@ -88,6 +88,7 @@ type testIdentifier struct{}
 func (t testIdentifier) YAML() string                                       { return "" }
 func (t testIdentifier) Name() string                                       { return "a" }
 func (t testIdentifier) Details() string                                    { return "b" }
+func (t testIdentifier) Fields() []string                                   { return nil }
 func (t testIdentifier) Save(l *persist.LoadSaver)                          {}
 func (t testIdentifier) Recorder() core.Recorder                            { return testRecorder{} }
 func (t testIdentifier) Recognise(m core.MatcherType, i int) (bool, string) { return false, "" }
@@ -99,7 +100,7 @@ type testRecorder struct{}
 
 func (t testRecorder) Active(m core.MatcherType)                     {}
 func (t testRecorder) Record(m core.MatcherType, r core.Result) bool { return true }
-func (t testRecorder) Satisfied(m core.MatcherType) bool             { return false }
+func (t testRecorder) Satisfied(m core.MatcherType) (bool, int)      { return false, 0 }
 func (t testRecorder) Report(c chan core.Identification)             { c <- testIdentification{} }
 
 // identification test stub

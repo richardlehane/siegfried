@@ -45,6 +45,11 @@ var identifier = struct {
 
 // Name returns the name of the identifier.
 func Name() string {
+	if identifier.name == "" {
+		if mimeinfo.mi == "" {
+			identifier.name = pronom.name
+		}
+	}
 	return identifier.name
 }
 

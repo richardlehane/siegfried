@@ -152,7 +152,7 @@ func buildOptions() []config.Option {
 	if *mi != "" {
 		opts = append(opts, config.SetMIMEInfo(*mi))
 	}
-	if *name != config.Name() {
+	if *name != "" {
 		opts = append(opts, config.SetName(*name))
 	}
 	if *details != config.Details() {
