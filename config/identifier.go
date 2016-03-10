@@ -37,6 +37,7 @@ var identifier = struct {
 	exclude     []string // exclude a set of PRONOM reports from the signature
 	extensions  string   // directory where custom signature extensions are stored
 	extend      []string
+	inspect     bool // indicates that running in inspect mode
 }{
 	extensions: "custom",
 }
@@ -241,6 +242,11 @@ func IsArchive(id string) Archive {
 	return None
 }
 
+// Inspect reports whether roy is being run in inspect mode.
+func Inspect() bool {
+	return identifier.inspect
+}
+
 // SETTERS
 
 // SetName sets the name of the identifier.
@@ -352,6 +358,14 @@ func SetExclude(l []string) func() private {
 func SetExtend(l []string) func() private {
 	return func() private {
 		identifier.extend = l
+		return private{}
+	}
+}
+
+// SetInspect causes roy to run in inspect mode.
+func SetInspect() func() private {
+	return func() private {
+		identifier.inspect = true
 		return private{}
 	}
 }

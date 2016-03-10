@@ -25,7 +25,6 @@ import (
 	"strings"
 	"unicode/utf16"
 
-	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
 	"github.com/richardlehane/siegfried/pkg/core/parseable"
@@ -35,8 +34,8 @@ import (
 
 type mimeinfo []mappings.MIMEType
 
-func newMIMEInfo() (mimeinfo, error) {
-	buf, err := ioutil.ReadFile(config.MIMEInfo())
+func newMIMEInfo(path string) (parseable.Parseable, error) {
+	buf, err := ioutil.ReadFile(path)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +71,7 @@ func newMIMEInfo() (mimeinfo, error) {
 			}
 		}
 	}
-	return mi.MIMETypes, nil
+	return mimeinfo(mi.MIMETypes), nil
 }
 
 func (mi mimeinfo) IDs() []string {

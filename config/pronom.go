@@ -31,7 +31,6 @@ var pronom = struct {
 	reports          string   // directory where PRONOM reports are stored
 	noreports        bool     // build signature directly from DROID file rather than PRONOM reports
 	doubleup         bool     // include byte signatures for formats that also have container signatures
-	inspect          bool     // setting for inspecting PRONOM signatures
 	extendc          []string //container extensions
 	harvestURL       string
 	harvestTimeout   time.Duration
@@ -165,11 +164,6 @@ func Reports() string {
 	return pronom.reports
 }
 
-// Inspect reports whether roy is being run in inspect mode.
-func Inspect() bool {
-	return pronom.inspect
-}
-
 // DoubleUp reports whether the doubleup flag has been set. This will cause byte signatures to be built for formats where container signatures are also provided.
 func DoubleUp() bool {
 	return pronom.doubleup
@@ -240,14 +234,6 @@ func SetNoReports() func() private {
 func SetDoubleUp() func() private {
 	return func() private {
 		pronom.doubleup = true
-		return private{}
-	}
-}
-
-// SetInspect causes roy to run in inspect mode.
-func SetInspect() func() private {
-	return func() private {
-		pronom.inspect = true
 		return private{}
 	}
 }

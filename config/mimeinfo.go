@@ -35,7 +35,10 @@ var mimeinfo = struct {
 
 // MIMEInfo returns the location of the MIMEInfo signature file.
 func MIMEInfo() string {
-	return filepath.Join(siegfried.home, mimeinfo.mi)
+	if filepath.Dir(mimeinfo.mi) == "." {
+		return filepath.Join(siegfried.home, mimeinfo.mi)
+	}
+	return mimeinfo.mi
 }
 
 func ZipMIME() string {
@@ -59,6 +62,8 @@ func SetMIMEInfo(mi string) func() private {
 			if identifier.name == "" {
 				identifier.name = "freedesktop.org"
 			}
+		default:
+			mimeinfo.mi = mi
 		}
 		return private{}
 	}

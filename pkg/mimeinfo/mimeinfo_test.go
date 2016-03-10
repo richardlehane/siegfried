@@ -26,7 +26,7 @@ import (
 func TestNew(t *testing.T) {
 	config.SetHome(filepath.Join("..", "..", "cmd", "roy", "data"))
 	config.SetMIMEInfo("tika-mimetypes.xml")()
-	mi, err := newMIMEInfo()
+	mi, err := newMIMEInfo(config.MIMEInfo())
 	if err != nil {
 		t.Error(err)
 	}

@@ -71,6 +71,7 @@ var (
 	inspect        = flag.NewFlagSet("inspect", flag.ExitOnError)
 	inspectHome    = inspect.String("home", config.Home(), "override the default home directory")
 	inspectReports = inspect.String("reports", config.Reports(), "set path for PRONOM reports directory")
+	inspectMI      = inspect.String("mi", "", "set name/path for MIMEInfo signature file")
 	inspectCType   = inspect.Int("ct", 0, "provide container type to inspect container hits")
 	inspectCName   = inspect.String("cn", "", "provide container name to inspect container hits")
 )
@@ -119,11 +120,12 @@ func inspectSig(t core.MatcherType) error {
 }
 
 func inspectFmt(f string) error {
-	_, err := pronom.New(config.SetLimit(expandSets(f)), config.SetInspect(), config.SetNoContainer())
-	if err != nil {
+	if *inspectMI != "" {
+		_, err := mimeinfo.New(config.SetMIMEInfo(*inspectMI), config.SetLimit(expandSets(f)), config.SetInspect())
 		return err
 	}
-	return nil
+	_, err := pronom.New(config.SetLimit(expandSets(f)), config.SetInspect(), config.SetNoContainer())
+	return err
 }
 
 func blameSig(i int) error {
@@ -306,7 +308,7 @@ func main() {
 			case filepath.Ext(input) == ".sig":
 				config.SetSignature(input)
 				err = inspectSig(-1)
-			case strings.Contains(input, "fmt"):
+			case strings.Contains(input, "fmt"), *inspectMI != "":
 				err = inspectFmt(input)
 			default:
 				var i int

@@ -117,9 +117,45 @@ func New(opts ...config.Option) (core.Identifier, error) {
 	for _, v := range opts {
 		v()
 	}
-	mi, err := newMIMEInfo()
+	mi, err := newMIMEInfo(config.MIMEInfo())
 	if err != nil {
 		return nil, err
+	}
+	// if we are inspecting...
+	if config.Inspect() {
+		mi = parseable.Filter(config.Limit(mi.IDs()), mi)
+		is := infos(mi.Infos())
+		sigs, ids, err := mi.Signatures()
+		if err != nil {
+			return nil, fmt.Errorf("MIMEinfo: parsing signatures; got %s", err)
+		}
+		var id string
+		for i, sig := range sigs {
+			if ids[i] != id {
+				id = ids[i]
+				fmt.Printf("%s: \n", is[id].comment)
+			}
+			fmt.Println(sig)
+		}
+		return nil, nil
+	}
+	// apply limit or exclude
+	if config.HasLimit() || config.HasExclude() {
+		var ids []string
+		if config.HasLimit() {
+			ids = config.Limit(mi.IDs())
+		} else if config.HasExclude() {
+			ids = config.Exclude(mi.IDs())
+		}
+		mi = parseable.Filter(ids, mi)
+	}
+	// add extensions
+	for _, v := range config.Extend() {
+		e, err := newMIMEInfo(v)
+		if err != nil {
+			return nil, fmt.Errorf("MIMEinfo: error loading extension file %s; got %s", v, err)
+		}
+		mi = parseable.Join(mi, e)
 	}
 	id := &Identifier{
 		p:       mi,
