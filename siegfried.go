@@ -53,6 +53,13 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 	"github.com/richardlehane/siegfried/pkg/core/textmatcher"
 	"github.com/richardlehane/siegfried/pkg/core/xmlmatcher"
+	"github.com/richardlehane/siegfried/pkg/mimeinfo"
+	"github.com/richardlehane/siegfried/pkg/pronom"
+)
+
+var ( // for side effect - register their patterns
+	_ = pronom.Mask(0)
+	_ = mimeinfo.Int8(0)
 )
 
 // Siegfried structs are persisent objects that can be serialised to disk and
