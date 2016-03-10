@@ -299,6 +299,9 @@ func main() {
 		w = newJSON(os.Stdout)
 	case *droido:
 		w = newDroid(os.Stdout)
+		if len(s.Fields()) != 1 || len(s.Fields()[0]) != 7 {
+			log.Fatalln("[FATAL] DROID output is limited to signature files with a single PRONOM identifier")
+		}
 	default:
 		w = newYAML(os.Stdout)
 	}
