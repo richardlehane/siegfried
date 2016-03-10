@@ -80,6 +80,7 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 - feature: file name matcher now supports glob patterns as well as file extensions
 - default signature file now "default.sig" (was "pronom.sig")
 - changes to YAML and JSON output: "ns" (for namespace) replaces "id", and "id" replaces "puid"
+- changes to CSV output: multi-identifiers now displayed in extra columns, not extra rows 
 
 ### Version 1.4.5 (6/2/2016)
 - bugfix: [big file handling](https://github.com/richardlehane/siegfried/commit/b348c4628ac8edf8e93208e9100bd15616f72e41)
