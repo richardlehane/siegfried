@@ -7,7 +7,6 @@ import (
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/persist"
-	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
@@ -53,10 +52,7 @@ func (t testEMatcher) Identify(n string, sb *siegreader.Buffer, exclude ...int) 
 	}()
 	return ret, nil
 }
-
-func (t testEMatcher) String() string                                         { return "" }
-func (t testEMatcher) Save(l *persist.LoadSaver)                              {}
-func (t testEMatcher) Add(ss core.SignatureSet, l priority.List) (int, error) { return 0, nil }
+func (t testEMatcher) String() string { return "" }
 
 // byte matcher test stub
 
@@ -71,10 +67,7 @@ func (t testBMatcher) Identify(nm string, sb *siegreader.Buffer, exclude ...int)
 	}()
 	return ret, nil
 }
-
-func (t testBMatcher) String() string                                         { return "" }
-func (t testBMatcher) Save(l *persist.LoadSaver)                              {}
-func (t testBMatcher) Add(ss core.SignatureSet, l priority.List) (int, error) { return 0, nil }
+func (t testBMatcher) String() string { return "" }
 
 type testResult int
 
@@ -85,6 +78,9 @@ func (tr testResult) Basis() string { return "" }
 
 type testIdentifier struct{}
 
+func (t testIdentifier) Add(m core.Matcher, mt core.MatcherType) (core.Matcher, error) {
+	return nil, nil
+}
 func (t testIdentifier) YAML() string                                       { return "" }
 func (t testIdentifier) Name() string                                       { return "a" }
 func (t testIdentifier) Details() string                                    { return "b" }

@@ -36,7 +36,10 @@ const (
 
 type Matcher []*ContainerMatcher
 
-func Load(ls *persist.LoadSaver) Matcher {
+func Load(ls *persist.LoadSaver) core.Matcher {
+	if !ls.LoadBool() {
+		return nil
+	}
 	ret := make(Matcher, ls.LoadTinyUInt())
 	for i := range ret {
 		ret[i] = loadCM(ls)
@@ -46,18 +49,17 @@ func Load(ls *persist.LoadSaver) Matcher {
 	return ret
 }
 
-func (m Matcher) Save(ls *persist.LoadSaver) {
+func Save(c core.Matcher, ls *persist.LoadSaver) {
+	if c == nil {
+		ls.SaveBool(false)
+		return
+	}
+	m := c.(Matcher)
+	ls.SaveBool(true)
 	ls.SaveTinyUInt(len(m))
 	for _, v := range m {
 		v.save(ls)
 	}
-}
-
-func New() Matcher {
-	m := make(Matcher, 2)
-	m[0] = newZip()
-	m[1] = newMscfb()
-	return m
 }
 
 type SignatureSet struct {
@@ -66,16 +68,22 @@ type SignatureSet struct {
 	SigParts  [][]frames.Signature
 }
 
-func (m Matcher) Add(ss core.SignatureSet, l priority.List) (int, error) {
+func Add(c core.Matcher, ss core.SignatureSet, l priority.List) (core.Matcher, int, error) {
+	var m Matcher
+	if c == nil {
+		m = Matcher{newZip(), newMscfb()}
+	} else {
+		m = c.(Matcher)
+	}
 	sigs, ok := ss.(SignatureSet)
 	if !ok {
-		return 0, fmt.Errorf("Container matcher error: cannot convert signature set to CM signature set")
+		return nil, 0, fmt.Errorf("Container matcher error: cannot convert signature set to CM signature set")
 	}
 	err := m.addSigs(int(sigs.Typ), sigs.NameParts, sigs.SigParts, l)
 	if err != nil {
-		return 0, err
+		return nil, 0, err
 	}
-	return m.total(-1), nil
+	return m, m.total(-1), nil
 }
 
 // calculate total number of persists present in the matcher. Provide -1 to get the total sum, or supply an index of an individual matcher to exclude that matcher's total
@@ -242,7 +250,7 @@ type cTest struct {
 	satisfied   []int              // satisfied persists are immediately matched: i.e. a name without a required bitstream
 	unsatisfied []int              // unsatisfied persists depend on bitstreams as well as names matching
 	buffer      []frames.Signature // temporary - used while creating CTests
-	bm          *bytematcher.Matcher
+	bm          core.Matcher       // bytematcher
 }
 
 //map[string]*CTest
@@ -266,7 +274,7 @@ func saveCTests(ls *persist.LoadSaver, ct map[string]*cTest) {
 		ls.SaveString(k)
 		ls.SaveInts(v.satisfied)
 		ls.SaveInts(v.unsatisfied)
-		v.bm.Save(ls)
+		bytematcher.Save(v.bm, ls)
 	}
 }
 
@@ -274,11 +282,6 @@ func (ct *cTest) add(s frames.Signature, t int) {
 	if s == nil {
 		ct.satisfied = append(ct.satisfied, t)
 		return
-	}
-	// if we haven't created a BM for this node yet, do it now
-	if ct.bm == nil {
-		ct.bm = bytematcher.New()
-		ct.bm.SetLowMem()
 	}
 	ct.unsatisfied = append(ct.unsatisfied, t)
 	ct.buffer = append(ct.buffer, s)
@@ -291,6 +294,7 @@ func (ct *cTest) commit(p priority.List, prev int) error {
 	}
 	// don't set priorities if any of the persists are identical
 	var dupes bool
+	var err error
 	for i, v := range ct.buffer {
 		if i == len(ct.buffer)-1 {
 			break
@@ -303,11 +307,13 @@ func (ct *cTest) commit(p priority.List, prev int) error {
 		}
 	}
 	if dupes {
-		_, err := ct.bm.Add(bytematcher.SignatureSet(ct.buffer), nil)
+		ct.bm, _, err = bytematcher.Add(ct.bm, bytematcher.SignatureSet(ct.buffer), nil)
+		ct.bm.(*bytematcher.Matcher).SetLowMem()
 		ct.buffer = nil
 		return err
 	}
-	_, err := ct.bm.Add(bytematcher.SignatureSet(ct.buffer), p.Subset(ct.unsatisfied[len(ct.unsatisfied)-len(ct.buffer):], prev))
+	ct.bm, _, err = bytematcher.Add(ct.bm, bytematcher.SignatureSet(ct.buffer), nil)
+	ct.bm.(*bytematcher.Matcher).SetLowMem()
 	ct.buffer = nil
 	return err
 }
@@ -316,7 +322,7 @@ func (m Matcher) InspectTestTree(ct int, nm string, idx int) []int {
 	for _, c := range m {
 		if c.conType == containerType(ct) {
 			if ctst, ok := c.nameCTest[nm]; ok {
-				bmt := ctst.bm.InspectTestTree(idx)
+				bmt := ctst.bm.(*bytematcher.Matcher).InspectTestTree(idx)
 				ret := make([]int, len(bmt))
 				for i, v := range bmt {
 					s, _ := c.priorities.Index(ctst.unsatisfied[v])

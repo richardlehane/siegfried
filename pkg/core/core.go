@@ -21,12 +21,12 @@ import (
 
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core/persist"
-	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
 // Identifier describes the implementation of a signature format. E.g. there is a PRONOM identifier that implements the TNA's PRONOM format.
 type Identifier interface {
+	Add(Matcher, MatcherType) (Matcher, error)
 	Recorder() Recorder // return a recorder for matching
 	Name() string
 	Details() string
@@ -78,18 +78,16 @@ type Identification interface {
 	String() string          // short text that is displayed to indicate the format match
 	Known() bool             // does this identifier produce a match
 	Warn() string            // identification warning message
-	YAML() string            // long text that should be displayed to indicate the format match // TODO: 1.5 get rid of particular encodings.
-	JSON() string            // JSON match response // TODO: 1.5 get rid of particular encodings.
-	CSV() []string           // CSV match response // TODO: 1.5 get rid of particular encodings.
+	YAML() string            // long text that should be displayed to indicate the format match
+	JSON() string            // JSON match response
+	CSV() []string           // CSV match response. Can be any length slice, but must be same length as Fields() returned by Identifier
 	Archive() config.Archive // does this format match any of the archive formats (zip, gzip, tar, warc, arc)
 }
 
 // Matcher does the matching (against the name/mime string or the byte stream) and sends results
 type Matcher interface {
 	Identify(string, *siegreader.Buffer, ...int) (chan Result, error) // Given a name/MIME string and bytes, identify the file. Exclude excludes identifiers from an identification run.
-	Add(SignatureSet, priority.List) (int, error)                     // add a signature set, return total number of signatures in a matcher
 	String() string
-	Save(*persist.LoadSaver)
 }
 
 // MatcherType is used by recorders to tell which type of matcher has sent a result

@@ -48,23 +48,11 @@ type Matcher struct {
 	lowmem bool
 }
 
-// New returns a new Matcher.
-func New() *Matcher {
-	return &Matcher{
-		bofFrames:  &frameSet{},
-		eofFrames:  &frameSet{},
-		bofSeq:     &seqSet{},
-		eofSeq:     &seqSet{},
-		priorities: &priority.Set{},
-		mu:         &sync.Mutex{},
-	}
-}
-
 // SignatureSet for a bytematcher is a slice of frames.Signature.
 type SignatureSet []frames.Signature
 
 // Load loads a Matcher.
-func Load(ls *persist.LoadSaver) *Matcher {
+func Load(ls *persist.LoadSaver) core.Matcher {
 	if !ls.LoadBool() {
 		return nil
 	}
@@ -85,11 +73,12 @@ func Load(ls *persist.LoadSaver) *Matcher {
 }
 
 // Save persists a Matcher.
-func (b *Matcher) Save(ls *persist.LoadSaver) {
-	if b == nil {
+func Save(c core.Matcher, ls *persist.LoadSaver) {
+	if c == nil {
 		ls.SaveBool(false)
 		return
 	}
+	b := c.(*Matcher)
 	ls.SaveBool(true)
 	saveKeyFrames(ls, b.keyFrames)
 	saveTests(ls, b.tests)
@@ -119,11 +108,24 @@ func (se sigErrors) Error() string {
 // The priority list should be of equal length to the signatures, or nil (if no priorities are to be set).
 //
 // Example:
-//   n, err := bm.Add([]frames.Signature{frames.Signature{frames.NewFrame(frames.BOF, patterns.Sequence{'p','d','f'}, 0, 0)}}, nil)
-func (b *Matcher) Add(ss core.SignatureSet, priorities priority.List) (int, error) {
+//   m, n, err := Add(bm, []frames.Signature{frames.Signature{frames.NewFrame(frames.BOF, patterns.Sequence{'p','d','f'}, 0, 0)}}, nil)
+func Add(c core.Matcher, ss core.SignatureSet, priorities priority.List) (core.Matcher, int, error) {
+	var b *Matcher
+	if c == nil {
+		b = &Matcher{
+			bofFrames:  &frameSet{},
+			eofFrames:  &frameSet{},
+			bofSeq:     &seqSet{},
+			eofSeq:     &seqSet{},
+			priorities: &priority.Set{},
+			mu:         &sync.Mutex{},
+		}
+	} else {
+		b = c.(*Matcher)
+	}
 	sigs, ok := ss.(SignatureSet)
 	if !ok {
-		return -1, fmt.Errorf("Byte matcher: can't convert signature set to BM signature set")
+		return nil, -1, fmt.Errorf("Byte matcher: can't convert signature set to BM signature set")
 	}
 	var se sigErrors
 	// process each of the sigs, adding them to b.Sigs and the various seq/frame/testTree sets
@@ -138,7 +140,7 @@ func (b *Matcher) Add(ss core.SignatureSet, priorities priority.List) (int, erro
 		}
 	}
 	if len(se) > 0 {
-		return -1, se
+		return nil, -1, se
 	}
 	// set the maximum distances for this test tree so can properly size slices for matching
 	for _, t := range b.tests {
@@ -147,7 +149,7 @@ func (b *Matcher) Add(ss core.SignatureSet, priorities priority.List) (int, erro
 	}
 	// add the priorities to the priority set
 	b.priorities.Add(priorities, len(sigs), bof, eof)
-	return len(b.keyFrames), nil
+	return b, len(b.keyFrames), nil
 }
 
 // Identify matches a Matcher's signatures against the input siegreader.Buffer.

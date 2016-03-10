@@ -23,15 +23,13 @@ var testContainerMatcher *ContainerMatcher = &ContainerMatcher{
 	entryBufs:    siegreader.New(),
 }
 
-var testMatcher Matcher = []*ContainerMatcher{testContainerMatcher}
-
 var count int
 
 func TestMatcher(t *testing.T) {
 	ctypes = []ctype{ctype{testTrigger, newTestReader}}
 	// test adding
 	count++
-	_, err := testMatcher.Add(
+	testMatcher, _, err := Add(Matcher{testContainerMatcher},
 		SignatureSet{
 			0,
 			[][]string{[]string{"one", "two"}, []string{"one"}},
@@ -45,7 +43,7 @@ func TestMatcher(t *testing.T) {
 	// test IO
 	str := testMatcher.String()
 	saver := persist.NewLoadSaver(nil)
-	testMatcher.Save(saver)
+	Save(testMatcher, saver)
 	if len(saver.Bytes()) < 100 {
 		t.Errorf("Save container: too small, only got %v", len(saver.Bytes()))
 	}

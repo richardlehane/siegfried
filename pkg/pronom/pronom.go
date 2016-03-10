@@ -211,31 +211,31 @@ func (p *pronom) setContainers() error {
 }
 
 // add adds extension, bytematcher or containermatcher signatures to the identifier
-func (p *pronom) add(m core.Matcher, t core.MatcherType) error {
+func (p *pronom) add(m core.Matcher, t core.MatcherType) (core.Matcher, error) {
+	var l int
+	var err error
 	switch t {
 	default:
-		return fmt.Errorf("Pronom: unknown matcher type %d", t)
+		return nil, fmt.Errorf("Pronom: unknown matcher type %d", t)
 	case core.NameMatcher:
 		if !config.NoName() {
 			var exts []string
 			exts, p.ePuids = p.j.Globs()
-			l, err := m.Add(namematcher.SignatureSet(exts), nil)
+			m, l, err = namematcher.Add(m, namematcher.SignatureSet(exts), nil)
 			if err != nil {
-				return err
+				return nil, err
 			}
 			p.eStart = l - len(p.ePuids)
-			return nil
 		}
 	case core.MIMEMatcher:
 		if !config.NoMIME() {
 			var mimes []string
 			mimes, p.mPuids = p.j.MIMEs()
-			l, err := m.Add(mimematcher.SignatureSet(mimes), nil)
+			m, l, err = mimematcher.Add(m, mimematcher.SignatureSet(mimes), nil)
 			if err != nil {
-				return err
+				return nil, err
 			}
 			p.mStart = l - len(p.mPuids)
-			return nil
 		}
 	case core.ContainerMatcher:
 		return p.contMatcher(m)
@@ -244,24 +244,25 @@ func (p *pronom) add(m core.Matcher, t core.MatcherType) error {
 		var err error
 		sigs, p.bPuids, err = p.j.Signatures()
 		if err != nil {
-			return err
+			return nil, err
 		}
 		var plist priority.List
 		if !config.NoPriority() {
 			plist = p.pm.List(p.bPuids)
 		}
-		l, err := m.Add(bytematcher.SignatureSet(sigs), plist)
+		m, l, err = bytematcher.Add(m, bytematcher.SignatureSet(sigs), plist)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		p.bStart = l - len(p.bPuids)
 	case core.TextMatcher:
 		if !config.NoText() && p.hasPuid(config.TextPuid()) {
-			l, _ := m.Add(textmatcher.SignatureSet{}, nil)
+			m, l, _ = textmatcher.Add(m, textmatcher.SignatureSet{}, nil)
 			p.tStart = l
 		}
+	case core.XMLMatcher:
 	}
-	return nil
+	return m, nil
 }
 
 // for limit/exclude filtering of containers
@@ -274,10 +275,10 @@ func (p pronom) hasPuid(puid string) bool {
 	return false
 }
 
-func (p pronom) contMatcher(m core.Matcher) error {
+func (p pronom) contMatcher(m core.Matcher) (core.Matcher, error) {
 	// when no container is set
 	if p.c == nil {
-		return nil
+		return m, nil
 	}
 	var zpuids, mpuids []string
 	var zsigs, msigs [][]frames.Signature
@@ -300,7 +301,7 @@ func (p pronom) contMatcher(m core.Matcher) error {
 			names = append(names, f.Path)
 			sig, err := processDROID(puid, f.Signature.ByteSequences)
 			if err != nil {
-				return err
+				return nil, err
 			}
 			sigs = append(sigs, sig)
 		}
@@ -314,7 +315,7 @@ func (p pronom) contMatcher(m core.Matcher) error {
 			mnames = append(mnames, names)
 			msigs = append(msigs, sigs)
 		default:
-			return fmt.Errorf("Pronom: container parsing - unknown type %s", typ)
+			return nil, fmt.Errorf("Pronom: container parsing - unknown type %s", typ)
 		}
 	}
 	// apply no priority config
@@ -322,17 +323,19 @@ func (p pronom) contMatcher(m core.Matcher) error {
 	if !config.NoPriority() {
 		zplist, mplist = p.pm.List(zpuids), p.pm.List(mpuids)
 	}
-	_, err := m.Add(containermatcher.SignatureSet{containermatcher.Zip, znames, zsigs}, zplist)
+	var l int
+	var err error
+	m, _, err = containermatcher.Add(m, containermatcher.SignatureSet{containermatcher.Zip, znames, zsigs}, zplist)
 	if err != nil {
-		return err
+		return nil, err
 	}
-	l, err := m.Add(containermatcher.SignatureSet{containermatcher.Mscfb, mnames, msigs}, mplist)
+	m, l, err = containermatcher.Add(m, containermatcher.SignatureSet{containermatcher.Mscfb, mnames, msigs}, mplist)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	p.cPuids = append(zpuids, mpuids...)
 	p.cStart = l - len(p.cPuids)
-	return nil
+	return m, nil
 }
 
 // UTILS

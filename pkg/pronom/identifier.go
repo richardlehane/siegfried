@@ -97,7 +97,7 @@ func Load(ls *persist.LoadSaver) core.Identifier {
 	return i
 }
 
-func New(opts ...config.Option) (*Identifier, error) {
+func New(opts ...config.Option) (core.Identifier, error) {
 	for _, v := range opts {
 		v()
 	}
@@ -108,7 +108,7 @@ func New(opts ...config.Option) (*Identifier, error) {
 	return pronom.identifier(), nil
 }
 
-func (i *Identifier) Add(m core.Matcher, t core.MatcherType) error {
+func (i *Identifier) Add(m core.Matcher, t core.MatcherType) (core.Matcher, error) {
 	return i.p.add(m, t)
 }
 

@@ -19,6 +19,7 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
@@ -52,10 +53,11 @@ var suite = []unit{
 
 var testMatcher *Matcher
 
-func new(i int) (*Matcher, error) {
-	m := New()
+func new(i int) (core.Matcher, error) {
+	var m core.Matcher
 	for j := 1; j < i+1; j++ {
-		idx, _ := m.Add(SignatureSet{}, nil)
+		var idx int
+		m, idx, _ = Add(m, SignatureSet{}, nil)
 		if idx != j {
 			return nil, fmt.Errorf("Error adding signature set, expecting index %d got %d", j, idx)
 		}
@@ -68,8 +70,8 @@ func TestNewMatcher(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if *m != 5 {
-		t.Fatalf("Expecting a matcher equalling %d, got %d", 5, *m)
+	if tm := m.(*Matcher); *tm != 5 {
+		t.Fatalf("Expecting a matcher equalling %d, got %d", 5, tm)
 	}
 }
 

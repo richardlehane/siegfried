@@ -21,7 +21,8 @@ var TestProcessObj = &Matcher{
 var Sample = []byte("testTESTMATCHAAAAAAAAAAAYNESStesty")
 
 func TestProcess(t *testing.T) {
-	b := New()
+	m, _, _ := Add(nil, SignatureSet{}, nil)
+	b := m.(*Matcher)
 	config.SetDistance(8192)()
 	config.SetRange(2059)()
 	config.SetChoices(9)()
@@ -32,9 +33,9 @@ func TestProcess(t *testing.T) {
 		}
 	}
 	saver := persist.NewLoadSaver(nil)
-	b.Save(saver)
+	Save(b, saver)
 	loader := persist.NewLoadSaver(saver.Bytes())
-	b = Load(loader)
+	b = Load(loader).(*Matcher)
 	if len(b.keyFrames) != 6 {
 		t.Errorf("Expecting 6 keyframe slices, got %d", len(b.keyFrames))
 	}
@@ -71,15 +72,16 @@ func TestProcess(t *testing.T) {
 }
 
 func TestProcessFmt418(t *testing.T) {
-	b := New()
+	m, _, _ := Add(nil, SignatureSet{}, nil)
+	b := m.(*Matcher)
 	config.SetDistance(2000)()
 	config.SetRange(500)()
 	config.SetChoices(10)()
 	b.addSignature(tests.TestFmts[418])
 	saver := persist.NewLoadSaver(nil)
-	b.Save(saver)
+	Save(b, saver)
 	loader := persist.NewLoadSaver(saver.Bytes())
-	b = Load(loader)
+	b = Load(loader).(*Matcher)
 	if len(b.keyFrames[0]) != 2 {
 		for _, v := range b.keyFrames[0] {
 			t.Errorf("%s\n", v)
@@ -90,15 +92,16 @@ func TestProcessFmt418(t *testing.T) {
 var test418 = "%!PS-Adobe-2.0UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU%%DocumentNeededResources:UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU%%+ procset Adobe_Illustrator_AI3"
 
 func TestProcessFmt134(t *testing.T) {
-	b := New()
+	m, _, _ := Add(nil, SignatureSet{}, nil)
+	b := m.(*Matcher)
 	config.SetDistance(1000)
 	config.SetRange(500)
 	config.SetChoices(3)
 	b.addSignature(tests.TestFmts[134])
 	saver := persist.NewLoadSaver(nil)
-	b.Save(saver)
+	Save(b, saver)
 	loader := persist.NewLoadSaver(saver.Bytes())
-	b = Load(loader)
+	b = Load(loader).(*Matcher)
 	if len(b.keyFrames[0]) != 8 {
 		for _, v := range b.keyFrames[0] {
 			t.Errorf("%s\n", v)
@@ -117,12 +120,13 @@ func TestProcessFmt134(t *testing.T) {
 }
 
 func TestProcessFmt363(t *testing.T) {
-	b := New()
+	m, _, _ := Add(nil, SignatureSet{}, nil)
+	b := m.(*Matcher)
 	b.addSignature(tests.TestFmts[363])
 	saver := persist.NewLoadSaver(nil)
-	b.Save(saver)
+	Save(b, saver)
 	loader := persist.NewLoadSaver(saver.Bytes())
-	b = Load(loader)
+	b = Load(loader).(*Matcher)
 	if len(b.keyFrames[0]) != 2 {
 		for _, v := range b.keyFrames[0] {
 			t.Errorf("%s\n", v)

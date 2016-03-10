@@ -3,15 +3,16 @@ package mimematcher
 import (
 	"testing"
 
+	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/persist"
 )
 
-var fmts = SignatureSet{[]string{"application/json"}, []string{"application/json;v1"}, []string{"text/plain"}, []string{"x-world/x-3dmf"}, []string{"application/x-cocoa"}}
+var fmts = SignatureSet{"application/json", "application/json;v1", "text/plain", "x-world/x-3dmf", "application/x-cocoa"}
 
-var sm = New()
+var sm core.Matcher
 
 func init() {
-	sm.Add(fmts, nil)
+	sm, _, _ = Add(nil, fmts, nil)
 }
 
 func TestJsonMatch(t *testing.T) {
@@ -39,11 +40,9 @@ func TestNoMatch(t *testing.T) {
 }
 
 func TestIO(t *testing.T) {
-	sm := New()
-	sm.Add(fmts, nil)
 	str := sm.String()
 	saver := persist.NewLoadSaver(nil)
-	sm.Save(saver)
+	Save(sm, saver)
 	if len(saver.Bytes()) < 10 {
 		t.Errorf("Save mime matcher: too small, only got %v", saver.Bytes())
 	}

@@ -25,25 +25,31 @@ import (
 
 type Matcher int
 
-func Load(ls *persist.LoadSaver) *Matcher {
+func Load(ls *persist.LoadSaver) core.Matcher {
 	m := Matcher(ls.LoadSmallInt())
 	return &m
 }
 
-func (m *Matcher) Save(ls *persist.LoadSaver) {
-	ls.SaveSmallInt(int(*m))
-}
-
-func New() *Matcher {
-	m := Matcher(0)
-	return &m
+func Save(c core.Matcher, ls *persist.LoadSaver) {
+	if c == nil {
+		ls.SaveSmallInt(0)
+		return
+	}
+	ls.SaveSmallInt(int(*c.(*Matcher)))
 }
 
 type SignatureSet struct{}
 
-func (m *Matcher) Add(ss core.SignatureSet, p priority.List) (int, error) {
+func Add(c core.Matcher, ss core.SignatureSet, p priority.List) (core.Matcher, int, error) {
+	var m *Matcher
+	if c == nil {
+		z := Matcher(0)
+		m = &z
+	} else {
+		m = c.(*Matcher)
+	}
 	*m++
-	return int(*m), nil
+	return m, int(*m), nil
 }
 
 type result struct {

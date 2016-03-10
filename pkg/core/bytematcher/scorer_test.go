@@ -10,8 +10,8 @@ import (
 )
 
 func setup() (chan<- strike, <-chan core.Result) {
-	bm := New()
-	bm.Add(SignatureSet(tests.TestSignatures), nil)
+	m, _, _ := Add(nil, SignatureSet(tests.TestSignatures), nil)
+	bm := m.(*Matcher)
 	bufs := siegreader.New()
 	buf, _ := bufs.Get(bytes.NewBuffer(TestSample1))
 	buf.SizeNow()

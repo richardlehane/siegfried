@@ -34,7 +34,7 @@ type Matcher struct {
 	globIdx    [][]int
 }
 
-func Load(ls *persist.LoadSaver) *Matcher {
+func Load(ls *persist.LoadSaver) core.Matcher {
 	if !ls.LoadBool() {
 		return nil
 	}
@@ -63,11 +63,12 @@ func Load(ls *persist.LoadSaver) *Matcher {
 	}
 }
 
-func (m *Matcher) Save(ls *persist.LoadSaver) {
-	if m == nil {
+func Save(c core.Matcher, ls *persist.LoadSaver) {
+	if c == nil {
 		ls.SaveBool(false)
 		return
 	}
+	m := c.(*Matcher)
 	ls.SaveBool(true)
 	ls.SaveSmallInt(len(m.extensions))
 	for k, v := range m.extensions {
@@ -84,16 +85,18 @@ func (m *Matcher) Save(ls *persist.LoadSaver) {
 	}
 }
 
-func New() *Matcher {
-	return &Matcher{extensions: make(map[string][]int), globs: []string{}, globIdx: [][]int{}}
-}
-
 type SignatureSet []string
 
-func (m *Matcher) Add(ss core.SignatureSet, p priority.List) (int, error) {
+func Add(c core.Matcher, ss core.SignatureSet, p priority.List) (core.Matcher, int, error) {
+	var m *Matcher
+	if c == nil {
+		m = &Matcher{extensions: make(map[string][]int), globs: []string{}, globIdx: [][]int{}}
+	} else {
+		m = c.(*Matcher)
+	}
 	sigs, ok := ss.(SignatureSet)
 	if !ok {
-		return -1, fmt.Errorf("Namematcher: can't cast persist set")
+		return nil, -1, fmt.Errorf("Namematcher: can't cast persist set")
 	}
 	var length int
 	// unless it is a new matcher, calculate current length by iterating through all the result values
@@ -117,7 +120,7 @@ func (m *Matcher) Add(ss core.SignatureSet, p priority.List) (int, error) {
 	for i, v := range sigs {
 		m.add(v, i+length)
 	}
-	return length + len(sigs), nil
+	return m, length + len(sigs), nil
 }
 
 func (m *Matcher) add(s string, fmt int) {

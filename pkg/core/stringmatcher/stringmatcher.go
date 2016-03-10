@@ -28,7 +28,7 @@ import (
 
 type Matcher map[string][]result
 
-func Load(ls *persist.LoadSaver) Matcher {
+func Load(ls *persist.LoadSaver) core.Matcher {
 	le := ls.LoadSmallInt()
 	if le == 0 {
 		return nil
@@ -45,7 +45,12 @@ func Load(ls *persist.LoadSaver) Matcher {
 	return ret
 }
 
-func (m Matcher) Save(ls *persist.LoadSaver) {
+func Save(c core.Matcher, ls *persist.LoadSaver) {
+	if c == nil {
+		ls.SaveSmallInt(0)
+		return
+	}
+	m := c.(Matcher)
 	ls.SaveSmallInt(len(m))
 	for k, v := range m {
 		ls.SaveString(k)
@@ -56,16 +61,18 @@ func (m Matcher) Save(ls *persist.LoadSaver) {
 	}
 }
 
-func New() Matcher {
-	return make(Matcher)
-}
-
 type SignatureSet []string
 
-func (m Matcher) Add(ss core.SignatureSet, p priority.List) (int, error) {
+func Add(c core.Matcher, ss core.SignatureSet, p priority.List) (core.Matcher, int, error) {
+	var m Matcher
+	if c == nil {
+		m = make(Matcher)
+	} else {
+		m = c.(Matcher)
+	}
 	sigs, ok := ss.(SignatureSet)
 	if !ok {
-		return -1, fmt.Errorf("Stringmatcher: can't cast persist set")
+		return nil, -1, fmt.Errorf("Stringmatcher: can't cast persist set")
 	}
 	var length int
 	// unless it is a new matcher, calculate current length by iterating through all the result values
@@ -82,7 +89,7 @@ func (m Matcher) Add(ss core.SignatureSet, p priority.List) (int, error) {
 	for i, v := range sigs {
 		m.add(v, i+length)
 	}
-	return length + len(sigs), nil
+	return m, length + len(sigs), nil
 }
 
 func (m Matcher) add(s string, fmt int) {

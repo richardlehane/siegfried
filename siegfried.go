@@ -53,8 +53,6 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 	"github.com/richardlehane/siegfried/pkg/core/textmatcher"
 	"github.com/richardlehane/siegfried/pkg/core/xmlmatcher"
-	"github.com/richardlehane/siegfried/pkg/mimeinfo"
-	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
 // Siegfried structs are persisent objects that can be serialised to disk and
@@ -88,64 +86,39 @@ type Siegfried struct {
 //  }
 //  err = s.Save("pronom.sig") // save the Siegfried
 func New() *Siegfried {
-	s := &Siegfried{}
-	s.C = time.Now()
-	s.nm = namematcher.New()
-	s.mm = mimematcher.New()
-	s.cm = containermatcher.New()
-	s.xm = xmlmatcher.New()
-	s.bm = bytematcher.New()
-	s.tm = textmatcher.New()
-	s.buffers = siegreader.New()
-	return s
+	return &Siegfried{
+		C:       time.Now(),
+		buffers: siegreader.New(),
+	}
 }
 
 // Add adds an identifier to a Siegfried struct.
-// The identifer is type switched to test if it is supported. At present, only PRONOM identifiers are supported
 func (s *Siegfried) Add(i core.Identifier) error {
 	for _, v := range s.ids {
 		if v.Name() == i.Name() {
 			return fmt.Errorf("siegfried: identifiers must have unique names, you already have an identifier named %s. Use the -name flag to assign a new name e.g. `roy add -name richard`", i.Name())
 		}
 	}
-	switch i := i.(type) {
-	default:
-		return fmt.Errorf("siegfried: unknown identifier type %T", i)
-	case *pronom.Identifier:
-		if err := i.Add(s.nm, core.NameMatcher); err != nil {
-			return err
-		}
-		if err := i.Add(s.mm, core.MIMEMatcher); err != nil {
-			return err
-		}
-		if err := i.Add(s.cm, core.ContainerMatcher); err != nil {
-			return err
-		}
-		if err := i.Add(s.bm, core.ByteMatcher); err != nil {
-			return err
-		}
-		if err := i.Add(s.tm, core.TextMatcher); err != nil {
-			return err
-		}
-		s.ids = append(s.ids, i)
-	case *mimeinfo.Identifier:
-		if err := i.Add(s.nm, core.NameMatcher); err != nil {
-			return err
-		}
-		if err := i.Add(s.mm, core.MIMEMatcher); err != nil {
-			return err
-		}
-		if err := i.Add(s.xm, core.XMLMatcher); err != nil {
-			return err
-		}
-		if err := i.Add(s.bm, core.ByteMatcher); err != nil {
-			return err
-		}
-		if err := i.Add(s.tm, core.TextMatcher); err != nil {
-			return err
-		}
-		s.ids = append(s.ids, i)
+	var err error
+	if s.nm, err = i.Add(s.nm, core.NameMatcher); err != nil {
+		return err
 	}
+	if s.mm, err = i.Add(s.mm, core.MIMEMatcher); err != nil {
+		return err
+	}
+	if s.cm, err = i.Add(s.cm, core.ContainerMatcher); err != nil {
+		return err
+	}
+	if s.xm, err = i.Add(s.xm, core.XMLMatcher); err != nil {
+		return err
+	}
+	if s.bm, err = i.Add(s.bm, core.ByteMatcher); err != nil {
+		return err
+	}
+	if s.tm, err = i.Add(s.tm, core.TextMatcher); err != nil {
+		return err
+	}
+	s.ids = append(s.ids, i)
 	return nil
 }
 
@@ -153,12 +126,12 @@ func (s *Siegfried) Add(i core.Identifier) error {
 func (s *Siegfried) Save(path string) error {
 	ls := persist.NewLoadSaver(nil)
 	ls.SaveTime(s.C)
-	s.nm.Save(ls)
-	s.mm.Save(ls)
-	s.cm.Save(ls)
-	s.xm.Save(ls)
-	s.bm.Save(ls)
-	s.tm.Save(ls)
+	namematcher.Save(s.nm, ls)
+	mimematcher.Save(s.mm, ls)
+	containermatcher.Save(s.cm, ls)
+	xmlmatcher.Save(s.xm, ls)
+	bytematcher.Save(s.bm, ls)
+	textmatcher.Save(s.tm, ls)
 	ls.SaveTinyUInt(len(s.ids))
 	for _, i := range s.ids {
 		i.Save(ls)
@@ -309,12 +282,11 @@ func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identifi
 		}
 		if err == nil {
 			recs[i].Active(core.XMLMatcher)
-			//recs[i].Active(core.ByteMatcher)
 			recs[i].Active(core.TextMatcher)
 		}
 	}
 	// Name Matcher
-	if len(name) > 0 {
+	if len(name) > 0 && s.nm != nil {
 		nms, _ := s.nm.Identify(name, nil) // we don't care about an error here
 		for v := range nms {
 			for _, rec := range recs {
@@ -325,7 +297,7 @@ func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identifi
 		}
 	}
 	// MIME Matcher
-	if len(mime) > 0 {
+	if len(mime) > 0 && s.mm != nil {
 		mms, _ := s.mm.Identify(mime, nil) // we don't care about an error here
 		for v := range mms {
 			for _, rec := range recs {
@@ -353,26 +325,29 @@ func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identifi
 		}
 	}
 	satisfied := true
-	for _, rec := range recs {
-		if ok, _ := rec.Satisfied(core.XMLMatcher); !ok {
-			satisfied = false
-		}
-	}
 	// XML Matcher
-	if !satisfied && s.xm != nil {
-		if config.Debug() {
-			fmt.Fprintln(config.Out(), ">>START XML MATCHER")
-		}
-		xms, xerr := s.xm.Identify("", buffer)
-		for v := range xms {
-			for _, rec := range recs {
-				if rec.Record(core.XMLMatcher, v) {
-					break
-				}
+	if s.xm != nil {
+		for _, rec := range recs {
+			if ok, _ := rec.Satisfied(core.XMLMatcher); !ok {
+				satisfied = false
+				break
 			}
 		}
-		if err == nil {
-			err = xerr
+		if !satisfied {
+			if config.Debug() {
+				fmt.Fprintln(config.Out(), ">>START XML MATCHER")
+			}
+			xms, xerr := s.xm.Identify("", buffer)
+			for v := range xms {
+				for _, rec := range recs {
+					if rec.Record(core.XMLMatcher, v) {
+						break
+					}
+				}
+			}
+			if err == nil {
+				err = xerr
+			}
 		}
 	}
 	satisfied = true
@@ -386,7 +361,7 @@ func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identifi
 		}
 	}
 	// Byte Matcher
-	if !satisfied {
+	if s.bm != nil && !satisfied {
 		if config.Debug() {
 			fmt.Fprintln(config.Out(), ">>START BYTE MATCHER")
 		}
@@ -407,7 +382,7 @@ func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identifi
 		}
 	}
 	// Text Matcher
-	if !satisfied {
+	if s.tm != nil && !satisfied {
 		ids, _ := s.tm.Identify("", buffer) // we don't care about an error here
 		for v := range ids {
 			for _, rec := range recs {

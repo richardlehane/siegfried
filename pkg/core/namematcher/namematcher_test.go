@@ -3,15 +3,16 @@ package namematcher
 import (
 	"testing"
 
+	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/persist"
 )
 
 var fmts = SignatureSet{"*.wav", "*.doc", "*.xls", "*.pdf", "*.ppt", "*.adoc.txt", "README"}
 
-var sm = New()
+var sm core.Matcher
 
 func init() {
-	sm.Add(fmts, nil)
+	sm, _, _ = Add(nil, fmts, nil)
 }
 
 func TestWavMatch(t *testing.T) {
@@ -71,11 +72,10 @@ func TestNoExt(t *testing.T) {
 }
 
 func TestIO(t *testing.T) {
-	sm := New()
-	sm.Add(SignatureSet{"*.bla", "*.doc", "*.ppt"}, nil)
+	sm, _, _ = Add(nil, SignatureSet{"*.bla", "*.doc", "*.ppt"}, nil)
 	str := sm.String()
 	saver := persist.NewLoadSaver(nil)
-	sm.Save(saver)
+	Save(sm, saver)
 	if len(saver.Bytes()) < 10 {
 		t.Errorf("Save string matcher: too small, only got %v", saver.Bytes())
 	}

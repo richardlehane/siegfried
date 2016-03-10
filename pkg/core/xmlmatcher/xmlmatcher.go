@@ -29,7 +29,7 @@ type Matcher map[[2]string][]int
 
 type SignatureSet [][2]string // slice of root, namespace (both optional)
 
-func Load(ls *persist.LoadSaver) Matcher {
+func Load(ls *persist.LoadSaver) core.Matcher {
 	le := ls.LoadSmallInt()
 	if le == 0 {
 		return nil
@@ -46,7 +46,12 @@ func Load(ls *persist.LoadSaver) Matcher {
 	return ret
 }
 
-func (m Matcher) Save(ls *persist.LoadSaver) {
+func Save(c core.Matcher, ls *persist.LoadSaver) {
+	if c == nil {
+		ls.SaveSmallInt(0)
+		return
+	}
+	m := c.(Matcher)
 	ls.SaveSmallInt(len(m))
 	for k, v := range m {
 		ls.SaveString(k[0])
@@ -58,17 +63,16 @@ func (m Matcher) Save(ls *persist.LoadSaver) {
 	}
 }
 
-func New() Matcher {
-	return make(Matcher)
-}
-
-func (m Matcher) Add(ss core.SignatureSet, p priority.List) (int, error) {
-	if m == nil {
+func Add(c core.Matcher, ss core.SignatureSet, p priority.List) (core.Matcher, int, error) {
+	var m Matcher
+	if c == nil {
 		m = make(Matcher)
+	} else {
+		m = c.(Matcher)
 	}
 	sigs, ok := ss.(SignatureSet)
 	if !ok {
-		return -1, fmt.Errorf("Xmlmatcher: can't cast persist set")
+		return nil, -1, fmt.Errorf("Xmlmatcher: can't cast persist set")
 	}
 	var length int
 	// unless it is a new matcher, calculate current length by iterating through all the result values
@@ -90,7 +94,7 @@ func (m Matcher) Add(ss core.SignatureSet, p priority.List) (int, error) {
 			m[v] = []int{i + length}
 		}
 	}
-	return length + len(sigs), nil
+	return m, length + len(sigs), nil
 }
 
 func (m Matcher) Identify(s string, b *siegreader.Buffer, exclude ...int) (chan core.Result, error) {

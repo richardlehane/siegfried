@@ -113,7 +113,7 @@ func contains(ss []string, str string) bool {
 	return false
 }
 
-func New(opts ...config.Option) (*Identifier, error) {
+func New(opts ...config.Option) (core.Identifier, error) {
 	for _, v := range opts {
 		v()
 	}
@@ -133,64 +133,62 @@ func New(opts ...config.Option) (*Identifier, error) {
 	return id, nil
 }
 
-func (i *Identifier) Add(m core.Matcher, t core.MatcherType) error {
+func (i *Identifier) Add(m core.Matcher, t core.MatcherType) (core.Matcher, error) {
+	var l int
+	var err error
 	switch t {
 	default:
-		return fmt.Errorf("MIMEInfo: unknown matcher type %d", t)
+		return nil, fmt.Errorf("MIMEInfo: unknown matcher type %d", t)
 	case core.NameMatcher:
 		if !config.NoName() {
 			var globs []string
 			globs, i.gids = i.p.Globs()
-			l, err := m.Add(namematcher.SignatureSet(globs), nil)
+			m, l, err = namematcher.Add(m, namematcher.SignatureSet(globs), nil)
 			if err != nil {
-				return err
+				return nil, err
 			}
 			i.gstart = l - len(i.gids)
-			return nil
 		}
 	case core.MIMEMatcher:
 		if !config.NoMIME() {
 			var mimes []string
 			mimes, i.mids = i.p.MIMEs()
-			l, err := m.Add(mimematcher.SignatureSet(mimes), nil)
+			m, l, err = mimematcher.Add(m, mimematcher.SignatureSet(mimes), nil)
 			if err != nil {
-				return err
+				return nil, err
 			}
 			i.mstart = l - len(i.mids)
-			return nil
 		}
 	case core.XMLMatcher:
 		if !config.NoXML() {
 			var xmls [][2]string
 			xmls, i.xids = i.p.XMLs()
-			l, err := m.Add(xmlmatcher.SignatureSet(xmls), nil)
+			m, l, err = xmlmatcher.Add(m, xmlmatcher.SignatureSet(xmls), nil)
 			if err != nil {
-				return err
+				return nil, err
 			}
 			i.xstart = l - len(i.xids)
-			return nil
 		}
-	case core.ContainerMatcher:
-		return nil
 	case core.ByteMatcher:
 		var sigs []frames.Signature
 		var err error
 		sigs, i.bids, err = i.p.Signatures()
 		if err != nil {
-			return err
+			return nil, err
 		}
-		l, err := m.Add(bytematcher.SignatureSet(sigs), nil)
+		m, l, err = bytematcher.Add(m, bytematcher.SignatureSet(sigs), nil)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		i.bstart = l - len(i.bids)
 	case core.TextMatcher:
 		if !config.NoText() && contains(i.p.IDs(), config.TextMIME()) {
-			l, _ := m.Add(textmatcher.SignatureSet{}, nil)
+			m, l, _ = textmatcher.Add(m, textmatcher.SignatureSet{}, nil)
 			i.tstart = l
 		}
+	case core.ContainerMatcher:
 	}
-	return nil
+	return m, nil
 }
 
 func (i *Identifier) Name() string {

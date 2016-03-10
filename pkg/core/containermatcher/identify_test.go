@@ -15,7 +15,7 @@ func TestIdentify(t *testing.T) {
 	ctypes = []ctype{ctype{testTrigger, newTestReader}}
 	// test adding
 	count++
-	_, err := testMatcher.Add(
+	testMatcher, _, err := Add(Matcher{testContainerMatcher},
 		SignatureSet{
 			0,
 			[][]string{[]string{"one", "two"}, []string{"one"}},

@@ -15,24 +15,19 @@ var TestSample1 = []byte("test12345678910YNESSjunktestyjunktestytest123456789101
 
 var TestSample2 = []byte("test12345678910YNESSjTESTunktestyjunktestytest12345678910111223") // should match all 4 sigs
 
-func TestNew(t *testing.T) {
-	New()
-}
-
 func TestIO(t *testing.T) {
-	bm := New()
-	_, err := bm.Add(SignatureSet(tests.TestSignatures), nil)
+	bm, _, err := Add(nil, SignatureSet(tests.TestSignatures), nil)
 	if err != nil {
 		t.Error(err)
 	}
 	saver := persist.NewLoadSaver(nil)
-	bm.Save(saver)
+	Save(bm, saver)
 	if len(saver.Bytes()) < 100 {
 		t.Errorf("Save bytematcher: too small, only got %v", len(saver.Bytes()))
 	}
 	newbm := Load(persist.NewLoadSaver(saver.Bytes()))
 	nsaver := persist.NewLoadSaver(nil)
-	newbm.Save(nsaver)
+	Save(newbm, nsaver)
 	if len(nsaver.Bytes()) != len(saver.Bytes()) {
 		t.Fatalf("expecting the bms to match length: %d and %d", len(saver.Bytes()), len(nsaver.Bytes()))
 	}
@@ -57,8 +52,7 @@ func contains(a []core.Result, b []int) bool {
 }
 
 func TestMatch(t *testing.T) {
-	bm := New()
-	_, err := bm.Add(SignatureSet(tests.TestSignatures), nil)
+	bm, _, err := Add(nil, SignatureSet(tests.TestSignatures), nil)
 	if err != nil {
 		t.Error(err)
 	}

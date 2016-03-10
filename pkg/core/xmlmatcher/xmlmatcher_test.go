@@ -41,8 +41,7 @@ var (
 )
 
 func TestAdd(t *testing.T) {
-	m := New()
-	i, err := m.Add(testSet, nil)
+	_, i, err := Add(nil, testSet, nil)
 	if err != nil || i != 3 {
 		t.Errorf("expecting no errors and three signatures added, got %v and %d", err, i)
 	}
@@ -65,13 +64,12 @@ func identifyString(m Matcher, s string) ([]core.Result, error) {
 }
 
 func TestIdentify(t *testing.T) {
-	m := New()
-	i, e := m.Add(testSet, nil)
+	m, i, e := Add(nil, testSet, nil)
 	if i != 3 || e != nil {
 		t.Fatal("failed to create matcher")
 	}
 	for _, tc := range testCases {
-		res, err := identifyString(m, tc.val)
+		res, err := identifyString(m.(Matcher), tc.val)
 		if err != nil {
 			t.Fatalf("error identifying %s: %v", tc.name, err)
 		}

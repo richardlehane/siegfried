@@ -38,7 +38,7 @@ var (
 	mi          = build.String("mi", "", "set name/path for MIMEInfo signature file")
 	container   = build.String("container", config.Container(), "set name/path for Droid Container signature file")
 	reports     = build.String("reports", config.Reports(), "set path for PRONOM reports directory")
-	name        = build.String("name", config.Name(), "set identifier name")
+	name        = build.String("name", "", "set identifier name")
 	details     = build.String("details", config.Details(), "set identifier details")
 	extend      = build.String("extend", "", "comma separated list of additional signatures")
 	extendc     = build.String("extendc", "", "comma separated list of additional container signatures")
