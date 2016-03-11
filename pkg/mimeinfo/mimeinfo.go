@@ -25,6 +25,7 @@ import (
 	"strings"
 	"unicode/utf16"
 
+	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
 	"github.com/richardlehane/siegfried/pkg/core/parseable"
@@ -49,7 +50,7 @@ func newMIMEInfo(path string) (parseable.Parseable, error) {
 		index[v.MIME] = i
 	}
 	for i, v := range mi.MIMETypes {
-		if len(v.SuperiorClasses) == 1 {
+		if len(v.SuperiorClasses) == 1 && v.SuperiorClasses[0].SubClassOf != config.TextMIME() { // subclasses of text/plain shouldn't inherit text magic
 			sup := index[v.SuperiorClasses[0].SubClassOf]
 			if len(mi.MIMETypes[sup].XMLPattern) > 0 {
 				mi.MIMETypes[i].XMLPattern = append(mi.MIMETypes[i].XMLPattern, mi.MIMETypes[sup].XMLPattern...)
@@ -84,6 +85,7 @@ func (mi mimeinfo) IDs() []string {
 
 type formatInfo struct {
 	comment      string
+	text         bool
 	globWeights  []int
 	magicWeights []int
 }
@@ -95,6 +97,16 @@ func infos(m map[string]parseable.FormatInfo) map[string]formatInfo {
 		i[k] = v.(formatInfo)
 	}
 	return i
+}
+
+func textMIMES(m map[string]parseable.FormatInfo) []string {
+	ret := make([]string, 0, len(m))
+	for k, v := range m {
+		if v.(formatInfo).text {
+			ret = append(ret, k)
+		}
+	}
+	return ret
 }
 
 func (mi mimeinfo) Infos() map[string]parseable.FormatInfo {
@@ -136,6 +148,9 @@ func (mi mimeinfo) Infos() map[string]parseable.FormatInfo {
 					}
 				}
 			}
+		}
+		if len(v.SuperiorClasses) == 1 && v.SuperiorClasses[0].SubClassOf == config.TextMIME() {
+			fi.text = true
 		}
 		fmap[v.MIME] = fi
 	}
