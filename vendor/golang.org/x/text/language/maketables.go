@@ -632,6 +632,16 @@ func (b *builder) parseIndices() {
 			}
 		}
 	}
+	// Include locales for plural rules, which uses a different structure.
+	for _, plurals := range b.data.Supplemental().Plurals {
+		for _, rules := range plurals.PluralRules {
+			for _, lang := range strings.Split(rules.Locales, " ") {
+				if lang = strings.Split(lang, "_")[0]; lang != "root" {
+					b.lang.add(lang)
+				}
+			}
+		}
+	}
 	// Include languages in likely subtags.
 	for _, m := range b.supp.LikelySubtags.LikelySubtag {
 		from := strings.Split(m.From, "_")
@@ -1453,7 +1463,7 @@ func (b *builder) writeMatchData() {
 			}
 		}
 	}
-	sort.Sort(sortByConf(matchLang))
+	sort.Stable(sortByConf(matchLang))
 	// collapse percentage into confidence classes
 	for i, m := range matchLang {
 		matchLang[i].conf = toConf(m.conf)

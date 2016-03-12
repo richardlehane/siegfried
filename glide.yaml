@@ -1,0 +1,12 @@
+package: github.com/richardlehane/siegfried
+import:
+- package: github.com/richardlehane/characterize
+- package: github.com/richardlehane/match
+  subpackages:
+  - wac
+- package: github.com/richardlehane/mscfb
+- package: github.com/richardlehane/webarchive
+- package: github.com/richardlehane/xmldetect
+- package: golang.org/x/sys
+  subpackages:
+  - unix
