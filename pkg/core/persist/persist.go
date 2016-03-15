@@ -114,6 +114,75 @@ func (l *LoadSaver) SaveBool(b bool) {
 	}
 }
 
+const (
+	_a = 1 << iota
+	_b
+	_c
+	_d
+	_e
+	_f
+	_g
+	_h
+)
+
+func (l *LoadSaver) LoadBoolField() (a bool, b bool, c bool, d bool, e bool, f bool, g bool, h bool) {
+	byt := l.LoadByte()
+	if byt&_a == _a {
+		a = true
+	}
+	if byt&_b == _b {
+		b = true
+	}
+	if byt&_c == _c {
+		c = true
+	}
+	if byt&_d == _d {
+		d = true
+	}
+	if byt&_e == _e {
+		e = true
+	}
+	if byt&_f == _f {
+		f = true
+	}
+	if byt&_g == _g {
+		g = true
+	}
+	if byt&_h == _h {
+		h = true
+	}
+	return
+}
+
+func (l *LoadSaver) SaveBoolField(a bool, b bool, c bool, d bool, e bool, f bool, g bool, h bool) {
+	var byt byte
+	if a {
+		byt |= _a
+	}
+	if b {
+		byt |= _b
+	}
+	if c {
+		byt |= _c
+	}
+	if d {
+		byt |= _d
+	}
+	if e {
+		byt |= _e
+	}
+	if f {
+		byt |= _f
+	}
+	if g {
+		byt |= _g
+	}
+	if h {
+		byt |= _h
+	}
+	l.SaveByte(byt)
+}
+
 func (l *LoadSaver) LoadTinyInt() int {
 	i := int(l.LoadByte())
 	if i > max8 {

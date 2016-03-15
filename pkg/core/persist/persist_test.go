@@ -39,6 +39,16 @@ func TestByte(t *testing.T) {
 	}
 }
 
+func TestBoolField(t *testing.T) {
+	saver := NewLoadSaver(nil)
+	saver.SaveBoolField(true, false, false, true, false, true, true, true)
+	loader := NewLoadSaver(saver.Bytes())
+	a, b, c, d, e, f, g, h := loader.LoadBoolField()
+	if !a || b || c || !d || e || !f || !g || !h {
+		t.Errorf("expecting 'true, false, false, true, false, true, true, true', got %v, %v, %v, %v, %v, %v, %v, %v", a, b, c, d, e, f, g, h)
+	}
+}
+
 func TestTinyInt(t *testing.T) {
 	saver := NewLoadSaver(nil)
 	saver.SaveTinyInt(5)
