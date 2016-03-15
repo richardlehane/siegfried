@@ -166,7 +166,7 @@ func (c *csvWriter) writeFile(name string, sz int64, mod string, checksum []byte
 		}
 		if rowIdx >= len(c.recs) {
 			c.recs = append(c.recs, make([]string, len(c.recs[0])))
-			copy(c.recs[rowIdx][:idx+1], c.recs[0][:idx+1])
+			copy(c.recs[rowIdx][:idx], c.recs[0][:idx])
 		}
 		copy(c.recs[rowIdx][colIdx:], fields)
 	}
