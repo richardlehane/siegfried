@@ -27,10 +27,10 @@ import (
 )
 
 type Update struct {
-	SfVersion  [3]int
-	SigCreated string
-	GobSize    int
-	LatestURL  string
+	Version [3]int `json:"sf"`
+	Created string `json:"created"`
+	Size    int    `json:"size"`
+	Path    string `json:"path"`
 }
 
 func updateSigs() (string, error) {
@@ -47,12 +47,13 @@ func updateSigs() (string, error) {
 		return "", err
 	}
 	version := config.Version()
-	if version[0] < u.SfVersion[0] || (u.SfVersion[0] == version[0] && version[1] < u.SfVersion[1]) {
+	if version[0] < u.Version[0] || (version[0] == u.Version[0] && version[1] < u.Version[1]) || // if the version is out of date
+		u.Version == [3]int{0, 0, 0} || u.Created == "" || u.Size == 0 || u.Path == "" { // or if the unmarshalling hasn't worked and we have blank values
 		return "Your version of Siegfried is out of date; please install latest from http://www.itforarchivists.com/siegfried before continuing.", nil
 	}
 	s, err := siegfried.Load(config.Signature())
 	if err == nil {
-		if !s.Update(u.SigCreated) {
+		if !s.Update(u.Created) {
 			return "You are already up to date!", nil
 		}
 	} else {
@@ -69,12 +70,12 @@ func updateSigs() (string, error) {
 		}
 	}
 	fmt.Println("... downloading latest signature file ...")
-	response, err = getHttp(u.LatestURL)
+	response, err = getHttp(u.Path)
 	if err != nil {
-		return "", fmt.Errorf("Siegfried: error retrieving pronom.gob.\nThis may be a network or firewall issue. See https://github.com/richardlehane/siegfried/wiki/Getting-started for manual instructions.\nSystem error: %v", err)
+		return "", fmt.Errorf("Siegfried: error retrieving %s.\nThis may be a network or firewall issue. See https://github.com/richardlehane/siegfried/wiki/Getting-started for manual instructions.\nSystem error: %v", config.SignatureBase(), err)
 	}
-	if len(response) != u.GobSize {
-		return "", fmt.Errorf("Siegfried: error retrieving pronom.gob; expecting %d bytes, got %d bytes", u.GobSize, len(response))
+	if len(response) != u.Size {
+		return "", fmt.Errorf("Siegfried: error retrieving %s; expecting %d bytes, got %d bytes", config.SignatureBase(), u.Size, len(response))
 	}
 	err = ioutil.WriteFile(config.Signature(), response, os.ModePerm)
 	if err != nil {
