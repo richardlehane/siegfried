@@ -36,7 +36,7 @@ type Update struct {
 func updateSigs() (string, error) {
 	url, _, _ := config.UpdateOptions()
 	if url == "" {
-		return "Update is not available for this distribution of Siegfried", nil
+		return "Update is not available for this distribution of siegfried", nil
 	}
 	response, err := getHttp(url)
 	if err != nil {
@@ -49,7 +49,7 @@ func updateSigs() (string, error) {
 	version := config.Version()
 	if version[0] < u.Version[0] || (version[0] == u.Version[0] && version[1] < u.Version[1]) || // if the version is out of date
 		u.Version == [3]int{0, 0, 0} || u.Created == "" || u.Size == 0 || u.Path == "" { // or if the unmarshalling hasn't worked and we have blank values
-		return "Your version of Siegfried is out of date; please install latest from http://www.itforarchivists.com/siegfried before continuing.", nil
+		return "Your version of siegfried is out of date; please install latest from http://www.itforarchivists.com/siegfried before continuing.", nil
 	}
 	s, err := siegfried.Load(config.Signature())
 	if err == nil {
