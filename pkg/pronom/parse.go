@@ -184,11 +184,14 @@ func processSubSequence(puid string, ss mappings.SubSequence, eof, vry bool) (fr
 			if vry {
 				return min, -1, nil
 			}
-			return min, 0, nil
+			return min, min, nil // if not var - max should be at least min (which is prob 0)
 		}
 		max, err := decodeNum(maxS)
 		if err != nil {
 			return 0, 0, err
+		}
+		if max == 0 { // fix bug fmt/837 where has a min but no max
+			max = min
 		}
 		return min, max, nil
 	}
