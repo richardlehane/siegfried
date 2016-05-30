@@ -80,7 +80,7 @@ func (z *zipD) reader() io.Reader {
 }
 
 func (z *zipD) path() string {
-	return z.p + string(filepath.Separator) + filepath.FromSlash(characterize.ZipName(z.rdr.File[z.idx].Name))
+	return arcpath(z.p, filepath.FromSlash(characterize.ZipName(z.rdr.File[z.idx].Name)))
 }
 
 func (z *zipD) mime() string {
@@ -126,7 +126,7 @@ func (t *tarD) reader() io.Reader {
 }
 
 func (t *tarD) path() string {
-	return t.p + string(filepath.Separator) + filepath.FromSlash(t.hdr.Name)
+	return arcpath(t.p, filepath.FromSlash(t.hdr.Name))
 }
 
 func (t *tarD) mime() string {
@@ -189,7 +189,7 @@ func (g *gzipD) path() string {
 			name = filepath.Base(g.p)
 		}
 	}
-	return g.p + string(filepath.Separator) + name
+	return arcpath(g.p, name)
 }
 
 func (g *gzipD) mime() string {
@@ -260,7 +260,7 @@ func (w *wa) reader() io.Reader {
 }
 
 func (w *wa) path() string {
-	return filepath.Join(w.p, w.rec.Date().Format(webarchive.ARCTime), w.rec.URL())
+	return arcpath(w.p, filepath.Join(w.rec.Date().Format(webarchive.ARCTime), w.rec.URL()))
 }
 
 func (w *wa) mime() string {
@@ -293,4 +293,14 @@ func dirs(path, name string, written map[string]bool) []string {
 		return ret
 	}
 	return nil
+}
+
+func arcpath(base, path string) string {
+	if *droido {
+		return base + string(filepath.Separator) + path
+	}
+	if idx := strings.LastIndex(base, "] "); idx > 0 && idx+2 < len(base) {
+		return base[:idx+2] + "[" + base[idx+2:] + "] " + path
+	}
+	return "[" + base + "] " + path
 }
