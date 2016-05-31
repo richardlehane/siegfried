@@ -295,12 +295,11 @@ func dirs(path, name string, written map[string]bool) []string {
 	return nil
 }
 
+// per https://github.com/richardlehane/siegfried/issues/81
+// construct paths for compressed objects acc. to KDE hash notation
 func arcpath(base, path string) string {
 	if *droido {
 		return base + string(filepath.Separator) + path
 	}
-	if idx := strings.LastIndex(base, "] "); idx > 0 && idx+2 < len(base) {
-		return base[:idx+2] + "[" + base[idx+2:] + "] " + path
-	}
-	return "[" + base + "] " + path
+	return base + "#" + path
 }
