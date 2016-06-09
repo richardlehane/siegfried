@@ -28,7 +28,7 @@ var identifier = struct {
 	maxEOF      int      // maximum offset from end of file to scan
 	noEOF       bool     // trim end of file segments from signatures
 	noContainer bool     // don't build with container signatures
-	multi       int      // define how many results identifiers should return
+	multi       Multi    // define how many results identifiers should return
 	noText      bool     // don't build with text signatures
 	noName      bool     // don't build with filename signatures
 	noMIME      bool     // don't build with MIME signatures
@@ -82,8 +82,8 @@ func Details() string {
 	if identifier.noContainer {
 		str += "; no container signatures"
 	}
-	if identifier.noPriority {
-		str += "; no priorities"
+	if identifier.multi != Conclusive {
+		str += "; multi set to " + identifier.multi.String()
 	}
 	if identifier.noText {
 		str += "; no text matcher"
@@ -311,7 +311,7 @@ func SetMulti(m string) func() private {
 		case "1", "conclusive":
 			identifier.multi = Conclusive
 		case "2", "positive":
-			identifier.multi = Postive
+			identifier.multi = Positive
 		case "3", "comprehensive":
 			identifier.multi = Comprehensive
 		case "4", "exhaustive":

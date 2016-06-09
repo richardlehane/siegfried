@@ -26,7 +26,7 @@ const (
 )
 
 func (m Multi) String() string {
-	switch a {
+	switch m {
 	case Single:
 		return "single"
 	case Conclusive:
