@@ -16,52 +16,155 @@ package loc
 
 import (
 	"archive/zip"
+	"encoding/hex"
 	"encoding/xml"
-	"fmt"
 	"io/ioutil"
-	"log"
 	"path/filepath"
 	"strings"
 
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
 	"github.com/richardlehane/siegfried/pkg/core/parseable"
+	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/loc/mappings"
 )
 
+type fdds []mappings.FDD
+
 func newLOC(path string) (parseable.Parseable, error) {
 	rc, err := zip.OpenReader(path)
-	return nil, err
+	if err != nil {
+		return nil, err
+	}
 	defer rc.Close()
+
+	ret := make(fdds, 0, len(rc.File))
 	for _, f := range rc.File {
 		dir, nm := filepath.Split(f.Name)
 		if dir == "fddXML/" && nm != "" && filepath.Ext(nm) == ".xml" {
 			res := mappings.FDD{}
 			rdr, err := f.Open()
 			if err != nil {
-				log.Fatal(err)
+				return nil, err
 			}
 			buf, err := ioutil.ReadAll(rdr)
 			rdr.Close()
 			if err != nil {
-				log.Fatal(err)
+				return nil, err
 			}
 			err = xml.Unmarshal(buf, &res)
 			if err != nil {
-				log.Fatal(err)
+				return nil, err
 			}
-			exts := strings.Join(res.Extensions, ", ")
-			if exts != "" {
-				exts = "\nExtensions: " + exts
-			}
-			mimes := strings.Join(res.MIMEs, ", ")
-			if mimes != "" {
-				mimes = "\nMIMEs: " + mimes
-			}
-			magics := strings.Join(res.Magics, ", ")
-			if magics != "" {
-				magics = "\nMagics: " + magics
-			}
-			fmt.Printf("%s\n\n", res.ID+exts+mimes+magics)
+			ret = append(ret, res)
 		}
 	}
+	return ret, nil
+}
+
+func (f fdds) IDs() []string {
+	ids := make([]string, len(f))
+	for i, v := range f {
+		ids[i] = v.ID
+	}
+	return ids
+}
+
+type formatInfo struct {
+	name string
+}
+
+// turn generic FormatInfo into fdd formatInfo
+func infos(m map[string]parseable.FormatInfo) map[string]formatInfo {
+	i := make(map[string]formatInfo, len(m))
+	for k, v := range m {
+		i[k] = v.(formatInfo)
+	}
+	return i
+}
+
+func (f fdds) Infos() map[string]parseable.FormatInfo {
+	fmap := make(map[string]parseable.FormatInfo, len(f))
+	for _, v := range f {
+		fi := formatInfo{name: v.Name}
+		fmap[v.ID] = fi
+	}
+	return fmap
+}
+
+func (f fdds) Globs() ([]string, []string) {
+	globs, ids := make([]string, 0, len(f)), make([]string, 0, len(f))
+	for _, v := range f {
+		for _, w := range v.Extensions {
+			globs, ids = append(globs, "*."+w), append(ids, v.ID)
+		}
+	}
+	return globs, ids
+}
+
+func (f fdds) MIMEs() ([]string, []string) {
+	mimes, ids := make([]string, 0, len(f)), make([]string, 0, len(f))
+	for _, v := range f {
+		for _, w := range v.MIMEs {
+			mimes, ids = append(mimes, w), append(ids, v.ID)
+		}
+	}
+	return mimes, ids
+}
+
+// slice of root/NS
+func (f fdds) XMLs() ([][2]string, []string) {
 	return nil, nil
+}
+
+func (f fdds) Signatures() ([]frames.Signature, []string, error) {
+	/*
+		var errs []error
+		sigs, ids := make([]frames.Signature, 0, len(mi)), make([]string, 0, len(mi))
+		for _, v := range mi {
+			for _, w := range v.Magic {
+				for _, s := range w.Matches {
+					ss, err := toSigs(s)
+					for _, sig := range ss {
+						if sig != nil {
+							sigs, ids = append(sigs, sig), append(ids, v.MIME)
+						}
+					}
+					if err != nil {
+						errs = append(errs, err)
+					}
+				}
+			}
+		}
+		var err error
+		if len(errs) > 0 {
+			errStrs := make([]string, len(errs))
+			for i, e := range errs {
+				errStrs[i] = e.Error()
+			}
+			err = errors.New(strings.Join(errStrs, "; "))
+		}*/
+	return nil, nil, nil
+}
+
+func hexMagic(h string) (frames.Signature, error) {
+	repl := strings.NewReplacer("0x", "", " ", "")
+	h = repl.Replace(h)
+	hx, _ := hex.DecodeString(h)
+	pat := patterns.Sequence(hx)
+	return frames.Signature{frames.NewFrame(frames.BOF, pat, 0, 0)}, nil
+}
+
+func (f fdds) Priorities() priority.Map {
+	p := make(priority.Map)
+	for _, v := range f {
+		for _, r := range v.Relations {
+			switch r.Typ {
+			case "Subtype of":
+				p.Add(v.ID, r.Value)
+			}
+		}
+	}
+	p.Complete()
+	return p
 }

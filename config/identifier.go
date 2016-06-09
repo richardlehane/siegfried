@@ -28,7 +28,7 @@ var identifier = struct {
 	maxEOF      int      // maximum offset from end of file to scan
 	noEOF       bool     // trim end of file segments from signatures
 	noContainer bool     // don't build with container signatures
-	noPriority  bool     // ignore priority relations between signatures
+	multi       int      // define how many results identifiers should return
 	noText      bool     // don't build with text signatures
 	noName      bool     // don't build with filename signatures
 	noMIME      bool     // don't build with MIME signatures
@@ -140,7 +140,11 @@ func NoContainer() bool {
 
 // NoPriority reports whether priorities between signatures should be omitted.
 func NoPriority() bool {
-	return identifier.noPriority
+	return identifier.multi >= Comprehensive
+}
+
+func GetMulti() Multi {
+	return identifier.multi
 }
 
 // NoText reports whether text signatures should be omitted.
@@ -298,10 +302,23 @@ func SetNoContainer() func() private {
 	}
 }
 
-// SetNoPriority will cause priority relations between signatures to be omitted.
-func SetNoPriority() func() private {
+// SetMulti defines how identifiers report multiple results.
+func SetMulti(m string) func() private {
 	return func() private {
-		identifier.noPriority = true
+		switch m {
+		case "0", "single", "top":
+			identifier.multi = Single
+		case "1", "conclusive":
+			identifier.multi = Conclusive
+		case "2", "positive":
+			identifier.multi = Postive
+		case "3", "comprehensive":
+			identifier.multi = Comprehensive
+		case "4", "exhaustive":
+			identifier.multi = Exhaustive
+		default:
+			identifier.multi = Conclusive
+		}
 		return private{}
 	}
 }

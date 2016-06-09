@@ -80,11 +80,9 @@ func (r *reports) Globs() ([]string, []string) {
 	exts := make([]string, 0, len(r.r))
 	puids := make([]string, 0, len(r.p))
 	for i, v := range r.r {
-		if len(v.Extensions) > 0 {
-			for _, e := range globify(v.Extensions) {
-				exts = append(exts, e)
-				puids = append(puids, r.p[i])
-			}
+		for _, e := range globify(v.Extensions) {
+			exts = append(exts, e)
+			puids = append(puids, r.p[i])
 		}
 	}
 	return exts, puids

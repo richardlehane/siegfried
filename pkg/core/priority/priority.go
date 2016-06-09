@@ -25,7 +25,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/persist"
 )
 
-// a priority map links subordinate results to a list of priority restuls
+// a priority map links subordinate results to a list of priority results
 type Map map[string][]string
 
 func containsStr(ss []string, s string) bool {
