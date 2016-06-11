@@ -20,6 +20,7 @@ import (
 	"bytes"
 	"encoding/hex"
 	"errors"
+	"fmt"
 	"strconv"
 	"unicode/utf8"
 
@@ -33,6 +34,8 @@ func init() {
 	Register(notLoader, loadNot)
 	Register(bmhLoader, loadBMH)
 	Register(rbmhLoader, loadRBMH)
+	Register(maskLoader, loadMask)
+	Register(anyMaskLoader, loadAnyMask)
 }
 
 // Stringify returns a string version of a byte slice.
@@ -69,6 +72,8 @@ const (
 	notLoader
 	bmhLoader
 	rbmhLoader
+	maskLoader
+	anyMaskLoader
 )
 
 var loaders = [32]Loader{}
@@ -540,4 +545,147 @@ func (n Not) Save(ls *persist.LoadSaver) {
 
 func loadNot(ls *persist.LoadSaver) Pattern {
 	return Not{Load(ls)}
+}
+
+type Mask byte
+
+func (m Mask) Test(b []byte) (bool, int) {
+	if len(b) == 0 {
+		return false, 0
+	}
+	if byte(m)&b[0] == byte(m) {
+		return true, 1
+	}
+	return false, 1
+}
+
+func (m Mask) TestR(b []byte) (bool, int) {
+	if len(b) == 0 {
+		return false, 0
+	}
+	if byte(m)&b[len(b)-1] == byte(m) {
+		return true, 1
+	}
+	return false, 1
+}
+
+func (m Mask) Equals(pat Pattern) bool {
+	msk, ok := pat.(Mask)
+	if ok {
+		if m == msk {
+			return true
+		}
+	}
+	return false
+}
+
+func (m Mask) Length() (int, int) {
+	return 1, 1
+}
+
+func countBits(b byte) int {
+	var count uint
+	for b > 0 {
+		b &= b - 1
+		count++
+	}
+	return 256 / (1 << count)
+}
+
+func allBytes() []byte {
+	all := make([]byte, 256)
+	for i := range all {
+		all[i] = byte(i)
+	}
+	return all
+}
+
+func (m Mask) NumSequences() int {
+	return countBits(byte(m))
+}
+
+func (m Mask) Sequences() []Sequence {
+	seqs := make([]Sequence, 0, m.NumSequences())
+	for _, b := range allBytes() {
+		if byte(m)&b == byte(m) {
+			seqs = append(seqs, Sequence{b})
+		}
+	}
+	return seqs
+}
+
+func (m Mask) String() string {
+	return fmt.Sprintf("m %#x", byte(m))
+}
+
+func (m Mask) Save(ls *persist.LoadSaver) {
+	ls.SaveByte(maskLoader)
+	ls.SaveByte(byte(m))
+}
+
+func loadMask(ls *persist.LoadSaver) Pattern {
+	return Mask(ls.LoadByte())
+}
+
+type AnyMask byte
+
+func (am AnyMask) Test(b []byte) (bool, int) {
+	if len(b) == 0 {
+		return false, 0
+	}
+	if byte(am)&b[0] != 0 {
+		return true, 1
+	}
+	return false, 1
+}
+
+func (am AnyMask) TestR(b []byte) (bool, int) {
+	if len(b) == 0 {
+		return false, 0
+	}
+	if byte(am)&b[len(b)-1] != 0 {
+		return true, 1
+	}
+	return false, 1
+}
+
+func (am AnyMask) Equals(pat Pattern) bool {
+	amsk, ok := pat.(AnyMask)
+	if ok {
+		if am == amsk {
+			return true
+		}
+	}
+	return false
+}
+
+func (am AnyMask) Length() (int, int) {
+	return 1, 1
+}
+
+func (am AnyMask) NumSequences() int {
+	return 256 - countBits(byte(am))
+}
+
+func (am AnyMask) Sequences() []Sequence {
+	seqs := make([]Sequence, 0, am.NumSequences())
+	for _, b := range allBytes() {
+		if byte(am)&b != 0 {
+			seqs = append(seqs, Sequence{b})
+		}
+	}
+	return seqs
+}
+
+func (am AnyMask) String() string {
+	return fmt.Sprintf("am %#x", byte(am))
+}
+
+func (am AnyMask) Save(ls *persist.LoadSaver) {
+	ls.SaveByte(anyMaskLoader)
+	ls.SaveByte(byte(am))
+}
+
+func loadAnyMask(ls *persist.LoadSaver) Pattern {
+	return AnyMask(ls.LoadByte())
 }

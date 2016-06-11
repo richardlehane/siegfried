@@ -74,3 +74,7 @@ var TestChoices = []Choice{
 	},
 	Choice{TestSequences[0], TestLists[0]},
 }
+
+var TestMasks = []Mask{Mask(0xAA)}
+
+var TestAnyMasks = []AnyMask{AnyMask(0xAA)}

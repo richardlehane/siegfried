@@ -17,7 +17,6 @@ package pronom
 
 import (
 	"bytes"
-	"fmt"
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
 	"github.com/richardlehane/siegfried/pkg/core/persist"
@@ -25,14 +24,10 @@ import (
 
 func init() {
 	patterns.Register(rangeLoader, loadRange)
-	patterns.Register(maskLoader, loadMask)
-	patterns.Register(anyMaskLoader, loadAnyMask)
 }
 
 const (
 	rangeLoader byte = iota + 8
-	maskLoader
-	anyMaskLoader
 )
 
 type Range struct {
@@ -137,147 +132,4 @@ func loadRange(ls *persist.LoadSaver) patterns.Pattern {
 		ls.LoadBytes(),
 		ls.LoadBytes(),
 	}
-}
-
-type Mask byte
-
-func (m Mask) Test(b []byte) (bool, int) {
-	if len(b) == 0 {
-		return false, 0
-	}
-	if byte(m)&b[0] == byte(m) {
-		return true, 1
-	}
-	return false, 1
-}
-
-func (m Mask) TestR(b []byte) (bool, int) {
-	if len(b) == 0 {
-		return false, 0
-	}
-	if byte(m)&b[len(b)-1] == byte(m) {
-		return true, 1
-	}
-	return false, 1
-}
-
-func (m Mask) Equals(pat patterns.Pattern) bool {
-	msk, ok := pat.(Mask)
-	if ok {
-		if m == msk {
-			return true
-		}
-	}
-	return false
-}
-
-func (m Mask) Length() (int, int) {
-	return 1, 1
-}
-
-func countBits(b byte) int {
-	var count uint
-	for b > 0 {
-		b &= b - 1
-		count++
-	}
-	return 256 / (1 << count)
-}
-
-func allBytes() []byte {
-	all := make([]byte, 256)
-	for i := range all {
-		all[i] = byte(i)
-	}
-	return all
-}
-
-func (m Mask) NumSequences() int {
-	return countBits(byte(m))
-}
-
-func (m Mask) Sequences() []patterns.Sequence {
-	seqs := make([]patterns.Sequence, 0, m.NumSequences())
-	for _, b := range allBytes() {
-		if byte(m)&b == byte(m) {
-			seqs = append(seqs, patterns.Sequence{b})
-		}
-	}
-	return seqs
-}
-
-func (m Mask) String() string {
-	return fmt.Sprintf("m %#x", byte(m))
-}
-
-func (m Mask) Save(ls *persist.LoadSaver) {
-	ls.SaveByte(maskLoader)
-	ls.SaveByte(byte(m))
-}
-
-func loadMask(ls *persist.LoadSaver) patterns.Pattern {
-	return Mask(ls.LoadByte())
-}
-
-type AnyMask byte
-
-func (am AnyMask) Test(b []byte) (bool, int) {
-	if len(b) == 0 {
-		return false, 0
-	}
-	if byte(am)&b[0] != 0 {
-		return true, 1
-	}
-	return false, 1
-}
-
-func (am AnyMask) TestR(b []byte) (bool, int) {
-	if len(b) == 0 {
-		return false, 0
-	}
-	if byte(am)&b[len(b)-1] != 0 {
-		return true, 1
-	}
-	return false, 1
-}
-
-func (am AnyMask) Equals(pat patterns.Pattern) bool {
-	amsk, ok := pat.(AnyMask)
-	if ok {
-		if am == amsk {
-			return true
-		}
-	}
-	return false
-}
-
-func (am AnyMask) Length() (int, int) {
-	return 1, 1
-}
-
-func (am AnyMask) NumSequences() int {
-	return 256 - countBits(byte(am))
-}
-
-func (am AnyMask) Sequences() []patterns.Sequence {
-	seqs := make([]patterns.Sequence, 0, am.NumSequences())
-	for _, b := range allBytes() {
-		if byte(am)&b != 0 {
-			seqs = append(seqs, patterns.Sequence{b})
-		}
-	}
-	return seqs
-}
-
-func (am AnyMask) String() string {
-	return fmt.Sprintf("am %#x", byte(am))
-}
-
-func (am AnyMask) Save(ls *persist.LoadSaver) {
-	ls.SaveByte(anyMaskLoader)
-	ls.SaveByte(byte(am))
-}
-
-func loadAnyMask(ls *persist.LoadSaver) patterns.Pattern {
-	return AnyMask(ls.LoadByte())
 }

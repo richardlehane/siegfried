@@ -16,14 +16,13 @@ package loc
 
 import (
 	"archive/zip"
-	"encoding/hex"
 	"encoding/xml"
+	"errors"
 	"io/ioutil"
 	"path/filepath"
 	"strings"
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
-	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
 	"github.com/richardlehane/siegfried/pkg/core/parseable"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/loc/mappings"
@@ -118,41 +117,30 @@ func (f fdds) XMLs() ([][2]string, []string) {
 }
 
 func (f fdds) Signatures() ([]frames.Signature, []string, error) {
-	/*
-		var errs []error
-		sigs, ids := make([]frames.Signature, 0, len(mi)), make([]string, 0, len(mi))
-		for _, v := range mi {
-			for _, w := range v.Magic {
-				for _, s := range w.Matches {
-					ss, err := toSigs(s)
-					for _, sig := range ss {
-						if sig != nil {
-							sigs, ids = append(sigs, sig), append(ids, v.MIME)
-						}
-					}
-					if err != nil {
-						errs = append(errs, err)
-					}
-				}
-			}
+	var errs []error
+	sigs, ids := make([]frames.Signature, 0, len(f)), make([]string, 0, len(f))
+	for _, v := range f {
+		ss, e := magics(v.Magics)
+		if e != nil {
+			errs = append(errs, e)
 		}
-		var err error
-		if len(errs) > 0 {
-			errStrs := make([]string, len(errs))
-			for i, e := range errs {
-				errStrs[i] = e.Error()
-			}
-			err = errors.New(strings.Join(errStrs, "; "))
-		}*/
-	return nil, nil, nil
-}
-
-func hexMagic(h string) (frames.Signature, error) {
-	repl := strings.NewReplacer("0x", "", " ", "")
-	h = repl.Replace(h)
-	hx, _ := hex.DecodeString(h)
-	pat := patterns.Sequence(hx)
-	return frames.Signature{frames.NewFrame(frames.BOF, pat, 0, 0)}, nil
+		if ss == nil {
+			continue
+		}
+		for _, s := range ss {
+			sigs = append(sigs, s)
+			ids = append(ids, v.ID)
+		}
+	}
+	var err error
+	if len(errs) > 0 {
+		errStrs := make([]string, len(errs))
+		for i, e := range errs {
+			errStrs[i] = e.Error()
+		}
+		err = errors.New(strings.Join(errStrs, "; "))
+	}
+	return sigs, ids, err
 }
 
 func (f fdds) Priorities() priority.Map {

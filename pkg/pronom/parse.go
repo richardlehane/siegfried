@@ -408,9 +408,9 @@ func processGroup(l *lexer) (patterns.Pattern, error) {
 		var pat patterns.Pattern
 		switch {
 		case mask:
-			pat = Mask(val[0])
+			pat = patterns.Mask(val[0])
 		case anyMask:
-			pat = AnyMask(val[0])
+			pat = patterns.AnyMask(val[0])
 		default:
 			pat = patterns.Sequence(val)
 		}
