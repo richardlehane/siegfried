@@ -21,6 +21,8 @@ import (
 
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
+	"github.com/richardlehane/siegfried/pkg/core/identifier"
+	"github.com/richardlehane/siegfried/pkg/core/parseable"
 	"github.com/richardlehane/siegfried/pkg/core/persist"
 )
 
@@ -29,29 +31,13 @@ func init() {
 }
 
 type Identifier struct {
-	p          *pronom
-	name       string
-	details    string
-	noPriority bool // was noPriority set when built?
-	zipDefault bool
-	infos      map[string]formatInfo
-	eStart     int
-	ePuids     []string // slice of puids that corresponds to the extension matcher's int slice of signatures
-	mStart     int
-	mPuids     []string
-	cStart     int
-	cPuids     []string
-	bStart     int
-	bPuids     []string // slice of puids that corresponds to the bytematcher's int slice of signatures
-	tStart     int      // index if registered for text matcher
+	p     parseable.Parseable
+	infos map[string]formatInfo
+	*identifier.Base
 }
 
 func (i *Identifier) Save(ls *persist.LoadSaver) {
 	ls.SaveByte(core.Pronom)
-	ls.SaveString(i.name)
-	ls.SaveString(i.details)
-	ls.SaveBool(i.noPriority)
-	ls.SaveBool(i.zipDefault)
 	ls.SaveSmallInt(len(i.infos))
 	for k, v := range i.infos {
 		ls.SaveString(k)
@@ -59,23 +45,11 @@ func (i *Identifier) Save(ls *persist.LoadSaver) {
 		ls.SaveString(v.version)
 		ls.SaveString(v.mimeType)
 	}
-	ls.SaveInt(i.eStart)
-	ls.SaveStrings(i.ePuids)
-	ls.SaveInt(i.mStart)
-	ls.SaveStrings(i.mPuids)
-	ls.SaveInt(i.cStart)
-	ls.SaveStrings(i.cPuids)
-	ls.SaveInt(i.bStart)
-	ls.SaveStrings(i.bPuids)
-	ls.SaveSmallInt(i.tStart)
+	i.Base.Save(ls)
 }
 
 func Load(ls *persist.LoadSaver) core.Identifier {
 	i := &Identifier{}
-	i.name = ls.LoadString()
-	i.details = ls.LoadString()
-	i.noPriority = ls.LoadBool()
-	i.zipDefault = ls.LoadBool()
 	i.infos = make(map[string]formatInfo)
 	le := ls.LoadSmallInt()
 	for j := 0; j < le; j++ {
@@ -85,15 +59,7 @@ func Load(ls *persist.LoadSaver) core.Identifier {
 			ls.LoadString(),
 		}
 	}
-	i.eStart = ls.LoadInt()
-	i.ePuids = ls.LoadStrings()
-	i.mStart = ls.LoadInt()
-	i.mPuids = ls.LoadStrings()
-	i.cStart = ls.LoadInt()
-	i.cPuids = ls.LoadStrings()
-	i.bStart = ls.LoadInt()
-	i.bPuids = ls.LoadStrings()
-	i.tStart = ls.LoadSmallInt()
+	i.Base = identifier.Load(ls)
 	return i
 }
 
@@ -105,69 +71,15 @@ func New(opts ...config.Option) (core.Identifier, error) {
 	if err != nil {
 		return nil, err
 	}
-	return pronom.identifier(), nil
-}
-
-func (i *Identifier) Add(m core.Matcher, t core.MatcherType) (core.Matcher, error) {
-	return i.p.add(m, t)
-}
-
-func (i *Identifier) Name() string {
-	return i.name
-}
-
-func (i *Identifier) Details() string {
-	return i.details
+	return &Identifier{
+		p:     pronom,
+		infos: infos(p.Infos()),
+		Base:  identifier.New(p, contains(p.IDs(), config.ZipPuid())),
+	}, nil
 }
 
 func (i *Identifier) Fields() []string {
 	return []string{"namespace", "id", "format", "version", "mime", "basis", "warning"}
-}
-
-func (i *Identifier) String() string {
-	str := fmt.Sprintf("Name: %s\nDetails: %s\n", i.name, i.details)
-	str += fmt.Sprintf("Number of filename signatures: %d \n", len(i.ePuids))
-	str += fmt.Sprintf("Number of MIME signatures: %d \n", len(i.mPuids))
-	str += fmt.Sprintf("Number of container signatures: %d \n", len(i.cPuids))
-	str += fmt.Sprintf("Number of byte signatures: %d \n", len(i.bPuids))
-	return str
-}
-
-func (i *Identifier) Recognise(m core.MatcherType, idx int) (bool, string) {
-	switch m {
-	default:
-		return false, ""
-	case core.NameMatcher:
-		if idx >= i.eStart && idx < i.eStart+len(i.ePuids) {
-			idx = idx - i.eStart
-			return true, i.name + ": " + i.ePuids[idx]
-		}
-		return false, ""
-	case core.MIMEMatcher:
-		if idx >= i.mStart && idx < i.mStart+len(i.mPuids) {
-			idx = idx - i.mStart
-			return true, i.name + ": " + i.mPuids[idx]
-		}
-		return false, ""
-	case core.ContainerMatcher:
-		if idx >= i.cStart && idx < i.cStart+len(i.cPuids) {
-			idx = idx - i.cStart
-			return true, i.name + ": " + i.cPuids[idx]
-		}
-		return false, ""
-	case core.XMLMatcher:
-		return false, ""
-	case core.ByteMatcher:
-		if idx >= i.bStart && idx < i.bStart+len(i.bPuids) {
-			return true, i.name + ": " + i.bPuids[idx]
-		}
-		return false, ""
-	case core.TextMatcher:
-		if idx == i.tStart {
-			return true, i.name + ": " + config.TextPuid()
-		}
-		return false, ""
-	}
 }
 
 func (i *Identifier) Recorder() core.Recorder {
@@ -194,15 +106,15 @@ const (
 func (r *Recorder) Active(m core.MatcherType) {
 	switch m {
 	case core.NameMatcher:
-		if len(r.ePuids) > 0 {
+		if r.Identifier.Active(m) {
 			r.extActive = true
 		}
 	case core.MIMEMatcher:
-		if len(r.mPuids) > 0 {
+		if r.Identifier.Active(m) {
 			r.mimeActive = true
 		}
 	case core.TextMatcher:
-		if r.tStart > 0 {
+		if r.Identifier.Active(m) {
 			r.textActive = true
 		}
 	}
@@ -213,17 +125,15 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 	default:
 		return false
 	case core.NameMatcher:
-		if res.Index() >= r.eStart && res.Index() < r.eStart+len(r.ePuids) {
-			idx := res.Index() - r.eStart
-			r.ids = add(r.ids, r.name, r.ePuids[idx], r.infos[r.ePuids[idx]], res.Basis(), extScore)
+		if hit, id := r.Hit(m, res.Index()); hit {
+			r.ids = add(r.ids, r.Name(), id, r.infos[id], res.Basis(), extScore)
 			return true
 		} else {
 			return false
 		}
 	case core.MIMEMatcher:
-		if res.Index() >= r.mStart && res.Index() < r.mStart+len(r.mPuids) {
-			idx := res.Index() - r.mStart
-			r.ids = add(r.ids, r.name, r.mPuids[idx], r.infos[r.mPuids[idx]], res.Basis(), mimeScore)
+		if hit, id := r.Hit(m, res.Index()); hit {
+			r.ids = add(r.ids, r.Name(), id, r.infos[id], res.Basis(), mimeScore)
 			return true
 		} else {
 			return false
@@ -231,65 +141,51 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 	case core.ContainerMatcher:
 		// add zip default
 		if res.Index() < 0 {
-			if r.zipDefault {
+			if r.ZipDefault() {
 				r.cscore += incScore
-				r.ids = add(r.ids, r.name, config.ZipPuid(), r.infos[config.ZipPuid()], res.Basis(), r.cscore)
+				r.ids = add(r.ids, r.Name(), config.ZipPuid(), r.infos[config.ZipPuid()], res.Basis(), r.cscore)
 			}
 			return false
 		}
-		if res.Index() >= r.cStart && res.Index() < r.cStart+len(r.cPuids) {
-			idx := res.Index() - r.cStart
+		if hit, id := r.Hit(m, res.Index()); hit {
 			r.cscore += incScore
 			basis := res.Basis()
-			p, t := place(idx, r.cPuids)
+			p, t := r.Place(core.ContainerMatcher, res.Index())
 			if t > 1 {
 				basis = basis + fmt.Sprintf(" (signature %d/%d)", p, t)
 			}
-			r.ids = add(r.ids, r.name, r.cPuids[idx], r.infos[r.cPuids[idx]], basis, r.cscore)
+			r.ids = add(r.ids, r.Name(), id, r.infos[id], basis, r.cscore)
 			return true
 		} else {
 			return false
 		}
 	case core.ByteMatcher:
-		if res.Index() >= r.bStart && res.Index() < r.bStart+len(r.bPuids) {
+		if hit, id := r.Hit(m, res.Index()); hit {
 			if r.satisfied {
 				return true
 			}
-			idx := res.Index() - r.bStart
 			r.cscore += incScore
 			basis := res.Basis()
-			p, t := place(idx, r.bPuids)
+			p, t := r.Place(core.ByteMatcher, res.Index())
 			if t > 1 {
 				basis = basis + fmt.Sprintf(" (signature %d/%d)", p, t)
 			}
-			r.ids = add(r.ids, r.name, r.bPuids[idx], r.infos[r.bPuids[idx]], basis, r.cscore)
+			r.ids = add(r.ids, r.Name(), id, r.infos[id], basis, r.cscore)
 			return true
 		} else {
 			return false
 		}
 	case core.TextMatcher:
-		if res.Index() == r.tStart {
+		if hit, id := r.Hit(m, res.Index()); hit {
 			if r.satisfied {
 				return true
 			}
-			r.ids = add(r.ids, r.name, config.TextPuid(), r.infos[config.TextPuid()], res.Basis(), textScore)
+			r.ids = add(r.ids, r.Name(), id, r.infos[id], res.Basis(), textScore)
 			return true
 		} else {
 			return false
 		}
 	}
-}
-
-func place(idx int, ids []string) (int, int) {
-	puid := ids[idx]
-	var prev, post int
-	for i := idx - 1; i > -1 && ids[i] == puid; i-- {
-		prev++
-	}
-	for i := idx + 1; i < len(ids) && ids[i] == puid; i++ {
-		post++
-	}
-	return prev + 1, prev + post + 1
 }
 
 func (r *Recorder) Satisfied(mt core.MatcherType) (bool, int) {
@@ -308,7 +204,7 @@ func (r *Recorder) Satisfied(mt core.MatcherType) (bool, int) {
 	}
 	r.satisfied = true
 	if mt == core.ByteMatcher {
-		return true, r.bStart
+		return true, r.Start(mt)
 	}
 	return true, 0
 }
@@ -377,14 +273,14 @@ func (r *Recorder) Report(res chan core.Identification) {
 					poss[i] = v.ID
 					conf = conf | v.confidence
 				}
-				nids = []Identification{Identification{r.name, "UNKNOWN", "", "", "", nil, fmt.Sprintf("no match; possibilities based on %v are %v", lowConfidence(conf), strings.Join(poss, ", ")), 0, 0}}
+				nids = []Identification{Identification{r.Name(), "UNKNOWN", "", "", "", nil, fmt.Sprintf("no match; possibilities based on %v are %v", lowConfidence(conf), strings.Join(poss, ", ")), 0, 0}}
 			}
 			r.ids = nids
 		}
 		res <- r.checkActive(r.ids[0])
 		if len(r.ids) > 1 {
 			for i, v := range r.ids[1:] {
-				if v.confidence == conf || (r.noPriority && v.confidence >= incScore) {
+				if v.confidence == conf || (r.NoPriority() && v.confidence >= incScore) {
 					res <- r.checkActive(r.ids[i+1])
 				} else {
 					break
@@ -392,13 +288,13 @@ func (r *Recorder) Report(res chan core.Identification) {
 			}
 		}
 	} else {
-		res <- Identification{r.name, "UNKNOWN", "", "", "", nil, "no match", 0, 0}
+		res <- Identification{r.Name(), "UNKNOWN", "", "", "", nil, "no match", 0, 0}
 	}
 }
 
 func (r *Recorder) checkActive(i Identification) Identification {
 	if r.extActive && (i.confidence&extScore != extScore) {
-		for _, v := range r.ePuids {
+		for _, v := range r.IDs(core.NameMatcher) {
 			if i.ID == v {
 				if len(i.Warning) > 0 {
 					i.Warning += "; extension mismatch"
@@ -410,7 +306,7 @@ func (r *Recorder) checkActive(i Identification) Identification {
 		}
 	}
 	if r.mimeActive && (i.confidence&mimeScore != mimeScore) {
-		for _, v := range r.mPuids {
+		for _, v := range r.IDs(core.MIMEMatcher) {
 			if i.ID == v {
 				if len(i.Warning) > 0 {
 					i.Warning += "; MIME mismatch"
@@ -425,12 +321,12 @@ func (r *Recorder) checkActive(i Identification) Identification {
 }
 
 func (r *Recorder) hasSig(puid string) bool {
-	for _, v := range r.cPuids {
+	for _, v := range r.IDs(core.ContainerMatcher) {
 		if puid == v {
 			return true
 		}
 	}
-	for _, v := range r.bPuids {
+	for _, v := range r.IDs(core.ByteMatcher) {
 		if puid == v {
 			return true
 		}

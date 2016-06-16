@@ -15,6 +15,7 @@
 package parseable
 
 import (
+	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
 )
@@ -33,6 +34,7 @@ type Parseable interface {
 	Zips() ([][]string, [][]frames.Signature, []string, error)   // signature set and corresponding IDs for container matcher - Zip
 	MSCFBs() ([][]string, [][]frames.Signature, []string, error) // signature set and corresponding IDs for container matcher - MSCFB
 	RIFFs() ([][4]byte, []string)                                // signature set and corresponding IDs for riffmatcher
+	Texts() []string                                             // IDs for textmatcher
 	Priorities() priority.Map                                    // priority map
 }
 
@@ -48,6 +50,7 @@ func (b Blank) Signatures() ([]frames.Signature, []string, error)           { re
 func (b Blank) Zips() ([][]string, [][]frames.Signature, []string, error)   { return nil, nil, nil, nil }
 func (b Blank) MSCFBs() ([][]string, [][]frames.Signature, []string, error) { return nil, nil, nil, nil }
 func (b Blank) RIFFs() ([][4]byte, []string)                                { return nil, nil }
+func (b Blank) Texts() []string                                             { return nil }
 func (b Blank) Priorities() priority.Map                                    { return nil }
 
 // Joint allows two parseables to be logically joined.
@@ -62,7 +65,21 @@ func Join(a, b Parseable) *joint {
 
 // IDs returns a list of all the IDs in an identifier.
 func (j *joint) IDs() []string {
-	return append(j.a.IDs(), j.b.IDs()...)
+	ids := make([]string, len(j.a.IDs()), len(j.a.IDs())+len(j.b.IDs()))
+	copy(ids, j.a.IDs())
+	for _, id := range j.b.IDs() {
+		var present bool
+		for _, ida := range j.a.IDs() {
+			if id == ida {
+				present = true
+				break
+			}
+		}
+		if !present {
+			ids = append(ids, id)
+		}
+	}
+	return ids
 }
 
 // Infos returns a map of identifier specific information.
@@ -126,6 +143,24 @@ func (j *joint) MSCFBs() ([][]string, [][]frames.Signature, []string, error) {
 	return nil, nil, nil, nil
 }
 func (j *joint) RIFFs() ([][4]byte, []string) { return nil, nil }
+
+func (j *joint) Texts() []string {
+	txts := make([]string, len(j.a.Texts()), len(j.a.Texts())+len(j.b.Texts()))
+	copy(txts, j.a.Texts())
+	for _, t := range j.a.Texts() {
+		var present bool
+		for _, u := range j.b.Texts() {
+			if t == u {
+				present = true
+				break
+			}
+		}
+		if !present {
+			txts = append(txts, t)
+		}
+	}
+	return txts
+}
 
 // Filtered allows us to apply limit and exclude filters to a parseable (in both cases - provide the list of ids we want to show).
 type filtered struct {
@@ -226,6 +261,19 @@ func (f *filtered) MSCFBs() ([][]string, [][]frames.Signature, []string, error) 
 }
 func (f *filtered) RIFFs() ([][4]byte, []string) { return nil, nil }
 
+func (f *filtered) Texts() []string {
+	txts := make([]string, 0, len(f.p.Texts()))
+	for _, t := range f.p.Texts() {
+		for _, u := range f.IDs() {
+			if t == u {
+				txts = append(txts, t)
+				break
+			}
+		}
+	}
+	return txts
+}
+
 // Priorities returns a priority map.
 func (f *filtered) Priorities() priority.Map {
 	m := f.p.Priorities()
@@ -253,4 +301,67 @@ func (m *Mirror) Signatures() ([]frames.Signature, []string, error) {
 		}
 	}
 	return rsigs, rids, nil
+}
+
+type noName struct{ Parseable }
+
+func (nn noName) Globs() ([]string, []string) { return nil, nil }
+
+type noMIME struct{ Parseable }
+
+func (nm noMIME) MIMEs() ([]string, []string) { return nil, nil }
+
+type noXML struct{ Parseable }
+
+func (nx noXML) XMLs() ([][2]string, []string) { return nil, nil }
+
+type noContainers struct{ Parseable }
+
+func (nc noContainers) Zips() ([][]string, [][]frames.Signature, []string, error) {
+	return nil, nil, nil, nil
+}
+
+func (nc noContainers) MSCFBs() ([][]string, [][]frames.Signature, []string, error) {
+	return nil, nil, nil, nil
+}
+
+type noRIFF struct{ Parseable }
+
+func (nr noRIFF) RIFFs() ([][4]byte, []string) { return nil, nil }
+
+type noText struct{ Parseable }
+
+func (nt noText) Texts() []string { return nil }
+
+type noPriority struct{ Parseable }
+
+func (np noPriority) Priorities() priority.Map { return nil }
+
+func ApplyConfig(p Parseable) Parseable {
+	if config.NoName() {
+		p = noName{p}
+	}
+	if config.NoMIME() {
+		p = noMIME{p}
+	}
+	if config.NoXML() {
+		p = noXML{p}
+	}
+	if config.NoContainer() {
+		p = noContainers{p}
+	}
+	if config.NoRIFF() {
+		p = noRIFF{p}
+	}
+	if config.NoText() {
+		p = noText{p}
+	}
+	if config.NoPriority() {
+		p = noPriority{p}
+	}
+	// mirror PREV wild segments into EOF if maxBof and maxEOF set
+	if config.MaxBOF() > 0 && config.MaxEOF() > 0 {
+		p = &Mirror{p}
+	}
+	return p
 }

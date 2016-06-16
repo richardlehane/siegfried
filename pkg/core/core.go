@@ -102,6 +102,7 @@ const (
 	ByteMatcher
 	TextMatcher
 	XMLMatcher
+	RIFFMatcher
 )
 
 // SignatureSet is added to a matcher. It can take any form, depending on the matcher.

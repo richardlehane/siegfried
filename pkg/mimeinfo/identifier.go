@@ -23,6 +23,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
+	"github.com/richardlehane/siegfried/pkg/core/identifier"
 	"github.com/richardlehane/siegfried/pkg/core/mimematcher"
 	"github.com/richardlehane/siegfried/pkg/core/namematcher"
 	"github.com/richardlehane/siegfried/pkg/core/parseable"
@@ -36,30 +37,13 @@ func init() {
 }
 
 type Identifier struct {
-	p          parseable.Parseable
-	name       string
-	details    string
-	noPriority bool
-	zipDefault bool
-	infos      map[string]formatInfo
-	gstart     int
-	gids       []string
-	mstart     int
-	mids       []string
-	xstart     int
-	xids       []string
-	bstart     int
-	bids       []string
-	tstart     int
-	tids       []string
+	p     parseable.Parseable
+	infos map[string]formatInfo
+	*identifier.Base
 }
 
 func (i *Identifier) Save(ls *persist.LoadSaver) {
 	ls.SaveByte(core.MIMEInfo)
-	ls.SaveString(i.name)
-	ls.SaveString(i.details)
-	ls.SaveBool(i.noPriority)
-	ls.SaveBool(i.zipDefault)
 	ls.SaveSmallInt(len(i.infos))
 	for k, v := range i.infos {
 		ls.SaveString(k)
@@ -68,24 +52,11 @@ func (i *Identifier) Save(ls *persist.LoadSaver) {
 		ls.SaveInts(v.globWeights)
 		ls.SaveInts(v.magicWeights)
 	}
-	ls.SaveInt(i.gstart)
-	ls.SaveStrings(i.gids)
-	ls.SaveInt(i.mstart)
-	ls.SaveStrings(i.mids)
-	ls.SaveInt(i.xstart)
-	ls.SaveStrings(i.xids)
-	ls.SaveInt(i.bstart)
-	ls.SaveStrings(i.bids)
-	ls.SaveSmallInt(i.tstart)
-	ls.SaveStrings(i.tids)
+	i.Base.Save(ls)
 }
 
 func Load(ls *persist.LoadSaver) core.Identifier {
 	i := &Identifier{}
-	i.name = ls.LoadString()
-	i.details = ls.LoadString()
-	i.noPriority = ls.LoadBool()
-	i.zipDefault = ls.LoadBool()
 	i.infos = make(map[string]formatInfo)
 	le := ls.LoadSmallInt()
 	for j := 0; j < le; j++ {
@@ -96,16 +67,7 @@ func Load(ls *persist.LoadSaver) core.Identifier {
 			ls.LoadInts(),
 		}
 	}
-	i.gstart = ls.LoadInt()
-	i.gids = ls.LoadStrings()
-	i.mstart = ls.LoadInt()
-	i.mids = ls.LoadStrings()
-	i.xstart = ls.LoadInt()
-	i.xids = ls.LoadStrings()
-	i.bstart = ls.LoadInt()
-	i.bids = ls.LoadStrings()
-	i.tstart = ls.LoadSmallInt()
-	i.tids = ls.LoadStrings()
+	i.Base = identifier.Load(ls)
 	return i
 }
 
@@ -163,137 +125,15 @@ func New(opts ...config.Option) (core.Identifier, error) {
 		mi = parseable.Join(mi, e)
 	}
 	id := &Identifier{
-		p:          mi,
-		name:       config.Name(),
-		details:    config.Details(),
-		infos:      infos(mi.Infos()),
-		noPriority: config.NoPriority(),
-	}
-	if contains(mi.IDs(), config.ZipMIME()) {
-		id.zipDefault = true
+		p:     mi,
+		infos: infos(mi.Infos()),
+		Base:  identifier.New(contains(mi.IDs(), config.ZipMIME())),
 	}
 	return id, nil
 }
 
-func (i *Identifier) Add(m core.Matcher, t core.MatcherType) (core.Matcher, error) {
-	var l int
-	var err error
-	switch t {
-	default:
-		return nil, fmt.Errorf("MIMEInfo: unknown matcher type %d", t)
-	case core.NameMatcher:
-		if !config.NoName() {
-			var globs []string
-			globs, i.gids = i.p.Globs()
-			m, l, err = namematcher.Add(m, namematcher.SignatureSet(globs), nil)
-			if err != nil {
-				return nil, err
-			}
-			i.gstart = l - len(i.gids)
-		}
-	case core.MIMEMatcher:
-		if !config.NoMIME() {
-			var mimes []string
-			mimes, i.mids = i.p.MIMEs()
-			m, l, err = mimematcher.Add(m, mimematcher.SignatureSet(mimes), nil)
-			if err != nil {
-				return nil, err
-			}
-			i.mstart = l - len(i.mids)
-		}
-	case core.XMLMatcher:
-		if !config.NoXML() {
-			var xmls [][2]string
-			xmls, i.xids = i.p.XMLs()
-			m, l, err = xmlmatcher.Add(m, xmlmatcher.SignatureSet(xmls), nil)
-			if err != nil {
-				return nil, err
-			}
-			i.xstart = l - len(i.xids)
-		}
-	case core.ByteMatcher:
-		var sigs []frames.Signature
-		var err error
-		sigs, i.bids, err = i.p.Signatures()
-		if err != nil {
-			return nil, err
-		}
-		m, l, err = bytematcher.Add(m, bytematcher.SignatureSet(sigs), nil)
-		if err != nil {
-			return nil, err
-		}
-		i.bstart = l - len(i.bids)
-	case core.TextMatcher:
-		if !config.NoText() {
-			i.tids = textMIMES(i.p.Infos())
-			if len(i.tids) > 0 || contains(i.p.IDs(), config.TextMIME()) {
-				m, l, _ = textmatcher.Add(m, textmatcher.SignatureSet{}, nil)
-				i.tstart = l
-			}
-		}
-	case core.ContainerMatcher:
-	}
-	return m, nil
-}
-
-func (i *Identifier) Name() string {
-	return i.name
-}
-
-func (i *Identifier) Details() string {
-	return i.details
-}
-
 func (i *Identifier) Fields() []string {
 	return []string{"namespace", "id", "format", "mime", "basis", "warning"}
-}
-
-func (i *Identifier) String() string {
-	str := fmt.Sprintf("Name: %s\nDetails: %s\n", i.name, i.details)
-	str += fmt.Sprintf("Number of file infos: %d \n", len(i.infos))
-	str += fmt.Sprintf("Number of filename signatures: %d \n", len(i.gids))
-	str += fmt.Sprintf("Number of MIME signatures: %d \n", len(i.mids))
-	str += fmt.Sprintf("Number of XML signatures: %d \n", len(i.xids))
-	str += fmt.Sprintf("Number of byte signatures: %d \n", len(i.bids))
-	str += fmt.Sprintf("Number of text signatures: %d \n", len(i.tids))
-	return str
-}
-
-func (i *Identifier) Recognise(m core.MatcherType, idx int) (bool, string) {
-	switch m {
-	default:
-		return false, ""
-	case core.NameMatcher:
-		if idx >= i.gstart && idx < i.gstart+len(i.gids) {
-			idx = idx - i.gstart
-			return true, i.name + ": " + i.gids[idx]
-		}
-		return false, ""
-	case core.MIMEMatcher:
-		if idx >= i.mstart && idx < i.mstart+len(i.mids) {
-			idx = idx - i.mstart
-			return true, i.name + ": " + i.mids[idx]
-		}
-		return false, ""
-	case core.XMLMatcher:
-		if idx >= i.xstart && idx < i.xstart+len(i.xids) {
-			idx = idx - i.xstart
-			return true, i.name + ": " + i.xids[idx]
-		}
-		return false, ""
-	case core.ContainerMatcher:
-		return false, ""
-	case core.ByteMatcher:
-		if idx >= i.bstart && idx < i.bstart+len(i.bids) {
-			return true, i.name + ": " + i.bids[idx]
-		}
-		return false, ""
-	case core.TextMatcher:
-		if idx == i.tstart {
-			return true, i.name + ": " + config.TextPuid()
-		}
-		return false, ""
-	}
 }
 
 func (i *Identifier) Recorder() core.Recorder {

@@ -33,6 +33,7 @@ var identifier = struct {
 	noName      bool     // don't build with filename signatures
 	noMIME      bool     // don't build with MIME signatures
 	noXML       bool     // don't build with XML signatures
+	noRIFF      bool     // don't build with RIFF signatures
 	limit       []string // limit signature to a set of included PRONOM reports
 	exclude     []string // exclude a set of PRONOM reports from the signature
 	extensions  string   // directory where custom signature extensions are stored
@@ -96,6 +97,9 @@ func Details() string {
 	}
 	if identifier.noXML {
 		str += "; no XML matcher"
+	}
+	if identifier.noRIFF {
+		str += "; no RIFF matcher"
 	}
 	if pronom.noreports {
 		str += "; built without reports"
@@ -165,6 +169,11 @@ func NoMIME() bool {
 // NoXML reports whether XML signatures should be omitted.
 func NoXML() bool {
 	return identifier.noXML
+}
+
+// NoRIFF reports whether RIFF FOURCC signatures should be omitted.
+func NoRIFF() bool {
+	return identifier.noRIFF
 }
 
 // HasLimit reports whether a limited set of signatures has been selected.
@@ -347,10 +356,18 @@ func SetNoMIME() func() private {
 	}
 }
 
-// SetNoXML will cause MIME signatures to be omitted.
+// SetNoXML will cause XML signatures to be omitted.
 func SetNoXML() func() private {
 	return func() private {
 		identifier.noXML = true
+		return private{}
+	}
+}
+
+// SetNoRIFF will cause RIFF FOURCC signatures to be omitted.
+func SetNoRIFF() func() private {
+	return func() private {
+		identifier.noRIFF = true
 		return private{}
 	}
 }

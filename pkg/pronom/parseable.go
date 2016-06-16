@@ -17,6 +17,7 @@ package pronom
 import (
 	"strings"
 
+	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/parseable"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
@@ -103,6 +104,10 @@ func (r *reports) XMLs() ([][2]string, []string) {
 	return nil, nil
 }
 
+func (r *reports) Texts() []string {
+	return []string{config.TextPuid()}
+}
+
 func (r *reports) idsPuids() map[int]string {
 	if r.ip != nil {
 		return r.ip
@@ -126,6 +131,7 @@ func (r *reports) Priorities() priority.Map {
 			pMap.Add(this, idsPuids[sup])
 		}
 	}
+	pMap.Complete()
 	return pMap
 }
 
@@ -196,6 +202,10 @@ func (d *droid) XMLs() ([][2]string, []string) {
 	return nil, nil
 }
 
+func (d *droid) Texts() []string {
+	return []string{config.TextPuid()}
+}
+
 func (d *droid) idsPuids() map[int]string {
 	idsPuids := make(map[int]string)
 	for _, v := range d.FileFormats {
@@ -255,4 +265,52 @@ func (d *droid) Signatures() ([]frames.Signature, []string, error) {
 		}
 	}
 	return sigs, puids, err
+}
+
+// Containers
+type container struct {
+	*mappings.Container
+	parseable.Blank
+}
+
+func (c *container) IDs() []string {
+	return c.Puids()
+}
+
+func (c *container) containerSigs(t string) ([][]string, [][]frames.Signature, []string, error) {
+	// store all the puids in a map
+	cpuids := make(map[int]string)
+	for _, fm := range c.FormatMappings {
+		cpuids[fm.Id] = fm.Puid
+	}
+	cp := len(c.ContainerSignatures)
+	names := make([][]string, 0, cp)
+	sigs := make([][]frames.Signature, 0, cp)
+	puids := make([]string, 0, cp)
+	for _, c := range c.ContainerSignatures {
+		if c.ContainerType != t {
+			continue
+		}
+		puid := cpuids[c.Id]
+		ns, ss := make([]string, len(c.Files)), make([]frames.Signature, len(c.Files))
+		for i, f := range c.Files {
+			ns[i] = f.Path
+			sig, err := processDROID(puid, f.Signature.ByteSequences)
+			if err != nil {
+				return nil, nil, nil, err
+			}
+			ss[i] = sig
+		}
+		names = append(names, ns)
+		sigs = append(sigs, ss)
+		puids = append(puids, cpuids[c.Id])
+	}
+	return names, sigs, puids, nil
+}
+
+func (c *container) Zips() ([][]string, [][]frames.Signature, []string, error) {
+	return c.containerSigs("ZIP")
+}
+func (c *container) MSCFBs() ([][]string, [][]frames.Signature, []string, error) {
+	return c.containerSigs("OLE2")
 }

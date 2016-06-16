@@ -27,27 +27,26 @@ import (
 	"time"
 
 	"github.com/richardlehane/siegfried/config"
-	"github.com/richardlehane/siegfried/pkg/core"
-	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
-	"github.com/richardlehane/siegfried/pkg/core/containermatcher"
-	"github.com/richardlehane/siegfried/pkg/core/mimematcher"
-	"github.com/richardlehane/siegfried/pkg/core/namematcher"
 	"github.com/richardlehane/siegfried/pkg/core/parseable"
-	"github.com/richardlehane/siegfried/pkg/core/priority"
-	"github.com/richardlehane/siegfried/pkg/core/textmatcher"
 	"github.com/richardlehane/siegfried/pkg/pronom/mappings"
 )
 
 type pronom struct {
-	*Identifier
-	j  parseable.Parseable
-	c  *mappings.Container
-	pm priority.Map
+	parseable.Parseable
+	c parseable.Parseable
+}
+
+func (p *pronom) Zips() ([][]string, [][]frames.Signature, []string, error) {
+	return p.c.Zips()
+}
+
+func (p *pronom) MSCFBs() ([][]string, [][]frames.Signature, []string, error) {
+	return p.c.MSCFBs()
 }
 
 // Pronom creates a pronom object
-func newPronom() (*pronom, error) {
+func newPronom() (parseable.Parseable, error) {
 	p := &pronom{}
 	// apply no container rule
 	if !config.NoContainer() && !config.Inspect() {
@@ -58,29 +57,7 @@ func newPronom() (*pronom, error) {
 	if err := p.setParseables(); err != nil {
 		return nil, err
 	}
-	if config.Inspect() {
-		return p, nil
-	}
-	// apply noPriority rule
-	if !config.NoPriority() {
-		p.pm = p.j.Priorities()
-		p.pm.Complete()
-	}
-	return p, nil
-}
-
-func (p *pronom) identifier() *Identifier {
-	p.Identifier = &Identifier{
-		p:          p,
-		name:       config.Name(),
-		details:    config.Details(),
-		noPriority: config.NoPriority(),
-		infos:      infos(p.j.Infos()),
-	}
-	if p.hasPuid(config.ZipPuid()) {
-		p.Identifier.zipDefault = true
-	}
-	return p.Identifier
+	return parseable.ApplyConfig(p), nil
 }
 
 // set parseables joins signatures in the DROID signature file with any extra reports and adds that to the pronom object
@@ -108,7 +85,7 @@ func (p *pronom) setParseables() error {
 			}
 			fmt.Println(sig)
 		}
-		p.j = r
+		p.Parseable = r
 		return nil
 	}
 	// apply limit or exclude filters (only one can be applied)
@@ -120,23 +97,23 @@ func (p *pronom) setParseables() error {
 	}
 	// if noreports set
 	if config.Reports() == "" {
-		p.j = d
+		p.Parseable = d
 		// apply filter
 		if config.HasLimit() || config.HasExclude() {
-			p.j = parseable.Filter(puids, p.j)
+			p.Parseable = parseable.Filter(puids, p.Parseable)
 		}
 	} else { // otherwise build from reports
 		r, err := newReports(puids, d.idsPuids())
 		if err != nil {
 			return fmt.Errorf("Pronom: error loading reports; got %s\nYou must download PRONOM reports to build a signature (unless you use the -noreports flag). You can use `roy harvest` to download reports", err)
 		}
-		p.j = r
+		p.Parseable = r
 	}
 	// exclude byte signatures where also have container signatures, unless doubleup set
 	if !config.DoubleUp() {
-		p.j = &doublesFilter{
-			config.ExcludeDoubles(puids, p.c.Puids()),
-			p.j,
+		p.Parseable = &doublesFilter{
+			config.ExcludeDoubles(puids, p.c.IDs()),
+			p.Parseable,
 		}
 	}
 	// add extensions
@@ -145,11 +122,7 @@ func (p *pronom) setParseables() error {
 		if err != nil {
 			return fmt.Errorf("Pronom: error loading extension file; got %s", err)
 		}
-		p.j = parseable.Join(p.j, e)
-	}
-	// mirror PREV wild segments into EOF if maxBof and maxEOF set
-	if config.MaxBOF() > 0 && config.MaxEOF() > 0 {
-		p.j = &parseable.Mirror{p.j}
+		p.Parseable = parseable.Join(p.Parseable, e)
 	}
 	return nil
 }
@@ -193,152 +166,33 @@ func reportPath(puid string) string {
 
 // setContainers adds containers to a pronom object. It takes as an argument the path to a container signature file
 func (p *pronom) setContainers() error {
-	p.c = &mappings.Container{}
-	err := openXML(config.Container(), p.c)
+	c := &mappings.Container{}
+	err := openXML(config.Container(), c)
 	if err != nil {
 		return err
 	}
 	for _, ex := range config.ExtendC() {
-		c := &mappings.Container{}
-		err = openXML(ex, c)
+		c1 := &mappings.Container{}
+		err = openXML(ex, c1)
 		if err != nil {
 			return err
 		}
-		p.c.ContainerSignatures = append(p.c.ContainerSignatures, c.ContainerSignatures...)
-		p.c.FormatMappings = append(p.c.FormatMappings, c.FormatMappings...)
+		c.ContainerSignatures = append(c.ContainerSignatures, c1.ContainerSignatures...)
+		c.FormatMappings = append(c.FormatMappings, c1.FormatMappings...)
 	}
+	p.c = &container{c, parseable.Blank{}}
 	return nil
 }
 
-// add adds extension, bytematcher or containermatcher signatures to the identifier
-func (p *pronom) add(m core.Matcher, t core.MatcherType) (core.Matcher, error) {
-	var l int
-	var err error
-	switch t {
-	default:
-		return nil, fmt.Errorf("Pronom: unknown matcher type %d", t)
-	case core.NameMatcher:
-		if !config.NoName() {
-			var exts []string
-			exts, p.ePuids = p.j.Globs()
-			m, l, err = namematcher.Add(m, namematcher.SignatureSet(exts), nil)
-			if err != nil {
-				return nil, err
-			}
-			p.eStart = l - len(p.ePuids)
-		}
-	case core.MIMEMatcher:
-		if !config.NoMIME() {
-			var mimes []string
-			mimes, p.mPuids = p.j.MIMEs()
-			m, l, err = mimematcher.Add(m, mimematcher.SignatureSet(mimes), nil)
-			if err != nil {
-				return nil, err
-			}
-			p.mStart = l - len(p.mPuids)
-		}
-	case core.ContainerMatcher:
-		return p.contMatcher(m)
-	case core.ByteMatcher:
-		var sigs []frames.Signature
-		var err error
-		sigs, p.bPuids, err = p.j.Signatures()
-		if err != nil {
-			return nil, err
-		}
-		var plist priority.List
-		if !config.NoPriority() {
-			plist = p.pm.List(p.bPuids)
-		}
-		m, l, err = bytematcher.Add(m, bytematcher.SignatureSet(sigs), plist)
-		if err != nil {
-			return nil, err
-		}
-		p.bStart = l - len(p.bPuids)
-	case core.TextMatcher:
-		if !config.NoText() && p.hasPuid(config.TextPuid()) {
-			m, l, _ = textmatcher.Add(m, textmatcher.SignatureSet{}, nil)
-			p.tStart = l
-		}
-	case core.XMLMatcher:
-	}
-	return m, nil
-}
-
-// for limit/exclude filtering of containers
-func (p pronom) hasPuid(puid string) bool {
-	for _, v := range p.j.IDs() {
-		if puid == v {
+// UTILS
+func contains(strs []string, s string) bool {
+	for _, v := range strs {
+		if s == v {
 			return true
 		}
 	}
 	return false
 }
-
-func (p pronom) contMatcher(m core.Matcher) (core.Matcher, error) {
-	// when no container is set
-	if p.c == nil {
-		return m, nil
-	}
-	var zpuids, mpuids []string
-	var zsigs, msigs [][]frames.Signature
-	var znames, mnames [][]string
-	cpuids := make(map[int]string)
-	for _, fm := range p.c.FormatMappings {
-		cpuids[fm.Id] = fm.Puid
-	}
-	for _, c := range p.c.ContainerSignatures {
-		puid := cpuids[c.Id]
-		// only include the included fmts
-		// warning - this will mean no standalone container extensions
-		if !p.hasPuid(puid) {
-			continue
-		}
-		typ := c.ContainerType
-		names := make([]string, 0, 1)
-		sigs := make([]frames.Signature, 0, 1)
-		for _, f := range c.Files {
-			names = append(names, f.Path)
-			sig, err := processDROID(puid, f.Signature.ByteSequences)
-			if err != nil {
-				return nil, err
-			}
-			sigs = append(sigs, sig)
-		}
-		switch typ {
-		case "ZIP":
-			zpuids = append(zpuids, puid)
-			znames = append(znames, names)
-			zsigs = append(zsigs, sigs)
-		case "OLE2":
-			mpuids = append(mpuids, puid)
-			mnames = append(mnames, names)
-			msigs = append(msigs, sigs)
-		default:
-			return nil, fmt.Errorf("Pronom: container parsing - unknown type %s", typ)
-		}
-	}
-	// apply no priority config
-	var zplist, mplist priority.List
-	if !config.NoPriority() {
-		zplist, mplist = p.pm.List(zpuids), p.pm.List(mpuids)
-	}
-	var l int
-	var err error
-	m, _, err = containermatcher.Add(m, containermatcher.SignatureSet{containermatcher.Zip, znames, zsigs}, zplist)
-	if err != nil {
-		return nil, err
-	}
-	m, l, err = containermatcher.Add(m, containermatcher.SignatureSet{containermatcher.Mscfb, mnames, msigs}, mplist)
-	if err != nil {
-		return nil, err
-	}
-	p.cPuids = append(zpuids, mpuids...)
-	p.cStart = l - len(p.cPuids)
-	return m, nil
-}
-
-// UTILS
 
 // Harvest fetches PRONOM reports listed in the DROID file
 func Harvest() []error {
@@ -391,7 +245,7 @@ func getHttp(url string) ([]byte, error) {
 		return nil, err
 	}
 	_, timeout, transport := config.HarvestOptions()
-	req.Header.Add("User-Agent", "siegfried/r2d2bot (+https://github.com/richardlehane/siegfried)")
+	req.Header.Add("User-Agent", "siegfried/roybot (+https://github.com/richardlehane/siegfried)")
 	timer := time.AfterFunc(timeout, func() {
 		transport.CancelRequest(req)
 	})
