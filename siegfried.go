@@ -58,7 +58,7 @@ import (
 )
 
 var ( // for side effect - register their patterns
-	_ = pronom.Mask(0)
+	_ = pronom.Range{}
 	_ = mimeinfo.Int8(0)
 )
 

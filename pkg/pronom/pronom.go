@@ -159,11 +159,11 @@ func newDroid(path string) (*droid, error) {
 	if err := openXML(path, d); err != nil {
 		return nil, err
 	}
-	return &droid{d}, nil
+	return &droid{d, parseable.Blank{}}, nil
 }
 
 func newReports(reps []string, idsPuids map[int]string) (*reports, error) {
-	r := &reports{reps, make([]*mappings.Report, len(reps)), idsPuids}
+	r := &reports{reps, make([]*mappings.Report, len(reps)), idsPuids, parseable.Blank{}}
 	if len(reps) == 0 {
 		return r, nil // empty signatures
 	}

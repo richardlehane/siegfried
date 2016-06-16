@@ -18,6 +18,7 @@ import (
 	"fmt"
 	"path/filepath"
 	"testing"
+	"time"
 
 	"github.com/richardlehane/siegfried/config"
 )
@@ -51,5 +52,18 @@ func TestLOC(t *testing.T) {
 		}
 	} else {
 		t.Fatalf("Expecting a LOC, got nothing! Error: %v", err)
+	}
+}
+
+func TestUpdated(t *testing.T) {
+	config.SetHome(filepath.Join("..", "..", "cmd", "roy", "data"))
+	l, err := newLOC(config.LOC())
+	if err != nil || l == nil {
+		t.Fatalf("couldn't parse LOC file: %v", err)
+	}
+	expect, _ := time.Parse(dateFmt, "2016-01-01")
+	f := l.(fdds)
+	if !f.Updated().After(expect) {
+		t.Fatalf("expected %v, got %v", expect, f.Updated())
 	}
 }

@@ -29,11 +29,13 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
 	"github.com/richardlehane/siegfried/pkg/core/parseable"
-	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/mimeinfo/mappings"
 )
 
-type mimeinfo []mappings.MIMEType
+type mimeinfo struct {
+	m []mappings.MIMEType
+	parseable.Blank
+}
 
 func newMIMEInfo(path string) (parseable.Parseable, error) {
 	buf, err := ioutil.ReadFile(path)
@@ -72,12 +74,12 @@ func newMIMEInfo(path string) (parseable.Parseable, error) {
 			}
 		}
 	}
-	return mimeinfo(mi.MIMETypes), nil
+	return mimeinfo{mi.MIMETypes, parseable.Blank{}}, nil
 }
 
 func (mi mimeinfo) IDs() []string {
-	ids := make([]string, len(mi))
-	for i, v := range mi {
+	ids := make([]string, len(mi.m))
+	for i, v := range mi.m {
 		ids[i] = v.MIME
 	}
 	return ids
@@ -110,8 +112,8 @@ func textMIMES(m map[string]parseable.FormatInfo) []string {
 }
 
 func (mi mimeinfo) Infos() map[string]parseable.FormatInfo {
-	fmap := make(map[string]parseable.FormatInfo, len(mi))
-	for _, v := range mi {
+	fmap := make(map[string]parseable.FormatInfo, len(mi.m))
+	for _, v := range mi.m {
 		fi := formatInfo{}
 		if len(v.Comment) > 0 {
 			fi.comment = v.Comment[0]
@@ -158,8 +160,8 @@ func (mi mimeinfo) Infos() map[string]parseable.FormatInfo {
 }
 
 func (mi mimeinfo) Globs() ([]string, []string) {
-	globs, ids := make([]string, 0, len(mi)), make([]string, 0, len(mi))
-	for _, v := range mi {
+	globs, ids := make([]string, 0, len(mi.m)), make([]string, 0, len(mi.m))
+	for _, v := range mi.m {
 		for _, w := range v.Globs {
 			globs, ids = append(globs, w.Pattern), append(ids, v.MIME)
 		}
@@ -168,8 +170,8 @@ func (mi mimeinfo) Globs() ([]string, []string) {
 }
 
 func (mi mimeinfo) MIMEs() ([]string, []string) {
-	mimes, ids := make([]string, 0, len(mi)), make([]string, 0, len(mi))
-	for _, v := range mi {
+	mimes, ids := make([]string, 0, len(mi.m)), make([]string, 0, len(mi.m))
+	for _, v := range mi.m {
 		mimes, ids = append(mimes, v.MIME), append(ids, v.MIME)
 		for _, w := range v.Aliases {
 			mimes, ids = append(mimes, w.Alias), append(ids, v.MIME)
@@ -180,8 +182,8 @@ func (mi mimeinfo) MIMEs() ([]string, []string) {
 
 // slice of root/NS
 func (mi mimeinfo) XMLs() ([][2]string, []string) {
-	xmls, ids := make([][2]string, 0, len(mi)), make([]string, 0, len(mi))
-	for _, v := range mi {
+	xmls, ids := make([][2]string, 0, len(mi.m)), make([]string, 0, len(mi.m))
+	for _, v := range mi.m {
 		for _, w := range v.XMLPattern {
 			xmls, ids = append(xmls, [2]string{w.Local, w.NS}), append(ids, v.MIME)
 		}
@@ -191,8 +193,8 @@ func (mi mimeinfo) XMLs() ([][2]string, []string) {
 
 func (mi mimeinfo) Signatures() ([]frames.Signature, []string, error) {
 	var errs []error
-	sigs, ids := make([]frames.Signature, 0, len(mi)), make([]string, 0, len(mi))
-	for _, v := range mi {
+	sigs, ids := make([]frames.Signature, 0, len(mi.m)), make([]string, 0, len(mi.m))
+	for _, v := range mi.m {
 		for _, w := range v.Magic {
 			for _, s := range w.Matches {
 				ss, err := toSigs(s)
@@ -398,6 +400,3 @@ func unquote(input string) []byte {
 	}
 	return rgx.ReplaceAllFunc([]byte(rpl.Replace(input)), numReplace)
 }
-
-// we don't create a priority map for mimeinfo
-func (mi mimeinfo) Priorities() priority.Map { return nil }

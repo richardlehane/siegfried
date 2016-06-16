@@ -40,6 +40,7 @@ type Identifier interface {
 const (
 	Pronom byte = iota // Pronom is the TNA's PRONOM file format registry
 	MIMEInfo
+	LOCFdd
 )
 
 // IdentifierLoader unmarshals an Identifer from a LoadSaver.

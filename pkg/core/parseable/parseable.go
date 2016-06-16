@@ -24,14 +24,31 @@ type FormatInfo interface{}
 
 // Parseable is something we can parse to derive filename, MIME, XML and byte signatures.
 type Parseable interface {
-	IDs() []string                                     // list of all IDs in identifier
-	Infos() map[string]FormatInfo                      // identifier specific information
-	Globs() ([]string, []string)                       // signature set and corresponding IDs for globmatcher
-	MIMEs() ([]string, []string)                       // signature set and corresponding IDs for mimematcher
-	XMLs() ([][2]string, []string)                     // signature set and corresponding IDs for xmlmatcher
-	Signatures() ([]frames.Signature, []string, error) // signature set and corresponding IDs for bytematcher
-	Priorities() priority.Map                          // priority map
+	IDs() []string                                               // list of all IDs in identifier
+	Infos() map[string]FormatInfo                                // identifier specific information
+	Globs() ([]string, []string)                                 // signature set and corresponding IDs for globmatcher
+	MIMEs() ([]string, []string)                                 // signature set and corresponding IDs for mimematcher
+	XMLs() ([][2]string, []string)                               // signature set and corresponding IDs for xmlmatcher
+	Signatures() ([]frames.Signature, []string, error)           // signature set and corresponding IDs for bytematcher
+	Zips() ([][]string, [][]frames.Signature, []string, error)   // signature set and corresponding IDs for container matcher - Zip
+	MSCFBs() ([][]string, [][]frames.Signature, []string, error) // signature set and corresponding IDs for container matcher - MSCFB
+	RIFFs() ([][4]byte, []string)                                // signature set and corresponding IDs for riffmatcher
+	Priorities() priority.Map                                    // priority map
 }
+
+// Blank parseable can be embedded within other parseables in order to include default nil implementations of the interface
+type Blank struct{}
+
+func (b Blank) IDs() []string                                               { return nil }
+func (b Blank) Infos() map[string]FormatInfo                                { return nil }
+func (b Blank) Globs() ([]string, []string)                                 { return nil, nil }
+func (b Blank) MIMEs() ([]string, []string)                                 { return nil, nil }
+func (b Blank) XMLs() ([][2]string, []string)                               { return nil, nil }
+func (b Blank) Signatures() ([]frames.Signature, []string, error)           { return nil, nil, nil }
+func (b Blank) Zips() ([][]string, [][]frames.Signature, []string, error)   { return nil, nil, nil, nil }
+func (b Blank) MSCFBs() ([][]string, [][]frames.Signature, []string, error) { return nil, nil, nil, nil }
+func (b Blank) RIFFs() ([][4]byte, []string)                                { return nil, nil }
+func (b Blank) Priorities() priority.Map                                    { return nil }
 
 // Joint allows two parseables to be logically joined.
 type joint struct {
@@ -103,6 +120,12 @@ func (j *joint) Priorities() priority.Map {
 	}
 	return ps
 }
+
+func (j *joint) Zips() ([][]string, [][]frames.Signature, []string, error) { return nil, nil, nil, nil }
+func (j *joint) MSCFBs() ([][]string, [][]frames.Signature, []string, error) {
+	return nil, nil, nil, nil
+}
+func (j *joint) RIFFs() ([][4]byte, []string) { return nil, nil }
 
 // Filtered allows us to apply limit and exclude filters to a parseable (in both cases - provide the list of ids we want to show).
 type filtered struct {
@@ -194,6 +217,14 @@ func (f *filtered) Signatures() ([]frames.Signature, []string, error) {
 	}
 	return ret, retp, nil
 }
+
+func (f *filtered) Zips() ([][]string, [][]frames.Signature, []string, error) {
+	return nil, nil, nil, nil
+}
+func (f *filtered) MSCFBs() ([][]string, [][]frames.Signature, []string, error) {
+	return nil, nil, nil, nil
+}
+func (f *filtered) RIFFs() ([][4]byte, []string) { return nil, nil }
 
 // Priorities returns a priority map.
 func (f *filtered) Priorities() priority.Map {

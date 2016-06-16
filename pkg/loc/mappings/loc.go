@@ -28,6 +28,7 @@ type FDD struct {
 	Magics     []string   `xml:"fileTypeSignifiers>signifiersGroup>magicNumbers>sigValues>sigValue"`
 	Others     []Other    `xml:"fileTypeSignifiers>signifiersGroup>other"`
 	Relations  []Relation `xml:"identificationAndDescription>relationships>relationship"`
+	Updates    []string   `xml:"properties>updates>date"`
 }
 
 type Other struct {

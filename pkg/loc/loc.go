@@ -21,6 +21,7 @@ import (
 	"io/ioutil"
 	"path/filepath"
 	"strings"
+	"time"
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/parseable"
@@ -59,6 +60,21 @@ func newLOC(path string) (parseable.Parseable, error) {
 		}
 	}
 	return ret, nil
+}
+
+const dateFmt = "2006-01-02"
+
+func (f fdds) Updated() time.Time {
+	t, _ := time.Parse(dateFmt, "2000-01-01")
+	for _, v := range f {
+		for _, u := range v.Updates {
+			tt, err := time.Parse(dateFmt, u)
+			if err == nil && tt.After(t) {
+				t = tt
+			}
+		}
+	}
+	return t
 }
 
 func (f fdds) IDs() []string {

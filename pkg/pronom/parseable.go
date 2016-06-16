@@ -54,6 +54,7 @@ type reports struct {
 	p  []string
 	r  []*mappings.Report
 	ip map[int]string
+	parseable.Blank
 }
 
 func (r *reports) IDs() []string {
@@ -147,6 +148,7 @@ func (r *reports) Signatures() ([]frames.Signature, []string, error) {
 // DROID
 type droid struct {
 	*mappings.Droid
+	parseable.Blank
 }
 
 func (d *droid) IDs() []string {

@@ -465,3 +465,14 @@ func (l *LoadSaver) LoadTime() time.Time {
 	l.Err = t.UnmarshalBinary(buf)
 	return *t
 }
+
+func (l *LoadSaver) SaveFourCC(cc [4]byte) {
+	l.put(cc[:])
+}
+
+func (l *LoadSaver) LoadFourCC() [4]byte {
+	buf := l.get(4)
+	var ret [4]byte
+	copy(ret[:], buf)
+	return ret
+}
