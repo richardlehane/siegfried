@@ -22,7 +22,6 @@ import (
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/identifier"
-	"github.com/richardlehane/siegfried/pkg/core/parseable"
 	"github.com/richardlehane/siegfried/pkg/core/persist"
 )
 
@@ -31,7 +30,7 @@ func init() {
 }
 
 type Identifier struct {
-	p     parseable.Parseable
+	p     identifier.Parseable
 	infos map[string]formatInfo
 	*identifier.Base
 }
@@ -74,7 +73,7 @@ func New(opts ...config.Option) (core.Identifier, error) {
 	return &Identifier{
 		p:     pronom,
 		infos: infos(p.Infos()),
-		Base:  identifier.New(p, contains(p.IDs(), config.ZipPuid())),
+		Base:  identifier.New(pronom, contains(pronom.IDs(), config.ZipPuid())),
 	}, nil
 }
 
@@ -189,8 +188,11 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 }
 
 func (r *Recorder) Satisfied(mt core.MatcherType) (bool, int) {
+	if r.NoPriority() {
+		return false, 0
+	}
 	if r.cscore < incScore {
-		if mt == core.ByteMatcher || mt == core.XMLMatcher {
+		if mt == core.ByteMatcher || mt == core.XMLMatcher || mt == core.RIFFMatcher {
 			return false, 0
 		}
 		if len(r.ids) == 0 {
@@ -233,66 +235,99 @@ func lowConfidence(conf int) string {
 }
 
 func (r *Recorder) Report(res chan core.Identification) {
-	if len(r.ids) > 0 {
-		sort.Sort(r.ids)
-		conf := r.ids[0].confidence
-		// if we've only got extension / mime matches, check if those matches are ruled out by lack of byte match
-		// only permit a single extension or mime only match
-		// add warnings too
-		if conf <= textScore {
-			nids := make([]Identification, 0, 1)
-			for _, v := range r.ids {
-				// if overall confidence is greater than mime or ext only, then rule out any lesser confident matches
-				if conf > mimeScore && v.confidence != conf {
-					break
-				}
-				// if we have plain text result that is based on ext or mime only,
-				// and not on a text match, and if text matcher is on for this identifier,
-				// then don't report a text match
-				if v.ID == config.TextPuid() && conf < textScore && r.textActive {
-					continue
-				}
-				// if the match has no corresponding byte or container signature...
-				if ok := r.hasSig(v.ID); !ok {
-					// break immediately if more than one match
-					if len(nids) > 0 {
-						nids = nids[:0]
-						break
-					}
-					if len(v.Warning) > 0 {
-						v.Warning += "; " + "match on " + lowConfidence(v.confidence) + " only"
-					} else {
-						v.Warning = "match on " + lowConfidence(v.confidence) + " only"
-					}
-					nids = append(nids, v)
-				}
-			}
-			if len(nids) != 1 {
-				poss := make([]string, len(r.ids))
-				for i, v := range r.ids {
-					poss[i] = v.ID
-					conf = conf | v.confidence
-				}
-				nids = []Identification{Identification{r.Name(), "UNKNOWN", "", "", "", nil, fmt.Sprintf("no match; possibilities based on %v are %v", lowConfidence(conf), strings.Join(poss, ", ")), 0, 0}}
-			}
-			r.ids = nids
-		}
-		res <- r.checkActive(r.ids[0])
-		if len(r.ids) > 1 {
-			for i, v := range r.ids[1:] {
-				if v.confidence == conf || (r.NoPriority() && v.confidence >= incScore) {
-					res <- r.checkActive(r.ids[i+1])
-				} else {
-					break
-				}
-			}
-		}
-	} else {
+	// no results
+	if len(r.ids) == 0 {
 		res <- Identification{r.Name(), "UNKNOWN", "", "", "", nil, "no match", 0, 0}
+		return
 	}
+	sort.Sort(r.ids)
+	// exhaustive
+	if r.Multi() == config.Exhaustive {
+		for _, v := range r.ids {
+			res <- r.updateWarning(v)
+		}
+		return
+	}
+	conf := r.ids[0].confidence
+	// if we've only got extension / mime matches, check if those matches are ruled out by lack of byte match
+	// only permit a single extension or mime only match
+	// add warnings too
+	if conf <= textScore {
+		nids := make([]Identification, 0, 1)
+		for _, v := range r.ids {
+			// if overall confidence is greater than mime or ext only, then rule out any lesser confident matches
+			if conf > mimeScore && v.confidence != conf {
+				break
+			}
+			// if we have plain text result that is based on ext or mime only,
+			// and not on a text match, and if text matcher is on for this identifier,
+			// then don't report a text match
+			if v.ID == config.TextPuid() && conf < textScore && r.textActive {
+				continue
+			}
+			// if the match has no corresponding byte or container signature...
+			if ok := r.hasSig(v.ID); !ok {
+				// break immediately if more than one match
+				if len(nids) > 0 {
+					nids = nids[:0]
+					break
+				}
+				nids = append(nids, v)
+			}
+		}
+		if len(nids) != 1 {
+			poss := make([]string, len(r.ids))
+			for i, v := range r.ids {
+				poss[i] = v.ID
+				conf = conf | v.confidence
+			}
+			res <- Identification{r.Name(), "UNKNOWN", "", "", "", nil, fmt.Sprintf("no match; possibilities based on %v are %v", lowConfidence(conf), strings.Join(poss, ", ")), 0, 0}
+			return
+		}
+		r.ids = nids
+	}
+	// handle single result only
+	if r.Multi() == config.Single && len(r.ids) > 1 && r.ids[0].confidence == r.ids[1].confidence {
+		poss := make([]string, 0, len(r.ids))
+		for _, v := range r.ids {
+			if v.confidence < conf {
+				break
+			}
+			poss = append(poss, v.ID)
+		}
+		res <- Identification{r.Name(), "UNKNOWN", "", "", "", nil, fmt.Sprintf("multiple matches %v", strings.Join(poss, ", ")), 0, 0}
+		return
+	}
+	for i, v := range r.ids {
+		if i > 0 {
+			switch r.Multi() {
+			case config.Single:
+				return
+			case config.Conclusive:
+				if v.confidence < conf {
+					return
+				}
+			default:
+				if v.confidence < incScore {
+					return
+				}
+			}
+		}
+		res <- r.updateWarning(v)
+	}
+	return
 }
 
-func (r *Recorder) checkActive(i Identification) Identification {
+func (r *Recorder) updateWarning(i Identification) Identification {
+	// apply low confidence
+	if i.confidence <= textScore {
+		if len(i.Warning) > 0 {
+			i.Warning += "; " + "match on " + lowConfidence(i.confidence) + " only"
+		} else {
+			i.Warning = "match on " + lowConfidence(i.confidence) + " only"
+		}
+	}
+	// apply mismatches
 	if r.extActive && (i.confidence&extScore != extScore) {
 		for _, v := range r.IDs(core.NameMatcher) {
 			if i.ID == v {

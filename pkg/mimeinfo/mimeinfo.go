@@ -28,16 +28,15 @@ import (
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
-	"github.com/richardlehane/siegfried/pkg/core/parseable"
 	"github.com/richardlehane/siegfried/pkg/mimeinfo/mappings"
 )
 
 type mimeinfo struct {
 	m []mappings.MIMEType
-	parseable.Blank
+	identifier.Blank
 }
 
-func newMIMEInfo(path string) (parseable.Parseable, error) {
+func newMIMEInfo(path string) (identifier.Parseable, error) {
 	buf, err := ioutil.ReadFile(path)
 	if err != nil {
 		return nil, err
@@ -74,7 +73,7 @@ func newMIMEInfo(path string) (parseable.Parseable, error) {
 			}
 		}
 	}
-	return mimeinfo{mi.MIMETypes, parseable.Blank{}}, nil
+	return mimeinfo{mi.MIMETypes, identifier.Blank{}}, nil
 }
 
 func (mi mimeinfo) IDs() []string {
@@ -93,7 +92,7 @@ type formatInfo struct {
 }
 
 // turn generic FormatInfo into mimeinfo formatInfo
-func infos(m map[string]parseable.FormatInfo) map[string]formatInfo {
+func infos(m map[string]identifier.FormatInfo) map[string]formatInfo {
 	i := make(map[string]formatInfo, len(m))
 	for k, v := range m {
 		i[k] = v.(formatInfo)
@@ -101,7 +100,7 @@ func infos(m map[string]parseable.FormatInfo) map[string]formatInfo {
 	return i
 }
 
-func textMIMES(m map[string]parseable.FormatInfo) []string {
+func textMIMES(m map[string]identifier.FormatInfo) []string {
 	ret := make([]string, 0, len(m))
 	for k, v := range m {
 		if v.(formatInfo).text {
@@ -111,8 +110,8 @@ func textMIMES(m map[string]parseable.FormatInfo) []string {
 	return ret
 }
 
-func (mi mimeinfo) Infos() map[string]parseable.FormatInfo {
-	fmap := make(map[string]parseable.FormatInfo, len(mi.m))
+func (mi mimeinfo) Infos() map[string]identifier.FormatInfo {
+	fmap := make(map[string]identifier.FormatInfo, len(mi.m))
 	for _, v := range mi.m {
 		fi := formatInfo{}
 		if len(v.Comment) > 0 {
@@ -178,6 +177,10 @@ func (mi mimeinfo) MIMEs() ([]string, []string) {
 		}
 	}
 	return mimes, ids
+}
+
+func (mi mimeinfo) Texts() []string {
+	return textMIMES(mi.Infos())
 }
 
 // slice of root/NS

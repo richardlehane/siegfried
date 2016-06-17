@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
-	"github.com/richardlehane/siegfried/pkg/core/parseable"
+	"github.com/richardlehane/siegfried/pkg/core/identifier"
 	"github.com/richardlehane/siegfried/pkg/pronom/mappings"
 )
 
@@ -188,7 +188,7 @@ func TestParseHex(t *testing.T) {
 }
 
 func TestParseReports(t *testing.T) {
-	r := &reports{[]string{"test1", "test2", "test3", "test4"}, []*mappings.Report{rStub1, rStub2, rStub3, rStub4}, nil, parseable.Blank{}}
+	r := &reports{[]string{"test1", "test2", "test3", "test4"}, []*mappings.Report{rStub1, rStub2, rStub3, rStub4}, nil, identifier.Blank{}}
 	_, _, err := r.Signatures()
 	if err != nil {
 		t.Error(err)

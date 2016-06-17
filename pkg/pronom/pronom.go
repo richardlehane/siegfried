@@ -28,13 +28,32 @@ import (
 
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
-	"github.com/richardlehane/siegfried/pkg/core/parseable"
+	"github.com/richardlehane/siegfried/pkg/core/identifier"
 	"github.com/richardlehane/siegfried/pkg/pronom/mappings"
 )
 
 type pronom struct {
-	parseable.Parseable
-	c parseable.Parseable
+	identifier.Parseable
+	c identifier.Parseable
+}
+
+// add container IDs to the DROID IDs (this ensures container extensions register)
+func (p *pronom) IDs() []string {
+	ids := make([]string, len(p.Parseable.IDs()), len(p.Parseable.IDs())+len(p.c.IDs()))
+	copy(ids, p.Parseable.IDs())
+	for _, id := range p.c.IDs() {
+		var present bool
+		for _, ida := range p.Parseable.IDs() {
+			if id == ida {
+				present = true
+				break
+			}
+		}
+		if !present {
+			ids = append(ids, id)
+		}
+	}
+	return ids
 }
 
 func (p *pronom) Zips() ([][]string, [][]frames.Signature, []string, error) {
@@ -46,7 +65,7 @@ func (p *pronom) MSCFBs() ([][]string, [][]frames.Signature, []string, error) {
 }
 
 // Pronom creates a pronom object
-func newPronom() (parseable.Parseable, error) {
+func newPronom() (identifier.Parseable, error) {
 	p := &pronom{}
 	// apply no container rule
 	if !config.NoContainer() && !config.Inspect() {
@@ -57,10 +76,10 @@ func newPronom() (parseable.Parseable, error) {
 	if err := p.setParseables(); err != nil {
 		return nil, err
 	}
-	return parseable.ApplyConfig(p), nil
+	return identifier.ApplyConfig(p), nil
 }
 
-// set parseables joins signatures in the DROID signature file with any extra reports and adds that to the pronom object
+// set identifiers joins signatures in the DROID signature file with any extra reports and adds that to the pronom object
 func (p *pronom) setParseables() error {
 	d, err := newDroid(config.Droid())
 	if err != nil {
@@ -98,10 +117,6 @@ func (p *pronom) setParseables() error {
 	// if noreports set
 	if config.Reports() == "" {
 		p.Parseable = d
-		// apply filter
-		if config.HasLimit() || config.HasExclude() {
-			p.Parseable = parseable.Filter(puids, p.Parseable)
-		}
 	} else { // otherwise build from reports
 		r, err := newReports(puids, d.idsPuids())
 		if err != nil {
@@ -109,20 +124,20 @@ func (p *pronom) setParseables() error {
 		}
 		p.Parseable = r
 	}
-	// exclude byte signatures where also have container signatures, unless doubleup set
-	if !config.DoubleUp() {
-		p.Parseable = &doublesFilter{
-			config.ExcludeDoubles(puids, p.c.IDs()),
-			p.Parseable,
-		}
-	}
 	// add extensions
 	for _, v := range config.Extend() {
 		e, err := newDroid(v)
 		if err != nil {
 			return fmt.Errorf("Pronom: error loading extension file; got %s", err)
 		}
-		p.Parseable = parseable.Join(p.Parseable, e)
+		p.Parseable = identifier.Join(p.Parseable, e)
+	}
+	// exclude byte signatures where also have container signatures, unless doubleup set
+	if !config.DoubleUp() {
+		p.Parseable = doublesFilter{
+			config.ExcludeDoubles(puids, p.c.IDs()),
+			p.Parseable,
+		}
 	}
 	return nil
 }
@@ -132,11 +147,11 @@ func newDroid(path string) (*droid, error) {
 	if err := openXML(path, d); err != nil {
 		return nil, err
 	}
-	return &droid{d, parseable.Blank{}}, nil
+	return &droid{d, identifier.Blank{}}, nil
 }
 
 func newReports(reps []string, idsPuids map[int]string) (*reports, error) {
-	r := &reports{reps, make([]*mappings.Report, len(reps)), idsPuids, parseable.Blank{}}
+	r := &reports{reps, make([]*mappings.Report, len(reps)), idsPuids, identifier.Blank{}}
 	if len(reps) == 0 {
 		return r, nil // empty signatures
 	}
@@ -180,7 +195,7 @@ func (p *pronom) setContainers() error {
 		c.ContainerSignatures = append(c.ContainerSignatures, c1.ContainerSignatures...)
 		c.FormatMappings = append(c.FormatMappings, c1.FormatMappings...)
 	}
-	p.c = &container{c, parseable.Blank{}}
+	p.c = &container{c, identifier.Blank{}}
 	return nil
 }
 

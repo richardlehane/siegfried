@@ -50,6 +50,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/mimematcher"
 	"github.com/richardlehane/siegfried/pkg/core/namematcher"
 	"github.com/richardlehane/siegfried/pkg/core/persist"
+	"github.com/richardlehane/siegfried/pkg/core/riffmatcher"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 	"github.com/richardlehane/siegfried/pkg/core/textmatcher"
 	"github.com/richardlehane/siegfried/pkg/core/xmlmatcher"
@@ -72,6 +73,7 @@ type Siegfried struct {
 	mm core.Matcher // mimematcher
 	cm core.Matcher // containermatcher
 	xm core.Matcher // bytematcher
+	rm core.Matcher // riffmatcher
 	bm core.Matcher // bytematcher
 	tm core.Matcher // textmatcher
 	// mutatable fields follow
@@ -119,6 +121,9 @@ func (s *Siegfried) Add(i core.Identifier) error {
 	if s.xm, err = i.Add(s.xm, core.XMLMatcher); err != nil {
 		return err
 	}
+	if s.rm, err = i.Add(s.rm, core.RIFFMatcher); err != nil {
+		return err
+	}
 	if s.bm, err = i.Add(s.bm, core.ByteMatcher); err != nil {
 		return err
 	}
@@ -137,6 +142,7 @@ func (s *Siegfried) Save(path string) error {
 	mimematcher.Save(s.mm, ls)
 	containermatcher.Save(s.cm, ls)
 	xmlmatcher.Save(s.xm, ls)
+	riffmatcher.Save(s.rm, ls)
 	bytematcher.Save(s.bm, ls)
 	textmatcher.Save(s.tm, ls)
 	ls.SaveTinyUInt(len(s.ids))
@@ -196,6 +202,7 @@ func Load(path string) (*Siegfried, error) {
 		mm: mimematcher.Load(ls),
 		cm: containermatcher.Load(ls),
 		xm: xmlmatcher.Load(ls),
+		rm: riffmatcher.Load(ls),
 		bm: bytematcher.Load(ls),
 		tm: textmatcher.Load(ls),
 		ids: func() []core.Identifier {
@@ -354,6 +361,32 @@ func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identifi
 			}
 			if err == nil {
 				err = xerr
+			}
+		}
+	}
+	satisfied = true
+	// RIFF Matcher
+	if s.rm != nil {
+		for _, rec := range recs {
+			if ok, _ := rec.Satisfied(core.RIFFMatcher); !ok {
+				satisfied = false
+				break
+			}
+		}
+		if !satisfied {
+			if config.Debug() {
+				fmt.Fprintln(config.Out(), ">>START RIFF MATCHER")
+			}
+			rms, rerr := s.rm.Identify("", buffer)
+			for v := range rms {
+				for _, rec := range recs {
+					if rec.Record(core.RIFFMatcher, v) {
+						break
+					}
+				}
+			}
+			if err == nil {
+				err = rerr
 			}
 		}
 	}

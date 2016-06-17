@@ -26,7 +26,6 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/identifier"
 	"github.com/richardlehane/siegfried/pkg/core/mimematcher"
 	"github.com/richardlehane/siegfried/pkg/core/namematcher"
-	"github.com/richardlehane/siegfried/pkg/core/parseable"
 	"github.com/richardlehane/siegfried/pkg/core/persist"
 	"github.com/richardlehane/siegfried/pkg/core/textmatcher"
 	"github.com/richardlehane/siegfried/pkg/core/xmlmatcher"
@@ -37,7 +36,7 @@ func init() {
 }
 
 type Identifier struct {
-	p     parseable.Parseable
+	p     identifier.Parseable
 	infos map[string]formatInfo
 	*identifier.Base
 }
@@ -90,7 +89,7 @@ func New(opts ...config.Option) (core.Identifier, error) {
 	}
 	// if we are inspecting...
 	if config.Inspect() {
-		mi = parseable.Filter(config.Limit(mi.IDs()), mi)
+		mi = identifier.Filter(config.Limit(mi.IDs()), mi)
 		is := infos(mi.Infos())
 		sigs, ids, err := mi.Signatures()
 		if err != nil {
@@ -114,7 +113,7 @@ func New(opts ...config.Option) (core.Identifier, error) {
 		} else if config.HasExclude() {
 			ids = config.Exclude(mi.IDs())
 		}
-		mi = parseable.Filter(ids, mi)
+		mi = identifier.Filter(ids, mi)
 	}
 	// add extensions
 	for _, v := range config.Extend() {
@@ -122,7 +121,7 @@ func New(opts ...config.Option) (core.Identifier, error) {
 		if err != nil {
 			return nil, fmt.Errorf("MIMEinfo: error loading extension file %s; got %s", v, err)
 		}
-		mi = parseable.Join(mi, e)
+		mi = identifier.Join(mi, e)
 	}
 	id := &Identifier{
 		p:     mi,

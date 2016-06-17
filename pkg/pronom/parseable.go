@@ -19,7 +19,7 @@ import (
 
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
-	"github.com/richardlehane/siegfried/pkg/core/parseable"
+	"github.com/richardlehane/siegfried/pkg/core/identifier"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/pronom/mappings"
 )
@@ -31,7 +31,7 @@ type formatInfo struct {
 }
 
 // turn generic FormatInfo into PRONOM formatInfo
-func infos(m map[string]parseable.FormatInfo) map[string]formatInfo {
+func infos(m map[string]identifier.FormatInfo) map[string]formatInfo {
 	i := make(map[string]formatInfo, len(m))
 	for k, v := range m {
 		i[k] = v.(formatInfo)
@@ -42,11 +42,11 @@ func infos(m map[string]parseable.FormatInfo) map[string]formatInfo {
 // DoublesFilter removes the byte signatures where container signatures are also defined
 type doublesFilter struct {
 	ids []string
-	parseable.Parseable
+	identifier.Parseable
 }
 
-func (db *doublesFilter) Signatures() ([]frames.Signature, []string, error) {
-	filter := parseable.Filter(db.ids, db.Parseable)
+func (db doublesFilter) Signatures() ([]frames.Signature, []string, error) {
+	filter := identifier.Filter(db.ids, db.Parseable)
 	return filter.Signatures()
 }
 
@@ -55,15 +55,15 @@ type reports struct {
 	p  []string
 	r  []*mappings.Report
 	ip map[int]string
-	parseable.Blank
+	identifier.Blank
 }
 
 func (r *reports) IDs() []string {
 	return r.p
 }
 
-func (r *reports) Infos() map[string]parseable.FormatInfo {
-	infos := make(map[string]parseable.FormatInfo)
+func (r *reports) Infos() map[string]identifier.FormatInfo {
+	infos := make(map[string]identifier.FormatInfo)
 	for i, v := range r.r {
 		infos[r.p[i]] = formatInfo{v.Name, strings.TrimSpace(v.Version), v.MIME()}
 	}
@@ -154,7 +154,7 @@ func (r *reports) Signatures() ([]frames.Signature, []string, error) {
 // DROID
 type droid struct {
 	*mappings.Droid
-	parseable.Blank
+	identifier.Blank
 }
 
 func (d *droid) IDs() []string {
@@ -165,8 +165,8 @@ func (d *droid) IDs() []string {
 	return puids
 }
 
-func (d *droid) Infos() map[string]parseable.FormatInfo {
-	infos := make(map[string]parseable.FormatInfo)
+func (d *droid) Infos() map[string]identifier.FormatInfo {
+	infos := make(map[string]identifier.FormatInfo)
 	for _, v := range d.FileFormats {
 		infos[v.Puid] = formatInfo{v.Name, v.Version, v.MIMEType}
 	}
@@ -270,7 +270,7 @@ func (d *droid) Signatures() ([]frames.Signature, []string, error) {
 // Containers
 type container struct {
 	*mappings.Container
-	parseable.Blank
+	identifier.Blank
 }
 
 func (c *container) IDs() []string {

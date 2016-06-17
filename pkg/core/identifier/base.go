@@ -24,7 +24,6 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/containermatcher"
 	"github.com/richardlehane/siegfried/pkg/core/mimematcher"
 	"github.com/richardlehane/siegfried/pkg/core/namematcher"
-	"github.com/richardlehane/siegfried/pkg/core/parseable"
 	"github.com/richardlehane/siegfried/pkg/core/persist"
 	"github.com/richardlehane/siegfried/pkg/core/riffmatcher"
 	"github.com/richardlehane/siegfried/pkg/core/textmatcher"
@@ -33,7 +32,7 @@ import (
 
 // A base identifier that can be embedded in other identifier
 type Base struct {
-	p                                        parseable.Parseable
+	p                                        Parseable
 	name                                     string
 	details                                  string
 	multi                                    config.Multi
@@ -80,7 +79,7 @@ func loadIndexes(ls *persist.LoadSaver) indexes {
 	}
 }
 
-func New(p parseable.Parseable, zipdefault bool) *Base {
+func New(p Parseable, zipdefault bool) *Base {
 	return &Base{
 		p:          p,
 		name:       config.Name(),
@@ -142,6 +141,10 @@ func (b *Base) String() string {
 
 func (b *Base) NoPriority() bool {
 	return b.multi >= config.Comprehensive
+}
+
+func (b *Base) Multi() config.Multi {
+	return b.multi
 }
 
 func (b *Base) ZipDefault() bool {
