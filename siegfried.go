@@ -54,13 +54,15 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 	"github.com/richardlehane/siegfried/pkg/core/textmatcher"
 	"github.com/richardlehane/siegfried/pkg/core/xmlmatcher"
+	"github.com/richardlehane/siegfried/pkg/loc"
 	"github.com/richardlehane/siegfried/pkg/mimeinfo"
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
-var ( // for side effect - register their patterns
+var ( // for side effect - register their patterns/ signature loaders
 	_ = pronom.Range{}
 	_ = mimeinfo.Int8(0)
+	_ = loc.Identifier{}
 )
 
 // Siegfried structs are persisent objects that can be serialised to disk and

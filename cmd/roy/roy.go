@@ -163,6 +163,9 @@ func buildOptions() []config.Option {
 	if *fdd != "" {
 		opts = append(opts, config.SetLOC(*fdd))
 	}
+	if *locfdd {
+		opts = append(opts, config.SetLOC(""))
+	}
 	if *name != "" {
 		opts = append(opts, config.SetName(*name))
 	}

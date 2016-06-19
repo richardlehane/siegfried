@@ -40,6 +40,7 @@ var identifier = struct {
 	extend      []string
 	inspect     bool // indicates that running in inspect mode
 }{
+	multi:      Conclusive,
 	extensions: "custom",
 }
 
@@ -48,7 +49,7 @@ var identifier = struct {
 // Name returns the name of the identifier.
 func Name() string {
 	if identifier.name == "" {
-		if mimeinfo.mi == "" {
+		if mimeinfo.mi == "" && loc.fdd == "" {
 			identifier.name = pronom.name
 		}
 	}

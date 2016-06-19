@@ -19,6 +19,7 @@ import "path/filepath"
 var loc = struct {
 	fdd  string
 	def  string // default
+	name string
 	zip  string
 	gzip string // n/a
 	tar  string // n/a
@@ -27,6 +28,7 @@ var loc = struct {
 	text string // n/a
 }{
 	def:  "fddXML.zip",
+	name: "loc",
 	zip:  "fdd000354",
 	arc:  "fdd000235",
 	warc: "fdd000236",
@@ -34,7 +36,7 @@ var loc = struct {
 
 // LOC returns the location of the LOC signature file.
 func LOC() string {
-	if loc.fdd == "" {
+	if loc.fdd == loc.def {
 		return filepath.Join(siegfried.home, loc.def)
 	}
 	if filepath.Dir(loc.fdd) == "." {
@@ -49,7 +51,13 @@ func ZipLOC() string {
 
 func SetLOC(fdd string) func() private {
 	return func() private {
+		if fdd == "" {
+			fdd = loc.def
+		}
 		loc.fdd = fdd
+		if identifier.name == "" {
+			identifier.name = loc.name
+		}
 		return private{}
 	}
 }

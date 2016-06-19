@@ -397,7 +397,7 @@ func (id Identification) YAML() string {
 	if len(id.Basis) > 0 {
 		basis = quoteText(strings.Join(id.Basis, "; "))
 	}
-	return fmt.Sprintf("  - ns      : %v\n    id      : %v\n    format  : %v\n    full : %v\n    mime    : %v\n    basis   : %v\n    warning : %v\n",
+	return fmt.Sprintf("  - ns      : %v\n    id      : %v\n    format  : %v\n    full     : %v\n    mime    : %v\n    basis   : %v\n    warning : %v\n",
 		id.Namespace, id.ID, quoteText(id.Name), quoteText(id.LongName), quoteText(id.Mime), basis, quoteText(id.Warning))
 }
 
