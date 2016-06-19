@@ -200,15 +200,6 @@ func (p *pronom) setContainers() error {
 }
 
 // UTILS
-func contains(strs []string, s string) bool {
-	for _, v := range strs {
-		if s == v {
-			return true
-		}
-	}
-	return false
-}
-
 // Harvest fetches PRONOM reports listed in the DROID file
 func Harvest() []error {
 	d, err := newDroid(config.Droid())

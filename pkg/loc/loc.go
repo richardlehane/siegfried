@@ -24,21 +24,24 @@ import (
 	"time"
 
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
-	"github.com/richardlehane/siegfried/pkg/core/parseable"
+	"github.com/richardlehane/siegfried/pkg/core/identifier"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/loc/mappings"
 )
 
-type fdds []mappings.FDD
+type fdds struct {
+	f []mappings.FDD
+	identifier.Blank
+}
 
-func newLOC(path string) (parseable.Parseable, error) {
+func newLOC(path string) (identifier.Parseable, error) {
 	rc, err := zip.OpenReader(path)
 	if err != nil {
 		return nil, err
 	}
 	defer rc.Close()
 
-	ret := make(fdds, 0, len(rc.File))
+	fs := make([]mappings.FDD, 0, len(rc.File))
 	for _, f := range rc.File {
 		dir, nm := filepath.Split(f.Name)
 		if dir == "fddXML/" && nm != "" && filepath.Ext(nm) == ".xml" {
@@ -56,17 +59,17 @@ func newLOC(path string) (parseable.Parseable, error) {
 			if err != nil {
 				return nil, err
 			}
-			ret = append(ret, res)
+			fs = append(fs, res)
 		}
 	}
-	return ret, nil
+	return fdds{fs, identifier.Blank{}}, nil
 }
 
 const dateFmt = "2006-01-02"
 
 func (f fdds) Updated() time.Time {
 	t, _ := time.Parse(dateFmt, "2000-01-01")
-	for _, v := range f {
+	for _, v := range f.f {
 		for _, u := range v.Updates {
 			tt, err := time.Parse(dateFmt, u)
 			if err == nil && tt.After(t) {
@@ -78,19 +81,21 @@ func (f fdds) Updated() time.Time {
 }
 
 func (f fdds) IDs() []string {
-	ids := make([]string, len(f))
-	for i, v := range f {
+	ids := make([]string, len(f.f))
+	for i, v := range f.f {
 		ids[i] = v.ID
 	}
 	return ids
 }
 
 type formatInfo struct {
-	name string
+	name     string
+	longName string
+	mimeType string
 }
 
 // turn generic FormatInfo into fdd formatInfo
-func infos(m map[string]parseable.FormatInfo) map[string]formatInfo {
+func infos(m map[string]identifier.FormatInfo) map[string]formatInfo {
 	i := make(map[string]formatInfo, len(m))
 	for k, v := range m {
 		i[k] = v.(formatInfo)
@@ -98,18 +103,26 @@ func infos(m map[string]parseable.FormatInfo) map[string]formatInfo {
 	return i
 }
 
-func (f fdds) Infos() map[string]parseable.FormatInfo {
-	fmap := make(map[string]parseable.FormatInfo, len(f))
-	for _, v := range f {
-		fi := formatInfo{name: v.Name}
+func (f fdds) Infos() map[string]identifier.FormatInfo {
+	fmap := make(map[string]identifier.FormatInfo, len(f.f))
+	for _, v := range f.f {
+		var mime string
+		if len(v.MIMEs) > 0 {
+			mime = v.MIMEs[0]
+		}
+		fi := formatInfo{
+			name:     v.Name,
+			longName: v.LongName,
+			mimeType: mime,
+		}
 		fmap[v.ID] = fi
 	}
 	return fmap
 }
 
 func (f fdds) Globs() ([]string, []string) {
-	globs, ids := make([]string, 0, len(f)), make([]string, 0, len(f))
-	for _, v := range f {
+	globs, ids := make([]string, 0, len(f.f)), make([]string, 0, len(f.f))
+	for _, v := range f.f {
 		for _, w := range v.Extensions {
 			globs, ids = append(globs, "*."+w), append(ids, v.ID)
 		}
@@ -118,8 +131,8 @@ func (f fdds) Globs() ([]string, []string) {
 }
 
 func (f fdds) MIMEs() ([]string, []string) {
-	mimes, ids := make([]string, 0, len(f)), make([]string, 0, len(f))
-	for _, v := range f {
+	mimes, ids := make([]string, 0, len(f.f)), make([]string, 0, len(f.f))
+	for _, v := range f.f {
 		for _, w := range v.MIMEs {
 			mimes, ids = append(mimes, w), append(ids, v.ID)
 		}
@@ -127,15 +140,10 @@ func (f fdds) MIMEs() ([]string, []string) {
 	return mimes, ids
 }
 
-// slice of root/NS
-func (f fdds) XMLs() ([][2]string, []string) {
-	return nil, nil
-}
-
 func (f fdds) Signatures() ([]frames.Signature, []string, error) {
 	var errs []error
-	sigs, ids := make([]frames.Signature, 0, len(f)), make([]string, 0, len(f))
-	for _, v := range f {
+	sigs, ids := make([]frames.Signature, 0, len(f.f)), make([]string, 0, len(f.f))
+	for _, v := range f.f {
 		ss, e := magics(v.Magics)
 		if e != nil {
 			errs = append(errs, e)
@@ -159,9 +167,27 @@ func (f fdds) Signatures() ([]frames.Signature, []string, error) {
 	return sigs, ids, err
 }
 
+func (f fdds) RIFFs() ([][4]byte, []string) {
+	riffs, ids := make([][4]byte, 0, len(f.f)), make([]string, 0, len(f.f))
+	for _, v := range f.f {
+		for _, w := range v.Others {
+			if w.Tag == "Microsoft FOURCC" {
+				for _, x := range w.Values {
+					if len(x) == 4 {
+						val := [4]byte{}
+						copy(val[:], x[:])
+						riffs, ids = append(riffs, val), append(ids, v.ID)
+					}
+				}
+			}
+		}
+	}
+	return riffs, ids
+}
+
 func (f fdds) Priorities() priority.Map {
 	p := make(priority.Map)
-	for _, v := range f {
+	for _, v := range f.f {
 		for _, r := range v.Relations {
 			switch r.Typ {
 			case "Subtype of":

@@ -21,14 +21,8 @@ import (
 
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
-	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
-	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/identifier"
-	"github.com/richardlehane/siegfried/pkg/core/mimematcher"
-	"github.com/richardlehane/siegfried/pkg/core/namematcher"
 	"github.com/richardlehane/siegfried/pkg/core/persist"
-	"github.com/richardlehane/siegfried/pkg/core/textmatcher"
-	"github.com/richardlehane/siegfried/pkg/core/xmlmatcher"
 )
 
 func init() {
@@ -105,16 +99,6 @@ func New(opts ...config.Option) (core.Identifier, error) {
 		}
 		return nil, nil
 	}
-	// apply limit or exclude
-	if config.HasLimit() || config.HasExclude() {
-		var ids []string
-		if config.HasLimit() {
-			ids = config.Limit(mi.IDs())
-		} else if config.HasExclude() {
-			ids = config.Exclude(mi.IDs())
-		}
-		mi = identifier.Filter(ids, mi)
-	}
 	// add extensions
 	for _, v := range config.Extend() {
 		e, err := newMIMEInfo(v)
@@ -123,12 +107,13 @@ func New(opts ...config.Option) (core.Identifier, error) {
 		}
 		mi = identifier.Join(mi, e)
 	}
-	id := &Identifier{
-		p:     mi,
+	// apply config
+	mi = identifier.ApplyConfig(mi)
+	// return identifier
+	return &Identifier{
 		infos: infos(mi.Infos()),
-		Base:  identifier.New(contains(mi.IDs(), config.ZipMIME())),
-	}
-	return id, nil
+		Base:  identifier.New(mi, config.ZipMIME()),
+	}, nil
 }
 
 func (i *Identifier) Fields() []string {
@@ -152,17 +137,13 @@ type Recorder struct {
 }
 
 func (r *Recorder) Active(m core.MatcherType) {
-	switch m {
-	case core.NameMatcher:
-		if len(r.gids) > 0 {
+	if r.Identifier.Active(m) {
+		switch m {
+		case core.NameMatcher:
 			r.globActive = true
-		}
-	case core.MIMEMatcher:
-		if len(r.mids) > 0 {
+		case core.MIMEMatcher:
 			r.mimeActive = true
-		}
-	case core.TextMatcher:
-		if r.tstart > 0 {
+		case core.TextMatcher:
 			r.textActive = true
 		}
 	}
@@ -173,55 +154,41 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 	default:
 		return false
 	case core.NameMatcher:
-		if res.Index() >= r.gstart && res.Index() < r.gstart+len(r.gids) {
-			idx := res.Index() - r.gstart
-			r.ids = add(r.ids, r.name, r.gids[idx], r.infos[r.gids[idx]], res.Basis(), core.NameMatcher, rel(idx, r.gids))
+		if hit, id := r.Hit(m, res.Index()); hit {
+			r.ids = add(r.ids, r.Name(), id, r.infos[id], res.Basis(), m, rel(r.Place(core.NameMatcher, res.Index())))
 			return true
 		} else {
 			return false
 		}
-	case core.MIMEMatcher:
-		if res.Index() >= r.mstart && res.Index() < r.mstart+len(r.mids) {
-			idx := res.Index() - r.mstart
-			r.ids = add(r.ids, r.name, r.mids[idx], r.infos[r.mids[idx]], res.Basis(), core.MIMEMatcher, 0)
-			return true
-		} else {
-			return false
-		}
-	case core.XMLMatcher:
-		if res.Index() >= r.xstart && res.Index() < r.xstart+len(r.xids) {
-			idx := res.Index() - r.xstart
-			r.ids = add(r.ids, r.name, r.xids[idx], r.infos[r.xids[idx]], res.Basis(), core.XMLMatcher, 0)
+	case core.MIMEMatcher, core.XMLMatcher:
+		if hit, id := r.Hit(m, res.Index()); hit {
+			r.ids = add(r.ids, r.Name(), id, r.infos[id], res.Basis(), m, 0)
 			return true
 		} else {
 			return false
 		}
 	case core.ByteMatcher:
-		if res.Index() >= r.bstart && res.Index() < r.bstart+len(r.bids) {
+		if hit, id := r.Hit(m, res.Index()); hit {
 			if r.satisfied {
 				return true
 			}
-			idx := res.Index() - r.bstart
 			basis := res.Basis()
-			p, t := place(idx, r.bids)
+			p, t := r.Place(core.ByteMatcher, res.Index())
 			if t > 1 {
 				basis = basis + fmt.Sprintf(" (signature %d/%d)", p, t)
 			}
-			r.ids = add(r.ids, r.name, r.bids[idx], r.infos[r.bids[idx]], basis, core.ByteMatcher, p-1)
+			r.ids = add(r.ids, r.Name(), id, r.infos[id], basis, m, p-1)
 			return true
 		} else {
 			return false
 		}
 	case core.TextMatcher:
-		if res.Index() == r.tstart {
+		if hit, _ := r.Hit(m, res.Index()); hit {
 			if r.satisfied {
 				return true
 			}
-			if _, ok := r.infos[config.TextMIME()]; ok {
-				r.ids = add(r.ids, r.name, config.TextMIME(), r.infos[config.TextMIME()], res.Basis(), core.TextMatcher, 0)
-			}
-			if len(r.tids) > 0 {
-				r.ids = bulkAdd(r.ids, r.name, r.tids, r.infos, res.Basis(), core.TextMatcher, 0)
+			if len(r.IDs(m)) > 0 {
+				r.ids = bulkAdd(r.ids, r.Name(), r.IDs(m), r.infos, res.Basis(), core.TextMatcher, 0)
 			}
 			return true
 		} else {
@@ -230,28 +197,18 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 	}
 }
 
-func rel(idx int, ids []string) int {
-	prev, _ := place(idx, ids)
+func rel(prev, post int) int {
 	return prev - 1
 }
 
-func place(idx int, ids []string) (int, int) {
-	puid := ids[idx]
-	var prev, post int
-	for i := idx - 1; i > -1 && ids[i] == puid; i-- {
-		prev++
-	}
-	for i := idx + 1; i < len(ids) && ids[i] == puid; i++ {
-		post++
-	}
-	return prev + 1, prev + post + 1
-}
-
 func (r *Recorder) Satisfied(mt core.MatcherType) (bool, int) {
+	if r.NoPriority() {
+		return false, 0
+	}
 	sort.Sort(r.ids)
 	if len(r.ids) > 0 && (r.ids[0].xmlMatch || (r.ids[0].magicScore > 0 && r.ids[0].ID != config.TextMIME())) {
 		if mt == core.ByteMatcher {
-			return true, r.bstart
+			return true, r.Start(mt)
 		}
 		return true, 0
 	}
@@ -261,42 +218,38 @@ func (r *Recorder) Satisfied(mt core.MatcherType) (bool, int) {
 func (r *Recorder) Report(res chan core.Identification) {
 	if len(r.ids) == 0 {
 		res <- Identification{
-			Namespace: r.name,
+			Namespace: r.Name(),
 			ID:        "UNKNOWN",
 			Warning:   "no match",
 		}
 		return
 	}
 	sort.Sort(r.ids)
-	// if match is filename/mime only
-	// Less reports whether index i should sort before index j
-	if !r.ids[0].xmlMatch && r.ids[0].magicScore == 0 && !r.noPriority {
-		lowConfidence := confidenceTrick()
+	// exhaustive
+	if r.Multi() == config.Exhaustive {
+		for _, v := range r.ids {
+			res <- r.updateWarning(v)
+		}
+		return
+	}
+	// if we've only got weak matches (match is filename/mime only) report only the first
+	if !r.ids[0].xmlMatch && r.ids[0].magicScore == 0 {
 		var nids []Identification
-		if len(r.ids) == 1 || r.ids.Less(0, 1) {
-			v := r.ids[0]
-			if v.ID != config.TextMIME() || v.textMatch || !r.textActive {
-				if len(v.Warning) > 0 {
-					v.Warning += "; " + "match on " + lowConfidence(v) + " only"
-				} else {
-					v.Warning = "match on " + lowConfidence(v) + " only"
-				}
-				// if the match has no corresponding byte or xml signature...
-				if r.hasSig(v.ID) {
-					v.Warning += "; byte/xml signatures for this format did not match"
-				}
-				nids = []Identification{v}
+		if len(r.ids) == 1 || r.ids.Less(0, 1) { // // Less reports whether the element with index i (0) should sort before the element with index j
+			if r.ids[0].ID != config.TextMIME() || r.ids[0].textMatch || !r.textActive {
+				nids = []Identification{r.ids[0]}
 			}
 		}
 		var conf string
 		if len(nids) != 1 {
+			lowConfidence := confidenceTrick()
 			poss := make([]string, len(r.ids))
 			for i, v := range r.ids {
 				poss[i] = v.ID
 				conf = lowConfidence(v)
 			}
 			nids = []Identification{Identification{
-				Namespace: r.name,
+				Namespace: r.Name(),
 				ID:        "UNKNOWN",
 				Warning:   fmt.Sprintf("no match; possibilities based on %s are %v", conf, strings.Join(poss, ", ")),
 			},
@@ -304,20 +257,59 @@ func (r *Recorder) Report(res chan core.Identification) {
 		}
 		r.ids = nids
 	}
-	res <- r.checkActive(r.ids[0])
-	if len(r.ids) > 1 {
-		for i, _ := range r.ids[1:] {
-			if !r.noPriority && r.ids.Less(i, i+1) {
+	// handle single result only
+	if r.Multi() == config.Single && len(r.ids) > 1 && !r.ids.Less(0, 1) {
+		poss := make([]string, 0, len(r.ids))
+		for i, v := range r.ids {
+			if i > 0 && r.ids.Less(i-1, i) {
 				break
 			}
-			res <- r.checkActive(r.ids[i+1])
+			poss = append(poss, v.ID)
 		}
+		res <- Identification{
+			Namespace: r.Name(),
+			ID:        "UNKNOWN",
+			Warning:   fmt.Sprintf("multiple matches %v", strings.Join(poss, ", ")),
+		}
+		return
 	}
+	for i, v := range r.ids {
+		if i > 0 {
+			switch r.Multi() {
+			case config.Single:
+				return
+			case config.Conclusive:
+				if r.ids.Less(i-1, i) {
+					return
+				}
+			default:
+				if !v.xmlMatch && v.magicScore == 0 { // if weak
+					return
+				}
+			}
+		}
+		res <- r.updateWarning(v)
+	}
+	return
 }
 
-func (r *Recorder) checkActive(i Identification) Identification {
+func (r *Recorder) updateWarning(i Identification) Identification {
+	// weak match
+	if i.xmlMatch && i.magicScore == 0 {
+		lowConfidence := confidenceTrick()
+		if len(i.Warning) > 0 {
+			i.Warning += "; " + "match on " + lowConfidence(i) + " only"
+		} else {
+			i.Warning = "match on " + lowConfidence(i) + " only"
+		}
+		// if the match has no corresponding byte or xml signature...
+		if r.HasSig(i.ID, core.XMLMatcher, core.ByteMatcher) {
+			i.Warning += "; byte/xml signatures for this format did not match"
+		}
+	}
+	// apply mismatches
 	if r.globActive && i.globScore == 0 {
-		for _, v := range r.gids {
+		for _, v := range r.IDs(core.NameMatcher) {
 			if i.ID == v {
 				if len(i.Warning) > 0 {
 					i.Warning += "; filename mismatch"
@@ -361,20 +353,6 @@ func confidenceTrick() func(i Identification) string {
 			return strings.Join(ls[:len(ls)-1], ", ") + " and " + ls[len(ls)-1]
 		}
 	}
-}
-
-func (r *Recorder) hasSig(id string) bool {
-	for _, v := range r.xids {
-		if id == v {
-			return true
-		}
-	}
-	for _, v := range r.bids {
-		if id == v {
-			return true
-		}
-	}
-	return false
 }
 
 type Identification struct {

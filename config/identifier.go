@@ -56,7 +56,8 @@ func Name() string {
 }
 
 // Details returns a description of the identifier. This is auto-populated if not set directly.
-func Details() string {
+// Extra information from signatures such as date last modified can be given to this function.
+func Details(extra ...string) string {
 	// if the details string has been explicitly set, return it
 	if len(identifier.details) > 0 {
 		return identifier.details
@@ -65,11 +66,16 @@ func Details() string {
 	var str string
 	if len(mimeinfo.mi) > 0 {
 		str = mimeinfo.mi
+	} else if len(loc.fdd) > 0 {
+		str = loc.fdd
 	} else {
 		str = DroidBase()
 		if !identifier.noContainer {
 			str += "; " + ContainerBase()
 		}
+	}
+	if len(extra) > 0 {
+		str += " (" + strings.Join(extra, ", ") + ")"
 	}
 	if identifier.maxBOF > 0 {
 		str += fmt.Sprintf("; max BOF %d", identifier.maxBOF)
@@ -241,15 +247,15 @@ func Extend() []string {
 // IsArchive returns an Archive that corresponds to the provided id (or none if no match).
 func IsArchive(id string) Archive {
 	switch id {
-	case pronom.zip, mimeinfo.zip:
+	case pronom.zip, mimeinfo.zip, loc.zip:
 		return Zip
 	case pronom.gzip, mimeinfo.gzip:
 		return Gzip
 	case pronom.tar, mimeinfo.tar:
 		return Tar
-	case pronom.arc, pronom.arc1_1, mimeinfo.arc:
+	case pronom.arc, pronom.arc1_1, mimeinfo.arc, loc.arc:
 		return ARC
-	case pronom.warc:
+	case pronom.warc, mimeinfo.warc, loc.warc:
 		return WARC
 	}
 	return None

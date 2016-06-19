@@ -31,13 +31,13 @@ func TestLOC(t *testing.T) {
 	if l != nil {
 		if dump {
 			fdd := l.(fdds)
-			for _, v := range fdd {
+			for _, v := range fdd.f {
 				fmt.Println(v)
 				fmt.Println("****************")
 			}
 		} else if dumpmagic {
 			fdd := l.(fdds)
-			for _, v := range fdd {
+			for _, v := range fdd.f {
 				if len(v.Magics) > 0 {
 					fmt.Println("{")
 					for _, m := range v.Magics {

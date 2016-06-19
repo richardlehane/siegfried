@@ -79,13 +79,13 @@ func loadIndexes(ls *persist.LoadSaver) indexes {
 	}
 }
 
-func New(p Parseable, zipdefault bool) *Base {
+func New(p Parseable, zip string, extra ...string) *Base {
 	return &Base{
 		p:          p,
 		name:       config.Name(),
-		details:    config.Details(),
+		details:    config.Details(extra...),
 		multi:      config.GetMulti(),
-		zipDefault: zipdefault,
+		zipDefault: contains(p.IDs(), zip),
 	}
 }
 
@@ -341,4 +341,24 @@ func (b *Base) IDs(m core.MatcherType) []string {
 	case core.TextMatcher:
 		return b.tids.ids
 	}
+}
+
+func (b *Base) HasSig(id string, ms ...core.MatcherType) bool {
+	for _, m := range ms {
+		for _, i := range b.IDs(m) {
+			if id == i {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+func contains(strs []string, s string) bool {
+	for _, v := range strs {
+		if s == v {
+			return true
+		}
+	}
+	return false
 }

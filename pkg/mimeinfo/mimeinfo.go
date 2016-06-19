@@ -28,6 +28,7 @@ import (
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
+	"github.com/richardlehane/siegfried/pkg/core/identifier"
 	"github.com/richardlehane/siegfried/pkg/mimeinfo/mappings"
 )
 
@@ -101,7 +102,8 @@ func infos(m map[string]identifier.FormatInfo) map[string]formatInfo {
 }
 
 func textMIMES(m map[string]identifier.FormatInfo) []string {
-	ret := make([]string, 0, len(m))
+	ret := make([]string, 1, len(m))
+	ret[0] = config.TextMIME() // first one is the default
 	for k, v := range m {
 		if v.(formatInfo).text {
 			ret = append(ret, k)

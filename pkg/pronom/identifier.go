@@ -30,7 +30,6 @@ func init() {
 }
 
 type Identifier struct {
-	p     identifier.Parseable
 	infos map[string]formatInfo
 	*identifier.Base
 }
@@ -71,9 +70,8 @@ func New(opts ...config.Option) (core.Identifier, error) {
 		return nil, err
 	}
 	return &Identifier{
-		p:     pronom,
-		infos: infos(p.Infos()),
-		Base:  identifier.New(pronom, contains(pronom.IDs(), config.ZipPuid())),
+		infos: infos(pronom.Infos()),
+		Base:  identifier.New(pronom, config.ZipPuid()),
 	}, nil
 }
 
@@ -103,17 +101,13 @@ const (
 )
 
 func (r *Recorder) Active(m core.MatcherType) {
-	switch m {
-	case core.NameMatcher:
-		if r.Identifier.Active(m) {
+	if r.Identifier.Active(m) {
+		switch m {
+		case core.NameMatcher:
 			r.extActive = true
-		}
-	case core.MIMEMatcher:
-		if r.Identifier.Active(m) {
+		case core.MIMEMatcher:
 			r.mimeActive = true
-		}
-	case core.TextMatcher:
-		if r.Identifier.Active(m) {
+		case core.TextMatcher:
 			r.textActive = true
 		}
 	}
@@ -237,7 +231,11 @@ func lowConfidence(conf int) string {
 func (r *Recorder) Report(res chan core.Identification) {
 	// no results
 	if len(r.ids) == 0 {
-		res <- Identification{r.Name(), "UNKNOWN", "", "", "", nil, "no match", 0, 0}
+		res <- Identification{
+			Namespace: r.Name(),
+			ID:        "UNKNOWN",
+			Warning:   "no match",
+		}
 		return
 	}
 	sort.Sort(r.ids)
@@ -266,7 +264,7 @@ func (r *Recorder) Report(res chan core.Identification) {
 				continue
 			}
 			// if the match has no corresponding byte or container signature...
-			if ok := r.hasSig(v.ID); !ok {
+			if ok := r.HasSig(v.ID, core.ContainerMatcher, core.ByteMatcher); !ok {
 				// break immediately if more than one match
 				if len(nids) > 0 {
 					nids = nids[:0]
@@ -281,7 +279,11 @@ func (r *Recorder) Report(res chan core.Identification) {
 				poss[i] = v.ID
 				conf = conf | v.confidence
 			}
-			res <- Identification{r.Name(), "UNKNOWN", "", "", "", nil, fmt.Sprintf("no match; possibilities based on %v are %v", lowConfidence(conf), strings.Join(poss, ", ")), 0, 0}
+			res <- Identification{
+				Namespace: r.Name(),
+				ID:        "UNKNOWN",
+				Warning:   fmt.Sprintf("no match; possibilities based on %v are %v", lowConfidence(conf), strings.Join(poss, ", ")),
+			}
 			return
 		}
 		r.ids = nids
@@ -295,7 +297,11 @@ func (r *Recorder) Report(res chan core.Identification) {
 			}
 			poss = append(poss, v.ID)
 		}
-		res <- Identification{r.Name(), "UNKNOWN", "", "", "", nil, fmt.Sprintf("multiple matches %v", strings.Join(poss, ", ")), 0, 0}
+		res <- Identification{
+			Namespace: r.Name(),
+			ID:        "UNKNOWN",
+			Warning:   fmt.Sprintf("multiple matches %v", strings.Join(poss, ", ")),
+		}
 		return
 	}
 	for i, v := range r.ids {
@@ -353,20 +359,6 @@ func (r *Recorder) updateWarning(i Identification) Identification {
 		}
 	}
 	return i
-}
-
-func (r *Recorder) hasSig(puid string) bool {
-	for _, v := range r.IDs(core.ContainerMatcher) {
-		if puid == v {
-			return true
-		}
-	}
-	for _, v := range r.IDs(core.ByteMatcher) {
-		if puid == v {
-			return true
-		}
-	}
-	return false
 }
 
 type Identification struct {

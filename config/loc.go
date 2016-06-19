@@ -18,21 +18,18 @@ import "path/filepath"
 
 var loc = struct {
 	fdd  string
-	def  string
+	def  string // default
 	zip  string
-	gzip string
-	tar  string
+	gzip string // n/a
+	tar  string // n/a
 	arc  string
 	warc string
-	text string
+	text string // n/a
 }{
 	def:  "fddXML.zip",
-	zip:  "application/zip",
-	gzip: "application/gzip",
-	tar:  "application/x-tar",
-	arc:  "application/x-arc",
-	warc: "application/x-warc",
-	text: "text/plain",
+	zip:  "fdd000354",
+	arc:  "fdd000235",
+	warc: "fdd000236",
 }
 
 // LOC returns the location of the LOC signature file.
@@ -48,10 +45,6 @@ func LOC() string {
 
 func ZipLOC() string {
 	return loc.zip
-}
-
-func TextLOC() string {
-	return loc.text
 }
 
 func SetLOC(fdd string) func() private {

@@ -26,6 +26,7 @@ import (
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
+	"github.com/richardlehane/siegfried/pkg/loc"
 	"github.com/richardlehane/siegfried/pkg/mimeinfo"
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
@@ -36,6 +37,8 @@ var (
 	home        = build.String("home", config.Home(), "override the default home directory")
 	droid       = build.String("droid", config.Droid(), "set name/path for DROID signature file")
 	mi          = build.String("mi", "", "set name/path for MIMEInfo signature file")
+	fdd         = build.String("fdd", "", "set name/path for LOC FDD signature file")
+	locfdd      = build.Bool("loc", false, "build a LOC FDD signature file")
 	container   = build.String("container", config.Container(), "set name/path for Droid Container signature file")
 	reports     = build.String("reports", config.Reports(), "set path for PRONOM reports directory")
 	name        = build.String("name", "", "set identifier name")
@@ -53,6 +56,7 @@ var (
 	noname      = build.Bool("noname", false, "skip filename matcher")
 	nomime      = build.Bool("nomime", false, "skip MIME matcher")
 	noxml       = build.Bool("noxml", false, "skip XML matcher")
+	noriff      = build.Bool("noriff", false, "skip RIFF matcher")
 	noreports   = build.Bool("noreports", false, "build directly from DROID file rather than PRONOM reports")
 	doubleup    = build.Bool("doubleup", false, "include byte signatures for formats that also have container signatures")
 	rng         = build.Int("range", config.Range(), "define a maximum range for segmentation")
@@ -97,6 +101,8 @@ func makegob(s *siegfried.Siegfried, opts []config.Option) error {
 	var err error
 	if *mi != "" {
 		id, err = mimeinfo.New(opts...)
+	} else if *locfdd || *fdd != "" {
+		id, err = loc.New(opts...)
 	} else {
 		id, err = pronom.New(opts...)
 	}
@@ -154,6 +160,9 @@ func buildOptions() []config.Option {
 	if *mi != "" {
 		opts = append(opts, config.SetMIMEInfo(*mi))
 	}
+	if *fdd != "" {
+		opts = append(opts, config.SetLOC(*fdd))
+	}
 	if *name != "" {
 		opts = append(opts, config.SetName(*name))
 	}
@@ -204,6 +213,9 @@ the DROID signature file you should also include a regular signature extension
 	}
 	if *noxml {
 		opts = append(opts, config.SetNoXML())
+	}
+	if *noriff {
+		opts = append(opts, config.SetNoRIFF())
 	}
 	if *noreports {
 		opts = append(opts, config.SetNoReports())
