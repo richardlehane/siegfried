@@ -50,7 +50,7 @@ func (b *Matcher) start(bof bool) {
 // identify function - brings a new matcher into existence
 func (b *Matcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan core.Result, exclude ...int) {
 	buf.Quit = quit
-	waitSet := b.priorities.WaitSet()
+	waitSet := b.priorities.WaitSet(exclude...)
 	var maxBOF, maxEOF int
 	if len(exclude) > 0 {
 		maxBOF, maxEOF = waitSet.MaxOffsets()

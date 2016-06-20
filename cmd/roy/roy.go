@@ -130,6 +130,10 @@ func inspectFmt(f string) error {
 		_, err := mimeinfo.New(config.SetMIMEInfo(*inspectMI), config.SetLimit(expandSets(f)), config.SetInspect())
 		return err
 	}
+	if strings.HasPrefix(f, "fdd") {
+		_, err := loc.New(config.SetLOC(""), config.SetLimit(expandSets(f)), config.SetInspect())
+		return err
+	}
 	_, err := pronom.New(config.SetLimit(expandSets(f)), config.SetInspect(), config.SetNoContainer())
 	return err
 }
@@ -320,10 +324,12 @@ func main() {
 				err = inspectSig(core.NameMatcher)
 			case input == "mimematcher", input == "mm":
 				err = inspectSig(core.MIMEMatcher)
+			case input == "riffmatcher", input == "rm":
+				err = inspectSig(core.RIFFMatcher)
 			case filepath.Ext(input) == ".sig":
 				config.SetSignature(input)
 				err = inspectSig(-1)
-			case strings.Contains(input, "fmt"), *inspectMI != "":
+			case strings.Contains(input, "fmt"), *inspectMI != "", strings.HasPrefix(input, "fdd"):
 				err = inspectFmt(input)
 			default:
 				var i int

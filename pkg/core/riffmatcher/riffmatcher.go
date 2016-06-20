@@ -16,32 +16,41 @@ package riffmatcher
 
 import (
 	"fmt"
+	"sort"
+	"strings"
 
 	"golang.org/x/image/riff"
 
+	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/persist"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
 )
 
-type Matcher map[riff.FourCC][]int
+type Matcher struct {
+	riffs      map[riff.FourCC][]int
+	priorities *priority.Set
+}
 
 func Load(ls *persist.LoadSaver) core.Matcher {
 	le := ls.LoadSmallInt()
 	if le == 0 {
 		return nil
 	}
-	ret := make(Matcher)
+	riffs := make(map[riff.FourCC][]int)
 	for i := 0; i < le; i++ {
 		k := riff.FourCC(ls.LoadFourCC())
 		r := make([]int, ls.LoadSmallInt())
 		for j := range r {
 			r[j] = ls.LoadSmallInt()
 		}
-		ret[k] = r
+		riffs[k] = r
 	}
-	return ret
+	return &Matcher{
+		riffs:      riffs,
+		priorities: priority.Load(ls),
+	}
 }
 
 func Save(c core.Matcher, ls *persist.LoadSaver) {
@@ -49,25 +58,32 @@ func Save(c core.Matcher, ls *persist.LoadSaver) {
 		ls.SaveSmallInt(0)
 		return
 	}
-	m := c.(Matcher)
-	ls.SaveSmallInt(len(m))
-	for k, v := range m {
+	m := c.(*Matcher)
+	ls.SaveSmallInt(len(m.riffs))
+	if len(m.riffs) == 0 {
+		return
+	}
+	for k, v := range m.riffs {
 		ls.SaveFourCC(k)
 		ls.SaveSmallInt(len(v))
 		for _, w := range v {
 			ls.SaveSmallInt(w)
 		}
 	}
+	m.priorities.Save(ls)
 }
 
 type SignatureSet [][4]byte
 
 func Add(c core.Matcher, ss core.SignatureSet, p priority.List) (core.Matcher, int, error) {
-	var m Matcher
+	var m *Matcher
 	if c == nil {
-		m = make(Matcher)
+		m = &Matcher{
+			riffs:      make(map[riff.FourCC][]int),
+			priorities: &priority.Set{},
+		}
 	} else {
-		m = c.(Matcher)
+		m = c.(*Matcher)
 	}
 	sigs, ok := ss.(SignatureSet)
 	if !ok {
@@ -75,8 +91,8 @@ func Add(c core.Matcher, ss core.SignatureSet, p priority.List) (core.Matcher, i
 	}
 	var length int
 	// unless it is a new matcher, calculate current length by iterating through all the result values
-	if len(m) > 0 {
-		for _, v := range m {
+	if len(m.riffs) > 0 {
+		for _, v := range m.riffs {
 			for _, w := range v {
 				if w > length {
 					length = w
@@ -87,13 +103,15 @@ func Add(c core.Matcher, ss core.SignatureSet, p priority.List) (core.Matcher, i
 	}
 	for i, v := range sigs {
 		cc := riff.FourCC(v)
-		_, ok := m[cc]
+		_, ok := m.riffs[cc]
 		if ok {
-			m[cc] = append(m[cc], i+length)
+			m.riffs[cc] = append(m.riffs[cc], i+length)
 		} else {
-			m[cc] = []int{i + length}
+			m.riffs[cc] = []int{i + length}
 		}
 	}
+	// add priorities
+	m.priorities.Add(p, len(sigs), 0, 0)
 	return m, length + len(sigs), nil
 }
 
@@ -107,7 +125,7 @@ func (r result) Index() int {
 }
 
 func (r result) Basis() string {
-	return "FourCC matches " + string(r.cc[:])
+	return "fourCC matches " + string(r.cc[:])
 }
 
 func (m Matcher) Identify(na string, b *siegreader.Buffer, exclude ...int) (chan core.Result, error) {
@@ -117,48 +135,75 @@ func (m Matcher) Identify(na string, b *siegreader.Buffer, exclude ...int) (chan
 		close(res)
 		return res, nil
 	}
-	cc, rrdr, err := riff.NewReader(siegreader.ReaderFrom(b))
+	rcc, rrdr, err := riff.NewReader(siegreader.ReaderFrom(b))
 	if err != nil {
 		res := make(chan core.Result)
 		close(res)
 		return res, nil
 	}
-	uniqs := make(map[riff.FourCC]struct{})
-	uniqs[cc] = struct{}{}
-	descend(rrdr, uniqs)
-	var l int
-	for k, _ := range uniqs {
-		l += len(m[k])
-	}
-	res := make(chan core.Result, l)
-	for k, _ := range uniqs {
-		for _, h := range m[k] {
-			res <- result{h, k}
+	// now make structures for testing
+	uniqs := make(map[riff.FourCC]bool)
+	res := make(chan core.Result)
+	waitset := m.priorities.WaitSet(exclude...)
+	// send and report if satisified
+	send := func(cc riff.FourCC) bool {
+		if config.Debug() {
+			fmt.Fprintf(config.Out(), "riff match %s\n", string(cc[:]))
 		}
+		if uniqs[cc] {
+			return false
+		}
+		uniqs[cc] = true
+		for _, hit := range m.riffs[cc] {
+			if waitset.Check(hit) {
+				if config.Debug() {
+					fmt.Fprintf(config.Out(), "sending riff match %s\n", string(cc[:]))
+				}
+				res <- result{hit, cc}
+				if waitset.Put(hit) {
+					return true
+				}
+			}
+		}
+		return false
 	}
-	close(res)
+	// riff walk
+	var descend func(*riff.Reader) bool
+	descend = func(r *riff.Reader) bool {
+		for {
+			chunkID, chunkLen, chunkData, err := r.Next()
+			if err != nil || send(chunkID) {
+				return true
+			}
+			if chunkID == riff.LIST {
+				listType, list, err := riff.NewListReader(chunkLen, chunkData)
+				if err != nil || send(listType) {
+					return true
+				}
+				if descend(list) {
+					return true
+				}
+			}
+		}
+		return false
+	}
+	// go time
+	go func() {
+		if send(rcc) {
+			close(res)
+			return
+		}
+		descend(rrdr)
+		close(res)
+	}()
 	return res, nil
 }
 
-func descend(r *riff.Reader, uniqs map[riff.FourCC]struct{}) {
-	for {
-		chunkID, chunkLen, chunkData, err := r.Next()
-		if err != nil {
-			return
-		}
-		if chunkID == riff.LIST {
-			listType, list, err := riff.NewListReader(chunkLen, chunkData)
-			if err != nil {
-				return
-			}
-			uniqs[listType] = struct{}{}
-			descend(list, uniqs)
-			continue
-		}
-		uniqs[chunkID] = struct{}{}
-	}
-}
-
 func (m Matcher) String() string {
-	return "RIFF matcher"
+	keys := make([]string, 0, len(m.riffs))
+	for k, _ := range m.riffs {
+		keys = append(keys, string(k[:]))
+	}
+	sort.Strings(keys)
+	return fmt.Sprintf("RIFF matcher: %s\n", strings.Join(keys, ", "))
 }

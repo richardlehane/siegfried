@@ -265,7 +265,7 @@ func (b *Base) Add(m core.Matcher, t core.MatcherType) (core.Matcher, error) {
 	case core.RIFFMatcher:
 		var riffs [][4]byte
 		riffs, b.rids.ids = b.p.RIFFs()
-		m, l, err = riffmatcher.Add(m, riffmatcher.SignatureSet(riffs), nil)
+		m, l, err = riffmatcher.Add(m, riffmatcher.SignatureSet(riffs), b.p.Priorities().List(b.rids.ids))
 		if err != nil {
 			return nil, err
 		}

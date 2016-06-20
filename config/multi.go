@@ -28,15 +28,15 @@ const (
 func (m Multi) String() string {
 	switch m {
 	case Single:
-		return "single"
+		return "single (0)"
 	case Conclusive:
-		return "conclusive"
+		return "conclusive (1)"
 	case Positive:
-		return "positive"
+		return "positive (2)"
 	case Comprehensive:
-		return "comprehensive"
+		return "comprehensive (3)"
 	case Exhaustive:
-		return "exhaustive"
+		return "exhaustive (4)"
 	}
 	return ""
 }

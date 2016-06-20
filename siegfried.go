@@ -525,6 +525,8 @@ func (s *Siegfried) Inspect(t core.MatcherType) string {
 		return s.mm.String()
 	case core.ContainerMatcher:
 		return s.cm.String()
+	case core.RIFFMatcher:
+		return s.rm.String()
 	}
 	return fmt.Sprintf("Identifiers\n%s\nByte Matcher\n%sText Matcher\n%s",
 		func() string {

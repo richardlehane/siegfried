@@ -141,6 +141,9 @@ func (m Map) Filter(fmts []string) Map {
 
 // return a priority list using the indexes from the supplied slice of keys (keys can be duplicated in that slice)
 func (m Map) List(keys []string) List {
+	if m == nil {
+		return nil
+	}
 	// build a map of keys to their indexes in the supplied slice
 	iMap := make(map[string][]int)
 	for _, k := range keys {
