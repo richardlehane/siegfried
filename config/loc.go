@@ -17,15 +17,16 @@ package config
 import "path/filepath"
 
 var loc = struct {
-	fdd  string
-	def  string // default
-	name string
-	zip  string
-	gzip string // n/a
-	tar  string // n/a
-	arc  string
-	warc string
-	text string // n/a
+	fdd      string
+	def      string // default
+	nopronom bool
+	name     string
+	zip      string
+	gzip     string // n/a
+	tar      string // n/a
+	arc      string
+	warc     string
+	text     string // n/a
 }{
 	def:  "fddXML.zip",
 	name: "loc",
@@ -47,6 +48,17 @@ func LOC() string {
 
 func ZipLOC() string {
 	return loc.zip
+}
+
+func NoPRONOM() bool {
+	return loc.nopronom
+}
+
+func SetNoPRONOM() func() private {
+	return func() private {
+		loc.nopronom = true
+		return private{}
+	}
 }
 
 func SetLOC(fdd string) func() private {

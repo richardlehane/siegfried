@@ -23,14 +23,17 @@ import (
 	"strings"
 	"time"
 
+	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/identifier"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/loc/mappings"
+	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
 type fdds struct {
 	f []mappings.FDD
+	p identifier.Parseable
 	identifier.Blank
 }
 
@@ -62,7 +65,15 @@ func newLOC(path string) (identifier.Parseable, error) {
 			fs = append(fs, res)
 		}
 	}
-	return fdds{fs, identifier.Blank{}}, nil
+
+	var p identifier.Parseable = identifier.Blank{}
+	if !config.NoPRONOM() {
+		p, err = pronom.NewPronom()
+		if err != nil {
+			return nil, err
+		}
+	}
+	return fdds{fs, p, identifier.Blank{}}, nil
 }
 
 const dateFmt = "2006-01-02"
@@ -142,18 +153,41 @@ func (f fdds) MIMEs() ([]string, []string) {
 
 func (f fdds) Signatures() ([]frames.Signature, []string, error) {
 	var errs []error
+	var puidsIDs map[string][]string
+	if len(f.p.IDs()) > 0 {
+		puidsIDs = make(map[string][]string)
+	}
 	sigs, ids := make([]frames.Signature, 0, len(f.f)), make([]string, 0, len(f.f))
 	for _, v := range f.f {
 		ss, e := magics(v.Magics)
 		if e != nil {
 			errs = append(errs, e)
 		}
-		if ss == nil {
-			continue
-		}
 		for _, s := range ss {
 			sigs = append(sigs, s)
 			ids = append(ids, v.ID)
+		}
+		if puidsIDs != nil {
+			for _, puid := range v.PUIDs() {
+				puidsIDs[puid] = append(puidsIDs[puid], v.ID)
+			}
+		}
+	}
+	if puidsIDs != nil {
+		puids := make([]string, 0, len(puidsIDs))
+		for p, _ := range puidsIDs {
+			puids = append(puids, p)
+		}
+		np := identifier.Filter(puids, f.p)
+		ns, ps, e := np.Signatures()
+		if e != nil {
+			errs = append(errs, e)
+		}
+		for i, v := range ps {
+			for _, id := range puidsIDs[v] {
+				sigs = append(sigs, ns[i])
+				ids = append(ids, id)
+			}
 		}
 	}
 	var err error
@@ -165,6 +199,60 @@ func (f fdds) Signatures() ([]frames.Signature, []string, error) {
 		err = errors.New(strings.Join(errStrs, "; "))
 	}
 	return sigs, ids, err
+}
+
+func (f fdds) containers(typ string) ([][]string, [][]frames.Signature, []string, error) {
+	if _, ok := f.p.(identifier.Blank); ok {
+		return nil, nil, nil, nil
+	}
+	puidsIDs := make(map[string][]string)
+	for _, v := range f.f {
+		for _, puid := range v.PUIDs() {
+			puidsIDs[puid] = append(puidsIDs[puid], v.ID)
+		}
+	}
+	puids := make([]string, 0, len(puidsIDs))
+	for p, _ := range puidsIDs {
+		puids = append(puids, p)
+	}
+
+	np := identifier.Filter(puids, f.p)
+
+	names, sigs, ids := make([][]string, 0, len(f.f)), make([][]frames.Signature, 0, len(f.f)), make([]string, 0, len(f.f))
+	var (
+		ns  [][]string
+		ss  [][]frames.Signature
+		is  []string
+		err error
+	)
+	switch typ {
+	default:
+		err = errors.New("Unknown container type " + typ)
+	case "ZIP":
+		ns, ss, is, err = np.Zips()
+	case "OLE2":
+		ns, ss, is, err = np.MSCFBs()
+	}
+
+	if err != nil {
+		return nil, nil, nil, err
+	}
+	for i, puid := range is {
+		for _, id := range puidsIDs[puid] {
+			names = append(names, ns[i])
+			sigs = append(sigs, ss[i])
+			ids = append(ids, id)
+		}
+	}
+	return names, sigs, ids, nil
+}
+
+func (f fdds) Zips() ([][]string, [][]frames.Signature, []string, error) {
+	return f.containers("ZIP")
+}
+
+func (f fdds) MSCFBs() ([][]string, [][]frames.Signature, []string, error) {
+	return f.containers("OLE2")
 }
 
 func (f fdds) RIFFs() ([][4]byte, []string) {
@@ -190,7 +278,7 @@ func (f fdds) Priorities() priority.Map {
 	for _, v := range f.f {
 		for _, r := range v.Relations {
 			switch r.Typ {
-			case "Subtype of":
+			case "Subtype of", "Modification of", "Version of", "Extension of", "Has earlier version":
 				p.Add(v.ID, r.Value)
 			}
 		}

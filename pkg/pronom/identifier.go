@@ -65,7 +65,7 @@ func New(opts ...config.Option) (core.Identifier, error) {
 	for _, v := range opts {
 		v()
 	}
-	pronom, err := newPronom()
+	pronom, err := NewPronom()
 	if err != nil {
 		return nil, err
 	}

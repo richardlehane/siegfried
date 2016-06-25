@@ -162,6 +162,27 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 		} else {
 			return false
 		}
+	case core.ContainerMatcher:
+		// add zip default
+		if res.Index() < 0 {
+			if r.ZipDefault() {
+				r.cscore += incScore
+				r.ids = add(r.ids, r.Name(), config.ZipLOC(), r.infos[config.ZipLOC()], res.Basis(), r.cscore)
+			}
+			return false
+		}
+		if hit, id := r.Hit(m, res.Index()); hit {
+			r.cscore += incScore
+			basis := res.Basis()
+			p, t := r.Place(core.ContainerMatcher, res.Index())
+			if t > 1 {
+				basis = basis + fmt.Sprintf(" (signature %d/%d)", p, t)
+			}
+			r.ids = add(r.ids, r.Name(), id, r.infos[id], basis, r.cscore)
+			return true
+		} else {
+			return false
+		}
 	case core.RIFFMatcher:
 		if hit, id := r.Hit(m, res.Index()); hit {
 			if r.satisfied {

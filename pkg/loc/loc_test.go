@@ -27,6 +27,7 @@ func TestLOC(t *testing.T) {
 	var dump, dumpmagic bool // set to true to print out LOC sigs
 
 	config.SetHome(filepath.Join("..", "..", "cmd", "roy", "data"))
+	config.SetLOC("")()
 	l, err := newLOC(config.LOC())
 	if l != nil {
 		if dump {

@@ -65,7 +65,7 @@ func (p *pronom) MSCFBs() ([][]string, [][]frames.Signature, []string, error) {
 }
 
 // Pronom creates a pronom object
-func newPronom() (identifier.Parseable, error) {
+func NewPronom() (identifier.Parseable, error) {
 	p := &pronom{}
 	// apply no container rule
 	if !config.NoContainer() && !config.Inspect() {

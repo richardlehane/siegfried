@@ -69,14 +69,20 @@ func Details(extra ...string) string {
 		str = mimeinfo.mi
 	} else if len(loc.fdd) > 0 {
 		str = loc.fdd
+		if !loc.nopronom {
+			extra = append(extra, DroidBase())
+			if !identifier.noContainer {
+				extra = append(extra, ContainerBase())
+			}
+		}
 	} else {
 		str = DroidBase()
 		if !identifier.noContainer {
-			str += "; " + ContainerBase()
+			str += ", " + ContainerBase()
 		}
 	}
 	if len(extra) > 0 {
-		str += " (" + strings.Join(extra, ", ") + ")"
+		str += " (" + strings.Join(extra, "; ") + ")"
 	}
 	if identifier.maxBOF > 0 {
 		str += fmt.Sprintf("; max BOF %d", identifier.maxBOF)

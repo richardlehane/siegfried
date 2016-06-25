@@ -29,6 +29,7 @@ type FDD struct {
 	Others     []Other    `xml:"fileTypeSignifiers>signifiersGroup>other"`
 	Relations  []Relation `xml:"identificationAndDescription>relationships>relationship"`
 	Updates    []string   `xml:"properties>updates>date"`
+	Links      []string   `xml:"usefulReferences>urls>url>urlReference>link"`
 }
 
 type Other struct {
@@ -66,7 +67,7 @@ func rstr(rs []Relation) []string {
 }
 
 func (f FDD) String() string {
-	return fmt.Sprintf("ID: %s\nName: %s\nLong Name: %s\nExts: %s\nMIMEs: %s\nMagics: %s\nOthers: %s\nRelations: %s",
+	return fmt.Sprintf("ID: %s\nName: %s\nLong Name: %s\nExts: %s\nMIMEs: %s\nMagics: %s\nOthers: %s\nRelations: %s\nPUIDs: %s",
 		f.ID,
 		f.Name,
 		f.LongName,
@@ -75,5 +76,16 @@ func (f FDD) String() string {
 		strings.Join(f.Magics, ", "),
 		strings.Join(ostr(f.Others), ", "),
 		strings.Join(rstr(f.Relations), ", "),
+		strings.Join(f.PUIDs(), ", "),
 	)
+}
+
+func (f FDD) PUIDs() []string {
+	var puids []string
+	for _, l := range f.Links {
+		if strings.HasPrefix(l, "http://apps.nationalarchives.gov.uk/pronom/") {
+			puids = append(puids, strings.TrimPrefix(l, "http://apps.nationalarchives.gov.uk/pronom/"))
+		}
+	}
+	return puids
 }

@@ -39,6 +39,7 @@ var (
 	mi          = build.String("mi", "", "set name/path for MIMEInfo signature file")
 	fdd         = build.String("fdd", "", "set name/path for LOC FDD signature file")
 	locfdd      = build.Bool("loc", false, "build a LOC FDD signature file")
+	nopronom    = build.Bool("nopronom", false, "don't include PRONOM sigs with LOC signature file")
 	container   = build.String("container", config.Container(), "set name/path for Droid Container signature file")
 	reports     = build.String("reports", config.Reports(), "set path for PRONOM reports directory")
 	name        = build.String("name", "", "set identifier name")
@@ -169,6 +170,9 @@ func buildOptions() []config.Option {
 	}
 	if *locfdd {
 		opts = append(opts, config.SetLOC(""))
+	}
+	if *nopronom {
+		opts = append(opts, config.SetNoPRONOM())
 	}
 	if *name != "" {
 		opts = append(opts, config.SetName(*name))
