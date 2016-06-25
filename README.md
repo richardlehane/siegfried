@@ -3,11 +3,12 @@
 [Siegfried](http://www.itforarchivists.com/siegfried) is a signature-based file format identification tool, implementing:
 
   - the National Archives UK's [PRONOM](http://apps.nationalarchives.gov.uk/pronom) file format signatures
-  - freedesktop.org's [MIME-info](https://freedesktop.org/wiki/Software/shared-mime-info/) file format signatures.
+  - freedesktop.org's [MIME-info](https://freedesktop.org/wiki/Software/shared-mime-info/) file format signatures
+  - the Library of Congress's [Format Descriptions](http://www.digitalpreservation.gov/formats/fdd/descriptions.shtml).
 
 ### Version
 
-1.5.0
+1.6.0
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried)
 
@@ -44,7 +45,7 @@
 
 #### Signature files
 
-By default, siegfried uses the latest PRONOM signatures without buffer limits (i.e. it may do full file scans). To use MIME-info signatures, or to add buffer limits or other customisations, use the [roy tool](https://github.com/richardlehane/siegfried/wiki/Building-a-signature-file-with-ROY) to build your own signature file.
+By default, siegfried uses the latest PRONOM signatures without buffer limits (i.e. it may do full file scans). To use MIME-info or LOC signatures, or to add buffer limits or other customisations, use the [roy tool](https://github.com/richardlehane/siegfried/wiki/Building-a-signature-file-with-ROY) to build your own signature file.
 
 ## Install
 
@@ -74,6 +75,13 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 
 ## Recent Changes
+### Version 1.6.0 (2x/6/2016)
+- feature: implement Library of Congress FDD signatures
+- feature: implement RIFF matcher
+- feature: -multi flag replaces -nopriority; based on report by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/75)
+- change to -z output: use hash as filepath separator (and unix slash for webarchives); requested by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/81)
+- bugfix: parsing fmt/837 signature; reported by [Sarah Romkey](https://github.com/richardlehane/siegfried/issues/80)
+
 ### Version 1.5.0 (14/3/2016)
 - feature: implement freedesktop.org MIME-info signatures (and the Apache Tika variant)
 - feature: implement XML matcher
