@@ -78,11 +78,11 @@ func Details(extra ...string) string {
 	} else {
 		str = DroidBase()
 		if !identifier.noContainer {
-			str += ", " + ContainerBase()
+			str += "; " + ContainerBase()
 		}
 	}
 	if len(extra) > 0 {
-		str += " (" + strings.Join(extra, "; ") + ")"
+		str += " (" + strings.Join(extra, ", ") + ")"
 	}
 	if identifier.maxBOF > 0 {
 		str += fmt.Sprintf("; max BOF %d", identifier.maxBOF)
