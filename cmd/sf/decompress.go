@@ -260,7 +260,7 @@ func (w *wa) reader() io.Reader {
 }
 
 func (w *wa) path() string {
-	return arcpath(w.p, w.rec.Date().Format(webarchive.ARCTime)+'/'+w.rec.URL())
+	return arcpath(w.p, w.rec.Date().Format(webarchive.ARCTime)+"/"+w.rec.URL())
 }
 
 func (w *wa) mime() string {
