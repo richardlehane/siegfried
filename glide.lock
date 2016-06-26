@@ -1,5 +1,5 @@
 hash: 2faaea615e9a8a21cbbdece66726b50773b898784ebb3c0d0dea5271ed682e71
-updated: 2016-06-26T18:27:14.888341126+10:00
+updated: 2016-06-26T19:58:34.020639833+10:00
 imports:
 - name: github.com/richardlehane/characterize
   version: 65c3af3b37223a3694e454f8ccd2bfe37f0a3ec0
