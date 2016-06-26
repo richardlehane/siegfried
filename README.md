@@ -4,7 +4,7 @@
 
   - the National Archives UK's [PRONOM](http://apps.nationalarchives.gov.uk/pronom) file format signatures
   - freedesktop.org's [MIME-info](https://freedesktop.org/wiki/Software/shared-mime-info/) file format signatures
-  - the Library of Congress's [Format Descriptions](http://www.digitalpreservation.gov/formats/fdd/descriptions.shtml).
+  - the Library of Congress's [FDD](http://www.digitalpreservation.gov/formats/fdd/descriptions.shtml) file format signatures (*beta*).
 
 ### Version
 
@@ -75,8 +75,8 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 
 ## Recent Changes
-### Version 1.6.0 (2x/6/2016)
-- feature: implement Library of Congress FDD signatures
+### Version 1.6.0 (26/6/2016)
+- feature: implement Library of Congress FDD signatures (*beta*)
 - feature: implement RIFF matcher
 - feature: -multi flag replaces -nopriority; based on report by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/75)
 - change to -z output: use hash as filepath separator (and unix slash for webarchives); requested by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/81)

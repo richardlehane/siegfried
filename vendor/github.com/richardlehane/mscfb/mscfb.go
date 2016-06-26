@@ -184,7 +184,7 @@ func (r *Reader) setDifats() error {
 // set the ministream FAT and sector slices in the header
 func (r *Reader) setMiniStream() error {
 	// do nothing if there is no ministream
-	if r.File[0].startingSectorLoc == endOfChain || r.header.miniFatSectorLoc == endOfChain || r.header.numMiniFatSectors == 0 {
+	if r.direntries[0].startingSectorLoc == endOfChain || r.header.miniFatSectorLoc == endOfChain || r.header.numMiniFatSectors == 0 {
 		return nil
 	}
 	// build a slice of minifat sectors (akin to the DIFAT slice)
@@ -201,7 +201,7 @@ func (r *Reader) setMiniStream() error {
 	// build a slice of ministream sectors
 	c = int(sectorSize / 4 * r.header.numMiniFatSectors)
 	r.header.miniStreamLocs = make([]uint32, 0, c)
-	sn := r.File[0].startingSectorLoc
+	sn := r.direntries[0].startingSectorLoc
 	var err error
 	for sn != endOfChain {
 		r.header.miniStreamLocs = append(r.header.miniStreamLocs, sn)
@@ -270,13 +270,15 @@ func (r *Reader) findNext(sn uint32, mini bool) (uint32, error) {
 
 // Reader provides sequential access to the contents of a MS compound file (MSCFB)
 type Reader struct {
-	slicer  bool
-	buf     []byte
-	header  *header
-	File    []*File // File is a slice of directory entries. Not necessarily in correct order. Use Next() for order.
-	entry   int
-	indexes []int
-	ra      io.ReaderAt
+	slicer     bool
+	buf        []byte
+	header     *header
+	File       []*File // File is an ordered slice of final directory entries.
+	direntries []*File // unordered raw directory entries
+	entry      int
+
+	ra io.ReaderAt
+	wa io.WriterAt
 }
 
 // New returns a MSCFB reader
@@ -331,7 +333,7 @@ func (r *Reader) Next() (*File, error) {
 	if r.entry >= len(r.File) {
 		return nil, io.EOF
 	}
-	return r.File[r.indexes[r.entry]], nil
+	return r.File[r.entry], nil
 }
 
 // Read the current directory entry
@@ -339,7 +341,7 @@ func (r *Reader) Read(b []byte) (n int, err error) {
 	if r.entry >= len(r.File) {
 		return 0, io.EOF
 	}
-	return r.File[r.indexes[r.entry]].Read(b)
+	return r.File[r.entry].Read(b)
 }
 
 // Debug provides granular information from an mscfb file to assist with debugging
@@ -362,6 +364,10 @@ const (
 	ErrFormat = iota
 	// ErrRead reports issues attempting to read MSCFB streams
 	ErrRead
+	// ErrSeek reports seek issues
+	ErrSeek
+	// ErrWrite reports write issues
+	ErrWrite
 	// ErrTraverse reports issues attempting to traverse the child-parent-sibling relations
 	// between MSCFB storage objects
 	ErrTraverse

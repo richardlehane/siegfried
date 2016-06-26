@@ -99,21 +99,27 @@ func testFile(t *testing.T, path string) {
 
 func TestTraverse(t *testing.T) {
 	r := new(Reader)
-	r.File = testEntries
+	r.direntries = testEntries
 	if r.traverse() != nil {
 		t.Error("Error traversing")
 	}
 	expect := []int{0, 1, 2, 4, 5, 8, 9, 11, 6, 3, 7, 10}
-	for i, v := range r.indexes {
-		if v != expect[i] {
-			t.Errorf("Error traversing: expecting %d at index %d; got %d", expect[i], i, v)
+	if len(r.File) != len(expect) {
+		t.Fatalf("Error traversing: expecting %d entries, got %d", len(expect), len(r.File))
+	}
+	for i, v := range r.File {
+		if v != testEntries[expect[i]] {
+			t.Errorf("Error traversing: expecting %d at index %d; got %v", expect[i], i, v)
 		}
 	}
-	if r.File[10].Path[0] != "Charlie" {
-		t.Errorf("Error traversing: expecting Charlie got %s", r.File[10].Path[0])
+	if len(r.File[len(r.File)-1].Path) != 2 {
+		t.Fatalf("Error traversing: expecting a path length of %d, got %d", 2, len(r.File[len(r.File)-1].Path))
 	}
-	if r.File[10].Path[1] != "Golf" {
-		t.Errorf("Error traversing: expecting Golf got %s", r.File[10].Path[1])
+	if r.File[len(r.File)-1].Path[0] != "Charlie" {
+		t.Errorf("Error traversing: expecting Charlie got %s", r.File[expect[10]].Path[0])
+	}
+	if r.File[len(r.File)-1].Path[1] != "Golf" {
+		t.Errorf("Error traversing: expecting Golf got %s", r.File[expect[10]].Path[1])
 	}
 }
 
@@ -135,6 +141,144 @@ func TestPpt(t *testing.T) {
 
 func TestXls(t *testing.T) {
 	testFile(t, testXls)
+}
+
+func TestSeek(t *testing.T) {
+	file, _ := os.Open(testXls)
+	defer file.Close()
+	doc, _ := New(file)
+	// the third entry in the XLS file is 2719 bytes
+	f := doc.File[3]
+	if f.Size != 2719 {
+		t.Fatalf("Expecting the third entry of the XLS file to be 2719 bytes long; it is %d", f.Size)
+	}
+	buf := make([]byte, 2719)
+	i, err := f.Read(buf)
+	if i != 2719 || err != nil {
+		t.Fatalf("Expecting 2719 length and no error; got %d and %v", i, err)
+	}
+	s, err := f.Seek(50, 1)
+	if s != 2719 || err == nil {
+		t.Fatalf("%v, %d", err, s)
+	}
+	s, err = f.Seek(1500, 0)
+	if s != 1500 || err != nil {
+		t.Fatalf("Seek error: %v, %d", err, s)
+	}
+	nbuf := make([]byte, 475)
+	i, err = f.Read(nbuf)
+	if i != 475 || err != nil {
+		t.Fatalf("Expecting 475 length and no error; got %d and %v", i, err)
+	}
+	if !bytes.Equal(buf[1500:1975], nbuf) {
+		t.Fatalf("Slices not equal: %s, %s", string(buf[1500:1975]), string(nbuf))
+	}
+	s, err = f.Seek(5, 1)
+	if s != 1980 || err != nil {
+		t.Fatalf("Seek error: %v, %d", err, s)
+	}
+	i, err = f.Read(nbuf[:5])
+	if i != 5 || err != nil {
+		t.Fatalf("Expecting 5 length, and no error; got %d and %v", i, err)
+	}
+	if !bytes.Equal(buf[1980:1985], nbuf[:5]) {
+		t.Fatalf("Slices not equal: %s, %s", string(buf[1980:1985]), string(nbuf[:5]))
+	}
+	s, err = f.Seek(30, 2)
+	if s != 2689 || err != nil {
+		t.Fatalf("Seek error: %v, %d", err, s)
+	}
+	i, err = f.Read(nbuf[:30])
+	if i != 30 || err != nil {
+		t.Fatalf("Expecting 30 length, and no error; got %d and %v", i, err)
+	}
+	if !bytes.Equal(buf[2689:], nbuf[:30]) {
+		t.Fatalf("Slices not equal: %d, %s, %s", len(buf[2688:]), string(buf[2688:]), string(nbuf[:30]))
+	}
+}
+
+func TestWrite(t *testing.T) {
+	file, err := os.OpenFile(testXls, os.O_RDWR, 0666)
+	if err != nil {
+		t.Fatalf("error opening file for read/write %v", err)
+	}
+	defer file.Close()
+	doc, err := New(file)
+	if err != nil {
+		t.Fatalf("Error opening file; Returns error: %v", err)
+	}
+	// the third entry in the XLS file is 2719 bytes
+	f := doc.File[3]
+	s, err := f.Seek(30, 0)
+	if s != 30 || err != nil {
+		t.Fatalf("Seek error: %v, %d", err, s)
+	}
+	orig := make([]byte, 4)
+	i, err := f.Read(orig)
+	if i != 4 || err != nil {
+		t.Fatalf("Expecting read length 4, and no error, got %d %v", i, err)
+	}
+	s, err = f.Seek(30, 0)
+	if s != 30 || err != nil {
+		t.Fatalf("Seek error: %v, %d", err, s)
+	}
+	i, err = f.Write([]byte("test"))
+	if i != 4 || err != nil {
+		t.Errorf("error writing, got %d %v", i, err)
+	}
+	s, err = f.Seek(30, 0)
+	if s != 30 || err != nil {
+		t.Fatalf("Seek error: %v, %d", err, s)
+	}
+	res := make([]byte, 4)
+	i, err = f.Read(res)
+	if i != 4 || err != nil {
+		t.Errorf("error reading, got %d %v", i, err)
+	}
+	if string(res) != "test" {
+		t.Errorf("expecting test, got %s", string(res))
+	}
+	s, err = f.Seek(30, 0)
+	if s != 30 || err != nil {
+		t.Fatalf("Seek error: %v, %d", err, s)
+	}
+	i, err = f.Write(orig)
+	if i != 4 || err != nil {
+		t.Errorf("error writing, got %d %v", i, err)
+	}
+	s, err = f.Seek(30, 0)
+	if s != 30 || err != nil {
+		t.Fatalf("Seek error: %v, %d", err, s)
+	}
+	i, err = f.Read(res)
+	if i != 4 || err != nil {
+		t.Errorf("error reading, got %d %v", i, err)
+	}
+	if string(res) != string(orig) {
+		t.Errorf("bad result, expected %s, got %s", string(orig), string(res))
+	}
+	i, err = f.WriteAt([]byte("test"), 30)
+	if i != 4 || err != nil {
+		t.Errorf("error writing, got %d %v", i, err)
+	}
+	i, err = f.ReadAt(res, 30)
+	if i != 4 || err != nil {
+		t.Errorf("error reading, got %d %v", i, err)
+	}
+	if string(res) != "test" {
+		t.Errorf("expecting test, got %s", string(res))
+	}
+	i, err = f.WriteAt(orig, 30)
+	if i != 4 || err != nil {
+		t.Errorf("error writing, got %d %v", i, err)
+	}
+	i, err = f.ReadAt(res, 30)
+	if i != 4 || err != nil {
+		t.Errorf("error reading, got %d %v", i, err)
+	}
+	if string(res) != string(orig) {
+		t.Errorf("bad result, expected %s, got %s", string(orig), string(res))
+	}
 }
 
 func benchFile(b *testing.B, path string) {

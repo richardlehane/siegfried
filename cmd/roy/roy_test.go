@@ -7,13 +7,14 @@ import (
 
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/config"
+	"github.com/richardlehane/siegfried/pkg/loc"
 	"github.com/richardlehane/siegfried/pkg/mimeinfo"
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
 var testhome = flag.String("testhome", "data", "override the default home directory")
 
-func TestMakeGob(t *testing.T) {
+func TestMakeDefault(t *testing.T) {
 	s := siegfried.New()
 	config.SetHome(*testhome)
 	p, err := pronom.New()
@@ -50,7 +51,15 @@ func TestMakePronomTika(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	sigs := filepath.Join("data", "pronom-tika.sig")
+	l, err := loc.New(config.SetName("loc"), config.SetLOC(""))
+	if err != nil {
+		t.Fatal(err)
+	}
+	err = s.Add(l)
+	if err != nil {
+		t.Fatal(err)
+	}
+	sigs := filepath.Join("data", "pronom-tika-loc.sig")
 	err = s.Save(sigs)
 	if err != nil {
 		t.Fatal(err)

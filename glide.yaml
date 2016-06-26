@@ -10,3 +10,6 @@ import:
 - package: golang.org/x/sys
   subpackages:
   - unix
+- package: golang.org/x/image
+  subpackages:
+  - riff

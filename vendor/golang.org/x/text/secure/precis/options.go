@@ -17,7 +17,7 @@ type Option func(*options)
 
 type options struct {
 	// Preparation options
-	allowwidechars bool
+	foldWidth bool
 
 	// Enforcement options
 	cases         transform.Transformer
@@ -26,6 +26,7 @@ type options struct {
 	additional    []func() transform.Transformer
 	width         *width.Transformer
 	disallowEmpty bool
+	bidiRule      bool
 
 	// Comparison options
 	ignorecase bool
@@ -43,26 +44,33 @@ var (
 	// comparison during the PRECIS comparison step.
 	IgnoreCase Option = ignoreCase
 
-	// The AllowWide option causes the profile to allow full-width and half-width
-	// characters by mapping them to their decomposition mappings. This is useful
-	// for profiles that are based on the identifier class which would otherwise
-	// disallow wide characters.
-	AllowWide Option = allowWide
+	// The FoldWidth option causes the profile to map non-canonical wide and
+	// narrow variants to their decomposition mapping. This is useful for
+	// profiles that are based on the identifier class which would otherwise
+	// disallow such characters.
+	FoldWidth Option = foldWidth
 
 	// The DisallowEmpty option causes the enforcement step to return an error if
 	// the resulting string would be empty.
 	DisallowEmpty Option = disallowEmpty
+
+	// The BidiRule option causes the Bidi Rule defined in RFC 5893 to be
+	// applied.
+	BidiRule Option = bidiRule
 )
 
 var (
 	ignoreCase = func(o *options) {
 		o.ignorecase = true
 	}
-	allowWide = func(o *options) {
-		o.allowwidechars = true
+	foldWidth = func(o *options) {
+		o.foldWidth = true
 	}
 	disallowEmpty = func(o *options) {
 		o.disallowEmpty = true
+	}
+	bidiRule = func(o *options) {
+		o.bidiRule = true
 	}
 )
 
@@ -81,13 +89,6 @@ func Norm(f norm.Form) Option {
 	}
 }
 
-// The Width option defines a Profile's width mapping rule.
-func Width(w width.Transformer) Option {
-	return func(o *options) {
-		o.width = &w
-	}
-}
-
 // The FoldCase option defines a Profile's case mapping rule. Options can be
 // provided to determine the type of case folding used.
 func FoldCase(opts ...cases.Option) Option {
@@ -103,12 +104,3 @@ func Disallow(set runes.Set) Option {
 		o.disallow = set
 	}
 }
-
-// TODO: Pending finalization of the unicode/bidi API
-// // The Dir option defines a Profile's directionality mapping rule. Generally
-// // profiles based on the Identifier string class will want to use the "Bidi
-// // Rule" defined in RFC5893, and profiles based on the Freeform string class
-// // will want to use the Unicode bidirectional algorithm defined in UAX9.
-// func Dir() Option {
-// 	panic("unimplemented")
-// }

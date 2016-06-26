@@ -22,13 +22,15 @@ for record, err := rdr.Next(); err == nil; record, err = rdr.Next() {
     log.Fatal(err)
   }
   fmt.Printf("Read: %d bytes\n", i)
-  // records also have URL(), Date() and Size() methods
-  fmt.Printf("URL: %s, Date: %v, Size: %d\n", record.URL(), record.Date(), record.Size())
+  // records also have URL(), MIME(), Date() and Size() methods
+  fmt.Printf("URL: %s, MIME: %s, Date: %v, Size: %d\n", 
+    record.URL(), record.MIME(), record.Date(), record.Size())
   // the Fields() method returns all the fields in the WARC or ARC record
   for key, values := range record.Fields() {
     fmt.Printf("Field key: %s, Field values: %v\n", key, values)
   }
 }
+f.Close()
 f, _ = os.Open("examplesIAH-20080430204825-00000-blackbook.warc.gz")
 defer f.Close()
 // readers can Reset() to reuse the underlying buffers
@@ -41,6 +43,11 @@ defer rdr.Close()
 // records. After stripping, those HTTP headers are available alongside the WARC 
 // headers in the record.Fields() map.
 for record, err := rdr.NextPayload(); err == nil; record, err = rdr.NextPayload() {
+  // webarchive.DecodePayload(record) decodes any encodings (transfer or 
+  // content) declared in a record's HTTP header.
+  // webarchive.DecodePayloadT(record) just decodes transfer encodings.
+  // Both decode chunked, deflate and gzip encodings.
+  record = webarchive.DecodePayload(record)
   i, err := io.Copy(ioutil.Discard, record)
   if err != nil {
     log.Fatal(err)

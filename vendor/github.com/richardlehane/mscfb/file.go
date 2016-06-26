@@ -82,7 +82,7 @@ func (r *Reader) setDirEntries() error {
 	if r.header.numDirectorySectors > 0 {
 		c = int(r.header.numDirectorySectors)
 	}
-	fs := make([]*File, 0, c)
+	de := make([]*File, 0, c)
 	cycles := make(map[uint32]bool)
 	num := int(sectorSize / 128)
 	sn := r.header.directorySectorLoc
@@ -94,11 +94,9 @@ func (r *Reader) setDirEntries() error {
 		for i := 0; i < num; i++ {
 			f := &File{r: r}
 			f.directoryEntryFields = makeDirEntry(buf[i*128:])
-			if f.directoryEntryFields.objectType != unknown {
-				fixFile(r.header.majorVersion, f)
-				f.readSector = f.startingSectorLoc
-				fs = append(fs, f)
-			}
+			fixFile(r.header.majorVersion, f)
+			f.curSector = f.startingSectorLoc
+			de = append(de, f)
 		}
 		nsn, err := r.findNext(sn, false)
 		if err != nil {
@@ -112,12 +110,15 @@ func (r *Reader) setDirEntries() error {
 		}
 		sn = nsn
 	}
-	r.File = fs
+	r.direntries = de
 	return nil
 }
 
 func fixFile(v uint16, f *File) {
 	fixName(f)
+	if f.objectType != stream {
+		return
+	}
 	// if the MSCFB major version is 4, then this can be a uint64 otherwise is a uint32 and the least signficant bits can contain junk
 	if v > 3 {
 		f.Size = int64(binary.LittleEndian.Uint64(f.streamSize[:]))
@@ -143,26 +144,24 @@ func fixName(f *File) {
 }
 
 func (r *Reader) traverse() error {
-	r.indexes = make([]int, len(r.File))
-	var idx int
+	r.File = make([]*File, 0, len(r.direntries))
 	var recurse func(int, []string)
 	var err error
 	recurse = func(i int, path []string) {
-		if i < 0 || i >= len(r.File) {
+		if i < 0 || i >= len(r.direntries) {
 			err = Error{ErrTraverse, "illegal traversal index", int64(i)}
 			return
 		}
-		file := r.File[i]
+		file := r.direntries[i]
 		if file.leftSibID != noStream {
 			recurse(int(file.leftSibID), path)
 		}
-		if idx >= len(r.indexes) {
+		if len(r.File) >= cap(r.File) {
 			err = Error{ErrTraverse, "traversal counter overflow", int64(i)}
 			return
 		}
-		r.indexes[idx] = i
+		r.File = append(r.File, file)
 		file.Path = path
-		idx++
 		if file.childID != noStream {
 			if i > 0 {
 				recurse(int(file.childID), append(path, file.Name))
@@ -181,13 +180,13 @@ func (r *Reader) traverse() error {
 
 // File represents a MSCFB directory entry
 type File struct {
-	Name       string   // stream or directory name
-	Initial    uint16   // the first character in the name (identifies special streams such as MSOLEPS property sets)
-	Path       []string // file path
-	Size       int64    // size of stream
-	i          int64    // bytes read
-	readSector uint32   // next sector for Read
-	rem        int64    // offset in current sector remaining previous Read
+	Name      string   // stream or directory name
+	Initial   uint16   // the first character in the name (identifies special streams such as MSOLEPS property sets)
+	Path      []string // file path
+	Size      int64    // size of stream
+	i         int64    // bytes read
+	curSector uint32   // next sector for Read | Write
+	rem       int64    // offset in current sector remaining previous Read | Write
 	*directoryEntryFields
 	r *Reader
 }
@@ -236,7 +235,7 @@ func (f *File) Modified() time.Time {
 // Read this directory entry
 // Returns 0, io.EOF if no stream is available (i.e. for a storage object)
 func (f *File) Read(b []byte) (int, error) {
-	if f.objectType != stream || f.Size < 1 || f.i >= f.Size {
+	if f.Size < 1 || f.i >= f.Size {
 		return 0, io.EOF
 	}
 	sz := len(b)
@@ -272,16 +271,176 @@ func (f *File) Read(b []byte) (int, error) {
 	return i, err
 }
 
-// return offsets and lengths for read
-func (f *File) stream(sz int) ([][2]int64, error) {
+// Write to this directory entry
+// Depends on the io.ReaderAt supplied to mscfb.New() being a WriterAt too
+// Returns 0, io.EOF if no stream is available (i.e. for a storage object)
+func (f *File) Write(b []byte) (int, error) {
+	if f.Size < 1 || f.i >= f.Size {
+		return 0, io.EOF
+	}
+	if f.r.wa == nil {
+		wa, ok := f.r.ra.(io.WriterAt)
+		if !ok {
+			return 0, Error{ErrWrite, "mscfb.New must be given ReaderAt convertible to a io.WriterAt in order to write", 0}
+		}
+		f.r.wa = wa
+	}
+	sz := len(b)
+	if int64(sz) > f.Size-f.i {
+		sz = int(f.Size - f.i)
+	}
+	// get sectors and lengths for writes
+	str, err := f.stream(sz)
+	if err != nil {
+		return 0, err
+	}
+	// now read
+	var idx, i int
+	for _, v := range str {
+		jdx := idx + int(v[1])
+		if jdx < idx || jdx > sz {
+			return 0, Error{ErrWrite, "bad write length", int64(jdx)}
+		}
+		j, err := f.r.wa.WriteAt(b[idx:jdx], v[0])
+		i = i + j
+		if err != nil {
+			f.i += int64(i)
+			return i, Error{ErrWrite, "underlying writer fail (" + err.Error() + ")", int64(idx)}
+		}
+		idx = jdx
+	}
+	f.i += int64(i)
+	if i != sz {
+		err = Error{ErrWrite, "bytes written do not match expected write size", int64(i)}
+	} else if i < len(b) {
+		err = io.EOF
+	}
+	return i, err
+}
+
+// ReadAt reads p bytes at offset off from start of file. Does not affect seek place for other reads/writes.
+func (f *File) ReadAt(p []byte, off int64) (n int, err error) {
+	// memorize place
+	mi, mrem, mcur := f.i, f.rem, f.curSector
+	_, err = f.Seek(off, 0)
+	if err == nil {
+		n, err = f.Read(p)
+	}
+	f.i, f.rem, f.curSector = mi, mrem, mcur
+	return n, err
+}
+
+// WriteAt reads p bytes at offset off from start of file. Does not affect seek place for other reads/writes.
+func (f *File) WriteAt(p []byte, off int64) (n int, err error) {
+	// memorize place
+	mi, mrem, mcur := f.i, f.rem, f.curSector
+	_, err = f.Seek(off, 0)
+	if err == nil {
+		n, err = f.Write(p)
+	}
+	f.i, f.rem, f.curSector = mi, mrem, mcur
+	return n, err
+}
+
+// Seek sets the offset for the next Read or Write to offset, interpreted according to whence: 0 means relative to the
+// start of the file, 1 means relative to the current offset, and 2 means relative to the end. Seek returns the new
+// offset relative to the start of the file and an error, if any.
+func (f *File) Seek(offset int64, whence int) (int64, error) {
+	var abs int64
+	switch whence {
+	default:
+		return 0, Error{ErrSeek, "invalid whence", int64(whence)}
+	case 0:
+		abs = offset
+	case 1:
+		abs = f.i + offset
+	case 2:
+		abs = f.Size - offset
+	}
+	switch {
+	case abs < 0:
+		return f.i, Error{ErrSeek, "can't seek before start of File", abs}
+	case abs >= f.Size:
+		return f.i, Error{ErrSeek, "can't seek past File length", abs}
+	case abs == f.i:
+		return abs, nil
+	case abs > f.i:
+		t := f.i
+		f.i = abs
+		return f.i, f.seek(abs - t)
+	}
+	if f.rem >= f.i-abs {
+		f.rem = f.rem - (f.i - abs)
+		f.i = abs
+		return f.i, nil
+	}
+	f.rem = 0
+	f.curSector = f.startingSectorLoc
+	f.i = abs
+	return f.i, f.seek(abs)
+}
+
+func (f *File) seek(sz int64) error {
 	// calculate ministream and sector size
 	var mini bool
+	var ss int64
 	if f.Size < miniStreamCutoffSize {
 		mini = true
+		ss = 64
+	} else {
+		ss = int64(sectorSize)
 	}
+
+	var j int64
+	var err error
+	// if we have a remainder in the current sector, use it first
+	if f.rem > 0 {
+		if ss-f.rem <= sz {
+			f.curSector, err = f.r.findNext(f.curSector, mini)
+			if err != nil {
+				return err
+			}
+			j += ss - f.rem
+			f.rem = 0
+			if j == sz {
+				return nil
+			}
+		} else {
+			f.rem += sz
+			return nil
+		}
+		if f.curSector == endOfChain {
+			return Error{ErrRead, "unexpected early end of chain", int64(f.curSector)}
+		}
+	}
+
+	for {
+		// check if we are at the last sector
+		if sz-j < ss {
+			f.rem = sz - j
+			return nil
+		} else {
+			j += ss
+			f.curSector, err = f.r.findNext(f.curSector, mini)
+			if err != nil {
+				return err
+			}
+			// we might be at the last sector if there is no remainder, if so can return
+			if j == sz {
+				return nil
+			}
+		}
+	}
+}
+
+// return offsets and lengths for read or write
+func (f *File) stream(sz int) ([][2]int64, error) {
+	// calculate ministream, cap for sector slice, and sector size
+	var mini bool
 	var l int
 	var ss int64
-	if mini {
+	if f.Size < miniStreamCutoffSize {
+		mini = true
 		l = sz/64 + 2
 		ss = 64
 	} else {
@@ -294,7 +453,7 @@ func (f *File) stream(sz int) ([][2]int64, error) {
 
 	// if we have a remainder from a previous read, use it first
 	if f.rem > 0 {
-		offset, err := f.r.getOffset(f.readSector, mini)
+		offset, err := f.r.getOffset(f.curSector, mini)
 		if err != nil {
 			return nil, err
 		}
@@ -304,20 +463,20 @@ func (f *File) stream(sz int) ([][2]int64, error) {
 			sectors = append(sectors, [2]int64{offset + f.rem, ss - f.rem})
 		}
 		if ss-f.rem <= int64(sz) {
-			f.rem = 0
-			f.readSector, err = f.r.findNext(f.readSector, mini)
+			f.curSector, err = f.r.findNext(f.curSector, mini)
 			if err != nil {
 				return nil, err
 			}
 			j += int(ss - f.rem)
+			f.rem = 0
 		} else {
 			f.rem += int64(sz)
 		}
 		if sectors[0][1] == int64(sz) {
 			return sectors, nil
 		}
-		if f.readSector == endOfChain {
-			return nil, Error{ErrRead, "unexpected early end of chain", int64(f.readSector)}
+		if f.curSector == endOfChain {
+			return nil, Error{ErrRead, "unexpected early end of chain", int64(f.curSector)}
 		}
 		i++
 	}
@@ -328,7 +487,7 @@ func (f *File) stream(sz int) ([][2]int64, error) {
 			return nil, Error{ErrRead, "index overruns sector length", int64(i)}
 		}
 		// grab the next offset
-		offset, err := f.r.getOffset(f.readSector, mini)
+		offset, err := f.r.getOffset(f.curSector, mini)
 		if err != nil {
 			return nil, err
 		}
@@ -340,7 +499,7 @@ func (f *File) stream(sz int) ([][2]int64, error) {
 		} else {
 			sectors = append(sectors, [2]int64{offset, ss})
 			j += int(ss)
-			f.readSector, err = f.r.findNext(f.readSector, mini)
+			f.curSector, err = f.r.findNext(f.curSector, mini)
 			if err != nil {
 				return nil, err
 			}

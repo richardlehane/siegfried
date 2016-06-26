@@ -195,7 +195,7 @@ func eatToken(in io.ByteReader) (bool, string, string, error) {
 // eats an element returning:
 // a bool to signfify if a valid element
 // the tag name
-// the default (xmlns) namespace.
+// the default (xmlns=) namespace.
 func eatElement(in io.ByteReader, c byte) (bool, string, string) {
 	buf := make([]byte, 32)
 	var (
@@ -234,20 +234,21 @@ func extractNS(buf []byte) string {
 		(buf[1] == 'm' || buf[1] == 'M') &&
 		(buf[2] == 'l' || buf[2] == 'L') &&
 		(buf[3] == 'n' || buf[3] == 'N') &&
-		(buf[4] == 's' || buf[4] == 'S') {
+		(buf[4] == 's' || buf[4] == 'S') &&
+		buf[5] == '=' {
 		var (
 			inQuote byte
 			start   int
 		)
-		for i, c := range buf[5:] {
+		for i, c := range buf[6:] {
 			if inQuote == 0 {
 				// test for " or '
 				if c == 0x27 || c == 0x22 {
 					inQuote = c
-					start = 5 + i + 1
+					start = 6 + i + 1
 				}
 			} else if c == inQuote {
-				return string(buf[start : i+5])
+				return string(buf[start : i+6])
 			}
 		}
 	}
