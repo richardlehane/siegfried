@@ -18,12 +18,12 @@ build_script:
   - go install -a github.com/richardlehane/siegfried/cmd/roy
 
 artifacts:
-  - path: c:\gopath\bin
-    name: siegfried-$(PLATFORM)
+  - path: '**\bin'
+    name: siegfried_$(APPVEYOR_REPO_TAG_NAME)_win$(PLATFORM)
 
 deploy:
   - provider: GitHub         
     draft: false
     prerelease: false
     on:
-      platform: x86                
+      appveyor_repo_tag: true                
