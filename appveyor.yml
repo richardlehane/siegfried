@@ -21,9 +21,14 @@ artifacts:
   - path: '**\bin'
     name: siegfried_$(APPVEYOR_REPO_TAG_NAME)_win$(PLATFORM)
 
+  - path: c:\gopath\src\github.com\richardlehane\siegfried\cmd\roy\data
+    name: data_$(APPVEYOR_REPO_TAG_NAME)
+
 deploy:
-  - provider: GitHub         
-    draft: false
+  - provider: GitHub
+    release: v$(APPVEYOR_REPO_TAG_NAME) 
+    description: 'Release description'         
+    draft: true
     prerelease: false
     on:
       appveyor_repo_tag: true                
