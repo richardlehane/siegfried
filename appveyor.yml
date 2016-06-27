@@ -1,0 +1,29 @@
+# version format
+version: "{build}"
+
+# environment variables
+environment:
+  GOPATH: c:\gopath
+
+platform:
+  - x86
+  - x64
+
+branches:
+  only:
+    - master
+
+install:
+  - set PATH=%GOPATH%\bin;c:\go\bin;%PATH%
+
+build_script:
+  - go install -a github.com/richardlehane/siegfried/cmd/sf
+  - go install -a github.com/richardlehane/siegfried/cmd/roy
+
+deploy:
+  - provider: GitHub
+    artifact: c:\go\bin\sf.exe           
+    draft: false
+    prerelease: false
+    on:
+      branch: master                
