@@ -1,7 +1,5 @@
-# version format
 version: "{build}"
 
-# environment variables
 environment:
   GOPATH: c:\gopath
 
@@ -13,17 +11,19 @@ branches:
   only:
     - master
 
-install:
-  - set PATH=%GOPATH%\bin;c:\go\bin;%PATH%
+clone_folder: c:\gopath\src\github.com\richardlehane\siegfried
 
 build_script:
   - go install -a github.com/richardlehane/siegfried/cmd/sf
   - go install -a github.com/richardlehane/siegfried/cmd/roy
 
+artifacts:
+  - path: c:\gopath\bin
+    name: siegfried-$(PLATFORM)
+
 deploy:
-  - provider: GitHub
-    artifact: c:\go\bin\sf.exe           
+  - provider: GitHub         
     draft: false
     prerelease: false
     on:
-      branch: master                
+      platform: x86                
