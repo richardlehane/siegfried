@@ -61,7 +61,7 @@
       <InternalSignature>
         <SignatureID>1149</SignatureID>
         <SignatureName>Snoop</SignatureName>
-        <SignatureNote>Magic: snoop... Version: 2</SignatureNote>
+        <SignatureNote>Magic: snoop... Version: 2 - https://tools.ietf.org/rfc/rfc1761.txt</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1400</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>

@@ -65,12 +65,13 @@ var (
 	choices     = build.Int("choices", config.Choices(), "define a maximum number of choices for segmentation")
 
 	// HARVEST
-	harvest        = flag.NewFlagSet("harvest", flag.ExitOnError)
-	harvestHome    = harvest.String("home", config.Home(), "override the default home directory")
-	harvestDroid   = harvest.String("droid", config.Droid(), "set name/path for DROID signature file")
-	harvestReports = harvest.String("reports", config.Reports(), "set path for PRONOM reports directory")
-	_, htimeout, _ = config.HarvestOptions()
-	timeout        = flag.Duration("timeout", htimeout, "set duration before timing-out harvesting requests e.g. 120s")
+	harvest           = flag.NewFlagSet("harvest", flag.ExitOnError)
+	harvestHome       = harvest.String("home", config.Home(), "override the default home directory")
+	harvestDroid      = harvest.String("droid", config.Droid(), "set name/path for DROID signature file")
+	harvestReports    = harvest.String("reports", config.Reports(), "set path for PRONOM reports directory")
+	_, htimeout, _, _ = config.HarvestOptions()
+	timeout           = harvest.Duration("timeout", htimeout, "set duration before timing-out harvesting requests e.g. 120s")
+	throttlef         = harvest.Duration("throttle", 0, "set a time to wait HTTP requests e.g. 50ms")
 
 	// INSPECT (roy inspect | roy inspect fmt/121 | roy inspect usr/local/mysig.gob | roy inspect 10)
 	inspect        = flag.NewFlagSet("inspect", flag.ExitOnError)
@@ -258,6 +259,9 @@ func setHarvestOptions() {
 	}
 	if *timeout != htimeout {
 		config.SetHarvestTimeout(*timeout)
+	}
+	if *throttlef > 0 {
+		config.SetHarvestThrottle(*throttlef)
 	}
 }
 

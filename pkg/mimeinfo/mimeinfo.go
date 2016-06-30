@@ -325,7 +325,7 @@ func toPattern(m mappings.Match) (patterns.Pattern, int, int, error) {
 			return nil, min, max, err
 		}
 		pat = Host32(i)
-	case "string":
+	case "string", "": // if no type given, assume string
 		pat = patterns.Sequence(unquote(m.Value))
 	case "stringignorecase":
 		pat = IgnoreCase(unquote(m.Value))
@@ -339,7 +339,7 @@ func toPattern(m mappings.Match) (patterns.Pattern, int, int, error) {
 	case "regex":
 		return nil, min, max, nil // ignore regex magic
 	default:
-		return nil, min, max, errors.New("unknown magic type " + m.Typ)
+		return nil, min, max, errors.New("unknown magic type: " + m.Typ + " val: " + m.Value)
 	}
 	if len(m.Mask) > 0 {
 		pat = Mask{pat, unquote(m.Mask)}

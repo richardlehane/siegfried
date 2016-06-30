@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1696</FormatID>
+      <FormatName>Compound WordPerfect for Windows Document</FormatName>
+      <FormatVersion>6 onwards</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Word Processor</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>This is a compound version of Wordperfect for Windows. Also known as Corel WordPerfect. Major and minor version fields are the main variants between 6.x and 12 formats (The last two bytes in this signature). The major version is the same for 6.x through to 12 documents - 2. The minor version byte for a non-compound file created in WPWin 8.0 is 1. The minor version for a compound file created in WPWin 8.0. Is 2.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>16 Jun 2016</ProvenanceSourceDate>
+      <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
+      <LastUpdatedDate>16 Jun 2016</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/vnd.wordperfect</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/892</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>1827</ExternalSignatureID>
+        <Signature>wpd</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1828</ExternalSignatureID>
+        <Signature>doc</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1829</ExternalSignatureID>
+        <Signature>wp6</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1830</ExternalSignatureID>
+        <Signature>wp</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1831</ExternalSignatureID>
+        <Signature>w60</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

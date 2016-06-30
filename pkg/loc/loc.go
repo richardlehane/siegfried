@@ -40,7 +40,7 @@ type fdds struct {
 func newLOC(path string) (identifier.Parseable, error) {
 	rc, err := zip.OpenReader(path)
 	if err != nil {
-		return nil, err
+		return nil, errors.New("reading " + path + "; " + err.Error())
 	}
 	defer rc.Close()
 

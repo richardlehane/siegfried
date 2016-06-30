@@ -69,7 +69,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>000001BA{8-12}000001BB{8-65536}000001B3{8-128}000001B5</ByteSequenceValue>
+          <ByteSequenceValue>000001BA{8-12}000001BB{8-65536}000001B3{8-136}000001B5</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

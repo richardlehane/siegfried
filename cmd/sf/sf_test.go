@@ -9,6 +9,7 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/config"
@@ -43,16 +44,22 @@ func identifyT(s *siegfried.Siegfried, p string) ([]string, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to open %v, got: %v", p, err)
 	}
-	c, err := s.Identify(file, p, "")
-	if c == nil {
-		return nil, fmt.Errorf("failed to identify %v, got: %v", p, err)
-	}
+	t := time.Now()
+	c, _ := s.Identify(file, p, "")
 	for i := range c {
 		ids = append(ids, i.String())
 	}
 	err = file.Close()
 	if err != nil {
 		return nil, err
+	}
+	if len(ids) > 10 {
+		fmt.Printf("test file %s has %d ids\n", p, len(ids))
+	}
+	tooLong := time.Millisecond * 500
+	elapsed := time.Since(t)
+	if elapsed > tooLong {
+		fmt.Printf("time elapsed for %s was %s\n", p, elapsed.String())
 	}
 	return ids, nil
 }

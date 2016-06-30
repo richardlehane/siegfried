@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 
-<ContainerSignatureMapping schemaVersion="1.0" signatureVersion="1"> 
+<ContainerSignatureMapping schemaVersion="1.0" signatureVersion="16"> 
     <ContainerSignatures>
 
         <ContainerSignature Id="1000" ContainerType="OLE2">
@@ -1679,6 +1679,46 @@
             </Files>
         </ContainerSignature> 
         
+             <ContainerSignature Id="15020" ContainerType="OLE2">
+            <Description>Microsoft Works Spreadsheet 6-9</Description>
+            <Files>
+                <File>
+                    <Path>Workbook</Path>
+                     <BinarySignatures>
+                        <InternalSignatureCollection>
+	                        <InternalSignature ID="15020">
+	                            <ByteSequence Reference="BOFoffset">
+	                                <SubSequence Position="1" SubSeqMinOffset="1" SubSeqMaxOffset="128">
+	                                    <Sequence>'MS Works'</Sequence>
+	                                </SubSequence>
+	                            </ByteSequence>
+	                        </InternalSignature>
+	                    </InternalSignatureCollection>
+                    </BinarySignatures>
+                </File>
+            </Files>
+        </ContainerSignature> 
+        
+     <ContainerSignature Id="15025" ContainerType="OLE2">
+            <Description>Microsoft Works Spreadsheet 6-9</Description>
+            <Files>
+                <File>
+                    <Path>Workbook</Path>
+                     <BinarySignatures>
+                        <InternalSignatureCollection>
+	                        <InternalSignature ID="15025">
+	                            <ByteSequence Reference="BOFoffset">
+	                                <SubSequence Position="1" SubSeqMinOffset="1" SubSeqMaxOffset="128">
+	                                    <Sequence>'M'00'S'002000'W'00'o'00'r'00'k'00's'</Sequence>
+	                                </SubSequence>
+	                            </ByteSequence>
+	                        </InternalSignature>
+	                    </InternalSignatureCollection>
+                    </BinarySignatures>
+                </File>
+            </Files>
+        </ContainerSignature> 
+        
 	<ContainerSignature Id="16000" ContainerType="OLE2">
 		<Description>Microsoft Office 2007 and later encrypted document</Description> 
 		<Files>
@@ -2637,6 +2677,85 @@
                 </File>
             </Files>
         </ContainerSignature>
+        
+        <ContainerSignature Id="24100" ContainerType="OLE2">
+            <Description>Corel Presentation</Description>
+            <Files>
+                <File>
+                    <Path>PerfectOffice_MAIN</Path>
+                    <BinarySignatures>
+                        <InternalSignatureCollection>                    
+	                        <InternalSignature ID="24100">
+	                            <ByteSequence Reference="BOFoffset">
+	                                <SubSequence Position="1" SubSeqMinOffset="0" SubSeqMaxOffset="0">
+	                                    <Sequence>'ÿWPC'</Sequence>
+	                                </SubSequence>
+	                            </ByteSequence>
+	                            <ByteSequence Reference="BOFoffset">
+	                                <SubSequence Position="1" SubSeqMinOffset="8" SubSeqMaxOffset="0">
+	                                    <Sequence>0F 0F 02</Sequence>
+	                                </SubSequence>
+	                            </ByteSequence>
+	                        </InternalSignature>
+	                    </InternalSignatureCollection>
+                    </BinarySignatures>
+                </File>
+            </Files>
+        </ContainerSignature>
+        
+        <ContainerSignature Id="24200" ContainerType="OLE2">
+            <Description>Compound WordPerfect for Windows Document 6 onwards</Description>
+            <Files>
+                <File>
+                    <Path>PerfectOffice_MAIN</Path>
+                    <BinarySignatures>
+                        <InternalSignatureCollection>                    
+	                        <InternalSignature ID="24200">
+	                            <ByteSequence Reference="BOFoffset">
+	                                <SubSequence Position="1" SubSeqMinOffset="0" SubSeqMaxOffset="0">
+	                                    <Sequence>'ÿWPC'</Sequence>
+	                                </SubSequence>
+	                            </ByteSequence>
+	                            <ByteSequence Reference="BOFoffset">
+	                                <SubSequence Position="1" SubSeqMinOffset="8" SubSeqMaxOffset="0">
+	                                    <Sequence>01 0A 02 02</Sequence>
+	                                </SubSequence>
+	                            </ByteSequence>
+	                        </InternalSignature>
+	                    </InternalSignatureCollection>
+                    </BinarySignatures>
+                </File>
+            </Files>
+        </ContainerSignature>
+        
+        <ContainerSignature Id="25000" ContainerType="OLE2">
+            <Description>PageMaker Document (Generic)</Description>
+            <Files>
+                <File>
+                    <Path>PageMaker</Path>
+                </File>
+            </Files>
+        </ContainerSignature>
+        
+        <ContainerSignature Id="26000" ContainerType="OLE2">
+            <Description>i2 Analysts Notebook</Description>
+            <Files>
+                <File>
+                    <Path>SummaryInformation</Path>
+                    <BinarySignatures>
+                        <InternalSignatureCollection>                    
+	                        <InternalSignature ID="26000">
+	                            <ByteSequence Reference="BOFoffset">
+	                                <SubSequence Position="1" SubSeqMinOffset="0" SubSeqMaxOffset="2048">
+	                                    <Sequence>'A'00'n'00'a'00'l'00'y'00's'00't'002700's'002000'N'00'o'00't'00'e'00'b'00'o'00'o'00'k'00</Sequence>
+	                                </SubSequence>
+	                            </ByteSequence>
+	                        </InternalSignature>
+	                    </InternalSignatureCollection>
+                    </BinarySignatures>
+                </File>
+            </Files>
+        </ContainerSignature>
 
     </ContainerSignatures>
     <FileFormatMappings>
@@ -2793,6 +2912,11 @@
         <FileFormatMapping signatureId="15000" Puid="fmt/233"/>
         <!--  Microsoft Works Word Processor 5-6 (OLE2)-->
         <FileFormatMapping signatureId="15010" Puid="fmt/258"/>
+        
+	    <!--  Microsoft Works Spreadsheet (OLE2)-->
+	    <FileFormatMapping signatureId="15020" Puid="fmt/901" />
+    	<!--  Microsoft Works Spreadsheet (OLE2)-->
+	    <FileFormatMapping signatureId="15025" Puid="fmt/901" />
      
 	<!--  Microsoft Encrypted Document (OLE2)-->
         <FileFormatMapping signatureId="16000" Puid="fmt/494"/>
@@ -2903,6 +3027,18 @@
 	<FileFormatMapping signatureId="24000" Puid="fmt/836" />
 	<!--  Quattro Pro Spreadsheet 9 onwards (OLE2)-->
 	<FileFormatMapping signatureId="24010" Puid="fmt/837" />
+    
+	<!--  Corel Presentation 7-8-9 (OLE2)-->
+	<FileFormatMapping signatureId="24100" Puid="fmt/877" />
+    
+	<!--  Compound WordPerfect for Windows Document 6 onwards(OLE2)-->
+	<FileFormatMapping signatureId="24200" Puid="fmt/892" />
+    
+	<!--  PageMaker Document (Generic) (OLE2)-->
+	<FileFormatMapping signatureId="25000" Puid="fmt/876" />
+    
+	<!--  i2 Analysts Notebook (OLE2)-->
+	<FileFormatMapping signatureId="26000" Puid="fmt/893" />
 
     </FileFormatMappings>
   

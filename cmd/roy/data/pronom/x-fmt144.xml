@@ -60,6 +60,42 @@
           <ByteSequenceValue>4350543746494C45</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1135</SignatureID>
+        <SignatureName>CPT 8</SignatureName>
+        <SignatureNote>BOF: CPT8FILE</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1384</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4350543846494C45</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1136</SignatureID>
+        <SignatureName>CPT 9</SignatureName>
+        <SignatureNote>BOF: CPT9FILE</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1385</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4350543946494C45</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

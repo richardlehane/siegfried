@@ -97,7 +97,7 @@
           <ByteSequenceID>107</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>65536</MaxOffset>
+          <MaxOffset>131072</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
@@ -129,7 +129,7 @@
           <ByteSequenceID>108</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>16000</MaxOffset>
+          <MaxOffset>131072</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

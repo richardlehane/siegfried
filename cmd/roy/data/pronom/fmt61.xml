@@ -102,6 +102,12 @@
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1706</RelatedFormatID>
+        <RelatedFormatName>Microsoft Works Spreadsheet</RelatedFormatName>
+        <RelatedFormatVersion>6-9</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>682</RelatedFormatID>
         <RelatedFormatName>Microsoft Excel 5.0/95 Workbook (xls)</RelatedFormatName>

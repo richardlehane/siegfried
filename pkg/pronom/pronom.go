@@ -66,7 +66,9 @@ func (p *pronom) MSCFBs() ([][]string, [][]frames.Signature, []string, error) {
 
 // Pronom creates a pronom object
 func NewPronom() (identifier.Parseable, error) {
-	p := &pronom{}
+	p := &pronom{
+		c: identifier.Blank{},
+	}
 	// apply no container rule
 	if !config.NoContainer() && !config.Inspect() {
 		if err := p.setContainers(); err != nil {
@@ -207,7 +209,7 @@ func Harvest() []error {
 		return []error{err}
 	}
 	apply := func(puid string) error {
-		url, _, _ := config.HarvestOptions()
+		url, _, _, _ := config.HarvestOptions()
 		return save(puid, url, config.Reports())
 	}
 	return applyAll(5, d.IDs(), apply)
@@ -225,7 +227,16 @@ func applyAll(max int, reps []string, apply func(puid string) error) []error {
 	ch := make(chan error, len(reps))
 	wg := sync.WaitGroup{}
 	queue := make(chan struct{}, max) // to avoid hammering TNA
+	_, _, tf, _ := config.HarvestOptions()
+	var throttle *time.Ticker
+	if tf > 0 {
+		throttle = time.NewTicker(tf)
+		defer throttle.Stop()
+	}
 	for _, puid := range reps {
+		if tf > 0 {
+			<-throttle.C
+		}
 		wg.Add(1)
 		go func(puid string) {
 			queue <- struct{}{}
@@ -250,7 +261,7 @@ func getHttp(url string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	_, timeout, transport := config.HarvestOptions()
+	_, timeout, _, transport := config.HarvestOptions()
 	req.Header.Add("User-Agent", "siegfried/roybot (+https://github.com/richardlehane/siegfried)")
 	timer := time.AfterFunc(timeout, func() {
 		transport.CancelRequest(req)

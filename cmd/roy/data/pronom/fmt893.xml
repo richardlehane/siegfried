@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1697</FormatID>
+      <FormatName>i2 Analysts Notebook</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Dataset</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The i2 Analyst’s Notebook format is a visual intelligence analysis environment that allows users to collate, analyse and visualise data.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>16 Jun 2016</ProvenanceSourceDate>
+      <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
+      <LastUpdatedDate>16 Jun 2016</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/893</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>46</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>IBM Corporation</OrganisationName>
+        <DeveloperCompoundName>IBM Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>46</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>IBM Corporation</OrganisationName>
+        <SupportCompoundName>IBM Corporation</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>1832</ExternalSignatureID>
+        <Signature>anb</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

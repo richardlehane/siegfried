@@ -14,7 +14,7 @@
       </FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>A Verity collection is the fundamental structure underlying the search capabilities of Verity applications. A collection consists of information about a particular set of documents that are available for searching and viewing. The specific information stored for a collection includes a word index and various other indexes, plus a document table containing document field information and logical pointers to the document files. The Verity Collection Index Pending Transaction Files store information on pending indexing transactions.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>

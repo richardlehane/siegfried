@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1698</FormatID>
+      <FormatName>Gaussian Input Data File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Gaussian Input Data files are created by the Gaussian computer program for computational chemistry.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>16 Jun 2016</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>16 Jun 2016</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/894</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>1833</ExternalSignatureID>
+        <Signature>gjf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1241</SignatureID>
+        <SignatureName>Gaussian Input Data File</SignatureName>
+        <SignatureNote>#*(AM1|PM3|STO-3G|3-21G|3-21g|6-31G|6-31g|augcc-pvtz){0-128}.{0-128}.(-1|2|0)( |,)[0:9]{0-128}[0:9].[0:9]{0-24}[0:9].[0:9]{0-24}[0:9].[0:9]
+This signature has been developed with reference to the basic structure of Gaussian input files as described: http://www.gaussian.com/g_tech/g_ur/m_input.htm and http://chemistry.umeche.maine.edu/Modeling/GGGauss.html. 
+The 'Route Section' describes the 'Basis Set' used, as listed here: http://www.gaussian.com/g_tech/g_ur/m_basis_sets.htm. The current signature includes the basis sets AM1,PM3,STO-3G,3-21G,3-21g,6-31G,6-31g and augcc-pvtz. It is likely that additional basis sets have been used in this format, if this has been perceived then please feed this back to PRONOM so the signature can be improved.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1514</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>1</Offset>
+          <MaxOffset>128</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>(414D31|504D33|53544F2D3347|332D323147|332D323167|362D333147|362D333167|6175672D63632D7076747A){0-128}0A(2D31|30|31)(20|2C)[31:39]{1-128}[30:39]2E[30:39]{0-24}[30:39]2E[30:39]{0-24}[30:39]2E[30:39]</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>1518</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>128</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>23</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

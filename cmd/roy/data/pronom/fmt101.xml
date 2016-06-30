@@ -257,6 +257,27 @@
         </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1694</RelatedFormatID>
+        <RelatedFormatName>AbiWord Document</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1695</RelatedFormatID>
+        <RelatedFormatName>AbiWord Document Template</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1700</RelatedFormatID>
+        <RelatedFormatName>Music XML</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>639</RelatedFormatID>
         <RelatedFormatName>Hypertext Markup Language</RelatedFormatName>
@@ -303,6 +324,27 @@
         <RelationshipType>Is supertype of</RelationshipType>
         <RelatedFormatID>1283</RelatedFormatID>
         <RelatedFormatName>TransXchange File Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>1694</RelatedFormatID>
+        <RelatedFormatName>AbiWord Document</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>1695</RelatedFormatID>
+        <RelatedFormatName>AbiWord Document Template</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>1700</RelatedFormatID>
+        <RelatedFormatName>Music XML</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

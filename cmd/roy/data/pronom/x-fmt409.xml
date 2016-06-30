@@ -75,6 +75,18 @@
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1704</RelatedFormatID>
+        <RelatedFormatName>Windows Portable Executable</RelatedFormatName>
+        <RelatedFormatVersion>32 bit</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1705</RelatedFormatID>
+        <RelatedFormatName>Windows Portable Executable</RelatedFormatName>
+        <RelatedFormatVersion>64 bit</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

@@ -76,6 +76,13 @@ func Save(c core.Matcher, ls *persist.LoadSaver) {
 type SignatureSet [][4]byte
 
 func Add(c core.Matcher, ss core.SignatureSet, p priority.List) (core.Matcher, int, error) {
+	sigs, ok := ss.(SignatureSet)
+	if !ok {
+		return nil, -1, fmt.Errorf("RIFFmatcher: can't cast persist set")
+	}
+	if len(sigs) == 0 {
+		return c, 0, nil
+	}
 	var m *Matcher
 	if c == nil {
 		m = &Matcher{
@@ -84,10 +91,6 @@ func Add(c core.Matcher, ss core.SignatureSet, p priority.List) (core.Matcher, i
 		}
 	} else {
 		m = c.(*Matcher)
-	}
-	sigs, ok := ss.(SignatureSet)
-	if !ok {
-		return nil, -1, fmt.Errorf("RIFFmatcher: can't cast persist set")
 	}
 	var length int
 	// unless it is a new matcher, calculate current length by iterating through all the result values

@@ -34,6 +34,7 @@ var pronom = struct {
 	extendc          []string //container extensions
 	harvestURL       string
 	harvestTimeout   time.Duration
+	harvestThrottle  time.Duration
 	harvestTransport *http.Transport
 	// archive puids
 	zip    string
@@ -180,8 +181,8 @@ func ExtendC() []string {
 }
 
 // HarvestOptions reports the PRONOM url, timeout and transport.
-func HarvestOptions() (string, time.Duration, *http.Transport) {
-	return pronom.harvestURL, pronom.harvestTimeout, pronom.harvestTransport
+func HarvestOptions() (string, time.Duration, time.Duration, *http.Transport) {
+	return pronom.harvestURL, pronom.harvestTimeout, pronom.harvestThrottle, pronom.harvestTransport
 }
 
 // ZipPuid reports the puid for a zip archive.
@@ -251,6 +252,10 @@ func SetExtendC(l []string) func() private {
 // SetHarvestTimeout sets a time limit on PRONOM harvesting.
 func SetHarvestTimeout(d time.Duration) {
 	pronom.harvestTimeout = d
+}
+
+func SetHarvestThrottle(d time.Duration) {
+	pronom.harvestThrottle = d
 }
 
 // SetHarvestTransport sets the PRONOM harvesting transport.

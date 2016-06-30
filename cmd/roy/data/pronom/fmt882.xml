@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1686</FormatID>
+      <FormatName>Wordstar 2000</FormatName>
+      <FormatVersion>1</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Word Processor</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Wordstar 2000 is a version of the Wordstar word proccessor application that was popular in the early to mid 1980s and was created by MicroPro. Wordstar 2000 files are likely to lack a file extension.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>178</ProvenanceSourceID>
+      <ProvenanceName>National Library of New Zealand / National Library of New Zealand</ProvenanceName>
+      <ProvenanceSourceDate>18 May 2016</ProvenanceSourceDate>
+      <ProvenanceDescription>Signature supplied by Jay Gattuso of the National Library of New Zealand</ProvenanceDescription>
+      <LastUpdatedDate>18 May 2016</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/882</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>110</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>MicroPro Inc</OrganisationName>
+        <DeveloperCompoundName>MicroPro Inc</DeveloperCompoundName>
+      </Developers>
+      <InternalSignature>
+        <SignatureID>1234</SignatureID>
+        <SignatureName>Wordstar 2000 v1 File</SignatureName>
+        <SignatureNote>WS2000ÿ1.00</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1506</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>7F20575332303030FF312E3030</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

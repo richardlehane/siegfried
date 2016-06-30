@@ -112,6 +112,18 @@
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1704</RelatedFormatID>
+        <RelatedFormatName>Windows Portable Executable</RelatedFormatName>
+        <RelatedFormatVersion>32 bit</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1705</RelatedFormatID>
+        <RelatedFormatName>Windows Portable Executable</RelatedFormatName>
+        <RelatedFormatVersion>64 bit</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>774</RelatedFormatID>
         <RelatedFormatName>MS-DOS Executable</RelatedFormatName>
