@@ -19,17 +19,22 @@ before_build:
 build_script:
   - go install -a github.com/richardlehane/siegfried/cmd/sf
   - go install -a github.com/richardlehane/siegfried/cmd/roy
-  - ps: if(!(Test-Path $env:\APPVEYOR_REPO_TAG_NAME)){$env:SFVERSION="_"}
-  - ps: if(Test-Path $env:\APPVEYOR_REPO_TAG_NAME){$env:SFVERSION=$env:APPVEYOR_REPO_TAG_NAME.Trim("v").Replace(".","-")}
+  - ps: if(!($env:APPVEYOR_REPO_TAG_NAME)){$env:SFVERSION="_"}
+  - ps: if($env:APPVEYOR_REPO_TAG_NAME){$env:SFVERSION=$env:APPVEYOR_REPO_TAG_NAME.Trim("v").Replace(".","-")}
   - ps: if($env:PLATFORM -eq "x64"){$env:WINTYPE="win64"}
   - ps: if($env:PLATFORM -eq "x86"){$env:WINTYPE="win32"}
+  - ps: md siegfried
+  - ps: Copy-Item -Path c:\gopath\src\github.com\richardlehane\siegfried\cmd\roy\data\*.* -Destination siegfried -Recurse
 
 after_build:
-  7z a siegfried_%SFVERSION%_%WINTYPE%.zip c:\gopath\bin\*.exe
+  - 7z a siegfried_%SFVERSION%_%WINTYPE%.zip c:\gopath\bin\*.exe
+  - 7z a data_%SFVERSION%.zip siegfried
 
 artifacts:
   - path: siegfried_$(SFVERSION)_$(WINTYPE).zip
     name: siegfried_$(SFVERSION)_$(WINTYPE)
+  - path: data_$(SFVERSION).zip
+    name: data_$(SFVERSION)
 
 deploy:
   - provider: GitHub
@@ -37,7 +42,7 @@ deploy:
       secure: d/jFwo/lO0o59JZDJdkA7E3NgHvknKz9aSMz4gRLMLZ6CiWJOGOA3mDYuAtCAEPo
     release: $(APPVEYOR_REPO_TAG_NAME) 
     description: 'Release description goes here'
-    artifact: siegfried_$(SFVERSION)_$(WINTYPE)      
+    artifact: siegfried_$(SFVERSION)_$(WINTYPE), data_$(SFVERSION)      
     draft: true
     prerelease: false
     on:
