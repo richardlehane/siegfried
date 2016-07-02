@@ -16,7 +16,8 @@ clone_folder: c:\gopath\src\github.com\richardlehane\siegfried
 build_script:
   - go install -a github.com/richardlehane/siegfried/cmd/sf
   - go install -a github.com/richardlehane/siegfried/cmd/roy
-  - ps: $env:SFVERSION=$env:APPVEYOR_REPO_TAG_NAME.Trim("v").Replace(".","-")
+  - ps: $env:SFVERSION="_"
+  - ps: if(test-path $env:APPVEYOR_REPO_TAG_NAME){$env:SFVERSION=$env:APPVEYOR_REPO_TAG_NAME.Trim("v").Replace(".","-")}
   - ps: if($env:PLATFORM -eq "x64"){$env:WINTYPE="win64"}
   - ps: if($env:PLATFORM -eq "x86"){$env:WINTYPE="win32"}
 
