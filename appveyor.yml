@@ -18,7 +18,7 @@ build_script:
   - go install -a github.com/richardlehane/siegfried/cmd/roy
 
 after_build:
-  7z a siegfried_$(APPVEYOR_REPO_TAG_NAME)_win{platform}.zip c:\gopath\bin\*.exe
+  7z a siegfried_%APPVEYOR_REPO_TAG_NAME%_win%PLATFORM%.zip c:\gopath\bin\*.exe
 
 artifacts:
   - path: siegfried_$(APPVEYOR_REPO_TAG_NAME)_win{platform}.zip
