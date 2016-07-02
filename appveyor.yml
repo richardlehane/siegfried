@@ -16,15 +16,16 @@ clone_folder: c:\gopath\src\github.com\richardlehane\siegfried
 build_script:
   - go install -a github.com/richardlehane/siegfried/cmd/sf
   - go install -a github.com/richardlehane/siegfried/cmd/roy
+  - ps: $env:SFVERSION=$env:APPVEYOR_REPO_TAG_NAME.Trim("v")
   - ps: if($env:PLATFORM -eq "x64"){$env:WINTYPE="win64"}
   - ps: if($env:PLATFORM -eq "x86"){$env:WINTYPE="win32"}
 
 after_build:
-  7z a siegfried_%APPVEYOR_REPO_TAG_NAME%_%WINTYPE%.zip c:\gopath\bin\*.exe
+  7z a siegfried_%SFVERSION%_%WINTYPE%.zip c:\gopath\bin\*.exe
 
 artifacts:
-  - path: siegfried_$(APPVEYOR_REPO_TAG_NAME)_$(WINTYPE).zip
-    name: siegfried_$(APPVEYOR_REPO_TAG_NAME)_$(WINTYPE)
+  - path: siegfried_$(SFVERSION)_$(WINTYPE).zip
+    name: siegfried_$(SFVERSION)_$(WINTYPE)
 
 deploy:
   - provider: GitHub
@@ -32,7 +33,7 @@ deploy:
       secure: d/jFwo/lO0o59JZDJdkA7E3NgHvknKz9aSMz4gRLMLZ6CiWJOGOA3mDYuAtCAEPo
     release: $(APPVEYOR_REPO_TAG_NAME) 
     description: 'Release description goes here'
-    artifact: siegfried_$(APPVEYOR_REPO_TAG_NAME)_$(WINTYPE)      
+    artifact: siegfried_$(SFVERSION)_$(WINTYPE)      
     draft: true
     prerelease: false
     on:
