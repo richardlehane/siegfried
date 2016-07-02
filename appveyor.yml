@@ -37,6 +37,7 @@ deploy:
     artifact: siegfried_$(SFVERSION)_$(WINTYPE)      
     draft: true
     prerelease: false
+    force_update: true
     on:
       appveyor_repo_tag: true
       #branch: master               
