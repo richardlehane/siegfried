@@ -13,11 +13,14 @@ platform:
 
 clone_folder: c:\gopath\src\github.com\richardlehane\siegfried
 
+before_build:
+  - ps: if($env:PLATFORM -eq "x86"){$env:Path = "C:\go-x86;"+$env:Path}
+
 build_script:
   - go install -a github.com/richardlehane/siegfried/cmd/sf
   - go install -a github.com/richardlehane/siegfried/cmd/roy
-  - ps: $env:SFVERSION="_"
-  - ps: if(test-path $env:APPVEYOR_REPO_TAG_NAME){$env:SFVERSION=$env:APPVEYOR_REPO_TAG_NAME.Trim("v").Replace(".","-")}
+  - ps: if(!(Test-Path $env:APPVEYOR_REPO_TAG_NAME)){$env:SFVERSION="_"}
+  - ps: if(Test-Path $env:APPVEYOR_REPO_TAG_NAME){$env:SFVERSION=$env:APPVEYOR_REPO_TAG_NAME.Trim("v").Replace(".","-")}
   - ps: if($env:PLATFORM -eq "x64"){$env:WINTYPE="win64"}
   - ps: if($env:PLATFORM -eq "x86"){$env:WINTYPE="win32"}
 
@@ -37,7 +40,6 @@ deploy:
     artifact: siegfried_$(SFVERSION)_$(WINTYPE)      
     draft: true
     prerelease: false
-    force_update: true
     on:
       appveyor_repo_tag: true
       #branch: master               
