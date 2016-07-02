@@ -17,8 +17,11 @@ build_script:
   - go install -a github.com/richardlehane/siegfried/cmd/sf
   - go install -a github.com/richardlehane/siegfried/cmd/roy
 
+after_build:
+  7z a siegfried_$(APPVEYOR_REPO_TAG_NAME)_win{platform}.zip c:\gopath\bin\*.exe
+
 artifacts:
-  - path: '**\bin'
+  - path: siegfried_$(APPVEYOR_REPO_TAG_NAME)_win{platform}.zip
     name: siegfried_$(APPVEYOR_REPO_TAG_NAME)_win{platform}
 
 deploy:
@@ -27,7 +30,7 @@ deploy:
       secure: d/jFwo/lO0o59JZDJdkA7E3NgHvknKz9aSMz4gRLMLZ6CiWJOGOA3mDYuAtCAEPo
     release: $(APPVEYOR_REPO_TAG_NAME) 
     description: 'Release description goes here'
-    artifact: siegfried_$(APPVEYOR_REPO_TAG_NAME)_win{platform}       
+    #artifact: siegfried_$(APPVEYOR_REPO_TAG_NAME)_win{platform}       
     draft: true
     prerelease: false
     on:
