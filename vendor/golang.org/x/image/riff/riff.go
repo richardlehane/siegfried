@@ -129,7 +129,7 @@ func (z *Reader) Next() (chunkID FourCC, chunkLen uint32, chunkData io.Reader, e
 		return FourCC{}, 0, nil, z.err
 	}
 	z.totalLen -= chunkHeaderSize
-	if _, err = io.ReadFull(z.r, z.buf[:chunkHeaderSize]); err != nil {
+	if _, z.err = io.ReadFull(z.r, z.buf[:chunkHeaderSize]); z.err != nil {
 		if z.err == io.EOF || z.err == io.ErrUnexpectedEOF {
 			z.err = errShortChunkHeader
 		}
