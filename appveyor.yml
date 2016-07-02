@@ -23,6 +23,8 @@ artifacts:
 
 deploy:
   - provider: GitHub
+    auth_token:
+      secure: d/jFwo/lO0o59JZDJdkA7E3NgHvknKz9aSMz4gRLMLZ6CiWJOGOA3mDYuAtCAEPo
     release: v$(APPVEYOR_REPO_TAG_NAME) 
     description: 'Release description goes here'         
     draft: true
