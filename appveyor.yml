@@ -7,9 +7,9 @@ platform:
   - x86
   - x64
 
-#branches:
-#  only:
-#    - master
+branches:
+  only:
+    - master
 
 clone_folder: c:\gopath\src\github.com\richardlehane\siegfried
 
@@ -25,9 +25,11 @@ deploy:
   - provider: GitHub
     auth_token:
       secure: d/jFwo/lO0o59JZDJdkA7E3NgHvknKz9aSMz4gRLMLZ6CiWJOGOA3mDYuAtCAEPo
-    release: v$(APPVEYOR_REPO_TAG_NAME) 
-    description: 'Release description goes here'         
+    release: $(APPVEYOR_REPO_TAG_NAME) 
+    description: 'Release description goes here'
+    artifact: siegfried_$(APPVEYOR_REPO_TAG_NAME)_win{platform}       
     draft: true
     prerelease: false
     on:
+      branch: master
       appveyor_repo_tag: true                
