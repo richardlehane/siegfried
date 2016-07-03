@@ -12,29 +12,28 @@ clone_folder: c:\gopath\src\github.com\richardlehane\siegfried
 before_build:
   - ps: if(!($env:APPVEYOR_REPO_TAG_NAME)){$env:SFVERSION="_"}
   - ps: if($env:APPVEYOR_REPO_TAG_NAME){$env:SFVERSION=$env:APPVEYOR_REPO_TAG_NAME.Trim("v").Replace(".","-")}
-  - ps: md win32
   - ps: md win64
+  - ps: md win32
   - ps: md siegfried
 
 build_script:
-  - ps: $env:GOROOT=C:\go-x86
-  - C:\go-x86\bin\go build -a -o win32\sf.exe github.com/richardlehane/siegfried/cmd/sf
-  - C:\go-x86\bin\go build -a -o win32\roy.exe github.com/richardlehane/siegfried/cmd/roy
-  - ps: $env:GOROOT=C:\go
   - go build -a -o win64\sf.exe github.com/richardlehane/siegfried/cmd/sf
   - go build -a -o win64\roy.exe github.com/richardlehane/siegfried/cmd/roy
+  - ps: $env:GOROOT="C:\go-x86"
+  - C:\go-x86\bin\go build -a -o win32\sf.exe github.com/richardlehane/siegfried/cmd/sf
+  - C:\go-x86\bin\go build -a -o win32\roy.exe github.com/richardlehane/siegfried/cmd/roy
   - ps: Copy-Item -Path c:\gopath\src\github.com\richardlehane\siegfried\cmd\roy\data\*.* -Destination siegfried -Recurse
 
 after_build:
-  - 7z a siegfried_%SFVERSION%_win32.zip win32\*.exe
   - 7z a siegfried_%SFVERSION%_win64.zip win64\*.exe
+  - 7z a siegfried_%SFVERSION%_win32.zip win32\*.exe
   - 7z a data_%SFVERSION%.zip siegfried
 
 artifacts:
-  - path: siegfried_%SFVERSION%_win32.zip
-    name: win32
   - path: siegfried_%SFVERSION%_win64.zip
     name: win64
+  - path: siegfried_%SFVERSION%_win32.zip
+    name: win32
   - path: data_$(SFVERSION).zip
     name: data
 
@@ -43,8 +42,8 @@ deploy:
     auth_token:
       secure: d/jFwo/lO0o59JZDJdkA7E3NgHvknKz9aSMz4gRLMLZ6CiWJOGOA3mDYuAtCAEPo
     release: $(APPVEYOR_REPO_TAG_NAME) 
-    description: 'Release description goes here'
-    artifact: win32, win64, data      
+    description: 'Release description'
+    artifact: win64,win32,data      
     draft: true
     prerelease: false
     on:
