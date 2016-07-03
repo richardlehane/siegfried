@@ -22,7 +22,7 @@ build_script:
   - ps: $env:GOROOT="C:\go-x86"
   - C:\go-x86\bin\go build -a -o win32\sf.exe github.com/richardlehane/siegfried/cmd/sf
   - C:\go-x86\bin\go build -a -o win32\roy.exe github.com/richardlehane/siegfried/cmd/roy
-  - ps: Copy-Item -Path c:\gopath\src\github.com\richardlehane\siegfried\cmd\roy\data\*.* -Destination siegfried -Recurse
+  - ps: Copy-Item "c:\gopath\src\github.com\richardlehane\siegfried\cmd\roy\data\*" siegfried -recurse
 
 after_build:
   - 7z a siegfried_%SFVERSION%_win64.zip win64\*.exe
@@ -30,9 +30,9 @@ after_build:
   - 7z a data_%SFVERSION%.zip siegfried
 
 artifacts:
-  - path: siegfried_%SFVERSION%_win64.zip
+  - path: siegfried_$(SFVERSION)_win64.zip
     name: win64
-  - path: siegfried_%SFVERSION%_win32.zip
+  - path: siegfried_$(SFVERSION)_win32.zip
     name: win32
   - path: data_$(SFVERSION).zip
     name: data
