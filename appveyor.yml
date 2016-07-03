@@ -15,11 +15,12 @@ before_build:
   - ps: md win32
   - ps: md win64
   - ps: md siegfried
-  - cmd: dir C:\go-x86
 
 build_script:
+  - ps: $env:GOROOT=C:\go-x86
   - C:\go-x86\bin\go build -a -o win32\sf.exe github.com/richardlehane/siegfried/cmd/sf
   - C:\go-x86\bin\go build -a -o win32\roy.exe github.com/richardlehane/siegfried/cmd/roy
+  - ps: $env:GOROOT=C:\go
   - go build -a -o win64\sf.exe github.com/richardlehane/siegfried/cmd/sf
   - go build -a -o win64\roy.exe github.com/richardlehane/siegfried/cmd/roy
   - ps: Copy-Item -Path c:\gopath\src\github.com\richardlehane\siegfried\cmd\roy\data\*.* -Destination siegfried -Recurse
