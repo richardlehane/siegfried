@@ -15,10 +15,11 @@ before_build:
   - ps: md win32
   - ps: md win64
   - ps: md siegfried
+  - cmd: dir C:\go-x86
 
 build_script:
-  - C:\go-x86\go build -a -o win32\sf.exe github.com/richardlehane/siegfried/cmd/sf
-  - C:\go-x86\go build -a -o win32\roy.exe github.com/richardlehane/siegfried/cmd/roy
+  - C:\go-x86\bin\go build -a -o win32\sf.exe github.com/richardlehane/siegfried/cmd/sf
+  - C:\go-x86\bin\go build -a -o win32\roy.exe github.com/richardlehane/siegfried/cmd/roy
   - go build -a -o win64\sf.exe github.com/richardlehane/siegfried/cmd/sf
   - go build -a -o win64\roy.exe github.com/richardlehane/siegfried/cmd/roy
   - ps: Copy-Item -Path c:\gopath\src\github.com\richardlehane\siegfried\cmd\roy\data\*.* -Destination siegfried -Recurse
@@ -27,7 +28,6 @@ after_build:
   - 7z a siegfried_%SFVERSION%_win32.zip win32\*.exe
   - 7z a siegfried_%SFVERSION%_win64.zip win64\*.exe
   - 7z a data_%SFVERSION%.zip siegfried
-  - cmd: dir C:\go-x86
 
 artifacts:
   - path: siegfried_%SFVERSION%_win32.zip
