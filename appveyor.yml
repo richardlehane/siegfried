@@ -3,10 +3,6 @@ version: "{build}"
 environment:
   GOPATH: c:\gopath
 
-platform:
-  - x86
-  - x64
-
 #branches:
 #  only:
 #    - master
@@ -14,27 +10,32 @@ platform:
 clone_folder: c:\gopath\src\github.com\richardlehane\siegfried
 
 before_build:
-  - ps: if($env:PLATFORM -eq "x86"){$env:Path = "C:\go-x86;"+$env:Path}
-
-build_script:
-  - go install -a github.com/richardlehane/siegfried/cmd/sf
-  - go install -a github.com/richardlehane/siegfried/cmd/roy
   - ps: if(!($env:APPVEYOR_REPO_TAG_NAME)){$env:SFVERSION="_"}
   - ps: if($env:APPVEYOR_REPO_TAG_NAME){$env:SFVERSION=$env:APPVEYOR_REPO_TAG_NAME.Trim("v").Replace(".","-")}
-  - ps: if($env:PLATFORM -eq "x64"){$env:WINTYPE="win64"}
-  - ps: if($env:PLATFORM -eq "x86"){$env:WINTYPE="win32"}
+  - ps: md win32
+  - ps: md win64
   - ps: md siegfried
+
+build_script:
+  - C:\go-x86\go build -a -o win32\sf.exe github.com/richardlehane/siegfried/cmd/sf
+  - C:\go-x86\go build -a -o win32\roy.exe github.com/richardlehane/siegfried/cmd/roy
+  - go build -a -o win64\sf.exe github.com/richardlehane/siegfried/cmd/sf
+  - go build -a -o win64\roy.exe github.com/richardlehane/siegfried/cmd/roy
   - ps: Copy-Item -Path c:\gopath\src\github.com\richardlehane\siegfried\cmd\roy\data\*.* -Destination siegfried -Recurse
 
 after_build:
-  - 7z a siegfried_%SFVERSION%_%WINTYPE%.zip c:\gopath\bin\*.exe
+  - 7z a siegfried_%SFVERSION%_win32.zip win32\*.exe
+  - 7z a siegfried_%SFVERSION%_win64.zip win64\*.exe
   - 7z a data_%SFVERSION%.zip siegfried
+  - cmd: dir C:\go-x86
 
 artifacts:
-  - path: siegfried_$(SFVERSION)_$(WINTYPE).zip
-    name: siegfried_$(SFVERSION)_$(WINTYPE)
+  - path: siegfried_%SFVERSION%_win32.zip
+    name: win32
+  - path: siegfried_%SFVERSION%_win64.zip
+    name: win64
   - path: data_$(SFVERSION).zip
-    name: data_$(SFVERSION)
+    name: data
 
 deploy:
   - provider: GitHub
@@ -42,7 +43,7 @@ deploy:
       secure: d/jFwo/lO0o59JZDJdkA7E3NgHvknKz9aSMz4gRLMLZ6CiWJOGOA3mDYuAtCAEPo
     release: $(APPVEYOR_REPO_TAG_NAME) 
     description: 'Release description goes here'
-    artifact: siegfried_$(SFVERSION)_$(WINTYPE), data_$(SFVERSION)      
+    artifact: win32, win64, data      
     draft: true
     prerelease: false
     on:
