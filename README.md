@@ -8,7 +8,7 @@
 
 ### Version
 
-1.6.0
+1.6.1
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -74,14 +74,18 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
     sudo apt-get update && sudo apt-get install siegfried
 
 
-## Latest Changes 
-### [1.6.1] - YYYY-MM-DD
+## Changes 
+### [1.6.1] - 2016-07-06
 ### Added
-- 
-
-### Changed
+- Travis and Appveyor CI automated deployment to Github releases and Bintray
+- PRONOM v85 signatures
+- LICENSE.txt, CHANGELOG.md
+- [Go Report Card](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
 ### Fixed
+- golang.org/x/image/riff bug (reported [here](https://github.com/golang/go/issues/16236))
+- misspellings reported by Go Report Card
+- ineffectual assignments reported by Go Report Card
 
 [Change Log](https://github.com/richardlehane/siegfried/blob/master/CHANGELOG.md)
 

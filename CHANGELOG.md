@@ -1,5 +1,5 @@
 # Change Log
-## [1.6.1] - YYYY-MM-DD
+## [1.6.1] - 2016-07-06
 ### Added
 - Travis and Appveyor CI automated deployment to Github releases and Bintray
 - PRONOM v85 signatures
