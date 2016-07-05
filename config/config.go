@@ -13,7 +13,7 @@
 // limitations under the License.
 
 // Package config sets up defaults used by both the SF and roy tools
-// Config options can be overriden with build flags e.g. the brew and archivematica files.
+// Config options can be overridden with build flags e.g. the brew and archivematica files.
 package config
 
 // Option is a private but exported type. It is a function that sets a siegfried option.

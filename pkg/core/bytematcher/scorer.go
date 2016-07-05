@@ -388,7 +388,7 @@ func (b *Matcher) scorer(buf *siegreader.Buffer, waitSet *priority.WaitSet, q ch
 
 	go func() {
 		for in := range incoming {
-			// if we've got a postive result, drain any remaining strikes from the matchers
+			// if we've got a positive result, drain any remaining strikes from the matchers
 			if quitting {
 				continue
 			}

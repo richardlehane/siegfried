@@ -171,7 +171,7 @@ func TestParseHex(t *testing.T) {
 	if !tok.Pat().Equals(Range{[]byte{0}, []byte{3}}) {
 		t.Error("Parse items: Expecting [00:03], got", tok.Pat())
 	}
-	ts, _, _, err = process("fmt/390", bsStub5.Hex, false)
+	ts, _, _, _ = process("fmt/390", bsStub5.Hex, false)
 	tok = ts[12]
 	if tok.Min() != 5 || tok.Max() != -1 {
 		t.Error("Parse items: Expecting 5-0, got", tok.Min(), tok.Max())
@@ -179,7 +179,7 @@ func TestParseHex(t *testing.T) {
 	if !tok.Pat().Equals(patterns.Sequence(processText("7E41"))) {
 		t.Error("Parse items: Expecting 7E41, got", tok.Pat())
 	}
-	ts, _, _, err = process("x-fmt/317", bsStub6.Hex, false)
+	ts, _, _, _ = process("x-fmt/317", bsStub6.Hex, false)
 	seqs := ts[2].Pat().Sequences()
 	if !seqs[0].Equals(patterns.Sequence(processText("0D0A"))) {
 		t.Error("Parse items: Expecting [13 10], got", []byte(seqs[0]))

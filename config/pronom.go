@@ -170,7 +170,7 @@ func DoubleUp() bool {
 	return pronom.doubleup
 }
 
-// ExcludeDoubles takes a slice of puids and a slice of container puids and exludes those that are in the container slice, if nodoubles is set.
+// ExcludeDoubles takes a slice of puids and a slice of container puids and excludes those that are in the container slice, if nodoubles is set.
 func ExcludeDoubles(puids, cont []string) []string {
 	return exclude(puids, cont)
 }

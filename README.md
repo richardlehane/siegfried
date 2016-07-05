@@ -74,7 +74,8 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
     sudo apt-get update && sudo apt-get install siegfried
 
 
-## Changes - [1.6.1] - YYYY-MM-DD
+## Latest Changes 
+### [1.6.1] - YYYY-MM-DD
 ### Added
 - 
 
@@ -82,7 +83,7 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 ### Fixed
 
-[Change history](https://github.com/richardlehane/siegfried/blob/master/CHANGELOG.md)
+[Change Log](https://github.com/richardlehane/siegfried/blob/master/CHANGELOG.md)
 
 ## Rights
 

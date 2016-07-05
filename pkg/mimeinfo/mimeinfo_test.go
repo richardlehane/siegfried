@@ -39,7 +39,7 @@ func TestNew(t *testing.T) {
 			t.Errorf("Empty signature: %s", ids[i])
 		}
 	}
-	id, err := New()
+	id, _ := New()
 	str := id.String()
 	saver := persist.NewLoadSaver(nil)
 	id.Save(saver)

@@ -167,21 +167,21 @@ func TestTip(t *testing.T) {
 		t.Error(err)
 	}
 	buf := bytes.NewReader([]byte{0x00, 0x4d, 0x52, 0x4d, 0x00})
-	c, err := s.Identify(buf, "test.mrw", "")
+	c, _ := s.Identify(buf, "test.mrw", "")
 	for i := range c {
 		if i.String() != expect {
 			t.Errorf("First buffer: expecting %s, got %s", expect, i)
 		}
 	}
 	buf = bytes.NewReader([]byte{0x00, 0x4d, 0x52, 0x4d, 0x00})
-	c, err = s.Identify(buf, "test.mrw", "")
+	c, _ = s.Identify(buf, "test.mrw", "")
 	for i := range c {
 		if i.String() != expect {
 			t.Errorf("Second buffer: expecting %s, got %s", expect, i)
 		}
 	}
 	buf = bytes.NewReader([]byte{0x00, 0x4d, 0x52, 0x4d, 0x00})
-	c, err = s.Identify(buf, "test.mrw", "")
+	c, _ = s.Identify(buf, "test.mrw", "")
 	for i := range c {
 		if i.String() != expect {
 			t.Errorf("Third buffer: expecting %s, got %s", expect, i)
