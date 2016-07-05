@@ -2,14 +2,13 @@ version: "{build}"
 environment:
   GOPATH: c:\gopath
 branches:
-  only:
-  - master
+  except:
+  - develop
 clone_folder: c:\gopath\src\github.com\richardlehane\siegfried
 before_build:
 - ps: if(!($env:APPVEYOR_REPO_TAG_NAME)){$env:SFVERSION="_"}
 - ps: if($env:APPVEYOR_REPO_TAG_NAME){$env:SFVERSION=$env:APPVEYOR_REPO_TAG_NAME.Trim("v").Replace(".","-")}
 - ps: if($env:APPVEYOR_REPO_TAG_NAME){$env:SFTITLE=$env:APPVEYOR_REPO_TAG_NAME.Trim("v")}
-- ps: $env:SFDESC=[system.io.file]::ReadAllText('c:\gopath\src\github.com\richardlehane\siegfried\latest.md')
 - ps: md win64
 - ps: md win32
 - ps: md siegfried
@@ -37,10 +36,9 @@ deploy:
     secure: d/jFwo/lO0o59JZDJdkA7E3NgHvknKz9aSMz4gRLMLZ6CiWJOGOA3mDYuAtCAEPo
   tag: $(APPVEYOR_REPO_TAG_NAME)
   release: Version $(SFTITLE) 
-  description: $(SFDESC)
+  description: "see [CHANGELOG.md](https://github.com/richardlehane/siegfried/blob/master/CHANGELOG.md)"
   artifact: win64,win32,data      
   draft: true
   prerelease: false
   on:
-    appveyor_repo_tag: true
-    branch: master               
+    appveyor_repo_tag: true             

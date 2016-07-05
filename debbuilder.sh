@@ -35,14 +35,13 @@ dpkg-deb --build $SFDIR
 
 # write bintray json
 DATE=`date +%Y-%m-%d`
-DESC=`cat ${HOME}/gopath/src/github.com/richardlehane/siegfried/latest.md`
 cat >$BASE/bintray.json  << EOB
 {
     "package": {
         "name": "siegfried",
         "repo": "debian",
         "subject": "siegfried",
-        "desc": "${DESC}",
+        "desc": "see [CHANGELOG.md](https://github.com/richardlehane/siegfried/blob/master/CHANGELOG.md)",
         "website_url": "http://www.itforarchivists.com/siegfried",
         "issue_tracker_url": "https://github.com/richardlehane/siegfried/issues",
         "vcs_url": "hhttps://github.com/richardlehane/siegfried.git",
