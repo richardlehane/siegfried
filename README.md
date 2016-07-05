@@ -74,64 +74,15 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
     sudo apt-get update && sudo apt-get install siegfried
 
 
-## Recent Changes
-### Version 1.6.0 (26/6/2016)
-- feature: implement Library of Congress FDD signatures (*beta*)
-- feature: implement RIFF matcher
-- feature: -multi flag replaces -nopriority; based on report by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/75)
-- change to -z output: use hash as filepath separator (and unix slash for webarchives); requested by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/81)
-- bugfix: parsing fmt/837 signature; reported by [Sarah Romkey](https://github.com/richardlehane/siegfried/issues/80)
+## Changes - [1.6.1] - YYYY-MM-DD
+### Added
+- 
 
-### Version 1.5.0 (14/3/2016)
-- feature: implement freedesktop.org MIME-info signatures (and the Apache Tika variant)
-- feature: implement XML matcher
-- feature: file name matcher now supports glob patterns as well as file extensions
-- default signature file now "default.sig" (was "pronom.sig")
-- changes to YAML and JSON output: "ns" (for namespace) replaces "id", and "id" replaces "puid"
-- changes to CSV output: multi-identifiers now displayed in extra columns, not extra rows 
+### Changed
 
-### Version 1.4.5 (6/2/2016)
-- bugfix: [big file handling](https://github.com/richardlehane/siegfried/commit/b348c4628ac8edf8e93208e9100bd15616f72e41)
-- bugfix: [file handle leak](https://github.com/richardlehane/siegfried/commit/47144fd33a4ddd260bdcd5dd15c132525c3bd113); reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/66)
-- bugfix: [mscfb](https://github.com/richardlehane/mscfb/commit/e19fa67f7571388d3dc956f7c6b4547bfb635072); reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/68)
-- summarise os errors; requested by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/65)
-- code quality: vendor external packages; implemented by [Misty de Meo](https://github.com/richardlehane/siegfried/pull/71)
+### Fixed
 
-### Version 1.4.4 (9/1/2016)
-- fix: speed regression in TIFF mis-identification patch last release
-- code quality: refactor textmatcher package
-- code quality: refactor siegreader package
-- code quality: documentation
-
-### Version 1.4.3 (19/12/2015)
-- measure time elapsed with -log time
-- bugfix: [percent encode file URIs in droid output](https://github.com/richardlehane/siegfried/issues/63)
-- bugfix: long windows directory paths (further work on bug fixed in 1.4.2); reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/58)
-- bugfix: mscfb panic; reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/62)
-- bugfix: **TIFF mis-identifications** due to an [early halt error](https://github.com/richardlehane/siegfried/commit/5f0ccd477c467186c350e762f8fddda888d987bf)
-
-### Version 1.4.2 (27/11/2015)
-- new -throttle flag; requested by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/61)
-- errors logged to stderr by default (to quieten use -log ""); requested by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/60)
-- mscfb update: [lazy reading](https://github.com/richardlehane/mscfb/commit/f909cfa596c7880c650ed5440df90e5474f08b29) 
-- webarchive update: [decode Transfer-Encoding and Content-Encoding](https://github.com/richardlehane/webarchive/commit/2f125b9bece4d7d119ea029aa8c942a41962ecf4); requested by [Dragan Espenschied](https://github.com/richardlehane/siegfried/issues/55)
-- bugfix: long windows paths; reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/58)
-- bugfix: 32-bit file size overflow; reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/59)
-
-### Version 1.4.1 (6/11/2015)
-- **-log replaces -debug, -slow, -unknown and -known flags** (see usage above)
-- highlight empty file/stream with error and warning
-- negative text match overrides extension-only plain text match
-
-### Version 1.4.0 (31/10/2015)
-- new MIME matcher; requested by [Dragan Espenschied](https://github.com/richardlehane/siegfried/issues/55)
-- support warc continuations
-- add all.json and tiff.json sets
-- minor speed-up
-- report less redundant basis information
-- report error on empty file/stream
-
-[Full change history](https://github.com/richardlehane/siegfried/wiki/Change-history)
+[Change history](https://github.com/richardlehane/siegfried/blob/master/CHANGELOG.md)
 
 ## Rights
 
