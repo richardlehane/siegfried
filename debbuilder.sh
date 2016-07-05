@@ -61,7 +61,7 @@ cat >$BASE/bintray.json  << EOB
 
     "files":
         [
-        {"includePattern": "${SFDIR}.deb", "uploadPattern": "\$1",
+        {"includePattern": "${SFDIR}.deb", "uploadPattern": "siegfried_${VERSION}-1_amd64.deb",
         "matrixParams": {
             "deb_distribution": "wheezy",
             "deb_component": "main",
