@@ -68,6 +68,6 @@ cat >$BASE/bintray.json  << EOB
             "deb_architecture": "amd64"}
         }
         ],
-    "publish": false
+    "publish": true
 }
 EOB

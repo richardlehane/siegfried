@@ -38,7 +38,7 @@ deploy:
   release: Version $(SFTITLE) 
   description: "see [CHANGELOG.md](https://github.com/richardlehane/siegfried/blob/master/CHANGELOG.md)"
   artifact: win64,win32,data      
-  draft: true
+  draft: false
   prerelease: false
   on:
     appveyor_repo_tag: true             

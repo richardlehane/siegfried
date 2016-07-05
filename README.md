@@ -75,7 +75,7 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 
 ## Changes 
-### [1.6.1] - 2016-07-06
+### [1.6.1] 2016-07-06
 ### Added
 - Travis and Appveyor CI automated deployment to Github releases and Bintray
 - PRONOM v85 signatures
