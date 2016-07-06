@@ -1,4 +1,12 @@
 # Change Log
+## v1.6.2 (XXXX-XX-XX)
+### Added
+- new command: `roy setup`
+
+### Fixed
+- add fddXML.zip to .gitattributes to preserve newlines
+- various [Go Report Card](https://goreportcard.com/report/github.com/richardlehane/siegfried) issues
+
 ## v1.6.1 (2016-07-06)
 ### Added
 - Travis and Appveyor CI automated deployment to Github releases and Bintray

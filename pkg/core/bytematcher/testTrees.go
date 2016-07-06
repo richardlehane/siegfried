@@ -21,7 +21,6 @@ import (
 
 // Test trees link byte sequence and frame matches (from the sequence and frame sets) to keyframes. This link is sometimes direct if there are no
 // further test to perform. Follow-up tests may be required to the left or to the right of the match.
-
 type testTree struct {
 	// keyFrames []keyFrameID
 	// incompleteIdx int
@@ -262,7 +261,7 @@ func matchTestNodes(ts []*testNode, b []byte, rev bool) []followupMatch {
 			success, offs = t.Match(b[o:])
 		}
 		if success {
-			for i, _ := range offs {
+			for i := range offs {
 				offs[i] = offs[i] + o
 			}
 			for _, s := range t.success {

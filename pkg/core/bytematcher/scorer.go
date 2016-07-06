@@ -356,7 +356,7 @@ func (b *Matcher) scorer(buf *siegreader.Buffer, waitSet *priority.WaitSet, q ch
 			h = newHit(hit.id[0])
 		}
 		if h.partials[hit.id[1]] == nil {
-			h.partials[hit.id[1]] = [][2]int64{[2]int64{hit.offset, int64(hit.length)}}
+			h.partials[hit.id[1]] = [][2]int64{{hit.offset, int64(hit.length)}}
 		} else {
 			h.partials[hit.id[1]] = append(h.partials[hit.id[1]], [2]int64{hit.offset, int64(hit.length)})
 		}
