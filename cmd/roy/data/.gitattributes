@@ -1,3 +1,4 @@
 # Override git line endings for signature files
 *.sig binary
 *.zip binary
+*.xml binary
