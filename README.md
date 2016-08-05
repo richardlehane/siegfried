@@ -95,6 +95,10 @@ Copyright 2016 Richard Lehane
 
 Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
 
+## Announcements
+
+Join the [Google Group](https://groups.google.com/d/forum/sf-roy) for updates, signature releases, and help.
+
 ## Contributing
 
 Like siegfried and want to get involved in its development? That'd be wonderful! There are some notes on the [wiki](https://github.com/richardlehane/siegfried/wiki) to get you started, and please get in touch.
