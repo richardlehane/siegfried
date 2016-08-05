@@ -153,6 +153,12 @@
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>942</RelatedFormatID>
+        <RelatedFormatName>Microsoft Visio XML Drawing</RelatedFormatName>
+        <RelatedFormatVersion>2003-2010</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>975</RelatedFormatID>
         <RelatedFormatName>Keyhole Markup Language (XML)</RelatedFormatName>
         <RelatedFormatVersion>
@@ -278,6 +284,12 @@
         </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1737</RelatedFormatID>
+        <RelatedFormatName>Mathcad Document</RelatedFormatName>
+        <RelatedFormatVersion>XML</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>639</RelatedFormatID>
         <RelatedFormatName>Hypertext Markup Language</RelatedFormatName>
@@ -347,6 +359,12 @@
         <RelatedFormatName>Music XML</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>1737</RelatedFormatID>
+        <RelatedFormatName>Mathcad Document</RelatedFormatName>
+        <RelatedFormatVersion>XML</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>

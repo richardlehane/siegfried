@@ -11,7 +11,7 @@
       <FormatTypes>Image (Raster)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Portable Network Graphics (PNG) was designed for the lossless, portable, compressed storage of raster images.  PNG provides a patent-free replacement for GIF and can also replace many common uses of TIFF. Indexed-color, grayscale, and truecolor images are supported, plus an optional alpha channel. Sample depths range from 1 to 16 bits. PNG is designed to work in online viewing applications, so it is fully streamable.  It can store gamma and chromaticity.  PNG also detects file corruption.</FormatDescription>
       <BinaryFileFormat>Binary</BinaryFileFormat>
       <ByteOrders>Big-endian (Motorola)</ByteOrders>
       <ReleaseDate>

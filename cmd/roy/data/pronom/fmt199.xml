@@ -73,7 +73,7 @@
       <InternalSignature>
         <SignatureID>278</SignatureID>
         <SignatureName>MP4 Media File</SignatureName>
-        <SignatureNote>Represents the following character sequence: {4}ftyp{0-64}(mp42|mp41|isom|iso2){4-64}(moov|cmov|mdat)</SignatureNote>
+        <SignatureNote>Represents the following character sequence: {4}ftyp{0-64}(mp42|mp41|isom|iso2)*moov</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>357</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -85,7 +85,7 @@
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>Little-endian</Endianness>
-          <ByteSequenceValue>66747970{0-64}(6D703432|6D703431|69736F6D|69736F32){4-64}(6D6F6F76|6D646174|636D6F76)</ByteSequenceValue>
+          <ByteSequenceValue>66747970{0-64}(6D703432|6D703431|69736F6D|69736F32)*6D6F6F76</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

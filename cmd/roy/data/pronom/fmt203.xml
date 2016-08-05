@@ -13,7 +13,7 @@
       <FormatTypes>Audio</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>Ogg is a open container format maintained by the Xiph.Org Foundation.</FormatDescription>
+      <FormatDescription>Ogg is a open container format maintained by the Xiph.Org Foundation. Vorbis is a free and open-source software project headed by the Xiph.Org Foundation and produces an audio coding format and software reference encoder/decoder (codec) for lossy audio compression.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -65,6 +65,20 @@
           <ByteSequenceValue>4F6767530002{23}766F7262697300000000{19}4F676753</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Can be contained by</RelationshipType>
+        <RelatedFormatID>1749</RelatedFormatID>
+        <RelatedFormatName>Ogg Multimedia Container</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>1749</RelatedFormatID>
+        <RelatedFormatName>Ogg Multimedia Container</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

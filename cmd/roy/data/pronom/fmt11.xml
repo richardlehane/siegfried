@@ -90,6 +90,13 @@
         <RelatedFormatVersion>1.2</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1740</RelatedFormatID>
+        <RelatedFormatName>Animated Portable Network Graphics</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Is previous version of</RelationshipType>
         <RelatedFormatID>665</RelatedFormatID>
         <RelatedFormatName>Portable Network Graphics</RelatedFormatName>

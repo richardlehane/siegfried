@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1717</FormatID>
+      <FormatName>Microsoft Paint</FormatName>
+      <FormatVersion>2</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Raster)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Prior to Windows 3.0, the bundled version of Microsoft Paint used a proprietary format with the extension MSP. The format supported only 1 bit monochrome graphics. Windows 3.0 replaced Microsoft Paint with an application called Paintbrush, that could open MSP files, but would save only as PCX or BMP.</FormatDescription>
+      <BinaryFileFormat>Text</BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>05 Jul 2016</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>05 Jul 2016</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/912</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>93</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <DeveloperCompoundName>Microsoft Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>93</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <SupportCompoundName>Microsoft Corporation</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>1855</ExternalSignatureID>
+        <Signature>msp</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1263</SignatureID>
+        <SignatureName>Microsoft Paint v2</SignatureName>
+        <SignatureNote>BOF: LinS{22} 3x16 bit 'null' words</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1535</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4C696E53{22}000000000000</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>302</RelatedFormatID>
+        <RelatedFormatName>Microsoft Paint</RelatedFormatName>
+        <RelatedFormatVersion>1</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

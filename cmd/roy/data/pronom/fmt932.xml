@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1737</FormatID>
+      <FormatName>Mathcad Document</FormatName>
+      <FormatVersion>XML</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Dataset</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Mathcad is a proprietary application intended for the verification, validation, documentation and reuse of engineering calculations.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>08 Jul 2016</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>08 Jul 2016</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/932</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>1887</ExternalSignatureID>
+        <Signature>xmcd</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1276</SignatureID>
+        <SignatureName>Mathcad Document XML</SignatureName>
+        <SignatureNote>XML subset, seeking XML declaration followed by namespace declaration of http://schemas.mathsoft.com</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1548</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C3F786D6C2076657273696F6E3D22312E3022*786D6C6E733D22687474703A2F2F736368656D61732E6D617468736F66742E636F6D</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>638</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subtype of</RelationshipType>
+        <RelatedFormatID>638</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

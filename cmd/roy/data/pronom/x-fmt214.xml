@@ -3,8 +3,8 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>302</FormatID>
-      <FormatName>Windows Paint</FormatName>
-      <FormatVersion>3.x</FormatVersion>
+      <FormatName>Microsoft Paint</FormatName>
+      <FormatVersion>1</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -12,7 +12,7 @@
       <FormatTypes>Image (Raster)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Prior to Windows 3.0, the bundled version of Microsoft Paint used a proprietary format with the extension MSP. The format supported only 1 bit monochrome graphics. Windows 3.0 replaced Microsoft Paint with an application called Paintbrush, that could open MSP files, but would save only as PCX or BMP.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -36,11 +36,49 @@
         <Identifier>x-fmt/214</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>93</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <DeveloperCompoundName>Microsoft Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>93</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <SupportCompoundName>Microsoft Corporation</SupportCompoundName>
+      </Support>
       <ExternalSignature>
         <ExternalSignatureID>290</ExternalSignatureID>
         <Signature>msp</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1262</SignatureID>
+        <SignatureName>Microsoft Paint v1</SignatureName>
+        <SignatureNote>BOF: DanM{22} 3x16 bit 'null' words</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1534</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>44616E4D{22}000000000000</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>1717</RelatedFormatID>
+        <RelatedFormatName>Microsoft Paint</RelatedFormatName>
+        <RelatedFormatVersion>2</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

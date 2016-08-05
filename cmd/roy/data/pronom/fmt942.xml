@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1747</FormatID>
+      <FormatName>Adobe Air</FormatName>
+      <FormatVersion>1.5</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>
+      </FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Adobe Air, formerly codenamed Apollo, is a cross-platform runtime system developed by Adobe Systems for building desktop applications and mobile applications, programmed using Adobe Flash, ActionScript and optionally Apache Flex.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>214</ProvenanceSourceID>
+      <ProvenanceName>Archives New Zealand / Archives New Zealand</ProvenanceName>
+      <ProvenanceSourceDate>13 Jul 2016</ProvenanceSourceDate>
+      <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
+      <LastUpdatedDate>13 Jul 2016</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/vnd.adobe.air-application-installer-package+zip</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/942</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>7</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Adobe Systems Incorporated</OrganisationName>
+        <DeveloperCompoundName>Adobe Systems Incorporated</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>7</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Adobe Systems Incorporated</OrganisationName>
+        <SupportCompoundName>Adobe Systems Incorporated</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>1898</ExternalSignatureID>
+        <Signature>air</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

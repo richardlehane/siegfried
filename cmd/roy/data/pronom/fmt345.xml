@@ -12,7 +12,7 @@
       <FormatTypes>Image (Vector)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>The Enhanced Metafile format is a 32-bit format that can contain both vector information and bitmap information. This format contains extended features over the Windows Metafile Format, including built-in scaling information, and improvements in color palettes and device independence.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>Little-endian (Intel)</ByteOrders>
       <ReleaseDate>
@@ -35,7 +35,7 @@
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
       <FileFormatIdentifier>
-        <Identifier>image/x-emf</Identifier>
+        <Identifier>image/emf</Identifier>
         <IdentifierType>MIME</IdentifierType>
       </FileFormatIdentifier>
       <ExternalSignature>

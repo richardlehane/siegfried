@@ -38,11 +38,6 @@
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
       <ExternalSignature>
-        <ExternalSignatureID>46</ExternalSignatureID>
-        <Signature>bak</Signature>
-        <SignatureType>File extension</SignatureType>
-      </ExternalSignature>
-      <ExternalSignature>
         <ExternalSignatureID>177</ExternalSignatureID>
         <Signature>xlk</Signature>
         <SignatureType>File extension</SignatureType>

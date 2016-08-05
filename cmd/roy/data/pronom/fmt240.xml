@@ -4,7 +4,7 @@
     <FileFormat>
       <FormatID>970</FormatID>
       <FormatName>Microsoft Office Binder File for Windows</FormatName>
-      <FormatVersion>97-2003</FormatVersion>
+      <FormatVersion>97-2000</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -13,7 +13,7 @@
       </FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Microsoft Binder was an application included with Microsoft Office 95, 97, and 2000 that allowed users to include different types of OLE 2.0 objects (e.g., documents, spreadsheets, and presentations) in one file.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -24,8 +24,7 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>07 Jan 2010</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
+      <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
       <LastUpdatedDate>07 Jan 2010</LastUpdatedDate>
       <FormatNote>
       </FormatNote>

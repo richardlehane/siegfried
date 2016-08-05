@@ -38,6 +38,10 @@
         <Identifier>fmt/590</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>image/jxr</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
       <Developers>
         <DeveloperID>93</DeveloperID>
         <DeveloperName>

@@ -4,22 +4,21 @@
     <FileFormat>
       <FormatID>1357</FormatID>
       <FormatName>Matroska</FormatName>
-      <FormatVersion>
-      </FormatVersion>
+      <FormatVersion>1-4</FormatVersion>
       <FormatAliases>
       </FormatAliases>
-      <FormatFamilies>
-      </FormatFamilies>
+      <FormatFamilies>EBML</FormatFamilies>
       <FormatTypes>Video</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>The Matroska Multimedia Container is an open standard free container format, based on the Extensible Binary Meta Language (EBML). Matroska file extensions are .MKV for video (with subtitles and audio), .MK3D for stereoscopic video, .MKA for audio-only files, and .MKS for subtitles only.</FormatDescription>
+      <FormatDescription>The Matroska Multimedia Container is an open standard free container format, based on the Extensible Binary Meta Language (EBML). Matroska file extensions are .MKV for video (with subtitles and audio), .MK3D for stereoscopic video, .MKA for audio-only files, and .MKS for subtitles only. The Internet Engineering Task Force (IETF) Working Group: Codec Encoding for LossLess Archiving and Realtime transmission (cellar) is tasked with the standardisation of Matroska.
+
+The EBML specifications are work-in-progress, and can be found here: https://github.com/Matroska-Org/ebml-specification/blob/master/specification.markdown</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
-      <ReleaseDate>
-      </ReleaseDate>
+      <ReleaseDate>06 Dec 2002</ReleaseDate>
       <WithdrawnDate>
       </WithdrawnDate>
       <ProvenanceSourceID>191</ProvenanceSourceID>
@@ -61,21 +60,35 @@
       <InternalSignature>
         <SignatureID>907</SignatureID>
         <SignatureName>Matroska Video</SignatureName>
-        <SignatureNote>.Eß£{0-32}B‚ˆmatroskaB‡</SignatureNote>
+        <SignatureNote>0x1A45DFA3(EBML-Level 0 element), {0-32}, 0x428288(DocType element), string=matroska, 0x4287(DocTypeVersion element). The specification allows for ASCII text before the EBML header and considers the level 0 EBML header element to be the beginning of the EBML document. For now this signature is offset to 1024 bytes to allow for some ASCII text to precede the header, but to assume the EBML header of a Matroska multimedia format will begin near the beginning of the file and to mitigate against wasteful processing of large files that are not Matroska multimedia.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1131</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>0</MaxOffset>
+          <MaxOffset>1024</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
-          <Endianness>
-          </Endianness>
+          <Endianness>Big-endian</Endianness>
           <ByteSequenceValue>1A45DFA3{0-32}4282886D6174726F736B614287</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <ReferenceFile>
+        <ReferenceFileID>3</ReferenceFileID>
+        <ReferenceFileName>Matroska Test Suite - Wave 1</ReferenceFileName>
+        <ReferenceFileDescription>A set of 8 files meant to cover the basic features a player should support to be considered a good Matroska player.</ReferenceFileDescription>
+        <ReferenceFileDocumentation>
+        </ReferenceFileDocumentation>
+        <ReferenceFileIPR>
+        </ReferenceFileIPR>
+        <ReferenceFileNote>
+        </ReferenceFileNote>
+        <ReferenceFileIdentifier>
+          <Identifier>http://www.matroska.org/downloads/test_w1.html</Identifier>
+          <IdentifierType>URL</IdentifierType>
+        </ReferenceFileIdentifier>
+      </ReferenceFile>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

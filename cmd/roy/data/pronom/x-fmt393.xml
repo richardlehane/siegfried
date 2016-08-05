@@ -115,6 +115,12 @@
         <RelatedFormatName>WordPerfect for MS-DOS/Windows Document</RelatedFormatName>
         <RelatedFormatVersion>5.1</RelatedFormatVersion>
       </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>1754</RelatedFormatID>
+        <RelatedFormatName>WordPerfect</RelatedFormatName>
+        <RelatedFormatVersion>4.0/4.1/4.2</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

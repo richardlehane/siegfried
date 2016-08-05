@@ -41,6 +41,10 @@ The format lacks an extension, and is instead represented by a file name consist
         <Identifier>fmt/503</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>multipart/appledouble</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
       <Developers>
         <DeveloperID>15</DeveloperID>
         <DeveloperName>

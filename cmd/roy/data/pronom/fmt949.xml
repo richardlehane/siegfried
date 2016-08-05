@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1754</FormatID>
+      <FormatName>WordPerfect</FormatName>
+      <FormatVersion>4.0/4.1/4.2</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Word Processor</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>WordPerfect is a Word Processing application currently owned by Corel Corporation. The original version of WordPerfect 4.0 was released in 1984. 4.1 followed in 1985 and 4.2 
+in 1986, with versions released on various platforms up to 1988 when version 5.0 was originally released for DOS.
+
+Only the technical specification for version 4.2 is currently known to have been made public, originally via the PC Developer's Toolkit diskette, and this can be found 
+preserved here: http://www.columbia.edu/~em36/wpdos/wp42ff.txt.
+
+The file format for the WP4.2 version contains only the document body with special function codes, and the format lacks a header or mandatory elements that can be used by 
+PRONOM for automatic identification. Each function code represents a text function, such as bold or underline, so with reference to the specification it should be possible to 
+parse the file to understand the intended layout. It may be the case that the file format for 4.0 and 4.1 is functionally identical or very similar to version 4.2.
+
+A free C++ library called libwpd is available: http://libwpd.sourceforge.net/ and it includes the ability to parse WP4.2 files. This library is known to have been implemented 
+in LibreOffice, Koffice, and AbiWord among others, so these applications can be used to open and render WordPerfect 4.2 files, and potentially WP4.0 and WP4.1.
+
+Due to the age of the format, WP4.x files may lack a format extension, however .wp4 and .wpd are known to be associated with the format.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>21 Jul 2016</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>21 Jul 2016</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/vnd.wordperfect</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/949</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>35</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Corel Corporation</OrganisationName>
+        <DeveloperCompoundName>Corel Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>35</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Corel Corporation</OrganisationName>
+        <SupportCompoundName>Corel Corporation</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>1911</ExternalSignatureID>
+        <Signature>wp4</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1912</ExternalSignatureID>
+        <Signature>wpd</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>736</RelatedFormatID>
+        <RelatedFormatName>WordPerfect for MS-DOS Document</RelatedFormatName>
+        <RelatedFormatVersion>5.0</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

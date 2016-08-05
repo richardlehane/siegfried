@@ -13,7 +13,7 @@
       </FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>The New Executable (abbreviated NE or NewEXE) is a 16-bit .exe file format, a successor to the DOS MZ executable format. It is used by 16-bit Microsoft Windows, and by some versions of OS/2 and MS-DOS.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -41,6 +41,20 @@
         <Identifier>x-fmt/410</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>93</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <DeveloperCompoundName>Microsoft Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>93</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <SupportCompoundName>Microsoft Corporation</SupportCompoundName>
+      </Support>
       <ExternalSignature>
         <ExternalSignatureID>773</ExternalSignatureID>
         <Signature>exe</Signature>

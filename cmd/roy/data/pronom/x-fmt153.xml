@@ -9,10 +9,10 @@
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Image (Vector)</FormatTypes>
+      <FormatTypes>Image (Raster), Image (Vector)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>The Enhanced Metafile format is a 32-bit format that can contain both vector information and bitmap information. This format contains extended features over the Windows Metafile Format, including built-in scaling information, and improvements in color palettes and device independence.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>Little-endian (Intel)</ByteOrders>
       <ReleaseDate>
@@ -32,13 +32,27 @@
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
-        <Identifier>image/x-emf</Identifier>
+        <Identifier>image/emf</Identifier>
         <IdentifierType>MIME</IdentifierType>
       </FileFormatIdentifier>
       <FileFormatIdentifier>
         <Identifier>x-fmt/153</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>93</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <DeveloperCompoundName>Microsoft Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>93</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <SupportCompoundName>Microsoft Corporation</SupportCompoundName>
+      </Support>
       <ExternalSignature>
         <ExternalSignatureID>209</ExternalSignatureID>
         <Signature>emf</Signature>

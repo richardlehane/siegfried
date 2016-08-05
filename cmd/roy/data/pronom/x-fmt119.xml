@@ -13,7 +13,7 @@
       <FormatTypes>Image (Vector)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Windows Metafile is an image file format originally designed for Microsoft Windows in 1990. Windows Metafiles may contain both vector graphics and bitmap components.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -34,9 +34,27 @@
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
+        <Identifier>image/wmf</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
         <Identifier>x-fmt/119</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>93</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <DeveloperCompoundName>Microsoft Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>93</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <SupportCompoundName>Microsoft Corporation</SupportCompoundName>
+      </Support>
       <ExternalSignature>
         <ExternalSignatureID>165</ExternalSignatureID>
         <Signature>wmf</Signature>

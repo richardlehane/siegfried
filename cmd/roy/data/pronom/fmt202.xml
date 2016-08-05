@@ -42,10 +42,16 @@
         <Signature>nef</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1913</ExternalSignatureID>
+        <Signature>nrw</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
       <InternalSignature>
         <SignatureID>1046</SignatureID>
-        <SignatureName>Nikon RAW Motorola</SignatureName>
-        <SignatureNote>BOF: MM.*{6-2150}NIKON{1-16384}RAW</SignatureNote>
+        <SignatureName>Nikon RAW Motorola v1</SignatureName>
+        <SignatureNote>#--Makernote and image data standard--#
+TIFF Magic, Makernote Tag, Makernote ID, Byte Order, Subfile Type, Compression</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1287</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -57,13 +63,14 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>4D4D002A{6-2150}4E494B4F4E{1-16384}524157</ByteSequenceValue>
+          <ByteSequenceValue>4D4D002A*927C{0-35536}4E696B6F6E00(0200|0210|0211)00004D4D002A00000008{0-999999}00FE00040000000100000000{36}0103000300000001(0001|8799)0000</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <InternalSignature>
         <SignatureID>1047</SignatureID>
-        <SignatureName>Nikon RAW Intel</SignatureName>
-        <SignatureNote>BOF: II*.{6-2150}NIKON{1-16384}RAW</SignatureNote>
+        <SignatureName>Nikon RAW Intel v1</SignatureName>
+        <SignatureNote>#--Makernote and image data standard--#
+TIFF Magic, Makernote Tag, Makernote ID, Byte Order, Subfile Type, Compression</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1292</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -75,7 +82,119 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>49492A00{6-2150}4E494B4F4E{1-16384}524157</ByteSequenceValue>
+          <ByteSequenceValue>49492A00*7C92{0-35536}4E696B6F6E00(0200|0210|0211)000049492A0008000000{0-999999}00FE00040001000000000000{36}000301030001000000(0100|9987)00</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1293</SignatureID>
+        <SignatureName>Nikon RAW Motorola v2</SignatureName>
+        <SignatureNote>#--Makernote and image data reversed--#
+TIFF Magic, Makernote Tag, Subfile Type, Compression, Makernote ID, Byte Order</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1564</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4D4D002A*927C{0-35536}00FE00040000000100000000{36}0103000300000001(0001|8799)0000{0-999999}4E696B6F6E00(0200|0210|0211)00004D4D002A00000008</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1294</SignatureID>
+        <SignatureName>Nikon RAW Intel v2</SignatureName>
+        <SignatureNote>#--Makernote and image data reversed--#
+TIFF Magic, Makernote Tag, Subfile Type, Compression, Makernote ID, Byte Order</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1565</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>49492A00*7C92{0-35536}00FE00040001000000000000{36}000301030001000000(0100|9987)00{0-999999}4E696B6F6E00(0200|0210|0211)000049492A0008000000</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1295</SignatureID>
+        <SignatureName>Nikon RAW Motorola v3</SignatureName>
+        <SignatureNote>#--Makernote in the Middle--#
+TIFF Magic, Subfile Type, Compression, Makernote Tag, Makernote ID, Byte Order</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1566</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4D4D002A*00FE00040000000100000000{36}0103000300000001(0001|8799)0000{0-999999}927C{0-2046}4E696B6F6E00(0200|0210|0211)00004D4D002A00000008</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1296</SignatureID>
+        <SignatureName>Nikon RAW Intel v3</SignatureName>
+        <SignatureNote>#--Makernote in the Middle--#
+TIFF Magic, Subfile Type, Compression, Makernote Tag, Makernote ID, Byte Order</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1567</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>49492A00*00FE00040001000000000000{36}000301030001000000(0100|9987)00{0-999999}7C92{0-2046}4E696B6F6E00(0200|0210|0211)000049492A0008000000</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1297</SignatureID>
+        <SignatureName>Nikon D1 RAW Motorola</SignatureName>
+        <SignatureNote>TIFF Magic, Makernote ID, Makernote Tag</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1568</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4D4D002A*4E494B4F4E20434F52504F524154494F4E004E494B4F4E2044312000{1-16384}927C{0-512}524157</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1298</SignatureID>
+        <SignatureName>Nikon D1 RAW Intel</SignatureName>
+        <SignatureNote>TIFF Magic, Makernote ID, Makernote Tag</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1569</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>49492A00*4E494B4F4E20434F52504F524154494F4E004E494B4F4E2044312000{1-16384}7C92{0-512}524157</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

@@ -8,8 +8,7 @@
       </FormatVersion>
       <FormatAliases>
       </FormatAliases>
-      <FormatFamilies>
-      </FormatFamilies>
+      <FormatFamilies>EBML</FormatFamilies>
       <FormatTypes>Video</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
@@ -25,7 +24,7 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>28 Aug 2013</ProvenanceSourceDate>
-      <ProvenanceDescription>http://www.matroska.org/technical/specs/index.html</ProvenanceDescription>
+      <ProvenanceDescription>http://www.webmproject.org/docs/container/</ProvenanceDescription>
       <LastUpdatedDate>28 Aug 2013</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
@@ -63,7 +62,7 @@
       <InternalSignature>
         <SignatureID>911</SignatureID>
         <SignatureName>WebM</SignatureName>
-        <SignatureNote>.Eß£.{0-32}B‚„webmB‡</SignatureNote>
+        <SignatureNote>1A45DFA3(EBML Header){0-32}4282847765626D4287(doctype = webm)</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1135</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>

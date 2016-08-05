@@ -96,6 +96,12 @@
         </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1755</RelatedFormatID>
+        <RelatedFormatName>MIME Email</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>645</RelatedFormatID>
         <RelatedFormatName>Hypertext Markup Language</RelatedFormatName>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1749</FormatID>
+      <FormatName>Ogg Multimedia Container</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Audio, Video</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Ogg is a free, open container format maintained by the Xiph.Org Foundation. The Ogg container format can multiplex a number of independent streams for audio, video, text, and metadata.
+
+In the Ogg multimedia framework, Theora provides a lossy video layer. The audio layer is commonly provided by the music-oriented Vorbis format. Other audio coding format options include the Opus compression format, the lossless audio compression format FLAC, Speex for low bitrate voice data, and OggPCM for uncompressed PCM audio.
+
+This generic entry applies where available PRONOM signatures for Ogg do not yet apply to the file in question. In this instance you may wish to contact pronom@nationalarchives.gov.uk to help improve PRONOM's signatures.</FormatDescription>
+      <BinaryFileFormat>Text</BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>21 Jul 2016</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>21 Jul 2016</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/ogg</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/944</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>1900</ExternalSignatureID>
+        <Signature>ogg</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1901</ExternalSignatureID>
+        <Signature>ogv</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1902</ExternalSignatureID>
+        <Signature>spx</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1903</ExternalSignatureID>
+        <Signature>opus</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1287</SignatureID>
+        <SignatureName>Ogg Container</SignatureName>
+        <SignatureNote>Capture pattern (“OggS”); stream structure revision (00h); flag: 1st page of a logical bitstream (02h)</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1563</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4F6767530002</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Can contain</RelationshipType>
+        <RelatedFormatID>929</RelatedFormatID>
+        <RelatedFormatName>Ogg Vorbis Codec Compressed Multimedia File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Can contain</RelationshipType>
+        <RelatedFormatID>1750</RelatedFormatID>
+        <RelatedFormatName>Ogg Theora Video</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Can contain</RelationshipType>
+        <RelatedFormatID>1751</RelatedFormatID>
+        <RelatedFormatName>Ogg Opus Codec Compressed Multimedia File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Can contain</RelationshipType>
+        <RelatedFormatID>1752</RelatedFormatID>
+        <RelatedFormatName>Ogg FLAC Compressed Multimedia File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Can contain</RelationshipType>
+        <RelatedFormatID>1753</RelatedFormatID>
+        <RelatedFormatName>Ogg Speex Codec Multimedia File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>929</RelatedFormatID>
+        <RelatedFormatName>Ogg Vorbis Codec Compressed Multimedia File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1750</RelatedFormatID>
+        <RelatedFormatName>Ogg Theora Video</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1751</RelatedFormatID>
+        <RelatedFormatName>Ogg Opus Codec Compressed Multimedia File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1752</RelatedFormatID>
+        <RelatedFormatName>Ogg FLAC Compressed Multimedia File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1753</RelatedFormatID>
+        <RelatedFormatName>Ogg Speex Codec Multimedia File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

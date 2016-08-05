@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1729</FormatID>
+      <FormatName>Microsoft Visio Drawing</FormatName>
+      <FormatVersion>2013</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Vector), Presentation</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Microsoft Visio is a diagramming and vector graphics application and is part of the Microsoft Office family. Visio 2013 introduced file formats based upon Open Packaging Conventions and XML. Further information about these formats can be found here: https://msdn.microsoft.com/en-us/library/office/jj228622.aspx</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>08 Jul 2016</ProvenanceSourceDate>
+      <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
+      <LastUpdatedDate>08 Jul 2016</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/vnd.ms-visio.drawing.main+xml</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/924</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>93</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <DeveloperCompoundName>Microsoft Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>93</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <SupportCompoundName>Microsoft Corporation</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>1879</ExternalSignatureID>
+        <Signature>vsdx</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>1230</RelatedFormatID>
+        <RelatedFormatName>Microsoft Visio Drawing</RelatedFormatName>
+        <RelatedFormatVersion>2003-2010</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

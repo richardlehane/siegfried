@@ -84,211 +84,150 @@
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <InternalSignature>
-        <SignatureID>56</SignatureID>
-        <SignatureName>QuickTime 1</SignatureName>
-        <SignatureNote>Movie atom (moov) + movie header atom (mvhd)</SignatureNote>
+        <SignatureID>1300</SignatureID>
+        <SignatureName>QuickTime variant1</SignatureName>
+        <SignatureNote>Offset 4: moov{0-4096}(mvhd|cmov|rmra)</SignatureNote>
         <ByteSequence>
-          <ByteSequenceID>159</ByteSequenceID>
+          <ByteSequenceID>1582</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>4</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>4</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>6D6F6F76{4}6D766864</ByteSequenceValue>
+          <ByteSequenceValue>6D6F6F76{0-4096}(6D766864|636D6F76|726D7261)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <InternalSignature>
-        <SignatureID>167</SignatureID>
-        <SignatureName>Quicktime 2</SignatureName>
-        <SignatureNote>Movie data atom (mdat) + movie atom (moov) + movie header atom (mvhd)</SignatureNote>
+        <SignatureID>1301</SignatureID>
+        <SignatureName>QuickTime variant2</SignatureName>
+        <SignatureNote>Offset 4: mdat*moov{0-4096}(mvhd|cmov|rmra)
+Variants 2-8 cover the following pattern, which would be desirable to consolidate but is currently not possible due to limitations of the PRONOM signature engine:
+(mdat|cmov|ftypqt  |pnot|skip|free|wide)*moov{0-4096}(mvhd|cmov|rmra)
+(6D646174|636D6F76|6674797071742020|706E6F74|736B6970|66726565|77696465)*6D6F6F76{0-4096}(6D766864|636D6F76|726D7261)</SignatureNote>
         <ByteSequence>
-          <ByteSequenceID>197</ByteSequenceID>
+          <ByteSequenceID>1581</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>4</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>4</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>6D646174*6D6F6F76{4}6D766864</ByteSequenceValue>
+          <ByteSequenceValue>6D646174*6D6F6F76{0-4096}(6D766864|636D6F76|726D7261)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <InternalSignature>
-        <SignatureID>168</SignatureID>
-        <SignatureName>Quicktime 3</SignatureName>
-        <SignatureNote>Movie atom (moov) + compressed movie atom (cmov) + data compression atom (dcom)</SignatureNote>
+        <SignatureID>1302</SignatureID>
+        <SignatureName>QuickTime variant3</SignatureName>
+        <SignatureNote>Offset 4: cmov*moov{0-4096}(mvhd|cmov|rmra)</SignatureNote>
         <ByteSequence>
-          <ByteSequenceID>198</ByteSequenceID>
+          <ByteSequenceID>1580</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>4</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>4</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>6D6F6F76{4}636D6F76{4}64636F6D</ByteSequenceValue>
+          <ByteSequenceValue>636D6F76*6D6F6F76{0-4096}(6D766864|636D6F76|726D7261)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <InternalSignature>
-        <SignatureID>169</SignatureID>
-        <SignatureName>Quicktime 4</SignatureName>
-        <SignatureNote>Movie data atom (mdat) + movie atom (moov) + compressed movie atom (cmov) + data compression atom (dcom)</SignatureNote>
+        <SignatureID>1303</SignatureID>
+        <SignatureName>QuickTime variant4</SignatureName>
+        <SignatureNote>Offset 4: ftypqt  *moov{0-4096}(mvhd|cmov|rmra)</SignatureNote>
         <ByteSequence>
-          <ByteSequenceID>199</ByteSequenceID>
+          <ByteSequenceID>1579</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>4</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>4</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>6D646174*6D6F6F76{4}636D6F76{4}64636F6D</ByteSequenceValue>
+          <ByteSequenceValue>6674797071742020*6D6F6F76{0-4096}(6D766864|636D6F76|726D7261)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <InternalSignature>
-        <SignatureID>194</SignatureID>
-        <SignatureName>QuickTime 5</SignatureName>
-        <SignatureNote>Placeholder atom (wide) + movie data atom (mdat) + movie atom (moov) + movie header atom (mvhd)</SignatureNote>
+        <SignatureID>1304</SignatureID>
+        <SignatureName>QuickTime variant5</SignatureName>
+        <SignatureNote>Offset 4: pnot*moov{0-4096}(mvhd|cmov|rmra)</SignatureNote>
         <ByteSequence>
-          <ByteSequenceID>252</ByteSequenceID>
-          <PositionType>Absolute from BOF</PositionType>
-          <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
-          <IndirectOffsetLocation>
-          </IndirectOffsetLocation>
-          <IndirectOffsetLength>
-          </IndirectOffsetLength>
-          <Endianness>
-          </Endianness>
-          <ByteSequenceValue>0000000877696465{4}6D646174*6D6F6F76{4}6D766864</ByteSequenceValue>
-        </ByteSequence>
-      </InternalSignature>
-      <InternalSignature>
-        <SignatureID>195</SignatureID>
-        <SignatureName>QuickTime 6</SignatureName>
-        <SignatureNote>Placeholder atom (wide) + movie data atom (mdat) + movie atom (moov) + compressed movie atom (cmov) + data compression atom (dcom)</SignatureNote>
-        <ByteSequence>
-          <ByteSequenceID>253</ByteSequenceID>
-          <PositionType>Absolute from BOF</PositionType>
-          <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
-          <IndirectOffsetLocation>
-          </IndirectOffsetLocation>
-          <IndirectOffsetLength>
-          </IndirectOffsetLength>
-          <Endianness>
-          </Endianness>
-          <ByteSequenceValue>0000000877696465{4}6D646174*6D6F6F76{4}636D6F76{4}64636F6D</ByteSequenceValue>
-        </ByteSequence>
-      </InternalSignature>
-      <InternalSignature>
-        <SignatureID>212</SignatureID>
-        <SignatureName>QuickTime</SignatureName>
-        <SignatureNote>Atoms: mdat, cmov, moov, ftyp, pnot, wide, skip, free, junk, or pict</SignatureNote>
-        <ByteSequence>
-          <ByteSequenceID>286</ByteSequenceID>
+          <ByteSequenceID>1578</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>4</Offset>
-          <MaxOffset>
-          </MaxOffset>
-          <IndirectOffsetLocation>
-          </IndirectOffsetLocation>
-          <IndirectOffsetLength>
-          </IndirectOffsetLength>
-          <Endianness>Little-endian</Endianness>
-          <ByteSequenceValue>6D646174</ByteSequenceValue>
-        </ByteSequence>
-      </InternalSignature>
-      <InternalSignature>
-        <SignatureID>691</SignatureID>
-        <SignatureName>QuickTime 7</SignatureName>
-        <SignatureNote>size + ftyp + qt2020</SignatureNote>
-        <ByteSequence>
-          <ByteSequenceID>856</ByteSequenceID>
-          <PositionType>Absolute from BOF</PositionType>
-          <Offset>
-          </Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>4</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>000000{1}6674797071742020</ByteSequenceValue>
+          <ByteSequenceValue>706E6F74*6D6F6F76{0-4096}(6D766864|636D6F76|726D7261)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <InternalSignature>
-        <SignatureID>717</SignatureID>
-        <SignatureName>Quicktime 8</SignatureName>
-        <SignatureNote>Looking for two atoms: 'wide' and 'mvhd'</SignatureNote>
+        <SignatureID>1305</SignatureID>
+        <SignatureName>QuickTime variant6</SignatureName>
+        <SignatureNote>Offset 4: skip*moov{0-4096}(mvhd|cmov|rmra)</SignatureNote>
         <ByteSequence>
-          <ByteSequenceID>903</ByteSequenceID>
-          <PositionType>Absolute from BOF</PositionType>
-          <Offset>0</Offset>
-          <MaxOffset>20</MaxOffset>
-          <IndirectOffsetLocation>
-          </IndirectOffsetLocation>
-          <IndirectOffsetLength>
-          </IndirectOffsetLength>
-          <Endianness>
-          </Endianness>
-          <ByteSequenceValue>77696465{1-20}6D766864</ByteSequenceValue>
-        </ByteSequence>
-      </InternalSignature>
-      <InternalSignature>
-        <SignatureID>760</SignatureID>
-        <SignatureName>Quicktime 9</SignatureName>
-        <SignatureNote>BOF, offset 4: 'free' atom, followed by one or more 00 bytes, with 'ftyp' atom seen later in the file</SignatureNote>
-        <ByteSequence>
-          <ByteSequenceID>955</ByteSequenceID>
+          <ByteSequenceID>1577</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>4</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>4</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>6672656500*66747970</ByteSequenceValue>
+          <ByteSequenceValue>736B6970*6D6F6F76{0-4096}(6D766864|636D6F76|726D7261)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <InternalSignature>
-        <SignatureID>780</SignatureID>
-        <SignatureName>Quicktime 10</SignatureName>
-        <SignatureNote>'free' atom, followed by one or more 00 bytes, with 'moov' atom seen later in the file</SignatureNote>
+        <SignatureID>1306</SignatureID>
+        <SignatureName>QuickTime variant7</SignatureName>
+        <SignatureNote>Offset 4: free*moov{0-4096}(mvhd|cmov|rmra)</SignatureNote>
         <ByteSequence>
-          <ByteSequenceID>981</ByteSequenceID>
+          <ByteSequenceID>1576</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>4</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>4</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>6672656500*6D6F6F76</ByteSequenceValue>
+          <ByteSequenceValue>66726565*6D6F6F76{0-4096}(6D766864|636D6F76|726D7261)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1307</SignatureID>
+        <SignatureName>QuickTime variant8</SignatureName>
+        <SignatureNote>Offset 4: wide*moov{0-4096}(mvhd|cmov|rmra)</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1575</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>4</Offset>
+          <MaxOffset>4</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>77696465*6D6F6F76{0-4096}(6D766864|636D6F76|726D7261)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
