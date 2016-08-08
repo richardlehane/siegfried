@@ -295,7 +295,7 @@ func (r *Recorder) Report(res chan core.Identification) {
 
 func (r *Recorder) updateWarning(i Identification) Identification {
 	// weak match
-	if i.xmlMatch && i.magicScore == 0 {
+	if !i.xmlMatch && i.magicScore == 0 {
 		lowConfidence := confidenceTrick()
 		if len(i.Warning) > 0 {
 			i.Warning += "; " + "match on " + lowConfidence(i) + " only"
