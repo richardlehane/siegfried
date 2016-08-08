@@ -1,9 +1,8 @@
 # Change Log
-## v1.6.2 (XXXX-XX-XX)
-### Added
-- new command: `roy setup`
-
+## v1.6.2 (2016-08-08)
 ### Fixed
+- poor performance unknowns due to interaction of -bof/-eof flags with known BOF/EOF calculation; reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/86)
+- [unnecessary warnings for mimeinfo identifier](https://github.com/richardlehane/siegfried/issues/84)
 - add fddXML.zip to .gitattributes to preserve newlines
 - various [Go Report Card](https://goreportcard.com/report/github.com/richardlehane/siegfried) issues
 

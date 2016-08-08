@@ -8,7 +8,7 @@
 
 ### Version
 
-1.6.1
+1.6.2
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -75,17 +75,12 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
 
 ## Changes 
-### v1.6.1 (2016-07-06)
-### Added
-- Travis and Appveyor CI automated deployment to Github releases and Bintray
-- PRONOM v85 signatures
-- LICENSE.txt, CHANGELOG.md
-- [Go Report Card](https://goreportcard.com/report/github.com/richardlehane/siegfried)
-
+### v1.6.2 (2016-08-08)
 ### Fixed
-- golang.org/x/image/riff bug (reported [here](https://github.com/golang/go/issues/16236))
-- misspellings reported by Go Report Card
-- ineffectual assignments reported by Go Report Card
+- poor performance unknowns due to interaction of -bof/-eof flags with known BOF/EOF calculation; reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/86)
+- [unnecessary warnings for mimeinfo identifier](https://github.com/richardlehane/siegfried/issues/84)
+- add fddXML.zip to .gitattributes to preserve newlines
+- various [Go Report Card](https://goreportcard.com/report/github.com/richardlehane/siegfried) issues
 
 [Change Log](https://github.com/richardlehane/siegfried/blob/master/CHANGELOG.md)
 
