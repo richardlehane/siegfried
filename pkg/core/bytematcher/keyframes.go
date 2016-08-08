@@ -275,18 +275,20 @@ func firstBOFandEOF(bof int, eof int, ks []keyFrame) (int, int) {
 		return bof, eof
 	}
 	b := getMax(-1, func(t frames.OffType) bool { return t == frames.BOF }, ks, true)
-	if b < 0 {
+	if b < 0 || b > bof {
 		e := getMax(-1, func(t frames.OffType) bool { return t == frames.EOF }, ks, true)
 		if e < 0 {
-			return -1, -1
+			if b < 0 {
+				return -1, -1
+			}
+			return b, eof
 		}
 		if e > eof {
-			eof = e
+			if b < 0 || b > e {
+				return bof, e
+			}
+			return b, eof
 		}
-		return bof, eof
-	}
-	if b > bof {
-		bof = b
 	}
 	return bof, eof
 }
