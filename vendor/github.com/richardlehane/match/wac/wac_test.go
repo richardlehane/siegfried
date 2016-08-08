@@ -200,15 +200,13 @@ func BenchmarkIndex(b *testing.B) {
 
 // following benchmark code is from <http://godoc.org/code.google.com/p/ahocorasick> for comparison
 func benchmarkValue(n int) []byte {
-	input := []byte{}
+	input := make([]byte, n)
 	for i := 0; i < n; i++ {
-		var b byte
 		if i%2 == 0 {
-			b = 'a'
+			input[i] = 'a'
 		} else {
-			b = 'b'
+			input[i] = 'b'
 		}
-		input = append(input, b)
 	}
 	return input
 }
@@ -254,9 +252,22 @@ func BenchmarkMatchingManyMatches(b *testing.B) {
 func BenchmarkMatchingHardTree(b *testing.B) {
 	b.StopTimer()
 	reader := bytes.NewBuffer(benchmarkValue(b.N))
-	ac := New(hardTree())
+	ac := New([]Seq{seq("abababababababd"),
+		seq("abababb"),
+		seq("abababababq")})
 	b.StartTimer()
 	r := ac.Index(reader)
 	for _ = range r {
+	}
+}
+
+func BenchmarkProgress(b *testing.B) {
+	b.StopTimer()
+	reader := bytes.NewBuffer(benchmarkValue(524289))
+	ac := New([]Seq{seq("de"), seq("abb")})
+	b.StartTimer()
+	for i := 0; i < b.N; i++ {
+		for _ = range ac.Index(reader) {
+		}
 	}
 }

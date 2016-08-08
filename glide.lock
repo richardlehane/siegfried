@@ -1,10 +1,10 @@
 hash: 2faaea615e9a8a21cbbdece66726b50773b898784ebb3c0d0dea5271ed682e71
-updated: 2016-06-26T19:58:34.020639833+10:00
+updated: 2016-08-08T23:07:55.470906938+10:00
 imports:
 - name: github.com/richardlehane/characterize
   version: 65c3af3b37223a3694e454f8ccd2bfe37f0a3ec0
 - name: github.com/richardlehane/match
-  version: 99984db6ea1ae239eb932b3795e3d389be7fddb5
+  version: d5ba1f35f795d8293cda5aeada0d36a2b1f4faa7
   subpackages:
   - wac
 - name: github.com/richardlehane/mscfb
@@ -18,19 +18,19 @@ imports:
 - name: github.com/richardlehane/xmldetect
   version: d96cd89e827673690c9e9f15546eff6dd85f17f1
 - name: golang.org/x/image
-  version: 97680175a5267bb8b31f1923e7a66df98013b11a
+  version: 9f8d0d45877da31f672995d10677ae6a586e31a5
   subpackages:
   - riff
 - name: golang.org/x/sys
-  version: 62bee037599929a6e9146f29d10dd5208c43507d
+  version: a646d33e2ee3172a661fc09bca23bb4889a41bc8
   subpackages:
   - unix
 - name: golang.org/x/text
-  version: 4440cd4f4c2ea31e1872e00de675a86d0c19006c
+  version: 2910a502d2bf9e43193af9d68ca516529614eed3
   subpackages:
   - encoding/charmap
   - encoding
   - encoding/internal
   - encoding/internal/identifier
   - transform
-devImports: []
+testImports: []

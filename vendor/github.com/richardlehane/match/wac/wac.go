@@ -318,7 +318,7 @@ func (wac *Wac) match(input io.ByteReader, results chan Result) {
 				}
 			}
 		}
-		if offset >= 1024 && offset&(^offset+1) == offset {
+		if offset&(^offset+1) == offset && offset >= 1024 { // send powers of 2 greater than 512
 			progressResult.Offset = offset
 			results <- progressResult
 		}
