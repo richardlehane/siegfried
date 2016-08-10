@@ -71,9 +71,11 @@ func (r *reports) Infos() map[string]identifier.FormatInfo {
 }
 
 func globify(s []string) []string {
-	ret := make([]string, len(s))
-	for i, v := range s {
-		ret[i] = "*." + v
+	ret := make([]string, 0, len(s))
+	for _, v := range s {
+		if len(v) > 0 {
+			ret = append(ret, "*."+v)
+		}
 	}
 	return ret
 }

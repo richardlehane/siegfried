@@ -1,4 +1,8 @@
 # Change Log
+## v1.6.3 (2016-XX-XX)
+### Fixed
+- roy build -noreports includes blank extensions that generate false matches; reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/87)
+
 ## v1.6.2 (2016-08-08)
 ### Fixed
 - poor performance unknowns due to interaction of -bof/-eof flags with known BOF/EOF calculation; reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/86)
