@@ -74,12 +74,13 @@ var (
 	throttlef         = harvest.Duration("throttle", 0, "set a time to wait HTTP requests e.g. 50ms")
 
 	// INSPECT (roy inspect | roy inspect fmt/121 | roy inspect usr/local/mysig.gob | roy inspect 10)
-	inspect        = flag.NewFlagSet("inspect", flag.ExitOnError)
-	inspectHome    = inspect.String("home", config.Home(), "override the default home directory")
-	inspectReports = inspect.String("reports", config.Reports(), "set path for PRONOM reports directory")
-	inspectMI      = inspect.String("mi", "", "set name/path for MIMEInfo signature file")
-	inspectCType   = inspect.Int("ct", 0, "provide container type to inspect container hits")
-	inspectCName   = inspect.String("cn", "", "provide container name to inspect container hits")
+	inspect            = flag.NewFlagSet("inspect", flag.ExitOnError)
+	inspectHome        = inspect.String("home", config.Home(), "override the default home directory")
+	inspectReports     = inspect.String("reports", config.Reports(), "set path for PRONOM reports directory")
+	inspectMI          = inspect.String("mi", "", "set name/path for MIMEInfo signature file")
+	inspectCType       = inspect.Int("ct", 0, "provide container type to inspect container hits")
+	inspectCName       = inspect.String("cn", "", "provide container name to inspect container hits")
+	inspectNoContainer = inspect.Bool("nocontainer", false, "skip container signatures")
 )
 
 func savereps() error {
@@ -136,7 +137,11 @@ func inspectFmt(f string) error {
 		_, err := loc.New(config.SetLOC(""), config.SetLimit(expandSets(f)), config.SetInspect())
 		return err
 	}
-	_, err := pronom.New(config.SetLimit(expandSets(f)), config.SetInspect(), config.SetNoContainer())
+	opts := []config.Option{config.SetLimit(expandSets(f)), config.SetInspect()}
+	if *inspectNoContainer {
+		opts = append(opts, config.SetNoContainer())
+	}
+	_, err := pronom.New(opts...)
 	return err
 }
 

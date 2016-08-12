@@ -70,7 +70,7 @@ func NewPronom() (identifier.Parseable, error) {
 		c: identifier.Blank{},
 	}
 	// apply no container rule
-	if !config.NoContainer() && !config.Inspect() {
+	if !config.NoContainer() {
 		if err := p.setContainers(); err != nil {
 			return nil, fmt.Errorf("Pronom: error loading containers; got %s\nUnless you have set `-nocontainer` you need to download a container signature file", err)
 		}

@@ -30,7 +30,6 @@ func init() {
 }
 
 type Identifier struct {
-	p     identifier.Parseable
 	infos map[string]formatInfo
 	*identifier.Base
 }
