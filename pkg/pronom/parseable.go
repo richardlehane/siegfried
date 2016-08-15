@@ -30,6 +30,10 @@ type formatInfo struct {
 	mimeType string
 }
 
+func (f formatInfo) String() string {
+	return f.name
+}
+
 // turn generic FormatInfo into PRONOM formatInfo
 func infos(m map[string]identifier.FormatInfo) map[string]formatInfo {
 	i := make(map[string]formatInfo, len(m))
@@ -294,14 +298,26 @@ func (c *container) containerSigs(t string) ([][]string, [][]frames.Signature, [
 			continue
 		}
 		puid := cpuids[c.Id]
-		ns, ss := make([]string, len(c.Files)), make([]frames.Signature, len(c.Files))
-		for i, f := range c.Files {
-			ns[i] = f.Path
+		ns, ss := make([]string, 0, len(c.Files)), make([]frames.Signature, 0, len(c.Files))
+		for _, f := range c.Files {
 			sig, err := processDROID(puid, f.Signature.ByteSequences)
 			if err != nil {
 				return nil, nil, nil, err
 			}
-			ss[i] = sig
+			// write over a File if it exists: address bug x-fmt/45 (# issues 89)
+			var replace bool
+			for i, nm := range ns {
+				if nm == f.Path {
+					if sig != nil {
+						ss[i] = sig
+					}
+					replace = true
+				}
+			}
+			if !replace {
+				ns = append(ns, f.Path)
+				ss = append(ss, sig)
+			}
 		}
 		names = append(names, ns)
 		sigs = append(sigs, ss)
