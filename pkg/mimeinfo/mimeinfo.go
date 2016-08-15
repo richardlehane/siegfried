@@ -92,6 +92,10 @@ type formatInfo struct {
 	magicWeights []int
 }
 
+func (f formatInfo) String() string {
+	return f.comment
+}
+
 // turn generic FormatInfo into mimeinfo formatInfo
 func infos(m map[string]identifier.FormatInfo) map[string]formatInfo {
 	i := make(map[string]formatInfo, len(m))

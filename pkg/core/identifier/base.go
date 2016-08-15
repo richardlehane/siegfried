@@ -139,6 +139,10 @@ func (b *Base) String() string {
 	return str
 }
 
+func (b *Base) Inspect(ids ...string) string {
+	return inspect(b.p, ids...)
+}
+
 func (b *Base) NoPriority() bool {
 	return b.multi >= config.Comprehensive
 }

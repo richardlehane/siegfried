@@ -80,24 +80,6 @@ func New(opts ...config.Option) (core.Identifier, error) {
 	if err != nil {
 		return nil, err
 	}
-	// if we are inspecting...
-	if config.Inspect() {
-		mi = identifier.Filter(config.Limit(mi.IDs()), mi)
-		is := infos(mi.Infos())
-		sigs, ids, err := mi.Signatures()
-		if err != nil {
-			return nil, fmt.Errorf("MIMEinfo: parsing signatures; got %s", err)
-		}
-		var id string
-		for i, sig := range sigs {
-			if ids[i] != id {
-				id = ids[i]
-				fmt.Printf("%s: \n", is[id].comment)
-			}
-			fmt.Println(sig)
-		}
-		return nil, nil
-	}
 	// add extensions
 	for _, v := range config.Extend() {
 		e, err := newMIMEInfo(v)

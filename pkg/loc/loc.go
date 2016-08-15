@@ -105,6 +105,10 @@ type formatInfo struct {
 	mimeType string
 }
 
+func (f formatInfo) String() string {
+	return f.name
+}
+
 // turn generic FormatInfo into fdd formatInfo
 func infos(m map[string]identifier.FormatInfo) map[string]formatInfo {
 	i := make(map[string]formatInfo, len(m))

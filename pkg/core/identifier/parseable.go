@@ -15,13 +15,17 @@
 package identifier
 
 import (
+	"strings"
+
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/priority"
 )
 
 // FormatInfo is Identifier-specific information to be retained for the Identifier.
-type FormatInfo interface{}
+type FormatInfo interface {
+	String() string
+}
 
 // Parseable is something we can parse to derive filename, MIME, XML and byte signatures.
 type Parseable interface {
@@ -36,6 +40,122 @@ type Parseable interface {
 	RIFFs() ([][4]byte, []string)                                // signature set and corresponding IDs for riffmatcher
 	Texts() []string                                             // IDs for textmatcher
 	Priorities() priority.Map                                    // priority map
+}
+
+// inspect returns string representations of the format signatures within a parseable
+func inspect(p Parseable, ids ...string) string {
+	var (
+		lines                = make([]string, 0, 10)
+		gs, gids             = p.Globs()
+		ms, mids             = p.MIMEs()
+		xs, xids             = p.XMLs()
+		bs, bids, _          = p.Signatures()
+		zns, zbs, zids, _    = p.Zips()
+		msns, msbs, msids, _ = p.MSCFBs()
+		rs, rids             = p.RIFFs()
+		tids                 = p.Texts()
+		pm                   = p.Priorities()
+	)
+	has := func(ss []string, s string) bool {
+		for _, v := range ss {
+			if s == v {
+				return true
+			}
+		}
+		return false
+	}
+	get := func(ss, rs []string, s string) []string {
+		ret := make([]string, 0, len(ss))
+		for i, v := range ss {
+			if s == v {
+				ret = append(ret, rs[i])
+			}
+		}
+		return ret
+	}
+	getX := func(ss []string, rs [][2]string, s string) []string {
+		ret := make([]string, 0, len(ss))
+		for i, v := range ss {
+			if s == v {
+				ret = append(ret, "root: "+rs[i][0]+"; ns: "+rs[i][1])
+			}
+		}
+		return ret
+	}
+	getS := func(ss []string, rs []frames.Signature, s string) []string {
+		ret := make([]string, 0, len(ss))
+		for i, v := range ss {
+			if s == v {
+				ret = append(ret, rs[i].String())
+			}
+		}
+		return ret
+	}
+	getC := func(ss []string, cn [][]string, cb [][]frames.Signature, s string) []string {
+		ret := make([]string, 0, len(ss))
+		for i, v := range ss {
+			if s == v {
+				cret := make([]string, len(cn[i]))
+				for j, n := range cn[i] {
+					cret[j] = n
+					if cb[i][j] != nil {
+						cret[j] += " | " + cb[i][j].String()
+					}
+				}
+				ret = append(ret, strings.Join(cret, "; "))
+			}
+		}
+		return ret
+	}
+	getR := func(ss []string, rs [][4]byte, s string) []string {
+		ret := make([]string, 0, len(ss))
+		for i, v := range ss {
+			if s == v {
+				ret = append(ret, string(rs[i][:]))
+			}
+		}
+		return ret
+	}
+	for _, id := range ids {
+		info, ok := p.Infos()[id]
+		if !ok {
+			lines = append(lines, " >> can't find "+id+" << ")
+			continue
+		}
+		lines = append(lines, " >> "+info.String()+" << ")
+		if has(gids, id) {
+			lines = append(lines, "globs: "+strings.Join(get(gids, gs, id), ", "))
+		}
+		if has(mids, id) {
+			lines = append(lines, "mimes: "+strings.Join(get(mids, ms, id), ", "))
+		}
+		if has(xids, id) {
+			lines = append(lines, "xmls: "+strings.Join(getX(xids, xs, id), ", "))
+		}
+		if has(bids, id) {
+			lines = append(lines, "sigs: "+strings.Join(getS(bids, bs, id), ", "))
+		}
+		if has(zids, id) {
+			lines = append(lines, "zip sigs: "+strings.Join(getC(zids, zns, zbs, id), ", "))
+		}
+		if has(msids, id) {
+			lines = append(lines, "mscfb sigs: "+strings.Join(getC(msids, msns, msbs, id), ", "))
+		}
+		if has(rids, id) {
+			lines = append(lines, "riffs: "+strings.Join(getR(rids, rs, id), ", "))
+		}
+		if has(tids, id) {
+			lines = append(lines, "text signature")
+		}
+		// Priorities
+		ps, ok := pm[id]
+		if ok && len(ps) > 0 {
+			lines = append(lines, "superiors: "+strings.Join(ps, ", "))
+		} else {
+			lines = append(lines, "superiors: none")
+		}
+	}
+	return strings.Join(lines, "\n")
 }
 
 // Blank parseable can be embedded within other parseables in order to include default nil implementations of the interface

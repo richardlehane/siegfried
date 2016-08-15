@@ -87,28 +87,6 @@ func (p *pronom) setParseables() error {
 	if err != nil {
 		return fmt.Errorf("Pronom: error loading Droid file; got %s\nYou must have a Droid file to build a signature", err)
 	}
-	// if we are just inspecting a single report file
-	if config.Inspect() {
-		r, err := newReports(config.Limit(d.IDs()), nil)
-		if err != nil {
-			return fmt.Errorf("Pronom: error loading reports; got %s\nYou must download PRONOM reports to build a signature (unless you use the -noreports flag). You can use `roy harvest` to download reports", err)
-		}
-		is := infos(r.Infos())
-		sigs, puids, err := r.Signatures()
-		if err != nil {
-			return fmt.Errorf("Pronom: parsing signatures; got %s", err)
-		}
-		var puid string
-		for i, sig := range sigs {
-			if puids[i] != puid {
-				puid = puids[i]
-				fmt.Printf("%s: \n", is[puid].name)
-			}
-			fmt.Println(sig)
-		}
-		p.Parseable = r
-		return nil
-	}
 	// apply limit or exclude filters (only one can be applied)
 	puids := d.IDs()
 	if config.HasLimit() {

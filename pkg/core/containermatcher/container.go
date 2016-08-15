@@ -253,8 +253,6 @@ type cTest struct {
 	bm          core.Matcher       // bytematcher
 }
 
-//map[string]*CTest
-
 func loadCTests(ls *persist.LoadSaver) map[string]*cTest {
 	ret := make(map[string]*cTest)
 	l := ls.LoadSmallInt()

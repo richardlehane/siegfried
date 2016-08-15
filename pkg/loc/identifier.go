@@ -69,24 +69,6 @@ func New(opts ...config.Option) (core.Identifier, error) {
 	if err != nil {
 		return nil, err
 	}
-	// if we are inspecting...
-	if config.Inspect() {
-		loc = identifier.Filter(config.Limit(loc.IDs()), loc)
-		is := infos(loc.Infos())
-		sigs, ids, err := loc.Signatures()
-		if err != nil {
-			return nil, fmt.Errorf("LOC: parsing signatures; got %s", err)
-		}
-		var id string
-		for i, sig := range sigs {
-			if ids[i] != id {
-				id = ids[i]
-				fmt.Printf("%s: \n", is[id].name)
-			}
-			fmt.Println(sig)
-		}
-		return nil, nil
-	}
 	// set updated
 	updated := loc.(fdds).Updated().Format(dateFmt)
 	// add extensions

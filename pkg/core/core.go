@@ -32,7 +32,8 @@ type Identifier interface {
 	Details() string
 	Fields() []string // first element must be the identifier name
 	Save(*persist.LoadSaver)
-	String() string
+	String() string                            // A string represention of the global identifier
+	Inspect(...string) string                  // String representation of format signatures within the identifier
 	Recognise(MatcherType, int) (bool, string) // do you recognise this result index?
 }
 
