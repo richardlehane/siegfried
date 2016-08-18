@@ -135,7 +135,7 @@ func inspectFmt(f string) error {
 	} else if strings.HasPrefix(f, "fdd") {
 		id, err = loc.New(config.SetLOC(""))
 	} else {
-		id, err = pronom.New()
+		id, err = pronom.New(config.SetNoReports())
 	}
 	if err != nil {
 		return err
