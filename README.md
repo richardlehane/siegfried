@@ -8,7 +8,7 @@
 
 ### Version
 
-1.6.2
+1.6.3
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -79,12 +79,13 @@ Or, for the most recent updates, you can install from this fork:
 
 
 ## Changes 
-### v1.6.2 (2016-08-08)
+### v1.6.3 (2016-08-18)
+### Added
+- roy inspect FMT command now gives details of all signatures, [including container signatures](https://github.com/richardlehane/siegfried/issues/88)
+
 ### Fixed
-- poor performance unknowns due to interaction of -bof/-eof flags with known BOF/EOF calculation; reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/86)
-- [unnecessary warnings for mimeinfo identifier](https://github.com/richardlehane/siegfried/issues/84)
-- add fddXML.zip to .gitattributes to preserve newlines
-- various [Go Report Card](https://goreportcard.com/report/github.com/richardlehane/siegfried) issues
+- misidentification: [x-fmt/45 files misidentified as fmt/40](https://github.com/richardlehane/siegfried/issues/89) due to repetition of elements in container file
+- roy build -noreports includes blank extensions that generate false matches; reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/87)
 
 [Change Log](https://github.com/richardlehane/siegfried/blob/master/CHANGELOG.md)
 

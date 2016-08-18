@@ -1,16 +1,16 @@
 hash: 2faaea615e9a8a21cbbdece66726b50773b898784ebb3c0d0dea5271ed682e71
-updated: 2016-08-08T23:07:55.470906938+10:00
+updated: 2016-08-18T21:25:01.213892453+10:00
 imports:
 - name: github.com/richardlehane/characterize
   version: 65c3af3b37223a3694e454f8ccd2bfe37f0a3ec0
 - name: github.com/richardlehane/match
-  version: d5ba1f35f795d8293cda5aeada0d36a2b1f4faa7
+  version: 5a1e4b22375cd71894aff9f07d3c04042480ae2a
   subpackages:
   - wac
 - name: github.com/richardlehane/mscfb
-  version: 31f08312a17a314d13ffd28ae8a51885d2cc19b0
+  version: e6200048a572183cd2743c492bf4c082ae41bebd
 - name: github.com/richardlehane/msoleps
-  version: 4cd1b2f6d92e7c429fcedeff31a40bc0532ed96c
+  version: 9c861828737207430037b6e1b313798518c97831
   subpackages:
   - types
 - name: github.com/richardlehane/webarchive
@@ -26,7 +26,7 @@ imports:
   subpackages:
   - unix
 - name: golang.org/x/text
-  version: 2910a502d2bf9e43193af9d68ca516529614eed3
+  version: d69c40b4be55797923cec7457fac7a244d91a9b6
   subpackages:
   - encoding/charmap
   - encoding

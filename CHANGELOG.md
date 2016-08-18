@@ -1,5 +1,5 @@
 # Change Log
-## v1.6.3 (2016-08-20)
+## v1.6.3 (2016-08-18)
 ### Added
 - roy inspect FMT command now gives details of all signatures, [including container signatures](https://github.com/richardlehane/siegfried/issues/88)
 
