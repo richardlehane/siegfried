@@ -67,6 +67,10 @@ Download a pre-built binary from the [releases page](https://github.com/richardl
 
     brew install mistydemeo/digipres/siegfried
 
+Or, for the most recent updates, you can install from this fork:
+
+    brew install richardlehane/digipres/siegfried
+
 #### Ubuntu/Debian (64 bit):
 
     wget -qO - https://bintray.com/user/downloadSubjectPublicKey?username=bintray | sudo apt-key add -

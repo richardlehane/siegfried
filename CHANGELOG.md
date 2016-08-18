@@ -1,6 +1,10 @@
 # Change Log
-## v1.6.3 (2016-XX-XX)
+## v1.6.3 (2016-08-20)
+### Added
+- roy inspect FMT command now gives details of all signatures, [including container signatures](https://github.com/richardlehane/siegfried/issues/88)
+
 ### Fixed
+- misidentification: [x-fmt/45 files misidentified as fmt/40](https://github.com/richardlehane/siegfried/issues/89) due to repetition of elements in container file
 - roy build -noreports includes blank extensions that generate false matches; reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/87)
 
 ## v1.6.2 (2016-08-08)
