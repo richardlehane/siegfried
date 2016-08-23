@@ -1,5 +1,8 @@
 # Change Log
 ## v1.6.4 (2016-XX-XX)
+### Fixed
+- [container matcher running when empty](https://github.com/richardlehane/siegfried/issues/90) (i.e. for freedesktop/tika signature files and when -nocontainer flag used with PRONOM)
+
 ### Changed
 - roy inspect FMT command speed up by building without reports
 
