@@ -55,6 +55,10 @@ func Save(c core.Matcher, ls *persist.LoadSaver) {
 		return
 	}
 	m := c.(Matcher)
+	if m.total(-1) == 0 {
+		ls.SaveBool(false)
+		return
+	}
 	ls.SaveBool(true)
 	ls.SaveTinyUInt(len(m))
 	for _, v := range m {
@@ -86,7 +90,7 @@ func Add(c core.Matcher, ss core.SignatureSet, l priority.List) (core.Matcher, i
 	return m, m.total(-1), nil
 }
 
-// calculate total number of persists present in the matcher. Provide -1 to get the total sum, or supply an index of an individual matcher to exclude that matcher's total
+// calculate total number of signatures present in the matcher. Provide -1 to get the total sum, or supply an index of an individual matcher to exclude that matcher's total
 func (m Matcher) total(i int) int {
 	var t int
 	for j, v := range m {
@@ -139,7 +143,7 @@ type ContainerMatcher struct {
 	startIndexes []int //  added to hits - these place all container matches in a single slice
 	conType      containerType
 	nameCTest    map[string]*cTest
-	parts        []int // corresponds with each persist: represents the number of CTests for each sig
+	parts        []int // corresponds with each signature: represents the number of CTests for each sig
 	priorities   *priority.Set
 	extension    string
 	entryBufs    *siegreader.Buffers
