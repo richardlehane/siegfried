@@ -87,17 +87,18 @@ func (p *pronom) setParseables() error {
 	if err != nil {
 		return fmt.Errorf("Pronom: error loading Droid file; got %s\nYou must have a Droid file to build a signature", err)
 	}
-	// apply limit or exclude filters (only one can be applied)
-	puids := d.IDs()
-	if config.HasLimit() {
-		puids = config.Limit(puids)
-	} else if config.HasExclude() {
-		puids = config.Exclude(puids)
-	}
+
 	// if noreports set
 	if config.Reports() == "" {
 		p.Parseable = d
 	} else { // otherwise build from reports
+		// get list of puids that applies limit or exclude filters (actual filtering of Parseable delegated to core/identifier)
+		puids := d.IDs()
+		if config.HasLimit() {
+			puids = config.Limit(puids)
+		} else if config.HasExclude() {
+			puids = config.Exclude(puids)
+		}
 		r, err := newReports(puids, d.idsPuids())
 		if err != nil {
 			return fmt.Errorf("Pronom: error loading reports; got %s\nYou must download PRONOM reports to build a signature (unless you use the -noreports flag). You can use `roy harvest` to download reports", err)
@@ -115,7 +116,7 @@ func (p *pronom) setParseables() error {
 	// exclude byte signatures where also have container signatures, unless doubleup set
 	if !config.DoubleUp() {
 		p.Parseable = doublesFilter{
-			config.ExcludeDoubles(puids, p.c.IDs()),
+			config.ExcludeDoubles(p.IDs(), p.c.IDs()),
 			p.Parseable,
 		}
 	}

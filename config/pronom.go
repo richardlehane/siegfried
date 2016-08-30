@@ -29,7 +29,6 @@ var pronom = struct {
 	droid            string   // name of droid file e.g. DROID_SignatureFile_V78.xml
 	container        string   // e.g. container-signature-19770502.xml
 	reports          string   // directory where PRONOM reports are stored
-	noreports        bool     // build signature directly from DROID file rather than PRONOM reports
 	doubleup         bool     // include byte signatures for formats that also have container signatures
 	extendc          []string //container extensions
 	harvestURL       string
@@ -156,13 +155,10 @@ func latest(prefix, suffix string) (string, error) {
 
 // Reports returns the location of the PRONOM reports directory.
 func Reports() string {
-	if pronom.noreports || pronom.reports == "" {
+	if pronom.reports == "" {
 		return ""
 	}
-	if filepath.Dir(pronom.reports) == "." {
-		return filepath.Join(siegfried.home, pronom.reports)
-	}
-	return pronom.reports
+	return filepath.Join(siegfried.home, pronom.reports)
 }
 
 // DoubleUp reports whether the doubleup flag has been set. This will cause byte signatures to be built for formats where container signatures are also provided.
@@ -215,18 +211,10 @@ func SetContainer(c string) func() private {
 	}
 }
 
-// SetReports sets the location of the PRONOM reports directory.
-func SetReports(r string) func() private {
-	return func() private {
-		pronom.reports = r
-		return private{}
-	}
-}
-
 // SetNoReports instructs roy to build from the DROID signature file alone (and not from the PRONOM reports).
 func SetNoReports() func() private {
 	return func() private {
-		pronom.noreports = true
+		pronom.reports = ""
 		return private{}
 	}
 }

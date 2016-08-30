@@ -41,7 +41,6 @@ var (
 	locfdd      = build.Bool("loc", false, "build a LOC FDD signature file")
 	nopronom    = build.Bool("nopronom", false, "don't include PRONOM sigs with LOC signature file")
 	container   = build.String("container", config.Container(), "set name/path for Droid Container signature file")
-	reports     = build.String("reports", config.Reports(), "set path for PRONOM reports directory")
 	name        = build.String("name", "", "set identifier name")
 	details     = build.String("details", config.Details(), "set identifier details")
 	extend      = build.String("extend", "", "comma separated list of additional signatures")
@@ -68,15 +67,16 @@ var (
 	harvest           = flag.NewFlagSet("harvest", flag.ExitOnError)
 	harvestHome       = harvest.String("home", config.Home(), "override the default home directory")
 	harvestDroid      = harvest.String("droid", config.Droid(), "set name/path for DROID signature file")
-	harvestReports    = harvest.String("reports", config.Reports(), "set path for PRONOM reports directory")
 	_, htimeout, _, _ = config.HarvestOptions()
 	timeout           = harvest.Duration("timeout", htimeout, "set duration before timing-out harvesting requests e.g. 120s")
 	throttlef         = harvest.Duration("throttle", 0, "set a time to wait HTTP requests e.g. 50ms")
 
-	// INSPECT (roy inspect | roy inspect fmt/121 | roy inspect usr/local/mysig.gob | roy inspect 10)
+	// INSPECT (roy inspect | roy inspect fmt/121 | roy inspect usr/local/mysig.sig | roy inspect 10)
 	inspect        = flag.NewFlagSet("inspect", flag.ExitOnError)
 	inspectHome    = inspect.String("home", config.Home(), "override the default home directory")
-	inspectReports = inspect.String("reports", config.Reports(), "set path for PRONOM reports directory")
+	inspectReports = inspect.Bool("reports", false, "build signatures from PRONOM reports (rather than DROID xml)")
+	inspectExtend  = inspect.String("extend", "", "comma separated list of additional signatures")
+	inspectExtendc = inspect.String("extendc", "", "comma separated list of additional container signatures")
 	inspectMI      = inspect.String("mi", "", "set name/path for MIMEInfo signature file")
 	inspectCType   = inspect.Int("ct", 0, "provide container type to inspect container hits")
 	inspectCName   = inspect.String("cn", "", "provide container name to inspect container hits")
@@ -119,6 +119,9 @@ func makegob(s *siegfried.Siegfried, opts []config.Option) error {
 }
 
 func inspectSig(t core.MatcherType) error {
+	if *inspectHome != config.Home() {
+		config.SetHome(*inspectHome)
+	}
 	s, err := siegfried.Load(config.Signature())
 	if err != nil {
 		return err
@@ -134,12 +137,17 @@ func inspectFmt(f string) error {
 	if len(fs) == 0 {
 		return fmt.Errorf("no valid fmt to inspect in %s", f)
 	}
+	opts := getOptions()
 	if *inspectMI != "" {
-		id, err = mimeinfo.New(config.SetMIMEInfo(*inspectMI))
+		id, err = mimeinfo.New(opts...)
 	} else if strings.HasPrefix(fs[0], "fdd") {
-		id, err = loc.New(config.SetLOC(""))
+		opts = append(opts, config.SetLOC(""))
+		id, err = loc.New(opts...)
 	} else {
-		id, err = pronom.New(config.SetNoReports())
+		if !*inspectReports {
+			opts = append(opts, config.SetNoReports())
+		}
+		id, err = pronom.New(opts...)
 	}
 	if err != nil {
 		return err
@@ -149,6 +157,9 @@ func inspectFmt(f string) error {
 }
 
 func blameSig(i int) error {
+	if *inspectHome != config.Home() {
+		config.SetHome(*inspectHome)
+	}
 	s, err := siegfried.Load(config.Signature())
 	if err != nil {
 		return err
@@ -157,19 +168,20 @@ func blameSig(i int) error {
 	return nil
 }
 
-func buildOptions() []config.Option {
+func getOptions() []config.Option {
 	if *home != config.Home() {
 		config.SetHome(*home)
 	}
+	if *inspectHome != config.Home() {
+		config.SetHome(*inspectHome)
+	}
 	opts := []config.Option{}
+	// build options
 	if *droid != config.Droid() {
 		opts = append(opts, config.SetDroid(*droid))
 	}
 	if *container != config.Container() {
 		opts = append(opts, config.SetContainer(*container))
-	}
-	if *reports != config.Reports() {
-		opts = append(opts, config.SetReports(*reports))
 	}
 	if *mi != "" {
 		opts = append(opts, config.SetMIMEInfo(*mi))
@@ -197,7 +209,7 @@ func buildOptions() []config.Option {
 			fmt.Println(
 				`roy: warning! Unless the container extension only extends formats defined in 
 the DROID signature file you should also include a regular signature extension 
-(-extend) that includes a FileFormatCollection element defining the new formats.`)
+(-extend) that includes a FileFormatCollection element describing the new formats.`)
 		}
 		opts = append(opts, config.SetExtendC(expandSets(*extendc)))
 	}
@@ -252,6 +264,22 @@ the DROID signature file you should also include a regular signature extension
 	if *choices != config.Choices() {
 		opts = append(opts, config.SetChoices(*choices))
 	}
+	// inspect options
+	if *inspectMI != "" {
+		opts = append(opts, config.SetMIMEInfo(*inspectMI))
+	}
+	if *inspectExtend != "" {
+		opts = append(opts, config.SetExtend(expandSets(*inspectExtend)))
+	}
+	if *inspectExtendc != "" {
+		if *inspectExtend == "" {
+			fmt.Println(
+				`roy: warning! Unless the container extension only extends formats defined in 
+the DROID signature file you should also include a regular signature extension 
+(-extend) that includes a FileFormatCollection element describing the new formats.`)
+		}
+		opts = append(opts, config.SetExtendC(expandSets(*inspectExtendc)))
+	}
 	return opts
 }
 
@@ -262,23 +290,11 @@ func setHarvestOptions() {
 	if *harvestDroid != config.Droid() {
 		config.SetDroid(*harvestDroid)()
 	}
-	if *harvestReports != config.Reports() {
-		config.SetReports(*harvestReports)()
-	}
 	if *timeout != htimeout {
 		config.SetHarvestTimeout(*timeout)
 	}
 	if *throttlef > 0 {
 		config.SetHarvestThrottle(*throttlef)
-	}
-}
-
-func setInspectOptions() {
-	if *inspectHome != config.Home() {
-		config.SetHome(*inspectHome)
-	}
-	if *inspectReports != config.Reports() {
-		config.SetReports(*inspectReports)()
 	}
 }
 
@@ -304,7 +320,7 @@ func main() {
 				config.SetSignature(build.Arg(0))
 			}
 			s := siegfried.New()
-			err = makegob(s, buildOptions())
+			err = makegob(s, getOptions())
 		}
 	case "add":
 		err = build.Parse(os.Args[2:])
@@ -315,7 +331,7 @@ func main() {
 			var s *siegfried.Siegfried
 			s, err = siegfried.Load(config.Signature())
 			if err == nil {
-				err = makegob(s, buildOptions())
+				err = makegob(s, getOptions())
 			}
 		}
 	case "harvest":
@@ -327,7 +343,6 @@ func main() {
 	case "inspect":
 		err = inspect.Parse(os.Args[2:])
 		if err == nil {
-			setInspectOptions()
 			input := inspect.Arg(0)
 			switch {
 			case input == "":
@@ -350,10 +365,11 @@ func main() {
 			default:
 				var i int
 				i, err = strconv.Atoi(input)
-				if err != nil {
-					log.Fatal(err)
+				if err == nil {
+					err = blameSig(i)
+				} else {
+					err = inspectFmt(input)
 				}
-				err = blameSig(i)
 			}
 		}
 	default:

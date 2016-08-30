@@ -113,7 +113,7 @@ func Details(extra ...string) string {
 	if identifier.noRIFF {
 		str += "; no RIFF matcher"
 	}
-	if pronom.noreports {
+	if pronom.reports == "" {
 		str += "; built without reports"
 	}
 	if pronom.doubleup {

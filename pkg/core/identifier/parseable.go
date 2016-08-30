@@ -236,7 +236,7 @@ func (j joint) XMLs() ([][2]string, []string) {
 	return append(a, c...), append(b, d...)
 }
 
-// Signatures returns a signature set with corresponding IDs and weights for the bytematcher.
+// Signatures returns a signature set with corresponding IDs for the bytematcher.
 func (j joint) Signatures() ([]frames.Signature, []string, error) {
 	s, p, err := j.a.Signatures()
 	if err != nil {
