@@ -61,3 +61,10 @@ func TestMirror(t *testing.T) {
 		t.Errorf("Mirror fail: got %v", mirror)
 	}
 }
+
+func TestMirror704(t *testing.T) {
+	mirror := TestFmts[704].Mirror()
+	if !mirror.Equals(TestFmts[704]) {
+		t.Errorf("Expecting a reverse of fmt/704, got %v", mirror)
+	}
+}

@@ -84,6 +84,14 @@ var TestFmts = map[int]Signature{
 		},
 		},
 	},
+	704: Signature{
+		Fixed{BOF, 0, patterns.Sequence("RIFF")},
+		Fixed{PREV, 4, patterns.Sequence("WAVE")},
+		Wild{PREV, patterns.Sequence("fmt ")},
+		Fixed{PREV, 4, patterns.Sequence{1, 0}},
+		Wild{PREV, patterns.Sequence("bext")},
+		Fixed{PREV, 350, patterns.Sequence{1, 0}},
+	},
 }
 
 // TestSignatures are exported so they can be used by the other bytematcher packages.

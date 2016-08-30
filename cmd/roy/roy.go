@@ -130,9 +130,13 @@ func inspectSig(t core.MatcherType) error {
 func inspectFmt(f string) error {
 	var id core.Identifier
 	var err error
+	fs := expandSets(f)
+	if len(fs) == 0 {
+		return fmt.Errorf("no valid fmt to inspect in %s", f)
+	}
 	if *inspectMI != "" {
 		id, err = mimeinfo.New(config.SetMIMEInfo(*inspectMI))
-	} else if strings.HasPrefix(f, "fdd") {
+	} else if strings.HasPrefix(fs[0], "fdd") {
 		id, err = loc.New(config.SetLOC(""))
 	} else {
 		id, err = pronom.New(config.SetNoReports())
@@ -140,7 +144,7 @@ func inspectFmt(f string) error {
 	if err != nil {
 		return err
 	}
-	fmt.Println(id.Inspect(expandSets(f)...))
+	fmt.Println(id.Inspect(fs...))
 	return nil
 }
 
@@ -341,7 +345,7 @@ func main() {
 			case filepath.Ext(input) == ".sig":
 				config.SetSignature(input)
 				err = inspectSig(-1)
-			case strings.Contains(input, "fmt"), *inspectMI != "", strings.HasPrefix(input, "fdd"):
+			case strings.Contains(input, "fmt"), *inspectMI != "", strings.HasPrefix(input, "fdd"), strings.HasPrefix(input, "@"):
 				err = inspectFmt(input)
 			default:
 				var i int
