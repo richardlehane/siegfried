@@ -34,6 +34,7 @@ type Identifier interface {
 	Save(*persist.LoadSaver)
 	String() string                            // A string represention of the global identifier
 	Inspect(...string) string                  // String representation of format signatures within the identifier
+	GraphP() string                            // a dot graph representation of the priority map within the identifier (if present)
 	Recognise(MatcherType, int) (bool, string) // do you recognise this result index?
 }
 

@@ -518,24 +518,42 @@ func (s *Siegfried) Update(t string) bool {
 func (s *Siegfried) Inspect(t core.MatcherType) string {
 	switch t {
 	case core.ByteMatcher:
-		return s.bm.String()
+		if s.bm != nil {
+			return s.bm.String()
+		}
 	case core.NameMatcher:
-		return s.nm.String()
+		if s.nm != nil {
+			return s.nm.String()
+		}
 	case core.MIMEMatcher:
-		return s.mm.String()
+		if s.mm != nil {
+			return s.mm.String()
+		}
 	case core.ContainerMatcher:
-		return s.cm.String()
+		if s.cm != nil {
+			return s.cm.String()
+		}
 	case core.RIFFMatcher:
-		return s.rm.String()
+		if s.rm != nil {
+			return s.rm.String()
+		}
+	case core.TextMatcher:
+		if s.tm != nil {
+			return s.tm.String()
+		}
+	case core.XMLMatcher:
+		if s.xm != nil {
+			return s.xm.String()
+		}
+	default:
+		return fmt.Sprintf("Identifiers\n%s",
+			func() string {
+				var str string
+				for _, i := range s.ids {
+					str += i.String()
+				}
+				return str
+			}())
 	}
-	return fmt.Sprintf("Identifiers\n%s\nByte Matcher\n%sText Matcher\n%s",
-		func() string {
-			var str string
-			for _, i := range s.ids {
-				str += i.String()
-			}
-			return str
-		}(),
-		s.bm.String(),
-		s.tm.String())
+	return "matcher not present in this signature"
 }

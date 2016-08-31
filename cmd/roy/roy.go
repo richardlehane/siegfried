@@ -77,7 +77,11 @@ var (
 	inspectReports = inspect.Bool("reports", false, "build signatures from PRONOM reports (rather than DROID xml)")
 	inspectExtend  = inspect.String("extend", "", "comma separated list of additional signatures")
 	inspectExtendc = inspect.String("extendc", "", "comma separated list of additional container signatures")
-	inspectMI      = inspect.String("mi", "", "set name/path for MIMEInfo signature file")
+	inspectInclude = inspect.String("limit", "", "when inspecting priorities, comma separated list of PRONOM signatures to include")
+	inspectExclude = inspect.String("exclude", "", "when inspecting priorities, comma separated list of PRONOM signatures to exclude")
+	inspectMI      = inspect.String("mi", "", "set name/path for MIMEInfo signature file to inspect")
+	inspectFDD     = inspect.String("fdd", "", "set name/path for LOC FDD signature file to inspect")
+	inspectLOC     = inspect.Bool("loc", false, "inspect a LOC FDD signature file")
 	inspectCType   = inspect.Int("ct", 0, "provide container type to inspect container hits")
 	inspectCName   = inspect.String("cn", "", "provide container name to inspect container hits")
 )
@@ -137,15 +141,17 @@ func inspectFmt(f string) error {
 	if len(fs) == 0 {
 		return fmt.Errorf("no valid fmt to inspect in %s", f)
 	}
-	opts := getOptions()
+	opts := append(getOptions(), config.SetDoubleUp()) // speed up by allowing sig double ups
 	if *inspectMI != "" {
 		id, err = mimeinfo.New(opts...)
-	} else if strings.HasPrefix(fs[0], "fdd") {
-		opts = append(opts, config.SetLOC(""))
+	} else if strings.HasPrefix(fs[0], "fdd") || *inspectLOC || (*inspectFDD != "") {
+		if *inspectFDD == "" && !*inspectLOC {
+			opts = append(opts, config.SetLOC(""))
+		}
 		id, err = loc.New(opts...)
 	} else {
 		if !*inspectReports {
-			opts = append(opts, config.SetNoReports())
+			opts = append(opts, config.SetNoReports()) // speed up by building from droid xml
 		}
 		id, err = pronom.New(opts...)
 	}
@@ -153,6 +159,27 @@ func inspectFmt(f string) error {
 		return err
 	}
 	fmt.Println(id.Inspect(fs...))
+	return nil
+}
+
+func graphPriorities() error {
+	var id core.Identifier
+	var err error
+	opts := append(getOptions(), config.SetDoubleUp()) // speed up by allowing sig double ups
+	if *inspectMI != "" {
+		id, err = mimeinfo.New(opts...)
+	} else if *inspectLOC || (*inspectFDD != "") {
+		id, err = loc.New(opts...)
+	} else {
+		if !*inspectReports {
+			opts = append(opts, config.SetNoReports()) // speed up by building from droid xml
+		}
+		id, err = pronom.New(opts...)
+	}
+	if err != nil {
+		return err
+	}
+	fmt.Println(id.GraphP())
 	return nil
 }
 
@@ -268,6 +295,18 @@ the DROID signature file you should also include a regular signature extension
 	if *inspectMI != "" {
 		opts = append(opts, config.SetMIMEInfo(*inspectMI))
 	}
+	if *inspectFDD != "" {
+		opts = append(opts, config.SetLOC(*fdd))
+	}
+	if *inspectLOC {
+		opts = append(opts, config.SetLOC(""))
+	}
+	if *inspectInclude != "" {
+		opts = append(opts, config.SetLimit(expandSets(*inspectInclude)))
+	}
+	if *inspectExclude != "" {
+		opts = append(opts, config.SetExclude(expandSets(*inspectExclude)))
+	}
 	if *inspectExtend != "" {
 		opts = append(opts, config.SetExtend(expandSets(*inspectExtend)))
 	}
@@ -357,6 +396,12 @@ func main() {
 				err = inspectSig(core.MIMEMatcher)
 			case input == "riffmatcher", input == "rm":
 				err = inspectSig(core.RIFFMatcher)
+			case input == "xmlmatcher", input == "xm":
+				err = inspectSig(core.XMLMatcher)
+			case input == "textmatcher", input == "tm":
+				err = inspectSig(core.TextMatcher)
+			case input == "priorities", input == "p":
+				err = graphPriorities()
 			case filepath.Ext(input) == ".sig":
 				config.SetSignature(input)
 				err = inspectSig(-1)

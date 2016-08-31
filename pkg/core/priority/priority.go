@@ -28,6 +28,16 @@ import (
 // a priority map links subordinate results to a list of priority results
 type Map map[string][]string
 
+func (m Map) Elements() [][2]string {
+	elements := make([][2]string, 0, len(m)*3)
+	for k, v := range m {
+		for _, sup := range v {
+			elements = append(elements, [2]string{k, sup})
+		}
+	}
+	return elements
+}
+
 func containsStr(ss []string, s string) bool {
 	for _, v := range ss {
 		if v == s {

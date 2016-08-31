@@ -5,10 +5,10 @@
 
 ### Fixed
 - [container matcher running when empty](https://github.com/richardlehane/siegfried/issues/90) (i.e. for freedesktop/tika signature files and when -nocontainer flag used with PRONOM)
-- [-doubleup flag preventing signature extensions loading](https://github.com/richardlehane/siegfried/issues/92) - since v1.3.0 signature extensions included with the -extend flag haven't been loading properly due to interaction with the doubles filter (which prevents byte signatures loading for formats that also have container signatures defined)
+- [-doubleup flag preventing signature extensions loading](https://github.com/richardlehane/siegfried/issues/92): since v1.3.0 signature extensions included with the -extend flag haven't been loading properly due to interaction with the doubles filter (which prevents byte signatures loading for formats that also have container signatures defined)
 
 ### Changed
-- roy inspect FMT command speed up by building without reports
+- roy inspect FMT command speed up by building without reports and without the doubles filter
 - -reports flag removed for roy harvest and roy build commands
 - -reports flag changed for roy inspect command, now a boolean that, if set, will cause the signature(s) to be built from the PRONOM report(s), rather than the DROID XML file. This is slower but can be a more accurate representation.
 

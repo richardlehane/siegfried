@@ -16,6 +16,7 @@ package identifier
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core"
@@ -141,6 +142,20 @@ func (b *Base) String() string {
 
 func (b *Base) Inspect(ids ...string) string {
 	return inspect(b.p, ids...)
+}
+
+func (b *Base) GraphP() string {
+	p := b.p.Priorities()
+	if p == nil {
+		return "no priorities set"
+	}
+	infos := b.p.Infos()
+	elements := p.Elements()
+	lines := make([]string, len(elements))
+	for i, v := range elements {
+		lines[i] = fmt.Sprintf("\"%s (%s)\" -> \"%s (%s)\"", infos[v[0]].String(), v[0], infos[v[1]].String(), v[1])
+	}
+	return "digraph {\n  " + strings.Join(lines, "\n  ") + "\n}"
 }
 
 func (b *Base) NoPriority() bool {
