@@ -3,7 +3,7 @@ package bytematcher
 import (
 	"testing"
 
-	"github.com/richardlehane/match/wac"
+	wac "github.com/richardlehane/match/fwac"
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames/tests"
 	"github.com/richardlehane/siegfried/pkg/core/persist"

@@ -17,7 +17,7 @@ package bytematcher
 import (
 	"bytes"
 
-	"github.com/richardlehane/match/wac"
+	wac "github.com/richardlehane/match/fwac"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/persist"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"

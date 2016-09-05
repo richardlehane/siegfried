@@ -19,7 +19,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/richardlehane/match/wac"
+	wac "github.com/richardlehane/match/fwac"
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/core/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/core/persist"
@@ -43,8 +43,8 @@ type Matcher struct {
 	priorities *priority.Set
 	// remaining fields are not persisted
 	mu     *sync.Mutex
-	bAho   *wac.Wac
-	eAho   *wac.Wac
+	bAho   wac.Wac
+	eAho   wac.Wac
 	lowmem bool
 }
 
