@@ -189,11 +189,10 @@ func BenchmarkNew(b *testing.B) {
 func BenchmarkIndex(b *testing.B) {
 	b.StopTimer()
 	ac := New([]Seq{seq("handle"), seq("handl"), seq("hand"), seq("han"), seq("ha"), seq("a")})
-	input := bytes.NewBuffer([]byte("The pot had a handle"))
+	reader := bytes.NewBuffer([]byte("The pot had a handle"))
 	b.StartTimer()
 	for i := 0; i < b.N; i++ {
-		r := ac.Index(input)
-		for _ = range r {
+		for _ = range ac.Index(reader) {
 		}
 	}
 }
@@ -231,8 +230,9 @@ func BenchmarkMatchingNoMatch(b *testing.B) {
 		seq("abababb"),
 		seq("abababababq")})
 	b.StartTimer()
-	r := ac.Index(reader)
-	for _ = range r {
+	for i := 0; i < b.N; i++ {
+		for _ = range ac.Index(reader) {
+		}
 	}
 }
 
@@ -244,8 +244,9 @@ func BenchmarkMatchingManyMatches(b *testing.B) {
 		seq("ababab"),
 		seq("ababababab")})
 	b.StartTimer()
-	r := ac.Index(reader)
-	for _ = range r {
+	for i := 0; i < b.N; i++ {
+		for _ = range ac.Index(reader) {
+		}
 	}
 }
 
@@ -256,8 +257,9 @@ func BenchmarkMatchingHardTree(b *testing.B) {
 		seq("abababb"),
 		seq("abababababq")})
 	b.StartTimer()
-	r := ac.Index(reader)
-	for _ = range r {
+	for i := 0; i < b.N; i++ {
+		for _ = range ac.Index(reader) {
+		}
 	}
 }
 
