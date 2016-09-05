@@ -8,7 +8,7 @@
 
 ### Version
 
-1.6.3
+1.6.4
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -79,15 +79,20 @@ Or, for the most recent updates, you can install from this fork:
 
 
 ## Changes 
-### v1.6.3 (2016-08-18)
+### v1.6.4 (2016-09-05)
 ### Added
-- roy inspect FMT command now gives details of all signatures, [including container signatures](https://github.com/richardlehane/siegfried/issues/88)
+- roy inspect FMT command now inspects sets e.g. roy inspect @pdfa
+- roy inspect priorities command generates graphs of priority relations
 
 ### Fixed
-- misidentification: [x-fmt/45 files misidentified as fmt/40](https://github.com/richardlehane/siegfried/issues/89) due to repetition of elements in container file
-- roy build -noreports includes blank extensions that generate false matches; reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/87)
+- [container matcher running when empty](https://github.com/richardlehane/siegfried/issues/90) (i.e. for freedesktop/tika signature files and when -nocontainer flag used with PRONOM)
+- [-doubleup flag preventing signature extensions loading](https://github.com/richardlehane/siegfried/issues/92): since v1.3.0 signature extensions included with the -extend flag haven't been loading properly due to interaction with the doubles filter (which prevents byte signatures loading for formats that also have container signatures defined)
 
-[Change Log](https://github.com/richardlehane/siegfried/blob/master/CHANGELOG.md)
+### Changed
+- use fwac rather than wac package for performance
+- roy inspect FMT command speed up by building without reports and without the doubles filter
+- -reports flag removed for roy harvest and roy build commands
+- -reports flag changed for roy inspect command, now a boolean that, if set, will cause the signature(s) to be built from the PRONOM report(s), rather than the DROID XML file. This is slower but can be a more accurate representation.
 
 ## Rights
 
