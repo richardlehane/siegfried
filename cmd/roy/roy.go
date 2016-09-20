@@ -44,29 +44,29 @@ Usage of inspect:
    roy inspect
       Inspect the default signature file.
    roy inspect SIGNATURE 
-      Inspect a named signature file. E.g. roy inspect archivematica.sig
+      Inspect a named signature file e.g. roy inspect archivematica.sig
    roy inspect MATCHER
-      Inspect  contents of a matcher. E.g. roy inspect bytematcher.
-      Short aliases work too e.g. roy inspect bm.
+      Inspect  contents of a matcher e.g. roy inspect bytematcher.
+      Short aliases work too e.g. roy inspect bm
       Current matchers are bytematcher (or bm), containermatcher (cm),
       xmlmatcher (xm), riffmatcher (rm), namematcher (nm), textmatcher (tm).
    roy inspect INTEGER
       Identify the signatures related to the numerical hits reported by the 
-      sf debug and slow flags (sf -log d,s). E.g. roy inspect 100.
+      sf debug and slow flags (sf -log d,s). E.g. roy inspect 100
       To inspect hits within containermatchers, give the index for the
       container type with the -ct flag, and the name of the container 
       sub-folder with the -cn flag.
       The container types are 0 for XML and 1 for MSCFB.
-      E.g. roy inspect -ct 0 -cn [Content_Types].xml 0.
+      E.g. roy inspect -ct 0 -cn [Content_Types].xml 0
    roy inspect FMT
-      Inspect a file format signature. E.g. roy inspect fmt/40.
+      Inspect a file format signature e.g. roy inspect fmt/40
       MIME-info and LOC FDD file format signatures can be inspected too. 
       Also accepts comma separated lists of formats or format sets.
-      E.g. roy inspect fmt/40,fmt/41 or roy inspect @pdfa.
+      E.g. roy inspect fmt/40,fmt/41 or roy inspect @pdfa
    roy inspect priorities
       Create a graph of priority relations (in graphviz dot format).
       Short alias is roy inspect p.
-      View graph with a command like roy inspect p | dot -Tsvg | display.
+      View graph with a command e.g. roy inspect p | dot -Tpng -o priorities.png
       If you don't have dot installed, can use http://www.webgraphviz.com/.
 
 Additional flags:
@@ -76,11 +76,11 @@ Additional flags:
    -extend, -extendc
       Add additional extension and container extension signature files. 
       Useful for inspecting test signatures during development.
-      E.g. roy inspect -extend my-groovy-sig.xml dev/1.
+      E.g. roy inspect -extend my-groovy-sig.xml dev/1
    -limit, -exclude
       Limit signatures to a comma-separated list of formats (or sets).
       Useful for priority graphs.
-      E.g. roy inspect -limit @pdfa priorities.
+      E.g. roy inspect -limit @pdfa priorities
    -mi, -loc, -fdd
       Specify particular MIME-info or LOC FDD signature files for inspecting
       formats or viewing priorities.
