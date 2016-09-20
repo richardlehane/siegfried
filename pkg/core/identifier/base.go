@@ -153,6 +153,10 @@ func (b *Base) GraphP() string {
 	elements := p.Elements()
 	lines := make([]string, len(elements))
 	for i, v := range elements {
+		if v[1] == "" {
+			lines[i] = fmt.Sprintf("\"%s (%s)\"", infos[v[0]].String(), v[0])
+			continue
+		}
 		lines[i] = fmt.Sprintf("\"%s (%s)\" -> \"%s (%s)\"", infos[v[0]].String(), v[0], infos[v[1]].String(), v[1])
 	}
 	return "digraph {\n  " + strings.Join(lines, "\n  ") + "\n}"

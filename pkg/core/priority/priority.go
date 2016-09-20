@@ -29,10 +29,17 @@ import (
 type Map map[string][]string
 
 func (m Map) Elements() [][2]string {
+	fmts := make(map[string]bool)
 	elements := make([][2]string, 0, len(m)*3)
 	for k, v := range m {
 		for _, sup := range v {
 			elements = append(elements, [2]string{k, sup})
+			fmts[sup] = true
+		}
+	}
+	for k, v := range m {
+		if len(v) == 0 && !fmts[k] {
+			elements = append(elements, [2]string{k, ""})
 		}
 	}
 	return elements
