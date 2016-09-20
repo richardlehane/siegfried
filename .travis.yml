@@ -5,6 +5,7 @@ go:
 - 1.4
 - 1.5
 - 1.6
+- 1.7
 - tip
 branches:
   except:
@@ -21,7 +22,7 @@ before_deploy:
 deploy:
   on:
     tags: true
-    go: 1.6
+    go: 1.7
   provider: bintray
   file: ${HOME}/deb/bintray.json
   user: richardlehane
