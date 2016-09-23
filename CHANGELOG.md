@@ -1,4 +1,10 @@
 # Change Log
+## v1.6.5 (2016-09-xx)
+### Fixed
+- roy inspect priorities command now includes "orphan" fmts in graphs
+- debbuilder.sh fix: debian packages were copying roy data to wrong directory
+- update PRONOM urls from apps. to www.
+
 ## v1.6.4 (2016-09-05)
 ### Added
 - roy inspect FMT command now inspects sets e.g. roy inspect @pdfa

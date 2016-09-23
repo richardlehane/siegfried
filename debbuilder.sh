@@ -8,12 +8,12 @@ export SFDIR
 # setup dirs
 mkdir -p $SFDIR/DEBIAN
 mkdir -p $SFDIR/usr/bin
-mkdir -p $SFDIR/usr/share
+mkdir -p $SFDIR/usr/share/siegfried
 
 # copy binaries and assets
 cp $HOME/gopath/bin/sf $SFDIR/usr/bin/sf
 cp $HOME/gopath/bin/roy $SFDIR/usr/bin/roy
-cp -R $HOME/gopath/src/github.com/richardlehane/siegfried/cmd/roy/data/. $SFDIR/usr/share
+cp -R $HOME/gopath/src/github.com/richardlehane/siegfried/cmd/roy/data/. $SFDIR/usr/share/siegfried
 
 # write control file
 SIZE=$(du -s "${SFDIR}/usr" | cut -f1)

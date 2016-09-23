@@ -85,6 +85,8 @@ func (f FDD) PUIDs() []string {
 	for _, l := range f.Links {
 		if strings.HasPrefix(l, "http://apps.nationalarchives.gov.uk/pronom/") {
 			puids = append(puids, strings.TrimPrefix(l, "http://apps.nationalarchives.gov.uk/pronom/"))
+		} else if strings.HasPrefix(l, "http://www.nationalarchives.gov.uk/pronom/") {
+			puids = append(puids, strings.TrimPrefix(l, "http://www.nationalarchives.gov.uk/pronom/"))
 		}
 	}
 	return puids

@@ -2,7 +2,7 @@
 
 [Siegfried](http://www.itforarchivists.com/siegfried) is a signature-based file format identification tool, implementing:
 
-  - the National Archives UK's [PRONOM](http://apps.nationalarchives.gov.uk/pronom) file format signatures
+  - the National Archives UK's [PRONOM](http://www.nationalarchives.gov.uk/pronom) file format signatures
   - freedesktop.org's [MIME-info](https://freedesktop.org/wiki/Software/shared-mime-info/) file format signatures
   - the Library of Congress's [FDD](http://www.digitalpreservation.gov/formats/fdd/descriptions.shtml) file format signatures (*beta*).
 
