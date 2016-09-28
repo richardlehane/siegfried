@@ -1,5 +1,5 @@
 # Change Log
-## v1.6.5 (2016-09-xx)
+## v1.6.5 (2016-09-28)
 ### Added
 - new sets files (pronom-families.json and pronom-types) automatically created from PRONOM classficiations. Removed redundant sets (database, audio, etc.).
 
