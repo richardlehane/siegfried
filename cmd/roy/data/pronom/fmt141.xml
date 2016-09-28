@@ -71,7 +71,7 @@
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>Big-endian</Endianness>
-          <ByteSequenceValue>52494646{4}57415645666D7420100000000100{14-1000}64617461</ByteSequenceValue>
+          <ByteSequenceValue>52494646{4}57415645666D7420100000000100{14-*}64617461</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

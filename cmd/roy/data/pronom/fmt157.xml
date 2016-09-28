@@ -94,6 +94,13 @@
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>869</RelatedFormatID>
+        <RelatedFormatName>TrueType Font</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>1100</RelatedFormatID>
         <RelatedFormatName>Acrobat PDF/A - Portable Document Format</RelatedFormatName>
         <RelatedFormatVersion>1b</RelatedFormatVersion>

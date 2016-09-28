@@ -87,21 +87,9 @@
       </InternalSignature>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
-        <RelatedFormatID>617</RelatedFormatID>
-        <RelatedFormatName>Acrobat PDF 1.4 - Portable Document Format</RelatedFormatName>
-        <RelatedFormatVersion>1.4</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Has lower priority than</RelationshipType>
-        <RelatedFormatID>618</RelatedFormatID>
-        <RelatedFormatName>Acrobat PDF 1.5 - Portable Document Format</RelatedFormatName>
-        <RelatedFormatVersion>1.5</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Has lower priority than</RelationshipType>
-        <RelatedFormatID>637</RelatedFormatID>
-        <RelatedFormatName>Acrobat PDF 1.6 - Portable Document Format</RelatedFormatName>
-        <RelatedFormatVersion>1.6</RelatedFormatVersion>
+        <RelatedFormatID>770</RelatedFormatID>
+        <RelatedFormatName>Acrobat PDF/A - Portable Document Format</RelatedFormatName>
+        <RelatedFormatVersion>1a</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
@@ -178,6 +166,13 @@
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1280</RelatedFormatID>
         <RelatedFormatName>Acrobat PDF/E - Portable Document Format for Engineering PDF/E-1</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>869</RelatedFormatID>
+        <RelatedFormatName>TrueType Font</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

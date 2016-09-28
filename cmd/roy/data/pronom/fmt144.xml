@@ -81,6 +81,13 @@ Variable bytes: /GTS_PDFXVersion(CGATS.12/1-1999)</SignatureNote>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>869</RelatedFormatID>
+        <RelatedFormatName>TrueType Font</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Is previous version of</RelationshipType>
         <RelatedFormatID>788</RelatedFormatID>
         <RelatedFormatName>Acrobat PDF/X - Portable Document Format - Exchange 1:2001</RelatedFormatName>

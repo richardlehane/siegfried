@@ -40,6 +40,20 @@
         <Identifier>fmt/59</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>93</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <DeveloperCompoundName>Microsoft Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>93</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <SupportCompoundName>Microsoft Corporation</SupportCompoundName>
+      </Support>
       <Document>
         <DocumentID>10</DocumentID>
         <DisplayText>OpenOffice.org, 2004, OpenOffice.org's documentation of the Microsoft Excel file format: Excel versions 2, 3, 4, 5, 95, 97, 2000, XP, 2003</DisplayText>
@@ -82,24 +96,6 @@
         <Signature>xls</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
-      <InternalSignature>
-        <SignatureID>76</SignatureID>
-        <SignatureName>BIFF 5 &amp; 7 Workbook (generic)</SignatureName>
-        <SignatureNote>09 - BOF / 08 - Version indicator / {2} - unspecified / 0005 - Version 5 / 0500 - unspecified</SignatureNote>
-        <ByteSequence>
-          <ByteSequenceID>194</ByteSequenceID>
-          <PositionType>Absolute from BOF</PositionType>
-          <Offset>512</Offset>
-          <MaxOffset>8192</MaxOffset>
-          <IndirectOffsetLocation>
-          </IndirectOffsetLocation>
-          <IndirectOffsetLength>
-          </IndirectOffsetLength>
-          <Endianness>
-          </Endianness>
-          <ByteSequenceValue>0908{2}00050500</ByteSequenceValue>
-        </ByteSequence>
-      </InternalSignature>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>684</RelatedFormatID>

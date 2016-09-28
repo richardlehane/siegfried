@@ -187,6 +187,13 @@ Additional information regarding violations of PDF/A 1b conformance added Februa
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>869</RelatedFormatID>
+        <RelatedFormatName>TrueType Font</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>1016</RelatedFormatID>
         <RelatedFormatName>Acrobat PDF 1.7 - Portable Document Format</RelatedFormatName>
         <RelatedFormatVersion>1.7</RelatedFormatVersion>

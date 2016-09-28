@@ -51,7 +51,7 @@ An RF64 file containing the bext chunk becomes a Multichannel Broadcast Wave for
       <InternalSignature>
         <SignatureID>1039</SignatureID>
         <SignatureName>RF64 MBWF</SignatureName>
-        <SignatureNote>BOF: RF64ÿÿÿÿWAVEds64 with bext chunk following at indeterminate point. Further research is required to refine this signature</SignatureNote>
+        <SignatureNote>BOF: RF64{4}WAVEds64 with bext chunk following at indeterminate point. Further research is required to refine this signature</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1280</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -63,7 +63,7 @@ An RF64 file containing the bext chunk becomes a Multichannel Broadcast Wave for
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>52463634FFFFFFFF5741564564733634*62657874</ByteSequenceValue>
+          <ByteSequenceValue>52463634{4}5741564564733634*62657874</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

@@ -81,6 +81,13 @@ Variable: /GTS_PDFXVersion(PDF/X-2:2003)</SignatureNote>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>869</RelatedFormatID>
+        <RelatedFormatName>TrueType Font</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Is subtype of</RelationshipType>
         <RelatedFormatID>617</RelatedFormatID>
         <RelatedFormatName>Acrobat PDF 1.4 - Portable Document Format</RelatedFormatName>

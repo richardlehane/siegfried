@@ -50,7 +50,7 @@
       <InternalSignature>
         <SignatureID>1038</SignatureID>
         <SignatureName>RF64</SignatureName>
-        <SignatureNote>BOF: RF64ÿÿÿÿWAVEds64</SignatureNote>
+        <SignatureNote>BOF: RF64{4}WAVEds64</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1279</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -62,7 +62,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>52463634FFFFFFFF5741564564733634</ByteSequenceValue>
+          <ByteSequenceValue>52463634{4}5741564564733634</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

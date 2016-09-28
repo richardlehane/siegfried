@@ -110,7 +110,23 @@
     "fmt/944 (Ogg Multimedia Container)",
     "fmt/946 (Ogg Opus Codec Compressed Multimedia File)",
     "fmt/947 (Ogg FLAC Compressed Multimedia File)",
-    "fmt/948 (Ogg Speex Codec Multimedia File)"
+    "fmt/948 (Ogg Speex Codec Multimedia File)",
+    "fmt/951 (Sonic Foundry WAVE 64)",
+    "fmt/952 (True Audio 1)",
+    "fmt/953 (True Audio 2)",
+    "fmt/954 (Adaptive Multi-Rate Wideband Audio)",
+    "fmt/955 (Downloadable Sounds Audio)",
+    "fmt/956 (RIFF-based MIDI)",
+    "fmt/957 (DirectMusic Segment File Format)",
+    "fmt/958 (DirectMusic Style File Format)",
+    "fmt/959 (Portable Sound Format)",
+    "fmt/960 (DOS Sound and Music Interface Advanced Module Format)",
+    "fmt/961 (Mobile eXtensible Music Format)",
+    "fmt/962 (QCP Audio File Format)",
+    "fmt/965 (Music Encoding Initiative)",
+    "fmt/972 (Dolby MLP Lossless Audio)",
+    "fmt/973 (DTS Coherent Acoustics (DCA) Audio)",
+    "fmt/974 (Notation Interchange File Format)"
   ],
   "database": [
     "x-fmt/6 (FoxPro Database 2.0)",
@@ -251,7 +267,8 @@
     "fmt/910 (CRAM File Format 2.x)",
     "fmt/911 (CRAM File Format 3.x)",
     "fmt/931 (Mathcad Document Binary)",
-    "fmt/932 (Mathcad Document XML)"
+    "fmt/932 (Mathcad Document XML)",
+    "fmt/963 (OMNIC Spectral Data File)"
   ],
   "email": [
     "x-fmt/430 (Microsoft Outlook Email Message 97-2003)",
@@ -444,7 +461,8 @@
     "fmt/912 (Microsoft Paint 2)",
     "fmt/930 (Magick Image File Format)",
     "fmt/935 (Animated Portable Network Graphics)",
-    "fmt/936 (Microsoft Picture It! Image File 1)"
+    "fmt/936 (Microsoft Picture It! Image File 1)",
+    "fmt/970 (Khronos Texture File)"
   ],
   "imageVector": [
     "x-fmt/20 (Adobe Illustrator 1.0 / 1.1)",
@@ -889,7 +907,8 @@
     "fmt/697 (Additive Manufacturing File Format)",
     "fmt/871 (Adobe Content Server Message File)",
     "fmt/875 (RDF/XML)",
-    "fmt/886 (HTML Components)"
+    "fmt/886 (HTML Components)",
+    "fmt/965 (Music Encoding Initiative)"
   ],
   "textStructured": [
     "x-fmt/41 (Data Interchange Format)",
@@ -1003,7 +1022,8 @@
     "fmt/731 (Bink Video Format 1)",
     "fmt/732 (Bink Video Format 2)",
     "fmt/944 (Ogg Multimedia Container)",
-    "fmt/945 (Ogg Theora Video)"
+    "fmt/945 (Ogg Theora Video)",
+    "fmt/971 (Microsoft Windows Movie Maker File)"
   ],
   "wordProcessor": [
     "x-fmt/1 (Microsoft Word for Macintosh Document 3.0)",
@@ -1136,6 +1156,8 @@
     "fmt/890 (AbiWord Document)",
     "fmt/891 (AbiWord Document Template)",
     "fmt/892 (Compound WordPerfect for Windows Document 6 onwards)",
-    "fmt/949 (WordPerfect 4.0/4.1/4.2)"
+    "fmt/949 (WordPerfect 4.0/4.1/4.2)",
+    "fmt/964 (Final Draft Document 5-7)",
+    "fmt/969 ( Rich Text Format 0)"
   ]
 }

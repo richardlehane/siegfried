@@ -45,6 +45,11 @@
         <Signature>sgml</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1943</ExternalSignatureID>
+        <Signature>sgm</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

@@ -52,7 +52,7 @@
         <SignatureID>1040</SignatureID>
         <SignatureName>XMF</SignatureName>
         <SignatureNote>BOF: XMF_ 
-At this time the XMF signature does not distinguish between different XMF versions (for example Mobile XMF), however this should be possible with further research.</SignatureNote>
+At this time the XMF signature does not distinguish between different XMF subtypes, with the exception of Mobile XMF.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1281</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -67,6 +67,13 @@ At this time the XMF signature does not distinguish between different XMF versio
           <ByteSequenceValue>584D465F</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1766</RelatedFormatID>
+        <RelatedFormatName>Mobile eXtensible Music Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

@@ -12,7 +12,11 @@
       <FormatTypes>Word Processor</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>WordStar is a Word Processor application originally published by MicroPro. WS4 files currently cannot by identified though a PRONOM identification signature. 
+
+On the surface it's a plain text file, however the format 'shifts' the last byte of each word. Effectively it is 'flipping' the first bit of the ASCII character from 0 to 1. so a lower case 'r' (hex value 0x72) becomes 'ò' (hex value 0xF2); lower case 'd' (hex 0x64) becomes 'ä' (hex 0xE4) and so on. 
+
+It should be possible to write a simple decoder application for WS4 files, however note that the conjecture above is based on observation of a limited pool of files, and there may be additional subtleties yet to be encountered and understood. Please contact the PRONOM team if you have any further information about this format.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>

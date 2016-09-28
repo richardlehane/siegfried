@@ -1,8 +1,13 @@
 # Change Log
 ## v1.6.5 (2016-09-xx)
+### Added
+- new sets files (pronom-families.json and pronom-types) automatically created from PRONOM classficiations. Removed redundant sets (database, audio, etc.).
+
 ### Fixed
-- roy inspect priorities command now includes "orphan" fmts in graphs
 - debbuilder.sh fix: debian packages were copying roy data to wrong directory
+
+### Changed
+- roy inspect priorities command now includes "orphan" fmts in graphs
 - update PRONOM urls from apps. to www.
 
 ## v1.6.4 (2016-09-05)

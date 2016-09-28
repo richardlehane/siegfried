@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1764</FormatID>
+      <FormatName>Portable Sound Format</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Audio</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The Portable Sound Format (PSF) is a sequencer sound file format for video game music, created by Neill Corlett. PSF files contain audio data and a sequence player. A file with the .psf or .psf1 extensions will usually be self-contained files holding both the audio library data and sequencing data. A .minipsf or .minipsf1 will hold just sequencing data, while a .psflib or .psf1lib will contain the audio library data so these must reside in the same directory where used.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>14 Sep 2016</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>14 Sep 2016</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/959</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>1924</ExternalSignatureID>
+        <Signature>psf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1925</ExternalSignatureID>
+        <Signature>psf1</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1926</ExternalSignatureID>
+        <Signature>psflib</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1927</ExternalSignatureID>
+        <Signature>minipsf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1928</ExternalSignatureID>
+        <Signature>minipsf1</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1929</ExternalSignatureID>
+        <Signature>gsf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1930</ExternalSignatureID>
+        <Signature>gsflib</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1931</ExternalSignatureID>
+        <Signature>minigsf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1316</SignatureID>
+        <SignatureName>Portable Sound Format</SignatureName>
+        <SignatureNote>BOF: PSFx, where x represents one of the following values for which PSF has been adapted
+
+4th byte:
+0x01: Playstation (PSF1)
+0x02: Playstation 2 (PSF2)
+0x11: Sega Saturn (SSF)
+0x12: Sega Dreamcast (DSF)
+0x13: Sega Genesis
+0x21: Nintendo 64 (USF)
+0x22: GameBoy Advance (GSF)
+0x23: Super NES (SNSF)
+0x41: Capcom QSound (QSF)
+
+Format description: http://web.archive.org/web/20140125155137/http://wiki.neillcorlett.com/PSFFormat</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1591</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>505346(01|02|11|12|13|21|22|23|41)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

@@ -34,6 +34,10 @@ Known QuarkXpress file types are: qxd - QuarkXpress Document; qxl - QuarkXpress 
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
+        <Identifier>application/vnd.Quark.QuarkXPress</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
         <Identifier>x-fmt/182</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>

@@ -188,7 +188,7 @@
       <InternalSignature>
         <SignatureID>9</SignatureID>
         <SignatureName>TIFF generic (little-endian)</SignatureName>
-        <SignatureNote>Header</SignatureNote>
+        <SignatureNote>Header: II* 0x00</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>183</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -207,7 +207,7 @@
       <InternalSignature>
         <SignatureID>10</SignatureID>
         <SignatureName>TIFF generic (big-endian)</SignatureName>
-        <SignatureNote>Header</SignatureNote>
+        <SignatureNote>Header: MM 0x00 *</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>184</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>

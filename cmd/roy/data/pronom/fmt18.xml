@@ -118,18 +118,6 @@
       </InternalSignature>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
-        <RelatedFormatID>618</RelatedFormatID>
-        <RelatedFormatName>Acrobat PDF 1.5 - Portable Document Format</RelatedFormatName>
-        <RelatedFormatVersion>1.5</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Has lower priority than</RelationshipType>
-        <RelatedFormatID>637</RelatedFormatID>
-        <RelatedFormatName>Acrobat PDF 1.6 - Portable Document Format</RelatedFormatName>
-        <RelatedFormatVersion>1.6</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>770</RelatedFormatID>
         <RelatedFormatName>Acrobat PDF/A - Portable Document Format</RelatedFormatName>
         <RelatedFormatVersion>1a</RelatedFormatVersion>
@@ -244,27 +232,10 @@
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
-        <RelatedFormatID>613</RelatedFormatID>
-        <RelatedFormatName>Acrobat PDF 1.0 - Portable Document Format</RelatedFormatName>
-        <RelatedFormatVersion>1.0</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Has priority over</RelationshipType>
-        <RelatedFormatID>614</RelatedFormatID>
-        <RelatedFormatName>Acrobat PDF 1.1 - Portable Document Format</RelatedFormatName>
-        <RelatedFormatVersion>1.1</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Has priority over</RelationshipType>
-        <RelatedFormatID>615</RelatedFormatID>
-        <RelatedFormatName>Acrobat PDF 1.2 - Portable Document Format</RelatedFormatName>
-        <RelatedFormatVersion>1.2</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Has priority over</RelationshipType>
-        <RelatedFormatID>616</RelatedFormatID>
-        <RelatedFormatName>Acrobat PDF 1.3 - Portable Document Format</RelatedFormatName>
-        <RelatedFormatVersion>1.3</RelatedFormatVersion>
+        <RelatedFormatID>869</RelatedFormatID>
+        <RelatedFormatName>TrueType Font</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Is previous version of</RelationshipType>

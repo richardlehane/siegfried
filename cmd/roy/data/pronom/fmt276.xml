@@ -79,6 +79,12 @@
       </InternalSignature>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>770</RelatedFormatID>
+        <RelatedFormatName>Acrobat PDF/A - Portable Document Format</RelatedFormatName>
+        <RelatedFormatVersion>1a</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1100</RelatedFormatID>
         <RelatedFormatName>Acrobat PDF/A - Portable Document Format</RelatedFormatName>
         <RelatedFormatVersion>1b</RelatedFormatVersion>
@@ -162,16 +168,17 @@
         </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
-        <RelationshipType>Is previous version of</RelationshipType>
-        <RelatedFormatID>1267</RelatedFormatID>
-        <RelatedFormatName>Acrobat PDF/A - Portable Document Format</RelatedFormatName>
-        <RelatedFormatVersion>3b</RelatedFormatVersion>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>869</RelatedFormatID>
+        <RelatedFormatName>TrueType Font</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
-        <RelationshipType>Is subtype of</RelationshipType>
-        <RelatedFormatID>1268</RelatedFormatID>
-        <RelatedFormatName>Acrobat PDF/A - Portable Document Format</RelatedFormatName>
-        <RelatedFormatVersion>3u</RelatedFormatVersion>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>637</RelatedFormatID>
+        <RelatedFormatName>Acrobat PDF 1.6 - Portable Document Format</RelatedFormatName>
+        <RelatedFormatVersion>1.6</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Is supertype of</RelationshipType>
@@ -196,6 +203,18 @@
         <RelatedFormatID>1266</RelatedFormatID>
         <RelatedFormatName>Acrobat PDF/A - Portable Document Format</RelatedFormatName>
         <RelatedFormatVersion>3a</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>1267</RelatedFormatID>
+        <RelatedFormatName>Acrobat PDF/A - Portable Document Format</RelatedFormatName>
+        <RelatedFormatVersion>3b</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>1268</RelatedFormatID>
+        <RelatedFormatName>Acrobat PDF/A - Portable Document Format</RelatedFormatName>
+        <RelatedFormatVersion>3u</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>

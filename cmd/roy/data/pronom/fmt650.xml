@@ -35,6 +35,10 @@
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
+        <Identifier>application/vnd.Quark.QuarkXPress</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
         <Identifier>fmt/650</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>

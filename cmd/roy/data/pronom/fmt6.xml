@@ -49,20 +49,19 @@
       <InternalSignature>
         <SignatureID>50</SignatureID>
         <SignatureName>WAVE</SignatureName>
-        <SignatureNote>RIFF header, WAVE ID, Format chunk and Data chunk</SignatureNote>
+        <SignatureNote>RIFF header, WAVE ID</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>154</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>52494646{4}57415645*666D7420{18-*}64617461</ByteSequenceValue>
+          <ByteSequenceValue>52494646{4}57415645</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
