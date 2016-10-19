@@ -41,6 +41,22 @@ func (s Signature) Equals(s1 Signature) bool {
 	return true
 }
 
+// Contains tests whether a signature wholly contains the segments of another signature.
+func (s Signature) Contains(s1 Signature) bool {
+	if len(s1) > len(s) {
+		return false
+	}
+	// ignore offsets as signatures may intersperse additional frames - just check order and patterns
+	// this makes the test imprecise, but a good enough approximation
+	var numEquals int
+	for _, f := range s {
+		if f.Pat().Equals(s1[numEquals].Pat()) {
+			numEquals++
+		}
+	}
+	return numEquals == len(s1)
+}
+
 // Segment divides signatures into signature segments.
 // This separation happens on wildcards or when the distance between frames is deemed too great.
 // E.g. a signature of [BOF 0: "ABCD"][PREV 0-20: "EFG"][PREV Wild: "HI"][EOF 0: "XYZ"]
