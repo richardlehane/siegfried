@@ -5,8 +5,24 @@ import (
 
 	"github.com/richardlehane/siegfried/pkg/core/persist"
 
+	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
 	. "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns/tests"
 )
+
+func TestContains(t *testing.T) {
+	if !Contains(TestSequences[0], TestSequences[1]) {
+		t.Error("Contains fail: equal sequences")
+	}
+	if !Contains(TestLists[0], TestLists[0]) {
+		t.Error("Contains fail: equal lists")
+	}
+	if !Contains(TestSequences[2], TestSequences[1]) {
+		t.Error("Contains fail: testy contains test")
+	}
+	if Contains(TestSequences[1], TestSequences[2]) {
+		t.Error("Contains fail: test doesn't contain testy")
+	}
+}
 
 func TestSequence(t *testing.T) {
 	if !TestSequences[0].Equals(TestSequences[1]) {

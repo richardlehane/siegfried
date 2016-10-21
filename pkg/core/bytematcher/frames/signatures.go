@@ -14,6 +14,8 @@
 
 package frames
 
+import "github.com/richardlehane/siegfried/pkg/core/bytematcher/patterns"
+
 // Signature is just a slice of frames.
 type Signature []Frame
 
@@ -50,7 +52,7 @@ func (s Signature) Contains(s1 Signature) bool {
 	// this makes the test imprecise, but a good enough approximation
 	var numEquals int
 	for _, f := range s {
-		if f.Pat().Equals(s1[numEquals].Pat()) {
+		if patterns.Contains(f.Pat(), s1[numEquals].Pat()) {
 			numEquals++
 		}
 	}
