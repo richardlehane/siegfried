@@ -374,7 +374,7 @@ func toOffset(off string) (int, int, error) {
 }
 
 var (
-	rpl = strings.NewReplacer("\\ ", " ", "\\n", "\n", "\\t", "\t", "\\r", "\r", "\\b", "\b", "\\f", "\f", "\\v", "\v")
+	rpl = strings.NewReplacer("\\ ", " ", "\\n", "\n", "\\t", "\t", "\\r", "\r", "\\b", "\b", "\\f", "\f", "\\v", "\v", "\\\\", "\\")
 	rgx = regexp.MustCompile(`\\([0-9]{1,3}|x[0-9A-Fa-f]{1,2})`)
 )
 

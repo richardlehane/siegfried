@@ -1,4 +1,11 @@
 # Change Log
+## v1.6.6 (2016-10-25)
+### Added
+- graph implicit and missing priorities with `roy inspect implicit-priorities` and `roy inspect missing-priorities`
+
+### Fixed
+- error parsing mimeinfo signatures with double backslashes (e.g. rtf signatures)
+
 ## v1.6.5 (2016-09-28)
 ### Added
 - new sets files (pronom-families.json and pronom-types) automatically created from PRONOM classficiations. Removed redundant sets (database, audio, etc.).

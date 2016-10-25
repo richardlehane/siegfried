@@ -28,6 +28,22 @@ import (
 // a priority map links subordinate results to a list of priority results
 type Map map[string][]string
 
+func (m Map) Difference(mb Map) Map {
+	mc := make(Map)
+	for k, v := range m {
+		vb, ok := mb[k]
+		if !ok {
+			mc[k] = v
+			continue
+		}
+		e := extras(v, vb)
+		if len(e) > 0 {
+			mc[k] = e
+		}
+	}
+	return mc
+}
+
 func (m Map) Elements() [][2]string {
 	fmts := make(map[string]bool)
 	elements := make([][2]string, 0, len(m)*3)
@@ -74,6 +90,7 @@ func (m Map) Add(subordinate string, superior string) {
 	m[subordinate] = []string{superior}
 }
 
+// create a list of all strings that appear in 'a' but not 'b'
 func extras(a []string, b []string) []string {
 	ret := make([]string, 0)
 	for _, v := range a {

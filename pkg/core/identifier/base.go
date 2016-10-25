@@ -26,6 +26,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core/mimematcher"
 	"github.com/richardlehane/siegfried/pkg/core/namematcher"
 	"github.com/richardlehane/siegfried/pkg/core/persist"
+	"github.com/richardlehane/siegfried/pkg/core/priority"
 	"github.com/richardlehane/siegfried/pkg/core/riffmatcher"
 	"github.com/richardlehane/siegfried/pkg/core/textmatcher"
 	"github.com/richardlehane/siegfried/pkg/core/xmlmatcher"
@@ -144,12 +145,7 @@ func (b *Base) Inspect(ids ...string) string {
 	return inspect(b.p, ids...)
 }
 
-func (b *Base) GraphP() string {
-	p := b.p.Priorities()
-	if p == nil {
-		return "no priorities set"
-	}
-	infos := b.p.Infos()
+func graphP(p priority.Map, infos map[string]FormatInfo) string {
 	elements := p.Elements()
 	lines := make([]string, len(elements))
 	for i, v := range elements {
@@ -160,6 +156,44 @@ func (b *Base) GraphP() string {
 		lines[i] = fmt.Sprintf("\"%s (%s)\" -> \"%s (%s)\"", infos[v[0]].String(), v[0], infos[v[1]].String(), v[1])
 	}
 	return "digraph {\n  " + strings.Join(lines, "\n  ") + "\n}"
+}
+
+const (
+	Priorities int = iota
+	Missing
+	Implicit
+)
+
+func (b *Base) GraphP(i int) string {
+	p := b.p.Priorities()
+	if p == nil && i < Implicit {
+		return "no priorities set"
+	}
+	switch i {
+	case Missing:
+		p = implicit(b.p.Signatures()).Difference(p)
+	case Implicit:
+		p = implicit(b.p.Signatures())
+	}
+	return graphP(p, b.p.Infos())
+}
+
+func implicit(sigs []frames.Signature, ids []string, e error) priority.Map {
+	pm := make(priority.Map)
+	if e != nil {
+		return pm
+	}
+	for i, v := range sigs {
+		for j, w := range sigs {
+			if i == j || ids[i] == ids[j] {
+				continue
+			}
+			if w.Contains(v) {
+				pm.Add(ids[i], ids[j])
+			}
+		}
+	}
+	return pm
 }
 
 func (b *Base) NoPriority() bool {
