@@ -78,7 +78,10 @@ Or, for the most recent updates, you can install from this fork:
     sudo apt-get update && sudo apt-get install siegfried
 
 
-## [Changes](CHANGELOG.md) 
+## Changes 
+
+See the [CHANGELOG](CHANGELOG.md) for the full history.
+
 ### v1.6.6 (2016-10-25)
 ### Added
 - graph implicit and missing priorities with `roy inspect implicit-priorities` and `roy inspect missing-priorities`
