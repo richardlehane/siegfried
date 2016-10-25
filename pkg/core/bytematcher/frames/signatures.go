@@ -43,17 +43,80 @@ func (s Signature) Equals(s1 Signature) bool {
 	return true
 }
 
+// add ints together & if any are -1 (wildcard) then return -1
+func addWilds(i ...int) int {
+	var j int
+	for _, k := range i {
+		if k == -1 {
+			return -1
+		}
+		j += k
+	}
+	return j
+}
+
+// return the min and max legal offsets for a frame. If it is a BOF sequence the first variable returned is true.
+func (s Signature) position(idx int) (bool, int, int) {
+	var min, max int
+	f := s[idx]
+	if f.Orientation() >= SUCC {
+		for j := len(s) - 1; j >= 0; j-- {
+			f = s[j]
+			if f.Orientation() == EOF {
+				min, max = 0, 0
+			}
+			if j == idx {
+				return false, addWilds(min, f.Min()), addWilds(max, f.Max())
+			}
+			minl, maxl := f.Length()
+			min, max = addWilds(min, f.Min(), minl), addWilds(max, f.Max(), maxl)
+		}
+	}
+	for i, f := range s {
+		if f.Orientation() == BOF {
+			min, max = 0, 0
+		}
+		if i == idx {
+			return true, addWilds(min, f.Min()), addWilds(max, f.Max())
+		}
+		minl, maxl := f.Length()
+		min, max = addWilds(min, f.Min(), minl), addWilds(max, f.Max(), maxl)
+	}
+	// should not get here
+	return false, -1, -1
+}
+
+// test whether two positions overlap. Positions are marked by BOF/EOF and min/max ints
+func overlap(a bool, amin, amax int, b bool, bmin, bmax int) bool {
+	if a != b {
+		return false
+	}
+	if amax > -1 && (amax < bmin || amax < amin) {
+		return false
+	}
+	if bmax > -1 && bmax < amin {
+		return false
+	}
+	return true
+}
+
 // Contains tests whether a signature wholly contains the segments of another signature.
 func (s Signature) Contains(s1 Signature) bool {
 	if len(s1) > len(s) {
 		return false
 	}
-	// ignore offsets as signatures may intersperse additional frames - just check order and patterns
-	// this makes the test imprecise, but a good enough approximation
 	var numEquals int
-	for _, f := range s {
-		if patterns.Contains(f.Pat(), s1[numEquals].Pat()) {
-			numEquals++
+	for i, f := range s {
+		if idx := patterns.Index(f.Pat(), s1[numEquals].Pat()); idx >= 0 {
+			a, amin, amax := s.position(i)
+			amin += idx
+			b, bmin, bmax := s1.position(numEquals)
+			if overlap(a, amin, amax, b, bmin, bmax) {
+				numEquals++
+				if numEquals == len(s1) {
+					break
+				}
+			}
 		}
 	}
 	return numEquals == len(s1)

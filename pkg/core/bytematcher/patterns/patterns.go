@@ -96,17 +96,17 @@ func Load(ls *persist.LoadSaver) Pattern {
 	return l(ls)
 }
 
-// Contains reports whether a pattern contains another pattern
-func Contains(a, b Pattern) bool {
+// Index reports the offset of one pattern within another (or -1 if not contained)
+func Index(a, b Pattern) int {
 	if a.Equals(b) {
-		return true
+		return 0
 	}
 	seq1, ok := a.(Sequence)
 	seq2, ok2 := b.(Sequence)
 	if ok && ok2 {
-		return bytes.Contains(seq1, seq2)
+		return bytes.Index(seq1, seq2)
 	}
-	return false
+	return -1
 }
 
 // Sequence is a matching sequence of bytes.
