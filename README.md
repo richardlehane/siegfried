@@ -8,7 +8,7 @@
 
 ### Version
 
-1.6.5
+1.6.6
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -78,17 +78,13 @@ Or, for the most recent updates, you can install from this fork:
     sudo apt-get update && sudo apt-get install siegfried
 
 
-## Changes 
-### v1.6.5 (2016-09-28)
+## [Changes](CHANGELOG.md) 
+### v1.6.6 (2016-10-25)
 ### Added
-- new sets files (pronom-families.json and pronom-types) automatically created from PRONOM classficiations. Removed redundant sets (database, audio, etc.).
+- graph implicit and missing priorities with `roy inspect implicit-priorities` and `roy inspect missing-priorities`
 
 ### Fixed
-- debbuilder.sh fix: debian packages were copying roy data to wrong directory
-
-### Changed
-- roy inspect priorities command now includes "orphan" fmts in graphs
-- update PRONOM urls from apps. to www.
+- error parsing mimeinfo signatures with double backslashes (e.g. rtf signatures)
 
 ## Rights
 
