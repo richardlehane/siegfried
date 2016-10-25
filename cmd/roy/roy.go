@@ -68,6 +68,11 @@ Usage of inspect:
       Short alias is roy inspect p.
       View graph with a command e.g. roy inspect p | dot -Tpng -o priorities.png
       If you don't have dot installed, can use http://www.webgraphviz.com/.
+   roy inspect missing-priorities
+      Create a graph of relations that are apparent in byte signatures,
+      but that are absent from the set of formal priority relations.
+      Short alias is roy inspect mp.
+      View graph with a command e.g. roy inspect mp | dot -Tpng -o missing.png
 
 Additional flags:
    The roy inspect FMT and roy inspect priorities sub-commands both accept
@@ -223,7 +228,7 @@ func inspectFmt(f string) error {
 	return nil
 }
 
-func graphPriorities() error {
+func graphPriorities(typ int) error {
 	var id core.Identifier
 	var err error
 	opts := append(getOptions(), config.SetDoubleUp()) // speed up by allowing sig double ups
@@ -240,7 +245,7 @@ func graphPriorities() error {
 	if err != nil {
 		return err
 	}
-	fmt.Println(id.GraphP())
+	fmt.Println(id.GraphP(typ))
 	return nil
 }
 
@@ -455,7 +460,11 @@ func main() {
 			case input == "textmatcher", input == "tm":
 				err = inspectSig(core.TextMatcher)
 			case input == "priorities", input == "p":
-				err = graphPriorities()
+				err = graphPriorities(0)
+			case input == "missing-priorities", input == "mp":
+				err = graphPriorities(1)
+			case input == "implicit-priorities", input == "ip":
+				err = graphPriorities(2)
 			case filepath.Ext(input) == ".sig":
 				config.SetSignature(input)
 				err = inspectSig(-1)
