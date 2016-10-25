@@ -73,6 +73,11 @@ Usage of inspect:
       but that are absent from the set of formal priority relations.
       Short alias is roy inspect mp.
       View graph with a command e.g. roy inspect mp | dot -Tpng -o missing.png
+   roy inspect implicit-priorities
+      Create a graph of relations that are apparent from the byte signatures,
+      rather than explicitly defined.
+      Short alias is roy inspect ip.
+      View graph with a command e.g. roy inspect ip | dot -Tpng -o implicit.png
 
 Additional flags:
    The roy inspect FMT and roy inspect priorities sub-commands both accept
