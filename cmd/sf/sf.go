@@ -29,7 +29,6 @@ import (
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/pkg/core/siegreader"
-
 	/*// Uncomment to build with profiler
 	"net/http"
 	_ "net/http/pprof"
@@ -148,17 +147,17 @@ func identifyFile(w writer, s *siegfried.Siegfried, path string, sz int64, mod s
 
 func identifyRdr(w writer, s *siegfried.Siegfried, r io.Reader, sz int64, path, mime, mod string) {
 	lg.set(path)
-	c, err := s.Identify(r, path, mime)
+	b, berr := s.Buffer(r)
+	defer s.Put(b)
+	c, err := s.IdentifyBuffer(b, berr, path, mime)
 	lg.err(err)
 	if c == nil {
 		w.writeFile(path, sz, mod, nil, err, nil)
 		lg.reset()
 		return
 	}
-	var b *siegreader.Buffer
 	var cs []byte
 	if checksum != nil {
-		b = s.Buffer()
 		var i int64
 		l := checksum.BlockSize()
 		for ; ; i += int64(l) {
@@ -177,9 +176,6 @@ func identifyRdr(w writer, s *siegfried.Siegfried, r io.Reader, sz int64, path, 
 		return
 	}
 	var d decompressor
-	if b == nil {
-		b = s.Buffer()
-	}
 	switch a {
 	case config.Zip:
 		d, err = newZip(siegreader.ReaderFrom(b), path, sz)

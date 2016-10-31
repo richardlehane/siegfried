@@ -1,4 +1,8 @@
 # Change Log
+## v1.6.7
+### Added
+- enable -hash and -z functionality for -serve 
+
 ## v1.6.6 (2016-10-25)
 ### Added
 - graph implicit and missing priorities with `roy inspect implicit-priorities` and `roy inspect missing-priorities`

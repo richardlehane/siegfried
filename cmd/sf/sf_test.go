@@ -215,12 +215,7 @@ func Test363(t *testing.T) {
 		for i := range c {
 			iter++
 			if i.String() != expect {
-				sbuf := s.Buffer()
-				equal := true
-				if !bytes.Equal(se, sbuf.Bytes()) {
-					equal = false
-				}
-				t.Errorf("First buffer on %d iteration: expecting %s, got %s, buffer equality test is %v", iter, expect, i, equal)
+				t.Errorf("First buffer on %d iteration: expecting %s, got %s", iter, expect, i)
 			}
 		}
 	}
@@ -232,12 +227,7 @@ func Test363(t *testing.T) {
 		for i := range c {
 			iter++
 			if i.String() != expect {
-				sbuf := s.Buffer()
-				equal := true
-				if !bytes.Equal(se, sbuf.Bytes()) {
-					equal = false
-				}
-				t.Errorf("Second buffer on %d iteration: expecting %s, got %s, buffer equality test is %v", iter, expect, i, equal)
+				t.Errorf("Second buffer on %d iteration: expecting %s, got %s", iter, expect, i)
 			}
 		}
 	}

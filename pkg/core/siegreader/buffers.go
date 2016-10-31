@@ -25,8 +25,6 @@ type Buffers struct {
 	fpool *pool // Pool of file Buffers
 	epool *pool // Pool of external buffers
 
-	last *pool // Keep reference to the last pool
-
 	fdatas *datas // file datas
 }
 
@@ -36,7 +34,6 @@ func New() *Buffers {
 		spool: newPool(newStream),
 		fpool: newPool(newFile),
 		epool: newPool(newExternal),
-		last:  nil,
 		fdatas: &datas{
 			newPool(newBigFile),
 			newPool(newSmallFile),
@@ -76,29 +73,12 @@ func (b *Buffers) Put(i *Buffer) {
 		panic("Siegreader: unknown buffer type")
 	case *stream:
 		b.spool.put(i.bufferSrc)
-		b.last = b.spool
 	case *file:
 		b.fdatas.put(i.bufferSrc.(*file).data)
 		b.fpool.put(i.bufferSrc)
-		b.last = b.fpool
 	case *external:
 		b.epool.put(i.bufferSrc)
-		b.last = b.epool
 	}
-}
-
-// Last retrieves the last Buffer returned to the pool with Put.
-func (b *Buffers) Last() *Buffer {
-	if b.last == nil {
-		return nil
-	}
-	last := &Buffer{bufferSrc: b.last.get().(bufferSrc)}
-	if str, ok := last.bufferSrc.(*stream); ok {
-		str.b = last
-	} else if f, ok := last.bufferSrc.(*file); ok {
-		f.recalled = true
-	}
-	return last
 }
 
 // data pool (used by file)

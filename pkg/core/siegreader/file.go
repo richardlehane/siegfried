@@ -7,11 +7,10 @@ import (
 )
 
 type file struct {
-	peek     [initialRead]byte
-	sz       int64
-	src      *os.File
-	once     *sync.Once
-	recalled bool // have we been recalled from the pool?
+	peek [initialRead]byte
+	sz   int64
+	src  *os.File
+	once *sync.Once
 	data
 
 	pool *datas // link to the data pool
@@ -27,7 +26,6 @@ type data interface {
 func (f *file) setSource(src *os.File, p *datas) error {
 	// reset
 	f.once = &sync.Once{}
-	f.recalled = false
 	f.data = nil
 	f.pool = p
 	f.src = src
@@ -79,9 +77,6 @@ func (f *file) Slice(off int64, l int) ([]byte, error) {
 	}
 	f.once.Do(func() {
 		f.data = f.pool.get(f)
-		if f.recalled { // if this buffer has been recalled, put the data back in the pool for recycling straight away
-			f.pool.put(f.data)
-		}
 	})
 	ret := f.slice(off, l)
 	return ret, err
@@ -106,9 +101,6 @@ func (f *file) EofSlice(off int64, l int) ([]byte, error) {
 	}
 	f.once.Do(func() {
 		f.data = f.pool.get(f)
-		if f.recalled { // if this buffer has been recalled, put the data back in the pool for recycling straight away
-			f.pool.put(f.data)
-		}
 	})
 	ret := f.eofSlice(off, l)
 	return ret, err

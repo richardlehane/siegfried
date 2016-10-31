@@ -156,7 +156,8 @@ type gzipD struct {
 }
 
 func newGzip(b *siegreader.Buffer, path string) (decompressor, error) {
-	_ = b.SizeNow()              // in case of a stream, force full read
+	b.Quit = make(chan struct{}) // in case a stream with a closed quit channel, make a new one
+	_ = b.SizeNow()              // in case a stream, force full read
 	buf, err := b.EofSlice(0, 4) // gzip stores uncompressed size in last 4 bytes of the stream
 	if err != nil {
 		return nil, err

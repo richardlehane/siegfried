@@ -275,14 +275,19 @@ func (s *Siegfried) Fields() [][]string {
 	return ret
 }
 
-// Identify identifies a stream or file object.
-// It takes the name of the file/stream (if unknown, give an empty string) and an io.Reader
-// It returns a channel of identifications and an error.
-func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identification, error) {
+func (s *Siegfried) Buffer(r io.Reader) (*siegreader.Buffer, error) {
 	buffer, err := s.buffers.Get(r)
 	if err == io.EOF {
 		err = nil
 	}
+	return buffer, err
+}
+
+func (s *Siegfried) Put(buffer *siegreader.Buffer) {
+	s.buffers.Put(buffer)
+}
+
+func (s *Siegfried) IdentifyBuffer(buffer *siegreader.Buffer, err error, name, mime string) (chan core.Identification, error) {
 	if err != nil && err != siegreader.ErrEmpty {
 		return nil, fmt.Errorf("siegfried: error reading file; got %v", err)
 	}
@@ -434,7 +439,7 @@ func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identifi
 			}
 		}
 	}
-	s.buffers.Put(buffer)
+	// report results
 	go func() {
 		for _, rec := range recs {
 			rec.Report(res)
@@ -442,6 +447,15 @@ func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identifi
 		close(res)
 	}()
 	return res, err
+}
+
+// Identify identifies a stream or file object.
+// It takes the name of the file/stream (if unknown, give an empty string) and an io.Reader
+// It returns a channel of identifications and an error.
+func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identification, error) {
+	buffer, err := s.Buffer(r)
+	defer s.buffers.Put(buffer)
+	return s.IdentifyBuffer(buffer, err, name, mime)
 }
 
 // Blame checks with the byte matcher to see what identification results subscribe to a particular result or test
@@ -494,14 +508,6 @@ func (s *Siegfried) Blame(idx, ct int, cn string) string {
 	}
 	return fmt.Sprintf("%s\nResults at %d: %s (identifies results reported by -slow)\nHits at %d: %s (identifies hits reported by -debug)", matcher, idx, resName, idx, ttiNames)
 
-}
-
-// Buffer returns the last buffer inspected
-// This prevents unnecessary double-up of IO e.g. when unzipping files post-identification.
-func (s *Siegfried) Buffer() *siegreader.Buffer {
-	last := s.buffers.Last()
-	last.Quit = make(chan struct{}) // may have already closed the quit channel
-	return last
 }
 
 // Update checks whether a Siegfried struct is due for update, by testing whether the time given is after the time
