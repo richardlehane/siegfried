@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// +build linux,go1.4,!appengine darwin,go1.4,!appengine dragonfly,go1.4,!appengine freebsd,go1.4,!appengine netbsd,go1.4,!appengine openbsd,go1.4,!appengine
+// +build linux,!appengine darwin dragonfly freebsd netbsd openbsd
 
 package siegreader
 
