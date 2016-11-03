@@ -7,9 +7,6 @@ go:
 - 1.6
 - 1.7
 - tip
-branches:
-  except:
-  - develop
 install:
 - go get github.com/richardlehane/siegfried/cmd/sf
 script:
@@ -21,6 +18,7 @@ before_deploy:
 - ./debbuilder.sh
 deploy:
   on:
+    branch: master
     tags: true
     go: 1.7
   provider: bintray
