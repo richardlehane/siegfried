@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/richardlehane/siegfried/config"
+	"github.com/richardlehane/siegfried/internal/config"
 )
 
 func TestSets(t *testing.T) {
@@ -28,9 +28,9 @@ func TestSets(t *testing.T) {
 }
 
 var testSet = map[string][]string{
-	"t": []string{"a", "a", "b", "c"},
-	"u": []string{"b", "d"},
-	"v": []string{"@t", "@u"},
+	"t": {"a", "a", "b", "c"},
+	"u": {"b", "d"},
+	"v": {"@t", "@u"},
 }
 
 func TestDupeSets(t *testing.T) {

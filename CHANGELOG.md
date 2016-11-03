@@ -1,7 +1,12 @@
 # Change Log
 ## v1.6.7
 ### Added
-- enable -hash and -z functionality for -serve 
+- enable -hash and -z functionality for -serve and -multi
+- hash and z params for server (-serve) to control per-request
+
+### Changed
+- code re-organisation using /internal to hide internal packages
+- -multi flag now a boolean
 
 ## v1.6.6 (2016-10-25)
 ### Added

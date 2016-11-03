@@ -27,8 +27,8 @@ import (
 	"time"
 
 	"github.com/richardlehane/siegfried"
-	"github.com/richardlehane/siegfried/config"
-	"github.com/richardlehane/siegfried/pkg/core/siegreader"
+	"github.com/richardlehane/siegfried/internal/config"
+	"github.com/richardlehane/siegfried/internal/core/siegreader"
 	/*// Uncomment to build with profiler
 	"net/http"
 	_ "net/http/pprof"
@@ -251,9 +251,10 @@ func main() {
 	}
 
 	if *logf != "" {
-		if *multi > 1 && *logf != "error" {
-			log.Fatalln("[FATAL] cannot log in parallel mode")
-		}
+		/*
+			if *multi > 1 && *logf != "error" {
+				log.Fatalln("[FATAL] cannot log in parallel mode")
+			}*/
 		if err := newLogger(*logf); err != nil {
 			log.Fatalln(err)
 		}

@@ -25,7 +25,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/richardlehane/siegfried/config"
+	"github.com/richardlehane/siegfried/internal/config"
 )
 
 // take a comma separated string of puids and sets (e.g. fmt/1,@pdf,fmt/2) and expand any sets within.

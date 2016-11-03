@@ -6,10 +6,10 @@ import (
 	"testing"
 
 	"github.com/richardlehane/siegfried"
-	"github.com/richardlehane/siegfried/config"
-	"github.com/richardlehane/siegfried/pkg/loc"
-	"github.com/richardlehane/siegfried/pkg/mimeinfo"
-	"github.com/richardlehane/siegfried/pkg/pronom"
+	"github.com/richardlehane/siegfried/internal/config"
+	"github.com/richardlehane/siegfried/internal/loc"
+	"github.com/richardlehane/siegfried/internal/mimeinfo"
+	"github.com/richardlehane/siegfried/internal/pronom"
 )
 
 var testhome = flag.String("testhome", "data", "override the default home directory")

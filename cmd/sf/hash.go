@@ -26,6 +26,8 @@ import (
 
 const hashChoices = "'md5', 'sha1', 'sha256', 'sha512', 'crc'"
 
+// TODO: make parallel safe
+
 var checksum hash.Hash
 
 func setHash() error {

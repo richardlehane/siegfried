@@ -27,7 +27,7 @@ import (
 	"github.com/richardlehane/characterize"
 	"github.com/richardlehane/webarchive"
 
-	"github.com/richardlehane/siegfried/pkg/core/siegreader"
+	"github.com/richardlehane/siegfried/internal/core/siegreader"
 )
 
 type decompressor interface {
@@ -219,6 +219,7 @@ func trimWebPath(p string) string {
 	return p
 }
 
+// TODO: make the newARC and newWARC funcs parallel safe
 var (
 	arcReader  *webarchive.ARCReader
 	warcReader *webarchive.WARCReader

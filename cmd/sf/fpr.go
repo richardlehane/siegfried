@@ -24,8 +24,8 @@ import (
 	"strings"
 
 	"github.com/richardlehane/siegfried"
-	"github.com/richardlehane/siegfried/config"
-	"github.com/richardlehane/siegfried/pkg/pronom"
+	"github.com/richardlehane/siegfried/internal/config"
+	"github.com/richardlehane/siegfried/internal/pronom"
 )
 
 var fprflag = flag.Bool("fpr", false, "start siegfried fpr server at "+config.Fpr())

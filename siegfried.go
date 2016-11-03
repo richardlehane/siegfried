@@ -43,20 +43,20 @@ import (
 	"strings"
 	"time"
 
-	"github.com/richardlehane/siegfried/config"
-	"github.com/richardlehane/siegfried/pkg/core"
-	"github.com/richardlehane/siegfried/pkg/core/bytematcher"
-	"github.com/richardlehane/siegfried/pkg/core/containermatcher"
-	"github.com/richardlehane/siegfried/pkg/core/mimematcher"
-	"github.com/richardlehane/siegfried/pkg/core/namematcher"
-	"github.com/richardlehane/siegfried/pkg/core/persist"
-	"github.com/richardlehane/siegfried/pkg/core/riffmatcher"
-	"github.com/richardlehane/siegfried/pkg/core/siegreader"
-	"github.com/richardlehane/siegfried/pkg/core/textmatcher"
-	"github.com/richardlehane/siegfried/pkg/core/xmlmatcher"
-	"github.com/richardlehane/siegfried/pkg/loc"
-	"github.com/richardlehane/siegfried/pkg/mimeinfo"
-	"github.com/richardlehane/siegfried/pkg/pronom"
+	"github.com/richardlehane/siegfried/internal/config"
+	"github.com/richardlehane/siegfried/internal/core"
+	"github.com/richardlehane/siegfried/internal/core/bytematcher"
+	"github.com/richardlehane/siegfried/internal/core/containermatcher"
+	"github.com/richardlehane/siegfried/internal/core/mimematcher"
+	"github.com/richardlehane/siegfried/internal/core/namematcher"
+	"github.com/richardlehane/siegfried/internal/core/persist"
+	"github.com/richardlehane/siegfried/internal/core/riffmatcher"
+	"github.com/richardlehane/siegfried/internal/core/siegreader"
+	"github.com/richardlehane/siegfried/internal/core/textmatcher"
+	"github.com/richardlehane/siegfried/internal/core/xmlmatcher"
+	"github.com/richardlehane/siegfried/internal/loc"
+	"github.com/richardlehane/siegfried/internal/mimeinfo"
+	"github.com/richardlehane/siegfried/internal/pronom"
 )
 
 var ( // for side effect - register their patterns/ signature loaders
@@ -275,6 +275,7 @@ func (s *Siegfried) Fields() [][]string {
 	return ret
 }
 
+// Buffer returns a siegreader buffer from the pool
 func (s *Siegfried) Buffer(r io.Reader) (*siegreader.Buffer, error) {
 	buffer, err := s.buffers.Get(r)
 	if err == io.EOF {
@@ -283,10 +284,12 @@ func (s *Siegfried) Buffer(r io.Reader) (*siegreader.Buffer, error) {
 	return buffer, err
 }
 
+// Put returns a siegreader buffer to the pool
 func (s *Siegfried) Put(buffer *siegreader.Buffer) {
 	s.buffers.Put(buffer)
 }
 
+// IdentifyBuffer identifies a siegreader buffer. Supply the error from Get as the second argument.
 func (s *Siegfried) IdentifyBuffer(buffer *siegreader.Buffer, err error, name, mime string) (chan core.Identification, error) {
 	if err != nil && err != siegreader.ErrEmpty {
 		return nil, fmt.Errorf("siegfried: error reading file; got %v", err)
@@ -450,7 +453,7 @@ func (s *Siegfried) IdentifyBuffer(buffer *siegreader.Buffer, err error, name, m
 }
 
 // Identify identifies a stream or file object.
-// It takes the name of the file/stream (if unknown, give an empty string) and an io.Reader
+// It takes an io.Reader and the name and mimetype of the file/stream (if unknown, give empty strings).
 // It returns a channel of identifications and an error.
 func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identification, error) {
 	buffer, err := s.Buffer(r)
