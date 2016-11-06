@@ -22,8 +22,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/richardlehane/siegfried/internal/config"
-	"github.com/richardlehane/siegfried/internal/core"
+	"github.com/richardlehane/siegfried/config"
+	"github.com/richardlehane/siegfried/core"
 )
 
 // TODO: slow and debug are non-parallel, but other logging functions should work in parallel modes

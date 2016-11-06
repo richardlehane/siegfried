@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/richardlehane/siegfried/internal/config"
+	"github.com/richardlehane/siegfried/config"
 )
 
 func TestSets(t *testing.T) {

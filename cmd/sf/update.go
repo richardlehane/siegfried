@@ -23,7 +23,7 @@ import (
 	"time"
 
 	"github.com/richardlehane/siegfried"
-	"github.com/richardlehane/siegfried/internal/config"
+	"github.com/richardlehane/siegfried/config"
 )
 
 type Update struct {

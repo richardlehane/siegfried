@@ -12,8 +12,8 @@ import (
 	"time"
 
 	"github.com/richardlehane/siegfried"
-	"github.com/richardlehane/siegfried/internal/config"
-	"github.com/richardlehane/siegfried/internal/pronom"
+	"github.com/richardlehane/siegfried/config"
+	"github.com/richardlehane/siegfried/pronom"
 )
 
 var (

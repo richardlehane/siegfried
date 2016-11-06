@@ -27,7 +27,7 @@ import (
 	"github.com/richardlehane/characterize"
 	"github.com/richardlehane/webarchive"
 
-	"github.com/richardlehane/siegfried/internal/core/siegreader"
+	"github.com/richardlehane/siegfried/internal/siegreader"
 )
 
 type decompressor interface {

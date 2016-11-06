@@ -24,7 +24,7 @@
 //  	log.Fatal(err)
 //  }
 //  defer f.Close()
-//  c, err := s.Identify("filename", f)
+//  c, err := s.Identify(f, "filename.ext", "application/xml")
 //  if err != nil {
 //  	log.Fatal(err)
 //  }
@@ -43,20 +43,20 @@ import (
 	"strings"
 	"time"
 
-	"github.com/richardlehane/siegfried/internal/config"
-	"github.com/richardlehane/siegfried/internal/core"
-	"github.com/richardlehane/siegfried/internal/core/bytematcher"
-	"github.com/richardlehane/siegfried/internal/core/containermatcher"
-	"github.com/richardlehane/siegfried/internal/core/mimematcher"
-	"github.com/richardlehane/siegfried/internal/core/namematcher"
-	"github.com/richardlehane/siegfried/internal/core/persist"
-	"github.com/richardlehane/siegfried/internal/core/riffmatcher"
-	"github.com/richardlehane/siegfried/internal/core/siegreader"
-	"github.com/richardlehane/siegfried/internal/core/textmatcher"
-	"github.com/richardlehane/siegfried/internal/core/xmlmatcher"
-	"github.com/richardlehane/siegfried/internal/loc"
-	"github.com/richardlehane/siegfried/internal/mimeinfo"
-	"github.com/richardlehane/siegfried/internal/pronom"
+	"github.com/richardlehane/siegfried/config"
+	"github.com/richardlehane/siegfried/core"
+	"github.com/richardlehane/siegfried/internal/bytematcher"
+	"github.com/richardlehane/siegfried/internal/containermatcher"
+	"github.com/richardlehane/siegfried/internal/mimematcher"
+	"github.com/richardlehane/siegfried/internal/namematcher"
+	"github.com/richardlehane/siegfried/internal/persist"
+	"github.com/richardlehane/siegfried/internal/riffmatcher"
+	"github.com/richardlehane/siegfried/internal/siegreader"
+	"github.com/richardlehane/siegfried/internal/textmatcher"
+	"github.com/richardlehane/siegfried/internal/xmlmatcher"
+	"github.com/richardlehane/siegfried/loc"
+	"github.com/richardlehane/siegfried/mimeinfo"
+	"github.com/richardlehane/siegfried/pronom"
 )
 
 var ( // for side effect - register their patterns/ signature loaders
