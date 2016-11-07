@@ -22,7 +22,7 @@ import (
 
 	"github.com/richardlehane/siegfried/internal/bytematcher/frames"
 	"github.com/richardlehane/siegfried/internal/bytematcher/patterns"
-	"github.com/richardlehane/siegfried/pronom/mappings"
+	"github.com/richardlehane/siegfried/pkg/pronom/mappings"
 )
 
 // This code produces siegfried bytematcher signatures from the relevant parts of PRONOM, Droid and Container XML signature files

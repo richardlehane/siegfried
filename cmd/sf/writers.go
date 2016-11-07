@@ -26,8 +26,8 @@ import (
 	"strings"
 
 	"github.com/richardlehane/siegfried"
-	"github.com/richardlehane/siegfried/config"
-	"github.com/richardlehane/siegfried/core"
+	"github.com/richardlehane/siegfried/pkg/config"
+	"github.com/richardlehane/siegfried/pkg/core"
 )
 
 type iterableID interface {

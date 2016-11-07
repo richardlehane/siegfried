@@ -4,11 +4,11 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/richardlehane/siegfried/config"
-	"github.com/richardlehane/siegfried/core"
 	"github.com/richardlehane/siegfried/internal/persist"
 	"github.com/richardlehane/siegfried/internal/siegreader"
-	"github.com/richardlehane/siegfried/pronom"
+	"github.com/richardlehane/siegfried/pkg/config"
+	"github.com/richardlehane/siegfried/pkg/core"
+	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
 func TestLoad(t *testing.T) {

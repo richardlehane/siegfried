@@ -27,8 +27,8 @@ import (
 	"time"
 
 	"github.com/richardlehane/siegfried"
-	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/internal/siegreader"
+	"github.com/richardlehane/siegfried/pkg/config"
 	/*// Uncomment to build with profiler
 	"net/http"
 	_ "net/http/pprof"

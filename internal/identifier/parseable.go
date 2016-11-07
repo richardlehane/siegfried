@@ -17,9 +17,9 @@ package identifier
 import (
 	"strings"
 
-	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/internal/bytematcher/frames"
 	"github.com/richardlehane/siegfried/internal/priority"
+	"github.com/richardlehane/siegfried/pkg/config"
 )
 
 // FormatInfo is Identifier-specific information to be retained for the Identifier.

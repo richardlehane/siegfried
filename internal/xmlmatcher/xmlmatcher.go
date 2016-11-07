@@ -19,10 +19,10 @@ import (
 
 	"github.com/richardlehane/xmldetect"
 
-	"github.com/richardlehane/siegfried/core"
 	"github.com/richardlehane/siegfried/internal/persist"
 	"github.com/richardlehane/siegfried/internal/priority"
 	"github.com/richardlehane/siegfried/internal/siegreader"
+	"github.com/richardlehane/siegfried/pkg/core"
 )
 
 type Matcher map[[2]string][]int

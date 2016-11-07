@@ -4,9 +4,9 @@ import (
 	"testing"
 
 	wac "github.com/richardlehane/match/fwac"
-	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/internal/bytematcher/frames/tests"
 	"github.com/richardlehane/siegfried/internal/persist"
+	"github.com/richardlehane/siegfried/pkg/config"
 )
 
 var TestProcessObj = &Matcher{

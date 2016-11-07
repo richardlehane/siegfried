@@ -18,8 +18,8 @@ import (
 	"fmt"
 
 	wac "github.com/richardlehane/match/fwac"
-	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/internal/bytematcher/frames"
+	"github.com/richardlehane/siegfried/pkg/config"
 )
 
 func (b *Matcher) addSignature(sig frames.Signature) error {

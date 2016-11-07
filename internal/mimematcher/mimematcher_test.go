@@ -3,8 +3,8 @@ package mimematcher
 import (
 	"testing"
 
-	"github.com/richardlehane/siegfried/core"
 	"github.com/richardlehane/siegfried/internal/persist"
+	"github.com/richardlehane/siegfried/pkg/core"
 )
 
 var fmts = SignatureSet{"application/json", "application/json;v1", "text/plain", "x-world/x-3dmf", "application/x-cocoa"}

@@ -4,7 +4,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/richardlehane/siegfried/config"
+	"github.com/richardlehane/siegfried/pkg/config"
 )
 
 // DROID parsing is tested by comparing it against Report parsing

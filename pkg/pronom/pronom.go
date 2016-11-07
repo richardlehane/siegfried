@@ -26,10 +26,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/internal/bytematcher/frames"
 	"github.com/richardlehane/siegfried/internal/identifier"
-	"github.com/richardlehane/siegfried/pronom/mappings"
+	"github.com/richardlehane/siegfried/pkg/config"
+	"github.com/richardlehane/siegfried/pkg/pronom/mappings"
 )
 
 type pronom struct {

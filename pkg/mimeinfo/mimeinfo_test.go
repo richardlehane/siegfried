@@ -19,8 +19,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/internal/persist"
+	"github.com/richardlehane/siegfried/pkg/config"
 )
 
 func TestNew(t *testing.T) {

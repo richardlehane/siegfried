@@ -18,9 +18,9 @@ import (
 	"fmt"
 
 	wac "github.com/richardlehane/match/fwac"
-	"github.com/richardlehane/siegfried/config"
-	"github.com/richardlehane/siegfried/core"
 	"github.com/richardlehane/siegfried/internal/siegreader"
+	"github.com/richardlehane/siegfried/pkg/config"
+	"github.com/richardlehane/siegfried/pkg/core"
 )
 
 func (b *Matcher) start(bof bool) {

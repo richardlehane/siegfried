@@ -18,8 +18,6 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/richardlehane/siegfried/config"
-	"github.com/richardlehane/siegfried/core"
 	"github.com/richardlehane/siegfried/internal/bytematcher"
 	"github.com/richardlehane/siegfried/internal/bytematcher/frames"
 	"github.com/richardlehane/siegfried/internal/containermatcher"
@@ -30,6 +28,8 @@ import (
 	"github.com/richardlehane/siegfried/internal/riffmatcher"
 	"github.com/richardlehane/siegfried/internal/textmatcher"
 	"github.com/richardlehane/siegfried/internal/xmlmatcher"
+	"github.com/richardlehane/siegfried/pkg/config"
+	"github.com/richardlehane/siegfried/pkg/core"
 )
 
 // A base identifier that can be embedded in other identifier

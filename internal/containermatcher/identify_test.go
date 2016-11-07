@@ -5,10 +5,10 @@ import (
 	"io"
 	"testing"
 
-	"github.com/richardlehane/siegfried/core"
 	"github.com/richardlehane/siegfried/internal/bytematcher/frames"
 	"github.com/richardlehane/siegfried/internal/bytematcher/frames/tests"
 	"github.com/richardlehane/siegfried/internal/siegreader"
+	"github.com/richardlehane/siegfried/pkg/core"
 )
 
 func TestIdentify(t *testing.T) {

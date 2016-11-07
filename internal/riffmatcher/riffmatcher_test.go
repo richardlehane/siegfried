@@ -6,9 +6,9 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/richardlehane/siegfried/core"
 	"github.com/richardlehane/siegfried/internal/persist"
 	"github.com/richardlehane/siegfried/internal/siegreader"
+	"github.com/richardlehane/siegfried/pkg/core"
 )
 
 var testdata = flag.String("testdata", filepath.Join("..", "..", "..", "cmd", "sf", "testdata"), "override the default test data directory")

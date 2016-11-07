@@ -1,4 +1,4 @@
-// Copyright 2016 Richard Lehane. All rights reserved.
+// Copyright 2014 Richard Lehane. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,21 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package loc
+package pronom
 
 import (
 	"fmt"
 	"sort"
 	"strings"
 
-	"github.com/richardlehane/siegfried/config"
-	"github.com/richardlehane/siegfried/core"
 	"github.com/richardlehane/siegfried/internal/identifier"
 	"github.com/richardlehane/siegfried/internal/persist"
+	"github.com/richardlehane/siegfried/pkg/config"
+	"github.com/richardlehane/siegfried/pkg/core"
 )
 
 func init() {
-	core.RegisterIdentifier(core.LOC, Load)
+	core.RegisterIdentifier(core.Pronom, Load)
 }
 
 type Identifier struct {
@@ -35,12 +35,12 @@ type Identifier struct {
 }
 
 func (i *Identifier) Save(ls *persist.LoadSaver) {
-	ls.SaveByte(core.LOC)
+	ls.SaveByte(core.Pronom)
 	ls.SaveSmallInt(len(i.infos))
 	for k, v := range i.infos {
 		ls.SaveString(k)
 		ls.SaveString(v.name)
-		ls.SaveString(v.longName)
+		ls.SaveString(v.version)
 		ls.SaveString(v.mimeType)
 	}
 	i.Base.Save(ls)
@@ -65,31 +65,18 @@ func New(opts ...config.Option) (core.Identifier, error) {
 	for _, v := range opts {
 		v()
 	}
-	loc, err := newLOC(config.LOC())
+	pronom, err := NewPronom()
 	if err != nil {
 		return nil, err
 	}
-	// set updated
-	updated := loc.(fdds).Updated().Format(dateFmt)
-	// add extensions
-	for _, v := range config.Extend() {
-		e, err := newLOC(v)
-		if err != nil {
-			return nil, fmt.Errorf("LOC: error loading extension file %s; got %s", v, err)
-		}
-		loc = identifier.Join(loc, e)
-	}
-	// apply config
-	loc = identifier.ApplyConfig(loc)
-	// return identifier
 	return &Identifier{
-		infos: infos(loc.Infos()),
-		Base:  identifier.New(loc, config.ZipLOC(), updated),
+		infos: infos(pronom.Infos()),
+		Base:  identifier.New(pronom, config.ZipPuid()),
 	}, nil
 }
 
 func (i *Identifier) Fields() []string {
-	return []string{"namespace", "id", "format", "full", "mime", "basis", "warning"}
+	return []string{"namespace", "id", "format", "version", "mime", "basis", "warning"}
 }
 
 func (i *Identifier) Recorder() core.Recorder {
@@ -149,7 +136,7 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 		if res.Index() < 0 {
 			if r.ZipDefault() {
 				r.cscore += incScore
-				r.ids = add(r.ids, r.Name(), config.ZipLOC(), r.infos[config.ZipLOC()], res.Basis(), r.cscore)
+				r.ids = add(r.ids, r.Name(), config.ZipPuid(), r.infos[config.ZipPuid()], res.Basis(), r.cscore)
 			}
 			return false
 		}
@@ -161,17 +148,6 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 				basis = basis + fmt.Sprintf(" (signature %d/%d)", p, t)
 			}
 			r.ids = add(r.ids, r.Name(), id, r.infos[id], basis, r.cscore)
-			return true
-		} else {
-			return false
-		}
-	case core.RIFFMatcher:
-		if hit, id := r.Hit(m, res.Index()); hit {
-			if r.satisfied {
-				return true
-			}
-			r.cscore += incScore
-			r.ids = add(r.ids, r.Name(), id, r.infos[id], res.Basis(), r.cscore)
 			return true
 		} else {
 			return false
@@ -192,6 +168,16 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 		} else {
 			return false
 		}
+	case core.TextMatcher:
+		if hit, id := r.Hit(m, res.Index()); hit {
+			if r.satisfied {
+				return true
+			}
+			r.ids = add(r.ids, r.Name(), id, r.infos[id], res.Basis(), textScore)
+			return true
+		} else {
+			return false
+		}
 	}
 }
 
@@ -205,6 +191,11 @@ func (r *Recorder) Satisfied(mt core.MatcherType) (bool, int) {
 		}
 		if len(r.ids) == 0 {
 			return false, 0
+		}
+		for _, res := range r.ids {
+			if res.ID == config.TextPuid() {
+				return false, 0
+			}
 		}
 	}
 	r.satisfied = true
@@ -266,8 +257,14 @@ func (r *Recorder) Report(res chan core.Identification) {
 			if conf > mimeScore && v.confidence != conf {
 				break
 			}
-			// if the match has no corresponding byte or RIFF signature...
-			if ok := r.HasSig(v.ID, core.RIFFMatcher, core.ByteMatcher); !ok {
+			// if we have plain text result that is based on ext or mime only,
+			// and not on a text match, and if text matcher is on for this identifier,
+			// then don't report a text match
+			if v.ID == config.TextPuid() && conf < textScore && r.textActive {
+				continue
+			}
+			// if the match has no corresponding byte or container signature...
+			if ok := r.HasSig(v.ID, core.ContainerMatcher, core.ByteMatcher); !ok {
 				// break immediately if more than one match
 				if len(nids) > 0 {
 					nids = nids[:0]
@@ -368,7 +365,7 @@ type Identification struct {
 	Namespace  string
 	ID         string
 	Name       string
-	LongName   string
+	Version    string
 	Mime       string
 	Basis      []string
 	Warning    string
@@ -400,8 +397,8 @@ func (id Identification) YAML() string {
 	if len(id.Basis) > 0 {
 		basis = quoteText(strings.Join(id.Basis, "; "))
 	}
-	return fmt.Sprintf("  - ns      : %v\n    id      : %v\n    format  : %v\n    full    : %v\n    mime    : %v\n    basis   : %v\n    warning : %v\n",
-		id.Namespace, id.ID, quoteText(id.Name), quoteText(id.LongName), quoteText(id.Mime), basis, quoteText(id.Warning))
+	return fmt.Sprintf("  - ns      : %v\n    id      : %v\n    format  : %v\n    version : %v\n    mime    : %v\n    basis   : %v\n    warning : %v\n",
+		id.Namespace, id.ID, quoteText(id.Name), quoteText(id.Version), quoteText(id.Mime), basis, quoteText(id.Warning))
 }
 
 func (id Identification) JSON() string {
@@ -409,8 +406,8 @@ func (id Identification) JSON() string {
 	if len(id.Basis) > 0 {
 		basis = strings.Join(id.Basis, "; ")
 	}
-	return fmt.Sprintf("{\"ns\":\"%s\",\"id\":\"%s\",\"format\":\"%s\",\"full\":\"%s\",\"mime\":\"%s\",\"basis\":\"%s\",\"warning\":\"%s\"}",
-		id.Namespace, id.ID, id.Name, id.LongName, id.Mime, basis, id.Warning)
+	return fmt.Sprintf("{\"ns\":\"%s\",\"id\":\"%s\",\"format\":\"%s\",\"version\":\"%s\",\"mime\":\"%s\",\"basis\":\"%s\",\"warning\":\"%s\"}",
+		id.Namespace, id.ID, id.Name, id.Version, id.Mime, basis, id.Warning)
 }
 
 func (id Identification) CSV() []string {
@@ -422,7 +419,7 @@ func (id Identification) CSV() []string {
 		id.Namespace,
 		id.ID,
 		id.Name,
-		id.LongName,
+		id.Version,
 		id.Mime,
 		basis,
 		id.Warning,
@@ -449,5 +446,5 @@ func add(p pids, id string, f string, info formatInfo, basis string, c int) pids
 			return p
 		}
 	}
-	return append(p, Identification{id, f, info.name, info.longName, info.mimeType, []string{basis}, "", config.IsArchive(f), c})
+	return append(p, Identification{id, f, info.name, info.version, info.mimeType, []string{basis}, "", config.IsArchive(f), c})
 }

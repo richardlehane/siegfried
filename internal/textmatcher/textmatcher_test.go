@@ -19,8 +19,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/richardlehane/siegfried/core"
 	"github.com/richardlehane/siegfried/internal/siegreader"
+	"github.com/richardlehane/siegfried/pkg/core"
 )
 
 type unit struct {

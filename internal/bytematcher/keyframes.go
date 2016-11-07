@@ -17,10 +17,10 @@ package bytematcher
 import (
 	"fmt"
 
-	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/internal/bytematcher/frames"
 	"github.com/richardlehane/siegfried/internal/persist"
 	"github.com/richardlehane/siegfried/internal/priority"
+	"github.com/richardlehane/siegfried/pkg/config"
 )
 
 // positioning information: min/max offsets (in relation to BOF or EOF) and min/max lengths

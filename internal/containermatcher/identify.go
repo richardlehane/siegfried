@@ -18,10 +18,10 @@ import (
 	"fmt"
 	"path/filepath"
 
-	"github.com/richardlehane/siegfried/config"
-	"github.com/richardlehane/siegfried/core"
 	"github.com/richardlehane/siegfried/internal/priority"
 	"github.com/richardlehane/siegfried/internal/siegreader"
+	"github.com/richardlehane/siegfried/pkg/config"
+	"github.com/richardlehane/siegfried/pkg/core"
 )
 
 func (m Matcher) Identify(n string, b *siegreader.Buffer, exclude ...int) (chan core.Result, error) {

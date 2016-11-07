@@ -43,8 +43,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/richardlehane/siegfried/config"
-	"github.com/richardlehane/siegfried/core"
 	"github.com/richardlehane/siegfried/internal/bytematcher"
 	"github.com/richardlehane/siegfried/internal/containermatcher"
 	"github.com/richardlehane/siegfried/internal/mimematcher"
@@ -54,9 +52,11 @@ import (
 	"github.com/richardlehane/siegfried/internal/siegreader"
 	"github.com/richardlehane/siegfried/internal/textmatcher"
 	"github.com/richardlehane/siegfried/internal/xmlmatcher"
-	"github.com/richardlehane/siegfried/loc"
-	"github.com/richardlehane/siegfried/mimeinfo"
-	"github.com/richardlehane/siegfried/pronom"
+	"github.com/richardlehane/siegfried/pkg/config"
+	"github.com/richardlehane/siegfried/pkg/core"
+	"github.com/richardlehane/siegfried/pkg/loc"
+	"github.com/richardlehane/siegfried/pkg/mimeinfo"
+	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
 var ( // for side effect - register their patterns/ signature loaders

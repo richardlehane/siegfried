@@ -24,11 +24,11 @@ import (
 	"strings"
 
 	"github.com/richardlehane/siegfried"
-	"github.com/richardlehane/siegfried/config"
-	"github.com/richardlehane/siegfried/core"
-	"github.com/richardlehane/siegfried/loc"
-	"github.com/richardlehane/siegfried/mimeinfo"
-	"github.com/richardlehane/siegfried/pronom"
+	"github.com/richardlehane/siegfried/pkg/config"
+	"github.com/richardlehane/siegfried/pkg/core"
+	"github.com/richardlehane/siegfried/pkg/loc"
+	"github.com/richardlehane/siegfried/pkg/mimeinfo"
+	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
 var usage = `

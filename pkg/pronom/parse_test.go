@@ -6,7 +6,7 @@ import (
 
 	"github.com/richardlehane/siegfried/internal/bytematcher/patterns"
 	"github.com/richardlehane/siegfried/internal/identifier"
-	"github.com/richardlehane/siegfried/pronom/mappings"
+	"github.com/richardlehane/siegfried/pkg/pronom/mappings"
 )
 
 var bsStub1 = mappings.ByteSequence{

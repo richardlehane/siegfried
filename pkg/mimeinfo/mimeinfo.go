@@ -25,11 +25,11 @@ import (
 	"strings"
 	"unicode/utf16"
 
-	"github.com/richardlehane/siegfried/config"
 	"github.com/richardlehane/siegfried/internal/bytematcher/frames"
 	"github.com/richardlehane/siegfried/internal/bytematcher/patterns"
 	"github.com/richardlehane/siegfried/internal/identifier"
-	"github.com/richardlehane/siegfried/mimeinfo/mappings"
+	"github.com/richardlehane/siegfried/pkg/config"
+	"github.com/richardlehane/siegfried/pkg/mimeinfo/mappings"
 )
 
 type mimeinfo struct {
