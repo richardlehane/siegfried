@@ -21,6 +21,7 @@ import (
 	"hash"
 	"os"
 	"path/filepath"
+	"sync"
 	"time"
 
 	"github.com/richardlehane/siegfried"
