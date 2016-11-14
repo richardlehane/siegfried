@@ -18,130 +18,52 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"path/filepath"
 	"strings"
 	"time"
 
 	"github.com/richardlehane/siegfried/pkg/config"
-	"github.com/richardlehane/siegfried/pkg/core"
 )
-
-// TODO: slow and debug are non-parallel, but other logging functions should work in parallel modes
-
-var lg *logger
 
 type logger struct {
 	progress, e, warn, debug, slow, known, unknown bool
 	w                                              io.Writer
 	start                                          time.Time
-	// mutate each file
-	path string
-	u    bool
-	fp   bool // file name already printed
 }
 
-func newLogger(opts string) error {
-	l := &logger{w: os.Stderr}
+func newLogger(opts string) (*logger, error) {
+	lg := &logger{w: os.Stderr}
+	if opts == "" {
+		return lg, nil
+	}
 	for _, o := range strings.Split(opts, ",") {
 		switch o {
 		case "stderr":
 		case "stdout", "out", "o":
-			l.w = os.Stdout
+			lg.w = os.Stdout
 		case "progress", "p":
-			l.progress = true
+			lg.progress = true
 		case "time", "t":
-			l.start = time.Now()
+			lg.start = time.Now()
 		case "error", "err", "e":
-			l.e = true
+			lg.e = true
 		case "warning", "warn", "w":
-			l.warn = true
+			lg.warn = true
 		case "debug", "d":
-			l.debug, l.progress = true, true
+			lg.debug, lg.progress = true, true
 			config.SetDebug()
 		case "slow", "s":
-			l.slow, l.progress = true, true
+			lg.slow, lg.progress = true, true
 			config.SetSlow()
 		case "unknown", "u":
-			l.unknown = true
+			lg.unknown = true
 		case "known", "k":
-			l.known = true
+			lg.known = true
 		default:
-			return fmt.Errorf("unknown -log input %s; expect be comma-separated list of stdout,out,o,progress,p,error,err,e,warning,warn,w,debug,d,slow,s,unknown,u,known,k", opts)
+			return nil, fmt.Errorf("unknown -log input %s; expect be comma-separated list of stdout,out,o,progress,p,error,err,e,warning,warn,w,debug,d,slow,s,unknown,u,known,k", opts)
 		}
 	}
 	if config.Debug() || config.Slow() {
-		config.SetOut(l.w)
+		config.SetOut(lg.w)
 	}
-	lg = l
-	return nil
-}
-
-var (
-	fileString = "[FILE]"
-	errString  = "[ERROR]"
-	warnString = "[WARN]"
-	timeString = "[TIME]"
-)
-
-func (l *logger) printElapsed() {
-	if l == nil || l.start.IsZero() {
-		return
-	}
-	fmt.Fprintf(l.w, "%s %v\n", timeString, time.Since(l.start))
-}
-
-func (l *logger) printFile() {
-	if !l.fp {
-		fmt.Fprintf(l.w, "%s %s\n", fileString, l.path)
-		l.fp = true
-	}
-}
-
-func (l *logger) set(path string) {
-	if l == nil {
-		return
-	}
-	l.path, _ = filepath.Abs(path)
-	if l.path == "" {
-		l.path = path
-	}
-	if l.progress {
-		l.printFile()
-	}
-}
-
-func (l *logger) err(err error) {
-	if l != nil && l.e && err != nil {
-		l.printFile()
-		fmt.Fprintf(l.w, "%s %v\n", errString, err)
-	}
-}
-
-func (l *logger) id(i core.Identification) {
-	if l == nil {
-		return
-	}
-	if (l.unknown || l.known) && i.Known() {
-		l.u = true
-	}
-	if l.warn {
-		if w := i.Warn(); w != "" {
-			l.printFile()
-			fmt.Fprintf(l.w, "%s %s\n", warnString, w)
-		}
-	}
-	if l.slow || l.debug {
-		fmt.Fprintf(l.w, "matched: %s\n", i.String())
-	}
-}
-
-func (l *logger) reset() {
-	if l == nil {
-		return
-	}
-	if (l.known && l.u) || (l.unknown && !l.u) {
-		fmt.Fprintln(l.w, l.path)
-	}
-	l.u, l.fp = false, false
-	l.path = ""
+	return lg, nil
 }

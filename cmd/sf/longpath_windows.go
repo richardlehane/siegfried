@@ -16,9 +16,11 @@ package main
 
 import (
 	"fmt"
+	"hash"
 	"os"
 	"path/filepath"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/richardlehane/siegfried"
@@ -81,8 +83,8 @@ func retryOpen(path string, err error) (*os.File, error) {
 	return file, nil
 }
 
-func multiIdentifyS(w writer, s *siegfried.Siegfried, root, orig string, norecurse bool) error {
-	wf := func(path string, info os.FileInfo, err error) error {
+func identify(ctxts chan *context, wg *sync.WaitGroup, s *siegfried.Siegfried, w writer, root, orig string, h hash.Hash, z bool, norecurse bool) error {
+	walkFunc := func(path string, info os.FileInfo, err error) error {
 		var retry bool
 		var lp, sp string
 		if *throttlef > 0 {
@@ -101,15 +103,18 @@ func multiIdentifyS(w writer, s *siegfried.Siegfried, root, orig string, norecur
 				return filepath.SkipDir
 			}
 			if retry { // if a dir long path, restart the recursion with a long path as the new root
-				return multiIdentifyS(w, s, lp, sp, norecurse)
+				return identify(ctxts, wg, s, w, lp, sp, h, z, norecurse)
 			}
 			if *droido {
-				w.writeFile(shortpath(path, orig), -1, info.ModTime().Format(time.RFC3339), nil, nil, nil) // write directory with a -1 size for droid output only
+				dctx := newContext(s, w, wg, nil, false, shortpath(path, orig), "", info.ModTime().Format(time.RFC3339), -1)
+				dctx.res <- results{nil, nil, nil}
+				wg.Add(1)
+				ctxts <- dctx
 			}
 			return nil
 		}
-		identifyFile(w, s, shortpath(path, orig), info.Size(), info.ModTime().Format(time.RFC3339))
+		identifyFile(newContext(s, w, wg, h, z, shortpath(path, orig), "", info.ModTime().Format(time.RFC3339), info.Size()), ctxts)
 		return nil
 	}
-	return filepath.Walk(root, wf)
+	return filepath.Walk(root, walkFunc)
 }

@@ -219,12 +219,6 @@ func trimWebPath(p string) string {
 	return p
 }
 
-// TODO: make the newARC and newWARC funcs parallel safe
-var (
-	arcReader  *webarchive.ARCReader
-	warcReader *webarchive.WARCReader
-)
-
 type wa struct {
 	p   string
 	rec webarchive.Record
@@ -232,22 +226,12 @@ type wa struct {
 }
 
 func newARC(r io.Reader, path string) (decompressor, error) {
-	var err error
-	if arcReader == nil {
-		arcReader, err = webarchive.NewARCReader(r)
-	} else {
-		err = arcReader.Reset(r)
-	}
+	arcReader, err := webarchive.NewARCReader(r)
 	return &wa{p: trimWebPath(path), rdr: arcReader}, err
 }
 
 func newWARC(r io.Reader, path string) (decompressor, error) {
-	var err error
-	if warcReader == nil {
-		warcReader, err = webarchive.NewWARCReader(r)
-	} else {
-		err = warcReader.Reset(r)
-	}
+	warcReader, err := webarchive.NewWARCReader(r)
 	return &wa{p: trimWebPath(path), rdr: warcReader}, err
 }
 

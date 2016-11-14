@@ -30,63 +30,31 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core"
 )
 
-type iterableID interface {
-	next() core.Identification
-}
+// i.Known()
 
-type idChan chan core.Identification
-
-func (ids idChan) next() core.Identification {
-	id, ok := <-ids
-	if !ok {
-		return nil
-	}
-	lg.id(id)
-	return id
-}
-
-type idSlice struct {
-	idx int
-	ids []core.Identification
-}
-
-func (is *idSlice) next() core.Identification {
-	is.idx++
-	if is.idx > len(is.ids) {
-		return nil
-	}
-	return is.ids[is.idx-1]
-}
-
-func makeIdSlice(c iterableID) *idSlice {
+func sliceIDs(c chan core.Identification) ([]core.Identification, config.Archive) {
+	var arc config.Archive
 	ids := make([]core.Identification, 0, 1)
-	for id := c.next(); id != nil; id = c.next() {
+	for id := range c {
 		ids = append(ids, id)
+		if id.Archive() > 0 {
+			arc = id.Archive()
+		}
 	}
-	return &idSlice{0, ids}
+	return ids, arc
 }
 
 type writer interface {
 	writeHead(s *siegfried.Siegfried)
 	// if a directory give a negative sz
-	writeFile(name string, sz int64, mod string, checksum []byte, err error, ids iterableID) config.Archive
+	writeFile(name string, sz int64, mod string, checksum []byte, err error, ids []core.Identification)
 	writeTail()
 }
 
 type logWriter struct{}
 
 func (l logWriter) writeHead(s *siegfried.Siegfried) {}
-func (l logWriter) writeFile(name string, sz int64, mod string, cs []byte, err error, ids iterableID) config.Archive {
-	var arc config.Archive
-	if ids == nil {
-		return 0
-	}
-	for id := ids.next(); id != nil; id = ids.next() {
-		if id.Archive() > 0 {
-			arc = id.Archive()
-		}
-	}
-	return arc
+func (l logWriter) writeFile(name string, sz int64, mod string, cs []byte, err error, ids []core.Identification) {
 }
 func (l logWriter) writeTail() {}
 
@@ -116,7 +84,7 @@ func (c *csvWriter) writeHead(s *siegfried.Siegfried) {
 	c.recs[0][0], c.recs[0][1], c.recs[0][2], c.recs[0][3] = "filename", "filesize", "modified", "errors"
 	idx := 4
 	if *hashf != "" {
-		c.recs[0][4] = hashHeader(false)
+		c.recs[0][4] = hashHeader(false, *hashf)
 		idx++
 	}
 	for _, f := range fields {
@@ -126,7 +94,7 @@ func (c *csvWriter) writeHead(s *siegfried.Siegfried) {
 	c.w.Write(c.recs[0])
 }
 
-func (c *csvWriter) writeFile(name string, sz int64, mod string, checksum []byte, err error, ids iterableID) config.Archive {
+func (c *csvWriter) writeFile(name string, sz int64, mod string, checksum []byte, err error, ids []core.Identification) {
 	var errStr string
 	if err != nil {
 		errStr = err.Error()
@@ -137,24 +105,20 @@ func (c *csvWriter) writeFile(name string, sz int64, mod string, checksum []byte
 		c.recs[0][4] = hex.EncodeToString(checksum)
 		idx++
 	}
-	if ids == nil {
+	if len(ids) == 0 {
 		empty := make([]string, len(c.recs[0])-idx)
 		if checksum != nil {
 			c.recs[0][4] = ""
 		}
 		copy(c.recs[0][idx:], empty)
 		c.w.Write(c.recs[0])
-		return 0
+		return
 	}
 
-	var arc config.Archive
 	var thisName string
 	var rowIdx, colIdx, prevLen int
 	colIdx = idx
-	for id := ids.next(); id != nil; id = ids.next() {
-		if id.Archive() > arc {
-			arc = id.Archive()
-		}
+	for _, id := range ids {
 		fields := id.CSV()
 		if thisName == fields[0] {
 			rowIdx++
@@ -174,7 +138,7 @@ func (c *csvWriter) writeFile(name string, sz int64, mod string, checksum []byte
 		c.w.Write(r)
 	}
 	c.recs = c.recs[:1]
-	return arc
+	return
 }
 
 func (c *csvWriter) writeTail() { c.w.Flush() }
@@ -192,27 +156,20 @@ func (y *yamlWriter) writeHead(s *siegfried.Siegfried) {
 	y.w.WriteString(s.YAML())
 }
 
-func (y *yamlWriter) writeFile(name string, sz int64, mod string, checksum []byte, err error, ids iterableID) config.Archive {
+func (y *yamlWriter) writeFile(name string, sz int64, mod string, checksum []byte, err error, ids []core.Identification) {
 	var errStr string
 	if err != nil {
 		errStr = fmt.Sprintf("'%s'", err.Error())
 	}
 	var h string
 	if checksum != nil {
-		h = fmt.Sprintf("%s   : %s\n", hashHeader(true), hex.EncodeToString(checksum))
+		h = fmt.Sprintf("%s   : %s\n", hashHeader(true, *hashf), hex.EncodeToString(checksum))
 	}
 	fmt.Fprintf(y.w, "---\nfilename : '%s'\nfilesize : %d\nmodified : %s\nerrors   : %s\n%smatches  :\n", y.replacer.Replace(name), sz, mod, errStr, h)
-	if ids == nil {
-		return 0
-	}
-	var arc config.Archive
-	for id := ids.next(); id != nil; id = ids.next() {
-		if id.Archive() > arc {
-			arc = id.Archive()
-		}
+	for _, id := range ids {
 		y.w.WriteString(id.YAML())
 	}
-	return arc
+	return
 }
 
 func (y *yamlWriter) writeTail() { y.w.Flush() }
@@ -232,7 +189,7 @@ func (j *jsonWriter) writeHead(s *siegfried.Siegfried) {
 	j.w.WriteString("\"files\":[")
 }
 
-func (j *jsonWriter) writeFile(name string, sz int64, mod string, checksum []byte, err error, ids iterableID) config.Archive {
+func (j *jsonWriter) writeFile(name string, sz int64, mod string, checksum []byte, err error, ids []core.Identification) {
 	if j.subs {
 		j.w.WriteString(",")
 	}
@@ -242,27 +199,21 @@ func (j *jsonWriter) writeFile(name string, sz int64, mod string, checksum []byt
 	}
 	var h string
 	if checksum != nil {
-		h = fmt.Sprintf("\"%s\":\"%s\",", hashHeader(false), hex.EncodeToString(checksum))
+		h = fmt.Sprintf("\"%s\":\"%s\",", hashHeader(false, *hashf), hex.EncodeToString(checksum))
 	}
 	fmt.Fprintf(j.w, "{\"filename\":\"%s\",\"filesize\": %d,\"modified\":\"%s\",\"errors\": \"%s\",%s\"matches\": [", j.replacer.Replace(name), sz, mod, errStr, h)
-	if ids == nil {
-		return 0
+	if len(ids) == 0 {
+		return
 	}
-	var subs bool
-	var arc config.Archive
-	for id := ids.next(); id != nil; id = ids.next() {
-		if id.Archive() > arc {
-			arc = id.Archive()
-		}
-		if subs {
+	for idx, id := range ids {
+		if idx > 0 {
 			j.w.WriteString(",")
 		}
 		j.w.WriteString(id.JSON())
-		subs = true
 	}
 	j.w.WriteString("]}")
 	j.subs = true
-	return arc
+	return
 }
 
 func (j *jsonWriter) writeTail() {
@@ -292,16 +243,15 @@ func newDroid(w io.Writer) *droidWriter {
 }
 
 // "identifier", "id", "format name", "format version", "mimetype", "basis", "warning"
-
 func (d *droidWriter) writeHead(s *siegfried.Siegfried) {
 	d.w.Write([]string{
 		"ID", "PARENT_ID", "URI", "FILE_PATH", "NAME",
 		"METHOD", "STATUS", "SIZE", "TYPE", "EXT",
-		"LAST_MODIFIED", "EXTENSION_MISMATCH", strings.ToUpper(hashHeader(false)) + "_HASH", "FORMAT_COUNT",
+		"LAST_MODIFIED", "EXTENSION_MISMATCH", strings.ToUpper(hashHeader(false, *hashf)) + "_HASH", "FORMAT_COUNT",
 		"PUID", "MIME_TYPE", "FORMAT_NAME", "FORMAT_VERSION"})
 }
 
-func (d *droidWriter) writeFile(p string, sz int64, mod string, checksum []byte, err error, ids iterableID) config.Archive {
+func (d *droidWriter) writeFile(p string, sz int64, mod string, checksum []byte, err error, ids []core.Identification) {
 	d.id++
 	d.rec[0], d.rec[6], d.rec[10] = strconv.Itoa(d.id), "Done", mod
 	if err != nil {
@@ -319,7 +269,7 @@ func (d *droidWriter) writeFile(p string, sz int64, mod string, checksum []byte,
 		}
 		d.rec[3] = clearArchivePath(d.rec[2], d.rec[3])
 		d.w.Write(d.rec)
-		return 0
+		return
 	}
 	// size
 	d.rec[7] = strconv.FormatInt(sz, 10)
@@ -328,22 +278,19 @@ func (d *droidWriter) writeFile(p string, sz int64, mod string, checksum []byte,
 	} else {
 		d.rec[12] = hex.EncodeToString(checksum)
 	}
-	var arc config.Archive
-	nids := makeIdSlice(ids)
 	// leave early for unknowns
-	if !nids.ids[0].Known() {
+	if len(ids) < 1 || !ids[0].Known() {
 		d.rec[5], d.rec[8], d.rec[11], d.rec[13] = "", "File", "FALSE", "0"
 		d.rec[14], d.rec[15], d.rec[16], d.rec[17] = "", "", "", ""
 		d.rec[3] = clearArchivePath(d.rec[2], d.rec[3])
 		d.w.Write(d.rec)
-		return 0
+		return
 	}
-	d.rec[13] = strconv.Itoa(len(nids.ids))
-	for id := nids.next(); id != nil; id = nids.next() {
+	d.rec[13] = strconv.Itoa(len(ids))
+	for _, id := range ids {
 		if id.Archive() > 0 {
-			arc = id.Archive()
 			d.rec[8] = "Container"
-			d.parents[d.rec[3]] = parent{d.id, d.rec[2], arc.String()}
+			d.parents[d.rec[3]] = parent{d.id, d.rec[2], id.Archive().String()}
 		} else {
 			d.rec[8] = "File"
 		}
@@ -353,7 +300,7 @@ func (d *droidWriter) writeFile(p string, sz int64, mod string, checksum []byte,
 		d.rec[3] = clearArchivePath(d.rec[2], d.rec[3])
 		d.w.Write(d.rec)
 	}
-	return arc
+	return
 }
 
 func (d *droidWriter) writeTail() { d.w.Flush() }

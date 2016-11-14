@@ -19,38 +19,31 @@ import (
 	"crypto/sha1"
 	"crypto/sha256"
 	"crypto/sha512"
-	"errors"
 	"hash"
 	"hash/crc32"
 )
 
 const hashChoices = "'md5', 'sha1', 'sha256', 'sha512', 'crc'"
 
-// TODO: make parallel safe
-
-var checksum hash.Hash
-
-func setHash() error {
+func getHash(typ string) hash.Hash {
 	switch *hashf {
 	case "":
 	case "md5", "MD5":
-		checksum = md5.New()
+		return md5.New()
 	case "sha1", "SHA1":
-		checksum = sha1.New()
+		return sha1.New()
 	case "sha256", "SHA256":
-		checksum = sha256.New()
+		return sha256.New()
 	case "sha512", "SHA512":
-		checksum = sha512.New()
+		return sha512.New()
 	case "crc", "CRC":
-		checksum = crc32.NewIEEE()
-	default:
-		return errors.New("Siegfried: invalid hash type; choose from " + hashChoices)
+		return crc32.NewIEEE()
 	}
 	return nil
 }
 
-func hashHeader(pad bool) string {
-	switch *hashf {
+func hashHeader(pad bool, typ string) string {
+	switch typ {
 	default:
 		return "no"
 	case "md5", "MD5":

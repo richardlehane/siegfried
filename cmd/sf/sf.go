@@ -18,23 +18,33 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
+	"hash"
 	"io"
 	"log"
 	"os"
 	"path/filepath"
-	"runtime"
 	"sync"
 	"time"
 
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/internal/siegreader"
 	"github.com/richardlehane/siegfried/pkg/config"
+	"github.com/richardlehane/siegfried/pkg/core"
 	/*// Uncomment to build with profiler
 	"net/http"
 	_ "net/http/pprof"
 	*/)
 
-const PROCS = -1
+// defaults
+const (
+	maxProcs     = 1024
+	defaultProcs = 1
+
+	fileString = "[FILE]"
+	errString  = "[ERROR]"
+	warnString = "[WARN]"
+	timeString = "[TIME]"
+)
 
 // flags
 var (
@@ -48,7 +58,7 @@ var (
 	sig       = flag.String("sig", config.SignatureBase(), "set the signature file")
 	home      = flag.String("home", config.Home(), "override the default home directory")
 	serve     = flag.String("serve", "", "start siegfried server e.g. -serve localhost:5138")
-	multi     = flag.Int("multi", 1, "set number of file ID processes")
+	multi     = flag.Int("multi", defaultProcs, "set number of parallel file ID processes")
 	archive   = flag.Bool("z", false, "scan archive formats (zip, tar, gzip, warc, arc)")
 	hashf     = flag.String("hash", "", "calculate file checksum with hash algorithm; options "+hashChoices)
 	throttlef = flag.Duration("throttle", 0, "set a time to wait between scanning files e.g. 50ms")
@@ -56,181 +66,195 @@ var (
 
 var throttle *time.Ticker
 
-func writeError(w writer, path string, sz int64, mod string, err error) {
-	w.writeFile(path, sz, mod, nil, err, nil)
-	// log the error too
-	lg.set(path)
-	lg.err(err)
-	lg.reset()
-}
-
-type res struct {
+type context struct {
+	s  *siegfried.Siegfried
+	w  writer
+	wg *sync.WaitGroup
+	// opts
+	h hash.Hash
+	z bool
+	// info
 	path string
-	sz   int64
+	mime string
 	mod  string
-	c    iterableID
-	err  error
+	sz   int64
+	// results
+	res chan results
 }
 
-func printer(w writer, resc chan chan res, wg *sync.WaitGroup) {
-	for rr := range resc {
-		r := <-rr
-		w.writeFile(r.path, r.sz, r.mod, nil, r.err, r.c)
-		wg.Done()
+type results struct {
+	err error
+	cs  []byte
+	ids []core.Identification
+}
+
+func newContext(s *siegfried.Siegfried, w writer, wg *sync.WaitGroup, h hash.Hash, z bool, path, mime, mod string, sz int64) *context {
+	return &context{
+		s:    s,
+		w:    w,
+		wg:   wg,
+		h:    h,
+		z:    z,
+		path: path,
+		mime: mime,
+		mod:  mod,
+		sz:   sz,
+		res:  make(chan results, 1),
 	}
 }
 
-func multiIdentifyP(w writer, s *siegfried.Siegfried, r string, norecurse bool) error {
-	wg := &sync.WaitGroup{}
-	runtime.GOMAXPROCS(PROCS)
-	resc := make(chan chan res, *multi)
-	go printer(w, resc, wg)
-	wf := func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			return fmt.Errorf("walking %s; got %v", path, err)
+func printer(ctxts chan *context, lg *logger) {
+	// helpers for logging
+	abs := func(p string) string {
+		np, _ := filepath.Abs(p)
+		if np == "" {
+			return p
 		}
-		if info.IsDir() {
-			if norecurse && path != r {
-				return filepath.SkipDir
-			}
-			if *droido {
-				wg.Add(1)
-				rchan := make(chan res, 1)
-				resc <- rchan
-				go func() {
-					rchan <- res{path, -1, info.ModTime().String(), nil, nil} // write directory with a -1 size for droid output only
-				}()
-			}
-			return nil
-		}
-		wg.Add(1)
-		rchan := make(chan res, 1)
-		resc <- rchan
-		go func() {
-			f, err := os.Open(path)
-			if err != nil {
-				rchan <- res{path, 0, "", nil, err.(*os.PathError).Err} // return summary error only
-				return
-			}
-			c, err := s.Identify(f, path, "")
-			if c == nil {
-				f.Close()
-				rchan <- res{path, 0, "", nil, err}
-				return
-			}
-			ids := makeIdSlice(idChan(c))
-			f.Close()
-			rchan <- res{path, info.Size(), info.ModTime().Format(time.RFC3339), ids, err}
-		}()
-		return nil
+		return np
 	}
-	err := filepath.Walk(r, wf)
-	wg.Wait()
-	close(resc)
-	return err
+	printFile := func(done bool, p string) bool {
+		if !done {
+			fmt.Fprintf(lg.w, "%s %s\n", fileString, abs(p))
+		}
+		return true
+	}
+	for ctx := range ctxts {
+		var fp bool // just print FILE once in log
+		// log progress before blocking
+		if lg.progress {
+			fp = printFile(fp, ctx.path)
+		}
+		// block on the results
+		res := <-ctx.res
+		// log error
+		if lg.e && res.err != nil {
+			fp = printFile(fp, ctx.path)
+			fmt.Fprintf(lg.w, "%s %v\n", errString, res.err)
+		}
+		// log warnings, known, unknown and report matches for slow or debug
+		if lg.warn || lg.known || lg.unknown || lg.slow || lg.debug {
+			var kn bool
+			for _, id := range res.ids {
+				if id.Known() {
+					kn = true
+				}
+				if lg.warn {
+					if w := id.Warn(); w != "" {
+						fp = printFile(fp, ctx.path)
+						fmt.Fprintf(lg.w, "%s %s\n", warnString, w)
+					}
+				}
+				if lg.slow || lg.debug {
+					fmt.Fprintf(lg.w, "matched: %s\n", id.String())
+				}
+			}
+			if (lg.known && kn) || (lg.unknown && !kn) {
+				fmt.Fprintln(lg.w, abs(ctx.path))
+			}
+		}
+		// write the result
+		ctx.w.writeFile(ctx.path, ctx.sz, ctx.mod, res.cs, res.err, res.ids)
+		ctx.wg.Done()
+	}
+	// finishing, log time elapsed
+	if !lg.start.IsZero() {
+		fmt.Fprintf(lg.w, "%s %v\n", timeString, time.Since(lg.start))
+	}
 }
 
-// multiIdentifyS() defined in longpath.go and longpath_windows.go
+// identify() defined in longpath.go and longpath_windows.go
 
-func identifyFile(w writer, s *siegfried.Siegfried, path string, sz int64, mod string) {
-	f, err := os.Open(path)
+func identifyFile(ctx *context, ctxts chan *context) {
+	f, err := os.Open(ctx.path)
 	if err != nil {
-		f, err = retryOpen(path, err) // retry open in case is a windows long path error
+		f, err = retryOpen(ctx.path, err) // retry open in case is a windows long path error
 		if err != nil {
-			writeError(w, path, sz, mod, err.(*os.PathError).Err) // write summary error
+			ctx.res <- results{err, nil, nil}
+			ctx.wg.Add(1)
+			ctxts <- ctx
 			return
 		}
 	}
-	identifyRdr(w, s, f, sz, path, "", mod)
+	identifyRdr(f, ctx, ctxts)
 	f.Close()
 }
 
-func identifyRdr(w writer, s *siegfried.Siegfried, r io.Reader, sz int64, path, mime, mod string) {
-	lg.set(path)
-	b, berr := s.Buffer(r)
-	defer s.Put(b)
-	c, err := s.IdentifyBuffer(b, berr, path, mime)
-	lg.err(err)
-	if c == nil {
-		w.writeFile(path, sz, mod, nil, err, nil)
-		lg.reset()
-		return
-	}
-	var cs []byte
-	if checksum != nil {
-		var i int64
-		l := checksum.BlockSize()
-		for ; ; i += int64(l) {
-			buf, _ := b.Slice(i, l)
-			if buf == nil {
-				break
-			}
-			checksum.Write(buf)
+func identifyRdr(r io.Reader, ctx *context, ctxts chan *context) {
+	ctx.wg.Add(1)
+	ctxts <- ctx
+	go func() {
+		b, berr := ctx.s.Buffer(r)
+		defer ctx.s.Put(b)
+		c, err := ctx.s.IdentifyBuffer(b, berr, ctx.path, ctx.mime)
+		if c == nil {
+			ctx.res <- results{err, nil, nil}
+			return
 		}
-		cs = checksum.Sum(nil)
-		checksum.Reset()
-	}
-	a := w.writeFile(path, sz, mod, cs, err, idChan(c))
-	lg.reset()
-	if !*archive || a == config.None {
-		return
-	}
-	var d decompressor
-	switch a {
-	case config.Zip:
-		d, err = newZip(siegreader.ReaderFrom(b), path, sz)
-	case config.Gzip:
-		d, err = newGzip(b, path)
-	case config.Tar:
-		d, err = newTar(siegreader.ReaderFrom(b), path)
-	case config.ARC:
-		d, err = newARC(siegreader.ReaderFrom(b), path)
-	case config.WARC:
-		d, err = newWARC(siegreader.ReaderFrom(b), path)
-	}
-	if err != nil {
-		writeError(w, path, sz, mod, fmt.Errorf("failed to decompress, got: %v", err))
-		return
-	}
-	for err = d.next(); err == nil; err = d.next() {
-		if *droido {
-			for _, v := range d.dirs() {
-				w.writeFile(v, -1, "", nil, nil, nil)
+		// calculate checksum
+		var cs []byte
+		if ctx.h != nil {
+			var i int64
+			l := ctx.h.BlockSize()
+			for ; ; i += int64(l) {
+				buf, _ := b.Slice(i, l)
+				if buf == nil {
+					break
+				}
+				ctx.h.Write(buf)
 			}
+			cs = ctx.h.Sum(nil)
 		}
-		identifyRdr(w, s, d.reader(), d.size(), d.path(), d.mime(), d.mod())
-	}
+		// decompress if an archive format
+		ids, arc := sliceIDs(c)
+		ctx.res <- results{err, cs, ids}
+		if !ctx.z || arc == config.None {
+			return
+		}
+		var d decompressor
+		switch arc {
+		case config.Zip:
+			d, err = newZip(siegreader.ReaderFrom(b), ctx.path, ctx.sz)
+		case config.Gzip:
+			d, err = newGzip(b, ctx.path)
+		case config.Tar:
+			d, err = newTar(siegreader.ReaderFrom(b), ctx.path)
+		case config.ARC:
+			d, err = newARC(siegreader.ReaderFrom(b), ctx.path)
+		case config.WARC:
+			d, err = newWARC(siegreader.ReaderFrom(b), ctx.path)
+		}
+		if err != nil {
+			ctx.res <- results{fmt.Errorf("failed to decompress, got: %v", err), nil, nil}
+			return
+		}
+		for err = d.next(); err == nil; err = d.next() {
+			if _, ok := ctx.w.(*droidWriter); ok {
+				for _, v := range d.dirs() {
+					dctx := newContext(ctx.s, ctx.w, ctx.wg, nil, false, v, "", "", -1)
+					dctx.res <- results{nil, nil, nil}
+					ctx.wg.Add(1)
+					ctxts <- dctx
+				}
+			}
+			identifyRdr(d.reader(), newContext(ctx.s, ctx.w, ctx.wg, nil, false, d.path(), d.mime(), d.mod(), d.size()), ctxts)
+		}
+	}()
 }
 
 func main() {
-
 	flag.Parse()
-
 	/*//UNCOMMENT TO RUN PROFILER
 	go func() {
 		log.Println(http.ListenAndServe("localhost:6060", nil))
 	}()*/
-
-	if *version {
-		version := config.Version()
-		fmt.Printf("siegfried %d.%d.%d\n", version[0], version[1], version[2])
-		s, err := siegfried.Load(config.Signature())
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-		fmt.Print(s)
-		return
-	}
-
+	// configure home and signature if not default
 	if *home != config.Home() {
 		config.SetHome(*home)
 	}
-
 	if *sig != config.SignatureBase() {
 		config.SetSignature(*sig)
 	}
-
+	// handle -update
 	if *update {
 		msg, err := updateSigs()
 		if err != nil {
@@ -239,55 +263,63 @@ func main() {
 		fmt.Println(msg)
 		return
 	}
-
-	// during parallel scanning or in server mode, unsafe to access the last read buffer - so can't unzip or hash
-	if *multi > 1 || *serve != "" {
-		if *archive {
-			log.Fatalln("[FATAL] cannot scan archive formats when running in parallel or server mode")
-		}
-		if *hashf != "" {
-			log.Fatalln("[FATAL] cannot calculate file checksum when running in parallel or server mode")
-		}
+	// handle -hash error
+	checksum := getHash(*hashf)
+	if *hashf != "" && checksum == nil {
+		log.Fatalf("[FATAL] invalid hash type; choose from %s", hashChoices)
 	}
-
-	if *logf != "" {
-		/*
-			if *multi > 1 && *logf != "error" {
-				log.Fatalln("[FATAL] cannot log in parallel mode")
-			}*/
-		if err := newLogger(*logf); err != nil {
-			log.Fatalln(err)
-		}
-	}
-
-	if err := setHash(); err != nil {
-		log.Fatal(err)
-	}
-
-	if *serve != "" || *fprflag {
-		s, err := siegfried.Load(config.Signature())
-		if err != nil {
-			log.Fatalf("[FATAL] error loading signature file, got: %v", err)
-		}
-		if *serve != "" {
-			log.Printf("Starting server at %s. Use CTRL-C to quit.\n", *serve)
-			listen(*serve, s)
-			return
-		}
-		log.Printf("FPR server started at %s. Use CTRL-C to quit.\n", config.Fpr())
-		serveFpr(config.Fpr(), s)
-		return
-	}
-
-	if flag.NArg() != 1 {
-		log.Fatalln("[FATAL] expecting a single file or directory argument")
-	}
-
+	// load and handle signature errors
 	s, err := siegfried.Load(config.Signature())
 	if err != nil {
 		log.Fatalf("[FATAL] error loading signature file, got: %v", err)
 	}
-
+	// handle -version
+	if *version {
+		version := config.Version()
+		fmt.Printf("siegfried %d.%d.%d\n%s", version[0], version[1], version[2], s)
+		return
+	}
+	// handle -fpr
+	if *fprflag {
+		log.Printf("FPR server started at %s. Use CTRL-C to quit.\n", config.Fpr())
+		serveFpr(config.Fpr(), s)
+		return
+	}
+	// check -multi
+	if *multi > maxProcs || *multi < 1 {
+		*multi = defaultProcs
+	}
+	// start logger
+	lg, err := newLogger(*logf)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	if config.Slow() || config.Debug() {
+		if *serve != "" || *fprflag {
+			log.Fatalln("[FATAL] debug and slow logging cannot be run in server mode")
+		}
+		*multi = 1 // only one process if slow/debug
+	}
+	// start throttle
+	if *throttlef != 0 {
+		throttle = time.NewTicker(*throttlef)
+		defer throttle.Stop()
+	}
+	// start the printer
+	ctxts := make(chan *context, *multi)
+	go printer(ctxts, lg)
+	// handle -serve
+	if *serve != "" {
+		log.Printf("Starting server at %s. Use CTRL-C to quit.\n", *serve)
+		listen(*serve, s, ctxts)
+		return
+	}
+	// handle no file/directory argument
+	if flag.NArg() != 1 {
+		close(ctxts)
+		log.Fatalln("[FATAL] expecting a single file or directory argument")
+	}
+	// set default writer
 	var w writer
 	switch {
 	case *csvo:
@@ -297,19 +329,20 @@ func main() {
 	case *droido:
 		w = newDroid(os.Stdout)
 		if len(s.Fields()) != 1 || len(s.Fields()[0]) != 7 {
+			close(ctxts)
 			log.Fatalln("[FATAL] DROID output is limited to signature files with a single PRONOM identifier")
 		}
 	default:
 		w = newYAML(os.Stdout)
 	}
-
+	// overrite writer with nil if logging is to std out
 	if lg != nil && lg.w == os.Stdout {
 		w = logWriter{}
 	}
-
+	wg := &sync.WaitGroup{}
+	w.writeHead(s)
 	// support reading list files from stdin
 	if flag.Arg(0) == "-" {
-		w.writeHead(s)
 		scanner := bufio.NewScanner(os.Stdin)
 		for scanner.Scan() {
 			info, err := os.Stat(scanner.Text())
@@ -317,48 +350,22 @@ func main() {
 				info, err = retryStat(scanner.Text(), err)
 			}
 			if err != nil || info.IsDir() {
-				writeError(w, scanner.Text(), 0, "", fmt.Errorf("failed to identify %s (in scanning mode, inputs must all be files and not directories), got: %v", scanner.Text(), err))
+				ctx := newContext(s, w, wg, nil, false, scanner.Text(), "", "", 0)
+				ctx.res <- results{fmt.Errorf("failed to identify %s (in scanning mode, inputs must all be files and not directories), got: %v", scanner.Text(), err), nil, nil}
+				wg.Add(1)
+				ctxts <- ctx
 			} else {
-				identifyFile(w, s, scanner.Text(), info.Size(), info.ModTime().Format(time.RFC3339))
+				identifyFile(newContext(s, w, wg, checksum, *archive, scanner.Text(), "", info.ModTime().Format(time.RFC3339), info.Size()), ctxts)
 			}
 		}
-		w.writeTail()
-		lg.printElapsed()
-		os.Exit(0)
-	}
 
-	info, err := os.Stat(flag.Arg(0))
-	if err != nil {
-		info, err = retryStat(flag.Arg(0), err)
-		if err != nil {
-			log.Fatalf("[FATAL] cannot get info for %v, got: %v", flag.Arg(0), err)
+	} else {
+		if err := identify(ctxts, wg, s, w, flag.Arg(0), "", checksum, *archive, *nr); err != nil {
+			log.Print(err)
 		}
 	}
-
-	if info.IsDir() {
-		w.writeHead(s)
-		if *multi > 16 {
-			*multi = 16
-		}
-		if *multi > 1 {
-			err = multiIdentifyP(w, s, flag.Arg(0), *nr)
-		} else {
-			if *throttlef != 0 {
-				throttle = time.NewTicker(*throttlef)
-				defer throttle.Stop()
-			}
-			err = multiIdentifyS(w, s, flag.Arg(0), "", *nr)
-		}
-		w.writeTail()
-		if err != nil {
-			log.Fatalf("[FATAL] %v\n", err)
-		}
-		lg.printElapsed()
-		os.Exit(0)
-	}
-	w.writeHead(s)
-	identifyFile(w, s, flag.Arg(0), info.Size(), info.ModTime().Format(time.RFC3339))
+	wg.Wait()
+	close(ctxts)
 	w.writeTail()
-	lg.printElapsed()
 	os.Exit(0)
 }

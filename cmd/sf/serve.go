@@ -20,6 +20,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"sync"
 
 	"github.com/richardlehane/siegfried"
 )
@@ -72,9 +73,10 @@ func parseRequest(w http.ResponseWriter, r *http.Request) (string, writer, bool)
 	return "application/json", newJSON(w), nr
 }
 
-func identify(s *siegfried.Siegfried) func(w http.ResponseWriter, r *http.Request) {
+func handleIdentify(s *siegfried.Siegfried, ctxts chan *context) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		mime, wr, nr := parseRequest(w, r)
+		wg := &sync.WaitGroup{}
 		if r.Method == "POST" {
 			f, h, err := r.FormFile("file")
 			if err != nil {
@@ -97,44 +99,24 @@ func identify(s *siegfried.Siegfried) func(w http.ResponseWriter, r *http.Reques
 			}
 			w.Header().Set("Content-Type", mime)
 			wr.writeHead(s)
-			c, err := s.Identify(f, h.Filename, "")
-			lg.set(h.Filename)
-			lg.err(err)
-			if c == nil {
-				wr.writeFile(h.Filename, sz, mod, nil, err, nil)
-				lg.reset()
-				return
-			}
-			wr.writeFile(h.Filename, sz, mod, nil, err, idChan(c))
+			identifyRdr(f, newContext(s, wr, wg, nil, false, h.Filename, "", mod, sz), ctxts)
+			wg.Wait()
 			wr.writeTail()
-			lg.reset()
 			return
 		} else {
 			path, err := decodePath(r.URL.Path)
 			if err != nil {
 				handleErr(w, http.StatusNotFound, err)
-				lg.set(path)
-				lg.err(err)
-				lg.reset()
-				return
-			}
-			info, err := os.Stat(path)
-			if err != nil {
-				handleErr(w, http.StatusNotFound, err)
-				lg.set(path)
-				lg.err(err)
-				lg.reset()
 				return
 			}
 			w.Header().Set("Content-Type", mime)
 			wr.writeHead(s)
-			if info.IsDir() {
-				multiIdentifyS(wr, s, path, "", nr)
-				wr.writeTail()
-				return
-			}
-			identifyFile(wr, s, path, info.Size(), info.ModTime().String())
+			err = identify(ctxts, wg, s, wr, path, "", nil, false, nr)
+			wg.Wait()
 			wr.writeTail()
+			if err != nil {
+				handleErr(w, http.StatusNotFound, err)
+			}
 			return
 		}
 	}
@@ -154,6 +136,10 @@ const usage = `
 			<h3>Parameters</h3>
 			<p><i>nr</i> (optional) - this parameter can be used to stop sub-directory recursion when a directory path is given.</p>
 			<p><i>format</i> (optional) - this parameter can be used to select the output format (csv, yaml, json). Default is json. Alternatively, HTTP content negotiation can be used.</p>
+			
+			<p><i>hash</i></p>
+			<p><i>z</i></p>
+			<p><i>sig</i> (optional)</p>
 			<h2>POST request</h2>
 			<p><strong>POST</strong> <i>/identify(?format=csv|yaml|json)</i> Attach a file as form-data with the key "file".</p>
 			<p>E.g. curl localhost:5138/identify -F file=@myfile.doc</i>
@@ -172,9 +158,9 @@ func handleMain(w http.ResponseWriter, r *http.Request) {
 	io.WriteString(w, usage)
 }
 
-func listen(port string, s *siegfried.Siegfried) {
+func listen(port string, s *siegfried.Siegfried, ctxts chan *context) {
 	http.HandleFunc("/", handleMain)
-	http.HandleFunc("/identify", identify(s))
-	http.HandleFunc("/identify/", identify(s))
+	http.HandleFunc("/identify", handleIdentify(s, ctxts))
+	http.HandleFunc("/identify/", handleIdentify(s, ctxts))
 	http.ListenAndServe(port, nil)
 }

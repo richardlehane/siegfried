@@ -59,7 +59,7 @@ func identifyT(s *siegfried.Siegfried, p string) ([]string, error) {
 	tooLong := time.Millisecond * 500
 	elapsed := time.Since(t)
 	if elapsed > tooLong {
-		fmt.Printf("time elapsed for %s was %s\n", p, elapsed.String())
+		fmt.Printf("[WARNING] time to match %s was %s\n", p, elapsed.String())
 	}
 	return ids, nil
 }

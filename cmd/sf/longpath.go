@@ -18,6 +18,7 @@ package main
 
 import (
 	"fmt"
+	"hash"
 	"os"
 	"path/filepath"
 	"time"
@@ -33,7 +34,7 @@ func retryStat(path string, err error) (os.FileInfo, error) {
 	return nil, err
 }
 
-func multiIdentifyS(w writer, s *siegfried.Siegfried, root, orig string, norecurse bool) error {
+func identify(ctxts chan *context, wg *sync.WaitGroup, s *siegfried.Siegfried, w writer, root, orig string, h hash.Hash, z bool, norecurse bool) error {
 	walkFunc := func(path string, info os.FileInfo, err error) error {
 		if *throttlef > 0 {
 			<-throttle.C
@@ -46,11 +47,14 @@ func multiIdentifyS(w writer, s *siegfried.Siegfried, root, orig string, norecur
 				return filepath.SkipDir
 			}
 			if *droido {
-				w.writeFile(path, -1, info.ModTime().Format(time.RFC3339), nil, nil, nil) // write directory with a -1 size for droid output only
+				dctx := newContext(s, w, wg, nil, false, path, "", info.ModTime().Format(time.RFC3339), -1)
+				dctx.res <- results{nil, nil, nil}
+				wg.Add(1)
+				ctxts <- dctx
 			}
 			return nil
 		}
-		identifyFile(w, s, path, info.Size(), info.ModTime().Format(time.RFC3339))
+		identifyFile(newContext(s, w, wg, h, z, path, "", info.ModTime().Format(time.RFC3339), info.Size()), ctxts)
 		return nil
 	}
 	return filepath.Walk(root, walkFunc)
