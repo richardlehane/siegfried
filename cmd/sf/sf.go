@@ -38,7 +38,7 @@ import (
 // defaults
 const (
 	maxProcs     = 1024
-	defaultProcs = 1
+	defaultProcs = 8
 
 	fileString = "[FILE]"
 	errString  = "[ERROR]"
@@ -156,89 +156,105 @@ func printer(ctxts chan *context, lg *logger) {
 		ctx.w.writeFile(ctx.path, ctx.sz, ctx.mod, res.cs, res.err, res.ids)
 		ctx.wg.Done()
 	}
-	// finishing, log time elapsed
-	if !lg.start.IsZero() {
-		fmt.Fprintf(lg.w, "%s %v\n", timeString, time.Since(lg.start))
-	}
 }
 
 // identify() defined in longpath.go and longpath_windows.go
 
 func identifyFile(ctx *context, ctxts chan *context) {
-	f, err := os.Open(ctx.path)
-	if err != nil {
-		f, err = retryOpen(ctx.path, err) // retry open in case is a windows long path error
+	ctx.wg.Add(1)
+	ctxts <- ctx
+	if ctx.z {
+		f, err := os.Open(ctx.path)
 		if err != nil {
-			ctx.res <- results{err, nil, nil}
-			ctx.wg.Add(1)
-			ctxts <- ctx
-			return
+			f, err = retryOpen(ctx.path, err) // retry open in case is a windows long path error
+			if err != nil {
+				ctx.res <- results{err, nil, nil}
+				ctx.wg.Add(1)
+				ctxts <- ctx
+				return
+			}
 		}
+		identifyRdr(f, ctx, ctxts)
+		f.Close()
+	} else {
+		go func() {
+			ctx.wg.Add(1)
+			f, err := os.Open(ctx.path)
+			if err != nil {
+				f, err = retryOpen(ctx.path, err) // retry open in case is a windows long path error
+				if err != nil {
+					ctx.res <- results{err, nil, nil}
+					ctx.wg.Add(1)
+					ctxts <- ctx
+					return
+				}
+			}
+			identifyRdr(f, ctx, ctxts)
+			f.Close()
+			ctx.wg.Done()
+		}()
 	}
-	identifyRdr(f, ctx, ctxts)
-	f.Close()
 }
 
 func identifyRdr(r io.Reader, ctx *context, ctxts chan *context) {
-	ctx.wg.Add(1)
-	ctxts <- ctx
-	go func() {
-		b, berr := ctx.s.Buffer(r)
-		defer ctx.s.Put(b)
-		c, err := ctx.s.IdentifyBuffer(b, berr, ctx.path, ctx.mime)
-		if c == nil {
-			ctx.res <- results{err, nil, nil}
-			return
-		}
-		// calculate checksum
-		var cs []byte
-		if ctx.h != nil {
-			var i int64
-			l := ctx.h.BlockSize()
-			for ; ; i += int64(l) {
-				buf, _ := b.Slice(i, l)
-				if buf == nil {
-					break
-				}
-				ctx.h.Write(buf)
+	b, berr := ctx.s.Buffer(r)
+	defer ctx.s.Put(b)
+	c, err := ctx.s.IdentifyBuffer(b, berr, ctx.path, ctx.mime)
+	if c == nil {
+		ctx.res <- results{err, nil, nil}
+		return
+	}
+	// calculate checksum
+	var cs []byte
+	if ctx.h != nil {
+		var i int64
+		l := ctx.h.BlockSize()
+		for ; ; i += int64(l) {
+			buf, _ := b.Slice(i, l)
+			if buf == nil {
+				break
 			}
-			cs = ctx.h.Sum(nil)
+			ctx.h.Write(buf)
 		}
-		// decompress if an archive format
-		ids, arc := sliceIDs(c)
-		ctx.res <- results{err, cs, ids}
-		if !ctx.z || arc == config.None {
-			return
-		}
-		var d decompressor
-		switch arc {
-		case config.Zip:
-			d, err = newZip(siegreader.ReaderFrom(b), ctx.path, ctx.sz)
-		case config.Gzip:
-			d, err = newGzip(b, ctx.path)
-		case config.Tar:
-			d, err = newTar(siegreader.ReaderFrom(b), ctx.path)
-		case config.ARC:
-			d, err = newARC(siegreader.ReaderFrom(b), ctx.path)
-		case config.WARC:
-			d, err = newWARC(siegreader.ReaderFrom(b), ctx.path)
-		}
-		if err != nil {
-			ctx.res <- results{fmt.Errorf("failed to decompress, got: %v", err), nil, nil}
-			return
-		}
-		for err = d.next(); err == nil; err = d.next() {
-			if _, ok := ctx.w.(*droidWriter); ok {
-				for _, v := range d.dirs() {
-					dctx := newContext(ctx.s, ctx.w, ctx.wg, nil, false, v, "", "", -1)
-					dctx.res <- results{nil, nil, nil}
-					ctx.wg.Add(1)
-					ctxts <- dctx
-				}
+		cs = ctx.h.Sum(nil)
+	}
+	// decompress if an archive format
+	ids, arc := sliceIDs(c)
+	ctx.res <- results{err, cs, ids}
+	if !ctx.z || arc == config.None {
+		return
+	}
+	var d decompressor
+	switch arc {
+	case config.Zip:
+		d, err = newZip(siegreader.ReaderFrom(b), ctx.path, ctx.sz)
+	case config.Gzip:
+		d, err = newGzip(b, ctx.path)
+	case config.Tar:
+		d, err = newTar(siegreader.ReaderFrom(b), ctx.path)
+	case config.ARC:
+		d, err = newARC(siegreader.ReaderFrom(b), ctx.path)
+	case config.WARC:
+		d, err = newWARC(siegreader.ReaderFrom(b), ctx.path)
+	}
+	if err != nil {
+		ctx.res <- results{fmt.Errorf("failed to decompress, got: %v", err), nil, nil}
+		return
+	}
+	for err = d.next(); err == nil; err = d.next() {
+		if _, ok := ctx.w.(*droidWriter); ok {
+			for _, v := range d.dirs() {
+				dctx := newContext(ctx.s, ctx.w, ctx.wg, nil, false, v, "", "", -1)
+				dctx.res <- results{nil, nil, nil}
+				ctx.wg.Add(1)
+				ctxts <- dctx
 			}
-			identifyRdr(d.reader(), newContext(ctx.s, ctx.w, ctx.wg, nil, false, d.path(), d.mime(), d.mod(), d.size()), ctxts)
 		}
-	}()
+		nctx := newContext(ctx.s, ctx.w, ctx.wg, nil, false, d.path(), d.mime(), d.mod(), d.size())
+		nctx.wg.Add(1)
+		ctxts <- nctx
+		identifyRdr(d.reader(), nctx, ctxts)
+	}
 }
 
 func main() {
@@ -358,7 +374,6 @@ func main() {
 				identifyFile(newContext(s, w, wg, checksum, *archive, scanner.Text(), "", info.ModTime().Format(time.RFC3339), info.Size()), ctxts)
 			}
 		}
-
 	} else {
 		if err := identify(ctxts, wg, s, w, flag.Arg(0), "", checksum, *archive, *nr); err != nil {
 			log.Print(err)
@@ -367,5 +382,9 @@ func main() {
 	wg.Wait()
 	close(ctxts)
 	w.writeTail()
+	// log time elapsed
+	if !lg.start.IsZero() {
+		fmt.Fprintf(lg.w, "%s %v\n", timeString, time.Since(lg.start))
+	}
 	os.Exit(0)
 }
