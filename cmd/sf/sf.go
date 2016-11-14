@@ -375,9 +375,7 @@ func main() {
 			}
 		}
 	} else {
-		if err := identify(ctxts, wg, s, w, flag.Arg(0), "", checksum, *archive, *nr); err != nil {
-			log.Print(err)
-		}
+		err = identify(ctxts, wg, s, w, flag.Arg(0), "", checksum, *archive, *nr)
 	}
 	wg.Wait()
 	close(ctxts)
@@ -385,6 +383,9 @@ func main() {
 	// log time elapsed
 	if !lg.start.IsZero() {
 		fmt.Fprintf(lg.w, "%s %v\n", timeString, time.Since(lg.start))
+	}
+	if err != nil {
+		log.Fatal(err)
 	}
 	os.Exit(0)
 }
