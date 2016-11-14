@@ -45,7 +45,7 @@ func sliceIDs(c chan core.Identification) ([]core.Identification, config.Archive
 }
 
 type writer interface {
-	writeHead(s *siegfried.Siegfried)
+	writeHead(s *siegfried.Siegfried, hh string)
 	// if a directory give a negative sz
 	writeFile(name string, sz int64, mod string, checksum []byte, err error, ids []core.Identification)
 	writeTail()
@@ -53,7 +53,7 @@ type writer interface {
 
 type logWriter struct{}
 
-func (l logWriter) writeHead(s *siegfried.Siegfried) {}
+func (l logWriter) writeHead(s *siegfried.Siegfried, hh string) {}
 func (l logWriter) writeFile(name string, sz int64, mod string, cs []byte, err error, ids []core.Identification) {
 }
 func (l logWriter) writeTail() {}
@@ -68,7 +68,7 @@ func newCSV(w io.Writer) *csvWriter {
 	return &csvWriter{w: csv.NewWriter(os.Stdout)}
 }
 
-func (c *csvWriter) writeHead(s *siegfried.Siegfried) {
+func (c *csvWriter) writeHead(s *siegfried.Siegfried, hh string) {
 	fields := s.Fields()
 	c.names = make([]string, len(fields))
 	l := 4
@@ -84,7 +84,7 @@ func (c *csvWriter) writeHead(s *siegfried.Siegfried) {
 	c.recs[0][0], c.recs[0][1], c.recs[0][2], c.recs[0][3] = "filename", "filesize", "modified", "errors"
 	idx := 4
 	if *hashf != "" {
-		c.recs[0][4] = hashHeader(false, *hashf)
+		c.recs[0][4] = hashHeader(false, hh)
 		idx++
 	}
 	for _, f := range fields {
@@ -146,13 +146,15 @@ func (c *csvWriter) writeTail() { c.w.Flush() }
 type yamlWriter struct {
 	replacer *strings.Replacer
 	w        *bufio.Writer
+	hh       string
 }
 
 func newYAML(w io.Writer) *yamlWriter {
-	return &yamlWriter{strings.NewReplacer("'", "''"), bufio.NewWriter(w)}
+	return &yamlWriter{strings.NewReplacer("'", "''"), bufio.NewWriter(w), ""}
 }
 
-func (y *yamlWriter) writeHead(s *siegfried.Siegfried) {
+func (y *yamlWriter) writeHead(s *siegfried.Siegfried, hh string) {
+	y.hh = hashHeader(true, hh)
 	y.w.WriteString(s.YAML())
 }
 
@@ -163,7 +165,7 @@ func (y *yamlWriter) writeFile(name string, sz int64, mod string, checksum []byt
 	}
 	var h string
 	if checksum != nil {
-		h = fmt.Sprintf("%s   : %s\n", hashHeader(true, *hashf), hex.EncodeToString(checksum))
+		h = fmt.Sprintf("%s   : %s\n", y.hh, hex.EncodeToString(checksum))
 	}
 	fmt.Fprintf(y.w, "---\nfilename : '%s'\nfilesize : %d\nmodified : %s\nerrors   : %s\n%smatches  :\n", y.replacer.Replace(name), sz, mod, errStr, h)
 	for _, id := range ids {
@@ -178,13 +180,15 @@ type jsonWriter struct {
 	subs     bool
 	replacer *strings.Replacer
 	w        *bufio.Writer
+	hh       string
 }
 
 func newJSON(w io.Writer) *jsonWriter {
-	return &jsonWriter{false, strings.NewReplacer(`"`, `\"`, `\\`, `\\`, `\`, `\\`), bufio.NewWriter(w)}
+	return &jsonWriter{false, strings.NewReplacer(`"`, `\"`, `\\`, `\\`, `\`, `\\`), bufio.NewWriter(w), ""}
 }
 
-func (j *jsonWriter) writeHead(s *siegfried.Siegfried) {
+func (j *jsonWriter) writeHead(s *siegfried.Siegfried, hh string) {
+	j.hh = hashHeader(false, hh)
 	j.w.WriteString(s.JSON())
 	j.w.WriteString("\"files\":[")
 }
@@ -199,7 +203,7 @@ func (j *jsonWriter) writeFile(name string, sz int64, mod string, checksum []byt
 	}
 	var h string
 	if checksum != nil {
-		h = fmt.Sprintf("\"%s\":\"%s\",", hashHeader(false, *hashf), hex.EncodeToString(checksum))
+		h = fmt.Sprintf("\"%s\":\"%s\",", j.hh, hex.EncodeToString(checksum))
 	}
 	fmt.Fprintf(j.w, "{\"filename\":\"%s\",\"filesize\": %d,\"modified\":\"%s\",\"errors\": \"%s\",%s\"matches\": [", j.replacer.Replace(name), sz, mod, errStr, h)
 	if len(ids) == 0 {
@@ -243,11 +247,11 @@ func newDroid(w io.Writer) *droidWriter {
 }
 
 // "identifier", "id", "format name", "format version", "mimetype", "basis", "warning"
-func (d *droidWriter) writeHead(s *siegfried.Siegfried) {
+func (d *droidWriter) writeHead(s *siegfried.Siegfried, hh string) {
 	d.w.Write([]string{
 		"ID", "PARENT_ID", "URI", "FILE_PATH", "NAME",
 		"METHOD", "STATUS", "SIZE", "TYPE", "EXT",
-		"LAST_MODIFIED", "EXTENSION_MISMATCH", strings.ToUpper(hashHeader(false, *hashf)) + "_HASH", "FORMAT_COUNT",
+		"LAST_MODIFIED", "EXTENSION_MISMATCH", strings.ToUpper(hashHeader(false, hh)) + "_HASH", "FORMAT_COUNT",
 		"PUID", "MIME_TYPE", "FORMAT_NAME", "FORMAT_VERSION"})
 }
 

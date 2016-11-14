@@ -340,7 +340,7 @@ func main() {
 		w = logWriter{}
 	}
 	wg := &sync.WaitGroup{}
-	w.writeHead(s)
+	w.writeHead(s, *hashf)
 	// support reading list files from stdin
 	if flag.Arg(0) == "-" {
 		scanner := bufio.NewScanner(os.Stdin)
