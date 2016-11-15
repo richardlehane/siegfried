@@ -132,7 +132,7 @@ func printer(ctxts chan *context, lg *logger) {
 			fmt.Fprintf(lg.w, "%s %v\n", errString, res.err)
 		}
 		// log warnings, known, unknown and report matches for slow or debug
-		if lg.warn || lg.known || lg.unknown || lg.slow || lg.debug {
+		if lg.warn || lg.known || lg.unknown {
 			var kn bool
 			for _, id := range res.ids {
 				if id.Known() {
@@ -143,9 +143,6 @@ func printer(ctxts chan *context, lg *logger) {
 						fp = printFile(fp, ctx.path)
 						fmt.Fprintf(lg.w, "%s %s\n", warnString, w)
 					}
-				}
-				if lg.slow || lg.debug {
-					fmt.Fprintf(lg.w, "matched: %s\n", id.String())
 				}
 			}
 			if (lg.known && kn) || (lg.unknown && !kn) {

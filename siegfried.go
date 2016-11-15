@@ -309,6 +309,10 @@ func (s *Siegfried) IdentifyBuffer(buffer *siegreader.Buffer, err error, name, m
 			recs[i].Active(core.TextMatcher)
 		}
 	}
+	// Log name for debug/slow
+	if config.Debug() || config.Slow() {
+		fmt.Fprintf(config.Out(), "[FILE] %s\n", name)
+	}
 	// Name Matcher
 	if len(name) > 0 && s.nm != nil {
 		nms, _ := s.nm.Identify(name, nil) // we don't care about an error here
@@ -445,6 +449,18 @@ func (s *Siegfried) IdentifyBuffer(buffer *siegreader.Buffer, err error, name, m
 	// report results
 	go func() {
 		for _, rec := range recs {
+			if config.Slow() || config.Debug() {
+				pipe := make(chan core.Identification)
+				go func() {
+					rec.Report(pipe)
+					close(pipe)
+				}()
+				for id := range pipe {
+					fmt.Fprintf(config.Out(), "matched: %s\n", id.String())
+					res <- id
+				}
+				continue
+			}
 			rec.Report(res)
 		}
 		close(res)

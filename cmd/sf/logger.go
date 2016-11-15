@@ -25,9 +25,9 @@ import (
 )
 
 type logger struct {
-	progress, e, warn, debug, slow, known, unknown bool
-	w                                              io.Writer
-	start                                          time.Time
+	progress, e, warn, known, unknown bool
+	w                                 io.Writer
+	start                             time.Time
 }
 
 func newLogger(opts string) (*logger, error) {
@@ -49,10 +49,8 @@ func newLogger(opts string) (*logger, error) {
 		case "warning", "warn", "w":
 			lg.warn = true
 		case "debug", "d":
-			lg.debug, lg.progress = true, true
 			config.SetDebug()
 		case "slow", "s":
-			lg.slow, lg.progress = true, true
 			config.SetSlow()
 		case "unknown", "u":
 			lg.unknown = true
@@ -63,6 +61,7 @@ func newLogger(opts string) (*logger, error) {
 		}
 	}
 	if config.Debug() || config.Slow() {
+		lg.progress = false // progress reported internally
 		config.SetOut(lg.w)
 	}
 	return lg, nil
