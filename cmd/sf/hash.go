@@ -26,7 +26,7 @@ import (
 const hashChoices = "'md5', 'sha1', 'sha256', 'sha512', 'crc'"
 
 func getHash(typ string) hash.Hash {
-	switch *hashf {
+	switch typ {
 	case "":
 	case "md5", "MD5":
 		return md5.New()

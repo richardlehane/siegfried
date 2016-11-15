@@ -120,7 +120,7 @@ func printer(ctxts chan *context, lg *logger) {
 	}
 	for ctx := range ctxts {
 		var fp bool // just print FILE once in log
-		// log progress before blocking
+		// log progress
 		if lg.progress {
 			fp = printFile(fp, ctx.path)
 		}
@@ -160,40 +160,33 @@ func printer(ctxts chan *context, lg *logger) {
 
 // identify() defined in longpath.go and longpath_windows.go
 
+func readFile(ctx *context, ctxts chan *context) {
+	f, err := os.Open(ctx.path)
+	if err != nil {
+		f, err = retryOpen(ctx.path, err) // retry open in case is a windows long path error
+		if err != nil {
+			ctx.res <- results{err, nil, nil}
+			ctx.wg.Add(1)
+			ctxts <- ctx
+			return
+		}
+	}
+	identifyRdr(f, ctx, ctxts)
+	f.Close()
+}
+
 func identifyFile(ctx *context, ctxts chan *context) {
 	ctx.wg.Add(1)
 	ctxts <- ctx
-	if ctx.z {
-		f, err := os.Open(ctx.path)
-		if err != nil {
-			f, err = retryOpen(ctx.path, err) // retry open in case is a windows long path error
-			if err != nil {
-				ctx.res <- results{err, nil, nil}
-				ctx.wg.Add(1)
-				ctxts <- ctx
-				return
-			}
-		}
-		identifyRdr(f, ctx, ctxts)
-		f.Close()
-	} else {
-		go func() {
-			ctx.wg.Add(1)
-			f, err := os.Open(ctx.path)
-			if err != nil {
-				f, err = retryOpen(ctx.path, err) // retry open in case is a windows long path error
-				if err != nil {
-					ctx.res <- results{err, nil, nil}
-					ctx.wg.Add(1)
-					ctxts <- ctx
-					return
-				}
-			}
-			identifyRdr(f, ctx, ctxts)
-			f.Close()
-			ctx.wg.Done()
-		}()
+	if ctx.z || config.Slow() || config.Debug() {
+		readFile(ctx, ctxts)
+		return
 	}
+	go func() {
+		ctx.wg.Add(1)
+		readFile(ctx, ctxts)
+		ctx.wg.Done()
+	}()
 }
 
 func identifyRdr(r io.Reader, ctx *context, ctxts chan *context) {
@@ -314,7 +307,6 @@ func main() {
 		if *serve != "" || *fprflag {
 			log.Fatalln("[FATAL] debug and slow logging cannot be run in server mode")
 		}
-		*multi = 1 // only one process if slow/debug
 	}
 	// start throttle
 	if *throttlef != 0 {
@@ -351,7 +343,7 @@ func main() {
 	default:
 		w = newYAML(os.Stdout)
 	}
-	// overrite writer with nil if logging is to std out
+	// overrite writer with nil writer if logging is to stdout
 	if lg != nil && lg.w == os.Stdout {
 		w = logWriter{}
 	}
