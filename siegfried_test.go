@@ -81,14 +81,15 @@ type testIdentifier struct{}
 func (t testIdentifier) Add(m core.Matcher, mt core.MatcherType) (core.Matcher, error) {
 	return nil, nil
 }
-func (t testIdentifier) YAML() string                                       { return "" }
+func (t testIdentifier) Recorder() core.Recorder                            { return testRecorder{} }
 func (t testIdentifier) Name() string                                       { return "a" }
 func (t testIdentifier) Details() string                                    { return "b" }
 func (t testIdentifier) Fields() []string                                   { return nil }
 func (t testIdentifier) Save(l *persist.LoadSaver)                          {}
-func (t testIdentifier) Recorder() core.Recorder                            { return testRecorder{} }
-func (t testIdentifier) Recognise(m core.MatcherType, i int) (bool, string) { return false, "" }
 func (t testIdentifier) String() string                                     { return "" }
+func (t testIdentifier) Inspect(s ...string) string                         { return "" }
+func (t testIdentifier) GraphP(i int) string                                { return "" }
+func (t testIdentifier) Recognise(m core.MatcherType, i int) (bool, string) { return false, "" }
 
 // recorder test stub
 
@@ -97,7 +98,9 @@ type testRecorder struct{}
 func (t testRecorder) Active(m core.MatcherType)                     {}
 func (t testRecorder) Record(m core.MatcherType, r core.Result) bool { return true }
 func (t testRecorder) Satisfied(m core.MatcherType) (bool, int)      { return false, 0 }
-func (t testRecorder) Report(c chan core.Identification)             { c <- testIdentification{} }
+func (t testRecorder) Report() []core.Identification {
+	return []core.Identification{testIdentification{}}
+}
 
 // identification test stub
 

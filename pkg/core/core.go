@@ -71,9 +71,8 @@ func LoadIdentifier(ls *persist.LoadSaver) Identifier {
 type Recorder interface {
 	Record(MatcherType, Result) bool   // Record results for each matcher; return true if match recorded (siegfried will iterate through the identifiers until an identifier returns true).
 	Satisfied(MatcherType) (bool, int) // Called before matcher starts - should we continue onto this matcher?
-	Report(chan Identification)        // Send results on channel
-	//Results() []Identification         // Return results as slice
-	Active(MatcherType) // Instruct Recorder that can expect results of type MatcherType.
+	Report() []Identification          // Return results as slice
+	Active(MatcherType)                // Instruct Recorder that can expect results of type MatcherType.
 }
 
 // Identification is sent by an identifier when a format matches

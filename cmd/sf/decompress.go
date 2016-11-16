@@ -28,7 +28,19 @@ import (
 	"github.com/richardlehane/webarchive"
 
 	"github.com/richardlehane/siegfried/internal/siegreader"
+	"github.com/richardlehane/siegfried/pkg/config"
+	"github.com/richardlehane/siegfried/pkg/core"
 )
+
+func isArc(ids []core.Identification) config.Archive {
+	var arc config.Archive
+	for _, id := range ids {
+		if id.Archive() > 0 {
+			return id.Archive()
+		}
+	}
+	return arc
+}
 
 type decompressor interface {
 	next() error // when finished, should return io.EOF

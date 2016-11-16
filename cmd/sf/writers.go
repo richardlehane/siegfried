@@ -32,18 +32,6 @@ import (
 
 // i.Known()
 
-func sliceIDs(c chan core.Identification) ([]core.Identification, config.Archive) {
-	var arc config.Archive
-	ids := make([]core.Identification, 0, 1)
-	for id := range c {
-		ids = append(ids, id)
-		if id.Archive() > 0 {
-			arc = id.Archive()
-		}
-	}
-	return ids, arc
-}
-
 type writer interface {
 	writeHead(s *siegfried.Siegfried, hh string)
 	// if a directory give a negative sz

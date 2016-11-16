@@ -290,11 +290,10 @@ func (s *Siegfried) Put(buffer *siegreader.Buffer) {
 }
 
 // IdentifyBuffer identifies a siegreader buffer. Supply the error from Get as the second argument.
-func (s *Siegfried) IdentifyBuffer(buffer *siegreader.Buffer, err error, name, mime string) (chan core.Identification, error) {
+func (s *Siegfried) IdentifyBuffer(buffer *siegreader.Buffer, err error, name, mime string) ([]core.Identification, error) {
 	if err != nil && err != siegreader.ErrEmpty {
 		return nil, fmt.Errorf("siegfried: error reading file; got %v", err)
 	}
-	res := make(chan core.Identification)
 	recs := make([]core.Recorder, len(s.ids))
 	for i, v := range s.ids {
 		recs[i] = v.Recorder()
@@ -446,25 +445,22 @@ func (s *Siegfried) IdentifyBuffer(buffer *siegreader.Buffer, err error, name, m
 			}
 		}
 	}
-	// report results
-	go func() {
-		for _, rec := range recs {
-			if config.Slow() || config.Debug() {
-				pipe := make(chan core.Identification)
-				go func() {
-					rec.Report(pipe)
-					close(pipe)
-				}()
-				for id := range pipe {
-					fmt.Fprintf(config.Out(), "matched: %s\n", id.String())
-					res <- id
-				}
-				continue
+	if len(recs) < 2 {
+		return recs[0].Report(), err
+	}
+	var res []core.Identification
+	for idx, rec := range recs {
+		if config.Slow() || config.Debug() {
+			for _, id := range rec.Report() {
+				fmt.Fprintf(config.Out(), "matched: %s\n", id.String())
 			}
-			rec.Report(res)
 		}
-		close(res)
-	}()
+		if idx == 0 {
+			res = rec.Report()
+			continue
+		}
+		res = append(res, rec.Report()...)
+	}
 	return res, err
 }
 
@@ -474,7 +470,19 @@ func (s *Siegfried) IdentifyBuffer(buffer *siegreader.Buffer, err error, name, m
 func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identification, error) {
 	buffer, err := s.Buffer(r)
 	defer s.buffers.Put(buffer)
-	return s.IdentifyBuffer(buffer, err, name, mime)
+	res, err := s.IdentifyBuffer(buffer, err, name, mime)
+	if res == nil {
+		return nil, err
+	}
+	resc := make(chan core.Identification)
+	// report results
+	go func() {
+		for _, id := range res {
+			resc <- id
+		}
+		close(resc)
+	}()
+	return resc, err
 }
 
 // Blame checks with the byte matcher to see what identification results subscribe to a particular result or test

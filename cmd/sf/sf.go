@@ -189,8 +189,8 @@ func identifyFile(ctx *context, ctxts chan *context) {
 func identifyRdr(r io.Reader, ctx *context, ctxts chan *context) {
 	b, berr := ctx.s.Buffer(r)
 	defer ctx.s.Put(b)
-	c, err := ctx.s.IdentifyBuffer(b, berr, ctx.path, ctx.mime)
-	if c == nil {
+	ids, err := ctx.s.IdentifyBuffer(b, berr, ctx.path, ctx.mime)
+	if ids == nil {
 		ctx.res <- results{err, nil, nil}
 		return
 	}
@@ -209,9 +209,12 @@ func identifyRdr(r io.Reader, ctx *context, ctxts chan *context) {
 		cs = ctx.h.Sum(nil)
 	}
 	// decompress if an archive format
-	ids, arc := sliceIDs(c)
 	ctx.res <- results{err, cs, ids}
-	if !ctx.z || arc == config.None {
+	if !ctx.z {
+		return
+	}
+	arc := isArc(ids)
+	if arc == config.None {
 		return
 	}
 	var d decompressor

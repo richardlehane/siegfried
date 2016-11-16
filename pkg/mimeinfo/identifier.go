@@ -196,22 +196,23 @@ func (r *Recorder) Satisfied(mt core.MatcherType) (bool, int) {
 	return false, 0
 }
 
-func (r *Recorder) Report(res chan core.Identification) {
+func (r *Recorder) Report() []core.Identification {
+	// no results
 	if len(r.ids) == 0 {
-		res <- Identification{
+		return []core.Identification{Identification{
 			Namespace: r.Name(),
 			ID:        "UNKNOWN",
 			Warning:   "no match",
-		}
-		return
+		}}
 	}
 	sort.Sort(r.ids)
 	// exhaustive
 	if r.Multi() == config.Exhaustive {
-		for _, v := range r.ids {
-			res <- r.updateWarning(v)
+		ret := make([]core.Identification, len(r.ids))
+		for i, v := range r.ids {
+			ret[i] = r.updateWarning(v)
 		}
-		return
+		return ret
 	}
 	// if we've only got weak matches (match is filename/mime only) report only the first
 	if !r.ids[0].xmlMatch && r.ids[0].magicScore == 0 {
@@ -229,12 +230,11 @@ func (r *Recorder) Report(res chan core.Identification) {
 				poss[i] = v.ID
 				conf = lowConfidence(v)
 			}
-			nids = []Identification{{
+			return []core.Identification{Identification{
 				Namespace: r.Name(),
 				ID:        "UNKNOWN",
 				Warning:   fmt.Sprintf("no match; possibilities based on %s are %v", conf, strings.Join(poss, ", ")),
-			},
-			}
+			}}
 		}
 		r.ids = nids
 	}
@@ -247,31 +247,31 @@ func (r *Recorder) Report(res chan core.Identification) {
 			}
 			poss = append(poss, v.ID)
 		}
-		res <- Identification{
+		return []core.Identification{Identification{
 			Namespace: r.Name(),
 			ID:        "UNKNOWN",
 			Warning:   fmt.Sprintf("multiple matches %v", strings.Join(poss, ", ")),
-		}
-		return
+		}}
 	}
+	ret := make([]core.Identification, len(r.ids))
 	for i, v := range r.ids {
 		if i > 0 {
 			switch r.Multi() {
 			case config.Single:
-				return
+				return ret[:i]
 			case config.Conclusive:
 				if r.ids.Less(i-1, i) {
-					return
+					return ret[:i]
 				}
 			default:
 				if !v.xmlMatch && v.magicScore == 0 { // if weak
-					return
+					return ret[:i]
 				}
 			}
 		}
-		res <- r.updateWarning(v)
+		ret[i] = r.updateWarning(v)
 	}
-	return
+	return ret
 }
 
 func (r *Recorder) updateWarning(i Identification) Identification {
