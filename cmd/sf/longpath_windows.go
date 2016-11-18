@@ -16,14 +16,10 @@ package main
 
 import (
 	"fmt"
-	"hash"
 	"os"
 	"path/filepath"
 	"strings"
-	"sync"
 	"time"
-
-	"github.com/richardlehane/siegfried"
 )
 
 // longpath code derived from https://github.com/docker/docker/tree/master/pkg/longpath
@@ -83,7 +79,7 @@ func retryOpen(path string, err error) (*os.File, error) {
 	return file, nil
 }
 
-func identify(ctxts chan *context, wg *sync.WaitGroup, s *siegfried.Siegfried, w writer, root, orig string, h hash.Hash, z bool, norecurse bool) error {
+func identify(ctxts chan *context, root, orig string, norecurse bool, gf getFn) error {
 	walkFunc := func(path string, info os.FileInfo, err error) error {
 		var retry bool
 		var lp, sp string
@@ -103,17 +99,17 @@ func identify(ctxts chan *context, wg *sync.WaitGroup, s *siegfried.Siegfried, w
 				return filepath.SkipDir
 			}
 			if retry { // if a dir long path, restart the recursion with a long path as the new root
-				return identify(ctxts, wg, s, w, lp, sp, h, z, norecurse)
+				return identify(ctxts, lp, sp, norecurse, gf)
 			}
 			if *droido {
-				dctx := newContext(s, w, wg, nil, false, shortpath(path, orig), "", info.ModTime().Format(time.RFC3339), -1)
+				dctx := gf(shortpath(path, orig), "", info.ModTime().Format(time.RFC3339), -1)
 				dctx.res <- results{nil, nil, nil}
-				wg.Add(1)
+				dctx.wg.Add(1)
 				ctxts <- dctx
 			}
 			return nil
 		}
-		identifyFile(newContext(s, w, wg, h, z, shortpath(path, orig), "", info.ModTime().Format(time.RFC3339), info.Size()), ctxts)
+		identifyFile(gf(shortpath(path, orig), "", info.ModTime().Format(time.RFC3339), info.Size()), ctxts, gf)
 		return nil
 	}
 	return filepath.Walk(root, walkFunc)

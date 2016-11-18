@@ -37,8 +37,7 @@ import (
 
 // defaults
 const (
-	maxProcs     = 1024
-	defaultProcs = 8
+	maxMulti = 1024
 
 	fileString = "[FILE]"
 	errString  = "[ERROR]"
@@ -58,7 +57,7 @@ var (
 	sig       = flag.String("sig", config.SignatureBase(), "set the signature file")
 	home      = flag.String("home", config.Home(), "override the default home directory")
 	serve     = flag.String("serve", "", "start siegfried server e.g. -serve localhost:5138")
-	multi     = flag.Int("multi", defaultProcs, "set number of parallel file ID processes")
+	multi     = flag.Int("multi", 1, "set number of parallel file ID processes")
 	archive   = flag.Bool("z", false, "scan archive formats (zip, tar, gzip, warc, arc)")
 	hashf     = flag.String("hash", "", "calculate file checksum with hash algorithm; options "+hashChoices)
 	throttlef = flag.Duration("throttle", 0, "set a time to wait between scanning files e.g. 50ms")
@@ -88,19 +87,32 @@ type results struct {
 	ids []core.Identification
 }
 
-func newContext(s *siegfried.Siegfried, w writer, wg *sync.WaitGroup, h hash.Hash, z bool, path, mime, mod string, sz int64) *context {
-	return &context{
-		s:    s,
-		w:    w,
-		wg:   wg,
-		h:    h,
-		z:    z,
-		path: path,
-		mime: mime,
-		mod:  mod,
-		sz:   sz,
-		res:  make(chan results, 1),
+var ctxPool *sync.Pool
+
+func setCtxPool(s *siegfried.Siegfried, w writer, wg *sync.WaitGroup, h hash.Hash, z bool) {
+	ctxPool = &sync.Pool{
+		New: func() interface{} {
+			return &context{
+				s:   s,
+				w:   w,
+				wg:  wg,
+				h:   h,
+				z:   z,
+				res: make(chan results, 1),
+			}
+		},
 	}
+}
+
+type getFn func(string, string, string, int64) *context
+
+func getCtx(path, mime, mod string, sz int64) *context {
+	c := ctxPool.Get().(*context)
+	if c.h != nil {
+		c.h.Reset()
+	}
+	c.path, c.mime, c.mod, c.sz = path, mime, mod, sz
+	return c
 }
 
 func printer(ctxts chan *context, lg *logger) {
@@ -152,12 +164,13 @@ func printer(ctxts chan *context, lg *logger) {
 		// write the result
 		ctx.w.writeFile(ctx.path, ctx.sz, ctx.mod, res.cs, res.err, res.ids)
 		ctx.wg.Done()
+		ctxPool.Put(ctx) // return the context to the pool
 	}
 }
 
 // identify() defined in longpath.go and longpath_windows.go
 
-func readFile(ctx *context, ctxts chan *context) {
+func readFile(ctx *context, ctxts chan *context, gf getFn) {
 	f, err := os.Open(ctx.path)
 	if err != nil {
 		f, err = retryOpen(ctx.path, err) // retry open in case is a windows long path error
@@ -168,25 +181,25 @@ func readFile(ctx *context, ctxts chan *context) {
 			return
 		}
 	}
-	identifyRdr(f, ctx, ctxts)
+	identifyRdr(f, ctx, ctxts, gf)
 	f.Close()
 }
 
-func identifyFile(ctx *context, ctxts chan *context) {
+func identifyFile(ctx *context, ctxts chan *context, gf getFn) {
 	ctx.wg.Add(1)
 	ctxts <- ctx
-	if ctx.z || config.Slow() || config.Debug() {
-		readFile(ctx, ctxts)
+	if *multi == 1 || ctx.z || config.Slow() || config.Debug() {
+		readFile(ctx, ctxts, gf)
 		return
 	}
 	go func() {
 		ctx.wg.Add(1)
-		readFile(ctx, ctxts)
+		readFile(ctx, ctxts, gf)
 		ctx.wg.Done()
 	}()
 }
 
-func identifyRdr(r io.Reader, ctx *context, ctxts chan *context) {
+func identifyRdr(r io.Reader, ctx *context, ctxts chan *context, gf getFn) {
 	b, berr := ctx.s.Buffer(r)
 	defer ctx.s.Put(b)
 	ids, err := ctx.s.IdentifyBuffer(b, berr, ctx.path, ctx.mime)
@@ -209,12 +222,13 @@ func identifyRdr(r io.Reader, ctx *context, ctxts chan *context) {
 		cs = ctx.h.Sum(nil)
 	}
 	// decompress if an archive format
-	ctx.res <- results{err, cs, ids}
 	if !ctx.z {
+		ctx.res <- results{err, cs, ids}
 		return
 	}
 	arc := isArc(ids)
 	if arc == config.None {
+		ctx.res <- results{err, cs, ids}
 		return
 	}
 	var d decompressor
@@ -231,22 +245,26 @@ func identifyRdr(r io.Reader, ctx *context, ctxts chan *context) {
 		d, err = newWARC(siegreader.ReaderFrom(b), ctx.path)
 	}
 	if err != nil {
-		ctx.res <- results{fmt.Errorf("failed to decompress, got: %v", err), nil, nil}
+		ctx.res <- results{fmt.Errorf("failed to decompress, got: %v", err), cs, ids}
 		return
 	}
+	_, dw := ctx.w.(*droidWriter)
+	// send the result
+	ctx.res <- results{err, cs, ids}
+	// decompress and recurse
 	for err = d.next(); err == nil; err = d.next() {
-		if _, ok := ctx.w.(*droidWriter); ok {
+		if dw {
 			for _, v := range d.dirs() {
-				dctx := newContext(ctx.s, ctx.w, ctx.wg, nil, false, v, "", "", -1)
+				dctx := gf(v, "", "", -1)
 				dctx.res <- results{nil, nil, nil}
-				ctx.wg.Add(1)
+				dctx.wg.Add(1)
 				ctxts <- dctx
 			}
 		}
-		nctx := newContext(ctx.s, ctx.w, ctx.wg, nil, false, d.path(), d.mime(), d.mod(), d.size())
+		nctx := gf(d.path(), d.mime(), d.mod(), d.size())
 		nctx.wg.Add(1)
 		ctxts <- nctx
-		identifyRdr(d.reader(), nctx, ctxts)
+		identifyRdr(d.reader(), nctx, ctxts, gf)
 	}
 }
 
@@ -295,8 +313,9 @@ func main() {
 		return
 	}
 	// check -multi
-	if *multi > maxProcs || *multi < 1 {
-		*multi = defaultProcs
+	if *multi > maxMulti || *multi < 1 || (*archive && *multi > 1) {
+		log.Println("[WARN] -multi must be > 0 and =< 1024. If -z, -multi must be 1. Resetting -multi to 1")
+		*multi = 1
 	}
 	// start logger
 	lg, err := newLogger(*logf)
@@ -314,19 +333,12 @@ func main() {
 		defer throttle.Stop()
 	}
 	// start the printer
-	ctxts := make(chan *context, *multi)
+	lenCtxts := *multi
+	if lenCtxts == 1 {
+		lenCtxts = 8
+	}
+	ctxts := make(chan *context, lenCtxts)
 	go printer(ctxts, lg)
-	// handle -serve
-	if *serve != "" {
-		log.Printf("Starting server at %s. Use CTRL-C to quit.\n", *serve)
-		listen(*serve, s, ctxts)
-		return
-	}
-	// handle no file/directory argument
-	if flag.NArg() != 1 {
-		close(ctxts)
-		log.Fatalln("[FATAL] expecting a single file or directory argument")
-	}
 	// set default writer
 	var w writer
 	switch {
@@ -347,7 +359,22 @@ func main() {
 	if lg != nil && lg.w == os.Stdout {
 		w = logWriter{}
 	}
+	// setup default waitgroup
 	wg := &sync.WaitGroup{}
+	// setup context pool
+	setCtxPool(s, w, wg, checksum, *archive)
+	// handle -serve
+	if *serve != "" {
+		log.Printf("Starting server at %s. Use CTRL-C to quit.\n", *serve)
+		listen(*serve, s, ctxts)
+		return
+	}
+	// handle no file/directory argument
+	if flag.NArg() != 1 {
+		close(ctxts)
+		log.Fatalln("[FATAL] expecting a single file or directory argument")
+	}
+
 	w.writeHead(s, *hashf)
 	// support reading list files from stdin
 	if flag.Arg(0) == "-" {
@@ -358,16 +385,16 @@ func main() {
 				info, err = retryStat(scanner.Text(), err)
 			}
 			if err != nil || info.IsDir() {
-				ctx := newContext(s, w, wg, nil, false, scanner.Text(), "", "", 0)
+				ctx := getCtx(scanner.Text(), "", "", 0)
 				ctx.res <- results{fmt.Errorf("failed to identify %s (in scanning mode, inputs must all be files and not directories), got: %v", scanner.Text(), err), nil, nil}
-				wg.Add(1)
+				ctx.wg.Add(1)
 				ctxts <- ctx
 			} else {
-				identifyFile(newContext(s, w, wg, checksum, *archive, scanner.Text(), "", info.ModTime().Format(time.RFC3339), info.Size()), ctxts)
+				identifyFile(getCtx(scanner.Text(), "", info.ModTime().Format(time.RFC3339), info.Size()), ctxts, getCtx)
 			}
 		}
 	} else {
-		err = identify(ctxts, wg, s, w, flag.Arg(0), "", checksum, *archive, *nr)
+		err = identify(ctxts, flag.Arg(0), "", *nr, getCtx)
 	}
 	wg.Wait()
 	close(ctxts)

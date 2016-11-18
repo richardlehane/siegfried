@@ -35,7 +35,7 @@ func retryStat(path string, err error) (os.FileInfo, error) {
 	return nil, err
 }
 
-func identify(ctxts chan *context, wg *sync.WaitGroup, s *siegfried.Siegfried, w writer, root, orig string, h hash.Hash, z bool, norecurse bool) error {
+func identify(ctxts chan *context, root, orig string, norecurse bool, gf getFn) error {
 	walkFunc := func(path string, info os.FileInfo, err error) error {
 		if *throttlef > 0 {
 			<-throttle.C
@@ -48,14 +48,14 @@ func identify(ctxts chan *context, wg *sync.WaitGroup, s *siegfried.Siegfried, w
 				return filepath.SkipDir
 			}
 			if *droido {
-				dctx := newContext(s, w, wg, nil, false, path, "", info.ModTime().Format(time.RFC3339), -1)
+				dctx := gf(s, w, wg, nil, false, path, "", info.ModTime().Format(time.RFC3339), -1)
 				dctx.res <- results{nil, nil, nil}
-				wg.Add(1)
+				dctx.wg.Add(1)
 				ctxts <- dctx
 			}
 			return nil
 		}
-		identifyFile(newContext(s, w, wg, h, z, path, "", info.ModTime().Format(time.RFC3339), info.Size()), ctxts)
+		identifyFile(gf(path, "", info.ModTime().Format(time.RFC3339), info.Size()), ctxts, gf)
 		return nil
 	}
 	return filepath.Walk(root, walkFunc)

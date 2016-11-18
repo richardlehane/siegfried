@@ -99,10 +99,11 @@ func handleIdentify(s *siegfried.Siegfried, ctxts chan *context) func(w http.Res
 			}
 			w.Header().Set("Content-Type", mime)
 			wr.writeHead(s, "")
-			ctx := newContext(s, wr, wg, nil, false, h.Filename, "", mod, sz)
-			ctx.wg.Add(1)
+			ctx := getCtx(h.Filename, "", mod, sz)
+			wg.Add(1)
+			ctx.wg = wg
 			ctxts <- ctx
-			identifyRdr(f, ctx, ctxts)
+			identifyRdr(f, ctx, ctxts, getCtx)
 			wg.Wait()
 			wr.writeTail()
 			return
@@ -114,7 +115,7 @@ func handleIdentify(s *siegfried.Siegfried, ctxts chan *context) func(w http.Res
 			}
 			w.Header().Set("Content-Type", mime)
 			wr.writeHead(s, "")
-			err = identify(ctxts, wg, s, wr, path, "", nil, false, nr)
+			err = identify(ctxts, path, "", nr, getCtx)
 			wg.Wait()
 			wr.writeTail()
 			if err != nil {

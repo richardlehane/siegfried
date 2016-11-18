@@ -24,11 +24,11 @@
 //  	log.Fatal(err)
 //  }
 //  defer f.Close()
-//  c, err := s.Identify(f, "filename.ext", "application/xml")
+//  ids, err := s.Identify(f, "filename.ext", "application/xml")
 //  if err != nil {
 //  	log.Fatal(err)
 //  }
-//  for id := range c {
+//  for _, id := range ids {
 //  	fmt.Println(id)
 //  }
 package siegfried
@@ -466,23 +466,11 @@ func (s *Siegfried) IdentifyBuffer(buffer *siegreader.Buffer, err error, name, m
 
 // Identify identifies a stream or file object.
 // It takes an io.Reader and the name and mimetype of the file/stream (if unknown, give empty strings).
-// It returns a channel of identifications and an error.
-func (s *Siegfried) Identify(r io.Reader, name, mime string) (chan core.Identification, error) {
+// It returns a slice of identifications and an error.
+func (s *Siegfried) Identify(r io.Reader, name, mime string) ([]core.Identification, error) {
 	buffer, err := s.Buffer(r)
 	defer s.buffers.Put(buffer)
-	res, err := s.IdentifyBuffer(buffer, err, name, mime)
-	if res == nil {
-		return nil, err
-	}
-	resc := make(chan core.Identification)
-	// report results
-	go func() {
-		for _, id := range res {
-			resc <- id
-		}
-		close(resc)
-	}()
-	return resc, err
+	return s.IdentifyBuffer(buffer, err, name, mime)
 }
 
 // Blame checks with the byte matcher to see what identification results subscribe to a particular result or test

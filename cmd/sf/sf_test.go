@@ -46,7 +46,7 @@ func identifyT(s *siegfried.Siegfried, p string) ([]string, error) {
 	}
 	t := time.Now()
 	c, _ := s.Identify(file, p, "")
-	for i := range c {
+	for _, i := range c {
 		ids = append(ids, i.String())
 	}
 	err = file.Close()
@@ -168,21 +168,21 @@ func TestTip(t *testing.T) {
 	}
 	buf := bytes.NewReader([]byte{0x00, 0x4d, 0x52, 0x4d, 0x00})
 	c, _ := s.Identify(buf, "test.mrw", "")
-	for i := range c {
+	for _, i := range c {
 		if i.String() != expect {
 			t.Errorf("First buffer: expecting %s, got %s", expect, i)
 		}
 	}
 	buf = bytes.NewReader([]byte{0x00, 0x4d, 0x52, 0x4d, 0x00})
 	c, _ = s.Identify(buf, "test.mrw", "")
-	for i := range c {
+	for _, i := range c {
 		if i.String() != expect {
 			t.Errorf("Second buffer: expecting %s, got %s", expect, i)
 		}
 	}
 	buf = bytes.NewReader([]byte{0x00, 0x4d, 0x52, 0x4d, 0x00})
 	c, _ = s.Identify(buf, "test.mrw", "")
-	for i := range c {
+	for _, i := range c {
 		if i.String() != expect {
 			t.Errorf("Third buffer: expecting %s, got %s", expect, i)
 		}
@@ -212,7 +212,7 @@ func Test363(t *testing.T) {
 	for i := 0; i < repetitions; i++ {
 		buf := bytes.NewReader(se)
 		c, _ := s.Identify(buf, "test.seg", "")
-		for i := range c {
+		for _, i := range c {
 			iter++
 			if i.String() != expect {
 				t.Errorf("First buffer on %d iteration: expecting %s, got %s", iter, expect, i)
@@ -224,7 +224,7 @@ func Test363(t *testing.T) {
 	for i := 0; i < repetitions; i++ {
 		buf := bytes.NewReader(se)
 		c, _ := s.Identify(buf, "test2.seg", "")
-		for i := range c {
+		for _, i := range c {
 			iter++
 			if i.String() != expect {
 				t.Errorf("Second buffer on %d iteration: expecting %s, got %s", iter, expect, i)
