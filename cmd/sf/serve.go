@@ -17,6 +17,7 @@ package main
 import (
 	"encoding/base64"
 	"fmt"
+	"hash"
 	"io"
 	"net/http"
 	"os"
@@ -42,40 +43,94 @@ func decodePath(s string) (string, error) {
 	return string(data), nil
 }
 
-func parseRequest(w http.ResponseWriter, r *http.Request) (string, writer, bool) {
-	var nr bool
+func parseRequest(w http.ResponseWriter, r *http.Request) (
+	mime string, wr writer, norec bool, z bool, cs hash.Hash, sf *siegfried.Siegfried) {
 	vals := r.URL.Query()
-	if n, ok := vals["nr"]; ok && len(n) > 0 {
-		if n[0] == "true" {
-			nr = true
-		}
+	// json, csv, droid or yaml
+	var fmt int
+	switch {
+	case *jsono:
+		fmt = 1
+	case *csvo:
+		fmt = 2
+	case *droido:
+		fmt = 3
 	}
-	if format, ok := vals["format"]; ok && len(format) > 0 {
-		switch format[0] {
-		case "json":
-			return "application/json", newJSON(w), nr
-		case "csv":
-			return "text/csv", newCSV(w), nr
+	if v, ok := vals["format"]; ok && len(v) > 0 {
+		switch v[0] {
 		case "yaml":
-			return "application/x-yaml", newYAML(w), nr
+			fmt = 0
+		case "json":
+			fmt = 1
+		case "csv":
+			fmt = 2
+		case "droid":
+			fmt = 3
 		}
 	}
 	if accept := r.Header.Get("Accept"); accept != "" {
 		switch accept {
-		case "application/json":
-			return "application/json", newJSON(w), nr
-		case "text/csv", "application/csv":
-			return "text/csv", newCSV(w), nr
 		case "application/x-yaml":
-			return "application/x-yaml", newYAML(w), nr
+			fmt = 0
+		case "application/json":
+			fmt = 1
+		case "text/csv", "application/csv":
+			fmt = 2
+		case "application/x-droid":
+			fmt = 3
 		}
 	}
-	return "application/json", newJSON(w), nr
+	switch fmt {
+	case 0:
+		wr = newYAML(w)
+		mime = "application/x-yaml"
+	case 1:
+		wr = newJSON(w)
+		mime = "application/json"
+	case 2:
+		wr = newCSV(w)
+		mime = "text/csv"
+	case 3:
+		wr = newDroid(w)
+		mime = "application/x-droid"
+	}
+	// no recurse
+	norec = *nr
+	if v, ok := vals["nr"]; ok && len(v) > 0 {
+		if v[0] == "true" {
+			norec = true
+		} else {
+			norec = false
+		}
+	}
+	// archive
+	z = *archive
+	if v, ok := vals["z"]; ok && len(v) > 0 {
+		if v[0] == "true" {
+			z = true
+		} else {
+			z = false
+		}
+	}
+	// checksum
+	h := *hashf
+	if v, ok := vals["hash"]; ok && len(v) > 0 {
+		h = v[0]
+	}
+	cs = getHash(h)
+	// sig
+	if v, ok := vals["sig"]; ok && len(v) > 0 {
+		path, err := base64.URLEncoding.DecodeString(v[0])
+		if err == nil {
+			sf, _ = siegfried.Load(string(path))
+		}
+	}
+	return
 }
 
 func handleIdentify(s *siegfried.Siegfried, ctxts chan *context) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
-		mime, wr, nr := parseRequest(w, r)
+		mime, wr, nr, _, _, _ := parseRequest(w, r)
 		wg := &sync.WaitGroup{}
 		if r.Method == "POST" {
 			f, h, err := r.FormFile("file")

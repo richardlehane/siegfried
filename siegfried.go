@@ -40,6 +40,7 @@ import (
 	"io"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 	"strings"
 	"time"
 
@@ -81,6 +82,7 @@ type Siegfried struct {
 	// mutatable fields follow
 	ids     []core.Identifier // identifiers
 	buffers *siegreader.Buffers
+	path    string
 }
 
 // New creates a new Siegfried struct. It initializes the three matchers.
@@ -215,6 +217,7 @@ func Load(path string) (*Siegfried, error) {
 			return ids
 		}(),
 		buffers: siegreader.New(),
+		path:    filepath.Base(path),
 	}, ls.Err
 }
 
@@ -222,7 +225,7 @@ func Load(path string) (*Siegfried, error) {
 func (s *Siegfried) String() string {
 	str := fmt.Sprintf(
 		"%s (%v)\nidentifiers: \n",
-		config.Signature(),
+		s.path,
 		s.C.Format(time.RFC3339))
 	for _, id := range s.ids {
 		str += fmt.Sprintf("  - %v: %v\n", id.Name(), id.Details())
@@ -238,7 +241,7 @@ func (s *Siegfried) YAML() string {
 		"---\nsiegfried   : %d.%d.%d\nscandate    : %v\nsignature   : %s\ncreated     : %v\nidentifiers : \n",
 		version[0], version[1], version[2],
 		time.Now().Format(time.RFC3339),
-		config.SignatureBase(),
+		s.path,
 		s.C.Format(time.RFC3339))
 	for _, id := range s.ids {
 		str += fmt.Sprintf("  - name    : '%v'\n    details : '%v'\n", id.Name(), id.Details())
@@ -254,7 +257,7 @@ func (s *Siegfried) JSON() string {
 		"{\"siegfried\":\"%d.%d.%d\",\"scandate\":\"%v\",\"signature\":\"%s\",\"created\":\"%v\",\"identifiers\":[",
 		version[0], version[1], version[2],
 		time.Now().Format(time.RFC3339),
-		config.SignatureBase(),
+		s.path,
 		s.C.Format(time.RFC3339))
 	for i, id := range s.ids {
 		if i > 0 {
