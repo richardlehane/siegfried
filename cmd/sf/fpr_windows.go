@@ -17,8 +17,8 @@ package main
 import "github.com/richardlehane/siegfried"
 
 var (
-	fprcontent       = false
-	fprflag    *bool = &fprcontent
+	boolval       = false
+	fprflag *bool = &boolval
 )
 
 func serveFpr(addr string, s *siegfried.Siegfried) {}

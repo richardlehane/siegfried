@@ -63,31 +63,10 @@ var (
 	throttlef = flag.Duration("throttle", 0, "set a time to wait between scanning files e.g. 50ms")
 )
 
-var throttle *time.Ticker
-
-type context struct {
-	s  *siegfried.Siegfried
-	w  writer
-	wg *sync.WaitGroup
-	// opts
-	h hash.Hash
-	z bool
-	// info
-	path string
-	mime string
-	mod  string
-	sz   int64
-	// results
-	res chan results
-}
-
-type results struct {
-	err error
-	cs  []byte
-	ids []core.Identification
-}
-
-var ctxPool *sync.Pool
+var (
+	throttle *time.Ticker
+	ctxPool  *sync.Pool
+)
 
 func setCtxPool(s *siegfried.Siegfried, w writer, wg *sync.WaitGroup, h hash.Hash, z bool) {
 	ctxPool = &sync.Pool{
@@ -113,6 +92,28 @@ func getCtx(path, mime, mod string, sz int64) *context {
 	}
 	c.path, c.mime, c.mod, c.sz = path, mime, mod, sz
 	return c
+}
+
+type context struct {
+	s  *siegfried.Siegfried
+	w  writer
+	wg *sync.WaitGroup
+	// opts
+	h hash.Hash
+	z bool
+	// info
+	path string
+	mime string
+	mod  string
+	sz   int64
+	// results
+	res chan results
+}
+
+type results struct {
+	err error
+	cs  []byte
+	ids []core.Identification
 }
 
 func printer(ctxts chan *context, lg *logger) {
@@ -200,9 +201,10 @@ func identifyFile(ctx *context, ctxts chan *context, gf getFn) {
 }
 
 func identifyRdr(r io.Reader, ctx *context, ctxts chan *context, gf getFn) {
-	b, berr := ctx.s.Buffer(r)
-	defer ctx.s.Put(b)
-	ids, err := ctx.s.IdentifyBuffer(b, berr, ctx.path, ctx.mime)
+	s := ctx.s
+	b, berr := s.Buffer(r)
+	defer s.Put(b)
+	ids, err := s.IdentifyBuffer(b, berr, ctx.path, ctx.mime)
 	if ids == nil {
 		ctx.res <- results{err, nil, nil}
 		return

@@ -18,13 +18,9 @@ package main
 
 import (
 	"fmt"
-	"hash"
 	"os"
 	"path/filepath"
-	"sync"
 	"time"
-
-	"github.com/richardlehane/siegfried"
 )
 
 func retryOpen(path string, err error) (*os.File, error) {
@@ -48,7 +44,7 @@ func identify(ctxts chan *context, root, orig string, norecurse bool, gf getFn) 
 				return filepath.SkipDir
 			}
 			if *droido {
-				dctx := gf(s, w, wg, nil, false, path, "", info.ModTime().Format(time.RFC3339), -1)
+				dctx := gf(path, "", info.ModTime().Format(time.RFC3339), -1)
 				dctx.res <- results{nil, nil, nil}
 				dctx.wg.Add(1)
 				ctxts <- dctx

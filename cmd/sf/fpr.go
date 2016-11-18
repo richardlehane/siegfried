@@ -25,7 +25,6 @@ import (
 
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/pkg/config"
-	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
 var fprflag = flag.Bool("fpr", false, "start siegfried fpr server at "+config.Fpr())
@@ -43,28 +42,24 @@ func fpridentify(s *siegfried.Siegfried, path string) []byte {
 	if err != nil {
 		return reply("error: failed to open " + path + "; got " + err.Error())
 	}
-	c, err := s.Identify(fi, path, "")
-	if c == nil {
+	ids, err := s.Identify(fi, path, "")
+	if ids == nil {
 		return reply("error: failed to scan " + path + "; got " + err.Error())
-	}
-	var ids []string
-	var warn string
-	for i := range c {
-		ids = append(ids, i.String())
-		if !i.Known() {
-			warn = i.(*pronom.Identification).Warning
-		}
 	}
 	switch len(ids) {
 	case 0:
-		return reply("error: scanning " + path + ": no puids returned")
+		return reply("error: scanning " + path + ": no formats returned")
 	case 1:
-		if warn != "" {
-			return reply("error: format unknown; got " + warn)
+		if !ids[0].Known() {
+			return reply("error: format unknown; got " + ids[0].Warn())
 		}
-		return reply(ids[0])
+		return reply(ids[0].String())
 	default:
-		return reply("error: multiple formats returned; got " + strings.Join(ids, ", "))
+		strs := make([]string, len(ids))
+		for i, v := range ids {
+			strs[i] = v.String()
+		}
+		return reply("error: multiple formats returned; got " + strings.Join(strs, ", "))
 	}
 }
 
