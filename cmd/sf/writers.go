@@ -20,7 +20,6 @@ import (
 	"encoding/hex"
 	"fmt"
 	"io"
-	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
@@ -53,7 +52,7 @@ type csvWriter struct {
 }
 
 func newCSV(w io.Writer) *csvWriter {
-	return &csvWriter{w: csv.NewWriter(os.Stdout)}
+	return &csvWriter{w: csv.NewWriter(w)}
 }
 
 func (c *csvWriter) writeHead(s *siegfried.Siegfried, hh string) {
@@ -230,7 +229,7 @@ func newDroid(w io.Writer) *droidWriter {
 	return &droidWriter{
 		parents: make(map[string]parent),
 		rec:     make([]string, 18),
-		w:       csv.NewWriter(os.Stdout),
+		w:       csv.NewWriter(w),
 	}
 }
 
