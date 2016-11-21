@@ -15,7 +15,6 @@
 package main
 
 import (
-	"encoding/base64"
 	"fmt"
 	"io"
 	"net/http"
@@ -23,6 +22,7 @@ import (
 	"sync"
 
 	"github.com/richardlehane/siegfried"
+	"github.com/richardlehane/siegfried/pkg/config"
 )
 
 func handleErr(w http.ResponseWriter, status int, e error) {
@@ -33,56 +33,56 @@ func handleErr(w http.ResponseWriter, status int, e error) {
 
 func decodePath(s string) (string, error) {
 	if len(s) < 11 {
-		return "", fmt.Errorf("Path too short, expecting 11 characters got %d", len(s))
+		return "", fmt.Errorf("path too short, expecting 11 characters got %d", len(s))
 	}
-	data, err := base64.URLEncoding.DecodeString(s[10:])
-	if err != nil {
-		return "", fmt.Errorf("base64 decoding error: %v", err)
-	}
-	return string(data), nil
+	return s[10:], nil
 }
 
-func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried, wg *sync.WaitGroup) (string, writer, bool, string, *siegfried.Siegfried, getFn) {
-	vals := r.URL.Query()
+func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried, wg *sync.WaitGroup) (error, string, writer, bool, string, *siegfried.Siegfried, getFn) {
 	// json, csv, droid or yaml
+	paramsErr := func(field, expect string) (error, string, writer, bool, string, *siegfried.Siegfried, getFn) {
+		return fmt.Errorf("bad request; in param %s got %s; valid values %s", field, r.FormValue(field), expect), "", nil, false, "", nil, nil
+	}
 	var (
 		mime string
 		wr   writer
-		fmt  int
+		frmt int
 	)
 	switch {
 	case *jsono:
-		fmt = 1
+		frmt = 1
 	case *csvo:
-		fmt = 2
+		frmt = 2
 	case *droido:
-		fmt = 3
+		frmt = 3
 	}
-	if v, ok := vals["format"]; ok && len(v) > 0 {
-		switch v[0] {
+	if v := r.FormValue("format"); v != "" {
+		switch v {
 		case "yaml":
-			fmt = 0
+			frmt = 0
 		case "json":
-			fmt = 1
+			frmt = 1
 		case "csv":
-			fmt = 2
+			frmt = 2
 		case "droid":
-			fmt = 3
+			frmt = 3
+		default:
+			return paramsErr("format", "yaml, json, csv or droid")
 		}
 	}
 	if accept := r.Header.Get("Accept"); accept != "" {
 		switch accept {
 		case "application/x-yaml":
-			fmt = 0
+			frmt = 0
 		case "application/json":
-			fmt = 1
+			frmt = 1
 		case "text/csv", "application/csv":
-			fmt = 2
+			frmt = 2
 		case "application/x-droid":
-			fmt = 3
+			frmt = 3
 		}
 	}
-	switch fmt {
+	switch frmt {
 	case 0:
 		wr = newYAML(w)
 		mime = "application/x-yaml"
@@ -98,37 +98,43 @@ func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried
 	}
 	// no recurse
 	norec := *nr
-	if v, ok := vals["nr"]; ok && len(v) > 0 {
-		if v[0] == "true" {
+	if v := r.FormValue("nr"); v != "" {
+		switch v {
+		case "true":
 			norec = true
-		} else {
+		case "false":
 			norec = false
+		default:
+			paramsErr("nr", "true or false")
 		}
 	}
 	// archive
 	z := *archive
-	if v, ok := vals["z"]; ok && len(v) > 0 {
-		if v[0] == "true" {
+	if v := r.FormValue("z"); v != "" {
+		switch v {
+		case "true":
 			z = true
-		} else {
+		case "false":
 			z = false
+		default:
+			paramsErr("z", "true or false")
 		}
 	}
 	// checksum
 	h := *hashf
-	if v, ok := vals["hash"]; ok && len(v) > 0 {
-		h = v[0]
+	if v := r.FormValue("hash"); v != "" {
+		h = v
 	}
 	cs := getHash(h)
 	// sig
 	sf := s
-	if v, ok := vals["sig"]; ok && len(v) > 0 {
-		path, err := base64.URLEncoding.DecodeString(v[0])
+	if v := r.FormValue("sig"); v != "" {
+		if _, err := os.Stat(config.Local(v)); err != nil {
+			return fmt.Errorf("bad request; sig param should be path to a signature file (absolute or relative to home); got %v", err), "", nil, false, "", nil, nil
+		}
+		nsf, err := siegfried.Load(config.Local(v))
 		if err == nil {
-			nsf, err := siegfried.Load(string(path))
-			if err == nil {
-				sf = nsf
-			}
+			sf = nsf
 		}
 	}
 	gf := func(path, mime, mod string, sz int64) *context {
@@ -137,13 +143,17 @@ func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried
 		c.s, c.w, c.wg, c.h, c.z = sf, wr, wg, cs, z
 		return c
 	}
-	return mime, wr, norec, h, sf, gf
+	return nil, mime, wr, norec, h, sf, gf
 }
 
 func handleIdentify(s *siegfried.Siegfried, ctxts chan *context) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		wg := &sync.WaitGroup{}
-		mime, wr, nr, hh, sf, gf := parseRequest(w, r, s, wg)
+		err, mime, wr, nr, hh, sf, gf := parseRequest(w, r, s, wg)
+		if err != nil {
+			handleErr(w, http.StatusNotFound, err)
+			return
+		}
 		if r.Method == "POST" {
 			f, h, err := r.FormFile("file")
 			if err != nil {
@@ -175,6 +185,9 @@ func handleIdentify(s *siegfried.Siegfried, ctxts chan *context) func(w http.Res
 			return
 		} else {
 			path, err := decodePath(r.URL.Path)
+			if err == nil {
+				_, err = os.Stat(path)
+			}
 			if err != nil {
 				handleErr(w, http.StatusNotFound, err)
 				return
@@ -185,7 +198,9 @@ func handleIdentify(s *siegfried.Siegfried, ctxts chan *context) func(w http.Res
 			wg.Wait()
 			wr.writeTail()
 			if err != nil {
-				io.WriteString(w, err.Error())
+				if _, ok := err.(WalkError); ok { // only dump out walk errors, other errors reported in result
+					io.WriteString(w, err.Error())
+				}
 			}
 			return
 		}
@@ -198,28 +213,90 @@ const usage = `
 			<title>Siegfried server</title>
 		</head>
 		<body>
-			<h1>Siegfried server usage</h1>
-			<p>The siegfried server has two modes of identification: GET request, where a file or directory path is given in the URL and the server retrieves the file(s); or POST request, where the file is sent over the network as form-data.</p> 
-			<h2>GET request</h2>
-			<p><strong>GET</strong> <i>/identify/[<a href="https://tools.ietf.org/html/rfc4648#section-5">URL-safe base64 encoded</a> file name or folder name](?nr=true&format=csv|yaml|json|droid&hash=md5&z=true)</i></p>
-			<p>E.g. http://localhost:5138/identify/YzpcTXkgRG9jdW1lbnRzXGhlbGxvX3dvcmxkLmRvYw==</p>
+			<h1><a name="top">Siegfried server usage</a></h1>
+			<p>The siegfried server has two modes of identification:
+			<ul><li><a href="#get_request">GET request</a>, where a file or directory path is given in the URL and the server retrieves the file(s);</li>
+			<li><a href="#post_request">POST request</a>, where the file is sent over the network as form-data.</li></ul></p> 
+			<h2>Default settings</h2>
+			<p>When starting the server, you can use regular sf flags to set defaults for the <i>nr</i>, <i>format</i>, <i>hash</i>, <i>z</i>, and <i>sig</i> parameters that will apply to all requests unless overriden. Logging options can also be set.<p>
+			<p>E.g. sf -nr -z -hash md5 -sig pronom-tika.sig -log warn,error -serve localhost:5138</p>
+			<hr>
+			<h2><a name="get_request">GET request</a></h2>
+			<p><strong>GET</strong> <i>/identify/[file name or folder name (percent encoded)](?nr=true&format=yaml&hash=md5&z=true&sig=locfdd.sig)</i></p>
+			<p>E.g. http://localhost:5138/identify/c%3A%2FUsers%2Frichardl%2FMy%20Documents%2Fhello%20world.docx?format=json</p>
 			<h3>Parameters</h3>
 			<p><i>nr</i> (optional) - stop sub-directory recursion when a directory path is given.</p>
 			<p><i>format</i> (optional) - select the output format (csv, yaml, json, droid). Default is yaml. Alternatively, HTTP content negotiation can be used.</p>
 			<p><i>hash</i> (optional) - calculate file checksum (md5, sha1, sha256, sha512, crc)</p>
 			<p><i>z</i> (optional) - scan archive formats (zip, tar, gzip, warc, arc) with z=true. Default is false.</p>
-			<p><i>sig</i> (optional) - load a specific signature file. The signature filename should be <a href="https://tools.ietf.org/html/rfc4648#section-5">URL-safe base64 encoded</a>. Default is default.sig.</p>
-			<h2>POST request</h2>
-			<p><strong>POST</strong> <i>/identify(?format=csv|yaml|json|droid)</i> Attach a file as form-data with the key "file".</p>
-			<p>E.g. curl localhost:5138/identify -F file=@myfile.doc</p>
+			<p><i>sig</i> (optional) - load a specific signature file. Default is default.sig.</p>
+			<h3>Example</h2>
+			<!-- set the get target for the example form using js function at bottom page-->
+			<h4>File/ directory:</h4>
+			<p><input type="text" id="filename"> (provide the path to a file or directory e.g. c:\My Documents\file.doc. It will be percent encoded by this form.)</p>
+			<h4>Parameters:</h4>
+			<form method="get" id="get_example">
+			 <p>No directory recursion (nr): <input type="radio" name="nr" value="true"> true <input type="radio" name="nr" value="false" checked> false</p>
+			 <p>Format (format): <select name="format">
+  				<option value="yaml">yaml</option>
+  				<option value="json">json</option>
+  				<option value="csv">csv</option>
+ 				<option value="droid">droid</option>
+			</select></p>
+			 <p>Hash (hash): <select name="hash">
+  				<option value="none">none</option>
+  				<option value="md5">md5</option>
+  				<option value="sha1">sha1</option>
+ 				<option value="sha256">sha256</option>
+ 				<option value="sha512">sha512</option>
+ 				<option value="crc">crc</option>
+			</select></p>
+			 <p>Scan archive (z): <input type="radio" name="z" value="true"> true <input type="radio" name="z" value="false" checked> false</p>
+			 <p>Signature file (sig): <input type="text" name="sig"></p>
+			 <p><input type="submit" value="Submit"></p>
+			</form>
+			<p><a href="#top">Back to top</p>
+			<hr>
+			<h2><a name="post_request">POST request</a></h2>
+			<p><strong>POST</strong> <i>/identify(?format=yaml&hash=md5&z=true&sig=locfdd.sig)</i> Attach a file as form-data with the key "file".</p>
+			<p>E.g. curl "http://localhost:5138/identify?format=json&hash=crc" -F file=@myfile.doc</p>
 			<h3>Parameters</h3>
 			<p><i>format</i> (optional) - select the output format (csv, yaml, json, droid). Default is yaml. Alternatively, HTTP content negotiation can be used.</p>
 			<p><i>hash</i> (optional) - calculate file checksum (md5, sha1, sha256, sha512, crc)</p>
 			<p><i>z</i> (optional) - scan archive formats (zip, tar, gzip, warc, arc) with z=true. Default is false.</p>
-			<p><i>sig</i> (optional) - load a specific signature file. The signature filename should be <a href="https://tools.ietf.org/html/rfc4648#section-5">URL-safe base64 encoded</a>. Default is default.sig.</p>
-			<h2>Default settings</h2>
-			<p>When starting the server, you can use regular sf flags to set defaults for the <i>nr</i>, <i>format</i>, <i>hash</i>, <i>z</i>, and <i>sig</i> parameters that will apply unless overriden by requests.<p>
-			<p>E.g. sf -nr -z -hash md5 -sig pronom-tika.sig -serve localhost:5138</p>
+			<p><i>sig</i> (optional) - load a specific signature file. Default is default.sig.</p>
+			<h3>Example</h2>
+			<form action="/identify" enctype="multipart/form-data" method="post">
+			 <h4>File:</h4>
+			 <p><input type="file" name="file"></p>
+			 <h4>Parameters:</h4>
+			 <p>Format (format): <select name="format">
+  				<option value="yaml">yaml</option>
+  				<option value="json">json</option>
+  				<option value="csv">csv</option>
+ 				<option value="droid">droid</option>
+			</select></p>
+			 <p>Hash (hash): <select name="hash">
+  				<option value="none">none</option>
+  				<option value="md5">md5</option>
+  				<option value="sha1">sha1</option>
+ 				<option value="sha256">sha256</option>
+ 				<option value="sha512">sha512</option>
+ 				<option value="crc">crc</option>
+			</select></p>
+			 <p>Scan archive (z): <input type="radio" name="z" value="true"> true <input type="radio" name="z" value="false" checked> false</p>
+			 <p>Signature file (sig): <input type="text" name="sig"></p>
+			 <p><input type="submit" value="Submit"></p>
+			</form>
+			<p><a href="#top">Back to top</p>
+			<script>
+				var input = document.getElementById('filename');
+				input.addEventListener('input', function()
+				{
+					var frm = document.getElementById('get_example');
+   				    frm.action = "/identify/" + encodeURIComponent(input.value);
+				});
+			</script>
 		</body>
 	</html>
 `

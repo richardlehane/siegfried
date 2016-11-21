@@ -71,6 +71,8 @@ var ( // for side effect - register their patterns/ signature loaders
 // They contain three matchers as well as a slice of identifiers. When identifiers
 // are added to a Siegfried struct, they are registered with each matcher.
 type Siegfried struct {
+	path string // file name of Siegfried: created at Load time
+	// immutable fields
 	C  time.Time    // signature create time
 	nm core.Matcher // namematcher
 	mm core.Matcher // mimematcher
@@ -79,10 +81,9 @@ type Siegfried struct {
 	rm core.Matcher // riffmatcher
 	bm core.Matcher // bytematcher
 	tm core.Matcher // textmatcher
-	// mutatable fields follow
+	// mutatable fields
 	ids     []core.Identifier // identifiers
 	buffers *siegreader.Buffers
-	path    string
 }
 
 // New creates a new Siegfried struct. It initializes the three matchers.
@@ -201,14 +202,15 @@ func Load(path string) (*Siegfried, error) {
 	}
 	ls := persist.NewLoadSaver(buf)
 	return &Siegfried{
-		C:  ls.LoadTime(),
-		nm: namematcher.Load(ls),
-		mm: mimematcher.Load(ls),
-		cm: containermatcher.Load(ls),
-		xm: xmlmatcher.Load(ls),
-		rm: riffmatcher.Load(ls),
-		bm: bytematcher.Load(ls),
-		tm: textmatcher.Load(ls),
+		path: filepath.Base(path),
+		C:    ls.LoadTime(),
+		nm:   namematcher.Load(ls),
+		mm:   mimematcher.Load(ls),
+		cm:   containermatcher.Load(ls),
+		xm:   xmlmatcher.Load(ls),
+		rm:   riffmatcher.Load(ls),
+		bm:   bytematcher.Load(ls),
+		tm:   textmatcher.Load(ls),
 		ids: func() []core.Identifier {
 			ids := make([]core.Identifier, ls.LoadTinyUInt())
 			for i := range ids {
@@ -217,7 +219,6 @@ func Load(path string) (*Siegfried, error) {
 			return ids
 		}(),
 		buffers: siegreader.New(),
-		path:    filepath.Base(path),
 	}, ls.Err
 }
 

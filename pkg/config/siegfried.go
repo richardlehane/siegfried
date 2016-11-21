@@ -68,12 +68,17 @@ func Home() string {
 	return siegfried.home
 }
 
+// Home makes a path local to Home() if it is relative
+func Local(base string) string {
+	if filepath.Dir(base) == "." {
+		return filepath.Join(siegfried.home, base)
+	}
+	return base
+}
+
 // Signature returns the path to the siegfried signature file.
 func Signature() string {
-	if filepath.Dir(siegfried.signature) == "." {
-		return filepath.Join(siegfried.home, siegfried.signature)
-	}
-	return siegfried.signature
+	return Local(siegfried.signature)
 }
 
 // SignatureBase returns the filename of the siegfried signature file.

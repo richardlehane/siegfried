@@ -37,7 +37,7 @@ func identify(ctxts chan *context, root, orig string, norecurse bool, gf getFn) 
 			<-throttle.C
 		}
 		if err != nil {
-			return fmt.Errorf("walking %s; got %v", path, err)
+			return WalkError{path, err}
 		}
 		if info.IsDir() {
 			if norecurse && path != root {

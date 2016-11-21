@@ -68,6 +68,15 @@ var (
 	ctxPool  *sync.Pool
 )
 
+type WalkError struct {
+	path string
+	err  error
+}
+
+func (we WalkError) Error() string {
+	return fmt.Sprintf("walking %s; got %v", we.path, we.err)
+}
+
 func setCtxPool(s *siegfried.Siegfried, w writer, wg *sync.WaitGroup, h hash.Hash, z bool) {
 	ctxPool = &sync.Pool{
 		New: func() interface{} {

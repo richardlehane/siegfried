@@ -34,7 +34,7 @@ func TestIdentify(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	i := <-c
+	i := c[0]
 	if i.String() != "fmt/3" {
 		t.Error("expecting fmt/3")
 	}
