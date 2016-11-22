@@ -1,5 +1,5 @@
 hash: 2faaea615e9a8a21cbbdece66726b50773b898784ebb3c0d0dea5271ed682e71
-updated: 2016-11-22T21:31:04.651894782+11:00
+updated: 2016-11-22T21:44:51.560528312+11:00
 imports:
 - name: github.com/richardlehane/characterize
   version: 65c3af3b37223a3694e454f8ccd2bfe37f0a3ec0
@@ -15,7 +15,7 @@ imports:
   subpackages:
   - types
 - name: github.com/richardlehane/webarchive
-  version: 9a14e4e40c1e2aa210871018ddf20324d737db75
+  version: ec07e1d4c5c9344f71966498be595ceffeae6ca8
 - name: github.com/richardlehane/xmldetect
   version: d96cd89e827673690c9e9f15546eff6dd85f17f1
 - name: golang.org/x/image

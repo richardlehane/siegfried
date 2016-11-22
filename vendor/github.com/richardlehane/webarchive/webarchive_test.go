@@ -51,7 +51,7 @@ func TestReaders(t *testing.T) {
 		if info.IsDir() {
 			return nil
 		}
-		if filepath.Ext(path) == ".DS_Store" || filepath.Ext(path) == ".cdx" {
+		if filepath.Ext(path) == ".DS_Store" || filepath.Ext(path) == ".cdx" || filepath.Ext(path) == ".gitattributes" {
 			return nil
 		}
 		wrdr, wrdr2 := open(path)
