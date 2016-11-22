@@ -15,6 +15,7 @@
 package main
 
 import (
+	"encoding/base64"
 	"fmt"
 	"io"
 	"net/http"
@@ -31,9 +32,16 @@ func handleErr(w http.ResponseWriter, status int, e error) {
 	io.WriteString(w, fmt.Sprintf("SF server error; got %v\n", e))
 }
 
-func decodePath(s string) (string, error) {
+func decodePath(s, b64 string) (string, error) {
 	if len(s) < 11 {
-		return "", fmt.Errorf("path too short, expecting 11 characters got %d", len(s))
+		return "", fmt.Errorf("path too short, expecting at least 11 characters got %d", len(s))
+	}
+	if b64 == "true" {
+		data, err := base64.URLEncoding.DecodeString(s[10:])
+		if err != nil {
+			return "", fmt.Errorf("Error base64 decoding file path, error message %v", err)
+		}
+		return string(data), nil
 	}
 	return s[10:], nil
 }
@@ -146,64 +154,62 @@ func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried
 	return nil, mime, wr, norec, h, sf, gf
 }
 
-func handleIdentify(s *siegfried.Siegfried, ctxts chan *context) func(w http.ResponseWriter, r *http.Request) {
-	return func(w http.ResponseWriter, r *http.Request) {
-		wg := &sync.WaitGroup{}
-		err, mime, wr, nr, hh, sf, gf := parseRequest(w, r, s, wg)
+func handleIdentify(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried, ctxts chan *context) {
+	wg := &sync.WaitGroup{}
+	err, mime, wr, nr, hh, sf, gf := parseRequest(w, r, s, wg)
+	if err != nil {
+		handleErr(w, http.StatusNotFound, err)
+		return
+	}
+	if r.Method == "POST" {
+		f, h, err := r.FormFile("file")
 		if err != nil {
 			handleErr(w, http.StatusNotFound, err)
 			return
 		}
-		if r.Method == "POST" {
-			f, h, err := r.FormFile("file")
+		defer f.Close()
+		var sz int64
+		var mod string
+		osf, ok := f.(*os.File)
+		if ok {
+			info, err := osf.Stat()
 			if err != nil {
-				handleErr(w, http.StatusNotFound, err)
-				return
+				handleErr(w, http.StatusInternalServerError, err)
 			}
-			defer f.Close()
-			var sz int64
-			var mod string
-			osf, ok := f.(*os.File)
-			if ok {
-				info, err := osf.Stat()
-				if err != nil {
-					handleErr(w, http.StatusInternalServerError, err)
-				}
-				sz = info.Size()
-				mod = info.ModTime().String()
-			} else {
-				sz = r.ContentLength
-			}
-			w.Header().Set("Content-Type", mime)
-			wr.writeHead(sf, hh)
-			wg.Add(1)
-			ctx := gf(h.Filename, "", mod, sz)
-			ctxts <- ctx
-			identifyRdr(f, ctx, ctxts, gf)
-			wg.Wait()
-			wr.writeTail()
-			return
+			sz = info.Size()
+			mod = info.ModTime().String()
 		} else {
-			path, err := decodePath(r.URL.Path)
-			if err == nil {
-				_, err = os.Stat(path)
-			}
-			if err != nil {
-				handleErr(w, http.StatusNotFound, err)
-				return
-			}
-			w.Header().Set("Content-Type", mime)
-			wr.writeHead(sf, hh)
-			err = identify(ctxts, path, "", nr, gf)
-			wg.Wait()
-			wr.writeTail()
-			if err != nil {
-				if _, ok := err.(WalkError); ok { // only dump out walk errors, other errors reported in result
-					io.WriteString(w, err.Error())
-				}
-			}
+			sz = r.ContentLength
+		}
+		w.Header().Set("Content-Type", mime)
+		wr.writeHead(sf, hh)
+		wg.Add(1)
+		ctx := gf(h.Filename, "", mod, sz)
+		ctxts <- ctx
+		identifyRdr(f, ctx, ctxts, gf)
+		wg.Wait()
+		wr.writeTail()
+		return
+	} else {
+		path, err := decodePath(r.URL.Path, r.FormValue("base64"))
+		if err == nil {
+			_, err = os.Stat(path)
+		}
+		if err != nil {
+			handleErr(w, http.StatusNotFound, err)
 			return
 		}
+		w.Header().Set("Content-Type", mime)
+		wr.writeHead(sf, hh)
+		err = identify(ctxts, path, "", nr, gf)
+		wg.Wait()
+		wr.writeTail()
+		if err != nil {
+			if _, ok := err.(WalkError); ok { // only dump out walk errors, other errors reported in result
+				io.WriteString(w, err.Error())
+			}
+		}
+		return
 	}
 }
 
@@ -219,13 +225,14 @@ const usage = `
 			<li><a href="#post_request">POST request</a>, where the file is sent over the network as form-data.</li></ul></p> 
 			<h2>Default settings</h2>
 			<p>When starting the server, you can use regular sf flags to set defaults for the <i>nr</i>, <i>format</i>, <i>hash</i>, <i>z</i>, and <i>sig</i> parameters that will apply to all requests unless overriden. Logging options can also be set.<p>
-			<p>E.g. sf -nr -z -hash md5 -sig pronom-tika.sig -log warn,error -serve localhost:5138</p>
+			<p>E.g. sf -nr -z -hash md5 -sig pronom-tika.sig -log p,w,e -serve localhost:5138</p>
 			<hr>
 			<h2><a name="get_request">GET request</a></h2>
-			<p><strong>GET</strong> <i>/identify/[file name or folder name (percent encoded)](?nr=true&format=yaml&hash=md5&z=true&sig=locfdd.sig)</i></p>
+			<p><strong>GET</strong> <i>/identify/[file or folder name (percent encoded)](?nr=true&format=yaml&hash=md5&z=true&sig=locfdd.sig)</i></p>
 			<p>E.g. http://localhost:5138/identify/c%3A%2FUsers%2Frichardl%2FMy%20Documents%2Fhello%20world.docx?format=json</p>
 			<h3>Parameters</h3>
-			<p><i>nr</i> (optional) - stop sub-directory recursion when a directory path is given.</p>
+			<p><i>base64</i> (optional) - use <a href="https://tools.ietf.org/html/rfc4648#section-5">URL-safe base64 encoding</a> for the file or folder name with base64=true.</p>
+			<p><i>nr</i> (optional) - stop sub-directory recursion when a directory path is given with nr=true.</p>
 			<p><i>format</i> (optional) - select the output format (csv, yaml, json, droid). Default is yaml. Alternatively, HTTP content negotiation can be used.</p>
 			<p><i>hash</i> (optional) - calculate file checksum (md5, sha1, sha256, sha512, crc)</p>
 			<p><i>z</i> (optional) - scan archive formats (zip, tar, gzip, warc, arc) with z=true. Default is false.</p>
@@ -236,10 +243,11 @@ const usage = `
 			<p><input type="text" id="filename"> (provide the path to a file or directory e.g. c:\My Documents\file.doc. It will be percent encoded by this form.)</p>
 			<h4>Parameters:</h4>
 			<form method="get" id="get_example">
+			  <p>Use base64 encoding (base64): <input type="radio" name="base64" value="true"> true <input type="radio" name="base64" value="false" checked> false</p>
 			 <p>No directory recursion (nr): <input type="radio" name="nr" value="true"> true <input type="radio" name="nr" value="false" checked> false</p>
 			 <p>Format (format): <select name="format">
-  				<option value="yaml">yaml</option>
   				<option value="json">json</option>
+  				<option value="yaml">yaml</option>
   				<option value="csv">csv</option>
  				<option value="droid">droid</option>
 			</select></p>
@@ -271,8 +279,8 @@ const usage = `
 			 <p><input type="file" name="file"></p>
 			 <h4>Parameters:</h4>
 			 <p>Format (format): <select name="format">
-  				<option value="yaml">yaml</option>
   				<option value="json">json</option>
+  				<option value="yaml">yaml</option>
   				<option value="csv">csv</option>
  				<option value="droid">droid</option>
 			</select></p>
@@ -302,17 +310,29 @@ const usage = `
 `
 
 func handleMain(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "GET" || r.URL.Path != "/" {
-		handleErr(w, http.StatusNotFound, fmt.Errorf("Not a valid path"))
-		return
-	}
 	w.Header().Set("Content-Type", "text/html")
 	io.WriteString(w, usage)
 }
 
+type muxer struct {
+	s     *siegfried.Siegfried
+	ctxts chan *context
+}
+
+func (m *muxer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	if (len(r.URL.Path) == 0 || r.URL.Path == "/") && r.Method == "GET" {
+		handleMain(w, r)
+		return
+	}
+	if len(r.URL.Path) >= 9 && r.URL.Path[:9] == "/identify" {
+		handleIdentify(w, r, m.s, m.ctxts)
+		return
+	}
+	handleErr(w, http.StatusNotFound, fmt.Errorf("valid paths are /, /identify and /identify/*"))
+	return
+}
+
 func listen(port string, s *siegfried.Siegfried, ctxts chan *context) {
-	http.HandleFunc("/", handleMain)
-	http.HandleFunc("/identify", handleIdentify(s, ctxts))
-	http.HandleFunc("/identify/", handleIdentify(s, ctxts))
-	http.ListenAndServe(port, nil)
+	mux := &muxer{s, ctxts}
+	http.ListenAndServe(port, mux)
 }
