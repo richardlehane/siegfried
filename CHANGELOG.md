@@ -5,7 +5,7 @@
 - new hash, z, and sig params for -serve mode (to control per-request)
 - enable droid output in -serve mode
 - GET requests in -serve mode now just percent encoded (with base64 option as a param)
-- -serve mode landing page now includes example forms with documentation
+- -serve mode landing page now includes example forms
 
 ### Changed
 - code re-organisation using /internal directory to hide internal packages
