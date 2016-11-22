@@ -1,4 +1,4 @@
 # Set default unix line endings
-* text eol=lf
 
-# this will be overriden in the skeleton-suite directory and vendor directory
+* text eol=lf
+vendor/* binary
