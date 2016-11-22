@@ -1,5 +1,5 @@
 hash: 2faaea615e9a8a21cbbdece66726b50773b898784ebb3c0d0dea5271ed682e71
-updated: 2016-11-22T21:05:42.342988347+11:00
+updated: 2016-11-22T21:31:04.651894782+11:00
 imports:
 - name: github.com/richardlehane/characterize
   version: 65c3af3b37223a3694e454f8ccd2bfe37f0a3ec0
@@ -9,13 +9,13 @@ imports:
   - fwac
   - wac
 - name: github.com/richardlehane/mscfb
-  version: e6200048a572183cd2743c492bf4c082ae41bebd
+  version: 5013c8765c1df5f78c2e1d8333fe3e1c48b85d87
 - name: github.com/richardlehane/msoleps
-  version: 9c861828737207430037b6e1b313798518c97831
+  version: 616c65031d126bc15d4ee88c3fcc725af09310f8
   subpackages:
   - types
 - name: github.com/richardlehane/webarchive
-  version: 18736197b754cd5c883663346882699c3f5f5477
+  version: 9a14e4e40c1e2aa210871018ddf20324d737db75
 - name: github.com/richardlehane/xmldetect
   version: d96cd89e827673690c9e9f15546eff6dd85f17f1
 - name: golang.org/x/image
