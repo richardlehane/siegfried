@@ -8,7 +8,7 @@
 
 ### Version
 
-1.6.6
+1.6.7
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -79,12 +79,17 @@ Or, for the most recent updates, you can install from this fork:
 
 
 ## Changes 
-### v1.6.6 (2016-10-25)
+### v1.6.7 (2016-11-23)
 ### Added
-- graph implicit and missing priorities with `roy inspect implicit-priorities` and `roy inspect missing-priorities`
+- enable -hash, -z, and -log flags for -serve and -multi modes
+- new hash, z, and sig params for -serve mode (to control per-request)
+- enable droid output in -serve mode
+- GET requests in -serve mode now just percent encoded (with base64 option as a param)
+- -serve mode landing page now includes example forms with documentation
 
-### Fixed
-- error parsing mimeinfo signatures with double backslashes (e.g. rtf signatures)
+### Changed
+- code re-organisation using /internal directory to hide internal packages
+- Identify method now returns a slice rather than channel of IDs (siegfried pkg change)
 
 See the [CHANGELOG](CHANGELOG.md) for the full history.
 

@@ -228,7 +228,7 @@ const usage = `
 			<p>E.g. sf -nr -z -hash md5 -sig pronom-tika.sig -log p,w,e -serve localhost:5138</p>
 			<hr>
 			<h2><a name="get_request">GET request</a></h2>
-			<p><strong>GET</strong> <i>/identify/[file or folder name (percent encoded)](?nr=true&format=yaml&hash=md5&z=true&sig=locfdd.sig)</i></p>
+			<p><strong>GET</strong> <i>/identify/[file or folder name (percent encoded)](?base64=false&nr=true&format=yaml&hash=md5&z=true&sig=locfdd.sig)</i></p>
 			<p>E.g. http://localhost:5138/identify/c%3A%2FUsers%2Frichardl%2FMy%20Documents%2Fhello%20world.docx?format=json</p>
 			<h3>Parameters</h3>
 			<p><i>base64</i> (optional) - use <a href="https://tools.ietf.org/html/rfc4648#section-5">URL-safe base64 encoding</a> for the file or folder name with base64=true.</p>

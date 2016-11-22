@@ -1,12 +1,15 @@
 # Change Log
 ## v1.6.7
 ### Added
-- enable -hash and -z functionality for -serve and -multi
-- hash and z params for server (-serve) to control per-request
+- enable -hash, -z, and -log flags for -serve and -multi modes
+- new hash, z, and sig params for -serve mode (to control per-request)
+- enable droid output in -serve mode
+- GET requests in -serve mode now just percent encoded (with base64 option as a param)
+- -serve mode landing page now includes example forms with documentation
 
 ### Changed
-- code re-organisation using /internal to hide internal packages
-- -multi flag now a boolean
+- code re-organisation using /internal directory to hide internal packages
+- Identify method now returns a slice rather than channel of IDs (siegfried pkg change)
 
 ## v1.6.6 (2016-10-25)
 ### Added
