@@ -1,4 +1,4 @@
 # Set default unix line endings
 
 * text eol=lf
-vendor/* binary
+vendor/** binary
