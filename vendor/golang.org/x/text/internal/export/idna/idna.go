@@ -18,7 +18,6 @@
 package idna // import "golang.org/x/text/internal/export/idna"
 
 import (
-	"errors"
 	"fmt"
 	"strings"
 	"unicode/utf8"
@@ -27,41 +26,102 @@ import (
 	"golang.org/x/text/unicode/norm"
 )
 
+// NOTE: Unlike common practice in Go APIs, the functions will return a
+// sanitized domain name in case of errors. Browsers sometimes use a partially
+// evaluated string as lookup.
+// TODO: the current error handling is, in my opinion, the least opinionated.
+// Other strategies are also viable, though:
+// Option 1) Return an empty string in case of error, but allow the user to
+//    specify explicitly which errors to ignore.
+// Option 2) Return the partially evaluated string if it is itself a valid
+//    string, otherwise return the empty string in case of error.
+// Option 3) Option 1 and 2.
+// Option 4) Always return an empty string for now and implement Option 1 as
+//    needed, and document that the return string may not be empty in case of
+//    error in the future.
+// I think Option 1 is best, but it is quite opinionated.
+
 // ToASCII converts a domain or domain label to its ASCII form. For example,
 // ToASCII("bücher.example.com") is "xn--bcher-kva.example.com", and
-// ToASCII("golang") is "golang".
+// ToASCII("golang") is "golang". If an error is encountered it will return
+// an error and a (partially) processed result.
 func ToASCII(s string) (string, error) {
 	return Resolve.process(s, true)
 }
 
 // ToUnicode converts a domain or domain label to its Unicode form. For example,
 // ToUnicode("xn--bcher-kva.example.com") is "bücher.example.com", and
-// ToUnicode("golang") is "golang".
+// ToUnicode("golang") is "golang". If an error is encountered it will return
+// an error and a (partially) processed result.
 func ToUnicode(s string) (string, error) {
 	return NonTransitional.process(s, false)
 }
 
+// An Option configures a Profile at creation time.
+type Option func(*options)
+
+// Transitional sets a Profile to use the Transitional mapping as defined
+// in UTS #46.
+func Transitional(transitional bool) Option {
+	return func(o *options) { o.transitional = true }
+}
+
+// VerifyDNSLength sets whether a Profile should fail if any of the IDN parts
+// are longer than allowed by the RFC.
+func VerifyDNSLength(verify bool) Option {
+	return func(o *options) { o.verifyDNSLength = verify }
+}
+
+// IgnoreSTD3Rules sets whether ASCII characters outside the A-Z, a-z, 0-9 and
+// the hyphen should be allowed. By default this is not allowed, but IDNA2003,
+// and as a consequence UTS #46, allows this to be overridden to support
+// browsers that allow characters outside this range, for example a '_' (U+005F
+// LOW LINE). See http://www.rfc- editor.org/std/std3.txt for more details.
+func IgnoreSTD3Rules(ignore bool) Option {
+	return func(o *options) { o.ignoreSTD3Rules = ignore }
+}
+
+type options struct {
+	transitional    bool
+	ignoreSTD3Rules bool
+	verifyDNSLength bool
+}
+
 // A Profile defines the configuration of a IDNA mapper.
 type Profile struct {
-	Transitional    bool
-	IgnoreSTD3Rules bool
-	IgnoreDNSLength bool
-	// ErrHandler      func(error)
+	options
+}
+
+func apply(o *options, opts []Option) {
+	for _, f := range opts {
+		f(o)
+	}
+}
+
+// New creates a new Profile.
+// With no options, the returned profile is the non-transitional profile as
+// defined in UTS #46.
+func New(o ...Option) *Profile {
+	p := &Profile{}
+	apply(&p.options, o)
+	return p
 }
 
 // ToASCII converts a domain or domain label to its ASCII form. For example,
 // ToASCII("bücher.example.com") is "xn--bcher-kva.example.com", and
-// ToASCII("golang") is "golang".
+// ToASCII("golang") is "golang". If an error is encountered it will return
+// an error and a (partially) processed result.
 func (p *Profile) ToASCII(s string) (string, error) {
 	return p.process(s, true)
 }
 
 // ToUnicode converts a domain or domain label to its Unicode form. For example,
 // ToUnicode("xn--bcher-kva.example.com") is "bücher.example.com", and
-// ToUnicode("golang") is "golang".
+// ToUnicode("golang") is "golang". If an error is encountered it will return
+// an error and a (partially) processed result.
 func (p *Profile) ToUnicode(s string) (string, error) {
 	pp := *p
-	pp.Transitional = false
+	pp.transitional = false
 	return pp.process(s, false)
 }
 
@@ -69,12 +129,12 @@ func (p *Profile) ToUnicode(s string) (string, error) {
 // purposes. The string format may change with different versions.
 func (p *Profile) String() string {
 	s := ""
-	if p.Transitional {
+	if p.transitional {
 		s = "Transitional"
 	} else {
-		s = "NonTraditional"
+		s = "NonTransitional"
 	}
-	if p.IgnoreSTD3Rules {
+	if p.ignoreSTD3Rules {
 		s += ":NoSTD3Rules"
 	}
 	return s
@@ -89,17 +149,12 @@ var (
 	// The configuration of this profile may change over time.
 	Display = display
 
-	// Transitional defines a profile that implements the Transitional mapping
-	// as defined in UTS #46 with no additional constraints.
-	Transitional = transitional
-
 	// NonTransitional defines a profile that implements the Transitional
 	// mapping as defined in UTS #46 with no additional constraints.
 	NonTransitional = nonTransitional
 
-	resolve         = &Profile{Transitional: true}
+	resolve         = &Profile{options{transitional: true}}
 	display         = &Profile{}
-	transitional    = &Profile{Transitional: true}
 	nonTransitional = &Profile{}
 
 	// TODO: profiles
@@ -108,15 +163,19 @@ var (
 	// bundle or block deviation characters.
 )
 
-// TODO: rethink error strategy
+type labelError struct{ label, code_ string }
 
-var (
-	// errDisallowed indicates a domain name contains a disallowed rune.
-	errDisallowed = errors.New("idna: disallowed rune")
+func (e labelError) code() string { return e.code_ }
+func (e labelError) Error() string {
+	return fmt.Sprintf("idna: invalid label %q", e.label)
+}
 
-	// errEmptyLabel indicates a label was empty.
-	errEmptyLabel = errors.New("idna: empty label")
-)
+type runeError rune
+
+func (e runeError) code() string { return "P1" }
+func (e runeError) Error() string {
+	return fmt.Sprintf("idna: disallowed rune %U", e)
+}
 
 // process implements the algorithm described in section 4 of UTS #46,
 // see http://www.unicode.org/reports/tr46.
@@ -136,7 +195,8 @@ func (p *Profile) process(s string, toASCII bool) (string, error) {
 			continue
 		case disallowed:
 			if err == nil {
-				err = errDisallowed
+				r, _ := utf8.DecodeRuneInString(s[i:])
+				err = runeError(r)
 			}
 			continue
 		case mapped, deviation:
@@ -166,7 +226,7 @@ func (p *Profile) process(s string, toASCII bool) (string, error) {
 	for ; len(s) > 0 && s[0] == '.'; s = s[1:] {
 	}
 	if s == "" {
-		return "", errors.New("idna: there are no labels")
+		return "", &labelError{s, "A4"}
 	}
 	labels := labelIter{orig: s}
 	for ; !labels.done(); labels.next() {
@@ -175,7 +235,7 @@ func (p *Profile) process(s string, toASCII bool) (string, error) {
 			// Empty labels are not okay. The label iterator skips the last
 			// label if it is empty.
 			if err == nil {
-				err = errEmptyLabel
+				err = &labelError{s, "A4"}
 			}
 			continue
 		}
@@ -211,20 +271,20 @@ func (p *Profile) process(s string, toASCII bool) (string, error) {
 				labels.set(a)
 			}
 			n := len(label)
-			if !p.IgnoreDNSLength && err == nil && (n == 0 || n > 63) {
-				err = fmt.Errorf("idna: label with invalid length %d", n)
+			if p.verifyDNSLength && err == nil && (n == 0 || n > 63) {
+				err = &labelError{label, "A4"}
 			}
 		}
 	}
 	s = labels.result()
-	if toASCII && !p.IgnoreDNSLength && err == nil {
+	if toASCII && p.verifyDNSLength && err == nil {
 		// Compute the length of the domain name minus the root label and its dot.
 		n := len(s)
 		if n > 0 && s[n-1] == '.' {
 			n--
 		}
 		if len(s) < 1 || n > 253 {
-			err = fmt.Errorf("idna: doman name with invalid length %d", n)
+			err = &labelError{s, "A4"}
 		}
 	}
 	return s, err
@@ -296,19 +356,19 @@ const acePrefix = "xn--"
 func (p *Profile) simplify(cat category) category {
 	switch cat {
 	case disallowedSTD3Mapped:
-		if !p.IgnoreSTD3Rules {
+		if !p.ignoreSTD3Rules {
 			cat = disallowed
 		} else {
 			cat = mapped
 		}
 	case disallowedSTD3Valid:
-		if !p.IgnoreSTD3Rules {
+		if !p.ignoreSTD3Rules {
 			cat = disallowed
 		} else {
 			cat = valid
 		}
 	case deviation:
-		if !p.Transitional {
+		if !p.transitional {
 			cat = valid
 		}
 	case validNV8, validXV8:
@@ -320,12 +380,12 @@ func (p *Profile) simplify(cat category) category {
 
 func (p *Profile) validateFromPunycode(s string) error {
 	if !norm.NFC.IsNormalString(s) {
-		return errors.New("idna: punycode is not normalized")
+		return &labelError{s, "V1"}
 	}
 	for i := 0; i < len(s); {
 		v, sz := trie.lookupString(s[i:])
 		if c := p.simplify(info(v).category()); c != valid && c != deviation {
-			return fmt.Errorf("idna: invalid character %+q in expanded punycode", s[i:i+sz])
+			return &labelError{s, "V6"}
 		}
 		i += sz
 	}
@@ -398,19 +458,19 @@ var joinStates = [][numJoinTypes]joinState{
 // already implicitly satisfied by the overall implementation.
 func (p *Profile) validate(s string) error {
 	if len(s) > 4 && s[2] == '-' && s[3] == '-' {
-		return errors.New("idna: label starts with ??--")
+		return &labelError{s, "V2"}
 	}
 	if s[0] == '-' || s[len(s)-1] == '-' {
-		return errors.New("idna: label may not start or end with '-'")
+		return &labelError{s, "V3"}
 	}
 	// TODO: merge the use of this in the trie.
 	v, sz := trie.lookupString(s)
 	x := info(v)
 	if x.isModifier() {
-		return fmt.Errorf("idna: label starts with modifier %U", []rune(s[:sz])[0])
+		return &labelError{s, "V5"}
 	}
 	if !bidirule.ValidString(s) {
-		return errors.New("idna: label violates Bidi Rule")
+		return &labelError{s, "B"}
 	}
 	// Quickly return in the absence of zero-width (non) joiners.
 	if strings.Index(s, zwj) == -1 && strings.Index(s, zwnj) == -1 {
@@ -435,7 +495,7 @@ func (p *Profile) validate(s string) error {
 		x = info(v)
 	}
 	if st == stateFAIL || st == stateAfter {
-		return errors.New("idna: label violates Context J rule")
+		return &labelError{s, "C"}
 	}
 	return nil
 }

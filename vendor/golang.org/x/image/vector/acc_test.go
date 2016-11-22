@@ -481,11 +481,11 @@ func makeInXxx(height int, useFloatingPointMath bool) *Rasterizer {
 	for _, d := range data {
 		switch d.n {
 		case 0:
-			z.MoveTo(d.p)
+			z.MoveTo(d.px, d.py)
 		case 1:
-			z.LineTo(d.p)
+			z.LineTo(d.px, d.py)
 		case 2:
-			z.QuadTo(d.p, d.q)
+			z.QuadTo(d.px, d.py, d.qx, d.qy)
 		}
 	}
 	return z
@@ -611,4 +611,41 @@ var flMask16 = []uint32{
 	0x6d81, 0xffff, 0xffff, 0xeaf5, 0x7dcf, 0x5533, 0x6c2b, 0xc07b, 0xfff1, 0xffff, 0xffff, 0xffff, 0x4a9d,
 	0x00d4, 0xa6a1, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xd54d, 0x8399, 0xffff, 0xffff, 0x764b,
 	0x0000, 0x001b, 0x4ffc, 0xbb4a, 0xe3f5, 0xeee3, 0xbd4c, 0x7e42, 0x0900, 0x1b0c, 0xb6fc, 0xb6fc, 0x7e04,
+}
+
+// TestFixedFloatingCloseness compares the closeness of the fixed point and
+// floating point rasterizer.
+func TestFixedFloatingCloseness(t *testing.T) {
+	if len(fxMask16) != len(flMask16) {
+		t.Fatalf("len(fxMask16) != len(flMask16)")
+	}
+
+	total := uint32(0)
+	for i := range fxMask16 {
+		a := fxMask16[i]
+		b := flMask16[i]
+		if a > b {
+			total += a - b
+		} else {
+			total += b - a
+		}
+	}
+	n := len(fxMask16)
+
+	// This log message is useful when changing the fixed point rasterizer
+	// implementation, such as by changing ϕ. Assuming that the floating point
+	// rasterizer is accurate, the average difference is a measure of how
+	// inaccurate the (faster) fixed point rasterizer is.
+	//
+	// Smaller is better.
+	percent := float64(total*100) / float64(n*65535)
+	t.Logf("Comparing closeness of the fixed point and floating point rasterizer.\n"+
+		"Specifically, the elements of fxMask16 and flMask16.\n"+
+		"Total diff = %d, n = %d, avg = %.5f out of 65535, or %.5f%%.\n",
+		total, n, float64(total)/float64(n), percent)
+
+	const thresholdPercent = 1.0
+	if percent > thresholdPercent {
+		t.Errorf("average difference: got %.5f%%, want <= %.5f%%", percent, thresholdPercent)
+	}
 }
