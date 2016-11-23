@@ -29,7 +29,7 @@ import (
 	"github.com/richardlehane/siegfried/internal/bytematcher/patterns"
 	"github.com/richardlehane/siegfried/internal/identifier"
 	"github.com/richardlehane/siegfried/pkg/config"
-	"github.com/richardlehane/siegfried/pkg/mimeinfo/mappings"
+	"github.com/richardlehane/siegfried/pkg/mimeinfo/internal/mappings"
 )
 
 type mimeinfo struct {

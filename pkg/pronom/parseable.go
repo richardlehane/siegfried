@@ -21,7 +21,7 @@ import (
 	"github.com/richardlehane/siegfried/internal/identifier"
 	"github.com/richardlehane/siegfried/internal/priority"
 	"github.com/richardlehane/siegfried/pkg/config"
-	"github.com/richardlehane/siegfried/pkg/pronom/mappings"
+	"github.com/richardlehane/siegfried/pkg/pronom/internal/mappings"
 )
 
 type formatInfo struct {
