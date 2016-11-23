@@ -77,14 +77,14 @@ func (we WalkError) Error() string {
 	return fmt.Sprintf("walking %s; got %v", we.path, we.err)
 }
 
-func setCtxPool(s *siegfried.Siegfried, w writer, wg *sync.WaitGroup, h hash.Hash, z bool) {
+func setCtxPool(s *siegfried.Siegfried, w writer, wg *sync.WaitGroup, h hashTyp, z bool) {
 	ctxPool = &sync.Pool{
 		New: func() interface{} {
 			return &context{
 				s:   s,
 				w:   w,
 				wg:  wg,
-				h:   h,
+				h:   makeHash(h),
 				z:   z,
 				res: make(chan results, 1),
 			}
@@ -302,8 +302,8 @@ func main() {
 		return
 	}
 	// handle -hash error
-	checksum := getHash(*hashf)
-	if *hashf != "" && checksum == nil {
+	hashT := getHash(*hashf)
+	if *hashf != "" && hashT < 0 {
 		log.Fatalf("[FATAL] invalid hash type; choose from %s", hashChoices)
 	}
 	// load and handle signature errors
@@ -373,7 +373,7 @@ func main() {
 	// setup default waitgroup
 	wg := &sync.WaitGroup{}
 	// setup context pool
-	setCtxPool(s, w, wg, checksum, *archive)
+	setCtxPool(s, w, wg, hashT, *archive)
 	// handle -serve
 	if *serve != "" {
 		log.Printf("Starting server at %s. Use CTRL-C to quit.\n", *serve)
@@ -386,7 +386,7 @@ func main() {
 		log.Fatalln("[FATAL] expecting a single file or directory argument")
 	}
 
-	w.writeHead(s, *hashf)
+	w.writeHead(s, hashT)
 	// support reading list files from stdin
 	if flag.Arg(0) == "-" {
 		scanner := bufio.NewScanner(os.Stdin)

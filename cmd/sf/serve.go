@@ -46,10 +46,10 @@ func decodePath(s, b64 string) (string, error) {
 	return s[10:], nil
 }
 
-func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried, wg *sync.WaitGroup) (error, string, writer, bool, string, *siegfried.Siegfried, getFn) {
+func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried, wg *sync.WaitGroup) (error, string, writer, bool, hashTyp, *siegfried.Siegfried, getFn) {
 	// json, csv, droid or yaml
-	paramsErr := func(field, expect string) (error, string, writer, bool, string, *siegfried.Siegfried, getFn) {
-		return fmt.Errorf("bad request; in param %s got %s; valid values %s", field, r.FormValue(field), expect), "", nil, false, "", nil, nil
+	paramsErr := func(field, expect string) (error, string, writer, bool, hashTyp, *siegfried.Siegfried, getFn) {
+		return fmt.Errorf("bad request; in param %s got %s; valid values %s", field, r.FormValue(field), expect), "", nil, false, -1, nil, nil
 	}
 	var (
 		mime string
@@ -133,12 +133,12 @@ func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried
 	if v := r.FormValue("hash"); v != "" {
 		h = v
 	}
-	cs := getHash(h)
+	ht := getHash(h)
 	// sig
 	sf := s
 	if v := r.FormValue("sig"); v != "" {
 		if _, err := os.Stat(config.Local(v)); err != nil {
-			return fmt.Errorf("bad request; sig param should be path to a signature file (absolute or relative to home); got %v", err), "", nil, false, "", nil, nil
+			return fmt.Errorf("bad request; sig param should be path to a signature file (absolute or relative to home); got %v", err), "", nil, false, -1, nil, nil
 		}
 		nsf, err := siegfried.Load(config.Local(v))
 		if err == nil {
@@ -148,15 +148,15 @@ func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried
 	gf := func(path, mime, mod string, sz int64) *context {
 		c := ctxPool.Get().(*context)
 		c.path, c.mime, c.mod, c.sz = path, mime, mod, sz
-		c.s, c.w, c.wg, c.h, c.z = sf, wr, wg, cs, z
+		c.s, c.w, c.wg, c.h, c.z = sf, wr, wg, makeHash(ht), z
 		return c
 	}
-	return nil, mime, wr, norec, h, sf, gf
+	return nil, mime, wr, norec, ht, sf, gf
 }
 
 func handleIdentify(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried, ctxts chan *context) {
 	wg := &sync.WaitGroup{}
-	err, mime, wr, nr, hh, sf, gf := parseRequest(w, r, s, wg)
+	err, mime, wr, nr, ht, sf, gf := parseRequest(w, r, s, wg)
 	if err != nil {
 		handleErr(w, http.StatusNotFound, err)
 		return
@@ -182,7 +182,7 @@ func handleIdentify(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfri
 			sz = r.ContentLength
 		}
 		w.Header().Set("Content-Type", mime)
-		wr.writeHead(sf, hh)
+		wr.writeHead(sf, ht)
 		wg.Add(1)
 		ctx := gf(h.Filename, "", mod, sz)
 		ctxts <- ctx
@@ -200,7 +200,7 @@ func handleIdentify(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfri
 			return
 		}
 		w.Header().Set("Content-Type", mime)
-		wr.writeHead(sf, hh)
+		wr.writeHead(sf, ht)
 		err = identify(ctxts, path, "", nr, gf)
 		wg.Wait()
 		wr.writeTail()

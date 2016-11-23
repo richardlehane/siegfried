@@ -32,7 +32,7 @@ import (
 // i.Known()
 
 type writer interface {
-	writeHead(s *siegfried.Siegfried, hh string)
+	writeHead(s *siegfried.Siegfried, ht hashTyp)
 	// if a directory give a negative sz
 	writeFile(name string, sz int64, mod string, checksum []byte, err error, ids []core.Identification)
 	writeTail()
@@ -40,7 +40,7 @@ type writer interface {
 
 type logWriter struct{}
 
-func (l logWriter) writeHead(s *siegfried.Siegfried, hh string) {}
+func (l logWriter) writeHead(s *siegfried.Siegfried, ht hashTyp) {}
 func (l logWriter) writeFile(name string, sz int64, mod string, cs []byte, err error, ids []core.Identification) {
 }
 func (l logWriter) writeTail() {}
@@ -55,11 +55,11 @@ func newCSV(w io.Writer) *csvWriter {
 	return &csvWriter{w: csv.NewWriter(w)}
 }
 
-func (c *csvWriter) writeHead(s *siegfried.Siegfried, hh string) {
+func (c *csvWriter) writeHead(s *siegfried.Siegfried, ht hashTyp) {
 	fields := s.Fields()
 	c.names = make([]string, len(fields))
 	l := 4
-	if *hashf != "" {
+	if ht >= 0 {
 		l++
 	}
 	for i, f := range fields {
@@ -70,8 +70,8 @@ func (c *csvWriter) writeHead(s *siegfried.Siegfried, hh string) {
 	c.recs[0] = make([]string, l)
 	c.recs[0][0], c.recs[0][1], c.recs[0][2], c.recs[0][3] = "filename", "filesize", "modified", "errors"
 	idx := 4
-	if *hashf != "" {
-		c.recs[0][4] = hashHeader(false, hh)
+	if ht >= 0 {
+		c.recs[0][4] = ht.header(false)
 		idx++
 	}
 	for _, f := range fields {
@@ -140,8 +140,8 @@ func newYAML(w io.Writer) *yamlWriter {
 	return &yamlWriter{strings.NewReplacer("'", "''"), bufio.NewWriter(w), ""}
 }
 
-func (y *yamlWriter) writeHead(s *siegfried.Siegfried, hh string) {
-	y.hh = hashHeader(true, hh)
+func (y *yamlWriter) writeHead(s *siegfried.Siegfried, ht hashTyp) {
+	y.hh = ht.header(true)
 	y.w.WriteString(s.YAML())
 }
 
@@ -174,8 +174,8 @@ func newJSON(w io.Writer) *jsonWriter {
 	return &jsonWriter{false, strings.NewReplacer(`"`, `\"`, `\\`, `\\`, `\`, `\\`), bufio.NewWriter(w), ""}
 }
 
-func (j *jsonWriter) writeHead(s *siegfried.Siegfried, hh string) {
-	j.hh = hashHeader(false, hh)
+func (j *jsonWriter) writeHead(s *siegfried.Siegfried, ht hashTyp) {
+	j.hh = ht.header(false)
 	j.w.WriteString(s.JSON())
 	j.w.WriteString("\"files\":[")
 }
@@ -234,11 +234,11 @@ func newDroid(w io.Writer) *droidWriter {
 }
 
 // "identifier", "id", "format name", "format version", "mimetype", "basis", "warning"
-func (d *droidWriter) writeHead(s *siegfried.Siegfried, hh string) {
+func (d *droidWriter) writeHead(s *siegfried.Siegfried, ht hashTyp) {
 	d.w.Write([]string{
 		"ID", "PARENT_ID", "URI", "FILE_PATH", "NAME",
 		"METHOD", "STATUS", "SIZE", "TYPE", "EXT",
-		"LAST_MODIFIED", "EXTENSION_MISMATCH", strings.ToUpper(hashHeader(false, hh)) + "_HASH", "FORMAT_COUNT",
+		"LAST_MODIFIED", "EXTENSION_MISMATCH", strings.ToUpper(ht.header(false)) + "_HASH", "FORMAT_COUNT",
 		"PUID", "MIME_TYPE", "FORMAT_NAME", "FORMAT_VERSION"})
 }
 
