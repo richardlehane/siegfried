@@ -224,7 +224,7 @@ const usage = `
 			<ul><li><a href="#get_request">GET request</a>, where a file or directory path is given in the URL and the server retrieves the file(s);</li>
 			<li><a href="#post_request">POST request</a>, where the file is sent over the network as form-data.</li></ul></p> 
 			<h2>Default settings</h2>
-			<p>When starting the server, you can use regular sf flags to set defaults for the <i>nr</i>, <i>format</i>, <i>hash</i>, <i>z</i>, and <i>sig</i> parameters that will apply to all requests unless overriden. Logging options can also be set.<p>
+			<p>When starting the server, you can use regular sf flags to set defaults for the <i>nr</i>, <i>format</i>, <i>hash</i>, <i>z</i>, and <i>sig</i> parameters that will apply to all requests unless overridden. Logging options can also be set.<p>
 			<p>E.g. sf -nr -z -hash md5 -sig pronom-tika.sig -log p,w,e -serve localhost:5138</p>
 			<hr>
 			<h2><a name="get_request">GET request</a></h2>
