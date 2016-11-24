@@ -1,0 +1,14 @@
+{
+  "archivematica (archivematica extension signatures)": [
+    "archivematica-fmt2.xml",
+    "archivematica-fmt3.xml",
+    "archivematica-fmt4.xml",
+    "archivematica-fmt5.xml"
+  ],
+  "archivematica-ids": [
+    "archivematica-fmt/2",
+    "archivematica-fmt/3",
+    "archivematica-fmt/4",
+    "archivematica-fmt/5"
+  ]
+}
