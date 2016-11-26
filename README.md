@@ -33,6 +33,7 @@
     sf -serve hostname:port                    // Server mode
     sf -version                                // Display version information
     sf -throttle 10ms DIR                      // Pause for duration (e.g. 1s) between file scans
+    sf -multi 256 DIR                          // Scan multiple (e.g. 256) files in parallel 
     sf -log [comma-sep opts] file.ext | DIR    // Log errors etc. to stderr (default) or stdout
     sf -log e,w file.ext | DIR                 // Log errors and warnings to stderr
     sf -log u,o file.ext | DIR                 // Log unknowns to stdout
