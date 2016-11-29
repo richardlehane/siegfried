@@ -23,30 +23,6 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core"
 )
 
-func (b *Matcher) start(bof bool) {
-	b.mu.Lock()
-	defer b.mu.Unlock()
-	if bof {
-		if b.bAho != nil {
-			return
-		}
-		if b.lowmem {
-			b.bAho = wac.NewLowMem(b.bofSeq.set)
-			return
-		}
-		b.bAho = wac.New(b.bofSeq.set)
-		return
-	}
-	if b.eAho != nil {
-		return
-	}
-	if b.lowmem {
-		b.eAho = wac.NewLowMem(b.eofSeq.set)
-		return
-	}
-	b.eAho = wac.New(b.eofSeq.set)
-}
-
 // identify function - brings a new matcher into existence
 func (b *Matcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan core.Result, exclude ...int) {
 	buf.Quit = quit
@@ -76,9 +52,13 @@ func (b *Matcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan co
 	default:
 	}
 
-	// Do an initial check of BOF sequences
-	b.start(true) // start bof matcher if not yet started
+	// start bof matcher if not yet started
+	b.bmu.Do(func() {
+		b.bAho = wac.NewWac(b.lowmem, b.bofSeq.set)
+	})
 	var bchan chan wac.Result
+
+	// Do an initial check of BOF sequences
 	bchan = b.bAho.Index(rdr)
 	for br := range bchan {
 		if br.Index[0] == -1 {
@@ -104,7 +84,9 @@ func (b *Matcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan co
 
 	// Setup EOF tests
 	efchan := b.eofFrames.index(buf, true, quit)
-	b.start(false)
+	b.emu.Do(func() {
+		b.eAho = wac.NewWac(b.lowmem, b.eofSeq.set)
+	})
 	rrdr := siegreader.LimitReverseReaderFrom(buf, maxEOF)
 	echan := b.eAho.Index(rrdr)
 

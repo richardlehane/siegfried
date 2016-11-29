@@ -42,7 +42,8 @@ type Matcher struct {
 	maxEOF     int
 	priorities *priority.Set
 	// remaining fields are not persisted
-	mu     *sync.Mutex
+	bmu    *sync.Once
+	emu    *sync.Once
 	bAho   wac.Wac
 	eAho   wac.Wac
 	lowmem bool
@@ -68,7 +69,8 @@ func Load(ls *persist.LoadSaver) core.Matcher {
 		maxBOF:     ls.LoadInt(),
 		maxEOF:     ls.LoadInt(),
 		priorities: priority.Load(ls),
-		mu:         &sync.Mutex{},
+		bmu:        &sync.Once{},
+		emu:        &sync.Once{},
 	}
 }
 
@@ -118,7 +120,8 @@ func Add(c core.Matcher, ss core.SignatureSet, priorities priority.List) (core.M
 			bofSeq:     &seqSet{},
 			eofSeq:     &seqSet{},
 			priorities: &priority.Set{},
-			mu:         &sync.Mutex{},
+			bmu:        &sync.Once{},
+			emu:        &sync.Once{},
 		}
 	} else {
 		b = c.(*Matcher)
