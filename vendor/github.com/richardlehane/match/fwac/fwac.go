@@ -113,7 +113,7 @@ func New(seqs []Seq) Wac {
 	}
 }
 
-// New Low Mem creates a Wild Aho-Corasick tree with lower memory requirements (single tree, low mem transitions)
+// NewLowMem creates a Wild Aho-Corasick tree with lower memory requirements (single tree, low mem transitions)
 func NewLowMem(seqs []Seq) Wac {
 	root := &nodelm{}
 	root.addGotos(seqs, true)
@@ -122,6 +122,14 @@ func NewLowMem(seqs []Seq) Wac {
 		root: root,
 		p:    newPool(seqs),
 	}
+}
+
+// NewWac creates either a low memory or regular Wild Aho-Corasick tree
+func NewWac(lm bool, seqs []Seq) Wac {
+	if lm {
+		return NewLowMem(seqs)
+	}
+	return New(seqs)
 }
 
 // fwac is a wild Aho-Corasick tree
