@@ -364,32 +364,7 @@ func (id Identification) Warn() string {
 	return id.Warning
 }
 
-func quoteText(s string) string {
-	if len(s) == 0 {
-		return s
-	}
-	return "'" + s + "'"
-}
-
-func (id Identification) YAML() string {
-	var basis string
-	if len(id.Basis) > 0 {
-		basis = quoteText(strings.Join(id.Basis, "; "))
-	}
-	return fmt.Sprintf("  - ns      : %v\n    id      : %v\n    format  : %v\n    mime    : %v\n    basis   : %v\n    warning : %v\n",
-		id.Namespace, quoteText(id.ID), quoteText(id.Name), quoteText(id.ID), basis, quoteText(id.Warning))
-}
-
-func (id Identification) JSON() string {
-	var basis string
-	if len(id.Basis) > 0 {
-		basis = strings.Join(id.Basis, "; ")
-	}
-	return fmt.Sprintf("{\"ns\":\"%s\",\"id\":\"%s\",\"format\":\"%s\",\"mime\":\"%s\",\"basis\":\"%s\",\"warning\":\"%s\"}",
-		id.Namespace, id.ID, id.Name, id.ID, basis, id.Warning)
-}
-
-func (id Identification) CSV() []string {
+func (id Identification) Values() []string {
 	var basis string
 	if len(id.Basis) > 0 {
 		basis = strings.Join(id.Basis, "; ")

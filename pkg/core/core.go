@@ -80,9 +80,7 @@ type Identification interface {
 	String() string          // short text that is displayed to indicate the format match
 	Known() bool             // does this identifier produce a match
 	Warn() string            // identification warning message
-	YAML() string            // long text that should be displayed to indicate the format match
-	JSON() string            // JSON match response
-	CSV() []string           // CSV match response. Can be any length slice, but must be same length as Fields() returned by Identifier
+	Values() []string        // match response. Slice can be any length, but must be same length as Fields() returned by Identifier
 	Archive() config.Archive // does this format match any of the archive formats (zip, gzip, tar, warc, arc)
 }
 
