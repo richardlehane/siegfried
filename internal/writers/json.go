@@ -14,23 +14,21 @@
 
 package writers
 
-import (
-	"fmt"
-	"strings"
-)
+import "strings"
 
 func jsonizer(fields []string) func([]string) string {
 	for i, v := range fields {
 		if v == "namespace" {
-			fields[i] = "ns"
+			fields[i] = "\"ns\":\""
+			continue
 		}
+		fields[i] = "\"" + v + "\":\""
 	}
-	hdr := "{\"" + strings.Join(fields, "\":\"%s\",\"") + "\":\"%s\"}"
-	vals := make([]interface{}, len(fields))
+	vals := make([]string, len(fields))
 	return func(values []string) string {
 		for i, v := range values {
-			vals[i] = v
+			vals[i] = fields[i] + v
 		}
-		return fmt.Sprintf(hdr, vals...)
+		return "{" + strings.Join(vals, "\",") + "\"}"
 	}
 }

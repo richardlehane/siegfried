@@ -16,24 +16,34 @@ package writers
 
 import "testing"
 
-var fields = []string{"namespace",
-	"id",
-	"format",
-	"version",
-	"mime",
-	"basis",
-	"warning"}
+var values = []string{"pronom",
+	"fmt/43",
+	"JPEG File Interchange Format",
+	"1.01",
+	"image/jpeg",
+	"extension match jpg; byte match at [[[0 14]] [[75201 2]]]",
+	""}
+
+func makeFields() []string {
+	return []string{"namespace",
+		"id",
+		"format",
+		"version",
+		"mime",
+		"basis",
+		"warning"}
+}
 
 func TestHeader(t *testing.T) {
 	expect := "  - ns      : %v\n    id      : %v\n    format  : %v\n    version : %v\n    mime    : %v\n    basis   : %v\n    warning : %v\n"
-	ret := header(fields)
+	ret := header(makeFields())
 	if expect != ret {
 		t.Errorf("Expecting header to return %s\nGot: %s", expect, ret)
 	}
 }
 
 func TestYAML(t *testing.T) {
-	yml := yamlizer(fields)
+	yml := yamlizer(makeFields())
 	expect := `  - ns      : 'pronom'
     id      : 'fmt/43'
     format  : 'JPEG File Interchange Format'
@@ -42,13 +52,6 @@ func TestYAML(t *testing.T) {
     basis   : 'extension match jpg; byte match at [[[0 14]] [[75201 2]]]'
     warning : 
 `
-	values := []string{"pronom",
-		"fmt/43",
-		"JPEG File Interchange Format",
-		"1.01",
-		"image/jpeg",
-		"extension match jpg; byte match at [[[0 14]] [[75201 2]]]",
-		""}
 	ret := yml(values)
 	if ret != expect {
 		t.Errorf("Expecting yamlizer to return :\n%s\nGot:\n%s", expect, ret)
