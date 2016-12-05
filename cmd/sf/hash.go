@@ -68,32 +68,17 @@ func makeHash(typ hashTyp) hash.Hash {
 	return nil
 }
 
-func (typ hashTyp) header(pad bool) string {
+func (typ hashTyp) String() string {
 	switch typ {
 	case md5Hash:
-		if pad {
-			return "md5   "
-		}
 		return "md5"
 	case sha1Hash:
-		if pad {
-			return "sha1  "
-		}
 		return "sha1"
 	case sha256Hash:
-		if pad {
-			return "sha256"
-		}
 		return "sha256"
 	case sha512Hash:
-		if pad {
-			return "sha512"
-		}
 		return "sha512"
 	case crcHash:
-		if pad {
-			return "crc   "
-		}
 		return "crc"
 	}
 	return "no"

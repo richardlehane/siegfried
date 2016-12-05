@@ -109,7 +109,5 @@ type testIdentification struct{}
 func (t testIdentification) String() string          { return "fmt/3" }
 func (t testIdentification) Warn() string            { return "" }
 func (t testIdentification) Known() bool             { return true }
-func (t testIdentification) YAML() string            { return "" }
-func (t testIdentification) JSON() string            { return "" }
-func (t testIdentification) CSV() []string           { return nil }
+func (t testIdentification) Values() []string        { return nil }
 func (t testIdentification) Archive() config.Archive { return 0 }

@@ -30,7 +30,7 @@ func retryStat(path string, err error) (os.FileInfo, error) {
 	return nil, err
 }
 
-func identify(ctxts chan *context, root, orig string, norecurse bool, gf getFn) error {
+func identify(ctxts chan *context, root, orig string, norecurse, droid bool, gf getFn) error {
 	walkFunc := func(path string, info os.FileInfo, err error) error {
 		if *throttlef > 0 {
 			<-throttle.C
@@ -42,7 +42,7 @@ func identify(ctxts chan *context, root, orig string, norecurse bool, gf getFn) 
 			if norecurse && path != root {
 				return filepath.SkipDir
 			}
-			if *droido {
+			if droid {
 				dctx := gf(path, "", info.ModTime().Format(time.RFC3339), -1)
 				dctx.res <- results{nil, nil, nil}
 				dctx.wg.Add(1)

@@ -12,11 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main
+package sets
 
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -28,23 +29,29 @@ import (
 	"github.com/richardlehane/siegfried/pkg/config"
 )
 
-// take a comma separated string of puids and sets (e.g. fmt/1,@pdf,fmt/2) and expand any sets within.
-// Also split, trim, sort and de-dupe.
-// return a slice of puids
-func expandSets(l string) []string {
+// ExpandSets takes a comma separated string of fmts and sets (e.g. fmt/1,@pdf,fmt/2) and expand any sets within.
+func ExpandSets(l string) []string {
+	ss, err := ExpandItems(strings.Split(l, ","))
+	if err != nil {
+		log.Fatal(err)
+	}
+	return ss
+}
+
+// ExpandItems takes a slice of fmts and sets (e.g. []{"fmt/1","@pdf","fmt/2"}) and expand any sets within.
+func ExpandItems(items []string) ([]string, error) {
 	uniqs := make(map[string]struct{}) // drop any duplicates with this map
-	items := strings.Split(l, ",")
 	for _, v := range items {
 		item := strings.TrimSpace(v)
 		if strings.HasPrefix(item, "@") {
 			if sets == nil {
 				if err := initSets(); err != nil {
-					log.Fatalf("error loading sets: %v", err)
+					return nil, fmt.Errorf("error loading sets: %v", err)
 				}
 			}
 			list, err := getSets(strings.TrimPrefix(item, "@"))
 			if err != nil {
-				log.Fatalf("error interpreting sets: %v", err)
+				return nil, fmt.Errorf("error interpreting sets: %v", err)
 			}
 			for _, v := range list {
 				uniqs[v] = struct{}{}
@@ -57,7 +64,7 @@ func expandSets(l string) []string {
 	for k := range uniqs {
 		ret = append(ret, k)
 	}
-	return sortFmts(ret)
+	return sortFmts(ret), nil
 }
 
 // a plain string sort doesn't work e.g. get fmt/1,fmt/111/fmt/2 - need to sort on ints

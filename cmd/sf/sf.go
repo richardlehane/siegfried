@@ -22,11 +22,12 @@ import (
 	"io"
 	"log"
 	"os"
-	"path/filepath"
 	"sync"
 	"time"
 
 	"github.com/richardlehane/siegfried"
+	"github.com/richardlehane/siegfried/cmd/internal/logger"
+	"github.com/richardlehane/siegfried/cmd/internal/writer"
 	"github.com/richardlehane/siegfried/internal/siegreader"
 	"github.com/richardlehane/siegfried/pkg/config"
 	"github.com/richardlehane/siegfried/pkg/core"
@@ -36,14 +37,7 @@ import (
 	*/)
 
 // defaults
-const (
-	maxMulti = 1024
-
-	fileString = "[FILE]"
-	errString  = "[ERROR]"
-	warnString = "[WARN]"
-	timeString = "[TIME]"
-)
+const maxMulti = 1024
 
 // flags
 var (
@@ -77,15 +71,16 @@ func (we WalkError) Error() string {
 	return fmt.Sprintf("walking %s; got %v", we.path, we.err)
 }
 
-func setCtxPool(s *siegfried.Siegfried, w writer, wg *sync.WaitGroup, h hashTyp, z bool) {
+func setCtxPool(s *siegfried.Siegfried, wg *sync.WaitGroup, w writer.Writer, d, z bool, h hashTyp) {
 	ctxPool = &sync.Pool{
 		New: func() interface{} {
 			return &context{
 				s:   s,
-				w:   w,
 				wg:  wg,
-				h:   makeHash(h),
+				w:   w,
+				d:   d,
 				z:   z,
+				h:   makeHash(h),
 				res: make(chan results, 1),
 			}
 		},
@@ -105,11 +100,12 @@ func getCtx(path, mime, mod string, sz int64) *context {
 
 type context struct {
 	s  *siegfried.Siegfried
-	w  writer
 	wg *sync.WaitGroup
+	w  writer.Writer
+	d  bool // droid
 	// opts
-	h hash.Hash
 	z bool
+	h hash.Hash
 	// info
 	path string
 	mime string
@@ -125,54 +121,15 @@ type results struct {
 	ids []core.Identification
 }
 
-func printer(ctxts chan *context, lg *logger) {
-	// helpers for logging
-	abs := func(p string) string {
-		np, _ := filepath.Abs(p)
-		if np == "" {
-			return p
-		}
-		return np
-	}
-	printFile := func(done bool, p string) bool {
-		if !done {
-			fmt.Fprintf(lg.w, "%s %s\n", fileString, abs(p))
-		}
-		return true
-	}
+func printer(ctxts chan *context, lg *logger.Logger) {
 	for ctx := range ctxts {
-		var fp bool // just print FILE once in log
-		// log progress
-		if lg.progress {
-			fp = printFile(fp, ctx.path)
-		}
+		lg.Progress(ctx.path)
 		// block on the results
 		res := <-ctx.res
-		// log error
-		if lg.e && res.err != nil {
-			fp = printFile(fp, ctx.path)
-			fmt.Fprintf(lg.w, "%s %v\n", errString, res.err)
-		}
-		// log warnings, known, unknown and report matches for slow or debug
-		if lg.warn || lg.known || lg.unknown {
-			var kn bool
-			for _, id := range res.ids {
-				if id.Known() {
-					kn = true
-				}
-				if lg.warn {
-					if w := id.Warn(); w != "" {
-						fp = printFile(fp, ctx.path)
-						fmt.Fprintf(lg.w, "%s %s\n", warnString, w)
-					}
-				}
-			}
-			if (lg.known && kn) || (lg.unknown && !kn) {
-				fmt.Fprintln(lg.w, abs(ctx.path))
-			}
-		}
+		lg.Error(ctx.path, res.err)
+		lg.IDs(ctx.path, res.ids)
 		// write the result
-		ctx.w.writeFile(ctx.path, ctx.sz, ctx.mod, res.cs, res.err, res.ids)
+		ctx.w.File(ctx.path, ctx.sz, ctx.mod, res.cs, res.err, res.ids)
 		ctx.wg.Done()
 		ctxPool.Put(ctx) // return the context to the pool
 	}
@@ -259,12 +216,11 @@ func identifyRdr(r io.Reader, ctx *context, ctxts chan *context, gf getFn) {
 		ctx.res <- results{fmt.Errorf("failed to decompress, got: %v", err), cs, ids}
 		return
 	}
-	_, dw := ctx.w.(*droidWriter)
 	// send the result
 	ctx.res <- results{err, cs, ids}
 	// decompress and recurse
 	for err = d.next(); err == nil; err = d.next() {
-		if dw {
+		if ctx.d {
 			for _, v := range d.dirs() {
 				dctx := gf(v, "", "", -1)
 				dctx.res <- results{nil, nil, nil}
@@ -315,6 +271,19 @@ func main() {
 	if *version {
 		version := config.Version()
 		fmt.Printf("siegfried %d.%d.%d\n%s", version[0], version[1], version[2], s)
+		/*
+			// String representation of a Siegfried struct
+			func (s *Siegfried) String() string {
+				str := fmt.Sprintf(
+					"%s (%v)\nidentifiers: \n",
+					s.path,
+					s.C.Format(time.RFC3339))
+				for _, id := range s.ids {
+					str += fmt.Sprintf("  - %v: %v\n", id.Name(), id.Details())
+				}
+				return str
+			}
+		*/
 		return
 	}
 	// handle -fpr
@@ -329,7 +298,7 @@ func main() {
 		*multi = 1
 	}
 	// start logger
-	lg, err := newLogger(*logf)
+	lg, err := logger.New(*logf)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -351,29 +320,29 @@ func main() {
 	ctxts := make(chan *context, lenCtxts)
 	go printer(ctxts, lg)
 	// set default writer
-	var w writer
+	var w writer.Writer
+	var d bool
 	switch {
+	case lg.IsOut():
+		w = writer.Null()
 	case *csvo:
-		w = newCSV(os.Stdout)
+		w = writer.CSV(os.Stdout)
 	case *jsono:
-		w = newJSON(os.Stdout)
+		w = writer.JSON(os.Stdout)
 	case *droido:
-		w = newDroid(os.Stdout)
 		if len(s.Fields()) != 1 || len(s.Fields()[0]) != 7 {
 			close(ctxts)
 			log.Fatalln("[FATAL] DROID output is limited to signature files with a single PRONOM identifier")
 		}
+		w = writer.Droid(os.Stdout)
+		d = true
 	default:
-		w = newYAML(os.Stdout)
-	}
-	// overrite writer with nil writer if logging is to stdout
-	if lg != nil && lg.w == os.Stdout {
-		w = logWriter{}
+		w = writer.YAML(os.Stdout)
 	}
 	// setup default waitgroup
 	wg := &sync.WaitGroup{}
 	// setup context pool
-	setCtxPool(s, w, wg, hashT, *archive)
+	setCtxPool(s, wg, w, d, *archive, hashT)
 	// handle -serve
 	if *serve != "" {
 		log.Printf("Starting server at %s. Use CTRL-C to quit.\n", *serve)
@@ -386,7 +355,7 @@ func main() {
 		log.Fatalln("[FATAL] expecting a single file or directory argument")
 	}
 
-	w.writeHead(s, hashT)
+	w.Head(config.SignatureBase(), s.C, s.Identifiers(), s.Fields(), hashT.String())
 	// support reading list files from stdin
 	if flag.Arg(0) == "-" {
 		scanner := bufio.NewScanner(os.Stdin)
@@ -405,15 +374,13 @@ func main() {
 			}
 		}
 	} else {
-		err = identify(ctxts, flag.Arg(0), "", *nr, getCtx)
+		err = identify(ctxts, flag.Arg(0), "", *nr, d, getCtx)
 	}
 	wg.Wait()
 	close(ctxts)
-	w.writeTail()
+	w.Tail()
 	// log time elapsed
-	if !lg.start.IsZero() {
-		fmt.Fprintf(lg.w, "%s %v\n", timeString, time.Since(lg.start))
-	}
+	lg.Elapsed()
 	if err != nil {
 		log.Fatal(err)
 	}

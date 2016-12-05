@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package writers
+package writer
 
 import "strings"
 
@@ -32,3 +32,25 @@ func jsonizer(fields []string) func([]string) string {
 		return "{" + strings.Join(vals, "\",") + "\"}"
 	}
 }
+
+/*
+// JSON representation of a Siegfried struct.
+// This is the provenace block at the beginning of sf results and includes descriptions for each identifier.
+func (s *Siegfried) JSON() string {
+	version := config.Version()
+	str := fmt.Sprintf(
+		"{\"siegfried\":\"%d.%d.%d\",\"scandate\":\"%v\",\"signature\":\"%s\",\"created\":\"%v\",\"identifiers\":[",
+		version[0], version[1], version[2],
+		time.Now().Format(time.RFC3339),
+		s.path,
+		s.C.Format(time.RFC3339))
+	for i, id := range s.ids {
+		if i > 0 {
+			str += ","
+		}
+		str += fmt.Sprintf("{\"name\":\"%s\",\"details\":\"%s\"}", id.Name(), id.Details())
+	}
+	str += "],"
+	return str
+}
+*/

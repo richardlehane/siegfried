@@ -23,6 +23,7 @@ import (
 	"sync"
 
 	"github.com/richardlehane/siegfried"
+	"github.com/richardlehane/siegfried/cmd/internal/writer"
 	"github.com/richardlehane/siegfried/pkg/config"
 )
 
@@ -46,14 +47,15 @@ func decodePath(s, b64 string) (string, error) {
 	return s[10:], nil
 }
 
-func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried, wg *sync.WaitGroup) (error, string, writer, bool, hashTyp, *siegfried.Siegfried, getFn) {
+func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried, wg *sync.WaitGroup) (error, string, writer.Writer, bool, bool, hashTyp, *siegfried.Siegfried, getFn) {
 	// json, csv, droid or yaml
-	paramsErr := func(field, expect string) (error, string, writer, bool, hashTyp, *siegfried.Siegfried, getFn) {
-		return fmt.Errorf("bad request; in param %s got %s; valid values %s", field, r.FormValue(field), expect), "", nil, false, -1, nil, nil
+	paramsErr := func(field, expect string) (error, string, writer.Writer, bool, bool, hashTyp, *siegfried.Siegfried, getFn) {
+		return fmt.Errorf("bad request; in param %s got %s; valid values %s", field, r.FormValue(field), expect), "", nil, false, false, -1, nil, nil
 	}
 	var (
 		mime string
-		wr   writer
+		wr   writer.Writer
+		d    bool
 		frmt int
 	)
 	switch {
@@ -92,16 +94,17 @@ func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried
 	}
 	switch frmt {
 	case 0:
-		wr = newYAML(w)
+		wr = writer.YAML(w)
 		mime = "application/x-yaml"
 	case 1:
-		wr = newJSON(w)
+		wr = writer.JSON(w)
 		mime = "application/json"
 	case 2:
-		wr = newCSV(w)
+		wr = writer.CSV(w)
 		mime = "text/csv"
 	case 3:
-		wr = newDroid(w)
+		wr = writer.Droid(w)
+		d = true
 		mime = "application/x-droid"
 	}
 	// no recurse
@@ -138,7 +141,7 @@ func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried
 	sf := s
 	if v := r.FormValue("sig"); v != "" {
 		if _, err := os.Stat(config.Local(v)); err != nil {
-			return fmt.Errorf("bad request; sig param should be path to a signature file (absolute or relative to home); got %v", err), "", nil, false, -1, nil, nil
+			return fmt.Errorf("bad request; sig param should be path to a signature file (absolute or relative to home); got %v", err), "", nil, false, false, -1, nil, nil
 		}
 		nsf, err := siegfried.Load(config.Local(v))
 		if err == nil {
@@ -148,15 +151,15 @@ func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried
 	gf := func(path, mime, mod string, sz int64) *context {
 		c := ctxPool.Get().(*context)
 		c.path, c.mime, c.mod, c.sz = path, mime, mod, sz
-		c.s, c.w, c.wg, c.h, c.z = sf, wr, wg, makeHash(ht), z
+		c.s, c.wg, c.w, c.d, c.z, c.h = sf, wg, wr, d, z, makeHash(ht)
 		return c
 	}
-	return nil, mime, wr, norec, ht, sf, gf
+	return nil, mime, wr, norec, d, ht, sf, gf
 }
 
 func handleIdentify(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried, ctxts chan *context) {
 	wg := &sync.WaitGroup{}
-	err, mime, wr, nr, ht, sf, gf := parseRequest(w, r, s, wg)
+	err, mime, wr, nr, d, ht, sf, gf := parseRequest(w, r, s, wg)
 	if err != nil {
 		handleErr(w, http.StatusNotFound, err)
 		return
@@ -182,13 +185,13 @@ func handleIdentify(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfri
 			sz = r.ContentLength
 		}
 		w.Header().Set("Content-Type", mime)
-		wr.writeHead(sf, ht)
+		wr.Head(config.SignatureBase(), sf.C, sf.Identifiers(), sf.Fields(), ht.String())
 		wg.Add(1)
 		ctx := gf(h.Filename, "", mod, sz)
 		ctxts <- ctx
 		identifyRdr(f, ctx, ctxts, gf)
 		wg.Wait()
-		wr.writeTail()
+		wr.Tail()
 		return
 	} else {
 		path, err := decodePath(r.URL.Path, r.FormValue("base64"))
@@ -200,10 +203,10 @@ func handleIdentify(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfri
 			return
 		}
 		w.Header().Set("Content-Type", mime)
-		wr.writeHead(sf, ht)
-		err = identify(ctxts, path, "", nr, gf)
+		wr.Head(config.SignatureBase(), sf.C, sf.Identifiers(), sf.Fields(), ht.String())
+		err = identify(ctxts, path, "", nr, d, gf)
 		wg.Wait()
-		wr.writeTail()
+		wr.Tail()
 		if err != nil {
 			if _, ok := err.(WalkError); ok { // only dump out walk errors, other errors reported in result
 				io.WriteString(w, err.Error())

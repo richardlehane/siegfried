@@ -40,7 +40,6 @@ import (
 	"io"
 	"io/ioutil"
 	"os"
-	"path/filepath"
 	"strings"
 	"time"
 
@@ -71,7 +70,6 @@ var ( // for side effect - register their patterns/ signature loaders
 // They contain three matchers as well as a slice of identifiers. When identifiers
 // are added to a Siegfried struct, they are registered with each matcher.
 type Siegfried struct {
-	path string // file name of Siegfried: created at Load time
 	// immutable fields
 	C  time.Time    // signature create time
 	nm core.Matcher // namematcher
@@ -202,15 +200,14 @@ func Load(path string) (*Siegfried, error) {
 	}
 	ls := persist.NewLoadSaver(buf)
 	return &Siegfried{
-		path: filepath.Base(path),
-		C:    ls.LoadTime(),
-		nm:   namematcher.Load(ls),
-		mm:   mimematcher.Load(ls),
-		cm:   containermatcher.Load(ls),
-		xm:   xmlmatcher.Load(ls),
-		rm:   riffmatcher.Load(ls),
-		bm:   bytematcher.Load(ls),
-		tm:   textmatcher.Load(ls),
+		C:  ls.LoadTime(),
+		nm: namematcher.Load(ls),
+		mm: mimematcher.Load(ls),
+		cm: containermatcher.Load(ls),
+		xm: xmlmatcher.Load(ls),
+		rm: riffmatcher.Load(ls),
+		bm: bytematcher.Load(ls),
+		tm: textmatcher.Load(ls),
 		ids: func() []core.Identifier {
 			ids := make([]core.Identifier, ls.LoadTinyUInt())
 			for i := range ids {
@@ -222,52 +219,14 @@ func Load(path string) (*Siegfried, error) {
 	}, ls.Err
 }
 
-// String representation of a Siegfried struct
-func (s *Siegfried) String() string {
-	str := fmt.Sprintf(
-		"%s (%v)\nidentifiers: \n",
-		s.path,
-		s.C.Format(time.RFC3339))
-	for _, id := range s.ids {
-		str += fmt.Sprintf("  - %v: %v\n", id.Name(), id.Details())
+// Identifiers returns a slice of the names and details of each identifier.
+func (s *Siegfried) Identifiers() [][2]string {
+	ret := make([][2]string, len(s.ids))
+	for i, v := range s.ids {
+		ret[i][0] = v.Name()
+		ret[i][1] = v.Details()
 	}
-	return str
-}
-
-// YAML representation of a Siegfried struct.
-// This is the provenace block at the beginning of sf results and includes descriptions for each identifier.
-func (s *Siegfried) YAML() string {
-	version := config.Version()
-	str := fmt.Sprintf(
-		"---\nsiegfried   : %d.%d.%d\nscandate    : %v\nsignature   : %s\ncreated     : %v\nidentifiers : \n",
-		version[0], version[1], version[2],
-		time.Now().Format(time.RFC3339),
-		s.path,
-		s.C.Format(time.RFC3339))
-	for _, id := range s.ids {
-		str += fmt.Sprintf("  - name    : '%v'\n    details : '%v'\n", id.Name(), id.Details())
-	}
-	return str
-}
-
-// JSON representation of a Siegfried struct.
-// This is the provenace block at the beginning of sf results and includes descriptions for each identifier.
-func (s *Siegfried) JSON() string {
-	version := config.Version()
-	str := fmt.Sprintf(
-		"{\"siegfried\":\"%d.%d.%d\",\"scandate\":\"%v\",\"signature\":\"%s\",\"created\":\"%v\",\"identifiers\":[",
-		version[0], version[1], version[2],
-		time.Now().Format(time.RFC3339),
-		s.path,
-		s.C.Format(time.RFC3339))
-	for i, id := range s.ids {
-		if i > 0 {
-			str += ","
-		}
-		str += fmt.Sprintf("{\"name\":\"%s\",\"details\":\"%s\"}", id.Name(), id.Details())
-	}
-	str += "],"
-	return str
+	return ret
 }
 
 // Fields returns a slice of the names of the fields in each identifier.

@@ -79,7 +79,7 @@ func retryOpen(path string, err error) (*os.File, error) {
 	return file, nil
 }
 
-func identify(ctxts chan *context, root, orig string, norecurse bool, gf getFn) error {
+func identify(ctxts chan *context, root, orig string, norecurse, droid bool, gf getFn) error {
 	walkFunc := func(path string, info os.FileInfo, err error) error {
 		var retry bool
 		var lp, sp string
@@ -101,7 +101,7 @@ func identify(ctxts chan *context, root, orig string, norecurse bool, gf getFn) 
 			if retry { // if a dir long path, restart the recursion with a long path as the new root
 				return identify(ctxts, lp, sp, norecurse, gf)
 			}
-			if *droido {
+			if droid {
 				dctx := gf(shortpath(path, orig), "", info.ModTime().Format(time.RFC3339), -1)
 				dctx.res <- results{nil, nil, nil}
 				dctx.wg.Add(1)

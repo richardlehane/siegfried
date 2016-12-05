@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package writers
+package writer
 
 import (
 	"fmt"
@@ -51,3 +51,22 @@ func yamlizer(fields []string) func([]string) string {
 		return fmt.Sprintf(hdr, vals...)
 	}
 }
+
+/*
+
+// YAML representation of a Siegfried struct.
+// This is the provenace block at the beginning of sf results and includes descriptions for each identifier.
+func (s *Siegfried) YAML() string {
+	version := config.Version()
+	str := fmt.Sprintf(
+		"---\nsiegfried   : %d.%d.%d\nscandate    : %v\nsignature   : %s\ncreated     : %v\nidentifiers : \n",
+		version[0], version[1], version[2],
+		time.Now().Format(time.RFC3339),
+		s.path,
+		s.C.Format(time.RFC3339))
+	for _, id := range s.ids {
+		str += fmt.Sprintf("  - name    : '%v'\n    details : '%v'\n", id.Name(), id.Details())
+	}
+	return str
+}
+*/

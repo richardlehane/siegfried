@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main
+package writer
 
 import (
 	"bufio"
@@ -23,27 +23,29 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
+	"time"
 
-	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/pkg/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 )
 
-// i.Known()
-
-type writer interface {
-	writeHead(s *siegfried.Siegfried, ht hashTyp)
-	// if a directory give a negative sz
-	writeFile(name string, sz int64, mod string, checksum []byte, err error, ids []core.Identification)
-	writeTail()
+type Writer interface {
+	Head(path string, created time.Time, ids [][2]string, fields [][]string, hh string)            // 	path := filepath.Base(path)
+	File(name string, sz int64, mod string, checksum []byte, err error, ids []core.Identification) // if a directory give a negative sz
+	Tail()
 }
 
-type logWriter struct{}
-
-func (l logWriter) writeHead(s *siegfried.Siegfried, ht hashTyp) {}
-func (l logWriter) writeFile(name string, sz int64, mod string, cs []byte, err error, ids []core.Identification) {
+func Null() Writer {
+	return null{}
 }
-func (l logWriter) writeTail() {}
+
+type null struct{}
+
+func (n null) Head(path string, created time.Time, ids [][2]string, fields [][]string, hh string) {
+}
+func (n null) File(name string, sz int64, mod string, cs []byte, err error, ids []core.Identification) {
+}
+func (n null) Tail() {}
 
 type csvWriter struct {
 	recs  [][]string
@@ -51,15 +53,14 @@ type csvWriter struct {
 	w     *csv.Writer
 }
 
-func newCSV(w io.Writer) *csvWriter {
+func CSV(w io.Writer) Writer {
 	return &csvWriter{w: csv.NewWriter(w)}
 }
 
-func (c *csvWriter) writeHead(s *siegfried.Siegfried, ht hashTyp) {
-	fields := s.Fields()
+func (c *csvWriter) Head(path string, created time.Time, ids [][2]string, fields [][]string, hh string) {
 	c.names = make([]string, len(fields))
 	l := 4
-	if ht >= 0 {
+	if hh != "" {
 		l++
 	}
 	for i, f := range fields {
@@ -70,8 +71,8 @@ func (c *csvWriter) writeHead(s *siegfried.Siegfried, ht hashTyp) {
 	c.recs[0] = make([]string, l)
 	c.recs[0][0], c.recs[0][1], c.recs[0][2], c.recs[0][3] = "filename", "filesize", "modified", "errors"
 	idx := 4
-	if ht >= 0 {
-		c.recs[0][4] = ht.header(false)
+	if hh != "" {
+		c.recs[0][4] = hh
 		idx++
 	}
 	for _, f := range fields {
@@ -81,7 +82,7 @@ func (c *csvWriter) writeHead(s *siegfried.Siegfried, ht hashTyp) {
 	c.w.Write(c.recs[0])
 }
 
-func (c *csvWriter) writeFile(name string, sz int64, mod string, checksum []byte, err error, ids []core.Identification) {
+func (c *csvWriter) File(name string, sz int64, mod string, checksum []byte, err error, ids []core.Identification) {
 	var errStr string
 	if err != nil {
 		errStr = err.Error()
@@ -106,7 +107,7 @@ func (c *csvWriter) writeFile(name string, sz int64, mod string, checksum []byte
 	var rowIdx, colIdx, prevLen int
 	colIdx = idx
 	for _, id := range ids {
-		fields := id.CSV()
+		fields := id.Values()
 		if thisName == fields[0] {
 			rowIdx++
 		} else {
@@ -128,7 +129,7 @@ func (c *csvWriter) writeFile(name string, sz int64, mod string, checksum []byte
 	return
 }
 
-func (c *csvWriter) writeTail() { c.w.Flush() }
+func (c *csvWriter) Tail() { c.w.Flush() }
 
 type yamlWriter struct {
 	replacer *strings.Replacer
@@ -136,32 +137,32 @@ type yamlWriter struct {
 	hh       string
 }
 
-func newYAML(w io.Writer) *yamlWriter {
+func YAML(w io.Writer) Writer {
 	return &yamlWriter{strings.NewReplacer("'", "''"), bufio.NewWriter(w), ""}
 }
 
-func (y *yamlWriter) writeHead(s *siegfried.Siegfried, ht hashTyp) {
-	y.hh = ht.header(true)
-	y.w.WriteString(s.YAML())
+func (y *yamlWriter) Head(path string, created time.Time, ids [][2]string, fields [][]string, hh string) {
+	y.hh = hh
+	//y.w.WriteString(s.YAML())
 }
 
-func (y *yamlWriter) writeFile(name string, sz int64, mod string, checksum []byte, err error, ids []core.Identification) {
+func (y *yamlWriter) File(name string, sz int64, mod string, checksum []byte, err error, ids []core.Identification) {
 	var errStr string
 	if err != nil {
 		errStr = fmt.Sprintf("'%s'", err.Error())
 	}
 	var h string
 	if checksum != nil {
-		h = fmt.Sprintf("%s   : %s\n", y.hh, hex.EncodeToString(checksum))
+		h = fmt.Sprintf("%s   : %-8s\n", y.hh, hex.EncodeToString(checksum))
 	}
 	fmt.Fprintf(y.w, "---\nfilename : '%s'\nfilesize : %d\nmodified : %s\nerrors   : %s\n%smatches  :\n", y.replacer.Replace(name), sz, mod, errStr, h)
-	for _, id := range ids {
-		y.w.WriteString(id.YAML())
-	}
+	//for _,  := range ids {
+	//y.w.WriteString(id.YAML())
+	//}
 	return
 }
 
-func (y *yamlWriter) writeTail() { y.w.Flush() }
+func (y *yamlWriter) Tail() { y.w.Flush() }
 
 type jsonWriter struct {
 	subs     bool
@@ -170,17 +171,17 @@ type jsonWriter struct {
 	hh       string
 }
 
-func newJSON(w io.Writer) *jsonWriter {
+func JSON(w io.Writer) Writer {
 	return &jsonWriter{false, strings.NewReplacer(`"`, `\"`, `\\`, `\\`, `\`, `\\`), bufio.NewWriter(w), ""}
 }
 
-func (j *jsonWriter) writeHead(s *siegfried.Siegfried, ht hashTyp) {
-	j.hh = ht.header(false)
-	j.w.WriteString(s.JSON())
+func (j *jsonWriter) Head(path string, created time.Time, ids [][2]string, fields [][]string, hh string) {
+	j.hh = hh
+	//j.w.WriteString(s.JSON())
 	j.w.WriteString("\"files\":[")
 }
 
-func (j *jsonWriter) writeFile(name string, sz int64, mod string, checksum []byte, err error, ids []core.Identification) {
+func (j *jsonWriter) File(name string, sz int64, mod string, checksum []byte, err error, ids []core.Identification) {
 	if j.subs {
 		j.w.WriteString(",")
 	}
@@ -196,18 +197,18 @@ func (j *jsonWriter) writeFile(name string, sz int64, mod string, checksum []byt
 	if len(ids) == 0 {
 		return
 	}
-	for idx, id := range ids {
+	for idx, _ := range ids {
 		if idx > 0 {
 			j.w.WriteString(",")
 		}
-		j.w.WriteString(id.JSON())
+		//j.w.WriteString(id.JSON())
 	}
 	j.w.WriteString("]}")
 	j.subs = true
 	return
 }
 
-func (j *jsonWriter) writeTail() {
+func (j *jsonWriter) Tail() {
 	j.w.WriteString("]}\n")
 	j.w.Flush()
 }
@@ -225,7 +226,7 @@ type parent struct {
 	archive string
 }
 
-func newDroid(w io.Writer) *droidWriter {
+func Droid(w io.Writer) Writer {
 	return &droidWriter{
 		parents: make(map[string]parent),
 		rec:     make([]string, 18),
@@ -234,15 +235,18 @@ func newDroid(w io.Writer) *droidWriter {
 }
 
 // "identifier", "id", "format name", "format version", "mimetype", "basis", "warning"
-func (d *droidWriter) writeHead(s *siegfried.Siegfried, ht hashTyp) {
+func (d *droidWriter) Head(path string, created time.Time, ids [][2]string, fields [][]string, hh string) {
+	if hh == "" {
+		hh = "no"
+	}
 	d.w.Write([]string{
 		"ID", "PARENT_ID", "URI", "FILE_PATH", "NAME",
 		"METHOD", "STATUS", "SIZE", "TYPE", "EXT",
-		"LAST_MODIFIED", "EXTENSION_MISMATCH", strings.ToUpper(ht.header(false)) + "_HASH", "FORMAT_COUNT",
+		"LAST_MODIFIED", "EXTENSION_MISMATCH", strings.ToUpper(hh) + "_HASH", "FORMAT_COUNT",
 		"PUID", "MIME_TYPE", "FORMAT_NAME", "FORMAT_VERSION"})
 }
 
-func (d *droidWriter) writeFile(p string, sz int64, mod string, checksum []byte, err error, ids []core.Identification) {
+func (d *droidWriter) File(p string, sz int64, mod string, checksum []byte, err error, ids []core.Identification) {
 	d.id++
 	d.rec[0], d.rec[6], d.rec[10] = strconv.Itoa(d.id), "Done", mod
 	if err != nil {
@@ -285,7 +289,7 @@ func (d *droidWriter) writeFile(p string, sz int64, mod string, checksum []byte,
 		} else {
 			d.rec[8] = "File"
 		}
-		fields := id.CSV()
+		fields := id.Values()
 		d.rec[5], d.rec[11] = getMethod(fields[5]), mismatch(fields[6])
 		d.rec[14], d.rec[15], d.rec[16], d.rec[17] = fields[1], fields[4], fields[2], fields[3]
 		d.rec[3] = clearArchivePath(d.rec[2], d.rec[3])
@@ -294,7 +298,7 @@ func (d *droidWriter) writeFile(p string, sz int64, mod string, checksum []byte,
 	return
 }
 
-func (d *droidWriter) writeTail() { d.w.Flush() }
+func (d *droidWriter) Tail() { d.w.Flush() }
 
 func (d *droidWriter) processPath(p string) (parent, uri, path, name, ext string) {
 	path, _ = filepath.Abs(p)
