@@ -135,31 +135,84 @@ type yamlWriter struct {
 	replacer *strings.Replacer
 	w        *bufio.Writer
 	hh       string
+	hstrs    []string
+	vals     [][]interface{}
 }
 
 func YAML(w io.Writer) Writer {
-	return &yamlWriter{strings.NewReplacer("'", "''"), bufio.NewWriter(w), ""}
+	return &yamlWriter{
+		replacer: strings.NewReplacer("'", "''"),
+		w:        bufio.NewWriter(w),
+	}
+}
+
+func header(fields []string) string {
+	headings := make([]string, len(fields))
+	var max int
+	for _, v := range fields {
+		if v != "namespace" && len(v) > max {
+			max = len(v)
+		}
+	}
+	pad := fmt.Sprintf("%%-%ds", max)
+	for i, v := range fields {
+		if v == "namespace" {
+			v = "ns"
+		}
+		headings[i] = fmt.Sprintf(pad, v)
+	}
+	return "  - " + strings.Join(headings, " : %v\n    ") + " : %v\n"
 }
 
 func (y *yamlWriter) Head(path string, created time.Time, ids [][2]string, fields [][]string, hh string) {
 	y.hh = hh
-	//y.w.WriteString(s.YAML())
+	y.hstrs = make([]string, len(fields))
+	y.vals = make([][]interface{}, len(fields))
+	for i, f := range fields {
+		y.hstrs[i] = header(f)
+		y.vals[i] = make([]interface{}, len(f))
+	}
+	version := config.Version()
+	fmt.Fprintf(y.w,
+		"---\nsiegfried   : %d.%d.%d\nscandate    : %v\nsignature   : %s\ncreated     : %v\nidentifiers : \n",
+		version[0], version[1], version[2],
+		time.Now().Format(time.RFC3339),
+		y.replacer.Replace(path),
+		created.Format(time.RFC3339))
+	for _, id := range ids {
+		fmt.Fprintf(y.w, "  - name    : '%v'\n    details : '%v'\n", id[0], id[1])
+	}
 }
 
 func (y *yamlWriter) File(name string, sz int64, mod string, checksum []byte, err error, ids []core.Identification) {
-	var errStr string
+	var (
+		errStr   string
+		h        string
+		thisName string
+		idx      int = -1
+	)
 	if err != nil {
 		errStr = fmt.Sprintf("'%s'", err.Error())
 	}
-	var h string
 	if checksum != nil {
-		h = fmt.Sprintf("%s   : %-8s\n", y.hh, hex.EncodeToString(checksum))
+		h = fmt.Sprintf("%-8s : %s\n", y.hh, hex.EncodeToString(checksum))
 	}
 	fmt.Fprintf(y.w, "---\nfilename : '%s'\nfilesize : %d\nmodified : %s\nerrors   : %s\n%smatches  :\n", y.replacer.Replace(name), sz, mod, errStr, h)
-	//for _,  := range ids {
-	//y.w.WriteString(id.YAML())
-	//}
-	return
+	for _, id := range ids {
+		values = id.Values()
+		if values[0] != thisName {
+			idx++
+			thisName = values[0]
+		}
+		for i, v := range values {
+			if v == "" {
+				y.vals[idx][i] = ""
+				continue
+			}
+			y.vals[idx][i] = "'" + v + "'"
+		}
+		fmt.Fprintf(y.w, y.hstrs[idx], y.vals[idx]...)
+	}
 }
 
 func (y *yamlWriter) Tail() { y.w.Flush() }
