@@ -199,7 +199,7 @@ func (y *yamlWriter) File(name string, sz int64, mod string, checksum []byte, er
 	}
 	fmt.Fprintf(y.w, "---\nfilename : '%s'\nfilesize : %d\nmodified : %s\nerrors   : %s\n%smatches  :\n", y.replacer.Replace(name), sz, mod, errStr, h)
 	for _, id := range ids {
-		values = id.Values()
+		values := id.Values()
 		if values[0] != thisName {
 			idx++
 			thisName = values[0]

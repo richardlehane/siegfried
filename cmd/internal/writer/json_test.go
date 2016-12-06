@@ -22,7 +22,7 @@ import (
 func TestJSON(t *testing.T) {
 	json := jsonizer(makeFields())
 	expect := `{"ns":"pronom","id":"fmt/43","format":"JPEG File Interchange Format","version":"1.01","mime":"image/jpeg","basis":"extension match jpg; byte match at [[[0 14]] [[75201 2]]]","warning":""}`
-	ret := json(values)
+	ret := json(testValues)
 	if ret != expect {
 		t.Errorf("Expecting jsonizer to return :\n%s\nGot:\n%s", expect, ret)
 	}
@@ -32,6 +32,6 @@ func BenchmarkJSON(b *testing.B) {
 	json := jsonizer(makeFields())
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		fmt.Sprintf("%s", json(values))
+		fmt.Sprintf("%s", json(testValues))
 	}
 }

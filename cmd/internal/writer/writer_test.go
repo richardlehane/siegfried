@@ -25,7 +25,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core"
 )
 
-var values = []string{"pronom",
+var testValues = []string{"pronom",
 	"fmt/43",
 	"JPEG File Interchange Format",
 	"1.01",
@@ -39,10 +39,10 @@ func (t testErr) Error() string { return "mscfb: bad OLE" }
 
 type testID struct{}
 
-func (t testID) String() string          { return values[1] }
+func (t testID) String() string          { return testValues[1] }
 func (t testID) Known() bool             { return true }
 func (t testID) Warn() string            { return "" }
-func (t testID) Values() []string        { return values }
+func (t testID) Values() []string        { return testValues }
 func (t testID) Archive() config.Archive { return 0 }
 
 func makeFields() []string {
