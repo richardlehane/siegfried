@@ -22,9 +22,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/richardlehane/siegfried/cmd/internal/sets"
 	"github.com/richardlehane/siegfried/pkg/config"
 	"github.com/richardlehane/siegfried/pkg/core"
+	"github.com/richardlehane/siegfried/pkg/sets"
 )
 
 const (
@@ -78,11 +78,7 @@ func New(opts string) (*Logger, error) {
 	}
 	if len(items) > 0 {
 		lg.fmts = make(map[string]bool)
-		f, err := sets.ExpandItems(items)
-		if err != nil {
-			return nil, fmt.Errorf("unknown -log input %s; expect be comma-separated list of stdout,out,o,progress,p,error,err,e,warning,warn,w,debug,d,slow,s,unknown,u,known,k,fmt/1", opts)
-		}
-		for _, v := range f {
+		for _, v := range sets.Sets(items...) {
 			lg.fmts[v] = true
 		}
 	}

@@ -17,7 +17,6 @@ package sets
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -25,33 +24,39 @@ import (
 	"sort"
 	"strconv"
 	"strings"
-
-	"github.com/richardlehane/siegfried/pkg/config"
+	"sync"
 )
 
-// ExpandSets takes a comma separated string of fmts and sets (e.g. fmt/1,@pdf,fmt/2) and expand any sets within.
-func ExpandSets(l string) []string {
-	ss, err := ExpandItems(strings.Split(l, ","))
-	if err != nil {
-		log.Fatal(err)
+var (
+	sets   map[string][]string
+	setsMu = &sync.Once{}
+)
+
+// Keys returns a list of all the format sets
+func Keys() []string {
+	load(setsDir())
+	l := make([]string, 0, len(sets))
+	for k := range sets {
+		l = append(l, k)
 	}
-	return ss
+	return l
 }
 
-// ExpandItems takes a slice of fmts and sets (e.g. []{"fmt/1","@pdf","fmt/2"}) and expand any sets within.
-func ExpandItems(items []string) ([]string, error) {
+// Expand takes a comma separated string of fmts and sets (e.g. fmt/1,@pdf,fmt/2) and expand any sets within.
+func Expand(l string) []string {
+	return Sets(strings.Split(l, ",")...)
+}
+
+// Sets takes a slice of fmts and sets (e.g. []{"fmt/1","@pdf","fmt/2"}) and expand any sets within.
+func Sets(items ...string) []string {
 	uniqs := make(map[string]struct{}) // drop any duplicates with this map
 	for _, v := range items {
 		item := strings.TrimSpace(v)
 		if strings.HasPrefix(item, "@") {
-			if sets == nil {
-				if err := initSets(); err != nil {
-					return nil, fmt.Errorf("error loading sets: %v", err)
-				}
-			}
+			load(setsDir())
 			list, err := getSets(strings.TrimPrefix(item, "@"))
 			if err != nil {
-				return nil, fmt.Errorf("error interpreting sets: %v", err)
+				log.Fatalf("error interpreting sets: %v", err)
 			}
 			for _, v := range list {
 				uniqs[v] = struct{}{}
@@ -64,7 +69,7 @@ func ExpandItems(items []string) ([]string, error) {
 	for k := range uniqs {
 		ret = append(ret, k)
 	}
-	return sortFmts(ret), nil
+	return sortFmts(ret)
 }
 
 // a plain string sort doesn't work e.g. get fmt/1,fmt/111/fmt/2 - need to sort on ints
@@ -106,8 +111,6 @@ func sortFmts(s []string) []string {
 	return append(ret, others...)
 }
 
-var sets map[string][]string
-
 func getSets(key string) ([]string, error) {
 	// recursively build a list of all values for the key
 	attempted := make(map[string]bool) // prevent cycles by bookkeeping with attempted map
@@ -138,6 +141,58 @@ func getSets(key string) ([]string, error) {
 	return f(key)
 }
 
+func load(path string) {
+	setsMu.Do(func() {
+		//  load all json files in the sets directory and add them to a single map
+		sets = make(map[string][]string)
+		wf := func(path string, info os.FileInfo, err error) error {
+			if err != nil {
+				return errors.New("error walking sets directory, must have a 'sets' directory in siegfried home: " + err.Error())
+			}
+			if info.IsDir() {
+				return nil
+			}
+			switch filepath.Ext(path) {
+			default:
+				return nil // ignore non json files
+			case ".json":
+			}
+			set := make(map[string][]string)
+			byts, err := ioutil.ReadFile(path)
+			if err != nil {
+				return errors.New("error loading " + path + " " + err.Error())
+			}
+			err = json.Unmarshal(byts, &set)
+			if err != nil {
+				return errors.New("error unmarshalling " + path + " " + err.Error())
+			}
+			for k, v := range set {
+				k = stripComment(k)
+				v = stripComments(v)
+				sort.Strings(v)
+				m, ok := sets[k]
+				if !ok {
+					sets[k] = v
+				} else {
+					// if we already have this key, add any new items in its list to the existing list
+					for _, w := range v {
+						idx := sort.SearchStrings(m, w)
+						if idx == len(m) || m[idx] != w {
+							m = append(m, w)
+						}
+					}
+					sort.Strings(m)
+					sets[k] = m
+				}
+			}
+			return nil
+		}
+		if err := filepath.Walk(path, wf); err != nil {
+			log.Fatal(err)
+		}
+	})
+}
+
 func stripComment(in string) string {
 	ws := strings.Index(in, " ")
 	if ws < 0 {
@@ -153,52 +208,4 @@ func stripComments(in []string) []string {
 		out[i] = stripComment(v)
 	}
 	return out
-}
-
-func initSets() error {
-	//  load all json files in the sets directory and add them to a single map
-	sets = make(map[string][]string)
-	wf := func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			return errors.New("error walking sets directory, must have a 'sets' directory in siegfried home: " + err.Error())
-		}
-		if info.IsDir() {
-			return nil
-		}
-		switch filepath.Ext(path) {
-		default:
-			return nil // ignore non json files
-		case ".json":
-		}
-		set := make(map[string][]string)
-		byts, err := ioutil.ReadFile(path)
-		if err != nil {
-			return errors.New("error loading " + path + " " + err.Error())
-		}
-		err = json.Unmarshal(byts, &set)
-		if err != nil {
-			return errors.New("error unmarshalling " + path + " " + err.Error())
-		}
-		for k, v := range set {
-			k = stripComment(k)
-			v = stripComments(v)
-			sort.Strings(v)
-			m, ok := sets[k]
-			if !ok {
-				sets[k] = v
-			} else {
-				// if we already have this key, add any new items in its list to the existing list
-				for _, w := range v {
-					idx := sort.SearchStrings(m, w)
-					if idx == len(m) || m[idx] != w {
-						m = append(m, w)
-					}
-				}
-				sort.Strings(m)
-				sets[k] = m
-			}
-		}
-		return nil
-	}
-	return filepath.Walk(filepath.Join(config.Home(), "sets"), wf)
 }

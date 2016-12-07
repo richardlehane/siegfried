@@ -29,6 +29,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/loc"
 	"github.com/richardlehane/siegfried/pkg/mimeinfo"
 	"github.com/richardlehane/siegfried/pkg/pronom"
+	"github.com/richardlehane/siegfried/pkg/sets"
 )
 
 var usage = `
@@ -208,7 +209,7 @@ func inspectSig(t core.MatcherType) error {
 func inspectFmt(f string) error {
 	var id core.Identifier
 	var err error
-	fs := expandSets(f)
+	fs := sets.Expand(f)
 	if len(fs) == 0 {
 		return fmt.Errorf("no valid fmt to inspect in %s", f)
 	}
@@ -300,7 +301,7 @@ func getOptions() []config.Option {
 		opts = append(opts, config.SetDetails(*details))
 	}
 	if *extend != "" {
-		opts = append(opts, config.SetExtend(expandSets(*extend)))
+		opts = append(opts, config.SetExtend(sets.Expand(*extend)))
 	}
 	if *extendc != "" {
 		if *extend == "" {
@@ -309,13 +310,13 @@ func getOptions() []config.Option {
 the DROID signature file you should also include a regular signature extension 
 (-extend) that includes a FileFormatCollection element describing the new formats.`)
 		}
-		opts = append(opts, config.SetExtendC(expandSets(*extendc)))
+		opts = append(opts, config.SetExtendC(sets.Expand(*extendc)))
 	}
 	if *include != "" {
-		opts = append(opts, config.SetLimit(expandSets(*include)))
+		opts = append(opts, config.SetLimit(sets.Expand(*include)))
 	}
 	if *exclude != "" {
-		opts = append(opts, config.SetExclude(expandSets(*exclude)))
+		opts = append(opts, config.SetExclude(sets.Expand(*exclude)))
 	}
 	if *bof != 0 {
 		opts = append(opts, config.SetBOF(*bof))
@@ -373,13 +374,13 @@ the DROID signature file you should also include a regular signature extension
 		opts = append(opts, config.SetLOC(""))
 	}
 	if *inspectInclude != "" {
-		opts = append(opts, config.SetLimit(expandSets(*inspectInclude)))
+		opts = append(opts, config.SetLimit(sets.Expand(*inspectInclude)))
 	}
 	if *inspectExclude != "" {
-		opts = append(opts, config.SetExclude(expandSets(*inspectExclude)))
+		opts = append(opts, config.SetExclude(sets.Expand(*inspectExclude)))
 	}
 	if *inspectExtend != "" {
-		opts = append(opts, config.SetExtend(expandSets(*inspectExtend)))
+		opts = append(opts, config.SetExtend(sets.Expand(*inspectExtend)))
 	}
 	if *inspectExtendc != "" {
 		if *inspectExtend == "" {
@@ -388,7 +389,7 @@ the DROID signature file you should also include a regular signature extension
 the DROID signature file you should also include a regular signature extension 
 (-extend) that includes a FileFormatCollection element describing the new formats.`)
 		}
-		opts = append(opts, config.SetExtendC(expandSets(*inspectExtendc)))
+		opts = append(opts, config.SetExtendC(sets.Expand(*inspectExtendc)))
 	}
 	return opts
 }

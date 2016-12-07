@@ -81,5 +81,5 @@ func (typ hashTyp) String() string {
 	case crcHash:
 		return "crc"
 	}
-	return "no"
+	return ""
 }

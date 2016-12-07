@@ -10,6 +10,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/loc"
 	"github.com/richardlehane/siegfried/pkg/mimeinfo"
 	"github.com/richardlehane/siegfried/pkg/pronom"
+	"github.com/richardlehane/siegfried/pkg/sets"
 )
 
 var testhome = flag.String("testhome", "data", "override the default home directory")
@@ -71,7 +72,7 @@ func TestMakeArchivematica(t *testing.T) {
 	config.SetHome(*testhome)
 	p, err := pronom.New(
 		config.SetName("archivematica"),
-		config.SetExtend(expandSets("archivematica-fmt2.xml,archivematica-fmt3.xml,archivematica-fmt4.xml,archivematica-fmt5.xml")))
+		config.SetExtend(sets.Expand("archivematica-fmt2.xml,archivematica-fmt3.xml,archivematica-fmt4.xml,archivematica-fmt5.xml")))
 	if err != nil {
 		t.Fatal(err)
 	}

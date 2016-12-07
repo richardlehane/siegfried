@@ -99,7 +99,7 @@ func identify(ctxts chan *context, root, orig string, norecurse, droid bool, gf 
 				return filepath.SkipDir
 			}
 			if retry { // if a dir long path, restart the recursion with a long path as the new root
-				return identify(ctxts, lp, sp, norecurse, gf)
+				return identify(ctxts, lp, sp, norecurse, droid, gf)
 			}
 			if droid {
 				dctx := gf(shortpath(path, orig), "", info.ModTime().Format(time.RFC3339), -1)
