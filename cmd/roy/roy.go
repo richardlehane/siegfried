@@ -139,6 +139,7 @@ var (
 	harvest           = flag.NewFlagSet("harvest", flag.ExitOnError)
 	harvestHome       = harvest.String("home", config.Home(), "override the default home directory")
 	harvestDroid      = harvest.String("droid", config.Droid(), "set name/path for DROID signature file")
+	harvestChanges    = harvest.Bool("changes", false, "harvest the latest PRONOM release-notes.xml file")
 	_, htimeout, _, _ = config.HarvestOptions()
 	timeout           = harvest.Duration("timeout", htimeout, "set duration before timing-out harvesting requests e.g. 120s")
 	throttlef         = harvest.Duration("throttle", 0, "set a time to wait HTTP requests e.g. 50ms")
@@ -156,6 +157,12 @@ var (
 	inspectLOC     = inspect.Bool("loc", false, "inspect a LOC FDD signature file")
 	inspectCType   = inspect.Int("ct", 0, "provide container type to inspect container hits")
 	inspectCName   = inspect.String("cn", "", "provide container name to inspect container hits")
+
+	// SETS
+	setsf       = flag.NewFlagSet("sets", flag.ExitOnError)
+	setsHome    = setsf.String("home", config.Home(), "override the default home directory")
+	setsDroid   = setsf.String("droid", config.Droid(), "set name/path for DROID signature file")
+	setsChanges = setsf.Bool("changes", false, "create a pronom-changes.json sets file")
 )
 
 func savereps() error {
@@ -264,6 +271,30 @@ func blameSig(i int) error {
 		return err
 	}
 	fmt.Println(s.Blame(i, *inspectCType, *inspectCName))
+	return nil
+}
+
+func squares(num int) string {
+	s := make([]string, num)
+	for i := 0; i < num; i++ {
+		s[i] = "\xE2\x96\xA0"
+	}
+	return strings.Join(s, " ")
+}
+
+func viewChanges() error {
+	releases, err := pronom.LoadReleases(config.Local("release-notes.xml"))
+	if err != nil {
+		return err
+	}
+	years, relfrequency, newfrequency, upfrequency, sigfrequency := pronom.Changes(releases)
+	for _, k := range years {
+		fmt.Printf("%d\n", k)
+		fmt.Printf("number releases: %s (%d)\n", squares(relfrequency[k]), relfrequency[k])
+		fmt.Printf("new records:     %s (%d)\n", squares(newfrequency[k]/10), newfrequency[k])
+		fmt.Printf("updated records: %s (%d)\n", squares(upfrequency[k]/10), upfrequency[k])
+		fmt.Printf("new signatures:  %s (%d)\n\n", squares(sigfrequency[k]/10), sigfrequency[k])
+	}
 	return nil
 }
 
@@ -409,6 +440,15 @@ func setHarvestOptions() {
 	}
 }
 
+func setSetsOptions() {
+	if *setsHome != config.Home() {
+		config.SetHome(*setsHome)
+	}
+	if *setsDroid != config.Droid() {
+		config.SetDroid(*setsDroid)()
+	}
+}
+
 func main() {
 	var err error
 	if len(os.Args) < 2 {
@@ -441,7 +481,11 @@ func main() {
 		err = harvest.Parse(os.Args[2:])
 		if err == nil {
 			setHarvestOptions()
-			err = savereps()
+			if *harvestChanges {
+				err = pronom.GetReleases(config.Local("release-notes.xml"))
+			} else {
+				err = savereps()
+			}
 		}
 	case "inspect":
 		inspect.Usage = func() { fmt.Print(inspectUsage) }
@@ -471,6 +515,8 @@ func main() {
 				err = graphPriorities(1)
 			case input == "implicit-priorities", input == "ip":
 				err = graphPriorities(2)
+			case input == "changes":
+				err = viewChanges()
 			case filepath.Ext(input) == ".sig":
 				config.SetSignature(input)
 				err = inspectSig(-1)
@@ -484,6 +530,19 @@ func main() {
 				} else {
 					err = inspectFmt(input)
 				}
+			}
+		}
+	case "sets":
+		err = setsf.Parse(os.Args[2:])
+		if err == nil {
+			setSetsOptions()
+			if *setsChanges {
+				releases, err := pronom.LoadReleases(config.Local("release-notes.xml"))
+				if err == nil {
+					err = pronom.ReleaseSet("pronom-changes.json", releases)
+				}
+			} else {
+				err = pronom.TypeSets("pronom-all.json", "pronom-families.json", "pronom-types.json")
 			}
 		}
 	default:

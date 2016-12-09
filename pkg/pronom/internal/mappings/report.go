@@ -27,6 +27,8 @@ type Report struct {
 	Name        string             `xml:"report_format_detail>FileFormat>FormatName"`
 	Version     string             `xml:"report_format_detail>FileFormat>FormatVersion"`
 	Description string             `xml:"report_format_detail>FileFormat>FormatDescription"`
+	Families    string             `xml:"report_format_detail>FileFormat>FormatFamilies"`
+	Types       string             `xml:"report_format_detail>FileFormat>FormatTypes"`
 	Identifiers []FormatIdentifier `xml:"report_format_detail>FileFormat>FileFormatIdentifier"`
 	Signatures  []Signature        `xml:"report_format_detail>FileFormat>InternalSignature"`
 	Extensions  []string           `xml:"report_format_detail>FileFormat>ExternalSignature>Signature"`
@@ -116,4 +118,17 @@ func (r *Report) MIME() string {
 		}
 	}
 	return ""
+}
+
+func (r *Report) Label(puid string) string {
+	name, version := strings.TrimSpace(r.Name), strings.TrimSpace(r.Version)
+	switch {
+	case name == "" && version == "":
+		return puid
+	case name == "":
+		return puid + " (" + version + ")"
+	case version == "":
+		return puid + " (" + name + ")"
+	}
+	return puid + " (" + name + " " + version + ")"
 }

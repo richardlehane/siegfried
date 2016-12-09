@@ -16,12 +16,15 @@
 package pronom
 
 import (
+	"encoding/json"
 	"encoding/xml"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"path/filepath"
+	"sort"
+	"strconv"
 	"strings"
 	"sync"
 	"time"
@@ -192,6 +195,142 @@ func Harvest() []error {
 		return save(puid, url, config.Reports())
 	}
 	return applyAll(5, d.IDs(), apply)
+}
+
+func nameType(in string) string {
+	switch in {
+	case "New Records":
+		return "new"
+	case "Updated Records":
+		return "updated"
+	case "New Signatures", "Signatures":
+		return "signatures"
+	}
+	return in
+}
+
+func checkType(in string) bool {
+	switch in {
+	case "New Records", "Updated Records", "New Signatures", "Signatures":
+		return true
+	}
+	return false
+}
+
+func GetReleases(path string) error {
+	byts, err := getHttp(config.ChangesURL())
+	if err != nil {
+		return err
+	}
+	return ioutil.WriteFile(path, byts, os.ModePerm)
+}
+
+func LoadReleases(path string) (*mappings.Releases, error) {
+	releases := &mappings.Releases{}
+	err := openXML(path, releases)
+	return releases, err
+}
+
+func Changes(releases *mappings.Releases) (years []int, relfrequency, newfrequency, upfrequency, sigfrequency map[int]int) {
+	relfrequency, newfrequency, upfrequency, sigfrequency = make(map[int]int), make(map[int]int), make(map[int]int), make(map[int]int)
+	for _, release := range releases.Releases {
+		trimdate := strings.TrimSpace(release.ReleaseDate)
+		date := trimdate[len(trimdate)-4 : len(trimdate)]
+		yr, _ := strconv.Atoi(date)
+		relfrequency[yr]++
+		for _, bit := range release.Outlines {
+			if !checkType(bit.Typ) {
+				continue
+			}
+			switch nameType(bit.Typ) {
+			case "new":
+				newfrequency[yr] += len(bit.Puids)
+			case "updated":
+				upfrequency[yr] += len(bit.Puids)
+			case "signatures":
+				sigfrequency[yr] += len(bit.Puids)
+			}
+		}
+	}
+	years = make([]int, 0, len(relfrequency))
+	for k, _ := range relfrequency {
+		years = append(years, k)
+	}
+	sort.Ints(years)
+	return
+}
+
+func makePuids(in []mappings.Puid) []string {
+	out := make([]string, len(in))
+	for i, v := range in {
+		out[i] = v.Typ + "/" + v.Val
+	}
+	return out
+}
+
+// ReleaseSet writes a changes sets file based on the latest PRONOM release file
+func ReleaseSet(path string, releases *mappings.Releases) error {
+	output := mappings.OrderedMap{}
+	for _, release := range releases.Releases {
+		bits := []mappings.KeyVal{}
+		name := strings.TrimSuffix(strings.TrimPrefix(release.SignatureName, "DROID_SignatureFile_V"), ".xml")
+		top := mappings.KeyVal{
+			Key: name,
+			Val: []string{},
+		}
+		for _, bit := range release.Outlines {
+			if !checkType(bit.Typ) {
+				continue
+			}
+			this := name + nameType(bit.Typ)
+			top.Val = append(top.Val, "@"+this)
+			bits = append(bits, mappings.KeyVal{
+				Key: this,
+				Val: makePuids(bit.Puids),
+			})
+		}
+		output = append(output, top)
+		output = append(output, bits...)
+	}
+	out, err := json.MarshalIndent(output, "", "  ")
+	if err != nil {
+		return err
+	}
+	return ioutil.WriteFile(filepath.Join(config.Local("sets"), path), out, 0666)
+}
+
+// TypeSets writes three sets files based on PRONOM reports:
+// an all sets files, with all PUIDs; a families sets file with FormatFamilies; and a types sets file with FormatTypes.
+func TypeSets(p1, p2, p3 string) error {
+	d, err := newDroid(config.Droid())
+	if err != nil {
+		return err
+	}
+	r, err := newReports(d.IDs(), d.idsPuids())
+	if err != nil {
+		return err
+	}
+	families, types := r.FamilyTypes()
+	all := r.Labels()
+	out, err := json.MarshalIndent(map[string][]string{"all": all}, "", "  ")
+	if err != nil {
+		return err
+	}
+	if err := ioutil.WriteFile(filepath.Join(config.Local("sets"), p1), out, 0666); err != nil {
+		return err
+	}
+	out, err = json.MarshalIndent(families, "", "  ")
+	if err != nil {
+		return err
+	}
+	if err := ioutil.WriteFile(filepath.Join(config.Local("sets"), p2), out, 0666); err != nil {
+		return err
+	}
+	out, err = json.MarshalIndent(types, "", "  ")
+	if err != nil {
+		return err
+	}
+	return ioutil.WriteFile(filepath.Join(config.Local("sets"), p3), out, 0666)
 }
 
 func openXML(path string, els interface{}) error {

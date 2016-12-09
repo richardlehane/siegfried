@@ -31,6 +31,7 @@ var pronom = struct {
 	reports          string   // directory where PRONOM reports are stored
 	doubleup         bool     // include byte signatures for formats that also have container signatures
 	extendc          []string //container extensions
+	changesURL       string
 	harvestURL       string
 	harvestTimeout   time.Duration
 	harvestThrottle  time.Duration
@@ -47,6 +48,7 @@ var pronom = struct {
 }{
 	name:             "pronom",
 	reports:          "pronom",
+	changesURL:       "http://www.nationalarchives.gov.uk/aboutapps/pronom/release-notes.xml",
 	harvestURL:       "http://www.nationalarchives.gov.uk/pronom/",
 	harvestTimeout:   120 * time.Second,
 	harvestTransport: &http.Transport{Proxy: http.ProxyFromEnvironment},
@@ -174,6 +176,10 @@ func ExcludeDoubles(puids, cont []string) []string {
 // Extend reports whether a set of container signature extensions has been provided.
 func ExtendC() []string {
 	return extensionPaths(pronom.extendc)
+}
+
+func ChangesURL() string {
+	return pronom.changesURL
 }
 
 // HarvestOptions reports the PRONOM url, timeout and transport.

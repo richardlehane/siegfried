@@ -62,6 +62,55 @@ type reports struct {
 	identifier.Blank
 }
 
+func word(w string) string {
+	w = strings.TrimSpace(w)
+	w = strings.ToLower(w)
+	ws := strings.Split(w, " ")
+	w = ws[0]
+	if len(ws) > 1 {
+		for _, s := range ws[1:] {
+			s = strings.TrimSuffix(strings.TrimPrefix(s, "("), ")")
+			s = strings.Replace(s, "-", "", 1)
+			w += strings.Title(s)
+		}
+	}
+	return w
+}
+
+func normalise(ws string) []string {
+	ss := strings.Split(ws, ",")
+	for i, s := range ss {
+		ss[i] = word(s)
+	}
+	if len(ss) == 1 && ss[0] == "" {
+		return nil
+	}
+	return ss
+}
+
+func (r *reports) FamilyTypes() (map[string][]string, map[string][]string) {
+	retf, rett := make(map[string][]string), make(map[string][]string)
+	for i, v := range r.r {
+		f, t := normalise(v.Families), normalise(v.Types)
+		this := v.Label(r.p[i])
+		for _, fs := range f {
+			retf[fs] = append(retf[fs], this)
+		}
+		for _, ts := range t {
+			rett[ts] = append(rett[ts], this)
+		}
+	}
+	return retf, rett
+}
+
+func (r *reports) Labels() []string {
+	ret := make([]string, len(r.p))
+	for i, v := range r.r {
+		ret[i] = v.Label(r.p[i])
+	}
+	return ret
+}
+
 func (r *reports) IDs() []string {
 	return r.p
 }
