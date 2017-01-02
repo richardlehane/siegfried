@@ -222,6 +222,8 @@ type jsonWriter struct {
 	replacer *strings.Replacer
 	w        *bufio.Writer
 	hh       string
+	hstrs    []string
+	vals     [][]interface{}
 }
 
 func JSON(w io.Writer) Writer {
@@ -230,6 +232,13 @@ func JSON(w io.Writer) Writer {
 
 func (j *jsonWriter) Head(path string, created time.Time, ids [][2]string, fields [][]string, hh string) {
 	j.hh = hh
+	j.hstrs = make([]string, len(fields))
+	j.vals = make([][]interface{}, len(fields))
+	for i, f := range fields {
+		j.hstrs[i] = header(f)
+		j.vals[i] = make([]interface{}, len(f))
+	}
+	version := config.Version()
 	//j.w.WriteString(s.JSON())
 	j.w.WriteString("\"files\":[")
 }
