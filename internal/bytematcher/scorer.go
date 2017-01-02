@@ -471,6 +471,7 @@ func (b *Matcher) scorer(buf *siegreader.Buffer, waitSet *priority.WaitSet, q ch
 						}
 					}
 				}
+				// given waitset, check if any potential matches remain to wait for
 				potentials = filterKF(potentials, waitSet)
 				var ok bool
 				for _, pot := range potentials {
