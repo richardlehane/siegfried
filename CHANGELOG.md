@@ -1,4 +1,17 @@
 # Change Log
+## v1.6.8
+### Added
+- log files that match particular formats with `-log fmt/1,@set2` (comma separated list of format IDs/format sets)
+- a summary view of formats matched during a scan with `-log chart` (or just "c")
+- `roy replay` subcommand: load one or more results to replay logging or to convert to a different output format e.g. `roy replay -csv results.yaml` or `roy replay -log unknown,chart,stdout results.yaml`
+- `roy compare` subcommand: view the difference between two or more results e.g. `roy compare results1.yaml results2.csv droid.csv ...`
+- `roy sets` subcommand: `roy sets` creates pronom-all.json, pronom-families.json, and pronom-types.json sets files;
+`roy sets -changes` requires a release-notes.xml file and creates a pronom-changes.json sets file
+- `roy inspect changes` provides a summary view of a PRONOM release-notes.xml file
+
+### Fixed
+- some files cause endless scanning due to large numbers of signature hits; reported by [workflowsguy](https://github.com/richardlehane/siegfried/issues/94)
+
 ## v1.6.7
 ### Added
 - enable -hash, -z, and -log flags for -serve and -multi modes
