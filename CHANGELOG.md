@@ -1,18 +1,19 @@
 # Change Log
-## v1.6.8
+## v1.6.8 (2017-01-)
 ### Added
-- log files that match particular formats with `-log fmt/1,@set2` (comma separated list of format IDs/format sets)
-- a summary view of formats matched during a scan with `-log chart` (or just "c")
-- `roy replay` subcommand: load one or more results to replay logging or to convert to a different output format e.g. `roy replay -csv results.yaml` or `roy replay -log unknown,chart,stdout results.yaml`
+- log files that match particular formats with `-log fmt/1,@set2` (comma separated list of format IDs/format sets). These can be mixed with regular log options e.g. `-log unknown,fmt1,chart`
+- generate a summary view of formats matched during a scan with `-log chart` (or just "c")
+- `roy replay` subcommand: load one or more results to replay logging or to convert to a different output format e.g. `roy replay -csv results.yaml` or `roy replay -log unknown,chart,stdout results1.yaml results2.csv`
 - `roy compare` subcommand: view the difference between two or more results e.g. `roy compare results1.yaml results2.csv droid.csv ...`
 - `roy sets` subcommand: `roy sets` creates pronom-all.json, pronom-families.json, and pronom-types.json sets files;
-`roy sets -changes` requires a release-notes.xml file and creates a pronom-changes.json sets file
+`roy sets -changes` creates a pronom-changes.json sets file from a PRONOM release-notes.xml file; `roy sets -list @set1,@set2` lists contents of a comma-separated list of format sets
 - `roy inspect changes` provides a summary view of a PRONOM release-notes.xml file
 
 ### Fixed
 - some files cause endless scanning due to large numbers of signature hits; reported by [workflowsguy](https://github.com/richardlehane/siegfried/issues/94)
+- null bytes can be written to output due to bad zip filename decoding; reported by [Tim Walsh](https://github.com/richardlehane/siegfried/issues/945
 
-## v1.6.7
+## v1.6.7 (2016-11-23)
 ### Added
 - enable -hash, -z, and -log flags for -serve and -multi modes
 - new hash, z, and sig params for -serve mode (to control per-request)
