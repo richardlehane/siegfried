@@ -55,7 +55,7 @@ func makeFields() []string {
 		"warning"}
 }
 
-func TestHeader(t *testing.T) {
+func TestYAMLHeader(t *testing.T) {
 	expect := "  - ns      : %v\n    id      : %v\n    format  : %v\n    version : %v\n    mime    : %v\n    basis   : %v\n    warning : %v\n"
 	ret := header(makeFields())
 	if expect != ret {
@@ -83,4 +83,14 @@ func ExampleYAML() {
 	//     mime    : 'image/jpeg'
 	//     basis   : 'extension match jpg; byte match at [[[0 14]] [[75201 2]]]'
 	//     warning :
+}
+
+func ExampleJSON() {
+	js := JSON(ioutil.Discard)
+	js.Head("", time.Time{}, [][2]string{{"pronom", ""}}, [][]string{makeFields()}, "")
+	js.(*jsonWriter).w = bufio.NewWriter(os.Stdout)
+	js.File("example.doc", 1, "2015-05-24T16:59:13+10:00", nil, testErr{}, []core.Identification{testID{}})
+	js.Tail()
+	// Output:
+	// {"filename":"example.doc","filesize": 1,"modified":"2015-05-24T16:59:13+10:00","errors": "mscfb: bad OLE","matches": [{"ns":"pronom","id":"fmt/43","format":"JPEG File Interchange Format","version":"1.01","mime":"image/jpeg","basis":"extension match jpg; byte match at [[[0 14]] [[75201 2]]]","warning":""}]}]}
 }

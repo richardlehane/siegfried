@@ -222,48 +222,82 @@ type jsonWriter struct {
 	replacer *strings.Replacer
 	w        *bufio.Writer
 	hh       string
-	hstrs    []string
-	vals     [][]interface{}
+	hstrs    []func([]string) string
 }
 
 func JSON(w io.Writer) Writer {
-	return &jsonWriter{false, strings.NewReplacer(`"`, `\"`, `\\`, `\\`, `\`, `\\`), bufio.NewWriter(w), ""}
+	return &jsonWriter{
+		replacer: strings.NewReplacer(`"`, `\"`, `\\`, `\\`, `\`, `\\`),
+		w:        bufio.NewWriter(w),
+	}
+}
+
+func jsonizer(fields []string) func([]string) string {
+	for i, v := range fields {
+		if v == "namespace" {
+			fields[i] = "\"ns\":\""
+			continue
+		}
+		fields[i] = "\"" + v + "\":\""
+	}
+	vals := make([]string, len(fields))
+	return func(values []string) string {
+		for i, v := range values {
+			vals[i] = fields[i] + v
+		}
+		return "{" + strings.Join(vals, "\",") + "\"}"
+	}
 }
 
 func (j *jsonWriter) Head(path string, created time.Time, ids [][2]string, fields [][]string, hh string) {
 	j.hh = hh
-	j.hstrs = make([]string, len(fields))
-	j.vals = make([][]interface{}, len(fields))
+	j.hstrs = make([]func([]string) string, len(fields))
 	for i, f := range fields {
-		j.hstrs[i] = header(f)
-		j.vals[i] = make([]interface{}, len(f))
+		j.hstrs[i] = jsonizer(f)
 	}
 	version := config.Version()
-	//j.w.WriteString(s.JSON())
-	j.w.WriteString("\"files\":[")
+	fmt.Fprintf(j.w,
+		"{\"siegfried\":\"%d.%d.%d\",\"scandate\":\"%v\",\"signature\":\"%s\",\"created\":\"%v\",\"identifiers\":[",
+		version[0], version[1], version[2],
+		time.Now().Format(time.RFC3339),
+		path,
+		created.Format(time.RFC3339))
+	for i, id := range ids {
+		if i > 0 {
+			j.w.WriteString(",")
+		}
+		fmt.Fprintf(j.w, "{\"name\":\"%s\",\"details\":\"%s\"}", id[0], id[1])
+	}
+	j.w.WriteString("],\"files\":[")
 }
 
 func (j *jsonWriter) File(name string, sz int64, mod string, checksum []byte, err error, ids []core.Identification) {
 	if j.subs {
 		j.w.WriteString(",")
 	}
-	var errStr string
+	var (
+		errStr   string
+		h        string
+		thisName string
+		idx      int = -1
+	)
 	if err != nil {
 		errStr = err.Error()
 	}
-	var h string
 	if checksum != nil {
 		h = fmt.Sprintf("\"%s\":\"%s\",", j.hh, hex.EncodeToString(checksum))
 	}
 	fmt.Fprintf(j.w, "{\"filename\":\"%s\",\"filesize\": %d,\"modified\":\"%s\",\"errors\": \"%s\",%s\"matches\": [", j.replacer.Replace(name), sz, mod, errStr, h)
-	if len(ids) == 0 {
-		return
-	}
-	for idx, _ := range ids {
-		if idx > 0 {
+	for i, id := range ids {
+		if i > 0 {
 			j.w.WriteString(",")
 		}
-		//j.w.WriteString(id.JSON())
+		values := id.Values()
+		if values[0] != thisName {
+			idx++
+			thisName = values[0]
+		}
+		j.w.WriteString(j.hstrs[idx](values))
 	}
 	j.w.WriteString("]}")
 	j.subs = true
