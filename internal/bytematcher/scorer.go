@@ -392,7 +392,7 @@ func (b *Matcher) scorer(buf *siegreader.Buffer, waitSet *priority.WaitSet, q ch
 			if quitting {
 				continue
 			}
-			// if the strike reports progress, check if we should be continuing to wait
+			// HANDLE PROGRESS STRIKES (check if we should be continuing to wait)
 			if in.idxa == -1 {
 				// update with the latest offset
 				if in.reverse {
@@ -416,7 +416,7 @@ func (b *Matcher) scorer(buf *siegreader.Buffer, waitSet *priority.WaitSet, q ch
 				}
 				continue
 			}
-			// now cache or satisfy the strike
+			// HANDLE MATCH STRIKES
 			var hasPotential bool
 			potentials := filterKF(b.tests[in.idxa+in.idxb].keyFrames(), waitSet)
 			for _, pot := range potentials {

@@ -22,9 +22,6 @@ import (
 // Test trees link byte sequence and frame matches (from the sequence and frame sets) to keyframes. This link is sometimes direct if there are no
 // further test to perform. Follow-up tests may be required to the left or to the right of the match.
 type testTree struct {
-	// keyFrames []keyFrameID
-	// incompleteIdx int
-	// incompletes []followUp L R are ints representing max length
 	complete         []keyFrameID
 	incomplete       []followUp
 	maxLeftDistance  int
@@ -242,7 +239,7 @@ func maxLength(ts []*testNode) int {
 	return max
 }
 
-// TODO: This recursive function can overload the stack. Replace with a linear goroutine approach
+// TODO: This recursive function can overload the stack. Replace with a lazy approach
 func matchTestNodes(ts []*testNode, b []byte, rev bool) []followupMatch {
 	ret := []followupMatch{}
 	if b == nil {
