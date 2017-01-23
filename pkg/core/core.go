@@ -29,7 +29,7 @@ type Identifier interface {
 	Recorder() Recorder // return a recorder for matching
 	Name() string
 	Details() string
-	Fields() []string // first element must be the identifier name
+	Fields() []string // Fields of an Identification, first element must be "namespace"
 	Save(*persist.LoadSaver)
 	String() string                            // A string represention of the global identifier
 	Inspect(...string) string                  // String representation of format signatures within the identifier

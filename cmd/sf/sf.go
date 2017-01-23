@@ -379,8 +379,8 @@ func main() {
 	wg.Wait()
 	close(ctxts)
 	w.Tail()
-	// log time elapsed
-	lg.Elapsed()
+	// log time elapsed and chart
+	lg.Close()
 	if err != nil {
 		log.Fatal(err)
 	}
