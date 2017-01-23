@@ -24,6 +24,7 @@ import (
 	"strings"
 
 	"github.com/richardlehane/siegfried"
+	"github.com/richardlehane/siegfried/cmd/internal/chart"
 	"github.com/richardlehane/siegfried/pkg/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/loc"
@@ -274,27 +275,17 @@ func blameSig(i int) error {
 	return nil
 }
 
-func squares(num int) string {
-	s := make([]string, num)
-	for i := 0; i < num; i++ {
-		s[i] = "\xE2\x96\xA0"
-	}
-	return strings.Join(s, " ")
-}
-
 func viewChanges() error {
 	releases, err := pronom.LoadReleases(config.Local("release-notes.xml"))
 	if err != nil {
 		return err
 	}
-	years, relfrequency, newfrequency, upfrequency, sigfrequency := pronom.Changes(releases)
-	for _, k := range years {
-		fmt.Printf("%d\n", k)
-		fmt.Printf("number releases: %s (%d)\n", squares(relfrequency[k]), relfrequency[k])
-		fmt.Printf("new records:     %s (%d)\n", squares(newfrequency[k]/10), newfrequency[k])
-		fmt.Printf("updated records: %s (%d)\n", squares(upfrequency[k]/10), upfrequency[k])
-		fmt.Printf("new signatures:  %s (%d)\n\n", squares(sigfrequency[k]/10), sigfrequency[k])
-	}
+	years, fields, changes := pronom.Changes(releases)
+	fmt.Println(chart.Chart("PRONOM releases",
+		years,
+		fields,
+		map[string]bool{"number releases": true},
+		changes))
 	return nil
 }
 

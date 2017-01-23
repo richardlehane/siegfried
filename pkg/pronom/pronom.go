@@ -231,33 +231,41 @@ func LoadReleases(path string) (*mappings.Releases, error) {
 	return releases, err
 }
 
-func Changes(releases *mappings.Releases) (years []int, relfrequency, newfrequency, upfrequency, sigfrequency map[int]int) {
-	relfrequency, newfrequency, upfrequency, sigfrequency = make(map[int]int), make(map[int]int), make(map[int]int), make(map[int]int)
+func Changes(releases *mappings.Releases) ([]string, []string, map[string]map[string]int) {
+	changes := make(map[string]map[string]int)
+	fields := []string{"number releases", "new records", "updated records", "new signatures"}
 	for _, release := range releases.Releases {
 		trimdate := strings.TrimSpace(release.ReleaseDate)
-		date := trimdate[len(trimdate)-4 : len(trimdate)]
-		yr, _ := strconv.Atoi(date)
-		relfrequency[yr]++
+		yr := trimdate[len(trimdate)-4 : len(trimdate)]
+		if changes[yr] == nil {
+			changes[yr] = make(map[string]int)
+		}
+		changes[yr][fields[0]]++
 		for _, bit := range release.Outlines {
 			if !checkType(bit.Typ) {
 				continue
 			}
 			switch nameType(bit.Typ) {
 			case "new":
-				newfrequency[yr] += len(bit.Puids)
+				changes[yr][fields[1]] += len(bit.Puids)
 			case "updated":
-				upfrequency[yr] += len(bit.Puids)
+				changes[yr][fields[2]] += len(bit.Puids)
 			case "signatures":
-				sigfrequency[yr] += len(bit.Puids)
+				changes[yr][fields[3]] += len(bit.Puids)
 			}
 		}
 	}
-	years = make([]int, 0, len(relfrequency))
-	for k, _ := range relfrequency {
-		years = append(years, k)
+	yrs := make([]int, 0, len(changes))
+	for k, _ := range changes {
+		i, _ := strconv.Atoi(k)
+		yrs = append(yrs, i)
 	}
-	sort.Ints(years)
-	return
+	sort.Ints(yrs)
+	years := make([]string, len(yrs))
+	for i, v := range yrs {
+		years[i] = strconv.Itoa(v)
+	}
+	return years, fields, changes
 }
 
 func makePuids(in []mappings.Puid) []string {
