@@ -164,6 +164,7 @@ var (
 	setsHome    = setsf.String("home", config.Home(), "override the default home directory")
 	setsDroid   = setsf.String("droid", config.Droid(), "set name/path for DROID signature file")
 	setsChanges = setsf.Bool("changes", false, "create a pronom-changes.json sets file")
+	setsList    = setsf.String("list", "", "expand comma separated list of format sets")
 )
 
 func savereps() error {
@@ -275,17 +276,17 @@ func blameSig(i int) error {
 	return nil
 }
 
-func viewChanges() error {
-	releases, err := pronom.LoadReleases(config.Local("release-notes.xml"))
+func viewReleases() error {
+	xm, err := pronom.LoadReleases(config.Local("release-notes.xml"))
 	if err != nil {
 		return err
 	}
-	years, fields, changes := pronom.Changes(releases)
+	years, fields, releases := pronom.Releases(xm)
 	fmt.Println(chart.Chart("PRONOM releases",
 		years,
 		fields,
 		map[string]bool{"number releases": true},
-		changes))
+		releases))
 	return nil
 }
 
@@ -506,8 +507,8 @@ func main() {
 				err = graphPriorities(1)
 			case input == "implicit-priorities", input == "ip":
 				err = graphPriorities(2)
-			case input == "changes":
-				err = viewChanges()
+			case input == "releases":
+				err = viewReleases()
 			case filepath.Ext(input) == ".sig":
 				config.SetSignature(input)
 				err = inspectSig(-1)
@@ -527,7 +528,9 @@ func main() {
 		err = setsf.Parse(os.Args[2:])
 		if err == nil {
 			setSetsOptions()
-			if *setsChanges {
+			if *setsList != "" {
+				fmt.Println(strings.Join(sets.Expand(*setsList), "\n"))
+			} else if *setsChanges {
 				releases, err := pronom.LoadReleases(config.Local("release-notes.xml"))
 				if err == nil {
 					err = pronom.ReleaseSet("pronom-changes.json", releases)

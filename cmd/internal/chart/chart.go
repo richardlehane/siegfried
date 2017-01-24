@@ -45,7 +45,7 @@ func Chart(title string, sections, fields []string, abs map[string]bool, frequen
 	var pad int // pad to length longest field
 	for _, v := range fields {
 		if len(v) > pad {
-			pad = len(v)
+			pad = len(v) + 1
 		}
 	}
 	template := fmt.Sprintf("%%-%ds %%s (%%d)\n", pad)

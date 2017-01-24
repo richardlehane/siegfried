@@ -40,6 +40,18 @@ func TestIdentify(t *testing.T) {
 	}
 }
 
+func TestLabel(t *testing.T) {
+	s := &Siegfried{ids: []core.Identifier{testIdentifier{}}}
+	res := s.Label(testIdentification{})
+	if len(res) != 2 ||
+		res[0][0] != "namespace" ||
+		res[0][1] != "a" ||
+		res[1][0] != "id" ||
+		res[1][1] != "fmt/3" {
+		t.Errorf("bad label, got %v", res)
+	}
+}
+
 // extension matcher test stub
 
 type testEMatcher struct{}
@@ -84,7 +96,7 @@ func (t testIdentifier) Add(m core.Matcher, mt core.MatcherType) (core.Matcher, 
 func (t testIdentifier) Recorder() core.Recorder                            { return testRecorder{} }
 func (t testIdentifier) Name() string                                       { return "a" }
 func (t testIdentifier) Details() string                                    { return "b" }
-func (t testIdentifier) Fields() []string                                   { return nil }
+func (t testIdentifier) Fields() []string                                   { return []string{"namespace", "id"} }
 func (t testIdentifier) Save(l *persist.LoadSaver)                          {}
 func (t testIdentifier) String() string                                     { return "" }
 func (t testIdentifier) Inspect(s ...string) string                         { return "" }
@@ -109,5 +121,5 @@ type testIdentification struct{}
 func (t testIdentification) String() string          { return "fmt/3" }
 func (t testIdentification) Warn() string            { return "" }
 func (t testIdentification) Known() bool             { return true }
-func (t testIdentification) Values() []string        { return nil }
+func (t testIdentification) Values() []string        { return []string{"a", "fmt/3"} }
 func (t testIdentification) Archive() config.Archive { return 0 }

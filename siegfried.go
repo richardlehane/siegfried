@@ -238,7 +238,7 @@ func (s *Siegfried) Fields() [][]string {
 	return ret
 }
 
-// Buffer returns a siegreader buffer from the pool
+// Buffer gets a siegreader buffer from the pool
 func (s *Siegfried) Buffer(r io.Reader) (*siegreader.Buffer, error) {
 	buffer, err := s.buffers.Get(r)
 	if err == io.EOF {
@@ -434,6 +434,22 @@ func (s *Siegfried) Identify(r io.Reader, name, mime string) ([]core.Identificat
 	buffer, err := s.Buffer(r)
 	defer s.buffers.Put(buffer)
 	return s.IdentifyBuffer(buffer, err, name, mime)
+}
+
+// Label takes the values of a core.Identification and returns a slice that pairs these values with the
+// relevant identifier's field labels.
+func (s *Siegfried) Label(id core.Identification) [][2]string {
+	ret := make([][2]string, len(id.Values()))
+	for i, p := range s.Identifiers() {
+		if p[0] == id.Values()[0] {
+			for j, l := range s.Fields()[i] {
+				ret[j][0] = l
+				ret[j][1] = id.Values()[j]
+			}
+			return ret
+		}
+	}
+	return nil
 }
 
 // Blame checks with the byte matcher to see what identification results subscribe to a particular result or test

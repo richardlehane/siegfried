@@ -231,7 +231,7 @@ func LoadReleases(path string) (*mappings.Releases, error) {
 	return releases, err
 }
 
-func Changes(releases *mappings.Releases) ([]string, []string, map[string]map[string]int) {
+func Releases(releases *mappings.Releases) ([]string, []string, map[string]map[string]int) {
 	changes := make(map[string]map[string]int)
 	fields := []string{"number releases", "new records", "updated records", "new signatures"}
 	for _, release := range releases.Releases {

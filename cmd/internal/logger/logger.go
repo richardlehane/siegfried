@@ -130,17 +130,17 @@ func (lg *Logger) Chart() {
 		totals = append(totals, k)
 		sort.Strings(v)
 	}
-	sort.Ints(totals)
+	sort.Sort(sort.Reverse(sort.IntSlice(totals)))
 	for _, k := range totals {
 		fields = append(fields, fieldR[k]...)
 	}
-	fmt.Println(chart.Chart("Formats", sections, fields, map[string]bool{}, lg.cht))
+	fmt.Print(chart.Chart("[Chart]", sections, fields, map[string]bool{}, lg.cht))
 }
 
-// Close prints time elapsed and chart
+// Close prints and chart and time elapsed
 func (lg *Logger) Close() {
-	lg.Elapsed()
 	lg.Chart()
+	lg.Elapsed()
 }
 
 // Progress prints file name and resets.
