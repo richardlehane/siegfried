@@ -355,7 +355,7 @@ func main() {
 		log.Fatalln("[FATAL] expecting a single file or directory argument")
 	}
 
-	w.Head(config.SignatureBase(), s.C, s.Identifiers(), s.Fields(), hashT.String())
+	w.Head(config.SignatureBase(), time.Now(), s.C, config.Version(), s.Identifiers(), s.Fields(), hashT.String())
 	// support reading list files from stdin
 	if flag.Arg(0) == "-" {
 		scanner := bufio.NewScanner(os.Stdin)

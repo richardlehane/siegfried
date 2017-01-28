@@ -65,7 +65,7 @@ func TestYAMLHeader(t *testing.T) {
 
 func ExampleYAML() {
 	yml := YAML(ioutil.Discard)
-	yml.Head("", time.Time{}, [][2]string{{"pronom", ""}}, [][]string{makeFields()}, "")
+	yml.Head("", time.Time{}, time.Time{}, [3]int{}, [][2]string{{"pronom", ""}}, [][]string{makeFields()}, "")
 	yml.(*yamlWriter).w = bufio.NewWriter(os.Stdout)
 	yml.File("example.doc", 1, "2015-05-24T16:59:13+10:00", nil, testErr{}, []core.Identification{testID{}})
 	yml.Tail()
@@ -87,7 +87,7 @@ func ExampleYAML() {
 
 func ExampleJSON() {
 	js := JSON(ioutil.Discard)
-	js.Head("", time.Time{}, [][2]string{{"pronom", ""}}, [][]string{makeFields()}, "")
+	js.Head("", time.Time{}, time.Time{}, [3]int{}, [][2]string{{"pronom", ""}}, [][]string{makeFields()}, "")
 	js.(*jsonWriter).w = bufio.NewWriter(os.Stdout)
 	js.File("example.doc", 1, "2015-05-24T16:59:13+10:00", nil, testErr{}, []core.Identification{testID{}})
 	js.Tail()

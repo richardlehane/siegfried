@@ -30,8 +30,8 @@ import (
 )
 
 type Writer interface {
-	Head(path string, created time.Time, ids [][2]string, fields [][]string, hh string)            // 	path := filepath.Base(path)
-	File(name string, sz int64, mod string, checksum []byte, err error, ids []core.Identification) // if a directory give a negative sz
+	Head(path string, scanned, created time.Time, version [3]int, ids [][2]string, fields [][]string, hh string) // 	path := filepath.Base(path)
+	File(name string, sz int64, mod string, checksum []byte, err error, ids []core.Identification)               // if a directory give a negative sz
 	Tail()
 }
 
@@ -41,7 +41,7 @@ func Null() Writer {
 
 type null struct{}
 
-func (n null) Head(path string, created time.Time, ids [][2]string, fields [][]string, hh string) {
+func (n null) Head(path string, scanned, created time.Time, version [3]int, ids [][2]string, fields [][]string, hh string) {
 }
 func (n null) File(name string, sz int64, mod string, cs []byte, err error, ids []core.Identification) {
 }
@@ -57,7 +57,7 @@ func CSV(w io.Writer) Writer {
 	return &csvWriter{w: csv.NewWriter(w)}
 }
 
-func (c *csvWriter) Head(path string, created time.Time, ids [][2]string, fields [][]string, hh string) {
+func (c *csvWriter) Head(path string, scanned, created time.Time, version [3]int, ids [][2]string, fields [][]string, hh string) {
 	c.names = make([]string, len(fields))
 	l := 4
 	if hh != "" {
@@ -164,7 +164,7 @@ func header(fields []string) string {
 	return "  - " + strings.Join(headings, " : %v\n    ") + " : %v\n"
 }
 
-func (y *yamlWriter) Head(path string, created time.Time, ids [][2]string, fields [][]string, hh string) {
+func (y *yamlWriter) Head(path string, scanned, created time.Time, version [3]int, ids [][2]string, fields [][]string, hh string) {
 	y.hh = hh
 	y.hstrs = make([]string, len(fields))
 	y.vals = make([][]interface{}, len(fields))
@@ -172,11 +172,10 @@ func (y *yamlWriter) Head(path string, created time.Time, ids [][2]string, field
 		y.hstrs[i] = header(f)
 		y.vals[i] = make([]interface{}, len(f))
 	}
-	version := config.Version()
 	fmt.Fprintf(y.w,
 		"---\nsiegfried   : %d.%d.%d\nscandate    : %v\nsignature   : %s\ncreated     : %v\nidentifiers : \n",
 		version[0], version[1], version[2],
-		time.Now().Format(time.RFC3339),
+		scanned.Format(time.RFC3339),
 		y.replacer.Replace(path),
 		created.Format(time.RFC3339))
 	for _, id := range ids {
@@ -249,17 +248,16 @@ func jsonizer(fields []string) func([]string) string {
 	}
 }
 
-func (j *jsonWriter) Head(path string, created time.Time, ids [][2]string, fields [][]string, hh string) {
+func (j *jsonWriter) Head(path string, scanned, created time.Time, version [3]int, ids [][2]string, fields [][]string, hh string) {
 	j.hh = hh
 	j.hstrs = make([]func([]string) string, len(fields))
 	for i, f := range fields {
 		j.hstrs[i] = jsonizer(f)
 	}
-	version := config.Version()
 	fmt.Fprintf(j.w,
 		"{\"siegfried\":\"%d.%d.%d\",\"scandate\":\"%v\",\"signature\":\"%s\",\"created\":\"%v\",\"identifiers\":[",
 		version[0], version[1], version[2],
-		time.Now().Format(time.RFC3339),
+		scanned.Format(time.RFC3339),
 		path,
 		created.Format(time.RFC3339))
 	for i, id := range ids {
@@ -331,7 +329,7 @@ func Droid(w io.Writer) Writer {
 }
 
 // "identifier", "id", "format name", "format version", "mimetype", "basis", "warning"
-func (d *droidWriter) Head(path string, created time.Time, ids [][2]string, fields [][]string, hh string) {
+func (d *droidWriter) Head(path string, scanned, created time.Time, version [3]int, ids [][2]string, fields [][]string, hh string) {
 	if hh == "" {
 		hh = "no"
 	}

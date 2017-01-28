@@ -21,6 +21,7 @@ import (
 	"net/http"
 	"os"
 	"sync"
+	"time"
 
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/cmd/internal/writer"
@@ -185,7 +186,7 @@ func handleIdentify(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfri
 			sz = r.ContentLength
 		}
 		w.Header().Set("Content-Type", mime)
-		wr.Head(config.SignatureBase(), sf.C, sf.Identifiers(), sf.Fields(), ht.String())
+		wr.Head(config.SignatureBase(), time.Now(), sf.C, config.Version(), sf.Identifiers(), sf.Fields(), ht.String())
 		wg.Add(1)
 		ctx := gf(h.Filename, "", mod, sz)
 		ctxts <- ctx
@@ -203,7 +204,7 @@ func handleIdentify(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfri
 			return
 		}
 		w.Header().Set("Content-Type", mime)
-		wr.Head(config.SignatureBase(), sf.C, sf.Identifiers(), sf.Fields(), ht.String())
+		wr.Head(config.SignatureBase(), time.Now(), sf.C, config.Version(), sf.Identifiers(), sf.Fields(), ht.String())
 		err = identify(ctxts, path, "", nr, d, gf)
 		wg.Wait()
 		wr.Tail()
