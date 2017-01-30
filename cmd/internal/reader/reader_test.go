@@ -4,26 +4,22 @@ import (
 	"testing"
 )
 
-func TestCSV(t *testing.T) {
+func TestCSVvsYAML(t *testing.T) {
 	sfc, err := Open("examples/multi/multi.csv")
 	if err != nil {
 		t.Fatal(err)
 	}
-	for f, e := sfc.Next(); e == nil; f, e = sfc.Next() {
-		if f.Path != "Jerry" {
-			t.Errorf("Expecting Jerry got %s", f.Path)
-		}
-	}
-}
-
-func TestYAML(t *testing.T) {
 	sfy, err := Open("examples/multi/multi.yaml")
 	if err != nil {
 		t.Fatal(err)
 	}
-	for f, e := sfy.Next(); e == nil; f, e = sfy.Next() {
-		if f.Path != "Jerry" {
-			t.Errorf("Expecting Jerry got %s", f.Path)
+	for f, e := sfc.Next(); e == nil; f, e = sfc.Next() {
+		y, e1 := sfy.Next()
+		if e1 != nil {
+			t.Errorf("got a YAML error for a valid CSV %s; %v", f.Path, e1)
+		}
+		if len(f.IDs) != len(y.IDs) {
+			t.Errorf("YAML and CSV IDs don't match for %s; got %d and %d", f.Path, len(f.IDs), len(y.IDs))
 		}
 	}
 }

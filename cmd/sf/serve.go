@@ -24,6 +24,7 @@ import (
 	"time"
 
 	"github.com/richardlehane/siegfried"
+	"github.com/richardlehane/siegfried/cmd/internal/checksum"
 	"github.com/richardlehane/siegfried/cmd/internal/writer"
 	"github.com/richardlehane/siegfried/pkg/config"
 )
@@ -48,9 +49,9 @@ func decodePath(s, b64 string) (string, error) {
 	return s[10:], nil
 }
 
-func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried, wg *sync.WaitGroup) (error, string, writer.Writer, bool, bool, hashTyp, *siegfried.Siegfried, getFn) {
+func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried, wg *sync.WaitGroup) (error, string, writer.Writer, bool, bool, checksum.HashTyp, *siegfried.Siegfried, getFn) {
 	// json, csv, droid or yaml
-	paramsErr := func(field, expect string) (error, string, writer.Writer, bool, bool, hashTyp, *siegfried.Siegfried, getFn) {
+	paramsErr := func(field, expect string) (error, string, writer.Writer, bool, bool, checksum.HashTyp, *siegfried.Siegfried, getFn) {
 		return fmt.Errorf("bad request; in param %s got %s; valid values %s", field, r.FormValue(field), expect), "", nil, false, false, -1, nil, nil
 	}
 	var (
@@ -137,7 +138,7 @@ func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried
 	if v := r.FormValue("hash"); v != "" {
 		h = v
 	}
-	ht := getHash(h)
+	ht := checksum.GetHash(h)
 	// sig
 	sf := s
 	if v := r.FormValue("sig"); v != "" {
@@ -152,7 +153,7 @@ func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried
 	gf := func(path, mime, mod string, sz int64) *context {
 		c := ctxPool.Get().(*context)
 		c.path, c.mime, c.mod, c.sz = path, mime, mod, sz
-		c.s, c.wg, c.w, c.d, c.z, c.h = sf, wg, wr, d, z, makeHash(ht)
+		c.s, c.wg, c.w, c.d, c.z, c.h = sf, wg, wr, d, z, checksum.MakeHash(ht)
 		return c
 	}
 	return nil, mime, wr, norec, d, ht, sf, gf

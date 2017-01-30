@@ -18,8 +18,10 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 
+	"github.com/richardlehane/siegfried/cmd/internal/checksum"
 	"github.com/richardlehane/siegfried/pkg/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 )
@@ -50,6 +52,45 @@ type File struct {
 	IDs  []core.Identification
 }
 
+func toVersion(str string) ([3]int, error) {
+	var ret [3]int
+	if str == "" {
+		return ret, nil
+	}
+	nums := strings.Split(str, ".")
+	if len(nums) != len(ret) {
+		return ret, fmt.Errorf("bad version; got %d numbers", len(nums))
+	}
+	for i, v := range nums {
+		var err error
+		ret[i], err = strconv.Atoi(v)
+		if err != nil {
+			return ret, fmt.Errorf("bad version; got %v", err)
+		}
+	}
+	return ret, nil
+}
+
+func newHeadMap(m map[string]string) (Head, error) {
+	return newHead(m["results"], m["signature"], m["scandate"], m["created"], m["siegfried"])
+}
+
+func newHead(resultsPath, sigPath, scanned, created, version string) (Head, error) {
+	var err error
+	h := Head{
+		ResultsPath:   resultsPath,
+		SignaturePath: sigPath,
+	}
+	h.Version, err = toVersion(version)
+	if scanned != "" {
+		h.Scanned, err = time.Parse(time.RFC3339, scanned)
+	}
+	if created != "" {
+		h.Created, err = time.Parse(time.RFC3339, created)
+	}
+	return h, err
+}
+
 func newFile(path, sz, mod, hash, e string) (File, error) {
 	file := File{
 		Path: path,
@@ -68,6 +109,67 @@ func newFile(path, sz, mod, hash, e string) (File, error) {
 	}
 	file.Size = int64(size)
 	return file, nil
+}
+
+func getFile(rec record) (File, error) {
+	var hh string
+	for k := range rec.attributes {
+		if h := checksum.GetHash(k); h >= 0 {
+			hh = k
+			break
+		}
+	}
+	f, err := newFile(rec.attributes["filename"],
+		rec.attributes["filesize"],
+		rec.attributes["modified"],
+		rec.attributes[hh],
+		rec.attributes["errors"],
+	)
+	if err != nil {
+		return f, err
+	}
+	var sidx, eidx int
+	for i, v := range rec.listFields {
+		if v == "ns" {
+			eidx = i
+			if eidx > sidx {
+				f.IDs = append(f.IDs, newDefaultID(rec.listFields[sidx:eidx], rec.listValues[sidx:eidx]))
+				sidx = eidx
+			}
+		}
+	}
+	f.IDs = append(f.IDs, newDefaultID(rec.listFields[sidx:len(rec.listFields)], rec.listValues[sidx:len(rec.listFields)]))
+	return f, nil
+}
+
+func getHash(m map[string]string) string {
+	for k := range m {
+		if h := checksum.GetHash(k); h >= 0 {
+			return h.String()
+		}
+	}
+	return ""
+}
+
+func getFields(keys, vals []string) [][]string {
+	ret := make([][]string, 0, 1)
+	var ns string
+	var consume bool
+	for i, v := range keys {
+		if v == "ns" {
+			if ns == vals[i] {
+				consume = false
+			} else {
+				ns = vals[i]
+				consume = true
+				ret = append(ret, []string{})
+			}
+		}
+		if consume {
+			ret[len(ret)-1] = append(ret[len(ret)-1], v)
+		}
+	}
+	return ret
 }
 
 func Open(path string) (Reader, error) {

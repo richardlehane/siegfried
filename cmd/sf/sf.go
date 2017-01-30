@@ -26,6 +26,7 @@ import (
 	"time"
 
 	"github.com/richardlehane/siegfried"
+	"github.com/richardlehane/siegfried/cmd/internal/checksum"
 	"github.com/richardlehane/siegfried/cmd/internal/logger"
 	"github.com/richardlehane/siegfried/cmd/internal/writer"
 	"github.com/richardlehane/siegfried/internal/siegreader"
@@ -53,7 +54,7 @@ var (
 	serve     = flag.String("serve", "", "start siegfried server e.g. -serve localhost:5138")
 	multi     = flag.Int("multi", 1, "set number of parallel file ID processes")
 	archive   = flag.Bool("z", false, "scan archive formats (zip, tar, gzip, warc, arc)")
-	hashf     = flag.String("hash", "", "calculate file checksum with hash algorithm; options "+hashChoices)
+	hashf     = flag.String("hash", "", "calculate file checksum with hash algorithm; options "+checksum.HashChoices)
 	throttlef = flag.Duration("throttle", 0, "set a time to wait between scanning files e.g. 50ms")
 )
 
@@ -71,7 +72,7 @@ func (we WalkError) Error() string {
 	return fmt.Sprintf("walking %s; got %v", we.path, we.err)
 }
 
-func setCtxPool(s *siegfried.Siegfried, wg *sync.WaitGroup, w writer.Writer, d, z bool, h hashTyp) {
+func setCtxPool(s *siegfried.Siegfried, wg *sync.WaitGroup, w writer.Writer, d, z bool, h checksum.HashTyp) {
 	ctxPool = &sync.Pool{
 		New: func() interface{} {
 			return &context{
@@ -80,7 +81,7 @@ func setCtxPool(s *siegfried.Siegfried, wg *sync.WaitGroup, w writer.Writer, d, 
 				w:   w,
 				d:   d,
 				z:   z,
-				h:   makeHash(h),
+				h:   checksum.MakeHash(h),
 				res: make(chan results, 1),
 			}
 		},
@@ -258,9 +259,9 @@ func main() {
 		return
 	}
 	// handle -hash error
-	hashT := getHash(*hashf)
+	hashT := checksum.GetHash(*hashf)
 	if *hashf != "" && hashT < 0 {
-		log.Fatalf("[FATAL] invalid hash type; choose from %s", hashChoices)
+		log.Fatalf("[FATAL] invalid hash type; choose from %s", checksum.HashChoices)
 	}
 	// load and handle signature errors
 	s, err := siegfried.Load(config.Signature())

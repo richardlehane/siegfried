@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main
+package checksum
 
 import (
 	"crypto/md5"
@@ -23,19 +23,19 @@ import (
 	"hash/crc32"
 )
 
-const hashChoices = "'md5', 'sha1', 'sha256', 'sha512', 'crc'"
+const HashChoices = "'md5', 'sha1', 'sha256', 'sha512', 'crc'"
 
-type hashTyp int
+type HashTyp int
 
 const (
-	md5Hash hashTyp = iota
+	md5Hash HashTyp = iota
 	sha1Hash
 	sha256Hash
 	sha512Hash
 	crcHash
 )
 
-func getHash(typ string) hashTyp {
+func GetHash(typ string) HashTyp {
 	switch typ {
 	case "", "false":
 	case "md5", "MD5":
@@ -52,7 +52,7 @@ func getHash(typ string) hashTyp {
 	return -1
 }
 
-func makeHash(typ hashTyp) hash.Hash {
+func MakeHash(typ HashTyp) hash.Hash {
 	switch typ {
 	case md5Hash:
 		return md5.New()
@@ -68,7 +68,7 @@ func makeHash(typ hashTyp) hash.Hash {
 	return nil
 }
 
-func (typ hashTyp) String() string {
+func (typ HashTyp) String() string {
 	switch typ {
 	case md5Hash:
 		return "md5"
