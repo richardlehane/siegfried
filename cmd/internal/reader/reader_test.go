@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestCSVvsYAML(t *testing.T) {
+func TestSF(t *testing.T) {
 	sfc, err := Open("examples/multi/multi.csv")
 	if err != nil {
 		t.Fatal(err)
@@ -13,13 +13,21 @@ func TestCSVvsYAML(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	sfj, err := Open("examples/multi/multi.json")
+	if err != nil {
+		t.Fatal(err)
+	}
 	for f, e := sfc.Next(); e == nil; f, e = sfc.Next() {
 		y, e1 := sfy.Next()
 		if e1 != nil {
 			t.Errorf("got a YAML error for a valid CSV %s; %v", f.Path, e1)
 		}
-		if len(f.IDs) != len(y.IDs) {
-			t.Errorf("YAML and CSV IDs don't match for %s; got %d and %d", f.Path, len(f.IDs), len(y.IDs))
+		j, e2 := sfj.Next()
+		if e2 != nil {
+			t.Errorf("got a JSON error for a valid CSV %s; %v", f.Path, e2)
+		}
+		if len(f.IDs) != len(y.IDs) || len(f.IDs) != len(j.IDs) {
+			t.Errorf("JSON, YAML and CSV IDs don't match for %s; got %d, %d and %d", f.Path, len(j.IDs), len(y.IDs), len(f.IDs))
 		}
 	}
 }

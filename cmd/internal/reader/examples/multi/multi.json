@@ -1,1 +1,3598 @@
-{"siegfried":"1.6.7","scandate":"2017-01-27T16:56:02+11:00","signature":"default.sig","created":"2017-01-27T16:52:41+11:00","identifiers":[{"name":"pronom","details":"DROID_SignatureFile_V88.xml; container-signature-20160927.xml; multi set to exhaustive (4)"},{"name":"loc","details":"fddXML.zip (2016-03-10, DROID_SignatureFile_V88.xml, container-signature-20160927.xml)"}],"files":[{"filename":"hpap/hpapa1_oc.doc","filesize": 154624,"modified":"2008-05-26T08:16:32+10:00","errors": "","matches": [{"ns":"pronom","id":"fmt/111","format":"OLE2 Compound Document Format","version":"","mime":"","basis":"byte match at 0, 30","warning":""},{"ns":"pronom","id":"fmt/609","format":"Microsoft Word (Generic)","version":"6.0-2003","mime":"application/msword","basis":"extension match doc; container name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/40","format":"Microsoft Word Document","version":"97-2003","mime":"application/msword","basis":"extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/39","format":"Microsoft Word Document","version":"6.0/95","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/273","format":"Microsoft Word for MS-DOS Document","version":"3.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/274","format":"Microsoft Word for MS-DOS Document","version":"4.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/275","format":"Microsoft Word for MS-DOS Document","version":"5.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/276","format":"Microsoft Word for MS-DOS Document","version":"5.5","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/329","format":"Interleaf Document","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/131","format":"Stationery for Mac OS X","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/44","format":"WordPerfect for MS-DOS/Windows Document","version":"6.0","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/37","format":"Microsoft Word for Windows Document","version":"1.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/38","format":"Microsoft Word for Windows Document","version":"2.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/473","format":"Microsoft Office Owner File","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/43","format":"Wordperfect Secondary File","version":"5.1/5.2","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/754","format":"Microsoft Word Document (Password Protected)","version":"97-2003","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/892","format":"Compound WordPerfect for Windows Document","version":"6 onwards","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/42","format":"Wordperfect Secondary File","version":"5.0","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"loc","id":"fdd000132","format":"Macromedia Flash FLA Project File Format","full":"Macromedia Flash FLA Project File Format","mime":"","basis":"byte match at 0, 24","warning":"extension mismatch"}]},{"filename":"hpap/hpapa2_oc.doc","filesize": 130560,"modified":"2008-05-26T08:16:32+10:00","errors": "","matches": [{"ns":"pronom","id":"fmt/111","format":"OLE2 Compound Document Format","version":"","mime":"","basis":"byte match at 0, 30","warning":""},{"ns":"pronom","id":"fmt/609","format":"Microsoft Word (Generic)","version":"6.0-2003","mime":"application/msword","basis":"extension match doc; container name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/40","format":"Microsoft Word Document","version":"97-2003","mime":"application/msword","basis":"extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/39","format":"Microsoft Word Document","version":"6.0/95","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/273","format":"Microsoft Word for MS-DOS Document","version":"3.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/274","format":"Microsoft Word for MS-DOS Document","version":"4.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/275","format":"Microsoft Word for MS-DOS Document","version":"5.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/276","format":"Microsoft Word for MS-DOS Document","version":"5.5","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/329","format":"Interleaf Document","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/131","format":"Stationery for Mac OS X","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/44","format":"WordPerfect for MS-DOS/Windows Document","version":"6.0","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/37","format":"Microsoft Word for Windows Document","version":"1.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/38","format":"Microsoft Word for Windows Document","version":"2.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/473","format":"Microsoft Office Owner File","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/43","format":"Wordperfect Secondary File","version":"5.1/5.2","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/754","format":"Microsoft Word Document (Password Protected)","version":"97-2003","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/892","format":"Compound WordPerfect for Windows Document","version":"6 onwards","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/42","format":"Wordperfect Secondary File","version":"5.0","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"loc","id":"fdd000132","format":"Macromedia Flash FLA Project File Format","full":"Macromedia Flash FLA Project File Format","mime":"","basis":"byte match at 0, 24","warning":"extension mismatch"}]},{"filename":"hpap/hpapa3_oc.doc","filesize": 176640,"modified":"2008-05-26T08:16:32+10:00","errors": "","matches": [{"ns":"pronom","id":"fmt/111","format":"OLE2 Compound Document Format","version":"","mime":"","basis":"byte match at 0, 30","warning":""},{"ns":"pronom","id":"fmt/609","format":"Microsoft Word (Generic)","version":"6.0-2003","mime":"application/msword","basis":"extension match doc; container name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/40","format":"Microsoft Word Document","version":"97-2003","mime":"application/msword","basis":"extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/39","format":"Microsoft Word Document","version":"6.0/95","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/273","format":"Microsoft Word for MS-DOS Document","version":"3.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/274","format":"Microsoft Word for MS-DOS Document","version":"4.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/275","format":"Microsoft Word for MS-DOS Document","version":"5.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/276","format":"Microsoft Word for MS-DOS Document","version":"5.5","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/329","format":"Interleaf Document","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/131","format":"Stationery for Mac OS X","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/44","format":"WordPerfect for MS-DOS/Windows Document","version":"6.0","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/37","format":"Microsoft Word for Windows Document","version":"1.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/38","format":"Microsoft Word for Windows Document","version":"2.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/473","format":"Microsoft Office Owner File","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/43","format":"Wordperfect Secondary File","version":"5.1/5.2","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/754","format":"Microsoft Word Document (Password Protected)","version":"97-2003","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/892","format":"Compound WordPerfect for Windows Document","version":"6 onwards","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/42","format":"Wordperfect Secondary File","version":"5.0","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"loc","id":"fdd000132","format":"Macromedia Flash FLA Project File Format","full":"Macromedia Flash FLA Project File Format","mime":"","basis":"byte match at 0, 24","warning":"extension mismatch"}]},{"filename":"hpap/hpapa4_oc.doc","filesize": 237568,"modified":"2008-05-26T08:16:32+10:00","errors": "","matches": [{"ns":"pronom","id":"fmt/111","format":"OLE2 Compound Document Format","version":"","mime":"","basis":"byte match at 0, 30","warning":""},{"ns":"pronom","id":"fmt/609","format":"Microsoft Word (Generic)","version":"6.0-2003","mime":"application/msword","basis":"extension match doc; container name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/40","format":"Microsoft Word Document","version":"97-2003","mime":"application/msword","basis":"extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/39","format":"Microsoft Word Document","version":"6.0/95","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/273","format":"Microsoft Word for MS-DOS Document","version":"3.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/274","format":"Microsoft Word for MS-DOS Document","version":"4.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/275","format":"Microsoft Word for MS-DOS Document","version":"5.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/276","format":"Microsoft Word for MS-DOS Document","version":"5.5","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/329","format":"Interleaf Document","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/131","format":"Stationery for Mac OS X","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/44","format":"WordPerfect for MS-DOS/Windows Document","version":"6.0","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/37","format":"Microsoft Word for Windows Document","version":"1.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/38","format":"Microsoft Word for Windows Document","version":"2.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/473","format":"Microsoft Office Owner File","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/43","format":"Wordperfect Secondary File","version":"5.1/5.2","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/754","format":"Microsoft Word Document (Password Protected)","version":"97-2003","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/892","format":"Compound WordPerfect for Windows Document","version":"6 onwards","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/42","format":"Wordperfect Secondary File","version":"5.0","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"loc","id":"fdd000132","format":"Macromedia Flash FLA Project File Format","full":"Macromedia Flash FLA Project File Format","mime":"","basis":"byte match at 0, 24","warning":"extension mismatch"}]},{"filename":"hpap/hpapa5-2_oc.doc","filesize": 91136,"modified":"2008-05-26T08:16:32+10:00","errors": "","matches": [{"ns":"pronom","id":"fmt/111","format":"OLE2 Compound Document Format","version":"","mime":"","basis":"byte match at 0, 30","warning":""},{"ns":"pronom","id":"fmt/609","format":"Microsoft Word (Generic)","version":"6.0-2003","mime":"application/msword","basis":"extension match doc; container name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/40","format":"Microsoft Word Document","version":"97-2003","mime":"application/msword","basis":"extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/39","format":"Microsoft Word Document","version":"6.0/95","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/273","format":"Microsoft Word for MS-DOS Document","version":"3.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/274","format":"Microsoft Word for MS-DOS Document","version":"4.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/275","format":"Microsoft Word for MS-DOS Document","version":"5.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/276","format":"Microsoft Word for MS-DOS Document","version":"5.5","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/329","format":"Interleaf Document","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/131","format":"Stationery for Mac OS X","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/44","format":"WordPerfect for MS-DOS/Windows Document","version":"6.0","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/37","format":"Microsoft Word for Windows Document","version":"1.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/38","format":"Microsoft Word for Windows Document","version":"2.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/473","format":"Microsoft Office Owner File","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/43","format":"Wordperfect Secondary File","version":"5.1/5.2","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/754","format":"Microsoft Word Document (Password Protected)","version":"97-2003","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/892","format":"Compound WordPerfect for Windows Document","version":"6 onwards","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/42","format":"Wordperfect Secondary File","version":"5.0","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"loc","id":"fdd000132","format":"Macromedia Flash FLA Project File Format","full":"Macromedia Flash FLA Project File Format","mime":"","basis":"byte match at 0, 24","warning":"extension mismatch"}]},{"filename":"hpap/hpapa5_oc.doc","filesize": 116224,"modified":"2008-05-26T08:16:32+10:00","errors": "","matches": [{"ns":"pronom","id":"fmt/111","format":"OLE2 Compound Document Format","version":"","mime":"","basis":"byte match at 0, 30","warning":""},{"ns":"pronom","id":"fmt/609","format":"Microsoft Word (Generic)","version":"6.0-2003","mime":"application/msword","basis":"extension match doc; container name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/40","format":"Microsoft Word Document","version":"97-2003","mime":"application/msword","basis":"extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/39","format":"Microsoft Word Document","version":"6.0/95","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/273","format":"Microsoft Word for MS-DOS Document","version":"3.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/274","format":"Microsoft Word for MS-DOS Document","version":"4.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/275","format":"Microsoft Word for MS-DOS Document","version":"5.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/276","format":"Microsoft Word for MS-DOS Document","version":"5.5","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/329","format":"Interleaf Document","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/131","format":"Stationery for Mac OS X","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/44","format":"WordPerfect for MS-DOS/Windows Document","version":"6.0","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/37","format":"Microsoft Word for Windows Document","version":"1.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/38","format":"Microsoft Word for Windows Document","version":"2.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/473","format":"Microsoft Office Owner File","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/43","format":"Wordperfect Secondary File","version":"5.1/5.2","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/754","format":"Microsoft Word Document (Password Protected)","version":"97-2003","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/892","format":"Compound WordPerfect for Windows Document","version":"6 onwards","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/42","format":"Wordperfect Secondary File","version":"5.0","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"loc","id":"fdd000132","format":"Macromedia Flash FLA Project File Format","full":"Macromedia Flash FLA Project File Format","mime":"","basis":"byte match at 0, 24","warning":"extension mismatch"}]},{"filename":"hpap/hpapa6_oc.doc","filesize": 126976,"modified":"2008-05-26T08:16:32+10:00","errors": "","matches": [{"ns":"pronom","id":"fmt/111","format":"OLE2 Compound Document Format","version":"","mime":"","basis":"byte match at 0, 30","warning":""},{"ns":"pronom","id":"fmt/609","format":"Microsoft Word (Generic)","version":"6.0-2003","mime":"application/msword","basis":"extension match doc; container name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/40","format":"Microsoft Word Document","version":"97-2003","mime":"application/msword","basis":"extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/39","format":"Microsoft Word Document","version":"6.0/95","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/273","format":"Microsoft Word for MS-DOS Document","version":"3.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/274","format":"Microsoft Word for MS-DOS Document","version":"4.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/275","format":"Microsoft Word for MS-DOS Document","version":"5.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/276","format":"Microsoft Word for MS-DOS Document","version":"5.5","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/329","format":"Interleaf Document","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/131","format":"Stationery for Mac OS X","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/44","format":"WordPerfect for MS-DOS/Windows Document","version":"6.0","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/37","format":"Microsoft Word for Windows Document","version":"1.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/38","format":"Microsoft Word for Windows Document","version":"2.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/473","format":"Microsoft Office Owner File","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/43","format":"Wordperfect Secondary File","version":"5.1/5.2","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/754","format":"Microsoft Word Document (Password Protected)","version":"97-2003","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/892","format":"Compound WordPerfect for Windows Document","version":"6 onwards","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/42","format":"Wordperfect Secondary File","version":"5.0","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"loc","id":"fdd000132","format":"Macromedia Flash FLA Project File Format","full":"Macromedia Flash FLA Project File Format","mime":"","basis":"byte match at 0, 24","warning":"extension mismatch"}]},{"filename":"hpap/hpapb1_fc.doc","filesize": 130048,"modified":"2008-05-26T08:16:32+10:00","errors": "","matches": [{"ns":"pronom","id":"fmt/111","format":"OLE2 Compound Document Format","version":"","mime":"","basis":"byte match at 0, 30","warning":""},{"ns":"pronom","id":"fmt/609","format":"Microsoft Word (Generic)","version":"6.0-2003","mime":"application/msword","basis":"extension match doc; container name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/40","format":"Microsoft Word Document","version":"97-2003","mime":"application/msword","basis":"extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/39","format":"Microsoft Word Document","version":"6.0/95","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/273","format":"Microsoft Word for MS-DOS Document","version":"3.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/274","format":"Microsoft Word for MS-DOS Document","version":"4.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/275","format":"Microsoft Word for MS-DOS Document","version":"5.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/276","format":"Microsoft Word for MS-DOS Document","version":"5.5","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/329","format":"Interleaf Document","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/131","format":"Stationery for Mac OS X","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/44","format":"WordPerfect for MS-DOS/Windows Document","version":"6.0","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/37","format":"Microsoft Word for Windows Document","version":"1.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/38","format":"Microsoft Word for Windows Document","version":"2.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/473","format":"Microsoft Office Owner File","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/43","format":"Wordperfect Secondary File","version":"5.1/5.2","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/754","format":"Microsoft Word Document (Password Protected)","version":"97-2003","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/892","format":"Compound WordPerfect for Windows Document","version":"6 onwards","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/42","format":"Wordperfect Secondary File","version":"5.0","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"loc","id":"fdd000132","format":"Macromedia Flash FLA Project File Format","full":"Macromedia Flash FLA Project File Format","mime":"","basis":"byte match at 0, 24","warning":"extension mismatch"}]},{"filename":"hpap/hpapb2_fc.doc","filesize": 76800,"modified":"2008-05-26T08:16:32+10:00","errors": "","matches": [{"ns":"pronom","id":"fmt/111","format":"OLE2 Compound Document Format","version":"","mime":"","basis":"byte match at 0, 30","warning":""},{"ns":"pronom","id":"fmt/609","format":"Microsoft Word (Generic)","version":"6.0-2003","mime":"application/msword","basis":"extension match doc; container name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/40","format":"Microsoft Word Document","version":"97-2003","mime":"application/msword","basis":"extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/39","format":"Microsoft Word Document","version":"6.0/95","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/273","format":"Microsoft Word for MS-DOS Document","version":"3.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/274","format":"Microsoft Word for MS-DOS Document","version":"4.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/275","format":"Microsoft Word for MS-DOS Document","version":"5.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/276","format":"Microsoft Word for MS-DOS Document","version":"5.5","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/329","format":"Interleaf Document","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/131","format":"Stationery for Mac OS X","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/44","format":"WordPerfect for MS-DOS/Windows Document","version":"6.0","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/37","format":"Microsoft Word for Windows Document","version":"1.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/38","format":"Microsoft Word for Windows Document","version":"2.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/473","format":"Microsoft Office Owner File","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/43","format":"Wordperfect Secondary File","version":"5.1/5.2","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/754","format":"Microsoft Word Document (Password Protected)","version":"97-2003","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/892","format":"Compound WordPerfect for Windows Document","version":"6 onwards","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/42","format":"Wordperfect Secondary File","version":"5.0","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"loc","id":"fdd000132","format":"Macromedia Flash FLA Project File Format","full":"Macromedia Flash FLA Project File Format","mime":"","basis":"byte match at 0, 24","warning":"extension mismatch"}]},{"filename":"hpap/hpapc1_gc.doc","filesize": 88064,"modified":"2008-05-26T08:16:32+10:00","errors": "","matches": [{"ns":"pronom","id":"fmt/111","format":"OLE2 Compound Document Format","version":"","mime":"","basis":"byte match at 0, 30","warning":""},{"ns":"pronom","id":"fmt/609","format":"Microsoft Word (Generic)","version":"6.0-2003","mime":"application/msword","basis":"extension match doc; container name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/40","format":"Microsoft Word Document","version":"97-2003","mime":"application/msword","basis":"extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/39","format":"Microsoft Word Document","version":"6.0/95","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/273","format":"Microsoft Word for MS-DOS Document","version":"3.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/274","format":"Microsoft Word for MS-DOS Document","version":"4.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/275","format":"Microsoft Word for MS-DOS Document","version":"5.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/276","format":"Microsoft Word for MS-DOS Document","version":"5.5","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/329","format":"Interleaf Document","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/131","format":"Stationery for Mac OS X","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/44","format":"WordPerfect for MS-DOS/Windows Document","version":"6.0","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/37","format":"Microsoft Word for Windows Document","version":"1.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/38","format":"Microsoft Word for Windows Document","version":"2.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/473","format":"Microsoft Office Owner File","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/43","format":"Wordperfect Secondary File","version":"5.1/5.2","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/754","format":"Microsoft Word Document (Password Protected)","version":"97-2003","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/892","format":"Compound WordPerfect for Windows Document","version":"6 onwards","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/42","format":"Wordperfect Secondary File","version":"5.0","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"loc","id":"fdd000132","format":"Macromedia Flash FLA Project File Format","full":"Macromedia Flash FLA Project File Format","mime":"","basis":"byte match at 0, 24","warning":"extension mismatch"}]},{"filename":"hpap/hpapc2_gc.doc","filesize": 77824,"modified":"2008-05-26T08:16:32+10:00","errors": "","matches": [{"ns":"pronom","id":"fmt/111","format":"OLE2 Compound Document Format","version":"","mime":"","basis":"byte match at 0, 30","warning":""},{"ns":"pronom","id":"fmt/609","format":"Microsoft Word (Generic)","version":"6.0-2003","mime":"application/msword","basis":"extension match doc; container name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/40","format":"Microsoft Word Document","version":"97-2003","mime":"application/msword","basis":"extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/39","format":"Microsoft Word Document","version":"6.0/95","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/273","format":"Microsoft Word for MS-DOS Document","version":"3.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/274","format":"Microsoft Word for MS-DOS Document","version":"4.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/275","format":"Microsoft Word for MS-DOS Document","version":"5.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/276","format":"Microsoft Word for MS-DOS Document","version":"5.5","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/329","format":"Interleaf Document","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/131","format":"Stationery for Mac OS X","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/44","format":"WordPerfect for MS-DOS/Windows Document","version":"6.0","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/37","format":"Microsoft Word for Windows Document","version":"1.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/38","format":"Microsoft Word for Windows Document","version":"2.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/473","format":"Microsoft Office Owner File","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/43","format":"Wordperfect Secondary File","version":"5.1/5.2","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/754","format":"Microsoft Word Document (Password Protected)","version":"97-2003","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/892","format":"Compound WordPerfect for Windows Document","version":"6 onwards","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/42","format":"Wordperfect Secondary File","version":"5.0","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"loc","id":"fdd000132","format":"Macromedia Flash FLA Project File Format","full":"Macromedia Flash FLA Project File Format","mime":"","basis":"byte match at 0, 24","warning":"extension mismatch"}]},{"filename":"hpap/hpapc3_gc.doc","filesize": 107008,"modified":"2008-05-26T08:16:32+10:00","errors": "","matches": [{"ns":"pronom","id":"fmt/111","format":"OLE2 Compound Document Format","version":"","mime":"","basis":"byte match at 0, 30","warning":""},{"ns":"pronom","id":"fmt/609","format":"Microsoft Word (Generic)","version":"6.0-2003","mime":"application/msword","basis":"extension match doc; container name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/40","format":"Microsoft Word Document","version":"97-2003","mime":"application/msword","basis":"extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/39","format":"Microsoft Word Document","version":"6.0/95","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/273","format":"Microsoft Word for MS-DOS Document","version":"3.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/274","format":"Microsoft Word for MS-DOS Document","version":"4.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/275","format":"Microsoft Word for MS-DOS Document","version":"5.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/276","format":"Microsoft Word for MS-DOS Document","version":"5.5","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/329","format":"Interleaf Document","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/131","format":"Stationery for Mac OS X","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/44","format":"WordPerfect for MS-DOS/Windows Document","version":"6.0","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/37","format":"Microsoft Word for Windows Document","version":"1.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/38","format":"Microsoft Word for Windows Document","version":"2.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/473","format":"Microsoft Office Owner File","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/43","format":"Wordperfect Secondary File","version":"5.1/5.2","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/754","format":"Microsoft Word Document (Password Protected)","version":"97-2003","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/892","format":"Compound WordPerfect for Windows Document","version":"6 onwards","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/42","format":"Wordperfect Secondary File","version":"5.0","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"loc","id":"fdd000132","format":"Macromedia Flash FLA Project File Format","full":"Macromedia Flash FLA Project File Format","mime":"","basis":"byte match at 0, 24","warning":"extension mismatch"}]},{"filename":"hpap/hpapc4_gc.doc","filesize": 68608,"modified":"2008-05-26T08:16:32+10:00","errors": "","matches": [{"ns":"pronom","id":"fmt/111","format":"OLE2 Compound Document Format","version":"","mime":"","basis":"byte match at 0, 30","warning":""},{"ns":"pronom","id":"fmt/609","format":"Microsoft Word (Generic)","version":"6.0-2003","mime":"application/msword","basis":"extension match doc; container name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/40","format":"Microsoft Word Document","version":"97-2003","mime":"application/msword","basis":"extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/39","format":"Microsoft Word Document","version":"6.0/95","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/273","format":"Microsoft Word for MS-DOS Document","version":"3.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/274","format":"Microsoft Word for MS-DOS Document","version":"4.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/275","format":"Microsoft Word for MS-DOS Document","version":"5.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/276","format":"Microsoft Word for MS-DOS Document","version":"5.5","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/329","format":"Interleaf Document","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/131","format":"Stationery for Mac OS X","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/44","format":"WordPerfect for MS-DOS/Windows Document","version":"6.0","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/37","format":"Microsoft Word for Windows Document","version":"1.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/38","format":"Microsoft Word for Windows Document","version":"2.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/473","format":"Microsoft Office Owner File","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/43","format":"Wordperfect Secondary File","version":"5.1/5.2","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/754","format":"Microsoft Word Document (Password Protected)","version":"97-2003","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/892","format":"Compound WordPerfect for Windows Document","version":"6 onwards","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/42","format":"Wordperfect Secondary File","version":"5.0","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"loc","id":"fdd000132","format":"Macromedia Flash FLA Project File Format","full":"Macromedia Flash FLA Project File Format","mime":"","basis":"byte match at 0, 24","warning":"extension mismatch"}]},{"filename":"hpap/hpapd1&2.doc","filesize": 26624,"modified":"2008-05-26T08:16:32+10:00","errors": "","matches": [{"ns":"pronom","id":"fmt/111","format":"OLE2 Compound Document Format","version":"","mime":"","basis":"byte match at 0, 30","warning":""},{"ns":"pronom","id":"fmt/609","format":"Microsoft Word (Generic)","version":"6.0-2003","mime":"application/msword","basis":"extension match doc; container name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/40","format":"Microsoft Word Document","version":"97-2003","mime":"application/msword","basis":"extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/39","format":"Microsoft Word Document","version":"6.0/95","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/273","format":"Microsoft Word for MS-DOS Document","version":"3.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/274","format":"Microsoft Word for MS-DOS Document","version":"4.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/275","format":"Microsoft Word for MS-DOS Document","version":"5.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/276","format":"Microsoft Word for MS-DOS Document","version":"5.5","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/329","format":"Interleaf Document","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/131","format":"Stationery for Mac OS X","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/44","format":"WordPerfect for MS-DOS/Windows Document","version":"6.0","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/37","format":"Microsoft Word for Windows Document","version":"1.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/38","format":"Microsoft Word for Windows Document","version":"2.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/473","format":"Microsoft Office Owner File","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/43","format":"Wordperfect Secondary File","version":"5.1/5.2","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/754","format":"Microsoft Word Document (Password Protected)","version":"97-2003","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/892","format":"Compound WordPerfect for Windows Document","version":"6 onwards","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/42","format":"Wordperfect Secondary File","version":"5.0","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"loc","id":"fdd000132","format":"Macromedia Flash FLA Project File Format","full":"Macromedia Flash FLA Project File Format","mime":"","basis":"byte match at 0, 24","warning":"extension mismatch"}]},{"filename":"hpap/hpape1_dlb.doc","filesize": 23552,"modified":"2008-05-26T08:16:32+10:00","errors": "","matches": [{"ns":"pronom","id":"fmt/111","format":"OLE2 Compound Document Format","version":"","mime":"","basis":"byte match at 0, 30","warning":""},{"ns":"pronom","id":"fmt/609","format":"Microsoft Word (Generic)","version":"6.0-2003","mime":"application/msword","basis":"extension match doc; container name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/40","format":"Microsoft Word Document","version":"97-2003","mime":"application/msword","basis":"extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/39","format":"Microsoft Word Document","version":"6.0/95","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/273","format":"Microsoft Word for MS-DOS Document","version":"3.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/274","format":"Microsoft Word for MS-DOS Document","version":"4.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/275","format":"Microsoft Word for MS-DOS Document","version":"5.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/276","format":"Microsoft Word for MS-DOS Document","version":"5.5","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/329","format":"Interleaf Document","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/131","format":"Stationery for Mac OS X","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/44","format":"WordPerfect for MS-DOS/Windows Document","version":"6.0","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/37","format":"Microsoft Word for Windows Document","version":"1.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/38","format":"Microsoft Word for Windows Document","version":"2.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/473","format":"Microsoft Office Owner File","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/43","format":"Wordperfect Secondary File","version":"5.1/5.2","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/754","format":"Microsoft Word Document (Password Protected)","version":"97-2003","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/892","format":"Compound WordPerfect for Windows Document","version":"6 onwards","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/42","format":"Wordperfect Secondary File","version":"5.0","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"loc","id":"fdd000132","format":"Macromedia Flash FLA Project File Format","full":"Macromedia Flash FLA Project File Format","mime":"","basis":"byte match at 0, 24","warning":"extension mismatch"}]},{"filename":"hpap/hpape2_dlb.doc","filesize": 59392,"modified":"2008-05-26T08:16:32+10:00","errors": "","matches": [{"ns":"pronom","id":"fmt/111","format":"OLE2 Compound Document Format","version":"","mime":"","basis":"byte match at 0, 30","warning":""},{"ns":"pronom","id":"fmt/609","format":"Microsoft Word (Generic)","version":"6.0-2003","mime":"application/msword","basis":"extension match doc; container name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/40","format":"Microsoft Word Document","version":"97-2003","mime":"application/msword","basis":"extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/39","format":"Microsoft Word Document","version":"6.0/95","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/273","format":"Microsoft Word for MS-DOS Document","version":"3.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/274","format":"Microsoft Word for MS-DOS Document","version":"4.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/275","format":"Microsoft Word for MS-DOS Document","version":"5.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/276","format":"Microsoft Word for MS-DOS Document","version":"5.5","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/329","format":"Interleaf Document","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/131","format":"Stationery for Mac OS X","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/44","format":"WordPerfect for MS-DOS/Windows Document","version":"6.0","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/37","format":"Microsoft Word for Windows Document","version":"1.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/38","format":"Microsoft Word for Windows Document","version":"2.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/473","format":"Microsoft Office Owner File","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/43","format":"Wordperfect Secondary File","version":"5.1/5.2","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/754","format":"Microsoft Word Document (Password Protected)","version":"97-2003","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/892","format":"Compound WordPerfect for Windows Document","version":"6 onwards","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/42","format":"Wordperfect Secondary File","version":"5.0","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"loc","id":"fdd000132","format":"Macromedia Flash FLA Project File Format","full":"Macromedia Flash FLA Project File Format","mime":"","basis":"byte match at 0, 24","warning":"extension mismatch"}]},{"filename":"hpap/hpape3_dlb.doc","filesize": 29184,"modified":"2008-05-26T08:16:32+10:00","errors": "","matches": [{"ns":"pronom","id":"fmt/111","format":"OLE2 Compound Document Format","version":"","mime":"","basis":"byte match at 0, 30","warning":""},{"ns":"pronom","id":"fmt/609","format":"Microsoft Word (Generic)","version":"6.0-2003","mime":"application/msword","basis":"extension match doc; container name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/40","format":"Microsoft Word Document","version":"97-2003","mime":"application/msword","basis":"extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/39","format":"Microsoft Word Document","version":"6.0/95","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/273","format":"Microsoft Word for MS-DOS Document","version":"3.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/274","format":"Microsoft Word for MS-DOS Document","version":"4.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/275","format":"Microsoft Word for MS-DOS Document","version":"5.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/276","format":"Microsoft Word for MS-DOS Document","version":"5.5","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/329","format":"Interleaf Document","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/131","format":"Stationery for Mac OS X","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/44","format":"WordPerfect for MS-DOS/Windows Document","version":"6.0","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/37","format":"Microsoft Word for Windows Document","version":"1.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/38","format":"Microsoft Word for Windows Document","version":"2.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/473","format":"Microsoft Office Owner File","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/43","format":"Wordperfect Secondary File","version":"5.1/5.2","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/754","format":"Microsoft Word Document (Password Protected)","version":"97-2003","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/892","format":"Compound WordPerfect for Windows Document","version":"6 onwards","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/42","format":"Wordperfect Secondary File","version":"5.0","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"loc","id":"fdd000132","format":"Macromedia Flash FLA Project File Format","full":"Macromedia Flash FLA Project File Format","mime":"","basis":"byte match at 0, 24","warning":"extension mismatch"}]},{"filename":"hpap/hpapf1_lit.doc","filesize": 101888,"modified":"2008-05-26T08:16:32+10:00","errors": "","matches": [{"ns":"pronom","id":"fmt/111","format":"OLE2 Compound Document Format","version":"","mime":"","basis":"byte match at 0, 30","warning":""},{"ns":"pronom","id":"fmt/609","format":"Microsoft Word (Generic)","version":"6.0-2003","mime":"application/msword","basis":"extension match doc; container name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/40","format":"Microsoft Word Document","version":"97-2003","mime":"application/msword","basis":"extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/39","format":"Microsoft Word Document","version":"6.0/95","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/273","format":"Microsoft Word for MS-DOS Document","version":"3.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/274","format":"Microsoft Word for MS-DOS Document","version":"4.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/275","format":"Microsoft Word for MS-DOS Document","version":"5.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/276","format":"Microsoft Word for MS-DOS Document","version":"5.5","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/329","format":"Interleaf Document","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/131","format":"Stationery for Mac OS X","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/44","format":"WordPerfect for MS-DOS/Windows Document","version":"6.0","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/37","format":"Microsoft Word for Windows Document","version":"1.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/38","format":"Microsoft Word for Windows Document","version":"2.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/473","format":"Microsoft Office Owner File","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/43","format":"Wordperfect Secondary File","version":"5.1/5.2","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/754","format":"Microsoft Word Document (Password Protected)","version":"97-2003","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/892","format":"Compound WordPerfect for Windows Document","version":"6 onwards","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/42","format":"Wordperfect Secondary File","version":"5.0","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"loc","id":"fdd000132","format":"Macromedia Flash FLA Project File Format","full":"Macromedia Flash FLA Project File Format","mime":"","basis":"byte match at 0, 24","warning":"extension mismatch"}]},{"filename":"hpap/hpapf2_mem.doc","filesize": 168960,"modified":"2008-05-26T08:16:32+10:00","errors": "","matches": [{"ns":"pronom","id":"fmt/111","format":"OLE2 Compound Document Format","version":"","mime":"","basis":"byte match at 0, 30","warning":""},{"ns":"pronom","id":"fmt/609","format":"Microsoft Word (Generic)","version":"6.0-2003","mime":"application/msword","basis":"extension match doc; container name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/40","format":"Microsoft Word Document","version":"97-2003","mime":"application/msword","basis":"extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/39","format":"Microsoft Word Document","version":"6.0/95","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/273","format":"Microsoft Word for MS-DOS Document","version":"3.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/274","format":"Microsoft Word for MS-DOS Document","version":"4.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/275","format":"Microsoft Word for MS-DOS Document","version":"5.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/276","format":"Microsoft Word for MS-DOS Document","version":"5.5","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/329","format":"Interleaf Document","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/131","format":"Stationery for Mac OS X","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/44","format":"WordPerfect for MS-DOS/Windows Document","version":"6.0","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/37","format":"Microsoft Word for Windows Document","version":"1.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/38","format":"Microsoft Word for Windows Document","version":"2.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/473","format":"Microsoft Office Owner File","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/43","format":"Wordperfect Secondary File","version":"5.1/5.2","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/754","format":"Microsoft Word Document (Password Protected)","version":"97-2003","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/892","format":"Compound WordPerfect for Windows Document","version":"6 onwards","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/42","format":"Wordperfect Secondary File","version":"5.0","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"loc","id":"fdd000132","format":"Macromedia Flash FLA Project File Format","full":"Macromedia Flash FLA Project File Format","mime":"","basis":"byte match at 0, 24","warning":"extension mismatch"}]},{"filename":"hpap/hpapindex.doc","filesize": 98816,"modified":"2008-05-26T08:16:32+10:00","errors": "","matches": [{"ns":"pronom","id":"fmt/111","format":"OLE2 Compound Document Format","version":"","mime":"","basis":"byte match at 0, 30","warning":""},{"ns":"pronom","id":"fmt/609","format":"Microsoft Word (Generic)","version":"6.0-2003","mime":"application/msword","basis":"extension match doc; container name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/40","format":"Microsoft Word Document","version":"97-2003","mime":"application/msword","basis":"extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only","warning":""},{"ns":"pronom","id":"fmt/39","format":"Microsoft Word Document","version":"6.0/95","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/273","format":"Microsoft Word for MS-DOS Document","version":"3.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/274","format":"Microsoft Word for MS-DOS Document","version":"4.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/275","format":"Microsoft Word for MS-DOS Document","version":"5.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/276","format":"Microsoft Word for MS-DOS Document","version":"5.5","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/329","format":"Interleaf Document","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/131","format":"Stationery for Mac OS X","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/44","format":"WordPerfect for MS-DOS/Windows Document","version":"6.0","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/37","format":"Microsoft Word for Windows Document","version":"1.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/38","format":"Microsoft Word for Windows Document","version":"2.0","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/473","format":"Microsoft Office Owner File","version":"","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/43","format":"Wordperfect Secondary File","version":"5.1/5.2","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/754","format":"Microsoft Word Document (Password Protected)","version":"97-2003","mime":"application/msword","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"fmt/892","format":"Compound WordPerfect for Windows Document","version":"6 onwards","mime":"application/vnd.wordperfect","basis":"extension match doc","warning":"match on extension only"},{"ns":"pronom","id":"x-fmt/42","format":"Wordperfect Secondary File","version":"5.0","mime":"","basis":"extension match doc","warning":"match on extension only"},{"ns":"loc","id":"fdd000132","format":"Macromedia Flash FLA Project File Format","full":"Macromedia Flash FLA Project File Format","mime":"","basis":"byte match at 0, 24","warning":"extension mismatch"}]}]}
+{
+  "siegfried": "1.6.7",
+  "scandate": "2017-01-27T16:56:02+11:00",
+  "signature": "default.sig",
+  "created": "2017-01-27T16:52:41+11:00",
+  "identifiers": [
+    {
+      "name": "pronom",
+      "details": "DROID_SignatureFile_V88.xml; container-signature-20160927.xml; multi set to exhaustive (4)"
+    },
+    {
+      "name": "loc",
+      "details": "fddXML.zip (2016-03-10, DROID_SignatureFile_V88.xml, container-signature-20160927.xml)"
+    }
+  ],
+  "files": [
+    {
+      "filename": "hpap/hpapa1_oc.doc",
+      "filesize": 154624,
+      "modified": "2008-05-26T08:16:32+10:00",
+      "errors": "",
+      "matches": [
+        {
+          "ns": "pronom",
+          "id": "fmt/111",
+          "format": "OLE2 Compound Document Format",
+          "version": "",
+          "mime": "",
+          "basis": "byte match at 0, 30",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/609",
+          "format": "Microsoft Word (Generic)",
+          "version": "6.0-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/40",
+          "format": "Microsoft Word Document",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/39",
+          "format": "Microsoft Word Document",
+          "version": "6.0/95",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/273",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "3.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/274",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "4.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/275",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/276",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.5",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/329",
+          "format": "Interleaf Document",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/131",
+          "format": "Stationery for Mac OS X",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/44",
+          "format": "WordPerfect for MS-DOS/Windows Document",
+          "version": "6.0",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/37",
+          "format": "Microsoft Word for Windows Document",
+          "version": "1.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/38",
+          "format": "Microsoft Word for Windows Document",
+          "version": "2.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/473",
+          "format": "Microsoft Office Owner File",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/43",
+          "format": "Wordperfect Secondary File",
+          "version": "5.1/5.2",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/754",
+          "format": "Microsoft Word Document (Password Protected)",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/892",
+          "format": "Compound WordPerfect for Windows Document",
+          "version": "6 onwards",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/42",
+          "format": "Wordperfect Secondary File",
+          "version": "5.0",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "loc",
+          "id": "fdd000132",
+          "format": "Macromedia Flash FLA Project File Format",
+          "full": "Macromedia Flash FLA Project File Format",
+          "mime": "",
+          "basis": "byte match at 0, 24",
+          "warning": "extension mismatch"
+        }
+      ]
+    },
+    {
+      "filename": "hpap/hpapa2_oc.doc",
+      "filesize": 130560,
+      "modified": "2008-05-26T08:16:32+10:00",
+      "errors": "",
+      "matches": [
+        {
+          "ns": "pronom",
+          "id": "fmt/111",
+          "format": "OLE2 Compound Document Format",
+          "version": "",
+          "mime": "",
+          "basis": "byte match at 0, 30",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/609",
+          "format": "Microsoft Word (Generic)",
+          "version": "6.0-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/40",
+          "format": "Microsoft Word Document",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/39",
+          "format": "Microsoft Word Document",
+          "version": "6.0/95",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/273",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "3.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/274",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "4.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/275",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/276",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.5",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/329",
+          "format": "Interleaf Document",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/131",
+          "format": "Stationery for Mac OS X",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/44",
+          "format": "WordPerfect for MS-DOS/Windows Document",
+          "version": "6.0",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/37",
+          "format": "Microsoft Word for Windows Document",
+          "version": "1.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/38",
+          "format": "Microsoft Word for Windows Document",
+          "version": "2.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/473",
+          "format": "Microsoft Office Owner File",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/43",
+          "format": "Wordperfect Secondary File",
+          "version": "5.1/5.2",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/754",
+          "format": "Microsoft Word Document (Password Protected)",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/892",
+          "format": "Compound WordPerfect for Windows Document",
+          "version": "6 onwards",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/42",
+          "format": "Wordperfect Secondary File",
+          "version": "5.0",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "loc",
+          "id": "fdd000132",
+          "format": "Macromedia Flash FLA Project File Format",
+          "full": "Macromedia Flash FLA Project File Format",
+          "mime": "",
+          "basis": "byte match at 0, 24",
+          "warning": "extension mismatch"
+        }
+      ]
+    },
+    {
+      "filename": "hpap/hpapa3_oc.doc",
+      "filesize": 176640,
+      "modified": "2008-05-26T08:16:32+10:00",
+      "errors": "",
+      "matches": [
+        {
+          "ns": "pronom",
+          "id": "fmt/111",
+          "format": "OLE2 Compound Document Format",
+          "version": "",
+          "mime": "",
+          "basis": "byte match at 0, 30",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/609",
+          "format": "Microsoft Word (Generic)",
+          "version": "6.0-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/40",
+          "format": "Microsoft Word Document",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/39",
+          "format": "Microsoft Word Document",
+          "version": "6.0/95",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/273",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "3.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/274",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "4.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/275",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/276",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.5",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/329",
+          "format": "Interleaf Document",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/131",
+          "format": "Stationery for Mac OS X",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/44",
+          "format": "WordPerfect for MS-DOS/Windows Document",
+          "version": "6.0",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/37",
+          "format": "Microsoft Word for Windows Document",
+          "version": "1.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/38",
+          "format": "Microsoft Word for Windows Document",
+          "version": "2.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/473",
+          "format": "Microsoft Office Owner File",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/43",
+          "format": "Wordperfect Secondary File",
+          "version": "5.1/5.2",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/754",
+          "format": "Microsoft Word Document (Password Protected)",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/892",
+          "format": "Compound WordPerfect for Windows Document",
+          "version": "6 onwards",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/42",
+          "format": "Wordperfect Secondary File",
+          "version": "5.0",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "loc",
+          "id": "fdd000132",
+          "format": "Macromedia Flash FLA Project File Format",
+          "full": "Macromedia Flash FLA Project File Format",
+          "mime": "",
+          "basis": "byte match at 0, 24",
+          "warning": "extension mismatch"
+        }
+      ]
+    },
+    {
+      "filename": "hpap/hpapa4_oc.doc",
+      "filesize": 237568,
+      "modified": "2008-05-26T08:16:32+10:00",
+      "errors": "",
+      "matches": [
+        {
+          "ns": "pronom",
+          "id": "fmt/111",
+          "format": "OLE2 Compound Document Format",
+          "version": "",
+          "mime": "",
+          "basis": "byte match at 0, 30",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/609",
+          "format": "Microsoft Word (Generic)",
+          "version": "6.0-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/40",
+          "format": "Microsoft Word Document",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/39",
+          "format": "Microsoft Word Document",
+          "version": "6.0/95",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/273",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "3.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/274",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "4.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/275",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/276",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.5",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/329",
+          "format": "Interleaf Document",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/131",
+          "format": "Stationery for Mac OS X",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/44",
+          "format": "WordPerfect for MS-DOS/Windows Document",
+          "version": "6.0",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/37",
+          "format": "Microsoft Word for Windows Document",
+          "version": "1.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/38",
+          "format": "Microsoft Word for Windows Document",
+          "version": "2.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/473",
+          "format": "Microsoft Office Owner File",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/43",
+          "format": "Wordperfect Secondary File",
+          "version": "5.1/5.2",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/754",
+          "format": "Microsoft Word Document (Password Protected)",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/892",
+          "format": "Compound WordPerfect for Windows Document",
+          "version": "6 onwards",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/42",
+          "format": "Wordperfect Secondary File",
+          "version": "5.0",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "loc",
+          "id": "fdd000132",
+          "format": "Macromedia Flash FLA Project File Format",
+          "full": "Macromedia Flash FLA Project File Format",
+          "mime": "",
+          "basis": "byte match at 0, 24",
+          "warning": "extension mismatch"
+        }
+      ]
+    },
+    {
+      "filename": "hpap/hpapa5-2_oc.doc",
+      "filesize": 91136,
+      "modified": "2008-05-26T08:16:32+10:00",
+      "errors": "",
+      "matches": [
+        {
+          "ns": "pronom",
+          "id": "fmt/111",
+          "format": "OLE2 Compound Document Format",
+          "version": "",
+          "mime": "",
+          "basis": "byte match at 0, 30",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/609",
+          "format": "Microsoft Word (Generic)",
+          "version": "6.0-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/40",
+          "format": "Microsoft Word Document",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/39",
+          "format": "Microsoft Word Document",
+          "version": "6.0/95",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/273",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "3.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/274",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "4.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/275",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/276",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.5",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/329",
+          "format": "Interleaf Document",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/131",
+          "format": "Stationery for Mac OS X",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/44",
+          "format": "WordPerfect for MS-DOS/Windows Document",
+          "version": "6.0",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/37",
+          "format": "Microsoft Word for Windows Document",
+          "version": "1.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/38",
+          "format": "Microsoft Word for Windows Document",
+          "version": "2.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/473",
+          "format": "Microsoft Office Owner File",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/43",
+          "format": "Wordperfect Secondary File",
+          "version": "5.1/5.2",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/754",
+          "format": "Microsoft Word Document (Password Protected)",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/892",
+          "format": "Compound WordPerfect for Windows Document",
+          "version": "6 onwards",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/42",
+          "format": "Wordperfect Secondary File",
+          "version": "5.0",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "loc",
+          "id": "fdd000132",
+          "format": "Macromedia Flash FLA Project File Format",
+          "full": "Macromedia Flash FLA Project File Format",
+          "mime": "",
+          "basis": "byte match at 0, 24",
+          "warning": "extension mismatch"
+        }
+      ]
+    },
+    {
+      "filename": "hpap/hpapa5_oc.doc",
+      "filesize": 116224,
+      "modified": "2008-05-26T08:16:32+10:00",
+      "errors": "",
+      "matches": [
+        {
+          "ns": "pronom",
+          "id": "fmt/111",
+          "format": "OLE2 Compound Document Format",
+          "version": "",
+          "mime": "",
+          "basis": "byte match at 0, 30",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/609",
+          "format": "Microsoft Word (Generic)",
+          "version": "6.0-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/40",
+          "format": "Microsoft Word Document",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/39",
+          "format": "Microsoft Word Document",
+          "version": "6.0/95",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/273",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "3.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/274",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "4.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/275",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/276",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.5",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/329",
+          "format": "Interleaf Document",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/131",
+          "format": "Stationery for Mac OS X",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/44",
+          "format": "WordPerfect for MS-DOS/Windows Document",
+          "version": "6.0",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/37",
+          "format": "Microsoft Word for Windows Document",
+          "version": "1.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/38",
+          "format": "Microsoft Word for Windows Document",
+          "version": "2.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/473",
+          "format": "Microsoft Office Owner File",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/43",
+          "format": "Wordperfect Secondary File",
+          "version": "5.1/5.2",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/754",
+          "format": "Microsoft Word Document (Password Protected)",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/892",
+          "format": "Compound WordPerfect for Windows Document",
+          "version": "6 onwards",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/42",
+          "format": "Wordperfect Secondary File",
+          "version": "5.0",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "loc",
+          "id": "fdd000132",
+          "format": "Macromedia Flash FLA Project File Format",
+          "full": "Macromedia Flash FLA Project File Format",
+          "mime": "",
+          "basis": "byte match at 0, 24",
+          "warning": "extension mismatch"
+        }
+      ]
+    },
+    {
+      "filename": "hpap/hpapa6_oc.doc",
+      "filesize": 126976,
+      "modified": "2008-05-26T08:16:32+10:00",
+      "errors": "",
+      "matches": [
+        {
+          "ns": "pronom",
+          "id": "fmt/111",
+          "format": "OLE2 Compound Document Format",
+          "version": "",
+          "mime": "",
+          "basis": "byte match at 0, 30",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/609",
+          "format": "Microsoft Word (Generic)",
+          "version": "6.0-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/40",
+          "format": "Microsoft Word Document",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/39",
+          "format": "Microsoft Word Document",
+          "version": "6.0/95",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/273",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "3.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/274",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "4.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/275",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/276",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.5",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/329",
+          "format": "Interleaf Document",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/131",
+          "format": "Stationery for Mac OS X",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/44",
+          "format": "WordPerfect for MS-DOS/Windows Document",
+          "version": "6.0",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/37",
+          "format": "Microsoft Word for Windows Document",
+          "version": "1.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/38",
+          "format": "Microsoft Word for Windows Document",
+          "version": "2.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/473",
+          "format": "Microsoft Office Owner File",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/43",
+          "format": "Wordperfect Secondary File",
+          "version": "5.1/5.2",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/754",
+          "format": "Microsoft Word Document (Password Protected)",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/892",
+          "format": "Compound WordPerfect for Windows Document",
+          "version": "6 onwards",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/42",
+          "format": "Wordperfect Secondary File",
+          "version": "5.0",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "loc",
+          "id": "fdd000132",
+          "format": "Macromedia Flash FLA Project File Format",
+          "full": "Macromedia Flash FLA Project File Format",
+          "mime": "",
+          "basis": "byte match at 0, 24",
+          "warning": "extension mismatch"
+        }
+      ]
+    },
+    {
+      "filename": "hpap/hpapb1_fc.doc",
+      "filesize": 130048,
+      "modified": "2008-05-26T08:16:32+10:00",
+      "errors": "",
+      "matches": [
+        {
+          "ns": "pronom",
+          "id": "fmt/111",
+          "format": "OLE2 Compound Document Format",
+          "version": "",
+          "mime": "",
+          "basis": "byte match at 0, 30",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/609",
+          "format": "Microsoft Word (Generic)",
+          "version": "6.0-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/40",
+          "format": "Microsoft Word Document",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/39",
+          "format": "Microsoft Word Document",
+          "version": "6.0/95",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/273",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "3.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/274",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "4.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/275",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/276",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.5",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/329",
+          "format": "Interleaf Document",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/131",
+          "format": "Stationery for Mac OS X",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/44",
+          "format": "WordPerfect for MS-DOS/Windows Document",
+          "version": "6.0",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/37",
+          "format": "Microsoft Word for Windows Document",
+          "version": "1.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/38",
+          "format": "Microsoft Word for Windows Document",
+          "version": "2.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/473",
+          "format": "Microsoft Office Owner File",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/43",
+          "format": "Wordperfect Secondary File",
+          "version": "5.1/5.2",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/754",
+          "format": "Microsoft Word Document (Password Protected)",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/892",
+          "format": "Compound WordPerfect for Windows Document",
+          "version": "6 onwards",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/42",
+          "format": "Wordperfect Secondary File",
+          "version": "5.0",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "loc",
+          "id": "fdd000132",
+          "format": "Macromedia Flash FLA Project File Format",
+          "full": "Macromedia Flash FLA Project File Format",
+          "mime": "",
+          "basis": "byte match at 0, 24",
+          "warning": "extension mismatch"
+        }
+      ]
+    },
+    {
+      "filename": "hpap/hpapb2_fc.doc",
+      "filesize": 76800,
+      "modified": "2008-05-26T08:16:32+10:00",
+      "errors": "",
+      "matches": [
+        {
+          "ns": "pronom",
+          "id": "fmt/111",
+          "format": "OLE2 Compound Document Format",
+          "version": "",
+          "mime": "",
+          "basis": "byte match at 0, 30",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/609",
+          "format": "Microsoft Word (Generic)",
+          "version": "6.0-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/40",
+          "format": "Microsoft Word Document",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/39",
+          "format": "Microsoft Word Document",
+          "version": "6.0/95",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/273",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "3.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/274",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "4.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/275",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/276",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.5",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/329",
+          "format": "Interleaf Document",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/131",
+          "format": "Stationery for Mac OS X",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/44",
+          "format": "WordPerfect for MS-DOS/Windows Document",
+          "version": "6.0",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/37",
+          "format": "Microsoft Word for Windows Document",
+          "version": "1.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/38",
+          "format": "Microsoft Word for Windows Document",
+          "version": "2.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/473",
+          "format": "Microsoft Office Owner File",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/43",
+          "format": "Wordperfect Secondary File",
+          "version": "5.1/5.2",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/754",
+          "format": "Microsoft Word Document (Password Protected)",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/892",
+          "format": "Compound WordPerfect for Windows Document",
+          "version": "6 onwards",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/42",
+          "format": "Wordperfect Secondary File",
+          "version": "5.0",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "loc",
+          "id": "fdd000132",
+          "format": "Macromedia Flash FLA Project File Format",
+          "full": "Macromedia Flash FLA Project File Format",
+          "mime": "",
+          "basis": "byte match at 0, 24",
+          "warning": "extension mismatch"
+        }
+      ]
+    },
+    {
+      "filename": "hpap/hpapc1_gc.doc",
+      "filesize": 88064,
+      "modified": "2008-05-26T08:16:32+10:00",
+      "errors": "",
+      "matches": [
+        {
+          "ns": "pronom",
+          "id": "fmt/111",
+          "format": "OLE2 Compound Document Format",
+          "version": "",
+          "mime": "",
+          "basis": "byte match at 0, 30",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/609",
+          "format": "Microsoft Word (Generic)",
+          "version": "6.0-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/40",
+          "format": "Microsoft Word Document",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/39",
+          "format": "Microsoft Word Document",
+          "version": "6.0/95",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/273",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "3.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/274",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "4.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/275",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/276",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.5",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/329",
+          "format": "Interleaf Document",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/131",
+          "format": "Stationery for Mac OS X",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/44",
+          "format": "WordPerfect for MS-DOS/Windows Document",
+          "version": "6.0",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/37",
+          "format": "Microsoft Word for Windows Document",
+          "version": "1.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/38",
+          "format": "Microsoft Word for Windows Document",
+          "version": "2.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/473",
+          "format": "Microsoft Office Owner File",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/43",
+          "format": "Wordperfect Secondary File",
+          "version": "5.1/5.2",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/754",
+          "format": "Microsoft Word Document (Password Protected)",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/892",
+          "format": "Compound WordPerfect for Windows Document",
+          "version": "6 onwards",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/42",
+          "format": "Wordperfect Secondary File",
+          "version": "5.0",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "loc",
+          "id": "fdd000132",
+          "format": "Macromedia Flash FLA Project File Format",
+          "full": "Macromedia Flash FLA Project File Format",
+          "mime": "",
+          "basis": "byte match at 0, 24",
+          "warning": "extension mismatch"
+        }
+      ]
+    },
+    {
+      "filename": "hpap/hpapc2_gc.doc",
+      "filesize": 77824,
+      "modified": "2008-05-26T08:16:32+10:00",
+      "errors": "",
+      "matches": [
+        {
+          "ns": "pronom",
+          "id": "fmt/111",
+          "format": "OLE2 Compound Document Format",
+          "version": "",
+          "mime": "",
+          "basis": "byte match at 0, 30",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/609",
+          "format": "Microsoft Word (Generic)",
+          "version": "6.0-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/40",
+          "format": "Microsoft Word Document",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/39",
+          "format": "Microsoft Word Document",
+          "version": "6.0/95",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/273",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "3.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/274",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "4.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/275",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/276",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.5",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/329",
+          "format": "Interleaf Document",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/131",
+          "format": "Stationery for Mac OS X",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/44",
+          "format": "WordPerfect for MS-DOS/Windows Document",
+          "version": "6.0",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/37",
+          "format": "Microsoft Word for Windows Document",
+          "version": "1.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/38",
+          "format": "Microsoft Word for Windows Document",
+          "version": "2.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/473",
+          "format": "Microsoft Office Owner File",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/43",
+          "format": "Wordperfect Secondary File",
+          "version": "5.1/5.2",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/754",
+          "format": "Microsoft Word Document (Password Protected)",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/892",
+          "format": "Compound WordPerfect for Windows Document",
+          "version": "6 onwards",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/42",
+          "format": "Wordperfect Secondary File",
+          "version": "5.0",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "loc",
+          "id": "fdd000132",
+          "format": "Macromedia Flash FLA Project File Format",
+          "full": "Macromedia Flash FLA Project File Format",
+          "mime": "",
+          "basis": "byte match at 0, 24",
+          "warning": "extension mismatch"
+        }
+      ]
+    },
+    {
+      "filename": "hpap/hpapc3_gc.doc",
+      "filesize": 107008,
+      "modified": "2008-05-26T08:16:32+10:00",
+      "errors": "",
+      "matches": [
+        {
+          "ns": "pronom",
+          "id": "fmt/111",
+          "format": "OLE2 Compound Document Format",
+          "version": "",
+          "mime": "",
+          "basis": "byte match at 0, 30",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/609",
+          "format": "Microsoft Word (Generic)",
+          "version": "6.0-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/40",
+          "format": "Microsoft Word Document",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/39",
+          "format": "Microsoft Word Document",
+          "version": "6.0/95",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/273",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "3.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/274",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "4.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/275",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/276",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.5",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/329",
+          "format": "Interleaf Document",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/131",
+          "format": "Stationery for Mac OS X",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/44",
+          "format": "WordPerfect for MS-DOS/Windows Document",
+          "version": "6.0",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/37",
+          "format": "Microsoft Word for Windows Document",
+          "version": "1.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/38",
+          "format": "Microsoft Word for Windows Document",
+          "version": "2.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/473",
+          "format": "Microsoft Office Owner File",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/43",
+          "format": "Wordperfect Secondary File",
+          "version": "5.1/5.2",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/754",
+          "format": "Microsoft Word Document (Password Protected)",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/892",
+          "format": "Compound WordPerfect for Windows Document",
+          "version": "6 onwards",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/42",
+          "format": "Wordperfect Secondary File",
+          "version": "5.0",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "loc",
+          "id": "fdd000132",
+          "format": "Macromedia Flash FLA Project File Format",
+          "full": "Macromedia Flash FLA Project File Format",
+          "mime": "",
+          "basis": "byte match at 0, 24",
+          "warning": "extension mismatch"
+        }
+      ]
+    },
+    {
+      "filename": "hpap/hpapc4_gc.doc",
+      "filesize": 68608,
+      "modified": "2008-05-26T08:16:32+10:00",
+      "errors": "",
+      "matches": [
+        {
+          "ns": "pronom",
+          "id": "fmt/111",
+          "format": "OLE2 Compound Document Format",
+          "version": "",
+          "mime": "",
+          "basis": "byte match at 0, 30",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/609",
+          "format": "Microsoft Word (Generic)",
+          "version": "6.0-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/40",
+          "format": "Microsoft Word Document",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/39",
+          "format": "Microsoft Word Document",
+          "version": "6.0/95",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/273",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "3.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/274",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "4.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/275",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/276",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.5",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/329",
+          "format": "Interleaf Document",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/131",
+          "format": "Stationery for Mac OS X",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/44",
+          "format": "WordPerfect for MS-DOS/Windows Document",
+          "version": "6.0",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/37",
+          "format": "Microsoft Word for Windows Document",
+          "version": "1.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/38",
+          "format": "Microsoft Word for Windows Document",
+          "version": "2.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/473",
+          "format": "Microsoft Office Owner File",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/43",
+          "format": "Wordperfect Secondary File",
+          "version": "5.1/5.2",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/754",
+          "format": "Microsoft Word Document (Password Protected)",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/892",
+          "format": "Compound WordPerfect for Windows Document",
+          "version": "6 onwards",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/42",
+          "format": "Wordperfect Secondary File",
+          "version": "5.0",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "loc",
+          "id": "fdd000132",
+          "format": "Macromedia Flash FLA Project File Format",
+          "full": "Macromedia Flash FLA Project File Format",
+          "mime": "",
+          "basis": "byte match at 0, 24",
+          "warning": "extension mismatch"
+        }
+      ]
+    },
+    {
+      "filename": "hpap/hpapd1&2.doc",
+      "filesize": 26624,
+      "modified": "2008-05-26T08:16:32+10:00",
+      "errors": "",
+      "matches": [
+        {
+          "ns": "pronom",
+          "id": "fmt/111",
+          "format": "OLE2 Compound Document Format",
+          "version": "",
+          "mime": "",
+          "basis": "byte match at 0, 30",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/609",
+          "format": "Microsoft Word (Generic)",
+          "version": "6.0-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/40",
+          "format": "Microsoft Word Document",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/39",
+          "format": "Microsoft Word Document",
+          "version": "6.0/95",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/273",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "3.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/274",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "4.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/275",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/276",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.5",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/329",
+          "format": "Interleaf Document",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/131",
+          "format": "Stationery for Mac OS X",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/44",
+          "format": "WordPerfect for MS-DOS/Windows Document",
+          "version": "6.0",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/37",
+          "format": "Microsoft Word for Windows Document",
+          "version": "1.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/38",
+          "format": "Microsoft Word for Windows Document",
+          "version": "2.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/473",
+          "format": "Microsoft Office Owner File",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/43",
+          "format": "Wordperfect Secondary File",
+          "version": "5.1/5.2",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/754",
+          "format": "Microsoft Word Document (Password Protected)",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/892",
+          "format": "Compound WordPerfect for Windows Document",
+          "version": "6 onwards",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/42",
+          "format": "Wordperfect Secondary File",
+          "version": "5.0",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "loc",
+          "id": "fdd000132",
+          "format": "Macromedia Flash FLA Project File Format",
+          "full": "Macromedia Flash FLA Project File Format",
+          "mime": "",
+          "basis": "byte match at 0, 24",
+          "warning": "extension mismatch"
+        }
+      ]
+    },
+    {
+      "filename": "hpap/hpape1_dlb.doc",
+      "filesize": 23552,
+      "modified": "2008-05-26T08:16:32+10:00",
+      "errors": "",
+      "matches": [
+        {
+          "ns": "pronom",
+          "id": "fmt/111",
+          "format": "OLE2 Compound Document Format",
+          "version": "",
+          "mime": "",
+          "basis": "byte match at 0, 30",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/609",
+          "format": "Microsoft Word (Generic)",
+          "version": "6.0-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/40",
+          "format": "Microsoft Word Document",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/39",
+          "format": "Microsoft Word Document",
+          "version": "6.0/95",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/273",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "3.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/274",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "4.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/275",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/276",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.5",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/329",
+          "format": "Interleaf Document",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/131",
+          "format": "Stationery for Mac OS X",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/44",
+          "format": "WordPerfect for MS-DOS/Windows Document",
+          "version": "6.0",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/37",
+          "format": "Microsoft Word for Windows Document",
+          "version": "1.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/38",
+          "format": "Microsoft Word for Windows Document",
+          "version": "2.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/473",
+          "format": "Microsoft Office Owner File",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/43",
+          "format": "Wordperfect Secondary File",
+          "version": "5.1/5.2",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/754",
+          "format": "Microsoft Word Document (Password Protected)",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/892",
+          "format": "Compound WordPerfect for Windows Document",
+          "version": "6 onwards",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/42",
+          "format": "Wordperfect Secondary File",
+          "version": "5.0",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "loc",
+          "id": "fdd000132",
+          "format": "Macromedia Flash FLA Project File Format",
+          "full": "Macromedia Flash FLA Project File Format",
+          "mime": "",
+          "basis": "byte match at 0, 24",
+          "warning": "extension mismatch"
+        }
+      ]
+    },
+    {
+      "filename": "hpap/hpape2_dlb.doc",
+      "filesize": 59392,
+      "modified": "2008-05-26T08:16:32+10:00",
+      "errors": "",
+      "matches": [
+        {
+          "ns": "pronom",
+          "id": "fmt/111",
+          "format": "OLE2 Compound Document Format",
+          "version": "",
+          "mime": "",
+          "basis": "byte match at 0, 30",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/609",
+          "format": "Microsoft Word (Generic)",
+          "version": "6.0-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/40",
+          "format": "Microsoft Word Document",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/39",
+          "format": "Microsoft Word Document",
+          "version": "6.0/95",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/273",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "3.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/274",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "4.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/275",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/276",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.5",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/329",
+          "format": "Interleaf Document",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/131",
+          "format": "Stationery for Mac OS X",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/44",
+          "format": "WordPerfect for MS-DOS/Windows Document",
+          "version": "6.0",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/37",
+          "format": "Microsoft Word for Windows Document",
+          "version": "1.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/38",
+          "format": "Microsoft Word for Windows Document",
+          "version": "2.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/473",
+          "format": "Microsoft Office Owner File",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/43",
+          "format": "Wordperfect Secondary File",
+          "version": "5.1/5.2",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/754",
+          "format": "Microsoft Word Document (Password Protected)",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/892",
+          "format": "Compound WordPerfect for Windows Document",
+          "version": "6 onwards",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/42",
+          "format": "Wordperfect Secondary File",
+          "version": "5.0",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "loc",
+          "id": "fdd000132",
+          "format": "Macromedia Flash FLA Project File Format",
+          "full": "Macromedia Flash FLA Project File Format",
+          "mime": "",
+          "basis": "byte match at 0, 24",
+          "warning": "extension mismatch"
+        }
+      ]
+    },
+    {
+      "filename": "hpap/hpape3_dlb.doc",
+      "filesize": 29184,
+      "modified": "2008-05-26T08:16:32+10:00",
+      "errors": "",
+      "matches": [
+        {
+          "ns": "pronom",
+          "id": "fmt/111",
+          "format": "OLE2 Compound Document Format",
+          "version": "",
+          "mime": "",
+          "basis": "byte match at 0, 30",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/609",
+          "format": "Microsoft Word (Generic)",
+          "version": "6.0-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/40",
+          "format": "Microsoft Word Document",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/39",
+          "format": "Microsoft Word Document",
+          "version": "6.0/95",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/273",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "3.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/274",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "4.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/275",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/276",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.5",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/329",
+          "format": "Interleaf Document",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/131",
+          "format": "Stationery for Mac OS X",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/44",
+          "format": "WordPerfect for MS-DOS/Windows Document",
+          "version": "6.0",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/37",
+          "format": "Microsoft Word for Windows Document",
+          "version": "1.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/38",
+          "format": "Microsoft Word for Windows Document",
+          "version": "2.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/473",
+          "format": "Microsoft Office Owner File",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/43",
+          "format": "Wordperfect Secondary File",
+          "version": "5.1/5.2",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/754",
+          "format": "Microsoft Word Document (Password Protected)",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/892",
+          "format": "Compound WordPerfect for Windows Document",
+          "version": "6 onwards",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/42",
+          "format": "Wordperfect Secondary File",
+          "version": "5.0",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "loc",
+          "id": "fdd000132",
+          "format": "Macromedia Flash FLA Project File Format",
+          "full": "Macromedia Flash FLA Project File Format",
+          "mime": "",
+          "basis": "byte match at 0, 24",
+          "warning": "extension mismatch"
+        }
+      ]
+    },
+    {
+      "filename": "hpap/hpapf1_lit.doc",
+      "filesize": 101888,
+      "modified": "2008-05-26T08:16:32+10:00",
+      "errors": "",
+      "matches": [
+        {
+          "ns": "pronom",
+          "id": "fmt/111",
+          "format": "OLE2 Compound Document Format",
+          "version": "",
+          "mime": "",
+          "basis": "byte match at 0, 30",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/609",
+          "format": "Microsoft Word (Generic)",
+          "version": "6.0-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/40",
+          "format": "Microsoft Word Document",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/39",
+          "format": "Microsoft Word Document",
+          "version": "6.0/95",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/273",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "3.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/274",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "4.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/275",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/276",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.5",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/329",
+          "format": "Interleaf Document",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/131",
+          "format": "Stationery for Mac OS X",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/44",
+          "format": "WordPerfect for MS-DOS/Windows Document",
+          "version": "6.0",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/37",
+          "format": "Microsoft Word for Windows Document",
+          "version": "1.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/38",
+          "format": "Microsoft Word for Windows Document",
+          "version": "2.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/473",
+          "format": "Microsoft Office Owner File",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/43",
+          "format": "Wordperfect Secondary File",
+          "version": "5.1/5.2",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/754",
+          "format": "Microsoft Word Document (Password Protected)",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/892",
+          "format": "Compound WordPerfect for Windows Document",
+          "version": "6 onwards",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/42",
+          "format": "Wordperfect Secondary File",
+          "version": "5.0",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "loc",
+          "id": "fdd000132",
+          "format": "Macromedia Flash FLA Project File Format",
+          "full": "Macromedia Flash FLA Project File Format",
+          "mime": "",
+          "basis": "byte match at 0, 24",
+          "warning": "extension mismatch"
+        }
+      ]
+    },
+    {
+      "filename": "hpap/hpapf2_mem.doc",
+      "filesize": 168960,
+      "modified": "2008-05-26T08:16:32+10:00",
+      "errors": "",
+      "matches": [
+        {
+          "ns": "pronom",
+          "id": "fmt/111",
+          "format": "OLE2 Compound Document Format",
+          "version": "",
+          "mime": "",
+          "basis": "byte match at 0, 30",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/609",
+          "format": "Microsoft Word (Generic)",
+          "version": "6.0-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/40",
+          "format": "Microsoft Word Document",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/39",
+          "format": "Microsoft Word Document",
+          "version": "6.0/95",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/273",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "3.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/274",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "4.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/275",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/276",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.5",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/329",
+          "format": "Interleaf Document",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/131",
+          "format": "Stationery for Mac OS X",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/44",
+          "format": "WordPerfect for MS-DOS/Windows Document",
+          "version": "6.0",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/37",
+          "format": "Microsoft Word for Windows Document",
+          "version": "1.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/38",
+          "format": "Microsoft Word for Windows Document",
+          "version": "2.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/473",
+          "format": "Microsoft Office Owner File",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/43",
+          "format": "Wordperfect Secondary File",
+          "version": "5.1/5.2",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/754",
+          "format": "Microsoft Word Document (Password Protected)",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/892",
+          "format": "Compound WordPerfect for Windows Document",
+          "version": "6 onwards",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/42",
+          "format": "Wordperfect Secondary File",
+          "version": "5.0",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "loc",
+          "id": "fdd000132",
+          "format": "Macromedia Flash FLA Project File Format",
+          "full": "Macromedia Flash FLA Project File Format",
+          "mime": "",
+          "basis": "byte match at 0, 24",
+          "warning": "extension mismatch"
+        }
+      ]
+    },
+    {
+      "filename": "hpap/hpapindex.doc",
+      "filesize": 98816,
+      "modified": "2008-05-26T08:16:32+10:00",
+      "errors": "",
+      "matches": [
+        {
+          "ns": "pronom",
+          "id": "fmt/111",
+          "format": "OLE2 Compound Document Format",
+          "version": "",
+          "mime": "",
+          "basis": "byte match at 0, 30",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/609",
+          "format": "Microsoft Word (Generic)",
+          "version": "6.0-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/40",
+          "format": "Microsoft Word Document",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc; container name CompObj with byte match at 70, 20; name WordDocument with name only",
+          "warning": ""
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/39",
+          "format": "Microsoft Word Document",
+          "version": "6.0/95",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/273",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "3.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/274",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "4.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/275",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/276",
+          "format": "Microsoft Word for MS-DOS Document",
+          "version": "5.5",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/329",
+          "format": "Interleaf Document",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/131",
+          "format": "Stationery for Mac OS X",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/44",
+          "format": "WordPerfect for MS-DOS/Windows Document",
+          "version": "6.0",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/37",
+          "format": "Microsoft Word for Windows Document",
+          "version": "1.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/38",
+          "format": "Microsoft Word for Windows Document",
+          "version": "2.0",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/473",
+          "format": "Microsoft Office Owner File",
+          "version": "",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/43",
+          "format": "Wordperfect Secondary File",
+          "version": "5.1/5.2",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/754",
+          "format": "Microsoft Word Document (Password Protected)",
+          "version": "97-2003",
+          "mime": "application/msword",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "fmt/892",
+          "format": "Compound WordPerfect for Windows Document",
+          "version": "6 onwards",
+          "mime": "application/vnd.wordperfect",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "pronom",
+          "id": "x-fmt/42",
+          "format": "Wordperfect Secondary File",
+          "version": "5.0",
+          "mime": "",
+          "basis": "extension match doc",
+          "warning": "match on extension only"
+        },
+        {
+          "ns": "loc",
+          "id": "fdd000132",
+          "format": "Macromedia Flash FLA Project File Format",
+          "full": "Macromedia Flash FLA Project File Format",
+          "mime": "",
+          "basis": "byte match at 0, 24",
+          "warning": "extension mismatch"
+        }
+      ]
+    }
+  ]
+}

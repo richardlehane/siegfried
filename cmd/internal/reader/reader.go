@@ -52,6 +52,12 @@ type File struct {
 	IDs  []core.Identification
 }
 
+type record struct {
+	attributes map[string]string
+	listFields []string
+	listValues []string
+}
+
 func toVersion(str string) ([3]int, error) {
 	var ret [3]int
 	if str == "" {
@@ -69,6 +75,12 @@ func toVersion(str string) ([3]int, error) {
 		}
 	}
 	return ret, nil
+}
+
+func getHead(rec record) (Head, error) {
+	head, err := newHeadMap(rec.attributes)
+	head.Identifiers = getIdentifiers(rec.listValues)
+	return head, err
 }
 
 func newHeadMap(m map[string]string) (Head, error) {
@@ -142,6 +154,18 @@ func getFile(rec record) (File, error) {
 	return f, nil
 }
 
+func getIdentifiers(vals []string) [][2]string {
+	ret := make([][2]string, 0, len(vals)/2)
+	for i, v := range vals {
+		if i%2 == 0 {
+			ret = append(ret, [2]string{v, ""})
+		} else {
+			ret[len(ret)-1][1] = v
+		}
+	}
+	return ret
+}
+
 func getHash(m map[string]string) string {
 	for k := range m {
 		if h := checksum.GetHash(k); h >= 0 {
@@ -185,7 +209,7 @@ func Open(path string) (Reader, error) {
 	case 'f':
 		return newCSV(f, path)
 	case '{':
-		//return newJSON(f, path)
+		return newJSON(f, path)
 	case 'O', 'K':
 		//return newFido(f, path)
 	case 'D':

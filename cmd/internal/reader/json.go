@@ -14,40 +14,98 @@
 
 package reader
 
-/*
-type sfjresults struct {
-	Files []*sfjres `json:"files"`
+import (
+	"encoding/json"
+	"io"
+	"strconv"
+)
+
+type sfJSON struct {
+	dec    *json.Decoder
+	closer io.ReadCloser
+	head   Head
+	peek   record
+	err    error
 }
 
-type sfjres struct {
-	Filename string      `json:"filename"`
-	Matches  []*sfjmatch `json:"matches"`
-}
-
-type sfjmatch struct {
-	Puid string `json:"puid"`
-}
-
-func (m *sfjmatch) puid() string {
-	return m.Puid
-}
-
-func sfJson(b []byte) (map[string]string, error) {
-	doc := &sfjresults{}
-	if err := json.Unmarshal(b, doc); err != nil {
-		return nil, fmt.Errorf("JSON parsing error: %v", err)
-	}
-	out := make(map[string]string)
-	convertJ := func(s []*sfjmatch) []puidMatch {
-		ret := make([]puidMatch, len(s))
-		for i := range s {
-			ret[i] = puidMatch(s[i])
+func next(dec *json.Decoder) ([]string, []string, error) {
+	var (
+		tok json.Token
+		err error
+		i   int
+	)
+	keys, vals := make([]string, 0, 10), make([]string, 0, 10)
+	for tok, err = dec.Token(); err == nil; tok, err = dec.Token() {
+		switch tok := tok.(type) {
+		case string:
+			if i%2 == 0 {
+				keys = append(keys, tok)
+			} else {
+				vals = append(vals, tok)
+			}
+			i++
+		case float64:
+			i++
+			vals = append(vals, strconv.FormatFloat(tok, 'f', 0, 32))
+		case json.Delim:
+			if tok.String() == "[" || tok.String() == "]" {
+				return keys, vals, nil
+			}
 		}
-		return ret
 	}
-	for _, v := range doc.Files {
-		addMatches(out, prefix(v.Filename, *sroot), convertJ(v.Matches))
-	}
-	return out, nil
+	return nil, nil, err
 }
-*/
+
+func jsonRecord(dec *json.Decoder) (record, error) {
+	keys, vals, err := next(dec)
+	if err != nil {
+		return record{}, err
+	}
+	m := make(map[string]string)
+	for i, v := range vals {
+		m[keys[i]] = v
+	}
+	keys, vals, err = next(dec)
+	if err != nil {
+		return record{}, err
+	}
+	return record{m, keys, vals}, nil
+}
+
+func newJSON(rc io.ReadCloser, path string) (Reader, error) {
+	sfj := &sfJSON{
+		dec:    json.NewDecoder(rc),
+		closer: rc,
+	}
+	rec, err := jsonRecord(sfj.dec)
+	if err != nil {
+		return nil, err
+	}
+	rec.attributes["results"] = path
+	sfj.head, err = getHead(rec)
+	if err != nil {
+		return nil, err
+	}
+	next(sfj.dec) // throw away "files": [
+	sfj.peek, sfj.err = jsonRecord(sfj.dec)
+	sfj.head.HashHeader = getHash(sfj.peek.attributes)
+	sfj.head.Fields = getFields(sfj.peek.listFields, sfj.peek.listValues)
+	return sfj, nil
+}
+
+func (sfj *sfJSON) Head() Head {
+	return sfj.head
+}
+
+func (sfj *sfJSON) Next() (File, error) {
+	r, e := sfj.peek, sfj.err
+	if e != nil {
+		return File{}, e
+	}
+	sfj.peek, sfj.err = jsonRecord(sfj.dec)
+	return getFile(r)
+}
+
+func (sfj *sfJSON) Close() error {
+	return sfj.closer.Close()
+}

@@ -41,12 +41,6 @@ type token struct {
 	val string
 }
 
-type record struct {
-	attributes map[string]string
-	listFields []string
-	listValues []string
-}
-
 func advance(buf *bufio.Reader) (token, error) {
 	byts, err := buf.ReadBytes('\n')
 	if err != nil {
@@ -124,15 +118,7 @@ func (sfy *sfYAML) makeHead(path string) (*sfYAML, error) {
 		return nil, fmt.Errorf("invalid YAML; got %v", err)
 	}
 	rec.attributes["results"] = path
-	sfy.head, err = newHeadMap(rec.attributes)
-	sfy.head.Identifiers = make([][2]string, 0, len(rec.listValues)/2)
-	for i, v := range rec.listValues {
-		if i%2 == 0 {
-			sfy.head.Identifiers = append(sfy.head.Identifiers, [2]string{v, ""})
-		} else {
-			sfy.head.Identifiers[len(sfy.head.Identifiers)-1][1] = v
-		}
-	}
+	sfy.head, err = getHead(rec)
 	sfy.peek, sfy.err = consumeRecord(sfy.buf)
 	sfy.head.HashHeader = getHash(sfy.peek.attributes)
 	sfy.head.Fields = getFields(sfy.peek.listFields, sfy.peek.listValues)
