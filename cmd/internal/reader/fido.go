@@ -14,22 +14,82 @@
 
 package reader
 
-/*
-func fido(p string) (map[string]string, error) {
-	b, err := ioutil.ReadFile(p)
-	if err != nil {
-		return nil, err
-	}
-	rdr := csv.NewReader(bytes.NewReader(b))
-	entries, err := rdr.ReadAll()
-	if err != nil {
-		return nil, err
-	}
-	out := make(map[string]string)
-	addFunc := resultAdder("KO", *froot)
-	for _, v := range entries {
-		addFunc(out, v[0], v[6], v[2])
-	}
-	return out, nil
+import (
+	"encoding/csv"
+	"fmt"
+	"io"
+)
+
+const (
+	unknownWarn = "no match"
+	extWarn     = "match on extension only"
+)
+
+var (
+	fidoIDs    = [][2]string{{"fido", ""}}
+	fidoFields = [][]string{{"ns", "id", "format", "full", "mime", "basis", "warning", "time"}}
+)
+
+type fido struct {
+	rdr    *csv.Reader
+	closer io.ReadCloser
+	path   string
+	peek   []string
+	err    error
 }
-*/
+
+func newFido(rc io.ReadCloser, path string) (Reader, error) {
+	fi := &fido{
+		rdr:    csv.NewReader(rc),
+		closer: rc,
+		path:   path,
+	}
+	fi.peek, fi.err = fi.rdr.Read()
+	if fi.err == nil && len(fi.peek) < 9 {
+		fi.err = fmt.Errorf("not a valid fido results file, need 9 fields, got %d", len(fi.peek))
+	}
+	return fi, fi.err
+}
+
+func (fi *fido) Head() Head {
+	return Head{
+		ResultsPath: fi.path,
+		Identifiers: fidoIDs,
+		Fields:      fidoFields,
+	}
+}
+
+func idVals(known, puid, format, full, mime, basis, time string) []string {
+	var warn string
+	if known == "KO" {
+		puid = "UNKNOWN"
+		warn = unknownWarn
+	} else if basis == "extension" {
+		warn = extWarn
+	}
+	if mime == "None" {
+		mime = ""
+	}
+	return []string{"fido", puid, format, full, mime, basis, warn, time}
+}
+
+func (fi *fido) Next() (File, error) {
+	if fi.peek == nil || fi.err != nil {
+		return File{}, fi.err
+	}
+	file, err := newFile(fi.peek[6], fi.peek[5], "", "", "")
+	fn := fi.peek[6]
+	for {
+		file.IDs = append(file.IDs, newDefaultID(fidoFields[0],
+			idVals(fi.peek[0], fi.peek[2], fi.peek[3], fi.peek[4], fi.peek[7], fi.peek[8], fi.peek[1])))
+		fi.peek, fi.err = fi.rdr.Read()
+		if fi.peek == nil || fi.err != nil || fn != fi.peek[6] {
+			break
+		}
+	}
+	return file, err
+}
+
+func (fi *fido) Close() error {
+	return fi.closer.Close()
+}

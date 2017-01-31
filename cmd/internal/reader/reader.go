@@ -211,7 +211,7 @@ func Open(path string) (Reader, error) {
 	case '{':
 		return newJSON(f, path)
 	case 'O', 'K':
-		//return newFido(f, path)
+		return newFido(f, path)
 	case 'D':
 		//return newDroidNp(f, path)
 	case '"':

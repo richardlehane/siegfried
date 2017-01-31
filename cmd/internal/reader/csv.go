@@ -94,7 +94,7 @@ func (sfc *sfCSV) Next() (File, error) {
 		hash = sfc.peek[fieldStart]
 		fieldStart++
 	}
-	file, err := newFile(sfc.peek[0], sfc.peek[1], sfc.peek[2], sfc.peek[3], hash)
+	file, err := newFile(sfc.peek[0], sfc.peek[1], sfc.peek[2], hash, sfc.peek[3])
 	if err != nil {
 		return file, err
 	}
