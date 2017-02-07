@@ -13,3 +13,15 @@ import:
 - package: golang.org/x/image
   subpackages:
   - riff
+- package: golang.org/x/tools
+  subpackages:
+  - go/buildutil
+  - go/loader
+- package: golang.org/x/net
+  subpackages:
+  - html
+  - html/atom
+  - websocket
+- package: golang.org/x/crypto
+  subpackages:
+  - ssh/terminal
