@@ -26,15 +26,17 @@ import (
 
 // Frame encapsulates a pattern with offset information, mediating between the pattern and the bytestream.
 type Frame interface {
-	Match([]byte) (bool, []int)  // Match the enclosed pattern against the byte slice in a L-R direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
+	Match([]byte) (bool, []int) // Match the enclosed pattern against the byte slice in a L-R direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
+	MatchN([]byte, int) (bool, int)
 	MatchR([]byte) (bool, []int) // Match the enclosed pattern against the byte slice in a reverse (R-L) direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
-	Equals(Frame) bool           // Equals tests equality of two frames.
+	MatchNR([]byte, int) (bool, int)
+	Equals(Frame) bool // Equals tests equality of two frames.
 	String() string
-	Min() int                    // Min returns the minimum offset a frame can appear at
-	Max() int                    // Max returns the maximum offset a frame can appear at. Returns -1 for no limit (wildcard, *)
-	Linked(Frame, int, int) bool // Linked tests whether a frame is linked to a preceding frame (by a preceding or succeding relationship) with an offset and range that is less than the supplied ints
-	Pat() patterns.Pattern       // Pat exposes the enclosed pattern
-	Save(*persist.LoadSaver)     // Save a frame to a LoadSaver. The first byte written should be the identifying byte provided to Register().
+	Min() int                                // Min returns the minimum offset a frame can appear at
+	Max() int                                // Max returns the maximum offset a frame can appear at. Returns -1 for no limit (wildcard, *)
+	Linked(Frame, int, int) (bool, int, int) // Linked tests whether a frame is linked to a preceding frame (by a preceding or succeding relationship) with an offset and range that is less than the supplied ints
+	Pat() patterns.Pattern                   // Pat exposes the enclosed pattern
+	Save(*persist.LoadSaver)                 // Save a frame to a LoadSaver. The first byte written should be the identifying byte provided to Register().
 
 	// The following methods are inherited from the enclosed OffType
 	Orientation() OffType
@@ -186,24 +188,38 @@ type Fixed struct {
 
 // Match the enclosed pattern against the byte slice in a L-R direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
 func (f Fixed) Match(b []byte) (bool, []int) {
-	if f.Off >= len(b) {
-		return false, nil
-	}
-	if success, length := f.Test(b[f.Off:]); success {
-		return true, []int{f.Off + length}
+	if m, l := f.MatchN(b, 0); m {
+		return true, []int{l}
 	}
 	return false, nil
 }
 
+func (f Fixed) MatchN(b []byte, n int) (bool, int) {
+	if n > 0 || f.Off >= len(b) {
+		return false, -1
+	}
+	if success, length := f.Test(b[f.Off:]); success {
+		return true, f.Off + length
+	}
+	return false, -1
+}
+
 // MatchR matches the enclosed pattern against the byte slice in a reverse (R-L) direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
 func (f Fixed) MatchR(b []byte) (bool, []int) {
-	if f.Off >= len(b) {
-		return false, nil
-	}
-	if success, length := f.TestR(b[:len(b)-f.Off]); success {
-		return true, []int{f.Off + length}
+	if m, l := f.MatchNR(b, 0); m {
+		return true, []int{l}
 	}
 	return false, nil
+}
+
+func (f Fixed) MatchNR(b []byte, n int) (bool, int) {
+	if n > 0 || f.Off >= len(b) {
+		return false, -1
+	}
+	if success, length := f.TestR(b[:len(b)-f.Off]); success {
+		return true, f.Off + length
+	}
+	return false, -1
 }
 
 // Equals tests equality of two frames
@@ -232,20 +248,20 @@ func (f Fixed) Max() int {
 }
 
 // Linked tests whether a frame is linked to a preceding frame (by a preceding or succeding relationship) with an offset and range that is less than the supplied ints.
-func (f Fixed) Linked(prev Frame, maxDistance, maxRange int) bool {
+func (f Fixed) Linked(prev Frame, maxDistance, maxRange int) (bool, int, int) {
 	switch f.OffType {
 	case PREV:
 		if f.Off > maxDistance {
-			return false
+			return false, 0, 0
 		}
-		return true
+		return true, maxDistance - f.Off, maxRange
 	case SUCC, EOF:
 		if prev.Orientation() != SUCC || prev.Max() < 0 || prev.Max() > maxDistance || prev.Max()-prev.Min() > maxRange {
-			return false
+			return false, 0, 0
 		}
-		return true
+		return true, maxDistance - prev.Max(), maxRange - (prev.Max() - prev.Min())
 	default:
-		return false
+		return false, 0, 0
 	}
 }
 
@@ -305,6 +321,32 @@ func (w Window) Match(b []byte) (bool, []int) {
 	return false, nil
 }
 
+func (w Window) MatchN(b []byte, n int) (bool, int) {
+	var i int
+	min, max := w.MinOff, w.MaxOff
+	_, m := w.Length()
+	max += m
+	if max > len(b) {
+		max = len(b)
+	}
+	for min < max {
+		success, length := w.Test(b[min:max])
+		if success {
+			if i == n {
+				return true, min + length
+			}
+			i++
+			min++
+		} else {
+			if length == 0 {
+				break
+			}
+			min += length
+		}
+	}
+	return false, -1
+}
+
 // MatchR matches the enclosed pattern against the byte slice in a reverse (R-L) direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
 func (w Window) MatchR(b []byte) (bool, []int) {
 	ret := make([]int, 0, 1)
@@ -330,6 +372,32 @@ func (w Window) MatchR(b []byte) (bool, []int) {
 		return true, ret
 	}
 	return false, nil
+}
+
+func (w Window) MatchNR(b []byte, n int) (bool, int) {
+	var i int
+	min, max := w.MinOff, w.MaxOff
+	_, m := w.Length()
+	max += m
+	if max > len(b) {
+		max = len(b)
+	}
+	for min < max {
+		success, length := w.TestR(b[len(b)-max : len(b)-min])
+		if success {
+			if i == n {
+				return true, min + length
+			}
+			i++
+			min++
+		} else {
+			if length == 0 {
+				break
+			}
+			min += length
+		}
+	}
+	return false, -1
 }
 
 // Equals tests equality of two frames
@@ -358,20 +426,20 @@ func (w Window) Max() int {
 }
 
 // Linked tests whether a frame is linked to a preceding frame (by a preceding or succeding relationship) with an offset and range that is less than the supplied ints.
-func (w Window) Linked(prev Frame, maxDistance, maxRange int) bool {
+func (w Window) Linked(prev Frame, maxDistance, maxRange int) (bool, int, int) {
 	switch w.OffType {
 	case PREV:
 		if w.MaxOff > maxDistance || w.MaxOff-w.MinOff > maxRange {
-			return false
+			return false, 0, 0
 		}
-		return true
+		return true, maxDistance - w.MaxOff, maxRange - (w.MaxOff - w.MinOff)
 	case SUCC, EOF:
 		if prev.Orientation() != SUCC || prev.Max() < 0 || prev.Max() > maxDistance || prev.Max()-prev.Min() > maxRange {
-			return false
+			return false, 0, 0
 		}
-		return true
+		return true, maxDistance - prev.Max(), maxRange - (prev.Max() - prev.Min())
 	default:
-		return false
+		return false, 0, 0
 	}
 }
 
@@ -426,6 +494,27 @@ func (w Wild) Match(b []byte) (bool, []int) {
 	return false, nil
 }
 
+func (w Wild) MatchN(b []byte, n int) (bool, int) {
+	var i int
+	min, max := 0, len(b)
+	for min < max {
+		success, length := w.Test(b[min:])
+		if success {
+			if i == n {
+				return true, min + length
+			}
+			i++
+			min++
+		} else {
+			if length == 0 {
+				break
+			}
+			min += length
+		}
+	}
+	return false, -1
+}
+
 // MatchR matches the enclosed pattern against the byte slice in a reverse (R-L) direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
 func (w Wild) MatchR(b []byte) (bool, []int) {
 	ret := make([]int, 0, 1)
@@ -446,6 +535,27 @@ func (w Wild) MatchR(b []byte) (bool, []int) {
 		return true, ret
 	}
 	return false, nil
+}
+
+func (w Wild) MatchNR(b []byte, n int) (bool, int) {
+	var i int
+	min, max := 0, len(b)
+	for min < max {
+		success, length := w.TestR(b[:len(b)-min])
+		if success {
+			if i == n {
+				return true, min + length
+			}
+			i++
+			min++
+		} else {
+			if length == 0 {
+				break
+			}
+			min += length
+		}
+	}
+	return false, -1
 }
 
 // Equals tests equality of two frames.
@@ -474,15 +584,15 @@ func (w Wild) Max() int {
 }
 
 // Linked tests whether a frame is linked to a preceding frame (by a preceding or succeding relationship) with an offset and range that is less than the supplied ints.
-func (w Wild) Linked(prev Frame, maxDistance, maxRange int) bool {
+func (w Wild) Linked(prev Frame, maxDistance, maxRange int) (bool, int, int) {
 	switch w.OffType {
 	case SUCC, EOF:
 		if prev.Orientation() != SUCC || prev.Max() < 0 || prev.Max() > maxDistance || prev.Max()-prev.Min() > maxRange {
-			return false
+			return false, 0, 0
 		}
-		return true
+		return true, maxDistance - prev.Max(), maxRange - (prev.Max() - prev.Min())
 	default:
-		return false
+		return false, 0, 0
 	}
 }
 
@@ -534,6 +644,27 @@ func (w WildMin) Match(b []byte) (bool, []int) {
 	return false, nil
 }
 
+func (w WildMin) MatchN(b []byte, n int) (bool, int) {
+	var i int
+	min, max := w.MinOff, len(b)
+	for min < max {
+		success, length := w.Test(b[min:])
+		if success {
+			if i == n {
+				return true, min + length
+			}
+			i++
+			min++
+		} else {
+			if length == 0 {
+				break
+			}
+			min += length
+		}
+	}
+	return false, -1
+}
+
 // MatchR matches the enclosed pattern against the byte slice in a reverse (R-L) direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
 func (w WildMin) MatchR(b []byte) (bool, []int) {
 	ret := make([]int, 0, 1)
@@ -554,6 +685,27 @@ func (w WildMin) MatchR(b []byte) (bool, []int) {
 		return true, ret
 	}
 	return false, nil
+}
+
+func (w WildMin) MatchNR(b []byte, n int) (bool, int) {
+	var i int
+	min, max := w.MinOff, len(b)
+	for min < max {
+		success, length := w.TestR(b[:len(b)-min])
+		if success {
+			if i == n {
+				return true, min + length
+			}
+			i++
+			min++
+		} else {
+			if length == 0 {
+				break
+			}
+			min += length
+		}
+	}
+	return false, -1
 }
 
 // Equals tests equality of two frames.
@@ -582,15 +734,15 @@ func (w WildMin) Max() int {
 }
 
 // Linked tests whether a frame is linked to a preceding frame (by a preceding or succeding relationship) with an offset and range that is less than the supplied ints.
-func (w WildMin) Linked(prev Frame, maxDistance, maxRange int) bool {
+func (w WildMin) Linked(prev Frame, maxDistance, maxRange int) (bool, int, int) {
 	switch w.OffType {
 	case SUCC, EOF:
 		if prev.Orientation() != SUCC || prev.Max() < 0 || prev.Max() > maxDistance || prev.Max()-prev.Min() > maxRange {
-			return false
+			return false, 0, 0
 		}
-		return true
+		return true, maxDistance - prev.Max(), maxRange - (prev.Max() - prev.Min())
 	default:
-		return false
+		return false, 0, 0
 	}
 }
 

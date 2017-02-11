@@ -30,6 +30,25 @@ func (s Signature) String() string {
 	return "(" + str + ")"
 }
 
+// TODO
+func (s Signature) MatchN([]byte, int) (bool, int) {
+	return false, 0
+}
+
+// TODO
+func (s Signature) MatchNR([]byte, int) (bool, int) {
+	return false, 0
+}
+
+func (s Signature) OneEnough() bool {
+	for _, f := range s {
+		if _, ok := f.(Fixed); !ok {
+			return false
+		}
+	}
+	return true
+}
+
 // Equals tests equality of two signatures.
 func (s Signature) Equals(s1 Signature) bool {
 	if len(s) != len(s1) {
@@ -137,12 +156,15 @@ func (s Signature) Segment(dist, rng int) []Signature {
 	}
 	segments := make([]Signature, 0, 1)
 	segment := Signature{s[0]}
+	thisDist, thisRng := dist, rng
+	var lnk bool
 	for i, frame := range s[1:] {
-		if frame.Linked(s[i], dist, rng) {
+		if lnk, thisDist, thisRng = frame.Linked(s[i], thisDist, thisRng); lnk {
 			segment = append(segment, frame)
 		} else {
 			segments = append(segments, segment)
 			segment = Signature{frame}
+			thisDist, thisRng = dist, rng
 		}
 	}
 	return append(segments, segment)

@@ -90,7 +90,7 @@ func varLength(seg frames.Signature, max int) position {
 	}
 	if len(seg) > 1 {
 		for i, f := range seg[1:] {
-			if f.Linked(seg[i], 0, 0) {
+			if lnk, _, _ := f.Linked(seg[i], 0, 0); lnk {
 				num = f.NumSequences()
 				if num > 0 && num <= max {
 					if current.length > 0 && cur*num <= max {
@@ -135,7 +135,7 @@ func bofLength(seg frames.Signature, max int) position {
 	}
 	if len(seg) > 1 {
 		for i, f := range seg[1:] {
-			if f.Linked(seg[i], 0, 0) {
+			if lnk, _, _ := f.Linked(seg[i], 0, 0); lnk {
 				num = f.NumSequences()
 				if num > 0 && num <= max {
 					if pos.length > 0 && cur*num <= max {
@@ -165,7 +165,7 @@ func eofLength(seg frames.Signature, max int) position {
 	if len(seg) > 1 {
 		for i := len(seg) - 2; i >= 0; i-- {
 			f := seg[i]
-			if seg[i+1].Linked(f, 0, 0) {
+			if lnk, _, _ := seg[i+1].Linked(f, 0, 0); lnk {
 				num = f.NumSequences()
 				if num > 0 && num <= max {
 					if pos.length > 0 && cur*num <= max {
