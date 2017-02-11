@@ -7,7 +7,7 @@ go:
 - 1.7
 - tip
 install:
-- go install github.com/richardlehane/siegfried/cmd/sf
+- go get github.com/richardlehane/siegfried/cmd/sf
 script:
 - go test github.com/richardlehane/siegfried/cmd/sf
 before_deploy:
