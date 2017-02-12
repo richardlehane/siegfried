@@ -8,7 +8,7 @@
 
 ### Version
 
-1.6.7
+1.7.0
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -21,17 +21,19 @@
 
 #### Options
 
+    sf -version                                // Display version information
     sf -csv file.ext | DIR                     // Output CSV rather than YAML
     sf -json file.ext | DIR                    // Output JSON rather than YAML
     sf -droid file.ext | DIR                   // Output DROID CSV rather than YAML
-    sf -                                       // Read list of files piped to stdin
     sf -nr DIR                                 // Don't scan subdirectories
     sf -z file.zip | DIR                       // Decompress and scan zip, tar, gzip, warc, arc
     sf -hash md5 file.ext | DIR                // Calculate md5, sha1, sha256, sha512, or crc hash
     sf -sig custom.sig file.ext                // Use a custom signature file
+    sf -                                       // Scan stream piped to stdin
+    sf -name file.ext -                        // Provide filename when scanning stream 
+    sf -f myfiles.txt                          // Read list of files piped to stdin
     sf -home c:\junk -sig custom.sig file.ext  // Use a custom home directory
     sf -serve hostname:port                    // Server mode
-    sf -version                                // Display version information
     sf -throttle 10ms DIR                      // Pause for duration (e.g. 1s) between file scans
     sf -multi 256 DIR                          // Scan multiple (e.g. 256) files in parallel 
     sf -log [comma-sep opts] file.ext | DIR    // Log errors etc. to stderr (default) or stdout
@@ -39,6 +41,8 @@
     sf -log u,o file.ext | DIR                 // Log unknowns to stdout
     sf -log d,s file.ext | DIR                 // Log debugging and slow messages to stderr
     sf -log p,t DIR > results.yaml             // Log progress and time while redirecting results
+    sf -log fmt/1,c DIR > results.yaml         // Log instances of fmt/1 and chart results
+    sf -log u -csv -r results.yaml             // Replay results file, convert to csv, log unknowns
 
 #### Example
 
@@ -80,6 +84,23 @@ Or, for the most recent updates, you can install from this fork:
 
 
 ## Changes 
+### v1.7.0 (2017-02-19)
+### Added
+- log files that match particular formats with `-log fmt/1,@set2` (comma separated list of format IDs/format sets). These can be mixed with regular log options e.g. `-log unknown,fmt/1,chart`
+- generate a summary view of formats matched during a scan with `-log chart` (or just `-log c`)
+- replay scans from results files with `sf -r`: load one or more results files to replay logging or to convert to a different output format e.g. `sf -r -csv results.yaml` or `sf -r -log unknown,chart,stdout results1.yaml results2.csv`
+- compare results with `roy compare` subcommand: view the difference between two or more results e.g. `roy compare results1.yaml results2.csv droid.csv ...`
+- `roy sets` subcommand: `roy sets` creates pronom-all.json, pronom-families.json, and pronom-types.json sets files;
+`roy sets -changes` creates a pronom-changes.json sets file from a PRONOM release-notes.xml file; `roy sets -list @set1,@set2` lists contents of a comma-separated list of format sets
+- `roy inspect releases` provides a summary view of a PRONOM release-notes.xml file
+
+## Changed
+- the `sf -` command now scans stdin e.g. `cat mypdf.pdf | sf -`. You can pass a filename in to supplement the analysis with the `-name` flag. E.g. `cat myfile.pdf | sf -name myfile.pdf -`. In previous versions of sf, the hyphen argument signfied treating stdin as a newline separated list of filenames for scanning. For that functionality, use the new `-f` flag which can now be used with an input file or stdin i.e. `sf -f myfiles.txt` or `cat myfiles.txt | sf -f -`; requested by [pm64](https://github.com/richardlehane/siegfried/issues/96)
+
+### Fixed
+- some files cause endless scanning due to large numbers of signature hits; reported by [workflowsguy](https://github.com/richardlehane/siegfried/issues/94)
+- null bytes can be written to output due to bad zip filename decoding; reported by [Tim Walsh](https://github.com/richardlehane/siegfried/issues/95)
+
 ### v1.6.7 (2016-11-23)
 ### Added
 - enable -hash, -z, and -log flags for -serve and -multi modes
