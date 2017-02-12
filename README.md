@@ -95,7 +95,7 @@ Or, for the most recent updates, you can install from this fork:
 - `roy inspect releases` provides a summary view of a PRONOM release-notes.xml file
 
 ## Changed
-- the `sf -` command now scans stdin e.g. `cat mypdf.pdf | sf -`. You can pass a filename in to supplement the analysis with the `-name` flag. E.g. `cat myfile.pdf | sf -name myfile.pdf -`. In previous versions of sf, the hyphen argument signfied treating stdin as a newline separated list of filenames for scanning. For that functionality, use the new `-f` flag which can now be used with an input file or stdin i.e. `sf -f myfiles.txt` or `cat myfiles.txt | sf -f -`; requested by [pm64](https://github.com/richardlehane/siegfried/issues/96)
+- the `sf -` command now scans stdin e.g. `cat mypdf.pdf | sf -`. You can pass a filename in to supplement the analysis with the `-name` flag. E.g. `cat myfile.pdf | sf -name myfile.pdf -`. In previous versions of sf, the dash argument signified treating stdin as a newline separated list of filenames for scanning. Use the new `-f` flag for this e.g. `sf -f myfiles.txt` or `cat myfiles.txt | sf -f -`; change requested by [pm64](https://github.com/richardlehane/siegfried/issues/96)
 
 ### Fixed
 - some files cause endless scanning due to large numbers of signature hits; reported by [workflowsguy](https://github.com/richardlehane/siegfried/issues/94)
