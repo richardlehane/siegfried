@@ -21,7 +21,6 @@
 
 #### Options
 
-    sf -version                                // Display version information
     sf -csv file.ext | DIR                     // Output CSV rather than YAML
     sf -json file.ext | DIR                    // Output JSON rather than YAML
     sf -droid file.ext | DIR                   // Output DROID CSV rather than YAML
@@ -31,7 +30,8 @@
     sf -sig custom.sig file.ext                // Use a custom signature file
     sf -                                       // Scan stream piped to stdin
     sf -name file.ext -                        // Provide filename when scanning stream 
-    sf -f myfiles.txt                          // Read list of files piped to stdin
+    sf -f myfiles.txt                          // Scan list of files
+    sf -version                                // Display version information
     sf -home c:\junk -sig custom.sig file.ext  // Use a custom home directory
     sf -serve hostname:port                    // Server mode
     sf -throttle 10ms DIR                      // Pause for duration (e.g. 1s) between file scans
@@ -81,6 +81,10 @@ Or, for the most recent updates, you can install from this fork:
     wget -qO - https://bintray.com/user/downloadSubjectPublicKey?username=bintray | sudo apt-key add -
     echo "deb http://dl.bintray.com/siegfried/debian wheezy main" | sudo tee -a /etc/apt/sources.list
     sudo apt-get update && sudo apt-get install siegfried
+
+#### FreeBSD:
+
+    pkg install siegfried
 
 
 ## Changes 
@@ -136,3 +140,5 @@ Thanks TNA for http://www.nationalarchives.gov.uk/pronom/ and http://www.nationa
 Thanks Ross for https://github.com/exponential-decay/skeleton-test-suite-generator and http://exponentialdecay.co.uk/sd/index.htm, both are very handy!
 
 Thanks Misty for the brew and ubuntu packaging
+
+Thanks Steffen for the FreeBSD packaging
