@@ -1,7 +1,15 @@
 package reader
 
 import (
+	"bytes"
 	"testing"
+)
+
+const (
+	ipresFiles      = 2190
+	ipresFidoIDs    = 2984
+	ipresDroidIDs   = 2451
+	ipresDroidNpIDs = 2192
 )
 
 func TestSF(t *testing.T) {
@@ -32,17 +40,37 @@ func TestSF(t *testing.T) {
 	}
 }
 
-func TestFido(t *testing.T) {
-	fi, err := Open("examples/ipresShowcase/fido.csv")
+func testRdr(t *testing.T, path string, expectFiles, expectIDs int) {
+	rdr, err := Open(path)
 	if err != nil {
 		t.Fatal(err)
 	}
 	var i, j int
-	for f, e := fi.Next(); e == nil; f, e = fi.Next() {
+	for f, e := rdr.Next(); e == nil; f, e = rdr.Next() {
 		i++
 		j += len(f.IDs)
 	}
-	if i != 2190 || j != 2984 {
-		t.Errorf("Expecting 2190 files and 2984 IDs, got %d files and %d IDs", i, j)
+	if i != expectFiles || j != expectIDs {
+		t.Errorf("Expecting %d files and %d IDs, got %d files and %d IDs", expectFiles, expectIDs, i, j)
+	}
+}
+
+func TestFido(t *testing.T) {
+	testRdr(t, "examples/ipresShowcase/fido.csv", ipresFiles, ipresFidoIDs)
+}
+
+func TestDroid(t *testing.T) {
+	testRdr(t, "examples/ipresShowcase/droid-gui-m.csv", ipresFiles, ipresDroidIDs)
+	testRdr(t, "examples/ipresShowcase/droid-gui-m.csv", ipresFiles, ipresDroidIDs)
+	testRdr(t, "examples/ipresShowcase/droid-np.csv", ipresFiles, ipresDroidNpIDs)
+}
+
+func TestCompare(t *testing.T) {
+	w := &bytes.Buffer{}
+	if err := Compare(w, 0, "examples/ipresShowcase/droid-gui-m.csv", "examples/ipresShowcase/droid-gui-s.csv"); err != nil {
+		t.Fatal(err)
+	}
+	if string(w.Bytes()) != "COMPLETE MATCH" {
+		t.Fatalf("expecting a complete match; got %s", string(w.Bytes()))
 	}
 }

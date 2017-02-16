@@ -14,62 +14,219 @@
 
 package reader
 
-/*
-func _droid(p string) (map[string]string, error) {
-	b, err := ioutil.ReadFile(p)
-	if err != nil {
-		return nil, err
-	}
-	if len(b) < 3 {
-		return nil, fmt.Errorf("Empty results")
-	}
-	switch string(b[:3]) {
-	case `"ID`:
-		return droidCSV(b)
-	case "DRO":
-		return droidRaw(b)
-	}
-	return nil, fmt.Errorf("Not a valid droid result set")
+import (
+	"bufio"
+	"bytes"
+	"encoding/csv"
+	"fmt"
+	"io"
+	"strconv"
+	"strings"
+
+	"github.com/richardlehane/siegfried/cmd/internal/checksum"
+)
+
+var (
+	droidIDs      = [][2]string{{"droid", ""}}
+	droidFields   = [][]string{{"ns", "id", "format", "version", "mime", "basis", "warning"}}
+	droidNpFields = [][]string{{"ns", "id", "warning"}}
+)
+
+type droid struct {
+	rdr    *csv.Reader
+	closer io.ReadCloser
+	hh     string
+	path   string
+	peek   []string
+	err    error
 }
 
-func droidRaw(b []byte) (map[string]string, error) {
-	sep := []byte("Open archives: False")
-	i := bytes.Index(b, sep)
-	b = bytes.TrimSpace(b[i+len(sep):])
-	s := bufio.NewScanner(bytes.NewReader(b))
-	out := make(map[string]string)
-	addFunc := resultAdder("Unknown", *droot)
-	for ok := s.Scan(); ok; ok = s.Scan() {
-		line := s.Bytes()
-		idx := bytes.LastIndex(line, []byte{','})
-		addFunc(out, string(line[idx+1:]), string(line[:idx]), string(line[idx+1:]))
-	}
-	return out, nil
-}
-
-func droidCSV(b []byte) (map[string]string, error) {
-	rdr := csv.NewReader(bytes.NewReader(b))
+func newDroid(rc io.ReadCloser, path string) (Reader, error) {
+	rdr := csv.NewReader(rc)
 	rdr.FieldsPerRecord = -1
-	entries, err := rdr.ReadAll()
-	if err != nil || len(entries) < 2 {
-		return nil, fmt.Errorf("DROID error: either no results, or bad CSV. CSV err: %v", err)
+	//rdr.LazyQuotes = true
+	rec, err := rdr.Read()
+	if err != nil || rec[0] != "ID" || len(rec) < 17 {
+		return nil, fmt.Errorf("bad or invalid DROID CSV: %v", err)
 	}
-	out := make(map[string]string)
-	addFunc := resultAdder("0", *droot)
+	dr := &droid{
+		rdr:    rdr,
+		closer: rc,
+		path:   path,
+	}
+	cs := checksum.GetHash(strings.TrimSuffix(rec[12], "_HASH"))
+	if cs >= 0 {
+		dr.hh = cs.String()
+	}
+	return dr, dr.nextFile()
+}
 
-	for _, v := range entries[1:] {
-		switch v[8] {
-		case "File", "Container":
-			addFunc(out, v[13], v[3], v[14])
+func (dr *droid) nextFile() error {
+	for {
+		dr.peek, dr.err = dr.rdr.Read()
+		if dr.err != nil {
+			return fmt.Errorf("bad or invalid DROID CSV: %v", dr.err)
 		}
-		num, err := strconv.Atoi(v[13])
-		// if we've got more than one PUID, grab it here
-		if err == nil && num > 1 {
-			for i := 1; i < num; i++ {
-				addFunc(out, v[13], v[3], v[14+i*4])
+		if len(dr.peek) > 8 && dr.peek[8] != "Folder" {
+			return nil
+		}
+	}
+}
+
+func (dr *droid) Head() Head {
+	return Head{
+		ResultsPath: dr.path,
+		Identifiers: droidIDs,
+		Fields:      droidFields,
+		HashHeader:  dr.hh,
+	}
+}
+
+func didVals(puid, format, version, mime, basis, mismatch string) []string {
+	var warn string
+	if mismatch == "true" {
+		warn = extMismatch
+	} else if basis == "Extension" {
+		warn = extWarn
+	} else if puid == "" {
+		warn = unknownWarn
+	}
+	if puid == "" {
+		puid = "UNKNOWN"
+	}
+	return []string{droidIDs[0][0], puid, format, version, mime, strings.ToLower(basis), warn}
+}
+
+func (dr *droid) Next() (File, error) {
+	if dr.peek == nil || dr.err != nil {
+		return File{}, dr.err
+	}
+	file, err := newFile(dr.peek[3], dr.peek[7], dr.peek[10], dr.peek[12], "")
+	fn := dr.peek[3]
+	for {
+		file.IDs = append(file.IDs, newDefaultID(droidFields[0],
+			didVals(dr.peek[14], dr.peek[15], dr.peek[16], dr.peek[17], dr.peek[5], dr.peek[11])))
+		// single line multi ids
+		if len(dr.peek) > 18 {
+			num, err := strconv.Atoi(dr.peek[13])
+			if err == nil && num > 1 {
+				for i := 1; i < num; i++ {
+					file.IDs = append(file.IDs, newDefaultID(droidFields[0],
+						didVals(dr.peek[14+i*4], dr.peek[15+i*4], dr.peek[16+i*4], dr.peek[17+i*4], dr.peek[5], dr.peek[11])))
+				}
 			}
 		}
+		// multi line multi ids
+		err := dr.nextFile()
+		if err != nil || fn != dr.peek[3] {
+			break
+		}
 	}
-	return out, nil
+	return file, err
 }
-*/
+
+func (dr *droid) Close() error {
+	return dr.closer.Close()
+}
+
+type droidNp struct {
+	buf    *bufio.Reader
+	closer io.ReadCloser
+	path   string
+	ids    [][2]string
+	peek   []string
+	err    error
+}
+
+func newDroidNp(rc io.ReadCloser, path string) (Reader, error) {
+	dnp := &droidNp{
+		buf:    bufio.NewReader(rc),
+		closer: rc,
+		path:   path,
+		ids:    make([][2]string, 1),
+	}
+	dnp.ids[0][0] = droidIDs[0][0]
+	var (
+		sigs []string
+		byts []byte
+		err  error
+	)
+	for {
+		byts, err = dnp.buf.ReadBytes('\n')
+		if err != nil {
+			return nil, err
+		}
+		if bytes.HasPrefix(byts, []byte("Binary signature file: ")) {
+			sigs = append(sigs, string(byts))
+		} else if bytes.HasPrefix(byts, []byte("Container signature file: ")) {
+			sigs = append(sigs, string(byts))
+		}
+		if !bytes.Contains(byts, []byte(": ")) {
+			break
+		}
+	}
+	dnp.ids[0][1] = strings.Join(sigs, "; ")
+	return dnp, dnp.setPeek(byts)
+}
+
+func (dnp *droidNp) advance() {
+	byts, err := dnp.buf.ReadBytes('\n')
+	if err != nil {
+		dnp.err = err
+		return
+	}
+	dnp.err = dnp.setPeek(byts)
+}
+
+func (dnp *droidNp) setPeek(byts []byte) error {
+	idx := bytes.LastIndex(byts, []byte{','})
+	if idx < 0 {
+		if strings.TrimSpace(string(byts)) == "" {
+			return io.EOF
+		}
+		return fmt.Errorf("bad droid no profile file; line without comma separator: %v", byts)
+	}
+	var fn, puid string
+	fn = string(byts[:idx])
+	if idx < len(byts)-2 {
+		puid = strings.TrimSpace(string(byts[idx+1:]))
+	}
+	dnp.peek = []string{fn, puid}
+	return nil
+}
+
+func (dnp *droidNp) Head() Head {
+	return Head{
+		ResultsPath: dnp.path,
+		Identifiers: dnp.ids,
+		Fields:      droidNpFields,
+	}
+}
+
+func (dnp *droidNp) Next() (File, error) {
+	if dnp.peek == nil || dnp.err != nil {
+		return File{}, dnp.err
+	}
+	file, err := newFile(dnp.peek[0], "", "", "", "")
+	fn := dnp.peek[0]
+	for {
+		var puid, warn string
+		puid = dnp.peek[1]
+		if puid == "Unknown" {
+			puid = "UNKNOWN"
+			warn = unknownWarn
+		}
+		file.IDs = append(file.IDs, newDefaultID(droidNpFields[0],
+			[]string{droidIDs[0][0], puid, warn}))
+		// multi line multi ids
+		dnp.advance()
+		if dnp.err != nil || fn != dnp.peek[0] {
+			break
+		}
+	}
+	return file, err
+}
+
+func (dnp *droidNp) Close() error {
+	return dnp.closer.Close()
+}

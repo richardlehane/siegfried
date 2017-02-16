@@ -20,11 +20,6 @@ import (
 	"io"
 )
 
-const (
-	unknownWarn = "no match"
-	extWarn     = "match on extension only"
-)
-
 var (
 	fidoIDs    = [][2]string{{"fido", ""}}
 	fidoFields = [][]string{{"ns", "id", "format", "full", "mime", "basis", "warning", "time"}}

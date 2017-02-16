@@ -26,6 +26,12 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core"
 )
 
+const (
+	unknownWarn = "no match"
+	extWarn     = "match on extension only"
+	extMismatch = "extension mismatch"
+)
+
 type Reader interface {
 	Head() Head
 	Next() (File, error)
@@ -114,6 +120,9 @@ func newFile(path, sz, mod, hash, e string) (File, error) {
 	}
 	if e != "" {
 		file.Err = fmt.Errorf("%s", e)
+	}
+	if sz == "" {
+		return file, nil
 	}
 	size, err := strconv.Atoi(sz)
 	if err != nil {
@@ -213,9 +222,9 @@ func Open(path string) (Reader, error) {
 	case 'O', 'K':
 		return newFido(f, path)
 	case 'D':
-		//return newDroidNp(f, path)
+		return newDroidNp(f, path)
 	case '"':
-		//return newDroid(f, path)
+		return newDroid(f, path)
 	}
 	return nil, fmt.Errorf("not a valid results file")
 }

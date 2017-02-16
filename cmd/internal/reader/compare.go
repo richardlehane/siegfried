@@ -15,197 +15,106 @@
 package reader
 
 import (
+	"encoding/csv"
+	"fmt"
 	"io"
+	"path/filepath"
+	"sort"
+	"strconv"
+	"strings"
 )
 
-func Compare(w io.Writer, readers ...Reader) error {
+const (
+	Path int = iota
+	Filename
+	FilenameSize
+	FilenameMod
+	FilenameHash
+	Hash
+)
+
+func keygen(join int, fi File) string {
+	switch join {
+	default:
+		return fi.Path
+	case Filename:
+		return filepath.Base(fi.Path)
+	case FilenameSize:
+		return filepath.Base(fi.Path) + strconv.FormatInt(fi.Size, 10)
+	case FilenameMod:
+		return filepath.Base(fi.Path) + fi.Mod
+	case FilenameHash:
+		return filepath.Base(fi.Path) + string(fi.Hash)
+	case Hash:
+		return string(fi.Hash)
+	}
+}
+
+func idStr(fi File) string {
+	ids := make([]string, len(fi.IDs))
+	for i, id := range fi.IDs {
+		ids[i] = id.String()
+	}
+	sort.Strings(ids)
+	return strings.Join(ids, ";")
+}
+
+func matches(res []string) bool {
+	if len(res) < 3 {
+		return false
+	}
+	m := res[1]
+	for _, r := range res[2:] {
+		if r != m {
+			return false
+		}
+	}
+	return true
+}
+
+func Compare(w io.Writer, join int, paths ...string) error {
+	if len(paths) < 2 {
+		return fmt.Errorf("at least two results files must be provided for comparison; got %d", len(paths))
+	}
+	readers := make([]Reader, len(paths))
+	for i, v := range paths {
+		rdr, err := Open(v)
+		if err != nil {
+			return err
+		}
+		readers[i] = rdr
+	}
+	files := make([]string, 0, 1000)
+	results := make(map[string][]string)
+	for i, rdr := range readers {
+		for f, e := rdr.Next(); e == nil; f, e = rdr.Next() {
+			key := keygen(join, f)
+			_, ok := results[key]
+			if !ok {
+				files = append(files, key)
+				def := make([]string, len(readers)+1)
+				def[0] = f.Path
+				for i := range def[1:] {
+					def[i+1] = "MISSING"
+				}
+				results[key] = def
+			}
+			results[key][i+1] = idStr(f)
+		}
+	}
+	wrt := csv.NewWriter(w)
+	var complete bool = true
+	for _, f := range files {
+		if !matches(results[f]) {
+			complete = false
+			if err := wrt.Write(results[f]); err != nil {
+				return err
+			}
+		}
+	}
+	wrt.Flush()
+	if complete {
+		fmt.Fprint(w, "COMPLETE MATCH")
+	}
 	return nil
 }
-
-/*
-
-type puidMatch interface {
-	puid() string
-}
-
-func manyToOne(puids []string) string {
-	if len(puids) == 0 {
-		return UNKNOWN
-	}
-	sort.Strings(puids)
-	return strings.Join(puids, SEP)
-}
-
-func addMatches(m map[string]string, name string, matches []puidMatch) {
-	var l int
-	for _, p := range matches {
-		if p.puid() != "UNKNOWN" {
-			l++
-		}
-	}
-	puids := make([]string, l)
-	var i int
-	for _, p := range matches {
-		if p.puid() != "UNKNOWN" {
-			puids[i] = p.puid()
-			i++
-		}
-	}
-	m[clean(name)] = manyToOne(puids)
-}
-
-func oneToOne(puids, puid string) string {
-	return manyToOne(append(strings.Split(puids, SEP), puid))
-}
-
-func resultAdder(unknown, p string) func(map[string]string, string, string, string) {
-	return func(m map[string]string, u string, file string, puid string) {
-		file = prefix(file, p)
-		if u == unknown {
-			m[clean(file)] = UNKNOWN
-			return
-		}
-		if _, ok := m[clean(file)]; ok {
-			m[clean(file)] = oneToOne(m[clean(file)], puid)
-		} else {
-			m[clean(file)] = puid
-		}
-	}
-}
-
-
-var replacer = strings.NewReplacer("''", "'")
-
-func clean(path string) string {
-	vol := filepath.VolumeName(path)
-	return strings.TrimPrefix(filepath.Clean(replacer.Replace(path)), vol)
-}
-
-func prefix(n, p string) string {
-	if p == "" {
-		return n
-	}
-	return strings.TrimPrefix(n, p)
-}
-
-func run(comp map[string][4]string, fg *string, fn func(string) (map[string]string, error), idx, no int, members [4]bool) ([4]bool, int) {
-	if *fg != "" {
-		m, err := fn(*fg)
-		if err != nil {
-			log.Fatalf("Error reading %s: %v", *fg, err)
-		}
-		for k, v := range m {
-			if w, ok := comp[k]; ok {
-				w[idx] = v
-				comp[k] = w
-			} else {
-				switch idx {
-				case 0:
-					comp[k] = [4]string{v, "", "", ""}
-				case 1:
-					comp[k] = [4]string{"", v, "", ""}
-				case 2:
-					comp[k] = [4]string{"", "", v, ""}
-				case 3:
-					comp[k] = [4]string{"", "", "", v}
-				}
-			}
-		}
-		members[idx] = true
-		no++
-		return members, no
-	}
-	return members, no
-}
-
-func _main() {
-	flag.Parse()
-	// collect results for each tool invoked. Results in form: filename -> matches
-	comp := make(map[string][4]string)
-	names := []string{"sf", "second sf", "droid", "fido"}
-	var members [4]bool
-	var no int // number of members
-	members, no = run(comp, sfF, sf, 0, no, members)
-	members, no = run(comp, sf2F, sf, 1, no, members)
-	members, no = run(comp, droidF, _droid, 2, no, members)
-	members, no = run(comp, fidoF, fido, 3, no, members)
-	if no <= 1 {
-		log.Fatalf("Must have more than one output to compare")
-	}
-	// now filter results for just the mismatches. Rearrange in form: matches -> filename (so sorted in output)
-	results := make(map[[4]string][]string)
-	matches := func(outs [4]string, members [4]bool) bool {
-		var sub bool
-		var this string
-		for i, v := range members {
-			if v {
-				if !sub {
-					this = outs[i]
-					sub = true
-					continue
-				}
-				if this != outs[i] {
-					return false
-				}
-			}
-		}
-		return true
-	}
-	for k, v := range comp {
-		if !matches(v, members) {
-			if _, ok := results[v]; ok {
-				results[v] = append(results[v], k)
-			} else {
-				results[v] = []string{k}
-			}
-		}
-	}
-	if len(results) == 0 {
-		log.Println("COMPLETE MATCH")
-		os.Exit(0)
-	}
-	// write output
-	writer := csv.NewWriter(os.Stdout)
-	header := func(names []string, members [4]bool, l int) []string {
-		row := make([]string, l+1)
-		row[0] = "filename"
-		var i int
-		for j, v := range members {
-			if v {
-				i++
-				row[i] = names[j]
-			}
-		}
-		return row
-	}
-	err := writer.Write(header(names, members, no))
-	if err != nil {
-		log.Fatal(err)
-	}
-	body := func(filename string, outs [4]string, members [4]bool, l int) []string {
-		row := make([]string, l+1)
-		row[0] = filename
-		var i int
-		for j, v := range members {
-			if v {
-				i++
-				row[i] = outs[j]
-				if row[i] == "" {
-					row[i] = "MISSING"
-				}
-			}
-		}
-		return row
-	}
-	for k, v := range results {
-		for _, w := range v {
-			err := writer.Write(body(w, k, members, no))
-			if err != nil {
-				log.Fatal(err)
-			}
-		}
-	}
-	writer.Flush()
-	log.Println("COMPLETE")
-}
-*/
