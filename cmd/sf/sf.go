@@ -28,6 +28,7 @@ import (
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/cmd/internal/checksum"
 	"github.com/richardlehane/siegfried/cmd/internal/logger"
+	"github.com/richardlehane/siegfried/cmd/internal/reader"
 	"github.com/richardlehane/siegfried/cmd/internal/writer"
 	"github.com/richardlehane/siegfried/internal/siegreader"
 	"github.com/richardlehane/siegfried/pkg/config"
@@ -56,6 +57,9 @@ var (
 	archive   = flag.Bool("z", false, "scan archive formats (zip, tar, gzip, warc, arc)")
 	hashf     = flag.String("hash", "", "calculate file checksum with hash algorithm; options "+checksum.HashChoices)
 	throttlef = flag.Duration("throttle", 0, "set a time to wait between scanning files e.g. 50ms")
+	replay    = flag.Bool("replay", false, "replay one (or more) results files to change output or logging e.g. sf -r -csv results.yaml")
+	list      = flag.Bool("f", false, "scan one (or more) lists of filenames")
+	name      = flag.String("name", "", "provide a filename when scanning a stream e.g. sf -name myfile.txt -")
 )
 
 var (
@@ -264,7 +268,13 @@ func main() {
 		log.Fatalf("[FATAL] invalid hash type; choose from %s", checksum.HashChoices)
 	}
 	// load and handle signature errors
-	s, err := siegfried.Load(config.Signature())
+	var (
+		s   *siegfried.Siegfried
+		err error
+	)
+	if !*replay || *version || *fprflag || *serve != "" {
+		s, err = siegfried.Load(config.Signature())
+	}
 	if err != nil {
 		log.Fatalf("[FATAL] error loading signature file, got: %v", err)
 	}
@@ -339,30 +349,79 @@ func main() {
 	}
 	// handle no file/directory argument
 	if flag.NArg() != 1 {
-		close(ctxts)
-		log.Fatalln("[FATAL] expecting a single file or directory argument")
-	}
-
-	w.Head(config.SignatureBase(), time.Now(), s.C, config.Version(), s.Identifiers(), s.Fields(), hashT.String())
-	// support reading list files from stdin
-	if flag.Arg(0) == "-" {
-		scanner := bufio.NewScanner(os.Stdin)
-		for scanner.Scan() {
-			info, err := os.Stat(scanner.Text())
-			if err != nil {
-				info, err = retryStat(scanner.Text(), err)
+		if *replay || *list {
+			if flag.NArg() < 1 {
+				close(ctxts)
+				log.Fatalln("[FATAL] expecting one or more file or directory arguments")
 			}
-			if err != nil || info.IsDir() {
-				ctx := getCtx(scanner.Text(), "", "", 0)
-				ctx.res <- results{fmt.Errorf("failed to identify %s (in scanning mode, inputs must all be files and not directories), got: %v", scanner.Text(), err), nil, nil}
+		} else {
+			close(ctxts)
+			log.Fatalln("[FATAL] expecting a single file or directory argument")
+		}
+	}
+	if *replay {
+		for i, v := range flag.Args() {
+			rdr, e := reader.Open(v)
+			if e != nil {
+				close(ctxts)
+				log.Fatalf("[FATAL] error reading results file %s; got %v\n", v, e)
+			}
+			if i == 0 {
+				hd := rdr.Head()
+				w.Head(hd.SignaturePath, hd.Scanned, hd.Created, hd.Version, hd.Identifiers, hd.Fields, hd.HashHeader)
+			}
+			var f reader.File
+			for f, e = rdr.Next(); e == nil; f, e = rdr.Next() {
+				ctx := getCtx(f.Path, "", f.Mod, f.Size)
+				ctx.res <- results{f.Err, f.Hash, f.IDs}
 				ctx.wg.Add(1)
 				ctxts <- ctx
-			} else {
-				identifyFile(getCtx(scanner.Text(), "", info.ModTime().Format(time.RFC3339), info.Size()), ctxts, getCtx)
+			}
+			rdr.Close()
+			if e != nil && e != io.EOF {
+				close(ctxts)
+				log.Fatalf("[FATAL] error reading results file %s; got %v\n", v, e)
 			}
 		}
 	} else {
-		err = identify(ctxts, flag.Arg(0), "", *nr, d, getCtx)
+		w.Head(config.SignatureBase(), time.Now(), s.C, config.Version(), s.Identifiers(), s.Fields(), hashT.String())
+		// support reading list files from stdin
+		if *list {
+			for _, v := range flag.Args() {
+				var f *os.File
+				if v == "-" {
+					f = os.Stdin
+				} else {
+					f, err = os.Open(v)
+					if err != nil {
+						break
+					}
+				}
+				scanner := bufio.NewScanner(f)
+				for scanner.Scan() {
+					info, err := os.Stat(scanner.Text())
+					if err != nil {
+						info, err = retryStat(scanner.Text(), err)
+					}
+					if err != nil || info.IsDir() {
+						ctx := getCtx(scanner.Text(), "", "", 0)
+						ctx.res <- results{fmt.Errorf("failed to identify %s (in scanning mode, inputs must all be files and not directories), got: %v", scanner.Text(), err), nil, nil}
+						ctx.wg.Add(1)
+						ctxts <- ctx
+					} else {
+						identifyFile(getCtx(scanner.Text(), "", info.ModTime().Format(time.RFC3339), info.Size()), ctxts, getCtx)
+					}
+				}
+				f.Close()
+			}
+		} else if flag.Arg(0) == "-" {
+			ctx := getCtx(*name, "", "", 0)
+			ctx.wg.Add(1)
+			ctxts <- ctx
+			identifyRdr(os.Stdin, ctx, ctxts, getCtx)
+		} else {
+			err = identify(ctxts, flag.Arg(0), "", *nr, d, getCtx)
+		}
 	}
 	wg.Wait()
 	close(ctxts)
