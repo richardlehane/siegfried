@@ -8,8 +8,8 @@ import "golang.org/x/text/encoding/charmap"
 // If extended or international text is detected, returns IBM437 decoded string.
 // Otherwise assumes UTF8 or ASCII.
 func ZipName(in string) string {
-	switch detectText([]byte(in)) {
-	case _e, _i:
+	switch Detect([]byte(in)) {
+	case EXTENDED, LATIN1:
 		dec := charmap.CodePage437.NewDecoder()
 		ret := make([]byte, len(in))
 		dec.Transform(ret, []byte(in), true)

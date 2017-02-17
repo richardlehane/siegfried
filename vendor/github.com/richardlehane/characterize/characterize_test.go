@@ -43,4 +43,9 @@ func TestZipName(t *testing.T) {
 	if !utf8.Valid([]byte(nm)) {
 		t.Fatalf("not valid: %s", nm)
 	}
+	raw := "±æ∞∏À˘‘⁄≤„(1-4).dwg"
+	nm = ZipName(raw)
+	if nm != raw {
+		t.Fatalf("expect raw to equal ZipName: %s , %s", raw, nm)
+	}
 }
