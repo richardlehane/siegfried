@@ -134,7 +134,7 @@ func (lg *Logger) Chart() {
 	for _, k := range totals {
 		fields = append(fields, fieldR[k]...)
 	}
-	fmt.Print(chart.Chart("[Chart]", sections, fields, map[string]bool{}, lg.cht))
+	fmt.Fprint(lg.w, chart.Chart("[Chart]", sections, fields, map[string]bool{}, lg.cht))
 }
 
 // Close prints and chart and time elapsed
