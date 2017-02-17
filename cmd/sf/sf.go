@@ -281,7 +281,11 @@ func main() {
 	// handle -version
 	if *version {
 		version := config.Version()
-		fmt.Printf("siegfried %d.%d.%d\n%s", version[0], version[1], version[2], s)
+		fmt.Printf("siegfried %d.%d.%d\n", version[0], version[1], version[2])
+		fmt.Printf("%s (%s)\nidentifiers: \n", config.Signature(), s.C.Format(time.RFC3339))
+		for _, id := range s.Identifiers() {
+			fmt.Printf("  - %s: %s\n", id[0], id[1])
+		}
 		return
 	}
 	// handle -fpr
