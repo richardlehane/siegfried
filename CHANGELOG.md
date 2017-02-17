@@ -1,5 +1,5 @@
 # Change Log
-## v1.7.0 (2017-02-19)
+## v1.7.0 (2017-02-17)
 ### Added
 - log files that match particular formats with `-log fmt/1,@set2` (comma separated list of format IDs/format sets). These can be mixed with regular log options e.g. `-log unknown,fmt/1,chart`
 - generate a summary view of formats matched during a scan with `-log chart` (or just `-log c`)

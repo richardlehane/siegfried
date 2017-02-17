@@ -57,8 +57,8 @@ var (
 	archive   = flag.Bool("z", false, "scan archive formats (zip, tar, gzip, warc, arc)")
 	hashf     = flag.String("hash", "", "calculate file checksum with hash algorithm; options "+checksum.HashChoices)
 	throttlef = flag.Duration("throttle", 0, "set a time to wait between scanning files e.g. 50ms")
-	replay    = flag.Bool("replay", false, "replay one (or more) results files to change output or logging e.g. sf -r -csv results.yaml")
-	list      = flag.Bool("f", false, "scan one (or more) lists of filenames")
+	replay    = flag.Bool("replay", false, "replay one (or more) results files to change output or logging e.g. sf -replay -csv results.yaml")
+	list      = flag.Bool("f", false, "scan one (or more) lists of filenames e.g. sf -f myfiles.txt")
 	name      = flag.String("name", "", "provide a filename when scanning a stream e.g. sf -name myfile.txt -")
 )
 
