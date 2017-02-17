@@ -4,6 +4,7 @@ go:
 - 1.5
 - 1.6
 - 1.7
+- 1.x
 - tip
 env:
 - GO15VENDOREXPERIMENT=1  
@@ -20,7 +21,7 @@ deploy:
   on:
     branch: master
     tags: true
-    go: 1.7
+    go: 1.x
   provider: bintray
   file: ${HOME}/deb/bintray.json
   user: richardlehane
