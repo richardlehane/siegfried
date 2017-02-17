@@ -189,13 +189,14 @@ func getFields(keys, vals []string) [][]string {
 	var ns string
 	var consume bool
 	for i, v := range keys {
-		if v == "ns" {
+		if v == "ns" || v == "namespace" {
 			if ns == vals[i] {
 				consume = false
 			} else {
 				ns = vals[i]
 				consume = true
 				ret = append(ret, []string{})
+				v = "namespace" // always store as namespace
 			}
 		}
 		if consume {
@@ -206,7 +207,15 @@ func getFields(keys, vals []string) [][]string {
 }
 
 func Open(path string) (Reader, error) {
-	f, err := os.Open(path)
+	var (
+		f   *os.File
+		err error
+	)
+	if path == "-" {
+		f = os.Stdin
+	} else {
+		f, err = os.Open(path)
+	}
 	if err != nil {
 		return nil, err
 	}

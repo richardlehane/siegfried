@@ -105,14 +105,14 @@ func (dr *droid) Next() (File, error) {
 	fn := dr.peek[3]
 	for {
 		file.IDs = append(file.IDs, newDefaultID(droidFields[0],
-			didVals(dr.peek[14], dr.peek[15], dr.peek[16], dr.peek[17], dr.peek[5], dr.peek[11])))
+			didVals(dr.peek[14], dr.peek[16], dr.peek[17], dr.peek[15], dr.peek[5], dr.peek[11])))
 		// single line multi ids
 		if len(dr.peek) > 18 {
 			num, err := strconv.Atoi(dr.peek[13])
 			if err == nil && num > 1 {
 				for i := 1; i < num; i++ {
 					file.IDs = append(file.IDs, newDefaultID(droidFields[0],
-						didVals(dr.peek[14+i*4], dr.peek[15+i*4], dr.peek[16+i*4], dr.peek[17+i*4], dr.peek[5], dr.peek[11])))
+						didVals(dr.peek[14+i*4], dr.peek[16+i*4], dr.peek[17+i*4], dr.peek[15+i*4], dr.peek[5], dr.peek[11])))
 				}
 			}
 		}

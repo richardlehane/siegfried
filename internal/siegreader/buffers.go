@@ -48,6 +48,12 @@ func New() *Buffers {
 // Source buffers are re-cycled where possible.
 func (b *Buffers) Get(src io.Reader) (*Buffer, error) {
 	f, ok := src.(*os.File)
+	if ok {
+		stat, err := f.Stat()
+		if err != nil || stat.Mode()&os.ModeType != 0 {
+			ok = false
+		}
+	}
 	if !ok {
 		e, ok := src.(source)
 		if !ok || !e.IsSlicer() {

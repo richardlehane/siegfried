@@ -42,7 +42,7 @@
     sf -log d,s file.ext | DIR                 // Log debugging and slow messages to stderr
     sf -log p,t DIR > results.yaml             // Log progress and time while redirecting results
     sf -log fmt/1,c DIR > results.yaml         // Log instances of fmt/1 and chart results
-    sf -log u -csv -r results.yaml             // Replay results file, convert to csv, log unknowns
+    sf -replay -log u -csv results.yaml        // Replay results file, convert to csv, log unknowns
 
 #### Example
 
@@ -92,7 +92,7 @@ Or, for the most recent updates, you can install from this fork:
 ### Added
 - log files that match particular formats with `-log fmt/1,@set2` (comma separated list of format IDs/format sets). These can be mixed with regular log options e.g. `-log unknown,fmt/1,chart`
 - generate a summary view of formats matched during a scan with `-log chart` (or just `-log c`)
-- replay scans from results files with `sf -r`: load one or more results files to replay logging or to convert to a different output format e.g. `sf -r -csv results.yaml` or `sf -r -log unknown,chart,stdout results1.yaml results2.csv`
+- replay scans from results files with `sf -replay`: load one or more results files to replay logging or to convert to a different output format e.g. `sf -replay -csv results.yaml` or `sf -replay -log unknown,chart,stdout results1.yaml results2.csv`
 - compare results with `roy compare` subcommand: view the difference between two or more results e.g. `roy compare results1.yaml results2.csv droid.csv ...`
 - `roy sets` subcommand: `roy sets` creates pronom-all.json, pronom-families.json, and pronom-types.json sets files;
 `roy sets -changes` creates a pronom-changes.json sets file from a PRONOM release-notes.xml file; `roy sets -list @set1,@set2` lists contents of a comma-separated list of format sets

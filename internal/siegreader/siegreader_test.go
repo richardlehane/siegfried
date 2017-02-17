@@ -13,9 +13,9 @@ const testString = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWX
 
 var (
 	testBytes     = []byte(testString)
-	testfile      = filepath.Join("..", "..", "..", "cmd", "sf", "testdata", "benchmark", "Benchmark.docx")
-	testBigFile   = filepath.Join("..", "..", "..", "cmd", "sf", "testdata", "benchmark", "Benchmark.xml")
-	testSmallFile = filepath.Join("..", "..", "..", "cmd", "sf", "testdata", "benchmark", "Benchmark.gif")
+	testfile      = filepath.Join("..", "..", "cmd", "sf", "testdata", "benchmark", "Benchmark.docx")
+	testBigFile   = filepath.Join("..", "..", "cmd", "sf", "testdata", "benchmark", "Benchmark.xml")
+	testSmallFile = filepath.Join("..", "..", "cmd", "sf", "testdata", "benchmark", "Benchmark.gif")
 
 	bufs = New()
 )

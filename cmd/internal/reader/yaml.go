@@ -19,14 +19,16 @@ import (
 	"bytes"
 	"fmt"
 	"io"
+	"strings"
 )
 
 type sfYAML struct {
-	buf    *bufio.Reader
-	closer io.ReadCloser
-	head   Head
-	peek   record
-	err    error
+	replacer *strings.Replacer
+	buf      *bufio.Reader
+	closer   io.ReadCloser
+	head     Head
+	peek     record
+	err      error
 }
 
 const (
@@ -41,7 +43,7 @@ type token struct {
 	val string
 }
 
-func advance(buf *bufio.Reader) (token, error) {
+func advance(buf *bufio.Reader, repl *strings.Replacer) (token, error) {
 	byts, err := buf.ReadBytes('\n')
 	if err != nil {
 		return token{}, err
@@ -59,28 +61,28 @@ func advance(buf *bufio.Reader) (token, error) {
 	split := bytes.SplitN(byts, []byte(":"), 2)
 	tok.key = string(bytes.TrimSpace(split[0]))
 	if len(split) == 2 {
-		tok.val = string(bytes.TrimSuffix(bytes.TrimPrefix(bytes.TrimSpace(split[1]), []byte("'")), []byte("'")))
+		tok.val = repl.Replace(string(bytes.TrimSuffix(bytes.TrimPrefix(bytes.TrimSpace(split[1]), []byte("'")), []byte("'"))))
 	}
 	return tok, nil
 }
 
-func consumeList(buf *bufio.Reader, tok token) ([]string, []string, error) {
+func consumeList(buf *bufio.Reader, repl *strings.Replacer, tok token) ([]string, []string, error) {
 	fields, values := []string{tok.key}, []string{tok.val}
 	var err error
-	for tok, err = advance(buf); err == nil && tok.typ != divide; tok, err = advance(buf) {
+	for tok, err = advance(buf, repl); err == nil && tok.typ != divide; tok, err = advance(buf, repl) {
 		fields, values = append(fields, tok.key), append(values, tok.val)
 	}
 	return fields, values, err
 }
 
-func consumeRecord(buf *bufio.Reader) (record, error) {
+func consumeRecord(buf *bufio.Reader, repl *strings.Replacer) (record, error) {
 	var (
 		rec record
 		tok token
 		err error
 	)
 	m := make(map[string]string)
-	for tok, err = advance(buf); err == nil && tok.typ == keyval; tok, err = advance(buf) {
+	for tok, err = advance(buf, repl); err == nil && tok.typ == keyval; tok, err = advance(buf, repl) {
 		m[tok.key] = tok.val
 	}
 	if err != nil || tok.typ != item {
@@ -89,7 +91,7 @@ func consumeRecord(buf *bufio.Reader) (record, error) {
 		}
 		return rec, err
 	}
-	ks, vs, err := consumeList(buf, tok)
+	ks, vs, err := consumeList(buf, repl, tok)
 	if err != nil && err != io.EOF {
 		return rec, err
 	}
@@ -98,8 +100,9 @@ func consumeRecord(buf *bufio.Reader) (record, error) {
 
 func newYAML(rc io.ReadCloser, path string) (Reader, error) {
 	sfy := &sfYAML{
-		buf:    bufio.NewReader(rc),
-		closer: rc,
+		replacer: strings.NewReplacer("''", "'"),
+		buf:      bufio.NewReader(rc),
+		closer:   rc,
 	}
 	return sfy.makeHead(path)
 }
@@ -109,17 +112,17 @@ func (sfy *sfYAML) Head() Head {
 }
 
 func (sfy *sfYAML) makeHead(path string) (*sfYAML, error) {
-	tok, err := advance(sfy.buf)
+	tok, err := advance(sfy.buf, sfy.replacer)
 	if err != nil || tok.typ != divide {
 		return nil, fmt.Errorf("invalid YAML; got %v", err)
 	}
-	rec, err := consumeRecord(sfy.buf)
+	rec, err := consumeRecord(sfy.buf, sfy.replacer)
 	if err != nil {
 		return nil, fmt.Errorf("invalid YAML; got %v", err)
 	}
 	rec.attributes["results"] = path
 	sfy.head, err = getHead(rec)
-	sfy.peek, sfy.err = consumeRecord(sfy.buf)
+	sfy.peek, sfy.err = consumeRecord(sfy.buf, sfy.replacer)
 	sfy.head.HashHeader = getHash(sfy.peek.attributes)
 	sfy.head.Fields = getFields(sfy.peek.listFields, sfy.peek.listValues)
 	return sfy, err
@@ -130,7 +133,7 @@ func (sfy *sfYAML) Next() (File, error) {
 	if e != nil {
 		return File{}, e
 	}
-	sfy.peek, sfy.err = consumeRecord(sfy.buf)
+	sfy.peek, sfy.err = consumeRecord(sfy.buf, sfy.replacer)
 	return getFile(r)
 }
 

@@ -70,7 +70,7 @@ func TestCompare(t *testing.T) {
 	if err := Compare(w, 0, "examples/ipresShowcase/droid-gui-m.csv", "examples/ipresShowcase/droid-gui-s.csv"); err != nil {
 		t.Fatal(err)
 	}
-	if string(w.Bytes()) != "COMPLETE MATCH" {
+	if string(w.Bytes()) != "COMPLETE MATCH\n" {
 		t.Fatalf("expecting a complete match; got %s", string(w.Bytes()))
 	}
 }
