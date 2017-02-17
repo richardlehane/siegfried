@@ -272,19 +272,6 @@ func main() {
 	if *version {
 		version := config.Version()
 		fmt.Printf("siegfried %d.%d.%d\n%s", version[0], version[1], version[2], s)
-		/*
-			// String representation of a Siegfried struct
-			func (s *Siegfried) String() string {
-				str := fmt.Sprintf(
-					"%s (%v)\nidentifiers: \n",
-					s.path,
-					s.C.Format(time.RFC3339))
-				for _, id := range s.ids {
-					str += fmt.Sprintf("  - %v: %v\n", id.Name(), id.Details())
-				}
-				return str
-			}
-		*/
 		return
 	}
 	// handle -fpr

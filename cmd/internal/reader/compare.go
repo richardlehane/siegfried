@@ -114,7 +114,7 @@ func Compare(w io.Writer, join int, paths ...string) error {
 	}
 	wrt.Flush()
 	if complete {
-		fmt.Fprint(w, "COMPLETE MATCH")
+		fmt.Fprint(w, "COMPLETE MATCH\n")
 	}
 	return nil
 }

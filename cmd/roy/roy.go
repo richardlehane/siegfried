@@ -25,6 +25,7 @@ import (
 
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/cmd/internal/chart"
+	"github.com/richardlehane/siegfried/cmd/internal/reader"
 	"github.com/richardlehane/siegfried/pkg/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/loc"
@@ -39,6 +40,8 @@ Usage:
    roy add -help 
    roy harvest -help
    roy inspect -help
+   roy sets -help
+   roy compare -help
 `
 
 var inspectUsage = `
@@ -80,6 +83,9 @@ Usage of inspect:
       rather than explicitly defined.
       Short alias is roy inspect ip.
       View graph with a command e.g. roy inspect ip | dot -Tpng -o implicit.png
+   roy inspect releases
+      Summary view of a PRONOM release-notes.xml file (which must be in your 
+      siegfried home directory). 
 
 Additional flags:
    The roy inspect FMT and roy inspect priorities sub-commands both accept
@@ -165,6 +171,10 @@ var (
 	setsDroid   = setsf.String("droid", config.Droid(), "set name/path for DROID signature file")
 	setsChanges = setsf.Bool("changes", false, "create a pronom-changes.json sets file")
 	setsList    = setsf.String("list", "", "expand comma separated list of format sets")
+
+	// COMPARE
+	comparef    = flag.NewFlagSet("compare", flag.ExitOnError)
+	compareJoin = comparef.Int("join", 0, "control which field(s) are used to link results files. Default is 0 (full file path). Other options are 1 (filename), 2, (filename + size), 3 (filename + modified), 4 (filename + hash), 5 (hash)")
 )
 
 func savereps() error {
@@ -538,6 +548,11 @@ func main() {
 			} else {
 				err = pronom.TypeSets("pronom-all.json", "pronom-families.json", "pronom-types.json")
 			}
+		}
+	case "compare":
+		err = comparef.Parse(os.Args[2:])
+		if err == nil {
+			err = reader.Compare(os.Stdout, *compareJoin, comparef.Args()...)
 		}
 	default:
 		log.Fatal(usage)

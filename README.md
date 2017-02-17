@@ -105,18 +105,6 @@ Or, for the most recent updates, you can install from this fork:
 - some files cause endless scanning due to large numbers of signature hits; reported by [workflowsguy](https://github.com/richardlehane/siegfried/issues/94)
 - null bytes can be written to output due to bad zip filename decoding; reported by [Tim Walsh](https://github.com/richardlehane/siegfried/issues/95)
 
-### v1.6.7 (2016-11-23)
-### Added
-- enable -hash, -z, and -log flags for -serve and -multi modes
-- new hash, z, and sig params for -serve mode (to control per-request)
-- enable droid output in -serve mode
-- GET requests in -serve mode now just percent encoded (with base64 option as a param)
-- -serve mode landing page now includes example forms
-
-### Changed
-- code re-organisation using /internal directory to hide internal packages
-- Identify method now returns a slice rather than channel of IDs (siegfried pkg change)
-
 See the [CHANGELOG](CHANGELOG.md) for the full history.
 
 ## Rights
