@@ -225,10 +225,10 @@ func inspectSig(t core.MatcherType) error {
 	return nil
 }
 
-func inspectFmt(f string) error {
+func inspectFmts(fmts []string) error {
 	var id core.Identifier
 	var err error
-	fs := sets.Expand(f)
+	fs := sets.Expand(strings.Join(fmts, ","))
 	if len(fs) == 0 {
 		return fmt.Errorf("no valid fmt to inspect in %s", f)
 	}
@@ -523,14 +523,14 @@ func main() {
 				config.SetSignature(input)
 				err = inspectSig(-1)
 			case strings.Contains(input, "fmt"), *inspectMI != "", strings.HasPrefix(input, "fdd"), strings.HasPrefix(input, "@"):
-				err = inspectFmt(input)
+				err = inspectFmts(inspect.Args())
 			default:
 				var i int
 				i, err = strconv.Atoi(input)
 				if err == nil {
 					err = blameSig(i)
 				} else {
-					err = inspectFmt(input)
+					err = inspectFmts(inspect.Args())
 				}
 			}
 		}
