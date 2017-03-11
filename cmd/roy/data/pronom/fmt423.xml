@@ -35,6 +35,10 @@ Version 7.0 includes: tabbed dockable palettes, transform palette, align palette
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
+        <Identifier>application/postscript</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
         <Identifier>com.adobe.illustrator-image</Identifier>
         <IdentifierType>Apple Uniform Type Identifier</IdentifierType>
       </FileFormatIdentifier>

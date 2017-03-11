@@ -35,6 +35,10 @@ Version 6.0 includes; gradients, eye dropper, paint bucket</ProvenanceDescriptio
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
+        <Identifier>application/postscript</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
         <Identifier>com.adobe.illustrator-image</Identifier>
         <IdentifierType>Apple Uniform Type Identifier</IdentifierType>
       </FileFormatIdentifier>

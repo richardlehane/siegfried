@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1795</FormatID>
+      <FormatName>ESRI File Geodatabase</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Database</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>An ESRI file geodatabase is a collection of files in a folder on disk that can store, query, and manage both spatial and nonspatial data.The GeoDB is the primary data storage model for ArcGIS.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>06 Feb 2017</ProvenanceSourceDate>
+      <ProvenanceDescription>Unfortunately we are currently unable to use PRONOM to be able to develop a signature to identify this format, hopefully in the future this functionality will be available.</ProvenanceDescription>
+      <LastUpdatedDate>06 Feb 2017</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/990</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>221</DeveloperID>
+        <DeveloperName>Esri</DeveloperName>
+        <OrganisationName>Esri</OrganisationName>
+        <DeveloperCompoundName>Esri / Esri</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>221</SupportID>
+        <SupportName>Esri</SupportName>
+        <OrganisationName>Esri</OrganisationName>
+        <SupportCompoundName>Esri / Esri</SupportCompoundName>
+      </Support>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

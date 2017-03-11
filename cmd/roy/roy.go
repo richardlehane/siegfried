@@ -230,7 +230,7 @@ func inspectFmts(fmts []string) error {
 	var err error
 	fs := sets.Expand(strings.Join(fmts, ","))
 	if len(fs) == 0 {
-		return fmt.Errorf("no valid fmt to inspect in %s", f)
+		return fmt.Errorf("no valid fmt to inspect in %s", strings.Join(fmts, ","))
 	}
 	opts := append(getOptions(), config.SetDoubleUp()) // speed up by allowing sig double ups
 	if *inspectMI != "" {

@@ -96,7 +96,7 @@ Additional information regarding violations of PDF/A 1b conformance added Februa
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>255044462D312E(33|34|35|36|37)</ByteSequenceValue>
+          <ByteSequenceValue>255044462D312E[30:37]</ByteSequenceValue>
         </ByteSequence>
         <ByteSequence>
           <ByteSequenceID>643</ByteSequenceID>
@@ -129,7 +129,7 @@ Additional information regarding violations of PDF/A 1b conformance added Februa
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>255044462D312E(33|34|35|36|37)</ByteSequenceValue>
+          <ByteSequenceValue>255044462D312E[30:37]</ByteSequenceValue>
         </ByteSequence>
         <ByteSequence>
           <ByteSequenceID>1187</ByteSequenceID>

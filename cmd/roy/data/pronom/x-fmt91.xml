@@ -12,7 +12,7 @@
       <FormatTypes>Page Description</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Postscript is a computer language for creating vector graphics.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -85,15 +85,14 @@
           <ByteSequenceID>248</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>2525454F46(0D|0A|0D0A)</ByteSequenceValue>
+          <ByteSequenceValue>2525454F46(0D|0A|0D0A|0A0A)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

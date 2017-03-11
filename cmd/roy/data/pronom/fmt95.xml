@@ -93,7 +93,7 @@ PDF/A supports two levels of compliance PDF/A1-a (Accessible) and PDF/A1-b (Basi
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>Little-endian</Endianness>
-          <ByteSequenceValue>255044462D312E34</ByteSequenceValue>
+          <ByteSequenceValue>255044462D312E[30:37]</ByteSequenceValue>
         </ByteSequence>
         <ByteSequence>
           <ByteSequenceID>337</ByteSequenceID>

@@ -13,7 +13,7 @@
       <FormatTypes>Text (Mark-up)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>LaTeX is a document preparation system for typesetting. It is widely used in academia for technical or scientific documents but can be used for other forms of publishing. LaTeX projects can contain multiple subdocuments which are linked to a Master Document.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>

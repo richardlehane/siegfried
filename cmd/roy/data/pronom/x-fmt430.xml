@@ -38,6 +38,11 @@
         <Signature>msg</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1972</ExternalSignatureID>
+        <Signature>oft</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
       <InternalSignature>
         <SignatureID>208</SignatureID>
         <SignatureName>Outlook Message Format</SignatureName>

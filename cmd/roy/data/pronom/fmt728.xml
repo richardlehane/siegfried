@@ -13,7 +13,7 @@
       <FormatTypes>Text (Structured)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>RealLegal E-Transcript creates electronic transcripts. E-Transcript files allow for custom formatting. There is a free E-Transcript Viewer to view an E-Transcript file. E-Transcript files are also compatible with Westlaw Case Notebook.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -64,6 +64,40 @@ VAR: .This transcript created and delivered by..&lt;COMPANY&gt;...Ph:</Signature
         </ByteSequence>
         <ByteSequence>
           <ByteSequenceID>1298</ByteSequenceID>
+          <PositionType>Variable</PositionType>
+          <Offset>
+          </Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>0054686973207472616E736372697074206372656174656420616E642064656C6976657265642062790D0A3C434F4D50414E593E2E0D0A50683A</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1346</SignatureID>
+        <SignatureName>RealLegal E-Transcript v2</SignatureName>
+        <SignatureNote>BOF: (offset 10) 0x000003
+VAR: .This transcript created and delivered by..&lt;COMPANY&gt;…Ph:</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1615</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>10</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>000003</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>1623</ByteSequenceID>
           <PositionType>Variable</PositionType>
           <Offset>
           </Offset>

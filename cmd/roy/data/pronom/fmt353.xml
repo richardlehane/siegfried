@@ -301,6 +301,13 @@
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1440</RelatedFormatID>
+        <RelatedFormatName>Epson Raw Image Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1529</RelatedFormatID>
         <RelatedFormatName>Digital Negative Format (DNG)</RelatedFormatName>
         <RelatedFormatVersion>1.4</RelatedFormatVersion>

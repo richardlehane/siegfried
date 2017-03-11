@@ -37,6 +37,10 @@ Version 5.5 includes spell checker, find/replace text</ProvenanceDescription>
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
+        <Identifier>application/postscript</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
         <Identifier>com.adobe.illustrator-image</Identifier>
         <IdentifierType>Apple Uniform Type Identifier</IdentifierType>
       </FileFormatIdentifier>

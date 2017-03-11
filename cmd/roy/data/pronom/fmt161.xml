@@ -5,7 +5,8 @@
       <FormatID>876</FormatID>
       <FormatName>SIARD (Software-Independent Archiving of Relational Databases)</FormatName>
       <FormatVersion>1.0</FormatVersion>
-      <FormatAliases>SIARD (2.0)</FormatAliases>
+      <FormatAliases>
+      </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
       <FormatTypes>Database</FormatTypes>

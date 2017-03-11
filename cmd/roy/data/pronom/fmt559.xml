@@ -36,6 +36,10 @@ Beginning with version 9, the Adobe Illustrated ai file format included both a p
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
+        <Identifier>application/postscript</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
         <Identifier>com.adobe.illustrator-image</Identifier>
         <IdentifierType>Apple Uniform Type Identifier</IdentifierType>
       </FileFormatIdentifier>

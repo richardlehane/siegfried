@@ -25,8 +25,7 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>16 Jun 2016</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
+      <ProvenanceDescription>Versions prior to DROID 6.3 may not identify this format correctly</ProvenanceDescription>
       <LastUpdatedDate>16 Jun 2016</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
@@ -50,7 +49,7 @@
       <InternalSignature>
         <SignatureID>1243</SignatureID>
         <SignatureName>Music XML</SignatureName>
-        <SignatureNote>&lt;?xml version="1.0"*http://www.musicxml.org/dtds/</SignatureNote>
+        <SignatureNote>&lt;?xml version="1.0"{8-256}http://www.musicxml.org/dtds/</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1516</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -62,7 +61,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>3C3F786D6C2076657273696F6E3D(22|27)312E30(22|27)*687474703A2F2F7777772E6D75736963786D6C2E6F72672F647464732F</ByteSequenceValue>
+          <ByteSequenceValue>3C3F786D6C2076657273696F6E3D(22|27)312E30(22|27){8-256}687474703A2F2F7777772E6D75736963786D6C2E6F72672F647464732F</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
