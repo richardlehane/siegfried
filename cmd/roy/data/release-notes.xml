@@ -1,6 +1,400 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="release-note.xsl"?>
 <release_notes>
+<release_note>
+    <release_date>8th March 2017</release_date>
+    <signature_filename>DROID_SignatureFile_V89.xml</signature_filename> 
+    <release_outline name="New Records">
+	  <format>
+	   <puid type="fmt">975</puid>
+	   <name>Jamcracker Tracker Module</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">976</puid>
+	   <name>MagicaVoxel Vox Format</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+      <format>
+	   <puid type="fmt">977</puid>
+	   <name>AutoCAD Design Web Format(DWFx)</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+      <format>
+	   <puid type="fmt">978</puid>
+	   <name>3DS Max</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+      <format>
+	   <puid type="fmt">979</puid>
+	   <name>XML Property List</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+      <format>
+	   <puid type="fmt">980</puid>
+	   <name>AAE Sidecar Format</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+       <format>
+	   <puid type="fmt">981</puid>
+	   <name>EazyDraw File Format</name>
+	   <summary>Full entry added.</summary>
+	  </format> 
+       <format>      
+	   <puid type="fmt">982</puid>
+	   <name>iMovieProj File Format</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+       <format>      
+	   <puid type="fmt">983</puid>
+	   <name>NIB File Format</name>
+	   <summary>Full entry added.</summary>
+	  </format>  
+       <format>      
+	   <puid type="fmt">984</puid>
+	   <name>Binary Property List</name>
+	   <summary>Full entry added.</summary>
+	  </format>       
+      <format>      
+	   <puid type="fmt">985</puid>
+	   <name>Valve Texture Format</name>
+	   <summary>Full entry added. Requested by Taylor Bangs.</summary>
+	  </format>  
+      <format>      
+	   <puid type="fmt">986</puid>
+	   <name>Extensible Metadata Platform Format</name>
+	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	  </format> 
+      <format>      
+	   <puid type="fmt">987</puid>
+	   <name>Microsoft OneNote Package File</name>
+	   <summary>Full entry added. Requested by LDS Church.</summary>
+	  </format> 
+      <format>      
+	   <puid type="fmt">988</puid>
+	   <name>ESRI ArcScene Document</name>
+	   <summary>Full entry added.</summary>
+	  </format> 
+      <format>      
+	   <puid type="fmt">989</puid>
+	   <name>ESRI ArcGlobe Document</name>
+	   <summary>Full entry added.</summary>
+	  </format> 
+      <format>      
+	   <puid type="fmt">990</puid>
+	   <name>ESRI File Geodatabase</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+      <format>      
+	   <puid type="fmt">991</puid>
+	   <name>SHA256 File</name>
+	   <summary>Extension only entry added.</summary>
+	  </format>
+      <format>      
+	   <puid type="fmt">992</puid>
+	   <name>SHA1 File</name>
+	   <summary>Extension only entry added.</summary>
+	  </format>
+      <format>      
+	   <puid type="fmt">993</puid>
+	   <name>MD5 File</name>
+	   <summary>Extension only entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">994</puid>
+	   <name>Jeff's Image File</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">995</puid>
+	   <name>SIARD (Software-Independent Archiving of Relational Databases) v2</name>
+	   <summary>Full entry added. Submitted by KEEP SOLUTIONS</summary>
+	  </format>
+	 </release_outline>
+
+	 <release_outline name="Updated Records">
+    <format>
+	   <puid type="fmt">95</puid>
+	   <name>Acrobat PDF/A - Portable Document Format 1a</name>
+	   <summary>Adjusted signature due to findings by Koninklijke Bibliotheek</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">214</puid>
+	   <name>Microsoft Excel for Windows</name>
+	   <summary>Adjusted container signature due to findings found through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">280</puid>
+	   <name>LaTeX (Master document)</name>
+	   <summary>Added description</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">281</puid>
+	   <name>LaTeX (Subdocument)</name>
+	   <summary>Added description</summary>
+	  </format>
+    <format>
+	   <puid type="fmt">354</puid>
+	   <name>Acrobat PDF/A - Portable Document Format 1b</name>
+	   <summary>Adjusted signatures due to findings by Koninklijke Bibliotheek</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">355</puid>
+	   <name>Rich Text Format 1.9</name>
+	   <summary>Adjusted signature due to findings by National Library New Zealand</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">417</puid>
+	   <name>Adobe Illustrator v88</name>
+	   <summary>Added mimetype - application/postscript</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">418</puid>
+	   <name>Adobe Illustrator v3.0/3.2</name>
+	   <summary>Added mimetype - application/postscript</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">419</puid>
+	   <name>Adobe Illustrator v4</name>
+	   <summary>Added mimetype - application/postscript</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">420</puid>
+	   <name>Adobe Illustrator v5.0/5.5</name>
+	   <summary>Added mimetype - application/postscript</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">421</puid>
+	   <name>Adobe Illustrator Japan</name>
+	   <summary>Added mimetype - application/postscript</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">422</puid>
+	   <name>Adobe Illustrator v6</name>
+	   <summary>Added mimetype - application/postscript</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">423</puid>
+	   <name>Adobe Illustrator v7</name>
+	   <summary>Added mimetype - application/postscript</summary>
+	  </format>
+    <format>
+	   <puid type="fmt">476</puid>
+	   <name>Acrobat PDF/A - Portable Document Format 2a</name>
+	   <summary>Adjusted description due to suggestion of Yan Han, the University of Arizona Libraries and Leonard Rosenthol, Adobe Systems</summary>
+	  </format>
+    <format>
+	   <puid type="fmt">477</puid>
+	   <name>Acrobat PDF/A - Portable Document Format 2b</name>
+	   <summary>Adjusted description due to suggestion of Yan Han, the University of Arizona Libraries and Leonard Rosenthol, Adobe Systems</summary>
+	  </format>
+    <format>
+	   <puid type="fmt">478</puid>
+	   <name>Acrobat PDF/A - Portable Document Format 2u</name>
+	   <summary>Adjusted description due to suggestion of Yan Han, the University of Arizona Libraries and Leonard Rosenthol, Adobe Systems</summary>
+	  </format>
+    <format>
+	   <puid type="fmt">479</puid>
+	   <name>Acrobat PDF/A - Portable Document Format 3a</name>
+	   <summary>Adjusted description due to suggestion of Yan Han, the University of Arizona Libraries and Leonard Rosenthol, Adobe Systems</summary>
+	  </format>
+    <format>
+	   <puid type="fmt">480</puid>
+	   <name>Acrobat PDF/A - Portable Document Format 3b</name>
+	   <summary>Adjusted description due to suggestion of Yan Han, the University of Arizona Libraries and Leonard Rosenthol, Adobe Systems</summary>
+	  </format>
+    <format>
+	   <puid type="fmt">481</puid>
+	   <name>Acrobat PDF/A - Portable Document Format 3u</name>
+	   <summary>Adjusted description due to suggestion of Yan Han, the University of Arizona Libraries and Leonard Rosenthol, Adobe Systems</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">557</puid>
+	   <name>Adobe Illustrator v8</name>
+	   <summary>Added mimetype - application/postscript</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">558</puid>
+	   <name>Adobe Illustrator v9</name>
+	   <summary>Added mimetype - application/postscript</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">559</puid>
+	   <name>Adobe Illustrator v10</name>
+	   <summary>Added mimetype - application/postscript</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">560</puid>
+	   <name>Adobe Illustrator v11</name>
+	   <summary>Added mimetype - application/postscript</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">561</puid>
+	   <name>Adobe Illustrator v12</name>
+	   <summary>Added mimetype - application/postscript</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">562</puid>
+	   <name>Adobe Illustrator v13</name>
+	   <summary>Added mimetype - application/postscript</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">563</puid>
+	   <name>Adobe Illustrator v14</name>
+	   <summary>Added mimetype - application/postscript</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">564</puid>
+	   <name>Adobe Illustrator v15</name>
+	   <summary>Added mimetype - application/postscript</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">565</puid>
+	   <name>Adobe Illustrator v16</name>
+	   <summary>Added mimetype - application/postscript</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">570</puid>
+	   <name>Extensible Metadata Platform Packet</name>
+	   <summary>Added priority over fmt/986 - Extensible Metadata Platform Format.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">637</puid>
+	   <name>Microsoft OneNote</name>
+	   <summary>Added description.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">641</puid>
+	   <name>Epson Raw Image format</name>
+	   <summary>Added priority over fmt/353 - Tagged Image File Format - Suggested by Archives New Zealand.</summary>
+	  </format>
+      <format>
+	   <puid type="fmt">728</puid>
+	   <name>RealLegal E-Transcript</name>
+	   <summary>Added description and additional binary signature due to findings found through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">896</puid>
+	   <name>Music XML</name>
+	   <summary>Adjusted signature due to findings found through PRONOM research and added note.</summary>
+	  </format>
+      <format>
+	   <puid type="x-fmt">191</puid>
+	   <name>Postscript 1.0</name>
+	   <summary>Adjusted signature due to findings by State Records New South Wales. Added 0A0A sequence to EOF. Added description. </summary>
+	  </format>
+       <format>
+	   <puid type="x-fmt">330</puid>
+	   <name>JustWrite Text Document</name>
+	   <summary>Added binary signature submitted by LDS Church. Added description. Added extension signature jwt. </summary>
+	  </format>     
+      <format>
+	   <puid type="x-fmt">430</puid>
+	   <name>Microsoft Outlook Email Message</name>
+	   <summary>Added extension signature oft</summary>
+	  </format>
+         </release_outline>
+         
+
+ 	 <release_outline name="New Signatures"> 
+      <format>
+	   <puid type="fmt">728</puid>
+	   <name>RealLegal E-Transcript</name>
+	   <summary>Added new signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">975</puid>
+	   <name>Jamcracker Tracker Module</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	   <format>
+	   <puid type="fmt">976</puid>
+	   <name>MagicaVoxel Vox Format</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+ 	   <format>
+	   <puid type="fmt">977</puid>
+	   <name>AutoCAD Design Web Format(DWFx)</name>
+	   <summary>Container signature developed through PRONOM research.</summary>
+	  </format>   
+ 	   <format>
+	   <puid type="fmt">978</puid>
+	   <name>3DS Max</name>
+	   <summary>Container signature developed through PRONOM research.</summary>
+	  </format>  
+ 	   <format>
+	   <puid type="fmt">979</puid>
+	   <name>XML Property List</name>
+	   <summary>Binary signature developed through PRONOM research.</summary>
+	  </format>      
+ 	   <format>
+	   <puid type="fmt">980</puid>
+	   <name>AAE sidecar format</name>
+	   <summary>Binary signature developed through PRONOM research.</summary>
+	  </format>  
+       <format>
+	   <puid type="fmt">981</puid>
+	   <name>EazyDraw File Format</name>
+	   <summary>Binary signature developed through PRONOM research.</summary>
+	  </format> 
+       <format>      
+	   <puid type="fmt">982</puid>
+	   <name>iMovieProj File Format</name>
+	   <summary>Binary signature developed through PRONOM research.</summary>
+	  </format>
+       <format>      
+	   <puid type="fmt">983</puid>
+	   <name>NIB File Format</name>
+	   <summary>Binary signature developed through PRONOM research.</summary>
+	  </format>  
+       <format>      
+	   <puid type="fmt">984</puid>
+	   <name>Binary Property List</name>
+	   <summary></summary>
+	  </format>    
+       <format>      
+	   <puid type="fmt">985</puid>
+	   <name>Valve Texture Format</name>
+	   <summary>Binary signature developed through PRONOM research. Requested by Taylor Bangs.</summary>
+	  </format>     
+       <format>      
+	   <puid type="fmt">986</puid>
+	   <name>Extensible Metadata Platform Format</name>
+	   <summary>Binary signature created with assistance by research from LDS Church</summary>
+	  </format>   
+       <format>
+	   <puid type="fmt">987</puid>
+	   <name>Microsoft OneNote Package File</name>
+	   <summary>Binary signature created with assistance by research from LDS Church.</summary>
+	  </format> 
+       <format>
+	   <puid type="x-fmt">330</puid>
+	   <name>JustWrite Text Document</name>
+	   <summary>Added binary signature submitted by LDS Church. Added extension signature jwt.</summary>
+	  </format>  
+       <format>      
+	   <puid type="fmt">988</puid>
+	   <name>ESRI ArcScene Document</name>
+	   <summary>Container signature developed through PRONOM research.</summary>
+	  </format> 
+      <format>      
+	   <puid type="fmt">989</puid>
+	   <name>ESRI ArcGlobe Document</name>
+	   <summary>Container signature developed through PRONOM research.</summary>
+	  </format>    
+     <format>
+	   <puid type="fmt">994</puid>
+	   <name>Jeff's Image File</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>	 
+	  <format>
+	   <puid type="fmt">995</puid>
+	   <name>SIARD (Software-Independent Archiving of Relational Databases) v2</name>
+	   <summary>Added container signature. Submitted by KEEP SOLUTIONS</summary>
+	  </format>      
+	 </release_outline>
+    </release_note>
+
 <release_note>
     <release_date>27th September 2016</release_date>
     <signature_filename>DROID_SignatureFile_V88.xml</signature_filename> 
@@ -78,7 +472,7 @@
 	  <format>
 	   <puid type="fmt">965</puid>
 	   <name>Music Encoding Initiative</name>
-	   <summary>Full entry added. Submitted by Bibliothèque cantonale et universitaire BCU Lausanne.</summary>
+	   <summary>Full entry added. Submitted by Bibliotheque cantonale et universitaire BCU Lausanne.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">966</puid>
@@ -469,7 +863,7 @@
 	  <format>
 	   <puid type="fmt">965</puid>
 	   <name>Music Encoding Initiative</name>
-	   <summary>Signature requested by Bibliothèque cantonale et universitaire BCU Lausanne.</summary>
+	   <summary>Signature requested by Bibliotheque cantonale et universitaire BCU Lausanne.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">966</puid>
@@ -752,7 +1146,7 @@
 	   <puid type="fmt">950</puid>
 	   <name>MIME Email 1.0</name>
 	   <summary>Full entry added in collaboration between LDS Church and National Library of New Zealand.</summary>
-	  </format>
+	  </format>  
 	 </release_outline>
 
 	 <release_outline name="Updated Records">
@@ -1203,7 +1597,7 @@
 	  </format>
       	  <format>
       	   <puid type="fmt">893</puid>
-	   <name>i2 Analyst’s Notebook</name>
+	   <name>i2 Analyst's Notebook</name>
 	   <summary>Full entry added.</summary>
 	  </format>
       	  <format>
@@ -1219,12 +1613,12 @@
       	  <format>
       	   <puid type="fmt">896</puid>
 	   <name>Music XML</name>
-	   <summary>Full entry added. Requested by Bibliothèque cantonale et universitaire BCU Lausanne.</summary>
+	   <summary>Full entry added. Requested by Bibliotheque cantonale et universitaire BCU Lausanne.</summary>
 	  </format>
       	  <format>
       	   <puid type="fmt">897</puid>
 	   <name>Compressed Music XML</name>
-	   <summary>Extension only entry added. Requested by Bibliothèque cantonale et universitaire BCU Lausanne.</summary>
+	   <summary>Extension only entry added. Requested by Bibliotheque cantonale et universitaire BCU Lausanne.</summary>
 	  </format>
       	  <format>
       	   <puid type="fmt">898</puid>
@@ -1389,7 +1783,7 @@
 	  </format>
       	  <format>
       	   <puid type="fmt">893</puid>
-	   <name>i2 Analyst’s Notebook</name>
+	   <name>i2 Analyst's Notebook</name>
 	   <summary>Container signature developed through PRONOM research.</summary>
 	  </format>
       	  <format>
@@ -1405,7 +1799,7 @@
       	  <format>
       	   <puid type="fmt">896</puid>
 	   <name>Music XML</name>
-	   <summary>Signature developed through PRONOM research. Requested by Bibliothèque cantonale et universitaire BCU Lausanne.</summary>
+	   <summary>Signature developed through PRONOM research. Requested by Bibliotheque cantonale et universitaire BCU Lausanne.</summary>
 	  </format>
       	  <format>
       	   <puid type="fmt">898</puid>

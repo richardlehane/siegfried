@@ -86,3 +86,17 @@ func TestMakeArchivematica(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestSets(t *testing.T) {
+	config.SetHome(*testhome)
+	releases, err := pronom.LoadReleases(config.Local("release-notes.xml"))
+	if err == nil {
+		err = pronom.ReleaseSet("pronom-changes.json", releases)
+	}
+	if err == nil {
+		err = pronom.TypeSets("pronom-all.json", "pronom-families.json", "pronom-types.json")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+}

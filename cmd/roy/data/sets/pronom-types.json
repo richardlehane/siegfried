@@ -126,7 +126,8 @@
     "fmt/965 (Music Encoding Initiative)",
     "fmt/972 (Dolby MLP Lossless Audio)",
     "fmt/973 (DTS Coherent Acoustics (DCA) Audio)",
-    "fmt/974 (Notation Interchange File Format)"
+    "fmt/974 (Notation Interchange File Format)",
+    "fmt/975 (Jamcracker Tracker Module)"
   ],
   "database": [
     "x-fmt/6 (FoxPro Database 2.0)",
@@ -220,7 +221,9 @@
     "fmt/751 (AppleWorks Database 6)",
     "fmt/756 (Zope export file)",
     "fmt/848 (ClarisWorks Database 2-3)",
-    "fmt/868 (MySQL Table Definition Format)"
+    "fmt/868 (MySQL Table Definition Format)",
+    "fmt/990 (ESRI File Geodatabase)",
+    "fmt/995 (SIARD (Software-Independent Archiving of Relational Databases) 2.0)"
   ],
   "dataset": [
     "x-fmt/13 (Tab-separated values)",
@@ -462,7 +465,8 @@
     "fmt/930 (Magick Image File Format)",
     "fmt/935 (Animated Portable Network Graphics)",
     "fmt/936 (Microsoft Picture It! Image File 1)",
-    "fmt/970 (Khronos Texture File)"
+    "fmt/970 (Khronos Texture File)",
+    "fmt/994 (Jeffs Image Format)"
   ],
   "imageVector": [
     "x-fmt/20 (Adobe Illustrator 1.0 / 1.1)",
@@ -688,7 +692,13 @@
     "fmt/902 (Blender 3D 32 bit)",
     "fmt/903 (Blender 3D 64 bit)",
     "fmt/913 (Caligari trueSpace File Format ASCII)",
-    "fmt/914 (Caligari trueSpace File Format Binary)"
+    "fmt/914 (Caligari trueSpace File Format Binary)",
+    "fmt/976 (MagicaVoxel Vox format)",
+    "fmt/977 (AutoCAD Design Web Format(DWFx))",
+    "fmt/978 (3DS Max)",
+    "fmt/985 (Valve Texture Format)",
+    "fmt/988 (ESRI ArcScene Document)",
+    "fmt/989 (ESRI ArcGlobe Document)"
   ],
   "pageDescription": [
     "fmt/122 (Encapsulated PostScript File Format 1.2)",
@@ -908,7 +918,13 @@
     "fmt/871 (Adobe Content Server Message File)",
     "fmt/875 (RDF/XML)",
     "fmt/886 (HTML Components)",
-    "fmt/965 (Music Encoding Initiative)"
+    "fmt/965 (Music Encoding Initiative)",
+    "fmt/979 (XML Property List)",
+    "fmt/980 (AAE Sidecar Format)",
+    "fmt/981 (EazyDraw File Format)",
+    "fmt/982 (iMovieProj File Format)",
+    "fmt/983 (NIB File Format)",
+    "fmt/986 (Extensible Metadata Platform Format)"
   ],
   "textStructured": [
     "x-fmt/41 (Data Interchange Format)",
@@ -979,7 +995,10 @@
     "fmt/896 (Music XML)",
     "fmt/897 (Compressed Music XML)",
     "fmt/938 (Python Script File)",
-    "fmt/950 (MIME Email 1.0)"
+    "fmt/950 (MIME Email 1.0)",
+    "fmt/991 (SHA256 File)",
+    "fmt/992 (SHA1 File)",
+    "fmt/993 (MD5 File)"
   ],
   "textUnstructured": [
     "x-fmt/14 (Macintosh Text File)",
@@ -1158,6 +1177,6 @@
     "fmt/892 (Compound WordPerfect for Windows Document 6 onwards)",
     "fmt/949 (WordPerfect 4.0/4.1/4.2)",
     "fmt/964 (Final Draft Document 5-7)",
-    "fmt/969 ( Rich Text Format 0)"
+    "fmt/969 (Rich Text Format 0)"
   ]
 }
