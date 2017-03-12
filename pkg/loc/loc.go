@@ -47,7 +47,7 @@ func newLOC(path string) (identifier.Parseable, error) {
 	fs := make([]mappings.FDD, 0, len(rc.File))
 	for _, f := range rc.File {
 		dir, nm := filepath.Split(f.Name)
-		if dir == "fddXML/" && nm != "" && filepath.Ext(nm) == ".xml" {
+		if dir == "fddXML/" && nm != "" && filepath.Ext(nm) == ".xml" && !strings.Contains(nm, "test") {
 			res := mappings.FDD{}
 			rdr, err := f.Open()
 			if err != nil {

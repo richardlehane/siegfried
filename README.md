@@ -8,7 +8,7 @@
 
 ### Version
 
-1.7.0
+1.7.1
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -87,7 +87,14 @@ Or, for the most recent updates, you can install from this fork:
     pkg install siegfried
 
 
-## Changes 
+## Changes
+### v1.7.1 (2017-03-12)
+### Added
+- signature updates for PRONOM, LOC and tika-mimetypes
+
+### Changed
+- `roy inspect` accepts space as well as comma-separated lists of formats e.g. `roy inspect fmt/1 fmt/2`
+
 ### v1.7.0 (2017-02-17)
 ### Added
 - log files that match particular formats with `-log fmt/1,@set2` (comma separated list of format IDs/format sets). These can be mixed with regular log options e.g. `-log unknown,fmt/1,chart`

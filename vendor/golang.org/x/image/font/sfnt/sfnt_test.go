@@ -6,6 +6,7 @@ package sfnt
 
 import (
 	"bytes"
+	"fmt"
 	"io/ioutil"
 	"path/filepath"
 	"testing"
@@ -14,50 +15,46 @@ import (
 	"golang.org/x/image/math/fixed"
 )
 
-func moveTo(xa, ya int) Segment {
+func moveTo(xa, ya fixed.Int26_6) Segment {
 	return Segment{
-		Op: SegmentOpMoveTo,
-		Args: [6]fixed.Int26_6{
-			0: fixed.I(xa),
-			1: fixed.I(ya),
-		},
+		Op:   SegmentOpMoveTo,
+		Args: [6]fixed.Int26_6{xa, ya},
 	}
 }
 
-func lineTo(xa, ya int) Segment {
+func lineTo(xa, ya fixed.Int26_6) Segment {
 	return Segment{
-		Op: SegmentOpLineTo,
-		Args: [6]fixed.Int26_6{
-			0: fixed.I(xa),
-			1: fixed.I(ya),
-		},
+		Op:   SegmentOpLineTo,
+		Args: [6]fixed.Int26_6{xa, ya},
 	}
 }
 
-func quadTo(xa, ya, xb, yb int) Segment {
+func quadTo(xa, ya, xb, yb fixed.Int26_6) Segment {
 	return Segment{
-		Op: SegmentOpQuadTo,
-		Args: [6]fixed.Int26_6{
-			0: fixed.I(xa),
-			1: fixed.I(ya),
-			2: fixed.I(xb),
-			3: fixed.I(yb),
-		},
+		Op:   SegmentOpQuadTo,
+		Args: [6]fixed.Int26_6{xa, ya, xb, yb},
 	}
 }
 
-func cubeTo(xa, ya, xb, yb, xc, yc int) Segment {
+func cubeTo(xa, ya, xb, yb, xc, yc fixed.Int26_6) Segment {
 	return Segment{
-		Op: SegmentOpCubeTo,
-		Args: [6]fixed.Int26_6{
-			0: fixed.I(xa),
-			1: fixed.I(ya),
-			2: fixed.I(xb),
-			3: fixed.I(yb),
-			4: fixed.I(xc),
-			5: fixed.I(yc),
-		},
+		Op:   SegmentOpCubeTo,
+		Args: [6]fixed.Int26_6{xa, ya, xb, yb, xc, yc},
 	}
+}
+
+func checkSegmentsEqual(got, want []Segment) error {
+	if len(got) != len(want) {
+		return fmt.Errorf("got %d elements, want %d\noverall:\ngot  %v\nwant %v",
+			len(got), len(want), got, want)
+	}
+	for i, g := range got {
+		if w := want[i]; g != w {
+			return fmt.Errorf("element %d:\ngot  %v\nwant %v\noverall:\ngot  %v\nwant %v",
+				i, g, w, got, want)
+		}
+	}
+	return nil
 }
 
 func TestTrueTypeParse(t *testing.T) {
@@ -389,38 +386,30 @@ func TestTrueTypeSegments(t *testing.T) {
 func testSegments(t *testing.T, filename string, wants [][]Segment) {
 	data, err := ioutil.ReadFile(filepath.FromSlash("../testdata/" + filename))
 	if err != nil {
-		t.Fatal(err)
+		t.Fatalf("ReadFile: %v", err)
 	}
 	f, err := Parse(data)
 	if err != nil {
-		t.Fatal(err)
+		t.Fatalf("Parse: %v", err)
 	}
+	ppem := fixed.Int26_6(f.UnitsPerEm())
 
 	if ng := f.NumGlyphs(); ng != len(wants) {
 		t.Fatalf("NumGlyphs: got %d, want %d", ng, len(wants))
 	}
 	var b Buffer
-loop:
 	for i, want := range wants {
-		got, err := f.LoadGlyph(&b, GlyphIndex(i), nil)
+		got, err := f.LoadGlyph(&b, GlyphIndex(i), ppem, nil)
 		if err != nil {
 			t.Errorf("i=%d: LoadGlyph: %v", i, err)
 			continue
 		}
-		if len(got) != len(want) {
-			t.Errorf("i=%d: got %d elements, want %d\noverall:\ngot  %v\nwant %v",
-				i, len(got), len(want), got, want)
+		if err := checkSegmentsEqual(got, want); err != nil {
+			t.Errorf("i=%d: %v", i, err)
 			continue
 		}
-		for j, g := range got {
-			if w := want[j]; g != w {
-				t.Errorf("i=%d: element %d:\ngot  %v\nwant %v\noverall:\ngot  %v\nwant %v",
-					i, j, g, w, got, want)
-				continue loop
-			}
-		}
 	}
-	if _, err := f.LoadGlyph(nil, 0xffff, nil); err != ErrNotFound {
+	if _, err := f.LoadGlyph(nil, 0xffff, ppem, nil); err != ErrNotFound {
 		t.Errorf("LoadGlyph(..., 0xffff, ...):\ngot  %v\nwant %v", err, ErrNotFound)
 	}
 
@@ -429,5 +418,133 @@ loop:
 		t.Errorf("Name: %v", err)
 	} else if want := filename[:len(filename)-len(".ttf")]; name != want {
 		t.Errorf("Name:\ngot  %q\nwant %q", name, want)
+	}
+}
+
+func TestPPEM(t *testing.T) {
+	data, err := ioutil.ReadFile(filepath.FromSlash("../testdata/glyfTest.ttf"))
+	if err != nil {
+		t.Fatalf("ReadFile: %v", err)
+	}
+	f, err := Parse(data)
+	if err != nil {
+		t.Fatalf("Parse: %v", err)
+	}
+	var b Buffer
+	x, err := f.GlyphIndex(&b, '1')
+	if err != nil {
+		t.Fatalf("GlyphIndex: %v", err)
+	}
+	if x == 0 {
+		t.Fatalf("GlyphIndex: no glyph index found for the rune '1'")
+	}
+
+	testCases := []struct {
+		ppem fixed.Int26_6
+		want []Segment
+	}{{
+		ppem: fixed.Int26_6(12 << 6),
+		want: []Segment{
+			moveTo(77, 0),
+			lineTo(77, 614),
+			lineTo(230, 614),
+			lineTo(230, 0),
+			lineTo(77, 0),
+		},
+	}, {
+		ppem: fixed.Int26_6(2048),
+		want: []Segment{
+			moveTo(205, 0),
+			lineTo(205, 1638),
+			lineTo(614, 1638),
+			lineTo(614, 0),
+			lineTo(205, 0),
+		},
+	}}
+
+	for i, tc := range testCases {
+		got, err := f.LoadGlyph(&b, x, tc.ppem, nil)
+		if err != nil {
+			t.Errorf("i=%d: LoadGlyph: %v", i, err)
+			continue
+		}
+		if err := checkSegmentsEqual(got, tc.want); err != nil {
+			t.Errorf("i=%d: %v", i, err)
+			continue
+		}
+	}
+}
+
+func TestGlyphName(t *testing.T) {
+	f, err := Parse(goregular.TTF)
+	if err != nil {
+		t.Fatalf("Parse: %v", err)
+	}
+
+	testCases := []struct {
+		r    rune
+		want string
+	}{
+		{'\x00', "NULL"},
+		{'!', "exclam"},
+		{'A', "A"},
+		{'{', "braceleft"},
+		{'\u00c4', "Adieresis"}, // U+00C4 LATIN CAPITAL LETTER A WITH DIAERESIS
+		{'\u2020', "dagger"},    // U+2020 DAGGER
+		{'\u2660', "spade"},     // U+2660 BLACK SPADE SUIT
+		{'\uf800', "gopher"},    // U+F800 <Private Use>
+		{'\ufffe', ".notdef"},   // Not in the Go Regular font, so GlyphIndex returns (0, nil).
+	}
+
+	var b Buffer
+	for _, tc := range testCases {
+		x, err := f.GlyphIndex(&b, tc.r)
+		if err != nil {
+			t.Errorf("r=%q: GlyphIndex: %v", tc.r, err)
+			continue
+		}
+		got, err := f.GlyphName(&b, x)
+		if err != nil {
+			t.Errorf("r=%q: GlyphName: %v", tc.r, err)
+			continue
+		}
+		if got != tc.want {
+			t.Errorf("r=%q: got %q, want %q", tc.r, got, tc.want)
+			continue
+		}
+	}
+}
+
+func TestBuiltInPostNames(t *testing.T) {
+	testCases := []struct {
+		x    GlyphIndex
+		want string
+	}{
+		{0, ".notdef"},
+		{1, ".null"},
+		{2, "nonmarkingreturn"},
+		{13, "asterisk"},
+		{36, "A"},
+		{93, "z"},
+		{123, "ocircumflex"},
+		{202, "Edieresis"},
+		{255, "Ccaron"},
+		{256, "ccaron"},
+		{257, "dcroat"},
+		{258, ""},
+		{999, ""},
+		{0xffff, ""},
+	}
+
+	for _, tc := range testCases {
+		if tc.x >= numBuiltInPostNames {
+			continue
+		}
+		i := builtInPostNamesOffsets[tc.x+0]
+		j := builtInPostNamesOffsets[tc.x+1]
+		got := builtInPostNamesData[i:j]
+		if got != tc.want {
+			t.Errorf("x=%d: got %q, want %q", tc.x, got, tc.want)
+		}
 	}
 }

@@ -1,4 +1,11 @@
 # Change Log
+## v1.7.1 (2017-03-12)
+### Added
+- signature updates for PRONOM, LOC and tika-mimetypes
+
+### Changed
+- `roy inspect` accepts space as well as comma-separated lists of formats e.g. `roy inspect fmt/1 fmt/2`
+
 ## v1.7.0 (2017-02-17)
 ### Added
 - log files that match particular formats with `-log fmt/1,@set2` (comma separated list of format IDs/format sets). These can be mixed with regular log options e.g. `-log unknown,fmt/1,chart`
@@ -9,7 +16,7 @@
 `roy sets -changes` creates a pronom-changes.json sets file from a PRONOM release-notes.xml file; `roy sets -list @set1,@set2` lists contents of a comma-separated list of format sets
 - `roy inspect releases` provides a summary view of a PRONOM release-notes.xml file
 
-## Changed
+### Changed
 - the `sf -` command now scans stdin e.g. `cat mypdf.pdf | sf -`. You can pass a filename in to supplement the analysis with the `-name` flag. E.g. `cat myfile.pdf | sf -name myfile.pdf -`. In previous versions of sf, the dash argument signified treating stdin as a newline separated list of filenames for scanning. Use the new `-f` flag for this e.g. `sf -f myfiles.txt` or `cat myfiles.txt | sf -f -`; change requested by [pm64](https://github.com/richardlehane/siegfried/issues/96)
 
 ### Fixed
