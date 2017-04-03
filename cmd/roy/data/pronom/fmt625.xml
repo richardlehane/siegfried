@@ -60,11 +60,11 @@
       <InternalSignature>
         <SignatureID>958</SignatureID>
         <SignatureName>Apple Disk Copy Image</SignatureName>
-        <SignatureNote>The byte at position 0x50 defines the disk encoding. Byte 0x51 defines the 'format byte'. Bytes 0x52-53 are the private word/magic number used for identification. Further information is found here: http://68kmla.org/wiki/index.php/DiskCopy_4.2_format_specification</SignatureNote>
+        <SignatureNote>The byte at position 0x40-43 represent four potential values for data block sizes and 0x44-47 represent 3 potential tag sizes in bytes (there is a possiblity there are additional values for these sequences which may require future adjustment to the signature) 0x50 defines the disk encoding. Byte 0x51 defines the 'format byte'. Bytes 0x52-53 are the private word/magic number used for identification. Further information is found here: http://68kmla.org/wiki/index.php/DiskCopy_4.2_format_specification</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1181</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
-          <Offset>80</Offset>
+          <Offset>64</Offset>
           <MaxOffset>
           </MaxOffset>
           <IndirectOffsetLocation>
@@ -73,7 +73,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>(00|01|02|03)(02|12|22|24|96)0100</ByteSequenceValue>
+          <ByteSequenceValue>(00064000|000C8000|000B4000|00168000)(00002580|00004B00|00000000){8}(00|01|02|03)(02|12|22|24|96)0100</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

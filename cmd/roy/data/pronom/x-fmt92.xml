@@ -66,8 +66,9 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>277</SignatureID>
-        <SignatureName>Adobe Photoshop (psd)</SignatureName>
-        <SignatureNote>Primarily matches a character sequence of: 8BPS……….</SignatureNote>
+        <SignatureName>Adobe Photoshop PSD</SignatureName>
+        <SignatureNote>BOF: '8BPS', version 1 (0x0001), 6 reserved null bytes
+https://www.adobe.com/devnet-apps/photoshop/fileformatashtml/</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>356</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -82,6 +83,13 @@
           <ByteSequenceValue>38425053000100000000000000</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>1801</RelatedFormatID>
+        <RelatedFormatName>Adobe Photoshop Large Document Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

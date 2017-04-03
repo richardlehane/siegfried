@@ -10,10 +10,10 @@
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Spreadsheet</FormatTypes>
+      <FormatTypes>Dataset</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>SPSS (Statistical Package for the Social Sciences) is a software package used for statistical analysis in the social sciences. The first version of SPSS was developed by SPSS Inc. in 1968 and has since had twenty two stable version releases.  In 2009 SPSS Inc. was acquired by IBM.  As of version 17.0.1 SPSS software has been known as Predictive Analytics Software. SPSS is used widely by both academics and other social researchers.</FormatDescription>
+      <FormatDescription>SPSS (Statistical Package for the Social Sciences) is a software package used for statistical analysis in the social sciences. The first version of SPSS was developed by SPSS Inc. in 1968. In 2009 SPSS Inc. was acquired by IBM.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>

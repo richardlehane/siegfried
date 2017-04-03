@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1816</FormatID>
+      <FormatName>INTERLIS Transfer File</FormatName>
+      <FormatVersion>2.2</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>INTERLIS is a description and transfer mechanism for spatial data. INTERLIS 2 Transfer files are XML files that contain data, e.g. geodata, which is structured according to certain rules. These rules are described in another file (or multiple files) called a model file.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>24 Mar 2017</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>24 Mar 2017</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1011</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>1989</ExternalSignatureID>
+        <Signature>xml</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>1990</ExternalSignatureID>
+        <Signature>xtf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1383</SignatureID>
+        <SignatureName>Interlis transfer file 2.2 a</SignatureName>
+        <SignatureNote>&lt;?xml version=('|")1.0('|") encoding=('|")UTF-8('|"){0-2}?&gt;{0-256}&lt;TRANSFER xmlns=('|")http://www.interlis.ch/INTERLIS2.2('|")</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1652</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C3F786D6C2076657273696F6E3D(22|27)312E30(22|27)20656E636F64696E673D(22|27)5554462D38(22|27){0-2}3F3E{0-256}3C5452414E5346455220786D6C6E733D(22|27)687474703A2F2F7777772E696E7465726C69732E63682F494E5445524C4953322E32(22|27)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1384</SignatureID>
+        <SignatureName>Interlis transfer file 2.2 b</SignatureName>
+        <SignatureNote>&lt;.?.x.m.l. .v.e.r.s.i.o.n.=.'.1...0.'. .e.n.c.o.d.i.n.g.=.'.U.T.F.-.8.'.?.&gt;{0-512}&lt;.T.R.A.N.S.F.E.R. .x.m.l.n.s.=.".h.t.t.p.:././.w.w.w...i.n.t.e.r.l.i.s...c.h./.I.N.T.E.R.L.I.S.2...3</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1653</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>2</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C003F0078006D006C002000760065007200730069006F006E003D00(22|27)0031002E003000(22|27)00200065006E0063006F00640069006E0067003D00(22|27)005500540046002D003800(22|27)003F003E{0-512}3C005400520041004E005300460045005200200078006D006C006E0073003D00(22|27)0068007400740070003A002F002F007700770077002E0069006E007400650072006C00690073002E00630068002F0049004E005400450052004C004900530032002E0032</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>638</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

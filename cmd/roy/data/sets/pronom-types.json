@@ -81,7 +81,7 @@
     "fmt/441 (Windows Media Video 9 Advanced Profile (WVC1) 9 Advanced Profile (WVC1))",
     "fmt/472 (Sony Digital Voice File/Sony Memory Stick Voice File)",
     "fmt/527 (Broadcast WAVE 2 Generic)",
-    "fmt/588 (R3D)",
+    "fmt/588 (Redcode RAW (R3D) Media File 1)",
     "fmt/596 (Apple Lossless Audio Codec)",
     "fmt/703 (Broadcast WAVE 0 PCM Encoding)",
     "fmt/704 (Broadcast WAVE 1 PCM Encoding)",
@@ -127,7 +127,10 @@
     "fmt/972 (Dolby MLP Lossless Audio)",
     "fmt/973 (DTS Coherent Acoustics (DCA) Audio)",
     "fmt/974 (Notation Interchange File Format)",
-    "fmt/975 (Jamcracker Tracker Module)"
+    "fmt/975 (Jamcracker Tracker Module)",
+    "fmt/1007 (Digital Speech Standard)",
+    "fmt/1008 (DSS Pro)",
+    "fmt/1038 (Redcode RAW (R3D) Media File 2)"
   ],
   "database": [
     "x-fmt/6 (FoxPro Database 2.0)",
@@ -250,10 +253,11 @@
     "fmt/602 (Statistical Analysis System Catalogue XPT (Unix) 9.1)",
     "fmt/603 (Statistical Analysis System Data XPT (Windows) 9.1)",
     "fmt/604 (Statistical Analysis System Data XPT (Unix) 9.1)",
-    "fmt/605 (Statistical Analysis System Catalogue (Windows) 9.1)",
-    "fmt/606 (Statistical Analysis System Catalogue (Unix) 9.1)",
+    "fmt/605 (Statistical Analysis System Catalog (Windows) 9.1)",
+    "fmt/606 (Statistical Analysis System Catalog (Unix) 9.1)",
     "fmt/607 (Statistical Analysis System Data (Windows) 9.1)",
     "fmt/608 (Statistical Analysis System Data (Unix) 9.1)",
+    "fmt/638 (SPSS Data File)",
     "fmt/828 (MAT-file format 7.3)",
     "fmt/854 (Personal Ancestral File (PAF) 3)",
     "fmt/855 (Personal Ancestral File (PAF) 4)",
@@ -271,7 +275,36 @@
     "fmt/911 (CRAM File Format 3.x)",
     "fmt/931 (Mathcad Document Binary)",
     "fmt/932 (Mathcad Document XML)",
-    "fmt/963 (OMNIC Spectral Data File)"
+    "fmt/963 (OMNIC Spectral Data File)",
+    "fmt/997 (SPSS Portable Data Format)",
+    "fmt/1002 (Nearly Raw Raster Data 1)",
+    "fmt/1003 (Nearly Raw Raster Data 2)",
+    "fmt/1004 (Nearly Raw Raster Data 3)",
+    "fmt/1005 (Nearly Raw Raster Data 4)",
+    "fmt/1006 (Nearly Raw Raster Data 5)",
+    "fmt/1015 (Statistical Analysis System Data (Windows) Generic)",
+    "fmt/1016 (Statistical Analysis System Data (Unix) Generic)",
+    "fmt/1017 (Statistical Analysis System Data (Windows) 8.2)",
+    "fmt/1018 (Statistical Analysis System Data (Unix) 8.2)",
+    "fmt/1019 (Statistical Analysis System Data (Windows) 9.2)",
+    "fmt/1020 (Statistical Analysis System Data (Unix) 9.2)",
+    "fmt/1021 (Statistical Analysis System Data (Windows) 9.3)",
+    "fmt/1022 (Statistical Analysis System Data (Unix) 9.3)",
+    "fmt/1023 (Statistical Analysis System Catalog (Windows) Generic)",
+    "fmt/1024 (Statistical Analysis System Catalog (Unix) Generic)",
+    "fmt/1025 (Statistical Analysis System Catalog (Windows) 9.2)",
+    "fmt/1026 (Statistical Analysis System Catalog (Unix) 9.2)",
+    "fmt/1027 (Statistical Analysis System Catalog (Windows) 9.3)",
+    "fmt/1028 (Statistical Analysis System Catalog (Unix) 9.3)",
+    "fmt/1029 (Stata Data (DTA) Format 104)",
+    "fmt/1030 (Stata Data (DTA) Format 105)",
+    "fmt/1031 (Stata Data (DTA) Format 110)",
+    "fmt/1032 (Stata Data (DTA) Format 111)",
+    "fmt/1034 (Stata Data (DTA) Format 114)",
+    "fmt/1033 (Stata Data (DTA) Format 113)",
+    "fmt/1035 (Stata Data (DTA) Format 115)",
+    "fmt/1036 (Stata Data (DTA) Format 117)",
+    "fmt/1037 (Stata Data (DTA) Format 118)"
   ],
   "email": [
     "x-fmt/430 (Microsoft Outlook Email Message 97-2003)",
@@ -466,7 +499,17 @@
     "fmt/935 (Animated Portable Network Graphics)",
     "fmt/936 (Microsoft Picture It! Image File 1)",
     "fmt/970 (Khronos Texture File)",
-    "fmt/994 (Jeffs Image Format)"
+    "fmt/994 (Jeffs Image Format)",
+    "fmt/996 (Adobe Photoshop Large Document Format)",
+    "fmt/998 (OpenRaster Image Format)",
+    "fmt/999 (Krita Document Format)",
+    "fmt/1001 (OpenEXR 2)",
+    "fmt/1002 (Nearly Raw Raster Data 1)",
+    "fmt/1003 (Nearly Raw Raster Data 2)",
+    "fmt/1004 (Nearly Raw Raster Data 3)",
+    "fmt/1005 (Nearly Raw Raster Data 4)",
+    "fmt/1006 (Nearly Raw Raster Data 5)",
+    "fmt/1040 (DirectDraw Surface)"
   ],
   "imageVector": [
     "x-fmt/20 (Adobe Illustrator 1.0 / 1.1)",
@@ -698,7 +741,9 @@
     "fmt/978 (3DS Max)",
     "fmt/985 (Valve Texture Format)",
     "fmt/988 (ESRI ArcScene Document)",
-    "fmt/989 (ESRI ArcGlobe Document)"
+    "fmt/989 (ESRI ArcGlobe Document)",
+    "fmt/1009 (FBX (Filmbox) Binary)",
+    "fmt/1010 (FBX (Filmbox) Text)"
   ],
   "pageDescription": [
     "fmt/122 (Encapsulated PostScript File Format 1.2)",
@@ -863,7 +908,6 @@
     "fmt/598 (Microsoft Excel Template 2007 onwards)",
     "fmt/627 (Microsoft Excel Macro-Enabled Template 2007)",
     "fmt/628 (Microsoft Excel Macro-Enabled Add-In 2007)",
-    "fmt/638 (SPSS Data File)",
     "fmt/736 (ClarisWorks 1 (generic))",
     "fmt/737 (ClarisWorks 2-3 (generic))",
     "fmt/740 (ClarisWorks Spreadsheet 4)",
@@ -924,7 +968,8 @@
     "fmt/981 (EazyDraw File Format)",
     "fmt/982 (iMovieProj File Format)",
     "fmt/983 (NIB File Format)",
-    "fmt/986 (Extensible Metadata Platform Format)"
+    "fmt/986 (Extensible Metadata Platform Format)",
+    "fmt/1039 (Redcode Metadata (RMD) File)"
   ],
   "textStructured": [
     "x-fmt/41 (Data Interchange Format)",
@@ -998,7 +1043,11 @@
     "fmt/950 (MIME Email 1.0)",
     "fmt/991 (SHA256 File)",
     "fmt/992 (SHA1 File)",
-    "fmt/993 (MD5 File)"
+    "fmt/993 (MD5 File)",
+    "fmt/1011 (INTERLIS Transfer File 2.2)",
+    "fmt/1012 (INTERLIS Model File 2.2)",
+    "fmt/1013 (INTERLIS Transfer File 1)",
+    "fmt/1014 (INTERLIS Model File 1)"
   ],
   "textUnstructured": [
     "x-fmt/14 (Macintosh Text File)",
@@ -1035,14 +1084,15 @@
     "fmt/569 (Matroska 1-4)",
     "fmt/573 (WebM)",
     "fmt/585 (MPEG-2 Transport Stream)",
-    "fmt/588 (R3D)",
+    "fmt/588 (Redcode RAW (R3D) Media File 1)",
     "fmt/640 (MPEG-2 Elementary Stream)",
     "fmt/649 (MPEG-1 Elementary Stream)",
     "fmt/731 (Bink Video Format 1)",
     "fmt/732 (Bink Video Format 2)",
     "fmt/944 (Ogg Multimedia Container)",
     "fmt/945 (Ogg Theora Video)",
-    "fmt/971 (Microsoft Windows Movie Maker File)"
+    "fmt/971 (Microsoft Windows Movie Maker File)",
+    "fmt/1038 (Redcode RAW (R3D) Media File 2)"
   ],
   "wordProcessor": [
     "x-fmt/1 (Microsoft Word for Macintosh Document 3.0)",

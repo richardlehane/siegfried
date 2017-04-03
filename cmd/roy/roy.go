@@ -301,12 +301,6 @@ func viewReleases() error {
 }
 
 func getOptions() []config.Option {
-	if *home != config.Home() {
-		config.SetHome(*home)
-	}
-	if *inspectHome != config.Home() {
-		config.SetHome(*inspectHome)
-	}
 	opts := []config.Option{}
 	// build options
 	if *droid != config.Droid() {
@@ -424,15 +418,21 @@ the DROID signature file you should also include a regular signature extension
 		}
 		opts = append(opts, config.SetExtendC(sets.Expand(*inspectExtendc)))
 	}
+	// set home
+	if *home != config.Home() {
+		config.SetHome(*home)
+	} else if *inspectHome != config.Home() {
+		config.SetHome(*inspectHome)
+	}
 	return opts
 }
 
 func setHarvestOptions() {
-	if *harvestHome != config.Home() {
-		config.SetHome(*harvestHome)
-	}
 	if *harvestDroid != config.Droid() {
 		config.SetDroid(*harvestDroid)()
+	}
+	if *harvestHome != config.Home() {
+		config.SetHome(*harvestHome)
 	}
 	if *timeout != htimeout {
 		config.SetHarvestTimeout(*timeout)
@@ -443,11 +443,11 @@ func setHarvestOptions() {
 }
 
 func setSetsOptions() {
-	if *setsHome != config.Home() {
-		config.SetHome(*setsHome)
-	}
 	if *setsDroid != config.Droid() {
 		config.SetDroid(*setsDroid)()
+	}
+	if *setsHome != config.Home() {
+		config.SetHome(*setsHome)
 	}
 }
 

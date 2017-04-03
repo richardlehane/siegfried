@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1821</FormatID>
+      <FormatName>Statistical Analysis System Data (Unix)</FormatName>
+      <FormatVersion>Generic</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Dataset</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>SAS (Statistical Analysis System) is a statistical analysis software suite developed by SAS Institute. A SAS data file is a type of SAS data set that contains data values and descriptor information. This generic entry applies where PRONOM is unable to be specific regarding the version number of the file format. Please contact the PRONOM mailbox if you encounter a 'generic' SAS data file as this will help improve the data within PRONOM.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>27 Mar 2017</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>27 Mar 2017</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1016</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>1996</ExternalSignatureID>
+        <Signature>sas7bdat</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2033</ExternalSignatureID>
+        <Signature>sd7</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1377</SignatureID>
+        <SignatureName>SAS Data (Unix) Generic</SignatureName>
+        <SignatureNote>BOF: 32 byte binary magic {7} 0x31 = Unix {116} 'DATA'
+Signature based extensively on unofficial description of DATA format, plus a wide variety of format samples: https://cran.r-project.org/web/packages/sas7bdat/vignettes/sas7bdat.pdf</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1646</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>000000000000000000000000C2EA8160B31411CFBD92080009C7318C181F1011{7}31{116}44415441</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1400</RelatedFormatID>
+        <RelatedFormatName>Statistical Analysis System Data (Unix)</RelatedFormatName>
+        <RelatedFormatVersion>9.1</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1823</RelatedFormatID>
+        <RelatedFormatName>Statistical Analysis System Data (Unix)</RelatedFormatName>
+        <RelatedFormatVersion>8.2</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1825</RelatedFormatID>
+        <RelatedFormatName>Statistical Analysis System Data (Unix)</RelatedFormatName>
+        <RelatedFormatVersion>9.2</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1827</RelatedFormatID>
+        <RelatedFormatName>Statistical Analysis System Data (Unix)</RelatedFormatName>
+        <RelatedFormatVersion>9.3</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

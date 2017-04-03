@@ -3,9 +3,8 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>1380</FormatID>
-      <FormatName>R3D</FormatName>
-      <FormatVersion>
-      </FormatVersion>
+      <FormatName>Redcode RAW (R3D) Media File</FormatName>
+      <FormatVersion>1</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -45,12 +44,12 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>935</SignatureID>
-        <SignatureName>R3D</SignatureName>
-        <SignatureNote>BOF: …DRED1</SignatureNote>
+        <SignatureName>R3D v1</SignatureName>
+        <SignatureNote>BOF, offset 4: RED1{2}R1</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1155</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
-          <Offset>0</Offset>
+          <Offset>4</Offset>
           <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
@@ -58,9 +57,15 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>0000014452454431</ByteSequenceValue>
+          <ByteSequenceValue>52454431{2}5231</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>1843</RelatedFormatID>
+        <RelatedFormatName>Redcode RAW (R3D) Media File</RelatedFormatName>
+        <RelatedFormatVersion>2</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>
