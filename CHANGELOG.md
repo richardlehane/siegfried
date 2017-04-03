@@ -1,7 +1,7 @@
 # Change Log
 ## v1.7.2 (2017-04-4)
 ### Added
-- signature updates for PRONOM, LOC and tika-mimetypes
+- PRONOM v90 update
 
 ### Fixed
 - the -home flag was being overriden for roy subcommands due to interaction other flags

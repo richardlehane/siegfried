@@ -90,7 +90,7 @@ Or, for the most recent updates, you can install from this fork:
 ## Changes
 ### v1.7.2 (2017-04-4)
 ### Added
-- signature updates for PRONOM, LOC and tika-mimetypes
+- PRONOM v90 update
 
 ### Fixed
 - the -home flag was being overriden for roy subcommands due to interaction other flags
