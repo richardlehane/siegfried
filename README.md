@@ -8,7 +8,7 @@
 
 ### Version
 
-1.7.1
+1.7.2
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -88,6 +88,13 @@ Or, for the most recent updates, you can install from this fork:
 
 
 ## Changes
+### v1.7.2 (2017-04-4)
+### Added
+- signature updates for PRONOM, LOC and tika-mimetypes
+
+### Fixed
+- the -home flag was being overriden for roy subcommands due to interaction other flags
+
 ### v1.7.1 (2017-03-12)
 ### Added
 - signature updates for PRONOM, LOC and tika-mimetypes
