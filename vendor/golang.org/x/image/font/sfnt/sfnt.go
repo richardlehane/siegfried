@@ -45,10 +45,18 @@ const (
 	// safe to call concurrently, as long as each call has a different *Buffer.
 	maxCmapSegments = 20000
 
-	maxGlyphDataLength  = 64 * 1024
-	maxHintBits         = 256
-	maxNumTables        = 256
-	maxRealNumberStrLen = 64 // Maximum length in bytes of the "-123.456E-7" representation.
+	// TODO: similarly, load subroutine locations lazily. Adobe's
+	// SourceHanSansSC-Regular.otf has up to 30000 subroutines.
+	maxNumSubroutines = 40000
+
+	maxCompoundRecursionDepth = 8
+	maxCompoundStackSize      = 64
+	maxGlyphDataLength        = 64 * 1024
+	maxHintBits               = 256
+	maxNumFontDicts           = 256
+	maxNumFonts               = 256
+	maxNumTables              = 256
+	maxRealNumberStrLen       = 64 // Maximum length in bytes of the "-123.456E-7" representation.
 
 	// (maxTableOffset + maxTableLength) will not overflow an int32.
 	maxTableLength = 1 << 29
@@ -59,23 +67,27 @@ var (
 	// ErrNotFound indicates that the requested value was not found.
 	ErrNotFound = errors.New("sfnt: not found")
 
-	errInvalidBounds        = errors.New("sfnt: invalid bounds")
-	errInvalidCFFTable      = errors.New("sfnt: invalid CFF table")
-	errInvalidCmapTable     = errors.New("sfnt: invalid cmap table")
-	errInvalidGlyphData     = errors.New("sfnt: invalid glyph data")
-	errInvalidHeadTable     = errors.New("sfnt: invalid head table")
-	errInvalidKernTable     = errors.New("sfnt: invalid kern table")
-	errInvalidLocaTable     = errors.New("sfnt: invalid loca table")
-	errInvalidLocationData  = errors.New("sfnt: invalid location data")
-	errInvalidMaxpTable     = errors.New("sfnt: invalid maxp table")
-	errInvalidNameTable     = errors.New("sfnt: invalid name table")
-	errInvalidPostTable     = errors.New("sfnt: invalid post table")
-	errInvalidSourceData    = errors.New("sfnt: invalid source data")
-	errInvalidTableOffset   = errors.New("sfnt: invalid table offset")
-	errInvalidTableTagOrder = errors.New("sfnt: invalid table tag order")
-	errInvalidUCS2String    = errors.New("sfnt: invalid UCS-2 string")
-	errInvalidVersion       = errors.New("sfnt: invalid version")
+	errInvalidBounds          = errors.New("sfnt: invalid bounds")
+	errInvalidCFFTable        = errors.New("sfnt: invalid CFF table")
+	errInvalidCmapTable       = errors.New("sfnt: invalid cmap table")
+	errInvalidFont            = errors.New("sfnt: invalid font")
+	errInvalidFontCollection  = errors.New("sfnt: invalid font collection")
+	errInvalidGlyphData       = errors.New("sfnt: invalid glyph data")
+	errInvalidGlyphDataLength = errors.New("sfnt: invalid glyph data length")
+	errInvalidHeadTable       = errors.New("sfnt: invalid head table")
+	errInvalidKernTable       = errors.New("sfnt: invalid kern table")
+	errInvalidLocaTable       = errors.New("sfnt: invalid loca table")
+	errInvalidLocationData    = errors.New("sfnt: invalid location data")
+	errInvalidMaxpTable       = errors.New("sfnt: invalid maxp table")
+	errInvalidNameTable       = errors.New("sfnt: invalid name table")
+	errInvalidPostTable       = errors.New("sfnt: invalid post table")
+	errInvalidSingleFont      = errors.New("sfnt: invalid single font (data is a font collection)")
+	errInvalidSourceData      = errors.New("sfnt: invalid source data")
+	errInvalidTableOffset     = errors.New("sfnt: invalid table offset")
+	errInvalidTableTagOrder   = errors.New("sfnt: invalid table tag order")
+	errInvalidUCS2String      = errors.New("sfnt: invalid UCS-2 string")
 
+	errUnsupportedCFFFDSelectTable     = errors.New("sfnt: unsupported CFF FDSelect table")
 	errUnsupportedCFFVersion           = errors.New("sfnt: unsupported CFF version")
 	errUnsupportedCmapEncodings        = errors.New("sfnt: unsupported cmap encodings")
 	errUnsupportedCompoundGlyph        = errors.New("sfnt: unsupported compound glyph")
@@ -83,7 +95,10 @@ var (
 	errUnsupportedKernTable            = errors.New("sfnt: unsupported kern table")
 	errUnsupportedRealNumberEncoding   = errors.New("sfnt: unsupported real number encoding")
 	errUnsupportedNumberOfCmapSegments = errors.New("sfnt: unsupported number of cmap segments")
+	errUnsupportedNumberOfFontDicts    = errors.New("sfnt: unsupported number of font dicts")
+	errUnsupportedNumberOfFonts        = errors.New("sfnt: unsupported number of fonts")
 	errUnsupportedNumberOfHints        = errors.New("sfnt: unsupported number of hints")
+	errUnsupportedNumberOfSubroutines  = errors.New("sfnt: unsupported number of subroutines")
 	errUnsupportedNumberOfTables       = errors.New("sfnt: unsupported number of tables")
 	errUnsupportedPlatformEncoding     = errors.New("sfnt: unsupported platform encoding")
 	errUnsupportedPostTable            = errors.New("sfnt: unsupported post table")
@@ -254,19 +269,105 @@ type table struct {
 	offset, length uint32
 }
 
-// Parse parses an SFNT font from a []byte data source.
-func Parse(src []byte) (*Font, error) {
-	f := &Font{src: source{b: src}}
-	if err := f.initialize(); err != nil {
+// ParseCollection parses an SFNT font collection, such as TTC or OTC data,
+// from a []byte data source.
+//
+// If passed data for a single font, a TTF or OTF instead of a TTC or OTC, it
+// will return a collection containing 1 font.
+func ParseCollection(src []byte) (*Collection, error) {
+	c := &Collection{src: source{b: src}}
+	if err := c.initialize(); err != nil {
+		return nil, err
+	}
+	return c, nil
+}
+
+// ParseCollectionReaderAt parses an SFNT collection, such as TTC or OTC data,
+// from an io.ReaderAt data source.
+//
+// If passed data for a single font, a TTF or OTF instead of a TTC or OTC, it
+// will return a collection containing 1 font.
+func ParseCollectionReaderAt(src io.ReaderAt) (*Collection, error) {
+	c := &Collection{src: source{r: src}}
+	if err := c.initialize(); err != nil {
+		return nil, err
+	}
+	return c, nil
+}
+
+// Collection is a collection of one or more fonts.
+//
+// All of the Collection methods are safe to call concurrently.
+type Collection struct {
+	src     source
+	offsets []uint32
+}
+
+// NumFonts returns the number of fonts in the collection.
+func (c *Collection) NumFonts() int { return len(c.offsets) }
+
+func (c *Collection) initialize() error {
+	// The https://www.microsoft.com/typography/otspec/otff.htm "Font
+	// Collections" section describes the TTC Header.
+	buf, err := c.src.view(nil, 0, 12)
+	if err != nil {
+		return err
+	}
+	// These cases match the switch statement in Font.initializeTables.
+	switch u32(buf) {
+	default:
+		return errInvalidFontCollection
+	case 0x00010000, 0x4f54544f:
+		// Try parsing it as a single font instead of a collection.
+		c.offsets = []uint32{0}
+	case 0x74746366: // "ttcf".
+		numFonts := u32(buf[8:])
+		if numFonts == 0 || numFonts > maxNumFonts {
+			return errUnsupportedNumberOfFonts
+		}
+		buf, err = c.src.view(nil, 12, int(4*numFonts))
+		if err != nil {
+			return err
+		}
+		c.offsets = make([]uint32, numFonts)
+		for i := range c.offsets {
+			o := u32(buf[4*i:])
+			if o > maxTableOffset {
+				return errUnsupportedTableOffsetLength
+			}
+			c.offsets[i] = o
+		}
+	}
+	return nil
+}
+
+// Font returns the i'th font in the collection.
+func (c *Collection) Font(i int) (*Font, error) {
+	if i < 0 || len(c.offsets) <= i {
+		return nil, ErrNotFound
+	}
+	f := &Font{src: c.src}
+	if err := f.initialize(int(c.offsets[i])); err != nil {
 		return nil, err
 	}
 	return f, nil
 }
 
-// ParseReaderAt parses an SFNT font from an io.ReaderAt data source.
+// Parse parses an SFNT font, such as TTF or OTF data, from a []byte data
+// source.
+func Parse(src []byte) (*Font, error) {
+	f := &Font{src: source{b: src}}
+	if err := f.initialize(0); err != nil {
+		return nil, err
+	}
+	return f, nil
+}
+
+// ParseReaderAt parses an SFNT font, such as TTF or OTF data, from an
+// io.ReaderAt data source.
 func ParseReaderAt(src io.ReaderAt) (*Font, error) {
 	f := &Font{src: source{r: src}}
-	if err := f.initialize(); err != nil {
+	if err := f.initialize(0); err != nil {
 		return nil, err
 	}
 	return f, nil
@@ -340,6 +441,7 @@ type Font struct {
 	kern table
 
 	cached struct {
+		glyphData        glyphData
 		glyphIndex       glyphIndexFunc
 		indexToLocFormat bool // false means short, true means long.
 		isPostScript     bool
@@ -347,24 +449,20 @@ type Font struct {
 		kernOffset       int32
 		postTableVersion uint32
 		unitsPerEm       Units
-
-		// The glyph data for the glyph index i is in
-		// src[locations[i+0]:locations[i+1]].
-		locations []uint32
 	}
 }
 
 // NumGlyphs returns the number of glyphs in f.
-func (f *Font) NumGlyphs() int { return len(f.cached.locations) - 1 }
+func (f *Font) NumGlyphs() int { return len(f.cached.glyphData.locations) - 1 }
 
 // UnitsPerEm returns the number of units per em for f.
 func (f *Font) UnitsPerEm() Units { return f.cached.unitsPerEm }
 
-func (f *Font) initialize() error {
+func (f *Font) initialize(offset int) error {
 	if !f.src.valid() {
 		return errInvalidSourceData
 	}
-	buf, isPostScript, err := f.initializeTables(nil)
+	buf, isPostScript, err := f.initializeTables(offset)
 	if err != nil {
 		return err
 	}
@@ -381,7 +479,11 @@ func (f *Font) initialize() error {
 	if err != nil {
 		return err
 	}
-	buf, numGlyphs, locations, err := f.parseMaxp(buf, indexToLocFormat, isPostScript)
+	buf, numGlyphs, err := f.parseMaxp(buf, isPostScript)
+	if err != nil {
+		return err
+	}
+	buf, glyphData, err := f.parseGlyphData(buf, numGlyphs, indexToLocFormat, isPostScript)
 	if err != nil {
 		return err
 	}
@@ -398,6 +500,7 @@ func (f *Font) initialize() error {
 		return err
 	}
 
+	f.cached.glyphData = glyphData
 	f.cached.glyphIndex = glyphIndex
 	f.cached.indexToLocFormat = indexToLocFormat
 	f.cached.isPostScript = isPostScript
@@ -405,26 +508,29 @@ func (f *Font) initialize() error {
 	f.cached.kernOffset = kernOffset
 	f.cached.postTableVersion = postTableVersion
 	f.cached.unitsPerEm = unitsPerEm
-	f.cached.locations = locations
 
 	return nil
 }
 
-func (f *Font) initializeTables(buf []byte) (buf1 []byte, isPostScript bool, err error) {
+func (f *Font) initializeTables(offset int) (buf1 []byte, isPostScript bool, err error) {
 	// https://www.microsoft.com/typography/otspec/otff.htm "Organization of an
 	// OpenType Font" says that "The OpenType font starts with the Offset
 	// Table", which is 12 bytes.
-	buf, err = f.src.view(buf, 0, 12)
+	buf, err := f.src.view(nil, offset, 12)
 	if err != nil {
 		return nil, false, err
 	}
+	// When updating the cases in this switch statement, also update the
+	// Collection.initialize method.
 	switch u32(buf) {
 	default:
-		return nil, false, errInvalidVersion
+		return nil, false, errInvalidFont
 	case 0x00010000:
 		// No-op.
 	case 0x4f54544f: // "OTTO".
 		isPostScript = true
+	case 0x74746366: // "ttcf".
+		return nil, false, errInvalidSingleFont
 	}
 	numTables := int(u16(buf[4:]))
 	if numTables > maxNumTables {
@@ -433,7 +539,7 @@ func (f *Font) initializeTables(buf []byte) (buf1 []byte, isPostScript bool, err
 
 	// "The Offset Table is followed immediately by the Table Record entries...
 	// sorted in ascending order by tag", 16 bytes each.
-	buf, err = f.src.view(buf, 12, 16*numTables)
+	buf, err = f.src.view(buf, offset+12, 16*numTables)
 	if err != nil {
 		return nil, false, err
 	}
@@ -597,10 +703,20 @@ func (f *Font) parseKern(buf []byte) (buf1 []byte, kernNumPairs, kernOffset int3
 		}
 		return f.parseKernVersion0(buf, offset, length)
 	case 1:
-		// TODO: find such a (proprietary?) font, and support it. Both of
-		// https://www.microsoft.com/typography/otspec/kern.htm
+		if buf[2] != 0 || buf[3] != 0 {
+			return nil, 0, 0, errUnsupportedKernTable
+		}
+		// Microsoft's https://www.microsoft.com/typography/otspec/kern.htm
+		// says that "Apple has extended the definition of the 'kern' table to
+		// provide additional functionality. The Apple extensions are not
+		// supported on Windows."
+		//
+		// The format is relatively complicated, including encoding a state
+		// machine, but rarely seen. We follow Microsoft's and FreeType's
+		// behavior and simply ignore it. Theoretically, we could follow
 		// https://developer.apple.com/fonts/TrueType-Reference-Manual/RM06/Chap6kern.html
-		// say that such fonts work on Mac OS but not on Windows.
+		// but it doesn't seem worth the effort.
+		return buf, 0, 0, nil
 	}
 	return nil, 0, 0, errUnsupportedKernTable
 }
@@ -633,7 +749,9 @@ func (f *Font) parseKernVersion0(buf []byte, offset, length int) (buf1 []byte, k
 	case 0:
 		return f.parseKernFormat0(buf, offset, subtableLength)
 	case 2:
-		// TODO: find such a (proprietary?) font, and support it.
+		// If we could find such a font, we could write code to support it, but
+		// a comment in the equivalent FreeType code (sfnt/ttkern.c) says that
+		// they've never seen such a font.
 	}
 	return nil, 0, 0, errUnsupportedKernTable
 }
@@ -654,24 +772,44 @@ func (f *Font) parseKernFormat0(buf []byte, offset, length int) (buf1 []byte, ke
 	return buf, kernNumPairs, int32(offset) + headerSize, nil
 }
 
-func (f *Font) parseMaxp(buf []byte, indexToLocFormat, isPostScript bool) (buf1 []byte, numGlyphs int, locations []uint32, err error) {
+func (f *Font) parseMaxp(buf []byte, isPostScript bool) (buf1 []byte, numGlyphs int, err error) {
 	// https://www.microsoft.com/typography/otspec/maxp.htm
 
 	if isPostScript {
 		if f.maxp.length != 6 {
-			return nil, 0, nil, errInvalidMaxpTable
+			return nil, 0, errInvalidMaxpTable
 		}
 	} else {
 		if f.maxp.length != 32 {
-			return nil, 0, nil, errInvalidMaxpTable
+			return nil, 0, errInvalidMaxpTable
 		}
 	}
 	u, err := f.src.u16(buf, f.maxp, 4)
 	if err != nil {
-		return nil, 0, nil, err
+		return nil, 0, err
 	}
-	numGlyphs = int(u)
+	return buf, int(u), nil
+}
 
+type glyphData struct {
+	// The glyph data for the i'th glyph index is in
+	// src[locations[i+0]:locations[i+1]].
+	//
+	// The slice length equals 1 plus the number of glyphs.
+	locations []uint32
+
+	// For PostScript fonts, the bytecode for the i'th global or local
+	// subroutine is in src[x[i+0]:x[i+1]].
+	//
+	// The []uint32 slice length equals 1 plus the number of subroutines
+	gsubrs      []uint32
+	singleSubrs []uint32
+	multiSubrs  [][]uint32
+
+	fdSelect fdSelect
+}
+
+func (f *Font) parseGlyphData(buf []byte, numGlyphs int, indexToLocFormat, isPostScript bool) (buf1 []byte, ret glyphData, err error) {
 	if isPostScript {
 		p := cffParser{
 			src:    &f.src,
@@ -679,21 +817,21 @@ func (f *Font) parseMaxp(buf []byte, indexToLocFormat, isPostScript bool) (buf1 
 			offset: int(f.cff.offset),
 			end:    int(f.cff.offset + f.cff.length),
 		}
-		locations, err = p.parse()
+		ret, err = p.parse(numGlyphs)
 		if err != nil {
-			return nil, 0, nil, err
+			return nil, glyphData{}, err
 		}
 	} else {
-		locations, err = parseLoca(&f.src, f.loca, f.glyf.offset, indexToLocFormat, numGlyphs)
+		ret.locations, err = parseLoca(&f.src, f.loca, f.glyf.offset, indexToLocFormat, numGlyphs)
 		if err != nil {
-			return nil, 0, nil, err
+			return nil, glyphData{}, err
 		}
 	}
-	if len(locations) != numGlyphs+1 {
-		return nil, 0, nil, errInvalidLocationData
+	if len(ret.locations) != numGlyphs+1 {
+		return nil, glyphData{}, errInvalidLocationData
 	}
 
-	return buf, numGlyphs, locations, nil
+	return buf, ret, nil
 }
 
 func (f *Font) parsePost(buf []byte, numGlyphs int) (buf1 []byte, postTableVersion uint32, err error) {
@@ -737,17 +875,21 @@ func (f *Font) GlyphIndex(b *Buffer, r rune) (GlyphIndex, error) {
 	return f.cached.glyphIndex(f, b, r)
 }
 
-func (f *Font) viewGlyphData(b *Buffer, x GlyphIndex) ([]byte, error) {
+func (f *Font) viewGlyphData(b *Buffer, x GlyphIndex) (buf []byte, offset, length uint32, err error) {
 	xx := int(x)
 	if f.NumGlyphs() <= xx {
-		return nil, ErrNotFound
+		return nil, 0, 0, ErrNotFound
 	}
-	i := f.cached.locations[xx+0]
-	j := f.cached.locations[xx+1]
+	i := f.cached.glyphData.locations[xx+0]
+	j := f.cached.glyphData.locations[xx+1]
+	if j < i {
+		return nil, 0, 0, errInvalidGlyphDataLength
+	}
 	if j-i > maxGlyphDataLength {
-		return nil, errUnsupportedGlyphDataLength
+		return nil, 0, 0, errUnsupportedGlyphDataLength
 	}
-	return b.view(&f.src, int(i), int(j-i))
+	buf, err = b.view(&f.src, int(i), int(j-i))
+	return buf, i, j - i, err
 }
 
 // LoadGlyphOptions are the options to the Font.LoadGlyph method.
@@ -760,30 +902,31 @@ type LoadGlyphOptions struct {
 //
 // If b is non-nil, the segments become invalid to use once b is re-used.
 //
+// In the returned Segments' (x, y) coordinates, the Y axis increases down.
+//
 // It returns ErrNotFound if the glyph index is out of range.
 func (f *Font) LoadGlyph(b *Buffer, x GlyphIndex, ppem fixed.Int26_6, opts *LoadGlyphOptions) ([]Segment, error) {
 	if b == nil {
 		b = &Buffer{}
 	}
 
-	buf, err := f.viewGlyphData(b, x)
-	if err != nil {
-		return nil, err
-	}
-
 	b.segments = b.segments[:0]
 	if f.cached.isPostScript {
-		b.psi.type2Charstrings.initialize(b.segments)
-		if err := b.psi.run(psContextType2Charstring, buf); err != nil {
-			return nil, err
-		}
-		b.segments = b.psi.type2Charstrings.segments
-	} else {
-		segments, err := appendGlyfSegments(b.segments, buf)
+		buf, offset, length, err := f.viewGlyphData(b, x)
 		if err != nil {
 			return nil, err
 		}
-		b.segments = segments
+		b.psi.type2Charstrings.initialize(f, b, x)
+		if err := b.psi.run(psContextType2Charstring, buf, offset, length); err != nil {
+			return nil, err
+		}
+		if !b.psi.type2Charstrings.ended {
+			return nil, errInvalidCFFTable
+		}
+	} else {
+		if err := loadGlyf(f, b, x, 0, 0); err != nil {
+			return nil, err
+		}
 	}
 
 	// Scale the segments. If we want to support hinting, we'll have to push
@@ -791,10 +934,14 @@ func (f *Font) LoadGlyph(b *Buffer, x GlyphIndex, ppem fixed.Int26_6, opts *Load
 	// loading code, such as the appendGlyfSegments body, since TrueType
 	// hinting bytecode works on the scaled glyph vectors. For now, though,
 	// it's simpler to scale as a post-processing step.
+	//
+	// We also flip the Y coordinates. OpenType's Y axis increases up. Go's
+	// standard graphics libraries' Y axis increases down.
 	for i := range b.segments {
-		s := &b.segments[i]
-		for j := range s.Args {
-			s.Args[j] = scale(s.Args[j]*ppem, f.cached.unitsPerEm)
+		a := &b.segments[i].Args
+		for j := range a {
+			a[j].X = +scale(a[j].X*ppem, f.cached.unitsPerEm)
+			a[j].Y = -scale(a[j].Y*ppem, f.cached.unitsPerEm)
 		}
 	}
 
@@ -889,9 +1036,9 @@ func (f *Font) Kern(b *Buffer, x0, x1 GlyphIndex, ppem fixed.Int26_6, h font.Hin
 	if n := f.NumGlyphs(); int(x0) >= n || int(x1) >= n {
 		return 0, ErrNotFound
 	}
-	// Not every font has a kern table. If it doesn't, there's no need to
-	// allocate a Buffer.
-	if f.kern.length == 0 {
+	// Not every font has a kern table. If it doesn't, or if that table is
+	// ignored, there's no need to allocate a Buffer.
+	if f.cached.kernNumPairs == 0 {
 		return 0, nil
 	}
 	if b == nil {
@@ -1024,6 +1171,16 @@ type Buffer struct {
 	buf []byte
 	// segments holds glyph vector path segments.
 	segments []Segment
+	// compoundStack holds the components of a TrueType compound glyph.
+	compoundStack [maxCompoundStackSize]struct {
+		glyphIndex   GlyphIndex
+		dx, dy       int16
+		hasTransform bool
+		transformXX  int16
+		transformXY  int16
+		transformYX  int16
+		transformYY  int16
+	}
 	// psi is a PostScript interpreter for when the Font is an OpenType/CFF
 	// font.
 	psi psInterpreter
@@ -1043,8 +1200,10 @@ func (b *Buffer) view(src *source, offset, length int) ([]byte, error) {
 
 // Segment is a segment of a vector path.
 type Segment struct {
-	Op   SegmentOp
-	Args [6]fixed.Int26_6
+	// Op is the operator.
+	Op SegmentOp
+	// Args is up to three (x, y) coordinates. The Y axis increases down.
+	Args [3]fixed.Point26_6
 }
 
 // SegmentOp is a vector path segment's operator.
@@ -1056,3 +1215,33 @@ const (
 	SegmentOpQuadTo
 	SegmentOpCubeTo
 )
+
+// translateArgs applies a translation to args.
+func translateArgs(args *[3]fixed.Point26_6, dx, dy fixed.Int26_6) {
+	args[0].X += dx
+	args[0].Y += dy
+	args[1].X += dx
+	args[1].Y += dy
+	args[2].X += dx
+	args[2].Y += dy
+}
+
+// transformArgs applies an affine transformation to args. The t?? arguments
+// are 2.14 fixed point values.
+func transformArgs(args *[3]fixed.Point26_6, txx, txy, tyx, tyy int16, dx, dy fixed.Int26_6) {
+	args[0] = tform(txx, txy, tyx, tyy, dx, dy, args[0])
+	args[1] = tform(txx, txy, tyx, tyy, dx, dy, args[1])
+	args[2] = tform(txx, txy, tyx, tyy, dx, dy, args[2])
+}
+
+func tform(txx, txy, tyx, tyy int16, dx, dy fixed.Int26_6, p fixed.Point26_6) fixed.Point26_6 {
+	const half = 1 << 13
+	return fixed.Point26_6{
+		X: dx +
+			fixed.Int26_6((int64(p.X)*int64(txx)+half)>>14) +
+			fixed.Int26_6((int64(p.Y)*int64(tyx)+half)>>14),
+		Y: dy +
+			fixed.Int26_6((int64(p.X)*int64(txy)+half)>>14) +
+			fixed.Int26_6((int64(p.Y)*int64(tyy)+half)>>14),
+	}
+}

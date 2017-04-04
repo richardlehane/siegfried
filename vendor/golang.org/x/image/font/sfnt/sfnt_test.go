@@ -15,35 +15,59 @@ import (
 	"golang.org/x/image/math/fixed"
 )
 
+func pt(x, y fixed.Int26_6) fixed.Point26_6 {
+	return fixed.Point26_6{X: x, Y: y}
+}
+
 func moveTo(xa, ya fixed.Int26_6) Segment {
 	return Segment{
 		Op:   SegmentOpMoveTo,
-		Args: [6]fixed.Int26_6{xa, ya},
+		Args: [3]fixed.Point26_6{pt(xa, ya)},
 	}
 }
 
 func lineTo(xa, ya fixed.Int26_6) Segment {
 	return Segment{
 		Op:   SegmentOpLineTo,
-		Args: [6]fixed.Int26_6{xa, ya},
+		Args: [3]fixed.Point26_6{pt(xa, ya)},
 	}
 }
 
 func quadTo(xa, ya, xb, yb fixed.Int26_6) Segment {
 	return Segment{
 		Op:   SegmentOpQuadTo,
-		Args: [6]fixed.Int26_6{xa, ya, xb, yb},
+		Args: [3]fixed.Point26_6{pt(xa, ya), pt(xb, yb)},
 	}
 }
 
 func cubeTo(xa, ya, xb, yb, xc, yc fixed.Int26_6) Segment {
 	return Segment{
 		Op:   SegmentOpCubeTo,
-		Args: [6]fixed.Int26_6{xa, ya, xb, yb, xc, yc},
+		Args: [3]fixed.Point26_6{pt(xa, ya), pt(xb, yb), pt(xc, yc)},
 	}
 }
 
+func translate(dx, dy fixed.Int26_6, s Segment) Segment {
+	translateArgs(&s.Args, dx, dy)
+	return s
+}
+
+func transform(txx, txy, tyx, tyy int16, dx, dy fixed.Int26_6, s Segment) Segment {
+	transformArgs(&s.Args, txx, txy, tyx, tyy, dx, dy)
+	return s
+}
+
 func checkSegmentsEqual(got, want []Segment) error {
+	// Flip got's Y axis. The test cases' coordinates are given with the Y axis
+	// increasing up, as that is what the ttx tool gives, and is the model for
+	// the underlying font format. The Go API returns coordinates with the Y
+	// axis increasing down, the same as the standard graphics libraries.
+	for i := range got {
+		for j := range got[i].Args {
+			got[i].Args[j].Y *= -1
+		}
+	}
+
 	if len(got) != len(want) {
 		return fmt.Errorf("got %d elements, want %d\noverall:\ngot  %v\nwant %v",
 			len(got), len(want), got, want)
@@ -106,25 +130,23 @@ func TestGoRegularGlyphIndex(t *testing.T) {
 		// The actual values are ad hoc, and result from whatever tools the
 		// Bigelow & Holmes type foundry used and the order in which they
 		// crafted the glyphs. They may change over time as newer versions of
-		// the font are released. In practice, though, running this test with
-		// coverage analysis suggests that it covers both the zero and non-zero
-		// cmapEntry16.offset cases for a format-4 cmap table.
+		// the font are released.
 
-		{'\u0020', 3},   // U+0020 SPACE
-		{'\u0021', 4},   // U+0021 EXCLAMATION MARK
-		{'\u0022', 5},   // U+0022 QUOTATION MARK
-		{'\u0023', 6},   // U+0023 NUMBER SIGN
-		{'\u0024', 223}, // U+0024 DOLLAR SIGN
-		{'\u0025', 7},   // U+0025 PERCENT SIGN
-		{'\u0026', 8},   // U+0026 AMPERSAND
-		{'\u0027', 9},   // U+0027 APOSTROPHE
+		{'\u0020', 3},  // U+0020 SPACE
+		{'\u0021', 4},  // U+0021 EXCLAMATION MARK
+		{'\u0022', 5},  // U+0022 QUOTATION MARK
+		{'\u0023', 6},  // U+0023 NUMBER SIGN
+		{'\u0024', 7},  // U+0024 DOLLAR SIGN
+		{'\u0025', 8},  // U+0025 PERCENT SIGN
+		{'\u0026', 9},  // U+0026 AMPERSAND
+		{'\u0027', 10}, // U+0027 APOSTROPHE
 
-		{'\u03bd', 423}, // U+03BD GREEK SMALL LETTER NU
-		{'\u03be', 424}, // U+03BE GREEK SMALL LETTER XI
-		{'\u03bf', 438}, // U+03BF GREEK SMALL LETTER OMICRON
-		{'\u03c0', 208}, // U+03C0 GREEK SMALL LETTER PI
-		{'\u03c1', 425}, // U+03C1 GREEK SMALL LETTER RHO
-		{'\u03c2', 426}, // U+03C2 GREEK SMALL LETTER FINAL SIGMA
+		{'\u03bd', 396}, // U+03BD GREEK SMALL LETTER NU
+		{'\u03be', 397}, // U+03BE GREEK SMALL LETTER XI
+		{'\u03bf', 398}, // U+03BF GREEK SMALL LETTER OMICRON
+		{'\u03c0', 399}, // U+03C0 GREEK SMALL LETTER PI
+		{'\u03c1', 400}, // U+03C1 GREEK SMALL LETTER RHO
+		{'\u03c2', 401}, // U+03C2 GREEK SMALL LETTER FINAL SIGMA
 	}
 
 	var b Buffer
@@ -378,6 +400,70 @@ func TestTrueTypeSegments(t *testing.T) {
 		lineTo(614, 1638),
 		lineTo(614, 0),
 		lineTo(205, 0),
+	}, {
+		// five
+		// - contour #0
+		moveTo(0, 0),
+		lineTo(0, 100),
+		lineTo(400, 100),
+		lineTo(400, 0),
+		lineTo(0, 0),
+	}, {
+		// six
+		// - contour #0
+		moveTo(0, 0),
+		lineTo(0, 100),
+		lineTo(400, 100),
+		lineTo(400, 0),
+		lineTo(0, 0),
+		// - contour #1
+		translate(111, 234, moveTo(205, 0)),
+		translate(111, 234, lineTo(205, 1638)),
+		translate(111, 234, lineTo(614, 1638)),
+		translate(111, 234, lineTo(614, 0)),
+		translate(111, 234, lineTo(205, 0)),
+	}, {
+		// seven
+		// - contour #0
+		moveTo(0, 0),
+		lineTo(0, 100),
+		lineTo(400, 100),
+		lineTo(400, 0),
+		lineTo(0, 0),
+		// - contour #1
+		transform(1<<13, 0, 0, 1<<13, 56, 117, moveTo(205, 0)),
+		transform(1<<13, 0, 0, 1<<13, 56, 117, lineTo(205, 1638)),
+		transform(1<<13, 0, 0, 1<<13, 56, 117, lineTo(614, 1638)),
+		transform(1<<13, 0, 0, 1<<13, 56, 117, lineTo(614, 0)),
+		transform(1<<13, 0, 0, 1<<13, 56, 117, lineTo(205, 0)),
+	}, {
+		// eight
+		// - contour #0
+		moveTo(0, 0),
+		lineTo(0, 100),
+		lineTo(400, 100),
+		lineTo(400, 0),
+		lineTo(0, 0),
+		// - contour #1
+		transform(3<<13, 0, 0, 1<<13, 56, 117, moveTo(205, 0)),
+		transform(3<<13, 0, 0, 1<<13, 56, 117, lineTo(205, 1638)),
+		transform(3<<13, 0, 0, 1<<13, 56, 117, lineTo(614, 1638)),
+		transform(3<<13, 0, 0, 1<<13, 56, 117, lineTo(614, 0)),
+		transform(3<<13, 0, 0, 1<<13, 56, 117, lineTo(205, 0)),
+	}, {
+		// nine
+		// - contour #0
+		moveTo(0, 0),
+		lineTo(0, 100),
+		lineTo(400, 100),
+		lineTo(400, 0),
+		lineTo(0, 0),
+		// - contour #1
+		transform(22381, 8192, 5996, 14188, 237, 258, moveTo(205, 0)),
+		transform(22381, 8192, 5996, 14188, 237, 258, lineTo(205, 1638)),
+		transform(22381, 8192, 5996, 14188, 237, 258, lineTo(614, 1638)),
+		transform(22381, 8192, 5996, 14188, 237, 258, lineTo(614, 0)),
+		transform(22381, 8192, 5996, 14188, 237, 258, lineTo(205, 0)),
 	}}
 
 	testSegments(t, "glyfTest.ttf", wants)
@@ -485,7 +571,7 @@ func TestGlyphName(t *testing.T) {
 		r    rune
 		want string
 	}{
-		{'\x00', "NULL"},
+		{'\x00', "uni0000"},
 		{'!', "exclam"},
 		{'A', "A"},
 		{'{', "braceleft"},
