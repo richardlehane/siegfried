@@ -2,6 +2,549 @@
 <?xml-stylesheet type="text/xsl" href="release-note.xsl"?>
 <release_notes>
 <release_note>
+    <release_date>30th March 2017</release_date>
+    <signature_filename>DROID_SignatureFile_V90.xml</signature_filename> 
+    <release_outline name="New Records">
+	  <format>
+	   <puid type="fmt">996</puid>
+	   <name>Adobe Photoshop Large Document Format</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">997</puid>
+	   <name>SPSS Portable Data Format</name>
+	   <summary>Full entry added. Submitted by National Digital Library of Finland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">998</puid>
+	   <name>OpenRaster Image Format</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">999</puid>
+	   <name>Krita Document Format</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1000</puid>
+	   <name>TZX Format</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1001</puid>
+	   <name>OpenEXR 2</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1002</puid>
+	   <name>Nearly Raw Raster Data 1</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1003</puid>
+	   <name>Nearly Raw Raster Data 2</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1004</puid>
+	   <name>Nearly Raw Raster Data 3</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1005</puid>
+	   <name>Nearly Raw Raster Data 4</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1006</puid>
+	   <name>Nearly Raw Raster Data 5</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1007</puid>
+	   <name>Digital Speech Standard</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1008</puid>
+	   <name>DSS Pro</name>
+	   <summary>Full entry added.</summary>
+	  </format> 
+	    <format>
+	   <puid type="fmt">1009</puid>
+	   <name>FBX (Filmbox) Binary</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1010</puid>
+	   <name>FBX (Filmbox) Text</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1011</puid>
+	   <name>INTERLIS Transfer File 2.2</name>
+	   <summary>Full entry added. Requested by Swiss Federal Archives and Federal Office of Topography swisstopo..</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1012</puid>
+	   <name>INTERLIS Model File 2.2</name>
+	   <summary>Full entry added. Requested by Swiss Federal Archives and Federal Office of Topography swisstopo.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1013</puid>
+	   <name>INTERLIS Transfer File 1</name>
+	   <summary>Full entry added. Requested by Swiss Federal Archives and Federal Office of Topography swisstopo.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1014</puid>
+	   <name>INTERLIS Model File 1</name>
+	   <summary>Full entry added. Requested by Swiss Federal Archives and Federal Office of Topography swisstopo.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1015</puid>
+	   <name>Statistical Analysis System Data (Windows) Generic</name>
+	   <summary>Full entry added. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1016</puid>
+	   <name>Statistical Analysis System Data (Unix) Generic</name>
+	   <summary>Full entry added. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1017</puid>
+	   <name>Statistical Analysis System Data (Windows) 8.2</name>
+	   <summary>Full entry added. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1018</puid>
+	   <name>Statistical Analysis System Data (Unix) 8.2</name>
+	   <summary>Full entry added. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1019</puid>
+	   <name>Statistical Analysis System Data (Windows) 9.2</name>
+	   <summary>Full entry added. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1020</puid>
+	   <name>Statistical Analysis System Data (Unix) 9.2</name>
+	   <summary>Full entry added. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1021</puid>
+	   <name>Statistical Analysis System Data (Windows) 9.3</name>
+	   <summary>Full entry added. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1022</puid>
+	   <name>Statistical Analysis System Data (Unix) 9.3</name>
+	   <summary>Full entry added. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1023</puid>
+	   <name>Statistical Analysis System Catalog (Windows) Generic</name>
+	   <summary>Full entry added. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1024</puid>
+	   <name>Statistical Analysis System Catalog (Unix) Generic</name>
+	   <summary>Full entry added. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1025</puid>
+	   <name>Statistical Analysis System Catalog (Windows) 9.2</name>
+	   <summary>Full entry added. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1026</puid>
+	   <name>Statistical Analysis System Catalog (Unix) 9.2</name>
+	   <summary>Full entry added. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1027</puid>
+	   <name>Statistical Analysis System Catalog (Windows) 9.3</name>
+	   <summary>Full entry added. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1028</puid>
+	   <name>Statistical Analysis System Catalog (Unix) 9.3</name>
+	   <summary>Full entry added. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1029</puid>
+	   <name>Stata Data (DTA) Format 104</name>
+	   <summary>Full entry added. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1030</puid>
+	   <name>Stata Data (DTA) Format 105</name>
+	   <summary>Full entry added. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1031</puid>
+	   <name>Stata Data (DTA) Format 110</name>
+	   <summary>Full entry added. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1032</puid>
+	   <name>Stata Data (DTA) Format 111</name>
+	   <summary>Full entry added. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1033</puid>
+	   <name>Stata Data (DTA) Format 113</name>
+	   <summary>Full entry added. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1034</puid>
+	   <name>Stata Data (DTA) Format 114</name>
+	   <summary>Full entry added. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1035</puid>
+	   <name>Stata Data (DTA) Format 115</name>
+	   <summary>Full entry added. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1036</puid>
+	   <name>Stata Data (DTA) Format 117</name>
+	   <summary>Full entry added. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1037</puid>
+	   <name>Stata Data (DTA) Format 118</name>
+	   <summary>Full entry added. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1038</puid>
+	   <name>Redcode RAW (R3D) Media File 2</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1039</puid>
+	   <name>Redcode Metadata (RMD) File</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1040</puid>
+	   <name>DirectDraw Surface</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	 </release_outline>
+
+	 <release_outline name="Updated Records">
+	  <format>
+	   <puid type="fmt">144</puid>
+	   <name>Acrobat PDF/X - Portable Document Format - Exchange 1:1999</name>
+	   <summary>Gave priority over all parent Acrobat PDF versions. Issue raised by Archives New Zealand and State Records New South Wales.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">145</puid>
+	   <name>Acrobat PDF/X - Portable Document Format - Exchange 1:2001</name>
+	   <summary>Gave priority over all parent Acrobat PDF versions. Issue raised by Archives New Zealand and State Records New South Wales.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">146</puid>
+	   <name>Acrobat PDF/X - Portable Document Format - Exchange 1a:2003</name>
+	   <summary>Gave priority over all parent Acrobat PDF versions. Issue raised by Archives New Zealand and State Records New South Wales.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">147</puid>
+	   <name>Acrobat PDF/X - Portable Document Format - Exchange 2:2003</name>
+	   <summary>Gave priority over all parent Acrobat PDF versions. Issue raised by Archives New Zealand and State Records New South Wales.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">148</puid>
+	   <name>Acrobat PDF/X - Portable Document Format - Exchange 3:2003</name>
+	   <summary>Gave priority over all parent Acrobat PDF versions. Issue raised by Archives New Zealand and State Records New South Wales.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">157</puid>
+	   <name>Acrobat PDF/X - Portable Document Format - Exchange 1a:2001</name>
+	   <summary>Gave priority over all parent Acrobat PDF versions. Issue raised by Archives New Zealand and State Records New South Wales.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">158</puid>
+	   <name>Acrobat PDF/X - Portable Document Format - Exchange 3:2002</name>
+	   <summary>Gave priority over all parent Acrobat PDF versions. Issue raised by Archives New Zealand and State Records New South Wales.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">588</puid>
+	   <name>Redcode RAW (R3D) Media File 1</name>
+	   <summary>Changed name from R3D. Adjusted signature.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">605</puid>
+	   <name>Statistical Analysis System Catalog (Windows) 9.1</name>
+	   <summary>Changed spelling of 'catalog' from 'catalogue' for consistency with terminology of the software and documentation. Simplified signature. Gave priority over fmt/1023. Added description.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">606</puid>
+	   <name>Statistical Analysis System Catalog (Windows) 9.1</name>
+	   <summary>Changed spelling of 'catalog' from 'catalogue' for consistency with terminology of the software and documentation. Simplified signature. Gave priority over fmt/1024. Added description.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">607</puid>
+	   <name>Statistical Analysis System Data (Windows) 9.1</name>
+	   <summary>Simplified signature. Gave priority over fmt/1015. Added description.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">608</puid>
+	   <name>Statistical Analysis System Data (Unix) 9.1</name>
+	   <summary>Simplified signature. Gave priority over fmt/1016. Added description.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">625</puid>
+	   <name>Apple Disk Copy Image 4.2</name>
+	   <summary>Adjusted signature due to findings by National Library New Zealand </summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">638</puid>
+	   <name>SPSS Data File</name>
+	   <summary>Changed format type to Dataset. Simplified description.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">995</puid>
+	   <name>SIARD (Software-Independent Archiving of Relational Databases) 2.0</name>
+	   <summary>Corrected 'Developed by' and 'Supported by' to Swiss Federal Archives. Error identified by KEEP SOLUTIONS.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">92</puid>
+	   <name>Adobe Photoshop</name>
+	   <summary>Linked to file format specification in signature description.</summary>
+	  </format>
+         </release_outline>
+         
+ 	 <release_outline name="New Signatures"> 
+	  <format>
+	   <puid type="fmt">996</puid>
+	   <name>Adobe Photoshop Large Document Format</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">997</puid>
+	   <name>SPSS Portable Data Format</name>
+	   <summary>Signature developed through PRONOM research. Requested by National Digital Library of Finland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">998</puid>
+	   <name>OpenRaster Image Format</name>
+	   <summary>Container signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">999</puid>
+	   <name>Krita Document Format</name>
+	   <summary>Container signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1000</puid>
+	   <name>TZX Format</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1001</puid>
+	   <name>OpenEXR 2</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1002</puid>
+	   <name>Nearly Raw Raster Data 1</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1003</puid>
+	   <name>Nearly Raw Raster Data 2</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1004</puid>
+	   <name>Nearly Raw Raster Data 3</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1005</puid>
+	   <name>Nearly Raw Raster Data 4</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1006</puid>
+	   <name>Nearly Raw Raster Data 5</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1007</puid>
+	   <name>Digital Speech Standard</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1008</puid>
+	   <name>DSS Pro</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>	  
+	    <format>
+	   <puid type="fmt">1009</puid>
+	   <name>FBX Binary</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>	  
+	  <format>
+	   <puid type="fmt">1010</puid>
+	   <name>FBX Text</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>	
+	  <format>
+	   <puid type="fmt">1011</puid>
+	   <name>Interlis Transfer File v2.2</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1012</puid>
+	   <name>Interlis Model File v2.2</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1013</puid>
+	   <name>Interlis Transfer File v1</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1014</puid>
+	   <name>Interlis Model File v1</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+      <format>
+	   <puid type="fmt">1015</puid>
+	   <name>Statistical Analysis System Data (Windows) Generic</name>
+	   <summary>Signature developed through PRONOM research. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1016</puid>
+	   <name>Statistical Analysis System Data (Unix) Generic</name>
+	   <summary>Signature developed through PRONOM research. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1017</puid>
+	   <name>Statistical Analysis System Data (Windows) 8.2</name>
+	   <summary>Signature developed through PRONOM research. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1018</puid>
+	   <name>Statistical Analysis System Data (Unix) 8.2</name>
+	   <summary>Signature developed through PRONOM research. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1019</puid>
+	   <name>Statistical Analysis System Data (Windows) 9.2</name>
+	   <summary>Signature developed through PRONOM research. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1020</puid>
+	   <name>Statistical Analysis System Data (Unix) 9.2</name>
+	   <summary>Signature developed through PRONOM research. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1021</puid>
+	   <name>Statistical Analysis System Data (Windows) 9.3</name>
+	   <summary>Signature developed through PRONOM research. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1022</puid>
+	   <name>Statistical Analysis System Data (Unix) 9.3</name>
+	   <summary>Signature developed through PRONOM research. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1023</puid>
+	   <name>Statistical Analysis System Catalog (Windows) Generic</name>
+	   <summary>Signature developed through PRONOM research. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1024</puid>
+	   <name>Statistical Analysis System Catalog (Unix) Generic</name>
+	   <summary>Signature developed through PRONOM research. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1025</puid>
+	   <name>Statistical Analysis System Catalog (Windows) 9.2</name>
+	   <summary>Signature developed through PRONOM research. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1026</puid>
+	   <name>Statistical Analysis System Catalog (Unix) 9.2</name>
+	   <summary>Signature developed through PRONOM research. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1027</puid>
+	   <name>Statistical Analysis System Catalog (Windows) 9.3</name>
+	   <summary>Signature developed through PRONOM research. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1028</puid>
+	   <name>Statistical Analysis System Catalog (Unix) 9.3</name>
+	   <summary>Signature developed through PRONOM research. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+       </format>
+	  <format>
+	   <puid type="fmt">1029</puid>
+	   <name>Stata Data (DTA) Format 104</name>
+	   <summary>Signature developed through PRONOM research. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1030</puid>
+	   <name>Stata Data (DTA) Format 105</name>
+	   <summary>Signature developed through PRONOM research. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1031</puid>
+	   <name>Stata Data (DTA) Format 110</name>
+	   <summary>Signature developed through PRONOM research. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1032</puid>
+	   <name>Stata Data (DTA) Format 111</name>
+	   <summary>Signature developed through PRONOM research. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1033</puid>
+	   <name>Stata Data (DTA) Format 113</name>
+	   <summary>Signature developed through PRONOM research. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1034</puid>
+	   <name>Stata Data (DTA) Format 114</name>
+	   <summary>Signature developed through PRONOM research. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1035</puid>
+	   <name>Stata Data (DTA) Format 115</name>
+	   <summary>Signature developed through PRONOM research. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1036</puid>
+	   <name>Stata Data (DTA) Format 117</name>
+	   <summary>Signature developed through PRONOM research. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1037</puid>
+	   <name>Stata Data (DTA) Format 118</name>
+	   <summary>Signature developed through PRONOM research. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1038</puid>
+	   <name>Redcode RAW (R3D) Media File 2</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1039</puid>
+	   <name>Redcode Metadata (RMD) File</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1040</puid>
+	   <name>DirectDraw Surface</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	 </release_outline>
+    </release_note>
+
+<release_note>
     <release_date>8th March 2017</release_date>
     <signature_filename>DROID_SignatureFile_V89.xml</signature_filename> 
     <release_outline name="New Records">
@@ -143,115 +686,193 @@
 	   <name>Rich Text Format 1.9</name>
 	   <summary>Adjusted signature due to findings by National Library New Zealand</summary>
 	  </format>
+
 	  <format>
+
 	   <puid type="fmt">417</puid>
+
 	   <name>Adobe Illustrator v88</name>
+
 	   <summary>Added mimetype - application/postscript</summary>
+
 	  </format>
 	  <format>
+
 	   <puid type="fmt">418</puid>
+
 	   <name>Adobe Illustrator v3.0/3.2</name>
+
 	   <summary>Added mimetype - application/postscript</summary>
+
 	  </format>
+
 	  <format>
+
 	   <puid type="fmt">419</puid>
+
 	   <name>Adobe Illustrator v4</name>
+
 	   <summary>Added mimetype - application/postscript</summary>
+
 	  </format>
+
 	  <format>
+
 	   <puid type="fmt">420</puid>
+
 	   <name>Adobe Illustrator v5.0/5.5</name>
+
 	   <summary>Added mimetype - application/postscript</summary>
+
 	  </format>
+
 	  <format>
+
 	   <puid type="fmt">421</puid>
+
 	   <name>Adobe Illustrator Japan</name>
+
 	   <summary>Added mimetype - application/postscript</summary>
+
 	  </format>
+
 	  <format>
+
 	   <puid type="fmt">422</puid>
+
 	   <name>Adobe Illustrator v6</name>
+
 	   <summary>Added mimetype - application/postscript</summary>
+
+	  </format>
+
+	  <format>
+
+	   <puid type="fmt">423</puid>
+
+	   <name>Adobe Illustrator v7</name>
+
+	   <summary>Added mimetype - application/postscript</summary>
+
 	  </format>
 	  <format>
-	   <puid type="fmt">423</puid>
-	   <name>Adobe Illustrator v7</name>
-	   <summary>Added mimetype - application/postscript</summary>
-	  </format>
-    <format>
 	   <puid type="fmt">476</puid>
 	   <name>Acrobat PDF/A - Portable Document Format 2a</name>
 	   <summary>Adjusted description due to suggestion of Yan Han, the University of Arizona Libraries and Leonard Rosenthol, Adobe Systems</summary>
 	  </format>
-    <format>
+	  <format>
 	   <puid type="fmt">477</puid>
 	   <name>Acrobat PDF/A - Portable Document Format 2b</name>
 	   <summary>Adjusted description due to suggestion of Yan Han, the University of Arizona Libraries and Leonard Rosenthol, Adobe Systems</summary>
 	  </format>
-    <format>
+	  <format>
 	   <puid type="fmt">478</puid>
 	   <name>Acrobat PDF/A - Portable Document Format 2u</name>
 	   <summary>Adjusted description due to suggestion of Yan Han, the University of Arizona Libraries and Leonard Rosenthol, Adobe Systems</summary>
 	  </format>
-    <format>
+	  <format>
 	   <puid type="fmt">479</puid>
 	   <name>Acrobat PDF/A - Portable Document Format 3a</name>
 	   <summary>Adjusted description due to suggestion of Yan Han, the University of Arizona Libraries and Leonard Rosenthol, Adobe Systems</summary>
 	  </format>
-    <format>
+	  <format>
 	   <puid type="fmt">480</puid>
 	   <name>Acrobat PDF/A - Portable Document Format 3b</name>
 	   <summary>Adjusted description due to suggestion of Yan Han, the University of Arizona Libraries and Leonard Rosenthol, Adobe Systems</summary>
 	  </format>
-    <format>
+	  <format>
 	   <puid type="fmt">481</puid>
 	   <name>Acrobat PDF/A - Portable Document Format 3u</name>
 	   <summary>Adjusted description due to suggestion of Yan Han, the University of Arizona Libraries and Leonard Rosenthol, Adobe Systems</summary>
 	  </format>
+
 	  <format>
+
 	   <puid type="fmt">557</puid>
+
 	   <name>Adobe Illustrator v8</name>
+
 	   <summary>Added mimetype - application/postscript</summary>
+
 	  </format>
+
 	  <format>
+
 	   <puid type="fmt">558</puid>
+
 	   <name>Adobe Illustrator v9</name>
+
 	   <summary>Added mimetype - application/postscript</summary>
+
 	  </format>
+
 	  <format>
+
 	   <puid type="fmt">559</puid>
+
 	   <name>Adobe Illustrator v10</name>
+
 	   <summary>Added mimetype - application/postscript</summary>
+
 	  </format>
+
 	  <format>
+
 	   <puid type="fmt">560</puid>
+
 	   <name>Adobe Illustrator v11</name>
+
 	   <summary>Added mimetype - application/postscript</summary>
+
 	  </format>
+
 	  <format>
+
 	   <puid type="fmt">561</puid>
+
 	   <name>Adobe Illustrator v12</name>
+
 	   <summary>Added mimetype - application/postscript</summary>
+
 	  </format>
+
 	  <format>
+
 	   <puid type="fmt">562</puid>
+
 	   <name>Adobe Illustrator v13</name>
+
 	   <summary>Added mimetype - application/postscript</summary>
+
 	  </format>
+
 	  <format>
 	   <puid type="fmt">563</puid>
+
 	   <name>Adobe Illustrator v14</name>
+
 	   <summary>Added mimetype - application/postscript</summary>
+
 	  </format>
+
 	  <format>
+
 	   <puid type="fmt">564</puid>
+
 	   <name>Adobe Illustrator v15</name>
+
 	   <summary>Added mimetype - application/postscript</summary>
+
 	  </format>
+
 	  <format>
+
 	   <puid type="fmt">565</puid>
+
 	   <name>Adobe Illustrator v16</name>
+
 	   <summary>Added mimetype - application/postscript</summary>
+
 	  </format>
 	  <format>
 	   <puid type="fmt">570</puid>
@@ -268,7 +889,7 @@
 	   <name>Epson Raw Image format</name>
 	   <summary>Added priority over fmt/353 - Tagged Image File Format - Suggested by Archives New Zealand.</summary>
 	  </format>
-      <format>
+	  <format>
 	   <puid type="fmt">728</puid>
 	   <name>RealLegal E-Transcript</name>
 	   <summary>Added description and additional binary signature due to findings found through PRONOM research.</summary>
@@ -278,26 +899,25 @@
 	   <name>Music XML</name>
 	   <summary>Adjusted signature due to findings found through PRONOM research and added note.</summary>
 	  </format>
-      <format>
+	  <format>
 	   <puid type="x-fmt">191</puid>
 	   <name>Postscript 1.0</name>
 	   <summary>Adjusted signature due to findings by State Records New South Wales. Added 0A0A sequence to EOF. Added description. </summary>
 	  </format>
-       <format>
+	  <format>
 	   <puid type="x-fmt">330</puid>
 	   <name>JustWrite Text Document</name>
 	   <summary>Added binary signature submitted by LDS Church. Added description. Added extension signature jwt. </summary>
 	  </format>     
-      <format>
+	  <format>
 	   <puid type="x-fmt">430</puid>
 	   <name>Microsoft Outlook Email Message</name>
 	   <summary>Added extension signature oft</summary>
 	  </format>
          </release_outline>
          
-
  	 <release_outline name="New Signatures"> 
-      <format>
+	  <format>
 	   <puid type="fmt">728</puid>
 	   <name>RealLegal E-Transcript</name>
 	   <summary>Added new signature developed through PRONOM research.</summary>
