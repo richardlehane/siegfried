@@ -191,7 +191,7 @@ func (y *yamlWriter) File(name string, sz int64, mod string, checksum []byte, er
 		idx      int = -1
 	)
 	if err != nil {
-		errStr = fmt.Sprintf("'%s'", err.Error())
+		errStr = "'" + y.replacer.Replace(err.Error()) + "'"
 	}
 	if checksum != nil {
 		h = fmt.Sprintf("%-8s : %s\n", y.hh, hex.EncodeToString(checksum))
@@ -208,7 +208,7 @@ func (y *yamlWriter) File(name string, sz int64, mod string, checksum []byte, er
 				y.vals[idx][i] = ""
 				continue
 			}
-			y.vals[idx][i] = "'" + v + "'"
+			y.vals[idx][i] = "'" + y.replacer.Replace(v) + "'"
 		}
 		fmt.Fprintf(y.w, y.hstrs[idx], y.vals[idx]...)
 	}
