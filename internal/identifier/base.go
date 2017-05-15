@@ -54,6 +54,13 @@ func (ii indexes) hit(i int) (bool, string) {
 	return false, ""
 }
 
+func (ii indexes) first(i int) (bool, string) {
+	if i == ii.start && len(ii.ids) > 0 {
+		return true, ii.ids[0]
+	}
+	return false, ""
+}
+
 func (ii indexes) save(ls *persist.LoadSaver) {
 	ls.SaveInt(ii.start)
 	ls.SaveStrings(ii.ids)
@@ -225,7 +232,7 @@ func (b *Base) Hit(m core.MatcherType, idx int) (bool, string) {
 	case core.RIFFMatcher:
 		return b.rids.hit(idx)
 	case core.TextMatcher:
-		return b.tids.hit(idx)
+		return b.tids.first(idx) // textmatcher is unique as only returns a single hit per identifier
 	}
 }
 
