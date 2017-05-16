@@ -2,6 +2,7 @@ package reader
 
 import (
 	"bytes"
+	"os"
 	"testing"
 )
 
@@ -13,15 +14,21 @@ const (
 )
 
 func TestSF(t *testing.T) {
-	sfc, err := Open("examples/multi/multi.csv")
+	f1, err := os.Open("examples/multi/multi.csv")
+	defer f1.Close()
+	sfc, err := New(f1, "examples/multi/multi.csv")
 	if err != nil {
 		t.Fatal(err)
 	}
-	sfy, err := Open("examples/multi/multi.yaml")
+	f2, err := os.Open("examples/multi/multi.yaml")
+	defer f2.Close()
+	sfy, err := New(f2, "examples/multi/multi.yaml")
 	if err != nil {
 		t.Fatal(err)
 	}
-	sfj, err := Open("examples/multi/multi.json")
+	f3, err := os.Open("examples/multi/multi.json")
+	defer f3.Close()
+	sfj, err := New(f3, "examples/multi/multi.json")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -41,7 +48,12 @@ func TestSF(t *testing.T) {
 }
 
 func testRdr(t *testing.T, path string, expectFiles, expectIDs int) {
-	rdr, err := Open(path)
+	f, err := os.Open(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer f.Close()
+	rdr, err := New(f, path)
 	if err != nil {
 		t.Fatal(err)
 	}

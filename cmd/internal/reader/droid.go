@@ -33,16 +33,15 @@ var (
 )
 
 type droid struct {
-	rdr    *csv.Reader
-	closer io.ReadCloser
-	hh     string
-	path   string
-	peek   []string
-	err    error
+	rdr  *csv.Reader
+	hh   string
+	path string
+	peek []string
+	err  error
 }
 
-func newDroid(rc io.ReadCloser, path string) (Reader, error) {
-	rdr := csv.NewReader(rc)
+func newDroid(r io.Reader, path string) (Reader, error) {
+	rdr := csv.NewReader(r)
 	rdr.FieldsPerRecord = -1
 	//rdr.LazyQuotes = true
 	rec, err := rdr.Read()
@@ -50,9 +49,8 @@ func newDroid(rc io.ReadCloser, path string) (Reader, error) {
 		return nil, fmt.Errorf("bad or invalid DROID CSV: %v", err)
 	}
 	dr := &droid{
-		rdr:    rdr,
-		closer: rc,
-		path:   path,
+		rdr:  rdr,
+		path: path,
 	}
 	cs := checksum.GetHash(strings.TrimSuffix(rec[12], "_HASH"))
 	if cs >= 0 {
@@ -125,25 +123,19 @@ func (dr *droid) Next() (File, error) {
 	return file, err
 }
 
-func (dr *droid) Close() error {
-	return dr.closer.Close()
-}
-
 type droidNp struct {
-	buf    *bufio.Reader
-	closer io.ReadCloser
-	path   string
-	ids    [][2]string
-	peek   []string
-	err    error
+	buf  *bufio.Reader
+	path string
+	ids  [][2]string
+	peek []string
+	err  error
 }
 
-func newDroidNp(rc io.ReadCloser, path string) (Reader, error) {
+func newDroidNp(r io.Reader, path string) (Reader, error) {
 	dnp := &droidNp{
-		buf:    bufio.NewReader(rc),
-		closer: rc,
-		path:   path,
-		ids:    make([][2]string, 1),
+		buf:  bufio.NewReader(r),
+		path: path,
+		ids:  make([][2]string, 1),
 	}
 	dnp.ids[0][0] = droidIDs[0][0]
 	var (
@@ -225,8 +217,4 @@ func (dnp *droidNp) Next() (File, error) {
 		}
 	}
 	return file, err
-}
-
-func (dnp *droidNp) Close() error {
-	return dnp.closer.Close()
 }

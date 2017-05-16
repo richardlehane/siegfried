@@ -18,6 +18,7 @@ import (
 	"encoding/csv"
 	"fmt"
 	"io"
+	"os"
 	"path/filepath"
 	"sort"
 	"strconv"
@@ -78,7 +79,12 @@ func Compare(w io.Writer, join int, paths ...string) error {
 	}
 	readers := make([]Reader, len(paths))
 	for i, v := range paths {
-		rdr, err := Open(v)
+		f, err := os.Open(v)
+		if err != nil {
+			return err
+		}
+		defer f.Close()
+		rdr, err := New(f, v)
 		if err != nil {
 			return err
 		}

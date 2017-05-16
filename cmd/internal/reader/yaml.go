@@ -25,7 +25,6 @@ import (
 type sfYAML struct {
 	replacer *strings.Replacer
 	buf      *bufio.Reader
-	closer   io.ReadCloser
 	head     Head
 	peek     record
 	err      error
@@ -98,11 +97,10 @@ func consumeRecord(buf *bufio.Reader, repl *strings.Replacer) (record, error) {
 	return record{m, ks, vs}, nil
 }
 
-func newYAML(rc io.ReadCloser, path string) (Reader, error) {
+func newYAML(r io.Reader, path string) (Reader, error) {
 	sfy := &sfYAML{
 		replacer: strings.NewReplacer("''", "'"),
-		buf:      bufio.NewReader(rc),
-		closer:   rc,
+		buf:      bufio.NewReader(r),
 	}
 	return sfy.makeHead(path)
 }
@@ -135,8 +133,4 @@ func (sfy *sfYAML) Next() (File, error) {
 	}
 	sfy.peek, sfy.err = consumeRecord(sfy.buf, sfy.replacer)
 	return getFile(r)
-}
-
-func (sfy *sfYAML) Close() error {
-	return sfy.closer.Close()
 }

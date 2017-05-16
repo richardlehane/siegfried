@@ -22,7 +22,6 @@ import (
 
 type sfCSV struct {
 	rdr         *csv.Reader
-	closer      io.ReadCloser
 	hh          string
 	path        string
 	fields      [][]string
@@ -31,16 +30,15 @@ type sfCSV struct {
 	err         error
 }
 
-func newCSV(rc io.ReadCloser, path string) (Reader, error) {
-	rdr := csv.NewReader(rc)
+func newCSV(r io.Reader, path string) (Reader, error) {
+	rdr := csv.NewReader(r)
 	rec, err := rdr.Read()
 	if err != nil || rec[0] != "filename" || len(rec) < 5 {
 		return nil, fmt.Errorf("bad or invalid CSV: %v", err)
 	}
 	sfc := &sfCSV{
-		rdr:    rdr,
-		closer: rc,
-		path:   path,
+		rdr:  rdr,
+		path: path,
 	}
 	var (
 		fieldStart = 4
@@ -114,8 +112,4 @@ func (sfc *sfCSV) Next() (File, error) {
 		}
 	}
 	return file, nil
-}
-
-func (sfc *sfCSV) Close() error {
-	return sfc.closer.Close()
 }

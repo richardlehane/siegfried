@@ -26,18 +26,16 @@ var (
 )
 
 type fido struct {
-	rdr    *csv.Reader
-	closer io.ReadCloser
-	path   string
-	peek   []string
-	err    error
+	rdr  *csv.Reader
+	path string
+	peek []string
+	err  error
 }
 
-func newFido(rc io.ReadCloser, path string) (Reader, error) {
+func newFido(r io.Reader, path string) (Reader, error) {
 	fi := &fido{
-		rdr:    csv.NewReader(rc),
-		closer: rc,
-		path:   path,
+		rdr:  csv.NewReader(r),
+		path: path,
 	}
 	fi.peek, fi.err = fi.rdr.Read()
 	if fi.err == nil && len(fi.peek) < 9 {
@@ -83,8 +81,4 @@ func (fi *fido) Next() (File, error) {
 		}
 	}
 	return file, err
-}
-
-func (fi *fido) Close() error {
-	return fi.closer.Close()
 }

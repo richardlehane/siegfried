@@ -352,16 +352,9 @@ func main() {
 		return
 	}
 	// handle no file/directory argument
-	if flag.NArg() != 1 {
-		if *replay || *list {
-			if flag.NArg() < 1 {
-				close(ctxts)
-				log.Fatalln("[FATAL] expecting one or more file or directory arguments")
-			}
-		} else {
-			close(ctxts)
-			log.Fatalln("[FATAL] expecting a single file or directory argument")
-		}
+	if flag.NArg() < 1 {
+		close(ctxts)
+		log.Fatalln("[FATAL] expecting one or more file or directory arguments (or '-' to read from stdin)")
 	}
 	if *replay {
 		for i, v := range flag.Args() {

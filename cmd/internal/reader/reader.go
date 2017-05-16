@@ -16,7 +16,7 @@ package reader
 
 import (
 	"fmt"
-	"os"
+	"io"
 	"strconv"
 	"strings"
 	"time"
@@ -35,7 +35,6 @@ const (
 type Reader interface {
 	Head() Head
 	Next() (File, error)
-	Close() error
 }
 
 type Head struct {
@@ -206,36 +205,49 @@ func getFields(keys, vals []string) [][]string {
 	return ret
 }
 
-func Open(path string) (Reader, error) {
-	var (
-		f   *os.File
-		err error
-	)
-	if path == "-" {
-		f = os.Stdin
-	} else {
-		f, err = os.Open(path)
+type peekReader struct {
+	unread bool
+	peek   byte
+	rdr    io.Reader
+}
+
+func (pr *peekReader) Read(b []byte) (int, error) {
+	if pr.unread {
+		if len(b) < 1 {
+			return 0, nil
+		}
+		b[0] = pr.peek
+		pr.unread = false
+		if len(b) == 1 {
+			return 1, nil
+		}
+		i, e := pr.rdr.Read(b[1:])
+		return i + 1, e
 	}
-	if err != nil {
+	return pr.rdr.Read(b)
+}
+
+func New(rdr io.Reader, path string) (Reader, error) {
+	buf := make([]byte, 1)
+	if _, err := rdr.Read(buf); err != nil {
 		return nil, err
 	}
-	buf := make([]byte, 1)
-	f.ReadAt(buf, 0)
+	pr := &peekReader{true, buf[0], rdr}
 	switch buf[0] {
 	case '-':
-		return newYAML(f, path)
+		return newYAML(pr, path)
 	case 'f':
-		return newCSV(f, path)
+		return newCSV(pr, path)
 	case '{':
-		return newJSON(f, path)
+		return newJSON(pr, path)
 	case 'O', 'K':
-		return newFido(f, path)
+		return newFido(pr, path)
 	case 'D':
-		return newDroidNp(f, path)
+		return newDroidNp(pr, path)
 	case '"':
-		return newDroid(f, path)
+		return newDroid(pr, path)
 	}
-	return nil, fmt.Errorf("not a valid results file")
+	return nil, fmt.Errorf("not a valid results file, bad char %d", int(buf[1]))
 }
 
 type defaultID struct {

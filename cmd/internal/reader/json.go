@@ -21,11 +21,10 @@ import (
 )
 
 type sfJSON struct {
-	dec    *json.Decoder
-	closer io.ReadCloser
-	head   Head
-	peek   record
-	err    error
+	dec  *json.Decoder
+	head Head
+	peek record
+	err  error
 }
 
 func next(dec *json.Decoder) ([]string, []string, error) {
@@ -72,11 +71,8 @@ func jsonRecord(dec *json.Decoder) (record, error) {
 	return record{m, keys, vals}, nil
 }
 
-func newJSON(rc io.ReadCloser, path string) (Reader, error) {
-	sfj := &sfJSON{
-		dec:    json.NewDecoder(rc),
-		closer: rc,
-	}
+func newJSON(r io.Reader, path string) (Reader, error) {
+	sfj := &sfJSON{dec: json.NewDecoder(r)}
 	rec, err := jsonRecord(sfj.dec)
 	if err != nil {
 		return nil, err
@@ -104,8 +100,4 @@ func (sfj *sfJSON) Next() (File, error) {
 	}
 	sfj.peek, sfj.err = jsonRecord(sfj.dec)
 	return getFile(r)
-}
-
-func (sfj *sfJSON) Close() error {
-	return sfj.closer.Close()
 }
