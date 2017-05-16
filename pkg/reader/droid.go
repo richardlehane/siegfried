@@ -23,7 +23,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/richardlehane/siegfried/cmd/internal/checksum"
+	"github.com/richardlehane/siegfried/internal/checksum"
 )
 
 var (

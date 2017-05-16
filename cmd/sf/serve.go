@@ -24,9 +24,9 @@ import (
 	"time"
 
 	"github.com/richardlehane/siegfried"
-	"github.com/richardlehane/siegfried/cmd/internal/checksum"
-	"github.com/richardlehane/siegfried/cmd/internal/writer"
+	"github.com/richardlehane/siegfried/internal/checksum"
 	"github.com/richardlehane/siegfried/pkg/config"
+	"github.com/richardlehane/siegfried/pkg/writer"
 )
 
 func handleErr(w http.ResponseWriter, status int, e error) {

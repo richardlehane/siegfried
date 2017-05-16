@@ -26,13 +26,13 @@ import (
 	"time"
 
 	"github.com/richardlehane/siegfried"
-	"github.com/richardlehane/siegfried/cmd/internal/checksum"
-	"github.com/richardlehane/siegfried/cmd/internal/logger"
-	"github.com/richardlehane/siegfried/cmd/internal/reader"
-	"github.com/richardlehane/siegfried/cmd/internal/writer"
+	"github.com/richardlehane/siegfried/internal/checksum"
+	"github.com/richardlehane/siegfried/internal/logger"
 	"github.com/richardlehane/siegfried/internal/siegreader"
 	"github.com/richardlehane/siegfried/pkg/config"
 	"github.com/richardlehane/siegfried/pkg/core"
+	"github.com/richardlehane/siegfried/pkg/reader"
+	"github.com/richardlehane/siegfried/pkg/writer"
 	/*// Uncomment to build with profiler
 	"net/http"
 	_ "net/http/pprof"

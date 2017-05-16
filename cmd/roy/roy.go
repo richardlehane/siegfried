@@ -24,13 +24,13 @@ import (
 	"strings"
 
 	"github.com/richardlehane/siegfried"
-	"github.com/richardlehane/siegfried/cmd/internal/chart"
-	"github.com/richardlehane/siegfried/cmd/internal/reader"
+	"github.com/richardlehane/siegfried/internal/chart"
 	"github.com/richardlehane/siegfried/pkg/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/loc"
 	"github.com/richardlehane/siegfried/pkg/mimeinfo"
 	"github.com/richardlehane/siegfried/pkg/pronom"
+	"github.com/richardlehane/siegfried/pkg/reader"
 	"github.com/richardlehane/siegfried/pkg/sets"
 )
 

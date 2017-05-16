@@ -21,7 +21,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/richardlehane/siegfried/cmd/internal/checksum"
+	"github.com/richardlehane/siegfried/internal/checksum"
 	"github.com/richardlehane/siegfried/pkg/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 )

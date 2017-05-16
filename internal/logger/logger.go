@@ -23,7 +23,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/richardlehane/siegfried/cmd/internal/chart"
+	"github.com/richardlehane/siegfried/internal/chart"
 	"github.com/richardlehane/siegfried/pkg/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/sets"
