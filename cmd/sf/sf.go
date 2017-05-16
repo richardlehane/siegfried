@@ -240,6 +240,42 @@ func identifyRdr(r io.Reader, ctx *context, ctxts chan *context, gf getFn) {
 	}
 }
 
+func openFile(path string) (*os.File, error) {
+	if path == "-" {
+		return os.Stdin, nil
+	}
+	return os.Open(path)
+}
+
+var firstReplay sync.Once
+
+func replayFile(path string, ctxts chan *context, w writer.Writer) error {
+	f, err := openFile(path)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	rdr, err := reader.New(f, path)
+	if err != nil {
+		return fmt.Errorf("[FATAL] error reading results file %s; got %v\n", path, err)
+	}
+	firstReplay.Do(func() {
+		hd := rdr.Head()
+		w.Head(hd.SignaturePath, hd.Scanned, hd.Created, hd.Version, hd.Identifiers, hd.Fields, hd.HashHeader)
+	})
+	var rf reader.File
+	for rf, err = rdr.Next(); err == nil; rf, err = rdr.Next() {
+		ctx := getCtx(rf.Path, "", rf.Mod, rf.Size)
+		ctx.res <- results{rf.Err, rf.Hash, rf.IDs}
+		ctx.wg.Add(1)
+		ctxts <- ctx
+	}
+	if err != nil && err != io.EOF {
+		return fmt.Errorf("[FATAL] error reading results file %s; got %v\n", path, err)
+	}
+	return nil
+}
+
 func main() {
 	flag.Parse()
 	/*//UNCOMMENT TO RUN PROFILER
@@ -354,70 +390,50 @@ func main() {
 	// handle no file/directory argument
 	if flag.NArg() < 1 {
 		close(ctxts)
-		log.Fatalln("[FATAL] expecting one or more file or directory arguments (or '-' to read from stdin)")
+		log.Fatalln("[FATAL] expecting one or more file or directory arguments (or '-' to scan stdin)")
 	}
-	if *replay {
-		for i, v := range flag.Args() {
-			rdr, e := reader.Open(v)
-			if e != nil {
-				close(ctxts)
-				log.Fatalf("[FATAL] error reading results file %s; got %v\n", v, e)
-			}
-			if i == 0 {
-				hd := rdr.Head()
-				w.Head(hd.SignaturePath, hd.Scanned, hd.Created, hd.Version, hd.Identifiers, hd.Fields, hd.HashHeader)
-			}
-			var f reader.File
-			for f, e = rdr.Next(); e == nil; f, e = rdr.Next() {
-				ctx := getCtx(f.Path, "", f.Mod, f.Size)
-				ctx.res <- results{f.Err, f.Hash, f.IDs}
-				ctx.wg.Add(1)
-				ctxts <- ctx
-			}
-			rdr.Close()
-			if e != nil && e != io.EOF {
-				close(ctxts)
-				log.Fatalf("[FATAL] error reading results file %s; got %v\n", v, e)
-			}
-		}
-	} else {
+	if !*replay {
 		w.Head(config.SignatureBase(), time.Now(), s.C, config.Version(), s.Identifiers(), s.Fields(), hashT.String())
-		// support reading list files from stdin
+	}
+	for _, v := range flag.Args() {
 		if *list {
-			for _, v := range flag.Args() {
-				var f *os.File
-				if v == "-" {
-					f = os.Stdin
-				} else {
-					f, err = os.Open(v)
+			f, err := openFile(v)
+			if err != nil {
+				break
+			}
+			scanner := bufio.NewScanner(f)
+			for scanner.Scan() {
+				info, err := os.Stat(scanner.Text())
+				if err != nil {
+					info, err = retryStat(scanner.Text(), err)
+				}
+				if err != nil || info.IsDir() {
+					ctx := getCtx(scanner.Text(), "", "", 0)
+					ctx.res <- results{fmt.Errorf("failed to identify %s (in scanning mode, inputs must all be files and not directories), got: %v", scanner.Text(), err), nil, nil}
+					ctx.wg.Add(1)
+					ctxts <- ctx
+				} else if *replay {
+					err = replayFile(scanner.Text(), ctxts, w)
 					if err != nil {
 						break
 					}
+				} else {
+					identifyFile(getCtx(scanner.Text(), "", info.ModTime().Format(time.RFC3339), info.Size()), ctxts, getCtx)
 				}
-				scanner := bufio.NewScanner(f)
-				for scanner.Scan() {
-					info, err := os.Stat(scanner.Text())
-					if err != nil {
-						info, err = retryStat(scanner.Text(), err)
-					}
-					if err != nil || info.IsDir() {
-						ctx := getCtx(scanner.Text(), "", "", 0)
-						ctx.res <- results{fmt.Errorf("failed to identify %s (in scanning mode, inputs must all be files and not directories), got: %v", scanner.Text(), err), nil, nil}
-						ctx.wg.Add(1)
-						ctxts <- ctx
-					} else {
-						identifyFile(getCtx(scanner.Text(), "", info.ModTime().Format(time.RFC3339), info.Size()), ctxts, getCtx)
-					}
-				}
-				f.Close()
 			}
-		} else if flag.Arg(0) == "-" {
+			f.Close()
+		} else if *replay {
+			err = replayFile(v, ctxts, w)
+		} else if v == "-" {
 			ctx := getCtx(*name, "", "", 0)
 			ctx.wg.Add(1)
 			ctxts <- ctx
 			identifyRdr(os.Stdin, ctx, ctxts, getCtx)
 		} else {
-			err = identify(ctxts, flag.Arg(0), "", *nr, d, getCtx)
+			err = identify(ctxts, v, "", *nr, d, getCtx)
+		}
+		if err != nil {
+			break
 		}
 	}
 	wg.Wait()
