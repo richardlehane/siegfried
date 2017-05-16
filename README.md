@@ -8,7 +8,7 @@
 
 ### Version
 
-1.7.2
+1.7.3
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -88,6 +88,19 @@ Or, for the most recent updates, you can install from this fork:
 
 
 ## Changes
+### v1.7.3 (2017-05-20)
+### Added
+- sf now accepts multiple files or directories as input e.g. `sf myfile1.doc mydir myfile3.txt`
+
+### Changed
+- code re-organisation to export reader and writer packages
+- `sf -replay` can now take lists of results files with `-f` flag e.g. `sf -replay -f list-of-results.txt`
+
+## Fixed
+- the command `sf -replay -` now works on Windows as expected e.g. `sf myfiles | sf -replay -json -`
+- text matcher not allocating hits to correct identifiers when multiple IDs; fixes [#101](https://github.com/richardlehane/siegfried/issues/101)
+- unescaped YAML field contains quote; reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/100)
+
 ### v1.7.2 (2017-04-4)
 ### Added
 - PRONOM v90 update
