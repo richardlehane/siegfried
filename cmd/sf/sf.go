@@ -402,8 +402,9 @@ func main() {
 				break
 			}
 			scanner := bufio.NewScanner(f)
+			var info os.FileInfo
 			for scanner.Scan() {
-				info, err := os.Stat(scanner.Text())
+				info, err = os.Stat(scanner.Text())
 				if err != nil {
 					info, err = retryStat(scanner.Text(), err)
 				}
@@ -412,6 +413,7 @@ func main() {
 					ctx.res <- results{fmt.Errorf("failed to identify %s (in scanning mode, inputs must all be files and not directories), got: %v", scanner.Text(), err), nil, nil}
 					ctx.wg.Add(1)
 					ctxts <- ctx
+					err = nil // don't log.Fatal this error, report it in the results
 				} else if *replay {
 					err = replayFile(scanner.Text(), ctxts, w)
 					if err != nil {
