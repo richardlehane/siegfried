@@ -7,7 +7,7 @@
 - code re-organisation to export reader and writer packages
 - `sf -replay` can now take lists of results files with `-f` flag e.g. `sf -replay -f list-of-results.txt`
 
-## Fixed
+### Fixed
 - the command `sf -replay -` now works on Windows as expected e.g. `sf myfiles | sf -replay -json -`
 - text matcher not allocating hits to correct identifiers when multiple IDs; fixes [#101](https://github.com/richardlehane/siegfried/issues/101)
 - unescaped YAML field contains quote; reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/100)
