@@ -2,6 +2,7 @@
 ## v1.7.3 (2017-05-20)
 ### Added
 - sf now accepts multiple files or directories as input e.g. `sf myfile1.doc mydir myfile3.txt`
+- LOC signature update
 
 ### Changed
 - code re-organisation to export reader and writer packages
@@ -9,7 +10,7 @@
 
 ### Fixed
 - the command `sf -replay -` now works on Windows as expected e.g. `sf myfiles | sf -replay -json -`
-- text matcher not allocating hits to correct identifiers when multiple IDs; fixes [#101](https://github.com/richardlehane/siegfried/issues/101)
+- text matcher not allocating hits to correct identifiers; fixes [#101](https://github.com/richardlehane/siegfried/issues/101)
 - unescaped YAML field contains quote; reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/100)
 
 ## v1.7.2 (2017-04-4)
