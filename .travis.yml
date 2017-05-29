@@ -4,8 +4,11 @@ go:
 - 1.5
 - 1.6
 - 1.7
-- 1.x
+- 1.8.x
 - tip
+branches:
+  only:
+    - master
 env:
 - GO15VENDOREXPERIMENT=1  
 install:
@@ -19,9 +22,8 @@ before_deploy:
 - ./debbuilder.sh
 deploy:
   on:
-    branch: master
     tags: true
-    go: 1.x
+    condition: $TRAVIS_GO_VERSION =~ ^1\.8\.[0-9]+$
   provider: bintray
   file: ${HOME}/deb/bintray.json
   user: richardlehane
