@@ -7,8 +7,8 @@ go:
 - 1.8.x
 - tip
 branches:
-  only:
-    - master
+  except:
+    - develop
 env:
 - GO15VENDOREXPERIMENT=1  
 install:
