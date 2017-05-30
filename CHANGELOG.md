@@ -1,4 +1,8 @@
 # Change Log
+## v1.7.3-2 (2017-05-30)
+### Fixed
+- no changes since v1.7.3, repairing Travis-CI auto-deploy of Debian packages
+
 ## v1.7.3 (2017-05-20)
 ### Added
 - sf now accepts multiple files or directories as input e.g. `sf myfile1.doc mydir myfile3.txt`
