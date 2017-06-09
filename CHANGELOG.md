@@ -1,5 +1,5 @@
 # Change Log
-## v1.7.3-2 (2017-05-30)
+## v1.7.3-(x) (2017-05-30)
 ### Fixed
 - no changes since v1.7.3, repairing Travis-CI auto-deploy of Debian packages
 
