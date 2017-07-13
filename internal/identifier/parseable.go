@@ -500,6 +500,10 @@ type noXML struct{ Parseable }
 
 func (nx noXML) XMLs() ([][2]string, []string) { return nil, nil }
 
+type noByte struct{ Parseable }
+
+func (nb noByte) Signatures() ([]frames.Signature, []string, error) { return nil, nil, nil }
+
 type noContainers struct{ Parseable }
 
 func (nc noContainers) Zips() ([][]string, [][]frames.Signature, []string, error) {
@@ -531,6 +535,9 @@ func ApplyConfig(p Parseable) Parseable {
 	}
 	if config.NoXML() {
 		p = noXML{p}
+	}
+	if config.NoByte() {
+		p = noByte{p}
 	}
 	if config.NoContainer() {
 		p = noContainers{p}

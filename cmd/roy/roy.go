@@ -130,6 +130,7 @@ var (
 	eof         = build.Int("eof", 0, "define a maximum EOF offset")
 	noeof       = build.Bool("noeof", false, "ignore EOF segments in signatures")
 	multi       = build.String("multi", "", "control how identifiers treat multiple results")
+	nobyte      = build.Bool("nobyte", false, "skip byte signatures")
 	nocontainer = build.Bool("nocontainer", false, "skip container signatures")
 	notext      = build.Bool("notext", false, "skip text matcher")
 	noname      = build.Bool("noname", false, "skip filename matcher")
@@ -356,6 +357,9 @@ the DROID signature file you should also include a regular signature extension
 	}
 	if *multi != "" {
 		opts = append(opts, config.SetMulti(strings.ToLower(*multi)))
+	}
+	if *nobyte {
+		opts = append(opts, config.SetNoByte())
 	}
 	if *nocontainer {
 		opts = append(opts, config.SetNoContainer())

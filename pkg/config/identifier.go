@@ -27,6 +27,7 @@ var identifier = struct {
 	maxBOF      int      // maximum offset from beginning of file to scan
 	maxEOF      int      // maximum offset from end of file to scan
 	noEOF       bool     // trim end of file segments from signatures
+	noByte      bool     // don't build with byte signatures
 	noContainer bool     // don't build with container signatures
 	multi       Multi    // define how many results identifiers should return
 	noText      bool     // don't build with text signatures
@@ -92,6 +93,9 @@ func Details(extra ...string) string {
 	if identifier.noEOF {
 		str += "; no EOF signature parts"
 	}
+	if identifier.noByte {
+		str += "; no byte signatures"
+	}
 	if identifier.noContainer {
 		str += "; no container signatures"
 	}
@@ -147,6 +151,11 @@ func MaxEOF() int {
 // NoEOF reports whether end of file segments of signatures should be trimmed.
 func NoEOF() bool {
 	return identifier.noEOF
+}
+
+// NoByte reports whether byte signatures should be omitted.
+func NoByte() bool {
+	return identifier.noByte
 }
 
 // NoContainer reports whether container signatures should be omitted.
@@ -306,6 +315,14 @@ func SetEOF(e int) func() private {
 func SetNoEOF() func() private {
 	return func() private {
 		identifier.noEOF = true
+		return private{}
+	}
+}
+
+// SetNoByte will cause byte signatures to be omitted.
+func SetNoByte() func() private {
+	return func() private {
+		identifier.noByte = true
 		return private{}
 	}
 }

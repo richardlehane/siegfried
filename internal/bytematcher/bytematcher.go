@@ -130,6 +130,9 @@ func Add(c core.Matcher, ss core.SignatureSet, priorities priority.List) (core.M
 	if !ok {
 		return nil, -1, fmt.Errorf("Byte matcher: can't convert signature set to BM signature set")
 	}
+	if len(sigs) == 0 {
+		return c, len(b.keyFrames), nil // return same matcher as given (may be nil) if no signatures to add
+	}
 	var se sigErrors
 	// process each of the sigs, adding them to b.Sigs and the various seq/frame/testTree sets
 	var bof, eof int
