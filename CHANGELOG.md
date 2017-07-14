@@ -1,4 +1,12 @@
 # Change Log
+## v1.7.4 (2017-07-16)
+### Added
+- `roy build` and `roy add` now take a `-nobyte` flag to omit byte signatures from the identifier; requested by [Nick Krabbenhoeft](https://github.com/richardlehane/siegfried/issues/102) 
+
+### Changed
+- update Tika MIMEInfo signatures to 1.16
+- update LOC to 2017-06-10
+
 ## v1.7.3-(x) (2017-05-30)
 ### Fixed
 - no changes since v1.7.3, repairing Travis-CI auto-deploy of Debian packages
