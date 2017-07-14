@@ -106,7 +106,7 @@ func characterise(m []string) ([]string, []string, []int, []int, error) {
 }
 
 func dehex(h string, off int) ([][]byte, []int, []bool, error) { // return bytes, offsets, and masks
-	repl := strings.NewReplacer("0x", "", " ", "", "\n\t", "", "{20 bytes of Hex 20}", "2020202020202020202020202020202020202020") // special case fdd000342 (nl tab within the hex)
+	repl := strings.NewReplacer("0x", "", " ", "", "\n", "", "\t", "", "\r", "", "{20 bytes of Hex 20}", "2020202020202020202020202020202020202020") // special case fdd000342 (nl tab within the hex)
 	h = repl.Replace(h)
 	if len(h)%2 != 0 {
 		return nil, nil, nil, fmt.Errorf("loc: can't dehex %s", h)
