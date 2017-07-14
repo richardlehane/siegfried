@@ -88,7 +88,7 @@ Or, for the most recent updates, you can install from this fork:
 
 
 ## Changes
-### v1.7.4 (2017-07-16)
+### v1.7.4 (2017-07-14)
 ### Added
 - `roy build` and `roy add` now take a `-nobyte` flag to omit byte signatures from the identifier; requested by [Nick Krabbenhoeft](https://github.com/richardlehane/siegfried/issues/102) 
 

@@ -1,5 +1,7 @@
 // Copyright 2015 Richard Lehane.
 
+// +build !appengine
+
 package characterize
 
 import "golang.org/x/text/encoding/charmap"

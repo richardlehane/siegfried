@@ -1,8 +1,8 @@
 hash: 2faaea615e9a8a21cbbdece66726b50773b898784ebb3c0d0dea5271ed682e71
-updated: 2017-05-20T17:20:23.595491924+10:00
+updated: 2017-07-14T20:57:56.823492242+10:00
 imports:
 - name: github.com/richardlehane/characterize
-  version: 61abc7ff7f9e54d9e0564702c532e7a44fbeb1f9
+  version: 28c58d8a7f61c9ceaadc3acc30add36f62a8e530
 - name: github.com/richardlehane/match
   version: 1da9f7fe8ab466854fde985510be4f30c544406d
   subpackages:
@@ -19,15 +19,15 @@ imports:
 - name: github.com/richardlehane/xmldetect
   version: d96cd89e827673690c9e9f15546eff6dd85f17f1
 - name: golang.org/x/image
-  version: f483456c9f61fd7c1e170033d58ef22ff5ffe291
+  version: 426cfd8eeb6e08ab1932954e09e3c2cb2bc6e36d
   subpackages:
   - riff
 - name: golang.org/x/sys
-  version: a2e06a18b0d52d8cb2010e04b372a1965d8e3439
+  version: abf9c25f54453410d0c6668e519582a9e1115027
   subpackages:
   - unix
 - name: golang.org/x/text
-  version: 19e51611da83d6be54ddafce4a4af510cb3e9ea4
+  version: 836efe42bb4aa16aaa17b9c155d8813d336ed720
   subpackages:
   - encoding
   - encoding/charmap
