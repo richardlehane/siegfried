@@ -53,7 +53,6 @@
 By default, siegfried uses the latest PRONOM signatures without buffer limits (i.e. it may do full file scans). To use MIME-info or LOC signatures, or to add buffer limits or other customisations, use the [roy tool](https://github.com/richardlehane/siegfried/wiki/Building-a-signature-file-with-ROY) to build your own signature file.
 
 ## Install
-
 ### With go installed: 
 
     go get github.com/richardlehane/siegfried/cmd/sf
@@ -86,6 +85,11 @@ Or, for the most recent updates, you can install from this fork:
 
     pkg install siegfried
 
+#### Arch Linux: 
+
+    git clone https://aur.archlinux.org/siegfried.git
+    cd siegfried
+    makepkg -si
 
 ## Changes
 ### v1.7.4 (2017-07-14)
@@ -165,4 +169,4 @@ Thanks Ross for https://github.com/exponential-decay/skeleton-test-suite-generat
 
 Thanks Misty for the brew and ubuntu packaging
 
-Thanks Steffen for the FreeBSD packaging
+Thanks Steffen for the FreeBSD and Arch Linux packaging
