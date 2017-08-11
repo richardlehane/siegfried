@@ -193,8 +193,8 @@ func Load(path string) (*Siegfried, error) {
 	}
 	r := bytes.NewBuffer(fbuf[len(config.Magic())+2:])
 	rc := flate.NewReader(r)
-	defer rc.Close()
 	buf, err := ioutil.ReadAll(rc)
+	rc.Close()
 	if err != nil {
 		return nil, fmt.Errorf(errOpening, err)
 	}
@@ -502,16 +502,6 @@ func (s *Siegfried) Blame(idx, ct int, cn string) string {
 	}
 	return fmt.Sprintf("%s\nResults at %d: %s (identifies results reported by -slow)\nHits at %d: %s (identifies hits reported by -debug)", matcher, idx, resName, idx, ttiNames)
 
-}
-
-// Update checks whether a Siegfried struct is due for update, by testing whether the time given is after the time
-// the signature was created.
-func (s *Siegfried) Update(t string) bool {
-	tm, err := time.Parse(time.RFC3339, t)
-	if err != nil {
-		return false
-	}
-	return tm.After(s.C)
 }
 
 // Inspect returns a string containing detail about the various matchers in the Siegfried struct.
