@@ -1,4 +1,16 @@
 # Change Log
+## v1.7.5 (2017-08-12)
+### Added
+- `sf -update` flag can now be used to download/update non-PRONOM signatures. Options are "loc", "tika", "freedesktop", "pronom-tika-loc", "deluxe" and "archivematica". To update a non-PRONOM signature, include the signature name as an argument after the flags e.g. `sf -update freedesktop`. This command will overwrite 'default.sig' (the default signature file that sf loads). You can preserve your default signature file by providing an alternative `-sig` target e.g. `sf -sig notdefault.sig -update loc`. If you use one of the signature options as a filename (with or without a .sig extension), you can omit the signature argument i.e. `sf -update -sig loc.sig` is equivalent to `sf -sig loc.sig -update loc`. Feature requested by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/103).
+- `sf -update` now does SHA-256 hash verification of updates and communication with the update server is via HTTPS.
+
+### Changed
+- update PRONOM signatures to v91
+
+### Fixed
+- fixes to config package where global variables are polluted with subsquent calls to the Add(Identifier) function
+- fix to reader package where panic triggered by illegal slice access in some cases
+
 ## v1.7.4 (2017-07-14)
 ### Added
 - `roy build` and `roy add` now take a `-nobyte` flag to omit byte signatures from the identifier; requested by [Nick Krabbenhoeft](https://github.com/richardlehane/siegfried/issues/102) 
