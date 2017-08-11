@@ -43,13 +43,13 @@ var siegfried = struct {
 	out        io.Writer
 	checkpoint int64
 }{
-	version:         [3]int{1, 7, 4},
+	version:         [3]int{1, 7, 5},
 	signature:       "default.sig",
 	magic:           []byte{'s', 'f', 0x00, 0xFF},
 	distance:        8192,
 	rng:             4096,
 	choices:         128,
-	updateURL:       "http://www.itforarchivists.com/siegfried/update",
+	updateURL:       "https://www.itforarchivists.com/siegfried/update",
 	updateTimeout:   30 * time.Second,
 	updateTransport: &http.Transport{Proxy: http.ProxyFromEnvironment},
 	fpr:             "/tmp/siegfried",

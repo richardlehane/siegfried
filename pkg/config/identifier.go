@@ -48,12 +48,16 @@ var identifier = struct {
 
 // Name returns the name of the identifier.
 func Name() string {
-	if identifier.name == "" {
-		if mimeinfo.mi == "" && loc.fdd == "" {
-			identifier.name = pronom.name
-		}
+	switch {
+	case identifier.name != "":
+		return identifier.name
+	case mimeinfo.mi != "":
+		return mimeinfo.name
+	case loc.fdd != "":
+		return loc.name
+	default:
+		return pronom.name
 	}
-	return identifier.name
 }
 
 // Details returns a description of the identifier. This is auto-populated if not set directly.
@@ -277,6 +281,16 @@ func IsArchive(id string) Archive {
 }
 
 // SETTERS
+
+// Clear clears loc and mimeinfo details to avoid pollution when creating multiple identifiers in same session
+func Clear() func() private {
+	return func() private {
+		identifier.name = ""
+		loc.fdd = ""
+		mimeinfo.mi = ""
+		return private{}
+	}
+}
 
 // SetName sets the name of the identifier.
 func SetName(n string) func() private {

@@ -63,13 +63,11 @@ func SetNoPRONOM() func() private {
 
 func SetLOC(fdd string) func() private {
 	return func() private {
+		mimeinfo.mi = "" // reset mimeinfo to prevent pollution
 		if fdd == "" {
 			fdd = loc.def
 		}
 		loc.fdd = fdd
-		if identifier.name == "" {
-			identifier.name = loc.name
-		}
 		return private{}
 	}
 }
