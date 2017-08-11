@@ -33,18 +33,28 @@ func TestMakeDefault(t *testing.T) {
 	}
 }
 
-func TestMakePronomTika(t *testing.T) {
+func TestLoc(t *testing.T) {
 	s := siegfried.New()
 	config.SetHome(*testhome)
-	p, err := pronom.New()
+	l, err := loc.New(config.SetLOC(""))
 	if err != nil {
 		t.Fatal(err)
 	}
-	err = s.Add(p)
+	err = s.Add(l)
 	if err != nil {
 		t.Fatal(err)
 	}
-	m, err := mimeinfo.New(config.SetName("tika"), config.SetMIMEInfo("tika"))
+	sigs := filepath.Join("data", "loc.sig")
+	err = s.Save(sigs)
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestMakeTika(t *testing.T) {
+	s := siegfried.New()
+	config.SetHome(*testhome)
+	m, err := mimeinfo.New(config.SetMIMEInfo("tika"))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -52,7 +62,51 @@ func TestMakePronomTika(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	l, err := loc.New(config.SetName("loc"), config.SetLOC(""))
+	sigs := filepath.Join("data", "tika.sig")
+	err = s.Save(sigs)
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestMakeFreedesktop(t *testing.T) {
+	s := siegfried.New()
+	config.SetHome(*testhome)
+	m, err := mimeinfo.New(config.SetMIMEInfo("freedesktop"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	err = s.Add(m)
+	if err != nil {
+		t.Fatal(err)
+	}
+	sigs := filepath.Join("data", "freedesktop.sig")
+	err = s.Save(sigs)
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestMakePronomTikaLoc(t *testing.T) {
+	s := siegfried.New()
+	config.SetHome(*testhome)
+	p, err := pronom.New(config.Clear())
+	if err != nil {
+		t.Fatal(err)
+	}
+	err = s.Add(p)
+	if err != nil {
+		t.Fatal(err)
+	}
+	m, err := mimeinfo.New(config.SetMIMEInfo("tika"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	err = s.Add(m)
+	if err != nil {
+		t.Fatal(err)
+	}
+	l, err := loc.New(config.SetLOC(""))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -61,6 +115,48 @@ func TestMakePronomTika(t *testing.T) {
 		t.Fatal(err)
 	}
 	sigs := filepath.Join("data", "pronom-tika-loc.sig")
+	err = s.Save(sigs)
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestMakeDeluxe(t *testing.T) {
+	s := siegfried.New()
+	config.SetHome(*testhome)
+	p, err := pronom.New(config.Clear())
+	if err != nil {
+		t.Fatal(err)
+	}
+	err = s.Add(p)
+	if err != nil {
+		t.Fatal(err)
+	}
+	m, err := mimeinfo.New(config.SetMIMEInfo("tika"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	err = s.Add(m)
+	if err != nil {
+		t.Fatal(err)
+	}
+	f, err := mimeinfo.New(config.SetMIMEInfo("freedesktop"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	err = s.Add(f)
+	if err != nil {
+		t.Fatal(err)
+	}
+	l, err := loc.New(config.SetLOC(""))
+	if err != nil {
+		t.Fatal(err)
+	}
+	err = s.Add(l)
+	if err != nil {
+		t.Fatal(err)
+	}
+	sigs := filepath.Join("data", "deluxe.sig")
 	err = s.Save(sigs)
 	if err != nil {
 		t.Fatal(err)
