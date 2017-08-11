@@ -15,30 +15,89 @@
 package main
 
 import (
+	"bytes"
+	"compress/flate"
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
+	"path/filepath"
+	"strings"
 	"time"
 
-	"github.com/richardlehane/siegfried"
+	"github.com/richardlehane/siegfried/internal/persist"
 	"github.com/richardlehane/siegfried/pkg/config"
 )
 
 type Update struct {
 	Version [3]int `json:"sf"`
 	Created string `json:"created"`
+	Hash    string `json:"hash"`
 	Size    int    `json:"size"`
 	Path    string `json:"path"`
 }
 
-func updateSigs() (string, error) {
+func current(buf []byte, utime string) bool {
+	ut, err := time.Parse(time.RFC3339, utime)
+	if err != nil {
+		return false
+	}
+	if len(buf) < len(config.Magic())+2+15 {
+		return false
+	}
+	rc := flate.NewReader(bytes.NewBuffer(buf[len(config.Magic())+2:]))
+	nbuf := make([]byte, 15)
+	if n, _ := rc.Read(nbuf); n < 15 {
+		return false
+	}
+	rc.Close()
+	ls := persist.NewLoadSaver(nbuf)
+	tt := ls.LoadTime()
+	if ls.Err != nil {
+		return false
+	}
+	return !ut.After(tt)
+}
+
+func same(buf []byte, uhash string) bool {
+	h := sha256.New()
+	h.Write(buf)
+	return hex.EncodeToString(h.Sum(nil)) == uhash
+}
+
+func uptodate(utime, uhash string) bool {
+	fbuf, err := ioutil.ReadFile(config.Signature())
+	if err != nil {
+		return false
+	}
+	if current(fbuf, utime) && same(fbuf, uhash) {
+		return true
+	}
+	return false
+}
+
+func location(base, sig string, args []string) string {
+	if len(args) > 0 && len(args[0]) > 0 {
+		if args[0] == "freedesktop.org" { // freedesktop.org is more correct, but we don't use it in update service
+			args[0] = "freedesktop"
+		}
+		return base + "/" + args[0]
+	}
+	if len(sig) > 0 && sig != config.SignatureBase() {
+		return base + "/" + strings.TrimSuffix(filepath.Base(sig), filepath.Ext(sig))
+	}
+	return base
+}
+
+func updateSigs(sig string, args []string) (string, error) {
 	url, _, _ := config.UpdateOptions()
 	if url == "" {
 		return "Update is not available for this distribution of siegfried", nil
 	}
-	response, err := getHttp(url)
+	response, err := getHttp(location(url, sig, args))
 	if err != nil {
 		return "", err
 	}
@@ -51,22 +110,18 @@ func updateSigs() (string, error) {
 		u.Version == [3]int{0, 0, 0} || u.Created == "" || u.Size == 0 || u.Path == "" { // or if the unmarshalling hasn't worked and we have blank values
 		return "Your version of siegfried is out of date; please install latest from http://www.itforarchivists.com/siegfried before continuing.", nil
 	}
-	s, err := siegfried.Load(config.Signature())
-	if err == nil {
-		if !s.Update(u.Created) {
-			return "You are already up to date!", nil
-		}
-	} else {
-		// this hairy bit of golang exception handling is thanks to Ross! :)
-		if _, err = os.Stat(config.Home()); err != nil {
-			if os.IsNotExist(err) {
-				err = os.MkdirAll(config.Home(), os.ModePerm)
-				if err != nil {
-					return "", fmt.Errorf("Siegfried: cannot create home directory %s, %v", config.Home(), err)
-				}
-			} else {
-				return "", fmt.Errorf("Siegfried: error opening directory %s, %v", config.Home(), err)
+	if uptodate("test_time", "test hash") {
+		return "You are already up to date!", nil
+	}
+	// this hairy bit of golang exception handling is thanks to Ross! :)
+	if _, err = os.Stat(config.Home()); err != nil {
+		if os.IsNotExist(err) {
+			err = os.MkdirAll(config.Home(), os.ModePerm)
+			if err != nil {
+				return "", fmt.Errorf("Siegfried: cannot create home directory %s, %v", config.Home(), err)
 			}
+		} else {
+			return "", fmt.Errorf("Siegfried: error opening directory %s, %v", config.Home(), err)
 		}
 	}
 	fmt.Println("... downloading latest signature file ...")
@@ -76,6 +131,9 @@ func updateSigs() (string, error) {
 	}
 	if len(response) != u.Size {
 		return "", fmt.Errorf("Siegfried: error retrieving %s; expecting %d bytes, got %d bytes", config.SignatureBase(), u.Size, len(response))
+	}
+	if !same(response, u.Hash) {
+		return "", fmt.Errorf("Siegfried: error retrieving %s; SHA256 hash of response doesn't match %s", "test_signature", u.Hash)
 	}
 	err = ioutil.WriteFile(config.Signature(), response, os.ModePerm)
 	if err != nil {

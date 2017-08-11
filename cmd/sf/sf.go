@@ -291,7 +291,7 @@ func main() {
 	}
 	// handle -update
 	if *update {
-		msg, err := updateSigs()
+		msg, err := updateSigs(*sig, flag.Args())
 		if err != nil {
 			log.Fatalf("[FATAL] failed to update signature file, %v", err)
 		}
