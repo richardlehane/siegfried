@@ -247,7 +247,7 @@ func New(rdr io.Reader, path string) (Reader, error) {
 	case '"':
 		return newDroid(pr, path)
 	}
-	return nil, fmt.Errorf("not a valid results file, bad char %d", int(buf[1]))
+	return nil, fmt.Errorf("not a valid results file, bad char %d", int(buf[0]))
 }
 
 type defaultID struct {
