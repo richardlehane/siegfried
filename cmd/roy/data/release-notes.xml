@@ -1,6 +1,560 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="release-note.xsl"?>
 <release_notes>
+<release_note>
+    <release_date>25th July 2017</release_date>
+    <signature_filename>DROID_SignatureFile_V91.xml</signature_filename> 
+    <release_outline name="New Records">
+	  <format>
+	   <puid type="fmt">1041</puid>
+	   <name>HDF 1-4</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1042</puid>
+	   <name>WordPerfect Graphics Metafile 2.0</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1043</puid>
+	   <name>Microsoft PRX File</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1044</puid>
+	   <name>AutoShade Rendering Slide</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1045</puid>
+	   <name>Q&#38;A Word Processor Document</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1046</puid>
+	   <name>Draco File Format</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1047</puid>
+	   <name>Geography Markup Language 3.2</name>
+	   <summary>Full entry added. Requested by Archaeology Data Service.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1048</puid>
+	   <name>OGR GFS File</name>
+	   <summary>Full entry added. Requested by Archaeology Data Service.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1049</puid>
+	   <name>QuickDraw 3D Metafile (ASCII)</name>
+	   <summary>Full entry added. Submitted by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1050</puid>
+	   <name>QuickDraw 3D Metafile (Binary) 1</name>
+	   <summary>Full entry added. Submitted by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1051</puid>
+	   <name>Windows Journal Format</name>
+	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1052</puid>
+	   <name>BKNAS Seismic Data Format 1.0</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1053</puid>
+	   <name>Adobe Audio Waveform</name>
+	   <summary>Full entry added. Submitted by National Library of Scotland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1054</puid>
+	   <name>AVCHD Clip Information File</name>
+	   <summary>Full entry added. Submitted by National Library of Scotland. Additionally requested by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1055</puid>
+	   <name>M2TS</name>
+	   <summary>Full entry added. Submitted by National Library of Scotland. Additionally requested by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1056</puid>
+	   <name>SNAP Main Data File</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1057</puid>
+	   <name>SNAP Archive Data File</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1058</puid>
+	   <name>SNAP Processed Data File</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1059</puid>
+	   <name>FileMaker Pro Database 2</name>
+	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1060</puid>
+	   <name>Phase One Raw Image</name>
+	   <summary>Full entry added. Submitted by Historic Environment Scotland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1061</puid>
+	   <name>Phase One IIQ Raw Image</name>
+	   <summary>Full entry added. Submitted by Historic Environment Scotland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1062</puid>
+	   <name>Hasselblad 3FR Raw Image</name>
+	   <summary>Full entry added. Submitted by Historic Environment Scotland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1063</puid>
+	   <name>Leaf Mosaic Raw Image</name>
+	   <summary>Full entry added. Submitted by Historic Environment Scotland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1064</puid>
+	   <name>Portable Database 1</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1065</puid>
+	   <name>Portable Database 2</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1066</puid>
+	   <name>Portable Database 3</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1067</puid>
+	   <name>Silo PDB Variant</name>
+	   <summary>Full entry added. Submitted by University of Leeds.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1068</puid>
+	   <name>Silo HDF5 Variant</name>
+	   <summary>Full entry added. Submitted by University of Leeds.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1069</puid>
+	   <name>Cue Sheet</name>
+	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1070</puid>
+	   <name>Preferred Executable Format</name>
+	   <summary>Full entry added. Submitted by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1071</puid>
+	   <name>Apple Disk Image</name>
+	   <summary>Full entry added. Submitted by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1072</puid>
+	   <name>FileMaker Pro Database 1</name>
+	   <summary>Full entry added. Submitted by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1073</puid>
+	   <name>Google Document Link File</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1074</puid>
+	   <name>AVCHD Playlist File</name>
+	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1075</puid>
+	   <name>AVCHD Movie Object File</name>
+	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1076</puid>
+	   <name>AVCHD Index File</name>
+	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1077</puid>
+	   <name>AVCHD Thumbnail Index File</name>
+	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1078</puid>
+	   <name>Microsoft Program Database 2.00</name>
+	   <summary>Full entry added. Submitted by National Library of Scotland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1079</puid>
+	   <name>Microsoft Program Database 7.00</name>
+	   <summary>Full entry added. Submitted by National Library of Scotland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1080</puid>
+	   <name>ASP Application Directive File</name>
+	   <summary>Full entry added. Submitted by National Library of Scotland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1081</puid>
+	   <name>ASP Control Directive File</name>
+	   <summary>Full entry added. Submitted by National Library of Scotland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1082</puid>
+	   <name>ASP WebService Directive File</name>
+	   <summary>Full entry added. Submitted by National Library of Scotland.</summary>
+	  </format>
+	 </release_outline>
+
+	 <release_outline name="Updated Records">
+	  <format>
+	   <puid type="fmt">76</puid>
+	   <name>Drawing Interchange File Format (ASCII) R13</name>
+	   <summary>Modified signature to account for UNIX line endings. It will likely be necessary to make similar changes for other DXF ASCII files. Please contact the PRONOM team if you have any currently unidentified DXF files. New signature and samples provided by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">77</puid>
+	   <name>Drawing Interchange File Format (ASCII) R14</name>
+	   <summary>Modified signature to account for UNIX line endings. It will likely be necessary to make similar changes for other DXF ASCII files. Please contact the PRONOM team if you have any currently unidentified DXF files. New signature and samples provided by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">78</puid>
+	   <name>Drawing Interchange File Format (ASCII) 2000-2002</name>
+	   <summary>Modified signature to account for UNIX line endings. It will likely be necessary to make similar changes for other DXF ASCII files. Please contact the PRONOM team if you have any currently unidentified DXF files. New signature and samples provided by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">192</puid>
+	   <name>Kodak Digital Camera Raw Image File</name>
+	   <summary>Added brief description. Added format type Image (Raster).</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">194</puid>
+	   <name>FileMaker Pro Database 7+</name>
+	   <summary>Adjusted name from 'FileMaker Pro Ver. 7+ Database Document 7' for consistency. Added brief description. Slightly adjusted format signature description.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">245</puid>
+	   <name>Structured Data Exchange Format</name>
+	   <summary>Removed empty 'External Signature' - should be null instead. Error identified through schema validation work with French government/Programme Vitam, France</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">286</puid>
+	   <name>HDF5 1</name>
+	   <summary>Changed duplicated 'hdf5' extension to hdf.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">400</puid>
+	   <name>Macromedia FreeHand MX</name>
+	   <summary>Changed lower-case signature byte values to upper-case. Error identified through schema validation work with French government/Programme Vitam, France</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">418</puid>
+	   <name>Adobe Illustrator 3.0 / 3.2</name>
+	   <summary>Added additional signature for variation in BOF.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">423</puid>
+	   <name>Adobe Illustrator 6</name>
+	   <summary>Signature updated as part of PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">462</puid>
+	   <name>MS DOS Compression Format</name>
+	   <summary>Removed empty 'External Signature' - should be null instead. Error identified through schema validation work with French government/Programme Vitam, France</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">562</puid>
+	   <name>Adobe Illustrator 13</name>
+	   <summary>Signature updated as part of PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">563</puid>
+	   <name>Adobe Illustrator 14</name>
+	   <summary>Signature updated as part of PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">807</puid>
+	   <name>HDF5 0</name>
+	   <summary>Added 'hdf5' and 'hdf' extensions.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">831</puid>
+	   <name>Polygon File Format</name>
+	   <summary>Improved signature submitted by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">950</puid>
+	   <name>MIME Email</name>
+	   <summary>Improved signature submitted by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">969</puid>
+	   <name>Rich Text Format 0</name>
+	   <summary>Removed extraneous whitespace preceeding format name. Error identified by Andy Jackson's file format registry aggregator - http://www.digipres.org/formats/- hosted on the DigiPres Commons website.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">19</puid>
+	   <name>3D Studio</name>
+	   <summary>Added variant signature based on samples provided by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">227</puid>
+	   <name>Geography Markup Language</name>
+	   <summary>Added format type GIS.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">239</puid>
+	   <name>Microsoft Access Database 97</name>
+	   <summary>Changed lower-case signature byte values to upper-case. Error identified through schema validation work with French government/Programme Vitam, France</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">280</puid>
+	   <name>XML Schema Definition</name>
+	   <summary>Gave priority over fmt/1047 - Geography Markup Language 3.2.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">395</puid>
+	   <name>WordPerfect Graphics Metafile 1.0</name>
+	   <summary>Added brief description. Adjusted signature for consistency with new entry for version 2.0 format in line with format header description in 'The File Formats Handbook' by Gunter Born.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">451</puid>
+	   <name>SketchUp Document</name>
+	   <summary>Added brief description. Added alternative signature for older versions, provided by Henk Vanstappen, Datable. Removed MIME type application/octet-stream as is not specific to this format. Added format type 'Model'.</summary>
+	  </format>
+      </release_outline>
+         
+ 	 <release_outline name="New Signatures">
+	  <format>
+	   <puid type="fmt">192</puid>
+	   <name>Kodak Digital Camera Raw Image File</name>
+	   <summary>Signature developed through PRONOM research. Requested by Historic Environment Scotland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1041</puid>
+	   <name>HDF 1-4</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1042</puid>
+	   <name>WordPerfect Graphics Metafile 2.0</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1043</puid>
+	   <name>Microsoft PRX File</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1044</puid>
+	   <name>AutoShade Rendering Slide</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1045</puid>
+	   <name>Q&#38;A Word Processor Document</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1046</puid>
+	   <name>Draco File Format</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1047</puid>
+	   <name>Geography Markup Language 3.2</name>
+	   <summary>Signature developed through PRONOM research. Requested by Archaeology Data Service.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1048</puid>
+	   <name>OGR GFS File</name>
+	   <summary>Signature developed through PRONOM research. Requested by Archaeology Data Service.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1049</puid>
+	   <name>QuickDraw 3D Metafile (ASCII)</name>
+	   <summary>Signature submitted by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1050</puid>
+	   <name>QuickDraw 3D Metafile (Binary) 1</name>
+	   <summary>Signature submitted by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1051</puid>
+	   <name>Windows Journal Format</name>
+	   <summary>Signature submitted by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1052</puid>
+	   <name>BKNAS Seismic Data Format 1.0</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1053</puid>
+	   <name>Adobe Audio Waveform</name>
+	   <summary>Signature submitted by National Library of Scotland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1054</puid>
+	   <name>AVCHD Clip Information File</name>
+	   <summary>Signature submitted by National Library of Scotland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1055</puid>
+	   <name>M2TS</name>
+	   <summary>Signature developed with National Library of Scotland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1056</puid>
+	   <name>SNAP Main Data File</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1057</puid>
+	   <name>SNAP Archive Data File</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1058</puid>
+	   <name>SNAP Processed Data File</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1059</puid>
+	   <name>FileMaker Pro Database 2</name>
+	   <summary>Signature developed with LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1060</puid>
+	   <name>Phase One Raw Image</name>
+	   <summary>Signature developed through PRONOM research. Requested by Historic Environment Scotland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1061</puid>
+	   <name>Phase One IIQ Raw Image</name>
+	   <summary>Signature developed through PRONOM research. Requested by Historic Environment Scotland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1062</puid>
+	   <name>Hasselblad 3FR Raw Image</name>
+	   <summary>Signature developed through PRONOM research. Requested by Historic Environment Scotland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1063</puid>
+	   <name>Leaf Mosaic Raw Image</name>
+	   <summary>Signature developed through PRONOM research. Requested by Historic Environment Scotland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1064</puid>
+	   <name>Portable Database 1</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1065</puid>
+	   <name>Portable Database 2</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1066</puid>
+	   <name>Portable Database 3</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1067</puid>
+	   <name>Silo PDB Variant</name>
+	   <summary>Signature developed through PRONOM research. Requested by University of Leeds.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1068</puid>
+	   <name>Silo HDF5 Variant</name>
+	   <summary>Signature developed through PRONOM research. Requested by University of Leeds.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1069</puid>
+	   <name>Cue Sheet</name>
+	   <summary>Signature developed with LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1070</puid>
+	   <name>Preferred Executable Format</name>
+	   <summary>Signature developed through PRONOM research based on samples provided by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1071</puid>
+	   <name>Apple Disk Image</name>
+	   <summary>Signature developed with Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1072</puid>
+	   <name>FileMaker Pro Database 1</name>
+	   <summary>Signature developed through PRONOM research based on samples provided by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1073</puid>
+	   <name>Google Document Link File</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1074</puid>
+	   <name>AVCHD Playlist File</name>
+	   <summary>Signature developed with LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1075</puid>
+	   <name>AVCHD Movie Object File</name>
+	   <summary>Signature developed with LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1076</puid>
+	   <name>AVCHD Index File</name>
+	   <summary>Signature developed with LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1077</puid>
+	   <name>AVCHD Thumbnail Index File</name>
+	   <summary>Signature developed with LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1078</puid>
+	   <name>Microsoft Program Database 2.00</name>
+	   <summary>Signature submitted by National Library of Scotland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1079</puid>
+	   <name>Microsoft Program Database 7.00</name>
+	   <summary>Signature submitted by National Library of Scotland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1080</puid>
+	   <name>ASP Application Directive File</name>
+	   <summary>Signature submitted by National Library of Scotland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1081</puid>
+	   <name>ASP Control Directive File</name>
+	   <summary>Signature submitted by National Library of Scotland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1082</puid>
+	   <name>ASP WebService Directive File</name>
+	   <summary>Signature submitted by National Library of Scotland.</summary>
+	  </format>
+	 </release_outline>
+    </release_note> 
+
+
 <release_note>
     <release_date>30th March 2017</release_date>
     <signature_filename>DROID_SignatureFile_V90.xml</signature_filename> 
@@ -381,7 +935,7 @@
 	   <name>DSS Pro</name>
 	   <summary>Signature developed through PRONOM research.</summary>
 	  </format>	  
-	    <format>
+	  <format>
 	   <puid type="fmt">1009</puid>
 	   <name>FBX Binary</name>
 	   <summary>Signature developed through PRONOM research.</summary>
@@ -411,7 +965,7 @@
 	   <name>Interlis Model File v1</name>
 	   <summary>Signature developed through PRONOM research.</summary>
 	  </format>
-      <format>
+	  <format>
 	   <puid type="fmt">1015</puid>
 	   <name>Statistical Analysis System Data (Windows) Generic</name>
 	   <summary>Signature developed through PRONOM research. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
@@ -480,7 +1034,7 @@
 	   <puid type="fmt">1028</puid>
 	   <name>Statistical Analysis System Catalog (Unix) 9.3</name>
 	   <summary>Signature developed through PRONOM research. Requested by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
-       </format>
+          </format>
 	  <format>
 	   <puid type="fmt">1029</puid>
 	   <name>Stata Data (DTA) Format 104</name>
@@ -5306,7 +5860,7 @@
 		<format>
 		<puid type="fmt">684</puid>
 		<name>Vectorworks 2015</name>
-		<summary>Full entry added.</summary>
+		<summary>Full entry added. Submitted by Pratt Institute School of Information and Library Science</summary>
 		</format>
 		<format>
 		<puid type="fmt">685</puid>
@@ -5316,7 +5870,7 @@
 		<format>
 		<puid type="fmt">686</puid>
 		<name>Vectorworks 2010</name>
-		<summary>Full entry added.</summary>
+		<summary>Full entry added. Submitted by Pratt Institute School of Information and Library Science</summary>
 		</format>
 	</release_outline>
 	<release_outline name="Updated Records">
