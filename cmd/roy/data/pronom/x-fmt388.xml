@@ -261,6 +261,20 @@
         <RelatedFormatVersion>1.4</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1867</RelatedFormatID>
+        <RelatedFormatName>Phase One IIQ Raw Image</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1868</RelatedFormatID>
+        <RelatedFormatName>Hasselblad 3FR Raw Image</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>609</RelatedFormatID>
         <RelatedFormatName>Tagged Image File Format</RelatedFormatName>

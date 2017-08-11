@@ -9,7 +9,7 @@
       <FormatAliases>GML</FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Text (Mark-up)</FormatTypes>
+      <FormatTypes>GIS, Text (Mark-up)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
       <FormatDescription>The Geography Markup Language (GML) is the XML grammar defined by the Open Geospatial Consortium (OGC) to express geographical features. GML serves as a modeling language for geographic systems as well as an open interchange format for geographic transactions on the Internet.
@@ -72,10 +72,22 @@ Full specifications can be found at http://www.opengeospatial.org/standards/gml<
         </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1852</RelatedFormatID>
+        <RelatedFormatName>Geography Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>3.2</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>638</RelatedFormatID>
         <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
         <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>1852</RelatedFormatID>
+        <RelatedFormatName>Geography Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>3.2</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>

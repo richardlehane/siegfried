@@ -270,6 +270,13 @@
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>917</RelatedFormatID>
+        <RelatedFormatName>Kodak Digital Camera Raw Image File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>927</RelatedFormatID>
         <RelatedFormatName>Nikon Digital SLR Camera Raw Image File</RelatedFormatName>
         <RelatedFormatVersion>
@@ -311,6 +318,27 @@
         <RelatedFormatID>1529</RelatedFormatID>
         <RelatedFormatName>Digital Negative Format (DNG)</RelatedFormatName>
         <RelatedFormatVersion>1.4</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1867</RelatedFormatID>
+        <RelatedFormatName>Phase One IIQ Raw Image</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1868</RelatedFormatID>
+        <RelatedFormatName>Hasselblad 3FR Raw Image</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1870</RelatedFormatID>
+        <RelatedFormatName>Leaf Mosaic Raw Image</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Is supertype of</RelationshipType>

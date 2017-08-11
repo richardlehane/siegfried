@@ -43,6 +43,16 @@
         <Signature>h5</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2077</ExternalSignatureID>
+        <Signature>hdf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2078</ExternalSignatureID>
+        <Signature>hdf5</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
       <InternalSignature>
         <SignatureID>1172</SignatureID>
         <SignatureName>HDF5 version 0</SignatureName>
@@ -61,6 +71,12 @@
           <ByteSequenceValue>894844460D0A1A0A00</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1875</RelatedFormatID>
+        <RelatedFormatName>Silo</RelatedFormatName>
+        <RelatedFormatVersion>HDF5 Variant</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

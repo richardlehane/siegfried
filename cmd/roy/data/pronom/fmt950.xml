@@ -49,11 +49,11 @@
       <InternalSignature>
         <SignatureID>1299</SignatureID>
         <SignatureName>MIME Email</SignatureName>
-        <SignatureNote>MIME-Version: 1.0 or Mime-Version: 1.0
+        <SignatureNote>MIME-(V|v)ersion: 1.0 or Mime-(V|v)ersion: 1.0
 To: 
 From: 
 Date: 
-Content-Type:</SignatureNote>
+Content-(T|t)ype:</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1570</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -65,7 +65,7 @@ Content-Type:</SignatureNote>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>4D(494D45|696D65)2D56657273696F6E3A20312E30</ByteSequenceValue>
+          <ByteSequenceValue>4D(494D45|696D65)2D(56|76)657273696F6E3A20312E30</ByteSequenceValue>
         </ByteSequence>
         <ByteSequence>
           <ByteSequenceID>1571</ByteSequenceID>

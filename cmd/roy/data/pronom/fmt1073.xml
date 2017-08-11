@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1880</FormatID>
+      <FormatName>Google Document Link File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Google document link files are text based files written in the format of JSON (JavaScript Object Notation). They 
+
+provide a URL link to the Google document held in Google Drive.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>19 Jul 2017</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>19 Jul 2017</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1073</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>141</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Google</OrganisationName>
+        <DeveloperCompoundName>Google</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>141</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Google</OrganisationName>
+        <SupportCompoundName>Google</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2068</ExternalSignatureID>
+        <Signature>gslides</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2069</ExternalSignatureID>
+        <Signature>gdoc</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2070</ExternalSignatureID>
+        <Signature>gsheet</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2071</ExternalSignatureID>
+        <Signature>gdraw</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2072</ExternalSignatureID>
+        <Signature>gmap</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2073</ExternalSignatureID>
+        <Signature>gsite</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2074</ExternalSignatureID>
+        <Signature>gform</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1451</SignatureID>
+        <SignatureName>Google Document Link File</SignatureName>
+        <SignatureNote>{"url": "https://docs.google.com/open{52}doc_id{1-128}email{1-128}resource_id</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1709</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>
+          </Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>7B2275726C223A202268747470733A2F2F646F63732E676F6F676C652E636F6D2F6F70656E{1-64}646F635F6964{1-128}656D61696C{1-128}7265736F757263655F6964</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

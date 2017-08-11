@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1889</FormatID>
+      <FormatName>ASP Control Directive File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Active Server Pages (ASP) is a Microsoft server-side script engine for dynamically generated web pages. The Control Directive file defines user control specific attributes that are used by the ASP.NET page parser and compiler.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>225</ProvenanceSourceID>
+      <ProvenanceName>National Library of Scotland / National Library of Scotland</ProvenanceName>
+      <ProvenanceSourceDate>24 Jul 2017</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>24 Jul 2017</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1081</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>93</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <DeveloperCompoundName>Microsoft Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>93</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <SupportCompoundName>Microsoft Corporation</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2089</ExternalSignatureID>
+        <Signature>ascx</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1462</SignatureID>
+        <SignatureName>ASP Control Directive</SignatureName>
+        <SignatureNote>BOF: &lt;%@ Control (AutoEventWireup|ClassName|CodeBehind|CodeFile|CodeFileBaseClass|CompilationMode|CompilerOptions|Debug|Description|EnableTheming|EnableViewState|Explicit|Inherits|Language|LinePragmas|Src|Strict|TargetSchema|WarningLevel)=
+https://msdn.microsoft.com/en-us/library/d19c0t4b(v=vs.85).aspx</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1723</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>128</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C254020436F6E74726F6C20(4175746F4576656E74576972657570|436C6173734E616D65|436F6465426568696E64|436F646546696C65|436F646546696C6542617365436C617373|436F6D70696C6174696F6E4D6F6465|436F6D70696C65724F7074696F6E73|4465627567|4465736372697074696F6E|456E61626C655468656D696E67|456E61626C65566965775374617465|4578706C69636974|496E686572697473|4C616E6775616765|4C696E65507261676D6173|537263|537472696374|546172676574536368656D61|5761726E696E674C6576656C)3D</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

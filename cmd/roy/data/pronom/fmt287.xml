@@ -70,6 +70,12 @@
           <ByteSequenceValue>894844460D0A1A0A02</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1875</RelatedFormatID>
+        <RelatedFormatName>Silo</RelatedFormatName>
+        <RelatedFormatVersion>HDF5 Variant</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

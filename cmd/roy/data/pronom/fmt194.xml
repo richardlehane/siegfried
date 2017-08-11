@@ -3,8 +3,8 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>919</FormatID>
-      <FormatName>FileMaker Pro Ver. 7+ Database Document</FormatName>
-      <FormatVersion>7</FormatVersion>
+      <FormatName>FileMaker Pro Database</FormatName>
+      <FormatVersion>7+</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -12,7 +12,7 @@
       <FormatTypes>Database</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>FileMaker Pro is a cross-platform relational database application from FileMaker Inc.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -44,7 +44,7 @@
       <InternalSignature>
         <SignatureID>690</SignatureID>
         <SignatureName>FP7</SignatureName>
-        <SignatureNote>Looking for this 'ÀHBAM7' at an offset of 14 and then this 'HBAM2101OCT99Á.H.Pro 7.0ÀÀ' at a 525 offset.</SignatureNote>
+        <SignatureNote>Looking for 'ÀHBAM7' at an offset of 14 and then  'HBAM2101OCT99Á.H.Pro 7.0ÀÀ' at a 525 offset.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>855</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>

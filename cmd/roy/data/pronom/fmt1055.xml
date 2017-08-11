@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1860</FormatID>
+      <FormatName>M2TS</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Video</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>M2TS is the video stream packet format used on Blu-ray discs. M2TS is similar to fmt/585 - MPEG-2 Transport Stream, but instead features 192 byte packets, with a 4 byte TP_extra_header preceeding each 188 byte transport packet. Filenames usually take the form 'xxxxx.mts' or xxxxx.m2ts' where xxxxx represents a numeric value, beginning with 00000 and incrementing by 1 for each stream.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>225</ProvenanceSourceID>
+      <ProvenanceName>National Library of Scotland / National Library of Scotland</ProvenanceName>
+      <ProvenanceSourceDate>10 Jul 2017</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>10 Jul 2017</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1055</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>228</DeveloperID>
+        <DeveloperName>Sony</DeveloperName>
+        <OrganisationName>Sony</OrganisationName>
+        <DeveloperCompoundName>Sony / Sony</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>228</SupportID>
+        <SupportName>Sony</SupportName>
+        <OrganisationName>Sony</OrganisationName>
+        <SupportCompoundName>Sony / Sony</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2050</ExternalSignatureID>
+        <Signature>mts</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2051</ExternalSignatureID>
+        <Signature>m2ts</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1421</SignatureID>
+        <SignatureName>M2TS</SignatureName>
+        <SignatureNote>BOF: offset 4, 0x47 sync byte appearing every 192 bytes from hereon. https://www.google.ch/patents/US7106946</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1685</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>4</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>47{191}47{191}47{191}47{191}47{191}47{191}47{191}47</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

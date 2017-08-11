@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1850</FormatID>
+      <FormatName>Q&amp;A Word Processor Document</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Word Processor</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Q&amp;A was a database and word processing software program for IBM PC-compatible computers published by Symantec and partners from 1985 to 1998. Due to their age, Q&amp;A files may lack an extension.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>11 Apr 2017</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>11 Apr 2017</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1045</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>72</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Symantec Corporation</OrganisationName>
+        <DeveloperCompoundName>Symantec Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>72</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Symantec Corporation</OrganisationName>
+        <SupportCompoundName>Symantec Corporation</SupportCompoundName>
+      </Support>
+      <InternalSignature>
+        <SignatureID>1404</SignatureID>
+        <SignatureName>Q&amp;A Write Word Processor (WP)</SignatureName>
+        <SignatureNote>BOF: TBWP or TBTX, followed by null. TB stands for TouchBase, Symantec's original internal name for the product. WP = Word Processor including header/footer. TX = Text only.
+Format is described here:
+https://books.google.co.uk/books?id=YfkUKcyI7KIC&amp;pg=PT439</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1675</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>5442575000</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1405</SignatureID>
+        <SignatureName>Q&amp;A Write Word Processor (TX)</SignatureName>
+        <SignatureNote>BOF: TBWP or TBTX, followed by null. TB stands for TouchBase, Symantec's original internal name for the product. WP = Word Processor including header/footer. TX = Text only.
+Format is described here:
+https://books.google.co.uk/books?id=YfkUKcyI7KIC&amp;pg=PT439</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1676</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>5442545800</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

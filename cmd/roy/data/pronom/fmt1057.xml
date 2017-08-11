@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1862</FormatID>
+      <FormatName>SNAP Archive Data File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Dataset</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Snap Survey provides a selection of software which allows users to design surveys. The SNAP Survey archive file is an compressed version of the SNAP Meta Data and if one is present a SNAP Raw Data file. If it is a survey with email invitations, and responses, it also compresses system files about the current state of the mailing.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>11 Jul 2017</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>11 Jul 2017</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1057</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>226</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Snap Survey Enterprise</OrganisationName>
+        <DeveloperCompoundName>Snap Survey Enterprise</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>226</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Snap Survey Enterprise</OrganisationName>
+        <SupportCompoundName>Snap Survey Enterprise</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2053</ExternalSignatureID>
+        <Signature>adf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1425</SignatureID>
+        <SignatureName>SNAP Archive data file</SignatureName>
+        <SignatureNote>S.u.r.v.e.y{0-64}.a.r.c.h.i.v.e. .f.i.l.e.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1687</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>
+          </Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>530075007200760065007900{0-64}0061007200630068006900760065002000660069006C006500</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

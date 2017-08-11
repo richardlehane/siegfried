@@ -139,6 +139,41 @@ Version 3 includes graph creation.</ProvenanceDescription>
           <ByteSequenceValue>252150532D41646F62652D332E30{16-512}2525446F63756D656E74537570706C6965645265736F75726365733A{1-512}25252B2070726F637365742041646F62655F496C6C7573747261746F72(5F414933|415F414933)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1433</SignatureID>
+        <SignatureName>Adobe Illustrator 3.x v5</SignatureName>
+        <SignatureNote>The first line of the file is a unique comment that declares the file contains a Postscript program and identifies the version of the Document Structuring Conventions to which the document conforms as 2.0 or 3.0. The prolog did not contain %%DocumentNeededResources:  but did contain %%DocumentSuppliedResources: and the continuation %%+ procset Adobe_Illustrator_AI3 or %%+procset Adobe_IllustratorA_AI3</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1693</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>
+          </Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>C5D0D3C6</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>1711</ByteSequenceID>
+          <PositionType>Variable</PositionType>
+          <Offset>
+          </Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>252150532D41646F62652D332E30{16-512}2525446F63756D656E74537570706C6965645265736F75726365733A{1-512}25252B2070726F637365742041646F62655F496C6C7573747261746F72(5F414933|415F414933)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1201</RelatedFormatID>

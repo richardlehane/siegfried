@@ -73,7 +73,7 @@ Version 6.0 includes; gradients, eye dropper, paint bucket</ProvenanceDescriptio
           <ByteSequenceID>1113</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>0</MaxOffset>
+          <MaxOffset>64</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

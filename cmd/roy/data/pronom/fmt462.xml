@@ -37,12 +37,6 @@
         <Identifier>fmt/462</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
-      <ExternalSignature>
-        <ExternalSignatureID>1268</ExternalSignatureID>
-        <Signature>
-        </Signature>
-        <SignatureType>File extension</SignatureType>
-      </ExternalSignature>
       <InternalSignature>
         <SignatureID>718</SignatureID>
         <SignatureName>MS DOS Compression (SZDD)</SignatureName>

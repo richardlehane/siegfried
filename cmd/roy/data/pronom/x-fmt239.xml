@@ -56,7 +56,7 @@
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>Little-endian</Endianness>
-          <ByteSequenceValue>000100005374616e64617264204a65742044420000000000</ByteSequenceValue>
+          <ByteSequenceValue>000100005374616E64617264204A65742044420000000000</ByteSequenceValue>
         </ByteSequence>
         <ByteSequence>
           <ByteSequenceID>349</ByteSequenceID>
@@ -70,7 +70,7 @@
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>Little-endian</Endianness>
-          <ByteSequenceValue>41636365737356657273696f6e{0-1024}30372e[30:39][30:39]</ByteSequenceValue>
+          <ByteSequenceValue>41636365737356657273696F6E{0-1024}30372E[30:39][30:39]</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

@@ -73,7 +73,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>1c0100000200041c0114000200141c0116000200091c011e000a4672656548616e6431311C01280008{6}30301C014600083230</ByteSequenceValue>
+          <ByteSequenceValue>1C0100000200041C0114000200141C0116000200091C011E000A4672656548616E6431311C01280008{6}30301C014600083230</ByteSequenceValue>
         </ByteSequence>
         <ByteSequence>
           <ByteSequenceID>776</ByteSequenceID>

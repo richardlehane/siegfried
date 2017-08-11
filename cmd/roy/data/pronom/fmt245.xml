@@ -38,12 +38,6 @@
         <Identifier>fmt/245</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
-      <ExternalSignature>
-        <ExternalSignatureID>964</ExternalSignatureID>
-        <Signature>
-        </Signature>
-        <SignatureType>File extension</SignatureType>
-      </ExternalSignature>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>
