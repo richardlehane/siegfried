@@ -34,7 +34,9 @@
     "fmt/844 (Advanced Forensic Format)",
     "fmt/850 (NuFile Exchange Archival Library)",
     "fmt/866 (Apple Safari Webarchive)",
-    "fmt/887 (SafeGuard Encrypted Virtual Disk)"
+    "fmt/887 (SafeGuard Encrypted Virtual Disk)",
+    "fmt/1070 (Preferred Executable Format)",
+    "fmt/1071 (Apple Disk Image)"
   ],
   "audio": [
     "x-fmt/135 (Audio Interchange File Format 1.3)",
@@ -130,7 +132,8 @@
     "fmt/975 (Jamcracker Tracker Module)",
     "fmt/1007 (Digital Speech Standard)",
     "fmt/1008 (DSS Pro)",
-    "fmt/1038 (Redcode RAW (R3D) Media File 2)"
+    "fmt/1038 (Redcode RAW (R3D) Media File 2)",
+    "fmt/1053 (Adobe Audio Waveform)"
   ],
   "database": [
     "x-fmt/6 (FoxPro Database 2.0)",
@@ -172,7 +175,7 @@
     "fmt/169 (Microsoft Works Database for DOS 1.05)",
     "fmt/170 (Microsoft Works Database for DOS 1.12)",
     "fmt/171 (Microsoft Works Database for DOS 2.0)",
-    "fmt/194 (FileMaker Pro Ver. 7+ Database Document 7)",
+    "fmt/194 (FileMaker Pro Database 7+)",
     "fmt/219 (Microsoft Works Database for Windows 2.0)",
     "fmt/222 (Microsoft Works Database for Windows 2.0a)",
     "fmt/223 (Microsoft Works Database for Windows 3.0)",
@@ -226,7 +229,14 @@
     "fmt/848 (ClarisWorks Database 2-3)",
     "fmt/868 (MySQL Table Definition Format)",
     "fmt/990 (ESRI File Geodatabase)",
-    "fmt/995 (SIARD (Software-Independent Archiving of Relational Databases) 2.0)"
+    "fmt/995 (SIARD (Software-Independent Archiving of Relational Databases) 2.0)",
+    "fmt/1059 (FileMaker Pro Database 2)",
+    "fmt/1064 (Portable Database 1)",
+    "fmt/1065 (Portable Database 2)",
+    "fmt/1066 (Portable Database 3)",
+    "fmt/1072 (FileMaker Pro Database 1)",
+    "fmt/1078 (Microsoft Program Database 2.00)",
+    "fmt/1079 (Microsoft Program Database 7.00)"
   ],
   "dataset": [
     "x-fmt/13 (Tab-separated values)",
@@ -304,7 +314,13 @@
     "fmt/1033 (Stata Data (DTA) Format 113)",
     "fmt/1035 (Stata Data (DTA) Format 115)",
     "fmt/1036 (Stata Data (DTA) Format 117)",
-    "fmt/1037 (Stata Data (DTA) Format 118)"
+    "fmt/1037 (Stata Data (DTA) Format 118)",
+    "fmt/1041 (HDF 1-4)",
+    "fmt/1052 (BKNAS Seismic Data Format 1.0)",
+    "fmt/1056 (SNAP Main Data File)",
+    "fmt/1057 (SNAP Archive Data File)",
+    "fmt/1058 (SNAP Processed Data File)",
+    "fmt/1068 (Silo HDF5 Variant)"
   ],
   "email": [
     "x-fmt/430 (Microsoft Outlook Email Message 97-2003)",
@@ -315,6 +331,7 @@
   "gis": [
     "x-fmt/225 (ESRI MapInfo Data File)",
     "x-fmt/226 (ESRI Arc/Info Export File)",
+    "x-fmt/227 (Geography Markup Language)",
     "x-fmt/231 (ESRI MapInfo Export File)",
     "x-fmt/235 (ESRI Arc/View ShapeFile)",
     "x-fmt/314 (Digital Terrain Elevation Data)",
@@ -332,7 +349,8 @@
     "fmt/372 (Earth Resource Satellite image header format)",
     "fmt/724 (Keyhole Markup Language (Container))",
     "fmt/915 (Mapsforge Binary Map File Format)",
-    "fmt/916 (ESRI ArcMap Document)"
+    "fmt/916 (ESRI ArcMap Document)",
+    "fmt/1047 (Geography Markup Language 3.2)"
   ],
   "imageRaster": [
     "x-fmt/25 (OS/2 Bitmap 1.0)",
@@ -427,6 +445,7 @@
     "fmt/156 (Tagged Image File Format for Internet Fax (TIFF-FX))",
     "x-fmt/418 (Icon file format)",
     "x-fmt/424 (Deluxe Paint bitmap)",
+    "fmt/192 (Kodak Digital Camera Raw Image File)",
     "fmt/195 (ERDAS IMAGINE Gray-scale Bitmap Image)",
     "fmt/202 (Nikon Digital SLR Camera Raw Image File)",
     "fmt/211 (Kodak Photo CD Image)",
@@ -509,7 +528,11 @@
     "fmt/1004 (Nearly Raw Raster Data 3)",
     "fmt/1005 (Nearly Raw Raster Data 4)",
     "fmt/1006 (Nearly Raw Raster Data 5)",
-    "fmt/1040 (DirectDraw Surface)"
+    "fmt/1040 (DirectDraw Surface)",
+    "fmt/1060 (Phase One Raw Image)",
+    "fmt/1061 (Phase One IIQ Raw Image)",
+    "fmt/1062 (Hasselblad 3FR Raw Image)",
+    "fmt/1063 (Leaf Mosaic Raw Image)"
   ],
   "imageVector": [
     "x-fmt/20 (Adobe Illustrator 1.0 / 1.1)",
@@ -683,7 +706,9 @@
     "fmt/928 (Microsoft Visio Macro-Enabled Stencil 2013)",
     "fmt/929 (Microsoft Visio Macro-Enabled Template 2013)",
     "fmt/933 (Simple Vector Format 1)",
-    "fmt/934 (Simple Vector Format 2)"
+    "fmt/934 (Simple Vector Format 2)",
+    "fmt/1042 (WordPerfect Graphics Metafile 2.0)",
+    "fmt/1044 (AutoShade Rendering Slide)"
   ],
   "model": [
     "x-fmt/19 (3D Studio)",
@@ -702,6 +727,7 @@
     "x-fmt/436 (CATIA Model 4)",
     "x-fmt/438 (CATIA 5)",
     "x-fmt/439 (CATIA Model (Part Description) 5)",
+    "x-fmt/451 (SketchUp Document)",
     "fmt/415 (Cinema 4D 4.x)",
     "fmt/450 (VectorWorks 12.5)",
     "fmt/451 (VectorWorks 2009)",
@@ -743,7 +769,10 @@
     "fmt/988 (ESRI ArcScene Document)",
     "fmt/989 (ESRI ArcGlobe Document)",
     "fmt/1009 (FBX (Filmbox) Binary)",
-    "fmt/1010 (FBX (Filmbox) Text)"
+    "fmt/1010 (FBX (Filmbox) Text)",
+    "fmt/1046 (Draco File Format)",
+    "fmt/1049 (QuickDraw 3D Metafile (ASCII))",
+    "fmt/1050 (QuickDraw 3D Metafile (Binary) 1)"
   ],
   "pageDescription": [
     "fmt/122 (Encapsulated PostScript File Format 1.2)",
@@ -969,7 +998,9 @@
     "fmt/982 (iMovieProj File Format)",
     "fmt/983 (NIB File Format)",
     "fmt/986 (Extensible Metadata Platform Format)",
-    "fmt/1039 (Redcode Metadata (RMD) File)"
+    "fmt/1039 (Redcode Metadata (RMD) File)",
+    "fmt/1047 (Geography Markup Language 3.2)",
+    "fmt/1048 (OGR GFS File)"
   ],
   "textStructured": [
     "x-fmt/41 (Data Interchange Format)",
@@ -1047,7 +1078,12 @@
     "fmt/1011 (INTERLIS Transfer File 2.2)",
     "fmt/1012 (INTERLIS Model File 2.2)",
     "fmt/1013 (INTERLIS Transfer File 1)",
-    "fmt/1014 (INTERLIS Model File 1)"
+    "fmt/1014 (INTERLIS Model File 1)",
+    "fmt/1069 (Cue Sheet)",
+    "fmt/1073 (Google Document Link File)",
+    "fmt/1080 (ASP Application Directive File)",
+    "fmt/1081 (ASP Control Directive File)",
+    "fmt/1082 (ASP WebService Directive File)"
   ],
   "textUnstructured": [
     "x-fmt/14 (Macintosh Text File)",
@@ -1092,7 +1128,8 @@
     "fmt/944 (Ogg Multimedia Container)",
     "fmt/945 (Ogg Theora Video)",
     "fmt/971 (Microsoft Windows Movie Maker File)",
-    "fmt/1038 (Redcode RAW (R3D) Media File 2)"
+    "fmt/1038 (Redcode RAW (R3D) Media File 2)",
+    "fmt/1055 (M2TS)"
   ],
   "wordProcessor": [
     "x-fmt/1 (Microsoft Word for Macintosh Document 3.0)",
@@ -1227,6 +1264,8 @@
     "fmt/892 (Compound WordPerfect for Windows Document 6 onwards)",
     "fmt/949 (WordPerfect 4.0/4.1/4.2)",
     "fmt/964 (Final Draft Document 5-7)",
-    "fmt/969 (Rich Text Format 0)"
+    "fmt/969 (Rich Text Format 0)",
+    "fmt/1045 (Q\u0026A Word Processor Document)",
+    "fmt/1051 (Windows Journal Format)"
   ]
 }
