@@ -49,7 +49,7 @@ var siegfried = struct {
 	distance:        8192,
 	rng:             4096,
 	choices:         128,
-	updateURL:       "https://www.itforarchivists.com/siegfried/update",
+	updateURL:       "https://www.itforarchivists.com/siegfried/update", // "http://localhost:8081/siegfried/update",
 	updateTimeout:   30 * time.Second,
 	updateTransport: &http.Transport{Proxy: http.ProxyFromEnvironment},
 	fpr:             "/tmp/siegfried",

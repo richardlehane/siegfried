@@ -286,12 +286,14 @@ func main() {
 	if *home != config.Home() {
 		config.SetHome(*home)
 	}
+	var usig string
 	if *sig != config.SignatureBase() {
 		config.SetSignature(*sig)
+		usig = *sig
 	}
 	// handle -update
 	if *update {
-		msg, err := updateSigs(*sig, flag.Args())
+		msg, err := updateSigs(usig, flag.Args())
 		if err != nil {
 			log.Fatalf("[FATAL] failed to update signature file, %v", err)
 		}

@@ -62,18 +62,21 @@ func current(buf []byte, utime string) bool {
 	return !ut.After(tt)
 }
 
-func same(buf []byte, uhash string) bool {
+func same(buf []byte, usize int, uhash string) bool {
+	if len(buf) != usize {
+		return false
+	}
 	h := sha256.New()
 	h.Write(buf)
 	return hex.EncodeToString(h.Sum(nil)) == uhash
 }
 
-func uptodate(utime, uhash string) bool {
+func uptodate(utime, uhash string, usize int) bool {
 	fbuf, err := ioutil.ReadFile(config.Signature())
 	if err != nil {
 		return false
 	}
-	if current(fbuf, utime) && same(fbuf, uhash) {
+	if current(fbuf, utime) && same(fbuf, usize, uhash) {
 		return true
 	}
 	return false
@@ -86,7 +89,7 @@ func location(base, sig string, args []string) string {
 		}
 		return base + "/" + args[0]
 	}
-	if len(sig) > 0 && sig != config.SignatureBase() {
+	if len(sig) > 0 {
 		return base + "/" + strings.TrimSuffix(filepath.Base(sig), filepath.Ext(sig))
 	}
 	return base
@@ -110,7 +113,7 @@ func updateSigs(sig string, args []string) (string, error) {
 		u.Version == [3]int{0, 0, 0} || u.Created == "" || u.Size == 0 || u.Path == "" { // or if the unmarshalling hasn't worked and we have blank values
 		return "Your version of siegfried is out of date; please install latest from http://www.itforarchivists.com/siegfried before continuing.", nil
 	}
-	if uptodate("test_time", "test hash") {
+	if uptodate(u.Created, u.Hash, u.Size) {
 		return "You are already up to date!", nil
 	}
 	// this hairy bit of golang exception handling is thanks to Ross! :)
@@ -129,11 +132,8 @@ func updateSigs(sig string, args []string) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("Siegfried: error retrieving %s.\nThis may be a network or firewall issue. See https://github.com/richardlehane/siegfried/wiki/Getting-started for manual instructions.\nSystem error: %v", config.SignatureBase(), err)
 	}
-	if len(response) != u.Size {
-		return "", fmt.Errorf("Siegfried: error retrieving %s; expecting %d bytes, got %d bytes", config.SignatureBase(), u.Size, len(response))
-	}
-	if !same(response, u.Hash) {
-		return "", fmt.Errorf("Siegfried: error retrieving %s; SHA256 hash of response doesn't match %s", "test_signature", u.Hash)
+	if !same(response, u.Size, u.Hash) {
+		return "", fmt.Errorf("Siegfried: error retrieving %s; SHA256 hash of response doesn't match %s", config.SignatureBase(), u.Hash)
 	}
 	err = ioutil.WriteFile(config.Signature(), response, os.ModePerm)
 	if err != nil {
