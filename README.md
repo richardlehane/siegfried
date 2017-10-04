@@ -8,7 +8,7 @@
 
 ### Version
 
-1.7.5
+1.7.6
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -92,6 +92,18 @@ Or, for the most recent updates, you can install from this fork:
     makepkg -si
 
 ## Changes
+# Change Log
+### v1.7.6 (2017-19-04)
+### Added
+- continue on error flag (-coe) can now be used to continue scans despite fatal file errors that would normally cause scanning to halt. This may be useful e.g. for big directory scans over unreliable networks. Usage: `sf -coe DIR`.
+
+### Changed
+- update PRONOM signatures to v92
+
+### Fixed
+- file scanning is now restricted to regular files (i.e. not symlinks, sockets, devices etc.). Reported by [Henk Vanstappen](https://github.com/richardlehane/siegfried/issues/107).
+- windows longpath fix now works for paths that appear short
+
 ### v1.7.5 (2017-08-12)
 ### Added
 - `sf -update` flag can now be used to download/update non-PRONOM signatures. Options are "loc", "tika", "freedesktop", "pronom-tika-loc", "deluxe" and "archivematica". To update a non-PRONOM signature, include the signature name as an argument after the flags e.g. `sf -update freedesktop`. This command will overwrite 'default.sig' (the default signature file that sf loads). You can preserve your default signature file by providing an alternative `-sig` target e.g. `sf -sig notdefault.sig -update loc`. If you use one of the signature options as a filename (with or without a .sig extension), you can omit the signature argument i.e. `sf -update -sig loc.sig` is equivalent to `sf -sig loc.sig -update loc`. Feature requested by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/103).
