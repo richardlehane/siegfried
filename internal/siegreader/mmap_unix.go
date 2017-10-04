@@ -2,7 +2,8 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// +build linux,!appengine darwin,!appengine dragonfly freebsd netbsd openbsd
+// +build linux darwin dragonfly freebsd netbsd openbsd
+// +build !appengine
 
 package siegreader
 
