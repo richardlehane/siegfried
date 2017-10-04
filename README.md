@@ -92,7 +92,6 @@ Or, for the most recent updates, you can install from this fork:
     makepkg -si
 
 ## Changes
-# Change Log
 ### v1.7.6 (2017-19-04)
 ### Added
 - continue on error flag (-coe) can now be used to continue scans despite fatal file errors that would normally cause scanning to halt. This may be useful e.g. for big directory scans over unreliable networks. Usage: `sf -coe DIR`.
