@@ -15,7 +15,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -24,10 +23,7 @@ import (
 
 // longpath code derived from https://github.com/docker/docker/tree/master/pkg/longpath
 // prefix is the longpath prefix for Windows file paths.
-const (
-	prefix = `\\?\`
-	lplen  = 240
-)
+const prefix = `\\?\`
 
 func longpath(path string) string {
 	if !strings.HasPrefix(path, prefix) {
@@ -58,7 +54,7 @@ func shortpath(long, short string) string {
 }
 
 func retryStat(path string, err error) (os.FileInfo, error) {
-	if len(path) < lplen || strings.HasPrefix(path, prefix) { // already a long path - no point retrying
+	if strings.HasPrefix(path, prefix) { // already a long path - no point retrying
 		return nil, err
 	}
 	info, e := os.Lstat(longpath(path)) // filepath.Walk uses Lstat not Stat
@@ -69,7 +65,7 @@ func retryStat(path string, err error) (os.FileInfo, error) {
 }
 
 func retryOpen(path string, err error) (*os.File, error) {
-	if len(path) < lplen || strings.HasPrefix(path, prefix) { // already a long path - no point retrying
+	if strings.HasPrefix(path, prefix) { // already a long path - no point retrying
 		return nil, err
 	}
 	file, e := os.Open(longpath(path))
@@ -79,7 +75,7 @@ func retryOpen(path string, err error) (*os.File, error) {
 	return file, nil
 }
 
-func identify(ctxts chan *context, root, orig string, norecurse, droid bool, gf getFn) error {
+func identify(ctxts chan *context, root, orig string, coerr, norecurse, droid bool, gf getFn) error {
 	walkFunc := func(path string, info os.FileInfo, err error) error {
 		var retry bool
 		var lp, sp string
@@ -89,7 +85,11 @@ func identify(ctxts chan *context, root, orig string, norecurse, droid bool, gf 
 		if err != nil {
 			info, err = retryStat(path, err) // retry stat in case is a windows long path error
 			if err != nil {
-				return fmt.Errorf("walking %s; got %v", path, err)
+				if coerr {
+					printFile(ctxts, gf(path, "", "", 0), WalkError{path, err})
+					return nil
+				}
+				return WalkError{path, err}
 			}
 			lp, sp = longpath(path), path
 			retry = true
@@ -99,14 +99,15 @@ func identify(ctxts chan *context, root, orig string, norecurse, droid bool, gf 
 				return filepath.SkipDir
 			}
 			if retry { // if a dir long path, restart the recursion with a long path as the new root
-				return identify(ctxts, lp, sp, norecurse, droid, gf)
+				return identify(ctxts, lp, sp, coerr, norecurse, droid, gf)
 			}
 			if droid {
-				dctx := gf(shortpath(path, orig), "", info.ModTime().Format(time.RFC3339), -1)
-				dctx.res <- results{nil, nil, nil}
-				dctx.wg.Add(1)
-				ctxts <- dctx
+				printFile(ctxts, gf(shortpath(path, orig), "", info.ModTime().Format(time.RFC3339), -1), nil)
 			}
+			return nil
+		}
+		if !info.Mode().IsRegular() {
+			printFile(ctxts, gf(path, "", info.ModTime().Format(time.RFC3339), info.Size()), ModeError(info.Mode()))
 			return nil
 		}
 		identifyFile(gf(shortpath(path, orig), "", info.ModTime().Format(time.RFC3339), info.Size()), ctxts, gf)

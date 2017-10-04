@@ -47,6 +47,7 @@ var (
 	version   = flag.Bool("version", false, "display version information")
 	logf      = flag.String("log", "error", "log errors, warnings, debug or slow output, knowns or unknowns to stderr or stdout e.g. -log error,warn,unknown,stdout")
 	nr        = flag.Bool("nr", false, "prevent automatic directory recursion")
+	coe       = flag.Bool("coe", false, "continue on fatal file errors (this may result in directories being skipped during walks)")
 	csvo      = flag.Bool("csv", false, "CSV output format")
 	jsono     = flag.Bool("json", false, "JSON output format")
 	droido    = flag.Bool("droid", false, "DROID CSV output format")
@@ -67,13 +68,32 @@ var (
 	ctxPool  *sync.Pool
 )
 
+type ModeError os.FileMode
+
+func (me ModeError) Error() string {
+	typ := "unknown"
+	switch {
+	case os.FileMode(me)&os.ModeDir == os.ModeDir:
+		typ = "directory"
+	case os.FileMode(me)&os.ModeSymlink == os.ModeSymlink:
+		typ = "symlink"
+	case os.FileMode(me)&os.ModeNamedPipe == os.ModeNamedPipe:
+		typ = "named pipe"
+	case os.FileMode(me)&os.ModeSocket == os.ModeSocket:
+		typ = "socket"
+	case os.FileMode(me)&os.ModeDevice == os.ModeDevice:
+		typ = "device"
+	}
+	return fmt.Sprintf("[FATAL] only regular files can be scanned, this file is of type %s", typ)
+}
+
 type WalkError struct {
 	path string
 	err  error
 }
 
 func (we WalkError) Error() string {
-	return fmt.Sprintf("walking %s; got %v", we.path, we.err)
+	return fmt.Sprintf("[FATAL] file access error for %s: %v", we.path, we.err)
 }
 
 func setCtxPool(s *siegfried.Siegfried, wg *sync.WaitGroup, w writer.Writer, d, z bool, h checksum.HashTyp) {
@@ -138,6 +158,13 @@ func printer(ctxts chan *context, lg *logger.Logger) {
 		ctx.wg.Done()
 		ctxPool.Put(ctx) // return the context to the pool
 	}
+}
+
+// convenience function for printing files we haven't ID'ed (e.g. dirs or errors)
+func printFile(ctxs chan *context, ctx *context, err error) {
+	ctx.res <- results{err, nil, nil}
+	ctx.wg.Add(1)
+	ctxs <- ctx
 }
 
 // identify() defined in longpath.go and longpath_windows.go
@@ -410,11 +437,13 @@ func main() {
 				if err != nil {
 					info, err = retryStat(scanner.Text(), err)
 				}
-				if err != nil || info.IsDir() {
-					ctx := getCtx(scanner.Text(), "", "", 0)
-					ctx.res <- results{fmt.Errorf("failed to identify %s (in scanning mode, inputs must all be files and not directories), got: %v", scanner.Text(), err), nil, nil}
-					ctx.wg.Add(1)
-					ctxts <- ctx
+				if err != nil || !info.Mode().IsRegular() {
+					if err == nil {
+						err = ModeError(info.Mode())
+					}
+					printFile(ctxts,
+						getCtx(scanner.Text(), "", "", 0),
+						fmt.Errorf("failed to identify %s: %v", scanner.Text(), err))
 					err = nil // don't log.Fatal this error, report it in the results
 				} else if *replay {
 					err = replayFile(scanner.Text(), ctxts, w)
@@ -434,7 +463,7 @@ func main() {
 			ctxts <- ctx
 			identifyRdr(os.Stdin, ctx, ctxts, getCtx)
 		} else {
-			err = identify(ctxts, v, "", *nr, d, getCtx)
+			err = identify(ctxts, v, "", *coe, *nr, d, getCtx)
 		}
 		if err != nil {
 			break

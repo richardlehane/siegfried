@@ -30,12 +30,16 @@ func retryStat(path string, err error) (os.FileInfo, error) {
 	return nil, err
 }
 
-func identify(ctxts chan *context, root, orig string, norecurse, droid bool, gf getFn) error {
+func identify(ctxts chan *context, root, orig string, coerr, norecurse, droid bool, gf getFn) error {
 	walkFunc := func(path string, info os.FileInfo, err error) error {
 		if *throttlef > 0 {
 			<-throttle.C
 		}
 		if err != nil {
+			if coerr {
+				printFile(ctxts, gf(path, "", "", 0), WalkError{path, err})
+				return nil
+			}
 			return WalkError{path, err}
 		}
 		if info.IsDir() {
@@ -43,11 +47,12 @@ func identify(ctxts chan *context, root, orig string, norecurse, droid bool, gf 
 				return filepath.SkipDir
 			}
 			if droid {
-				dctx := gf(path, "", info.ModTime().Format(time.RFC3339), -1)
-				dctx.res <- results{nil, nil, nil}
-				dctx.wg.Add(1)
-				ctxts <- dctx
+				printFile(ctxts, gf(path, "", info.ModTime().Format(time.RFC3339), -1), nil)
 			}
+			return nil
+		}
+		if !info.Mode().IsRegular() {
+			printFile(ctxts, gf(path, "", info.ModTime().Format(time.RFC3339), info.Size()), ModeError(info.Mode()))
 			return nil
 		}
 		identifyFile(gf(path, "", info.ModTime().Format(time.RFC3339), info.Size()), ctxts, gf)

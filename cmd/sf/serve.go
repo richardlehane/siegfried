@@ -49,10 +49,10 @@ func decodePath(s, b64 string) (string, error) {
 	return s[10:], nil
 }
 
-func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried, wg *sync.WaitGroup) (error, string, writer.Writer, bool, bool, checksum.HashTyp, *siegfried.Siegfried, getFn) {
+func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried, wg *sync.WaitGroup) (error, string, writer.Writer, bool, bool, bool, checksum.HashTyp, *siegfried.Siegfried, getFn) {
 	// json, csv, droid or yaml
-	paramsErr := func(field, expect string) (error, string, writer.Writer, bool, bool, checksum.HashTyp, *siegfried.Siegfried, getFn) {
-		return fmt.Errorf("bad request; in param %s got %s; valid values %s", field, r.FormValue(field), expect), "", nil, false, false, -1, nil, nil
+	paramsErr := func(field, expect string) (error, string, writer.Writer, bool, bool, bool, checksum.HashTyp, *siegfried.Siegfried, getFn) {
+		return fmt.Errorf("bad request; in param %s got %s; valid values %s", field, r.FormValue(field), expect), "", nil, false, false, false, -1, nil, nil
 	}
 	var (
 		mime string
@@ -121,6 +121,18 @@ func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried
 			paramsErr("nr", "true or false")
 		}
 	}
+	// continue on error
+	coerr := *coe
+	if v := r.FormValue("coe"); v != "" {
+		switch v {
+		case "true":
+			coerr = true
+		case "false":
+			coerr = false
+		default:
+			paramsErr("coe", "true or false")
+		}
+	}
 	// archive
 	z := *archive
 	if v := r.FormValue("z"); v != "" {
@@ -143,7 +155,7 @@ func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried
 	sf := s
 	if v := r.FormValue("sig"); v != "" {
 		if _, err := os.Stat(config.Local(v)); err != nil {
-			return fmt.Errorf("bad request; sig param should be path to a signature file (absolute or relative to home); got %v", err), "", nil, false, false, -1, nil, nil
+			return fmt.Errorf("bad request; sig param should be path to a signature file (absolute or relative to home); got %v", err), "", nil, false, false, false, -1, nil, nil
 		}
 		nsf, err := siegfried.Load(config.Local(v))
 		if err == nil {
@@ -156,12 +168,12 @@ func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried
 		c.s, c.wg, c.w, c.d, c.z, c.h = sf, wg, wr, d, z, checksum.MakeHash(ht)
 		return c
 	}
-	return nil, mime, wr, norec, d, ht, sf, gf
+	return nil, mime, wr, coerr, norec, d, ht, sf, gf
 }
 
 func handleIdentify(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried, ctxts chan *context) {
 	wg := &sync.WaitGroup{}
-	err, mime, wr, nr, d, ht, sf, gf := parseRequest(w, r, s, wg)
+	err, mime, wr, coerr, nrec, d, ht, sf, gf := parseRequest(w, r, s, wg)
 	if err != nil {
 		handleErr(w, http.StatusNotFound, err)
 		return
@@ -206,7 +218,7 @@ func handleIdentify(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfri
 		}
 		w.Header().Set("Content-Type", mime)
 		wr.Head(config.SignatureBase(), time.Now(), sf.C, config.Version(), sf.Identifiers(), sf.Fields(), ht.String())
-		err = identify(ctxts, path, "", nr, d, gf)
+		err = identify(ctxts, path, "", coerr, nrec, d, gf)
 		wg.Wait()
 		wr.Tail()
 		if err != nil {
@@ -237,6 +249,7 @@ const usage = `
 			<p>E.g. http://localhost:5138/identify/c%3A%2FUsers%2Frichardl%2FMy%20Documents%2Fhello%20world.docx?format=json</p>
 			<h3>Parameters</h3>
 			<p><i>base64</i> (optional) - use <a href="https://tools.ietf.org/html/rfc4648#section-5">URL-safe base64 encoding</a> for the file or folder name with base64=true.</p>
+			<p><i>coe</i> (optional) - continue directory scans even when fatal file access errors are encountered with coe=true.</p>
 			<p><i>nr</i> (optional) - stop sub-directory recursion when a directory path is given with nr=true.</p>
 			<p><i>format</i> (optional) - select the output format (csv, yaml, json, droid). Default is yaml. Alternatively, HTTP content negotiation can be used.</p>
 			<p><i>hash</i> (optional) - calculate file checksum (md5, sha1, sha256, sha512, crc)</p>
@@ -249,6 +262,7 @@ const usage = `
 			<h4>Parameters:</h4>
 			<form method="get" id="get_example">
 			  <p>Use base64 encoding (base64): <input type="radio" name="base64" value="true"> true <input type="radio" name="base64" value="false" checked> false</p>
+			 <p>Continue on error (coe): <input type="radio" name="coe" value="true"> true <input type="radio" name="nr" value="false" checked> false</p>
 			 <p>No directory recursion (nr): <input type="radio" name="nr" value="true"> true <input type="radio" name="nr" value="false" checked> false</p>
 			 <p>Format (format): <select name="format">
   				<option value="json">json</option>
