@@ -84,7 +84,7 @@ func (me ModeError) Error() string {
 	case os.FileMode(me)&os.ModeDevice == os.ModeDevice:
 		typ = "device"
 	}
-	return fmt.Sprintf("[FATAL] only regular files can be scanned, this file is of type %s", typ)
+	return fmt.Sprintf("file is of type %s; only regular files can be scanned", typ)
 }
 
 type WalkError struct {
