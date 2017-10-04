@@ -34,7 +34,7 @@
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
-        <Identifier>application/x-gzip</Identifier>
+        <Identifier>application/gzip</Identifier>
         <IdentifierType>MIME</IdentifierType>
       </FileFormatIdentifier>
       <FileFormatIdentifier>

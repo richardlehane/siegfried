@@ -60,7 +60,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>5374756666497421A136F7DC0AA2A29BDD4215F7DC0AA2A23399</ByteSequenceValue>
+          <ByteSequenceValue>5374756666497421</ByteSequenceValue>
         </ByteSequence>
         <ByteSequence>
           <ByteSequenceID>778</ByteSequenceID>

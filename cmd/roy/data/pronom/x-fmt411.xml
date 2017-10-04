@@ -34,7 +34,7 @@
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
-        <Identifier>application/octet-stream</Identifier>
+        <Identifier>application/vnd.microsoft.portable-executable</Identifier>
         <IdentifierType>MIME</IdentifierType>
       </FileFormatIdentifier>
       <FileFormatIdentifier>

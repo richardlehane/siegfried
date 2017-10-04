@@ -2,6 +2,254 @@
 <?xml-stylesheet type="text/xsl" href="release-note.xsl"?>
 <release_notes>
 <release_note>
+    <release_date>20th September 2017</release_date>
+    <signature_filename>DROID_SignatureFile_V92.xml</signature_filename> 
+    <release_outline name="New Records">
+	  <format>
+	   <puid type="fmt">1083</puid>
+	   <name>Hangul Word Processor Document 3</name>
+	   <summary>Full entry added. Requested by RM Soft Korea.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1084</puid>
+	   <name>Hangul Word Processor Document 5</name>
+	   <summary>Full entry added. Requested by RM Soft Korea.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1085</puid>
+	   <name>TRIM Context Reference File</name>
+	   <summary>Full entry added. Requested by Public Records Office Northern Ireland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1086</puid>
+	   <name>Monkey's Audio File</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1087</puid>
+	   <name>FAT Disk Image</name>
+	   <summary>Full entry added. Requested by National Library of Scotland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1088</puid>
+	   <name>Visual Basic (VB) File</name>
+	   <summary>Extension only entry added. Requested by National Library of Scotland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1089</puid>
+	   <name>VBScript (VBS) File</name>
+	   <summary>Extension only entry added. Requested by National Library of Scotland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1090</puid>
+	   <name>Exclude File</name>
+	   <summary>Extension only entry added. Requested by National Library of Scotland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1091</puid>
+	   <name>Scribus Document</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1092</puid>
+	   <name>Alias Pix Image File</name>
+	   <summary>Full entry added. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1093</puid>
+	   <name>Alias Scene Description Language</name>
+	   <summary>Full entry added. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1094</puid>
+	   <name>The Neuroimaging Informatics Technology Initiative File Format 2</name>
+	   <summary>Full entry added. Submitted by Bodleian Libraries, University of Oxford.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1095</puid>
+	   <name>PEA Archive Format</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1096</puid>
+	   <name>FreeArc Archive Format</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1097</puid>
+	   <name>ZPAQ Archive Format</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1098</puid>
+	   <name>XZ File Format</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1099</puid>
+	   <name>TCR eBook</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1100</puid>
+	   <name>yEnc Encoded File</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	 </release_outline>
+
+	 <release_outline name="Updated Records">
+	  <format>
+	   <puid type="fmt">279</puid>
+	   <name>FLAC (Free Lossless Audio Codec) 1.2.1</name>
+	   <summary>Added MIME type.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">320</puid>
+	   <name>ESRI Shapefile Projection (Well-Known Text) Format</name>
+	   <summary>Added small EOF offset to account for potential for line-endings. Submitted by Landesarchiv Nordrhein-Westfalen.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">399</puid>
+	   <name>Stuffit X Archive File</name>
+	   <summary>Adjusted signature.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">682</puid>
+	   <name>Thumbs DB file XP</name>
+	   <summary>Added MIME type.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">798</puid>
+	   <name>The Neuroimaging Informatics Technology Initiative File Format 1</name>
+	   <summary>Added version number. Added missing extension and second signature variant. Added alias 'NIfTI-1 Data Format'. Added format type 'Dataset'. Additional information provided by Bodleian Libraries, University of Oxford.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">829</puid>
+	   <name>3MF 3D Manufacturing Format</name>
+	   <summary>Changed MIME type from application/vnd.ms-package.3dmanufacturing-3dmodel+xml to application/vnd.ms-3mfdocument to match current IANA entry.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">877</puid>
+	   <name>Corel Presentation 7-8-9</name>
+	   <summary>Adjusted container signature to resolve issue with non-ASCII character representation causing non-identification within Linux environments. Issue identified through Ross Spencer's Skeleton Corpus work and resolution assisted by State Records New South Wales and Richard Lehane's Siegfried file format identification tool.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">892</puid>
+	   <name>Compound WordPerfect for Windows Document 6 onwards</name>
+	   <summary>Adjusted container signature to resolve issue with non-ASCII character representation causing non-identification within Linux environments. Issue identified through Ross Spencer's Skeleton Corpus work and resolution assisted by State Records New South Wales and Richard Lehane's Siegfried file format identification tool.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">899</puid>
+	   <name>Windows Portable Executable 32 bit</name>
+	   <summary>Changed MIME type from application/octet-stream to application/vnd.microsoft.portable-executable to match current IANA entry.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">900</puid>
+	   <name>Windows Portable Executable 64 bit</name>
+	   <summary>Changed MIME type from application/octet-stream to application/vnd.microsoft.portable-executable to match current IANA entry.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">266</puid>
+	   <name>GZIP Format</name>
+	   <summary>Changed MIME type from application/x-gzip to application/gzip to match current IANA entry.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">411</puid>
+	   <name>Windows Portable Executable</name>
+	   <summary>Changed MIME type from application/octet-stream to application/vnd.microsoft.portable-executable to match current IANA entry.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">414</puid>
+	   <name>Windows Cabinet File</name>
+	   <summary>Added MIME type.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">415</puid>
+	   <name>Java Compiled Object Code</name>
+	   <summary>Gave priority over Alias Pix Image File due to rare edge-case clash conditions.</summary>
+	  </format>
+      </release_outline>
+         
+ 	 <release_outline name="New Signatures">
+	  <format>
+	   <puid type="fmt">1083</puid>
+	   <name>Hangul Word Processor Document 3</name>
+	   <summary>Signature developed through PRONOM research. Requested by RM Soft Korea.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1084</puid>
+	   <name>Hangul Word Processor Document 5</name>
+	   <summary>Container signature developed through PRONOM research. Requested by RM Soft Korea.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1085</puid>
+	   <name>TRIM Context Reference File</name>
+	   <summary>Signature developed with Public Records Office Northern Ireland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1086</puid>
+	   <name>Monkey's Audio File</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1087</puid>
+	   <name>FAT Disk Image</name>
+	   <summary>Signature developed with National Library of Scotland.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1091</puid>
+	   <name>Scribus Document</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1092</puid>
+	   <name>Alias Pix Image File</name>
+	   <summary>Signature developed with the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1093</puid>
+	   <name>Alias Scene Description Language</name>
+	   <summary>Signature developed with the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1094</puid>
+	   <name>The Neuroimaging Informatics Technology Initiative File Format 2</name>
+	   <summary>Signature developed with Bodleian Libraries, University of Oxford.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1095</puid>
+	   <name>PEA Archive Format</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1096</puid>
+	   <name>FreeArc Archive Format</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1097</puid>
+	   <name>ZPAQ Archive Format</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1098</puid>
+	   <name>XZ File Format</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1099</puid>
+	   <name>TCR eBook</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1100</puid>
+	   <name>yEnc Encoded File</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	 </release_outline>
+    </release_note> 
+
+<release_note>
     <release_date>25th July 2017</release_date>
     <signature_filename>DROID_SignatureFile_V91.xml</signature_filename> 
     <release_outline name="New Records">

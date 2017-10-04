@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1902</FormatID>
+      <FormatName>The Neuroimaging Informatics Technology Initiative File Format</FormatName>
+      <FormatVersion>2</FormatVersion>
+      <FormatAliases>NIfTI-2</FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Dataset</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>A Neuroimaging format used in medical industry for the analysis of scans of x-rays. Version 2 is an extended version of NIfTI allowing 64 bit storage and addressing.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>230</ProvenanceSourceID>
+      <ProvenanceName>Bodleian Library, University of Oxford / Bodleian Library, University of Oxford</ProvenanceName>
+      <ProvenanceSourceDate>19 Sep 2017</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>19 Sep 2017</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1094</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2107</ExternalSignatureID>
+        <Signature>nii</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1474</SignatureID>
+        <SignatureName>The Neuroimaging Informatics Technology Initiative File Format V2 variant1</SignatureName>
+        <SignatureNote>Offset 4: 'ni2 ' 0x0D0A1A0A
+https://www.nitrc.org/forum/forum.php?thread_id=2148&amp;forum_id=1941</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1735</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>4</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>6E6932000D0A1A0A</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1475</SignatureID>
+        <SignatureName>The Neuroimaging Informatics Technology Initiative File Format V2 variant2</SignatureName>
+        <SignatureNote>Offset 4: 'n+2 ' 0x0D0A1A0A
+https://www.nitrc.org/forum/forum.php?thread_id=2148&amp;forum_id=1941</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1734</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>4</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>6E2B32000D0A1A0A</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>1598</RelatedFormatID>
+        <RelatedFormatName>The Neuroimaging Informatics Technology Initiative File Format</RelatedFormatName>
+        <RelatedFormatVersion>1</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

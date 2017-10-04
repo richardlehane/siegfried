@@ -36,7 +36,7 @@ http://3mf.io/what-is-3mf/3mf-specification/</ProvenanceDescription>
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
-        <Identifier>application/vnd.ms-package.3dmanufacturing-3dmodel+xml</Identifier>
+        <Identifier>application/vnd.ms-3mfdocument</Identifier>
         <IdentifierType>MIME</IdentifierType>
       </FileFormatIdentifier>
       <FileFormatIdentifier>

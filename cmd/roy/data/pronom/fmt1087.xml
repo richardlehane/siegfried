@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1895</FormatID>
+      <FormatName>FAT Disk Image</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The File Allocation Table is a file system architecture used across a range of computer systems. This entry aims to capture instances where the file system has been exported as a portable disk image. It may be possible and desirable to distinguish between different types of FAT image. Please contact the PRONOM team if you can assist with this.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>225</ProvenanceSourceID>
+      <ProvenanceName>National Library of Scotland / National Library of Scotland</ProvenanceName>
+      <ProvenanceSourceDate>21 Aug 2017</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>21 Aug 2017</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1087</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2096</ExternalSignatureID>
+        <Signature>img</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2097</ExternalSignatureID>
+        <Signature>ima</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2098</ExternalSignatureID>
+        <Signature>dsk</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1468</SignatureID>
+        <SignatureName>FAT Disk Image</SignatureName>
+        <SignatureNote>BOF: Jump instruction bytes 1 and 3 - 0XEB{1}0x90, byte 14 = Sectors per cluster, any from 1, 2, 4, 8, 16, 32, 64, or 128</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1727</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>EB{1}90{10}(01|02|04|08|10|20|40|80)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

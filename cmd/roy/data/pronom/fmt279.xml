@@ -38,6 +38,10 @@ http://flac.sourceforge.net/documentation_format_overview.html</ProvenanceDescri
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
+        <Identifier>audio/flac</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
         <Identifier>fmt/279</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>

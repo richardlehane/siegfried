@@ -26,7 +26,7 @@
       <ProvenanceSourceDate>24 Jan 2011</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>24 Jan 2011</LastUpdatedDate>
+      <LastUpdatedDate>19 Sep 2017</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -62,8 +62,7 @@
           <ByteSequenceID>521</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>2</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
