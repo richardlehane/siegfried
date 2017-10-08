@@ -90,10 +90,11 @@ func New(opts ...config.Option) (core.Identifier, error) {
 	}
 	// apply config
 	mi = identifier.ApplyConfig(mi)
+	// get version
 	// return identifier
 	return &Identifier{
 		infos: infos(mi.Infos()),
-		Base:  identifier.New(mi, config.ZipMIME()),
+		Base:  identifier.New(mi, config.ZipMIME(), config.MIMEVersion()...),
 	}, nil
 }
 

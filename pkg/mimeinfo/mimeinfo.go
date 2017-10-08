@@ -32,6 +32,10 @@ import (
 	"github.com/richardlehane/siegfried/pkg/mimeinfo/internal/mappings"
 )
 
+func versions() []string {
+	return nil
+}
+
 type mimeinfo struct {
 	m []mappings.MIMEType
 	identifier.Blank

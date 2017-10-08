@@ -14,24 +14,30 @@
 
 package config
 
-import "path/filepath"
+import (
+	"encoding/json"
+	"io/ioutil"
+	"path/filepath"
+)
 
 var mimeinfo = struct {
-	mi   string
-	name string
-	zip  string
-	gzip string
-	tar  string
-	arc  string
-	warc string
-	text string
+	mi       string
+	name     string
+	versions string
+	zip      string
+	gzip     string
+	tar      string
+	arc      string
+	warc     string
+	text     string
 }{
-	zip:  "application/zip",
-	gzip: "application/gzip",
-	tar:  "application/x-tar",
-	arc:  "application/x-arc",
-	warc: "application/x-warc",
-	text: "text/plain",
+	versions: "mime-info.json",
+	zip:      "application/zip",
+	gzip:     "application/gzip",
+	tar:      "application/x-tar",
+	arc:      "application/x-arc",
+	warc:     "application/x-warc",
+	text:     "text/plain",
 }
 
 // MIMEInfo returns the location of the MIMEInfo signature file.
@@ -40,6 +46,18 @@ func MIMEInfo() string {
 		return filepath.Join(siegfried.home, mimeinfo.mi)
 	}
 	return mimeinfo.mi
+}
+
+func MIMEVersion() []string {
+	byt, err := ioutil.ReadFile(filepath.Join(siegfried.home, mimeinfo.versions))
+	m := make(map[string][]string)
+	if err == nil {
+		err = json.Unmarshal(byt, &m)
+		if err == nil {
+			return m[mimeinfo.mi]
+		}
+	}
+	return nil
 }
 
 func ZipMIME() string {
