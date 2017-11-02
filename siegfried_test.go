@@ -99,7 +99,7 @@ func (t testIdentifier) Details() string                                    { re
 func (t testIdentifier) Fields() []string                                   { return []string{"namespace", "id"} }
 func (t testIdentifier) Save(l *persist.LoadSaver)                          {}
 func (t testIdentifier) String() string                                     { return "" }
-func (t testIdentifier) Inspect(s ...string) string                         { return "" }
+func (t testIdentifier) Inspect(s ...string) (string, error)                { return "", nil }
 func (t testIdentifier) GraphP(i int) string                                { return "" }
 func (t testIdentifier) Recognise(m core.MatcherType, i int) (bool, string) { return false, "" }
 

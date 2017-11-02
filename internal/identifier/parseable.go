@@ -42,9 +42,16 @@ type Parseable interface {
 	Priorities() priority.Map                                    // priority map
 }
 
+type inspectErr []string
+
+func (ie inspectErr) Error() string {
+	return "can't find " + strings.Join(ie, ", ")
+}
+
 // inspect returns string representations of the format signatures within a parseable
-func inspect(p Parseable, ids ...string) string {
+func inspect(p Parseable, ids ...string) (string, error) {
 	var (
+		ie                   = inspectErr{}
 		fmts                 = make([]string, 0, len(ids))
 		gs, gids             = p.Globs()
 		ms, mids             = p.MIMEs()
@@ -119,45 +126,48 @@ func inspect(p Parseable, ids ...string) string {
 	for _, id := range ids {
 		lines := make([]string, 0, 10)
 		info, ok := p.Infos()[id]
-		if !ok {
-			lines = append(lines, ">> can't find "+id+" << ")
-			continue
-		}
-		lines = append(lines, strings.ToUpper(info.String()+" ("+id+")"))
-		if has(gids, id) {
-			lines = append(lines, "globs: "+strings.Join(get(gids, gs, id), ", "))
-		}
-		if has(mids, id) {
-			lines = append(lines, "mimes: "+strings.Join(get(mids, ms, id), ", "))
-		}
-		if has(xids, id) {
-			lines = append(lines, "xmls: "+strings.Join(getX(xids, xs, id), ", "))
-		}
-		if has(bids, id) {
-			lines = append(lines, "sigs: "+strings.Join(getS(bids, bs, id), "\n      "))
-		}
-		if has(zids, id) {
-			lines = append(lines, "zip sigs: "+strings.Join(getC(zids, zns, zbs, id), "\n          "))
-		}
-		if has(msids, id) {
-			lines = append(lines, "mscfb sigs: "+strings.Join(getC(msids, msns, msbs, id), "\n           "))
-		}
-		if has(rids, id) {
-			lines = append(lines, "riffs: "+strings.Join(getR(rids, rs, id), ", "))
-		}
-		if has(tids, id) {
-			lines = append(lines, "text signature")
-		}
-		// Priorities
-		ps, ok := pm[id]
-		if ok && len(ps) > 0 {
-			lines = append(lines, "superiors: "+strings.Join(ps, ", "))
+		if ok {
+			lines = append(lines, strings.ToUpper(info.String()+" ("+id+")"))
+			if has(gids, id) {
+				lines = append(lines, "globs: "+strings.Join(get(gids, gs, id), ", "))
+			}
+			if has(mids, id) {
+				lines = append(lines, "mimes: "+strings.Join(get(mids, ms, id), ", "))
+			}
+			if has(xids, id) {
+				lines = append(lines, "xmls: "+strings.Join(getX(xids, xs, id), ", "))
+			}
+			if has(bids, id) {
+				lines = append(lines, "sigs: "+strings.Join(getS(bids, bs, id), "\n      "))
+			}
+			if has(zids, id) {
+				lines = append(lines, "zip sigs: "+strings.Join(getC(zids, zns, zbs, id), "\n          "))
+			}
+			if has(msids, id) {
+				lines = append(lines, "mscfb sigs: "+strings.Join(getC(msids, msns, msbs, id), "\n           "))
+			}
+			if has(rids, id) {
+				lines = append(lines, "riffs: "+strings.Join(getR(rids, rs, id), ", "))
+			}
+			if has(tids, id) {
+				lines = append(lines, "text signature")
+			}
+			// Priorities
+			ps, ok := pm[id]
+			if ok && len(ps) > 0 {
+				lines = append(lines, "superiors: "+strings.Join(ps, ", "))
+			} else {
+				lines = append(lines, "superiors: none")
+			}
 		} else {
-			lines = append(lines, "superiors: none")
+			ie = append(ie, id)
 		}
 		fmts = append(fmts, strings.Join(lines, "\n"))
 	}
-	return strings.Join(fmts, "\n\n")
+	if len(ie) > 0 {
+		return strings.Join(fmts, "\n\n"), ie
+	}
+	return strings.Join(fmts, "\n\n"), nil
 }
 
 // Blank parseable can be embedded within other parseables in order to include default nil implementations of the interface

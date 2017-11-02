@@ -70,17 +70,18 @@ Usage of inspect:
       E.g. roy inspect fmt/40,fmt/41 or roy inspect @pdfa
    roy inspect priorities
       Create a graph of priority relations (in graphviz dot format).
+      The graph is built from the set of defined priority relations.
       Short alias is roy inspect p.
       View graph with a command e.g. roy inspect p | dot -Tpng -o priorities.png
       If you don't have dot installed, can use http://www.webgraphviz.com/.
    roy inspect missing-priorities
-      Create a graph of relations that are apparent in byte signatures,
-      but that are absent from the set of formal priority relations.
+      Create a graph of relations that can be inferred from byte signatures,
+      but that are not in the set of defined priority relations.
       Short alias is roy inspect mp.
       View graph with a command e.g. roy inspect mp | dot -Tpng -o missing.png
    roy inspect implicit-priorities
-      Create a graph of relations that are apparent from the byte signatures,
-      rather than explicitly defined.
+      Create a graph of relations that can be inferred from byte signatures,
+      regardless of whether they are in the set of defined priority relations.
       Short alias is roy inspect ip.
       View graph with a command e.g. roy inspect ip | dot -Tpng -o implicit.png
    roy inspect releases
@@ -219,11 +220,10 @@ func inspectSig(t core.MatcherType) error {
 		config.SetHome(*inspectHome)
 	}
 	s, err := siegfried.Load(config.Signature())
-	if err != nil {
-		return err
+	if err == nil {
+		fmt.Print(s.Inspect(t))
 	}
-	fmt.Print(s.Inspect(t))
-	return nil
+	return err
 }
 
 func inspectFmts(fmts []string) error {
@@ -231,7 +231,7 @@ func inspectFmts(fmts []string) error {
 	var err error
 	fs := sets.Expand(strings.Join(fmts, ","))
 	if len(fs) == 0 {
-		return fmt.Errorf("no valid fmt to inspect in %s", strings.Join(fmts, ","))
+		return fmt.Errorf("nothing to inspect")
 	}
 	opts := append(getOptions(), config.SetDoubleUp()) // speed up by allowing sig double ups
 	if *inspectMI != "" {
@@ -250,8 +250,11 @@ func inspectFmts(fmts []string) error {
 	if err != nil {
 		return err
 	}
-	fmt.Println(id.Inspect(fs...))
-	return nil
+	rep, err := id.Inspect(fs...)
+	if err == nil {
+		fmt.Println(rep)
+	}
+	return err
 }
 
 func graphPriorities(typ int) error {
@@ -268,11 +271,10 @@ func graphPriorities(typ int) error {
 		}
 		id, err = pronom.New(opts...)
 	}
-	if err != nil {
-		return err
+	if err == nil {
+		fmt.Println(id.GraphP(typ))
 	}
-	fmt.Println(id.GraphP(typ))
-	return nil
+	return err
 }
 
 func blameSig(i int) error {
@@ -280,11 +282,10 @@ func blameSig(i int) error {
 		config.SetHome(*inspectHome)
 	}
 	s, err := siegfried.Load(config.Signature())
-	if err != nil {
-		return err
+	if err == nil {
+		fmt.Println(s.Blame(i, *inspectCType, *inspectCName))
 	}
-	fmt.Println(s.Blame(i, *inspectCType, *inspectCName))
-	return nil
+	return err
 }
 
 func viewReleases() error {
@@ -526,8 +527,6 @@ func main() {
 			case filepath.Ext(input) == ".sig":
 				config.SetSignature(input)
 				err = inspectSig(-1)
-			case strings.Contains(input, "fmt"), *inspectMI != "", strings.HasPrefix(input, "fdd"), strings.HasPrefix(input, "@"):
-				err = inspectFmts(inspect.Args())
 			default:
 				var i int
 				i, err = strconv.Atoi(input)
@@ -537,6 +536,9 @@ func main() {
 					err = inspectFmts(inspect.Args())
 				}
 			}
+		}
+		if err != nil {
+			err = fmt.Errorf("%s\nUsage: `roy inspect -help`", err.Error())
 		}
 	case "sets":
 		err = setsf.Parse(os.Args[2:])

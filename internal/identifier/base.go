@@ -148,7 +148,7 @@ func (b *Base) String() string {
 	return str
 }
 
-func (b *Base) Inspect(ids ...string) string {
+func (b *Base) Inspect(ids ...string) (string, error) {
 	return inspect(b.p, ids...)
 }
 

@@ -61,7 +61,7 @@ func Sets(items ...string) []string {
 			for _, v := range list {
 				uniqs[v] = struct{}{}
 			}
-		} else {
+		} else if len(item) > 0 {
 			uniqs[item] = struct{}{}
 		}
 	}

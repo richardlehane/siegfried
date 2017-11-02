@@ -32,7 +32,7 @@ type Identifier interface {
 	Fields() []string // Fields of an Identification, first element must be "namespace"
 	Save(*persist.LoadSaver)
 	String() string                            // A string represention of the global identifier
-	Inspect(...string) string                  // String representation of format signatures within the identifier
+	Inspect(...string) (string, error)         // String representation of format signatures within the identifier
 	GraphP(int) string                         // a dot graph representation of the identifier's priorities, missing priorities or implicit priorities
 	Recognise(MatcherType, int) (bool, string) // do you recognise this result index?
 }
