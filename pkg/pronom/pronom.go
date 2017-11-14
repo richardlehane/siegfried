@@ -341,6 +341,31 @@ func TypeSets(p1, p2, p3 string) error {
 	return ioutil.WriteFile(filepath.Join(config.Local("sets"), p3), out, 0666)
 }
 
+// Extension set writes a sets file that links extensions to IDs.
+func ExtensionSet(path string) error {
+	d, err := newDroid(config.Droid())
+	if err != nil {
+		return err
+	}
+	r, err := newReports(d.IDs(), d.idsPuids())
+	if err != nil {
+		return err
+	}
+	exts, puids := r.Globs()
+	extM := make(map[string][]string)
+	for i, e := range exts {
+		if len(e) > 0 {
+			e = strings.TrimPrefix(e, "*")
+			extM[e] = append(extM[e], puids[i])
+		}
+	}
+	out, err := json.MarshalIndent(extM, "", "  ")
+	if err != nil {
+		return err
+	}
+	return ioutil.WriteFile(filepath.Join(config.Local("sets"), path), out, 0666)
+}
+
 func openXML(path string, els interface{}) error {
 	buf, err := ioutil.ReadFile(path)
 	if err != nil {
