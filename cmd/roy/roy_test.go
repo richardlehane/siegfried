@@ -192,6 +192,9 @@ func TestSets(t *testing.T) {
 	if err == nil {
 		err = pronom.TypeSets("pronom-all.json", "pronom-families.json", "pronom-types.json")
 	}
+	if err == nil {
+		err = pronom.ExtensionSet("pronom-extensions.json")
+	}
 	if err != nil {
 		t.Fatal(err)
 	}
