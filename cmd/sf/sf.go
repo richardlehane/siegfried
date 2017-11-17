@@ -174,9 +174,7 @@ func readFile(ctx *context, ctxts chan *context, gf getFn) {
 	if err != nil {
 		f, err = retryOpen(ctx.path, err) // retry open in case is a windows long path error
 		if err != nil {
-			ctx.res <- results{err, nil, nil}
-			ctx.wg.Add(1)
-			ctxts <- ctx
+			printFile(ctxts, ctx, err)
 			return
 		}
 	}
@@ -249,21 +247,22 @@ func identifyRdr(r io.Reader, ctx *context, ctxts chan *context, gf getFn) {
 		return
 	}
 	// send the result
+	zpath := ctx.path
 	ctx.res <- results{err, cs, ids}
 	// decompress and recurse
 	for err = d.next(); err == nil; err = d.next() {
 		if ctx.d {
 			for _, v := range d.dirs() {
-				dctx := gf(v, "", "", -1)
-				dctx.res <- results{nil, nil, nil}
-				dctx.wg.Add(1)
-				ctxts <- dctx
+				printFile(ctxts, gf(v, "", "", -1), nil)
 			}
 		}
 		nctx := gf(d.path(), d.mime(), d.mod(), d.size())
 		nctx.wg.Add(1)
 		ctxts <- nctx
 		identifyRdr(d.reader(), nctx, ctxts, gf)
+	}
+	if err != io.EOF && err != nil {
+		printFile(ctxts, gf(arcpath(zpath, ""), "", "", 0), fmt.Errorf("error occurred during decompression: %v", err))
 	}
 }
 
