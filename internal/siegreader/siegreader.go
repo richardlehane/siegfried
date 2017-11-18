@@ -48,6 +48,7 @@ const (
 	eofSz           = readSz * 2
 	wheelSz         = readSz * 16
 	smallFileSz     = readSz * 16 // 65536
+	streamSz        = smallFileSz * 1024
 )
 
 type bufferSrc interface {

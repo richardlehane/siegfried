@@ -78,6 +78,7 @@ func (b *Buffers) Put(i *Buffer) {
 	default:
 		panic("Siegreader: unknown buffer type")
 	case *stream:
+		i.bufferSrc.(*stream).cleanUp()
 		b.spool.put(i.bufferSrc)
 	case *file:
 		b.fdatas.put(i.bufferSrc.(*file).data)
