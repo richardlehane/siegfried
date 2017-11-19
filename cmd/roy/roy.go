@@ -553,6 +553,9 @@ func main() {
 				}
 			} else {
 				err = pronom.TypeSets("pronom-all.json", "pronom-families.json", "pronom-types.json")
+				if err == nil {
+					err = pronom.ExtensionSet("pronom-extensions.json")
+				}
 			}
 		}
 	case "compare":
