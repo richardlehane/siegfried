@@ -74,17 +74,17 @@ func (b *Buffers) Get(src io.Reader) (*Buffer, error) {
 
 // Put returns a Buffer to the pool for re-cycling.
 func (b *Buffers) Put(i *Buffer) {
-	switch i.bufferSrc.(type) {
+	switch v := i.bufferSrc.(type) {
 	default:
 		panic("Siegreader: unknown buffer type")
 	case *stream:
-		i.bufferSrc.(*stream).cleanUp()
-		b.spool.put(i.bufferSrc)
+		v.cleanUp()
+		b.spool.put(v)
 	case *file:
-		b.fdatas.put(i.bufferSrc.(*file).data)
-		b.fpool.put(i.bufferSrc)
+		b.fdatas.put(v.data)
+		b.fpool.put(v)
 	case *external:
-		b.epool.put(i.bufferSrc)
+		b.epool.put(v)
 	}
 }
 
@@ -118,15 +118,16 @@ func (d *datas) put(i data) {
 	if i == nil {
 		return
 	}
-	switch i.(type) {
+	switch v := i.(type) {
 	default:
 		panic("Siegreader: unknown data type")
 	case *bigfile:
-		d.bfpool.put(i)
+		d.bfpool.put(v)
 	case *smallfile:
-		d.sfpool.put(i)
+		d.sfpool.put(v)
 	case *mmap:
-		d.mpool.put(i)
+		v.reset()
+		d.mpool.put(v)
 	}
 	return
 }

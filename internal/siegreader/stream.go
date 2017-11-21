@@ -70,9 +70,13 @@ func (s *stream) grow() error {
 	}
 	c := cap(s.buf) * 2
 	if c > streamSz {
-		var err error
-		s.tf, err = ioutil.TempFile("", "siegfried")
-		return err
+		if cap(s.buf) < streamSz {
+			c = streamSz
+		} else { // if we've exceeded streamSz, use a temp file to copy remainder
+			var err error
+			s.tf, err = ioutil.TempFile("", "siegfried")
+			return err
+		}
 	}
 	buf := make([]byte, c)
 	copy(buf, s.buf[:s.i]) // don't care about unlocking as grow() is only called by fill()
