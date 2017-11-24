@@ -172,6 +172,7 @@ func NoPriority() bool {
 	return identifier.multi >= Comprehensive
 }
 
+// GetMulti returns the multi setting
 func GetMulti() Multi {
 	return identifier.multi
 }

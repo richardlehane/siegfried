@@ -25,8 +25,13 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core"
 )
 
+// Matcher matches provided MIME-types against MIME-types associated with formats.
+// This is an extra signal for identification akin to a file extension.
+// It is used, for example, for web archive files (WARC) where you have declared
+// MIME-types which you might want to verify.
 type Matcher map[string][]int
 
+// Load returns a MIMEMatcher
 func Load(ls *persist.LoadSaver) core.Matcher {
 	le := ls.LoadSmallInt()
 	if le == 0 {
@@ -44,6 +49,7 @@ func Load(ls *persist.LoadSaver) core.Matcher {
 	return ret
 }
 
+// Save encodes a MIMEMatcher
 func Save(c core.Matcher, ls *persist.LoadSaver) {
 	if c == nil {
 		ls.SaveSmallInt(0)
@@ -60,8 +66,10 @@ func Save(c core.Matcher, ls *persist.LoadSaver) {
 	}
 }
 
+// SignatureSet for a MIMEMatcher is a slice of MIME-types
 type SignatureSet []string
 
+// Add adds a set of MIME-type signatures to a MIMEMatcher
 func Add(c core.Matcher, ss core.SignatureSet, p priority.List) (core.Matcher, int, error) {
 	var m Matcher
 	if c == nil {
@@ -100,6 +108,7 @@ func (m Matcher) add(s string, fmt int) {
 	m[s] = []int{fmt}
 }
 
+// Identify tests the supplied MIME-type against the MIMEMatcher. The Buffer is not used.
 func (m Matcher) Identify(s string, na *siegreader.Buffer, exclude ...int) (chan core.Result, error) {
 	var (
 		fmts, tfmts []int
@@ -130,6 +139,7 @@ func (m Matcher) Identify(s string, na *siegreader.Buffer, exclude ...int) (chan
 	return res, nil
 }
 
+// String representation of a MIMEMatcher
 func (m Matcher) String() string {
 	var str string
 	var keys []string
@@ -143,16 +153,20 @@ func (m Matcher) String() string {
 	return str
 }
 
+// Result reports a MIME-type match. If Trimmed is true, then the supplied MIME-type
+// was trimmed of text following a ";" before matching
 type Result struct {
 	idx     int
 	Trimmed bool
 	mime    string
 }
 
+// Index of the MIME-type match
 func (r Result) Index() int {
 	return r.idx
 }
 
+// Basis for a MIME-type match is always just that the mime matched
 func (r Result) Basis() string {
 	return "mime match " + r.mime
 }
