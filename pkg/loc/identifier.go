@@ -371,7 +371,7 @@ type Identification struct {
 	ID         string
 	Name       string
 	LongName   string
-	Mime       string
+	MIME       string
 	Basis      []string
 	Warning    string
 	archive    config.Archive
@@ -400,7 +400,7 @@ func (id Identification) Values() []string {
 		id.ID,
 		id.Name,
 		id.LongName,
-		id.Mime,
+		id.MIME,
 		basis,
 		id.Warning,
 	}

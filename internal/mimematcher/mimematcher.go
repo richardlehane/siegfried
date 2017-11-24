@@ -71,7 +71,7 @@ func Add(c core.Matcher, ss core.SignatureSet, p priority.List) (core.Matcher, i
 	}
 	sigs, ok := ss.(SignatureSet)
 	if !ok {
-		return nil, -1, fmt.Errorf("Mimematcher: can't cast persist set")
+		return nil, -1, fmt.Errorf("MIMEmatcher: bad signature set")
 	}
 	var length int
 	// unless it is a new matcher, calculate current length by iterating through all the result values
