@@ -236,7 +236,7 @@ func Releases(releases *mappings.Releases) ([]string, []string, map[string]map[s
 	fields := []string{"number releases", "new records", "updated records", "new signatures"}
 	for _, release := range releases.Releases {
 		trimdate := strings.TrimSpace(release.ReleaseDate)
-		yr := trimdate[len(trimdate)-4 : len(trimdate)]
+		yr := trimdate[len(trimdate)-4:]
 		if changes[yr] == nil {
 			changes[yr] = make(map[string]int)
 		}
@@ -256,7 +256,7 @@ func Releases(releases *mappings.Releases) ([]string, []string, map[string]map[s
 		}
 	}
 	yrs := make([]int, 0, len(changes))
-	for k, _ := range changes {
+	for k := range changes {
 		i, _ := strconv.Atoi(k)
 		yrs = append(yrs, i)
 	}

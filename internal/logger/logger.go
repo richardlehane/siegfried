@@ -112,7 +112,7 @@ func (lg *Logger) Chart() {
 		return
 	}
 	sections := make([]string, 0, len(lg.cht))
-	for k, _ := range lg.cht {
+	for k := range lg.cht {
 		sections = append(sections, k)
 	}
 	sort.Strings(sections)
