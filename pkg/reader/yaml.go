@@ -86,7 +86,7 @@ func consumeRecord(buf *bufio.Reader, repl *strings.Replacer) (record, error) {
 	}
 	if err != nil || tok.typ != item {
 		if err == nil {
-			return rec, fmt.Errorf("unexpected token got %s", tok.typ)
+			return rec, fmt.Errorf("unexpected token got %d", tok.typ)
 		}
 		return rec, err
 	}
