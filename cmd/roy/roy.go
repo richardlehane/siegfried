@@ -542,20 +542,23 @@ func main() {
 		}
 	case "sets":
 		err = setsf.Parse(os.Args[2:])
-		if err == nil {
-			setSetsOptions()
-			if *setsList != "" {
-				fmt.Println(strings.Join(sets.Expand(*setsList), "\n"))
-			} else if *setsChanges {
-				releases, err := pronom.LoadReleases(config.Local("release-notes.xml"))
-				if err == nil {
-					err = pronom.ReleaseSet("pronom-changes.json", releases)
-				}
-			} else {
-				err = pronom.TypeSets("pronom-all.json", "pronom-families.json", "pronom-types.json")
-				if err == nil {
-					err = pronom.ExtensionSet("pronom-extensions.json")
-				}
+		if err != nil {
+			break
+		}
+		setSetsOptions()
+		if *setsList != "" {
+			fmt.Println(strings.Join(sets.Expand(*setsList), "\n"))
+		} else if *setsChanges {
+			releases, rerr := pronom.LoadReleases(config.Local("release-notes.xml"))
+			if rerr != nil {
+				err = rerr
+				break
+			}
+			err = pronom.ReleaseSet("pronom-changes.json", releases)
+		} else {
+			err = pronom.TypeSets("pronom-all.json", "pronom-families.json", "pronom-types.json")
+			if err == nil {
+				err = pronom.ExtensionSet("pronom-extensions.json")
 			}
 		}
 	case "compare":
