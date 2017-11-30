@@ -30,12 +30,14 @@ import (
 type containerType int
 
 const (
-	Zip containerType = iota
-	Mscfb
+	Zip   containerType = iota // Zip container type e.g. for .docx etc.
+	Mscfb                      // Mscfb container type  e.g. for .doc etc.
 )
 
+// Matcher is a slice of container matchers
 type Matcher []*ContainerMatcher
 
+// Load returns a container Matcher
 func Load(ls *persist.LoadSaver) core.Matcher {
 	if !ls.LoadBool() {
 		return nil
@@ -49,6 +51,7 @@ func Load(ls *persist.LoadSaver) core.Matcher {
 	return ret
 }
 
+// Save encodes a container Matcher
 func Save(c core.Matcher, ls *persist.LoadSaver) {
 	if c == nil {
 		ls.SaveBool(false)
