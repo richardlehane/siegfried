@@ -1,5 +1,5 @@
 hash: 2faaea615e9a8a21cbbdece66726b50773b898784ebb3c0d0dea5271ed682e71
-updated: 2017-11-04T00:56:22.410915+11:00
+updated: 2017-11-30T15:36:52.4360756+11:00
 imports:
 - name: github.com/richardlehane/characterize
   version: 28c58d8a7f61c9ceaadc3acc30add36f62a8e530
@@ -23,11 +23,11 @@ imports:
   subpackages:
   - riff
 - name: golang.org/x/sys
-  version: 46eaec7899b1dd945c25db17c78ba3f0c58a6613
+  version: 13fcbd661c8ececa8807a29b48407d674b1d8ed8
   subpackages:
   - unix
 - name: golang.org/x/text
-  version: 88f656faf3f37f690df1a32515b479415e1a6769
+  version: 572a2b141f625f4360cf42a41a43622067e0510b
   subpackages:
   - encoding
   - encoding/charmap
