@@ -1,7 +1,20 @@
 # Change Log
-## v1.7.6 (2017-19-04)
+## v1.7.7 (2017-11-30)
 ### Added
-- continue on error flag (-coe) can now be used to continue scans despite fatal file errors that would normally cause scanning to halt. This may be useful e.g. for big directory scans over unreliable networks. Usage: `sf -coe DIR`.
+- version information for MIME-info signatures (freedesktop.org and tika-mimetypes) now recorded in mime-info.json file and presented in results
+- new sets file for PRONOM extensions. This creates sets like @.doc and @.txt (i.e. all PUIDs with those extensions). Allows you to do commands like `roy build -limit @.doc,@.docx`, `roy inspect @.txt` and `sf -log @.pdf,o DIR`
+
+### Changed
+- update freedesktop.org signatures to v1.9
+
+### Fixed
+- out of memory error when using `sf -z` on compressed files that contain very large files; reported by [Terry Jolliffe](https://github.com/richardlehane/siegfried/issues/109)
+- report errors that occur during file decompression. Previously, only fatal errors encountered when a compressed file is first opened were reported. Now errors that are encountered while attempting to walk the contents of a compressed file are also reported. 
+- report errors for 'roy inspect' when roy can't find anything to inspect; reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/108)
+
+## v1.7.6 (2017-10-04)
+### Added
+- continue on error flag (-coe) can now be used to continue scans despite fatal file errors that would normally cause scanning to halt. This may be useful e.g. for big directory scans over unreliable networks. Usage: `sf -coe DIR`
 
 ### Changed
 - update PRONOM signatures to v92
