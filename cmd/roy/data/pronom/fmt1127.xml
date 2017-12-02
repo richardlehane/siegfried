@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1937</FormatID>
+      <FormatName>Sony ARW RAW Image File</FormatName>
+      <FormatVersion>2.x</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Raster)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>ARW is a raw image format produced by some makes of Sony cameras. The format is based upon TIFF.</FormatDescription>
+      <BinaryFileFormat>Text</BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>202</ProvenanceSourceID>
+      <ProvenanceName>KULeuven - LIBIS / KULeuven - LIBIS</ProvenanceName>
+      <ProvenanceSourceDate>28 Nov 2017</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>28 Nov 2017</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1127</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>228</DeveloperID>
+        <DeveloperName>Sony</DeveloperName>
+        <OrganisationName>Sony</OrganisationName>
+        <DeveloperCompoundName>Sony / Sony</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>228</SupportID>
+        <SupportName>Sony</SupportName>
+        <OrganisationName>Sony</OrganisationName>
+        <SupportCompoundName>Sony / Sony</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2147</ExternalSignatureID>
+        <Signature>arw</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1509</SignatureID>
+        <SignatureName>Sony ARW 2.x</SignatureName>
+        <SignatureNote>TIFF Header{0-512}"SONY"{0-2048} Maker Note data adjusted for endianness: Sony 'FileFormat' Exif tag 0xB000, 0x0001=byte, 0x00000004=four times, 0x01 = SR2 format, 02= ARW 1.x, 03= ARW 2.x. We can distinguish between minor versions if requested. Sony Maker Note tags described at https://sno.phy.queensu.ca/~phil/exiftool/TagNames/Sony.html</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1770</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>49492A00{0-512}534F4E59{0-2048}00B001000400000003</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>1099</RelatedFormatID>
+        <RelatedFormatName>Tagged Image File Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

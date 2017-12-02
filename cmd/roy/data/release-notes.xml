@@ -1,6 +1,351 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="release-note.xsl"?>
 <release_notes>
+
+<release_note>
+    <release_date>30th November 2017</release_date>
+    <signature_filename>DROID_SignatureFile_V93.xml</signature_filename> 
+    <release_outline name="New Records">
+	  <format>
+	   <puid type="fmt">1101</puid>
+	   <name>High Efficiency Image File Format</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1102</puid>
+	   <name>Uuencoded File</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1103</puid>
+	   <name>AutoCAD Hatch Pattern</name>
+	   <summary>Full entry added. Submitted by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1104</puid>
+	   <name>Seattle FilmWorks SFW Image Format</name>
+	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1105</puid>
+	   <name>Hierarchical File System</name>
+	   <summary>Full entry added. Developed as a collaborative effort between The Open Preservation Foundation, The National Archives, Artefactual Systems, New York Public Libraries and University of California, Los Angeles. HFS was also requested by Preservica.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1106</puid>
+	   <name>Python Compiled File 2.0</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1107</puid>
+	   <name>Python Compiled File 2.1</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1108</puid>
+	   <name>Python Compiled File 2.2</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1109</puid>
+	   <name>Python Compiled File 2.3</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1110</puid>
+	   <name>Python Compiled File 2.4</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1111</puid>
+	   <name>Python Compiled File 2.5</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1112</puid>
+	   <name>Python Compiled File 2.6</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1113</puid>
+	   <name>Python Compiled File 3.0</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1114</puid>
+	   <name>Python Compiled File 3.1</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1115</puid>
+	   <name>Python Compiled File 3.2</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1116</puid>
+	   <name>Python Compiled File 3.3</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1117</puid>
+	   <name>Python Compiled File 3.5</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1118</puid>
+	   <name>Python Compiled File 3.6</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1119</puid>
+	   <name>Jupyter Python Notebook</name>
+	   <summary>Full entry added. Submitted by University of Edinburgh.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1120</puid>
+	   <name>DIFFRACplus Raw Data File Format 1</name>
+	   <summary>Full entry added. Submitted by University of Edinburgh.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1121</puid>
+	   <name>DIFFRACplus Raw Data File Format 2</name>
+	   <summary>Full entry added. Submitted by University of Edinburgh.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1122</puid>
+	   <name>VAMAS Surface Chemical Analysis Standard Data Transfer Format</name>
+	   <summary>Full entry added. Submitted by University of Edinburgh.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1123</puid>
+	   <name>Origin Project Format Non-Unicode</name>
+	   <summary>Full entry added. Submitted separately by University of Edinburgh and by Bodleian Libraries, University of Oxford.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1124</puid>
+	   <name>Origin Project Format Unicode</name>
+	   <summary>Full entry added. Submitted separately by University of Edinburgh and by Bodleian Libraries, University of Oxford.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1125</puid>
+	   <name>JASCO JWS Format OLE2</name>
+	   <summary>Full entry added. Submitted by University of Edinburgh.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1126</puid>
+	   <name>Sony SR2 RAW Image File</name>
+	   <summary>Full entry added. Requested by State Library New South Wales and samples provided by LIBIS - KU Leuven.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1127</puid>
+	   <name>Sony ARW RAW Image File 2.x</name>
+	   <summary>Full entry added. Requested by State Library New South Wales and samples provided by LIBIS - KU Leuven.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1128</puid>
+	   <name>Progressive Graphics File</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1129</puid>
+	   <name>PDF 2.0 - Portable Document Format 2.0</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1130</puid>
+	   <name>C3D File Format</name>
+	   <summary>Full entry added. Submitted by University of Edinburgh and previously requested by NARA Information Services/Applied Research Division, The National Archives and Records Administration.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1131</puid>
+	   <name>Gatan Digital Micrograph File Format (DM3) 3</name>
+	   <summary>Full entry added. Submitted by Bodleian Libraries, University of Oxford.</summary>
+	  </format>
+	 </release_outline>
+
+	 <release_outline name="Updated Records">
+	  <format>
+	   <puid type="fmt">134</puid>
+	   <name>MPEG 1/2 Audio Layer 3</name>
+	   <summary>Adjusted signature to allow range at the BOF for files without ID3v2, adjusted EOF section for files with ID3v2 due to submission by University of Mississippi.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">289</puid>
+	   <name>WARC</name>
+	   <summary>Enhanced description and added compression type as requested by Nationaal Archief, the National Archives of the Netherlands.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">826</puid>
+	   <name>Scriptware Script Format</name>
+	   <summary>Added signature variant submitted by Harry Ransom Center, University of Texas.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">384</puid>
+	   <name>Quicktime</name>
+	   <summary>For Quicktime signature variant 4, dropped the requirement to find the 'moov' atom when the value of the 'ftyp' atom appears at offset 4 as 'qt  '. Request raised in Siegfried GitHub Issues tracker.</summary>
+	  </format>
+      </release_outline>
+         
+ 	 <release_outline name="New Signatures">
+	  <format>
+	   <puid type="fmt">191</puid>
+	   <name>Sony ARW RAW Image File 1.x</name>
+	   <summary>Added version number. Signature developed through PRONOM research. Requested by State Library New South Wales and samples provided by KU Leuven.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1101</puid>
+	   <name>High Efficiency Image File Format</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1102</puid>
+	   <name>Uuencoded File</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1103</puid>
+	   <name>AutoCAD Hatch Pattern</name>
+	   <summary>Signature developed with Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1104</puid>
+	   <name>Seattle FilmWorks SFW Image Format</name>
+	   <summary>Signature submitted by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1105</puid>
+	   <name>Hierarchical File System</name>
+	   <summary>Signature developed as a collaborative effort between The Open Preservation Foundation, The National Archives, Artefactual Systems, New York Public Libraries and University of California, Los Angeles.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1106</puid>
+	   <name>Python Compiled File 2.0</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1107</puid>
+	   <name>Python Compiled File 2.1</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1108</puid>
+	   <name>Python Compiled File 2.2</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1109</puid>
+	   <name>Python Compiled File 2.3</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1110</puid>
+	   <name>Python Compiled File 2.4</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1111</puid>
+	   <name>Python Compiled File 2.5</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1112</puid>
+	   <name>Python Compiled File 2.6</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1113</puid>
+	   <name>Python Compiled File 3.0</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1114</puid>
+	   <name>Python Compiled File 3.1</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1115</puid>
+	   <name>Python Compiled File 3.2</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1116</puid>
+	   <name>Python Compiled File 3.3</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1117</puid>
+	   <name>Python Compiled File 3.5</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1118</puid>
+	   <name>Python Compiled File 3.6</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1120</puid>
+	   <name>DIFFRACplus Raw Data File Format 1</name>
+	   <summary>Signature developed through PRONOM research. Requested by University of Edinburgh.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1121</puid>
+	   <name>DIFFRACplus Raw Data File Format 2</name>
+	   <summary>Signature developed through PRONOM research. Requested by University of Edinburgh.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1122</puid>
+	   <name>VAMAS Surface Chemical Analysis Standard Data Transfer Format</name>
+	   <summary>Signature developed through PRONOM research from samples submitted by University of Edinburgh.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1123</puid>
+	   <name>Origin Project Format Non-Unicode</name>
+	   <summary>Signature developed with Bodleian Libraries, University of Oxford and additional samples submitted by University of Edinburgh.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1124</puid>
+	   <name>Origin Project Format Unicode</name>
+	   <summary>Signature developed through PRONOM research from samples submitted by University of Edinburgh.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1125</puid>
+	   <name>JASCO JWS Format OLE2</name>
+	   <summary>Container signature developed through PRONOM research from samples submitted by University of Edinburgh.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1126</puid>
+	   <name>Sony SR2 RAW Image File</name>
+	   <summary>Signature developed through PRONOM research. Requested by State Library New South Wales and samples provided by LIBIS - KU Leuven.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1127</puid>
+	   <name>Sony ARW RAW Image File 2.x</name>
+	   <summary>Signature developed through PRONOM research. Requested by State Library New South Wales and samples provided by LIBIS - KU Leuven.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1128</puid>
+	   <name>Progressive Graphics File</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1129</puid>
+	   <name>PDF 2.0 - Portable Document Format 2.0</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1130</puid>
+	   <name>C3D File Format</name>
+	   <summary>Signature developed with University of Edinburgh.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1131</puid>
+	   <name>Gatan Digital Micrograph File Format (DM3) 3</name>
+	   <summary>Signature developed with Bodleian Libraries, University of Oxford.</summary>
+	  </format>
+	 </release_outline>
+    </release_note>
+
+
 <release_note>
     <release_date>20th September 2017</release_date>
     <signature_filename>DROID_SignatureFile_V92.xml</signature_filename> 
@@ -249,7 +594,7 @@
 	 </release_outline>
     </release_note> 
 
-<release_note>
+    <release_note> 
     <release_date>25th July 2017</release_date>
     <signature_filename>DROID_SignatureFile_V91.xml</signature_filename> 
     <release_outline name="New Records">

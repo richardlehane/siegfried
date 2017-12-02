@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1935</FormatID>
+      <FormatName>JASCO JWS Format</FormatName>
+      <FormatVersion>OLE2</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Dataset</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>JWS is a data format produced by JASCO Spectroscopy instruments. This entry relates to the version of the format based upon the OLE2 compound document format. Please contact the PRONOM team if you are able to provide a detailed description for this format.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>215</ProvenanceSourceID>
+      <ProvenanceName>University of Edinburgh / University of Edinburgh</ProvenanceName>
+      <ProvenanceSourceDate>28 Nov 2017</ProvenanceSourceDate>
+      <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures. The identification mechanism for this format is based largely on the jwslib.py file with the jwsProcessor software created by Víctor M. Hernández-Rocamora - https://github.com/vhernandez/jwsProcessor</ProvenanceDescription>
+      <LastUpdatedDate>28 Nov 2017</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1125</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2145</ExternalSignatureID>
+        <Signature>jws</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

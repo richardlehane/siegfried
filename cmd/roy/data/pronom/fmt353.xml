@@ -270,6 +270,12 @@
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>916</RelatedFormatID>
+        <RelatedFormatName>Sony ARW RAW Image File</RelatedFormatName>
+        <RelatedFormatVersion>1.x</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>917</RelatedFormatID>
         <RelatedFormatName>Kodak Digital Camera Raw Image File</RelatedFormatName>
         <RelatedFormatVersion>
@@ -339,6 +345,19 @@
         <RelatedFormatName>Leaf Mosaic Raw Image</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1936</RelatedFormatID>
+        <RelatedFormatName>Sony SR2 RAW Image File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1937</RelatedFormatID>
+        <RelatedFormatName>Sony ARW RAW Image File</RelatedFormatName>
+        <RelatedFormatVersion>2.x</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Is supertype of</RelationshipType>

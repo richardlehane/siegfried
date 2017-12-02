@@ -143,7 +143,7 @@ Variants 2-8 cover the following pattern, which would be desirable to consolidat
       <InternalSignature>
         <SignatureID>1303</SignatureID>
         <SignatureName>QuickTime variant4</SignatureName>
-        <SignatureNote>Offset 4: ftypqt  *moov{0-4096}(mvhd|cmov|rmra)</SignatureNote>
+        <SignatureNote>Offset 4: 'ftypqt  ' only - assumption is that format is QuickTime if FTYP define as 'qt  ' therefore no need to seek additional MOOV atom.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1579</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -155,7 +155,7 @@ Variants 2-8 cover the following pattern, which would be desirable to consolidat
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>6674797071742020*6D6F6F76{0-4096}(6D766864|636D6F76|726D7261)</ByteSequenceValue>
+          <ByteSequenceValue>6674797071742020</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <InternalSignature>

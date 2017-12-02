@@ -123,6 +123,31 @@ WARC format has been written by the members of the IIPC (http://www.netpreserve.
         <RelatedFormatName>Hypertext Markup Language</RelatedFormatName>
         <RelatedFormatVersion>5</RelatedFormatVersion>
       </RelatedFormat>
+      <CompressionType>
+        <CompressionID>16</CompressionID>
+        <CompressionName>Deflate</CompressionName>
+        <CompressionVersion>
+        </CompressionVersion>
+        <CompressionAliases>
+        </CompressionAliases>
+        <CompressionFamilies>
+        </CompressionFamilies>
+        <Description>Deflate is a lossless algorithm based on LZ77 and Huffman encoding. It was developed by Phil Katz in 1996 for use in the PKZIP compressed archive format, and forms the basis for PNG compression. It is also the compression algorithm used by the GZIP file format.</Description>
+        <Lossiness>Lossless</Lossiness>
+        <ReleaseDate>01 Jan 1996</ReleaseDate>
+        <WithdrawnDate>
+        </WithdrawnDate>
+        <CompressionDocumentation>
+        </CompressionDocumentation>
+        <CompressionIPR>
+        </CompressionIPR>
+        <CompressionNote>
+        </CompressionNote>
+        <CompressionIdentifier>
+          <Identifier>x-cmp/16</Identifier>
+          <IdentifierType>PUID</IdentifierType>
+        </CompressionIdentifier>
+      </CompressionType>
       <CharacterEncoding>
         <EncodingID>2</EncodingID>
         <EncodingName>UTF-8</EncodingName>

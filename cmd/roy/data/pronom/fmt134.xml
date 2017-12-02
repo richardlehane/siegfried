@@ -51,7 +51,7 @@
       <InternalSignature>
         <SignatureID>266</SignatureID>
         <SignatureName>MPEG-1 Audio Layer 3 with ID3v2 Tag</SignatureName>
-        <SignatureNote>Regularly-spaced frame headers should always be discoverable near EOF. An ID3v1 tag of up to 355 bytes may be present at EOF. NB. The signature byte sequence is currently massaged to steer around the known PRONOM bug in the area of right fragment matching when the longest fragment is not nearest EOF. A fragment of three null bytes has been appended to the signature to ensure it's the longest. These null bytes appear to be always present so will hopefully not cause any valid MP3 file to fail identification. When the PRONOM bug has been fixed, the "FFFB{10-50}000000{37-1782}" at the end of the byte sequence should be replaced by "FFFB(47-1795)" and this note curtailed. The BOF byte sequence represents the MP3 ID3 tag.</SignatureNote>
+        <SignatureNote>Regularly-spaced frame headers should always be discoverable near EOF. An ID3v1 tag of up to 355 bytes may be present at EOF.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>340</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
@@ -63,7 +63,7 @@
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>Little-endian</Endianness>
-          <ByteSequenceValue>FFFB[10:EB]{46-1439}FFFB[10:EB]{46-1439}FFFB[10:EB]{46-1439}FFFB[10:EB]{46-1439}FFFB[10:EB]{7-500}000000{36-1426}</ByteSequenceValue>
+          <ByteSequenceValue>FFFB[10:EB]{46-1439}FFFB[10:EB]{46-1439}FFFB[10:EB]{46-1439}FFFB[10:EB]{46-1439}FFFB[10:EB]{47-1795}</ByteSequenceValue>
         </ByteSequence>
         <ByteSequence>
           <ByteSequenceID>358</ByteSequenceID>
@@ -82,7 +82,7 @@
       <InternalSignature>
         <SignatureID>267</SignatureID>
         <SignatureName>MPEG-2 Audio Layer 3 with ID3v2 Tag</SignatureName>
-        <SignatureNote>Regularly-spaced frame headers should always be discoverable near EOF. An ID3v1 tag of up to 355 bytes may be present at EOF. NB. The signature byte sequence is currently massaged to steer around the known PRONOM bug in the area of right fragment matching when the longest fragment is not nearest EOF. A fragment of three null bytes has been appended to the signature to ensure it's the longest. These null bytes appear to be always present so will hopefully not cause any valid MP3 file to fail identification. When the PRONOM bug has been fixed, the "FFF3{10-50}000000{37-1782}" at the end of the byte sequence should be replaced by "FFF3(47-1795)" and this note curtailed. The BOF byte sequence represents the MP3 ID3 tag.</SignatureNote>
+        <SignatureNote>Regularly-spaced frame headers should always be discoverable near EOF. An ID3v1 tag of up to 355 bytes may be present at EOF.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>341</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
@@ -94,7 +94,7 @@
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>Little-endian</Endianness>
-          <ByteSequenceValue>FFF3[10:EB]{46-1439}FFF3[10:EB]{46-1439}FFF3[10:EB]{46-1439}FFF3[10:EB]{46-1439}FFF3[10:EB]{7-500}000000{36-1426}</ByteSequenceValue>
+          <ByteSequenceValue>FFF3[10:EB]{46-1439}FFF3[10:EB]{46-1439}FFF3[10:EB]{46-1439}FFF3[10:EB]{46-1439}FFF3[10:EB]{47-1795}</ByteSequenceValue>
         </ByteSequence>
         <ByteSequence>
           <ByteSequenceID>359</ByteSequenceID>
@@ -113,7 +113,7 @@
       <InternalSignature>
         <SignatureID>268</SignatureID>
         <SignatureName>MPEG-1 Audio Layer 3 with ID3v2 Tag (protected)</SignatureName>
-        <SignatureNote>Regularly-spaced frame headers should always be discoverable near EOF. Header has CRC bit off to indicate protected. An ID3v1 tag of up to 355 bytes may be present at EOF. NB. The signature byte sequence is currently massaged to steer around the known PRONOM bug in the area of right fragment matching when the longest fragment is not nearest EOF. A fragment of three null bytes has been appended to the signature to ensure it's the longest. These null bytes appear to be always present so will hopefully not cause any valid MP3 file to fail identification. When the PRONOM bug has been fixed, the "FFFA{10-50}000000{37-1782}" at the end of the byte sequence should be replaced by "FFFA(47-1795)" and this note curtailed. The BOF byte sequence represents the MP3 ID3 tag.</SignatureNote>
+        <SignatureNote>Regularly-spaced frame headers should always be discoverable near EOF. Header has CRC bit off to indicate protected. An ID3v1 tag of up to 355 bytes may be present at EOF.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>342</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
@@ -125,7 +125,7 @@
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>Little-endian</Endianness>
-          <ByteSequenceValue>FFFA[10:EB]{46-1439}FFFA[10:EB]{46-1439}FFFA[10:EB]{46-1439}FFFA[10:EB]{46-1439}FFFA[10:EB]{7-500}000000{36-1426}</ByteSequenceValue>
+          <ByteSequenceValue>FFFA[10:EB]{46-1439}FFFA[10:EB]{46-1439}FFFA[10:EB]{46-1439}FFFA[10:EB]{46-1439}FFFA[10:EB]{47-1795}</ByteSequenceValue>
         </ByteSequence>
         <ByteSequence>
           <ByteSequenceID>360</ByteSequenceID>
@@ -144,7 +144,7 @@
       <InternalSignature>
         <SignatureID>269</SignatureID>
         <SignatureName>MPEG-2 Audio Layer 3 with ID3v2 Tag (protected)</SignatureName>
-        <SignatureNote>Regularly-spaced frame headers should always be discoverable near EOF. Header has CRC bit off to indicate protected. An ID3v1 tag of up to 355 bytes may be present at EOF. NB. The signature byte sequence is currently massaged to steer around the known PRONOM bug in the area of right fragment matching when the longest fragment is not nearest EOF. A fragment of three null bytes has been appended to the signature to ensure it's the longest. These null bytes appear to be always present so will hopefully not cause any valid MP3 file to fail identification. When the PRONOM bug has been fixed, the "FFF2{10-50}000000{37-1782}" at the end of the byte sequence should be replaced by "FFF2(47-1795)" and this note curtailed. The BOF byte sequence represents the MP3 ID3 tag.</SignatureNote>
+        <SignatureNote>Regularly-spaced frame headers should always be discoverable near EOF. Header has CRC bit off to indicate protected. An ID3v1 tag of up to 355 bytes may be present at EOF.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>343</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
@@ -156,7 +156,7 @@
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>Little-endian</Endianness>
-          <ByteSequenceValue>FFF2[10:EB]{46-1439}FFF2[10:EB]{46-1439}FFF2[10:EB]{46-1439}FFF2[10:EB]{46-1439}FFF2[10:EB]{7-500}000000{36-1426}</ByteSequenceValue>
+          <ByteSequenceValue>FFF2[10:EB]{46-1439}FFF2[10:EB]{46-1439}FFF2[10:EB]{46-1439}FFF2[10:EB]{46-1439}FFF2[10:EB]{47-1795}</ByteSequenceValue>
         </ByteSequence>
         <ByteSequence>
           <ByteSequenceID>361</ByteSequenceID>
@@ -180,14 +180,13 @@
           <ByteSequenceID>365</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>1795</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>Little-endian</Endianness>
-          <ByteSequenceValue>FFFB[10:EB]{46-1439}FFFB[10:EB]{46-1439}FFFB[10:EB]{46-1439}FFFB[10:EB]{46-1439}FFFB[10:EB]{46-1439}FFFB[10:EB]{46-1439}FFFB[10:EB]{46-1439}FFFB[10:EB]{46-1439}</ByteSequenceValue>
+          <ByteSequenceValue>FFFB[10:EB]{46-1439}FFFB[10:EB]{46-1439}FFFB[10:EB]{46-1439}FFFB[10:EB]{46-1439}FFFB[10:EB]{46-1439}FFFB[10:EB]{46-1439}FFFB[10:EB]{46-1439}FFFB[10:EB]</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <InternalSignature>
@@ -198,14 +197,13 @@
           <ByteSequenceID>364</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>1795</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>Little-endian</Endianness>
-          <ByteSequenceValue>FFF3[10:EB]{46-1439}FFF3[10:EB]{46-1439}FFF3[10:EB]{46-1439}FFF3[10:EB]{46-1439}FFF3[10:EB]{46-1439}FFF3[10:EB]{46-1439}FFF3[10:EB]{46-1439}FFF3[10:EB]{46-1439}</ByteSequenceValue>
+          <ByteSequenceValue>FFF3[10:EB]{46-1439}FFF3[10:EB]{46-1439}FFF3[10:EB]{46-1439}FFF3[10:EB]{46-1439}FFF3[10:EB]{46-1439}FFF3[10:EB]{46-1439}FFF3[10:EB]{46-1439}FFF3[10:EB]</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <InternalSignature>
@@ -216,14 +214,13 @@
           <ByteSequenceID>363</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>1795</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>Little-endian</Endianness>
-          <ByteSequenceValue>FFFA[10:EB]{46-1439}FFFA[10:EB]{46-1439}FFFA[10:EB]{46-1439}FFFA[10:EB]{46-1439}FFFA[10:EB]{46-1439}FFFA[10:EB]{46-1439}FFFA[10:EB]{46-1439}FFFA[10:EB]{46-1439}</ByteSequenceValue>
+          <ByteSequenceValue>FFFA[10:EB]{46-1439}FFFA[10:EB]{46-1439}FFFA[10:EB]{46-1439}FFFA[10:EB]{46-1439}FFFA[10:EB]{46-1439}FFFA[10:EB]{46-1439}FFFA[10:EB]{46-1439}FFFA[10:EB]</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <InternalSignature>
@@ -234,14 +231,13 @@
           <ByteSequenceID>362</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>1795</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>Little-endian</Endianness>
-          <ByteSequenceValue>FFF2[10:EB]{46-1439}FFF2[10:EB]{46-1439}FFF2[10:EB]{46-1439}FFF2[10:EB]{46-1439}FFF2[10:EB]{46-1439}FFF2[10:EB]{46-1439}FFF2[10:EB]{46-1439}FFF2[10:EB]{46-1439}</ByteSequenceValue>
+          <ByteSequenceValue>FFF2[10:EB]{46-1439}FFF2[10:EB]{46-1439}FFF2[10:EB]{46-1439}FFF2[10:EB]{46-1439}FFF2[10:EB]{46-1439}FFF2[10:EB]{46-1439}FFF2[10:EB]{46-1439}FFF2[10:EB]</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

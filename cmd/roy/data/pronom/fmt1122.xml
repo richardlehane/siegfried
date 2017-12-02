@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1932</FormatID>
+      <FormatName>VAMAS Surface Chemical Analysis Standard Data Transfer Format</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Dataset</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The VAMAS Surface Chemical Analysis Standard Data Transfer Format is designed to facilitate interchange of chemical analysis data. The format is standaradised within ISO14976. Please contact the PRONOM team if you are able to provide a more detailed description.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>215</ProvenanceSourceID>
+      <ProvenanceName>University of Edinburgh / University of Edinburgh</ProvenanceName>
+      <ProvenanceSourceDate>27 Nov 2017</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>27 Nov 2017</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1122</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2136</ExternalSignatureID>
+        <Signature>vms</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1504</SignatureID>
+        <SignatureName>VAMAS Surface Chemical Analysis Standard Data Transfer Format</SignatureName>
+        <SignatureNote>String near BOF: "VAMAS Surface Chemical Analysis Standard Data Transfer Format 1988 May 4"</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1765</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>16</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>56414D41532053757266616365204368656D6963616C20416E616C79736973205374616E646172642044617461205472616E7366657220466F726D61742031393838204D61792034</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

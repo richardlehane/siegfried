@@ -46,7 +46,7 @@
       <InternalSignature>
         <SignatureID>1181</SignatureID>
         <SignatureName>Scriptware SW3</SignatureName>
-        <SignatureNote>SW3C-Scriptware by Cinovation</SignatureNote>
+        <SignatureNote>SW3(A|C)-Scriptware by Cinovation</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1432</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -58,7 +58,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>535733432D536372697074776172652062792043696E6F766174696F6E</ByteSequenceValue>
+          <ByteSequenceValue>535733(41|43)2D536372697074776172652062792043696E6F766174696F6E</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

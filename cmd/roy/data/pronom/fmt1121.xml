@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1931</FormatID>
+      <FormatName>DIFFRACplus Raw Data File Format</FormatName>
+      <FormatVersion>2</FormatVersion>
+      <FormatAliases>Bruker XRD (2)</FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Dataset</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>This format contains the raw data produced by Bruker X-ray Powder Diffraction (XRD) Instrumentation. Please contact the PRONOM team if you are able to provide a more detailed description.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>215</ProvenanceSourceID>
+      <ProvenanceName>University of Edinburgh / University of Edinburgh</ProvenanceName>
+      <ProvenanceSourceDate>27 Nov 2017</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>27 Nov 2017</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1121</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2135</ExternalSignatureID>
+        <Signature>raw</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1503</SignatureID>
+        <SignatureName>DIFFRACplus Raw Data File Format 2</SignatureName>
+        <SignatureNote>BOF: "RAW1.01", 0x00 {8} MM/DD/YY. Signnature based on the format description in the Bruker Advanced X-Ray Solutions General Area Detector Diffraction System (GADDS) Reference Manual. Also see https://github.com/scattering/scattio/blob/master/python/scattio/bruker.py</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1764</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>524157312E303100{8}[30:31][30:39]2F[30:33][30:39]2F[30:39][30:39]</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>
