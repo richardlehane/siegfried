@@ -1,4 +1,9 @@
 # Change Log
+## v1.7.8 (2017-12-02)
+### Changed
+- update LOC signatures to 2017-09-28
+- update PRONOM signatures to v93
+
 ## v1.7.7 (2017-11-30)
 ### Added
 - version information for MIME-info signatures (freedesktop.org and tika-mimetypes) now recorded in mime-info.json file and presented in results

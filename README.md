@@ -8,7 +8,7 @@
 
 ### Version
 
-1.7.7
+1.7.8
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -92,6 +92,11 @@ Or, for the most recent updates, you can install from this fork:
     makepkg -si
 
 ## Changes
+### v1.7.8 (2017-12-02)
+### Changed
+- update LOC signatures to 2017-09-28
+- update PRONOM signatures to v93
+
 ### v1.7.7 (2017-11-30)
 ### Added
 - version information for MIME-info signatures (freedesktop.org and tika-mimetypes) now recorded in mime-info.json file and presented in results
