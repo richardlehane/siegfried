@@ -42,7 +42,9 @@
     "fmt/1096 (FreeArc Archive Format)",
     "fmt/1097 (ZPAQ Archive Format)",
     "fmt/1098 (XZ File Format)",
-    "fmt/1100 (yEnc Encoded File)"
+    "fmt/1100 (yEnc Encoded File)",
+    "fmt/1102 (Uuencoded File)",
+    "fmt/1105 (Hierarchical File System)"
   ],
   "audio": [
     "x-fmt/135 (Audio Interchange File Format 1.3)",
@@ -329,7 +331,14 @@
     "fmt/1057 (SNAP Archive Data File)",
     "fmt/1058 (SNAP Processed Data File)",
     "fmt/1068 (Silo HDF5 Variant)",
-    "fmt/1094 (The Neuroimaging Informatics Technology Initiative File Format 2)"
+    "fmt/1094 (The Neuroimaging Informatics Technology Initiative File Format 2)",
+    "fmt/1120 (DIFFRACplus Raw Data File Format 1)",
+    "fmt/1121 (DIFFRACplus Raw Data File Format 2)",
+    "fmt/1122 (VAMAS Surface Chemical Analysis Standard Data Transfer Format)",
+    "fmt/1123 (Origin Project Format Non-Unicode)",
+    "fmt/1124 (Origin Project Format Unicode)",
+    "fmt/1125 (JASCO JWS Format OLE2)",
+    "fmt/1130 (C3D File Format)"
   ],
   "email": [
     "x-fmt/430 (Microsoft Outlook Email Message 97-2003)",
@@ -454,6 +463,7 @@
     "fmt/156 (Tagged Image File Format for Internet Fax (TIFF-FX))",
     "x-fmt/418 (Icon file format)",
     "x-fmt/424 (Deluxe Paint bitmap)",
+    "fmt/191 (Sony ARW RAW Image File 1.x)",
     "fmt/192 (Kodak Digital Camera Raw Image File)",
     "fmt/195 (ERDAS IMAGINE Gray-scale Bitmap Image)",
     "fmt/202 (Nikon Digital SLR Camera Raw Image File)",
@@ -542,7 +552,14 @@
     "fmt/1061 (Phase One IIQ Raw Image)",
     "fmt/1062 (Hasselblad 3FR Raw Image)",
     "fmt/1063 (Leaf Mosaic Raw Image)",
-    "fmt/1092 (Alias Pix Image File)"
+    "fmt/1092 (Alias Pix Image File)",
+    "fmt/1101 (High Efficiency Image File Format)",
+    "fmt/1103 (AutoCAD Hatch Pattern)",
+    "fmt/1104 (Seattle FilmWorks SFW Image Format)",
+    "fmt/1126 (Sony SR2 RAW Image File)",
+    "fmt/1127 (Sony ARW RAW Image File 2.x)",
+    "fmt/1128 (Progressive Graphics File)",
+    "fmt/1131 (Gatan Digital Micrograph File Format (DM3) 3)"
   ],
   "imageVector": [
     "x-fmt/20 (Adobe Illustrator 1.0 / 1.1)",
@@ -820,7 +837,8 @@
     "fmt/481 (Acrobat PDF/A - Portable Document Format 3u)",
     "fmt/501 (PostScript 3.1)",
     "fmt/683 (Advanced Function Presentation)",
-    "fmt/888 (QuadriSpace Format)"
+    "fmt/888 (QuadriSpace Format)",
+    "fmt/1129 (PDF 2.0 - Portable Document Format 2.0)"
   ],
   "presentation": [
     "x-fmt/32 (Harvard Graphics Chart 3.0)",
@@ -1099,7 +1117,8 @@
     "fmt/1085 (TRIM Context Reference File)",
     "fmt/1088 (Visual Basic (VB) File)",
     "fmt/1089 (VBScript (VBS) File)",
-    "fmt/1099 (TCR eBook)"
+    "fmt/1099 (TCR eBook)",
+    "fmt/1119 (Jupyter Python Notebook)"
   ],
   "textUnstructured": [
     "x-fmt/14 (Macintosh Text File)",
