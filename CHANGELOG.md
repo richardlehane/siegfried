@@ -1,4 +1,8 @@
 # Change Log
+## v1.7.9 (2018-)
+### Fixed
+- the `roy compare -join` options that join on filepath now work better when comparing results with windows and unix paths
+
 ## v1.7.8 (2017-12-02)
 ### Changed
 - update LOC signatures to 2017-09-28
