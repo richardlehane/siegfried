@@ -19,7 +19,6 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"path/filepath"
 	"sort"
 	"strconv"
 	"strings"
@@ -34,18 +33,37 @@ const (
 	Hash
 )
 
+func isSep(c uint8) bool {
+	return c == '\\' || c == '/'
+}
+
+// like filepath.Base but simplified + works with unix or win separators
+func base(path string) string {
+	for len(path) > 0 && isSep(path[len(path)-1]) {
+		path = path[0 : len(path)-1]
+	}
+	i := len(path) - 1
+	for i >= 0 && !isSep(path[i]) {
+		i--
+	}
+	if i >= 0 {
+		return path[i+1:]
+	}
+	return ""
+}
+
 func keygen(join int, fi File) string {
 	switch join {
 	default:
 		return fi.Path
 	case Filename:
-		return filepath.Base(fi.Path)
+		return base(fi.Path)
 	case FilenameSize:
-		return filepath.Base(fi.Path) + strconv.FormatInt(fi.Size, 10)
+		return base(fi.Path) + strconv.FormatInt(fi.Size, 10)
 	case FilenameMod:
-		return filepath.Base(fi.Path) + fi.Mod
+		return base(fi.Path) + fi.Mod
 	case FilenameHash:
-		return filepath.Base(fi.Path) + string(fi.Hash)
+		return base(fi.Path) + string(fi.Hash)
 	case Hash:
 		return string(fi.Hash)
 	}
