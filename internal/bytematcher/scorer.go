@@ -61,10 +61,11 @@ func progressStrike(off int64, rev bool) strike {
 // strikes are cached in a map of strike items
 type strikeItem struct {
 	first      strike
-	idx        int
+	idx        int // allows us to 'pop' strikes off the strikeItem and records where we are in the successive slice
 	successive [][2]int64
 }
 
+// have we popped off all the available strikes?
 func (s *strikeItem) hasPotential() bool {
 	return s.idx+1 <= len(s.successive)
 }
@@ -81,7 +82,7 @@ func (s *strikeItem) pop() strike {
 	return s.first
 }
 
-// potential hits are marked in a map of hitItems
+// potential hits are marked in a map of hitItems indexed by keyframeID[0]
 type hitItem struct {
 	potentialIdxs []int        // indexes to the strike cache
 	partials      [][][2]int64 // for each keyframe in a signature, a slice of offsets and lengths of matches

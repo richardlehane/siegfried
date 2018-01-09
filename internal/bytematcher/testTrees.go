@@ -166,6 +166,7 @@ func hasTest(t []*testNode, f frames.Frame) (*testNode, bool) {
 }
 
 func appendTests(ts []*testNode, f []frames.Frame, fu int) []*testNode {
+	// if our signature segment is empty just return ts
 	if len(f) < 1 {
 		return ts
 	}
