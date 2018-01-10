@@ -1,11 +1,13 @@
 package bytematcher
 
 import (
+	"sync"
 	"testing"
 
 	wac "github.com/richardlehane/match/fwac"
 	"github.com/richardlehane/siegfried/internal/bytematcher/frames/tests"
 	"github.com/richardlehane/siegfried/internal/persist"
+	"github.com/richardlehane/siegfried/internal/priority"
 	"github.com/richardlehane/siegfried/pkg/config"
 )
 
@@ -20,9 +22,20 @@ var TestProcessObj = &Matcher{
 
 var Sample = []byte("testTESTMATCHAAAAAAAAAAAYNESStesty")
 
+func newMatcher() *Matcher {
+	return &Matcher{
+		bofFrames:  &frameSet{},
+		eofFrames:  &frameSet{},
+		bofSeq:     &seqSet{},
+		eofSeq:     &seqSet{},
+		priorities: &priority.Set{},
+		bmu:        &sync.Once{},
+		emu:        &sync.Once{},
+	}
+}
+
 func TestProcess(t *testing.T) {
-	m, _, _ := Add(nil, SignatureSet{}, nil)
-	b := m.(*Matcher)
+	b := newMatcher()
 	config.SetDistance(8192)()
 	config.SetRange(2059)()
 	config.SetChoices(9)()
@@ -72,8 +85,7 @@ func TestProcess(t *testing.T) {
 }
 
 func TestProcessFmt418(t *testing.T) {
-	m, _, _ := Add(nil, SignatureSet{}, nil)
-	b := m.(*Matcher)
+	b := newMatcher()
 	config.SetDistance(2000)()
 	config.SetRange(500)()
 	config.SetChoices(10)()
@@ -92,8 +104,7 @@ func TestProcessFmt418(t *testing.T) {
 var test418 = "%!PS-Adobe-2.0UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU%%DocumentNeededResources:UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU%%+ procset Adobe_Illustrator_AI3"
 
 func TestProcessFmt134(t *testing.T) {
-	m, _, _ := Add(nil, SignatureSet{}, nil)
-	b := m.(*Matcher)
+	b := newMatcher()
 	config.SetDistance(1000)
 	config.SetRange(500)
 	config.SetChoices(3)
@@ -120,8 +131,7 @@ func TestProcessFmt134(t *testing.T) {
 }
 
 func TestProcessFmt363(t *testing.T) {
-	m, _, _ := Add(nil, SignatureSet{}, nil)
-	b := m.(*Matcher)
+	b := newMatcher()
 	b.addSignature(tests.TestFmts[363])
 	saver := persist.NewLoadSaver(nil)
 	Save(b, saver)
