@@ -58,14 +58,14 @@ func progressStrike(off int64, rev bool) strike {
 	}
 }
 
-// strikes are cached in a map of strike items
+// strikes are cached in a map of strikeItems indexed by strikes' idxa + idxb fields
 type strikeItem struct {
 	first      strike
 	idx        int // allows us to 'pop' strikes off the strikeItem and records where we are in the successive slice
 	successive [][2]int64
 }
 
-// have we popped off all the available strikes?
+// have we exhausted the strikeItem i.e. popped off all the available strikes?
 func (s *strikeItem) hasPotential() bool {
 	return s.idx+1 <= len(s.successive)
 }
@@ -82,14 +82,14 @@ func (s *strikeItem) pop() strike {
 	return s.first
 }
 
-// potential hits are marked in a map of hitItems indexed by keyframeID[0]
+// potential hits (signature matches) are marked in a map of hitItems indexed by keyframeID[0]
 type hitItem struct {
 	potentialIdxs []int        // indexes to the strike cache
 	partials      [][][2]int64 // for each keyframe in a signature, a slice of offsets and lengths of matches
 	matched       bool         // if we've already matched, mark so don't return
 }
 
-// return next strike to test, true if continue/false if done
+// returns the next strike for testing and true if should continue/false if done
 func (h *hitItem) nextPotential(s map[int]*strikeItem) (strike, bool) {
 	if h == nil || !h.potentiallyComplete(-1, s) {
 		return strike{}, false
@@ -112,10 +112,10 @@ func (h *hitItem) nextPotential(s map[int]*strikeItem) (strike, bool) {
 	return s[minIdx].pop(), true
 }
 
-// is a hit item potentially complete - i.e. has at least one potential strike,
+// is a hit item potentially complete? - i.e. has at least one potential strike,
 // and either partial matches or strikes for all segments
 func (h *hitItem) potentiallyComplete(idx int, s map[int]*strikeItem) bool {
-	if h.matched {
+	if h.matched { // if matched, we don't want to resatisfy it
 		return false
 	}
 	for i, v := range h.potentialIdxs {
@@ -140,15 +140,16 @@ func all(m map[int]*hitItem) []int {
 	return ret
 }
 
+// kfHits are returned by the testStrike function defined in the scorer method below. They give offsets and lengths for hits on signatures' keyframes.
 type kfHit struct {
 	id     keyFrameID
 	offset int64
 	length int
 }
 
+// partials are used within the testStrike function defined in the scorer method below.
+// they mirror the testTree incompletes slice to record distances for hits to left and right of the matching segment
 type partial struct {
-	l          bool
-	r          bool
 	ldistances []int
 	rdistances []int
 }
@@ -296,11 +297,10 @@ func (b *Matcher) scorer(buf *siegreader.Buffer, waitSet *priority.WaitSet, q ch
 			}
 			left := matchTestNodes(t.left, lslc, true)
 			for _, lp := range left {
-				if partials[lp.followUp].l {
-					partials[lp.followUp].ldistances = append(partials[lp.followUp].ldistances, lp.distances...)
-				} else {
-					partials[lp.followUp].l = true
+				if partials[lp.followUp].ldistances == nil {
 					partials[lp.followUp].ldistances = lp.distances
+				} else {
+					partials[lp.followUp].ldistances = append(partials[lp.followUp].ldistances, lp.distances...)
 				}
 			}
 		}
@@ -313,25 +313,26 @@ func (b *Matcher) scorer(buf *siegreader.Buffer, waitSet *priority.WaitSet, q ch
 			}
 			right := matchTestNodes(t.right, rslc, false)
 			for _, rp := range right {
-				if partials[rp.followUp].r {
-					partials[rp.followUp].rdistances = append(partials[rp.followUp].rdistances, rp.distances...)
-				} else {
-					partials[rp.followUp].r = true
+				if partials[rp.followUp].rdistances == nil {
 					partials[rp.followUp].rdistances = rp.distances
+
+				} else {
+					partials[rp.followUp].rdistances = append(partials[rp.followUp].rdistances, rp.distances...)
 				}
 			}
 		}
 		// now iterate through the partials, checking whether they fulfil any of the incompletes
 		for i, p := range partials {
-			if p.l == t.incomplete[i].l && p.r == t.incomplete[i].r {
+			if (len(p.ldistances) > 0) == t.incomplete[i].l && (len(p.rdistances) > 0) == t.incomplete[i].r {
 				kf := t.incomplete[i].kf
 				if b.keyFrames[kf[0]][kf[1]].check(st.offset) && waitSet.Check(kf[0]) {
-					if !p.l {
+					if p.ldistances == nil {
 						p.ldistances = []int{0}
 					}
-					if !p.r {
+					if p.rdistances == nil {
 						p.rdistances = []int{0}
 					}
+					// oneEnough is defined in keyframes.go and checks whether segments of a signature are anchored to other segments
 					if oneEnough(kf[1], b.keyFrames[kf[0]]) {
 						res = append(res, kfHit{kf, off - int64(p.ldistances[0]), p.ldistances[0] + st.length + p.rdistances[0]})
 						continue
