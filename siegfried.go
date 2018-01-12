@@ -456,23 +456,46 @@ func (s *Siegfried) Label(id core.Identification) [][2]string {
 // tree index. It can be used when identifying in a debug mode to check which identification results trigger
 // which strikes.
 func (s *Siegfried) Blame(idx, ct int, cn string) string {
+	toIDs := func(iis []int, typ core.MatcherType) []string {
+		res := make([]string, len(iis))
+		for i, v := range iis {
+			for _, id := range s.ids {
+				if ok, str := id.Recognise(typ, v); ok {
+					res[i] = str
+				}
+			}
+		}
+		return res
+	}
+	if idx < 0 {
+		buf := &bytes.Buffer{}
+		fmt.Fprint(buf, "TEST TREES\n")
+		bm := s.bm.(*bytematcher.Matcher)
+		for i := 0; i < bm.TestTreeLen(); i++ {
+			cres, ires, maxL, maxR, maxLM, maxRM := bm.DescribeTestTree(i)
+			if idx < -1 {
+				if maxLM < 1 && maxRM < 1 {
+					continue
+				}
+				if idx < -2 && maxLM < 2 && maxRM < 2 {
+					continue
+				}
+				if idx < -3 && maxLM < 1000 && maxRM < 1000 {
+					continue
+				}
+			}
+			fmt.Fprintf(buf, "---\nTest Tree %d\nCompletes: %s\nIncompletes: %s\nMax Left Distance: %d\nMax Right Distance: %d\nMax Left Matches: %d\nMax Right Matches: %d\n",
+				i, strings.Join(toIDs(cres, core.ByteMatcher), ", "), strings.Join(toIDs(ires, core.ByteMatcher), ", "), maxL, maxR, maxLM, maxRM)
+		}
+		return buf.String()
+	}
 	matcher := "BYTE MATCHER"
-	matcherType := core.ByteMatcher
 	var ttis []int
 	if cn != "" {
 		matcher = "CONTAINER MATCHER"
-		matcherType = core.ContainerMatcher
 		cm := s.cm.(containermatcher.Matcher)
 		ttis = cm.InspectTestTree(ct, cn, idx)
-		res := make([]string, len(ttis))
-		for i, v := range ttis {
-			for _, id := range s.ids {
-				if ok, str := id.Recognise(matcherType, v); ok {
-					res[i] = str
-				}
-				break
-			}
-		}
+		res := toIDs(ttis, core.ContainerMatcher)
 		ttiNames := "not recognised"
 		if len(res) > 0 {
 			ttiNames = strings.Join(res, ",")
@@ -480,28 +503,19 @@ func (s *Siegfried) Blame(idx, ct int, cn string) string {
 		return fmt.Sprintf("%s\nHits at %d: %s (identifies hits reported by -debug)", matcher, idx, ttiNames)
 	}
 	bm := s.bm.(*bytematcher.Matcher)
-	ttis = bm.InspectTestTree(idx)
-	res := make([]string, len(ttis)+1)
+	resName := "not recognised"
 	for _, id := range s.ids {
-		if ok, str := id.Recognise(matcherType, idx); ok {
-			res[0] = str
+		if ok, str := id.Recognise(core.ByteMatcher, idx); ok {
+			resName = str
+			break
 		}
-		for i, v := range ttis {
-			if ok, str := id.Recognise(matcherType, v); ok {
-				res[i+1] = str
-			}
-		}
-	}
-	resName := res[0]
-	if resName == "" {
-		resName = "not recognised"
 	}
 	ttiNames := "not recognised"
-	if len(res) > 1 {
-		ttiNames = strings.Join(res[1:], ",")
+	res := toIDs(bm.InspectTestTree(idx), core.ByteMatcher)
+	if len(res) > 0 {
+		ttiNames = strings.Join(res, ",")
 	}
 	return fmt.Sprintf("%s\nResults at %d: %s (identifies results reported by -slow)\nHits at %d: %s (identifies hits reported by -debug)", matcher, idx, resName, idx, ttiNames)
-
 }
 
 // Inspect returns a string containing detail about the various matchers in the Siegfried struct.

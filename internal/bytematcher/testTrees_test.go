@@ -62,6 +62,25 @@ func TestMaxLength(t *testing.T) {
 	}
 }
 
+func TestMaxMatches(t *testing.T) {
+	test := &testTree{}
+	test.add([2]int{0, 0}, []frames.Frame{}, []frames.Frame{tests.TestFrames[0], tests.TestFrames[3], tests.TestFrames[6]})
+	test.add([2]int{0, 0}, []frames.Frame{}, []frames.Frame{tests.TestFrames[1], tests.TestFrames[3]})
+	mm := maxMatches(test.right, 33)
+	if mm != 3 {
+		t.Errorf("maxMatches fail: expecting 3 got %d", mm)
+	}
+}
+
+func TestMaxMatches134(t *testing.T) {
+	test := &testTree{}
+	test.add([2]int{0, 0}, []frames.Frame{}, tests.TestFmts[134][1:])
+	mm := maxMatches(test.right, maxLength(test.right))
+	if mm != 1001 {
+		t.Errorf("maxMatches fail: expecting 1001 got %d", mm)
+	}
+}
+
 func TestMatchLeft(t *testing.T) {
 	left := matchTestNodes(TestTestTree.left, Sample[:8], true)
 	if len(left) != 1 {

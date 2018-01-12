@@ -15,6 +15,8 @@
 package bytematcher
 
 import (
+	"sort"
+
 	"github.com/richardlehane/siegfried/internal/bytematcher/frames"
 	"github.com/richardlehane/siegfried/internal/persist"
 )
@@ -75,27 +77,6 @@ func loadTests(ls *persist.LoadSaver) []*testTree {
 		ret[i].right = loadTestNodes(ls)
 	}
 	return ret
-}
-
-func (t *testTree) String() string {
-	str := "{TEST TREE Completes:"
-	for i, v := range t.complete {
-		str += v.String()
-		if i < len(t.complete)-1 {
-			str += ", "
-		}
-	}
-	if len(t.incomplete) < 1 {
-		return str + "}"
-	}
-	str += " Incompletes:"
-	for i, v := range t.incomplete {
-		str += v.kf.String()
-		if i < len(t.incomplete)-1 {
-			str += ", "
-		}
-	}
-	return str + "}"
 }
 
 // KeyFrames returns a list of all KeyFrameIDs that are included in the test tree, including completes and incompletes
@@ -240,7 +221,51 @@ func maxLength(ts []*testNode) int {
 	return max
 }
 
+/* Consider adding new calculated values for maxLeftIter and maxRightIter. These would use the new MaxMatches methods on the Frames
+   to determine the theoretical max times we'd have to iterate in order to generate all the possible followUp hits.
+*/
+func maxMatches(ts []*testNode, l int) int {
+	if len(ts) == 0 || l == 0 {
+		return 0
+	}
+	var iters int
+	maxes := make(map[int]int)
+	var delve func(t *testNode, this int)
+	delve = func(t *testNode, this int) {
+		if iters > 1000 {
+			return
+		}
+		iters++
+		mm, rem, min := t.MaxMatches(this)
+		for mm > 0 {
+			for _, fu := range t.success {
+				maxes[fu]++
+			}
+			for _, nt := range t.tests {
+				delve(nt, rem)
+			}
+			mm--
+			rem = rem - min
+		}
+	}
+	for _, t := range ts {
+		delve(t, l)
+	}
+	if iters > 1000 {
+		return iters
+	}
+	maxSlc := make([]int, len(maxes))
+	var iter int
+	for _, v := range maxes {
+		maxSlc[iter] = v
+		iter++
+	}
+	sort.Ints(maxSlc)
+	return maxSlc[len(maxSlc)-1]
+}
+
 // TODO: This recursive function can overload the stack. Replace with a lazy approach
+// Could it return a closure that itself returns one followupMatch per keyframe ID?
 func matchTestNodes(ts []*testNode, b []byte, rev bool) []followupMatch {
 	ret := []followupMatch{}
 	if b == nil {

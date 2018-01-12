@@ -34,6 +34,7 @@ type Frame interface {
 	String() string
 	Min() int                                // Min returns the minimum offset a frame can appear at
 	Max() int                                // Max returns the maximum offset a frame can appear at. Returns -1 for no limit (wildcard, *)
+	MaxMatches(l int) (int, int, int)        // MaxMatches returns the max number of times a frame can match, given a byte slice of length 'l', and the maximum remaining slice length, and the minimum length of the pattern
 	Linked(Frame, int, int) (bool, int, int) // Linked tests whether a frame is linked to a preceding frame (by a preceding or succeding relationship) with an offset and range that is less than the supplied ints
 	Pat() patterns.Pattern                   // Pat exposes the enclosed pattern
 	Save(*persist.LoadSaver)                 // Save a frame to a LoadSaver. The first byte written should be the identifying byte provided to Register().
@@ -247,6 +248,16 @@ func (f Fixed) Max() int {
 	return f.Off
 }
 
+// MaxMatches returns the max number of times a frame can match, given a byte slice of length 'l', and the maximum remaining slice length
+func (f Fixed) MaxMatches(l int) (int, int, int) {
+	min, _ := f.Length()
+	rem := l - min - f.Off
+	if rem >= 0 {
+		return 1, rem, min
+	}
+	return 0, 0, 0
+}
+
 // Linked tests whether a frame is linked to a preceding frame (by a preceding or succeding relationship) with an offset and range that is less than the supplied ints.
 func (f Fixed) Linked(prev Frame, maxDistance, maxRange int) (bool, int, int) {
 	switch f.OffType {
@@ -425,6 +436,19 @@ func (w Window) Max() int {
 	return w.MaxOff
 }
 
+// MaxMatches returns the max number of times a frame can match, given a byte slice of length 'l', and the maximum remaining slice length
+func (w Window) MaxMatches(l int) (int, int, int) {
+	min, _ := w.Length()
+	rem := l - min - w.MinOff
+	if rem < 0 {
+		return 0, 0, 0
+	}
+	if w.MaxOff+min > l {
+		return rem/min + 1, rem, min
+	}
+	return (w.MaxOff + min - w.MinOff) / min, rem, min
+}
+
 // Linked tests whether a frame is linked to a preceding frame (by a preceding or succeding relationship) with an offset and range that is less than the supplied ints.
 func (w Window) Linked(prev Frame, maxDistance, maxRange int) (bool, int, int) {
 	switch w.OffType {
@@ -583,6 +607,16 @@ func (w Wild) Max() int {
 	return -1
 }
 
+// MaxMatches returns the max number of times a frame can match, given a byte slice of length 'l', and the maximum remaining slice length
+func (w Wild) MaxMatches(l int) (int, int, int) {
+	min, _ := w.Length()
+	rem := l - min
+	if rem < 0 {
+		return 0, 0, 0
+	}
+	return rem/min + 1, rem, min
+}
+
 // Linked tests whether a frame is linked to a preceding frame (by a preceding or succeding relationship) with an offset and range that is less than the supplied ints.
 func (w Wild) Linked(prev Frame, maxDistance, maxRange int) (bool, int, int) {
 	switch w.OffType {
@@ -731,6 +765,16 @@ func (w WildMin) Min() int {
 // Max returns the maximum offset a frame can appear at. Returns -1 for no limit (wildcard, *).
 func (w WildMin) Max() int {
 	return -1
+}
+
+// MaxMatches returns the max number of times a frame can match, given a byte slice of length 'l', and the maximum remaining slice length
+func (w WildMin) MaxMatches(l int) (int, int, int) {
+	min, _ := w.Length()
+	rem := l - min - w.MinOff
+	if rem < 0 {
+		return 0, 0, 0
+	}
+	return rem/min + 1, rem, min
 }
 
 // Linked tests whether a frame is linked to a preceding frame (by a preceding or succeding relationship) with an offset and range that is less than the supplied ints.

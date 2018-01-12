@@ -180,7 +180,7 @@ func (b *Matcher) String() string {
 	str += fmt.Sprintf("EOF seqs: %v\n", len(b.eofSeq.set))
 	str += fmt.Sprintf("BOF frames: %v\n", len(b.bofFrames.set))
 	str += fmt.Sprintf("EOF frames: %v\n", len(b.eofFrames.set))
-	str += fmt.Sprintf("Total Tests: %v\n", len(b.tests))
+	str += fmt.Sprintf("Total Test Trees: %v\n", len(b.tests))
 	var c, ic, l, r, ml, mr int
 	for _, t := range b.tests {
 		c += len(t.complete)
@@ -211,18 +211,28 @@ func (b *Matcher) String() string {
 // InspectTestTree reports which signatures are linked to a given index in the test tree.
 // This is used by the -log debug and -log slow options for sf.
 func (b *Matcher) InspectTestTree(i int) []int {
+	cres, ires, _, _, _, _ := b.DescribeTestTree(i)
+	return append(cres, ires...)
+}
+
+func (b *Matcher) DescribeTestTree(i int) ([]int, []int, int, int, int, int) {
 	if i < 0 || i >= len(b.tests) {
-		return nil
+		return nil, nil, 0, 0, 0, 0
 	}
 	t := b.tests[i]
-	res := make([]int, len(t.complete)+len(t.incomplete))
+	cres := make([]int, len(t.complete))
 	for i, v := range t.complete {
-		res[i] = v[0]
+		cres[i] = v[0]
 	}
+	ires := make([]int, len(t.incomplete))
 	for i, v := range t.incomplete {
-		res[i+len(t.complete)] = v.kf[0]
+		ires[i] = v.kf[0]
 	}
-	return res
+	return cres, ires, t.maxLeftDistance, t.maxRightDistance, maxMatches(t.left, t.maxLeftDistance), maxMatches(t.right, t.maxRightDistance)
+}
+
+func (b *Matcher) TestTreeLen() int {
+	return len(b.tests)
 }
 
 // SetLowMem instructs the Aho Corasick search tree to be built with a low memory opt (runs slightly slower than regular).
