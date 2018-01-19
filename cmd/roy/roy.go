@@ -526,12 +526,8 @@ func main() {
 				err = viewReleases()
 			case input == "testtrees":
 				err = blameSig(-1)
-			case input == "multitts":
+			case input == "keyframes":
 				err = blameSig(-2)
-			case input == "manytts":
-				err = blameSig(-3)
-			case input == "maxitts":
-				err = blameSig(-4)
 			case filepath.Ext(input) == ".sig":
 				config.SetSignature(input)
 				err = inspectSig(-1)

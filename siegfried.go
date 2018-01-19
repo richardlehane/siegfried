@@ -456,36 +456,37 @@ func (s *Siegfried) Label(id core.Identification) [][2]string {
 // tree index. It can be used when identifying in a debug mode to check which identification results trigger
 // which strikes.
 func (s *Siegfried) Blame(idx, ct int, cn string) string {
+	toID := func(i int, typ core.MatcherType) string {
+		for _, id := range s.ids {
+			if ok, str := id.Recognise(typ, i); ok {
+				return str
+			}
+		}
+		return ""
+	}
 	toIDs := func(iis []int, typ core.MatcherType) []string {
 		res := make([]string, len(iis))
 		for i, v := range iis {
-			for _, id := range s.ids {
-				if ok, str := id.Recognise(typ, v); ok {
-					res[i] = str
-				}
-			}
+			res[i] = toID(v, typ)
 		}
 		return res
 	}
 	if idx < 0 {
 		buf := &bytes.Buffer{}
-		fmt.Fprint(buf, "TEST TREES\n")
-		bm := s.bm.(*bytematcher.Matcher)
-		for i := 0; i < bm.TestTreeLen(); i++ {
-			cres, ires, maxL, maxR, maxLM, maxRM := bm.DescribeTestTree(i)
-			if idx < -1 {
-				if maxLM < 1 && maxRM < 1 {
-					continue
-				}
-				if idx < -2 && maxLM < 2 && maxRM < 2 {
-					continue
-				}
-				if idx < -3 && maxLM < 1000 && maxRM < 1000 {
-					continue
-				}
+		if idx < -1 {
+			fmt.Fprint(buf, "KEY FRAMES\n")
+			bm := s.bm.(*bytematcher.Matcher)
+			for i := 0; i < bm.KeyFramesLen(); i++ {
+				fmt.Fprintf(buf, "---\n%s\n%s\n", toID(i, core.ByteMatcher), strings.Join(bm.DescribeKeyFrames(i), "\n"))
 			}
-			fmt.Fprintf(buf, "---\nTest Tree %d\nCompletes: %s\nIncompletes: %s\nMax Left Distance: %d\nMax Right Distance: %d\nMax Left Matches: %d\nMax Right Matches: %d\n",
-				i, strings.Join(toIDs(cres, core.ByteMatcher), ", "), strings.Join(toIDs(ires, core.ByteMatcher), ", "), maxL, maxR, maxLM, maxRM)
+		} else {
+			fmt.Fprint(buf, "TEST TREES\n")
+			bm := s.bm.(*bytematcher.Matcher)
+			for i := 0; i < bm.TestTreeLen(); i++ {
+				cres, ires, maxL, maxR, maxLM, maxRM := bm.DescribeTestTree(i)
+				fmt.Fprintf(buf, "---\nTest Tree %d\nCompletes: %s\nIncompletes: %s\nMax Left Distance: %d\nMax Right Distance: %d\nMax Left Matches: %d\nMax Right Matches: %d\n",
+					i, strings.Join(toIDs(cres, core.ByteMatcher), ", "), strings.Join(toIDs(ires, core.ByteMatcher), ", "), maxL, maxR, maxLM, maxRM)
+			}
 		}
 		return buf.String()
 	}

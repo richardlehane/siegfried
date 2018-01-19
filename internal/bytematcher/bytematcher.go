@@ -235,6 +235,21 @@ func (b *Matcher) TestTreeLen() int {
 	return len(b.tests)
 }
 
+func (b *Matcher) DescribeKeyFrames(i int) []string {
+	if i< 0 || i >= len(b.keyFrames)  {
+		return nil
+	}
+	ret := make([]string, len(b.keyFrames[i]))
+	for j := range ret {
+		ret[j] = b.keyFrames[i][j].String() 
+	}
+	return ret
+}
+
+func (b *Matcher) KeyFramesLen() int {
+	return len(b.keyFrames)
+}
+
 // SetLowMem instructs the Aho Corasick search tree to be built with a low memory opt (runs slightly slower than regular).
 func (b *Matcher) SetLowMem() {
 	b.lowmem = true
