@@ -148,6 +148,8 @@ func (s *stream) Slice(off int64, l int) ([]byte, error) {
 				return nil, io.EOF
 			}
 			l = int(s.sz - off)
+		} else {
+			err = nil
 		}
 	}
 	// slice is wholly in buf
