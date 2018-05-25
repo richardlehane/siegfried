@@ -70,8 +70,18 @@ var (
 
 type ModeError os.FileMode
 
+func declarative_lookup(dtyp int, typ string) string {
+	decl := "file is of type %s; only regular files can be scanned"
+	switch {
+	case dtyp == 1:
+		decl = "file does not have %s; and cannot be scanned"
+	}
+	return fmt.Sprintf(decl, typ)
+}
+
 func (me ModeError) Error() string {
 	typ := "unknown"
+	dtyp := 0
 	switch {
 	case os.FileMode(me)&os.ModeDir == os.ModeDir:
 		typ = "directory"
@@ -83,8 +93,11 @@ func (me ModeError) Error() string {
 		typ = "socket"
 	case os.FileMode(me)&os.ModeDevice == os.ModeDevice:
 		typ = "device"
+	case os.FileMode(me)&(256) == 0:
+		typ = "user read permissions"
+		dtyp = 1
 	}
-	return fmt.Sprintf("file is of type %s; only regular files can be scanned", typ)
+	return declarative_lookup(dtyp, typ)
 }
 
 type WalkError struct {
