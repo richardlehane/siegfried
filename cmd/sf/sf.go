@@ -70,18 +70,8 @@ var (
 
 type ModeError os.FileMode
 
-func declarative_lookup(dtyp int, typ string) string {
-	decl := "file is of type %s; only regular files can be scanned"
-	switch {
-	case dtyp == 1:
-		decl = "file does not have %s; and cannot be scanned"
-	}
-	return fmt.Sprintf(decl, typ)
-}
-
 func (me ModeError) Error() string {
 	typ := "unknown"
-	dtyp := 0
 	switch {
 	case os.FileMode(me)&os.ModeDir == os.ModeDir:
 		typ = "directory"
@@ -94,10 +84,9 @@ func (me ModeError) Error() string {
 	case os.FileMode(me)&os.ModeDevice == os.ModeDevice:
 		typ = "device"
 	case os.FileMode(me)&(256) == 0:
-		typ = "user read permissions"
-		dtyp = 1
+		return fmt.Sprint("file does not have user read permissions; and cannot be scanned")
 	}
-	return declarative_lookup(dtyp, typ)
+	return fmt.Sprintf("file is of type %s; only regular files can be scanned", typ)
 }
 
 type WalkError struct {
@@ -188,6 +177,7 @@ func readFile(ctx *context, ctxts chan *context, gf getFn) {
 		f, err = retryOpen(ctx.path, err) // retry open in case is a windows long path error
 		if err != nil {
 			printFile(ctxts, ctx, err)
+			ctx.wg.Done() // prevent hang on file access or other error
 			return
 		}
 	}
@@ -449,7 +439,7 @@ func main() {
 				if err != nil {
 					info, err = retryStat(scanner.Text(), err)
 				}
-				if err != nil || !info.Mode().IsRegular() {
+				if err != nil || !info.Mode().IsRegular() || info.Mode()&(256) == 0 {
 					if err == nil {
 						err = ModeError(info.Mode())
 					}

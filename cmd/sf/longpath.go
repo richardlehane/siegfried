@@ -51,12 +51,8 @@ func identify(ctxts chan *context, root, orig string, coerr, norecurse, droid bo
 			}
 			return nil
 		}
-		if !info.Mode().IsRegular() {
-			printFile(ctxts, gf(path, "", info.ModTime().Format(time.RFC3339), info.Size()), ModeError(info.Mode()))
-			return nil
-		}
 		// zero user read permissions mask, octal 400 (decimal 256)
-		if info.Mode()&(256) == 0 {
+		if !info.Mode().IsRegular() || info.Mode()&(256) == 0 {
 			printFile(ctxts, gf(path, "", info.ModTime().Format(time.RFC3339), info.Size()), ModeError(info.Mode()))
 			return nil
 		}
