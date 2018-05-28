@@ -83,8 +83,8 @@ func (me ModeError) Error() string {
 		typ = "socket"
 	case os.FileMode(me)&os.ModeDevice == os.ModeDevice:
 		typ = "device"
-	case os.FileMode(me)&(256) == 0:
-		return fmt.Sprint("file does not have user read permissions; and cannot be scanned")
+	case os.FileMode(me)&256 == 0:
+		return "file does not have user read permissions; and cannot be scanned"
 	}
 	return fmt.Sprintf("file is of type %s; only regular files can be scanned", typ)
 }
@@ -176,8 +176,7 @@ func readFile(ctx *context, ctxts chan *context, gf getFn) {
 	if err != nil {
 		f, err = retryOpen(ctx.path, err) // retry open in case is a windows long path error
 		if err != nil {
-			printFile(ctxts, ctx, err)
-			ctx.wg.Done() // prevent hang on file access or other error
+			ctx.res <- results{err, nil, nil}
 			return
 		}
 	}
@@ -439,7 +438,7 @@ func main() {
 				if err != nil {
 					info, err = retryStat(scanner.Text(), err)
 				}
-				if err != nil || !info.Mode().IsRegular() || info.Mode()&(256) == 0 {
+				if err != nil || !info.Mode().IsRegular() || info.Mode()&256 == 0 {
 					if err == nil {
 						err = ModeError(info.Mode())
 					}
