@@ -34,15 +34,16 @@ var (
 )
 
 // also used in sf_test.go
-func check(i string, j []string) bool {
-	for _, v := range j {
-		if i == v {
+func check(s string, ss []string) bool {
+	for _, v := range ss {
+		if s == v {
 			return true
 		}
 	}
 	return false
 }
 
+// if -setconf flag set, write settable flags to a conf file. Returns flag names set and an error.
 func setconf() (string, error) {
 	buf := &bytes.Buffer{}
 	var settables []string
@@ -66,6 +67,7 @@ func setconf() (string, error) {
 	return "", os.Remove(config.Conf())
 }
 
+// if it exists, read defaults from the conf file. Overwrite defaults with any flags explictly set
 func readconf() error {
 	if _, err := os.Stat(config.Conf()); err != nil {
 		if os.IsNotExist(err) {

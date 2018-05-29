@@ -43,6 +43,8 @@
     sf -log p,t DIR > results.yaml             // Log progress and time while redirecting results
     sf -log fmt/1,c DIR > results.yaml         // Log instances of fmt/1 and chart results
     sf -replay -log u -csv results.yaml        // Replay results file, convert to csv, log unknowns
+    sf -setconf -multi 16 -hash sha1           // Save flag defaults in a config file
+    sf -setconf -serve :5138 -conf srv.conf    // Save/load named config file with '-conf filename' 
 
 #### Example
 

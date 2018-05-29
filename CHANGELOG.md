@@ -1,6 +1,15 @@
 # Change Log
-## v1.7.9 (2018-)
+## v1.7.9 (2018-06-)
+### Added
+- save defaults in a configuration file: use the -setconf flag to record any other flags used into a config file. These defaults will be loaded each time you run sf. E.g. `sf -multi 16 -setconf` then `sf DIR` (loads the new multi default)
+- use `-conf filename` to save or load from a named config file. E.g. `sf -multi 16 -serve :5138 -conf srv.conf -setconf` and then `sf -conf srv.conf` 
+- added `-yaml` flag so, if you set json/csv in default config :(, you can override with YAML instead. Choose the YAML!
+
+### Changed
+
 ### Fixed
+- read and other file errors caused sf to hang; reports by [Greg Lepore and Andy Foster](https://github.com/richardlehane/siegfried/issues/113); fix contributed by [Ross Spencer](https://github.com/richardlehane/siegfried/commit/ea5300d3639d741a451522958e8b99912f7d639d)
+- bug reading streams where EOF returned for reads exactly adjacent the end of file 
 - the `roy compare -join` options that join on filepath now work better when comparing results with windows and unix paths
 
 ## v1.7.8 (2017-12-02)
