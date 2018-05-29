@@ -26,27 +26,44 @@ import (
 	"github.com/richardlehane/siegfried/pkg/config"
 )
 
-// list of flags that can be configured
-var setableFlags = []string{"coe", "csv", "droid", "hash", "json", "log", "multi", "nr", "serve", "sig", "throttle", "z"}
+var (
+	// list of flags that can be configured
+	setableFlags = []string{"coe", "csv", "droid", "hash", "json", "log", "multi", "nr", "serve", "sig", "throttle", "yaml", "z"}
+	// list of flags that control output - these are exclusive of each other
+	outputFlags = []string{"csv", "droid", "json", "yaml"}
+)
 
-func setable(f string) bool {
-	for _, v := range setableFlags {
-		if f == v {
+// also used in sf_test.go
+func check(i string, j []string) bool {
+	for _, v := range j {
+		if i == v {
 			return true
 		}
 	}
 	return false
 }
 
-func setconf() error {
+func setconf() (string, error) {
 	buf := &bytes.Buffer{}
+	var settables []string
 	flag.Visit(func(fl *flag.Flag) {
-		if !setable(fl.Name) {
+		if !check(fl.Name, setableFlags) {
 			return
 		}
 		fmt.Fprintf(buf, "%s:%s\n", fl.Name, fl.Value.String())
+		settables = append(settables, fl.Name)
 	})
-	return ioutil.WriteFile(config.Conf(), buf.Bytes(), 0644)
+	if len(settables) > 0 {
+		return strings.Join(settables, ", "), ioutil.WriteFile(config.Conf(), buf.Bytes(), 0644)
+	}
+	// no flags - so we delete the conf file if it exists
+	if _, err := os.Stat(config.Conf()); err != nil {
+		if os.IsNotExist(err) {
+			return "", nil
+		}
+		return "", err
+	}
+	return "", os.Remove(config.Conf())
 }
 
 func readconf() error {
@@ -72,7 +89,14 @@ func readconf() error {
 	}
 	// remove conf values for any flags explictly set
 	flag.Visit(func(fl *flag.Flag) {
-		delete(confFlags, fl.Name)
+		// if an output flag has been explicitly set, delete any that may be in the conf file
+		if check(fl.Name, outputFlags) {
+			for _, v := range outputFlags {
+				delete(confFlags, v)
+			}
+		} else {
+			delete(confFlags, fl.Name)
+		}
 	})
 	for k, v := range confFlags {
 		if err = flag.Set(k, v); err != nil {

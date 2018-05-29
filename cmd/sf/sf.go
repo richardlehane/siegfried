@@ -47,6 +47,7 @@ var (
 	version   = flag.Bool("version", false, "display version information")
 	logf      = flag.String("log", "error", "log errors, warnings, debug or slow output, knowns or unknowns to stderr or stdout e.g. -log error,warn,unknown,stdout")
 	nr        = flag.Bool("nr", false, "prevent automatic directory recursion")
+	yaml      = flag.Bool("yaml", true, "YAML output format")
 	csvo      = flag.Bool("csv", false, "CSV output format")
 	jsono     = flag.Bool("json", false, "JSON output format")
 	droido    = flag.Bool("droid", false, "DROID CSV output format")
@@ -321,11 +322,15 @@ func main() {
 		config.SetConf(*conff)
 	}
 	if *setconff {
-		err := setconf()
+		msg, err := setconf()
 		if err != nil {
 			log.Fatalf("[FATAL] failed to set configuration file, %v", err)
 		}
-		fmt.Printf("Flags saved in %s\n", config.Conf())
+		if msg == "" {
+			fmt.Printf("No flags to save, deleted config file (if it exists) at %s\n", config.Conf())
+			return
+		}
+		fmt.Printf("Saved flags (%s) in config file at %s\n", msg, config.Conf())
 		return
 	}
 	if err := readconf(); err != nil {

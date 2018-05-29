@@ -84,15 +84,6 @@ func multiIdentifyT(s *siegfried.Siegfried, r string) ([][]string, error) {
 	return set, err
 }
 
-func check(i string, j []string) bool {
-	for _, v := range j {
-		if i == v {
-			return true
-		}
-	}
-	return false
-}
-
 func matchString(i []string) string {
 	str := "[ "
 	for _, v := range i {
