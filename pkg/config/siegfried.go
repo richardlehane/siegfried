@@ -26,6 +26,7 @@ var siegfried = struct {
 	version   [3]int // Siegfried version (i.e. of the sf tool)
 	home      string // Home directory used by both sf and roy tools
 	signature string // Name of signature file
+	conf      string // Name of the conf file
 	magic     []byte // Magic bytes to ID signature file
 	// Defaults for processing bytematcher signatures. These control the segmentation.
 	distance int // The acceptable distance between two frames before they will be segmented (default is 8192)
@@ -45,6 +46,7 @@ var siegfried = struct {
 }{
 	version:         [3]int{1, 7, 9},
 	signature:       "default.sig",
+	conf:            "sf.conf",
 	magic:           []byte{'s', 'f', 0x00, 0xFF},
 	distance:        8192,
 	rng:             4096,
@@ -84,6 +86,11 @@ func Signature() string {
 // SignatureBase returns the filename of the siegfried signature file.
 func SignatureBase() string {
 	return siegfried.signature
+}
+
+// Conf returns the path to the siegfried configuration file.
+func Conf() string {
+	return Local(siegfried.conf)
 }
 
 // Magic returns the magic string encoded at the start of a siegfried signature file.
@@ -155,6 +162,11 @@ func SetHome(h string) {
 // SetSignature sets the signature filename or filepath.
 func SetSignature(s string) {
 	siegfried.signature = s
+}
+
+// SetConf sets the configuration filename or filepath.
+func SetConf(s string) {
+	siegfried.conf = s
 }
 
 // SetDistance sets the distance variable for the bytematcher.

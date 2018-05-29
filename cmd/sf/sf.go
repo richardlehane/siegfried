@@ -57,10 +57,12 @@ var (
 	archive   = flag.Bool("z", false, "scan archive formats (zip, tar, gzip, warc, arc)")
 	hashf     = flag.String("hash", "", "calculate file checksum with hash algorithm; options "+checksum.HashChoices)
 	throttlef = flag.Duration("throttle", 0, "set a time to wait between scanning files e.g. 50ms")
-	coe       = flag.Bool("coe", false, "continue on fatal file errors (this may result in directories being skipped during walks)")
+	coe       = flag.Bool("coe", false, "continue on fatal errors during directory walks (this may result in directories being skipped)")
 	replay    = flag.Bool("replay", false, "replay one (or more) results files to change output or logging e.g. sf -replay -csv results.yaml")
 	list      = flag.Bool("f", false, "scan one (or more) lists of filenames e.g. sf -f myfiles.txt")
 	name      = flag.String("name", "", "provide a filename when scanning a stream e.g. sf -name myfile.txt -")
+	conff     = flag.String("conf", "", "set the configuration file")
+	setconff  = flag.Bool("setconf", false, "record flags used with this command in configuration file")
 )
 
 var (
@@ -310,10 +312,26 @@ func main() {
 	go func() {
 		log.Println(http.ListenAndServe("localhost:6060", nil))
 	}()*/
-	// configure home and signature if not default
+	// configure home
 	if *home != config.Home() {
 		config.SetHome(*home)
 	}
+	// conf funcs - setconff saves flags as configuration; readconf reads defaults
+	if *conff != "" {
+		config.SetConf(*conff)
+	}
+	if *setconff {
+		err := setconf()
+		if err != nil {
+			log.Fatalf("[FATAL] failed to set configuration file, %v", err)
+		}
+		fmt.Printf("Flags saved in %s\n", config.Conf())
+		return
+	}
+	if err := readconf(); err != nil {
+		log.Fatalf("[FATAL] error reading configuration file, %v", err)
+	}
+	// configure signature
 	var usig string
 	if *sig != config.SignatureBase() {
 		config.SetSignature(*sig)
