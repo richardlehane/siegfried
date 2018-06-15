@@ -11,6 +11,41 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core"
 )
 
+var testPartials = [][][2]int64{
+	{{0, 3}, {0, 4}},
+	{{1, 1}},
+	{{2, 1}, {2, 3}, {2, 4}},
+}
+
+var expectPartials = [][][2]int64{
+	{{0, 3}, {1, 1}, {2, 1}},
+	{{0, 4}, {1, 1}, {2, 1}},
+	{{0, 3}, {1, 1}, {2, 3}},
+	{{0, 4}, {1, 1}, {2, 3}},
+	{{0, 3}, {1, 1}, {2, 4}},
+	{{0, 4}, {1, 1}, {2, 4}},
+}
+
+func TestIteratePartials(t *testing.T) {
+	var i int
+	next := iteratePartials(testPartials)
+	for p := next(0, 2); p != nil; p = next(0, 2) {
+		if i > 5 {
+			t.Fatalf("looped too many times on partials: %d", i)
+		}
+		ex := expectPartials[i]
+		for j, v := range ex {
+			if v != p[j] {
+				t.Fatalf("failed on %d iteration, wrong partial; expected %v and got %v", i+1, v, p[j])
+			}
+		}
+		i++
+	}
+	if i != len(expectPartials) {
+		t.Fatalf("expected %d partials, got: %d", len(expectPartials), i)
+	}
+}
+
 func setup() (chan<- strike, <-chan core.Result) {
 	m, _, _ := Add(nil, SignatureSet(tests.TestSignatures), nil)
 	bm := m.(*Matcher)

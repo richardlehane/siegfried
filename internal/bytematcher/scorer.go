@@ -89,6 +89,37 @@ type hitItem struct {
 	matched       bool         // if we've already matched, mark so don't return
 }
 
+// returns an interator func for the partials in a hitItem
+func iteratePartials(partials [][][2]int64) func(int, int) [][2]int64 {
+	idxs := make([]int, len(partials))
+	ret := make([][2]int64, len(partials))
+	var ev int
+	return func(start, end int) [][2]int64 {
+		if idxs == nil || start >= len(idxs) || ev >= end {
+			return nil
+		}
+		for i, v := range idxs[start:] {
+			ret[i+start] = partials[i+start][v]
+		}
+		for i := range partials[start:] {
+			if idxs[i+start] == len(partials[i+start])-1 {
+				if i+start == len(partials)-1 { // if we are at the end
+					idxs = nil
+					break
+				}
+				if i+start >= end { // if we are at the end value
+					ev = end
+				}
+				idxs[i+start] = 0
+				continue
+			}
+			idxs[i+start]++
+			break
+		}
+		return ret
+	}
+}
+
 // returns the next strike for testing and true if should continue/false if done
 func (h *hitItem) nextPotential(s map[int]*strikeItem) (strike, bool) {
 	if h == nil || !h.potentiallyComplete(-1, s) {
@@ -367,25 +398,29 @@ func (b *Matcher) scorer(buf *siegreader.Buffer, waitSet *priority.WaitSet, q ch
 				return false, ""
 			}
 		}
-		prevOff := h.partials[0]
-		basis := make([][][2]int64, len(kfs))
-		basis[0] = prevOff
-		prevKf := kfs[0]
-		ok = false
-		for i, kf := range kfs[1:] {
-			var nextKf keyFrame
-			if i+2 < len(kfs) {
-				nextKf = kfs[i+2]
+		next := iteratePartials(h.partials)
+		var start, end int
+		var basis [][2]int64
+		for basis = next(start, len(kfs)-1); basis != nil; basis = next(start, end) {
+			prevKf := kfs[0]
+			var ok, checkpoint bool
+			for i, kf := range kfs[1:] {
+				ok, checkpoint = checkRelatedKF(kf, prevKf, basis[i+1], basis[i])
+				if !ok {
+					if end < i+1 {
+						end = i + 1
+					}
+					break
+				}
+				if checkpoint && start < i+1 {
+					start = i + 1
+				}
 			}
-			thisOff := h.partials[i+1]
-			prevOff, ok = kf.checkRelated(prevKf, nextKf, thisOff, prevOff)
-			if !ok {
-				return false, ""
+			if ok {
+				return true, fmt.Sprintf("byte match at %v", basis)
 			}
-			basis[i+1] = prevOff
-			prevKf = kf
 		}
-		return true, fmt.Sprintf("byte match at %v", basis)
+		return false, ""
 	}
 
 	go func() {

@@ -380,59 +380,38 @@ func oneEnough(id int, kfs []keyFrame) bool {
 	return true
 }
 
-// test two key frames (current and previous) to see if they are connected and, if so, at what offsets
-func (kf keyFrame) checkRelated(prevKf, nextKf keyFrame, thisOff, prevOff [][2]int64) ([][2]int64, bool) {
-	switch kf.typ {
+// test two key frames (current and previous) to see if they are connected, and
+// can we "lock in" any previous matches?
+func checkRelatedKF(thisKf, prevKf keyFrame, thisOff, prevOff [2]int64) (bool, bool) {
+	switch thisKf.typ {
 	case frames.BOF:
-		return thisOff, true
+		return true, true
 	case frames.EOF, frames.SUCC:
 		if prevKf.typ == frames.SUCC && !(prevKf.seg.pMax == -1 && prevKf.seg.pMin == 0) {
-			ret := make([][2]int64, 0, len(thisOff))
-			success := false
-			for _, v := range thisOff {
-				for _, v1 := range prevOff {
-					dif := v[0] - v1[0] - v1[1]
-					if dif > -1 {
-						if dif < prevKf.seg.pMin || (prevKf.seg.pMax > -1 && dif > prevKf.seg.pMax) {
-							continue
-						} else {
-							ret = append(ret, v)
-							success = true
-							// if this type is EOF, we only need one match
-							if kf.typ == frames.EOF {
-								return ret, success
-							}
-						}
-					}
+			dif := thisOff[0] - prevOff[0] - prevOff[1]
+			if dif > -1 {
+				if dif < prevKf.seg.pMin || (prevKf.seg.pMax > -1 && dif > prevKf.seg.pMax) {
+					return false, false
+				} else {
+					return true, false
 				}
 			}
-			return ret, success
+			return false, false
 		} else {
-			return thisOff, true
+			return true, true
 		}
 	default:
-		if kf.seg.pMax == -1 && kf.seg.pMin == 0 {
-			return thisOff, true
+		if thisKf.seg.pMax == -1 && thisKf.seg.pMin == 0 {
+			return true, true
 		}
-		ret := make([][2]int64, 0, len(thisOff))
-		success := false
-		for _, v := range thisOff {
-			for _, v1 := range prevOff {
-				dif := v[0] - v1[0] - v1[1] // current offset, minus previous offset, minus previous length
-				if dif > -1 {
-					if dif < kf.seg.pMin || (kf.seg.pMax > -1 && dif > kf.seg.pMax) {
-						continue
-					} else {
-						ret = append(ret, v)
-						success = true
-						// if the next type isn't a non-wild PREV, we only need one match
-						if nextKf.typ != frames.PREV || (nextKf.seg.pMax == -1 && nextKf.seg.pMin == 0) {
-							return ret, success
-						}
-					}
-				}
+		dif := thisOff[0] - prevOff[0] - prevOff[1] // current offset, minus previous offset, minus previous length
+		if dif > -1 {
+			if dif < thisKf.seg.pMin || (thisKf.seg.pMax > -1 && dif > thisKf.seg.pMax) {
+				return false, false
+			} else {
+				return true, false
 			}
 		}
-		return ret, success
+		return false, false
 	}
 }
