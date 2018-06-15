@@ -1,5 +1,5 @@
 # Change Log
-## v1.7.9 (2018-06-)
+## v1.7.9 (2018-06-30)
 ### Added
 - save defaults in a configuration file: use the -setconf flag to record any other flags used into a config file. These defaults will be loaded each time you run sf. E.g. `sf -multi 16 -setconf` then `sf DIR` (loads the new multi default)
 - use `-conf filename` to save or load from a named config file. E.g. `sf -multi 16 -serve :5138 -conf srv.conf -setconf` and then `sf -conf srv.conf` 
@@ -10,7 +10,8 @@
 
 ### Fixed
 - read and other file errors caused sf to hang; reports by [Greg Lepore and Andy Foster](https://github.com/richardlehane/siegfried/issues/113); fix contributed by [Ross Spencer](https://github.com/richardlehane/siegfried/commit/ea5300d3639d741a451522958e8b99912f7d639d)
-- bug reading streams where EOF returned for reads exactly adjacent the end of file 
+- bug reading streams where EOF returned for reads exactly adjacent the end of file
+- some matches result in extremely verbose basis fields; reported by [Nick Krabbenhoeft](https://github.com/richardlehane/siegfried/issues/111). Partly fixed: basis field now reports a single basis but work remains to speed up matching for these cases.
 
 ## v1.7.8 (2017-12-02)
 ### Changed
