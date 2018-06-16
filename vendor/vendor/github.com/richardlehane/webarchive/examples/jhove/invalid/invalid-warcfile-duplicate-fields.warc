@@ -1,0 +1,29 @@
+WARC/1.0
+WARC-Type: warcinfo
+WARC-Type: warcinfo
+WARC-Date: 2008-04-30T20:48:25Z
+WARC-Date: 2008-04-30T20:48:25Z
+WARC-Filename: IAH-20080430204825-00000-blackbook.warc.gz
+WARC-Filename: IAH-20080430204825-00000-blackbook.warc.gz
+WARC-Record-ID: <urn:uuid:35f02b38-eb19-4f0d-86e4-bfe95815069c-1>
+WARC-Record-ID: <urn:uuid:35f02b38-eb19-4f0d-86e4-bfe95815069c-1>
+Content-Type: application/warc-fields
+Content-Type: application/warc-fields
+Content-Length: 483
+Content-Length: 483
+
+software: Heritrix/@VERSION@ http://crawler.archive.org
+ip: 192.168.1.13
+hostname: blackbook
+format: WARC File Format 0.17
+conformsTo: http://crawler.archive.org/warc/0.17/WARC0.17ISO.doc
+operator: Admin
+isPartOf: archive.org-shallow
+created: 2008-04-30T20:48:24Z
+description: archive.org shallow
+robots: classic
+http-header-user-agent: Mozilla/5.0 (compatible; heritrix/1.14.0 +http://crawler.archive.org)
+http-header-from: archive-crawler-agent@lists.sourceforge.net
+
+
+

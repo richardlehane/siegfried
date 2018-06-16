@@ -1,0 +1,143 @@
+WARC/0.17
+WARC-Type: warcinfo
+WARC-Date: 2008-04-30T20:48:25Z
+WARC-Filename: IAH-20080430204825-00000-blackbook.warc.gz
+WARC-Record-ID: <urn:uuid:35f02b38-eb19-4f0d-86e4-bfe95815069c>
+Content-Length: 483
+
+software: Heritrix/@VERSION@ http://crawler.archive.org
+ip: 192.168.1.13
+hostname: blackbook
+format: WARC File Format 0.17
+conformsTo: http://crawler.archive.org/warc/0.17/WARC0.17ISO.doc
+operator: Admin
+isPartOf: archive.org-shallow
+created: 2008-04-30T20:48:24Z
+description: archive.org shallow
+robots: classic
+http-header-user-agent: Mozilla/5.0 (compatible; heritrix/1.14.0 +http://crawler.archive.org)
+http-header-from: archive-crawler-agent@lists.sourceforge.net
+
+
+
+WARC/0.17
+WARC-Type: request
+WARC-Target-URI: http://www.archive.org/robots.txt
+WARC-Date: 2008-04-30T20:48:25Z
+WARC-Concurrent-To: <urn:uuid:e7c9eff8-f5bc-4aeb-b3d2-9d3df99afb30>
+WARC-Record-ID: <urn:uuid:fe11aa54-f8a7-4795-8cba-595f689a688f>
+Content-Length: 238
+
+GET /robots.txt HTTP/1.0
+User-Agent: Mozilla/5.0 (compatible; heritrix/1.14.0 +http://crawler.archive.org)
+From: archive-crawler-agent@lists.sourceforge.net
+Connection: close
+Referer: http://www.archive.org/
+Host: www.archive.org
+
+
+
+WARC/0.17
+WARC-Type: response
+WARC-Target-URI: dns:www.archive.org
+WARC-Date: 2008-04-30T20:48:25Z
+WARC-IP-Address: 68.87.76.178
+WARC-Record-ID: <urn:uuid:ff728363-2d5f-4f5f-b832-9552de1a6037>
+Content-Length: 56
+
+20080430204825
+www.archive.org.	589	IN	A	207.241.229.39
+
+WARC/0.17
+WARC-Type: metadata
+WARC-Target-URI: http://www.archive.org/robots.txt
+WARC-Date: 2008-04-30T20:48:25Z
+WARC-Concurrent-To: <urn:uuid:e7c9eff8-f5bc-4aeb-b3d2-9d3df99afb30>
+WARC-Record-ID: <urn:uuid:545709ad-90c5-4c08-9eed-092bdf2e33a7>
+Content-Length: 66
+
+via: http://www.archive.org/
+hopsFromSeed: P
+fetchTimeMs: 47
+
+
+
+WARC/0.17
+WARC-Type: resource
+WARC-Target-URI: http://www.archive.org/
+WARC-Date: 2008-04-30T20:48:26Z
+WARC-Payload-Digest: sha1:2WAXX5NUWNNCS2BDKCO5OVDQBJVNKIVV
+WARC-IP-Address: 207.241.229.39
+WARC-Record-ID: <urn:uuid:4042c21b-d898-43f0-9c95-b50da2d1aa42>
+Content-Length: 693
+
+HTTP/1.1 200 OK
+Date: Wed, 30 Apr 2008 20:48:25 GMT
+Server: Apache/2.0.54 (Ubuntu) PHP/5.0.5-2ubuntu1.4 mod_ssl/2.0.54 OpenSSL/0.9.7g
+Last-Modified: Wed, 09 Jan 2008 23:18:29 GMT
+ETag: "47ac-16e-4f9e5b40"
+Accept-Ranges: bytes
+Content-Length: 366
+Connection: close
+Content-Type: text/html; charset=UTF-8
+
+<html>
+<head>
+<meta http-equiv="Refresh" content="0;URL=http://www.archive.org/index.php"/>
+<script>
+document.location="http://www.archive.org/index.php";
+</script>
+</head>
+<body>
+<img width="70" height="56" src="http://www.archive.org/images/logoc.jpg"/><br/>
+Please visit our website at:
+<a href="http://www.archive.org">http://www.archive.org</a>
+</body>
+</html>
+
+
+WARC/0.17
+WARC-Type: conversion
+WARC-Target-URI: http://www.archive.org/
+WARC-Date: 2008-04-30T20:48:26Z
+WARC-Payload-Digest: sha1:2WAXX5NUWNNCS2BDKCO5OVDQBJVNKIVV
+WARC-Record-ID: <urn:uuid:4042c21b-d898-43f0-9c95-b50da2d1aa42>
+Content-Length: 693
+
+HTTP/1.1 200 OK
+Date: Wed, 30 Apr 2008 20:48:25 GMT
+Server: Apache/2.0.54 (Ubuntu) PHP/5.0.5-2ubuntu1.4 mod_ssl/2.0.54 OpenSSL/0.9.7g
+Last-Modified: Wed, 09 Jan 2008 23:18:29 GMT
+ETag: "47ac-16e-4f9e5b40"
+Accept-Ranges: bytes
+Content-Length: 366
+Connection: close
+Content-Type: text/html; charset=UTF-8
+
+<html>
+<head>
+<meta http-equiv="Refresh" content="0;URL=http://www.archive.org/index.php"/>
+<script>
+document.location="http://www.archive.org/index.php";
+</script>
+</head>
+<body>
+<img width="70" height="56" src="http://www.archive.org/images/logoc.jpg"/><br/>
+Please visit our website at:
+<a href="http://www.archive.org">http://www.archive.org</a>
+</body>
+</html>
+
+
+WARC/0.17
+WARC-Type: revisit
+WARC-Target-URI: dns:www.archive.org
+WARC-Date: 2008-04-30T20:48:25Z
+WARC-IP-Address: 68.87.76.178
+WARC-Record-ID: <urn:uuid:ff728363-2d5f-4f5f-b832-9552de1a6037>
+WARC-Profile: http://netpreserve.org/warc/1.0/revisit/identical-payload-digest
+Content-Length: 56
+
+20080430204825
+www.archive.org.	589	IN	A	207.241.229.39
+

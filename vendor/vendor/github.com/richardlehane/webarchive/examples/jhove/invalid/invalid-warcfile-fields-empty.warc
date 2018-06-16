@@ -1,0 +1,20 @@
+WARC/1.0
+WARC-Type: 
+WARC-Target-URI: 
+WARC-IP-Address: 
+WARC-Date: 
+WARC-Record-ID: 
+Content-Length: 
+Content-Type: 
+WARC-Block-Digest: 
+WARC-Segment-Number: 
+
+GET /robots.txt HTTP/1.0
+User-Agent: Mozilla/5.0 (compatible; heritrix/1.14.0 +http://crawler.archive.org)
+From: archive-crawler-agent@lists.sourceforge.net
+Connection: close
+Referer: http://www.archive.org/
+Host: www.archive.org
+
+
+

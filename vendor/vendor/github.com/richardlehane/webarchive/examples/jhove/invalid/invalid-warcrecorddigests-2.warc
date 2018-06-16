@@ -1,0 +1,78 @@
+WARC/1.0
+WARC-Type: response
+WARC-Record-ID: <urn:uuid:e7c9eff8-f5bc-4aeb-b3d2-9d3df99afb30>
+WARC-Date: 2008-04-30T20:48:25Z
+Content-Length: 782
+Content-Type: application/http; msgtype=response
+WARC-Block-Digest: md5:1110110111100010001001011000000101101000010110010100001001110010000111000111101110010111010000111101110011101101001100010111011000110011110100000000111000110011
+WARC-Payload-Digest: md5:1001010100000100011001100101001010110111000110101010101000011110100010100101101001101010111110010001111000100100000000010110110111111110101011100111101111010100
+WARC-IP-Address: 207.241.229.39
+WARC-Target-URI: http://www.archive.org/robots.txt
+
+HTTP/1.1 200 OK
+Date: Wed, 30 Apr 2008 20:48:24 GMT
+Server: Apache/2.0.54 (Ubuntu) PHP/5.0.5-2ubuntu1.4 mod_ssl/2.0.54 OpenSSL/0.9.7g
+Last-Modified: Sat, 02 Feb 2008 19:40:44 GMT
+ETag: "47c3-1d3-11134700"
+Accept-Ranges: bytes
+Content-Length: 467
+Connection: close
+Content-Type: text/plain; charset=UTF-8
+
+##############################################
+#
+# Welcome to the Archive!
+#
+##############################################
+# Please crawl our files.
+# We appreciate if you can crawl responsibly.
+# Stay open!
+##############################################
+User-agent: *
+Disallow: /nothing---please-crawl-us--
+
+# slow down the ask jeeves crawler which was hitting our SE a little too fast
+# via collection pages.   --Feb2008 tracey--
+User-agent: Teoma
+Crawl-Delay: 10
+
+
+WARC/1.0
+WARC-Type: response
+WARC-Record-ID: <urn:uuid:e7c9eff8-f5bc-4aeb-b3d2-9d3df99afb30>
+WARC-Date: 2008-04-30T20:48:25Z
+Content-Length: 782
+Content-Type: application/http; msgtype=response
+WARC-Block-Digest: sha1:01110001101101010000011010000000001011011011010010100001100100101011111101111000000011000110010000000001111011100011000111011110
+WARC-Payload-Digest: sha1:10100110110101101000011010011111011010000000101100011011110111010000110100100111101111110101101001011111010010010100100000101110
+WARC-IP-Address: 207.241.229.39
+WARC-Target-URI: http://www.archive.org/robots.txt
+
+HTTP/1.1 200 OK
+Date: Wed, 30 Apr 2008 20:48:24 GMT
+Server: Apache/2.0.54 (Ubuntu) PHP/5.0.5-2ubuntu1.4 mod_ssl/2.0.54 OpenSSL/0.9.7g
+Last-Modified: Sat, 02 Feb 2008 19:40:44 GMT
+ETag: "47c3-1d3-11134700"
+Accept-Ranges: bytes
+Content-Length: 467
+Connection: close
+Content-Type: text/plain; charset=UTF-8
+
+##############################################
+#
+# Welcome to the Archive!
+#
+##############################################
+# Please crawl our files.
+# We appreciate if you can crawl responsibly.
+# Stay open!
+##############################################
+User-agent: *
+Disallow: /nothing---please-crawl-us--
+
+# slow down the ask jeeves crawler which was hitting our SE a little too fast
+# via collection pages.   --Feb2008 tracey--
+User-agent: Teoma
+Crawl-Delay: 10
+
+
