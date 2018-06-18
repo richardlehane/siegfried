@@ -11,7 +11,8 @@
 ### Fixed
 - read and other file errors caused sf to hang; reports by [Greg Lepore and Andy Foster](https://github.com/richardlehane/siegfried/issues/113); fix contributed by [Ross Spencer](https://github.com/richardlehane/siegfried/commit/ea5300d3639d741a451522958e8b99912f7d639d)
 - bug reading streams where EOF returned for reads exactly adjacent the end of file
-- some matches result in extremely verbose basis fields; reported by [Nick Krabbenhoeft](https://github.com/richardlehane/siegfried/issues/111). Partly fixed: basis field now reports a single basis but work remains to speed up matching for these cases.
+- bug in mscfb library ([race condition for concurrent access to a global variable](https://github.com/richardlehane/siegfried/issues/117))
+- some matches result in extremely verbose basis fields; reported by [Nick Krabbenhoeft](https://github.com/richardlehane/siegfried/issues/111). Partly fixed: basis field now reports a single basis for a match but work remains to speed up matching for these cases.
 
 ## v1.7.8 (2017-12-02)
 ### Changed
