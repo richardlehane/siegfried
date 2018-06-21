@@ -292,12 +292,12 @@ func (ct *cTest) add(s frames.Signature, t int) {
 	ct.buffer = append(ct.buffer, s)
 }
 
-// call for each key after all persists added
+// call for each key after all signatures added
 func (ct *cTest) commit(p priority.List, prev int) error {
 	if ct.buffer == nil {
 		return nil
 	}
-	// don't set priorities if any of the persists are identical
+	// don't set priorities if any of the signatures are identical
 	var dupes bool
 	var err error
 	for i, v := range ct.buffer {
@@ -317,7 +317,7 @@ func (ct *cTest) commit(p priority.List, prev int) error {
 		ct.buffer = nil
 		return err
 	}
-	ct.bm, _, err = bytematcher.Add(ct.bm, bytematcher.SignatureSet(ct.buffer), nil)
+	ct.bm, _, err = bytematcher.Add(ct.bm, bytematcher.SignatureSet(ct.buffer), nil) // ERROR here? - meant to add priorities?
 	ct.bm.(*bytematcher.Matcher).SetLowMem()
 	ct.buffer = nil
 	return err

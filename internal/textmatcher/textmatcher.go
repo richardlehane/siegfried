@@ -65,7 +65,7 @@ func (r result) Basis() string {
 	return r.basis
 }
 
-func (m *Matcher) Identify(na string, buf *siegreader.Buffer, exclude ...int) (chan core.Result, error) {
+func (m *Matcher) Identify(na string, buf *siegreader.Buffer, hints ...core.Hint) (chan core.Result, error) {
 	if *m > 0 {
 		tt := buf.Text()
 		if tt != characterize.DATA {
