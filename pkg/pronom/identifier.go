@@ -192,8 +192,8 @@ func (r *Recorder) Satisfied(mt core.MatcherType) (bool, core.Hint) {
 		if len(r.ids) == 0 {
 			return false, core.Hint{}
 		}
-		if mt == core.ByteMatcher || mt == core.XMLMatcher || mt == core.RIFFMatcher {
-			if mt == core.ByteMatcher {
+		if mt == core.ContainerMatcher || mt == core.ByteMatcher || mt == core.XMLMatcher || mt == core.RIFFMatcher {
+			if mt == core.ByteMatcher || mt == core.ContainerMatcher {
 				keys := make([]string, len(r.ids))
 				for i, v := range r.ids {
 					keys[i] = v.String()
