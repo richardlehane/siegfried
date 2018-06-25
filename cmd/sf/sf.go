@@ -33,10 +33,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/reader"
 	"github.com/richardlehane/siegfried/pkg/writer"
-	/*// Uncomment to build with profiler
-	"net/http"
-	_ "net/http/pprof"
-	*/)
+)
 
 // defaults
 const maxMulti = 1024
@@ -309,10 +306,6 @@ func replayFile(path string, ctxts chan *context, w writer.Writer) error {
 
 func main() {
 	flag.Parse()
-	/*//UNCOMMENT TO RUN PROFILER
-	go func() {
-		log.Println(http.ListenAndServe("localhost:6060", nil))
-	}()*/
 	// configure home
 	if *home != config.Home() {
 		config.SetHome(*home)
