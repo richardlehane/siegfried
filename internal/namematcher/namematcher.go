@@ -153,7 +153,7 @@ func normalise(s string) (string, string) {
 	return base, strings.ToLower(strings.TrimPrefix(filepath.Ext(base), "."))
 }
 
-func (m *Matcher) Identify(s string, na *siegreader.Buffer, exclude ...int) (chan core.Result, error) {
+func (m *Matcher) Identify(s string, na *siegreader.Buffer, hints ...core.Hint) (chan core.Result, error) {
 	var efmts, gfmts []int
 	base, ext := normalise(s)
 	var glob string

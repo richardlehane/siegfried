@@ -56,7 +56,7 @@ func TestLabel(t *testing.T) {
 
 type testEMatcher struct{}
 
-func (t testEMatcher) Identify(n string, sb *siegreader.Buffer, exclude ...int) (chan core.Result, error) {
+func (t testEMatcher) Identify(n string, sb *siegreader.Buffer, hints ...core.Hint) (chan core.Result, error) {
 	ret := make(chan core.Result)
 	go func() {
 		ret <- testResult(0)
@@ -70,7 +70,7 @@ func (t testEMatcher) String() string { return "" }
 
 type testBMatcher struct{}
 
-func (t testBMatcher) Identify(nm string, sb *siegreader.Buffer, exclude ...int) (chan core.Result, error) {
+func (t testBMatcher) Identify(nm string, sb *siegreader.Buffer, hints ...core.Hint) (chan core.Result, error) {
 	ret := make(chan core.Result)
 	go func() {
 		ret <- testResult(1)
@@ -107,9 +107,9 @@ func (t testIdentifier) Recognise(m core.MatcherType, i int) (bool, string) { re
 
 type testRecorder struct{}
 
-func (t testRecorder) Active(m core.MatcherType)                     {}
-func (t testRecorder) Record(m core.MatcherType, r core.Result) bool { return true }
-func (t testRecorder) Satisfied(m core.MatcherType) (bool, int)      { return false, 0 }
+func (t testRecorder) Active(m core.MatcherType)                      {}
+func (t testRecorder) Record(m core.MatcherType, r core.Result) bool  { return true }
+func (t testRecorder) Satisfied(m core.MatcherType) (bool, core.Hint) { return false, core.Hint{} }
 func (t testRecorder) Report() []core.Identification {
 	return []core.Identification{testIdentification{}}
 }
