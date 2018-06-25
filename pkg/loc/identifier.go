@@ -198,23 +198,23 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 	}
 }
 
-func (r *Recorder) Satisfied(mt core.MatcherType) (bool, core.Hint) {
+func (r *Recorder) Satisfied(mt core.MatcherType) (bool, int) {
 	if r.NoPriority() {
-		return false, core.Hint{}
+		return false, 0
 	}
 	if r.cscore < incScore {
 		if mt == core.ByteMatcher || mt == core.XMLMatcher || mt == core.RIFFMatcher {
-			return false, core.Hint{}
+			return false, 0
 		}
 		if len(r.ids) == 0 {
-			return false, core.Hint{}
+			return false, 0
 		}
 	}
 	r.satisfied = true
 	if mt == core.ByteMatcher {
-		return true, core.Hint{r.Start(mt), nil}
+		return true, r.Start(mt)
 	}
-	return true, core.Hint{}
+	return true, 0
 }
 
 func lowConfidence(conf int) string {

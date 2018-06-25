@@ -24,21 +24,14 @@ import (
 )
 
 // identify function - brings a new matcher into existence
-func (b *Matcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan core.Result, hints ...core.Hint) {
+func (b *Matcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan core.Result, exclude ...int) {
 	buf.Quit = quit
-	waitSet := b.priorities.WaitSet(hints...)
-	maxBOF, maxEOF := b.maxBOF, b.maxEOF
-	if len(hints) > 0 {
-		var hasExclude bool
-		for _, h := range hints {
-			if h.Pivot == nil {
-				hasExclude = true
-				break
-			}
-		}
-		if hasExclude {
-			maxBOF, maxEOF = waitSet.MaxOffsets()
-		}
+	waitSet := b.priorities.WaitSet(exclude...)
+	var maxBOF, maxEOF int
+	if len(exclude) > 0 {
+		maxBOF, maxEOF = waitSet.MaxOffsets()
+	} else {
+		maxBOF, maxEOF = b.maxBOF, b.maxEOF
 	}
 	incoming := b.scorer(buf, waitSet, quit, r)
 	rdr := siegreader.LimitReaderFrom(buf, maxBOF)

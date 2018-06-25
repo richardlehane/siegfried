@@ -109,7 +109,7 @@ func (m Matcher) add(s string, fmt int) {
 }
 
 // Identify tests the supplied MIME-type against the MIMEMatcher. The Buffer is not used.
-func (m Matcher) Identify(s string, na *siegreader.Buffer, hints ...core.Hint) (chan core.Result, error) {
+func (m Matcher) Identify(s string, na *siegreader.Buffer, exclude ...int) (chan core.Result, error) {
 	var (
 		fmts, tfmts []int
 		idx         int

@@ -116,19 +116,20 @@ func (m Matcher) addSigs(i int, nameParts [][]string, sigParts [][]frames.Signat
 	}
 	// give as a starting index the current total of persists in the matcher, except those in the ContainerMatcher in question
 	m[i].startIndexes = append(m[i].startIndexes, m.total(i))
+	prev := len(m[i].parts)
 	for j, n := range nameParts {
 		err = m[i].addSignature(n, sigParts[j])
 		if err != nil {
 			return err
 		}
 	}
+	m[i].priorities.Add(l, len(nameParts), 0, 0)
 	for _, v := range m[i].nameCTest {
-		err = v.commit()
+		err := v.commit(l, prev)
 		if err != nil {
 			return err
 		}
 	}
-	m[i].priorities.Add(l, len(nameParts), 0, 0)
 	return nil
 }
 
@@ -291,13 +292,32 @@ func (ct *cTest) add(s frames.Signature, t int) {
 	ct.buffer = append(ct.buffer, s)
 }
 
-// call for each key after all signatures added
-func (ct *cTest) commit() error {
+// call for each key after all persists added
+func (ct *cTest) commit(p priority.List, prev int) error {
 	if ct.buffer == nil {
 		return nil
 	}
+	// don't set priorities if any of the persists are identical
+	var dupes bool
 	var err error
-	ct.bm, _, err = bytematcher.Add(ct.bm, bytematcher.SignatureSet(ct.buffer), nil) // don't need to add priorities
+	for i, v := range ct.buffer {
+		if i == len(ct.buffer)-1 {
+			break
+		}
+		for _, v2 := range ct.buffer[i+1:] {
+			if v.Equals(v2) {
+				dupes = true
+				break
+			}
+		}
+	}
+	if dupes {
+		ct.bm, _, err = bytematcher.Add(ct.bm, bytematcher.SignatureSet(ct.buffer), nil)
+		ct.bm.(*bytematcher.Matcher).SetLowMem()
+		ct.buffer = nil
+		return err
+	}
+	ct.bm, _, err = bytematcher.Add(ct.bm, bytematcher.SignatureSet(ct.buffer), nil)
 	ct.bm.(*bytematcher.Matcher).SetLowMem()
 	ct.buffer = nil
 	return err

@@ -168,9 +168,9 @@ func Add(c core.Matcher, ss core.SignatureSet, priorities priority.List) (core.M
 //       fmt.Print("Success! It is signature 0!")
 //     }
 //   }
-func (b *Matcher) Identify(name string, sb *siegreader.Buffer, hints ...core.Hint) (chan core.Result, error) {
+func (b *Matcher) Identify(name string, sb *siegreader.Buffer, exclude ...int) (chan core.Result, error) {
 	quit, ret := make(chan struct{}), make(chan core.Result)
-	go b.identify(sb, quit, ret, hints...)
+	go b.identify(sb, quit, ret, exclude...)
 	return ret, nil
 }
 
@@ -236,12 +236,12 @@ func (b *Matcher) TestTreeLen() int {
 }
 
 func (b *Matcher) DescribeKeyFrames(i int) []string {
-	if i < 0 || i >= len(b.keyFrames) {
+	if i< 0 || i >= len(b.keyFrames)  {
 		return nil
 	}
 	ret := make([]string, len(b.keyFrames[i]))
 	for j := range ret {
-		ret[j] = b.keyFrames[i][j].String()
+		ret[j] = b.keyFrames[i][j].String() 
 	}
 	return ret
 }

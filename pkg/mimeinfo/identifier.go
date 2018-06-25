@@ -183,18 +183,18 @@ func rel(prev, post int) int {
 	return prev - 1
 }
 
-func (r *Recorder) Satisfied(mt core.MatcherType) (bool, core.Hint) {
+func (r *Recorder) Satisfied(mt core.MatcherType) (bool, int) {
 	if r.NoPriority() {
-		return false, core.Hint{}
+		return false, 0
 	}
 	sort.Sort(r.ids)
 	if len(r.ids) > 0 && (r.ids[0].xmlMatch || (r.ids[0].magicScore > 0 && r.ids[0].ID != config.TextMIME())) {
 		if mt == core.ByteMatcher {
-			return true, core.Hint{r.Start(mt), nil}
+			return true, r.Start(mt)
 		}
-		return true, core.Hint{}
+		return true, 0
 	}
-	return false, core.Hint{}
+	return false, 0
 }
 
 func (r *Recorder) Report() []core.Identification {

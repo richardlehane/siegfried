@@ -252,31 +252,6 @@ func (s *Siegfried) Put(buffer *siegreader.Buffer) {
 	s.buffers.Put(buffer)
 }
 
-func satisfied(mt core.MatcherType, recs []core.Recorder) (bool, []core.Hint) {
-	sat := true
-	var hints []core.Hint
-	if mt == core.ByteMatcher || mt == core.ContainerMatcher {
-		hints = make([]core.Hint, 0, len(recs))
-	}
-	for _, rec := range recs {
-		ok, h := rec.Satisfied(mt)
-		if mt == core.ByteMatcher || mt == core.ContainerMatcher {
-			if !ok {
-				sat = false
-				if h.Pivot != nil {
-					hints = append(hints, h)
-				}
-			} else {
-				hints = append(hints, h)
-			}
-		} else if !ok {
-			sat = false
-			break
-		}
-	}
-	return sat, hints
-}
-
 // IdentifyBuffer identifies a siegreader buffer. Supply the error from Get as the second argument.
 func (s *Siegfried) IdentifyBuffer(buffer *siegreader.Buffer, err error, name, mime string) ([]core.Identification, error) {
 	if err != nil && err != siegreader.ErrEmpty {
@@ -323,12 +298,11 @@ func (s *Siegfried) IdentifyBuffer(buffer *siegreader.Buffer, err error, name, m
 		}
 	}
 	// Container Matcher
-	_, hints := satisfied(core.ContainerMatcher, recs)
 	if s.cm != nil {
 		if config.Debug() {
 			fmt.Fprintln(config.Out(), ">>START CONTAINER MATCHER")
 		}
-		cms, cerr := s.cm.Identify(name, buffer, hints...)
+		cms, cerr := s.cm.Identify(name, buffer)
 		for v := range cms {
 			for _, rec := range recs {
 				if rec.Record(core.ContainerMatcher, v) {
@@ -340,49 +314,74 @@ func (s *Siegfried) IdentifyBuffer(buffer *siegreader.Buffer, err error, name, m
 			err = cerr
 		}
 	}
-	sat, _ := satisfied(core.XMLMatcher, recs)
+	satisfied := true
 	// XML Matcher
-	if s.xm != nil && !sat {
-		if config.Debug() {
-			fmt.Fprintln(config.Out(), ">>START XML MATCHER")
-		}
-		xms, xerr := s.xm.Identify("", buffer)
-		for v := range xms {
-			for _, rec := range recs {
-				if rec.Record(core.XMLMatcher, v) {
-					break
-				}
+	if s.xm != nil {
+		for _, rec := range recs {
+			if ok, _ := rec.Satisfied(core.XMLMatcher); !ok {
+				satisfied = false
+				break
 			}
 		}
-		if err == nil {
-			err = xerr
+		if !satisfied {
+			if config.Debug() {
+				fmt.Fprintln(config.Out(), ">>START XML MATCHER")
+			}
+			xms, xerr := s.xm.Identify("", buffer)
+			for v := range xms {
+				for _, rec := range recs {
+					if rec.Record(core.XMLMatcher, v) {
+						break
+					}
+				}
+			}
+			if err == nil {
+				err = xerr
+			}
 		}
 	}
-	sat, _ = satisfied(core.RIFFMatcher, recs)
+	satisfied = true
 	// RIFF Matcher
-	if s.rm != nil && !sat {
-		if config.Debug() {
-			fmt.Fprintln(config.Out(), ">>START RIFF MATCHER")
-		}
-		rms, rerr := s.rm.Identify("", buffer)
-		for v := range rms {
-			for _, rec := range recs {
-				if rec.Record(core.RIFFMatcher, v) {
-					break
-				}
+	if s.rm != nil {
+		for _, rec := range recs {
+			if ok, _ := rec.Satisfied(core.RIFFMatcher); !ok {
+				satisfied = false
+				break
 			}
 		}
-		if err == nil {
-			err = rerr
+		if !satisfied {
+			if config.Debug() {
+				fmt.Fprintln(config.Out(), ">>START RIFF MATCHER")
+			}
+			rms, rerr := s.rm.Identify("", buffer)
+			for v := range rms {
+				for _, rec := range recs {
+					if rec.Record(core.RIFFMatcher, v) {
+						break
+					}
+				}
+			}
+			if err == nil {
+				err = rerr
+			}
 		}
 	}
-	sat, hints = satisfied(core.ByteMatcher, recs)
+	satisfied = true
+	exclude := make([]int, 0, len(recs))
+	for _, rec := range recs {
+		ok, ex := rec.Satisfied(core.ByteMatcher)
+		if !ok {
+			satisfied = false
+		} else {
+			exclude = append(exclude, ex)
+		}
+	}
 	// Byte Matcher
-	if s.bm != nil && !sat {
+	if s.bm != nil && !satisfied {
 		if config.Debug() {
 			fmt.Fprintln(config.Out(), ">>START BYTE MATCHER")
 		}
-		ids, _ := s.bm.Identify("", buffer, hints...) // we don't care about an error here
+		ids, _ := s.bm.Identify("", buffer, exclude...) // we don't care about an error here
 		for v := range ids {
 			for _, rec := range recs {
 				if rec.Record(core.ByteMatcher, v) {
@@ -391,9 +390,15 @@ func (s *Siegfried) IdentifyBuffer(buffer *siegreader.Buffer, err error, name, m
 			}
 		}
 	}
-	sat, _ = satisfied(core.TextMatcher, recs)
+	satisfied = true
+	for _, rec := range recs {
+		if ok, _ := rec.Satisfied(core.TextMatcher); !ok {
+			satisfied = false
+			break
+		}
+	}
 	// Text Matcher
-	if s.tm != nil && !sat {
+	if s.tm != nil && !satisfied {
 		ids, _ := s.tm.Identify("", buffer) // we don't care about an error here
 		for v := range ids {
 			for _, rec := range recs {

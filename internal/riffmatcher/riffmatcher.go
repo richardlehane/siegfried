@@ -131,7 +131,7 @@ func (r result) Basis() string {
 	return "fourCC matches " + string(r.cc[:])
 }
 
-func (m Matcher) Identify(na string, b *siegreader.Buffer, hints ...core.Hint) (chan core.Result, error) {
+func (m Matcher) Identify(na string, b *siegreader.Buffer, exclude ...int) (chan core.Result, error) {
 	buf, err := b.Slice(0, 8)
 	if err != nil || buf[0] != 'R' || buf[1] != 'I' || buf[2] != 'F' || buf[3] != 'F' {
 		res := make(chan core.Result)
@@ -147,7 +147,7 @@ func (m Matcher) Identify(na string, b *siegreader.Buffer, hints ...core.Hint) (
 	// now make structures for testing
 	uniqs := make(map[riff.FourCC]bool)
 	res := make(chan core.Result)
-	waitset := m.priorities.WaitSet(hints...)
+	waitset := m.priorities.WaitSet(exclude...)
 	// send and report if satisified
 	send := func(cc riff.FourCC) bool {
 		if config.Debug() {

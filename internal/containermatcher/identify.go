@@ -24,7 +24,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core"
 )
 
-func (m Matcher) Identify(n string, b *siegreader.Buffer, hints ...core.Hint) (chan core.Result, error) {
+func (m Matcher) Identify(n string, b *siegreader.Buffer, exclude ...int) (chan core.Result, error) {
 	res := make(chan core.Result)
 	// check trigger
 	buf, err := b.Slice(0, 8)

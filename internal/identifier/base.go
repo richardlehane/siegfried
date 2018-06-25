@@ -17,7 +17,6 @@ package identifier
 import (
 	"fmt"
 	"strings"
-	"sync"
 
 	"github.com/richardlehane/siegfried/internal/bytematcher"
 	"github.com/richardlehane/siegfried/internal/bytematcher/frames"
@@ -40,50 +39,34 @@ type Base struct {
 	details                                  string
 	multi                                    config.Multi
 	zipDefault                               bool
-	gids, mids, cids, xids, bids, rids, tids *indexes
+	gids, mids, cids, xids, bids, rids, tids indexes
 }
 
 type indexes struct {
-	start  int
-	ids    []string
-	once   sync.Once
-	lookup map[string][]int
+	start int
+	ids   []string
 }
 
-func (ii *indexes) find(ks []string) []int {
-	ii.once.Do(func() {
-		ii.lookup = make(map[string][]int)
-		for i, v := range ii.ids {
-			ii.lookup[v] = append(ii.lookup[v], ii.start+i)
-		}
-	})
-	ret := make([]int, 0, len(ks)*2)
-	for _, k := range ks {
-		ret = append(ret, ii.lookup[k]...)
-	}
-	return ret
-}
-
-func (ii *indexes) hit(i int) (bool, string) {
+func (ii indexes) hit(i int) (bool, string) {
 	if i >= ii.start && i < ii.start+len(ii.ids) {
 		return true, ii.ids[i-ii.start]
 	}
 	return false, ""
 }
 
-func (ii *indexes) first(i int) (bool, string) {
+func (ii indexes) first(i int) (bool, string) {
 	if i == ii.start && len(ii.ids) > 0 {
 		return true, ii.ids[0]
 	}
 	return false, ""
 }
 
-func (ii *indexes) save(ls *persist.LoadSaver) {
+func (ii indexes) save(ls *persist.LoadSaver) {
 	ls.SaveInt(ii.start)
 	ls.SaveStrings(ii.ids)
 }
 
-func (ii *indexes) place(i int) (int, int) {
+func (ii indexes) place(i int) (int, int) {
 	if i >= ii.start && i < ii.start+len(ii.ids) {
 		idx, id := i-ii.start, ii.ids[i-ii.start]
 		var prev, post int
@@ -98,10 +81,10 @@ func (ii *indexes) place(i int) (int, int) {
 	return -1, -1
 }
 
-func loadIndexes(ls *persist.LoadSaver) *indexes {
-	return &indexes{
-		start: ls.LoadInt(),
-		ids:   ls.LoadStrings(),
+func loadIndexes(ls *persist.LoadSaver) indexes {
+	return indexes{
+		ls.LoadInt(),
+		ls.LoadStrings(),
 	}
 }
 
@@ -112,7 +95,6 @@ func New(p Parseable, zip string, extra ...string) *Base {
 		details:    config.Details(extra...),
 		multi:      config.GetMulti(),
 		zipDefault: contains(p.IDs(), zip),
-		gids:       &indexes{}, mids: &indexes{}, cids: &indexes{}, xids: &indexes{}, bids: &indexes{}, rids: &indexes{}, tids: &indexes{},
 	}
 }
 
@@ -272,27 +254,6 @@ func (b *Base) Place(m core.MatcherType, idx int) (int, int) {
 		return b.rids.place(idx)
 	case core.TextMatcher:
 		return b.tids.place(idx)
-	}
-}
-
-func (b *Base) Lookup(m core.MatcherType, keys []string) []int {
-	switch m {
-	default:
-		return nil
-	case core.NameMatcher:
-		return b.gids.find(keys)
-	case core.MIMEMatcher:
-		return b.mids.find(keys)
-	case core.ContainerMatcher:
-		return b.cids.find(keys)
-	case core.XMLMatcher:
-		return b.xids.find(keys)
-	case core.ByteMatcher:
-		return b.bids.find(keys)
-	case core.RIFFMatcher:
-		return b.rids.find(keys)
-	case core.TextMatcher:
-		return b.tids.find(keys)
 	}
 }
 

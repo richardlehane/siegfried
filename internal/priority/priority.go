@@ -23,7 +23,6 @@ import (
 	"sync"
 
 	"github.com/richardlehane/siegfried/internal/persist"
-	"github.com/richardlehane/siegfried/pkg/core"
 )
 
 // a priority map links subordinate results to a list of priority results
@@ -235,6 +234,7 @@ func (l List) String() string {
 }
 
 // A priority set holds a number of priority lists
+// Todo: add a slice of max BOF/ EOF offsets (so that signature sets without priorities but with bof limits/eof limits won't cause lengthy scans)
 type Set struct {
 	idx        []int
 	lists      []List
@@ -280,6 +280,7 @@ func Load(ls *persist.LoadSaver) *Set {
 
 // Add a priority list to a set. The length is the number of signatures the priority list applies to, not the length of the priority list.
 // This length will only differ when no priorities are set for a given set of signatures.
+// Todo: add maxOffsets here
 func (s *Set) Add(l List, length, bof, eof int) {
 	var last int
 	if len(s.idx) > 0 {
@@ -313,7 +314,7 @@ func (s *Set) await(idx int, bof, eof int64) bool {
 	return false
 }
 
-// Index return the index of the s.lists for the wait list, and return the previous tally
+// return the index of the s.lists for the wait list, and return the previous tally
 // previous tally is necessary for adding to the values in the priority list to give real priorities
 func (s *Set) Index(i int) (int, int) {
 	var prev int
@@ -330,32 +331,23 @@ func (s *Set) Index(i int) (int, int) {
 // A wait set is a mutating structure that holds the set of indexes that should be waited for while matching underway
 type WaitSet struct {
 	*Set
-	wait  [][]int // a nil list means we're not waiting on anything yet; an empty list means nothing to wait for i.e. satisifed
-	pivot [][]int // a pivot list is a list of indexes that we could potentially pivot to. E.g. for a .pdf file that has mp3 signatures, but is actually a PDF
-	m     *sync.RWMutex
+	wait [][]int
+	m    *sync.RWMutex
 }
 
-// WaitSet creates a new WaitSet given a list of hints
-func (s *Set) WaitSet(hints ...core.Hint) *WaitSet {
+func (s *Set) WaitSet(exclude ...int) *WaitSet {
 	ws := &WaitSet{
 		s,
 		make([][]int, len(s.lists)),
-		make([][]int, len(s.lists)),
 		&sync.RWMutex{},
 	}
-	for _, h := range hints {
-		idx, _ := s.Index(h.Exclude)
-		if h.Pivot == nil {
-			ws.wait[idx] = []int{}
-		} else {
-			ws.pivot[idx] = h.Pivot
-		}
+	for _, e := range exclude {
+		idx, _ := s.Index(e)
+		ws.wait[idx] = []int{}
 	}
 	return ws
 }
 
-// MaxOffsets returns max/min offset info in order to override the max/min offsets set on the bytematcher when
-// any identifiers have been excluded.
 func (w *WaitSet) MaxOffsets() (int, int) {
 	var bof, eof int
 	for i, v := range w.wait {
@@ -371,19 +363,6 @@ func (w *WaitSet) MaxOffsets() (int, int) {
 	return bof, eof
 }
 
-func inPivot(i int, ii []int) bool {
-	for _, v := range ii {
-		if i == v {
-			return true
-		}
-	}
-	return false
-}
-
-func mightPivot(i int, ii []int) bool {
-	return len(ii) > 0 && !inPivot(i, ii)
-}
-
 // Set the priority list & return a boolean indicating whether the WaitSet is satisfied such that matching can stop (i.e. no priority list is nil, and all are empty)
 func (w *WaitSet) Put(i int) bool {
 	idx, prev := w.Index(i)
@@ -394,26 +373,24 @@ func (w *WaitSet) Put(i int) bool {
 	}
 	w.m.Lock()
 	defer w.m.Unlock()
-	// set the wait list
 	w.wait[idx] = l
-	mp := mightPivot(i, w.pivot[idx])
-	if !mp {
-		w.pivot[idx] = nil // ditch the pivot list if it is just confirming a match or empty
-	}
 	// if we have any priorities, then we aren't satisified
-	if len(l) > 0 || mp {
+	if len(l) > 0 {
 		return false
 	}
-	// if l is 0, and we have only one priority set, and we're not going to pivot, then we are satisfied
-	if len(w.wait) == 1 && !mp {
+	// if l is 0 and we have only one priority set, then we are satisfied
+	if len(w.wait) == 1 {
 		return true
 	}
-	// otherwise, let's check all the other priority sets for wait sets or pivot lists
+	// otherwise, let's check all the other priority sets
 	for i, v := range w.wait {
 		if i == idx {
 			continue
 		}
-		if v == nil || len(v) > 0 || len(w.pivot[i]) > 0 {
+		if v == nil {
+			return false
+		}
+		if len(v) > 0 {
 			return false
 		}
 	}
@@ -430,18 +407,13 @@ func (w *WaitSet) PutAt(i int, bof, eof int64) bool {
 	}
 	w.m.Lock()
 	defer w.m.Unlock()
-	// set the wait list
 	w.wait[idx] = l
-	mp := mightPivot(i, w.pivot[idx])
-	if !mp {
-		w.pivot[idx] = nil // ditch the pivot list if it is just confirming a match or empty
-	}
 	// if we have any priorities, then we aren't satisified
-	if (len(l) > 0 || mp) && w.await(idx, bof, eof) {
+	if len(l) > 0 && w.await(idx, bof, eof) {
 		return false
 	}
-	// if l is 0, and we have only one priority set, and we're not going to pivot, then we are satisfied
-	if len(w.wait) == 1 && !mp {
+	// if l is 0 and we have only one priority set, then we are satisfied
+	if len(w.wait) == 1 {
 		return true
 	}
 	// otherwise, let's check all the other priority sets
@@ -450,7 +422,7 @@ func (w *WaitSet) PutAt(i int, bof, eof int64) bool {
 			continue
 		}
 		if w.await(i, bof, eof) {
-			if v == nil || len(v) > 0 || len(w.pivot[i]) > 0 {
+			if v == nil || len(v) > 0 {
 				return false
 			}
 		}
@@ -472,7 +444,7 @@ func (w *WaitSet) check(i, idx, prev int) bool {
 	}
 	j := sort.SearchInts(w.wait[idx], i-prev)
 	if j == len(w.wait[idx]) || w.wait[idx][j] != i-prev {
-		return inPivot(i, w.pivot[idx])
+		return false
 	}
 	return true
 }
@@ -515,11 +487,11 @@ func (w *WaitSet) WaitingOn() []int {
 	w.m.RLock()
 	defer w.m.RUnlock()
 	var l int
-	for i, v := range w.wait {
+	for _, v := range w.wait {
 		if v == nil {
 			return nil
 		}
-		l = l + len(v) + len(w.pivot[i])
+		l = l + len(v)
 	}
 	ret := make([]int, l)
 	var prev, j int
@@ -528,7 +500,6 @@ func (w *WaitSet) WaitingOn() []int {
 			ret[j] = x + prev
 			j++
 		}
-		copy(ret[j:], w.pivot[i])
 		prev = w.idx[i]
 	}
 	return ret
@@ -546,7 +517,7 @@ func (w *WaitSet) WaitingOnAt(bof, eof int64) []int {
 			if v == nil {
 				return nil
 			}
-			l = l + len(v) + len(w.pivot[i])
+			l = l + len(v)
 		}
 	}
 	ret := make([]int, l)
@@ -557,7 +528,6 @@ func (w *WaitSet) WaitingOnAt(bof, eof int64) []int {
 				ret[j] = x + prev
 				j++
 			}
-			copy(ret[j:], w.pivot[i])
 		}
 		prev = w.idx[i]
 	}
