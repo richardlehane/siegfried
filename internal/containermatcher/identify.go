@@ -32,20 +32,77 @@ func (m Matcher) Identify(n string, b *siegreader.Buffer, hints ...core.Hint) (c
 		close(res)
 		return res, nil
 	}
-	for _, c := range m {
+	divhints := m.divideHints(hints)
+	for i, c := range m {
 		if c.trigger(buf) {
 			rdr, err := c.rdr(b)
 			if err != nil {
 				close(res)
 				return res, err
 			}
-			go c.identify(n, rdr, res)
+			go c.identify(n, rdr, res, divhints[i]...)
 			return res, nil
 		}
 	}
 	// nothing ... move on
 	close(res)
 	return res, nil
+}
+
+// ranges allows referencing a container hit back to a specific container matcher (used by divideHints)
+// returns running number / matcher index / identifier index
+func (m Matcher) ranges() [][3]int {
+	var l int
+	for _, c := range m {
+		l += len(c.startIndexes)
+	}
+	ret := make([][3]int, l)
+	var prev, this, idx, jdx int
+	for i := range ret {
+		prev = this
+		this = m[idx].startIndexes[jdx]
+		ret[i] = [3]int{prev + this, idx, jdx}
+		idx++
+		if idx >= len(m) {
+			jdx++
+			idx = 0
+		}
+	}
+	return ret
+}
+
+func findID(id int, rng [][3]int) (int, int) {
+	var idx int
+	for idx = range rng {
+		if rng[idx][0] >= id {
+			if idx > 0 {
+				idx--
+			}
+			break
+		}
+	}
+	return rng[idx][1], rng[idx][2]
+}
+
+func (m Matcher) divideHints(hints []core.Hint) [][]core.Hint {
+	ret := make([][]core.Hint, len(m))
+	for i := range ret {
+		ret[i] = make([]core.Hint, len(hints))
+	}
+	rng := m.ranges()
+	for i, h := range hints {
+		if len(h.Pivot) == 0 {
+			continue
+		}
+		for _, p := range h.Pivot {
+			midx, iidx := findID(p, rng)
+			if ret[midx][i].Pivot == nil {
+				ret[midx][i].Pivot = make([]int, 0, len(h.Pivot))
+			}
+			ret[midx][i].Pivot = append(ret[midx][i].Pivot, p-m[midx].startIndexes[iidx])
+		}
+	}
+	return ret
 }
 
 type identifier struct {
@@ -56,23 +113,23 @@ type identifier struct {
 	result       bool
 }
 
-func (c *ContainerMatcher) newIdentifier(numParts int) *identifier {
+func (c *ContainerMatcher) newIdentifier(numParts int, hints ...core.Hint) *identifier {
 	return &identifier{
 		make([][]hit, numParts),
 		make([]bool, numParts),
-		c.priorities.WaitSet(),
+		c.priorities.WaitSet(hints...),
 		make([]hit, 0, 1),
 		false,
 	}
 }
 
-func (c *ContainerMatcher) identify(n string, rdr Reader, res chan core.Result) {
+func (c *ContainerMatcher) identify(n string, rdr Reader, res chan core.Result, hints ...core.Hint) {
 	// safe to call on a nil matcher (i.e. container matching switched off)
 	if c == nil {
 		close(res)
 		return
 	}
-	id := c.newIdentifier(len(c.parts))
+	id := c.newIdentifier(len(c.parts), hints...)
 	var err error
 	for err = rdr.Next(); err == nil; err = rdr.Next() {
 		ct, ok := c.nameCTest[rdr.Name()]

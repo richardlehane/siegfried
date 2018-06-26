@@ -114,7 +114,7 @@ func (m Matcher) addSigs(i int, nameParts [][]string, sigParts [][]frames.Signat
 	if len(nameParts) != len(sigParts) {
 		return fmt.Errorf("Container: expecting equal name and persist parts")
 	}
-	// give as a starting index the current total of persists in the matcher, except those in the ContainerMatcher in question
+	// give as a starting index the current total of signatures in the matcher, except those in the ContainerMatcher in question
 	m[i].startIndexes = append(m[i].startIndexes, m.total(i))
 	for j, n := range nameParts {
 		err = m[i].addSignature(n, sigParts[j])

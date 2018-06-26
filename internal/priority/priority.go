@@ -331,6 +331,7 @@ func (s *Set) Index(i int) (int, int) {
 type WaitSet struct {
 	*Set
 	wait  [][]int // a nil list means we're not waiting on anything yet; an empty list means nothing to wait for i.e. satisifed
+	this  []int   // record last hit so can avoid pivotting to weaker matches
 	pivot [][]int // a pivot list is a list of indexes that we could potentially pivot to. E.g. for a .pdf file that has mp3 signatures, but is actually a PDF
 	m     *sync.RWMutex
 }
@@ -340,6 +341,7 @@ func (s *Set) WaitSet(hints ...core.Hint) *WaitSet {
 	ws := &WaitSet{
 		s,
 		make([][]int, len(s.lists)),
+		make([]int, len(s.lists)),
 		make([][]int, len(s.lists)),
 		&sync.RWMutex{},
 	}
@@ -396,6 +398,8 @@ func (w *WaitSet) Put(i int) bool {
 	defer w.m.Unlock()
 	// set the wait list
 	w.wait[idx] = l
+	// set this
+	w.this[idx] = i - prev
 	mp := mightPivot(i, w.pivot[idx])
 	if !mp {
 		w.pivot[idx] = nil // ditch the pivot list if it is just confirming a match or empty
@@ -432,6 +436,8 @@ func (w *WaitSet) PutAt(i int, bof, eof int64) bool {
 	defer w.m.Unlock()
 	// set the wait list
 	w.wait[idx] = l
+	// set this
+	w.this[idx] = i - prev
 	mp := mightPivot(i, w.pivot[idx])
 	if !mp {
 		w.pivot[idx] = nil // ditch the pivot list if it is just confirming a match or empty
@@ -472,7 +478,15 @@ func (w *WaitSet) check(i, idx, prev int) bool {
 	}
 	j := sort.SearchInts(w.wait[idx], i-prev)
 	if j == len(w.wait[idx]) || w.wait[idx][j] != i-prev {
-		return inPivot(i, w.pivot[idx])
+		if inPivot(i, w.pivot[idx]) {
+			l := w.list(idx, i-prev)
+			k := sort.SearchInts(l, w.this[idx])
+			if k < len(l) && l[k] == w.this[idx] {
+				return false
+			}
+			return true
+		}
+		return false
 	}
 	return true
 }
@@ -529,6 +543,7 @@ func (w *WaitSet) WaitingOn() []int {
 			j++
 		}
 		copy(ret[j:], w.pivot[i])
+		j += len(w.pivot[i])
 		prev = w.idx[i]
 	}
 	return ret
@@ -558,6 +573,7 @@ func (w *WaitSet) WaitingOnAt(bof, eof int64) []int {
 				j++
 			}
 			copy(ret[j:], w.pivot[i])
+			j += len(w.pivot[i])
 		}
 		prev = w.idx[i]
 	}
