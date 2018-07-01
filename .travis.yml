@@ -1,7 +1,7 @@
 sudo: false
 language: go
 go:
-- 1.x
+- stable
 # set packet, runner, and bb account/key env vars
 env:
   global:
