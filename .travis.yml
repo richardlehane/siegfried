@@ -2,17 +2,18 @@ sudo: false
 language: go
 go:
 - 1.x
+# set packet, runner, and bb account/key env vars
 env:
   global:
   - secure: PibTvGBFP7+PfSl2jZMSwl7/15EENLJI3nmmqwwUbQ+OOqIF6T1JnP0d4P9iAiebUqEuP9fp3/zNgm1LXXKE1vt9EOqx/i1WnbcWcM3yLq4qOVl/wSYAlUK1pe/Dw8i4aHoB1LcRgFjKlV4r5IoQzq6ow9bQhjLGiAB027wjpO0=
   - secure: Cu3Gf2Hb+WJiL/dRG2PK2Gg9ykJyNsMcIgaSNd8S+FN+X4Ltv5kmucUbjmiPXHXIjGWDDRX9tMw+wpuY5PfeG8sqvkVVw9ihkgnpeaqPC6ai2oQc/697iUoAy2w0nzTSZmYPOl9hNfH08OJPrOpoFk9Fkj7VIxnxZxvva4t6c3s=
   - secure: lUEvW4eDkbFPZNqn+d2VCWpfpiIYBikjmNd8jNdTJhyiGNqpz74pMznndQJyFHx5dxPL1B+ZAqHbu4bH8aC0H0zihdeGhN5QX1d7GIue3/x6lKoumvLNUpRAlSnH+9IBtuKKpsIpEHLHHKo/aAs3BYhCWy54XCYQb1879t8yvBw=
   - secure: MGuqXRbAYTbaN7QOJ7TXOHvbmCZCjT6BQ4X8Vi1mjyz/e/n/UVi9rsnGTtLbKTyK1C52lW6N/vKdr28SZAX8K8AVnVNxquaOJnMNA4NRO1M25Nv579ahYTlEb65tUDFbqd88QeRc032pdARUBaPMKrH3PRp6WOioEQOsLE4IDCk=
-
+# install siegfried and provisioner
 install:
 - go install github.com/richardlehane/siegfried/cmd/sf
-- go get github.com/richardlehane/siegfried/provisioner
-
+- go get github.com/richardlehane/provisioner
+# run test, provision, and deploy jobs
 jobs:
   include:
   - stage: test
