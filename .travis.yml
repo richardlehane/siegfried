@@ -13,7 +13,7 @@ env:
 install:
 - go install github.com/richardlehane/siegfried/cmd/sf
 - go get github.com/richardlehane/provisioner
-# run test, provision, and deploy jobs
+# run test, provision (deploy/bench), and deploy jobs
 jobs:
   include:
   - stage: test
