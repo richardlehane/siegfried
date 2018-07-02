@@ -7,7 +7,6 @@
 
 ### Changed
 - the `roy compare -join` options that join on filepath now work better when comparing results with mixed windows and unix paths
-- proof of life
 
 ### Fixed
 - read and other file errors caused sf to hang; reports by [Greg Lepore and Andy Foster](https://github.com/richardlehane/siegfried/issues/113); fix contributed by [Ross Spencer](https://github.com/richardlehane/siegfried/commit/ea5300d3639d741a451522958e8b99912f7d639d)
