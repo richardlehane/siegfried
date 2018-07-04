@@ -12,7 +12,7 @@ env:
 # install siegfried and provisioner
 install:
 - go install github.com/richardlehane/siegfried/cmd/sf
-- go get -d github.com/richardlehane/provisioner
+- go get github.com/richardlehane/provisioner
 # run test, provision (deploy/bench), and deploy jobs
 jobs:
   include:
