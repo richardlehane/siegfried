@@ -20,11 +20,11 @@ jobs:
     script: go test github.com/richardlehane/siegfried/cmd/sf
   - stage: develop
     if: branch = develop
-    script: provisioner -host=develop-${RAND}.itforarchivists.com -env=RUNNER_AUTH,BB_ACCOUNT,BB_KEY
+    script: provisioner -host=develop-RAND.itforarchivists.com -env=RUNNER_AUTH,BB_ACCOUNT,BB_KEY
       $HOME/gopath/src/github.com/richardlehane/provisioner/scripts/develop.yaml
   - stage: bench
     if: branch = master
-    script: provisioner -host=bench-${RAND}.itforarchivists.com -env=RUNNER_AUTH,BB_ACCOUNT,BB_KEY
+    script: provisioner -host=bench-RAND.itforarchivists.com -env=RUNNER_AUTH,BB_ACCOUNT,BB_KEY
       $HOME/gopath/src/github.com/richardlehane/provisioner/scripts/bench.yaml
   - stage: deploy
     if: branch = master
