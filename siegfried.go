@@ -263,7 +263,7 @@ func satisfied(mt core.MatcherType, recs []core.Recorder) (bool, []core.Hint) {
 		if mt == core.ByteMatcher || mt == core.ContainerMatcher {
 			if !ok {
 				sat = false
-				if h.Pivot != nil {
+				if len(h.Pivot) > 0 {
 					hints = append(hints, h)
 				}
 			} else {
