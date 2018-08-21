@@ -24,7 +24,7 @@ jobs:
       $HOME/gopath/src/github.com/richardlehane/provisioner/scripts/develop.yaml
   - stage: bench
     if: branch = master
-    script: provisioner -life=2h -host=bench-RAND.itforarchivists.com -env=PACKET_AUTH_TOKEN,RUNNER_AUTH,BB_ACCOUNT,BB_KEY
+    script: provisioner -life=12h -max=-1 -host=bench-RAND.itforarchivists.com -env=PACKET_AUTH_TOKEN,RUNNER_AUTH,BB_ACCOUNT,BB_KEY
       $HOME/gopath/src/github.com/richardlehane/provisioner/scripts/bench.yaml
   - stage: deploy
     if: branch = master
