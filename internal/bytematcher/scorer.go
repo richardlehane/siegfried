@@ -398,29 +398,31 @@ func (b *Matcher) scorer(buf *siegreader.Buffer, waitSet *priority.WaitSet, q ch
 				return false, ""
 			}
 		}
-		next := iteratePartials(h.partials)
-		var start, end int
-		var basis [][2]int64
-		for basis = next(start, len(kfs)-1); basis != nil; basis = next(start, end) {
-			prevKf := kfs[0]
-			var ok, checkpoint bool
-			for i, kf := range kfs[1:] {
-				ok, checkpoint = checkRelatedKF(kf, prevKf, basis[i+1], basis[i])
-				if !ok {
-					if end < i+1 {
-						end = i + 1
+		return searchPartials(h.partials, kfs)
+		/*
+			next := iteratePartials(h.partials)
+			var start, end int
+			var basis [][2]int64
+			for basis = next(start, len(kfs)-1); basis != nil; basis = next(start, end) {
+				prevKf := kfs[0]
+				var ok, checkpoint bool
+				for i, kf := range kfs[1:] {
+					ok, checkpoint = checkRelatedKF(kf, prevKf, basis[i+1], basis[i])
+					if !ok {
+						if end < i+1 {
+							end = i + 1
+						}
+						break
 					}
-					break
+					if checkpoint && start < i+1 {
+						start = i + 1
+					}
 				}
-				if checkpoint && start < i+1 {
-					start = i + 1
+				if ok {
+					return true, fmt.Sprintf("byte match at %v", basis)
 				}
 			}
-			if ok {
-				return true, fmt.Sprintf("byte match at %v", basis)
-			}
-		}
-		return false, ""
+			return false, ""*/
 	}
 
 	go func() {
