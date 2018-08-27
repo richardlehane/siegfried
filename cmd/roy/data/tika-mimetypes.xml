@@ -76,6 +76,20 @@
     <glob pattern="*.atomsvc"/>
   </mime-type>
   <mime-type type="application/auth-policy+xml"/>
+
+  <mime-type type="application/x-bat">
+    <_comment>Windows Batch / Command File</_comment>
+    <alias type="application/bat"/>
+    <sub-class-of type="text/plain"/>
+    <magic priority="50">
+      <match value="@echo off" type="string" offset="0" />
+      <match value="rem " type="string" offset="0" />
+      <match value="REM " type="string" offset="0" />
+    </magic>
+    <glob pattern="*.bat"/>
+    <glob pattern="*.cmd"/>
+  </mime-type>
+
   <mime-type type="application/batch-smtp"/>
   <mime-type type="application/beep+xml"/>
 
@@ -105,6 +119,27 @@
   <mime-type type="application/cnrp+xml"/>
   <mime-type type="application/commonground"/>
   <mime-type type="application/conference-info+xml"/>
+  
+  <mime-type type="application/coreldraw">
+     <alias type="application/x-coreldraw"/>
+     <alias type="application/x-cdr"/>
+     <alias type="application/cdr"/>
+     <alias type="image/x-cdr"/>
+     <alias type="image/cdr"/>
+     <_comment>CorelDraw</_comment>
+     <_comment>cdr: CorelDraw</_comment>
+     <_comment>des: CorelDraw X4 and newer</_comment>
+     <magic priority="60">
+        <match value="RIFF" type="string" offset="0">
+           <match value="CDR" type="string" offset="8" />
+           <match value="cdr" type="string" offset="8" />
+           <match value="DES" type="string" offset="8" />
+           <match value="des" type="string" offset="8" />
+        </match>
+     </magic>
+     <glob pattern="*.cdr"/>
+  </mime-type>
+  
   <mime-type type="application/cpl+xml"/>
   <mime-type type="application/csta+xml"/>
   <mime-type type="application/cstadata+xml"/>
@@ -334,7 +369,7 @@
     <alias type="application/mac-binhex"/>
     <alias type="application/binhex"/>
     <magic priority="50">
-      <match value="must\ be\ converted\ with\ BinHex" type="string" offset="11"/>
+      <match value="must be converted with BinHex" type="string" offset="11"/>
     </magic>
     <glob pattern="*.hqx"/>
   </mime-type>
@@ -373,10 +408,12 @@
       <match value="From " type="string" offset="0">
          <match value="\nFrom: " type="string" offset="32:256"/>
          <match value="\nDate: " type="string" offset="32:256"/>
+         <match value="\nSubject: " type="string" offset="32:256"/>
          <match value="\nDelivered-To: " type="string" offset="32:256"/>
          <match value="\nReceived: by " type="string" offset="32:256"/>
          <match value="\nReceived: via " type="string" offset="32:256"/>
          <match value="\nReceived: from " type="string" offset="32:256"/>
+         <match value="\nMime-Version: " type="string" offset="32:256"/>
       </match>
     </magic>
     <glob pattern="*.mbox"/>
@@ -824,6 +861,8 @@
   <mime-type type="application/smil+xml">
     <alias type="application/smil"/>
     <_comment>SMIL Multimedia</_comment>
+    <root-XML localName="smil"/>
+    <sub-class-of type="application/xml"/>
     <glob pattern="*.smi"/>
     <glob pattern="*.smil"/>
     <glob pattern="*.sml"/>
@@ -1375,10 +1414,22 @@
   <mime-type type="application/vnd.intu.qfx">
     <glob pattern="*.qfx"/>
   </mime-type>
+  <mime-type type="application/vnd.iptc.g2.catalogitem+xml"/>
   <mime-type type="application/vnd.iptc.g2.conceptitem+xml"/>
   <mime-type type="application/vnd.iptc.g2.knowledgeitem+xml"/>
   <mime-type type="application/vnd.iptc.g2.newsitem+xml"/>
+    
+  <mime-type type="application/vnd.iptc.g2.newsmessage+xml">
+    <root-XML localName="newsMessage"/>
+    <root-XML localName="newsMessage" namespaceURI="http://iptc.org/std/nar/2006-10-01/"/>
+    <sub-class-of type="application/xml"/>
+    <_comment>XML syntax for IPTC NewsMessages</_comment>
+    <glob pattern="*.nar"/>
+  </mime-type>
+  
   <mime-type type="application/vnd.iptc.g2.packageitem+xml"/>
+  <mime-type type="application/vnd.iptc.g2.planningitem+xml"/>
+
   <mime-type type="application/vnd.ipunplugged.rcprofile">
     <glob pattern="*.rcprofile"/>
   </mime-type>
@@ -2735,6 +2786,16 @@
   <mime-type type="application/voicexml+xml">
     <glob pattern="*.vxml"/>
   </mime-type>
+
+  <mime-type type="application/warc">
+    <acronym>WARC</acronym>
+    <_comment>WARC</_comment>
+    <magic priority="50">
+       <match value="WARC/" type="string" offset="0"/>
+    </magic>
+    <glob pattern="*.warc"/>
+  </mime-type>
+
   <mime-type type="application/watcherinfo+xml"/>
   <mime-type type="application/whoispp-query"/>
   <mime-type type="application/whoispp-response"/>
@@ -2748,6 +2809,30 @@
   </mime-type>
   <mime-type type="application/wspolicy+xml">
     <glob pattern="*.wspolicy"/>
+  </mime-type>
+  
+  <mime-type type="image/x-tga">
+     <alias type="image/x-targa"/>
+     <!-- trailer bytes: 54 52 55 45 56 49 53 49 4F 4E 2D 58 46 49 4C 45 2E 00
+          trailer as string: TRUEVISION-XFILE\\x2E\\x00
+          Some .tga files may be conflicting with application/x-123 recognition, 
+          therefore this mime-type must be set in front of application/x-123 -->
+     <_comment>Targa image data</_comment>
+     <magic priority="90">
+        <match value="0x01010000" type="big32" offset="1" >
+           <match value=".*[\\x54\\x52\\x55\\x45\\x56\\x49\\x53\\x49\\x4F\\x4E\\x2D\\x58\\x46\\x49\\x4C\\x45\\x2E\\x00]" type="regex" offset="8" />
+        </match>
+        <match value="0x00020000" type="big32" offset="1" >
+           <match value=".*[\\x54\\x52\\x55\\x45\\x56\\x49\\x53\\x49\\x4F\\x4E\\x2D\\x58\\x46\\x49\\x4C\\x45\\x2E\\x00]" type="regex" offset="8" />
+        </match>
+        <match value="0x00030000" type="big32" offset="1" >
+           <match value=".*[\\x54\\x52\\x55\\x45\\x56\\x49\\x53\\x49\\x4F\\x4E\\x2D\\x58\\x46\\x49\\x4C\\x45\\x2E\\x00]" type="regex" offset="8" />
+        </match>
+     </magic>
+     <glob pattern="*.tga"/>
+     <glob pattern="*.icb"/>
+     <glob pattern="*.vda"/>
+     <!-- <glob pattern="*.vst"/> --> <!-- conflicting with application/vnd.visio-->
   </mime-type>
 
   <mime-type type="application/x-123">
@@ -3049,6 +3134,20 @@
     <magic priority="60">
       <match value="bplist" type="string" offset="0"/>
     </magic>
+  </mime-type>
+  <mime-type type="application/x-gtar">
+    <_comment>GNU tar Compressed File Archive (GNU Tape Archive)</_comment>
+    <magic priority="50">
+      <!-- GNU tar archive -->
+      <match value="ustar  \0" type="string" offset="257" />
+    </magic>
+    <glob pattern="*.gtar"/>
+    <sub-class-of type="application/x-tar"/>
+  </mime-type>
+
+  <mime-type type="application/x-brotli">
+    <glob pattern="*.br" />
+    <glob pattern="*.brotli" />
   </mime-type>
 
   <mime-type type="application/x-bzip">
@@ -3426,9 +3525,15 @@
     <glob pattern="*.gz" />
     <glob pattern="*.tgz" />
     <glob pattern="*-gz" />
-    <glob pattern="*.emz" />
   </mime-type>
-
+  <mime-type type="application/zstd">
+    <_comment>https://en.wikipedia.org/wiki/Zstandard</_comment>
+    <_comment>https://tools.ietf.org/id/draft-kucherawy-dispatch-zstd-01.html</_comment>
+    <magic priority="50">
+      <match value="0xFD2FB528" type="little32" offset="0"/>
+    </magic>
+    <glob pattern="*.zstd"/>
+  </mime-type>
   <mime-type type="application/x-hdf">
     <_comment>Hierarchical Data Format File</_comment>
     <magic priority="50">
@@ -3468,6 +3573,15 @@
       </match>
     </magic>
     <glob pattern="*.ibooks"/>
+  </mime-type>
+
+  <mime-type type="application/x-internet-archive">
+    <acronym>ARC</acronym>
+    <_comment>ARC</_comment>
+    <magic priority="60">
+       <match value="filedesc://" type="string" offset="0"/>
+    </magic>
+    <glob pattern="*.arc"/>
   </mime-type>
 
   <mime-type type="application/x-isatab-investigation">
@@ -3558,6 +3672,29 @@
       <match value="-lz5-" type="string" offset="2"/>
     </magic>
   </mime-type>
+  
+  <mime-type type="application/x-lz4">
+     <_comment>First match LZ4 Frame</_comment>
+     <_comment>Second match Legacy Frame</_comment>
+     <magic priority="60">
+        <match value="0x184d2204" type="little32" offset="0" />
+        <match value="0x184c2102" type="little32" offset="0" />
+     </magic>
+     <glob pattern="*.lz4"/>
+  </mime-type>
+  
+  <mime-type type="application/x-lzip">
+    <_comment>Lzip (LZMA) compressed archive</_comment>
+    <magic priority="50">
+      <match value="\x4c\x5a\x49\x50" type="string" offset="0"/>
+    </magic>
+    <glob pattern="*.lz"/>
+  </mime-type>
+  
+  <mime-type type="application/x-lzma">
+    <_comment>LZMA compressed archive</_comment>
+    <glob pattern="*.lzma"/>
+  </mime-type>  
 
   <mime-type type="application/x-mobipocket-ebook">
     <acronym>MOBI</acronym>
@@ -3574,15 +3711,26 @@
   <mime-type type="application/x-ms-owner">
     <_comment>Temporary files created by MSOffice applications</_comment>
     <_comment>PRONOM fmt-473</_comment>
+    <_comment>First byte and 53rd byte are the same -- the length of the name.</_comment>
+    <_comment>Based on TIKA-2469, we've added a heuristic/wild guess that the first 10 chars</_comment>
+    <_comment>after the length byte should be \x00 or a non-control character.</_comment>
     <magic priority="80">
-      <match value="(?s)^([\\x05-\\x0F]).{53}\\1\x00" type="regex" offset="0"/>
+      <match value="(?s)^([\\x05-\\x0F])[\\x00\\x20-\\x7E]{10}.{43}\\1\x00" type="regex" offset="0"/>
+    </magic>
+  </mime-type>
+  <mime-type type="application/x-ms-nls">
+    <_comment>Microsoft National Language Support</_comment>
+    <_comment>Should take precedence over x-ms-owner</_comment>
+    <magic priority="70">
+      <match value="(?s)^\\x0D.{51}\\x0C\\x00\\x0D\\x00\\x0E" type="regex" offset="0"/>
+      <match value="(?s)^\\x44\\x43.\\x01" type="regex" offset="0"/>
     </magic>
   </mime-type>
   <mime-type type="application/x-ms-wmd">
     <glob pattern="*.wmd"/>
   </mime-type>
   <mime-type type="application/x-ms-wmz">
-    <sub-class-of type="application/x-gzip"/>
+    <sub-class-of type="application/gzip"/>
     <glob pattern="*.wmz"/>
   </mime-type>
   <mime-type type="application/x-ms-xbap">
@@ -3607,7 +3755,6 @@
   <mime-type type="application/x-msdownload">
     <glob pattern="*.dll"/>
     <glob pattern="*.com"/>
-    <glob pattern="*.bat"/>
     <magic priority="50">
       <match value="MZ" type="string" offset="0"/>
     </magic>
@@ -3959,7 +4106,7 @@
     <acronym>ESRI Shapefiles</acronym>
     <_comment>ESRI Shapefiles</_comment>
     <magic priority="60">
-      <match value="0x0000270a" type="big32" offset="2" />
+      <match value="0x0000270a" type="big32" offset="0" />
     </magic>
     <glob pattern="*.shp"/>
   </mime-type>
@@ -4697,7 +4844,7 @@
     <glob pattern="*.aac"/>
   </mime-type>
 
-  <mime-type type="audio/x-adbcm">
+  <mime-type type="audio/x-adpcm">
     <magic priority="20">
       <match value=".snd" type="string" offset="0">
         <match value="23" type="big32" offset="12"/>
@@ -4723,6 +4870,15 @@
     <glob pattern="*.aiff"/>
     <glob pattern="*.aifc"/>
   </mime-type>
+  
+  <mime-type type="audio/x-caf">
+     <_comment>Core Audio Format</_comment>
+     <_comment>com.apple.coreaudio-format</_comment>
+     <magic priority="60">
+        <match value="caff" type="string" offset="0" />
+     </magic>
+     <glob pattern="*.caf"/>
+  </mime-type>
 
   <mime-type type="audio/x-dec-basic">
     <magic priority="20">
@@ -4738,7 +4894,7 @@
     </magic>
   </mime-type>
 
-  <mime-type type="audio/x-dec-adbcm">
+  <mime-type type="audio/x-dec-adpcm">
     <magic priority="20">
       <match value="0x0064732E" type="big32" offset="0">
         <match value="23" type="big32" offset="12"/>
@@ -4912,6 +5068,14 @@
         <match value="0x464D4520" type="little32" offset="40"/>
       </match>
     </magic>
+  </mime-type>
+
+  <mime-type type="image/x-emf-compressed">
+    <sub-class-of type="application/gzip"/>
+    <alias type="application/x-ms-emz"/>
+    <acronym>EMZ</acronym>
+    <_comment>Compressed Enhanced Metafile</_comment>
+    <glob pattern="*.emz" />
   </mime-type>
 
   <mime-type type="image/example"/>
@@ -5206,6 +5370,33 @@
     <glob pattern="*.wbmp"/>
   </mime-type>
 
+  <mime-type type="image/vnd.zbrush.dcx">
+    <acronym>DCX</acronym>
+    <_comment>ZSoft Multi-Page Paintbrush</_comment>
+    <alias type="image/x-dcx"/>
+    <magic priority="50">
+      <match value="0xB168DE3A" type="string" offset="0"/>
+    </magic>
+    <glob pattern="*.dcx"/>
+  </mime-type>
+
+  <mime-type type="image/vnd.zbrush.pcx">
+    <acronym>PCX</acronym>
+    <_comment>ZSoft Paintbrush PiCture eXchange</_comment>
+    <alias type="image/x-pcx"/>
+    <alias type="image/x-pc-paintbrush"/>
+    <magic priority="40">
+      <match value="0x0A" type="string" offset="0">
+        <match value="0x00" type="string" offset="1"/>
+        <match value="0x02" type="string" offset="1"/>
+        <match value="0x03" type="string" offset="1"/>
+        <match value="0x04" type="string" offset="1"/>
+        <match value="0x05" type="string" offset="1"/>
+      </match>
+    </magic>
+    <glob pattern="*.pcx"/>
+  </mime-type>
+
   <mime-type type="image/webp">
     <acronym>WEBP</acronym>
     <tika:link>http://en.wikipedia.org/wiki/WebP</tika:link>
@@ -5306,9 +5497,6 @@
     </magic>
   </mime-type>
 
-  <mime-type type="image/x-pcx">
-    <glob pattern="*.pcx"/>
-  </mime-type>
   <mime-type type="image/x-pict">
     <_comment>Apple Macintosh QuickDraw/PICT Format</_comment>
     <magic priority="50">
@@ -5537,8 +5725,6 @@
     <magic priority="50">
       <match value="Delivered-To:" type="string" offset="0"/>
       <match value="Status:" type="string" offset="0"/>
-      <match value="X-Mozilla-Status:" type="string" offset="0"/>
-      <match value="X-Mozilla-Status2:" type="string" offset="0"/>
       <match value="Relay-Version:" type="stringignorecase" offset="0"/>
       <match value="#!\ rnews" type="string" offset="0"/>
       <match value="N#!\ rnews" type="string" offset="0"/>
@@ -5548,12 +5734,34 @@
       <match value="From:" type="stringignorecase" offset="0"/>
       <match value="Received:" type="stringignorecase" offset="0"/>
       <match value="Message-ID:" type="stringignorecase" offset="0"/>
+      <match value="\nReturn-Path:" type="stringignorecase" offset="0:1000"/>
+      <match value="\nX-Originating-IP:" type="stringignorecase" offset="0:1000"/>
+      <match value="\nReceived:" type="stringignorecase" offset="0:1000"/>
       <match value="Date:" type="string" offset="0"/>
       <match value="User-Agent:" type="string" offset="0"/>
       <match value="MIME-Version:" type="stringignorecase" offset="0"/>
+      <match value="X-Mailer:" type="string" offset="0"/>
       <match value="X-Notes-Item:" type="string" offset="0">
         <match value="Message-ID:" type="string" offset="0:8192"/>
       </match>
+      <match value="X-" type="stringignorecase" offset="0">
+        <match value="\nMessage-ID:" type="string" offset="0:8192"/>
+        <match value="\nFrom:" type="stringignorecase" offset="0:8192"/>
+        <match value="\nTo:" type="stringignorecase" offset="0:8192"/>
+        <match value="\nSubject:" type="string" offset="0:8192"/>
+        <match value="\nMIME-Version:" type="stringignorecase" offset="0:8192"/>
+      </match>
+      <match value="DKIM-" type="string" offset="0">
+        <match value="\nMessage-ID:" type="string" offset="0:8192"/>
+        <match value="\nFrom:" type="stringignorecase" offset="0:8192"/>
+        <match value="\nTo:" type="stringignorecase" offset="0:8192"/>
+        <match value="\nSubject:" type="string" offset="0:8192"/>
+        <match value="\nMIME-Version:" type="stringignorecase" offset="0:8192"/>
+      </match>
+    </magic>
+    <magic priority="40">
+      <!-- lower priority than message/news -->
+      <match value="\nMessage-ID:" type="stringignorecase" offset="0:1000"/>
     </magic>
     <glob pattern="*.eml"/>
     <glob pattern="*.mime"/>
@@ -5840,7 +6048,6 @@
     <glob pattern="*.ac"/>
     <glob pattern="*.am"/>
     <glob pattern="*.classpath"/>
-    <glob pattern="*.cmd"/>
     <glob pattern="*.config"/>
     <glob pattern="*.cwiki"/>
     <glob pattern="*.data"/>

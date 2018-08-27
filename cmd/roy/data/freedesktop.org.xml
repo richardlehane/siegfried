@@ -69,6 +69,7 @@
     <comment xml:lang="cs">Atari 2600</comment>
     <comment xml:lang="da">Atari 2600</comment>
     <comment xml:lang="de">Atari 2600</comment>
+    <comment xml:lang="en_GB">Atari 2600</comment>
     <comment xml:lang="es">Atari 2600</comment>
     <comment xml:lang="eu">Atari 2600</comment>
     <comment xml:lang="fi">Atari 2600</comment>
@@ -102,6 +103,7 @@
     <comment xml:lang="cs">Atari 7800</comment>
     <comment xml:lang="da">Atari 7800</comment>
     <comment xml:lang="de">Atari 7800</comment>
+    <comment xml:lang="en_GB">Atari 7800</comment>
     <comment xml:lang="es">Atari 7800</comment>
     <comment xml:lang="eu">Atari 7800</comment>
     <comment xml:lang="fi">Atari 7800</comment>
@@ -133,6 +135,27 @@
   </mime-type>
   <mime-type type="application/x-atari-lynx-rom">
     <comment>Atari Lynx</comment>
+    <comment xml:lang="ast">Atari Lynx</comment>
+    <comment xml:lang="ca">Atari Lynx</comment>
+    <comment xml:lang="cs">Atari Lynx</comment>
+    <comment xml:lang="de">Atari Lynx</comment>
+    <comment xml:lang="en_GB">Atari Lynx</comment>
+    <comment xml:lang="es">Atari Lynx</comment>
+    <comment xml:lang="fi">Atari Lynx</comment>
+    <comment xml:lang="hr">Atari Lynx</comment>
+    <comment xml:lang="hu">Atari Lynx</comment>
+    <comment xml:lang="id">Atari Lynx</comment>
+    <comment xml:lang="it">Atari Lynx</comment>
+    <comment xml:lang="kk">Atari Lynx</comment>
+    <comment xml:lang="ko">Atari Lynx</comment>
+    <comment xml:lang="pl">Atari Lynx</comment>
+    <comment xml:lang="pt_BR">Atari Lynx</comment>
+    <comment xml:lang="ru">Atari Lynx</comment>
+    <comment xml:lang="sk">Atari Lynx</comment>
+    <comment xml:lang="sv">Atari Lynx</comment>
+    <comment xml:lang="uk">Atari Lynx</comment>
+    <comment xml:lang="zh_CN">雅达利 Lynx</comment>
+    <comment xml:lang="zh_TW">Atari Lynx</comment>
     <generic-icon name="application-x-executable"/>
     <glob pattern="*.lnx"/>
     <magic>
@@ -543,7 +566,7 @@
   <mime-type type="application/metalink+xml">
     <comment>Metalink file</comment>
     <comment xml:lang="ar">ملف ميتالنك</comment>
-    <comment xml:lang="ast">Ficheru de meta enllaz</comment>
+    <comment xml:lang="ast">Ficheru d'enllaz meta</comment>
     <comment xml:lang="bg">Изтегляне — Metalink</comment>
     <comment xml:lang="ca">fitxer Metalink</comment>
     <comment xml:lang="cs">soubor metalink</comment>
@@ -595,7 +618,7 @@
   <mime-type type="application/metalink4+xml">
     <comment>Metalink file</comment>
     <comment xml:lang="ar">ملف ميتالنك</comment>
-    <comment xml:lang="ast">Ficheru de meta enllaz</comment>
+    <comment xml:lang="ast">Ficheru d'enllaz meta</comment>
     <comment xml:lang="bg">Изтегляне — Metalink</comment>
     <comment xml:lang="ca">fitxer Metalink</comment>
     <comment xml:lang="cs">soubor metalink</comment>
@@ -696,7 +719,6 @@
     <comment xml:lang="vi">không rõ</comment>
     <comment xml:lang="zh_CN">未知</comment>
     <comment xml:lang="zh_TW">不明</comment>
-    <glob pattern="*.bin"/>
   </mime-type>
   <mime-type type="application/x-partial-download">
     <comment>Partially downloaded file</comment>
@@ -1504,6 +1526,12 @@
     <expanded-acronym>Public-Key Cryptography Standards</expanded-acronym>
     <glob pattern="*.p8"/>
   </mime-type>
+  <mime-type type="application/pkcs8-encrypted">
+    <comment>PKCS#8 private key (encrypted)</comment>
+    <acronym>PKCS</acronym>
+    <expanded-acronym>Public-Key Cryptography Standards</expanded-acronym>
+    <glob pattern="*.p8e"/>
+  </mime-type>
   <mime-type type="application/pkcs10">
     <comment>PKCS#10 certification request</comment>
     <comment xml:lang="ar">طلب شهادة PKCS#10</comment>
@@ -1560,6 +1588,7 @@
   <mime-type type="application/pkix-cert">
     <comment>X.509 certificate</comment>
     <comment xml:lang="ar">شهادة X.509</comment>
+    <comment xml:lang="ast">Certificáu X.509</comment>
     <comment xml:lang="bg">Сертификат — X.509</comment>
     <comment xml:lang="ca">certificat X.509</comment>
     <comment xml:lang="cs">certifikát X.509</comment>
@@ -1605,6 +1634,7 @@
   <mime-type type="application/pkix-crl">
     <comment>Certificate revocation list</comment>
     <comment xml:lang="ar">قائمة إبطال الشهادات</comment>
+    <comment xml:lang="ast">Llistáu de revocación de certificaos</comment>
     <comment xml:lang="bg">Списък с отхвърлени сертификати</comment>
     <comment xml:lang="ca">llista de revocació de certificats</comment>
     <comment xml:lang="cs">seznam odvolaných certifikátů</comment>
@@ -1650,6 +1680,7 @@
   <mime-type type="application/pkix-pkipath">
     <comment>PkiPath certification path</comment>
     <comment xml:lang="ar">مسار شهادة PkiPath</comment>
+    <comment xml:lang="ast">Camín de certificación PkiPath</comment>
     <comment xml:lang="bg">Сертификационна верига — PkiPath</comment>
     <comment xml:lang="ca">camí cap a la certificació PkiPath</comment>
     <comment xml:lang="cs">cesta k certifikátu PkiPath</comment>
@@ -1815,6 +1846,7 @@
     <comment xml:lang="cs">dokument RAML</comment>
     <comment xml:lang="da">RAML-dokument</comment>
     <comment xml:lang="de">RAML-Dokument</comment>
+    <comment xml:lang="en_GB">RAML document</comment>
     <comment xml:lang="es">documento RAML</comment>
     <comment xml:lang="eu">RAML dokumentua</comment>
     <comment xml:lang="fi">RAML-asiakirja</comment>
@@ -2174,11 +2206,12 @@
     <comment xml:lang="vi">Cơ sở dữ liệu SQLite2</comment>
     <comment xml:lang="zh_CN">SQLite2 数据库</comment>
     <comment xml:lang="zh_TW">SQLite2 資料庫</comment>
+    <glob pattern="*.sqlite2"/>
     <magic>
       <match value="** This file contains an SQLite" type="string" offset="0"/>
     </magic>
   </mime-type>
-  <mime-type type="application/x-sqlite3">
+  <mime-type type="application/vnd.sqlite3">
     <comment>SQLite3 database</comment>
     <comment xml:lang="ar">قاعدة بيانات SQLite3</comment>
     <comment xml:lang="be@latin">Baza źviestak SQLite3</comment>
@@ -2227,9 +2260,11 @@
     <comment xml:lang="vi">Cơ sở dữ liệu SQLite3</comment>
     <comment xml:lang="zh_CN">SQLite3 数据库</comment>
     <comment xml:lang="zh_TW">SQLite3 資料庫</comment>
+    <glob pattern="*.sqlite3"/>
     <magic>
       <match value="SQLite format 3" type="string" offset="0"/>
     </magic>
+    <alias type="application/x-sqlite3"/>
   </mime-type>
   <mime-type type="application/x-gedcom">
     <comment>GEDCOM family history</comment>
@@ -2459,9 +2494,10 @@
       <match value="(;FF[4]" type="string" offset="0"/>
     </magic>
   </mime-type>
-  <mime-type type="application/x-xliff">
+  <mime-type type="application/xliff+xml">
     <comment>XLIFF translation file</comment>
     <comment xml:lang="ar">ملف ترجمة XLIFF</comment>
+    <comment xml:lang="ast">Ficheru de traducciones XLIFF</comment>
     <comment xml:lang="be@latin">Fajł pierakładu XLIFF</comment>
     <comment xml:lang="bg">Превод — XLIFF</comment>
     <comment xml:lang="ca">fitxer de traducció XLIFF</comment>
@@ -2517,6 +2553,7 @@
       <match value="&lt;xliff" type="string" offset="0:256"/>
     </magic>
     <root-XML namespaceURI='urn:oasis:names:tc:xliff:document:1.1' localName='xliff'/>
+    <alias type="application/x-xliff"/>
   </mime-type>
   <mime-type type="application/x-yaml">
     <comment>YAML document</comment>
@@ -2578,6 +2615,7 @@
   <mime-type type="application/vnd.corel-draw">
     <comment>Corel Draw drawing</comment>
     <comment xml:lang="ar">تصميم Corel Draw</comment>
+    <comment xml:lang="ast">Dibuxu de Corel Draw</comment>
     <comment xml:lang="az">Corel Draw çəkimi</comment>
     <comment xml:lang="be@latin">Rysunak Corel Draw</comment>
     <comment xml:lang="bg">Чертеж — Corel Draw</comment>
@@ -2644,6 +2682,7 @@
   <mime-type type="application/vnd.hp-hpgl">
     <comment>HPGL file</comment>
     <comment xml:lang="ar">ملف HPGL</comment>
+    <comment xml:lang="ast">Ficheru HPGL</comment>
     <comment xml:lang="be@latin">Fajł HPGL</comment>
     <comment xml:lang="bg">Файл — HPGL</comment>
     <comment xml:lang="ca">fitxer HPGL</comment>
@@ -2698,6 +2737,7 @@
   <mime-type type="application/vnd.hp-pcl">
     <comment>PCL file</comment>
     <comment xml:lang="ar">ملف PCL</comment>
+    <comment xml:lang="ast">FIcheru PCL</comment>
     <comment xml:lang="be@latin">Fajł PCL</comment>
     <comment xml:lang="bg">Файл — PCL</comment>
     <comment xml:lang="ca">fitxer PCL</comment>
@@ -2752,6 +2792,7 @@
   <mime-type type="application/vnd.lotus-1-2-3">
     <comment>Lotus 1-2-3 spreadsheet</comment>
     <comment xml:lang="ar">جدول Lotus 1-2-3</comment>
+    <comment xml:lang="ast">Fueya de cálculu de Lotus 1-2-3</comment>
     <comment xml:lang="az">Lotus 1-2-3 hesab cədvəli</comment>
     <comment xml:lang="be@latin">Raźlikovy arkuš Lotus 1-2-3</comment>
     <comment xml:lang="bg">Таблица — Lotus 1-2-3</comment>
@@ -2818,6 +2859,7 @@
   </mime-type>
   <mime-type type="application/vnd.lotus-wordpro">
     <comment>Lotus Word Pro</comment>
+    <comment xml:lang="ast">Lotus Word Pro</comment>
     <comment xml:lang="ca">Lotus Word Pro</comment>
     <comment xml:lang="cs">Lotus Word Pro</comment>
     <comment xml:lang="da">Lotus Word Pro</comment>
@@ -2862,6 +2904,7 @@
   <mime-type type="application/vnd.ms-access">
     <comment>JET database</comment>
     <comment xml:lang="ar">قاعدة بيانات JET</comment>
+    <comment xml:lang="ast">Base de datos JETº</comment>
     <comment xml:lang="be@latin">Baza źviestak JET</comment>
     <comment xml:lang="bg">База от данни — JET</comment>
     <comment xml:lang="ca">base de dades JET</comment>
@@ -3376,6 +3419,7 @@
   </mime-type>
   <mime-type type="application/vnd.ms-powerpoint.slide.macroEnabled.12">
     <comment>PowerPoint slide</comment>
+    <comment xml:lang="ast">Diapositiva de PowerPoint</comment>
     <comment xml:lang="ca">dispositiva de PowerPoint</comment>
     <comment xml:lang="cs">promítání PowerPoint</comment>
     <comment xml:lang="da">PowerPoint-dias</comment>
@@ -3466,6 +3510,7 @@
   </mime-type>
   <mime-type type="application/vnd.ms-powerpoint.template.macroEnabled.12">
     <comment>PowerPoint presentation template</comment>
+    <comment xml:lang="ast">Plantía de presentaciones de PowerPoint</comment>
     <comment xml:lang="ca">plantilla de presentació de PowerPoint</comment>
     <comment xml:lang="cs">šablona prezentace PowerPoint</comment>
     <comment xml:lang="da">PowerPoint-præsentationsskabelon</comment>
@@ -3864,6 +3909,7 @@
     <glob pattern="*.oxps"/>
     <glob pattern="*.xps"/>
     <alias type="application/vnd.ms-xpsdocument"/>
+    <alias type="application/xps"/>
   </mime-type>
   <mime-type type="application/vnd.ms-works">
     <comment>Microsoft Works document</comment>
@@ -4042,6 +4088,7 @@
   <mime-type type="application/msword-template">
     <comment>Word template</comment>
     <comment xml:lang="ar">قالب Word</comment>
+    <comment xml:lang="ast">Plantía de Word</comment>
     <comment xml:lang="be@latin">Šablon Word</comment>
     <comment xml:lang="bg">Шаблон за документи — Word</comment>
     <comment xml:lang="ca">plantilla de Word</comment>
@@ -4193,6 +4240,7 @@
   <mime-type type="application/vnd.ms-tnef">
     <comment>TNEF message</comment>
     <comment xml:lang="ar">رسالة TNEF</comment>
+    <comment xml:lang="ast">Mensaxe TNEF</comment>
     <comment xml:lang="be@latin">List TNEF</comment>
     <comment xml:lang="bg">Съобщение — TNEF</comment>
     <comment xml:lang="ca">missatge TNEF</comment>
@@ -6390,6 +6438,7 @@
   <mime-type type="application/vnd.oasis.opendocument.image">
     <comment>ODI image</comment>
     <comment xml:lang="ar">صورة ODI</comment>
+    <comment xml:lang="ast">Imaxe ODI</comment>
     <comment xml:lang="be@latin">Vyjava ODI</comment>
     <comment xml:lang="bg">Изображение — ODI</comment>
     <comment xml:lang="ca">imatge ODI</comment>
@@ -6453,6 +6502,7 @@
   <mime-type type="application/vnd.openofficeorg.extension">
     <comment>OpenOffice.org extension</comment>
     <comment xml:lang="ar">امتداد OpenOffice.org</comment>
+    <comment xml:lang="ast">Estensión d'OpenOffice.org</comment>
     <comment xml:lang="be@latin">Pašyreńnie OpenOffice.org</comment>
     <comment xml:lang="bg">Разширение — OpenOffice</comment>
     <comment xml:lang="ca">extensió d'OpenOffice.org</comment>
@@ -6504,6 +6554,7 @@
   </mime-type>
   <mime-type type="application/vnd.android.package-archive">
     <comment>Android package</comment>
+    <comment xml:lang="ast">Paquete d'Android</comment>
     <comment xml:lang="bg">Пакет — Android</comment>
     <comment xml:lang="ca">paquet d'Android</comment>
     <comment xml:lang="cs">balíčky systému Android</comment>
@@ -6549,6 +6600,7 @@
   <mime-type type="application/vnd.symbian.install">
     <comment>SIS package</comment>
     <comment xml:lang="ar">حزمة SIS</comment>
+    <comment xml:lang="ast">Paquete SIS</comment>
     <comment xml:lang="be@latin">Pakunak SIS</comment>
     <comment xml:lang="bg">Пакет — SIS</comment>
     <comment xml:lang="ca">paquet SIS</comment>
@@ -6606,6 +6658,7 @@
   <mime-type type="x-epoc/x-sisx-app">
     <comment>SISX package</comment>
     <comment xml:lang="ar">حزمة SISX</comment>
+    <comment xml:lang="ast">Paquete SISX</comment>
     <comment xml:lang="be@latin">Pakunak SISX</comment>
     <comment xml:lang="bg">Пакет — SISX</comment>
     <comment xml:lang="ca">paquet SISX</comment>
@@ -6777,6 +6830,12 @@
     <glob pattern="*.wpd"/>
     <glob pattern="*.wpp"/>
   </mime-type>
+  <mime-type type="application/vnd.youtube.yt">
+    <comment>YouTube Media Archive</comment>
+    <generic-icon name="video-x-generic"/>
+    <glob pattern="*.yt"/>
+    <sub-class-of type="application/zip"/>
+  </mime-type>
   <mime-type type="application/x-spss-por">
     <comment>SPSS Portable Data File</comment>
     <comment xml:lang="ar">ملف بيانات SPSS متنقلة</comment>
@@ -6937,6 +6996,7 @@
   <mime-type type="application/x-7z-compressed">
     <comment>7-zip archive</comment>
     <comment xml:lang="ar">أرشيف 7-zip</comment>
+    <comment xml:lang="ast">Archivu 7-zip</comment>
     <comment xml:lang="be@latin">Archiŭ 7-zip</comment>
     <comment xml:lang="bg">Архив — 7-zip</comment>
     <comment xml:lang="ca">arxiu 7-zip</comment>
@@ -7522,6 +7582,7 @@
   <mime-type type="application/x-asp">
     <comment>ASP page</comment>
     <comment xml:lang="ar">صفحة ASP</comment>
+    <comment xml:lang="ast">Páxina ASP</comment>
     <comment xml:lang="be@latin">Staronka ASP</comment>
     <comment xml:lang="bg">Страница — ASP</comment>
     <comment xml:lang="ca">pàgina ASP</comment>
@@ -7578,6 +7639,7 @@
   <mime-type type="application/x-awk">
     <comment>AWK script</comment>
     <comment xml:lang="ar">سكربت AWK</comment>
+    <comment xml:lang="ast">Script AWK</comment>
     <comment xml:lang="az">AWK skripti</comment>
     <comment xml:lang="be@latin">Skrypt AWK</comment>
     <comment xml:lang="bg">Скрипт — AWK</comment>
@@ -7764,6 +7826,7 @@
   <mime-type type="application/x-blender">
     <comment>Blender scene</comment>
     <comment xml:lang="ar">مشهد بلندر</comment>
+    <comment xml:lang="ast">Escena de Blender</comment>
     <comment xml:lang="be@latin">Scena Blender</comment>
     <comment xml:lang="bg">Сцена — Blender</comment>
     <comment xml:lang="ca">escena de Blender</comment>
@@ -7876,6 +7939,7 @@
   <mime-type type="application/x-bzip">
     <comment>Bzip archive</comment>
     <comment xml:lang="ar">أرشيف Bzip</comment>
+    <comment xml:lang="ast">Archivu Bzip</comment>
     <comment xml:lang="be@latin">Archiŭ bzip</comment>
     <comment xml:lang="bg">Архив — bzip</comment>
     <comment xml:lang="ca">arxiu bzip</comment>
@@ -7934,6 +7998,7 @@
   <mime-type type="application/x-bzip-compressed-tar">
     <comment>Tar archive (bzip-compressed)</comment>
     <comment xml:lang="ar">أرشيف Tar (مضغوط-bzip)</comment>
+    <comment xml:lang="ast">Archivu Tar (comprimíu en bzip)</comment>
     <comment xml:lang="be@latin">Archiŭ tar (bzip-skampresavany)</comment>
     <comment xml:lang="bg">Архив — tar, компресиран с bzip</comment>
     <comment xml:lang="ca">arxiu tar (amb compressió bzip)</comment>
@@ -8093,7 +8158,7 @@
     <generic-icon name="x-office-document"/>
     <glob pattern="*.ps.bz2"/>
   </mime-type>
-  <mime-type type="application/x-cbr">
+  <mime-type type="application/vnd.comicbook-rar">
     <comment>comic book archive</comment>
     <comment xml:lang="ar">أرشيف comic book</comment>
     <comment xml:lang="be@latin">archiŭ komiksaŭ</comment>
@@ -8144,6 +8209,7 @@
     <sub-class-of type="application/vnd.rar"/>
     <generic-icon name="x-office-document"/>
     <glob pattern="*.cbr"/>
+    <alias type="application/x-cbr"/>
   </mime-type>
   <mime-type type="application/x-cb7">
     <comment>comic book archive</comment>
@@ -8402,6 +8468,7 @@
   </mime-type>
   <mime-type type="application/x-apple-diskimage">
     <comment>Apple disk image</comment>
+    <comment xml:lang="ast">Imaxe de discu d'Apple</comment>
     <comment xml:lang="bg">Диск — Apple</comment>
     <comment xml:lang="ca">imatge de disc d'Apple</comment>
     <comment xml:lang="cs">obraz disku Apple</comment>
@@ -8443,85 +8510,95 @@
     <glob pattern="*.dmg"/>
   </mime-type>
   <mime-type type="application/x-raw-disk-image">
-     <comment>Raw disk image</comment>
-     <comment xml:lang="ca">imatge de disc RAW</comment>
-     <comment xml:lang="cs">surový obraz disku</comment>
-     <comment xml:lang="da">Rå diskaftryk</comment>
-     <comment xml:lang="de">Rohes Datenträgerabbild</comment>
-     <comment xml:lang="el">Ανεπεξέργαστη εικόνα δίσκου</comment>
-     <comment xml:lang="en_GB">Raw disk image</comment>
-     <comment xml:lang="es">imagen de disco en bruto</comment>
-     <comment xml:lang="eu">Disko gordinaren irudia</comment>
-     <comment xml:lang="fi">Raaka levytiedosto</comment>
-     <comment xml:lang="fr">image disque Raw</comment>
-     <comment xml:lang="ga">Amhíomha diosca</comment>
-     <comment xml:lang="gl">Imaxe de disco en bruto</comment>
-     <comment xml:lang="he">דמות גולמית של כונן</comment>
-     <comment xml:lang="hr">Osnovna slika diska</comment>
-     <comment xml:lang="hu">Nyers lemezkép</comment>
-     <comment xml:lang="ia">Imagine de disco crude</comment>
-     <comment xml:lang="id">Image disk mentah</comment>
-     <comment xml:lang="it">Immagine disco raw</comment>
-     <comment xml:lang="kk">Шикі диск бейнесі</comment>
-     <comment xml:lang="ko">RAW 디스크 이미지</comment>
-     <comment xml:lang="oc">imatge disc Raw</comment>
-     <comment xml:lang="pl">Surowy obraz dysku</comment>
-     <comment xml:lang="pt">imagem de disco Raw</comment>
-     <comment xml:lang="pt_BR">Imagem bruta de disco</comment>
-     <comment xml:lang="ru">Необработанный образ диска</comment>
-     <comment xml:lang="sk">Obraz disku</comment>
-     <comment xml:lang="sl">Surovi odtis diska</comment>
-     <comment xml:lang="sr">сиров одраз диска</comment>
-     <comment xml:lang="sv">Rå diskavbild</comment>
-     <comment xml:lang="tr">İşlem görmemiş disk imajı</comment>
-     <comment xml:lang="uk">простий образ диска</comment>
-     <comment xml:lang="zh_CN">原始磁盘映像</comment>
-     <comment xml:lang="zh_TW">原生磁碟映像檔</comment>
-     <glob pattern="*.raw-disk-image"/>
-     <glob pattern="*.img"/>
-   </mime-type>
-   <mime-type type="application/x-raw-disk-image-xz-compressed">
-     <comment>Raw disk image (XZ-compressed)</comment>
-     <comment xml:lang="ca">imatge de disc RAW (amb compressió XZ)</comment>
-     <comment xml:lang="cs">surový obraz disku (komprimovaný pomocí XZ)</comment>
-     <comment xml:lang="da">Rå diskaftryk (XZ-komprimeret)</comment>
-     <comment xml:lang="de">Rohes Datenträgerabbild (XZ-komprimiert)</comment>
-     <comment xml:lang="el">Ανεπεξέργαστη εικόνα δίσκου (συμπιεσμένη XZ)</comment>
-     <comment xml:lang="en_GB">Raw disk image (XZ-compressed)</comment>
-     <comment xml:lang="es">imagen de disco en bruto (comprimida con XZ)</comment>
-     <comment xml:lang="eu">Disko gordinaren irudia (XZ-rekin konprimitua)</comment>
-     <comment xml:lang="fi">Raaka levytiedosto (XZ-pakattu)</comment>
-     <comment xml:lang="fr">image disque Raw (compression XZ)</comment>
-     <comment xml:lang="ga">Amhíomhá (comhbhrúite le XZ)</comment>
-     <comment xml:lang="gl">Imaxe de disco en bruto (comprimida en XZ)</comment>
-     <comment xml:lang="he">דמות גולמית של כונן (בדחיסת XZ)</comment>
-     <comment xml:lang="hr">Osnovna slika diska (XZ sažeta)</comment>
-     <comment xml:lang="hu">Nyers lemezkép (XZ-vel tömörítve)</comment>
-     <comment xml:lang="ia">Imagine de disco crude (comprimite con XZ)</comment>
-     <comment xml:lang="id">Image disk mentah (terkompresi XZ)</comment>
-     <comment xml:lang="it">Immagine disco raw (compressa XZ)</comment>
-     <comment xml:lang="kk">Шикі диск бейнесі (XZ-мен сығылған)</comment>
-     <comment xml:lang="ko">RAW 디스크 이미지(XZ 압축)</comment>
-     <comment xml:lang="oc">imatge disc Raw (compression XZ)</comment>
-     <comment xml:lang="pl">Surowy obraz dysku (kompresja XZ)</comment>
-     <comment xml:lang="pt">imagem de disco Raw (compressão XZ)</comment>
-     <comment xml:lang="pt_BR">Imagem bruta de disco (compactada com XZ)</comment>
-     <comment xml:lang="ru">Необработанный образ диска (сжатый xz)</comment>
-     <comment xml:lang="sk">Obraz disku (komprimovaný pomocou XZ)</comment>
-     <comment xml:lang="sl">Surovi odtis diska (stisnjeno z XZ)</comment>
-     <comment xml:lang="sr">сиров одраз диска (запакована ИксЗ-ом)</comment>
-     <comment xml:lang="sv">Rå diskavbild (XZ-komprimerad)</comment>
-     <comment xml:lang="tr">İşlem görmemiş disk imajı (XZ ile sıkıştırılmış)</comment>
-     <comment xml:lang="uk">простий образ диска (стиснений XZ)</comment>
-     <comment xml:lang="zh_CN">原始磁盘映像（XZ 压缩）</comment>
-     <comment xml:lang="zh_TW">原生磁碟映像 (XZ 格式壓縮)</comment>
-     <sub-class-of type="application/x-xz"/>
-     <glob pattern="*.raw-disk-image.xz"/>
-     <glob pattern="*.img.xz"/>
-   </mime-type>
+    <comment>Raw disk image</comment>
+    <comment xml:lang="ast">Imaxe de discu en bruto</comment>
+    <comment xml:lang="ca">imatge de disc RAW</comment>
+    <comment xml:lang="cs">surový obraz disku</comment>
+    <comment xml:lang="da">Rå diskaftryk</comment>
+    <comment xml:lang="de">Rohes Datenträgerabbild</comment>
+    <comment xml:lang="el">Ανεπεξέργαστη εικόνα δίσκου</comment>
+    <comment xml:lang="en_GB">Raw disk image</comment>
+    <comment xml:lang="es">imagen de disco en bruto</comment>
+    <comment xml:lang="eu">Disko gordinaren irudia</comment>
+    <comment xml:lang="fi">Raaka levytiedosto</comment>
+    <comment xml:lang="fr">image disque Raw</comment>
+    <comment xml:lang="ga">Amhíomha diosca</comment>
+    <comment xml:lang="gl">Imaxe de disco en bruto</comment>
+    <comment xml:lang="he">דמות גולמית של כונן</comment>
+    <comment xml:lang="hr">Osnovna slika diska</comment>
+    <comment xml:lang="hu">Nyers lemezkép</comment>
+    <comment xml:lang="ia">Imagine de disco crude</comment>
+    <comment xml:lang="id">Image disk mentah</comment>
+    <comment xml:lang="it">Immagine disco raw</comment>
+    <comment xml:lang="kk">Шикі диск бейнесі</comment>
+    <comment xml:lang="ko">RAW 디스크 이미지</comment>
+    <comment xml:lang="oc">imatge disc Raw</comment>
+    <comment xml:lang="pl">Surowy obraz dysku</comment>
+    <comment xml:lang="pt">imagem de disco Raw</comment>
+    <comment xml:lang="pt_BR">Imagem bruta de disco</comment>
+    <comment xml:lang="ru">Необработанный образ диска</comment>
+    <comment xml:lang="sk">Obraz disku</comment>
+    <comment xml:lang="sl">Surovi odtis diska</comment>
+    <comment xml:lang="sr">сиров одраз диска</comment>
+    <comment xml:lang="sv">Rå diskavbild</comment>
+    <comment xml:lang="tr">İşlem görmemiş disk imajı</comment>
+    <comment xml:lang="uk">простий образ диска</comment>
+    <comment xml:lang="zh_CN">原始磁盘映像</comment>
+    <comment xml:lang="zh_TW">原生磁碟映像檔</comment>
+    <glob pattern="*.raw-disk-image"/>
+    <glob pattern="*.img"/>
+  </mime-type>
+  <mime-type type="application/x-raw-floppy-disk-image">
+    <comment>Floppy disk image</comment>
+    <sub-class-of type="application/x-raw-disk-image"/>
+    <alias type="application/x-fd-file"/>
+    <glob pattern="*.fd"/>
+    <glob pattern="*.qd"/>
+  </mime-type>
+  <mime-type type="application/x-raw-disk-image-xz-compressed">
+    <comment>Raw disk image (XZ-compressed)</comment>
+    <comment xml:lang="ast">Imaxe de discu en bruto (comprimida en XZ)</comment>
+    <comment xml:lang="ca">imatge de disc RAW (amb compressió XZ)</comment>
+    <comment xml:lang="cs">surový obraz disku (komprimovaný pomocí XZ)</comment>
+    <comment xml:lang="da">Rå diskaftryk (XZ-komprimeret)</comment>
+    <comment xml:lang="de">Rohes Datenträgerabbild (XZ-komprimiert)</comment>
+    <comment xml:lang="el">Ανεπεξέργαστη εικόνα δίσκου (συμπιεσμένη XZ)</comment>
+    <comment xml:lang="en_GB">Raw disk image (XZ-compressed)</comment>
+    <comment xml:lang="es">imagen de disco en bruto (comprimida con XZ)</comment>
+    <comment xml:lang="eu">Disko gordinaren irudia (XZ-rekin konprimitua)</comment>
+    <comment xml:lang="fi">Raaka levytiedosto (XZ-pakattu)</comment>
+    <comment xml:lang="fr">image disque Raw (compression XZ)</comment>
+    <comment xml:lang="ga">Amhíomhá (comhbhrúite le XZ)</comment>
+    <comment xml:lang="gl">Imaxe de disco en bruto (comprimida en XZ)</comment>
+    <comment xml:lang="he">דמות גולמית של כונן (בדחיסת XZ)</comment>
+    <comment xml:lang="hr">Osnovna slika diska (XZ sažeta)</comment>
+    <comment xml:lang="hu">Nyers lemezkép (XZ-vel tömörítve)</comment>
+    <comment xml:lang="ia">Imagine de disco crude (comprimite con XZ)</comment>
+    <comment xml:lang="id">Image disk mentah (terkompresi XZ)</comment>
+    <comment xml:lang="it">Immagine disco raw (compressa XZ)</comment>
+    <comment xml:lang="kk">Шикі диск бейнесі (XZ-мен сығылған)</comment>
+    <comment xml:lang="ko">RAW 디스크 이미지(XZ 압축)</comment>
+    <comment xml:lang="oc">imatge disc Raw (compression XZ)</comment>
+    <comment xml:lang="pl">Surowy obraz dysku (kompresja XZ)</comment>
+    <comment xml:lang="pt">imagem de disco Raw (compressão XZ)</comment>
+    <comment xml:lang="pt_BR">Imagem bruta de disco (compactada com XZ)</comment>
+    <comment xml:lang="ru">Необработанный образ диска (сжатый xz)</comment>
+    <comment xml:lang="sk">Obraz disku (komprimovaný pomocou XZ)</comment>
+    <comment xml:lang="sl">Surovi odtis diska (stisnjeno z XZ)</comment>
+    <comment xml:lang="sr">сиров одраз диска (запакована ИксЗ-ом)</comment>
+    <comment xml:lang="sv">Rå diskavbild (XZ-komprimerad)</comment>
+    <comment xml:lang="tr">İşlem görmemiş disk imajı (XZ ile sıkıştırılmış)</comment>
+    <comment xml:lang="uk">простий образ диска (стиснений XZ)</comment>
+    <comment xml:lang="zh_CN">原始磁盘映像（XZ 压缩）</comment>
+    <comment xml:lang="zh_TW">原生磁碟映像 (XZ 格式壓縮)</comment>
+    <sub-class-of type="application/x-xz"/>
+    <glob pattern="*.raw-disk-image.xz"/>
+    <glob pattern="*.img.xz"/>
+  </mime-type>
   <mime-type type="application/x-cd-image">
     <comment>raw CD image</comment>
     <comment xml:lang="ar">صورة CD خامة</comment>
+    <comment xml:lang="ast">imaxe de CD en bruto</comment>
     <comment xml:lang="be@latin">suvoraja vyjava CD</comment>
     <comment xml:lang="bg">Изображение — raw CD</comment>
     <comment xml:lang="ca">imatge de CD en cru</comment>
@@ -8581,6 +8658,7 @@
     <comment xml:lang="cs">balíček AppImage s aplikací</comment>
     <comment xml:lang="da">Applmage-programsamling</comment>
     <comment xml:lang="de">AppImage-Anwendungspaket</comment>
+    <comment xml:lang="en_GB">AppImage application bundle</comment>
     <comment xml:lang="es">paquete de aplicación AppImage</comment>
     <comment xml:lang="eu">AppImage aplikazio bilduma</comment>
     <comment xml:lang="fi">AppImage-sovelluspaketti</comment>
@@ -8595,7 +8673,7 @@
     <comment xml:lang="ko">AppImage 프로그램 번들</comment>
     <comment xml:lang="pl">Pakiet programu AppImage</comment>
     <comment xml:lang="pt_BR">Pacote de aplicativo AppImage</comment>
-    <comment xml:lang="ru">Пакет приложений AppImage</comment>
+    <comment xml:lang="ru">Пакет приложения AppImage</comment>
     <comment xml:lang="sk">Balík aplikácií AppImage</comment>
     <comment xml:lang="sr">скуп програма Ап-слике</comment>
     <comment xml:lang="sv">AppImage-programbunt</comment>
@@ -9025,6 +9103,7 @@
   <mime-type type="application/x-cpio">
     <comment>CPIO archive</comment>
     <comment xml:lang="ar">أرشيف CPIO</comment>
+    <comment xml:lang="ast">Archivu CPIO</comment>
     <comment xml:lang="az">CPIO arxivi</comment>
     <comment xml:lang="be@latin">Archiŭ CPIO</comment>
     <comment xml:lang="bg">Архив — CPIO</comment>
@@ -9318,10 +9397,12 @@
   <mime-type type="application/x-sega-cd-rom">
     
     <comment>Sega CD disc image</comment>
+    <comment xml:lang="ast">Imaxe de discu de Sega CD</comment>
     <comment xml:lang="ca">imatge de disc de Sega CD</comment>
     <comment xml:lang="cs">obraz disku CD pro Sega</comment>
     <comment xml:lang="da">Sega CD-diskaftryk</comment>
     <comment xml:lang="de">Sega-CD-Datenträgerabbild</comment>
+    <comment xml:lang="en_GB">Sega CD disc image</comment>
     <comment xml:lang="es">imagen de disco CD de Sega</comment>
     <comment xml:lang="eu">Sega CD disko irudia</comment>
     <comment xml:lang="fi">Sega CD -levykuva</comment>
@@ -9360,9 +9441,11 @@
   <mime-type type="application/x-sega-pico-rom">
     
     <comment>Sega Pico ROM</comment>
+    <comment xml:lang="ast">ROM de Sega Pico</comment>
     <comment xml:lang="ca">ROM de Sega Pico</comment>
-    <comment xml:lang="cs">Pico ROM pro Sega</comment>
+    <comment xml:lang="cs">ROM pro Sega Pico</comment>
     <comment xml:lang="de">Sega Pico ROM</comment>
+    <comment xml:lang="en_GB">Sega Pico ROM</comment>
     <comment xml:lang="es">ROM de Sega Pico</comment>
     <comment xml:lang="eu">Sega Pico ROM</comment>
     <comment xml:lang="fi">Sega Pico ROM</comment>
@@ -9391,6 +9474,7 @@
   </mime-type>
   <mime-type type="application/x-saturn-rom">
     <comment>Sega Saturn disc image</comment>
+    <comment xml:lang="ast">Imaxe de discu de Sega Saturn</comment>
     <comment xml:lang="ca">imatge de disc de Sega Saturn</comment>
     <comment xml:lang="cs">obraz disku pro Sega Saturn</comment>
     <comment xml:lang="da">Sega Saturn-diskaftryk</comment>
@@ -9432,6 +9516,7 @@
   </mime-type>
   <mime-type type="application/x-dc-rom">
     <comment>Dreamcast GD-ROM</comment>
+    <comment xml:lang="ast">GD-ROM de Dreamcast</comment>
     <comment xml:lang="ca">GD-ROM de Dreamcast</comment>
     <comment xml:lang="cs">GD-ROM pro Dreamcast</comment>
     <comment xml:lang="da">Dreamcast GD-ROM</comment>
@@ -9468,6 +9553,7 @@
   <mime-type type="application/x-nintendo-ds-rom">
     <comment>Nintendo DS ROM</comment>
     <comment xml:lang="ar">Nintendo DS ROM</comment>
+    <comment xml:lang="ast">ROM de Nintendo DS</comment>
     <comment xml:lang="be@latin">Nintendo DS ROM</comment>
     <comment xml:lang="bg">ROM — Nintendo DS</comment>
     <comment xml:lang="ca">ROM de Nintendo DS</comment>
@@ -9518,6 +9604,7 @@
   </mime-type>
   <mime-type type="application/x-pc-engine-rom">
     <comment>PC Engine ROM</comment>
+    <comment xml:lang="ast">ROM de PC Engine</comment>
     <comment xml:lang="ca">ROM de PC Engine</comment>
     <comment xml:lang="cs">ROM pro PC Engine</comment>
     <comment xml:lang="da">PC Engine ROM</comment>
@@ -9556,6 +9643,7 @@
   </mime-type>
   <mime-type type="application/x-wii-rom">
     <comment>Wii disc image</comment>
+    <comment xml:lang="ast">Imaxe de discu de Wii</comment>
     <comment xml:lang="ca">imatge de disc de Wii</comment>
     <comment xml:lang="cs">obraz disku pro Wii</comment>
     <comment xml:lang="da">Wii-diskaftryk</comment>
@@ -9686,6 +9774,7 @@
     <comment xml:lang="ca">cartutx Thomson Mémo7</comment>
     <comment xml:lang="cs">Kazeta Thomson Mémo7</comment>
     <comment xml:lang="de">Thomson-Mémo7-Steckmodul</comment>
+    <comment xml:lang="en_GB">Thomson Mémo7 cartridge</comment>
     <comment xml:lang="es">cartucho Mémo7 de Thomson</comment>
     <comment xml:lang="fr">cartouche Thomson Mémo7</comment>
     <comment xml:lang="ga">cartús Thomson Mémo7</comment>
@@ -9713,6 +9802,7 @@
     <comment xml:lang="ca">cinta de casset Thomson</comment>
     <comment xml:lang="cs">Kazeta Thomson</comment>
     <comment xml:lang="de">Thomson-Kassette</comment>
+    <comment xml:lang="en_GB">Thomson cassette</comment>
     <comment xml:lang="es">casete de Thomson</comment>
     <comment xml:lang="fr">cassette Thomson</comment>
     <comment xml:lang="ga">caiséad Thomson</comment>
@@ -9740,6 +9830,7 @@
     <comment xml:lang="ca">imatge de disquet HFE</comment>
     <comment xml:lang="cs">Obraz diskety HFE</comment>
     <comment xml:lang="de">HFE-Diskettenabbild</comment>
+    <comment xml:lang="en_GB">HFE floppy disk image</comment>
     <comment xml:lang="es">imagen de disquete HFE</comment>
     <comment xml:lang="fr">image disquette HFE</comment>
     <comment xml:lang="ga">íomhá diosca fhlapaigh HFE</comment>
@@ -9750,7 +9841,7 @@
     <comment xml:lang="kk">HFE иілгіш диск бейнесі</comment>
     <comment xml:lang="ko">HFE 플로피 디스크 이미지</comment>
     <comment xml:lang="pl">Obraz dyskietki HFE</comment>
-    <comment xml:lang="pt_BR">Imagem de disquete HFE</comment>
+    <comment xml:lang="pt_BR">Imagem de disco flexível HFE</comment>
     <comment xml:lang="ru">Образ гибкого диска HFE</comment>
     <comment xml:lang="sk">Obraz pružného disku HFE</comment>
     <comment xml:lang="sr">ХФЕ слика флопи диска</comment>
@@ -9766,12 +9857,14 @@
     <magic>
       <match value="HXCPICFE" type="string" offset="0"/>
     </magic>
+    <alias type="application/x-hfe-file"/>
   </mime-type>
   <mime-type type="application/x-thomson-sap-image">
     <comment>SAP Thomson floppy disk image</comment>
     <comment xml:lang="ca">imatge de disquet SAP Thomson</comment>
     <comment xml:lang="cs">Obraz diskety SAP Thomson</comment>
     <comment xml:lang="de">SAP-Thomson-Diskettenabbild</comment>
+    <comment xml:lang="en_GB">SAP Thomson floppy disk image</comment>
     <comment xml:lang="es">imagen de disquete SAP de Thomson</comment>
     <comment xml:lang="fr">image disquette SAP Thomson</comment>
     <comment xml:lang="ga">íomhá diosca fhlapaigh SAP Thomson</comment>
@@ -9782,7 +9875,7 @@
     <comment xml:lang="kk">SAP Thomson иілгіш диск бейнесі</comment>
     <comment xml:lang="ko">SAP 톰슨 플로피 디스크 이미지</comment>
     <comment xml:lang="pl">Obraz dyskietki SAP Thomson</comment>
-    <comment xml:lang="pt_BR">Imagem de disquete SAP Thomson</comment>
+    <comment xml:lang="pt_BR">Imagem de disco flexível SAP Thomson</comment>
     <comment xml:lang="ru">Образ гибкого диска SAP Thomson</comment>
     <comment xml:lang="sk">Obraz pružného disku SAP Thomson</comment>
     <comment xml:lang="sr">САП Томсон слика флопи диска</comment>
@@ -9798,6 +9891,7 @@
     <magic>
       <match value="SYSTEME D'ARCHIVAGE PUKALL S.A.P. (c) Alexandre PUKALL Avril 1998" type="string" offset="1"/>
     </magic>
+    <alias type="application/x-sap-file"/>
   </mime-type>
   <mime-type type="application/vnd.debian.binary-package">
     <comment>Debian package</comment>
@@ -9961,7 +10055,13 @@
     <comment xml:lang="zh_CN">Qt Markup Language 文件</comment>
     <comment xml:lang="zh_TW">Qt 標記語言檔</comment>
     <magic priority="80">
-      <match value="import Qt " type="string" offset="0:256"/>
+      <match value="/bin/env qml" type="string" offset="2:16"/>
+      <match value="import Qt" type="string" offset="0:3000">
+        <match value="{" type="string" offset="9:3009"/>
+      </match>
+      <match value="import Qml" type="string" offset="0:3000">
+        <match value="{" type="string" offset="9:3009"/>
+      </match>
     </magic>
     <glob pattern="*.qml"/>
     <glob pattern="*.qmltypes"/>
@@ -10539,6 +10639,7 @@
   </mime-type>
   <mime-type type="font/woff">
     <comment>WOFF font</comment>
+    <comment xml:lang="ast">Fonte WOFF</comment>
     <comment xml:lang="ca">lletra WOFF</comment>
     <comment xml:lang="cs">font WOFF</comment>
     <comment xml:lang="da">WOFF-skrifttype</comment>
@@ -10556,7 +10657,7 @@
     <comment xml:lang="hu">WOFF-betűkészlet</comment>
     <comment xml:lang="ia">Typo de litteras WOFF</comment>
     <comment xml:lang="id">Fonta WOFF</comment>
-    <comment xml:lang="it">Font WOFF</comment>
+    <comment xml:lang="it">Carattere WOFF</comment>
     <comment xml:lang="ja">WOFF フォント</comment>
     <comment xml:lang="kk">WOFF қарібі</comment>
     <comment xml:lang="ko">WOFF 글꼴</comment>
@@ -10585,6 +10686,27 @@
   </mime-type>
   <mime-type type="font/woff">
     <comment>WOFF2 font</comment>
+    <comment xml:lang="ast">Fonte WOFF2</comment>
+    <comment xml:lang="ca">lletra WOFF2</comment>
+    <comment xml:lang="cs">font WOFF2</comment>
+    <comment xml:lang="de">WOFF2-Schrift</comment>
+    <comment xml:lang="en_GB">WOFF2 font</comment>
+    <comment xml:lang="es">tipo de letra WOFF2</comment>
+    <comment xml:lang="fi">WOFF2-fontti</comment>
+    <comment xml:lang="hr">WOFF2 slovo</comment>
+    <comment xml:lang="hu">WOFF2 betűkészlet</comment>
+    <comment xml:lang="id">Fonta WOFF2</comment>
+    <comment xml:lang="it">Carattere WOFF2</comment>
+    <comment xml:lang="kk">WOFF2 қарібі</comment>
+    <comment xml:lang="ko">WOFF2 글꼴</comment>
+    <comment xml:lang="pl">Czcionka WOFF2</comment>
+    <comment xml:lang="pt_BR">Fonte WOFF2</comment>
+    <comment xml:lang="ru">Шрифт WOFF2</comment>
+    <comment xml:lang="sk">Písmo WOFF2</comment>
+    <comment xml:lang="sv">WOFF2-typsnitt</comment>
+    <comment xml:lang="uk">шрифт WOFF2</comment>
+    <comment xml:lang="zh_CN">WOFF2 字体</comment>
+    <comment xml:lang="zh_TW">WOFF2 字型</comment>
     <acronym>WOFF2</acronym>
     <expanded-acronym>Web Open Font Format 2.0</expanded-acronym>
     <generic-icon name="font-x-generic"/>
@@ -10597,7 +10719,8 @@
     <comment>PostScript type-1 font</comment>
     <comment xml:lang="ca">lletra type-1 de PostScript</comment>
     <comment xml:lang="cs">font PostScript type-1</comment>
-    <comment xml:lang="de">PostScript-Typ-1-Schriftart</comment>
+    <comment xml:lang="de">PostScript-Typ-1-Schrift</comment>
+    <comment xml:lang="en_GB">PostScript type-1 font</comment>
     <comment xml:lang="es">tipo de letra PostScript Type-1</comment>
     <comment xml:lang="eu">PostScript type-1 letra-tipoa</comment>
     <comment xml:lang="fr">police PostScript Type 1</comment>
@@ -11441,6 +11564,26 @@
   </mime-type>
   <mime-type type="font/collection">
     <comment>Font collection</comment>
+    <comment xml:lang="ca">ccol·lecció de lletres</comment>
+    <comment xml:lang="cs">kolekce fontů</comment>
+    <comment xml:lang="de">Schriftsammlung</comment>
+    <comment xml:lang="en_GB">Font collection</comment>
+    <comment xml:lang="es">colección tipográfica</comment>
+    <comment xml:lang="fi">Fonttikokoelma</comment>
+    <comment xml:lang="hr">Kolekcija slova</comment>
+    <comment xml:lang="hu">Betűkészlet-gyűjtemény</comment>
+    <comment xml:lang="id">Koleksi fonta</comment>
+    <comment xml:lang="it">Raccolta di caratteri</comment>
+    <comment xml:lang="kk">Қаріптер жинағы</comment>
+    <comment xml:lang="ko">글꼴 모음</comment>
+    <comment xml:lang="pl">Kolekcja czcionek</comment>
+    <comment xml:lang="pt_BR">coleção de fontes</comment>
+    <comment xml:lang="ru">Коллекция шрифтов</comment>
+    <comment xml:lang="sk">Zbierka písiem</comment>
+    <comment xml:lang="sv">Typsnittssamling</comment>
+    <comment xml:lang="uk">збірка шрифтів</comment>
+    <comment xml:lang="zh_CN">字体集</comment>
+    <comment xml:lang="zh_TW">字型集</comment>
     <generic-icon name="font-x-generic"/>
     <glob pattern="*.ttc"/>
   </mime-type>
@@ -11686,6 +11829,7 @@
     <comment xml:lang="cs">ROM pro Game Boy Color</comment>
     <comment xml:lang="da">Game Boy Color ROM</comment>
     <comment xml:lang="de">Game Boy Color ROM</comment>
+    <comment xml:lang="en_GB">Game Boy Colour ROM</comment>
     <comment xml:lang="es">ROM de Game Boy Color</comment>
     <comment xml:lang="eu">Game Boy Color ROM</comment>
     <comment xml:lang="fi">Game Boy Color -ROM</comment>
@@ -11772,6 +11916,25 @@
   </mime-type>
   <mime-type type="application/x-virtual-boy-rom">
     <comment>Virtual Boy ROM</comment>
+    <comment xml:lang="ca">ROM de Virtual Boy</comment>
+    <comment xml:lang="cs">ROM pro Virtual Boy</comment>
+    <comment xml:lang="de">Virtual Boy ROM</comment>
+    <comment xml:lang="en_GB">Virtual Boy ROM</comment>
+    <comment xml:lang="es">ROM de Virtual Boy</comment>
+    <comment xml:lang="hr">Virtual Boy ROM</comment>
+    <comment xml:lang="hu">Virtual Boy ROM</comment>
+    <comment xml:lang="id">ROM Virtual Boy</comment>
+    <comment xml:lang="it">ROM Virtual Boy</comment>
+    <comment xml:lang="kk">Virtual Boy ROM</comment>
+    <comment xml:lang="ko">버추얼보이 롬</comment>
+    <comment xml:lang="pl">Plik ROM konsoli Virtual Boy</comment>
+    <comment xml:lang="pt_BR">ROM de Virtual Boy</comment>
+    <comment xml:lang="ru">Virtual Boy ROM</comment>
+    <comment xml:lang="sk">ROM pre Virtual Boy</comment>
+    <comment xml:lang="sv">Virtual Boy-rom</comment>
+    <comment xml:lang="uk">ROM Virtual Boy</comment>
+    <comment xml:lang="zh_CN">Virtual Boy ROM</comment>
+    <comment xml:lang="zh_TW">Virtual Boy ROM</comment>
     <generic-icon name="application-x-executable"/>
     <glob pattern="*.vb"/>
   </mime-type>
@@ -11901,6 +12064,7 @@
     <comment xml:lang="cs">ROM pro Genesis 32X</comment>
     <comment xml:lang="da">Genesis 32X ROM</comment>
     <comment xml:lang="de">Genesis 32X ROM</comment>
+    <comment xml:lang="en_GB">Genesis 32X ROM</comment>
     <comment xml:lang="es">ROM de Genesis 32X</comment>
     <comment xml:lang="eu">Genesis 32X ROM</comment>
     <comment xml:lang="fi">Genesis 32X -ROM</comment>
@@ -13305,6 +13469,7 @@
     <comment xml:lang="cs">sešit Jupyter</comment>
     <comment xml:lang="da">Jupyter Notebook</comment>
     <comment xml:lang="de">Jupyter-Dokument</comment>
+    <comment xml:lang="en_GB">Jupyter Notebook</comment>
     <comment xml:lang="es">libreta de Jupyter</comment>
     <comment xml:lang="eu">Jupyter Notebook</comment>
     <comment xml:lang="fr">carnet de notes Jupyter</comment>
@@ -14658,7 +14823,7 @@
     <generic-icon name="package-x-generic"/>
     <glob pattern="*.lhz"/>
   </mime-type>
-  <mime-type type="text/vnd.trolltech.linguist">
+  <mime-type type="text/vnd.qt.linguist">
     <comment>message catalog</comment>
     <comment xml:lang="ar">كتالوج الرسالة</comment>
     <comment xml:lang="be@latin">kataloh paviedamleńniaŭ</comment>
@@ -14714,6 +14879,7 @@
     </magic>
     <glob pattern="*.ts"/>
     <alias type="application/x-linguist"/>
+    <alias type="text/vnd.trolltech.linguist"/>
   </mime-type>
   <mime-type type="application/x-lyx">
     <comment>LyX document</comment>
@@ -14822,6 +14988,7 @@
     <comment xml:lang="cs">archiv Tar (komprimace LZ4)</comment>
     <comment xml:lang="da">Tar-arkiv (LZ4-komprimeret)</comment>
     <comment xml:lang="de">Tar-Archiv (LZ4-komprimiert)</comment>
+    <comment xml:lang="en_GB">Tar archive (LZ4-compressed)</comment>
     <comment xml:lang="es">archivador Tar (comprimido con LZ4)</comment>
     <comment xml:lang="eu">Tar artxiboa (LZ4-rekin konprimatua)</comment>
     <comment xml:lang="fi">Tar-arkisto (LZ4-pakattu)</comment>
@@ -14904,6 +15071,7 @@
     <comment xml:lang="cs">archiv Tar (komprimace lzip)</comment>
     <comment xml:lang="da">Tar-arkiv (lzip-komprimeret)</comment>
     <comment xml:lang="de">Tar-Archiv (lzip-komprimiert)</comment>
+    <comment xml:lang="en_GB">Tar archive (lzip-compressed)</comment>
     <comment xml:lang="es">archivador Tar (comprimido con lzip)</comment>
     <comment xml:lang="eu">Tar artxiboa (lzip-rekin konprimatua)</comment>
     <comment xml:lang="fi">Tar-arkisto (lzip-pakattu)</comment>
@@ -14936,6 +15104,7 @@
     <comment xml:lang="ca">document PDF (amb compressió lzip)</comment>
     <comment xml:lang="cs">dokument PDF (komprimace lzip)</comment>
     <comment xml:lang="de">PDF-Dokument (lzip-komprimiert)</comment>
+    <comment xml:lang="en_GB">PDF document (lzip-compressed)</comment>
     <comment xml:lang="es">documento PDF (comprimido con lzip)</comment>
     <comment xml:lang="eu">PDF dokumentua (lzip-rekin konprimitua)</comment>
     <comment xml:lang="fi">PDF-asiakirja (lzip-pakattu)</comment>
@@ -15135,7 +15304,6 @@
     <comment xml:lang="el">Συμπιεσμένο αρχείο Qpress</comment>
     <comment xml:lang="en_GB">Qpress archive</comment>
     <comment xml:lang="es">archivador de Qpress</comment>
-    <comment xml:lang="eu">Qpress artxiboa</comment>
     <comment xml:lang="fi">Qpress-arkisto</comment>
     <comment xml:lang="fr">Archive Qpress</comment>
     <comment xml:lang="ga">cartlann Qpress</comment>
@@ -15216,7 +15384,6 @@
     <comment xml:lang="el">Συμπιεσμένο αρχείο Zlib</comment>
     <comment xml:lang="en_GB">Zlib archive</comment>
     <comment xml:lang="es">archivador Zlib</comment>
-    <comment xml:lang="eu">Zlib artxiboa</comment>
     <comment xml:lang="fi">Zlib-arkisto</comment>
     <comment xml:lang="fr">Archive Zlib</comment>
     <comment xml:lang="ga">cartlann Zlib</comment>
@@ -16426,6 +16593,7 @@
     <comment xml:lang="cs">ROM pro Neo-Geo Pocket</comment>
     <comment xml:lang="da">Neo-Geo Pocket ROM</comment>
     <comment xml:lang="de">Neo-Geo Pocket ROM</comment>
+    <comment xml:lang="en_GB">Neo-Geo Pocket ROM</comment>
     <comment xml:lang="es">ROM de Neo-Geo Pocket</comment>
     <comment xml:lang="eu">Neo-Geo Pocket ROM</comment>
     <comment xml:lang="fi">Neo-Geo Pocket -ROM</comment>
@@ -16450,7 +16618,21 @@
     <generic-icon name="application-x-executable"/>
     <glob pattern="*.ngp"/>
     <magic>
-      <match value="COPYRIGHT BY SNK CORPORATION" type="string" offset="0"/>
+      <match value="0x0" type="byte" offset="35">
+        <match value="COPYRIGHT BY SNK CORPORATION" type="string" offset="0"/>
+        <match value=" LICENSED BY SNK CORPORATION" type="string" offset="0"/>
+      </match>
+    </magic>
+  </mime-type>
+  <mime-type type="application/x-neo-geo-pocket-color-rom">
+    <comment>Neo-Geo Pocket Color ROM</comment>
+    <generic-icon name="application-x-executable"/>
+    <glob pattern="*.ngc"/>
+    <magic>
+      <match value="0x10" type="byte" offset="35">
+        <match value="COPYRIGHT BY SNK CORPORATION" type="string" offset="0"/>
+        <match value=" LICENSED BY SNK CORPORATION" type="string" offset="0"/>
+      </match>
     </magic>
   </mime-type>
   <mime-type type="application/x-nes-rom">
@@ -16634,7 +16816,7 @@
     <comment xml:lang="hr">Object kôd</comment>
     <comment xml:lang="hu">tárgykód</comment>
     <comment xml:lang="ia">Codice objecto</comment>
-    <comment xml:lang="id">kode object</comment>
+    <comment xml:lang="id">kode objek</comment>
     <comment xml:lang="it">Codice oggetto</comment>
     <comment xml:lang="ja">オブジェクトコード</comment>
     <comment xml:lang="kk">объектті коды</comment>
@@ -17902,6 +18084,7 @@
     <sub-class-of type="application/x-executable"/>
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-script"/>
+    <alias type="text/x-perl"/>
     <magic priority="50">
       <match value='eval \"exec /usr/local/bin/perl' type="string" offset="0"/>
       <match value="/bin/perl" type="string" offset="2:16"/>
@@ -18022,7 +18205,7 @@
     <comment xml:lang="pt">pacote de certificação PKCS#7</comment>
     <comment xml:lang="pt_BR">Pacote de certificados PKCS#7</comment>
     <comment xml:lang="ro">Pachet certificat PKCS#7</comment>
-    <comment xml:lang="ru">Пакет сертификатов PKCS#7</comment>
+    <comment xml:lang="ru">Пакет сертификата PKCS#7</comment>
     <comment xml:lang="sk">Zväzok certifikátov PKCS#7</comment>
     <comment xml:lang="sl">Datoteka potrdila PKCS#7</comment>
     <comment xml:lang="sr">ПКЦС#7 пакет уверења</comment>
@@ -18076,7 +18259,7 @@
     <comment xml:lang="pt">pacote de certificação PKCS#12</comment>
     <comment xml:lang="pt_BR">Pacote de certificados PKCS#12</comment>
     <comment xml:lang="ro">Certificat împachetat PKCS#12</comment>
-    <comment xml:lang="ru">Пакет сертификатов PKCS#12</comment>
+    <comment xml:lang="ru">Пакет сертификата PKCS#12</comment>
     <comment xml:lang="sk">Zväzok certifikátov PKCS#12</comment>
     <comment xml:lang="sl">Datoteka potrdila PKCS#12</comment>
     <comment xml:lang="sq">Bundle çertifikate PKCS#12</comment>
@@ -19643,6 +19826,7 @@
     <comment xml:lang="cs">ROM pro SG-1000</comment>
     <comment xml:lang="da">SG-1000 ROM</comment>
     <comment xml:lang="de">SG-1000 ROM</comment>
+    <comment xml:lang="en_GB">SG-1000 ROM</comment>
     <comment xml:lang="es">ROM de SG-1000</comment>
     <comment xml:lang="eu">SG-1000 ROM</comment>
     <comment xml:lang="fi">SG-1000 -ROM</comment>
@@ -19674,6 +19858,7 @@
     <comment xml:lang="cs">ROM pro Master System</comment>
     <comment xml:lang="da">Master System ROM</comment>
     <comment xml:lang="de">Master System ROM</comment>
+    <comment xml:lang="en_GB">Master System ROM</comment>
     <comment xml:lang="es">ROM de Master System</comment>
     <comment xml:lang="eu">Master System ROM</comment>
     <comment xml:lang="fi">Master System -ROM</comment>
@@ -19705,6 +19890,7 @@
     <comment xml:lang="cs">ROM pro Game Gear</comment>
     <comment xml:lang="da">Game Gear ROM</comment>
     <comment xml:lang="de">Game Gear ROM</comment>
+    <comment xml:lang="en_GB">Game Gear ROM</comment>
     <comment xml:lang="es">ROM de Game Gear</comment>
     <comment xml:lang="eu">Game Gear ROM</comment>
     <comment xml:lang="fi">Game Gear -ROM</comment>
@@ -19920,7 +20106,7 @@
     <comment xml:lang="hr">WebVTT podnaslovi</comment>
     <comment xml:lang="hu">WebVTT feliratok</comment>
     <comment xml:lang="ia">Subtitulos WebVTT</comment>
-    <comment xml:lang="id">Subtitel WebVTT</comment>
+    <comment xml:lang="id">Subjudul WebVTT</comment>
     <comment xml:lang="it">Sottotitoli WebVTT</comment>
     <comment xml:lang="ja">WebVTT サブタイトル</comment>
     <comment xml:lang="ka">WebVTT ქვეტიტრები</comment>
@@ -21539,11 +21725,49 @@
   </mime-type>
   <mime-type type="application/x-wonderswan-rom">
     <comment>Bandai WonderSwan ROM</comment>
+    <comment xml:lang="ca">ROM de Bandai WonderSwan</comment>
+    <comment xml:lang="cs">ROM pro Bandai WonderSwan</comment>
+    <comment xml:lang="de">Bandai WonderSwan ROM</comment>
+    <comment xml:lang="en_GB">Bandai WonderSwan ROM</comment>
+    <comment xml:lang="es">ROM de Bandai WonderSwan</comment>
+    <comment xml:lang="hr">Bandai WonderSwan ROM</comment>
+    <comment xml:lang="hu">Bandai WonderSwan ROM</comment>
+    <comment xml:lang="id">ROM Bandai WonderSwan</comment>
+    <comment xml:lang="it">ROM Bandai WonderSwan</comment>
+    <comment xml:lang="kk">Bandai WonderSwan ROM</comment>
+    <comment xml:lang="ko">반다이 원더스완 롬</comment>
+    <comment xml:lang="pl">Plik ROM konsoli Bandai WonderSwan</comment>
+    <comment xml:lang="pt_BR">ROM de WonderSwan da Bandai</comment>
+    <comment xml:lang="ru">Bandai WonderSwan ROM</comment>
+    <comment xml:lang="sk">ROM pre Bandai WonderSwan</comment>
+    <comment xml:lang="sv">Bandai WonderSwan-rom</comment>
+    <comment xml:lang="uk">ROM Bandai WonderSwan</comment>
+    <comment xml:lang="zh_CN">万代 WonderSwan ROM</comment>
+    <comment xml:lang="zh_TW">Bandai WonderSwan ROM</comment>
     <generic-icon name="application-x-executable"/>
     <glob pattern="*.ws"/>
   </mime-type>
   <mime-type type="application/x-wonderswan-color-rom">
     <comment>Bandai WonderSwan Color ROM</comment>
+    <comment xml:lang="ca">ROM de Bandai WonderSwan Color</comment>
+    <comment xml:lang="cs">ROM pro Bandai WonderSwan Color</comment>
+    <comment xml:lang="de">Bandai WonderSwan Color ROM</comment>
+    <comment xml:lang="en_GB">Bandai WonderSwan Color ROM</comment>
+    <comment xml:lang="es">ROM de Bandai WonderSwan Color</comment>
+    <comment xml:lang="hr">Bandai WonderSwan Color ROM</comment>
+    <comment xml:lang="hu">Bandai WonderSwan Color ROM</comment>
+    <comment xml:lang="id">ROM Bandai WonderSwan Color</comment>
+    <comment xml:lang="it">ROM Bandai WonderSwan Color</comment>
+    <comment xml:lang="kk">Bandai WonderSwan Color ROM</comment>
+    <comment xml:lang="ko">반다이 원더스완 컬러 롬</comment>
+    <comment xml:lang="pl">Plik ROM konsoli Bandai WonderSwan Color</comment>
+    <comment xml:lang="pt_BR">ROM de WonderSwan Color da Bandai</comment>
+    <comment xml:lang="ru">Bandai WonderSwan Color ROM</comment>
+    <comment xml:lang="sk">ROM pre Bandai WonderSwan Color</comment>
+    <comment xml:lang="sv">Bandai WonderSwan Color-rom</comment>
+    <comment xml:lang="uk">ROM Bandai WonderSwan Color</comment>
+    <comment xml:lang="zh_CN">万代 WonderSwan Color ROM</comment>
+    <comment xml:lang="zh_TW">Bandai WonderSwan Color ROM</comment>
     <generic-icon name="application-x-executable"/>
     <glob pattern="*.wsc"/>
   </mime-type>
@@ -21960,7 +22184,7 @@
     <comment xml:lang="ko">DTS 오디오</comment>
     <comment xml:lang="lv">DTS audio</comment>
     <comment xml:lang="oc">àudio DTS</comment>
-    <comment xml:lang="pl">Dźwięk DTS</comment>
+    <comment xml:lang="pl">Plik dźwiękowy DTS</comment>
     <comment xml:lang="pt">aúdio DTS</comment>
     <comment xml:lang="pt_BR">Áudio DTS</comment>
     <comment xml:lang="ru">Аудио DTS</comment>
@@ -22006,7 +22230,7 @@
     <comment xml:lang="ko">DTSHD 오디오</comment>
     <comment xml:lang="lv">DTSHD audio</comment>
     <comment xml:lang="oc">àudio DTSHD</comment>
-    <comment xml:lang="pl">Dźwięk DTSHD</comment>
+    <comment xml:lang="pl">Plik dźwiękowy DTSHD</comment>
     <comment xml:lang="pt">áudio DTSHD</comment>
     <comment xml:lang="pt_BR">Áudio DTSHD</comment>
     <comment xml:lang="ru">Аудио DTSHD</comment>
@@ -22507,6 +22731,25 @@
   </mime-type>
   <mime-type type="audio/x-pn-audibleaudio">
     <comment>Audible.Com audio</comment>
+    <comment xml:lang="ca">àudio Audible.Com</comment>
+    <comment xml:lang="cs">zvuk Audible.Com</comment>
+    <comment xml:lang="de">Audible.Com-Audio</comment>
+    <comment xml:lang="en_GB">Audible.Com audio</comment>
+    <comment xml:lang="es">sonido de Audible.com</comment>
+    <comment xml:lang="hr">Audible.Com zvučni zapis</comment>
+    <comment xml:lang="hu">Audible.Com hang</comment>
+    <comment xml:lang="id">Audio Audible.Com</comment>
+    <comment xml:lang="it">Audio Audible.Com</comment>
+    <comment xml:lang="kk">Audible.Com аудиосы</comment>
+    <comment xml:lang="ko">Audible.Com 오디오</comment>
+    <comment xml:lang="pl">Plik dźwiękowy Audible.com</comment>
+    <comment xml:lang="pt_BR">Áudio de audible.com</comment>
+    <comment xml:lang="ru">Аудио Audible.Com</comment>
+    <comment xml:lang="sk">Audio Audible.Com</comment>
+    <comment xml:lang="sv">Audible.Com-ljud</comment>
+    <comment xml:lang="uk">звук Audible.Com</comment>
+    <comment xml:lang="zh_CN">Audible.Com 音频</comment>
+    <comment xml:lang="zh_TW">Audible.Com 音訊</comment>
     <magic priority="50">
       
       <match value="1469084982" type="big32" offset="4"/>
@@ -22876,7 +23119,7 @@
     <comment xml:lang="ko">AAC 오디오</comment>
     <comment xml:lang="lv">AAC audio</comment>
     <comment xml:lang="oc">àudio AAC</comment>
-    <comment xml:lang="pl">Dźwięk AAC</comment>
+    <comment xml:lang="pl">Plik dźwiękowy AAC</comment>
     <comment xml:lang="pt">áudio AAC</comment>
     <comment xml:lang="pt_BR">Áudio AAC</comment>
     <comment xml:lang="ru">Аудио AAC</comment>
@@ -22895,7 +23138,16 @@
       <match value="0xFFF0" type="big16" offset="0" mask="0xFFF6"/>
     </magic>
     <glob pattern="*.aac"/>
+    <glob pattern="*.adts"/>
+    <glob weight="10" pattern="*.ass"/>
     <alias type="audio/x-aac"/>
+  </mime-type>
+  <mime-type type="audio/usac">
+    <comment>USAC audio</comment>
+    <acronym>USAC</acronym>
+    <expanded-acronym>Unified Speech and Audio Coding</expanded-acronym>
+    <glob pattern="*.loas"/>
+    <glob pattern="*.xhe"/>
   </mime-type>
   <mime-type type="audio/mp4">
     <comment>MPEG-4 audio</comment>
@@ -22954,6 +23206,11 @@
     </magic>
     <glob pattern="*.m4a"/>
     <glob pattern="*.f4a"/>
+  </mime-type>
+  <mime-type type="audio/x-m4r">
+    <comment>MPEG-4 Ringtone</comment>
+    <glob pattern="*.m4r"/>
+    <sub-class-of type="video/mp4"/>
   </mime-type>
   <mime-type type="video/mp4">
     <comment>MPEG-4 video</comment>
@@ -23446,7 +23703,7 @@
     <comment xml:lang="nl">MP3-audio (gestreamd)</comment>
     <comment xml:lang="nn">Strauma MP3-lyd</comment>
     <comment xml:lang="oc">àudio MP3 (flux)</comment>
-    <comment xml:lang="pl">Dźwięk MP3 (strumień)</comment>
+    <comment xml:lang="pl">Plik dźwiękowy MP3 (strumień)</comment>
     <comment xml:lang="pt">áudio MP3 (em fluxo)</comment>
     <comment xml:lang="pt_BR">Áudio MP3 (em fluxo)</comment>
     <comment xml:lang="ro">Audio MP3 (flux)</comment>
@@ -25073,6 +25330,16 @@
     </magic>
     <glob pattern="*.gif"/>
   </mime-type>
+  <mime-type type="image/heif">
+    <comment>HEIF image</comment>
+    <acronym>HEIF</acronym>
+    <expanded-acronym>High Efficiency Image File</expanded-acronym>
+    <glob pattern="*.heic"/>
+    <glob pattern="*.heif"/>
+    <alias type="image/heic"/>
+    <alias type="image/heic-sequence"/>
+    <alias type="image/heif-sequence"/>
+  </mime-type>
   <mime-type type="image/ief">
     <comment>IEF image</comment>
     <comment xml:lang="ar">صورة IEF</comment>
@@ -25188,8 +25455,35 @@
     <glob pattern="*.jpe"/>
     <alias type="image/pjpeg"/>
   </mime-type>
+  <mime-type type="video/x-mjpeg">
+    <comment>MJPEG video stream</comment>
+    <acronym>MJPEG</acronym>
+    <expanded-acronym>Motion JPEG</expanded-acronym>
+    <sub-class-of type="image/jpeg"/>
+    <glob pattern="*.mjpeg"/>
+    <glob pattern="*.mjpg"/>
+  </mime-type>
   <mime-type type="image/x-jp2-codestream">
     <comment>JPEG-2000 codestream</comment>
+    <comment xml:lang="ca">flux de codis JPEG-2000</comment>
+    <comment xml:lang="cs">datový tok JPEG-2000</comment>
+    <comment xml:lang="de">JPEG-2000 Codestream</comment>
+    <comment xml:lang="en_GB">JPEG-2000 codestream</comment>
+    <comment xml:lang="es">secuencia de código JPEG-2000</comment>
+    <comment xml:lang="hr">JPEG-2000 kôd strujanja</comment>
+    <comment xml:lang="hu">JPEG-2000 kódfolyam</comment>
+    <comment xml:lang="id">codestream JPEG-2000</comment>
+    <comment xml:lang="it">Codestream JPEG-2000</comment>
+    <comment xml:lang="kk">JPEG-2000 код ағыны</comment>
+    <comment xml:lang="ko">JPEG-2000 코드스트림</comment>
+    <comment xml:lang="pl">Strumień kodu JPEG-2000</comment>
+    <comment xml:lang="pt_BR">Imagem JPEG-2000</comment>
+    <comment xml:lang="ru">Кодовый поток JPEG-2000</comment>
+    <comment xml:lang="sk">JPEG-2000 codestream</comment>
+    <comment xml:lang="sv">JPEG-2000-kodström</comment>
+    <comment xml:lang="uk">потік коду JPEG-2000</comment>
+    <comment xml:lang="zh_CN">JPEG-2000 码流</comment>
+    <comment xml:lang="zh_TW">JPEG-2000 代碼串流</comment>
     <magic priority="50">
       <match value="0xff4fff51" type="big32" offset="0"/>
     </magic>
@@ -25199,6 +25493,26 @@
   </mime-type>
   <mime-type type="image/jp2">
     <comment>JPEG-2000 JP2 image</comment>
+    <comment xml:lang="ca">imatge JPEG-2000 JP2</comment>
+    <comment xml:lang="cs">obrázek JPEG-2000 JP2</comment>
+    <comment xml:lang="de">JPEG-2000 JP2-Bild</comment>
+    <comment xml:lang="en_GB">JPEG-2000 JP2 image</comment>
+    <comment xml:lang="es">imagen JPEG-2000 JP2</comment>
+    <comment xml:lang="fi">JPEG-2000 JP2 -kuva</comment>
+    <comment xml:lang="hr">JPEG-2000 JP2 slika</comment>
+    <comment xml:lang="hu">JPEG-2000 JP2 kép</comment>
+    <comment xml:lang="id">Citra JPEG-2000 JP2</comment>
+    <comment xml:lang="it">Immagine JPEG-2000 JP2</comment>
+    <comment xml:lang="kk">JPEG-2000 JP2 суреті</comment>
+    <comment xml:lang="ko">JPEG-2000 JP2 그림</comment>
+    <comment xml:lang="pl">Obraz JP2 JPEG-2000</comment>
+    <comment xml:lang="pt_BR">Imagem JP2 de JPEG-2000</comment>
+    <comment xml:lang="ru">Изоражение JPEG-2000 JP2</comment>
+    <comment xml:lang="sk">Obrázok JPEG-2000 JP2</comment>
+    <comment xml:lang="sv">JPEG-2000 JP2-bild</comment>
+    <comment xml:lang="uk">зображення JP2 JPEG-2000</comment>
+    <comment xml:lang="zh_CN">JPEG-2000 JP2 图像</comment>
+    <comment xml:lang="zh_TW">JPEG-2000 JP2 影像</comment>
     <acronym>JP2</acronym>
     <expanded-acronym>JPEG-2000</expanded-acronym>
     <alias type="image/jpeg2000"/>
@@ -25212,6 +25526,26 @@
   </mime-type>
   <mime-type type="image/jpx">
     <comment>JPEG-2000 JPX image</comment>
+    <comment xml:lang="ca">imatge JPEG-2000 JPX</comment>
+    <comment xml:lang="cs">obrázek JPEG-2000 JPX</comment>
+    <comment xml:lang="de">JPEG-2000 JPX-Bild</comment>
+    <comment xml:lang="en_GB">JPEG-2000 JPX image</comment>
+    <comment xml:lang="es">imagen JPEG-2000 JPX</comment>
+    <comment xml:lang="fi">JPEG-2000 JPX -kuva</comment>
+    <comment xml:lang="hr">JPEG-2000 JPX slika</comment>
+    <comment xml:lang="hu">JPEG-2000 JPX kép</comment>
+    <comment xml:lang="id">Citra JPEG-2000 JPX</comment>
+    <comment xml:lang="it">Immagine JPEG-2000 JPX</comment>
+    <comment xml:lang="kk">JPEG-2000 JPX суреті</comment>
+    <comment xml:lang="ko">JPEG-2000 JPX 그림</comment>
+    <comment xml:lang="pl">Obraz JPX JPEG-2000</comment>
+    <comment xml:lang="pt_BR">Imagem JPX de JPEG-2000</comment>
+    <comment xml:lang="ru">Изображение JPEG-2000 JPX</comment>
+    <comment xml:lang="sk">Obrázok JPEG-2000 JPX</comment>
+    <comment xml:lang="sv">JPEG-2000 JPX-bild</comment>
+    <comment xml:lang="uk">зображення JPX JPEG-2000</comment>
+    <comment xml:lang="zh_CN">JPEG-2000 JPX 图像</comment>
+    <comment xml:lang="zh_TW">JPEG-2000 JPX 影像</comment>
     <acronym>JPX</acronym>
     <expanded-acronym>JPEG-2000 eXtended</expanded-acronym>
     <magic priority="50">
@@ -25222,6 +25556,26 @@
   </mime-type>
   <mime-type type="image/jpm">
     <comment>JPEG-2000 JPM image</comment>
+    <comment xml:lang="ca">imatge JPEG-2000 JPM</comment>
+    <comment xml:lang="cs">obrázek JPEG-2000 JPM</comment>
+    <comment xml:lang="de">JPEG-2000 JPM-Bild</comment>
+    <comment xml:lang="en_GB">JPEG-2000 JPM image</comment>
+    <comment xml:lang="es">imagen JPEG-2000 JPM</comment>
+    <comment xml:lang="fi">JPEG-2000 JPM -kuva</comment>
+    <comment xml:lang="hr">JPEG-2000 JPM slika</comment>
+    <comment xml:lang="hu">JPEG-2000 JPM kép</comment>
+    <comment xml:lang="id">Citra JPEG-2000 JPM</comment>
+    <comment xml:lang="it">Immagine JPEG-2000 JPM</comment>
+    <comment xml:lang="kk">JPEG-2000 JPM суреті</comment>
+    <comment xml:lang="ko">JPEG-2000 JPM 그림</comment>
+    <comment xml:lang="pl">Obraz JPM JPEG-2000</comment>
+    <comment xml:lang="pt_BR">Imagem JPM de JPEG-2000</comment>
+    <comment xml:lang="ru">Изображение JPEG-2000 JPM</comment>
+    <comment xml:lang="sk">Obrázok JPEG-2000 JPM</comment>
+    <comment xml:lang="sv">JPEG-2000 JPM-bild</comment>
+    <comment xml:lang="uk">зображення JPM JPEG-2000</comment>
+    <comment xml:lang="zh_CN">JPEG-2000 JPM 图像</comment>
+    <comment xml:lang="zh_TW">JPEG-2000 JPM 影像</comment>
     <acronym>JPM</acronym>
     <expanded-acronym>JPEG-2000 Mixed</expanded-acronym>
     <magic priority="50">
@@ -25232,6 +25586,26 @@
   </mime-type>
   <mime-type type="video/mj2">
     <comment>JPEG-2000 MJ2 video</comment>
+    <comment xml:lang="ca">vídeo JPEG-2000 MJ2</comment>
+    <comment xml:lang="cs">video JPEG-2000 MJ2</comment>
+    <comment xml:lang="de">JPEG-2000 MJ2-Video</comment>
+    <comment xml:lang="en_GB">JPEG-2000 MJ2 video</comment>
+    <comment xml:lang="es">vídeo JPEG-2000 MJ2</comment>
+    <comment xml:lang="fi">JPEG-2000 MJ2 -video</comment>
+    <comment xml:lang="hr">JPEG-2000 MJ2 video snimka</comment>
+    <comment xml:lang="hu">JPEG-2000 MJ2 videó</comment>
+    <comment xml:lang="id">Video JPEG-2000 MJ2</comment>
+    <comment xml:lang="it">Video JPEG-2000 MJ2</comment>
+    <comment xml:lang="kk">JPEG-2000 MJ2 видеосы</comment>
+    <comment xml:lang="ko">JPEG-2000 MJ2 동영상</comment>
+    <comment xml:lang="pl">Plik wideo MJ2 JPEG-2000</comment>
+    <comment xml:lang="pt_BR">Imagem MJ2 de JPEG-2000</comment>
+    <comment xml:lang="ru">Видео JPEG-2000 MJ2</comment>
+    <comment xml:lang="sk">Video JPEG-2000 MJ2</comment>
+    <comment xml:lang="sv">JPEG-2000 MJ2-bild</comment>
+    <comment xml:lang="uk">зображення MJ2 JPEG-2000</comment>
+    <comment xml:lang="zh_CN">JPEG-2000 MJ2 视频</comment>
+    <comment xml:lang="zh_TW">JPEG-2000 MJ2 視訊</comment>
     <acronym>MJ2</acronym>
     <expanded-acronym>Motion JPEG-2000</expanded-acronym>
     <magic priority="50">
@@ -26860,7 +27234,6 @@
     <comment xml:lang="el">Πολυσέλιδη εικόνα TIFF</comment>
     <comment xml:lang="en_GB">Multi-page TIFF image</comment>
     <comment xml:lang="es">imagen TIFF de varias páginas</comment>
-    <comment xml:lang="eu">Orri anitzeko TIFF irudia</comment>
     <comment xml:lang="fi">Monisivuinen TIFF-kuva</comment>
     <comment xml:lang="fr">Image TIFF multi-page</comment>
     <comment xml:lang="ga">íomhá il-leathanach TIFF</comment>
@@ -26897,7 +27270,7 @@
     <comment xml:lang="be@latin">Vyjava AutoCAD</comment>
     <comment xml:lang="bg">Изображение — AutoCAD</comment>
     <comment xml:lang="ca">imatge d'AutoCAD</comment>
-    <comment xml:lang="cs">obrázek AutoCAD</comment>
+    <comment xml:lang="cs">výkres AutoCAD</comment>
     <comment xml:lang="cy">Delwedd AutoCAD</comment>
     <comment xml:lang="da">AutoCAD-billede</comment>
     <comment xml:lang="de">AutoCAD-Bild</comment>
@@ -27601,7 +27974,7 @@
     <comment xml:lang="zh_TW">DjVu 影像</comment>
     <alias type="image/x-djvu"/>
     <alias type="image/x.djvu"/>
-    <magic priority="50">
+    <magic priority="80">
       <match value="AT&amp;TFORM" type="string" offset="0">
         <match value="DJVU" type="string" offset="12"/>
       </match>
@@ -27647,7 +28020,7 @@
     <comment xml:lang="zh_CN">DjVu 文档</comment>
     <comment xml:lang="zh_TW">DjVu 文件</comment>
     <generic-icon name="x-office-document"/>
-    <magic priority="50">
+    <magic priority="80">
       <match value="AT&amp;TFORM" type="string" offset="0">
         <match value="DJVM" type="string" offset="12"/>
       </match>
@@ -29460,6 +29833,25 @@
   </mime-type>
   <mime-type type="image/x-gimp-gbr">
     <comment>GIMP brush</comment>
+    <comment xml:lang="ca">pinzell de GIMP</comment>
+    <comment xml:lang="cs">štětec GIMP</comment>
+    <comment xml:lang="de">GIMP-Pinsel</comment>
+    <comment xml:lang="en_GB">GIMP brush</comment>
+    <comment xml:lang="es">pincel del GIMP</comment>
+    <comment xml:lang="hr">GIMP kist</comment>
+    <comment xml:lang="hu">GIMP ecset</comment>
+    <comment xml:lang="id">Kuas GIMP</comment>
+    <comment xml:lang="it">Pennello GIMP</comment>
+    <comment xml:lang="kk">GIMP бояу жаққышы</comment>
+    <comment xml:lang="ko">GIMP 붓</comment>
+    <comment xml:lang="pl">Pędzel programu GIMP</comment>
+    <comment xml:lang="pt_BR">Pincel do GIMP</comment>
+    <comment xml:lang="ru">Кисть GIMP</comment>
+    <comment xml:lang="sk">Štetec aplikácie GIMP</comment>
+    <comment xml:lang="sv">GIMP-pensel</comment>
+    <comment xml:lang="uk">пензель GIMP</comment>
+    <comment xml:lang="zh_CN">GIMP 笔刷</comment>
+    <comment xml:lang="zh_TW">GIMP 筆刷</comment>
     <glob pattern="*.gbr"/>
     <magic priority="50">
       <match value="GIMP" type="string" offset="20"/>
@@ -29467,10 +29859,47 @@
   </mime-type>
   <mime-type type="image/x-gimp-gih">
     <comment>GIMP brush pipe</comment>
+    <comment xml:lang="ca">conducte del pinzell de GIMP</comment>
+    <comment xml:lang="cs">zřetězení štětců GIMP</comment>
+    <comment xml:lang="de">GIMP-Pinselanimation</comment>
+    <comment xml:lang="en_GB">GIMP brush pipe</comment>
+    <comment xml:lang="es">pincel animado del GIMP</comment>
+    <comment xml:lang="hr">GIMP valjkasti kist</comment>
+    <comment xml:lang="hu">GIMP ecsetcsatorna</comment>
+    <comment xml:lang="id">Pipa kuas GIMP</comment>
+    <comment xml:lang="it">Pipe pennello GIMP</comment>
+    <comment xml:lang="kk">GIMP бояу жаққыш түтігі</comment>
+    <comment xml:lang="ko">GIMP 붓 파이프</comment>
+    <comment xml:lang="pl">Potok pędzla programu GIMP</comment>
+    <comment xml:lang="pt_BR">Tubo de pincel do GIMP</comment>
+    <comment xml:lang="ru">Анимированная кисть GIMP</comment>
+    <comment xml:lang="sv">GIMP-penselrör</comment>
+    <comment xml:lang="uk">канал пензлів GIMP</comment>
+    <comment xml:lang="zh_CN">GIMP 管刷</comment>
+    <comment xml:lang="zh_TW">GIMP 筆刷導管</comment>
     <glob pattern="*.gih"/>
   </mime-type>
   <mime-type type="image/x-gimp-pat">
     <comment>GIMP pattern</comment>
+    <comment xml:lang="ca">patró de GIMP</comment>
+    <comment xml:lang="cs">vzorek GIMP</comment>
+    <comment xml:lang="de">GIMP-Muster</comment>
+    <comment xml:lang="en_GB">GIMP pattern</comment>
+    <comment xml:lang="es">patrón del GIMP</comment>
+    <comment xml:lang="hr">GIMP uzorak</comment>
+    <comment xml:lang="hu">GIMP minta</comment>
+    <comment xml:lang="id">Pola GIMP</comment>
+    <comment xml:lang="it">Motivo GIMP</comment>
+    <comment xml:lang="kk">GIMP оюы</comment>
+    <comment xml:lang="ko">GIMP 패턴</comment>
+    <comment xml:lang="pl">Deseń programu GIMP</comment>
+    <comment xml:lang="pt_BR">Textura do GIMP</comment>
+    <comment xml:lang="ru">Шаблон GIMP</comment>
+    <comment xml:lang="sk">Vzor aplikácie GIMP</comment>
+    <comment xml:lang="sv">GIMP-mönster</comment>
+    <comment xml:lang="uk">візерунок GIMP</comment>
+    <comment xml:lang="zh_CN">GIMP 图案</comment>
+    <comment xml:lang="zh_TW">GIMP 樣式</comment>
     <glob pattern="*.pat"/>
     <magic priority="50">
       <match value="GPAT" type="string" offset="20"/>
@@ -29667,7 +30096,7 @@
     <comment xml:lang="hr">Blokovski uređaj</comment>
     <comment xml:lang="hu">blokkos eszköz</comment>
     <comment xml:lang="ia">Dispositivo de blocos</comment>
-    <comment xml:lang="id">blok divais</comment>
+    <comment xml:lang="id">peranti blok</comment>
     <comment xml:lang="it">Device a blocchi</comment>
     <comment xml:lang="ja">ブロックデバイス</comment>
     <comment xml:lang="kk">блоктық құрылғысы</comment>
@@ -29719,7 +30148,7 @@
     <comment xml:lang="hr">Znakovni uređaj</comment>
     <comment xml:lang="hu">karakteres eszköz</comment>
     <comment xml:lang="ia">Dispositivo de characteres</comment>
-    <comment xml:lang="id">karakter divais</comment>
+    <comment xml:lang="id">peranti karakter</comment>
     <comment xml:lang="it">Device a caratteri</comment>
     <comment xml:lang="ja">キャラクタデバイス</comment>
     <comment xml:lang="kk">символдық құрылғысы</comment>
@@ -30418,6 +30847,7 @@
     <comment xml:lang="cs">dokument IGES</comment>
     <comment xml:lang="da">IGES-dokument</comment>
     <comment xml:lang="de">IGES-Dokument</comment>
+    <comment xml:lang="en_GB">IGES document</comment>
     <comment xml:lang="es">documento IGES</comment>
     <comment xml:lang="eu">IGES dokumentua</comment>
     <comment xml:lang="fi">IGES-asiakirja</comment>
@@ -30646,7 +31076,7 @@
     <comment xml:lang="hr">Poruka kratkg sadržaja</comment>
     <comment xml:lang="hu">ömlesztett üzenet</comment>
     <comment xml:lang="ia">Digesto de messages</comment>
-    <comment xml:lang="id">pesan digest</comment>
+    <comment xml:lang="id">digest pesan</comment>
     <comment xml:lang="it">Digest di messaggi</comment>
     <comment xml:lang="ja">メッセージダイジェスト</comment>
     <comment xml:lang="kk">мәлімдеме профилі</comment>
@@ -30959,7 +31389,7 @@
     <comment xml:lang="ga">sruth sonraí (brú freastalaí)</comment>
     <comment xml:lang="gl">fluxo de datos (por iniciativa do servidor)</comment>
     <comment xml:lang="he">מידע בזרימה (דחיפה ע״י השרת)</comment>
-    <comment xml:lang="hr">Tok podataka (poslužiteljem pogurano)</comment>
+    <comment xml:lang="hr">Strujanje podataka (poslužiteljem pogurano)</comment>
     <comment xml:lang="hu">sugárzott adatfolyam (kiszolgálóról)</comment>
     <comment xml:lang="ia">Fluxo de datos (pulsate per servitor)</comment>
     <comment xml:lang="id">arus data (dorongan server)</comment>
@@ -31227,7 +31657,7 @@
     <comment xml:lang="hr">txt2tags dokument</comment>
     <comment xml:lang="hu">txt2tags dokumentum</comment>
     <comment xml:lang="ia">Documento txt2tags</comment>
-    <comment xml:lang="id">dokumen txt2tags</comment>
+    <comment xml:lang="id">Dokumen txt2tags</comment>
     <comment xml:lang="it">Documento txt2tags</comment>
     <comment xml:lang="ja">txt2tags ドキュメント</comment>
     <comment xml:lang="ka">txt2tags დოკუმენტი</comment>
@@ -31265,7 +31695,7 @@
     <comment>Verilog source code</comment>
     <comment xml:lang="bg">Изходен код — Verilog</comment>
     <comment xml:lang="ca">codi font en Verilog</comment>
-    <comment xml:lang="cs">zdrojový kód Verilog</comment>
+    <comment xml:lang="cs">zdrojový kód v jazyce Verilog</comment>
     <comment xml:lang="da">Verilog-kildekode</comment>
     <comment xml:lang="de">Verilog-Quelltext</comment>
     <comment xml:lang="el">Πηγαίος κώδικας Verilog</comment>
@@ -31392,7 +31822,7 @@
     <comment>VHDL source code</comment>
     <comment xml:lang="bg">Изходен код — VHDL</comment>
     <comment xml:lang="ca">codi font en VHDL</comment>
-    <comment xml:lang="cs">zdrojový kód VHDL</comment>
+    <comment xml:lang="cs">zdrojový kód v jazyce VHDL</comment>
     <comment xml:lang="da">VHDL-kildekode</comment>
     <comment xml:lang="de">VHDL-Quelltext</comment>
     <comment xml:lang="el">Πηγαίος κώδικας VHDL</comment>
@@ -31566,7 +31996,7 @@
     <comment xml:lang="hr">Običan tekstovni dokument</comment>
     <comment xml:lang="hu">egyszerű szöveg</comment>
     <comment xml:lang="ia">Documento de texto simple</comment>
-    <comment xml:lang="id">dokumen teks biasa</comment>
+    <comment xml:lang="id">dokumen teks polos</comment>
     <comment xml:lang="it">Documento in testo semplice</comment>
     <comment xml:lang="ja">平文テキストドキュメント</comment>
     <comment xml:lang="kk">мәтіндік құжаты</comment>
@@ -31724,7 +32154,7 @@
     <comment xml:lang="hr">Zaglavlja e-pošte</comment>
     <comment xml:lang="hu">levélfejléc</comment>
     <comment xml:lang="ia">Capites de e-mail</comment>
-    <comment xml:lang="id">tajuk email</comment>
+    <comment xml:lang="id">header email</comment>
     <comment xml:lang="it">Intestazioni email</comment>
     <comment xml:lang="ja">メールヘッダー</comment>
     <comment xml:lang="kk">пошталық тақырыптамалары</comment>
@@ -32443,7 +32873,7 @@
     <comment xml:lang="hr">Ada izvorni kôd</comment>
     <comment xml:lang="hu">Ada-forráskód</comment>
     <comment xml:lang="ia">Codice-fonte Ada</comment>
-    <comment xml:lang="id">Kode program Ada</comment>
+    <comment xml:lang="id">Kode sumber Ada</comment>
     <comment xml:lang="it">Codice sorgente Ada</comment>
     <comment xml:lang="ja">Ada ソースコード</comment>
     <comment xml:lang="ka">Ada-ის საწყისი კოდი</comment>
@@ -32607,7 +33037,7 @@
     <comment xml:lang="hr">C++ zaglavlje</comment>
     <comment xml:lang="hu">C++ fejléc</comment>
     <comment xml:lang="ia">Capite C++</comment>
-    <comment xml:lang="id">Tajuk C++</comment>
+    <comment xml:lang="id">Header C++</comment>
     <comment xml:lang="it">Header C++</comment>
     <comment xml:lang="ja">C++ ヘッダー</comment>
     <comment xml:lang="ka">C++-ის თავსართი</comment>
@@ -32647,7 +33077,7 @@
     <comment xml:lang="be@latin">Kryničny kod C++</comment>
     <comment xml:lang="bg">Изходен код — C++</comment>
     <comment xml:lang="ca">codi font en C++</comment>
-    <comment xml:lang="cs">zdrojový kód C++</comment>
+    <comment xml:lang="cs">zdrojový kód v jazyce C++</comment>
     <comment xml:lang="da">C++-kildekode</comment>
     <comment xml:lang="de">C++-Quelltext</comment>
     <comment xml:lang="el">Πηγαίος κώδικας C++</comment>
@@ -32664,7 +33094,7 @@
     <comment xml:lang="hr">C++ izvorni kôd</comment>
     <comment xml:lang="hu">C++-forráskód</comment>
     <comment xml:lang="ia">Codice-fonte C++</comment>
-    <comment xml:lang="id">Kode program C++</comment>
+    <comment xml:lang="id">Kode sumber C++</comment>
     <comment xml:lang="it">Codice sorgente C++</comment>
     <comment xml:lang="ja">C++ ソースコード</comment>
     <comment xml:lang="ka">C++-ის საწყისი კოდი</comment>
@@ -32774,7 +33204,7 @@
     <comment xml:lang="hr">C zaglavlje</comment>
     <comment xml:lang="hu">C fejléc</comment>
     <comment xml:lang="ia">Capite C</comment>
-    <comment xml:lang="id">Tajuk C</comment>
+    <comment xml:lang="id">Header C</comment>
     <comment xml:lang="it">Header C</comment>
     <comment xml:lang="ja">C ヘッダー</comment>
     <comment xml:lang="ka">C-ის თავსართი</comment>
@@ -32827,7 +33257,7 @@
     <comment xml:lang="hr">CMake izvorni kôd</comment>
     <comment xml:lang="hu">CMake-forráskód</comment>
     <comment xml:lang="ia">Codice-fonte CMake</comment>
-    <comment xml:lang="id">Kode program CMake</comment>
+    <comment xml:lang="id">Kode sumber CMake</comment>
     <comment xml:lang="it">Codice sorgente CMake</comment>
     <comment xml:lang="ja">CMake ソースコード</comment>
     <comment xml:lang="ka">CMake-ის საწყისი კოდი</comment>
@@ -33061,7 +33491,7 @@
     <comment xml:lang="be@latin">Kryničny kod C</comment>
     <comment xml:lang="bg">Изходен код — C</comment>
     <comment xml:lang="ca">codi font en C</comment>
-    <comment xml:lang="cs">zdrojový kód C</comment>
+    <comment xml:lang="cs">zdrojový kód v jazyce C</comment>
     <comment xml:lang="da">C-kildekode</comment>
     <comment xml:lang="de">C-Quelltext</comment>
     <comment xml:lang="el">Πηγαίος κώδικας C</comment>
@@ -33078,7 +33508,7 @@
     <comment xml:lang="hr">C izvorni kôd</comment>
     <comment xml:lang="hu">C-forráskód</comment>
     <comment xml:lang="ia">Codice-fonte C</comment>
-    <comment xml:lang="id">Kode program C</comment>
+    <comment xml:lang="id">Kode sumber C</comment>
     <comment xml:lang="it">Codice sorgente C</comment>
     <comment xml:lang="ja">C ソースコード</comment>
     <comment xml:lang="ka">C-ის საწყისი კოდი</comment>
@@ -33121,7 +33551,7 @@
     <comment xml:lang="be@latin">Kryničny kod C#</comment>
     <comment xml:lang="bg">Изходен код — C#</comment>
     <comment xml:lang="ca">codi font en C#</comment>
-    <comment xml:lang="cs">zdrojový kód C#</comment>
+    <comment xml:lang="cs">zdrojový kód v jazyce C#</comment>
     <comment xml:lang="da">C#-kildekode</comment>
     <comment xml:lang="de">C#-Quelltext</comment>
     <comment xml:lang="el">Πηγαίος κώδικας C#</comment>
@@ -33138,7 +33568,7 @@
     <comment xml:lang="hr">C# izvorni kôd</comment>
     <comment xml:lang="hu">C#-forráskód</comment>
     <comment xml:lang="ia">Codice-fonte C#</comment>
-    <comment xml:lang="id">Kode program C#</comment>
+    <comment xml:lang="id">Kode sumber C#</comment>
     <comment xml:lang="it">Codice sorgente C#</comment>
     <comment xml:lang="ja">C# ソースコード</comment>
     <comment xml:lang="ka">C#-ის საწყისი კოდი</comment>
@@ -33175,7 +33605,7 @@
     <comment xml:lang="be@latin">Kryničny kod Vala</comment>
     <comment xml:lang="bg">Изходен код — Vala</comment>
     <comment xml:lang="ca">codi font en Vala</comment>
-    <comment xml:lang="cs">zdrojový kód Vala</comment>
+    <comment xml:lang="cs">zdrojový kód v jazyce Vala</comment>
     <comment xml:lang="da">Valakildekode</comment>
     <comment xml:lang="de">Vala-Quelltext</comment>
     <comment xml:lang="el">Πηγαίος κώδικας Vala</comment>
@@ -33192,7 +33622,7 @@
     <comment xml:lang="hr">Vala izvorni kôd</comment>
     <comment xml:lang="hu">Vala forráskód</comment>
     <comment xml:lang="ia">Codice-fonte Vala</comment>
-    <comment xml:lang="id">Kode program Vala</comment>
+    <comment xml:lang="id">Kode sumber Vala</comment>
     <comment xml:lang="it">Codice sorgente Vala</comment>
     <comment xml:lang="ja">Vala ソースコード</comment>
     <comment xml:lang="kk">Vala бастапқы коды</comment>
@@ -33391,7 +33821,7 @@
     <comment xml:lang="be@latin">Kryničny kod D</comment>
     <comment xml:lang="bg">Изходен код — D</comment>
     <comment xml:lang="ca">codi font en D</comment>
-    <comment xml:lang="cs">zdrojový kód D</comment>
+    <comment xml:lang="cs">zdrojový kód v jazyce D</comment>
     <comment xml:lang="da">D-kildekode</comment>
     <comment xml:lang="de">D-Quelltext</comment>
     <comment xml:lang="el">Πηγαίος κώδικας D</comment>
@@ -33408,7 +33838,7 @@
     <comment xml:lang="hr">D izvorni kôd</comment>
     <comment xml:lang="hu">D-forráskód</comment>
     <comment xml:lang="ia">Codice-fonte D</comment>
-    <comment xml:lang="id">Kode program D</comment>
+    <comment xml:lang="id">Kode sumber D</comment>
     <comment xml:lang="it">Codice sorgente D</comment>
     <comment xml:lang="ja">D ソースコード</comment>
     <comment xml:lang="ka">D-ის საწყისი კოდი</comment>
@@ -33502,7 +33932,7 @@
     <comment xml:lang="be@latin">Kryničny kod Eiffel</comment>
     <comment xml:lang="bg">Изходен код — Eiffel</comment>
     <comment xml:lang="ca">codi font en Eiffel</comment>
-    <comment xml:lang="cs">zdrojový kód Eiffel</comment>
+    <comment xml:lang="cs">zdrojový kód v jazyce Eiffel</comment>
     <comment xml:lang="da">Eiffelkildekode</comment>
     <comment xml:lang="de">Eiffel-Quelltext</comment>
     <comment xml:lang="el">Πηγαίος κώδικας Eiffel</comment>
@@ -33519,7 +33949,7 @@
     <comment xml:lang="hr">Eiffel izvorni kôd</comment>
     <comment xml:lang="hu">Eiffel forráskód</comment>
     <comment xml:lang="ia">Codice-fonte Eiffel</comment>
-    <comment xml:lang="id">Kode program Eiffel</comment>
+    <comment xml:lang="id">Kode sumber Eiffel</comment>
     <comment xml:lang="it">Codice sorgente Eiffel</comment>
     <comment xml:lang="ja">Eiffel ソースコード</comment>
     <comment xml:lang="ka">Eiffel-ის საწყისი კოდი</comment>
@@ -33616,7 +34046,7 @@
     <comment xml:lang="be@latin">Kryničny kod Erlang</comment>
     <comment xml:lang="bg">Изходен код — Erlang</comment>
     <comment xml:lang="ca">codi font en Erlang</comment>
-    <comment xml:lang="cs">zdrojový kód Erlang</comment>
+    <comment xml:lang="cs">zdrojový kód v jazyce Erlang</comment>
     <comment xml:lang="da">Erlangkildekode</comment>
     <comment xml:lang="de">Erlang-Quelltext</comment>
     <comment xml:lang="el">Πηγαίος κώδικας Erlang</comment>
@@ -33633,7 +34063,7 @@
     <comment xml:lang="hr">Erlang izvorni kôd</comment>
     <comment xml:lang="hu">Erlang forráskód</comment>
     <comment xml:lang="ia">Codice-fonte Erlang</comment>
-    <comment xml:lang="id">Kode program Erlang</comment>
+    <comment xml:lang="id">Kode sumber Erlang</comment>
     <comment xml:lang="it">Codice sorgente Erlang</comment>
     <comment xml:lang="ja">Erlang ソースコード</comment>
     <comment xml:lang="ka">Erlang-ის საწყისი კოდი</comment>
@@ -33670,7 +34100,7 @@
     <comment xml:lang="be@latin">Kryničny kod Fortran</comment>
     <comment xml:lang="bg">Изходен код — Fortran</comment>
     <comment xml:lang="ca">codi font en Fortran</comment>
-    <comment xml:lang="cs">zdrojový kód Fortran</comment>
+    <comment xml:lang="cs">zdrojový kód v jazyce Fortran</comment>
     <comment xml:lang="cy">Ffynhonnell rhaglen FORTRAN</comment>
     <comment xml:lang="da">Fortrankildekode</comment>
     <comment xml:lang="de">Fortran-Quelltext</comment>
@@ -33688,7 +34118,7 @@
     <comment xml:lang="hr">Fortran izvorni kôd</comment>
     <comment xml:lang="hu">Fortran-forráskód</comment>
     <comment xml:lang="ia">Codice-fonte Fortran</comment>
-    <comment xml:lang="id">Kode program Fortran</comment>
+    <comment xml:lang="id">Kode sumber Fortran</comment>
     <comment xml:lang="it">Codice sorgente Fortran</comment>
     <comment xml:lang="ja">Fortran ソースコード</comment>
     <comment xml:lang="ka">Fortran-ის საწყისი კოდი</comment>
@@ -33739,7 +34169,7 @@
     <comment xml:lang="hr">Genie izvorni kôd</comment>
     <comment xml:lang="hu">Genie forráskód</comment>
     <comment xml:lang="ia">Codice-fonte Genie</comment>
-    <comment xml:lang="id">Kode program Genie</comment>
+    <comment xml:lang="id">Kode sumber Genie</comment>
     <comment xml:lang="it">Codice sorgente Genie</comment>
     <comment xml:lang="kk">Genie бастапқы коды</comment>
     <comment xml:lang="ko">Genie 소스 코드</comment>
@@ -33880,6 +34310,7 @@
     <comment xml:lang="cs">specifikace vlastností ve formátu Gherkin</comment>
     <comment xml:lang="da">funktionspecifikation i Gherkin-format</comment>
     <comment xml:lang="de">Funktionsspezifikation im Gherkin-Format</comment>
+    <comment xml:lang="en_GB">feature specification in Gherkin format</comment>
     <comment xml:lang="es">especificación de funcionalidad en formato Gherkin</comment>
     <comment xml:lang="fr">spécification fonctionnelle au format Gherkin</comment>
     <comment xml:lang="ga">sonraíocht gnéithe i bhformáid Gherkin</comment>
@@ -34094,7 +34525,7 @@
     <comment xml:lang="be@latin">Kryničny kod Haskell</comment>
     <comment xml:lang="bg">Изходен код на Haskell</comment>
     <comment xml:lang="ca">codi font en Haskell</comment>
-    <comment xml:lang="cs">zdrojový kód Haskell</comment>
+    <comment xml:lang="cs">zdrojový kód v jazyce Haskell</comment>
     <comment xml:lang="cy">Ffynhonnell rhaglen Haskell</comment>
     <comment xml:lang="da">Haskellkildekode</comment>
     <comment xml:lang="de">Haskell-Quelltext</comment>
@@ -34112,7 +34543,7 @@
     <comment xml:lang="hr">Haskell izvorni kôd</comment>
     <comment xml:lang="hu">Haskell-forráskód</comment>
     <comment xml:lang="ia">Codice-fonte Haskell</comment>
-    <comment xml:lang="id">Kode program Haskell</comment>
+    <comment xml:lang="id">Kode sumber Haskell</comment>
     <comment xml:lang="it">Codice sorgente Haskell</comment>
     <comment xml:lang="ja">Haskell ソースコード</comment>
     <comment xml:lang="kk">Haskell бастапқы коды</comment>
@@ -34258,7 +34689,7 @@
     <comment xml:lang="be@latin">Kryničny kod Java</comment>
     <comment xml:lang="bg">Изходен код на Java</comment>
     <comment xml:lang="ca">codi font en Java</comment>
-    <comment xml:lang="cs">zdrojový kód Java</comment>
+    <comment xml:lang="cs">zdrojový kód v jazyce Java</comment>
     <comment xml:lang="da">Javakildekode</comment>
     <comment xml:lang="de">Java-Quelltext</comment>
     <comment xml:lang="el">Πηγαίος κώδικας Java</comment>
@@ -34275,7 +34706,7 @@
     <comment xml:lang="hr">Java izvorni kôd</comment>
     <comment xml:lang="hu">Java-forráskód</comment>
     <comment xml:lang="ia">Codice-fonte Java</comment>
-    <comment xml:lang="id">Kode program Java</comment>
+    <comment xml:lang="id">Kode sumber Java</comment>
     <comment xml:lang="it">Codice sorgente Java</comment>
     <comment xml:lang="ja">Java ソースコード</comment>
     <comment xml:lang="kk">Java бастапқы коды</comment>
@@ -34436,7 +34867,7 @@
     <comment xml:lang="hr">LHS izvorni kôd</comment>
     <comment xml:lang="hu">LHS forráskód</comment>
     <comment xml:lang="ia">Codice-fonte LHS</comment>
-    <comment xml:lang="id">Kode program LHS</comment>
+    <comment xml:lang="id">Kode sumber LHS</comment>
     <comment xml:lang="it">Codice sorgente LHS</comment>
     <comment xml:lang="ja">LHS ソースコード</comment>
     <comment xml:lang="kk">LHS бастапқы коды</comment>
@@ -34851,7 +35282,7 @@
     <comment xml:lang="be@latin">Kryničny kod Objective-C</comment>
     <comment xml:lang="bg">Изходен код — Objective C</comment>
     <comment xml:lang="ca">codi font en Objective-C</comment>
-    <comment xml:lang="cs">zdrojový kód Objective-C</comment>
+    <comment xml:lang="cs">zdrojový kód v jazyce Objective-C</comment>
     <comment xml:lang="da">Objektiv C-kildekode</comment>
     <comment xml:lang="de">Objective-C-Quelltext</comment>
     <comment xml:lang="el">Πηγαίος κώδικας Objective-C</comment>
@@ -34868,7 +35299,7 @@
     <comment xml:lang="hr">Objective-C izvorni kôd</comment>
     <comment xml:lang="hu">Objective-C forráskód</comment>
     <comment xml:lang="ia">Codice-fonte Objective-C</comment>
-    <comment xml:lang="id">Kode program Objective-C</comment>
+    <comment xml:lang="id">Kode sumber Objective-C</comment>
     <comment xml:lang="it">Codice sorgente Objective-C</comment>
     <comment xml:lang="ja">Objective-C ソースコード</comment>
     <comment xml:lang="ka">Objective-C-ის საწყისი კოდი</comment>
@@ -34908,7 +35339,7 @@
     <comment xml:lang="be@latin">Kryničny kod OCaml</comment>
     <comment xml:lang="bg">Изходен код — OCaml</comment>
     <comment xml:lang="ca">codi font en OCaml</comment>
-    <comment xml:lang="cs">zdrojový kód OCaml</comment>
+    <comment xml:lang="cs">zdrojový kód v jazyce OCaml</comment>
     <comment xml:lang="da">OCaml-kildekode</comment>
     <comment xml:lang="de">OCaml-Quelltext</comment>
     <comment xml:lang="el">Πηγαίος κώδικας OCaml</comment>
@@ -34925,7 +35356,7 @@
     <comment xml:lang="hr">OCaml izvorni kôd</comment>
     <comment xml:lang="hu">OCaml forráskód</comment>
     <comment xml:lang="ia">Codice-fonte OCaml</comment>
-    <comment xml:lang="id">Kode program OCaml</comment>
+    <comment xml:lang="id">Kode sumber OCaml</comment>
     <comment xml:lang="it">Codice sorgente OCaml</comment>
     <comment xml:lang="ja">OCaml ソースコード</comment>
     <comment xml:lang="kk">OCaml бастапқы коды</comment>
@@ -34956,6 +35387,26 @@
   </mime-type>
   <mime-type type="text/x-opencl-src">
     <comment>OpenCL source code</comment>
+    <comment xml:lang="ca">codi font en OpenCL</comment>
+    <comment xml:lang="cs">zdrojový kód v jazyce OpenCL</comment>
+    <comment xml:lang="de">OpenCL-Quelltext</comment>
+    <comment xml:lang="en_GB">OpenCL source code</comment>
+    <comment xml:lang="es">código fuente en OpenCL</comment>
+    <comment xml:lang="fi">OpenCL-lähdekoodi</comment>
+    <comment xml:lang="hr">OpenCL izvorni kôd</comment>
+    <comment xml:lang="hu">OpenCL forráskód</comment>
+    <comment xml:lang="id">Kode sumber OpenCL</comment>
+    <comment xml:lang="it">Codice sorgente OpenCL</comment>
+    <comment xml:lang="kk">OpenCL бастапқы коды</comment>
+    <comment xml:lang="ko">OpenCL 소스 코드</comment>
+    <comment xml:lang="pl">Kod źródłowy OpenCL</comment>
+    <comment xml:lang="pt_BR">Código-fonte do OpenCL</comment>
+    <comment xml:lang="ru">Исходный код OpenGL</comment>
+    <comment xml:lang="sk">Zdrojový kód OpenCL</comment>
+    <comment xml:lang="sv">OpenCL-källkod</comment>
+    <comment xml:lang="uk">вихідний код мовою OpenCL</comment>
+    <comment xml:lang="zh_CN">OpenCL 源代码</comment>
+    <comment xml:lang="zh_TW">OpenCL 源碼</comment>
     <acronym>OpenCL</acronym>
     <expanded-acronym>Open Computing Language</expanded-acronym>
     <sub-class-of type="text/x-csrc"/>
@@ -35039,7 +35490,7 @@
     <comment xml:lang="hr">Meson izvorni kôd</comment>
     <comment xml:lang="hu">Meson forráskód</comment>
     <comment xml:lang="ia">Codice-fonte Meson</comment>
-    <comment xml:lang="id">Kode program Meson</comment>
+    <comment xml:lang="id">Kode sumber Meson</comment>
     <comment xml:lang="it">Codice sorgente Meson</comment>
     <comment xml:lang="kk">Meson бастапқы коды</comment>
     <comment xml:lang="ko">Meson 소스 코드</comment>
@@ -35120,7 +35571,7 @@
     <comment xml:lang="be@latin">Kryničny kod Pascal</comment>
     <comment xml:lang="bg">Изходен код — Pascal</comment>
     <comment xml:lang="ca">codi font en Pascal</comment>
-    <comment xml:lang="cs">zdrojový kód Pascal</comment>
+    <comment xml:lang="cs">zdrojový kód v jazyce Pascal</comment>
     <comment xml:lang="da">Pascalkildekode</comment>
     <comment xml:lang="de">Pascal-Quelltext</comment>
     <comment xml:lang="el">Πηγαίος κώδικας Pascal</comment>
@@ -35137,7 +35588,7 @@
     <comment xml:lang="hr">Pascal izvorni kôd</comment>
     <comment xml:lang="hu">Pascal-forráskód</comment>
     <comment xml:lang="ia">Codice-fonte Pascal</comment>
-    <comment xml:lang="id">Kode program Pascal</comment>
+    <comment xml:lang="id">Kode sumber Pascal</comment>
     <comment xml:lang="it">Codice sorgente Pascal</comment>
     <comment xml:lang="ja">Pascal ソースコード</comment>
     <comment xml:lang="kk">Pascal бастапқы коды</comment>
@@ -35239,7 +35690,7 @@
     <comment>Go source code</comment>
     <comment xml:lang="bg">Изходен код — Go</comment>
     <comment xml:lang="ca">codi font en Go</comment>
-    <comment xml:lang="cs">zdrojový kód Go</comment>
+    <comment xml:lang="cs">zdrojový kód v jazyce Go</comment>
     <comment xml:lang="da">Go-kildekode</comment>
     <comment xml:lang="de">Go-Quelltext</comment>
     <comment xml:lang="el">Πηγαίος κώδικας Go</comment>
@@ -35320,6 +35771,26 @@
   </mime-type>
   <mime-type type="text/x-python3">
     <comment>Python 3 script</comment>
+    <comment xml:lang="ca">script Python 3</comment>
+    <comment xml:lang="cs">skript v jazyce Python 3</comment>
+    <comment xml:lang="de">Python-3-Skript</comment>
+    <comment xml:lang="en_GB">Python 3 script</comment>
+    <comment xml:lang="es">secuencia de órdenes en Python 3</comment>
+    <comment xml:lang="fi">Python 3 -skripti</comment>
+    <comment xml:lang="hr">Python3 skripta</comment>
+    <comment xml:lang="hu">Python 3 parancsfájl</comment>
+    <comment xml:lang="id">Skrip Python 3</comment>
+    <comment xml:lang="it">Script Python 3</comment>
+    <comment xml:lang="kk">Python 3 скрипті</comment>
+    <comment xml:lang="ko">파이썬 3 스크립트</comment>
+    <comment xml:lang="pl">Skrypt Python 3</comment>
+    <comment xml:lang="pt_BR">Script Python 3</comment>
+    <comment xml:lang="ru">Сценарий Python 3</comment>
+    <comment xml:lang="sk">Skript Python 3</comment>
+    <comment xml:lang="sv">Python 3-skript</comment>
+    <comment xml:lang="uk">скрипт мовою Python 3</comment>
+    <comment xml:lang="zh_CN">Python 3 脚本</comment>
+    <comment xml:lang="zh_TW">Python 3 指令稿</comment>
     <sub-class-of type='text/x-python'/>
     <magic priority="60">
       <match value="#!/bin/python3" type="string" offset="0"/>
@@ -35343,7 +35814,7 @@
     <comment xml:lang="be@latin">Skrypt Python</comment>
     <comment xml:lang="bg">Скрипт — Python</comment>
     <comment xml:lang="ca">script Python</comment>
-    <comment xml:lang="cs">skript Python</comment>
+    <comment xml:lang="cs">skript v jazyce Python</comment>
     <comment xml:lang="da">Pythonprogram</comment>
     <comment xml:lang="de">Python-Skript</comment>
     <comment xml:lang="el">Δέσμη ενεργειών Python</comment>
@@ -35411,7 +35882,7 @@
     <comment xml:lang="be@latin">Skrypt Lua</comment>
     <comment xml:lang="bg">Скрипт на Lua</comment>
     <comment xml:lang="ca">script Lua</comment>
-    <comment xml:lang="cs">skript Lua</comment>
+    <comment xml:lang="cs">skript v jazyce Lua</comment>
     <comment xml:lang="da">Luaprogram</comment>
     <comment xml:lang="de">Lua-Skript</comment>
     <comment xml:lang="el">Δέσμη ενεργειών Lua</comment>
@@ -35636,6 +36107,7 @@
     <comment xml:lang="cs">soubor preprocesoru Sass CSS</comment>
     <comment xml:lang="da">Sass CSS-forbrænderfil</comment>
     <comment xml:lang="de">Sass-CSS-Präprozessordatei</comment>
+    <comment xml:lang="en_GB">Sass CSS pre-processor file</comment>
     <comment xml:lang="es">archivo de preprocesador de CSS Sass</comment>
     <comment xml:lang="fr">fichier de prétraitement CSS Sass</comment>
     <comment xml:lang="ga">comhad réamhphróiseálaí CSS Sass</comment>
@@ -35765,6 +36237,7 @@
     <comment xml:lang="cs">soubor preprocesoru Sass CSS</comment>
     <comment xml:lang="da">Sass CSS-forbrænderfil</comment>
     <comment xml:lang="de">Sass-CSS-Präprozessordatei</comment>
+    <comment xml:lang="en_GB">Sass CSS pre-processor file</comment>
     <comment xml:lang="es">archivo de preprocesador de CSS Sass</comment>
     <comment xml:lang="fr">fichier de prétraitement CSS Sass</comment>
     <comment xml:lang="ga">comhad réamhphróiseálaí CSS Sass</comment>
@@ -36248,6 +36721,7 @@
     <comment xml:lang="cs">šablona Twig</comment>
     <comment xml:lang="da">Twig-skabelon</comment>
     <comment xml:lang="de">Twig-Vorlage</comment>
+    <comment xml:lang="en_GB">Twig template</comment>
     <comment xml:lang="es">plantilla de Twig</comment>
     <comment xml:lang="eu">Twig txantiloia</comment>
     <comment xml:lang="fr">modèle Twig</comment>
@@ -36610,6 +37084,7 @@
     <comment xml:lang="ca">fitxer de servei de D-Bus</comment>
     <comment xml:lang="cs">soubor služby D-Bus</comment>
     <comment xml:lang="de">D-Bus-Dienstdatei</comment>
+    <comment xml:lang="en_GB">D-Bus service file</comment>
     <comment xml:lang="es">archivo de servicio de D-Bus</comment>
     <comment xml:lang="eu">D-Bus zerbitzu fitxategia</comment>
     <comment xml:lang="fi">D-Bus-palvelutiedosto</comment>
@@ -36622,7 +37097,7 @@
     <comment xml:lang="kk">D-Bus қызметтік файлы</comment>
     <comment xml:lang="ko">D-Bus 서비스 파일</comment>
     <comment xml:lang="pl">Plik usługi D-Bus</comment>
-    <comment xml:lang="pt_BR">Arquivo do serviço D-Bus</comment>
+    <comment xml:lang="pt_BR">Arquivo de serviço do D-Bus</comment>
     <comment xml:lang="ru">Файл службы D-Bus</comment>
     <comment xml:lang="sk">Súbor služby D-Bus</comment>
     <comment xml:lang="sr">датотека услуге Д-сабирнице</comment>
@@ -36644,6 +37119,7 @@
     <comment xml:lang="ca">fitxer d'unitat de systemd</comment>
     <comment xml:lang="cs">jednotkový soubor systemd</comment>
     <comment xml:lang="de">systemd-Einheitsdatei</comment>
+    <comment xml:lang="en_GB">systemd unit file</comment>
     <comment xml:lang="es">archivo de unidad de systemd</comment>
     <comment xml:lang="eu">systemd unitate fitxategia</comment>
     <comment xml:lang="fi">systemd-yksikkötiedosto</comment>
@@ -36656,7 +37132,7 @@
     <comment xml:lang="kk">systemd юнит файлы</comment>
     <comment xml:lang="ko">systemd 유닛 파일</comment>
     <comment xml:lang="pl">Plik jednostki systemd</comment>
-    <comment xml:lang="pt_BR">Arquivo de unidade do systemd</comment>
+    <comment xml:lang="pt_BR">Arquivo de unit do systemd</comment>
     <comment xml:lang="ru">Модульный файл Systemd</comment>
     <comment xml:lang="sk">Súbor jednotky systemd</comment>
     <comment xml:lang="sr">датотека јединице системд-а</comment>
@@ -37071,7 +37547,7 @@
     <comment xml:lang="ga">sruth aistrithe MPEG-2</comment>
     <comment xml:lang="gl">fluxo de transporte MPEG-2</comment>
     <comment xml:lang="he">העברת זרימה של MPEG-2</comment>
-    <comment xml:lang="hr">MPEG-2 transportni tok</comment>
+    <comment xml:lang="hr">MPEG-2 transportno strujanje</comment>
     <comment xml:lang="hu">MPEG-2 átviteli adatfolyam</comment>
     <comment xml:lang="ia">Fluxo de transporto MPEG-2</comment>
     <comment xml:lang="id">Stream transport MPEG-2</comment>
@@ -37372,6 +37848,7 @@
     <comment xml:lang="ca">imatge de textura de Khronos</comment>
     <comment xml:lang="cs">obrázek s texturou Khronos</comment>
     <comment xml:lang="de">Khronos-Texturbild</comment>
+    <comment xml:lang="en_GB">Khronos texture image</comment>
     <comment xml:lang="es">imagen de textura de Khronos</comment>
     <comment xml:lang="fr">image de texture Khronos</comment>
     <comment xml:lang="ga">íomhá uigeachta Khronos</comment>
@@ -37382,7 +37859,7 @@
     <comment xml:lang="kk">Khronos текстура суреті</comment>
     <comment xml:lang="ko">크로노스 텍스처 파일</comment>
     <comment xml:lang="pl">Obraz tekstury Khronos</comment>
-    <comment xml:lang="pt_BR">Imagem de textura Khronos</comment>
+    <comment xml:lang="pt_BR">Imagem de textura do Khronos</comment>
     <comment xml:lang="ru">Изображение текстуры Khronos</comment>
     <comment xml:lang="sk">Obrázok textúry Khronos</comment>
     <comment xml:lang="sr">слика Кронос текстуре</comment>
@@ -39264,6 +39741,7 @@
     <comment xml:lang="cs">binární rozdíl mezi soubory</comment>
     <comment xml:lang="da">binære forskelle mellem filer</comment>
     <comment xml:lang="de">binäre Unterschiede zwischen Dateien</comment>
+    <comment xml:lang="en_GB">binary differences between files</comment>
     <comment xml:lang="es">diferencias entre archivos binarios</comment>
     <comment xml:lang="eu">fitxategi binarioen arteko ezberdinstasunak</comment>
     <comment xml:lang="fr">différences binaires entre fichiers</comment>
@@ -40452,6 +40930,7 @@
     <comment xml:lang="cs">balíček Flatpak s aplikací</comment>
     <comment xml:lang="da">Flatpak-programsamling</comment>
     <comment xml:lang="de">Flatpak-Anwendungspaket</comment>
+    <comment xml:lang="en_GB">Flatpak application bundle</comment>
     <comment xml:lang="es">paquete de aplicación Flatpak</comment>
     <comment xml:lang="eu">Flatpak aplikazio bilduma</comment>
     <comment xml:lang="fi">Flatpak-sovelluspaketti</comment>
@@ -40466,7 +40945,7 @@
     <comment xml:lang="ko">Flatpak 프로그램 번들</comment>
     <comment xml:lang="pl">Pakiet programu Flatpak</comment>
     <comment xml:lang="pt_BR">Pacote de aplicativo Flatpak</comment>
-    <comment xml:lang="ru">Пакет приложений Flatpak</comment>
+    <comment xml:lang="ru">Пакет приложения Flatpak</comment>
     <comment xml:lang="sk">Balík aplikácií Flatpak</comment>
     <comment xml:lang="sr">скуп програма Флатпака</comment>
     <comment xml:lang="sv">Flatpak-programbunt</comment>
@@ -40490,6 +40969,7 @@
     <comment xml:lang="cs">popis repozitáře Flatpak</comment>
     <comment xml:lang="da">Flatpak-arkivbeskrivelse</comment>
     <comment xml:lang="de">Flatpak-Repositoriumsbeschreibung</comment>
+    <comment xml:lang="en_GB">Flatpak repository description</comment>
     <comment xml:lang="es">descripción de repositorio de Flatpak</comment>
     <comment xml:lang="eu">Flatpak biltegi deskribapena</comment>
     <comment xml:lang="fi">Flatpak-ohjelmistolähdekuvaus</comment>
@@ -40525,6 +41005,7 @@
     <comment xml:lang="ca">referència de dipòsit Flatpak</comment>
     <comment xml:lang="cs">odkaz na repozitář Flatpak</comment>
     <comment xml:lang="de">Flatpak-Repositoriumsreferenz</comment>
+    <comment xml:lang="en_GB">Flatpak repository reference</comment>
     <comment xml:lang="es">referencia a repositorio de Flatpak</comment>
     <comment xml:lang="eu">Flatpak biltegi erreferentzia</comment>
     <comment xml:lang="fi">Flatpak-ohjelmistolähdeviite</comment>
@@ -40560,6 +41041,7 @@
     <comment xml:lang="cs">souborový systém Squashfs</comment>
     <comment xml:lang="da">Squashfs-filsystem</comment>
     <comment xml:lang="de">Squashfs-Dateisystem</comment>
+    <comment xml:lang="en_GB">Squashfs filesystem</comment>
     <comment xml:lang="es">sistema de archivos Squashfs</comment>
     <comment xml:lang="eu">Squashfs fitxategi sistema</comment>
     <comment xml:lang="fi">Squashfs-tiedostojärjestelmä</comment>
@@ -40596,6 +41078,7 @@
     <comment xml:lang="cs">balíček AppImage s aplikací</comment>
     <comment xml:lang="da">Applmage-programsamling</comment>
     <comment xml:lang="de">AppImage-Anwendungspaket</comment>
+    <comment xml:lang="en_GB">AppImage application bundle</comment>
     <comment xml:lang="es">paquete de aplicación AppImage</comment>
     <comment xml:lang="eu">AppImage aplikazio bilduma</comment>
     <comment xml:lang="fi">AppImage-sovelluspaketti</comment>
@@ -40610,7 +41093,7 @@
     <comment xml:lang="ko">AppImage 프로그램 번들</comment>
     <comment xml:lang="pl">Pakiet programu AppImage</comment>
     <comment xml:lang="pt_BR">Pacote de aplicativo AppImage</comment>
-    <comment xml:lang="ru">Пакет приложений AppImage</comment>
+    <comment xml:lang="ru">Пакет приложения AppImage</comment>
     <comment xml:lang="sk">Balík aplikácií AppImage</comment>
     <comment xml:lang="sr">скуп програма Ап-слике</comment>
     <comment xml:lang="sv">AppImage-programbunt</comment>
@@ -40639,6 +41122,7 @@
     <comment xml:lang="cs">balíček Snap</comment>
     <comment xml:lang="da">Snap-pakke</comment>
     <comment xml:lang="de">Snap-Paket</comment>
+    <comment xml:lang="en_GB">Snap package</comment>
     <comment xml:lang="es">paquete Snap</comment>
     <comment xml:lang="eu">Snap paketea</comment>
     <comment xml:lang="fi">Snap-paketti</comment>
@@ -40666,73 +41150,17 @@
   </mime-type>
 
   
-  <mime-type type="model/x.stl-binary">
-    <comment>STL 3D model (binary)</comment>
-    <comment xml:lang="ca">model 3D STL (binari)</comment>
-    <comment xml:lang="cs">model STL 3D (binární)</comment>
-    <comment xml:lang="de">STL 3D-Modell (binär)</comment>
-    <comment xml:lang="es">modelo 3D STL (binario)</comment>
-    <comment xml:lang="eu">STL 3D modeloa (binarioa)</comment>
-    <comment xml:lang="fr">modèle (binaire) STL 3D</comment>
-    <comment xml:lang="ga">samhail 3T STL (dénártha)</comment>
-    <comment xml:lang="hr">STL 3D model (binarna datoteka)</comment>
-    <comment xml:lang="hu">STL 3D modell (bináris)</comment>
-    <comment xml:lang="id">model STL 3D (biner)</comment>
-    <comment xml:lang="it">Modello 3D STL (binario)</comment>
-    <comment xml:lang="kk">STL 3D моделі (екілік)</comment>
-    <comment xml:lang="ko">STL 3D 모델(바이너리)</comment>
-    <comment xml:lang="pl">Model 3D STL (binarny)</comment>
-    <comment xml:lang="pt_BR">Modelo 3D STL (binário)</comment>
-    <comment xml:lang="ru">3D модель STL (бинарная)</comment>
-    <comment xml:lang="sk">STL 3D model (binárny)</comment>
-    <comment xml:lang="sr">СТЛ 3Д модел (извршна)</comment>
-    <comment xml:lang="sv">STL 3D-modell (binär)</comment>
-    <comment xml:lang="tr">STL 3D modeli (ikili)</comment>
-    <comment xml:lang="uk">просторова модель STL (бінарна)</comment>
-    <comment xml:lang="zh_CN">STL 3D 模型（二进制）</comment>
-    <comment xml:lang="zh_TW">STL 3D 模型 (二進位)</comment>
-    <magic priority="10">
-      <match value="0x0" type="byte" offset="134" mask="0xFFFF">
-        <match value="0x0" type="byte" offset="184" mask="0xFFFF">
-          <match value="0x0" type="byte" offset="234" mask="0xFFFF"/>
-        </match>
-      </match>
-    </magic>
-    <glob pattern="*.stl"/>
-  </mime-type>
-
-  <mime-type type="model/x.stl-ascii">
-    <comment>STL 3D model (ASCII)</comment>
-    <comment xml:lang="ca">model 3D STL (ASCII)</comment>
-    <comment xml:lang="cs">model STL 3D (ASCII)</comment>
-    <comment xml:lang="de">STL 3D-Modell (ASCII)</comment>
-    <comment xml:lang="es">modelo 3D STL (ASCII)</comment>
-    <comment xml:lang="eu">STL 3D modeloa (ASCII)</comment>
-    <comment xml:lang="fr">modèle (ASCII) STL 3D</comment>
-    <comment xml:lang="ga">samhail 3T STL (ASCII)</comment>
-    <comment xml:lang="hr">STL 3D model (ASCII)</comment>
-    <comment xml:lang="hu">STL 3D modell (ASCII)</comment>
-    <comment xml:lang="id">model STL 3D (ASCII)</comment>
-    <comment xml:lang="it">Modello 3D STL (ASCII)</comment>
-    <comment xml:lang="kk">STL 3D моделі (ASCII)</comment>
-    <comment xml:lang="ko">STL 3D 모델(아스키)</comment>
-    <comment xml:lang="pl">Model 3D STL (ASCII)</comment>
-    <comment xml:lang="pt_BR">Modelo 3D STL (ASCII)</comment>
-    <comment xml:lang="ru">3D модель STL (ASCII)</comment>
-    <comment xml:lang="sk">STL 3D model (ASCII)</comment>
-    <comment xml:lang="sr">СТЛ 3Д модел (АСКРИ)</comment>
-    <comment xml:lang="sv">STL 3D-modell (ASCII)</comment>
-    <comment xml:lang="tr">STL 3D modeli (ASCII)</comment>
-    <comment xml:lang="uk">просторова модель STL (ASCII)</comment>
-    <comment xml:lang="zh_CN">STL 3D 模型 (ASCII)</comment>
-    <comment xml:lang="zh_TW">STL 3D 模型 (ASCII)</comment>
-    <sub-class-of type="text/plain"/>
-    <generic-icon name="text-x-generic"/>
+  <mime-type type="model/stl">
+    <comment>STL 3D model</comment>
+    <acronym>STL</acronym>
+    <expanded-acronym>StereoLithography</expanded-acronym>
     <magic priority="50">
       <match value="solid" type="string" offset="0"/>
       <match value="SOLID" type="string" offset="0"/>
     </magic>
     <glob pattern="*.stl"/>
+    <alias type="model/x.stl-ascii"/>
+    <alias type="model/x.stl-binary"/>
   </mime-type>
 
   <mime-type type="text/x.gcode">
@@ -40740,6 +41168,7 @@
     <comment xml:lang="ca">fitxer G-code</comment>
     <comment xml:lang="cs">soubor G-code</comment>
     <comment xml:lang="de">G-Code-Datei</comment>
+    <comment xml:lang="en_GB">G-code file</comment>
     <comment xml:lang="es">archivo G-code</comment>
     <comment xml:lang="eu">G-code fitxategia</comment>
     <comment xml:lang="fi">G-code-tiedosto</comment>
@@ -40769,8 +41198,9 @@
   <mime-type type="application/x-fds-disk">
     <comment>Nintendo FDS disk image</comment>
     <comment xml:lang="ca">Imatge de disc Nintendo FDS</comment>
-    <comment xml:lang="cs">obraz disku Nintendo FDS</comment>
+    <comment xml:lang="cs">obraz disku pro Nintendo FDS</comment>
     <comment xml:lang="de">Nintendo-FDS-Datenträgerabbild</comment>
+    <comment xml:lang="en_GB">Nintendo FDS disk image</comment>
     <comment xml:lang="es">imagen de disco FDS de Nintendo</comment>
     <comment xml:lang="eu">Nintendo FDS disko irudia</comment>
     <comment xml:lang="fi">Nintendo FDS -levykuva</comment>
