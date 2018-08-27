@@ -89,34 +89,45 @@ type hitItem struct {
 	matched       bool         // if we've already matched, mark so don't return
 }
 
-// returns an interator func for the partials in a hitItem
-func iteratePartials(partials [][][2]int64) func(int, int) [][2]int64 {
+// search a set of partials for a complete match
+func searchPartials(partials [][][2]int64, kfs []keyFrame) (bool, string) {
 	idxs := make([]int, len(partials))
-	ret := make([][2]int64, len(partials))
-	var ev int
-	return func(start, end int) [][2]int64 {
-		if idxs == nil || start >= len(idxs) || ev >= end {
-			return nil
+	var i, j, o = 0, 1, 0
+
+	for {
+		// if we've made it to the last item, we've made it through
+		if j == len(idxs) {
+			basis := make([][2]int64, len(idxs))
+			for i, v := range idxs {
+				basis[i] = partials[i][v]
+			}
+			return true, fmt.Sprintf("byte match at %v", basis)
 		}
-		for i, v := range idxs[start:] {
-			ret[i+start] = partials[i+start][v]
-		}
-		for i := range partials[start:] {
-			if idxs[i+start] == len(partials[i+start])-1 {
-				if i+start == len(partials)-1 { // if we are at the end
-					idxs = nil
-					break
+		for {
+			ok, lock := checkRelatedKF(kfs[j], kfs[i], partials[j][idxs[j]], partials[i][idxs[i]])
+			if ok {
+				if lock {
+					o = j
 				}
-				if i+start >= end { // if we are at the end value
-					ev = end
-				}
-				idxs[i+start] = 0
+				i++
+				j++
+				break
+			}
+			if idxs[j] < len(partials[j])-1 {
+				idxs[j]++
 				continue
 			}
-			idxs[i+start]++
-			break
+			if idxs[i] < len(partials[i])-1 {
+				idxs[j] = 0
+				idxs[i]++
+				if i > o {
+					i--
+					j--
+				}
+				continue
+			}
+			return false, ""
 		}
-		return ret
 	}
 }
 
@@ -399,30 +410,6 @@ func (b *Matcher) scorer(buf *siegreader.Buffer, waitSet *priority.WaitSet, q ch
 			}
 		}
 		return searchPartials(h.partials, kfs)
-		/*
-			next := iteratePartials(h.partials)
-			var start, end int
-			var basis [][2]int64
-			for basis = next(start, len(kfs)-1); basis != nil; basis = next(start, end) {
-				prevKf := kfs[0]
-				var ok, checkpoint bool
-				for i, kf := range kfs[1:] {
-					ok, checkpoint = checkRelatedKF(kf, prevKf, basis[i+1], basis[i])
-					if !ok {
-						if end < i+1 {
-							end = i + 1
-						}
-						break
-					}
-					if checkpoint && start < i+1 {
-						start = i + 1
-					}
-				}
-				if ok {
-					return true, fmt.Sprintf("byte match at %v", basis)
-				}
-			}
-			return false, ""*/
 	}
 
 	go func() {
