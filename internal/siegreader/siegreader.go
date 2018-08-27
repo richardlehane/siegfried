@@ -43,12 +43,12 @@ var (
 )
 
 const (
-	readSz      int = 4096
+	readSz      int = 8192 // old 4096
 	initialRead     = readSz * 2
 	eofSz           = readSz * 2
-	wheelSz         = readSz * 16
-	smallFileSz     = readSz * 16 // 65536
-	streamSz        = smallFileSz * 1024
+	wheelSz         = readSz * 8        // old 16
+	smallFileSz     = readSz * 8        // old 16
+	streamSz        = smallFileSz * 512 // old 1024
 )
 
 type bufferSrc interface {
@@ -94,4 +94,10 @@ func (b *Buffer) Text() characterize.CharType {
 		b.text = characterize.Detect(buf)
 	}
 	return b.text
+}
+
+// Reader exposes a Reader for the Buffer.
+// This is to support external uses of this internal package.
+func (b *Buffer) Reader() *Reader {
+	return ReaderFrom(b)
 }
