@@ -1,4 +1,4 @@
-// Copyright 2015 Richard Lehane. All rights reserved.
+// Copyright 2018 Richard Lehane. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,9 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main
+// Package decompress provides zip, tar, gzip and webarchive decompression/unpacking
+package decompress
 
 import (
+	"fmt"
 	"io"
 	"path/filepath"
 	"strings"
@@ -32,7 +34,14 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core"
 )
 
-func isArc(ids []core.Identification) config.Archive {
+// package flag for changing functionality of Arcpath func if droid output flag is used
+var droidOutput bool
+
+func SetDroid() {
+	droidOutput = true
+}
+
+func IsArc(ids []core.Identification) config.Archive {
 	var arc config.Archive
 	for _, id := range ids {
 		if id.Archive() > 0 {
@@ -42,14 +51,30 @@ func isArc(ids []core.Identification) config.Archive {
 	return arc
 }
 
-type decompressor interface {
-	next() error // when finished, should return io.EOF
-	reader() io.Reader
-	path() string
-	mime() string
-	size() int64
-	mod() string
-	dirs() []string
+type Decompressor interface {
+	Next() error // when finished, should return io.EOF
+	Reader() io.Reader
+	Path() string
+	MIME() string
+	Size() int64
+	Mod() string
+	Dirs() []string
+}
+
+func New(arc config.Archive, buf *siegreader.Buffer, path string, sz int64) (Decompressor, error) {
+	switch arc {
+	case config.Zip:
+		return newZip(siegreader.ReaderFrom(buf), path, sz)
+	case config.Gzip:
+		return newGzip(buf, path)
+	case config.Tar:
+		return newTar(siegreader.ReaderFrom(buf), path)
+	case config.ARC:
+		return newARC(siegreader.ReaderFrom(buf), path)
+	case config.WARC:
+		return newWARC(siegreader.ReaderFrom(buf), path)
+	}
+	return nil, fmt.Errorf("Decompress: unknown archive type %v", arc)
 }
 
 type zipD struct {
@@ -60,7 +85,7 @@ type zipD struct {
 	written map[string]bool
 }
 
-func newZip(ra io.ReaderAt, path string, sz int64) (decompressor, error) {
+func newZip(ra io.ReaderAt, path string, sz int64) (Decompressor, error) {
 	zr, err := zip.NewReader(ra, sz)
 	return &zipD{idx: -1, p: path, rdr: zr}, err
 }
@@ -72,7 +97,7 @@ func (z *zipD) close() {
 	z.rc.Close()
 }
 
-func (z *zipD) next() error {
+func (z *zipD) Next() error {
 	z.close() // close the previous entry, if any
 	// proceed
 	z.idx++
@@ -87,27 +112,27 @@ func (z *zipD) next() error {
 	return err
 }
 
-func (z *zipD) reader() io.Reader {
+func (z *zipD) Reader() io.Reader {
 	return z.rc
 }
 
-func (z *zipD) path() string {
-	return arcpath(z.p, filepath.FromSlash(characterize.ZipName(z.rdr.File[z.idx].Name)))
+func (z *zipD) Path() string {
+	return Arcpath(z.p, filepath.FromSlash(characterize.ZipName(z.rdr.File[z.idx].Name)))
 }
 
-func (z *zipD) mime() string {
+func (z *zipD) MIME() string {
 	return ""
 }
 
-func (z *zipD) size() int64 {
+func (z *zipD) Size() int64 {
 	return int64(z.rdr.File[z.idx].UncompressedSize64)
 }
 
-func (z *zipD) mod() string {
+func (z *zipD) Mod() string {
 	return z.rdr.File[z.idx].ModTime().Format(time.RFC3339)
 }
 
-func (z *zipD) dirs() []string {
+func (z *zipD) Dirs() []string {
 	if z.written == nil {
 		z.written = make(map[string]bool)
 	}
@@ -121,11 +146,11 @@ type tarD struct {
 	written map[string]bool
 }
 
-func newTar(r io.Reader, path string) (decompressor, error) {
+func newTar(r io.Reader, path string) (Decompressor, error) {
 	return &tarD{p: path, rdr: tar.NewReader(r)}, nil
 }
 
-func (t *tarD) next() error {
+func (t *tarD) Next() error {
 	var err error
 	// scan past directories
 	for t.hdr, err = t.rdr.Next(); err == nil && t.hdr.FileInfo().IsDir(); t.hdr, err = t.rdr.Next() {
@@ -133,27 +158,27 @@ func (t *tarD) next() error {
 	return err
 }
 
-func (t *tarD) reader() io.Reader {
+func (t *tarD) Reader() io.Reader {
 	return t.rdr
 }
 
-func (t *tarD) path() string {
-	return arcpath(t.p, filepath.FromSlash(t.hdr.Name))
+func (t *tarD) Path() string {
+	return Arcpath(t.p, filepath.FromSlash(t.hdr.Name))
 }
 
-func (t *tarD) mime() string {
+func (t *tarD) MIME() string {
 	return ""
 }
 
-func (t *tarD) size() int64 {
+func (t *tarD) Size() int64 {
 	return t.hdr.Size
 }
 
-func (t *tarD) mod() string {
+func (t *tarD) Mod() string {
 	return t.hdr.ModTime.Format(time.RFC3339)
 }
 
-func (t *tarD) dirs() []string {
+func (t *tarD) Dirs() []string {
 	if t.written == nil {
 		t.written = make(map[string]bool)
 	}
@@ -167,7 +192,7 @@ type gzipD struct {
 	rdr  *gzip.Reader
 }
 
-func newGzip(b *siegreader.Buffer, path string) (decompressor, error) {
+func newGzip(b *siegreader.Buffer, path string) (Decompressor, error) {
 	b.Quit = make(chan struct{}) // in case a stream with a closed quit channel, make a new one
 	_ = b.SizeNow()              // in case a stream, force full read
 	buf, err := b.EofSlice(0, 4) // gzip stores uncompressed size in last 4 bytes of the stream
@@ -179,7 +204,7 @@ func newGzip(b *siegreader.Buffer, path string) (decompressor, error) {
 	return &gzipD{sz: sz, p: path, rdr: g}, err
 }
 
-func (g *gzipD) next() error {
+func (g *gzipD) Next() error {
 	if g.read {
 		g.rdr.Close()
 		return io.EOF
@@ -188,11 +213,11 @@ func (g *gzipD) next() error {
 	return nil
 }
 
-func (g *gzipD) reader() io.Reader {
+func (g *gzipD) Reader() io.Reader {
 	return g.rdr
 }
 
-func (g *gzipD) path() string {
+func (g *gzipD) Path() string {
 	name := g.rdr.Name
 	if len(name) == 0 {
 		switch filepath.Ext(g.p) {
@@ -202,22 +227,22 @@ func (g *gzipD) path() string {
 			name = filepath.Base(g.p)
 		}
 	}
-	return arcpath(g.p, name)
+	return Arcpath(g.p, name)
 }
 
-func (g *gzipD) mime() string {
+func (g *gzipD) MIME() string {
 	return ""
 }
 
-func (g *gzipD) size() int64 {
+func (g *gzipD) Size() int64 {
 	return g.sz
 }
 
-func (g *gzipD) mod() string {
+func (g *gzipD) Mod() string {
 	return g.rdr.ModTime.Format(time.RFC3339)
 }
 
-func (t *gzipD) dirs() []string {
+func (t *gzipD) Dirs() []string {
 	return nil
 }
 
@@ -237,43 +262,43 @@ type wa struct {
 	rdr webarchive.Reader
 }
 
-func newARC(r io.Reader, path string) (decompressor, error) {
+func newARC(r io.Reader, path string) (Decompressor, error) {
 	arcReader, err := webarchive.NewARCReader(r)
 	return &wa{p: trimWebPath(path), rdr: arcReader}, err
 }
 
-func newWARC(r io.Reader, path string) (decompressor, error) {
+func newWARC(r io.Reader, path string) (Decompressor, error) {
 	warcReader, err := webarchive.NewWARCReader(r)
 	return &wa{p: trimWebPath(path), rdr: warcReader}, err
 }
 
-func (w *wa) next() error {
+func (w *wa) Next() error {
 	var err error
 	w.rec, err = w.rdr.NextPayload()
 	return err
 }
 
-func (w *wa) reader() io.Reader {
+func (w *wa) Reader() io.Reader {
 	return webarchive.DecodePayload(w.rec)
 }
 
-func (w *wa) path() string {
-	return arcpath(w.p, w.rec.Date().Format(webarchive.ARCTime)+"/"+w.rec.URL())
+func (w *wa) Path() string {
+	return Arcpath(w.p, w.rec.Date().Format(webarchive.ARCTime)+"/"+w.rec.URL())
 }
 
-func (w *wa) mime() string {
+func (w *wa) MIME() string {
 	return w.rec.MIME()
 }
 
-func (w *wa) size() int64 {
+func (w *wa) Size() int64 {
 	return w.rec.Size()
 }
 
-func (w *wa) mod() string {
+func (w *wa) Mod() string {
 	return w.rec.Date().Format(time.RFC3339)
 }
 
-func (w *wa) dirs() []string {
+func (w *wa) Dirs() []string {
 	return nil
 }
 
@@ -295,8 +320,8 @@ func dirs(path, name string, written map[string]bool) []string {
 
 // per https://github.com/richardlehane/siegfried/issues/81
 // construct paths for compressed objects acc. to KDE hash notation
-func arcpath(base, path string) string {
-	if *droido {
+func Arcpath(base, path string) string {
+	if droidOutput {
 		return base + string(filepath.Separator) + path
 	}
 	return base + "#" + path

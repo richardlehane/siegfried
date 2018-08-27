@@ -28,9 +28,9 @@ import (
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/internal/checksum"
 	"github.com/richardlehane/siegfried/internal/logger"
-	"github.com/richardlehane/siegfried/internal/siegreader"
 	"github.com/richardlehane/siegfried/pkg/config"
 	"github.com/richardlehane/siegfried/pkg/core"
+	"github.com/richardlehane/siegfried/pkg/decompress"
 	"github.com/richardlehane/siegfried/pkg/reader"
 	"github.com/richardlehane/siegfried/pkg/writer"
 )
@@ -226,24 +226,12 @@ func identifyRdr(r io.Reader, ctx *context, ctxts chan *context, gf getFn) {
 		ctx.res <- results{err, cs, ids}
 		return
 	}
-	arc := isArc(ids)
+	arc := decompress.IsArc(ids)
 	if arc == config.None {
 		ctx.res <- results{err, cs, ids}
 		return
 	}
-	var d decompressor
-	switch arc {
-	case config.Zip:
-		d, err = newZip(siegreader.ReaderFrom(b), ctx.path, ctx.sz)
-	case config.Gzip:
-		d, err = newGzip(b, ctx.path)
-	case config.Tar:
-		d, err = newTar(siegreader.ReaderFrom(b), ctx.path)
-	case config.ARC:
-		d, err = newARC(siegreader.ReaderFrom(b), ctx.path)
-	case config.WARC:
-		d, err = newWARC(siegreader.ReaderFrom(b), ctx.path)
-	}
+	d, err := decompress.New(arc, b, ctx.path, ctx.sz)
 	if err != nil {
 		ctx.res <- results{fmt.Errorf("failed to decompress, got: %v", err), cs, ids}
 		return
@@ -252,19 +240,19 @@ func identifyRdr(r io.Reader, ctx *context, ctxts chan *context, gf getFn) {
 	zpath := ctx.path
 	ctx.res <- results{err, cs, ids}
 	// decompress and recurse
-	for err = d.next(); err == nil; err = d.next() {
+	for err = d.Next(); err == nil; err = d.Next() {
 		if ctx.d {
-			for _, v := range d.dirs() {
+			for _, v := range d.Dirs() {
 				printFile(ctxts, gf(v, "", "", -1), nil)
 			}
 		}
-		nctx := gf(d.path(), d.mime(), d.mod(), d.size())
+		nctx := gf(d.Path(), d.MIME(), d.Mod(), d.Size())
 		nctx.wg.Add(1)
 		ctxts <- nctx
-		identifyRdr(d.reader(), nctx, ctxts, gf)
+		identifyRdr(d.Reader(), nctx, ctxts, gf)
 	}
 	if err != io.EOF && err != nil {
-		printFile(ctxts, gf(arcpath(zpath, ""), "", "", 0), fmt.Errorf("error occurred during decompression: %v", err))
+		printFile(ctxts, gf(decompress.Arcpath(zpath, ""), "", "", 0), fmt.Errorf("error occurred during decompression: %v", err))
 	}
 }
 
@@ -418,6 +406,7 @@ func main() {
 			close(ctxts)
 			log.Fatalln("[FATAL] DROID output is limited to signature files with a single PRONOM identifier")
 		}
+		decompress.SetDroid()
 		w = writer.Droid(os.Stdout)
 		d = true
 	default:
