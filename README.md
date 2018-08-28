@@ -8,7 +8,7 @@
 
 ### Version
 
-1.7.8
+1.7.9
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -43,7 +43,7 @@
     sf -log p,t DIR > results.yaml             // Log progress and time while redirecting results
     sf -log fmt/1,c DIR > results.yaml         // Log instances of fmt/1 and chart results
     sf -replay -log u -csv results.yaml        // Replay results file, convert to csv, log unknowns
-    sf -setconf -multi 16 -hash sha1           // Save flag defaults in a config file
+    sf -setconf -multi 32 -hash sha1           // Save flag defaults in a config file
     sf -setconf -serve :5138 -conf srv.conf    // Save/load named config file with '-conf filename' 
 
 #### Example

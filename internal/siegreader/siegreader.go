@@ -43,12 +43,12 @@ var (
 )
 
 const (
-	readSz      int = 8192 // old 4096
-	initialRead     = readSz * 2
-	eofSz           = readSz * 2
-	wheelSz         = readSz * 8        // old 16
-	smallFileSz     = readSz * 8        // old 16
-	streamSz        = smallFileSz * 512 // old 1024
+	readSz      int = 8192
+	initialRead     = readSz
+	eofSz           = readSz
+	wheelSz         = readSz * 8
+	smallFileSz     = readSz * 8
+	streamSz        = smallFileSz * 1024
 )
 
 type bufferSrc interface {
