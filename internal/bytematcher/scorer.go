@@ -122,6 +122,38 @@ func failFast(partials [][][2]int64, kfs []keyFrame) bool {
 }
 
 // search a set of partials for a complete match
+func nsearchPartials(partials [][][2]int64, kfs []keyFrame) (bool, string) {
+	res := make([][][2]int64, len(partials))
+	idxs := make([][]int, len(partials))
+	prevOff := partials[0]
+	var idx []int
+	ok := false
+	res[0] = prevOff
+	for i, kf := range kfs[1:] {
+		var nextKf keyFrame
+		if i+2 < len(kfs) {
+			nextKf = kfs[i+2]
+		}
+		prevOff, idx, ok = checkRelated(kf, kfs[i], nextKf, partials[i+1], prevOff)
+		if !ok {
+			return false, ""
+		}
+		res[i+1] = prevOff
+		idxs[i+1] = idx
+	}
+	basis := make([][2]int64, len(partials))
+	basis[len(basis)-1] = res[len(res)-1][0]
+	j := idxs[len(idxs)-1][0]
+	for i := len(idxs) - 1; i > 0; i-- {
+		basis[i-1] = res[i-1][j]
+		if i > 1 {
+			j = idxs[i-1][j]
+		}
+	}
+	return true, fmt.Sprintf("byte match at %v", basis)
+}
+
+// search a set of partials for a complete match
 func searchPartials(partials [][][2]int64, kfs []keyFrame) (bool, string) {
 	//if failFast(partials, kfs) {
 	//	return false, ""
@@ -452,7 +484,7 @@ func (b *Matcher) scorer(buf *siegreader.Buffer, waitSet *priority.WaitSet, q ch
 				return false, ""
 			}
 		}
-		return searchPartials(h.partials, kfs)
+		return nsearchPartials(h.partials, kfs)
 	}
 
 	go func() {

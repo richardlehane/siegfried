@@ -415,3 +415,63 @@ func checkRelatedKF(thisKf, prevKf keyFrame, thisOff, prevOff [2]int64) (bool, b
 		return false, false
 	}
 }
+
+func checkRelated(thisKf, prevKf, nextKf keyFrame, thisOff, prevOff [][2]int64) ([][2]int64, []int, bool) {
+	switch thisKf.typ {
+	case frames.BOF:
+		return thisOff, make([]int, len(thisOff)), true
+	case frames.EOF, frames.SUCC:
+		if prevKf.typ == frames.SUCC && !(prevKf.seg.pMax == -1 && prevKf.seg.pMin == 0) {
+			ret := make([][2]int64, 0, len(thisOff))
+			idx := make([]int, 0, len(prevOff))
+			success := false
+			for _, v := range thisOff {
+				for i, v1 := range prevOff {
+					dif := v[0] - v1[0] - v1[1]
+					if dif > -1 {
+						if dif < prevKf.seg.pMin || (prevKf.seg.pMax > -1 && dif > prevKf.seg.pMax) {
+							continue
+						} else {
+							ret = append(ret, v)
+							idx = append(idx, i)
+							success = true
+							// if this type is EOF, we only need one match
+							if thisKf.typ == frames.EOF {
+								return ret, idx, success
+							}
+						}
+					}
+				}
+			}
+			return ret, idx, success
+		} else {
+			return thisOff, make([]int, len(thisOff)), true
+		}
+	default:
+		if thisKf.seg.pMax == -1 && thisKf.seg.pMin == 0 {
+			return thisOff, make([]int, len(thisOff)), true
+		}
+		ret := make([][2]int64, 0, len(thisOff))
+		idx := make([]int, 0, len(prevOff))
+		success := false
+		for _, v := range thisOff {
+			for i, v1 := range prevOff {
+				dif := v[0] - v1[0] - v1[1] // current offset, minus previous offset, minus previous length
+				if dif > -1 {
+					if dif < thisKf.seg.pMin || (thisKf.seg.pMax > -1 && dif > thisKf.seg.pMax) {
+						continue
+					} else {
+						ret = append(ret, v)
+						idx = append(idx, i)
+						success = true
+						// if the next type isn't a non-wild PREV, we only need one match
+						if nextKf.typ != frames.PREV || (nextKf.seg.pMax == -1 && nextKf.seg.pMin == 0) {
+							return ret, idx, success
+						}
+					}
+				}
+			}
+		}
+		return ret, idx, success
+	}
+}
