@@ -89,8 +89,45 @@ type hitItem struct {
 	matched       bool         // if we've already matched, mark so don't return
 }
 
+func failFast(partials [][][2]int64, kfs []keyFrame) bool {
+	for i, v := range partials {
+		if len(v) == 1 {
+			if i > 0 && len(partials[i-1]) > 1 {
+				var linked bool
+				for _, p := range partials[i-1] {
+					if ok, _ := checkRelatedKF(kfs[i], kfs[i-1], v[0], p); ok {
+						linked = true
+						break
+					}
+				}
+				if !linked {
+					return true
+				}
+			}
+			if i < len(partials)-1 {
+				var linked bool
+				for _, p := range partials[i+1] {
+					if ok, _ := checkRelatedKF(kfs[i+1], kfs[i], p, v[0]); ok {
+						linked = true
+						break
+					}
+				}
+				if !linked {
+					return true
+				}
+			}
+		}
+	}
+	return false
+}
+
 // search a set of partials for a complete match
 func searchPartials(partials [][][2]int64, kfs []keyFrame) (bool, string) {
+	//if failFast(partials, kfs) {
+	//	return false, ""
+	//}
+	var backtrack int
+
 	idxs := make([]int, len(partials))
 	var i, j, o = 0, 1, 0
 
@@ -101,33 +138,39 @@ func searchPartials(partials [][][2]int64, kfs []keyFrame) (bool, string) {
 			for i, v := range idxs {
 				basis[i] = partials[i][v]
 			}
+			if backtrack > 0 {
+				fmt.Printf("backtrack: %d\n", backtrack)
+			}
 			return true, fmt.Sprintf("byte match at %v", basis)
 		}
-		for {
-			ok, lock := checkRelatedKF(kfs[j], kfs[i], partials[j][idxs[j]], partials[i][idxs[i]])
-			if ok {
-				if lock {
-					o = j
-				}
-				i++
-				j++
-				break
+
+		ok, lock := checkRelatedKF(kfs[j], kfs[i], partials[j][idxs[j]], partials[i][idxs[i]])
+		if ok {
+			if lock {
+				o = j
 			}
-			if idxs[j] < len(partials[j])-1 {
-				idxs[j]++
-				continue
-			}
-			if idxs[i] < len(partials[i])-1 {
-				idxs[j] = 0
-				idxs[i]++
-				if i > o {
-					i--
-					j--
-				}
-				continue
-			}
-			return false, ""
+			i++
+			j++
+			continue
 		}
+		if idxs[j] < len(partials[j])-1 {
+			idxs[j]++
+			continue
+		}
+		if idxs[i] < len(partials[i])-1 {
+			idxs[j] = 0
+			idxs[i]++
+			if i > o {
+				i--
+				j--
+				backtrack++
+			}
+			continue
+		}
+		if backtrack > 0 {
+			fmt.Printf("backtrack: %d\n", backtrack)
+		}
+		return false, ""
 	}
 }
 
