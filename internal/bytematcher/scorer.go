@@ -89,35 +89,8 @@ type hitItem struct {
 	matched       bool         // if we've already matched, mark so don't return
 }
 
-// quick and nasty check - return 0 for fail, 1 for pass, 2 for uncertain
-func failFast(partials [][][2]int64, kfs []keyFrame) int {
-	var uncertain bool
-	for i, v := range partials[1:] {
-		if ok, _ := checkRelatedKF(kfs[i+1], kfs[i], v[0], partials[i][0]); !ok {
-			if len(v) == 1 && len(partials[i]) == 1 {
-				return 0
-			}
-			uncertain = true
-		}
-	}
-	if uncertain {
-		return 2
-	}
-	return 1
-}
-
 // search a set of partials for a complete match
 func searchPartials(partials [][][2]int64, kfs []keyFrame) (bool, string) {
-	switch failFast(partials, kfs) {
-	case 0:
-		return false, ""
-	case 1:
-		basis := make([][2]int64, len(partials))
-		for i, v := range partials {
-			basis[i] = v[0]
-		}
-		return true, fmt.Sprintf("byte match at %v", basis)
-	}
 	res := make([][][2]int64, len(partials))
 	idxs := make([][]int, len(partials))
 	prevOff := partials[0]
