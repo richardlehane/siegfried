@@ -89,40 +89,35 @@ type hitItem struct {
 	matched       bool         // if we've already matched, mark so don't return
 }
 
-func failFast(partials [][][2]int64, kfs []keyFrame) bool {
-	for i, v := range partials {
-		if len(v) == 1 {
-			if i > 0 && len(partials[i-1]) > 1 {
-				var linked bool
-				for _, p := range partials[i-1] {
-					if ok, _ := checkRelatedKF(kfs[i], kfs[i-1], v[0], p); ok {
-						linked = true
-						break
-					}
-				}
-				if !linked {
-					return true
-				}
+// quick and nasty check - return 0 for fail, 1 for pass, 2 for uncertain
+func failFast(partials [][][2]int64, kfs []keyFrame) int {
+	var uncertain bool
+	for i, v := range partials[1:] {
+		if ok, _ := checkRelatedKF(kfs[i+1], kfs[i], v[0], partials[i][0]); !ok {
+			if len(v) == 1 && len(partials[i]) == 1 {
+				return 0
 			}
-			if i < len(partials)-1 {
-				var linked bool
-				for _, p := range partials[i+1] {
-					if ok, _ := checkRelatedKF(kfs[i+1], kfs[i], p, v[0]); ok {
-						linked = true
-						break
-					}
-				}
-				if !linked {
-					return true
-				}
-			}
+			uncertain = true
 		}
 	}
-	return false
+	if uncertain {
+		return 2
+	}
+	return 1
 }
 
 // search a set of partials for a complete match
 func nsearchPartials(partials [][][2]int64, kfs []keyFrame) (bool, string) {
+	switch failFast(partials, kfs) {
+	case 0:
+		return false, ""
+	case 1:
+		basis := make([][2]int64, len(partials))
+		for i, v := range partials {
+			basis[i] = v[0]
+		}
+		return true, fmt.Sprintf("byte match at %v", basis)
+	}
 	res := make([][][2]int64, len(partials))
 	idxs := make([][]int, len(partials))
 	prevOff := partials[0]
