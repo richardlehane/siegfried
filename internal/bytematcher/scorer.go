@@ -107,7 +107,7 @@ func failFast(partials [][][2]int64, kfs []keyFrame) int {
 }
 
 // search a set of partials for a complete match
-func nsearchPartials(partials [][][2]int64, kfs []keyFrame) (bool, string) {
+func searchPartials(partials [][][2]int64, kfs []keyFrame) (bool, string) {
 	switch failFast(partials, kfs) {
 	case 0:
 		return false, ""
@@ -146,59 +146,6 @@ func nsearchPartials(partials [][][2]int64, kfs []keyFrame) (bool, string) {
 		}
 	}
 	return true, fmt.Sprintf("byte match at %v", basis)
-}
-
-// search a set of partials for a complete match
-func searchPartials(partials [][][2]int64, kfs []keyFrame) (bool, string) {
-	//if failFast(partials, kfs) {
-	//	return false, ""
-	//}
-	var backtrack int
-
-	idxs := make([]int, len(partials))
-	var i, j, o = 0, 1, 0
-
-	for {
-		// if we've made it to the last item, we've made it through
-		if j == len(idxs) {
-			basis := make([][2]int64, len(idxs))
-			for i, v := range idxs {
-				basis[i] = partials[i][v]
-			}
-			if backtrack > 0 {
-				fmt.Printf("backtrack: %d\n", backtrack)
-			}
-			return true, fmt.Sprintf("byte match at %v", basis)
-		}
-
-		ok, lock := checkRelatedKF(kfs[j], kfs[i], partials[j][idxs[j]], partials[i][idxs[i]])
-		if ok {
-			if lock {
-				o = j
-			}
-			i++
-			j++
-			continue
-		}
-		if idxs[j] < len(partials[j])-1 {
-			idxs[j]++
-			continue
-		}
-		if idxs[i] < len(partials[i])-1 {
-			idxs[j] = 0
-			idxs[i]++
-			if i > o {
-				i--
-				j--
-				backtrack++
-			}
-			continue
-		}
-		if backtrack > 0 {
-			fmt.Printf("backtrack: %d\n", backtrack)
-		}
-		return false, ""
-	}
 }
 
 // returns the next strike for testing and true if should continue/false if done
@@ -479,7 +426,7 @@ func (b *Matcher) scorer(buf *siegreader.Buffer, waitSet *priority.WaitSet, q ch
 				return false, ""
 			}
 		}
-		return nsearchPartials(h.partials, kfs)
+		return searchPartials(h.partials, kfs)
 	}
 
 	go func() {
