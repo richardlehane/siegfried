@@ -7,7 +7,7 @@
 
 ### Changed
 - the `roy compare -join` options that join on filepath now work better when comparing results with mixed windows and unix paths
-- exported a decompress package to give more functionality for users of the golang API; requested by [Byron Ruth](https://github.com/richardlehane/siegfried/issues/119)
+- exported decompress package to give more functionality for users of the golang API; requested by [Byron Ruth](https://github.com/richardlehane/siegfried/issues/119)
 - update LOC signatures to 2018-06-14
 - update freedesktop.org signatures to v1.10
 - update tika-mimetype signatures to v1.18
