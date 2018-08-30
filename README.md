@@ -94,6 +94,26 @@ Or, for the most recent updates, you can install from this fork:
     makepkg -si
 
 ## Changes
+### v1.7.9 (2018-08-30)
+### Added
+- save defaults in a configuration file: use the -setconf flag to record any other flags used into a config file. These defaults will be loaded each time you run sf. E.g. `sf -multi 16 -setconf` then `sf DIR` (loads the new multi default)
+- use `-conf filename` to save or load from a named config file. E.g. `sf -multi 16 -serve :5138 -conf srv.conf -setconf` and then `sf -conf srv.conf` 
+- added `-yaml` flag so, if you set json/csv in default config :(, you can override with YAML instead. Choose the YAML!
+
+### Changed
+- the `roy compare -join` options that join on filepath now work better when comparing results with mixed windows and unix paths
+- exported decompress package to give more functionality for users of the golang API; requested by [Byron Ruth](https://github.com/richardlehane/siegfried/issues/119)
+- update LOC signatures to 2018-06-14
+- update freedesktop.org signatures to v1.10
+- update tika-mimetype signatures to v1.18
+
+### Fixed
+- misidentifications of some files e.g. ODF presentation due to sf quitting early on strong matches. Have adjusted this algorithm to make sf wait longer if there is evidence (e.g. from filename) that the file might be something else. Reported by [Jean-Séverin Lair](https://github.com/richardlehane/siegfried/issues/112)
+- read and other file errors caused sf to hang; reports by [Greg Lepore and Andy Foster](https://github.com/richardlehane/siegfried/issues/113); fix contributed by [Ross Spencer](https://github.com/richardlehane/siegfried/commit/ea5300d3639d741a451522958e8b99912f7d639d)
+- bug reading streams where EOF returned for reads exactly adjacent the end of file
+- bug in mscfb library ([race condition for concurrent access to a global variable](https://github.com/richardlehane/siegfried/issues/117))
+- some matches result in extremely verbose basis fields; reported by [Nick Krabbenhoeft](https://github.com/richardlehane/siegfried/issues/111). Partly fixed: basis field now reports a single basis for a match but work remains to speed up matching for these cases.
+
 ### v1.7.8 (2017-12-02)
 ### Changed
 - update LOC signatures to 2017-09-28

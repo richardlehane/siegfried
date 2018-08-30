@@ -1,5 +1,5 @@
 # Change Log
-## v1.7.9 (2018-08-31)
+## v1.7.9 (2018-08-30)
 ### Added
 - save defaults in a configuration file: use the -setconf flag to record any other flags used into a config file. These defaults will be loaded each time you run sf. E.g. `sf -multi 16 -setconf` then `sf DIR` (loads the new multi default)
 - use `-conf filename` to save or load from a named config file. E.g. `sf -multi 16 -serve :5138 -conf srv.conf -setconf` and then `sf -conf srv.conf` 
