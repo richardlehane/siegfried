@@ -203,7 +203,7 @@ func (r *Recorder) Satisfied(mt core.MatcherType) (bool, core.Hint) {
 		return false, core.Hint{}
 	}
 	if r.cscore < incScore {
-		if mt == core.ByteMatcher || mt == core.XMLMatcher || mt == core.RIFFMatcher {
+		if mt == core.ContainerMatcher || mt == core.ByteMatcher || mt == core.XMLMatcher || mt == core.RIFFMatcher {
 			return false, core.Hint{}
 		}
 		if len(r.ids) == 0 {
