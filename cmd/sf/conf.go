@@ -67,27 +67,36 @@ func setconf() (string, error) {
 	return "", os.Remove(config.Conf())
 }
 
-// if it exists, read defaults from the conf file. Overwrite defaults with any flags explictly set
-func readconf() error {
+// if it exists, read defaults from the conf file.
+func getconf() (map[string]string, error) {
 	if _, err := os.Stat(config.Conf()); err != nil {
 		if os.IsNotExist(err) {
-			return nil
+			return nil, nil
 		}
-		return err
+		return nil, err
 	}
 	f, err := os.Open(config.Conf())
 	if err != nil {
-		return err
+		return nil, err
 	}
 	defer f.Close()
+	ret := make(map[string]string)
 	scanner := bufio.NewScanner(f)
-	confFlags := make(map[string]string)
 	for scanner.Scan() {
 		kv := strings.SplitN(scanner.Text(), ":", 2)
 		if len(kv) != 2 {
 			continue
 		}
-		confFlags[kv[0]] = kv[1]
+		ret[kv[0]] = kv[1]
+	}
+	return ret, nil
+}
+
+// if it exists, read defaults from the conf file. Overwrite defaults with any flags explictly set
+func readconf() error {
+	confFlags, err := getconf()
+	if len(confFlags) == 0 {
+		return err
 	}
 	// remove conf values for any flags explictly set
 	flag.Visit(func(fl *flag.Flag) {

@@ -356,6 +356,13 @@ func main() {
 		for _, id := range s.Identifiers() {
 			fmt.Printf("  - %s: %s\n", id[0], id[1])
 		}
+		confflags, _ := getconf()
+		if len(confflags) > 0 {
+			fmt.Print("config: \n")
+			for k, v := range confflags {
+				fmt.Printf("  - %s: %s\n", k, v)
+			}
+		}
 		return
 	}
 	// handle -fpr
