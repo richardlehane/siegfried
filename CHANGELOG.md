@@ -1,4 +1,16 @@
 # Change Log
+## v1.7.10 (2018-09-18)
+### Added
+- print configuration defaults with `sf -version`
+
+### Changed
+- update PRONOM to v94
+
+### Fixed
+- LOC identifier fixed after regression in v1.7.9
+- remove skeleton-suite files triggering malware warnings by adding to .gitignore; reported by [Dave Rice](https://github.com/richardlehane/siegfried/issues/118)
+- release built with Go version 11, which includes a fix for a CIFS error that caused files to be skipped during file walk; reported by [Maarten Savels](https://github.com/richardlehane/siegfried/issues/115)
+
 ## v1.7.9 (2018-08-30)
 ### Added
 - save defaults in a configuration file: use the -setconf flag to record any other flags used into a config file. These defaults will be loaded each time you run sf. E.g. `sf -multi 16 -setconf` then `sf DIR` (loads the new multi default)
