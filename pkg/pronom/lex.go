@@ -88,13 +88,15 @@ const (
 	tab          = '\t'
 	amp          = '&'
 	tilda        = '~'
+	newline      = '\n'
+	carriage     = '\r'
 )
 
 const digits = "0123456789"
 
 const hexadecimal = digits + "abcdefABCDEF"
 
-const hexnonquote = hexadecimal + " "
+const hexnonquote = hexadecimal + " " + "\n" + "\r"
 
 const digitswild = digits + "*"
 
@@ -142,11 +144,6 @@ func (l *lexer) backup() {
 func (l *lexer) emit(t itemType) {
 	l.items <- item{t, l.start, l.input[l.start:l.pos]}
 	l.start = l.pos
-}
-
-// isSpace reports whether r is a space character.
-func isSpace(r rune) bool {
-	return r == space || r == tab
 }
 
 // acceptRun consumes a run of runes from the valid set.
@@ -350,7 +347,7 @@ func insideUnprocessedText(l *lexer) stateFn {
 		case quot:
 			l.emit(itemQuote)
 			return insideQuoteText
-		case space, tab:
+		case space, tab, newline, carriage:
 			l.emit(itemSpace)
 		}
 	}
