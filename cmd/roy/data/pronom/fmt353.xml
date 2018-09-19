@@ -22,7 +22,7 @@
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>07 Jul 2011</ProvenanceSourceDate>
       <ProvenanceDescription>PUID created for the TIFF format in response to the difficulties we have been having with multiple identification of the format and a consensus on a new interpretation of the standard from within The National Archives and outside with external stakeholders.</ProvenanceDescription>
-      <LastUpdatedDate>07 Jul 2011</LastUpdatedDate>
+      <LastUpdatedDate>13 Sep 2018</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -358,6 +358,13 @@
         <RelatedFormatID>1937</RelatedFormatID>
         <RelatedFormatName>Sony ARW RAW Image File</RelatedFormatName>
         <RelatedFormatVersion>2.x</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>687</RelatedFormatID>
+        <RelatedFormatName>MPEG 1/2 Audio Layer 3</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Is supertype of</RelationshipType>

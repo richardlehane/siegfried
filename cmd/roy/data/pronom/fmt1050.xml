@@ -75,6 +75,12 @@ https://hwiegman.home.xs4all.nl/fileformats/3dmf/3DMF.pdf</SignatureNote>
           <ByteSequenceValue>33444D46000000100001</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>2013</RelatedFormatID>
+        <RelatedFormatName>QuickDraw 3D Metafile (Binary)</RelatedFormatName>
+        <RelatedFormatVersion>0</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

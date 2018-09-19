@@ -4,7 +4,7 @@
     <FileFormat>
       <FormatID>44</FormatID>
       <FormatName>Microsoft Excel Template</FormatName>
-      <FormatVersion>2000</FormatVersion>
+      <FormatVersion>97-2003</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -12,7 +12,7 @@
       <FormatTypes>Spreadsheet</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>A template document that forms a basis for actual workbooks, with macro support. The replacement for the old .xlt format.</FormatDescription>
+      <FormatDescription>A template document that forms a basis for Microsoft Excel workbooks.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -23,9 +23,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>03 Aug 2015</LastUpdatedDate>
+      <ProvenanceDescription>	This format is identifiable via a container signature in DROID 6 and later.</ProvenanceDescription>
+      <LastUpdatedDate>13 Sep 2018</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -33,14 +32,38 @@
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
+        <Identifier>application/vnd.ms-excel</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
         <Identifier>x-fmt/17</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>93</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <DeveloperCompoundName>Microsoft Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>93</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <SupportCompoundName>Microsoft Corporation</SupportCompoundName>
+      </Support>
       <ExternalSignature>
         <ExternalSignatureID>40</ExternalSignatureID>
         <Signature>xlt</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>684</RelatedFormatID>
+        <RelatedFormatName>Microsoft Excel 97 Workbook (xls)</RelatedFormatName>
+        <RelatedFormatVersion>8</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

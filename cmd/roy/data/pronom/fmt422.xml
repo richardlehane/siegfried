@@ -65,6 +65,11 @@ Version 6.0 includes; gradients, eye dropper, paint bucket</ProvenanceDescriptio
         <Signature>ai</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2258</ExternalSignatureID>
+        <Signature>eps</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
       <InternalSignature>
         <SignatureID>889</SignatureID>
         <SignatureName>Adobe Illustrator 6.0</SignatureName>

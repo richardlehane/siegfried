@@ -10,8 +10,7 @@
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>
-      </FormatTypes>
+      <FormatTypes>Font</FormatTypes>
       <FormatDisclosure>Full</FormatDisclosure>
       <FormatDescription>Created by Apple, TrueType Font files are a sequence of concatenated tables (a table is a sequence of words; each table must be long aligned and padded with zeroes if necessary). The first of the tables is the font directory, a special table that facilitates access to the other tables in the font. The directory is followed by a sequence of tables containing the font data. These tables can appear in any order. Certain tables are required for all fonts. Others are optional depending upon the functionality expected of a particular font. The tables have names known as tags. Tags have the type uint32. Currently defined tag names consist of four characters. Tag names with less than four characters have trailing spaces. When tag names are shown in text they are enclosed in straight quotes. Tables that are required must appear in any valid TrueType font file. Also notable is that Apple makes a distinction between a "TrueType font" (which refers to a particular font outline definition technology) and an "sfnt-housed font," which refers to any font which uses the same packaging format as a TrueType font: that is, it uses the same directory structure and the same table format and meaning for any tables present.</FormatDescription>
       <BinaryFileFormat>Binary</BinaryFileFormat>
@@ -33,7 +32,7 @@ http://developer.apple.com/fonts/ttrefman/rm06/Chap6.html</ProvenanceDescription
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
-        <Identifier>application/octet-stream</Identifier>
+        <Identifier>font/ttf</Identifier>
         <IdentifierType>MIME</IdentifierType>
       </FileFormatIdentifier>
       <FileFormatIdentifier>
@@ -267,8 +266,7 @@ http://developer.apple.com/fonts/ttrefman/rm06/Chap6.html</ProvenanceDescription
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1412</RelatedFormatID>
         <RelatedFormatName>Web Open Font Format</RelatedFormatName>
-        <RelatedFormatVersion>
-        </RelatedFormatVersion>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>

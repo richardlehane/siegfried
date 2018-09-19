@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1954</FormatID>
+      <FormatName>CompuServe WinCIM Message Format</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Email</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>WinCIM was client software produced by CompuServe to enable access to CompuServe's forums and other internet services.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>233</ProvenanceSourceID>
+      <ProvenanceName>Harry Ransom Centre / Harry Ransom Centre</ProvenanceName>
+      <ProvenanceSourceDate>23 Jul 2018</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>23 Jul 2018</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1144</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>108</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Compuserve Incorporated</OrganisationName>
+        <DeveloperCompoundName>Compuserve Incorporated</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>108</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Compuserve Incorporated</OrganisationName>
+        <SupportCompoundName>Compuserve Incorporated</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2169</ExternalSignatureID>
+        <Signature>plx</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2170</ExternalSignatureID>
+        <Signature>msg</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1526</SignatureID>
+        <SignatureName>CompuServe WinCIM</SignatureName>
+        <SignatureNote>BOF: 'VIS000' 0x1A</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1789</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>5649533030301A</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

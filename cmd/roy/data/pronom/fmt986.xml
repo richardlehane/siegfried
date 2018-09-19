@@ -60,7 +60,7 @@
       <InternalSignature>
         <SignatureID>1349</SignatureID>
         <SignatureName>XMP file format</SignatureName>
-        <SignatureNote>&lt;x:xmpmeta xmlns:x="adobe:ns:meta/</SignatureNote>
+        <SignatureNote>&lt;x:xmpmeta xmlns:x=("|')adobe:ns:meta/</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1618</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -72,7 +72,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>3C783A786D706D65746120786D6C6E733A783D2261646F62653A6E733A6D6574612F22</ByteSequenceValue>
+          <ByteSequenceValue>3C783A786D706D65746120786D6C6E733A783D(22|25)61646F62653A6E733A6D6574612F(22|25)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

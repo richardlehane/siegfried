@@ -11,7 +11,7 @@
       </FormatFamilies>
       <FormatTypes>Database</FormatTypes>
       <FormatDisclosure>Full</FormatDisclosure>
-      <FormatDescription>Software-Independent Archiving of Relational Databases is a format for storing content of relational databases in files for long-term preservation e.g. in archives. The format was developed by the Swiss Federal Archives. It is an open standard and is supported by the SIARD software of the Swiss Federal Archives. SIARD format is a ZIP file (based on the 64 bit extension of the  ZIP format introduced by PkWare Inc. with version 4.5 of the ZIP format definition in order to avoid size limitations which are unrealistic for databases). The ZIP file contains an XML file describing the database structure (database metadata) as well as a collection of XML files describing the table content (database primary data) as well as - optionally - some text files and some binary files representing database large objects (BLOBs and CLOBs). SIARD format is used for archiving databases adhering to the SQL (ideally SQL:1999 core) standard.</FormatDescription>
+      <FormatDescription>Software-Independent Archiving of Relational Databases is a format for storing content of relational databases in files for long-term preservation e.g. in archives. The format was developed by the Swiss Federal Archives. It is an open standard and is supported by the SIARD software of the Swiss Federal Archives. SIARD format is a ZIP file (based on the 64 bit extension of the  ZIP format introduced by PkWare Inc. with version 4.5 of the ZIP format definition in order to avoid size limitations which are unrealistic for databases). The ZIP file contains an XML file describing the database structure and metadata as well as a collection of XML files describing the table content (database primary data) as well as, optionally, some text files and some binary files representing database large objects (BLOBs and CLOBs).</FormatDescription>
       <BinaryFileFormat>Binary</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -23,7 +23,7 @@
       <ProvenanceName>Keep Solutions / Keep Solutions</ProvenanceName>
       <ProvenanceSourceDate>07 Mar 2017</ProvenanceSourceDate>
       <ProvenanceDescription>This format is identifiable via a container signature in DROID 6 and later.</ProvenanceDescription>
-      <LastUpdatedDate>07 Mar 2017</LastUpdatedDate>
+      <LastUpdatedDate>13 Sep 2018</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -51,6 +51,12 @@
         <Signature>siard</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>2006</RelatedFormatID>
+        <RelatedFormatName>SIARD (Software-Independent Archiving of Relational Databases)</RelatedFormatName>
+        <RelatedFormatVersion>2.1</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

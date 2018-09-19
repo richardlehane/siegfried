@@ -95,6 +95,20 @@
         <RelatedFormatVersion>4.x</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2015</RelatedFormatID>
+        <RelatedFormatName>LightWave 3D Object</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2016</RelatedFormatID>
+        <RelatedFormatName>Impulse 3D Data Description Object</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Is supertype of</RelationshipType>
         <RelatedFormatID>1083</RelatedFormatID>
         <RelatedFormatName>Interchange File Format Interleaved Bitmap</RelatedFormatName>

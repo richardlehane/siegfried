@@ -74,6 +74,18 @@
           <ByteSequenceValue>1F8B08</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Can contain</RelationshipType>
+        <RelatedFormatID>2008</RelatedFormatID>
+        <RelatedFormatName>RData</RelatedFormatName>
+        <RelatedFormatVersion>Binary</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Can contain</RelationshipType>
+        <RelatedFormatID>2009</RelatedFormatID>
+        <RelatedFormatName>RData</RelatedFormatName>
+        <RelatedFormatVersion>ASCII</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

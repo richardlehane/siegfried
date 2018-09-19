@@ -10,8 +10,7 @@
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>
-      </FormatTypes>
+      <FormatTypes>Font</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
       <FormatDescription>OpenType is a font format developed by Microsoft, in colaboration with Adobe.</FormatDescription>
@@ -28,7 +27,7 @@
       <ProvenanceSourceDate>01 May 2013</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>01 May 2013</LastUpdatedDate>
+      <LastUpdatedDate>13 Sep 2018</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -38,6 +37,10 @@
       <FileFormatIdentifier>
         <Identifier>fmt/520</Identifier>
         <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>font/otf</Identifier>
+        <IdentifierType>MIME</IdentifierType>
       </FileFormatIdentifier>
       <Developers>
         <DeveloperID>93</DeveloperID>

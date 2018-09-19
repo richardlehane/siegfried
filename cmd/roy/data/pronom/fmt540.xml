@@ -12,7 +12,7 @@
       <FormatTypes>Model</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>CINEMA 4D is a 3D modeling, animation and rendering application developed by MAXON Computer GmbH.  CINEMA 4D as a file format can contain elements of animation, modeling, texturing and rendering. CINEMA 4D uses IFF, which means Interchange File Format“. IFF is a chunk based format. IFF allows you to read only those structures of a file which your application can handle.</FormatDescription>
+      <FormatDescription>CINEMA 4D is a 3D modeling, animation and rendering application developed by MAXON Computer GmbH.  CINEMA 4D as a file format can contain elements of animation, modeling, texturing and rendering.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -26,7 +26,7 @@
       <ProvenanceSourceDate>19 Jul 2013</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>19 Jul 2013</LastUpdatedDate>
+      <LastUpdatedDate>13 Sep 2018</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -60,6 +60,12 @@
           <ByteSequenceValue>4D433530{4}(50524635|444F4B35|43415435|46435635)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>1990</RelatedFormatID>
+        <RelatedFormatName>Cinema 4D</RelatedFormatName>
+        <RelatedFormatVersion>6+</RelatedFormatVersion>
+      </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Is subsequent version of</RelationshipType>
         <RelatedFormatID>1194</RelatedFormatID>

@@ -3,6 +3,1035 @@
 <release_notes>
 
 <release_note>
+    <release_date>17th September 2018</release_date>
+    <signature_filename>DROID_SignatureFile_V94.xml</signature_filename> 
+    <release_outline name="New Records">
+	  <format>
+	   <puid type="fmt">1132</puid>
+	   <name>Netscape Bookmark File Format</name>
+	   <summary>Full entry added. Submitted separately by National Library of Australia and National Library of New Zealand.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1133</puid>
+	   <name>Farbfeld Image Format</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1134</puid>
+	   <name>GPS Exchange Format</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1135</puid>
+	   <name>SQLite Database File Format 2</name>
+	   <summary>Full entry added. Submitted by Landesarchiv Nordrhein-Westfalen.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1136</puid>
+	   <name>MiniCAD 6</name>
+	   <summary>Full entry added. Submitted by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1137</puid>
+	   <name>MiniCAD 7</name>
+	   <summary>Full entry added. Submitted by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1138</puid>
+	   <name>MiniCAD/VectorWorks 8</name>
+	   <summary>Full entry added. Submitted by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1139</puid>
+	   <name>VectorWorks 9</name>
+	   <summary>Full entry added. Submitted by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1140</puid>
+	   <name>VectorWorks 10</name>
+	   <summary>Full entry added. Submitted by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1141</puid>
+	   <name>VectorWorks 11</name>
+	   <summary>Full entry added. Submitted by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1142</puid>
+	   <name>VectorWorks Plugin or Script</name>
+	   <summary>Full entry added. Submitted by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1143</puid>
+	   <name>ZISRAW (CZI) File Format</name>
+	   <summary>Full entry added. Submitted by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1144</puid>
+	   <name>Compuserve WinCIM Message Format</name>
+	   <summary>Full entry added. Submitted by Harry Ransom Center, University of Texas.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1145</puid>
+	   <name>Maxwell Render Material File</name>
+	   <summary>Full entry added. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1146</puid>
+	   <name>Maxwell Render Image Format</name>
+	   <summary>Full entry added. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1147</puid>
+	   <name>Maxwell Render Scene File Format</name>
+	   <summary>Full entry added. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1148</puid>
+	   <name>SIDOUN WinAVA Format</name>
+	   <summary>Full entry added. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1149</puid>
+	   <name>Markdown</name>
+	   <summary>Extension only entry added. Description provided by Artefactual Systems. Additionally requested by University of Edinburgh.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1150</puid>
+	   <name>4X Movie File</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1151</puid>
+	   <name>Lightwright Show File 1</name>
+	   <summary>Full entry added. Submitted by New York Public Libraries.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1152</puid>
+	   <name>Lightwright Show File 2</name>
+	   <summary>Full entry added. Submitted by New York Public Libraries.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1153</puid>
+	   <name>Lightwright Show File 3</name>
+	   <summary>Full entry added. Submitted by New York Public Libraries.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1154</puid>
+	   <name>Lightwright Show File 4</name>
+	   <summary>Full entry added. Submitted by New York Public Libraries.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1155</puid>
+	   <name>Lightwright Show File 5</name>
+	   <summary>Full entry added. Submitted by New York Public Libraries.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1156</puid>
+	   <name>Lightwright Show File 6</name>
+	   <summary>Full entry added. Submitted by New York Public Libraries.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1157</puid>
+	   <name>Folio Infobase File 2</name>
+	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1158</puid>
+	   <name>Folio Infobase File 3</name>
+	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1159</puid>
+	   <name>Folio Infobase File 4</name>
+	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1160</puid>
+	   <name>Folio Shadow File 3</name>
+	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1161</puid>
+	   <name>Folio Shadow File 4</name>
+	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1162</puid>
+	   <name>Folio Flat File</name>
+	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1163</puid>
+	   <name>Folio Definition File</name>
+	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1164</puid>
+	   <name>Praat Picture File</name>
+	   <summary>Full entry added. Submitted by the University of British Columbia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1165</puid>
+	   <name>Praat Script File</name>
+	   <summary>Extension only entry added. Submitted by the University of British Columbia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1166</puid>
+	   <name>Niton Data Transfer</name>
+	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1167</puid>
+	   <name>Softimage 3D Picture File Format</name>
+	   <summary>Full entry added. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1168</puid>
+	   <name>Maya Icons or Swatches file</name>
+	   <summary>Full entry added. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1169</puid>
+	   <name>Maya IFF Image File</name>
+	   <summary>Full entry added. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1170</puid>
+	   <name>Alias Studio File 8.5</name>
+	   <summary>Full entry added. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1171</puid>
+	   <name>Alias PowerAnimator File 9.0</name>
+	   <summary>Full entry added. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1172</puid>
+	   <name>Web Open Font Format 2.0</name>
+	   <summary>Full entry added. Submitted by British Library.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1173</puid>
+	   <name>FrameMD5</name>
+	   <summary>Full entry added. Requested by both Technische Informationsbibliothek (TIB) Hannover, and Saxon State- and University Library Dresden (SLUB).</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1174</puid>
+	   <name>Hewlett Packard Graphics Language 2</name>
+	   <summary>Full entry added. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1175</puid>
+	   <name>Alias Studio File 9.0</name>
+	   <summary>Full entry added. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1176</puid>
+	   <name>Nullsoft Streaming Video</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1177</puid>
+	   <name>MicroStation Material Library</name>
+	   <summary>Full entry added. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1178</puid>
+	   <name>Synthetic Music Mobile Application Format</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1179</puid>
+	   <name>Away3D Data Format 2.x</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1180</puid>
+	   <name>Cinema 4D 6+</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1181</puid>
+	   <name>Bodypaint 3D</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1182</puid>
+	   <name>Blitz3D File Format</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1183</puid>
+	   <name>MicroStation Material Palette</name>
+	   <summary>Full entry added. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1184</puid>
+	   <name>InDesign Markup Language Package</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1185</puid>
+	   <name>Apple Icon Image Format</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1186</puid>
+	   <name>Dr. Halo Image Palette</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1187</puid>
+	   <name>iWork13 Template 1.0</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1188</puid>
+	   <name>Ogre Mesh 1.x</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1189</puid>
+	   <name>Ogre Mesh XML</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1190</puid>
+	   <name>Adobe SWC Package</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1191</puid>
+	   <name>Adobe InDesign Book</name>
+	   <summary>Full entry added. Requested by Victoria University of Wellington.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1192</puid>
+	   <name>Adobe InDesign Library</name>
+	   <summary>Full entry added. Requested by Victoria University of Wellington.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1193</puid>
+	   <name>ZModeler Z3D 1</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1194</puid>
+	   <name>ZModeler Z3D 2</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1195</puid>
+	   <name>ZModeler Z3D 3</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1196</puid>
+	   <name>SIARD (Software-Independent Archiving of Relational Databases) 2.1</name>
+	   <summary>Full entry added. Requested by Swiss Federal Archives and Landesarchiv Nordrhein-Westfalen.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1197</puid>
+	   <name>MyISAM Indexes File</name>
+	   <summary>Full entry added. Format was submitted for PRONOM research as part of a collection provided by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1198</puid>
+	   <name>RData Binary</name>
+	   <summary>Full entry added. Format was submitted for PRONOM research as part of a collection provided by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1199</puid>
+	   <name>RData ASCII</name>
+	   <summary>Full entry added. Format was submitted for PRONOM research as part of a collection provided by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1200</puid>
+	   <name>PowerDraw 6</name>
+	   <summary>Full entry added. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1201</puid>
+	   <name>PowerCADD 1.0</name>
+	   <summary>Full entry added. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1202</puid>
+	   <name>Guymager Acquisition Info File</name>
+	   <summary>Full entry added. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1203</puid>
+	   <name>QuickDraw 3D Metafile (Binary) 0</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1204</puid>
+	   <name>Strata StudioPro Vis Format</name>
+	   <summary>Full entry added. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1205</puid>
+	   <name>LightWave 3D Object</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1206</puid>
+	   <name>Impulse 3D Data Description Object</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1207</puid>
+	   <name>Sony SFK File</name>
+	   <summary>Full entry added. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1208</puid>
+	   <name>Virtools File Format</name>
+	   <summary>Full entry added. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1209</puid>
+	   <name>COLLADA Digital Asset Exchange (DAE)</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1210</puid>
+	   <name>Wavefront OBJ File</name>
+	   <summary>Full entry added. Joint submission by LDS Church and the Archaeology Data Service.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1211</puid>
+	   <name>Wavefront Material Template Library</name>
+	   <summary>Full entry added. Joint submission by LDS Church and the Archaeology Data Service.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1212</puid>
+	   <name>HP System Software Manager CVA File</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1213</puid>
+	   <name>Zoner Callisto Metafile 2</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1214</puid>
+	   <name>Cakewalk WRK Project</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1215</puid>
+	   <name>ERDAS Hierarchical File Architecture Format</name>
+	   <summary>Full entry added. Submitted by National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1216</puid>
+	   <name>Lotus Freelance Show</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1217</puid>
+	   <name>Leonardo Image Format</name>
+	   <summary>Full entry added.</summary>
+	  </format>
+	 </release_outline>
+
+	 <release_outline name="Updated Records">
+	  <format>
+	   <puid type="fmt">101</puid>
+	   <name>Extensible Markup Language</name>
+	   <summary>Corrected priority relationship between XML and XHTML. XHTML is more specific so should have priority. Error reported by Nationaal Archief, and NedGraphics b.v.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">102</puid>
+	   <name>Extensible Hypertext Markup Language 1.0</name>
+	   <summary>Corrected priority relationship between XML and XHTML. XHTML is more specific so should have priority. Error reported by Nationaal Archief, and NedGraphics b.v.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">103</puid>
+	   <name>Extensible Hypertext Markup Language 1.1</name>
+	   <summary>Corrected priority relationship between XML and XHTML. XHTML is more specific so should have priority. Error reported by Nationaal Archief, and NedGraphics b.v.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">104</puid>
+	   <name>Macromedia Flash 1</name>
+	   <summary>Given priority over MPEG 1/2 Audio Layer 3 fmt/134 due to rare clash condition.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">105</puid>
+	   <name>Macromedia Flash 2</name>
+	   <summary>Given priority over MPEG 1/2 Audio Layer 3 fmt/134 due to rare clash condition.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">106</puid>
+	   <name>Macromedia Flash 3</name>
+	   <summary>Given priority over MPEG 1/2 Audio Layer 3 fmt/134 due to rare clash condition.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">107</puid>
+	   <name>Macromedia Flash 4</name>
+	   <summary>Given priority over MPEG 1/2 Audio Layer 3 fmt/134 due to rare clash condition.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">108</puid>
+	   <name>Macromedia Flash 5</name>
+	   <summary>Given priority over MPEG 1/2 Audio Layer 3 fmt/134 due to rare clash condition.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">109</puid>
+	   <name>Macromedia Flash 6</name>
+	   <summary>Given priority over MPEG 1/2 Audio Layer 3 fmt/134 due to rare clash condition.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">110</puid>
+	   <name>Macromedia Flash 7</name>
+	   <summary>Given priority over MPEG 1/2 Audio Layer 3 fmt/134 due to rare clash condition.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">134</puid>
+	   <name>MPEG 1/2 Audio Layer 3</name>
+	   <summary>Increased number of sync bytes each signature variant is seeking to address increase in false-positives for unrelated formats being reported since changes introduced in v93 PRONOM update. Previously a set of null bytes was being sought near the end of an MP3 file to compensate for an old (since fixed) DROID bug with fragmented signatures, however these null bytes in the identification signature were themselves causing false-negatives.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">161</puid>
+	   <name>SIARD (Software-Independent Archiving of Relational Databases) 2.0</name>
+	   <summary>Minor description update provided by Landesarchiv Nordrhein-Westfalen.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">353</puid>
+	   <name>Tagged Image File Format</name>
+	   <summary>Given priority over MPEG 1/2 Audio Layer 3 fmt/134 due to rare clash condition reported by National Library of New Zealand.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">415</puid>
+	   <name>Cinema 4D 4.x</name>
+	   <summary>Adjusted description.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">422</puid>
+	   <name>Adobe Illustrator 6.0</name>
+	   <summary>Added EPS as alternative extension.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">520</puid>
+	   <name>OpenType Font File</name>
+	   <summary>Added Media Type font/otf and format classification 'Font'.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">540</puid>
+	   <name>Cinema 4D 5.x</name>
+	   <summary>Adjusted description.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">557</puid>
+	   <name>Adobe Illustrator 8.0</name>
+	   <summary>Added EPS as alternative extension.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">616</puid>
+	   <name>Web Open Font Format 1.0</name>
+	   <summary>Amended Media Type from deprecated application/font-woff to font/woff. Added version number in line with official specification. Added format classification 'Font'.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">729</puid>
+	   <name>SQLite Database File Format 3</name>
+	   <summary>Added version number 3. Submitted by Landesarchiv Nordrhein-Westfalen.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">851</puid>
+	   <name>Genealogical Data Communication (GEDCOM)</name>
+	   <summary>Minor adjustment to signature allowing UNIX new line variants.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">986</puid>
+	   <name>Extensible Metadata Platform Format</name>
+	   <summary>Minor adjustment to signature allowing single or double quotes for tag attributes. Requested by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1062</puid>
+	   <name>Hasselblad 3FR Raw Image</name>
+	   <summary>Removed binary identification signature due to numerous false-positives reported via the Rosetta Format Library Working Group. We hope to implement a stronger signature in a future release.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1092</puid>
+	   <name>Alias Pix Image File</name>
+	   <summary>Added .ico as an additional extension. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">17</puid>
+	   <name>Microsoft Excel Template 97-2003</name>
+	   <summary>Updated name from Microsoft Excel Template 2000 to refelect actual period covered by format. Added Media Type.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">158</puid>
+	   <name>Initial Graphics Exchange Specification (IGES) 5.x</name>
+	   <summary>Added hex value '0D' as variant to new line character in signature. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">231</puid>
+	   <name>ESRI MapInfo Export File</name>
+	   <summary>Slightly adjusted wildcard ranges within signatures. Requested by National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">382</puid>
+	   <name>Macromedia FLV 1</name>
+	   <summary>Given priority over MPEG 1/2 Audio Layer 3 fmt/134 due to rare clash condition.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">386</puid>
+	   <name>MPEG-2 Program Stream</name>
+	   <summary>Added .mod extension and explanatory note to the format description. Submitted by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">453</puid>
+	   <name>TrueType Font</name>
+	   <summary>Amended Media Type from incorrect application/octet-stream to font/tff. Added format classifiaction 'Font'.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">455</puid>
+	   <name>AutoCAD Drawing 2007-2008</name>
+	   <summary>Given priority over MPEG 1/2 Audio Layer 3 fmt/134 due to rare clash condition.</summary>
+	  </format>
+	 </release_outline>
+
+ 	 <release_outline name="New Signatures">
+	  <format>
+	   <puid type="fmt">161</puid>
+	   <name>SIARD (Software-Independent Archiving of Relational Databases) 1.0</name>
+	   <summary>Added container signature in response to enquiry from Landesarchiv Nordrhein-Westfalen. Retained current binary signature for continuing compatibility with DROID versions earlier than 6.0, although the container signature method is preferred where available.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1132</puid>
+	   <name>Netscape Bookmark File Format</name>
+	   <summary>Signature submitted separately by National Library of Australia and National Library of New Zealand.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1133</puid>
+	   <name>Farbfeld Image Format</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1134</puid>
+	   <name>GPS Exchange Format</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1135</puid>
+	   <name>SQLite Database File Format 2</name>
+	   <summary>Signature submitted by Landesarchiv Nordrhein-Westfalen.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1136</puid>
+	   <name>MiniCAD 6</name>
+	   <summary>Signature submitted by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1137</puid>
+	   <name>MiniCAD 7</name>
+	   <summary>Signature submitted by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1138</puid>
+	   <name>MiniCAD/VectorWorks 8</name>
+	   <summary>Signature submitted by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1139</puid>
+	   <name>VectorWorks 9</name>
+	   <summary>Signature submitted by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1140</puid>
+	   <name>VectorWorks 10</name>
+	   <summary>Signature submitted by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1141</puid>
+	   <name>VectorWorks 11</name>
+	   <summary>Signature submitted by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1142</puid>
+	   <name>VectorWorks Plugin or Script</name>
+	   <summary>Signature submitted by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1143</puid>
+	   <name>ZISRAW (CZI) File Format</name>
+	   <summary>Signature submitted by Henk Vanstappen, Datable.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1144</puid>
+	   <name>Compuserve WinCIM Message Format</name>
+	   <summary>Signature developed through PRONOM research. Submitted by Harry Ransom Center, University of Texas.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1145</puid>
+	   <name>Maxwell Render Material File</name>
+	   <summary>Signature developed through PRONOM research. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1146</puid>
+	   <name>Maxwell Render Image Format</name>
+	   <summary>Signature developed through PRONOM research. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1147</puid>
+	   <name>Maxwell Render Scene File Format</name>
+	   <summary>Signature developed through PRONOM research. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1148</puid>
+	   <name>SIDOUN WinAVA Format</name>
+	   <summary>Signature developed through PRONOM research. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1150</puid>
+	   <name>4X Movie File</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1151</puid>
+	   <name>Lightwright Show File 1</name>
+	   <summary>Signature submitted by New York Public Libraries.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1152</puid>
+	   <name>Lightwright Show File 2</name>
+	   <summary>Signature submitted by New York Public Libraries.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1153</puid>
+	   <name>Lightwright Show File 3</name>
+	   <summary>Signature submitted by New York Public Libraries.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1154</puid>
+	   <name>Lightwright Show File 4</name>
+	   <summary>Signature submitted by New York Public Libraries.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1155</puid>
+	   <name>Lightwright Show File 5</name>
+	   <summary>Signature submitted by New York Public Libraries.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1156</puid>
+	   <name>Lightwright Show File 6</name>
+	   <summary>Signature submitted by New York Public Libraries.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1157</puid>
+	   <name>Folio Infobase File 2</name>
+	   <summary>Signature submitted by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1158</puid>
+	   <name>Folio Infobase File 3</name>
+	   <summary>Signature submitted by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1159</puid>
+	   <name>Folio Infobase File 4</name>
+	   <summary>Signature submitted by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1160</puid>
+	   <name>Folio Shadow File 3</name>
+	   <summary>Signature submitted by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1161</puid>
+	   <name>Folio Shadow File 4</name>
+	   <summary>Signature submitted by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1162</puid>
+	   <name>Folio Flat File</name>
+	   <summary>Signature submitted by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1163</puid>
+	   <name>Folio Definition File</name>
+	   <summary>Signature submitted by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1164</puid>
+	   <name>Praat Picture File</name>
+	   <summary>Signature developed through PRONOM research. Submitted by the Univesity of British Columbia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1166</puid>
+	   <name>Niton Data Transfer</name>
+	   <summary>Signature submitted by LDS Church.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1167</puid>
+	   <name>Softimage 3D Picture File Format</name>
+	   <summary>Signature developed through PRONOM research. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1168</puid>
+	   <name>Maya Icons or Swatches file</name>
+	   <summary>Signature developed through PRONOM research. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1169</puid>
+	   <name>Maya IFF Image File</name>
+	   <summary>Signature developed through PRONOM research. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1170</puid>
+	   <name>Alias Studio File 8.5</name>
+	   <summary>Signature developed through PRONOM research. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1171</puid>
+	   <name>Alias PowerAnimator File 9.0</name>
+	   <summary>Signature developed through PRONOM research. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1172</puid>
+	   <name>Web Open Font Format 2.0</name>
+	   <summary>Signature developed through PRONOM research. Submitted by British Library.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1173</puid>
+	   <name>FrameMD5</name>
+	   <summary>Signature developed through PRONOM research. Requested by both Technische Informationsbibliothek (TIB) Hannover, and Saxon State- and University Library Dresden (SLUB).</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1174</puid>
+	   <name>Hewlett Packard Graphics Language 2</name>
+	   <summary>Signature developed through PRONOM research. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1175</puid>
+	   <name>Alias Studio File 9.0</name>
+	   <summary>Signature developed through PRONOM research. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1176</puid>
+	   <name>Nullsoft Streaming Video</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1177</puid>
+	   <name>MicroStation Material Library</name>
+	   <summary>Signature developed through PRONOM research. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1178</puid>
+	   <name>Synthetic Music Mobile Application Format</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1179</puid>
+	   <name>Away3D Data Format 2.x</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1180</puid>
+	   <name>Cinema 4D 6+</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1181</puid>
+	   <name>Bodypaint 3D</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1182</puid>
+	   <name>Blitz3D File Format</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1183</puid>
+	   <name>MicroStation Material Palette</name>
+	   <summary>Signature developed through PRONOM research. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1184</puid>
+	   <name>InDesign Markup Language Package</name>
+	   <summary>Container signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1185</puid>
+	   <name>Apple Icon Image Format</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1186</puid>
+	   <name>Dr. Halo Image Palette</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1187</puid>
+	   <name>iWork13 Template 1.0</name>
+	   <summary>Container signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1188</puid>
+	   <name>Ogre Mesh 1.x</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1189</puid>
+	   <name>Ogre Mesh XML</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1190</puid>
+	   <name>Adobe SWC Package</name>
+	   <summary>Container signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1191</puid>
+	   <name>Adobe InDesign Book</name>
+	   <summary>Signature developed through PRONOM research. Requested by Victoria University of Wellington.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1192</puid>
+	   <name>Adobe InDesign Library</name>
+	   <summary>Signature developed through PRONOM research. Requested by Victoria University of Wellington.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1193</puid>
+	   <name>ZModeler Z3D 1</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1194</puid>
+	   <name>ZModeler Z3D 2</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1195</puid>
+	   <name>ZModeler Z3D 3</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1196</puid>
+	   <name>SIARD (Software-Independent Archiving of Relational Databases) 2.1</name>
+	   <summary>Container signature provided by Swiss Federal Archives and Landesarchiv Nordrhein-Westfalen.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1197</puid>
+	   <name>MyISAM Indexes File</name>
+	   <summary>Signature developed through PRONOM research. Format was submitted for PRONOM research as part of a collection provided by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1198</puid>
+	   <name>RData Binary</name>
+	   <summary>Signature developed through PRONOM research. Format was submitted for PRONOM research as part of a collection provided by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1199</puid>
+	   <name>RData ASCII</name>
+	   <summary>Signature developed through PRONOM research. Format was submitted for PRONOM research as part of a collection provided by Filling the Digital Preservation Gap - University of York and University of Hull.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1200</puid>
+	   <name>PowerDraw 6</name>
+	   <summary>Signature developed through PRONOM research. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1201</puid>
+	   <name>PowerCADD 1.0</name>
+	   <summary>Signature developed through PRONOM research. Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1202</puid>
+	   <name>Guymager Acquisition Info File</name>
+	   <summary>Signature submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1203</puid>
+	   <name>QuickDraw 3D Metafile (Binary) 0</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1204</puid>
+	   <name>Strata StudioPro Vis Format</name>
+	   <summary>Signature submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1205</puid>
+	   <name>LightWave 3D Object</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1206</puid>
+	   <name>Impulse 3D Data Description Object</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1207</puid>
+	   <name>Sony SFK File</name>
+	   <summary>Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1208</puid>
+	   <name>Virtools File Format</name>
+	   <summary>Submitted by the Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1209</puid>
+	   <name>COLLADA Digital Asset Exchange (DAE)</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1210</puid>
+	   <name>Wavefront OBJ File</name>
+	   <summary>Signature developed through a joint submission by LDS Church and the Archaeology Data Service.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1211</puid>
+	   <name>Wavefront Material Template Library</name>
+	   <summary>Signature developed through a joint submission by LDS Church and the Archaeology Data Service.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1212</puid>
+	   <name>HP System Software Manager CVA File</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1213</puid>
+	   <name>Zoner Callisto Metafile 2</name>
+	   <summary>Container signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1214</puid>
+	   <name>Cakewalk WRK Project</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1215</puid>
+	   <name>ERDAS Hierarchical File Architecture Format</name>
+	   <summary>Signature developed through PRONOM research. Submitted by National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1216</puid>
+	   <name>Lotus Freelance Show</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1217</puid>
+	   <name>Leonardo Image Format</name>
+	   <summary>Signature developed through PRONOM research.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">17</puid>
+	   <name>Microsoft Excel Template 97-2003</name>
+	   <summary>Container signature developed through PRONOM research.</summary>
+	  </format>
+	 </release_outline>
+    </release_note>
+
+
+<release_note>
     <release_date>30th November 2017</release_date>
     <signature_filename>DROID_SignatureFile_V93.xml</signature_filename> 
     <release_outline name="New Records">

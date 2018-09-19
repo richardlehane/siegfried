@@ -58,7 +58,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>302048454144{0-1024}474544430D0A322056455253</ByteSequenceValue>
+          <ByteSequenceValue>302048454144{0-1024}47454443(0D0A|0D|0A)322056455253</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

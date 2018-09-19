@@ -22,7 +22,7 @@
       <ProvenanceSourceDate>11 Mar 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <LastUpdatedDate>14 Sep 2018</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -127,12 +127,6 @@
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
-        <RelatedFormatID>638</RelatedFormatID>
-        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
-        <RelatedFormatVersion>1.0</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>777</RelatedFormatID>
         <RelatedFormatName>Java Archive Format</RelatedFormatName>
         <RelatedFormatVersion>
@@ -164,6 +158,12 @@
         <RelatedFormatName>ePub format</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>638</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>

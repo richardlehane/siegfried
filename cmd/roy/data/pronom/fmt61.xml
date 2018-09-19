@@ -103,6 +103,12 @@
       </InternalSignature>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>44</RelatedFormatID>
+        <RelatedFormatName>Microsoft Excel Template</RelatedFormatName>
+        <RelatedFormatVersion>97-2003</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1706</RelatedFormatID>
         <RelatedFormatName>Microsoft Works Spreadsheet</RelatedFormatName>
         <RelatedFormatVersion>6-9</RelatedFormatVersion>

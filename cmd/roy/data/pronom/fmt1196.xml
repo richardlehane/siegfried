@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2006</FormatID>
+      <FormatName>SIARD (Software-Independent Archiving of Relational Databases)</FormatName>
+      <FormatVersion>2.1</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Database</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Software-Independent Archiving of Relational Databases is a format for storing content of relational databases in files for long-term preservation e.g. in archives. The format was developed by the Swiss Federal Archives. It is an open standard and is supported by the SIARD software of the Swiss Federal Archives. SIARD format is a ZIP file (based on the 64 bit extension of the  ZIP format introduced by PkWare Inc. with version 4.5 of the ZIP format definition in order to avoid size limitations which are unrealistic for databases). The ZIP file contains an XML file describing the database structure and metadata as well as a collection of XML files describing the table content (database primary data) as well as, optionally, some text files and some binary files representing database large objects (BLOBs and CLOBs).</FormatDescription>
+      <BinaryFileFormat>Text</BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>232</ProvenanceSourceID>
+      <ProvenanceName>Landesarchiv Nordrhein-Westfalen / Landesarchiv Nordrhein-Westfalen</ProvenanceName>
+      <ProvenanceSourceDate>13 Aug 2018</ProvenanceSourceDate>
+      <ProvenanceDescription>This format is identifiable via a container signature in DROID 6 and later.</ProvenanceDescription>
+      <LastUpdatedDate>13 Aug 2018</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1196</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>143</DeveloperID>
+        <DeveloperName>Swiss Federal Archives</DeveloperName>
+        <OrganisationName>Swiss Federal Archives</OrganisationName>
+        <DeveloperCompoundName>Swiss Federal Archives / Swiss Federal Archives</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>143</SupportID>
+        <SupportName>Swiss Federal Archives</SupportName>
+        <OrganisationName>Swiss Federal Archives</OrganisationName>
+        <SupportCompoundName>Swiss Federal Archives / Swiss Federal Archives</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2225</ExternalSignatureID>
+        <Signature>siard</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>1800</RelatedFormatID>
+        <RelatedFormatName>SIARD (Software-Independent Archiving of Relational Databases)</RelatedFormatName>
+        <RelatedFormatVersion>2.0</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

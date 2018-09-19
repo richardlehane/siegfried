@@ -65,7 +65,7 @@ http://www.wiz-worx.com/iges5x/version5x/version5x.pdf</ProvenanceDescription>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>53(202020202020|303030303030)31(0D0A|0A){72}(5320202020202032|5330303030303032|4720202020202031|4730303030303031)</ByteSequenceValue>
+          <ByteSequenceValue>53(202020202020|303030303030)31(0D0A|0D|0A){72}(5320202020202032|5330303030303032|4720202020202031|4730303030303031)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

@@ -22,7 +22,7 @@
       <ProvenanceSourceDate>11 Mar 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <LastUpdatedDate>14 Sep 2018</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -137,6 +137,18 @@
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>635</RelatedFormatID>
         <RelatedFormatName>Scalable Vector Graphics</RelatedFormatName>
+        <RelatedFormatVersion>1.1</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>643</RelatedFormatID>
+        <RelatedFormatName>Extensible Hypertext Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>644</RelatedFormatID>
+        <RelatedFormatName>Extensible Hypertext Markup Language</RelatedFormatName>
         <RelatedFormatVersion>1.1</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
@@ -358,6 +370,19 @@
         </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1944</RelatedFormatID>
+        <RelatedFormatName>GPS Exchange Format</RelatedFormatName>
+        <RelatedFormatVersion>1.1</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2019</RelatedFormatID>
+        <RelatedFormatName>COLLADA Digital Asset Exchange (DAE)</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>639</RelatedFormatID>
         <RelatedFormatName>Hypertext Markup Language</RelatedFormatName>
@@ -380,18 +405,6 @@
         <RelatedFormatID>642</RelatedFormatID>
         <RelatedFormatName>Hypertext Markup Language</RelatedFormatName>
         <RelatedFormatVersion>4.01</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Has priority over</RelationshipType>
-        <RelatedFormatID>643</RelatedFormatID>
-        <RelatedFormatName>Extensible Hypertext Markup Language</RelatedFormatName>
-        <RelatedFormatVersion>1.0</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Has priority over</RelationshipType>
-        <RelatedFormatID>644</RelatedFormatID>
-        <RelatedFormatName>Extensible Hypertext Markup Language</RelatedFormatName>
-        <RelatedFormatVersion>1.1</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
@@ -446,6 +459,12 @@
         <RelatedFormatID>1852</RelatedFormatID>
         <RelatedFormatName>Geography Markup Language</RelatedFormatName>
         <RelatedFormatVersion>3.2</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>1944</RelatedFormatID>
+        <RelatedFormatName>GPS Exchange Format</RelatedFormatName>
+        <RelatedFormatVersion>1.1</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>

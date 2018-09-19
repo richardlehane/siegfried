@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1983</FormatID>
+      <FormatName>FrameMD5</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>
+      </FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>FrameMD5 is incorporated by ffmpeg and is used to generate frame by frame checksums of each decoded audio and video frame within a media file. For each frame it provides a timestamp, size in bytes, and an MD5 checksum, which can be used to verify the integrity of the decoded data.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>235</ProvenanceSourceID>
+      <ProvenanceName>Technische Informationsbibliothek (TIB) Hannover / Technische Informationsbibliothek (TIB) Hannover</ProvenanceName>
+      <ProvenanceSourceDate>02 Aug 2018</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>02 Aug 2018</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1173</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2202</ExternalSignatureID>
+        <Signature>framemd5</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2203</ExternalSignatureID>
+        <Signature>md5</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1554</SignatureID>
+        <SignatureName>FrameMD5</SignatureName>
+        <SignatureNote>BOF: '#format: frame checksums' {13-16}} '#hash: MD5', based on https://ffmpeg.org/doxygen/3.0/md5enc_8c_source.html (See framemd5_write_header), assuming newline can be CRLF.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1821</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>23666F726D61743A206672616D6520636865636B73756D73{13-16}23686173683A204D4435</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

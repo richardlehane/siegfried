@@ -94,7 +94,7 @@ Or, for the most recent updates, you can install from this fork:
     makepkg -si
 
 ## Changes
-### v1.7.10 (2018-09-18)
+### v1.7.10 (2018-09-19)
 ### Added
 - print configuration defaults with `sf -version`
 

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>1959</FormatID>
+      <FormatName>Markdown</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Mark-up)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Markdown was created by John Gruber and Aaron Swartz circa 2004. The purpose of Markdown is to let users write clean text-based documents that do not suffer from the legibility issues of other 'markup' formats. 
+
+Markdown uses combinations of characters, for example, hashes (pound-sign), asterisks, and combination of square- and rounded- brackets to prefix or suffix parts of text. The symbols provide instructions to an interpreter. A single hash '#' for example, that prefixes a line of text is an instruction to make that line a top-level header in a formatted document. Two hashes '##' is an instruction to render, or output, a secondary header. And so on.
+
+Ultimately the result of writing markdown is a document that can be parsed into a well-formed version of other presentation languages such as HTML or XHTML.
+
+There is no single specification for Markdown, nor is there a single canonical output. That is, Markdown syntax could be converted into many other file types. 
+
+Further descriptions of the background of Markdown and a list of Markdown 'flavors' can be found on the Archiveteam Just Solve It File Formats Wiki: http://fileformats.archiveteam.org/wiki/Markdown
+
+Wikipedia also provides a thorough description of Markdown and its syntax: https://en.wikipedia.org/wiki/Markdown#Standardization</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>195</ProvenanceSourceID>
+      <ProvenanceName>Artefactual Systems Inc / Artefactual Systems Inc</ProvenanceName>
+      <ProvenanceSourceDate>23 Jul 2018</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>23 Jul 2018</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1149</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>text/markdown</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2175</ExternalSignatureID>
+        <Signature>md</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

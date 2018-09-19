@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2018</FormatID>
+      <FormatName>Virtools File Format</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>
+      </FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>This is a group of formats created by the Virtools software application. Originally released in 1993, Virtools offered a development environment to create interactive 3D applications.
+
+Virtools includes four format types, Composition files, Object files, Player files and Scripts files.
+
+Virtools Composition files have an extension of .cmo, these contain an arrangement of one or more elements or associated behaviours which are assembled within Virtools. 
+Virtools Object files have an extension of .nmo and contain one or more elements or scripts.
+Virtools Player files have an extension of .vmo and contain a composition that has been exported from Virtools and are read only files.
+Virtools Script files have an extension of .nms and contain a script or a behaviour graph.
+
+Currently PRONOM is unable to distinguish between these four different formats, if you are able to provide any information around this format please contact pronom@nationalarchives.gov.uk.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>216</ProvenanceSourceID>
+      <ProvenanceName>The Canadian Centre for Architecture / The Canadian Centre for Architecture</ProvenanceName>
+      <ProvenanceSourceDate>16 Aug 2018</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>16 Aug 2018</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1208</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2234</ExternalSignatureID>
+        <Signature>cmo</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2235</ExternalSignatureID>
+        <Signature>nmo</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2236</ExternalSignatureID>
+        <Signature>vmo</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2237</ExternalSignatureID>
+        <Signature>nms</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1586</SignatureID>
+        <SignatureName>Virtools File Format</SignatureName>
+        <SignatureNote>BOF: 'Nemo Fi.'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1857</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>
+          </Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4E656D6F20466900</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

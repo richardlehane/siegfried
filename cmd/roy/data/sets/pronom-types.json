@@ -44,7 +44,8 @@
     "fmt/1098 (XZ File Format)",
     "fmt/1100 (yEnc Encoded File)",
     "fmt/1102 (Uuencoded File)",
-    "fmt/1105 (Hierarchical File System)"
+    "fmt/1105 (Hierarchical File System)",
+    "fmt/1190 (Adobe SWC Package)"
   ],
   "audio": [
     "x-fmt/135 (Audio Interchange File Format 1.3)",
@@ -142,7 +143,9 @@
     "fmt/1008 (DSS Pro)",
     "fmt/1038 (Redcode RAW (R3D) Media File 2)",
     "fmt/1053 (Adobe Audio Waveform)",
-    "fmt/1086 (Monkey's Audio File)"
+    "fmt/1086 (Monkey's Audio File)",
+    "fmt/1178 (Synthetic Music Mobile Application Format)",
+    "fmt/1214 (Cakewalk WRK Project)"
   ],
   "database": [
     "x-fmt/6 (FoxPro Database 2.0)",
@@ -228,7 +231,7 @@
     "fmt/517 (PowerProject 12.0.02+)",
     "fmt/522 (Open Project File)",
     "fmt/612 (Mork)",
-    "fmt/729 (SQLite Database File Format)",
+    "fmt/729 (SQLite Database File Format 3)",
     "fmt/736 (ClarisWorks 1 (generic))",
     "fmt/737 (ClarisWorks 2-3 (generic))",
     "fmt/741 (ClarisWorks Database 4)",
@@ -245,7 +248,17 @@
     "fmt/1066 (Portable Database 3)",
     "fmt/1072 (FileMaker Pro Database 1)",
     "fmt/1078 (Microsoft Program Database 2.00)",
-    "fmt/1079 (Microsoft Program Database 7.00)"
+    "fmt/1079 (Microsoft Program Database 7.00)",
+    "fmt/1135 (SQLite Database File Format 2)",
+    "fmt/1157 (Folio Infobase File 2)",
+    "fmt/1158 (Folio Infobase File 3)",
+    "fmt/1159 (Folio Infobase File 4)",
+    "fmt/1160 (Folio Shadow File 3)",
+    "fmt/1161 (Folio Shadow File 4)",
+    "fmt/1162 (Folio Flat File)",
+    "fmt/1163 (Folio Definition File)",
+    "fmt/1196 (SIARD (Software-Independent Archiving of Relational Databases) 2.1)",
+    "fmt/1197 (MyISAM Indexes File)"
   ],
   "dataset": [
     "x-fmt/13 (Tab-separated values)",
@@ -338,13 +351,25 @@
     "fmt/1123 (Origin Project Format Non-Unicode)",
     "fmt/1124 (Origin Project Format Unicode)",
     "fmt/1125 (JASCO JWS Format OLE2)",
-    "fmt/1130 (C3D File Format)"
+    "fmt/1130 (C3D File Format)",
+    "fmt/1143 (ZISRAW (CZI) File Format)",
+    "fmt/1166 (Niton Data Transfer)",
+    "fmt/1198 (RData Binary)",
+    "fmt/1199 (RData ASCII)",
+    "fmt/1207 (Sony SFK File)"
   ],
   "email": [
     "x-fmt/430 (Microsoft Outlook Email Message 97-2003)",
     "fmt/278 (Internet Message Format)",
     "fmt/838 (Outlook Express Message Database)",
-    "fmt/839 (Outlook Express Folder Database)"
+    "fmt/839 (Outlook Express Folder Database)",
+    "fmt/1144 (CompuServe WinCIM Message Format)"
+  ],
+  "font": [
+    "x-fmt/453 (TrueType Font)",
+    "fmt/520 (OpenType Font File)",
+    "fmt/616 (Web Open Font Format 1.0)",
+    "fmt/1172 (Web Open Font Format 2.0)"
   ],
   "gis": [
     "x-fmt/225 (ESRI MapInfo Data File)",
@@ -368,7 +393,8 @@
     "fmt/724 (Keyhole Markup Language (Container))",
     "fmt/915 (Mapsforge Binary Map File Format)",
     "fmt/916 (ESRI ArcMap Document)",
-    "fmt/1047 (Geography Markup Language 3.2)"
+    "fmt/1047 (Geography Markup Language 3.2)",
+    "fmt/1215 (ERDAS Hierarchical File Architecture Format)"
   ],
   "imageRaster": [
     "x-fmt/25 (OS/2 Bitmap 1.0)",
@@ -559,7 +585,17 @@
     "fmt/1126 (Sony SR2 RAW Image File)",
     "fmt/1127 (Sony ARW RAW Image File 2.x)",
     "fmt/1128 (Progressive Graphics File)",
-    "fmt/1131 (Gatan Digital Micrograph File Format (DM3) 3)"
+    "fmt/1131 (Gatan Digital Micrograph File Format (DM3) 3)",
+    "fmt/1133 (Farbfeld Image Format)",
+    "fmt/1146 (Maxwell Render Image Format)",
+    "fmt/1164 (Praat Picture File)",
+    "fmt/1167 (Softimage 3D Picture File Format)",
+    "fmt/1168 (Maya Icons or Swatches file)",
+    "fmt/1169 (Maya IFF Image File)",
+    "fmt/1181 (Bodypaint 3D)",
+    "fmt/1185 (Apple Icon Image Format)",
+    "fmt/1186 (Dr. Halo Image Palette)",
+    "fmt/1217 (Leonardo Image Format)"
   ],
   "imageVector": [
     "x-fmt/20 (Adobe Illustrator 1.0 / 1.1)",
@@ -735,7 +771,8 @@
     "fmt/933 (Simple Vector Format 1)",
     "fmt/934 (Simple Vector Format 2)",
     "fmt/1042 (WordPerfect Graphics Metafile 2.0)",
-    "fmt/1044 (AutoShade Rendering Slide)"
+    "fmt/1044 (AutoShade Rendering Slide)",
+    "fmt/1213 (Zoner Callisto Metafile 2)"
   ],
   "model": [
     "x-fmt/19 (3D Studio)",
@@ -800,7 +837,34 @@
     "fmt/1046 (Draco File Format)",
     "fmt/1049 (QuickDraw 3D Metafile (ASCII))",
     "fmt/1050 (QuickDraw 3D Metafile (Binary) 1)",
-    "fmt/1093 (Alias Scene Description Language)"
+    "fmt/1093 (Alias Scene Description Language)",
+    "fmt/1136 (MiniCAD 6)",
+    "fmt/1137 (MiniCAD 7)",
+    "fmt/1138 (MiniCAD/VectorWorks 8)",
+    "fmt/1139 (VectorWorks 9)",
+    "fmt/1140 (VectorWorks 10)",
+    "fmt/1141 (VectorWorks 11)",
+    "fmt/1142 (VectorWorks Plugin or Script)",
+    "fmt/1145 (Maxwell Render Material File)",
+    "fmt/1148 (SIDOUN WinAVA Format)",
+    "fmt/1147 (Maxwell Render Scene File Format)",
+    "fmt/1170 (Alias Studio Wire File 8.5)",
+    "fmt/1171 (Alias PowerAnimator File 9.0)",
+    "fmt/1175 (Alias Studio Wire File 9.0)",
+    "fmt/1179 (Away3D Data Format 2.x)",
+    "fmt/1180 (Cinema 4D 6+)",
+    "fmt/1182 (Blitz3D File Format)",
+    "fmt/1188 (Ogre Mesh 1.x)",
+    "fmt/1189 (Ogre Mesh XML)",
+    "fmt/1193 (ZModeler Z3D 1)",
+    "fmt/1194 (ZModeler Z3D 2)",
+    "fmt/1195 (ZModeler Z3D 3)",
+    "fmt/1203 (QuickDraw 3D Metafile (Binary) 0)",
+    "fmt/1204 (Strata StudioPro Vis Format)",
+    "fmt/1205 (LightWave 3D Object)",
+    "fmt/1206 (Impulse 3D Data Description Object)",
+    "fmt/1209 (COLLADA Digital Asset Exchange (DAE))",
+    "fmt/1210 (Wavefront OBJ File)"
   ],
   "pageDescription": [
     "fmt/122 (Encapsulated PostScript File Format 1.2)",
@@ -838,7 +902,8 @@
     "fmt/501 (PostScript 3.1)",
     "fmt/683 (Advanced Function Presentation)",
     "fmt/888 (QuadriSpace Format)",
-    "fmt/1129 (PDF 2.0 - Portable Document Format 2.0)"
+    "fmt/1129 (PDF 2.0 - Portable Document Format 2.0)",
+    "fmt/1174 (Hewlett Packard Graphics Language 2)"
   ],
   "presentation": [
     "x-fmt/32 (Harvard Graphics Chart 3.0)",
@@ -915,10 +980,13 @@
     "fmt/927 (Microsoft Visio Macro-Enabled Drawing 2013)",
     "fmt/928 (Microsoft Visio Macro-Enabled Stencil 2013)",
     "fmt/929 (Microsoft Visio Macro-Enabled Template 2013)",
-    "fmt/1091 (Scribus Document)"
+    "fmt/1091 (Scribus Document)",
+    "fmt/1184 (InDesign Markup Language Package)",
+    "fmt/1191 (Adobe InDesign Book)",
+    "fmt/1216 (Lotus Freelance Show)"
   ],
   "spreadsheet": [
-    "x-fmt/17 (Microsoft Excel Template 2000)",
+    "x-fmt/17 (Microsoft Excel Template 97-2003)",
     "x-fmt/23 (Microsoft Excel Backup)",
     "x-fmt/114 (Lotus 1-2-3 Worksheet 2.0)",
     "x-fmt/115 (Lotus 1-2-3 Worksheet 3.0)",
@@ -1030,7 +1098,10 @@
     "fmt/986 (Extensible Metadata Platform Format)",
     "fmt/1039 (Redcode Metadata (RMD) File)",
     "fmt/1047 (Geography Markup Language 3.2)",
-    "fmt/1048 (OGR GFS File)"
+    "fmt/1048 (OGR GFS File)",
+    "fmt/1132 (Netscape Bookmark File Format)",
+    "fmt/1134 (GPS Exchange Format 1.1)",
+    "fmt/1149 (Markdown)"
   ],
   "textStructured": [
     "x-fmt/41 (Data Interchange Format)",
@@ -1118,7 +1189,10 @@
     "fmt/1088 (Visual Basic (VB) File)",
     "fmt/1089 (VBScript (VBS) File)",
     "fmt/1099 (TCR eBook)",
-    "fmt/1119 (Jupyter Python Notebook)"
+    "fmt/1119 (Jupyter Python Notebook)",
+    "fmt/1165 (Praat Script File)",
+    "fmt/1202 (Guymager Acquisition Info File)",
+    "fmt/1212 (HP System Software Manager CVA File)"
   ],
   "textUnstructured": [
     "x-fmt/14 (Macintosh Text File)",
@@ -1164,7 +1238,9 @@
     "fmt/945 (Ogg Theora Video)",
     "fmt/971 (Microsoft Windows Movie Maker File)",
     "fmt/1038 (Redcode RAW (R3D) Media File 2)",
-    "fmt/1055 (M2TS)"
+    "fmt/1055 (M2TS)",
+    "fmt/1150 (4X Movie File)",
+    "fmt/1176 (Nullsoft Streaming Video)"
   ],
   "wordProcessor": [
     "x-fmt/1 (Microsoft Word for Macintosh Document 3.0)",

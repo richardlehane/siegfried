@@ -24,7 +24,7 @@
       <ProvenanceSourceDate>11 Mar 2005</ProvenanceSourceDate>
       <ProvenanceDescription>http://wwwimages.adobe.com/www.adobe.com/content/dam/Adobe/en/devnet/swf/pdf/swf-file-format-spec.pdf
 http://www.adobe.com/devnet/articles/flashplayer-air-feature-list.html</ProvenanceDescription>
-      <LastUpdatedDate>03 Aug 2015</LastUpdatedDate>
+      <LastUpdatedDate>14 Sep 2018</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -91,6 +91,13 @@ http://www.adobe.com/devnet/articles/flashplayer-air-feature-list.html</Provenan
           <ByteSequenceValue>0000</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>687</RelatedFormatID>
+        <RelatedFormatName>MPEG 1/2 Audio Layer 3</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Is previous version of</RelationshipType>
         <RelatedFormatID>650</RelatedFormatID>

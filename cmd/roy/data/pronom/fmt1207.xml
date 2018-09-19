@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2017</FormatID>
+      <FormatName>Sony SFK File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Dataset</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Sony Creative Software applications create SFK files for all audio events imported into the application. These files contain data which helps visualise the waveform on the screen and assist large files to be opened quickly</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>216</ProvenanceSourceID>
+      <ProvenanceName>The Canadian Centre for Architecture / The Canadian Centre for Architecture</ProvenanceName>
+      <ProvenanceSourceDate>16 Aug 2018</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>16 Aug 2018</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1207</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>228</DeveloperID>
+        <DeveloperName>Sony</DeveloperName>
+        <OrganisationName>Sony</OrganisationName>
+        <DeveloperCompoundName>Sony / Sony</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>228</SupportID>
+        <SupportName>Sony</SupportName>
+        <OrganisationName>Sony</OrganisationName>
+        <SupportCompoundName>Sony / Sony</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2233</ExternalSignatureID>
+        <Signature>sfk</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1585</SignatureID>
+        <SignatureName>Sony SFK file</SignatureName>
+        <SignatureNote>BOF: 'SFPK'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1856</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>
+          </Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>5346504B</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

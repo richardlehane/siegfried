@@ -4,14 +4,12 @@
     <FileFormat>
       <FormatID>1412</FormatID>
       <FormatName>Web Open Font Format</FormatName>
-      <FormatVersion>
-      </FormatVersion>
+      <FormatVersion>1.0</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>
-      </FormatTypes>
+      <FormatTypes>Font</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
       <FormatDescription>Web Open Font Format (WOFF) is a font format designed primarily for use on the Web, and can also be used as a container format or "wrapper" for font data in already-existing formats.</FormatDescription>
@@ -28,7 +26,7 @@
       <ProvenanceSourceDate>14 Feb 2014</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>14 Feb 2014</LastUpdatedDate>
+      <LastUpdatedDate>13 Sep 2018</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -36,12 +34,12 @@
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
-        <Identifier>application/font-woff</Identifier>
-        <IdentifierType>MIME</IdentifierType>
-      </FileFormatIdentifier>
-      <FileFormatIdentifier>
         <Identifier>fmt/616</Identifier>
         <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>font/woff</Identifier>
+        <IdentifierType>MIME</IdentifierType>
       </FileFormatIdentifier>
       <Developers>
         <DeveloperID>200</DeveloperID>
@@ -62,7 +60,7 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>952</SignatureID>
-        <SignatureName>Web Open Font Format</SignatureName>
+        <SignatureName>Web Open Font Format 1</SignatureName>
         <SignatureNote>BOF: wOFF</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1177</ByteSequenceID>

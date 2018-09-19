@@ -13,7 +13,9 @@
       <FormatTypes>Video</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>MPEG-2 is a lossy compression standard (an improvement and expansion of the MPEG-1 standard) designed for the generic coding of video and audio and intended to cover a wide scope of application, including: video production, broadcast and editing. Streams are at potentially higher bitrates than MPEG-1 but more efficient compression making it suited to High Definition video. MPEG-2 Video supports both 'progressive' and 'interlaced' frame video. An MPG-2 ‘Program’ stream (PS) file (*.mpg, *.mpeg) generally contain both video and audio streams, generally for synchronised playback, and may carry a variety of other data (e.g. video captions).</FormatDescription>
+      <FormatDescription>MPEG-2 is a lossy compression standard (an improvement and expansion of the MPEG-1 standard) designed for the generic coding of video and audio and intended to cover a wide scope of application, including: video production, broadcast and editing. Streams are at potentially higher bitrates than MPEG-1 but more efficient compression making it suited to High Definition video. MPEG-2 Video supports both 'progressive' and 'interlaced' frame video. An MPG-2 ‘Program’ stream (PS) file (*.mpg, *.mpeg) generally contain both video and audio streams, generally for synchronised playback, and may carry a variety of other data (e.g. video captions).
+
+Some camcorders store their MPEG-2 Program Stream video data as files with the .mod extension, usually alongside other files containing metadata and management information for the video.</FormatDescription>
       <BinaryFileFormat>Binary</BinaryFileFormat>
       <ByteOrders>Big-endian (Motorola)</ByteOrders>
       <ReleaseDate>
@@ -25,7 +27,7 @@
       <ProvenanceSourceDate>11 Mar 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>07 Jul 2014</LastUpdatedDate>
+      <LastUpdatedDate>13 Sep 2018</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -52,6 +54,11 @@
       <ExternalSignature>
         <ExternalSignatureID>683</ExternalSignatureID>
         <Signature>mpg</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2257</ExternalSignatureID>
+        <Signature>mod</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <InternalSignature>
