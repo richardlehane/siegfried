@@ -2115,8 +2115,7 @@
                 <ByteSequence Reference="BOFoffset">
                   <SubSequence Position="1" SubSeqMinOffset="32"
                     SubSeqMaxOffset="32">
-                    <Sequence>'Microsoft Picture It! version 1
-                      Picture'</Sequence>
+                    <Sequence>'Microsoft Picture It! version 1 Picture'</Sequence>
                   </SubSequence>
                 </ByteSequence>
               </InternalSignature>
@@ -2365,8 +2364,7 @@
                 <ByteSequence>
                   <SubSequence Position="1" SubSeqMinOffset="0"
                     SubSeqMaxOffset="200">
-                    <Sequence>'xmlns:key="http://developer.apple.com/namespaces/keynote2"
-                      key:version="92008102400"'</Sequence>
+                    <Sequence>'xmlns:key="http://developer.apple.com/namespaces/keynote2" key:version="92008102400"'</Sequence>
                   </SubSequence>
                 </ByteSequence>
               </InternalSignature>
