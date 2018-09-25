@@ -29,7 +29,8 @@ import (
 // When a byte sequence is matched, the TestTree is examined for keyframe matches and to conduct further tests.
 type seqSet struct {
 	set           []wac.Seq
-	testTreeIndex []int // The index of the testTree for the first choices. For subsequence choices, add the index of that choice to the test tree index.
+	entanglements map[int]entanglement // not persisted yet
+	testTreeIndex []int                // The index of the testTree for the first choices. For subsequence choices, add the index of that choice to the test tree index.
 }
 
 func (ss *seqSet) save(ls *persist.LoadSaver) {
