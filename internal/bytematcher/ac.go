@@ -23,108 +23,12 @@ import (
 	"sync"
 )
 
-// Index returns a channel of results, these contain the indexes (a double index: index of the Seq and index of the Choice)
-// and offsets (in the input byte slice) of matching sequences.
-func (wac *fwac) Index(input io.ByteReader) chan Result {
-	output := make(chan Result)
-	go wac.match(input, output)
-	return output
+type ac interface {
+	match(io.ByteReader, chan seqmatch)
 }
 
-func (wac *fwac) match(input io.ByteReader, results chan Result) {
-	var offset int64
-	var progressResult = Result{Index: [2]int{-1, -1}}
-	precons := wac.p.get()
-	curr := wac.zero
-	for c, err := input.ReadByte(); err == nil; c, err = input.ReadByte() {
-		offset++
-		if trans := curr.transit[c]; trans != nil {
-			curr = trans
-		} else {
-			for curr != wac.root {
-				curr = curr.fail
-				if trans := curr.transit[c]; trans != nil {
-					curr = trans
-					break
-				}
-
-			}
-		}
-		if curr.output != nil && (curr.outMax == -1 || curr.outMax >= offset-int64(curr.outMaxL)) {
-			for _, o := range curr.output {
-				if o.max == -1 || o.max >= offset-int64(o.length) {
-					if o.subIndex == 0 || (precons[o.seqIndex][o.subIndex-1] != 0 && offset-int64(o.length) >= precons[o.seqIndex][o.subIndex-1]) {
-						if precons[o.seqIndex][o.subIndex] == 0 {
-							precons[o.seqIndex][o.subIndex] = offset
-						}
-						results <- Result{Index: [2]int{o.seqIndex, o.subIndex}, Offset: offset - int64(o.length), Length: o.length}
-					}
-				}
-			}
-		}
-		if offset&(^offset+1) == offset && offset >= 1024 { // send powers of 2 greater than 512
-			progressResult.Offset = offset
-			results <- progressResult
-		}
-	}
-	wac.p.put(precons)
-	close(results)
-}
-
-// Index returns a channel of results, these contain the indexes (a double index: index of the Seq and index of the Choice)
-// and offsets (in the input byte slice) of matching sequences.
-func (wac *fwaclm) Index(input io.ByteReader) chan Result {
-	output := make(chan Result)
-	go wac.match(input, output)
-	return output
-}
-
-func (wac *fwaclm) match(input io.ByteReader, results chan Result) {
-	var offset int64
-	var progressResult = Result{Index: [2]int{-1, -1}}
-	precons := wac.p.get()
-	curr := wac.root
-	for c, err := input.ReadByte(); err == nil; c, err = input.ReadByte() {
-		offset++
-		if trans := curr.transit.get(c); trans != nil {
-			curr = trans
-		} else {
-			for curr != wac.root {
-				curr = curr.fail
-				if trans := curr.transit.get(c); trans != nil {
-					curr = trans
-					break
-				}
-
-			}
-		}
-		if curr.output != nil && (curr.outMax == -1 || curr.outMax >= offset-int64(curr.outMaxL)) {
-			for _, o := range curr.output {
-				if o.max == -1 || o.max >= offset-int64(o.length) {
-					if o.subIndex == 0 || (precons[o.seqIndex][o.subIndex-1] != 0 && offset-int64(o.length) >= precons[o.seqIndex][o.subIndex-1]) {
-						if precons[o.seqIndex][o.subIndex] == 0 {
-							precons[o.seqIndex][o.subIndex] = offset
-						}
-						results <- Result{Index: [2]int{o.seqIndex, o.subIndex}, Offset: offset - int64(o.length), Length: o.length}
-					}
-				}
-			}
-		}
-		if offset&(^offset+1) == offset && offset >= 1024 { // send powers of 2 greater than 512
-			progressResult.Offset = offset
-			results <- progressResult
-		}
-	}
-	wac.p.put(precons)
-	close(results)
-}
-
-type wac interface {
-	index(io.ByteReader, chan result)
-}
-
-// result contains the index and offset of matches.
-type result struct {
+// seqmatch contains the index and offset of matches.
+type seqmatch struct {
 	index  [2]int // a double index: index of the seq and index of the Choice
 	offset int64
 	length int
@@ -138,6 +42,10 @@ type seq struct {
 	maxOffsets []int64 // maximum offsets for each choice. Can be -1 for wildcard.
 	choices    []choice
 }
+
+// an entanglement is an (OR) set of an (AND) set of bof/eof seqs that must be satisfied up to the first wild in that seq
+// you only entangle to seqs that have fixed max offsets
+type entanglement [][][2]int
 
 func (s seq) String() string {
 	str := "{Offsets:"
@@ -163,17 +71,13 @@ func (s seq) String() string {
 	return str + "}"
 }
 
-// an entanglement is an (OR) set of an (AND) set of bof/eof seqs that must be satisfied up to the first wild in that seq
-// you only entangle to seqs that have fixed max offsets
-type entanglement [][][2]int
-
-func newWac(seqs []wac) wac {
+func newWac(seqs []seq) ac {
 	zero := &node{keys: make([]byte, 0, 1)}
 	zero.addGotos(seqs, true) // TODO: cld use low memory here?
 	root := zero.addFails(true)
 	root.addGotos(seqs, false)
 	root.addFails(false)
-	return &ac{
+	return &achm{
 		zero: zero,
 		root: root,
 		p:    newPool(seqs),
@@ -181,7 +85,7 @@ func newWac(seqs []wac) wac {
 }
 
 // NewLowMem creates a Wild Aho-Corasick tree with lower memory requirements (single tree, low mem transitions)
-func newLowMem(seqs []Seq) wac {
+func newLowMem(seqs []seq) ac {
 	root := &nodelm{}
 	root.addGotos(seqs, true)
 	root.addFails(false)
@@ -191,14 +95,14 @@ func newLowMem(seqs []Seq) wac {
 	}
 }
 
-// ac is a wild Aho-Corasick tree
-type ac struct {
+// achm is a wild Aho-Corasick tree that favours speed over memory
+type achm struct {
 	zero *node
 	root *node
 	p    *pool // pool of preconditions
 }
 
-// fwaclm is a wild Aho-Corasick tree that takes less RAM
+// aclm is a wild Aho-Corasick tree that takes less memory
 type aclm struct {
 	root *nodelm
 	p    *pool // pool of preconditions
@@ -249,7 +153,7 @@ type node struct {
 	outMaxL int
 }
 
-func (start *node) addGotos(seqs []Seq, zero bool) {
+func (start *node) addGotos(seqs []seq, zero bool) {
 	// iterate through byte sequences adding goto links to the link matrix
 	for id, seq := range seqs {
 		for i, choice := range seq.choices {
@@ -375,7 +279,7 @@ func (t transLM) get(b byte) *nodelm {
 	return nil
 }
 
-func (start *nodelm) addGotos(seqs []Seq, zero bool) {
+func (start *nodelm) addGotos(seqs []seq, zero bool) {
 	// iterate through byte sequences adding goto links to the link matrix
 	for id, seq := range seqs {
 		for i, choice := range seq.choices {
@@ -493,17 +397,17 @@ func clear(p precons) precons {
 // pool of precons - just an embedded sync.Pool
 type pool struct{ *sync.Pool }
 
-func preconsFn(s []Seq) func() interface{} {
+func preconsFn(s []seq) func() interface{} {
 	t := make([]int, len(s))
 	for i := range s {
-		t[i] = len(s[i].Choices)
+		t[i] = len(s[i].choices)
 	}
 	return func() interface{} {
 		return newPrecons(t)
 	}
 }
 
-func newPool(s []Seq) *pool {
+func newPool(s []seq) *pool {
 	return &pool{&sync.Pool{New: preconsFn(s)}}
 }
 
