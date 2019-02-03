@@ -44,7 +44,7 @@ type seq struct {
 }
 
 // an entanglement is an (OR) set of an (AND) set of bof/eof seqs that must be satisfied up to the first wild in that seq
-// you only entangle to seqs that have fixed max offsets
+// you only entangle with seqs that have fixed max offsets
 type entanglement [][][2]int
 
 func (s seq) String() string {
