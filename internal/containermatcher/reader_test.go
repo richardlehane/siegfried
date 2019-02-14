@@ -36,6 +36,8 @@ func (tr *testReader) SetSource(b *siegreader.Buffers) (*siegreader.Buffer, erro
 
 func (tr *testReader) Close() {}
 
+func (tr *testReader) IsDir() bool { return false }
+
 func (tr *testReader) Quit() {}
 
 var ns []*node = []*node{

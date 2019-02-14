@@ -20,5 +20,6 @@ type Reader interface {
 	Next() error  // when finished, should return io.EOF
 	Name() string // return name of the object with paths concatenated with / character
 	SetSource(*siegreader.Buffers) (*siegreader.Buffer, error)
-	Close() // close files
+	Close()      // close files
+	IsDir() bool // report if a directory
 }

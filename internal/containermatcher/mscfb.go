@@ -53,3 +53,10 @@ func (m *mscfbReader) SetSource(b *siegreader.Buffers) (*siegreader.Buffer, erro
 }
 
 func (m *mscfbReader) Close() {}
+
+func (m *mscfbReader) IsDir() bool {
+	if m.entry == nil {
+		return false
+	}
+	return m.entry.FileInfo().IsDir()
+}

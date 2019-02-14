@@ -161,7 +161,7 @@ func (ct *cTest) identify(c *ContainerMatcher, id *identifier, rdr Reader, name 
 			id.hits = append(id.hits, hit{h, name, "name only"})
 		}
 	}
-	if ct.unsatisfied != nil {
+	if ct.unsatisfied != nil && !rdr.IsDir() {
 		buf, _ := rdr.SetSource(c.entryBufs) // NOTE: an error is ignored here.
 		bmc, _ := ct.bm.Identify("", buf)
 		for r := range bmc {

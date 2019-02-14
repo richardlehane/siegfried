@@ -29,11 +29,7 @@ type zipReader struct {
 }
 
 func (z *zipReader) Next() error {
-	// proceed
 	z.idx++
-	// scan past directories
-	for ; z.idx < len(z.rdr.File) && z.rdr.File[z.idx].FileHeader.FileInfo().IsDir(); z.idx++ {
-	}
 	if z.idx >= len(z.rdr.File) {
 		return io.EOF
 	}
@@ -58,6 +54,13 @@ func (z *zipReader) Close() {
 		return
 	}
 	z.rc.Close()
+}
+
+func (z *zipReader) IsDir() bool {
+	if z.idx < len(z.rdr.File) {
+		return z.rdr.File[z.idx].FileHeader.FileInfo().IsDir()
+	}
+	return false
 }
 
 func zipRdr(b *siegreader.Buffer) (Reader, error) {
