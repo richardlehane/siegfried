@@ -7,6 +7,7 @@ package sfnt
 import (
 	"bytes"
 	"fmt"
+	"image"
 	"io/ioutil"
 	"path/filepath"
 	"testing"
@@ -223,9 +224,11 @@ func TestMetrics(t *testing.T) {
 		font []byte
 		want font.Metrics
 	}{
-		"goregular": {goregular.TTF, font.Metrics{Height: 2367, Ascent: 1935, Descent: 432}},
+		"goregular": {goregular.TTF, font.Metrics{Height: 2367, Ascent: 1935, Descent: 432, XHeight: 1086, CapHeight: 1480,
+			CaretSlope: image.Point{X: 0, Y: 1}}},
 		// cmapTest.ttf has a non-zero lineGap.
-		"cmapTest": {cmapFont, font.Metrics{Height: 1549, Ascent: 1365, Descent: 0}},
+		"cmapTest": {cmapFont, font.Metrics{Height: 1549, Ascent: 1365, Descent: 0, XHeight: 800, CapHeight: 800,
+			CaretSlope: image.Point{X: 20, Y: 100}}},
 	}
 	var b Buffer
 	for name, tc := range testCases {
@@ -761,6 +764,30 @@ func TestPPEM(t *testing.T) {
 			t.Errorf("i=%d: %v", i, err)
 			continue
 		}
+	}
+}
+
+func TestPostInfo(t *testing.T) {
+	data, err := ioutil.ReadFile(filepath.FromSlash("../testdata/glyfTest.ttf"))
+	if err != nil {
+		t.Fatalf("ReadFile: %v", err)
+	}
+	f, err := Parse(data)
+	if err != nil {
+		t.Fatalf("Parse: %v", err)
+	}
+	post := f.PostTable()
+	if post.ItalicAngle != -11.25 {
+		t.Error("ItalicAngle:", post.ItalicAngle)
+	}
+	if post.UnderlinePosition != -255 {
+		t.Error("UnderlinePosition:", post.UnderlinePosition)
+	}
+	if post.UnderlineThickness != 102 {
+		t.Error("UnderlineThickness:", post.UnderlineThickness)
+	}
+	if post.IsFixedPitch {
+		t.Error("IsFixedPitch:", post.IsFixedPitch)
 	}
 }
 
