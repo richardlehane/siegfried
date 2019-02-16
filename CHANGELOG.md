@@ -1,4 +1,13 @@
 # Change Log
+## v1.7.11 (2019-02-16)
+### Changed
+- update LOC signatures to 2019-01-06
+- update tika-mimetypes signatures to v1.20
+
+### Fixed
+- container matching can now match against directory names. Thanks Ross Spencer for [reporting](https://github.com/richardlehane/siegfried/issues/123) and for the sample SIARD signature file. Thanks Dave Clipsham, Martin Hoppenheit and Phillip Tommerholt for contributions on the ticket.
+- fixes to travis.yml for auto-deploy of debian release; [#124](https://github.com/richardlehane/siegfried/issues/124)
+
 ## v1.7.10 (2018-09-19)
 ### Added
 - print configuration defaults with `sf -version`

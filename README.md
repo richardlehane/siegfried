@@ -8,7 +8,7 @@
 
 ### Version
 
-1.7.10
+1.7.11
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -94,6 +94,15 @@ Or, for the most recent updates, you can install from this fork:
     makepkg -si
 
 ## Changes
+### v1.7.11 (2019-02-16)
+### Changed
+- update LOC signatures to 2019-01-06
+- update tika-mimetypes signatures to v1.20
+
+### Fixed
+- container matching can now match against directory names. Thanks Ross Spencer for [reporting](https://github.com/richardlehane/siegfried/issues/123) and for the sample SIARD signature file. Thanks Dave Clipsham, Martin Hoppenheit and Phillip Tommerholt for contributions on the ticket.
+- fixes to travis.yml for auto-deploy of debian release; [#124](https://github.com/richardlehane/siegfried/issues/124)
+
 ### v1.7.10 (2018-09-19)
 ### Added
 - print configuration defaults with `sf -version`
