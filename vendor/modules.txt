@@ -1,0 +1,22 @@
+# github.com/richardlehane/characterize v1.0.0
+github.com/richardlehane/characterize
+# github.com/richardlehane/match v1.0.0
+github.com/richardlehane/match/fwac
+# github.com/richardlehane/mscfb v1.0.1
+github.com/richardlehane/mscfb
+# github.com/richardlehane/msoleps v1.0.1
+github.com/richardlehane/msoleps/types
+# github.com/richardlehane/webarchive v1.0.0
+github.com/richardlehane/webarchive
+# github.com/richardlehane/xmldetect v1.0.0
+github.com/richardlehane/xmldetect
+# golang.org/x/image v0.0.0-20190209060608-ef4a1470e0dc
+golang.org/x/image/riff
+# golang.org/x/sys v0.0.0-20190215142949-d0b11bdaac8a
+golang.org/x/sys/unix
+# golang.org/x/text v0.3.0
+golang.org/x/text/encoding/charmap
+golang.org/x/text/encoding
+golang.org/x/text/encoding/internal
+golang.org/x/text/encoding/internal/identifier
+golang.org/x/text/transform

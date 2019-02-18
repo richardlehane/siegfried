@@ -1,5 +1,0 @@
-package: github.com/richardlehane/characterize
-import:
-- package: golang.org/x/text
-  subpackages:
-  - encoding/charmap
