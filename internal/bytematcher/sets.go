@@ -28,9 +28,9 @@ import (
 // As far as possible, signatures are flattened into simple byte sequences grouped into two sets: BOF and EOF sets.
 // When a byte sequence is matched, the TestTree is examined for keyframe matches and to conduct further tests.
 type seqSet struct {
-	set           []wac.Seq
-	entanglements map[int]entanglement // not persisted yet
-	testTreeIndex []int                // The index of the testTree for the first choices. For subsequence choices, add the index of that choice to the test tree index.
+	set []wac.Seq
+	//entanglements map[int]entanglement // not persisted yet
+	testTreeIndex []int // The index of the testTree for the first choices. For subsequence choices, add the index of that choice to the test tree index.
 }
 
 func (ss *seqSet) save(ls *persist.LoadSaver) {
