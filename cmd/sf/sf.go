@@ -40,27 +40,29 @@ const maxMulti = 1024
 
 // flags
 var (
-	update    = flag.Bool("update", false, "update or install the default signature file")
-	version   = flag.Bool("version", false, "display version information")
-	logf      = flag.String("log", "error", "log errors, warnings, debug or slow output, knowns or unknowns to stderr or stdout e.g. -log error,warn,unknown,stdout")
-	nr        = flag.Bool("nr", false, "prevent automatic directory recursion")
-	yaml      = flag.Bool("yaml", true, "YAML output format")
-	csvo      = flag.Bool("csv", false, "CSV output format")
-	jsono     = flag.Bool("json", false, "JSON output format")
-	droido    = flag.Bool("droid", false, "DROID CSV output format")
-	sig       = flag.String("sig", config.SignatureBase(), "set the signature file")
-	home      = flag.String("home", config.Home(), "override the default home directory")
-	serve     = flag.String("serve", "", "start siegfried server e.g. -serve localhost:5138")
-	multi     = flag.Int("multi", 1, "set number of parallel file ID processes")
-	archive   = flag.Bool("z", false, "scan archive formats (zip, tar, gzip, warc, arc)")
-	hashf     = flag.String("hash", "", "calculate file checksum with hash algorithm; options "+checksum.HashChoices)
-	throttlef = flag.Duration("throttle", 0, "set a time to wait between scanning files e.g. 50ms")
-	coe       = flag.Bool("coe", false, "continue on fatal errors during directory walks (this may result in directories being skipped)")
-	replay    = flag.Bool("replay", false, "replay one (or more) results files to change output or logging e.g. sf -replay -csv results.yaml")
-	list      = flag.Bool("f", false, "scan one (or more) lists of filenames e.g. sf -f myfiles.txt")
-	name      = flag.String("name", "", "provide a filename when scanning a stream e.g. sf -name myfile.txt -")
-	conff     = flag.String("conf", "", "set the configuration file")
-	setconff  = flag.Bool("setconf", false, "record flags used with this command in configuration file")
+	updateShort  = flag.Bool("u", false, "update or install the default signature file")
+	update       = flag.Bool("update", false, "update or install the default signature file")
+	versionShort = flag.Bool("v", false, "display version information")
+	version      = flag.Bool("version", false, "display version information")
+	logf         = flag.String("log", "error", "log errors, warnings, debug or slow output, knowns or unknowns to stderr or stdout e.g. -log error,warn,unknown,stdout")
+	nr           = flag.Bool("nr", false, "prevent automatic directory recursion")
+	yaml         = flag.Bool("yaml", true, "YAML output format")
+	csvo         = flag.Bool("csv", false, "CSV output format")
+	jsono        = flag.Bool("json", false, "JSON output format")
+	droido       = flag.Bool("droid", false, "DROID CSV output format")
+	sig          = flag.String("sig", config.SignatureBase(), "set the signature file")
+	home         = flag.String("home", config.Home(), "override the default home directory")
+	serve        = flag.String("serve", "", "start siegfried server e.g. -serve localhost:5138")
+	multi        = flag.Int("multi", 1, "set number of parallel file ID processes")
+	archive      = flag.Bool("z", false, "scan archive formats (zip, tar, gzip, warc, arc)")
+	hashf        = flag.String("hash", "", "calculate file checksum with hash algorithm; options "+checksum.HashChoices)
+	throttlef    = flag.Duration("throttle", 0, "set a time to wait between scanning files e.g. 50ms")
+	coe          = flag.Bool("coe", false, "continue on fatal errors during directory walks (this may result in directories being skipped)")
+	replay       = flag.Bool("replay", false, "replay one (or more) results files to change output or logging e.g. sf -replay -csv results.yaml")
+	list         = flag.Bool("f", false, "scan one (or more) lists of filenames e.g. sf -f myfiles.txt")
+	name         = flag.String("name", "", "provide a filename when scanning a stream e.g. sf -name myfile.txt -")
+	conff        = flag.String("conf", "", "set the configuration file")
+	setconff     = flag.Bool("setconf", false, "record flags used with this command in configuration file")
 )
 
 var (
@@ -324,7 +326,7 @@ func main() {
 		usig = *sig
 	}
 	// handle -update
-	if *update {
+	if *update || *updateShort {
 		msg, err := updateSigs(usig, flag.Args())
 		if err != nil {
 			log.Fatalf("[FATAL] failed to update signature file, %v", err)
@@ -342,14 +344,14 @@ func main() {
 		s   *siegfried.Siegfried
 		err error
 	)
-	if !*replay || *version || *fprflag || *serve != "" {
+	if !*replay || *version || *versionShort || *fprflag || *serve != "" {
 		s, err = siegfried.Load(config.Signature())
 	}
 	if err != nil {
 		log.Fatalf("[FATAL] error loading signature file, got: %v", err)
 	}
 	// handle -version
-	if *version {
+	if *version || *versionShort {
 		version := config.Version()
 		fmt.Printf("siegfried %d.%d.%d\n", version[0], version[1], version[2])
 		fmt.Printf("%s (%s)\nidentifiers: \n", config.Signature(), s.C.Format(time.RFC3339))
