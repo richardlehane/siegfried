@@ -139,6 +139,26 @@ func (s *Siegfried) Add(i core.Identifier) error {
 
 // Save persists a Siegfried struct to disk (path)
 func (s *Siegfried) Save(path string) error {
+	f, err := os.Create(path)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	_, err = f.Write(append(config.Magic(), byte(config.Version()[0]), byte(config.Version()[1])))
+	if err != nil {
+		return err
+	}
+	z, err := flate.NewWriter(f, 1)
+	if err != nil {
+		return err
+	}
+	err = s.SaveWriter(z)
+	z.Close()
+	return err
+}
+
+// SaveWriter persists a Siegfried struct to an io.Writer
+func (s *Siegfried) SaveWriter(w io.Writer) error {
 	ls := persist.NewLoadSaver(nil)
 	ls.SaveTime(s.C)
 	namematcher.Save(s.nm, ls)
@@ -155,21 +175,7 @@ func (s *Siegfried) Save(path string) error {
 	if ls.Err != nil {
 		return ls.Err
 	}
-	f, err := os.Create(path)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-	_, err = f.Write(append(config.Magic(), byte(config.Version()[0]), byte(config.Version()[1])))
-	if err != nil {
-		return err
-	}
-	z, err := flate.NewWriter(f, 1)
-	if err != nil {
-		return err
-	}
-	_, err = z.Write(ls.Bytes())
-	z.Close()
+	_, err := w.Write(ls.Bytes())
 	return err
 }
 
@@ -198,6 +204,19 @@ func Load(path string) (*Siegfried, error) {
 	if err != nil {
 		return nil, fmt.Errorf(errOpening, err)
 	}
+	return load(buf)
+}
+
+// LoadReader creates a Siegfried struct and loads content from a reader
+func LoadReader(r io.Reader) (*Siegfried, error) {
+	buf, err := ioutil.ReadAll(r)
+	if err != nil {
+		return nil, err
+	}
+	return load(buf)
+}
+
+func load(buf []byte) (*Siegfried, error) {
 	ls := persist.NewLoadSaver(buf)
 	return &Siegfried{
 		C:  ls.LoadTime(),
