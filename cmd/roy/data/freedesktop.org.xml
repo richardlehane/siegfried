@@ -10684,7 +10684,7 @@
     <glob pattern="*.woff"/>
     <alias type="application/font-woff"/>
   </mime-type>
-  <mime-type type="font/woff">
+  <mime-type type="font/woff2">
     <comment>WOFF2 font</comment>
     <comment xml:lang="ast">Fonte WOFF2</comment>
     <comment xml:lang="ca">lletra WOFF2</comment>

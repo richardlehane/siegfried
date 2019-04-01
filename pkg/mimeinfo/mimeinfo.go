@@ -53,6 +53,9 @@ func newMIMEInfo(path string) (identifier.Parseable, error) {
 	}
 	index := make(map[string]int)
 	for i, v := range mi.MIMETypes {
+		if _, ok := index[v.MIME]; ok {
+			return nil, errors.New("Can't parse mimeinfo file, duplicated ID: " + v.MIME)
+		}
 		index[v.MIME] = i
 	}
 	for i, v := range mi.MIMETypes {

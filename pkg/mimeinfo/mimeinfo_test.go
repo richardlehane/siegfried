@@ -25,10 +25,15 @@ import (
 
 func TestNew(t *testing.T) {
 	config.SetHome(filepath.Join("..", "..", "cmd", "roy", "data"))
-	config.SetMIMEInfo("tika-mimetypes.xml")()
+	config.SetMIMEInfo("freedesktop.org.xml")()
 	mi, err := newMIMEInfo(config.MIMEInfo())
 	if err != nil {
-		t.Error(err)
+		t.Fatal(err)
+	}
+	config.SetMIMEInfo("tika-mimetypes.xml")()
+	mi, err = newMIMEInfo(config.MIMEInfo())
+	if err != nil {
+		t.Fatal(err)
 	}
 	sigs, ids, err := mi.Signatures()
 	if err != nil {
