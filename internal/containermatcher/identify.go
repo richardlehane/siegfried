@@ -74,7 +74,7 @@ func (m Matcher) ranges() [][3]int {
 func findID(id int, rng [][3]int) (int, int) {
 	var idx int
 	for idx = range rng {
-		if rng[idx][0] >= id {
+		if rng[idx][0] > id {
 			if idx > 0 {
 				idx--
 			}
