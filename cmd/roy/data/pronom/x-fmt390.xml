@@ -75,6 +75,11 @@
         <Signature>jpg</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2262</ExternalSignatureID>
+        <Signature>jpeg</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
       <InternalSignature>
         <SignatureID>147</SignatureID>
         <SignatureName>EXIF Compressed Image 2.1 (big-endian)</SignatureName>

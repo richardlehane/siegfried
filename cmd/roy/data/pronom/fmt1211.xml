@@ -47,7 +47,7 @@
       <InternalSignature>
         <SignatureID>1589</SignatureID>
         <SignatureName>Wavefront Material Template Library</SignatureName>
-        <SignatureNote>BOF, offset 0-1024, 'newmtl' &lt;name&gt; {0-32} (Ka|Kd|Ks) &lt;space&gt;</SignatureNote>
+        <SignatureNote>BOF, offset 0-1024, 'newmtl' &lt;name&gt; {0-80} (Ka|Kd|Ks) &lt;space&gt;</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1860</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -59,7 +59,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>6E65776D746C{0-32}(4B61|4B64|4B73)20</ByteSequenceValue>
+          <ByteSequenceValue>6E65776D746C{0-80}(4B61|4B64|4B73)20</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

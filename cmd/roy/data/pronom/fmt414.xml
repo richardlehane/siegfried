@@ -25,7 +25,7 @@
       <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
       <ProvenanceSourceDate>06 Nov 2012</ProvenanceSourceDate>
       <ProvenanceDescription>Specification available at http://www.music.mcgill.ca/~ich/classes/synth/AudioIFF1.2.1/AudioIFF1.2.1.html</ProvenanceDescription>
-      <LastUpdatedDate>06 Nov 2012</LastUpdatedDate>
+      <LastUpdatedDate>18 Feb 2019</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -68,6 +68,13 @@
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>221</RelatedFormatID>
         <RelatedFormatName>Interchange File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>687</RelatedFormatID>
+        <RelatedFormatName>MPEG 1/2 Audio Layer 3</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

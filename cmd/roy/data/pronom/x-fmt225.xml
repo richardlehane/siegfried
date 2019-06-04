@@ -26,7 +26,7 @@
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <LastUpdatedDate>18 Feb 2019</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -37,6 +37,11 @@
         <Identifier>x-fmt/225</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2284</ExternalSignatureID>
+        <Signature>mid</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

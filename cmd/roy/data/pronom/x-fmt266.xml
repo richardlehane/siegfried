@@ -86,6 +86,13 @@
         <RelatedFormatName>RData</RelatedFormatName>
         <RelatedFormatVersion>ASCII</RelatedFormatVersion>
       </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Can contain</RelationshipType>
+        <RelatedFormatID>2029</RelatedFormatID>
+        <RelatedFormatName>Gnumeric</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

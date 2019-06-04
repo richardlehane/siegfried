@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2044</FormatID>
+      <FormatName>DIGIDOC-XML</FormatName>
+      <FormatVersion>1.1</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Mark-up)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>DigiDoc is a digital signature format specific to Estonia. The format is based on the ETSI TS 101 903 Standard ‘XML Advanced Electronic Signatures (XAdES)’. DigiDoc corresponds to the XAdES profile ‘XAdES-X-L’. A DigiDoc container includes source files (the files that were signed) as well as signatures that are related to the signed file(s). Also every signature contains the certificate, validity confirmation and the validity confirmation service certificate. https://www.id.ee/?id=35780</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>239</ProvenanceSourceID>
+      <ProvenanceName>The National Archives of Estonia / The National Archives of Estonia</ProvenanceName>
+      <ProvenanceSourceDate>18 Feb 2019</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>18 Feb 2019</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1231</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2287</ExternalSignatureID>
+        <Signature>ddoc</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1610</SignatureID>
+        <SignatureName>DigiDoc 1.1</SignatureName>
+        <SignatureNote>XML Header + SignedDoc element attributes - XML Schema https://www.id.ee/public/DigiDoc_1.1.xsd</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1882</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>3</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C3F786D6C2076657273696F6E3D(22|27)312E30(22|27)20656E636F64696E673D(22|27)5554462D38(22|27)3F3E{0-2}3C5369676E6564446F6320666F726D61743D(22|27)44494749444F432D584D4C(22|27)2076657273696F6E3D(22|27)312E31(22|27)3E</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>638</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

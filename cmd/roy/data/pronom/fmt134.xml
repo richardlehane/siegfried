@@ -303,6 +303,12 @@
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1192</RelatedFormatID>
+        <RelatedFormatName>Audio Interchange File Format</RelatedFormatName>
+        <RelatedFormatVersion>1.2</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1986</RelatedFormatID>
         <RelatedFormatName>Nullsoft Streaming Video</RelatedFormatName>
         <RelatedFormatVersion>

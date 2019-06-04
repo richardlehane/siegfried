@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2029</FormatID>
+      <FormatName>Gnumeric</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Spreadsheet</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Gnumeric is an open source spreadsheet application. The native format is an XML-based format, that is typically compressed within a GZIP container. It may be desirable to distinguish between different versions of Gnumeric spreadsheet documents. Please contact the PRONOM team if this is the case.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>238</ProvenanceSourceID>
+      <ProvenanceName>SLUB Dresden / Sächsische Landesbibliothek – Staats- und Universitätsbibliothek Dresden</ProvenanceName>
+      <ProvenanceSourceDate>11 Feb 2019</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>11 Feb 2019</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/x-gnumeric</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1219</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2261</ExternalSignatureID>
+        <Signature>gnumeric</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1596</SignatureID>
+        <SignatureName>Gnumeric variant 1</SignatureName>
+        <SignatureNote>&lt;?xmlversion="1.0"{2-32}&lt;gnm:Workbook xmlns:gnm="http://www.gnumeric.org</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1867</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C3F786D6C2076657273696F6E3D22312E30{2-32}3C676E6D3A576F726B626F6F6B20786D6C6E733A676E6D3D22687474703A2F2F7777772E676E756D657269632E6F7267</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1597</SignatureID>
+        <SignatureName>Gnumeric variant 2</SignatureName>
+        <SignatureNote>&lt;?xmlversion="1.0"{2-32}&lt;gmr:Workbook xmlns:gmr="http://www.gnome.org/gnumeric/</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1866</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C3F786D6C2076657273696F6E3D22312E30{2-32}3C676D723A576F726B626F6F6B20786D6C6E733A676D723D22687474703A2F2F7777772E676E6F6D652E6F72672F676E756D657269632F</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Can be contained by</RelationshipType>
+        <RelatedFormatID>386</RelatedFormatID>
+        <RelatedFormatName>GZIP Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>638</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subtype of</RelationshipType>
+        <RelatedFormatID>638</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

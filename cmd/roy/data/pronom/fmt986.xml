@@ -72,7 +72,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>3C783A786D706D65746120786D6C6E733A783D(22|25)61646F62653A6E733A6D6574612F(22|25)</ByteSequenceValue>
+          <ByteSequenceValue>3C783A786D706D65746120786D6C6E733A783D(22|27)61646F62653A6E733A6D6574612F(22|25)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

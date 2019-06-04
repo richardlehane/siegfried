@@ -43,6 +43,11 @@
         <Signature>jpg</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2264</ExternalSignatureID>
+        <Signature>jpeg</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
       <InternalSignature>
         <SignatureID>146</SignatureID>
         <SignatureName>EXIF Compressed Image 2.0 (big-endian)</SignatureName>

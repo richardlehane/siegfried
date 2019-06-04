@@ -1,6 +1,214 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="release-note.xsl"?>
 <release_notes>
+
+<release_note>
+    <release_date>9th May 2019</release_date>
+    <signature_filename>DROID_SignatureFile_V95.xml</signature_filename>
+    <release_outline name="New Records">
+	  <format>
+	   <puid type="fmt">1218</puid>
+	   <name>SubRip Subtitle File</name>
+	   <summary>Extension-only entry added. Submitted by National Library of New Zealand.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1219</puid>
+	   <name>Gnumeric</name>
+	   <summary>Full entry added. Submitted by Saxon State- and University Library Dresden (SLUB).</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1220</puid>
+	   <name>WordPerfect for Macintosh Document 2.x</name>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1221</puid>
+	   <name>WordPerfect for Macintosh Document 3.x</name>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1222</puid>
+	   <name>WordPerfect for Macintosh Document 3.5-4.x</name>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1223</puid>
+	   <name>PaperPort MAX 2</name>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1224</puid>
+	   <name>PaperPort MAX 3-4</name>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1225</puid>
+	   <name>PaperPort MAX 5</name>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1226</puid>
+	   <name>Sparky 2</name>
+	   <summary>Full entry added. Submitted by University of Illinois.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1227</puid>
+	   <name>NMRView</name>
+	   <summary>Full entry added. Submitted by University of Illinois.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1228</puid>
+	   <name>NMRPipe</name>
+	   <summary>Full entry added. Submitted by University of Illinois.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1229</puid>
+	   <name>Sibelius Sound Set Definition</name>
+	   <summary>Extension-only entry added. Submitted by National Library of New Zealand.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1230</puid>
+	   <name>SK-XML 1.0</name>
+	   <summary>Full entry added. Submitted by The National Archives of Estonia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1231</puid>
+	   <name>DIGIDOC-XML 1.1</name>
+	   <summary>Full entry added. Submitted by The National Archives of Estonia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1232</puid>
+	   <name>DIGIDOC-XML 1.2</name>
+	   <summary>Full entry added. Submitted by The National Archives of Estonia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1233</puid>
+	   <name>DIGIDOC-XML 1.3</name>
+	   <summary>Full entry added. Submitted by The National Archives of Estonia.</summary>
+	  </format>
+	 </release_outline>
+
+	 <release_outline name="Updated Records">
+	  <format>
+	   <puid type="fmt">414</puid>
+	   <name>Audio Interchange File Format 1.2</name>
+	   <summary>Given priority over MPEG 1/2 Audio Layer 3 fmt/134 due to rare clash condition. Requested by National Library of New Zealand.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">645</puid>
+	   <name>Exchangeable Image File Format (Compressed) 2.2.1</name>
+	   <summary>Added .jpeg as extension. Requested by National Library of New Zealand.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">882</puid>
+	   <name>Wordstar 2000 1</name>
+	   <summary>Added a 128-byte max offset. Requested by National Library of New Zealand.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">986</puid>
+	   <name>Extensible Metadata Platform Format</name>
+	   <summary>Corrected part of signature relating to a single quote mark for which the hex encoding had been entered for percentage character instead. Reported by Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1211</puid>
+	   <name>Wavefront Material Template Library</name>
+	   <summary>Slightly extended wildcard offset between 'newmtl' declaration and first 'Ka'/'Kd'/'Ks' properties . Requested by Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">225</puid>
+	   <name>ESRI MapInfo Data File</name>
+	   <summary>Added .mid as extension. Requested by National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">390</puid>
+	   <name>Exchangeable Image File Format (Compressed) 2.1</name>
+	   <summary>Added .jpeg as extension. Requested by National Library of New Zealand.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">391</puid>
+	   <name>Exchangeable Image File Format (Compressed) 2.2</name>
+	   <summary>Added .jpeg as extension. Requested by National Library of New Zealand.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">398</puid>
+	   <name>Exchangeable Image File Format (Compressed) 2.0</name>
+	   <summary>Added .jpeg as extension. Requested by National Library of New Zealand.</summary>
+	  </format>
+	 </release_outline>
+
+ 	 <release_outline name="New Signatures">
+	  <format>
+	   <puid type="fmt">1219</puid>
+	   <name>Gnumeric</name>
+	   <summary>Signature developed with Saxon State- and University Library Dresden (SLUB).</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1220</puid>
+	   <name>WordPerfect for Macintosh Document 2.x</name>
+	   <summary>Signature developed by Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1221</puid>
+	   <name>WordPerfect for Macintosh Document 3.x</name>
+	   <summary>Signature developed by Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1222</puid>
+	   <name>WordPerfect for Macintosh Document 3.5-4.x</name>
+	   <summary>Signature developed by Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1223</puid>
+	   <name>PaperPort MAX 2</name>
+	   <summary>Signature developed by Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1224</puid>
+	   <name>PaperPort MAX 3-4</name>
+	   <summary>Signature developed by Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1225</puid>
+	   <name>PaperPort MAX 5</name>
+	   <summary>Signature developed by Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1226</puid>
+	   <name>Sparky 2</name>
+	   <summary>Signature developed with University of Illinois.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1227</puid>
+	   <name>NMRView</name>
+	   <summary>Signature developed with University of Illinois.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1228</puid>
+	   <name>NMRPipe</name>
+	   <summary>Signature developed with University of Illinois.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1230</puid>
+	   <name>SK-XML 1.0</name>
+	   <summary>Signature submitted by The National Archives of Estonia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1231</puid>
+	   <name>DIGIDOC-XML 1.1</name>
+	   <summary>Signature submitted by The National Archives of Estonia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1232</puid>
+	   <name>DIGIDOC-XML 1.2</name>
+	   <summary>Signature submitted by The National Archives of Estonia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1233</puid>
+	   <name>DIGIDOC-XML 1.3</name>
+	   <summary>Signature submitted by The National Archives of Estonia.</summary>
+	  </format>
+	 </release_outline>
+    </release_note>
 
 <release_note>
     <release_date>17th September 2018</release_date>
@@ -134,37 +342,37 @@
 	  <format>
 	   <puid type="fmt">1157</puid>
 	   <name>Folio Infobase File 2</name>
-	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1158</puid>
 	   <name>Folio Infobase File 3</name>
-	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1159</puid>
 	   <name>Folio Infobase File 4</name>
-	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1160</puid>
 	   <name>Folio Shadow File 3</name>
-	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1161</puid>
 	   <name>Folio Shadow File 4</name>
-	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1162</puid>
 	   <name>Folio Flat File</name>
-	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1163</puid>
 	   <name>Folio Definition File</name>
-	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1164</puid>
@@ -179,7 +387,7 @@
 	  <format>
 	   <puid type="fmt">1166</puid>
 	   <name>Niton Data Transfer</name>
-	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1167</puid>
@@ -399,12 +607,12 @@
 	  <format>
 	   <puid type="fmt">1210</puid>
 	   <name>Wavefront OBJ File</name>
-	   <summary>Full entry added. Joint submission by LDS Church and the Archaeology Data Service.</summary>
+	   <summary>Full entry added. Joint submission by Church of Jesus Christ of Latter-day Saints and the Archaeology Data Service.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1211</puid>
 	   <name>Wavefront Material Template Library</name>
-	   <summary>Full entry added. Joint submission by LDS Church and the Archaeology Data Service.</summary>
+	   <summary>Full entry added. Joint submission by Church of Jesus Christ of Latter-day Saints and the Archaeology Data Service.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1212</puid>
@@ -547,7 +755,7 @@
 	  <format>
 	   <puid type="fmt">986</puid>
 	   <name>Extensible Metadata Platform Format</name>
-	   <summary>Minor adjustment to signature allowing single or double quotes for tag attributes. Requested by LDS Church.</summary>
+	   <summary>Minor adjustment to signature allowing single or double quotes for tag attributes. Requested by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1062</puid>
@@ -582,12 +790,12 @@
 	  <format>
 	   <puid type="x-fmt">386</puid>
 	   <name>MPEG-2 Program Stream</name>
-	   <summary>Added .mod extension and explanatory note to the format description. Submitted by LDS Church.</summary>
+	   <summary>Added .mod extension and explanatory note to the format description. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="x-fmt">453</puid>
 	   <name>TrueType Font</name>
-	   <summary>Amended Media Type from incorrect application/octet-stream to font/tff. Added format classifiaction 'Font'.</summary>
+	   <summary>Amended Media Type from incorrect application/octet-stream to font/tff. Added format classification 'Font'.</summary>
 	  </format>
 	  <format>
 	   <puid type="x-fmt">455</puid>
@@ -725,37 +933,37 @@
 	  <format>
 	   <puid type="fmt">1157</puid>
 	   <name>Folio Infobase File 2</name>
-	   <summary>Signature submitted by LDS Church.</summary>
+	   <summary>Signature submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1158</puid>
 	   <name>Folio Infobase File 3</name>
-	   <summary>Signature submitted by LDS Church.</summary>
+	   <summary>Signature submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1159</puid>
 	   <name>Folio Infobase File 4</name>
-	   <summary>Signature submitted by LDS Church.</summary>
+	   <summary>Signature submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1160</puid>
 	   <name>Folio Shadow File 3</name>
-	   <summary>Signature submitted by LDS Church.</summary>
+	   <summary>Signature submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1161</puid>
 	   <name>Folio Shadow File 4</name>
-	   <summary>Signature submitted by LDS Church.</summary>
+	   <summary>Signature submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1162</puid>
 	   <name>Folio Flat File</name>
-	   <summary>Signature submitted by LDS Church.</summary>
+	   <summary>Signature submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1163</puid>
 	   <name>Folio Definition File</name>
-	   <summary>Signature submitted by LDS Church.</summary>
+	   <summary>Signature submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1164</puid>
@@ -765,7 +973,7 @@
 	  <format>
 	   <puid type="fmt">1166</puid>
 	   <name>Niton Data Transfer</name>
-	   <summary>Signature submitted by LDS Church.</summary>
+	   <summary>Signature submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1167</puid>
@@ -985,12 +1193,12 @@
 	  <format>
 	   <puid type="fmt">1210</puid>
 	   <name>Wavefront OBJ File</name>
-	   <summary>Signature developed through a joint submission by LDS Church and the Archaeology Data Service.</summary>
+	   <summary>Signature developed through a joint submission by Church of Jesus Christ of Latter-day Saints and the Archaeology Data Service.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1211</puid>
 	   <name>Wavefront Material Template Library</name>
-	   <summary>Signature developed through a joint submission by LDS Church and the Archaeology Data Service.</summary>
+	   <summary>Signature developed through a joint submission by Church of Jesus Christ of Latter-day Saints and the Archaeology Data Service.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1212</puid>
@@ -1053,7 +1261,7 @@
 	  <format>
 	   <puid type="fmt">1104</puid>
 	   <name>Seattle FilmWorks SFW Image Format</name>
-	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1105</puid>
@@ -1239,7 +1447,7 @@
 	  <format>
 	   <puid type="fmt">1104</puid>
 	   <name>Seattle FilmWorks SFW Image Format</name>
-	   <summary>Signature submitted by LDS Church.</summary>
+	   <summary>Signature submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1105</puid>
@@ -1680,7 +1888,7 @@
 	  <format>
 	   <puid type="fmt">1051</puid>
 	   <name>Windows Journal Format</name>
-	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1052</puid>
@@ -1695,12 +1903,12 @@
 	  <format>
 	   <puid type="fmt">1054</puid>
 	   <name>AVCHD Clip Information File</name>
-	   <summary>Full entry added. Submitted by National Library of Scotland. Additionally requested by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by National Library of Scotland. Additionally requested by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1055</puid>
 	   <name>M2TS</name>
-	   <summary>Full entry added. Submitted by National Library of Scotland. Additionally requested by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by National Library of Scotland. Additionally requested by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1056</puid>
@@ -1720,7 +1928,7 @@
 	  <format>
 	   <puid type="fmt">1059</puid>
 	   <name>FileMaker Pro Database 2</name>
-	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1060</puid>
@@ -1770,7 +1978,7 @@
 	  <format>
 	   <puid type="fmt">1069</puid>
 	   <name>Cue Sheet</name>
-	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1070</puid>
@@ -1795,22 +2003,22 @@
 	  <format>
 	   <puid type="fmt">1074</puid>
 	   <name>AVCHD Playlist File</name>
-	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1075</puid>
 	   <name>AVCHD Movie Object File</name>
-	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1076</puid>
 	   <name>AVCHD Index File</name>
-	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1077</puid>
 	   <name>AVCHD Thumbnail Index File</name>
-	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1078</puid>
@@ -2016,7 +2224,7 @@
 	  <format>
 	   <puid type="fmt">1051</puid>
 	   <name>Windows Journal Format</name>
-	   <summary>Signature submitted by LDS Church.</summary>
+	   <summary>Signature submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1052</puid>
@@ -2056,7 +2264,7 @@
 	  <format>
 	   <puid type="fmt">1059</puid>
 	   <name>FileMaker Pro Database 2</name>
-	   <summary>Signature developed with LDS Church.</summary>
+	   <summary>Signature developed with Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1060</puid>
@@ -2106,7 +2314,7 @@
 	  <format>
 	   <puid type="fmt">1069</puid>
 	   <name>Cue Sheet</name>
-	   <summary>Signature developed with LDS Church.</summary>
+	   <summary>Signature developed with Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1070</puid>
@@ -2131,22 +2339,22 @@
 	  <format>
 	   <puid type="fmt">1074</puid>
 	   <name>AVCHD Playlist File</name>
-	   <summary>Signature developed with LDS Church.</summary>
+	   <summary>Signature developed with Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1075</puid>
 	   <name>AVCHD Movie Object File</name>
-	   <summary>Signature developed with LDS Church.</summary>
+	   <summary>Signature developed with Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1076</puid>
 	   <name>AVCHD Index File</name>
-	   <summary>Signature developed with LDS Church.</summary>
+	   <summary>Signature developed with Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1077</puid>
 	   <name>AVCHD Thumbnail Index File</name>
-	   <summary>Signature developed with LDS Church.</summary>
+	   <summary>Signature developed with Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1078</puid>
@@ -2782,12 +2990,12 @@
       <format>      
 	   <puid type="fmt">986</puid>
 	   <name>Extensible Metadata Platform Format</name>
-	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format> 
       <format>      
 	   <puid type="fmt">987</puid>
 	   <name>Microsoft OneNote Package File</name>
-	   <summary>Full entry added. Requested by LDS Church.</summary>
+	   <summary>Full entry added. Requested by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format> 
       <format>      
 	   <puid type="fmt">988</puid>
@@ -3083,7 +3291,7 @@
 	  <format>
 	   <puid type="x-fmt">330</puid>
 	   <name>JustWrite Text Document</name>
-	   <summary>Added binary signature submitted by LDS Church. Added description. Added extension signature jwt. </summary>
+	   <summary>Added binary signature submitted by Church of Jesus Christ of Latter-day Saints. Added description. Added extension signature jwt. </summary>
 	  </format>     
 	  <format>
 	   <puid type="x-fmt">430</puid>
@@ -3156,17 +3364,17 @@
        <format>      
 	   <puid type="fmt">986</puid>
 	   <name>Extensible Metadata Platform Format</name>
-	   <summary>Binary signature created with assistance by research from LDS Church</summary>
+	   <summary>Binary signature created with assistance by research from Church of Jesus Christ of Latter-day Saints</summary>
 	  </format>   
        <format>
 	   <puid type="fmt">987</puid>
 	   <name>Microsoft OneNote Package File</name>
-	   <summary>Binary signature created with assistance by research from LDS Church.</summary>
+	   <summary>Binary signature created with assistance by research from Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format> 
        <format>
 	   <puid type="x-fmt">330</puid>
 	   <name>JustWrite Text Document</name>
-	   <summary>Added binary signature submitted by LDS Church. Added extension signature jwt.</summary>
+	   <summary>Added binary signature submitted by Church of Jesus Christ of Latter-day Saints. Added extension signature jwt.</summary>
 	  </format>  
        <format>      
 	   <puid type="fmt">988</puid>
@@ -3941,7 +4149,7 @@
 	  <format>
 	   <puid type="fmt">950</puid>
 	   <name>MIME Email 1.0</name>
-	   <summary>Full entry added in collaboration between LDS Church and National Library of New Zealand.</summary>
+	   <summary>Full entry added in collaboration between Church of Jesus Christ of Latter-day Saints and National Library of New Zealand.</summary>
 	  </format>  
 	 </release_outline>
 
@@ -4292,7 +4500,7 @@
 	  <format>
 	   <puid type="fmt">950</puid>
 	   <name>MIME Email 1.0</name>
-	   <summary>Signature developed in collaboration between LDS Church and National Library of New Zealand.</summary>
+	   <summary>Signature developed in collaboration between Church of Jesus Christ of Latter-day Saints and National Library of New Zealand.</summary>
 	  </format>
 	  <format>
 	   <puid type="x-fmt">214</puid>
@@ -4314,12 +4522,12 @@
 	  <format>
 	   <puid type="fmt">877</puid>
 	   <name>Corel Presentation 7-8-9</name>
-	   <summary>Full entry added. Requested by LDS Church.</summary>
+	   <summary>Full entry added. Requested by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">878</puid>
 	   <name>Corel Presentation 3</name>
-	   <summary>Full entry added. Requested by LDS Church.</summary>
+	   <summary>Full entry added. Requested by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">879</puid>
@@ -4334,7 +4542,7 @@
 	  <format>
 	   <puid type="fmt">881</puid>
 	   <name>Microsoft Document Imaging File Format</name>
-	   <summary>Full entry added. Requested by LDS Church.</summary>
+	   <summary>Full entry added. Requested by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">882</puid>
@@ -4434,7 +4642,7 @@
  	  <format>
       	   <puid type="fmt">901</puid>
 	   <name>Microsoft Works Spreadsheet 6-9</name>
-	   <summary>Full entry added. Requested by LDS church.</summary>
+	   <summary>Full entry added. Requested by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
  	  <format>
       	   <puid type="fmt">902</puid>
@@ -4507,7 +4715,7 @@
 	  <format>
 	   <puid type="x-fmt">386</puid>
 	   <name>MPEG-2 Program Stream</name>
-	   <summary>Improved signature following research prompted by LDS Church.</summary>
+	   <summary>Improved signature following research prompted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="x-fmt">387</puid>
@@ -4525,17 +4733,17 @@
 	  <format>
 	   <puid type="fmt">877</puid>
 	   <name>Corel Presentation 7-8-9</name>
-	   <summary>Container signature developed through PRONOM research. Requested by LDS Church.</summary>
+	   <summary>Container signature developed through PRONOM research. Requested by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">878</puid>
 	   <name>Corel Presentation 3</name>
-	   <summary>Signature developed through PRONOM research. Requested by LDS Church.</summary>
+	   <summary>Signature developed through PRONOM research. Requested by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">881</puid>
 	   <name>Microsoft Document Imaging File Format</name>
-	   <summary>Signature developed through PRONOM research. Requested by LDS Church.</summary>
+	   <summary>Signature developed through PRONOM research. Requested by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">882</puid>
@@ -4615,7 +4823,7 @@
  	  <format>
       	   <puid type="fmt">901</puid>
 	   <name>Microsoft Works Spreadsheet 6-9</name>
-	   <summary>Container signature developed through PRONOM research. Requested by LDS church.</summary>
+	   <summary>Container signature developed through PRONOM research. Requested by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>    
  	  <format>
       	   <puid type="fmt">902</puid>
@@ -4677,22 +4885,22 @@
 	  <format>
 	   <puid type="fmt">834</puid>
 	   <name>Quattro Pro Spreadsheet for Windows 1/5</name>
-	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">835</puid>
 	   <name>Quattro Pro Spreadsheet for Windows 6</name>
-	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">836</puid>
 	   <name>Quattro Pro Spreadsheet 7-8</name>
-	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">837</puid>
 	   <name>Quattro Pro Spreadsheet 9 onwards</name>
-	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">838</puid>
@@ -4762,7 +4970,7 @@
 	  <format>
 	   <puid type="fmt">851</puid>
 	   <name>Genealogical Data Communication (GEDCOM) Format</name>
-	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">852</puid>
@@ -4777,17 +4985,17 @@
 	  <format>
 	   <puid type="fmt">854</puid>
 	   <name>Personal Ancestral File (PAF) 3</name>
-	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">855</puid>
 	   <name>Personal Ancestral File (PAF) 4</name>
-	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">856</puid>
 	   <name>Personal Ancestral File (PAF) 5</name>
-	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">857</puid>
@@ -5533,22 +5741,22 @@
 	  <format>
 	   <puid type="fmt">834</puid>
 	   <name>Quattro Pro Spreadsheet for Windows 1/5</name>
-	   <summary>Signature developed through PRONOM research based on samples submitted by LDS Church.</summary>
+	   <summary>Signature developed through PRONOM research based on samples submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">835</puid>
 	   <name>Quattro Pro Spreadsheet for Windows 6</name>
-	   <summary>Signature developed through PRONOM research based on samples submitted by LDS Church.</summary>
+	   <summary>Signature developed through PRONOM research based on samples submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">836</puid>
 	   <name>Quattro Pro Spreadsheet 7-8</name>
-	   <summary>Container signature developed through PRONOM research based on samples submitted by LDS Church.</summary>
+	   <summary>Container signature developed through PRONOM research based on samples submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">837</puid>
 	   <name>Quattro Pro Spreadsheet 9 onwards</name>
-	   <summary>Container signature developed through PRONOM research based on samples submitted by LDS Church.</summary>
+	   <summary>Container signature developed through PRONOM research based on samples submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">838</puid>
@@ -5618,7 +5826,7 @@
 	  <format>
 	   <puid type="fmt">851</puid>
 	   <name>Genealogical Data Communication (GEDCOM) Format</name>
-	   <summary>Signature developed through PRONOM research, requested by LDS Church.</summary>
+	   <summary>Signature developed through PRONOM research, requested by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">852</puid>
@@ -5633,17 +5841,17 @@
 	  <format>
 	   <puid type="fmt">854</puid>
 	   <name>Personal Ancestral File (PAF) 3</name>
-	   <summary>Signature developed through PRONOM research based on samples submitted by LDS Church.</summary>
+	   <summary>Signature developed through PRONOM research based on samples submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">855</puid>
 	   <name>Personal Ancestral File (PAF) 4</name>
-	   <summary>Signature developed through PRONOM research based on samples submitted by LDS Church.</summary>
+	   <summary>Signature developed through PRONOM research based on samples submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">856</puid>
 	   <name>Personal Ancestral File (PAF) 5</name>
-	   <summary>Signature developed through PRONOM research based on samples submitted by LDS Church.</summary>
+	   <summary>Signature developed through PRONOM research based on samples submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">857</puid>
@@ -6701,7 +6909,7 @@
 	  <format>
 	   <puid type="fmt">730</puid>
 	   <name>Digital Negative Format (DNG) 1.4</name>
-	   <summary>Full entry added. Submitted by LDS Church.</summary>
+	   <summary>Full entry added. Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">731</puid>
@@ -6882,7 +7090,7 @@
 	  <format>
 	   <puid type="fmt">730</puid>
 	   <name>Digital Negative Format (DNG) 1.4</name>
-	   <summary>Signature developed from format samples submitted by LDS Church.</summary>
+	   <summary>Signature developed from format samples submitted by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">731</puid>
@@ -7722,12 +7930,12 @@
 	  <format>
            <puid type="fmt">1</puid>
            <name>Broadcast WAVE 0</name>
-           <summary>Added signature variant for files that conform to WAVEFORMATEXTENSIBLE and gave priority over Waveform Audio (WAVEFORMATEXTENSIBLE). Submitted by LDS Church.</summary>
+           <summary>Added signature variant for files that conform to WAVEFORMATEXTENSIBLE and gave priority over Waveform Audio (WAVEFORMATEXTENSIBLE). Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
       	  </format>
 	  <format>
            <puid type="fmt">2</puid>
            <name>Broadcast WAVE 1</name>
-           <summary>Added signature variant for files that conform to WAVEFORMATEXTENSIBLE and gave priority over Waveform Audio (WAVEFORMATEXTENSIBLE). Submitted by LDS Church.</summary>
+           <summary>Added signature variant for files that conform to WAVEFORMATEXTENSIBLE and gave priority over Waveform Audio (WAVEFORMATEXTENSIBLE). Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
       	  </format>
 	  <format>
            <puid type="fmt">40</puid>
@@ -7762,7 +7970,7 @@
 	  <format>
            <puid type="fmt">527</puid>
            <name>Broadcast WAVE 2</name>
-           <summary>Added signature variant for files that conform to WAVEFORMATEXTENSIBLE and gave priority over Waveform Audio (WAVEFORMATEXTENSIBLE). Submitted by LDS Church.</summary>
+           <summary>Added signature variant for files that conform to WAVEFORMATEXTENSIBLE and gave priority over Waveform Audio (WAVEFORMATEXTENSIBLE). Submitted by Church of Jesus Christ of Latter-day Saints.</summary>
       	  </format>
 	  <format>
            <puid type="fmt">648</puid>
@@ -8292,7 +8500,7 @@
 	   <format>
 	   <puid type="fmt">640</puid>
 	   <name>MPEG-2 Elementary Stream</name>
-	   <summary>Outline Entry Added. Submitted by LDS Church</summary>
+	   <summary>Outline Entry Added. Submitted by Church of Jesus Christ of Latter-day Saints</summary>
 	   </format>
 	   <format>
 	   <puid type="fmt">641</puid>
@@ -8471,7 +8679,7 @@
 	   <format>
 	   <puid type="fmt">640</puid>
 	   <name>MPEG-2 Elementary Stream</name>
-	   <summary>Signature developed in collaboration with LDS Church.</summary>
+	   <summary>Signature developed in collaboration with Church of Jesus Christ of Latter-day Saints.</summary>
 	   </format>
 	   <format>
 	   <puid type="fmt">641</puid>
@@ -8694,7 +8902,7 @@
 	   <format>
 	   <puid type="x-fmt">386</puid>
 	   <name>MPEG-2 Video Format</name>
-	   <summary>Binary signature edited, requested on behalf of LDS Church.</summary>
+	   <summary>Binary signature edited, requested on behalf of Church of Jesus Christ of Latter-day Saints.</summary>
 	   </format>
 	</release_outline>
 	<release_outline name="New Signatures">
@@ -10177,12 +10385,12 @@
 		<format>
 		<puid type="fmt">1</puid>
 		<name>Broadcast WAVE 0</name>
-		<summary>Added further signature variants in collaboration with LDS Church.</summary>
+		<summary>Added further signature variants in collaboration with Church of Jesus Christ of Latter-day Saints.</summary>
 		</format>
 		<format>
 		<puid type="fmt">2</puid>
 		<name>Broadcast WAVE 1</name>
-		<summary>Added further signature variants in collaboration with LDS Church.</summary>
+		<summary>Added further signature variants in collaboration with Church of Jesus Christ of Latter-day Saints.</summary>
 		</format>
 		<format>
 		<puid type="fmt">473</puid>
