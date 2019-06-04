@@ -356,7 +356,10 @@
     "fmt/1166 (Niton Data Transfer)",
     "fmt/1198 (RData Binary)",
     "fmt/1199 (RData ASCII)",
-    "fmt/1207 (Sony SFK File)"
+    "fmt/1207 (Sony SFK File)",
+    "fmt/1226 (Sparky 2)",
+    "fmt/1227 (NMRView)",
+    "fmt/1228 (NMRPipe)"
   ],
   "email": [
     "x-fmt/430 (Microsoft Outlook Email Message 97-2003)",
@@ -595,7 +598,9 @@
     "fmt/1181 (Bodypaint 3D)",
     "fmt/1185 (Apple Icon Image Format)",
     "fmt/1186 (Dr. Halo Image Palette)",
-    "fmt/1217 (Leonardo Image Format)"
+    "fmt/1217 (Leonardo Image Format)",
+    "fmt/1223 (PaperPort MAX 2)",
+    "fmt/1224 (PaperPort MAX 3-4)"
   ],
   "imageVector": [
     "x-fmt/20 (Adobe Illustrator 1.0 / 1.1)",
@@ -1046,7 +1051,8 @@
     "fmt/836 (Quattro Pro Spreadsheet 7-8)",
     "fmt/837 (Quattro Pro Spreadsheet 9 onwards)",
     "fmt/847 (ClarisWorks Spreadsheet 2-3)",
-    "fmt/901 (Microsoft Works Spreadsheet 6-9)"
+    "fmt/901 (Microsoft Works Spreadsheet 6-9)",
+    "fmt/1219 (Gnumeric)"
   ],
   "textMarkup": [
     "x-fmt/195 (Standard Generalized Markup Language)",
@@ -1101,7 +1107,11 @@
     "fmt/1048 (OGR GFS File)",
     "fmt/1132 (Netscape Bookmark File Format)",
     "fmt/1134 (GPS Exchange Format 1.1)",
-    "fmt/1149 (Markdown)"
+    "fmt/1149 (Markdown)",
+    "fmt/1230 (SK-XML 1.0)",
+    "fmt/1231 (DIGIDOC-XML 1.1)",
+    "fmt/1232 (DIGIDOC-XML 1.2)",
+    "fmt/1233 (DIGIDOC-XML 1.3)"
   ],
   "textStructured": [
     "x-fmt/41 (Data Interchange Format)",
@@ -1192,7 +1202,9 @@
     "fmt/1119 (Jupyter Python Notebook)",
     "fmt/1165 (Praat Script File)",
     "fmt/1202 (Guymager Acquisition Info File)",
-    "fmt/1212 (HP System Software Manager CVA File)"
+    "fmt/1212 (HP System Software Manager CVA File)",
+    "fmt/1218 (SubRip Subtitle File)",
+    "fmt/1229 (Sibelius Sound Set Definition)"
   ],
   "textUnstructured": [
     "x-fmt/14 (Macintosh Text File)",
@@ -1379,6 +1391,10 @@
     "fmt/1045 (Q\u0026A Word Processor Document)",
     "fmt/1051 (Windows Journal Format)",
     "fmt/1083 (Hangul Word Processor Document 3)",
-    "fmt/1084 (Hangul Word Processor Document 5)"
+    "fmt/1084 (Hangul Word Processor Document 5)",
+    "fmt/1220 (WordPerfect for Macintosh Document 2.x)",
+    "fmt/1221 (WordPerfect for Macintosh Document 3.x)",
+    "fmt/1222 (WordPerfect for Macintosh Document 3.5-4.x)",
+    "fmt/1225 (PaperPort MAX 5)"
   ]
 }

@@ -1669,6 +1669,22 @@
     "fmt/1214 (Cakewalk WRK Project)",
     "fmt/1215 (ERDAS Hierarchical File Architecture Format)",
     "fmt/1216 (Lotus Freelance Show)",
-    "fmt/1217 (Leonardo Image Format)"
+    "fmt/1217 (Leonardo Image Format)",
+    "fmt/1218 (SubRip Subtitle File)",
+    "fmt/1219 (Gnumeric)",
+    "fmt/1220 (WordPerfect for Macintosh Document 2.x)",
+    "fmt/1221 (WordPerfect for Macintosh Document 3.x)",
+    "fmt/1222 (WordPerfect for Macintosh Document 3.5-4.x)",
+    "fmt/1223 (PaperPort MAX 2)",
+    "fmt/1224 (PaperPort MAX 3-4)",
+    "fmt/1225 (PaperPort MAX 5)",
+    "fmt/1226 (Sparky 2)",
+    "fmt/1227 (NMRView)",
+    "fmt/1228 (NMRPipe)",
+    "fmt/1229 (Sibelius Sound Set Definition)",
+    "fmt/1230 (SK-XML 1.0)",
+    "fmt/1231 (DIGIDOC-XML 1.1)",
+    "fmt/1232 (DIGIDOC-XML 1.2)",
+    "fmt/1233 (DIGIDOC-XML 1.3)"
   ]
 }
