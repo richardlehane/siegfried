@@ -285,7 +285,7 @@ func satisfied(mt core.MatcherType, recs []core.Recorder) (bool, []core.Hint) {
 				if len(h.Pivot) > 0 {
 					hints = append(hints, h)
 				}
-			} else {
+			} else { // if this matcher is satisfied, append a hint with a nil Pivot (which priority knows is satisifed)
 				hints = append(hints, h)
 			}
 		} else if !ok {

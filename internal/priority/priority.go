@@ -347,7 +347,7 @@ func (s *Set) WaitSet(hints ...core.Hint) *WaitSet {
 	}
 	for _, h := range hints {
 		idx, _ := s.Index(h.Exclude)
-		if h.Pivot == nil {
+		if h.Pivot == nil { // if h.Pivot is nil (as opposed to empty slice), it is a signal that that matcher is satisfied
 			ws.wait[idx] = []int{}
 		} else {
 			ws.pivot[idx] = h.Pivot

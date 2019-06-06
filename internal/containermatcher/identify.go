@@ -86,20 +86,19 @@ func findID(id int, rng [][3]int) (int, int) {
 
 func (m Matcher) divideHints(hints []core.Hint) [][]core.Hint {
 	ret := make([][]core.Hint, len(m))
-	for i := range ret {
-		ret[i] = make([]core.Hint, len(hints))
-	}
 	rng := m.ranges()
-	for i, h := range hints {
+	for _, h := range hints {
 		if len(h.Pivot) == 0 {
 			continue
 		}
+		first := make([]bool, len(m))
 		for _, p := range h.Pivot {
 			midx, iidx := findID(p, rng)
-			if ret[midx][i].Pivot == nil {
-				ret[midx][i].Pivot = make([]int, 0, len(h.Pivot))
+			if !first[midx] {
+				first[midx] = true
+				ret[midx] = append(ret[midx], core.Hint{m[midx].startIndexes[iidx], nil}) // is this the right Exclude val??
 			}
-			ret[midx][i].Pivot = append(ret[midx][i].Pivot, p-m[midx].startIndexes[iidx])
+			ret[midx][len(ret[midx])-1].Pivot = append(ret[midx][len(ret[midx])-1].Pivot, p-m[midx].startIndexes[iidx])
 		}
 	}
 	return ret
