@@ -96,7 +96,8 @@ func (m Matcher) divideHints(hints []core.Hint) [][]core.Hint {
 			midx, iidx := findID(p, rng)
 			if !first[midx] {
 				first[midx] = true
-				ret[midx] = append(ret[midx], core.Hint{m[midx].startIndexes[iidx], nil}) // is this the right Exclude val??
+				_, excl := m[midx].priorities.Index(p - m[midx].startIndexes[iidx])
+				ret[midx] = append(ret[midx], core.Hint{excl, nil})
 			}
 			ret[midx][len(ret[midx])-1].Pivot = append(ret[midx][len(ret[midx])-1].Pivot, p-m[midx].startIndexes[iidx])
 		}
