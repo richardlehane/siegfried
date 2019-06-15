@@ -149,7 +149,7 @@ See the [CHANGELOG](CHANGELOG.md) for the full history.
 
 ## Rights
 
-Copyright 2017 Richard Lehane 
+Copyright 2019 Richard Lehane 
 
 Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
 
