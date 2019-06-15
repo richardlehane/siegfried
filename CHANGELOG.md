@@ -1,4 +1,14 @@
 # Change Log
+## v1.7.12 (2019-06-15)
+### Changed
+- update PRONOM to v95
+- update LOC signatures to 2019-05-20
+- update tika-mimetypes signatures to v1.21
+
+### Fixed
+- .docx files with .doc extensions panic due to bug in division of hints in container matcher. Thanks to Jean-Séverin Lair for [reporting and sharing samples](https://github.com/richardlehane/siegfried/issues/126) and to VAIarchief for [additional report with example](https://github.com/richardlehane/siegfried/issues/127).
+- mime-info signatures panic on some files due to duplicate entries in the freedesktop and tika signature files; spotted during an attempt at pair coding with Ross Spencer... thanks Ross and sorry for hogging the laptop! [#125](https://github.com/richardlehane/siegfried/issues/125)
+
 ## v1.7.11 (2019-02-16)
 ### Changed
 - update LOC signatures to 2019-01-06

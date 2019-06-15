@@ -8,7 +8,7 @@
 
 ### Version
 
-1.7.11
+1.7.12
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -31,7 +31,7 @@
     sf -                                       // Scan stream piped to stdin
     sf -name file.ext -                        // Provide filename when scanning stream 
     sf -f myfiles.txt                          // Scan list of files
-    sf -version                                // Display version information
+    sf -v | -version                           // Display version information
     sf -home c:\junk -sig custom.sig file.ext  // Use a custom home directory
     sf -serve hostname:port                    // Server mode
     sf -throttle 10ms DIR                      // Pause for duration (e.g. 1s) between file scans
@@ -94,6 +94,16 @@ Or, for the most recent updates, you can install from this fork:
     makepkg -si
 
 ## Changes
+### v1.7.12 (2019-06-15)
+### Changed
+- update PRONOM to v95
+- update LOC signatures to 2019-05-20
+- update tika-mimetypes signatures to v1.21
+
+### Fixed
+- .docx files with .doc extensions panic due to bug in division of hints in container matcher. Thanks to Jean-Séverin Lair for [reporting and sharing samples](https://github.com/richardlehane/siegfried/issues/126) and to VAIarchief for [additional report with example](https://github.com/richardlehane/siegfried/issues/127).
+- mime-info signatures panic on some files due to duplicate entries in the freedesktop and tika signature files; spotted during an attempt at pair coding with Ross Spencer... thanks Ross and sorry for hogging the laptop! [#125](https://github.com/richardlehane/siegfried/issues/125)
+
 ### v1.7.11 (2019-02-16)
 ### Changed
 - update LOC signatures to 2019-01-06
