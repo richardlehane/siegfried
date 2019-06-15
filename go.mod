@@ -6,6 +6,7 @@ require (
 	github.com/richardlehane/mscfb v1.0.1
 	github.com/richardlehane/webarchive v1.0.0
 	github.com/richardlehane/xmldetect v1.0.0
-	golang.org/x/image v0.0.0-20190209060608-ef4a1470e0dc
-	golang.org/x/sys v0.0.0-20190215142949-d0b11bdaac8a
+	golang.org/x/image v0.0.0-20190523035834-f03afa92d3ff
+	golang.org/x/sys v0.0.0-20190614160838-b47fdc937951
+	golang.org/x/text v0.3.2 // indirect
 )
