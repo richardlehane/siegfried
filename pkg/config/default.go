@@ -1,4 +1,4 @@
-// +build !brew,!archivematica,!appengine
+// +build !brew,!archivematica
 
 // Copyright 2014 Richard Lehane. All rights reserved.
 //
