@@ -25,6 +25,8 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+
+	"github.com/richardlehane/siegfried/pkg/config"
 )
 
 var (
@@ -34,7 +36,7 @@ var (
 
 // Keys returns a list of all the format sets
 func Keys() []string {
-	load(setsDir())
+	load(config.Local("sets"))
 	l := make([]string, 0, len(sets))
 	for k := range sets {
 		l = append(l, k)
@@ -53,7 +55,7 @@ func Sets(items ...string) []string {
 	for _, v := range items {
 		item := strings.TrimSpace(v)
 		if strings.HasPrefix(item, "@") {
-			load(setsDir())
+			load(config.Local("sets"))
 			list, err := getSets(strings.TrimPrefix(item, "@"))
 			if err != nil {
 				log.Fatalf("error interpreting sets: %v", err)
