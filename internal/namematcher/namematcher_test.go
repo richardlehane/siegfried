@@ -88,21 +88,40 @@ func TestIO(t *testing.T) {
 }
 
 var fnames = []string{
+	"README",
+	"README",
+	"",
+	"\\this\\directory\\file.txt",
+	"file.txt",
+	"txt",
+	"c:\\docs\\SONG.MP3",
+	"SONG.MP3",
+	"mp3",
+	"Climate/Existential.pdf",
+	"Existential.pdf",
+	"pdf",
 	"/Volumes/Public/bearbeiten/Dateien/ermitteln Dateityp/Salzburger Nachtstudio.2019-06-19 - Kulturkampf im Klassenzimmer?.mp3",
 	"Salzburger Nachtstudio.2019-06-19 - Kulturkampf im Klassenzimmer?.mp3",
+	"mp3",
 	"http://www.archive.org/about/faq.php?faq_id=243 207.241.229.39",
 	"faq.php",
+	"php",
 	"http://www.archive.org/images/wayback-election2000.gif",
 	"wayback-election2000.gif",
+	"gif",
 	"http://www.example.org/foo.html#bar",
 	"foo.html",
+	"html",
 }
 
 func TestNormalise(t *testing.T) {
-	for i := 0; i < len(fnames); i += 2 {
-		_, fname := normalise(fnames[i])
+	for i := 0; i < len(fnames); i += 3 {
+		fname, ext := normalise(fnames[i])
 		if fname != fnames[i+1] {
-			t.Errorf("normalise func\ninput: %s\nexpect: %s\ngot: %s", fnames[i], fnames[i+1], fname)
+			t.Errorf("normalise filename error\ninput: %s\nexpect: %s\ngot: %s", fnames[i], fnames[i+1], fname)
+		}
+		if ext != fnames[i+2] {
+			t.Errorf("normalise ext error\ninput: %s\nexpect: %s\ngot: %s", fnames[i], fnames[i+2], ext)
 		}
 	}
 }
