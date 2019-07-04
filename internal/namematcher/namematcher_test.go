@@ -86,3 +86,23 @@ func TestIO(t *testing.T) {
 		t.Errorf("Load string matcher: expecting first matcher (%v), to equal second matcher (%v)", str, str2)
 	}
 }
+
+var fnames = []string{
+	"/Volumes/Public/bearbeiten/Dateien/ermitteln Dateityp/Salzburger Nachtstudio.2019-06-19 - Kulturkampf im Klassenzimmer?.mp3",
+	"Salzburger Nachtstudio.2019-06-19 - Kulturkampf im Klassenzimmer?.mp3",
+	"http://www.archive.org/about/faq.php?faq_id=243 207.241.229.39",
+	"faq.php",
+	"http://www.archive.org/images/wayback-election2000.gif",
+	"wayback-election2000.gif",
+	"http://www.example.org/foo.html#bar",
+	"foo.html",
+}
+
+func TestNormalise(t *testing.T) {
+	for i := 0; i < len(fnames); i += 2 {
+		_, fname := normalise(fnames[i])
+		if fname != fnames[i+1] {
+			t.Errorf("normalise func\ninput: %s\nexpect: %s\ngot: %s", fnames[i], fnames[i+1], fname)
+		}
+	}
+}
