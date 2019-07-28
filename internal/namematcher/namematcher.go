@@ -18,6 +18,7 @@ package namematcher
 
 import (
 	"fmt"
+	"net/url"
 	"path/filepath"
 	"sort"
 	"strings"
@@ -26,6 +27,7 @@ import (
 	"github.com/richardlehane/siegfried/internal/priority"
 	"github.com/richardlehane/siegfried/internal/siegreader"
 	"github.com/richardlehane/siegfried/pkg/core"
+	"github.com/richardlehane/siegfried/pkg/reader"
 )
 
 type Matcher struct {
@@ -144,12 +146,17 @@ func (m *Matcher) add(s string, fmt int) {
 	m.globIdx = append(m.globIdx, []int{fmt})
 }
 
+// return the base name (e.g. README.txt) and extension (e.g. txt)
+// s can be a URL (i.e. if source is from a WARC or ARC), hence use of url package
 func normalise(s string) (string, string) {
-	base := filepath.Base(s)
-	idx := strings.LastIndex(base, "?") // to get ext from URL paths, get rid of params
-	if idx > -1 && (strings.Index(base[:idx], ".") > -1 || strings.Index(base[idx:], ".") == -1) {
-		base = base[:idx]
+	u, err := url.Parse(s)
+	if err == nil && u.Scheme != "" {
+		switch u.Scheme {
+		case "http", "https", "ftp", "mailto", "file", "data", "irc":
+			s = u.Path
+		}
 	}
+	base := reader.Base(s)
 	return base, strings.ToLower(strings.TrimPrefix(filepath.Ext(base), "."))
 }
 

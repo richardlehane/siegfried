@@ -38,7 +38,8 @@ func isSep(c uint8) bool {
 }
 
 // like filepath.Base but simplified + works with unix or win separators
-func base(path string) string {
+func Base(path string) string {
+	// remove trailing
 	for len(path) > 0 && isSep(path[len(path)-1]) {
 		path = path[0 : len(path)-1]
 	}
@@ -49,7 +50,7 @@ func base(path string) string {
 	if i >= 0 {
 		return path[i+1:]
 	}
-	return ""
+	return path
 }
 
 func keygen(join int, fi File) string {
@@ -57,13 +58,13 @@ func keygen(join int, fi File) string {
 	default:
 		return fi.Path
 	case Filename:
-		return base(fi.Path)
+		return Base(fi.Path)
 	case FilenameSize:
-		return base(fi.Path) + strconv.FormatInt(fi.Size, 10)
+		return Base(fi.Path) + strconv.FormatInt(fi.Size, 10)
 	case FilenameMod:
-		return base(fi.Path) + fi.Mod
+		return Base(fi.Path) + fi.Mod
 	case FilenameHash:
-		return base(fi.Path) + string(fi.Hash)
+		return Base(fi.Path) + string(fi.Hash)
 	case Hash:
 		return string(fi.Hash)
 	}
