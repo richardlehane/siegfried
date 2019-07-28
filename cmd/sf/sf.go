@@ -446,27 +446,20 @@ func main() {
 				break
 			}
 			scanner := bufio.NewScanner(f)
-			var info os.FileInfo
 			for scanner.Scan() {
-				info, err = os.Stat(scanner.Text())
-				if err != nil {
-					info, err = retryStat(scanner.Text(), err)
-				}
-				if err != nil || !info.Mode().IsRegular() || info.Mode()&256 == 0 {
-					if err == nil {
-						err = ModeError(info.Mode())
-					}
-					printFile(ctxts,
-						getCtx(scanner.Text(), "", "", 0),
-						fmt.Errorf("failed to identify %s: %v", scanner.Text(), err))
-					err = nil // don't log.Fatal this error, report it in the results
-				} else if *replay {
+				if *replay {
 					err = replayFile(scanner.Text(), ctxts, w)
 					if err != nil {
 						break
 					}
 				} else {
-					identifyFile(getCtx(scanner.Text(), "", info.ModTime().Format(time.RFC3339), info.Size()), ctxts, getCtx)
+					err = identify(ctxts, v, "", *coe, *nr, d, getCtx)
+					if err != nil {
+						printFile(ctxts,
+							getCtx(scanner.Text(), "", "", 0),
+							fmt.Errorf("failed to identify %s: %v", scanner.Text(), err))
+						err = nil
+					}
 				}
 			}
 			f.Close()
