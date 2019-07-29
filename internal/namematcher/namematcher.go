@@ -146,14 +146,27 @@ func (m *Matcher) add(s string, fmt int) {
 	m.globIdx = append(m.globIdx, []int{fmt})
 }
 
-// return the base name (e.g. README.txt) and extension (e.g. txt)
-// s can be a URL (i.e. if source is from a WARC or ARC), hence use of url package
+// normalise returns a path's base name (e.g. README.txt) and extension (e.g. txt)
 func normalise(s string) (string, string) {
-	u, err := url.Parse(s)
-	if err == nil && u.Scheme != "" {
-		switch u.Scheme {
-		case "http", "https", "ftp", "mailto", "file", "data", "irc":
-			s = u.Path
+	// check if this might be a URL (i.e. if source is from a WARC or ARC)
+	i := strings.Index(s, "://")
+	if i > 0 {
+		// backup until hit first non-ASCII alpha char (so we can trim the string to start with scheme)
+		for i > 0 {
+			i--
+			if s[i] < 65 || s[i] > 122 || (s[i] > 90 && s[i] < 97) {
+				i++
+				break
+			}
+		}
+		u, err := url.Parse(s[i:])
+		if err == nil && u.Scheme != "" {
+			// make sure it really is a URL
+			switch u.Scheme {
+			case "http", "https", "ftp", "mailto", "file", "data", "irc":
+				// grab the path (trims any trailing query string from the URL)
+				s = u.Path
+			}
 		}
 	}
 	base := reader.Base(s)

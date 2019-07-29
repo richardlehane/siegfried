@@ -112,6 +112,9 @@ var fnames = []string{
 	"http://www.example.org/foo.html#bar",
 	"foo.html",
 	"html",
+	"/root/corpora/ipres-systems-showcase-files/IAH-20080430204825-00000-blackbook.warc#20080430205011/http://www.archive.org/about/faq.php?faq_id=257",
+	"faq.php",
+	"php",
 }
 
 func TestNormalise(t *testing.T) {
