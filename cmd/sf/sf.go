@@ -453,7 +453,7 @@ func main() {
 						break
 					}
 				} else {
-					err = identify(ctxts, v, "", *coe, *nr, d, getCtx)
+					err = identify(ctxts, scanner.Text(), "", *coe, *nr, d, getCtx)
 					if err != nil {
 						printFile(ctxts,
 							getCtx(scanner.Text(), "", "", 0),
