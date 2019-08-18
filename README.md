@@ -8,7 +8,7 @@
 
 ### Version
 
-1.7.12
+1.7.13
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -30,7 +30,7 @@
     sf -sig custom.sig file.ext                // Use a custom signature file
     sf -                                       // Scan stream piped to stdin
     sf -name file.ext -                        // Provide filename when scanning stream 
-    sf -f myfiles.txt                          // Scan list of files
+    sf -f myfiles.txt                          // Scan list of files and directories
     sf -v | -version                           // Display version information
     sf -home c:\junk -sig custom.sig file.ext  // Use a custom home directory
     sf -serve hostname:port                    // Server mode
@@ -94,6 +94,17 @@ Or, for the most recent updates, you can install from this fork:
     makepkg -si
 
 ## Changes
+### v1.7.13 (2019-08-18)
+### Added
+- the `-f` flag now scans directories, as well as files. Requested by [Harry Moss](https://github.com/richardlehane/siegfried/issues/130)
+
+### Changed
+- update LOC signatures to 2019-06-16
+- update tika-mimetypes signatures to v1.22
+
+### Fixed
+- filenames with "?" were parsed as URLs, breaking name/extension matching; reported by [workflowsguy](https://github.com/richardlehane/siegfried/issues/129)
+
 ### v1.7.12 (2019-06-15)
 ### Changed
 - update PRONOM to v95

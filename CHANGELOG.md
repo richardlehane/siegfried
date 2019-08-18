@@ -1,4 +1,15 @@
 # Change Log
+## v1.7.13 (2019-08-18)
+### Added
+- the `-f` flag now scans directories, as well as files. Requested by [Harry Moss](https://github.com/richardlehane/siegfried/issues/130)
+
+### Changed
+- update LOC signatures to 2019-06-16
+- update tika-mimetypes signatures to v1.22
+
+### Fixed
+- filenames with "?" were parsed as URLs; reported by [workflowsguy](https://github.com/richardlehane/siegfried/issues/129)
+
 ## v1.7.12 (2019-06-15)
 ### Changed
 - update PRONOM to v95
