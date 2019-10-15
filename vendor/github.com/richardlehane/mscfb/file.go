@@ -145,9 +145,18 @@ func fixName(f *File) {
 
 func (r *Reader) traverse() error {
 	r.File = make([]*File, 0, len(r.direntries))
-	var recurse func(int, []string)
-	var err error
+	var (
+		recurse func(int, []string)
+		err     error
+		counter int
+	)
 	recurse = func(i int, path []string) {
+		// prevent cycles, number of recurse calls can't exceed number of directory entries
+		counter++
+		if counter > len(r.direntries) {
+			err = Error{ErrTraverse, "traversal counter overflow", int64(i)}
+			return
+		}
 		if i < 0 || i >= len(r.direntries) {
 			err = Error{ErrTraverse, "illegal traversal index", int64(i)}
 			return
@@ -155,10 +164,6 @@ func (r *Reader) traverse() error {
 		file := r.direntries[i]
 		if file.leftSibID != noStream {
 			recurse(int(file.leftSibID), path)
-		}
-		if len(r.File) >= cap(r.File) {
-			err = Error{ErrTraverse, "traversal counter overflow", int64(i)}
-			return
 		}
 		r.File = append(r.File, file)
 		file.Path = path
