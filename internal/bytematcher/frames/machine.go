@@ -1,0 +1,93 @@
+// Copyright 2019 Richard Lehane. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package frames
+
+import (
+	"github.com/richardlehane/siegfried/internal/bytematcher/patterns"
+	"github.com/richardlehane/siegfried/internal/persist"
+)
+
+// A Machine is a segment of a signature that implements the patterns interface
+type Machine []Frame
+
+func (m Machine) Test(b []byte) (bool, int) {
+	var iter int
+	offs := make([]int, len(m))
+	for {
+		if iter < 0 {
+			return false, 0
+		}
+		if offs[iter] >= len(b) {
+			iter--
+			continue
+		}
+		success, length := m[iter].MatchN(b[offs[iter]:], 0)
+		if !success {
+			iter--
+			continue
+		}
+		offs[iter] += length
+		if iter == len(offs)-1 {
+			break
+		}
+		offs[iter+1] = offs[iter]
+		iter++
+	}
+	return true, offs[iter]
+}
+
+func (m Machine) TestR([]byte) (bool, int) { return false, 0 }
+
+func (m Machine) Equals(pat patterns.Pattern) bool {
+	m2, ok := pat.(Machine)
+	if !ok || len(m) != len(m2) {
+		return false
+	}
+	for i, f := range m {
+		if !f.Equals(m2[i]) {
+			return false
+		}
+	}
+	return true
+}
+
+func (m Machine) Length() (int, int) {
+	var min, max int
+	for _, f := range m {
+		pmin, pmax := f.Length()
+		min += f.Min()
+		min += pmin
+		max += f.Max()
+		max += pmax
+	}
+	return min, max
+}
+
+// Machines are used where sequence matching inefficient
+func (m Machine) NumSequences() int              { return 0 }
+func (m Machine) Sequences() []patterns.Sequence { return nil }
+
+func (m Machine) String() string {
+	var str string
+	for i, v := range m {
+		if i > 0 {
+			str += " | "
+		}
+		str += v.String()
+	}
+	return "m {" + str + "}"
+}
+
+func (m Machine) Save(ls *persist.LoadSaver) {}
