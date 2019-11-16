@@ -318,7 +318,7 @@ func (w Window) Match(b []byte) (bool, []int) {
 		success, length := w.Test(b[min:max])
 		if success {
 			ret = append(ret, min+length)
-			min++
+			min++ // TODO: why not += length?? - is that only reliable for fail? Check patterns
 		} else {
 			if length == 0 {
 				break
@@ -347,7 +347,7 @@ func (w Window) MatchN(b []byte, n int) (bool, int) {
 				return true, min + length
 			}
 			i++
-			min++
+			min++ // TODO: why not += length?? - is that only reliable for fail? Check patterns
 		} else {
 			if length == 0 {
 				break

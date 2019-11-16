@@ -19,6 +19,14 @@ import (
 	"github.com/richardlehane/siegfried/internal/persist"
 )
 
+func init() {
+	patterns.Register(machineLoader, loadMachine)
+}
+
+const (
+	machineLoader byte = 15 // mimeinfo patterns start at 16
+)
+
 // A Machine is a segment of a signature that implements the patterns interface
 type Machine []Frame
 
@@ -48,7 +56,32 @@ func (m Machine) Test(b []byte) (bool, int) {
 	return true, offs[iter]
 }
 
-func (m Machine) TestR([]byte) (bool, int) { return false, 0 }
+func (m Machine) TestR(b []byte) (bool, int) {
+	iter := len(m) - 1
+	offs := make([]int, len(m))
+	for {
+		if iter >= len(m) {
+			return false, 0
+		}
+		if offs[iter] >= len(b) {
+			iter++
+			continue
+		}
+		success, length := m[iter].MatchNR(b[:len(b)-offs[iter]], 0)
+		if !success {
+			iter++
+			continue
+		}
+		offs[iter] += length
+		if iter == 0 {
+			break
+		}
+		offs[iter-1] = offs[iter]
+		iter--
+	}
+
+	return true, offs[iter]
+}
 
 func (m Machine) Equals(pat patterns.Pattern) bool {
 	m2, ok := pat.(Machine)
@@ -90,4 +123,18 @@ func (m Machine) String() string {
 	return "m {" + str + "}"
 }
 
-func (m Machine) Save(ls *persist.LoadSaver) {}
+func (m Machine) Save(ls *persist.LoadSaver) {
+	ls.SaveByte(machineLoader)
+	ls.SaveSmallInt(len(m))
+	for _, f := range m {
+		f.Save(ls)
+	}
+}
+
+func loadMachine(ls *persist.LoadSaver) patterns.Pattern {
+	m := make(Machine, ls.LoadSmallInt())
+	for i := range m {
+		m[i] = Load(ls)
+	}
+	return m
+}
