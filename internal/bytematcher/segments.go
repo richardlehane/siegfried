@@ -68,7 +68,10 @@ func characterise(seg frames.Signature) sigType {
 	return bofWindow
 }
 
-// the position of a key frame in a sequence: the length (minimum length in bytes), start and end indexes
+// position of a key frame in a segment: the length (minimum length in bytes), start and end indexes.
+// The keyframe can span multiple frames in the segment (if they are immediately adjacent and can make sequences)
+// which is why there is a start and end index
+// If length is 0, the segment goes to the frame matcher
 type position struct {
 	length int
 	start  int
