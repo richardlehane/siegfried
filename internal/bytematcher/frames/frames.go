@@ -34,8 +34,8 @@ type Frame interface {
 	String() string
 	Min() int                                // Min returns the minimum offset a frame can appear at
 	Max() int                                // Max returns the maximum offset a frame can appear at. Returns -1 for no limit (wildcard, *)
-	MaxMatches(l int) (int, int, int)        // MaxMatches returns the max number of times a frame can match, given a byte slice of length 'l', and the maximum remaining slice length, and the minimum length of the pattern
-	Linked(Frame, int, int) (bool, int, int) // Linked tests whether a frame is linked to a preceding frame (by a preceding or succeding relationship) with an offset and range that is less than the supplied ints
+	MaxMatches(l int) (int, int, int)        // MaxMatches returns the max number of times a frame can match, the maximum remaining slice length, and the minimum length of the pattern, given a byte slice of length 'l'
+	Linked(Frame, int, int) (bool, int, int) // Linked tests whether a frame is linked to a preceding frame (by a preceding or succeding relationship) with an offset and range that is less than the supplied ints. Pass -1 as maxDistance to test linkage regardless of distance/range
 	Pat() patterns.Pattern                   // Pat exposes the enclosed pattern
 	Save(*persist.LoadSaver)                 // Save a frame to a LoadSaver. The first byte written should be the identifying byte provided to Register().
 
@@ -262,12 +262,21 @@ func (f Fixed) MaxMatches(l int) (int, int, int) {
 func (f Fixed) Linked(prev Frame, maxDistance, maxRange int) (bool, int, int) {
 	switch f.OffType {
 	case PREV:
+		if maxDistance < 0 {
+			return true, maxDistance, maxRange
+		}
 		if f.Off > maxDistance {
 			return false, 0, 0
 		}
 		return true, maxDistance - f.Off, maxRange
 	case SUCC, EOF:
-		if prev.Orientation() != SUCC || prev.Max() < 0 || prev.Max() > maxDistance || prev.Max()-prev.Min() > maxRange {
+		if prev.Orientation() != SUCC || prev.Max() < 0 {
+			return false, 0, 0
+		}
+		if maxDistance < 0 {
+			return true, maxDistance, maxRange
+		}
+		if prev.Max() > maxDistance || prev.Max()-prev.Min() > maxRange {
 			return false, 0, 0
 		}
 		return true, maxDistance - prev.Max(), maxRange - (prev.Max() - prev.Min())
@@ -453,12 +462,21 @@ func (w Window) MaxMatches(l int) (int, int, int) {
 func (w Window) Linked(prev Frame, maxDistance, maxRange int) (bool, int, int) {
 	switch w.OffType {
 	case PREV:
+		if maxDistance < 0 {
+			return true, maxDistance, maxRange
+		}
 		if w.MaxOff > maxDistance || w.MaxOff-w.MinOff > maxRange {
 			return false, 0, 0
 		}
 		return true, maxDistance - w.MaxOff, maxRange - (w.MaxOff - w.MinOff)
 	case SUCC, EOF:
-		if prev.Orientation() != SUCC || prev.Max() < 0 || prev.Max() > maxDistance || prev.Max()-prev.Min() > maxRange {
+		if prev.Orientation() != SUCC || prev.Max() < 0 {
+			return false, 0, 0
+		}
+		if maxDistance < 0 {
+			return true, maxDistance, maxRange
+		}
+		if prev.Max() > maxDistance || prev.Max()-prev.Min() > maxRange {
 			return false, 0, 0
 		}
 		return true, maxDistance - prev.Max(), maxRange - (prev.Max() - prev.Min())
@@ -621,7 +639,13 @@ func (w Wild) MaxMatches(l int) (int, int, int) {
 func (w Wild) Linked(prev Frame, maxDistance, maxRange int) (bool, int, int) {
 	switch w.OffType {
 	case SUCC, EOF:
-		if prev.Orientation() != SUCC || prev.Max() < 0 || prev.Max() > maxDistance || prev.Max()-prev.Min() > maxRange {
+		if prev.Orientation() != SUCC || prev.Max() < 0 {
+			return false, 0, 0
+		}
+		if maxDistance < 0 {
+			return true, maxDistance, maxRange
+		}
+		if prev.Max() > maxDistance || prev.Max()-prev.Min() > maxRange {
 			return false, 0, 0
 		}
 		return true, maxDistance - prev.Max(), maxRange - (prev.Max() - prev.Min())
@@ -781,7 +805,13 @@ func (w WildMin) MaxMatches(l int) (int, int, int) {
 func (w WildMin) Linked(prev Frame, maxDistance, maxRange int) (bool, int, int) {
 	switch w.OffType {
 	case SUCC, EOF:
-		if prev.Orientation() != SUCC || prev.Max() < 0 || prev.Max() > maxDistance || prev.Max()-prev.Min() > maxRange {
+		if prev.Orientation() != SUCC || prev.Max() < 0 {
+			return false, 0, 0
+		}
+		if maxDistance < 0 {
+			return true, maxDistance, maxRange
+		}
+		if prev.Max() > maxDistance || prev.Max()-prev.Min() > maxRange {
 			return false, 0, 0
 		}
 		return true, maxDistance - prev.Max(), maxRange - (prev.Max() - prev.Min())
