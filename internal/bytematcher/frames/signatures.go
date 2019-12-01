@@ -30,16 +30,6 @@ func (s Signature) String() string {
 	return "(" + str + ")"
 }
 
-// TODO
-func (s Signature) MatchN([]byte, int) (bool, int) {
-	return false, 0
-}
-
-// TODO
-func (s Signature) MatchNR([]byte, int) (bool, int) {
-	return false, 0
-}
-
 func (s Signature) OneEnough() bool {
 	for _, f := range s {
 		if _, ok := f.(Fixed); !ok {

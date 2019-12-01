@@ -47,6 +47,9 @@ func (m Machine) Test(b []byte) (bool, int) {
 			continue
 		}
 		offs[iter] += length
+		// TODO: what is length? Is it safe to move forward more than 1 + starting offset of the match?
+		// (i.e. not full length of pat)
+		// Suggestion: Frame should report its starting offset, Pattern should report length of match and start of next possible match
 		if iter == len(offs)-1 {
 			break
 		}
