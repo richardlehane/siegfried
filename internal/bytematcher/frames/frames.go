@@ -446,6 +446,7 @@ func (w Window) Max() int {
 }
 
 // MaxMatches returns the max number of times a frame can match, given a byte slice of length 'l', and the maximum remaining slice length
+// TODO: this is *wrong* because it presumes a pattern can't overlap i.e. in AAAAAA, the string AA can match at 5 positions, not 3
 func (w Window) MaxMatches(l int) (int, int, int) {
 	min, _ := w.Length()
 	rem := l - min - w.MinOff

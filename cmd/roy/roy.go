@@ -143,6 +143,7 @@ var (
 	rng         = build.Int("range", config.Range(), "define a maximum range for segmentation")
 	distance    = build.Int("distance", config.Distance(), "define a maximum distance for segmentation")
 	choices     = build.Int("choices", config.Choices(), "define a maximum number of choices for segmentation")
+	cost        = build.Int("cost", config.Cost(), "define a maximum tolerable cost in the worst case for segmentation (overrides distance/range/choices)")
 
 	// HARVEST
 	harvest           = flag.NewFlagSet("harvest", flag.ExitOnError)
@@ -394,6 +395,9 @@ the DROID signature file you should also include a regular signature extension
 	}
 	if *choices != config.Choices() {
 		opts = append(opts, config.SetChoices(*choices))
+	}
+	if *cost != config.Cost() {
+		opts = append(opts, config.SetCost(*cost))
 	}
 	// inspect options
 	if *inspectMI != "" {

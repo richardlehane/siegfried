@@ -32,6 +32,7 @@ var siegfried = struct {
 	distance int // The acceptable distance between two frames before they will be segmented (default is 8192)
 	rng      int // The acceptable range between two frames before they will be segmented (default is 0-2049)
 	choices  int // The acceptable number of plain sequences generated from a single segment
+	cost     int // The acceptable cost of a signature segement, in terms of the times that it might match in a worst case
 	// Config for using the update service.
 	updateURL       string // URL for the update service (a JSON file that indicates whether update necessary and where can be found)
 	updateTimeout   time.Duration
@@ -44,13 +45,14 @@ var siegfried = struct {
 	out        io.Writer
 	checkpoint int64
 }{
-	version:         [3]int{1, 7, 13},
+	version:         [3]int{1, 8, 0},
 	signature:       "default.sig",
 	conf:            "sf.conf",
 	magic:           []byte{'s', 'f', 0x00, 0xFF},
 	distance:        8192,
 	rng:             4096,
 	choices:         128,
+	cost:            256000,
 	updateURL:       "https://www.itforarchivists.com/siegfried/update", // "http://localhost:8081/siegfried/update",
 	updateTimeout:   30 * time.Second,
 	updateTransport: &http.Transport{Proxy: http.ProxyFromEnvironment},
@@ -122,6 +124,12 @@ func Choices() int {
 	return siegfried.choices
 }
 
+// Choices is a bytematcher setting. It controls the number of tolerable matches in a worst case scenario for a signature segement.
+// If this cost is exceeded, then segmentation won't happen and the choices/range/distance preferences will be ignored.
+func Cost() int {
+	return siegfried.cost
+}
+
 // UpdateOptions returns the update URL, timeout and transport for the sf -update command.
 func UpdateOptions() (string, time.Duration, *http.Transport) {
 	return siegfried.updateURL, siegfried.updateTimeout, siegfried.updateTransport
@@ -185,10 +193,18 @@ func SetRange(i int) func() private {
 	}
 }
 
-// SetDistance sets the choices variable for the bytematcher.
+// SetChoices sets the choices variable for the bytematcher.
 func SetChoices(i int) func() private {
 	return func() private {
 		siegfried.choices = i
+		return private{}
+	}
+}
+
+// SetCost sets the cost variable for the bytematcher.
+func SetCost(i int) func() private {
+	return func() private {
+		siegfried.cost = i
 		return private{}
 	}
 }
