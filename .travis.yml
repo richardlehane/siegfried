@@ -16,6 +16,7 @@ install:
 - git clone https://github.com/richardlehane/provisioner.git
 - cd provisioner
 - go install
+- cd $HOME/richardlehane/siegfried
 # run test, provision (deploy/bench), and deploy jobs
 jobs:
   include:
@@ -24,11 +25,11 @@ jobs:
   - stage: develop
     if: branch = develop
     script: provisioner -life=2h -host=develop-RAND.itforarchivists.com -env=PACKET_AUTH_TOKEN,RUNNER_AUTH,BB_ACCOUNT,BB_KEY
-      $HOME/gopath/src/github.com/richardlehane/provisioner/scripts/develop.yaml
+      $HOME/provisioner/scripts/develop.yaml
   - stage: bench
     if: branch = master
     script: provisioner -life=12h -max=-1 -host=bench-RAND.itforarchivists.com -env=PACKET_AUTH_TOKEN,RUNNER_AUTH,BB_ACCOUNT,BB_KEY
-      $HOME/gopath/src/github.com/richardlehane/provisioner/scripts/bench.yaml
+      $HOME/provisioner/scripts/bench.yaml
   - stage: deploy
     script: skip
     before_deploy:
