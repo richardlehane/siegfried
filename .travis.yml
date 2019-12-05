@@ -16,7 +16,7 @@ install:
 - git clone https://github.com/richardlehane/provisioner.git
 - cd provisioner
 - go install
-- cd $HOME/richardlehane/siegfried
+- cd $TRAVIS_BUILD_DIR
 # run test, provision (deploy/bench), and deploy jobs
 jobs:
   include:
