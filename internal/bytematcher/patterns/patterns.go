@@ -52,12 +52,12 @@ func Stringify(b []byte) string {
 // Exact byte sequence matches are a type of pattern, as are byte ranges, non-sequence matches etc.
 // You can define custom patterns (e.g. for W3C date type) by implementing this interface.
 type Pattern interface {
-	Test([]byte) (bool, int)  // Returns boolean for match. For a positive match, the integer value represents the length of the match. For a negative match, the integer represents an offset jump before a subsequent test. That offset should be 0 if the remaining byte slice is smaller than the pattern.
-	TestR([]byte) (bool, int) // Same as Test but for testing in reverse (from the right-most position of the byte slice).
-	Equals(Pattern) bool      // Test equality with another pattern
-	Length() (int, int)       // Minimum and maximum lengths of the pattern
-	NumSequences() int        // Number of simple sequences represented by a pattern. Return 0 if the pattern cannot be represented by a defined number of simple sequence (e.g. for an indirect offset pattern) or, if in your opinion, the number of sequences is unreasonably large.
-	Sequences() []Sequence    // Convert the pattern to a slice of sequences. Return an empty slice if the pattern cannot be represented by a defined number of simple sequences.
+	Test([]byte) (int, int)  // For a positive match, returns length of the match and bytes to advance for subsequent test. For a negative match, returns -1 and the bytes to advance for subsequent test (or 0 if the length of the pattern is longer than the length of the slice).
+	TestR([]byte) (int, int) // Same as Test but for testing in reverse (from the right-most position of the byte slice).
+	Equals(Pattern) bool     // Test equality with another pattern
+	Length() (int, int)      // Minimum and maximum lengths of the pattern
+	NumSequences() int       // Number of simple sequences represented by a pattern. Return 0 if the pattern cannot be represented by a defined number of simple sequence (e.g. for an indirect offset pattern) or, if in your opinion, the number of sequences is unreasonably large.
+	Sequences() []Sequence   // Convert the pattern to a slice of sequences. Return an empty slice if the pattern cannot be represented by a defined number of simple sequences.
 	String() string
 	Save(*persist.LoadSaver) // encode the pattern into bytes for saving in a persist file
 }
@@ -113,29 +113,25 @@ func Index(a, b Pattern) int {
 type Sequence []byte
 
 // Test bytes against the pattern.
-// For a positive match, the integer value represents the length of the match.
-// For a negative match, the integer represents an offset jump before a subsequent test.
-func (s Sequence) Test(b []byte) (bool, int) {
+func (s Sequence) Test(b []byte) (int, int) {
 	if len(b) < len(s) {
-		return false, 0
+		return -1, 0
 	}
 	if bytes.Equal(s, b[:len(s)]) {
-		return true, len(s)
+		return len(s), 1
 	}
-	return false, 1
+	return -1, 1
 }
 
 // Test bytes against the pattern in reverse.
-// For a positive match, the integer value represents the length of the match.
-// For a negative match, the integer represents an offset jump before a subsequent test.
-func (s Sequence) TestR(b []byte) (bool, int) {
+func (s Sequence) TestR(b []byte) (int, int) {
 	if len(b) < len(s) {
-		return false, 0
+		return -1, 0
 	}
 	if bytes.Equal(s, b[len(b)-len(s):]) {
-		return true, len(s)
+		return len(s), 1
 	}
-	return false, 1
+	return -1, 1
 }
 
 // Equals reports whether a pattern is identical to another pattern.
@@ -185,40 +181,36 @@ func loadSequence(ls *persist.LoadSaver) Pattern {
 	return Sequence(ls.LoadBytes())
 }
 
-// Choice is a slice of patterns, any of which can test true for the pattern to succeed. Returns the longest matching pattern
+// Choice is a slice of patterns, any of which can test successfully for the pattern to succeed. Returns the longest matching pattern
 type Choice []Pattern
 
-func (c Choice) test(b []byte, f func(Pattern, []byte) (bool, int)) (bool, int) {
-	var r, res bool
-	var tl, fl, lgth int
+func (c Choice) test(b []byte, f func(Pattern, []byte) (int, int)) (int, int) {
+	var r, res = -1, -1
+	var tl, fl, adv int
 	for _, pat := range c {
-		res, lgth = f(pat, b)
-		if res {
-			r = true
-			if lgth > tl {
-				tl = lgth
+		res, adv = f(pat, b)
+		if res > -1 {
+			r = res
+			if adv > tl {
+				tl = adv
 			}
-		} else if lgth > fl {
-			fl = lgth
+		} else if adv > fl {
+			fl = adv
 		}
 	}
-	if r {
+	if r > -1 {
 		return r, tl
 	}
 	return r, fl
 }
 
 // Test bytes against the pattern.
-// For a positive match, the integer value represents the length of the match.
-// For a negative match, the integer represents an offset jump before a subsequent test.
-func (c Choice) Test(b []byte) (bool, int) {
+func (c Choice) Test(b []byte) (int, int) {
 	return c.test(b, Pattern.Test)
 }
 
 // Test bytes against the pattern in reverse.
-// For a positive match, the integer value represents the length of the match.
-// For a negative match, the integer represents an offset jump before a subsequent test.
-func (c Choice) TestR(b []byte) (bool, int) {
+func (c Choice) TestR(b []byte) (int, int) {
 	return c.test(b, Pattern.TestR)
 }
 
@@ -318,57 +310,53 @@ func loadChoice(ls *persist.LoadSaver) Pattern {
 type List []Pattern
 
 // Test bytes against the pattern.
-// For a positive match, the integer value represents the length of the match.
-// For a negative match, the integer represents an offset jump before a subsequent test.
-func (l List) Test(b []byte) (bool, int) {
+func (l List) Test(b []byte) (int, int) {
 	if len(l) < 1 {
-		return false, 0
+		return -1, 0
 	}
-	success, first := l[0].Test(b)
-	if !success {
-		return false, first
+	le, _ := l[0].Test(b)
+	if le < 0 {
+		return -1, 1
 	}
-	total := first
+	total := le
 	if len(l) > 1 {
 		for _, p := range l[1:] {
 			if len(b) <= total {
-				return false, 0
+				return -1, 0
 			}
-			success, le := p.Test(b[total:])
-			if !success {
-				return false, first
+			le, _ := p.Test(b[total:])
+			if le < 0 {
+				return -1, 1
 			}
 			total += le
 		}
 	}
-	return true, total
+	return total, 1
 }
 
 // Test bytes against the pattern in reverse.
-// For a positive match, the integer value represents the length of the match.
-// For a negative match, the integer represents an offset jump before a subsequent test.
-func (l List) TestR(b []byte) (bool, int) {
+func (l List) TestR(b []byte) (int, int) {
 	if len(l) < 1 {
-		return false, 0
+		return -1, 0
 	}
-	success, first := l[len(l)-1].TestR(b)
-	if !success {
-		return false, first
+	le, _ := l[len(l)-1].TestR(b)
+	if le < 0 {
+		return -1, 1
 	}
-	total := first
+	total := le
 	if len(l) > 1 {
 		for i := len(l) - 2; i >= 0; i-- {
 			if len(b) <= total {
-				return false, 0
+				return -1, 0
 			}
-			success, le := l[i].TestR(b[:len(b)-total])
-			if !success {
-				return false, first
+			le, _ := l[i].TestR(b[:len(b)-total])
+			if le < 0 {
+				return -1, 1
 			}
 			total += le
 		}
 	}
-	return true, total
+	return total, 1
 }
 
 // Equals reports whether a pattern is identical to another pattern.
@@ -461,33 +449,29 @@ func loadList(ls *persist.LoadSaver) Pattern {
 type Not struct{ Pattern }
 
 // Test bytes against the pattern.
-// For a positive match, the integer value represents the length of the match.
-// For a negative match, the integer represents an offset jump before a subsequent test.
-func (n Not) Test(b []byte) (bool, int) {
+func (n Not) Test(b []byte) (int, int) {
 	min, _ := n.Pattern.Length()
 	if len(b) < min {
-		return false, 0
+		return -1, 0
 	}
 	ok, _ := n.Pattern.Test(b)
-	if !ok {
-		return true, min
+	if ok < 0 {
+		return min, 1
 	}
-	return false, 1
+	return -1, 1
 }
 
 // Test bytes against the pattern in reverse.
-// For a positive match, the integer value represents the length of the match.
-// For a negative match, the integer represents an offset jump before a subsequent test.
-func (n Not) TestR(b []byte) (bool, int) {
+func (n Not) TestR(b []byte) (int, int) {
 	min, _ := n.Pattern.Length()
 	if len(b) < min {
-		return false, 0
+		return -1, 0
 	}
 	ok, _ := n.Pattern.TestR(b)
-	if !ok {
-		return true, min
+	if ok < 0 {
+		return min, 1
 	}
-	return false, 1
+	return -1, 1
 }
 
 // Equals reports whether a pattern is identical to another pattern.
@@ -562,24 +546,24 @@ func loadNot(ls *persist.LoadSaver) Pattern {
 
 type Mask byte
 
-func (m Mask) Test(b []byte) (bool, int) {
+func (m Mask) Test(b []byte) (int, int) {
 	if len(b) == 0 {
-		return false, 0
+		return -1, 0
 	}
 	if byte(m)&b[0] == byte(m) {
-		return true, 1
+		return 1, 1
 	}
-	return false, 1
+	return -1, 1
 }
 
-func (m Mask) TestR(b []byte) (bool, int) {
+func (m Mask) TestR(b []byte) (int, int) {
 	if len(b) == 0 {
-		return false, 0
+		return -1, 0
 	}
 	if byte(m)&b[len(b)-1] == byte(m) {
-		return true, 1
+		return 1, 1
 	}
-	return false, 1
+	return -1, 1
 }
 
 func (m Mask) Equals(pat Pattern) bool {
@@ -642,24 +626,24 @@ func loadMask(ls *persist.LoadSaver) Pattern {
 
 type AnyMask byte
 
-func (am AnyMask) Test(b []byte) (bool, int) {
+func (am AnyMask) Test(b []byte) (int, int) {
 	if len(b) == 0 {
-		return false, 0
+		return -1, 0
 	}
 	if byte(am)&b[0] != 0 {
-		return true, 1
+		return 1, 1
 	}
-	return false, 1
+	return -1, 1
 }
 
-func (am AnyMask) TestR(b []byte) (bool, int) {
+func (am AnyMask) TestR(b []byte) (int, int) {
 	if len(b) == 0 {
-		return false, 0
+		return -1, 0
 	}
 	if byte(am)&b[len(b)-1] != 0 {
-		return true, 1
+		return 1, 1
 	}
-	return false, 1
+	return -1, 1
 }
 
 func (am AnyMask) Equals(pat Pattern) bool {

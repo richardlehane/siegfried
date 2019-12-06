@@ -12,10 +12,10 @@ func TestSequence(t *testing.T) {
 	if !TestSequences[0].Equals(TestSequences[1]) {
 		t.Error("Seq fail: Equality")
 	}
-	if r, _ := TestSequences[0].Test([]byte{'t', 'o', 'o', 't'}); r {
+	if r, _ := TestSequences[0].Test([]byte{'t', 'o', 'o', 't'}); r > -1 {
 		t.Error("Sequence fail: shouldn't match")
 	}
-	if _, l := TestSequences[2].Test([]byte{'t', 'e', 's', 't', 'y'}); l != 5 {
+	if r, _ := TestSequences[2].Test([]byte{'t', 'e', 's', 't', 'y'}); r != 5 {
 		t.Error("Sequence fail: should match")
 	}
 	reverseSeq := TestSequences[2].Reverse()
@@ -36,7 +36,7 @@ func TestChoice(t *testing.T) {
 	if !TestChoices[0].Equals(TestChoices[1]) {
 		t.Error("Choice fail: Equality")
 	}
-	if _, l := TestChoices[0].Test([]byte{'t', 'e', 's', 't'}); l != 4 {
+	if r, _ := TestChoices[0].Test([]byte{'t', 'e', 's', 't'}); r != 4 {
 		t.Error("Choice test fail: Test")
 	}
 	if TestChoices[0].NumSequences() != 2 {
@@ -52,7 +52,7 @@ func TestList(t *testing.T) {
 	if TestLists[0].Equals(TestLists[1]) {
 		t.Error("List fail: equality")
 	}
-	if _, l := TestLists[0].Test([]byte{'t', 'e', 's', 't', 't', 'e', 's', 't', 'y'}); l != 9 {
+	if r, _ := TestLists[0].Test([]byte{'t', 'e', 's', 't', 't', 'e', 's', 't', 'y'}); r != 9 {
 		t.Error("List test fail: Test")
 	}
 	if TestLists[0].NumSequences() != 1 {
@@ -68,10 +68,10 @@ func TestNotSequence(t *testing.T) {
 	if !TestNotSequences[0].Equals(TestNotSequences[1]) {
 		t.Error("NotSequence fail: Equality test")
 	}
-	if r, _ := TestNotSequences[0].Test([]byte{'t', 'e', 's', 't'}); r {
+	if r, _ := TestNotSequences[0].Test([]byte{'t', 'e', 's', 't'}); r > -1 {
 		t.Error("NotSequence fail: Test")
 	}
-	if _, l := TestNotSequences[0].Test([]byte{'t', 'o', 'o', 't'}); l != 4 {
+	if r, _ := TestNotSequences[0].Test([]byte{'t', 'o', 'o', 't'}); r != 4 {
 		t.Error("NotSequence fail: Test")
 	}
 	seqs := TestNotSequences[2].Sequences()
@@ -90,10 +90,10 @@ func TestNotSequence(t *testing.T) {
 
 func TestMask(t *testing.T) {
 	mask := TestMasks[0]
-	if r, _ := mask.Test([]byte{0xEE}); !r {
+	if r, _ := mask.Test([]byte{0xEE}); r != 1 {
 		t.Errorf("mask fail: 0xEE should match")
 	}
-	if r, _ := mask.Test([]byte{0x0A}); r {
+	if r, _ := mask.Test([]byte{0x0A}); r > -1 {
 		t.Errorf("mask fail: expected 0x0A not to match!")
 	}
 	num := mask.NumSequences()
@@ -116,10 +116,10 @@ func TestMask(t *testing.T) {
 
 func TestAnyMask(t *testing.T) {
 	amask := TestAnyMasks[0]
-	if r, _ := amask.Test([]byte{0x0A}); !r {
+	if r, _ := amask.Test([]byte{0x0A}); r != 1 {
 		t.Errorf("any mask fail: 0x0A should match")
 	}
-	if r, _ := amask.Test([]byte{5}); r {
+	if r, _ := amask.Test([]byte{5}); r > -1 {
 		t.Errorf("any mask fail: expected 5 not to match!")
 	}
 	num := amask.NumSequences()

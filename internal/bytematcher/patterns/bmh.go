@@ -53,31 +53,27 @@ func NewBMHSequence(s Sequence) *BMHSequence {
 }
 
 // Test bytes against the pattern.
-// For a positive match, the integer value represents the length of the match.
-// For a negative match, the integer represents an offset jump before a subsequent test.
-func (s *BMHSequence) Test(b []byte) (bool, int) {
+func (s *BMHSequence) Test(b []byte) (int, int) {
 	if len(b) < len(s.Seq) {
-		return false, 0
+		return -1, 0
 	}
 	for i := len(s.Seq) - 1; i > -1; i-- {
 		if b[i] != s.Seq[i] {
-			return false, s.Shift[b[len(s.Seq)-1]]
+			return -1, s.Shift[b[len(s.Seq)-1]]
 		}
 	}
-	return true, len(s.Seq)
+	return len(s.Seq), 1
 }
 
 // Test bytes against the pattern in reverse.
-// For a positive match, the integer value represents the length of the match.
-// For a negative match, the integer represents an offset jump before a subsequent test.
-func (s *BMHSequence) TestR(b []byte) (bool, int) {
+func (s *BMHSequence) TestR(b []byte) (int, int) {
 	if len(b) < len(s.Seq) {
-		return false, 0
+		return -1, 0
 	}
 	if bytes.Equal(s.Seq, b[len(b)-len(s.Seq):]) {
-		return true, len(s.Seq)
+		return len(s.Seq), 1
 	}
-	return false, 1
+	return -1, 1
 }
 
 // Equals reports whether a pattern is identical to another pattern.
@@ -147,31 +143,27 @@ func NewRBMHSequence(s Sequence) *RBMHSequence {
 }
 
 // Test bytes against the pattern.
-// For a positive match, the integer value represents the length of the match.
-// For a negative match, the integer represents an offset jump before a subsequent test.
-func (s *RBMHSequence) Test(b []byte) (bool, int) {
+func (s *RBMHSequence) Test(b []byte) (int, int) {
 	if len(b) < len(s.Seq) {
-		return false, 0
+		return -1, 0
 	}
 	if bytes.Equal(s.Seq, b[:len(s.Seq)]) {
-		return true, len(s.Seq)
+		return len(s.Seq), 1
 	}
-	return false, 1
+	return -1, 1
 }
 
 // Test bytes against the pattern in reverse.
-// For a positive match, the integer value represents the length of the match.
-// For a negative match, the integer represents an offset jump before a subsequent test.
-func (s *RBMHSequence) TestR(b []byte) (bool, int) {
+func (s *RBMHSequence) TestR(b []byte) (int, int) {
 	if len(b) < len(s.Seq) {
-		return false, 0
+		return -1, 0
 	}
 	for i, v := range b[len(b)-len(s.Seq):] {
 		if v != s.Seq[i] {
-			return false, s.Shift[b[len(b)-len(s.Seq)]]
+			return -1, s.Shift[b[len(b)-len(s.Seq)]]
 		}
 	}
-	return true, len(s.Seq)
+	return len(s.Seq), 1
 }
 
 // Equals reports whether a pattern is identical to another pattern.
