@@ -30,60 +30,60 @@ const (
 // A Machine is a segment of a signature that implements the patterns interface
 type Machine []Frame
 
-func (m Machine) Test(b []byte) (bool, int) {
+func (m Machine) Test(b []byte) (int, int) {
 	var iter int
 	offs := make([]int, len(m))
 	for {
 		if iter < 0 {
-			return false, 0
+			return -1, 1
 		}
 		if offs[iter] >= len(b) {
 			iter--
 			continue
 		}
-		success, length := m[iter].MatchN(b[offs[iter]:], 0)
-		if !success {
+		length, adv := m[iter].MatchN(b[offs[iter]:], 0)
+		if length < 0 {
 			iter--
 			continue
 		}
-		offs[iter] += length
-		// TODO: what is length? Is it safe to move forward more than 1 + starting offset of the match?
-		// (i.e. not full length of pat)
-		// Suggestion: Frame should report its starting offset, Pattern should report length of match and start of next possible match
+		// success!
 		if iter == len(offs)-1 {
+			offs[iter] += length
 			break
 		}
-		offs[iter+1] = offs[iter]
+		offs[iter+1] = offs[iter] + length
+		offs[iter] += adv
 		iter++
 	}
-	return true, offs[iter]
+	return offs[iter], 1
 }
 
-func (m Machine) TestR(b []byte) (bool, int) {
+func (m Machine) TestR(b []byte) (int, int) {
 	iter := len(m) - 1
 	offs := make([]int, len(m))
 	for {
 		if iter >= len(m) {
-			return false, 0
+			return -1, 0
 		}
 		if offs[iter] >= len(b) {
 			iter++
 			continue
 		}
-		success, length := m[iter].MatchNR(b[:len(b)-offs[iter]], 0)
-		if !success {
+		length, adv := m[iter].MatchNR(b[:len(b)-offs[iter]], 0)
+		if length < 0 {
 			iter++
 			continue
 		}
-		offs[iter] += length
+		// success!
 		if iter == 0 {
+			offs[iter] += length
 			break
 		}
-		offs[iter-1] = offs[iter]
+		offs[iter-1] = offs[iter] + length
+		offs[iter] += adv
 		iter--
 	}
-
-	return true, offs[iter]
+	return offs[iter], 1
 }
 
 func (m Machine) Equals(pat patterns.Pattern) bool {

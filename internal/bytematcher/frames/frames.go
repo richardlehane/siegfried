@@ -26,11 +26,11 @@ import (
 
 // Frame encapsulates a pattern with offset information, mediating between the pattern and the bytestream.
 type Frame interface {
-	Match([]byte) (bool, []int) // Match the enclosed pattern against the byte slice in a L-R direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
-	MatchN([]byte, int) (bool, int)
-	MatchR([]byte) (bool, []int) // Match the enclosed pattern against the byte slice in a reverse (R-L) direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
-	MatchNR([]byte, int) (bool, int)
-	Equals(Frame) bool // Equals tests equality of two frames.
+	Match([]byte) []int             // Match the enclosed pattern against the byte slice in a L-R direction. Returns a slice of offsets for where a successive match by a related frame should begin.
+	MatchN([]byte, int) (int, int)  // For the nth match (per above), return the offset for successive match by related frame and bytes that can advance to make a successive test by this frame.
+	MatchR([]byte) []int            // Match the enclosed pattern against the byte slice in a reverse (R-L) direction. Returns a slice of offsets for where a successive match by a related frame should begin.
+	MatchNR([]byte, int) (int, int) // For the nth match (per above), return the offset for successive match by related frame and bytes that can advance to make a successive test by this frame.
+	Equals(Frame) bool              // Equals tests equality of two frames.
 	String() string
 	Min() int                                // Min returns the minimum offset a frame can appear at
 	Max() int                                // Max returns the maximum offset a frame can appear at. Returns -1 for no limit (wildcard, *)
@@ -187,40 +187,38 @@ type Fixed struct {
 	patterns.Pattern
 }
 
-// Match the enclosed pattern against the byte slice in a L-R direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
-func (f Fixed) Match(b []byte) (bool, []int) {
-	if m, l := f.MatchN(b, 0); m {
-		return true, []int{l}
+func (f Fixed) Match(b []byte) []int {
+	if l, _ := f.MatchN(b, 0); l > -1 {
+		return []int{l}
 	}
-	return false, nil
+	return nil
 }
 
-func (f Fixed) MatchN(b []byte, n int) (bool, int) {
+func (f Fixed) MatchN(b []byte, n int) (int, int) {
 	if n > 0 || f.Off >= len(b) {
-		return false, -1
+		return -1, 0
 	}
-	if success, length := f.Test(b[f.Off:]); success {
-		return true, f.Off + length
+	if length, adv := f.Test(b[f.Off:]); length > -1 {
+		return f.Off + length, f.Off + adv
 	}
-	return false, -1
+	return -1, 0
 }
 
-// MatchR matches the enclosed pattern against the byte slice in a reverse (R-L) direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
-func (f Fixed) MatchR(b []byte) (bool, []int) {
-	if m, l := f.MatchNR(b, 0); m {
-		return true, []int{l}
+func (f Fixed) MatchR(b []byte) []int {
+	if l, _ := f.MatchNR(b, 0); l > -1 {
+		return []int{l}
 	}
-	return false, nil
+	return nil
 }
 
-func (f Fixed) MatchNR(b []byte, n int) (bool, int) {
+func (f Fixed) MatchNR(b []byte, n int) (int, int) {
 	if n > 0 || f.Off >= len(b) {
-		return false, -1
+		return -1, 0
 	}
-	if success, length := f.TestR(b[:len(b)-f.Off]); success {
-		return true, f.Off + length
+	if length, adv := f.TestR(b[:len(b)-f.Off]); length > -1 {
+		return f.Off + length, f.Off + adv
 	}
-	return false, -1
+	return -1, 0
 }
 
 // Equals tests equality of two frames
@@ -314,8 +312,7 @@ type Window struct {
 	patterns.Pattern
 }
 
-// Match the enclosed pattern against the byte slice in a L-R direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
-func (w Window) Match(b []byte) (bool, []int) {
+func (w Window) Match(b []byte) []int {
 	ret := make([]int, 0, 1)
 	min, max := w.MinOff, w.MaxOff
 	_, m := w.Length()
@@ -324,24 +321,19 @@ func (w Window) Match(b []byte) (bool, []int) {
 		max = len(b)
 	}
 	for min < max {
-		success, length := w.Test(b[min:max])
-		if success {
+		length, adv := w.Test(b[min:max])
+		if length > -1 {
 			ret = append(ret, min+length)
-			min++ // TODO: why not += length?? - is that only reliable for fail? Check patterns
-		} else {
-			if length == 0 {
-				break
-			}
-			min += length
 		}
+		if adv < 1 {
+			break
+		}
+		min += adv
 	}
-	if len(ret) > 0 {
-		return true, ret
-	}
-	return false, nil
+	return ret
 }
 
-func (w Window) MatchN(b []byte, n int) (bool, int) {
+func (w Window) MatchN(b []byte, n int) (int, int) {
 	var i int
 	min, max := w.MinOff, w.MaxOff
 	_, m := w.Length()
@@ -350,25 +342,22 @@ func (w Window) MatchN(b []byte, n int) (bool, int) {
 		max = len(b)
 	}
 	for min < max {
-		success, length := w.Test(b[min:max])
-		if success {
+		length, adv := w.Test(b[min:max])
+		if length > -1 {
 			if i == n {
-				return true, min + length
+				return min + length, min + adv
 			}
 			i++
-			min++ // TODO: why not += length?? - is that only reliable for fail? Check patterns
-		} else {
-			if length == 0 {
-				break
-			}
-			min += length
 		}
+		if adv < 1 {
+			break
+		}
+		min += adv
 	}
-	return false, -1
+	return -1, 0
 }
 
-// MatchR matches the enclosed pattern against the byte slice in a reverse (R-L) direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
-func (w Window) MatchR(b []byte) (bool, []int) {
+func (w Window) MatchR(b []byte) []int {
 	ret := make([]int, 0, 1)
 	min, max := w.MinOff, w.MaxOff
 	_, m := w.Length()
@@ -377,24 +366,19 @@ func (w Window) MatchR(b []byte) (bool, []int) {
 		max = len(b)
 	}
 	for min < max {
-		success, length := w.TestR(b[len(b)-max : len(b)-min])
-		if success {
+		length, adv := w.TestR(b[len(b)-max : len(b)-min])
+		if length > -1 {
 			ret = append(ret, min+length)
-			min++
-		} else {
-			if length == 0 {
-				break
-			}
-			min += length
 		}
+		if adv < 1 {
+			break
+		}
+		min += adv
 	}
-	if len(ret) > 0 {
-		return true, ret
-	}
-	return false, nil
+	return ret
 }
 
-func (w Window) MatchNR(b []byte, n int) (bool, int) {
+func (w Window) MatchNR(b []byte, n int) (int, int) {
 	var i int
 	min, max := w.MinOff, w.MaxOff
 	_, m := w.Length()
@@ -403,21 +387,19 @@ func (w Window) MatchNR(b []byte, n int) (bool, int) {
 		max = len(b)
 	}
 	for min < max {
-		success, length := w.TestR(b[len(b)-max : len(b)-min])
-		if success {
+		length, adv := w.TestR(b[len(b)-max : len(b)-min])
+		if length > -1 {
 			if i == n {
-				return true, min + length
+				return min + length, min + adv
 			}
 			i++
-			min++
-		} else {
-			if length == 0 {
-				break
-			}
-			min += length
 		}
+		if adv < 1 {
+			break
+		}
+		min += adv
 	}
-	return false, -1
+	return -1, 0
 }
 
 // Equals tests equality of two frames
@@ -516,89 +498,75 @@ type Wild struct {
 }
 
 // Match the enclosed pattern against the byte slice in a L-R direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
-func (w Wild) Match(b []byte) (bool, []int) {
+func (w Wild) Match(b []byte) []int {
 	ret := make([]int, 0, 1)
 	min, max := 0, len(b)
 	for min < max {
-		success, length := w.Test(b[min:])
-		if success {
+		length, adv := w.Test(b[min:])
+		if length > -1 {
 			ret = append(ret, min+length)
-			min++
-		} else {
-			if length == 0 {
-				break
-			}
-			min += length
 		}
+		if adv < 1 {
+			break
+		}
+		min += adv
 	}
-	if len(ret) > 0 {
-		return true, ret
-	}
-	return false, nil
+	return ret
 }
 
-func (w Wild) MatchN(b []byte, n int) (bool, int) {
+func (w Wild) MatchN(b []byte, n int) (int, int) {
 	var i int
 	min, max := 0, len(b)
 	for min < max {
-		success, length := w.Test(b[min:])
-		if success {
+		length, adv := w.Test(b[min:])
+		if length > -1 {
 			if i == n {
-				return true, min + length
+				return min + length, min + adv
 			}
 			i++
-			min++
-		} else {
-			if length == 0 {
-				break
-			}
-			min += length
 		}
+		if adv < 1 {
+			break
+		}
+		min += adv
 	}
-	return false, -1
+	return -1, 0
 }
 
 // MatchR matches the enclosed pattern against the byte slice in a reverse (R-L) direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
-func (w Wild) MatchR(b []byte) (bool, []int) {
+func (w Wild) MatchR(b []byte) []int {
 	ret := make([]int, 0, 1)
 	min, max := 0, len(b)
 	for min < max {
-		success, length := w.TestR(b[:len(b)-min])
-		if success {
+		length, adv := w.TestR(b[:len(b)-min])
+		if length > -1 {
 			ret = append(ret, min+length)
-			min++
-		} else {
-			if length == 0 {
-				break
-			}
-			min += length
 		}
+		if adv < 1 {
+			break
+		}
+		min += adv
 	}
-	if len(ret) > 0 {
-		return true, ret
-	}
-	return false, nil
+	return ret
 }
 
-func (w Wild) MatchNR(b []byte, n int) (bool, int) {
+func (w Wild) MatchNR(b []byte, n int) (int, int) {
 	var i int
 	min, max := 0, len(b)
 	for min < max {
-		success, length := w.TestR(b[:len(b)-min])
-		if success {
+		length, adv := w.TestR(b[:len(b)-min])
+		if length > -1 {
 			if i == n {
-				return true, min + length
+				return min + length, min + adv
 			}
 			i++
-			min++
-		} else {
-			if length == 0 {
-				break
-			}
-			min += length
 		}
+		if adv < 1 {
+			break
+		}
+		min += adv
 	}
-	return false, -1
+	return -1, 0
 }
 
 // Equals tests equality of two frames.
@@ -682,89 +650,75 @@ type WildMin struct {
 }
 
 // Match the enclosed pattern against the byte slice in a L-R direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
-func (w WildMin) Match(b []byte) (bool, []int) {
+func (w WildMin) Match(b []byte) []int {
 	ret := make([]int, 0, 1)
 	min, max := w.MinOff, len(b)
 	for min < max {
-		success, length := w.Test(b[min:])
-		if success {
+		length, adv := w.Test(b[min:])
+		if length > -1 {
 			ret = append(ret, min+length)
-			min++
-		} else {
-			if length == 0 {
-				break
-			}
-			min += length
 		}
+		if adv < 1 {
+			break
+		}
+		min += adv
 	}
-	if len(ret) > 0 {
-		return true, ret
-	}
-	return false, nil
+	return ret
 }
 
-func (w WildMin) MatchN(b []byte, n int) (bool, int) {
+func (w WildMin) MatchN(b []byte, n int) (int, int) {
 	var i int
 	min, max := w.MinOff, len(b)
 	for min < max {
-		success, length := w.Test(b[min:])
-		if success {
+		length, adv := w.Test(b[min:])
+		if length > -1 {
 			if i == n {
-				return true, min + length
+				return min + length, min + adv
 			}
 			i++
-			min++
-		} else {
-			if length == 0 {
-				break
-			}
-			min += length
 		}
+		if adv < 1 {
+			break
+		}
+		min += adv
 	}
-	return false, -1
+	return -1, 0
 }
 
 // MatchR matches the enclosed pattern against the byte slice in a reverse (R-L) direction. Return a boolean to indicate success. If true, return an offset for where a successive match by a related frame should begin.
-func (w WildMin) MatchR(b []byte) (bool, []int) {
+func (w WildMin) MatchR(b []byte) []int {
 	ret := make([]int, 0, 1)
 	min, max := w.MinOff, len(b)
 	for min < max {
-		success, length := w.TestR(b[:len(b)-min])
-		if success {
+		length, adv := w.TestR(b[:len(b)-min])
+		if length > -1 {
 			ret = append(ret, min+length)
-			min++
-		} else {
-			if length == 0 {
-				break
-			}
-			min += length
 		}
+		if adv < 1 {
+			break
+		}
+		min += adv
 	}
-	if len(ret) > 0 {
-		return true, ret
-	}
-	return false, nil
+	return ret
 }
 
-func (w WildMin) MatchNR(b []byte, n int) (bool, int) {
+func (w WildMin) MatchNR(b []byte, n int) (int, int) {
 	var i int
 	min, max := w.MinOff, len(b)
 	for min < max {
-		success, length := w.TestR(b[:len(b)-min])
-		if success {
+		length, adv := w.TestR(b[:len(b)-min])
+		if length > -1 {
 			if i == n {
-				return true, min + length
+				return min + length, min + adv
 			}
 			i++
-			min++
-		} else {
-			if length == 0 {
-				break
-			}
-			min += length
 		}
+		if adv < 1 {
+			break
+		}
+		min += adv
 	}
-	return false, -1
+	return -1, 0
 }
 
 // Equals tests equality of two frames.

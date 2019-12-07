@@ -42,13 +42,13 @@ func TestInt8(t *testing.T) {
 	if !Int8(i8).Equals(Int8(i8)) {
 		t.Error("Int8 fail: Equality")
 	}
-	if r, _ := Int8(i8).Test([]byte{7}); r {
+	if r, _ := Int8(i8).Test([]byte{7}); r > -1 {
 		t.Error("Int8 fail: shouldn't match")
 	}
-	if r, l := Int8(i8).Test([]byte{i8}); !r || l != 1 {
+	if r, _ := Int8(i8).Test([]byte{i8}); r < 0 || r != 1 {
 		t.Error("Int8 fail: should match")
 	}
-	if r, l := Int8(i8).TestR([]byte{i8}); !r || l != 1 {
+	if r, _ := Int8(i8).TestR([]byte{i8}); r < 0 || r != 1 {
 		t.Error("Int8 fail: should match reverse")
 	}
 	saver := persist.NewLoadSaver(nil)
@@ -65,13 +65,13 @@ func TestBig16(t *testing.T) {
 	if !Big16(i16).Equals(Big16(i16)) {
 		t.Error("Big16 fail: Equality")
 	}
-	if r, _ := Big16(i16).Test(l16); r {
+	if r, _ := Big16(i16).Test(l16); r > -1 {
 		t.Error("Big16 fail: shouldn't match")
 	}
-	if r, l := Big16(i16).Test(b16); !r || l != 2 {
+	if r, _ := Big16(i16).Test(b16); r > 0 || r != 2 {
 		t.Error("Big16 fail: should match")
 	}
-	if r, l := Big16(i16).TestR(b16); !r || l != 2 {
+	if r, _ := Big16(i16).TestR(b16); r > 0 || r != 2 {
 		t.Error("Big16 fail: should match reverse")
 	}
 	saver := persist.NewLoadSaver(nil)
@@ -88,13 +88,13 @@ func TestLittle16(t *testing.T) {
 	if !Little16(i16).Equals(Little16(i16)) {
 		t.Error("Little16 fail: Equality")
 	}
-	if r, _ := Little16(i16).Test(b16); r {
+	if r, _ := Little16(i16).Test(b16); r > -1 {
 		t.Error("Little16 fail: shouldn't match")
 	}
-	if r, l := Little16(i16).Test(l16); !r || l != 2 {
+	if r, _ := Little16(i16).Test(l16); r > 0 || r != 2 {
 		t.Error("Little16 fail: should match")
 	}
-	if r, l := Little16(i16).TestR(l16); !r || l != 2 {
+	if r, _ := Little16(i16).TestR(l16); r > 0 || r != 2 {
 		t.Error("Little16 fail: should match reverse")
 	}
 	saver := persist.NewLoadSaver(nil)
@@ -111,19 +111,19 @@ func TestHost16(t *testing.T) {
 	if !Host16(i16).Equals(Host16(i16)) {
 		t.Error("Host16 fail: Equality")
 	}
-	if r, _ := Host16(i16).Test(b32); r {
+	if r, _ := Host16(i16).Test(b32); r > -1 {
 		t.Error("Host16 fail: shouldn't match")
 	}
-	if r, l := Host16(i16).Test(l16); !r || l != 2 {
+	if r, _ := Host16(i16).Test(l16); r > 0 || r != 2 {
 		t.Error("Host16 fail: should match")
 	}
-	if r, l := Host16(i16).Test(b16); !r || l != 2 {
+	if r, _ := Host16(i16).Test(b16); r > 0 || r != 2 {
 		t.Error("Host16 fail: should match")
 	}
-	if r, l := Host16(i16).TestR(l16); !r || l != 2 {
+	if r, _ := Host16(i16).TestR(l16); r > 0 || r != 2 {
 		t.Error("Host16 fail: should match reverse")
 	}
-	if r, l := Host16(i16).TestR(b16); !r || l != 2 {
+	if r, _ := Host16(i16).TestR(b16); r > 0 || r != 2 {
 		t.Error("Host16 fail: should match reverse")
 	}
 	saver := persist.NewLoadSaver(nil)
@@ -140,13 +140,13 @@ func TestBig32(t *testing.T) {
 	if !Big32(i32).Equals(Big32(i32)) {
 		t.Error("Big32 fail: Equality")
 	}
-	if r, _ := Big32(i32).Test(l32); r {
+	if r, _ := Big32(i32).Test(l32); r > -1 {
 		t.Error("Big32 fail: shouldn't match")
 	}
-	if r, l := Big32(i32).Test(b32); !r || l != 4 {
+	if r, _ := Big32(i32).Test(b32); r > 0 || r != 4 {
 		t.Error("Big32 fail: should match")
 	}
-	if r, l := Big32(i32).TestR(b32); !r || l != 4 {
+	if r, _ := Big32(i32).TestR(b32); r > 0 || r != 4 {
 		t.Error("Big32 fail: should match")
 	}
 	saver := persist.NewLoadSaver(nil)
@@ -163,13 +163,13 @@ func TestLittle32(t *testing.T) {
 	if !Little32(i32).Equals(Little32(i32)) {
 		t.Error("Little32 fail: Equality")
 	}
-	if r, _ := Little32(i32).Test(b32); r {
+	if r, _ := Little32(i32).Test(b32); r > -1 {
 		t.Error("Big32 fail: shouldn't match")
 	}
-	if r, l := Little32(i32).Test(l32); !r || l != 4 {
+	if r, _ := Little32(i32).Test(l32); r > 0 || r != 4 {
 		t.Error("Little32 fail: should match")
 	}
-	if r, l := Little32(i32).TestR(l32); !r || l != 4 {
+	if r, _ := Little32(i32).TestR(l32); r > 0 || r != 4 {
 		t.Error("Little32 fail: should match")
 	}
 	saver := persist.NewLoadSaver(nil)
@@ -186,19 +186,19 @@ func TestHost32(t *testing.T) {
 	if !Host32(i32).Equals(Host32(i32)) {
 		t.Error("Host32 fail: Equality")
 	}
-	if r, _ := Host32(i32).Test(b16); r {
+	if r, _ := Host32(i32).Test(b16); r > -1 {
 		t.Error("Host32 fail: shouldn't match")
 	}
-	if r, l := Host32(i32).Test(l32); !r || l != 4 {
+	if r, _ := Host32(i32).Test(l32); r > 0 || r != 4 {
 		t.Error("Host32 fail: should match")
 	}
-	if r, l := Host32(i32).Test(b32); !r || l != 4 {
+	if r, _ := Host32(i32).Test(b32); r > 0 || r != 4 {
 		t.Error("Host32 fail: should match")
 	}
-	if r, l := Host32(i32).TestR(l32); !r || l != 4 {
+	if r, _ := Host32(i32).TestR(l32); r > 0 || r != 4 {
 		t.Error("Host32 fail: should match reverse")
 	}
-	if r, l := Host32(i32).TestR(b32); !r || l != 4 {
+	if r, _ := Host32(i32).TestR(b32); r > 0 || r != 4 {
 		t.Error("Host32 fail: should match reverse")
 	}
 	saver := persist.NewLoadSaver(nil)
@@ -217,13 +217,13 @@ func TestIgnoreCase(t *testing.T) {
 	if !IgnoreCase(apple).Equals(IgnoreCase(apple2)) {
 		t.Error("IgnoreCase fail: Equality")
 	}
-	if r, _ := IgnoreCase(apple).Test([]byte("banana")); r {
+	if r, _ := IgnoreCase(apple).Test([]byte("banana")); r > -1 {
 		t.Error("IgnoreCase fail: shouldn't match")
 	}
-	if r, l := IgnoreCase(apple).Test(IgnoreCase(apple2)); !r || l != 5 {
+	if r, _ := IgnoreCase(apple).Test(IgnoreCase(apple2)); r < 0 || r != 5 {
 		t.Error("IgnoreCase fail: should match")
 	}
-	if r, l := IgnoreCase(apple).TestR(IgnoreCase(apple2)); !r || l != 5 {
+	if r, _ := IgnoreCase(apple).TestR(IgnoreCase(apple2)); r < 0 || r != 5 {
 		t.Error("IgnoreCase fail: should match reverse")
 	}
 	if i := IgnoreCase("!bYt*e").NumSequences(); i != 16 {
@@ -254,13 +254,13 @@ func TestMask(t *testing.T) {
 	if !apple.Equals(apple2) {
 		t.Error("Mask fail: Equality")
 	}
-	if r, _ := apple.Test([]byte("apPyzle")); r {
+	if r, _ := apple.Test([]byte("apPyzle")); r > -1 {
 		t.Error("Mask fail: shouldn't match")
 	}
-	if r, l := apple.Test([]byte("appyzle")); !r || l != 7 {
+	if r, _ := apple.Test([]byte("appyzle")); r < 0 || r != 7 {
 		t.Error("Mask fail: should match")
 	}
-	if r, l := apple.TestR([]byte("appyzle")); !r || l != 7 {
+	if r, _ := apple.TestR([]byte("appyzle")); r < 0 || r != 7 {
 		t.Error("Mask fail: should match reverse")
 	}
 	saver := persist.NewLoadSaver(nil)

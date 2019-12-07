@@ -13,16 +13,16 @@ func TestMachine(t *testing.T) {
 		t.Errorf("Expecting 0 sequences, got %d", machine.NumSequences())
 	}
 	// test BOF matching
-	ok, l := machine.Test(TestMP3)
-	if !ok {
+	l, _ := machine.Test(TestMP3)
+	if l < 0 {
 		t.Error("Expecting the machine to match the MP3")
 	}
 	if l != 5218 {
 		t.Errorf("Expecting length of the match to be 5218, got %d", l)
 	}
 	// check for pernicious slowdown
-	nok, _ := machine.Test(TestBumper)
-	if nok {
+	l, _ = machine.Test(TestBumper)
+	if l > -1 {
 		t.Error("Expecting the machine not to match bumper")
 	}
 	// test EOF matching
@@ -30,8 +30,8 @@ func TestMachine(t *testing.T) {
 	if rmachine.NumSequences() != 0 {
 		t.Errorf("Expecting 0 sequences, got %d", machine.NumSequences())
 	}
-	ok, l = rmachine.TestR(TestMP3)
-	if !ok {
+	l, _ = rmachine.TestR(TestMP3)
+	if l < 0 {
 		t.Error("Expecting the machine to match the MP3")
 	}
 	if l != 5218 {
