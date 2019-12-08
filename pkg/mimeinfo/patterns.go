@@ -61,7 +61,7 @@ func (n Int8) Test(b []byte) (int, int) {
 }
 
 // Test bytes against the pattern in reverse.
-func (n Int8) TestR(b []byte) (bool, int) {
+func (n Int8) TestR(b []byte) (int, int) {
 	if len(b) < 1 {
 		return -1, 0
 	}
@@ -398,7 +398,7 @@ func (n Host16) Test(b []byte) (int, int) {
 }
 
 // Test bytes against the pattern in reverse.
-func (n Host16) TestR(b []byte) (bool, int) {
+func (n Host16) TestR(b []byte) (int, int) {
 	if len(b) < 2 {
 		return -1, 0
 	}

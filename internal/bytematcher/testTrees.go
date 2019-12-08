@@ -276,14 +276,13 @@ func matchTestNodes(ts []*testNode, b []byte, rev bool) []followupMatch {
 		if o >= len(b) {
 			return
 		}
-		var success bool
 		var offs []int
 		if rev {
-			success, offs = t.MatchR(b[:len(b)-o])
+			offs = t.MatchR(b[:len(b)-o])
 		} else {
-			success, offs = t.Match(b[o:])
+			offs = t.Match(b[o:])
 		}
-		if success {
+		if len(offs) > 0 {
 			for i := range offs {
 				offs[i] = offs[i] + o
 			}

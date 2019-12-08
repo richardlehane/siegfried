@@ -180,7 +180,6 @@ func (fs *frameSet) index(buf *siegreader.Buffer, rev bool, quit chan struct{}) 
 				return
 			default:
 			}
-			var match bool
 			var matches []int
 			if rev {
 				slc, err := buf.EofSlice(0, frames.TotalLength(f))
@@ -188,16 +187,16 @@ func (fs *frameSet) index(buf *siegreader.Buffer, rev bool, quit chan struct{}) 
 					close(ret)
 					return
 				}
-				match, matches = f.MatchR(slc)
+				matches = f.MatchR(slc)
 			} else {
 				slc, err := buf.Slice(0, frames.TotalLength(f))
 				if err != nil {
 					close(ret)
 					return
 				}
-				match, matches = f.Match(slc)
+				matches = f.Match(slc)
 			}
-			if match {
+			if len(matches) > 0 {
 				var min int
 				if !rev {
 					min, _ = f.Length()
