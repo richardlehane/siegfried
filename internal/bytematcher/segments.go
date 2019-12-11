@@ -43,7 +43,7 @@ func characterise(seg frames.Signature) sigType {
 	case frames.SUCC:
 		return succ
 	case frames.EOF:
-		off := seg[len(seg)-1].Max()
+		off := seg[len(seg)-1].Max
 		switch {
 		case off == 0:
 			return eofZero
@@ -57,7 +57,7 @@ func characterise(seg frames.Signature) sigType {
 	case frames.PREV:
 		return prev
 	case frames.BOF:
-		off := seg[0].Max()
+		off := seg[0].Max
 		switch {
 		case off == 0:
 			return bofZero

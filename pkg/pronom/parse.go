@@ -74,32 +74,32 @@ func processPRONOM(puid string, s mappings.Signature) (frames.Signature, error) 
 		// check position and add patterns to signature
 		switch bs.Position {
 		case pronombof:
-			if seg[0].Min() != 0 || seg[0].Max() != 0 {
-				min, max = seg[0].Min(), seg[0].Max()
+			if seg[0].Min != 0 || seg[0].Max != 0 {
+				min, max = seg[0].Min, seg[0].Max
 			}
-			seg[0] = frames.NewFrame(frames.BOF, seg[0].Pat(), min, max)
+			seg[0] = frames.NewFrame(frames.BOF, seg[0].Pattern, min, max)
 		case pronomvry:
 			if max == 0 {
 				max = -1
 			}
-			if seg[0].Min() != 0 || seg[0].Max() != 0 {
-				min, max = seg[0].Min(), seg[0].Max()
+			if seg[0].Min != 0 || seg[0].Max != 0 {
+				min, max = seg[0].Min, seg[0].Max
 			}
 			if min == max {
 				max = -1
 			}
-			seg[0] = frames.NewFrame(frames.BOF, seg[0].Pat(), min, max)
+			seg[0] = frames.NewFrame(frames.BOF, seg[0].Pattern, min, max)
 		case pronomeof:
 			if len(seg) > 1 {
 				for i, f := range seg[:len(seg)-1] {
-					seg[i] = frames.NewFrame(frames.SUCC, f.Pat(), seg[i+1].Min(), seg[i+1].Max())
+					seg[i] = frames.NewFrame(frames.SUCC, f.Pattern, seg[i+1].Min, seg[i+1].Max)
 				}
 			}
 			// handle edge case where there is a {x-y} at end of EOF seq e.g. x-fmt/263
 			if lmin != 0 || lmax != 0 {
 				min, max = lmin, lmax
 			}
-			seg[len(seg)-1] = frames.NewFrame(frames.EOF, seg[len(seg)-1].Pat(), min, max)
+			seg[len(seg)-1] = frames.NewFrame(frames.EOF, seg[len(seg)-1].Pattern, min, max)
 		default:
 			return nil, errors.New("Pronom parse error: invalid ByteSequence position " + bs.Position)
 		}
@@ -201,15 +201,15 @@ func processSubSequence(puid string, ss mappings.SubSequence, eof, vry bool) (fr
 	}
 	if eof {
 		if ss.Position == 1 {
-			sig[len(sig)-1] = frames.NewFrame(frames.EOF, sig[len(sig)-1].Pat(), min, max)
+			sig[len(sig)-1] = frames.NewFrame(frames.EOF, sig[len(sig)-1].Pattern, min, max)
 		} else {
-			sig[len(sig)-1] = frames.NewFrame(frames.SUCC, sig[len(sig)-1].Pat(), min, max)
+			sig[len(sig)-1] = frames.NewFrame(frames.SUCC, sig[len(sig)-1].Pattern, min, max)
 		}
 	} else {
 		if ss.Position == 1 {
-			sig[0] = frames.NewFrame(frames.BOF, sig[0].Pat(), min, max)
+			sig[0] = frames.NewFrame(frames.BOF, sig[0].Pattern, min, max)
 		} else {
-			sig[0] = frames.NewFrame(frames.PREV, sig[0].Pat(), min, max)
+			sig[0] = frames.NewFrame(frames.PREV, sig[0].Pattern, min, max)
 		}
 	}
 	return sig, nil
@@ -260,11 +260,11 @@ func appendFragments(puid string, sig frames.Signature, frags []mappings.Fragmen
 				if len(pats) > 1 {
 					list := make(patterns.List, len(pats))
 					for i, v := range pats {
-						list[i] = v.Pat()
+						list[i] = v.Pattern
 					}
 					choice = append(choice, list)
 				} else {
-					choice = append(choice, pats[0].Pat())
+					choice = append(choice, pats[0].Pattern)
 				}
 			}
 			ns[i] = frames.Signature{frames.NewFrame(typ, choice, 0, 0)}
@@ -294,25 +294,25 @@ func appendFragments(puid string, sig frames.Signature, frags []mappings.Fragmen
 	if left {
 		if eof {
 			for i, v := range ns {
-				v[len(v)-1] = frames.NewFrame(frames.SUCC, v[len(v)-1].Pat(), offs[i][0], offs[i][1])
+				v[len(v)-1] = frames.NewFrame(frames.SUCC, v[len(v)-1].Pattern, offs[i][0], offs[i][1])
 				sig = append(v, sig...)
 			}
 		} else {
 			for i, v := range ns {
-				sig[0] = frames.NewFrame(frames.PREV, sig[0].Pat(), offs[i][0], offs[i][1])
+				sig[0] = frames.NewFrame(frames.PREV, sig[0].Pattern, offs[i][0], offs[i][1])
 				sig = append(v, sig...)
 			}
 		}
 	} else {
 		if eof {
 			for i, v := range ns {
-				sig[len(sig)-1] = frames.NewFrame(frames.SUCC, sig[len(sig)-1].Pat(), offs[i][0], offs[i][1])
+				sig[len(sig)-1] = frames.NewFrame(frames.SUCC, sig[len(sig)-1].Pattern, offs[i][0], offs[i][1])
 				sig = append(sig, v...)
 			}
 
 		} else {
 			for i, v := range ns {
-				v[0] = frames.NewFrame(frames.PREV, v[0].Pat(), offs[i][0], offs[i][1])
+				v[0] = frames.NewFrame(frames.PREV, v[0].Pattern, offs[i][0], offs[i][1])
 				sig = append(sig, v...)
 			}
 		}

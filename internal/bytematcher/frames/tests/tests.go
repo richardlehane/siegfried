@@ -23,93 +23,93 @@ import (
 
 // TestFrames are exported so they can be used by the other bytematcher packages.
 var TestFrames = []Frame{
-	Fixed{BOF, 0, TestSequences[0]},      //0 test
-	Fixed{BOF, 0, TestSequences[1]},      // test
-	Fixed{SUCC, 0, TestSequences[2]},     // testy
-	Fixed{PREV, 0, TestSequences[3]},     // TEST
-	Fixed{SUCC, 1, TestSequences[0]},     // test
-	Window{BOF, 0, 5, TestSequences[0]},  //5 test
-	Window{PREV, 10, 20, TestChoices[2]}, // TESTY | YNESS
-	Window{EOF, 10, 20, TestChoices[0]},  // test | testy
-	Window{PREV, 0, 1, TestSequences[3]}, // TEST
-	Wild{BOF, TestSequences[0]},          // test
-	Wild{SUCC, TestChoices[0]},           //10 test | testy
-	WildMin{BOF, 5, TestSequences[0]},    // test
-	WildMin{EOF, 5, TestSequences[0]},    // test
-	Window{BOF, 0, 5, TestChoices[4]},    // a | b
-	Wild{PREV, TestSequences[0]},         // test
-	Wild{BOF, TestSequences[0]},          //15
-	Wild{BOF, TestSequences[16]},
-	Fixed{EOF, 0, TestSequences[17]},
-	Fixed{BOF, 0, TestLists[0]},
+	{0, 0, BOF, TestSequences[0]},   //0 test
+	{0, 0, BOF, TestSequences[1]},   // test
+	{0, 0, SUCC, TestSequences[2]},  // testy
+	{0, 0, PREV, TestSequences[3]},  // TEST
+	{1, 1, SUCC, TestSequences[0]},  // test
+	{0, 5, BOF, TestSequences[0]},   //5 test
+	{10, 20, PREV, TestChoices[2]},  // TESTY | YNESS
+	{10, 20, EOF, TestChoices[0]},   // test | testy
+	{0, 1, PREV, TestSequences[3]},  // TEST
+	{0, -1, BOF, TestSequences[0]},  // test
+	{0, -1, SUCC, TestChoices[0]},   //10 test | testy
+	{5, -1, BOF, TestSequences[0]},  // test
+	{5, -1, EOF, TestSequences[0]},  // test
+	{0, 5, BOF, TestChoices[4]},     // a | b
+	{0, -1, PREV, TestSequences[0]}, // test
+	{0, -1, BOF, TestSequences[0]},  //15
+	{0, -1, BOF, TestSequences[16]},
+	{0, 0, EOF, TestSequences[17]},
+	{0, 0, BOF, TestLists[0]},
 }
 
 // TestFmts tests some particularly problematic formats.
 var TestFmts = map[int]Signature{
 	134: {
-		Fixed{BOF, 0, patterns.Sequence{255, 254}},
-		Fixed{PREV, 0, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}}}, // This pattern is actually a range 10:EB but simplified here
-		Window{PREV, 46, 1439, patterns.Sequence{255, 254}},
-		Fixed{PREV, 0, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}}},
-		Window{PREV, 46, 1439, patterns.Sequence{255, 254}},
-		Fixed{PREV, 0, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}}},
-		Window{PREV, 46, 1439, patterns.Sequence{255, 254}},
-		Fixed{PREV, 0, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}}},
-		Window{PREV, 46, 1439, patterns.Sequence{255, 254}},
-		Fixed{PREV, 0, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}}},
-		Window{PREV, 46, 1439, patterns.Sequence{255, 254}},
-		Fixed{PREV, 0, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}}},
-		Window{PREV, 46, 1439, patterns.Sequence{255, 254}},
-		Fixed{PREV, 0, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}}},
-		Window{PREV, 46, 1439, patterns.Sequence{255, 254}},
-		Fixed{PREV, 0, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}}},
+		{0, 0, BOF, patterns.Sequence{255, 254}},
+		{0, 0, PREV, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}}}, // This pattern is actually a range 10:EB but simplified here
+		{46, 1439, PREV, patterns.Sequence{255, 254}},
+		{0, 0, PREV, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}}},
+		{46, 1439, PREV, patterns.Sequence{255, 254}},
+		{0, 0, PREV, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}}},
+		{46, 1439, PREV, patterns.Sequence{255, 254}},
+		{0, 0, PREV, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}}},
+		{46, 1439, PREV, patterns.Sequence{255, 254}},
+		{0, 0, PREV, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}}},
+		{46, 1439, PREV, patterns.Sequence{255, 254}},
+		{0, 0, PREV, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}}},
+		{46, 1439, PREV, patterns.Sequence{255, 254}},
+		{0, 0, PREV, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}}},
+		{46, 1439, PREV, patterns.Sequence{255, 254}},
+		{0, 0, PREV, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}}},
 	},
 	13401: { // the 1st signature for 134 (EOF bit)
-		Fixed{SUCC, 0, patterns.Sequence{255, 251}},
-		Window{SUCC, 46, 1439, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}}, // This pattern is actually a range 10:EB but simplified here
-		Fixed{SUCC, 0, patterns.Sequence{255, 251}},
-		Window{SUCC, 46, 1439, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}},
-		Fixed{SUCC, 0, patterns.Sequence{255, 251}},
-		Window{SUCC, 46, 1439, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}},
-		Fixed{SUCC, 0, patterns.Sequence{255, 251}},
-		Window{SUCC, 46, 1439, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}},
-		Fixed{SUCC, 0, patterns.Sequence{255, 251}},
-		Window{SUCC, 46, 1439, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}},
-		Fixed{SUCC, 0, patterns.Sequence{255, 251}},
-		Window{SUCC, 46, 1439, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}},
-		Fixed{SUCC, 0, patterns.Sequence{255, 251}},
-		Window{EOF, 47, 1795, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}},
+		{0, 0, SUCC, patterns.Sequence{255, 251}},
+		{46, 1439, SUCC, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}}, // This pattern is actually a range 10:EB but simplified here
+		{0, 0, SUCC, patterns.Sequence{255, 251}},
+		{46, 1439, SUCC, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}},
+		{0, 0, SUCC, patterns.Sequence{255, 251}},
+		{46, 1439, SUCC, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}},
+		{0, 0, SUCC, patterns.Sequence{255, 251}},
+		{46, 1439, SUCC, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}},
+		{0, 0, SUCC, patterns.Sequence{255, 251}},
+		{46, 1439, SUCC, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}},
+		{0, 0, SUCC, patterns.Sequence{255, 251}},
+		{46, 1439, SUCC, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}},
+		{0, 0, SUCC, patterns.Sequence{255, 251}},
+		{47, 1795, EOF, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}},
 	},
 	13405: { // the 5th signature for 134
-		Fixed{BOF, 0, patterns.Sequence{255, 251}},
-		Fixed{PREV, 0, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}}, // This pattern is actually a range 10:EB but simplified here
-		Window{PREV, 46, 1439, patterns.Sequence{255, 251}},
-		Fixed{PREV, 0, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}},
-		Window{PREV, 46, 1439, patterns.Sequence{255, 251}},
-		Fixed{PREV, 0, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}},
-		Window{PREV, 46, 1439, patterns.Sequence{255, 251}},
-		Fixed{PREV, 0, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}},
-		Window{PREV, 46, 1439, patterns.Sequence{255, 251}},
-		Fixed{PREV, 0, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}},
-		Window{PREV, 46, 1439, patterns.Sequence{255, 251}},
-		Fixed{PREV, 0, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}},
-		Window{PREV, 46, 1439, patterns.Sequence{255, 251}},
-		Fixed{PREV, 0, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}},
-		Window{PREV, 46, 1439, patterns.Sequence{255, 251}},
-		Fixed{PREV, 0, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}},
+		{0, 0, BOF, patterns.Sequence{255, 251}},
+		{0, 0, PREV, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}}, // This pattern is actually a range 10:EB but simplified here
+		{46, 1439, PREV, patterns.Sequence{255, 251}},
+		{0, 0, PREV, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}},
+		{46, 1439, PREV, patterns.Sequence{255, 251}},
+		{0, 0, PREV, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}},
+		{46, 1439, PREV, patterns.Sequence{255, 251}},
+		{0, 0, PREV, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}},
+		{46, 1439, PREV, patterns.Sequence{255, 251}},
+		{0, 0, PREV, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}},
+		{46, 1439, PREV, patterns.Sequence{255, 251}},
+		{0, 0, PREV, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}},
+		{46, 1439, PREV, patterns.Sequence{255, 251}},
+		{0, 0, PREV, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}},
+		{46, 1439, PREV, patterns.Sequence{255, 251}},
+		{0, 0, PREV, patterns.Choice{patterns.Sequence{16}, patterns.Sequence{17}, patterns.Sequence{18}, patterns.Sequence{19}, patterns.Sequence{20}, patterns.Sequence{125}}},
 	},
 	418: {
-		Fixed{BOF, 0, patterns.Sequence("%!PS-Adobe-2.0")},
-		Window{PREV, 16, 512, patterns.Sequence("%%DocumentNeededResources:")},
-		Window{PREV, 1, 512, patterns.Sequence("%%+ procset Adobe_Illustrator")},
-		Fixed{PREV, 0, patterns.Choice{patterns.Sequence("_AI3"), patterns.Sequence("A_AI3")}},
+		{0, 0, BOF, patterns.Sequence("%!PS-Adobe-2.0")},
+		{16, 512, PREV, patterns.Sequence("%%DocumentNeededResources:")},
+		{1, 512, PREV, patterns.Sequence("%%+ procset Adobe_Illustrator")},
+		{0, 0, PREV, patterns.Choice{patterns.Sequence("_AI3"), patterns.Sequence("A_AI3")}},
 	},
 	363: {
-		Window{BOF, 0, 320, patterns.Sequence("@@@@@@@@@@@@@@@@@@@@@@")},
-		Fixed{BOF, 3200, patterns.Sequence{0, 0}},
-		Fixed{PREV, 15, patterns.Not{patterns.Sequence{0}}},
-		Fixed{PREV, 3, patterns.Not{patterns.Sequence{0}}},
-		Fixed{PREV, 2, patterns.Choice{
+		{0, 320, BOF, patterns.Sequence("@@@@@@@@@@@@@@@@@@@@@@")},
+		{3200, 3200, BOF, patterns.Sequence{0, 0}},
+		{15, 15, PREV, patterns.Not{patterns.Sequence{0}}},
+		{3, 3, PREV, patterns.Not{patterns.Sequence{0}}},
+		{2, 2, PREV, patterns.Choice{
 			patterns.Sequence{1, 0},
 			patterns.List{
 				patterns.Sequence{0},
@@ -119,12 +119,12 @@ var TestFmts = map[int]Signature{
 		},
 	},
 	704: {
-		Fixed{BOF, 0, patterns.Sequence("RIFF")},
-		Fixed{PREV, 4, patterns.Sequence("WAVE")},
-		Wild{PREV, patterns.Sequence("fmt ")},
-		Fixed{PREV, 4, patterns.Sequence{1, 0}},
-		Wild{PREV, patterns.Sequence("bext")},
-		Fixed{PREV, 350, patterns.Sequence{1, 0}},
+		{0, 0, BOF, patterns.Sequence("RIFF")},
+		{4, 4, PREV, patterns.Sequence("WAVE")},
+		{0, -1, PREV, patterns.Sequence("fmt ")},
+		{4, 4, PREV, patterns.Sequence{1, 0}},
+		{0, -1, PREV, patterns.Sequence("bext")},
+		{350, 350, PREV, patterns.Sequence{1, 0}},
 	},
 }
 

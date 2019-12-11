@@ -32,7 +32,7 @@ func (s Signature) String() string {
 
 func (s Signature) OneEnough() bool {
 	for _, f := range s {
-		if _, ok := f.(Fixed); !ok {
+		if f.Min != f.Max {
 			return false
 		}
 	}
@@ -75,10 +75,10 @@ func (s Signature) position(idx int) (bool, int, int) {
 				min, max = 0, 0
 			}
 			if j == idx {
-				return false, addWilds(min, f.Min()), addWilds(max, f.Max())
+				return false, addWilds(min, f.Min), addWilds(max, f.Max)
 			}
 			minl, maxl := f.Length()
-			min, max = addWilds(min, f.Min(), minl), addWilds(max, f.Max(), maxl)
+			min, max = addWilds(min, f.Min, minl), addWilds(max, f.Max, maxl)
 		}
 	}
 	for i, f := range s {
@@ -86,10 +86,10 @@ func (s Signature) position(idx int) (bool, int, int) {
 			min, max = 0, 0
 		}
 		if i == idx {
-			return true, addWilds(min, f.Min()), addWilds(max, f.Max())
+			return true, addWilds(min, f.Min), addWilds(max, f.Max)
 		}
 		minl, maxl := f.Length()
-		min, max = addWilds(min, f.Min(), minl), addWilds(max, f.Max(), maxl)
+		min, max = addWilds(min, f.Min, minl), addWilds(max, f.Max, maxl)
 	}
 	// should not get here
 	return false, -1, -1
@@ -116,7 +116,7 @@ func (s Signature) Contains(s1 Signature) bool {
 	}
 	var numEquals int
 	for i, f := range s {
-		if idx := patterns.Index(f.Pat(), s1[numEquals].Pat()); idx >= 0 {
+		if idx := patterns.Index(f.Pattern, s1[numEquals].Pattern); idx >= 0 {
 			a, amin, amax := s.position(i)
 			amin += idx
 			b, bmin, bmax := s1.position(numEquals)
@@ -164,13 +164,13 @@ func (s Signature) Segment(dist, rng int) []Signature {
 func (s Signature) reverse(last bool, min int) Signature {
 	ret := make(Signature, len(s))
 	for i := range s[:len(s)-1] {
-		ret[i] = SwitchFrame(s[i+1], s[i].Pat())
+		ret[i] = SwitchFrame(s[i+1], s[i].Pattern)
 	}
 	typ := SUCC
 	if last {
 		typ = EOF
 	}
-	ret[len(ret)-1] = NewFrame(typ, s[len(s)-1].Pat(), min)
+	ret[len(ret)-1] = NewFrame(typ, s[len(s)-1].Pattern, min)
 	return ret
 }
 
@@ -181,8 +181,8 @@ func (s Signature) Mirror() Signature {
 	segments := s.Segment(bignum, bignum)
 	var hasWild = -1
 	for i, v := range segments {
-		if v[0].Orientation() < SUCC && v[0].Max() == -1 {
-			if v[0].Orientation() < PREV && v[0].Min() > 0 {
+		if v[0].Orientation() < SUCC && v[0].Max == -1 {
+			if v[0].Orientation() < PREV && v[0].Min > 0 {
 				hasWild = -1 // reset on BOF min wild
 			} else {
 				if hasWild < 0 {
@@ -196,7 +196,7 @@ func (s Signature) Mirror() Signature {
 	}
 	ret := make(Signature, 0, len(s))
 	for i, v := range segments {
-		if i >= hasWild && v[0].Orientation() < SUCC && v[0].Max() == -1 {
+		if i >= hasWild && v[0].Orientation() < SUCC && v[0].Max == -1 {
 			var last bool
 			var min int
 			if i == len(segments)-1 {
@@ -204,7 +204,7 @@ func (s Signature) Mirror() Signature {
 			} else {
 				next := segments[i+1][0]
 				if next.Orientation() < SUCC {
-					min = next.Min()
+					min = next.Min
 				}
 			}
 			ret = append(ret, v.reverse(last, min)...)

@@ -17,7 +17,6 @@
 package frames
 
 import (
-	"errors"
 	"strconv"
 
 	"github.com/richardlehane/siegfried/internal/bytematcher/patterns"
@@ -90,7 +89,7 @@ func NewFrame(typ OffType, pat patterns.Pattern, offsets ...int) Frame {
 	if offsets[0] < 0 {
 		offsets[0] = 0
 	}
-	return Frame{typ, offsets[0], offsets[1], pat}
+	return Frame{offsets[0], offsets[1], typ, pat}
 }
 
 // SwitchFrame returns a new frame with a different orientation (for example to allow right-left searching).
@@ -102,7 +101,7 @@ func SwitchFrame(f Frame, p patterns.Pattern) Frame {
 func BMHConvert(fs []Frame, rev bool) []Frame {
 	nfs := make([]Frame, len(fs))
 	for i, f := range fs {
-		nfs[i] = NewFrame(f.Orientation(), patterns.BMH(f.Pat(), rev), f.Min, f.Max)
+		nfs[i] = NewFrame(f.Orientation(), patterns.BMH(f.Pattern, rev), f.Min, f.Max)
 	}
 	return nfs
 }
@@ -200,7 +199,7 @@ func (f Frame) MatchR(b []byte) []int {
 // For the nth match (per above), return the offset for successive match by related frame and bytes that can advance to make a successive test by this frame.
 func (f Frame) MatchNR(b []byte, n int) (int, int) {
 	var i int
-	min, max := f.Min, w.Max
+	min, max := f.Min, f.Max
 	if max < 0 || max > len(b) {
 		max = len(b)
 	}
@@ -243,7 +242,7 @@ func (f Frame) MaxMatches(l int) (int, int, int) {
 	}
 	// handle fixed
 	if f.Min == f.Max {
-		return 1, rem, min	
+		return 1, rem, min
 	}
 	var ov int
 	if f.OffType <= 1 {
@@ -252,9 +251,9 @@ func (f Frame) MaxMatches(l int) (int, int, int) {
 		ov = patterns.OverlapR(f.Pattern)
 	}
 	if f.Max < 0 || f.Max+min > l {
-		return rem/ov+ 1, rem, min	
+		return rem/ov + 1, rem, min
 	}
-	return (f.Max - min - f.Min)/ov+ 1, rem, min
+	return (f.Max-min-f.Min)/ov + 1, rem, min
 }
 
 // Linked tests whether a frame is linked to a preceding frame (by a preceding or succeding relationship) with an offset and range that is less than the supplied ints.
@@ -265,10 +264,10 @@ func (f Frame) Linked(prev Frame, maxDistance, maxRange int) (bool, int, int) {
 		if maxDistance < 0 {
 			return true, maxDistance, maxRange
 		}
-		if f.Max < 0 || f.Max > maxDistance || f.Max-w.Min > maxRange {
+		if f.Max < 0 || f.Max > maxDistance || f.Max-f.Min > maxRange {
 			return false, 0, 0
 		}
-		return true, maxDistance - f.Max, maxRange - (w.Max - w.Min)
+		return true, maxDistance - f.Max, maxRange - (f.Max - f.Min)
 	case SUCC, EOF:
 		if prev.Orientation() != SUCC || prev.Max < 0 {
 			return false, 0, 0
@@ -285,7 +284,7 @@ func (f Frame) Linked(prev Frame, maxDistance, maxRange int) (bool, int, int) {
 	}
 }
 
-func (f Frame) Save(*persist.LoadSaver) {
+func (f Frame) Save(ls *persist.LoadSaver) {
 	ls.SaveInt(f.Min)
 	ls.SaveInt(f.Max)
 	ls.SaveByte(byte(f.OffType))

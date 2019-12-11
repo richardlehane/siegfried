@@ -50,7 +50,7 @@ func TestKeyFrame(t *testing.T) {
 	if len(left) != 1 {
 		t.Error("KeyFrame: expecting only one frame on the left")
 	}
-	seq := left[0].Pat().Sequences()
+	seq := left[0].Pattern.Sequences()
 	if seq[0][1] != 'e' {
 		t.Error("KeyFrame: expecting the left frame's pattern to have been reversed")
 	}

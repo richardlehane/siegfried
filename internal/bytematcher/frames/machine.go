@@ -103,9 +103,9 @@ func (m Machine) Length() (int, int) {
 	var min, max int
 	for _, f := range m {
 		pmin, pmax := f.Length()
-		min += f.Min()
+		min += f.Min
 		min += pmin
-		max += f.Max()
+		max += f.Max
 		max += pmax
 	}
 	return min, max

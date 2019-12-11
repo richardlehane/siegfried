@@ -40,7 +40,7 @@ func TestWindow(t *testing.T) {
 	}
 	num, rem, _ := w2.MaxMatches(16)
 	if num != 2 {
-		t.Errorf("Window fail: MaxMatches should have four matches, got %d", num)
+		t.Errorf("Window fail: MaxMatches should have two matches, got %d", num)
 	}
 	if rem != 12 {
 		t.Errorf("Window fail: MaxMatches should have rem value 12, got %d", rem)

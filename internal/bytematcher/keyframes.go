@@ -131,18 +131,18 @@ func toKeyFrame(seg frames.Signature, pos position) (keyFrame, []frames.Frame, [
 	keyPos.lMin, keyPos.lMax = calcLen(seg[pos.start:pos.end])
 	// BOF and PREV segments
 	if seg[0].Orientation() < frames.SUCC {
-		typ, segPos.pMin, segPos.pMax = seg[0].Orientation(), int64(seg[0].Min()), int64(seg[0].Max())
+		typ, segPos.pMin, segPos.pMax = seg[0].Orientation(), int64(seg[0].Min), int64(seg[0].Max)
 		keyPos.pMin, keyPos.pMax = segPos.pMin, segPos.pMax
 		for i, f := range seg[:pos.start+1] {
 			if pos.start > i {
 				min, max := f.Length()
 				keyPos.pMin += int64(min)
-				keyPos.pMin += int64(seg[i+1].Min())
+				keyPos.pMin += int64(seg[i+1].Min)
 				if keyPos.pMax > -1 {
 					keyPos.pMax += int64(max)
-					keyPos.pMax += int64(seg[i+1].Max())
+					keyPos.pMax += int64(seg[i+1].Max)
 				}
-				left = append([]frames.Frame{frames.SwitchFrame(seg[i+1], f.Pat())}, left...)
+				left = append([]frames.Frame{frames.SwitchFrame(seg[i+1], f.Pattern)}, left...)
 			}
 		}
 		if pos.end < len(seg) {
@@ -151,18 +151,18 @@ func toKeyFrame(seg frames.Signature, pos position) (keyFrame, []frames.Frame, [
 		return keyFrame{typ, segPos, keyPos}, frames.BMHConvert(left, true), frames.BMHConvert(right, false)
 	}
 	// EOF and SUCC segments
-	typ, segPos.pMin, segPos.pMax = seg[len(seg)-1].Orientation(), int64(seg[len(seg)-1].Min()), int64(seg[len(seg)-1].Max())
+	typ, segPos.pMin, segPos.pMax = seg[len(seg)-1].Orientation(), int64(seg[len(seg)-1].Min), int64(seg[len(seg)-1].Max)
 	keyPos.pMin, keyPos.pMax = segPos.pMin, segPos.pMax
 	if pos.end < len(seg) {
 		for i, f := range seg[pos.end:] {
 			min, max := f.Length()
 			keyPos.pMin += int64(min)
-			keyPos.pMin += int64(seg[pos.end+i-1].Min())
+			keyPos.pMin += int64(seg[pos.end+i-1].Min)
 			if keyPos.pMax > -1 {
 				keyPos.pMax += int64(max)
-				keyPos.pMax += int64(seg[pos.end+i-1].Max())
+				keyPos.pMax += int64(seg[pos.end+i-1].Max)
 			}
-			right = append(right, frames.SwitchFrame(seg[pos.end+i-1], f.Pat()))
+			right = append(right, frames.SwitchFrame(seg[pos.end+i-1], f.Pattern))
 		}
 	}
 	for _, f := range seg[:pos.start] {
@@ -180,8 +180,8 @@ func calcLen(fs []frames.Frame) (int, int) {
 			min += fmin
 			max += fmax
 			if i > 0 {
-				min += f.Min()
-				max += f.Max()
+				min += f.Min
+				max += f.Max
 			}
 		}
 		return min, max
@@ -192,8 +192,8 @@ func calcLen(fs []frames.Frame) (int, int) {
 		min += fmin
 		max += fmax
 		if i < len(fs)-1 {
-			min += f.Min()
-			max += f.Max()
+			min += f.Min
+			max += f.Max
 		}
 	}
 	return min, max
