@@ -231,48 +231,30 @@ func (f Frame) String() string {
 	return OffString[f.OffType] + ":" + strconv.Itoa(f.Min) + "-" + strconv.Itoa(f.Max) + " " + f.Pattern.String()
 }
 
-// MaxMatches returns the max number of times a frame can match, given a byte slice of length 'l', and the maximum remaining slice length
+// MaxMatches returns:
+//   - the max number of times a frame can match, given a byte slice of length 'l'
+//   - the maximum remaining slice length
+//   - the minimum length of a successful pattern match
 func (f Frame) MaxMatches(l int) (int, int, int) {
 	min, _ := f.Length()
-	rem := l - min - f.Off
-	if rem >= 0 {
-		return 1, rem, min
-	}
-	return 0, 0, 0
-}
-
-// MaxMatches returns the max number of times a frame can match, given a byte slice of length 'l', and the maximum remaining slice length
-// TODO: this is *wrong* because it presumes a pattern can't overlap i.e. in AAAAAA, the string AA can match at 5 positions, not 3
-func (w Window) MaxMatches(l int) (int, int, int) {
-	min, _ := w.Length()
-	rem := l - min - w.MinOff
+	rem := l - min - f.Min
 	if rem < 0 {
 		return 0, 0, 0
 	}
-	if w.MaxOff+min > l {
-		return rem/min + 1, rem, min
+	// handle fixed
+	if f.Min == f.Max {
+		return 1, rem, min	
 	}
-	return (w.MaxOff + min - w.MinOff) / min, rem, min
-}
-
-// MaxMatches returns the max number of times a frame can match, given a byte slice of length 'l', and the maximum remaining slice length
-func (w Wild) MaxMatches(l int) (int, int, int) {
-	min, _ := w.Length()
-	rem := l - min
-	if rem < 0 {
-		return 0, 0, 0
+	var ov int
+	if f.OffType <= 1 {
+		ov = patterns.Overlap(f.Pattern)
+	} else {
+		ov = patterns.OverlapR(f.Pattern)
 	}
-	return rem/min + 1, rem, min
-}
-
-// MaxMatches returns the max number of times a frame can match, given a byte slice of length 'l', and the maximum remaining slice length
-func (w WildMin) MaxMatches(l int) (int, int, int) {
-	min, _ := w.Length()
-	rem := l - min - w.MinOff
-	if rem < 0 {
-		return 0, 0, 0
+	if f.Max < 0 || f.Max+min > l {
+		return (l-f.Min)/ov+ 1, rem, min	
 	}
-	return rem/min + 1, rem, min
+	return (f.Max + min - f.Min)/ov+ 1, rem, min
 }
 
 // Linked tests whether a frame is linked to a preceding frame (by a preceding or succeding relationship) with an offset and range that is less than the supplied ints.
