@@ -252,9 +252,9 @@ func (f Frame) MaxMatches(l int) (int, int, int) {
 		ov = patterns.OverlapR(f.Pattern)
 	}
 	if f.Max < 0 || f.Max+min > l {
-		return (l-f.Min)/ov+ 1, rem, min	
+		return rem/ov+ 1, rem, min	
 	}
-	return (f.Max + min - f.Min)/ov+ 1, rem, min
+	return (f.Max - min - f.Min)/ov+ 1, rem, min
 }
 
 // Linked tests whether a frame is linked to a preceding frame (by a preceding or succeding relationship) with an offset and range that is less than the supplied ints.
