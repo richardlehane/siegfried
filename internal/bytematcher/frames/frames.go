@@ -228,16 +228,7 @@ func (f Frame) Equals(f1 Frame) bool {
 }
 
 func (f Frame) String() string {
-	switch {
-	case f.Min == f.Max && f.Min >= 0:
-		"F " + OffString[f.OffType] + ":" + strconv.Itoa(f.Min) + " " + f.Pattern.String()
-	case f.Min > 0 && f.Max < -1:
-		"WM " + OffString[f.OffType] + ":" + strconv.Itoa(f.Min) + " " + f.Pattern.String()
-	case f.Min <= 0 && f.Max < -1:
-		"WL " + OffString[f.OffType] + " " + f.Pattern.String()
-	default:
-		"WW " + OffString[f.OffType] + ":" + strconv.Itoa(f.Min) + "-" + strconv.Itoa(f.Max) + " " + f.Pattern.String()
-	}
+	return OffString[f.OffType] + ":" + strconv.Itoa(f.Min) + "-" + strconv.Itoa(f.Max) + " " + f.Pattern.String()
 }
 
 // MaxMatches returns the max number of times a frame can match, given a byte slice of length 'l', and the maximum remaining slice length
