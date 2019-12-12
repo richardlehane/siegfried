@@ -24,7 +24,7 @@ import (
 
 func (b *Matcher) addSignature(sig frames.Signature) error {
 	// todo: add cost to the Segment - or merge segments based on cost?
-	segments := sig.Segment(config.Distance(), config.Range())
+	segments := sig.Segment(config.Distance(), config.Range(), config.Cost())
 	// apply config no eof option
 	if config.NoEOF() {
 		var hasEof bool

@@ -140,7 +140,34 @@ func (s Signature) Contains(s1 Signature) bool {
 // 3. [EOF 0: "XYZ"]
 // The Distance and Range options control the allowable distance and range between frames
 // (i.e. a fixed offset of 5000 distant might be acceptable, where a range of 1-2000 might not be).
-func (s Signature) Segment(dist, rng int) []Signature {
+func (s Signature) Segment(dist, rng, cost int) []Signature {
+	// first pass: segment just on wild, then check cost of further segmentation
+	wildSegs := s.segment(-1, -1)
+	ret := make([]Signature, 0, 1)
+	for _, v := range wildSegs {
+		if !v.costly(cost) {
+			segs := s.segment(dist, rng)
+			for _, s := range segs {
+				ret = append(ret, s)
+			}
+		}
+	}
+	return ret
+}
+
+func (s Signature) costly(cost int) bool {
+	price := 1
+	for _, v := range s {
+		mm, _, _ := v.MaxMatches(-1)
+		price = price * mm
+		if cost < price {
+			return true
+		}
+	}
+	return false
+}
+
+func (s Signature) segment(dist, rng int) []Signature {
 	if len(s) <= 1 {
 		return []Signature{s}
 	}
@@ -177,8 +204,7 @@ func (s Signature) reverse(last bool, min int) Signature {
 // Mirror returns a signature in which wildcard previous segments are turned into wildcard succ/eof segments.
 // If no wildcard previous segments are present, nil is returned.
 func (s Signature) Mirror() Signature {
-	const bignum = 1000000
-	segments := s.Segment(bignum, bignum)
+	segments := s.segment(-1, -1)
 	var hasWild = -1
 	for i, v := range segments {
 		if v[0].Orientation() < SUCC && v[0].Max == -1 {

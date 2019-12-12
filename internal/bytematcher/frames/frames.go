@@ -237,20 +237,20 @@ func (f Frame) String() string {
 func (f Frame) MaxMatches(l int) (int, int, int) {
 	min, _ := f.Length()
 	rem := l - min - f.Min
-	if rem < 0 {
+	if rem < 0 && l >= 0 {
 		return 0, 0, 0
 	}
 	// handle fixed
-	if f.Min == f.Max {
+	if f.Min == f.Max || (l < 0 && f.Max < 0) {
 		return 1, rem, min
 	}
 	var ov int
-	if f.OffType <= 1 {
+	if f.OffType <= PREV {
 		ov = patterns.Overlap(f.Pattern)
 	} else {
 		ov = patterns.OverlapR(f.Pattern)
 	}
-	if f.Max < 0 || f.Max+min > l {
+	if f.Max < 0 || (l > 0 && f.Max+min > l) {
 		return rem/ov + 1, rem, min
 	}
 	return (f.Max-f.Min)/ov + 1, rem, min
@@ -261,7 +261,7 @@ func (f Frame) MaxMatches(l int) (int, int, int) {
 func (f Frame) Linked(prev Frame, maxDistance, maxRange int) (bool, int, int) {
 	switch f.OffType {
 	case PREV:
-		if maxDistance < 0 {
+		if maxDistance < 0 && f.Max > -1 {
 			return true, maxDistance, maxRange
 		}
 		if f.Max < 0 || f.Max > maxDistance || f.Max-f.Min > maxRange {

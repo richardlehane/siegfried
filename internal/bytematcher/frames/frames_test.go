@@ -57,8 +57,8 @@ func TestWild(t *testing.T) {
 		t.Error("Wild fail: Equality")
 	}
 	num, rem, _ := w2.MaxMatches(10)
-	if num != 2 {
-		t.Errorf("Wild fail: MaxMatches should have two matches, got %d", num)
+	if num != 3 {
+		t.Errorf("Wild fail: MaxMatches should have three matches, got %d", num)
 	}
 	if rem != 6 {
 		t.Errorf("Wild fail: MaxMatches should have rem value 6, got %d", rem)
@@ -80,12 +80,5 @@ func TestWildMin(t *testing.T) {
 	}
 	if rem != 1 {
 		t.Errorf("WildMin fail: MaxMatches should have rem value 1, got %d", rem)
-	}
-}
-
-func TestMirror(t *testing.T) {
-	mirror := TestSignatures[2].Mirror()
-	if mirror[1].Orientation() != EOF {
-		t.Errorf("Mirror fail: got %v", mirror)
 	}
 }
