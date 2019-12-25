@@ -14,7 +14,10 @@
 
 package frames
 
-import "github.com/richardlehane/siegfried/internal/bytematcher/patterns"
+import (
+	"fmt"
+	"github.com/richardlehane/siegfried/internal/bytematcher/patterns"
+)
 
 // Signature is just a slice of frames.
 type Signature []Frame
@@ -140,6 +143,8 @@ func (s Signature) Contains(s1 Signature) bool {
 // 3. [EOF 0: "XYZ"]
 // The Distance and Range options control the allowable distance and range between frames
 // (i.e. a fixed offset of 5000 distant might be acceptable, where a range of 1-2000 might not be).
+var costCount = 1
+
 func (s Signature) Segment(dist, rng, cost int) []Signature {
 	// first pass: segment just on wild, then check cost of further segmentation
 	wildSegs := s.segment(-1, -1)
@@ -150,6 +155,13 @@ func (s Signature) Segment(dist, rng, cost int) []Signature {
 			for _, s := range segs {
 				ret = append(ret, s)
 			}
+		} else {
+			fmt.Printf("---\n%d result:\n", costCount)
+			fmt.Println(v)
+			fmt.Println("%%%")
+			fmt.Println(s)
+			fmt.Println("---")
+			costCount++
 		}
 	}
 	return ret

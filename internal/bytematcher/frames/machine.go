@@ -24,7 +24,8 @@ func init() {
 }
 
 const (
-	machineLoader byte = 15 // mimeinfo patterns start at 16
+	machineLoader byte = iota + 12 // mimeinfo patterns start at 16
+	blockLoader
 )
 
 // A Machine is a segment of a signature that implements the patterns interface
@@ -140,4 +141,9 @@ func loadMachine(ls *persist.LoadSaver) patterns.Pattern {
 		m[i] = Load(ls)
 	}
 	return m
+}
+
+type Block struct {
+	Frames []Frame
+	Key    int
 }

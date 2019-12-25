@@ -12,83 +12,79 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package bytematcher
+package frames
 
-import (
-	"fmt"
+import "fmt"
 
-	"github.com/richardlehane/siegfried/internal/bytematcher/frames"
-)
-
-type sigType int
+type SigType int
 
 const (
-	unknown   sigType = iota
-	bofZero           // fixed offset, zero length from BOF
-	bofWindow         // offset is a window or fixed value greater than zero from BOF
-	bofWild
-	prev
-	succ
-	eofZero
-	eofWindow
-	eofWild
+	Unknown   SigType = iota
+	BOFZero           // fixed offset, zero length from BOF
+	BOFWindow         // offset is a window or fixed value greater than zero from BOF
+	BOFWild
+	Prev
+	Succ
+	EOFZero
+	EOFWindow
+	EOFWild
 )
 
 // Simple characterisation of a segment: is it relative to the BOF, or the EOF, or is it a prev/succ segment.
-func characterise(seg frames.Signature) sigType {
+func Characterise(seg Signature) SigType {
 	if len(seg) == 0 {
-		return unknown
+		return Unknown
 	}
 	switch seg[len(seg)-1].Orientation() {
-	case frames.SUCC:
-		return succ
-	case frames.EOF:
+	case SUCC:
+		return Succ
+	case EOF:
 		off := seg[len(seg)-1].Max
 		switch {
 		case off == 0:
-			return eofZero
+			return EOFZero
 		case off < 0:
-			return eofWild
+			return EOFWild
 		default:
-			return eofWindow
+			return EOFWindow
 		}
 	}
 	switch seg[0].Orientation() {
-	case frames.PREV:
-		return prev
-	case frames.BOF:
+	case PREV:
+		return Prev
+	case BOF:
 		off := seg[0].Max
 		switch {
 		case off == 0:
-			return bofZero
+			return BOFZero
 		case off < 0:
-			return bofWild
+			return BOFWild
 		}
 	}
-	return bofWindow
+	return BOFWindow
 }
 
 // position of a key frame in a segment: the length (minimum length in bytes), start and end indexes.
 // The keyframe can span multiple frames in the segment (if they are immediately adjacent and can make sequences)
 // which is why there is a start and end index
 // If length is 0, the segment goes to the frame matcher
-type position struct {
-	length int
-	start  int
-	end    int
+type Position struct {
+	Length int
+	Start  int
+	End    int
 }
 
-func (p position) String() string {
-	return fmt.Sprintf("POS Length: %d; Start: %d; End: %d", p.length, p.start, p.end)
+func (p Position) String() string {
+	return fmt.Sprintf("POS Length: %d; Start: %d; End: %d", p.Length, p.Start, p.End)
 }
 
-func varLength(seg frames.Signature, max int) position {
+func VarLength(seg Signature, max int) Position {
 	var cur int
-	var current, greatest position
+	var current, greatest Position
 	num := seg[0].NumSequences()
-	if num > 0 && num <= max && frames.NonZero(seg[0]) {
-		current.length, _ = seg[0].Length()
-		greatest = position{current.length, 0, 1}
+	if num > 0 && num <= max && NonZero(seg[0]) {
+		current.Length, _ = seg[0].Length()
+		greatest = Position{current.Length, 0, 1}
 		cur = num
 	}
 	if len(seg) > 1 {
@@ -96,30 +92,30 @@ func varLength(seg frames.Signature, max int) position {
 			if lnk, _, _ := f.Linked(seg[i], 0, 0); lnk {
 				num = f.NumSequences()
 				if num > 0 && num <= max {
-					if current.length > 0 && cur*num <= max {
+					if current.Length > 0 && cur*num <= max {
 						l, _ := f.Length()
-						current.length += l
-						current.end = i + 2
+						current.Length += l
+						current.End = i + 2
 						cur = cur * num
 					} else {
-						current.length, _ = f.Length()
-						current.start, current.end = i+1, i+2
+						current.Length, _ = f.Length()
+						current.Start, current.End = i+1, i+2
 						cur = num
 					}
 				} else {
-					current.length = 0
+					current.Length = 0
 				}
 			} else {
 				num = f.NumSequences()
-				if num > 0 && num <= max && frames.NonZero(seg[i+1]) {
-					current.length, _ = f.Length()
-					current.start, current.end = i+1, i+2
+				if num > 0 && num <= max && NonZero(seg[i+1]) {
+					current.Length, _ = f.Length()
+					current.Start, current.End = i+1, i+2
 					cur = num
 				} else {
-					current.length = 0
+					current.Length = 0
 				}
 			}
-			if current.length > greatest.length {
+			if current.Length > greatest.Length {
 				greatest = current
 			}
 		}
@@ -127,13 +123,13 @@ func varLength(seg frames.Signature, max int) position {
 	return greatest
 }
 
-func bofLength(seg frames.Signature, max int) position {
+func BOFLength(seg Signature, max int) Position {
 	var cur int
-	var pos position
+	var pos Position
 	num := seg[0].NumSequences()
 	if num > 0 && num <= max {
-		pos.length, _ = seg[0].Length()
-		pos.start, pos.end = 0, 1
+		pos.Length, _ = seg[0].Length()
+		pos.Start, pos.End = 0, 1
 		cur = num
 	}
 	if len(seg) > 1 {
@@ -141,10 +137,10 @@ func bofLength(seg frames.Signature, max int) position {
 			if lnk, _, _ := f.Linked(seg[i], 0, 0); lnk {
 				num = f.NumSequences()
 				if num > 0 && num <= max {
-					if pos.length > 0 && cur*num <= max {
+					if pos.Length > 0 && cur*num <= max {
 						l, _ := f.Length()
-						pos.length += l
-						pos.end = i + 2
+						pos.Length += l
+						pos.End = i + 2
 						cur = cur * num
 						continue
 					}
@@ -156,13 +152,13 @@ func bofLength(seg frames.Signature, max int) position {
 	return pos
 }
 
-func eofLength(seg frames.Signature, max int) position {
+func EOFLength(seg Signature, max int) Position {
 	var cur int
-	var pos position
+	var pos Position
 	num := seg[len(seg)-1].NumSequences()
 	if num > 0 && num <= max {
-		pos.length, _ = seg[len(seg)-1].Length()
-		pos.start, pos.end = len(seg)-1, len(seg)
+		pos.Length, _ = seg[len(seg)-1].Length()
+		pos.Start, pos.End = len(seg)-1, len(seg)
 		cur = num
 	}
 	if len(seg) > 1 {
@@ -171,10 +167,10 @@ func eofLength(seg frames.Signature, max int) position {
 			if lnk, _, _ := seg[i+1].Linked(f, 0, 0); lnk {
 				num = f.NumSequences()
 				if num > 0 && num <= max {
-					if pos.length > 0 && cur*num <= max {
+					if pos.Length > 0 && cur*num <= max {
 						l, _ := f.Length()
-						pos.length += l
-						pos.start = i
+						pos.Length += l
+						pos.Start = i
 						cur = cur * num
 						continue
 					}

@@ -227,7 +227,16 @@ func (f Frame) Equals(f1 Frame) bool {
 }
 
 func (f Frame) String() string {
-	return OffString[f.OffType] + ":" + strconv.Itoa(f.Min) + "-" + strconv.Itoa(f.Max) + " " + f.Pattern.String()
+	var rng string
+	if f.Min == f.Max {
+		rng = strconv.Itoa(f.Min)
+	} else {
+		if f.Max < 0 {
+			rng = strconv.Itoa(f.Min) + "..*"
+		}
+		rng = strconv.Itoa(f.Min) + ".." + strconv.Itoa(f.Max)
+	}
+	return OffString[f.OffType] + ":" + rng + " " + f.Pattern.String()
 }
 
 // MaxMatches returns:
