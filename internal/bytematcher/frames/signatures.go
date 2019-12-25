@@ -151,9 +151,9 @@ func (s Signature) Segment(dist, rng, cost int) []Signature {
 	ret := make([]Signature, 0, 1)
 	for _, v := range wildSegs {
 		if !v.costly(cost) {
-			segs := s.segment(dist, rng)
-			for _, s := range segs {
-				ret = append(ret, s)
+			segs := v.segment(dist, rng)
+			for _, se := range segs {
+				ret = append(ret, se)
 			}
 		} else {
 			fmt.Printf("---\n%d result:\n", costCount)
