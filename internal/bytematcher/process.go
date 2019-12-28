@@ -30,8 +30,8 @@ func (b *Matcher) addSignature(sig frames.Signature) error {
 		var hasEof bool
 		var x int
 		for i, segment := range segments {
-			c := characterise(segment)
-			if c > prev {
+			c := segment.Characterise()
+			if c > frames.Prev {
 				hasEof = true
 				x = i
 				break
@@ -48,33 +48,33 @@ func (b *Matcher) addSignature(sig frames.Signature) error {
 	kf := make([]keyFrame, len(segments))
 	clstr := newCluster(b)
 	for i, segment := range segments {
-		var pos position
-		c := characterise(segment)
+		var pos frames.Position
+		c := segment.Characterise()
 		switch c {
-		case unknown:
+		case frames.Unknown:
 			return fmt.Errorf("Zero length segment: signature %d, %v, segment %d", len(b.keyFrames), sig, i)
-		case bofZero:
-			pos = bofLength(segment, config.Choices())
-		case eofZero:
-			pos = eofLength(segment, config.Choices())
+		case frames.BOFZero:
+			pos = frames.BOFLength(segment, config.Choices())
+		case frames.EOFZero:
+			pos = frames.EOFLength(segment, config.Choices())
 		default:
-			pos = varLength(segment, config.Choices())
+			pos = frames.VarLength(segment, config.Choices())
 		}
-		if pos.length < 1 {
+		if pos.Length < 1 {
 			switch c {
-			case bofZero, bofWindow:
+			case frames.BOFZero, frames.BOFWindow:
 				kf[i] = b.addToFrameSet(segment, i, b.bofFrames, 0, 1)
-			case eofZero, eofWindow:
+			case frames.EOFZero, frames.EOFWindow:
 				kf[i] = b.addToFrameSet(segment, i, b.eofFrames, len(segment)-1, len(segment))
 			default:
 				return fmt.Errorf("Variable offset segment encountered that can't be turned into a sequence: signature %d, segment %d", len(b.keyFrames), i)
 			}
 		} else {
 			switch c {
-			case bofZero, bofWild:
+			case frames.BOFZero, frames.BOFWild:
 				clstr = clstr.commit()
 				kf[i] = clstr.add(segment, i, pos)
-			case bofWindow:
+			case frames.BOFWindow:
 				if i > 0 {
 					kfB, _, _ := toKeyFrame(segment, pos)
 					if crossOver(kf[i-1], kfB) {
@@ -84,15 +84,15 @@ func (b *Matcher) addSignature(sig frames.Signature) error {
 					clstr = clstr.commit()
 				}
 				kf[i] = clstr.add(segment, i, pos)
-			case prev:
+			case frames.Prev:
 				kf[i] = clstr.add(segment, i, pos)
-			case succ:
+			case frames.Succ:
 				if !clstr.rev {
 					clstr = clstr.commit()
 					clstr.rev = true
 				}
 				kf[i] = clstr.add(segment, i, pos)
-			case eofZero, eofWindow, eofWild:
+			case frames.EOFZero, frames.EOFWindow, frames.EOFWild:
 				if !clstr.rev {
 					clstr = clstr.commit()
 					clstr.rev = true
@@ -126,14 +126,14 @@ func newCluster(b *Matcher) *cluster {
 	return &cluster{b: b}
 }
 
-func (c *cluster) add(seg frames.Signature, i int, pos position) keyFrame {
+func (c *cluster) add(seg frames.Signature, i int, pos frames.Position) keyFrame {
 	sequences := frames.NewSequencer(c.rev)
 	k, left, right := toKeyFrame(seg, pos)
 	c.kfs = append(c.kfs, k)
 	var seqs [][]byte
 	// do it all backwards
 	if c.rev {
-		for j := pos.end - 1; j >= pos.start; j-- {
+		for j := pos.End - 1; j >= pos.Start; j-- {
 			seqs = sequences(seg[j])
 		}
 		c.w.Choices = append([]wac.Choice{wac.Choice(seqs)}, c.w.Choices...)
@@ -141,7 +141,7 @@ func (c *cluster) add(seg frames.Signature, i int, pos position) keyFrame {
 		c.lefts = append([][]frames.Frame{left}, c.lefts...)
 		c.rights = append([][]frames.Frame{right}, c.rights...)
 	} else {
-		for _, f := range seg[pos.start:pos.end] {
+		for _, f := range seg[pos.Start:pos.End] {
 			seqs = sequences(f)
 		}
 		c.w.Choices = append(c.w.Choices, wac.Choice(seqs))
@@ -188,7 +188,7 @@ func (c *cluster) commit() *cluster {
 }
 
 func (b *Matcher) addToFrameSet(segment frames.Signature, i int, fs *frameSet, start, end int) keyFrame {
-	k, left, right := toKeyFrame(segment, position{0, start, end})
+	k, left, right := toKeyFrame(segment, frames.Position{0, start, end})
 	hi := fs.add(segment[start], len(b.tests))
 	if hi == len(b.tests) {
 		b.tests = append(b.tests, &testTree{})

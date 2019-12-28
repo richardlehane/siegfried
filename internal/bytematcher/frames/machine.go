@@ -21,6 +21,7 @@ import (
 
 func init() {
 	patterns.Register(machineLoader, loadMachine)
+	patterns.Register(blockLoader, loadBlock)
 }
 
 const (
@@ -141,9 +142,4 @@ func loadMachine(ls *persist.LoadSaver) patterns.Pattern {
 		m[i] = Load(ls)
 	}
 	return m
-}
-
-type Block struct {
-	Frames []Frame
-	Key    int
 }
