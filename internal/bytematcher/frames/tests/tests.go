@@ -42,6 +42,19 @@ var TestFrames = []Frame{
 	{0, -1, BOF, TestSequences[16]},
 	{0, 0, EOF, TestSequences[17]},
 	{0, 0, BOF, TestLists[0]},
+	{0, 0, BOF, TestChoices[6]},
+	{0, 0, PREV, TestChoices[2]}, // 20
+}
+
+// TestSignatures are exported so they can be used by the other bytematcher packages.
+var TestSignatures = []Signature{
+	{TestFrames[0], TestFrames[6], TestFrames[10], TestFrames[2], TestFrames[7]},                 // [BOF 0:test], [P 10-20:TESTY|YNESS], [S *:test|testy], [S 0:testy], [E 10-20:test|testy] 3 Segments
+	{TestFrames[1], TestFrames[6], TestFrames[8], TestFrames[2], TestFrames[10], TestFrames[17]}, // [BOF 0:test], [P 10-20:TESTY|YNESS], [P 0-1:TEST], [S 0:testy], [S *:test|testy], [E 0:23] 3 segments
+	{TestFrames[13], TestFrames[14]},               // [BOF 0-5:a|b|c..j], [P *:test] 2 segments
+	{TestFrames[1], TestFrames[6], TestFrames[15]}, // [BOF 0:test], [P 10-20:TESTY|YNESS], [BOF *:test] 2 segments
+	{TestFrames[16]},                               // [BOF *:junk]
+	{TestFrames[18]},                               // [BOF 0:List(test,testy)]
+	{TestFrames[19], TestFrames[20]}, // [BOF 0:TEST|TESTY], [P 0:TESTY|YNESS]
 }
 
 // TestFmts tests some particularly problematic formats.
@@ -128,15 +141,8 @@ var TestFmts = map[int]Signature{
 	},
 }
 
-// TestSignatures are exported so they can be used by the other bytematcher packages.
-var TestSignatures = []Signature{
-	{TestFrames[0], TestFrames[6], TestFrames[10], TestFrames[2], TestFrames[7]},                 // [BOF 0:test], [P 10-20:TESTY|YNESS], [S *:test|testy], [S 0:testy], [E 10-20:test|testy] 3 Segments
-	{TestFrames[1], TestFrames[6], TestFrames[8], TestFrames[2], TestFrames[10], TestFrames[17]}, // [BOF 0:test], [P 10-20:TESTY|YNESS], [P 0-1:TEST], [S 0:testy], [S *:test|testy], [E 0:23] 3 segments
-	{TestFrames[13], TestFrames[14]},               // [BOF 0-5:a|b|c..j], [P *:test] 2 segments
-	{TestFrames[1], TestFrames[6], TestFrames[15]}, // [BOF 0:test], [P 10-20:TESTY|YNESS], [BOF *:test] 2 segments
-	{TestFrames[16]},                               // [BOF *:junk]
-	{TestFrames[18]},                               // [BOF 0:List(test,testy)]
-}
+// MultiLen is a test for the multi-length Pattern issue: Patterns can have varying lengths, but return longest match only
+var TestMultiLen = []byte("TESTYNESS")
 
 // ShortBumper is an sd2 file that breaks sf - this test is for the new machine pattern
 var TestBumper = []byte{255, 251, 112, 255, 251, 205, 255, 251, 39, 255, 250, 157, 255, 249, 141, 255, 250, 53, 255, 251, 202, 255, 251, 104, 255, 250, 188, 255, 251, 222, 255, 250, 79, 255, 250, 246, 255, 251, 139, 255, 250, 179, 255, 251, 219, 255, 249, 212, 255, 251, 53, 255, 250, 165, 255, 250, 18, 255, 251, 118, 255, 250, 248, 255, 250, 92, 255, 250, 92, 255, 250, 163, 255, 250, 175, 255, 251, 85, 255, 251, 49, 255, 249, 200, 255, 251, 63, 255, 250, 127, 255, 249, 220, 255, 249, 138, 255, 251, 8, 255, 250, 231, 255, 249, 230, 255, 250, 198, 255, 250, 76, 255, 250, 168, 255, 251, 51, 255, 250, 129, 255, 251, 94, 255, 249, 231, 255, 251, 209, 255, 251, 220, 255, 249, 217, 255, 250, 71, 255, 252, 96, 255, 250, 63, 255, 251, 107, 255, 251, 83, 255, 250, 118, 255, 251, 247, 255, 250, 227, 255, 251, 161, 255, 250, 227, 255, 251, 195, 255, 251, 148, 255, 249, 243, 255, 252, 56, 255, 252, 21, 255, 252, 77, 255, 250, 94, 255, 251, 180, 255, 251, 246, 255, 249, 237, 255, 251, 30, 255, 251, 177, 255, 252, 82, 255, 251, 97, 255, 252, 95, 255, 251, 12, 255, 251, 142, 255, 251, 13, 255, 250, 123, 255, 250, 237, 255, 251, 117, 255, 251, 217, 255, 250, 254, 255, 251, 110, 255, 251, 112, 255, 252, 162, 255, 250, 108, 255, 251, 68, 255, 251, 207, 255, 252, 68, 255, 251, 112, 255, 251, 247, 255, 250, 114, 255, 251, 174, 255, 251, 88, 255, 251, 221, 255, 252, 47, 255, 251, 52, 255, 252, 142, 255, 251, 189, 255, 250, 253, 255, 251, 218, 255, 252, 162, 255, 252, 26, 255, 251, 35, 255, 250, 138, 255, 250, 94, 255, 250, 89, 255, 250, 193, 255, 251, 228, 255, 251, 116, 255, 252, 91, 255, 251, 124, 255, 251, 58, 255, 251, 151, 255, 251, 111, 255, 252, 113, 255, 251, 206, 255, 250, 170, 255, 252, 33, 255, 252, 27, 255, 251, 209, 255, 251, 141, 255, 251, 66, 255, 251, 39, 255, 251, 232, 255, 251, 101, 255, 251, 153, 255, 252, 83, 255, 251, 23, 255, 251, 116, 255, 251, 187, 255, 251, 252, 255, 252, 186, 255, 251, 134, 255, 252, 76, 255, 251, 233, 255, 252, 105, 255, 251, 5, 255, 251, 112, 255, 252, 143, 255, 251, 142, 255, 251, 73, 255, 250, 185, 255, 251, 114, 255, 251, 194, 255, 250, 205, 255, 251, 69, 255, 252, 114, 255, 253, 32, 255, 252, 175, 255, 252, 66, 255, 252, 61, 255, 251, 112}
