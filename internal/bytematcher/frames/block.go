@@ -19,8 +19,42 @@ import (
 	"github.com/richardlehane/siegfried/internal/persist"
 )
 
+// Blockify takes a signature segment, identifies any blocks within (frames linked by fixed offsets),
+// converts those frames to block patterns within window frames (the window frame of the first frame in the block),
+// but with a new length), and returns a new segment.
+// If no blocks are within a segment, the original segment will be returned.
 func Blockify(seg Signature) Signature {
-	return seg
+	if len(seg) < 2 {
+		return seg
+	}
+	ret := make(Signature, 0, len(seg))
+	var blk []Frame
+	lst := seg[0]
+	for _, f := range seg[1:] {
+		if f.Linked(lst, -1, 0) {
+			if len(blk) == 0 {
+				blk = append(blk, lst, f)
+			} else {
+				blk = append(blk, f)
+			}
+		} else {
+			if len(blk) > 0 {
+				if len(blk) > 0 {
+					ret = append(ret, blockify(blk))
+				}
+				blk = []Frame{}
+			}
+			ret = append(ret, f)
+		}
+	}
+	if len(blk) > 0 {
+		ret = append(ret, blockify(blk))
+	}
+	return ret
+}
+
+func blockify(seg []Frame) Frame {
+	return seg[0]
 }
 
 // Block combines Frames that are linked to each other by a fixed offset into a single Pattern
@@ -29,10 +63,10 @@ type Block struct {
 	L    []Frame
 	R    []Frame
 	Key  patterns.Pattern
-	Min  int
-	Max  int
-	Off  int
-	OffR int
+	Min  int // Min pattern length
+	Max  int // Max pattern length
+	Off  int // fixed offset of the Key, relative to the first frame in the block
+	OffR int // fixed offset of the Key, relative to the last frame in the block
 }
 
 func (bl *Block) Test(b []byte) (int, int) {

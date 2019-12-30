@@ -267,7 +267,8 @@ func (f Frame) MaxMatches(l int) (int, int, int) {
 
 // Linked tests whether a frame is linked to a preceding frame (by a preceding or succeding relationship) with an offset and range that is less than the supplied ints.
 // If -1 is given for maxDistance & maxRange, then will check if frame is linked to a preceding frame via a PREV or SUCC relationship.
-// If -1 is given for maxDistance, but not maxRange - then will check if frame linked on the range only (useful for checking if fixed relationship)
+// If -1 is given for maxDistance, but not maxRange, then will check if frame linked without regard to distance (only range),
+// this is useful because if give maxRange of 0 you can tell if it is a fixed relationship
 func (f Frame) Linked(prev Frame, maxDistance, maxRange int) (bool, int, int) {
 	switch f.OffType {
 	case PREV:
