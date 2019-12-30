@@ -38,3 +38,11 @@ func TestMachine(t *testing.T) {
 		t.Errorf("Expecting length of the match to be 5218, got %d", l)
 	}
 }
+
+func TestMultiLen(t *testing.T( {
+	machine := Machine(TestSignatures[6])
+	l, _ := machineTest(TestMultiLen)
+	if l < 0 {
+		t.Error("Expected the machine to match the multi-len string TESTYNESS")	
+	}
+}
