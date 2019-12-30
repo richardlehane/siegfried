@@ -54,7 +54,7 @@ var TestSignatures = []Signature{
 	{TestFrames[1], TestFrames[6], TestFrames[15]}, // [BOF 0:test], [P 10-20:TESTY|YNESS], [BOF *:test] 2 segments
 	{TestFrames[16]},                               // [BOF *:junk]
 	{TestFrames[18]},                               // [BOF 0:List(test,testy)]
-	{TestFrames[19], TestFrames[20]}, // [BOF 0:TEST|TESTY], [P 0:TESTY|YNESS]
+	{TestFrames[19], TestFrames[20]},               // [BOF 0:TEST|TESTY], [P 0:TESTY|YNESS]
 }
 
 // TestFmts tests some particularly problematic formats.

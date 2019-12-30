@@ -39,10 +39,10 @@ func TestMachine(t *testing.T) {
 	}
 }
 
-func TestMultiLen(t *testing.T( {
+func TestMultiLenMatching(t *testing.T) {
 	machine := Machine(TestSignatures[6])
-	l, _ := machineTest(TestMultiLen)
+	l, _ := machine.Test(TestMultiLen)
 	if l < 0 {
-		t.Error("Expected the machine to match the multi-len string TESTYNESS")	
+		t.Error("Expected the machine to match the multi-len string TESTYNESS")
 	}
 }

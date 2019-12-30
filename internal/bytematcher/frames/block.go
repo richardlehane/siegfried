@@ -31,7 +31,7 @@ func Blockify(seg Signature) Signature {
 	var blk []Frame
 	lst := seg[0]
 	for _, f := range seg[1:] {
-		if f.Linked(lst, -1, 0) {
+		if lnk, _, _ := f.Linked(lst, -1, 0); lnk {
 			if len(blk) == 0 {
 				blk = append(blk, lst, f)
 			} else {
