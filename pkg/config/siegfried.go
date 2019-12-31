@@ -29,10 +29,11 @@ var siegfried = struct {
 	conf      string // Name of the conf file
 	magic     []byte // Magic bytes to ID signature file
 	// Defaults for processing bytematcher signatures. These control the segmentation.
-	distance int // The acceptable distance between two frames before they will be segmented (default is 8192)
-	rng      int // The acceptable range between two frames before they will be segmented (default is 0-2049)
-	choices  int // The acceptable number of plain sequences generated from a single segment
-	cost     int // The acceptable cost of a signature segement, in terms of the times that it might match in a worst case
+	distance   int // The acceptable distance between two frames before they will be segmented (default is 8192)
+	rng        int // The acceptable range between two frames before they will be segmented (default is 0-2049)
+	choices    int // The acceptable number of plain sequences generated from a single segment
+	cost       int // The acceptable cost of a signature segement, in terms of the times that it might match in a worst case
+	repetition int // The acceptable repetition within a signature segment, used in combination with cost to determine segmentation.
 	// Config for using the update service.
 	updateURL       string // URL for the update service (a JSON file that indicates whether update necessary and where can be found)
 	updateTimeout   time.Duration
@@ -53,6 +54,7 @@ var siegfried = struct {
 	rng:             4096,
 	choices:         128,
 	cost:            25600000,
+	repetition:      4,
 	updateURL:       "https://www.itforarchivists.com/siegfried/update", // "http://localhost:8081/siegfried/update",
 	updateTimeout:   30 * time.Second,
 	updateTransport: &http.Transport{Proxy: http.ProxyFromEnvironment},
@@ -130,6 +132,11 @@ func Cost() int {
 	return siegfried.cost
 }
 
+// Repetitition is a bytematcher setting. It is used in combination with Cost to determine segmentation.
+func Repetition() int {
+	return siegfried.repetition
+}
+
 // UpdateOptions returns the update URL, timeout and transport for the sf -update command.
 func UpdateOptions() (string, time.Duration, *http.Transport) {
 	return siegfried.updateURL, siegfried.updateTimeout, siegfried.updateTransport
@@ -205,6 +212,14 @@ func SetChoices(i int) func() private {
 func SetCost(i int) func() private {
 	return func() private {
 		siegfried.cost = i
+		return private{}
+	}
+}
+
+// SetRepetition sets the repetitition variable for the bytematcher.
+func SetRepetition(i int) func() private {
+	return func() private {
+		siegfried.repetition = i
 		return private{}
 	}
 }

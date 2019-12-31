@@ -50,9 +50,8 @@ func Blockify(seg Signature) Signature {
 				if len(blk) > 0 {
 					ret = append(ret, blockify(blk))
 				}
-				blk = []Frame{}
+				blk = []Frame{f}
 			}
-			ret = append(ret, f)
 		}
 		lst = f
 	}
@@ -63,8 +62,11 @@ func Blockify(seg Signature) Signature {
 }
 
 func blockify(seg []Frame) Frame {
+	if len(seg) == 1 {
+		return seg[0]
+	}
 	// identify Key by looking for longest Pattern within the segment
-	var kf, kfl, bl int
+	var kf, kfl int
 	for i, f := range seg {
 		l, _ := f.Length()
 		if l > kfl {
@@ -75,27 +77,27 @@ func blockify(seg []Frame) Frame {
 	blk := &Block{}
 	var fr Frame
 	// Frame is the first frame in a BOF/PREV segment, or the last if a EOF/SUCC segment
-	typ := seg[0].Characterise
+	typ := Signature(seg).Characterise()
 	// BMHify the Key and populate (switching) the L and R frames
 	if typ <= Prev {
 		fr = seg[0]
-		blk.Key = patterns.BMH(seg[kf], false)
-		if kf < len(seg)-1{
+		blk.Key = patterns.BMH(seg[kf].Pattern, false)
+		if kf < len(seg)-1 {
 			blk.R = seg[kf+1:]
 		}
 		blk.L = make([]Frame, kf)
 		for i := 0; i < kf; i++ {
-			blk.L[i] = SwitchFrame(seg[i+1], seg[i].Pattern) 
+			blk.L[i] = SwitchFrame(seg[i+1], seg[i].Pattern)
 		}
 	} else {
 		fr = seg[len(seg)-1]
-		blk.Key = patterns.BMH(seg[kf], true)
+		blk.Key = patterns.BMH(seg[kf].Pattern, true)
 		if kf > 0 {
 			blk.L = seg[:kf]
 		}
 		blk.R = make([]Frame, len(seg)-kf-1)
-		idx := len(blk.R)-1
-		for i := len(seg)-1; i > kf; i-- {
+		idx := len(blk.R) - 1
+		for i := len(seg) - 1; i > kf; i-- {
 			blk.R[idx] = SwitchFrame(seg[i-1], seg[i].Pattern)
 			idx--
 		}
@@ -103,12 +105,12 @@ func blockify(seg []Frame) Frame {
 	// calc block length by tallying TotalLength of L and R frames plus length of the pattern
 	blk.Le, _ = blk.Key.Length()
 	for _, f := range blk.L {
-		blk.Le += f.TotalLength()
-		blk.Off += f.TotalLength()
+		blk.Le += TotalLength(f)
+		blk.Off += TotalLength(f)
 	}
 	for _, f := range blk.R {
-		blk.Le += f.TotalLength()
-		blk.OffR += f.TotalLength()
+		blk.Le += TotalLength(f)
+		blk.OffR += TotalLength(f)
 	}
 	fr.Pattern = blk
 	return fr
@@ -121,7 +123,7 @@ type Block struct {
 	L    []Frame
 	R    []Frame
 	Key  patterns.Pattern
-	Le int	// Pattern length
+	Le   int // Pattern length
 	Off  int // fixed offset of the Key, relative to the first frame in the block
 	OffR int // fixed offset of the Key, relative to the last frame in the block
 }
@@ -147,16 +149,16 @@ func (bl *Block) Test(b []byte) ([]int, int) {
 	}
 	rd := bl.Off + ls[0]
 	for _, rf := range bl.R {
-		if rd > len(b) - 1 {
+		if rd > len(b)-1 {
 			return nil, jmp
 		}
-		j, _ := rf.MatchN(b[rd:],0)
+		j, _ := rf.MatchN(b[rd:], 0)
 		if j < 0 {
 			return nil, jmp
 		}
 		rd += j
-	}	
-	return bl.Le, jmp
+	}
+	return []int{bl.Le}, jmp
 }
 
 func (bl *Block) TestR(b []byte) ([]int, int) {
@@ -178,18 +180,18 @@ func (bl *Block) TestR(b []byte) ([]int, int) {
 		}
 		ld -= j
 	}
-	rd := len(b)-bl.OffR
+	rd := len(b) - bl.OffR
 	for _, rf := range bl.R {
-		if rd > len(b) - 1 {
+		if rd > len(b)-1 {
 			return nil, jmp
 		}
-		j, _ := rf.MatchN(b[rd:],0)
+		j, _ := rf.MatchN(b[rd:], 0)
 		if j < 0 {
 			return nil, jmp
 		}
 		rd += j
-	}	
-	return bl.Le, jmp
+	}
+	return []int{bl.Le}, jmp
 }
 
 func (bl *Block) Equals(pat patterns.Pattern) bool {
@@ -201,8 +203,7 @@ func (bl *Block) Equals(pat patterns.Pattern) bool {
 		return false
 	}
 	if len(bl.L) != len(bl2.L) || len(bl.R) != len(bl2.R) ||
-		bl.Min != bl2.Min || bl.Max != bl2.Max ||
-		bl.Off != bl2.Off || bl.OffR != bl2.OffR {
+		bl.Le != bl2.Le || bl.Off != bl2.Off || bl.OffR != bl2.OffR {
 		return false
 	}
 	for i, v := range bl.L {
@@ -262,16 +263,16 @@ func (bl *Block) Save(ls *persist.LoadSaver) {
 	bl.Key.Save(ls)
 	ls.SaveInt(bl.Le)
 	ls.SaveInt(bl.Off)
-	ls.SaveInt(bl.OffR)	
+	ls.SaveInt(bl.OffR)
 }
 
 func loadBlock(ls *persist.LoadSaver) patterns.Pattern {
 	bl := &Block{}
-	bl.L = make([]Frame, len(ls.LoadSmallInt())
+	bl.L = make([]Frame, ls.LoadSmallInt())
 	for i := range bl.L {
 		bl.L[i] = Load(ls)
 	}
-	bl.R = make([]Frame, len(ls.LoadSmallInt())
+	bl.R = make([]Frame, ls.LoadSmallInt())
 	for i := range bl.R {
 		bl.R[i] = Load(ls)
 	}

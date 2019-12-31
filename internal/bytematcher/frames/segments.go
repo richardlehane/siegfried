@@ -27,23 +27,18 @@ import "fmt"
 // (i.e. a fixed offset of 5000 distant might be acceptable, where a range of 1-2000 might not be).
 var costCount = 1
 
-func (s Signature) Segment(dist, rng, cost int) []Signature {
+func (s Signature) Segment(dist, rng, cost, repetition int) []Signature {
 	// first pass: segment just on wild, then check cost of further segmentation
 	wildSegs := s.segment(-1, -1)
 	ret := make([]Signature, 0, 1)
 	for _, v := range wildSegs {
-		if !v.costly(cost) {
+		if v.costly(cost) && v.repetitive(repetition) {
+			fmt.Println(s)
+		} else {
 			segs := v.segment(dist, rng)
 			for _, se := range segs {
 				ret = append(ret, se)
 			}
-		} else {
-			fmt.Printf("---\n%d result:\n", costCount)
-			fmt.Println(v)
-			fmt.Println("%%%")
-			fmt.Println(s)
-			fmt.Println("---")
-			costCount++
 		}
 	}
 	return ret
@@ -59,6 +54,22 @@ func (s Signature) costly(cost int) bool {
 		}
 	}
 	return false
+}
+
+func (s Signature) repetitive(repetition int) bool {
+	var price int
+	ns := Blockify(s)
+	if len(ns) < 2 {
+		return false
+	}
+	pat := ns[0].Pattern
+	for _, v := range ns[1:] {
+		if v.Pattern.Equals(pat) {
+			price += 1
+		}
+		pat = v.Pattern
+	}
+	return price > repetition
 }
 
 func (s Signature) segment(dist, rng int) []Signature {

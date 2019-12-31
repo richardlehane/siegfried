@@ -316,12 +316,12 @@ func (l List) Test(b []byte) ([]int, int) {
 	}
 	totals := []int{0}
 	for _, pat := range l {
-		var nts := make([]int, 0, len(totals))
+		nts := make([]int, 0, len(totals))
 		for _, t := range totals {
 			les, _ := pat.Test(b[t:])
 			for _, le := range les {
-				nts := append(nts, t+le)
-			}		 
+				nts = append(nts, t+le)
+			}
 		}
 		if len(nts) < 1 {
 			return nil, 1
@@ -337,13 +337,13 @@ func (l List) TestR(b []byte) ([]int, int) {
 		return nil, 0
 	}
 	totals := []int{0}
-	for i := len(l)-1; i >= 0; i-- {
-		var nts := make([]int, 0, len(totals))
+	for i := len(l) - 1; i >= 0; i-- {
+		nts := make([]int, 0, len(totals))
 		for _, t := range totals {
-			les, _ := l[i].TestR(:len(b)-t)
+			les, _ := l[i].TestR(b[:len(b)-t])
 			for _, le := range les {
-				nts := append(nts, t+le)
-			}		 
+				nts = append(nts, t+le)
+			}
 		}
 		if len(nts) < 1 {
 			return nil, 1

@@ -8,10 +8,11 @@ import (
 )
 
 const cost = 250000
+const repetition = 4
 
 // [BOF 0:test], [P 10-20:TESTY|YNESS], [S *:test|testy], [S 0:testy], [E 10-20:test|testy]
 func TestSignatureOne(t *testing.T) {
-	s := TestSignatures[0].Segment(8192, 2059, cost)
+	s := TestSignatures[0].Segment(8192, 2059, cost, repetition)
 	if len(s) != 3 {
 		t.Errorf("Segment fail: expecting 3 segments, got %d", len(s))
 	}
@@ -53,7 +54,7 @@ func TestSignatureOne(t *testing.T) {
 
 // [BOF 0:test], [P 10-20:TESTY|YNESS], [P 0-1:TEST], [S 0:testy], [S *:test|testy], [E 0:23]
 func TestSignatureTwo(t *testing.T) {
-	s := TestSignatures[1].Segment(8192, 2059, cost)
+	s := TestSignatures[1].Segment(8192, 2059, cost, repetition)
 	if len(s) != 3 {
 		t.Errorf("Segment fail: expecting 3 segments, got %d", len(s))
 	}
@@ -83,7 +84,7 @@ func TestSignatureTwo(t *testing.T) {
 
 // [BOF 0-5:a|b|c...|j], [P *:test]
 func TestSignatureThree(t *testing.T) {
-	s := TestSignatures[2].Segment(8192, 2059, cost)
+	s := TestSignatures[2].Segment(8192, 2059, cost, repetition)
 	if len(s) != 2 {
 		t.Errorf("Segment fail: expecting 2 segments, got %d", len(s))
 	}
@@ -110,7 +111,7 @@ func TestSignatureThree(t *testing.T) {
 
 // [BOF 0:test], [P 10-20:TESTY|YNESS], [BOF *:test]
 func TestSignatureFour(t *testing.T) {
-	s := TestSignatures[3].Segment(8192, 2059, cost)
+	s := TestSignatures[3].Segment(8192, 2059, cost, repetition)
 	if len(s) != 2 {
 		t.Errorf("Segment fail: expecting 2 segments, got %d", len(s))
 	}
@@ -136,7 +137,7 @@ func TestSignatureFour(t *testing.T) {
 }
 
 func TestFmt418(t *testing.T) {
-	s := TestFmts[418].Segment(2000, 500, cost)
+	s := TestFmts[418].Segment(2000, 500, cost, repetition)
 	if len(s) != 2 {
 		t.Errorf("fmt418 fail: expecting 2 segments, got %d", len(s))
 	}
