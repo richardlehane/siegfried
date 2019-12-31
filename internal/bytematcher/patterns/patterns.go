@@ -314,24 +314,21 @@ func (l List) Test(b []byte) ([]int, int) {
 	if len(l) < 1 {
 		return nil, 0
 	}
-	le, _ := l[0].Test(b)
-	if len(le) < 1 {
-		return nil, 1
-	}
-	total := le[0]
-	if len(l) > 1 {
-		for _, p := range l[1:] {
-			if len(b) <= total {
-				return nil, 0
-			}
-			le, _ := p.Test(b[total:])
-			if len(le) < 1 {
-				return nil, 1
-			}
-			total += le[0]
+	totals := []int{0}
+	for _, pat := range l {
+		var nts := make([]int, 0, len(totals))
+		for _, t := range totals {
+			les, _ := pat.Test(b[t:])
+			for _, le := range les {
+				nts := append(nts, t+le)
+			}		 
 		}
+		if len(nts) < 1 {
+			return nil, 1
+		}
+		totals = nts
 	}
-	return []int{total}, 1
+	return totals, 1
 }
 
 // Test bytes against the pattern in reverse.
@@ -339,24 +336,21 @@ func (l List) TestR(b []byte) ([]int, int) {
 	if len(l) < 1 {
 		return nil, 0
 	}
-	le, _ := l[len(l)-1].TestR(b)
-	if len(le) < 1 {
-		return nil, 1
-	}
-	total := le[0]
-	if len(l) > 1 {
-		for i := len(l) - 2; i >= 0; i-- {
-			if len(b) <= total {
-				return nil, 0
-			}
-			le, _ := l[i].TestR(b[:len(b)-total])
-			if len(le) < 1 {
-				return nil, 1
-			}
-			total += le[0]
+	totals := []int{0}
+	for i := len(l)-1; i >= 0; i-- {
+		var nts := make([]int, 0, len(totals))
+		for _, t := range totals {
+			les, _ := l[i].TestR(:len(b)-t)
+			for _, le := range les {
+				nts := append(nts, t+le)
+			}		 
 		}
+		if len(nts) < 1 {
+			return nil, 1
+		}
+		totals = nts
 	}
-	return []int{total}, 1
+	return totals, 1
 }
 
 // Equals reports whether a pattern is identical to another pattern.
