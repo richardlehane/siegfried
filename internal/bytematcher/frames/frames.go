@@ -141,9 +141,9 @@ func (f Frame) Match(b []byte) []int {
 		max = len(b)
 	}
 	for min <= max {
-		length, adv := f.Test(b[min:])
-		if length > -1 {
-			ret = append(ret, min+length)
+		lengths, adv := f.Test(b[min:])
+		for _, l := range lengths {
+			ret = append(ret, min+l)
 		}
 		if adv < 1 {
 			break
@@ -161,10 +161,10 @@ func (f Frame) MatchN(b []byte, n int) (int, int) {
 		max = len(b)
 	}
 	for min <= max {
-		length, adv := f.Test(b[min:])
-		if length > -1 {
+		lengths, adv := f.Test(b[min:])
+		for _, l := range lengths {
 			if i == n {
-				return min + length, min + adv
+				return min + l, min + adv
 			}
 			i++
 		}
@@ -184,9 +184,9 @@ func (f Frame) MatchR(b []byte) []int {
 		max = len(b)
 	}
 	for min <= max {
-		length, adv := f.TestR(b[:len(b)-min])
-		if length > -1 {
-			ret = append(ret, min+length)
+		lengths, adv := f.TestR(b[:len(b)-min])
+		for _, l := range lengths {
+			ret = append(ret, min+l)
 		}
 		if adv < 1 {
 			break
@@ -204,10 +204,10 @@ func (f Frame) MatchNR(b []byte, n int) (int, int) {
 		max = len(b)
 	}
 	for min <= max {
-		length, adv := f.TestR(b[:len(b)-min])
-		if length > -1 {
+		lengths, adv := f.TestR(b[:len(b)-min])
+		for _, l := range lengths {
 			if i == n {
-				return min + length, min + adv
+				return min + l, min + adv
 			}
 			i++
 		}
