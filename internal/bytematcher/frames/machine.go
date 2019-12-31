@@ -29,8 +29,20 @@ const (
 	blockLoader
 )
 
+func machinify(seg Signature) Signature {
+	seg = Blockify(seg)
+	switch seg.Characterise() {
+	case BOFZero, BOFWindow, BOFWild:
+		return Signature{NewFrame(BOF, Machine(seg), 0, 0)}
+	case EOFZero, EOFWindow, EOFWild:
+		return Signature{NewFrame(EOF, Machine(seg), 0, 0)}
+	default: //todo handle Prev and Succ wild
+	}
+	return seg
+}
+
 // A Machine is a segment of a signature that implements the patterns interface
-type Machine []Frame
+type Machine Signature
 
 func (m Machine) Test(b []byte) ([]int, int) {
 	var iter int

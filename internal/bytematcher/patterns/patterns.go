@@ -191,10 +191,10 @@ func (c Choice) test(b []byte, f func(Pattern, []byte) ([]int, int)) ([]int, int
 		res, adv = f(pat, b)
 		if len(res) > 0 {
 			r = append(r, res...)
-			if tl == 0 || adv < tl {
+			if tl == 0 || (adv > 0 && adv < tl) {
 				tl = adv
 			}
-		} else if tl == 0 || adv < fl {
+		} else if fl == 0 || (adv > 0 && adv < fl) {
 			fl = adv
 		}
 	}

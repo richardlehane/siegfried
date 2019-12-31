@@ -36,29 +36,18 @@ func Blockify(seg Signature) Signature {
 		return seg
 	}
 	ret := make(Signature, 0, len(seg))
-	var blk []Frame
 	lst := seg[0]
+	blk := []Frame{lst}
 	for _, f := range seg[1:] {
 		if lnk, _, _ := f.Linked(lst, -1, 0); lnk && singleLen(lst) && singleLen(f) {
-			if len(blk) == 0 {
-				blk = append(blk, lst, f)
-			} else {
-				blk = append(blk, f)
-			}
+			blk = append(blk, f)
 		} else {
-			if len(blk) > 0 {
-				if len(blk) > 0 {
-					ret = append(ret, blockify(blk))
-				}
-				blk = []Frame{f}
-			}
+			ret = append(ret, blockify(blk))
+			blk = []Frame{f}
 		}
 		lst = f
 	}
-	if len(blk) > 0 {
-		ret = append(ret, blockify(blk))
-	}
-	return ret
+	return append(ret, blockify(blk))
 }
 
 func blockify(seg []Frame) Frame {

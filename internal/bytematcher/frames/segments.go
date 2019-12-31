@@ -33,7 +33,7 @@ func (s Signature) Segment(dist, rng, cost, repetition int) []Signature {
 	ret := make([]Signature, 0, 1)
 	for _, v := range wildSegs {
 		if v.costly(cost) && v.repetitive(repetition) {
-			fmt.Println(s)
+			ret = append(ret, machinify(v))
 		} else {
 			segs := v.segment(dist, rng)
 			for _, se := range segs {
