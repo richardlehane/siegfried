@@ -53,27 +53,27 @@ func NewBMHSequence(s Sequence) *BMHSequence {
 }
 
 // Test bytes against the pattern.
-func (s *BMHSequence) Test(b []byte) (int, int) {
+func (s *BMHSequence) Test(b []byte) ([]int, int) {
 	if len(b) < len(s.Seq) {
-		return -1, 0
+		return nil, 0
 	}
 	for i := len(s.Seq) - 1; i > -1; i-- {
 		if b[i] != s.Seq[i] {
-			return -1, s.Shift[b[len(s.Seq)-1]]
+			return nil, s.Shift[b[len(s.Seq)-1]]
 		}
 	}
-	return len(s.Seq), 1
+	return []int{len(s.Seq)}, 1
 }
 
 // Test bytes against the pattern in reverse.
-func (s *BMHSequence) TestR(b []byte) (int, int) {
+func (s *BMHSequence) TestR(b []byte) ([]int, int) {
 	if len(b) < len(s.Seq) {
-		return -1, 0
+		return nil, 0
 	}
 	if bytes.Equal(s.Seq, b[len(b)-len(s.Seq):]) {
-		return len(s.Seq), 1
+		return []int{len(s.Seq)}, 1
 	}
-	return -1, 1
+	return nil, 1
 }
 
 // Equals reports whether a pattern is identical to another pattern.
@@ -143,27 +143,27 @@ func NewRBMHSequence(s Sequence) *RBMHSequence {
 }
 
 // Test bytes against the pattern.
-func (s *RBMHSequence) Test(b []byte) (int, int) {
+func (s *RBMHSequence) Test(b []byte) ([]int, int) {
 	if len(b) < len(s.Seq) {
-		return -1, 0
+		return nil, 0
 	}
 	if bytes.Equal(s.Seq, b[:len(s.Seq)]) {
-		return len(s.Seq), 1
+		return []int{len(s.Seq)}, 1
 	}
-	return -1, 1
+	return nil, 1
 }
 
 // Test bytes against the pattern in reverse.
-func (s *RBMHSequence) TestR(b []byte) (int, int) {
+func (s *RBMHSequence) TestR(b []byte) ([]int, int) {
 	if len(b) < len(s.Seq) {
-		return -1, 0
+		return nil, 0
 	}
 	for i, v := range b[len(b)-len(s.Seq):] {
 		if v != s.Seq[i] {
-			return -1, s.Shift[b[len(b)-len(s.Seq)]]
+			return nil, s.Shift[b[len(b)-len(s.Seq)]]
 		}
 	}
-	return len(s.Seq), 1
+	return []int{len(s.Seq)}, 1
 }
 
 // Equals reports whether a pattern is identical to another pattern.
