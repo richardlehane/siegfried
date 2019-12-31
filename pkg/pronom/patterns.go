@@ -34,28 +34,28 @@ type Range struct {
 	From, To []byte
 }
 
-func (r Range) Test(b []byte) (int, int) {
+func (r Range) Test(b []byte) ([]int, int) {
 	if len(b) < len(r.From) || len(b) < len(r.To) {
-		return -1, 0
+		return nil, 0
 	}
 	if bytes.Compare(r.From, b[:len(r.From)]) < 1 {
 		if bytes.Compare(r.To, b[:len(r.To)]) > -1 {
-			return len(r.From), 1
+			return []int{len(r.From)}, 1
 		}
 	}
-	return -1, 1
+	return nil, 1
 }
 
-func (r Range) TestR(b []byte) (int, int) {
+func (r Range) TestR(b []byte) ([]int, int) {
 	if len(b) < len(r.From) || len(b) < len(r.To) {
-		return -1, 0
+		return nil, 0
 	}
 	if bytes.Compare(r.From, b[len(b)-len(r.From):]) < 1 {
 		if bytes.Compare(r.To, b[len(b)-len(r.To):]) > -1 {
-			return len(r.From), 1
+			return []int{len(r.From)}, 1
 		}
 	}
-	return -1, 1
+	return nil, 1
 }
 
 func (r Range) Equals(pat patterns.Pattern) bool {
