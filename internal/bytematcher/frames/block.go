@@ -19,6 +19,14 @@ import (
 	"github.com/richardlehane/siegfried/internal/persist"
 )
 
+func singleLen(f Frame) bool {
+	min, max := f.Length()
+	if min == max {
+		return true
+	}
+	return false
+}
+
 // Blockify takes a signature segment, identifies any blocks within (frames linked by fixed offsets),
 // converts those frames to block patterns within window frames (the window frame of the first frame in the block),
 // but with a new length), and returns a new segment.
@@ -31,7 +39,7 @@ func Blockify(seg Signature) Signature {
 	var blk []Frame
 	lst := seg[0]
 	for _, f := range seg[1:] {
-		if lnk, _, _ := f.Linked(lst, -1, 0); lnk {
+		if lnk, _, _ := f.Linked(lst, -1, 0); lnk && singleLen(lst) && singleLen(f) {
 			if len(blk) == 0 {
 				blk = append(blk, lst, f)
 			} else {
@@ -46,6 +54,7 @@ func Blockify(seg Signature) Signature {
 			}
 			ret = append(ret, f)
 		}
+		lst = f
 	}
 	if len(blk) > 0 {
 		ret = append(ret, blockify(blk))
@@ -54,17 +63,65 @@ func Blockify(seg Signature) Signature {
 }
 
 func blockify(seg []Frame) Frame {
-	return seg[0]
+	// identify Key by looking for longest Pattern within the segment
+	var kf, kfl, bl int
+	for i, f := range seg {
+		l, _ := f.Length()
+		if l > kfl {
+			kfl = l
+			kf = i
+		}
+	}
+	blk := &Block{}
+	var fr Frame
+	// Frame is the first frame in a BOF/PREV segment, or the last if a EOF/SUCC segment
+	typ := seg[0].Characterise
+	// BMHify the Key and populate (switching) the L and R frames
+	if typ <= Prev {
+		fr = seg[0]
+		blk.Key = patterns.BMH(seg[kf], false)
+		if kf < len(seg)-1{
+			blk.R = seg[kf+1:]
+		}
+		blk.L = make([]Frame, kf)
+		for i := 0; i < kf; i++ {
+			blk.L[i] = SwitchFrame(seg[i+1], seg[i].Pattern) 
+		}
+	} else {
+		fr = seg[len(seg)-1]
+		blk.Key = patterns.BMH(seg[kf], true)
+		if kf > 0 {
+			blk.L = seg[:kf]
+		}
+		blk.R = make([]Frame, len(seg)-kf-1)
+		idx := len(blk.R)-1
+		for i := len(seg)-1; i > kf; i-- {
+			blk.R[idx] = SwitchFrame(seg[i-1], seg[i].Pattern)
+			idx--
+		}
+	}
+	// calc block length by tallying TotalLength of L and R frames plus length of the pattern
+	blk.Le, _ = blk.Key.Length()
+	for _, f := range blk.L {
+		blk.Le += f.TotalLength()
+		blk.Off += f.TotalLength()
+	}
+	for _, f := range blk.R {
+		blk.Le += f.TotalLength()
+		blk.OffR += f.TotalLength()
+	}
+	fr.Pattern = blk
+	return fr
 }
 
 // Block combines Frames that are linked to each other by a fixed offset into a single Pattern
+// Patterns within a block must have a single length (i.e. no Choice patterns with varying lengths).
 // Blocks are used within the Machine pattern to cluster frames to identify repetitions & optimise searching.
 type Block struct {
 	L    []Frame
 	R    []Frame
 	Key  patterns.Pattern
-	Min  int // Min pattern length
-	Max  int // Max pattern length
+	Le int	// Pattern length
 	Off  int // fixed offset of the Key, relative to the first frame in the block
 	OffR int // fixed offset of the Key, relative to the last frame in the block
 }
@@ -73,15 +130,66 @@ func (bl *Block) Test(b []byte) ([]int, int) {
 	if bl.Off >= len(b) {
 		return nil, 0
 	}
-	l, jmp := bl.Key.Test(b[bl.Off:])
-	if len(l) < 1 {
-		return l, jmp
+	ls, jmp := bl.Key.Test(b[bl.Off:])
+	if len(ls) < 1 {
+		return nil, jmp
 	}
-	return l, jmp
+	ld := bl.Off
+	for i := len(bl.L) - 1; i >= 0; i-- {
+		if ld < 0 {
+			return nil, jmp
+		}
+		j, _ := bl.L[i].MatchNR(b[:ld], 0)
+		if j < 0 {
+			return nil, jmp
+		}
+		ld -= j
+	}
+	rd := bl.Off + ls[0]
+	for _, rf := range bl.R {
+		if rd > len(b) - 1 {
+			return nil, jmp
+		}
+		j, _ := rf.MatchN(b[rd:],0)
+		if j < 0 {
+			return nil, jmp
+		}
+		rd += j
+	}	
+	return bl.Le, jmp
 }
 
 func (bl *Block) TestR(b []byte) ([]int, int) {
-	return nil, 1
+	if bl.OffR >= len(b) {
+		return nil, 0
+	}
+	ls, jmp := bl.Key.TestR(b[:len(b)-bl.OffR])
+	if len(ls) < 1 {
+		return nil, jmp
+	}
+	ld := bl.OffR + ls[0]
+	for i := len(bl.L) - 1; i >= 0; i-- {
+		if ld < 0 {
+			return nil, jmp
+		}
+		j, _ := bl.L[i].MatchNR(b[:ld], 0)
+		if j < 0 {
+			return nil, jmp
+		}
+		ld -= j
+	}
+	rd := len(b)-bl.OffR
+	for _, rf := range bl.R {
+		if rd > len(b) - 1 {
+			return nil, jmp
+		}
+		j, _ := rf.MatchN(b[rd:],0)
+		if j < 0 {
+			return nil, jmp
+		}
+		rd += j
+	}	
+	return bl.Le, jmp
 }
 
 func (bl *Block) Equals(pat patterns.Pattern) bool {
@@ -111,7 +219,7 @@ func (bl *Block) Equals(pat patterns.Pattern) bool {
 }
 
 func (bl *Block) Length() (int, int) {
-	return bl.Min, bl.Max
+	return bl.Le, bl.Le
 }
 
 // Blocks are used where sequence matching inefficient
@@ -147,8 +255,29 @@ func (bl *Block) Save(ls *persist.LoadSaver) {
 	for _, f := range bl.L {
 		f.Save(ls)
 	}
+	ls.SaveSmallInt(len(bl.R))
+	for _, f := range bl.R {
+		f.Save(ls)
+	}
+	bl.Key.Save(ls)
+	ls.SaveInt(bl.Le)
+	ls.SaveInt(bl.Off)
+	ls.SaveInt(bl.OffR)	
 }
 
 func loadBlock(ls *persist.LoadSaver) patterns.Pattern {
-	return &Block{}
+	bl := &Block{}
+	bl.L = make([]Frame, len(ls.LoadSmallInt())
+	for i := range bl.L {
+		bl.L[i] = Load(ls)
+	}
+	bl.R = make([]Frame, len(ls.LoadSmallInt())
+	for i := range bl.R {
+		bl.R[i] = Load(ls)
+	}
+	bl.Key = patterns.Load(ls)
+	bl.Le = ls.LoadInt()
+	bl.Off = ls.LoadInt()
+	bl.OffR = ls.LoadInt()
+	return bl
 }
