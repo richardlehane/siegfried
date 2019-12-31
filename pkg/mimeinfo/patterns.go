@@ -50,25 +50,25 @@ const (
 type Int8 byte
 
 // Test bytes against the pattern.
-func (n Int8) Test(b []byte) (int, int) {
+func (n Int8) Test(b []byte) ([]int, int) {
 	if len(b) < 1 {
-		return -1, 0
+		return nil, 0
 	}
 	if b[0] == byte(n) {
-		return 1, 1
+		return []int{1}, 1
 	}
-	return -1, 1
+	return nil, 1
 }
 
 // Test bytes against the pattern in reverse.
-func (n Int8) TestR(b []byte) (int, int) {
+func (n Int8) TestR(b []byte) ([]int, int) {
 	if len(b) < 1 {
-		return -1, 0
+		return nil, 0
 	}
 	if b[len(b)-1] == byte(n) {
-		return 1, 1
+		return []int{1}, 1
 	}
-	return -1, 1
+	return nil, 1
 }
 
 // Equals reports whether a pattern is identical to another pattern.
@@ -112,25 +112,25 @@ func loadInt8(ls *persist.LoadSaver) patterns.Pattern {
 type Big16 uint16
 
 // Test bytes against the pattern.
-func (n Big16) Test(b []byte) (int, int) {
+func (n Big16) Test(b []byte) ([]int, int) {
 	if len(b) < 2 {
-		return -1, 0
+		return nil, 0
 	}
 	if binary.BigEndian.Uint16(b[:2]) == uint16(n) {
-		return 2, 1
+		return []int{2}, 1
 	}
-	return -1, 1
+	return nil, 1
 }
 
 // Test bytes against the pattern in reverse.
-func (n Big16) TestR(b []byte) (int, int) {
+func (n Big16) TestR(b []byte) ([]int, int) {
 	if len(b) < 2 {
-		return -1, 0
+		return nil, 0
 	}
 	if binary.BigEndian.Uint16(b[len(b)-2:]) == uint16(n) {
-		return 2, 1
+		return []int{2}, 1
 	}
-	return -1, 1
+	return nil, 1
 }
 
 // Equals reports whether a pattern is identical to another pattern.
@@ -180,25 +180,25 @@ func loadBig16(ls *persist.LoadSaver) patterns.Pattern {
 type Big32 uint32
 
 // Test bytes against the pattern.
-func (n Big32) Test(b []byte) (int, int) {
+func (n Big32) Test(b []byte) ([]int, int) {
 	if len(b) < 4 {
-		return -1, 0
+		return nil, 0
 	}
 	if binary.BigEndian.Uint32(b[:4]) == uint32(n) {
-		return 4, 1
+		return []int{4}, 1
 	}
-	return -1, 1
+	return nil, 1
 }
 
 // Test bytes against the pattern in reverse.
-func (n Big32) TestR(b []byte) (int, int) {
+func (n Big32) TestR(b []byte) ([]int, int) {
 	if len(b) < 4 {
-		return -1, 0
+		return nil, 0
 	}
 	if binary.BigEndian.Uint32(b[len(b)-4:]) == uint32(n) {
-		return 4, 1
+		return []int{4}, 1
 	}
-	return -1, 1
+	return nil, 1
 }
 
 // Equals reports whether a pattern is identical to another pattern.
@@ -248,25 +248,25 @@ func loadBig32(ls *persist.LoadSaver) patterns.Pattern {
 type Little16 uint16
 
 // Test bytes against the pattern.
-func (n Little16) Test(b []byte) (int, int) {
+func (n Little16) Test(b []byte) ([]int, int) {
 	if len(b) < 2 {
-		return -1, 0
+		return nil, 0
 	}
 	if binary.LittleEndian.Uint16(b[:2]) == uint16(n) {
-		return 2, 1
+		return []int{2}, 1
 	}
-	return -1, 1
+	return nil, 1
 }
 
 // Test bytes against the pattern in reverse.
-func (n Little16) TestR(b []byte) (int, int) {
+func (n Little16) TestR(b []byte) ([]int, int) {
 	if len(b) < 2 {
-		return -1, 0
+		return nil, 0
 	}
 	if binary.LittleEndian.Uint16(b[len(b)-2:]) == uint16(n) {
-		return 2, 1
+		return []int{2}, 1
 	}
-	return -1, 1
+	return nil, 1
 }
 
 // Equals reports whether a pattern is identical to another pattern.
@@ -316,25 +316,25 @@ func loadLittle16(ls *persist.LoadSaver) patterns.Pattern {
 type Little32 uint32
 
 // Test bytes against the pattern.
-func (n Little32) Test(b []byte) (int, int) {
+func (n Little32) Test(b []byte) ([]int, int) {
 	if len(b) < 4 {
-		return -1, 0
+		return nil, 0
 	}
 	if binary.LittleEndian.Uint32(b[:4]) == uint32(n) {
-		return 4, 1
+		return []int{4}, 1
 	}
-	return -1, 1
+	return nil, 1
 }
 
 // Test bytes against the pattern in reverse.
-func (n Little32) TestR(b []byte) (int, int) {
+func (n Little32) TestR(b []byte) ([]int, int) {
 	if len(b) < 4 {
-		return -1, 0
+		return nil, 0
 	}
 	if binary.LittleEndian.Uint32(b[len(b)-4:]) == uint32(n) {
-		return 4, 1
+		return []int{4}, 1
 	}
-	return -1, 1
+	return nil, 1
 }
 
 // Equals reports whether a pattern is identical to another pattern.
@@ -384,31 +384,31 @@ func loadLittle32(ls *persist.LoadSaver) patterns.Pattern {
 type Host16 uint16
 
 // Test bytes against the pattern.
-func (n Host16) Test(b []byte) (int, int) {
+func (n Host16) Test(b []byte) ([]int, int) {
 	if len(b) < 2 {
-		return -1, 0
+		return nil, 0
 	}
 	if binary.LittleEndian.Uint16(b[:2]) == uint16(n) {
-		return 2, 1
+		return []int{2}, 1
 	}
 	if binary.BigEndian.Uint16(b[:2]) == uint16(n) {
-		return 2, 1
+		return []int{2}, 1
 	}
-	return -1, 1
+	return nil, 1
 }
 
 // Test bytes against the pattern in reverse.
-func (n Host16) TestR(b []byte) (int, int) {
+func (n Host16) TestR(b []byte) ([]int, int) {
 	if len(b) < 2 {
-		return -1, 0
+		return nil, 0
 	}
 	if binary.LittleEndian.Uint16(b[len(b)-2:]) == uint16(n) {
-		return 2, 1
+		return []int{2}, 1
 	}
 	if binary.BigEndian.Uint16(b[len(b)-2:]) == uint16(n) {
-		return 2, 1
+		return []int{2}, 1
 	}
-	return -1, 1
+	return nil, 1
 }
 
 // Equals reports whether a pattern is identical to another pattern.
@@ -459,31 +459,31 @@ func loadHost16(ls *persist.LoadSaver) patterns.Pattern {
 type Host32 uint32
 
 // Test bytes against the pattern.
-func (n Host32) Test(b []byte) (int, int) {
+func (n Host32) Test(b []byte) ([]int, int) {
 	if len(b) < 4 {
-		return -1, 0
+		return nil, 0
 	}
 	if binary.LittleEndian.Uint32(b[:4]) == uint32(n) {
-		return 4, 1
+		return []int{4}, 1
 	}
 	if binary.BigEndian.Uint32(b[:4]) == uint32(n) {
-		return 4, 1
+		return []int{4}, 1
 	}
-	return -1, 1
+	return nil, 1
 }
 
 // Test bytes against the pattern in reverse.
-func (n Host32) TestR(b []byte) (int, int) {
+func (n Host32) TestR(b []byte) ([]int, int) {
 	if len(b) < 4 {
-		return -1, 0
+		return nil, 0
 	}
 	if binary.LittleEndian.Uint32(b[len(b)-4:]) == uint32(n) {
-		return 4, 1
+		return []int{4}, 1
 	}
 	if binary.BigEndian.Uint32(b[len(b)-4:]) == uint32(n) {
-		return 4, 1
+		return []int{4}, 1
 	}
-	return -1, 1
+	return nil, 1
 }
 
 // Equals reports whether a pattern is identical to another pattern.
@@ -533,9 +533,9 @@ func loadHost32(ls *persist.LoadSaver) patterns.Pattern {
 
 type IgnoreCase []byte
 
-func (c IgnoreCase) Test(b []byte) (int, int) {
+func (c IgnoreCase) Test(b []byte) ([]int, int) {
 	if len(b) < len(c) {
-		return -1, 0
+		return nil, 0
 	}
 	for i, v := range c {
 		if v != b[i] {
@@ -545,15 +545,15 @@ func (c IgnoreCase) Test(b []byte) (int, int) {
 			if 'A' <= v && v <= 'Z' && b[i] == v+'a'-'A' {
 				continue
 			}
-			return -1, 1
+			return nil, 1
 		}
 	}
-	return len(c), 1
+	return []int{len(c)}, 1
 }
 
-func (c IgnoreCase) TestR(b []byte) (int, int) {
+func (c IgnoreCase) TestR(b []byte) ([]int, int) {
 	if len(b) < len(c) {
-		return -1, 0
+		return nil, 0
 	}
 	for i, v := range c {
 		if v != b[len(b)-len(c)+i] {
@@ -563,10 +563,10 @@ func (c IgnoreCase) TestR(b []byte) (int, int) {
 			if 'A' <= v && v <= 'Z' && b[len(b)-len(c)+i] == v+'a'-'A' {
 				continue
 			}
-			return -1, 1
+			return nil, 1
 		}
 	}
-	return len(c), 1
+	return []int{len(c)}, 1
 }
 
 // Equals reports whether a pattern is identical to another pattern.
@@ -647,9 +647,9 @@ type Mask struct {
 	val []byte // masks for numerical types can be any number; masks for strings must be in base16 and start with 0x
 }
 
-func (m Mask) Test(b []byte) (int, int) {
+func (m Mask) Test(b []byte) ([]int, int) {
 	if len(b) < len(m.val) {
-		return -1, 0
+		return nil, 0
 	}
 	t := make([]byte, len(m.val))
 	for i := range t {
@@ -658,9 +658,9 @@ func (m Mask) Test(b []byte) (int, int) {
 	return m.pat.Test(t)
 }
 
-func (m Mask) TestR(b []byte) (int, int) {
+func (m Mask) TestR(b []byte) ([]int, int) {
 	if len(b) < len(m.val) {
-		return -1, 0
+		return nil, 0
 	}
 	t := make([]byte, len(m.val))
 	for i := range t {
