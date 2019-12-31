@@ -29,7 +29,7 @@ func TestBMH(t *testing.T) {
 func TestRBMH(t *testing.T) {
 	b := NewRBMHSequence(TestSequences[0])
 	ok, l := b.TestR([]byte("tosttest"))
-	len(ok) != 1 || ok[0] != 4 {
+	if len(ok) != 1 || ok[0] != 4 {
 		t.Errorf("Expecting bmh match length to be 4, got %d", l)
 	}
 	ok, l = b.TestR([]byte("testtost"))

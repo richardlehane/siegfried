@@ -7,5 +7,4 @@ import (
 )
 
 func TestBlock(t *testing.T) {
-	t.Fatal("does nothing yet")
 }

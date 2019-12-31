@@ -32,12 +32,12 @@ const (
 // A Machine is a segment of a signature that implements the patterns interface
 type Machine []Frame
 
-func (m Machine) Test(b []byte) (int, int) {
+func (m Machine) Test(b []byte) ([]int, int) {
 	var iter int
 	offs := make([]int, len(m))
 	for {
 		if iter < 0 {
-			return -1, 1
+			return nil, 1
 		}
 		if offs[iter] >= len(b) {
 			iter--
@@ -57,15 +57,15 @@ func (m Machine) Test(b []byte) (int, int) {
 		offs[iter] += adv
 		iter++
 	}
-	return offs[iter], 1
+	return []int{offs[iter]}, 1
 }
 
-func (m Machine) TestR(b []byte) (int, int) {
+func (m Machine) TestR(b []byte) ([]int, int) {
 	iter := len(m) - 1
 	offs := make([]int, len(m))
 	for {
 		if iter >= len(m) {
-			return -1, 0
+			return nil, 0
 		}
 		if offs[iter] >= len(b) {
 			iter++
@@ -85,7 +85,7 @@ func (m Machine) TestR(b []byte) (int, int) {
 		offs[iter] += adv
 		iter--
 	}
-	return offs[iter], 1
+	return []int{offs[iter]}, 1
 }
 
 func (m Machine) Equals(pat patterns.Pattern) bool {

@@ -114,13 +114,13 @@ func TestHost16(t *testing.T) {
 	if r, _ := Host16(i16).Test(b32); len(r) > 0 {
 		t.Error("Host16 fail: shouldn't match")
 	}
-	if r, _ := Host16(i16).Test(l16);len(r) != 1 || r[0] != 2 {
+	if r, _ := Host16(i16).Test(l16); len(r) != 1 || r[0] != 2 {
 		t.Error("Host16 fail: should match")
 	}
 	if r, _ := Host16(i16).Test(b16); len(r) != 1 || r[0] != 2 {
 		t.Error("Host16 fail: should match")
 	}
-	if r, _ := Host16(i16).TestR(l16);len(r) != 1 || r[0] != 2 {
+	if r, _ := Host16(i16).TestR(l16); len(r) != 1 || r[0] != 2 {
 		t.Error("Host16 fail: should match reverse")
 	}
 	if r, _ := Host16(i16).TestR(b16); len(r) != 1 || r[0] != 2 {

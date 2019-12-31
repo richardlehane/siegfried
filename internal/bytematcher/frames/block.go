@@ -69,19 +69,19 @@ type Block struct {
 	OffR int // fixed offset of the Key, relative to the last frame in the block
 }
 
-func (bl *Block) Test(b []byte) (int, int) {
+func (bl *Block) Test(b []byte) ([]int, int) {
 	if bl.Off >= len(b) {
-		return -1, 0
+		return nil, 0
 	}
 	l, jmp := bl.Key.Test(b[bl.Off:])
-	if l < 1 {
+	if len(l) < 1 {
 		return l, jmp
 	}
 	return l, jmp
 }
 
-func (bl *Block) TestR(b []byte) (int, int) {
-	return -1, 1
+func (bl *Block) TestR(b []byte) ([]int, int) {
+	return nil, 1
 }
 
 func (bl *Block) Equals(pat patterns.Pattern) bool {

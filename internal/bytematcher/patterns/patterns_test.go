@@ -69,10 +69,10 @@ func TestNotSequence(t *testing.T) {
 		t.Error("NotSequence fail: Equality test")
 	}
 	if r, _ := TestNotSequences[0].Test([]byte{'t', 'e', 's', 't'}); len(r) > 0 {
-		t.Error("NotSequence fail: Test")
+		t.Error("NotSequence fail: Test shouldn't match")
 	}
 	if r, _ := TestNotSequences[0].Test([]byte{'t', 'o', 'o', 't'}); len(r) != 1 || r[0] != 4 {
-		t.Error("NotSequence fail: Test")
+		t.Error("NotSequence fail: Test should match")
 	}
 	seqs := TestNotSequences[2].Sequences()
 	if len(seqs) != 255 {
@@ -90,7 +90,7 @@ func TestNotSequence(t *testing.T) {
 
 func TestMask(t *testing.T) {
 	mask := TestMasks[0]
-	if r, _ := mask.Test([]byte{0xEE}); r != 1 {
+	if r, _ := mask.Test([]byte{0xEE}); len(r) != 1 || r[0] != 1 {
 		t.Errorf("mask fail: 0xEE should match")
 	}
 	if r, _ := mask.Test([]byte{0x0A}); len(r) > 0 {

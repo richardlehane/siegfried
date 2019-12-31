@@ -53,11 +53,11 @@ func Stringify(b []byte) string {
 // You can define custom patterns (e.g. for W3C date type) by implementing this interface.
 type Pattern interface {
 	Test([]byte) ([]int, int)  // For a positive match, returns slice of lengths of the match and bytes to advance for a subsequent test. For a negative match, returns nil or empty slice and the bytes to advance for subsequent test (or 0 if the length of the pattern is longer than the length of the slice).
-	TestR([]byte) (int, int) // Same as Test but for testing in reverse (from the right-most position of the byte slice).
-	Equals(Pattern) bool     // Test equality with another pattern
-	Length() (int, int)      // Minimum and maximum lengths of the pattern
-	NumSequences() int       // Number of simple sequences represented by a pattern. Return 0 if the pattern cannot be represented by a defined number of simple sequence (e.g. for an indirect offset pattern) or, if in your opinion, the number of sequences is unreasonably large.
-	Sequences() []Sequence   // Convert the pattern to a slice of sequences. Return an empty slice if the pattern cannot be represented by a defined number of simple sequences.
+	TestR([]byte) ([]int, int) // Same as Test but for testing in reverse (from the right-most position of the byte slice).
+	Equals(Pattern) bool       // Test equality with another pattern
+	Length() (int, int)        // Minimum and maximum lengths of the pattern
+	NumSequences() int         // Number of simple sequences represented by a pattern. Return 0 if the pattern cannot be represented by a defined number of simple sequence (e.g. for an indirect offset pattern) or, if in your opinion, the number of sequences is unreasonably large.
+	Sequences() []Sequence     // Convert the pattern to a slice of sequences. Return an empty slice if the pattern cannot be represented by a defined number of simple sequences.
 	String() string
 	Save(*persist.LoadSaver) // encode the pattern into bytes for saving in a persist file
 }
@@ -124,7 +124,7 @@ func (s Sequence) Test(b []byte) ([]int, int) {
 }
 
 // Test bytes against the pattern in reverse.
-func (s Sequence) TestR(b []byte) (int, int) {
+func (s Sequence) TestR(b []byte) ([]int, int) {
 	if len(b) < len(s) {
 		return nil, 0
 	}
@@ -315,48 +315,48 @@ func (l List) Test(b []byte) ([]int, int) {
 		return nil, 0
 	}
 	le, _ := l[0].Test(b)
-	if le < 0 {
+	if len(le) < 1 {
 		return nil, 1
 	}
-	total := le
+	total := le[0]
 	if len(l) > 1 {
 		for _, p := range l[1:] {
 			if len(b) <= total {
-				return -1, 0
+				return nil, 0
 			}
 			le, _ := p.Test(b[total:])
-			if le < 0 {
+			if len(le) < 1 {
 				return nil, 1
 			}
-			total += le
+			total += le[0]
 		}
 	}
-	return total, 1
+	return []int{total}, 1
 }
 
 // Test bytes against the pattern in reverse.
-func (l List) TestR(b []byte) (int, int) {
+func (l List) TestR(b []byte) ([]int, int) {
 	if len(l) < 1 {
-		return -1, 0
+		return nil, 0
 	}
 	le, _ := l[len(l)-1].TestR(b)
-	if le < 0 {
-		return -1, 1
+	if len(le) < 1 {
+		return nil, 1
 	}
-	total := le
+	total := le[0]
 	if len(l) > 1 {
 		for i := len(l) - 2; i >= 0; i-- {
 			if len(b) <= total {
-				return -1, 0
+				return nil, 0
 			}
 			le, _ := l[i].TestR(b[:len(b)-total])
-			if le < 0 {
-				return -1, 1
+			if len(le) < 1 {
+				return nil, 1
 			}
-			total += le
+			total += le[0]
 		}
 	}
-	return total, 1
+	return []int{total}, 1
 }
 
 // Equals reports whether a pattern is identical to another pattern.
@@ -455,7 +455,7 @@ func (n Not) Test(b []byte) ([]int, int) {
 		return nil, 0
 	}
 	ok, _ := n.Pattern.Test(b)
-	if len(ok) > 0 {
+	if len(ok) < 1 {
 		return []int{min}, 1
 	}
 	return nil, 1
@@ -468,8 +468,8 @@ func (n Not) TestR(b []byte) ([]int, int) {
 		return nil, 0
 	}
 	ok, _ := n.Pattern.TestR(b)
-	if len(ok) > 0 {
-		return min, 1
+	if len(ok) < 1 {
+		return []int{min}, 1
 	}
 	return nil, 1
 }
