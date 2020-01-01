@@ -37,6 +37,10 @@ func TestMachine(t *testing.T) {
 	if l[0] != 5218 {
 		t.Errorf("Expecting length of the match to be 5218, got %d", l)
 	}
+	min, max := rmachine.Length()
+	if min != 344 || max != 10450 {
+		t.Errorf("Got lengths %d and %d", min, max)
+	}
 }
 
 func TestMultiLenMatching(t *testing.T) {

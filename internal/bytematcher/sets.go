@@ -16,6 +16,7 @@ package bytematcher
 
 import (
 	"bytes"
+	"io"
 
 	wac "github.com/richardlehane/match/fwac"
 	"github.com/richardlehane/siegfried/internal/bytematcher/frames"
@@ -183,28 +184,28 @@ func (fs *frameSet) index(buf *siegreader.Buffer, rev bool, quit chan struct{}) 
 			var matches []int
 			if rev {
 				slc, err := buf.EofSlice(0, frames.TotalLength(f))
-				if err != nil {
+				if err != nil && err != io.EOF {
 					close(ret)
 					return
 				}
 				matches = f.MatchR(slc)
 			} else {
 				slc, err := buf.Slice(0, frames.TotalLength(f))
-				if err != nil {
+				if err != nil && err != io.EOF {
 					close(ret)
 					return
 				}
 				matches = f.Match(slc)
 			}
-			if len(matches) > 0 {
-				var min int
-				if !rev {
-					min, _ = f.Length()
-				}
-				for _, off := range matches {
-					ret <- fsmatch{i, int64(off - min), min}
-				}
+			//if len(matches) > 0 { TODO: WTF???
+			//	var min int
+			//	if !rev {
+			//		min, _ = f.Length()
+			//	}
+			for _, off := range matches {
+				ret <- fsmatch{i, int64(f.Min), off - f.Min}
 			}
+			//}
 		}
 		close(ret)
 	}()
