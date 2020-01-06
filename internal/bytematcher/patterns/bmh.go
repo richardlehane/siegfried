@@ -35,8 +35,9 @@ func BMH(p Pattern, rev bool) Pattern {
 // BMHSequence is an optimised version of the regular Sequence pattern.
 // It is used behind the scenes in the Bytematcher package to speed up matching and should not be used directly in other packages (use the plain Sequence instead).
 type BMHSequence struct {
-	Seq   Sequence
-	Shift [256]int
+	Seq     Sequence
+	advance int
+	Shift   [256]int
 }
 
 // NewBMHSequence turns a Sequence into a BMHSequence.
@@ -49,7 +50,7 @@ func NewBMHSequence(s Sequence) *BMHSequence {
 	for i := 0; i < last; i++ {
 		shift[s[i]] = last - i
 	}
-	return &BMHSequence{s, shift}
+	return &BMHSequence{s, Overlap(s), shift}
 }
 
 // Test bytes against the pattern.
@@ -62,7 +63,7 @@ func (s *BMHSequence) Test(b []byte) ([]int, int) {
 			return nil, s.Shift[b[len(s.Seq)-1]]
 		}
 	}
-	return []int{len(s.Seq)}, 1
+	return []int{len(s.Seq)}, s.advance
 }
 
 // Test bytes against the pattern in reverse.
@@ -71,7 +72,7 @@ func (s *BMHSequence) TestR(b []byte) ([]int, int) {
 		return nil, 0
 	}
 	if bytes.Equal(s.Seq, b[len(b)-len(s.Seq):]) {
-		return []int{len(s.Seq)}, 1
+		return []int{len(s.Seq)}, s.advance
 	}
 	return nil, 1
 }
@@ -108,6 +109,7 @@ func (s *BMHSequence) String() string {
 func (s *BMHSequence) Save(ls *persist.LoadSaver) {
 	ls.SaveByte(bmhLoader)
 	ls.SaveBytes(s.Seq)
+	ls.SaveSmallInt(s.advance)
 	for _, v := range s.Shift {
 		ls.SaveSmallInt(v)
 	}
@@ -116,6 +118,7 @@ func (s *BMHSequence) Save(ls *persist.LoadSaver) {
 func loadBMH(ls *persist.LoadSaver) Pattern {
 	bmh := &BMHSequence{}
 	bmh.Seq = Sequence(ls.LoadBytes())
+	bmh.advance = ls.LoadSmallInt()
 	for i := range bmh.Shift {
 		bmh.Shift[i] = ls.LoadSmallInt()
 	}
@@ -125,8 +128,9 @@ func loadBMH(ls *persist.LoadSaver) Pattern {
 // RBMHSequence is a variant of the BMH sequence designed for reverse (R-L) matching.
 // It is used behind the scenes in the Bytematcher package to speed up matching and should not be used directly in other packages (use the plain Sequence instead).
 type RBMHSequence struct {
-	Seq   Sequence
-	Shift [256]int
+	Seq     Sequence
+	advance int
+	Shift   [256]int
 }
 
 // NewRBMHSequence create a reverse matching BMH sequence (apply the BMH optimisation to TestR rather than Test).
@@ -139,7 +143,7 @@ func NewRBMHSequence(s Sequence) *RBMHSequence {
 	for i := 0; i < last; i++ {
 		shift[s[last-i]] = last - i
 	}
-	return &RBMHSequence{s, shift}
+	return &RBMHSequence{s, Overlap(s), shift}
 }
 
 // Test bytes against the pattern.
@@ -148,7 +152,7 @@ func (s *RBMHSequence) Test(b []byte) ([]int, int) {
 		return nil, 0
 	}
 	if bytes.Equal(s.Seq, b[:len(s.Seq)]) {
-		return []int{len(s.Seq)}, 1
+		return []int{len(s.Seq)}, s.advance
 	}
 	return nil, 1
 }
@@ -163,7 +167,7 @@ func (s *RBMHSequence) TestR(b []byte) ([]int, int) {
 			return nil, s.Shift[b[len(b)-len(s.Seq)]]
 		}
 	}
-	return []int{len(s.Seq)}, 1
+	return []int{len(s.Seq)}, s.advance
 }
 
 // Equals reports whether a pattern is identical to another pattern.
@@ -198,6 +202,7 @@ func (s *RBMHSequence) String() string {
 func (s *RBMHSequence) Save(ls *persist.LoadSaver) {
 	ls.SaveByte(rbmhLoader)
 	ls.SaveBytes(s.Seq)
+	ls.SaveSmallInt(s.advance)
 	for _, v := range s.Shift {
 		ls.SaveSmallInt(v)
 	}
@@ -206,6 +211,7 @@ func (s *RBMHSequence) Save(ls *persist.LoadSaver) {
 func loadRBMH(ls *persist.LoadSaver) Pattern {
 	rbmh := &RBMHSequence{}
 	rbmh.Seq = Sequence(ls.LoadBytes())
+	rbmh.advance = ls.LoadSmallInt()
 	for i := range rbmh.Shift {
 		rbmh.Shift[i] = ls.LoadSmallInt()
 	}
