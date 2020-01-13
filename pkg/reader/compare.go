@@ -22,6 +22,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"time"
 )
 
 const (
@@ -62,7 +63,7 @@ func keygen(join int, fi File) string {
 	case FilenameSize:
 		return Base(fi.Path) + strconv.FormatInt(fi.Size, 10)
 	case FilenameMod:
-		return Base(fi.Path) + fi.Mod
+		return Base(fi.Path) + fi.Mod.Format(time.RFC3339)
 	case FilenameHash:
 		return Base(fi.Path) + string(fi.Hash)
 	case Hash:

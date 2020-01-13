@@ -58,12 +58,14 @@ func testRdr(t *testing.T, path string, expectFiles, expectIDs int) {
 		t.Fatal(err)
 	}
 	var i, j int
-	for f, e := rdr.Next(); e == nil; f, e = rdr.Next() {
+	var ff File
+	var e error
+	for ff, e = rdr.Next(); e == nil; ff, e = rdr.Next() {
 		i++
-		j += len(f.IDs)
+		j += len(ff.IDs)
 	}
 	if i != expectFiles || j != expectIDs {
-		t.Errorf("Expecting %d files and %d IDs, got %d files and %d IDs", expectFiles, expectIDs, i, j)
+		t.Errorf("Expecting %d files and %d IDs, got %d files and %d IDs; error: %v", expectFiles, expectIDs, i, j, e)
 	}
 }
 
@@ -73,7 +75,7 @@ func TestFido(t *testing.T) {
 
 func TestDroid(t *testing.T) {
 	testRdr(t, "examples/ipresShowcase/droid-gui-m.csv", ipresFiles, ipresDroidIDs)
-	testRdr(t, "examples/ipresShowcase/droid-gui-m.csv", ipresFiles, ipresDroidIDs)
+	testRdr(t, "examples/ipresShowcase/droid-gui-s.csv", ipresFiles, ipresDroidIDs)
 	testRdr(t, "examples/ipresShowcase/droid-np.csv", ipresFiles, ipresDroidNpIDs)
 }
 

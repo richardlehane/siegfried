@@ -109,10 +109,19 @@ func newHead(resultsPath, sigPath, scanned, created, version string) (Head, erro
 }
 
 func newFile(path, sz, mod, hash, e string) (File, error) {
+	var err error
 	file := File{
 		Path: path,
-		Mod:  mod,
 		IDs:  make([]core.Identification, 0, 1),
+	}
+	if mod != "" {
+		file.Mod, err = time.Parse(time.RFC3339, mod)
+		if err != nil {
+			file.Mod, err = time.Parse(droidTime, mod)
+		}
+	}
+	if err != nil {
+		err = fmt.Errorf("bad field, mod: %s, err: %v", mod, err)
 	}
 	if len(hash) > 0 {
 		file.Hash = []byte(hash)
@@ -123,12 +132,12 @@ func newFile(path, sz, mod, hash, e string) (File, error) {
 	if sz == "" {
 		return file, nil
 	}
-	size, err := strconv.Atoi(sz)
-	if err != nil {
-		return file, fmt.Errorf("bad field; expecting int got %s", sz)
+	fs, fserr := strconv.Atoi(sz)
+	file.Size = int64(fs)
+	if fserr != nil {
+		err = fmt.Errorf("bad field, sz: %s, err: %v", sz, err)
 	}
-	file.Size = int64(size)
-	return file, nil
+	return file, err
 }
 
 func getFile(rec record) (File, error) {

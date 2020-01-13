@@ -26,6 +26,8 @@ import (
 	"github.com/richardlehane/siegfried/internal/checksum"
 )
 
+const droidTime = "2006-01-02T15:04:05"
+
 var (
 	droidIDs      = [][2]string{{"droid", ""}}
 	droidFields   = [][]string{{"ns", "id", "format", "version", "mime", "basis", "warning"}}
