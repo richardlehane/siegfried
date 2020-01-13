@@ -57,7 +57,7 @@ type Decompressor interface {
 	Path() string
 	MIME() string
 	Size() int64
-	Mod() string
+	Mod() time.Time
 	Dirs() []string
 }
 
@@ -128,8 +128,8 @@ func (z *zipD) Size() int64 {
 	return int64(z.rdr.File[z.idx].UncompressedSize64)
 }
 
-func (z *zipD) Mod() string {
-	return z.rdr.File[z.idx].ModTime().Format(time.RFC3339)
+func (z *zipD) Mod() time.Time {
+	return z.rdr.File[z.idx].ModTime()
 }
 
 func (z *zipD) Dirs() []string {
@@ -174,8 +174,8 @@ func (t *tarD) Size() int64 {
 	return t.hdr.Size
 }
 
-func (t *tarD) Mod() string {
-	return t.hdr.ModTime.Format(time.RFC3339)
+func (t *tarD) Mod() time.Time {
+	return t.hdr.ModTime
 }
 
 func (t *tarD) Dirs() []string {
@@ -238,8 +238,8 @@ func (g *gzipD) Size() int64 {
 	return g.sz
 }
 
-func (g *gzipD) Mod() string {
-	return g.rdr.ModTime.Format(time.RFC3339)
+func (g *gzipD) Mod() time.Time {
+	return g.rdr.ModTime
 }
 
 func (t *gzipD) Dirs() []string {
@@ -294,8 +294,8 @@ func (w *wa) Size() int64 {
 	return w.rec.Size()
 }
 
-func (w *wa) Mod() string {
-	return w.rec.Date().Format(time.RFC3339)
+func (w *wa) Mod() time.Time {
+	return w.rec.Date()
 }
 
 func (w *wa) Dirs() []string {

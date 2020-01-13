@@ -162,7 +162,7 @@ func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried
 			sf = nsf
 		}
 	}
-	gf := func(path, mime, mod string, sz int64) *context {
+	gf := func(path, mime string, mod time.Time, sz int64) *context {
 		c := ctxPool.Get().(*context)
 		c.path, c.mime, c.mod, c.sz = path, mime, mod, sz
 		c.s, c.wg, c.w, c.d, c.z, c.h = sf, wg, wr, d, z, checksum.MakeHash(ht)
@@ -186,7 +186,7 @@ func handleIdentify(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfri
 		}
 		defer f.Close()
 		var sz int64
-		var mod string
+		var mod time.Time
 		osf, ok := f.(*os.File)
 		if ok {
 			info, err := osf.Stat()
@@ -194,7 +194,7 @@ func handleIdentify(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfri
 				handleErr(w, http.StatusInternalServerError, err)
 			}
 			sz = info.Size()
-			mod = info.ModTime().String()
+			mod = info.ModTime()
 		} else {
 			sz = r.ContentLength
 		}

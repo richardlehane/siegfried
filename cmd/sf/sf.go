@@ -116,9 +116,9 @@ func setCtxPool(s *siegfried.Siegfried, wg *sync.WaitGroup, w writer.Writer, d, 
 	}
 }
 
-type getFn func(string, string, string, int64) *context
+type getFn func(string, string, time.Time, int64) *context
 
-func getCtx(path, mime, mod string, sz int64) *context {
+func getCtx(path, mime string, mod time.Time, sz int64) *context {
 	c := ctxPool.Get().(*context)
 	if c.h != nil {
 		c.h.Reset()
@@ -138,7 +138,7 @@ type context struct {
 	// info
 	path string
 	mime string
-	mod  string
+	mod  time.Time
 	sz   int64
 	// results
 	res chan results
@@ -158,7 +158,7 @@ func printer(ctxts chan *context, lg *logger.Logger) {
 		lg.Error(ctx.path, res.err)
 		lg.IDs(ctx.path, res.ids)
 		// write the result
-		ctx.w.File(ctx.path, ctx.sz, ctx.mod, res.cs, res.err, res.ids)
+		ctx.w.File(ctx.path, ctx.sz, ctx.mod.Format(time.RFC3339), res.cs, res.err, res.ids)
 		ctx.wg.Done()
 		ctxPool.Put(ctx) // return the context to the pool
 	}
@@ -245,7 +245,7 @@ func identifyRdr(r io.Reader, ctx *context, ctxts chan *context, gf getFn) {
 	for err = d.Next(); err == nil; err = d.Next() {
 		if ctx.d {
 			for _, v := range d.Dirs() {
-				printFile(ctxts, gf(v, "", "", -1), nil)
+				printFile(ctxts, gf(v, "", time.Time{}, -1), nil)
 			}
 		}
 		nctx := gf(d.Path(), d.MIME(), d.Mod(), d.Size())
@@ -254,7 +254,7 @@ func identifyRdr(r io.Reader, ctx *context, ctxts chan *context, gf getFn) {
 		identifyRdr(d.Reader(), nctx, ctxts, gf)
 	}
 	if err != io.EOF && err != nil {
-		printFile(ctxts, gf(decompress.Arcpath(zpath, ""), "", "", 0), fmt.Errorf("error occurred during decompression: %v", err))
+		printFile(ctxts, gf(decompress.Arcpath(zpath, ""), "", time.Time{}, 0), fmt.Errorf("error occurred during decompression: %v", err))
 	}
 }
 
@@ -456,7 +456,7 @@ func main() {
 					err = identify(ctxts, scanner.Text(), "", *coe, *nr, d, getCtx)
 					if err != nil {
 						printFile(ctxts,
-							getCtx(scanner.Text(), "", "", 0),
+							getCtx(scanner.Text(), "", time.Time{}, 0),
 							fmt.Errorf("failed to identify %s: %v", scanner.Text(), err))
 						err = nil
 					}
@@ -466,7 +466,7 @@ func main() {
 		} else if *replay {
 			err = replayFile(v, ctxts, w)
 		} else if v == "-" {
-			ctx := getCtx(*name, "", "", 0)
+			ctx := getCtx(*name, "", time.Time{}, 0)
 			ctx.wg.Add(1)
 			ctxts <- ctx
 			identifyRdr(os.Stdin, ctx, ctxts, getCtx)

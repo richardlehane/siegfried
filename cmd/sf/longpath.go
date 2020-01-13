@@ -37,7 +37,7 @@ func identify(ctxts chan *context, root, orig string, coerr, norecurse, droid bo
 		}
 		if err != nil {
 			if coerr {
-				printFile(ctxts, gf(path, "", "", 0), WalkError{path, err})
+				printFile(ctxts, gf(path, "", time.Time{}, 0), WalkError{path, err})
 				return nil
 			}
 			return WalkError{path, err}
@@ -47,16 +47,16 @@ func identify(ctxts chan *context, root, orig string, coerr, norecurse, droid bo
 				return filepath.SkipDir
 			}
 			if droid {
-				printFile(ctxts, gf(path, "", info.ModTime().Format(time.RFC3339), -1), nil)
+				printFile(ctxts, gf(path, "", info.ModTime(), -1), nil)
 			}
 			return nil
 		}
 		// zero user read permissions mask, octal 400 (decimal 256)
 		if !info.Mode().IsRegular() || info.Mode()&256 == 0 {
-			printFile(ctxts, gf(path, "", info.ModTime().Format(time.RFC3339), info.Size()), ModeError(info.Mode()))
+			printFile(ctxts, gf(path, "", info.ModTime(), info.Size()), ModeError(info.Mode()))
 			return nil
 		}
-		identifyFile(gf(path, "", info.ModTime().Format(time.RFC3339), info.Size()), ctxts, gf)
+		identifyFile(gf(path, "", info.ModTime(), info.Size()), ctxts, gf)
 		return nil
 	}
 	return filepath.Walk(root, walkFunc)

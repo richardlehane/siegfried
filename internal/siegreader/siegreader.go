@@ -43,9 +43,9 @@ var (
 )
 
 const (
-	readSz      int = 4096       // 8192
-	initialRead     = readSz * 4 // was 2, try 4
-	eofSz           = readSz * 4 // was 2, try 4
+	readSz      int = 4096 // 8192
+	initialRead     = readSz * 2
+	eofSz           = readSz * 2
 	wheelSz         = readSz * 16
 	smallFileSz     = readSz * 16
 	streamSz        = smallFileSz * 1024

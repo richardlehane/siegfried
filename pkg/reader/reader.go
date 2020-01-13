@@ -51,7 +51,7 @@ type Head struct {
 type File struct {
 	Path string
 	Size int64
-	Mod  string
+	Mod  time.Time
 	Hash []byte
 	Err  error
 	IDs  []core.Identification

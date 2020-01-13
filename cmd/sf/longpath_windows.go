@@ -18,7 +18,6 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-	"time"
 )
 
 // longpath code derived from https://github.com/docker/docker/tree/master/pkg/longpath
@@ -102,15 +101,15 @@ func identify(ctxts chan *context, root, orig string, coerr, norecurse, droid bo
 				return identify(ctxts, lp, sp, coerr, norecurse, droid, gf)
 			}
 			if droid {
-				printFile(ctxts, gf(shortpath(path, orig), "", info.ModTime().Format(time.RFC3339), -1), nil)
+				printFile(ctxts, gf(shortpath(path, orig), "", info.ModTime(), -1), nil)
 			}
 			return nil
 		}
 		if !info.Mode().IsRegular() {
-			printFile(ctxts, gf(path, "", info.ModTime().Format(time.RFC3339), info.Size()), ModeError(info.Mode()))
+			printFile(ctxts, gf(path, "", info.ModTime(), info.Size()), ModeError(info.Mode()))
 			return nil
 		}
-		identifyFile(gf(shortpath(path, orig), "", info.ModTime().Format(time.RFC3339), info.Size()), ctxts, gf)
+		identifyFile(gf(shortpath(path, orig), "", info.ModTime(), info.Size()), ctxts, gf)
 		return nil
 	}
 	return filepath.Walk(root, walkFunc)
