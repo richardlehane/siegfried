@@ -57,6 +57,7 @@ var (
 	archive      = flag.Bool("z", false, "scan archive formats (zip, tar, gzip, warc, arc)")
 	hashf        = flag.String("hash", "", "calculate file checksum with hash algorithm; options "+checksum.HashChoices)
 	throttlef    = flag.Duration("throttle", 0, "set a time to wait between scanning files e.g. 50ms")
+	utcf         = flag.Bool("utc", false, "report file modified times in UTC, rather than local, TZ")
 	coe          = flag.Bool("coe", false, "continue on fatal errors during directory walks (this may result in directories being skipped)")
 	replay       = flag.Bool("replay", false, "replay one (or more) results files to change output or logging e.g. sf -replay -csv results.yaml")
 	list         = flag.Bool("f", false, "scan one (or more) lists of filenames e.g. sf -f myfiles.txt")
@@ -157,6 +158,9 @@ func printer(ctxts chan *context, lg *logger.Logger) {
 		res := <-ctx.res
 		lg.Error(ctx.path, res.err)
 		lg.IDs(ctx.path, res.ids)
+		if *utcf {
+			ctx.mod = ctx.mod.UTC()
+		}
 		// write the result
 		ctx.w.File(ctx.path, ctx.sz, ctx.mod.Format(time.RFC3339), res.cs, res.err, res.ids)
 		ctx.wg.Done()
