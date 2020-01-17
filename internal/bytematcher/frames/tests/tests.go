@@ -40,10 +40,11 @@ var TestFrames = []Frame{
 	{0, -1, PREV, TestSequences[0]}, // test
 	{0, -1, BOF, TestSequences[0]},  //15
 	{0, -1, BOF, TestSequences[16]},
-	{0, 0, EOF, TestSequences[17]},
+	{0, 0, EOF, TestSequences[17]}, // 17 "23"
 	{0, 0, BOF, TestLists[0]},
 	{0, 0, BOF, TestChoices[6]},
-	{0, 0, PREV, TestChoices[2]}, // 20
+	{0, 0, PREV, TestChoices[2]},   // 20
+	{5, 5, PREV, TestSequences[0]}, // test
 }
 
 // TestSignatures are exported so they can be used by the other bytematcher packages.
@@ -55,6 +56,7 @@ var TestSignatures = []Signature{
 	{TestFrames[16]},                               // [BOF *:junk]
 	{TestFrames[18]},                               // [BOF 0:List(test,testy)]
 	{TestFrames[19], TestFrames[20]},               // [BOF 0:TEST|TESTY], [P 0:TESTY|YNESS]
+	{TestFrames[0], TestFrames[21], TestFrames[10], TestFrames[2], TestFrames[17]}, // [BOF 0:test], [P 5:testy], [S *:test|testy], [S 0:testy], [E 0:23] 3 Segments
 }
 
 // TestFmts tests some particularly problematic formats.

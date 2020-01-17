@@ -57,7 +57,7 @@ func blockify(seg []Frame) Frame {
 	// identify Key by looking for longest Sequence Pattern within the segment
 	var kf, kfl int
 	for i, f := range seg {
-		if _, ok := f.Pattern.(patterns.Sequence) { // we want to BMH the key, so this will only work on seqs
+		if _, ok := f.Pattern.(patterns.Sequence); ok { // we want to BMH the key, so this will only work on seqs
 			l, _ := f.Length()
 			if l > kfl {
 				kfl = l
