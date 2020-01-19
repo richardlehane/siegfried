@@ -1,4 +1,20 @@
 # Change Log
+## v1.8.0 (2020-01-)
+### Added
+- utc flag returns file modified dates in UTC e.g. `sf -utc FILE | DIR`. Requested by [Dragan Espenschied](https://github.com/richardlehane/siegfried/issues/136)
+- new cost and repetition flags to control segmentation when building signatures
+
+### Changed
+- update PRONOM to v96
+- update LOC signatures to 2019-12-18
+- update tika-mimetypes signatures to v1.23
+- update freedesktop.org signatures to v1.15
+
+### Fixed
+- XML namespaces detected by prefix on root tag, as well as default namespace (for mime-info spec)
+- panic when scanning certain MS-CFB files. Reported separately by Mike Shallcross and Euan Cochrane
+- file with many FF xx sequences grinds to a halt. Reported by [Andy Foster](https://github.com/richardlehane/siegfried/issues/128)
+
 ## v1.7.13 (2019-08-18)
 ### Added
 - the `-f` flag now scans directories, as well as files. Requested by [Harry Moss](https://github.com/richardlehane/siegfried/issues/130)
