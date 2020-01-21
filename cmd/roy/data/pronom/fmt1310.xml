@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2128</FormatID>
+      <FormatName>LocoFile</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Database</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The LocoFile Datafile format is a database format produced by LocoFile, an add-on first released in 1988 for the Amstrad PCW's LocoScript 2 word processor and supported in all subsequent versions of LocoScript. LocoFile Datafiles store indexed records, such as addresses indexed by name, which could be accessed while editing LocoScript documents or automatically inserted into document templates for batch processing.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>184</ProvenanceSourceID>
+      <ProvenanceName>British Library / British Library</ProvenanceName>
+      <ProvenanceSourceDate>18 Jan 2020</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>18 Jan 2020</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1310</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>246</DeveloperID>
+        <DeveloperName>Locomotive Software</DeveloperName>
+        <OrganisationName>Locomotive Software</OrganisationName>
+        <DeveloperCompoundName>Locomotive Software / Locomotive Software</DeveloperCompoundName>
+      </Developers>
+      <InternalSignature>
+        <SignatureID>1685</SignatureID>
+        <SignatureName>LocoFile</SignatureName>
+        <SignatureNote>BOF: Magic Bytes 'FIL..'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1953</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>46494C01(01|02)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

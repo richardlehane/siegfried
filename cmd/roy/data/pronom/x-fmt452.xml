@@ -51,6 +51,96 @@
         <OrganisationName>Google</OrganisationName>
         <SupportCompoundName>Google</SupportCompoundName>
       </Support>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2077</RelatedFormatID>
+        <RelatedFormatName>SketchUp Document</RelatedFormatName>
+        <RelatedFormatVersion>1</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2078</RelatedFormatID>
+        <RelatedFormatName>SketchUp Document</RelatedFormatName>
+        <RelatedFormatVersion>2</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2079</RelatedFormatID>
+        <RelatedFormatName>SketchUp Document</RelatedFormatName>
+        <RelatedFormatVersion>3</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2080</RelatedFormatID>
+        <RelatedFormatName>SketchUp Document</RelatedFormatName>
+        <RelatedFormatVersion>4</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2081</RelatedFormatID>
+        <RelatedFormatName>SketchUp Document</RelatedFormatName>
+        <RelatedFormatVersion>5</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2082</RelatedFormatID>
+        <RelatedFormatName>SketchUp Document</RelatedFormatName>
+        <RelatedFormatVersion>6</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2083</RelatedFormatID>
+        <RelatedFormatName>SketchUp Document</RelatedFormatName>
+        <RelatedFormatVersion>7</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2084</RelatedFormatID>
+        <RelatedFormatName>SketchUp Document</RelatedFormatName>
+        <RelatedFormatVersion>8</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2085</RelatedFormatID>
+        <RelatedFormatName>SketchUp Document</RelatedFormatName>
+        <RelatedFormatVersion>13</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2086</RelatedFormatID>
+        <RelatedFormatName>SketchUp Document</RelatedFormatName>
+        <RelatedFormatVersion>14</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2087</RelatedFormatID>
+        <RelatedFormatName>SketchUp Document</RelatedFormatName>
+        <RelatedFormatVersion>15</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2088</RelatedFormatID>
+        <RelatedFormatName>SketchUp Document</RelatedFormatName>
+        <RelatedFormatVersion>16</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2089</RelatedFormatID>
+        <RelatedFormatName>SketchUp Document</RelatedFormatName>
+        <RelatedFormatVersion>17</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2090</RelatedFormatID>
+        <RelatedFormatName>SketchUp Document</RelatedFormatName>
+        <RelatedFormatVersion>18</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2091</RelatedFormatID>
+        <RelatedFormatName>SketchUp Document</RelatedFormatName>
+        <RelatedFormatVersion>19</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2066</FormatID>
+      <FormatName>SOSI</FormatName>
+      <FormatVersion>4.1</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>GIS</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>SOSI is an abbreviation of Samordnet Opplegg for Stedfestet Informasjon, translating to Systematic Organisation of Spatial Information in English.  SOSI is a file format used for exchanging digital geodata published initially in 1987 by the Norwegian Mapping Authority. The standard includes definitions for geometry, topology, data quality, coordinate systems, attributes and metadata. It is a widely used in file format for Norwegian map data.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>243</ProvenanceSourceID>
+      <ProvenanceName>Norwegian Unix Users Group / Norwegian Unix Users Group</ProvenanceName>
+      <ProvenanceSourceDate>18 Jan 2020</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>18 Jan 2020</LastUpdatedDate>
+      <FormatNote>https://www.kartverket.no/geodataarbeid/Standarder/SOSI/</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1248</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>text/vnd.sosi</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2304</ExternalSignatureID>
+        <Signature>sos</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1624</SignatureID>
+        <SignatureName>SOSI Version 4.1</SignatureName>
+        <SignatureNote>BOF: Magic bytes: {0-10} ‘HODE’{0-300}’SOSI-VERSJON’{0-5}'4.1'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1895</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>10</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>484F4445{0-300}534F53492D564552534A4F4E{0-5}342E31</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2064</RelatedFormatID>
+        <RelatedFormatName>SOSI</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

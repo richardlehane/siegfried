@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2158</FormatID>
+      <FormatName>BDOC</FormatName>
+      <FormatVersion>1</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>BDOC is a digital signature format developed in 2014 to replace the old DDOC (DigiDoc) digital signature format in Estonia. Compared to DDOC, an important modification is that a .bdoc file is in fact a ZIP container with the signed files, the signatures and the protocol control information and can be opened by any program that recognises the ZIP format.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>239</ProvenanceSourceID>
+      <ProvenanceName>The National Archives of Estonia / The National Archives of Estonia</ProvenanceName>
+      <ProvenanceSourceDate>20 Jan 2020</ProvenanceSourceDate>
+      <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
+      <LastUpdatedDate>20 Jan 2020</LastUpdatedDate>
+      <FormatNote>https://www.id.ee/?lang=en&amp;id=34336. Standard: EVS 821:2009 BDOC - Format for Digital Signatures https://www.evs.ee/products/evs-821-2009</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/vnd.bdoc-1.0</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1340</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2505</ExternalSignatureID>
+        <Signature>bdoc</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

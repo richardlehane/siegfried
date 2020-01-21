@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2119</FormatID>
+      <FormatName>The Print Shop Project</FormatName>
+      <FormatVersion>2-5</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Presentation</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The Print Shop is a desktop publishing application published by Broderbund. This format version post-dates the earlier The Print Shop Deluxe product range. More information about the format family can be found here: http://fileformats.archiveteam.org/wiki/The_Print_Shop.</FormatDescription>
+      <BinaryFileFormat>Text</BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>
+      </ProvenanceName>
+      <ProvenanceSourceDate>18 Jan 2020</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>18 Jan 2020</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1301</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>20</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Broderbund Software, Inc</OrganisationName>
+        <DeveloperCompoundName>Broderbund Software, Inc</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>20</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Broderbund Software, Inc</OrganisationName>
+        <SupportCompoundName>Broderbund Software, Inc</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2414</ExternalSignatureID>
+        <Signature>psproj</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1676</SignatureID>
+        <SignatureName>The Print Shop Project 2</SignatureName>
+        <SignatureNote>BOF: PSD5RDOC</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1944</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>12</Offset>
+          <MaxOffset>12</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>5053443552444F43</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

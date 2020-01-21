@@ -5,14 +5,13 @@
       <FormatID>1062</FormatID>
       <FormatName>Macromedia Director</FormatName>
       <FormatVersion>Macintosh</FormatVersion>
-      <FormatAliases>
-      </FormatAliases>
+      <FormatAliases>Adobe Director</FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
       <FormatTypes>Presentation</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Adobe Director (formerly Macromedia Director) was a multimedia application authoring platform created by Macromedia and managed by Adobe Systems until its discontinuation. Director was the primary editor on the Adobe Shockwave platform.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -25,7 +24,7 @@
       <ProvenanceSourceDate>18 Jan 2011</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>18 Jan 2011</LastUpdatedDate>
+      <LastUpdatedDate>20 Jan 2020</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -40,6 +39,20 @@
         <Identifier>fmt/317</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>7</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Adobe Systems Incorporated</OrganisationName>
+        <DeveloperCompoundName>Adobe Systems Incorporated</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>7</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Adobe Systems Incorporated</OrganisationName>
+        <SupportCompoundName>Adobe Systems Incorporated</SupportCompoundName>
+      </Support>
       <ExternalSignature>
         <ExternalSignatureID>1065</ExternalSignatureID>
         <Signature>dir</Signature>
@@ -66,7 +79,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>58464952{4}3339564D70616D6918000000010000002C</ByteSequenceValue>
+          <ByteSequenceValue>58464952{4}3339564D70616D691800000001000000</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

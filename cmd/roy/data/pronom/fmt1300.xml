@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2118</FormatID>
+      <FormatName>Broderbund The Print Shop/PrintMaster/American Greetings Project</FormatName>
+      <FormatVersion>10-23</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Presentation</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The Print Shop is a desktop publishing application published by Broderbund. The software has a range of format extensions dependent on the type of project being created and the format is produced by a range of Broderbund branded products. More information about the format family can be found here: http://fileformats.archiveteam.org/wiki/The_Print_Shop. The format is based on the OLE2 compound file format.</FormatDescription>
+      <BinaryFileFormat>Text</BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>
+      </ProvenanceName>
+      <ProvenanceSourceDate>18 Jan 2020</ProvenanceSourceDate>
+      <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
+      <LastUpdatedDate>18 Jan 2020</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1300</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>20</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Broderbund Software, Inc</OrganisationName>
+        <DeveloperCompoundName>Broderbund Software, Inc</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>20</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Broderbund Software, Inc</OrganisationName>
+        <SupportCompoundName>Broderbund Software, Inc</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2394</ExternalSignatureID>
+        <Signature>ban</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2395</ExternalSignatureID>
+        <Signature>bro</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2396</ExternalSignatureID>
+        <Signature>biz</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2397</ExternalSignatureID>
+        <Signature>cal</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2398</ExternalSignatureID>
+        <Signature>car</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2399</ExternalSignatureID>
+        <Signature>cer</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2400</ExternalSignatureID>
+        <Signature>env</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2401</ExternalSignatureID>
+        <Signature>fax</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2402</ExternalSignatureID>
+        <Signature>sig</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2403</ExternalSignatureID>
+        <Signature>cft</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2404</ExternalSignatureID>
+        <Signature>hcr</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2405</ExternalSignatureID>
+        <Signature>lbl</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2406</ExternalSignatureID>
+        <Signature>let</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2407</ExternalSignatureID>
+        <Signature>nws</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2408</ExternalSignatureID>
+        <Signature>not</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2409</ExternalSignatureID>
+        <Signature>pcr</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2410</ExternalSignatureID>
+        <Signature>php</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2411</ExternalSignatureID>
+        <Signature>tsh</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2412</ExternalSignatureID>
+        <Signature>web</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2413</ExternalSignatureID>
+        <Signature>sti</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

@@ -4,8 +4,7 @@
     <FileFormat>
       <FormatID>1029</FormatID>
       <FormatName>WARC</FormatName>
-      <FormatVersion>
-      </FormatVersion>
+      <FormatVersion>1.0</FormatVersion>
       <FormatAliases>ISO 28500-2009, Web ARChive file format</FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
@@ -34,6 +33,10 @@ WARC format has been written by the members of the IIPC (http://www.netpreserve.
       </FormatRisk>
       <TechnicalEnvironment>
       </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/warc</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
       <FileFormatIdentifier>
         <Identifier>fmt/289</Identifier>
         <IdentifierType>PUID</IdentifierType>

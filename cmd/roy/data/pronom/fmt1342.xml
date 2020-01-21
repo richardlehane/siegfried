@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2160</FormatID>
+      <FormatName>BDOC</FormatName>
+      <FormatVersion>2.x</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>
+      </FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>BDOC is a digital signature format specific to Estonia. National BDOC 2.1 standard EVS 821:2014 http://www.evs.ee/products/evs-821-2014. The format comprises two technically different subformats. In order for end users to be able to easy differentiate between these subformats, each subformat has obtained its own file extension - .bdoc and .asice. .bdoc or BDOC-TM or ASiC-E LT-TM is the BDOC signature format with a time-mark. The RFC 2560 standard based time-marks ensure long-term proofability of the authenticity of the signature. This format has been used as a default digital signature format in Estonia since 2015. .asice or BDOC-TS or ASiC-E LT is the BDOC signature format with a time-stamp. In contrast to the LT-TM format, long-term proofability of the authenticity of the signature is ensured by the RFC 3161 standard based time-stamps. The ASiC-E LT signature is highly compliant with the international standards. One can also differentiate between the subformats by inspecting the signature0.xml file: BDOC has element "SignaturePolicyIdentifier" whereas ASICE includes element "SignatureTimeStamp".</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>239</ProvenanceSourceID>
+      <ProvenanceName>The National Archives of Estonia / The National Archives of Estonia</ProvenanceName>
+      <ProvenanceSourceDate>20 Jan 2020</ProvenanceSourceDate>
+      <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
+      <LastUpdatedDate>20 Jan 2020</LastUpdatedDate>
+      <FormatNote>https://www.id.ee/public/BDOC2.0.bdoc https://www.id.ee/public/BDOC2.1.bdoc https://www.id.ee/public/bdoc21-TS.asice</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/vnd.etsi.asic-e+zip</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1342</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2507</ExternalSignatureID>
+        <Signature>bdoc</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2508</ExternalSignatureID>
+        <Signature>asice</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

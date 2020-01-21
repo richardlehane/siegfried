@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>1450</FormatID>
-      <FormatName>Quark Xpress Data File</FormatName>
+      <FormatName>QuarkXPress Project</FormatName>
       <FormatVersion>10</FormatVersion>
       <FormatAliases>
       </FormatAliases>
@@ -12,7 +12,7 @@
       <FormatTypes>Presentation</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>QuarkXPress is desktop publishing software for creating and editing page layouts that can be run on Mac and Windows operating systems.</FormatDescription>
+      <FormatDescription>QuarkXPress is desktop publishing software for creating and editing page layouts that can be run on Mac and Windows operating systems. It was first released in 1987. It can be used to creating a variety of layouts, from single-page flyers to multi-media projects required for magazines, newspapers and catalogues. Versions 1-3 were available on Macintosh only, from version 3.1 a common signature is used.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -26,7 +26,7 @@
       <ProvenanceSourceDate>14 Jul 2014</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>14 Jul 2014</LastUpdatedDate>
+      <LastUpdatedDate>20 Jan 2020</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -56,18 +56,13 @@
         <SupportCompoundName>Quark, Inc</SupportCompoundName>
       </Support>
       <ExternalSignature>
-        <ExternalSignatureID>1502</ExternalSignatureID>
-        <Signature>qct</Signature>
-        <SignatureType>File extension</SignatureType>
-      </ExternalSignature>
-      <ExternalSignature>
         <ExternalSignatureID>1503</ExternalSignatureID>
         <Signature>qpt</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <ExternalSignature>
         <ExternalSignatureID>1504</ExternalSignatureID>
-        <Signature>qcd</Signature>
+        <Signature>qwd</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <ExternalSignature>
@@ -77,85 +72,51 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>982</SignatureID>
-        <SignatureName>Quark Xpress 10 Data File (Motorola)</SignatureName>
-        <SignatureNote>BOF: ..MMXPR    VAR: QuarkXPress 10</SignatureNote>
+        <SignatureName>QuarkXPress 10 (Motorola)</SignatureName>
+        <SignatureNote>BOF (Offset 2):'MMXPR'{2}'J'.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1210</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
-          <Offset>
-          </Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <Offset>2</Offset>
+          <MaxOffset>2</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>00004D4D585052</ByteSequenceValue>
-        </ByteSequence>
-        <ByteSequence>
-          <ByteSequenceID>1211</ByteSequenceID>
-          <PositionType>Variable</PositionType>
-          <Offset>
-          </Offset>
-          <MaxOffset>
-          </MaxOffset>
-          <IndirectOffsetLocation>
-          </IndirectOffsetLocation>
-          <IndirectOffsetLength>
-          </IndirectOffsetLength>
-          <Endianness>
-          </Endianness>
-          <ByteSequenceValue>517561726B585072657373203130</ByteSequenceValue>
+          <ByteSequenceValue>4D4D585052{2}4A</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <InternalSignature>
         <SignatureID>983</SignatureID>
-        <SignatureName>Quark Xpress 10 Data File (Intel)</SignatureName>
-        <SignatureNote>BOF: ..IIXPR    VAR: QuarkXPress 10</SignatureNote>
+        <SignatureName>QuarkXPress 10 (Intel)</SignatureName>
+        <SignatureNote>BOF (Offset 2):'IIXPR'{1}'J'. The 'II' stands for created on an Intel computer.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1212</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
-          <Offset>
-          </Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <Offset>2</Offset>
+          <MaxOffset>2</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>00004949585052</ByteSequenceValue>
-        </ByteSequence>
-        <ByteSequence>
-          <ByteSequenceID>1213</ByteSequenceID>
-          <PositionType>Variable</PositionType>
-          <Offset>
-          </Offset>
-          <MaxOffset>
-          </MaxOffset>
-          <IndirectOffsetLocation>
-          </IndirectOffsetLocation>
-          <IndirectOffsetLength>
-          </IndirectOffsetLength>
-          <Endianness>
-          </Endianness>
-          <ByteSequenceValue>517561726B585072657373203130</ByteSequenceValue>
+          <ByteSequenceValue>4949585052{1}4A</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>255</RelatedFormatID>
-        <RelatedFormatName>Quark Xpress Data File</RelatedFormatName>
+        <RelatedFormatName>QuarkXPress Data File</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Is subsequent version of</RelationshipType>
         <RelatedFormatID>1484</RelatedFormatID>
-        <RelatedFormatName>Quark Xpress Data File</RelatedFormatName>
+        <RelatedFormatName>QuarkXPress Project</RelatedFormatName>
         <RelatedFormatVersion>9</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>

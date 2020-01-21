@@ -11,7 +11,8 @@
       </FormatFamilies>
       <FormatTypes>Video</FormatTypes>
       <FormatDisclosure>Full</FormatDisclosure>
-      <FormatDescription>The QuickTime file format is a format for storing multimedia content, principally video, developed by Apple. The basic data unit in a QuickTime file is the atom. Each atom contains size and type information along with its data. The size field indicates the number of bytes in the atom, including the size and type fields. The type field specifies the type of data stored in the atom and, by implication, the format of that data. Atoms are hierarchical in nature. That is, one atom can contain one or more other atoms of varying types. For example, a movie atom contains one track atom for each track in the movie. The track atoms, in turn, contain one or more media atoms each, along with other atoms that define other track and movie characteristics. This hierarchical structure of atoms is referred to as a containment hierarchy. A QuickTime file is simply a collection of atoms. QuickTime does not impose any rules about the order of these atoms.</FormatDescription>
+      <FormatDescription>The QuickTime file format is a format for storing multimedia content, principally video, developed by Apple. The basic data unit in a QuickTime file is the atom. Each atom contains size and type information along with its data. The size field indicates the number of bytes in the atom, including the size and type fields. The type field specifies the type of data stored in the atom and, by implication, the format of that data. Atoms are hierarchical in nature. That is, one atom can contain one or more other atoms of varying types. For example, a movie atom contains one track atom for each track in the movie. The track atoms, in turn, contain one or more media atoms each, along with other atoms that define other track and movie characteristics. This hierarchical structure of atoms is referred to as a containment hierarchy. A QuickTime file is simply a collection of atoms. QuickTime does not impose any rules about the order of these atoms.
+Apple discontinued the support of Windows Media Player in the year 2016. Windows Media Player thus only supports file format versions 2.0, or earlier, of QuickTime Movie files. Newer QuickTime Movie files can be played on Windows with VLC Media Player.</FormatDescription>
       <BinaryFileFormat>Binary</BinaryFileFormat>
       <ByteOrders>Big-endian (Motorola)</ByteOrders>
       <ReleaseDate>
@@ -23,9 +24,8 @@
       <ProvenanceSourceDate>11 Mar 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>26 Feb 2013</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>20 Jan 2020</LastUpdatedDate>
+      <FormatNote>https://support.apple.com/kb/DL837?locale=en_US</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -45,6 +45,13 @@
         <OrganisationName>Apple Computer, Inc.</OrganisationName>
         <DeveloperCompoundName>Apple Computer, Inc.</DeveloperCompoundName>
       </Developers>
+      <Support>
+        <SupportID>15</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Apple Computer, Inc.</OrganisationName>
+        <SupportCompoundName>Apple Computer, Inc.</SupportCompoundName>
+      </Support>
       <Document>
         <DocumentID>57</DocumentID>
         <DisplayText>Apple Computer, Incorporated, 2000, Inside QuickTime: QuickTime File Format</DisplayText>

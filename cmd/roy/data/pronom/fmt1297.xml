@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2115</FormatID>
+      <FormatName>Calendar Creator File</FormatName>
+      <FormatVersion>5-6</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Dataset</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Calendar Creator is software published by Broderbund Software for the creation of personlised calendars. The format is based on the OLE2 compound file format.</FormatDescription>
+      <BinaryFileFormat>Text</BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>
+      </ProvenanceName>
+      <ProvenanceSourceDate>18 Jan 2020</ProvenanceSourceDate>
+      <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
+      <LastUpdatedDate>18 Jan 2020</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1297</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>20</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Broderbund Software, Inc</OrganisationName>
+        <DeveloperCompoundName>Broderbund Software, Inc</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>20</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Broderbund Software, Inc</OrganisationName>
+        <SupportCompoundName>Broderbund Software, Inc</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2372</ExternalSignatureID>
+        <Signature>cc5</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>2116</RelatedFormatID>
+        <RelatedFormatName>Calendar Creator File</RelatedFormatName>
+        <RelatedFormatVersion>7-8</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>2114</RelatedFormatID>
+        <RelatedFormatName>Calendar Creator File</RelatedFormatName>
+        <RelatedFormatVersion>4</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

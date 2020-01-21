@@ -13,7 +13,7 @@
       <FormatTypes>Image (Raster)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>Adobe Photoshop is a raster graphics editor developed and published by Adobe Systems for Windows and OS X.</FormatDescription>
+      <FormatDescription>Adobe Photoshop is a raster graphics editor developed and published by Adobe Systems for Windows and OS X. Files natively produced by Adobe PhotoDeluxe (extension pdd) also appear to be based upon the Adobe Photoshop file format.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -26,7 +26,7 @@
       <ProvenanceSourceDate>23 Sep 2003</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>06 Nov 2014</LastUpdatedDate>
+      <LastUpdatedDate>20 Jan 2020</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -62,6 +62,11 @@
       <ExternalSignature>
         <ExternalSignatureID>133</ExternalSignatureID>
         <Signature>psd</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2477</ExternalSignatureID>
+        <Signature>pdd</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <InternalSignature>

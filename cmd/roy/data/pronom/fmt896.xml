@@ -3,14 +3,14 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>1700</FormatID>
-      <FormatName>Music XML</FormatName>
+      <FormatName>MusicXML</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatTypes>Text (Mark-up)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
       <FormatDescription>MusicXML is an XML based format, it was designed for sharing sheet music files between applications, and for archiving sheet music files for use in the future.</FormatDescription>
@@ -26,7 +26,7 @@
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>16 Jun 2016</ProvenanceSourceDate>
       <ProvenanceDescription>Versions prior to DROID 6.3 may not identify this format correctly</ProvenanceDescription>
-      <LastUpdatedDate>16 Jun 2016</LastUpdatedDate>
+      <LastUpdatedDate>20 Jan 2020</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -44,6 +44,11 @@
       <ExternalSignature>
         <ExternalSignatureID>1835</ExternalSignatureID>
         <Signature>xml</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2476</ExternalSignatureID>
+        <Signature>musicxml</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <InternalSignature>

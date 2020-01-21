@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>1469</FormatID>
-      <FormatName>PKCS #7 Crytographic message file</FormatName>
+      <FormatName>PKCS #7 Crytographic Message File</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
@@ -61,6 +61,27 @@
           <ByteSequenceValue>2A864886F70D0107{0-64}2A864886F70D0107</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2061</RelatedFormatID>
+        <RelatedFormatName>ZFO (Message) File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2062</RelatedFormatID>
+        <RelatedFormatName>ZFO (Sent Message) File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2063</RelatedFormatID>
+        <RelatedFormatName>ZFO (Proof of Delivery) File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

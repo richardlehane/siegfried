@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2142</FormatID>
+      <FormatName>QuarkXPress Project</FormatName>
+      <FormatVersion>2015</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Presentation</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>QuarkXPress is destop publishing software for creating and editing page layouts that can be run on Mac and Windows operating systems. It was first released in 1987. It can be used to creating a variety of layouts, from single-page flyers to multi-media projects required for magazines, newspapers and catalogues. Versions 1-3 were available on Macintosh only, from version 3.1 a common signature is used.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>
+      </ProvenanceName>
+      <ProvenanceSourceDate>18 Jan 2020</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>18 Jan 2020</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/vnd.Quark.QuarkXPress</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1324</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>91</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Quark, Inc</OrganisationName>
+        <DeveloperCompoundName>Quark, Inc</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>91</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Quark, Inc</OrganisationName>
+        <SupportCompoundName>Quark, Inc</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2448</ExternalSignatureID>
+        <Signature>qxp</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2449</ExternalSignatureID>
+        <Signature>qpt</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2450</ExternalSignatureID>
+        <Signature>qwd</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1713</SignatureID>
+        <SignatureName>QuarkXPress 2015 (Motorola)</SignatureName>
+        <SignatureNote>BOF (Offset 2):'MMXPR'{2}'K.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1986</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>2</Offset>
+          <MaxOffset>2</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4D4D585052{2}4B</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1714</SignatureID>
+        <SignatureName>QuarkXPress 2015 (Intel)</SignatureName>
+        <SignatureNote>BOF (Offset 2):'IIXPR'{1}'K'.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1987</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>2</Offset>
+          <MaxOffset>2</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4949585052{1}4B</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>255</RelatedFormatID>
+        <RelatedFormatName>QuarkXPress Data File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

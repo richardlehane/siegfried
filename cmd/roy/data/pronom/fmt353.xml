@@ -360,6 +360,18 @@
         <RelatedFormatVersion>2.x</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2130</RelatedFormatID>
+        <RelatedFormatName>CorelCHART Document</RelatedFormatName>
+        <RelatedFormatVersion>3-4</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2131</RelatedFormatID>
+        <RelatedFormatName>CorelCHART Document</RelatedFormatName>
+        <RelatedFormatVersion>5</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>687</RelatedFormatID>
         <RelatedFormatName>MPEG 1/2 Audio Layer 3</RelatedFormatName>

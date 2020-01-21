@@ -21,8 +21,9 @@
       </ReleaseDate>
       <WithdrawnDate>
       </WithdrawnDate>
-      <ProvenanceSourceID>221</ProvenanceSourceID>
-      <ProvenanceName>Esri / Esri</ProvenanceName>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>
+      </ProvenanceName>
       <ProvenanceSourceDate>18 Feb 2019</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
@@ -45,7 +46,7 @@
       <InternalSignature>
         <SignatureID>1602</SignatureID>
         <SignatureName>PaperPort MAX 3-4</SignatureName>
-        <SignatureNote>BOF: 'ViGCj' \n</SignatureNote>
+        <SignatureNote>BOF: 'ViGCj' 0x1A</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1872</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>

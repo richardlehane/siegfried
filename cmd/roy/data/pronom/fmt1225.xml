@@ -4,7 +4,7 @@
     <FileFormat>
       <FormatID>2035</FormatID>
       <FormatName>PaperPort MAX</FormatName>
-      <FormatVersion>5</FormatVersion>
+      <FormatVersion>5-7</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -21,8 +21,9 @@
       </ReleaseDate>
       <WithdrawnDate>
       </WithdrawnDate>
-      <ProvenanceSourceID>221</ProvenanceSourceID>
-      <ProvenanceName>Esri / Esri</ProvenanceName>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>
+      </ProvenanceName>
       <ProvenanceSourceDate>18 Feb 2019</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
@@ -44,8 +45,8 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>1603</SignatureID>
-        <SignatureName>PaperPort MAX 5</SignatureName>
-        <SignatureNote>BOF: 'ViGEm' \n</SignatureNote>
+        <SignatureName>PaperPort MAX 5-7</SignatureName>
+        <SignatureNote>BOF: 'ViGEm' 0x1A</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1873</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>

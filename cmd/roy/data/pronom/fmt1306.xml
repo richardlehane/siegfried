@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2124</FormatID>
+      <FormatName>LocoScript Document</FormatName>
+      <FormatVersion>3</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Word Processor</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The LocoScript 3 Document format is a proprietary word processing format produced by LocoScript 3, a word processor for Amstrad PCWs.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>184</ProvenanceSourceID>
+      <ProvenanceName>British Library / British Library</ProvenanceName>
+      <ProvenanceSourceDate>18 Jan 2020</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>18 Jan 2020</LastUpdatedDate>
+      <FormatNote>https://www.seasip.info/Unix/Joyce/ls1frm.html</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1306</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>246</DeveloperID>
+        <DeveloperName>Locomotive Software</DeveloperName>
+        <OrganisationName>Locomotive Software</OrganisationName>
+        <DeveloperCompoundName>Locomotive Software / Locomotive Software</DeveloperCompoundName>
+      </Developers>
+      <InternalSignature>
+        <SignatureID>1681</SignatureID>
+        <SignatureName>LocoScript Document Version 3</SignatureName>
+        <SignatureNote>BOF: Magic Bytes 'JOY..' with the last (03|04) byte specific to file version.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1949</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4A4F5901(03|04)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

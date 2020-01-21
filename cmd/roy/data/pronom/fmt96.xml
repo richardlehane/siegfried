@@ -181,8 +181,7 @@
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1029</RelatedFormatID>
         <RelatedFormatName>WARC</RelatedFormatName>
-        <RelatedFormatVersion>
-        </RelatedFormatVersion>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
@@ -223,6 +222,19 @@
         <RelatedFormatName>Vector Markup Language</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1670</RelatedFormatID>
+        <RelatedFormatName>Apple Safari Webarchive</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2099</RelatedFormatID>
+        <RelatedFormatName>WARC</RelatedFormatName>
+        <RelatedFormatVersion>1.1</RelatedFormatVersion>
       </RelatedFormat>
       <FormatProperties>
         <FormatProperty>

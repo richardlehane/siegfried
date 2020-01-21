@@ -12,7 +12,7 @@
     "x-fmt/416 (BinHex Binary Text)",
     "x-fmt/429 (Microsoft Web Archive)",
     "fmt/189 (Microsoft Office Open XML 2007 onwards)",
-    "fmt/289 (WARC)",
+    "fmt/289 (WARC 1.0)",
     "fmt/329 (Shell Archive Format)",
     "fmt/364 (National Imagery Transmission Format 1.0)",
     "fmt/365 (National Imagery Transmission Format 2.0)",
@@ -45,7 +45,16 @@
     "fmt/1100 (yEnc Encoded File)",
     "fmt/1102 (Uuencoded File)",
     "fmt/1105 (Hierarchical File System)",
-    "fmt/1190 (Adobe SWC Package)"
+    "fmt/1190 (Adobe SWC Package)",
+    "fmt/1242 (ZFO (Form) File)",
+    "fmt/1243 (ZFO (Message) File)",
+    "fmt/1244 (ZFO (Sent Message) File)",
+    "fmt/1245 (ZFO (Proof of Delivery) File)",
+    "fmt/1251 (Electronically Certified Document (EDOC))",
+    "fmt/1252 (Raw Flux Image)",
+    "fmt/1281 (WARC 1.1)",
+    "fmt/1340 (BDOC 1)",
+    "fmt/1341 (ASICS)"
   ],
   "audio": [
     "x-fmt/135 (Audio Interchange File Format 1.3)",
@@ -145,7 +154,8 @@
     "fmt/1053 (Adobe Audio Waveform)",
     "fmt/1086 (Monkey's Audio File)",
     "fmt/1178 (Synthetic Music Mobile Application Format)",
-    "fmt/1214 (Cakewalk WRK Project)"
+    "fmt/1214 (Cakewalk WRK Project)",
+    "fmt/1280 (NCH Dictation Audio File)"
   ],
   "database": [
     "x-fmt/6 (FoxPro Database 2.0)",
@@ -258,11 +268,21 @@
     "fmt/1162 (Folio Flat File)",
     "fmt/1163 (Folio Definition File)",
     "fmt/1196 (SIARD (Software-Independent Archiving of Relational Databases) 2.1)",
-    "fmt/1197 (MyISAM Indexes File)"
+    "fmt/1197 (MyISAM Indexes File)",
+    "fmt/1237 (FileMaker Pro Database 12)",
+    "fmt/1254 (Cardfile)",
+    "fmt/1258 (Microsoft Access Workgroup Information File)",
+    "fmt/1284 (PFS:First Choice Database)",
+    "fmt/1310 (LocoFile)",
+    "fmt/1338 (RootsMagic Database 4-7)",
+    "fmt/1345 (Legacy Family Tree Database 3-9)",
+    "fmt/1352 (FamilyTree Maker Database 1-4)",
+    "fmt/1353 (FamilyTree Maker Database 5-16)"
   ],
   "dataset": [
     "x-fmt/13 (Tab-separated values)",
     "x-fmt/18 (Comma Separated Values)",
+    "x-fmt/141 (Calendar Creator Plus Data File 2)",
     "fmt/282 (netCDF-3 Classic)",
     "fmt/283 (netCDF-3 64-bit)",
     "fmt/284 (Gridded Binary 1.0)",
@@ -359,7 +379,12 @@
     "fmt/1207 (Sony SFK File)",
     "fmt/1226 (Sparky 2)",
     "fmt/1227 (NMRView)",
-    "fmt/1228 (NMRPipe)"
+    "fmt/1228 (NMRPipe)",
+    "fmt/1255 (Windows Address Book)",
+    "fmt/1295 (Calendar Creator Event 3-4)",
+    "fmt/1296 (Calendar Creator File 4)",
+    "fmt/1297 (Calendar Creator File 5-6)",
+    "fmt/1298 (Calendar Creator File 7-8)"
   ],
   "email": [
     "x-fmt/430 (Microsoft Outlook Email Message 97-2003)",
@@ -397,7 +422,15 @@
     "fmt/915 (Mapsforge Binary Map File Format)",
     "fmt/916 (ESRI ArcMap Document)",
     "fmt/1047 (Geography Markup Language 3.2)",
-    "fmt/1215 (ERDAS Hierarchical File Architecture Format)"
+    "fmt/1215 (ERDAS Hierarchical File Architecture Format)",
+    "fmt/1238 (Band Interleaved By Line File)",
+    "fmt/1239 (Band Interleaved By Pixel File)",
+    "fmt/1240 (Band Sequential File)",
+    "fmt/1246 (SOSI)",
+    "fmt/1247 (SOSI 4.0)",
+    "fmt/1248 (SOSI 4.1)",
+    "fmt/1249 (SOSI 4.5)",
+    "fmt/1250 (SOSI 8.1)"
   ],
   "imageRaster": [
     "x-fmt/25 (OS/2 Bitmap 1.0)",
@@ -424,7 +457,7 @@
     "x-fmt/184 (Sun Raster Image)",
     "x-fmt/185 (Raw Bitmap)",
     "x-fmt/186 (Silicon Graphics RGB File)",
-    "x-fmt/187 (Fractal Design Painter RIFF Bitmap Graphics)",
+    "x-fmt/187 (Painter RIFF Image File)",
     "x-fmt/188 (SDSC Image Tool Wavefront Raster Image)",
     "x-fmt/189 (SDSC Image Tool Run-Length Encoded Bitmap)",
     "x-fmt/194 (IRIS Graphics)",
@@ -600,7 +633,11 @@
     "fmt/1186 (Dr. Halo Image Palette)",
     "fmt/1217 (Leonardo Image Format)",
     "fmt/1223 (PaperPort MAX 2)",
-    "fmt/1224 (PaperPort MAX 3-4)"
+    "fmt/1224 (PaperPort MAX 3-4)",
+    "fmt/1336 (LEADTools Lead 1Bit Compressed Image)",
+    "fmt/1337 (LEADToolsCompressed Image)",
+    "fmt/1343 (PTGui Project File 10)",
+    "fmt/1344 (PTGui Project File 11)"
   ],
   "imageVector": [
     "x-fmt/20 (Adobe Illustrator 1.0 / 1.1)",
@@ -612,7 +649,7 @@
     "x-fmt/34 (Corel Presentation Exchange File 5.0)",
     "x-fmt/35 (Corel Presentation Exchange File 6 and Later)",
     "x-fmt/36 (Corel CMX Compressed)",
-    "x-fmt/47 (Micrografx Draw 2.0)",
+    "x-fmt/47 (Micrografx Draw 1-2)",
     "x-fmt/53 (Macromedia Freehand 5)",
     "x-fmt/55 (Frame Vector Metafile)",
     "x-fmt/57 (Ventura Publisher Vector Graphics)",
@@ -641,7 +678,7 @@
     "x-fmt/296 (Micrografx Designer 3.1)",
     "x-fmt/303 (Aldus Freehand Drawing 3)",
     "x-fmt/304 (Aldus Freehand Drawing 4)",
-    "x-fmt/310 (Corel Chart)",
+    "x-fmt/310 (CorelCHART Document)",
     "x-fmt/325 (Harvard Graphics Vector Graphics 2.0)",
     "x-fmt/327 (IntelliDraw Vector Graphics)",
     "x-fmt/374 (CorelDraw Drawing 9.0)",
@@ -777,7 +814,9 @@
     "fmt/934 (Simple Vector Format 2)",
     "fmt/1042 (WordPerfect Graphics Metafile 2.0)",
     "fmt/1044 (AutoShade Rendering Slide)",
-    "fmt/1213 (Zoner Callisto Metafile 2)"
+    "fmt/1213 (Zoner Callisto Metafile 2)",
+    "fmt/1312 (CorelCHART Document 3-4)",
+    "fmt/1313 (CorelCHART Document 5)"
   ],
   "model": [
     "x-fmt/19 (3D Studio)",
@@ -869,7 +908,31 @@
     "fmt/1205 (LightWave 3D Object)",
     "fmt/1206 (Impulse 3D Data Description Object)",
     "fmt/1209 (COLLADA Digital Asset Exchange (DAE))",
-    "fmt/1210 (Wavefront OBJ File)"
+    "fmt/1210 (Wavefront OBJ File)",
+    "fmt/1259 (SketchUp Document 1)",
+    "fmt/1260 (SketchUp Document 2)",
+    "fmt/1261 (SketchUp Document 3)",
+    "fmt/1262 (SketchUp Document 4)",
+    "fmt/1263 (SketchUp Document 5)",
+    "fmt/1264 (SketchUp Document 6)",
+    "fmt/1265 (SketchUp Document 7)",
+    "fmt/1266 (SketchUp Document 8)",
+    "fmt/1267 (SketchUp Document 13)",
+    "fmt/1268 (SketchUp Document 14)",
+    "fmt/1269 (SketchUp Document 15)",
+    "fmt/1270 (SketchUp Document 16)",
+    "fmt/1271 (SketchUp Document 17)",
+    "fmt/1272 (SketchUp Document 18)",
+    "fmt/1273 (SketchUp Document 19)",
+    "fmt/1314 (GL Transmission Format (Text) 1.0)",
+    "fmt/1315 (GL Transmission Format (Text) 2.0)",
+    "fmt/1316 (GL Transmission Format (Binary))",
+    "fmt/1346 (Autodesk Revit File 4)",
+    "fmt/1347 (Autodesk Revit Project File 2008)",
+    "fmt/1348 (Autodesk Revit Family File 2008)",
+    "fmt/1349 (Autodesk Revit Family File 2010)",
+    "fmt/1350 (Autodesk Revit Project File 2019)",
+    "fmt/1351 (Autodesk Revit Family File 2019)"
   ],
   "pageDescription": [
     "fmt/122 (Encapsulated PostScript File Format 1.2)",
@@ -908,7 +971,9 @@
     "fmt/683 (Advanced Function Presentation)",
     "fmt/888 (QuadriSpace Format)",
     "fmt/1129 (PDF 2.0 - Portable Document Format 2.0)",
-    "fmt/1174 (Hewlett Packard Graphics Language 2)"
+    "fmt/1174 (Hewlett Packard Graphics Language 2)",
+    "fmt/1286 (Envoy Document File 1)",
+    "fmt/1287 (Envoy Document File 7)"
   ],
   "presentation": [
     "x-fmt/32 (Harvard Graphics Chart 3.0)",
@@ -920,8 +985,8 @@
     "x-fmt/89 (Freelance File 1.0-2.1)",
     "x-fmt/101 (Harvard Graphics Show 3.0)",
     "x-fmt/162 (Adobe FrameMaker Interchange Format)",
-    "x-fmt/168 (Broderbund Print Shop Deluxe)",
-    "x-fmt/182 (Quark Xpress Data File)",
+    "x-fmt/168 (Broderbund Print Shop Deluxe 1-4)",
+    "x-fmt/182 (QuarkXPress Data File)",
     "x-fmt/216 (Microsoft Powerpoint Packaged Presentation)",
     "x-fmt/217 (Adobe ACD)",
     "x-fmt/252 (Microsoft Publisher 2.0)",
@@ -972,9 +1037,9 @@
     "fmt/647 (Microsoft Expression Media 2)",
     "fmt/648 (Media View Pro)",
     "fmt/650 (Quark Xpress Report File)",
-    "fmt/651 (Quark Xpress Data File 10)",
-    "fmt/652 (Quark Xpress Data File 6)",
-    "fmt/685 (Quark Xpress Data File 9)",
+    "fmt/651 (QuarkXPress Project 10)",
+    "fmt/652 (QuarkXPress Project 6)",
+    "fmt/685 (QuarkXPress Project 9)",
     "fmt/753 (AppleWorks Presentation 6)",
     "fmt/876 (Pagemaker Document (Generic))",
     "fmt/877 (Corel Presentation 7-8-9)",
@@ -988,7 +1053,36 @@
     "fmt/1091 (Scribus Document)",
     "fmt/1184 (InDesign Markup Language Package)",
     "fmt/1191 (Adobe InDesign Book)",
-    "fmt/1216 (Lotus Freelance Show)"
+    "fmt/1216 (Lotus Freelance Show)",
+    "fmt/1275 (3M Printscape 2)",
+    "fmt/1276 (SureThing Project File)",
+    "fmt/1289 (RFFlow Chart 3)",
+    "fmt/1290 (RFFlow Chart 4)",
+    "fmt/1291 (RFFlow Chart 5)",
+    "fmt/1292 (EIOffice Document)",
+    "fmt/1299 (Broderbund Print Shop Deluxe 5-6)",
+    "fmt/1300 (Broderbund The Print Shop/PrintMaster/American Greetings Project 10-23)",
+    "fmt/1301 (The Print Shop Project 2-5)",
+    "fmt/1302 (PrintMaster Gold Project 1)",
+    "fmt/1317 (QuarkXPress Document 3.1)",
+    "fmt/1318 (QuarkXPress Document 3.3)",
+    "fmt/1319 (QuarkXPress Document 4)",
+    "fmt/1320 (QuarkXPress Document 5)",
+    "fmt/1321 (QuarkXPress Project 7)",
+    "fmt/1322 (QuarkXPress Project 8)",
+    "fmt/1323 (QuarkXPress Project 9.1)",
+    "fmt/1324 (QuarkXPress Project 2015)",
+    "fmt/1325 (QuarkXPress Project 2016)",
+    "fmt/1326 (QuarkXPress Project 2017)",
+    "fmt/1327 (QuarkXPress Project 2018)",
+    "fmt/1328 (QuarkXPress Project 2019)",
+    "fmt/1329 (Avery Label Pro Document 3)",
+    "fmt/1330 (Avery DesignPro Document 4)",
+    "fmt/1331 (Avery DesignPro Document 5)",
+    "fmt/1332 (HP Photo Album)",
+    "fmt/1333 (Sony PictureGear Studio PhotoAlbum)",
+    "fmt/1334 (Sony PictureGear Studio PrintStudio)",
+    "fmt/1335 (Sony PictureGear Studio Binder)"
   ],
   "spreadsheet": [
     "x-fmt/17 (Microsoft Excel Template 97-2003)",
@@ -1052,7 +1146,9 @@
     "fmt/837 (Quattro Pro Spreadsheet 9 onwards)",
     "fmt/847 (ClarisWorks Spreadsheet 2-3)",
     "fmt/901 (Microsoft Works Spreadsheet 6-9)",
-    "fmt/1219 (Gnumeric)"
+    "fmt/1219 (Gnumeric)",
+    "fmt/1292 (EIOffice Document)",
+    "fmt/1294 (602Tab Spreadsheet)"
   ],
   "textMarkup": [
     "x-fmt/195 (Standard Generalized Markup Language)",
@@ -1072,7 +1168,7 @@
     "fmt/135 (OpenDocument Format 1.0)",
     "x-fmt/417 (HTML Extension File)",
     "fmt/205 (Synchronized Multimedia Integration Language)",
-    "fmt/243 (GPS eXchange Format)",
+    "fmt/243 (GPS Exchange Format 1.0)",
     "fmt/244 (Keyhole Markup Language (XML))",
     "fmt/280 (LaTeX (Master document))",
     "fmt/281 (LaTeX (Subdocument))",
@@ -1095,6 +1191,8 @@
     "fmt/871 (Adobe Content Server Message File)",
     "fmt/875 (RDF/XML)",
     "fmt/886 (HTML Components)",
+    "fmt/896 (MusicXML)",
+    "fmt/897 (Compressed MusicXML)",
     "fmt/965 (Music Encoding Initiative)",
     "fmt/979 (XML Property List)",
     "fmt/980 (AAE Sidecar Format)",
@@ -1111,7 +1209,9 @@
     "fmt/1230 (SK-XML 1.0)",
     "fmt/1231 (DIGIDOC-XML 1.1)",
     "fmt/1232 (DIGIDOC-XML 1.2)",
-    "fmt/1233 (DIGIDOC-XML 1.3)"
+    "fmt/1233 (DIGIDOC-XML 1.3)",
+    "fmt/1241 (FO File)",
+    "fmt/1311 (Tweet JSON)"
   ],
   "textStructured": [
     "x-fmt/41 (Data Interchange Format)",
@@ -1161,7 +1261,7 @@
     "fmt/644 (Nullsoft Scriptable Install System)",
     "fmt/658 (Cypher Query Language)",
     "fmt/659 (Industry Foundation Classes 2x2)",
-    "fmt/670 (PKCS #7 Crytographic message file)",
+    "fmt/670 (PKCS #7 Crytographic Message File)",
     "fmt/698 (Standard for the Exchange of Product model data)",
     "fmt/699 (Industry Foundation Classes 2x3)",
     "fmt/700 (Industry Foundation Classes 4)",
@@ -1179,8 +1279,6 @@
     "fmt/884 (AXD HTTP Handler File)",
     "fmt/885 (BASIC File)",
     "fmt/894 (Gaussian Input Data File)",
-    "fmt/896 (Music XML)",
-    "fmt/897 (Compressed Music XML)",
     "fmt/938 (Python Script File)",
     "fmt/950 (MIME Email 1.0)",
     "fmt/991 (SHA256 File)",
@@ -1204,7 +1302,11 @@
     "fmt/1202 (Guymager Acquisition Info File)",
     "fmt/1212 (HP System Software Manager CVA File)",
     "fmt/1218 (SubRip Subtitle File)",
-    "fmt/1229 (Sibelius Sound Set Definition)"
+    "fmt/1229 (Sibelius Sound Set Definition)",
+    "fmt/1235 (EclipseCrossword Puzzle File)",
+    "fmt/1236 (EclipseCrossword Word List File)",
+    "fmt/1256 (MapInfo Workspace File)",
+    "fmt/1288 (IESNA LM-63 Photometric Data File)"
   ],
   "textUnstructured": [
     "x-fmt/14 (Macintosh Text File)",
@@ -1215,7 +1317,9 @@
     "x-fmt/283 (8-bit ASCII Text)",
     "fmt/331 (Autorun Configuration File)",
     "fmt/335 (Dreamweaver Lock File)",
-    "fmt/755 (Microsoft Word Document Template (Password Protected) 97-2003)"
+    "fmt/755 (Microsoft Word Document Template (Password Protected) 97-2003)",
+    "fmt/1253 (ESRI Code Page File)",
+    "fmt/1257 (AutoCAD Temporary File)"
   ],
   "video": [
     "x-fmt/152 (Digital Video)",
@@ -1252,7 +1356,8 @@
     "fmt/1038 (Redcode RAW (R3D) Media File 2)",
     "fmt/1055 (M2TS)",
     "fmt/1150 (4X Movie File)",
-    "fmt/1176 (Nullsoft Streaming Video)"
+    "fmt/1176 (Nullsoft Streaming Video)",
+    "fmt/1234 (Smacker Video)"
   ],
   "wordProcessor": [
     "x-fmt/1 (Microsoft Word for Macintosh Document 3.0)",
@@ -1395,6 +1500,17 @@
     "fmt/1220 (WordPerfect for Macintosh Document 2.x)",
     "fmt/1221 (WordPerfect for Macintosh Document 3.x)",
     "fmt/1222 (WordPerfect for Macintosh Document 3.5-4.x)",
-    "fmt/1225 (PaperPort MAX 5)"
+    "fmt/1225 (PaperPort MAX 5-7)",
+    "fmt/1282 (PFS:First Choice Document 1-2)",
+    "fmt/1283 (PFS:First Choice Document 3)",
+    "fmt/1292 (EIOffice Document)",
+    "fmt/1293 (602Text Document)",
+    "fmt/1304 (LocoScript Document 1)",
+    "fmt/1305 (LocoScript Document 2)",
+    "fmt/1306 (LocoScript Document 3)",
+    "fmt/1307 (LocoScript Document 4)",
+    "fmt/1308 (LocoScript PC)",
+    "fmt/1309 (LocoScript Professional)",
+    "fmt/1339 (PaperPort MAX 8-12)"
   ]
 }

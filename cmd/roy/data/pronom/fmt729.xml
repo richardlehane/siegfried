@@ -80,6 +80,12 @@
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2156</RelatedFormatID>
+        <RelatedFormatName>RootsMagic Database</RelatedFormatName>
+        <RelatedFormatVersion>4-7</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Is subsequent version of</RelationshipType>
         <RelatedFormatID>1945</RelatedFormatID>
         <RelatedFormatName>SQLite Database File Format</RelatedFormatName>

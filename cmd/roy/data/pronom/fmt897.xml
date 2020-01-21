@@ -3,17 +3,17 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>1701</FormatID>
-      <FormatName>Compressed Music XML</FormatName>
+      <FormatName>Compressed MusicXML</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatTypes>Text (Mark-up)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is a ZIP container version of the MusicXML format, a XML based format. It was designed for sharing sheet music files between applications, and for archiving sheet music files for use in the future.</FormatDescription>
+      <FormatDescription>This is a ZIP container version of the MusicXML format, an XML based format. It was designed for sharing sheet music files between applications, and for archiving sheet music files for use in the future.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -25,8 +25,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>16 Jun 2016</ProvenanceSourceDate>
-      <ProvenanceDescription>The MXL container holds the Music XML file, which has the same file name as the MXL container. Variable file names cannot currently be represented within the PRONOM container signature file.</ProvenanceDescription>
-      <LastUpdatedDate>16 Jun 2016</LastUpdatedDate>
+      <ProvenanceDescription>The container holds the Music XML file, which has the same file name as the MXL container. Variable file names cannot currently be represented within the PRONOM container signature file.</ProvenanceDescription>
+      <LastUpdatedDate>20 Jan 2020</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>

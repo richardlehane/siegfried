@@ -45,7 +45,7 @@
       <InternalSignature>
         <SignatureID>1516</SignatureID>
         <SignatureName>GPX 1.1</SignatureName>
-        <SignatureNote>BOF: XML declaration, GPX 1.1 namespace http://www.topografix.com/GPX/1/1</SignatureNote>
+        <SignatureNote>BOF: XML declaration{8-512}GPX 1.1 namespace http://www.topografix.com/GPX/1/1</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1779</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -57,7 +57,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>3C3F786D6C2076657273696F6E3D(22|27){8-256}687474703A2F2F7777772E746F706F6772616669782E636F6D2F4750582F312F3122</ByteSequenceValue>
+          <ByteSequenceValue>3C3F786D6C2076657273696F6E3D(22|27){8-512}687474703A2F2F7777772E746F706F6772616669782E636F6D2F4750582F312F3122</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

@@ -46,7 +46,7 @@
       <InternalSignature>
         <SignatureID>1601</SignatureID>
         <SignatureName>PaperPort MAX 2</SignatureName>
-        <SignatureNote>BOF: 'ViGBe' \n</SignatureNote>
+        <SignatureNote>BOF: 'ViGBe' 0x1A</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1871</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>

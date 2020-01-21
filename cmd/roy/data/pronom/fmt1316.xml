@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2134</FormatID>
+      <FormatName>GL Transmission Format (Binary)</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Model</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>glTF (GL Transmission Format) is a royalty-free specification for the efficient transmission and loading of 3D scenes and models by applications. It is an API-neutral runtime asset delivery format. glTF bridges the gap between 3D content creation tools and modern 3D applications by providing an extensible, interoperable format for the transmission and loading of 3D content. Binary glTF is a container format in which an entire glTF asset (JSON asset description, binary geometry, key frames, skins and images) can be stored in a single binary blob.
+A glTF Overview can be found at https://www.khronos.org/gltf .</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>244</ProvenanceSourceID>
+      <ProvenanceName>Preservica / Preservica</ProvenanceName>
+      <ProvenanceSourceDate>18 Jan 2020</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>18 Jan 2020</LastUpdatedDate>
+      <FormatNote>Full specification of the format can be found at https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#glb-file-format-specification</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1316</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>model/gltf-binary</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>219</DeveloperID>
+        <DeveloperName>Khronos Group</DeveloperName>
+        <OrganisationName>Khronos Group</OrganisationName>
+        <DeveloperCompoundName>Khronos Group / Khronos Group</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>219</SupportID>
+        <SupportName>Khronos Group</SupportName>
+        <OrganisationName>Khronos Group</OrganisationName>
+        <SupportCompoundName>Khronos Group / Khronos Group</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2426</ExternalSignatureID>
+        <Signature>glb</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1695</SignatureID>
+        <SignatureName>GLTF (Binary)</SignatureName>
+        <SignatureNote>BOF:'glTF....'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1968</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>676C544602000000</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

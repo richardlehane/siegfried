@@ -73,6 +73,12 @@
           <ByteSequenceValue>410063006300650073007300560065007200730069006F006E{0-2048}300038002E00[30:39]00[30:39]</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2163</RelatedFormatID>
+        <RelatedFormatName>Legacy Family Tree Database</RelatedFormatName>
+        <RelatedFormatVersion>3-9</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

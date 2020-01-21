@@ -12,7 +12,7 @@
       <FormatTypes>Audio</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>MP3 is a digital audio format, formally known as MPEG-1 Audio Layer III or MPEG-2 Audio Layer III. A third variant, known as MPEG 2.5, which supports lower bit rates implemented by the LAME MP3 encoder among others, but is not a recognised standard.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -23,8 +23,9 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>11 Mar 2005</ProvenanceSourceDate>
-      <ProvenanceDescription>Digital Preservation Department.</ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>20 Jan 2020</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -240,6 +241,24 @@
           <ByteSequenceValue>FFF2[10:EB]{46-1439}FFF2[10:EB]{46-1439}FFF2[10:EB]{46-1439}FFF2[10:EB]{46-1439}FFF2[10:EB]{46-1439}FFF2[10:EB]{46-1439}FFF2[10:EB]{46-1439}FFF2[10:EB]{46-1439}FFF2[10:EB]{46-1439}FFF2[10:EB]</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1733</SignatureID>
+        <SignatureName>MP3 2.5</SignatureName>
+        <SignatureNote>Regularly-spaced frame headers should always be discoverable starting at BOF. MPEG 2.5 is an extended variant of MP3 that provides wider support of lower bit-rates than standard MP3. It is implemented by LAME encoder among others, however is not an officially recognised standard.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2009</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>1795</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>FFE3[10:EB]{46-1439}FFE3[10:EB]{46-1439}FFE3[10:EB]{46-1439}FFE3[10:EB]{46-1439}FFE3[10:EB]{46-1439}FFE3[10:EB]{46-1439}FFE3[10:EB]{46-1439}FFE3[10:EB]{46-1439}FFE3[10:EB]{46-1439}FFE3[10:EB]</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>646</RelatedFormatID>
@@ -311,6 +330,13 @@
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1986</RelatedFormatID>
         <RelatedFormatName>Nullsoft Streaming Video</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2098</RelatedFormatID>
+        <RelatedFormatName>NCH Dictation Audio File</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

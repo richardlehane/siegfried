@@ -36,6 +36,13 @@
         <Identifier>x-fmt/331</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>95</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Lotus Corporation</OrganisationName>
+        <DeveloperCompoundName>Lotus Corporation</DeveloperCompoundName>
+      </Developers>
       <ExternalSignature>
         <ExternalSignatureID>481</ExternalSignatureID>
         <Signature>fm1</Signature>
@@ -62,7 +69,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>000002000680(02|96)00</ByteSequenceValue>
+          <ByteSequenceValue>000002000680(02|83|96)00</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

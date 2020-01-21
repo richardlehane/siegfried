@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>260</FormatID>
-      <FormatName>Fractal Design Painter RIFF Bitmap Graphics</FormatName>
+      <FormatName>Painter RIFF Image File</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
@@ -13,7 +13,7 @@
       <FormatTypes>Image (Raster)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>.RIF is the native image format for the Painter software application. It includes features such as layering and  transparency. It was originally developed by Fractal Design, but is now owned and used by Corel Corporation.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -26,7 +26,7 @@
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <LastUpdatedDate>20 Jan 2020</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -37,11 +37,61 @@
         <Identifier>x-fmt/187</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>35</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Corel Corporation</OrganisationName>
+        <DeveloperCompoundName>Corel Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>35</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Corel Corporation</OrganisationName>
+        <SupportCompoundName>Corel Corporation</SupportCompoundName>
+      </Support>
       <ExternalSignature>
         <ExternalSignatureID>254</ExternalSignatureID>
         <Signature>rif</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1657</SignatureID>
+        <SignatureName>Painter RIFF Image File (pre-2000)</SignatureName>
+        <SignatureNote>The Painter RIFF format is Identified by the first 4 bytes, then bytes 8-12 which defines compression, then a static 4 bytes used in all versions at byte 40 "3F E6 66 66". The early versions identify the first 4 bytes "00 02 00 00"</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1928</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>00020000{36}3FE66666</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1658</SignatureID>
+        <SignatureName>Painter RIFF Image File (2000+)</SignatureName>
+        <SignatureNote>The Painter RIFF format is identified by the first 4 bytes, then bytes 8-12 which defines compression, then a static 4 bytes used in all versions at byte 40 "3F E6 66 66". The later Corel versions (2000+) identify with the first 4 bytes "00 02 20 00".</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1929</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>00022000{36}3FE66666</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

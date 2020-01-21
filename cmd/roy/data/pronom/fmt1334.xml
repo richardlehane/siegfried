@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2152</FormatID>
+      <FormatName>Sony PictureGear Studio PrintStudio</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Presentation</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>PictureGear Studio is a creativity package published by Sony. .LMU is the native format of PrintStudio, for creating postcards, calendars and labels. LMD is a PrintStudio template.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>
+      </ProvenanceName>
+      <ProvenanceSourceDate>18 Jan 2020</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>18 Jan 2020</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1334</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>228</DeveloperID>
+        <DeveloperName>Sony</DeveloperName>
+        <OrganisationName>Sony</OrganisationName>
+        <DeveloperCompoundName>Sony / Sony</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>228</SupportID>
+        <SupportName>Sony</SupportName>
+        <OrganisationName>Sony</OrganisationName>
+        <SupportCompoundName>Sony / Sony</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2469</ExternalSignatureID>
+        <Signature>lmu</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2470</ExternalSignatureID>
+        <Signature>lmd</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1725</SignatureID>
+        <SignatureName>Sony PictureGear Studio PrintStudio</SignatureName>
+        <SignatureNote>BOF: 'LMUD' 0x00000100</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2000</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4C4D554400000100</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

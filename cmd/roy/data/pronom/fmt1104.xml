@@ -28,7 +28,7 @@
       <ProvenanceSourceDate>28 Sep 2017</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>28 Sep 2017</LastUpdatedDate>
+      <LastUpdatedDate>20 Jan 2020</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -46,7 +46,7 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>1486</SignatureID>
-        <SignatureName>Seattle FilmWorks Image</SignatureName>
+        <SignatureName>Seattle FilmWorks Image 94A variant</SignatureName>
         <SignatureNote>BOF: SFW94A</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1748</ByteSequenceID>
@@ -60,6 +60,24 @@
           <Endianness>
           </Endianness>
           <ByteSequenceValue>534657393441</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1614</SignatureID>
+        <SignatureName>Seattle FilmWorks Image 98A variant</SignatureName>
+        <SignatureNote>BOF: SFW98A</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1884</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>534657393841</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>
