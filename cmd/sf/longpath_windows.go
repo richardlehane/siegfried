@@ -18,6 +18,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 )
 
 // longpath code derived from https://github.com/docker/docker/tree/master/pkg/longpath
