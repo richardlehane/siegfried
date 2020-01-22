@@ -8,7 +8,7 @@
 
 ### Version
 
-1.7.13
+1.8.0
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -94,67 +94,21 @@ Or, for the most recent updates, you can install from this fork:
     makepkg -si
 
 ## Changes
-### v1.7.13 (2019-08-18)
+### v1.8.0 (2020-01-22)
 ### Added
-- the `-f` flag now scans directories, as well as files. Requested by [Harry Moss](https://github.com/richardlehane/siegfried/issues/130)
+- utc flag returns file modified dates in UTC e.g. `sf -utc FILE | DIR`. Requested by [Dragan Espenschied](https://github.com/richardlehane/siegfried/issues/136)
+- new cost and repetition flags to control segmentation when building signatures
 
 ### Changed
-- update LOC signatures to 2019-06-16
-- update tika-mimetypes signatures to v1.22
+- update PRONOM to v96
+- update LOC signatures to 2019-12-18
+- update tika-mimetypes signatures to v1.23
+- update freedesktop.org signatures to v1.15
 
 ### Fixed
-- filenames with "?" were parsed as URLs, breaking name/extension matching; reported by [workflowsguy](https://github.com/richardlehane/siegfried/issues/129)
-
-### v1.7.12 (2019-06-15)
-### Changed
-- update PRONOM to v95
-- update LOC signatures to 2019-05-20
-- update tika-mimetypes signatures to v1.21
-
-### Fixed
-- .docx files with .doc extensions panic due to bug in division of hints in container matcher. Thanks to Jean-Séverin Lair for [reporting and sharing samples](https://github.com/richardlehane/siegfried/issues/126) and to VAIarchief for [additional report with example](https://github.com/richardlehane/siegfried/issues/127).
-- mime-info signatures panic on some files due to duplicate entries in the freedesktop and tika signature files; spotted during an attempt at pair coding with Ross Spencer... thanks Ross and sorry for hogging the laptop! [#125](https://github.com/richardlehane/siegfried/issues/125)
-
-### v1.7.11 (2019-02-16)
-### Changed
-- update LOC signatures to 2019-01-06
-- update tika-mimetypes signatures to v1.20
-
-### Fixed
-- container matching can now match against directory names. Thanks Ross Spencer for [reporting](https://github.com/richardlehane/siegfried/issues/123) and for the sample SIARD signature file. Thanks Dave Clipsham, Martin Hoppenheit and Phillip Tommerholt for contributions on the ticket.
-- fixes to travis.yml for auto-deploy of debian release; [#124](https://github.com/richardlehane/siegfried/issues/124)
-
-### v1.7.10 (2018-09-19)
-### Added
-- print configuration defaults with `sf -version`
-
-### Changed
-- update PRONOM to v94
-
-### Fixed
-- LOC identifier fixed after regression in v1.7.9
-- remove skeleton-suite files triggering malware warnings by adding to .gitignore; reported by [Dave Rice](https://github.com/richardlehane/siegfried/issues/118)
-- release built with Go version 11, which includes a fix for a CIFS error that caused files to be skipped during file walk; reported by [Maarten Savels](https://github.com/richardlehane/siegfried/issues/115)
-
-### v1.7.9 (2018-08-30)
-### Added
-- save defaults in a configuration file: use the -setconf flag to record any other flags used into a config file. These defaults will be loaded each time you run sf. E.g. `sf -multi 16 -setconf` then `sf DIR` (loads the new multi default)
-- use `-conf filename` to save or load from a named config file. E.g. `sf -multi 16 -serve :5138 -conf srv.conf -setconf` and then `sf -conf srv.conf` 
-- added `-yaml` flag so, if you set json/csv in default config :(, you can override with YAML instead. Choose the YAML!
-
-### Changed
-- the `roy compare -join` options that join on filepath now work better when comparing results with mixed windows and unix paths
-- exported decompress package to give more functionality for users of the golang API; requested by [Byron Ruth](https://github.com/richardlehane/siegfried/issues/119)
-- update LOC signatures to 2018-06-14
-- update freedesktop.org signatures to v1.10
-- update tika-mimetype signatures to v1.18
-
-### Fixed
-- misidentifications of some files e.g. ODF presentation due to sf quitting early on strong matches. Have adjusted this algorithm to make sf wait longer if there is evidence (e.g. from filename) that the file might be something else. Reported by [Jean-Séverin Lair](https://github.com/richardlehane/siegfried/issues/112)
-- read and other file errors caused sf to hang; reports by [Greg Lepore and Andy Foster](https://github.com/richardlehane/siegfried/issues/113); fix contributed by [Ross Spencer](https://github.com/richardlehane/siegfried/commit/ea5300d3639d741a451522958e8b99912f7d639d)
-- bug reading streams where EOF returned for reads exactly adjacent the end of file
-- bug in mscfb library ([race condition for concurrent access to a global variable](https://github.com/richardlehane/siegfried/issues/117))
-- some matches result in extremely verbose basis fields; reported by [Nick Krabbenhoeft](https://github.com/richardlehane/siegfried/issues/111). Partly fixed: basis field now reports a single basis for a match but work remains to speed up matching for these cases.
+- XML namespaces detected by prefix on root tag, as well as default namespace (for mime-info spec)
+- panic when scanning certain MS-CFB files. Reported separately by Mike Shallcross and Euan Cochrane
+- file with many FF xx sequences grinds to a halt. Reported by [Andy Foster](https://github.com/richardlehane/siegfried/issues/128)
 
 See the [CHANGELOG](CHANGELOG.md) for the full history.
 

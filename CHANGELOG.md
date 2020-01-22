@@ -1,5 +1,5 @@
 # Change Log
-## v1.8.0 (2020-01-)
+## v1.8.0 (2020-01-22)
 ### Added
 - utc flag returns file modified dates in UTC e.g. `sf -utc FILE | DIR`. Requested by [Dragan Espenschied](https://github.com/richardlehane/siegfried/issues/136)
 - new cost and repetition flags to control segmentation when building signatures
