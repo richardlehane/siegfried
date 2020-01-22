@@ -85,7 +85,7 @@ func identify(ctxts chan *context, root, orig string, coerr, norecurse, droid bo
 			info, err = retryStat(path, err) // retry stat in case is a windows long path error
 			if err != nil {
 				if coerr {
-					printFile(ctxts, gf(path, "", "", 0), WalkError{path, err})
+					printFile(ctxts, gf(path, "", time.Time{}, 0), WalkError{path, err})
 					return nil
 				}
 				return WalkError{path, err}
