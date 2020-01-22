@@ -6,7 +6,7 @@ branches:
   - master
 clone_folder: c:\gopath\src\github.com\richardlehane\siegfried
 before_build:
-- ps: if(!($env:APPVEYOR_REPO_TAG_NAME)){$env:SFVERSION="_"}
+- ps: $env:APPVEYOR_REPO_TAG_NAME="v1.8.0"
 - ps: if($env:APPVEYOR_REPO_TAG_NAME){$env:SFVERSION=$env:APPVEYOR_REPO_TAG_NAME.Trim("v").Replace(".","-")}
 - ps: if($env:APPVEYOR_REPO_TAG_NAME){$env:SFTITLE=$env:APPVEYOR_REPO_TAG_NAME.Trim("v")}
 - ps: md win64
@@ -39,6 +39,4 @@ deploy:
   description: "see [CHANGELOG.md](https://github.com/richardlehane/siegfried/blob/master/CHANGELOG.md)"
   artifact: win64,win32,data      
   draft: false
-  prerelease: false
-  on:
-    appveyor_repo_tag: true             
+  prerelease: false         
