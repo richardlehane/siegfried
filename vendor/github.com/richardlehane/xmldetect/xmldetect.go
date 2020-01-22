@@ -199,57 +199,80 @@ func eatToken(in io.ByteReader) (bool, string, string, error) {
 func eatElement(in io.ByteReader, c byte) (bool, string, string) {
 	buf := make([]byte, 32)
 	var (
-		err     error
-		tag, ns string
-		idx     int
+		err             error
+		tag, ns, prefix string
+		idx             int
 	)
 	for ; err == nil; c, err = in.ReadByte() {
 		switch c {
-		default:
-			if idx >= len(buf) {
-				cp := make([]byte, len(buf)*2)
-				copy(cp, buf)
-				buf = cp
-			}
-			buf[idx] = c
-			idx++
 		case '>', ' ', '\r', '\n', '\t':
 			if tag == "" {
 				tag = string(buf[:idx])
 			} else if ns == "" {
-				ns = extractNS(buf[:idx])
+				ns = extractNS(prefix, buf[:idx])
 			}
 			if c == '>' {
 				return true, tag, ns
 			}
 			idx = 0
+		default:
+			if c == ':' && tag == "" {
+				prefix = string(buf[:idx])
+				idx = 0
+			} else {
+				if idx >= len(buf) {
+					cp := make([]byte, len(buf)*2)
+					copy(cp, buf)
+					buf = cp
+				}
+				buf[idx] = c
+				idx++
+			}
 		}
 	}
 	return false, "", ""
 }
 
-func extractNS(buf []byte) string {
-	if len(buf) > 8 &&
-		(buf[0] == 'x' || buf[0] == 'X') &&
-		(buf[1] == 'm' || buf[1] == 'M') &&
-		(buf[2] == 'l' || buf[2] == 'L') &&
-		(buf[3] == 'n' || buf[3] == 'N') &&
-		(buf[4] == 's' || buf[4] == 'S') &&
-		buf[5] == '=' {
-		var (
-			inQuote byte
-			start   int
-		)
-		for i, c := range buf[6:] {
-			if inQuote == 0 {
-				// test for " or '
-				if c == 0x27 || c == 0x22 {
-					inQuote = c
-					start = 6 + i + 1
+func extractNS(prefix string, buf []byte) string {
+	var (
+		inQuote    byte
+		start, end int
+	)
+	if prefix == "" {
+		start = 6
+		if len(buf) > 8 &&
+			(buf[0] == 'x' || buf[0] == 'X') &&
+			(buf[1] == 'm' || buf[1] == 'M') &&
+			(buf[2] == 'l' || buf[2] == 'L') &&
+			(buf[3] == 'n' || buf[3] == 'N') &&
+			(buf[4] == 's' || buf[4] == 'S') &&
+			buf[5] == '=' {
+		} else {
+			return ""
+		}
+	} else {
+		if len(buf) > len(prefix)+1 {
+			for i := 0; i < len(prefix); i++ {
+				if buf[i] != prefix[i] {
+					return ""
 				}
-			} else if c == inQuote {
-				return string(buf[start : i+6])
 			}
+			if buf[len(prefix)] != '=' {
+				return ""
+			}
+		}
+		start = len(prefix) + 1
+	}
+	for i, c := range buf[start:] {
+		if inQuote == 0 {
+			// test for " or '
+			if c == 0x27 || c == 0x22 {
+				inQuote = c
+				end = start + i
+				start += i + 1
+			}
+		} else if c == inQuote {
+			return string(buf[start : end+i])
 		}
 	}
 	return ""

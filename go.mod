@@ -5,9 +5,9 @@ require (
 	github.com/richardlehane/match v1.0.0
 	github.com/richardlehane/mscfb v1.0.3
 	github.com/richardlehane/webarchive v1.0.0
-	github.com/richardlehane/xmldetect v1.0.0
-	golang.org/x/image v0.0.0-20191009234506-e7c1f5e7dbb8
-	golang.org/x/sys v0.0.0-20191010194322-b09406accb47
+	github.com/richardlehane/xmldetect v1.0.1
+	golang.org/x/image v0.0.0-20200119044424-58c23975cae1
+	golang.org/x/sys v0.0.0-20200122134326-e047566fdf82
 	golang.org/x/text v0.3.2 // indirect
 )
 
