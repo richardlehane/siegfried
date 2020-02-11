@@ -43,6 +43,26 @@ func decodeNum(num string) (int, error) {
 	return strconv.Atoi(num)
 }
 
+// PROCompatSequence (compatibility) provides access to the PRONON
+// primitive mappings.ByteSequence for custom identifier types that
+// want to make use of PRONOM's level of expression.
+type PROCompatSequence = mappings.ByteSequence
+
+// BeginningOfFile provides access to PRONOM's BOF const.
+const BeginningOfFile = pronombof
+
+// EndOfFile provides access to PRONOM's EOF const.
+const EndOfFile = pronomeof
+
+// FormatPRONOM is an external helper function for enabling the
+// processing of a significant number of signature types compatible with
+// the PRONOM standard from plain-old hex, to more complex PRONOM regex.
+func FormatPRONOM(id string, ps []PROCompatSequence) (frames.Signature, error) {
+	signature := mappings.Signature{}
+	signature.ByteSequences = ps
+	return processPRONOM(id, signature)
+}
+
 // PRONOM
 func processPRONOM(puid string, s mappings.Signature) (frames.Signature, error) {
 	sig := make(frames.Signature, 0, 1)

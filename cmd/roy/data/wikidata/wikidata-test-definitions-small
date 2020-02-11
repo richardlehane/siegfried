@@ -1,0 +1,2195 @@
+{
+  "head" : {
+    "vars" : [ "uri", "uriLabel", "puid", "extension", "mimetype", "encodingLabel", "referenceLabel", "date", "relativityLabel", "offset", "sig" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1023647"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Microsoft Compiled HTML Help"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/634"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "chm"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-chm"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1023647"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Microsoft Compiled HTML Help"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/634"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "chm"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/vnd.ms-htmlhelp"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1027477"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Caltech Intermediate Form"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "cif"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1027882"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Short Payment Descriptor"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "spayd"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-shortpaymentdescriptor"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q10287816"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "GZIP"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "x-fmt/266"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "gz"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/gzip"
+      },
+      "encodingLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "hexadecimal"
+      },
+      "referenceLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Gary Kessler's File Signature Table"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2017-08-07T00:00:00Z"
+      },
+      "offset" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "0"
+      },
+      "sig" : {
+        "type" : "literal",
+        "value" : "1F8B08"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q10352597"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "602Text Document"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/1293"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "602"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1035647"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Card Verifiable Certificate"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "cvcert"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1035647"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Card Verifiable Certificate"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "cv"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q10376670"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "tar.bz2"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "tar.bz2"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q10387757"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Universal Image Format"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "uif"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q10394820"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Zope Configuration Markup Language"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "zcml"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q10394822"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "ZIP archive file format, version 6.3.2"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "zipx"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/zip"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q10394822"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "ZIP archive file format, version 6.3.2"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "zip"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/zip"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q10397009"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Arachne Plugin Manager file format"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "apm"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q10397010"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : ".rmp"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "rmp"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q10397011"
+      },
+      "uriLabel" : {
+        "type" : "literal",
+        "value" : "Q10397011"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1046238"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "XML-RPC"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1047541"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Encapsulated PostScript"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/124"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "eps"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "image/x-eps"
+      },
+      "encodingLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "hexadecimal"
+      },
+      "referenceLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Gary Kessler's File Signature Table"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2017-08-08T00:00:00Z"
+      },
+      "offset" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "0"
+      },
+      "sig" : {
+        "type" : "literal",
+        "value" : "C5D0D3C6"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1047541"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Encapsulated PostScript"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/124"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "eps"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "image/x-eps"
+      },
+      "encodingLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "hexadecimal"
+      },
+      "referenceLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Gary Kessler's File Signature Table"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2017-08-08T00:00:00Z"
+      },
+      "offset" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "0"
+      },
+      "sig" : {
+        "type" : "literal",
+        "value" : "252150532D41646F62652D332E3020455053462D332030"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1047541"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Encapsulated PostScript"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/124"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "eps"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/postscript"
+      },
+      "encodingLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "hexadecimal"
+      },
+      "referenceLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Gary Kessler's File Signature Table"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2017-08-08T00:00:00Z"
+      },
+      "offset" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "0"
+      },
+      "sig" : {
+        "type" : "literal",
+        "value" : "C5D0D3C6"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1047541"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Encapsulated PostScript"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/124"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "eps"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/postscript"
+      },
+      "encodingLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "hexadecimal"
+      },
+      "referenceLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Gary Kessler's File Signature Table"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2017-08-08T00:00:00Z"
+      },
+      "offset" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "0"
+      },
+      "sig" : {
+        "type" : "literal",
+        "value" : "252150532D41646F62652D332E3020455053462D332030"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1050471"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Property list"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/984"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "plist"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1050715"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "stddef.h"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1050979"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "iso646.h"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1051010"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "float.h"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1052000"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "qcow"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "qcow"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/octet-stream"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1054220"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "ID3"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1056154"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "M4V"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "m4v"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "video/x-m4v"
+      },
+      "encodingLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "hexadecimal"
+      },
+      "referenceLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Gary Kessler's File Signature Table"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2017-08-08T00:00:00Z"
+      },
+      "offset" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "0"
+      },
+      "sig" : {
+        "type" : "literal",
+        "value" : "00000018667479706D703432"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1056154"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "M4V"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "m4v"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "video/x-m4v"
+      },
+      "encodingLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "hexadecimal"
+      },
+      "referenceLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Gary Kessler's File Signature Table"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2017-08-08T00:00:00Z"
+      },
+      "offset" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "0"
+      },
+      "sig" : {
+        "type" : "literal",
+        "value" : "00000020667479704D345620"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1056154"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "M4V"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "m4v"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "video/x-m4v"
+      },
+      "encodingLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "hexadecimal"
+      },
+      "referenceLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Gary Kessler's File Signature Table"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2017-08-08T00:00:00Z"
+      },
+      "offset" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "4"
+      },
+      "sig" : {
+        "type" : "literal",
+        "value" : "667479706D703432"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q10610388"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Standard MIDI File"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "x-fmt/230"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "midi"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "audio/x-midi"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q10610388"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Standard MIDI File"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "x-fmt/230"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "mid"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "audio/x-midi"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q10610388"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Standard MIDI File"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "x-fmt/230"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "midi"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "audio/sp-midi"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q10610388"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Standard MIDI File"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "x-fmt/230"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "mid"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "audio/sp-midi"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q10610388"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Standard MIDI File"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "x-fmt/230"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "midi"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "audio/mid"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q10610388"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Standard MIDI File"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "x-fmt/230"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "mid"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "audio/mid"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q10610388"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Standard MIDI File"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "x-fmt/230"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "midi"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "audio/m"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q10610388"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Standard MIDI File"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "x-fmt/230"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "mid"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "audio/m"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q10610388"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Standard MIDI File"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "x-fmt/230"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "midi"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-midi"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q10610388"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Standard MIDI File"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "x-fmt/230"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "mid"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-midi"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q10610388"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Standard MIDI File"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "x-fmt/230"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "midi"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "audio/midi"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q10610388"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Standard MIDI File"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "x-fmt/230"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "mid"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "audio/midi"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1062254"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Channel Definition Format"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1063976"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Truevision TGA"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "x-fmt/367"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "tpic"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "image/x-tga"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1063976"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Truevision TGA"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/402"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "tpic"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "image/x-tga"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1063976"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Truevision TGA"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "x-fmt/367"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "vst"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "image/x-tga"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1063976"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Truevision TGA"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/402"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "vst"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "image/x-tga"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1063976"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Truevision TGA"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "x-fmt/367"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "icb"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "image/x-tga"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1063976"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Truevision TGA"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/402"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "icb"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "image/x-tga"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1063976"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Truevision TGA"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "x-fmt/367"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "vda"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "image/x-tga"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1063976"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Truevision TGA"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/402"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "vda"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "image/x-tga"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1063976"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Truevision TGA"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "x-fmt/367"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "tga"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "image/x-tga"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1063976"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Truevision TGA"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/402"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "tga"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "image/x-tga"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1063976"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Truevision TGA"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "x-fmt/367"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "tpic"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "image/x-targa"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1063976"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Truevision TGA"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/402"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "tpic"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "image/x-targa"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1063976"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Truevision TGA"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "x-fmt/367"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "vst"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "image/x-targa"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1063976"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Truevision TGA"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/402"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "vst"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "image/x-targa"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1063976"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Truevision TGA"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "x-fmt/367"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "icb"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "image/x-targa"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1063976"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Truevision TGA"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/402"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "icb"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "image/x-targa"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1063976"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Truevision TGA"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "x-fmt/367"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "vda"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "image/x-targa"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1063976"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Truevision TGA"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/402"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "vda"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "image/x-targa"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1063976"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Truevision TGA"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "x-fmt/367"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "tga"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "image/x-targa"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1063976"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Truevision TGA"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/402"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "tga"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "image/x-targa"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1064017"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Monkey's Audio"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/1086"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "ape"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "audio/x-ape"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1064039"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "JPEG XR"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/590"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "jxr"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "image/jxr"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1066897"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "LDAP Data Interchange Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/611"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "ldif"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1067761"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Windows Media Audio 9 Lossless"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "wma"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1068805"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : ".properties"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "properties"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069211"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Chemical Markup Language"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/333"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "cml"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "chemical/x-cml"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/807"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "he5"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf5"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/287"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "he5"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf5"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/286"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "he5"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf5"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/807"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "he2"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf5"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/287"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "he2"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf5"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/286"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "he2"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf5"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/807"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "hdf5"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf5"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/287"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "hdf5"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf5"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/286"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "hdf5"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf5"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/807"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "hdf4"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf5"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/287"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "hdf4"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf5"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/286"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "hdf4"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf5"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/807"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "hdf"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf5"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/287"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "hdf"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf5"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/286"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "hdf"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf5"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/807"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "h5"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf5"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/287"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "h5"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf5"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/286"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "h5"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf5"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/807"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "h4"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf5"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/287"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "h4"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf5"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/286"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "h4"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf5"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/807"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "he5"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/287"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "he5"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/286"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "he5"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/807"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "he2"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/287"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "he2"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/286"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "he2"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/807"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "hdf5"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/287"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "hdf5"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/286"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "hdf5"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1069215"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hierarchical Data Format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/807"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "hdf4"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-hdf"
+      }
+    } ]
+  }
+}

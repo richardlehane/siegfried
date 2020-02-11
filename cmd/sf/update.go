@@ -149,7 +149,7 @@ func getHttp(url string) ([]byte, error) {
 		return nil, err
 	}
 	_, timeout, transport := config.UpdateOptions()
-	req.Header.Add("User-Agent", "siegfried/siegbot (+https://github.com/richardlehane/siegfried)")
+	req.Header.Add("User-Agent", config.UserAgent())
 	req.Header.Add("Cache-Control", "no-cache")
 	timer := time.AfterFunc(timeout, func() {
 		transport.CancelRequest(req)

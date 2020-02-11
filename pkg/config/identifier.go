@@ -45,16 +45,19 @@ var identifier = struct {
 }
 
 // GETTERS
+const emptyNamespace = ""
 
 // Name returns the name of the identifier.
 func Name() string {
 	switch {
-	case identifier.name != "":
+	case identifier.name != emptyNamespace:
 		return identifier.name
-	case mimeinfo.mi != "":
+	case mimeinfo.mi != emptyNamespace:
 		return mimeinfo.name
-	case loc.fdd != "":
+	case loc.fdd != emptyNamespace:
 		return loc.name
+	case GetWikidataNamespace() != emptyNamespace:
+		return GetWikidataNamespace()
 	default:
 		return pronom.name
 	}
@@ -74,6 +77,14 @@ func Details(extra ...string) string {
 	} else if len(loc.fdd) > 0 {
 		str = loc.fdd
 		if !loc.nopronom {
+			extra = append(extra, DroidBase())
+			if !identifier.noContainer {
+				extra = append(extra, ContainerBase())
+			}
+		}
+	} else if wikidata.definitions != "" {
+		str = wikidata.definitions
+		if !wikidata.nopronom {
 			extra = append(extra, DroidBase())
 			if !identifier.noContainer {
 				extra = append(extra, ContainerBase())
