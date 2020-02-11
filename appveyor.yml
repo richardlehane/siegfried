@@ -4,6 +4,7 @@ environment:
 branches:
   only:
   - master
+  - develop
 clone_folder: c:\gopath\src\github.com\richardlehane\siegfried
 before_build:
 - ps: if(!($env:APPVEYOR_REPO_TAG_NAME)){$env:SFVERSION="_"}
