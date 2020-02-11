@@ -14,7 +14,7 @@ import (
 
 var testhome = flag.String("home", "data", "override the default home directory")
 
-func TestMakeDefault(t *testing.T) {
+func TestDefault(t *testing.T) {
 	s := siegfried.New()
 	config.SetHome(*testhome)
 	p, err := pronom.New()
