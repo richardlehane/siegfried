@@ -20,12 +20,13 @@ package main
 
 import (
 	"flag"
-	"log"
+	"fmt"
+	"os"
 	"path/filepath"
-	"testing"
 
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/pkg/config"
+	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/loc"
 	"github.com/richardlehane/siegfried/pkg/mimeinfo"
 	"github.com/richardlehane/siegfried/pkg/pronom"
@@ -47,9 +48,11 @@ func main() {
 		makeArchivematica,
 		makeSets,
 	}
-	for _, j := range jobs {
+	for i, j := range jobs {
+		fmt.Printf("Running job %d\n", i)
 		if err := j(); err != nil {
-			log.Fatal(err)
+			fmt.Println(err)
+			os.Exit(0)
 		}
 	}
 }
