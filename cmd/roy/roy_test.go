@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"path/filepath"
 	"testing"
 
 	"github.com/richardlehane/siegfried"
@@ -13,7 +12,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/sets"
 )
 
-var testhome = flag.String("testhome", "data", "override the default home directory")
+var testhome = flag.String("home", "data", "override the default home directory")
 
 func TestMakeDefault(t *testing.T) {
 	s := siegfried.New()
@@ -23,11 +22,6 @@ func TestMakeDefault(t *testing.T) {
 		t.Fatal(err)
 	}
 	err = s.Add(p)
-	if err != nil {
-		t.Fatal(err)
-	}
-	sigs := filepath.Join("data", config.SignatureBase())
-	err = s.Save(sigs)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -44,14 +38,9 @@ func TestLoc(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	sigs := filepath.Join("data", "loc.sig")
-	err = s.Save(sigs)
-	if err != nil {
-		t.Fatal(err)
-	}
 }
 
-func TestMakeTika(t *testing.T) {
+func TestTika(t *testing.T) {
 	s := siegfried.New()
 	config.SetHome(*testhome)
 	m, err := mimeinfo.New(config.SetMIMEInfo("tika"))
@@ -62,14 +51,9 @@ func TestMakeTika(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	sigs := filepath.Join("data", "tika.sig")
-	err = s.Save(sigs)
-	if err != nil {
-		t.Fatal(err)
-	}
 }
 
-func TestMakeFreedesktop(t *testing.T) {
+func TestFreedesktop(t *testing.T) {
 	s := siegfried.New()
 	config.SetHome(*testhome)
 	m, err := mimeinfo.New(config.SetMIMEInfo("freedesktop"))
@@ -80,14 +64,9 @@ func TestMakeFreedesktop(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	sigs := filepath.Join("data", "freedesktop.sig")
-	err = s.Save(sigs)
-	if err != nil {
-		t.Fatal(err)
-	}
 }
 
-func TestMakePronomTikaLoc(t *testing.T) {
+func TestPronomTikaLoc(t *testing.T) {
 	s := siegfried.New()
 	config.SetHome(*testhome)
 	p, err := pronom.New(config.Clear())
@@ -114,14 +93,9 @@ func TestMakePronomTikaLoc(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	sigs := filepath.Join("data", "pronom-tika-loc.sig")
-	err = s.Save(sigs)
-	if err != nil {
-		t.Fatal(err)
-	}
 }
 
-func TestMakeDeluxe(t *testing.T) {
+func TestDeluxe(t *testing.T) {
 	s := siegfried.New()
 	config.SetHome(*testhome)
 	p, err := pronom.New(config.Clear())
@@ -156,14 +130,9 @@ func TestMakeDeluxe(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	sigs := filepath.Join("data", "deluxe.sig")
-	err = s.Save(sigs)
-	if err != nil {
-		t.Fatal(err)
-	}
 }
 
-func TestMakeArchivematica(t *testing.T) {
+func TestArchivematica(t *testing.T) {
 	s := siegfried.New()
 	config.SetHome(*testhome)
 	p, err := pronom.New(
@@ -173,28 +142,6 @@ func TestMakeArchivematica(t *testing.T) {
 		t.Fatal(err)
 	}
 	err = s.Add(p)
-	if err != nil {
-		t.Fatal(err)
-	}
-	sigs := filepath.Join("data", "archivematica.sig")
-	err = s.Save(sigs)
-	if err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestSets(t *testing.T) {
-	config.SetHome(*testhome)
-	releases, err := pronom.LoadReleases(config.Local("release-notes.xml"))
-	if err == nil {
-		err = pronom.ReleaseSet("pronom-changes.json", releases)
-	}
-	if err == nil {
-		err = pronom.TypeSets("pronom-all.json", "pronom-families.json", "pronom-types.json")
-	}
-	if err == nil {
-		err = pronom.ExtensionSet("pronom-extensions.json")
-	}
 	if err != nil {
 		t.Fatal(err)
 	}
