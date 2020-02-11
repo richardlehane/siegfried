@@ -57,12 +57,18 @@ import (
 	"github.com/richardlehane/siegfried/pkg/loc"
 	"github.com/richardlehane/siegfried/pkg/mimeinfo"
 	"github.com/richardlehane/siegfried/pkg/pronom"
+
+	// Load Wikidata into a Siegfried...
+	"github.com/richardlehane/siegfried/pkg/wikidata"
 )
 
 var ( // for side effect - register their patterns/ signature loaders
 	_ = pronom.Range{}
 	_ = mimeinfo.Int8(0)
 	_ = loc.Identifier{}
+
+	// Is this what we want to do here..?
+	_ = wikidata.Identifier{}
 )
 
 // Siegfried structs are persisent objects that can be serialised to disk and

@@ -55,6 +55,10 @@ func Name() string {
 		return mimeinfo.name
 	case loc.fdd != "":
 		return loc.name
+	// WIKIDATA TODO: Wikidata name is set here, what conditions will this be
+	// blank?
+	case wikidata.definitions != "":
+		return wikidata.name
 	default:
 		return pronom.name
 	}
@@ -74,6 +78,14 @@ func Details(extra ...string) string {
 	} else if len(loc.fdd) > 0 {
 		str = loc.fdd
 		if !loc.nopronom {
+			extra = append(extra, DroidBase())
+			if !identifier.noContainer {
+				extra = append(extra, ContainerBase())
+			}
+		}
+	} else if wikidata.definitions != "" {
+		str = wikidata.definitions
+		if !wikidata.nopronom {
 			extra = append(extra, DroidBase())
 			if !identifier.noContainer {
 				extra = append(extra, ContainerBase())

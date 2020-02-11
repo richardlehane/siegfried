@@ -1,0 +1,9 @@
+Wikidata todo log (✓)
+
+* Resolve wikidata pages with multiple PUIDs per record.
+* Discuss provenance further, i.e. tmpPuids does not seem to be the correct approach.
+* Ensure that signature details are accurate.
+* "Module" layout to be consistent with what each part of the code is doing.
+* Docstring consistency.
+* Unit tests, e.g. for provenance mapping.
+* Inspect function for PRONOM only can only consult PUID nos. not QIDs.

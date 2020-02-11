@@ -42,6 +42,7 @@ const (
 	Pronom byte = iota // Pronom is the TNA's PRONOM file format registry
 	MIMEInfo
 	LOC
+	Wikidata
 )
 
 // IdentifierLoader unmarshals an Identifer from a LoadSaver.

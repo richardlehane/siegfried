@@ -64,6 +64,10 @@ var (
 	name         = flag.String("name", "", "provide a filename when scanning a stream e.g. sf -name myfile.txt -")
 	conff        = flag.String("conf", "", "set the configuration file")
 	setconff     = flag.Bool("setconf", false, "record flags used with this command in configuration file")
+
+	// WIKIDATA TODO: Wikidata source mode for how we'd like to display
+	// provenance. This flag only impacts Wikidata.
+	source = flag.Bool("source", false, "display a source field when provenance is available for an identifier")
 )
 
 var (
@@ -376,6 +380,10 @@ func main() {
 		log.Printf("FPR server started at %s. Use CTRL-C to quit.\n", config.Fpr())
 		serveFpr(config.Fpr(), s)
 		return
+	}
+	// WIKIDATA TODO; Handle source flag. (This might be removed)
+	if *source {
+		config.SetWikidataSourceField()
 	}
 	// check -multi
 	if *multi > maxMulti || *multi < 1 || (*archive && *multi > 1) {

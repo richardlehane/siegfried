@@ -79,11 +79,14 @@ func (ii *indexes) first(i int) (bool, string) {
 }
 
 func (ii *indexes) save(ls *persist.LoadSaver) {
+	// WIKIDATA TODO: Keep in mind this function as we work out provenance.
 	ls.SaveInt(ii.start)
 	ls.SaveStrings(ii.ids)
 }
 
 func (ii *indexes) place(i int) (int, int) {
+	// WIKIDATA TODO: Keep in mind this function as we work out provenance.
+	// E.g. Q3063041
 	if i >= ii.start && i < ii.start+len(ii.ids) {
 		idx, id := i-ii.start, ii.ids[i-ii.start]
 		var prev, post int
@@ -107,7 +110,10 @@ func loadIndexes(ls *persist.LoadSaver) *indexes {
 
 func New(p Parseable, zip string, extra ...string) *Base {
 	return &Base{
-		p:          p,
+		p: p,
+		// WIKIDATA TODO: config.Name seems to be cross-populated by all
+		// identifiers, so default, de-facto becomes Wikidata when we want
+		// PRONOM.
 		name:       config.Name(),
 		details:    config.Details(extra...),
 		multi:      config.GetMulti(),
@@ -154,6 +160,8 @@ func (b *Base) Details() string {
 	return b.details
 }
 
+// WIKIDATA TODO: These values aren't output in the correct order or we're not
+// adding to them correctly in the Wikidata identifier.
 func (b *Base) String() string {
 	str := fmt.Sprintf("Name: %s\nDetails: %s\n", b.name, b.details)
 	str += fmt.Sprintf("Number of filename signatures: %d \n", len(b.gids.ids))
@@ -254,6 +262,9 @@ func (b *Base) Hit(m core.MatcherType, idx int) (bool, string) {
 	}
 }
 
+// Place returns the position of a signature and total number of signatures to
+// the recorder so that it can play back information about which signature it
+// matched against.
 func (b *Base) Place(m core.MatcherType, idx int) (int, int) {
 	switch m {
 	default:
@@ -267,6 +278,7 @@ func (b *Base) Place(m core.MatcherType, idx int) (int, int) {
 	case core.XMLMatcher:
 		return b.xids.place(idx)
 	case core.ByteMatcher:
+
 		return b.bids.place(idx)
 	case core.RIFFMatcher:
 		return b.rids.place(idx)
@@ -353,9 +365,17 @@ func (b *Base) Add(m core.Matcher, t core.MatcherType) (core.Matcher, error) {
 			return nil, err
 		}
 		b.xids.start = l - len(b.xids.ids)
+
 	case core.ByteMatcher:
+
+		// WIKIDATA TODO: Keep this segment in mind as we resolve the
+		// provenance feature. The Signatures function here belongs to each
+		// of the identifiers, so where we are going to process Wikidata
+		// alongside PRONOM.
+
 		var sigs []frames.Signature
 		var err error
+
 		sigs, b.bids.ids, err = b.p.Signatures()
 		if err != nil {
 			return nil, err
