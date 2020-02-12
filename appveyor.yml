@@ -6,6 +6,8 @@ branches:
   - master
   - develop
 clone_folder: c:\gopath\src\github.com\richardlehane\siegfried
+test_script:
+- go test github.com/richardlehane/siegfried/cmd/sf
 before_build:
 - ps: if(!($env:APPVEYOR_REPO_TAG_NAME)){$env:SFVERSION="_"}
 - ps: if($env:APPVEYOR_REPO_TAG_NAME){$env:SFVERSION=$env:APPVEYOR_REPO_TAG_NAME.Trim("v").Replace(".","-")}
