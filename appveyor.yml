@@ -6,6 +6,8 @@ branches:
   - master
   - develop
 clone_folder: c:\gopath\src\github.com\richardlehane\siegfried
+before_test:
+- ps: $env:GOROOT="C:\go"
 test_script:
 - go test github.com/richardlehane/siegfried/cmd/sf
 before_build:
