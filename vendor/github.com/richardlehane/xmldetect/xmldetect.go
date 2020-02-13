@@ -251,6 +251,7 @@ func extractNS(prefix string, buf []byte) string {
 			return ""
 		}
 	} else {
+		start = len(prefix) + 1
 		if len(buf) > len(prefix)+1 {
 			for i := 0; i < len(prefix); i++ {
 				if buf[i] != prefix[i] {
@@ -260,8 +261,9 @@ func extractNS(prefix string, buf []byte) string {
 			if buf[len(prefix)] != '=' {
 				return ""
 			}
+		} else {
+			return ""
 		}
-		start = len(prefix) + 1
 	}
 	for i, c := range buf[start:] {
 		if inQuote == 0 {

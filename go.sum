@@ -8,12 +8,12 @@ github.com/richardlehane/msoleps v1.0.1 h1:RfrALnSNXzmXLbGct/P2b4xkFz4e8Gmj/0Vj9
 github.com/richardlehane/msoleps v1.0.1/go.mod h1:BWev5JBpU9Ko2WAgmZEuiz4/u3ZYTKbjLycmwiWUfWg=
 github.com/richardlehane/webarchive v1.0.0 h1:RnmjrTFzNoenSypXrIFW0dvw8Isytv5z0Nf44dN1ktQ=
 github.com/richardlehane/webarchive v1.0.0/go.mod h1:R+J0ocBfFb0A3vzwXZwrYoPe69PJLEejLzFL5ceDroM=
-github.com/richardlehane/xmldetect v1.0.1 h1:/Sl4a+y0sJgMXY9CAwjjsE8mHTCxb87sSnFc6FDy0P8=
-github.com/richardlehane/xmldetect v1.0.1/go.mod h1:Zp1lhTLRJa2p2QKA4jOruVQYc0NFQDO0YUz3k/k6JcE=
+github.com/richardlehane/xmldetect v1.0.2 h1:/3ooFuJwtgpMMe14/7m8a/JIvECMx6SpsPcDRiNyR8o=
+github.com/richardlehane/xmldetect v1.0.2/go.mod h1:Zp1lhTLRJa2p2QKA4jOruVQYc0NFQDO0YUz3k/k6JcE=
 golang.org/x/image v0.0.0-20200119044424-58c23975cae1 h1:5h3ngYt7+vXCDZCup/HkCQgW5XwmSvR/nA2JmJ0RErg=
 golang.org/x/image v0.0.0-20200119044424-58c23975cae1/go.mod h1:FeLwcggjj3mMvU+oOTbSwawSJRM1uh48EjtB4UJZlP0=
-golang.org/x/sys v0.0.0-20200122134326-e047566fdf82 h1:ywK/j/KkyTHcdyYSZNXGjMwgmDSfjglYZ3vStQ/gSCU=
-golang.org/x/sys v0.0.0-20200122134326-e047566fdf82/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
+golang.org/x/sys v0.0.0-20200212091648-12a6c2dcc1e4 h1:sfkvUWPNGwSV+8/fNqctR5lS2AqCSqYwXdrjCxp/dXo=
+golang.org/x/sys v0.0.0-20200212091648-12a6c2dcc1e4/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/text v0.3.0 h1:g61tztE5qeGQ89tm6NTjjM9VPIm088od1l6aSorWRWg=
 golang.org/x/text v0.3.0/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=
 golang.org/x/text v0.3.2 h1:tW2bmiBqwgJj/UpqtC8EpXEZVYOwU0yG4iWbprSVAcs=
