@@ -73,6 +73,8 @@ func New(arc config.Archive, buf *siegreader.Buffer, path string, sz int64) (Dec
 		return newARC(siegreader.ReaderFrom(buf), path)
 	case config.WARC:
 		return newWARC(siegreader.ReaderFrom(buf), path)
+	case config.ISO:
+		return newISO(siegreader.ReaderFrom(buf), path)
 	}
 	return nil, fmt.Errorf("Decompress: unknown archive type %v", arc)
 }

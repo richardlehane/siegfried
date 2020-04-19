@@ -54,7 +54,7 @@ var (
 	home         = flag.String("home", config.Home(), "override the default home directory")
 	serve        = flag.String("serve", "", "start siegfried server e.g. -serve localhost:5138")
 	multi        = flag.Int("multi", 1, "set number of parallel file ID processes")
-	archive      = flag.Bool("z", false, "scan archive formats (zip, tar, gzip, warc, arc)")
+	archive      = flag.Bool("z", false, "scan archive formats (zip, tar, gzip, warc, arc, iso)")
 	hashf        = flag.String("hash", "", "calculate file checksum with hash algorithm; options "+checksum.HashChoices)
 	throttlef    = flag.Duration("throttle", 0, "set a time to wait between scanning files e.g. 50ms")
 	utcf         = flag.Bool("utc", false, "report file modified times in UTC, rather than local, TZ")

@@ -24,6 +24,7 @@ const (
 	Tar
 	ARC
 	WARC
+	ISO
 )
 
 func (a Archive) String() string {
@@ -38,6 +39,8 @@ func (a Archive) String() string {
 		return "ARC"
 	case WARC:
 		return "WARC"
+	case ISO:
+		return "ISO"
 	}
 	return ""
 }

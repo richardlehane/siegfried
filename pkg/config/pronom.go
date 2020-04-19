@@ -43,6 +43,7 @@ var pronom = struct {
 	arc    string
 	arc1_1 string
 	warc   string
+	iso    string
 	// text puid
 	text string
 }{
@@ -58,6 +59,7 @@ var pronom = struct {
 	arc:              "x-fmt/219",
 	arc1_1:           "fmt/410",
 	warc:             "fmt/289",
+	iso:              "fmt/468",
 	text:             "x-fmt/111",
 }
 
