@@ -37,10 +37,14 @@ import (
 // package flag for changing functionality of Arcpath func if droid output flag is used
 var droidOutput bool
 
+// SetDroid enables callers to configure Arcpath to output a DROID style
+// package path string.
 func SetDroid() {
 	droidOutput = true
 }
 
+// IsArc extracts from an Identification structure whether the identified
+// object is an Archive we might handle with this package.
 func IsArc(ids []core.Identification) config.Archive {
 	var arc config.Archive
 	for _, id := range ids {
@@ -51,6 +55,7 @@ func IsArc(ids []core.Identification) config.Archive {
 	return arc
 }
 
+// Decompressor describes functions for interacting with archive type objects.
 type Decompressor interface {
 	Next() error // when finished, should return io.EOF
 	Reader() io.Reader
@@ -61,6 +66,8 @@ type Decompressor interface {
 	Dirs() []string
 }
 
+// New will return a new Decompressor like object for compatible archive like
+// packages, e.g. Zip, Gzip, Tar, Warc, etc.
 func New(arc config.Archive, buf *siegreader.Buffer, path string, sz int64) (Decompressor, error) {
 	switch arc {
 	case config.Zip:
@@ -244,7 +251,7 @@ func (g *gzipD) Mod() time.Time {
 	return g.rdr.ModTime
 }
 
-func (t *gzipD) Dirs() []string {
+func (g *gzipD) Dirs() []string {
 	return nil
 }
 
@@ -320,8 +327,12 @@ func dirs(path, name string, written map[string]bool) []string {
 	return nil
 }
 
-// per https://github.com/richardlehane/siegfried/issues/81
-// construct paths for compressed objects acc. to KDE hash notation
+// Arcpath constructs paths for compressed objects according to KDE hash
+// notation. Unless the droidOutput flag is configured.
+//
+// Per: https://github.com/richardlehane/siegfried/issues/81
+//
+//
 func Arcpath(base, path string) string {
 	if droidOutput {
 		return base + string(filepath.Separator) + path
