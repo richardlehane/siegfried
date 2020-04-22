@@ -277,6 +277,10 @@ func IsArchive(id string) Archive {
 		return ARC
 	case pronom.warc, mimeinfo.warc, loc.warc:
 		return WARC
+	// TODO: In this branch, add MIMEINFO identifier if it exists, and LOC.
+	// TODO: In Wikidata branch add Wikidata identifiers to the above.
+	case pronom.iso:
+		return ISO
 	}
 	return None
 }
