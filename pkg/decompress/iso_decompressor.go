@@ -34,7 +34,10 @@ type isoDecompressor struct {
 	mod       time.Time
 }
 
-func newISO(path string) (Decompressor, error) {
+func newISO(reader io.Reader, path string) (Decompressor, error) {
+	// TODO: We're not using the reader, the iso9660 library requires a
+	// readseeker. We can probably rectify this when we create our own
+	// reader/s.
 	isoReader, err := iso.NewISOReader(path)
 	return &isoDecompressor{
 		path:      path,
@@ -43,16 +46,18 @@ func newISO(path string) (Decompressor, error) {
 }
 
 func (iso *isoDecompressor) close() {
-	// TODO: not implemented...
-}
-
-func (iso *isoDecompressor) Next() error {
+	// Reset the reader to ensure state is not left behind. TODO: Decide if
+	// this is needed/necessary.
 	if iso.reader != nil {
 		iso.reader = nil
 		iso.name = ""
 		iso.size = 0
 		iso.mod = time.Time{}
 	}
+}
+
+func (iso *isoDecompressor) Next() error {
+	iso.close()
 	for {
 		file, err := iso.isoReader.Next()
 		if err != nil {
