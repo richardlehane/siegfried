@@ -40,31 +40,32 @@ const maxMulti = 1024
 
 // flags
 var (
-	updateShort  = flag.Bool("u", false, "update or install the default signature file")
-	update       = flag.Bool("update", false, "update or install the default signature file")
-	versionShort = flag.Bool("v", false, "display version information")
-	version      = flag.Bool("version", false, "display version information")
-	logf         = flag.String("log", "error", "log errors, warnings, debug or slow output, knowns or unknowns to stderr or stdout e.g. -log error,warn,unknown,stdout")
-	nr           = flag.Bool("nr", false, "prevent automatic directory recursion")
-	yaml         = flag.Bool("yaml", true, "YAML output format")
-	csvo         = flag.Bool("csv", false, "CSV output format")
-	jsono        = flag.Bool("json", false, "JSON output format")
-	droido       = flag.Bool("droid", false, "DROID CSV output format")
-	sig          = flag.String("sig", config.SignatureBase(), "set the signature file")
-	home         = flag.String("home", config.Home(), "override the default home directory")
-	serve        = flag.String("serve", "", "start siegfried server e.g. -serve localhost:5138")
-	multi        = flag.Int("multi", 1, "set number of parallel file ID processes")
-	archive      = flag.Bool("z", false, fmt.Sprintf("scan archive formats: (%s)", config.ListAllArcTypes()))
-	hashf        = flag.String("hash", "", "calculate file checksum with hash algorithm; options "+checksum.HashChoices)
-	throttlef    = flag.Duration("throttle", 0, "set a time to wait between scanning files e.g. 50ms")
-	utcf         = flag.Bool("utc", false, "report file modified times in UTC, rather than local, TZ")
-	coe          = flag.Bool("coe", false, "continue on fatal errors during directory walks (this may result in directories being skipped)")
-	replay       = flag.Bool("replay", false, "replay one (or more) results files to change output or logging e.g. sf -replay -csv results.yaml")
-	list         = flag.Bool("f", false, "scan one (or more) lists of filenames e.g. sf -f myfiles.txt")
-	name         = flag.String("name", "", "provide a filename when scanning a stream e.g. sf -name myfile.txt -")
-	conff        = flag.String("conf", "", "set the configuration file")
-	setconff     = flag.Bool("setconf", false, "record flags used with this command in configuration file")
-	sourceinline = flag.Bool("sourceinline", false, "display provenance in-line (basis field) when it is available for an identifier, e.g. Wikidata")
+	updateShort    = flag.Bool("u", false, "update or install the default signature file")
+	update         = flag.Bool("update", false, "update or install the default signature file")
+	versionShort   = flag.Bool("v", false, "display version information")
+	version        = flag.Bool("version", false, "display version information")
+	logf           = flag.String("log", "error", "log errors, warnings, debug or slow output, knowns or unknowns to stderr or stdout e.g. -log error,warn,unknown,stdout")
+	nr             = flag.Bool("nr", false, "prevent automatic directory recursion")
+	yaml           = flag.Bool("yaml", true, "YAML output format")
+	csvo           = flag.Bool("csv", false, "CSV output format")
+	jsono          = flag.Bool("json", false, "JSON output format")
+	droido         = flag.Bool("droid", false, "DROID CSV output format")
+	sig            = flag.String("sig", config.SignatureBase(), "set the signature file")
+	home           = flag.String("home", config.Home(), "override the default home directory")
+	serve          = flag.String("serve", "", "start siegfried server e.g. -serve localhost:5138")
+	multi          = flag.Int("multi", 1, "set number of parallel file ID processes")
+	archive        = flag.Bool("z", false, fmt.Sprintf("scan archive formats: (%s)", config.ListAllArcTypes()))
+	selectArchives = flag.String("zs", config.ListAllArcTypes(), "select the archive types to decompress and identify the contents of")
+	hashf          = flag.String("hash", "", "calculate file checksum with hash algorithm; options "+checksum.HashChoices)
+	throttlef      = flag.Duration("throttle", 0, "set a time to wait between scanning files e.g. 50ms")
+	utcf           = flag.Bool("utc", false, "report file modified times in UTC, rather than local, TZ")
+	coe            = flag.Bool("coe", false, "continue on fatal errors during directory walks (this may result in directories being skipped)")
+	replay         = flag.Bool("replay", false, "replay one (or more) results files to change output or logging e.g. sf -replay -csv results.yaml")
+	list           = flag.Bool("f", false, "scan one (or more) lists of filenames e.g. sf -f myfiles.txt")
+	name           = flag.String("name", "", "provide a filename when scanning a stream e.g. sf -name myfile.txt -")
+	conff          = flag.String("conf", "", "set the configuration file")
+	setconff       = flag.Bool("setconf", false, "record flags used with this command in configuration file")
+	sourceinline   = flag.Bool("sourceinline", false, "display provenance in-line (basis field) when it is available for an identifier, e.g. Wikidata")
 )
 
 var (
@@ -371,6 +372,10 @@ func main() {
 			}
 		}
 		return
+	}
+	// handle -zs
+	if *selectArchives != "" {
+		config.SetArchiveFilterPermissive(*selectArchives)
 	}
 	// handle -fpr
 	if *fprflag {
