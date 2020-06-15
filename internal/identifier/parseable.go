@@ -15,6 +15,7 @@
 package identifier
 
 import (
+	"sort"
 	"strings"
 
 	"github.com/richardlehane/siegfried/internal/bytematcher/frames"
@@ -536,6 +537,43 @@ type noPriority struct{ Parseable }
 
 func (np noPriority) Priorities() priority.Map { return nil }
 
+// sorted sorts signatures by their index so that runs of signatures
+// e.g. fmt/1, fmt/1, fmt/2, fmt/1 can be properly placed.
+type sorted struct{ Parseable }
+
+func (s sorted) Signatures() ([]frames.Signature, []string, error) {
+	sigs, ids, err := s.Parseable.Signatures()
+	if err != nil {
+		return sigs, ids, err
+	}
+	retSigs := make([]frames.Signature, len(sigs))
+	retIds := make([]string, len(ids))
+	copy(retIds, ids)
+	sort.Strings(retIds)
+	var last string
+	var nth int
+	for i, this := range retIds {
+		if this == last {
+			nth++
+		} else {
+			nth = 0
+			last = this
+		}
+		var cursor int
+		for j, str := range ids {
+			if this != str {
+				continue
+			}
+			if cursor == nth {
+				retSigs[i] = sigs[j]
+				break
+			}
+			cursor++
+		}
+	}
+	return retSigs, retIds, nil
+}
+
 func ApplyConfig(p Parseable) Parseable {
 	if config.NoName() {
 		p = noName{p}
@@ -574,5 +612,7 @@ func ApplyConfig(p Parseable) Parseable {
 		}
 		p = Filter(ids, p)
 	}
+	// Sort Parseable so runs of signatures are contiguous.
+	p = sorted{p}
 	return p
 }
