@@ -1,10 +1,12 @@
 package wikidata
 
 import (
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
 
@@ -211,6 +213,28 @@ func openWikidata() {
 					// as well and will be added back in for production
 					// release.
 					mappings.WikidataMapping[k] = mappings.DeleteSignatures(&wd)
+				} else {
+					// Optionally create Skeleton files from the data...
+					roySkeletons := false
+					if roySkeletons {
+						hexRepr, _ := hex.DecodeString(wd.Signatures[signature].Signature)
+						extension := wd.Extension[0]
+						fname := ""
+						if extension == "" {
+							fname = fmt.Sprintf("%s", wd.ID)
+						} else {
+							fname = fmt.Sprintf("%s.%s", wd.ID, extension)
+						}
+						fname = filepath.Join("wikidata-skeleton-suite", fname)
+						f, err := os.Create(fname)
+						if err == nil {
+							defer f.Close()
+							f.Write([]byte(hexRepr))
+						} else {
+							fmt.Println("ERROR OPENING FILE", err)
+						}
+
+					}
 				}
 			}
 		}
