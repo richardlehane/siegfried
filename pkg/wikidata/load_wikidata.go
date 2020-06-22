@@ -162,21 +162,21 @@ func countSignatures() int {
 
 func openWikidata() {
 	path := config.WikidataDefinitionsPath()
-	fmt.Fprintf(os.Stderr, "Roy: Opening Wikidata report: %s\n", path)
+	fmt.Fprintf(os.Stderr, "Roy (Wikidata): Opening Wikidata report: %s\n", path)
 
 	jsonFile, err := ioutil.ReadFile(path)
 	if err != nil {
-		fmt.Errorf("Roy: Cannot open Wikidata file: %s", err)
+		fmt.Errorf("Roy (Wikidata): Cannot open Wikidata file: %s", err)
 	}
 
 	var sparqlReport spargo.SPARQLResult
 	err = json.Unmarshal(jsonFile, &sparqlReport)
 	if err != nil {
-		fmt.Errorf("Roy: Cannot open Wikidata file: %s", err)
+		fmt.Errorf("Roy (Wikidata): Cannot open Wikidata file: %s", err)
 	}
 
 	results := sparqlReport.Results.Bindings
-	fmt.Fprintf(os.Stderr, "Roy: Original SPARQL results count: %d\n", len(results))
+	fmt.Fprintf(os.Stderr, "Roy (Wikidata): Original SPARQL results count: %d\n", len(results))
 	for _, wdRecord := range results {
 		id := getID(wdRecord[formatField].Value)
 		if mappings.WikidataMapping[id].ID == "" {
@@ -197,33 +197,29 @@ func openWikidata() {
 	//
 	for k, wd := range mappings.WikidataMapping {
 		if len(wd.Signatures) > 1 {
-			fmt.Fprintf(
-				os.Stderr,
-				"Roy: Removing binary signatures for: %s (> 1 (%d))\n",
-				wd.ID, len(wd.Signatures),
-			)
+			// WIKIDATA TODO: We remove additional signatures we're not yet
+			// capable of handling with the Wikidata work. We will add this
+			// back in for production release.
 			mappings.WikidataMapping[k] = mappings.DeleteSignatures(&wd)
 		}
 		if len(wd.Signatures) > 0 {
 			for signature := range wd.Signatures {
 				_, err := isHex(wd.Signatures[signature].Signature)
 				if err != nil {
-					fmt.Fprintf(
-						os.Stderr,
-						"Roy: Removing binary signatures for: %s (invalid hex: %s) (%s)\n",
-						wd.ID, wd.Signatures[signature].Signature,
-						err,
-					)
+					// WIKIDATA TODO: Any other signatures which are not
+					// well-formed will be removed from the collection for now
+					// as well and will be added back in for production
+					// release.
 					mappings.WikidataMapping[k] = mappings.DeleteSignatures(&wd)
 				}
 			}
 		}
 	}
 
-	fmt.Fprintf(os.Stderr, "Roy: Condensed SPARQL results: %d\n", len(mappings.WikidataMapping))
-	fmt.Fprintf(os.Stderr, "Roy: Number of anticipated signatures before: %d\n", before)
-	fmt.Fprintf(os.Stderr, "Roy: Number of anticipated signatures after: %d\n", countSignatures())
-	fmt.Fprintf(os.Stderr, "Roy: Report generation complete...\n")
+	fmt.Fprintf(os.Stderr, "Roy (Wikidata): Condensed SPARQL results: %d\n", len(mappings.WikidataMapping))
+	fmt.Fprintf(os.Stderr, "Roy (Wikidata): Number of anticipated signatures before: %d\n", before)
+	fmt.Fprintf(os.Stderr, "Roy (Wikidata): Number of anticipated signatures after: %d\n", countSignatures())
+	fmt.Fprintf(os.Stderr, "Roy (Wikidata): Report generation complete...\n")
 
 	createReportMapping()
 }

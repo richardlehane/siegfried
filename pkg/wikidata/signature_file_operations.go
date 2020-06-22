@@ -3,6 +3,7 @@ package wikidata
 import (
 	"fmt"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/richardlehane/siegfried/pkg/config"
@@ -90,12 +91,19 @@ func infos(formatInfoMap map[string]identifier.FormatInfo) map[string]formatInfo
 
 // Serialize formatInfo as a string for debugging.
 func (f formatInfo) String() string {
+	// WIKIDATA TODO: This information is used by Parseable's inspect function
+	// as well. We should play around with the formatting a little so it
+	// satisfies each use.
+	sources := ""
+	if len(f.sources) > 0 {
+		sources = strings.Join(f.sources, " ")
+	}
 	return fmt.Sprintf(
-		"Format info: Name: '%s'; MIMEType: '%s'; PUID: '%s'; Sources: %s ",
+		"---\nFormat info: Name: '%s'\nMIMEType: '%s'\nPUID: '%s'\nSources: '%s'\n",
 		f.name,
 		f.mime,
 		f.puid,
-		f.sources,
+		sources,
 	)
 }
 
@@ -106,7 +114,12 @@ func (f formatInfo) String() string {
 // that you'd like to talk about in an identifier.
 //
 func (wdd wikidataFDDs) Infos() map[string]identifier.FormatInfo {
-	fmt.Fprintf(os.Stderr, "WD: in infos... %d %t\n", len(wdd.formats), config.NoPRONOM())
+	fmt.Fprintf(
+		os.Stderr,
+		"Roy (Wikidata): In Infos()... length formats: '%d' no-pronom: '%t'\n",
+		len(wdd.formats),
+		config.NoPRONOM(),
+	)
 	formatInfoMap := make(map[string]identifier.FormatInfo, len(wdd.formats))
 	for _, value := range wdd.formats {
 		if len(value.PRONOM) > 1 {

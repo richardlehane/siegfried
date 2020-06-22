@@ -45,9 +45,15 @@ func newWikidata() (identifier.Parseable, []string, error) {
 	openWikidata()
 	// If we are using PRONOM signatures we start to load those here.
 	if config.WDNoPRONOM() {
-		fmt.Fprintf(os.Stderr, "WD: Not building identifiers set from PRONOM\n")
+		fmt.Fprintf(
+			os.Stderr,
+			"Roy (Wikidata): Not building identifiers set from PRONOM\n",
+		)
 	} else {
-		fmt.Fprintf(os.Stderr, "WD: Building identifiers set from PRONOM\n")
+		fmt.Fprintf(
+			os.Stderr,
+			"Roy (Wikidata): Building identifiers set from PRONOM\n",
+		)
 		wikiParseable, err = pronom.NewPronom()
 		if err != nil {
 			return nil, []string{}, err

@@ -16,7 +16,10 @@ const wikidataNotProcessed = "57494B49444154413A204E6F742050726F6365737365642062
 
 // Globs are filename signatures. In this instance, File format extensions.
 func (wdd wikidataFDDs) Globs() ([]string, []string) {
-	fmt.Fprintf(os.Stderr, "WD: Adding Glob signatures to identifier....\n")
+	fmt.Fprintf(
+		os.Stderr,
+		"Roy (Wikidata): Adding Glob signatures to identifier....\n",
+	)
 	globs, ids := make([]string, 0, len(wdd.formats)), make([]string, 0, len(wdd.formats))
 	for _, v := range wdd.formats {
 		for _, w := range v.Extension {
@@ -43,35 +46,6 @@ func collectPUIDs(puidsIDs map[string][]string, v mappings.Wikidata) map[string]
 	return puidsIDs
 }
 
-func SignaturesPRONOMOnly(wdd wikidataFDDs) ([]frames.Signature, []string, error) {
-	// WIKIDATA TODO Siegfried uses an errors slice to return cumulative errors
-	// here... e.g. var errs []error, we can do the same...
-
-	var errs []error
-
-	// WIKIDATA TODO do we need a Parseable object to take along with us while
-	// building a signature file.
-
-	fmt.Fprintf(os.Stderr, "WD: Adding Byte signatures to identifier...\n")
-
-	sigs, ids := make([]frames.Signature, 0, len(wdd.formats)), make([]string, 0, len(wdd.formats))
-	for _, wd := range wdd.formats {
-		if len(wd.Signatures) > 0 {
-			sig := formatSig(wd.Signatures[0].Signature)
-			fmt.Fprintf(os.Stderr, "WD byte signature: %s %s\n", sig, wd.ID)
-			frames, err := magics(sig)
-			if err != nil {
-				errs = append(errs, err)
-			}
-			for _, fr := range frames {
-				sigs = append(sigs, fr)
-				ids = append(ids, wd.ID)
-			}
-		}
-	}
-	return sigs, ids, nil
-}
-
 func SignaturesPRONOMandWikidata(wdd wikidataFDDs) ([]frames.Signature, []string, error) {
 
 	// WIKIDATA TODO Siegfried uses an errors slice to return cumulative errors
@@ -87,7 +61,7 @@ func SignaturesPRONOMandWikidata(wdd wikidataFDDs) ([]frames.Signature, []string
 	// WIKIDATA TODO do we need a Parseable object to take along with us while
 	// building a signature file.
 
-	fmt.Fprintf(os.Stderr, "WD: Adding Byte signatures to identifier...\n")
+	fmt.Fprintf(os.Stderr, "Roy (Wikidata): Adding Byte signatures to identifier...\n")
 
 	sigs, ids := make([]frames.Signature, 0, len(wdd.formats)), make([]string, 0, len(wdd.formats))
 	for _, wd := range wdd.formats {
@@ -98,7 +72,6 @@ func SignaturesPRONOMandWikidata(wdd wikidataFDDs) ([]frames.Signature, []string
 
 		if len(wd.Signatures) > 0 {
 			sig := formatSig(wd.Signatures[0].Signature)
-			fmt.Fprintf(os.Stderr, "WD byte signature: %s %s\n", sig, wd.ID)
 			frames, err := magics(sig)
 			if err != nil {
 				errs = append(errs, err)
@@ -146,44 +119,6 @@ func formatSig(sig string) []string {
 	return formatted
 }
 
-func SignaturesNativeWikidata(wdd wikidataFDDs) ([]frames.Signature, []string, error) {
-
-	// WIKIDATA TODO Siegfried uses an errors slice to return cumulative errors
-	// here... e.g. var errs []error, we can do the same...
-
-	var errs []error
-
-	// WIKIDATA TODO do we need a Parseable object to take along with us while
-	// building a signature file.
-
-	fmt.Fprintf(os.Stderr, "WD: Adding Wikidata Byte signatures to identifier...\n")
-
-	// WIKIDATA TODO: We start piecing signatures together here...
-
-	sigs := make([]frames.Signature, 0, len(wdd.formats))
-	ids := make([]string, 0, len(wdd.formats))
-	// prov := make([]string, 0, len(wdd.formats))
-
-	for _, wd := range wdd.formats {
-		if len(wd.Signatures) > 0 {
-			// WIKIDATA TODO: Only doing index[0] here, so this needs to be
-			// fixed.
-			sig := formatSig(wd.Signatures[0].Signature)
-			// fmt.Fprintf(os.Stderr, "WD byte signature: %s %s %s\n", sig, wd.ID, wd.Signatures[0].Provenance)
-			frames, err := magics(sig)
-			if err != nil {
-				errs = append(errs, err)
-			}
-			for _, fr := range frames {
-				sigs = append(sigs, fr)
-				ids = append(ids, wd.ID)
-				// prov = append(prov, wd.Signatures[0].Provenance)
-			}
-		}
-	}
-	return sigs, ids, nil
-}
-
 // WIKIDATA TODO WIKIDATA containers are currently disabled...
 
 // Zips adds ZIP based container signatures to the identifier.
@@ -201,7 +136,10 @@ func (wdd wikidataFDDs) MSCFBs() ([][]string, [][]frames.Signature, []string, er
 // This mimics that of the Library of Congress identifier. Wikidata container
 // modelling is in-progress.
 func (wdd wikidataFDDs) containers(typ string) ([][]string, [][]frames.Signature, []string, error) {
-	fmt.Fprintf(os.Stderr, "WD: Adding container signatures to identifier...\n")
+	fmt.Fprintf(
+		os.Stderr,
+		"Roy (Wikidata): Adding container signatures to identifier...\n",
+	)
 	if _, ok := wdd.parseable.(identifier.Blank); ok {
 		return nil, nil, nil, nil
 	}

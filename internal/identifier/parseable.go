@@ -128,7 +128,9 @@ func inspect(p Parseable, ids ...string) (string, error) {
 		lines := make([]string, 0, 10)
 		info, ok := p.Infos()[id]
 		if ok {
-			lines = append(lines, strings.ToUpper(info.String()+" ("+id+")"))
+			// WIKIDATA TODO: ADDED ID to INSPECT here. What does that mean
+			// for the other identifiers.
+			lines = append(lines, strings.ToUpper(info.String()+"ID: ("+id+")"))
 			if has(gids, id) {
 				lines = append(lines, "globs: "+strings.Join(get(gids, gs, id), ", "))
 			}

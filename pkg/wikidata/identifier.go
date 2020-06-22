@@ -45,11 +45,11 @@ var tmpPuids []string
 //
 func New(opts ...config.Option) (core.Identifier, error) {
 
-	fmt.Println("WD Roy: congratulations: doing something with the Wikidata identifier package!")
+	fmt.Println("Roy (Wikidata): congratulations: doing something with the Wikidata identifier package!")
 
 	wikidata, puids, err := newWikidata()
 	if err != nil {
-		return nil, fmt.Errorf("WD Roy: error in New Wikidata: %s", err)
+		return nil, fmt.Errorf("Roy (Wikidata): error in New Wikidata: %s", err)
 	}
 
 	// WIKIDATA TODO: Refer to purpose of this above.
