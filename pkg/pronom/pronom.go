@@ -129,7 +129,7 @@ func (p *pronom) setParseables() error {
 func newDroid(path string) (*droid, error) {
 	d := &mappings.Droid{}
 	if err := openXML(path, d); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("%s: %s", err, path)
 	}
 	return &droid{d, identifier.Blank{}}, nil
 }

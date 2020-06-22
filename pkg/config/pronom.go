@@ -69,7 +69,7 @@ func Droid() string {
 	if pronom.droid == "" {
 		droid, err := latest("DROID_SignatureFile_V", ".xml")
 		if err != nil {
-			return ""
+			return fmt.Sprintf("%s", err)
 		}
 		return filepath.Join(siegfried.home, droid)
 	}
