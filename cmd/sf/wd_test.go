@@ -2,10 +2,7 @@ package main
 
 import (
 	"flag"
-	"os"
 	"path/filepath"
-	"strings"
-	"testing"
 
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/pkg/config"
