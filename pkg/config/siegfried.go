@@ -47,7 +47,9 @@ var siegfried = struct {
 	checkpoint int64
 	userAgent  string
 }{
-	version:         [3]int{1, 8, 0},
+	// WIKIDATA TODO: Revert this back to an integer slice. This value is just
+	// for testing.
+	version:         [3]int{1, 9, -1},
 	signature:       "default.sig",
 	conf:            "sf.conf",
 	magic:           []byte{'s', 'f', 0x00, 0xFF},
