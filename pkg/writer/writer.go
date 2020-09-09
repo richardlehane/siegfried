@@ -377,7 +377,7 @@ func (d *droidWriter) File(p string, sz int64, mod string, checksum []byte, err 
 	}
 	d.rec[13] = strconv.Itoa(len(ids))
 	for _, id := range ids {
-		if id.Archive() > 0 {
+		if id.Archive() > config.None {
 			d.rec[8] = "Container"
 			d.parents[d.rec[3]] = parent{d.id, d.rec[2], id.Archive().String()}
 		} else {

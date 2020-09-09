@@ -44,7 +44,7 @@ func SetDroid() {
 func IsArc(ids []core.Identification) config.Archive {
 	var arc config.Archive
 	for _, id := range ids {
-		if id.Archive() > 0 {
+		if id.Archive() > config.None {
 			return id.Archive()
 		}
 	}

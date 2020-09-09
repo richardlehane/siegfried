@@ -28,6 +28,13 @@ import (
 
 // Wikidata configuration fields. NB. In alphabetical order.
 var wikidata = struct {
+	// archive formats that Siegfried should be able to decompress via
+	// the Wikidata identifier.
+	arc    string
+	arc1_1 string
+	gzip   string
+	tar    string
+	warc   string
 	// debug provides a way for users to output errors and warnings
 	// associated with Wikidata records.
 	debug bool
@@ -55,6 +62,11 @@ var wikidata = struct {
 	// $SFHOME.
 	wikidatahome string
 }{
+	arc:          "Q7978505",
+	arc1_1:       "Q27824065",
+	gzip:         "Q27824060",
+	tar:          "Q283579",
+	warc:         "Q10287816",
 	definitions:  "wikidata-definitions-1.0.0",
 	endpoint:     "https://query.wikidata.org/sparql",
 	filemode:     0644,
@@ -193,6 +205,15 @@ func GetWikidataSourceField() bool {
 // identifier output.
 func SetWikidataNoPRONOM() func() private {
 	wikidata.nopronom = true
+	return func() private {
+		return private{}
+	}
+}
+
+// SetWikidataPRONOM will turn native PRONOM patterns on in the final
+// identifier output.
+func SetWikidataPRONOM() func() private {
+	wikidata.nopronom = false
 	return func() private {
 		return private{}
 	}
