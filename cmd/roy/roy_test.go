@@ -70,7 +70,7 @@ func TestFreedesktop(t *testing.T) {
 func TestWikidata(t *testing.T) {
 	s := siegfried.New()
 	config.SetHome(*testhome)
-	config.SetWikidataDefinitions("wikidata-test-definitions-small")
+	config.SetWikidataDefinitions("wikidata-test-definitions")
 	m, err := wd.New(config.SetWikidataNamespace())
 	if err != nil {
 		t.Fatal(err)
