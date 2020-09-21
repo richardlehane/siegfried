@@ -128,7 +128,11 @@ func inspect(p Parseable, ids ...string) (string, error) {
 		lines := make([]string, 0, 10)
 		info, ok := p.Infos()[id]
 		if ok {
-			lines = append(lines, strings.ToUpper(info.String()+" ("+id+")"))
+			if config.GetWikidataNamespace() != "" {
+				lines = append(lines, strings.ToUpper(info.String()+"QID: ("+id+")"))
+			} else {
+				lines = append(lines, strings.ToUpper(info.String()))
+			}
 			if has(gids, id) {
 				lines = append(lines, "globs: "+strings.Join(get(gids, gs, id), ", "))
 			}

@@ -32,6 +32,9 @@ import (
 	"github.com/richardlehane/siegfried/pkg/loc"
 	"github.com/richardlehane/siegfried/pkg/mimeinfo"
 	"github.com/richardlehane/siegfried/pkg/pronom"
+
+	wd "github.com/richardlehane/siegfried/pkg/wikidata"
+
 	"github.com/richardlehane/siegfried/pkg/reader"
 	"github.com/richardlehane/siegfried/pkg/sets"
 )
@@ -39,7 +42,7 @@ import (
 var usage = `
 Usage:
    roy build -help
-   roy add -help 
+   roy add -help
    roy harvest -help
    roy inspect -help
    roy sets -help
@@ -50,7 +53,7 @@ var inspectUsage = `
 Usage of inspect:
    roy inspect
       Inspect the default signature file.
-   roy inspect SIGNATURE 
+   roy inspect SIGNATURE
       Inspect a named signature file e.g. roy inspect archivematica.sig
    roy inspect MATCHER
       Inspect  contents of a matcher e.g. roy inspect bytematcher.
@@ -58,16 +61,16 @@ Usage of inspect:
       Current matchers are bytematcher (or bm), containermatcher (cm),
       xmlmatcher (xm), riffmatcher (rm), namematcher (nm), textmatcher (tm).
    roy inspect INTEGER
-      Identify the signatures related to the numerical hits reported by the 
+      Identify the signatures related to the numerical hits reported by the
       sf debug and slow flags (sf -log d,s). E.g. roy inspect 100
       To inspect hits within containermatchers, give the index for the
-      container type with the -ct flag, and the name of the container 
+      container type with the -ct flag, and the name of the container
       sub-folder with the -cn flag.
       The container types are 0 for XML and 1 for MSCFB.
       E.g. roy inspect -ct 0 -cn [Content_Types].xml 0
    roy inspect FMT
       Inspect a file format signature e.g. roy inspect fmt/40
-      MIME-info and LOC FDD file format signatures can be inspected too. 
+      MIME-info and LOC FDD file format signatures can be inspected too.
       Also accepts comma separated lists of formats or format sets.
       E.g. roy inspect fmt/40,fmt/41 or roy inspect @pdfa
    roy inspect priorities
@@ -87,15 +90,15 @@ Usage of inspect:
       Short alias is roy inspect ip.
       View graph with a command e.g. roy inspect ip | dot -Tpng -o implicit.png
    roy inspect releases
-      Summary view of a PRONOM release-notes.xml file (which must be in your 
-      siegfried home directory). 
+      Summary view of a PRONOM release-notes.xml file (which must be in your
+      siegfried home directory).
 
 Additional flags:
    The roy inspect FMT and roy inspect priorities sub-commands both accept
    the following flags. These flags mirror the equivalent flags for the
    roy build subcommand and you can find more detail with roy build -help.
    -extend, -extendc
-      Add additional extension and container extension signature files. 
+      Add additional extension and container extension signature files.
       Useful for inspecting test signatures during development.
       E.g. roy inspect -extend my-groovy-sig.xml dev/1
    -limit, -exclude
@@ -115,61 +118,67 @@ Additional flags:
 
 var (
 	// BUILD, ADD flag sets
-	build       = flag.NewFlagSet("build | add", flag.ExitOnError)
-	home        = build.String("home", config.Home(), "override the default home directory")
-	droid       = build.String("droid", config.Droid(), "set name/path for DROID signature file")
-	mi          = build.String("mi", "", "set name/path for MIMEInfo signature file")
-	fdd         = build.String("fdd", "", "set name/path for LOC FDD signature file")
-	locfdd      = build.Bool("loc", false, "build a LOC FDD signature file")
-	nopronom    = build.Bool("nopronom", false, "don't include PRONOM sigs with LOC signature file")
-	container   = build.String("container", config.Container(), "set name/path for Droid Container signature file")
-	name        = build.String("name", "", "set identifier name")
-	details     = build.String("details", config.Details(), "set identifier details")
-	extend      = build.String("extend", "", "comma separated list of additional signatures")
-	extendc     = build.String("extendc", "", "comma separated list of additional container signatures")
-	include     = build.String("limit", "", "comma separated list of PRONOM signatures to include")
-	exclude     = build.String("exclude", "", "comma separated list of PRONOM signatures to exclude")
-	bof         = build.Int("bof", 0, "define a maximum BOF offset")
-	eof         = build.Int("eof", 0, "define a maximum EOF offset")
-	noeof       = build.Bool("noeof", false, "ignore EOF segments in signatures")
-	multi       = build.String("multi", "", "control how identifiers treat multiple results")
-	nobyte      = build.Bool("nobyte", false, "skip byte signatures")
-	nocontainer = build.Bool("nocontainer", false, "skip container signatures")
-	notext      = build.Bool("notext", false, "skip text matcher")
-	noname      = build.Bool("noname", false, "skip filename matcher")
-	nomime      = build.Bool("nomime", false, "skip MIME matcher")
-	noxml       = build.Bool("noxml", false, "skip XML matcher")
-	noriff      = build.Bool("noriff", false, "skip RIFF matcher")
-	noreports   = build.Bool("noreports", false, "build directly from DROID file rather than PRONOM reports")
-	doubleup    = build.Bool("doubleup", false, "include byte signatures for formats that also have container signatures")
-	rng         = build.Int("range", config.Range(), "define a maximum range for segmentation")
-	distance    = build.Int("distance", config.Distance(), "define a maximum distance for segmentation")
-	choices     = build.Int("choices", config.Choices(), "define a maximum number of choices for segmentation")
-	cost        = build.Int("cost", config.Cost(), "define a maximum tolerable cost in the worst case for segmentation (overrides distance/range/choices)")
-	repetition  = build.Int("repetition", config.Repetition(), "define a maximum tolerable repetition in a segment, used in combination with cost to determine segmentation")
+	build         = flag.NewFlagSet("build | add", flag.ExitOnError)
+	home          = build.String("home", config.Home(), "override the default home directory")
+	droid         = build.String("droid", config.Droid(), "set name/path for DROID signature file")
+	mi            = build.String("mi", "", "set name/path for MIMEInfo signature file")
+	fdd           = build.String("fdd", "", "set name/path for LOC FDD signature file")
+	locfdd        = build.Bool("loc", false, "build a LOC FDD signature file")
+	wikidata      = build.Bool("wikidata", false, "build a Wikidata identifier")
+	wikidataDebug = build.Bool("wikidatadebug", false, "build a Wikidata identifier in debug mode")
+	nopronom      = build.Bool("nopronom", false, "don't include PRONOM sigs with LOC or Wikidata signature file")
+	container     = build.String("container", config.Container(), "set name/path for Droid Container signature file")
+	name          = build.String("name", "", "set identifier name")
+	details       = build.String("details", config.Details(), "set identifier details")
+	extend        = build.String("extend", "", "comma separated list of additional signatures")
+	extendc       = build.String("extendc", "", "comma separated list of additional container signatures")
+	include       = build.String("limit", "", "comma separated list of PRONOM signatures to include")
+	exclude       = build.String("exclude", "", "comma separated list of PRONOM signatures to exclude")
+	bof           = build.Int("bof", 0, "define a maximum BOF offset")
+	eof           = build.Int("eof", 0, "define a maximum EOF offset")
+	noeof         = build.Bool("noeof", false, "ignore EOF segments in signatures")
+	multi         = build.String("multi", "", "control how identifiers treat multiple results")
+	nobyte        = build.Bool("nobyte", false, "skip byte signatures")
+	nocontainer   = build.Bool("nocontainer", false, "skip container signatures")
+	notext        = build.Bool("notext", false, "skip text matcher")
+	noname        = build.Bool("noname", false, "skip filename matcher")
+	nomime        = build.Bool("nomime", false, "skip MIME matcher")
+	noxml         = build.Bool("noxml", false, "skip XML matcher")
+	noriff        = build.Bool("noriff", false, "skip RIFF matcher")
+	noreports     = build.Bool("noreports", false, "build directly from DROID file rather than PRONOM reports")
+	doubleup      = build.Bool("doubleup", false, "include byte signatures for formats that also have container signatures")
+	rng           = build.Int("range", config.Range(), "define a maximum range for segmentation")
+	distance      = build.Int("distance", config.Distance(), "define a maximum distance for segmentation")
+	choices       = build.Int("choices", config.Choices(), "define a maximum number of choices for segmentation")
+	cost          = build.Int("cost", config.Cost(), "define a maximum tolerable cost in the worst case for segmentation (overrides distance/range/choices)")
+	repetition    = build.Int("repetition", config.Repetition(), "define a maximum tolerable repetition in a segment, used in combination with cost to determine segmentation")
 
 	// HARVEST
-	harvest           = flag.NewFlagSet("harvest", flag.ExitOnError)
-	harvestHome       = harvest.String("home", config.Home(), "override the default home directory")
-	harvestDroid      = harvest.String("droid", config.Droid(), "set name/path for DROID signature file")
-	harvestChanges    = harvest.Bool("changes", false, "harvest the latest PRONOM release-notes.xml file")
-	_, htimeout, _, _ = config.HarvestOptions()
-	timeout           = harvest.Duration("timeout", htimeout, "set duration before timing-out harvesting requests e.g. 120s")
-	throttlef         = harvest.Duration("throttle", 0, "set a time to wait HTTP requests e.g. 50ms")
+	harvest                 = flag.NewFlagSet("harvest", flag.ExitOnError)
+	harvestHome             = harvest.String("home", config.Home(), "override the default home directory")
+	harvestDroid            = harvest.String("droid", config.Droid(), "set name/path for DROID signature file")
+	harvestChanges          = harvest.Bool("changes", false, "harvest the latest PRONOM release-notes.xml file")
+	_, htimeout, _, _       = config.HarvestOptions()
+	timeout                 = harvest.Duration("timeout", htimeout, "set duration before timing-out harvesting requests e.g. 120s")
+	throttlef               = harvest.Duration("throttle", 0, "set a time to wait HTTP requests e.g. 50ms")
+	harvestWikidataSig      = harvest.Bool("wikidata", false, "harvest a static Wikidata report")
+	harvestWikidataLang     = harvest.String("lang", config.WikidataLang(), "two-letter language-code to download Wikidata strings, e.g. \"de\"")
+	harvestWikidataEndpoint = harvest.String("wikidataendpoint", config.WikidataEndpoint(), "the endpoint to use to harvest Wikidata definitions from")
 
 	// INSPECT (roy inspect | roy inspect fmt/121 | roy inspect usr/local/mysig.sig | roy inspect 10)
-	inspect        = flag.NewFlagSet("inspect", flag.ExitOnError)
-	inspectHome    = inspect.String("home", config.Home(), "override the default home directory")
-	inspectReports = inspect.Bool("reports", false, "build signatures from PRONOM reports (rather than DROID xml)")
-	inspectExtend  = inspect.String("extend", "", "comma separated list of additional signatures")
-	inspectExtendc = inspect.String("extendc", "", "comma separated list of additional container signatures")
-	inspectInclude = inspect.String("limit", "", "when inspecting priorities, comma separated list of PRONOM signatures to include")
-	inspectExclude = inspect.String("exclude", "", "when inspecting priorities, comma separated list of PRONOM signatures to exclude")
-	inspectMI      = inspect.String("mi", "", "set name/path for MIMEInfo signature file to inspect")
-	inspectFDD     = inspect.String("fdd", "", "set name/path for LOC FDD signature file to inspect")
-	inspectLOC     = inspect.Bool("loc", false, "inspect a LOC FDD signature file")
-	inspectCType   = inspect.Int("ct", 0, "provide container type to inspect container hits")
-	inspectCName   = inspect.String("cn", "", "provide container name to inspect container hits")
+	inspect         = flag.NewFlagSet("inspect", flag.ExitOnError)
+	inspectHome     = inspect.String("home", config.Home(), "override the default home directory")
+	inspectReports  = inspect.Bool("reports", false, "build signatures from PRONOM reports (rather than DROID xml)")
+	inspectExtend   = inspect.String("extend", "", "comma separated list of additional signatures")
+	inspectExtendc  = inspect.String("extendc", "", "comma separated list of additional container signatures")
+	inspectInclude  = inspect.String("limit", "", "when inspecting priorities, comma separated list of PRONOM signatures to include")
+	inspectExclude  = inspect.String("exclude", "", "when inspecting priorities, comma separated list of PRONOM signatures to exclude")
+	inspectMI       = inspect.String("mi", "", "set name/path for MIMEInfo signature file to inspect")
+	inspectFDD      = inspect.String("fdd", "", "set name/path for LOC FDD signature file to inspect")
+	inspectLOC      = inspect.Bool("loc", false, "inspect a LOC FDD signature file")
+	inspectCType    = inspect.Int("ct", 0, "provide container type to inspect container hits")
+	inspectCName    = inspect.String("cn", "", "provide container name to inspect container hits")
+	inspectWikidata = inspect.Bool("wikidata", false, "inspect a Wikidata signature file")
 
 	// SETS
 	setsf       = flag.NewFlagSet("sets", flag.ExitOnError)
@@ -188,13 +197,13 @@ func savereps() error {
 	if err != nil {
 		err = os.Mkdir(config.Reports(), os.ModePerm)
 		if err != nil {
-			return fmt.Errorf("roy: error making reports directory")
+			return fmt.Errorf("roy: error making reports directory %s", err)
 		}
 	}
 	file.Close()
 	errs := pronom.Harvest()
 	if len(errs) > 0 {
-		return fmt.Errorf("roy: errors saving reports to disk")
+		return fmt.Errorf("roy: errors saving reports to disk %s", errs)
 	}
 	return nil
 }
@@ -206,15 +215,21 @@ func makegob(s *siegfried.Siegfried, opts []config.Option) error {
 		id, err = mimeinfo.New(opts...)
 	} else if *locfdd || *fdd != "" {
 		id, err = loc.New(opts...)
+	} else if *wikidata || *wikidataDebug {
+		id, err = wd.New(opts...)
 	} else {
 		id, err = pronom.New(opts...)
 	}
 	if err != nil {
 		return err
 	}
-	err = s.Add(id)
-	if err != nil {
-		return err
+	if id != nil {
+		err = s.Add(id)
+		if err != nil {
+			return err
+		}
+	} else {
+		log.Println("Identifier returned nil, not adding to a Siegfried")
 	}
 	return s.Save(config.Signature())
 }
@@ -245,6 +260,8 @@ func inspectFmts(fmts []string) error {
 			opts = append(opts, config.SetLOC(""))
 		}
 		id, err = loc.New(opts...)
+	} else if *inspectWikidata == true {
+		id, err = wd.New(opts...)
 	} else {
 		if !*inspectReports {
 			opts = append(opts, config.SetNoReports()) // speed up by building from droid xml
@@ -324,8 +341,15 @@ func getOptions() []config.Option {
 	if *locfdd {
 		opts = append(opts, config.SetLOC(""))
 	}
+	if *wikidata {
+		opts = append(opts, config.SetWikidataNamespace())
+	}
+	if *wikidataDebug {
+		opts = append(opts, config.SetWikidataDebug())
+	}
 	if *nopronom {
 		opts = append(opts, config.SetNoPRONOM())
+		opts = append(opts, config.SetWikidataNoPRONOM())
 	}
 	if *name != "" {
 		opts = append(opts, config.SetName(*name))
@@ -339,8 +363,8 @@ func getOptions() []config.Option {
 	if *extendc != "" {
 		if *extend == "" {
 			fmt.Println(
-				`roy: warning! Unless the container extension only extends formats defined in 
-the DROID signature file you should also include a regular signature extension 
+				`roy: warning! Unless the container extension only extends formats defined in
+the DROID signature file you should also include a regular signature extension
 (-extend) that includes a FileFormatCollection element describing the new formats.`)
 		}
 		opts = append(opts, config.SetExtendC(sets.Expand(*extendc)))
@@ -415,6 +439,9 @@ the DROID signature file you should also include a regular signature extension
 	if *inspectLOC {
 		opts = append(opts, config.SetLOC(""))
 	}
+	if *inspectWikidata {
+		opts = append(opts, config.SetWikidataNamespace())
+	}
 	if *inspectInclude != "" {
 		opts = append(opts, config.SetLimit(sets.Expand(*inspectInclude)))
 	}
@@ -427,8 +454,8 @@ the DROID signature file you should also include a regular signature extension
 	if *inspectExtendc != "" {
 		if *inspectExtend == "" {
 			fmt.Println(
-				`roy: warning! Unless the container extension only extends formats defined in 
-the DROID signature file you should also include a regular signature extension 
+				`roy: warning! Unless the container extension only extends formats defined in
+the DROID signature file you should also include a regular signature extension
 (-extend) that includes a FileFormatCollection element describing the new formats.`)
 		}
 		opts = append(opts, config.SetExtendC(sets.Expand(*inspectExtendc)))
@@ -454,6 +481,24 @@ func setHarvestOptions() {
 	}
 	if *throttlef > 0 {
 		config.SetHarvestThrottle(*throttlef)
+	}
+	if *harvestWikidataLang != "" {
+		config.SetWikidataLang(*harvestWikidataLang)
+	}
+	if *harvestWikidataEndpoint != config.WikidataEndpoint() {
+		log.Printf(
+			"Roy (Wikidata): Setting Wikidata endpoint to '%s'",
+			*harvestWikidataEndpoint,
+		)
+		log.Println(
+			"Roy (Wikidata); Ensure that the URL exists and is a compatible Wikidata SPARQL endpoint",
+		)
+		_, err := config.SetWikidataEndpoint(*harvestWikidataEndpoint)
+		if err != nil {
+			// Error information from SetWikidataEndpoint is just
+			// summary information. We don't need to act on this.
+			log.Println(err)
+		}
 	}
 }
 
@@ -500,6 +545,8 @@ func main() {
 			setHarvestOptions()
 			if *harvestChanges {
 				err = pronom.GetReleases(config.Local("release-notes.xml"))
+			} else if *harvestWikidataSig {
+				err = harvestWikidata()
 			} else {
 				err = savereps()
 			}

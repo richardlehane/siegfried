@@ -14,17 +14,97 @@
 
 package config
 
+import (
+	"fmt"
+)
+
 // Archive is a file format capable of decompression by sf.
 type Archive int
 
+// Archive type enum.
 const (
 	None Archive = iota // None means the format cannot be decompressed by sf.
-	Zip
-	Gzip
-	Tar
-	ARC
-	WARC
+	Zip                 // Zip describes a Zip type archive.
+	Gzip                // Gzip describes a Gzip type archive.	.
+	Tar                 // Tar describes a Tar type archive
+	ARC                 // ARC describes an ARC web archive.
+	WARC                // WARC describes a WARC web archive.
 )
+
+const (
+	zipArc  = "zip"
+	tarArc  = "tar"
+	gzipArc = "gzip"
+	warcArc = "warc"
+	arcArc  = "arc"
+)
+
+// ArcZipTypes returns a string array with all Zip identifiers Siegfried
+// can match and decompress.
+func ArcZipTypes() []string {
+	return []string{
+		pronom.zip,
+		mimeinfo.zip,
+		loc.zip,
+	}
+}
+
+// ArcGzipTypes returns a string array with all Gzip identifiers
+// Siegfried can match and decompress.
+func ArcGzipTypes() []string {
+	return []string{
+		pronom.gzip,
+		mimeinfo.gzip,
+		wikidata.gzip,
+	}
+}
+
+// ArcTarTypes returns a string array with all Tar identifiers Siegfried
+// can match and decompress.
+func ArcTarTypes() []string {
+	return []string{
+		pronom.tar,
+		mimeinfo.tar,
+		wikidata.tar,
+	}
+}
+
+// ArcArcTypes returns a string array with all Arc identifiers Siegfried
+// can match and decompress.
+func ArcArcTypes() []string {
+	return []string{
+		pronom.arc,
+		pronom.arc1_1,
+		mimeinfo.arc,
+		loc.arc,
+		wikidata.arc,
+		wikidata.arc1_1,
+	}
+}
+
+// ArcWarcTypes returns a string array with all Arc identifiers
+// Siegfried can match and decompress.
+func ArcWarcTypes() []string {
+	return []string{
+		pronom.warc,
+		mimeinfo.warc,
+		loc.warc,
+		wikidata.warc,
+	}
+}
+
+// ListAllArcTypes returns a list of archive file-format extensions that
+// can be used to filter the files Siegfried will decompress to identify
+// the contents of.
+func ListAllArcTypes() string {
+	return fmt.Sprintf("%s, %s, %s, %s, %s",
+		zipArc,
+		tarArc,
+		gzipArc,
+		warcArc,
+		arcArc,
+	)
+}
 
 func (a Archive) String() string {
 	switch a {

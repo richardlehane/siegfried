@@ -1,0 +1,743 @@
+{
+  "head" : {
+    "vars" : [ "uri", "uriLabel", "puid", "extension", "mimetype", "encodingLabel", "referenceLabel", "date", "relativityLabel", "offset", "sig" ]
+  },
+  "results" : {
+    "bindings" : [{
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7978505"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Web ARChive"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "warc"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/289"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/warc"
+      }
+    },{
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q178051"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Portable Network Graphics"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "png"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "image/png"
+      },
+      "encodingLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "hexadecimal"
+      },
+      "referenceLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Gary Kessler's File Signature Table"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2017-08-08T00:00:00Z"
+      },
+      "relativityLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "beginning of file"
+      },
+      "offset" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "0"
+      },
+      "sig" : {
+        "type" : "literal",
+        "value" : "89504E470D0A1A0A"
+      }
+    },{
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q27824065"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Internet Archive ARC, version 1.1"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "arc"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-internet-archive"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/410"
+      }
+    },{
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q27824060"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Internet Archive ARC, version 1.0"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "arc"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-internet-archive"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "x-fmt/219"
+      }
+    },{
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q283579"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "tar"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "tar"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "x-fmt/265"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-tar"
+      },
+      "encodingLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "hexadecimal"
+      },
+      "offset" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "257"
+      },
+      "sig" : {
+        "type" : "literal",
+        "value" : "7573746172"
+      },
+      "referenceLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Gary Kessler's File Signature Table"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2017-08-08T00:00:00Z"
+      }
+    },{
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q10287816"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "GZIP"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "x-fmt/266"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "gz"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/gzip"
+      },
+      "encodingLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "hexadecimal"
+      },
+      "referenceLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Gary Kessler's File Signature Table"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2017-08-07T00:00:00Z"
+      },
+      "offset" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "0"
+      },
+      "sig" : {
+        "type" : "literal",
+        "value" : "1F8B08"
+      }
+    },{
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q27203973"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "OpenDocument Presentation, version 1.1"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/292"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "odp"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/vnd.oasis.opendocument.presentation"
+      }
+    },{
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q747906"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "OpenRaster"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "ora"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "image/openraster"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/998"
+      }
+    },{
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49988096"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Apple iBooks format"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/482"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "ibooks"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/x-ibooks+zip"
+      }
+    },{
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q47520869"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Serif PagePlus Publication file format, version 12"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "ppp"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/680"
+      }
+    },{
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q28205479"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Amiga Workbench icon"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "info"
+      },
+      "encodingLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "hexadecimal"
+      },
+      "referenceLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Gary Kessler's File Signature Table"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2017-08-08T00:00:00Z"
+      },
+      "offset" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "0"
+      },
+      "sig" : {
+        "type" : "literal",
+        "value" : "E310000100000000"
+      }
+    },{
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q27881556"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Free Lossless Audio Codec"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "flac"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/279"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "audio/x-ogg"
+      },
+      "encodingLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "hexadecimal"
+      },
+      "referenceLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Gary Kessler's File Signature Table"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2017-08-08T00:00:00Z"
+      },
+      "offset" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "0"
+      },
+      "sig" : {
+        "type" : "literal",
+        "value" : "664C614300000022"
+      },
+      "relativityLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "beginning of file"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q27881556"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Free Lossless Audio Codec"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "oga"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/279"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "audio/x-ogg"
+      },
+      "encodingLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "hexadecimal"
+      },
+      "referenceLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Gary Kessler's File Signature Table"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2017-08-08T00:00:00Z"
+      },
+      "offset" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "0"
+      },
+      "sig" : {
+        "type" : "literal",
+        "value" : "664C614300000022"
+      },
+      "relativityLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "beginning of file"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q27881556"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Free Lossless Audio Codec"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "flac"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/279"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "audio/x-flac"
+      },
+      "encodingLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "hexadecimal"
+      },
+      "referenceLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Gary Kessler's File Signature Table"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2017-08-08T00:00:00Z"
+      },
+      "offset" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "0"
+      },
+      "sig" : {
+        "type" : "literal",
+        "value" : "664C614300000022"
+      },
+      "relativityLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "beginning of file"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q27881556"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Free Lossless Audio Codec"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "oga"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/279"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "audio/x-flac"
+      },
+      "encodingLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "hexadecimal"
+      },
+      "referenceLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Gary Kessler's File Signature Table"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2017-08-08T00:00:00Z"
+      },
+      "offset" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "0"
+      },
+      "sig" : {
+        "type" : "literal",
+        "value" : "664C614300000022"
+      },
+      "relativityLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "beginning of file"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q27881556"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Free Lossless Audio Codec"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "flac"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/279"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "audio/flac"
+      },
+      "encodingLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "hexadecimal"
+      },
+      "referenceLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Gary Kessler's File Signature Table"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2017-08-08T00:00:00Z"
+      },
+      "offset" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "0"
+      },
+      "sig" : {
+        "type" : "literal",
+        "value" : "664C614300000022"
+      },
+      "relativityLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "beginning of file"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q27881556"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Free Lossless Audio Codec"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "oga"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/279"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "audio/flac"
+      },
+      "encodingLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "hexadecimal"
+      },
+      "referenceLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Gary Kessler's File Signature Table"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2017-08-08T00:00:00Z"
+      },
+      "offset" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "0"
+      },
+      "sig" : {
+        "type" : "literal",
+        "value" : "664C614300000022"
+      },
+      "relativityLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "beginning of file"
+      }
+    },{
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q27229565"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Portable Network Graphics, version 1.0"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/11"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "png"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "image/png"
+      },
+      "encodingLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "hexadecimal"
+      },
+      "referenceLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "PRONOM"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2017-08-09T00:00:00Z"
+      },
+      "offset" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "0"
+      },
+      "sig" : {
+        "type" : "literal",
+        "value" : "89504E470D0A1A0A0000000D49484452"
+      },
+      "relativityLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "beginning of file"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q27229565"
+      },
+      "uriLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Portable Network Graphics, version 1.0"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/11"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "png"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "image/png"
+      },
+      "encodingLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "hexadecimal"
+      },
+      "referenceLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "PRONOM"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2017-08-09T00:00:00Z"
+      },
+      "offset" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "2"
+      },
+      "sig" : {
+        "type" : "literal",
+        "value" : "0000000049454E44AE426082"
+      },
+      "relativityLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "end of file"
+      }
+    }]
+  }
+}

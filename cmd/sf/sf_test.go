@@ -126,6 +126,10 @@ func TestSuite(t *testing.T) {
 		return nil
 	}
 	suite := filepath.Join(*testdata, "skeleton-suite")
+	_, err = os.Stat(suite)
+	if err != nil {
+		t.Fatal(err)
+	}
 	err = filepath.Walk(suite, wf)
 	if err != nil {
 		t.Fatal(err)

@@ -45,16 +45,19 @@ var identifier = struct {
 }
 
 // GETTERS
+const emptyNamespace = ""
 
 // Name returns the name of the identifier.
 func Name() string {
 	switch {
-	case identifier.name != "":
+	case identifier.name != emptyNamespace:
 		return identifier.name
-	case mimeinfo.mi != "":
+	case mimeinfo.mi != emptyNamespace:
 		return mimeinfo.name
-	case loc.fdd != "":
+	case loc.fdd != emptyNamespace:
 		return loc.name
+	case GetWikidataNamespace() != emptyNamespace:
+		return GetWikidataNamespace()
 	default:
 		return pronom.name
 	}
@@ -74,6 +77,14 @@ func Details(extra ...string) string {
 	} else if len(loc.fdd) > 0 {
 		str = loc.fdd
 		if !loc.nopronom {
+			extra = append(extra, DroidBase())
+			if !identifier.noContainer {
+				extra = append(extra, ContainerBase())
+			}
+		}
+	} else if wikidata.definitions != "" {
+		str = wikidata.definitions
+		if !wikidata.nopronom {
 			extra = append(extra, DroidBase())
 			if !identifier.noContainer {
 				extra = append(extra, ContainerBase())
@@ -264,18 +275,28 @@ func Extend() []string {
 	return extensionPaths(identifier.extend)
 }
 
+// Return true if value 'v' is contained in slice 's'.
+func contains(v string, s []string) bool {
+	for _, n := range s {
+		if v == n {
+			return true
+		}
+	}
+	return false
+}
+
 // IsArchive returns an Archive that corresponds to the provided id (or none if no match).
 func IsArchive(id string) Archive {
-	switch id {
-	case pronom.zip, mimeinfo.zip, loc.zip:
+	switch {
+	case contains(id, ArcZipTypes()):
 		return Zip
-	case pronom.gzip, mimeinfo.gzip:
+	case contains(id, ArcGzipTypes()):
 		return Gzip
-	case pronom.tar, mimeinfo.tar:
+	case contains(id, ArcTarTypes()):
 		return Tar
-	case pronom.arc, pronom.arc1_1, mimeinfo.arc, loc.arc:
+	case contains(id, ArcArcTypes()):
 		return ARC
-	case pronom.warc, mimeinfo.warc, loc.warc:
+	case contains(id, ArcWarcTypes()):
 		return WARC
 	}
 	return None

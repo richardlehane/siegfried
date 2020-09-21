@@ -10,6 +10,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/mimeinfo"
 	"github.com/richardlehane/siegfried/pkg/pronom"
 	"github.com/richardlehane/siegfried/pkg/sets"
+	wd "github.com/richardlehane/siegfried/pkg/wikidata"
 )
 
 var testhome = flag.String("home", "data", "override the default home directory")
@@ -57,6 +58,20 @@ func TestFreedesktop(t *testing.T) {
 	s := siegfried.New()
 	config.SetHome(*testhome)
 	m, err := mimeinfo.New(config.SetMIMEInfo("freedesktop"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	err = s.Add(m)
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestWikidata(t *testing.T) {
+	s := siegfried.New()
+	config.SetHome(*testhome)
+	config.SetWikidataDefinitions("wikidata-test-definitions")
+	m, err := wd.New(config.SetWikidataNamespace())
 	if err != nil {
 		t.Fatal(err)
 	}

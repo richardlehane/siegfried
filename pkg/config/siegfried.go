@@ -45,6 +45,7 @@ var siegfried = struct {
 	slow       bool
 	out        io.Writer
 	checkpoint int64
+	userAgent  string
 }{
 	version:         [3]int{1, 8, 0},
 	signature:       "default.sig",
@@ -60,6 +61,7 @@ var siegfried = struct {
 	updateTransport: &http.Transport{Proxy: http.ProxyFromEnvironment},
 	fpr:             "/tmp/siegfried",
 	checkpoint:      524288, // point at which to report slow signatures (must be power of two)
+	userAgent:       "siegfried/siegbot (+https://github.com/richardlehane/siegfried)",
 }
 
 // GETTERS
@@ -165,6 +167,11 @@ func Out() io.Writer {
 // Checkpoint reports the offset at which slow logging should trigger.
 func Checkpoint(i int64) bool {
 	return i == siegfried.checkpoint
+}
+
+// UserAgent returns the siegbot User-Agent string for http requests.
+func UserAgent() string {
+	return siegfried.userAgent
 }
 
 // SETTERS

@@ -54,7 +54,7 @@ var (
 	home         = flag.String("home", config.Home(), "override the default home directory")
 	serve        = flag.String("serve", "", "start siegfried server e.g. -serve localhost:5138")
 	multi        = flag.Int("multi", 1, "set number of parallel file ID processes")
-	archive      = flag.Bool("z", false, "scan archive formats (zip, tar, gzip, warc, arc)")
+	archive      = flag.Bool("z", false, fmt.Sprintf("scan archive formats: (%s)", config.ListAllArcTypes()))
 	hashf        = flag.String("hash", "", "calculate file checksum with hash algorithm; options "+checksum.HashChoices)
 	throttlef    = flag.Duration("throttle", 0, "set a time to wait between scanning files e.g. 50ms")
 	utcf         = flag.Bool("utc", false, "report file modified times in UTC, rather than local, TZ")
@@ -64,6 +64,7 @@ var (
 	name         = flag.String("name", "", "provide a filename when scanning a stream e.g. sf -name myfile.txt -")
 	conff        = flag.String("conf", "", "set the configuration file")
 	setconff     = flag.Bool("setconf", false, "record flags used with this command in configuration file")
+	sourceinline = flag.Bool("sourceinline", false, "display provenance in-line (basis field) when it is available for an identifier, e.g. Wikidata")
 )
 
 var (
@@ -376,6 +377,11 @@ func main() {
 		log.Printf("FPR server started at %s. Use CTRL-C to quit.\n", config.Fpr())
 		serveFpr(config.Fpr(), s)
 		return
+	}
+	// present source in the basis field within the Wikidata identifier
+	// instead of its own field.
+	if *sourceinline {
+		config.SetWikidataSourceFieldOff()
 	}
 	// check -multi
 	if *multi > maxMulti || *multi < 1 || (*archive && *multi > 1) {
