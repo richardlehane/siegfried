@@ -5,10 +5,11 @@
   - the National Archives UK's [PRONOM](http://www.nationalarchives.gov.uk/pronom) file format signatures
   - freedesktop.org's [MIME-info](https://freedesktop.org/wiki/Software/shared-mime-info/) file format signatures
   - the Library of Congress's [FDD](http://www.digitalpreservation.gov/formats/fdd/descriptions.shtml) file format signatures (*beta*).
+  - Wikidata (*beta*).
 
 ### Version
 
-1.8.0
+1.9.0
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![Build status](https://ci.appveyor.com/api/projects/status/1eqdmi2nvive0vgn?svg=true)](https://ci.appveyor.com/project/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -26,6 +27,7 @@
     sf -droid file.ext | DIR                   // Output DROID CSV rather than YAML
     sf -nr DIR                                 // Don't scan subdirectories
     sf -z file.zip | DIR                       // Decompress and scan zip, tar, gzip, warc, arc
+    sf -zs gzip,tar file.tar.gz | DIR          // Selectively decompress and scan 
     sf -hash md5 file.ext | DIR                // Calculate md5, sha1, sha256, sha512, or crc hash
     sf -sig custom.sig file.ext                // Use a custom signature file
     sf -                                       // Scan stream piped to stdin
@@ -94,6 +96,19 @@ Or, for the most recent updates, you can install from this fork:
     makepkg -si
 
 ## Changes
+### v1.9.0 (2020-09-22)
+### Added
+- a new Wikidata identifier, harvesting information from the Wikidata Query Service. Implemented by [Ross Spencer](https://github.com/richardlehane/siegfried/commit/dfb579b4ae46ae6daa814fc3fc74271d768f2f9c). 
+- select which archive types (zip, tar, gzip, warc, or arc) are unpacked using the -zs flag (sf -zs tar,zip). Implemented by [Ross Spencer](https://github.com/richardlehane/siegfried/commit/88dd43b55e5f83304705f6bcd439d502ef08cd38).
+
+### Changed
+- update LOC signatures to 2020-09-21
+- update tika-mimetypes signatures to v1.24
+- update freedesktop.org signatures to v2.0
+
+### Fixed
+- incorrect basis for some signatures with multiple patterns. Reported and fixed by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/142).
+
 ### v1.8.0 (2020-01-22)
 ### Added
 - utc flag returns file modified dates in UTC e.g. `sf -utc FILE | DIR`. Requested by [Dragan Espenschied](https://github.com/richardlehane/siegfried/issues/136)
@@ -114,7 +129,7 @@ See the [CHANGELOG](CHANGELOG.md) for the full history.
 
 ## Rights
 
-Copyright 2019 Richard Lehane 
+Copyright 2020 Richard Lehane, Ross Spencer 
 
 Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
 

@@ -1,4 +1,17 @@
 # Change Log
+## v1.9.0 (2020-09-22)
+### Added
+- a new Wikidata identifier, harvesting information from the Wikidata Query Service. Implemented by [Ross Spencer](https://github.com/richardlehane/siegfried/commit/dfb579b4ae46ae6daa814fc3fc74271d768f2f9c). 
+- select which archive types (zip, tar, gzip, warc, or arc) are unpacked using the -zs flag (sf -zs tar,zip). Implemented by [Ross Spencer](https://github.com/richardlehane/siegfried/commit/88dd43b55e5f83304705f6bcd439d502ef08cd38).
+
+### Changed
+- update LOC signatures to 2020-09-21
+- update tika-mimetypes signatures to v1.24
+- update freedesktop.org signatures to v2.0
+
+### Fixed
+- incorrect basis for some signatures with multiple patterns. Reported and fixed by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/142).
+
 ## v1.8.0 (2020-01-22)
 ### Added
 - utc flag returns file modified dates in UTC e.g. `sf -utc FILE | DIR`. Requested by [Dragan Espenschied](https://github.com/richardlehane/siegfried/issues/136)

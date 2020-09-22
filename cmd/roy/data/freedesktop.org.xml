@@ -457,6 +457,15 @@ command to generate the output files.
     </magic>
     <alias type="application/x-sqlite3"/>
   </mime-type>
+  <mime-type type="application/x-apple-systemprofiler+xml">
+    <comment>Apple System Profiler</comment>
+    <sub-class-of type="application/xml"/>
+    <magic priority="50">
+      <match type="string" value="&lt;plist version=&quot;1.0&quot;" offset="0:256"/>
+    </magic>
+    <glob pattern="*.spx" weight="40"/>
+    <root-XML namespaceURI="http://www.apple.com/DTDs/PropertyList-1.0.dtd" localName="plist"/>
+  </mime-type>
   <mime-type type="application/x-gedcom">
     <comment>GEDCOM family history</comment>
     <acronym>GEDCOM</acronym>
@@ -2255,6 +2264,7 @@ command to generate the output files.
     <magic priority="50">
       <match type="string" value="SEGA GENESIS" offset="256"/>
       <match type="string" value="SEGA MEGA DRIVE" offset="256"/>
+      <match type="string" value="SEGA_MEGA_DRIVE" offset="256"/>
       <match type="string" value="EAGN" offset="640"/>
       <match type="string" value="EAMG" offset="640"/>
     </magic>
@@ -3248,6 +3258,7 @@ command to generate the output files.
     </magic>
     <glob pattern="*.oga"/>
     <glob pattern="*.ogg"/>
+    <glob pattern="*.spx"/>
   </mime-type>
   <mime-type type="audio/x-speex">
     <comment>Speex audio</comment>
@@ -3350,13 +3361,13 @@ command to generate the output files.
       <match type="string" value='eval \"exec /usr/local/bin/perl' offset="0"/>
       <match type="string" value="/bin/perl" offset="2:16"/>
       <match type="string" value="/bin/env perl" offset="2:16"/>
-      <match type="string" value="use strict" offset="0:256"/>
-      <match type="string" value="use warnings" offset="0:256"/>
-      <match type="string" value="use diagnostics" offset="0:256"/>
       <match type="string" value="use Test::" offset="0:256"/>
       <match type="string" value="BEGIN {" offset="0:256"/>
     </magic>
     <magic priority="40">
+      <match type="string" value="use strict" offset="0:256"/>
+      <match type="string" value="use warnings" offset="0:256"/>
+      <match type="string" value="use diagnostics" offset="0:256"/>
       <match type="string" value="\n=pod" offset="0:256"/>
       <match type="string" value="\n=head1 NAME" offset="0:256"/>
       <match type="string" value="\n=head1 DESCRIPTION" offset="0:256"/>
@@ -4141,12 +4152,16 @@ command to generate the output files.
     <magic priority="50">
       <!-- https://github.com/FFmpeg/FFmpeg/blob/master/libavformat/aadec.c#L33 -->
       <match type="big32" value="1469084982" offset="4"/>
-      <match type="string" value="aax " offset="8"/>
     </magic>
     <glob pattern="*.aa"/>
-    <glob pattern="*.aax"/>
     <alias type="audio/vnd.audible"/>
-    <alias type="audio/vnd.audible.aax"/>
+  </mime-type>
+  <mime-type type="audio/vnd.audible.aax">
+    <comment>Audible Enhanced audio</comment>
+    <magic priority="50">
+      <match type="string" value="ftypaax " offset="4"/>
+    </magic>
+    <glob pattern="*.aax"/>
   </mime-type>
   <mime-type type="audio/x-it">
     <comment>Impulse Tracker audio</comment>
@@ -4283,7 +4298,6 @@ command to generate the output files.
     <comment>3GPP2 multimedia file</comment>
     <acronym>3GPP2</acronym>
     <expanded-acronym>3rd Generation Partnership Project 2</expanded-acronym>
-    <sub-class-of type="video/mp4"/>
     <magic priority="50">
       <match type="string" value="ftyp3g2" offset="4"/>
     </magic>
@@ -4431,6 +4445,7 @@ command to generate the output files.
     <comment>Musepack audio</comment>
     <magic priority="50">
       <match type="string" value="MP+" offset="0"/>
+      <match type="string" value="MPCK" offset="0"/>
     </magic>
     <glob pattern="*.mpc"/>
     <glob pattern="*.mpp"/>
@@ -5864,6 +5879,14 @@ command to generate the output files.
     <glob pattern="CMakeLists.txt"/>
     <sub-class-of type="text/plain"/>
   </mime-type>
+  <mime-type type="text/x-common-lisp">
+    <comment>Common Lisp source code</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.asd"/>
+    <glob pattern="*.fasl"/>
+    <glob pattern="*.lisp"/>
+    <glob pattern="*.ros"/>
+  </mime-type>
   <mime-type type="text/csv">
     <comment>CSV document</comment>
     <acronym>CSV</acronym>
@@ -6366,8 +6389,9 @@ command to generate the output files.
     <glob pattern="*.sql"/>
     <alias type="text/x-sql"/>
   </mime-type>
-  <mime-type type="text/x-tcl">
+  <mime-type type="text/tcl">
     <comment>Tcl script</comment>
+    <alias type="text/x-tcl"/>
     <sub-class-of type="text/plain"/>
     <glob pattern="*.tcl"/>
     <glob pattern="*.tk"/>
@@ -6435,6 +6459,13 @@ command to generate the output files.
       <match type="string" value="begin " offset="0"/>
     </magic>
     <alias type="zz-application/zz-winassoc-uu"/>
+  </mime-type>
+  <mime-type type="text/vbscript">
+    <comment>VBScript program</comment>
+    <alias type="text/vbs"/>
+    <sub-class-of type="text/plain"/>
+    <generic-icon name="text-x-script"/>
+    <glob pattern="*.vbs"/>
   </mime-type>
   <mime-type type="text/x-xmi">
     <comment>XMI file</comment>
@@ -7318,4 +7349,60 @@ command to generate the output files.
     <glob pattern="*.cwk"/>
   </mime-type>
 
+  <mime-type type="application/x-bps-patch">
+    <comment>BPS patch</comment>
+    <acronym>BPS</acronym>
+    <expanded-acronym>Binary Patching System</expanded-acronym>
+    <glob pattern="*.bps"/>
+    <magic>
+      <match type="string" value="BPS1" offset="0"/>
+    </magic>
+  </mime-type>
+
+  <mime-type type="application/x-ips-patch">
+    <comment>IPS patch</comment>
+    <acronym>IPS</acronym>
+    <expanded-acronym>International Patching System</expanded-acronym>
+    <glob pattern="*.ips"/>
+    <magic>
+      <match type="string" value="PATCH" offset="0"/>
+    </magic>
+  </mime-type>
+
+  <mime-type type="application/x-pyspread-spreadsheet">
+    <comment>Pyspread spreadsheet</comment>
+    <glob pattern="*.pysu"/>
+    <magic>
+      <match type="string" value="[Pyspread save file version]" offset="0"/>
+    </magic>
+    <generic-icon name="x-office-spreadsheet"/>
+  </mime-type>
+  <mime-type type="application/x-pyspread-bz-spreadsheet">
+    <comment>Pyspread spreadsheet (bzip-compressed)</comment>
+    <sub-class-of type="application/x-bzip"/>
+    <glob pattern="*.pys"/>
+    <generic-icon name="x-office-spreadsheet"/>
+  </mime-type>
+
+  <mime-type type="text/x-kotlin">
+    <comment>Kotlin source code</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.kt"/>
+  </mime-type>
+
+  <mime-type type="image/avif">
+    <comment>AV1 Image File Format (AVIF)</comment>
+    <magic priority="50">
+        <match type="string" value="ftypavif" offset="4"/>
+        <match type="string" value="ftypmif1" offset="4"/>
+    </magic>
+    <glob pattern="*.avif"/>
+  </mime-type>
+  <mime-type type="image/avif-sequence">
+    <comment>AVIF image sequence</comment>
+    <magic priority="50">
+        <match type="string" value="ftypavis" offset="4"/>
+    </magic>
+    <glob pattern="*.avifs"/>
+  </mime-type>
 </mime-info>
