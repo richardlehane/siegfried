@@ -287,6 +287,9 @@ func contains(v string, s []string) bool {
 
 // IsArchive returns an Archive that corresponds to the provided id (or none if no match).
 func IsArchive(id string) Archive {
+	if !contains(id, archiveFilterPermissive()) {
+		return None
+	}
 	switch {
 	case contains(id, ArcZipTypes()):
 		return Zip

@@ -33,6 +33,7 @@ var nonArcUID = "fmt/1000"
 
 // arcTest defines the structure needed for our table driven testing.
 type arcTest struct {
+	filter string  // The set of zip-type files to provide SetArchiveFilterPermissive(...)
 	uid    string  // A UID (PUID, FDD) that identifies a zip-type file.
 	result Archive // The anticipated result from our test.
 }
@@ -40,19 +41,23 @@ type arcTest struct {
 // isArcTests provide us a slice of tests and results to loop through.
 var isArcTests = []arcTest{
 	// Positive tests should return valid Archive values.
-	arcTest{proZipUID, Zip},
-	arcTest{mimeTarUID, Tar},
-	arcTest{mimeGzipUID, Gzip},
-	arcTest{mimeWarcUID, WARC},
-	arcTest{locArcUID, ARC},
+	arcTest{ListAllArcTypes(), proZipUID, Zip},
+	arcTest{"TAR", mimeTarUID, Tar},
+	arcTest{"gZip", mimeGzipUID, Gzip},
+	arcTest{"warc,zip,tar", mimeWarcUID, WARC},
+	arcTest{"zip,arc", locArcUID, ARC},
 	// Negative tests should all return None.
-	arcTest{nonArcUID, None},
+	arcTest{"zip,arc", mimeWarcUID, None},
+	arcTest{"zip,arc", mimeGzipUID, None},
+	arcTest{ListAllArcTypes(), nonArcUID, None},
+	arcTest{"", nonArcUID, None},
 }
 
-// TestIsArchive tests cases whether we return the correct result when
-// testing whether something is an Archive.
-func TestIsArchive(t *testing.T) {
+// TestIsArchivePositive tests cases where the archive filter should
+// return a positive match.
+func TestIsArchivePositive(t *testing.T) {
 	for _, test := range isArcTests {
+		SetArchiveFilterPermissive(test.filter)
 		arc := IsArchive(test.uid)
 		if arc != test.result {
 			t.Errorf(

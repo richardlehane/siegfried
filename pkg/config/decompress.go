@@ -16,6 +16,7 @@ package config
 
 import (
 	"fmt"
+	"strings"
 )
 
 // Archive is a file format capable of decompression by sf.
@@ -104,6 +105,40 @@ func ListAllArcTypes() string {
 		warcArc,
 		arcArc,
 	)
+}
+
+var permissiveFilter []string
+
+// SetArchiveFilterPermissive will take our comma separated list of
+// archives we want to extract from the Siegfried command-line and use
+// the values to construct a permissive filter. Anything not in the
+// slice returned at the end of this function will not be extracted when
+// -z flag is used.
+func SetArchiveFilterPermissive(value string) []string {
+	arr := []string{}
+	arcList := strings.Split(value, ",")
+	for _, arc := range arcList {
+		switch strings.TrimSpace(strings.ToLower(arc)) {
+		case zipArc:
+			arr = append(arr, ArcZipTypes()...)
+		case tarArc:
+			arr = append(arr, ArcTarTypes()...)
+		case gzipArc:
+			arr = append(arr, ArcGzipTypes()...)
+		case warcArc:
+			arr = append(arr, ArcWarcTypes()...)
+		case arcArc:
+			arr = append(arr, ArcArcTypes()...)
+		}
+	}
+	permissiveFilter = arr
+	return arr
+}
+
+// archiveFilterPermissive provides a getter for the configured
+// zip-types we want to extract and identify the contents of.
+func archiveFilterPermissive() []string {
+	return permissiveFilter
 }
 
 func (a Archive) String() string {
