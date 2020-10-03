@@ -45,6 +45,9 @@ func (m *mscfbReader) Name() string {
 		return ""
 	}
 	path := append(m.entry.Path, m.entry.Name)
+	if m.entry.FileInfo().IsDir() {
+		return strings.Join(path, "/") + "/" // add a trailing slash if a directory
+	}
 	return strings.Join(path, "/")
 }
 
