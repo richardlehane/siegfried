@@ -267,7 +267,6 @@ func appendFragments(puid string, sig frames.Signature, frags []mappings.Fragmen
 	var choice patterns.Choice
 	offs := make([][2]int, len(fs))
 	ns := make([]frames.Signature, len(fs))
-	//l := len(sig)
 	// iterate over the grouped fragments
 	for i, v := range fs {
 		if len(v) > 1 {
@@ -343,6 +342,9 @@ func appendFragments(puid string, sig frames.Signature, frags []mappings.Fragmen
 // Shared code for processing raw lex outputs in PRONOM/Container pattern language
 
 func process(puid, seq string, eof bool) (frames.Signature, int, int, error) {
+	if seq == "" {
+		return nil, 0, 0, errors.New("parse error " + puid + ": empty sequence")
+	}
 	typ := frames.PREV
 	if eof {
 		typ = frames.SUCC
