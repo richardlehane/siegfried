@@ -3,6 +3,1257 @@
 <release_notes>
 
 <release_note>
+    <release_date>1st October 2020</release_date>
+    <signature_filename>DROID_SignatureFile_V97.xml</signature_filename>
+    <release_outline name="New Records">
+	  <format>
+	   <puid type="fmt">1354</puid>
+	   <name>QuickBooks Backup File</name>
+	   <summary>Full entry added. Submitted by National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1355</puid>
+	   <name>WARC 1.0</name>
+	   <summary>Full entry added. Submitted by Landesarchiv Nordrhein-Westfalen.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1356</puid>
+	   <name>Virtual Format (Raster)</name>
+	   <summary>Full entry added. Submitted by National Library of Wales.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1357</puid>
+	   <name>Virtual Format (Vector)</name>
+	   <summary>Full entry added. Submitted by National Library of Wales.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1358</puid>
+	   <name>MicroStation Base File</name>
+	   <summary>Full entry added. Submitted by The Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1359</puid>
+	   <name>Softdisk Text Compressor</name>
+	   <summary>Full entry added. Submitted by The Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1360</puid>
+	   <name>Picture Publisher Bitmap 6-10</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter Day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1361</puid>
+	   <name>Amiga Disk File</name>
+	   <summary>Full entry added. Submitted by The National Archives and Records Administration and National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1362</puid>
+	   <name>Microsoft MapPoint Document</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1363</puid>
+	   <name>DeluxePaint Animation File</name>
+	   <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1364</puid>
+	   <name>V-Ray Material XML (Vismat)</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter Day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1365</puid>
+	   <name>Debug File</name>
+	   <summary>Extension-only entry added. Submitted by The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1366</puid>
+	   <name>ESRI Published Map Format</name>
+	   <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1367</puid>
+	   <name>GeoJSON</name>
+	   <summary>Extension-only entry added. Submitted by The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1368</puid>
+	   <name>Nero Cover Designer File</name>
+	   <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1369</puid>
+	   <name>Error File</name>
+	   <summary>Extension-only entry added. Submitted by The Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1370</puid>
+	   <name>Advanced Disk Catalog</name>
+	   <summary>Full entry added. Submitted by The Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1371</puid>
+	   <name>OmniPage Document 10</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter Day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1372</puid>
+	   <name>OmniPage Document 12</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter Day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1373</puid>
+	   <name>OmniPage Document 18</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter Day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1374</puid>
+	   <name>XDOMEA 1.0</name>
+	   <summary>Full entry added. Submitted by Landesarchiv Nordrhein-Westfalen.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1375</puid>
+	   <name>XDOMEA 2.0.0</name>
+	   <summary>Full entry added. Submitted by Landesarchiv Nordrhein-Westfalen.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1376</puid>
+	   <name>XDOMEA 2.0.1</name>
+	   <summary>Full entry added. Submitted by Landesarchiv Nordrhein-Westfalen.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1377</puid>
+	   <name>XDOMEA 2.1.0</name>
+	   <summary>Full entry added. Submitted by Landesarchiv Nordrhein-Westfalen.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1378</puid>
+	   <name>XDOMEA 2.2.0</name>
+	   <summary>Full entry added. Submitted by Landesarchiv Nordrhein-Westfalen.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1379</puid>
+	   <name>XDOMEA 2.3.0</name>
+	   <summary>Full entry added. Submitted by Landesarchiv Nordrhein-Westfalen.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1380</puid>
+	   <name>XDOMEA 2.4.0</name>
+	   <summary>Full entry added. Submitted by Landesarchiv Nordrhein-Westfalen.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1381</puid>
+	   <name>VariCAD 7+</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter Day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1382</puid>
+	   <name>Embedded OpenType (EOT) File Format 0x00010000</name>
+	   <summary>Full entry added. Submitted by Technische Informationsbibliothek (TIB) Hannover.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1383</puid>
+	   <name>Embedded OpenType (EOT) File Format 0x00020001</name>
+	   <summary>Full entry added. Submitted by Technische Informationsbibliothek (TIB) Hannover.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1384</puid>
+	   <name>Embedded OpenType (EOT) File Format 0x00020002</name>
+	   <summary>Full entry added. Submitted by Technische Informationsbibliothek (TIB) Hannover.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1385</puid>
+	   <name>Bruker PDZ</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter Day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1386</puid>
+	   <name>Muvee autoProducer Project File 1-5</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter Day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1387</puid>
+	   <name>Muvee autoProducer Project File 6</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter Day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1388</puid>
+	   <name>Muvee Reveal Project File</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter Day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1389</puid>
+	   <name>Drawing Interchange Format (ASCII) 2018/2019/2020/2021</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1390</puid>
+	   <name>Drawing Interchange Format (Binary) 2007-2009</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1391</puid>
+	   <name>Drawing Interchange Format (Binary) 2010-2012</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1392</puid>
+	   <name>Drawing Interchange Format (Binary) 2013-2017</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1393</puid>
+	   <name>Drawing Interchange Format (Binary) 2018-2021</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1394</puid>
+	   <name>Drawing Interchange Format (Binary) Generic</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1395</puid>
+	   <name>AutoCAD Drawing 2018/2019/2020/2021</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1396</puid>
+	   <name>FinePrint</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1397</puid>
+	   <name>FARO Laser Scan File</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1398</puid>
+	   <name>FARO WorkSpace File</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1399</puid>
+	   <name>DiskDoubler</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1400</puid>
+	   <name>Ichitaro Document 8</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1401</puid>
+	   <name>Student Writing Center Report</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1402</puid>
+	   <name>Student Writing Center Journal</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1403</puid>
+	   <name>Student Writing Center Sign</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1404</puid>
+	   <name>Student Writing Center Newsletter</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1405</puid>
+	   <name>Student Writing Center Letter</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1406</puid>
+	   <name>Flow Charting I-II+</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1407</puid>
+	   <name>Flow Charting 3</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1408</puid>
+	   <name>Flow Charting 4</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1409</puid>
+	   <name>Flow Charting 5</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1410</puid>
+	   <name>Flow Charting 6</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1411</puid>
+	   <name>Flow Charting PDQ</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1412</puid>
+	   <name>Flow Charting Graphic Flowcharting Image</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1413</puid>
+	   <name>Corel Gallery Clipart BMF</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1414</puid>
+	   <name>PFS:Write</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1415</puid>
+	   <name>GST Publisher 1</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1416</puid>
+	   <name>GST Publisher 2</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1417</puid>
+	   <name>Corel Print House Document 1</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1418</puid>
+	   <name>Corel Print House Document 2</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1419</puid>
+	   <name>Corel Print House/Print Office Document 3</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1420</puid>
+	   <name>Corel Print House/Print Office Document 4</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1421</puid>
+	   <name>Corel Print House/Print Office Document 5</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1422</puid>
+	   <name>Corel Photo House Image</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1423</puid>
+	   <name>HP TRIM Outlook Saved Message File</name>
+	   <summary>Extension-only entry. Submitted by National Archives of Australia and State Archives and Records Authority of New South Wales.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1424</puid>
+	   <name>WordPerfect Encrypted Document 4.2</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1425</puid>
+	   <name>MacDraw 0.9</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1426</puid>
+	   <name>MacDraw 1.x</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1427</puid>
+	   <name>MacDraw II</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1428</puid>
+	   <name>MacDraw Pro</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1429</puid>
+	   <name>MacPaint 2</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1430</puid>
+	   <name>Minitab Worksheet 8-11</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1431</puid>
+	   <name>Minitab Portable Worksheet</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1432</puid>
+	   <name>Minitab Worksheet 12</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1433</puid>
+	   <name>Minitab Worksheet 13</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1434</puid>
+	   <name>Minitab Project 14</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1435</puid>
+	   <name>Minitab Worksheet 14</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1436</puid>
+	   <name>Minitab Project 14</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1437</puid>
+	   <name>Minitab Worksheet 15+</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1438</puid>
+	   <name>Minitab Project 15+</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1439</puid>
+	   <name>Apple iWork Pages 09</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1440</puid>
+	   <name>Apple iWork Numbers 09</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1441</puid>
+	   <name>Apple iWork Document 14</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1442</puid>
+	   <name>QuarkXPress Document 1-2</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1443</puid>
+	   <name>QuarkXPress Document 3.0</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1444</puid>
+	   <name>QuarkXPress Document 3.2</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1445</puid>
+	   <name>QuarkXPress Project 9.2</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1446</puid>
+	   <name>QuarkXPress Project 10.1</name>
+	   <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+    </release_outline>
+    <release_outline name="Updated Records">
+	  <format>
+	   <puid type="fmt">63</puid>
+	   <name>Drawing Interchange Format (ASCII) Generic</name>
+	   <summary>File format information updated and signature updated to allow for seperate new line characters. Submitted by The Church of Jesus Christ of Latter-day Saints, Canadian Centre for Architecture and The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">64</puid>
+	   <name>Drawing Interchange Format (ASCII) 1.0</name>
+	   <summary>File format information updated and signature updated to allow for seperate new line characters. Submitted by The Church of Jesus Christ of Latter-day Saints, Canadian Centre for Architecture and The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">65</puid>
+	   <name>Drawing Interchange Format (ASCII) 1.2</name>
+	   <summary>File format information updated and signature updated to allow for seperate new line characters. Submitted by The Church of Jesus Christ of Latter-day Saints, Canadian Centre for Architecture and The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">66</puid>
+	   <name>Drawing Interchange Format (ASCII) 1.3</name>
+	   <summary>File format information updated and signature updated to allow for seperate new line characters. Submitted by The Church of Jesus Christ of Latter-day Saints, Canadian Centre for Architecture and The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">67</puid>
+	   <name>Drawing Interchange Format (ASCII) 1.4</name>
+	   <summary>File format information updated and signature updated to allow for seperate new line characters. Submitted by The Church of Jesus Christ of Latter-day Saints, Canadian Centre for Architecture and The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">68</puid>
+	   <name>Drawing Interchange Format (ASCII) 2.0</name>
+	   <summary>File format information updated and signature updated to allow for seperate new line characters. Submitted by The Church of Jesus Christ of Latter-day Saints, Canadian Centre for Architecture and The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">69</puid>
+	   <name>Drawing Interchange Format (ASCII) 2.1</name>
+	   <summary>File format information updated and signature updated to allow for seperate new line characters. Submitted by The Church of Jesus Christ of Latter-day Saints, Canadian Centre for Architecture and The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">70</puid>
+	   <name>Drawing Interchange Format (ASCII) 2.2</name>
+	   <summary>File format information updated and signature updated to allow for seperate new line characters. Submitted by The Church of Jesus Christ of Latter-day Saints, Canadian Centre for Architecture and The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">71</puid>
+	   <name>Drawing Interchange Format (ASCII) 2.5</name>
+	   <summary>File format information updated and signature updated to allow for seperate new line characters. Submitted by The Church of Jesus Christ of Latter-day Saints, Canadian Centre for Architecture and The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">72</puid>
+	   <name>Drawing Interchange Format (ASCII) 2.6</name>
+	   <summary>File format information updated and signature updated to allow for seperate new line characters. Submitted by The Church of Jesus Christ of Latter-day Saints, Canadian Centre for Architecture and The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">73</puid>
+	   <name>Drawing Interchange Format (ASCII) R9</name>
+	   <summary>File format information updated and signature updated to allow for seperate new line characters. Submitted by The Church of Jesus Christ of Latter-day Saints, Canadian Centre for Architecture and The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">74</puid>
+	   <name>Drawing Interchange Format (ASCII) R10</name>
+	   <summary>File format information updated and signature updated to allow for seperate new line characters. Submitted by The Church of Jesus Christ of Latter-day Saints, Canadian Centre for Architecture and The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">75</puid>
+	   <name>Drawing Interchange Format (ASCII) R11/12</name>
+	   <summary>File format information updated and signature updated to allow for seperate new line characters. Submitted by The Church of Jesus Christ of Latter-day Saints, Canadian Centre for Architecture and The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">76</puid>
+	   <name>Drawing Interchange Format (ASCII) R13</name>
+	   <summary>File format information updated and signature updated to allow for seperate new line characters. Submitted by The Church of Jesus Christ of Latter-day Saints, Canadian Centre for Architecture and The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">77</puid>
+	   <name>Drawing Interchange Format (ASCII) R14</name>
+	   <summary>File format information updated and signature updated to allow for seperate new line characters. Submitted by The Church of Jesus Christ of Latter-day Saints, Canadian Centre for Architecture and The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">78</puid>
+	   <name>Drawing Interchange Format (ASCII) 2000-2002</name>
+	   <summary>File format information updated and signature updated to allow for seperate new line characters. Submitted by The Church of Jesus Christ of Latter-day Saints, Canadian Centre for Architecture and The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">79</puid>
+	   <name>Drawing Interchange Format (ASCII) 2004/2005/2006</name>
+	   <summary>File format information updated and signature updated to allow for seperate new line characters. Submitted by The Church of Jesus Christ of Latter-day Saints, Canadian Centre for Architecture and The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">80</puid>
+	   <name>Drawing Interchange Format (Binary) R10</name>
+	   <summary>File format information updated and signature updated. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">81</puid>
+	   <name>Drawing Interchange Format (Binary) R11/12</name>
+	   <summary>File format information updated and signature updated. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">82</puid>
+	   <name>Drawing Interchange Format (Binary) R13</name>
+	   <summary>File format information updated and signature updated. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">83</puid>
+	   <name>Drawing Interchange Format (Binary) R14</name>
+	   <summary>File format information updated and signature updated. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">84</puid>
+	   <name>Drawing Interchange Format (Binary) 2000-2002</name>
+	   <summary>File format information updated and signature updated. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">85</puid>
+	   <name>Drawing Interchange Format (Binary) 2004-2006</name>
+	   <summary>File format information updated and signature updated. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">289</puid>
+	   <name>WARC</name>
+	   <summary>WARC 1.0 in the v.96, the version number removed and internal signature ammended. Submitted by Landesarchiv Nordrhein-Westfalen.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">332</puid>
+	   <name>ESRI Arc/View Project 3.x</name>
+	   <summary>Extension 'def' added. Submitted by The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">353</puid>
+	   <name>Tagged Image File Format</name>
+	   <summary>Links to documentation updated. Submitted by Amsterdam City Archives.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">433</puid>
+	   <name>Drawing Interchange Format (ASCII) 2007/2008/2009</name>
+	   <summary>File format information updated and signature updated to allow for seperate new line characters. Submitted by The Church of Jesus Christ of Latter-day Saints, Canadian Centre for Architecture and The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">435</puid>
+	   <name>Drawing Interchange Format (ASCII) 2010/2011/2012</name>
+	   <summary>File format information updated and signature updated to allow for seperate new line characters. Submitted by The Church of Jesus Christ of Latter-day Saints, Canadian Centre for Architecture and The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">473</puid>
+	   <name>Microsoft Office Owner File</name>
+	   <summary>Inclusion of docx as an external signature. Submitted by Nationaal Archief, the National Archives of the Netherlands.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">532</puid>
+	   <name>Drawing Interchange Format (ASCII) 2013/2014/2015/2016/2017</name>
+	   <summary>File format information updated and signature updated to allow for seperate new line characters. Submitted by The Church of Jesus Christ of Latter-day Saints, Canadian Centre for Architecture and The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">646</puid>
+	   <name>Apple iWork Keynote 09</name>
+	   <summary>Minor update to description. Adjusted name from 'Apple iWorks Keynote 09' to match brand name.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">650</puid>
+	   <name>QuarkXPress Report File</name>
+	   <summary>Corrected name from 'Quark Xpress Report File' for consistency with brand.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">704</puid>
+	   <name>Broadcast WAVE 1 PCM Encoding</name>
+	   <summary>Added priority over fmt/142 Waveform Audio (WAVEFORMATEX). Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">706</puid>
+	   <name>Broadcast WAVE 0 MPEG Encoding</name>
+	   <summary>Added priority over fmt/142 Waveform Audio (WAVEFORMATEX). Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">707</puid>
+	   <name>Broadcast WAVE 1 MPEG Encoding</name>
+	   <summary>Added priority over fmt/142 Waveform Audio (WAVEFORMATEX). Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">708</puid>
+	   <name>Broadcast WAVE 2 MPEG Encoding</name>
+	   <summary>Added priority over fmt/142 Waveform Audio (WAVEFORMATEX). Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">798</puid>
+	   <name>The Neuroimaging Informatics Technology Initiative File Format 1</name>
+	   <summary>Description amended. Submitted by John Pellman.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">803</puid>
+	   <name>Encase Image File Format/Expert Witness Compression Format</name>
+	   <summary>Media type added. Submitted by The University of North Carolina at Charlotte.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">824</puid>
+	   <name>Apple iWork Pages Generic</name>
+	   <summary>Added 'Generic' as version to differentiate from new entry with signature. Added explanatory note to description.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">825</puid>
+	   <name>Apple iWork Numbers Generic</name>
+	   <summary>Added 'Generic' as version to differentiate from new entry with signature. Added explanatory note to description.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">869</puid>
+	   <name>CDX Internet Archive Index</name>
+	   <summary>Added additional signature variant and added 'variant 1' to existing signature. Submitted by Staatsarchiv Basel-Stadt.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">916</puid>
+	   <name>ESRI ArcMap Document</name>
+	   <summary>Added 'mxt' as additional extension. Submitted by The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1094</puid>
+	   <name>The Neuroimaging Informatics Technology Initiative File Format 2</name>
+	   <summary>Description amended. Submitted by John Pellman.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1187</puid>
+	   <name>Apple iWork Template 13</name>
+	   <summary>Adjusted name from 'iWork13 Template' for consistency with other iWork PRONOM entries.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1281</puid>
+	   <name>WARC 1.1</name>
+	   <summary>Priority over WARC added and signature description amended. Submitted by Landesarchiv Nordrhein-Westfalen.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1314</puid>
+	   <name>GL Transmission Format (Text) 1.0</name>
+	   <summary>Signature amended with wildcards instead of fixed byte range between sequences. Submitted by Preservica.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1315</puid>
+	   <name>GL Transmission Format (Text) 2.0</name>
+	   <summary>Signature amended with wildcards instead of fixed byte range between sequences. Submitted by Preservica.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">31</puid>
+	   <name>CorelDraw Compressed Drawing 1</name>
+	   <summary>Added brief descripription and additional cjw extension. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">36</puid>
+	   <name>CorelDraw Compressed Drawing 2</name>
+	   <summary>Renamed from 'Corel CMX Compressed' for consistency with the underlying format but included the original PRONOM name as an alias. Added description. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">85</puid>
+	   <name>Picture Publisher Bitmap 5.0</name>
+	   <summary>Description updated and internal signature added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">161</puid>
+	   <name>MacPaint 1</name>
+	   <summary>Added version number and brief descripription. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">176</puid>
+	   <name>Picture Publisher Bitmap 4</name>
+	   <summary>Description updated and internal signature added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">280</puid>
+	   <name>XML Schema Definition</name>
+	   <summary>Gave priority over fmt/1376 XDOMEA 1.0.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">350</puid>
+	   <name>OmniPage Pro Document 5-9</name>
+	   <summary>Added version number and brief descripription. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">429</puid>
+	   <name>MHTML</name>
+	   <summary>Changed name from 'Microsoft Web Archive' as MHTML is not a Microsoft-specific technology. Added description. Disassociated Media type message/rfc822. Gave priority over HTML 5.</summary>
+	  </format>
+    </release_outline>
+    <release_outline name="New Signatures">
+	  <format>
+	   <puid type="fmt">125</puid>
+	   <name>Microsoft PowerPoint Presentation 95</name>
+	   <summary>Added container signature submitted by Preservica.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">869</puid>
+	   <name>CDX Internet Archive Index</name>
+	   <summary>Added additional signature variant submitted by Staatsarchiv Basel-Stadt.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1317</puid>
+	   <name>QuarkXPress Document 3.1</name>
+	   <summary>Added 'intel' signature variant. Updated 'motorola' signature variant to include a wider byte variety at  position 0x09 provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1354</puid>
+	   <name>QuickBooks Backup File</name>
+	   <summary>Signature developed and samples provided by National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1355</puid>
+	   <name>WARC 1.0</name>
+	   <summary>Signature developed and samples provided by Landesarchiv Nordrhein-Westfalen.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1356</puid>
+	   <name>Virtual Format (Raster)</name>
+	   <summary>Signature submitted by National Library of Wales.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1357</puid>
+	   <name>Virtual Format (Vector)</name>
+	   <summary>Signature submitted by National Library of Wales.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1358</puid>
+	   <name>MicroStation Base File</name>
+	   <summary>Signature developed and samples provided by The Centre of Canadian Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1359</puid>
+	   <name>Softdisk Text Compressor</name>
+	   <summary>Signature developed and samples provided by The Centre of Canadian Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1360</puid>
+	   <name>Picture Publisher Bitmap 6-10</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1361</puid>
+	   <name>Amiga Disk File</name>
+	   <summary>Signature developed and samples provided by National Library of Australia and The National Archives and Records Administration.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1362</puid>
+	   <name>Microsoft MapPoint Document</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1363</puid>
+	   <name>DeluxePaint Animation File</name>
+	   <summary>Signature developed and samples provided by The National Archives and Records Administration.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1364</puid>
+	   <name>V-Ray Material XML (Vismat)</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1366</puid>
+	   <name>ESRI Published Map Format</name>
+	   <summary>Container signature developed. Submitted by The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1368</puid>
+	   <name>Nero Cover Designer File</name>
+	   <summary>Signature submitted by The National Library of Australia.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1370</puid>
+	   <name>Advanced Disk Catalog</name>
+	   <summary>Signature developed. Requested by The Canadian Centre for Architecture.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1371</puid>
+	   <name>OmniPage Document 10</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1372</puid>
+	   <name>OmniPage Document 12</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1373</puid>
+	   <name>OmniPage Document 18</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1374</puid>
+	   <name>XDOMEA 1.0</name>
+	   <summary>Signature submitted by Landesarchiv Nordrhein-Westfalen.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1375</puid>
+	   <name>XDOMEA 2.0.0</name>
+	   <summary>Signature submitted by Landesarchiv Nordrhein-Westfalen.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1376</puid>
+	   <name>XDOMEA 2.0.1</name>
+	   <summary>Signature submitted by Landesarchiv Nordrhein-Westfalen.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1377</puid>
+	   <name>XDOMEA 2.1.0</name>
+	   <summary>Signature submitted by Landesarchiv Nordrhein-Westfalen.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1378</puid>
+	   <name>XDOMEA 2.2.0</name>
+	   <summary>Signature submitted by Landesarchiv Nordrhein-Westfalen.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1379</puid>
+	   <name>XDOMEA 2.3.0</name>
+	   <summary>Signature submitted by Landesarchiv Nordrhein-Westfalen.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1380</puid>
+	   <name>XDOMEA 2.4.0</name>
+	   <summary>Signature submitted by Landesarchiv Nordrhein-Westfalen.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1381</puid>
+	   <name>VariCAD 7+</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1382</puid>
+	   <name>Embedded OpenType (EOT) File Format 0x00010000</name>
+	   <summary>Signature submitted by Technische Informationsbibliothek (TIB) Hannover.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1383</puid>
+	   <name>Embedded OpenType (EOT) File Format 0x00020001</name>
+	   <summary>Signature submitted by Technische Informationsbibliothek (TIB) Hannover.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1384</puid>
+	   <name>Embedded OpenType (EOT) File Format 0x00020002</name>
+	   <summary>Signature submitted by Technische Informationsbibliothek (TIB) Hannover.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1385</puid>
+	   <name>Bruker PDZ</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1386</puid>
+	   <name>Muvee autoProducer Project File 1-5</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1387</puid>
+	   <name>Muvee autoProducer Project File 6</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1388</puid>
+	   <name>Muvee Reveal Project File</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1389</puid>
+	   <name>Drawing Interchange Format (ASCII) 2018/2019/2020/2021</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1390</puid>
+	   <name>Drawing Interchange Format (Binary) 2007-2009</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1391</puid>
+	   <name>Drawing Interchange Format (Binary) 2010-2012</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1392</puid>
+	   <name>Drawing Interchange Format (Binary) 2013-2017</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1393</puid>
+	   <name>Drawing Interchange Format (Binary) 2018-2021</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1394</puid>
+	   <name>Drawing Interchange Format (Binary) Generic</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1395</puid>
+	   <name>AutoCAD Drawing 2018/2019/2020/2021</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1396</puid>
+	   <name>FinePrint</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1397</puid>
+	   <name>FARO Laser Scan File</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1398</puid>
+	   <name>FARO WorkSpace File</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1399</puid>
+	   <name>DiskDoubler</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1400</puid>
+	   <name>Ichitaro Document 8</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1401</puid>
+	   <name>Student Writing Center Report</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1402</puid>
+	   <name>Student Writing Center Journal</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1403</puid>
+	   <name>Student Writing Center Sign</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1404</puid>
+	   <name>Student Writing Center Newsletter</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1405</puid>
+	   <name>Student Writing Center Letter</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1406</puid>
+	   <name>Flow Charting I-II+</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1407</puid>
+	   <name>Flow Charting 3</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1408</puid>
+	   <name>Flow Charting 4</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1409</puid>
+	   <name>Flow Charting 5</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1410</puid>
+	   <name>Flow Charting 6</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1411</puid>
+	   <name>Flow Charting PDQ</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1412</puid>
+	   <name>Flow Charting Graphic Flowcharting Image</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1413</puid>
+	   <name>Corel Gallery Clipart BMF</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1414</puid>
+	   <name>PFS:Write</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1415</puid>
+	   <name>GST Publisher 1</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1416</puid>
+	   <name>GST Publisher 2</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1417</puid>
+	   <name>Corel Print House Document 1</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1418</puid>
+	   <name>Corel Print House Document 2</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1419</puid>
+	   <name>Corel Print House/Print Office Document 3</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1420</puid>
+	   <name>Corel Print House/Print Office Document 4</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1421</puid>
+	   <name>Corel Print House/Print Office Document 5</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1422</puid>
+	   <name>Corel Photo House Image</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1424</puid>
+	   <name>WordPerfect Encrypted Document 4.2</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1425</puid>
+	   <name>MacDraw 0.9</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1426</puid>
+	   <name>MacDraw 1.x</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1427</puid>
+	   <name>MacDraw II</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1428</puid>
+	   <name>MacDraw Pro</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1429</puid>
+	   <name>MacPaint 2</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1430</puid>
+	   <name>Minitab Worksheet 8-11</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1431</puid>
+	   <name>Minitab Portable Worksheet</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1432</puid>
+	   <name>Minitab Worksheet 12</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1433</puid>
+	   <name>Minitab Worksheet 13</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1434</puid>
+	   <name>Minitab Project 14</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1435</puid>
+	   <name>Minitab Worksheet 14</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1436</puid>
+	   <name>Minitab Project 14</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1437</puid>
+	   <name>Minitab Worksheet 15+</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1438</puid>
+	   <name>Minitab Project 15+</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1439</puid>
+	   <name>Apple iWork Pages 09</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1440</puid>
+	   <name>Apple iWork Numbers 09</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1441</puid>
+	   <name>Apple iWork Document 14</name>
+	   <summary>Container signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1442</puid>
+	   <name>QuarkXPress Document 1-2</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1443</puid>
+	   <name>QuarkXPress Document 3.0</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1444</puid>
+	   <name>QuarkXPress Document 3.2</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1445</puid>
+	   <name>QuarkXPress Project 9.2</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="fmt">1446</puid>
+	   <name>QuarkXPress Project 10.1</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">31</puid>
+	   <name>CorelDraw Compressed Drawing 1</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">36</puid>
+	   <name>CorelDraw Compressed Drawing 2</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">85</puid>
+	   <name>Picture Publisher Bitmap 5.0</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">88</puid>
+	   <name>Microsoft PowerPoint Presentation 4.0</name>
+	   <summary>Container signature developed by Preservica.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">161</puid>
+	   <name>MacPaint 1</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">176</puid>
+	   <name>Picture Publisher Bitmap 4</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">350</puid>
+	   <name>OmniPage Pro Document 5-9</name>
+	   <summary>Signature developed by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+	  <format>
+	   <puid type="x-fmt">429</puid>
+	   <name>MHTML</name>
+	   <summary>Signature developed based on suggestion and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+	  </format>
+    </release_outline>
+</release_note>
+
+<release_note>
     <release_date>21st January 2020</release_date>
     <signature_filename>DROID_SignatureFile_V96.xml</signature_filename>
     <release_outline name="New Records">
