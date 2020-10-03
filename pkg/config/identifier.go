@@ -82,7 +82,7 @@ func Details(extra ...string) string {
 				extra = append(extra, ContainerBase())
 			}
 		}
-	} else if wikidata.definitions != "" {
+	} else if wikidata.namespace != "" {
 		str = wikidata.definitions
 		if !wikidata.nopronom {
 			extra = append(extra, DroidBase())

@@ -70,7 +70,8 @@ func TextMIME() string {
 
 func SetMIMEInfo(mi string) func() private {
 	return func() private {
-		loc.fdd = "" // reset loc to prevent pollution
+		wikidata.namespace = "" // reset wikidata to prevent pollution
+		loc.fdd = ""            // reset loc to prevent pollution
 		switch mi {
 		case "tika", "tika-mimetypes.xml":
 			mimeinfo.mi = "tika-mimetypes.xml"

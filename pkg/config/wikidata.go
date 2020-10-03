@@ -88,8 +88,10 @@ const wikidataNamespace = "wikidata"
 // to say this identifier is ON/OFF and should be used, i.e. when
 // this function is called, we want to use a Wikidata identifier.
 func SetWikidataNamespace() func() private {
-	wikidata.namespace = wikidataNamespace
 	return func() private {
+		loc.fdd = ""     // reset loc to avoid pollution
+		mimeinfo.mi = "" // reset mimeinfo to avoid pollution
+		wikidata.namespace = wikidataNamespace
 		return private{}
 	}
 }
@@ -104,10 +106,7 @@ func GetWikidataNamespace() string {
 // identifier
 func SetWikidataDebug() func() private {
 	wikidata.debug = true
-	SetWikidataNamespace()
-	return func() private {
-		return private{}
-	}
+	return SetWikidataNamespace()
 }
 
 // WikidataDebug will return the status of the debug flag, i.e.
@@ -146,17 +145,15 @@ func WikidataFileMode() os.FileMode {
 // information will be returned to the caller and the default endpoint
 // will be used.
 func SetWikidataEndpoint(endpoint string) (func() private, error) {
-	var err error
-	_, err = url.ParseRequestURI(endpoint)
+	_, err := url.ParseRequestURI(endpoint)
 	if err != nil {
-		err = fmt.Errorf(
+		return func() private { return private{} }, fmt.Errorf(
 			"Roy (Wikidata): URL provided is invalid: '%s' default Wikidata Query Service will be used instead",
 			err,
 		)
-	} else {
-		wikidata.endpoint = endpoint
 	}
 	return func() private {
+		wikidata.endpoint = endpoint
 		return private{}
 	}, err
 }
@@ -189,8 +186,8 @@ func SetWikidataLang(lang string) {
 // that the report will replay the provenance of a signature in the
 // basis field instead.
 func SetWikidataSourceFieldOff() func() private {
-	wikidata.sourcefield = false
 	return func() private {
+		wikidata.sourcefield = false
 		return private{}
 	}
 }
@@ -204,8 +201,8 @@ func GetWikidataSourceField() bool {
 // SetWikidataNoPRONOM will turn native PRONOM patterns off in the final
 // identifier output.
 func SetWikidataNoPRONOM() func() private {
-	wikidata.nopronom = true
 	return func() private {
+		wikidata.nopronom = true
 		return private{}
 	}
 }
@@ -213,8 +210,8 @@ func SetWikidataNoPRONOM() func() private {
 // SetWikidataPRONOM will turn native PRONOM patterns on in the final
 // identifier output.
 func SetWikidataPRONOM() func() private {
-	wikidata.nopronom = false
 	return func() private {
+		wikidata.nopronom = false
 		return private{}
 	}
 }
