@@ -375,6 +375,7 @@ func main() {
 	}
 	// handle -zs
 	if *selectArchives != "" {
+		*archive = true // if zs flag given, no need to also give z flag
 		config.SetArchiveFilterPermissive(*selectArchives)
 	}
 	// handle -fpr
