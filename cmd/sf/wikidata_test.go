@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 
 	"os"
 
@@ -41,16 +40,11 @@ var (
 
 var wdSiegfried *siegfried.Siegfried
 
-func setupWikidata(pronomx bool, opts ...config.Option) error {
-	if opts == nil && wdSiegfried != nil {
-		return fmt.Errorf(
-			"Wikidata setup options are not properly configured",
-		)
-	}
+func setupWikidata(pronomx bool) error {
 	wdSiegfried = siegfried.New()
 	config.SetHome(*wikidataDefinitions)
-	config.SetWikidataNamespace()
 	config.SetWikidataDefinitions(wikidataTestDefinitions)
+	opts := []config.Option{config.SetWikidataNamespace()}
 	if pronomx != true {
 		opts = append(opts, config.SetWikidataNoPRONOM())
 	} else {
@@ -100,8 +94,7 @@ const containerMatch = "container name"
 // TestWikidataBasic will perform some rudimentary tests using some
 // simple Skeleton files and the Wikidata identifier without PRONOM.
 func TestWikidataBasic(t *testing.T) {
-	pronom := false
-	err := setupWikidata(pronom)
+	err := setupWikidata(false)
 	if err != nil {
 		t.Error(err)
 	}
@@ -131,8 +124,7 @@ var archiveSamples = []identificationTests{
 }
 
 func TestArchives(t *testing.T) {
-	pronom := true
-	err := setupWikidata(pronom)
+	err := setupWikidata(true)
 	if err != nil {
 		t.Error(err)
 	}
@@ -153,8 +145,7 @@ var extensionMismatchSamples = []identificationTests{
 }
 
 func TestExtensionMismatches(t *testing.T) {
-	pronom := false
-	err := setupWikidata(pronom)
+	err := setupWikidata(false)
 	if err != nil {
 		t.Error(err)
 	}
@@ -181,8 +172,7 @@ var containerSamples = []identificationTests{
 }
 
 func TestContainers(t *testing.T) {
-	pronom := true
-	err := setupWikidata(pronom)
+	err := setupWikidata(true)
 	if err != nil {
 		t.Error(err)
 	}

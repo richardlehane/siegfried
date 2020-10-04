@@ -4,7 +4,7 @@
     <FileFormat>
       <FormatID>1319</FormatID>
       <FormatName>Drawing Interchange File Format (ASCII)</FormatName>
-      <FormatVersion>2013/2014</FormatVersion>
+      <FormatVersion>2013/2014/2015/2016/2017</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -12,7 +12,7 @@
       <FormatTypes>Image (Vector)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>	ASCII DXF format is the ASCII encoded variant of the Drawing Interchange File Format, an exchange format for vector graphics developed by AutoDesk. They are probably the widely-used formats for exchanging vector data, and have become a de-facto industry standard. The format is owned by AutoDesk and typically changes with each release of their AutoCAD family of products. DXF files contain a tagged representation of the vector data. The structure comprises a Header section, followed by sections containing data on Classes, Tables, Blocks, Entities and, optionally, thumbnail images. Each section contains a series of data elements. each preceded by a group code tag, which indicates the type of data element. ASCII DXF version 2013-2017 is the version of the format associated with Releases between 2013 and 2017 of the AutoCAD family of software products.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -26,7 +26,7 @@
       <ProvenanceSourceDate>01 May 2013</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>01 May 2013</LastUpdatedDate>
+      <LastUpdatedDate>28 Sep 2020</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -68,19 +68,19 @@
           <ByteSequenceID>1042</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>1</Offset>
-          <MaxOffset>2</MaxOffset>
+          <MaxOffset>5</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>30{1-2}53454354494F4E{1-2}202032{1-2}484541444552{1}*39{1-2}2441434144564552{1-2}202031{1-2}414331303237{1}*30{1-2}454E44534543</ByteSequenceValue>
+          <ByteSequenceValue>30(0D0A|0A|0D)53454354494F4E(0D0A|0A|0D)202032(0D0A|0A|0D)484541444552(0D0A|0A|0D)*39(0D0A|0A|0D)2441434144564552(0D0A|0A|0D)202031(0D0A|0A|0D)414331303237(0D0A|0A|0D)*30(0D0A|0A|0D)454E44534543(0D0A|0A|0D)</ByteSequenceValue>
         </ByteSequence>
         <ByteSequence>
           <ByteSequenceID>1043</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
-          <Offset>1</Offset>
+          <Offset>0</Offset>
           <MaxOffset>2</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
@@ -88,7 +88,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>30{1-2}454F46</ByteSequenceValue>
+          <ByteSequenceValue>30(0D0A|0A|0D)454F46</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

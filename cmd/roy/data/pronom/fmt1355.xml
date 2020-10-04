@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2173</FormatID>
+      <FormatName>WARC</FormatName>
+      <FormatVersion>1.0</FormatVersion>
+      <FormatAliases>Web ARChive, ISO 28500-2009</FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The WARC (Web ARChive) file format offers a convention for concatenating multiple resource records (data objects), each consisting of a set of simple text headers and an arbitrary data block into one long file. The WARC format is an extension of the ARC file format (ARC) that has traditionally been used to store "web crawls" as sequences of content blocks harvested from the World Wide Web (…)
+Besides the primary content recorded in ARCs, the extended WARC format accommodates related secondary content, such as assigned metadata, abbreviated duplicate detection events, later-date transformations, and segmentation of large resources”. The WARC format defines no internal compression, however the standard recommends the GZIP format with "deflate" where compression is desirable.
+WARC format has been written by the members of the IIPC (http://www.netpreserve.org/) grouped within the ISO/TC46/SC4/WG12.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>232</ProvenanceSourceID>
+      <ProvenanceName>Landesarchiv Nordrhein-Westfalen / Landesarchiv Nordrhein-Westfalen</ProvenanceName>
+      <ProvenanceSourceDate>28 Jan 2020</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>28 Jan 2020</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/warc</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1355</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2532</ExternalSignatureID>
+        <Signature>warc</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1738</SignatureID>
+        <SignatureName>WARC 1.0</SignatureName>
+        <SignatureNote>Matching WARC header. Header: WARC/1.0 CRLF. Then either 'WARC-Record-ID', 'WARC-Date',  'WARC-Type', 'Content-Length' all madatory fields that can appear in any order.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2016</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>4096</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>Little-endian</Endianness>
+          <ByteSequenceValue>574152432F312E300D0A{0-512}(574152432D5265636F72642D4944|436F6E74656E742D4C656E677468|574152432D54797065|574152432D44617465)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>639</RelatedFormatID>
+        <RelatedFormatName>Hypertext Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>2.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>640</RelatedFormatID>
+        <RelatedFormatName>Hypertext Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>3.2</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>641</RelatedFormatID>
+        <RelatedFormatName>Hypertext Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>4.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>642</RelatedFormatID>
+        <RelatedFormatName>Hypertext Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>4.01</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>643</RelatedFormatID>
+        <RelatedFormatName>Extensible Hypertext Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>644</RelatedFormatID>
+        <RelatedFormatName>Extensible Hypertext Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.1</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>645</RelatedFormatID>
+        <RelatedFormatName>Hypertext Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>1029</RelatedFormatID>
+        <RelatedFormatName>WARC</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>1258</RelatedFormatID>
+        <RelatedFormatName>Hypertext Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>5</RelatedFormatVersion>
+      </RelatedFormat>
+      <CompressionType>
+        <CompressionID>16</CompressionID>
+        <CompressionName>Deflate</CompressionName>
+        <CompressionVersion>
+        </CompressionVersion>
+        <CompressionAliases>
+        </CompressionAliases>
+        <CompressionFamilies>
+        </CompressionFamilies>
+        <Description>Deflate is a lossless algorithm based on LZ77 and Huffman encoding. It was developed by Phil Katz in 1996 for use in the PKZIP compressed archive format, and forms the basis for PNG compression. It is also the compression algorithm used by the GZIP file format.</Description>
+        <Lossiness>Lossless</Lossiness>
+        <ReleaseDate>01 Jan 1996</ReleaseDate>
+        <WithdrawnDate>
+        </WithdrawnDate>
+        <CompressionDocumentation>
+        </CompressionDocumentation>
+        <CompressionIPR>
+        </CompressionIPR>
+        <CompressionNote>
+        </CompressionNote>
+        <CompressionIdentifier>
+          <Identifier>x-cmp/16</Identifier>
+          <IdentifierType>PUID</IdentifierType>
+        </CompressionIdentifier>
+      </CompressionType>
+      <CharacterEncoding>
+        <EncodingID>2</EncodingID>
+        <EncodingName>UTF-8</EncodingName>
+        <EncodingVersion>
+        </EncodingVersion>
+        <EncodingAliases>
+        </EncodingAliases>
+        <EncodingFamilies>
+        </EncodingFamilies>
+        <Description>Outline record only.</Description>
+        <CodePage>
+        </CodePage>
+        <CodeUnitWidth>
+        </CodeUnitWidth>
+        <EncodingFormWidth>
+        </EncodingFormWidth>
+        <ReleaseDate>
+        </ReleaseDate>
+        <WithdrawnDate>
+        </WithdrawnDate>
+        <EncodingDocumentation>
+        </EncodingDocumentation>
+        <EncodingIPR>
+        </EncodingIPR>
+        <EncodingNote>
+        </EncodingNote>
+      </CharacterEncoding>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

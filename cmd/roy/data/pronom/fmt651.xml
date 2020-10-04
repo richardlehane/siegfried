@@ -91,7 +91,7 @@
       <InternalSignature>
         <SignatureID>983</SignatureID>
         <SignatureName>QuarkXPress 10 (Intel)</SignatureName>
-        <SignatureNote>BOF (Offset 2):'IIXPR'{1}'J'. The 'II' stands for created on an Intel computer.</SignatureNote>
+        <SignatureNote>BOF (Offset 2):'IIXPR'{1}'J'.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1212</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>

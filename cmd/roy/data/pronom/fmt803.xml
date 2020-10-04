@@ -29,13 +29,17 @@ The format is used to store media images for forensic purposes. They are a type 
       <ProvenanceSourceDate>27 Nov 2015</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>27 Nov 2015</LastUpdatedDate>
+      <LastUpdatedDate>28 Sep 2020</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
       </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/encase</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
       <FileFormatIdentifier>
         <Identifier>fmt/803</Identifier>
         <IdentifierType>PUID</IdentifierType>

@@ -13,7 +13,7 @@
       <FormatTypes>GIS</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>In the ArcGIS platform by ESRI, a map document is a file that contains one or more maps, the page layout, and the associated layers, tables, charts, and reports. Map document files have an .mxd extension.</FormatDescription>
+      <FormatDescription>In the ArcGIS platform by ESRI, a map document is a file that contains one or more maps, the page layout, and the associated layers, tables, charts, and reports. Map document files have an .mxd extension. Template files have an .mxt extension and do not appear to be materially different from .mxd files. Please contact the PRONOM team if you are able to differentiate between docments and templates.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -26,7 +26,7 @@
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>06 Jul 2016</ProvenanceSourceDate>
       <ProvenanceDescription>	This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
-      <LastUpdatedDate>06 Jul 2016</LastUpdatedDate>
+      <LastUpdatedDate>28 Sep 2020</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -40,6 +40,11 @@
       <ExternalSignature>
         <ExternalSignatureID>1861</ExternalSignatureID>
         <Signature>mxd</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2616</ExternalSignatureID>
+        <Signature>mxt</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
     </FileFormat>

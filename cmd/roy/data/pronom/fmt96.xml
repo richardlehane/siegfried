@@ -181,7 +181,8 @@
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1029</RelatedFormatID>
         <RelatedFormatName>WARC</RelatedFormatName>
-        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
@@ -235,6 +236,12 @@
         <RelatedFormatID>2099</RelatedFormatID>
         <RelatedFormatName>WARC</RelatedFormatName>
         <RelatedFormatVersion>1.1</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2173</RelatedFormatID>
+        <RelatedFormatName>WARC</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
       </RelatedFormat>
       <FormatProperties>
         <FormatProperty>

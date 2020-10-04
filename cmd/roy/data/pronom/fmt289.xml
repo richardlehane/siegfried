@@ -4,7 +4,8 @@
     <FileFormat>
       <FormatID>1029</FormatID>
       <FormatName>WARC</FormatName>
-      <FormatVersion>1.0</FormatVersion>
+      <FormatVersion>
+      </FormatVersion>
       <FormatAliases>ISO 28500-2009, Web ARChive file format</FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
@@ -26,7 +27,7 @@ WARC format has been written by the members of the IIPC (http://www.netpreserve.
       </ProvenanceName>
       <ProvenanceSourceDate>02 Nov 2010</ProvenanceSourceDate>
       <ProvenanceDescription>Submitted by Bibliothèque nationale de France with supplementary description information attributed to ISO 28500-2009 standard.</ProvenanceDescription>
-      <LastUpdatedDate>19 Jul 2013</LastUpdatedDate>
+      <LastUpdatedDate>28 Sep 2020</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -62,7 +63,7 @@ WARC format has been written by the members of the IIPC (http://www.netpreserve.
       <InternalSignature>
         <SignatureID>305</SignatureID>
         <SignatureName>WARC</SignatureName>
-        <SignatureNote>Matching WARC header, type field and date. Header: WARC/{3-4}CRLF Type: WARC-Type:{0-12}CRLF Date: WARC-Date:[expression matching ISO8601 date pattern]CRLF. Note: Seems to be a problem matching WARC record at beginning of file so signature is currently variable position to catch records later in the file before 4096 bytes.</SignatureNote>
+        <SignatureNote>Matching WARC header. Header: 'WARC/'. Then either 'WARC-Record-ID', 'Content-Length',  'WARC-Type', 'WARC-Date' all madatory fields that can appear in any order.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>406</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -74,9 +75,21 @@ WARC format has been written by the members of the IIPC (http://www.netpreserve.
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>574152432F{3-4}0D0A574152432D547970653A{0-13}0D0A{0-512}574152432D446174653A{4-5}2D{2}2D{2}54{2}3A{2}3A{2}5A0D0A{0-1024}0D0A0D0A</ByteSequenceValue>
+          <ByteSequenceValue>574152432F{0-517}(574152432D5265636F72642D4944|436F6E74656E742D4C656E677468|574152432D54797065|574152432D44617465)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2099</RelatedFormatID>
+        <RelatedFormatName>WARC</RelatedFormatName>
+        <RelatedFormatVersion>1.1</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2173</RelatedFormatID>
+        <RelatedFormatName>WARC</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>639</RelatedFormatID>

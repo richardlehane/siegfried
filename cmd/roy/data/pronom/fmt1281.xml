@@ -5,8 +5,7 @@
       <FormatID>2099</FormatID>
       <FormatName>WARC</FormatName>
       <FormatVersion>1.1</FormatVersion>
-      <FormatAliases>
-      </FormatAliases>
+      <FormatAliases>ISO 28500:2017, Web ARChive</FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
       <FormatTypes>Aggregate</FormatTypes>
@@ -49,7 +48,7 @@
       <InternalSignature>
         <SignatureID>1661</SignatureID>
         <SignatureName>WARC 1.1</SignatureName>
-        <SignatureNote>Matching WARC header. Header: WARC/1.1 CRLF. Then either 'WARC-Record-ID', 'Content-Length',  'WARC-Type', 'Content-Type' all madatory fields that can appear in any order.</SignatureNote>
+        <SignatureNote>Matching WARC header. Header: WARC/1.1 CRLF. Then either 'WARC-Record-ID', 'WARC-Date',  'WARC-Type', 'Content-Length' all madatory fields that can appear in any order.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1932</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -104,6 +103,13 @@
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>645</RelatedFormatID>
         <RelatedFormatName>Hypertext Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>1029</RelatedFormatID>
+        <RelatedFormatName>WARC</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

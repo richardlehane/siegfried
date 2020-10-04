@@ -91,7 +91,7 @@
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>820</RelatedFormatID>
-        <RelatedFormatName>Microsoft Web Archive</RelatedFormatName>
+        <RelatedFormatName>MHTML</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

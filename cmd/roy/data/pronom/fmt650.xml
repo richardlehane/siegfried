@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>1449</FormatID>
-      <FormatName>Quark Xpress Report File</FormatName>
+      <FormatName>QuarkXPress Report File</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
@@ -13,7 +13,7 @@
       <FormatTypes>Presentation</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This file records activities to a file as it constructed and edited in QuarkXpress.</FormatDescription>
+      <FormatDescription>This file records activities to a file as it constructed and edited in QuarkXPress.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>

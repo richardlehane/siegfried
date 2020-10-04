@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2176</FormatID>
+      <FormatName>MicroStation Base File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Vector)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>These files, which always end with the file extension .bse, consist of the line drawing layer in Microstation from c.2000. MicroStation CAD software was developed and sold by Bentley Systems and which is used for 2D and 3D design, and is mainly used in the architectural and engineering industries.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>216</ProvenanceSourceID>
+      <ProvenanceName>The Canadian Centre for Architecture / The Canadian Centre for Architecture</ProvenanceName>
+      <ProvenanceSourceDate>05 Mar 2020</ProvenanceSourceDate>
+      <ProvenanceDescription>https://www.bentley.com/en/products/product-line/modeling-and-visualization-software/microstation</ProvenanceDescription>
+      <LastUpdatedDate>05 Mar 2020</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1358</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2535</ExternalSignatureID>
+        <Signature>bse</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1741</SignatureID>
+        <SignatureName>MicroStation Base File</SignatureName>
+        <SignatureNote>BOF offset 824- 3616  'HPT_DD_IGDS:FONTLIB'.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2019</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>824</Offset>
+          <MaxOffset>3616</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4850545F44445F494744533A464F4E544C4942</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

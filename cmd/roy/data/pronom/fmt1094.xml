@@ -11,7 +11,7 @@
       <FormatTypes>Dataset</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>A Neuroimaging format used in medical industry for the analysis of scans of x-rays. Version 2 is an extended version of NIfTI allowing 64 bit storage and addressing.</FormatDescription>
+      <FormatDescription>A Neuroimaging format commonly used in medical industry for the analysis of MRI data. Version 2 is an extended version of NIfTI allowing 64 bit storage and addressing.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -25,7 +25,7 @@
       <ProvenanceSourceDate>19 Sep 2017</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>19 Sep 2017</LastUpdatedDate>
+      <LastUpdatedDate>11 Aug 2020</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>

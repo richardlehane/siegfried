@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2184</FormatID>
+      <FormatName>ESRI Published Map Format</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>GIS</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The PMF file is a read-only map file created with ArcMap, an application included with ESRI Desktop GIS. It can be viewed with the ArcReader application. PMF files allow the protecting of data and confidentiality by enabling the creator to limit the data views, printing, zooming and other features of a map.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>234</ProvenanceSourceID>
+      <ProvenanceName>National Library of Australia / National Library of Australia</ProvenanceName>
+      <ProvenanceSourceDate>03 Sep 2020</ProvenanceSourceDate>
+      <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
+      <LastUpdatedDate>03 Sep 2020</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1366</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>221</DeveloperID>
+        <DeveloperName>Esri</DeveloperName>
+        <OrganisationName>Esri</OrganisationName>
+        <DeveloperCompoundName>Esri / Esri</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>221</SupportID>
+        <SupportName>Esri</SupportName>
+        <OrganisationName>Esri</OrganisationName>
+        <SupportCompoundName>Esri / Esri</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2543</ExternalSignatureID>
+        <Signature>pmf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

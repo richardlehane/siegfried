@@ -24,7 +24,7 @@
       <ProvenanceSourceDate>11 Feb 2015</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>11 Feb 2015</LastUpdatedDate>
+      <LastUpdatedDate>28 Sep 2020</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -92,6 +92,13 @@
         <RelatedFormatID>735</RelatedFormatID>
         <RelatedFormatName>Broadcast WAVE</RelatedFormatName>
         <RelatedFormatVersion>0 Generic</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>785</RelatedFormatID>
+        <RelatedFormatName>Waveform Audio (WAVEFORMATEX)</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>

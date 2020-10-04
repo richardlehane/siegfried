@@ -21,7 +21,7 @@
       <ProvenanceSourceDate>11 Mar 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <LastUpdatedDate>28 Sep 2020</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -36,6 +36,20 @@
         <Identifier>image/vnd.dxf</Identifier>
         <IdentifierType>MIME</IdentifierType>
       </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>18</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Autodesk Corporation</OrganisationName>
+        <DeveloperCompoundName>Autodesk Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>18</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Autodesk Corporation</OrganisationName>
+        <SupportCompoundName>Autodesk Corporation</SupportCompoundName>
+      </Support>
       <Document>
         <DocumentID>36</DocumentID>
         <DisplayText>Autodesk Corporation, 1995, AutoCAD Release 13 Developer's Guide: Chapter 13 - DXF Reference</DisplayText>
@@ -72,7 +86,7 @@
       <InternalSignature>
         <SignatureID>111</SignatureID>
         <SignatureName>Drawing Interchange File Format R13</SignatureName>
-        <SignatureNote>Header section with $ACADVER group code, EOF marker</SignatureNote>
+        <SignatureNote>Header section with $ACADVER group code (AC1012), EOF marker</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>25</ByteSequenceID>
           <PositionType>Variable</PositionType>
@@ -86,20 +100,20 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>30(0D0A|0A|0D)53454354494F4E(0D0A|0A|0D)202032(0D0A|0A|0D)484541444552*39(0D0A|0A|0D)2441434144564552(0D0A|0A|0D)202031(0D0A|0A|0D)414331303132*30(0D0A|0A|0D)454E44534543</ByteSequenceValue>
+          <ByteSequenceValue>30(0D0A|0A|0D)53454354494F4E(0D0A|0A|0D)202032(0D0A|0A|0D)484541444552(0D0A|0A|0D)*39(0D0A|0A|0D)2441434144564552(0D0A|0A|0D)202031(0D0A|0A|0D)414331303237(0D0A|0A|0D)*30(0D0A|0A|0D)454E44534543(0D0A|0A|0D)</ByteSequenceValue>
         </ByteSequence>
         <ByteSequence>
           <ByteSequenceID>26</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>2</MaxOffset>
+          <MaxOffset>5</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>30(0D0A|0A|0D)454F46</ByteSequenceValue>
+          <ByteSequenceValue>30(0D0A|0D|0A)454F46</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

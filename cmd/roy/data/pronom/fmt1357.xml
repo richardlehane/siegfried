@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2175</FormatID>
+      <FormatName>Virtual Format (Vector)</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>OGR Virtual Format</FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Mark-up)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>VRT is developed by the GDAL/OGR group and is an XML file that is used to transform source GIS datasets by the GDAL/OGR programs. It can operate on either raster or vector data sources, though the two different datasets cannot be mixed in the same VRT file. Virtual Format is a driver that transforms features read from other drivers based on criteria specified in an XML control file. It is primarily used to derive spatial layers from flat tables with spatial information in attribute columns. It can also be used to associate coordinate system information with a datasource, merge layers from different datasources into a single data source, or even just to provide an anchor file for access to non-file oriented datasources.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>194</ProvenanceSourceID>
+      <ProvenanceName>National Library of Wales / National Library of Wales</ProvenanceName>
+      <ProvenanceSourceDate>29 Jan 2020</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>29 Jan 2020</LastUpdatedDate>
+      <FormatNote>https://gdal.org/drivers/vector/vrt.html
+https://timcera.bitbucket.io/posts/vrts_are_amazing.html</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1357</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2534</ExternalSignatureID>
+        <Signature>vrt</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1740</SignatureID>
+        <SignatureName>Virtual Format (Vector)</SignatureName>
+        <SignatureNote>BOF: '&lt;OGRVRTDataSource&gt;’</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2018</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>300</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C4F475256525444617461536F75726365</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

@@ -4,8 +4,7 @@
     <FileFormat>
       <FormatID>1626</FormatID>
       <FormatName>Apple iWork Numbers</FormatName>
-      <FormatVersion>
-      </FormatVersion>
+      <FormatVersion>Generic</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -13,7 +12,7 @@
       <FormatTypes>Spreadsheet</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>Numbers is a spreadsheet application created by Apple as part of the iWork Productivity Suite.</FormatDescription>
+      <FormatDescription>Numbers is a spreadsheet application created by Apple as part of the iWork Productivity Suite. This entry is currently an extension-only entry to provide a default identification in the absence of a signature-based identification.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -27,7 +26,7 @@
       <ProvenanceSourceDate>16 Dec 2015</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>16 Dec 2015</LastUpdatedDate>
+      <LastUpdatedDate>30 Sep 2020</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>

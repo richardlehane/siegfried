@@ -62,7 +62,7 @@
         <DocumentNote>
         </DocumentNote>
         <DocumentIdentifier>
-          <Identifier>partners.adobe.com/public/developer/en/tiff/TIFF6.pdf</Identifier>
+          <Identifier>https://www.adobe.io/content/dam/udp/en/open/standards/tiff/TIFF6.pdf</Identifier>
           <IdentifierType>URL</IdentifierType>
         </DocumentIdentifier>
         <Author>
@@ -125,7 +125,7 @@
         <DocumentNote>
         </DocumentNote>
         <DocumentIdentifier>
-          <Identifier>partners.adobe.com/public/developer/en/tiff/TIFFPM6.pdf</Identifier>
+          <Identifier>https://www.adobe.io/content/dam/udp/en/open/standards/tiff/TIFFPM6.pdf</Identifier>
           <IdentifierType>URL</IdentifierType>
         </DocumentIdentifier>
         <Author>
@@ -157,7 +157,7 @@
         <DocumentNote>
         </DocumentNote>
         <DocumentIdentifier>
-          <Identifier>partners.adobe.com/public/developer/en/tiff/TIFFphotoshop.pdf</Identifier>
+          <Identifier>https://www.adobe.io/content/dam/udp/en/open/standards/tiff/TIFFphotoshop.pdf</Identifier>
           <IdentifierType>URL</IdentifierType>
         </DocumentIdentifier>
         <Author>

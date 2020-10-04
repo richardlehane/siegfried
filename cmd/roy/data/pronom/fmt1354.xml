@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2172</FormatID>
+      <FormatName>QuickBooks Backup File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Dataset</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>QBB file format used by QuickBooks for their backup files. It is used to manage inventory, payroll, sales and other needs of a business. QuickBooks includes many features such as marketing tools, product and suppliers, merchant services and training solutions. QBB files are the backups files QuickBooks QBW files containing all financial records, logos, images, letters, and templates.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>234</ProvenanceSourceID>
+      <ProvenanceName>National Library of Australia / National Library of Australia</ProvenanceName>
+      <ProvenanceSourceDate>27 Jan 2020</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>27 Jan 2020</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1354</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>51</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Intuit Inc.</OrganisationName>
+        <DeveloperCompoundName>Intuit Inc.</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>51</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Intuit Inc.</OrganisationName>
+        <SupportCompoundName>Intuit Inc.</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2531</ExternalSignatureID>
+        <Signature>qbb</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1737</SignatureID>
+        <SignatureName>QuickBooks Backup File</SignatureName>
+        <SignatureNote>BOF:E†....</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2015</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>458600000600</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

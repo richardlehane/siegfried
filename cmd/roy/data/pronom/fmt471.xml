@@ -91,9 +91,17 @@ Variant 1: &lt;!(DOCTYPE|doctype){0-4}(HTML|html)&gt;</SignatureNote>
       </InternalSignature>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>820</RelatedFormatID>
+        <RelatedFormatName>MHTML</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1029</RelatedFormatID>
         <RelatedFormatName>WARC</RelatedFormatName>
-        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
@@ -128,6 +136,12 @@ Variant 1: &lt;!(DOCTYPE|doctype){0-4}(HTML|html)&gt;</SignatureNote>
         <RelatedFormatID>2099</RelatedFormatID>
         <RelatedFormatName>WARC</RelatedFormatName>
         <RelatedFormatVersion>1.1</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2173</RelatedFormatID>
+        <RelatedFormatName>WARC</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>

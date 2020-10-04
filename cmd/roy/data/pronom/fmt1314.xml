@@ -29,7 +29,7 @@ A glTF Overview can be found at https://www.khronos.org/gltf</FormatDescription>
       <ProvenanceSourceDate>18 Jan 2020</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>18 Jan 2020</LastUpdatedDate>
+      <LastUpdatedDate>28 Sep 2020</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -64,7 +64,7 @@ A glTF Overview can be found at https://www.khronos.org/gltf</FormatDescription>
       <InternalSignature>
         <SignatureID>1693</SignatureID>
         <SignatureName>GLTF 1.0</SignatureName>
-        <SignatureNote>BOF:'{'{0-20}'"asset"'{0-5}':'{0-5}'{'{0-20}'"version"'{0-5}':'{0-5}'"1.0"' EOF: '}'</SignatureNote>
+        <SignatureNote>BOF:'{'*'"asset"'*':'*'{'*'"version"'*':'*'"1.0"' EOF: '}'</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1964</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -76,7 +76,7 @@ A glTF Overview can be found at https://www.khronos.org/gltf</FormatDescription>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>7B{0-20}22617373657422{0-5}3A{0-5}7B{0-20}2276657273696F6E22{0-5}3A{0-5}22312E3022</ByteSequenceValue>
+          <ByteSequenceValue>7B*22617373657422*3A*7B*2276657273696F6E22*3A*22312E3022</ByteSequenceValue>
         </ByteSequence>
         <ByteSequence>
           <ByteSequenceID>1965</ByteSequenceID>

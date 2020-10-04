@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2241</FormatID>
+      <FormatName>HP TRIM Outlook Saved Message File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>A vmbx file is a saved message file from Outlook associated with the EDRMS software HP TRIM document and records management software.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>234</ProvenanceSourceID>
+      <ProvenanceName>National Library of Australia / National Library of Australia</ProvenanceName>
+      <ProvenanceSourceDate>28 Sep 2020</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>28 Sep 2020</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1423</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>45</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Hewlett Packard Company</OrganisationName>
+        <DeveloperCompoundName>Hewlett Packard Company</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>45</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Hewlett Packard Company</OrganisationName>
+        <SupportCompoundName>Hewlett Packard Company</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2619</ExternalSignatureID>
+        <Signature>vmbx</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

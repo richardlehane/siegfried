@@ -58,6 +58,11 @@
         <Signature>doc</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2615</ExternalSignatureID>
+        <Signature>docx</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
       <InternalSignature>
         <SignatureID>738</SignatureID>
         <SignatureName>MS Owner file v1</SignatureName>

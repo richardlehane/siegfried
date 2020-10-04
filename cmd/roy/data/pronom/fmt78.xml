@@ -21,7 +21,7 @@
       <ProvenanceSourceDate>11 Mar 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <LastUpdatedDate>28 Sep 2020</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -36,6 +36,20 @@
         <Identifier>image/vnd.dxf</Identifier>
         <IdentifierType>MIME</IdentifierType>
       </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>18</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Autodesk Corporation</OrganisationName>
+        <DeveloperCompoundName>Autodesk Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>18</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Autodesk Corporation</OrganisationName>
+        <SupportCompoundName>Autodesk Corporation</SupportCompoundName>
+      </Support>
       <Document>
         <DocumentID>8</DocumentID>
         <DisplayText>Autodesk Corporation, 2001, AutoCAD 2002: DXF reference guide</DisplayText>
@@ -72,7 +86,7 @@
       <InternalSignature>
         <SignatureID>113</SignatureID>
         <SignatureName>Drawing Interchange File Format 2000-2002</SignatureName>
-        <SignatureNote>Header section with $ACADVER group code, EOF marker</SignatureNote>
+        <SignatureNote>Header section with $ACADVER group code (AC1015), EOF marker</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>21</ByteSequenceID>
           <PositionType>Variable</PositionType>
@@ -86,55 +100,20 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>30(0D0A|0A|0D)53454354494F4E(0D0A|0A|0D)202032(0D0A|0A|0D)484541444552*39(0D0A|0A|0D)2441434144564552(0D0A|0A|0D)202031(0D0A|0A|0D)414331303135*30(0D0A|0A|0D)454E44534543</ByteSequenceValue>
+          <ByteSequenceValue>30(0D0A|0A|0D)53454354494F4E(0D0A|0A|0D)202032(0D0A|0A|0D)484541444552(0D0A|0A|0D)*39(0D0A|0A|0D)2441434144564552(0D0A|0A|0D)202031(0D0A|0A|0D)414331303135(0D0A|0A|0D)*30(0D0A|0A|0D)454E44534543(0D0A|0A|0D)</ByteSequenceValue>
         </ByteSequence>
         <ByteSequence>
           <ByteSequenceID>22</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>2</MaxOffset>
+          <MaxOffset>5</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>30(0D0A|0A|0D)454F46</ByteSequenceValue>
-        </ByteSequence>
-      </InternalSignature>
-      <InternalSignature>
-        <SignatureID>686</SignatureID>
-        <SignatureName>Drawing Interchange File Format 2000-2002 (0A)</SignatureName>
-        <SignatureNote>replaces 0A0D in the original signature with just 0A to accommodate files with this variation..</SignatureNote>
-        <ByteSequence>
-          <ByteSequenceID>847</ByteSequenceID>
-          <PositionType>Variable</PositionType>
-          <Offset>
-          </Offset>
-          <MaxOffset>
-          </MaxOffset>
-          <IndirectOffsetLocation>
-          </IndirectOffsetLocation>
-          <IndirectOffsetLength>
-          </IndirectOffsetLength>
-          <Endianness>
-          </Endianness>
-          <ByteSequenceValue>300A53454354494F4E0A2020320A4845414445520A*390A24414341445645520A2020310A4143313031350A*300A454E445345430A</ByteSequenceValue>
-        </ByteSequence>
-        <ByteSequence>
-          <ByteSequenceID>848</ByteSequenceID>
-          <PositionType>Absolute from EOF</PositionType>
-          <Offset>
-          </Offset>
-          <MaxOffset>
-          </MaxOffset>
-          <IndirectOffsetLocation>
-          </IndirectOffsetLocation>
-          <IndirectOffsetLength>
-          </IndirectOffsetLength>
-          <Endianness>
-          </Endianness>
-          <ByteSequenceValue>300A454F460A</ByteSequenceValue>
+          <ByteSequenceValue>30(0D0A|0D|0A)454F46</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

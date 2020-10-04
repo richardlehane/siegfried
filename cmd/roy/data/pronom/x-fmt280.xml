@@ -97,6 +97,12 @@ Full specifications can be found at http://www.w3.org/TR/xmlschema-0/</FormatDes
         <RelatedFormatName>Geography Markup Language</RelatedFormatName>
         <RelatedFormatVersion>3.2</RelatedFormatVersion>
       </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2192</RelatedFormatID>
+        <RelatedFormatName>XDOMEA</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

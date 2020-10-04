@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2260</FormatID>
+      <FormatName>QuarkXPress Document</FormatName>
+      <FormatVersion>1-2</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Presentation</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>QuarkXPress is desktop publishing software for creating and editing page layouts that can be run on Mac and Windows operating systems. It was first released in 1987. It can be used to creating a variety of layouts, from single-page flyers to multi-media projects required for magazines, newspapers and catalogues. Versions 1-3 were available on Macintosh only and may lack an extension.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>
+      </ProvenanceName>
+      <ProvenanceSourceDate>30 Sep 2020</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>30 Sep 2020</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/vnd.Quark.QuarkXPress</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1442</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>91</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Quark, Inc</OrganisationName>
+        <DeveloperCompoundName>Quark, Inc</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>91</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Quark, Inc</OrganisationName>
+        <SupportCompoundName>Quark, Inc</SupportCompoundName>
+      </Support>
+      <InternalSignature>
+        <SignatureID>1801</SignatureID>
+        <SignatureName>QuarkXPress 1-2 variant 1</SignatureName>
+        <SignatureNote>BOF: 0x001C001C</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2095</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>001C001C</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1802</SignatureID>
+        <SignatureName>QuarkXPress 1-2 variant 2</SignatureName>
+        <SignatureNote>BOF: 0x00260026</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2094</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>00260026</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

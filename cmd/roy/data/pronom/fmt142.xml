@@ -82,6 +82,30 @@
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1503</RelatedFormatID>
+        <RelatedFormatName>Broadcast WAVE</RelatedFormatName>
+        <RelatedFormatVersion>1 PCM Encoding</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1505</RelatedFormatID>
+        <RelatedFormatName>Broadcast WAVE</RelatedFormatName>
+        <RelatedFormatVersion>0 MPEG Encoding</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1506</RelatedFormatID>
+        <RelatedFormatName>Broadcast WAVE</RelatedFormatName>
+        <RelatedFormatVersion>1 MPEG Encoding</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1507</RelatedFormatID>
+        <RelatedFormatName>Broadcast WAVE</RelatedFormatName>
+        <RelatedFormatVersion>2 MPEG Encoding</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>654</RelatedFormatID>
         <RelatedFormatName>Waveform Audio</RelatedFormatName>

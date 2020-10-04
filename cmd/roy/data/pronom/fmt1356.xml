@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2174</FormatID>
+      <FormatName>Virtual Format (Raster)</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>GDAL Virtual Format</FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Mark-up)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>VRT is developed by the GDAL/OGR group and is an XML file that is used to transform source GIS datasets by the GDAL/OGR programs. It can operate on either raster or vector data sources, though the two different datasets cannot be mixed in the same VRT file. VRT driver is a raster format driver that allows a virtual GDAL dtaset to be composed from other GDAL datasets with repositioning and algorithms potentially applied as well as various kinds of metadata altered or added. VRT descriptions of datasets can be saved in an XML format normally given the extension .vrt.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>194</ProvenanceSourceID>
+      <ProvenanceName>National Library of Wales / National Library of Wales</ProvenanceName>
+      <ProvenanceSourceDate>29 Jan 2020</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>29 Jan 2020</LastUpdatedDate>
+      <FormatNote>https://gdal.org/drivers/raster/vrt.html
+https://timcera.bitbucket.io/posts/vrts_are_amazing.html</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1356</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2533</ExternalSignatureID>
+        <Signature>vrt</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1739</SignatureID>
+        <SignatureName>Virtual Format (Raster)</SignatureName>
+        <SignatureNote>BOF: ‘&lt;VRTDataset raster’</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2017</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>300</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C5652544461746173657420726173746572</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

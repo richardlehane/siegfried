@@ -60,6 +60,9 @@ var sourcePuids []string
 // enables configuration to be applied as well.
 //
 func New(opts ...config.Option) (core.Identifier, error) {
+	for _, v := range opts {
+		v()
+	}
 	log.Println("Roy (Wikidata): Congratulations: doing something with the Wikidata identifier package!")
 	wikidata, puids, err := newWikidata()
 	if err != nil {
