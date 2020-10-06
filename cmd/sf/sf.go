@@ -55,7 +55,7 @@ var (
 	serve          = flag.String("serve", "", "start siegfried server e.g. -serve localhost:5138")
 	multi          = flag.Int("multi", 1, "set number of parallel file ID processes")
 	archive        = flag.Bool("z", false, fmt.Sprintf("scan archive formats: (%s)", config.ListAllArcTypes()))
-	selectArchives = flag.String("zs", config.ListAllArcTypes(), "select the archive types to decompress and identify the contents of")
+	selectArchives = flag.String("zs", "", fmt.Sprintf("select archive formats to scan: (%s)", config.ListAllArcTypes()))
 	hashf          = flag.String("hash", "", "calculate file checksum with hash algorithm; options "+checksum.HashChoices)
 	throttlef      = flag.Duration("throttle", 0, "set a time to wait between scanning files e.g. 50ms")
 	utcf           = flag.Bool("utc", false, "report file modified times in UTC, rather than local, TZ")
@@ -373,10 +373,15 @@ func main() {
 		}
 		return
 	}
-	// handle -zs
-	if *selectArchives != "" {
+	// handle -z and -zs
+	if *archive || *selectArchives != "" {
 		*archive = true // if zs flag given, no need to also give z flag
-		config.SetArchiveFilterPermissive(*selectArchives)
+		if *selectArchives == "" {
+			config.SetArchiveFilterPermissive(config.ListAllArcTypes())
+
+		} else {
+			config.SetArchiveFilterPermissive(*selectArchives)
+		}
 	}
 	// handle -fpr
 	if *fprflag {
