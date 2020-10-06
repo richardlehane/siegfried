@@ -28,7 +28,7 @@ import (
 
 var (
 	// list of flags that can be configured
-	setableFlags = []string{"coe", "csv", "droid", "hash", "json", "log", "multi", "nr", "serve", "sig", "throttle", "yaml", "z"}
+	setableFlags = []string{"coe", "csv", "droid", "hash", "json", "log", "multi", "nr", "serve", "sig", "throttle", "yaml", "z", "zs"}
 	// list of flags that control output - these are exclusive of each other
 	outputFlags = []string{"csv", "droid", "json", "yaml"}
 )
