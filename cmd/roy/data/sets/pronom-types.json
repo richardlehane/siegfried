@@ -10,9 +10,9 @@
     "x-fmt/269 (ZOO Compressed Archive)",
     "x-fmt/412 (Java Archive Format)",
     "x-fmt/416 (BinHex Binary Text)",
-    "x-fmt/429 (Microsoft Web Archive)",
+    "x-fmt/429 (MHTML)",
     "fmt/189 (Microsoft Office Open XML 2007 onwards)",
-    "fmt/289 (WARC 1.0)",
+    "fmt/289 (WARC)",
     "fmt/329 (Shell Archive Format)",
     "fmt/364 (National Imagery Transmission Format 1.0)",
     "fmt/365 (National Imagery Transmission Format 2.0)",
@@ -54,7 +54,10 @@
     "fmt/1252 (Raw Flux Image)",
     "fmt/1281 (WARC 1.1)",
     "fmt/1340 (BDOC 1)",
-    "fmt/1341 (ASICS)"
+    "fmt/1341 (ASICS)",
+    "fmt/1355 (WARC 1.0)",
+    "fmt/1361 (Amiga Disk File)",
+    "fmt/1399 (DiskDoubler)"
   ],
   "audio": [
     "x-fmt/135 (Audio Interchange File Format 1.3)",
@@ -384,7 +387,18 @@
     "fmt/1295 (Calendar Creator Event 3-4)",
     "fmt/1296 (Calendar Creator File 4)",
     "fmt/1297 (Calendar Creator File 5-6)",
-    "fmt/1298 (Calendar Creator File 7-8)"
+    "fmt/1298 (Calendar Creator File 7-8)",
+    "fmt/1354 (QuickBooks Backup File)",
+    "fmt/1385 (Bruker PDZ)",
+    "fmt/1430 (Minitab Worksheet 8-11)",
+    "fmt/1431 (Minitab Portable Worksheet)",
+    "fmt/1432 (Minitab Worksheet 12)",
+    "fmt/1433 (Minitab Worksheet 13)",
+    "fmt/1434 (Minitab Project 12-13)",
+    "fmt/1435 (Minitab Worksheet 14)",
+    "fmt/1436 (Minitab Project 14)",
+    "fmt/1437 (Minitab Worksheet 15+)",
+    "fmt/1438 (Minitab Project 15+)"
   ],
   "email": [
     "x-fmt/430 (Microsoft Outlook Email Message 97-2003)",
@@ -397,7 +411,10 @@
     "x-fmt/453 (TrueType Font)",
     "fmt/520 (OpenType Font File)",
     "fmt/616 (Web Open Font Format 1.0)",
-    "fmt/1172 (Web Open Font Format 2.0)"
+    "fmt/1172 (Web Open Font Format 2.0)",
+    "fmt/1382 (Embedded OpenType (EOT) File Format 0x00010000)",
+    "fmt/1383 (Embedded OpenType (EOT) File Format 0x00020001)",
+    "fmt/1384 (Embedded OpenType (EOT) File Format 0x00020002)"
   ],
   "gis": [
     "x-fmt/225 (ESRI MapInfo Data File)",
@@ -430,7 +447,10 @@
     "fmt/1247 (SOSI 4.0)",
     "fmt/1248 (SOSI 4.1)",
     "fmt/1249 (SOSI 4.5)",
-    "fmt/1250 (SOSI 8.1)"
+    "fmt/1250 (SOSI 8.1)",
+    "fmt/1362 (Microsoft MapPoint Document)",
+    "fmt/1366 (ESRI Published Map Format)",
+    "fmt/1367 (GeoJSON)"
   ],
   "imageRaster": [
     "x-fmt/25 (OS/2 Bitmap 1.0)",
@@ -446,7 +466,7 @@
     "x-fmt/153 (Microsoft Windows Enhanced Metafile 1.0)",
     "x-fmt/154 (AutoDesk FLIC Animation)",
     "x-fmt/159 (GEM Image)",
-    "x-fmt/161 (MacPaint Image)",
+    "x-fmt/161 (MacPaint Image 1)",
     "x-fmt/164 (Portable Bitmap Image - ASCII)",
     "x-fmt/167 (Adobe PhotoDeluxe)",
     "x-fmt/170 (PC Paint Bitmap)",
@@ -637,18 +657,22 @@
     "fmt/1336 (LEADTools Lead 1Bit Compressed Image)",
     "fmt/1337 (LEADToolsCompressed Image)",
     "fmt/1343 (PTGui Project File 10)",
-    "fmt/1344 (PTGui Project File 11)"
+    "fmt/1344 (PTGui Project File 11)",
+    "fmt/1360 (Picture Publisher Bitmap 6-10)",
+    "fmt/1412 (Flow Charting Graphic Flowcharting Image)",
+    "fmt/1422 (Corel Photo House Image)",
+    "fmt/1429 (MacPaint Image 2)"
   ],
   "imageVector": [
     "x-fmt/20 (Adobe Illustrator 1.0 / 1.1)",
     "x-fmt/29 (CorelDraw Drawing 6.0)",
     "x-fmt/30 (CorelDraw Template)",
-    "x-fmt/31 (CorelDraw Compressed Drawing)",
+    "x-fmt/31 (CorelDraw Compressed Drawing 1)",
     "x-fmt/32 (Harvard Graphics Chart 3.0)",
     "x-fmt/33 (Corel R.A.V.E. 1)",
     "x-fmt/34 (Corel Presentation Exchange File 5.0)",
     "x-fmt/35 (Corel Presentation Exchange File 6 and Later)",
-    "x-fmt/36 (Corel CMX Compressed)",
+    "x-fmt/36 (CorelDraw Compressed Drawing 2)",
     "x-fmt/47 (Micrografx Draw 1-2)",
     "x-fmt/53 (Macromedia Freehand 5)",
     "x-fmt/55 (Frame Vector Metafile)",
@@ -725,7 +749,7 @@
     "fmt/82 (Drawing Interchange File Format (Binary) R13)",
     "fmt/83 (Drawing Interchange File Format (Binary) R14)",
     "fmt/84 (Drawing Interchange File Format (Binary) 2000-2002)",
-    "fmt/85 (Drawing Interchange File Format (Binary) 2004-2005)",
+    "fmt/85 (Drawing Interchange File Format (Binary) 2004-2006)",
     "fmt/127 (OpenOffice Draw 1.0)",
     "x-fmt/401 (StarOffice Draw 5.x)",
     "x-fmt/402 (StarOffice Draw 5.2)",
@@ -768,7 +792,7 @@
     "fmt/467 (CorelDraw Drawing 1.0)",
     "fmt/502 (Bentley V8 DGN)",
     "fmt/531 (AutoCAD Drawing 2013/2014)",
-    "fmt/532 (Drawing Interchange File Format (ASCII) 2013/2014)",
+    "fmt/532 (Drawing Interchange File Format (ASCII) 2013/2014/2015/2016/2017)",
     "fmt/542 (GEM Metafile Format 1.01)",
     "fmt/543 (GEM Metafile Format 3.10)",
     "fmt/544 (Macromedia FreeHand 7)",
@@ -816,7 +840,20 @@
     "fmt/1044 (AutoShade Rendering Slide)",
     "fmt/1213 (Zoner Callisto Metafile 2)",
     "fmt/1312 (CorelCHART Document 3-4)",
-    "fmt/1313 (CorelCHART Document 5)"
+    "fmt/1313 (CorelCHART Document 5)",
+    "fmt/1358 (MicroStation Base File)",
+    "fmt/1389 (Drawing Interchange Format (ASCII) 2018/2019/2020)",
+    "fmt/1390 (Drawing Interchange Format (Binary) 2007-2009)",
+    "fmt/1391 (Drawing Interchange Format (Binary) 2010-2012)",
+    "fmt/1392 (Drawing Interchange Format (Binary) 2013-2017)",
+    "fmt/1393 (Drawing Interchange Format (Binary) 2018-2021)",
+    "fmt/1394 (Drawing Interchange Format (Binary) Generic)",
+    "fmt/1395 (AutoCAD Drawing 2018/2019/2020/2021)",
+    "fmt/1413 (Corel Gallery Clipart BMF)",
+    "fmt/1425 (MacDraw 0.9)",
+    "fmt/1426 (MacDraw 1.x)",
+    "fmt/1427 (MacDraw II)",
+    "fmt/1428 (MacDraw Pro)"
   ],
   "model": [
     "x-fmt/19 (3D Studio)",
@@ -932,7 +969,11 @@
     "fmt/1348 (Autodesk Revit Family File 2008)",
     "fmt/1349 (Autodesk Revit Family File 2010)",
     "fmt/1350 (Autodesk Revit Project File 2019)",
-    "fmt/1351 (Autodesk Revit Family File 2019)"
+    "fmt/1351 (Autodesk Revit Family File 2019)",
+    "fmt/1363 (DeluxePaint Animation File)",
+    "fmt/1381 (VariCAD Drawing 7+)",
+    "fmt/1397 (FARO Laser Scan File)",
+    "fmt/1398 (FARO WorkSpace File)"
   ],
   "pageDescription": [
     "fmt/122 (Encapsulated PostScript File Format 1.2)",
@@ -973,7 +1014,8 @@
     "fmt/1129 (PDF 2.0 - Portable Document Format 2.0)",
     "fmt/1174 (Hewlett Packard Graphics Language 2)",
     "fmt/1286 (Envoy Document File 1)",
-    "fmt/1287 (Envoy Document File 7)"
+    "fmt/1287 (Envoy Document File 7)",
+    "fmt/1396 (FinePrint)"
   ],
   "presentation": [
     "x-fmt/32 (Harvard Graphics Chart 3.0)",
@@ -1033,10 +1075,10 @@
     "fmt/633 (Microsoft PowerPoint Macro-Enabled Add-In 2007)",
     "fmt/636 (Microsoft PowerPoint Macro-Enabled Slide 2007)",
     "fmt/637 (Microsoft OneNote)",
-    "fmt/646 (Apple iWorks Keynote 09)",
+    "fmt/646 (Apple iWork Keynote 09)",
     "fmt/647 (Microsoft Expression Media 2)",
     "fmt/648 (Media View Pro)",
-    "fmt/650 (Quark Xpress Report File)",
+    "fmt/650 (QuarkXPress Report File)",
     "fmt/651 (QuarkXPress Project 10)",
     "fmt/652 (QuarkXPress Project 6)",
     "fmt/685 (QuarkXPress Project 9)",
@@ -1082,7 +1124,27 @@
     "fmt/1332 (HP Photo Album)",
     "fmt/1333 (Sony PictureGear Studio PhotoAlbum)",
     "fmt/1334 (Sony PictureGear Studio PrintStudio)",
-    "fmt/1335 (Sony PictureGear Studio Binder)"
+    "fmt/1335 (Sony PictureGear Studio Binder)",
+    "fmt/1359 (Softdisk Text Compressor)",
+    "fmt/1406 (Flow Charting I-II+)",
+    "fmt/1407 (Flow Charting 3)",
+    "fmt/1408 (Flow Charting 4)",
+    "fmt/1409 (Flow Charting 5)",
+    "fmt/1410 (Flow Charting 6)",
+    "fmt/1411 (Flow Charting PDQ)",
+    "fmt/1415 (GST Publisher File 1)",
+    "fmt/1416 (GST Publisher File 2)",
+    "fmt/1417 (Corel Print House Document 1)",
+    "fmt/1418 (Corel Print House Document 2)",
+    "fmt/1419 (Corel Print House/Print Office Document 3)",
+    "fmt/1420 (Corel Print House/Print Office Document 4)",
+    "fmt/1421 (Corel Print House/Print Office Document 5)",
+    "fmt/1441 (Apple iWork Document 14)",
+    "fmt/1442 (QuarkXPress Document 1-2)",
+    "fmt/1443 (QuarkXPress Document 3.0)",
+    "fmt/1444 (QuarkXPress Document 3.2)",
+    "fmt/1445 (QuarkXPress Project 9.2)",
+    "fmt/1446 (QuarkXPress Project 10.1)"
   ],
   "spreadsheet": [
     "x-fmt/17 (Microsoft Excel Template 97-2003)",
@@ -1139,7 +1201,7 @@
     "fmt/740 (ClarisWorks Spreadsheet 4)",
     "fmt/745 (ClarisWorks/AppleWorks Spreadsheet 5)",
     "fmt/750 (AppleWorks Spreadsheet 6)",
-    "fmt/825 (Apple iWork Numbers)",
+    "fmt/825 (Apple iWork Numbers Generic)",
     "fmt/834 (Quattro Pro Spreadsheet for Windows 1/5)",
     "fmt/835 (Quattro Pro Spreadsheet for Windows 6)",
     "fmt/836 (Quattro Pro Spreadsheet 7-8)",
@@ -1148,7 +1210,9 @@
     "fmt/901 (Microsoft Works Spreadsheet 6-9)",
     "fmt/1219 (Gnumeric)",
     "fmt/1292 (EIOffice Document)",
-    "fmt/1294 (602Tab Spreadsheet)"
+    "fmt/1294 (602Tab Spreadsheet)",
+    "fmt/1440 (Apple iWork Numbers 09)",
+    "fmt/1441 (Apple iWork Document 14)"
   ],
   "textMarkup": [
     "x-fmt/195 (Standard Generalized Markup Language)",
@@ -1211,7 +1275,16 @@
     "fmt/1232 (DIGIDOC-XML 1.2)",
     "fmt/1233 (DIGIDOC-XML 1.3)",
     "fmt/1241 (FO File)",
-    "fmt/1311 (Tweet JSON)"
+    "fmt/1311 (Tweet JSON)",
+    "fmt/1356 (Virtual Format (Raster))",
+    "fmt/1357 (Virtual Format (Vector))",
+    "fmt/1374 (XDOMEA 1.0)",
+    "fmt/1376 (XDOMEA 2.0.1)",
+    "fmt/1375 (XDOMEA 2.0.0)",
+    "fmt/1377 (XDOMEA 2.1.0)",
+    "fmt/1378 (XDOMEA 2.2.0)",
+    "fmt/1379 (XDOMEA 2.3.0)",
+    "fmt/1380 (XDOMEA 2.4.0)"
   ],
   "textStructured": [
     "x-fmt/41 (Data Interchange Format)",
@@ -1306,7 +1379,10 @@
     "fmt/1235 (EclipseCrossword Puzzle File)",
     "fmt/1236 (EclipseCrossword Word List File)",
     "fmt/1256 (MapInfo Workspace File)",
-    "fmt/1288 (IESNA LM-63 Photometric Data File)"
+    "fmt/1288 (IESNA LM-63 Photometric Data File)",
+    "fmt/1365 (Debug File)",
+    "fmt/1369 (Error File)",
+    "fmt/1423 (HP TRIM Outlook Saved Message File)"
   ],
   "textUnstructured": [
     "x-fmt/14 (Macintosh Text File)",
@@ -1357,7 +1433,10 @@
     "fmt/1055 (M2TS)",
     "fmt/1150 (4X Movie File)",
     "fmt/1176 (Nullsoft Streaming Video)",
-    "fmt/1234 (Smacker Video)"
+    "fmt/1234 (Smacker Video)",
+    "fmt/1386 (Muvee autoProducer Project File 1-5)",
+    "fmt/1387 (Muvee autoProducer Project File 6)",
+    "fmt/1388 (Muvee Reveal Project File)"
   ],
   "wordProcessor": [
     "x-fmt/1 (Microsoft Word for Macintosh Document 3.0)",
@@ -1483,7 +1562,7 @@
     "fmt/749 (AppleWorks Word Processor 6)",
     "fmt/754 (Microsoft Word Document (Password Protected) 97-2003)",
     "fmt/755 (Microsoft Word Document Template (Password Protected) 97-2003)",
-    "fmt/824 (Apple iWork Pages)",
+    "fmt/824 (Apple iWork Pages Generic)",
     "fmt/826 (Scriptware Script Format)",
     "fmt/846 (ClarisWorks Word Processor 2-3)",
     "fmt/882 (Wordstar 2000 1)",
@@ -1511,6 +1590,16 @@
     "fmt/1307 (LocoScript Document 4)",
     "fmt/1308 (LocoScript PC)",
     "fmt/1309 (LocoScript Professional)",
-    "fmt/1339 (PaperPort MAX 8-12)"
+    "fmt/1339 (PaperPort MAX 8-12)",
+    "fmt/1400 (Ichitaro Document 8)",
+    "fmt/1401 (Student Writing Center Report)",
+    "fmt/1402 (Student Writing Center Journal)",
+    "fmt/1403 (Student Writing Center Sign)",
+    "fmt/1404 (Student Writing Center Newsletter)",
+    "fmt/1405 (Student Writing Center Letter)",
+    "fmt/1414 (PFS:Write Document)",
+    "fmt/1424 (WordPerfect Encrypted Document 4.2)",
+    "fmt/1439 (Apple iWork Pages 09)",
+    "fmt/1441 (Apple iWork Document 14)"
   ]
 }
