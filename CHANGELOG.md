@@ -1,4 +1,13 @@
 # Change Log
+## v1.9.1 (2020-10-)
+### Changed
+- update PRONOM to v97
+- zs flag now activates -z flag
+
+### Fixed
+- details text in PRONOM identifier
+- `roy` panic when building signatures with empty sequences. Reported by [Greg Lepore](https://github.com/richardlehane/siegfried/issues/149)
+
 ## v1.9.0 (2020-09-22)
 ### Added
 - a new Wikidata identifier, harvesting information from the Wikidata Query Service. Implemented by [Ross Spencer](https://github.com/richardlehane/siegfried/commit/dfb579b4ae46ae6daa814fc3fc74271d768f2f9c). 
