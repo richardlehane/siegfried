@@ -44,11 +44,7 @@ func (m *mscfbReader) Name() string {
 	if m.entry == nil {
 		return ""
 	}
-	path := append(m.entry.Path, m.entry.Name)
-	if m.entry.FileInfo().IsDir() {
-		return strings.Join(path, "/") + "/" // add a trailing slash if a directory
-	}
-	return strings.Join(path, "/")
+	return strings.Join(append(m.entry.Path, m.entry.Name), "/")
 }
 
 func (m *mscfbReader) SetSource(b *siegreader.Buffers) (*siegreader.Buffer, error) {
