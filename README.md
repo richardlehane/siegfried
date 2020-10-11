@@ -9,7 +9,7 @@
 
 ### Version
 
-1.9.0
+1.9.1
 
 [![Build Status](https://travis-ci.org/richardlehane/siegfried.png?branch=master)](https://travis-ci.org/richardlehane/siegfried) [![Build status](https://ci.appveyor.com/api/projects/status/1eqdmi2nvive0vgn?svg=true)](https://ci.appveyor.com/project/richardlehane/siegfried) [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -96,6 +96,15 @@ Or, for the most recent updates, you can install from this fork:
     makepkg -si
 
 ## Changes
+### v1.9.1 (2020-10-11)
+### Changed
+- update PRONOM to v97
+- zs flag now activates -z flag
+
+### Fixed
+- details text in PRONOM identifier
+- `roy` panic when building signatures with empty sequences. Reported by [Greg Lepore](https://github.com/richardlehane/siegfried/issues/149)
+
 ### v1.9.0 (2020-09-22)
 ### Added
 - a new Wikidata identifier, harvesting information from the Wikidata Query Service. Implemented by [Ross Spencer](https://github.com/richardlehane/siegfried/commit/dfb579b4ae46ae6daa814fc3fc74271d768f2f9c). 

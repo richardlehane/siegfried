@@ -1,5 +1,5 @@
 # Change Log
-## v1.9.1 (2020-10-)
+## v1.9.1 (2020-10-11)
 ### Changed
 - update PRONOM to v97
 - zs flag now activates -z flag
