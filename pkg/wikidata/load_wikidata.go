@@ -55,6 +55,8 @@ const encodingField = "encodingLabel"
 const relativityField = "relativityLabel"
 const dateField = "date"
 const referenceField = "referenceLabel"
+const softwareField = "software"
+const softwareLabelField = "softwareLabel"
 
 // getID returns the QID from the IRI of the record that we're
 // processing.
