@@ -37,7 +37,7 @@ var wikidataLang = "en"
 const sparql = `
 	# Return all file format records from Wikidata.
 	#
-	select distinct ?uri ?uriLabel ?puid ?extension ?mimetype ?encodingLabel ?referenceLabel ?date ?relativityLabel ?offset ?sig
+	select distinct ?uri ?uriLabel ?puid ?extension ?mimetype ?encodingLabel ?referenceLabel ?date ?relativityLabel ?offset ?sig ?software ?softwareLabel
 	where
 	{
 	  ?uri wdt:P31/wdt:P279* wd:Q235557.               # Return records of type File Format.
@@ -55,6 +55,7 @@ const sparql = `
 	                }
 	    }
 	  }
+	  optional { ?software wdt:P1072 ?uri. }
 	  service wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE], <<lang>>". }
 	}
 	order by ?uri
