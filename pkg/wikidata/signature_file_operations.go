@@ -16,7 +16,7 @@
 // (saving and loading data structures to the Siegfried signature file).
 // Also creates the structures we are going to use to inspect the
 // signature file which also get converted to Siegfried result sets,
-// including provenance.
+// including provenance and revision history.
 
 package wikidata
 
@@ -57,6 +57,8 @@ func (i *Identifier) Save(ls *persist.LoadSaver) {
 		ls.SaveString(value.uri)
 		ls.SaveString(value.mime)
 		ls.SaveStrings(value.sources)
+		ls.SaveString(value.permalink)
+		ls.SaveString(value.revisionHistory)
 	}
 	i.Base.Save(ls)
 }
@@ -73,6 +75,8 @@ func Load(ls *persist.LoadSaver) core.Identifier {
 			ls.LoadString(),  // URI.
 			ls.LoadString(),  // mime.
 			ls.LoadStrings(), // sources.
+			ls.LoadString(),  // permalink.
+			ls.LoadString(),  // revision history.
 		}
 	}
 	i.Base = identifier.Load(ls)
@@ -97,6 +101,15 @@ type formatInfo struct {
 	// sources describes the source of a signature retrieved from
 	// Wikidata.
 	sources []string
+	// permalink refers to the Wikibase permalink for a Wikidata record.
+	// The data at the permalink represents the specific version of the
+	// record used to derive the information used by Siegfried, e.g.
+	// signature definition.
+	permalink string
+	// revisionHistory refers to a bigger chunk of JSON which can be
+	// displayed to a user to describe the history of a format
+	// definition.
+	revisionHistory string
 }
 
 // infos turns the generic formatInfo into the structure that will be
@@ -117,10 +130,11 @@ func (f formatInfo) String() string {
 		sources = strings.Join(f.sources, " ")
 	}
 	return fmt.Sprintf(
-		"---\nFormat info: Name: '%s'\nMIMEType: '%s'\nSources: '%s'\n",
+		"---\nFormat info: Name: '%s'\nMIMEType: '%s'\nSources: '%s' \nRevision History: %s\n---\n",
 		f.name,
 		f.mime,
 		sources,
+		f.revisionHistory,
 	)
 }
 
@@ -155,10 +169,12 @@ func (wdd wikidataDefinitions) Infos() parseableFormatInfo {
 		}
 		sources := prepareSources(value)
 		fi := formatInfo{
-			name:    value.Name,
-			uri:     value.URI,
-			mime:    mime,
-			sources: sources,
+			name:            value.Name,
+			uri:             value.URI,
+			mime:            mime,
+			sources:         sources,
+			permalink:       value.Permalink,
+			revisionHistory: value.RevisionHistory,
 		}
 		formatInfoMap[value.ID] = fi
 	}
@@ -166,11 +182,11 @@ func (wdd wikidataDefinitions) Infos() parseableFormatInfo {
 }
 
 // prepareSources prepares a slice of sources that will be used to
-// return some sort of provenance information for positive matches
-// returned by the Wikidata identifier. We need to return a slice here
-// as order of processing is important and matches the order which they
-// will be processed into the identifier in the other identifier
-// functions.
+// return some sort of source information (provenance of datum in
+// Wikidata) for positive matches returned by the Wikidata identifier.
+// We need to return a slice here as order of processing is important
+// and matches the order which they will be processed into the
+// identifier in the other identifier functions.
 //
 // We also want to take into account the native PRONOM sources here.
 //
@@ -187,7 +203,7 @@ func (wdd wikidataDefinitions) Infos() parseableFormatInfo {
 // to be compatible with Siegfried's/Roy's persist package.
 func prepareSources(wdMapping mappings.Wikidata) []string {
 
-	// Output the provenance date consistently.
+	// Output the source date consistently.
 	const provDateFormat = "2006-01-02"
 
 	sources := []string{}
@@ -196,9 +212,9 @@ func prepareSources(wdMapping mappings.Wikidata) []string {
 	if len(wdMapping.Signatures) > 0 {
 		// Records like MACH-0 (Q2627217) are good examples of records
 		// with multiple signatures that can potentially have different
-		// provenance.
+		// sources.
 		for idx := range wdMapping.Signatures {
-			prov := wdMapping.Signatures[idx].Provenance
+			prov := wdMapping.Signatures[idx].Source
 			date := wdMapping.Signatures[idx].Date
 			if date != "" {
 				date, _ := time.Parse(time.RFC3339, date)
