@@ -19,17 +19,32 @@
 package wikidata
 
 import (
-	"github.com/richardlehane/siegfried/pkg/wikidata/internal/mappings"
+	"fmt"
+	"log"
 
-	"github.com/ross-spencer/spargo/pkg/spargo"
+	"github.com/richardlehane/siegfried/pkg/wikidata/internal/mappings"
+	"github.com/ross-spencer/wikiprov/pkg/spargo"
 )
 
 // wikidataRecord provides an alias for the mappings.Wikidata object.
 type wikidataRecord = mappings.Wikidata
 
+// getProvenance will return the permalink, and provenance entry for
+// a Wikidata record given a QID. If a provenance entry doesn't exist
+// for an entry an error is returned.
+func getProvenance(id string, provenance wikiProv) (string, string, error) {
+	const noValueFound = ""
+	for _, value := range provenance {
+		if value.Title == id {
+			return value.Permalink, fmt.Sprintf("%s", value), nil
+		}
+	}
+	return noValueFound, noValueFound, fmt.Errorf("Roy (Wikidata): Provenance not found for: %s", id)
+}
+
 // newRecord creates a Wikidata record with the values received from
 // Wikidata itself.
-func newRecord(wikidataItem map[string]spargo.Item, addSigs bool) wikidataRecord {
+func newRecord(wikidataItem map[string]spargo.Item, provenance wikiProv, addSigs bool) wikidataRecord {
 	wd := wikidataRecord{}
 	wd.ID = getID(wikidataItem[uriField].Value)
 	wd.Name = wikidataItem[formatLabelField].Value
@@ -49,7 +64,7 @@ func newRecord(wikidataItem map[string]spargo.Item, addSigs bool) wikidataRecord
 			return wd
 		}
 		sig := Signature{}
-		sig.Provenance = parseProvenance(wikidataItem[referenceField].Value)
+		sig.Source = parseProvenance(wikidataItem[referenceField].Value)
 		sig.Date = wikidataItem[dateField].Value
 
 		wd.Signatures = append(wd.Signatures, sig)
@@ -57,6 +72,11 @@ func newRecord(wikidataItem map[string]spargo.Item, addSigs bool) wikidataRecord
 		wd.Signatures[0].ByteSequences = append(
 			wd.Signatures[0].ByteSequences, bs)
 	}
+	perma, prov, err := getProvenance(wd.ID, provenance)
+	if err != nil {
+		log.Println("Roy (Wikidata):", err)
+	}
+	wd.Permalink, wd.RevisionHistory = perma, prov
 	return wd
 }
 
