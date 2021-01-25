@@ -30,7 +30,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/wikidata/internal/converter"
 	"github.com/richardlehane/siegfried/pkg/wikidata/internal/mappings"
 
-	"github.com/ross-spencer/spargo/pkg/spargo"
+	"github.com/ross-spencer/wikiprov/pkg/spargo"
 )
 
 // ByteSequence provides an alias for the mappings.ByteSequence object.
@@ -117,7 +117,7 @@ func updateSequences(wikidataItem map[string]spargo.Item, wd *wikidataRecord) li
 				sig.ByteSequences = append(sig.ByteSequences, bs)
 				prov, lint := validateAndReturnProvenance(wikidataItem[referenceField].Value)
 				handleLinting(wd.URI, lint)
-				sig.Provenance = parseProvenance(prov)
+				sig.Source = parseProvenance(prov)
 				sig.Date, lint = validateAndReturnDate(wikidataItem[dateField].Value)
 				handleLinting(wd.URI, lint)
 				wd.Signatures = append(wd.Signatures, sig)

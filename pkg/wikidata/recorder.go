@@ -16,7 +16,7 @@
 // package.
 
 // WIKIDATA TODO: This part of an identifier is still somewhat
-// unfamiliar to me so I need to spend a bit longer on this next week.
+// unfamiliar to me so I need to spend a bit longer on it at some point.
 
 package wikidata
 
@@ -114,6 +114,7 @@ func add(matches matchIDs, id string, wikidataID string, info formatInfo, basis 
 				ID:         wikidataID,
 				Name:       info.name,
 				LongName:   info.uri,
+				Permalink:  info.permalink,
 				MIME:       info.mime,
 				Basis:      []string{basis},
 				Source:     []string{source},
@@ -128,6 +129,7 @@ func add(matches matchIDs, id string, wikidataID string, info formatInfo, basis 
 			ID:         wikidataID,
 			Name:       info.name,
 			LongName:   info.uri,
+			Permalink:  info.permalink,
 			MIME:       info.mime,
 			Basis:      []string{basis},
 			Warning:    "",

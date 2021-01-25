@@ -1,17 +1,19 @@
 package main
 
 import (
+	"bytes"
+	"encoding/json"
 	"flag"
-
 	"os"
-
 	"path/filepath"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/pkg/config"
 	"github.com/richardlehane/siegfried/pkg/wikidata"
+	"github.com/richardlehane/siegfried/pkg/writer"
 )
 
 // Path components associated with the Roy command folder.
@@ -29,6 +31,7 @@ const wikidataCustomSkeletons = "wd"
 const wikidataArcSkeletons = "arc"
 const wikidataExtensionMismatches = "ext_mismatch"
 const wikidataContainerMatches = "container"
+const wikidataCuriosityMatches = "curiosities"
 
 var (
 	wikidataDefinitions = flag.String(
@@ -47,6 +50,7 @@ func setupWikidata(pronomx bool) error {
 	opts := []config.Option{config.SetWikidataNamespace()}
 	if pronomx != true {
 		opts = append(opts, config.SetWikidataNoPRONOM())
+		opts = append(opts, config.SetWikidataSourceFieldOff())
 	} else {
 		opts = append(opts, config.SetWikidataPRONOM())
 	}
@@ -183,6 +187,27 @@ func TestContainers(t *testing.T) {
 	wdSiegfried = nil
 }
 
+var curiositySamples = []identificationTests{
+	identificationTests{
+		// curiosity.1 should match with Q000000 in the sample signature
+		// file which has source information including lots of strange
+		// characters as well as emoji.
+		filepath.Join(wikidataCuriosityMatches, "curiosity.1"),
+		"Q000000", true, true, false, false},
+}
+
+func TestCurious(t *testing.T) {
+	err := setupWikidata(true)
+	if err != nil {
+		t.Error(err)
+	}
+	for _, test := range curiositySamples {
+		path := filepath.Join(siegfriedTestData, wikidataTestData, test.fname)
+		siegfriedRunner(path, test, t)
+	}
+	wdSiegfried = nil
+}
+
 func siegfriedRunner(path string, test identificationTests, t *testing.T) {
 	file, err := os.Open(path)
 	if err != nil {
@@ -201,7 +226,8 @@ func siegfriedRunner(path string, test identificationTests, t *testing.T) {
 		t.Errorf("Namespace error, expected: '%s' received: '%s'", wikidataNamespace, namespace)
 	}
 	id := res[0].Values()[1]
-	basis := res[0].Values()[5]
+	permalink := res[0].Values()[4]
+	basis := res[0].Values()[6]
 	warning := res[0].Values()[7]
 	if id != test.qid {
 		t.Errorf(
@@ -210,6 +236,14 @@ func siegfriedRunner(path string, test identificationTests, t *testing.T) {
 			test.qid,
 		)
 	}
+	const placeholderPermalink = "https://www.wikidata.org/w/index.php?oldid=1287431117&title=Q12345"
+	if permalink != placeholderPermalink {
+		t.Errorf("There has been a problem parsing the permalink for '%s' from Wikidata/Wikiprov: %s",
+			test.qid,
+			permalink,
+		)
+	}
+
 	if test.extMatch && !strings.Contains(basis, extensionMatch) {
 		t.Errorf("Extension match not returned by identifier: %s", basis)
 	}
@@ -221,5 +255,18 @@ func siegfriedRunner(path string, test identificationTests, t *testing.T) {
 	}
 	if !test.extMatch && !strings.Contains(warning, extensionMismatch) {
 		t.Errorf("Expected an extension mismatch but it wasn't returned: %s", warning)
+	}
+
+	// Implement a basic Writer test for some of the data coming out of
+	// the Wikidata identifier. CSV and YAML will need a little more
+	// thought.
+	var w writer.Writer
+	buf := new(bytes.Buffer)
+	w = writer.JSON(buf)
+	w.Head("path/to/file", time.Now(), time.Now(), [3]int{0, 0, 0}, wdSiegfried.Identifiers(), wdSiegfried.Fields(), "md5")
+	w.File("testName", 10, "testMod", []byte("d41d8c"), nil, res)
+	w.Tail()
+	if !json.Valid([]byte(buf.String())) {
+		t.Errorf("Output from JSON writer is invalid: %s", buf.String())
 	}
 }
