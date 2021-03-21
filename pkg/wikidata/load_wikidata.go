@@ -43,18 +43,20 @@ type Signature = mappings.Signature
 
 // Fields which are used in the Wikidata SPARQL query which we will
 // access via JSON mapping.
-const uriField = "uri"
-const formatLabelField = "uriLabel"
-const puidField = "puid"
-const locField = "ldd"
-const extField = "extension"
-const mimeField = "mimetype"
-const signatureField = "sig"
-const offsetField = "offset"
-const encodingField = "encodingLabel"
-const relativityField = "relativityLabel"
-const dateField = "date"
-const referenceField = "referenceLabel"
+const (
+	uriField = "uri"
+	formatLabelField = "uriLabel"
+	puidField = "puid"
+	locField = "ldd"
+	extField = "extension"
+	mimeField = "mimetype"
+	signatureField = "sig"
+	offsetField = "offset"
+	encodingField = "encoding"
+	relativityField = "relativity"
+	dateField = "date"
+	referenceField = "referenceLabel"
+)
 
 // getID returns the QID from the IRI of the record that we're
 // processing.
