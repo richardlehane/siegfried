@@ -198,11 +198,21 @@ func siegfriedRunner(path string, test identificationTests, t *testing.T) {
 	}
 	namespace := res[0].Values()[0]
 	if namespace != wikidataNamespace {
-		t.Errorf("Namespace error, expected: '%s' received: '%s'", wikidataNamespace, namespace)
+		t.Errorf("Namespace error, expected: '%s' received: '%s'",
+			wikidataNamespace, namespace,
+		)
 	}
-	id := res[0].Values()[1]
-	basis := res[0].Values()[5]
-	warning := res[0].Values()[7]
+
+	// res is a an array of JSON values. We're interested in the first
+	// result, and then the fields within there.
+	firstResultField := 0
+	idField := 1
+	basisField := 5
+	warningField := 6
+
+	id := res[firstResultField].Values()[idField]
+	basis := res[firstResultField].Values()[basisField]
+	warning := res[firstResultField].Values()[warningField]
 	if id != test.qid {
 		t.Errorf(
 			"QID match different than anticipated: '%s' expected '%s'",

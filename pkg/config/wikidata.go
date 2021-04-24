@@ -55,9 +55,6 @@ var wikidata = struct {
 	// nopronom determines whether the identifier will be build without
 	// patterns from PRONOM sources outside of Wikidata.
 	nopronom bool
-	// sourceField provides a way to represent provenance as a new field
-	// in the Siegfried report.
-	sourcefield bool
 	// wikidatahome describes the name of the wikidata directory withing
 	// $SFHOME.
 	wikidatahome string
@@ -70,7 +67,6 @@ var wikidata = struct {
 	definitions:  "wikidata-definitions-1.0.0",
 	endpoint:     "https://query.wikidata.org/sparql",
 	filemode:     0644,
-	sourcefield:  true,
 	wikidatahome: "wikidata",
 }
 
@@ -180,22 +176,6 @@ func WikidataLang() string {
 // from Wikidata. The default is en.
 func SetWikidataLang(lang string) {
 	wikidatasparql.SetWikidataLang(lang)
-}
-
-// SetWikidataSourceFieldOff will set the sourcefield flag to off so
-// that the report will replay the provenance of a signature in the
-// basis field instead.
-func SetWikidataSourceFieldOff() func() private {
-	return func() private {
-		wikidata.sourcefield = false
-		return private{}
-	}
-}
-
-// GetWikidataSourceField will return the sourcefield status to the
-// caller.
-func GetWikidataSourceField() bool {
-	return wikidata.sourcefield
 }
 
 // SetWikidataNoPRONOM will turn native PRONOM patterns off in the final
