@@ -14,22 +14,39 @@
 
 package chart
 
-import "fmt"
+import (
+	"testing"
+)
 
-func ExampleChart() {
-	fmt.Print(Chart("Census",
+// TestExampleChart will compare the chart output with a test string to
+// ensure consistency of results.
+func TestExampleChart(t *testing.T) {
+
+	const res string = `CENSUS
+1950
+deaths:    ■ ■ (49)
+births:    ■ (11)
+
+1951
+deaths:    ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ (200)
+births:    ■ (9)
+`
+
+	chart := Chart("Census",
 		[]string{"1950", "1951", "1952"},
 		[]string{"deaths", "births", "marriages"},
 		map[string]bool{},
 		map[string]map[string]int{"1950": {"births": 11, "deaths": 49}, "1951": {"deaths": 200, "births": 9}},
-	))
-	// Output:
-	// CENSUS
-	// 1950
-	// deaths:   ■ ■ (49)
-	// births:   ■ (11)
-	//
-	// 1951
-	// deaths:   ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ (200)
-	// births:   ■ (9)
+	)
+
+	// Chart returned from Chart() call is terminated with \n, so this
+	// must be accounted for here with strings.Trim, or in the test
+	// string above.
+	if chart != res {
+		t.Errorf(
+			"Expected (@@ denotes BOF/EOF string):\n@@%s@@\n\nReceived:\n@@%s@@",
+			res,
+			chart,
+		)
+	}
 }
