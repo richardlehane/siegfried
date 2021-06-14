@@ -148,21 +148,13 @@ func (id Identification) String() string {
 //      e.g. namespace => becomes => ns
 //
 func (i *Identifier) Fields() []string {
-	// Results with extra source field we can populate with provenance
-	// information.
-	var resultsFieldsWithSource = []string{
-		"namespace",
-		"id",
-		"format",
-		"URI",
-		"mime",
-		"basis",
-		"source",
-		"warning",
-	}
-	// Result field without source field. This is a little more like
-	// other identifiers used in Siegfried.
-	var resultsFueldsWithoutSource = []string{
+	// Result fields. Basis is used by Wikidata to reflect both the
+	// details of the signature used to match (or other identifiers) as
+	// well as the source of binary signatures.
+	//
+	// e.g. byte match at 0, 4 (Gary Kessler''s File Signature Table (source date: 2017-08-08))
+	//
+	return []string{
 		"namespace",
 		"id",
 		"format",
@@ -171,10 +163,6 @@ func (i *Identifier) Fields() []string {
 		"basis",
 		"warning",
 	}
-	if config.GetWikidataSourceField() {
-		return resultsFieldsWithSource
-	}
-	return resultsFueldsWithoutSource
 }
 
 // Archive should tell us if any identifiers match those considered to
@@ -197,28 +185,8 @@ func (id Identification) Warn() string {
 // Values returns a string slice containing each of the identifier segments.
 func (id Identification) Values() []string {
 	var basis string
-	var source string
 	if len(id.Basis) > 0 {
 		basis = strings.Join(id.Basis, "; ")
-	}
-	if config.GetWikidataSourceField() {
-		if len(id.Source) > 0 {
-			if id.Source[0] != "" {
-				source = strings.Join(id.Source, "; ")
-			}
-			source = strings.TrimSpace(strings.Join(id.Source, " "))
-		}
-		// Slice must match the order of resultsFieldsWithSource.
-		return []string{
-			id.Namespace,
-			id.ID,
-			id.Name,
-			id.LongName,
-			id.MIME,
-			basis,
-			source,
-			id.Warning,
-		}
 	}
 	// Slice must match the order of resultsFueldsWithoutSource.
 	return []string{

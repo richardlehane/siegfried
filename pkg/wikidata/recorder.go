@@ -91,7 +91,7 @@ func (recorder *Recorder) Record(matcher core.MatcherType, result core.Result) b
 }
 
 // add appends identifications to a matchIDs slice.
-func add(matches matchIDs, id string, wikidataID string, info formatInfo, basis string, source string, confidence int) matchIDs {
+func add(matches matchIDs, id string, wikidataID string, info formatInfo, basis string, confidence int) matchIDs {
 	for idx, match := range matches {
 		// WIKIDATA TODO: This function is looping too much, especially
 		// with extension matches which might point to a part of this
@@ -103,24 +103,8 @@ func add(matches matchIDs, id string, wikidataID string, info formatInfo, basis 
 		if match.ID == wikidataID {
 			matches[idx].confidence += confidence
 			matches[idx].Basis = append(matches[idx].Basis, basis)
-			matches[idx].Source = append(matches[idx].Source, source)
 			return matches
 		}
-	}
-	if config.GetWikidataSourceField() {
-		return append(
-			matches, Identification{
-				Namespace:  id,
-				ID:         wikidataID,
-				Name:       info.name,
-				LongName:   info.uri,
-				MIME:       info.mime,
-				Basis:      []string{basis},
-				Source:     []string{source},
-				Warning:    "",
-				archive:    config.IsArchive(wikidataID),
-				confidence: confidence,
-			})
 	}
 	return append(
 		matches, Identification{
@@ -145,7 +129,6 @@ func recordNameMatcher(recorder *Recorder, matcher core.MatcherType, result core
 			id,
 			recorder.infos[id],
 			result.Basis(),
-			"",
 			extScore,
 		)
 		return true
@@ -184,17 +167,13 @@ func recordByteMatcher(recorder *Recorder, matcher core.MatcherType, result core
 			basis = fmt.Sprintf("%s", basis)
 		}
 	}
-	if !config.GetWikidataSourceField() {
-		basis = fmt.Sprintf("%s (%s)", basis, source)
-		source = ""
-	}
+	basis = fmt.Sprintf("%s (%s)", basis, source)
 	recorder.ids = add(
 		recorder.ids,
 		recorder.Name(),
 		id,
 		recorder.infos[id],
 		basis,
-		source,
 		recorder.cscore,
 	)
 	return true
@@ -211,7 +190,6 @@ func recordContainerMatcher(recorder *Recorder, matcher core.MatcherType, result
 				config.ZipPuid(),
 				recorder.infos[config.ZipPuid()],
 				result.Basis(),
-				"",
 				recorder.cscore,
 			)
 		}
@@ -244,17 +222,13 @@ func recordContainerMatcher(recorder *Recorder, matcher core.MatcherType, result
 				basis = fmt.Sprintf("%s", basis)
 			}
 		}
-		if !config.GetWikidataSourceField() {
-			basis = fmt.Sprintf("%s (%s)", basis, source)
-			source = ""
-		}
+		basis = fmt.Sprintf("%s (%s)", basis, source)
 		recorder.ids = add(
 			recorder.ids,
 			recorder.Name(),
 			id,
 			recorder.infos[id],
 			basis,
-			source,
 			recorder.cscore,
 		)
 		return true
