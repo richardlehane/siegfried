@@ -61,6 +61,7 @@ func setupWikidata(pronomx bool) error {
 // identificationTests provides our structure for table driven tests.
 type identificationTests struct {
 	fname          string
+	label          string
 	qid            string
 	extMatch       bool
 	byteMatch      bool
@@ -71,16 +72,23 @@ type identificationTests struct {
 var skeletonSamples = []identificationTests{
 	identificationTests{
 		filepath.Join(wikidataPRONOMSkeletons, "fmt-11-signature-id-58.png"),
-		"Q178051", true, true, false, false},
+		"Portable Network Graphics", "Q178051", true, true, false, false},
 	identificationTests{
 		filepath.Join(wikidataPRONOMSkeletons, "fmt-279-signature-id-295.flac"),
-		"Q27881556", true, true, false, false},
+		"Free Lossless Audio Codec", "Q27881556", true, true, false, false},
 	identificationTests{
 		filepath.Join(wikidataCustomSkeletons, "Q10287816.gz"),
-		"Q10287816", true, true, false, false},
+		"GZIP", "Q10287816", true, true, false, false},
 	identificationTests{
 		filepath.Join(wikidataCustomSkeletons, "Q28205479.info"),
-		"Q28205479", true, true, false, false},
+		"Amiga Workbench icon", "Q28205479", true, true, false, false},
+	identificationTests{
+		filepath.Join(wikidataCustomSkeletons, "Q42591.mp3"),
+		"إم بي 3", "Q42591", true, true, false, false},
+	identificationTests{
+		filepath.Join(wikidataCustomSkeletons, "Q42332.pdf"),
+		"পোর্টেবল ডকুমেন্ট ফরম্যাট", "Q42332", true, true, false, false},
+
 }
 
 // Rudimentary consts that can help us determine the method of
@@ -108,19 +116,19 @@ func TestWikidataBasic(t *testing.T) {
 var archiveSamples = []identificationTests{
 	identificationTests{
 		filepath.Join(wikidataArcSkeletons, "fmt-289-signature-id-305.warc"),
-		"Q7978505", true, true, false, false},
+		"Web ARChive", "Q7978505", true, true, false, false},
 	identificationTests{
 		filepath.Join(wikidataArcSkeletons, "fmt-410-signature-id-580.arc"),
-		"Q27824065", true, true, false, false},
+		"Internet Archive ARC, version 1.1", "Q27824065", true, true, false, false},
 	identificationTests{
 		filepath.Join(wikidataArcSkeletons, "x-fmt-219-signature-id-525.arc"),
-		"Q27824060", true, true, false, false},
+		"Internet Archive ARC, version 1.0", "Q27824060", true, true, false, false},
 	identificationTests{
 		filepath.Join(wikidataArcSkeletons, "x-fmt-265-signature-id-265.tar"),
-		"Q283579", true, true, false, false},
+		"tar", "Q283579", true, true, false, false},
 	identificationTests{
 		filepath.Join(wikidataArcSkeletons, "x-fmt-266-signature-id-201.gz"),
-		"Q10287816", true, true, false, false},
+		"GZIP", "Q10287816", true, true, false, false},
 }
 
 func TestArchives(t *testing.T) {
@@ -138,10 +146,10 @@ func TestArchives(t *testing.T) {
 var extensionMismatchSamples = []identificationTests{
 	identificationTests{
 		filepath.Join(wikidataExtensionMismatches, "fmt-11-signature-id-58.jpg"),
-		"Q178051", false, true, false, false},
+		"Portable Network Graphics", "Q178051", false, true, false, false},
 	identificationTests{
 		filepath.Join(wikidataExtensionMismatches, "fmt-279-signature-id-295.wav"),
-		"Q27881556", false, true, false, false},
+		"Free Lossless Audio Codec", "Q27881556", false, true, false, false},
 }
 
 func TestExtensionMismatches(t *testing.T) {
@@ -159,16 +167,16 @@ func TestExtensionMismatches(t *testing.T) {
 var containerSamples = []identificationTests{
 	identificationTests{
 		filepath.Join(wikidataContainerMatches, "fmt-292-container-signature-id-8010.odp"),
-		"Q27203973", true, true, true, false},
+		"OpenDocument Presentation, version 1.1", "Q27203973", true, true, true, false},
 	identificationTests{
 		filepath.Join(wikidataContainerMatches, "fmt-482-container-signature-id-14000.ibooks"),
-		"Q49988096", true, true, true, false},
+		"Apple iBooks format", "Q49988096", true, true, true, false},
 	identificationTests{
 		filepath.Join(wikidataContainerMatches, "fmt-680-container-signature-id-22120.ppp"),
-		"Q47520869", true, true, true, false},
+		"Serif PagePlus Publication file format, version 12", "Q47520869", true, true, true, false},
 	identificationTests{
 		filepath.Join(wikidataContainerMatches, "fmt-998-container-signature-id-32000.ora"),
-		"Q747906", true, true, true, false},
+		"OpenRaster", "Q747906", true, true, true, false},
 }
 
 func TestContainers(t *testing.T) {
@@ -202,22 +210,24 @@ func siegfriedRunner(path string, test identificationTests, t *testing.T) {
 			wikidataNamespace, namespace,
 		)
 	}
-
-	// res is a an array of JSON values. We're interested in the first
-	// result, and then the fields within there.
-	firstResultField := 0
-	idField := 1
-	basisField := 5
-	warningField := 6
-
-	id := res[firstResultField].Values()[idField]
-	basis := res[firstResultField].Values()[basisField]
-	warning := res[firstResultField].Values()[warningField]
+  // res is a an array of JSON values. We're interested in the first
+  // result (index 0), and then the following three fields
+	id := res[0].Values()[1]
+	label := res[0].Values()[2]
+	basis := res[0].Values()[5]
+	warning := res[0].Values()[6]
 	if id != test.qid {
 		t.Errorf(
 			"QID match different than anticipated: '%s' expected '%s'",
 			id,
 			test.qid,
+		)
+	}
+	if label != test.label {
+		t.Errorf(
+			"Label match different than anticipated: '%s' expected '%s'",
+			label,
+			test.label,
 		)
 	}
 	if test.extMatch && !strings.Contains(basis, extensionMatch) {
