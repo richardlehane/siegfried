@@ -37,7 +37,7 @@ var wikidataLang = "en"
 const sparql = `
 	# Return all file format records from Wikidata.
 	#
-	select distinct ?uri ?uriLabel ?puid ?extension ?mimetype ?encodingLabel ?referenceLabel ?date ?relativityLabel ?offset ?sig
+	select distinct ?uri ?uriLabel ?puid ?extension ?mimetype ?encoding ?referenceLabel ?date ?relativity ?offset ?sig
 	where
 	{
 	  ?uri wdt:P31/wdt:P279* wd:Q235557.               # Return records of type File Format.
@@ -48,14 +48,14 @@ const sparql = `
 	    optional { ?object pq:P3294 ?encoding.   }     # We don't always have an encoding.
 	    optional { ?object ps:P4152 ?sig.        }     # We always have a signature.
 	    optional { ?object pq:P2210 ?relativity. }     # Relativity to beginning or end of file.
-	    optional { ?object pq:P4153 ?offset.     }     # Offset relatve to the relativity.
+	    optional { ?object pq:P4153 ?offset.     }     # Offset relative to the relativity.
 	    optional { ?object prov:wasDerivedFrom ?provenance;
 	       optional { ?provenance pr:P248 ?reference;
 	                              pr:P813 ?date.
 	                }
 	    }
 	  }
-	  service wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE], <<lang>>". }
+	  service wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE], <<lang>>, en". }
 	}
 	order by ?uri
  	`

@@ -19,7 +19,6 @@ package converter
 import (
 	"encoding/hex"
 	"encoding/json"
-	"strings"
 	"testing"
 )
 
@@ -53,9 +52,10 @@ func TestParse(t *testing.T) {
 				t.Error("Converted flag should be set to 'true'")
 			}
 			newEncodingReversed := ReverseEncoding(encoding)
-			if strings.ToLower(sig.NewEncoding) != newEncodingReversed {
+			if sig.NewEncoding != newEncodingReversed {
 				t.Errorf("Encoding conversion didn't work got '%s' expected '%s'", newEncodingReversed, sig.NewEncoding)
 			}
+
 			if sig.NewSignature != signature {
 				t.Errorf("Newly encoded signature should be '%s' not '%s'", sig.NewSignature, signature)
 			}

@@ -23,7 +23,6 @@ package wikidata
 import (
 	"fmt"
 	"strconv"
-	"strings"
 
 	"github.com/richardlehane/siegfried/pkg/wikidata/internal/converter"
 )
@@ -179,10 +178,18 @@ type preProcessedSequence struct {
 	encoding   string
 }
 
-// relativities as encoded in Wikidata records.
+// Relativities as encoded in Wikidata records. IRIs from Wikidata mean
+// that we don't need to encode i18n differences. IRIs must have
+// http:// scheme, and link to the data entity, i.e. not the "page",
+// e.g.
+//
+//    * BOF data entity: http://www.wikidata.org/entity/Q35436009
+//    * BOF page: https://www.wikidata.org/wiki/Q35436009
+//
+
 const (
-	relativeBOF = "beginning of file"
-	relativeEOF = "end of file"
+	relativeBOF = "http://www.wikidata.org/entity/Q35436009"
+	relativeEOF = "http://www.wikidata.org/entity/Q1148480"
 )
 
 // validateAndReturnProvenance performs some arbitrary validation on
@@ -228,9 +235,9 @@ func validateAndReturnRelativity(value string) (string, linting, error) {
 	if value == "" {
 		// Assume beginning of file.
 		return relativeBOF, relWDE01, nil
-	} else if strings.ToLower(value) == relativeBOF {
+	} else if value == relativeBOF {
 		return relativeBOF, nle, nil
-	} else if strings.ToLower(value) == relativeEOF {
+	} else if value == relativeEOF {
 		return relativeEOF, nle, nil
 	}
 	return value, relWDE02, fmt.Errorf("%s: '%s'", unknownRelativity, value)

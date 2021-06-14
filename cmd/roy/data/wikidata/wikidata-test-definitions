@@ -1,6 +1,6 @@
 {
   "head" : {
-    "vars" : [ "uri", "uriLabel", "puid", "extension", "mimetype", "encodingLabel", "referenceLabel", "date", "relativityLabel", "offset", "sig" ]
+    "vars" : [ "uri", "uriLabel", "puid", "extension", "mimetype", "encoding", "referenceLabel", "date", "relativity", "offset", "sig" ]
   },
   "results" : {
     "bindings" : [{
@@ -43,10 +43,10 @@
         "type" : "literal",
         "value" : "image/png"
       },
-      "encodingLabel" : {
-        "xml:lang" : "en",
-        "type" : "literal",
-        "value" : "hexadecimal"
+      "encoding" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q82828",
+        "valueTestingNote": "hexadecimal"
       },
       "referenceLabel" : {
         "xml:lang" : "en",
@@ -58,10 +58,10 @@
         "type" : "literal",
         "value" : "2017-08-08T00:00:00Z"
       },
-      "relativityLabel" : {
-        "xml:lang" : "en",
-        "type" : "literal",
-        "value" : "beginning of file"
+      "relativity" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q35436009",
+        "valueTestingNote": "beginning of file"
       },
       "offset" : {
         "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
@@ -138,10 +138,10 @@
         "type" : "literal",
         "value" : "application/x-tar"
       },
-      "encodingLabel" : {
-        "xml:lang" : "en",
-        "type" : "literal",
-        "value" : "hexadecimal"
+      "encoding" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q82828",
+        "valueTestingNote": "hexadecimal"
       },
       "offset" : {
         "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
@@ -184,10 +184,10 @@
         "type" : "literal",
         "value" : "application/gzip"
       },
-      "encodingLabel" : {
-        "xml:lang" : "en",
-        "type" : "literal",
-        "value" : "hexadecimal"
+      "encoding" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q82828",
+        "valueTestingNote": "hexadecimal"
       },
       "referenceLabel" : {
         "xml:lang" : "en",
@@ -306,10 +306,10 @@
         "type" : "literal",
         "value" : "info"
       },
-      "encodingLabel" : {
-        "xml:lang" : "en",
-        "type" : "literal",
-        "value" : "hexadecimal"
+      "encoding" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q82828",
+        "valueTestingNote": "hexadecimal"
       },
       "referenceLabel" : {
         "xml:lang" : "en",
@@ -352,10 +352,10 @@
         "type" : "literal",
         "value" : "audio/x-ogg"
       },
-      "encodingLabel" : {
-        "xml:lang" : "en",
-        "type" : "literal",
-        "value" : "hexadecimal"
+      "encoding" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q82828",
+        "valueTestingNote": "hexadecimal"
       },
       "referenceLabel" : {
         "xml:lang" : "en",
@@ -376,10 +376,10 @@
         "type" : "literal",
         "value" : "664C614300000022"
       },
-      "relativityLabel" : {
-        "xml:lang" : "en",
-        "type" : "literal",
-        "value" : "beginning of file"
+      "relativity" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q35436009",
+        "valueTestingNote": "beginning of file"
       }
     }, {
       "uri" : {
@@ -403,10 +403,10 @@
         "type" : "literal",
         "value" : "audio/x-ogg"
       },
-      "encodingLabel" : {
-        "xml:lang" : "en",
-        "type" : "literal",
-        "value" : "hexadecimal"
+      "encoding" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q82828",
+        "valueTestingNote": "hexadecimal"
       },
       "referenceLabel" : {
         "xml:lang" : "en",
@@ -427,10 +427,10 @@
         "type" : "literal",
         "value" : "664C614300000022"
       },
-      "relativityLabel" : {
-        "xml:lang" : "en",
-        "type" : "literal",
-        "value" : "beginning of file"
+      "relativity" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q35436009",
+        "valueTestingNote": "beginning of file"
       }
     }, {
       "uri" : {
@@ -454,10 +454,10 @@
         "type" : "literal",
         "value" : "audio/x-flac"
       },
-      "encodingLabel" : {
-        "xml:lang" : "en",
-        "type" : "literal",
-        "value" : "hexadecimal"
+      "encoding" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q82828",
+        "valueTestingNote": "hexadecimal"
       },
       "referenceLabel" : {
         "xml:lang" : "en",
@@ -478,10 +478,10 @@
         "type" : "literal",
         "value" : "664C614300000022"
       },
-      "relativityLabel" : {
-        "xml:lang" : "en",
-        "type" : "literal",
-        "value" : "beginning of file"
+      "relativity" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q35436009",
+        "valueTestingNote": "beginning of file"
       }
     }, {
       "uri" : {
@@ -505,10 +505,10 @@
         "type" : "literal",
         "value" : "audio/x-flac"
       },
-      "encodingLabel" : {
-        "xml:lang" : "en",
-        "type" : "literal",
-        "value" : "hexadecimal"
+      "encoding" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q82828",
+        "valueTestingNote": "hexadecimal"
       },
       "referenceLabel" : {
         "xml:lang" : "en",
@@ -529,10 +529,10 @@
         "type" : "literal",
         "value" : "664C614300000022"
       },
-      "relativityLabel" : {
-        "xml:lang" : "en",
-        "type" : "literal",
-        "value" : "beginning of file"
+      "relativity" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q35436009",
+        "valueTestingNote": "beginning of file"
       }
     }, {
       "uri" : {
@@ -556,10 +556,10 @@
         "type" : "literal",
         "value" : "audio/flac"
       },
-      "encodingLabel" : {
-        "xml:lang" : "en",
-        "type" : "literal",
-        "value" : "hexadecimal"
+      "encoding" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q82828",
+        "valueTestingNote": "hexadecimal"
       },
       "referenceLabel" : {
         "xml:lang" : "en",
@@ -580,10 +580,10 @@
         "type" : "literal",
         "value" : "664C614300000022"
       },
-      "relativityLabel" : {
-        "xml:lang" : "en",
-        "type" : "literal",
-        "value" : "beginning of file"
+      "relativity" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q35436009",
+        "valueTestingNote": "beginning of file"
       }
     }, {
       "uri" : {
@@ -607,10 +607,10 @@
         "type" : "literal",
         "value" : "audio/flac"
       },
-      "encodingLabel" : {
-        "xml:lang" : "en",
-        "type" : "literal",
-        "value" : "hexadecimal"
+      "encoding" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q82828",
+        "valueTestingNote": "hexadecimal"
       },
       "referenceLabel" : {
         "xml:lang" : "en",
@@ -631,10 +631,10 @@
         "type" : "literal",
         "value" : "664C614300000022"
       },
-      "relativityLabel" : {
-        "xml:lang" : "en",
-        "type" : "literal",
-        "value" : "beginning of file"
+      "relativity" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q35436009",
+        "valueTestingNote": "beginning of file"
       }
     },{
       "uri" : {
@@ -658,10 +658,10 @@
         "type" : "literal",
         "value" : "image/png"
       },
-      "encodingLabel" : {
-        "xml:lang" : "en",
-        "type" : "literal",
-        "value" : "hexadecimal"
+      "encoding" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q82828",
+        "valueTestingNote": "hexadecimal"
       },
       "referenceLabel" : {
         "xml:lang" : "en",
@@ -682,10 +682,10 @@
         "type" : "literal",
         "value" : "89504E470D0A1A0A0000000D49484452"
       },
-      "relativityLabel" : {
-        "xml:lang" : "en",
-        "type" : "literal",
-        "value" : "beginning of file"
+      "relativity" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q35436009",
+        "valueTestingNote": "beginning of file"
       }
     }, {
       "uri" : {
@@ -709,10 +709,10 @@
         "type" : "literal",
         "value" : "image/png"
       },
-      "encodingLabel" : {
-        "xml:lang" : "en",
-        "type" : "literal",
-        "value" : "hexadecimal"
+      "encoding" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q82828",
+        "valueTestingNote": "hexadecimal"
       },
       "referenceLabel" : {
         "xml:lang" : "en",
@@ -733,10 +733,103 @@
         "type" : "literal",
         "value" : "0000000049454E44AE426082"
       },
-      "relativityLabel" : {
+      "relativity" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1148480",
+        "valueTestingNote": "end of file"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q42591"
+      },
+      "uriLabel" : {
+        "xml:lang" : "ar",
+        "type" : "literal",
+        "value" : "إم بي 3"
+      },
+      "puid" : {
+        "type" : "literal",
+        "value" : "fmt/134"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "mp3"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "audio/mpeg"
+      },
+      "encoding" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q82828",
+        "valueTestingNote": "hexadecimal"
+      },
+      "offset" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "0"
+      },
+      "sig" : {
+        "type" : "literal",
+        "value" : "494433"
+      },
+      "referenceLabel" : {
         "xml:lang" : "en",
         "type" : "literal",
-        "value" : "end of file"
+        "value" : "Gary Kessler's File Signature Table"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2017-08-08T00:00:00Z"
+      }
+    }, {
+      "uri" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q42332"
+      },
+      "uriLabel" : {
+        "xml:lang" : "bn",
+        "type" : "literal",
+        "value" : "পোর্টেবল ডকুমেন্ট ফরম্যাট"
+      },
+      "extension" : {
+        "type" : "literal",
+        "value" : "pdf"
+      },
+      "mimetype" : {
+        "type" : "literal",
+        "value" : "application/pdf"
+      },
+      "encoding" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q82828",
+        "valueTestingNote": "hexadecimal"
+      },
+      "relativity" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q35436009",
+        "valueTestingNote": "beginning of file"
+      },
+      "sig" : {
+        "type" : "literal",
+        "value" : "25504446"
+      },
+      "offset" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "0"
+      },
+      "referenceLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Gary Kessler's File Signature Table"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2017-08-08T00:00:00Z"
       }
     }]
   }

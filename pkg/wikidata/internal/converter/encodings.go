@@ -17,29 +17,49 @@
 
 package converter
 
-import (
-	"strings"
-)
-
+// Encoding enumeration to return unambiguous values for encoding from
+// the mapping lookup below.
 const (
-	UnknownEncoding = iota // UnknownEncoding provides us with a default to work with.
-	HexEncoding            // HexEncoding describes magic numbers written in plain-hexadecimal.
-	PronomEncoding         // PronomEncoding describe PRONOM based file format signatures.
-	PerlEncoding           // PerlEncoding describe PERL regular expression encoded signatures.
-	ASCIIEncoding          // ASCIIEncoding encoded patterns are those written entirely in plain ASCII.
-	GUIDEncoding           // GUIDEncoding are globally unique identifiers.
+	// UnknownEncoding provides us with a default to work with.
+	UnknownEncoding = iota
+	// HexEncoding describes magic numbers written in plain-hexadecimal.
+	HexEncoding
+	// PronomEncoding describe PRONOM based file format signatures.
+	PronomEncoding
+	// PerlEncoding describe PERL regular expression encoded signatures.
+	PerlEncoding
+	// ASCIIEncoding encoded patterns are those written entirely in plain ASCII.
+	ASCIIEncoding
+	// GUIDEncoding are globally unique identifiers.
+	GUIDEncoding
 )
 
-const hexadecimal = "hexadecimal"
-const guid = "globally unique identifier"
-const ascii = "ascii"
-const perl = "perl compatible regular expressions 2"
-const pronom = "pronom internal signature"
+// Encoding constants. IRIs from Wikidata mean that we don't need to
+// encode i18n differences. IRIs must have http:// scheme, and link to
+// the data entity, i.e. not the "page", e.g.
+//
+//    * Hex data entity: http://www.wikidata.org/entity/Q82828
+//    * Hex page: https://www.wikidata.org/wiki/Q82828
+//
+const (
+	// Hexadecimal.
+	hexadecimal = "http://www.wikidata.org/entity/Q82828"
+	// Globally unique identifier.
+	guid = "http://www.wikidata.org/entity/Q254972"
+	// ASCII.
+	ascii = "http://www.wikidata.org/entity/Q8815"
+	// Perl compatible regular expressions 2.
+	perl = "http://www.wikidata.org/entity/Q98056596"
+	// Pronom internal signature.
+	pronom = "http://www.wikidata.org/entity/Q35432091"
+	// Unknown encoding.
+	unknown = "unknown encoding"
+)
 
 // LookupEncoding will return a best-guess encoding type for a supplied
 // encoding string.
 func LookupEncoding(encoding string) int {
-	encoding = strings.ToLower(encoding)
+	encoding = encoding
 	switch encoding {
 	case hexadecimal:
 		return HexEncoding
@@ -70,5 +90,5 @@ func ReverseEncoding(encoding int) string {
 	case GUIDEncoding:
 		return guid
 	}
-	return "Unknown encoding"
+	return unknown
 }
