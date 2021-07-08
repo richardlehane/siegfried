@@ -55,46 +55,23 @@ var wikidata = struct {
 	// nopronom determines whether the identifier will be build without
 	// patterns from PRONOM sources outside of Wikidata.
 	nopronom bool
-	// revisionHistoryLen provides a way to configure the amount of
-	// history returned from a Wikibase instance. More history will
-	// slow down query time. Less history will speed it up.
-	revisionHistoryLen int
-	// revisionHistoryThreads provides a way to configure the number of
-	// threads used to download revision history from a Wikibase instance.
-	// Theoretically this value can speed up the Wikidata harvest process
-	// but it isn't guaranteed.
-	revisionHistoryThreads int
-	// sourcefield provides a way to represent provenance as a new field
+	// sourceField provides a way to represent provenance as a new field
 	// in the Siegfried report.
 	sourcefield bool
-	// sparqlParam refers to the SPARQL parameter (?param) that returns
-	// the QID for the record that we want to return revision history
-	// and permalink for. E.g. ?uriLabl may return QID: Q12345. This
-	// will then be used to query Wikibase for its revision history.
-	// This should be the subject/IRI of the file format record in
-	// Wikidata.
-	sparqlParam string
 	// wikidatahome describes the name of the wikidata directory withing
 	// $SFHOME.
 	wikidatahome string
-	// wikibaseURL is the base URL needed by Wikibase for permalinks to
-	// resolve.
-	wikibaseURL string
 }{
-	arc:                    "Q7978505",
-	arc1_1:                 "Q27824065",
-	gzip:                   "Q27824060",
-	tar:                    "Q283579",
-	warc:                   "Q10287816",
-	definitions:            "wikidata-definitions-2.0.0",
-	endpoint:               "https://query.wikidata.org/sparql",
-	filemode:               0644,
-	revisionHistoryLen:     5,
-	revisionHistoryThreads: 10,
-	sourcefield:            true,
-	sparqlParam:            "uri",
-	wikidatahome:           "wikidata",
-	wikibaseURL:            "https://www.wikidata.org/w/index.php",
+	arc:          "Q7978505",
+	arc1_1:       "Q27824065",
+	gzip:         "Q27824060",
+	tar:          "Q283579",
+	warc:         "Q10287816",
+	definitions:  "wikidata-definitions-1.0.0",
+	endpoint:     "https://query.wikidata.org/sparql",
+	filemode:     0644,
+	sourcefield:  true,
+	wikidatahome: "wikidata",
 }
 
 // WikidataHome describes where files needed by Siegfried and Roy for
@@ -175,8 +152,8 @@ func SetWikidataEndpoint(endpoint string) (func() private, error) {
 			err,
 		)
 	}
-	wikidata.endpoint = endpoint
 	return func() private {
+		wikidata.endpoint = endpoint
 		return private{}
 	}, err
 }
@@ -243,50 +220,4 @@ func SetWikidataPRONOM() func() private {
 // PRONOM patterns inside the identifier.
 func GetWikidataNoPRONOM() bool {
 	return wikidata.nopronom
-}
-
-// SetWikibaseURL lets the default value for the Wikibase URL to be
-// overridden. The URL should be that which enables permalinks to be
-// returned from Wikibase, e.g. for Wikidata this URL needs to be:
-//
-// e.g. https://www.wikidata.org/w/index.php
-//
-func SetWikibaseURL(baseURL string) (func() private, error) {
-	_, err := url.ParseRequestURI(baseURL)
-	if err != nil {
-		return func() private { return private{} }, fmt.Errorf(
-			"Roy (Wikidata): URL provided is invalid: '%s' default Wikibase URL be used instead but may not work",
-			err,
-		)
-	}
-	wikidata.wikibaseURL = baseURL
-	return func() private {
-		return private{}
-	}, err
-}
-
-// WikidataWikibaseURL returns the SPARQL endpoint to call when harvesting
-// Wikidata definitions.
-func WikidataWikibaseURL() string {
-	return wikidata.wikibaseURL
-}
-
-// WikidataSPARQLRevisionParam returns the SPARQL parameter (?param) that
-// returns the QID for the record that we want to return revision
-// history and permalink for. E.g. ?uriLabl may return QID: Q12345.
-// This will then be used to query Wikibase for its revision history.
-func WikidataSPARQLRevisionParam() string {
-	return wikidata.sparqlParam
-}
-
-// GetWikidataRevisionHistoryLen will return the length of the Wikibase
-// history to retrieve to the caller.
-func GetWikidataRevisionHistoryLen() int {
-	return wikidata.revisionHistoryLen
-}
-
-// GetWikidataRevisionHistoryThreads will return the number of threads
-// to use to retrieve Wikibase history to the caller.
-func GetWikidataRevisionHistoryThreads() int {
-	return wikidata.revisionHistoryThreads
 }

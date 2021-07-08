@@ -12,8 +12,8 @@
 // implied. See the License for the specific language governing
 // permissions and limitations under the License.
 
-// Package mappings provides data structures and helpers that describe
-// Wikidata signature resources that we want to work with.
+// Data structures and helpers that describe Wikidata signature
+// resources that we want to work with.
 package mappings
 
 import (
@@ -36,8 +36,6 @@ type Wikidata struct {
 	Extension         []string    // Extension returned by Wikidata.
 	Mimetype          []string    // Mimetype as recorded by Wikidata.
 	Signatures        []Signature // Signature associated with a record which we will convert to a new Type.
-	Permalink         string      // Permalink associated with a record when the definitions were downloaded.
-	RevisionHistory   string      // RevisionHistory is a human readable block of JSON for use in roy inspect functions.
 	disableSignatures bool        // If a bad heuristic was found we can't reliably add signatures to the record.
 }
 
@@ -45,7 +43,7 @@ type Wikidata struct {
 // identify a file format using Wikidata information.
 type Signature struct {
 	ByteSequences []ByteSequence // A signature is made up of multiple byte sequences that encode a position and a pattern, e.g. BOF and EOF.
-	Source        string         // Source (provenance) of the signature in Wikidata.
+	Provenance    string         // Provenance of the signature.
 	Date          string         // Date the signature was submitted.
 }
 

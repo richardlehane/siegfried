@@ -23,14 +23,12 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
-	"os"
 	"strings"
 
 	"github.com/richardlehane/siegfried/pkg/config"
 	"github.com/richardlehane/siegfried/pkg/wikidata/internal/mappings"
 
-	"github.com/ross-spencer/wikiprov/pkg/spargo"
-	"github.com/ross-spencer/wikiprov/pkg/wikiprov"
+	"github.com/ross-spencer/spargo/pkg/spargo"
 )
 
 // Alias for the mappings.WikidataMapping structure so that it is easy
@@ -39,15 +37,6 @@ var wikidataMapping = mappings.WikidataMapping
 
 // Alias our spargo Item for ease of referencing.
 type wikidataItem = []map[string]spargo.Item
-
-// Alias our wikiprov Provenance structure.
-type wikiProv = []wikiprov.Provenance
-
-// wikiItemProv helpfully collects item and provenance data.
-type wikiItemProv struct {
-	items wikidataItem
-	prov  wikiProv
-}
 
 // Signature provides an alias for mappings.Signature for convenience.
 type Signature = mappings.Signature
@@ -89,7 +78,7 @@ func contains(items []string, item string) bool {
 // Wikidata which are stored in SPARQL JSON and initiates their
 // processing into the structures required by Roy to process into an
 // identifier to be consumed by Siegfried.
-func openWikidata() wikiItemProv {
+func openWikidata() wikidataItem {
 	path := config.WikidataDefinitionsPath()
 	log.Printf(
 		"Roy (Wikidata): Opening Wikidata definitions: %s\n", path,
@@ -101,7 +90,7 @@ func openWikidata() wikiItemProv {
 			err,
 		)
 	}
-	var sparqlReport spargo.WikiProv
+	var sparqlReport spargo.SPARQLResult
 	err = json.Unmarshal(jsonFile, &sparqlReport)
 	if err != nil {
 		fmt.Errorf(
@@ -109,10 +98,8 @@ func openWikidata() wikiItemProv {
 			err,
 		)
 	}
-	return wikiItemProv{
-		items: sparqlReport.Binding.Bindings,
-		prov:  sparqlReport.Provenance,
-	}
+	results := sparqlReport.Results.Bindings
+	return results
 }
 
 // processWikidata iterates over the Wikidata signature definitions and
@@ -121,24 +108,24 @@ func openWikidata() wikiItemProv {
 // summary data structure is returned to the caller so that it can be
 // used to replay the results of processing, e.g. so the caller can
 // access the stored linting results.
-func processWikidata(itemProv wikiItemProv) Summary {
+func processWikidata(results wikidataItem) Summary {
 	var summary Summary
 	var expectedRecordsWithSignatures = make(map[string]bool)
-	for _, item := range itemProv.items {
+	for _, item := range results {
 		id := getID(item[uriField].Value)
 		if item[signatureField].Value != "" {
 			summary.SparqlRowsWithSigs++
 			expectedRecordsWithSignatures[item[uriField].Value] = true
 		}
 		if wikidataMapping[id].ID == "" {
-			okayToAdd := addSignatures(itemProv.items, id)
-			wikidataMapping[id] = newRecord(item, itemProv.prov, okayToAdd)
+			add := addSignatures(results, id)
+			wikidataMapping[id] = newRecord(item, add)
 		} else {
 			wikidataMapping[id] =
 				updateRecord(item, wikidataMapping[id])
 		}
 	}
-	summary.AllSparqlResults = len(itemProv.items)
+	summary.AllSparqlResults = len(results)
 	summary.CondensedSparqlResults = len(wikidataMapping)
 	summary.RecordsWithPotentialSignatures =
 		len(expectedRecordsWithSignatures)
@@ -149,16 +136,13 @@ func processWikidata(itemProv wikiItemProv) Summary {
 // parse, and process the Wikidata records from our definitions file.
 // After processing the summary results are output by Roy.
 func createMappingFromWikidata() []wikidataRecord {
-	itemProv := openWikidata()
-	summary := processWikidata(itemProv)
+	results := openWikidata()
+	summary := processWikidata(results)
 	analyseWikidataRecords(&summary)
 	mapping := createReportMapping()
-	// Output our summary before leaving the function. Output is to
-	// stdout because it "pollutes" the Roy "inspect" call otherwise.
-	// If an "inspect" flag setter/getter is implemented in
-	// siegfried/pkg/config/wikidata.go then more flexibility might be
-	// possible.
-	fmt.Fprintf(os.Stderr, "%s\n", summary)
+	// Output our summary before leaving the function. Consciously
+	// output to stdout, but we may want to output to stderr.
+	fmt.Println(summary)
 	return mapping
 }
 

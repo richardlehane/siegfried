@@ -21,14 +21,12 @@ import (
 	"os"
 
 	"github.com/richardlehane/siegfried/pkg/config"
-	"github.com/ross-spencer/wikiprov/pkg/spargo"
-	"github.com/ross-spencer/wikiprov/pkg/wikiprov"
+	"github.com/ross-spencer/spargo/pkg/spargo"
 )
 
 // harvestWikidata will connect to the configured Wikidata query service
 // and save the results of the configured query to disk.
 func harvestWikidata() error {
-
 	log.Printf(
 		"Roy (Wikidata): Harvesting Wikidata definitions: lang '%s'",
 		config.WikidataLang(),
@@ -44,23 +42,12 @@ func harvestWikidata() error {
 		"Roy (Wikidata): Harvesting definitions from: '%s'",
 		config.WikidataEndpoint(),
 	)
-
-	wikiprov.SetWikibasePermalinkBaseURL(config.WikidataWikibaseURL())
-
-	res, err := spargo.SPARQLWithProv(
-		config.WikidataEndpoint(),
-		config.WikidataSPARQL(),
-		config.WikidataSPARQLRevisionParam(),
-		config.GetWikidataRevisionHistoryLen(),
-		config.GetWikidataRevisionHistoryThreads(),
-	)
-
-	if err != nil {
-		return fmt.Errorf("Roy (Wikidata): Error trying to retrieve SPARQL with revision history: %s", err)
-	}
-
+	sparqlMe := spargo.SPARQLClient{}
+	sparqlMe.ClientInit(config.WikidataEndpoint(), config.WikidataSPARQL())
+	sparqlMe.SetUserAgent(config.UserAgent())
+	res := sparqlMe.SPARQLGo()
 	path := config.WikidataDefinitionsPath()
-	err = ioutil.WriteFile(path, []byte(fmt.Sprintf("%s", res)), config.WikidataFileMode())
+	err = ioutil.WriteFile(path, []byte(res.Human), config.WikidataFileMode())
 	if err != nil {
 		return fmt.Errorf(
 			"Roy (Wikidata): Error harvesting Wikidata: '%s'",

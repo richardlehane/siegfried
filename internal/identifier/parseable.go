@@ -15,7 +15,6 @@
 package identifier
 
 import (
-	"fmt"
 	"sort"
 	"strings"
 
@@ -130,7 +129,7 @@ func inspect(p Parseable, ids ...string) (string, error) {
 		info, ok := p.Infos()[id]
 		if ok {
 			if config.GetWikidataNamespace() != "" {
-				lines = append(lines, fmt.Sprintf("%sQID: (%s)", info.String(), id))
+				lines = append(lines, strings.ToUpper(info.String()+"QID: ("+id+")"))
 			} else {
 				lines = append(lines, strings.ToUpper(info.String()))
 			}
@@ -179,19 +178,17 @@ func inspect(p Parseable, ids ...string) (string, error) {
 // Blank parseable can be embedded within other parseables in order to include default nil implementations of the interface
 type Blank struct{}
 
-func (b Blank) IDs() []string                                             { return nil }
-func (b Blank) Infos() map[string]FormatInfo                              { return nil }
-func (b Blank) Globs() ([]string, []string)                               { return nil, nil }
-func (b Blank) MIMEs() ([]string, []string)                               { return nil, nil }
-func (b Blank) XMLs() ([][2]string, []string)                             { return nil, nil }
-func (b Blank) Signatures() ([]frames.Signature, []string, error)         { return nil, nil, nil }
-func (b Blank) Zips() ([][]string, [][]frames.Signature, []string, error) { return nil, nil, nil, nil }
-func (b Blank) MSCFBs() ([][]string, [][]frames.Signature, []string, error) {
-	return nil, nil, nil, nil
-}
-func (b Blank) RIFFs() ([][4]byte, []string) { return nil, nil }
-func (b Blank) Texts() []string              { return nil }
-func (b Blank) Priorities() priority.Map     { return nil }
+func (b Blank) IDs() []string                                               { return nil }
+func (b Blank) Infos() map[string]FormatInfo                                { return nil }
+func (b Blank) Globs() ([]string, []string)                                 { return nil, nil }
+func (b Blank) MIMEs() ([]string, []string)                                 { return nil, nil }
+func (b Blank) XMLs() ([][2]string, []string)                               { return nil, nil }
+func (b Blank) Signatures() ([]frames.Signature, []string, error)           { return nil, nil, nil }
+func (b Blank) Zips() ([][]string, [][]frames.Signature, []string, error)   { return nil, nil, nil, nil }
+func (b Blank) MSCFBs() ([][]string, [][]frames.Signature, []string, error) { return nil, nil, nil, nil }
+func (b Blank) RIFFs() ([][4]byte, []string)                                { return nil, nil }
+func (b Blank) Texts() []string                                             { return nil }
+func (b Blank) Priorities() priority.Map                                    { return nil }
 
 // Joint allows two parseables to be logically joined.
 type joint struct {
