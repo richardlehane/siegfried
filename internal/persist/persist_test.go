@@ -244,7 +244,7 @@ func TestTime(t *testing.T) {
 	saver.SaveTime(now)
 	loader := NewLoadSaver(saver.Bytes())
 	then := loader.LoadTime()
-	if now.String() != then.String() {
+	if now.Round(0).String() != then.Round(0).String() {
 		t.Errorf("expecting %s to equal %s, errs %v & %v, raw: %v", now, then, loader.Err, saver.Err, saver.Bytes())
 	}
 }

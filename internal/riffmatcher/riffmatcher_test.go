@@ -11,7 +11,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/core"
 )
 
-var testdata = flag.String("testdata", filepath.Join("..", "..", "..", "cmd", "sf", "testdata"), "override the default test data directory")
+var testdata = flag.String("testdata", filepath.Join("..", "..", "cmd", "sf", "testdata"), "override the default test data directory")
 
 var fmts = SignatureSet{
 	[4]byte{'a', 'f', 's', 'p'},
