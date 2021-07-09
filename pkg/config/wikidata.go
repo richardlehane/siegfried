@@ -67,7 +67,7 @@ var wikidata = struct {
 	gzip:         "Q27824060",
 	tar:          "Q283579",
 	warc:         "Q10287816",
-	definitions:  "wikidata-definitions-1.0.0",
+	definitions:  "wikidata-definitions-2.x.x",
 	endpoint:     "https://query.wikidata.org/sparql",
 	filemode:     0644,
 	sourcefield:  true,

@@ -57,6 +57,7 @@ func (i *Identifier) Save(ls *persist.LoadSaver) {
 		ls.SaveString(value.uri)
 		ls.SaveString(value.mime)
 		ls.SaveStrings(value.sources)
+		ls.SaveStrings(value.software)
 	}
 	i.Base.Save(ls)
 }
@@ -73,6 +74,7 @@ func Load(ls *persist.LoadSaver) core.Identifier {
 			ls.LoadString(),  // URI.
 			ls.LoadString(),  // mime.
 			ls.LoadStrings(), // sources.
+			ls.LoadStrings(), // software.
 		}
 	}
 	i.Base = identifier.Load(ls)
@@ -97,6 +99,9 @@ type formatInfo struct {
 	// sources describes the source of a signature retrieved from
 	// Wikidata.
 	sources []string
+	// software describes programs that are compatible with any
+	// potential identification.
+	software []string
 }
 
 // infos turns the generic formatInfo into the structure that will be
@@ -155,10 +160,11 @@ func (wdd wikidataDefinitions) Infos() parseableFormatInfo {
 		}
 		sources := prepareSources(value)
 		fi := formatInfo{
-			name:    value.Name,
-			uri:     value.URI,
-			mime:    mime,
-			sources: sources,
+			name:     value.Name,
+			uri:      value.URI,
+			mime:     mime,
+			sources:  sources,
+			software: value.Software,
 		}
 		formatInfoMap[value.ID] = fi
 	}

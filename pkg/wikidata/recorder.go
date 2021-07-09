@@ -120,6 +120,7 @@ func add(matches matchIDs, id string, wikidataID string, info formatInfo, basis 
 				Warning:    "",
 				archive:    config.IsArchive(wikidataID),
 				confidence: confidence,
+				Software:   info.software,
 			})
 	}
 	return append(
@@ -133,6 +134,7 @@ func add(matches matchIDs, id string, wikidataID string, info formatInfo, basis 
 			Warning:    "",
 			archive:    config.IsArchive(wikidataID),
 			confidence: confidence,
+			Software:   info.software,
 		})
 }
 
