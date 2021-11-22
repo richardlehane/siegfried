@@ -21,10 +21,6 @@ import (
 	"fmt"
 )
 
-// WikidataMapping provides a way to persist Wikidata resources in
-// memory.
-var WikidataMapping = make(map[string]Wikidata)
-
 // Wikidata stores information about something which constitutes a
 // format resource in Wikidata. I.e. Anything which has a URI and
 // describes a file-format.
@@ -100,4 +96,9 @@ func (wikidata Wikidata) PUIDs() []string {
 		puids = append(puids, puid)
 	}
 	return puids
+}
+
+// NewWikidata creates new map for adding Wikidata records to.
+func NewWikidata() map[string]Wikidata {
+	return make(map[string]Wikidata)
 }

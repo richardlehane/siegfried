@@ -15,15 +15,58 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
+	"strings"
 
 	"github.com/richardlehane/siegfried/pkg/config"
 	"github.com/ross-spencer/wikiprov/pkg/spargo"
 	"github.com/ross-spencer/wikiprov/pkg/wikiprov"
 )
+
+// configureCustomWikibase captures all the functions needed to harvest
+// signature information from a custom Wikibase instance. It only
+// impacts 'harvest'. Roy's 'build' stage needs to be managed differently.
+func configureCustomWikibase() error {
+	if err := config.SetCustomWikibaseEndpoint(
+		*harvestWikidataEndpoint,
+		*harvestWikidataWikibaseURL); err != nil {
+		return err
+	}
+	if err := config.SetCustomWikibaseQuery(); err != nil {
+		return err
+	}
+	return nil
+}
+
+// jsonEscape can be used to escape a string for adding to a JSON structure
+// without fear of letting unescaped special characters slip by.
+func jsonEscape(str string) string {
+	jsonStr, err := json.Marshal(str)
+	if err != nil {
+		panic(err)
+	}
+	str = string(jsonStr)
+	return str[1 : len(str)-1]
+}
+
+// addEndpoint is designed to augment the harvest data from Wikidata
+// with the source endpoint used. This information provides greater
+// context for the caller.
+//
+// In the fullness of time, this might also be added to Wikiprov, and
+// if it is, it will make the process more reliable, and this function
+// redundant.
+func addEndpoint(repl string, endpoint string) string {
+	replacement := fmt.Sprintf(
+		"{\n  \"endpoint\": \"%s\",",
+		jsonEscape(endpoint),
+	)
+	return strings.Replace(repl, "{", replacement, 1)
+}
 
 // harvestWikidata will connect to the configured Wikidata query service
 // and save the results of the configured query to disk.
@@ -45,7 +88,14 @@ func harvestWikidata() error {
 		config.WikidataEndpoint(),
 	)
 
-	wikiprov.SetWikibasePermalinkBaseURL(config.WikidataWikibaseURL())
+	// Set the Wikibase server URL for wikiprov to construct index.php
+	// and api.php links for permalinks and revision history.
+	wikiprov.SetWikibaseURLs(config.WikidataWikibaseURL())
+
+	log.Printf(
+		"Roy (Wikidata): Harvesting revision history from: '%s'",
+		config.WikidataWikibaseURL(),
+	)
 
 	res, err := spargo.SPARQLWithProv(
 		config.WikidataEndpoint(),
@@ -56,14 +106,27 @@ func harvestWikidata() error {
 	)
 
 	if err != nil {
-		return fmt.Errorf("Roy (Wikidata): Error trying to retrieve SPARQL with revision history: %s", err)
+		return fmt.Errorf(
+			"Error trying to retrieve SPARQL with revision history: %s",
+			err,
+		)
 	}
 
+	// Create a modified JSON output containing the endpoint the query
+	// was run against. In future this could be added to Wikiprov.
+	modifiedJSON := addEndpoint(
+		fmt.Sprintf("%s", res), config.WikidataEndpoint(),
+	)
+
 	path := config.WikidataDefinitionsPath()
-	err = ioutil.WriteFile(path, []byte(fmt.Sprintf("%s", res)), config.WikidataFileMode())
+	err = ioutil.WriteFile(
+		path,
+		[]byte(fmt.Sprintf("%s", modifiedJSON)),
+		config.WikidataFileMode(),
+	)
 	if err != nil {
 		return fmt.Errorf(
-			"Roy (Wikidata): Error harvesting Wikidata: '%s'",
+			"Error harvesting Wikidata: '%s'",
 			err,
 		)
 	}

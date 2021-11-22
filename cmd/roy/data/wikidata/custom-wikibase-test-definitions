@@ -1,0 +1,318 @@
+{
+  "endpoint": "http://wikibase.example.com:8834/proxy/wdqs/bigdata/namespace/wdq/sparql?",
+  "head": {
+    "vars": [
+      "uri",
+      "uriLabel",
+      "puid",
+      "extension",
+      "mimetype",
+      "encoding",
+      "referenceLabel",
+      "date",
+      "relativity",
+      "offset",
+      "sig"
+    ]
+  },
+  "results": {
+    "bindings": [
+      {
+        "date": {
+          "type": "literal",
+          "value": "1970-01-01T00:00:00Z",
+          "datatype": "http://www.w3.org/2001/XMLSchema#dateTime"
+        },
+        "encoding": {
+          "type": "uri",
+          "value": "http://wikibase.example.com/entity/Q2"
+        },
+        "extension": {
+          "type": "literal",
+          "value": "fiff"
+        },
+        "mimetype": {
+          "type": "literal",
+          "value": "x-application/ffiff"
+        },
+        "offset": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "referenceLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "another format registry"
+        },
+        "relativity": {
+          "type": "uri",
+          "value": "http://wikibase.example.com/entity/Q3"
+        },
+        "sig": {
+          "type": "literal",
+          "value": "BADF00DE"
+        },
+        "uri": {
+          "type": "uri",
+          "value": "http://wikibase.example.com/entity/Q6"
+        },
+        "uriLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FFIFF"
+        }
+      },
+      {
+        "date": {
+          "type": "literal",
+          "value": "1970-01-02T00:00:00Z",
+          "datatype": "http://www.w3.org/2001/XMLSchema#dateTime"
+        },
+        "extension": {
+          "type": "literal",
+          "value": "ff2"
+        },
+        "mimetype": {
+          "type": "literal",
+          "value": "x-application/format-two"
+        },
+        "offset": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "referenceLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "another format registry"
+        },
+        "relativity": {
+          "type": "uri",
+          "value": "http://wikibase.example.com/entity/Q3"
+        },
+        "sig": {
+          "type": "literal",
+          "value": "BA5E"
+        },
+        "uri": {
+          "type": "uri",
+          "value": "http://wikibase.example.com/entity/Q7"
+        },
+        "uriLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FFIIFF"
+        }
+      },
+      {
+        "date": {
+          "type": "literal",
+          "value": "1970-01-02T00:00:00Z",
+          "datatype": "http://www.w3.org/2001/XMLSchema#dateTime"
+        },
+        "extension": {
+          "type": "literal",
+          "value": "ff2"
+        },
+        "mimetype": {
+          "type": "literal",
+          "value": "x-application/format-two"
+        },
+        "offset": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "referenceLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "another format registry"
+        },
+        "relativity": {
+          "type": "uri",
+          "value": "http://wikibase.example.com/entity/Q4"
+        },
+        "sig": {
+          "type": "literal",
+          "value": "BA11"
+        },
+        "uri": {
+          "type": "uri",
+          "value": "http://wikibase.example.com/entity/Q7"
+        },
+        "uriLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FFIIFF"
+        }
+      },
+      {
+        "encoding": {
+          "type": "uri",
+          "value": "http://wikibase.example.com/entity/Q2"
+        },
+        "mimetype": {
+          "type": "literal",
+          "value": "application/fits"
+        },
+        "offset": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "sig": {
+          "type": "literal",
+          "value": "53494D504C4520203D202020202020202020202020202020202020202054"
+        },
+        "uri": {
+          "type": "uri",
+          "value": "http://wikibase.example.com/entity/Q8"
+        },
+        "uriLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Flexible Image Transport System (FITS), Version 3.0"
+        }
+      },
+      {
+        "encoding": {
+          "type": "uri",
+          "value": "http://wikibase.example.com/entity/Q2"
+        },
+        "mimetype": {
+          "type": "literal",
+          "value": "image/fits"
+        },
+        "offset": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "sig": {
+          "type": "literal",
+          "value": "53494D504C4520203D202020202020202020202020202020202020202054"
+        },
+        "uri": {
+          "type": "uri",
+          "value": "http://wikibase.example.com/entity/Q8"
+        },
+        "uriLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Flexible Image Transport System (FITS), Version 3.0"
+        }
+      },
+      {
+        "encoding": {
+          "type": "uri",
+          "value": "http://wikibase.example.com/entity/Q2"
+        },
+        "offset": {
+          "type": "literal",
+          "value": "10",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "relativity": {
+          "type": "uri",
+          "value": "http://wikibase.example.com/entity/Q3"
+        },
+        "sig": {
+          "type": "literal",
+          "value": "FF03FF"
+        },
+        "uri": {
+          "type": "uri",
+          "value": "http://wikibase.example.com/entity/Q9"
+        },
+        "uriLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FFIIIFF"
+        }
+      },
+      {
+        "encoding": {
+          "type": "uri",
+          "value": "http://wikibase.example.com/entity/Q2"
+        },
+        "offset": {
+          "type": "literal",
+          "value": "10",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "relativity": {
+          "type": "uri",
+          "value": "http://wikibase.example.com/entity/Q4"
+        },
+        "sig": {
+          "type": "literal",
+          "value": "FFA3FF"
+        },
+        "uri": {
+          "type": "uri",
+          "value": "http://wikibase.example.com/entity/Q9"
+        },
+        "uriLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FFIIIFF"
+        }
+      }
+    ]
+  },
+  "provenance": [
+    {
+      "Title": "Item:Q9",
+      "Revision": 65,
+      "Modified": "2022-02-05T22:41:18Z",
+      "Permalink": "http://wikibase.example.com/w/index.php?oldid=58&title=Item%3AQ6",
+      "History": [
+        "2022-02-05T22:41:18Z (oldid: 65): 'Admin' edited: '/* wbsetclaim-update:2||1|1 */ [[Property:P8]]: FFA3FF'",
+        "2022-02-05T22:41:09Z (oldid: 64): 'Admin' edited: '/* wbsetclaim-update:2||1|1 */ [[Property:P8]]: FF03FF'",
+        "2022-02-05T22:40:54Z (oldid: 63): 'Admin' edited: '/* wbsetclaim-create:2||1 */ [[Property:P8]]: FFA3FF'",
+        "2022-02-05T22:40:00Z (oldid: 62): 'Admin' edited: '/* wbsetclaim-create:2||1 */ [[Property:P8]]: FF03FF'",
+        "2022-02-05T22:38:56Z (oldid: 61): 'Admin' edited: '/* wbsetclaim-create:2||1 */ [[Property:P9]]: [[Item:Q1]]'"
+      ]
+    },
+    {
+      "Title": "Item:Q6",
+      "Revision": 58,
+      "Modified": "2021-11-28T16:41:25Z",
+      "Permalink": "http://wikibase.example.com/w/index.php?oldid=58&title=Item%3AQ6",
+      "History": [
+        "2021-11-28T16:41:25Z (oldid: 58): 'Admin' edited: '/* wbsetclaim-update:2||1 */ [[Property:P8]]: BADF00DE'",
+        "2021-11-20T21:51:49Z (oldid: 46): 'Admin' edited: '/* wbsetclaim-update:2||1 */ [[Property:P8]]: DEADBEEF'",
+        "2021-11-19T22:40:50Z (oldid: 37): 'Admin' edited: '/* wbsetclaim-update:2||1|2 */ [[Property:P8]]: DEADMAU5'",
+        "2021-11-19T22:40:44Z (oldid: 36): 'Admin' edited: '/* wbsetclaim-update:2||1|1 */ [[Property:P8]]: DEADMAU5'",
+        "2021-11-19T22:25:47Z (oldid: 33): 'Admin' edited: '/* wbsetclaim-create:2||1 */ [[Property:P9]]: [[Item:Q1]]'"
+      ]
+    },
+    {
+      "Title": "Item:Q7",
+      "Revision": 45,
+      "Modified": "2021-11-20T18:49:46Z",
+      "Permalink": "http://wikibase.example.com/w/index.php?oldid=58&title=Item%3AQ6",
+      "History": [
+        "2021-11-20T18:49:46Z (oldid: 45): 'Admin' edited: '/* wbsetclaim-create:2||1 */ [[Property:P8]]: BA11'",
+        "2021-11-20T18:49:02Z (oldid: 44): 'Admin' edited: '/* wbsetclaim-create:2||1 */ [[Property:P8]]: BA5E'",
+        "2021-11-20T18:47:29Z (oldid: 43): 'Admin' edited: '/* wbsetclaim-create:2||1 */ [[Property:P6]]: ff2'",
+        "2021-11-20T18:47:17Z (oldid: 42): 'Admin' edited: '/* wbsetclaim-create:2||1 */ [[Property:P7]]: x-application/format-two'",
+        "2021-11-20T18:46:59Z (oldid: 41): 'Admin' edited: '/* wbsetclaim-create:2||1 */ [[Property:P9]]: [[Item:Q1]]'"
+      ]
+    },
+    {
+      "Title": "Item:Q8",
+      "Revision": 59,
+      "Modified": "2021-11-28T17:35:02Z",
+      "Permalink": "http://wikibase.example.com/w/index.php?oldid=58&title=Item%3AQ6",
+      "History": [
+        "2021-11-28T17:35:02Z (oldid: 59): 'Admin' edited: '/* wbsetclaim-create:2||1 */ [[Property:P9]]: [[Item:Q1]]'",
+        "2021-11-26T20:26:37Z (oldid: 57): 'Admin' edited: '/* wbsetaliases-add:1|en */ x-fmt/383'",
+        "2021-11-26T19:59:23Z (oldid: 56): 'Admin' edited: '/* wbsetaliases-add:1|en */ fdd000317'",
+        "2021-11-26T19:58:19Z (oldid: 55): 'Admin' edited: '/* wbsetclaim-create:2||1 */ [[Property:P7]]: application/fits'",
+        "2021-11-26T19:58:10Z (oldid: 54): 'Admin' edited: '/* wbsetclaim-create:2||1 */ [[Property:P7]]: image/fits'"
+      ]
+    }
+  ]
+}

@@ -487,33 +487,10 @@ func setHarvestOptions() {
 		config.SetWikidataLang(*harvestWikidataLang)
 	}
 	if *harvestWikidataEndpoint != config.WikidataEndpoint() {
-		log.Printf(
-			"Roy (Wikidata): Setting Wikidata endpoint to '%s'",
-			*harvestWikidataEndpoint,
-		)
-		log.Println(
-			"Roy (Wikidata); Ensure that the URL exists and is a compatible Wikidata SPARQL endpoint",
-		)
-		_, err := config.SetWikidataEndpoint(*harvestWikidataEndpoint)
-		if err != nil {
-			// Error information from SetWikidataEndpoint is just
-			// summary information. We don't need to act on this.
-			log.Println(err)
-		}
-	}
-	if *harvestWikidataWikibaseURL != config.WikidataWikibaseURL() {
-		log.Printf(
-			"Roy (Wikidata): Setting Wikibase URL to '%s'",
-			*harvestWikidataWikibaseURL,
-		)
-		log.Println(
-			"Roy (Wikidata); Ensure that the URL exists and is a compatible Wikibase server",
-		)
-		_, err := config.SetWikibaseURL(*harvestWikidataWikibaseURL)
-		if err != nil {
-			// Error information from SetWikibaseURL is just summary
-			// information. We don't need to act on this.
-			log.Println(err)
+		// Configure Siegfried to connect to a custom Wikibase instance.
+		if err := configureCustomWikibase(); err != nil {
+			log.Printf("Roy (Wikibase): %s", err)
+			os.Exit(1)
 		}
 	}
 }

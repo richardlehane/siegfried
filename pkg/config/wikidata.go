@@ -55,6 +55,15 @@ var wikidata = struct {
 	// nopronom determines whether the identifier will be build without
 	// patterns from PRONOM sources outside of Wikidata.
 	nopronom bool
+	// propPronom should be the URL needed to resolve PRONOM encoded
+	// signatures in the Wikidata identifier.
+	propPronom string
+	// propBOF should be the URL needed to resolve signatures to BOF
+	// in the Wikidata identifier.
+	propBOF string
+	// propEOF should be the URL needed to resolve signatures to EOF
+	// in the Wikidata identifier.
+	propEOF string
 	// revisionHistoryLen provides a way to configure the amount of
 	// history returned from a Wikibase instance. More history will
 	// slow down query time. Less history will speed it up.
@@ -74,8 +83,20 @@ var wikidata = struct {
 	// wikidatahome describes the name of the wikidata directory withing
 	// $SFHOME.
 	wikidatahome string
+	// wikibaseSparql is a placeholder for custom queries to be provided
+	// to a custom Wikibase instance.
+	wikibaseSparql string
+	// wikibaseSparqlFile points to the wikibase.sparql file required to
+	// query a custom Wikibase endpoint.
+	wikibaseSparqlFile string
+	// wikibasePropsFile is a JSON file that stores all the properties
+	// needed for Roy to interpret a custom Wikibase SPARQL result.
+	wikibasePropsFile string
 	// wikibaseURL is the base URL needed by Wikibase for permalinks to
-	// resolve.
+	// resolve and for revision history to be retrieved. The URL will be
+	// augmented with /w/index.php or /w/api.php via Wikiprov (so do not
+	// add this!). Wikiprov is the package used to make revision history
+	// and permalinks happen.
 	wikibaseURL string
 }{
 	arc:                    "Q7978505",
@@ -83,14 +104,20 @@ var wikidata = struct {
 	gzip:                   "Q27824060",
 	tar:                    "Q283579",
 	warc:                   "Q10287816",
-	definitions:            "wikidata-definitions-2.0.0",
+	definitions:            "wikidata-definitions-3.0.0",
 	endpoint:               "https://query.wikidata.org/sparql",
 	filemode:               0644,
+	propPronom:             "http://www.wikidata.org/entity/Q35432091",
+	propBOF:                "http://www.wikidata.org/entity/Q35436009",
+	propEOF:                "http://www.wikidata.org/entity/Q1148480",
 	revisionHistoryLen:     5,
 	revisionHistoryThreads: 10,
 	sparqlParam:            "uri",
 	wikidatahome:           "wikidata",
-	wikibaseURL:            "https://www.wikidata.org/w/index.php",
+	wikibaseSparql:         "",
+	wikibaseSparqlFile:     "wikibase.sparql",
+	wikibasePropsFile:      "wikibase.json",
+	wikibaseURL:            "https://www.wikidata.org/",
 }
 
 // WikidataHome describes where files needed by Siegfried and Roy for
@@ -167,7 +194,7 @@ func SetWikidataEndpoint(endpoint string) (func() private, error) {
 	_, err := url.ParseRequestURI(endpoint)
 	if err != nil {
 		return func() private { return private{} }, fmt.Errorf(
-			"Roy (Wikidata): URL provided is invalid: '%s' default Wikidata Query Service will be used instead",
+			"URL provided is invalid: '%w' default Wikidata Query Service will be used instead",
 			err,
 		)
 	}
@@ -186,6 +213,9 @@ func WikidataEndpoint() string {
 // WikidataSPARQL returns the SPARQL query required to harvest Wikidata
 // definitions.
 func WikidataSPARQL() string {
+	if wikidata.wikibaseSparql != "" {
+		return wikidata.wikibaseSparql
+	}
 	return wikidatasparql.WikidataSPARQL()
 }
 
@@ -235,7 +265,7 @@ func SetWikibaseURL(baseURL string) (func() private, error) {
 	_, err := url.ParseRequestURI(baseURL)
 	if err != nil {
 		return func() private { return private{} }, fmt.Errorf(
-			"Roy (Wikidata): URL provided is invalid: '%s' default Wikibase URL be used instead but may not work",
+			"URL provided is invalid: '%w' default Wikibase URL be used instead but may not work",
 			err,
 		)
 	}
@@ -269,4 +299,153 @@ func GetWikidataRevisionHistoryLen() int {
 // to use to retrieve Wikibase history to the caller.
 func GetWikidataRevisionHistoryThreads() int {
 	return wikidata.revisionHistoryThreads
+}
+
+// WikibaseSparqlFile returns the file path expected for a custom
+// Wikibase sparql query file. This file is needed to query a custom
+// instance in the majority of cases. It is unlikely a host Wikibase
+// will use the same configured properties and entities.
+func WikibaseSparqlFile() string {
+	return filepath.Join(WikidataHome(), wikidata.wikibaseSparqlFile)
+}
+
+// SetWikibaseSparql sets the SPARQL placeholder for custom Wikibase
+// queries.
+func SetWikibaseSparql(query string) func() private {
+	wikidata.wikibaseSparql = query
+	return func() private {
+		return private{}
+	}
+}
+
+// checkWikibaseURL guides the user to set the Wikibase/Wikimedia server
+// URL when using a custom endpoint. This URL should be a valid
+// Wikimedia URL. Roy will connect to the Wikimedia API via this URL.
+func checkWikibaseURL(customEndpointURL string, customWikibaseURL string) error {
+	if customWikibaseURL == WikidataWikibaseURL() {
+		return fmt.Errorf(
+			"Wikibase server URL for '%s' needs to be configured, can't be: '%s'",
+			customEndpointURL,
+			customWikibaseURL,
+		)
+	}
+	return nil
+}
+
+// SetCustomWikibaseEndpoint sets a custom Wikibase endpoint if provided
+// by the caller.
+func SetCustomWikibaseEndpoint(customEndpointURL string, customWikibaseURL string) error {
+	err := checkWikibaseURL(customEndpointURL, customWikibaseURL)
+	if err != nil {
+		return err
+	}
+	_, err = SetWikidataEndpoint(customEndpointURL)
+	if err != nil {
+		return err
+	}
+	_, err = SetWikibaseURL(customWikibaseURL)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// SetCustomWikibaseQuery checks for a custom query file and then sets
+// the configuration to point to that file if it finds one.
+func SetCustomWikibaseQuery() error {
+	wikibaseSparqlPath := WikibaseSparqlFile()
+	sparqlFile, err := os.ReadFile(wikibaseSparqlPath)
+	if os.IsNotExist(err) {
+		return fmt.Errorf(
+			"Setting custom Wikibase SPARQL: cannot find file '%s' in '%s': %w",
+			wikibaseSparqlPath,
+			WikidataHome(),
+			err,
+		)
+	}
+	if err != nil {
+		return fmt.Errorf(
+			"Setting custom Wikibase SPARQL: unexpected error opening '%s' has occurred: %w",
+			wikibaseSparqlPath,
+			err,
+		)
+	}
+	// Read the contents and assign to our query field in our config.
+	SetWikibaseSparql(string(sparqlFile))
+	return nil
+}
+
+// WikibasePropsPath returns the file path expected for the
+// configuration needed to tell roy how to interpret results from a
+// custom Wikibase query.
+//
+// Example:
+//
+//		{
+//		   "PronomProp": "http://wikibase.example.com/entity/Q2",
+//		   "BofProp": "http://wikibase.example.com/entity/Q3",
+//		   "EofProp": "http://wikibase.example.com/entity/Q4"
+//		}
+//
+func WikibasePropsPath() string {
+	return filepath.Join(WikidataHome(), wikidata.wikibasePropsFile)
+}
+
+// SetWikibasePropsPath allows the WikidataPropsPath to be overwritten,
+// e.g. for testing, and if it becomes needed, in the primary Roy code base.
+func SetWikibasePropsPath(propsPath string) func() private {
+	wikidata.wikibasePropsFile = propsPath
+	return func() private {
+		return private{}
+	}
+}
+
+// WikibasePronom will return the configured PRONOM property from the
+// Wikibase configuration.
+func WikibasePronom() string {
+	return wikidata.propPronom
+}
+
+// WikibaseBOF will return the configured BOF property from the Wikibase
+// configuration.
+func WikibaseBOF() string {
+	return wikidata.propBOF
+}
+
+// WikibaseEOF will return the configured EOF property from the Wikibase
+// configuration.
+func WikibaseEOF() string {
+	return wikidata.propEOF
+}
+
+// testPropURL provides a helper for testing the properties being set by
+// SetProps.
+func testPropURL(propURL string) error {
+	_, err := url.ParseRequestURI(propURL)
+	if err != nil {
+		return fmt.Errorf(
+			"URL provided '%s' is invalid: '%w' custom Wikibase instances need this value to be correct",
+			propURL,
+			err,
+		)
+	}
+	return nil
+}
+
+// SetProps will set the three minimum properties needed to run Roy/SF
+// with a custom Wikibase instance.
+func SetProps(pronom string, bof string, eof string) error {
+	if err := testPropURL(pronom); err != nil {
+		return err
+	}
+	if err := testPropURL(bof); err != nil {
+		return err
+	}
+	if err := testPropURL(eof); err != nil {
+		return err
+	}
+	wikidata.propPronom = pronom
+	wikidata.propBOF = bof
+	wikidata.propEOF = eof
+	return nil
 }

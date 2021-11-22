@@ -1,0 +1,5 @@
+{
+ "PronomProp": "http://wikibase.example.com/entity/Q2",
+ "BofProp": "http://wikibase.example.com/entity/Q3",
+ "EofProp": "http://wikibase.example.com/entity/Q4"
+}

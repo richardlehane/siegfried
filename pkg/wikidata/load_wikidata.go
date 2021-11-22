@@ -20,6 +20,7 @@ package wikidata
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -27,15 +28,14 @@ import (
 	"strings"
 
 	"github.com/richardlehane/siegfried/pkg/config"
+	"github.com/richardlehane/siegfried/pkg/wikidata/internal/converter"
 	"github.com/richardlehane/siegfried/pkg/wikidata/internal/mappings"
 
 	"github.com/ross-spencer/wikiprov/pkg/spargo"
 	"github.com/ross-spencer/wikiprov/pkg/wikiprov"
 )
 
-// Alias for the mappings.WikidataMapping structure so that it is easy
-// to reference below.
-var wikidataMapping = mappings.WikidataMapping
+type wikidataMappings = map[string]mappings.Wikidata
 
 // Alias our spargo Item for ease of referencing.
 type wikidataItem = []map[string]spargo.Item
@@ -55,18 +55,18 @@ type Signature = mappings.Signature
 // Fields which are used in the Wikidata SPARQL query which we will
 // access via JSON mapping.
 const (
-	uriField = "uri"
+	uriField         = "uri"
 	formatLabelField = "uriLabel"
-	puidField = "puid"
-	locField = "ldd"
-	extField = "extension"
-	mimeField = "mimetype"
-	signatureField = "sig"
-	offsetField = "offset"
-	encodingField = "encoding"
-	relativityField = "relativity"
-	dateField = "date"
-	referenceField = "referenceLabel"
+	puidField        = "puid"
+	locField         = "ldd"
+	extField         = "extension"
+	mimeField        = "mimetype"
+	signatureField   = "sig"
+	offsetField      = "offset"
+	encodingField    = "encoding"
+	relativityField  = "relativity"
+	dateField        = "date"
+	referenceField   = "referenceLabel"
 )
 
 // getID returns the QID from the IRI of the record that we're
@@ -87,11 +87,45 @@ func contains(items []string, item string) bool {
 	return false
 }
 
+// endpointJSON provides a helper to us to read the harvest results from a
+// Wikibase and read the endpoint specifically. This is a special use feature
+// of Roy/Siegfried and doesn't yet exist in the Wikiprov internals.
+type endpointJSON struct {
+	Endpoint string `json:"endpoint"`
+}
+
+// ErrNoEndpoint provides a method of validating the error received from
+// this package when the custom SPARQL endpoint cannot be read from
+// the harvest data.
+var ErrNoEndpoint = errors.New("Endpoint in custom Wikibase sparql results not set")
+
+// customEndpoint checks whether or not a custom "endpoint" is set in
+// the Wikidata harvest results. If the endpoint doesn't match the default
+// for Wikidata then we have a signal that we need to do more work to
+// default endpoint then we need to do more work to make things run.
+func customEndpoint(jsonFile []byte) (bool, error) {
+	var endpoint endpointJSON
+	err := json.Unmarshal([]byte(jsonFile), &endpoint)
+	if err != nil {
+		return false, fmt.Errorf(
+			"Cannot parse JSON in Wikidata file: %w",
+			err,
+		)
+	}
+	if endpoint.Endpoint == "" {
+		return false, fmt.Errorf("%w", ErrNoEndpoint)
+	}
+	if endpoint.Endpoint != config.WikidataEndpoint() {
+		return true, nil
+	}
+	return false, nil
+}
+
 // openWikidata accesses the signatures definitions we harvested from
 // Wikidata which are stored in SPARQL JSON and initiates their
 // processing into the structures required by Roy to process into an
 // identifier to be consumed by Siegfried.
-func openWikidata() wikiItemProv {
+func openWikidata() (wikiItemProv, error) {
 	path := config.WikidataDefinitionsPath()
 	log.Printf(
 		"Roy (Wikidata): Opening Wikidata definitions: %s\n", path,
@@ -99,22 +133,48 @@ func openWikidata() wikiItemProv {
 	jsonFile, err := ioutil.ReadFile(path)
 	if err != nil {
 		fmt.Errorf(
-			"Roy (Wikidata): Cannot open Wikidata file: %s",
+			"Cannot open Wikidata file (check, or try harvest again): %w",
 			err,
+		)
+	}
+	custom, err := customEndpoint(jsonFile)
+	if err != nil {
+		return wikiItemProv{}, err
+	}
+	if custom == true {
+		log.Println("Roy (Wikidata): Using a custom endpoint for results")
+		err := setCustomWikibaseProperties()
+		if err != nil {
+			return wikiItemProv{}, fmt.Errorf("Setting custom Wikibase properties: %w", err)
+		}
+		log.Printf(
+			"Roy (Wikidata): Custom PRONOM encoding loaded; config: '%s' => local: '%s'",
+			config.WikibasePronom(),
+			converter.GetPronomEncoding(),
+		)
+		log.Printf(
+			"Roy (Wikidata): Custom BOF loaded; config: '%s' => local: '%s'",
+			config.WikibaseBOF(),
+			relativeBOF,
+		)
+		log.Printf(
+			"Roy (Wikidata): Custom EOF loaded; config: '%s' => local: '%s'",
+			config.WikibaseEOF(),
+			relativeEOF,
 		)
 	}
 	var sparqlReport spargo.WikiProv
 	err = json.Unmarshal(jsonFile, &sparqlReport)
 	if err != nil {
 		fmt.Errorf(
-			"Roy (Wikidata): Cannot open Wikidata file: %s",
+			"Cannot open Wikidata file: %w",
 			err,
 		)
 	}
 	return wikiItemProv{
 		items: sparqlReport.Binding.Bindings,
 		prov:  sparqlReport.Provenance,
-	}
+	}, nil
 }
 
 // processWikidata iterates over the Wikidata signature definitions and
@@ -123,7 +183,8 @@ func openWikidata() wikiItemProv {
 // summary data structure is returned to the caller so that it can be
 // used to replay the results of processing, e.g. so the caller can
 // access the stored linting results.
-func processWikidata(itemProv wikiItemProv) Summary {
+func processWikidata(itemProv wikiItemProv) (Summary, wikidataMappings) {
+	var wikidataMapping = mappings.NewWikidata()
 	var summary Summary
 	var expectedRecordsWithSignatures = make(map[string]bool)
 	for _, item := range itemProv.items {
@@ -144,24 +205,27 @@ func processWikidata(itemProv wikiItemProv) Summary {
 	summary.CondensedSparqlResults = len(wikidataMapping)
 	summary.RecordsWithPotentialSignatures =
 		len(expectedRecordsWithSignatures)
-	return summary
+	return summary, wikidataMapping
 }
 
 // createMappingFromWikidata encapsulates the functions needed to load
 // parse, and process the Wikidata records from our definitions file.
 // After processing the summary results are output by Roy.
-func createMappingFromWikidata() []wikidataRecord {
-	itemProv := openWikidata()
-	summary := processWikidata(itemProv)
-	analyseWikidataRecords(&summary)
-	mapping := createReportMapping()
+func createMappingFromWikidata() ([]wikidataRecord, error) {
+	itemProv, err := openWikidata()
+	if err != nil {
+		return []wikidataRecord{}, err
+	}
+	summary, wikidataMapping := processWikidata(itemProv)
+	analyseWikidataRecords(wikidataMapping, &summary)
+	reportMapping := createReportMapping(wikidataMapping)
 	// Output our summary before leaving the function. Output is to
 	// stdout because it "pollutes" the Roy "inspect" call otherwise.
 	// If an "inspect" flag setter/getter is implemented in
 	// siegfried/pkg/config/wikidata.go then more flexibility might be
 	// possible.
 	fmt.Fprintf(os.Stderr, "%s\n", summary)
-	return mapping
+	return reportMapping, nil
 }
 
 // createReportMapping iterates over our Wikidata records to return a
@@ -169,7 +233,7 @@ func createMappingFromWikidata() []wikidataRecord {
 // signatures into the Wikidata identifier. reportMappings is used to
 // map Wikidata identifiers to PRONOM so that PRONOM native patterns can
 // be incorporated into the identifier when it is first created.
-func createReportMapping() []wikidataRecord {
+func createReportMapping(wikidataMapping wikidataMappings) []wikidataRecord {
 	var reportMappings = []wikidataRecord{
 		/* Examples:
 		   {"Q12345", "PNG", "http://wikidata.org/q12345", "fmt/11", "png"},
@@ -182,4 +246,61 @@ func createReportMapping() []wikidataRecord {
 		reportMappings = append(reportMappings, wd)
 	}
 	return reportMappings
+}
+
+// There are three sets of properties to lookup in a configuration
+// file, those for PRONOM, BOF and EOF values.
+const (
+	pronomProp = "PronomProp"
+	bofProp    = "BofProp"
+	eofProp    = "EofProp"
+)
+
+// setCustomWikibaseProperties sets the properties needed by Roy to
+// parse the results coming from a custom Wikibase endpoint.
+func setCustomWikibaseProperties() error {
+	log.Println("Roy (Wikidata): Looking for existence of wikibase.json in Siegfried home")
+	wikibasePropsPath := config.WikibasePropsPath()
+	propsFile, err := os.ReadFile(wikibasePropsPath)
+	if os.IsNotExist(err) {
+		return fmt.Errorf(
+			"Cannot find file '%s' in '%s': %w",
+			wikibasePropsPath,
+			config.WikidataHome(),
+			err,
+		)
+	}
+	if err != nil {
+		return fmt.Errorf(
+			"A different error handling '%s' has occurred: %w",
+			wikibasePropsPath,
+			err,
+		)
+	}
+	propsMap := make(map[string]string)
+	if err == nil {
+		err = json.Unmarshal(propsFile, &propsMap)
+		if err != nil {
+			return err
+		}
+	}
+	pronom := propsMap[pronomProp]
+	bof := propsMap[bofProp]
+	eof := propsMap[eofProp]
+	// Set the properties globally in the config and then request they are
+	// re-read from the module so that they are updated prior to building the
+	// signature file.
+	err = config.SetProps(pronom, bof, eof)
+	if err != nil {
+		return err
+	}
+	GetPronomURIFromConfig()
+	GetBOFandEOFFromConfig()
+	log.Printf(
+		"Roy (Wikidata): Properties set for PRONOM: '%s', BOF: '%s', EOF: '%s'",
+		pronom,
+		bof,
+		eof,
+	)
+	return nil
 }

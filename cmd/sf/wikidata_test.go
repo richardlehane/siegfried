@@ -41,24 +41,34 @@ var (
 	)
 )
 
-var wdSiegfried *siegfried.Siegfried
+func resetWikidata() {
+	config.SetWikidataEndpoint("https://query.wikidata.org/sparql")
+	propPronom := "http://www.wikidata.org/entity/Q35432091"
+	propBOF := "http://www.wikidata.org/entity/Q35436009"
+	propEOF := "http://www.wikidata.org/entity/Q1148480"
+	config.SetProps(propPronom, propBOF, propEOF)
+	wikidata.GetBOFandEOFFromConfig()
+	wikidata.GetPronomURIFromConfig()
+}
 
-func setupWikidata(pronomx bool) error {
+func setupWikidata(pronom bool) (*siegfried.Siegfried, error) {
+	var wdSiegfried *siegfried.Siegfried
+	resetWikidata()
 	wdSiegfried = siegfried.New()
 	config.SetHome(*wikidataDefinitions)
 	config.SetWikidataDefinitions(wikidataTestDefinitions)
 	opts := []config.Option{config.SetWikidataNamespace()}
-	if pronomx != true {
+	if pronom != true {
 		opts = append(opts, config.SetWikidataNoPRONOM())
 	} else {
 		opts = append(opts, config.SetWikidataPRONOM())
 	}
 	identifier, err := wikidata.New(opts...)
 	if err != nil {
-		return err
+		return wdSiegfried, err
 	}
 	wdSiegfried.Add(identifier)
-	return nil
+	return wdSiegfried, nil
 }
 
 // identificationTests provides our structure for table driven tests.
@@ -104,15 +114,14 @@ const containerMatch = "container name"
 // TestWikidataBasic will perform some rudimentary tests using some
 // simple Skeleton files and the Wikidata identifier without PRONOM.
 func TestWikidataBasic(t *testing.T) {
-	err := setupWikidata(false)
+	wdSiegfried, err := setupWikidata(false)
 	if err != nil {
 		t.Error(err)
 	}
 	for _, test := range skeletonSamples {
 		path := filepath.Join(siegfriedTestData, wikidataTestData, test.fname)
-		siegfriedRunner(path, test, t)
+		siegfriedRunner(wdSiegfried, path, test, t)
 	}
-	wdSiegfried = nil
 }
 
 var archiveSamples = []identificationTests{
@@ -134,15 +143,14 @@ var archiveSamples = []identificationTests{
 }
 
 func TestArchives(t *testing.T) {
-	err := setupWikidata(true)
+	wdSiegfried, err := setupWikidata(true)
 	if err != nil {
 		t.Error(err)
 	}
 	for _, test := range archiveSamples {
 		path := filepath.Join(siegfriedTestData, wikidataTestData, test.fname)
-		siegfriedRunner(path, test, t)
+		siegfriedRunner(wdSiegfried, path, test, t)
 	}
-	wdSiegfried = nil
 }
 
 var extensionMismatchSamples = []identificationTests{
@@ -155,15 +163,14 @@ var extensionMismatchSamples = []identificationTests{
 }
 
 func TestExtensionMismatches(t *testing.T) {
-	err := setupWikidata(false)
+	wdSiegfried, err := setupWikidata(false)
 	if err != nil {
 		t.Error(err)
 	}
 	for _, test := range extensionMismatchSamples {
 		path := filepath.Join(siegfriedTestData, wikidataTestData, test.fname)
-		siegfriedRunner(path, test, t)
+		siegfriedRunner(wdSiegfried, path, test, t)
 	}
-	wdSiegfried = nil
 }
 
 var containerSamples = []identificationTests{
@@ -182,15 +189,14 @@ var containerSamples = []identificationTests{
 }
 
 func TestContainers(t *testing.T) {
-	err := setupWikidata(true)
+	wdSiegfried, err := setupWikidata(true)
 	if err != nil {
 		t.Error(err)
 	}
 	for _, test := range containerSamples {
 		path := filepath.Join(siegfriedTestData, wikidataTestData, test.fname)
-		siegfriedRunner(path, test, t)
+		siegfriedRunner(wdSiegfried, path, test, t)
 	}
-	wdSiegfried = nil
 }
 
 var curiositySamples = []identificationTests{
@@ -203,21 +209,20 @@ var curiositySamples = []identificationTests{
 }
 
 func TestCurious(t *testing.T) {
-	err := setupWikidata(true)
+	wdSiegfried, err := setupWikidata(true)
 	if err != nil {
 		t.Error(err)
 	}
 	for _, test := range curiositySamples {
 		path := filepath.Join(siegfriedTestData, wikidataTestData, test.fname)
-		siegfriedRunner(path, test, t)
+		siegfriedRunner(wdSiegfried, path, test, t)
 	}
-	wdSiegfried = nil
 }
 
-func siegfriedRunner(path string, test identificationTests, t *testing.T) {
+func siegfriedRunner(wdSiegfried *siegfried.Siegfried, path string, test identificationTests, t *testing.T) {
 	file, err := os.Open(path)
 	if err != nil {
-		t.Errorf("failed to open %v, got: %v", path, err)
+		t.Fatalf("failed to open %v, got: %v", path, err)
 	}
 	defer file.Close()
 	res, err := wdSiegfried.Identify(file, path, "")
@@ -256,23 +261,36 @@ func siegfriedRunner(path string, test identificationTests, t *testing.T) {
 	}
 	const placeholderPermalink = "https://www.wikidata.org/w/index.php?oldid=1287431117&title=Q12345"
 	if permalink != placeholderPermalink {
-		t.Errorf("There has been a problem parsing the permalink for '%s' from Wikidata/Wikiprov: %s",
+		t.Errorf(
+			"There has been a problem parsing the permalink for '%s' from Wikidata/Wikiprov: %s",
 			test.qid,
 			permalink,
 		)
 	}
 
 	if test.extMatch && !strings.Contains(basis, extensionMatch) {
-		t.Errorf("Extension match not returned by identifier: %s", basis)
+		t.Errorf(
+			"Extension match not returned by identifier: %s",
+			basis,
+		)
 	}
 	if test.byteMatch && !strings.Contains(basis, byteMatch) {
-		t.Errorf("Byte match not returned by identifier: %s", basis)
+		t.Errorf(
+			"Byte match not returned by identifier: %s",
+			basis,
+		)
 	}
 	if test.containerMatch && !strings.Contains(basis, containerMatch) {
-		t.Errorf("Container match not returned by identifier: %s", basis)
+		t.Errorf(
+			"Container match not returned by identifier: %s",
+			basis,
+		)
 	}
 	if !test.extMatch && !strings.Contains(warning, extensionMismatch) {
-		t.Errorf("Expected an extension mismatch but it wasn't returned: %s", warning)
+		t.Errorf(
+			"Expected an extension mismatch but it wasn't returned: %s",
+			warning,
+		)
 	}
 
 	// Implement a basic Writer test for some of the data coming out of
@@ -281,10 +299,18 @@ func siegfriedRunner(path string, test identificationTests, t *testing.T) {
 	var w writer.Writer
 	buf := new(bytes.Buffer)
 	w = writer.JSON(buf)
-	w.Head("path/to/file", time.Now(), time.Now(), [3]int{0, 0, 0}, wdSiegfried.Identifiers(), wdSiegfried.Fields(), "md5")
+	w.Head(
+		"path/to/file",
+		time.Now(),
+		time.Now(),
+		[3]int{0, 0, 0},
+		wdSiegfried.Identifiers(),
+		wdSiegfried.Fields(),
+		"md5",
+	)
 	w.File("testName", 10, "testMod", []byte("d41d8c"), nil, res)
 	w.Tail()
 	if !json.Valid([]byte(buf.String())) {
-		t.Errorf("Output from JSON writer is invalid: %s", buf.String())
+		t.Fatalf("Output from JSON writer is invalid: %s", buf.String())
 	}
 }

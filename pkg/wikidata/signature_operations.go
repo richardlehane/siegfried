@@ -120,7 +120,6 @@ func processSIgnatures(wdd wikidataDefinitions) ([]frames.Signature, []string, e
 			frames, err := pronom.FormatPRONOM(wd.ID, ps)
 			if err != nil {
 				errs = append(errs, err)
-				errs = append(errs, nil)
 			}
 			sigs = append(sigs, frames)
 			ids = append(ids, wd.ID)
@@ -151,7 +150,7 @@ func processSIgnatures(wdd wikidataDefinitions) ([]frames.Signature, []string, e
 		for i, e := range errs {
 			errStrs[i] = e.Error()
 		}
-		err = errors.New(strings.Join(errStrs, "; "))
+		err = errors.New(strings.Join(errStrs[:], "; "))
 	}
 	return sigs, ids, err
 }
