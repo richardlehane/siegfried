@@ -35,7 +35,12 @@ type wikidataRecord = mappings.Wikidata
 func getProvenance(id string, provenance wikiProv) (string, string, error) {
 	const noValueFound = ""
 	for _, value := range provenance {
-		if value.Title == id {
+		if value.Title == fmt.Sprintf("Item:%s", id) {
+			// Verbose Item prefix, used by default Wikimedia installs.
+			return value.Permalink, fmt.Sprintf("%s", value), nil
+		} else if value.Title == fmt.Sprintf("%s", id) {
+			// Non-verbose, but looks like it is used in Wikidata flavor
+			// Wikimedia, i.e. specifically Wikidata.
 			return value.Permalink, fmt.Sprintf("%s", value), nil
 		}
 	}

@@ -48,7 +48,7 @@ func (summary Summary) String() string {
 
 // analyseWikidataRecords will parse the processed Wikidata mapping and
 // populate the summary structure to enable us to report on the identifier.
-func analyseWikidataRecords(summary *Summary) {
+func analyseWikidataRecords(wikidataMapping wikidataMappings, summary *Summary) {
 	recordsWithLinting, allLinting, badHeuristics := countLintingErrors()
 	summary.RecordCountWithLintingMessages = recordsWithLinting
 	summary.AllLintingMessageCount = allLinting

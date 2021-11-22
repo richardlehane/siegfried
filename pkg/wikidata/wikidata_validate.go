@@ -24,6 +24,7 @@ import (
 	"fmt"
 	"strconv"
 
+	"github.com/richardlehane/siegfried/pkg/config"
 	"github.com/richardlehane/siegfried/pkg/wikidata/internal/converter"
 )
 
@@ -187,10 +188,23 @@ type preProcessedSequence struct {
 //    * BOF page: https://www.wikidata.org/wiki/Q35436009
 //
 
-const (
-	relativeBOF = "http://www.wikidata.org/entity/Q35436009"
-	relativeEOF = "http://www.wikidata.org/entity/Q1148480"
-)
+var relativeBOF string = config.WikibaseBOF()
+var relativeEOF string = config.WikibaseEOF()
+
+// GetBOFandEOFFromConfig will read the current value of the BOF/EOF
+// properties from the configuration, e.g. after being updated using a
+// custom SPARQL query.
+func GetBOFandEOFFromConfig() {
+	relativeBOF = config.WikibaseBOF()
+	relativeEOF = config.WikibaseEOF()
+}
+
+// GetPronomURIFromConfig will read the current value of the PRONOM
+// properties from the configuration, e.g. after being updated using a
+// custom SPARQL query.
+func GetPronomURIFromConfig() {
+	converter.GetPronomURIFromConfig()
+}
 
 // validateAndReturnProvenance performs some arbitrary validation on
 // provenance as recorded by Wikidata and let's us know any issues

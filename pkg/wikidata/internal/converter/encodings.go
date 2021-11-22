@@ -17,6 +17,10 @@
 
 package converter
 
+import (
+	"github.com/richardlehane/siegfried/pkg/config"
+)
+
 // Encoding enumeration to return unambiguous values for encoding from
 // the mapping lookup below.
 const (
@@ -50,11 +54,24 @@ const (
 	ascii = "http://www.wikidata.org/entity/Q8815"
 	// Perl compatible regular expressions 2.
 	perl = "http://www.wikidata.org/entity/Q98056596"
-	// Pronom internal signature.
-	pronom = "http://www.wikidata.org/entity/Q35432091"
 	// Unknown encoding.
 	unknown = "unknown encoding"
 )
+
+// PRONOM internal signature. This is not a constant as it can be read
+// into Roy from wikibase.json.
+var pronom string = config.WikibasePronom()
+
+// GetPronomURIFromConfig will read the current value of the PRONOM
+// property from the configuration, e.g. after being updated using a
+// custom SPARQL query.
+func GetPronomURIFromConfig() {
+	pronom = config.WikibasePronom()
+}
+
+// GetPronomEncoding returns the PRONOM encoding URI as is set locally in
+// the package.
+func GetPronomEncoding() string { return pronom }
 
 // LookupEncoding will return a best-guess encoding type for a supplied
 // encoding string.

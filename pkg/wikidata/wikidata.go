@@ -12,7 +12,7 @@
 // implied. See the License for the specific language governing
 // permissions and limitations under the License.
 
-// Package Wikidata contains the majority of the functions needed to
+// Package wikidata contains the majority of the functions needed to
 // build a Wikidata identifier (compiled signature file) compatible with
 // Siegfried. Package Wikidata then also contains the majority of the
 // functions required to enable Siegfried to consume that same
@@ -52,7 +52,10 @@ func newWikidata() (identifier.Parseable, []string, error) {
 	var err error
 	// Process Wikidata report from disk and read into a report
 	// structure.
-	reportMappings := createMappingFromWikidata()
+	reportMappings, err := createMappingFromWikidata()
+	if err != nil {
+		return nil, []string{}, err
+	}
 	if config.GetWikidataNoPRONOM() {
 		log.Println(
 			"Roy (Wikidata): Not building identifiers set from PRONOM",

@@ -1,4 +1,5 @@
 {
+  "endpoint": "https://query.wikidata.org/sparql",
   "head" : {
     "vars" : [ "uri", "uriLabel", "puid", "extension", "mimetype", "encoding", "referenceLabel", "date", "relativity", "offset", "sig" ]
   },

@@ -1,7 +1,11 @@
 package main
 
 import (
+	"encoding/json"
+	"errors"
 	"flag"
+	"io/fs"
+	"strings"
 	"testing"
 
 	"github.com/richardlehane/siegfried"
@@ -71,6 +75,48 @@ func TestWikidata(t *testing.T) {
 	s := siegfried.New()
 	config.SetHome(*testhome)
 	config.SetWikidataDefinitions("wikidata-test-definitions")
+	m, err := wd.New(config.SetWikidataNamespace())
+	if err != nil {
+		t.Fatal(err)
+	}
+	err = s.Add(m)
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestWikibaseNoEndpoint(t *testing.T) {
+	config.SetHome(*testhome)
+	config.SetWikidataDefinitions("custom-wikibase-test-definitions-no-endpoint")
+	_, err := wd.New(config.SetWikidataNamespace())
+	if !errors.Is(err, wd.ErrNoEndpoint) {
+		t.Fatalf(
+			"Expected 'ErrNoEndpoint' trying to open custom Wikibase definitions, but got: '%s'",
+			err,
+		)
+	}
+}
+
+func TestWikibaseNoProps(t *testing.T) {
+	config.SetHome(*testhome)
+	config.SetWikibasePropsPath("/path/does/not/exist.json")
+	config.SetWikidataDefinitions("custom-wikibase-test-definitions")
+	_, err := wd.New(config.SetWikidataNamespace())
+	if !errors.Is(err, fs.ErrNotExist) {
+		t.Fatalf(
+			"Expected an error trying to open custom Wikibase properties, but got: '%s'",
+			err,
+		)
+	}
+}
+
+func TestWikibase(t *testing.T) {
+	s := siegfried.New()
+	config.SetHome(*testhome)
+	// Default wouldn't normally need to be set, but may be overridden
+	// through other tests.
+	config.SetWikibasePropsPath("wikibase.json")
+	config.SetWikidataDefinitions("custom-wikibase-test-definitions")
 	m, err := wd.New(config.SetWikidataNamespace())
 	if err != nil {
 		t.Fatal(err)
@@ -159,5 +205,61 @@ func TestArchivematica(t *testing.T) {
 	err = s.Add(p)
 	if err != nil {
 		t.Fatal(err)
+	}
+}
+
+// TestAddEndpoint makes sure that valid JSON is still output when we
+// add the endpoint to the SPARQL JSON.
+func TestAddEndpoint(t *testing.T) {
+	simpleJSON := `
+{
+  "key_one": "value_one",
+  "key_two": "value_two"
+}
+`
+	resJSON := `
+{
+  "endpoint": "http://example.com:8834/proxy/wdqs/bigdata/namespace/wdq/sparql?",
+  "key_one": "value_one",
+  "key_two": "value_two"
+}
+`
+	res := addEndpoint(
+		simpleJSON,
+		"http://example.com:8834/proxy/wdqs/bigdata/namespace/wdq/sparql?",
+	)
+	// Try to see if adding endpoint works, and is equal to our sample
+	// JSON before checking whether or not it is valid.
+	if res != resJSON {
+		t.Errorf(
+			"Replacement result '%s' does not match what was expected '%s'",
+			res,
+			resJSON,
+		)
+	}
+	valid := json.Valid([]byte(res))
+	if !valid {
+		t.Fatalf("Add endpoint returned invalid JSON: '%s'", res)
+	}
+	// Lets flatten the JSON structure a bit and see if we can cause
+	// more problems this way,
+	res = addEndpoint(
+		strings.ReplaceAll(simpleJSON, "\n", ""),
+		"http://example.com:8834/proxy/wdqs/bigdata/namespace/wdq/sparql?",
+	)
+	if strings.ReplaceAll(res, "\n", "") !=
+		strings.ReplaceAll(resJSON, "\n", "") {
+		t.Errorf(
+			"Replacement result '%s' does not match what was expected '%s'",
+			res,
+			resJSON,
+		)
+	}
+	valid = json.Valid([]byte(res))
+	if !valid {
+		t.Fatalf(
+			"Add endpoint returned invalid JSON: '%s'",
+			res,
+		)
 	}
 }
