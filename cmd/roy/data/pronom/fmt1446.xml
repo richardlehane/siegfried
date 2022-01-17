@@ -74,7 +74,7 @@
       <InternalSignature>
         <SignatureID>1807</SignatureID>
         <SignatureName>QuarkXPress 10.1 (Motorola)</SignatureName>
-        <SignatureNote>BOF (Offset 2):'MMXPR'{2}'K'.</SignatureNote>
+        <SignatureNote>BOF (Offset 2):'MMXPR'{2}'J'.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>2098</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -86,13 +86,13 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>4D4D585052{2}4B</ByteSequenceValue>
+          <ByteSequenceValue>4D4D585052{2}4A</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <InternalSignature>
         <SignatureID>1808</SignatureID>
         <SignatureName>QuarkXPress 10.1 (Intel)</SignatureName>
-        <SignatureNote>BOF (Offset 2):'IIXPR'{1}'K'.</SignatureNote>
+        <SignatureNote>BOF (Offset 2):'IIXPR'{1}'J'.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>2099</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -104,7 +104,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>4949585052{1}4B</ByteSequenceValue>
+          <ByteSequenceValue>4949585052{1}4A</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2362</FormatID>
+      <FormatName>CompuServe RLE</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Raster)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>CompuServe RLE is a type of run-length encoding graphics monochrome file format, introduced by CompuServe in the 1980s to be used by the CompuServe on-line service. It is the predecessor of CompuServe's GIF file format that supported colour and was invented by Steve Wilhite. The image dimensions are either Medium (128x96) and High (256x192) resolution RLE- compressed files. Files consist entirely of ASCII characters, though some are control characters.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>29 Oct 2021</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>29 Oct 2021</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/CompuServe_RLE
+
+https://www.pmview.com/help/pmview/compuserve_rle_rle_.html
+
+https://en.wikipedia.org/wiki/CompuServe</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1538</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>108</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Compuserve Incorporated</OrganisationName>
+        <DeveloperCompoundName>Compuserve Incorporated</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>108</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Compuserve Incorporated</OrganisationName>
+        <SupportCompoundName>Compuserve Incorporated</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2811</ExternalSignatureID>
+        <Signature>rle</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1884</SignatureID>
+        <SignatureName>CompuServe RLE</SignatureName>
+        <SignatureNote>BOF: Magic bytes: '.GH or .GM'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2179</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>1B47(48|4D)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <CompressionType>
+        <CompressionID>13</CompressionID>
+        <CompressionName>Run Length Encoding</CompressionName>
+        <CompressionVersion>
+        </CompressionVersion>
+        <CompressionAliases>RLE</CompressionAliases>
+        <CompressionFamilies>
+        </CompressionFamilies>
+        <Description>Run length encoding (RLE) is perhaps the simplest image compression technique in common use. RLE algorithms are lossless, and work by searching for runs of bits, bytes, or pixels of the same value, and encoding the length and value of the run. As such, RLE achieves best results with images containing large areas of contiguous colour, and especially monochrome images. Complex colour images, such as photographs, do not compress well – in some cases, RLE can actually increase the file size. There are a number of RLE variants in common use, which are encountered in the TIFF, PCX and BMP graphics formats.</Description>
+        <Lossiness>Lossless</Lossiness>
+        <ReleaseDate>
+        </ReleaseDate>
+        <WithdrawnDate>
+        </WithdrawnDate>
+        <CompressionDocumentation>
+        </CompressionDocumentation>
+        <CompressionIPR>
+        </CompressionIPR>
+        <CompressionNote>
+        </CompressionNote>
+        <CompressionIdentifier>
+          <Identifier>x-cmp/13</Identifier>
+          <IdentifierType>PUID</IdentifierType>
+        </CompressionIdentifier>
+      </CompressionType>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

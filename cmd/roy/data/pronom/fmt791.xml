@@ -31,7 +31,7 @@ Operational Pattern “OP-Atom” is intended to satisfy the demands of applicat
       <ProvenanceSourceDate>23 Nov 2015</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>23 Nov 2015</LastUpdatedDate>
+      <LastUpdatedDate>17 Oct 2021</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -66,7 +66,7 @@ Operational Pattern “OP-Atom” is intended to satisfy the demands of applicat
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>060E2B34020501010D0102010102{70}060E2B34040101020D01020110</ByteSequenceValue>
+          <ByteSequenceValue>060E2B34020501010D0102010102{70}060E2B34040101(01|02)0D01020110</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

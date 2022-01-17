@@ -34,6 +34,10 @@ Full specifications available at: http://www.opengeospatial.org/standards/kml</F
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
+        <Identifier>application/vnd.google-earth.kml+xml</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
         <Identifier>fmt/244</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>

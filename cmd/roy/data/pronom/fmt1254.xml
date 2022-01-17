@@ -61,7 +61,7 @@ https://wikivisually.com/wiki/Cardfile</FormatNote>
       <InternalSignature>
         <SignatureID>1628</SignatureID>
         <SignatureName>Cardfile (MGC)</SignatureName>
-        <SignatureNote>BOF: Magic bytes ‘MCG’,  ‘RRG’ or 'DKO' at beginning of file. The initial versions of Cardfile have the magic bytes 'MCG'. When Cardfile updated to add OLE support the file signature changed to 'RRG'. Finally the file signature changed to 'DKO' when released as a 32-bit accessory and the character width changed in order to support unicode.</SignatureNote>
+        <SignatureNote>BOF: Magic bytes ‘MGC’, ‘RRG’ or 'DKO' at beginning of file. The initial versions of Cardfile have the magic bytes 'MCG'. When Cardfile updated to add OLE support the file signature changed to 'RRG'. Finally the file signature changed to 'DKO' when released as a 32-bit accessory and the character width changed in order to support unicode.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1899</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>

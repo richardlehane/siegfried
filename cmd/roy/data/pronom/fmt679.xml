@@ -26,7 +26,7 @@
       <ProvenanceSourceDate>23 Sep 2014</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>23 Sep 2014</LastUpdatedDate>
+      <LastUpdatedDate>15 Nov 2021</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -42,6 +42,12 @@
         <Signature>ppp</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>1470</RelatedFormatID>
+        <RelatedFormatName>Serif PagePlus Publication</RelatedFormatName>
+        <RelatedFormatVersion>Generic</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

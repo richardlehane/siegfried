@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2396</FormatID>
+      <FormatName>ISDOCX Information System Document</FormatName>
+      <FormatVersion>6.0.1</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>ISDOCX is a type of ZIP container file for transferring ISDOC documents and other material. Then content of this file format varies, but it should always contain ISDOC file format, and usually does contain a Portable Document Format (PDF). This signiture records a general ISDOCX file format as an extension only, however there are several versions of this format which can be found here: http://www.isdoc.cz/index.php?id=1316. Versions 6.0.1 must also contain 'manifest.xml' namespace file, this signiture records  6.0.1 with a 'manifest.xml' namespace file.
+
+
+ISDOC format is a type of Extensible Markup Language (XML) file format specific for transfer of financial, as well as other documents. It allows paperless exchanging of invoices and other documents, processing and portability among companies, public administration authorities and individuals. It was defined by “A Working group for Electronic Standards of data exchanging” in ICT Union (formerly SPIS). The “Declaration on common approach in the area of electronic invoicing in the Czech Republic” was signed on 16th October 2008. It represents a Czech customization of UBL standard https://www.iso.org/standard/66370.html. ISDOC file enables enveloped signatures including advanced IETF/W3C XML digital signatures conforming to the ETSI XAdES specification.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>242</ProvenanceSourceID>
+      <ProvenanceName>The National Archives of the Czech Republic / The National Archives of the Czech Republic</ProvenanceName>
+      <ProvenanceSourceDate>07 Dec 2021</ProvenanceSourceDate>
+      <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
+      <LastUpdatedDate>07 Dec 2021</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1571</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2853</ExternalSignatureID>
+        <Signature>isdocx</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>382</RelatedFormatID>
+        <RelatedFormatName>ZIP Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2393</RelatedFormatID>
+        <RelatedFormatName>ISDOCX Information System Document (Generic)</RelatedFormatName>
+        <RelatedFormatVersion>5.x</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>2395</RelatedFormatID>
+        <RelatedFormatName>ISDOC Information System Document</RelatedFormatName>
+        <RelatedFormatVersion>6.0.1</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

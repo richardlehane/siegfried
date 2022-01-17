@@ -253,6 +253,18 @@ QCD - QuarkXPress Article</ProvenanceDescription>
         <RelatedFormatName>QuarkXPress Project</RelatedFormatName>
         <RelatedFormatVersion>10.1</RelatedFormatVersion>
       </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2317</RelatedFormatID>
+        <RelatedFormatName>QuarkXPress Project</RelatedFormatName>
+        <RelatedFormatVersion>2020</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2318</RelatedFormatID>
+        <RelatedFormatName>QuarkXPress Project</RelatedFormatName>
+        <RelatedFormatVersion>2021</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

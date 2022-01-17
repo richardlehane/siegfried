@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2266</FormatID>
+      <FormatName>XLD4 (Graphic Data Document)</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Raster)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>XLD4 is a raster graphics format, sometimes known as Q4 file, associated with PC-98 a lineup of 16 and 32 bit computers manufactured by NEC in Japan. Each image consists of two separate files, one with a q4 extension and another with a q4d extension. The q4 file contains the bitmap image and the q4d the text description. In PRONOM these have been given two separate PUIDs.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>13 Oct 2021</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>13 Oct 2021</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/XLD4</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1448</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2647</ExternalSignatureID>
+        <Signature>q4d</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1810</SignatureID>
+        <SignatureName>XLD4 (Graphic Data Document)</SignatureName>
+        <SignatureNote>BOF: Magic bytes ASCII string ‘===============&gt;&gt;&gt;&gt;&gt; XLD4 GRAPHIC DATA DOCUMENT &lt;&lt;&lt;&lt;&lt;===============’</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2102</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3D3D3D3D3D3D3D3D3D3D3D3D3D3D3D3E3E3E3E3E20584C4434204752415048494320444154412020444F43554D454E54203C3C3C3C3C3D3D3D3D3D3D3D3D3D3D3D3D3D3D3D</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

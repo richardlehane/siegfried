@@ -9,7 +9,7 @@
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Word Processor</FormatTypes>
+      <FormatTypes>Image (Raster)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
       <FormatDescription>MAX was the native image format of earlier versions of the PaperPort document management software. Although this has been subsequently superseded by PDF, newer versions retain the ability to read, but not write MAX files.</FormatDescription>
@@ -27,7 +27,7 @@
       <ProvenanceSourceDate>18 Feb 2019</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>18 Feb 2019</LastUpdatedDate>
+      <LastUpdatedDate>16 Oct 2021</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>

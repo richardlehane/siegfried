@@ -4,7 +4,7 @@
     <FileFormat>
       <FormatID>87</FormatID>
       <FormatName>Macromedia Freehand</FormatName>
-      <FormatVersion>5</FormatVersion>
+      <FormatVersion>4 &amp; 5</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -12,7 +12,7 @@
       <FormatTypes>Image (Vector)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>FreeHand, created by Altsys Corporation in 1988 and licensed to Aldus Corporation, is a discontinued vector graphic editor for Windows and Mac. Uses include professional illustration, desktop publishing and web content. FreeHand versions 1 though to 4 were released by Aldus, later versions were developed by Macromedia. In 2005 Adobe Systems acquired Macromedia but FreeHand development has been discontinued.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -25,7 +25,7 @@
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>19 Jul 2013</LastUpdatedDate>
+      <LastUpdatedDate>17 Oct 2021</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -55,6 +55,11 @@
         <Signature>fh5</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2679</ExternalSignatureID>
+        <Signature>fh4</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
       <InternalSignature>
         <SignatureID>862</SignatureID>
         <SignatureName>FreeHand 5</SignatureName>
@@ -73,6 +78,12 @@
           <ByteSequenceValue>41474431</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>458</RelatedFormatID>
+        <RelatedFormatName>Aldus Freehand Drawing</RelatedFormatName>
+        <RelatedFormatVersion>4</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

@@ -49,15 +49,33 @@
       </ExternalSignature>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>165</RelatedFormatID>
+        <RelatedFormatName>Microsoft Visio Drawing</RelatedFormatName>
+        <RelatedFormatVersion>5.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>376</RelatedFormatID>
         <RelatedFormatName>Microsoft Visio Drawing</RelatedFormatName>
-        <RelatedFormatVersion>2000</RelatedFormatVersion>
+        <RelatedFormatVersion>2000-2002</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1230</RelatedFormatID>
         <RelatedFormatName>Microsoft Visio Drawing</RelatedFormatName>
         <RelatedFormatVersion>2003-2010</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2332</RelatedFormatID>
+        <RelatedFormatName>Microsoft Visio Drawing</RelatedFormatName>
+        <RelatedFormatVersion>3</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2333</RelatedFormatID>
+        <RelatedFormatName>Microsoft Visio Drawing</RelatedFormatName>
+        <RelatedFormatVersion>4</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>

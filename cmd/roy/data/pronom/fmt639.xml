@@ -4,8 +4,7 @@
     <FileFormat>
       <FormatID>1423</FormatID>
       <FormatName>Stuffit Archive File</FormatName>
-      <FormatVersion>
-      </FormatVersion>
+      <FormatVersion>5</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -13,7 +12,7 @@
       <FormatTypes>Aggregate</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>The Stuffit Archive file format is a proprietary file compression format originally developed by Raymond Lau.</FormatDescription>
+      <FormatDescription>The Stuffit Archive file format is a proprietary file compression format originally developed by Raymond Lau in 1987. It supports storing the Resource Fork alongside other files and is commonly used in Mac environments, though a Windows version has also been released.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -27,13 +26,17 @@
       <ProvenanceSourceDate>14 Feb 2014</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>14 Feb 2014</LastUpdatedDate>
+      <LastUpdatedDate>16 Oct 2021</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
       </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/x-stuffit</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
       <FileFormatIdentifier>
         <Identifier>com.stuffit.archive.sit</Identifier>
         <IdentifierType>Apple Uniform Type Identifier</IdentifierType>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2370</FormatID>
+      <FormatName>NeoDesk Icon File</FormatName>
+      <FormatVersion>1 and 2</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>NeoDisk icon file format is associated with the NeoDesk graphical environment, developed by Gribnif Software, for the Atari ST family of computers. Three versions of NeoDesk icon files exist. The first and the second and uncompressed and have no discernible signature. The first verison consists of 9 icons (232 bytes each) for a total file size of 2088 bytes. The second version consists of any number of icons (244 bytes each) with the total file size a multiple of 244. These can currently be identified by extension only using DROID.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>05 Nov 2021</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>05 Nov 2021</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/NeoDesk_icon
+
+http://www4.pair.com/gribnif/downloads/neodesk/</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1545</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2823</ExternalSignatureID>
+        <Signature>nic</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

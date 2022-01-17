@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2393</FormatID>
+      <FormatName>ISDOCX Information System Document (Generic)</FormatName>
+      <FormatVersion>5.x</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>ISDOCX is a type of ZIP container file for transferring ISDOC documents and other material. Then content of this file format varies, but it should always contain ISDOC file format, and usually does contain a Portable Document Format (PDF). This signiture records a general ISDOCX file format, however there are several versions of this format which can be found here: http://www.isdoc.cz/index.php?id=1316. Versions 6.0.1 must also contain 'manifest.xml' namespace file, this signiture records all versions prior to 6.0.1 without a 'manifest.xml' namespace file.
+
+ISDOC format is a type of Extensible Markup Language (XML) file format specific for transfer of financial, as well as other documents. It allows paperless exchanging of invoices and other documents, processing and portability among companies, public administration authorities and individuals. It was defined by “A Working group for Electronic Standards of data exchanging” in ICT Union (formerly SPIS). The “Declaration on common approach in the area of electronic invoicing in the Czech Republic” was signed on 16th October 2008. It represents a Czech customization of UBL standard https://www.iso.org/standard/66370.html. ISDOC file enables enveloped signatures including advanced IETF/W3C XML digital signatures conforming to the ETSI XAdES specification.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>242</ProvenanceSourceID>
+      <ProvenanceName>The National Archives of the Czech Republic / The National Archives of the Czech Republic</ProvenanceName>
+      <ProvenanceSourceDate>06 Dec 2021</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>06 Dec 2021</LastUpdatedDate>
+      <FormatNote>http://www.isdoc.org/
+
+http://www.isdoc.cz/fileadmin/isdoc/6.0/readme-en.html</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1568</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2850</ExternalSignatureID>
+        <Signature>isdocx</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1910</SignatureID>
+        <SignatureName>ISDOCX Information System Document (Generic)</SignatureName>
+        <SignatureNote>EOF; Offset:12-400; Magic bytes: 'isdoc'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2209</ByteSequenceID>
+          <PositionType>Absolute from EOF</PositionType>
+          <Offset>12</Offset>
+          <MaxOffset>1000</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>6973646F63</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2396</RelatedFormatID>
+        <RelatedFormatName>ISDOCX Information System Document</RelatedFormatName>
+        <RelatedFormatVersion>6.0.1</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>382</RelatedFormatID>
+        <RelatedFormatName>ZIP Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2392</RelatedFormatID>
+        <RelatedFormatName>ISDOC Information System Document (Generic)</RelatedFormatName>
+        <RelatedFormatVersion>5.x</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>2392</RelatedFormatID>
+        <RelatedFormatName>ISDOC Information System Document (Generic)</RelatedFormatName>
+        <RelatedFormatVersion>5.x</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

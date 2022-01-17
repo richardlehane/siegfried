@@ -476,6 +476,82 @@
         </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2286</RelatedFormatID>
+        <RelatedFormatName>	Ableton Live Set</RelatedFormatName>
+        <RelatedFormatVersion>8.2.1 onwards</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2297</RelatedFormatID>
+        <RelatedFormatName>TEI P4 XML - Single Text File</RelatedFormatName>
+        <RelatedFormatVersion>P4</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2298</RelatedFormatID>
+        <RelatedFormatName>TEI P4 XML - Corpus File</RelatedFormatName>
+        <RelatedFormatVersion>P4</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2299</RelatedFormatID>
+        <RelatedFormatName>TEI P5 - Single Text File</RelatedFormatName>
+        <RelatedFormatVersion>P5</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2300</RelatedFormatID>
+        <RelatedFormatName>TEI P5 XML - Corpus File</RelatedFormatName>
+        <RelatedFormatVersion>P5</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2322</RelatedFormatID>
+        <RelatedFormatName>Adobe Audition Session File</RelatedFormatName>
+        <RelatedFormatVersion>XML</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2324</RelatedFormatID>
+        <RelatedFormatName>XML Forms Data Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2326</RelatedFormatID>
+        <RelatedFormatName>Agisoft Project File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2368</RelatedFormatID>
+        <RelatedFormatName>ELAN Annotation File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2369</RelatedFormatID>
+        <RelatedFormatName>ELAN Preference File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2392</RelatedFormatID>
+        <RelatedFormatName>ISDOC Information System Document (Generic)</RelatedFormatName>
+        <RelatedFormatVersion>5.x</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2395</RelatedFormatID>
+        <RelatedFormatName>ISDOC Information System Document</RelatedFormatName>
+        <RelatedFormatVersion>6.0.1</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>639</RelatedFormatID>
         <RelatedFormatName>Hypertext Markup Language</RelatedFormatName>

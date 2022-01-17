@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2389</FormatID>
+      <FormatName>Associated Signature Container Extended (ASiC-E)</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The ASiC-E container is a ZIP archive file containing set of data objects and associated signatures. It is designed to associate an advanced electronic signature with any type of data. It operates with signature and time-stamp token formats XAdES, CAdES, timestamp RFC 3161.
+
+The container has an internal structure including a root folder for all the container content possibly including folders reflecting the content structure and a META-INF folder, in the root folder, for metadata about the content, including associated signatures.
+
+The integrity of the data is guaranteed by the electronic signature when present or should be provided externally if only a time-stamp token is applied to the data. Privacy can be guaranteed through the use of ZIP encryption features or externally. External integrity and privacy protection can be obtained e.g. through the use of SSL/TLS or S/MIME.
+
+ASiC-E container contains multiple data objects, each object may be signed by one or more signature carried in the container.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>242</ProvenanceSourceID>
+      <ProvenanceName>The National Archives of the Czech Republic / The National Archives of the Czech Republic</ProvenanceName>
+      <ProvenanceSourceDate>24 Nov 2021</ProvenanceSourceDate>
+      <ProvenanceDescription>	This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
+      <LastUpdatedDate>24 Nov 2021</LastUpdatedDate>
+      <FormatNote>https://www.etsi.org/deliver/etsi_ts/102900_102999/102918/01.03.01_60/ts_102918v010301p.pdf</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/vnd.etsi.asic-e+zip</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1564</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2846</ExternalSignatureID>
+        <Signature>asice</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2855</ExternalSignatureID>
+        <Signature>sce</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2069</RelatedFormatID>
+        <RelatedFormatName>Electronically Certified Document (EDOC)</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>2069</RelatedFormatID>
+        <RelatedFormatName>Electronically Certified Document (EDOC)</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>2160</RelatedFormatID>
+        <RelatedFormatName>BDOC</RelatedFormatName>
+        <RelatedFormatVersion>2.x</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

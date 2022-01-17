@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2383</FormatID>
+      <FormatName>SelF-eXtracting LHA/LZH Compressed Files</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>SelF-eXtracting LHA/LZH compressed files is an archive format for the Commodore 64 and 128 consisting of files compressed in the LHA format and appended to a program to extract them, so that the archive and its extractor is self-contained and no other program needs to be downloaded or installed in order to extract the archive. It is a sucessor of SDA format with an addition of the extractor is cross-compatible between both Commodore platforms (C-64 and C-128).</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>23 Nov 2021</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>23 Nov 2021</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/SIFF
+
+https://fileinfo.com/extension/son
+
+https://wiki.multimedia.cx/index.php/SIFF</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1558</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2839</ExternalSignatureID>
+        <Signature>sfx</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1902</SignatureID>
+        <SignatureName>SelF-eXtracting LHA/LZH Compressed File</SignatureName>
+        <SignatureNote>BOF; Offset: 3370 - 3410; Magic bytes: C64/C128 SELF EXTRACTING LHARCHIVE</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2201</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>3000</Offset>
+          <MaxOffset>3700</MaxOffset>
+          <IndirectOffsetLocation>0</IndirectOffsetLocation>
+          <IndirectOffsetLength>0</IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4336342F433132382053454C462045585452414354494E47204C4841524348495645</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

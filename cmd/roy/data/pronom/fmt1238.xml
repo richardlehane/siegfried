@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>2056</FormatID>
-      <FormatName>Band Interleaved By Line File</FormatName>
+      <FormatName>Band Interleaved By Line (BIL) Image Encoding</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
@@ -27,7 +27,7 @@
       <ProvenanceSourceDate>18 Jan 2020</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>18 Jan 2020</LastUpdatedDate>
+      <LastUpdatedDate>16 Oct 2021</LastUpdatedDate>
       <FormatNote>http://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/bil-bip-and-bsq-raster-files.htm
 https://www.harrisgeospatial.com/docs/ENVIImageFiles.html</FormatNote>
       <FormatRisk>

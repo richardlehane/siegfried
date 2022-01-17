@@ -5,13 +5,15 @@
       <FormatID>377</FormatID>
       <FormatName>Microsoft Visio Drawing</FormatName>
       <FormatVersion>2002</FormatVersion>
-      <FormatAliases>Microsoft Visio Drawing (XP)</FormatAliases>
+      <FormatAliases>
+      </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Image (Vector)</FormatTypes>
+      <FormatTypes>
+      </FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>Microsoft Visio is a diagramming and vector graphics application and is part of the Microsoft Office family.</FormatDescription>
+      <FormatDescription>This format has been deprecated in favour of x-fmt/258 - Microsoft Visio Drawing 2000-2002.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -22,8 +24,9 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
-      <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
-      <LastUpdatedDate>19 Apr 2012</LastUpdatedDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>24 Oct 2021</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -31,25 +34,9 @@
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
-        <Identifier>application/vnd.visio</Identifier>
-        <IdentifierType>MIME</IdentifierType>
-      </FileFormatIdentifier>
-      <FileFormatIdentifier>
         <Identifier>x-fmt/259</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
-      <ExternalSignature>
-        <ExternalSignatureID>364</ExternalSignatureID>
-        <Signature>vsd</Signature>
-        <SignatureType>File extension</SignatureType>
-      </ExternalSignature>
-      <RelatedFormat>
-        <RelationshipType>Has priority over</RelationshipType>
-        <RelatedFormatID>767</RelatedFormatID>
-        <RelatedFormatName>OLE2 Compound Document Format</RelatedFormatName>
-        <RelatedFormatVersion>
-        </RelatedFormatVersion>
-      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

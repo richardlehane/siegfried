@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2313</FormatID>
+      <FormatName>HyperCard Stack</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>Stack</FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Database</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>HyperCard Stack is a legacy file format used with the HyperCard application software. HyperCard was developed by Bill Atkinson for use on Apple Macintosh and Apple IIGS computers and was first released by Apple in 1987. Atkinson created HyperCard as a tool that non-programmers could use to write their own computer applications. The HyperCard program stored information in documents referred to as stacks. Each HyperCard stack consisted of related cards, which could contain text, images, interactive elements, and sound. individual cards within the stack to each other and that played various sounds as the user clicked them. The structure of HyperCard was based conceptually on physical card-filing systems, like Rolodex, or a flat-file database that used hyperlinks as navigation. HyperCard Stacks typically lack a format extension.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>256</ProvenanceSourceID>
+      <ProvenanceName>Library of Congress / Library of Congress</ProvenanceName>
+      <ProvenanceSourceDate>24 Oct 2021</ProvenanceSourceDate>
+      <ProvenanceDescription>Additionally submitted by National Library of New Zealand</ProvenanceDescription>
+      <LastUpdatedDate>24 Oct 2021</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fdd000537</Identifier>
+        <IdentifierType>Library of Congress Format Description Identifier</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1490</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <InternalSignature>
+        <SignatureID>1863</SignatureID>
+        <SignatureName>HyperCard Stack</SignatureName>
+        <SignatureNote>BOF, offset 4: 'STAK' 0xFFFFFFFF</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2156</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>4</Offset>
+          <MaxOffset>4</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>5354414BFFFFFFFF</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

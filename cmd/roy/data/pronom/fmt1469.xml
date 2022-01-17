@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2292</FormatID>
+      <FormatName>MAKIchan Graphics File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Raster)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>MAKIchan is a family of raster image file formats developed in the early 1990s by Woody-Rinn, a Japanese software developer. The first specificaiton, MAKI v1, refers and relates to .mki files. The second specificaiton, MAKI v2, is for .mag and .max files, with the latter supporting higher resolutions, as well as the native YJK colour model for MSX2 computers.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>16 Oct 2021</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>16 Oct 2021</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/MAKIchan_Graphics
+
+https://mooncore.eu/bunny/txt/makichan.htm
+
+https://ja.wikipedia.org/wiki/MAG%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1469</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2657</ExternalSignatureID>
+        <Signature>mki</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2658</ExternalSignatureID>
+        <Signature>mag</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2659</ExternalSignatureID>
+        <Signature>max</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1838</SignatureID>
+        <SignatureName>MAKIchan Graphics (.mki - "MAKI01A " Signature)</SignatureName>
+        <SignatureNote>BOF: 'MAKI01A' then 0x20 (space). The first of the two known signatures for .mki files associated with the MAKIchan Graphics file format.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2131</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4D414B4930314120</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1839</SignatureID>
+        <SignatureName>MAKIchan Graphics (.mki - "MAKI01B " Signature)</SignatureName>
+        <SignatureNote>BOF: 'MAKI01B' then 0x20 (space). The second of the two known signatures for .mki files associated with the MAKIchan Graphics file format.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2132</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4D414B4930314220</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1840</SignatureID>
+        <SignatureName>MAKIchan Graphics (.mag/.max "MAKI02 " Signature)</SignatureName>
+        <SignatureNote>BOF: 'MAKI02' then 0x20 (space). Signature for both .mag and .max files associatd with the MAKIchan Graphics file format.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2133</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4D414B49303220</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>687</RelatedFormatID>
+        <RelatedFormatName>MPEG 1/2 Audio Layer 3</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>1783</RelatedFormatID>
+        <RelatedFormatName>3DS Max</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

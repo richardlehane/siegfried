@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2384</FormatID>
+      <FormatName>Beam Software SIFF File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Audio</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>A Beam Software SIFF file is an audio file used by a Beam Software video game. Beam Software is an Australian video game developer that was founded in 1978 and acquired by Krome Studios in 2006, at which point Beam was renamed Krome Studios Melbourne. In the 1990s, Beam produced a handful of games that use their proprietary SIFF file format.  The file contains music, sound effects, or dialogue played within a game. The files cannot be played by most popular media players but can be converted to a standard audio format.
+
+The SIFF file format can be used to create files that contain both audio and video or just audio. When a SIFF format file contains both audio and video, it is saved with the .vb extension rather then .son extension.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>23 Nov 2021</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>23 Nov 2021</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/SIFF
+
+https://fileinfo.com/extension/son
+
+https://wiki.multimedia.cx/index.php/SIFF</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1559</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2840</ExternalSignatureID>
+        <Signature>son</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2841</ExternalSignatureID>
+        <Signature>vb</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1903</SignatureID>
+        <SignatureName>Beam Software SIFF File</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: SIFF</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2202</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>53494646</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>687</RelatedFormatID>
+        <RelatedFormatName>MPEG 1/2 Audio Layer 3</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

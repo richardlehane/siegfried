@@ -4,7 +4,7 @@
     <FileFormat>
       <FormatID>376</FormatID>
       <FormatName>Microsoft Visio Drawing</FormatName>
-      <FormatVersion>2000</FormatVersion>
+      <FormatVersion>2000-2002</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -24,7 +24,7 @@
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
       <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
-      <LastUpdatedDate>11 Jun 2012</LastUpdatedDate>
+      <LastUpdatedDate>24 Oct 2021</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -42,6 +42,16 @@
       <ExternalSignature>
         <ExternalSignatureID>363</ExternalSignatureID>
         <Signature>vsd</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2743</ExternalSignatureID>
+        <Signature>vss</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2744</ExternalSignatureID>
+        <Signature>vst</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <RelatedFormat>

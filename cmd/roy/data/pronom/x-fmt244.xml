@@ -26,7 +26,7 @@
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <LastUpdatedDate>24 Oct 2021</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -46,6 +46,12 @@
         <Signature>mpp</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>359</RelatedFormatID>
+        <RelatedFormatName>Microsoft Project</RelatedFormatName>
+        <RelatedFormatVersion>4.0</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

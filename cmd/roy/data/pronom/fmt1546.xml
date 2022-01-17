@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2371</FormatID>
+      <FormatName>Daisy-Dot Font File</FormatName>
+      <FormatVersion>I and II</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Font</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Daisy-Dot is a text processing program written by Roy Goldman for the Atari line of computers enabling dot-matrix printers to utilise near letter quality (NLQ) printing technology. Three versions of Daisy-Dot were released between 1987 and 1990. A number of Daisy-Dot font files are pre-packaged with the text processor while others can be user-generated using the Daisy-Dot font editor. Daisy-Dot I and II fonts can be identified by the ASCII signature 'DAISY-DOT NLQ FONT'.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>08 Nov 2021</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>08 Nov 2021</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/Daisy-Dot_font
+
+https://atariage.com/forums/topic/291455-daisy-dot-source-code/
+
+http://infolab.stanford.edu/~royg/work/index.html
+
+https://inverseatascii.files.wordpress.com/2018/08/s4e11-prt-dd1-manual-sanserif-2x-2cs.pdf
+
+https://ia803009.us.archive.org/7/items/daisydotii/Daisy%20Dot%20II%20manual.pdf
+
+http://85.11.68.68/stuff/collections/PoolDisk%20Too/CD2/UMICH/TEXT/PRINTING/DDOT2/</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1546</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2824</ExternalSignatureID>
+        <Signature>nlq</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1891</SignatureID>
+        <SignatureName>Daisy-Dot Font (Version I and II)</SignatureName>
+        <SignatureNote>BOF:'DAISY-DOT NLQ FONT'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2189</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>44414953592D444F54204E4C5120464F4E54</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

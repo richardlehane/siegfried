@@ -25,7 +25,7 @@
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
       <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
-      <LastUpdatedDate>19 Apr 2012</LastUpdatedDate>
+      <LastUpdatedDate>24 Oct 2021</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -45,6 +45,12 @@
         <Signature>mpp</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>360</RelatedFormatID>
+        <RelatedFormatName>Microsoft Project</RelatedFormatName>
+        <RelatedFormatVersion>95</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

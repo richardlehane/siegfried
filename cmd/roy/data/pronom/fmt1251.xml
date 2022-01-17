@@ -26,7 +26,7 @@
       <ProvenanceName>The National Archives of Latvia / The National Archives of Latvia</ProvenanceName>
       <ProvenanceSourceDate>18 Jan 2020</ProvenanceSourceDate>
       <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
-      <LastUpdatedDate>18 Jan 2020</LastUpdatedDate>
+      <LastUpdatedDate>13 Dec 2021</LastUpdatedDate>
       <FormatNote>https://www.iana.org/assignments/media-types/application/vnd.etsi.asic-e+zip
 
 https://www.eparaksts.lv/en/</FormatNote>
@@ -47,6 +47,20 @@ https://www.eparaksts.lv/en/</FormatNote>
         <Signature>edoc</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2389</RelatedFormatID>
+        <RelatedFormatName>Associated Signature Container Extended (ASiC-E)</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subtype of</RelationshipType>
+        <RelatedFormatID>2389</RelatedFormatID>
+        <RelatedFormatName>Associated Signature Container Extended (ASiC-E)</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

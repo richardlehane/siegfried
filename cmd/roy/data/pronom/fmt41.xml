@@ -168,6 +168,12 @@ EOF: EOI marker (FF|D9) with a large offset due to the amount of photoshop metad
         <RelatedFormatName>Exchangeable Image File Format (Compressed)</RelatedFormatName>
         <RelatedFormatVersion>2.2.1</RelatedFormatVersion>
       </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2330</RelatedFormatID>
+        <RelatedFormatName>Exchangeable Image File Format (Compressed)</RelatedFormatName>
+        <RelatedFormatVersion>2.3.x</RelatedFormatVersion>
+      </RelatedFormat>
       <FormatProperties>
         <FormatProperty>
           <PropertyName>Compression Type</PropertyName>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2387</FormatID>
+      <FormatName>AutoDesk Indexed Point Cloud</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Model</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>PCG files are file formats developed by Autodesk to specifically meet the demands of their software suite. They are indexed point cloud data generated using AutoDesk Revit mainly from PTS files. Support for PCG was removed in favor of newer RCP/RCS formats. Autodesk products, however, are often able to convert some open formats, such as PTS into PCG files. PCG is a cloud format that is able to work to manipulate scans and stitch them together into a single cloud, which can then be exported as a standalone file. It can be used in conjunction with Leica Cyclone  point cloud processing software which is a family of software modules that provides set of work process options for 3D laser scanning projects in engineering, surveying, construction and related applications.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>
+      </ProvenanceName>
+      <ProvenanceSourceDate>23 Nov 2021</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>23 Nov 2021</LastUpdatedDate>
+      <FormatNote>https://info.vercator.com/blog/what-are-the-most-common-3d-point-cloud-file-formats-and-how-to-solve-interoperability-issues
+
+http://fileformats.archiveteam.org/wiki/AutoDesk_PCG
+
+https://www.concreteconstruction.net/business/technology/six-bim-point-cloud-formats-you-should-know-about_o
+
+https://leica-geosystems.com/en-us/products/laser-scanners/software/leica-cyclone?redir=1</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1562</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2844</ExternalSignatureID>
+        <Signature>pcg</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1906</SignatureID>
+        <SignatureName>AutoDesk Indexed Point Cloud</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: PCG</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2205</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>504347</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

@@ -53,12 +53,11 @@ http://flac.sourceforge.net/documentation_format_overview.html</ProvenanceDescri
       <InternalSignature>
         <SignatureID>295</SignatureID>
         <SignatureName>FLAC (Free Lossless Audio Codec)</SignatureName>
-        <SignatureNote>BOF: fLaC..."</SignatureNote>
+        <SignatureNote>BOF: 'fLaC' with optional byte (80|00) followed by '.."'</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>394</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
-          <Offset>
-          </Offset>
+          <Offset>0</Offset>
           <MaxOffset>4</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
@@ -66,7 +65,7 @@ http://flac.sourceforge.net/documentation_format_overview.html</ProvenanceDescri
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>664C614300000022</ByteSequenceValue>
+          <ByteSequenceValue>664C6143(80|00)000022</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

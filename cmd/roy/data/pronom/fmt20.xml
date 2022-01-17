@@ -253,6 +253,13 @@
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>687</RelatedFormatID>
+        <RelatedFormatName>MPEG 1/2 Audio Layer 3</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>869</RelatedFormatID>
         <RelatedFormatName>TrueType Font</RelatedFormatName>
         <RelatedFormatVersion>

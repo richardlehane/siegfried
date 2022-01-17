@@ -3,8 +3,8 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>1629</FormatID>
-      <FormatName>MAT-file format</FormatName>
-      <FormatVersion>7.3</FormatVersion>
+      <FormatName>MATLAB Mat file</FormatName>
+      <FormatVersion>Level 7.3</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -26,7 +26,7 @@
       <ProvenanceSourceDate>21 Dec 2015</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>21 Dec 2015</LastUpdatedDate>
+      <LastUpdatedDate>09 Dec 2021</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -49,7 +49,7 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>1186</SignatureID>
-        <SignatureName>MAT 7.3</SignatureName>
+        <SignatureName>MATLAB Mat file 7.3</SignatureName>
         <SignatureNote>MATLAB 7.3{114}(..MI|..IM)</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1461</ByteSequenceID>
@@ -66,11 +66,16 @@
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2375</RelatedFormatID>
+        <RelatedFormatName>MATLAB Mat File</RelatedFormatName>
+        <RelatedFormatVersion>Level 4</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Is subsequent version of</RelationshipType>
         <RelatedFormatID>1606</RelatedFormatID>
-        <RelatedFormatName>Level 5 MAT-file format (MATLAB)</RelatedFormatName>
-        <RelatedFormatVersion>
-        </RelatedFormatVersion>
+        <RelatedFormatName>MATLAB Mat File</RelatedFormatName>
+        <RelatedFormatVersion>Level 5</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>

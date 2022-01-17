@@ -50,6 +50,13 @@
         <Signature>asice</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is subtype of</RelationshipType>
+        <RelatedFormatID>2389</RelatedFormatID>
+        <RelatedFormatName>Associated Signature Container Extended (ASiC-E)</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

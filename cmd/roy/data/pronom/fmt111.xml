@@ -127,13 +127,7 @@
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>376</RelatedFormatID>
         <RelatedFormatName>Microsoft Visio Drawing</RelatedFormatName>
-        <RelatedFormatVersion>2000</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Has lower priority than</RelationshipType>
-        <RelatedFormatID>377</RelatedFormatID>
-        <RelatedFormatName>Microsoft Visio Drawing</RelatedFormatName>
-        <RelatedFormatVersion>2002</RelatedFormatVersion>
+        <RelatedFormatVersion>2000-2002</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>

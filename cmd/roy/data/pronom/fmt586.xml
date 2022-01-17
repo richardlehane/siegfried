@@ -26,7 +26,7 @@
       <ProvenanceName>Tessella / Tessella</ProvenanceName>
       <ProvenanceSourceDate>28 Aug 2013</ProvenanceSourceDate>
       <ProvenanceDescription>http://www.lifetechnologies.com/uk/en/home/about-us.html</ProvenanceDescription>
-      <LastUpdatedDate>28 Aug 2013</LastUpdatedDate>
+      <LastUpdatedDate>13 Dec 2021</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -60,6 +60,13 @@
           <ByteSequenceValue>5344533200020002</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2381</RelatedFormatID>
+        <RelatedFormatName>Starlink Data Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

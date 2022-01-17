@@ -222,6 +222,18 @@
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2393</RelatedFormatID>
+        <RelatedFormatName>ISDOCX Information System Document (Generic)</RelatedFormatName>
+        <RelatedFormatVersion>5.x</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2396</RelatedFormatID>
+        <RelatedFormatName>ISDOCX Information System Document</RelatedFormatName>
+        <RelatedFormatVersion>6.0.1</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

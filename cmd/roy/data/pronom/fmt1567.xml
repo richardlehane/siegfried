@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2392</FormatID>
+      <FormatName>ISDOC Information System Document (Generic)</FormatName>
+      <FormatVersion>5.x</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Mark-up)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>ISDOC is a type of Extensible Markup Language (XML) file format specific for transfer of financial documents. It allows paperless exchanging of invoices and other documents, processing and portability among companies, public administration authorities and individuals. It was defined by “A Working group for Electronic Standards of data exchanging” in ICT Union (formerly SPIS). The “Declaration on common approach in the area of electronic invoicing in the Czech Republic” was signed on 16th October 2008. It represents a Czech customization of UBL standard https://www.iso.org/standard/66370.html. ISDOC file enables enveloped signatures including advanced IETF/W3C XML digital signatures conforming to the ETSI XAdES specification. This signiture records a general ISDOC file format, however there are several versions of this format which can be found here: http://www.isdoc.cz/index.php?id=1316.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>242</ProvenanceSourceID>
+      <ProvenanceName>The National Archives of the Czech Republic / The National Archives of the Czech Republic</ProvenanceName>
+      <ProvenanceSourceDate>06 Dec 2021</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>06 Dec 2021</LastUpdatedDate>
+      <FormatNote>http://www.isdoc.org/
+
+http://www.isdoc.cz/fileadmin/isdoc/6.0/readme-en.html</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1567</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2849</ExternalSignatureID>
+        <Signature>isdoc</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1909</SignatureID>
+        <SignatureName>ISDOC Information System Document (Generic)</SignatureName>
+        <SignatureNote>BOF; Offset: 16-300; Magic bytes: 'isdoc.cz'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2208</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>16</Offset>
+          <MaxOffset>300</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>6973646F632E637A</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2393</RelatedFormatID>
+        <RelatedFormatName>ISDOCX Information System Document (Generic)</RelatedFormatName>
+        <RelatedFormatVersion>5.x</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2395</RelatedFormatID>
+        <RelatedFormatName>ISDOC Information System Document</RelatedFormatName>
+        <RelatedFormatVersion>6.0.1</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>638</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>2395</RelatedFormatID>
+        <RelatedFormatName>ISDOC Information System Document</RelatedFormatName>
+        <RelatedFormatVersion>6.0.1</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subtype of</RelationshipType>
+        <RelatedFormatID>2393</RelatedFormatID>
+        <RelatedFormatName>ISDOCX Information System Document (Generic)</RelatedFormatName>
+        <RelatedFormatVersion>5.x</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

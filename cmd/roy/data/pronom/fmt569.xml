@@ -26,9 +26,8 @@ The EBML specifications are work-in-progress, and can be found here: https://git
       <ProvenanceSourceDate>19 Jul 2013</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>19 Jul 2013</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>09 Dec 2021</LastUpdatedDate>
+      <FormatNote>Format specification: https://matroska.org/technical/specs/index.html</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -74,6 +73,13 @@ The EBML specifications are work-in-progress, and can be found here: https://git
           <ByteSequenceValue>1A45DFA3{0-32}4282886D6174726F736B614287</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>687</RelatedFormatID>
+        <RelatedFormatName>MPEG 1/2 Audio Layer 3</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
       <ReferenceFile>
         <ReferenceFileID>3</ReferenceFileID>
         <ReferenceFileName>Matroska Test Suite - Wave 1</ReferenceFileName>

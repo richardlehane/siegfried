@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2364</FormatID>
+      <FormatName>NeoDisk Icon File</FormatName>
+      <FormatVersion>3</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>NeoDisk icon file format is associated with the NeoDesk graphical environment, developed by Gribnif Software, for the Atari ST family of computers. Three versions of NeoDesk icon files exist. This is the third version which is identified by the signature that begins with ASCII '.NIC'.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>03 Nov 2021</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>03 Nov 2021</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/NeoDesk_icon
+
+http://www4.pair.com/gribnif/downloads/neodesk/</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1540</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2813</ExternalSignatureID>
+        <Signature>nic</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1886</SignatureID>
+        <SignatureName>NeoDesk Icon File</SignatureName>
+        <SignatureNote>BOF:'.NIC' followed by 0x03 (end of text) followed by 0x00 (null) followed by ';NeoDesk Icon File format, Copyright ½ 1990 Gribnif Software'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2181</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>2E4E494303003B4E656F4465736B2049636F6E2046696C6520666F726D61742C20436F7079726967687420BD203139393020477269626E696620536F667477617265</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

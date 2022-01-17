@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2378</FormatID>
+      <FormatName>Septentrio Binary Format</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Dataset</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Septentrio Binary Format (SBF) is the binary output format of Septentrio receivers, with data are arranged in binary blocks referred to as SBF blocks. Each block consists of a sequence of numeric or alphanumeric fields of different types and sizes. The total block size is always a multiple of 4 bytes. 
+This format is used in conjunction with the Septentrio PolaRxS PRO GNSS receiver, that performs over multiple frequencies and constellations. It is used for ionospheric monitoring and space weather observations.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>18 Nov 2021</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>18 Nov 2021</LastUpdatedDate>
+      <FormatNote>http://www.terrisgps.com/product/septentrio-polarxs-pro/
+
+http://chain.physics.unb.ca/docs/septentrio/PolaRxS-Firmware-v2.9.0-SBF-Reference-Guide.pdf</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1553</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2832</ExternalSignatureID>
+        <Signature>sbf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1897</SignatureID>
+        <SignatureName>Septentrio Binary Format</SignatureName>
+        <SignatureNote>BOF: offset 0-3000; Magic bytes '$@{460-3000}PolaRxS_PRO'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2196</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>460</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>2440{460-3000}506F6C615278535F50524F</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

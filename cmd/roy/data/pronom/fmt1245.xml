@@ -67,7 +67,7 @@
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>1469</RelatedFormatID>
-        <RelatedFormatName>PKCS #7 Crytographic Message File</RelatedFormatName>
+        <RelatedFormatName>PKCS #7 Cryptographic Message File</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

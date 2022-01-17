@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2299</FormatID>
+      <FormatName>TEI P5 - Single Text File</FormatName>
+      <FormatVersion>P5</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Mark-up)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The Text Encoding Initiative Guidelines (TEI) provide a methodology for encoding textual content for a wide variety of academic and publishing purposes and repurposes. TEI P5 is serialised as XML. 
+
+Conceptually, TEI is a sibling of HTML which focuses on textual semantics rather than display. 
+
+The ‘ODD’ file extension is used when TEI is being used as a literate programming language for XML schemas, modern TEI guidelines are written in this form of the language, HTML, RNG, RNC and DTD files are then generated from the TEI.
+
+Note that TEI permits customisations and some may mean that the file no longer matches the signatures. This is especially the case where TEI is fragmented, embedded within other XML or when other XML namespaces are used.
+
+Customisation is primarily done via TEI-supplied tools, formerly PizzaChef https://tei-c.org/Vault/P4/pizza.html and now Roma https://roma2.tei-c.org/
+
+P5 differs from the preceding P4 version, amongst other things, using the then-new xml:lang  and xml:id tags.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>236</ProvenanceSourceID>
+      <ProvenanceName>Victoria University of Wellington / Victoria University of Wellington</ProvenanceName>
+      <ProvenanceSourceDate>19 Oct 2021</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>19 Oct 2021</LastUpdatedDate>
+      <FormatNote>https://tei-c.org/Guidelines/P5/
+
+https://teibyexample.org/tutorials/TBED00v00.htm?target=teihistory#teip5
+
+https://en.wikipedia.org/wiki/Text_Encoding_Initiative</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/tei+xml</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1476</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2690</ExternalSignatureID>
+        <Signature>xml</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2691</ExternalSignatureID>
+        <Signature>tei</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2692</ExternalSignatureID>
+        <Signature>odd</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1848</SignatureID>
+        <SignatureName>TEI P5 XML - Single Text</SignatureName>
+        <SignatureNote>BOF:'&lt;?xml version=("OR')1.0("OR')' followed by a gap between 0-512 bytes followed by 'TEI' followed by a gap between 0-512 bytes followed by 'http://www.tei-c.org/ns/1.0'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2141</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>3</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C3F786D6C2076657273696F6E3D(22|27)312E30(22|27){0-512}544549{0-512}687474703A2F2F7777772E7465692D632E6F72672F6E732F312E30</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2300</RelatedFormatID>
+        <RelatedFormatName>TEI P5 XML - Corpus File</RelatedFormatName>
+        <RelatedFormatVersion>P5</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>638</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

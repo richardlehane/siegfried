@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>487</FormatID>
-      <FormatName>Harvard Graphics Presentation</FormatName>
+      <FormatName>Harvard Graphics Show</FormatName>
       <FormatVersion>2.0</FormatVersion>
       <FormatAliases>
       </FormatAliases>
@@ -12,7 +12,7 @@
       <FormatTypes>Presentation</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Harvard Graphics (originally named Harvard Presentation Graphics) was a presentation and vector graphics program, used mainly on the MS-DOS platform. This entry was previous called 'Harvard Graphics Presentation', however the internal and external signatures related to the 'Show' format. Entries for Harvard Graphics Presentation have been created at fmt/1491 and fmt/1492.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>

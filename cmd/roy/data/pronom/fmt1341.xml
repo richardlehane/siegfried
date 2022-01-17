@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>2159</FormatID>
-      <FormatName>ASICS</FormatName>
+      <FormatName>Associated Signature Container Simple (ASiC-S)</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
@@ -13,7 +13,13 @@
       <FormatTypes>Aggregate</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>ASICS is an ASIC container where a single file object is associated with a signature or time assertion file.</FormatDescription>
+      <FormatDescription>The ASiC-S container is a ZIP archive file containing set of data objects and associated signatures. It is designed to associate an advanced electronic signature with any type of data. It operates with signature and time-stamp token formats XAdES, CAdES, timestamp RFC 3161.
+
+The container has an internal structure including a root folder for all the container content possibly including folders reflecting the content structure and a META-INF folder, in the root folder, for metadata about the content, including associated signatures.
+
+The integrity of the data is guaranteed by the electronic signature when present or should be provided externally if only a time-stamp token is applied to the data. Privacy can be guaranteed through the use of ZIP encryption features or externally. External integrity and privacy protection can be obtained e.g. through the use of SSL/TLS or S/MIME.
+
+ASiC-S container associates one or more signatures with a single data object.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -25,10 +31,11 @@
       <ProvenanceSourceID>239</ProvenanceSourceID>
       <ProvenanceName>The National Archives of Estonia / The National Archives of Estonia</ProvenanceName>
       <ProvenanceSourceDate>20 Jan 2020</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>20 Jan 2020</LastUpdatedDate>
-      <FormatNote>https://www.etsi.org/deliver/etsi_en/319100_319199/31916201/01.01.01_60/en_31916201v010101p.pdf</FormatNote>
+      <ProvenanceDescription>	This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
+      <LastUpdatedDate>24 Nov 2021</LastUpdatedDate>
+      <FormatNote>https://www.etsi.org/deliver/etsi_en/319100_319199/31916201/01.01.01_60/en_31916201v010101p.pdf
+
+https://www.etsi.org/deliver/etsi_ts/102900_102999/102918/01.03.01_60/ts_102918v010301p.pdf</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -44,6 +51,11 @@
       <ExternalSignature>
         <ExternalSignatureID>2506</ExternalSignatureID>
         <Signature>asics</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2856</ExternalSignatureID>
+        <Signature>scs</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
     </FileFormat>

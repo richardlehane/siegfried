@@ -27,7 +27,7 @@
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>11 Dec 2015</ProvenanceSourceDate>
       <ProvenanceDescription>http://yaml.org/</ProvenanceDescription>
-      <LastUpdatedDate>11 Dec 2015</LastUpdatedDate>
+      <LastUpdatedDate>16 Oct 2021</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -41,6 +41,11 @@
       <ExternalSignature>
         <ExternalSignatureID>1711</ExternalSignatureID>
         <Signature>yaml</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2676</ExternalSignatureID>
+        <Signature>yml</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
     </FileFormat>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2397</FormatID>
+      <FormatName>OrCAD Project File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>OrCAD, a proprietary software tool suite used primarily for electronic design automation (EDA). The software is used mainly by electronic design engineers and electronic technicians to create electronic schematics, perform mixed-signal simulation and electronic prints for manufacturing printed circuit boards. OrCAD was taken over by Cadence Design Systems in 1999 and was integrated with Cadence Allegro since 2005.
+
+A OrCAD Project File (.OPJ) is a container for the OrCAD design file (.DSN). In addition, a project file also includes simulation profile and layout information.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>08 Dec 2021</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>08 Dec 2021</LastUpdatedDate>
+      <FormatNote>https://file.org/extension/opj
+
+https://www.orcad.com/documentation/creating-new-project</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1572</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2854</ExternalSignatureID>
+        <Signature>opj</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1913</SignatureID>
+        <SignatureName>OrCAD Project File</SignatureName>
+        <SignatureNote>BOF:'(ExpressProject' followed by 0x20 (Space)</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2212</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>284578707265737350726F6A65637420</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

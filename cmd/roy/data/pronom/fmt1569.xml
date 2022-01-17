@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2394</FormatID>
+      <FormatName>Bitstream Speedo Fonts</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Font</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The Speedo fonts are a type of scalable font, created by Bitstream, Inc. The font was widely used in the disk operating system (DOS) era of computers, but has since became obsolete and is not used by any current software. Speedo was used on Atari ST, Falcon, in the XyWrite word processor, and in very early versions of WordPerfect and Microsoft Windows. It was then replaced by more popular font types like Type 1 fonts. Before Speedo was considered obsolete it was supported by the X Window System through the speedo module, and most Linux distributions had a Speedo font package, but support was removed from X in the X11R7.0 release in 2005. Speedo fonts include large international character set (over six hundred characters) and they are able to adapt their "pixels", "points", "horiz", "vert", and "avgwidth" XLFD values to match whatever value is requested by the X server.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>06 Dec 2021</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>08 Dec 2021</LastUpdatedDate>
+      <FormatNote>https://en.wikipedia.org/wiki/Bitstream_Speedo_Fonts
+
+http://fileformats.archiveteam.org/wiki/Speedo
+
+http://www.columbia.edu/~em36/wpdos/speedo.html
+
+http://www.netsweng.com/~anderson/talks/xclass/fonts.html
+
+https://web.archive.org/web/20091108153822/http://www.bitstream.com/fonts/support/speedo_fonts.html</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1569</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2851</ExternalSignatureID>
+        <Signature>spd</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1912</SignatureID>
+        <SignatureName>Bitstream Speedo Fonts</SignatureName>
+        <SignatureNote>BOF; Offset: 100-300; Magic bytes: 'Copyright 1989-1991 by Bitstream Inc. All rights reserved'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2211</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>100</Offset>
+          <MaxOffset>300</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>436F7079726967687420313938392D313939312062792042697473747265616D20496E632E20416C6C207269676874732072657365727665642E</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

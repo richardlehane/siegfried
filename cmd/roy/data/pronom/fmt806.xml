@@ -3,9 +3,8 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>1606</FormatID>
-      <FormatName>Level 5 MAT-file format (MATLAB)</FormatName>
-      <FormatVersion>
-      </FormatVersion>
+      <FormatName>MATLAB Mat File</FormatName>
+      <FormatVersion>Level 5</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -28,7 +27,7 @@
       <ProvenanceSourceDate>27 Nov 2015</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>27 Nov 2015</LastUpdatedDate>
+      <LastUpdatedDate>09 Dec 2021</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -51,7 +50,7 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>1171</SignatureID>
-        <SignatureName>Level 5 MAT-file format</SignatureName>
+        <SignatureName>MATLAB Mat file 5</SignatureName>
         <SignatureNote>MATLAB 5.0{114}(..MI|..IM)</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1424</ByteSequenceID>
@@ -68,10 +67,22 @@
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2375</RelatedFormatID>
+        <RelatedFormatName>MATLAB Mat File</RelatedFormatName>
+        <RelatedFormatVersion>Level 4</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Is previous version of</RelationshipType>
         <RelatedFormatID>1629</RelatedFormatID>
-        <RelatedFormatName>MAT-file format</RelatedFormatName>
-        <RelatedFormatVersion>7.3</RelatedFormatVersion>
+        <RelatedFormatName>MATLAB Mat file</RelatedFormatName>
+        <RelatedFormatVersion>Level 7.3</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>2375</RelatedFormatID>
+        <RelatedFormatName>MATLAB Mat File</RelatedFormatName>
+        <RelatedFormatVersion>Level 4</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2278</FormatID>
+      <FormatName>Primavera P6 Project Management XER File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Database</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>An ASCII based file used to store project information with accompanying tables and fields. Primavera P6 is a project management software which replaced the older P3 software in 2007. It has been supported by Oracle since 2008. This is the XER format however projects can also be saved in XML.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>
+      </ProvenanceName>
+      <ProvenanceSourceDate>16 Oct 2021</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>16 Oct 2021</LastUpdatedDate>
+      <FormatNote>https://ippm.dk/ikke-kategoriseret/crash-course-to-the-primavera-xer-format
+http://fileformats.archiveteam.org/wiki/Primavera_P6</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1455</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>63</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Oracle</OrganisationName>
+        <DeveloperCompoundName>Oracle</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>63</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Oracle</OrganisationName>
+        <SupportCompoundName>Oracle</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2649</ExternalSignatureID>
+        <Signature>xer</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1820</SignatureID>
+        <SignatureName>Primavera P6 Project Management</SignatureName>
+        <SignatureNote>BOF: 'ERMHDR' EOF:0D0A</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2111</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>45524D484452</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>2112</ByteSequenceID>
+          <PositionType>Absolute from EOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>0D0A</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2381</FormatID>
+      <FormatName>Starlink Data Format</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Dataset</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Starlink Data Format (SDF) was developed for Starlink project which was set up in late 1980s to
+provide data reduction software and facilities to United Kingdom astronomers. The format has an extention .sdf and is the binary format that stores structures of data using Hierarchical Data System (HDS) library, that implements the SDF format, providing the hierarchical structuting with the ability to read and write SDF format. In mid-1980s a standard for writing information collected accompaining the volumetric data astronomy, (e.g. sky coordinations, what telescope took the measurements, errors, and other directly related measurements) was created, titled as the N-Dimensional Data Format (NDF). NDF serves as a data model, organasing and storing the bulk data collected in the form of N-dimensional arrays of numbers. The NDF format is based on the Hierarchical Data System (HDS) and is extensible; not only does it provide a comprehensive set of standard ancillary items to describe the data, it can also be extended indefinitely to handle additional user-defined information of any type.
+Prior to mid1980s, the most significant pre-NDF format used by a major data analysis package was called FIGARO, developed at the Anglo-Australian Observatory but was eventually was converted to use NDF.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>23 Nov 2021</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>23 Nov 2021</LastUpdatedDate>
+      <FormatNote>https://arxiv.org/pdf/1410.7513.pdf
+
+http://ascl.net/1411.023
+
+https://ascl.net/1502.009
+
+http://starlink.eao.hawaii.edu/starlink
+
+https://github.com/Starlink
+
+https://en.wikipedia.org/wiki/Starlink_Project</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1556</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2837</ExternalSignatureID>
+        <Signature>sdf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1900</SignatureID>
+        <SignatureName>Starlink Data Format</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: SDS</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2199</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>534453</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1374</RelatedFormatID>
+        <RelatedFormatName>LifeTechnologies SDS</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

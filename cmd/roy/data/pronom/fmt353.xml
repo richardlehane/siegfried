@@ -21,10 +21,18 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>07 Jul 2011</ProvenanceSourceDate>
-      <ProvenanceDescription>PUID created for the TIFF format in response to the difficulties we have been having with multiple identification of the format and a consensus on a new interpretation of the standard from within The National Archives and outside with external stakeholders.</ProvenanceDescription>
-      <LastUpdatedDate>13 Sep 2018</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>09 Dec 2021</LastUpdatedDate>
+      <FormatNote>PUID created for the TIFF format in response to the difficulties we have been having with multiple identification of the format and a consensus on a new interpretation of the standard from within The National Archives and outside with external stakeholders.
+
+Documentation:
+
+https://www.itu.int/itudoc/itu-t/com16/tiff-fx/docs/tiff6.pdf 
+
+http://www.alternatiff.com/resources/TIFFPM6.pdf 
+
+http://www.alternatiff.com/resources/TIFFphotoshop.pd</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -62,7 +70,7 @@
         <DocumentNote>
         </DocumentNote>
         <DocumentIdentifier>
-          <Identifier>https://www.adobe.io/content/dam/udp/en/open/standards/tiff/TIFF6.pdf</Identifier>
+          <Identifier>https://web.archive.org/web/20211031081158/https://www.adobe.io/content/dam/udp/en/open/standards/tiff/TIFF6.pdf</Identifier>
           <IdentifierType>URL</IdentifierType>
         </DocumentIdentifier>
         <Author>
@@ -370,6 +378,18 @@
         <RelatedFormatID>2131</RelatedFormatID>
         <RelatedFormatName>CorelCHART Document</RelatedFormatName>
         <RelatedFormatVersion>5</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2302</RelatedFormatID>
+        <RelatedFormatName>XIFF (Xerox Image File Format)</RelatedFormatName>
+        <RelatedFormatVersion>2</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2303</RelatedFormatID>
+        <RelatedFormatName>XIFF (Xerox Image File Format)</RelatedFormatName>
+        <RelatedFormatVersion>3</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>

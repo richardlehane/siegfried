@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2385</FormatID>
+      <FormatName>Sample Vision Audio File Format</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Audio</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The SampleVision format is native to the Turtle Beach SampleVision program. The format supports  mono 16-bit audio and loop points.The Format was developed for use with the SampleVision software program, which was designed to send and receive samples via the MIDI interface on a PC. It consists of a variable-length header followed by a contiguous block of binary data representing the sound samples.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>23 Nov 2021</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>23 Nov 2021</LastUpdatedDate>
+      <FormatNote>https://help.adobe.com/archive/en_US/audition/3/audition_3_help.pdf#page=255 
+
+http://sox.sourceforge.net/AudioFormats-11.html
+
+https://nixdoc.net/man-pages/IRIX/man4/smp.4.html</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1560</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2842</ExternalSignatureID>
+        <Signature>smp</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1904</SignatureID>
+        <SignatureName>Sample Vision Audio File Format</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: SOUND SAMPLE DATA</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2203</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>534F554E442053414D504C452044415441</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>
