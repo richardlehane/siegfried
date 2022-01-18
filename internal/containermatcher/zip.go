@@ -17,6 +17,7 @@ package containermatcher
 import (
 	"archive/zip"
 	"io"
+	"strings"
 
 	"github.com/richardlehane/siegfried/internal/siegreader"
 )
@@ -37,7 +38,7 @@ func (z *zipReader) Next() error {
 }
 
 func (z *zipReader) Name() string {
-	return z.rdr.File[z.idx].Name
+	return strings.TrimSuffix(z.rdr.File[z.idx].Name, "\x00") // non-spec zip files may have null terminated strings
 }
 
 func (z *zipReader) SetSource(bufs *siegreader.Buffers) (*siegreader.Buffer, error) {
