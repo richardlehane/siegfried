@@ -23,10 +23,9 @@ import (
 )
 
 type zipReader struct {
-	idx     int
-	rdr     *zip.Reader
-	expired bool
-	rc      io.ReadCloser
+	idx int
+	rdr *zip.Reader
+	rc  io.ReadCloser
 }
 
 func (z *zipReader) Next() error {
