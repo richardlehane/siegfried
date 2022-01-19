@@ -253,7 +253,7 @@ func New(rdr io.Reader, path string) (Reader, error) {
 		return newFido(pr, path)
 	case 'D':
 		return newDroidNp(pr, path)
-	case '"':
+	case '"', 'I':
 		return newDroid(pr, path)
 	}
 	return nil, fmt.Errorf("not a valid results file, bad char %d", int(buf[0]))
