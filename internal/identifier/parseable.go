@@ -15,7 +15,6 @@
 package identifier
 
 import (
-	"fmt"
 	"sort"
 	"strings"
 
@@ -129,11 +128,7 @@ func inspect(p Parseable, ids ...string) (string, error) {
 		lines := make([]string, 0, 10)
 		info, ok := p.Infos()[id]
 		if ok {
-			if config.GetWikidataNamespace() != "" {
-				lines = append(lines, fmt.Sprintf("%sQID: (%s)", info.String(), id))
-			} else {
-				lines = append(lines, strings.ToUpper(info.String()))
-			}
+			lines = append(lines, strings.ToUpper(info.String()+" ("+id+")"))
 			if has(gids, id) {
 				lines = append(lines, "globs: "+strings.Join(get(gids, gs, id), ", "))
 			}
