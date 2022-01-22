@@ -309,7 +309,7 @@ func (b *Base) Add(m core.Matcher, t core.MatcherType) (core.Matcher, error) {
 	var err error
 	switch t {
 	default:
-		return nil, fmt.Errorf("Identifier: unknown matcher type %d", t)
+		return nil, fmt.Errorf("identifier: unknown matcher type %d", t)
 	case core.NameMatcher:
 		var globs []string
 		globs, b.gids.ids = b.p.Globs()
@@ -323,7 +323,15 @@ func (b *Base) Add(m core.Matcher, t core.MatcherType) (core.Matcher, error) {
 		if err != nil {
 			return nil, err
 		}
-		m, _, err = containermatcher.Add(m, containermatcher.SignatureSet{containermatcher.Zip, znames, zsigs}, b.p.Priorities().List(zids))
+		m, _, err = containermatcher.Add(
+			m,
+			containermatcher.SignatureSet{
+				Typ:       containermatcher.Zip,
+				NameParts: znames,
+				SigParts:  zsigs,
+			},
+			b.p.Priorities().List(zids),
+		)
 		if err != nil {
 			return nil, err
 		}
@@ -331,7 +339,15 @@ func (b *Base) Add(m core.Matcher, t core.MatcherType) (core.Matcher, error) {
 		if err != nil {
 			return nil, err
 		}
-		m, l, err = containermatcher.Add(m, containermatcher.SignatureSet{containermatcher.Mscfb, mnames, msigs}, b.p.Priorities().List(mids))
+		m, l, err = containermatcher.Add(
+			m,
+			containermatcher.SignatureSet{
+				Typ:       containermatcher.Mscfb,
+				NameParts: mnames,
+				SigParts:  msigs,
+			},
+			b.p.Priorities().List(mids),
+		)
 		if err != nil {
 			return nil, err
 		}

@@ -21,8 +21,7 @@ func init() {
 
 	hx := "Hex: 4D 4D 00 2A"
 
-	var pat patterns.Pattern
-	pat = patterns.Sequence(hx)
+	var pat = patterns.Sequence(hx)
 
 	f0 = frames.Signature{frames.NewFrame(frames.BOF, pat, 0, 0)}
 	f1 = frames.Signature{frames.NewFrame(frames.BOF, pat, 1, 1)}
