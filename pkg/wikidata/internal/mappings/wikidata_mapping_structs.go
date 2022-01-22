@@ -36,6 +36,7 @@ type Wikidata struct {
 	Extension         []string    // Extension returned by Wikidata.
 	Mimetype          []string    // Mimetype as recorded by Wikidata.
 	Signatures        []Signature // Signature associated with a record which we will convert to a new Type.
+	Software          []string    // Software that is compatible with the potential identification.
 	disableSignatures bool        // If a bad heuristic was found we can't reliably add signatures to the record.
 }
 

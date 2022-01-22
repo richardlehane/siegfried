@@ -132,11 +132,12 @@ func (c *csvWriter) File(name string, sz int64, mod string, checksum []byte, err
 func (c *csvWriter) Tail() { c.w.Flush() }
 
 type yamlWriter struct {
-	replacer *strings.Replacer
-	w        *bufio.Writer
-	hh       string
-	hstrs    []string
-	vals     [][]interface{}
+	replacer    *strings.Replacer
+	w           *bufio.Writer
+	hh          string
+	hstrs       []string
+	vals        [][]interface{}
+	complexData []int
 }
 
 func YAML(w io.Writer) Writer {
@@ -164,6 +165,38 @@ func header(fields []string) string {
 	return "  - " + strings.Join(headings, " : %v\n    ") + " : %v\n"
 }
 
+// Consts to lookup for Wikidata.
+//
+// TODO: This is just for demonstration purposes. The solution would be
+// better eventually and would be driven by the caller, not through
+// specific exceptions within the Writer.
+//
+const sfw = "software"
+
+// getComplexFieldds will mark the fields we want to output in YAML as
+// more than a flat string value, e.g. a list, or set of key-values.
+//
+// TODO: This is just for demonstration purposes. The solution would be
+// better eventually and would be driven by the caller, not through
+// specific exceptions within the Writer.
+//
+func (y *yamlWriter) getComplexFields(headers [][]string) {
+	var fields int = 1
+	var idxSoftware int
+	for _, header := range headers {
+		for idx, field := range header {
+			if field == sfw {
+				idxSoftware = idx
+			}
+		}
+		if idxSoftware > 0 {
+			break
+		}
+	}
+	y.complexData = make([]int, fields)
+	y.complexData[0] = idxSoftware
+}
+
 func (y *yamlWriter) Head(path string, scanned, created time.Time, version [3]int, ids [][2]string, fields [][]string, hh string) {
 	y.hh = hh
 	y.hstrs = make([]string, len(fields))
@@ -181,6 +214,36 @@ func (y *yamlWriter) Head(path string, scanned, created time.Time, version [3]in
 	for _, id := range ids {
 		fmt.Fprintf(y.w, "  - name    : '%v'\n    details : '%v'\n", id[0], id[1])
 	}
+	y.getComplexFields(fields)
+}
+
+// inSlice simply checks for the existence of an integer in an integer
+// slice, e.g. Field indices.
+func inSlice(needle int, haystack []int) bool {
+	for _, val := range haystack {
+		if needle == val {
+			return true
+		}
+	}
+	return false
+}
+
+// formatComplexType helps us to create a nested array/dictionary/list
+// in the YAML output.
+//
+// TODO: We can definitely add some testing around this...
+func formatYamlComplexType(val string) string {
+	const spacing = "    "
+	s := strings.Split(val, ";")
+	var new string
+	for _, a := range s {
+		if new == "" {
+			new = fmt.Sprintf("\n%s%s%s\n%s%s", spacing, spacing, strings.Trim(a, " "), spacing, spacing)
+		} else {
+			new = fmt.Sprintf("%s%s\n%s%s", new, strings.Trim(a, " "), spacing, spacing)
+		}
+	}
+	return strings.TrimRight(new, "\n ")
 }
 
 func (y *yamlWriter) File(name string, sz int64, mod string, checksum []byte, err error, ids []core.Identification) {
@@ -196,7 +259,15 @@ func (y *yamlWriter) File(name string, sz int64, mod string, checksum []byte, er
 	if checksum != nil {
 		h = fmt.Sprintf("%-8s : %s\n", y.hh, hex.EncodeToString(checksum))
 	}
-	fmt.Fprintf(y.w, "---\nfilename : '%s'\nfilesize : %d\nmodified : %s\nerrors   : %s\n%smatches  :\n", y.replacer.Replace(name), sz, mod, errStr, h)
+	fmt.Fprintf(
+		y.w,
+		"---\nfilename : '%s'\nfilesize : %d\nmodified : %s\nerrors   : %s\n%smatches  :\n",
+		y.replacer.Replace(name),
+		sz,
+		mod,
+		errStr,
+		h,
+	)
 	for _, id := range ids {
 		values := id.Values()
 		if values[0] != thisName {
@@ -208,7 +279,14 @@ func (y *yamlWriter) File(name string, sz int64, mod string, checksum []byte, er
 				y.vals[idx][i] = ""
 				continue
 			}
-			y.vals[idx][i] = "'" + y.replacer.Replace(v) + "'"
+			// TODO: As per-above exceptions, e.g. those for complex
+			// processing should be driven upstream with the correct
+			// signaling.
+			if inSlice(i, y.complexData) {
+				y.vals[idx][i] = formatYamlComplexType(v)
+			} else {
+				y.vals[idx][i] = fmt.Sprintf("'%s'", y.replacer.Replace(v))
+			}
 		}
 		fmt.Fprintf(y.w, y.hstrs[idx], y.vals[idx]...)
 	}

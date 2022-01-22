@@ -19,6 +19,8 @@
 package wikidata
 
 import (
+	"fmt"
+
 	"github.com/richardlehane/siegfried/pkg/wikidata/internal/mappings"
 
 	"github.com/ross-spencer/spargo/pkg/spargo"
@@ -26,6 +28,18 @@ import (
 
 // wikidataRecord provides an alias for the mappings.Wikidata object.
 type wikidataRecord = mappings.Wikidata
+
+// makeSoftware() creates a key-value pairing of software label and IRI.
+//
+// TODO: It would be "purer" to keep these apart, and so I might
+// investigate that depending on other ideas around this PR.
+func makeSoftware(wikidataItem map[string]spargo.Item) string {
+	return fmt.Sprintf(
+		"%s: %s",
+		wikidataItem[softwareLabelField].Value,
+		wikidataItem[softwareField].Value,
+	)
+}
 
 // newRecord creates a Wikidata record with the values received from
 // Wikidata itself.
@@ -57,6 +71,9 @@ func newRecord(wikidataItem map[string]spargo.Item, addSigs bool) wikidataRecord
 		wd.Signatures[0].ByteSequences = append(
 			wd.Signatures[0].ByteSequences, bs)
 	}
+	if wikidataItem[softwareField].Value != "" {
+		wd.Software = append(wd.Software, makeSoftware(wikidataItem))
+	}
 	return wd
 }
 
@@ -72,6 +89,12 @@ func updateRecord(wikidataItem map[string]spargo.Item, wd wikidataRecord) wikida
 	}
 	if contains(wd.Mimetype, wikidataItem[mimeField].Value) == false {
 		wd.Mimetype = append(wd.Mimetype, wikidataItem[mimeField].Value)
+	}
+	software := makeSoftware(wikidataItem)
+	if contains(wd.Software, software) == false {
+		if wikidataItem[softwareField].Value != "" {
+			wd.Software = append(wd.Software, software)
+		}
 	}
 	if wikidataItem[signatureField].Value != "" {
 		if !wd.SignaturesDisabled() {
