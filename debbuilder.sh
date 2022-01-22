@@ -21,7 +21,7 @@ cat >$SFDIR/DEBIAN/control  << EOA
 Package: siegfried
 Version: $VERSION-1
 Architecture: amd64
-Maintainer: Richard Lehane <richard.lehane@gmail.com>
+Maintainer: Richard Lehane <richard@itforarchivists.com>
 Installed-Size: $SIZE
 Depends: libc6 (>= 2.2.5)
 Section: misc
