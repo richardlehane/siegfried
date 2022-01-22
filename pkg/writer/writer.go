@@ -126,7 +126,6 @@ func (c *csvWriter) File(name string, sz int64, mod string, checksum []byte, err
 		c.w.Write(r)
 	}
 	c.recs = c.recs[:1]
-	return
 }
 
 func (c *csvWriter) Tail() { c.w.Flush() }
@@ -226,8 +225,37 @@ type jsonWriter struct {
 
 func JSON(w io.Writer) Writer {
 	return &jsonWriter{
-		replacer: strings.NewReplacer(`"`, `\"`, `\\`, `\\`, `\`, `\\`),
-		w:        bufio.NewWriter(w),
+		replacer: strings.NewReplacer(
+			`\`, `\\`,
+			`"`, `\"`,
+			"\u0000", `\u0000`,
+			"\u0001", `\u0001`,
+			"\u0002", `\u0002`,
+			"\u0003", `\u0003`,
+			"\u0004", `\u0004`,
+			"\u0005", `\u0005`,
+			"\u0006", `\u0006`,
+			"\u0007", `\u0007`,
+			"\u0008", `\u0008`,
+			"\u0009", `\u0009`,
+			"\u000A", `\u000A`,
+			"\u000B", `\u000B`,
+			"\u000C", `\u000C`,
+			"\u000D", `\u000D`,
+			"\u000E", `\u000E`,
+			"\u000F", `\u000F`,
+			"\u0010", `\u0010`,
+			"\u0011", `\u0011`,
+			"\u0012", `\u0012`,
+			"\u0013", `\u0013`,
+			"\u0014", `\u0014`,
+			"\u0015", `\u0015`,
+			"\u0016", `\u0016`,
+			"\u0017", `\u0017`,
+			"\u0018", `\u0018`,
+			"\u0019", `\u0019`,
+		),
+		w: bufio.NewWriter(w),
 	}
 }
 
@@ -299,7 +327,6 @@ func (j *jsonWriter) File(name string, sz int64, mod string, checksum []byte, er
 	}
 	j.w.WriteString("]}")
 	j.subs = true
-	return
 }
 
 func (j *jsonWriter) Tail() {
@@ -389,7 +416,6 @@ func (d *droidWriter) File(p string, sz int64, mod string, checksum []byte, err 
 		d.rec[3] = clearArchivePath(d.rec[2], d.rec[3])
 		d.w.Write(d.rec)
 	}
-	return
 }
 
 func (d *droidWriter) Tail() { d.w.Flush() }
