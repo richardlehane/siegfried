@@ -49,21 +49,21 @@ func TestProcess(t *testing.T) {
 	Save(b, saver)
 	loader := persist.NewLoadSaver(saver.Bytes())
 	b = Load(loader).(*Matcher)
-	if len(b.keyFrames) != 6 {
-		t.Errorf("Expecting 6 keyframe slices, got %d", len(b.keyFrames))
+	if len(b.keyFrames) != 8 {
+		t.Errorf("Expecting 8 keyframe slices, got %d", len(b.keyFrames))
 	}
 	var tl int
 	for _, v := range b.keyFrames {
 		tl += len(v)
 	}
-	if tl != 12 {
-		t.Errorf("Expecting a total of 12 keyframes, got %d", tl)
+	if tl != 16 {
+		t.Errorf("Expecting a total of 16 keyframes, got %d", tl)
 	}
-	if len(b.tests) != 9 {
-		t.Errorf("Expecting a total of 9 tests, got %d", len(b.tests))
+	if len(b.tests) != 12 {
+		t.Errorf("Expecting a total of 12 tests, got %d", len(b.tests))
 	}
-	if len(b.bofSeq.set) != 4 {
-		t.Errorf("Expecting 4 BOF seqs, got %d", len(b.bofSeq.set))
+	if len(b.bofSeq.set) != 5 {
+		t.Errorf("Expecting 5 BOF seqs, got %d", len(b.bofSeq.set))
 	}
 	e1 := wac.Seq{[]int64{0}, []wac.Choice{{[]byte{'t', 'e', 's', 't'}}}}
 	if !seqEquals(b.bofSeq.set[0], e1) {
@@ -73,8 +73,8 @@ func TestProcess(t *testing.T) {
 	if seqEquals(b.bofSeq.set[0], e2) {
 		t.Errorf("Not expecting %v to equal %v", b.bofSeq.set[0], e2)
 	}
-	if len(b.eofSeq.set) != 2 {
-		t.Errorf("Expecting two EOF seqs, got %d, first is %v", len(b.eofSeq.set), b.eofSeq.set[0])
+	if len(b.eofSeq.set) != 3 {
+		t.Errorf("Expecting 3 EOF seqs, got %d, first is %v", len(b.eofSeq.set), b.eofSeq.set[0])
 	}
 	if len(b.bofFrames.set) != 1 {
 		t.Errorf("Expecting one BOF Frame, got %d", len(b.bofFrames.set))
@@ -95,9 +95,7 @@ func TestProcessFmt418(t *testing.T) {
 	loader := persist.NewLoadSaver(saver.Bytes())
 	b = Load(loader).(*Matcher)
 	if len(b.keyFrames[0]) != 2 {
-		for _, v := range b.keyFrames[0] {
-			t.Errorf("%s\n", v)
-		}
+		t.Errorf("Expecting 2, got %d", len(b.keyFrames[0]))
 	}
 }
 
@@ -113,20 +111,15 @@ func TestProcessFmt134(t *testing.T) {
 	Save(b, saver)
 	loader := persist.NewLoadSaver(saver.Bytes())
 	b = Load(loader).(*Matcher)
-	if len(b.keyFrames[0]) != 8 {
-		for _, v := range b.keyFrames[0] {
-			t.Errorf("%s\n", v)
-		}
+	if len(b.keyFrames[0]) != 1 {
+		t.Errorf("Expecting 1, got %d", len(b.keyFrames[0]))
 	}
 	for _, t := range b.tests {
 		t.maxLeftDistance = maxLength(t.left)
 		t.maxRightDistance = maxLength(t.right)
 	}
-	if len(b.tests) != 8 {
-		for _, v := range b.tests {
-			t.Error(v.maxRightDistance)
-			t.Error(v.right)
-		}
+	if len(b.tests) != 1 {
+		t.Errorf("Expecting 1 test, got %d", len(b.tests))
 	}
 }
 

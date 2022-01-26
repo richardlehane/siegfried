@@ -55,7 +55,7 @@ const sparql = `
 	                }
 	    }
 	  }
-	  service wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE], <<lang>>, en". }
+	  service wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE], <<lang>>". }
 	}
 	order by ?uri
  	`

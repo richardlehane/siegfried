@@ -14,7 +14,9 @@
 
 package chart
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func ExampleChart() {
 	fmt.Print(Chart("Census",
@@ -26,10 +28,10 @@ func ExampleChart() {
 	// Output:
 	// CENSUS
 	// 1950
-	// deaths:   ■ ■ (49)
-	// births:   ■ (11)
+	// deaths:    ■ ■ (49)
+	// births:    ■ (11)
 	//
 	// 1951
-	// deaths:   ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ (200)
-	// births:   ■ (9)
+	// deaths:    ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ (200)
+	// births:    ■ (9)
 }

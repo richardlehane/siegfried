@@ -25,8 +25,8 @@ func TestRange(t *testing.T) {
 	if r, _ := rng.Test([]byte{4}); len(r) > 0 {
 		t.Error("Range fail: Test should fail")
 	}
-	if r, _ := rng3.Test([]byte{251, 11}); len(r) != 1 || r[0] != 1 {
-		t.Error("Range fail: Test")
+	if r, _ := rng3.Test([]byte{11, 251}); len(r) != 1 || r[0] != 2 {
+		t.Errorf("Range fail: Test multibyte range, got %d, %d", len(r), r[0])
 	}
 	if rng.NumSequences() != 3 {
 		t.Error("Range fail: NumSequences")
@@ -42,17 +42,17 @@ func TestNotRange(t *testing.T) {
 	if !rng.Equals(rng2) {
 		t.Error("NotRange fail: Equality")
 	}
-	if r, _ := rng.Test([]byte{1}); len(r) != 1 || r[0] != 1 {
+	if r, _ := rng.Test([]byte{1}); len(r) != 0 {
 		t.Error("Not Range fail: Test")
 	}
-	if r, _ := rng.Test([]byte{2}); len(r) != 1 || r[0] != 1 {
+	if r, _ := rng.Test([]byte{2}); len(r) != 0 {
 		t.Error("Not Range fail: Test")
 	}
-	if r, _ := rng.Test([]byte{3}); len(r) != 1 || r[0] != 1 {
+	if r, _ := rng.Test([]byte{3}); len(r) != 0 {
 		t.Error("Not Range fail: Test")
 	}
-	if r, _ := rng.Test([]byte{4}); len(r) > 0 {
-		t.Error("Not Range fail: Test shoud fail")
+	if r, _ := rng.Test([]byte{4}); len(r) != 1 || r[0] != 1 {
+		t.Error("Not Range fail: 4 falls outside range so should succeed")
 	}
 	if rng.NumSequences() != 253 {
 		t.Error("Not Range fail: NumSequences; expecting 253 got", rng.NumSequences())
