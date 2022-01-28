@@ -22,7 +22,7 @@ jobs:
         with:
           go-version: 1.x
       - name: Install provisioner  
-        run: go install -a github.com/richardlehane/provisioner
+        run: go install github.com/richardlehane/provisioner@latest
       - name: Provision develop
         if: github.ref_name == 'develop'
         run: provisioner -life=2h -host=develop-RAND.itforarchivists.com -env=PACKET_AUTH_TOKEN,RUNNER_AUTH,BB_ACCOUNT,BB_KEY scripts/develop.yaml

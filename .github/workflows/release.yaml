@@ -23,8 +23,8 @@ jobs:
           go-version: 1.x
       - name: Make sf and roy binaries
         run: |
-          go install -a -tags brew github.com/richardlehane/siegfried/cmd/sf
-          go install -a -tags brew github.com/richardlehane/siegfried/cmd/roy
+          go install -tags brew github.com/richardlehane/siegfried/cmd/sf
+          go install -tags brew github.com/richardlehane/siegfried/cmd/roy
       - name: Set environment variables
         run: |
           VERSION=$(echo "${{ github.ref }}" | tr -d 'refs/tags/v')
@@ -48,7 +48,7 @@ jobs:
         id: create_release 
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
           tag_name: ${{ github.ref }}
           release_name: Version ${{ github.ref }}
@@ -57,7 +57,7 @@ jobs:
       - name: Upload debian package
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ${{ env.SF_PATH }}.deb
@@ -66,7 +66,7 @@ jobs:
       - name: Upload zipped executables
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: siegfried_${{ env.VERS }}_linux64.zip
@@ -84,14 +84,14 @@ jobs:
           go-version: 1.x
       - name: Make sf and roy binaries
         run: |
-          go install -a -tags brew github.com/richardlehane/siegfried/cmd/sf
-          go install -a -tags brew github.com/richardlehane/siegfried/cmd/roy
+          go install -tags brew github.com/richardlehane/siegfried/cmd/sf
+          go install -tags brew github.com/richardlehane/siegfried/cmd/roy
       - name: Zip executables
         run: zip -j siegfried_${{ needs.publishDeb.outputs.version }}_mac64.zip $(go env GOPATH)/bin/sf $(go env GOPATH)/bin/roy
       - name: Upload zip
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
           upload_url: ${{ needs.publishDeb.outputs.upload_url }}
           asset_path: siegfried_${{ needs.publishDeb.outputs.version }}_mac64.zip
@@ -109,8 +109,8 @@ jobs:
           go-version: 1.x
       - name: Make sf and roy binaries
         run: |
-          go install -a github.com/richardlehane/siegfried/cmd/sf
-          go install -a github.com/richardlehane/siegfried/cmd/roy
+          go install github.com/richardlehane/siegfried/cmd/sf
+          go install github.com/richardlehane/siegfried/cmd/roy
       - name: Zip assets
         shell: pwsh
         run: |
@@ -121,7 +121,7 @@ jobs:
       - name: Upload siegfried.zip
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
           upload_url: ${{ needs.publishDeb.outputs.upload_url }}
           asset_path: siegfried_${{ needs.publishDeb.outputs.version }}_win64.zip
@@ -130,7 +130,7 @@ jobs:
       - name: Upload data.zip
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
           upload_url: ${{ needs.publishDeb.outputs.upload_url }}
           asset_path: data_${{ needs.publishDeb.outputs.version }}.zip

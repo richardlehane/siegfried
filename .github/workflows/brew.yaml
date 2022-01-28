@@ -1,0 +1,29 @@
+# This workflow updates siegfried.rb in richardlehane/homebrew-digipres
+#
+# Trigger it by creating a release.
+name: Brew
+on:
+  release:
+    types: [released]
+jobs:
+  bench:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get details of latest release
+        run: |
+          URL=$(curl https://api.github.com/repos/richardlehane/siegfried/releases/latest | grep "tarball_url" | grep -Eo 'https://[^\"]*')
+          echo "URL=$URL" >> $GITHUB_ENV
+          echo "VERSION=$(basename $URL)" >> $GITHUB_ENV
+          echo "SHA256=$(curl ${{ env.URL }} | sha256sum | cut -d " " -f 1)" >> $GITHUB_ENV
+      - name: Edit siegfried.rb and commit
+        run: |
+          git clone 'https://${{ secrets.PAT }}@github.com/richardlehane/homebrew-digipres.git'
+          cd homebrew-digipres
+          git config user.name "Richard Lehane"
+          git config user.email "richard@itforarchivists.com"
+          sed -i 's|url.*|url "${{ env.URL }}"|' siegfried.rb
+          sed -i 's/sha256.*/sha256 "${{ env.SHA256 }}"/' siegfried.rb
+          git add siegfried.rb
+          git commit -m "Update siegfried to ${{ env.VERSION }}"
+          git push origin master
+
