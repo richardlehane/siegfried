@@ -1,0 +1,28 @@
+# This workflow runs all the tests in ubuntu, windows and mac
+# environments.
+#
+# Trigger this workflow by pushing commits or by opening 
+# a pull request.
+name: Test
+on: 
+  push:
+    tags-ignore: 
+      - '**' # don't test twice 
+  pull_request:
+    types:
+      - opened
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Install latest version of go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.x
+      - name: Run tests
+        run: go test ./...

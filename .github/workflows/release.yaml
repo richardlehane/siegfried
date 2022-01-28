@@ -1,0 +1,138 @@
+# This workflow creates a release and builds and uploads
+# a debian package, as well as linux, windows and mac binaries.
+#
+# Trigger this workflow by pushing a version tag e.g. v1.1.0.
+# Add -rc for a prerelease e.g. v1.1.0-rc.
+name: Release
+on:
+  push:
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+jobs:
+  publishDeb:
+    runs-on: ubuntu-latest
+    outputs: 
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+      version: ${{ env.VERS }}
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Install latest version of go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.x
+      - name: Make sf and roy binaries
+        run: |
+          go install -a -tags brew github.com/richardlehane/siegfried/cmd/sf
+          go install -a -tags brew github.com/richardlehane/siegfried/cmd/roy
+      - name: Set environment variables
+        run: |
+          VERSION=$(echo "${{ github.ref }}" | tr -d 'refs/tags/v')
+          echo "VERS=$(echo $VERSION | tr "." "-")" >> $GITHUB_ENV
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "SF_PATH=siegfried_$VERSION-1_amd64" >> $GITHUB_ENV
+          echo "BIN_PATH=$(go env GOPATH)/bin" >> $GITHUB_ENV
+          echo "PRERELEASE=false" >> $GITHUB_ENV
+      - name: Set prerelease
+        if: endsWith(github.ref, 'rc')
+        run: echo "PRERELEASE=true" >> $GITHUB_ENV
+      - name: Execute debbuilder script
+        run: (chmod +x debbuilder.sh && ./debbuilder.sh)
+        env:
+          VERSION: ${{ env.VERSION }}
+          SF_PATH: ${{ env.SF_PATH }}
+          BIN_PATH: ${{ env.BIN_PATH }}
+      - name: Zip executables
+        run: zip -j siegfried_${{ env.VERS }}_linux64.zip ${{ env.BIN_PATH }}/sf ${{ env.BIN_PATH }}/roy
+      - name: Create release
+        id: create_release 
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Version ${{ github.ref }}
+          draft: false
+          prerelease: ${{ env.PRERELEASE }}
+      - name: Upload debian package
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ env.SF_PATH }}.deb
+          asset_name: ${{ env.SF_PATH }}.deb
+          asset_content_type: application/vnd.debian.binary-package
+      - name: Upload zipped executables
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: siegfried_${{ env.VERS }}_linux64.zip
+          asset_name: siegfried_${{ env.VERS }}_linux64.zip
+          asset_content_type: application/zip
+  publishMac:
+    runs-on: macos-latest
+    needs: publishDeb
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Install latest version of go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.x
+      - name: Make sf and roy binaries
+        run: |
+          go install -a -tags brew github.com/richardlehane/siegfried/cmd/sf
+          go install -a -tags brew github.com/richardlehane/siegfried/cmd/roy
+      - name: Zip executables
+        run: zip -j siegfried_${{ needs.publishDeb.outputs.version }}_mac64.zip $(go env GOPATH)/bin/sf $(go env GOPATH)/bin/roy
+      - name: Upload zip
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.publishDeb.outputs.upload_url }}
+          asset_path: siegfried_${{ needs.publishDeb.outputs.version }}_mac64.zip
+          asset_name: siegfried_${{ needs.publishDeb.outputs.version }}_mac64.zip
+          asset_content_type: application/zip
+  publishWin:
+    runs-on: windows-latest
+    needs: publishDeb
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Install latest version of go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.x
+      - name: Make sf and roy binaries
+        run: |
+          go install -a github.com/richardlehane/siegfried/cmd/sf
+          go install -a github.com/richardlehane/siegfried/cmd/roy
+      - name: Zip assets
+        shell: pwsh
+        run: |
+          7z a siegfried_${{ needs.publishDeb.outputs.version }}_win64.zip ((go env GOPATH) + "\bin\*.exe")
+          md siegfried
+          Copy-Item cmd\roy\data\* siegfried -recurse
+          7z a data_${{ needs.publishDeb.outputs.version }}.zip siegfried
+      - name: Upload siegfried.zip
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.publishDeb.outputs.upload_url }}
+          asset_path: siegfried_${{ needs.publishDeb.outputs.version }}_win64.zip
+          asset_name: siegfried_${{ needs.publishDeb.outputs.version }}_win64.zip
+          asset_content_type: application/zip
+      - name: Upload data.zip
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.publishDeb.outputs.upload_url }}
+          asset_path: data_${{ needs.publishDeb.outputs.version }}.zip
+          asset_name: data_${{ needs.publishDeb.outputs.version }}.zip
+          asset_content_type: application/zip

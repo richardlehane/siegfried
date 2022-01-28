@@ -1,0 +1,41 @@
+# This workflow triggers siegfried's automated benchmarks.
+#
+# Trigger it by creating a release (the main benchmark runs)
+# or by a commit to the develop branch (the develop benchmark runs).
+name: Benchmark
+on: 
+  push:
+    branches:
+      - develop
+  release:
+    types: [released]
+jobs:
+  bench:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+        with:
+          repository: richardlehane/provisioner
+      - name: Install latest version of go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.x
+      - name: Install provisioner  
+        run: go install -a github.com/richardlehane/provisioner
+      - name: Provision develop
+        if: github.ref_name == 'develop'
+        run: provisioner -life=2h -host=develop-RAND.itforarchivists.com -env=PACKET_AUTH_TOKEN,RUNNER_AUTH,BB_ACCOUNT,BB_KEY scripts/develop.yaml
+        env:
+          PACKET_AUTH_TOKEN: ${{ secrets.PACKET_AUTH_TOKEN }}
+          RUNNER_AUTH: ${{ secrets.RUNNER_AUTH }}
+          BB_ACCOUNT: ${{ secrets.BB_ACCOUNT }}
+          BB_KEY: ${{ secrets.PACKET_AUTH_TOKEN }}
+      - name: Provision main
+        if: github.ref_name != 'develop' # release
+        run: provisioner -life=12h -max=-1 -host=bench-RAND.itforarchivists.com -env=PACKET_AUTH_TOKEN,RUNNER_AUTH,BB_ACCOUNT,BB_KEY scripts/bench.yaml
+        env:
+          PACKET_AUTH_TOKEN: ${{ secrets.PACKET_AUTH_TOKEN }}
+          RUNNER_AUTH: ${{ secrets.RUNNER_AUTH }}
+          BB_ACCOUNT: ${{ secrets.BB_ACCOUNT }}
+          BB_KEY: ${{ secrets.PACKET_AUTH_TOKEN }}
