@@ -13,18 +13,16 @@ jobs:
   bench:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v2
-        with:
-          repository: richardlehane/provisioner
       - name: Install latest version of go
         uses: actions/setup-go@v2
         with:
           go-version: 1.x
+      - name: Check out repository code
+        uses: actions/checkout@v2
+        with:
+          repository: richardlehane/provisioner
       - name: Install provisioner  
         run: go install github.com/richardlehane/provisioner
-      - name: Check dir
-        run: ls .
       - name: Provision develop
         if: github.ref_name == 'develop'
         run: provisioner -life=2h -host=develop-RAND.itforarchivists.com -env=PACKET_AUTH_TOKEN,RUNNER_AUTH,BB_ACCOUNT,BB_KEY scripts/develop.yaml
