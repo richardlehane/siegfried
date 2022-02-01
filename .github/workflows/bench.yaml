@@ -30,7 +30,7 @@ jobs:
           PACKET_AUTH_TOKEN: ${{ secrets.PACKET_AUTH_TOKEN }}
           RUNNER_AUTH: ${{ secrets.RUNNER_AUTH }}
           BB_ACCOUNT: ${{ secrets.BB_ACCOUNT }}
-          BB_KEY: ${{ secrets.PACKET_AUTH_TOKEN }}
+          BB_KEY: ${{ secrets.BB_KEY }}
       - name: Provision main
         if: github.ref_name != 'develop' # release
         run: provisioner -life=12h -max=-1 -host=bench-RAND.itforarchivists.com -env=PACKET_AUTH_TOKEN,RUNNER_AUTH,BB_ACCOUNT,BB_KEY scripts/bench.yaml
@@ -38,4 +38,4 @@ jobs:
           PACKET_AUTH_TOKEN: ${{ secrets.PACKET_AUTH_TOKEN }}
           RUNNER_AUTH: ${{ secrets.RUNNER_AUTH }}
           BB_ACCOUNT: ${{ secrets.BB_ACCOUNT }}
-          BB_KEY: ${{ secrets.PACKET_AUTH_TOKEN }}
+          BB_KEY: ${{ secrets.BB_KEY }}
