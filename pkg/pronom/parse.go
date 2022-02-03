@@ -164,7 +164,14 @@ func processDROID(puid string, s []mappings.ByteSeq) (frames.Signature, error) {
 		} else if ref == "" {
 			vry = true
 		}
+		var zeroIndexed bool // fmt/1190 bug in containers: https://github.com/richardlehane/siegfried/issues/175
 		for _, ss := range b.SubSequences {
+			if ss.Position == 0 {
+				zeroIndexed = true
+			}
+			if zeroIndexed {
+				ss.Position += 1
+			}
 			ns, err := processSubSequence(puid, ss, eof, vry)
 			if err != nil {
 				return nil, err
