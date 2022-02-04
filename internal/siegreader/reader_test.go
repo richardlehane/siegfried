@@ -214,6 +214,7 @@ func TestReverseDrainFile(t *testing.T) {
 	if i := <-lastResults; i != 24040 {
 		t.Errorf("Expecting 24040, got %v", i)
 	}
+	<- firstResults // make sure we've finished in both directions before closing file
 	r.Close()
 	bufs.Put(b)
 }
