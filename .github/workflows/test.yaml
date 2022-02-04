@@ -6,8 +6,6 @@
 name: Test
 on: 
   push:
-    tags-ignore: 
-      - '**' # don't test twice 
   pull_request:
     types:
       - opened
