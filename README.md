@@ -9,7 +9,7 @@
 
 ### Version
 
-1.9.1
+1.9.2
 
 [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -59,7 +59,7 @@ By default, siegfried uses the latest PRONOM signatures without buffer limits (i
 ## Install
 ### With go installed: 
 
-    go get github.com/richardlehane/siegfried/cmd/sf
+    go install github.com/richardlehane/siegfried/cmd/sf@latest
 
     sf -update
 
@@ -96,6 +96,22 @@ Or, for the most recent updates, you can install from this fork:
     makepkg -si
 
 ## Changes
+### v1.9.2 (2022-02-07)
+### Changed
+- update PRONOM to v100
+- update LOC signatures to 2022-02-01
+- update tika-mimetypes signatures to v2.1
+- update freedesktop.org signatures to v2.2.1
+- roy inspect returns format ID with name
+
+### Fixed
+- parse issues for container files where zero indexing used for Position. Spotted by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/175)
+- sf -droid output can't be read by sf (e.g. for comparing results). Reported by [ostnatalie](https://github.com/richardlehane/siegfried/issues/174)
+- panic when running in server mode due to race condition. Reported by [Miguel Guimarães](https://github.com/richardlehane/siegfried/issues/172)
+- panic when reading malformed MSCFB files. Reported by [Greg Lepore](https://github.com/richardlehane/siegfried/issues/171)
+- unescaped control characters in JSON output. Reported by [Sebastian Lange](https://github.com/richardlehane/siegfried/issues/165)
+- zip file names with null terminated strings prevent ID of Serif formats. Reported by [Tyler Thorsted](https://github.com/richardlehane/siegfried/issues/150)
+
 ### v1.9.1 (2020-10-11)
 ### Changed
 - update PRONOM to v97
