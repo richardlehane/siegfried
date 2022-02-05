@@ -49,10 +49,10 @@ func decodePath(s, b64 string) (string, error) {
 	return s[10:], nil
 }
 
-func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried, wg *sync.WaitGroup) (error, string, writer.Writer, bool, bool, bool, checksum.HashTyp, *siegfried.Siegfried, getFn) {
+func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried, wg *sync.WaitGroup) (string, writer.Writer, bool, bool, bool, checksum.HashTyp, *siegfried.Siegfried, getFn, error) {
 	// json, csv, droid or yaml
-	paramsErr := func(field, expect string) (error, string, writer.Writer, bool, bool, bool, checksum.HashTyp, *siegfried.Siegfried, getFn) {
-		return fmt.Errorf("bad request; in param %s got %s; valid values %s", field, r.FormValue(field), expect), "", nil, false, false, false, -1, nil, nil
+	paramsErr := func(field, expect string) (string, writer.Writer, bool, bool, bool, checksum.HashTyp, *siegfried.Siegfried, getFn, error) {
+		return "", nil, false, false, false, -1, nil, nil, fmt.Errorf("bad request; in param %s got %s; valid values %s", field, r.FormValue(field), expect)
 	}
 	var (
 		mime string
@@ -155,7 +155,7 @@ func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried
 	sf := s
 	if v := r.FormValue("sig"); v != "" {
 		if _, err := os.Stat(config.Local(v)); err != nil {
-			return fmt.Errorf("bad request; sig param should be path to a signature file (absolute or relative to home); got %v", err), "", nil, false, false, false, -1, nil, nil
+			return "", nil, false, false, false, -1, nil, nil, fmt.Errorf("bad request; sig param should be path to a signature file (absolute or relative to home); got %v", err)
 		}
 		nsf, err := siegfried.Load(config.Local(v))
 		if err == nil {
@@ -168,12 +168,12 @@ func parseRequest(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried
 		c.s, c.wg, c.w, c.d, c.z, c.h = sf, wg, wr, d, z, checksum.MakeHash(ht)
 		return c
 	}
-	return nil, mime, wr, coerr, norec, d, ht, sf, gf
+	return mime, wr, coerr, norec, d, ht, sf, gf, nil
 }
 
 func handleIdentify(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfried, ctxts chan *context) {
 	wg := &sync.WaitGroup{}
-	err, mime, wr, coerr, nrec, d, ht, sf, gf := parseRequest(w, r, s, wg)
+	mime, wr, coerr, nrec, d, ht, sf, gf, err := parseRequest(w, r, s, wg)
 	if err != nil {
 		handleErr(w, http.StatusNotFound, err)
 		return
@@ -207,26 +207,22 @@ func handleIdentify(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfri
 		wg.Wait()
 		wr.Tail()
 		return
-	} else {
-		path, err := decodePath(r.URL.Path, r.FormValue("base64"))
-		if err == nil {
-			_, err = os.Stat(path)
-		}
-		if err != nil {
-			handleErr(w, http.StatusNotFound, err)
-			return
-		}
-		w.Header().Set("Content-Type", mime)
-		wr.Head(config.SignatureBase(), time.Now(), sf.C, config.Version(), sf.Identifiers(), sf.Fields(), ht.String())
-		err = identify(ctxts, path, "", coerr, nrec, d, gf)
-		wg.Wait()
-		wr.Tail()
-		if err != nil {
-			if _, ok := err.(WalkError); ok { // only dump out walk errors, other errors reported in result
-				io.WriteString(w, err.Error())
-			}
-		}
+	}
+	path, err := decodePath(r.URL.Path, r.FormValue("base64"))
+	if err == nil {
+		_, err = os.Stat(path)
+	}
+	if err != nil {
+		handleErr(w, http.StatusNotFound, err)
 		return
+	}
+	w.Header().Set("Content-Type", mime)
+	wr.Head(config.SignatureBase(), time.Now(), sf.C, config.Version(), sf.Identifiers(), sf.Fields(), ht.String())
+	err = identify(ctxts, path, "", coerr, nrec, d, gf)
+	wg.Wait()
+	wr.Tail()
+	if _, ok := err.(WalkError); ok { // only dump out walk errors, other errors reported in result
+		io.WriteString(w, err.Error())
 	}
 }
 
@@ -348,7 +344,6 @@ func (m *muxer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	handleErr(w, http.StatusNotFound, fmt.Errorf("valid paths are /, /identify and /identify/*"))
-	return
 }
 
 func listen(port string, s *siegfried.Siegfried, ctxts chan *context) {

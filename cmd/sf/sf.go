@@ -46,7 +46,7 @@ var (
 	version        = flag.Bool("version", false, "display version information")
 	logf           = flag.String("log", "error", "log errors, warnings, debug or slow output, knowns or unknowns to stderr or stdout e.g. -log error,warn,unknown,stdout")
 	nr             = flag.Bool("nr", false, "prevent automatic directory recursion")
-	yaml           = flag.Bool("yaml", true, "YAML output format")
+	_              = flag.Bool("yaml", true, "YAML output format") // yaml is the default, need a flag so can overwrite config (see conf.go)
 	csvo           = flag.Bool("csv", false, "CSV output format")
 	jsono          = flag.Bool("json", false, "JSON output format")
 	droido         = flag.Bool("droid", false, "DROID CSV output format")
@@ -192,16 +192,17 @@ func readFile(ctx *context, ctxts chan *context, gf getFn) {
 }
 
 func identifyFile(ctx *context, ctxts chan *context, gf getFn) {
-	ctx.wg.Add(1)
+	wg := ctx.wg
+	wg.Add(1)
 	ctxts <- ctx
 	if *multi == 1 || ctx.z || config.Slow() || config.Debug() {
 		readFile(ctx, ctxts, gf)
 		return
 	}
+	wg.Add(1)
 	go func() {
-		ctx.wg.Add(1)
 		readFile(ctx, ctxts, gf)
-		ctx.wg.Done()
+		wg.Done()
 	}()
 }
 
@@ -280,7 +281,7 @@ func replayFile(path string, ctxts chan *context, w writer.Writer) error {
 	defer f.Close()
 	rdr, err := reader.New(f, path)
 	if err != nil {
-		return fmt.Errorf("[FATAL] error reading results file %s; got %v\n", path, err)
+		return fmt.Errorf("[FATAL] error reading results file %s; got %v", path, err)
 	}
 	firstReplay.Do(func() {
 		hd := rdr.Head()
@@ -294,7 +295,7 @@ func replayFile(path string, ctxts chan *context, w writer.Writer) error {
 		ctxts <- ctx
 	}
 	if err != nil && err != io.EOF {
-		return fmt.Errorf("[FATAL] error reading results file %s; got %v\n", path, err)
+		return fmt.Errorf("[FATAL] error reading results file %s; got %v", path, err)
 	}
 	return nil
 }

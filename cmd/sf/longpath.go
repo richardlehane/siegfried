@@ -1,3 +1,4 @@
+//go:build !windows
 // +build !windows
 
 // Copyright 2015 Richard Lehane. All rights reserved.
@@ -23,10 +24,6 @@ import (
 )
 
 func retryOpen(path string, err error) (*os.File, error) {
-	return nil, err
-}
-
-func retryStat(path string, err error) (os.FileInfo, error) {
 	return nil, err
 }
 
