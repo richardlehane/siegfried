@@ -102,13 +102,13 @@ Or, for the most recent updates, you can install from this fork:
 - Custom Wikibase endpoint can now be specified for harvesting when paired with a custom SPARQL query and property mappings
 - Wikidata identifier includes permalinks in results
 - Wikidata revision history visible using `roy inspect`
+- roy inspect returns format ID with name
 
 ### Changed
 - update PRONOM to v100
 - update LOC signatures to 2022-02-01
 - update tika-mimetypes signatures to v2.1
 - update freedesktop.org signatures to v2.2.1
-- roy inspect returns format ID with name
 
 ### Fixed
 - parse issues for container files where zero indexing used for Position. Spotted by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/175)
