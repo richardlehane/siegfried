@@ -97,6 +97,12 @@ Or, for the most recent updates, you can install from this fork:
 
 ## Changes
 ### v1.9.2 (2022-02-07)
+### Added
+- Wikidata definition file specification has been updated and now includes endpoint (users will need to harvest Wikidata again)
+- Custom Wikibase endpoint can now be specified for harvesting when paired with a custom SPARQL query and property mappings
+- Wikidata identifier includes permalinks in results
+- Wikidata revision history visible using `roy inspect`
+
 ### Changed
 - update PRONOM to v100
 - update LOC signatures to 2022-02-01
