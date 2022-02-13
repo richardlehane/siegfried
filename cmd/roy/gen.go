@@ -31,6 +31,7 @@ import (
 	"github.com/richardlehane/siegfried/pkg/mimeinfo"
 	"github.com/richardlehane/siegfried/pkg/pronom"
 	"github.com/richardlehane/siegfried/pkg/sets"
+	"github.com/richardlehane/siegfried/pkg/wikidata"
 )
 
 var genhome = flag.String("home", "data", "override the default home directory")
@@ -47,6 +48,7 @@ func main() {
 		makeDeluxe,
 		makeArchivematica,
 		makeSets,
+		makeWikidata,
 	}
 	for i, j := range jobs {
 		fmt.Printf("Running job %d\n", i)
@@ -138,7 +140,13 @@ func makeDeluxe() error {
 	if err != nil {
 		return err
 	}
-	return writeSigFile("deluxe.sig", p, m, f, l)
+	wikidataOpts := []config.Option{config.SetWikidataNamespace()}
+	wikidataOpts = append(wikidataOpts, config.SetWikidataNoPRONOM())
+	w, err := wikidata.New(wikidataOpts...)
+	if err != nil {
+		return err
+	}
+	return writeSigFile("deluxe.sig", p, m, f, l, w)
 }
 
 func makeArchivematica() error {
@@ -165,4 +173,15 @@ func makeSets() error {
 		err = pronom.ExtensionSet("pronom-extensions.json")
 	}
 	return err
+}
+
+func makeWikidata() error {
+	config.SetHome(*genhome)
+	wikidataOpts := []config.Option{config.SetWikidataNamespace()}
+	wikidataOpts = append(wikidataOpts, config.SetWikidataNoPRONOM())
+	w, err := wikidata.New(wikidataOpts...)
+	if err != nil {
+		return err
+	}
+	return writeSigFile("wikidata.sig", w)
 }
