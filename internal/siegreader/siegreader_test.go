@@ -263,7 +263,6 @@ func testBuffer(t *testing.T, checks int, tf *os.File, bs *Buffer) error {
 	// test Slice()
 	for _, o := range offs {
 		rb := lens[rand.Intn(len(lens))]
-		t.Logf("trying read and slice, at off %d and len %d\n", o, len(rb))
 		wi, rerr := tf.ReadAt(rb, o)
 		slc, serr := bs.Slice(o, len(rb))
 		if !bytes.Equal(rb[:wi], slc) {
@@ -284,7 +283,6 @@ func testBuffer(t *testing.T, checks int, tf *os.File, bs *Buffer) error {
 	for _, o := range offs {
 		rb := lens[rand.Intn(len(lens))]
 		off, l := eofOff(sz, o, len(rb))
-		t.Logf("trying read and eofslice at EOF offset %d (real %d), len %d (real %d)\n", o, off, len(rb), l)
 		wi, rerr := tf.ReadAt(rb[:l], off)
 		slc, serr := bs.EofSlice(o, len(rb))
 		if !bytes.Equal(rb[:wi], slc) {

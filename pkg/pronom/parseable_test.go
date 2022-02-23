@@ -1,7 +1,9 @@
 package pronom
 
 import (
+	"fmt"
 	"path/filepath"
+	"strings"
 	"testing"
 
 	"github.com/richardlehane/siegfried/pkg/config"
@@ -9,7 +11,6 @@ import (
 
 // DROID parsing is tested by comparing it against Report parsing
 func TestParseDroid(t *testing.T) {
-	t.Skip() // this test fails but is a PRONOM/DROID issue
 	config.SetHome(filepath.Join("..", "..", "cmd", "roy", "data"))
 	d, err := newDroid(config.Droid())
 	if err != nil {
@@ -38,9 +39,13 @@ func TestParseDroid(t *testing.T) {
 	if len(dsigs) != len(rsigs) {
 		t.Errorf("Parse Droid: Expecting sig length of reports and droid to be same, got %d, %d", len(rsigs), len(dsigs))
 	}
+	errs := []string{}
 	for i, v := range rsigs {
 		if !v.Equals(dsigs[i]) {
-			t.Errorf("Parse Droid: signatures for %s are not equal:\nReports: %s\n  Droid: %s", rpuids[i], v, dsigs[i])
+			errs = append(errs, fmt.Sprintf("Parse Droid: signatures for %s are not equal:\nReports: %s\n  Droid: %s", rpuids[i], v, dsigs[i]))
 		}
+	}
+	if len(errs) != 0 {
+		t.Skip(strings.Join(errs, "\n"))
 	}
 }
