@@ -163,10 +163,10 @@ func (ct *cTest) identify(c *ContainerMatcher, id *identifier, rdr Reader, name 
 	}
 	if ct.unsatisfied != nil && !rdr.IsDir() {
 		buf, err := rdr.SetSource(c.entryBufs)
-		if err != nil {
+		if buf == nil {
 			rdr.Close()
 			if config.Debug() {
-				fmt.Fprintf(config.Out(), "{Container error - %s (container %d)): %v}\n", rdr.Name(), c.conType, err)
+				fmt.Fprintf(config.Out(), "{Container error - %s (container %d)); error: %v}\n", rdr.Name(), c.conType, err)
 			}
 			return id.hits
 		}
