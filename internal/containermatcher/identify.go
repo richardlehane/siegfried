@@ -162,7 +162,14 @@ func (ct *cTest) identify(c *ContainerMatcher, id *identifier, rdr Reader, name 
 		}
 	}
 	if ct.unsatisfied != nil && !rdr.IsDir() {
-		buf, _ := rdr.SetSource(c.entryBufs) // NOTE: an error is ignored here.
+		buf, err := rdr.SetSource(c.entryBufs)
+		if err != nil {
+			rdr.Close()
+			if config.Debug() {
+				fmt.Fprintf(config.Out(), "{Container error - %s (container %d)): %v}\n", rdr.Name(), c.conType, err)
+			}
+			return id.hits
+		}
 		bmc, _ := ct.bm.Identify("", buf)
 		for r := range bmc {
 			h := ct.unsatisfied[r.Index()]
