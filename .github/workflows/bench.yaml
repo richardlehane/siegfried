@@ -25,7 +25,7 @@ jobs:
         run: go install github.com/richardlehane/provisioner
       - name: Provision develop
         if: github.ref_name == 'develop'
-        run: provisioner -life=2h -host=develop-RAND.itforarchivists.com -env=PACKET_AUTH_TOKEN,RUNNER_AUTH,BB_ACCOUNT,BB_KEY tu=https://www.itforarchivists.com/siegfried/develop ts='div:nth-of-type(7) a' td=15 scripts/develop.yaml 
+        run: provisioner -life=2h -host=develop-RAND.itforarchivists.com -env=PACKET_AUTH_TOKEN,RUNNER_AUTH,BB_ACCOUNT,BB_KEY -tu=https://www.itforarchivists.com/siegfried/develop -ts='div:nth-of-type(7) a' -td=15 scripts/develop.yaml 
         env:
           PACKET_AUTH_TOKEN: ${{ secrets.PACKET_AUTH_TOKEN }}
           RUNNER_AUTH: ${{ secrets.RUNNER_AUTH }}
