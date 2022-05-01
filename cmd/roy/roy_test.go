@@ -263,3 +263,38 @@ func TestAddEndpoint(t *testing.T) {
 		)
 	}
 }
+
+// invokeOptions cycles through an options slice and invokes each of
+// their functions to set them within their respective configs.
+func invokeOptions(opts []config.Option) {
+	// Invoke the options we're trying to test.
+	for _, value := range opts {
+		value()
+	}
+}
+
+// TestNoPRONOM makes sure that the InspectNoPronom flag is set for the
+// identifiers that use it.
+func TestInspectNoPRONOM(t *testing.T) {
+
+	opts := getOptions()
+	invokeOptions(opts)
+
+	if config.NoPRONOM() != false {
+		t.Errorf("LoC NoPRONOM default is incorrect: %t", config.NoPRONOM())
+	}
+	if config.GetWikidataNoPRONOM() != false {
+		t.Errorf("Wikidata NoPRONOM default is incorrect: %t", config.GetWikidataNoPRONOM())
+	}
+
+	*inspectNoPRONOM = true
+	opts = getOptions()
+	invokeOptions(opts)
+
+	if config.NoPRONOM() != true {
+		t.Errorf("LoC NoPRONOM not set as anticipated: %t", config.NoPRONOM())
+	}
+	if config.GetWikidataNoPRONOM() != true {
+		t.Errorf("Wikidata NoPRONOM not set as anticipated: %t", config.GetWikidataNoPRONOM())
+	}
+}
