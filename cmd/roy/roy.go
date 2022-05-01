@@ -126,7 +126,7 @@ var (
 	locfdd        = build.Bool("loc", false, "build a LOC FDD signature file")
 	wikidata      = build.Bool("wikidata", false, "build a Wikidata identifier")
 	wikidataDebug = build.Bool("wikidatadebug", false, "build a Wikidata identifier in debug mode")
-	nopronom      = build.Bool("nopronom", false, "don't include PRONOM sigs with LOC or Wikidata signature file")
+	noPRONOM      = build.Bool("nopronom", false, "don't include PRONOM sigs with LOC or Wikidata signature file")
 	container     = build.String("container", config.Container(), "set name/path for Droid Container signature file")
 	name          = build.String("name", "", "set identifier name")
 	details       = build.String("details", config.Details(), "set identifier details")
@@ -180,6 +180,7 @@ var (
 	inspectCType    = inspect.Int("ct", 0, "provide container type to inspect container hits")
 	inspectCName    = inspect.String("cn", "", "provide container name to inspect container hits")
 	inspectWikidata = inspect.Bool("wikidata", false, "inspect a Wikidata signature file")
+	inspectNoPRONOM = inspect.Bool("nopronom", false, "don't include PRONOM sigs when inspecting LOC or Wikidata signature file")
 
 	// SETS
 	setsf       = flag.NewFlagSet("sets", flag.ExitOnError)
@@ -348,7 +349,7 @@ func getOptions() []config.Option {
 	if *wikidataDebug {
 		opts = append(opts, config.SetWikidataDebug())
 	}
-	if *nopronom {
+	if *noPRONOM || *inspectNoPRONOM {
 		opts = append(opts, config.SetNoPRONOM())
 		opts = append(opts, config.SetWikidataNoPRONOM())
 	}
