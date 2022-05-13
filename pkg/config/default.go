@@ -26,7 +26,8 @@ import (
 func init() {
 	current, err := user.Current()
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
+		return
 	}
 	siegfried.home = filepath.Join(current.HomeDir, "siegfried")
 }
