@@ -1,4 +1,4 @@
-// +build !brew,!archivematica
+// +build !brew,!archivematica,!js
 
 // Copyright 2014 Richard Lehane. All rights reserved.
 //
@@ -26,8 +26,7 @@ import (
 func init() {
 	current, err := user.Current()
 	if err != nil {
-		log.Print(err)
-		return
+		log.Fatal(err)
 	}
 	siegfried.home = filepath.Join(current.HomeDir, "siegfried")
 }
