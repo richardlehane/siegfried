@@ -12,7 +12,7 @@
       <FormatTypes>Presentation</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Adobe InDesign is a desktop publishing application developed and produced by Adobe Inc., first released in 1999. It is the successor to PageMaker, software previously created by Aldus Corporation in 1985, which was subsequently acquired by Adobe. It can be used to produce a number of works such as posters, flyers, brochures, magazines, newspapers, presentations and books. InDesign supports XML, stylesheets and other coding markup, providing functionality for exporting tagged text content for use in other digital and online formats.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -26,9 +26,8 @@
       <ProvenanceSourceDate>19 Jul 2013</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>19 Jul 2013</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>24 Feb 2022</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/InDesign_INDD</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -59,6 +58,11 @@
       <ExternalSignature>
         <ExternalSignatureID>1368</ExternalSignatureID>
         <Signature>indd</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2968</ExternalSignatureID>
+        <Signature>indt</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <InternalSignature>

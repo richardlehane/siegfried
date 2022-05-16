@@ -13,7 +13,7 @@
       <FormatTypes>Text (Structured)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>A vmbx file is a saved message file from Outlook associated with the EDRMS software HP TRIM document and records management software.</FormatDescription>
+      <FormatDescription>The HP TRIM Outlook Saved Message File is a saved message file from Outlook, associated with the EDRMS software, formerly known as HP TRIM document and records management, now re-named to Micro Focus Content Manager. There are several versions of this software with versions prior to 7.12 saving this file with an extension .mbx and versions 7.12 and later using extension .vmbx.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -22,14 +22,16 @@
       </ReleaseDate>
       <WithdrawnDate>
       </WithdrawnDate>
-      <ProvenanceSourceID>247</ProvenanceSourceID>
-      <ProvenanceName>National Archives of Australia / National Archives of Australia</ProvenanceName>
-      <ProvenanceSourceDate>19 Oct 2020</ProvenanceSourceDate>
+      <ProvenanceSourceID>262</ProvenanceSourceID>
+      <ProvenanceName>
+      </ProvenanceName>
+      <ProvenanceSourceDate>28 Sep 2020</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>19 Oct 2020</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>01 Mar 2022</LastUpdatedDate>
+      <FormatNote>https://en.wikipedia.org/wiki/Micro_Focus_Content_Manager; 
+
+https://community.microfocus.com/img/sws-rm/f/itrc-1015/50907/trim-viewer</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -55,6 +57,11 @@
       <ExternalSignature>
         <ExternalSignatureID>2619</ExternalSignatureID>
         <Signature>vmbx</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2972</ExternalSignatureID>
+        <Signature>mbx</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
     </FileFormat>

@@ -51,6 +51,11 @@
         <Signature>hdf5</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2910</ExternalSignatureID>
+        <Signature>nc</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
       <InternalSignature>
         <SignatureID>302</SignatureID>
         <SignatureName>HDF5 1.0</SignatureName>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2410</FormatID>
+      <FormatName>TurboCalc Document</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Spreadsheet</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>TurboCalc Document is a spreadsheet application developed by Gregory R. Schmalhofer and published by Stefan Ossowski's Schatztruhe (better known as Aminet) for the Commodore 64 used on Amiga operating system. The system is very similar to Microsoft Excel. There were several vesions of TurboCalc published in the years of 1980 - 1999.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>04 Jan 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>04 Jan 2022</LastUpdatedDate>
+      <FormatNote>https://www.file-extensions.org/tcd-file-extension-turbocalc-spreadsheet-file
+
+http://www.amiworld.it/programmi/turbocalc/turbocalc_eng.html
+
+https://www.wikidata.org/wiki/Q105850917
+
+https://blog.alb42.de/2019/06/10/turbocalc-functions/
+
+https://commodore.software/downloads/category/13-spreadsheets
+
+http://istilladoremy64.byethost24.com/doku.php?id=reviews:turbocalc</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1585</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>108</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Compuserve Incorporated</OrganisationName>
+        <DeveloperCompoundName>Compuserve Incorporated</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>108</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Compuserve Incorporated</OrganisationName>
+        <SupportCompoundName>Compuserve Incorporated</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2870</ExternalSignatureID>
+        <Signature>tcd</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1924</SignatureID>
+        <SignatureName>TurboCalc Document</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: '...TURBOCALC'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2226</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>01000C545552424F43414C43</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2444</FormatID>
+      <FormatName>Devicetree Blob (DTB)</FormatName>
+      <FormatVersion>17</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>
+      </FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>DeviceTree Blobs are a binary representation of a DeviceTree, which represents computer hardware layout, addresses, and interconnections. They enable details to be passed to the operating system as it boots up, instead of hard coding details of a device into that operating system. This signature describes version 17 of DeviceTree, however it may apply to other versions of the dtb file. Please get in touch if you have information which can help refine this signature.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>273</ProvenanceSourceID>
+      <ProvenanceName>Oliver Mattos / Oliver Mattos</ProvenanceName>
+      <ProvenanceSourceDate>03 Feb 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>03 Feb 2022</LastUpdatedDate>
+      <FormatNote>https://github.com/devicetree-org/devicetree-specification/releases/download/v0.3/devicetree-specification-v0.3.pdf</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1617</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>275</DeveloperID>
+        <DeveloperName>DeviceTree</DeveloperName>
+        <OrganisationName>DeviceTree</OrganisationName>
+        <DeveloperCompoundName>DeviceTree / DeviceTree</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>275</SupportID>
+        <SupportName>DeviceTree</SupportName>
+        <OrganisationName>DeviceTree</OrganisationName>
+        <SupportCompoundName>DeviceTree / DeviceTree</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2907</ExternalSignatureID>
+        <Signature>dtb</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1952</SignatureID>
+        <SignatureName>Devicetree Blob (DTB)</SignatureName>
+        <SignatureNote>Magic bytes, offset zero: Ð(carriage return)þí</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2259</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>Big-endian</Endianness>
+          <ByteSequenceValue>D00DFEED</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

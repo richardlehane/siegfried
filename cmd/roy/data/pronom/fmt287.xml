@@ -24,10 +24,10 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>01 Nov 2010</ProvenanceSourceDate>
-      <ProvenanceDescription>Following up external submission. Signature submitted by The Alfred Wegener Institute for Polar and Marine Research, Germany.</ProvenanceDescription>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
       <LastUpdatedDate>01 Nov 2010</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <FormatNote>Following up external submission. Signature submitted by The Alfred Wegener Institute for Polar and Marine Research, Germany.</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -49,6 +49,11 @@
       <ExternalSignature>
         <ExternalSignatureID>1723</ExternalSignatureID>
         <Signature>hdf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2912</ExternalSignatureID>
+        <Signature>nc</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <InternalSignature>

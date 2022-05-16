@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2423</FormatID>
+      <FormatName>ESRI ArcInfo Grid .nit File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Files which comprise part of an ArcInfo Grid, a raster data model storing information in a matrix of cells, with values representing a coordinate, and sometimes linked to an attribute table. ArcInfo Grid models are generated using ArcGIS software, produced by Esri (https://www.esri.com/en-us/arcgis/about-arcgis/overview.) Nit files follow a consistent naming pattern: arcXXXX.nit, where XXXX is an incrementally increasing number starting from 0000, e.g, arc000.nit, arc0001.nit, arc0002.nit. Nit files are always stored in an /info/ directory at the root. They are associated with .dat and .adf files, and their function is to store file structure and field definition information of the grid.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>234</ProvenanceSourceID>
+      <ProvenanceName>National Library of Australia / National Library of Australia</ProvenanceName>
+      <ProvenanceSourceDate>18 Jan 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>04 Mar 2022</LastUpdatedDate>
+      <FormatNote>http://avce00.maptools.org/docs/v7_bin_cover.html#ARC.DAT
+ 
+http://webhelp.esri.com/arcgisdesktop/9.2/index.cfm?TopicName=How_coverages_are_stored 
+
+https://support.esri.com/en/technical-article/000008526
+
+https://www.loc.gov/preservation/digital/formats/fdd/fdd000281.shtml</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1596</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2882</ExternalSignatureID>
+        <Signature>nit</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1935</SignatureID>
+        <SignatureName>ESRI ArcInfo Grid .nit File</SignatureName>
+        <SignatureNote>BOF, offset 16: magic bytes .. ÿÿ….</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2240</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>16</Offset>
+          <MaxOffset>16</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>00(02|04|08)FFFF00010004</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

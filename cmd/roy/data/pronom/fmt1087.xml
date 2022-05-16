@@ -71,6 +71,13 @@
           <ByteSequenceValue>EB{1}90{10}(01|02|04|08|10|20|40|80)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2436</RelatedFormatID>
+        <RelatedFormatName>exFAT (extensible File Allocation Table) disc image</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

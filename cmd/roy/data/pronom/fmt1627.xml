@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2454</FormatID>
+      <FormatName>Z Print Build File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Files used by Z Print or 3D Print that run 3D CJP Printers or former Z Corp Printers. They were used by Z corp 310s, 510s, 810s, 400s, 150s, 250s, 350s, 450s, 650s, 850s or 3D Systems 160s, 260s, 360s, 460s, 660s, 860s, or 4500s.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>216</ProvenanceSourceID>
+      <ProvenanceName>The Canadian Centre for Architecture / The Canadian Centre for Architecture</ProvenanceName>
+      <ProvenanceSourceDate>18 Feb 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>18 Feb 2022</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1627</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Support>
+        <SupportID>277</SupportID>
+        <SupportName>3D Systems, Inc</SupportName>
+        <OrganisationName>3D Systems, Inc</OrganisationName>
+        <SupportCompoundName>3D Systems, Inc / 3D Systems, Inc</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2920</ExternalSignatureID>
+        <Signature>zbd</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1967</SignatureID>
+        <SignatureName>Z Print Build File</SignatureName>
+        <SignatureNote>BOF Absolute from beginning of file, magic bytes: %ZCorp System Software Version</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2286</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>255A436F72702053797374656D20536F6674776172652056657273696F6E</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

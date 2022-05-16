@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2442</FormatID>
+      <FormatName>CATIA Drawing</FormatName>
+      <FormatVersion>5</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Model</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>CATIA is a 3D modelling software created by Dassault Systèmes, widely used across many industries for computer aided design, manufacture and engineering. The .catdrawing files are created with this software to store two dimensional drawings, including different views of the item being designed. Catdrawing files are always linked to .catpart files - without a .catpart file, the .catdrawing file won’t open.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>241</ProvenanceSourceID>
+      <ProvenanceName>J. Paul Getty Trust / J. Paul Getty Trust</ProvenanceName>
+      <ProvenanceSourceDate>03 Feb 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>03 Feb 2022</LastUpdatedDate>
+      <FormatNote>Official website: https://www.3ds.com/products-services/catia/</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1615</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>135</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Dassault Systems</OrganisationName>
+        <DeveloperCompoundName>Dassault Systems</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>135</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Dassault Systems</OrganisationName>
+        <SupportCompoundName>Dassault Systems</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2905</ExternalSignatureID>
+        <Signature>catdrawing</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1950</SignatureID>
+        <SignatureName>CATIA Drawing</SignatureName>
+        <SignatureNote>BOF offset 0, magic bytes: V5_CFV2 * CATDrwCont</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2257</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>56355F4346563200*434154447277436F6E74</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2440</FormatID>
+      <FormatName>XML Shareable Playlist Format</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Mark-up)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Xspf is a format for sharing playlists, supported by many applications. It uses xml, so is easily edited with a text editor. The official website gives useful information as to the structure of xspf files: https://www.xspf.org/quickstart</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>234</ProvenanceSourceID>
+      <ProvenanceName>National Library of Australia / National Library of Australia</ProvenanceName>
+      <ProvenanceSourceDate>27 Jan 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>27 Jan 2022</LastUpdatedDate>
+      <FormatNote>Specification: https://www.xspf.org/spec</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1613</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2903</ExternalSignatureID>
+        <Signature>xspf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1948</SignatureID>
+        <SignatureName>XML Shareable Playlist Format</SignatureName>
+        <SignatureNote>BOF, absolute zero: &lt;?xml version={25-26}&lt;playlist{1-14} xmlns="http://xspf.org/ns/0/
+EOF, offset 0-1: &lt;/playlist&gt;</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2255</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C3F786D6C2076657273696F6E3D{25-26}3C706C61796C697374{1-14}786D6C6E733D22687474703A2F2F787370662E6F72672F6E732F302F</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>2264</ByteSequenceID>
+          <PositionType>Absolute from EOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>1</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C2F706C61796C6973743E</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>638</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

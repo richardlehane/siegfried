@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2409</FormatID>
+      <FormatName>ADRIFT Text Adventure File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>ADRIFT Text Adventure File is an Interactive Fiction games file, produced by Campbell Wild's ADRIFT (Adventure Developer &amp; Runner - Interactive Fiction Toolkit). 
+
+ADRIFT was created for Miscrosoft Windows and runs under Windows 95, 98, and NT. It does not require extensive programming knowledge, as it provides a series of dialog boxes which can be filled-out with descriptions and properties of each location, object and character. It is not based on the traditional model of compiled source and interpreted binary files but instead, a game exists only as a single binary file which is created by the Generator (a series of specialised editors) and read by the Runner. Both components use a Windows-style graphical interface, and are largely mouse-driven.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>04 Jan 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>04 Jan 2022</LastUpdatedDate>
+      <FormatNote>http://www.firthworks.com/roger/cloak/adrift/index.html
+
+http://fileformats.archiveteam.org/wiki/ADRIFT
+
+https://www.adrift.co/
+
+http://www.plover.net/~textfire/raiffaq/FAQ.htm#:ADRIFT
+
+https://www.ifwiki.org/index.php/ADRIFT</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1584</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2869</ExternalSignatureID>
+        <Signature>taf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1923</SignatureID>
+        <SignatureName>ADRIFT Text Adventure File</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: '&lt;B?Éj‡ÂÏ'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2225</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C423FC96A87C2CF</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

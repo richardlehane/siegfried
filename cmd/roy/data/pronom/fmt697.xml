@@ -27,8 +27,9 @@
       <ProvenanceSourceDate>11 Feb 2015</ProvenanceSourceDate>
       <ProvenanceDescription>http://amf.wikispaces.com/</ProvenanceDescription>
       <LastUpdatedDate>11 Feb 2015</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <FormatNote>http://amf.wikispaces.com/
+
+https://web.archive.org/web/20120218025346/http://en.wikipedia.org/wiki/Additive_Manufacturing_File_Format#Meta-data</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -45,7 +46,7 @@
       <InternalSignature>
         <SignatureID>1026</SignatureID>
         <SignatureName>Additive Manufacturing File Format</SignatureName>
-        <SignatureNote>&lt;?xml version=('|")1.0('|") {1-256} &lt;amf {1-128} &lt;object id=</SignatureNote>
+        <SignatureNote>&lt;?xml version=('|")1.0('|") {1-256} &lt;amf</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1268</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -57,7 +58,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>3C3F786D6C2076657273696F6E3D(22|27)312E30(22|27){1-256}3C616D66{1-128}3C6F626A6563742069643D</ByteSequenceValue>
+          <ByteSequenceValue>3C3F786D6C2076657273696F6E3D(22|27)312E30(22|27){1-256}3C616D66</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

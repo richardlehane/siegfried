@@ -10,12 +10,13 @@
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>
-      </FormatTypes>
+      <FormatTypes>Aggregate</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
-      <BinaryFileFormat>Text</BinaryFileFormat>
+      <FormatDescription>This entry records generic Binary File format. A binary file is a computer file that is not a text file, the term itself is often used to describe a "non-text file". Due to multiple varieties of this format, this file format entry does not include a file format signature. Although binary file is not a text-based file format, some files stored as binary can contain parts that can be interpreted as text; for example, some computer document files containing formatted text, such as older Microsoft Word document files, contain the text of the document but also contain formatting information in binary form.
+
+The .bin extension is also used for the 'Binary Text (BIN)' graphics format, a method of creating images using ANSI character encoding. This format has no distinctive name, file extension, or a signature, and is different than a text-based file, which can be edited in a text editor. More information about BIN (Binary Text) format can be found using the reference links provided. The newer version to BIN format which has a clear file format signiture is XBIN [fmt/1612].</FormatDescription>
+      <BinaryFileFormat>Binary</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
       <ReleaseDate>
@@ -27,9 +28,14 @@
       <ProvenanceSourceDate>28 Oct 2009</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>28 Oct 2009</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>27 Jan 2022</LastUpdatedDate>
+      <FormatNote>https://en.wikipedia.org/wiki/Binary_file
+
+http://fileformats.archiveteam.org/wiki/BIN_(Binary_Text)
+
+http://www.acid.org/images/0896/XBIN.TXT
+
+https://fileinfo.com/extension/bin</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -43,6 +49,13 @@
         <Signature>bin</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>2439</RelatedFormatID>
+        <RelatedFormatName>XBIN (eXtended BIN)</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

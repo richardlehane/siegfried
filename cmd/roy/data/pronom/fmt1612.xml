@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2439</FormatID>
+      <FormatName>XBIN (eXtended BIN)</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Unstructured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>XBIN (eXtended BIN) is a character graphics format, widely used for ANSI art. It was designed to be a successor to BIN format [fmt/208] and uses a specialized run-lenght encoding (RLE) compression algorithm. Althought XBIN is considered to be a graphics format, it is not required to have an image. The format can be used for storing pre-made fonts and pre-made palettes which can be loaded from a viewer/editor. It is closely tied to the capabilities of the text modes of VGA graphics cards. The font can be customized, though limited to 16 colors only. 
+
+XBIN allows for binary images up to 65536 columns wide, and 65536 lines high, with an alternate set of palette colors either in blink or non-blink mode. It also allows for different textmode fonts from 1 to 32 scanlines high, consisting of either 256 or 512 different characters, and its file size is smaller by using more efficient compression system to its predecessor BIN format [fmt/208].</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>26 Jan 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>26 Jan 2022</LastUpdatedDate>
+      <FormatNote>http://web.archive.org/web/20120204063040/http://www.acid.org/info/xbin/x_spec.htm
+
+http://www.acid.org/images/0896/XBIN.TXT
+
+https://en.wikipedia.org/wiki/Xbin</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1612</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2902</ExternalSignatureID>
+        <Signature>xb</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1947</SignatureID>
+        <SignatureName>XBIN (eXtended BIN)</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 'XBIN.'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2253</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>5842494E1A</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>934</RelatedFormatID>
+        <RelatedFormatName>Binary File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <CompressionType>
+        <CompressionID>13</CompressionID>
+        <CompressionName>Run Length Encoding</CompressionName>
+        <CompressionVersion>
+        </CompressionVersion>
+        <CompressionAliases>RLE</CompressionAliases>
+        <CompressionFamilies>
+        </CompressionFamilies>
+        <Description>Run length encoding (RLE) is perhaps the simplest image compression technique in common use. RLE algorithms are lossless, and work by searching for runs of bits, bytes, or pixels of the same value, and encoding the length and value of the run. As such, RLE achieves best results with images containing large areas of contiguous colour, and especially monochrome images. Complex colour images, such as photographs, do not compress well – in some cases, RLE can actually increase the file size. There are a number of RLE variants in common use, which are encountered in the TIFF, PCX and BMP graphics formats.</Description>
+        <Lossiness>Lossless</Lossiness>
+        <ReleaseDate>
+        </ReleaseDate>
+        <WithdrawnDate>
+        </WithdrawnDate>
+        <CompressionDocumentation>
+        </CompressionDocumentation>
+        <CompressionIPR>
+        </CompressionIPR>
+        <CompressionNote>
+        </CompressionNote>
+        <CompressionIdentifier>
+          <Identifier>x-cmp/13</Identifier>
+          <IdentifierType>PUID</IdentifierType>
+        </CompressionIdentifier>
+      </CompressionType>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

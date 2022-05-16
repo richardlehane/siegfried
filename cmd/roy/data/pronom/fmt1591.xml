@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2418</FormatID>
+      <FormatName>ESRI ArcInfo Coverage Annotation File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Files which form part of an ArcInfo Coverage, which is a data model whose purpose is to store georelational data such as spatial location and descriptive data. Each ArcInfo Coverage resides in an ArcInfo workspace, a directory which contains two or more folders. These packages are generated using ArcGIS software, produced by Esri (https://www.esri.com/en-us/arcgis/about-arcgis/overview.) Files with the .txt extension contain text strings describing a geographic feature, formatted in user defined tables.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>234</ProvenanceSourceID>
+      <ProvenanceName>National Library of Australia / National Library of Australia</ProvenanceName>
+      <ProvenanceSourceDate>06 Jan 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>06 Jan 2022</LastUpdatedDate>
+      <FormatNote>https://www.loc.gov/preservation/digital/formats/fdd/fdd000284.shtml</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1591</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Support>
+        <SupportID>221</SupportID>
+        <SupportName>Esri</SupportName>
+        <OrganisationName>Esri</OrganisationName>
+        <SupportCompoundName>Esri / Esri</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2877</ExternalSignatureID>
+        <Signature>txt</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1930</SignatureID>
+        <SignatureName>ESRI ArcInfo Coverage Annotation File</SignatureName>
+        <SignatureNote>Magic bytes, Absolute from beginning of file: ..'ÿÿÿ.½</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2232</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>0000270AFFFFFFBD</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

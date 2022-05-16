@@ -25,10 +25,10 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>03 Nov 2011</ProvenanceSourceDate>
-      <ProvenanceDescription>Ongoing DROID signature research.</ProvenanceDescription>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
       <LastUpdatedDate>03 Nov 2011</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <FormatNote>Ongoing DROID signature research.</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -56,8 +56,7 @@
           <ByteSequenceID>673</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
@@ -70,8 +69,7 @@
           <ByteSequenceID>674</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>3</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

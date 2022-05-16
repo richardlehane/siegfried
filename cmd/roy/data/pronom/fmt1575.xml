@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2400</FormatID>
+      <FormatName>Spectrum 512 Compressed | Spectrum 512 Smooshed</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Raster)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Spectrum 512 was a computer paint program by Boris Tsikanovsky that enabled the creation of images with more than 16 simultaneous colors. It uses the Atari ST's rapid palette switching ability to expand the maximum number of colors to be displayed on-screen at once to 512 (up to 46 in each scan line). Spectrum 512 is a predecessor of Unispec. 
+
+This specific file format record details Spectrum 512 compressed formats. There are two varieties of compression in Spectrum 512 formats, first is Spectrum 512 Compressed and second Spectrum 512 Smooshed. Both of these formats have an identical file format signiture (magic bytes) and the only way to distinguish between these formats is by their extension. The Spectrum 512 Compressed format uses .spc and the Spectrum 512 Smooshed format uses .sps extension. Compression is via a modified run length encoding (RLE) scheme in both of these formats however, the files differ in in a compression methods depending on format type.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>04 Jan 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>04 Jan 2022</LastUpdatedDate>
+      <FormatNote>https://doudoroff.com/atari/spectrum.html
+
+https://temlib.org/AtariForumWiki/index.php/Spectrum_512_Smooshed_file_format
+
+https://temlib.org/AtariForumWiki/index.php/Spectrum_512_Compressed_file_format
+
+https://en.wikipedia.org/wiki/Atari_ST
+
+http://www.atarimania.com/utility-atari-st-spectrum-512_22312.html
+
+http://fileformats.archiveteam.org/wiki/Spectrum_512_formats</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1575</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2859</ExternalSignatureID>
+        <Signature>spc</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2860</ExternalSignatureID>
+        <Signature>sps</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1916</SignatureID>
+        <SignatureName>Spectrum 512 Compressed and Smooshed</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 'SP.'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2218</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>535000</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>687</RelatedFormatID>
+        <RelatedFormatName>MPEG 1/2 Audio Layer 3</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <CompressionType>
+        <CompressionID>13</CompressionID>
+        <CompressionName>Run Length Encoding</CompressionName>
+        <CompressionVersion>
+        </CompressionVersion>
+        <CompressionAliases>RLE</CompressionAliases>
+        <CompressionFamilies>
+        </CompressionFamilies>
+        <Description>Run length encoding (RLE) is perhaps the simplest image compression technique in common use. RLE algorithms are lossless, and work by searching for runs of bits, bytes, or pixels of the same value, and encoding the length and value of the run. As such, RLE achieves best results with images containing large areas of contiguous colour, and especially monochrome images. Complex colour images, such as photographs, do not compress well – in some cases, RLE can actually increase the file size. There are a number of RLE variants in common use, which are encountered in the TIFF, PCX and BMP graphics formats.</Description>
+        <Lossiness>Lossless</Lossiness>
+        <ReleaseDate>
+        </ReleaseDate>
+        <WithdrawnDate>
+        </WithdrawnDate>
+        <CompressionDocumentation>
+        </CompressionDocumentation>
+        <CompressionIPR>
+        </CompressionIPR>
+        <CompressionNote>
+        </CompressionNote>
+        <CompressionIdentifier>
+          <Identifier>x-cmp/13</Identifier>
+          <IdentifierType>PUID</IdentifierType>
+        </CompressionIdentifier>
+      </CompressionType>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

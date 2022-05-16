@@ -46,7 +46,8 @@
       <InternalSignature>
         <SignatureID>1899</SignatureID>
         <SignatureName>Standard Data Format</SignatureName>
-        <SignatureNote>Magic bytes: 0x0D (Carriage Return) followed by 0x0A (Line Feed) followed by 0x1A (Substitute)</SignatureNote>
+        <SignatureNote>Magic bytes, BOF, offset 0: G0
+Magic bytes: 0x0D (Carriage Return) followed by 0x0A (Line Feed) followed by 0x1A (Substitute)</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>2198</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
@@ -59,6 +60,19 @@
           <Endianness>
           </Endianness>
           <ByteSequenceValue>0D0A1A</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>2261</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>3</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4730</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

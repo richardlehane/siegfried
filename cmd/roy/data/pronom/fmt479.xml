@@ -26,7 +26,7 @@
       <ProvenanceSourceDate>25 Oct 2012</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>25 Oct 2012</LastUpdatedDate>
+      <LastUpdatedDate>11 Feb 2022</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -55,8 +55,7 @@ VAR: Identifies the byte sequence which equals - xmlns:pdfaid="http://www.aiim.o
           <ByteSequenceID>945</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>144</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
@@ -78,7 +77,40 @@ VAR: Identifies the byte sequence which equals - xmlns:pdfaid="http://www.aiim.o
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>786D6C6E733A7064666169643D(22|27)687474703A2F2F7777772E6169696D2E6F72672F706466612F6E732F6964*7064666169643A70617274(3D22|3D27|3E)33(22|27|3C2F7064666169643A706172743E){0-11}7064666169643A636F6E666F726D616E6365(3E|3D22|3D27)41(22|27|3C2F7064666169643A636F6E666F726D616E63653E)</ByteSequenceValue>
+          <ByteSequenceValue>786D6C6E733A7064666169643D(22|27)687474703A2F2F7777772E6169696D2E6F72672F706466612F6E732F6964*7064666169643A70617274(3D22|3D27|3E)33(22|27|3C2F7064666169643A706172743E){0-120}7064666169643A636F6E666F726D616E6365(3E|3D22|3D27)41(22|27|3C2F7064666169643A636F6E666F726D616E63653E)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1958</SignatureID>
+        <SignatureName>PDF/A-3A 2</SignatureName>
+        <SignatureNote>BOF: %PDF1.(0-7) VAR: Identifies the byte sequence which equals - xmlns:pdfaid="http://www.aiim.org/pdfa/ns/id/ which is the PDF/A identification namespace within the PDF/A meta-data, followed by &lt;pdfaid:part&gt;3&lt;pdfaid:part&gt; and &lt;pdfaid:conformance&gt;A&lt;pdfaid:conformance&gt;, which are the two mandatory elements and values for PDF/A. See ISO 19005-3:2012 for further information.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2273</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>144</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>255044462D312E[30:37]</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>2274</ByteSequenceID>
+          <PositionType>Variable</PositionType>
+          <Offset>
+          </Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>786D6C6E733A7064666169643D(22|27)687474703A2F2F7777772E6169696D2E6F72672F706466612F6E732F6964*7064666169643A636F6E666F726D616E6365(3E|3D22|3D27)41(22|27|3C2F7064666169643A636F6E666F726D616E63653E){0-120}7064666169643A70617274(3D22|3D27|3E)33(22|27|3C2F7064666169643A706172743E)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

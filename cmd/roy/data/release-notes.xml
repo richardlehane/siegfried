@@ -2,6 +2,1068 @@
 <?xml-stylesheet type="text/xsl" href="release-note.xsl"?>
 <release_notes>
 <release_note>
+	<release_date>11th March 2022</release_date>
+	<signature_filename>DROID_SignatureFile_V104.xml</signature_filename>
+	<release_outline name="Updated Records">
+		<format>
+         <puid type="fmt">1629</puid>
+         <name>Adobe InDesign Document (1.5)</name>
+         <summary>Corrected relationships by adding priority over Adobe InDesign Document 1.0 and removing priority over Adobe InDesign Document 1.0. Submitted by Digital Preservation Department, The National Archives.</summary>
+		</format>
+	</release_outline>
+</release_note>
+<release_note>
+   <release_date>10th March 2022</release_date>
+   <signature_filename>DROID_SignatureFile_V103.xml</signature_filename>
+   <release_outline name="New Records">
+      <format>
+         <puid type="fmt">1620</puid>
+         <name>Aero Studio Song</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1621</puid>
+         <name>AHX-Module Format (formerly THX Module Format)</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1622</puid>
+         <name>Asylum Music Format</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1623</puid>
+         <name>Art Of Noise - 4 Channel Module</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1624</puid>
+         <name>Art Of Noise - 8 Channel Module</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1625</puid>
+         <name>ESRI Colour File Format</name>
+         <summary>Extension-only entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1626</puid>
+         <name>MicroStation Symbology Resource File</name>
+         <summary>Full entry added. Submitted by The Canadian Centre for Architecture.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1627</puid>
+         <name>Z Print Build File</name>
+         <summary>Full entry added. Submitted by The Canadian Centre for Architecture.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1628</puid>
+         <name>Adobe InDesign Document 1.0</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1629</puid>
+         <name>Adobe InDesign Document 1.5</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1630</puid>
+         <name>Adobe InDesign Document 2.0</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1631</puid>
+         <name>Adobe InDesign Document CS5.5</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1632</puid>
+         <name>Adobe InDesign Document CC</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1633</puid>
+         <name>Adobe InDesign Document CC 2014</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1634</puid>
+         <name>Adobe InDesign Document CC 2015</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1635</puid>
+         <name>Adobe InDesign Document CC 2017</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1636</puid>
+         <name>Adobe InDesign Document CC 2018</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1637</puid>
+         <name>Adobe InDesign Document CC 2019</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1638</puid>
+         <name>Adobe InDesign Document CC 2020</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1639</puid>
+         <name>Adobe InDesign Document CC 2021</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1640</puid>
+         <name>Adobe InDesign Document CC 2022</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1641</puid>
+         <name>Adobe InDesign Interchange Document</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1642</puid>
+         <name>Adobe InDesign Library 2</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1643</puid>
+         <name>Lenel Network Video Recorder File</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1644</puid>
+         <name>Roxio Label Creator Project File v4-5</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1645</puid>
+         <name>Roxio Label Creator Project File v6-7</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1646</puid>
+         <name>Roxio Label Creator Project File v8-11</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1647</puid>
+         <name>Inspiration Software File</name>
+         <summary>Full entry added. Submitted by National Archives of Australia and State Archives and Records Authority of New South Wales.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1648</puid>
+         <name>Crystal Reports File</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="Updated Records">
+      <format>
+         <puid type="fmt">95</puid>
+         <name>Acrobat PDF/A - Portable Document Format (1a)</name>
+         <summary>Update to signature following error. Removal of whitespace causing issues in FIDO. Submitted by Vanderbilt University, Preservica and Misty De Méo.</summary>
+      </format>
+      <format>
+         <puid type="fmt">123</puid>
+         <name>Encapsulated PostScript File Format</name>
+         <summary>Amended to allow for magic bytes to be Adobe-2 or Adobe-2.0. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">152</puid>
+         <name>Digital Negative Format (DNG)</name>
+         <summary>Changed maximum offset of 'TIFF header plus DNGVersion tag near EOF' from 4084 to 6000 bytes. Submitted by Digital Repository, Historic Environment Scotland.</summary>
+      </format>
+      <format>
+         <puid type="fmt">196</puid>
+         <name>Adobe InDesign Document CS</name>
+         <summary>Outline description upgraded, note field updated and .indt file extension added . Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">276</puid>
+         <name>Acrobat PDF 1.7 - Portable Document Format</name>
+         <summary>Changed maximum byte offset from 0 to 1 . Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">450</puid>
+         <name>Adobe InDesign Document Generic</name>
+         <summary>Outline description upgraded, note field updated and .indt file extension added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">462</puid>
+         <name>MS-DOS Compression Format (SZDD Variant)</name>
+         <summary>Amended name for consistency, added link and description. Submitted by IS4.</summary>
+      </format>
+      <format>
+         <puid type="fmt">469</puid>
+         <name>MS-DOS Compression Format (KWAJ Variant)</name>
+         <summary>Amended name for consistency, added link. Submitted by IS4.</summary>
+      </format>
+      <format>
+         <puid type="fmt">548</puid>
+         <name>Adobe InDesign Document CS2</name>
+         <summary>Outline description upgraded, note field updated and .indt file extension added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">549</puid>
+         <name>Adobe InDesign Document CS3</name>
+         <summary>Outline description upgraded, note field updated and .indt file extension added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">550</puid>
+         <name>Adobe InDesign Document CS4</name>
+         <summary>Outline description upgraded, note field updated and .indt file extension added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">551</puid>
+         <name>Adobe InDesign Document CS5</name>
+         <summary>Outline description upgraded, note field updated and .indt file extension added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">552</puid>
+         <name>Adobe InDesign Document CS6</name>
+         <summary>Outline description upgraded, note field updated and .indt file extension added. Relationship changed to 'is subsequent version of' Adobe InDesign Document CS5.5 instead of Adobe InDesign Document CS5. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1184</puid>
+         <name>InDesign Markup Language Package</name>
+         <summary>Note field updated. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1191</puid>
+         <name>Adobe InDesign Book</name>
+         <summary>Note field updated. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1192</puid>
+         <name>Adobe InDesign Library 4</name>
+         <summary>Description, version number, note field and format type updated. Associated signature renamed from 'Adobe InDesign Library' to 'Adobe InDesign Library 4'. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1358</puid>
+         <name>MicroStation Base File</name>
+         <summary>Added byte sequence to signature. Added priority over Bentley Microstation Hidden Line File. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1423</puid>
+         <name>HP TRIM Outlook Saved Message File</name>
+         <summary>Added .mbx extension. Updated description . Submitted by National Archives of Australia and State Archives and Records Authority of New South Wales.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1596</puid>
+         <name>ESRI ArcInfo Grid .nit File</name>
+         <summary>Capitalised 'File' in file format name and signature. Amended BOF signature to allow for 02, 04 or 08 at byte 2. Removed EOF signature. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="New Signatures">
+      <format>
+         <puid type="fmt">1620</puid>
+         <name>Aero Studio Song</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1621</puid>
+         <name>AHX-Module Format (formerly THX Module Format)</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1622</puid>
+         <name>Asylum Music Format</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1623</puid>
+         <name>Art Of Noise - 4 Channel Module</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1624</puid>
+         <name>Art Of Noise - 8 Channel Module</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1626</puid>
+         <name>MicroStation Symbology Resource File</name>
+         <summary>Signature researched and samples provided by The Canadian Centre for Architecture.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1627</puid>
+         <name>Z Print Build File</name>
+         <summary>Signature researched and samples provided by The Canadian Centre for Architecture.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1628</puid>
+         <name>Adobe InDesign Document 1.0</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1629</puid>
+         <name>Adobe InDesign Document 1.5</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1630</puid>
+         <name>Adobe InDesign Document 2.0</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1631</puid>
+         <name>Adobe InDesign Document CS5.5</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1632</puid>
+         <name>Adobe InDesign Document CC</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1633</puid>
+         <name>Adobe InDesign Document CC 2014</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1634</puid>
+         <name>Adobe InDesign Document CC 2015</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1635</puid>
+         <name>Adobe InDesign Document CC 2017</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1636</puid>
+         <name>Adobe InDesign Document CC 2018</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1637</puid>
+         <name>Adobe InDesign Document CC 2019</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1638</puid>
+         <name>Adobe InDesign Document CC 2020</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1639</puid>
+         <name>Adobe InDesign Document CC 2021</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1640</puid>
+         <name>Adobe InDesign Document CC 2022</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1641</puid>
+         <name>Adobe InDesign Interchange Document</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1642</puid>
+         <name>Adobe InDesign Library 2</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1643</puid>
+         <name>Lenel Network Video Recorder File</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1644</puid>
+         <name>Roxio Label Creator Project File v4-5</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1645</puid>
+         <name>Roxio Label Creator Project File v6-7</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1646</puid>
+         <name>Roxio Label Creator Project File v8-11</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1647</puid>
+         <name>Inspiration Software File</name>
+         <summary>Signature researched and samples provided by National Archives of Australia and State Archives and Records Authority of New South Wales.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1648</puid>
+         <name>Crystal Reports File</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+   </release_outline>
+</release_note>
+<release_note>
+	<release_date>15th February 2022</release_date>
+	<signature_filename>DROID_SignatureFile_V102.xml</signature_filename>
+	<release_outline name="Updated Records">
+		<format>
+         <puid type="fmt">1579</puid>
+         <name>SPYne Containers</name>
+         <summary>Fixed an issue with A0 character appearing in description and signature note. Issue submitted by Ross Spencer.</summary>
+		</format>
+		<format>
+         <puid type="fmt">1612</puid>
+         <name>XBIN (eXtended BIN)</name>
+         <summary>Fixed issue with invalid A0 character appearing in name. Issue submitted by The Science Museum.</summary>
+		</format>		
+	</release_outline>
+</release_note>
+<release_note>
+   <release_date>15th February 2022</release_date>
+   <signature_filename>DROID_SignatureFile_V101.xml</signature_filename>
+   <release_outline name="New Records">
+      <format>
+         <puid type="fmt">1573</puid>
+         <name>Visual Basic Project File</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1574</puid>
+         <name>Visual Basic Project Workspace File</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1575</puid>
+         <name>Spectrum 512 Compressed | Spectrum 512 Smooshed</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1576</puid>
+         <name>Spectrum 512 Uncompressed | Spectrum 512 Uncompressed Enhanced </name>
+         <summary>Extension-only entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1577</puid>
+         <name>Spectrum 512 Extended v1</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1578</puid>
+         <name>Spectrum 512 Extended v2</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1579</puid>
+         <name>SPYne Containers</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1580</puid>
+         <name>Envision Publisher File</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1581</puid>
+         <name>Envision Publisher Font Files</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1582</puid>
+         <name>Vim SWAP File</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1583</puid>
+         <name>SXG (ZX Spectrum) Graphic File</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1584</puid>
+         <name>ADRIFT Text Adventure File</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1585</puid>
+         <name>TurboCalc Document</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1586</puid>
+         <name>TheDraw Save File</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1587</puid>
+         <name>COKE Format (Atari Falcon)</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1588</puid>
+         <name>TGIF File Format</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1589</puid>
+         <name>Taquart Interlace Picture </name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1590</puid>
+         <name>Visual Basic Binary Form File</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1591</puid>
+         <name>ESRI ArcInfo Coverage Annotation File</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1592</puid>
+         <name>ASEG-GDF2 Description File</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1593</puid>
+         <name>ASEG-GDF2 Data Definition File</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1594</puid>
+         <name>ESRI ArcInfo .dat File (External) </name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1595</puid>
+         <name>Canon Raw 3</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1596</puid>
+         <name>ESRI ArcInfo Grid .nit File</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1597</puid>
+         <name>PageMaker Template File</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1598</puid>
+         <name>Stata .do Command File</name>
+         <summary>Full entry added. Submitted by Yale University Library.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1599</puid>
+         <name>R Program File</name>
+         <summary>Full entry added. Submitted by Yale University Library.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1600</puid>
+         <name>ESRI ArcInfo DAT File (Internal)</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1601</puid>
+         <name>Type Library Type 1</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1602</puid>
+         <name>Type Library Type 2</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1603</puid>
+         <name>TUNDRA</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1604</puid>
+         <name>EggPaint (Atari Falcon)</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1605</puid>
+         <name>True Colour Sprites [Spooky Sprites] (Atari Falcon)</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1606</puid>
+         <name>Packed-Ice True Colour Sprites [Spooky Sprites] (Atari Falcon)</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1607</puid>
+         <name>True Colour Picture [Spooky Sprites] (Atari Falcon)</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1608</puid>
+         <name>Packed-Ice True Colour Picture [Spooky Sprites] (Atari Falcon)</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1609</puid>
+         <name>exFAT (extensible File Allocation Table) Disc Image</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1610</puid>
+         <name>Viacom New Media Graphics</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1611</puid>
+         <name>WRAptor Compressed File</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1612</puid>
+         <name>XBIN (eXtended BIN)</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1613</puid>
+         <name>XML Shareable Playlist Format</name>
+         <summary>Full entry added. Submitted by National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1614</puid>
+         <name>Esri ArcExplorer Project File</name>
+         <summary>Full entry added. Submitted by National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1615</puid>
+         <name>CATIA Drawing</name>
+         <summary>Full entry added. Submitted by J. Paul Getty Trust.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1616</puid>
+         <name>BibTeX Database File</name>
+         <summary>Full entry added. Submitted by Technische Informationsbibliothek (TIB) Hannover.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1617</puid>
+         <name>Devicetree Blob (DTB)</name>
+         <summary>Full entry added. Submitted by Oliver Mattos.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1618</puid>
+         <name>SGML/XML Entity File</name>
+         <summary>Full entry added. Submitted by National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1619</puid>
+         <name>Pascal Source Code</name>
+         <summary>Extension-only entry added. Submitted by National Library of Australia.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="Updated Records">
+      <format>
+         <puid type="fmt">95</puid>
+         <name>Acrobat PDF/A - Portable Document Format (1a)</name>
+         <summary>Additional signature added to allow for PDF conformance and PDF part tags to be alternated. Extension to BOF offset and 0-120 byte gap between part and conformance tags added to original signature. Submitted by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">116</puid>
+         <name>Windows Bitmap (Signature 3.0)</name>
+         <summary>Added the possibility of '10' at byte 28. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">208</puid>
+         <name>Binary File</name>
+         <summary>Added description, changed orientation to binary, added BIN file format and updated relationships. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">286</puid>
+         <name>HDF5 (1)</name>
+         <summary>Extension .nc added. Submitted by ETH-Bibliothek, ETH Zurich.</summary>
+      </format>
+      <format>
+         <puid type="fmt">287</puid>
+         <name>HDF5 (2)</name>
+         <summary>Extension .nc added. Submitted by ETH-Bibliothek, ETH Zurich.</summary>
+      </format>
+      <format>
+         <puid type="fmt">354</puid>
+         <name>Acrobat PDF/A - Portable Document Format (1b)</name>
+         <summary>Extension to byte gap between part and conformance tags added to both signatures. Submitted by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">372</puid>
+         <name>Earth Resource Satellite Image Header Format</name>
+         <summary>Added an offset of 3 bytes from EOF, at the request of the enquirer. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">468</puid>
+         <name>ISO Disk Image</name>
+         <summary>Broadened the BOF offset from 32769 to a range (32700- 37700). Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">476</puid>
+         <name>Acrobat PDF/A - Portable Document Format (2a)</name>
+         <summary>Additional signature added to allow for PDF conformance and PDF part tags to be alternated. Extension to BOF offset and 0-120 byte gap between part and conformance tags added to original signature. Submitted by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">477</puid>
+         <name>Acrobat PDF/A - Portable Document Format (2b)</name>
+         <summary>Additional signature added to allow for PDF conformance and PDF part tags to be alternated. Extension to BOF offset and 0-120 byte gap between part and conformance tags added to original signature. Submitted by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">478</puid>
+         <name>Acrobat PDF/A - Portable Document Format (2u)</name>
+         <summary>Additional signature added to allow for PDF conformance and PDF part tags to be alternated. Extension to BOF offset and 0-120 byte gap between part and conformance tags added to original signature. Submitted by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">479</puid>
+         <name>Acrobat PDF/A - Portable Document Format (3a)</name>
+         <summary>Additional signature added to allow for PDF conformance and PDF part tags to be alternated. Extension to BOF offset and 0-120 byte gap between part and conformance tags added to original signature. Submitted by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">480</puid>
+         <name>Acrobat PDF/A - Portable Document Format (3b)</name>
+         <summary>Additional signature added to allow for PDF conformance and PDF part tags to be alternated. Extension to BOF offset and 0-120 byte gap between part and conformance tags added to original signature. Submitted by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">481</puid>
+         <name>Acrobat PDF/A - Portable Document Format (3u)</name>
+         <summary>Additional signature added to allow for PDF conformance and PDF part tags to be alternated. Extension to BOF offset and 0-120 byte gap between part and conformance tags added to original signature. Submitted by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">569</puid>
+         <name>Matroska</name>
+         <summary>Updated link to reference files. Submitted by Heidelberg University library.</summary>
+      </format>
+      <format>
+         <puid type="fmt">643</puid>
+         <name>ASTM E57 3D File Format</name>
+         <summary>Added MIMEtype and links to documentation. Submitted by Sascha Brawer.</summary>
+      </format>
+      <format>
+         <puid type="fmt">697</puid>
+         <name>Additive Manufacturing File Format</name>
+         <summary>Deleted last sequence of signature and added new link for source of description. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">807</puid>
+         <name>HDF5 (0)</name>
+         <summary>Extension .nc added. Submitted by ETH-Bibliothek, ETH Zurich.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1555</puid>
+         <name>Standard Data Format</name>
+         <summary>Added BOF byte sequence. Submitted by Digital Preservation Department,The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">436</puid>
+         <name>CATIA Model</name>
+         <summary>Removed MIME type and added description. Submitted by Digital Preservation Department,The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">437</puid>
+         <name>CATIA Project</name>
+         <summary>Removed MIME type and added description. Submitted by Digital Preservation Department,The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">438</puid>
+         <name>CATIA Material Description</name>
+         <summary>Removed MIME type, added description and enhanced name. Submitted by Digital Preservation Department,The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">439</puid>
+         <name>CATIA Model (Part Description)</name>
+         <summary>Removed MIME type and added description. Submitted by Digital Preservation Department,The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">440</puid>
+         <name>CATIA Product Description</name>
+         <summary>Removed MIME type and added description. Submitted by Digital Preservation Department,The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">454</puid>
+         <name>Microsoft Internet Shortcut</name>
+         <summary>Broadened the BOF offset from 0 to 0-35. Submitted by The National Library of Australia.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="New Signatures">
+      <format>
+         <puid type="fmt">95</puid>
+         <name>Acrobat PDF/A - Portable Document Format (1a)</name>
+         <summary>Signature researched and samples provided by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">354</puid>
+         <name>Acrobat PDF/A - Portable Document Format (1b)</name>
+         <summary>Signature researched and samples provided by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">476</puid>
+         <name>Acrobat PDF/A - Portable Document Format (2a)</name>
+         <summary>Signature researched and samples provided by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">477</puid>
+         <name>Acrobat PDF/A - Portable Document Format (2b)</name>
+         <summary>Signature researched and samples provided by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">478</puid>
+         <name>Acrobat PDF/A - Portable Document Format (2u)</name>
+         <summary>Signature researched and samples provided by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">479</puid>
+         <name>Acrobat PDF/A - Portable Document Format (3a)</name>
+         <summary>Signature researched and samples provided by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">480</puid>
+         <name>Acrobat PDF/A - Portable Document Format (3b)</name>
+         <summary>Signature researched and samples provided by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">481</puid>
+         <name>Acrobat PDF/A - Portable Document Format (3u)</name>
+         <summary>Signature researched and samples provided by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">697</puid>
+         <name>Additive Manufacturing File Format</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1555</puid>
+         <name>Standard Data Format</name>
+         <summary>Signature researched and samples provided by Digital Preservation Department,The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1573</puid>
+         <name>Visual Basic Project File</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1574</puid>
+         <name>Visual Basic Project Workspace File</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1575</puid>
+         <name>Spectrum 512 Compressed | Spectrum 512 Smooshed</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1577</puid>
+         <name>Spectrum 512 Extended v1</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1578</puid>
+         <name>Spectrum 512 Extended v2</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1579</puid>
+         <name>SPYne Containers</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1580</puid>
+         <name>Envision Publisher File</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1581</puid>
+         <name>Envision Publisher Font Files</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1582</puid>
+         <name>Vim SWAP File</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1583</puid>
+         <name>SXG (ZX Spectrum) Graphic File</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1584</puid>
+         <name>ADRIFT Text Adventure File</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1585</puid>
+         <name>TurboCalc Document</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1586</puid>
+         <name>TheDraw Save File</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1587</puid>
+         <name>COKE Format (Atari Falcon)</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1588</puid>
+         <name>TGIF File Format</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1589</puid>
+         <name>Taquart Interlace Picture </name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1590</puid>
+         <name>Visual Basic Binary Form File</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1591</puid>
+         <name>ESRI ArcInfo Coverage Annotation File</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1592</puid>
+         <name>ASEG-GDF2 Description File</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1593</puid>
+         <name>ASEG-GDF2 Data Definition File</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1594</puid>
+         <name>ESRI ArcInfo .dat File (External) </name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1595</puid>
+         <name>Canon Raw 3</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1596</puid>
+         <name>ESRI ArcInfo Grid .nit File</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1597</puid>
+         <name>PageMaker Template File</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1598</puid>
+         <name>Stata .do Command File</name>
+         <summary>Signature researched and samples provided by Yale University Library.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1599</puid>
+         <name>R Program File</name>
+         <summary>Signature researched and samples provided by Yale University Library.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1600</puid>
+         <name>ESRI ArcInfo DAT File (Internal)</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1601</puid>
+         <name>Type Library Type 1</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1602</puid>
+         <name>Type Library Type 2</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1603</puid>
+         <name>TUNDRA</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1604</puid>
+         <name>EggPaint (Atari Falcon)</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1605</puid>
+         <name>True Colour Sprites [Spooky Sprites] (Atari Falcon)</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1606</puid>
+         <name>Packed-Ice True Colour Sprites [Spooky Sprites] (Atari Falcon)</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1607</puid>
+         <name>True Colour Picture [Spooky Sprites] (Atari Falcon)</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1608</puid>
+         <name>Packed-Ice True Colour Picture [Spooky Sprites] (Atari Falcon)</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1609</puid>
+         <name>exFAT (extensible File Allocation Table) Disc Image</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1610</puid>
+         <name>Viacom New Media Graphics</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1611</puid>
+         <name>WRAptor Compressed File</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1612</puid>
+         <name>XBIN (eXtended BIN)</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1613</puid>
+         <name>XML Shareable Playlist Format</name>
+         <summary>Signature researched and samples provided by National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1614</puid>
+         <name>Esri ArcExplorer Project File</name>
+         <summary>Signature researched and samples provided by National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1615</puid>
+         <name>CATIA Drawing</name>
+         <summary>Signature researched and samples provided by J. Paul Getty Trust.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1616</puid>
+         <name>BibTeX Database File</name>
+         <summary>Signature researched and samples provided by Technische Informationsbibliothek (TIB) Hannover.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1617</puid>
+         <name>Devicetree Blob (DTB)</name>
+         <summary>Signature researched and samples provided by Oliver Mattos.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1618</puid>
+         <name>SGML/XML Entity File</name>
+         <summary>Signature researched and samples provided by National Library of Australia.</summary>
+      </format>
+   </release_outline>
+</release_note>
+<release_note>
    <release_date>16th December 2021</release_date>
    <signature_filename>DROID_SignatureFile_V100.xml</signature_filename>
    <release_outline name="New Records">

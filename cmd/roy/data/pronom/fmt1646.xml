@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2473</FormatID>
+      <FormatName>Roxio Label Creator Project File</FormatName>
+      <FormatVersion>8-11</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Roxio Label Creator Project File is format used for storing project files produced by Roxio's Label Creator software, a software used for creating designs intended for jewel cases and disc labels. There are several known versions of this format with earlier versions being stored as OLE2 container format. This record describes the later versions of this format which has a binary signature.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>
+      </ProvenanceName>
+      <ProvenanceSourceDate>25 Feb 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>25 Feb 2022</LastUpdatedDate>
+      <FormatNote>https://archive.org/details/roxio_label_creator/04_roxio_cd_label_creator.jpeg
+
+http://fileformats.archiveteam.org/wiki/JWL</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1646</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2962</ExternalSignatureID>
+        <Signature>jwl</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1984</SignatureID>
+        <SignatureName>Roxio Label Creator Project File v8-11</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 'R.O.X.I.' 
+
+EOF; Offset: 109 - 120; Magic bytes; 'ÿþÿ.A.r.i.a.l'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2306</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>52004F005800490020</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>2307</ByteSequenceID>
+          <PositionType>Absolute from EOF</PositionType>
+          <Offset>109</Offset>
+          <MaxOffset>120</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>02FFFEFF0541007200690061006C</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>2472</RelatedFormatID>
+        <RelatedFormatName>Roxio Label Creator Project File</RelatedFormatName>
+        <RelatedFormatVersion>6-7</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

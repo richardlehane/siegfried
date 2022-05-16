@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2457</FormatID>
+      <FormatName>Adobe InDesign Document</FormatName>
+      <FormatVersion>2.0</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Presentation</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Adobe InDesign is a desktop publishing application developed and produced by Adobe Inc., first released in 1999. It is the successor to PageMaker, software previously created by Aldus Corporation in 1985, which was subsequently acquired by Adobe. It can be used to produce a number of works such as posters, flyers, brochures, magazines, newspapers, presentations and books. InDesign supports XML, stylesheets and other coding markup, providing functionality for exporting tagged text content for use in other digital and online formats.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>
+      </ProvenanceName>
+      <ProvenanceSourceDate>24 Feb 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>24 Feb 2022</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/InDesign_INDD</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1630</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2926</ExternalSignatureID>
+        <Signature>indd</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2927</ExternalSignatureID>
+        <Signature>ind</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2928</ExternalSignatureID>
+        <Signature>indt</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1970</SignatureID>
+        <SignatureName>Adobe InDesign Document 2.0</SignatureName>
+        <SignatureNote>BOF:0x0606 (2 x Acknowledge) followed by 'íõØ' followed by 0x1D (Group Separator) followed by 'Få½1ïçþt·' followed by 0x1D (Group Separator) followed by 'DOCUMENT' followed by either 0x01 (Start of Header) or 0x02 (Start of Text) followed by a fixed gap of 4 followed by either 0x02000000 (Start of Text followed by 3 x Null) or 0x00000002 (3 x Null followed by Start of Text)</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2289</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>0606EDF5D81D46E5BD31EFE7FE74B71D444F43554D454E54(01|02){4}(02000000|00000002)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>865</RelatedFormatID>
+        <RelatedFormatName>Adobe InDesign Document</RelatedFormatName>
+        <RelatedFormatVersion>Generic</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>2456</RelatedFormatID>
+        <RelatedFormatName>Adobe InDesign Document</RelatedFormatName>
+        <RelatedFormatVersion>1.5</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

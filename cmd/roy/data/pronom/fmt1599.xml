@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2426</FormatID>
+      <FormatName>R program file</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Unstructured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Programme files for R, a programming language for statistical computing. The official R software is free, open source, and run on command line. Other companies have produced GUI software packages which are commercially available. R files contain code which can be executed within the R environment, including commands for creating objects such as functions and values.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>204</ProvenanceSourceID>
+      <ProvenanceName>Yale University Library / Yale University Library</ProvenanceName>
+      <ProvenanceSourceDate>19 Jan 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>19 Jan 2022</LastUpdatedDate>
+      <FormatNote>The official R website: https://www.r-project.org/</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1599</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Support>
+        <SupportID>266</SupportID>
+        <SupportName>R Core Team</SupportName>
+        <OrganisationName>The R Project for Statistical Computing</OrganisationName>
+        <SupportCompoundName>R Core Team / The R Project for Statistical Computing</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2885</ExternalSignatureID>
+        <Signature>r</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

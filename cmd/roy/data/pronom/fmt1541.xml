@@ -74,6 +74,12 @@
           <ByteSequenceValue>56455253494F4E20{1-4}0D0A426567696E2056422E466F726D2066726D</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2399</RelatedFormatID>
+        <RelatedFormatName>Visual Basic Project Workspace File</RelatedFormatName>
+        <RelatedFormatVersion>1-6</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

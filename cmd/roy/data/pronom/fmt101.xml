@@ -552,6 +552,20 @@
         <RelatedFormatVersion>6.0.1</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2440</RelatedFormatID>
+        <RelatedFormatName>XML Shareable Playlist Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2468</RelatedFormatID>
+        <RelatedFormatName>Adobe InDesign Interchange Document</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>639</RelatedFormatID>
         <RelatedFormatName>Hypertext Markup Language</RelatedFormatName>

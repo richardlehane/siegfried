@@ -27,9 +27,9 @@
       <ProvenanceSourceDate>31 Mar 2014</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>31 Mar 2014</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>09 Feb 2022</LastUpdatedDate>
+      <FormatNote>http://www.libe57.org/ 
+https://www.ri.cmu.edu/pub_files/2011/1/2011-huber-e57-v3.pdf</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -37,6 +37,10 @@
       <FileFormatIdentifier>
         <Identifier>fmt/643</Identifier>
         <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>model/e57</Identifier>
+        <IdentifierType>MIME</IdentifierType>
       </FileFormatIdentifier>
       <ExternalSignature>
         <ExternalSignatureID>1492</ExternalSignatureID>

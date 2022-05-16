@@ -80,6 +80,13 @@ EOF absolute zero: FF FF  magic bytes: 				ÿÿ</SignatureNote>
           <ByteSequenceValue>FFFF</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2176</RelatedFormatID>
+        <RelatedFormatName>MicroStation Base File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

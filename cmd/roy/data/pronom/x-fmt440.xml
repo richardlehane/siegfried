@@ -12,7 +12,7 @@
       <FormatTypes>
       </FormatTypes>
       <FormatDisclosure>Full</FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>CATIA is a 3D modelling software created by Dassault Systèmes, widely used across many industries for computer aided design, manufacture and engineering.</FormatDescription>
       <BinaryFileFormat>Binary</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -25,7 +25,7 @@
       <ProvenanceSourceDate>06 Apr 2009</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>06 Apr 2009</LastUpdatedDate>
+      <LastUpdatedDate>11 Feb 2022</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -33,8 +33,9 @@
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
-        <Identifier>application/octet-stream</Identifier>
-        <IdentifierType>MIME</IdentifierType>
+        <Identifier>
+        </Identifier>
+        <IdentifierType>Other</IdentifierType>
       </FileFormatIdentifier>
       <FileFormatIdentifier>
         <Identifier>x-fmt/440</Identifier>

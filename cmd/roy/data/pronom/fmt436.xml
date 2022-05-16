@@ -85,7 +85,7 @@ This initial version accompanied the launch of DNG and related products. It was 
           <ByteSequenceID>804</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>4084</MaxOffset>
+          <MaxOffset>6000</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

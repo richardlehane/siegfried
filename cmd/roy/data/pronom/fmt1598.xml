@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2425</FormatID>
+      <FormatName>Stata .do command file</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Unstructured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Stata .do command files are optional text files used with in Stata, a research data analysis and statistical software package. Stata users can compile commands for Stata to run into a .do file, rather than typing them via the keyboard. This means commands do not have to be typed over and over again, and sets of commands can be reproduced at a later date. Such files are called .do files because the command that causes them to be executed is ‘do’. These files can be generated using a standard text editor, or the do-file editor which is built into Stata.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>204</ProvenanceSourceID>
+      <ProvenanceName>Yale University Library / Yale University Library</ProvenanceName>
+      <ProvenanceSourceDate>19 Jan 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>19 Feb 2022</LastUpdatedDate>
+      <FormatNote>https://www.stata.com/manuals/u16.pdf#u16Do-files
+https://www.stata.com/manuals/rdo.pdf</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1598</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Support>
+        <SupportID>265</SupportID>
+        <SupportName>StataCorp</SupportName>
+        <OrganisationName>StataCorp</OrganisationName>
+        <SupportCompoundName>StataCorp / StataCorp</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2884</ExternalSignatureID>
+        <Signature>do</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

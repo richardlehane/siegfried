@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2438</FormatID>
+      <FormatName>WRAptor Compressed File</FormatName>
+      <FormatVersion>1; 2; 3</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>
+      </FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>WRAptor Compressed File is a format which was written by Bill Lucier, copyrighted in 1995, distributed by Loadstar and updated  by Doreen Horne. This format is an uncommon compression format, capable of handling PRG, SEQ, USR and GEOS files (Sequential and VLIR), but not REL files. It utilizes a variant of the LZ (Lempel-Ziv) compression algorithm, starting at 9 bits per code. The 4-byte signature of this format is "FF 42 4C FF", with bytes 42 and 4C representing the authors initials in ASCII - "BL". 
+
+There are three versions of this format, all beginning with same magic bytes. The versions differentiate in their file extension with the v1 and v2 using .wra and the final v3 using .wr3. This entry records all versions of this file format. The complete manual of how to handle the software and this format is included with the reference links.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>26 Jan 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>26 Jan 2022</LastUpdatedDate>
+      <FormatNote>http://unusedino.de/ec64/technical/formats/wra-wr3.html
+
+http://www.zimmers.net/anonftp/pub/cbm/c64/archivers/Wraptor-3.0.readme</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1611</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2900</ExternalSignatureID>
+        <Signature>wra</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2901</ExternalSignatureID>
+        <Signature>wr3</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1946</SignatureID>
+        <SignatureName>WRAptor Compressed File</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 'ÿBLÿ'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2254</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>FF424CFF</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

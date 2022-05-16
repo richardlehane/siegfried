@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2474</FormatID>
+      <FormatName>Inspiration Software File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The Inspiration Software File (ISF) is a format created by Inspiration software and files can be opened using the software. The Inspiration software was founded in 1982 by Donald Helfgott and Mona Westhaver, originally as a tool focused on business analytics, helping to build products to meet business needs. In 1996 the focus of the tool shifted to educational purposes, supporting educators and students across early and higher education. There are several known version of this software up to version 10 as the latest version in February 2021. The ISF files created on version 9 Inspiration software are identical to version 10, but version 7 and 8 ISF files lack the functionality to save data containing mind maps (as according to the manufacturer instructions, please see the web-links in Note section).</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>247</ProvenanceSourceID>
+      <ProvenanceName>National Archives of Australia / National Archives of Australia</ProvenanceName>
+      <ProvenanceSourceDate>28 Feb 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>28 Feb 2022</LastUpdatedDate>
+      <FormatNote>https://psychology.fandom.com/wiki/Inspiration_Software
+
+https://v10.inspiration-manual.com/
+
+https://web.archive.org/web/20001018120642/http://www.inspirationsoftware.com/beta.html
+
+https://www.inspiration-at.com/</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1647</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2963</ExternalSignatureID>
+        <Signature>isf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1985</SignatureID>
+        <SignatureName>Inspiration Software File</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 'application/x-inspiration....Created by software from Inspiration Software, Inc.{80-258}.JFIF'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2308</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>6170706C69636174696F6E2F782D696E737069726174696F6E202020204372656174656420627920736F6674776172652066726F6D20496E737069726174696F6E20536F6674776172652C20496E632E{80-258}104A464946</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

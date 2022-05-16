@@ -25,10 +25,10 @@
       <ProvenanceSourceID>216</ProvenanceSourceID>
       <ProvenanceName>The Canadian Centre for Architecture / The Canadian Centre for Architecture</ProvenanceName>
       <ProvenanceSourceDate>05 Mar 2020</ProvenanceSourceDate>
-      <ProvenanceDescription>https://www.bentley.com/en/products/product-line/modeling-and-visualization-software/microstation</ProvenanceDescription>
-      <LastUpdatedDate>05 Mar 2020</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>04 Mar 2022</LastUpdatedDate>
+      <FormatNote>https://www.bentley.com/en/products/product-line/modeling-and-visualization-software/microstation</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -45,7 +45,8 @@
       <InternalSignature>
         <SignatureID>1741</SignatureID>
         <SignatureName>MicroStation Base File</SignatureName>
-        <SignatureNote>BOF offset 824- 3616  'HPT_DD_IGDS:FONTLIB'.</SignatureNote>
+        <SignatureNote>Absolute from BOF offset 824- 3616, magic bytes:
+'HPT_DD_IGDS:FONTLIB'.{32600-33200}DGN-Titles</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>2019</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -57,9 +58,16 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>4850545F44445F494744533A464F4E544C4942</ByteSequenceValue>
+          <ByteSequenceValue>4850545F44445F494744533A464F4E544C4942{32600-33200}44474E2D5469746C6573</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2374</RelatedFormatID>
+        <RelatedFormatName>Bentley Microstation Hidden Line File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

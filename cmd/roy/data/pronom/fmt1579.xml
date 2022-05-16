@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2404</FormatID>
+      <FormatName>SPYne Containers</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>
+      </FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>SPYne containers were created by John Lannetta c1995 and are found in Compuserve's CBM applications forum and in COMP.BINARIES.CBM newsgroup. The format is self-extracting and does not employ any compression. The word "SPYNE" does not represent any acronym, but is meant to represent a "spine", with files linked together like a human spine.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>04 Jan 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>04 Jan 2022</LastUpdatedDate>
+      <FormatNote>https://ist.uwaterloo.ca/~schepers/formats/SPYNE.TXT
+
+https://cbm8bit.com/articles/user-contributions/archival_formats</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1579</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>108</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Compuserve Incorporated</OrganisationName>
+        <DeveloperCompoundName>Compuserve Incorporated</DeveloperCompoundName>
+      </Developers>
+      <ExternalSignature>
+        <ExternalSignatureID>2864</ExternalSignatureID>
+        <Signature>spy</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1929</SignatureID>
+        <SignatureName>SPY (SPYne Containers)</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 0xA70220A0E5A90A8D</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2231</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>A70220A0E5A90A8D</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

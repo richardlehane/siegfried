@@ -4,17 +4,15 @@
     <FileFormat>
       <FormatID>2002</FormatID>
       <FormatName>Adobe InDesign Library</FormatName>
-      <FormatVersion>
-      </FormatVersion>
+      <FormatVersion>4</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>
-      </FormatTypes>
+      <FormatTypes>Aggregate</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>An InDesign Library is used to collect assets and other elements within Adobe InDesign that can then be shared across multiple projects. PRONOM currently doesn't distinguish between different format versions of INDB. Please let the PRONOM team know if this is desirable.</FormatDescription>
+      <FormatDescription>Adobe InDesign is a desktop publishing application developed and produced by Adobe Inc., first released in 1999. It is the successor to PageMaker, software previously created by Aldus Corporation in 1985, which was subsequently acquired by Adobe. It can be used to produce a number of works such as posters, flyers, brochures, magazines, newspapers, presentations and books. InDesign supports XML, stylesheets and other coding markup, providing functionality for exporting tagged text content for use in other digital and online formats. An InDesign Library is used to collect assets and other elements within Adobe InDesign that can then be shared across multiple projects.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -23,14 +21,13 @@
       </ReleaseDate>
       <WithdrawnDate>
       </WithdrawnDate>
-      <ProvenanceSourceID>236</ProvenanceSourceID>
-      <ProvenanceName>Victoria University of Wellington / Victoria University of Wellington</ProvenanceName>
+      <ProvenanceSourceID>239</ProvenanceSourceID>
+      <ProvenanceName>The National Archives of Estonia / The National Archives of Estonia</ProvenanceName>
       <ProvenanceSourceDate>10 Aug 2018</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>10 Aug 2018</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>24 Feb 2022</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/InDesign_Library</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -60,7 +57,7 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>1570</SignatureID>
-        <SignatureName>Adobe InDesign Library</SignatureName>
+        <SignatureName>Adobe InDesign Library 4</SignatureName>
         <SignatureNote>BOF: 16-byte GUID: 0606EDF5-D81D-46e5-BD31-EFE7FE74B71D; 8-byte string File Type: LIBRARY4;</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1841</ByteSequenceID>
@@ -76,6 +73,12 @@
           <ByteSequenceValue>0606EDF5D81D46E5BD31EFE7FE74B71D4C49425241525934</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>2469</RelatedFormatID>
+        <RelatedFormatName>Adobe InDesign Library</RelatedFormatName>
+        <RelatedFormatVersion>2</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

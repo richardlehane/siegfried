@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2401</FormatID>
+      <FormatName>Spectrum 512 Uncompressed | Spectrum 512 Uncompressed Enhanced</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Raster)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Spectrum 512 was a computer paint program by Boris Tsikanovsky that enabled the creation of images with more than 16 simultaneous colors. It uses the Atari ST's rapid palette switching ability to expand the maximum number of colors to be displayed on-screen at once to 512 (up to 46 in each scan line). Spectrum 512 is a predecessor of Unispec.
+
+This specific file format record details Spectrum 512 uncompressed formats. There are two varieties of uncompression in Spectrum 512 formats, first is Spectrum 512 Uncompressed and second Spectrum 512 Uncompressed Enhanced. Both of these formats have an unidentifiable file format signiture (magic bytes) and have the same extension. In the uncompressed files, the first 160 bytes are usually set to zero (except in the "Enhanced" variant). Following that are 31840 bytes of image data (160 for each row). Following that are 19104 bytes of palette data. The total file size is 51104 bytes. The Spectrum 512 Uncompressed Enhanced format extends the palette further, to 5 bits per color channel.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>04 Jan 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>04 Jan 2022</LastUpdatedDate>
+      <FormatNote>https://doudoroff.com/atari/spectrum.html
+
+https://temlib.org/AtariForumWiki/index.php/Spectrum_512_file_format
+
+https://temlib.org/AtariForumWiki/index.php/Spectrum_512_Enhanced_file_format
+
+https://en.wikipedia.org/wiki/Atari_ST
+
+http://www.atarimania.com/utility-atari-st-spectrum-512_22312.html
+
+http://fileformats.archiveteam.org/wiki/Spectrum_512_formats</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1576</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2861</ExternalSignatureID>
+        <Signature>spu</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>687</RelatedFormatID>
+        <RelatedFormatName>MPEG 1/2 Audio Layer 3</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

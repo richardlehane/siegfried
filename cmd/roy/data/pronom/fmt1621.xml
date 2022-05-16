@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2448</FormatID>
+      <FormatName>AHX-Module Format (formerly THX module format)</FormatName>
+      <FormatVersion>0-2</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Audio</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Music files created using AHX (Abyss' Highest Experience) software, which is used to create synthesised music similar to that played on Commodore 64 systems. The software was previously known as THX, but was changed after a legal dispute with LucasFilm.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>17 Feb 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>Abyss' Highest Experience homepage: http://amigascne.org/abyss/ahx/</ProvenanceDescription>
+      <LastUpdatedDate>17 Feb 2022</LastUpdatedDate>
+      <FormatNote>Specification:  http://ftp.modland.com/pub/documents/format_documentation/Abyss%27%20Highest%20eXperience%20(.ahx).txt
+
+http://fileformats.archiveteam.org/wiki/AHX_(Abyss)</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1621</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2914</ExternalSignatureID>
+        <Signature>ahx</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1962</SignatureID>
+        <SignatureName>AHX-Module Format (formerly THX Module Format)</SignatureName>
+        <SignatureNote>BOF offset 0, magic bytes: THX</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2281</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>Little-endian</Endianness>
+          <ByteSequenceValue>544858</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

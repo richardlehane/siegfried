@@ -47,14 +47,13 @@
       <InternalSignature>
         <SignatureID>730</SignatureID>
         <SignatureName>ISO Disk Image File</SignatureName>
-        <SignatureNote>BOF: CD001{1-16384}ÿCD001 with offset of 32769.
+        <SignatureNote>BOF: CD001{1-16384}ÿCD001 with offset of (32700- 37700).
 Beginning at byte 32768, an ISO file will hold two-to-many volume descriptors, each of 2048 bytes and starting with '*CD001', where * represents the volume desciptor type as defined within the specification.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>919</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
-          <Offset>32769</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <Offset>32700</Offset>
+          <MaxOffset>37700</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

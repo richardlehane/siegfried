@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2408</FormatID>
+      <FormatName>SXG (ZX Spectrum) Graphic File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Raster)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>SXG is a graphics format for the ZX Spectrum. SXG stands for "Speccy eXtended Graphic". Speccy is another name Spectrum is commonly known by its fan following. The ZX Spectrum is an 8-bit personal home computer developed by Sinclair Research, pioneered by Clive Sinclair. It was first released in the United Kingdom on 23 April 1982 and went on to become Britain's best-selling microcomputer. Games comprised the majority of commercial ZX Spectrum software. The SXG format was mostly used for graphics in early computer games on ZX Spectrum microcomputers.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>04 Jan 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>04 Jan 2022</LastUpdatedDate>
+      <FormatNote>https://en.wikipedia.org/wiki/ZX_Spectrum
+
+http://fileformats.archiveteam.org/wiki/SXG_(ZX_Spectrum)
+
+http://www.computinghistory.org.uk/det/424/Sinclair-ZX-Spectrum-48k/
+
+https://www.theguardian.com/games/2021/sep/17/clive-sinclair-zx-spectrum-offbeat-brilliance</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1583</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2868</ExternalSignatureID>
+        <Signature>sxg</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1922</SignatureID>
+        <SignatureName>SXG (ZX Spectrum) Graphic File</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: '.SXG.'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2224</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>7F53584703</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

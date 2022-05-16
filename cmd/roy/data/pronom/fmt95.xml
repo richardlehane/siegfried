@@ -22,7 +22,7 @@ PDF/A supports two levels of compliance PDF/A1-a (Accessible) and PDF/A1-b (Basi
       <ProvenanceSourceDate>17 Dec 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>22 Oct 2009</LastUpdatedDate>
+      <LastUpdatedDate>11 Feb 2022</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -86,8 +86,7 @@ PDF/A supports two levels of compliance PDF/A1-a (Accessible) and PDF/A1-b (Basi
           <ByteSequenceID>336</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>144</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
@@ -107,7 +106,40 @@ PDF/A supports two levels of compliance PDF/A1-a (Accessible) and PDF/A1-b (Basi
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>Little-endian</Endianness>
-          <ByteSequenceValue>786D6C6E733A7064666169643D(22|27)687474703A2F2F7777772E6169696D2E6F72672F706466612F6E732F6964*7064666169643A70617274(3D22|3D27|3E)31(22|27|3C2F7064666169643A706172743E){0-11}7064666169643A636F6E666F726D616E6365(3E|3D22|3D27)41(22|27|3C2F7064666169643A636F6E666F726D616E63653E)</ByteSequenceValue>
+          <ByteSequenceValue>786D6C6E733A7064666169643D(22|27)687474703A2F2F7777772E6169696D2E6F72672F706466612F6E732F6964*7064666169643A70617274(3D22|3D27|3E)31(22|27|3C2F7064666169643A706172743E){0-120}7064666169643A636F6E666F726D616E6365(3E|3D22|3D27)41(22|27|3C2F7064666169643A636F6E666F726D616E63653E)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>1954</SignatureID>
+        <SignatureName>PDF/A-1A 2</SignatureName>
+        <SignatureNote>Describes a signature for the PDF/A-1a form. Identifies the byte sequence which equals - xmlns:pdfaid="http://www.aiim.org/pdfa/ns/id/ which is the PDF/A identification namespace within the PDF/A meta-data, followed by &lt;pdfaid:conformance&gt;A&lt;pdfaid:conformance&gt;and &lt;pdfaid:part&gt;1&lt;pdfaid:part&gt;, and which are the two mandatory elements and values for PDFA/1a. See ISO 19005-1:2005 and Technical Corrigendum 1 for further information.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2265</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>144</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>255044462D312E[30:37]</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>2266</ByteSequenceID>
+          <PositionType>Variable</PositionType>
+          <Offset>
+          </Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>786D6C6E733A7064666169643D(22|27)687474703A2F2F7777772E6169696D2E6F72672F706466612F6E732F6964*7064666169643A636F6E666F726D616E6365(3E|3D22|3D27)41(22|27|3C2F7064666169643A636F6E666F726D616E63653E){0-120}7064666169643A70617274(3D22|3D27|3E)31(22|27|3C2F7064666169643A706172743E)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

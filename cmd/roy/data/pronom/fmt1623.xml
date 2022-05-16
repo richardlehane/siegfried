@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2450</FormatID>
+      <FormatName>Art Of Noise</FormatName>
+      <FormatVersion>4 Channel Module</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Audio</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Aon files produced by ArtOfNoise music tracker software, freeware which was available on the Commodore Amiga. It was intended to be a soundtracker suited to synthetic songs, with a wider range of instruments and effects than comparable software. Originally made in 4 channel mode, a later 8 channel version was produced.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>17 Feb 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>17 Feb 2022</LastUpdatedDate>
+      <FormatNote>Specification: https://ftp.modland.com/pub/documents/format_documentation/Art%20Of%20Noise%20(.aon).txt
+
+Samples:
+https://ftp.modland.com/pub/modules/Art%20Of%20Noise/</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1623</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2916</ExternalSignatureID>
+        <Signature>aon</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1964</SignatureID>
+        <SignatureName>Art Of Noise - 4 Channel Module</SignatureName>
+        <SignatureNote>BOF Absolute from beginning of file, magic bytes: AON4</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2283</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>414F4E34</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

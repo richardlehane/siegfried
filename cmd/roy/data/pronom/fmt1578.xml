@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2403</FormatID>
+      <FormatName>Spectrum 512 Extended</FormatName>
+      <FormatVersion>2</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Raster)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Spectrum 512 was a computer paint program by Boris Tsikanovsky that enabled the creation of images with more than 16 simultaneous colors. 
+It uses the Atari ST's rapid palette switching ability to expand the maximum number of colors to be displayed on-screen at once to 512 (up to 46 in each scan line). Spectrum 512 is a predecessor of Unispec.
+
+Spectrum 512 Extended (spx) files are extended Spectrum files with more than 200 lines in the picture, designed by Gizmo of Electronic Images. With a SPX creator like SPXCRT14.PRG multiple spectrum pictures can be attached to become one big .SPX file. There are two known versions of the format. This record details Version 2, files of this format (as compared to Version 1) can be packed as a whole, including the header, with either Ice 2.10 or Atomik 3.5. Both versions support larger pictures in Spectrum 512.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>04 Jan 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>04 Jan 2022</LastUpdatedDate>
+      <FormatNote>https://doudoroff.com/atari/spectrum.html
+
+https://temlib.org/AtariForumWiki/index.php/Spectrum_512_Extended_file_format
+
+https://en.wikipedia.org/wiki/Atari_ST
+
+http://www.atarimania.com/utility-atari-st-spectrum-512_22312.html
+
+http://fileformats.archiveteam.org/wiki/Spectrum_512_formats</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1578</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2863</ExternalSignatureID>
+        <Signature>spx</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1918</SignatureID>
+        <SignatureName>Spectrum 512 Extended v2</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 'SPX.'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2220</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>53505802</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>2402</RelatedFormatID>
+        <RelatedFormatName>Spectrum 512 Extended</RelatedFormatName>
+        <RelatedFormatVersion>1</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

@@ -11,7 +11,7 @@
       </FormatFamilies>
       <FormatTypes>Presentation</FormatTypes>
       <FormatDisclosure>Full</FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Adobe InDesign is a desktop publishing application developed and produced by Adobe Inc., first released in 1999. It is the successor to PageMaker, software previously created by Aldus Corporation in 1985, which was subsequently acquired by Adobe. It can be used to produce a number of works such as posters, flyers, brochures, magazines, newspapers, presentations and books. InDesign supports XML, stylesheets and other coding markup, providing functionality for exporting tagged text content for use in other digital and online formats.</FormatDescription>
       <BinaryFileFormat>Binary</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -24,9 +24,8 @@
       <ProvenanceSourceDate>06 Apr 2009</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>19 Jul 2013</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>24 Feb 2022</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/InDesign_INDD</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -61,6 +60,11 @@
       <ExternalSignature>
         <ExternalSignatureID>859</ExternalSignatureID>
         <Signature>indd</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2966</ExternalSignatureID>
+        <Signature>indt</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <InternalSignature>
@@ -116,6 +120,78 @@
         <RelatedFormatID>1340</RelatedFormatID>
         <RelatedFormatName>Adobe InDesign Document</RelatedFormatName>
         <RelatedFormatVersion>CS6</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2455</RelatedFormatID>
+        <RelatedFormatName>Adobe InDesign Document</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2457</RelatedFormatID>
+        <RelatedFormatName>Adobe InDesign Document</RelatedFormatName>
+        <RelatedFormatVersion>2.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2458</RelatedFormatID>
+        <RelatedFormatName>Adobe InDesign Document</RelatedFormatName>
+        <RelatedFormatVersion>CS5.5</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2459</RelatedFormatID>
+        <RelatedFormatName>Adobe InDesign Document</RelatedFormatName>
+        <RelatedFormatVersion>CC</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2460</RelatedFormatID>
+        <RelatedFormatName>Adobe InDesign Document</RelatedFormatName>
+        <RelatedFormatVersion>CC 2014</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2461</RelatedFormatID>
+        <RelatedFormatName>Adobe InDesign Document</RelatedFormatName>
+        <RelatedFormatVersion>CC 2015</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2462</RelatedFormatID>
+        <RelatedFormatName>Adobe InDesign Document</RelatedFormatName>
+        <RelatedFormatVersion>CC 2017</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2463</RelatedFormatID>
+        <RelatedFormatName>Adobe InDesign Document</RelatedFormatName>
+        <RelatedFormatVersion>CC 2018</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2464</RelatedFormatID>
+        <RelatedFormatName>Adobe InDesign Document</RelatedFormatName>
+        <RelatedFormatVersion>CC 2019</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2465</RelatedFormatID>
+        <RelatedFormatName>Adobe InDesign Document</RelatedFormatName>
+        <RelatedFormatVersion>CC 2020</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2466</RelatedFormatID>
+        <RelatedFormatName>Adobe InDesign Document</RelatedFormatName>
+        <RelatedFormatVersion>CC 2021</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2467</RelatedFormatID>
+        <RelatedFormatName>Adobe InDesign Document</RelatedFormatName>
+        <RelatedFormatVersion>CC 2022</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>

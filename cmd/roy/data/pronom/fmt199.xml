@@ -103,6 +103,12 @@
         </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2422</RelatedFormatID>
+        <RelatedFormatName>Canon Raw</RelatedFormatName>
+        <RelatedFormatVersion>3.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>658</RelatedFormatID>
         <RelatedFormatName>Quicktime</RelatedFormatName>

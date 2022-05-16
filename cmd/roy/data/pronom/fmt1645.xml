@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2472</FormatID>
+      <FormatName>Roxio Label Creator Project File</FormatName>
+      <FormatVersion>6-7</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Roxio Label Creator Project File is format used for storing project files produced by Roxio's Label Creator software, a software used for creating designs intended for jewel cases and disc labels. There are several known versions of this format with earlier versions being stored as OLE2 container format, such as the one this record describes.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>221</ProvenanceSourceID>
+      <ProvenanceName>Esri / Esri</ProvenanceName>
+      <ProvenanceSourceDate>25 Feb 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
+      <LastUpdatedDate>25 Feb 2022</LastUpdatedDate>
+      <FormatNote>https://archive.org/details/roxio_label_creator/04_roxio_cd_label_creator.jpeg
+
+http://fileformats.archiveteam.org/wiki/JWL</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1645</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2961</ExternalSignatureID>
+        <Signature>jwl</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>767</RelatedFormatID>
+        <RelatedFormatName>OLE2 Compound Document Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>2473</RelatedFormatID>
+        <RelatedFormatName>Roxio Label Creator Project File</RelatedFormatName>
+        <RelatedFormatVersion>8-11</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>2471</RelatedFormatID>
+        <RelatedFormatName>Roxio Label Creator Project File</RelatedFormatName>
+        <RelatedFormatVersion>4-5</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

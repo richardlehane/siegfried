@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2456</FormatID>
+      <FormatName>Adobe InDesign Document</FormatName>
+      <FormatVersion>1.5</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Presentation</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Adobe InDesign is a desktop publishing application developed and produced by Adobe Inc., first released in 1999. It is the successor to PageMaker, software previously created by Aldus Corporation in 1985, which was subsequently acquired by Adobe. It can be used to produce a number of works such as posters, flyers, brochures, magazines, newspapers, presentations and books. InDesign supports XML, stylesheets and other coding markup, providing functionality for exporting tagged text content for use in other digital and online formats.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>24 Feb 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>24 Feb 2022</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/InDesign_INDD</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1629</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2923</ExternalSignatureID>
+        <Signature>indd</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2924</ExternalSignatureID>
+        <Signature>ind</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2925</ExternalSignatureID>
+        <Signature>indt</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1969</SignatureID>
+        <SignatureName>Adobe InDesign Document 1.5</SignatureName>
+        <SignatureNote>BOF, Offset=92:'DOCUMENT' followed by either 0x01 (Start of Header) or 0x02 (Start of Text) followed by a fixed gap of 4 followed by either 0x01000000 (Start of Header followed by 3 x Null) or 0x00000001 (3 x Null followed by Start of Header) followed by 0x05 (Enquiry)</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2288</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>92</Offset>
+          <MaxOffset>92</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>444F43554D454E54(01|02){4}(01000000|00000001)05</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2455</RelatedFormatID>
+        <RelatedFormatName>Adobe InDesign Document</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>2457</RelatedFormatID>
+        <RelatedFormatName>Adobe InDesign Document</RelatedFormatName>
+        <RelatedFormatVersion>2.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>2455</RelatedFormatID>
+        <RelatedFormatName>Adobe InDesign Document</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

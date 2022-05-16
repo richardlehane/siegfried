@@ -191,6 +191,18 @@
         <RelatedFormatVersion>97-2003</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2471</RelatedFormatID>
+        <RelatedFormatName>Roxio Label Creator Project File</RelatedFormatName>
+        <RelatedFormatVersion>4-5</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2472</RelatedFormatID>
+        <RelatedFormatName>Roxio Label Creator Project File</RelatedFormatName>
+        <RelatedFormatVersion>6-7</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Is supertype of</RelationshipType>
         <RelatedFormatID>134</RelatedFormatID>
         <RelatedFormatName>Microsoft Powerpoint Presentation</RelatedFormatName>

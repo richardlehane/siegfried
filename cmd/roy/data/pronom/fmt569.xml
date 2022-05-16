@@ -26,7 +26,7 @@ The EBML specifications are work-in-progress, and can be found here: https://git
       <ProvenanceSourceDate>19 Jul 2013</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>09 Dec 2021</LastUpdatedDate>
+      <LastUpdatedDate>03 Feb 2022</LastUpdatedDate>
       <FormatNote>Format specification: https://matroska.org/technical/specs/index.html</FormatNote>
       <FormatRisk>
       </FormatRisk>
@@ -91,7 +91,7 @@ The EBML specifications are work-in-progress, and can be found here: https://git
         <ReferenceFileNote>
         </ReferenceFileNote>
         <ReferenceFileIdentifier>
-          <Identifier>http://www.matroska.org/downloads/test_w1.html</Identifier>
+          <Identifier>https://www.matroska.org/downloads/test_suite.html</Identifier>
           <IdentifierType>URL</IdentifierType>
         </ReferenceFileIdentifier>
       </ReferenceFile>

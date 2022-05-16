@@ -422,6 +422,20 @@
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2400</RelatedFormatID>
+        <RelatedFormatName>Spectrum 512 Compressed | Spectrum 512 Smooshed</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2401</RelatedFormatID>
+        <RelatedFormatName>Spectrum 512 Uncompressed | Spectrum 512 Uncompressed Enhanced</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

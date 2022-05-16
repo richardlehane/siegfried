@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2441</FormatID>
+      <FormatName>Esri ArcExplorer project file</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>
+      </FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>ArcExplorer is a viewer and organiser for maps, which enables the user to access information about an area including GIS (Geographic Information System) data. The .aep project file is used to save user projects, including custom maps, comments, sketches and other GIS data. ArcExplorer has been superseded by ArcGIS Explorer.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>234</ProvenanceSourceID>
+      <ProvenanceName>National Library of Australia / National Library of Australia</ProvenanceName>
+      <ProvenanceSourceDate>03 Feb 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>03 Feb 2022</LastUpdatedDate>
+      <FormatNote>https://www.esri.com/en-us/arcgis/products/arcgis-field-maps/overview</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1614</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Support>
+        <SupportID>221</SupportID>
+        <SupportName>Esri</SupportName>
+        <OrganisationName>Esri</OrganisationName>
+        <SupportCompoundName>Esri / Esri</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2904</ExternalSignatureID>
+        <Signature>aep</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1949</SignatureID>
+        <SignatureName>Esri ArcExplorer project file</SignatureName>
+        <SignatureNote>BOF, offset 0, magic bytes: [ARCEXPLORER]</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2256</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>5B4152434558504C4F5245525D</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>
