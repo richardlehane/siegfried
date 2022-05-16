@@ -84,7 +84,7 @@ func Add(c core.Matcher, ss core.SignatureSet, l priority.List) (core.Matcher, i
 	}
 	sigs, ok := ss.(SignatureSet)
 	if !ok {
-		return nil, 0, fmt.Errorf("Container matcher error: cannot convert signature set to CM signature set")
+		return nil, 0, fmt.Errorf("container matcher error: cannot convert signature set to CM signature set")
 	}
 	err := m.addSigs(int(sigs.Typ), sigs.NameParts, sigs.SigParts, l)
 	if err != nil {
@@ -108,11 +108,11 @@ func (m Matcher) total(i int) int {
 
 func (m Matcher) addSigs(i int, nameParts [][]string, sigParts [][]frames.Signature, l priority.List) error {
 	if len(m) < i+1 {
-		return fmt.Errorf("Container: missing container matcher")
+		return fmt.Errorf("container: missing container matcher")
 	}
 	var err error
 	if len(nameParts) != len(sigParts) {
-		return fmt.Errorf("Container: expecting equal name and persist parts")
+		return fmt.Errorf("container: expecting equal name and persist parts")
 	}
 	// give as a starting index the current total of signatures in the matcher, except those in the ContainerMatcher in question
 	m[i].startIndexes = append(m[i].startIndexes, m.total(i))
@@ -237,7 +237,7 @@ func newMscfb() *ContainerMatcher {
 
 func (c *ContainerMatcher) addSignature(nameParts []string, sigParts []frames.Signature) error {
 	if len(nameParts) != len(sigParts) {
-		return errors.New("Container matcher: nameParts and sigParts must be equal")
+		return errors.New("container matcher: nameParts and sigParts must be equal")
 	}
 	c.parts = append(c.parts, len(nameParts))
 	for i, nm := range nameParts {
