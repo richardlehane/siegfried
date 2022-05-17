@@ -12,6 +12,7 @@
     "x-fmt/416 (BinHex Binary Text)",
     "x-fmt/429 (MHTML)",
     "fmt/189 (Microsoft Office Open XML 2007 onwards)",
+    "fmt/208 (Binary File)",
     "fmt/289 (WARC)",
     "fmt/329 (Shell Archive Format)",
     "fmt/364 (National Imagery Transmission Format 1.0)",
@@ -46,6 +47,7 @@
     "fmt/1102 (Uuencoded File)",
     "fmt/1105 (Hierarchical File System)",
     "fmt/1190 (Adobe SWC Package)",
+    "fmt/1192 (Adobe InDesign Library 4)",
     "fmt/1242 (ZFO (Form) File)",
     "fmt/1243 (ZFO (Message) File)",
     "fmt/1244 (ZFO (Sent Message) File)",
@@ -69,7 +71,11 @@
     "fmt/1563 (ERDAS Imagine Large Raster Spill File)",
     "fmt/1564 (Associated Signature Container Extended (ASiC-E))",
     "fmt/1568 (ISDOCX Information System Document (Generic) 5.x)",
-    "fmt/1571 (ISDOCX Information System Document 6.0.1)"
+    "fmt/1571 (ISDOCX Information System Document 6.0.1)",
+    "fmt/1609 (exFAT (extensible File Allocation Table) disc image)",
+    "fmt/1642 (Adobe InDesign Library 2)",
+    "fmt/1644 (Roxio Label Creator Project File 4-5)",
+    "fmt/1645 (Roxio Label Creator Project File 6-7)"
   ],
   "audio": [
     "x-fmt/135 (Audio Interchange File Format 1.3)",
@@ -176,7 +182,12 @@
     "fmt/1499 (Adobe Audition Session File XML)",
     "fmt/1552 (Surprise! Adlib Tracker v2.0 2.0)",
     "fmt/1559 (Beam Software SIFF File)",
-    "fmt/1560 (Sample Vision Audio File Format)"
+    "fmt/1560 (Sample Vision Audio File Format)",
+    "fmt/1620 (Aero Studio Song)",
+    "fmt/1621 (AHX-Module Format (formerly THX module format) 0-2)",
+    "fmt/1622 (Asylum Music Format)",
+    "fmt/1623 (Art Of Noise 4 Channel Module)",
+    "fmt/1624 (Art Of Noise 8 Channel Module)"
   ],
   "database": [
     "x-fmt/6 (FoxPro Database 2.0)",
@@ -251,7 +262,7 @@
     "fmt/393 (Borland Reflex flat datafile)",
     "fmt/424 (OpenDocument Database Format 1.2)",
     "fmt/444 (OpenDocument Database Format 1.1)",
-    "fmt/462 (MS DOS Compression format)",
+    "fmt/462 (MS-DOS Compression Format (SZDD Variant))",
     "fmt/510 (PowerProject Teamplan)",
     "fmt/511 (PowerProject 7)",
     "fmt/512 (PowerProject 8)",
@@ -335,7 +346,7 @@
     "fmt/608 (Statistical Analysis System Data (Unix) 9.1)",
     "fmt/638 (SPSS Data File)",
     "fmt/798 (The Neuroimaging Informatics Technology Initiative File Format 1)",
-    "fmt/828 (MATLAB Mat file Level 7.3)",
+    "fmt/828 (MATLAB Mat File Level 7.3)",
     "fmt/854 (Personal Ancestral File (PAF) 3)",
     "fmt/855 (Personal Ancestral File (PAF) 4)",
     "fmt/856 (Personal Ancestral File (PAF) 5)",
@@ -450,7 +461,8 @@
     "fmt/1384 (Embedded OpenType (EOT) File Format 0x00020002)",
     "fmt/1546 (Daisy-Dot Font File I and II)",
     "fmt/1547 (Daisy-Dot Font File III)",
-    "fmt/1569 (Bitstream Speedo Fonts)"
+    "fmt/1569 (Bitstream Speedo Fonts)",
+    "fmt/1581 (Envision Publisher font files)"
   ],
   "gis": [
     "x-fmt/225 (ESRI MapInfo Data File)",
@@ -717,7 +729,24 @@
     "fmt/1538 (CompuServe RLE)",
     "fmt/1539 (Raster Matrix Format)",
     "fmt/1557 (Cyber Paint Sequence)",
-    "fmt/1561 (SpritePad Image Format)"
+    "fmt/1561 (SpritePad Image Format)",
+    "fmt/1575 (Spectrum 512 Compressed | Spectrum 512 Smooshed)",
+    "fmt/1576 (Spectrum 512 Uncompressed | Spectrum 512 Uncompressed Enhanced)",
+    "fmt/1577 (Spectrum 512 Extended 1)",
+    "fmt/1578 (Spectrum 512 Extended 2)",
+    "fmt/1583 (SXG (ZX Spectrum) Graphic File)",
+    "fmt/1586 (TheDraw Save File)",
+    "fmt/1587 (COKE format (Atari Falcon))",
+    "fmt/1589 (Taquart Interlace Picture)",
+    "fmt/1595 (Canon Raw 3.0)",
+    "fmt/1603 (TUNDRA)",
+    "fmt/1604 (EggPaint (Atari Falcon))",
+    "fmt/1605 (True Colour Sprites [Spooky Sprites] (Atari Falcon))",
+    "fmt/1606 (Packed-Ice True Colour Sprites [Spooky Sprites] (Atari Falcon))",
+    "fmt/1607 (True Colour Picture [Spooky Sprites] (Atari Falcon))",
+    "fmt/1608 (Packed-Ice True Colour Picture [Spooky Sprites] (Atari Falcon))",
+    "fmt/1610 (Viacom New Media Graphics)",
+    "fmt/1625 (ESRI Colour File Format)"
   ],
   "imageVector": [
     "x-fmt/20 (Adobe Illustrator 1.0 / 1.1)",
@@ -942,7 +971,7 @@
     "x-fmt/434 (3DM 2)",
     "x-fmt/435 (3DM 3)",
     "x-fmt/436 (CATIA Model 4)",
-    "x-fmt/438 (CATIA 5)",
+    "x-fmt/438 (CATIA Material Description 5)",
     "x-fmt/439 (CATIA Model (Part Description) 5)",
     "x-fmt/451 (SketchUp Document)",
     "fmt/415 (Cinema 4D 4.x)",
@@ -1049,7 +1078,8 @@
     "fmt/1502 (Agisoft Project Archive)",
     "fmt/1504 (Agisoft Tiled Model)",
     "fmt/1549 (Bentley Microstation Hidden Line File)",
-    "fmt/1562 (AutoDesk Indexed Point Cloud)"
+    "fmt/1562 (AutoDesk Indexed Point Cloud)",
+    "fmt/1615 (CATIA Drawing 5)"
   ],
   "pageDescription": [
     "fmt/122 (Encapsulated PostScript File Format 1.2)",
@@ -1233,7 +1263,20 @@
     "fmt/1513 (Microsoft Publisher 2007)",
     "fmt/1514 (Microsoft Publisher 2010)",
     "fmt/1515 (Microsoft Publisher 2013)",
-    "fmt/1516 (Microsoft Publisher 2016-2019)"
+    "fmt/1516 (Microsoft Publisher 2016-2019)",
+    "fmt/1628 (Adobe InDesign Document 1.0)",
+    "fmt/1629 (Adobe InDesign Document 1.5)",
+    "fmt/1630 (Adobe InDesign Document 2.0)",
+    "fmt/1631 (Adobe InDesign Document CS5.5)",
+    "fmt/1632 (Adobe InDesign Document CC)",
+    "fmt/1633 (Adobe InDesign Document CC 2014)",
+    "fmt/1634 (Adobe InDesign Document CC 2015)",
+    "fmt/1635 (Adobe InDesign Document CC 2017)",
+    "fmt/1636 (Adobe InDesign Document CC 2018)",
+    "fmt/1637 (Adobe InDesign Document CC 2019)",
+    "fmt/1638 (Adobe InDesign Document CC 2020)",
+    "fmt/1639 (Adobe InDesign Document CC 2021)",
+    "fmt/1640 (Adobe InDesign Document CC 2022)"
   ],
   "spreadsheet": [
     "x-fmt/17 (Microsoft Excel Template 97-2003)",
@@ -1304,7 +1347,9 @@
     "fmt/1441 (Apple iWork Document 14)",
     "fmt/1452 (Lotus 1-2-3 Worksheet 97)",
     "fmt/1453 (Lotus 1-2-3 Worksheet 9.8 Millennium)",
-    "fmt/1457 (OrgPlus File)"
+    "fmt/1457 (OrgPlus File)",
+    "fmt/1580 (Envision Publisher file)",
+    "fmt/1585 (TurboCalc Document)"
   ],
   "textMarkup": [
     "x-fmt/195 (Standard Generalized Markup Language)",
@@ -1387,7 +1432,10 @@
     "fmt/1503 (Agisoft Project File)",
     "fmt/1565 (reStructuredText)",
     "fmt/1567 (ISDOC Information System Document (Generic) 5.x)",
-    "fmt/1570 (ISDOC Information System Document 6.0.1)"
+    "fmt/1570 (ISDOC Information System Document 6.0.1)",
+    "fmt/1613 (XML Shareable Playlist Format)",
+    "fmt/1618 (SGML/XML Entity File)",
+    "fmt/1641 (Adobe InDesign Interchange Document)"
   ],
   "textStructured": [
     "x-fmt/41 (Data Interchange Format)",
@@ -1493,7 +1541,21 @@
     "fmt/1555 (Standard Data Format)",
     "fmt/1558 (SelF-eXtracting LHA/LZH Compressed Files)",
     "fmt/1566 (ColdFusion Markup Language)",
-    "fmt/1572 (OrCAD Project File)"
+    "fmt/1572 (OrCAD Project File)",
+    "fmt/1573 (Visual Basic Project File 1-6)",
+    "fmt/1574 (Visual Basic Project Workspace File 1-6)",
+    "fmt/1582 (Vim SWAP File)",
+    "fmt/1584 (ADRIFT Text Adventure File)",
+    "fmt/1591 (ESRI ArcInfo Coverage Annotation File)",
+    "fmt/1592 (ASEG-GDF2 Description file)",
+    "fmt/1593 (ASEG-GDF2- Data definition file)",
+    "fmt/1594 (ESRI ArcInfo .dat file (external))",
+    "fmt/1596 (ESRI ArcInfo Grid .nit File)",
+    "fmt/1600 (ESRI ArcInfo DAT File (internal))",
+    "fmt/1626 (MicroStation Symbology Resource File)",
+    "fmt/1627 (Z Print Build File)",
+    "fmt/1646 (Roxio Label Creator Project File 8-11)",
+    "fmt/1647 (Inspiration Software File)"
   ],
   "textUnstructured": [
     "x-fmt/14 (Macintosh Text File)",
@@ -1512,7 +1574,14 @@
     "fmt/1542 (Visual Basic Form File 3 or earlier)",
     "fmt/1543 (ELAN Annotation File)",
     "fmt/1548 (Visual Basics MAK File 3 or earlier)",
-    "fmt/1550 (MATLAB Mat File Level 4)"
+    "fmt/1550 (MATLAB Mat File Level 4)",
+    "fmt/1590 (Visual Basic Binary Form file)",
+    "fmt/1597 (PageMaker template file 5.0)",
+    "fmt/1598 (Stata .do command file)",
+    "fmt/1599 (R program file)",
+    "fmt/1612 (XBIN (eXtended BIN))",
+    "fmt/1616 (BibTeX Database File)",
+    "fmt/1619 (Pascal Source Code)"
   ],
   "video": [
     "x-fmt/152 (Digital Video)",
@@ -1555,7 +1624,8 @@
     "fmt/1387 (Muvee autoProducer Project File 6)",
     "fmt/1388 (Muvee Reveal Project File)",
     "fmt/1488 (Phantom CINE Video File)",
-    "fmt/1489 (Phantom CINE Compressed Video File)"
+    "fmt/1489 (Phantom CINE Compressed Video File)",
+    "fmt/1643 (Lenel Network Video Recorder File)"
   ],
   "wordProcessor": [
     "x-fmt/1 (Microsoft Word for Macintosh Document 3.0)",
