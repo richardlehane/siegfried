@@ -188,11 +188,22 @@ func (s *Siegfried) SaveWriter(w io.Writer) error {
 // Load creates a Siegfried struct and loads content from path
 func Load(path string) (*Siegfried, error) {
 	errOpening := "siegfried: error opening signature file, got %v; try running `sf -update`"
-	errNotSig := "siegfried: not a siegfried signature file; try running `sf -update`"
-	errUpdateSig := "siegfried: signature file is incompatible with this version of sf; try running `sf -update`"
-	fbuf, err := ioutil.ReadFile(path)
+	f, err := os.Open(path)
 	if err != nil {
 		return nil, fmt.Errorf(errOpening, err)
+	}
+	defer f.Close()
+	return LoadReader(f)
+}
+
+// LoadReader creates a Siegfried struct and loads content from a reader
+func LoadReader(r io.Reader) (*Siegfried, error) {
+	errReading := "siegfried: error reading signature file, got %v; try running `sf -update`"
+	errNotSig := "siegfried: not a siegfried signature file; try running `sf -update`"
+	errUpdateSig := "siegfried: signature file is incompatible with this version of sf; try running `sf -update`"
+	fbuf, err := ioutil.ReadAll(r)
+	if err != nil {
+		return nil, err
 	}
 	if len(fbuf) < len(config.Magic())+2 {
 		return nil, fmt.Errorf(errNotSig)
@@ -203,21 +214,12 @@ func Load(path string) (*Siegfried, error) {
 	if major, minor := fbuf[len(config.Magic())], fbuf[len(config.Magic())+1]; major < byte(config.Version()[0]) || (major == byte(config.Version()[0]) && minor < byte(config.Version()[1])) {
 		return nil, fmt.Errorf(errUpdateSig)
 	}
-	r := bytes.NewBuffer(fbuf[len(config.Magic())+2:])
-	rc := flate.NewReader(r)
+	rb := bytes.NewBuffer(fbuf[len(config.Magic())+2:])
+	rc := flate.NewReader(rb)
 	buf, err := ioutil.ReadAll(rc)
 	rc.Close()
 	if err != nil {
-		return nil, fmt.Errorf(errOpening, err)
-	}
-	return load(buf)
-}
-
-// LoadReader creates a Siegfried struct and loads content from a reader
-func LoadReader(r io.Reader) (*Siegfried, error) {
-	buf, err := ioutil.ReadAll(r)
-	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf(errReading, err)
 	}
 	return load(buf)
 }
