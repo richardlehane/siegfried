@@ -1,6 +1,8 @@
 package pronom
 
 import (
+	"encoding/json"
+	"errors"
 	"fmt"
 	"path/filepath"
 	"strings"
@@ -47,5 +49,42 @@ func TestParseDroid(t *testing.T) {
 	}
 	if len(errs) != 0 {
 		t.Skip(strings.Join(errs, "\n"))
+	}
+}
+
+func fiJSON(infos map[string]formatInfo) error {
+	for k, v := range infos {
+		if !json.Valid([]byte("\"" + v.name + "\"")) {
+			return errors.New(k + " has bad JSON: \"" + v.name + "\"")
+		}
+		if !json.Valid([]byte("\"" + v.version + "\"")) {
+			return errors.New(k + " has bad JSON: \"" + v.version + "\"")
+		}
+		if !json.Valid([]byte("\"" + v.mimeType + "\"")) {
+			return errors.New(k + " has bad JSON: \"" + v.mimeType + "\"")
+		}
+	}
+	return nil
+}
+
+// Check for any issues in format infos that would break JSON encoding
+// See: https://github.com/richardlehane/siegfried/issues/186
+func TestJSON(t *testing.T) {
+	config.SetHome(filepath.Join("..", "..", "cmd", "roy", "data"))
+	d, err := newDroid(config.Droid())
+	if err != nil {
+		t.Fatal(err)
+	}
+	err = fiJSON(infos(d.Infos()))
+	if err != nil {
+		t.Fatalf("JSON error in DROID file: %v", err)
+	}
+	r, err := newReports(d.IDs(), d.idsPuids())
+	if err != nil {
+		t.Fatal(err)
+	}
+	err = fiJSON(infos(r.Infos()))
+	if err != nil {
+		t.Fatalf("JSON error in PRONOM reports: %v", err)
 	}
 }

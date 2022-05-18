@@ -118,7 +118,7 @@ func (r *reports) IDs() []string {
 func (r *reports) Infos() map[string]identifier.FormatInfo {
 	infos := make(map[string]identifier.FormatInfo)
 	for i, v := range r.r {
-		infos[r.p[i]] = formatInfo{v.Name, strings.TrimSpace(v.Version), v.MIME()}
+		infos[r.p[i]] = formatInfo{strings.TrimSpace(v.Name), strings.TrimSpace(v.Version), strings.TrimSpace(v.MIME())}
 	}
 	return infos
 }
@@ -223,7 +223,7 @@ func (d *droid) IDs() []string {
 func (d *droid) Infos() map[string]identifier.FormatInfo {
 	infos := make(map[string]identifier.FormatInfo)
 	for _, v := range d.FileFormats {
-		infos[v.Puid] = formatInfo{v.Name, v.Version, v.MIMEType}
+		infos[v.Puid] = formatInfo{strings.TrimSpace(v.Name), strings.TrimSpace(v.Version), strings.TrimSpace(v.MIMEType)}
 	}
 	return infos
 }
