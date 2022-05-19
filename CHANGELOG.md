@@ -1,4 +1,21 @@
 # Change Log
+## v1.9.3 (2022-05-xx)
+### Added
+- JS/WASM build support contributed by [Andy Jackson](https://github.com/richardlehane/siegfried/pull/188)
+- wikidata signature added to `-update`. Contributed by [Ross Spencer](https://github.com/richardlehane/siegfried/pull/178)
+- `-nopronom` flag added to `roy inspect` subcommand. Contributed by [Ross Spencer](https://github.com/richardlehane/siegfried/pull/185)
+
+### Changed
+- update PRONOM to v104
+- update LOC signatures to 2022-05-09
+- update Wikidata to 2022-02-13
+- update tika-mimetypes signatures to v2.4.0
+- update freedesktop.org signatures to v2.2
+
+### Fixed
+- invalid JSON output for fmt/1472 due to tab in MIME. Reported by [Robert Schultz](https://github.com/richardlehane/siegfried/issues/186)
+- panic on corrput Zip containers. Reported by [A. Diamond](https://github.com/richardlehane/siegfried/issues/181)
+
 ## v1.9.2 (2022-02-07)
 ### Added
 - Wikidata definition file specification has been updated and now includes endpoint (users will need to harvest Wikidata again)
@@ -10,8 +27,8 @@
 ### Changed
 - update PRONOM to v100
 - update LOC signatures to 2022-02-01
-- update tika-mimetypes signatures to v2.1
-- update freedesktop.org signatures to v2.2.1
+- update tika-mimetypes signatures to v2.2.1
+- update freedesktop.org signatures to v2.1
 
 ### Fixed
 - parse issues for container files where zero indexing used for Position. Spotted by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/175)
