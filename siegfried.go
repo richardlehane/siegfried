@@ -149,22 +149,21 @@ func (s *Siegfried) Save(path string) error {
 	if err != nil {
 		return err
 	}
-	defer f.Close()
-	_, err = f.Write(append(config.Magic(), byte(config.Version()[0]), byte(config.Version()[1])))
+	err = s.SaveWriter(f)
 	if err != nil {
 		return err
 	}
-	z, err := flate.NewWriter(f, 1)
-	if err != nil {
-		return err
-	}
-	err = s.SaveWriter(z)
-	z.Close()
-	return err
+	return f.Close()
 }
 
 // SaveWriter persists a Siegfried struct to an io.Writer
 func (s *Siegfried) SaveWriter(w io.Writer) error {
+	// sprinkle magic
+	_, err := w.Write(append(config.Magic(), byte(config.Version()[0]), byte(config.Version()[1])))
+	if err != nil {
+		return err
+	}
+	// persist the siegfried
 	ls := persist.NewLoadSaver(nil)
 	ls.SaveTime(s.C)
 	namematcher.Save(s.nm, ls)
@@ -181,19 +180,30 @@ func (s *Siegfried) SaveWriter(w io.Writer) error {
 	if ls.Err != nil {
 		return ls.Err
 	}
-	_, err := w.Write(ls.Bytes())
-	return err
+	// compress
+	z, err := flate.NewWriter(w, 1)
+	if err != nil {
+		return err
+	}
+	_, err = z.Write(ls.Bytes())
+	if err != nil {
+		return err
+	}
+	return z.Close()
 }
 
 // Load creates a Siegfried struct and loads content from path
 func Load(path string) (*Siegfried, error) {
-	errOpening := "siegfried: error opening signature file, got %v; try running `sf -update`"
 	f, err := os.Open(path)
 	if err != nil {
-		return nil, fmt.Errorf(errOpening, err)
+		return nil, fmt.Errorf("siegfried: error opening signature file, got %v; try running `sf -update`", err)
 	}
-	defer f.Close()
-	return LoadReader(f)
+	sf, err := LoadReader(f)
+	if err != nil {
+		return nil, err
+	}
+	return sf, f.Close()
+
 }
 
 // LoadReader creates a Siegfried struct and loads content from a reader
