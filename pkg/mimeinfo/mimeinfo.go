@@ -52,11 +52,15 @@ func newMIMEInfo(path string) (identifier.Parseable, error) {
 		return nil, err
 	}
 	index := make(map[string]int)
+	errs := []string{}
 	for i, v := range mi.MIMETypes {
 		if _, ok := index[v.MIME]; ok {
-			return nil, errors.New("Can't parse mimeinfo file, duplicated ID: " + v.MIME)
+			errs = append(errs, v.MIME)
 		}
 		index[v.MIME] = i
+	}
+	if len(errs) > 0 {
+		return nil, errors.New("Can't parse mimeinfo file, duplicated IDs: " + strings.Join(errs, ", "))
 	}
 	for i, v := range mi.MIMETypes {
 		if len(v.SuperiorClasses) == 1 && v.SuperiorClasses[0].SubClassOf != config.TextMIME() { // subclasses of text/plain shouldn't inherit text magic
