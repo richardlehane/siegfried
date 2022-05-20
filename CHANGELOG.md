@@ -8,7 +8,7 @@
 ### Changed
 - update PRONOM to v104
 - update LOC signatures to 2022-05-09
-- update Wikidata to 2022-02-13
+- update Wikidata to 2022-05-20
 - update tika-mimetypes signatures to v2.4.0
 - update freedesktop.org signatures to v2.2
 

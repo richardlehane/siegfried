@@ -1,3 +1,4 @@
+//go:build ignore
 // +build ignore
 
 // Copyright 2020 Richard Lehane. All rights reserved.
@@ -44,7 +45,6 @@ func main() {
 		makeLoc,
 		makeTika,
 		makeFreedesktop,
-		makePronomTikaLoc,
 		makeDeluxe,
 		makeArchivematica,
 		makeSets,
@@ -103,23 +103,6 @@ func makeFreedesktop() error {
 		return err
 	}
 	return writeSigFile("freedesktop.sig", m)
-}
-
-func makePronomTikaLoc() error {
-	config.SetHome(*genhome)
-	p, err := pronom.New(config.Clear())
-	if err != nil {
-		return err
-	}
-	m, err := mimeinfo.New(config.SetMIMEInfo("tika"))
-	if err != nil {
-		return err
-	}
-	l, err := loc.New(config.SetLOC(""))
-	if err != nil {
-		return err
-	}
-	return writeSigFile("pronom-tika-loc.sig", p, m, l)
 }
 
 func makeDeluxe() error {
