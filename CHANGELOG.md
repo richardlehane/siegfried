@@ -1,5 +1,5 @@
 # Change Log
-## v1.9.3 (2022-05-xx)
+## v1.9.3 (2022-05-23)
 ### Added
 - JS/WASM build support contributed by [Andy Jackson](https://github.com/richardlehane/siegfried/pull/188)
 - wikidata signature added to `-update`. Contributed by [Ross Spencer](https://github.com/richardlehane/siegfried/pull/178)
@@ -13,8 +13,8 @@
 - update freedesktop.org signatures to v2.2
 
 ### Fixed
-- invalid JSON output for fmt/1472 due to tab in MIME. Reported by [Robert Schultz](https://github.com/richardlehane/siegfried/issues/186)
-- panic on corrput Zip containers. Reported by [A. Diamond](https://github.com/richardlehane/siegfried/issues/181)
+- invalid JSON output for fmt/1472 due to tab in MIME field. Reported by [Robert Schultz](https://github.com/richardlehane/siegfried/issues/186)
+- panic on corrupt Zip containers. Reported by [A. Diamond](https://github.com/richardlehane/siegfried/issues/181)
 
 ## v1.9.2 (2022-02-07)
 ### Added
