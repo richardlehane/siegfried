@@ -66,7 +66,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>254120[41:5A]*(0A|0A0D)25(44|54)20([30:39]|[41:5A])</ByteSequenceValue>
+          <ByteSequenceValue>254120[41:5A]{5-50}(0A|0A0D)25(41|42|43|44|54)20([30:39]|[41:5A])</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <InternalSignature>
@@ -84,7 +84,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>2541[41:5A]*(0A|0A0D)25(44|54)([30:39]|[41:5A])</ByteSequenceValue>
+          <ByteSequenceValue>2541[41:5A]{5-50}(0A|0A0D)25(41|42|43|44|54)([30:39]|[41:5A])</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

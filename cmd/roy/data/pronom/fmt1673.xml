@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2509</FormatID>
+      <FormatName>ZBrush MatCap</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Model</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>ZBrush Material format is used with 3-D materials by the ZBrush software. It is used with the MatCap (Material Capture) tool that uses calibration markers to capture information from photographs and other images. Each of these markers samples a single point on the image and defines the colour, texture and lightining of the surface to build up a material map that simulates the lighting and material properties from the photograph. The HDRP replaces all of the materials and lighting in the scene with what is in the MatCap.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>22 Apr 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>22 Apr 2022</LastUpdatedDate>
+      <FormatNote>http://docs.pixologic.com/user-guide/materials-lights-rendering/materials/
+
+https://docs.unity3d.com/Packages/com.unity.render-pipelines.high-definition@7.1/manual/MatCap.html#:~:text=MatCap%20mode%20uses%20an%20image,setting%20up%20the%20Scene%20lighting.
+
+http://fileformats.archiveteam.org/wiki/Zbrush_MatCap</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1673</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3028</ExternalSignatureID>
+        <Signature>zmt</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2007</SignatureID>
+        <SignatureName>Zbrush MatCap</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 'ZBrushFile', then 0x2E</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2331</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>5A42727573682046696C652E</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2545</FormatID>
+      <FormatName>Persuasion Presentation Interchange File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Presentation</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Persuasion Presentation Interchange File is part of Aldus Persuasion format family. The format was created in 1995 following the merger of Adulus Corporation with Adobe Systems, re-branding the software to Adobe Persuasion and creating versions for Microsoft Windows. Since the file formats for Macintosh and Windows differ, the intechange format was introduced to allow for transfer between these platforms. Aldus Persuasion is now discontinued presentation program software first developed by Peter Polash in 1988 for the Macintosh.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
+      <ProvenanceSourceDate>14 Jun 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>14 Jun 2022</LastUpdatedDate>
+      <FormatNote>https://en.wikipedia.org/wiki/Adobe_Persuasion
+
+http://fileformats.archiveteam.org/wiki/Persuasion
+
+https://adobe.fandom.com/wiki/Adobe_Persuasion</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1709</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>7</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Adobe Systems Incorporated</OrganisationName>
+        <DeveloperCompoundName>Adobe Systems Incorporated</DeveloperCompoundName>
+      </Developers>
+      <ExternalSignature>
+        <ExternalSignatureID>3079</ExternalSignatureID>
+        <Signature>prf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2042</SignatureID>
+        <SignatureName>Persuasion Presentation Interchange File</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 0x524F4F54 then a gap of 4 wildcard bytes followed by 0x50726573656E746174696F6E20496E7465726368616E67652046696C6520466F726D6174</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2369</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>524F4F54{4}50726573656E746174696F6E20496E7465726368616E67652046696C6520466F726D6174</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

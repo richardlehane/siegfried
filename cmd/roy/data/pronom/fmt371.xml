@@ -63,7 +63,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>65020102{1}040000{2}0000{2}00030001</ByteSequenceValue>
+          <ByteSequenceValue>65020102{1}0400(00|01|02|06){2}00(00|02|03|04|06){2}00030001</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

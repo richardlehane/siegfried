@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2478</FormatID>
+      <FormatName>Garmin Flexible and Interoperable Data Transfer file</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Unstructured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>A file format developed by Garmin, for the storing and sharing of data from sports and health devices. Data is collected during a sporting activity, stored on the Garmin device, and can then be uploaded to the Garmin Connect web service, and other web applications. The format ensures that any .fit compliant device can interpret data from another .fit compliant device.  The format allows users to track and compare data about their physical activities over time.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>15 Mar 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>15 Mar 2022</LastUpdatedDate>
+      <FormatNote>Specification: https://developer.garmin.com/fit/protocol/</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1651</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>279</DeveloperID>
+        <DeveloperName>Garmin</DeveloperName>
+        <OrganisationName>Garmin</OrganisationName>
+        <DeveloperCompoundName>Garmin / Garmin</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>279</SupportID>
+        <SupportName>Garmin</SupportName>
+        <OrganisationName>Garmin</OrganisationName>
+        <SupportCompoundName>Garmin / Garmin</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>2977</ExternalSignatureID>
+        <Signature>fit</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1987</SignatureID>
+        <SignatureName>Garmin Flexible and Interoperable Data Transfer file</SignatureName>
+        <SignatureNote>BOF Absolute from beginning of file, magic bytes: FIT</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2310</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>9</Offset>
+          <MaxOffset>9</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>464954</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

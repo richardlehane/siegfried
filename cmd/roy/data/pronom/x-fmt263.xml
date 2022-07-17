@@ -234,6 +234,24 @@
         <RelatedFormatName>ISDOCX Information System Document</RelatedFormatName>
         <RelatedFormatVersion>6.0.1</RelatedFormatVersion>
       </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2518</RelatedFormatID>
+        <RelatedFormatName>EndNote Library</RelatedFormatName>
+        <RelatedFormatVersion>X - X9</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2519</RelatedFormatID>
+        <RelatedFormatName>EndNote Compressed Library</RelatedFormatName>
+        <RelatedFormatVersion>X - X9</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2521</RelatedFormatID>
+        <RelatedFormatName>EndNote Compressed Library</RelatedFormatName>
+        <RelatedFormatVersion>20</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

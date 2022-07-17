@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2546</FormatID>
+      <FormatName>Persuasion Auto-Template Interchange File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Presentation</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Auto-Template Interchange File is part of Aldus Persuasion format family. The format stores template files for use on Aldus Persuasion. Adulus Persuasion is a presentation program software first developed by Peter Polash in 1988 for the Macintosh. Following a merger of Adobe Systems and Adulus Corporation in 1994, the software was re-branded to Adobe Persuasion and a Microsoft Windows version was released. There were two versions released for Macintosh only, then starting with version 2.x, a version for Windows was released with each new release up to version 4. Version 4 was released in 1996 and was bundled with other Adobe applications, including over 100 templates.  Adobe discontinued production of the software in September 1997.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
+      <ProvenanceSourceDate>14 Jun 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>14 Jun 2022</LastUpdatedDate>
+      <FormatNote>https://en.wikipedia.org/wiki/Adobe_Persuasion
+
+http://fileformats.archiveteam.org/wiki/Persuasion
+
+http://www.atpm.com/3.01/page10.shtml
+
+https://books.google.co.uk/books?id=wVDB2C8IJRYC&amp;pg=PA76&amp;lpg=PA76&amp;dq=adobe+persuasion+file+format&amp;source=bl&amp;ots=pfVdPE96jt&amp;sig=ACfU3U3Gid0EFkQkLOeTOeiyKb3_EAJZhw&amp;hl=en&amp;sa=X&amp;ved=2ahUKEwiCzMfYzKD4AhVSVsAKHTk2DeMQ6AF6BAgmEAM#v=onepage&amp;q=adobe%20persuasion%20file%20format&amp;f=false</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1710</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>7</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Adobe Systems Incorporated</OrganisationName>
+        <DeveloperCompoundName>Adobe Systems Incorporated</DeveloperCompoundName>
+      </Developers>
+      <ExternalSignature>
+        <ExternalSignatureID>3080</ExternalSignatureID>
+        <Signature>atf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2043</SignatureID>
+        <SignatureName>Persuasion Auto-Template Interchange File</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 0x524F4F54 then a gap of 4 wildcard bytes followed by 0x4175746F54656D706C61746520496E7465726368616E67652046696C6520466F726D6174</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2370</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>524F4F54{4}4175746F54656D706C61746520496E7465726368616E67652046696C6520466F726D6174</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

@@ -27,7 +27,7 @@
       <ProvenanceSourceDate>16 Oct 2021</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>16 Oct 2021</LastUpdatedDate>
+      <LastUpdatedDate>30 Jun 2022</LastUpdatedDate>
       <FormatNote>http://fileformats.archiveteam.org/wiki/MSA_(Magic_Shadow_Archiver)
 
 http://info-coach.fr/atari/documents/_mydoc/FD_Image_File_Format.pdf</FormatNote>
@@ -36,7 +36,7 @@ http://info-coach.fr/atari/documents/_mydoc/FD_Image_File_Format.pdf</FormatNote
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
-        <Identifier>	application/vnd.msa-disk-image</Identifier>
+        <Identifier>application/vnd.msa-disk-image</Identifier>
         <IdentifierType>MIME</IdentifierType>
       </FileFormatIdentifier>
       <FileFormatIdentifier>

@@ -49,7 +49,7 @@ http://www.cwls.org/las_info.php</FormatNote>
       <InternalSignature>
         <SignatureID>575</SignatureID>
         <SignatureName>Log ASCII Standard 1.2</SignatureName>
-        <SignatureNote>Header ASCII: ~V followed by version and standard information  (VERS.      1.2     CWLS (LOG ASCII STANDARD|LAS)  V(ERSION|ersion) 1.2) and then mandatory logging data recorded in Well Information Section (~W), Curve Information section (~C), and ASCII Log Data section (~A).</SignatureNote>
+        <SignatureNote>Header ASCII: ~V followed by version and standard information (VERS. 1.2 CWLS (LOG ASCII STANDARD||Log ASCII standard|LAS) V(ERSION|ersion) 1.2) and then mandatory logging data recorded in Well Information Section (~W), Curve Information section (~C), and ASCII Log Data section (~A).696F6E)20312E32*7E57*7E43*7E41</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>711</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -62,7 +62,7 @@ http://www.cwls.org/las_info.php</FormatNote>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>7E56*564552532E*312E32{0-1}3A{0-3}43574C5320(4C4F47204153434949205354414E44415244|4C6F67204153434949205374616E64617264|4C4153){1-3}56(455253494F4E|657273696F6E)20312E32*7E57*7E43*7E41</ByteSequenceValue>
+          <ByteSequenceValue>7E56*564552532E*312E32{0-1}3A{0-5}43574C5320(4C4F47204153434949205354414E44415244|4C6F67204153434949205374616E64617264|6C6F67204153434949205374616E64617264|4C4153){1-3}56(455253494F4E|657273696F6E)20312E32*7E57*7E43*7E41</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

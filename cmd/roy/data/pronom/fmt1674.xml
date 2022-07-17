@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2510</FormatID>
+      <FormatName>ZyXEL Voice Format Audio</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Audio</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>ZyXEL Voice Audio files were originally developed by Zyxel Communications for the Zyxel Z-Fax modem software application. These files are capable of digitizing speech to transfer data through software such as Z-Fax or VoiceConnect, using compression betweeen 19.2k CPS(ADPCM) and 9.6k CPS (CELP).</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>22 Apr 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>22 Apr 2022</LastUpdatedDate>
+      <FormatNote>http://www.fileformat.info/mirror/corion/index.htm#ZyXEL
+
+https://www.solvusoft.com/en/file-extensions/file-extension-zvd/
+
+https://www.wikidata.org/wiki/Q105854133</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1674</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3029</ExternalSignatureID>
+        <Signature>zvd</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3049</ExternalSignatureID>
+        <Signature>zyx</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3050</ExternalSignatureID>
+        <Signature>ad2</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2008</SignatureID>
+        <SignatureName>ZyXEL Voice Format Audio</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 'ZyXEL' followed by 0x02</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2332</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>5A7958454C02</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

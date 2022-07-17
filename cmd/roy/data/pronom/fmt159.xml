@@ -27,7 +27,7 @@
       <ProvenanceSourceDate>17 Apr 2008</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>17 Apr 2008</LastUpdatedDate>
+      <LastUpdatedDate>23 Jun 2022</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -41,11 +41,6 @@
       <ExternalSignature>
         <ExternalSignatureID>837</ExternalSignatureID>
         <Signature>ebcdic</Signature>
-        <SignatureType>File extension</SignatureType>
-      </ExternalSignature>
-      <ExternalSignature>
-        <ExternalSignatureID>865</ExternalSignatureID>
-        <Signature>siard</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
     </FileFormat>

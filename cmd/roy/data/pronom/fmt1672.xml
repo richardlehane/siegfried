@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2508</FormatID>
+      <FormatName>Linux/i386 Binary Executable File ZMAGIC</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>ZMAGIC file format is a type of a.out (an abbreviated form of "assembler output") executible binary format used with Unix-like operating systems. The format was superseeded by ELF file format with System V Release 4 around 1898, due to some limitations of the format. The ZMAGIC was the default a.out file format before they switched to QMAGIC files. Both formats of executable have a 32 byte header at the start of the file, but with ZMAGIC the .text section starts at byte offset 1024, while with QMAGIC the .text section starts at the beginning of the file and includes the header.</FormatDescription>
+      <BinaryFileFormat>Binary</BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>22 Apr 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>22 Apr 2022</LastUpdatedDate>
+      <FormatNote>https://www.linuxjournal.com/article/1059
+
+https://www.linux.org/threads/types-of-executables.9206/
+
+http://ftp.icm.edu.pl/packages/linux-uk/alpha/alpha/asm8.html#obj_file_formats_section
+
+https://www.win.tue.nl/~aeb/linux/lk/lk-3.html
+
+https://en.wikipedia.org/wiki/A.out
+
+https://wiki.osdev.org/A.out</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1672</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3026</ExternalSignatureID>
+        <Signature>so</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3027</ExternalSignatureID>
+        <Signature>o</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2006</SignatureID>
+        <SignatureName>Linux/i386 Binary Executable File ZMAGIC</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: Starting with either 0x07, 0x0B, 0xCC followed by either 0x00 or 0x01, then by 0x6400</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2330</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>(07|0B|CC|08)(00|01)6400</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

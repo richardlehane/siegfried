@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2505</FormatID>
+      <FormatName>Roxio Data Project File</FormatName>
+      <FormatVersion>11</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Roxio Data Project File with extension ROX is a part of Roxio disc project formats. ROXIO files are formed Roxio Creator software (previously named as Roxio Easy Media Creator, Easy CD Creator and Roxio Easy CD Creator), originally published by Adaptec in 1996, this version replaces the ROXIO format (fmt/1668) was published around 2011. This format is a binary file just as its predecessors however, unlike other versions, the format is XML type of file with its structure distinguishing between Data and Audio files. Previously the ROXIO file contained all saved project, that stores information about audio, video or data disk compilation intended to be burned to disc. Roxio Creator software allows the user to create data or audio CD layout, it allows for files to be saved for later use with references to files that will be included on the disc as well as other settings, but this format did not include the files themselves, only the information regarding these files. All versions up to version 10 and Roxio Creator 2009-2010 of layout format on Roxio Easy Media Creator software, saved their 'layout' files in ROXIO format, but this format only saves data type files, see separate entry for audio (fmt/1670).</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
+      <ProvenanceSourceDate>19 Apr 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>19 Apr 2022</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/ROX</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1669</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3023</ExternalSignatureID>
+        <Signature>rox</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2003</SignatureID>
+        <SignatureName>Roxio Data Project File v11</SignatureName>
+        <SignatureNote>BOF; Offset: 160-260; Magic Bytes: '9CA0EEEE-5BC5-41e9-8242-BEE21643FFF0'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2327</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>160</Offset>
+          <MaxOffset>260</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>39434130454545452D354243352D343165392D383234322D424545323136343346464630</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>638</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>2502</RelatedFormatID>
+        <RelatedFormatName>Roxio Easy Media Creator Layout</RelatedFormatName>
+        <RelatedFormatVersion>7</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>2503</RelatedFormatID>
+        <RelatedFormatName>Roxio Easy Media Creator - Classic Creator File</RelatedFormatName>
+        <RelatedFormatVersion>8-10</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>2504</RelatedFormatID>
+        <RelatedFormatName>Roxio Easy Media Creator Layout</RelatedFormatName>
+        <RelatedFormatVersion>8-10</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

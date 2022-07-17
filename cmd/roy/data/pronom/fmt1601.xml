@@ -69,7 +69,7 @@ https://flylib.com/books/en/3.264.1.146/1/</FormatNote>
         </ByteSequence>
         <ByteSequence>
           <ByteSequenceID>2243</ByteSequenceID>
-          <PositionType>Absolute from BOF</PositionType>
+          <PositionType>Absolute from EOF</PositionType>
           <Offset>13</Offset>
           <MaxOffset>20</MaxOffset>
           <IndirectOffsetLocation>

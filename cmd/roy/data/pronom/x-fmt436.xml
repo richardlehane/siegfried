@@ -11,7 +11,7 @@
       </FormatFamilies>
       <FormatTypes>Model</FormatTypes>
       <FormatDisclosure>Full</FormatDisclosure>
-      <FormatDescription>CATIA is a 3D modelling software created by Dassault Systèmes, widely used across many industries for computer aided design, manufacture and engineering.</FormatDescription>
+      <FormatDescription>CATIA is a 3D modelling software created by Dassault Systèmes, widely used across many industries for computer aided design, manufacture and engineering. Model files store representations of mechanical structures, or parts of structures.</FormatDescription>
       <BinaryFileFormat>Binary</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -24,7 +24,7 @@
       <ProvenanceSourceDate>06 Apr 2009</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>11 Feb 2022</LastUpdatedDate>
+      <LastUpdatedDate>27 Jun 2022</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -44,15 +44,15 @@
         <DeveloperID>135</DeveloperID>
         <DeveloperName>
         </DeveloperName>
-        <OrganisationName>Dassault Systems</OrganisationName>
-        <DeveloperCompoundName>Dassault Systems</DeveloperCompoundName>
+        <OrganisationName>Dassault Systèms</OrganisationName>
+        <DeveloperCompoundName>Dassault Systèms</DeveloperCompoundName>
       </Developers>
       <Support>
         <SupportID>135</SupportID>
         <SupportName>
         </SupportName>
-        <OrganisationName>Dassault Systems</OrganisationName>
-        <SupportCompoundName>Dassault Systems</SupportCompoundName>
+        <OrganisationName>Dassault Systèms</OrganisationName>
+        <SupportCompoundName>Dassault Systèms</SupportCompoundName>
       </Support>
       <ExternalSignature>
         <ExternalSignatureID>843</ExternalSignatureID>
@@ -67,7 +67,7 @@
       <InternalSignature>
         <SignatureID>344</SignatureID>
         <SignatureName>CATIA Model V4</SignatureName>
-        <SignatureNote>In the file header, the current level of CATIA used to create the model.</SignatureNote>
+        <SignatureNote>BOF offset 80, magic bytes: CATIA followed by three spaces{2024}CATIA SOLUTIONS V4{6}RELEASE followed by one space</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>441</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>

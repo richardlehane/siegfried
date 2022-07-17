@@ -22,8 +22,7 @@
       <WithdrawnDate>
       </WithdrawnDate>
       <ProvenanceSourceID>220</ProvenanceSourceID>
-      <ProvenanceName>
-      </ProvenanceName>
+      <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
       <ProvenanceSourceDate>20 Jan 2022</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
@@ -70,7 +69,7 @@
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>2421</RelatedFormatID>
-        <RelatedFormatName>ESRI ArcInfo .dat file (external)</RelatedFormatName>
+        <RelatedFormatName>ESRI ArcInfo .dat File (External)</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

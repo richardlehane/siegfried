@@ -22,12 +22,11 @@
       <WithdrawnDate>
       </WithdrawnDate>
       <ProvenanceSourceID>220</ProvenanceSourceID>
-      <ProvenanceName>
-      </ProvenanceName>
+      <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
       <ProvenanceSourceDate>24 Feb 2022</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>24 Feb 2022</LastUpdatedDate>
+      <LastUpdatedDate>30 Jun 2022</LastUpdatedDate>
       <FormatNote>http://fileformats.archiveteam.org/wiki/InDesign_INDD</FormatNote>
       <FormatRisk>
       </FormatRisk>
@@ -70,12 +69,6 @@
         <RelatedFormatID>2456</RelatedFormatID>
         <RelatedFormatName>Adobe InDesign Document</RelatedFormatName>
         <RelatedFormatVersion>1.5</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Has priority over</RelationshipType>
-        <RelatedFormatID>865</RelatedFormatID>
-        <RelatedFormatName>Adobe InDesign Document</RelatedFormatName>
-        <RelatedFormatVersion>Generic</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Is previous version of</RelationshipType>

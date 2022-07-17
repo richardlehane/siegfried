@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2539</FormatID>
+      <FormatName>Persuasion Mac Document</FormatName>
+      <FormatVersion>2.1</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Presentation</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Persuasion Mac Document format is part of Adulus Persuasion format family. The format is created using the Aldus Persuasion (now discontinued) presentation program software developed by Peter Polash in 1988 for the Macintosh platform by Aldus Corporation. Following a merger of Adobe Systems and Adulus Corporation in 1994, the software was re-branded to Adobe Persuasion and a Microsoft Windows version was released. There were two versions released for Macintosh only, then starting with version 2.x, a version for Windows was released with each new release up to version 4. Adobe discontinued production of the software in September 1997. This format entry describes the variation of the format released with version 2.1 of Adulus Persuasion for Macintosh.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
+      <ProvenanceSourceDate>14 Jun 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>14 Jun 2022</LastUpdatedDate>
+      <FormatNote>https://en.wikipedia.org/wiki/Adobe_Persuasion
+
+http://fileformats.archiveteam.org/wiki/Persuasion
+
+https://adobe.fandom.com/wiki/Adobe_Persuasion</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1703</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>7</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Adobe Systems Incorporated</OrganisationName>
+        <DeveloperCompoundName>Adobe Systems Incorporated</DeveloperCompoundName>
+      </Developers>
+      <Developers>
+        <DeveloperID>82</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Aldus Corporation</OrganisationName>
+        <DeveloperCompoundName>Aldus Corporation</DeveloperCompoundName>
+      </Developers>
+      <ExternalSignature>
+        <ExternalSignatureID>3069</ExternalSignatureID>
+        <Signature>pr2</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2036</SignatureID>
+        <SignatureName>Persuasion Mac Document v2.1</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 0x0014 then a sequence of five wildcard bytes followed by 0x0003</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2362</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>0014{5}0003</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>687</RelatedFormatID>
+        <RelatedFormatName>MPEG 1/2 Audio Layer 3</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>2540</RelatedFormatID>
+        <RelatedFormatName>Persuasion Mac Document</RelatedFormatName>
+        <RelatedFormatVersion>3.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>2538</RelatedFormatID>
+        <RelatedFormatName>Persuasion Mac Document</RelatedFormatName>
+        <RelatedFormatVersion>2.0</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

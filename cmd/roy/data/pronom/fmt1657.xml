@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2484</FormatID>
+      <FormatName>XIMG (Extended GEM Bit Image)</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Raster)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The XIMG  (Extended GEM Bit Image) image format is more developed version of GEM raster Image [x-fmt/159] which allows for standardised verison of storing colour palettes. It originated due to the specification of GEM format being ambiguous as to the format of color images. 
+
+The GEM raster format (also known as GEM VDI Bit Image; GEM Bit Image; GEM Image; GEM Bitmap; or IMG) is an image format native to the Graphical Environment Manager (GEM) operating system and developed at Digital Research. The format was used by GEM Paint and Ventura Publisher, and by a variety of Atari ST software.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>29 Mar 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>29 Mar 2022</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/GEM_Raster 
+
+https://www.wikidata.org/wiki/Q28206162 
+
+https://www.seasip.info/Gem/ff_img.html 
+
+https://www.fileformat.info/format/gemraster/spec/20e311cc16f844fda91beb539d62c46c/view.htm 
+
+https://archive.org/stream/mac_Graphics_File_Formats_Second_Edition_1996/Graphics_File_Formats_Second_Edition_1996_djvu.txt</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1657</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2983</ExternalSignatureID>
+        <Signature>ximg</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2984</ExternalSignatureID>
+        <Signature>img</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1991</SignatureID>
+        <SignatureName>XIMG (Extended GEM Bit Image)</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 'XIMG..'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2314</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>16</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>58494D470000</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>223</RelatedFormatID>
+        <RelatedFormatName>GEM Image</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <CompressionType>
+        <CompressionID>13</CompressionID>
+        <CompressionName>Run Length Encoding</CompressionName>
+        <CompressionVersion>
+        </CompressionVersion>
+        <CompressionAliases>RLE</CompressionAliases>
+        <CompressionFamilies>
+        </CompressionFamilies>
+        <Description>Run length encoding (RLE) is perhaps the simplest image compression technique in common use. RLE algorithms are lossless, and work by searching for runs of bits, bytes, or pixels of the same value, and encoding the length and value of the run. As such, RLE achieves best results with images containing large areas of contiguous colour, and especially monochrome images. Complex colour images, such as photographs, do not compress well – in some cases, RLE can actually increase the file size. There are a number of RLE variants in common use, which are encountered in the TIFF, PCX and BMP graphics formats.</Description>
+        <Lossiness>Lossless</Lossiness>
+        <ReleaseDate>
+        </ReleaseDate>
+        <WithdrawnDate>
+        </WithdrawnDate>
+        <CompressionDocumentation>
+        </CompressionDocumentation>
+        <CompressionIPR>
+        </CompressionIPR>
+        <CompressionNote>
+        </CompressionNote>
+        <CompressionIdentifier>
+          <Identifier>x-cmp/13</Identifier>
+          <IdentifierType>PUID</IdentifierType>
+        </CompressionIdentifier>
+      </CompressionType>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

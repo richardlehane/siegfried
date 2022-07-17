@@ -9,10 +9,10 @@
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Page Description</FormatTypes>
+      <FormatTypes>Image (Vector)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>PostScript (.ps) file format is a type of vector graphic file, it is saved by PostScript general-purpose page description language. Developed in the 1980s by Adobe Systems, its main focus was to turn digital graphics and text ready to print, it allowed for users to more easily turn their text and graphics into printed copies.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -25,9 +25,14 @@
       <ProvenanceSourceDate>11 Feb 2006</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>11 Feb 2006</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>17 Jun 2022</LastUpdatedDate>
+      <FormatNote>https://www.adobe.com/creativecloud/file-types/image/vector/ps-file.html#:~:text=frequently%20asked%20questions-,What%20is%20a%20PS%20file%3F,open%20it%20in%20an%20application.
+
+https://en.wikipedia.org/wiki/PostScript
+
+https://docs.fileformat.com/page-description-language/ps/
+
+https://fileinfo.com/extension/ps</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -152,6 +157,13 @@
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>1073</RelatedFormatID>
         <RelatedFormatName>EndNote Import File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2443</RelatedFormatID>
+        <RelatedFormatName>BibTeX Database File</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

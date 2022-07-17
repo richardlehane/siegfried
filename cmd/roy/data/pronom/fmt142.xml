@@ -83,6 +83,12 @@
       </InternalSignature>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1502</RelatedFormatID>
+        <RelatedFormatName>Broadcast WAVE</RelatedFormatName>
+        <RelatedFormatVersion>0 PCM Encoding</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1503</RelatedFormatID>
         <RelatedFormatName>Broadcast WAVE</RelatedFormatName>
         <RelatedFormatVersion>1 PCM Encoding</RelatedFormatVersion>

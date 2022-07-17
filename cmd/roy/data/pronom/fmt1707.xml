@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2543</FormatID>
+      <FormatName>Persuasion Windows Document</FormatName>
+      <FormatVersion>3.x - 4.x</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Presentation</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Persuasion Windows Document format is part of Adulus Persuasion format family.The format is created using the Adulus Persuasion (now discontinued) presentation program software developed by Peter Polash in 1988 orifinally for the Macintosh platform by Aldus Corporation. Following a merger of Adobe Systems and Adulus Corporation in 1994, the software was re-branded to Adobe Persuasion and a Microsoft Windows version was released. There were two versions released for Macintosh only, then starting with version 2.x version for Windows was released, up to version 4. Adobe discontinued production of the software in September 1997.  This format entry describes the variation of the format released with version 3.x and 4.x of Adulus Persuasion for Microsoft Windows. The research of this format is ongoing, please contact the PRONOM team if you have more information and can contribute to find distinguashing sequence between version 3.x and 4.x.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
+      <ProvenanceSourceDate>14 Jun 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>14 Jun 2022</LastUpdatedDate>
+      <FormatNote>https://en.wikipedia.org/wiki/Adobe_Persuasion
+
+http://fileformats.archiveteam.org/wiki/Persuasion
+
+https://adobe.fandom.com/wiki/Adobe_Persuasion_4
+
+https://books.google.co.uk/books?id=wVDB2C8IJRYC&amp;pg=PA76&amp;lpg=PA76&amp;dq=adobe+persuasion+file+format&amp;source=bl&amp;ots=pfVdPE96jt&amp;sig=ACfU3U3Gid0EFkQkLOeTOeiyKb3_EAJZhw&amp;hl=en&amp;sa=X&amp;ved=2ahUKEwiCzMfYzKD4AhVSVsAKHTk2DeMQ6AF6BAgmEAM#v=onepage&amp;q=adobe%20persuasion%20file%20format&amp;f=false</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1707</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>7</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Adobe Systems Incorporated</OrganisationName>
+        <DeveloperCompoundName>Adobe Systems Incorporated</DeveloperCompoundName>
+      </Developers>
+      <ExternalSignature>
+        <ExternalSignatureID>3074</ExternalSignatureID>
+        <Signature>pr3</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3075</ExternalSignatureID>
+        <Signature>at3</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3076</ExternalSignatureID>
+        <Signature>pn4</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3077</ExternalSignatureID>
+        <Signature>at4</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2040</SignatureID>
+        <SignatureName>Persuasion Windows Document v3-4</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 0x000000000000FF99 then a sequence of hundred wildcard bytes followed by 0x5350000302</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2366</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>000000000000FF99{100}5350000302</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>2542</RelatedFormatID>
+        <RelatedFormatName>Persuasion Windows Document</RelatedFormatName>
+        <RelatedFormatVersion>2.0</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

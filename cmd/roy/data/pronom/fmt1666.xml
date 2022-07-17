@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2502</FormatID>
+      <FormatName>Roxio Easy Media Creator Layout</FormatName>
+      <FormatVersion>7</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Roxio Easy Media Creator Layout version 7 with extension RCL is a part of Roxio disc project formats. RCL files are formed using Roxio Easy Media Creator software (previously named as Easy CD Creator and Roxio Easy CD Creator), originally published by Adaptec in 1996, this version follows the rebranding of the software to Roxio and was published around 2003. The format is different in hex structure to its predecessor version 6 (fmt/1665), with its hex sequence referencing the format version. Roxio Easy Media Creator software allowed the user to create data or audio CD layout by adding files or music in order to burn a disc. The layout only referenced the file location and not the files themselves. It allowed for files to be saved for later use with references to files that will be included on the disc as well as other settings.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
+      <ProvenanceSourceDate>19 Apr 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>19 Apr 2022</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/RCL
+
+https://archive.org/details/roxio-emc7-content/1-CDFront.jpg</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1666</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3020</ExternalSignatureID>
+        <Signature>rcl</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2000</SignatureID>
+        <SignatureName>Roxio Easy Media Creator Layout v7</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 0x FFFE2300, followed by a wildcard bytes between 0-900, then '[RoxioINF20] [ProjectSettings] RCLVer=70'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2324</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>FFFE2300{0-900}5B0052006F00780069006F0049004E004600320030005D000D000A005B00500072006F006A00650063007400530065007400740069006E00670073005D000D000A00520043004C005600650072003D00370030</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>2503</RelatedFormatID>
+        <RelatedFormatName>Roxio Easy Media Creator - Classic Creator File</RelatedFormatName>
+        <RelatedFormatVersion>8-10</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>2504</RelatedFormatID>
+        <RelatedFormatName>Roxio Easy Media Creator Layout</RelatedFormatName>
+        <RelatedFormatVersion>8-10</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>2505</RelatedFormatID>
+        <RelatedFormatName>Roxio Data Project File</RelatedFormatName>
+        <RelatedFormatVersion>11</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>2501</RelatedFormatID>
+        <RelatedFormatName>Easy CD Creator Layout | Roxio Easy CD Creator Layout</RelatedFormatName>
+        <RelatedFormatVersion>5-6</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

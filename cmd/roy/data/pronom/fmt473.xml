@@ -10,8 +10,7 @@
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>
-      </FormatTypes>
+      <FormatTypes>Page Description</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
       <FormatDescription>When a previously saved Word document is opened for editing, for printing, or for review, Word creates a temporary file that has a .doc file name extension. This file name extension begins with a tilde (~) that is followed by a dollar sign ($) that is followed by the remainder of the original file name. This temporary file holds the logon name of person who opens the file. This temporary file is called the "owner file."</FormatDescription>
@@ -28,7 +27,7 @@
       <ProvenanceSourceDate>25 Oct 2012</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>25 Oct 2012</LastUpdatedDate>
+      <LastUpdatedDate>30 Jun 2022</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -256,7 +255,7 @@
       <InternalSignature>
         <SignatureID>817</SignatureID>
         <SignatureName>MS Owner file v11</SignatureName>
-        <SignatureNote>1st byte is within the range of 01 to 0F, or 14. Next bytes are name of registered user. 55th byte is identical to 1st. 56th byte is 00</SignatureNote>
+        <SignatureNote>1st byte is within the range of 01 to 0F, or 19. Next bytes are name of registered user. 55th byte is identical to 1st. 56th byte is 00</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1022</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -274,7 +273,7 @@
       <InternalSignature>
         <SignatureID>818</SignatureID>
         <SignatureName>MS Owner file v12</SignatureName>
-        <SignatureNote>1st byte is within the range of 01 to 0F, or 14. Next bytes are name of registered user. 55th byte is identical to 1st. 56th byte is 00</SignatureNote>
+        <SignatureNote>1st byte is within the range of 01 to 0F, or 19. Next bytes are name of registered user. 55th byte is identical to 1st. 56th byte is 00</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1023</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -292,7 +291,7 @@
       <InternalSignature>
         <SignatureID>819</SignatureID>
         <SignatureName>MS Owner file v13</SignatureName>
-        <SignatureNote>1st byte is within the range of 01 to 0F, or 14. Next bytes are name of registered user. 55th byte is identical to 1st. 56th byte is 00</SignatureNote>
+        <SignatureNote>1st byte is within the range of 01 to 0F, or 19. Next bytes are name of registered user. 55th byte is identical to 1st. 56th byte is 00</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1024</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -310,7 +309,7 @@
       <InternalSignature>
         <SignatureID>820</SignatureID>
         <SignatureName>MS Owner file v14</SignatureName>
-        <SignatureNote>1st byte is within the range of 01 to 0F, or 14. Next bytes are name of registered user. 55th byte is identical to 1st. 56th byte is 00</SignatureNote>
+        <SignatureNote>1st byte is within the range of 01 to 0F, or 19. Next bytes are name of registered user. 55th byte is identical to 1st. 56th byte is 00</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1025</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -328,7 +327,7 @@
       <InternalSignature>
         <SignatureID>821</SignatureID>
         <SignatureName>MS Owner file v15</SignatureName>
-        <SignatureNote>1st byte is within the range of 01 to 0F, or 14. Next bytes are name of registered user. 55th byte is identical to 1st. 56th byte is 00</SignatureNote>
+        <SignatureNote>1st byte is within the range of 01 to 0F, or 19. Next bytes are name of registered user. 55th byte is identical to 1st. 56th byte is 00</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1026</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -346,7 +345,7 @@
       <InternalSignature>
         <SignatureID>822</SignatureID>
         <SignatureName>MS Owner file v16</SignatureName>
-        <SignatureNote>1st byte is within the range of 01 to 0F, or 14. Next bytes are name of registered user. 55th byte is identical to 1st. 56th byte is 00</SignatureNote>
+        <SignatureNote>1st byte is within the range of 01 to 0F, or 19. Next bytes are name of registered user. 55th byte is identical to 1st. 56th byte is 00</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1027</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -364,7 +363,7 @@
       <InternalSignature>
         <SignatureID>1182</SignatureID>
         <SignatureName>MS Owner file v17</SignatureName>
-        <SignatureNote>1st byte is within the hex range of 01 to 14. Next bytes are name of registered user. 55th byte is identical to 1st. 56th byte is 00</SignatureNote>
+        <SignatureNote>1st byte is within the hex range of 01 to 19. Next bytes are name of registered user. 55th byte is identical to 1st. 56th byte is 00</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1436</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -382,7 +381,7 @@
       <InternalSignature>
         <SignatureID>1183</SignatureID>
         <SignatureName>MS Owner file v18</SignatureName>
-        <SignatureNote>1st byte is within the hex range of 01 to 14. Next bytes are name of registered user. 55th byte is identical to 1st. 56th byte is 00</SignatureNote>
+        <SignatureNote>1st byte is within the hex range of 01 to 19. Next bytes are name of registered user. 55th byte is identical to 1st. 56th byte is 00</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1435</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -400,7 +399,7 @@
       <InternalSignature>
         <SignatureID>1184</SignatureID>
         <SignatureName>MS Owner file v19</SignatureName>
-        <SignatureNote>1st byte is within the hex range of 01 to 14. Next bytes are name of registered user. 55th byte is identical to 1st. 56th byte is 00</SignatureNote>
+        <SignatureNote>1st byte is within the hex range of 01 to 19. Next bytes are name of registered user. 55th byte is identical to 1st. 56th byte is 00</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1434</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -431,6 +430,101 @@
           <Endianness>
           </Endianness>
           <ByteSequenceValue>13{52}001300</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>2052</SignatureID>
+        <SignatureName>MS Owner file v21</SignatureName>
+        <SignatureNote>1st byte is within the hex range of 01 to 19. Next bytes are name of registered user. 55th byte is identical to 1st. 56th byte is 00.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2379</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>15{52}001500</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>2053</SignatureID>
+        <SignatureName>MS Owner file v22</SignatureName>
+        <SignatureNote>1st byte is within the hex range of 01 to 19. Next bytes are name of registered user. 55th byte is identical to 1st. 56th byte is 00.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2380</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>16{52}001600</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>2054</SignatureID>
+        <SignatureName>MS Owner file v23</SignatureName>
+        <SignatureNote>1st byte is within the hex range of 01 to 19. Next bytes are name of registered user. 55th byte is identical to 1st. 56th byte is 00.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2381</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>17{52}001700</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>2055</SignatureID>
+        <SignatureName>MS Owner file v24</SignatureName>
+        <SignatureNote>1st byte is within the hex range of 01 to 19. Next bytes are name of registered user. 55th byte is identical to 1st. 56th byte is 00.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2382</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>18{52}001800</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>2056</SignatureID>
+        <SignatureName>MS Owner file v25</SignatureName>
+        <SignatureNote>1st byte is within the hex range of 01 to 19. Next bytes are name of registered user. 55th byte is identical to 1st. 56th byte is 00.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2383</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>19{52}001900</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

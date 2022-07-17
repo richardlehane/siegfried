@@ -4,8 +4,7 @@
     <FileFormat>
       <FormatID>1070</FormatID>
       <FormatName>EndNote Library</FormatName>
-      <FormatVersion>
-      </FormatVersion>
+      <FormatVersion>1-9</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -13,7 +12,7 @@
       <FormatTypes>Text (Structured)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>EndNote Library file format is generated and used via EndNote reference management software application. A software intended for the management of bibliographies and references when producing academic text or reports. Endnote software was first launched in 1989 by Niles &amp; Associates, then in 2000 was acquired by Institute for Scientific Information’s Research Soft Division, and since 2016 owned by Clarivate. The EndNote Library file format stores the references and citations in so called 'libraries' used with the software. Users of EndNote application can create their own EndNote Library files, as well as upload EndNote Library files onto their software. The latter versions of this format, starting from version 8, include .data folder to accompany the EndNote Library format. The .data folder is automatically created by EndNote, intended to store attachments. Following this update, the .data folder is recommended to be present in the EndNote Library file structure in order to use the EndNote Library format with the EndNote software. This entry describes earliest versions of the application, from the first version up to and including version 9. Following versions started named as X and were sequential to version X9, then following versions were named as version 20. Subsequent X versions altered their file format structure to ZIP based container and are included in separate PRONOM entry. Please see the full version history using the Web Archive Wikipedia entry link included in the Notes section.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -26,9 +25,12 @@
       <ProvenanceSourceDate>31 Jan 2011</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>31 Jan 2011</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>13 May 2022</LastUpdatedDate>
+      <FormatNote>https://web.archive.org/web/20220501102310/https://en.wikipedia.org/wiki/EndNote
+
+https://web.archive.org/web/20130319092646/http://endnote.com/support/helpdocs/ENX-GettingStartedGuide.pdf
+
+http://fileformats.archiveteam.org/wiki/EndNote_Library</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -44,7 +46,7 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>420</SignatureID>
-        <SignatureName>EndNote Library No. 1</SignatureName>
+        <SignatureName>EndNote Library No. 1, versions 1-9</SignatureName>
         <SignatureNote>A rudimentary signature, based on the relative position of certain bytes found to be present in all examples of EndNote Library files tested.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>527</ByteSequenceID>
@@ -63,7 +65,7 @@
       </InternalSignature>
       <InternalSignature>
         <SignatureID>421</SignatureID>
-        <SignatureName>EndNote Library No. 2</SignatureName>
+        <SignatureName>EndNote Library No. 2, versions 1-9</SignatureName>
         <SignatureNote>A rudimentary signature, based on the relative position of certain bytes found to be present in all examples of EndNote Library files tested.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>528</ByteSequenceID>
@@ -82,7 +84,7 @@
       </InternalSignature>
       <InternalSignature>
         <SignatureID>422</SignatureID>
-        <SignatureName>EndNote Library No. 3</SignatureName>
+        <SignatureName>EndNote Library No. 3, versions 1-9</SignatureName>
         <SignatureNote>A rudimentary signature, based on the relative position of certain bytes found to be present in all examples of EndNote Library files tested.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>529</ByteSequenceID>
@@ -99,6 +101,18 @@
           <ByteSequenceValue>0000{2}00{7}0000{2}0000{2}0002{8}202040404020000040404040</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>2518</RelatedFormatID>
+        <RelatedFormatName>EndNote Library</RelatedFormatName>
+        <RelatedFormatVersion>X - X9</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>2519</RelatedFormatID>
+        <RelatedFormatName>EndNote Compressed Library</RelatedFormatName>
+        <RelatedFormatVersion>X - X9</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

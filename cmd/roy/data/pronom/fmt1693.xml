@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2529</FormatID>
+      <FormatName>Asymetrix Compel Presentation</FormatName>
+      <FormatVersion>1.0</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Presentation</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Asymetrix Compel Presentation files are proprietary formats belonging to Compel software application, developed by Asymetrix Learning Systems Corporation. Compel is a presentation software, a tool to create slide-based multimedia presentations. There were two versions published of this software first published in 1993 and second published in 1995, the software was discontinued in 1998. This format entry describes version 1.0 of this software. The software also could export .art files which seems to have very similar structure.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
+      <ProvenanceSourceDate>01 Jun 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>01 Jun 2022</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/Asymetrix_Compel
+
+https://web.archive.org/web/19970607001501/http://www.asymetrix.com/products/compel/
+
+https://archive.org/details/asymetrix-multimedia-creative-suite/Asymetrix%20Multimedia%20Creative%20Suite_disc.jpg
+
+https://books.google.co.uk/books?id=cTwEAAAAMBAJ&amp;pg=PA17&amp;dq=asymetrix+compel&amp;hl=en&amp;sa=X&amp;ved=2ahUKEwjWnMuAzIz4AhVKhFwKHRtvB50Q6wF6BAgIEAE#v=onepage&amp;q=asymetrix%20compel&amp;f=false
+
+https://www.danielsays.com/ssg-win1x2x3x-compel20.html</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1693</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3056</ExternalSignatureID>
+        <Signature>cpl</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2026</SignatureID>
+        <SignatureName>Asymetrix Compel Presentation v1.0</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 0x034A424F4ED32C41</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2352</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>034A424F4ED32C41</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>1257</RelatedFormatID>
+        <RelatedFormatName>Asymetrix Toolbook File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>2530</RelatedFormatID>
+        <RelatedFormatName>Asymetrix Compel Presentation</RelatedFormatName>
+        <RelatedFormatVersion>2.0</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

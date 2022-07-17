@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2511</FormatID>
+      <FormatName>IntelliFont Font File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Font</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>IntelliFont Font file is a format belonging to IntelliFont utility developed by Tom Hawkins at Compugraphic in Wilmington during the late 1980s. The font utility is native to AmigaOS, it was originally developed by Compugraphic Corporation, which was later acquired by Agfa, later becoming Monotype. This font format appears to be LHZ archive which holds data specific to create IntelliFont requirements.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>26 Apr 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>26 Apr 2022</LastUpdatedDate>
+      <FormatNote>https://en.wikipedia.org/wiki/Intellifont
+
+http://fileformats.archiveteam.org/wiki/IntelliFont
+
+https://en.wikipedia.org/wiki/AmigaOS
+
+http://aminet.net/search?query=intellifont
+
+https://wiki.amigaos.net/wiki/AmigaOS_Manual:_Workbench_Fonts</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1675</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3030</ExternalSignatureID>
+        <Signature>type</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3031</ExternalSignatureID>
+        <Signature>lib</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2009</SignatureID>
+        <SignatureName>IntelliFont Font File</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 0x00440001000000{2}000002</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2333</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>00440001000000{2}000002</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2556</FormatID>
+      <FormatName>Portable Compiled Format</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Font</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Portable Compiled Format (PCF) is a bitmap font format used by X Windows System in its core font system. PCF fonts are usually installed by default on most Uni-based operating systems and are used in terminals such as xterm. It gradually became more widely used than the Glyph Bitmap Distribution (BDF) format but has more recently been superseded by OpenType and TrueType fonts.</FormatDescription>
+      <BinaryFileFormat>Text</BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>15 Jun 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>15 Jun 2022</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/PCF
+
+https://en.wikipedia.org/wiki/Portable_Compiled_Format
+
+https://en.wikipedia.org/wiki/Glyph_Bitmap_Distribution_Format
+
+https://web.archive.org/web/20191229202901/https://fontforge.org/en-US/documentation/reference/pcf-format/</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1720</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3090</ExternalSignatureID>
+        <Signature>pcf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2049</SignatureID>
+        <SignatureName>Portable Compiled Format</SignatureName>
+        <SignatureNote>BOF: 0x01 (Start of Header) followed by 'fcp'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2376</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>01666370</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

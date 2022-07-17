@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2501</FormatID>
+      <FormatName>Easy CD Creator Layout | Roxio Easy CD Creator Layout</FormatName>
+      <FormatVersion>5-6</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>This entry combines Easy CD Creator Layout version 5 with extension CL5 and Roxio Easy CD Creator Layout version 6 with extension RCL, which are both part of Roxio disc project formats. CL5 and RCL files are formed using Easy CD Creator, a software originally published by Adaptec in 1996 after Adaptec merged its Easy-CD Pro with Corel CD Creator, RCL files were part of Adaptec's re-brading to Roxio. CL5 version of Easy CD Creator Layout formats was published in 2001 after Adaptec spun-off their digital media division as Roxio, but prior to rebranding Easy CD Creator as Roxio Easy CD Creator - creating RCL files. Easy CD Creator software allowed the user to create data or audio CD layout by adding files or music in order to burn a disc. The layout only referenced the file location and not the files themselves. It allowed for files to be saved for later use with references to files that will be included on the disc as well as other settings. 
+This format is a proprietary binary file, altered from earlier version CL2, CL3 and CL4 which are all Microsoft Compound File format, OLE2 container. The previous versions of this type of format have extensions CL2, CL3 and CL4. These earlier versions are seem to have very similar structure and cannot yet be distinguished in PRONOM. Please contact the PRONOM team in case you hold any more information regarding the earlier versions of this format.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
+      <ProvenanceSourceDate>19 Apr 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>30 May 2022</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/CL5
+
+https://www.file-extensions.org/cl5-file-extension
+
+https://fileinfo.com/extension/cl5
+
+http://fileformats.archiveteam.org/wiki/Easy_CD_Creator
+
+https://web.archive.org/web/20030602181520/http://www.roxio.com:80/en/products/ecdc/index.jhtml 
+
+http://fileformats.archiveteam.org/wiki/RCL</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1665</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3018</ExternalSignatureID>
+        <Signature>rcl</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3019</ExternalSignatureID>
+        <Signature>cl5</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1999</SignatureID>
+        <SignatureName>Roxio Easy CD Creator Layout v5 &amp; v6</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 0x10000000, then a gap of 1 byte followed by 0x0000000100000011000000</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2323</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>10000000{1}0000000100000011000000</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>2502</RelatedFormatID>
+        <RelatedFormatName>Roxio Easy Media Creator Layout</RelatedFormatName>
+        <RelatedFormatVersion>7</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

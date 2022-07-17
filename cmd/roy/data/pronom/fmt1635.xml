@@ -22,12 +22,11 @@
       <WithdrawnDate>
       </WithdrawnDate>
       <ProvenanceSourceID>220</ProvenanceSourceID>
-      <ProvenanceName>
-      </ProvenanceName>
+      <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
       <ProvenanceSourceDate>24 Feb 2022</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>24 Feb 2022</LastUpdatedDate>
+      <LastUpdatedDate>30 Jun 2022</LastUpdatedDate>
       <FormatNote>http://fileformats.archiveteam.org/wiki/InDesign_INDD</FormatNote>
       <FormatRisk>
       </FormatRisk>
@@ -40,6 +39,16 @@
       <ExternalSignature>
         <ExternalSignatureID>2941</ExternalSignatureID>
         <Signature>indd</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2973</ExternalSignatureID>
+        <Signature>ind</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2974</ExternalSignatureID>
+        <Signature>indt</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <InternalSignature>

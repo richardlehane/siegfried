@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2498</FormatID>
+      <FormatName>Yamaha TX Wave Audio</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Audio</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The Yamaha TX Wave Audio format is 12-bit audio wave file created by the Yamaha TX16W sampler. The Yamaha TX16W is a rack-mount sampler sound module with up to 50 kHz mono and 33 kHz stereo sampling. The format is proprietary created by Yamaha, similar to a .WAV file and supports 16, 33, and 50 kHz samples. The file consists of a 32 byte header followed by the actual waveform. This file fomat has multiple extensions, some of which have yet not been identified. The Yamaha SY Series Wave files also can use the same file extension and a simililar BOF sequence of 0x4C4D38393533. Please use links provided to view the full format specification.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>29 Mar 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>29 Mar 2022</LastUpdatedDate>
+      <FormatNote>http://www.youngmonkey.ca/nose/audio_tech/synth/Yamaha-TX16W.html
+
+https://en.wikipedia.org/wiki/Yamaha_TX16W
+
+https://www.file-extensions.org/w%3F%3F-file-extension
+
+https://dompselaar.org/Yamaha/TX16W/MP/</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1662</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>2993</ExternalSignatureID>
+        <Signature>txw</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2994</ExternalSignatureID>
+        <Signature>w01</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2995</ExternalSignatureID>
+        <Signature>w02</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2996</ExternalSignatureID>
+        <Signature>w03</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2997</ExternalSignatureID>
+        <Signature>w04</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2998</ExternalSignatureID>
+        <Signature>w05</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>2999</ExternalSignatureID>
+        <Signature>w06</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3000</ExternalSignatureID>
+        <Signature>w07</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3001</ExternalSignatureID>
+        <Signature>w08</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3002</ExternalSignatureID>
+        <Signature>w09</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3003</ExternalSignatureID>
+        <Signature>w10</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3004</ExternalSignatureID>
+        <Signature>w11</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3005</ExternalSignatureID>
+        <Signature>w12</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3006</ExternalSignatureID>
+        <Signature>w13</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3007</ExternalSignatureID>
+        <Signature>w14</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3008</ExternalSignatureID>
+        <Signature>w15</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3009</ExternalSignatureID>
+        <Signature>w16</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3010</ExternalSignatureID>
+        <Signature>w17</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3011</ExternalSignatureID>
+        <Signature>w18</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3012</ExternalSignatureID>
+        <Signature>w19</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3013</ExternalSignatureID>
+        <Signature>w20</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3014</ExternalSignatureID>
+        <Signature>w21</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3015</ExternalSignatureID>
+        <Signature>w22</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1995</SignatureID>
+        <SignatureName>Yamaha TX Wave Audio</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 'LM8953, then null bytes followed by wildcard bytes beween {16-21} then either bytes 0x49 or 0xC9, followed by 0x01'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2319</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4C4D383935330000000000000000000000{5}(49|C9)01</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2488</RelatedFormatID>
+        <RelatedFormatName>Yamaha Wave Audio</RelatedFormatName>
+        <RelatedFormatVersion>Generic</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

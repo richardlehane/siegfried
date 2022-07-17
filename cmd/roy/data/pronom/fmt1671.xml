@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2507</FormatID>
+      <FormatName>Z Compressed Data</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Z Compressed Data are files that have been compressed by Unix's shell compression program, compress. The compress software was developed by Spences Thomas in 1984 and uses LZW algorithm. The format has lossless data, it can be compressed and decompressed using the Unix and Linux operating systems.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>22 Apr 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>22 Apr 2022</LastUpdatedDate>
+      <FormatNote>https://en.wikipedia.org/wiki/Compress
+
+https://docs.fileformat.com/compression/z/
+
+http://fileformats.archiveteam.org/wiki/Compress_(Unix)</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1671</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3025</ExternalSignatureID>
+        <Signature>Z</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2005</SignatureID>
+        <SignatureName>Z Compressed Data</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 0x1F9D90</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2329</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>1F9D90</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <CompressionType>
+        <CompressionID>12</CompressionID>
+        <CompressionName>Lempel-Ziv-Welch</CompressionName>
+        <CompressionVersion>
+        </CompressionVersion>
+        <CompressionAliases>LZW</CompressionAliases>
+        <CompressionFamilies>
+        </CompressionFamilies>
+        <Description>The Lempel-Ziv-Welch compression algorithm was developed by Terry Welch in 1984, as a modification of the LZ78 compressor. It is a lossless technique which can be applied to almost any type of data, but is most commonly used for image compression. LZW compression is effective on images with colour depths from 1-bit (monochrome) to 24-bit (True Colour). LZW compression is encountered in a range of common graphics file formats, including TIFF and GIF.</Description>
+        <Lossiness>Lossless</Lossiness>
+        <ReleaseDate>01 Jan 1984</ReleaseDate>
+        <WithdrawnDate>
+        </WithdrawnDate>
+        <CompressionDocumentation>Welch, T A, 1984, A technique for high performance data compression, IEEE Computer, 17: 6</CompressionDocumentation>
+        <CompressionIPR>
+        </CompressionIPR>
+        <CompressionNote>
+        </CompressionNote>
+        <CompressionIdentifier>
+          <Identifier>x-cmp/12</Identifier>
+          <IdentifierType>PUID</IdentifierType>
+        </CompressionIdentifier>
+        <Developer>
+          <DeveloperID>121</DeveloperID>
+          <DeveloperName>T A Welch</DeveloperName>
+          <OrganisationName>
+          </OrganisationName>
+          <DeveloperCompoundName>T A Welch / [No organisation specified]</DeveloperCompoundName>
+        </Developer>
+      </CompressionType>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

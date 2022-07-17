@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>931</FormatID>
-      <FormatName>Synchronized Multimedia Integration Language</FormatName>
+      <FormatName>Synchronized Multimedia Integration Language (Generic)</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
@@ -13,7 +13,7 @@
       <FormatTypes>Text (Mark-up)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Synchronized Multimedia Integration Language is a World Wide Web Consortium recommended Extensible Markup Language (XML) markup language to describe multimedia presentations. It defines markup for timing, layout, animations, visual transitions, media embedding and others. SMIL allows presenting media items such as text, images, video, audio, links to other SMIL presentations, and files from multiple web servers. SMIL markup is written in XML, and has similarities to HTML. This is the generic entry for this file format which most commonly is denoted with the .smil extension. It is likely that the truncated .smi extension refers specifically to the metadata files accompanying the corresponding images taken by Sony digital cameras.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -26,9 +26,12 @@
       <ProvenanceSourceDate>28 Oct 2009</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>28 Oct 2009</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>16 Jun 2022</LastUpdatedDate>
+      <FormatNote>https://en.wikipedia.org/wiki/Synchronized_Multimedia_Integration_Language
+
+https://www.w3.org/TR/SMIL3/
+
+http://www.telestream.net/pdfs/app-notes/app_Camera_Ingest.pdf</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -42,6 +45,41 @@
         <Signature>smil</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3101</ExternalSignatureID>
+        <Signature>smi</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2051</SignatureID>
+        <SignatureName>Synchronized Multimedia Integration Language</SignatureName>
+        <SignatureNote>BOF:'&lt;?xml version=("OR')1.0("OR')' followed by a gap between 0-512 bytes followed by '&lt;smil xmlns='</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2378</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>3</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C3F786D6C2076657273696F6E3D(22|27)312E30(22|27){0-512}3C736D696C20786D6C6E733D</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>638</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subtype of</RelationshipType>
+        <RelatedFormatID>638</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

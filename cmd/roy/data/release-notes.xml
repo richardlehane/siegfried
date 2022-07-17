@@ -2,18 +2,1027 @@
 <?xml-stylesheet type="text/xsl" href="release-note.xsl"?>
 <release_notes>
 <release_note>
-	<release_date>11th March 2022</release_date>
-	<signature_filename>DROID_SignatureFile_V104.xml</signature_filename>
-	<release_outline name="Updated Records">
-		<format>
-         <puid type="fmt">1629</puid>
-         <name>Adobe InDesign Document (1.5)</name>
-         <summary>Corrected relationships by adding priority over Adobe InDesign Document 1.0 and removing priority over Adobe InDesign Document 1.0. Submitted by Digital Preservation Department, The National Archives.</summary>
-		</format>
-	</release_outline>
+   <release_date>4th July 2022</release_date>
+   <signature_filename>DROID_SignatureFile_V106.xml</signature_filename>
+   <release_outline name="New Records"/>
+   <release_outline name="Updated Records">
+      <format>
+         <puid type="fmt">90</puid>
+         <name>PCX (5)</name>
+         <summary>Added priority over fmt/134. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">205</puid>
+         <name>Synchronized Multimedia Integration Language (Generic)</name>
+         <summary>Added priority over fmt/101. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">473</puid>
+         <name>Microsoft Office Owner File</name>
+         <summary>Five additional signatures identified in line with the patterns already shown but expanded to allow for a bigger hex range.. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1601</puid>
+         <name>Type Library Type 1</name>
+         <summary>Adjusted sequence. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1688</puid>
+         <name>Microsoft Word for MS-DOS Document (v6)</name>
+         <summary>Adjusted sequence. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="New Signatures">
+      <format>
+         <puid type="fmt">473</puid>
+         <name>Microsoft Office Owner File</name>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+      </format>
+   </release_outline>
 </release_note>
 <release_note>
-   <release_date>10th March 2022</release_date>
+   <release_date>29th June 2022</release_date>
+   <signature_filename>DROID_SignatureFile_V105.xml</signature_filename>
+   <release_outline name="New Records">
+      <format>
+         <puid type="fmt">1649</puid>
+         <name>AGS 4 Data Format</name>
+         <summary>Full entry added. Submitted by Association of Geotechnical and Geoenvironmental Specialists, supported by British Geological Survey.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1650</puid>
+         <name>Bayesian Interchange Format File</name>
+         <summary>Extension-only entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1651</puid>
+         <name>Garmin Flexible and Interoperable Data Transfer file</name>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1652</puid>
+         <name>Typescript</name>
+         <summary>Extension-only entry added. Submitted by Diplomatic Archives / French Ministry for Europe and Foreign Affairs.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1653</puid>
+         <name>STAD PAC File</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1654</puid>
+         <name>Palm Database ImageViewer Format</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1655</puid>
+         <name>cdrLabel Label File</name>
+         <summary>Extension-only entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1656</puid>
+         <name>Microsoft Help Contents File</name>
+         <summary>Full entry added. Submitted by The Canadian Centre for Architecture .</summary>
+      </format>
+      <format>
+         <puid type="fmt">1657</puid>
+         <name>XIMG (Extended GEM Bit Image)</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1658</puid>
+         <name>XL-Paint MaX</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1659</puid>
+         <name>XL-Paint </name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1660</puid>
+         <name>Art &#38; Letters Clip Art Library</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration and The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1661</puid>
+         <name>Yamaha Wave Audio Generic</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1662</puid>
+         <name>Yamaha TX Wave Audio </name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1663</puid>
+         <name>YAODL (Yet Another Object Description Language) File</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1664</puid>
+         <name>RED Thumbnail File</name>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1665</puid>
+         <name>Easy CD Creator Layout | Roxio Easy CD Creator Layout</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1666</puid>
+         <name>Roxio Easy Media Creator Layout</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1667</puid>
+         <name>Roxio Easy Media Creator - Classic Creator File</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1668</puid>
+         <name>Roxio Easy Media Creator Layout</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1669</puid>
+         <name>Roxio Data Project File</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1670</puid>
+         <name>Roxio Audio Project File</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1671</puid>
+         <name>Z Compressed Data</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1672</puid>
+         <name>Linux/i386 Binary Executable File ZMAGIC</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1673</puid>
+         <name>ZBrush MatCap</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1674</puid>
+         <name>ZyXEL Voice Format Audio</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1675</puid>
+         <name>IntelliFont Font File</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1676</puid>
+         <name>Covox ADPCM Audio Files | Covox 8-bit audio</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1677</puid>
+         <name>Microsoft Office File List</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1678</puid>
+         <name>MATLAB Script File</name>
+         <summary>Extension-only entry added. Submitted by Technische Informationsbibliothek (TIB) Hannover.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1679</puid>
+         <name>Garmin track log file</name>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1680</puid>
+         <name>INTREPID Standard Information File</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1681</puid>
+         <name>OBO Flat File Format</name>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1682</puid>
+         <name>EndNote Library vX - X9</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1683</puid>
+         <name>EndNote Compressed Library vX - X9</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1684</puid>
+         <name>EndNote Library v20+</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1685</puid>
+         <name>EndNote Compressed Library v20+</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1686</puid>
+         <name>PageMaker Mac Document (4.0)</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1687</puid>
+         <name>PageMaker Mac Document (5.0)</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1688</puid>
+         <name>Microsoft Word for MS-DOS Document (v6)</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1689</puid>
+         <name>Microsoft Word for MS-DOS Glossary File (Generic)</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1690</puid>
+         <name>Microsoft Word for MS-DOS Style Sheet File (Generic)</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1691</puid>
+         <name>Microsoft Word for MS-DOS Printer Description File (Generic)</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1692</puid>
+         <name>ESRI ArcGIS Raw Raster Reader/ Writer</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1693</puid>
+         <name>Asymetrix Compel Presentation v1.0</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1694</puid>
+         <name>Asymetrix Compel Presentation v2.0</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1695</puid>
+         <name>602 Text file</name>
+         <summary>Full entry added. Submitted by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1696</puid>
+         <name>ESRI Attribute Index Files</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1697</puid>
+         <name>Calc602 Spreadsheet file or backup file v.1.51</name>
+         <summary>Full entry added. Submitted by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1698</puid>
+         <name>Calc602 Spreadsheet file or backup file v.1.00</name>
+         <summary>Full entry added. Submitted by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1699</puid>
+         <name>602 Graph/Chart File</name>
+         <summary>Full entry added. Submitted by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1700</puid>
+         <name>OGC GeoPackage</name>
+         <summary>Full entry added. Submitted by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1701</puid>
+         <name>Persuasion Mac Document v1</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1702</puid>
+         <name>Persuasion Mac Document v2</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1703</puid>
+         <name>Persuasion Mac Document v2.1</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1704</puid>
+         <name>Persuasion Mac Document v3</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1705</puid>
+         <name>Persuasion Mac Document v4</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1706</puid>
+         <name>Persuasion Windows Document v2</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1707</puid>
+         <name>Persuasion Windows Document v3-4</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1708</puid>
+         <name>Persuasion Player File v3</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1709</puid>
+         <name>Persuasion Presentation Interchange File</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1710</puid>
+         <name>Persuasion Auto-Template Interchange File</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1711</puid>
+         <name>Software602 Printer Configuration File</name>
+         <summary>Full entry added. Submitted by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1712</puid>
+         <name>Calc602 Macro File</name>
+         <summary>Extension-only entry added. Submitted by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1713</puid>
+         <name>Calc602 Project File v. 1.0</name>
+         <summary>Full entry added. Submitted by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1714</puid>
+         <name>CATIA Model File v.3</name>
+         <summary>Full entry added. Submitted by J. Paul Getty Trust..</summary>
+      </format>
+      <format>
+         <puid type="fmt">1715</puid>
+         <name>Applet Effect Factory Config File</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1716</puid>
+         <name>Cintel Raw Image/DaVinci Resolve Image</name>
+         <summary>Full entry added. Submitted by Preservica and the CSC - IT Center for Science, Finland.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1717</puid>
+         <name>Time Stamp Token</name>
+         <summary>Extension-only entry added. Submitted by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1718</puid>
+         <name>PageMaker Mac Document (6.5)</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1719</puid>
+         <name>PageMaker Mac Document (6.0)</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1720</puid>
+         <name>Portable Compiled Format</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1721</puid>
+         <name>Pablo Paint Raster Image</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1722</puid>
+         <name>BIM Metadata File</name>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="Updated Records">
+      <format>
+         <puid type="fmt">86</puid>
+         <name>PCX (0)</name>
+         <summary>Adjusted signature for a broader identification. Updated note in signature, description, reference links and compression type. Extension 'pcc'  was added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">87</puid>
+         <name>PCX (2)</name>
+         <summary>Adjusted signature for a broader identification. Updated note in signature, description, reference links and compression type. Extension 'pcc'  was added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">88</puid>
+         <name>PCX (3)</name>
+         <summary>Adjusted signature for a broader identification. Updated note in signature, description, reference links and compression type. Extension 'pcc'  was added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">89</puid>
+         <name>PCX (4)</name>
+         <summary>Adjusted signature for a broader identification. Updated note in signature, description, reference links and compression type. Extension 'pcc'  was added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">90</puid>
+         <name>PCX (5)</name>
+         <summary>Adjusted signature for a broader identification. Updated note in signature, description, reference links and compression type. Extension 'pcc'  was added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">141</puid>
+         <name>Waveform Audio (PCMWAVEFORMAT)</name>
+         <summary>Updated extension to include .wave. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">152</puid>
+         <name>Digital Negative Format (DNG) 1.1</name>
+         <summary>Changed maximum offset in signature to the TIFF header and DNGVersion tag near EOF from 4084 to 10000 bytes. Submitted by Digital Repository, Historic Environment Scotland.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">159</puid>
+         <name>GEM Image</name>
+         <summary>Updated description and note field. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">159</puid>
+         <name>EBCDIC-US</name>
+         <summary>Removal of extension .siard. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">173</puid>
+         <name>PageMaker PC Document (5.0)</name>
+         <summary>Updated description, mime type, updated title to refer to only PC files and extension of pt5 included.. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">174</puid>
+         <name>PageMaker PC Document (6.0)</name>
+         <summary>File format description updated, name changed to be specific to PC versions only and extensions added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">181</puid>
+         <name>PageMaker PC Document (6.5)</name>
+         <summary>File format description updated, name changed to be specific to PC versions only and extensions added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">205</puid>
+         <name>Synchronized Multimedia Integration Language (Generic)</name>
+         <summary>Updated name, description and note field. Added new signature and created priority over fmt/101. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">273</puid>
+         <name>Microsoft Word for MS-DOS Document (v3)</name>
+         <summary>Deprecated in favour of another entry. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">274</puid>
+         <name>Microsoft Word for MS-DOS Document (v4)</name>
+         <summary>Version number changed to v1-v4; updated description and notes section; added developer. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">275</puid>
+         <name>Microsoft Word for MS-DOS Document (v5)</name>
+         <summary>Updated description and notes section; added developer. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">276</puid>
+         <name>Microsoft Word for MS-DOS Document (v5.5)</name>
+         <summary>Updated signature, description and notes section; added developer. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">279</puid>
+         <name>MPEG 1/2 Audio Layer 3 Streaming</name>
+         <summary>Changed format type. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">314</puid>
+         <name>SID Audio 1</name>
+         <summary>Extension .dxr changed to .sid. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">325</puid>
+         <name>EndNote Library v1-9</name>
+         <summary>Updated description, version number and added priorities. Changed signature names to include version name. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">328</puid>
+         <name>EndNote Import File</name>
+         <summary>Amended internal sigs EndNote Import File No.1 and EndNote Import File No.2: Changed wildcard to {5-50}. Amended bytes within sequences from (44|54) to (41|42|43|44|54). Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">352</puid>
+         <name>PageMaker PC Document (4.0)</name>
+         <summary>Updated description, updated title to refer to only PC files and extension of pt4 included. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">371</puid>
+         <name>Enhanced Compression Wavelet</name>
+         <summary>Widened signature to account for variations in files found by enquirier. . Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">389</puid>
+         <name>Log ASCII Standard Format</name>
+         <summary>Expanded optional bytes from 0-3 to 0-5 and added optional 'Log ASCII Standard' magic bytes. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">406</puid>
+         <name>PostScript 2.0</name>
+         <summary>Added priority over fmt/1616, description, notes and changed format type. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">436</puid>
+         <name>CATIA Model v.4</name>
+         <summary>Updated description and magic bytes. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">438</puid>
+         <name>CATIA Material Description</name>
+         <summary>Removed stray space character from the start of the name field. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">526</puid>
+         <name>Adobe Font List</name>
+         <summary>Added description. Submitted by The Swedish Public Employment Service.</summary>
+      </format>
+      <format>
+         <puid type="fmt">662</puid>
+         <name>Panasonic Raw</name>
+         <summary>Extension changed from upper case RW2 to lower case rw2. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">670</puid>
+         <name>PKCS #7 Cryptographic Message File</name>
+         <summary>Adjusted signature to include first BOF byte and changed signature name to PKCS #7 Cryptographic Message File from P7M. Updated description and reference links. Added extensions .p7s, .p7b, and MIME types. Submitted by Tatiana Canelhas.</summary>
+      </format>
+      <format>
+         <puid type="fmt">703</puid>
+         <name>Broadcast WAVE 0 PCM Encoding</name>
+         <summary>Added priority over fmt/142 to prevent double identification with DROID (as is already the case with fmt/141). Submitted by Docuteam AG.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1342</puid>
+         <name>BDOC v2.x</name>
+         <summary>Added priority over fmt/1564 and format type. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1463</puid>
+         <name>Ableton Live Set</name>
+         <summary>Removed stray space character from the start of the name field. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1472</puid>
+         <name>Magic Shadow Archiver Disk Image File</name>
+         <summary>Removed stray space character from the start of the MIMEType field. Submitted by Sembiance.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1564</puid>
+         <name>Associated Signature Container Extended (ASiC-E)</name>
+         <summary>Container signature added to improve identification from extension only. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1568</puid>
+         <name>ISDOCX Information System Document (Generic)</name>
+         <summary>Updated signature to include BOF ZIP bytes, strengthened the EOF signature. Submitted by KEEP SOLUTIONS.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1616</puid>
+         <name>BibTeX Database File</name>
+         <summary>Strengthened signature by expanding BOF sequence. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1628</puid>
+         <name>Adobe InDesign Document 1.0</name>
+         <summary>Removed priority over x-fmt/450. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1635</puid>
+         <name>Adobe InDesign Document CC 2017</name>
+         <summary>Added .ind and .indt file extensions. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="New Signatures">
+      <format>
+         <puid type="fmt">86</puid>
+         <name>PCX (0)</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">87</puid>
+         <name>PCX (2)</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">88</puid>
+         <name>PCX (3)</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">89</puid>
+         <name>PCX (4)</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">90</puid>
+         <name>PCX (5)</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">173</puid>
+         <name>PageMaker PC Document (5.0)</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">174</puid>
+         <name>PageMaker PC Document (6.0)</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">181</puid>
+         <name>PageMaker PC Document (6.5)</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">205</puid>
+         <name>Synchronized Multimedia Integration Language (Generic)</name>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">352</puid>
+         <name>PageMaker PC Document (4.0)</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1564</puid>
+         <name>Associated Signature Container Extended (ASiC-E)</name>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1649</puid>
+         <name>AGS 4 Data Format</name>
+         <summary>Signature researched and samples provided by Association of Geotechnical and Geoenvironmental Specialists, supported by British Geological Survey.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1651</puid>
+         <name>Garmin Flexible and Interoperable Data Transfer file</name>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1653</puid>
+         <name>STAD PAC File</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1654</puid>
+         <name>Palm Database ImageViewer Format</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1656</puid>
+         <name>Microsoft Help Contents File</name>
+         <summary>Signature researched and samples provided by The Canadian Centre for Architecture .</summary>
+      </format>
+      <format>
+         <puid type="fmt">1657</puid>
+         <name>XIMG (Extended GEM Bit Image)</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1658</puid>
+         <name>XL-Paint MaX</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1659</puid>
+         <name>XL-Paint </name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1660</puid>
+         <name>Art &#38; Letters Clip Art Library</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration and The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1661</puid>
+         <name>Yamaha Wave Audio Generic</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1662</puid>
+         <name>Yamaha TX Wave Audio </name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1663</puid>
+         <name>YAODL (Yet Another Object Description Language) File</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1664</puid>
+         <name>RED Thumbnail File</name>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1665</puid>
+         <name>Easy CD Creator Layout | Roxio Easy CD Creator Layout</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1666</puid>
+         <name>Roxio Easy Media Creator Layout</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1667</puid>
+         <name>Roxio Easy Media Creator - Classic Creator File</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1668</puid>
+         <name>Roxio Easy Media Creator Layout</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1669</puid>
+         <name>Roxio Data Project File</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1670</puid>
+         <name>Roxio Audio Project File</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1671</puid>
+         <name>Z Compressed Data</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1672</puid>
+         <name>Linux/i386 Binary Executable File ZMAGIC</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1673</puid>
+         <name>ZBrush MatCap</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1674</puid>
+         <name>ZyXEL Voice Format Audio</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1675</puid>
+         <name>IntelliFont Font File</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1676</puid>
+         <name>Covox ADPCM Audio Files | Covox 8-bit audio</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1677</puid>
+         <name>Microsoft Office File List</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1679</puid>
+         <name>Garmin track log file</name>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1680</puid>
+         <name>INTREPID Standard Information File</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1681</puid>
+         <name>OBO Flat File Format</name>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1682</puid>
+         <name>EndNote Library vX - X9</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1683</puid>
+         <name>EndNote Compressed Library vX - X9</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1684</puid>
+         <name>EndNote Library v20+</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1685</puid>
+         <name>EndNote Compressed Library v20+</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1686</puid>
+         <name>PageMaker Mac Document (4.0)</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1687</puid>
+         <name>PageMaker Mac Document (5.0)</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1688</puid>
+         <name>Microsoft Word for MS-DOS Document (v6)</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1689</puid>
+         <name>Microsoft Word for MS-DOS Glossary File (Generic)</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1690</puid>
+         <name>Microsoft Word for MS-DOS Style Sheet File (Generic)</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1691</puid>
+         <name>Microsoft Word for MS-DOS Printer Description File (Generic)</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1692</puid>
+         <name>ESRI ArcGIS Raw Raster Reader/ Writer</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1693</puid>
+         <name>Asymetrix Compel Presentation v1.0</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1694</puid>
+         <name>Asymetrix Compel Presentation v2.0</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1695</puid>
+         <name>602 Text file</name>
+         <summary>Signature researched and samples provided by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1696</puid>
+         <name>ESRI Attribute Index Files</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1697</puid>
+         <name>Calc602 Spreadsheet file or backup file v.1.51</name>
+         <summary>Signature researched and samples provided by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1698</puid>
+         <name>Calc602 Spreadsheet file or backup file v.1.00</name>
+         <summary>Signature researched and samples provided by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1699</puid>
+         <name>602 Graph/Chart File</name>
+         <summary>Signature researched and samples provided by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1700</puid>
+         <name>OGC GeoPackage</name>
+         <summary>Signature researched and samples provided by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1701</puid>
+         <name>Persuasion Mac Document v1</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1702</puid>
+         <name>Persuasion Mac Document v2</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1703</puid>
+         <name>Persuasion Mac Document v2.1</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1704</puid>
+         <name>Persuasion Mac Document v3</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1705</puid>
+         <name>Persuasion Mac Document v4</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1706</puid>
+         <name>Persuasion Windows Document v2</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1707</puid>
+         <name>Persuasion Windows Document v3-4</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1708</puid>
+         <name>Persuasion Player File v3</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1709</puid>
+         <name>Persuasion Presentation Interchange File</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1710</puid>
+         <name>Persuasion Auto-Template Interchange File</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1711</puid>
+         <name>Software602 Printer Configuration File</name>
+         <summary>Signature researched and samples provided by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1713</puid>
+         <name>Calc602 Project File v. 1.0</name>
+         <summary>Signature researched and samples provided by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1714</puid>
+         <name>CATIA Model File v.3</name>
+         <summary>Signature researched and samples provided by J. Paul Getty Trust..</summary>
+      </format>
+      <format>
+         <puid type="fmt">1715</puid>
+         <name>Applet Effect Factory Config File</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1716</puid>
+         <name>Cintel Raw Image/DaVinci Resolve Image</name>
+         <summary>Signature researched and samples provided by Preservica and the CSC - IT Center for Science, Finland.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1718</puid>
+         <name>PageMaker Mac Document (6.5)</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1719</puid>
+         <name>PageMaker Mac Document (6.0)</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1720</puid>
+         <name>Portable Compiled Format</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1721</puid>
+         <name>Pablo Paint Raster Image</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1722</puid>
+         <name>BIM Metadata File</name>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+      </format>
+   </release_outline>
+</release_note>
+<release_note>
+   <release_date>11th March 2022</release_date>
+   <signature_filename>DROID_SignatureFile_V104.xml</signature_filename>
+   <release_outline name="Updated Records">
+      <format>
+         <puid type="fmt">1629</puid>
+         <name>Adobe InDesign Document 1.5</name>
+         <summary>Corrected relationships by adding priority over Adobe InDesign Document 1.0 and removing priority over Adobe InDesign Document 1.0. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+   </release_outline>
+</release_note>
+<release_note>
+   <release_date>11th March 2022</release_date>
    <signature_filename>DROID_SignatureFile_V103.xml</signature_filename>
    <release_outline name="New Records">
       <format>

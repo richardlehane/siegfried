@@ -28,11 +28,12 @@ ASiC-E container contains multiple data objects, each object may be signed by on
       </ReleaseDate>
       <WithdrawnDate>
       </WithdrawnDate>
-      <ProvenanceSourceID>242</ProvenanceSourceID>
-      <ProvenanceName>The National Archives of the Czech Republic / The National Archives of the Czech Republic</ProvenanceName>
+      <ProvenanceSourceID>254</ProvenanceSourceID>
+      <ProvenanceName>
+      </ProvenanceName>
       <ProvenanceSourceDate>24 Nov 2021</ProvenanceSourceDate>
       <ProvenanceDescription>	This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
-      <LastUpdatedDate>24 Nov 2021</LastUpdatedDate>
+      <LastUpdatedDate>27 Jun 2022</LastUpdatedDate>
       <FormatNote>https://www.etsi.org/deliver/etsi_ts/102900_102999/102918/01.03.01_60/ts_102918v010301p.pdf</FormatNote>
       <FormatRisk>
       </FormatRisk>
@@ -62,6 +63,12 @@ ASiC-E container contains multiple data objects, each object may be signed by on
         <RelatedFormatName>Electronically Certified Document (EDOC)</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2160</RelatedFormatID>
+        <RelatedFormatName>BDOC</RelatedFormatName>
+        <RelatedFormatVersion>2.x</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Is supertype of</RelationshipType>

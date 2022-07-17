@@ -12,7 +12,7 @@
       <FormatTypes>Word Processor</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Microsoft Word for MS-DOS Document is a proprietary binary format of Microsoft Word, word processing application, for MS-DOS first released in 1983. The first version was released on IBM PC DOS, developed by Microsoft, which Microsoft then re-branded as MS-DOS. The version was developed by Charles Simonyi and Richard Brodie firstly for Xenix in February 1983 (titled as "Multi-Tool Word") and in October 1983 for MS-DOS operating systems. The application featured graphics video mode, mouse and printer support (printer support was added in version 2) in WYSIWYG (What You See Is What You Get) interface and could run in text mode or graphics mode, with bold, italics, and underline features only available in the text mode. The version 5 of the format was released in 1989, with the release of Word for MS-MOS, which included added support for bookmarks, cross-references and conditions and loops in macros, remaining backwards compatible with Word 3.0 macros. Please see the full list of versions using the links provided in the Notes section.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>Little-endian (Intel)</ByteOrders>
       <ReleaseDate>
@@ -24,9 +24,14 @@
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>19 May 2022</LastUpdatedDate>
+      <FormatNote>https://web.archive.org/web/20211222235433/https://winworldpc.com/product/microsoft-word/5x-dos
+
+https://en.wikipedia.org/wiki/Doc_(computing)#Microsoft_Word_Binary_File_Format
+
+https://web.archive.org/web/20220517101947/https://en.wikipedia.org/wiki/History_of_Microsoft_Word
+
+https://www.docfly.com/blog/2020/a-brief-history-of-microsoft-word</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -43,6 +48,13 @@
         <Identifier>x-fmt/275</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>93</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <DeveloperCompoundName>Microsoft Corporation</DeveloperCompoundName>
+      </Developers>
       <ExternalSignature>
         <ExternalSignatureID>394</ExternalSignatureID>
         <Signature>doc</Signature>
@@ -75,15 +87,9 @@
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Is subsequent version of</RelationshipType>
-        <RelatedFormatID>405</RelatedFormatID>
-        <RelatedFormatName>Microsoft Word for MS-DOS Document</RelatedFormatName>
-        <RelatedFormatVersion>3.0</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Is subsequent version of</RelationshipType>
         <RelatedFormatID>406</RelatedFormatID>
         <RelatedFormatName>Microsoft Word for MS-DOS Document</RelatedFormatName>
-        <RelatedFormatVersion>4.0</RelatedFormatVersion>
+        <RelatedFormatVersion>1.x - 4.0</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>

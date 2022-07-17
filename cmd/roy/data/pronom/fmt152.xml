@@ -26,7 +26,7 @@ This version was published in February 2005 and corrected the flaws in the first
       <ProvenanceSourceDate>02 Feb 2007</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>11 Jun 2012</LastUpdatedDate>
+      <LastUpdatedDate>27 Jun 2022</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -95,7 +95,7 @@ This version was published in February 2005 and corrected the flaws in the first
           <ByteSequenceID>810</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>4084</MaxOffset>
+          <MaxOffset>10000</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

@@ -57,6 +57,7 @@
     "fmt/1281 (WARC 1.1)",
     "fmt/1340 (BDOC 1)",
     "fmt/1341 (Associated Signature Container Simple (ASiC-S))",
+    "fmt/1342 (BDOC 2.x)",
     "fmt/1355 (WARC 1.0)",
     "fmt/1361 (Amiga Disk File)",
     "fmt/1399 (DiskDoubler)",
@@ -72,10 +73,15 @@
     "fmt/1564 (Associated Signature Container Extended (ASiC-E))",
     "fmt/1568 (ISDOCX Information System Document (Generic) 5.x)",
     "fmt/1571 (ISDOCX Information System Document 6.0.1)",
-    "fmt/1609 (exFAT (extensible File Allocation Table) disc image)",
+    "fmt/1609 (exFAT (Extensible File Allocation Table) Disc Image)",
     "fmt/1642 (Adobe InDesign Library 2)",
     "fmt/1644 (Roxio Label Creator Project File 4-5)",
-    "fmt/1645 (Roxio Label Creator Project File 6-7)"
+    "fmt/1645 (Roxio Label Creator Project File 6-7)",
+    "fmt/1648 (Crystal Reports File)",
+    "fmt/1671 (Z Compressed Data)",
+    "fmt/1682 (EndNote Library X - X9)",
+    "fmt/1683 (EndNote Compressed Library X - X9)",
+    "fmt/1685 (EndNote Compressed Library 20)"
   ],
   "audio": [
     "x-fmt/135 (Audio Interchange File Format 1.3)",
@@ -89,7 +95,6 @@
     "x-fmt/222 (CD Audio)",
     "x-fmt/230 (MIDI Audio)",
     "x-fmt/278 (RealAudio 3)",
-    "x-fmt/279 (MPEG 1/2 Audio Layer 3 Streaming)",
     "x-fmt/305 (Apple Sound)",
     "fmt/6 (Waveform Audio)",
     "fmt/5 (Audio/Video Interleaved Format)",
@@ -187,7 +192,11 @@
     "fmt/1621 (AHX-Module Format (formerly THX module format) 0-2)",
     "fmt/1622 (Asylum Music Format)",
     "fmt/1623 (Art Of Noise 4 Channel Module)",
-    "fmt/1624 (Art Of Noise 8 Channel Module)"
+    "fmt/1624 (Art Of Noise 8 Channel Module)",
+    "fmt/1661 (Yamaha Wave Audio Generic)",
+    "fmt/1662 (Yamaha TX Wave Audio)",
+    "fmt/1674 (ZyXEL Voice Format Audio)",
+    "fmt/1676 (Covox ADPCM Audio Files)"
   ],
   "database": [
     "x-fmt/6 (FoxPro Database 2.0)",
@@ -324,7 +333,7 @@
     "fmt/285 (Gridded Binary 2.0)",
     "fmt/286 (HDF5 1)",
     "fmt/287 (HDF5 2)",
-    "fmt/372 (Earth Resource Satellite image header format)",
+    "fmt/372 (Earth Resource Satellite Image Header Format)",
     "fmt/389 (Log ASCII Standard Format 1.2)",
     "fmt/390 (Log ASCII Standard Format 2.0)",
     "fmt/391 (Log ASCII Standard Format 3.0)",
@@ -442,7 +451,9 @@
     "fmt/1506 (EinScan RGE 3D Range File)",
     "fmt/1553 (Septentrio Binary Format)",
     "fmt/1554 (DNA Sequence Chromatogram File 3.00)",
-    "fmt/1556 (Starlink Data Format)"
+    "fmt/1556 (Starlink Data Format)",
+    "fmt/1680 (INTREPID Standard Information File 3.7 onwards)",
+    "fmt/1722 (BIM Metadata File)"
   ],
   "email": [
     "x-fmt/430 (Microsoft Outlook Email Message 97-2003)",
@@ -462,7 +473,9 @@
     "fmt/1546 (Daisy-Dot Font File I and II)",
     "fmt/1547 (Daisy-Dot Font File III)",
     "fmt/1569 (Bitstream Speedo Fonts)",
-    "fmt/1581 (Envision Publisher font files)"
+    "fmt/1581 (Envision Publisher Font Files)",
+    "fmt/1675 (IntelliFont Font File)",
+    "fmt/1720 (Portable Compiled Format)"
   ],
   "gis": [
     "x-fmt/225 (ESRI MapInfo Data File)",
@@ -482,7 +495,7 @@
     "fmt/368 (ASPRS Lidar Data Exchange Format 1.0)",
     "fmt/369 (ASPRS Lidar Data Exchange Format 1.1)",
     "fmt/370 (ASPRS Lidar Data Exchange Format 1.2)",
-    "fmt/372 (Earth Resource Satellite image header format)",
+    "fmt/372 (Earth Resource Satellite Image Header Format)",
     "fmt/724 (Keyhole Markup Language (Container))",
     "fmt/915 (Mapsforge Binary Map File Format)",
     "fmt/916 (ESRI ArcMap Document)",
@@ -498,7 +511,10 @@
     "fmt/1250 (SOSI 8.1)",
     "fmt/1362 (Microsoft MapPoint Document)",
     "fmt/1366 (ESRI Published Map Format)",
-    "fmt/1367 (GeoJSON)"
+    "fmt/1367 (GeoJSON)",
+    "fmt/1692 (ESRI ArcGIS Raw Raster Reader/ Writer)",
+    "fmt/1696 (ESRI Attribute Index Files)",
+    "fmt/1700 (OGC GeoPackage 1.0-1.31)"
   ],
   "imageRaster": [
     "x-fmt/25 (OS/2 Bitmap 1.0)",
@@ -736,7 +752,7 @@
     "fmt/1578 (Spectrum 512 Extended 2)",
     "fmt/1583 (SXG (ZX Spectrum) Graphic File)",
     "fmt/1586 (TheDraw Save File)",
-    "fmt/1587 (COKE format (Atari Falcon))",
+    "fmt/1587 (COKE Format (Atari Falcon))",
     "fmt/1589 (Taquart Interlace Picture)",
     "fmt/1595 (Canon Raw 3.0)",
     "fmt/1603 (TUNDRA)",
@@ -746,7 +762,15 @@
     "fmt/1607 (True Colour Picture [Spooky Sprites] (Atari Falcon))",
     "fmt/1608 (Packed-Ice True Colour Picture [Spooky Sprites] (Atari Falcon))",
     "fmt/1610 (Viacom New Media Graphics)",
-    "fmt/1625 (ESRI Colour File Format)"
+    "fmt/1625 (ESRI Colour File Format)",
+    "fmt/1653 (STAD PAC File)",
+    "fmt/1654 (Palm Database ImageViewer Format)",
+    "fmt/1657 (XIMG (Extended GEM Bit Image))",
+    "fmt/1658 (XL-Paint MaX)",
+    "fmt/1659 (XL-Paint)",
+    "fmt/1664 (RED Thumbnail File)",
+    "fmt/1716 (Cintel Raw Image/DaVinci Resolve Image)",
+    "fmt/1721 (Pablo Paint Raster Image)"
   ],
   "imageVector": [
     "x-fmt/20 (Adobe Illustrator 1.0 / 1.1)",
@@ -839,6 +863,7 @@
     "x-fmt/402 (StarOffice Draw 5.2)",
     "fmt/54 (Drawing Interchange Binary Format 1.0)",
     "fmt/63 (Drawing Interchange File Format (ASCII) Generic)",
+    "x-fmt/406 (PostScript 2.0)",
     "fmt/139 (OpenDocument Graphics 1.0)",
     "fmt/216 (Microsoft Visio XML Drawing 2003-2010)",
     "fmt/296 (OpenDocument Graphics 1.1)",
@@ -954,7 +979,8 @@
     "fmt/1525 (Serif DrawPlus Drawing X5)",
     "fmt/1526 (Serif DrawPlus Drawing X6)",
     "fmt/1527 (Serif DrawPlus Drawing X8)",
-    "fmt/1528 (Serif DrawPlus Drawing Generic)"
+    "fmt/1528 (Serif DrawPlus Drawing Generic)",
+    "fmt/1660 (Arts \u0026 Letters Clip Art Library)"
   ],
   "model": [
     "x-fmt/19 (3D Studio)",
@@ -1079,7 +1105,9 @@
     "fmt/1504 (Agisoft Tiled Model)",
     "fmt/1549 (Bentley Microstation Hidden Line File)",
     "fmt/1562 (AutoDesk Indexed Point Cloud)",
-    "fmt/1615 (CATIA Drawing 5)"
+    "fmt/1615 (CATIA Drawing 5)",
+    "fmt/1673 (ZBrush MatCap)",
+    "fmt/1714 (CATIA Model File 3)"
   ],
   "pageDescription": [
     "fmt/122 (Encapsulated PostScript File Format 1.2)",
@@ -1096,7 +1124,6 @@
     "fmt/19 (Acrobat PDF 1.5 - Portable Document Format 1.5)",
     "fmt/20 (Acrobat PDF 1.6 - Portable Document Format 1.6)",
     "fmt/95 (Acrobat PDF/A - Portable Document Format 1a)",
-    "x-fmt/406 (PostScript 2.0)",
     "x-fmt/407 (PostScript 2.1)",
     "x-fmt/408 (PostScript 3.0)",
     "fmt/144 (Acrobat PDF/X - Portable Document Format - Exchange 1:1999)",
@@ -1108,6 +1135,7 @@
     "fmt/158 (Acrobat PDF/X - Portable Document Format - Exchange 3:2002)",
     "fmt/276 (Acrobat PDF 1.7 - Portable Document Format 1.7)",
     "fmt/354 (Acrobat PDF/A - Portable Document Format 1b)",
+    "fmt/473 (Microsoft Office Owner File)",
     "fmt/476 (Acrobat PDF/A - Portable Document Format 2a)",
     "fmt/477 (Acrobat PDF/A - Portable Document Format 2b)",
     "fmt/478 (Acrobat PDF/A - Portable Document Format 2u)",
@@ -1276,7 +1304,19 @@
     "fmt/1637 (Adobe InDesign Document CC 2019)",
     "fmt/1638 (Adobe InDesign Document CC 2020)",
     "fmt/1639 (Adobe InDesign Document CC 2021)",
-    "fmt/1640 (Adobe InDesign Document CC 2022)"
+    "fmt/1640 (Adobe InDesign Document CC 2022)",
+    "fmt/1693 (Asymetrix Compel Presentation 1.0)",
+    "fmt/1694 (Asymetrix Compel Presentation 2.0)",
+    "fmt/1701 (Persuasion Mac Document 1.0)",
+    "fmt/1702 (Persuasion Mac Document 2.0)",
+    "fmt/1703 (Persuasion Mac Document 2.1)",
+    "fmt/1704 (Persuasion Mac Document 3.0)",
+    "fmt/1705 (Persuasion Mac Document 4.0)",
+    "fmt/1706 (Persuasion Windows Document 2.0)",
+    "fmt/1707 (Persuasion Windows Document 3.x - 4.x)",
+    "fmt/1708 (Persuasion Player File 3)",
+    "fmt/1709 (Persuasion Presentation Interchange File)",
+    "fmt/1710 (Persuasion Auto-Template Interchange File)"
   ],
   "spreadsheet": [
     "x-fmt/17 (Microsoft Excel Template 97-2003)",
@@ -1348,8 +1388,9 @@
     "fmt/1452 (Lotus 1-2-3 Worksheet 97)",
     "fmt/1453 (Lotus 1-2-3 Worksheet 9.8 Millennium)",
     "fmt/1457 (OrgPlus File)",
-    "fmt/1580 (Envision Publisher file)",
-    "fmt/1585 (TurboCalc Document)"
+    "fmt/1580 (Envision Publisher File)",
+    "fmt/1585 (TurboCalc Document)",
+    "fmt/1712 (Calc602 Macro File)"
   ],
   "textMarkup": [
     "x-fmt/195 (Standard Generalized Markup Language)",
@@ -1368,7 +1409,7 @@
     "fmt/120 (DROID File Collection File Format 1.0)",
     "fmt/135 (OpenDocument Format 1.0)",
     "x-fmt/417 (HTML Extension File)",
-    "fmt/205 (Synchronized Multimedia Integration Language)",
+    "fmt/205 (Synchronized Multimedia Integration Language (Generic))",
     "fmt/243 (GPS Exchange Format 1.0)",
     "fmt/244 (Keyhole Markup Language (XML))",
     "fmt/280 (LaTeX (Master document))",
@@ -1435,7 +1476,8 @@
     "fmt/1570 (ISDOC Information System Document 6.0.1)",
     "fmt/1613 (XML Shareable Playlist Format)",
     "fmt/1618 (SGML/XML Entity File)",
-    "fmt/1641 (Adobe InDesign Interchange Document)"
+    "fmt/1641 (Adobe InDesign Interchange Document)",
+    "fmt/1677 (Microsoft Office File List)"
   ],
   "textStructured": [
     "x-fmt/41 (Data Interchange Format)",
@@ -1469,7 +1511,7 @@
     "fmt/303 (Computer Graphics Metafile (Binary) 1)",
     "fmt/305 (Computer Graphics Metafile (Binary) 3)",
     "fmt/306 (Computer Graphics Metafile (Binary) 4)",
-    "fmt/325 (EndNote Library)",
+    "fmt/325 (EndNote Library 1-9)",
     "fmt/328 (EndNote Import File)",
     "fmt/367 (ESRI World File Format)",
     "fmt/387 (VCalendar format)",
@@ -1481,6 +1523,7 @@
     "fmt/483 (ePub format)",
     "fmt/485 (Rocket Book eBook format)",
     "fmt/518 (Broad Band eBook LRF)",
+    "fmt/526 (Adobe Font List)",
     "fmt/611 (LDAP Data Interchange Format)",
     "fmt/634 (Microsoft Compiled HTML Help)",
     "fmt/644 (Nullsoft Scriptable Install System)",
@@ -1547,21 +1590,41 @@
     "fmt/1582 (Vim SWAP File)",
     "fmt/1584 (ADRIFT Text Adventure File)",
     "fmt/1591 (ESRI ArcInfo Coverage Annotation File)",
-    "fmt/1592 (ASEG-GDF2 Description file)",
-    "fmt/1593 (ASEG-GDF2- Data definition file)",
-    "fmt/1594 (ESRI ArcInfo .dat file (external))",
+    "fmt/1592 (ASEG-GDF2 Description File)",
+    "fmt/1593 (ASEG-GDF2- Data Definition File)",
+    "fmt/1594 (ESRI ArcInfo .dat File (External))",
     "fmt/1596 (ESRI ArcInfo Grid .nit File)",
-    "fmt/1600 (ESRI ArcInfo DAT File (internal))",
+    "fmt/1600 (ESRI ArcInfo DAT File (Internal))",
     "fmt/1626 (MicroStation Symbology Resource File)",
     "fmt/1627 (Z Print Build File)",
     "fmt/1646 (Roxio Label Creator Project File 8-11)",
-    "fmt/1647 (Inspiration Software File)"
+    "fmt/1647 (Inspiration Software File)",
+    "fmt/1649 (AGS 4 Data Format 4.0. 4.1)",
+    "fmt/1656 (Microsoft Help Contents File)",
+    "fmt/1663 (YAODL (Yet Another Object Description Language) File)",
+    "fmt/1665 (Easy CD Creator Layout | Roxio Easy CD Creator Layout 5-6)",
+    "fmt/1666 (Roxio Easy Media Creator Layout 7)",
+    "fmt/1667 (Roxio Easy Media Creator - Classic Creator File 8-10)",
+    "fmt/1668 (Roxio Easy Media Creator Layout 8-10)",
+    "fmt/1669 (Roxio Data Project File 11)",
+    "fmt/1670 (Roxio Audio Project File 11)",
+    "fmt/1672 (Linux/i386 Binary Executable File ZMAGIC)",
+    "fmt/1678 (MATLAB Script File)",
+    "fmt/1679 (Garmin track log file)",
+    "fmt/1681 (OBO Flat File Format 1.2)",
+    "fmt/1684 (EndNote Library 20)",
+    "fmt/1695 (602 Text file 1.0-1.51)",
+    "fmt/1697 (Calc602 Spreadsheet file or backup file 1.51)",
+    "fmt/1698 (Calc602 Spreadsheet file or backup file v.1.00 1.00)",
+    "fmt/1699 (602 Graph/Chart File 1.51)",
+    "fmt/1711 (Software602 Printer Configuration File 1.0)"
   ],
   "textUnstructured": [
     "x-fmt/14 (Macintosh Text File)",
     "x-fmt/16 (Unicode Text File)",
     "x-fmt/21 (7-bit ANSI Text)",
     "x-fmt/22 (7-bit ASCII Text)",
+    "x-fmt/279 (MPEG 1/2 Audio Layer 3 Streaming)",
     "x-fmt/282 (8-bit ANSI Text)",
     "x-fmt/283 (8-bit ASCII Text)",
     "fmt/331 (Autorun Configuration File)",
@@ -1575,13 +1638,19 @@
     "fmt/1543 (ELAN Annotation File)",
     "fmt/1548 (Visual Basics MAK File 3 or earlier)",
     "fmt/1550 (MATLAB Mat File Level 4)",
-    "fmt/1590 (Visual Basic Binary Form file)",
-    "fmt/1597 (PageMaker template file 5.0)",
-    "fmt/1598 (Stata .do command file)",
-    "fmt/1599 (R program file)",
+    "fmt/1590 (Visual Basic Binary Form File)",
+    "fmt/1597 (PageMaker Template File 5.0)",
+    "fmt/1598 (Stata .do Command File)",
+    "fmt/1599 (R Program File)",
     "fmt/1612 (XBIN (eXtended BIN))",
     "fmt/1616 (BibTeX Database File)",
-    "fmt/1619 (Pascal Source Code)"
+    "fmt/1619 (Pascal Source Code)",
+    "fmt/1650 (Bayesian Interchange Format File)",
+    "fmt/1651 (Garmin Flexible and Interoperable Data Transfer file)",
+    "fmt/1652 (Typescript)",
+    "fmt/1655 (cdrLabel Label File)",
+    "fmt/1713 (Calc602 Project File 1.0)",
+    "fmt/1717 (Time Stamp Token)"
   ],
   "video": [
     "x-fmt/152 (Digital Video)",
@@ -1644,9 +1713,9 @@
     "x-fmt/96 (Pocket Word Template)",
     "x-fmt/148 (IBM DisplayWrite DCA Text File)",
     "x-fmt/156 (Ventura Publisher)",
-    "x-fmt/173 (PageMaker Document 5.0)",
-    "x-fmt/174 (PageMaker Document 6.0)",
-    "x-fmt/181 (PageMaker Document 6.5)",
+    "x-fmt/173 (PageMaker PC Document 5.0)",
+    "x-fmt/174 (PageMaker PC Document 6.0)",
+    "x-fmt/181 (PageMaker PC Document 6.5-7.0)",
     "x-fmt/191 (AMI Professional Document)",
     "x-fmt/203 (WordPerfect for Windows Document 5.2)",
     "x-fmt/204 (Microsoft Word for Windows Macro)",
@@ -1659,8 +1728,7 @@
     "x-fmt/260 (WordStar for MS-DOS Document 4.0)",
     "x-fmt/261 (WordStar for MS-DOS Document 7.0)",
     "x-fmt/262 (WordStar for Windows Document 2.0)",
-    "x-fmt/273 (Microsoft Word for MS-DOS Document 3.0)",
-    "x-fmt/274 (Microsoft Word for MS-DOS Document 4.0)",
+    "x-fmt/274 (Microsoft Word for MS-DOS Document 1.x - 4.0)",
     "x-fmt/275 (Microsoft Word for MS-DOS Document 5.0)",
     "x-fmt/276 (Microsoft Word for MS-DOS Document 5.5)",
     "x-fmt/284 (IBM DisplayWrite Final Form Text File)",
@@ -1676,7 +1744,7 @@
     "x-fmt/345 (Microsoft Works Document)",
     "x-fmt/347 (MultiMate Text File 4.x)",
     "x-fmt/349 (Nota Bene Text File)",
-    "x-fmt/352 (PageMaker Document 4.0)",
+    "x-fmt/352 (PageMaker PC Document 4.0)",
     "x-fmt/370 (WordStar for MS-DOS Document 3.0)",
     "x-fmt/371 (XYWrite for Windows Document 4.0)",
     "x-fmt/372 (XYWrite Document III+)",
@@ -1796,6 +1864,14 @@
     "fmt/1534 (Serif PagePlus Publication X8)",
     "fmt/1535 (Serif PagePlus Publication X9)",
     "fmt/1536 (Serif PagePlus Publication SE)",
-    "fmt/1537 (Serif PagePlus Publication 1-3)"
+    "fmt/1537 (Serif PagePlus Publication 1-3)",
+    "fmt/1686 (PageMaker Mac Document 4.0)",
+    "fmt/1687 (PageMaker Mac Document 5.0)",
+    "fmt/1688 (Microsoft Word for MS-DOS Document 6.0)",
+    "fmt/1689 (Microsoft Word for MS-DOS Glossary File Generic)",
+    "fmt/1690 (Microsoft Word for MS-DOS Style Sheet File Generic)",
+    "fmt/1691 (Microsoft Word for MS-DOS Printer Description File Generic)",
+    "fmt/1718 (PageMaker Mac Document 6.5-7.0)",
+    "fmt/1719 (PageMaker Mac Document 6.0)"
   ]
 }

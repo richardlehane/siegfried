@@ -4,7 +4,7 @@
     <FileFormat>
       <FormatID>406</FormatID>
       <FormatName>Microsoft Word for MS-DOS Document</FormatName>
-      <FormatVersion>4.0</FormatVersion>
+      <FormatVersion>1.x - 4.0</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -12,7 +12,7 @@
       <FormatTypes>Word Processor</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Microsoft Word for MS-DOS Document is a proprietary binary format of Microsoft Word, word processing application, for MS-DOS first released in 1983. The first version was released on IBM PC DOS, developed by Microsoft, which Microsoft then re-branded as MS-DOS. The version was developed by Charles Simonyi and Richard Brodie firstly for Xenix in February 1983 (titled as "Multi-Tool Word") and in October 1983 for MS-DOS operating systems. The application featured graphics video mode, mouse and printer support (printer support was added in version 2) in WYSIWYG (What You See Is What You Get) interface and could run in text mode or graphics mode, with bold, italics, and underline features only available in the text mode. The following four versions were not much dissimilar, including only minor improvements, with the .doc format remained with the same therefore, they are all part of this entry. Please see the full list of versions using the links provided in the Notes section as well as, the manual for MS-DOS versions 1x which can be downloaded from WinWorld.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>Little-endian (Intel)</ByteOrders>
       <ReleaseDate>
@@ -24,9 +24,18 @@
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>19 May 2022</LastUpdatedDate>
+      <FormatNote>https://web.archive.org/web/20220513091703/https://winworldpc.com/product/microsoft-word/1x-dos
+
+https://winworldpc.com/download/0b7555c5-bd3b-c3b2-11c3-a4c2a83d7054
+
+https://winworldpc.com/download/07c3ae55-133b-c3b2-11c3-a4c2a83d7054
+
+https://en.wikipedia.org/wiki/Doc_(computing)#Microsoft_Word_Binary_File_Format
+
+https://web.archive.org/web/20220517101947/https://en.wikipedia.org/wiki/History_of_Microsoft_Word
+
+https://www.docfly.com/blog/2020/a-brief-history-of-microsoft-word</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -43,6 +52,13 @@
         <Identifier>x-fmt/274</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>93</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <DeveloperCompoundName>Microsoft Corporation</DeveloperCompoundName>
+      </Developers>
       <ExternalSignature>
         <ExternalSignatureID>393</ExternalSignatureID>
         <Signature>doc</Signature>
@@ -50,7 +66,7 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>488</SignatureID>
-        <SignatureName>Microsoft Word for DOS 4.0</SignatureName>
+        <SignatureName>Microsoft Word for DOS 1x - 4.0</SignatureName>
         <SignatureNote>Word signature (4 bytes) Reserved field (10 bytes) Flag (2 bytes) Version (2bytes)</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>605</ByteSequenceID>
@@ -72,18 +88,6 @@
         <RelatedFormatID>407</RelatedFormatID>
         <RelatedFormatName>Microsoft Word for MS-DOS Document</RelatedFormatName>
         <RelatedFormatVersion>5.0</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Is previous version of</RelationshipType>
-        <RelatedFormatID>408</RelatedFormatID>
-        <RelatedFormatName>Microsoft Word for MS-DOS Document</RelatedFormatName>
-        <RelatedFormatVersion>5.5</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Is subsequent version of</RelationshipType>
-        <RelatedFormatID>405</RelatedFormatID>
-        <RelatedFormatName>Microsoft Word for MS-DOS Document</RelatedFormatName>
-        <RelatedFormatVersion>3.0</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2553</FormatID>
+      <FormatName>Time Stamp Token</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Unstructured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Time Stamp Tokens contain a hash of data which is being time stamped, electronically signed by a Timestamping Authority. For example, tst files might be generated to prove a digital signature was created before a given time. The hash refers to data objects carried in ASiC containers.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>242</ProvenanceSourceID>
+      <ProvenanceName>The National Archives of the Czech Republic / The National Archives of the Czech Republic</ProvenanceName>
+      <ProvenanceSourceDate>14 Jun 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>14 Jun 2022</LastUpdatedDate>
+      <FormatNote>https://www.iana.org/assignments/media-types/application/vnd.etsi.timestamp-token
+Specification: https://www.etsi.org/deliver/etsi_ts/102900_102999/102918/01.03.01_60/ts_102918v010301p.pdf</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/vnd.etsi.timestamp-token</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1717</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>284</DeveloperID>
+        <DeveloperName>ETSI</DeveloperName>
+        <OrganisationName>ETSI</OrganisationName>
+        <DeveloperCompoundName>ETSI / ETSI</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>284</SupportID>
+        <SupportName>ETSI</SupportName>
+        <OrganisationName>ETSI</OrganisationName>
+        <SupportCompoundName>ETSI / ETSI</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3087</ExternalSignatureID>
+        <Signature>tst</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

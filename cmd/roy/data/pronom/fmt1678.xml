@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2514</FormatID>
+      <FormatName>MATLAB Script File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>MATLAB (an abbreviation of MATrix LABoratory) software and language enables the user to undertake numerical computation and visualization, programme and analyze data, develop algorithms, and create models. Files with extension m are the source code that executes MATLAB commands. A single MATLAB simulation can contain multiple .m files, each one performing a different function.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>235</ProvenanceSourceID>
+      <ProvenanceName>Technische Informationsbibliothek (TIB) Hannover / Technische Informationsbibliothek (TIB) Hannover</ProvenanceName>
+      <ProvenanceSourceDate>28 Apr 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>28 Apr 2022</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1678</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Support>
+        <SupportID>283</SupportID>
+        <SupportName>MathWorks</SupportName>
+        <OrganisationName>MathWorks</OrganisationName>
+        <SupportCompoundName>MathWorks / MathWorks</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3039</ExternalSignatureID>
+        <Signature>m</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

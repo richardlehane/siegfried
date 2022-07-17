@@ -165,6 +165,13 @@
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>931</RelatedFormatID>
+        <RelatedFormatName>Synchronized Multimedia Integration Language (Generic)</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>942</RelatedFormatID>
         <RelatedFormatName>Microsoft Visio XML Drawing</RelatedFormatName>
         <RelatedFormatVersion>2003-2010</RelatedFormatVersion>
@@ -478,7 +485,7 @@
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>2286</RelatedFormatID>
-        <RelatedFormatName>	Ableton Live Set</RelatedFormatName>
+        <RelatedFormatName>Ableton Live Set</RelatedFormatName>
         <RelatedFormatVersion>8.2.1 onwards</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
@@ -566,6 +573,18 @@
         </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2505</RelatedFormatID>
+        <RelatedFormatName>Roxio Data Project File</RelatedFormatName>
+        <RelatedFormatVersion>11</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2506</RelatedFormatID>
+        <RelatedFormatName>Roxio Audio Project File</RelatedFormatName>
+        <RelatedFormatVersion>11</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>639</RelatedFormatID>
         <RelatedFormatName>Hypertext Markup Language</RelatedFormatName>
@@ -593,6 +612,13 @@
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>645</RelatedFormatID>
         <RelatedFormatName>Hypertext Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>931</RelatedFormatID>
+        <RelatedFormatName>Synchronized Multimedia Integration Language (Generic)</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

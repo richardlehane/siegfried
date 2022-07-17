@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2521</FormatID>
+      <FormatName>EndNote Compressed Library</FormatName>
+      <FormatVersion>20</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>EndNote Library file format is generated and used via EndNote reference management software application. A software intended for the management of bibliographies and references when producing academic text or reports. Endnote software was first launched in 1989 by Niles &amp; Associates, then in 2000 was acquired by Institute for Scientific Information’s Research Soft Division, and since 2016 owned by Clarivate. The EndNote Library file format stores the references and citations in so called 'libraries' used with the software. Users of EndNote application can create their own EndNote Library files, as well as upload EndNote Library files onto their software. The latter versions of this format, starting from version 8, include .data folder to accompany the EndNote Library format. The .data folder is automatically created by EndNote, intended to store attachments. Following this update, the .data folder is recommended to be present in the EndNote Library file structure in order to use the EndNote Library format with the EndNote software. This entry describes compressed version 20 of the application, which is a ZIP compressed SQL Lite database type of format. In this later versions starting from version X, an ability to compress EndNote Library files using the EndNote application was added, in purpose to easily share EndNote library files with other EndNote users. Please see the full version history using the Web Archive Wikipedia entry link included in the Notes section.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
+      <ProvenanceSourceDate>13 May 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
+      <LastUpdatedDate>13 May 2022</LastUpdatedDate>
+      <FormatNote>https://web.archive.org/web/20220501102310/https://en.wikipedia.org/wiki/EndNote
+
+https://support.clarivate.com/Endnote/s/article/EndNote-X9-3-Library-Conversion-and-Backward-Compatibility?language=en_US
+
+http://fileformats.archiveteam.org/wiki/EndNote_Library</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1685</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3046</ExternalSignatureID>
+        <Signature>enlx</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>382</RelatedFormatID>
+        <RelatedFormatName>ZIP Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>2518</RelatedFormatID>
+        <RelatedFormatName>EndNote Library</RelatedFormatName>
+        <RelatedFormatVersion>X - X9</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>2519</RelatedFormatID>
+        <RelatedFormatName>EndNote Compressed Library</RelatedFormatName>
+        <RelatedFormatVersion>X - X9</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

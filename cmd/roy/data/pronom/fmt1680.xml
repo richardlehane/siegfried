@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2516</FormatID>
+      <FormatName>INTREPID Standard Information File</FormatName>
+      <FormatVersion>3.7 onwards</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Dataset</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>INTREPID Standard Information Files are a format developed by Australian company Intrepid Geophysics, used by their INTREPID software for processing and visualising geophysical data. isi files are vector files which can capture a variety of data. Every INTREPID dataset has an isi file which contains, amongst other information, the parameter values for the dataset.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>234</ProvenanceSourceID>
+      <ProvenanceName>National Library of Australia / National Library of Australia</ProvenanceName>
+      <ProvenanceSourceDate>09 May 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>09 May 2022</LastUpdatedDate>
+      <FormatNote>Specification: https://docs.intrepid-geophysics.com/intrepid/topics/databases-files-and-data-structures.html#5_5_INTREPID</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1680</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>281</DeveloperID>
+        <DeveloperName>Intrepid Geophysics</DeveloperName>
+        <OrganisationName>Intrepid Geophysics</OrganisationName>
+        <DeveloperCompoundName>Intrepid Geophysics / Intrepid Geophysics</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>281</SupportID>
+        <SupportName>Intrepid Geophysics</SupportName>
+        <OrganisationName>Intrepid Geophysics</OrganisationName>
+        <SupportCompoundName>Intrepid Geophysics / Intrepid Geophysics</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3041</ExternalSignatureID>
+        <Signature>isi</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2013</SignatureID>
+        <SignatureName>INTREPID Standard Information File</SignatureName>
+        <SignatureNote>BOF Absolute from beginning of file, magic bytes: MetaData Begin...Name.=
+EOF Absolute from beginning of file, magic bytes: End..MetaData End..</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2338</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4D6574614461746120426567696E0D0A094E616D65093D</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>2339</ByteSequenceID>
+          <PositionType>Absolute from EOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>456E640D0A4D6574614461746120456E640D0A</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

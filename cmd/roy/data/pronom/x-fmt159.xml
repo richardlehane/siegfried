@@ -13,7 +13,9 @@
       <FormatTypes>Image (Raster)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>The GEM raster format (also known as GEM VDI Bit Image; GEM Bit Image; GEM Image; GEM Bitmap; or IMG) is an image format native to the Graphical Environment Manager (GEM) operating system and developed at Digital Research. The format was used by GEM Paint and Ventura Publisher, and by a variety of Atari ST software.
+
+GEM raster images may be color, gray scale, or black and white and are always read and written in the big-endian format. The format of bi-level images is well standardized, but the specification is ambiguous as to the format of color images. As a result, other color formats of GEM raster image were later developed, some of which have their own names, such as XIMG (Extended GEM Bit Image), TIMG (TrueColor IMG), STTT, or Hyperpaint.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>Big-endian (Motorola)</ByteOrders>
       <ReleaseDate>
@@ -25,9 +27,16 @@
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>29 Mar 2022</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/GEM_Raster 
+
+https://www.wikidata.org/wiki/Q28206162 
+
+https://www.seasip.info/Gem/ff_img.html 
+
+https://www.fileformat.info/format/gemraster/spec/20e311cc16f844fda91beb539d62c46c/view.htm 
+
+https://archive.org/stream/mac_Graphics_File_Formats_Second_Edition_1996/Graphics_File_Formats_Second_Edition_1996_djvu.txt</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -59,6 +68,13 @@
           <ByteSequenceValue>0001000800(01|04)0002</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>2484</RelatedFormatID>
+        <RelatedFormatName>XIMG (Extended GEM Bit Image)</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

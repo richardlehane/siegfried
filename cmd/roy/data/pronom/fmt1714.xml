@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2550</FormatID>
+      <FormatName>CATIA Model File</FormatName>
+      <FormatVersion>3</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Model</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>CATIA is a 3D modelling software created by Dassault Systèmes, widely used across many industries for computer aided design, manufacture and engineering. Model files store representations of mechanical structures, or parts of structures.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>241</ProvenanceSourceID>
+      <ProvenanceName>J. Paul Getty Trust / J. Paul Getty Trust</ProvenanceName>
+      <ProvenanceSourceDate>14 Jun 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>14 Jun 2022</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1714</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>135</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Dassault Systèms</OrganisationName>
+        <DeveloperCompoundName>Dassault Systèms</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>135</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Dassault Systèms</OrganisationName>
+        <SupportCompoundName>Dassault Systèms</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3084</ExternalSignatureID>
+        <Signature>model</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2046</SignatureID>
+        <SignatureName>CATIA Model file v.3</SignatureName>
+        <SignatureNote>BOF, offset 80, magic bytes: CATIA{2029}CATIA VERSION 3{11}RELEASE</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2373</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>80</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4341544941202020{2026}43415449412056455253494F4E2033{11}52454C4541534520</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

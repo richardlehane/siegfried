@@ -13,7 +13,7 @@
       <FormatTypes>Text (Structured)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>PKCS is a group of public-key cryptography standards devised and published by RSA Security Inc, starting in the early 1990s. PKCS #7 describes a general syntax for data that may have cryptography applied to it, such as digital signatures and digital envelopes. P7M is the format that implements this standard.</FormatDescription>
+      <FormatDescription>PKCS #7 Cryptographic Message File is a form of electronic signature used to secure messages that can only be read by the intended recipient. PKCS #7 describes a general syntax for data that may have cryptography applied to it, such as digital signatures and digital envelopes. PKCS #7 is one of the family of standards called Public-Key Cryptography Standards (PKCS) devised and published by RSA Security Inc, starting in the early 1990s; storing signed and/or encrypted data, usually attached to an email message that includes an S/MIME (Secure/Multipurpose Internet Mail Extensions) digital signature. The extension .p7s usually refers to PKCS #7 Signature Files; .p7m usually refers to PKCS #7 MIME Files; and .p7b usually refers to PKCS #7 Certificate Files. The research of this format is still ongoing, please contact the PRONOM team if you how any more information regarding this format.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -27,13 +27,28 @@
       <ProvenanceSourceDate>23 Sep 2014</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>16 Oct 2021</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>14 Jun 2022</LastUpdatedDate>
+      <FormatNote>https://en.wikipedia.org/wiki/PKCS_7
+
+https://en.wikipedia.org/wiki/PKCS
+
+https://en.wikipedia.org/wiki/S/MIME
+
+https://www.cryptomathic.com/news-events/blog/introduction-to-digital-signatures-and-pkcs-7
+
+https://comodosslstore.com/resources/what-is-an-smime-p7s-file-attachment-and-how-do-i-open-it/</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
       </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/pkcs7-mime</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>application/pkcs7-signature</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
       <FileFormatIdentifier>
         <Identifier>fmt/670</Identifier>
         <IdentifierType>PUID</IdentifierType>
@@ -43,22 +58,32 @@
         <Signature>p7m</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3103</ExternalSignatureID>
+        <Signature>p7b</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3104</ExternalSignatureID>
+        <Signature>p7s</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
       <InternalSignature>
         <SignatureID>1003</SignatureID>
-        <SignatureName>P7M</SignatureName>
-        <SignatureNote>The signature is seeking the presence of the OID (Object Identifier) 1 2 840 113549 1 7 in ASN.1 (Abstract Syntax Notation) using BER (Basic encoding rules) encoding.</SignatureNote>
+        <SignatureName>PKCS #7 Cryptographic Message File</SignatureName>
+        <SignatureNote>The signature is seeking the first byte of 0x30, then the presence of the OID (Object Identifier) 1 2 840 113549 1 7 in ASN.1 (Abstract Syntax Notation) using BER (Basic encoding rules) encoding.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1227</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>16</MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>2A864886F70D0107{0-64}2A864886F70D0107</ByteSequenceValue>
+          <ByteSequenceValue>30{1-5}06092A864886F7</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

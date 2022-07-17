@@ -86,6 +86,18 @@
         <RelatedFormatVersion>4-7</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2520</RelatedFormatID>
+        <RelatedFormatName>EndNote Library</RelatedFormatName>
+        <RelatedFormatVersion>20</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2536</RelatedFormatID>
+        <RelatedFormatName>OGC GeoPackage</RelatedFormatName>
+        <RelatedFormatVersion>1.0-1.31</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Is subsequent version of</RelationshipType>
         <RelatedFormatID>1945</RelatedFormatID>
         <RelatedFormatName>SQLite Database File Format</RelatedFormatName>

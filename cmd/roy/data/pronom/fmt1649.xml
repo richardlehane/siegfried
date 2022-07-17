@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2476</FormatID>
+      <FormatName>AGS 4 Data Format</FormatName>
+      <FormatVersion>4.0. 4.1</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The AGS Data Format was created in 1991 by the Association of Geotechnical and Geoenvironmental Specialists, as a way of transferring data between different organisations in the geotechnical/geoenvironmental industry. It provides a way of exchanging said data reliably, independent of software/ hardware and operating system, and to a consistent standard.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>278</ProvenanceSourceID>
+      <ProvenanceName>AGS / Association of Geotechnical and Geoenvironmental Specialists</ProvenanceName>
+      <ProvenanceSourceDate>14 Mar 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>14 Mar 2022</LastUpdatedDate>
+      <FormatNote>Official specification: https://www.ags.org.uk/content/uploads/2022/02/AGS4-v-4.1.1-2022.pdf
+Official website: https://www.ags.org.uk/data-format/</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1649</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>278</DeveloperID>
+        <DeveloperName>AGS</DeveloperName>
+        <OrganisationName>Association of Geotechnical and Geoenvironmental Specialists</OrganisationName>
+        <DeveloperCompoundName>AGS / Association of Geotechnical and Geoenvironmental Specialists</DeveloperCompoundName>
+      </Developers>
+      <ExternalSignature>
+        <ExternalSignatureID>2975</ExternalSignatureID>
+        <Signature>ags</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1986</SignatureID>
+        <SignatureName>AGS 4 Data Format</SignatureName>
+        <SignatureNote>Variable, magic bytes: “{0-1}PROJ_ID","{0-1}PROJ_NAME",”*“{0-1}ABBR_HDNG",”{0-1}ABBR_CODE","</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2309</ByteSequenceID>
+          <PositionType>Variable</PositionType>
+          <Offset>
+          </Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>22{0-1}50524F4A5F4944222C22{0-1}50524F4A5F4E414D45222C22*22{0-1}414242525F48444E47222C22{0-1}414242525F434F4445222C22</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

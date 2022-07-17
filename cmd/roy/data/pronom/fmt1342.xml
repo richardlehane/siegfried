@@ -9,8 +9,7 @@
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>
-      </FormatTypes>
+      <FormatTypes>Aggregate</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
       <FormatDescription>BDOC is a digital signature format specific to Estonia. National BDOC 2.1 standard EVS 821:2014 http://www.evs.ee/products/evs-821-2014. The format comprises two technically different subformats. In order for end users to be able to easy differentiate between these subformats, each subformat has obtained its own file extension - .bdoc and .asice. .bdoc or BDOC-TM or ASiC-E LT-TM is the BDOC signature format with a time-mark. The RFC 2560 standard based time-marks ensure long-term proofability of the authenticity of the signature. This format has been used as a default digital signature format in Estonia since 2015. .asice or BDOC-TS or ASiC-E LT is the BDOC signature format with a time-stamp. In contrast to the LT-TM format, long-term proofability of the authenticity of the signature is ensured by the RFC 3161 standard based time-stamps. The ASiC-E LT signature is highly compliant with the international standards. One can also differentiate between the subformats by inspecting the signature0.xml file: BDOC has element "SignaturePolicyIdentifier" whereas ASICE includes element "SignatureTimeStamp".</FormatDescription>
@@ -22,11 +21,11 @@
       </ReleaseDate>
       <WithdrawnDate>
       </WithdrawnDate>
-      <ProvenanceSourceID>239</ProvenanceSourceID>
-      <ProvenanceName>The National Archives of Estonia / The National Archives of Estonia</ProvenanceName>
+      <ProvenanceSourceID>242</ProvenanceSourceID>
+      <ProvenanceName>The National Archives of the Czech Republic / The National Archives of the Czech Republic</ProvenanceName>
       <ProvenanceSourceDate>20 Jan 2020</ProvenanceSourceDate>
       <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
-      <LastUpdatedDate>20 Jan 2020</LastUpdatedDate>
+      <LastUpdatedDate>27 Jun 2022</LastUpdatedDate>
       <FormatNote>https://www.id.ee/public/BDOC2.0.bdoc https://www.id.ee/public/BDOC2.1.bdoc https://www.id.ee/public/bdoc21-TS.asice</FormatNote>
       <FormatRisk>
       </FormatRisk>
@@ -50,6 +49,13 @@
         <Signature>asice</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2389</RelatedFormatID>
+        <RelatedFormatName>Associated Signature Container Extended (ASiC-E)</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Is subtype of</RelationshipType>
         <RelatedFormatID>2389</RelatedFormatID>

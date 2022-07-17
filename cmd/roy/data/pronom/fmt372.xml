@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>1119</FormatID>
-      <FormatName>Earth Resource Satellite image header format</FormatName>
+      <FormatName>Earth Resource Satellite Image Header Format</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
@@ -27,7 +27,7 @@
       <ProvenanceSourceDate>03 Nov 2011</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>03 Nov 2011</LastUpdatedDate>
+      <LastUpdatedDate>15 Feb 2022</LastUpdatedDate>
       <FormatNote>Ongoing DROID signature research.</FormatNote>
       <FormatRisk>
       </FormatRisk>
