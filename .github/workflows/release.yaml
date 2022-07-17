@@ -44,6 +44,10 @@ jobs:
           BIN_PATH: ${{ env.BIN_PATH }}
       - name: Zip executables
         run: zip -j siegfried_${{ env.VERS }}_linux64.zip ${{ env.BIN_PATH }}/sf ${{ env.BIN_PATH }}/roy
+      - name: Make self-contained sf binary
+        run: go install -tags "brew static" github.com/richardlehane/siegfried/cmd/sf
+      - name: Zip self-contained executable
+        run: zip -j siegfried_${{ env.VERS }}_linux64_static.zip ${{ env.BIN_PATH }}/sf
       - name: Create release
         id: create_release 
         uses: actions/create-release@v1
@@ -72,6 +76,15 @@ jobs:
           asset_path: siegfried_${{ env.VERS }}_linux64.zip
           asset_name: siegfried_${{ env.VERS }}_linux64.zip
           asset_content_type: application/zip
+      - name: Upload zipped static executable
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: siegfried_${{ env.VERS }}_linux64_static.zip
+          asset_name: siegfried_${{ env.VERS }}_linux64_static.zip
+          asset_content_type: application/zip
   publishMac:
     runs-on: macos-latest
     needs: publishDeb
@@ -88,6 +101,10 @@ jobs:
           go install -tags brew github.com/richardlehane/siegfried/cmd/roy
       - name: Zip executables
         run: zip -j siegfried_${{ needs.publishDeb.outputs.version }}_mac64.zip $(go env GOPATH)/bin/sf $(go env GOPATH)/bin/roy
+      - name: Make self-contained sf binary
+        run: go install -tags "brew static" github.com/richardlehane/siegfried/cmd/sf
+      - name: Zip self-contained executable
+        run: zip -j siegfried_${{ needs.publishDeb.outputs.version }}_mac64_static.zip $(go env GOPATH)/bin/sf
       - name: Upload zip
         uses: actions/upload-release-asset@v1
         env:
@@ -96,6 +113,15 @@ jobs:
           upload_url: ${{ needs.publishDeb.outputs.upload_url }}
           asset_path: siegfried_${{ needs.publishDeb.outputs.version }}_mac64.zip
           asset_name: siegfried_${{ needs.publishDeb.outputs.version }}_mac64.zip
+          asset_content_type: application/zip
+      - name: Upload zipped static executable
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+        with:
+          upload_url: ${{ needs.publishDeb.outputs.upload_url }}
+          asset_path: siegfried_${{ needs.publishDeb.outputs.version }}_mac64_static.zip
+          asset_name: siegfried_${{ needs.publishDeb.outputs.version }}_mac64_static.zip
           asset_content_type: application/zip
   publishWin:
     runs-on: windows-latest
@@ -118,6 +144,11 @@ jobs:
           md siegfried
           Copy-Item cmd\roy\data\* siegfried -recurse
           7z a data_${{ needs.publishDeb.outputs.version }}.zip siegfried
+      - name: Make self-contained sf binary
+        run: go install -tags static github.com/richardlehane/siegfried/cmd/sf
+      - name: Zip static binary
+        shell: pwsh
+        run: 7z a siegfried_${{ needs.publishDeb.outputs.version }}_win64_static.zip ((go env GOPATH) + "\bin\sf.exe")
       - name: Upload siegfried.zip
         uses: actions/upload-release-asset@v1
         env:
@@ -126,6 +157,15 @@ jobs:
           upload_url: ${{ needs.publishDeb.outputs.upload_url }}
           asset_path: siegfried_${{ needs.publishDeb.outputs.version }}_win64.zip
           asset_name: siegfried_${{ needs.publishDeb.outputs.version }}_win64.zip
+          asset_content_type: application/zip
+      - name: Upload static sf
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+        with:
+          upload_url: ${{ needs.publishDeb.outputs.upload_url }}
+          asset_path: siegfried_${{ needs.publishDeb.outputs.version }}_win64_static.zip
+          asset_name: siegfried_${{ needs.publishDeb.outputs.version }}_win64_static.zip
           asset_content_type: application/zip
       - name: Upload data.zip
         uses: actions/upload-release-asset@v1

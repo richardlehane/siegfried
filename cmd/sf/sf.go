@@ -351,7 +351,7 @@ func main() {
 		err error
 	)
 	if !*replay || *version || *versionShort || *fprflag || *serve != "" {
-		s, err = siegfried.Load(config.Signature())
+		s, err = load(config.Signature())
 	}
 	if err != nil {
 		log.Fatalf("[FATAL] error loading signature file, got: %v", err)

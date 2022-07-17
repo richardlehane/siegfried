@@ -93,7 +93,7 @@ func (m Map) Add(subordinate string, superior string) {
 
 // create a list of all strings that appear in 'a' but not 'b'
 func extras(a []string, b []string) []string {
-	ret := make([]string, 0)
+	ret := make([]string, 0, len(a))
 	for _, v := range a {
 		var exists bool
 		for _, v1 := range b {
@@ -139,7 +139,7 @@ func (m Map) priorityWalk(k string) []string {
 func (m Map) Complete() {
 	for k := range m {
 		extraPriorities := m.priorityWalk(k)
-		m[k] = append(m[k], extraPriorities...)
+		m[k] = append(m[k], extras(extraPriorities, m[k])...)
 	}
 }
 

@@ -9,7 +9,7 @@
 
 ### Version
 
-1.9.2
+1.9.3
 
 [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -81,8 +81,8 @@ Or, for the most recent updates, you can install from this fork:
 
 #### Ubuntu/Debian (64 bit):
 
-    wget -qO - https://bintray.com/user/downloadSubjectPublicKey?username=bintray | sudo apt-key add -
-    echo "deb http://dl.bintray.com/siegfried/debian wheezy main" | sudo tee -a /etc/apt/sources.list
+    curl -sL "http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x20F802FE798E6857" | gpg --dearmor | sudo tee /usr/share/keyrings/siegfried-archive-keyring.gpg
+    echo "deb [signed-by=/usr/share/keyrings/siegfried-archive-keyring.gpg] https://www.itforarchivists.com/ buster main" | sudo tee -a /etc/apt/sources.list.d/siegfried.list
     sudo apt-get update && sudo apt-get install siegfried
 
 #### FreeBSD:
@@ -96,6 +96,23 @@ Or, for the most recent updates, you can install from this fork:
     makepkg -si
 
 ## Changes
+### v1.9.3 (2022-05-23)
+### Added
+- JS/WASM build support contributed by [Andy Jackson](https://github.com/richardlehane/siegfried/pull/188)
+- wikidata signature added to `-update`. Contributed by [Ross Spencer](https://github.com/richardlehane/siegfried/pull/178)
+- `-nopronom` flag added to `roy inspect` subcommand. Contributed by [Ross Spencer](https://github.com/richardlehane/siegfried/pull/185)
+
+### Changed
+- update PRONOM to v104
+- update LOC signatures to 2022-05-09
+- update Wikidata to 2022-05-20
+- update tika-mimetypes signatures to v2.4.0
+- update freedesktop.org signatures to v2.2
+
+### Fixed
+- invalid JSON output for fmt/1472 due to tab in MIME field. Reported by [Robert Schultz](https://github.com/richardlehane/siegfried/issues/186)
+- panic on corrupt Zip containers. Reported by [A. Diamond](https://github.com/richardlehane/siegfried/issues/181)
+
 ### v1.9.2 (2022-02-07)
 ### Added
 - Wikidata definition file specification has been updated and now includes endpoint (users will need to harvest Wikidata again)
@@ -139,22 +156,6 @@ Or, for the most recent updates, you can install from this fork:
 
 ### Fixed
 - incorrect basis for some signatures with multiple patterns. Reported and fixed by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/142).
-
-### v1.8.0 (2020-01-22)
-### Added
-- utc flag returns file modified dates in UTC e.g. `sf -utc FILE | DIR`. Requested by [Dragan Espenschied](https://github.com/richardlehane/siegfried/issues/136)
-- new cost and repetition flags to control segmentation when building signatures
-
-### Changed
-- update PRONOM to v96
-- update LOC signatures to 2019-12-18
-- update tika-mimetypes signatures to v1.23
-- update freedesktop.org signatures to v1.15
-
-### Fixed
-- XML namespaces detected by prefix on root tag, as well as default namespace (for mime-info spec)
-- panic when scanning certain MS-CFB files. Reported separately by Mike Shallcross and Euan Cochrane
-- file with many FF xx sequences grinds to a halt. Reported by [Andy Foster](https://github.com/richardlehane/siegfried/issues/128)
 
 See the [CHANGELOG](CHANGELOG.md) for the full history.
 

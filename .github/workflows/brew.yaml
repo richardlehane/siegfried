@@ -14,7 +14,7 @@ jobs:
           URL=$(curl https://api.github.com/repos/richardlehane/siegfried/releases/latest | grep "tarball_url" | grep -Eo 'https://[^\"]*')
           echo "URL=$URL" >> $GITHUB_ENV
           echo "VERSION=$(basename $URL)" >> $GITHUB_ENV
-          echo "SHA256=$(curl $URL | sha256sum | cut -d " " -f 1)" >> $GITHUB_ENV
+          echo "SHA256=$(curl -L $URL | sha256sum | cut -d " " -f 1)" >> $GITHUB_ENV
       - name: Edit siegfried.rb and commit
         run: |
           git clone 'https://${{ secrets.PAT }}@github.com/richardlehane/homebrew-digipres.git'
