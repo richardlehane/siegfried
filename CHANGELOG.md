@@ -1,4 +1,14 @@
 # Change Log
+## v1.9.4 (2022-07-18)
+### Added
+- new pkg/static and static builds. This allows direct use of sf API and self-contained binaries without needing separate signature files. 
+
+### Changed
+- update PRONOM to v106
+
+### Fixed
+- inconsistent output for `roy inspect priorities`. Reported by [Dave Clipsham](https://github.com/richardlehane/siegfried/issues/192)
+
 ## v1.9.3 (2022-05-23)
 ### Added
 - JS/WASM build support contributed by [Andy Jackson](https://github.com/richardlehane/siegfried/pull/188)
