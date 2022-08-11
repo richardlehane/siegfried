@@ -176,3 +176,17 @@ jobs:
           asset_path: data_${{ needs.publishDeb.outputs.version }}.zip
           asset_name: data_${{ needs.publishDeb.outputs.version }}.zip
           asset_content_type: application/zip
+  dispatch:
+    needs: publishDeb
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get release version
+        id: tag
+        run: echo ::set-output name=result::${GITHUB_REF/refs\/tags\/v/}
+      - name: Repository dispatch
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          repository: 'keeps/siegfried-docker'
+          event-type: dispatch
+          client-payload: '{"version": "${{ steps.tag.outputs.result }}"}'
