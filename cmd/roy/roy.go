@@ -169,6 +169,7 @@ var (
 	// INSPECT (roy inspect | roy inspect fmt/121 | roy inspect usr/local/mysig.sig | roy inspect 10)
 	inspect         = flag.NewFlagSet("inspect", flag.ExitOnError)
 	inspectHome     = inspect.String("home", config.Home(), "override the default home directory")
+	inspectDroid    = inspect.String("droid", config.Droid(), "set name/path for DROID signature file")
 	inspectReports  = inspect.Bool("reports", false, "build signatures from PRONOM reports (rather than DROID xml)")
 	inspectExtend   = inspect.String("extend", "", "comma separated list of additional signatures")
 	inspectExtendc  = inspect.String("extendc", "", "comma separated list of additional container signatures")
@@ -432,6 +433,9 @@ the DROID signature file you should also include a regular signature extension
 		opts = append(opts, config.SetRepetition(*repetition))
 	}
 	// inspect options
+	if *inspectDroid != config.Droid() {
+		opts = append(opts, config.SetDroid(*inspectDroid))
+	}
 	if *inspectMI != "" {
 		opts = append(opts, config.SetMIMEInfo(*inspectMI))
 	}
