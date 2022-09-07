@@ -3,18 +3,17 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>1255</FormatID>
-      <FormatName>ISO Disk Image File</FormatName>
+      <FormatName>ISO 9660 Disk Image File</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>
-      </FormatTypes>
+      <FormatTypes>Aggregate</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>ISO 9660 Disk Image File is a virtual image of optical disk, storing content and structure of an optical disc which can be transferred on the other media. This format specifically uses ISO 9660, a so-called original standard for file system for optical disc media, written by International Organization for Standardization (ISO) and considered an international technical standard available for many operating systems. A disk image is a uncompressed copy of the contents of a disk or a folder, it can facilitate certain types of backup and recovery strategies. Please see ID: fdd000348 from Library of Congress and other the links attached to this entry for further information.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -28,9 +27,14 @@
       <ProvenanceSourceDate>25 Oct 2012</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>25 Oct 2012</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>17 Aug 2022</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/ISO_image
+
+https://www.loc.gov/preservation/digital/formats/fdd/fdd000348.shtml
+
+https://en.wikipedia.org/wiki/Optical_disc_image
+
+https://docs.microsoft.com/en-us/windows/win32/imapi/disc-formats</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -42,6 +46,26 @@
       <ExternalSignature>
         <ExternalSignatureID>1275</ExternalSignatureID>
         <Signature>iso</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3131</ExternalSignatureID>
+        <Signature>toast</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3132</ExternalSignatureID>
+        <Signature>cdr</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3133</ExternalSignatureID>
+        <Signature>dmg</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3134</ExternalSignatureID>
+        <Signature>bin</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <InternalSignature>
@@ -63,6 +87,40 @@ Beginning at byte 32768, an ISO file will hold two-to-many volume descriptors, e
           <ByteSequenceValue>4344303031{1-16384}FF4344303031</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2585</RelatedFormatID>
+        <RelatedFormatName>UDF-ISO 9660 Bridge Disc</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2586</RelatedFormatID>
+        <RelatedFormatName>Apple Partition Map Disk Image</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2587</RelatedFormatID>
+        <RelatedFormatName>Apple Partition Map ISO 9660 Hybrid</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2589</RelatedFormatID>
+        <RelatedFormatName>Nero Burning ROM Image File</RelatedFormatName>
+        <RelatedFormatVersion>Generic</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subtype of</RelationshipType>
+        <RelatedFormatID>2584</RelatedFormatID>
+        <RelatedFormatName>UDF Disc Image</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

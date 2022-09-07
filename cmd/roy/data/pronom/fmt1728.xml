@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2572</FormatID>
+      <FormatName>dBASE Windows Form File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Dataset</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>dBASE is a database management systems for personal computers. The dBASE system includes the core database engine, a query system, a forms engine, and a programming language that ties all of these components together. The wfm file stores the dBASE form, used for entering and modifying data in the database.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>234</ProvenanceSourceID>
+      <ProvenanceName>National Library of Australia / National Library of Australia</ProvenanceName>
+      <ProvenanceSourceDate>07 Jul 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>07 Jul 2022</LastUpdatedDate>
+      <FormatNote>https://www.dbase.com/help/9_4/Creating_an_app/IDH_APP_WFM_FILE.htm</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1728</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>80</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>dBASE Inc.</OrganisationName>
+        <DeveloperCompoundName>dBASE Inc.</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>80</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>dBASE Inc.</OrganisationName>
+        <SupportCompoundName>dBASE Inc.</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3119</ExternalSignatureID>
+        <Signature>wfm</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2064</SignatureID>
+        <SignatureName>dBASE Windows Form File</SignatureName>
+        <SignatureNote>BOF Absolute from beginning of file, magic bytes:
+** END HEADER -- do not remove this line* * Generated on {2}/{2}/{2-4} *</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2390</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>2A2A20454E4420484541444552202D2D20646F206E6F742072656D6F76652074686973206C696E652A0D0A2A2047656E657261746564206F6E20{2}2F{2}2F{2-4}0D0A2A</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

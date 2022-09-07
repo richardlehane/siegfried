@@ -27,7 +27,7 @@
       <ProvenanceSourceDate>21 Sep 2016</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>21 Sep 2016</LastUpdatedDate>
+      <LastUpdatedDate>29 Jul 2022</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -56,6 +56,11 @@
         <OrganisationName>Apple Computer, Inc.</OrganisationName>
         <SupportCompoundName>Apple Computer, Inc.</SupportCompoundName>
       </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3136</ExternalSignatureID>
+        <Signature>as</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
       <InternalSignature>
         <SignatureID>1332</SignatureID>
         <SignatureName>AppleSingle v2</SignatureName>

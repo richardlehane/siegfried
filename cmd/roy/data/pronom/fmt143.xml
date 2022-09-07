@@ -24,7 +24,7 @@
       <ProvenanceSourceDate>01 Feb 2007</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>01 Feb 2007</LastUpdatedDate>
+      <LastUpdatedDate>25 Aug 2022</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -107,6 +107,13 @@
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>654</RelatedFormatID>
         <RelatedFormatName>Waveform Audio</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>785</RelatedFormatID>
+        <RelatedFormatName>Waveform Audio (WAVEFORMATEX)</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

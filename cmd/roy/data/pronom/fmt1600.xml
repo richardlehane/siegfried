@@ -13,7 +13,7 @@
       <FormatTypes>Text (Structured)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>Files which comprise part of an ArcInfo Coverage, which is a data model whose purpose is to store georelational data such as spatial location and descriptive data. Each ArcInfo Coverage resides in an ArcInfo workspace, a directory which contains two or more folders. These packages are generated using ArcGIS software, produced by Esri (https://www.esri.com/en-us/arcgis/about-arcgis/overview.) An ArcInfo coverage dataset typically has two types of .dat file: internal, which store the actual data table, and external, which contains a relative path to the data table. External .dat files follow a unique naming pattern: arcXXXX.dat, where XXXX is incrementally increasing number starting from 0000, e.g. arc0000.dat, arc0001.dat. The .dat files always come in pair with a NIT file and are both stored in an INFO directory at the root. Internal .dat files usually contain the byte sequence BOF, 000000.</FormatDescription>
+      <FormatDescription>Files which comprise part of an ArcInfo Coverage, which is a data model whose purpose is to store georelational data such as spatial location and descriptive data. Each ArcInfo Coverage resides in an ArcInfo workspace, a directory which contains two or more folders. These packages are generated using ArcGIS software, produced by Esri (https://www.esri.com/en-us/arcgis/about-arcgis/overview.) An ArcInfo coverage dataset typically has two types of .dat file: internal, which store the actual data table, and external, which contains a relative path to the data table. These external files, which have extension .dat, follow a unique naming pattern: arcXXXX.dat, where XXXX is incrementally increasing number starting from 0000, e.g. arc0000.dat, arc0001.dat. The .dat files always come in pair with a NIT file and are both stored in an INFO directory at the root. Internal .dat files usually contain the byte sequence BOF, 000000.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -27,7 +27,7 @@
       <ProvenanceSourceDate>20 Jan 2022</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>20 Jan 2022</LastUpdatedDate>
+      <LastUpdatedDate>20 Jul 2022</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -38,11 +38,13 @@
         <Identifier>fmt/1600</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
-      <ExternalSignature>
-        <ExternalSignatureID>2886</ExternalSignatureID>
-        <Signature>dat</Signature>
-        <SignatureType>File extension</SignatureType>
-      </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Equivalent to</RelationshipType>
+        <RelatedFormatID>2421</RelatedFormatID>
+        <RelatedFormatName>ESRI ArcInfo DAT File (External)</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

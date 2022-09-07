@@ -26,15 +26,23 @@
       <ProvenanceSourceDate>18 May 2016</ProvenanceSourceDate>
       <ProvenanceDescription>Signature supplied by Jay Gattuso of the National Library of New Zealand</ProvenanceDescription>
       <LastUpdatedDate>18 May 2016</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <FormatNote>http://justsolve.archiveteam.org/wiki/WordStar
+https://www.loc.gov/preservation/digital/formats/fdd/fdd000552</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
+        <Identifier>fdd000552</Identifier>
+        <IdentifierType>Library of Congress Format Description Identifier</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
         <Identifier>fmt/882</Identifier>
         <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>Q105856544</Identifier>
+        <IdentifierType>Wikidata QID Identifier</IdentifierType>
       </FileFormatIdentifier>
       <Developers>
         <DeveloperID>110</DeveloperID>
@@ -61,6 +69,12 @@
           <ByteSequenceValue>7F20575332303030FF312E3030</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>379</RelatedFormatID>
+        <RelatedFormatName>WordStar for MS-DOS Document</RelatedFormatName>
+        <RelatedFormatVersion>7.0</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

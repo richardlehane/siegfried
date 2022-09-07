@@ -26,19 +26,19 @@
       <ProvenanceSourceDate>13 Jun 2022</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>13 Jun 2022</LastUpdatedDate>
+      <LastUpdatedDate>20 Jul 2022</LastUpdatedDate>
       <FormatNote>Specification: https://www.ogc.org/standards/geopackage</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
-        <Identifier>fmt/1700</Identifier>
-        <IdentifierType>PUID</IdentifierType>
+        <Identifier>application/geopackage+sqlite3</Identifier>
+        <IdentifierType>MIME</IdentifierType>
       </FileFormatIdentifier>
       <FileFormatIdentifier>
-        <Identifier>geopackage+sqlite3</Identifier>
-        <IdentifierType>MIME</IdentifierType>
+        <Identifier>fmt/1700</Identifier>
+        <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
       <Developers>
         <DeveloperID>118</DeveloperID>

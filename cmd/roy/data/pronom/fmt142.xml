@@ -24,7 +24,7 @@
       <ProvenanceSourceDate>01 Feb 2007</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>01 Feb 2007</LastUpdatedDate>
+      <LastUpdatedDate>02 Sep 2022</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -81,6 +81,13 @@
           <ByteSequenceValue>52494646{4}57415645666D7420[!10]{3}[!FEFF]{16-*}64617461</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>786</RelatedFormatID>
+        <RelatedFormatName>Waveform Audio (WAVEFORMATEXTENSIBLE)</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1502</RelatedFormatID>

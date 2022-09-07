@@ -102,8 +102,8 @@
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>133</RelatedFormatID>
-        <RelatedFormatName>Microsoft Powerpoint Presentation</RelatedFormatName>
-        <RelatedFormatVersion>4.0</RelatedFormatVersion>
+        <RelatedFormatName>Microsoft PowerPoint Presentation</RelatedFormatName>
+        <RelatedFormatVersion>4.x</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>

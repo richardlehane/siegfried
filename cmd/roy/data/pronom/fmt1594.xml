@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>2421</FormatID>
-      <FormatName>ESRI ArcInfo .dat File (External)</FormatName>
+      <FormatName>ESRI ArcInfo DAT File (External)</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
@@ -74,6 +74,13 @@ EOF, offset 0-100, magic bytes,:   .adf</SignatureNote>
           <ByteSequenceValue>2E616466</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Equivalent to</RelationshipType>
+        <RelatedFormatID>2427</RelatedFormatID>
+        <RelatedFormatName>ESRI ArcInfo DAT File (Internal)</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>2422</RelatedFormatID>

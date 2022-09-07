@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2570</FormatID>
+      <FormatName>Geosoft Map Description File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>File format developed by Geosoft to integrate all graphics elements such as polygons, lines and text and layers (images, data, basemaps, plots and grids) constructed in Oasis montaj software.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>234</ProvenanceSourceID>
+      <ProvenanceName>National Library of Australia / National Library of Australia</ProvenanceName>
+      <ProvenanceSourceDate>07 Jul 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>07 Jul 2022</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1726</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>290</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Geosoft</OrganisationName>
+        <DeveloperCompoundName>Geosoft</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>290</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Geosoft</OrganisationName>
+        <SupportCompoundName>Geosoft</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3117</ExternalSignatureID>
+        <Signature>mdf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2062</SignatureID>
+        <SignatureName>Geosoft Map Description File</SignatureName>
+        <SignatureNote>BOF, offset 56, magic bytes: / xs,ys,mb,mr,mt,ml</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2388</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>56</Offset>
+          <MaxOffset>56</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>2F2078732C79732C6D622C6D722C6D742C6D6C</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

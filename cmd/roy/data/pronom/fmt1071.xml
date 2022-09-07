@@ -27,7 +27,7 @@
       <ProvenanceSourceDate>17 Jul 2017</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>17 Jul 2017</LastUpdatedDate>
+      <LastUpdatedDate>19 Aug 2022</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -84,6 +84,20 @@
           <ByteSequenceValue>6B6F6C790000000400000200</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>388</RelatedFormatID>
+        <RelatedFormatName>BZIP2 Compressed Archive</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2586</RelatedFormatID>
+        <RelatedFormatName>Apple Partition Map Disk Image</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

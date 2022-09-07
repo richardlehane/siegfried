@@ -12,7 +12,7 @@
       <FormatTypes>Word Processor</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>The WordStar format is the default proprietary plain text format for the word processing application of the same name. It was created in 1978 by MicroPro, originally for the CP/M operating system but later was used on other operating systems such as PC/MS-DOS. It was the first word processor to render the doument on screen as it would appear when printed. WordStar files often have the extension ws or ws follwed by their version number but it is also common for them to have no extension.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -25,17 +25,32 @@
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>29 Jul 2022</LastUpdatedDate>
+      <FormatNote>http://justsolve.archiveteam.org/wiki/WordStar
+https://www.loc.gov/preservation/digital/formats/fdd/fdd000552</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
+        <Identifier>fdd000552</Identifier>
+        <IdentifierType>Library of Congress Format Description Identifier</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>Q105856544</Identifier>
+        <IdentifierType>Wikidata QID Identifier</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
         <Identifier>x-fmt/237</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>110</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>MicroPro Inc</OrganisationName>
+        <DeveloperCompoundName>MicroPro Inc</DeveloperCompoundName>
+      </Developers>
       <ExternalSignature>
         <ExternalSignatureID>330</ExternalSignatureID>
         <Signature>ws</Signature>
@@ -65,6 +80,18 @@
           <ByteSequenceValue>1D7D000060{120}7D001D</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>379</RelatedFormatID>
+        <RelatedFormatName>WordStar for MS-DOS Document</RelatedFormatName>
+        <RelatedFormatVersion>7.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>342</RelatedFormatID>
+        <RelatedFormatName>WordStar for MS-DOS Document</RelatedFormatName>
+        <RelatedFormatVersion>5.5</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

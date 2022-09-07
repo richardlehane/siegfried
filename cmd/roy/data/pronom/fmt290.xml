@@ -105,6 +105,12 @@
         <RelatedFormatVersion>1.2</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2604</RelatedFormatID>
+        <RelatedFormatName>OpenDocument Text</RelatedFormatName>
+        <RelatedFormatVersion>1.3</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>382</RelatedFormatID>
         <RelatedFormatName>ZIP Format</RelatedFormatName>

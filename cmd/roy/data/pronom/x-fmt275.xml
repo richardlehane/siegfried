@@ -4,7 +4,7 @@
     <FileFormat>
       <FormatID>407</FormatID>
       <FormatName>Microsoft Word for MS-DOS Document</FormatName>
-      <FormatVersion>5.0</FormatVersion>
+      <FormatVersion>5.0 - 5.4</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -24,7 +24,7 @@
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>19 May 2022</LastUpdatedDate>
+      <LastUpdatedDate>20 Jul 2022</LastUpdatedDate>
       <FormatNote>https://web.archive.org/web/20211222235433/https://winworldpc.com/product/microsoft-word/5x-dos
 
 https://en.wikipedia.org/wiki/Doc_(computing)#Microsoft_Word_Binary_File_Format
@@ -76,7 +76,7 @@ https://www.docfly.com/blog/2020/a-brief-history-of-microsoft-word</FormatNote>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>31BE000000AB0000000000000000{82}0000{18}04</ByteSequenceValue>
+          <ByteSequenceValue>31BE000000AB0000000000000000{82}0000{18}(04|05)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

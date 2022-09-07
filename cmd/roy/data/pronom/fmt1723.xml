@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2567</FormatID>
+      <FormatName>Wordcraft Chapter Files</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Word Processor</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Files from Wordcraft word processing software from the 1980s, which was made for IBM XT and Commodore 64. Documents created with this software contained at least 2 files, an 'index' file with extension .doc and chapter file(s) with extension .001.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>07 Jul 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>07 Jul 2022</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1723</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>288</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Wordcraft International Limited</OrganisationName>
+        <DeveloperCompoundName>Wordcraft International Limited</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>288</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Wordcraft International Limited</OrganisationName>
+        <SupportCompoundName>Wordcraft International Limited</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3114</ExternalSignatureID>
+        <Signature>001</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

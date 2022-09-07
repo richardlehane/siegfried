@@ -12,7 +12,9 @@
       <FormatTypes>Word Processor</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>WordStar is a Word Processor application originally published by MicroPro. WS4 files currently cannot by identified though a PRONOM identification signature. 
+      <FormatDescription>The WordStar format is the default proprietary plain text format for the word processing application of the same name. It was created in 1978 by MicroPro, originally for the CP/M operating system but later was used on other operating systems such as PC/MS-DOS. It was the first word processor to render the doument on screen as it would appear when printed. WordStar files often have the extension ws or ws follwed by their version number but it is also common for them to have no extension. 
+
+WS4 files currently cannot by identified though a PRONOM identification signature. 
 
 On the surface it's a plain text file, however the format 'shifts' the last byte of each word. Effectively it is 'flipping' the first bit of the ASCII character from 0 to 1. so a lower case 'r' (hex value 0x72) becomes 'ò' (hex value 0xF2); lower case 'd' (hex 0x64) becomes 'ä' (hex 0xE4) and so on. 
 
@@ -29,17 +31,32 @@ It should be possible to write a simple decoder application for WS4 files, howev
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>29 Jul 2022</LastUpdatedDate>
+      <FormatNote>http://justsolve.archiveteam.org/wiki/WordStar
+https://www.loc.gov/preservation/digital/formats/fdd/fdd000552</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
+        <Identifier>fdd000552</Identifier>
+        <IdentifierType>Library of Congress Format Description Identifier</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>Q105856544</Identifier>
+        <IdentifierType>Wikidata QID Identifier</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
         <Identifier>x-fmt/260</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>110</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>MicroPro Inc</OrganisationName>
+        <DeveloperCompoundName>MicroPro Inc</DeveloperCompoundName>
+      </Developers>
       <ExternalSignature>
         <ExternalSignatureID>365</ExternalSignatureID>
         <Signature>ws</Signature>
@@ -50,6 +67,18 @@ It should be possible to write a simple decoder application for WS4 files, howev
         <Signature>ws4</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>285</RelatedFormatID>
+        <RelatedFormatName>WordStar for MS-DOS Document</RelatedFormatName>
+        <RelatedFormatVersion>5.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>542</RelatedFormatID>
+        <RelatedFormatName>WordStar for MS-DOS Document</RelatedFormatName>
+        <RelatedFormatVersion>3.0</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

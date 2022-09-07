@@ -27,7 +27,7 @@
       <ProvenanceSourceDate>22 Apr 2022</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>22 Apr 2022</LastUpdatedDate>
+      <LastUpdatedDate>29 Jul 2022</LastUpdatedDate>
       <FormatNote>https://en.wikipedia.org/wiki/Compress
 
 https://docs.fileformat.com/compression/z/
@@ -43,7 +43,7 @@ http://fileformats.archiveteam.org/wiki/Compress_(Unix)</FormatNote>
       </FileFormatIdentifier>
       <ExternalSignature>
         <ExternalSignatureID>3025</ExternalSignatureID>
-        <Signature>Z</Signature>
+        <Signature>z</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <InternalSignature>

@@ -56,7 +56,7 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>1951</SignatureID>
-        <SignatureName>BibTeX database file</SignatureName>
+        <SignatureName>BibTeX Database File</SignatureName>
         <SignatureNote>@, followed by one of these required tags: Article, Book, Booklet, Conference, Inbook, Incollection, Inproceedings, Manual, Mastersthesis, Misc, Phdthesis, Proceedings, Techreport, Unpublished, in all uppercase, all lowercase, or standard capitalized formats.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>2258</ByteSequenceID>
@@ -85,6 +85,19 @@
           <Endianness>
           </Endianness>
           <ByteSequenceValue>7B{1-600}7D</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>2398</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>201</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>40{4-60}7B{10-1300}7D</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

@@ -3,8 +3,8 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>133</FormatID>
-      <FormatName>Microsoft Powerpoint Presentation</FormatName>
-      <FormatVersion>4.0</FormatVersion>
+      <FormatName>Microsoft PowerPoint Presentation</FormatName>
+      <FormatVersion>4.x</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -12,7 +12,7 @@
       <FormatTypes>Presentation</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Microsoft PowerPoint Presentation is a proprietary binary file format developed by Microsoft Corporation used to store presentation files created in the Microsoft PowerPoint presentation software. This record describes version 4 of .ppt file format released in February 1994 for Windows, and included in the 4.2 version of Microsoft Office for Windows released in the same year. Versions up to version 4 of Microsoft PowerPoint use .ppt as extension however, they are not compatible with each other. Microsoft made backwards compatibility an optional add-on after Office 2003 and appears to have removed it altogether in Office 2010. Please follow the links attached to this entry for more information.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -23,10 +23,14 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
-      <ProvenanceDescription>This format is identifiable via a container signature in DROID 6 and later.</ProvenanceDescription>
-      <LastUpdatedDate>30 Sep 2020</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>24 Aug 2022</LastUpdatedDate>
+      <FormatNote>https://www.loc.gov/preservation/digital/formats/fdd/fdd000511.shtml
+
+http://justsolve.archiveteam.org/wiki/PPT
+
+https://web.archive.org/web/20220329174106/https://en.wikipedia.org/wiki/Microsoft_PowerPoint</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -43,6 +47,20 @@
         <Identifier>x-fmt/88</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>93</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <DeveloperCompoundName>Microsoft Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>93</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <SupportCompoundName>Microsoft Corporation</SupportCompoundName>
+      </Support>
       <ExternalSignature>
         <ExternalSignatureID>127</ExternalSignatureID>
         <Signature>ppt</Signature>
@@ -115,6 +133,12 @@
         <RelatedFormatID>134</RelatedFormatID>
         <RelatedFormatName>Microsoft Powerpoint Presentation</RelatedFormatName>
         <RelatedFormatVersion>95</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>2594</RelatedFormatID>
+        <RelatedFormatName>Microsoft PowerPoint Presentation</RelatedFormatName>
+        <RelatedFormatVersion>3.x</RelatedFormatVersion>
       </RelatedFormat>
       <FormatProperties>
         <FormatProperty>

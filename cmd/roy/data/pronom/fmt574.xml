@@ -13,7 +13,7 @@
       <FormatTypes>Dataset</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>DICOM (Digital Imaging and Communications in Medicine) is a standard for handling, storing, printing, and transmitting information in medical imaging. It includes a file format definition and a network communications protocol. The communication protocol is an application protocol that uses TCP/IP to communicate between systems. DICOM files can be exchanged between two entities that are capable of receiving image and patient data in DICOM format. The National Electrical Manufacturers Association (NEMA) holds the copyright to this standard. It was developed by the DICOM Standards Committee, whose members are also partly members of NEMA.</FormatDescription>
+      <FormatDescription>Digital Imaging and Communications in Medicine (DICOM) is a standard for handling, storing, printing, and transmitting information in medical imaging. It includes a file format definition and a network communications protocol. The communication protocol is an application protocol that uses TCP/IP to communicate between systems. DICOM files can be exchanged between two entities that are capable of receiving image and patient data in DICOM format. The National Electrical Manufacturers Association (NEMA) holds the copyright to this standard. It was developed by the DICOM Standards Committee, whose members are also partly members of NEMA.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -27,9 +27,12 @@
       <ProvenanceSourceDate>28 Aug 2013</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>28 Aug 2013</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>22 Jul 2022</LastUpdatedDate>
+      <FormatNote>https://dicom.nema.org/medical/dicom/current/output/pdf/part10.pdf
+
+https://dicom.nema.org/medical/dicom/current/output/pdf/part12.pdf
+
+https://www.dicomstandard.org/</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -50,19 +53,21 @@
       <InternalSignature>
         <SignatureID>915</SignatureID>
         <SignatureName>DICOM</SignatureName>
-        <SignatureNote>128 0x00 bytes, followed by 'DICM' ASCII string. This could also be expessed as just 'DICM', with a 128 byte offset, however including the 00 bytes strengthens the signature.</SignatureNote>
+        <SignatureNote>BOF; Offset: 128; Magic bytes: 'DICM'. 
+
+Please see the specification attached with this entry, which states that any format with string 'DCM' at the 128th byte is considered to be a DICOM file format.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1136</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
-          <Offset>0</Offset>
-          <MaxOffset>0</MaxOffset>
+          <Offset>128</Offset>
+          <MaxOffset>128</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004449434D</ByteSequenceValue>
+          <ByteSequenceValue>4449434D</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>
