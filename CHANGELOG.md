@@ -1,4 +1,12 @@
 # Change Log
+## v1.9.5 (2022-09-10)
+### Added
+- `roy inspect` now takes a `-droid` flag to allow easier inspection of old or custom DROID files
+- github action to update siegfried docker deployment [https://github.com/keeps/siegfried-docker]. Implemented by [Keep Solutions](https://github.com/richardlehane/siegfried/pull/201)
+
+### Changed
+- update PRONOM to v107
+
 ## v1.9.4 (2022-07-18)
 ### Added
 - new pkg/static and static builds. This allows direct use of sf API and self-contained binaries without needing separate signature files. 

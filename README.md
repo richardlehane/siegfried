@@ -9,7 +9,7 @@
 
 ### Version
 
-1.9.4
+1.9.5
 
 [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -96,6 +96,14 @@ Or, for the most recent updates, you can install from this fork:
     makepkg -si
 
 ## Changes
+### v1.9.5 (2022-09-10)
+### Added
+- `roy inspect` now takes a `-droid` flag to allow easier inspection of old or custom DROID files
+- github action to update siegfried docker deployment [https://github.com/keeps/siegfried-docker]. Implemented by [Keep Solutions](https://github.com/richardlehane/siegfried/pull/201)
+
+### Changed
+- update PRONOM to v107
+
 ### v1.9.4 (2022-07-18)
 ### Added
 - new pkg/static and static builds. This allows direct use of sf API and self-contained binaries without needing separate signature files. 
