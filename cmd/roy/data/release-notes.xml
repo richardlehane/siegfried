@@ -2,6 +2,156 @@
 <?xml-stylesheet type="text/xsl" href="release-note.xsl"?>
 <release_notes>
 <release_note>
+   <release_date>21st July 2022</release_date>
+   <signature_filename>DROID_SignatureFile_V107.xml</signature_filename>
+   <release_outline name="New Records">
+      <format>
+         <puid type="fmt">1723</puid>
+         <name>Wordcraft Chapter Files</name>
+         <summary>Extension-only entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1724</puid>
+         <name>LegalDocML Document</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1725</puid>
+         <name>Capture One Settings File</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1726</puid>
+         <name>Geosoft Map Description File</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1727</puid>
+         <name>Pro Tools Session File</name>
+         <summary>Full entry added. Submitted by National Library of New Zealand.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1728</puid>
+         <name>dBASE Windows Form File</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1729</puid>
+         <name>Esri Shapefile Geospatial Metadata File</name>
+         <summary>Full entry added. Submitted by Yan Han, University of Arizona.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1730</puid>
+         <name>Data File (Generic)</name>
+         <summary>Extension-only entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1731</puid>
+         <name>PowerGraphics Image File</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1732</puid>
+         <name>Prism Paint Bitmap</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1733</puid>
+         <name>PaintShop Plus Compressed Format</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1734</puid>
+         <name>Portfolio Graphics Compressed File</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="Updated Records">
+      <format>
+         <puid type="fmt">116</puid>
+         <name>Windows Bitmap (3.0)</name>
+         <summary>Broadened signature. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">275</puid>
+         <name>Microsoft Word for MS-DOS Document (v5)</name>
+         <summary>Amended signature to include variation of 05 at the 116th byte. Updated version number to 5.0-5.4 to incorporate versions 5 to 5.4 . Submitted by University of Saskatchewan.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1600</puid>
+         <name>ESRI ArcInfo DAT File (Internal)</name>
+         <summary>Added relationship to ESRI ArcInfo .dat File (External), removed extension, expanded description. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1616</puid>
+         <name>BibTeX Database File</name>
+         <summary>Tightened signature by re-adding BOF sequence. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1668</puid>
+         <name>Roxio Easy Media Creator Layout 8-10</name>
+         <summary>Attached correct signature sequence. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1700</puid>
+         <name>OGC GeoPackage</name>
+         <summary>Amended MIME type. Submitted by Preservica.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="New Signatures">
+      <format>
+         <puid type="fmt">1724</puid>
+         <name>LegalDocML Document</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1725</puid>
+         <name>Capture One Settings File</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1726</puid>
+         <name>Geosoft Map Description File</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1727</puid>
+         <name>Pro Tools Session File</name>
+         <summary>Signature researched and samples provided by National Library of New Zealand.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1728</puid>
+         <name>dBASE Windows Form File</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1729</puid>
+         <name>Esri Shapefile Geospatial Metadata File</name>
+         <summary>Signature researched and samples provided by Yan Han, University of Arizona.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1731</puid>
+         <name>PowerGraphics Image File</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1732</puid>
+         <name>Prism Paint Bitmap</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1733</puid>
+         <name>PaintShop Plus Compressed Format</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1734</puid>
+         <name>Portfolio Graphics Compressed File</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+    </release_outline>
+  </release_note>
+<release_note>
    <release_date>4th July 2022</release_date>
    <signature_filename>DROID_SignatureFile_V106.xml</signature_filename>
    <release_outline name="New Records"/>
@@ -45,22 +195,22 @@
    <signature_filename>DROID_SignatureFile_V105.xml</signature_filename>
    <release_outline name="New Records">
       <format>
-         <puid type="fmt">1649</puid>
+         <puid type="fmt ">1649</puid>
          <name>AGS 4 Data Format</name>
          <summary>Full entry added. Submitted by Association of Geotechnical and Geoenvironmental Specialists, supported by British Geological Survey.</summary>
       </format>
       <format>
-         <puid type="fmt">1650</puid>
+         <puid type="fmt ">1650</puid>
          <name>Bayesian Interchange Format File</name>
          <summary>Extension-only entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
       </format>
       <format>
-         <puid type="fmt">1651</puid>
+         <puid type="fmt ">1651</puid>
          <name>Garmin Flexible and Interoperable Data Transfer file</name>
          <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
       </format>
       <format>
-         <puid type="fmt">1652</puid>
+         <puid type="fmt ">1652</puid>
          <name>Typescript</name>
          <summary>Extension-only entry added. Submitted by Diplomatic Archives / French Ministry for Europe and Foreign Affairs.</summary>
       </format>
@@ -669,12 +819,12 @@
          <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
       </format>
       <format>
-         <puid type="fmt">1649</puid>
+         <puid type="fmt ">1649</puid>
          <name>AGS 4 Data Format</name>
          <summary>Signature researched and samples provided by Association of Geotechnical and Geoenvironmental Specialists, supported by British Geological Survey.</summary>
       </format>
       <format>
-         <puid type="fmt">1651</puid>
+         <puid type="fmt ">1651</puid>
          <name>Garmin Flexible and Interoperable Data Transfer file</name>
          <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
       </format>
