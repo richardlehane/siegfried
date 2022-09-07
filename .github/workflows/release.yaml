@@ -186,7 +186,7 @@ jobs:
       - name: Repository dispatch
         uses: peter-evans/repository-dispatch@v2
         with:
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          token: ${{ secrets.KEEPS_ACCESS_TOKEN }}
           repository: 'keeps/siegfried-docker'
           event-type: dispatch
           client-payload: '{"version": "${{ steps.tag.outputs.result }}"}'
