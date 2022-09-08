@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2597</FormatID>
+      <FormatName>Canon SIF File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>A Canon SIF file is present in the Canon XF folder structure that is used by media cards associated with cameras such as XF205 and C300. It is created whenever a video file is shot and exceeds the 2GB file size limit imposed by the FAT32 filesystem. In this case, an SIF file is created for each corresponding MXF file. It is found within the CANON XF/CLIPS 001/AAxxxx directory, where xxxx is an automatically generated number beginning with 0001. Although little official documentation exists, SIF likely stands for Shot/Segment/Span Information File. The precise contents of the file format have not yet been established, but its existence is necessary in order to import spanned clips into Canon media apps.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>24 Aug 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>24 Aug 2022</LastUpdatedDate>
+      <FormatNote>http://www.premierepro.org/2016/10/canon-xf-c300-xf305-folder-structure-and-file-naming-explained/</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1751</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>197</DeveloperID>
+        <DeveloperName>Canon</DeveloperName>
+        <OrganisationName>Canon</OrganisationName>
+        <DeveloperCompoundName>Canon / Canon</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>197</SupportID>
+        <SupportName>Canon</SupportName>
+        <OrganisationName>Canon</OrganisationName>
+        <SupportCompoundName>Canon / Canon</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3169</ExternalSignatureID>
+        <Signature>sif</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2093</SignatureID>
+        <SignatureName>Canon SIF File</SignatureName>
+        <SignatureNote>BOF: 0x01 (Start of Header) followed by 0x00 (Null) followed by 0x02 (Start of Text) followed by 0x00 (Null)</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2425</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>01000200</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>687</RelatedFormatID>
+        <RelatedFormatName>MPEG 1/2 Audio Layer 3</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

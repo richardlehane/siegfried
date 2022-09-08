@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2594</FormatID>
+      <FormatName>Microsoft PowerPoint Presentation</FormatName>
+      <FormatVersion>3.x</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Presentation</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Microsoft PowerPoint Presentation is a proprietary binary file format developed by Microsoft Corporation used to store presentation files created in the Microsoft PowerPoint presentation system. This record describes version 3 of .ppt file format released in May 1992 for Windows, and included in the 3.0 version of Microsoft Office for Windows released in August 1992. Versions up to version 4 [x-fmt/88] of Microsoft PowerPoint use .ppt as extension however, they are not compatible with each other. Microsoft made backwards compatibility an optional add-on after Office 2003 and appears to have removed it altogether in Office 2010. Please follow the links attached to this entry for more information.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
+      <ProvenanceSourceDate>24 Aug 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>24 Aug 2022</LastUpdatedDate>
+      <FormatNote>https://www.loc.gov/preservation/digital/formats/fdd/fdd000511.shtml
+
+http://justsolve.archiveteam.org/wiki/PPT
+
+https://web.archive.org/web/20220329174106/https://en.wikipedia.org/wiki/Microsoft_PowerPoint</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/vnd.ms-PowerPoint</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>com.microsoft.powerpoint.ppt</Identifier>
+        <IdentifierType>Apple Uniform Type Identifier</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1748</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>93</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <DeveloperCompoundName>Microsoft Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>93</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <SupportCompoundName>Microsoft Corporation</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3166</ExternalSignatureID>
+        <Signature>ppt</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2090</SignatureID>
+        <SignatureName>Microsoft PowerPoint Presentation v3</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 0xEDDEAD0B03000000</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2422</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>EDDEAD0B03000000</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>133</RelatedFormatID>
+        <RelatedFormatName>Microsoft PowerPoint Presentation</RelatedFormatName>
+        <RelatedFormatVersion>4.x</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>2593</RelatedFormatID>
+        <RelatedFormatName>Microsoft PowerPoint Presentation</RelatedFormatName>
+        <RelatedFormatVersion>2.x</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2583</FormatID>
+      <FormatName>Flow Cytometry Standard File</FormatName>
+      <FormatVersion>1.0-3.1</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Dataset</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Flow Cytometry Standard (FCS) is a format originating from data file standard for reading and writing of data from flow cytometry experiments written by International Society for Advancement of Cytometry (ISAC). FCS format describes a file that is a combination of textual data followed by binary data. The first version of the format was adopted as FCS 1.0 in 1984, and then was modified in 1990 as FCS 2.0 and again in 1997 as FCS 3.0, with the latest version of the standard introduced in 2010 as version 3.1. Please see the links attached with this entry to find file specification.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>292</ProvenanceSourceID>
+      <ProvenanceName>UMC Utrecht / University Medical Center Utrecht</ProvenanceName>
+      <ProvenanceSourceDate>15 Aug 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>15 Aug 2022</LastUpdatedDate>
+      <FormatNote>https://acrobat.adobe.com/link/review?uri=urn:aaid:scds:US:6a9bb787-839c-3d29-9800-4191c3209260#pageNum=1
+
+https://isac-net.org/page/Data-Standards
+
+https://web.archive.org/web/20220128002659/https://en.wikipedia.org/wiki/Flow_Cytometry_Standard</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>	application/vnd.isac.fcs</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1737</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>294</DeveloperID>
+        <DeveloperName>ISAC</DeveloperName>
+        <OrganisationName>International Society for Advancement of Cytometry</OrganisationName>
+        <DeveloperCompoundName>ISAC / International Society for Advancement of Cytometry</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>294</SupportID>
+        <SupportName>ISAC</SupportName>
+        <OrganisationName>International Society for Advancement of Cytometry</OrganisationName>
+        <SupportCompoundName>ISAC / International Society for Advancement of Cytometry</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3138</ExternalSignatureID>
+        <Signature>fcs</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2075</SignatureID>
+        <SignatureName>Flow Cytometry Standard File</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 'FCS' followed by a version number then followed by space characters, followed by at least three pairs of ASCII-encoded integers indicating the byte offsets for the start and end (=last byte of) of the primary TEXT segment, the DATA segment, and the ANALYSIS segment</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2402</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>464353{3}20</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

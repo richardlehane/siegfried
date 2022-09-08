@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2587</FormatID>
+      <FormatName>Apple Partition Map ISO 9660 Hybrid</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Apple Partition Map ISO 9660 Hybrid is a hybrid to describing the contents and structure of Apple Partition Map (APM) partition scheme and ISO9660 file system for optical disc media. The hybrid system allows for ISO9660 as a primary volume descriptor and an Apple Partition Map, allowing the disc to work on different types of computers. Apple Partition Map was developed by Apple in around 1988 with the introduction of Macintosh II. ISO 9660 was written by International Organization for Standardization (ISO) and considered an international technical standard available for many operating systems. A disk image is a uncompressed copy of the contents of a disk or a folder, it can facilitate certain types of backup and recovery strategies. Please see ID: fdd000348 from Library of Congress and other links attached to this entry for further information.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
+      <ProvenanceSourceDate>17 Aug 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>17 Aug 2022</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/Apple_Partition_Map
+
+https://www.loc.gov/preservation/digital/formats/fdd/fdd000348.shtml
+
+https://en.wikipedia.org/wiki/Apple_Disk_Image
+
+https://en.wikipedia.org/wiki/Optical_disc_image
+
+https://en.wikipedia.org/wiki/ISO_9660</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1741</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3154</ExternalSignatureID>
+        <Signature>toast</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3155</ExternalSignatureID>
+        <Signature>iso</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3156</ExternalSignatureID>
+        <Signature>cdr</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2080</SignatureID>
+        <SignatureName>Apple Partition Map ISO 9660 Hybrid, sig n.1</SignatureName>
+        <SignatureNote>BOF; Offset: 32768; Max Offset: 70468; Magic Bytes: wildcard bytes between 0 to 16 bytes, followed by 0x45520200, an exact 508 wildcard bytes followed by 0x504D4344303031, then wildcard bytes between 1 to 16384, followed by 0xFF4344303031</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2408</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>32768</Offset>
+          <MaxOffset>70468</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>{0-16}45520200{508}504D4344303031{1-16384}FF4344303031</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>2081</SignatureID>
+        <SignatureName>Apple Partition Map ISO 9660 Hybrid, sig n.2</SignatureName>
+        <SignatureNote>BOF; Offset: 32768; Max Offset: 70468; Magic Bytes: wildcard bytes between 0 to 16 bytes, followed by 0x45520800, an exact 2044 wildcard bytes followed by 0x504D4344303031, then wildcard bytes between 1 to 16384, followed by 0xFF4344303031</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2409</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>32768</Offset>
+          <MaxOffset>70468</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>{0-16}45520800{2044}504D4344303031{1-16384}FF4344303031</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>1255</RelatedFormatID>
+        <RelatedFormatName>ISO 9660 Disk Image File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2586</RelatedFormatID>
+        <RelatedFormatName>Apple Partition Map Disk Image</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

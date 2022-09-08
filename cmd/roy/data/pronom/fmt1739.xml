@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2585</FormatID>
+      <FormatName>UDF-ISO 9660 Bridge Disc</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>UDF-ISO 9660 Bridge Disc is a format that stores contents and structure of an optical disc which can be transferred on the other media. It uses Universal Disk Format (UDF) file system developed for optical media by the Optical Storage Technology Association (OSTA), as well as ISO 9660 International Organization for Standardization (ISO). This format acts as a support for discs where ISO 9660 and UDF formats all reside on the same optical disc. It can be used in video applications, such as DVD-Video, DVD+VR, and DVD-VR. A disk image is a uncompressed copy of the contents of a disk or a folder, it can facilitate certain types of backup and recovery strategies. Please see ID: fdd000348 from Library of Congress and other links attached to this entry for further information.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
+      <ProvenanceSourceDate>17 Aug 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>17 Aug 2022</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/Universal_Disk_Format
+
+http://fileformats.archiveteam.org/wiki/ISO_9660
+
+https://www.loc.gov/preservation/digital/formats/fdd/fdd000348.shtml
+
+https://en.wikipedia.org/wiki/Optical_disc_image
+
+https://docs.microsoft.com/en-us/windows/win32/imapi/disc-formats</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1739</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3143</ExternalSignatureID>
+        <Signature>toast</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3144</ExternalSignatureID>
+        <Signature>iso</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3145</ExternalSignatureID>
+        <Signature>cdr</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3146</ExternalSignatureID>
+        <Signature>dmg</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2077</SignatureID>
+        <SignatureName>UDF-ISO 9660 Bridge Disc</SignatureName>
+        <SignatureNote>BOF; Offset: 32768; Max Offset: 70468; Magic Bytes:  0x4344303031, then wildcard bytes between 1 to 16384, followed by 0xFF4344303031
+
+&amp; 
+
+BOF; Offset: 32768; Max Offset: 70468; Magic Bytes:  0x00424541303101, then an exact of 2048 wildcard bytes, followed by 0x004E535230, then either 0x32 or 33 followed by 0x01</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2404</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>32768</Offset>
+          <MaxOffset>70468</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4344303031{1-16384}FF4344303031</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>2405</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>32768</Offset>
+          <MaxOffset>36864</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>00424541303101{2041}004E535230(32|33)01</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2605</RelatedFormatID>
+        <RelatedFormatName>Apple Partition Map - ISO 9660 - UDF Hybrid Disk Image</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>1255</RelatedFormatID>
+        <RelatedFormatName>ISO 9660 Disk Image File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>2584</RelatedFormatID>
+        <RelatedFormatName>UDF Disc Image</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

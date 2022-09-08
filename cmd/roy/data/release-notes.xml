@@ -2,6 +2,536 @@
 <?xml-stylesheet type="text/xsl" href="release-note.xsl"?>
 <release_notes>
 <release_note>
+   <release_date>5th September 2022</release_date>
+   <signature_filename>DROID_SignatureFile_V108.xml</signature_filename>
+   <release_outline name="New Records">
+      <format>
+         <puid type="fmt">1735</puid>
+         <name>C/C++ Header File</name>
+         <summary>Extension-only entry added. Submitted by University Medical Center Utrecht.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1736</puid>
+         <name>Creative Voice File</name>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1737</puid>
+         <name>Flow Cytometry Standard File</name>
+         <summary>Full entry added. Submitted by University Medical Center Utrecht.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1738</puid>
+         <name>UDF Disc Image</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1739</puid>
+         <name>UDF-ISO 9660 Bridge Disc</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1740</puid>
+         <name>Apple Partition Map Disk Image</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1741</puid>
+         <name>Apple Partition Map ISO 9660 Hybrid</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1742</puid>
+         <name>Hierarchical File System Plus</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1743</puid>
+         <name>Nero Burning ROM Image File</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1744</puid>
+         <name>Psion Series 3 Bitmap</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1745</puid>
+         <name>PixArt Bitmap</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1746</puid>
+         <name>Rocky Interlace Picture</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1747</puid>
+         <name>Microsoft PowerPoint Presentation v2.x</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1748</puid>
+         <name>Microsoft PowerPoint Presentation v3.x</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1749</puid>
+         <name>Canon MIF File</name>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1750</puid>
+         <name>Canon CIF File</name>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1751</puid>
+         <name>Canon SIF File</name>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1752</puid>
+         <name>OpenDocument Database Format 1.3</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1753</puid>
+         <name>OpenDocument Graphics 1.3</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1754</puid>
+         <name>OpenDocument Presentation 1.3</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1755</puid>
+         <name>OpenDocument Spreadsheet 1.3</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1756</puid>
+         <name>OpenDocument Text 1.3</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1757</puid>
+         <name>Apple Partition Map - ISO 9660 - UDF Hybrid Disk Image</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1758</puid>
+         <name>Media Descriptor File</name>
+         <summary>Extension-only entry added. Submitted by The Royal Danish Library.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1759</puid>
+         <name>Media Descriptor Sidecar File</name>
+         <summary>Full entry added. Submitted by The Royal Danish Library.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1760</puid>
+         <name>CloneCD Control File</name>
+         <summary>Full entry added. Submitted by The Royal Danish Library.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1761</puid>
+         <name>MacBinary I</name>
+         <summary>Extension-only entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1762</puid>
+         <name>MacBinary II</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1763</puid>
+         <name>MacBinary III</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1764</puid>
+         <name>Sony SLV File</name>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1765</puid>
+         <name>Media Hash List</name>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1766</puid>
+         <name>Sony SML File</name>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="Updated Records">
+      <format>
+         <puid type="x-fmt">67</puid>
+         <name>OS/2 Presentation Manager Metafile (MET)</name>
+         <summary>New signature. Name changed from Met Metafile to OS/2 Presetation Manger Metafile (MET), description, references and classifications updated. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">88</puid>
+         <name>Microsoft PowerPoint Presentation v4.x</name>
+         <summary>Updated name, version, description, note and added developer. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">205</puid>
+         <name>WordStar for MS-DOS Document (5.0)</name>
+         <summary>Description updated. Addition of Library of Congress Format Description and Wikidata QID identifiers. Relationships between other WordStar entries added. Developer added. Submitted by Library of Congress.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">206</puid>
+         <name>WordStar for Windows Document (1.0)</name>
+         <summary>Description updated. Addition of Library of Congress Format Description and Wikidata QID identifiers. Relationships between other WordStar entries added. Developer added. Submitted by Library of Congress.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">236</puid>
+         <name>WordStar for MS-DOS Document (5.5)</name>
+         <summary>Description updated. Addition of Library of Congress Format Description and Wikidata QID identifiers. Relationships between other WordStar entries added. Developer added. Submitted by Library of Congress.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">237</puid>
+         <name>WordStar for MS-DOS Document (6.0)</name>
+         <summary>Description updated. Addition of Library of Congress Format Description and Wikidata QID identifiers. Relationships between other WordStar entries added. Developer added. Submitted by Library of Congress.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">260</puid>
+         <name>WordStar for MS-DOS Document (4.0)</name>
+         <summary>Description updated. Addition of Library of Congress Format Description and Wikidata QID identifiers. Relationships between other WordStar entries added. Developer added. Submitted by Library of Congress.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">261</puid>
+         <name>WordStar for MS-DOS Document (7.0)</name>
+         <summary>Description updated. Addition of Library of Congress Format Description and Wikidata QID identifiers. Relationships between other WordStar entries added. Developer added. Submitted by Library of Congress.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">262</puid>
+         <name>WordStar for Windows Document (2.0)</name>
+         <summary>Description updated. Addition of Library of Congress Format Description and Wikidata QID identifiers. Relationships between other WordStar entries added. Developer added. Submitted by Library of Congress.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">370</puid>
+         <name>WordStar for MS-DOS Document (3.0)</name>
+         <summary>Description updated. Addition of Library of Congress Format Description and Wikidata QID identifiers. Relationships between other WordStar entries added. Developer added. Submitted by Library of Congress.</summary>
+      </format>
+      <format>
+         <puid type="fmt">136</puid>
+         <name>OpenDocument Text 1.0</name>
+         <summary>Minor container signature syntax adjustment to align with official PRONOM syntax. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">137</puid>
+         <name>OpenDocument Spreadsheet 1.0</name>
+         <summary>Minor container signature syntax adjustment to align with official PRONOM syntax. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">138</puid>
+         <name>OpenDocument Presentation 1.0</name>
+         <summary>Minor container signature syntax adjustment to align with official PRONOM syntax. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">139</puid>
+         <name>OpenDocument Graphics 1.0</name>
+         <summary>New container signature. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">140</puid>
+         <name>OpenDocument Database 1.0</name>
+         <summary>Minor container signature syntax adjustment to align with official PRONOM syntax. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">142</puid>
+         <name>Waveform Audio (WAVEFORMATEX)</name>
+         <summary>Signature update - removal of wformat chunk due to DROID not currently being able to handle inverted sequences. For further details see issues #805 and #806 in the DROID GitHub page (https://github.com/digital-preservation/droid/issues). Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">143</puid>
+         <name>Waveform Audio (WAVEFORMATEXTENSIBLE)</name>
+         <summary>Priority added over fmt/142. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">291</puid>
+         <name>OpenDocument Text 1.2</name>
+         <summary>Minor container signature syntax adjustment to align with official PRONOM syntax. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">293</puid>
+         <name>OpenDocument Presentation 1.2</name>
+         <summary>Minor container signature syntax adjustment to align with official PRONOM syntax. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">295</puid>
+         <name>OpenDocument Spreadsheet 1.2</name>
+         <summary>Minor container signature syntax adjustment to align with official PRONOM syntax. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">296</puid>
+         <name>OpenDocument Graphics 1.1</name>
+         <summary>New container signature. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">297</puid>
+         <name>OpenDocument Graphics 1.2</name>
+         <summary>New container signature. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">424</puid>
+         <name>OpenDocument Database 1.2</name>
+         <summary>Minor container signature syntax adjustment to align with official PRONOM syntax. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">468</puid>
+         <name>ISO 9660 Disk Image File</name>
+         <summary>Updated name and description. Added extensions: toast; cdr; dmg and bin. Added format type. Added priority over fmt/1743. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">574</puid>
+         <name>Digital Imaging and Communications in Medicine File Format</name>
+         <summary>Amended signature to disregard first 127 bytes according to specification. Added links to specification and references, altered description. Submitted by University Medical Center Utrecht.</summary>
+      </format>
+      <format>
+         <puid type="fmt">882</puid>
+         <name>Wordstar 2000 (1)</name>
+         <summary>Note field updated. Addition of Library of Congress Format Description and Wikidata QID identifiers. Relationships between other WordStar entries added. Submitted by Library of Congress.</summary>
+      </format>
+      <format>
+         <puid type="fmt">967</puid>
+         <name>AppleSingle (1)</name>
+         <summary>New external signature .as added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">968</puid>
+         <name>AppleSingle (2)</name>
+         <summary>New external signature .as added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">986</puid>
+         <name>Extensible Metadata Platform Format</name>
+         <summary>Change the either/or at the end of the signature from (22|25) to (22|27). Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1071</puid>
+         <name>Apple Disk Image</name>
+         <summary>Given priority over fmt/1740 and x-fmt/268. Submitted by The Church of Jesus Christ of Latter-day Saints and The Royal Danish Library.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1352</puid>
+         <name>FamilyTree Maker Database 1-4</name>
+         <summary>Minor container signature syntax adjustment to align with official PRONOM syntax. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1353</puid>
+         <name>FamilyTree Maker Database 5-16</name>
+         <summary>Minor container signature syntax adjustment to align with official PRONOM syntax. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1600</puid>
+         <name>ESRI ArcInfo DAT File (Internal)</name>
+         <summary>Amended source. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1671</puid>
+         <name>Z Compressed Data</name>
+         <summary>File extension z decapitilised. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1724</puid>
+         <name>LegalDocML Document</name>
+         <summary>Removal of whitespace from signature. Submitted by Niedersächsisches Landesarchiv.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1727</puid>
+         <name>Pro Tools Session File</name>
+         <summary>Amended description of byte sequence to match bytes. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1727</puid>
+         <name>Pro Tools Session File</name>
+         <summary>Changed signature to accomdate a wider variety of ptx files. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1729</puid>
+         <name>Esri Shapefile Geospatial Metadata File</name>
+         <summary>Amended description of byte sequence to match bytes. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="New Signatures">
+      <format>
+         <puid type="x-fmt">67</puid>
+         <name>OS/2 Presentation Manager Metafile (MET)</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">139</puid>
+         <name>OpenDocument Graphics 1.0</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">296</puid>
+         <name>OpenDocument Graphics 1.1</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">297</puid>
+         <name>OpenDocument Graphics 1.2</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">574</puid>
+         <name>Digital Imaging and Communications in Medicine File Format</name>
+         <summary>Signature researched and samples provided by University Medical Center Utrecht.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1736</puid>
+         <name>Creative Voice File</name>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1737</puid>
+         <name>Flow Cytometry Standard File</name>
+         <summary>Signature researched and samples provided by University Medical Center Utrecht.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1738</puid>
+         <name>UDF Disc Image</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1739</puid>
+         <name>UDF-ISO 9660 Bridge Disc</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1740</puid>
+         <name>Apple Partition Map Disk Image</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1741</puid>
+         <name>Apple Partition Map ISO 9660 Hybrid</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1742</puid>
+         <name>Hierarchical File System Plus</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1743</puid>
+         <name>Nero Burning ROM Image File</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1744</puid>
+         <name>Psion Series 3 Bitmap</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1745</puid>
+         <name>PixArt Bitmap</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1746</puid>
+         <name>Rocky Interlace Picture</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1747</puid>
+         <name>Microsoft PowerPoint Presentation v2.x</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1748</puid>
+         <name>Microsoft PowerPoint Presentation v3.x</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1749</puid>
+         <name>Canon MIF File</name>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1750</puid>
+         <name>Canon CIF File</name>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1751</puid>
+         <name>Canon SIF File</name>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1752</puid>
+         <name>OpenDocument Database Format 1.3</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1753</puid>
+         <name>OpenDocument Graphics 1.3</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1754</puid>
+         <name>OpenDocument Presentation 1.3</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1755</puid>
+         <name>OpenDocument Spreadsheet 1.3</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1756</puid>
+         <name>OpenDocument Text 1.3</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1757</puid>
+         <name>Apple Partition Map - ISO 9660 - UDF Hybrid Disk Image</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1759</puid>
+         <name>Media Descriptor Sidecar File</name>
+         <summary>Signature researched and samples provided by The Royal Danish Library.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1760</puid>
+         <name>CloneCD Control File</name>
+         <summary>Signature researched and samples provided by The Royal Danish Library.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1762</puid>
+         <name>MacBinary II</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1763</puid>
+         <name>MacBinary III</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1764</puid>
+         <name>Sony SLV File</name>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1765</puid>
+         <name>Media Hash List</name>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1766</puid>
+         <name>Sony SML File</name>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+      </format>
+   </release_outline>
+</release_note>
+<release_note>
    <release_date>21st July 2022</release_date>
    <signature_filename>DROID_SignatureFile_V107.xml</signature_filename>
    <release_outline name="New Records">
@@ -75,7 +605,7 @@
       <format>
          <puid type="x-fmt">275</puid>
          <name>Microsoft Word for MS-DOS Document (v5)</name>
-         <summary>Amended signature to include variation of 05 at the 116th byte. Updated version number to 5.0-5.4 to incorporate versions 5 to 5.4 . Submitted by University of Saskatchewan.</summary>
+         <summary>Amended signature to include variation of 05 at the 116th byte. Updated version number to 5.0-5.4 to incorporate versions 5 to 5.4. Submitted by University of Saskatchewan.</summary>
       </format>
       <format>
          <puid type="fmt">1600</puid>
@@ -169,7 +699,7 @@
       <format>
          <puid type="fmt">473</puid>
          <name>Microsoft Office Owner File</name>
-         <summary>Five additional signatures identified in line with the patterns already shown but expanded to allow for a bigger hex range.. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Five additional signatures identified in line with the patterns already shown but expanded to allow for a bigger hex range. Submitted by Digital Preservation Department, The National Archives.</summary>
       </format>
       <format>
          <puid type="fmt">1601</puid>
@@ -195,22 +725,22 @@
    <signature_filename>DROID_SignatureFile_V105.xml</signature_filename>
    <release_outline name="New Records">
       <format>
-         <puid type="fmt ">1649</puid>
+         <puid type="fmt">1649</puid>
          <name>AGS 4 Data Format</name>
          <summary>Full entry added. Submitted by Association of Geotechnical and Geoenvironmental Specialists, supported by British Geological Survey.</summary>
       </format>
       <format>
-         <puid type="fmt ">1650</puid>
+         <puid type="fmt">1650</puid>
          <name>Bayesian Interchange Format File</name>
          <summary>Extension-only entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
       </format>
       <format>
-         <puid type="fmt ">1651</puid>
+         <puid type="fmt">1651</puid>
          <name>Garmin Flexible and Interoperable Data Transfer file</name>
          <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
       </format>
       <format>
-         <puid type="fmt ">1652</puid>
+         <puid type="fmt">1652</puid>
          <name>Typescript</name>
          <summary>Extension-only entry added. Submitted by Diplomatic Archives / French Ministry for Europe and Foreign Affairs.</summary>
       </format>
@@ -232,7 +762,7 @@
       <format>
          <puid type="fmt">1656</puid>
          <name>Microsoft Help Contents File</name>
-         <summary>Full entry added. Submitted by The Canadian Centre for Architecture .</summary>
+         <summary>Full entry added. Submitted by The Canadian Centre for Architecture.</summary>
       </format>
       <format>
          <puid type="fmt">1657</puid>
@@ -522,7 +1052,7 @@
       <format>
          <puid type="fmt">1714</puid>
          <name>CATIA Model File v.3</name>
-         <summary>Full entry added. Submitted by J. Paul Getty Trust..</summary>
+         <summary>Full entry added. Submitted by J. Paul Getty Trust.</summary>
       </format>
       <format>
          <puid type="fmt">1715</puid>
@@ -614,7 +1144,7 @@
       <format>
          <puid type="x-fmt">173</puid>
          <name>PageMaker PC Document (5.0)</name>
-         <summary>Updated description, mime type, updated title to refer to only PC files and extension of pt5 included.. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+         <summary>Updated description, mime type, updated title to refer to only PC files and extension of pt5 included. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
       </format>
       <format>
          <puid type="x-fmt">174</puid>
@@ -679,7 +1209,7 @@
       <format>
          <puid type="fmt">371</puid>
          <name>Enhanced Compression Wavelet</name>
-         <summary>Widened signature to account for variations in files found by enquirier. . Submitted by The National Library of Australia.</summary>
+         <summary>Widened signature to account for variations in files found by enquirier. Submitted by The National Library of Australia.</summary>
       </format>
       <format>
          <puid type="fmt">389</puid>
@@ -841,7 +1371,7 @@
       <format>
          <puid type="fmt">1656</puid>
          <name>Microsoft Help Contents File</name>
-         <summary>Signature researched and samples provided by The Canadian Centre for Architecture .</summary>
+         <summary>Signature researched and samples provided by The Canadian Centre for Architecture.</summary>
       </format>
       <format>
          <puid type="fmt">1657</puid>
@@ -1121,7 +1651,7 @@
       <format>
          <puid type="fmt">1714</puid>
          <name>CATIA Model File v.3</name>
-         <summary>Signature researched and samples provided by J. Paul Getty Trust..</summary>
+         <summary>Signature researched and samples provided by J. Paul Getty Trust.</summary>
       </format>
       <format>
          <puid type="fmt">1715</puid>
@@ -1340,12 +1870,12 @@
       <format>
          <puid type="fmt">196</puid>
          <name>Adobe InDesign Document CS</name>
-         <summary>Outline description upgraded, note field updated and .indt file extension added . Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+         <summary>Outline description upgraded, note field updated and .indt file extension added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
       </format>
       <format>
          <puid type="fmt">276</puid>
          <name>Acrobat PDF 1.7 - Portable Document Format</name>
-         <summary>Changed maximum byte offset from 0 to 1 . Submitted by The National Library of Australia.</summary>
+         <summary>Changed maximum byte offset from 0 to 1. Submitted by The National Library of Australia.</summary>
       </format>
       <format>
          <puid type="x-fmt">450</puid>
@@ -1410,7 +1940,7 @@
       <format>
          <puid type="fmt">1423</puid>
          <name>HP TRIM Outlook Saved Message File</name>
-         <summary>Added .mbx extension. Updated description . Submitted by National Archives of Australia and State Archives and Records Authority of New South Wales.</summary>
+         <summary>Added .mbx extension. Updated description. Submitted by National Archives of Australia and State Archives and Records Authority of New South Wales.</summary>
       </format>
       <format>
          <puid type="fmt">1596</puid>
@@ -1688,7 +2218,7 @@
       </format>
       <format>
          <puid type="fmt">1594</puid>
-         <name>ESRI ArcInfo .dat File (External) </name>
+         <name>ESRI ArcInfo .dat File (External)</name>
          <summary>Full entry added. Submitted by The National Library of Australia.</summary>
       </format>
       <format>
@@ -2097,7 +2627,7 @@
       </format>
       <format>
          <puid type="fmt">1594</puid>
-         <name>ESRI ArcInfo .dat File (External) </name>
+         <name>ESRI ArcInfo .dat File (External)</name>
          <summary>Signature researched and samples provided by The National Library of Australia.</summary>
       </format>
       <format>
@@ -2441,7 +2971,7 @@
       <format>
          <puid type="fmt">1341</puid>
          <name>Associated Signature Container Simple (ASiC-S)</name>
-         <summary>Updated name, description, source description, extension and container signature.. Submitted by The National Archives of the Czech Republic.</summary>
+         <summary>Updated name, description, source description, extension and container signature. Submitted by The National Archives of the Czech Republic.</summary>
       </format>
       <format>
          <puid type="fmt">1477</puid>
@@ -2748,7 +3278,7 @@
       </format>
    </release_outline>
 </release_note>
-<release_note> 
+<release_note>
     <release_date>27th October 2021</release_date> 
     <signature_filename>DROID_SignatureFile_V98.xml</signature_filename> 
     <release_outline name="New Records"> 
@@ -3398,7 +3928,7 @@
 	<format>
 	   <puid type="x-fmt">324</puid>
 	   <name>Harvard Graphics Show 2.0</name>
-	   <summary>Adjusted name from Harvard Graphics Presentation and updated description following information provided by The Church of Jesus Christ of Latter-day Saints. The longstanding internal and external signatures for this format related to the .shw 'Show' format, not the Presentation format. New entries have been created for Harvard Graphics Presentation at fmt/1491 and fmt/1492</summary>
+	   <summary>Adjusted name from Harvard Graphics Presentation and updated description following information provided by The Church of Jesus Christ of Latter-day Saints. The longstanding internal and external signatures for this format related to the .shw 'Show' format, not the Presentation format. New entries have been created for Harvard Graphics Presentation at fmt/1491 and fmt/1492.</summary>
   </format>
 	<format>
 	   <puid type="x-fmt">340</puid>
@@ -5135,7 +5665,6 @@
 	  </format>
     </release_outline>
 </release_note>
-
 <release_note>
     <release_date>21st January 2020</release_date>
     <signature_filename>DROID_SignatureFile_V96.xml</signature_filename>
@@ -6500,7 +7029,6 @@
 	  </format>
 	 </release_outline>
 </release_note>
-
 <release_note>
     <release_date>9th May 2019</release_date>
     <signature_filename>DROID_SignatureFile_V95.xml</signature_filename>
@@ -6611,7 +7139,7 @@
 	  <format>
 	   <puid type="fmt">1211</puid>
 	   <name>Wavefront Material Template Library</name>
-	   <summary>Slightly extended wildcard offset between 'newmtl' declaration and first 'Ka'/'Kd'/'Ks' properties . Requested by Church of Jesus Christ of Latter-day Saints.</summary>
+	   <summary>Slightly extended wildcard offset between 'newmtl' declaration and first 'Ka'/'Kd'/'Ks' properties. Requested by Church of Jesus Christ of Latter-day Saints.</summary>
 	  </format>
 	  <format>
 	   <puid type="x-fmt">225</puid>
@@ -6708,7 +7236,6 @@
 	  </format>
 	 </release_outline>
     </release_note>
-
 <release_note>
     <release_date>17th September 2018</release_date>
     <signature_filename>DROID_SignatureFile_V94.xml</signature_filename> 
@@ -7736,8 +8263,6 @@
 	  </format>
 	 </release_outline>
     </release_note>
-
-
 <release_note>
     <release_date>30th November 2017</release_date>
     <signature_filename>DROID_SignatureFile_V93.xml</signature_filename> 
@@ -8080,8 +8605,6 @@
 	  </format>
 	 </release_outline>
     </release_note>
-
-
 <release_note>
     <release_date>20th September 2017</release_date>
     <signature_filename>DROID_SignatureFile_V92.xml</signature_filename> 
@@ -8329,8 +8852,7 @@
 	  </format>
 	 </release_outline>
     </release_note> 
-
-    <release_note> 
+<release_note>
     <release_date>25th July 2017</release_date>
     <signature_filename>DROID_SignatureFile_V91.xml</signature_filename> 
     <release_outline name="New Records">
@@ -8882,8 +9404,6 @@
 	  </format>
 	 </release_outline>
     </release_note> 
-
-
 <release_note>
     <release_date>30th March 2017</release_date>
     <signature_filename>DROID_SignatureFile_V90.xml</signature_filename> 
@@ -8966,7 +9486,7 @@
 	  <format>
 	   <puid type="fmt">1011</puid>
 	   <name>INTERLIS Transfer File 2.2</name>
-	   <summary>Full entry added. Requested by Swiss Federal Archives and Federal Office of Topography swisstopo..</summary>
+	   <summary>Full entry added. Requested by Swiss Federal Archives and Federal Office of Topography swisstopo.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1012</puid>
@@ -9426,7 +9946,6 @@
 	  </format>
 	 </release_outline>
     </release_note>
-
 <release_note>
     <release_date>8th March 2017</release_date>
     <signature_filename>DROID_SignatureFile_V89.xml</signature_filename> 
@@ -9897,7 +10416,6 @@
 	  </format>      
 	 </release_outline>
     </release_note>
-
 <release_note>
     <release_date>27th September 2016</release_date>
     <signature_filename>DROID_SignatureFile_V88.xml</signature_filename> 
@@ -10415,7 +10933,6 @@
 	  </format>
 	 </release_outline>
     </release_note>
-
 <release_note>
     <release_date>27th July 2016</release_date>
     <signature_filename>DROID_SignatureFile_V86.xml</signature_filename> 
@@ -11008,7 +11525,6 @@
 	  </format>
 	</release_outline>
     </release_note>
-
 <release_note>
     <release_date>29th June 2016</release_date>
     <signature_filename>DROID_SignatureFile_V85.xml</signature_filename> 
@@ -11341,7 +11857,6 @@
 	  </format>
     </release_outline>
   </release_note>    
-  
 <release_note>
     <release_date>21st January 2016</release_date>
     <signature_filename>DROID_SignatureFile_V84.xml</signature_filename>  
@@ -12419,8 +12934,6 @@
 	  </format>
     </release_outline>
   </release_note>
-
-
 <release_note>
     <release_date>17th December 2015</release_date>
     <signature_filename>DROID_SignatureFile_V83.xml</signature_filename>  
@@ -13375,7 +13888,6 @@
 	  </format>
     </release_outline>
   </release_note>
-
 <release_note>
     <release_date>27th March 2015</release_date>
     <signature_filename>DROID_SignatureFile_V82.xml</signature_filename>  
@@ -13708,7 +14220,6 @@
 	  </format>
     </release_outline>
   </release_note>
-
 <release_note>
     <release_date>18th February 2015</release_date>
     <signature_filename>DROID_SignatureFile_V81.xml</signature_filename>  
@@ -14182,7 +14693,7 @@
 	  </format>
     </release_outline>
   </release_note>
-  <release_note>
+<release_note>
     <release_date>6th November 2014</release_date>
     <signature_filename>DROID_SignatureFile_V79.xml</signature_filename> 
 	<release_outline name="New Records">
@@ -14305,7 +14816,7 @@
 		</format>
 	</release_outline>
     </release_note>
-  <release_note>
+<release_note>
     <release_date>23rd September 2014</release_date>
     <signature_filename>DROID_SignatureFile_V78.xml</signature_filename>  
 	<release_outline name="New Records">
@@ -14620,7 +15131,7 @@
 	  </format>
 	</release_outline>
   </release_note>
-  <release_note>
+<release_note>
     <release_date>18th July 2014</release_date>
     <signature_filename>DROID_SignatureFile_V77.xml</signature_filename> 
 	<release_outline name="Updated Records">
@@ -14631,7 +15142,7 @@
 		</format>
 	</release_outline>
     </release_note>
-  <release_note>
+<release_note>
     <release_date>17th July 2014</release_date>
     <signature_filename>DROID_SignatureFile_V75.xml</signature_filename> 
 	<release_outline name="New Records">
@@ -14991,7 +15502,6 @@
 		</format>
 	</release_outline>
     </release_note>
-
 <release_note>
     <release_date>31st March 2014</release_date>
     <signature_filename>DROID_SignatureFile_V74.xml</signature_filename> 
@@ -15197,7 +15707,7 @@
 	   </format>
 	</release_outline>
     </release_note>
-  <release_note>
+<release_note>
     <release_date>27th February 2014</release_date>
     <signature_filename>DROID_SignatureFile_V73.xml</signature_filename> 
 	<release_outline name="New Records">
@@ -15557,7 +16067,7 @@
 	   </format>
 	</release_outline>
     </release_note>
-  <release_note>
+<release_note>
     <release_date>12th November 2013</release_date>
     <signature_filename>DROID_SignatureFile_V72.xml</signature_filename>  
 	<release_outline name="New Records">
@@ -15852,7 +16362,7 @@
 	   </format>
       </release_outline>
     </release_note>
-  <release_note>
+<release_note>
     <release_date>28th August 2013</release_date>
     <signature_filename>DROID_SignatureFile_V70.xml</signature_filename>  
 	 <release_outline name="New Records">
@@ -16052,7 +16562,7 @@
 		</format>
 	</release_outline>
       </release_note>
-  <release_note>
+<release_note>
     <release_date>19th July 2013</release_date>
     <signature_filename>DROID_SignatureFile_V69.xml</signature_filename> 
 	<release_outline name="New Records">
@@ -16662,8 +17172,7 @@
 		</format>
 	</release_outline>
     </release_note>
-
-  <release_note>
+<release_note>
     <release_date>1st May 2013</release_date>
     <signature_filename>DROID_SignatureFile_V68.xml</signature_filename> 
 	<release_outline name="New Records">
@@ -17008,8 +17517,7 @@
 		</format>
 	</release_outline>
     </release_note>
-
-  <release_note>
+<release_note>
     <release_date>26th February 2013</release_date>
     <signature_filename>DROID_SignatureFile_V67.xml</signature_filename> 
 	<release_outline name="New Records">
@@ -17294,9 +17802,7 @@
 		</format>
 	</release_outline>
     </release_note>
-
-
-  <release_note>
+<release_note>
     <release_date>18th December 2012</release_date>
     <signature_filename>DROID_SignatureFile_V66.xml</signature_filename> 
 	<release_outline name="New Records">
@@ -17706,11 +18212,7 @@
 		</format>
 	</release_outline>
     </release_note>
-
-
-
-
-  <release_note>
+<release_note>
     <release_date>25th October 2012</release_date>
     <signature_filename>DROID_SignatureFile_V65.xml</signature_filename> 
 	<release_outline name="New Records">
@@ -18055,8 +18557,7 @@
 		</format>
 	</release_outline>
     </release_note>
-
-  <release_note>
+<release_note>
     <release_date>29th August 2012</release_date>
     <signature_filename>DROID_SignatureFile_V63.xml</signature_filename> 
 	<release_outline name="Updated Records">
@@ -18112,9 +18613,7 @@
 	  </format>
 	</release_outline>
     </release_note>
-
-
-  <release_note>
+<release_note>
     <release_date>28th August 2012</release_date>
     <signature_filename>DROID_SignatureFile_V62.xml</signature_filename> 
 	<release_outline name="New Records">
@@ -18714,12 +19213,7 @@
 	  </format>
 	</release_outline>
     </release_note>
-
-
-
-
-
-  <release_note>
+<release_note>
     <release_date>6th July 2012</release_date>
     <signature_filename>DROID_SignatureFile_V61.xml</signature_filename>  
 	<release_outline name="New Records">
@@ -18752,8 +19246,7 @@
 	  </format>
 	 </release_outline>
   </release_note>
-	
-  <release_note>
+<release_note>
 	<release_date>11th June 2012</release_date>
     <signature_filename>DROID_SignatureFile_V60.xml</signature_filename> 
 	 <release_outline name="New Records">
@@ -19531,8 +20024,7 @@ Tagged Image File Format for Electronic Photography (TIFF/EP), Exchangeable Imag
       </format>
 	</release_outline>	 
   </release_note>
-  
-	<release_note>
+<release_note>
 	 <release_date>21st March 2012 </release_date>
 	 <signature_filename>DROID_SignatureFile_V59.xml</signature_filename>  
 	 <release_outline name="Updated Records">
@@ -19563,8 +20055,7 @@ Tagged Image File Format for Electronic Photography (TIFF/EP), Exchangeable Imag
 		</format>
 	 </release_outline>
 	</release_note> 
-  
-  <release_note>
+<release_note>
     <release_date>21st March 2012 </release_date>
     <signature_filename>DROID_SignatureFile_V58.xml</signature_filename>
     <release_outline name="New Records">
@@ -20069,7 +20560,7 @@ Tagged Image File Format for Electronic Photography (TIFF/EP), Exchangeable Imag
       </format>
     </release_outline>
   </release_note>
-  <release_note>
+<release_note>
     <release_date>4th January 2012 </release_date>
     <signature_filename>DROID_SignatureFile_V55.xml</signature_filename>
     <release_outline name="New Records">
@@ -20469,7 +20960,7 @@ Tagged Image File Format for Electronic Photography (TIFF/EP), Exchangeable Imag
       </format>
     </release_outline>
   </release_note>
-  <release_note>
+<release_note>
     <release_date>7th September 2011 </release_date>
     <signature_filename>DROID_SignatureFile_V52.xml</signature_filename>
     <release_outline name="New Records">
@@ -20564,7 +21055,7 @@ Tagged Image File Format for Electronic Photography (TIFF/EP), Exchangeable Imag
       </format>
     </release_outline>
   </release_note>
-  <release_note>
+<release_note>
     <release_date>15th July 2011 </release_date>
     <signature_filename>DROID_SignatureFile_V51.xml</signature_filename>
     <release_outline name="New Records">
@@ -21119,7 +21610,7 @@ Tagged Image File Format for Electronic Photography (TIFF/EP), Exchangeable Imag
       </format>
     </release_outline>
   </release_note>
-  <release_note>
+<release_note>
     <release_date>20th May 2011 </release_date>
     <signature_filename>DROID_SignatureFile_V50.xml</signature_filename>
     <release_outline name="New Records">
@@ -21204,7 +21695,7 @@ Tagged Image File Format for Electronic Photography (TIFF/EP), Exchangeable Imag
       </format>
     </release_outline>
   </release_note>
-  <release_note>
+<release_note>
     <release_date>5th April 2011 </release_date>
     <signature_filename>DROID_SignatureFile_V49.xml</signature_filename>
     <release_outline name="New Records">
@@ -21419,7 +21910,7 @@ Tagged Image File Format for Electronic Photography (TIFF/EP), Exchangeable Imag
       </format>
     </release_outline>
   </release_note>
-  <release_note>
+<release_note>
     <release_date>15th February 2011 </release_date>
     <signature_filename>DROID_SignatureFile_V47.xml</signature_filename>
     <release_outline name="Signatures">
@@ -21435,7 +21926,7 @@ Tagged Image File Format for Electronic Photography (TIFF/EP), Exchangeable Imag
       </format>
     </release_outline>
   </release_note>
-  <release_note>
+<release_note>
     <release_date>8th February 2011 </release_date>
     <signature_filename>DROID_SignatureFile_V46.xml</signature_filename>
     <release_outline name="New Records">
@@ -21647,7 +22138,7 @@ Tagged Image File Format for Electronic Photography (TIFF/EP), Exchangeable Imag
 		</summary>
     </release_outline>
   </release_note>
-  <release_note>
+<release_note>
     <release_date>6th December 2010 </release_date>
     <signature_filename>DROID_SignatureFile_V45.xml</signature_filename>
     <release_outline name="New Records">
@@ -22102,7 +22593,7 @@ Tagged Image File Format for Electronic Photography (TIFF/EP), Exchangeable Imag
       </format>
     </release_outline>
   </release_note>
-  <release_note>
+<release_note>
     <release_date>5th November 2010 </release_date>
     <signature_filename>DROID_SignatureFile_V42.xml</signature_filename>
     <release_outline name="New Records">
@@ -22217,7 +22708,7 @@ Tagged Image File Format for Electronic Photography (TIFF/EP), Exchangeable Imag
       </format>
     </release_outline>
   </release_note>
-  <release_note>
+<release_note>
     <release_date>1st November 2010</release_date>
     <signature_filename>DROID_SignatureFile_V41.xml</signature_filename>
     <release_outline name="New Records">
@@ -22315,7 +22806,7 @@ Tagged Image File Format for Electronic Photography (TIFF/EP), Exchangeable Imag
       </format>
     </release_outline>
   </release_note>
-  <release_note>
+<release_note>
     <release_date>1st August 2010</release_date>
     <signature_filename>DROID_SignatureFile_V38.xml</signature_filename>
     <release_outline name="New Records">
@@ -22455,7 +22946,7 @@ Tagged Image File Format for Electronic Photography (TIFF/EP), Exchangeable Imag
       </format>
     </release_outline>
   </release_note>
-  <release_note>
+<release_note>
     <release_date>1st June 2010</release_date>
     <signature_filename>DROID_SignatureFile_V36.xml</signature_filename>
     <release_outline name="Signatures">
@@ -22466,7 +22957,7 @@ Tagged Image File Format for Electronic Photography (TIFF/EP), Exchangeable Imag
       </format>
     </release_outline>
   </release_note>
-  <release_note>
+<release_note>
     <release_date>1st May 2010</release_date>
     <signature_filename>DROID_SignatureFile_V35.xml</signature_filename>
     <release_outline name="Signatures">
@@ -22477,7 +22968,7 @@ Tagged Image File Format for Electronic Photography (TIFF/EP), Exchangeable Imag
       </format>
     </release_outline>
   </release_note>
-  <release_note>
+<release_note>
     <release_date>2nd April 2010</release_date>
     <signature_filename>DROID_SignatureFile_V34.xml</signature_filename>
     <release_outline name="New Records">
@@ -22550,7 +23041,7 @@ Tagged Image File Format for Electronic Photography (TIFF/EP), Exchangeable Imag
       </format>
     </release_outline>
   </release_note>
-  <release_note>
+<release_note>
     <release_date>5th March 2010</release_date>
     <signature_filename>DROID_SignatureFile_V31.xml</signature_filename>
     <release_outline name="New Records">

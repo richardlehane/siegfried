@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2605</FormatID>
+      <FormatName>Apple Partition Map - ISO 9660 - UDF Hybrid Disk Image</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Apple Partition Map - ISO 9660 - UDF Hybrid Disk Image, describes the contents and structure of optical disc media of Apple Partition Map (APM) partition scheme with ISO9660 and Universal Disk Format (UDF) file systems attached. Since all three schemes reside on the same optical disc this is most likely to be on DVD media type of file. APM partition scheme can be thought of as a container format for multiple file system image files, and in this entry together UDF file system developed for optical media by the Optical Storage Technology Association (OSTA) and ISO 9660 International Organization for Standardization (ISO), the hybrid system acts as a support for all three schemes and allows for disc to be rendered on various operating systems. A disk image is a uncompressed copy of the contents of a disk or a folder, it can facilitate certain types of backup and recovery strategies. Please see ID: fdd000348 from Library of Congress and other links attached to this entry for further information.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
+      <ProvenanceSourceDate>25 Aug 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>25 Aug 2022</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/Apple_Partition_Map
+
+https://www.loc.gov/preservation/digital/formats/fdd/fdd000348.shtml
+
+https://en.wikipedia.org/wiki/Apple_Disk_Image
+
+https://en.wikipedia.org/wiki/Optical_disc_image
+
+https://en.wikipedia.org/wiki/ISO_9660
+
+http://fileformats.archiveteam.org/wiki/Universal_Disk_Format</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1757</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3175</ExternalSignatureID>
+        <Signature>iso</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3176</ExternalSignatureID>
+        <Signature>toast</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3177</ExternalSignatureID>
+        <Signature>dmg</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2094</SignatureID>
+        <SignatureName>Apple Partition Map - ISO 9660 - UDF Hybrid Disk Image sig.1</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: wildcard bytes between 0 to 16 bytes, followed by 0x45520200, an exact 508 wildcard bytes followed by 0x504D
+
+BOF; Offset: 32768; Max Offset: 103236; Magic Bytes:  0x4344303031, then wildcard bytes between 1 to 16384, followed by 0xFF4344303031
+
+BOF; Offset: 32768; Max Offset: 69632; Magic Bytes:  0x00424541303101, then an exact of 2041 wildcard bytes, followed by 0x004E535230, then either 0x32 or 33 followed by 0x01</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2426</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>{0-16}45520200{508}504D</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>2427</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>32768</Offset>
+          <MaxOffset>103236</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4344303031{1-16384}FF4344303031</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>2428</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>32768</Offset>
+          <MaxOffset>69632</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>00424541303101{2041}004E535230(32|33)01</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>2095</SignatureID>
+        <SignatureName>Apple Partition Map - ISO 9660 - UDF Hybrid Disk Image sig.2</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: wildcard bytes between 0 to 16 bytes, followed by 0x45520800, an exact 2044 wildcard bytes followed by 0x504D
+
+BOF; Offset: 32768; Max Offset: 103236; Magic Bytes:  0x4344303031, then wildcard bytes between 1 to 16384, followed by 0xFF4344303031
+
+BOF; Offset: 32768; Max Offset: 69632; Magic Bytes:  0x00424541303101, then an exact of 2041 wildcard bytes, followed by 0x004E535230, then either 0x32 or 33 followed by 0x01</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2429</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>{0-16}45520800{2044}504D</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>2430</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>32768</Offset>
+          <MaxOffset>103236</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4344303031{1-16384}FF4344303031</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>2431</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>32768</Offset>
+          <MaxOffset>69632</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>00424541303101{2041}004E535230(32|33)01</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2584</RelatedFormatID>
+        <RelatedFormatName>UDF Disc Image</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2585</RelatedFormatID>
+        <RelatedFormatName>UDF-ISO 9660 Bridge Disc</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2586</RelatedFormatID>
+        <RelatedFormatName>Apple Partition Map Disk Image</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2580</FormatID>
+      <FormatName>C/C++ Header File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>
+      </FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>C/C++ Header File can come with extension .hpp, .hxx or .h and are text header files written in the C or C++ programming language. File extension .h are preffered to be used in C programming language but are also compatable with C++. The .hpp extension is preffered to be used in C++ header file (the "pp" in extension presumably stands for "plus, plus"). These files are mainly categorized as developer files using the correct file extension, they can be inserted to a .cpp source code file, provided the “#include directive” is used. Due to type of this file format a magic bytes sequence could not be established and this format is only recognised by its exension, please contact the PRONOM team if you can provide any more information.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>292</ProvenanceSourceID>
+      <ProvenanceName>UMC Utrecht / University Medical Center Utrecht</ProvenanceName>
+      <ProvenanceSourceDate>02 Aug 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>02 Aug 2022</LastUpdatedDate>
+      <FormatNote>https://cplusplus.com/articles/Gw6AC542/
+
+https://docs.microsoft.com/en-us/cpp/cpp/header-files-cpp?view=msvc-170
+
+https://www.reviversoft.com/en/file-extensions/hpp
+
+https://www.cplusplus.com/</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1735</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3128</ExternalSignatureID>
+        <Signature>h</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3129</ExternalSignatureID>
+        <Signature>hpp</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3130</ExternalSignatureID>
+        <Signature>hxx</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

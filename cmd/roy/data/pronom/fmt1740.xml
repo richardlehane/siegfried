@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2586</FormatID>
+      <FormatName>Apple Partition Map Disk Image</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Apple Partition Map Disk Image is specific to describing the contents and structure of Apple Partition Map (APM) partition scheme, it can be thought of as a container format for multiple filesystem image files. It was developed by Apple in around 1988 with the introduction of Apple Partition Map scheme on Macintosh II, a scheme that defines how the data is organized on a singular disk. A disk image is a uncompressed copy of the contents of a disk or a folder, it can facilitate certain types of backup and recovery strategies. Please see ID: fdd000348 from Library of Congress and other links attached to this entry for further information.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
+      <ProvenanceSourceDate>17 Aug 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>17 Aug 2022</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/Apple_Partition_Map
+
+https://mac-optimization.bestreviews.net/the-different-partition-format-types-on-mac/
+
+https://www.loc.gov/preservation/digital/formats/fdd/fdd000348.shtml
+
+https://en.wikipedia.org/wiki/Apple_Disk_Image
+
+https://docs.microsoft.com/en-us/windows/win32/imapi/disc-formats</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1740</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>15</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Apple Computer, Inc.</OrganisationName>
+        <DeveloperCompoundName>Apple Computer, Inc.</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>15</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Apple Computer, Inc.</OrganisationName>
+        <SupportCompoundName>Apple Computer, Inc.</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3147</ExternalSignatureID>
+        <Signature>toast</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3149</ExternalSignatureID>
+        <Signature>iso</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3150</ExternalSignatureID>
+        <Signature>cdr</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3151</ExternalSignatureID>
+        <Signature>dmg</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3152</ExternalSignatureID>
+        <Signature>bin</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3153</ExternalSignatureID>
+        <Signature>img</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2078</SignatureID>
+        <SignatureName>Apple Partition Map Disk Image, sig n.1</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: wildcard bytes between 0 to 16 bytes, followed by 0x45520200, an exact 508 wildcard bytes followed by 0x504D</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2406</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>{0-16}45520200{508}504D</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>2079</SignatureID>
+        <SignatureName>Apple Partition Map Disk Image, sig n.2</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: wildcard bytes between 0 to 16 bytes, followed by 0x45520800, an exact 2044 wildcard bytes followed by 0x504D</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2407</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>{0-16}45520800{2044}504D</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>2088</SignatureID>
+        <SignatureName>Apple Partition Map Disk Image, sig n.3</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: wildcard bytes between 0 to 16 bytes, followed by a set of null bytes, then an exact 508 wildcard bytes followed by 0x504D</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2419</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>{0-16}00000000{508}504D</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1878</RelatedFormatID>
+        <RelatedFormatName>Apple Disk Image</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2587</RelatedFormatID>
+        <RelatedFormatName>Apple Partition Map ISO 9660 Hybrid</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2605</RelatedFormatID>
+        <RelatedFormatName>Apple Partition Map - ISO 9660 - UDF Hybrid Disk Image</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>1255</RelatedFormatID>
+        <RelatedFormatName>ISO 9660 Disk Image File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

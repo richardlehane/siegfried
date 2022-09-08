@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2589</FormatID>
+      <FormatName>Nero Burning ROM Image File</FormatName>
+      <FormatVersion>Generic</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Nero Burning ROM Image File (NRG) is a proprietary disc image format associated with Nero Burning ROM software. It acts as the utility of Nero Burning ROM and is used to create backups or copies of data for discs. This is a generic entry of NRG file format but there are two versions of this format. Its first version was launched in 1997 and was specified to store values as 32-bit integers. Its second version was introduced with version 5.5 of Nero Burning ROM software in 2001 and supports 64-bit integers.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
+      <ProvenanceSourceDate>19 Aug 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>19 Aug 2022</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/NRG
+
+https://en.wikipedia.org/wiki/NRG_(file_format)#Header
+
+https://docs.fileformat.com/disc-and-media/nrg/</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1743</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3161</ExternalSignatureID>
+        <Signature>nrg</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2084</SignatureID>
+        <SignatureName>Nero Burning ROM Image File</SignatureName>
+        <SignatureNote>EOF; Offset: 0-12; Magic Bytes: 0x4E4552(35|4F)</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2414</ByteSequenceID>
+          <PositionType>Absolute from EOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>12</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4E4552(35|4F)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1255</RelatedFormatID>
+        <RelatedFormatName>ISO 9660 Disk Image File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>
