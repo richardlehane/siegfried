@@ -111,6 +111,51 @@ func TestYAMLHeader(t *testing.T) {
 	}
 }
 
+func TestYAMLMultilineString(t *testing.T) {
+	buf := &bytes.Buffer{}
+	yml := YAML(buf)
+	yml.Head("", time.Time{}, time.Time{}, [3]int{}, [][2]string{{"pronom", ""}}, [][]string{makeFields()}, "")
+	yml.File("example.\ndoc", 1, "2015-05-24T16:59:13+10:00", nil, testErr{}, []core.Identification{testID{}})
+	yml.Tail()
+	expect :=
+		`---
+siegfried   : 0.0.0
+scandate    : 0001-01-01T00:00:00Z
+signature   : 
+created     : 0001-01-01T00:00:00Z
+identifiers : 
+  - name    : 'pronom'
+    details : ''
+---
+filename : "example.\ndoc"
+filesize : 1
+modified : 2015-05-24T16:59:13+10:00
+errors   : 'mscfb: bad OLE'
+matches  :
+  - ns      : 'pronom'
+    id      : 'fmt/43'
+    format  : 'JPEG File Interchange Format'
+    version : '1.01'
+    mime    : 'image/jpeg'
+    basis   : 'extension match jpg; byte match at [[[0 14]] [[75201 2]]]'
+    warning : 
+`
+	ret := buf.String()
+	if expect != ret {
+		var detail string
+		if len(expect) != len(ret) {
+			detail = fmt.Sprintf("Strings differ in length, %d vs %d", len(expect), len(ret))
+		} else {
+			for i := range expect {
+				if expect[i] != ret[i] {
+					detail = fmt.Sprintf("Strings differ at index %d, %d vs %d", i, expect[i], ret[i])
+				}
+			}
+		}
+		t.Errorf("Expecting return: %s\nGot: %s\n%s", expect, ret, detail)
+	}
+}
+
 func ExampleYAML() {
 	yml := YAML(ioutil.Discard)
 	yml.Head("", time.Time{}, time.Time{}, [3]int{}, [][2]string{{"pronom", ""}}, [][]string{makeFields()}, "")

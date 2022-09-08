@@ -131,17 +131,33 @@ func (c *csvWriter) File(name string, sz int64, mod string, checksum []byte, err
 func (c *csvWriter) Tail() { c.w.Flush() }
 
 type yamlWriter struct {
-	replacer *strings.Replacer
-	w        *bufio.Writer
-	hh       string
-	hstrs    []string
-	vals     [][]interface{}
+	replacer   *strings.Replacer
+	dblRplacer *strings.Replacer
+	w          *bufio.Writer
+	hh         string
+	hstrs      []string
+	vals       [][]interface{}
 }
+
+const nonPrintables = "\x00\x07\x08\x0A\x0B\x0C\x0D\x1B"
 
 func YAML(w io.Writer) Writer {
 	return &yamlWriter{
 		replacer: strings.NewReplacer("'", "''"),
-		w:        bufio.NewWriter(w),
+		dblRplacer: strings.NewReplacer(
+			"\x00", "\\0",
+			"\x07", "\\a",
+			"\x08", "\\b",
+			"\x0A", "\\n",
+			"\x0B", "\\v",
+			"\x0C", "\\f",
+			"\x0D", "\\r",
+			"\x1B", "\\e",
+			"\x22", "\\\"",
+			"\x2F", "\\/",
+			"\x5c", "\\\\",
+		),
+		w: bufio.NewWriter(w),
 	}
 }
 
@@ -186,6 +202,7 @@ func (y *yamlWriter) File(name string, sz int64, mod string, checksum []byte, er
 	var (
 		errStr   string
 		h        string
+		fname    string
 		thisName string
 		idx      int = -1
 	)
@@ -195,7 +212,12 @@ func (y *yamlWriter) File(name string, sz int64, mod string, checksum []byte, er
 	if checksum != nil {
 		h = fmt.Sprintf("%-8s : %s\n", y.hh, hex.EncodeToString(checksum))
 	}
-	fmt.Fprintf(y.w, "---\nfilename : '%s'\nfilesize : %d\nmodified : %s\nerrors   : %s\n%smatches  :\n", y.replacer.Replace(name), sz, mod, errStr, h)
+	if strings.ContainsAny(name, nonPrintables) {
+		fname = "\"" + y.dblRplacer.Replace(name) + "\""
+	} else {
+		fname = "'" + y.replacer.Replace(name) + "'"
+	}
+	fmt.Fprintf(y.w, "---\nfilename : %s\nfilesize : %d\nmodified : %s\nerrors   : %s\n%smatches  :\n", fname, sz, mod, errStr, h)
 	for _, id := range ids {
 		values := id.Values()
 		if values[0] != thisName {
