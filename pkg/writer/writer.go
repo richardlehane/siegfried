@@ -131,12 +131,12 @@ func (c *csvWriter) File(name string, sz int64, mod string, checksum []byte, err
 func (c *csvWriter) Tail() { c.w.Flush() }
 
 type yamlWriter struct {
-	replacer   *strings.Replacer
-	dblRplacer *strings.Replacer
-	w          *bufio.Writer
-	hh         string
-	hstrs      []string
-	vals       [][]interface{}
+	replacer    *strings.Replacer
+	dblReplacer *strings.Replacer
+	w           *bufio.Writer
+	hh          string
+	hstrs       []string
+	vals        [][]interface{}
 }
 
 const nonPrintables = "\x00\x07\x08\x0A\x0B\x0C\x0D\x1B"
@@ -144,7 +144,7 @@ const nonPrintables = "\x00\x07\x08\x0A\x0B\x0C\x0D\x1B"
 func YAML(w io.Writer) Writer {
 	return &yamlWriter{
 		replacer: strings.NewReplacer("'", "''"),
-		dblRplacer: strings.NewReplacer(
+		dblReplacer: strings.NewReplacer(
 			"\x00", "\\0",
 			"\x07", "\\a",
 			"\x08", "\\b",
@@ -213,7 +213,7 @@ func (y *yamlWriter) File(name string, sz int64, mod string, checksum []byte, er
 		h = fmt.Sprintf("%-8s : %s\n", y.hh, hex.EncodeToString(checksum))
 	}
 	if strings.ContainsAny(name, nonPrintables) {
-		fname = "\"" + y.dblRplacer.Replace(name) + "\""
+		fname = "\"" + y.dblReplacer.Replace(name) + "\""
 	} else {
 		fname = "'" + y.replacer.Replace(name) + "'"
 	}
