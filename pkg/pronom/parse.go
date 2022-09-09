@@ -95,7 +95,8 @@ func processPRONOM(puid string, s mappings.Signature) (frames.Signature, error) 
 		switch bs.Position {
 		case pronombof:
 			if seg[0].Min != 0 || seg[0].Max != 0 {
-				min, max = seg[0].Min, seg[0].Max
+				// some signatures may begin with offsets e.g. {0-8} see e.g. fmt/1741
+				min, max = seg[0].Min+min, seg[0].Max+max
 			}
 			seg[0] = frames.NewFrame(frames.BOF, seg[0].Pattern, min, max)
 		case pronomvry:
@@ -103,6 +104,7 @@ func processPRONOM(puid string, s mappings.Signature) (frames.Signature, error) 
 				max = -1
 			}
 			if seg[0].Min != 0 || seg[0].Max != 0 {
+				// this seems iffy?
 				min, max = seg[0].Min, seg[0].Max
 			}
 			if min == max {
