@@ -1,11 +1,17 @@
 # Change Log
-## v1.9.5 (2022-09-10)
+## v1.9.5 (2022-09-12)
 ### Added
 - `roy inspect` now takes a `-droid` flag to allow easier inspection of old or custom DROID files
 - github action to update siegfried docker deployment [https://github.com/keeps/siegfried-docker]. Implemented by [Keep Solutions](https://github.com/richardlehane/siegfried/pull/201)
 
 ### Changed
-- update PRONOM to v107
+- update PRONOM to v108
+- update tika-mimetype signatures to v1.4.1
+- update LOC signatures to 2022-09-01
+
+### Fixed
+- incorrect encoding of YAML strings containing line endings; [#202](https://github.com/richardlehane/siegfried/issues/202).
+- parse signatures with offsets and offsets in patterns e.g. fmt/1741; [#203](https://github.com/richardlehane/siegfried/issues/203)
 
 ## v1.9.4 (2022-07-18)
 ### Added
