@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2621</FormatID>
+      <FormatName>ESRI Persistent Auxiliary Metadata File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>GIS</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The ESRI Persistent Auxiliary Metadata File is a format produced by ArcGIS software, which accompanies the raster file (and sits alongside it). lnformation for the raster dataset, such a statistics, tables, histograms and co-ordinates, is stored in this auxiliary file if it cannot be stored internally. The files have the extension .aux.xml, but due to limitations of PRONOM, have been added with extension.xml as well as aux.xml.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>234</ProvenanceSourceID>
+      <ProvenanceName>National Library of Australia / National Library of Australia</ProvenanceName>
+      <ProvenanceSourceDate>22 Sep 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>22 Sep 2022</LastUpdatedDate>
+      <FormatNote>https://pro.arcgis.com/en/pro-app/latest/help/data/imagery/auxiliary-files.htm</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1771</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>221</DeveloperID>
+        <DeveloperName>Esri</DeveloperName>
+        <OrganisationName>Esri</OrganisationName>
+        <DeveloperCompoundName>Esri / Esri</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>221</SupportID>
+        <SupportName>Esri</SupportName>
+        <OrganisationName>Esri</OrganisationName>
+        <SupportCompoundName>Esri / Esri</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3194</ExternalSignatureID>
+        <Signature>xml</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3195</ExternalSignatureID>
+        <Signature>aux.xml</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2109</SignatureID>
+        <SignatureName>Esri Persistent Auxiliary Metadata File</SignatureName>
+        <SignatureNote>BOF offset 0-30, magic bytes: &lt;PAMDataset&gt;(10-200)&lt;Metadata domain="ESRI"|"Esri"&gt;
+EOF, offset 0-1:&lt;/PAMDataset&gt;</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2447</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>30</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C50414D446174617365743E{10-200}3C4D6574616461746120646F6D61696E3D22(4553524922|4573726922)3E</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>2448</ByteSequenceID>
+          <PositionType>Absolute from EOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>1</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C2F50414D446174617365743E</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>638</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

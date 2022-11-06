@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2622</FormatID>
+      <FormatName>Casio QV CAM</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Raster)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Casio QV CAM file format is a proprietary raster image format of Casio QV digital camera series. The QV series camera were originally packaged with built in flash memory to store images with a special data cable that allowed for transfer to a personal computer whilst using the QV-Link software. Using the software, the CAM format allowed for images to be uploaded back to its camera. The format could be considered a camera data image format, as some files contain JFIF or other encoding. The QV-Link software allowed for CAM file to be saved as TIFF, JPEG, or BM format for MS-Windows; or PICT, TIFF, or JPEG for Macintosh. 
+
+The first of the series, QV-10, was announced in November 1994 and was originally developed by a team led by Hiroyuki Suetaka in 1995. It was the world's first consumer LCD digital camera, meaning that it was the first electronic camera in history that allowed users to record and view the images right away. The relatively low cost of the camera helped it achieve wide success and was influential in the rise in popularity of digital photography. The full list of QV series can be found following the links provided in Notes section.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
+      <ProvenanceSourceDate>30 Sep 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>30 Sep 2022</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/Casio_CAM#:~:text=4%20References-,File%20Information,one%20being%20a%20JPEG%20format.
+
+https://docs.rs-online.com/e90b/0900766b8002d506.pdf
+
+http://www.computinghistory.org.uk/det/50788/Casio-QV-10A-LCD-Camera
+
+https://www.flickr.com/photos/alpat/5844048891
+
+https://web.archive.org/web/20220116225524/https://www.digitalkameramuseum.de/en/cameras/item/casio-qv-10</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1772</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3196</ExternalSignatureID>
+        <Signature>cam</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2110</SignatureID>
+        <SignatureName>Casio QV CAM</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 0x0720 followed by 'MM'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2449</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>07204D4D</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

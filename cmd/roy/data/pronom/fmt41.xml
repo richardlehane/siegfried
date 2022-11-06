@@ -12,7 +12,7 @@
       <FormatTypes>Image (Raster)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Raw JPEG Stream represents JPEG bitstream sequence of digital objects. JPEG stands for Joint Photographic Experts Group, an international organization that standardized the concept of lossy compression during the late 1980s and early 1990s. It uses DCT (Discrete Cosine Transform) compression technique used for images and audio. The standard of lossy compression is able to remove some visual data invisible to human eye which averages out colour variation and reduces the file size. JPEG image consists of a sequence of segments, each beginning with a two-byte "marker", each of which begins with a 0xFF byte, followed by a byte indicating what kind of marker it is. The signature for this entry represents the first two bytes of every JPEG stream, which are the Start Of Image (SOI) marker with values of 0xFF and 0xD8 (indicating that the baseline is DCT-based) and the End of Image (EOI) marker with valued of 0xFF and 0xD9. The second signatures represents the "colour transform" field of the APP14 which is an "Adobe" segment, representing graphic files which may have been edited in Adobe applications such as Adobe Photoshop.</FormatDescription>
       <BinaryFileFormat>Binary</BinaryFileFormat>
       <ByteOrders>Big-endian (Motorola)</ByteOrders>
       <ReleaseDate>
@@ -24,13 +24,20 @@
       <ProvenanceSourceDate>11 Mar 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>20 Oct 2022</LastUpdatedDate>
+      <FormatNote>https://www.loc.gov/preservation/digital/formats/fdd/fdd000017.shtml#:~:text=The%20Library%20of%20Congress%20Recommended,specify%20a%20version%20of%20JPEG.
+
+https://web.archive.org/web/20220624201809/https://www.adobe.com/creativecloud/file-types/image/raster/jpeg-file.html
+
+https://web.archive.org/web/20221015163305/https://en.wikipedia.org/wiki/JPEG</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
       </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fdd000017</Identifier>
+        <IdentifierType>Library of Congress Format Description Identifier</IdentifierType>
+      </FileFormatIdentifier>
       <FileFormatIdentifier>
         <Identifier>fmt/41</Identifier>
         <IdentifierType>PUID</IdentifierType>
@@ -52,6 +59,21 @@
       <ExternalSignature>
         <ExternalSignatureID>652</ExternalSignatureID>
         <Signature>jpeg</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3224</ExternalSignatureID>
+        <Signature>jif</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3225</ExternalSignatureID>
+        <Signature>jfif</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3226</ExternalSignatureID>
+        <Signature>jfi</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <InternalSignature>

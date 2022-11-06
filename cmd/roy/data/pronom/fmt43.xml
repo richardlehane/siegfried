@@ -22,9 +22,12 @@
       <ProvenanceSourceDate>11 Mar 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>20 Oct 2022</LastUpdatedDate>
+      <FormatNote>https://en.wikipedia.org/wiki/JPEG_File_Interchange_Format
+
+https://web.archive.org/web/20220624201809/https://www.adobe.com/creativecloud/file-types/image/raster/jpeg-file.html
+
+https://web.archive.org/web/20221015163305/https://en.wikipedia.org/wiki/JPEG</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -68,6 +71,21 @@
       <ExternalSignature>
         <ExternalSignatureID>736</ExternalSignatureID>
         <Signature>jpeg</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3230</ExternalSignatureID>
+        <Signature>jif</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3231</ExternalSignatureID>
+        <Signature>jfif</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3232</ExternalSignatureID>
+        <Signature>jfi</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <InternalSignature>

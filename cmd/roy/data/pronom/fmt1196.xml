@@ -53,6 +53,12 @@
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>2627</RelatedFormatID>
+        <RelatedFormatName>SIARD (Software-Independent Archiving of Relational Databases)</RelatedFormatName>
+        <RelatedFormatVersion>2.2</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Is subsequent version of</RelationshipType>
         <RelatedFormatID>1800</RelatedFormatID>
         <RelatedFormatName>SIARD (Software-Independent Archiving of Relational Databases)</RelatedFormatName>

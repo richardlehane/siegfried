@@ -10,7 +10,7 @@
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Database</FormatTypes>
+      <FormatTypes>Aggregate</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
       <FormatDescription>The MS-DOS compression format uses the SZDD algorithm to compress a single file into another single file, replacing the last character in the filename with an underscore. It is implemented via the MS-DOS commands COMPRESS.EXE and EXPAND.EXE.</FormatDescription>
@@ -27,7 +27,7 @@
       <ProvenanceSourceDate>28 Aug 2012</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>04 Mar 2022</LastUpdatedDate>
+      <LastUpdatedDate>28 Oct 2022</LastUpdatedDate>
       <FormatNote>A DOS compressed file will be named file.**_, so a DOS compressed .exe will be named 'file'.ex_, a DOS compressed .jpg will be named 'file'.jp_. 
 
 https://www.cabextract.org.uk/libmspack/doc/szdd_kwaj_format.html</FormatNote>

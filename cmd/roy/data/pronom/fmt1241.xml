@@ -24,16 +24,20 @@
       </WithdrawnDate>
       <ProvenanceSourceID>242</ProvenanceSourceID>
       <ProvenanceName>The National Archives of the Czech Republic / The National Archives of the Czech Republic</ProvenanceName>
-      <ProvenanceSourceDate>18 Jan 2020</ProvenanceSourceDate>
+      <ProvenanceSourceDate>20 Dec 2019</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>18 Jan 2020</LastUpdatedDate>
+      <LastUpdatedDate>11 Oct 2022</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
       </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>	application/vnd.software602.filler.form+xml</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
       <FileFormatIdentifier>
         <Identifier>fmt/1241</Identifier>
         <IdentifierType>PUID</IdentifierType>
@@ -46,7 +50,7 @@
       <InternalSignature>
         <SignatureID>1618</SignatureID>
         <SignatureName>FO File</SignatureName>
-        <SignatureNote>Within the first 2000 bytes 'fo:root inheritance='</SignatureNote>
+        <SignatureNote>Within the first 4000 hex byte pairs 'fo:root'</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1889</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -58,7 +62,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>666F3A726F6F7420696E6865726974616E63653D</ByteSequenceValue>
+          <ByteSequenceValue>666F3A726F6F74</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

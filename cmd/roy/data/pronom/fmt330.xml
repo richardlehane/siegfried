@@ -10,7 +10,7 @@
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Image (Vector)</FormatTypes>
+      <FormatTypes>Audio</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
       <FormatDescription>Peak files contain waveform information for audio files (e.g. wav or mp3). They allow some applications to generate a graphical representation of the waveform of the audio content of associated audio files, and can enable such audio files to be accessed more quickly by reducing the time it takes to draw the waveform of the audio content.</FormatDescription>
@@ -27,7 +27,7 @@
       <ProvenanceSourceDate>30 Mar 2011</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>30 Mar 2011</LastUpdatedDate>
+      <LastUpdatedDate>28 Oct 2022</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>

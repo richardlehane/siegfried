@@ -14,7 +14,7 @@
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
-      <ReleaseDate>04 Feb 2004</ReleaseDate>
+      <ReleaseDate>01 Jan 1998</ReleaseDate>
       <WithdrawnDate>
       </WithdrawnDate>
       <ProvenanceSourceID>1</ProvenanceSourceID>
@@ -609,6 +609,13 @@
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>2615</RelatedFormatID>
         <RelatedFormatName>Media Hash List</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2621</RelatedFormatID>
+        <RelatedFormatName>ESRI Persistent Auxiliary Metadata File</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

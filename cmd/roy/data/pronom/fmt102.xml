@@ -197,6 +197,12 @@
         <RelatedFormatName>Extensible Hypertext Markup Language</RelatedFormatName>
         <RelatedFormatVersion>1.1</RelatedFormatVersion>
       </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>2626</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.1</RelatedFormatVersion>
+      </RelatedFormat>
       <FormatProperties>
         <FormatProperty>
           <PropertyName>Title</PropertyName>

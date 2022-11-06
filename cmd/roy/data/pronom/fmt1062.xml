@@ -13,9 +13,8 @@
       <FormatTypes>Image (Raster)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>3FR is the raw image format produced by some models of Hasselblad camera equipment. The format conforms to the EXIF standard.</FormatDescription>
-      <BinaryFileFormat>
-      </BinaryFileFormat>
+      <FormatDescription>Hasselblad 3FR Raw Image is a proprietary Hasselblad raw image format produced by some models of Hasselblad camera equipment. The format is based on Tagged Image File Format (TIFF) and conforms to the Exchangeable Image File Format (EXIF) standard. The format was developed in the early 2000s with the introduction of H2D 2nd generation of integrated DSLRs and as a successor to Imacon 3F raw image file format.</FormatDescription>
+      <BinaryFileFormat>Binary</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
       <ReleaseDate>
@@ -27,9 +26,16 @@
       <ProvenanceSourceDate>13 Jul 2017</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>13 Jul 2017</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>21 Oct 2022</LastUpdatedDate>
+      <FormatNote>https://cdn.hasselblad.com/manuals/x1d/current/X1D_USER-GUIDE-English.pdf#page=87
+
+https://www.google.co.uk/books/edition/The_Hasselblad_Manual/_0h5AgAAQBAJ?hl=en&amp;gbpv=1&amp;dq=Hasselblad+%223FR%22+file+format+history&amp;printsec=frontcover
+
+https://web.archive.org/web/20190904184057/http:/static.hasselblad.com/2014/11/uk_us_h4d_range_user-manual_v16.pdf
+
+http://fileformats.archiveteam.org/wiki/Hasselblad_3FR
+
+https://en.wikipedia.org/wiki/Raw_image_format</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -43,6 +49,39 @@
         <Signature>3fr</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>1435</SignatureID>
+        <SignatureName>Hasselblad 3FR</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: A TIFF based format starting with Intel endian header "II*" and 0x00 then between 4 to 148 wildcard bytes followed by TIFF Make tag 0x0F01, then wildcard bytes between 8 to 512, followed by, in ASCII, "Hasselblad" tag
+
+BOF; Offset: 1-2048; Magic Bytes: 0x000500040001</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1694</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>49492A00{4-128}0F01{8-512}48617373656C626C6164</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>2473</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>1</Offset>
+          <MaxOffset>2047</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>000500040001</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>672</RelatedFormatID>

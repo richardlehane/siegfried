@@ -2,6 +2,371 @@
 <?xml-stylesheet type="text/xsl" href="release-note.xsl"?>
 <release_notes>
 <release_note>
+   <release_date>2nd November 2022</release_date>
+   <signature_filename>DROID_SignatureFile_V109.xml</signature_filename>
+   <release_outline name="New Records">
+      <format>
+         <puid type="fmt">1767</puid>
+         <name>Calc602 Project File v1.51</name>
+         <summary>Full entry added. Submitted by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1768</puid>
+         <name>C Source Code File</name>
+         <summary>Extension-only entry added. Submitted by Stadtarchiv Hof.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1769</puid>
+         <name>C++ Source Code File</name>
+         <summary>Extension-only entry added. Submitted by Stadtarchiv Hof.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1770</puid>
+         <name>GenBank Flat File</name>
+         <summary>Full entry added. Submitted by Bodleian Libraries.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1771</puid>
+         <name>ESRI Persistent Auxiliary Metadata File</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1772</puid>
+         <name>Casio QV CAM</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1773</puid>
+         <name>Calc602 Spreadsheet File</name>
+         <summary>Full entry added. Submitted by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1774</puid>
+         <name>602 Graph/Chart File</name>
+         <summary>Full entry added. Submitted by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1775</puid>
+         <name>Calc602 Project File</name>
+         <summary>Full entry added. Submitted by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1776</puid>
+         <name>Extensible Markup Language v1.1</name>
+         <summary>Full entry added. Submitted by Stadtarchiv Hof.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1777</puid>
+         <name>SIARD (Software-Independent Archiving of Relational Databases)</name>
+         <summary>Full entry added. Submitted by Swiss Federal Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1778</puid>
+         <name>Dynamic Publisher Picture File</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1779</puid>
+         <name>Dynamic Publisher Font File</name>
+         <summary>Full entry added. Submitted by The National Archives &amp; Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1780</puid>
+         <name>Koala MicroIllustrator Graphic File</name>
+         <summary>Full entry added. Submitted by The National Archives &amp; Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1781</puid>
+         <name>Pentax PEF Image File</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1782</puid>
+         <name>The Spectral Geologist Dataset v7.15</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1783</puid>
+         <name>The Spectral Geologist Dataset v7</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1784</puid>
+         <name>Animatic Film Format</name>
+         <summary>Full entry added. Submitted by The National Archives &amp; Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1785</puid>
+         <name>FLR Database File</name>
+         <summary>Full entry added. Submitted by The National Archives &amp; Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1786</puid>
+         <name>Funpaint Image File</name>
+         <summary>Full entry added. Submitted by The National Archives &amp; Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1787</puid>
+         <name>G9B Graphics Format Bitmap</name>
+         <summary>Full entry added. Submitted by The National Archives &amp; Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1788</puid>
+         <name>Gunpaint Image File</name>
+         <summary>Full entry added. Submitted by The National Archives &amp; Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1789</puid>
+         <name>GX2 Graphics File</name>
+         <summary>Full entry added. Submitted by The National Archives &amp; Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1790</puid>
+         <name>Help Librarian File</name>
+         <summary>Full entry added. Submitted by The National Archives &amp; Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1791</puid>
+         <name>Haiku Vector Icon Format</name>
+         <summary>Full entry added. Submitted by The National Archives &amp; Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1792</puid>
+         <name>ICDRAW Single Icon File</name>
+         <summary>Full entry added. Submitted by The National Archives &amp; Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1793</puid>
+         <name>ICDRAW Group Icon File</name>
+         <summary>Full entry added. Submitted by The National Archives &amp; Records Administration.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="Updated Records">
+      <format>
+         <puid type="fmt">41</puid>
+         <name>Raw JPEG Stream</name>
+         <summary>Updated description and reference links, added extensions jif; jfif; jfi, and LoC identifier. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">42</puid>
+         <name>JPEG File Interchange Format v1.00</name>
+         <summary>Updated reference links, added extensions jif; jfif; jfi. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">43</puid>
+         <name>JPEG File Interchange Format v1.01</name>
+         <summary>Updated reference links, added extensions jif; jfif; jfi. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">44</puid>
+         <name>JPEG File Interchange Format v1.02</name>
+         <summary>Updated reference links, added extensions jif; jfif; jfi, and LoC identifier. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">62</puid>
+         <name>Log File</name>
+         <summary>Updated description. Submitted by Stadtarchiv Hof.</summary>
+      </format>
+      <format>
+         <puid type="fmt">123</puid>
+         <name>Encapsulated PostScript File Format v2.0</name>
+         <summary>Adjusted signature to allow for 3 wildcard bytes in the EPS 2.0 signature instead of 2. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">142</puid>
+         <name>Waveform Audio (WAVEFORMATEX)</name>
+         <summary>Adjusted signature caused by copying error from previous release. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">198</puid>
+         <name>MPEG Audio Stream Layer II</name>
+         <summary>Removed comma from name, updated description, reference links, added relationships and LoC identifier. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">330</puid>
+         <name>Peak Graphical Waveform File</name>
+         <summary>Changed filetype to Audio. Submitted by National Library of the Netherlands.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">422</puid>
+         <name>Java Language Source Code File</name>
+         <summary>Updated description and capitalised name. Submitted by Stadtarchiv Hof.</summary>
+      </format>
+      <format>
+         <puid type="fmt">462</puid>
+         <name>MS-DOS Compression Format (SZDD Variant)</name>
+         <summary>Changed filetype to Aggregate. Submitted by National Library of the Netherlands.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1062</puid>
+         <name>Hasselblad 3FR Raw Image</name>
+         <summary>Added updated and previously removed signature in v94 of PRONOM. Updated description and reference links. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1241</puid>
+         <name>FO File</name>
+         <summary>Updated signature and MIME type. Submitted by The National Archives of Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1242</puid>
+         <name>ZFO (Form) File</name>
+         <summary>Updated container signature name and sequence. Submitted by The National Archives of Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1697</puid>
+         <name>Calc602 Spreadsheet file v1.51</name>
+         <summary>Added priority over fmt/1773, name adjusted and corrected error in signature description. Submitted by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1698</puid>
+         <name>Calc602 Spreadsheet file v1.00</name>
+         <summary>Added priority over fmt/1773, name adjusted. Submitted by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1699</puid>
+         <name>602 Graph/Chart File v1.51</name>
+         <summary>Added priority over fmt/1774. Submitted by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1713</puid>
+         <name>Calc602 Project File v1.0</name>
+         <summary>Added priority over fmt/1775. Submitted by The National Archives of the Czech Republic.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="New Signatures">
+      <format>
+         <puid type="fmt">1062</puid>
+         <name>Hasselblad 3FR Raw Image</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1767</puid>
+         <name>Calc602 Project File v1.51</name>
+         <summary>Signature researched and samples provided by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1770</puid>
+         <name>GenBank Flat File</name>
+         <summary>Signature researched and samples provided by Bodleian Libraries.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1771</puid>
+         <name>ESRI Persistent Auxiliary Metadata File</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1772</puid>
+         <name>Casio QV CAM</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1773</puid>
+         <name>Calc602 Spreadsheet File</name>
+         <summary>Signature researched and samples provided by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1774</puid>
+         <name>602 Graph/Chart File</name>
+         <summary>Signature researched and samples provided by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1775</puid>
+         <name>Calc602 Project File</name>
+         <summary>Signature researched and samples provided by The National Archives of the Czech Republic.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1776</puid>
+         <name>Extensible Markup Language v1.1</name>
+         <summary>Signature researched and samples provided by Stadtarchiv Hof.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1777</puid>
+         <name>SIARD (Software-Independent Archiving of Relational Databases)</name>
+         <summary>Signature researched and samples provided by Swiss Federal Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1778</puid>
+         <name>Dynamic Publisher Picture File</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1779</puid>
+         <name>Dynamic Publisher Font File</name>
+         <summary>Signature researched and samples provided by The National Archives &amp; Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1780</puid>
+         <name>Koala MicroIllustrator Graphic File</name>
+         <summary>Signature researched and samples provided by The National Archives &amp; Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1781</puid>
+         <name>Pentax PEF Image File</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1782</puid>
+         <name>The Spectral Geologist Dataset v7.15</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1783</puid>
+         <name>The Spectral Geologist Dataset v7</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1784</puid>
+         <name>Animatic Film Format</name>
+         <summary>Signature researched and samples provided by The National Archives &amp; Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1785</puid>
+         <name>FLR Database File</name>
+         <summary>Signature researched and samples provided by The National Archives &amp; Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1786</puid>
+         <name>Funpaint Image File</name>
+         <summary>Signature researched and samples provided by The National Archives &amp; Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1787</puid>
+         <name>G9B Graphics Format Bitmap</name>
+         <summary>Signature researched and samples provided by The National Archives &amp; Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1788</puid>
+         <name>Gunpaint Image File</name>
+         <summary>Signature researched and samples provided by The National Archives &amp; Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1789</puid>
+         <name>GX2 Graphics File</name>
+         <summary>Signature researched and samples provided by The National Archives &amp; Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1790</puid>
+         <name>Help Librarian File</name>
+         <summary>Signature researched and samples provided by The National Archives &amp; Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1791</puid>
+         <name>Haiku Vector Icon Format</name>
+         <summary>Signature researched and samples provided by The National Archives &amp; Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1792</puid>
+         <name>ICDRAW Single Icon File</name>
+         <summary>Signature researched and samples provided by The National Archives &amp; Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1793</puid>
+         <name>ICDRAW Group Icon File</name>
+         <summary>Signature researched and samples provided by The National Archives &amp; Records Administration.</summary>
+      </format>
+   </release_outline>
+</release_note>   
+<release_note>
    <release_date>5th September 2022</release_date>
    <signature_filename>DROID_SignatureFile_V108.xml</signature_filename>
    <release_outline name="New Records">

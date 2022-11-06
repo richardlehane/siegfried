@@ -14,7 +14,7 @@
       </FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>A log file is an usually human-readable plain text file that records (= logs) activities or events occuring in or behaviors of an operating system or other software runs.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -27,9 +27,8 @@
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>23 Sep 2022</LastUpdatedDate>
+      <FormatNote>Description provided by Stadtarchiv Hof (Municipal Archives of Hof, Free State of Bavaria, Germany).</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>

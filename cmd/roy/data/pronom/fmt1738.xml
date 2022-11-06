@@ -66,7 +66,7 @@ https://docs.microsoft.com/en-us/windows/win32/imapi/disc-formats</FormatNote>
       <InternalSignature>
         <SignatureID>2076</SignatureID>
         <SignatureName>UDF Disc Image</SignatureName>
-        <SignatureNote>BOF; Offset: 32768; Max Offset: 36864; Magic Bytes:  0x00424541303101, then an exact of 2048 wildcard bytes, followed by 0x004E535230, then either 0x32 or 33 followed by 0x01</SignatureNote>
+        <SignatureNote>BOF; Offset: 32768; Max Offset: 36864; Magic Bytes:  0x00424541303101, then an exact of 2041 wildcard bytes, followed by 0x004E535230, then either 0x32 or 33 followed by 0x01</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>2403</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -81,6 +81,13 @@ https://docs.microsoft.com/en-us/windows/win32/imapi/disc-formats</FormatNote>
           <ByteSequenceValue>00424541303101{2041}004E535230(32|33)01</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2585</RelatedFormatID>
+        <RelatedFormatName>UDF-ISO 9660 Bridge Disc</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>2605</RelatedFormatID>

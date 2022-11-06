@@ -121,6 +121,13 @@
           <ByteSequenceValue>FFFF[10:EB]{29-769}FFFF[10:EB]{29-769}FFFF[10:EB]{29-769}FFFF[10:EB]{29-769}</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is subtype of</RelationshipType>
+        <RelatedFormatID>923</RelatedFormatID>
+        <RelatedFormatName>MPEG Audio Stream Layer II</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

@@ -18,6 +18,7 @@
     "fmt/364 (National Imagery Transmission Format 1.0)",
     "fmt/365 (National Imagery Transmission Format 2.0)",
     "fmt/366 (National Imagery Transmission Format 2.1)",
+    "fmt/462 (MS-DOS Compression Format (SZDD Variant))",
     "fmt/468 (ISO 9660 Disk Image File)",
     "fmt/484 (7Zip format)",
     "fmt/508 (Quarter Inch Cartridge Host Interchange Format)",
@@ -122,7 +123,7 @@
     "fmt/141 (Waveform Audio (PCMWAVEFORMAT))",
     "fmt/142 (Waveform Audio (WAVEFORMATEX))",
     "fmt/143 (Waveform Audio (WAVEFORMATEXTENSIBLE))",
-    "fmt/198 (MPEG Audio Stream, Layer II)",
+    "fmt/198 (MPEG Audio Stream Layer II)",
     "fmt/199 (MPEG-4 Media File)",
     "fmt/203 (Ogg Vorbis Codec Compressed Multimedia File)",
     "fmt/209 (Sound Designer II Audio File)",
@@ -131,6 +132,7 @@
     "fmt/315 (Play SID Audio 2)",
     "fmt/316 (Real SID Audio)",
     "fmt/323 (Extended Module Audio File)",
+    "fmt/330 (Peak Graphical Waveform File)",
     "fmt/339 (Interchange File Format 8-bit Sampled Voice)",
     "fmt/347 (MPEG 1/2 Audio Layer I)",
     "fmt/356 (Adaptive Multi-Rate Audio)",
@@ -285,7 +287,6 @@
     "fmt/393 (Borland Reflex flat datafile)",
     "fmt/424 (OpenDocument Database Format 1.2)",
     "fmt/444 (OpenDocument Database Format 1.1)",
-    "fmt/462 (MS-DOS Compression Format (SZDD Variant))",
     "fmt/510 (PowerProject Teamplan)",
     "fmt/511 (PowerProject 7)",
     "fmt/512 (PowerProject 8)",
@@ -336,7 +337,9 @@
     "fmt/1455 (Primavera P6 Project Management XER File)",
     "fmt/1482 (Access Report Snapshot)",
     "fmt/1490 (HyperCard Stack)",
-    "fmt/1752 (OpenDocument Database Format 1.3)"
+    "fmt/1752 (OpenDocument Database Format 1.3)",
+    "fmt/1777 (SIARD (Software-Independent Archiving of Relational Databases) 2.2)",
+    "fmt/1785 (FLR Database File)"
   ],
   "dataset": [
     "x-fmt/13 (Tab-separated values)",
@@ -476,7 +479,9 @@
     "fmt/1760 (CloneCD Control File)",
     "fmt/1761 (MacBinary I)",
     "fmt/1762 (MacBinary II)",
-    "fmt/1763 (MacBinary III)"
+    "fmt/1763 (MacBinary III)",
+    "fmt/1782 (The Spectral Geologist Dataset 7.15)",
+    "fmt/1783 (The Spectral Geologist Dataset 7)"
   ],
   "email": [
     "x-fmt/430 (Microsoft Outlook Email Message 97-2003)",
@@ -498,7 +503,8 @@
     "fmt/1569 (Bitstream Speedo Fonts)",
     "fmt/1581 (Envision Publisher Font Files)",
     "fmt/1675 (IntelliFont Font File)",
-    "fmt/1720 (Portable Compiled Format)"
+    "fmt/1720 (Portable Compiled Format)",
+    "fmt/1779 (Dynamic Publisher Font File)"
   ],
   "gis": [
     "x-fmt/225 (ESRI MapInfo Data File)",
@@ -538,7 +544,8 @@
     "fmt/1692 (ESRI ArcGIS Raw Raster Reader/ Writer)",
     "fmt/1696 (ESRI Attribute Index Files)",
     "fmt/1700 (OGC GeoPackage 1.0-1.31)",
-    "fmt/1729 (Esri Shapefile Geospatial Metadata File)"
+    "fmt/1729 (Esri Shapefile Geospatial Metadata File)",
+    "fmt/1771 (ESRI Persistent Auxiliary Metadata File)"
   ],
   "imageRaster": [
     "x-fmt/25 (OS/2 Bitmap 1.0)",
@@ -802,7 +809,18 @@
     "fmt/1734 (Portfolio Graphics Compressed File)",
     "fmt/1744 (Psion Series 3 Bitmap)",
     "fmt/1745 (PixArt Bitmap)",
-    "fmt/1746 (Rocky Interlace Picture)"
+    "fmt/1746 (Rocky Interlace Picture)",
+    "fmt/1772 (Casio QV CAM)",
+    "fmt/1778 (Dynamic Publisher Picture File)",
+    "fmt/1780 (Koala MicroIllustrator Graphic File)",
+    "fmt/1781 (Pentax PEF Image File)",
+    "fmt/1784 (Animatic Film Format)",
+    "fmt/1786 (Funpaint Image File)",
+    "fmt/1787 (G9B Graphics Format Bitmap)",
+    "fmt/1788 (Gunpaint Image File)",
+    "fmt/1789 (GX2 Graphics File)",
+    "fmt/1792 (ICDRAW Single Icon File)",
+    "fmt/1793 (ICDRAW Group Icon File)"
   ],
   "imageVector": [
     "x-fmt/20 (Adobe Illustrator 1.0 / 1.1)",
@@ -907,7 +925,6 @@
     "fmt/304 (Computer Graphics Metafile (Binary) 2)",
     "fmt/305 (Computer Graphics Metafile (Binary) 3)",
     "fmt/306 (Computer Graphics Metafile (Binary) 4)",
-    "fmt/330 (Peak Graphical Waveform File)",
     "fmt/344 (Microsoft Windows Enhanced Metafile 2.0)",
     "fmt/345 (Microsoft Windows Enhanced Metafile 3.0)",
     "fmt/378 (Chemical Draw Exchange Format)",
@@ -1014,7 +1031,8 @@
     "fmt/1527 (Serif DrawPlus Drawing X8)",
     "fmt/1528 (Serif DrawPlus Drawing Generic)",
     "fmt/1660 (Arts \u0026 Letters Clip Art Library)",
-    "fmt/1753 (OpenDocument Graphics 1.3)"
+    "fmt/1753 (OpenDocument Graphics 1.3)",
+    "fmt/1791 (Haiku Vector Icon Format)"
   ],
   "model": [
     "x-fmt/19 (3D Studio)",
@@ -1517,7 +1535,8 @@
     "fmt/1641 (Adobe InDesign Interchange Document)",
     "fmt/1677 (Microsoft Office File List)",
     "fmt/1724 (LegalDocML Document)",
-    "fmt/1725 (Capture One Settings File)"
+    "fmt/1725 (Capture One Settings File)",
+    "fmt/1776 (Extensible Markup Language 1.1)"
   ],
   "textStructured": [
     "x-fmt/41 (Data Interchange Format)",
@@ -1654,14 +1673,17 @@
     "fmt/1681 (OBO Flat File Format 1.2)",
     "fmt/1684 (EndNote Library 20)",
     "fmt/1695 (602 Text file 1.0-1.51)",
-    "fmt/1697 (Calc602 Spreadsheet file or backup file 1.51)",
-    "fmt/1698 (Calc602 Spreadsheet file or backup file v.1.00 1.00)",
+    "fmt/1697 (Calc602 Spreadsheet file 1.51)",
+    "fmt/1698 (Calc602 Spreadsheet file 1.00)",
     "fmt/1699 (602 Graph/Chart File 1.51)",
     "fmt/1711 (Software602 Printer Configuration File 1.0)",
     "fmt/1726 (Geosoft Map Description File)",
     "fmt/1727 (Pro Tools Session File 10 onwards)",
     "fmt/1765 (Media Hash List)",
-    "fmt/1766 (Sony SML File)"
+    "fmt/1766 (Sony SML File)",
+    "fmt/1770 (GenBank Flat File)",
+    "fmt/1773 (Calc602 Spreadsheet File)",
+    "fmt/1774 (602 Graph/Chart File)"
   ],
   "textUnstructured": [
     "x-fmt/14 (Macintosh Text File)",
@@ -1694,7 +1716,11 @@
     "fmt/1652 (Typescript)",
     "fmt/1655 (cdrLabel Label File)",
     "fmt/1713 (Calc602 Project File 1.0)",
-    "fmt/1717 (Time Stamp Token)"
+    "fmt/1717 (Time Stamp Token)",
+    "fmt/1767 (Calc602 Project File 1.51)",
+    "fmt/1768 (C Source Code File)",
+    "fmt/1769 (C++ Source Code File)",
+    "fmt/1775 (Calc602 Project File)"
   ],
   "video": [
     "x-fmt/152 (Digital Video)",

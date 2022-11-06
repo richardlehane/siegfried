@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2631</FormatID>
+      <FormatName>Pentax PEF Image File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>Pentax RAW</FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Raster)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Pentax PEF Image File (or Pentax RAW) is a RAW image format based on TIFF [fmt/353] file format, provided by Pentax and associated with Pentax Digital SLR cameras. Its use has been deprecated since the release of DNG format. Similarly to RAW camera formats, PEF format contains information of image capture such as colour, lighting or camera sensor. The structure of these informations related to each image differs in each PEF format depending on which camera model was used to capture the image. The format first appeared with Pentax's digital *its Series and continued until Pentax Q series.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
+      <ProvenanceSourceDate>17 Oct 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>17 Oct 2022</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/Pentax_PEF
+
+https://www.online-convert.com/file-format/pef
+
+https://www.pentaxforums.com/forums/131-visitors-center/355882-pef-raw.html
+
+https://www.loc.gov/preservation/digital/formats/fdd/fdd000241.shtml</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1781</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>210</DeveloperID>
+        <DeveloperName>Ricoh</DeveloperName>
+        <OrganisationName>Ricoh</OrganisationName>
+        <DeveloperCompoundName>Ricoh / Ricoh</DeveloperCompoundName>
+      </Developers>
+      <ExternalSignature>
+        <ExternalSignatureID>3206</ExternalSignatureID>
+        <Signature>pef</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2121</SignatureID>
+        <SignatureName>Pentax PEF Image File</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: A TIFF based format starting with  TIFF Motorola endian header "MM.*" then variable number of wildcard bytes followed by 'PENTAX' tag, then wildcard bytes between none to 2048 followed by MakerNote values of "AOC MM".</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2457</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>Big-endian</Endianness>
+          <ByteSequenceValue>4D4D002A*50454E544158{0-2048}414F43004D4D</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>1099</RelatedFormatID>
+        <RelatedFormatName>Tagged Image File Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

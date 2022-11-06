@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>923</FormatID>
-      <FormatName>MPEG Audio Stream, Layer II</FormatName>
+      <FormatName>MPEG Audio Stream Layer II</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
@@ -13,7 +13,7 @@
       <FormatTypes>Audio</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>MPEG Audio Stream Layer II is a lossy audio compression format defined by ISO/IEC 11172-3 standard. The format was initiated by the Digital Audio Broadcast (DAB) project financed by the European Union as a part of the EUREKA research program in the late 1980s. The format first appeared in early 1990s, with its encoding derived from the MUSICAM (Masking pattern adapted Universal Subband Integrated Coding And Multiplexing) audio codec, chosen for its simplicity and error resistance. It is a predecessor to MPEG 1/2 Audio Layer III and often referred to as MP2.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -26,9 +26,14 @@
       <ProvenanceSourceDate>27 Oct 2009</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>27 Oct 2009</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>06 Oct 2022</LastUpdatedDate>
+      <FormatNote>https://www.loc.gov/preservation/digital/formats/fdd/fdd000338.shtml
+
+https://en.wikipedia.org/wiki/MPEG-1_Audio_Layer_II
+
+https://www.w3.org/TR/mse-byte-stream-format-mpeg-audio/
+
+http://www.library.snls.org.sz/archive/doc/wikipedia/wikipedia-terodump-0.1/tero-dump/wikipedia/mp/MP3.html</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -36,6 +41,10 @@
       <FileFormatIdentifier>
         <Identifier>audio/mpeg</Identifier>
         <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fdd000338</Identifier>
+        <IdentifierType>Library of Congress Format Description Identifier</IdentifierType>
       </FileFormatIdentifier>
       <FileFormatIdentifier>
         <Identifier>fmt/198</Identifier>
@@ -264,6 +273,20 @@
           <ByteSequenceValue>FFF5[10:EB]{45-1726}FFF5[10:EB]{45-1726}FFF5[10:EB]{45-1726}FFF5[10:EB]{45-1726}FFF5[10:EB]{7-500}000000{36-1426}</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>425</RelatedFormatID>
+        <RelatedFormatName>MPEG 1/2 Audio Layer 3 Streaming</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>1092</RelatedFormatID>
+        <RelatedFormatName>MPEG 1/2 Audio Layer I</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

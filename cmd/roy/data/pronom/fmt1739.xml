@@ -72,7 +72,7 @@ https://docs.microsoft.com/en-us/windows/win32/imapi/disc-formats</FormatNote>
 
 &amp; 
 
-BOF; Offset: 32768; Max Offset: 70468; Magic Bytes:  0x00424541303101, then an exact of 2048 wildcard bytes, followed by 0x004E535230, then either 0x32 or 33 followed by 0x01</SignatureNote>
+BOF; Offset: 32768; Max Offset: 70468; Magic Bytes:  0x00424541303101, then an exact of 2041 wildcard bytes, followed by 0x004E535230, then either 0x32 or 33 followed by 0x01</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>2404</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -111,6 +111,13 @@ BOF; Offset: 32768; Max Offset: 70468; Magic Bytes:  0x00424541303101, then an e
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>1255</RelatedFormatID>
         <RelatedFormatName>ISO 9660 Disk Image File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2584</RelatedFormatID>
+        <RelatedFormatName>UDF Disc Image</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

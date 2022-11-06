@@ -75,22 +75,10 @@ https://www.danielsays.com/ssg-win1x2x3x-compel20.html</FormatNote>
         </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
-        <RelationshipType>Is previous version of</RelationshipType>
-        <RelatedFormatID>2530</RelatedFormatID>
-        <RelatedFormatName>Asymetrix Compel Presentation</RelatedFormatName>
-        <RelatedFormatVersion>2.0</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
         <RelationshipType>Is subsequent version of</RelationshipType>
         <RelatedFormatID>2529</RelatedFormatID>
         <RelatedFormatName>Asymetrix Compel Presentation</RelatedFormatName>
         <RelatedFormatVersion>1.0</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Is subsequent version of</RelationshipType>
-        <RelatedFormatID>2530</RelatedFormatID>
-        <RelatedFormatName>Asymetrix Compel Presentation</RelatedFormatName>
-        <RelatedFormatVersion>2.0</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>

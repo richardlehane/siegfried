@@ -24,7 +24,7 @@
       <ProvenanceSourceDate>01 Feb 2007</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>02 Sep 2022</LastUpdatedDate>
+      <LastUpdatedDate>31 Oct 2022</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -66,19 +66,18 @@
       <InternalSignature>
         <SignatureID>607</SignatureID>
         <SignatureName>Waveform Audio (WAVEFORMATEX)</SignatureName>
-        <SignatureNote>RIFF header, WAVE ID, Format chunk, chunk length GTE 18, wformat Tag not equal to decimal 65534 = 0xFFFE and Data chunk</SignatureNote>
+        <SignatureNote>RIFF header, WAVE ID, Format chunk, chunk length GTE 18, wformat Tag not equal to decimal 65534 = 0xFFFE and Data chunk. Since DROID cannot currently handle inverted (i.e. not equal to) sequences, the wformat chunk is not expressed in this signature. For fmt/143 the wformat tag = 65534 = 0xFFFE, so this is handled by setting an appropriate identification priority.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>752</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>Big-endian</Endianness>
-          <ByteSequenceValue>52494646{4}57415645666D7420[!10]{3}[!FEFF]{16-*}64617461</ByteSequenceValue>
+          <ByteSequenceValue>52494646{4}57415645666D7420[!10]{21-*}64617461</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

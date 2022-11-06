@@ -26,7 +26,7 @@
       <ProvenanceSourceDate>14 Jun 2022</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>14 Jun 2022</LastUpdatedDate>
+      <LastUpdatedDate>28 Oct 2022</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -75,6 +75,13 @@ Calc602 v.1.00 WorkSpace</SignatureNote>
           <ByteSequenceValue>536F6674776172653630320D0A43616C6336303220762E312E303020576F726B5370616365</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2625</RelatedFormatID>
+        <RelatedFormatName>	Calc602 Project File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>
