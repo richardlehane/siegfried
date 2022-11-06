@@ -1,4 +1,8 @@
 # Change Log
+## v1.9.6 (2022-11-06)
+### Changed
+- update PRONOM to v109
+
 ## v1.9.5 (2022-09-12)
 ### Added
 - `roy inspect` now takes a `-droid` flag to allow easier inspection of old or custom DROID files
