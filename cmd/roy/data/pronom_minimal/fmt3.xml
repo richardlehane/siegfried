@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>619</FormatID>
+      <FormatName>Graphics Interchange Format</FormatName>
+      <FormatVersion>87a</FormatVersion>
+      <FormatAliases>GIF (1987a)</FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Raster)</FormatTypes>
+      <FormatDisclosure>Full</FormatDisclosure>
+      <FormatDescription>The Graphics Interchange Format (GIF) is a raster image format developed by Compuserve, primarily for use on the internet. A GIF file begins with a Header section and a Logical Screen Descriptor section. This is followed by one or more Image sections, and the file is terminated by a Trailer. GIF supports bit depths between 1 and 8 bits (i.e. up to 256 colours) and supports features such as interlacing and transparency. Images are always stored using lossless LZW compression.</FormatDescription>
+      <BinaryFileFormat>Binary</BinaryFileFormat>
+      <ByteOrders>Little-endian (Intel)</ByteOrders>
+      <ReleaseDate>15 Jun 1987</ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>11 Mar 2005</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>com.compuserve.gif</Identifier>
+        <IdentifierType>Apple Uniform Type Identifier</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/3</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>image/gif</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>108</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Compuserve Incorporated</OrganisationName>
+        <DeveloperCompoundName>Compuserve Incorporated</DeveloperCompoundName>
+      </Developers>
+      <Document>
+        <DocumentID>30</DocumentID>
+        <DisplayText>Compuserve Incorporated, 1987, Graphics Interchange Format: A standard defining a mechanism for the storage and transmission of raster-based graphics information</DisplayText>
+        <DocumentType>Authoritative</DocumentType>
+        <AvailabilityDescription>Public</AvailabilityDescription>
+        <AvailabilityNote>
+        </AvailabilityNote>
+        <PublicationDate>15 Jun 1987</PublicationDate>
+        <TitleText>Graphics Interchange Format: A standard defining a mechanism for the storage and transmission of raster-based graphics information</TitleText>
+        <DocumentIPR>
+        </DocumentIPR>
+        <DocumentNote>
+        </DocumentNote>
+        <Author>
+          <AuthorID>108</AuthorID>
+          <AuthorName>
+          </AuthorName>
+          <OrganisationName>Compuserve Incorporated</OrganisationName>
+          <AuthorCompoundName>Compuserve Incorporated</AuthorCompoundName>
+        </Author>
+        <Publisher>
+          <PublisherID>108</PublisherID>
+          <PublisherName>
+          </PublisherName>
+          <OrganisationName>Compuserve Incorporated</OrganisationName>
+          <PublisherCompoundName>Compuserve Incorporated</PublisherCompoundName>
+        </Publisher>
+      </Document>
+      <ExternalSignature>
+        <ExternalSignatureID>576</ExternalSignatureID>
+        <Signature>gif</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>18</SignatureID>
+        <SignatureName>GIF 1987a</SignatureName>
+        <SignatureNote>header &amp; trailer</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>179</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>474946383761</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>180</ByteSequenceID>
+          <PositionType>Absolute from EOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>4</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3B</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>620</RelatedFormatID>
+        <RelatedFormatName>Graphics Interchange Format</RelatedFormatName>
+        <RelatedFormatVersion>89a</RelatedFormatVersion>
+      </RelatedFormat>
+      <CompressionType>
+        <CompressionID>12</CompressionID>
+        <CompressionName>Lempel-Ziv-Welch</CompressionName>
+        <CompressionVersion>
+        </CompressionVersion>
+        <CompressionAliases>LZW</CompressionAliases>
+        <CompressionFamilies>
+        </CompressionFamilies>
+        <Description>The Lempel-Ziv-Welch compression algorithm was developed by Terry Welch in 1984, as a modification of the LZ78 compressor. It is a lossless technique which can be applied to almost any type of data, but is most commonly used for image compression. LZW compression is effective on images with colour depths from 1-bit (monochrome) to 24-bit (True Colour). LZW compression is encountered in a range of common graphics file formats, including TIFF and GIF.</Description>
+        <Lossiness>Lossless</Lossiness>
+        <ReleaseDate>01 Jan 1984</ReleaseDate>
+        <WithdrawnDate>
+        </WithdrawnDate>
+        <CompressionDocumentation>Welch, T A, 1984, A technique for high performance data compression, IEEE Computer, 17: 6</CompressionDocumentation>
+        <CompressionIPR>
+        </CompressionIPR>
+        <CompressionNote>
+        </CompressionNote>
+        <CompressionIdentifier>
+          <Identifier>x-cmp/12</Identifier>
+          <IdentifierType>PUID</IdentifierType>
+        </CompressionIdentifier>
+        <Developer>
+          <DeveloperID>121</DeveloperID>
+          <DeveloperName>T A Welch</DeveloperName>
+          <OrganisationName>
+          </OrganisationName>
+          <DeveloperCompoundName>T A Welch / [No organisation specified]</DeveloperCompoundName>
+        </Developer>
+      </CompressionType>
+      <FormatProperties>
+        <FormatProperty>
+          <PropertyName>Compression Type</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Image Width</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Image Height</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Colour Space</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Bits Per Sample</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+        <FormatProperty>
+          <PropertyName>Byte Order</PropertyName>
+          <PropertyDescription>
+          </PropertyDescription>
+          <PropertyType>Instance</PropertyType>
+          <PropertyRiskScore>
+          </PropertyRiskScore>
+          <PropertyHighRisk>
+          </PropertyHighRisk>
+          <PropertyValueDescription>
+          </PropertyValueDescription>
+          <PropertyRisks />
+        </FormatProperty>
+      </FormatProperties>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

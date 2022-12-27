@@ -202,8 +202,17 @@ func TextPuid() string {
 // SetDroid sets the name and/or location of the DROID signature file.
 // I.e. can provide a full path or a filename relative to the HOME directory.
 func SetDroid(d string) func() private {
+	pronom.droid = d
 	return func() private {
-		pronom.droid = d
+		return private{}
+	}
+}
+
+// SetPRONOMReportsDir sets the PRONOM reports directory, used to
+// generate a PRONOM identifier from the XML data retrieved from PRONOM.
+func SetPRONOMReportsDir(r string) func() private {
+	pronom.reports = r
+	return func() private {
 		return private{}
 	}
 }
