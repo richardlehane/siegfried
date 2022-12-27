@@ -25,9 +25,10 @@ import (
 )
 
 type formatInfo struct {
-	name     string
-	version  string
-	mimeType string
+	name       string
+	version    string
+	mimeType   string
+	formatType string
 }
 
 func (f formatInfo) String() string {
@@ -115,10 +116,15 @@ func (r *reports) IDs() []string {
 	return r.p
 }
 
+// Infos generates a FormatInfo structure to return to the caller.
 func (r *reports) Infos() map[string]identifier.FormatInfo {
 	infos := make(map[string]identifier.FormatInfo)
 	for i, v := range r.r {
-		infos[r.p[i]] = formatInfo{strings.TrimSpace(v.Name), strings.TrimSpace(v.Version), strings.TrimSpace(v.MIME())}
+		infos[r.p[i]] = formatInfo{strings.TrimSpace(v.Name),
+			strings.TrimSpace(v.Version),
+			strings.TrimSpace(v.MIME()),
+			strings.TrimSpace(v.Types),
+		}
 	}
 	return infos
 }
@@ -220,10 +226,16 @@ func (d *droid) IDs() []string {
 	return puids
 }
 
+// Infos generates a FormatInfo structure to return to the caller.
 func (d *droid) Infos() map[string]identifier.FormatInfo {
 	infos := make(map[string]identifier.FormatInfo)
 	for _, v := range d.FileFormats {
-		infos[v.Puid] = formatInfo{strings.TrimSpace(v.Name), strings.TrimSpace(v.Version), strings.TrimSpace(v.MIMEType)}
+		infos[v.Puid] = formatInfo{
+			strings.TrimSpace(v.Name),
+			strings.TrimSpace(v.Version),
+			strings.TrimSpace(v.MIMEType),
+			strings.TrimSpace(v.FormatType),
+		}
 	}
 	return infos
 }

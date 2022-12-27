@@ -61,6 +61,7 @@ type FileFormat struct {
 	Name       string   `xml:",attr"`
 	Version    string   `xml:",attr"`
 	MIMEType   string   `xml:",attr"`
+	FormatType string   "xml:-"
 	Extensions []string `xml:"Extension"`
 	Signatures []int    `xml:"InternalSignatureID"`
 	Priorities []int    `xml:"HasPriorityOverFileFormatID"`

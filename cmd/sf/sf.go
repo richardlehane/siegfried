@@ -427,7 +427,7 @@ func main() {
 	case *jsono:
 		w = writer.JSON(os.Stdout)
 	case *droido:
-		if len(s.Fields()) != 1 || len(s.Fields()[0]) != 7 {
+		if len(s.Fields()) != 1 || len(s.Fields()[0]) != 8 {
 			close(ctxts)
 			log.Fatalln("[FATAL] DROID output is limited to signature files with a single PRONOM identifier")
 		}

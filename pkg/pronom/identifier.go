@@ -34,6 +34,8 @@ type Identifier struct {
 	*identifier.Base
 }
 
+// Save converts PRONOM information to the persist byte format and then
+// saves it onto disk.
 func (i *Identifier) Save(ls *persist.LoadSaver) {
 	ls.SaveByte(core.Pronom)
 	ls.SaveSmallInt(len(i.infos))
@@ -42,16 +44,20 @@ func (i *Identifier) Save(ls *persist.LoadSaver) {
 		ls.SaveString(v.name)
 		ls.SaveString(v.version)
 		ls.SaveString(v.mimeType)
+		ls.SaveString(v.formatType)
 	}
 	i.Base.Save(ls)
 }
 
+// Load reads PRONOM information back from the persist byte format into
+// the Identifier's FormatInfo struct.
 func Load(ls *persist.LoadSaver) core.Identifier {
 	i := &Identifier{}
 	i.infos = make(map[string]formatInfo)
 	le := ls.LoadSmallInt()
 	for j := 0; j < le; j++ {
 		i.infos[ls.LoadString()] = formatInfo{
+			ls.LoadString(),
 			ls.LoadString(),
 			ls.LoadString(),
 			ls.LoadString(),
@@ -75,8 +81,19 @@ func New(opts ...config.Option) (core.Identifier, error) {
 	}, nil
 }
 
+// Fields returns the user-facing fields used in the Identifier's
+// reports.
 func (i *Identifier) Fields() []string {
-	return []string{"namespace", "id", "format", "version", "mime", "basis", "warning"}
+	return []string{
+		"namespace",
+		"id",
+		"format",
+		"version",
+		"mime",
+		"type",
+		"basis",
+		"warning",
+	}
 }
 
 func (i *Identifier) Recorder() core.Recorder {
@@ -371,12 +388,14 @@ func (r *Recorder) updateWarning(i Identification) Identification {
 	return i
 }
 
+// Identification records format related metadata.
 type Identification struct {
 	Namespace  string
 	ID         string
 	Name       string
 	Version    string
 	MIME       string
+	FormatType string
 	Basis      []string
 	Warning    string
 	archive    config.Archive
@@ -395,6 +414,7 @@ func (id Identification) Warn() string {
 	return id.Warning
 }
 
+// Values returns the Identification result information to the caller.
 func (id Identification) Values() []string {
 	var basis string
 	if len(id.Basis) > 0 {
@@ -406,6 +426,7 @@ func (id Identification) Values() []string {
 		id.Name,
 		id.Version,
 		id.MIME,
+		id.FormatType,
 		basis,
 		id.Warning,
 	}
@@ -431,5 +452,16 @@ func add(p pids, id string, f string, info formatInfo, basis string, c int) pids
 			return p
 		}
 	}
-	return append(p, Identification{id, f, info.name, info.version, info.mimeType, []string{basis}, "", config.IsArchive(f), c})
+	return append(
+		p, Identification{
+			id,
+			f,
+			info.name,
+			info.version,
+			info.mimeType,
+			info.formatType,
+			[]string{basis},
+			"",
+			config.IsArchive(f), c},
+	)
 }
