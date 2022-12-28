@@ -63,7 +63,7 @@ var pronom = struct {
 
 // GETTERS
 
-// DROID returns the location of the DROID signature file.
+// Droid returns the location of the DROID signature file.
 // If not set, infers the latest file.
 func Droid() string {
 	if pronom.droid == "" {
@@ -79,7 +79,7 @@ func Droid() string {
 	return pronom.droid
 }
 
-// DROID base returns the base filename of the DROID signature file.
+// DroidBase returns the base filename of the DROID signature file.
 // If not set, infers the latest file.
 func DroidBase() string {
 	if pronom.droid == "" {
@@ -173,11 +173,12 @@ func ExcludeDoubles(puids, cont []string) []string {
 	return exclude(puids, cont)
 }
 
-// Extend reports whether a set of container signature extensions has been provided.
+// ExtendC reports whether a set of container signature extensions has been provided.
 func ExtendC() []string {
 	return extensionPaths(pronom.extendc)
 }
 
+// ChangesURL returns the URL for the PRONOM release notes.
 func ChangesURL() string {
 	return pronom.changesURL
 }
@@ -257,6 +258,7 @@ func SetHarvestTimeout(d time.Duration) {
 	pronom.harvestTimeout = d
 }
 
+// SetHarvestThrottle sets a throttle value for downloading DROID reports.
 func SetHarvestThrottle(d time.Duration) {
 	pronom.harvestThrottle = d
 }

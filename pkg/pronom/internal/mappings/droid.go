@@ -12,7 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// This file contains struct mappings to unmarshal three different PRONOM XML formats: the signature file format, the report format, and the container format
+// Package mappings contains struct mappings to unmarshal three
+// different PRONOM XML formats: the signature file format, the report
+// format, and the container format.
 package mappings
 
 import (
@@ -21,6 +23,8 @@ import (
 
 // Droid Signature File
 
+// Droid describes the basic top-level structure of a DROID signature
+// file.
 type Droid struct {
 	XMLName     xml.Name            `xml:"FFSignatureFile"`
 	Version     int                 `xml:",attr"`
@@ -28,16 +32,22 @@ type Droid struct {
 	FileFormats []FileFormat        `xml:"FileFormatCollection>FileFormat"`
 }
 
+// InternalSignature describes the structure of the InternalSignature
+// section of a DROID signature file.
 type InternalSignature struct {
-	Id            int       `xml:"ID,attr"`
+	ID            int       `xml:"ID,attr"`
 	ByteSequences []ByteSeq `xml:"ByteSequence"`
 }
 
+// ByteSeq describes the structure of the ByteSequence sections of a
+// DROID signature file.
 type ByteSeq struct {
 	Reference    string        `xml:"Reference,attr"`
 	SubSequences []SubSequence `xml:"SubSequence"`
 }
 
+// SubSequence describes the structure of the SubSequence sections of a
+// DROID signature file.
 type SubSequence struct {
 	Position        int    `xml:",attr"`
 	SubSeqMinOffset string `xml:",attr"` // and empty int values are unmarshalled to 0
@@ -47,6 +57,8 @@ type SubSequence struct {
 	RightFragments  []Fragment `xml:"RightFragment"`
 }
 
+// Fragment describes the structure of the fragment sections of a DROID
+// signature file.
 type Fragment struct {
 	Value     string `xml:",chardata"`
 	MinOffset string `xml:",attr"`
@@ -54,9 +66,11 @@ type Fragment struct {
 	Position  int    `xml:",attr"`
 }
 
+// FileFormat describes the structure of the FileFormat section of a
+// DROID signature file.
 type FileFormat struct {
 	XMLName    xml.Name `xml:"FileFormat"`
-	Id         int      `xml:"ID,attr"`
+	ID         int      `xml:"ID,attr"`
 	Puid       string   `xml:"PUID,attr"`
 	Name       string   `xml:",attr"`
 	Version    string   `xml:",attr"`

@@ -29,6 +29,8 @@ func init() {
 	core.RegisterIdentifier(core.Pronom, Load)
 }
 
+// Identifier stores identifier format details alongside the baseline
+// siegfried identifier.
 type Identifier struct {
 	infos map[string]formatInfo
 	*identifier.Base
@@ -67,6 +69,7 @@ func Load(ls *persist.LoadSaver) core.Identifier {
 	return i
 }
 
+// New creates a new instance of a PRONOM identifier.
 func New(opts ...config.Option) (core.Identifier, error) {
 	for _, v := range opts {
 		v()
@@ -96,6 +99,7 @@ func (i *Identifier) Fields() []string {
 	}
 }
 
+// Recorder provides a new recorder for identification results.
 func (i *Identifier) Recorder() core.Recorder {
 	return &Recorder{
 		Identifier: i,
@@ -103,6 +107,7 @@ func (i *Identifier) Recorder() core.Recorder {
 	}
 }
 
+// Recorder stores information about match results.
 type Recorder struct {
 	*Identifier
 	ids        pids
@@ -120,6 +125,7 @@ const (
 	incScore
 )
 
+// Active sets the flags for the recorder's active matchers.
 func (r *Recorder) Active(m core.MatcherType) {
 	if r.Identifier.Active(m) {
 		switch m {
@@ -133,6 +139,7 @@ func (r *Recorder) Active(m core.MatcherType) {
 	}
 }
 
+// Record builds possible results sets associated with an identification.
 func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 	switch m {
 	default:
@@ -141,16 +148,14 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 		if hit, id := r.Hit(m, res.Index()); hit {
 			r.ids = add(r.ids, r.Name(), id, r.infos[id], res.Basis(), extScore)
 			return true
-		} else {
-			return false
 		}
+		return false
 	case core.MIMEMatcher:
 		if hit, id := r.Hit(m, res.Index()); hit {
 			r.ids = add(r.ids, r.Name(), id, r.infos[id], res.Basis(), mimeScore)
 			return true
-		} else {
-			return false
 		}
+		return false
 	case core.ContainerMatcher:
 		// add zip default
 		if res.Index() < 0 {
@@ -169,9 +174,8 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 			}
 			r.ids = add(r.ids, r.Name(), id, r.infos[id], basis, r.cscore)
 			return true
-		} else {
-			return false
 		}
+		return false
 	case core.ByteMatcher:
 		if hit, id := r.Hit(m, res.Index()); hit {
 			if r.satisfied {
@@ -185,9 +189,8 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 			}
 			r.ids = add(r.ids, r.Name(), id, r.infos[id], basis, r.cscore)
 			return true
-		} else {
-			return false
 		}
+		return false
 	case core.TextMatcher:
 		if hit, id := r.Hit(m, res.Index()); hit {
 			if r.satisfied {
@@ -195,12 +198,13 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 			}
 			r.ids = add(r.ids, r.Name(), id, r.infos[id], res.Basis(), textScore)
 			return true
-		} else {
-			return false
 		}
+		return false
 	}
 }
 
+// Satisfied determines whether we should continue running identification
+// with a given matcher type.
 func (r *Recorder) Satisfied(mt core.MatcherType) (bool, core.Hint) {
 	if r.NoPriority() {
 		return false, core.Hint{}
@@ -256,6 +260,8 @@ func lowConfidence(conf int) string {
 	}
 }
 
+// Report organizes the results output and lists the highest priority
+// results first.
 func (r *Recorder) Report() []core.Identification {
 	// no results
 	if len(r.ids) == 0 {
@@ -406,10 +412,12 @@ func (id Identification) String() string {
 	return id.ID
 }
 
+// Known outputs true if the identification result isn't UNKNOWN.
 func (id Identification) Known() bool {
 	return id.ID != "UNKNOWN"
 }
 
+// Warn returns the associated warning for a given identification.
 func (id Identification) Warn() string {
 	return id.Warning
 }
@@ -432,6 +440,7 @@ func (id Identification) Values() []string {
 	}
 }
 
+// Archive returns the archive value for a given identification.
 func (id Identification) Archive() config.Archive {
 	return id.archive
 }

@@ -276,7 +276,7 @@ func (d *droid) Texts() []string {
 func (d *droid) idsPuids() map[int]string {
 	idsPuids := make(map[int]string)
 	for _, v := range d.FileFormats {
-		idsPuids[v.Id] = v.Puid
+		idsPuids[v.ID] = v.Puid
 	}
 	return idsPuids
 }
@@ -317,7 +317,7 @@ func (d *droid) Signatures() ([]frames.Signature, []string, error) {
 	// first a map of internal sig ids to bytesequences
 	seqs := make(map[int][]mappings.ByteSeq)
 	for _, v := range d.Droid.Signatures {
-		seqs[v.Id] = v.ByteSequences
+		seqs[v.ID] = v.ByteSequences
 	}
 	m := d.puidsInternalIds()
 	var err error

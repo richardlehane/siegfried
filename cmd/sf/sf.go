@@ -72,9 +72,9 @@ var (
 	ctxPool  *sync.Pool
 )
 
-type ModeError os.FileMode
+type modeError os.FileMode
 
-func (me ModeError) Error() string {
+func (me modeError) Error() string {
 	typ := "unknown"
 	switch {
 	case os.FileMode(me)&os.ModeDir == os.ModeDir:
@@ -93,12 +93,12 @@ func (me ModeError) Error() string {
 	return fmt.Sprintf("file is of type %s; only regular files can be scanned", typ)
 }
 
-type WalkError struct {
+type walkError struct {
 	path string
 	err  error
 }
 
-func (we WalkError) Error() string {
+func (we walkError) Error() string {
 	return fmt.Sprintf("[FATAL] file access error for %s: %v", we.path, we.err)
 }
 
