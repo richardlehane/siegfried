@@ -1,11 +1,12 @@
 package main
 
 import (
-	"os"
+	"encoding/hex"
 	"path/filepath"
 	"reflect"
 	"sort"
 	"testing"
+	"testing/fstest"
 
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/pkg/config"
@@ -39,7 +40,53 @@ type pronomIdentificationTests struct {
 	error      string
 }
 
+var skeletons = make(map[string]*fstest.MapFile)
+
+// Populate the global skeletons map from string-based byte-sequences to
+// save having to store skeletons on disk and read from them.
+func makeSkeletons() {
+	var files = make(map[string]string)
+	files["fmt-11-signature-id-58.png"] = "89504e470d0a1a0a0000000d494844520000000049454e44ae426082"
+	files["fmt-14-signature-id-123.pdf"] = "255044462d312e302525454f46"
+	files["fmt-1-signature-id-1032.wav"] = ("" +
+		"524946460000000057415645000000000000000000000000000000000000" +
+		"000062657874000000000000000000000000000000000000000000000000" +
+		"000000000000000000000000000000000000000000000000000000000000" +
+		"000000000000000000000000000000000000000000000000000000000000" +
+		"000000000000000000000000000000000000000000000000000000000000" +
+		"000000000000000000000000000000000000000000000000000000000000" +
+		"000000000000000000000000000000000000000000000000000000000000" +
+		"000000000000000000000000000000000000000000000000000000000000" +
+		"000000000000000000000000000000000000000000000000000000000000" +
+		"000000000000000000000000000000000000000000000000000000000000" +
+		"000000000000000000000000000000000000000000000000000000000000" +
+		"000000000000000000000000000000000000000000000000000000000000" +
+		"00000000000000000000000000000000000000000000000000000000" +
+		"")
+	files["fmt-5-signature-id-51.avi"] = ("" +
+		"524946460000000041564920000000000000000000000000000000000000" +
+		"00004c495354000000006864726c61766968000000000000000000000000" +
+		"00000000000000004c495354000000006d6f7669" +
+		"")
+	files["fmt-3-signature-id-18.gif"] = "4749463837613b"
+	files["badf00d.unknown"] = "badf00d"
+	for key, val := range files {
+		data, _ := hex.DecodeString(val)
+		skeletons[key] = &fstest.MapFile{Data: []byte(data)}
+	}
+}
+
 var pronomIDs = []pronomIdentificationTests{
+	pronomIdentificationTests{
+		"pronom",
+		"UNKNOWN",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"no match",
+	},
 	pronomIdentificationTests{
 		"pronom",
 		"fmt/1",
@@ -114,9 +161,10 @@ func TestPronom(t *testing.T) {
 
 	sf.Add(identifier)
 
-	testFiles := filepath.Join(DataPath, "testdata", "minimal-pronom-skeletons")
+	makeSkeletons()
+	skeletonFS := fstest.MapFS(skeletons)
 
-	testDirListing, err := os.ReadDir(testFiles)
+	testDirListing, err := skeletonFS.ReadDir(".")
 	if err != nil {
 		t.Fatalf("Error reading test files directory: %s", err)
 	}
@@ -125,18 +173,13 @@ func TestPronom(t *testing.T) {
 	results := make([]pronomIdentificationTests, 0)
 
 	for _, val := range testDirListing {
-		testFilePath := filepath.Join(testFiles, val.Name())
-		file, err := os.Open(testFilePath)
-		if err != nil {
-			t.Fatalf("Problem opening test file: %s", err)
-		}
-		defer file.Close()
-		res, _ := sf.Identify(file, testFilePath, "")
+		testFilePath := filepath.Join(".", val.Name())
+		reader, _ := skeletonFS.Open(val.Name())
+		res, _ := sf.Identify(reader, testFilePath, "")
 		result := res[0].Values()
 		if len(result) != resultLen {
 			t.Errorf("Result len: %d not %d", len(result), resultLen)
 		}
-
 		idResult := pronomIdentificationTests{
 			result[0], // identifier
 			result[1], // PUID
@@ -161,9 +204,11 @@ func TestPronom(t *testing.T) {
 
 	// Compare results on a result by result basis.
 	for idx, res := range results {
+		//t.Error(res)
 		if !reflect.DeepEqual(res, pronomIDs[idx]) {
 			t.Errorf("Results not equal for %s", res.puid)
 		}
 	}
+
 	resetMinimalParams()
 }
