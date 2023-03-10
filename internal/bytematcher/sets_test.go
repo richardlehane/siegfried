@@ -3,18 +3,18 @@ package bytematcher
 import (
 	"testing"
 
-	wac "github.com/richardlehane/match/fwac"
+	"github.com/richardlehane/match/dwac"
 	"github.com/richardlehane/siegfried/internal/bytematcher/frames"
 	"github.com/richardlehane/siegfried/internal/bytematcher/frames/tests"
 )
 
 var TestSeqSetBof = &seqSet{
-	set:           []wac.Seq{},
+	set:           []dwac.Seq{},
 	testTreeIndex: []int{},
 }
 
 var TestSeqSetEof = &seqSet{
-	set:           []wac.Seq{},
+	set:           []dwac.Seq{},
 	testTreeIndex: []int{},
 }
 
@@ -25,10 +25,10 @@ var TestFrameSetBof = &frameSet{
 
 func TestSeqSet(t *testing.T) {
 	s := &seqSet{}
-	c1 := wac.Seq{[]int64{0}, []wac.Choice{{[]byte{'a', 'p', 'p', 'l', 'e'}}}}
-	c2 := wac.Seq{[]int64{0}, []wac.Choice{{[]byte{'a', 'p', 'p', 'l', 'e'}}}}
-	c3 := wac.Seq{[]int64{-1}, []wac.Choice{{[]byte{'a', 'p', 'p', 'l', 'e'}}}}
-	c4 := wac.Seq{[]int64{-1}, []wac.Choice{{[]byte{'a', 'p', 'p', 'l', 'e', 's'}}}}
+	c1 := dwac.Seq{MaxOffsets: []int64{0}, Choices: []dwac.Choice{{[]byte{'a', 'p', 'p', 'l', 'e'}}}}
+	c2 := dwac.Seq{MaxOffsets: []int64{0}, Choices: []dwac.Choice{{[]byte{'a', 'p', 'p', 'l', 'e'}}}}
+	c3 := dwac.Seq{MaxOffsets: []int64{-1}, Choices: []dwac.Choice{{[]byte{'a', 'p', 'p', 'l', 'e'}}}}
+	c4 := dwac.Seq{MaxOffsets: []int64{-1}, Choices: []dwac.Choice{{[]byte{'a', 'p', 'p', 'l', 'e', 's'}}}}
 	s.add(c1, 0)
 	i := s.add(c2, 1)
 	if i != 0 {

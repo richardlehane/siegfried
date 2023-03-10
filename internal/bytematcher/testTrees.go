@@ -79,16 +79,6 @@ func loadTests(ls *persist.LoadSaver) []*testTree {
 	return ret
 }
 
-// KeyFrames returns a list of all KeyFrameIDs that are included in the test tree, including completes and incompletes
-func (t *testTree) keyFrames() []keyFrameID {
-	ret := make([]keyFrameID, len(t.complete), len(t.complete)+len(t.incomplete))
-	copy(ret, t.complete)
-	for _, v := range t.incomplete {
-		ret = append(ret, v.kf)
-	}
-	return ret
-}
-
 type followUp struct {
 	kf keyFrameID
 	l  bool // have a left test
@@ -195,7 +185,6 @@ func (t *testTree) add(kf keyFrameID, l []frames.Frame, r []frames.Frame) {
 	if fr {
 		t.right = appendTests(t.right, r, fu)
 	}
-	return
 }
 
 func (t *testNode) length() int {
@@ -221,8 +210,10 @@ func maxLength(ts []*testNode) int {
 	return max
 }
 
-/* Consider adding new calculated values for maxLeftIter and maxRightIter. These would use the new MaxMatches methods on the Frames
-   to determine the theoretical max times we'd have to iterate in order to generate all the possible followUp hits.
+/*
+Consider adding new calculated values for maxLeftIter and maxRightIter. These would use the new MaxMatches methods on the Frames
+
+	to determine the theoretical max times we'd have to iterate in order to generate all the possible followUp hits.
 */
 func maxMatches(ts []*testNode, l int) int {
 	if len(ts) == 0 || l == 0 {
@@ -298,6 +289,43 @@ func matchTestNodes(ts []*testNode, b []byte, rev bool) []followupMatch {
 	}
 	for _, t := range ts {
 		match(t, 0)
+	}
+	return ret
+}
+
+// KeyFrames returns a list of all KeyFrameIDs that are included in the test tree, including completes and incompletes
+// Used in scorer.go
+func (t *testTree) keyFrames() []keyFrameID {
+	ret := make([]keyFrameID, len(t.complete), len(t.complete)+len(t.incomplete))
+	copy(ret, t.complete)
+	for _, v := range t.incomplete {
+		ret = append(ret, v.kf)
+	}
+	return ret
+}
+
+// FilterTests returns indexes into the main slice of testTree, given a slice of keyframe IDs.
+// Used in scorer.go to select a subset of sequences and tests for dynamic matching.
+func filterTests(ts []*testTree, kfids []keyFrameID) []int {
+	ret := make([]int, 0, len(kfids)) // will return length always equal kfids (no multiple kfids could attach to a single tt, so may be less)? would it be faster to do the outer loop on kfids. Current each tt can onlya appear once
+outer:
+	for idx, tt := range ts {
+		for _, c := range tt.complete {
+			for _, k := range kfids {
+				if c == k {
+					ret = append(ret, idx)
+					continue outer
+				}
+			}
+		}
+		for _, ic := range tt.incomplete {
+			for _, k := range kfids {
+				if ic.kf == k {
+					ret = append(ret, idx)
+					continue outer
+				}
+			}
+		}
 	}
 	return ret
 }
