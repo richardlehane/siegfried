@@ -17,7 +17,7 @@ package bytematcher
 import (
 	"fmt"
 
-	wac "github.com/richardlehane/match/fwac"
+	"github.com/richardlehane/match/dwac"
 	"github.com/richardlehane/siegfried/internal/bytematcher/frames"
 	"github.com/richardlehane/siegfried/pkg/config"
 )
@@ -52,7 +52,7 @@ func (b *Matcher) addSignature(sig frames.Signature) error {
 		c := segment.Characterise()
 		switch c {
 		case frames.Unknown:
-			return fmt.Errorf("Zero length segment: signature %d, %v, segment %d", len(b.keyFrames), sig, i)
+			return fmt.Errorf("zero length segment: signature %d, %v, segment %d", len(b.keyFrames), sig, i)
 		case frames.BOFZero:
 			pos = frames.BOFLength(segment, config.Choices())
 		case frames.EOFZero:
@@ -67,7 +67,7 @@ func (b *Matcher) addSignature(sig frames.Signature) error {
 			case frames.EOFZero, frames.EOFWindow:
 				kf[i] = b.addToFrameSet(segment, i, b.eofFrames, len(segment)-1, len(segment))
 			default:
-				return fmt.Errorf("Variable offset segment encountered that can't be turned into a sequence: signature %d, segment %d", len(b.keyFrames), i)
+				return fmt.Errorf("variable offset segment encountered that can't be turned into a sequence: signature %d, segment %d", len(b.keyFrames), i)
 			}
 		} else {
 			switch c {
@@ -105,7 +105,13 @@ func (b *Matcher) addSignature(sig frames.Signature) error {
 	}
 	clstr.commit()
 	updatePositions(kf)
-	b.knownBOF, b.knownEOF = firstBOFandEOF(b.knownBOF, b.knownEOF, kf)
+	unknownBOF, unknownEOF := unknownBOFandEOF(len(b.keyFrames), kf)
+	if len(unknownBOF) > 0 {
+		b.unknownBOF = append(b.unknownBOF, unknownBOF...)
+	}
+	if len(unknownEOF) > 0 {
+		b.unknownBOF = append(b.unknownEOF, unknownEOF...)
+	}
 	b.maxBOF = maxBOF(b.maxBOF, kf)
 	b.maxEOF = maxEOF(b.maxEOF, kf)
 	b.keyFrames = append(b.keyFrames, kf)
@@ -116,7 +122,7 @@ type cluster struct {
 	rev    bool
 	kfs    []keyFrame
 	b      *Matcher
-	w      wac.Seq
+	w      dwac.Seq
 	ks     []int
 	lefts  [][]frames.Frame
 	rights [][]frames.Frame
@@ -136,7 +142,7 @@ func (c *cluster) add(seg frames.Signature, i int, pos frames.Position) keyFrame
 		for j := pos.End - 1; j >= pos.Start; j-- {
 			seqs = sequences(seg[j])
 		}
-		c.w.Choices = append([]wac.Choice{wac.Choice(seqs)}, c.w.Choices...)
+		c.w.Choices = append([]dwac.Choice{dwac.Choice(seqs)}, c.w.Choices...)
 		c.ks = append([]int{i}, c.ks...)
 		c.lefts = append([][]frames.Frame{left}, c.lefts...)
 		c.rights = append([][]frames.Frame{right}, c.rights...)
@@ -144,7 +150,7 @@ func (c *cluster) add(seg frames.Signature, i int, pos frames.Position) keyFrame
 		for _, f := range seg[pos.Start:pos.End] {
 			seqs = sequences(f)
 		}
-		c.w.Choices = append(c.w.Choices, wac.Choice(seqs))
+		c.w.Choices = append(c.w.Choices, dwac.Choice(seqs))
 		c.ks = append(c.ks, i)
 		c.lefts = append(c.lefts, left)
 		c.rights = append(c.rights, right)
@@ -188,7 +194,7 @@ func (c *cluster) commit() *cluster {
 }
 
 func (b *Matcher) addToFrameSet(segment frames.Signature, i int, fs *frameSet, start, end int) keyFrame {
-	k, left, right := toKeyFrame(segment, frames.Position{0, start, end})
+	k, left, right := toKeyFrame(segment, frames.Position{Length: 0, Start: start, End: end})
 	hi := fs.add(segment[start], len(b.tests))
 	if hi == len(b.tests) {
 		b.tests = append(b.tests, &testTree{})

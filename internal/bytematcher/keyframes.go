@@ -93,6 +93,27 @@ func (kf keyFrameID) String() string {
 	return fmt.Sprintf("[%d:%d]", kf[0], kf[1])
 }
 
+func loadKeyFrameIDs(ls *persist.LoadSaver) []keyFrameID {
+	l := ls.LoadSmallInt()
+	if l == 0 {
+		return nil
+	}
+	ret := make([]keyFrameID, l)
+	for i := range ret {
+		ret[i][0] = ls.LoadSmallInt()
+		ret[i][1] = ls.LoadSmallInt()
+	}
+	return ret
+}
+
+func saveKeyFrameIDs(ls *persist.LoadSaver, kfids []keyFrameID) {
+	ls.SaveSmallInt(len(kfids))
+	for _, kfid := range kfids {
+		ls.SaveSmallInt(kfid[0])
+		ls.SaveSmallInt(kfid[1])
+	}
+}
+
 type kfFilter struct {
 	idx int
 	fdx int
@@ -269,25 +290,23 @@ func updatePositions(ks []keyFrame) {
 	}
 }
 
-// for doing a running total of the firstBOF and firstEOF:
-func firstBOFandEOF(bof int, eof int, ks []keyFrame) (int, int) {
-	if bof < 0 {
-		return bof, eof
-	}
+// returns keyframeIDs of unexcludable wildcard BOF or EOF keyframe segments
+func unknownBOFandEOF(firstIdx int, ks []keyFrame) ([]keyFrameID, []keyFrameID) {
+	var bof, eof []keyFrameID
 	b := getMax(-1, func(t frames.OffType) bool { return t == frames.BOF }, ks, true)
-	if b < 0 || b > bof {
+	if b < 0 {
 		e := getMax(-1, func(t frames.OffType) bool { return t == frames.EOF }, ks, true)
 		if e < 0 {
-			if b < 0 {
-				return -1, -1
+			bof = make([]keyFrameID, 0, len(ks))
+			eof = make([]keyFrameID, 0, len(ks))
+			for idx, kf := range ks {
+				if kf.typ < frames.SUCC {
+					bof = append(bof, keyFrameID{firstIdx, idx})
+				} else {
+					eof = append(eof, keyFrameID{firstIdx, idx})
+				}
 			}
-			return b, eof
-		}
-		if e > eof {
-			if b < 0 || b > e {
-				return bof, e
-			}
-			return b, eof
+
 		}
 	}
 	return bof, eof
@@ -378,42 +397,6 @@ func oneEnough(id int, kfs []keyFrame) bool {
 		}
 	}
 	return true
-}
-
-// test two key frames (current and previous) to see if they are connected, and
-// can we "lock in" any previous matches?
-func checkRelatedKF(thisKf, prevKf keyFrame, thisOff, prevOff [2]int64) (bool, bool) {
-	switch thisKf.typ {
-	case frames.BOF:
-		return true, true
-	case frames.EOF, frames.SUCC:
-		if prevKf.typ == frames.SUCC && !(prevKf.seg.pMax == -1 && prevKf.seg.pMin == 0) {
-			dif := thisOff[0] - prevOff[0] - prevOff[1]
-			if dif > -1 {
-				if dif < prevKf.seg.pMin || (prevKf.seg.pMax > -1 && dif > prevKf.seg.pMax) {
-					return false, false
-				} else {
-					return true, false
-				}
-			}
-			return false, false
-		} else {
-			return true, true
-		}
-	default:
-		if thisKf.seg.pMax == -1 && thisKf.seg.pMin == 0 {
-			return true, true
-		}
-		dif := thisOff[0] - prevOff[0] - prevOff[1] // current offset, minus previous offset, minus previous length
-		if dif > -1 {
-			if dif < thisKf.seg.pMin || (thisKf.seg.pMax > -1 && dif > thisKf.seg.pMax) {
-				return false, false
-			} else {
-				return true, false
-			}
-		}
-		return false, false
-	}
 }
 
 func checkRelated(thisKf, prevKf, nextKf keyFrame, thisOff, prevOff [][2]int64) ([][2]int64, []int, bool) {

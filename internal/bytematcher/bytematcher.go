@@ -19,7 +19,7 @@ import (
 	"fmt"
 	"sync"
 
-	wac "github.com/richardlehane/match/fwac"
+	"github.com/richardlehane/match/dwac"
 	"github.com/richardlehane/siegfried/internal/bytematcher/frames"
 	"github.com/richardlehane/siegfried/internal/persist"
 	"github.com/richardlehane/siegfried/internal/priority"
@@ -36,17 +36,16 @@ type Matcher struct {
 	eofFrames  *frameSet
 	bofSeq     *seqSet
 	eofSeq     *seqSet
-	knownBOF   int
-	knownEOF   int
+	unknownBOF []keyFrameID // slice of IDs for wild segments that can't be excluded by other segments in a signature at defined offsets
+	unknownEOF []keyFrameID // ditto but for EOF wild segments (of which PRONOM has none)
 	maxBOF     int
 	maxEOF     int
 	priorities *priority.Set
 	// remaining fields are not persisted
-	bmu    *sync.Once
-	emu    *sync.Once
-	bAho   wac.Wac
-	eAho   wac.Wac
-	lowmem bool
+	bmu  *sync.Once
+	emu  *sync.Once
+	bAho *dwac.Dwac
+	eAho *dwac.Dwac
 }
 
 // SignatureSet for a bytematcher is a slice of frames.Signature.
@@ -64,8 +63,8 @@ func Load(ls *persist.LoadSaver) core.Matcher {
 		eofFrames:  loadFrameSet(ls),
 		bofSeq:     loadSeqSet(ls),
 		eofSeq:     loadSeqSet(ls),
-		knownBOF:   ls.LoadInt(),
-		knownEOF:   ls.LoadInt(),
+		unknownBOF: loadKeyFrameIDs(ls),
+		unknownEOF: loadKeyFrameIDs(ls),
 		maxBOF:     ls.LoadInt(),
 		maxEOF:     ls.LoadInt(),
 		priorities: priority.Load(ls),
@@ -88,8 +87,8 @@ func Save(c core.Matcher, ls *persist.LoadSaver) {
 	b.eofFrames.save(ls)
 	b.bofSeq.save(ls)
 	b.eofSeq.save(ls)
-	ls.SaveInt(b.knownBOF)
-	ls.SaveInt(b.knownEOF)
+	saveKeyFrameIDs(ls, b.unknownBOF)
+	saveKeyFrameIDs(ls, b.unknownEOF)
 	ls.SaveInt(b.maxBOF)
 	ls.SaveInt(b.maxEOF)
 	b.priorities.Save(ls)
@@ -110,7 +109,8 @@ func (se sigErrors) Error() string {
 // The priority list should be of equal length to the signatures, or nil (if no priorities are to be set).
 //
 // Example:
-//   m, n, err := Add(bm, []frames.Signature{frames.Signature{frames.NewFrame(frames.BOF, patterns.Sequence{'p','d','f'}, 0, 0)}}, nil)
+//
+//	m, n, err := Add(bm, []frames.Signature{frames.Signature{frames.NewFrame(frames.BOF, patterns.Sequence{'p','d','f'}, 0, 0)}}, nil)
 func Add(c core.Matcher, ss core.SignatureSet, priorities priority.List) (core.Matcher, int, error) {
 	var b *Matcher
 	if c == nil {
@@ -128,7 +128,7 @@ func Add(c core.Matcher, ss core.SignatureSet, priorities priority.List) (core.M
 	}
 	sigs, ok := ss.(SignatureSet)
 	if !ok {
-		return nil, -1, fmt.Errorf("Byte matcher: can't convert signature set to BM signature set")
+		return nil, -1, fmt.Errorf("byte matcher: can't convert signature set to BM signature set")
 	}
 	if len(sigs) == 0 {
 		return c, len(b.keyFrames), nil // return same matcher as given (may be nil) if no signatures to add
@@ -162,12 +162,13 @@ func Add(c core.Matcher, ss core.SignatureSet, priorities priority.List) (core.M
 // Results are passed on the returned channel.
 //
 // Example:
-//   ret := bm.Identify("", buf)
-//   for v := range ret {
-//     if v.Index() == 0 {
-//       fmt.Print("Success! It is signature 0!")
-//     }
-//   }
+//
+//	ret := bm.Identify("", buf)
+//	for v := range ret {
+//	  if v.Index() == 0 {
+//	    fmt.Print("Success! It is signature 0!")
+//	  }
+//	}
 func (b *Matcher) Identify(name string, sb *siegreader.Buffer, hints ...core.Hint) (chan core.Result, error) {
 	quit, ret := make(chan struct{}), make(chan core.Result)
 	go b.identify(sb, quit, ret, hints...)
@@ -200,8 +201,8 @@ func (b *Matcher) String() string {
 	str += fmt.Sprintf("Right Tests: %v\n", r)
 	str += fmt.Sprintf("Maximum Left Distance: %v\n", ml)
 	str += fmt.Sprintf("Maximum Right Distance: %v\n", mr)
-	str += fmt.Sprintf("Known BOF distance: %v\n", b.knownBOF)
-	str += fmt.Sprintf("Known EOF distance: %v\n", b.knownEOF)
+	str += fmt.Sprintf("Number of unexcludable wild BOF segments: %v\n", len(b.unknownBOF))
+	str += fmt.Sprintf("Number of unexcludable wild EOF segments: %v\n", len(b.unknownEOF))
 	str += fmt.Sprintf("Maximum BOF Distance: %v\n", b.maxBOF)
 	str += fmt.Sprintf("Maximum EOF Distance: %v\n", b.maxEOF)
 	str += fmt.Sprintf("priorities: %v\n", b.priorities)
@@ -248,9 +249,4 @@ func (b *Matcher) DescribeKeyFrames(i int) []string {
 
 func (b *Matcher) KeyFramesLen() int {
 	return len(b.keyFrames)
-}
-
-// SetLowMem instructs the Aho Corasick search tree to be built with a low memory opt (runs slightly slower than regular).
-func (b *Matcher) SetLowMem() {
-	b.lowmem = true
 }

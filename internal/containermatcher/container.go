@@ -298,7 +298,6 @@ func (ct *cTest) commit() error {
 	}
 	var err error
 	ct.bm, _, err = bytematcher.Add(ct.bm, bytematcher.SignatureSet(ct.buffer), nil) // don't need to add priorities
-	ct.bm.(*bytematcher.Matcher).SetLowMem()
 	ct.buffer = nil
 	return err
 }

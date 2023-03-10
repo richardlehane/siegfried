@@ -18,7 +18,7 @@ import (
 	"bytes"
 	"io"
 
-	wac "github.com/richardlehane/match/fwac"
+	wac "github.com/richardlehane/match/dwac"
 	"github.com/richardlehane/siegfried/internal/bytematcher/frames"
 	"github.com/richardlehane/siegfried/internal/persist"
 	"github.com/richardlehane/siegfried/internal/siegreader"
@@ -121,6 +121,36 @@ func (ss *seqSet) add(seq wac.Seq, hi int) int {
 	ss.set = append(ss.set, seq)
 	ss.testTreeIndex = append(ss.testTreeIndex, hi)
 	return hi
+}
+
+// Reduce creates a reduced seqSet based on limited slice of test tree indexes.
+// Used for dynamic matching.
+func (ss *seqSet) reduce(tti []int) *seqSet {
+	uniq := make(map[int]bool)
+	ret := &seqSet{}
+	ret.testTreeIndex = make([]int, 0, len(tti))
+	ret.set = make([]wac.Seq, 0, len(tti))
+outer:
+	for _, v := range tti {
+		for idx, w := range ss.testTreeIndex {
+			if w <= v && v-w < len(ss.set[idx].Choices) {
+				if !uniq[w] {
+					uniq[w] = true
+					ret.testTreeIndex = append(ret.testTreeIndex, v)
+					if w == v {
+						ret.set = append(ret.set, ss.set[idx])
+					} else {
+						ret.set = append(ret.set, wac.Seq{
+							MaxOffsets: ss.set[idx].MaxOffsets[v-w:],
+							Choices:    ss.set[idx].Choices[v-w:],
+						})
+					}
+				}
+				continue outer
+			}
+		}
+	}
+	return ret
 }
 
 // Some signatures cannot be represented by simple byte sequences. The first or last frames from these sequences are added to the BOF or EOF frame sets.

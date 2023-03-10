@@ -2,6 +2,10 @@ github.com/richardlehane/characterize v1.0.0 h1:2MMnKFqYd+hsKpQrPkc5JjbcIzVBIfvS
 github.com/richardlehane/characterize v1.0.0/go.mod h1:9mhxzxtWkXoLQpkg+gt7ioK6//+3hrsv3VHkbj8kbuQ=
 github.com/richardlehane/match v1.0.2 h1:fWTlubvGpci2GFuDcEVvokmTTqn6Pk/GJq7W27i/9yU=
 github.com/richardlehane/match v1.0.2/go.mod h1:Vbb1gPhiebfU8sCtwqWzZrXcc13r9HrVkInLhIQDe+E=
+github.com/richardlehane/match v1.0.3 h1:oEjb5myV1johgi9NGXV1xp7caAlhqLi0PqFvnKhTR1Y=
+github.com/richardlehane/match v1.0.3/go.mod h1:Vz0T28BYeZrU9h54iHnyjDfhVlKvn7XB7smnVripJME=
+github.com/richardlehane/match v1.0.4 h1:sUgOoSRcLZWJIvw6JT23xMXDgoeO+r26lBbfw15LNBE=
+github.com/richardlehane/match v1.0.4/go.mod h1:Vz0T28BYeZrU9h54iHnyjDfhVlKvn7XB7smnVripJME=
 github.com/richardlehane/mscfb v1.0.4 h1:WULscsljNPConisD5hR0+OyZjwK46Pfyr6mPu5ZawpM=
 github.com/richardlehane/mscfb v1.0.4/go.mod h1:YzVpcZg9czvAuhk9T+a3avCpcFPMUWm7gK3DypaEsUk=
 github.com/richardlehane/msoleps v1.0.1/go.mod h1:BWev5JBpU9Ko2WAgmZEuiz4/u3ZYTKbjLycmwiWUfWg=
