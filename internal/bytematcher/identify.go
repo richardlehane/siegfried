@@ -105,8 +105,8 @@ func (b *Matcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan co
 			if er.Index[0] == -1 { // handle EOF wilds (should be none!)
 				incoming <- strike{-1, -1, er.Offset, 0, true, false} // send resume signal
 				kfids := <-resume
-				dynSet := b.eofSeq.reduce(filterTests(b.tests, kfids))
-				erchan <- dynSet.set
+				dynSet := b.eofSeq.indexes(filterTests(b.tests, kfids))
+				erchan <- dynSet
 				continue
 			}
 			if config.Debug() {
@@ -129,13 +129,13 @@ func (b *Matcher) identify(buf *siegreader.Buffer, quit chan struct{}, r chan co
 	// Finally, finish BOF scan looking for wilds only
 	incoming <- strike{-1, -1, bofOffset, 0, false, false} // send resume signal
 	kfids := <-resume
-	dynSet := b.bofSeq.reduce(filterTests(b.tests, kfids))
-	rchan <- dynSet.set
+	dynSet := b.bofSeq.indexes(filterTests(b.tests, kfids))
+	rchan <- dynSet
 	for br := range bchan {
 		if config.Debug() {
-			fmt.Fprintln(config.Out(), strike{dynSet.testTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false})
+			fmt.Fprintln(config.Out(), strike{b.bofSeq.testTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false})
 		}
-		incoming <- strike{dynSet.testTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false}
+		incoming <- strike{b.bofSeq.testTreeIndex[br.Index[0]], br.Index[1], br.Offset, br.Length, false, false}
 	}
 	close(incoming)
 }
