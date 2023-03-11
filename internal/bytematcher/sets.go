@@ -17,7 +17,9 @@ package bytematcher
 import (
 	"bytes"
 	"io"
+	"sort"
 
+	"github.com/richardlehane/match/dwac"
 	wac "github.com/richardlehane/match/dwac"
 	"github.com/richardlehane/siegfried/internal/bytematcher/frames"
 	"github.com/richardlehane/siegfried/internal/persist"
@@ -125,26 +127,17 @@ func (ss *seqSet) add(seq wac.Seq, hi int) int {
 
 // Reduce creates a reduced seqSet based on limited slice of test tree indexes.
 // Used for dynamic matching.
-func (ss *seqSet) reduce(tti []int) *seqSet {
+func (ss *seqSet) indexes(tti []int) []dwac.SeqIndex {
+	sort.Ints(tti)
 	uniq := make(map[int]bool)
-	ret := &seqSet{}
-	ret.testTreeIndex = make([]int, 0, len(tti))
-	ret.set = make([]wac.Seq, 0, len(tti))
+	ret := make([]dwac.SeqIndex, 0, len(tti))
 outer:
 	for _, v := range tti {
 		for idx, w := range ss.testTreeIndex {
 			if w <= v && v-w < len(ss.set[idx].Choices) {
 				if !uniq[w] {
+					ret = append(ret, dwac.SeqIndex{idx, v - w})
 					uniq[w] = true
-					ret.testTreeIndex = append(ret.testTreeIndex, v)
-					if w == v {
-						ret.set = append(ret.set, ss.set[idx])
-					} else {
-						ret.set = append(ret.set, wac.Seq{
-							MaxOffsets: ss.set[idx].MaxOffsets[v-w:],
-							Choices:    ss.set[idx].Choices[v-w:],
-						})
-					}
 				}
 				continue outer
 			}

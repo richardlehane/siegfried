@@ -6,6 +6,8 @@ github.com/richardlehane/match v1.0.3 h1:oEjb5myV1johgi9NGXV1xp7caAlhqLi0PqFvnKh
 github.com/richardlehane/match v1.0.3/go.mod h1:Vz0T28BYeZrU9h54iHnyjDfhVlKvn7XB7smnVripJME=
 github.com/richardlehane/match v1.0.4 h1:sUgOoSRcLZWJIvw6JT23xMXDgoeO+r26lBbfw15LNBE=
 github.com/richardlehane/match v1.0.4/go.mod h1:Vz0T28BYeZrU9h54iHnyjDfhVlKvn7XB7smnVripJME=
+github.com/richardlehane/match v1.0.5 h1:+tuXp28xaIPsvKbhHyuivce9qMEfE8nP9d0wSxJef9o=
+github.com/richardlehane/match v1.0.5/go.mod h1:Vz0T28BYeZrU9h54iHnyjDfhVlKvn7XB7smnVripJME=
 github.com/richardlehane/mscfb v1.0.4 h1:WULscsljNPConisD5hR0+OyZjwK46Pfyr6mPu5ZawpM=
 github.com/richardlehane/mscfb v1.0.4/go.mod h1:YzVpcZg9czvAuhk9T+a3avCpcFPMUWm7gK3DypaEsUk=
 github.com/richardlehane/msoleps v1.0.1/go.mod h1:BWev5JBpU9Ko2WAgmZEuiz4/u3ZYTKbjLycmwiWUfWg=
