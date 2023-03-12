@@ -128,7 +128,11 @@ func inspect(p Parseable, ids ...string) (string, error) {
 		lines := make([]string, 0, 10)
 		info, ok := p.Infos()[id]
 		if ok {
-			lines = append(lines, strings.ToUpper(info.String()+" ("+id+")"))
+			if strings.Contains(info.String(), "\n") { // for wikidata output
+				lines = append(lines, id, info.String(), "Signatures:")
+			} else {
+				lines = append(lines, strings.ToUpper(info.String()+" ("+id+")"))
+			}
 			if has(gids, id) {
 				lines = append(lines, "globs: "+strings.Join(get(gids, gs, id), ", "))
 			}
