@@ -160,8 +160,11 @@ func makeSets() error {
 
 func makeWikidata() error {
 	config.SetHome(*genhome)
-	wikidataOpts := []config.Option{config.SetWikidataNamespace()}
-	wikidataOpts = append(wikidataOpts, config.SetWikidataNoPRONOM())
+	wikidataOpts := []config.Option{
+		config.Clear(),
+		config.SetWikidataNamespace(),
+		config.SetWikidataNoPRONOM(),
+	}
 	w, err := wikidata.New(wikidataOpts...)
 	if err != nil {
 		return err

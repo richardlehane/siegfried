@@ -311,6 +311,7 @@ func IsArchive(id string) Archive {
 func Clear() func() private {
 	return func() private {
 		identifier.name = ""
+		identifier.extend = nil
 		loc.fdd = ""
 		mimeinfo.mi = ""
 		return private{}
