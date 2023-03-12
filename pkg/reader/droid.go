@@ -29,7 +29,7 @@ import (
 const droidTime = "2006-01-02T15:04:05"
 
 var (
-	droidIDs      = [][2]string{{"droid", ""}}
+	droidIDs      = [][2]string{{"pronom", ""}}
 	droidFields   = [][]string{{"ns", "id", "format", "version", "mime", "basis", "warning"}}
 	droidNpFields = [][]string{{"ns", "id", "warning"}}
 )

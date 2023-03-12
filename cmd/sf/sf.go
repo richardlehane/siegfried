@@ -16,6 +16,7 @@ package main
 
 import (
 	"bufio"
+	"errors"
 	"flag"
 	"fmt"
 	"hash"
@@ -283,8 +284,11 @@ func replayFile(path string, ctxts chan *context, w writer.Writer) error {
 	if err != nil {
 		return fmt.Errorf("[FATAL] error reading results file %s; got %v", path, err)
 	}
+	hd := rdr.Head()
+	if *droido && (len(hd.Identifiers) != 1 || len(hd.Fields[0]) != 7) {
+		return errors.New("[FATAL] DROID output is limited to signature files with a single PRONOM identifier")
+	}
 	firstReplay.Do(func() {
-		hd := rdr.Head()
 		w.Head(hd.SignaturePath, hd.Scanned, hd.Created, hd.Version, hd.Identifiers, hd.Fields, hd.HashHeader)
 	})
 	var rf reader.File
@@ -427,7 +431,7 @@ func main() {
 	case *jsono:
 		w = writer.JSON(os.Stdout)
 	case *droido:
-		if len(s.Fields()) != 1 || len(s.Fields()[0]) != 7 {
+		if !*replay && (len(s.Fields()) != 1 || len(s.Fields()[0]) != 7) {
 			close(ctxts)
 			log.Fatalln("[FATAL] DROID output is limited to signature files with a single PRONOM identifier")
 		}
