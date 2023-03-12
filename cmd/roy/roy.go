@@ -152,6 +152,7 @@ var (
 	choices       = build.Int("choices", config.Choices(), "define a maximum number of choices for segmentation")
 	cost          = build.Int("cost", config.Cost(), "define a maximum tolerable cost in the worst case for segmentation (overrides distance/range/choices)")
 	repetition    = build.Int("repetition", config.Repetition(), "define a maximum tolerable repetition in a segment, used in combination with cost to determine segmentation")
+	quiet         = build.Bool("quiet", false, "lower verbosity level of logging output when building signatures")
 
 	// HARVEST
 	harvest                    = flag.NewFlagSet("harvest", flag.ExitOnError)
@@ -431,6 +432,9 @@ the DROID signature file you should also include a regular signature extension
 	}
 	if *repetition != config.Repetition() {
 		opts = append(opts, config.SetRepetition(*repetition))
+	}
+	if *quiet == config.Verbose() {
+		opts = append(opts, config.SetVerbose(!*quiet)) // do the opposite, because the flag is quiet and the setting is verbose!
 	}
 	// inspect options
 	if *inspectDroid != config.Droid() {

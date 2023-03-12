@@ -22,7 +22,6 @@ package wikidata
 
 import (
 	"fmt"
-	"log"
 	"strings"
 	"time"
 
@@ -144,7 +143,7 @@ func (f formatInfo) String() string {
 // Infos provides a mechanism for a placing any other information about
 // formats that you'd like to talk about in an identifier.
 func (wdd wikidataDefinitions) Infos() parseableFormatInfo {
-	log.Printf(
+	logf(
 		"Roy (Wikidata): In Infos()... length formats: '%d' no-pronom: '%t'\n",
 		len(wdd.formats),
 		config.GetWikidataNoPRONOM(),
