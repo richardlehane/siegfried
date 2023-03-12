@@ -19,7 +19,6 @@ package wikidata
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"strings"
 	"time"
 
@@ -58,12 +57,11 @@ var sourcePuids []string
 // New will also update its identification information with provenance-like
 // info. It will enable signature extensions to be added by the utility, and
 // enables configuration to be applied as well.
-//
 func New(opts ...config.Option) (core.Identifier, error) {
 	for _, v := range opts {
 		v()
 	}
-	log.Println("Roy (Wikidata): Congratulations: doing something with the Wikidata identifier package!")
+	logln("Roy (Wikidata): Congratulations: doing something with the Wikidata identifier package!")
 	wikidata, puids, err := newWikidata()
 	if err != nil {
 		return nil, fmt.Errorf("Error in Wikidata New(): %w", err)
@@ -97,15 +95,14 @@ func (i *Identifier) Recorder() core.Recorder {
 // multiple, per file. The identification to the user looks something like as
 // follows:
 //
-//  - ns      : 'wikidata'
-//    id      : 'Q1343830'
-//    format  : 'Executable and Linkable Format'
-//    URI     : 'http://www.wikidata.org/entity/Q1343830'
-//    mime    :
-//    basis   : 'byte match at 0, 4 (signature 1/5); byte match at 0, 7 (signature 4/5)'
-//    source  : 'Gary Kessler''s File Signature Table (source date: 2017-08-08) PRONOM (Official (fmt/689))'
-//    warning :
-//
+//   - ns      : 'wikidata'
+//     id      : 'Q1343830'
+//     format  : 'Executable and Linkable Format'
+//     URI     : 'http://www.wikidata.org/entity/Q1343830'
+//     mime    :
+//     basis   : 'byte match at 0, 4 (signature 1/5); byte match at 0, 7 (signature 4/5)'
+//     source  : 'Gary Kessler”s File Signature Table (source date: 2017-08-08) PRONOM (Official (fmt/689))'
+//     warning :
 type Identification struct {
 	Namespace  string         // Namespace of the identifier, e.g. this will be the 'wikidata' namespace.
 	ID         string         // QID of the file format according to Wikidata.
@@ -133,21 +130,20 @@ func (id Identification) String() string {
 // Fields describes a portion of YAML that will be output by Siegfried's
 // identifier for an individual match. E.g.
 //
-//      matches  :
-//        - ns      : 'wikidata'
-//          id      : 'Q475488'
-//          format  : 'EPUB'
-//          ...     : '...'
-//          ...     : '...'
-//          custom  : 'your custom field'
-//          custom  : '...'
+//	matches  :
+//	  - ns      : 'wikidata'
+//	    id      : 'Q475488'
+//	    format  : 'EPUB'
+//	    ...     : '...'
+//	    ...     : '...'
+//	    custom  : 'your custom field'
+//	    custom  : '...'
 //
 // siegfried/pkg/writer/writer.go normalizes the output of this field
 // grouping so that if it sees certain fields, e.g. namespace, then it
 // can convert that to something anticipated by the consumer,
 //
-//      e.g. namespace => becomes => ns
-//
+//	e.g. namespace => becomes => ns
 func (i *Identifier) Fields() []string {
 	// Result fields. Basis is used by Wikidata to reflect both the
 	// details of the signature used to match (or other identifiers) as

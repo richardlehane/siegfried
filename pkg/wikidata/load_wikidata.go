@@ -69,6 +69,19 @@ const (
 	referenceField   = "referenceLabel"
 )
 
+// helper functions to control logging output
+// Verbose output is default for roy but not when running tests etc.
+func logf(format string, v ...any) {
+	if config.Verbose() {
+		log.Printf(format, v...)
+	}
+}
+func logln(v ...any) {
+	if config.Verbose() {
+		log.Println(v...)
+	}
+}
+
 // getID returns the QID from the IRI of the record that we're
 // processing.
 func getID(wikidataURI string) string {
@@ -127,13 +140,11 @@ func customEndpoint(jsonFile []byte) (bool, error) {
 // identifier to be consumed by Siegfried.
 func openWikidata() (wikiItemProv, error) {
 	path := config.WikidataDefinitionsPath()
-	log.Printf(
-		"Roy (Wikidata): Opening Wikidata definitions: %s\n", path,
-	)
+	logf("Roy (Wikidata): Opening Wikidata definitions: %s\n", path)
 	jsonFile, err := ioutil.ReadFile(path)
 	if err != nil {
-		fmt.Errorf(
-			"Cannot open Wikidata file (check, or try harvest again): %w",
+		return wikiItemProv{}, fmt.Errorf(
+			"cannot open Wikidata file (check, or try harvest again): %w",
 			err,
 		)
 	}
@@ -141,23 +152,23 @@ func openWikidata() (wikiItemProv, error) {
 	if err != nil {
 		return wikiItemProv{}, err
 	}
-	if custom == true {
-		log.Println("Roy (Wikidata): Using a custom endpoint for results")
+	if custom {
+		logln("Roy (Wikidata): Using a custom endpoint for results")
 		err := setCustomWikibaseProperties()
 		if err != nil {
-			return wikiItemProv{}, fmt.Errorf("Setting custom Wikibase properties: %w", err)
+			return wikiItemProv{}, fmt.Errorf("setting custom Wikibase properties: %w", err)
 		}
-		log.Printf(
+		logf(
 			"Roy (Wikidata): Custom PRONOM encoding loaded; config: '%s' => local: '%s'",
 			config.WikibasePronom(),
 			converter.GetPronomEncoding(),
 		)
-		log.Printf(
+		logf(
 			"Roy (Wikidata): Custom BOF loaded; config: '%s' => local: '%s'",
 			config.WikibaseBOF(),
 			relativeBOF,
 		)
-		log.Printf(
+		logf(
 			"Roy (Wikidata): Custom EOF loaded; config: '%s' => local: '%s'",
 			config.WikibaseEOF(),
 			relativeEOF,
@@ -166,8 +177,8 @@ func openWikidata() (wikiItemProv, error) {
 	var sparqlReport spargo.WikiProv
 	err = json.Unmarshal(jsonFile, &sparqlReport)
 	if err != nil {
-		fmt.Errorf(
-			"Cannot open Wikidata file: %w",
+		return wikiItemProv{}, fmt.Errorf(
+			"cannot open Wikidata file: %w",
 			err,
 		)
 	}
@@ -259,12 +270,12 @@ const (
 // setCustomWikibaseProperties sets the properties needed by Roy to
 // parse the results coming from a custom Wikibase endpoint.
 func setCustomWikibaseProperties() error {
-	log.Println("Roy (Wikidata): Looking for existence of wikibase.json in Siegfried home")
+	logln("Roy (Wikidata): Looking for existence of wikibase.json in Siegfried home")
 	wikibasePropsPath := config.WikibasePropsPath()
 	propsFile, err := os.ReadFile(wikibasePropsPath)
 	if os.IsNotExist(err) {
 		return fmt.Errorf(
-			"Cannot find file '%s' in '%s': %w",
+			"cannot find file '%s' in '%s': %w",
 			wikibasePropsPath,
 			config.WikidataHome(),
 			err,
@@ -272,7 +283,7 @@ func setCustomWikibaseProperties() error {
 	}
 	if err != nil {
 		return fmt.Errorf(
-			"A different error handling '%s' has occurred: %w",
+			"a different error handling '%s' has occurred: %w",
 			wikibasePropsPath,
 			err,
 		)
@@ -296,7 +307,7 @@ func setCustomWikibaseProperties() error {
 	}
 	GetPronomURIFromConfig()
 	GetBOFandEOFFromConfig()
-	log.Printf(
+	logf(
 		"Roy (Wikidata): Properties set for PRONOM: '%s', BOF: '%s', EOF: '%s'",
 		pronom,
 		bof,

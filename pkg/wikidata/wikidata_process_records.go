@@ -20,7 +20,6 @@ package wikidata
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/richardlehane/siegfried/pkg/wikidata/internal/mappings"
 	"github.com/ross-spencer/wikiprov/pkg/spargo"
@@ -79,7 +78,7 @@ func newRecord(wikidataItem map[string]spargo.Item, provenance wikiProv, addSigs
 	}
 	perma, prov, err := getProvenance(wd.ID, provenance)
 	if err != nil {
-		log.Println("Roy (Wikidata):", err)
+		logln("Roy (Wikidata):", err) // Q. (RL) Is it safe to ignore this error and just log it? Or should this func return an error?
 	}
 	wd.Permalink, wd.RevisionHistory = perma, prov
 	return wd

@@ -21,8 +21,6 @@
 package wikidata
 
 import (
-	"log"
-
 	"github.com/richardlehane/siegfried/internal/identifier"
 	"github.com/richardlehane/siegfried/pkg/config"
 	"github.com/richardlehane/siegfried/pkg/pronom"
@@ -57,11 +55,11 @@ func newWikidata() (identifier.Parseable, []string, error) {
 		return nil, []string{}, err
 	}
 	if config.GetWikidataNoPRONOM() {
-		log.Println(
+		logln(
 			"Roy (Wikidata): Not building identifiers set from PRONOM",
 		)
 	} else {
-		log.Println(
+		logln(
 			"Roy (Wikidata): Building identifiers set from PRONOM",
 		)
 		wikiParseable, err = pronom.NewPronom()
