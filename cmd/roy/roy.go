@@ -264,7 +264,8 @@ func inspectFmts(fmts []string) error {
 			opts = append(opts, config.SetLOC(""))
 		}
 		id, err = loc.New(opts...)
-	} else if *inspectWikidata == true {
+	} else if strings.HasPrefix(fs[0], "Q") || *inspectWikidata {
+		opts = append(opts, config.SetVerbose(false)) // only print fmt information
 		id, err = wd.New(opts...)
 	} else {
 		if !*inspectReports {

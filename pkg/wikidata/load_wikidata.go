@@ -230,12 +230,8 @@ func createMappingFromWikidata() ([]wikidataRecord, error) {
 	summary, wikidataMapping := processWikidata(itemProv)
 	analyseWikidataRecords(wikidataMapping, &summary)
 	reportMapping := createReportMapping(wikidataMapping)
-	// Output our summary before leaving the function. Output is to
-	// stdout because it "pollutes" the Roy "inspect" call otherwise.
-	// If an "inspect" flag setter/getter is implemented in
-	// siegfried/pkg/config/wikidata.go then more flexibility might be
-	// possible.
-	fmt.Fprintf(os.Stderr, "%s\n", summary)
+	// Log summary before leaving the function.
+	logf("%s\n", summary)
 	return reportMapping, nil
 }
 

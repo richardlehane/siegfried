@@ -129,7 +129,7 @@ func (f formatInfo) String() string {
 		sources = strings.Join(f.sources, " ")
 	}
 	return fmt.Sprintf(
-		"---\nFormat info: Name: '%s'\nMIMEType: '%s'\nSources: '%s' \nRevision History: %s\n---\n",
+		"Format info: Name: '%s'\nMIMEType: '%s'\nSources: '%s' \nRevision History: %s\n---\n",
 		f.name,
 		f.mime,
 		sources,
