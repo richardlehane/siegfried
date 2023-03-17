@@ -338,7 +338,7 @@ func main() {
 	}
 	// handle -update
 	if *update || *updateShort {
-		msg, err := updateSigs(usig, flag.Args())
+		_, msg, err := updateSigs(usig, flag.Args())
 		if err != nil {
 			log.Fatalf("[FATAL] failed to update signature file, %v", err)
 		}

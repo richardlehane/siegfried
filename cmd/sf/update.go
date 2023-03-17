@@ -95,52 +95,52 @@ func location(base, sig string, args []string) string {
 	return base
 }
 
-func updateSigs(sig string, args []string) (string, error) {
+func updateSigs(sig string, args []string) (bool, string, error) {
 	url, _, _ := config.UpdateOptions()
 	if url == "" {
-		return "Update is not available for this distribution of siegfried", nil
+		return false, "Update is not available for this distribution of siegfried", nil
 	}
 	response, err := getHttp(location(url, sig, args))
 	if err != nil {
-		return "", err
+		return false, "", err
 	}
 	var u Update
 	if err := json.Unmarshal(response, &u); err != nil {
-		return "", err
+		return false, "", err
 	}
 	version := config.Version()
 	if version[0] < u.Version[0] || (version[0] == u.Version[0] && version[1] < u.Version[1]) || // if the version is out of date
 		u.Version == [3]int{0, 0, 0} || u.Created == "" || u.Size == 0 || u.Path == "" { // or if the unmarshalling hasn't worked and we have blank values
-		return "Your version of siegfried is out of date; please install latest from http://www.itforarchivists.com/siegfried before continuing.", nil
+		return false, "Your version of siegfried is out of date; please install latest from http://www.itforarchivists.com/siegfried before continuing.", nil
 	}
 	if uptodate(u.Created, u.Hash, u.Size) {
-		return "You are already up to date!", nil
+		return false, "You are already up to date!", nil
 	}
 	// this hairy bit of golang exception handling is thanks to Ross! :)
 	if _, err = os.Stat(config.Home()); err != nil {
 		if os.IsNotExist(err) {
 			err = os.MkdirAll(config.Home(), os.ModePerm)
 			if err != nil {
-				return "", fmt.Errorf("Siegfried: cannot create home directory %s, %v", config.Home(), err)
+				return false, "", fmt.Errorf("Siegfried: cannot create home directory %s, %v", config.Home(), err)
 			}
 		} else {
-			return "", fmt.Errorf("Siegfried: error opening directory %s, %v", config.Home(), err)
+			return false, "", fmt.Errorf("Siegfried: error opening directory %s, %v", config.Home(), err)
 		}
 	}
 	fmt.Println("... downloading latest signature file ...")
 	response, err = getHttp(u.Path)
 	if err != nil {
-		return "", fmt.Errorf("Siegfried: error retrieving %s.\nThis may be a network or firewall issue. See https://github.com/richardlehane/siegfried/wiki/Getting-started for manual instructions.\nSystem error: %v", config.SignatureBase(), err)
+		return false, "", fmt.Errorf("Siegfried: error retrieving %s.\nThis may be a network or firewall issue. See https://github.com/richardlehane/siegfried/wiki/Getting-started for manual instructions.\nSystem error: %v", config.SignatureBase(), err)
 	}
 	if !same(response, u.Size, u.Hash) {
-		return "", fmt.Errorf("Siegfried: error retrieving %s; SHA256 hash of response doesn't match %s", config.SignatureBase(), u.Hash)
+		return false, "", fmt.Errorf("Siegfried: error retrieving %s; SHA256 hash of response doesn't match %s", config.SignatureBase(), u.Hash)
 	}
 	err = ioutil.WriteFile(config.Signature(), response, os.ModePerm)
 	if err != nil {
-		return "", fmt.Errorf("Siegfried: error writing to directory, %v", err)
+		return false, "", fmt.Errorf("Siegfried: error writing to directory, %v", err)
 	}
 	fmt.Printf("... writing %s ...\n", config.Signature())
-	return "Your signature file has been updated", nil
+	return true, "Your signature file has been updated", nil
 }
 
 func getHttp(url string) ([]byte, error) {
