@@ -494,7 +494,7 @@ func main() {
 		} else {
 			globs, err := filepath.Glob(v)
 			if err != nil {
-				log.Fatalln(fmt.Sprintf("[FATAL] bad glob pattern: %e", err))
+				log.Fatalln(fmt.Sprintf("[FATAL] bad glob pattern: %s", err))
 			}
 			for _, glob := range globs {
 				err = identify(ctxts, glob, "", *coe, *nr, d, getCtx)
