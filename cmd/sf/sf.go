@@ -23,6 +23,7 @@ import (
 	"io"
 	"log"
 	"os"
+	"path/filepath"
 	"sync"
 	"time"
 
@@ -491,7 +492,13 @@ func main() {
 			ctxts <- ctx
 			identifyRdr(os.Stdin, ctx, ctxts, getCtx)
 		} else {
-			err = identify(ctxts, v, "", *coe, *nr, d, getCtx)
+			globs, err := filepath.Glob(v)
+			if err != nil {
+				log.Fatalln(fmt.Sprintf("[FATAL] bad glob pattern: %e", err))
+			}
+			for _, glob := range globs {
+				err = identify(ctxts, glob, "", *coe, *nr, d, getCtx)
+			}
 		}
 		if err != nil {
 			break
