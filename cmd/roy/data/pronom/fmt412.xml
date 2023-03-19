@@ -65,6 +65,12 @@
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2678</RelatedFormatID>
+        <RelatedFormatName>DOCX Strict OOXML Document</RelatedFormatName>
+        <RelatedFormatVersion>2007 onwards</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Is supertype of</RelationshipType>
         <RelatedFormatID>1389</RelatedFormatID>
         <RelatedFormatName>Microsoft Word Template</RelatedFormatName>

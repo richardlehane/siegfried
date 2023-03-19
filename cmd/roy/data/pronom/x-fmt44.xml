@@ -4,7 +4,7 @@
     <FileFormat>
       <FormatID>75</FormatID>
       <FormatName>WordPerfect for MS-DOS/Windows Document</FormatName>
-      <FormatVersion>6.0</FormatVersion>
+      <FormatVersion>6.x</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -24,7 +24,7 @@
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <LastUpdatedDate>06 Mar 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -96,22 +96,31 @@
         <Signature>w60</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3299</ExternalSignatureID>
+        <Signature>w61</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3300</ExternalSignatureID>
+        <Signature>w62</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
       <InternalSignature>
         <SignatureID>246</SignatureID>
-        <SignatureName>WordPerfect for Windows 6.x - 12</SignatureName>
-        <SignatureNote>Also known as Corel WordPerfect. Major and minor version fields are the main variants between 6.x and 12 formats (The last two bytes in this signature). The major version is the same for 6.x through to 12 documents - 2. The minor version byte for a 9 non-compound file created in WPWin 8.0 is 1. The minor version for a 9 compound file created in WPWin 8.0. Is 2.</SignatureNote>
+        <SignatureName>WordPerfect for Windows 6.x</SignatureName>
+        <SignatureNote>Major and minor version fields are the main variants between version of 6.x (The last two bytes in this signature). The signature follows the pattern of: BOF Byte 0 = FF, Bytes 1-3 = WPC, Bytes 4-7 = size of header, Byte 8 = Product, Byte 9 = FileType, Byte 10 = Major version, Byte 11= Minor Version, Bytes 12-13 = Encryption, Bytes 14-15 = Unused (0).</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>321</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>Little-endian</Endianness>
-          <ByteSequenceValue>FF575043{4}010A0201</ByteSequenceValue>
+          <ByteSequenceValue>FF575043{4}010A02(00|01|02)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

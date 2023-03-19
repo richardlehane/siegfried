@@ -155,7 +155,7 @@
         <RelationshipType>Is previous version of</RelationshipType>
         <RelatedFormatID>1444</RelatedFormatID>
         <RelatedFormatName>Exchangeable Image File Format (Compressed)</RelatedFormatName>
-        <RelatedFormatVersion>2.2.1</RelatedFormatVersion>
+        <RelatedFormatVersion>2.21</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Is subsequent version of</RelationshipType>

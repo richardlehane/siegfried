@@ -13,7 +13,7 @@
       <FormatTypes>Text (Structured)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>WebVTT files are used for captioning or subtitling video content. It is a standard created by the World Wide Web Consortium (W3C) for displaying timed text, and is linked to the HTML5 &lt;track&gt; element.</FormatDescription>
+      <FormatDescription>WebVTT files are used for captioning or subtitling video content. It is a standard created by the World Wide Web Consortium (W3C) for displaying timed text, and is linked to the HTML5 &lt;track&gt; element. The primary purpose of WebVTT files is to add text overlays to a video. Each time interval is specified in the format (HH:)mm:ss.xxx --&gt; (HH:)mm:ss:xxx e.g. 00:00.000 --&gt; 00:02.310 or 01:00:05.000 --&gt; 01:00:07.000. The (HH:) is optional, but if included must have a minimum of 2 digits representing the hour (more than 2 digits may be used), and where both the minute (mm) and second (ss) parts must be between 00 and 59 inclusive.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -24,11 +24,13 @@
       </WithdrawnDate>
       <ProvenanceSourceID>249</ProvenanceSourceID>
       <ProvenanceName>LIBNOVA / LIBNOVA</ProvenanceName>
-      <ProvenanceSourceDate>16 Oct 2021</ProvenanceSourceDate>
+      <ProvenanceSourceDate>16 Nov 2020</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>16 Oct 2021</LastUpdatedDate>
-      <FormatNote>https://www.w3.org/TR/webvtt1/</FormatNote>
+      <LastUpdatedDate>13 Mar 2023</LastUpdatedDate>
+      <FormatNote>https://www.w3.org/TR/webvtt1/
+https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API 
+https://www.iana.org/assignments/media-types/text/vtt</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -60,20 +62,20 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>1819</SignatureID>
-        <SignatureName>WebVTT</SignatureName>
-        <SignatureNote>BOF: Optional byte order mark followed by ASCII ‘WEBVTT’</SignatureNote>
+        <SignatureName>Web Video Text Tracks (WebVTT)</SignatureName>
+        <SignatureNote>Absolute from beginning of file, offset 0-4, magic bytes: WEBVTT {10-40}  then a time stamp in the format xx:xx.xxx followed by --&gt; {0-5} followed by xx:xx.xxx (where x is a number).</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>2110</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>3</MaxOffset>
+          <MaxOffset>4</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>574542565454</ByteSequenceValue>
+          <ByteSequenceValue>574542565454{5-400}[30:35][30:39]3A[30:35][30:39]2E[30:39][30:39][30:39]202D2D3E20{0-5}[30:35][30:39]3A[30:35][30:39]2E[30:39][30:39][30:39]</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

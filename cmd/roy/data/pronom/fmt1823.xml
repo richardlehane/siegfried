@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2674</FormatID>
+      <FormatName>Audacity Project File</FormatName>
+      <FormatVersion>Early</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Audio</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Audacity is free and open source audio editing, recording and post-processing software. The first version (0.8) was released in 2000 by Dominic Mazzoni and Roger Dannenberg at Carnegie Mellon University, Pennsylvania. It remains available today. An Audacity project consists of an aup project file, which is the name of the project followed by .aup . Next to the .aup file is a folder containing many .au files, each one being a segment of audio data. The aup file describes how audacity links the au files together to form the tracks in the project.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
+      <ProvenanceSourceDate>07 Feb 2023</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>07 Feb 2023</LastUpdatedDate>
+      <FormatNote>https://manual.audacityteam.org/man/audacity_2.html#aup</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1823</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>300</DeveloperID>
+        <DeveloperName>Audacity</DeveloperName>
+        <OrganisationName>Audacity</OrganisationName>
+        <DeveloperCompoundName>Audacity / Audacity</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>300</SupportID>
+        <SupportName>Audacity</SupportName>
+        <OrganisationName>Audacity</OrganisationName>
+        <SupportCompoundName>Audacity / Audacity</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3275</ExternalSignatureID>
+        <Signature>aup</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2163</SignatureID>
+        <SignatureName>Audacity Project File (Early)</SignatureName>
+        <SignatureNote>BOF Absolute from beginning of file, magic bytes: AudacityProject(.|..)Version(.|..){4}(.|..)projName
+The singature allows for Mac &amp; Windows spacing differences.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2505</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>417564616369747950726F6A656374(0D|0D0A)56657273696F6E(0D|0D0A){4}(0D|0D0A)70726F6A4E616D65</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

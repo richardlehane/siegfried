@@ -27,7 +27,7 @@
       <ProvenanceSourceDate>18 Jan 2020</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>18 Jan 2020</LastUpdatedDate>
+      <LastUpdatedDate>13 Mar 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -46,7 +46,7 @@
       <InternalSignature>
         <SignatureID>1668</SignatureID>
         <SignatureName>IESNA LM-63 Photometric Data File</SignatureName>
-        <SignatureNote>BOF: 'IESNA:LM-63-'</SignatureNote>
+        <SignatureNote>BOF: 'IESNA' followed by either '91' or ':LM-63-'</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1937</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -58,7 +58,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>4945534E413A4C4D2D36332D</ByteSequenceValue>
+          <ByteSequenceValue>4945534E41(3931|3A4C4D2D36332D)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

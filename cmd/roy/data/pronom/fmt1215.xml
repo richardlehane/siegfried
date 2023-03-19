@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>2025</FormatID>
-      <FormatName>ERDAS Hierarchical File Architecture Format</FormatName>
+      <FormatName>Reduced Resolution Dataset</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
@@ -27,7 +27,7 @@
       <ProvenanceSourceDate>20 Aug 2018</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>20 Aug 2018</LastUpdatedDate>
+      <LastUpdatedDate>13 Mar 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -90,7 +90,7 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>1592</SignatureID>
-        <SignatureName>ERDAS HFA</SignatureName>
+        <SignatureName>Reduced Resolution Dataset</SignatureName>
         <SignatureNote>BOF: 'EHFA_HEADER_TAG', 0x00</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1863</ByteSequenceID>

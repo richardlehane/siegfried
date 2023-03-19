@@ -4,7 +4,7 @@
     <FileFormat>
       <FormatID>2133</FormatID>
       <FormatName>GL Transmission Format (Text)</FormatName>
-      <FormatVersion>2.0</FormatVersion>
+      <FormatVersion>2.x</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -29,7 +29,7 @@ A glTF Overview can be found at https://www.khronos.org/gltf</FormatDescription>
       <ProvenanceSourceDate>18 Jan 2020</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>28 Sep 2020</LastUpdatedDate>
+      <LastUpdatedDate>13 Mar 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -63,8 +63,8 @@ A glTF Overview can be found at https://www.khronos.org/gltf</FormatDescription>
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>1694</SignatureID>
-        <SignatureName>GLTF 2.0</SignatureName>
-        <SignatureNote>BOF:'{'*'"asset"'*':'*'{'*'"version"'*':'*'"2.0"' EOF: '}'</SignatureNote>
+        <SignatureName>GLTF 2.x</SignatureName>
+        <SignatureNote>BOF:'{'*'"asset"'*':'*'{'*'"version"'*':'*'"2.{a gap of 1-10 bytes to allow for minor versions to be identified}"' EOF: '}'</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1966</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -76,7 +76,7 @@ A glTF Overview can be found at https://www.khronos.org/gltf</FormatDescription>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>7B*22617373657422*3A*7B*2276657273696F6E22*3A*22322E3022</ByteSequenceValue>
+          <ByteSequenceValue>7B*22617373657422*3A*7B*2276657273696F6E22{0-20}3A{0-20}22322E{1-10}22</ByteSequenceValue>
         </ByteSequence>
         <ByteSequence>
           <ByteSequenceID>1967</ByteSequenceID>
