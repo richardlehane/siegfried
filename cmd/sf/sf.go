@@ -506,9 +506,6 @@ func main() {
 				}
 			}
 		}
-		if err != nil {
-			break
-		}
 	}
 	wg.Wait()
 	close(ctxts)
