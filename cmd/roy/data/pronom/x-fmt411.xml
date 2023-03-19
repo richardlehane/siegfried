@@ -26,9 +26,8 @@
       <ProvenanceSourceDate>17 Feb 2006</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>17 Feb 2006</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>14 Mar 2023</LastUpdatedDate>
+      <FormatNote>This specification describes the structure of executable (image) files and object files under the Windows family of operating systems. These files are referred to as Portable Executable (PE) and Common Object File Format (COFF) files, respectively- https://learn.microsoft.com/en-us/windows/win32/debug/pe-format</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -76,6 +75,18 @@
           <OrganisationName>Microsoft Corporation</OrganisationName>
           <PublisherCompoundName>Microsoft Corporation</PublisherCompoundName>
         </Publisher>
+      </Document>
+      <Document>
+        <DocumentID>94</DocumentID>
+        <DisplayText>Portable Executable Format</DisplayText>
+        <DocumentType>Authoritative</DocumentType>
+        <AvailabilityDescription>Public</AvailabilityDescription>
+        <AvailabilityNote>https://learn.microsoft.com/en-us/windows/win32/debug/pe-format</AvailabilityNote>
+        <PublicationDate>25 Feb 2023</PublicationDate>
+        <TitleText>Portable Executable Format</TitleText>
+        <DocumentIPR>
+        </DocumentIPR>
+        <DocumentNote>This specification describes the structure of executable (image) files and object files under the Windows family of operating systems. These files are referred to as Portable Executable (PE) and Common Object File Format (COFF) files, respectively.</DocumentNote>
       </Document>
       <ExternalSignature>
         <ExternalSignatureID>774</ExternalSignatureID>

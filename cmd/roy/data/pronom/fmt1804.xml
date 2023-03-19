@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2655</FormatID>
+      <FormatName>B Source Code File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>A source code file written in B programming language developed in the late 1960s as a derivation from BCPL  (Basic Combined Programming Language) and having been superseded by the C language. B is a so-called typeless language, i.e. a programming language with the only data type being the computer word treated either as an integer or a memory address to be dereferenced, depending on the context, or more precisely on how the word is processed.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>295</ProvenanceSourceID>
+      <ProvenanceName>Stadtarchiv Hof / Stadtarchiv Hof</ProvenanceName>
+      <ProvenanceSourceDate>04 Jan 2023</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>04 Jan 2023</LastUpdatedDate>
+      <FormatNote>Specification https://www.bell-labs.com/usr/dmr/www/kbman.pdf</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1804</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3249</ExternalSignatureID>
+        <Signature>b</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

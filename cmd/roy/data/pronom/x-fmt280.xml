@@ -100,7 +100,7 @@ Full specifications can be found at http://www.w3.org/TR/xmlschema-0/</FormatDes
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>2192</RelatedFormatID>
-        <RelatedFormatName>XDOMEA</RelatedFormatName>
+        <RelatedFormatName>xdomea</RelatedFormatName>
         <RelatedFormatVersion>1.0</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>

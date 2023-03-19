@@ -59,6 +59,12 @@
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2679</RelatedFormatID>
+        <RelatedFormatName>XLSX Strict OOXML Spreadsheet</RelatedFormatName>
+        <RelatedFormatVersion>2007 onwards</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Is supertype of</RelationshipType>
         <RelatedFormatID>1387</RelatedFormatID>
         <RelatedFormatName>Microsoft Excel Non-XML Binary Workbook</RelatedFormatName>

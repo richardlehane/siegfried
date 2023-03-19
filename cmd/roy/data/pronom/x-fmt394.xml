@@ -23,7 +23,7 @@
       <ProvenanceSourceDate>11 Mar 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <LastUpdatedDate>13 Mar 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -110,10 +110,17 @@
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2098</RelatedFormatID>
+        <RelatedFormatName>NCH Dictation Audio File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Is previous version of</RelationshipType>
         <RelatedFormatID>75</RelatedFormatID>
         <RelatedFormatName>WordPerfect for MS-DOS/Windows Document</RelatedFormatName>
-        <RelatedFormatVersion>6.0</RelatedFormatVersion>
+        <RelatedFormatVersion>6.x</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Is previous version of</RelationshipType>

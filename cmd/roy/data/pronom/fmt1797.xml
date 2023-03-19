@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2648</FormatID>
+      <FormatName>SHA512 File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>SHA-512 is part of the family of SHA-2 (Secure Hash Algorithm 2), a set of cryptographic hash functions which are designed by the United States National Security Agency (NSA) and published by the National Institute of Standards and Technology (NIST). SHA-512 produces a 512-bit (64-byte) hash value, typically rendered as a 128 digits long hexadecimal number. It can be used as a checksum to verify data integrity. The SHA-512 file is a plain text document which contains single or multiple hash values.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>295</ProvenanceSourceID>
+      <ProvenanceName>Stadtarchiv Hof / Stadtarchiv Hof</ProvenanceName>
+      <ProvenanceSourceDate>23 Nov 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>23 Nov 2022</LastUpdatedDate>
+      <FormatNote>Specification:  https://web.archive.org/web/20130526224224/https:/csrc.nist.gov/groups/STM/cavp/documents/shs/sha256-384-512.pdf</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1797</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3242</ExternalSignatureID>
+        <Signature>sha512</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

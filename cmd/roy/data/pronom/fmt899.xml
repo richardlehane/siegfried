@@ -26,9 +26,8 @@
       <ProvenanceSourceDate>21 Jun 2016</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>21 Jun 2016</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>13 Mar 2023</LastUpdatedDate>
+      <FormatNote>This specification describes the structure of executable (image) files and object files under the Windows family of operating systems. These files are referred to as Portable Executable (PE) and Common Object File Format (COFF) files, respectively- https://learn.microsoft.com/en-us/windows/win32/debug/pe-format</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -59,6 +58,18 @@
         <OrganisationName>Microsoft Corporation</OrganisationName>
         <SupportCompoundName>Microsoft Corporation</SupportCompoundName>
       </Support>
+      <Document>
+        <DocumentID>94</DocumentID>
+        <DisplayText>Portable Executable Format</DisplayText>
+        <DocumentType>Authoritative</DocumentType>
+        <AvailabilityDescription>Public</AvailabilityDescription>
+        <AvailabilityNote>https://learn.microsoft.com/en-us/windows/win32/debug/pe-format</AvailabilityNote>
+        <PublicationDate>25 Feb 2023</PublicationDate>
+        <TitleText>Portable Executable Format</TitleText>
+        <DocumentIPR>
+        </DocumentIPR>
+        <DocumentNote>This specification describes the structure of executable (image) files and object files under the Windows family of operating systems. These files are referred to as Portable Executable (PE) and Common Object File Format (COFF) files, respectively.</DocumentNote>
+      </Document>
       <ExternalSignature>
         <ExternalSignatureID>1838</ExternalSignatureID>
         <Signature>exe</Signature>
@@ -94,6 +105,12 @@ IMAGE_OPTIONAL_HEADER OptionalHeader;</SignatureNote>
           <ByteSequenceValue>4D5A{126-128500}50450000{20}0B01{66}[0000:1000]</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2645</RelatedFormatID>
+        <RelatedFormatName>Asymetrix Toolbook File</RelatedFormatName>
+        <RelatedFormatVersion>6-11.5</RelatedFormatVersion>
+      </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>774</RelatedFormatID>

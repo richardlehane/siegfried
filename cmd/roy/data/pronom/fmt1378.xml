@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>2196</FormatID>
-      <FormatName>XDOMEA</FormatName>
+      <FormatName>xdomea</FormatName>
       <FormatVersion>2.2.0</FormatVersion>
       <FormatAliases>
       </FormatAliases>
@@ -12,7 +12,7 @@
       <FormatTypes>Text (Mark-up)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>XDOMEA is an XML interface for the exchange of documents, cases, and records, typically used by digital record management systems in Germany.</FormatDescription>
+      <FormatDescription>xdomea is an XML interface for the exchange of documents, cases, and records, typically used by digital record management systems in Germany.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -24,8 +24,8 @@
       <ProvenanceSourceID>232</ProvenanceSourceID>
       <ProvenanceName>Landesarchiv Nordrhein-Westfalen / Landesarchiv Nordrhein-Westfalen</ProvenanceName>
       <ProvenanceSourceDate>22 Sep 2020</ProvenanceSourceDate>
-      <ProvenanceDescription>Further information about XDOMEA is published here: https://xoev.de/de/xdomea</ProvenanceDescription>
-      <LastUpdatedDate>22 Sep 2020</LastUpdatedDate>
+      <ProvenanceDescription>Further information about xdomea is published here: https://xoev.de/de/xdomea</ProvenanceDescription>
+      <LastUpdatedDate>13 Mar 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -43,7 +43,7 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>1756</SignatureID>
-        <SignatureName>XDOMEA 2.2.0</SignatureName>
+        <SignatureName>xdomea 2.2.0</SignatureName>
         <SignatureNote>ASCII header: &lt;?xml version="1.0" (alternatively with single quotes), followed by xdomea namespace declaration xmlns:domea="http://www.xdomea.de/V2.2.0" (alternatively with single quotes)</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>2034</ByteSequenceID>

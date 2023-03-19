@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>150</FormatID>
-      <FormatName>3D Studio Shapes</FormatName>
+      <FormatName>3D Studio (DOS) 2D Shape File</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
@@ -13,7 +13,7 @@
       <FormatTypes>Model</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>SHP is the 3D Studio (DOS) shape file format. 3D Studio DOS was the original 3D Studio product, and was created for the DOS platform by the Yost Group, and published by Autodesk.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -26,9 +26,8 @@
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>23 Feb 2023</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/SHP</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -37,11 +36,36 @@
         <Identifier>x-fmt/102</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <Support>
+        <SupportID>18</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Autodesk Corporation</OrganisationName>
+        <SupportCompoundName>Autodesk Corporation</SupportCompoundName>
+      </Support>
       <ExternalSignature>
         <ExternalSignatureID>144</ExternalSignatureID>
         <Signature>shp</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2167</SignatureID>
+        <SignatureName>3D Studio (DOS) 2D Shape File</SignatureName>
+        <SignatureNote>BOF Absolute from beginning of file, magic bytes: --{2}..</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2509</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>2D2D{2}0000</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

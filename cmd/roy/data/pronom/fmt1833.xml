@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2685</FormatID>
+      <FormatName>ArcSoft Album and SlideShow Files for PhotoStudio and PhotoImpression</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Arcsoft PhotoStudio and PhotoImpression use an (.abm) file to store the image list of files included in an album. Albums can also be saved to a SlideShow folder which includes the same Album format but can have an .sld extension.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
+      <ProvenanceSourceDate>22 Feb 2023</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>22 Feb 2023</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/Arcsoft_Album/Slide_Show</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1833</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Support>
+        <SupportID>302</SupportID>
+        <SupportName>Arcsoft</SupportName>
+        <OrganisationName>Arcsoft</OrganisationName>
+        <SupportCompoundName>Arcsoft / Arcsoft</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3286</ExternalSignatureID>
+        <Signature>abm</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3287</ExternalSignatureID>
+        <Signature>sld</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2171</SignatureID>
+        <SignatureName>ArcSoft Album and SlideShow Files for PhotoStudio and PhotoImpression</SignatureName>
+        <SignatureNote>BOF Absolute from beginning of file, magic bytes: PALM</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2513</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>50414C4D</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

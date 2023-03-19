@@ -26,7 +26,7 @@
       <ProvenanceSourceDate>01 Jun 2022</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>01 Jun 2022</LastUpdatedDate>
+      <LastUpdatedDate>13 Mar 2023</LastUpdatedDate>
       <FormatNote>http://fileformats.archiveteam.org/wiki/Asymetrix_Compel
 
 https://web.archive.org/web/19970607001501/http://www.asymetrix.com/products/compel/
@@ -49,6 +49,11 @@ https://www.danielsays.com/ssg-win1x2x3x-compel20.html</FormatNote>
         <Signature>cpl</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3303</ExternalSignatureID>
+        <Signature>art</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
       <InternalSignature>
         <SignatureID>2027</SignatureID>
         <SignatureName>Asymetrix Compel Presentation v2.0</SignatureName>
@@ -67,13 +72,6 @@ https://www.danielsays.com/ssg-win1x2x3x-compel20.html</FormatNote>
           <ByteSequenceValue>034A424F4FF53C55</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
-      <RelatedFormat>
-        <RelationshipType>Has priority over</RelationshipType>
-        <RelatedFormatID>1257</RelatedFormatID>
-        <RelatedFormatName>Asymetrix Toolbook File</RelatedFormatName>
-        <RelatedFormatVersion>
-        </RelatedFormatVersion>
-      </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Is subsequent version of</RelationshipType>
         <RelatedFormatID>2529</RelatedFormatID>

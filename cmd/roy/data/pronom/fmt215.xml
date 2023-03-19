@@ -66,6 +66,12 @@
         </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2681</RelatedFormatID>
+        <RelatedFormatName>PPTX Strict OOXML Presentation</RelatedFormatName>
+        <RelatedFormatVersion>2007 onwards</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Is supertype of</RelationshipType>
         <RelatedFormatID>1428</RelatedFormatID>
         <RelatedFormatName>Microsoft PowerPoint Show</RelatedFormatName>

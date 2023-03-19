@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>353</FormatID>
-      <FormatName>Microsoft Access Database</FormatName>
+      <FormatName>Microsoft Access Database File</FormatName>
       <FormatVersion>2002</FormatVersion>
       <FormatAliases>Microsoft Access Database (XP)</FormatAliases>
       <FormatFamilies>
@@ -11,7 +11,7 @@
       <FormatTypes>Database</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Microsoft Access Database File, formerly known as Jet MDB Database format, is proprietary file format developed and used by Microsoft as a native format for its Microsoft Access (formerly Microsoft Jet Database Engine) desktop database management system. First released in 1992, starting with version 1.0 the earlier versions of the database used the Jet Database Engine, with version Microsoft Access 2002 utilizing the Jet 4.0 database engine. The page size of the Jet 4.0 database engine is 4096 bytes. The .mde extension refers to protected Access database file with compiled VBA and macros. This entry records the version 2002 of MDB file format, for a full list of versions please follow the links provided in the Notes section.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -24,20 +24,45 @@
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>17 Jan 2023</LastUpdatedDate>
+      <FormatNote>https://web.archive.org/web/20220711181532/http://fileformats.archiveteam.org/wiki/Access
+
+https://web.archive.org/web/20220901011824/https://en.wikipedia.org/wiki/Microsoft_Access
+
+https://web.archive.org/web/20220825195028/https://www.loc.gov/preservation/digital/formats/fdd/fdd000462.shtml
+
+http://web.archive.org/web/20111115230803/http://support.microsoft.com/kb/178883</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
+        <Identifier>fdd000462</Identifier>
+        <IdentifierType>Library of Congress Format Description Identifier</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>Q1931566</Identifier>
+        <IdentifierType>Wikidata QID Identifier</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
         <Identifier>x-fmt/241</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>93</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Microsoft Corporation</OrganisationName>
+        <DeveloperCompoundName>Microsoft Corporation</DeveloperCompoundName>
+      </Developers>
       <ExternalSignature>
         <ExternalSignatureID>340</ExternalSignatureID>
         <Signature>mdb</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3311</ExternalSignatureID>
+        <Signature>mde</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <InternalSignature>
@@ -72,6 +97,12 @@
           <ByteSequenceValue>410063006300650073007300560065007200730069006F006E{0-2048}300039002E00[30:39]00[30:39]</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>352</RelatedFormatID>
+        <RelatedFormatName>Microsoft Access Database File</RelatedFormatName>
+        <RelatedFormatVersion>2000</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

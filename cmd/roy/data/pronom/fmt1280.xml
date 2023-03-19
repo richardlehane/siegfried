@@ -62,6 +62,12 @@
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>737</RelatedFormatID>
+        <RelatedFormatName>WordPerfect for MS-DOS/Windows Document</RelatedFormatName>
+        <RelatedFormatVersion>5.1</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>687</RelatedFormatID>
         <RelatedFormatName>MPEG 1/2 Audio Layer 3</RelatedFormatName>
