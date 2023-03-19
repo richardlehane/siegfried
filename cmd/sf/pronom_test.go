@@ -15,19 +15,6 @@ import (
 
 var DataPath string = filepath.Join("..", "..", "cmd", "roy", "data")
 
-// setMinimalParams configures our tests to use the minimal fixtures in
-// the test data directory.
-func setMinimalParams() {
-	config.SetDroid("DROID_minimal.xml")
-	config.SetPRONOMReportsDir("pronom_minimal")
-}
-
-// resetParams undoes the config used by PRONOM minimal tests.
-func resetMinimalParams() {
-	config.SetDroid("")
-	config.SetPRONOMReportsDir("pronom")
-}
-
 // pronomIdentificationTests provides our structure for table driven tests.
 type pronomIdentificationTests struct {
 	identiifer string
@@ -41,6 +28,8 @@ type pronomIdentificationTests struct {
 }
 
 var skeletons = make(map[string]*fstest.MapFile)
+
+var minimalPronom = []string{"fmt/1", "fmt/3", "fmt/5", "fmt/11", "fmt/14"}
 
 // Populate the global skeletons map from string-based byte-sequences to
 // save having to store skeletons on disk and read from them.
@@ -77,7 +66,7 @@ func makeSkeletons() {
 }
 
 var pronomIDs = []pronomIdentificationTests{
-	pronomIdentificationTests{
+	{
 		"pronom",
 		"UNKNOWN",
 		"",
@@ -87,7 +76,7 @@ var pronomIDs = []pronomIdentificationTests{
 		"",
 		"no match",
 	},
-	pronomIdentificationTests{
+	{
 		"pronom",
 		"fmt/1",
 		"Broadcast WAVE",
@@ -97,7 +86,7 @@ var pronomIDs = []pronomIdentificationTests{
 		"extension match wav; byte match at [[0 12] [32 356]]",
 		"",
 	},
-	pronomIdentificationTests{
+	{
 		"pronom",
 		"fmt/11",
 		"Portable Network Graphics",
@@ -107,17 +96,17 @@ var pronomIDs = []pronomIdentificationTests{
 		"extension match png; byte match at [[0 16] [16 12]]",
 		"",
 	},
-	pronomIdentificationTests{
+	{
 		"pronom",
 		"fmt/14",
-		"Acrobat PDF 1.X - Portable Document Format",
+		"Acrobat PDF 1.0 - Portable Document Format",
 		"1.0",
 		"application/pdf",
 		"Page Description",
 		"extension match pdf; byte match at [[0 8] [8 5]]",
 		"",
 	},
-	pronomIdentificationTests{
+	{
 		"pronom",
 		"fmt/3",
 		"Graphics Interchange Format",
@@ -127,7 +116,7 @@ var pronomIDs = []pronomIdentificationTests{
 		"extension match gif; byte match at [[0 6] [6 1]]",
 		"",
 	},
-	pronomIdentificationTests{
+	{
 		"pronom",
 		"fmt/5",
 		"Audio/Video Interleaved Format",
@@ -143,35 +132,21 @@ var pronomIDs = []pronomIdentificationTests{
 // minimized PRONOM dataset are correct and contain the information we
 // anticipate.
 func TestPronom(t *testing.T) {
-
-	var sf *siegfried.Siegfried
-	sf = siegfried.New()
-
+	sf := siegfried.New()
 	config.SetHome(DataPath)
-	if config.Reports() == "" {
-		t.Error("PRONOM reports are not set, this set requires reports")
-	}
-
-	setMinimalParams()
-
-	identifier, err := pronom.New()
+	identifier, err := pronom.New(config.SetLimit(minimalPronom))
 	if err != nil {
 		t.Errorf("Error creating new PRONOM identifier: %s", err)
 	}
-
 	sf.Add(identifier)
-
 	makeSkeletons()
 	skeletonFS := fstest.MapFS(skeletons)
-
 	testDirListing, err := skeletonFS.ReadDir(".")
 	if err != nil {
 		t.Fatalf("Error reading test files directory: %s", err)
 	}
-
 	const resultLen int = 8
 	results := make([]pronomIdentificationTests, 0)
-
 	for _, val := range testDirListing {
 		testFilePath := filepath.Join(".", val.Name())
 		reader, _ := skeletonFS.Open(val.Name())
@@ -192,7 +167,6 @@ func TestPronom(t *testing.T) {
 		}
 		results = append(results, idResult)
 	}
-
 	// Sort expected results and received results to make them
 	// comparable.
 	sort.Slice(pronomIDs, func(i, j int) bool {
@@ -201,14 +175,12 @@ func TestPronom(t *testing.T) {
 	sort.Slice(results, func(i, j int) bool {
 		return results[i].puid < results[j].puid
 	})
-
 	// Compare results on a result by result basis.
 	for idx, res := range results {
 		//t.Error(res)
 		if !reflect.DeepEqual(res, pronomIDs[idx]) {
-			t.Errorf("Results not equal for %s", res.puid)
+			t.Errorf("Results not equal for %s; expected %v; got %v", res.puid, pronomIDs[idx], res)
 		}
 	}
-
-	resetMinimalParams()
+	config.Clear()()
 }

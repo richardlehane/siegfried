@@ -25,10 +25,10 @@ import (
 )
 
 type formatInfo struct {
-	name       string
-	version    string
-	mimeType   string
-	formatType string
+	name     string
+	version  string
+	mimeType string
+	class    string
 }
 
 func (f formatInfo) String() string {
@@ -116,14 +116,14 @@ func (r *reports) IDs() []string {
 	return r.p
 }
 
-// Infos generates a FormatInfo structure to return to the caller.
 func (r *reports) Infos() map[string]identifier.FormatInfo {
 	infos := make(map[string]identifier.FormatInfo)
 	for i, v := range r.r {
-		infos[r.p[i]] = formatInfo{strings.TrimSpace(v.Name),
-			strings.TrimSpace(v.Version),
-			strings.TrimSpace(v.MIME()),
-			strings.TrimSpace(v.Types),
+		infos[r.p[i]] = formatInfo{
+			name:     strings.TrimSpace(v.Name),
+			version:  strings.TrimSpace(v.Version),
+			mimeType: strings.TrimSpace(v.MIME()),
+			class:    strings.TrimSpace(v.Types),
 		}
 	}
 	return infos
@@ -226,15 +226,13 @@ func (d *droid) IDs() []string {
 	return puids
 }
 
-// Infos generates a FormatInfo structure to return to the caller.
 func (d *droid) Infos() map[string]identifier.FormatInfo {
 	infos := make(map[string]identifier.FormatInfo)
 	for _, v := range d.FileFormats {
 		infos[v.Puid] = formatInfo{
-			strings.TrimSpace(v.Name),
-			strings.TrimSpace(v.Version),
-			strings.TrimSpace(v.MIMEType),
-			strings.TrimSpace(v.FormatType),
+			name:     strings.TrimSpace(v.Name),
+			version:  strings.TrimSpace(v.Version),
+			mimeType: strings.TrimSpace(v.MIMEType),
 		}
 	}
 	return infos
@@ -286,9 +284,7 @@ func (d *droid) puidsInternalIds() map[string][]int {
 	for _, v := range d.FileFormats {
 		if len(v.Signatures) > 0 {
 			sigs := make([]int, len(v.Signatures))
-			for j, w := range v.Signatures {
-				sigs[j] = w
-			}
+			copy(sigs, v.Signatures)
 			puidsIIds[v.Puid] = sigs
 		}
 	}

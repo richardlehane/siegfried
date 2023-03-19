@@ -29,6 +29,7 @@ var pronom = struct {
 	droid            string   // name of droid file e.g. DROID_SignatureFile_V78.xml
 	container        string   // e.g. container-signature-19770502.xml
 	reports          string   // directory where PRONOM reports are stored
+	noclass          bool     // omit class from the format info
 	doubleup         bool     // include byte signatures for formats that also have container signatures
 	extendc          []string //container extensions
 	changesURL       string
@@ -163,6 +164,11 @@ func Reports() string {
 	return filepath.Join(siegfried.home, pronom.reports)
 }
 
+// NoClass reports whether the noclass flag has been set. This will cause class to be omitted from format infos
+func NoClass() bool {
+	return pronom.noclass
+}
+
 // DoubleUp reports whether the doubleup flag has been set. This will cause byte signatures to be built for formats where container signatures are also provided.
 func DoubleUp() bool {
 	return pronom.doubleup
@@ -203,17 +209,8 @@ func TextPuid() string {
 // SetDroid sets the name and/or location of the DROID signature file.
 // I.e. can provide a full path or a filename relative to the HOME directory.
 func SetDroid(d string) func() private {
-	pronom.droid = d
 	return func() private {
-		return private{}
-	}
-}
-
-// SetPRONOMReportsDir sets the PRONOM reports directory, used to
-// generate a PRONOM identifier from the XML data retrieved from PRONOM.
-func SetPRONOMReportsDir(r string) func() private {
-	pronom.reports = r
-	return func() private {
+		pronom.droid = d
 		return private{}
 	}
 }
@@ -231,6 +228,14 @@ func SetContainer(c string) func() private {
 func SetNoReports() func() private {
 	return func() private {
 		pronom.reports = ""
+		return private{}
+	}
+}
+
+// SetNoClass causes class to be omitted from the format info
+func SetNoClass() func() private {
+	return func() private {
+		pronom.noclass = true
 		return private{}
 	}
 }

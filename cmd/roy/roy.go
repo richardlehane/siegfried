@@ -146,6 +146,7 @@ var (
 	noxml         = build.Bool("noxml", false, "skip XML matcher")
 	noriff        = build.Bool("noriff", false, "skip RIFF matcher")
 	noreports     = build.Bool("noreports", false, "build directly from DROID file rather than PRONOM reports")
+	noclass       = build.Bool("noclass", false, "omit format classes from the signature file")
 	doubleup      = build.Bool("doubleup", false, "include byte signatures for formats that also have container signatures")
 	rng           = build.Int("range", config.Range(), "define a maximum range for segmentation")
 	distance      = build.Int("distance", config.Distance(), "define a maximum distance for segmentation")
@@ -413,6 +414,9 @@ the DROID signature file you should also include a regular signature extension
 	}
 	if *noreports {
 		opts = append(opts, config.SetNoReports())
+	}
+	if *noclass {
+		opts = append(opts, config.SetNoClass())
 	}
 	if *doubleup {
 		opts = append(opts, config.SetDoubleUp())
