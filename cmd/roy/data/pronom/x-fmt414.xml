@@ -82,6 +82,13 @@
       </InternalSignature>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>306</RelatedFormatID>
+        <RelatedFormatName>Microsoft Powerpoint Packaged Presentation</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1792</RelatedFormatID>
         <RelatedFormatName>Microsoft OneNote Package File</RelatedFormatName>
         <RelatedFormatVersion>
@@ -91,6 +98,13 @@
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>2305</RelatedFormatID>
         <RelatedFormatName>Access Report Snapshot</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2691</RelatedFormatID>
+        <RelatedFormatName>Microsoft Publisher Packaged Document</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

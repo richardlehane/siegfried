@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2644</FormatID>
+      <FormatName>JPEG 2000 Codestream</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Raster)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>JPEG 2000 codestream (also known as J2K, J2C, or JPEG 2000 Part 1, Core Coding System) is the wavelet based compressed image format defined in Part 1 of the JPEG 2000 standard. Both lossy and lossless compression as supported.
+
+A JPEG 2000 codestream uses a variant of the JPEG format, with a nearly identical system of markers and segments.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>244</ProvenanceSourceID>
+      <ProvenanceName>Preservica / Preservica</ProvenanceName>
+      <ProvenanceSourceDate>11 Nov 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>11 Nov 2022</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1794</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>image/jp2</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3236</ExternalSignatureID>
+        <Signature>j2k</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3237</ExternalSignatureID>
+        <Signature>jpc</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3238</ExternalSignatureID>
+        <Signature>j2c</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2134</SignatureID>
+        <SignatureName>JPEG 2000 Codestream</SignatureName>
+        <SignatureNote>Based on the specification, start of codestream marker (0xFF4F) followed by image and tile size marker (0xFF51) at BOF, end of codestream marker (0xFFD9) at EOF.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2474</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>FF4FFF51</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>2475</ByteSequenceID>
+          <PositionType>Absolute from EOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>FFD9</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2647</FormatID>
+      <FormatName>Wireless Markup Language (WML) Document</FormatName>
+      <FormatVersion>1.1</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Mark-up)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Wireless Markup Language (wml) is an XML-based markup language created by the WAP (Wireless Application Protocol) Forum in the late 1990s. It was intended for mobile devices which were limited by bandwidth, memory and CPU capabilities, such as mobile phones, providing text and image presentation, forms, data input and hyperlinks, much like html. WAP died out in the early 2000s. It had been developed and supported by the WAP forum, which no longer exists, and has been subsumed by the Open Mobile Alliance.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>295</ProvenanceSourceID>
+      <ProvenanceName>Stadtarchiv Hof / Stadtarchiv Hof</ProvenanceName>
+      <ProvenanceSourceDate>22 Nov 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>22 Nov 2022</LastUpdatedDate>
+      <FormatNote>Specification: http://www.wapforum.org/what/technical.htmandhttp://www.wapforum.org/what/technical/wml-30-apr-98.pdf</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1796</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>text/vnd.wap.wml</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3241</ExternalSignatureID>
+        <Signature>wml</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2136</SignatureID>
+        <SignatureName>Wireless Markup Language (WML) Document</SignatureName>
+        <SignatureNote>BOF Absolute from beginning of file, magic bytes: &lt;?xml version="1.0"{0-75}&lt;!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML{20-200}&lt;wml&gt;
+EOF, offset 0-6, magic bytes: &lt;/card&gt;{0-6}&lt;/wml&gt;{0-2}</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2477</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C3F786D6C2076657273696F6E3D22312E3022{0-75}3C21444F435459504520776D6C205055424C494320222D2F2F574150464F52554D2F2F44544420574D4C{20-200}3C776D6C3E</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>2478</ByteSequenceID>
+          <PositionType>Absolute from EOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>3</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C2F636172643E{0-6}3C2F776D6C3E{0-2}</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>638</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

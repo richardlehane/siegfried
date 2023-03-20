@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2654</FormatID>
+      <FormatName>Transcriber TRS Format</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Mark-up)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>TRS is the native, XML-based format of Transcriber, a tool for assisting the manual annotation of speech signals. Transcriber (https://trans.sourceforge.net/) was superseded by Transcriber AG (https://transag.sourceforge.net/)</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>244</ProvenanceSourceID>
+      <ProvenanceName>Preservica / Preservica</ProvenanceName>
+      <ProvenanceSourceDate>23 Nov 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>23 Nov 2022</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1803</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3248</ExternalSignatureID>
+        <Signature>trs</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2142</SignatureID>
+        <SignatureName>Transcriber TRS Format</SignatureName>
+        <SignatureNote>BOF offset 0, XML 1.0 declaration, then !DOCTYPE declaration ‘trans’. A DTD for version 1.4 of the file format can be found here: https://github.com/giuliopaci/transcriber/blob/master/etc/trans-14.dtd. For now, PRONOM does not distinguish between different versions of TRS.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2484</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C3F786D6C2076657273696F6E3D22312E3022{1-128}3C21444F4354595045205472616E73</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>638</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

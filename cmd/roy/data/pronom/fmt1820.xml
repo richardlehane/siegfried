@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2671</FormatID>
+      <FormatName>MacCaption File</FormatName>
+      <FormatVersion>2</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>MacCaption is retired closed caption software for use in video captions. It was originally developed by CPC Computer Prompting and Captioning Co. and called CCaptionPro. It was renamed in 2003 to MacCaption. Project files have the extension .cca. Standalone caption files have the extension .mcc, and can contain both CEA-608 and CEA-708 data.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
+      <ProvenanceSourceDate>07 Feb 2023</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>07 Feb 2023</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1820</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3272</ExternalSignatureID>
+        <Signature>mcc</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2160</SignatureID>
+        <SignatureName>MacCaption File v.2</SignatureName>
+        <SignatureNote>BOF Absolute from beginning of file, magic bytes: File Format=MacCaption_MCC V2</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2502</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>46696C6520466F726D61743D4D616343617074696F6E5F4D4343205632</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

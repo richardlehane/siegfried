@@ -17,8 +17,10 @@ package bytematcher
 import (
 	"bytes"
 	"io"
+	"sort"
 
-	wac "github.com/richardlehane/match/fwac"
+	"github.com/richardlehane/match/dwac"
+	wac "github.com/richardlehane/match/dwac"
 	"github.com/richardlehane/siegfried/internal/bytematcher/frames"
 	"github.com/richardlehane/siegfried/internal/persist"
 	"github.com/richardlehane/siegfried/internal/siegreader"
@@ -121,6 +123,27 @@ func (ss *seqSet) add(seq wac.Seq, hi int) int {
 	ss.set = append(ss.set, seq)
 	ss.testTreeIndex = append(ss.testTreeIndex, hi)
 	return hi
+}
+
+// Reduce creates a reduced seqSet based on limited slice of test tree indexes.
+// Used for dynamic matching.
+func (ss *seqSet) indexes(tti []int) []dwac.SeqIndex {
+	sort.Ints(tti)
+	uniq := make(map[int]bool)
+	ret := make([]dwac.SeqIndex, 0, len(tti))
+outer:
+	for _, v := range tti {
+		for idx, w := range ss.testTreeIndex {
+			if w <= v && v-w < len(ss.set[idx].Choices) {
+				if !uniq[w] {
+					ret = append(ret, dwac.SeqIndex{idx, v - w})
+					uniq[w] = true
+				}
+				continue outer
+			}
+		}
+	}
+	return ret
 }
 
 // Some signatures cannot be represented by simple byte sequences. The first or last frames from these sequences are added to the BOF or EOF frame sets.

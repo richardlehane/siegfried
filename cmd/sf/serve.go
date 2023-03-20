@@ -236,6 +236,8 @@ const usage = `
 			<p>The siegfried server has two modes of identification:
 			<ul><li><a href="#get_request">GET request</a>, where a file or directory path is given in the URL and the server retrieves the file(s);</li>
 			<li><a href="#post_request">POST request</a>, where the file is sent over the network as form-data.</li></ul></p> 
+			<p>The update command can also be issued as a GET request to <a href="/update">/update</a>. This fetches an updated signature file and hot patches the running siegfried instance.</p>
+			<p>If PRONOM isn't being used as the underlying identifier, the update command can be qualified with the name of a different identifer e.g. <a href="/update">/update/wikidata</a>.</p>
 			<h2>Default settings</h2>
 			<p>When starting the server, you can use regular sf flags to set defaults for the <i>nr</i>, <i>format</i>, <i>hash</i>, <i>z</i>, and <i>sig</i> parameters that will apply to all requests unless overridden. Logging options can also be set.<p>
 			<p>E.g. sf -nr -z -hash md5 -sig pronom-tika.sig -log p,w,e -serve localhost:5138</p>
@@ -329,9 +331,43 @@ func handleMain(w http.ResponseWriter, r *http.Request) {
 	io.WriteString(w, usage)
 }
 
+func handleUpdate(w http.ResponseWriter, r *http.Request, m *muxer) {
+	args := []string{}
+	if len(r.URL.Path) > 8 {
+		args = append(args, r.URL.Path[8:])
+	}
+	updated, msg, err := updateSigs("", args)
+	if err != nil {
+		handleErr(w, http.StatusInternalServerError, err)
+		return
+	}
+	if updated {
+		defer func() {
+			if r := recover(); r != nil {
+				handleErr(w, http.StatusInternalServerError, fmt.Errorf("panic: %v", r))
+			}
+		}()
+		nsf, err := siegfried.Load(config.Signature()) // may panic
+		if err == nil {
+			m.s = nsf // hot swap the siegfried!
+			w.WriteHeader(http.StatusOK)
+			w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+			io.WriteString(w, msg)
+			return
+		} else {
+			handleErr(w, http.StatusInternalServerError, err)
+			return
+		}
+	}
+	w.WriteHeader(http.StatusNotModified)
+	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+	io.WriteString(w, msg)
+}
+
 type muxer struct {
 	s     *siegfried.Siegfried
 	ctxts chan *context
+	mut   sync.RWMutex
 }
 
 func (m *muxer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -340,13 +376,24 @@ func (m *muxer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if len(r.URL.Path) >= 9 && r.URL.Path[:9] == "/identify" {
+		m.mut.RLock()
 		handleIdentify(w, r, m.s, m.ctxts)
+		m.mut.RUnlock()
 		return
 	}
-	handleErr(w, http.StatusNotFound, fmt.Errorf("valid paths are /, /identify and /identify/*"))
+	if len(r.URL.Path) >= 7 && r.URL.Path[:7] == "/update" {
+		m.mut.Lock()
+		handleUpdate(w, r, m)
+		m.mut.Unlock()
+		return
+	}
+	handleErr(w, http.StatusNotFound, fmt.Errorf("valid paths are /, /update, /update/*, /identify and /identify/*"))
 }
 
 func listen(port string, s *siegfried.Siegfried, ctxts chan *context) {
-	mux := &muxer{s, ctxts}
+	mux := &muxer{
+		s:     s,
+		ctxts: ctxts,
+	}
 	http.ListenAndServe(port, mux)
 }

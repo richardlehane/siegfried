@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2686</FormatID>
+      <FormatName>GoDot 4Bit Graphics Format</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Raster)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>GoDot 4bit is the native image file format for the Commodore 64 image processing program GoDot.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>23 Feb 2023</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>23 Feb 2023</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/GoDot
+
+https://web.archive.org/web/20191223154008/http://www.godot64.de/english/4bit.htm</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1834</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3288</ExternalSignatureID>
+        <Signature>4bt</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2172</SignatureID>
+        <SignatureName>GoDot 4Bit Graphics Format</SignatureName>
+        <SignatureNote>BOF:'GOD0'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2514</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>474F4430</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>687</RelatedFormatID>
+        <RelatedFormatName>MPEG 1/2 Audio Layer 3</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

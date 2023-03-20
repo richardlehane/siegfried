@@ -242,6 +242,18 @@
         </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2693</RelatedFormatID>
+        <RelatedFormatName>Digital Negative Format (DNG)</RelatedFormatName>
+        <RelatedFormatVersion>1.5</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2694</RelatedFormatID>
+        <RelatedFormatName>Digital Negative Format (DNG)</RelatedFormatName>
+        <RelatedFormatVersion>1.6</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>609</RelatedFormatID>
         <RelatedFormatName>Tagged Image File Format</RelatedFormatName>

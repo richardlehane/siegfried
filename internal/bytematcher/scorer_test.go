@@ -7,6 +7,7 @@ import (
 	//"github.com/richardlehane/siegfried/internal/bytematcher/frames"
 	"github.com/richardlehane/siegfried/internal/bytematcher/frames/tests"
 	"github.com/richardlehane/siegfried/internal/siegreader"
+
 	//"github.com/richardlehane/siegfried/pkg/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 )
@@ -18,7 +19,8 @@ func setup() (chan<- strike, <-chan core.Result) {
 	buf, _ := bufs.Get(bytes.NewBuffer(TestSample1))
 	buf.SizeNow()
 	res := make(chan core.Result)
-	return bm.scorer(buf, bm.priorities.WaitSet(), make(chan struct{}), res), res
+	str, _ := bm.scorer(buf, bm.priorities.WaitSet(), make(chan struct{}), res)
+	return str, res
 }
 
 func TestScorer(t *testing.T) {
@@ -40,7 +42,7 @@ func BenchmarkScorer(bench *testing.B) {
 		scorer <- strike{0, 0, 0, 4, false, false}
 		scorer <- strike{1, 0, 17, 9, true, false}
 		scorer <- strike{1, 1, 30, 5, true, false}
-		_ = <-res
+		<-res
 	}
 }
 

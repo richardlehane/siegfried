@@ -17,7 +17,6 @@ package bytematcher
 import (
 	"fmt"
 
-	"github.com/richardlehane/siegfried/internal/bytematcher/frames"
 	"github.com/richardlehane/siegfried/internal/priority"
 	"github.com/richardlehane/siegfried/internal/siegreader"
 	"github.com/richardlehane/siegfried/pkg/config"
@@ -46,16 +45,6 @@ func (st strike) String() string {
 		strikeType = "frametest"
 	}
 	return fmt.Sprintf("{%s %s hit - index: %d [%d], offset: %d, length: %d}", strikeOrientation, strikeType, st.idxa+st.idxb, st.idxb, st.offset, st.length)
-}
-
-// progress strikes are special results from the WAC matchers that periodically report on progress, these aren't hits
-func progressStrike(off int64, rev bool) strike {
-	return strike{
-		idxa:    -1,
-		idxb:    -1,
-		offset:  off,
-		reverse: rev,
-	}
 }
 
 // strikes are cached in a map of strikeItems indexed by strikes' idxa + idxb fields
@@ -200,8 +189,9 @@ func (r result) Basis() string {
 	return r.basis
 }
 
-func (b *Matcher) scorer(buf *siegreader.Buffer, waitSet *priority.WaitSet, q chan struct{}, r chan<- core.Result) chan<- strike {
+func (b *Matcher) scorer(buf *siegreader.Buffer, waitSet *priority.WaitSet, q chan struct{}, r chan<- core.Result) (chan<- strike, <-chan []keyFrameID) {
 	incoming := make(chan strike)
+	resume := make(chan []keyFrameID)
 	hits := make(map[int]*hitItem)
 	strikes := make(map[int]*strikeItem)
 
@@ -224,19 +214,14 @@ func (b *Matcher) scorer(buf *siegreader.Buffer, waitSet *priority.WaitSet, q ch
 		return hit
 	}
 
-	// given the current bof and eof, is there anything worth waiting for?
-	continueWaiting := func(w []int) bool {
-		var keepScanning bool
-		// now for each of the possible signatures we are either waiting on or have partial/potential matches for, check whether there are live contenders
+	// Used for dwac
+	dynamicSeqs := func(w []int) []keyFrameID {
+		dynSeqs := make([]keyFrameID, 0, 20)
 		for _, v := range w {
 			kf := b.keyFrames[v]
 			for i, f := range kf {
-				off := bof
-				if f.typ > frames.PREV {
-					off = eof
-				}
 				var waitfor, excludable bool
-				if f.key.pMax == -1 || f.key.pMax+int64(f.key.lMax) > off {
+				if f.key.pMax == -1 {
 					waitfor = true
 				} else if hit, ok := hits[v]; ok {
 					if hit.partials[i] != nil {
@@ -248,18 +233,21 @@ func (b *Matcher) scorer(buf *siegreader.Buffer, waitSet *priority.WaitSet, q ch
 				// if we've got to the end of the signature, and have determined this is a live one - return immediately & continue scan
 				if waitfor {
 					if i == len(kf)-1 {
-						if !config.Slow() || !config.Checkpoint(bof) {
-							return true
+						if config.Slow() {
+							fmt.Fprintf(config.Out(), "waiting on: %d, potentially excludable: %t\n", v, excludable)
 						}
-						keepScanning = true
-						fmt.Fprintf(config.Out(), "waiting on: %d, potentially excludable: %t\n", v, excludable)
+						for ii, ff := range kf {
+							if ff.key.pMax == -1 {
+								dynSeqs = append(dynSeqs, keyFrameID{v, ii})
+							}
+						}
 					}
-					continue
+					continue // we've got one, now get more!
 				}
-				break
+				break // no reason to keep checking this signature
 			}
 		}
-		return keepScanning
+		return dynSeqs
 	}
 
 	testStrike := func(st strike) []kfHit {
@@ -408,28 +396,17 @@ func (b *Matcher) scorer(buf *siegreader.Buffer, waitSet *priority.WaitSet, q ch
 			if quitting {
 				continue
 			}
-			// HANDLE PROGRESS STRIKES (check if we should be continuing to wait)
+			// HANDLE RESUME
 			if in.idxa == -1 {
-				// update with the latest offset
-				if in.reverse {
-					eof = in.offset
-				} else {
-					bof = in.offset
-				}
-				w := waitSet.WaitingOnAt(bof, eof)
-				// if any of the waitlists are nil, we will continue - unless we are past the known bof and known eof (points at which we *should* have got at least partial matches), in which case we will check if any partial/potential matches are live
+				w := waitSet.WaitingOn() // todo: this uses bof/eof which are less relevant I don't store progress
 				if w == nil {
-					// keep going if we don't have a maximum known bof, or if our current bof/eof are less than the maximum known bof/eof
-					if b.knownBOF < 0 || int64(b.knownBOF) > bof || int64(b.knownEOF) > eof {
-						continue
-					}
-					// if we don't have a waitlist, and we are past the known bof and known eof, grab all the partials and potentials to check if any are live
 					w = all(hits)
 				}
-				// exhausted all contenders, we can stop scanning
-				if !continueWaiting(w) {
-					quit()
+				if in.reverse {
+					resume <- append(dynamicSeqs(w), b.unknownEOF...)
+					continue
 				}
+				resume <- append(dynamicSeqs(w), b.unknownBOF...)
 				continue
 			}
 			// HANDLE MATCH STRIKES
@@ -504,5 +481,5 @@ func (b *Matcher) scorer(buf *siegreader.Buffer, waitSet *priority.WaitSet, q ch
 		}
 		close(r)
 	}()
-	return incoming
+	return incoming, resume
 }

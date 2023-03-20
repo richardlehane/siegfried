@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2683</FormatID>
+      <FormatName>3D Studio (DOS) Project File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Model</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Prj is the 3D Studio (DOS) project-file format. The original 3D Studio product was created for the DOS platform by the Yost Group, and published by Autodesk.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
+      <ProvenanceSourceDate>22 Feb 2023</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>22 Feb 2023</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/PRJ</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1831</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Support>
+        <SupportID>18</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Autodesk Corporation</OrganisationName>
+        <SupportCompoundName>Autodesk Corporation</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3284</ExternalSignatureID>
+        <Signature>prj</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2169</SignatureID>
+        <SignatureName>3D Studio (DOS) Project File</SignatureName>
+        <SignatureNote>BOF Absolute from beginning of file, magic bytes:=Â{2}..</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2511</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3DC2{3}00</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

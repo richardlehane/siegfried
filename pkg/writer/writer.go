@@ -402,10 +402,12 @@ func (d *droidWriter) File(p string, sz int64, mod string, checksum []byte, err 
 		if sz < 0 {
 			d.rec[8], d.rec[9], d.rec[11] = "Folder", "", "false"
 			d.parents[d.rec[3]] = parent{d.id, d.rec[2], ""}
+			d.rec[3] = clearArchivePath(d.rec[2], d.rec[3])
+			d.rec[2] = d.rec[2] + "/" // add a trailing slash if a folder URI
 		} else {
 			d.rec[8], d.rec[11] = "", ""
+			d.rec[3] = clearArchivePath(d.rec[2], d.rec[3])
 		}
-		d.rec[3] = clearArchivePath(d.rec[2], d.rec[3])
 		d.w.Write(d.rec)
 		return
 	}

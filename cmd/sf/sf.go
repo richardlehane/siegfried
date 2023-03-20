@@ -16,12 +16,14 @@ package main
 
 import (
 	"bufio"
+	"errors"
 	"flag"
 	"fmt"
 	"hash"
 	"io"
 	"log"
 	"os"
+	"path/filepath"
 	"sync"
 	"time"
 
@@ -283,8 +285,11 @@ func replayFile(path string, ctxts chan *context, w writer.Writer) error {
 	if err != nil {
 		return fmt.Errorf("[FATAL] error reading results file %s; got %v", path, err)
 	}
+	hd := rdr.Head()
+	if *droido && (len(hd.Identifiers) != 1 || len(hd.Fields[0]) != 7) {
+		return errors.New("[FATAL] DROID output is limited to signature files with a single PRONOM identifier")
+	}
 	firstReplay.Do(func() {
-		hd := rdr.Head()
 		w.Head(hd.SignaturePath, hd.Scanned, hd.Created, hd.Version, hd.Identifiers, hd.Fields, hd.HashHeader)
 	})
 	var rf reader.File
@@ -333,7 +338,7 @@ func main() {
 	}
 	// handle -update
 	if *update || *updateShort {
-		msg, err := updateSigs(usig, flag.Args())
+		_, msg, err := updateSigs(usig, flag.Args())
 		if err != nil {
 			log.Fatalf("[FATAL] failed to update signature file, %v", err)
 		}
@@ -427,7 +432,7 @@ func main() {
 	case *jsono:
 		w = writer.JSON(os.Stdout)
 	case *droido:
-		if len(s.Fields()) != 1 || len(s.Fields()[0]) < 7 {
+		if !*replay && (len(s.Fields()) != 1 || len(s.Fields()[0]) < 7) {
 			close(ctxts)
 			log.Fatalln("[FATAL] DROID output is limited to signature files with a single PRONOM identifier")
 		}
@@ -487,7 +492,19 @@ func main() {
 			ctxts <- ctx
 			identifyRdr(os.Stdin, ctx, ctxts, getCtx)
 		} else {
-			err = identify(ctxts, v, "", *coe, *nr, d, getCtx)
+			globs, err := filepath.Glob(v)
+			if err != nil {
+				log.Fatalf("[FATAL] bad glob pattern: %s\n", err)
+			}
+			for _, glob := range globs {
+				err = identify(ctxts, glob, "", *coe, *nr, d, getCtx)
+				if err != nil {
+					printFile(ctxts,
+						getCtx(glob, "", time.Time{}, 0),
+						fmt.Errorf("failed to identify %s: %v", glob, err))
+					err = nil
+				}
+			}
 		}
 		if err != nil {
 			break

@@ -38,7 +38,8 @@ var identifier = struct {
 	limit       []string // limit signature to a set of included PRONOM reports
 	exclude     []string // exclude a set of PRONOM reports from the signature
 	extensions  string   // directory where custom signature extensions are stored
-	extend      []string
+	extend      []string // list of custom signature extensions
+	verbose     bool     // verbose output when building signatures
 }{
 	multi:      Conclusive,
 	extensions: "custom",
@@ -275,6 +276,11 @@ func Extend() []string {
 	return extensionPaths(identifier.extend)
 }
 
+// Verbose reports whether to build signatures with verbose logging output
+func Verbose() bool {
+	return identifier.verbose
+}
+
 // Return true if value 'v' is contained in slice 's'.
 func contains(v string, s []string) bool {
 	for _, n := range s {
@@ -458,6 +464,14 @@ func SetExclude(l []string) func() private {
 func SetExtend(l []string) func() private {
 	return func() private {
 		identifier.extend = l
+		return private{}
+	}
+}
+
+// SetVerbose controls logging verbosity when building signatures
+func SetVerbose(v bool) func() private {
+	return func() private {
+		identifier.verbose = v
 		return private{}
 	}
 }

@@ -93,7 +93,7 @@
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>352</RelatedFormatID>
-        <RelatedFormatName>Microsoft Access Database</RelatedFormatName>
+        <RelatedFormatName>Microsoft Access Database File</RelatedFormatName>
         <RelatedFormatVersion>2000</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>

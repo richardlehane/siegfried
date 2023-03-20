@@ -20,7 +20,6 @@ package wikidata
 import (
 	"errors"
 	"fmt"
-	"log"
 	"strconv"
 	"strings"
 
@@ -35,7 +34,7 @@ import (
 // Wikidata this means we'll use the extensions returned by the service
 // to match formats by that.
 func (wdd wikidataDefinitions) Globs() ([]string, []string) {
-	log.Println(
+	logln(
 		"Roy (Wikidata): Adding Glob signatures to identifier...",
 	)
 	globs, ids := make(
@@ -103,7 +102,7 @@ func processForPronom(bs byteSequences) []pronomSequence {
 // identifier and returns a slice of Signature frames, IDs, and errors
 // collected along the way.
 func processSIgnatures(wdd wikidataDefinitions) ([]frames.Signature, []string, error) {
-	log.Println(
+	logln(
 		"Roy (Wikidata): Adding Wikidata Byte signatures to identifier...",
 	)
 	var errs []error
@@ -170,7 +169,7 @@ func (wdd wikidataDefinitions) MSCFBs() ([][]string, [][]frames.Signature, []str
 // methods. This mimics that of the Library of Congress identifier.
 // Wikidata container modeling is in-progress.
 func (wdd wikidataDefinitions) containers(typ string) ([][]string, [][]frames.Signature, []string, error) {
-	log.Println(
+	logln(
 		"Roy (Wikidata): Adding container signatures to identifier...",
 	)
 	if _, ok := wdd.parseable.(identifier.Blank); ok {

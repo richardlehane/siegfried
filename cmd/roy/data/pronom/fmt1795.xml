@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2645</FormatID>
+      <FormatName>Asymetrix Toolbook File</FormatName>
+      <FormatVersion>6-11.5</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Presentation</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Asymetrix ToolBook was a Microsoft Windows based authoring software for creating e-learning systems. It was initially released in 1990 by Asymetrix Corporation, notably founded by Paul Allen, later merging with SumTotal Systems. ToolBook uses a book metaphor - a project file is thought of as a book containing pages of content. This is very similar to Microsoft PowerPoint’s use of the metaphor where presentations contain various slides. This entry records the .tbk file format described as ToolBook Books and .sbk format which are System Books containing scripts. This later version of format uses Portable Executable format. There were several versions of this software released, with version 11.5 as the final version of ToolBook, released in December 2012. SumTotal Systems ended all sales and support of Toolbook on December 31, 2021. Please see the full list of versions by following the links provided with this entry in Notes section.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
+      <ProvenanceSourceDate>18 Nov 2022</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>18 Nov 2022</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/Asymetrix_Toolbook#Software
+
+https://en.wikipedia.org/wiki/ToolBook
+
+https://winworldpc.com/product/toolbook/11</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1795</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3239</ExternalSignatureID>
+        <Signature>tbk</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3240</ExternalSignatureID>
+        <Signature>sbk</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2135</SignatureID>
+        <SignatureName>Asymetrix Toolbook File v6-11.5</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: Starting with 0x4D5A then between 126 to 128500 wildcard bytes followed by 0x50450000, then wildcard bytes of 20, followed by 0x0B01, then 66 wildcard bytes</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2476</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4D5A{126-128500}50450000{20}0B01{66}[0000:1000]*54006F006F006C00(42|62)006F006F006B00</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>1704</RelatedFormatID>
+        <RelatedFormatName>Windows Portable Executable</RelatedFormatName>
+        <RelatedFormatVersion>32 bit</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>1257</RelatedFormatID>
+        <RelatedFormatName>Asymetrix Toolbook File</RelatedFormatName>
+        <RelatedFormatVersion>1-5</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

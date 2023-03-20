@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2663</FormatID>
+      <FormatName>Audio Data Transport Stream</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Audio</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Audio Data Transport Stream (ADTS) is a format for audio data encoded with the Advanced Audio Coding (AAC) encoding scheme and was originally introduced with the MPEG-2 specification. It is common for this format to be contained with another format such as MPEG-4, and it can also be encoded with the Advanced Audio Coding (AAC) encoding scheme, originally introduced with the MPEG-2 specification. AAC can be encountered as a stand-alone extension, AAC-encoded data stored in ADTS files can often be used for streaming audio. An ADTS file consists of series of frames each containing header data followed by the compressed audio data.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
+      <ProvenanceSourceDate>31 Jan 2023</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>31 Jan 2023</LastUpdatedDate>
+      <FormatNote>https://wiki.multimedia.cx/index.php/ADTS
+
+http://dotwhat.net/file/extension/adts/10975
+
+https://www.file-extensions.org/adts-file-extension
+
+https://en.wikipedia.org/wiki/Advanced_Audio_Coding
+
+https://www.iana.org/assignments/media-types/audio/aac</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>audio/aac</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>audio/vnd.dlna.adts</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fdd000036</Identifier>
+        <IdentifierType>Library of Congress Format Description Identifier</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1812</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>Q27863188</Identifier>
+        <IdentifierType>Wikidata QID Identifier</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3263</ExternalSignatureID>
+        <Signature>aac</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3264</ExternalSignatureID>
+        <Signature>adts</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2152</SignatureID>
+        <SignatureName>Audio Data Transport Stream sig.1</SignatureName>
+        <SignatureNote>An FF pattern from BOF with variation of byte stream</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2494</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>FF(F0|F1|F8|F9)(40|41|44|45|48|49|4C|4D|50|51|54|55|58|59|5C|5D|60|61|64|65|68|69|6C|6D|70|71|80|81|84|85|88|89|8C|8D|90|91|94|95|98|99|9C|9D|A0|A1|A4|A5|A8|A9|AC|AD|B0|B1)(00|01|20|40|41|60|80|81|60|A0|C0|C1|E0)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>2153</SignatureID>
+        <SignatureName>Audio Data Transport Stream sig.2</SignatureName>
+        <SignatureNote>ID3 tag variation with variable byte stream</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2495</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>494433{0-2045}FF(F0|F1|F8|F9)(40|41|44|45|48|49|4C|4D|50|51|54|55|58|59|5C|5D|60|61|64|65|68|69|6C|6D|70|71|80|81|84|85|88|89|8C|8D|90|91|94|95|98|99|9C|9D|A0|A1|A4|A5|A8|A9|AC|AD|B0|B1)(00|01|20|40|41|60|80|81|60|A0|C0|C1|E0)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>687</RelatedFormatID>
+        <RelatedFormatName>MPEG 1/2 Audio Layer 3</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

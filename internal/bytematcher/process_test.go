@@ -4,7 +4,7 @@ import (
 	"sync"
 	"testing"
 
-	wac "github.com/richardlehane/match/fwac"
+	"github.com/richardlehane/match/dwac"
 	"github.com/richardlehane/siegfried/internal/bytematcher/frames/tests"
 	"github.com/richardlehane/siegfried/internal/persist"
 	"github.com/richardlehane/siegfried/internal/priority"
@@ -65,11 +65,11 @@ func TestProcess(t *testing.T) {
 	if len(b.bofSeq.set) != 5 {
 		t.Errorf("Expecting 5 BOF seqs, got %d", len(b.bofSeq.set))
 	}
-	e1 := wac.Seq{[]int64{0}, []wac.Choice{{[]byte{'t', 'e', 's', 't'}}}}
+	e1 := dwac.Seq{MaxOffsets: []int64{0}, Choices: []dwac.Choice{{[]byte{'t', 'e', 's', 't'}}}}
 	if !seqEquals(b.bofSeq.set[0], e1) {
 		t.Errorf("Expecting %v to equal %v", b.bofSeq.set[0], e1)
 	}
-	e2 := wac.Seq{[]int64{-1}, []wac.Choice{{[]byte{'t', 'e', 's', 't'}}}}
+	e2 := dwac.Seq{MaxOffsets: []int64{-1}, Choices: []dwac.Choice{{[]byte{'t', 'e', 's', 't'}}}}
 	if seqEquals(b.bofSeq.set[0], e2) {
 		t.Errorf("Not expecting %v to equal %v", b.bofSeq.set[0], e2)
 	}
@@ -98,8 +98,6 @@ func TestProcessFmt418(t *testing.T) {
 		t.Errorf("Expecting 2, got %d", len(b.keyFrames[0]))
 	}
 }
-
-var test418 = "%!PS-Adobe-2.0UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU%%DocumentNeededResources:UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU%%+ procset Adobe_Illustrator_AI3"
 
 func TestProcessFmt134(t *testing.T) {
 	b := newMatcher()
