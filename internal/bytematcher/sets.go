@@ -20,7 +20,6 @@ import (
 	"sort"
 
 	"github.com/richardlehane/match/dwac"
-	wac "github.com/richardlehane/match/dwac"
 	"github.com/richardlehane/siegfried/internal/bytematcher/frames"
 	"github.com/richardlehane/siegfried/internal/persist"
 	"github.com/richardlehane/siegfried/internal/siegreader"
@@ -31,7 +30,7 @@ import (
 // As far as possible, signatures are flattened into simple byte sequences grouped into two sets: BOF and EOF sets.
 // When a byte sequence is matched, the TestTree is examined for keyframe matches and to conduct further tests.
 type seqSet struct {
-	set []wac.Seq
+	set []dwac.Seq
 	//entanglements map[int]entanglement // not persisted yet
 	testTreeIndex []int // The index of the testTree for the first choices. For subsequence choices, add the index of that choice to the test tree index.
 }
@@ -58,12 +57,12 @@ func loadSeqSet(ls *persist.LoadSaver) *seqSet {
 		_ = ls.LoadInts() // discard the empty testtreeindex list too
 		return ret
 	}
-	ret.set = make([]wac.Seq, le)
+	ret.set = make([]dwac.Seq, le)
 	for i := range ret.set {
 		ret.set[i].MaxOffsets = ls.LoadBigInts()
-		ret.set[i].Choices = make([]wac.Choice, ls.LoadSmallInt())
+		ret.set[i].Choices = make([]dwac.Choice, ls.LoadSmallInt())
 		for j := range ret.set[i].Choices {
-			ret.set[i].Choices[j] = make(wac.Choice, ls.LoadSmallInt())
+			ret.set[i].Choices[j] = make(dwac.Choice, ls.LoadSmallInt())
 			for k := range ret.set[i].Choices[j] {
 				ret.set[i].Choices[j][k] = ls.LoadBytes()
 			}
@@ -74,7 +73,7 @@ func loadSeqSet(ls *persist.LoadSaver) *seqSet {
 }
 
 // helper funcs to test equality of wac.Seq
-func choiceExists(a []byte, b wac.Choice) bool {
+func choiceExists(a []byte, b dwac.Choice) bool {
 	for _, v := range b {
 		if bytes.Equal(a, v) {
 			return true
@@ -83,7 +82,7 @@ func choiceExists(a []byte, b wac.Choice) bool {
 	return false
 }
 
-func seqEquals(a wac.Seq, b wac.Seq) bool {
+func seqEquals(a dwac.Seq, b dwac.Seq) bool {
 	if len(a.MaxOffsets) != len(b.MaxOffsets) || len(a.Choices) != len(b.Choices) {
 		return false
 	}
@@ -105,7 +104,7 @@ func seqEquals(a wac.Seq, b wac.Seq) bool {
 	return true
 }
 
-func (ss *seqSet) exists(seq wac.Seq) (int, bool) {
+func (ss *seqSet) exists(seq dwac.Seq) (int, bool) {
 	for i, v := range ss.set {
 		if seqEquals(seq, v) {
 			return i, true
@@ -115,7 +114,7 @@ func (ss *seqSet) exists(seq wac.Seq) (int, bool) {
 }
 
 // Add sequence to set. Provides latest testTreeIndex, returns actual testTreeIndex for hit insertion.
-func (ss *seqSet) add(seq wac.Seq, hi int) int {
+func (ss *seqSet) add(seq dwac.Seq, hi int) int {
 	i, ok := ss.exists(seq)
 	if ok {
 		return ss.testTreeIndex[i]
