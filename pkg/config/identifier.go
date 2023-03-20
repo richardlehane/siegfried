@@ -397,6 +397,8 @@ func SetMulti(m string) func() private {
 			identifier.multi = Comprehensive
 		case "4", "exhaustive":
 			identifier.multi = Exhaustive
+		case "5", "droid":
+			identifier.multi = DROID
 		default:
 			identifier.multi = Conclusive
 		}

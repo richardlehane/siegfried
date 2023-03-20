@@ -23,6 +23,7 @@ const (
 	Positive                   // Return any result with a strong score (or if only weak results, return all). This means a byte match, container match or XML match. Text/MIME/extension-only matches are considered weak.
 	Comprehensive              // Same as positive but also turn off the priority rules during byte matching.
 	Exhaustive                 // Turn off priority rules during byte matching and return all weak as well as strong results.
+	DROID
 )
 
 func (m Multi) String() string {
@@ -37,6 +38,8 @@ func (m Multi) String() string {
 		return "comprehensive (3)"
 	case Exhaustive:
 		return "exhaustive (4)"
+	case DROID:
+		return "droid (5)"
 	}
 	return ""
 }
