@@ -201,6 +201,7 @@ func (b *Matcher) scorer(buf *siegreader.Buffer, waitSet *priority.WaitSet, q ch
 	var quitting bool
 	quit := func() {
 		close(q)
+		close(resume)
 		quitting = true
 	}
 
