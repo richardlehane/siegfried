@@ -29,6 +29,7 @@ var pronom = struct {
 	droid            string   // name of droid file e.g. DROID_SignatureFile_V78.xml
 	container        string   // e.g. container-signature-19770502.xml
 	reports          string   // directory where PRONOM reports are stored
+	noclass          bool     // omit class from the format info
 	doubleup         bool     // include byte signatures for formats that also have container signatures
 	extendc          []string //container extensions
 	changesURL       string
@@ -63,7 +64,7 @@ var pronom = struct {
 
 // GETTERS
 
-// DROID returns the location of the DROID signature file.
+// Droid returns the location of the DROID signature file.
 // If not set, infers the latest file.
 func Droid() string {
 	if pronom.droid == "" {
@@ -79,7 +80,7 @@ func Droid() string {
 	return pronom.droid
 }
 
-// DROID base returns the base filename of the DROID signature file.
+// DroidBase returns the base filename of the DROID signature file.
 // If not set, infers the latest file.
 func DroidBase() string {
 	if pronom.droid == "" {
@@ -163,6 +164,11 @@ func Reports() string {
 	return filepath.Join(siegfried.home, pronom.reports)
 }
 
+// NoClass reports whether the noclass flag has been set. This will cause class to be omitted from format infos
+func NoClass() bool {
+	return pronom.noclass
+}
+
 // DoubleUp reports whether the doubleup flag has been set. This will cause byte signatures to be built for formats where container signatures are also provided.
 func DoubleUp() bool {
 	return pronom.doubleup
@@ -173,11 +179,12 @@ func ExcludeDoubles(puids, cont []string) []string {
 	return exclude(puids, cont)
 }
 
-// Extend reports whether a set of container signature extensions has been provided.
+// ExtendC reports whether a set of container signature extensions has been provided.
 func ExtendC() []string {
 	return extensionPaths(pronom.extendc)
 }
 
+// ChangesURL returns the URL for the PRONOM release notes.
 func ChangesURL() string {
 	return pronom.changesURL
 }
@@ -225,6 +232,14 @@ func SetNoReports() func() private {
 	}
 }
 
+// SetNoClass causes class to be omitted from the format info
+func SetNoClass() func() private {
+	return func() private {
+		pronom.noclass = true
+		return private{}
+	}
+}
+
 // SetDoubleUp causes byte signatures to be built for formats where container signatures are also provided.
 func SetDoubleUp() func() private {
 	return func() private {
@@ -248,6 +263,7 @@ func SetHarvestTimeout(d time.Duration) {
 	pronom.harvestTimeout = d
 }
 
+// SetHarvestThrottle sets a throttle value for downloading DROID reports.
 func SetHarvestThrottle(d time.Duration) {
 	pronom.harvestThrottle = d
 }

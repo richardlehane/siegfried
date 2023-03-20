@@ -435,7 +435,7 @@ func (d *droidWriter) File(p string, sz int64, mod string, checksum []byte, err 
 			d.rec[8] = "File"
 		}
 		fields := id.Values()
-		d.rec[5], d.rec[11] = getMethod(fields[5]), mismatch(fields[6])
+		d.rec[5], d.rec[11] = getMethod(fields[len(fields)-2]), mismatch(fields[len(fields)-1])
 		d.rec[14], d.rec[15], d.rec[16], d.rec[17] = fields[1], fields[4], fields[2], fields[3]
 		d.rec[3] = clearArchivePath(d.rec[2], d.rec[3])
 		d.w.Write(d.rec)

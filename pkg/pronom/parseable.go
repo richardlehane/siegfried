@@ -28,6 +28,7 @@ type formatInfo struct {
 	name     string
 	version  string
 	mimeType string
+	class    string
 }
 
 func (f formatInfo) String() string {
@@ -118,7 +119,12 @@ func (r *reports) IDs() []string {
 func (r *reports) Infos() map[string]identifier.FormatInfo {
 	infos := make(map[string]identifier.FormatInfo)
 	for i, v := range r.r {
-		infos[r.p[i]] = formatInfo{strings.TrimSpace(v.Name), strings.TrimSpace(v.Version), strings.TrimSpace(v.MIME())}
+		infos[r.p[i]] = formatInfo{
+			name:     strings.TrimSpace(v.Name),
+			version:  strings.TrimSpace(v.Version),
+			mimeType: strings.TrimSpace(v.MIME()),
+			class:    strings.TrimSpace(v.Types),
+		}
 	}
 	return infos
 }
@@ -223,7 +229,11 @@ func (d *droid) IDs() []string {
 func (d *droid) Infos() map[string]identifier.FormatInfo {
 	infos := make(map[string]identifier.FormatInfo)
 	for _, v := range d.FileFormats {
-		infos[v.Puid] = formatInfo{strings.TrimSpace(v.Name), strings.TrimSpace(v.Version), strings.TrimSpace(v.MIMEType)}
+		infos[v.Puid] = formatInfo{
+			name:     strings.TrimSpace(v.Name),
+			version:  strings.TrimSpace(v.Version),
+			mimeType: strings.TrimSpace(v.MIMEType),
+		}
 	}
 	return infos
 }
@@ -264,7 +274,7 @@ func (d *droid) Texts() []string {
 func (d *droid) idsPuids() map[int]string {
 	idsPuids := make(map[int]string)
 	for _, v := range d.FileFormats {
-		idsPuids[v.Id] = v.Puid
+		idsPuids[v.ID] = v.Puid
 	}
 	return idsPuids
 }
@@ -274,9 +284,7 @@ func (d *droid) puidsInternalIds() map[string][]int {
 	for _, v := range d.FileFormats {
 		if len(v.Signatures) > 0 {
 			sigs := make([]int, len(v.Signatures))
-			for j, w := range v.Signatures {
-				sigs[j] = w
-			}
+			copy(sigs, v.Signatures)
 			puidsIIds[v.Puid] = sigs
 		}
 	}
@@ -305,7 +313,7 @@ func (d *droid) Signatures() ([]frames.Signature, []string, error) {
 	// first a map of internal sig ids to bytesequences
 	seqs := make(map[int][]mappings.ByteSeq)
 	for _, v := range d.Droid.Signatures {
-		seqs[v.Id] = v.ByteSequences
+		seqs[v.ID] = v.ByteSequences
 	}
 	m := d.puidsInternalIds()
 	var err error

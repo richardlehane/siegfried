@@ -21,6 +21,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"strings"
 	"testing"
 	"time"
 
@@ -153,6 +154,22 @@ matches  :
 			}
 		}
 		t.Errorf("Expecting return: %s\nGot: %s\n%s", expect, ret, detail)
+	}
+}
+
+// TestDroidHeader ensures that the DROID header is output consistently
+// and matches the DROID CSV specification.
+func TestDroidHeader(t *testing.T) {
+	buf := &bytes.Buffer{}
+	droid := Droid(buf)
+	droid.Head("", time.Time{}, time.Time{}, [3]int{}, [][2]string{{"pronom", ""}}, [][]string{makeFields()}, "md5")
+	droid.Tail()
+	// DROID identification result isn't tested here as the paths output
+	// are absolute and require a bit of finessing in SF to get right.
+	expected := `ID,PARENT_ID,URI,FILE_PATH,NAME,METHOD,STATUS,SIZE,TYPE,EXT,LAST_MODIFIED,EXTENSION_MISMATCH,MD5_HASH,FORMAT_COUNT,PUID,MIME_TYPE,FORMAT_NAME,FORMAT_VERSION`
+	res := strings.Trim(buf.String(), "\n")
+	if res != expected {
+		t.Errorf("DROID output didn't output as expected: \n'%s' got: \n'%s'", res, expected)
 	}
 }
 

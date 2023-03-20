@@ -12,14 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// This file contains struct mappings to unmarshal three different PRONOM XML formats: the signature file format, the report format, and the container format
+// Package mappings contains struct mappings to unmarshal three
+// different PRONOM XML formats: the DROID signature file format, the report
+// format, and the container format.
 package mappings
 
-import (
-	"encoding/xml"
-)
-
-// Droid Signature File
+import "encoding/xml"
 
 type Droid struct {
 	XMLName     xml.Name            `xml:"FFSignatureFile"`
@@ -29,7 +27,7 @@ type Droid struct {
 }
 
 type InternalSignature struct {
-	Id            int       `xml:"ID,attr"`
+	ID            int       `xml:"ID,attr"`
 	ByteSequences []ByteSeq `xml:"ByteSequence"`
 }
 
@@ -56,7 +54,7 @@ type Fragment struct {
 
 type FileFormat struct {
 	XMLName    xml.Name `xml:"FileFormat"`
-	Id         int      `xml:"ID,attr"`
+	ID         int      `xml:"ID,attr"`
 	Puid       string   `xml:"PUID,attr"`
 	Name       string   `xml:",attr"`
 	Version    string   `xml:",attr"`

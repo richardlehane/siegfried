@@ -29,38 +29,61 @@ func init() {
 	core.RegisterIdentifier(core.Pronom, Load)
 }
 
+// Identifier is the PRONOM implementation of the Identifier interface
+// It wraps the base Identifier implementation with a formatinfo map
 type Identifier struct {
-	infos map[string]formatInfo
+	hasClass bool // has this PRONOM identifier been built from reports & without the NoClass config option set?
+	infos    map[string]formatInfo
 	*identifier.Base
 }
 
+// Save persists the PRONOM Identifier to disk
 func (i *Identifier) Save(ls *persist.LoadSaver) {
 	ls.SaveByte(core.Pronom)
+	ls.SaveBool(i.hasClass)
 	ls.SaveSmallInt(len(i.infos))
 	for k, v := range i.infos {
 		ls.SaveString(k)
 		ls.SaveString(v.name)
 		ls.SaveString(v.version)
 		ls.SaveString(v.mimeType)
+		if i.hasClass {
+			ls.SaveString(v.class)
+		}
 	}
 	i.Base.Save(ls)
 }
 
+// Load reads PRONOM information back from the persist byte format into
+// the Identifier's FormatInfo struct.
 func Load(ls *persist.LoadSaver) core.Identifier {
 	i := &Identifier{}
+	i.hasClass = ls.LoadBool()
 	i.infos = make(map[string]formatInfo)
 	le := ls.LoadSmallInt()
-	for j := 0; j < le; j++ {
-		i.infos[ls.LoadString()] = formatInfo{
-			ls.LoadString(),
-			ls.LoadString(),
-			ls.LoadString(),
+	if i.hasClass {
+		for j := 0; j < le; j++ {
+			i.infos[ls.LoadString()] = formatInfo{
+				name:     ls.LoadString(),
+				version:  ls.LoadString(),
+				mimeType: ls.LoadString(),
+				class:    ls.LoadString(),
+			}
+		}
+	} else {
+		for j := 0; j < le; j++ {
+			i.infos[ls.LoadString()] = formatInfo{
+				name:     ls.LoadString(),
+				version:  ls.LoadString(),
+				mimeType: ls.LoadString(),
+			}
 		}
 	}
 	i.Base = identifier.Load(ls)
 	return i
 }
 
+// New creates a new PRONOM Identifier
 func New(opts ...config.Option) (core.Identifier, error) {
 	for _, v := range opts {
 		v()
@@ -70,15 +93,40 @@ func New(opts ...config.Option) (core.Identifier, error) {
 		return nil, err
 	}
 	return &Identifier{
-		infos: infos(pronom.Infos()),
-		Base:  identifier.New(pronom, config.ZipPuid()),
+		hasClass: config.Reports() != "" && !config.NoClass(),
+		infos:    infos(pronom.Infos()),
+		Base:     identifier.New(pronom, config.ZipPuid()),
 	}, nil
 }
 
+// Fields returns the user-facing fields used in the Identifier's
+// reports.
 func (i *Identifier) Fields() []string {
-	return []string{"namespace", "id", "format", "version", "mime", "basis", "warning"}
+	if i.hasClass {
+		return []string{
+			"namespace",
+			"id",
+			"format",
+			"version",
+			"mime",
+			"class",
+			"basis",
+			"warning",
+		}
+	} else {
+		return []string{
+			"namespace",
+			"id",
+			"format",
+			"version",
+			"mime",
+			"basis",
+			"warning",
+		}
+	}
 }
 
+// Recorder provides a new recorder for identification results.
 func (i *Identifier) Recorder() core.Recorder {
 	return &Recorder{
 		Identifier: i,
@@ -86,6 +134,7 @@ func (i *Identifier) Recorder() core.Recorder {
 	}
 }
 
+// Recorder stores information about match results.
 type Recorder struct {
 	*Identifier
 	ids        pids
@@ -103,6 +152,7 @@ const (
 	incScore
 )
 
+// Active sets the flags for the recorder's active matchers.
 func (r *Recorder) Active(m core.MatcherType) {
 	if r.Identifier.Active(m) {
 		switch m {
@@ -116,6 +166,7 @@ func (r *Recorder) Active(m core.MatcherType) {
 	}
 }
 
+// Record builds possible results sets associated with an identification.
 func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 	switch m {
 	default:
@@ -124,16 +175,14 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 		if hit, id := r.Hit(m, res.Index()); hit {
 			r.ids = add(r.ids, r.Name(), id, r.infos[id], res.Basis(), extScore)
 			return true
-		} else {
-			return false
 		}
+		return false
 	case core.MIMEMatcher:
 		if hit, id := r.Hit(m, res.Index()); hit {
 			r.ids = add(r.ids, r.Name(), id, r.infos[id], res.Basis(), mimeScore)
 			return true
-		} else {
-			return false
 		}
+		return false
 	case core.ContainerMatcher:
 		// add zip default
 		if res.Index() < 0 {
@@ -152,9 +201,8 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 			}
 			r.ids = add(r.ids, r.Name(), id, r.infos[id], basis, r.cscore)
 			return true
-		} else {
-			return false
 		}
+		return false
 	case core.ByteMatcher:
 		if hit, id := r.Hit(m, res.Index()); hit {
 			if r.satisfied {
@@ -168,9 +216,8 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 			}
 			r.ids = add(r.ids, r.Name(), id, r.infos[id], basis, r.cscore)
 			return true
-		} else {
-			return false
 		}
+		return false
 	case core.TextMatcher:
 		if hit, id := r.Hit(m, res.Index()); hit {
 			if r.satisfied {
@@ -178,12 +225,13 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 			}
 			r.ids = add(r.ids, r.Name(), id, r.infos[id], res.Basis(), textScore)
 			return true
-		} else {
-			return false
 		}
+		return false
 	}
 }
 
+// Satisfied determines whether we should continue running identification
+// with a given matcher type.
 func (r *Recorder) Satisfied(mt core.MatcherType) (bool, core.Hint) {
 	if r.NoPriority() {
 		return false, core.Hint{}
@@ -198,7 +246,10 @@ func (r *Recorder) Satisfied(mt core.MatcherType) (bool, core.Hint) {
 				for i, v := range r.ids {
 					keys[i] = v.String()
 				}
-				return false, core.Hint{r.Start(mt), r.Lookup(mt, keys)}
+				return false, core.Hint{
+					Exclude: r.Start(mt),
+					Pivot:   r.Lookup(mt, keys),
+				}
 			}
 			return false, core.Hint{}
 		}
@@ -211,7 +262,10 @@ func (r *Recorder) Satisfied(mt core.MatcherType) (bool, core.Hint) {
 	}
 	r.satisfied = true
 	if mt == core.ByteMatcher {
-		return true, core.Hint{r.Start(mt), nil}
+		return true, core.Hint{
+			Exclude: r.Start(mt),
+			Pivot:   nil,
+		}
 	}
 	return true, core.Hint{}
 }
@@ -239,13 +293,24 @@ func lowConfidence(conf int) string {
 	}
 }
 
+// Report organizes the results output and lists the highest priority
+// results first.
 func (r *Recorder) Report() []core.Identification {
 	// no results
 	if len(r.ids) == 0 {
-		return []core.Identification{Identification{
-			Namespace: r.Name(),
-			ID:        "UNKNOWN",
-			Warning:   "no match",
+		if r.hasClass {
+			return []core.Identification{Identification{
+				Namespace: r.Name(),
+				ID:        "UNKNOWN",
+				Warning:   "no match",
+			}}
+		}
+		return []core.Identification{NoClassIdentification{
+			Identification{
+				Namespace: r.Name(),
+				ID:        "UNKNOWN",
+				Warning:   "no match",
+			},
 		}}
 	}
 	sort.Sort(r.ids)
@@ -290,10 +355,19 @@ func (r *Recorder) Report() []core.Identification {
 				poss[i] = v.ID
 				conf = conf | v.confidence
 			}
-			return []core.Identification{Identification{
-				Namespace: r.Name(),
-				ID:        "UNKNOWN",
-				Warning:   fmt.Sprintf("no match; possibilities based on %v are %v", lowConfidence(conf), strings.Join(poss, ", ")),
+			if r.hasClass {
+				return []core.Identification{Identification{
+					Namespace: r.Name(),
+					ID:        "UNKNOWN",
+					Warning:   fmt.Sprintf("no match; possibilities based on %v are %v", lowConfidence(conf), strings.Join(poss, ", ")),
+				}}
+			}
+			return []core.Identification{NoClassIdentification{
+				Identification{
+					Namespace: r.Name(),
+					ID:        "UNKNOWN",
+					Warning:   fmt.Sprintf("no match; possibilities based on %v are %v", lowConfidence(conf), strings.Join(poss, ", ")),
+				},
 			}}
 		}
 		r.ids = nids
@@ -307,10 +381,19 @@ func (r *Recorder) Report() []core.Identification {
 			}
 			poss = append(poss, v.ID)
 		}
-		return []core.Identification{Identification{
-			Namespace: r.Name(),
-			ID:        "UNKNOWN",
-			Warning:   fmt.Sprintf("multiple matches %v", strings.Join(poss, ", ")),
+		if r.hasClass {
+			return []core.Identification{Identification{
+				Namespace: r.Name(),
+				ID:        "UNKNOWN",
+				Warning:   fmt.Sprintf("multiple matches %v", strings.Join(poss, ", ")),
+			}}
+		}
+		return []core.Identification{NoClassIdentification{
+			Identification{
+				Namespace: r.Name(),
+				ID:        "UNKNOWN",
+				Warning:   fmt.Sprintf("multiple matches %v", strings.Join(poss, ", ")),
+			},
 		}}
 	}
 	ret := make([]core.Identification, len(r.ids))
@@ -334,7 +417,7 @@ func (r *Recorder) Report() []core.Identification {
 	return ret
 }
 
-func (r *Recorder) updateWarning(i Identification) Identification {
+func (r *Recorder) updateWarning(i Identification) core.Identification {
 	// apply low confidence
 	if i.confidence <= textScore {
 		if len(i.Warning) > 0 {
@@ -368,15 +451,20 @@ func (r *Recorder) updateWarning(i Identification) Identification {
 			}
 		}
 	}
+	if !r.hasClass {
+		return NoClassIdentification{i}
+	}
 	return i
 }
 
+// Identification records format related metadata.
 type Identification struct {
 	Namespace  string
 	ID         string
 	Name       string
 	Version    string
 	MIME       string
+	Class      string
 	Basis      []string
 	Warning    string
 	archive    config.Archive
@@ -387,14 +475,17 @@ func (id Identification) String() string {
 	return id.ID
 }
 
+// Known outputs true if the identification result isn't UNKNOWN.
 func (id Identification) Known() bool {
 	return id.ID != "UNKNOWN"
 }
 
+// Warn returns the associated warning for a given identification.
 func (id Identification) Warn() string {
 	return id.Warning
 }
 
+// Values returns the Identification result information to the caller.
 func (id Identification) Values() []string {
 	var basis string
 	if len(id.Basis) > 0 {
@@ -406,11 +497,13 @@ func (id Identification) Values() []string {
 		id.Name,
 		id.Version,
 		id.MIME,
+		id.Class,
 		basis,
 		id.Warning,
 	}
 }
 
+// Archive returns the archive value for a given identification.
 func (id Identification) Archive() config.Archive {
 	return id.archive
 }
@@ -431,5 +524,39 @@ func add(p pids, id string, f string, info formatInfo, basis string, c int) pids
 			return p
 		}
 	}
-	return append(p, Identification{id, f, info.name, info.version, info.mimeType, []string{basis}, "", config.IsArchive(f), c})
+	return append(p,
+		Identification{
+			Namespace:  id,
+			ID:         f,
+			Name:       info.name,
+			Version:    info.version,
+			MIME:       info.mimeType,
+			Class:      info.class,
+			Basis:      []string{basis},
+			Warning:    "",
+			archive:    config.IsArchive(f),
+			confidence: c,
+		},
+	)
+}
+
+// NoClassIdentification wraps Identification to implement the noclass option
+type NoClassIdentification struct {
+	Identification
+}
+
+func (nc NoClassIdentification) Values() []string {
+	var basis string
+	if len(nc.Basis) > 0 {
+		basis = strings.Join(nc.Basis, "; ")
+	}
+	return []string{
+		nc.Namespace,
+		nc.ID,
+		nc.Name,
+		nc.Version,
+		nc.MIME,
+		basis,
+		nc.Warning,
+	}
 }

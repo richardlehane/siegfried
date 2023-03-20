@@ -318,6 +318,8 @@ func Clear() func() private {
 	return func() private {
 		identifier.name = ""
 		identifier.extend = nil
+		identifier.limit = nil
+		identifier.exclude = nil
 		loc.fdd = ""
 		mimeinfo.mi = ""
 		return private{}

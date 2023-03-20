@@ -190,7 +190,7 @@ func (r *Recorder) Satisfied(mt core.MatcherType) (bool, core.Hint) {
 	sort.Sort(r.ids)
 	if len(r.ids) > 0 && (r.ids[0].xmlMatch || (r.ids[0].magicScore > 0 && r.ids[0].ID != config.TextMIME())) {
 		if mt == core.ByteMatcher {
-			return true, core.Hint{r.Start(mt), nil}
+			return true, core.Hint{Exclude: r.Start(mt), Pivot: nil}
 		}
 		return true, core.Hint{}
 	}

@@ -221,7 +221,7 @@ func handleIdentify(w http.ResponseWriter, r *http.Request, s *siegfried.Siegfri
 	err = identify(ctxts, path, "", coerr, nrec, d, gf)
 	wg.Wait()
 	wr.Tail()
-	if _, ok := err.(WalkError); ok { // only dump out walk errors, other errors reported in result
+	if _, ok := err.(walkError); ok { // only dump out walk errors, other errors reported in result
 		io.WriteString(w, err.Error())
 	}
 }
