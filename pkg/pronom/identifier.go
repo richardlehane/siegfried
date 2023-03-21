@@ -21,6 +21,7 @@ import (
 
 	"github.com/richardlehane/siegfried/internal/identifier"
 	"github.com/richardlehane/siegfried/internal/persist"
+	"github.com/richardlehane/siegfried/internal/priority"
 	"github.com/richardlehane/siegfried/pkg/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 )
@@ -32,8 +33,10 @@ func init() {
 // Identifier is the PRONOM implementation of the Identifier interface
 // It wraps the base Identifier implementation with a formatinfo map
 type Identifier struct {
-	hasClass bool // has this PRONOM identifier been built from reports & without the NoClass config option set?
-	infos    map[string]formatInfo
+	hasClass     bool // has this PRONOM identifier been built from reports & without the NoClass config option set?
+	isMultiDROID bool // has the -multi DROID option been set
+	infos        map[string]formatInfo
+	priorities   priority.Map
 	*identifier.Base
 }
 
@@ -41,6 +44,7 @@ type Identifier struct {
 func (i *Identifier) Save(ls *persist.LoadSaver) {
 	ls.SaveByte(core.Pronom)
 	ls.SaveBool(i.hasClass)
+	ls.SaveBool(i.isMultiDROID)
 	ls.SaveSmallInt(len(i.infos))
 	for k, v := range i.infos {
 		ls.SaveString(k)
@@ -49,6 +53,9 @@ func (i *Identifier) Save(ls *persist.LoadSaver) {
 		ls.SaveString(v.mimeType)
 		if i.hasClass {
 			ls.SaveString(v.class)
+		}
+		if i.isMultiDROID {
+			ls.SaveStrings(i.priorities[k])
 		}
 	}
 	i.Base.Save(ls)
@@ -59,23 +66,35 @@ func (i *Identifier) Save(ls *persist.LoadSaver) {
 func Load(ls *persist.LoadSaver) core.Identifier {
 	i := &Identifier{}
 	i.hasClass = ls.LoadBool()
+	i.isMultiDROID = ls.LoadBool()
+	if i.isMultiDROID {
+		i.priorities = make(priority.Map)
+	}
 	i.infos = make(map[string]formatInfo)
 	le := ls.LoadSmallInt()
 	if i.hasClass {
 		for j := 0; j < le; j++ {
-			i.infos[ls.LoadString()] = formatInfo{
+			k := ls.LoadString()
+			i.infos[k] = formatInfo{
 				name:     ls.LoadString(),
 				version:  ls.LoadString(),
 				mimeType: ls.LoadString(),
 				class:    ls.LoadString(),
 			}
+			if i.isMultiDROID {
+				i.priorities[k] = ls.LoadStrings()
+			}
 		}
 	} else {
 		for j := 0; j < le; j++ {
-			i.infos[ls.LoadString()] = formatInfo{
+			k := ls.LoadString()
+			i.infos[k] = formatInfo{
 				name:     ls.LoadString(),
 				version:  ls.LoadString(),
 				mimeType: ls.LoadString(),
+			}
+			if i.isMultiDROID {
+				i.priorities[k] = ls.LoadStrings()
 			}
 		}
 	}
@@ -92,11 +111,16 @@ func New(opts ...config.Option) (core.Identifier, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &Identifier{
-		hasClass: config.Reports() != "" && !config.NoClass(),
-		infos:    infos(pronom.Infos()),
-		Base:     identifier.New(pronom, config.ZipPuid()),
-	}, nil
+	id := &Identifier{
+		hasClass:     config.Reports() != "" && !config.NoClass(),
+		isMultiDROID: config.GetMulti() == config.DROID,
+		infos:        infos(pronom.Infos()),
+		Base:         identifier.New(pronom, config.ZipPuid()),
+	}
+	if id.isMultiDROID {
+		id.priorities = pronom.Priorities()
+	}
+	return id, nil
 }
 
 // Fields returns the user-facing fields used in the Identifier's
