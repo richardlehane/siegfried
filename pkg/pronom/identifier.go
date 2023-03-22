@@ -262,7 +262,7 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 // Satisfied determines whether we should continue running identification
 // with a given matcher type.
 func (r *Recorder) Satisfied(mt core.MatcherType) (bool, core.Hint) {
-	if r.NoPriority() {
+	if r.NoPriority() && r.Multi() != config.DROID {
 		return false, core.Hint{}
 	}
 	if r.cscore < incScore {
