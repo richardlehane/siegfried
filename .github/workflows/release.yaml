@@ -16,9 +16,9 @@ jobs:
       version: ${{ env.VERS }}
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install latest version of go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v4
         with:
           go-version: 1.x
       - name: Make sf and roy binaries
@@ -90,9 +90,9 @@ jobs:
     needs: publishDeb
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install latest version of go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v4
         with:
           go-version: 1.x
       - name: Make sf and roy binaries
@@ -128,9 +128,9 @@ jobs:
     needs: publishDeb
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install latest version of go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v4
         with:
           go-version: 1.x
       - name: Make sf and roy binaries
