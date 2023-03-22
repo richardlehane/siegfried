@@ -35,6 +35,23 @@ func TestComplete(t *testing.T) {
 	}
 }
 
+func TestApply(t *testing.T) {
+	m := make(Map)
+	m.Add("apple", "orange")
+	m.Add("orange", "banana")
+	m.Add("orange", "grapes")
+	m.Add("banana", "grapes")
+	m.Add("banana", "grapefruit")
+	m.Complete()
+	hits := m.Apply([]string{"apple", "grapes", "orange", "grapefruit"})
+	if len(hits) != 2 {
+		t.Fatalf("Priority: expecting two superior hits, got %d", len(hits))
+	}
+	if hits[0] != "grapes" || hits[1] != "grapefruit" {
+		t.Errorf("Priority: expecting grapes and grapefruit, got %v", hits)
+	}
+}
+
 func TestList(t *testing.T) {
 	m := make(Map)
 	m.Add("apple", "orange")

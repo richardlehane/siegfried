@@ -174,6 +174,30 @@ func (m Map) Filter(fmts []string) Map {
 	return ret
 }
 
+// is this a superior result? (it has no superiors among the set of intial hits)
+func superior(sups, hits []string) bool {
+	for _, sup := range sups {
+		for _, hit := range hits {
+			if sup == hit {
+				return false
+			}
+		}
+	}
+	return true
+}
+
+// Apply checks a list of hits against a priority map and returns a subset of that list for any hits
+// that don't have superiors also in that list
+func (m Map) Apply(hits []string) []string {
+	ret := make([]string, 0, len(hits))
+	for _, hit := range hits {
+		if superior(m[hit], hits) {
+			ret = append(ret, hit)
+		}
+	}
+	return ret
+}
+
 // return a priority list using the indexes from the supplied slice of keys (keys can be duplicated in that slice)
 func (m Map) List(keys []string) List {
 	if m == nil {

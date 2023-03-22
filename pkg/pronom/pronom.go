@@ -67,18 +67,27 @@ func (p *pronom) MSCFBs() ([][]string, [][]frames.Signature, []string, error) {
 	return p.c.MSCFBs()
 }
 
-// Pronom creates a pronom object
-func NewPronom() (identifier.Parseable, error) {
+// return a PRONOM object without applying the config
+func raw() (identifier.Parseable, error) {
 	p := &pronom{
 		c: identifier.Blank{},
 	}
 	// apply no container rule
 	if !config.NoContainer() {
 		if err := p.setContainers(); err != nil {
-			return nil, fmt.Errorf("Pronom: error loading containers; got %s\nUnless you have set `-nocontainer` you need to download a container signature file", err)
+			return nil, fmt.Errorf("pronom: error loading containers; got %s\nUnless you have set `-nocontainer` you need to download a container signature file", err)
 		}
 	}
 	if err := p.setParseables(); err != nil {
+		return nil, err
+	}
+	return p, nil
+}
+
+// Pronom creates a pronom object
+func NewPronom() (identifier.Parseable, error) {
+	p, err := raw()
+	if err != nil {
 		return nil, err
 	}
 	return identifier.ApplyConfig(p), nil

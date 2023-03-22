@@ -9,14 +9,12 @@ import (
 	"github.com/richardlehane/siegfried/pkg/config"
 )
 
-var p *pronom
-
-var DataPath string = filepath.Join("..", "..", "cmd", "roy", "data")
+var dataPath string = filepath.Join("..", "..", "cmd", "roy", "data")
 
 var minimalPronom = []string{"fmt/1", "fmt/3", "fmt/5", "fmt/11", "fmt/14"}
 
 func TestNew(t *testing.T) {
-	config.SetHome(DataPath)
+	config.SetHome(dataPath)
 	_, err := NewPronom()
 	if err != nil {
 		t.Error(err)
@@ -26,7 +24,7 @@ func TestNew(t *testing.T) {
 // TestFormatInfos inspects the values loaded into a PRONOM identifier
 // from a minimal PRONOM dataset, i.e. fewer than loading all of PRONOM.
 func TestFormatInfos(t *testing.T) {
-	config.SetHome(DataPath)
+	config.SetHome(dataPath)
 	config.SetLimit(minimalPronom)()
 	i, err := NewPronom()
 	if err != nil {

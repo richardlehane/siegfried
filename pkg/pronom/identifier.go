@@ -107,10 +107,15 @@ func New(opts ...config.Option) (core.Identifier, error) {
 	for _, v := range opts {
 		v()
 	}
-	pronom, err := NewPronom()
+	pronom, err := raw()
 	if err != nil {
 		return nil, err
 	}
+	var pmap priority.Map
+	if config.GetMulti() == config.DROID {
+		pmap = pronom.Priorities()
+	}
+	pronom = identifier.ApplyConfig(pronom)
 	id := &Identifier{
 		hasClass:     config.Reports() != "" && !config.NoClass(),
 		isMultiDROID: config.GetMulti() == config.DROID,
@@ -118,7 +123,7 @@ func New(opts ...config.Option) (core.Identifier, error) {
 		Base:         identifier.New(pronom, config.ZipPuid()),
 	}
 	if id.isMultiDROID {
-		id.priorities = pronom.Priorities()
+		id.priorities = pmap
 	}
 	return id, nil
 }
