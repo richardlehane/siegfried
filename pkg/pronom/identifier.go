@@ -33,18 +33,18 @@ func init() {
 // Identifier is the PRONOM implementation of the Identifier interface
 // It wraps the base Identifier implementation with a formatinfo map
 type Identifier struct {
-	hasClass     bool // has this PRONOM identifier been built from reports & without the NoClass config option set?
-	isMultiDROID bool // has the -multi DROID option been set
-	infos        map[string]formatInfo
-	priorities   priority.Map
-	*identifier.Base
+	*identifier.Base      // embedded base identifier
+	hasClass         bool // has this PRONOM identifier been built from reports & without the NoClass config option set?
+	infos            map[string]formatInfo
+	priorities       priority.Map
 }
 
 // Save persists the PRONOM Identifier to disk
 func (i *Identifier) Save(ls *persist.LoadSaver) {
 	ls.SaveByte(core.Pronom)
+	i.Base.Save(ls)
 	ls.SaveBool(i.hasClass)
-	ls.SaveBool(i.isMultiDROID)
+	multi := i.Multi() == config.DROID
 	ls.SaveSmallInt(len(i.infos))
 	for k, v := range i.infos {
 		ls.SaveString(k)
@@ -54,20 +54,21 @@ func (i *Identifier) Save(ls *persist.LoadSaver) {
 		if i.hasClass {
 			ls.SaveString(v.class)
 		}
-		if i.isMultiDROID {
+		if multi {
 			ls.SaveStrings(i.priorities[k])
 		}
 	}
-	i.Base.Save(ls)
+
 }
 
 // Load reads PRONOM information back from the persist byte format into
 // the Identifier's FormatInfo struct.
 func Load(ls *persist.LoadSaver) core.Identifier {
 	i := &Identifier{}
+	i.Base = identifier.Load(ls)
 	i.hasClass = ls.LoadBool()
-	i.isMultiDROID = ls.LoadBool()
-	if i.isMultiDROID {
+	multi := i.Multi() == config.DROID
+	if multi {
 		i.priorities = make(priority.Map)
 	}
 	i.infos = make(map[string]formatInfo)
@@ -81,7 +82,7 @@ func Load(ls *persist.LoadSaver) core.Identifier {
 				mimeType: ls.LoadString(),
 				class:    ls.LoadString(),
 			}
-			if i.isMultiDROID {
+			if multi {
 				i.priorities[k] = ls.LoadStrings()
 			}
 		}
@@ -93,12 +94,12 @@ func Load(ls *persist.LoadSaver) core.Identifier {
 				version:  ls.LoadString(),
 				mimeType: ls.LoadString(),
 			}
-			if i.isMultiDROID {
+			if multi {
 				i.priorities[k] = ls.LoadStrings()
 			}
 		}
 	}
-	i.Base = identifier.Load(ls)
+
 	return i
 }
 
@@ -117,12 +118,11 @@ func New(opts ...config.Option) (core.Identifier, error) {
 	}
 	pronom = identifier.ApplyConfig(pronom)
 	id := &Identifier{
-		hasClass:     config.Reports() != "" && !config.NoClass(),
-		isMultiDROID: config.GetMulti() == config.DROID,
-		infos:        infos(pronom.Infos()),
-		Base:         identifier.New(pronom, config.ZipPuid()),
+		Base:     identifier.New(pronom, config.ZipPuid()),
+		hasClass: config.Reports() != "" && !config.NoClass(),
+		infos:    infos(pronom.Infos()),
 	}
-	if id.isMultiDROID {
+	if id.Multi() == config.DROID {
 		id.priorities = pmap
 	}
 	return id, nil
@@ -435,6 +435,10 @@ func (r *Recorder) Report() []core.Identification {
 				if v.confidence < conf {
 					return ret[:i]
 				}
+			case config.DROID:
+				if v.confidence < incScore {
+					return applyPriorities(r.priorities, ret[:i])
+				}
 			default:
 				if v.confidence < incScore {
 					return ret[:i]
@@ -442,6 +446,27 @@ func (r *Recorder) Report() []core.Identification {
 			}
 		}
 		ret[i] = r.updateWarning(v)
+	}
+	if len(ret) > 1 && r.Multi() == config.DROID {
+		return applyPriorities(r.priorities, ret)
+	}
+	return ret
+}
+
+func applyPriorities(pmap priority.Map, ids []core.Identification) []core.Identification {
+	keys := make([]string, len(ids))
+	for i, id := range ids {
+		keys[i] = id.String()
+	}
+	sups := pmap.Apply(keys)
+	ret := make([]core.Identification, len(sups))
+	for i, s := range sups {
+		for _, id := range ids {
+			if s == id.String() {
+				ret[i] = id
+				break
+			}
+		}
 	}
 	return ret
 }

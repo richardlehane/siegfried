@@ -186,7 +186,7 @@ func TestTip(t *testing.T) {
 
 // TestDROID tests -multi DROID. Samples from https://github.com/richardlehane/siegfried/issues/146
 func TestDROID(t *testing.T) {
-	if err := setup(config.SetMulti("DROID")); err != nil {
+	if err := setup(config.SetMulti("droid")); err != nil {
 		t.Fatal(err)
 	}
 	expect1 := []string{"fmt/41", "fmt/96"}
@@ -212,7 +212,7 @@ func TestDROID(t *testing.T) {
 		t.Errorf("-multi DROID: expected %v; got %v", expect1, c)
 	}
 	buf = bytes.NewReader(jpgmov[:])
-	c, _ = s.Identify(buf, "test.jpg", "")
+	c, _ = s.Identify(buf, "test.mov", "")
 	if len(c) != len(expect2) || (c[0].String() != expect2[0] && c[0].String() != expect2[1]) || (c[1].String() != expect2[0] && c[1].String() != expect2[1]) {
 		t.Errorf("-multi DROID: expected %v; got %v", expect2, c)
 	}

@@ -320,6 +320,7 @@ func Clear() func() private {
 		identifier.extend = nil
 		identifier.limit = nil
 		identifier.exclude = nil
+		identifier.multi = Conclusive
 		loc.fdd = ""
 		mimeinfo.mi = ""
 		return private{}
