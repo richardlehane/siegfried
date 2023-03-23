@@ -95,7 +95,11 @@
     "fmt/1751 (Canon SIF File)",
     "fmt/1757 (Apple Partition Map - ISO 9660 - UDF Hybrid Disk Image)",
     "fmt/1758 (Media Descriptor File)",
-    "fmt/1764 (Sony SLV File)"
+    "fmt/1764 (Sony SLV File)",
+    "fmt/1800 (Multimedia Viewer Book)",
+    "fmt/1835 (Archiver Format)",
+    "fmt/1836 (Brio Query File)",
+    "fmt/1840 (WACZ)"
   ],
   "audio": [
     "x-fmt/135 (Audio Interchange File Format 1.3)",
@@ -212,7 +216,16 @@
     "fmt/1662 (Yamaha TX Wave Audio)",
     "fmt/1674 (ZyXEL Voice Format Audio)",
     "fmt/1676 (Covox ADPCM Audio Files)",
-    "fmt/1736 (Creative Voice File)"
+    "fmt/1736 (Creative Voice File)",
+    "fmt/1812 (Audio Data Transport Stream)",
+    "fmt/1817 (Direct Stream Digital Stream File)",
+    "fmt/1818 (Direct Stream Digital Interchange File Format)",
+    "fmt/1822 (Audacity Audio Block File)",
+    "fmt/1823 (Audacity Project File Early)",
+    "fmt/1824 (Audacity Project File 1.x)",
+    "fmt/1825 (Audacity Project File 2.x)",
+    "fmt/1826 (Audacity Project File 3.x)",
+    "fmt/1843 (Human Machine Interfaces HMI File)"
   ],
   "database": [
     "x-fmt/6 (FoxPro Database 2.0)",
@@ -221,13 +234,13 @@
     "x-fmt/9 (dBASE Database III)",
     "x-fmt/10 (dBASE Database IV)",
     "x-fmt/46 (Microsoft Excel ODBC Query)",
-    "x-fmt/66 (Microsoft Access Database 2.0)",
+    "x-fmt/66 (Microsoft Access Database File 2.0)",
     "x-fmt/147 (Paradox Database Table 7)",
     "x-fmt/150 (Visual FoxPro Database Container File)",
-    "x-fmt/238 (Microsoft Access Database 95)",
-    "x-fmt/239 (Microsoft Access Database 97)",
-    "x-fmt/240 (Microsoft Access Database 2000)",
-    "x-fmt/241 (Microsoft Access Database 2002)",
+    "x-fmt/238 (Microsoft Access Database File 95)",
+    "x-fmt/239 (Microsoft Access Database File 97)",
+    "x-fmt/240 (Microsoft Access Database File 2000)",
+    "x-fmt/241 (Microsoft Access Database File 2002)",
     "x-fmt/242 (Microsoft FoxPro Database 2.6)",
     "x-fmt/271 (dBASE Database III+)",
     "x-fmt/272 (dBASE Database V)",
@@ -339,7 +352,12 @@
     "fmt/1490 (HyperCard Stack)",
     "fmt/1752 (OpenDocument Database Format 1.3)",
     "fmt/1777 (SIARD (Software-Independent Archiving of Relational Databases) 2.2)",
-    "fmt/1785 (FLR Database File)"
+    "fmt/1785 (FLR Database File)",
+    "fmt/1805 (Microsoft Access Database File 1.0)",
+    "fmt/1806 (Microsoft Access Database File 1.1)",
+    "fmt/1807 (Microsoft Access Encrypted Database File 1.0)",
+    "fmt/1808 (Microsoft Access Encrypted Database File 1.1)",
+    "fmt/1809 (Microsoft Access Encrypted Database File 2.0)"
   ],
   "dataset": [
     "x-fmt/13 (Tab-separated values)",
@@ -529,7 +547,7 @@
     "fmt/915 (Mapsforge Binary Map File Format)",
     "fmt/916 (ESRI ArcMap Document)",
     "fmt/1047 (Geography Markup Language 3.2)",
-    "fmt/1215 (ERDAS Hierarchical File Architecture Format)",
+    "fmt/1215 (Reduced Resolution Dataset)",
     "fmt/1238 (Band Interleaved By Line (BIL) Image Encoding)",
     "fmt/1239 (Band Interleaved By Pixel (BIP) Image Encoding)",
     "fmt/1240 (Band Sequential (BSQ) Image Encoding)",
@@ -690,7 +708,7 @@
     "fmt/615 (Gimp Image File Format)",
     "fmt/641 (Epson Raw Image Format)",
     "fmt/642 (Fujifilm RAW Image Format)",
-    "fmt/645 (Exchangeable Image File Format (Compressed) 2.2.1)",
+    "fmt/645 (Exchangeable Image File Format (Compressed) 2.21)",
     "fmt/661 (Sigma RAW Image)",
     "fmt/662 (Panasonic Raw)",
     "fmt/665 (Chasys Draw image file)",
@@ -820,7 +838,13 @@
     "fmt/1788 (Gunpaint Image File)",
     "fmt/1789 (GX2 Graphics File)",
     "fmt/1792 (ICDRAW Single Icon File)",
-    "fmt/1793 (ICDRAW Group Icon File)"
+    "fmt/1793 (ICDRAW Group Icon File)",
+    "fmt/1794 (JPEG 2000 Codestream)",
+    "fmt/1811 (Vips Image)",
+    "fmt/1832 (ArcSoft PhotoStudio File)",
+    "fmt/1834 (GoDot 4Bit Graphics Format)",
+    "fmt/1841 (Digital Negative Format (DNG) 1.5)",
+    "fmt/1842 (Digital Negative Format (DNG) 1.6)"
   ],
   "imageVector": [
     "x-fmt/20 (Adobe Illustrator 1.0 / 1.1)",
@@ -1037,7 +1061,7 @@
   "model": [
     "x-fmt/19 (3D Studio)",
     "x-fmt/49 (AutoCAD Design Web Format 6.0)",
-    "x-fmt/102 (3D Studio Shapes)",
+    "x-fmt/102 (3D Studio (DOS) 2D Shape File)",
     "x-fmt/108 (STL (Standard Tessellation Language) ASCII)",
     "x-fmt/158 (Initial Graphics Exchange Specification (IGES) 5.x)",
     "x-fmt/312 (DesignCAD Drawing)",
@@ -1140,8 +1164,8 @@
     "fmt/1271 (SketchUp Document 17)",
     "fmt/1272 (SketchUp Document 18)",
     "fmt/1273 (SketchUp Document 19)",
-    "fmt/1314 (GL Transmission Format (Text) 1.0)",
-    "fmt/1315 (GL Transmission Format (Text) 2.0)",
+    "fmt/1314 (GL Transmission Format (Text) 1.x)",
+    "fmt/1315 (GL Transmission Format (Text) 2.x)",
     "fmt/1316 (GL Transmission Format (Binary))",
     "fmt/1346 (Autodesk Revit File 4)",
     "fmt/1347 (Autodesk Revit Project File 2008)",
@@ -1159,7 +1183,9 @@
     "fmt/1562 (AutoDesk Indexed Point Cloud)",
     "fmt/1615 (CATIA Drawing 5)",
     "fmt/1673 (ZBrush MatCap)",
-    "fmt/1714 (CATIA Model File 3)"
+    "fmt/1714 (CATIA Model File 3)",
+    "fmt/1830 (3D Studio (DOS) 2D/3D Loft Object File)",
+    "fmt/1831 (3D Studio (DOS) Project File)"
   ],
   "pageDescription": [
     "fmt/122 (Encapsulated PostScript File Format 1.2)",
@@ -1371,7 +1397,10 @@
     "fmt/1710 (Persuasion Auto-Template Interchange File)",
     "fmt/1747 (Microsoft PowerPoint Presentation 2.x)",
     "fmt/1748 (Microsoft PowerPoint Presentation 3.x)",
-    "fmt/1754 (OpenDocument Presentation 1.3)"
+    "fmt/1754 (OpenDocument Presentation 1.3)",
+    "fmt/1795 (Asymetrix Toolbook File 6-11.5)",
+    "fmt/1829 (PPTX Strict OOXML Presentation 2007 onwards)",
+    "fmt/1839 (Microsoft Publisher Packaged Document)"
   ],
   "spreadsheet": [
     "x-fmt/17 (Microsoft Excel Template 97-2003)",
@@ -1446,7 +1475,8 @@
     "fmt/1580 (Envision Publisher File)",
     "fmt/1585 (TurboCalc Document)",
     "fmt/1712 (Calc602 Macro File)",
-    "fmt/1755 (OpenDocument Spreadsheet 1.3)"
+    "fmt/1755 (OpenDocument Spreadsheet 1.3)",
+    "fmt/1828 (XLSX Strict OOXML Spreadsheet 2007 onwards)"
   ],
   "textMarkup": [
     "x-fmt/195 (Standard Generalized Markup Language)",
@@ -1512,13 +1542,13 @@
     "fmt/1311 (Tweet JSON)",
     "fmt/1356 (Virtual Format (Raster))",
     "fmt/1357 (Virtual Format (Vector))",
-    "fmt/1374 (XDOMEA 1.0)",
-    "fmt/1376 (XDOMEA 2.0.1)",
-    "fmt/1375 (XDOMEA 2.0.0)",
-    "fmt/1377 (XDOMEA 2.1.0)",
-    "fmt/1378 (XDOMEA 2.2.0)",
-    "fmt/1379 (XDOMEA 2.3.0)",
-    "fmt/1380 (XDOMEA 2.4.0)",
+    "fmt/1374 (xdomea 1.0)",
+    "fmt/1376 (xdomea 2.0.1)",
+    "fmt/1375 (xdomea 2.0.0)",
+    "fmt/1377 (xdomea 2.1.0)",
+    "fmt/1378 (xdomea 2.2.0)",
+    "fmt/1379 (xdomea 2.3.0)",
+    "fmt/1380 (xdomea 2.4.0)",
     "fmt/1463 (Ableton Live Set 8.2.1 onwards)",
     "fmt/1474 (TEI P4 XML - Single Text File P4)",
     "fmt/1475 (TEI P4 XML - Corpus File P4)",
@@ -1536,7 +1566,12 @@
     "fmt/1677 (Microsoft Office File List)",
     "fmt/1724 (LegalDocML Document)",
     "fmt/1725 (Capture One Settings File)",
-    "fmt/1776 (Extensible Markup Language 1.1)"
+    "fmt/1776 (Extensible Markup Language 1.1)",
+    "fmt/1796 (Wireless Markup Language (WML) Document 1.1)",
+    "fmt/1799 (FLExText Interlinear XML Format)",
+    "fmt/1802 (Transcriber AG TAG Format)",
+    "fmt/1803 (Transcriber TRS Format)",
+    "fmt/1813 (xdomea 3.0.0)"
   ],
   "textStructured": [
     "x-fmt/41 (Data Interchange Format)",
@@ -1683,7 +1718,20 @@
     "fmt/1766 (Sony SML File)",
     "fmt/1770 (GenBank Flat File)",
     "fmt/1773 (Calc602 Spreadsheet File)",
-    "fmt/1774 (602 Graph/Chart File)"
+    "fmt/1774 (602 Graph/Chart File)",
+    "fmt/1797 (SHA512 File)",
+    "fmt/1798 (CHAT Transcription Format)",
+    "fmt/1801 (Praat TextGrid)",
+    "fmt/1804 (B Source Code File)",
+    "fmt/1814 (Adobe Color Book for Windows)",
+    "fmt/1815 (Adobe Color Swatch)",
+    "fmt/1816 (Adobe Swatch Exchange)",
+    "fmt/1819 (MacCaption File 1)",
+    "fmt/1820 (MacCaption File 2)",
+    "fmt/1821 (MacCaption Project)",
+    "fmt/1833 (ArcSoft Album and SlideShow Files for PhotoStudio and PhotoImpression)",
+    "fmt/1838 (Leica Project File)",
+    "fmt/1844 (GNU Image Manipulation Program Palette File)"
   ],
   "textUnstructured": [
     "x-fmt/14 (Macintosh Text File)",
@@ -1720,7 +1768,8 @@
     "fmt/1767 (Calc602 Project File 1.51)",
     "fmt/1768 (C Source Code File)",
     "fmt/1769 (C++ Source Code File)",
-    "fmt/1775 (Calc602 Project File)"
+    "fmt/1775 (Calc602 Project File)",
+    "fmt/1810 (Raw PIMA SWIR Reflectance Spectral File)"
   ],
   "video": [
     "x-fmt/152 (Digital Video)",
@@ -1774,7 +1823,7 @@
     "x-fmt/12 (Write for Windows Document 3.0)",
     "x-fmt/42 (Wordperfect Secondary File 5.0)",
     "x-fmt/43 (Wordperfect Secondary File 5.1/5.2)",
-    "x-fmt/44 (WordPerfect for MS-DOS/Windows Document 6.0)",
+    "x-fmt/44 (WordPerfect for MS-DOS/Windows Document 6.x)",
     "x-fmt/45 (Microsoft Word Document Template 97-2003)",
     "x-fmt/64 (Microsoft Word for Macintosh Document 4.0)",
     "x-fmt/65 (Microsoft Word for Macintosh Document 5.0)",
@@ -1944,6 +1993,8 @@
     "fmt/1718 (PageMaker Mac Document 6.5-7.0)",
     "fmt/1719 (PageMaker Mac Document 6.0)",
     "fmt/1723 (Wordcraft Chapter Files)",
-    "fmt/1756 (OpenDocument Text 1.3)"
+    "fmt/1756 (OpenDocument Text 1.3)",
+    "fmt/1827 (DOCX Strict OOXML Document 2007 onwards)",
+    "fmt/1837 (WordPerfect Presentations 2)"
   ]
 }
