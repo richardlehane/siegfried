@@ -572,34 +572,3 @@ func (w *WaitSet) WaitingOn() []int {
 	}
 	return ret
 }
-
-// For periodic checking - what signatures are we currently waiting on, at the given offsets?
-// Accumulates values from all the priority lists within the set.
-// Returns nil if *any* of the priority lists is nil.
-func (w *WaitSet) WaitingOnAt(bof, eof int64) []int {
-	w.m.RLock()
-	defer w.m.RUnlock()
-	var l int
-	for i, v := range w.wait {
-		if w.await(i, bof, eof) {
-			if v == nil {
-				return nil
-			}
-			l = l + len(v) + len(w.pivot[i])
-		}
-	}
-	ret := make([]int, l)
-	var prev, j int
-	for i, v := range w.wait {
-		if w.await(i, bof, eof) {
-			for _, x := range v {
-				ret[j] = x + prev
-				j++
-			}
-			copy(ret[j:], w.pivot[i])
-			j += len(w.pivot[i])
-		}
-		prev = w.idx[i]
-	}
-	return ret
-}
