@@ -47,7 +47,7 @@ var siegfried = struct {
 	checkpoint int64
 	userAgent  string
 }{
-	version:         [3]int{1, 9, 6},
+	version:         [3]int{1, 10, 0},
 	signature:       "default.sig",
 	conf:            "sf.conf",
 	magic:           []byte{'s', 'f', 0x00, 0xFF},

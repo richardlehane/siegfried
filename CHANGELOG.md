@@ -1,4 +1,22 @@
 # Change Log
+## v1.10.0 (2023-03-25)
+### Added
+- format classification included as "class" field in PRONOM results. Requested by [Robin François](https://github.com/richardlehane/siegfried/discussions/207). Implemented by [Ross Spencer](https://github.com/richardlehane/siegfried/commit/7f695720a752ac5fca3e1de8ba034b92ab6da1d9)
+- glob paths can be used in place of file or directory paths for identification (e.g. `sf *.jpg`). Implemented by [Ross Spencer](https://github.com/richardlehane/siegfried/commit/54bf6596c5fe7d1c9858348f0170d0dd7365fc8f)
+- `-multi droid` setting for roy build command. Applies priorities after rather than during identificaiton for more DROID-like results. Reported by [David Clipsham](https://github.com/richardlehane/siegfried/issues/146)
+- `/update` command for server mode. Requested by [Luis Faria](https://github.com/richardlehane/siegfried/issues/208)
+
+### Changed
+- new algorithm for dynamic multi-sequence matching for improved wildcard performance
+- update PRONOM to v111
+- update LOC to 2023-01-27
+- update tika-mimetypes to v2.7.0 
+
+### Fixed
+- archivematica extensions built into wikidata signatures. Reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/210)
+- trailing slash for folder paths in URI field in droid output. Reported by Philipp Wittwer
+- crash when using `sf -replay` with droid output
+
 ## v1.9.6 (2022-11-06)
 ### Changed
 - update PRONOM to v109
@@ -10,7 +28,7 @@
 
 ### Changed
 - update PRONOM to v108
-- update tika-mimetype signatures to v1.4.1
+- update tika-mimetype signatures to v2.4.1
 - update LOC signatures to 2022-09-01
 
 ### Fixed
