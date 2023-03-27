@@ -1,3 +1,4 @@
+//go:build !brew && !archivematica && !js
 // +build !brew,!archivematica,!js
 
 // Copyright 2014 Richard Lehane. All rights reserved.
@@ -17,16 +18,28 @@
 package config
 
 import (
+	"errors"
+	"io/fs"
 	"log"
-	"os/user"
+	"os"
 	"path/filepath"
+
+	"github.com/adrg/xdg"
 )
 
-// the default Home location is a "siegfried" folder in the user's $HOME
+// the default Home location is a "siegfried" folder in the user's application data folder, which can be overridden by setting the SIEGFRIED_HOME environment variable
 func init() {
-	current, err := user.Current()
-	if err != nil {
-		log.Fatal(err)
+	if home, ok := os.LookupEnv("SIEGFRIED_HOME"); ok {
+		siegfried.home = home
+	} else {
+		// if a home directory already exists in the legacy location continue using it, otherwise default to a XDG-aware OS-specific application data directory
+		siegfried.home = filepath.Join(xdg.Home, "siegfried")
+		if _, err := os.Stat(siegfried.home); err != nil {
+			if errors.Is(err, fs.ErrNotExist) {
+				siegfried.home = filepath.Join(xdg.DataHome, "siegfried")
+			} else {
+				log.Fatal(err)
+			}
+		}
 	}
-	siegfried.home = filepath.Join(current.HomeDir, "siegfried")
 }
