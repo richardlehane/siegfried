@@ -18,7 +18,9 @@
 package config
 
 import (
+	"errors"
 	"fmt"
+	"io/fs"
 	"net/url"
 	"os"
 	"path/filepath"
@@ -324,7 +326,7 @@ func SetWikibaseSparql(query string) func() private {
 func checkWikibaseURL(customEndpointURL string, customWikibaseURL string) error {
 	if customWikibaseURL == WikidataWikibaseURL() {
 		return fmt.Errorf(
-			"Wikibase server URL for '%s' needs to be configured, can't be: '%s'",
+			"wikibase server URL for '%s' needs to be configured, can't be: '%s'",
 			customEndpointURL,
 			customWikibaseURL,
 		)
@@ -355,17 +357,18 @@ func SetCustomWikibaseEndpoint(customEndpointURL string, customWikibaseURL strin
 func SetCustomWikibaseQuery() error {
 	wikibaseSparqlPath := WikibaseSparqlFile()
 	sparqlFile, err := os.ReadFile(wikibaseSparqlPath)
-	if os.IsNotExist(err) {
-		return fmt.Errorf(
-			"Setting custom Wikibase SPARQL: cannot find file '%s' in '%s': %w",
-			wikibaseSparqlPath,
-			WikidataHome(),
-			err,
-		)
-	}
 	if err != nil {
+		if errors.Is(err, fs.ErrNotExist) {
+			return fmt.Errorf(
+				"setting custom Wikibase SPARQL: cannot find file '%s' in '%s': %w",
+				wikibaseSparqlPath,
+				WikidataHome(),
+				err,
+			)
+		}
+
 		return fmt.Errorf(
-			"Setting custom Wikibase SPARQL: unexpected error opening '%s' has occurred: %w",
+			"setting custom Wikibase SPARQL: unexpected error opening '%s' has occurred: %w",
 			wikibaseSparqlPath,
 			err,
 		)

@@ -3,7 +3,6 @@ package config
 import (
 	"errors"
 	"io/fs"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"testing"
@@ -42,15 +41,17 @@ func TestProps(t *testing.T) {
 // handling required for updating our SPARQL query for a custom Wikibase.
 func TestSetCustomWikibaseQuery(t *testing.T) {
 	var testSPARQL = "select ?s ?p ?o where { ?s ?p ?o. }"
-	tempDir, _ := ioutil.TempDir("", "wikidata-test-dir-*")
-	defer os.RemoveAll(tempDir)
-	err := os.Mkdir(filepath.Join(tempDir, "wikidata"), 0755)
+	tempDir, err := os.MkdirTemp("", "wikidata-test-dir-*")
+	if err != nil {
+		t.Fatal(err)
+	}
+	err = os.Mkdir(filepath.Join(tempDir, "wikidata"), 0755)
 	if err != nil {
 		t.Fatal(err)
 	}
 	SetHome(tempDir)
 	customSPARQLFile := filepath.Join(tempDir, "wikidata", "wikibase.sparql")
-	err = ioutil.WriteFile(customSPARQLFile, []byte(testSPARQL), 0755)
+	err = os.WriteFile(customSPARQLFile, []byte(testSPARQL), 0755)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -67,7 +68,7 @@ func TestSetCustomWikibaseQuery(t *testing.T) {
 			WikidataSPARQL(),
 		)
 	}
-	err = os.Remove(customSPARQLFile)
+	_ = os.Remove(customSPARQLFile)
 	err = SetCustomWikibaseQuery()
 	if !errors.Is(err, fs.ErrNotExist) {
 		t.Errorf(

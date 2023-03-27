@@ -17,8 +17,10 @@ package main
 import (
 	"bufio"
 	"bytes"
+	"errors"
 	"flag"
 	"fmt"
+	"io/fs"
 	"io/ioutil"
 	"os"
 	"strings"
@@ -59,7 +61,7 @@ func setconf() (string, error) {
 	}
 	// no flags - so we delete the conf file if it exists
 	if _, err := os.Stat(config.Conf()); err != nil {
-		if os.IsNotExist(err) {
+		if errors.Is(err, fs.ErrNotExist) {
 			return "", nil
 		}
 		return "", err
@@ -70,7 +72,7 @@ func setconf() (string, error) {
 // if it exists, read defaults from the conf file.
 func getconf() (map[string]string, error) {
 	if _, err := os.Stat(config.Conf()); err != nil {
-		if os.IsNotExist(err) {
+		if errors.Is(err, fs.ErrNotExist) {
 			return nil, nil
 		}
 		return nil, err
