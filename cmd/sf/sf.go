@@ -492,16 +492,21 @@ func main() {
 			ctxts <- ctx
 			identifyRdr(os.Stdin, ctx, ctxts, getCtx)
 		} else {
-			globs, err := filepath.Glob(v)
+			matches, err := filepath.Glob(v)
 			if err != nil {
 				log.Fatalf("[FATAL] bad glob pattern: %s\n", err)
 			}
-			for _, glob := range globs {
-				err = identify(ctxts, glob, "", *coe, *nr, d, getCtx)
+
+			if matches == nil {
+				log.Fatalf("[FATAL] no matching file or directory for '%s'\n", v)
+			}
+
+			for _, match := range matches {
+				err = identify(ctxts, match, "", *coe, *nr, d, getCtx)
 				if err != nil {
 					printFile(ctxts,
-						getCtx(glob, "", time.Time{}, 0),
-						fmt.Errorf("failed to identify %s: %v", glob, err))
+						getCtx(match, "", time.Time{}, 0),
+						fmt.Errorf("failed to identify %s: %v", match, err))
 					err = nil
 				}
 			}
