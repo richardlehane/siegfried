@@ -23,8 +23,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-
-	"github.com/adrg/xdg"
+	"strings"
 )
 
 // the default Home location is a "siegfried" folder in the user's application data folder, which can be overridden by setting the SIEGFRIED_HOME environment variable
@@ -32,14 +31,40 @@ func init() {
 	if home, ok := os.LookupEnv("SIEGFRIED_HOME"); ok {
 		siegfried.home = home
 	} else {
+		home, err := os.UserHomeDir()
+		if err != nil {
+			log.Fatal(err)
+		}
+
 		// if a home directory already exists in the legacy location continue using it, otherwise default to a XDG-aware OS-specific application data directory
-		siegfried.home = filepath.Join(xdg.Home, "siegfried")
+		siegfried.home = filepath.Join(home, "siegfried")
 		if _, err := os.Stat(siegfried.home); err != nil {
 			if errors.Is(err, fs.ErrNotExist) {
-				siegfried.home = filepath.Join(xdg.DataHome, "siegfried")
+				siegfried.home = filepath.Join(userDataDir(home), "siegfried")
 			} else {
 				log.Fatal(err)
 			}
 		}
+	}
+}
+
+func xdgPath(home string, defaultPath string) string {
+	dataHome, found := os.LookupEnv("XDG_DATA_HOME")
+	if found && dataHome != "" {
+		if dataDir, found := strings.CutPrefix(dataHome, "~"); found {
+			dataHome = filepath.Join(home, dataDir)
+		}
+
+		// environment variable might contain variables like $HOME itself, let's expand
+		dataHome = os.ExpandEnv(dataHome)
+	}
+
+	// XDG Base Directory Specification demands relative paths to be ignored, fall back to default in that case
+	if filepath.IsAbs(dataHome) {
+		return dataHome
+	} else if filepath.IsAbs(defaultPath) {
+		return defaultPath
+	} else {
+		return filepath.Join(home, defaultPath)
 	}
 }
