@@ -20,6 +20,8 @@ package config
 import (
 	"os"
 	"path/filepath"
+
+	"golang.org/x/sys/windows"
 )
 
 
