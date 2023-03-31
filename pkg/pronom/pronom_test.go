@@ -6,6 +6,7 @@ import (
 	"sort"
 	"testing"
 
+	"github.com/richardlehane/siegfried/internal/identifier"
 	"github.com/richardlehane/siegfried/pkg/config"
 )
 
@@ -21,15 +22,9 @@ func TestNew(t *testing.T) {
 	}
 }
 
-// TestFormatInfos inspects the values loaded into a PRONOM identifier
-// from a minimal PRONOM dataset, i.e. fewer than loading all of PRONOM.
-func TestFormatInfos(t *testing.T) {
-	config.SetHome(dataPath)
-	config.SetLimit(minimalPronom)()
-	i, err := NewPronom()
-	if err != nil {
-		t.Error(err)
-	}
+// verifyIdentifier provides a number of tests that can be run against
+// a PRONOM identifier.
+func verifyIdentifier(i identifier.Parseable, t *testing.T) {
 	const minReports int = 5
 	if len(i.Infos()) != minReports {
 		t.Error("Unexpected number of reports for PRONOM minimal tests")
@@ -84,7 +79,7 @@ func TestFormatInfos(t *testing.T) {
 	sort.Strings(puids)
 	sort.Strings(expectedPuids)
 	if !reflect.DeepEqual(puids, expectedPuids) {
-		t.Error("PUIDs from minimal PRONOM set do not match expected values")
+		t.Errorf("PUIDs from minimal PRONOM set do not match expected values;  expected %v; got %v", puids, expectedPuids)
 	}
 	sort.Strings(names)
 	sort.Strings(expectedNames)
@@ -94,17 +89,49 @@ func TestFormatInfos(t *testing.T) {
 	sort.Strings(versions)
 	sort.Strings(expectedVersions)
 	if !reflect.DeepEqual(versions, expectedVersions) {
-		t.Error("Format versions from minimal PRONOM set do not match expected values")
+		t.Errorf("Format versions from minimal PRONOM set do not match expected values;  expected %v; got %v", versions, expectedVersions)
 	}
 	sort.Strings(mimes)
 	sort.Strings(expectedMimes)
 	if !reflect.DeepEqual(mimes, expectedMimes) {
-		t.Error("MIMETypes from minimal PRONOM set do not match expected values")
+		t.Errorf("MIMETypes from minimal PRONOM set do not match expected values; expected %v; got %v", mimes, expectedMimes)
 	}
 	sort.Strings(types)
 	sort.Strings(expectedTypes)
 	if !reflect.DeepEqual(types, expectedTypes) {
-		t.Error("Format types from minimal PRONOM set do not match expected values")
+		t.Errorf("Format types from minimal PRONOM set do not match expected values; expected %v; got %v", types, expectedTypes)
 	}
+}
+
+// TestFormatInfosDefault inspects the values loaded into a PRONOM
+// identifier from a minimal PRONOM dataset, i.e. fewer than loading
+// all of PRONOM.
+func TestFormatInfosDefault(t *testing.T) {
+	config.SetHome(dataPath)
+	config.SetLimit(minimalPronom)()
+	i, err := NewPronom()
+	if err != nil {
+		t.Error(err)
+	}
+	verifyIdentifier(i, t)
+	config.Clear()()
+}
+
+// TestFormatInfosNoReports performs the same tests as TestFormatInfosDefault
+// but does so without loading PRONOM reports, preferring to create an
+// identifier using a signature file only.
+func TestFormatInfosNoReports(t *testing.T) {
+	config.SetHome(dataPath)
+	config.SetLimit(minimalPronom)()
+	config.SetNoContainer()()
+	config.SetNoReports()()
+	if config.Reports() != "" {
+		t.Errorf("pronon.reports should be unset, not: %s", config.Reports())
+	}
+	i, err := NewPronom()
+	if err != nil {
+		t.Error(err)
+	}
+	verifyIdentifier(i, t)
 	config.Clear()()
 }

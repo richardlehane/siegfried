@@ -119,7 +119,7 @@ func New(opts ...config.Option) (core.Identifier, error) {
 	pronom = identifier.ApplyConfig(pronom)
 	id := &Identifier{
 		Base:     identifier.New(pronom, config.ZipPuid()),
-		hasClass: config.Reports() != "" && !config.NoClass(),
+		hasClass: !config.NoClass(),
 		infos:    infos(pronom.Infos()),
 	}
 	if id.Multi() == config.DROID {

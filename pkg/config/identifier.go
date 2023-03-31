@@ -316,6 +316,7 @@ func IsArchive(id string) Archive {
 // Clear clears loc and mimeinfo details to avoid pollution when creating multiple identifiers in same session
 func Clear() func() private {
 	return func() private {
+		identifier.noContainer = false
 		identifier.name = ""
 		identifier.extend = nil
 		identifier.limit = nil
@@ -323,6 +324,7 @@ func Clear() func() private {
 		identifier.multi = Conclusive
 		loc.fdd = ""
 		mimeinfo.mi = ""
+		pronom.reports = "pronom"
 		return private{}
 	}
 }

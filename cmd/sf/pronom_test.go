@@ -29,7 +29,7 @@ type pronomIdentificationTests struct {
 
 var skeletons = make(map[string]*fstest.MapFile)
 
-var minimalPronom = []string{"fmt/1", "fmt/3", "fmt/5", "fmt/11", "fmt/14"}
+var minimalPronom = []string{"fmt/1", "fmt/3", "fmt/5", "fmt/11", "fmt/14", "fmt/1002"}
 
 // Populate the global skeletons map from string-based byte-sequences to
 // save having to store skeletons on disk and read from them.
@@ -59,6 +59,7 @@ func makeSkeletons() {
 		"")
 	files["fmt-3-signature-id-18.gif"] = "4749463837613b"
 	files["badf00d.unknown"] = "badf00d"
+	files["fmt-1002-signature-id-1357.nrrd"] = "4e52524430302e3031"
 	for key, val := range files {
 		data, _ := hex.DecodeString(val)
 		skeletons[key] = &fstest.MapFile{Data: []byte(data)}
@@ -125,20 +126,21 @@ var pronomIDs = []pronomIdentificationTests{
 		"Audio, Video",
 		"extension match avi; byte match at 0, 12",
 		"",
+	}, {
+		"pronom",
+		"fmt/1002",
+		"Nearly Raw Raster Data",
+		"1",
+		"",
+		"Image (Raster), Dataset",
+		"extension match nrrd; byte match at 0, 9",
+		"",
 	},
 }
 
-// TestPronom looks to see if PRONOM identification results for a
-// minimized PRONOM dataset are correct and contain the information we
-// anticipate.
-func TestPronom(t *testing.T) {
-	sf := siegfried.New()
-	config.SetHome(DataPath)
-	identifier, err := pronom.New(config.SetLimit(minimalPronom))
-	if err != nil {
-		t.Errorf("Error creating new PRONOM identifier: %s", err)
-	}
-	sf.Add(identifier)
+// runIdentificationWithSF provides a number of tests that can be run
+// against a Siegfried.
+func runIdentificationWithSF(sf *siegfried.Siegfried, t *testing.T) {
 	makeSkeletons()
 	skeletonFS := fstest.MapFS(skeletons)
 	testDirListing, err := skeletonFS.ReadDir(".")
@@ -182,5 +184,38 @@ func TestPronom(t *testing.T) {
 			t.Errorf("Results not equal for %s; expected %v; got %v", res.puid, pronomIDs[idx], res)
 		}
 	}
+}
+
+// TestPronom looks to see if PRONOM identification results for a
+// minimized PRONOM dataset are correct and contain the information we
+// anticipate.
+func TestPronom(t *testing.T) {
+	sf := siegfried.New()
+	config.SetHome(DataPath)
+	identifier, err := pronom.New(config.SetLimit(minimalPronom))
+	if err != nil {
+		t.Errorf("Error creating new PRONOM identifier: %s", err)
+	}
+	sf.Add(identifier)
+	runIdentificationWithSF(sf, t)
+	config.Clear()()
+}
+
+// TestPronomNoReports performs the same tests as TestPronom, but
+// against a Siegfried created purely from a signature file.
+func TestPronomNoReports(t *testing.T) {
+	sf := siegfried.New()
+	config.SetHome(DataPath)
+	config.SetNoContainer()()
+	config.SetNoReports()()
+	if config.Reports() != "" {
+		t.Errorf("pronon.reports should be unset, not: %s", config.Reports())
+	}
+	identifier, err := pronom.New(config.SetLimit(minimalPronom))
+	if err != nil {
+		t.Errorf("Error creating new PRONOM identifier: %s", err)
+	}
+	sf.Add(identifier)
+	runIdentificationWithSF(sf, t)
 	config.Clear()()
 }

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- THIS FILE WILL BE REPLACED BEFORE MERGE -->
 <FFSignatureFile DateCreated="2023-08-18T15:27:49" Version="114" xmlns="http://www.nationalarchives.gov.uk/pronom/SignatureFile">
     <InternalSignatureCollection>
         <InternalSignature ID="9" Specificity="Specific">
@@ -52744,7 +52745,7 @@
             PUID="fmt/9" Version="5"/>
         <FileFormat ID="612" Name="Tagged Image File Format"
             PUID="fmt/10" Version="6"/>
-        <FileFormat ID="613" MIMEType="application/pdf"
+        <FileFormat  FormatType="Page Description" ID="613" MIMEType="application/pdf"
             Name="Acrobat PDF 1.0 - Portable Document Format"
             PUID="fmt/14" Version="1.0">
             <InternalSignatureID>123</InternalSignatureID>
@@ -52792,7 +52793,7 @@
             <HasPriorityOverFileFormatID>687</HasPriorityOverFileFormatID>
             <HasPriorityOverFileFormatID>869</HasPriorityOverFileFormatID>
         </FileFormat>
-        <FileFormat ID="619" MIMEType="image/gif"
+        <FileFormat FormatType="Image (Raster)" ID="619" MIMEType="image/gif"
             Name="Graphics Interchange Format" PUID="fmt/3" Version="87a">
             <InternalSignatureID>18</InternalSignatureID>
             <Extension>gif</Extension>
@@ -53005,7 +53006,7 @@
             <Extension>wav</Extension>
             <HasPriorityOverFileFormatID>2741</HasPriorityOverFileFormatID>
         </FileFormat>
-        <FileFormat ID="655" MIMEType="video/x-msvideo"
+        <FileFormat FormatType="Audio, Video" ID="655" MIMEType="video/x-msvideo"
             Name="Audio/Video Interleaved Format" PUID="fmt/5">
             <InternalSignatureID>51</InternalSignatureID>
             <Extension>avi</Extension>
@@ -53060,7 +53061,7 @@
             <InternalSignatureID>54</InternalSignatureID>
             <Extension>wrl</Extension>
         </FileFormat>
-        <FileFormat ID="664" MIMEType="image/png"
+        <FileFormat FormatType="Image (Raster)" ID="664" MIMEType="image/png"
             Name="Portable Network Graphics" PUID="fmt/11" Version="1.0">
             <InternalSignatureID>58</InternalSignatureID>
             <Extension>png</Extension>
@@ -53523,7 +53524,7 @@
             <InternalSignatureID>127</InternalSignatureID>
             <Extension>doc</Extension>
         </FileFormat>
-        <FileFormat ID="735" MIMEType="audio/x-wav"
+        <FileFormat FormatType="Audio" ID="735" MIMEType="audio/x-wav"
             Name="Broadcast WAVE" PUID="fmt/1" Version="0 Generic">
             <InternalSignatureID>1032</InternalSignatureID>
             <Extension>wav</Extension>
@@ -58786,7 +58787,7 @@
             <InternalSignatureID>1364</InternalSignatureID>
             <Extension>exr</Extension>
         </FileFormat>
-        <FileFormat ID="1807" Name="Nearly Raw Raster Data"
+        <FileFormat FormatType="Image (Raster), Dataset" ID="1807" Name="Nearly Raw Raster Data"
             PUID="fmt/1002" Version="1">
             <InternalSignatureID>1357</InternalSignatureID>
             <Extension>nrrd</Extension>
