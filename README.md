@@ -108,7 +108,8 @@ Or, for the most recent updates, you can install from this fork:
 - new algorithm for dynamic multi-sequence matching for improved wildcard performance
 - update PRONOM to v111
 - update LOC to 2023-01-27
-- update tika-mimetypes to v2.7.0 
+- update tika-mimetypes to v2.7.0
+- minimum go version to build siegfried is now 1.18 
 
 ### Fixed
 - archivematica extensions built into wikidata signatures. Reported by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/210)
