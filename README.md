@@ -18,18 +18,19 @@
 ### Command line
 
     sf file.ext
+    sf *.ext
     sf DIR
 
 #### Options
 
-    sf -csv file.ext | DIR                     // Output CSV rather than YAML
-    sf -json file.ext | DIR                    // Output JSON rather than YAML
-    sf -droid file.ext | DIR                   // Output DROID CSV rather than YAML
+    sf -csv file.ext | *.ext | DIR             // Output CSV rather than YAML
+    sf -json file.ext | *.ext | DIR            // Output JSON rather than YAML
+    sf -droid file.ext | *.ext | DIR           // Output DROID CSV rather than YAML
     sf -nr DIR                                 // Don't scan subdirectories
-    sf -z file.zip | DIR                       // Decompress and scan zip, tar, gzip, warc, arc
-    sf -zs gzip,tar file.tar.gz | DIR          // Selectively decompress and scan 
-    sf -hash md5 file.ext | DIR                // Calculate md5, sha1, sha256, sha512, or crc hash
-    sf -sig custom.sig file.ext                // Use a custom signature file
+    sf -z file.zip | *.ext | DIR               // Decompress and scan zip, tar, gzip, warc, arc
+    sf -zs gzip,tar file.tar.gz | *.ext | DIR  // Selectively decompress and scan 
+    sf -hash md5 file.ext | *.ext | DIR        // Calculate md5, sha1, sha256, sha512, or crc hash
+    sf -sig custom.sig *.ext | DIR             // Use a custom signature file
     sf -                                       // Scan stream piped to stdin
     sf -name file.ext -                        // Provide filename when scanning stream 
     sf -f myfiles.txt                          // Scan list of files and directories
@@ -38,10 +39,10 @@
     sf -serve hostname:port                    // Server mode
     sf -throttle 10ms DIR                      // Pause for duration (e.g. 1s) between file scans
     sf -multi 256 DIR                          // Scan multiple (e.g. 256) files in parallel 
-    sf -log [comma-sep opts] file.ext | DIR    // Log errors etc. to stderr (default) or stdout
-    sf -log e,w file.ext | DIR                 // Log errors and warnings to stderr
-    sf -log u,o file.ext | DIR                 // Log unknowns to stdout
-    sf -log d,s file.ext | DIR                 // Log debugging and slow messages to stderr
+    sf -log [comma-sep opts] file.ext          // Log errors etc. to stderr (default) or stdout
+    sf -log e,w file.ext | *.ext | DIR         // Log errors and warnings to stderr
+    sf -log u,o file.ext | *.ext | DIR         // Log unknowns to stdout
+    sf -log d,s file.ext | *.ext | DIR         // Log debugging and slow messages to stderr
     sf -log p,t DIR > results.yaml             // Log progress and time while redirecting results
     sf -log fmt/1,c DIR > results.yaml         // Log instances of fmt/1 and chart results
     sf -replay -log u -csv results.yaml        // Replay results file, convert to csv, log unknowns
