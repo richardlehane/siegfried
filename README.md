@@ -101,7 +101,7 @@ Or, for the most recent updates, you can install from this fork:
 - format classification included as "class" field in PRONOM results. Requested by [Robin François](https://github.com/richardlehane/siegfried/discussions/207). Implemented by [Ross Spencer](https://github.com/richardlehane/siegfried/commit/7f695720a752ac5fca3e1de8ba034b92ab6da1d9)
 - `-noclass` flag added to roy build command. Use this flag to build signatures that omit the new "class" field from results.
 - glob paths can be used in place of file or directory paths for identification (e.g. `sf *.jpg`). Implemented by [Ross Spencer](https://github.com/richardlehane/siegfried/commit/54bf6596c5fe7d1c9858348f0170d0dd7365fc8f)
-- `-multi droid` setting for roy build command. Applies priorities after rather than during identificaiton for more DROID-like results. Reported by [David Clipsham](https://github.com/richardlehane/siegfried/issues/146)
+- `-multi droid` setting for roy build command. Applies priorities after rather than during identification for more DROID-like results. Reported by [David Clipsham](https://github.com/richardlehane/siegfried/issues/146)
 - `/update` command for server mode. Requested by [Luis Faria](https://github.com/richardlehane/siegfried/issues/208)
 
 ### Changed
