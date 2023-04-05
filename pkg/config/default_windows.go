@@ -26,8 +26,9 @@ import (
 
 
 func userDataDir(home string) string {
-	if path, _ := windows.KnownFolderPath(*windows.FOLDERID_LocalAppData, windows.KF_FLAG_DEFAULT|KF_FLAG_DONT_VERIFY); path == "" {
-		path, _ := windows.KnownFolderPath(*windows.FOLDERID_LocalAppData, windows.KF_FLAG_DEFAULT_PATH|KF_FLAG_DONT_VERIFY)
+	path, _ := windows.KnownFolderPath(*windows.FOLDERID_LocalAppData, windows.KF_FLAG_DEFAULT|KF_FLAG_DONT_VERIFY)
+	if path == "" {
+		path, _ = windows.KnownFolderPath(*windows.FOLDERID_LocalAppData, windows.KF_FLAG_DEFAULT_PATH|KF_FLAG_DONT_VERIFY)
 	}
 
 	if path == "" {
