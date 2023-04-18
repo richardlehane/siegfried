@@ -24,6 +24,8 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"runtime"
+	"strings"
 	"sync"
 	"time"
 
@@ -492,16 +494,30 @@ func main() {
 			ctxts <- ctx
 			identifyRdr(os.Stdin, ctx, ctxts, getCtx)
 		} else {
-			globs, err := filepath.Glob(v)
+			_, err = os.Lstat(v)
 			if err != nil {
-				log.Fatalf("[FATAL] bad glob pattern: %s\n", err)
-			}
-			for _, glob := range globs {
-				err = identify(ctxts, glob, "", *coe, *nr, d, getCtx)
+				// As a workaround for https://github.com/richardlehane/siegfried/issues/227 only do glob matching on Windows _after_ a direct match has been tried and the name contains characters that indicate a possible pattern
+				if runtime.GOOS == "windows" && strings.ContainsAny(v, "*?[\\") {
+					// Since patterns aren't assumed to be the main argument form and a bad pattern can still be a valid filename (e.g. `file[.txt`) that just wasn't found ignore the returned error and just handle found matches
+					matches, _ := filepath.Glob(v)
+					if matches != nil {
+						for _, match := range matches {
+							err = identify(ctxts, match, "", *coe, *nr, d, getCtx)
+							if err != nil {
+								printFile(ctxts, getCtx(v, "", time.Time{}, 0), fmt.Errorf("failed to identify %s: %v", v, err))
+								err = nil
+							}
+						}
+
+						continue
+					}
+				}
+
+				break
+			} else {
+				err = identify(ctxts, v, "", *coe, *nr, d, getCtx)
 				if err != nil {
-					printFile(ctxts,
-						getCtx(glob, "", time.Time{}, 0),
-						fmt.Errorf("failed to identify %s: %v", glob, err))
+					printFile(ctxts, getCtx(v, "", time.Time{}, 0), fmt.Errorf("failed to identify %s: %v", v, err))
 					err = nil
 				}
 			}
