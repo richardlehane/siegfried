@@ -27,5 +27,9 @@ Priority: optional
 Description: signature-based file identification tool
 EOA
 
-# make deb
-dpkg-deb --build $SF_PATH
+# make deb; explicit 'xz' is for compatibility with Debian "bullseye";
+# see:
+#
+#    https://github.com/richardlehane/siegfried/issues/222
+#
+dpkg-deb -Zxz --build $SF_PATH
