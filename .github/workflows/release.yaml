@@ -25,6 +25,8 @@ jobs:
         run: |
           go install -tags brew github.com/richardlehane/siegfried/cmd/sf
           go install -tags brew github.com/richardlehane/siegfried/cmd/roy
+        env:
+          CGO_ENABLED: 0
       - name: Set environment variables
         run: |
           VERSION=$(echo "${{ github.ref }}" | tr -d 'refs/tags/v')
@@ -46,6 +48,8 @@ jobs:
         run: zip -j siegfried_${{ env.VERS }}_linux64.zip ${{ env.BIN_PATH }}/sf ${{ env.BIN_PATH }}/roy
       - name: Make self-contained sf binary
         run: go install -tags "brew static" github.com/richardlehane/siegfried/cmd/sf
+        env: 
+          CGO_ENABLED: 0
       - name: Zip self-contained executable
         run: zip -j siegfried_${{ env.VERS }}_linux64_static.zip ${{ env.BIN_PATH }}/sf
       - name: Create release
