@@ -262,7 +262,7 @@ func (r *Recorder) Record(m core.MatcherType, res core.Result) bool {
 // Satisfied determines whether we should continue running identification
 // with a given matcher type.
 func (r *Recorder) Satisfied(mt core.MatcherType) (bool, core.Hint) {
-	if r.NoPriority() && r.Multi() != config.DROID {
+	if r.NoPriority() && r.Multi() != config.DROID { // config.DROID is higher than Comprehensive, nevertheless we may want to halt e.g. no byte matching if successful container match
 		return false, core.Hint{}
 	}
 	if r.cscore < incScore {
@@ -401,7 +401,7 @@ func (r *Recorder) Report() []core.Identification {
 		}
 		r.ids = nids
 	}
-	// handle single result only
+	// handle multi-mode single where there isn't a definitive match
 	if r.Multi() == config.Single && len(r.ids) > 1 && r.ids[0].confidence == r.ids[1].confidence {
 		poss := make([]string, 0, len(r.ids))
 		for _, v := range r.ids {
@@ -437,7 +437,10 @@ func (r *Recorder) Report() []core.Identification {
 				}
 			case config.DROID:
 				if v.confidence < incScore {
-					return applyPriorities(r.priorities, ret[:i])
+					if i > 1 {
+						return applyPriorities(r.priorities, ret[:i])
+					}
+					return ret[:i] // don't bother applying priorities if only one strong match
 				}
 			default:
 				if v.confidence < incScore {
