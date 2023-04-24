@@ -47,6 +47,26 @@ func TestParseDroid(t *testing.T) {
 			errs = append(errs, fmt.Sprintf("Parse Droid: signatures for %s are not equal:\nReports: %s\n  Droid: %s", rpuids[i], v, dsigs[i]))
 		}
 	}
+	dpmap, rpmap := d.Priorities(), r.Priorities()
+	if len(dpmap) != len(rpmap) {
+		t.Errorf("Parse Droid: Expecting length of priorities of droid and reports to be the same, got %d and %d", len(dpmap), len(rpmap))
+	}
+	for k, v := range dpmap {
+		w, ok := rpmap[k]
+		if !ok {
+			t.Errorf("Parse Droid: Can't find %s in reports priorities", k)
+		}
+		if len(v) != len(w) {
+			errs = append(errs, fmt.Sprintf("Parse Droid: priorites for %s are not equal:\nReports: %v\nDroid: %v", k, w, v))
+			continue
+		}
+		for i, vv := range v {
+			if w[i] != vv {
+				errs = append(errs, fmt.Sprintf("Parse Droid: priorites for %s are not equal:\nReports: %v\nDroid: %v", k, w, v))
+				break
+			}
+		}
+	}
 	if len(errs) != 0 {
 		t.Skip(strings.Join(errs, "\n"))
 	}
