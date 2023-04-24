@@ -27,6 +27,11 @@ func retryOpen(path string, err error) (*os.File, error) {
 	return nil, err
 }
 
+func tryStat(path string) error {
+	_, err := os.Lstat(path)
+	return err
+}
+
 func identify(ctxts chan *context, root, orig string, coerr, norecurse, droid bool, gf getFn) error {
 	walkFunc := func(path string, info os.FileInfo, err error) error {
 		if *throttlef > 0 {

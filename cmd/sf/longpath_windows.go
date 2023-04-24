@@ -53,6 +53,16 @@ func shortpath(long, short string) string {
 	return long[i:]
 }
 
+
+func tryStat(path string) error {
+	_, err := os.Lstat(path)
+	if err != nil {
+		_, err = retryStat(path, err)
+	}
+
+	return err
+}
+
 func retryStat(path string, err error) (os.FileInfo, error) {
 	if strings.HasPrefix(path, prefix) { // already a long path - no point retrying
 		return nil, err
