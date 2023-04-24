@@ -78,9 +78,23 @@ func addStr(ss []string, s string) []string {
 	return append(ss, s)
 }
 
+// make sure that a set of superiors doesn't include self
+func trimSelf(ss []string, s string) []string {
+	if !containsStr(ss, s) {
+		return ss
+	}
+	ret := make([]string, 0, len(ss))
+	for _, v := range ss {
+		if v != s {
+			ret = append(ret, v)
+		}
+	}
+	return ret
+}
+
 // add a subordinate-superior relationship to the priority map
 func (m Map) Add(subordinate string, superior string) {
-	if subordinate == "" || superior == "" {
+	if subordinate == "" || superior == "" || subordinate == superior {
 		return
 	}
 	_, ok := m[subordinate]
@@ -91,15 +105,18 @@ func (m Map) Add(subordinate string, superior string) {
 	m[subordinate] = []string{superior}
 }
 
-// create a list of all strings that appear in 'a' but not 'b'
-func extras(a []string, b []string) []string {
+// create a list of all strings that appear in 'a' but not 'b', 'c', 'd', ...
+func extras(a []string, bs ...[]string) []string {
 	ret := make([]string, 0, len(a))
 	for _, v := range a {
 		var exists bool
-		for _, v1 := range b {
-			if v == v1 {
-				exists = true
-				break
+	outer:
+		for _, b := range bs {
+			for _, v1 := range b {
+				if v == v1 {
+					exists = true
+					break outer
+				}
 			}
 		}
 		if !exists {
@@ -125,7 +142,7 @@ func (m Map) priorityWalk(k string) []string {
 			}
 			tried = append(tried, v)
 			priorityPriorities := m[v]
-			ret = append(ret, extras(priorityPriorities, vals)...)
+			ret = append(ret, extras(priorityPriorities, vals, ret)...)
 			walkFn(v)
 		}
 	}
@@ -139,7 +156,9 @@ func (m Map) priorityWalk(k string) []string {
 func (m Map) Complete() {
 	for k := range m {
 		extraPriorities := m.priorityWalk(k)
+		extraPriorities = trimSelf(extraPriorities, k)
 		m[k] = append(m[k], extras(extraPriorities, m[k])...)
+		sort.Strings(m[k])
 	}
 }
 

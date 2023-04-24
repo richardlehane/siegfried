@@ -24,6 +24,7 @@ func TestComplete(t *testing.T) {
 	m.Add("orange", "grapes")
 	m.Add("banana", "grapes")
 	m.Add("banana", "grapefruit")
+	m.Add("grapes", "banana") // "banana shouldn't be added as superior to self"
 	m.Complete()
 	l := m["apple"]
 	if len(l) != 4 {
