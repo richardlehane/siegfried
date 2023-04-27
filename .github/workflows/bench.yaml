@@ -25,7 +25,7 @@ jobs:
         run: go install github.com/richardlehane/provisioner
       - name: Provision develop
         if: startsWith(github.ref_name, 'bench')
-        run: provisioner -life=2h -budget=cheap -host=develop-RAND.itforarchivists.com -env=CHERRY_AUTH_TOKEN,PACKET_AUTH_TOKEN,RUNNER_AUTH,BB_ACCOUNT,BB_KEY scripts/develop.yaml 
+        run: provisioner -life=2h -max=0.2 -host=develop-RAND.itforarchivists.com -env=CHERRY_AUTH_TOKEN,PACKET_AUTH_TOKEN,RUNNER_AUTH,BB_ACCOUNT,BB_KEY scripts/develop.yaml 
         env:
           CHERRY_AUTH_TOKEN: ${{ secrets.CHERRY_AUTH_TOKEN }}
           PACKET_AUTH_TOKEN: ${{ secrets.PACKET_AUTH_TOKEN }}
@@ -34,7 +34,7 @@ jobs:
           BB_KEY: ${{ secrets.BB_KEY }}
       - name: Provision main
         if: github.ref_name != 'develop' # release
-        run: provisioner -life=12h -budget=quality -host=bench-RAND.itforarchivists.com -env=CHERRY_AUTH_TOKEN,PACKET_AUTH_TOKEN,RUNNER_AUTH,BB_ACCOUNT,BB_KEY scripts/bench.yaml
+        run: provisioner -life=12h -max=-1 -host=bench-RAND.itforarchivists.com -env=CHERRY_AUTH_TOKEN,PACKET_AUTH_TOKEN,RUNNER_AUTH,BB_ACCOUNT,BB_KEY scripts/bench.yaml
         env:
           CHERRY_AUTH_TOKEN: ${{ secrets.CHERRY_AUTH_TOKEN }}
           PACKET_AUTH_TOKEN: ${{ secrets.PACKET_AUTH_TOKEN }}
