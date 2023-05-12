@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>40</FormatID>
-      <FormatName>Tab-separated values</FormatName>
+      <FormatName>Tab-separated Values</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
@@ -26,13 +26,22 @@
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>03 Aug 2015</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>25 Apr 2023</LastUpdatedDate>
+      <FormatNote>https://en.wikipedia.org/wiki/Tab-separated_values
+
+https://www.loc.gov/preservation/digital/formats/fdd/fdd000533.shtml</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
       </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fdd000533</Identifier>
+        <IdentifierType>Library of Congress Format Description Identifier</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>Q3513566</Identifier>
+        <IdentifierType>Wikidata QID Identifier</IdentifierType>
+      </FileFormatIdentifier>
       <FileFormatIdentifier>
         <Identifier>text/tab-separated-values</Identifier>
         <IdentifierType>MIME</IdentifierType>
@@ -44,6 +53,11 @@
       <ExternalSignature>
         <ExternalSignatureID>836</ExternalSignatureID>
         <Signature>tsv</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3333</ExternalSignatureID>
+        <Signature>tab</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
     </FileFormat>

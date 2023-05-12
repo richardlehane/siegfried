@@ -89,6 +89,13 @@ EOF Absolute from end of file, magic bytes: &lt;/IMG&gt;</SignatureNote>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2711</RelatedFormatID>
+        <RelatedFormatName>Capture One Session File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>638</RelatedFormatID>
         <RelatedFormatName>Extensible Markup Language</RelatedFormatName>

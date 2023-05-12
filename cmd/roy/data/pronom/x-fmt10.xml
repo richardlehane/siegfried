@@ -24,7 +24,7 @@
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>10 Oct 2003</ProvenanceSourceDate>
       <ProvenanceDescription>Further information about the dBASE file format can be obtained at http://www.digitalpreservation.gov/formats/fdd/fdd000325.shtml</ProvenanceDescription>
-      <LastUpdatedDate>03 Aug 2015</LastUpdatedDate>
+      <LastUpdatedDate>09 May 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -39,6 +39,20 @@
         <Identifier>x-fmt/10</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>80</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>dBASE Inc.</OrganisationName>
+        <DeveloperCompoundName>dBASE Inc.</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>80</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>dBASE Inc.</OrganisationName>
+        <SupportCompoundName>dBASE Inc.</SupportCompoundName>
+      </Support>
       <ExternalSignature>
         <ExternalSignatureID>18</ExternalSignatureID>
         <Signature>dbf</Signature>

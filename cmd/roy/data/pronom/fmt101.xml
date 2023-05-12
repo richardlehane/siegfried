@@ -648,6 +648,12 @@
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2664</RelatedFormatID>
+        <RelatedFormatName>xdomea</RelatedFormatName>
+        <RelatedFormatVersion>3.0.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>2675</RelatedFormatID>
         <RelatedFormatName>Audacity Project File</RelatedFormatName>
         <RelatedFormatVersion>1.x</RelatedFormatVersion>
@@ -657,6 +663,26 @@
         <RelatedFormatID>2676</RelatedFormatID>
         <RelatedFormatName>Audacity Project File</RelatedFormatName>
         <RelatedFormatVersion>2.x</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2697</RelatedFormatID>
+        <RelatedFormatName>Final Draft Document</RelatedFormatName>
+        <RelatedFormatVersion>8</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2706</RelatedFormatID>
+        <RelatedFormatName>Camtasia Studio Project</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2711</RelatedFormatID>
+        <RelatedFormatName>Capture One Session File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
@@ -797,6 +823,12 @@
         <RelatedFormatID>2198</RelatedFormatID>
         <RelatedFormatName>xdomea</RelatedFormatName>
         <RelatedFormatVersion>2.4.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>2697</RelatedFormatID>
+        <RelatedFormatName>Final Draft Document</RelatedFormatName>
+        <RelatedFormatVersion>8</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>

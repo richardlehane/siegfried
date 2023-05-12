@@ -144,6 +144,13 @@ This version, published June 2009, added various improvements, but the major cha
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2701</RelatedFormatID>
+        <RelatedFormatName>General Purpose RAW</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>672</RelatedFormatID>
         <RelatedFormatName>Exchangeable Image File Format (Uncompressed)</RelatedFormatName>
@@ -198,6 +205,13 @@ This version, published June 2009, added various improvements, but the major cha
         <RelationshipType>Is subtype of</RelationshipType>
         <RelatedFormatID>1099</RelatedFormatID>
         <RelatedFormatName>Tagged Image File Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>2701</RelatedFormatID>
+        <RelatedFormatName>General Purpose RAW</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

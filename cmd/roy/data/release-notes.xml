@@ -2,6 +2,346 @@
 <?xml-stylesheet type="text/xsl" href="release-note.xsl"?>
 <release_notes>
 <release_note>
+   <release_date>10th May 2023</release_date>
+   <signature_filename>DROID_SignatureFile_V112.xml</signature_filename>
+   <release_outline name="New Records">
+      <format>
+         <puid type="fmt">1845</puid>
+         <name>Final Draft Document v.8</name>
+         <summary>Full entry added. Submitted by Stadtarchiv Hof (Municipal Archives of Hof, Free State of Bavaria, Germany).</summary>
+      </format>
+      <format>
+         <puid type="fmt">1846</puid>
+         <name>Fountain Markup Language File</name>
+         <summary>Extension-only entry added. Submitted by Stadtarchiv Hof (Municipal Archives of Hof, Free State of Bavaria, Germany).</summary>
+      </format>
+      <format>
+         <puid type="fmt">1847</puid>
+         <name>Esri ArcMap Label file</name>
+         <summary>Extension-only entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1848</puid>
+         <name>Trelby Document File</name>
+         <summary>Full entry added. Submitted by Stadtarchiv Hof (Municipal Archives of Hof, Free State of Bavaria, Germany).</summary>
+      </format>
+      <format>
+         <puid type="fmt">1849</puid>
+         <name>General Purpose RAW (GoPro GPR)</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-Day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1850</puid>
+         <name>WordPerfect Macro File</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1851</puid>
+         <name>DAV Video Format</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1852</puid>
+         <name>Camtasia Recording File</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1853</puid>
+         <name>Camtasia Studio Project</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1854</puid>
+         <name>Open Media Framework Interchange 1.0</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1855</puid>
+         <name>Open Media Framework Interchange 2.0</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1856</puid>
+         <name>Enhanced Image Package</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1857</puid>
+         <name>Capture One Session File</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1858</puid>
+         <name>Microsoft Excel Workspace File</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1859</puid>
+         <name>Adobe Air</name>
+         <summary>Extension-only entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1860</puid>
+         <name>dBASE Report Form Definition File IV</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1861</puid>
+         <name>Quicken 3 Database File</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="Updated Records">
+      <format>
+         <puid type="fmt">175</puid>
+         <name>Microsoft Excel for Macintosh 2001</name>
+         <summary>PUID deprecated. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">176</puid>
+         <name>Microsoft Excel for Macintosh 2002</name>
+         <summary>PUID deprecated. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">177</puid>
+         <name>Microsoft Excel for Macintosh</name>
+         <summary>PUID deprecated. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">205</puid>
+         <name>Synchronized Multimedia Integration Language</name>
+         <summary>Updated signature. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">649</puid>
+         <name>MPEG-1 Elementary Stream</name>
+         <summary>Updated signature by broadening byte range. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">696</puid>
+         <name>Sibelius</name>
+         <summary>Updated signature description. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">803</puid>
+         <name>Encase Image File/Expert Witness Compression File</name>
+         <summary>Updated name, added priority over ISO 9660 Disk Image File. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">938</puid>
+         <name>Python Source Code File</name>
+         <summary>Updated name and description and added a link to the official documentation. Submitted by Stadtarchiv Hof (Municipal Archives of Hof, Free State of Bavaria, Germany).</summary>
+      </format>
+      <format>
+         <puid type="fmt">964</puid>
+         <name>Final Draft Document v.5-7</name>
+         <summary>Added relationship and developer. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1149</puid>
+         <name>Markdown</name>
+         <summary>Added extension .markdown and reference links. Submitted by Stadtarchiv Hof (Municipal Archives of Hof, Free State of Bavaria, Germany).</summary>
+      </format>
+      <format>
+         <puid type="fmt">1213</puid>
+         <name>Zoner Callisto Metafile</name>
+         <summary>Extension changed from .f to .zmf. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1218</puid>
+         <name>SubRip Subtitle File</name>
+         <summary>Updated description and added reference links. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1649</puid>
+         <name>AGS 4 Data Format</name>
+         <summary>Broadened main body of sig, and added BOF sequence. Submitted by Preservica and Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1805</puid>
+         <name>Microsoft Access Database File 1.0</name>
+         <summary>Updated Wikidata QID. Submitted by Yale University Library.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1806</puid>
+         <name>Microsoft Access Database File 1.1</name>
+         <summary>Updated Wikidata QID. Submitted by Yale University Library.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1807</puid>
+         <name>Microsoft Access Encrypted Database File 1.0</name>
+         <summary>Updated Wikidata QID. Submitted by Yale University Library.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1808</puid>
+         <name>Microsoft Access Encrypted Database File 1.1</name>
+         <summary>Updated Wikidata QID. Submitted by Yale University Library.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1809</puid>
+         <name>Microsoft Access Encrypted Database File 2.0</name>
+         <summary>Updated Wikidata QID. Submitted by Yale University Library.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1813</puid>
+         <name>xdomea 3.0.0</name>
+         <summary>Updated priority. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">8</puid>
+         <name>dBASE Database II</name>
+         <summary>Added developer. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">9</puid>
+         <name>dBASE Database III</name>
+         <summary>Added developer. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">10</puid>
+         <name>dBASE Database IV</name>
+         <summary>Added developer. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">13</puid>
+         <name>Tab-separated Values</name>
+         <summary>Added extension .tab, added reference links, identifiers for LoC and Wikidata QID. Submitted by Brigham Young University and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">66</puid>
+         <name>Microsoft Access Database File 2.0</name>
+         <summary>Updated Wikidata QID. Submitted by National Library of the Netherlands.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">128</puid>
+         <name>Microsoft Excel Workspace File</name>
+         <summary>Added description. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">238</puid>
+         <name>Microsoft Access Database File 95</name>
+         <summary>Updated Wikidata QID. Submitted by National Library of the Netherlands.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">239</puid>
+         <name>Microsoft Access Database File 97</name>
+         <summary>Updated Wikidata QID. Submitted by National Library of the Netherlands.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">240</puid>
+         <name>Microsoft Access Database File 2000</name>
+         <summary>Updated Wikidata QID. Submitted by National Library of the Netherlands.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">241</puid>
+         <name>Microsoft Access Database File 2002</name>
+         <summary>Updated Wikidata QID. Submitted by National Library of the Netherlands.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">271</puid>
+         <name>dBASE Database III+</name>
+         <summary>Added developer. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">272</puid>
+         <name>dBASE Database V</name>
+         <summary>Added developer. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">275</puid>
+         <name>Microsoft Access Database File 2007</name>
+         <summary>Updated Wikidata QID, description, reference links and developer. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">393</puid>
+         <name>WordPerfect for MS-DOS Document</name>
+         <summary>Added .doc extension. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">394</puid>
+         <name>WordPerfect for MS-DOS/Windows Document</name>
+         <summary>Added .doc extension. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">415</puid>
+         <name>Java Class File</name>
+         <summary>Updated format and signature names and descriptions. Submitted by Stadtarchiv Hof (Municipal Archives of Hof, Free State of Bavaria, Germany).</summary>
+      </format>
+   </release_outline>
+   <release_outline name="New Signatures">
+      <format>
+         <puid type="fmt">1845</puid>
+         <name>Final Draft Document v.8</name>
+         <summary>Signature researched and samples provided by Stadtarchiv Hof (Municipal Archives of Hof, Free State of Bavaria, Germany).</summary>
+      </format>
+      <format>
+         <puid type="fmt">1848</puid>
+         <name>Trelby Document File</name>
+         <summary>Signature researched and samples provided by Stadtarchiv Hof (Municipal Archives of Hof, Free State of Bavaria, Germany).</summary>
+      </format>
+      <format>
+         <puid type="fmt">1849</puid>
+         <name>General Purpose RAW (GoPro GPR)</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-Day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1850</puid>
+         <name>WordPerfect Macro File</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1851</puid>
+         <name>DAV Video Format</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1852</puid>
+         <name>Camtasia Recording File</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1853</puid>
+         <name>Camtasia Studio Project</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1854</puid>
+         <name>Open Media Framework Interchange 1.0</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1855</puid>
+         <name>Open Media Framework Interchange 2.0</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1856</puid>
+         <name>Enhanced Image Package</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1857</puid>
+         <name>Capture One Session File</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1858</puid>
+         <name>Microsoft Excel Workspace File</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1860</puid>
+         <name>dBASE Report Form Definition File IV</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1861</puid>
+         <name>Quicken 3 Database File</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+   </release_outline>
+</release_note>
+<release_note>
    <release_date>16th March 2023</release_date>
    <signature_filename>DROID_SignatureFile_V111.xml</signature_filename>
    <release_outline name="New Records"/>

@@ -23,7 +23,7 @@
       <ProvenanceSourceDate>11 Mar 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>13 Mar 2023</LastUpdatedDate>
+      <LastUpdatedDate>09 May 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -90,6 +90,11 @@
         <Signature>wp</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3335</ExternalSignatureID>
+        <Signature>doc</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
       <InternalSignature>
         <SignatureID>131</SignatureID>
         <SignatureName>WordPerfect 5.1</SignatureName>
@@ -109,6 +114,13 @@
           <ByteSequenceValue>FF575043{5}0A0001{2}0000</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2702</RelatedFormatID>
+        <RelatedFormatName>WordPerfect Macro File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>2098</RelatedFormatID>

@@ -89,6 +89,13 @@ Beginning at byte 32768, an ISO file will hold two-to-many volume descriptors, e
       </InternalSignature>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1603</RelatedFormatID>
+        <RelatedFormatName>Encase Image File/Expert Witness Compression File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>2585</RelatedFormatID>
         <RelatedFormatName>UDF-ISO 9660 Bridge Disc</RelatedFormatName>
         <RelatedFormatVersion>

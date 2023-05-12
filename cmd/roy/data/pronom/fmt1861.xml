@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2715</FormatID>
+      <FormatName>Quicken 3 Database File</FormatName>
+      <FormatVersion>3</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Spreadsheet</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Quicken is an app designed to help users manage their personal finance. It was first released in 1984, and has been steadily updated since then. It was originally developed by Intuit, but is currently owned by Aquiline Capital Partners. The Quicken 3 package contains files with extensions QDT (the primary file), QMT, QST, QDI and QNX, however, only the QST file has a clearly identifiable signature.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>234</ProvenanceSourceID>
+      <ProvenanceName>National Library of Australia / National Library of Australia</ProvenanceName>
+      <ProvenanceSourceDate>26 Apr 2023</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>26 Apr 2023</LastUpdatedDate>
+      <FormatNote>https://www.quicken.com/support/quicken-data-file-set-extensions</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1861</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>306</DeveloperID>
+        <DeveloperName>Quicken</DeveloperName>
+        <OrganisationName>Quicken</OrganisationName>
+        <DeveloperCompoundName>Quicken / Quicken</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>306</SupportID>
+        <SupportName>Quicken</SupportName>
+        <OrganisationName>Quicken</OrganisationName>
+        <SupportCompoundName>Quicken / Quicken</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3331</ExternalSignatureID>
+        <Signature>qst</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2205</SignatureID>
+        <SignatureName>Quicken 3 database File</SignatureName>
+        <SignatureNote>Absolute from beginning of file, magic bytes: "QW Ver. 3.00.00"</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2561</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>5157205665722E20332E30302E303020</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

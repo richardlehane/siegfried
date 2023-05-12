@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>1743</FormatID>
-      <FormatName>Python Script File</FormatName>
+      <FormatName>Python Source Code File</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
@@ -13,7 +13,7 @@
       <FormatTypes>Text (Structured)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>Python Script files are text files written using the Python programming language. They can be run by using a Python interpreter.</FormatDescription>
+      <FormatDescription>A source code file written in Python that can be run by a Python interpreter. Python is a multi-paradigm, high-level general-purpose programming language which was conceived in the late 1980s as a successor to the ABC programming language. Its extensive standard library, as well as a steadily growing number of third-party modules, provides functions, classes and more for a wide range of tasks, including scientific computing, machine learning and web scraping.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -25,11 +25,9 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>13 Jul 2016</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>13 Jul 2016</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <ProvenanceDescription>Description was submitted by Stadtarchiv Hof (Municipal Archives of Hof, Free State of Bavaria, Germany) in v112 of PRONOM signature file.</ProvenanceDescription>
+      <LastUpdatedDate>21 Mar 2023</LastUpdatedDate>
+      <FormatNote>Official documentation can be accessed at https://www.python.org/doc/</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>

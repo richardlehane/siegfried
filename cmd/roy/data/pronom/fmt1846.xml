@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2698</FormatID>
+      <FormatName>Fountain Markup Language File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Mark-up)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Fountain is a free and open source markup language designed for writing formatted screenplays. It is saved as UTF-8 text, and as such can be viewed and written in a simple text editor, and saved with the extension .txt, but is also compatible with programmes such as Storyist or Trelby. Fountain is the result of the merging of two lauguages; Scrippets by John August and Nima Yousefi, and Screenplay Markdown by Stu Maschwitz.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>295</ProvenanceSourceID>
+      <ProvenanceName>Stadtarchiv Hof / Stadtarchiv Hof</ProvenanceName>
+      <ProvenanceSourceDate>28 Mar 2023</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>28 Mar 2023</LastUpdatedDate>
+      <FormatNote>Specification:  https://fountain.io/syntax</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1846</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>305</DeveloperID>
+        <DeveloperName>Fountain</DeveloperName>
+        <OrganisationName>Fountain</OrganisationName>
+        <DeveloperCompoundName>Fountain / Fountain</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>305</SupportID>
+        <SupportName>Fountain</SupportName>
+        <OrganisationName>Fountain</OrganisationName>
+        <SupportCompoundName>Fountain / Fountain</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3314</ExternalSignatureID>
+        <Signature>spmd</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3315</ExternalSignatureID>
+        <Signature>fountain</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

@@ -35,11 +35,13 @@ Wikipedia also provides a thorough description of Markdown and its syntax: https
       <ProvenanceSourceID>195</ProvenanceSourceID>
       <ProvenanceName>Artefactual Systems Inc / Artefactual Systems Inc</ProvenanceName>
       <ProvenanceSourceDate>23 Jul 2018</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>23 Jul 2018</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <ProvenanceDescription>Update to this entry was sent by Stadtarchiv Hof and included in v112 of signature file.</ProvenanceDescription>
+      <LastUpdatedDate>20 Apr 2023</LastUpdatedDate>
+      <FormatNote>RFC 7763 (https://www.rfc-editor.org/rfc/rfc7763.html)
+
+http://fileformats.archiveteam.org/wiki/Markdown
+
+https://daringfireball.net/projects/markdown/</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -55,6 +57,11 @@ Wikipedia also provides a thorough description of Markdown and its syntax: https
       <ExternalSignature>
         <ExternalSignatureID>2175</ExternalSignatureID>
         <Signature>md</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3332</ExternalSignatureID>
+        <Signature>markdown</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
     </FileFormat>
