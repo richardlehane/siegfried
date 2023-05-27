@@ -16,8 +16,8 @@ package config
 
 import (
 	"fmt"
-	"io/ioutil"
 	"net/http"
+	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
@@ -125,7 +125,7 @@ func ContainerBase() string {
 func latest(prefix, suffix string) (string, error) {
 	var hits []string
 	var ids []int
-	files, err := ioutil.ReadDir(siegfried.home)
+	files, err := os.ReadDir(siegfried.home)
 	if err != nil {
 		return "", err
 	}
@@ -141,7 +141,7 @@ func latest(prefix, suffix string) (string, error) {
 		}
 	}
 	if len(hits) == 0 {
-		return "", fmt.Errorf("Config: no file in %s with prefix %s", siegfried.home, prefix)
+		return "", fmt.Errorf("config: no file in %s with prefix %s", siegfried.home, prefix)
 	}
 	if len(hits) == 1 {
 		return hits[0], nil

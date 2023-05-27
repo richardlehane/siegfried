@@ -20,7 +20,9 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
+	"errors"
 	"fmt"
+	"io/fs"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -118,7 +120,7 @@ func updateSigs(sig string, args []string) (bool, string, error) {
 	}
 	// this hairy bit of golang exception handling is thanks to Ross! :)
 	if _, err = os.Stat(config.Home()); err != nil {
-		if os.IsNotExist(err) {
+		if errors.Is(err, fs.ErrNotExist) {
 			err = os.MkdirAll(config.Home(), os.ModePerm)
 			if err != nil {
 				return false, "", fmt.Errorf("Siegfried: cannot create home directory %s, %v", config.Home(), err)

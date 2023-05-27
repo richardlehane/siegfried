@@ -22,6 +22,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io/fs"
 	"io/ioutil"
 	"log"
 	"os"
@@ -269,15 +270,16 @@ func setCustomWikibaseProperties() error {
 	logln("Roy (Wikidata): Looking for existence of wikibase.json in Siegfried home")
 	wikibasePropsPath := config.WikibasePropsPath()
 	propsFile, err := os.ReadFile(wikibasePropsPath)
-	if os.IsNotExist(err) {
-		return fmt.Errorf(
-			"cannot find file '%s' in '%s': %w",
-			wikibasePropsPath,
-			config.WikidataHome(),
-			err,
-		)
-	}
 	if err != nil {
+		if errors.Is(err, fs.ErrNotExist) {
+			return fmt.Errorf(
+				"cannot find file '%s' in '%s': %w",
+				wikibasePropsPath,
+				config.WikidataHome(),
+				err,
+			)
+		}
+
 		return fmt.Errorf(
 			"a different error handling '%s' has occurred: %w",
 			wikibasePropsPath,
