@@ -15,22 +15,23 @@
 // Package siegfried identifies file formats
 //
 // Example:
-//  s, err := siegfried.Load("pronom.sig")
-//  if err != nil {
-//  	log.Fatal(err)
-//  }
-//  f, err := os.Open("file")
-//  if err != nil {
-//  	log.Fatal(err)
-//  }
-//  defer f.Close()
-//  ids, err := s.Identify(f, "filename.ext", "application/xml")
-//  if err != nil {
-//  	log.Fatal(err)
-//  }
-//  for _, id := range ids {
-//  	fmt.Println(id)
-//  }
+//
+//	s, err := siegfried.Load("pronom.sig")
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//	f, err := os.Open("file")
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//	defer f.Close()
+//	ids, err := s.Identify(f, "filename.ext", "application/xml")
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//	for _, id := range ids {
+//		fmt.Println(id)
+//	}
 package siegfried
 
 import (
@@ -93,16 +94,17 @@ type Siegfried struct {
 // New creates a new Siegfried struct. It initializes the three matchers.
 //
 // Example:
-//  s := New()
-//  p, err := pronom.New() // create a new PRONOM identifier
-//  if err != nil {
-//  	log.Fatal(err)
-//  }
-//  err = s.Add(p) // add the identifier to the Siegfried
-//  if err != nil {
-//  	log.Fatal(err)
-//  }
-//  err = s.Save("pronom.sig") // save the Siegfried
+//
+//	s := New()
+//	p, err := pronom.New() // create a new PRONOM identifier
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//	err = s.Add(p) // add the identifier to the Siegfried
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//	err = s.Save("pronom.sig") // save the Siegfried
 func New() *Siegfried {
 	return &Siegfried{
 		C:       time.Now(),
@@ -196,7 +198,7 @@ func (s *Siegfried) SaveWriter(w io.Writer) error {
 func Load(path string) (*Siegfried, error) {
 	f, err := os.Open(path)
 	if err != nil {
-		return nil, fmt.Errorf("siegfried: error opening signature file, got %v; try running `sf -update`", err)
+		return nil, fmt.Errorf("error opening signature file, got %v; try running `sf -update`", err)
 	}
 	sf, err := LoadReader(f)
 	if err != nil {
@@ -208,9 +210,9 @@ func Load(path string) (*Siegfried, error) {
 
 // LoadReader creates a Siegfried struct and loads content from a reader
 func LoadReader(r io.Reader) (*Siegfried, error) {
-	errReading := "siegfried: error reading signature file, got %v; try running `sf -update`"
-	errNotSig := "siegfried: not a siegfried signature file; try running `sf -update`"
-	errUpdateSig := "siegfried: signature file is incompatible with this version of sf; try running `sf -update`"
+	errReading := "error reading signature file, got %v; try running `sf -update`"
+	errNotSig := "not a siegfried signature file; try running `sf -update`"
+	errUpdateSig := "signature file is incompatible with this version of sf; try running `sf -update`"
 	fbuf, err := ioutil.ReadAll(r)
 	if err != nil {
 		return nil, err
