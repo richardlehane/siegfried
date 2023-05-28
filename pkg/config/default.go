@@ -1,5 +1,4 @@
 //go:build !brew && !archivematica && !js
-// +build !brew,!archivematica,!js
 
 // Copyright 2014 Richard Lehane. All rights reserved.
 //
@@ -51,14 +50,12 @@ func init() {
 func xdgPath(home string, defaultPath string) string {
 	dataHome, found := os.LookupEnv("XDG_DATA_HOME")
 	if found && dataHome != "" {
-		if dataDir, found := strings.CutPrefix(dataHome, "~"); found {
-			dataHome = filepath.Join(home, dataDir)
+		if strings.HasPrefix(dataHome, "~") {
+			dataHome = filepath.Join(home, strings.TrimPrefix(dataHome, "~"))
 		}
-
 		// environment variable might contain variables like $HOME itself, let's expand
 		dataHome = os.ExpandEnv(dataHome)
 	}
-
 	// XDG Base Directory Specification demands relative paths to be ignored, fall back to default in that case
 	if filepath.IsAbs(dataHome) {
 		return dataHome

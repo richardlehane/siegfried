@@ -1,8 +1,4 @@
-//go:build (aix || darwin || dragonfly || freebsd || nacl || linux || netbsd || openbsd || solaris) && !brew && !archivematica && !js
-// +build aix darwin dragonfly freebsd nacl linux netbsd openbsd solaris
-// +build !brew
-// +build !archivematica
-// +build !js
+//go:build (aix || dragonfly || freebsd || nacl || linux || netbsd || openbsd || solaris) && !brew && !archivematica && !js
 
 // Copyright 2014 Richard Lehane. All rights reserved.
 //
@@ -19,7 +15,6 @@
 // limitations under the License.
 
 package config
-
 
 func userDataDir(home string) string {
 	return xdgPath(home, ".local/share")

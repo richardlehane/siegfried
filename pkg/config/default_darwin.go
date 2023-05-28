@@ -1,5 +1,4 @@
-//go:build darwin && !brew && !archivematica && !js
-// +build darwin,!brew,!archivematica,!js
+//go:build !brew && !archivematica && !js
 
 // Copyright 2014 Richard Lehane. All rights reserved.
 //
@@ -20,7 +19,6 @@ package config
 import (
 	"path/filepath"
 )
-
 
 func userDataDir(home string) string {
 	return xdgPath(home, filepath.Join("Library", "Application Support"))

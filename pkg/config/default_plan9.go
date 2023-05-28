@@ -1,5 +1,4 @@
-//go:build plan9 && !brew && !archivematica && !js
-// +build plan9,!brew,!archivematica,!js
+//go:build !brew && !archivematica && !js
 
 // Copyright 2014 Richard Lehane. All rights reserved.
 //
@@ -16,7 +15,6 @@
 // limitations under the License.
 
 package config
-
 
 func userDataDir(home string) string {
 	return xdgPath(home, "lib")

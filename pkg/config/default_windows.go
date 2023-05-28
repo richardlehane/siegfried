@@ -1,5 +1,4 @@
-//go:build windows && !brew && !archivematica && !js
-// +build windows,!brew,!archivematica,!js
+//go:build !brew && !archivematica && !js
 
 // Copyright 2014 Richard Lehane. All rights reserved.
 //
@@ -24,13 +23,11 @@ import (
 	"golang.org/x/sys/windows"
 )
 
-
 func userDataDir(home string) string {
-	path, _ := windows.KnownFolderPath(*windows.FOLDERID_LocalAppData, windows.KF_FLAG_DEFAULT|KF_FLAG_DONT_VERIFY)
+	path, _ := windows.KnownFolderPath(windows.FOLDERID_LocalAppData, windows.KF_FLAG_DEFAULT|windows.KF_FLAG_DONT_VERIFY)
 	if path == "" {
-		path, _ = windows.KnownFolderPath(*windows.FOLDERID_LocalAppData, windows.KF_FLAG_DEFAULT_PATH|KF_FLAG_DONT_VERIFY)
+		path, _ = windows.KnownFolderPath(windows.FOLDERID_LocalAppData, windows.KF_FLAG_DEFAULT_PATH|windows.KF_FLAG_DONT_VERIFY)
 	}
-
 	if path == "" {
 		dataDir, found := os.LookupEnv("LOCALAPPDATA")
 		if found && dataDir != "" {
@@ -39,6 +36,5 @@ func userDataDir(home string) string {
 			path = filepath.Join("AppData", "Local")
 		}
 	}
-
 	return xdgPath(home, path)
 }

@@ -1,4 +1,4 @@
-// +build brew
+//go:build brew
 
 package config
 
