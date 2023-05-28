@@ -36,7 +36,7 @@ jobs:
           echo "BIN_PATH=$(go env GOPATH)/bin" >> $GITHUB_ENV
           echo "PRERELEASE=false" >> $GITHUB_ENV
       - name: Set prerelease
-        if: endsWith(github.ref, 'rc')
+        if: contains(github.ref, 'rc')
         run: echo "PRERELEASE=true" >> $GITHUB_ENV
       - name: Execute debbuilder script
         run: (chmod +x debbuilder.sh && ./debbuilder.sh)
@@ -181,16 +181,14 @@ jobs:
           asset_name: data_${{ needs.publishDeb.outputs.version }}.zip
           asset_content_type: application/zip
   dispatch:
+    if: ${{ !contains(github.ref, 'rc')}} # don't update docker for release candidates
     needs: publishDeb
     runs-on: ubuntu-latest
     steps:
-      - name: Get release version
-        id: tag
-        run: echo ::set-output name=result::${GITHUB_REF/refs\/tags\/v/}
       - name: Repository dispatch
         uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ secrets.KEEPS_ACCESS_TOKEN }}
           repository: 'keeps/siegfried-docker'
           event-type: dispatch
-          client-payload: '{"version": "${{ steps.tag.outputs.result }}"}'
+          client-payload: '{"version": "${{ env.VERSION }}"}'
