@@ -1,7 +1,7 @@
 # This workflow triggers siegfried's automated benchmarks.
 #
 # Trigger it by creating a release (the main benchmark runs)
-# or by a commit to the develop branch (the develop benchmark runs).
+# or by a commit with a bench* tag. e.g. bench-2023-12-31
 name: Benchmark
 on: 
   push:

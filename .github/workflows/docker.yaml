@@ -1,7 +1,6 @@
 # This workflow triggers github.com/keeps/siegfried-docker on a new release.
 name: Docker
 on:
-  push:
   release:
     types: [released]
 jobs:
@@ -12,13 +11,10 @@ jobs:
         run: |
           VERSION=$(curl https://api.github.com/repos/richardlehane/siegfried/releases/latest | grep -Po '\"tag_name\": \"v\K[^\"]*')
           echo "VERSION=$VERSION" >> $GITHUB_ENV
-          echo ${{ env.VERSION }}
-      - name: Test dispatch
-        run: echo ${{ env.VERSION }}
-#      - name: Repository dispatch
-#        uses: peter-evans/repository-dispatch@v2
-#        with:
-#          token: ${{ secrets.KEEPS_ACCESS_TOKEN }}
-#          repository: 'keeps/siegfried-docker'
-#          event-type: dispatch
-#          client-payload: '{"version": "${{ env.VERSION }}"}'
+      - name: Repository dispatch
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.KEEPS_ACCESS_TOKEN }}
+          repository: 'keeps/siegfried-docker'
+          event-type: dispatch
+          client-payload: '{"version": "${{ env.VERSION }}"}'

@@ -2,7 +2,7 @@
 # a debian package, as well as linux, windows and mac binaries.
 #
 # Trigger this workflow by pushing a version tag e.g. v1.1.0.
-# Add -rc for a prerelease e.g. v1.1.0-rc.
+# Add -rc or -rcN for a release candidate/ prerelease e.g. v1.1.0-rc or v1.1.0-rc1.
 name: Release
 on:
   push:
