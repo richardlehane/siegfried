@@ -27,10 +27,10 @@ jobs:
           go install -tags brew github.com/richardlehane/siegfried/cmd/roy
         env:
           CGO_ENABLED: 0
-      - name: Set environment variables
+      - name: Set environment variables # trim refs/tags/v using 'cut -c12-'
         run: |
-          VERSION=$(echo "${{ github.ref }}" | tr -d 'refs/tags/v')
-          echo "VERS=$(echo $VERSION | tr "." "-")" >> $GITHUB_ENV
+          VERSION=$(echo "${{ github.ref }}" | cut -c12-)
+          echo "VERS=$(echo $VERSION | tr . -)" >> $GITHUB_ENV
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "SF_PATH=siegfried_$VERSION-1_amd64" >> $GITHUB_ENV
           echo "BIN_PATH=$(go env GOPATH)/bin" >> $GITHUB_ENV
