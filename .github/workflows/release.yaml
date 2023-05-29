@@ -180,15 +180,3 @@ jobs:
           asset_path: data_${{ needs.publishDeb.outputs.version }}.zip
           asset_name: data_${{ needs.publishDeb.outputs.version }}.zip
           asset_content_type: application/zip
-  dispatch:
-    if: ${{ !contains(github.ref, 'rc')}} # don't update docker for release candidates
-    needs: publishDeb
-    runs-on: ubuntu-latest
-    steps:
-      - name: Repository dispatch
-        uses: peter-evans/repository-dispatch@v2
-        with:
-          token: ${{ secrets.KEEPS_ACCESS_TOKEN }}
-          repository: 'keeps/siegfried-docker'
-          event-type: dispatch
-          client-payload: '{"version": "${{ env.VERSION }}"}'
