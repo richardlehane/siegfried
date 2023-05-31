@@ -118,10 +118,10 @@ jobs:
             data_${{ env.VERSION }}.zip      
   createRelease:
     runs-on: ubuntu-latest
-    needs: [buildMac, buildWin]
+    needs: [buildMac, buildWin] 
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v3
+      - name: Set version
+        run: echo "VERSION=$(echo "${{ github.ref }}" | cut -c12-)" >> $GITHUB_ENV 
       - uses: actions/download-artifact@v3
         with:
           name: release-artifacts
@@ -129,7 +129,7 @@ jobs:
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
-          name: Version ${{ github.ref }}
+          name: Version ${{ env.VERSION }}
           prerelease: ${{ contains(github.ref, 'rc') }}
           body: see CHANGELOG.md
           files: release-artifacts/*
