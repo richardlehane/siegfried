@@ -9,11 +9,8 @@ on:
     tags:
       - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 jobs:
-  publishDeb:
+  buildDeb:
     runs-on: ubuntu-latest
-    outputs: 
-      upload_url: ${{ steps.create_release.outputs.upload_url }}
-      version: ${{ env.VERS }}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -34,16 +31,8 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "SF_PATH=siegfried_$VERSION-1_amd64" >> $GITHUB_ENV
           echo "BIN_PATH=$(go env GOPATH)/bin" >> $GITHUB_ENV
-          echo "PRERELEASE=false" >> $GITHUB_ENV
-      - name: Set prerelease
-        if: contains(github.ref, 'rc')
-        run: echo "PRERELEASE=true" >> $GITHUB_ENV
       - name: Execute debbuilder script
         run: (chmod +x debbuilder.sh && ./debbuilder.sh)
-        env:
-          VERSION: ${{ env.VERSION }}
-          SF_PATH: ${{ env.SF_PATH }}
-          BIN_PATH: ${{ env.BIN_PATH }}
       - name: Zip executables
         run: zip -j siegfried_${{ env.VERS }}_linux64.zip ${{ env.BIN_PATH }}/sf ${{ env.BIN_PATH }}/roy
       - name: Make self-contained sf binary
@@ -51,47 +40,17 @@ jobs:
         env: 
           CGO_ENABLED: 0
       - name: Zip self-contained executable
-        run: zip -j siegfried_${{ env.VERS }}_linux64_static.zip ${{ env.BIN_PATH }}/sf
-      - name: Create release
-        id: create_release 
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
+        run: zip -j siegfried_${{ env.VERS }}_linux64_static.zip ${{ env.BIN_PATH }}/sf      
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Version ${{ github.ref }}
-          draft: false
-          prerelease: ${{ env.PRERELEASE }}
-      - name: Upload debian package
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ env.SF_PATH }}.deb
-          asset_name: ${{ env.SF_PATH }}.deb
-          asset_content_type: application/vnd.debian.binary-package
-      - name: Upload zipped executables
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: siegfried_${{ env.VERS }}_linux64.zip
-          asset_name: siegfried_${{ env.VERS }}_linux64.zip
-          asset_content_type: application/zip
-      - name: Upload zipped static executable
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: siegfried_${{ env.VERS }}_linux64_static.zip
-          asset_name: siegfried_${{ env.VERS }}_linux64_static.zip
-          asset_content_type: application/zip
-  publishMac:
+          name: release-artifacts
+          path: |
+            ${{ env.SF_PATH }}.deb
+            siegfried_${{ env.VERS }}_linux64.zip
+            siegfried_${{ env.VERS }}_linux64_static.zip
+  buildMac:
     runs-on: macos-latest
-    needs: publishDeb
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -99,37 +58,27 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: 1.x
+      - name: Set environment variable
+        run: echo "VERSION=$(echo ${{ github.ref }} | cut -c12- | tr . -)" >> $GITHUB_ENV
       - name: Make sf and roy binaries
         run: |
           go install -tags brew github.com/richardlehane/siegfried/cmd/sf
           go install -tags brew github.com/richardlehane/siegfried/cmd/roy
       - name: Zip executables
-        run: zip -j siegfried_${{ needs.publishDeb.outputs.version }}_mac64.zip $(go env GOPATH)/bin/sf $(go env GOPATH)/bin/roy
+        run: zip -j siegfried_${{ env.VERSION }}_mac64.zip $(go env GOPATH)/bin/sf $(go env GOPATH)/bin/roy
       - name: Make self-contained sf binary
         run: go install -tags "brew static" github.com/richardlehane/siegfried/cmd/sf
       - name: Zip self-contained executable
-        run: zip -j siegfried_${{ needs.publishDeb.outputs.version }}_mac64_static.zip $(go env GOPATH)/bin/sf
-      - name: Upload zip
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
+        run: zip -j siegfried_${{ env.VERSION }}_mac64_static.zip $(go env GOPATH)/bin/sf
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
         with:
-          upload_url: ${{ needs.publishDeb.outputs.upload_url }}
-          asset_path: siegfried_${{ needs.publishDeb.outputs.version }}_mac64.zip
-          asset_name: siegfried_${{ needs.publishDeb.outputs.version }}_mac64.zip
-          asset_content_type: application/zip
-      - name: Upload zipped static executable
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
-        with:
-          upload_url: ${{ needs.publishDeb.outputs.upload_url }}
-          asset_path: siegfried_${{ needs.publishDeb.outputs.version }}_mac64_static.zip
-          asset_name: siegfried_${{ needs.publishDeb.outputs.version }}_mac64_static.zip
-          asset_content_type: application/zip
-  publishWin:
+          name: release-artifacts
+          path: |
+            siegfried_${{ env.VERSION }}_mac64.zip
+            siegfried_${{ env.VERSION }}_mac64_static.zip
+  buildWin:
     runs-on: windows-latest
-    needs: publishDeb
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -137,6 +86,8 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: 1.x
+      - name: Set environment variable
+        run: echo "VERSION=$(echo ${{ github.ref }} | cut -c12- | tr . -)" >> $GITHUB_ENV
       - name: Make sf and roy binaries
         run: |
           go install github.com/richardlehane/siegfried/cmd/sf
@@ -144,39 +95,38 @@ jobs:
       - name: Zip assets
         shell: pwsh
         run: |
-          7z a siegfried_${{ needs.publishDeb.outputs.version }}_win64.zip ((go env GOPATH) + "\bin\*.exe")
+          7z a siegfried_${{ env.VERSION }}_win64.zip ((go env GOPATH) + "\bin\*.exe")
           md siegfried
           Copy-Item cmd\roy\data\* siegfried -recurse
-          7z a data_${{ needs.publishDeb.outputs.version }}.zip siegfried
+          7z a data_${{ env.VERSION }}.zip siegfried
       - name: Make self-contained sf binary
         run: go install -tags static github.com/richardlehane/siegfried/cmd/sf
       - name: Zip static binary
         shell: pwsh
-        run: 7z a siegfried_${{ needs.publishDeb.outputs.version }}_win64_static.zip ((go env GOPATH) + "\bin\sf.exe")
-      - name: Upload siegfried.zip
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
+        run: 7z a siegfried_${{ env.VERSION }}_win64_static.zip ((go env GOPATH) + "\bin\sf.exe")
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
         with:
-          upload_url: ${{ needs.publishDeb.outputs.upload_url }}
-          asset_path: siegfried_${{ needs.publishDeb.outputs.version }}_win64.zip
-          asset_name: siegfried_${{ needs.publishDeb.outputs.version }}_win64.zip
-          asset_content_type: application/zip
-      - name: Upload static sf
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
+          name: release-artifacts
+          path: |
+            siegfried_${{ env.VERSION }}_win64.zip
+            siegfried_${{ env.VERSION }}_win64_static.zip
+            data_${{ env.VERSION }}.zip      
+  createRelease:
+    runs-on: ubuntu-latest
+    needs: [buildDeb, buildMac, buildWin]
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - uses: actions/download-artifact@v2
         with:
-          upload_url: ${{ needs.publishDeb.outputs.upload_url }}
-          asset_path: siegfried_${{ needs.publishDeb.outputs.version }}_win64_static.zip
-          asset_name: siegfried_${{ needs.publishDeb.outputs.version }}_win64_static.zip
-          asset_content_type: application/zip
-      - name: Upload data.zip
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
+          name: release-artifacts
+          path: release-artifacts
+      - name: Create release
+        uses: softprops/action-gh-release@v1
         with:
-          upload_url: ${{ needs.publishDeb.outputs.upload_url }}
-          asset_path: data_${{ needs.publishDeb.outputs.version }}.zip
-          asset_name: data_${{ needs.publishDeb.outputs.version }}.zip
-          asset_content_type: application/zip
+          name: Version ${{ github.ref }}
+          draft: true
+          prerelease: ${{ contains(github.ref, 'rc') }}
+          body: See CHANGELOG.md
+          files: release-artifacts/*
