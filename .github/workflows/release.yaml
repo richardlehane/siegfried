@@ -11,6 +11,8 @@ on:
 jobs:
   buildDeb:
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ env.VERS }}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -51,6 +53,9 @@ jobs:
             siegfried_${{ env.VERS }}_linux64_static.zip
   buildMac:
     runs-on: macos-latest
+    needs: buildDeb
+    env: 
+      VERSION: ${{needs.buildDeb.outputs.version}}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -58,8 +63,6 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: 1.x
-      - name: Set environment variable
-        run: echo "VERSION=$(echo ${{ github.ref }} | cut -c12- | tr . -)" >> $GITHUB_ENV
       - name: Make sf and roy binaries
         run: |
           go install -tags brew github.com/richardlehane/siegfried/cmd/sf
@@ -79,6 +82,9 @@ jobs:
             siegfried_${{ env.VERSION }}_mac64_static.zip
   buildWin:
     runs-on: windows-latest
+    needs: buildDeb
+    env: 
+      VERSION: ${{needs.buildDeb.outputs.version}}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -86,8 +92,6 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: 1.x
-      - name: Set environment variable
-        run: echo "VERSION=$(echo ${{ github.ref }} | cut -c12- | tr . -)" >> $GITHUB_ENV
       - name: Make sf and roy binaries
         run: |
           go install github.com/richardlehane/siegfried/cmd/sf
@@ -114,11 +118,11 @@ jobs:
             data_${{ env.VERSION }}.zip      
   createRelease:
     runs-on: ubuntu-latest
-    needs: [buildDeb, buildMac, buildWin]
+    needs: [buildMac, buildWin]
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v3
         with:
           name: release-artifacts
           path: release-artifacts
@@ -126,7 +130,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           name: Version ${{ github.ref }}
-          draft: true
           prerelease: ${{ contains(github.ref, 'rc') }}
-          body: See CHANGELOG.md
+          body: see CHANGELOG.md
           files: release-artifacts/*
