@@ -124,7 +124,14 @@ func (m Matcher) addSigs(i int, nameParts [][]string, sigParts [][]frames.Signat
 			return err
 		}
 	}
+	// commit all the ctests
 	for _, v := range m[i].nameCTest {
+		err = v.commit()
+		if err != nil {
+			return err
+		}
+	}
+	for _, v := range m[i].globCtests {
 		err = v.commit()
 		if err != nil {
 			return err
