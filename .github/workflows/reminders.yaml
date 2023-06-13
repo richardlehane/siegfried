@@ -4,24 +4,25 @@ on:
   # Every year at noon on 1 June
   - cron: 0 12 1 6 * 
 jobs:
-  renew_key:
+  renewKey:
     name: Renew key
     runs-on: ubuntu-latest
-    - name: Post issue
-      uses: imjohnbo/issue-bot@v3
-      with:
-        assignees: "richardlehane"
-        labels: "install"
-        title: Renew key for debian signing
-        body: |-
-          The key for signing deb packages is about to expire!
-          
-          Do this:
-
-              gpg --list-options show-unusable-subkeys --list-keys
-              gpg --edit-key 0x20F802FE798E6857
-              gpg> key 2
-              gpg> expire
-              gpg> 1Y
-              gpg --keyserver keyserver.ubuntu.com --send-keys 0x20F802FE798E6857   
-        pinned: true
+    steps:
+      - name: Post issue
+        uses: imjohnbo/issue-bot@v3
+        with:
+          assignees: "richardlehane"
+          labels: "install"
+          title: Renew key for debian signing
+          body: |-
+            The key for signing deb packages is about to expire!
+                
+            Do this:
+            
+                gpg --list-options show-unusable-subkeys --list-keys
+                gpg --edit-key 0x20F802FE798E6857
+                gpg> key 2
+                gpg> expire
+                gpg> 1Y
+                gpg --keyserver keyserver.ubuntu.com --send-keys 0x20F802FE798E6857   
+          pinned: true
