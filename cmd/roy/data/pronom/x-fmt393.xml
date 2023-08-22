@@ -115,6 +115,13 @@
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2702</RelatedFormatID>
+        <RelatedFormatName>WordPerfect Macro File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Is previous version of</RelationshipType>
         <RelatedFormatID>737</RelatedFormatID>
         <RelatedFormatName>WordPerfect for MS-DOS/Windows Document</RelatedFormatName>

@@ -104,7 +104,13 @@
     "fmt/1854 (Open Media Framework Interchange 1.0)",
     "fmt/1855 (Open Media Framework Interchange 2.0)",
     "fmt/1856 (Enhanced Image Package)",
-    "fmt/1859 (Adobe Air 2.5)"
+    "fmt/1859 (Adobe Air 2.5)",
+    "fmt/1872 (Guitar Pro File 1)",
+    "fmt/1873 (Guitar Pro File 2-5)",
+    "fmt/1876 (HMM Packfile)",
+    "fmt/1894 (RagTime Document File 2-3)",
+    "fmt/1895 (RagTime Document File 4-6)",
+    "fmt/1898 (Perfect ZX Tape (PZX) Image Format)"
   ],
   "audio": [
     "x-fmt/135 (Audio Interchange File Format 1.3)",
@@ -230,7 +236,11 @@
     "fmt/1824 (Audacity Project File 1.x)",
     "fmt/1825 (Audacity Project File 2.x)",
     "fmt/1826 (Audacity Project File 3.x)",
-    "fmt/1843 (Human Machine Interfaces HMI File)"
+    "fmt/1843 (Human Machine Interfaces HMI File)",
+    "fmt/1886 (Resource Interchange File Format (RIFF))",
+    "fmt/1890 (Memory Stick Voice File (MSV) ADPCM Codec)",
+    "fmt/1891 (Digital Voice File (DVF) TRC Codec)",
+    "fmt/1892 (Memory Stick Voice File (MSV)/Digital Voice File (DVF) LPEC Codec)"
   ],
   "database": [
     "x-fmt/6 (FoxPro Database 2.0)",
@@ -505,7 +515,10 @@
     "fmt/1762 (MacBinary II)",
     "fmt/1763 (MacBinary III)",
     "fmt/1782 (The Spectral Geologist Dataset 7.15)",
-    "fmt/1783 (The Spectral Geologist Dataset 7)"
+    "fmt/1783 (The Spectral Geologist Dataset 7)",
+    "fmt/1869 (SPSS PC File Format)",
+    "fmt/1871 (Common Interface File)",
+    "fmt/1875 (Maptech BSB Documentation File)"
   ],
   "email": [
     "x-fmt/430 (Microsoft Outlook Email Message 97-2003)",
@@ -569,7 +582,8 @@
     "fmt/1696 (ESRI Attribute Index Files)",
     "fmt/1700 (OGC GeoPackage 1.0-1.31)",
     "fmt/1729 (Esri Shapefile Geospatial Metadata File)",
-    "fmt/1771 (ESRI Persistent Auxiliary Metadata File)"
+    "fmt/1771 (ESRI Persistent Auxiliary Metadata File)",
+    "fmt/1868 (Leapfrog Geo 3D Scene Format)"
   ],
   "imageRaster": [
     "x-fmt/25 (OS/2 Bitmap 1.0)",
@@ -851,7 +865,9 @@
     "fmt/1834 (GoDot 4Bit Graphics Format)",
     "fmt/1841 (Digital Negative Format (DNG) 1.5)",
     "fmt/1842 (Digital Negative Format (DNG) 1.6)",
-    "fmt/1849 (General Purpose RAW)"
+    "fmt/1849 (General Purpose RAW)",
+    "fmt/1878 (GST Art File 2)",
+    "fmt/1896 (Nokia Picture Message)"
   ],
   "imageVector": [
     "x-fmt/20 (Adobe Illustrator 1.0 / 1.1)",
@@ -1063,7 +1079,11 @@
     "fmt/1528 (Serif DrawPlus Drawing Generic)",
     "fmt/1660 (Arts \u0026 Letters Clip Art Library)",
     "fmt/1753 (OpenDocument Graphics 1.3)",
-    "fmt/1791 (Haiku Vector Icon Format)"
+    "fmt/1791 (Haiku Vector Icon Format)",
+    "fmt/1862 (Adobe Illustrator CC Artwork 17-23)",
+    "fmt/1863 (Adobe Illustrator CC 2020 Artwork 24-24.1)",
+    "fmt/1864 (Adobe Illustrator CC 2020 Artwork 24.2+)",
+    "fmt/1877 (GST Art File 1)"
   ],
   "model": [
     "x-fmt/19 (3D Studio)",
@@ -1192,7 +1212,9 @@
     "fmt/1673 (ZBrush MatCap)",
     "fmt/1714 (CATIA Model File 3)",
     "fmt/1830 (3D Studio (DOS) 2D/3D Loft Object File)",
-    "fmt/1831 (3D Studio (DOS) Project File)"
+    "fmt/1831 (3D Studio (DOS) Project File)",
+    "fmt/1885 (CloudCompare Entity File)",
+    "fmt/1897 (Ptex File Format)"
   ],
   "pageDescription": [
     "fmt/122 (Encapsulated PostScript File Format 1.2)",
@@ -1235,7 +1257,9 @@
     "fmt/1286 (Envoy Document File 1)",
     "fmt/1287 (Envoy Document File 7)",
     "fmt/1396 (FinePrint)",
-    "fmt/1500 (Adobe Acrobat Forms Data Format 1.x)"
+    "fmt/1500 (Adobe Acrobat Forms Data Format 1.x)",
+    "fmt/1874 (Esko ArtPro File)",
+    "fmt/1884 (Encapsulated PostScript File Format 2.1)"
   ],
   "presentation": [
     "x-fmt/32 (Harvard Graphics Chart 3.0)",
@@ -1407,7 +1431,9 @@
     "fmt/1754 (OpenDocument Presentation 1.3)",
     "fmt/1795 (Asymetrix Toolbook File 6-11.5)",
     "fmt/1829 (PPTX Strict OOXML Presentation 2007 onwards)",
-    "fmt/1839 (Microsoft Publisher Packaged Document)"
+    "fmt/1839 (Microsoft Publisher Packaged Document)",
+    "fmt/1866 (Microsoft Powerpoint for Macintosh 2)",
+    "fmt/1867 (Microsoft Powerpoint for Macintosh 3)"
   ],
   "spreadsheet": [
     "x-fmt/17 (Microsoft Excel Template 97-2003)",
@@ -1584,7 +1610,10 @@
     "fmt/1845 (Final Draft Document 8)",
     "fmt/1846 (Fountain Markup Language File)",
     "fmt/1853 (Camtasia Studio Project)",
-    "fmt/1857 (Capture One Session File)"
+    "fmt/1857 (Capture One Session File)",
+    "fmt/1882 (OPML File 1.*)",
+    "fmt/1883 (OPML File 2)",
+    "fmt/1900 (Mass Spectrometry Markup Language)"
   ],
   "textStructured": [
     "x-fmt/41 (Data Interchange Format)",
@@ -1744,7 +1773,9 @@
     "fmt/1821 (MacCaption Project)",
     "fmt/1833 (ArcSoft Album and SlideShow Files for PhotoStudio and PhotoImpression)",
     "fmt/1838 (Leica Project File)",
-    "fmt/1844 (GNU Image Manipulation Program Palette File)"
+    "fmt/1844 (GNU Image Manipulation Program Palette File)",
+    "fmt/1875 (Maptech BSB Documentation File)",
+    "fmt/1899 (RIS Citation)"
   ],
   "textUnstructured": [
     "x-fmt/14 (Macintosh Text File)",
@@ -1828,7 +1859,10 @@
     "fmt/1488 (Phantom CINE Video File)",
     "fmt/1489 (Phantom CINE Compressed Video File)",
     "fmt/1643 (Lenel Network Video Recorder File)",
-    "fmt/1851 (DAV Video Format)"
+    "fmt/1851 (DAV Video Format)",
+    "fmt/1865 (SWiSH Movie File)",
+    "fmt/1886 (Resource Interchange File Format (RIFF))",
+    "fmt/1893 (Microsoft Agent File)"
   ],
   "wordProcessor": [
     "x-fmt/1 (Microsoft Word for Macintosh Document 3.0)",
@@ -2012,6 +2046,7 @@
     "fmt/1827 (DOCX Strict OOXML Document 2007 onwards)",
     "fmt/1837 (WordPerfect Presentations 2)",
     "fmt/1848 (Trelby Document File)",
-    "fmt/1850 (WordPerfect Macro File)"
+    "fmt/1850 (WordPerfect Macro File)",
+    "fmt/1889 (Open Access III Document III)"
   ]
 }

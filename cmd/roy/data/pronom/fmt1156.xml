@@ -25,9 +25,8 @@
       <ProvenanceSourceID>231</ProvenanceSourceID>
       <ProvenanceName>New York Public Library / New York Public Library</ProvenanceName>
       <ProvenanceSourceDate>26 Jul 2018</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>26 Jul 2018</LastUpdatedDate>
+      <ProvenanceDescription>08/2023 (v.113)- Added 0 value to offset in EOF signature as null offset is causing max-offset to be ignored. Submitted by Preservica.</ProvenanceDescription>
+      <LastUpdatedDate>15 Aug 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -64,8 +63,7 @@ EOF, max offset 2048: CLEAR TEXT BLOCK..LWFORMAT V6</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1802</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
-          <Offset>
-          </Offset>
+          <Offset>0</Offset>
           <MaxOffset>2048</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>

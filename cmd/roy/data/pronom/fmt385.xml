@@ -13,7 +13,7 @@
       <FormatTypes>Image (Raster)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Microsoft Windows Cursor file is a binary system file. CUR pointer images come in different standard sizes such as 16x16 and 32x32. They are a stationary image format similar to an ICO (icon) file. CUR files are found alongside the installation of Microsoft Windows and were first introduced in Microsofts Windows 1.0 operating system in 1981.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -24,9 +24,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>23 Nov 2011</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>23 Nov 2011</LastUpdatedDate>
+      <ProvenanceDescription>08/2023 (v.113)- Offsets removed from variable byte sequence and description updated. Submitted by Preservica.</ProvenanceDescription>
+      <LastUpdatedDate>15 Aug 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -67,8 +66,10 @@
         <ByteSequence>
           <ByteSequenceID>703</ByteSequenceID>
           <PositionType>Variable</PositionType>
-          <Offset>18</Offset>
-          <MaxOffset>1024</MaxOffset>
+          <Offset>
+          </Offset>
+          <MaxOffset>
+          </MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

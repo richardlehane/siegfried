@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2736</FormatID>
+      <FormatName>OPML File</FormatName>
+      <FormatVersion>1.*</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Mark-up)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>OPML (Outline Processor Markup Language) files are an XML format developed to enable exchange of lists of internet web feeds (e.g. RSS feeds) between between different web feed aggregators, regardless of their operating system. OPML files have &lt;opml version="x"&gt; near the start, then contents mainly divided into &lt;head&gt; and &lt;body&gt; sections. It was developed in the early 2000s, and is still commonly used for backing up or sharing RSS feeds.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>1</ProvenanceSourceID>
+      <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
+      <ProvenanceSourceDate>06 Jul 2023</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>06 Jul 2023</LastUpdatedDate>
+      <FormatNote>Specification:  https://web.archive.org/web/20160304125338/http://dev.opml.org/spec1.htm</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1882</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>316</DeveloperID>
+        <DeveloperName>opml.org</DeveloperName>
+        <OrganisationName>opml.org</OrganisationName>
+        <DeveloperCompoundName>opml.org / opml.org</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>316</SupportID>
+        <SupportName>opml.org</SupportName>
+        <OrganisationName>opml.org</OrganisationName>
+        <SupportCompoundName>opml.org / opml.org</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3364</ExternalSignatureID>
+        <Signature>opml</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2223</SignatureID>
+        <SignatureName>OPML File v.1.*</SignatureName>
+        <SignatureNote>Absolute from BOF, magic bytes: &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;opml version="1.{1}"&gt;&lt;head&gt;&lt;title&gt;{0-300}&lt;/title&gt;&lt;/head&gt;&lt;body&gt;
+EOF, offset 0-4:&lt;/body&gt;(0-4)&lt;/opml&gt;</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2578</ByteSequenceID>
+          <PositionType>Absolute from EOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>4</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C2F626F64793E{0-4}3C2F6F706D6C3E</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>2616</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C3F786D6C2076657273696F6E3D22312E302220656E636F64696E673D225554462D38223F3E3C6F706D6C2076657273696F6E3D22312E{1}223E3C686561643E3C7469746C653E{0-300}3C2F7469746C653E3C2F686561643E3C626F64793E</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>638</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

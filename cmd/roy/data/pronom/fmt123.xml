@@ -20,9 +20,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>31 Oct 2022</LastUpdatedDate>
+      <ProvenanceDescription>08/2023 (v.113) - Description of magic bytes for signature added. Researched internally.</ProvenanceDescription>
+      <LastUpdatedDate>15 Aug 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -89,7 +88,7 @@
       <InternalSignature>
         <SignatureID>177</SignatureID>
         <SignatureName>EPS 2.0</SignatureName>
-        <SignatureNote>Version comment</SignatureNote>
+        <SignatureNote>Absolute from beginning of file, magic bytes: %!PS-Adobe-2{0-3}EPSF-2{0-2}.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>210</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -108,7 +107,8 @@
       <InternalSignature>
         <SignatureID>178</SignatureID>
         <SignatureName>EPS 2.0 Preview</SignatureName>
-        <SignatureNote>Version comment</SignatureNote>
+        <SignatureNote>Absolute from beginning of file, magic bytes: ÅÐÓÆ
+Variable: %!PS-Adobe-2.0 EPSF-2.0(.|..)</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>211</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -223,6 +223,12 @@
         <RelatedFormatID>331</RelatedFormatID>
         <RelatedFormatName>Encapsulated PostScript File Format</RelatedFormatName>
         <RelatedFormatVersion>3</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>2740</RelatedFormatID>
+        <RelatedFormatName>Encapsulated PostScript File Format</RelatedFormatName>
+        <RelatedFormatVersion>2.1</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Is subsequent version of</RelationshipType>

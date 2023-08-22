@@ -25,8 +25,9 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>31 Mar 2014</ProvenanceSourceDate>
-      <ProvenanceDescription>http://msdn.microsoft.com/en-us/library/ff632839.aspx</ProvenanceDescription>
-      <LastUpdatedDate>31 Mar 2014</LastUpdatedDate>
+      <ProvenanceDescription>http://msdn.microsoft.com/en-us/library/ff632839.aspx
+08/2023 (v.113)- Added priority over fmt/640 (MPEG-1 Elementary Stream). Submitted by Preservica.</ProvenanceDescription>
+      <LastUpdatedDate>15 Aug 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>

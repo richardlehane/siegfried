@@ -22,9 +22,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>25 Nov 2011</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>25 Nov 2011</LastUpdatedDate>
+      <ProvenanceDescription>08/2023 (v.113)- Max-offset added to BOF signature to accommodate header bytes. Submitted by The National Library of Australia.</ProvenanceDescription>
+      <LastUpdatedDate>15 Aug 2023</LastUpdatedDate>
       <FormatNote>Specifications available at: 
 http://www.cwls.org/las_info.php</FormatNote>
       <FormatRisk>
@@ -54,8 +53,7 @@ http://www.cwls.org/las_info.php</FormatNote>
           <ByteSequenceID>711</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>148</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

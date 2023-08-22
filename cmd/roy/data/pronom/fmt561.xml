@@ -26,11 +26,13 @@ Beginning with version 9, the Adobe Illustrated ai file format included both a p
       <ProvenanceSourceID>165</ProvenanceSourceID>
       <ProvenanceName>Georgia Tech Research Institute / Georgia Tech Research Institute</ProvenanceName>
       <ProvenanceSourceDate>19 Jul 2013</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>19 Jul 2013</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <ProvenanceDescription>Update submitted in v113 signture file by Brigham Young University as part of research - https://preservation.tylerthorsted.com/2023/04/07/adobe-illustrator-and-pdf/</ProvenanceDescription>
+      <LastUpdatedDate>24 May 2023</LastUpdatedDate>
+      <FormatNote>http://justsolve.archiveteam.org/wiki/Adobe_Illustrator_Artwork
+
+https://en.wikipedia.org/wiki/Adobe_Illustrator_Artwork
+
+https://www.adobe.com/creativecloud/file-types/image/vector/ai-file.html</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -86,7 +88,7 @@ Beginning with version 9, the Adobe Illustrated ai file format included both a p
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>255044462D312E34{1-32000}252150532D41646F62652D332E30{128-1024}254149355F46696C65466F726D61742038</ByteSequenceValue>
+          <ByteSequenceValue>255044462D312E34*41495072697661746544617461*252150532D41646F62652D332E30*254149355F46696C65466F726D61742038</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
@@ -94,6 +96,18 @@ Beginning with version 9, the Adobe Illustrated ai file format included both a p
         <RelatedFormatID>617</RelatedFormatID>
         <RelatedFormatName>Acrobat PDF 1.4 - Portable Document Format</RelatedFormatName>
         <RelatedFormatVersion>1.4</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>1350</RelatedFormatID>
+        <RelatedFormatName>Adobe Illustrator</RelatedFormatName>
+        <RelatedFormatVersion>13.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>1348</RelatedFormatID>
+        <RelatedFormatName>Adobe Illustrator</RelatedFormatName>
+        <RelatedFormatVersion>11.0</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>

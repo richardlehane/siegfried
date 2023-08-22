@@ -179,6 +179,12 @@
         <RelatedFormatVersion>8.0</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2740</RelatedFormatID>
+        <RelatedFormatName>Encapsulated PostScript File Format</RelatedFormatName>
+        <RelatedFormatVersion>2.1</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>1073</RelatedFormatID>
         <RelatedFormatName>EndNote Import File</RelatedFormatName>

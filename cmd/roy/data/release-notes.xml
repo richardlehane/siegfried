@@ -2,6 +2,721 @@
 <?xml-stylesheet type="text/xsl" href="release-note.xsl"?>
 <release_notes>
 <release_note>
+   <release_date>22nd August 2023</release_date>
+   <signature_filename>DROID_SignatureFile_V114.xml</signature_filename>
+   <release_outline name="New Records">
+      <format>
+         <puid type="fmt">1862</puid>
+         <name>Adobe Illustrator CC Artwork 17-23</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1863</puid>
+         <name>Adobe Illustrator CC 2020 Artwork 24.0-24.1</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1864</puid>
+         <name>Adobe Illustrator CC 2020 Artwork 24.2+</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1865</puid>
+         <name>SWiSH Movie File</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1866</puid>
+         <name>Microsoft Powerpoint for Macintosh v.2</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1867</puid>
+         <name>Microsoft Powerpoint for Macintosh v.3</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1868</puid>
+         <name>Leapfrog Geo 3D Scene Format</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1869</puid>
+         <name>SPSS PC File Format</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1870</puid>
+         <name>Yamaha PSR Disk Manager File</name>
+         <summary>Full entry added. Submitted by R. Guedj, Bibliothèque Cantonale Universitaire de Fribourg.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1871</puid>
+         <name>Common Interface File</name>
+         <summary>Full entry added. Submitted by Transport for London.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1872</puid>
+         <name>Guitar Pro File 1</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1873</puid>
+         <name>Guitar Pro File 2-5</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1874</puid>
+         <name>Esko ArtPro File</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1875</puid>
+         <name>Maptech BSB Documentation File</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1876</puid>
+         <name>HMM Packfile</name>
+         <summary>Full entry added. Submitted by Ross Spencer, Ravensburger AG.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1877</puid>
+         <name>GST Art File (1)</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1878</puid>
+         <name>GST Art File (2)</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1879</puid>
+         <name>vCard 2.1</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1880</puid>
+         <name>vCard 3</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1881</puid>
+         <name>vCard 4</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1882</puid>
+         <name>OPML File 1.*</name>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1883</puid>
+         <name>OPML File 2</name>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1884</puid>
+         <name>Encapsulated PostScript File Format 2.1</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1885</puid>
+         <name>CloudCompare Entity File</name>
+         <summary>Full entry added. Submitted by National Library of New Zealand.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1886</puid>
+         <name>Resource Interleaved File Format (RIFF)</name>
+         <summary>Full entry added. Submitted by New York Public Libraries.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1887</puid>
+         <name>Common Instrument File (CIF) 1</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1888</puid>
+         <name>Common Instrument File (CIF) 2</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1889</puid>
+         <name>Open Access III Document</name>
+         <summary>Full entry added. Submitted by National Library of New Zealand.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1890</puid>
+         <name>Memory Stick Voice File (MSV) ADPCM Codec</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1891</puid>
+         <name>Digital Voice File (DVF) TRC Codec</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1892</puid>
+         <name>Memory Stick Voice File (MSV)/Digital Voice File (DVF) LPEC Codec</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1893</puid>
+         <name>Microsoft Agent File</name>
+         <summary>Full entry added. Submitted by New York Public Libraries.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1894</puid>
+         <name>RagTime Document File 2-3</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1895</puid>
+         <name>RagTime Document File 4-6</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1896</puid>
+         <name>Nokia Picture Message</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1897</puid>
+         <name>Ptex File Format</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1898</puid>
+         <name>Perfect ZX Tape (PZX) Image Format</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1899</puid>
+         <name>RIS Citation</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1900</puid>
+         <name>Mass Spectrometry Markup Language</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="Updated Records">
+      <format>
+         <puid type="fmt">5</puid>
+         <name>Audio/Video Interleaved Format</name>
+         <summary>Signature simplified to increase identification tool processing time. Added priority over fmt/1886. Submitted by Preservica and New York Public Libraries.</summary>
+      </format>
+      <format>
+         <puid type="fmt">6</puid>
+         <name>Waveform Audio</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">41</puid>
+         <name>Raw JPEG Stream</name>
+         <summary>Offset modified for the EOF signature as null value causing max-offset to be ignored. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">122</puid>
+         <name>Encapsulated PostScript File Format 1.2</name>
+         <summary>Added description of magic bytes. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">123</puid>
+         <name>Encapsulated PostScript File Format 2.0</name>
+         <summary>Added description of magic bytes. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">124</puid>
+         <name>Encapsulated PostScript File Format 3</name>
+         <summary>Added description of magic bytes and specification. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">163</puid>
+         <name>Microsoft Works Word Processor 1-3 for DOS and 2 for Windows</name>
+         <summary>Updated description to provide entry and added links to documentation. Signature updated with either or bytes. Max-offset of 0 bytes added for BOF signature. Submitted by Zeticon.</summary>
+      </format>
+      <format>
+         <puid type="fmt">179</puid>
+         <name>Microsoft PowerPoint for Macintosh v.4.0</name>
+         <summary>Added description and MIME type. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">181</puid>
+         <name>Microsoft PowerPoint for Macintosh 2001</name>
+         <summary>Added description and MIME type. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">199</puid>
+         <name>MPEG-4 Media File</name>
+         <summary>Added priority over fmt/1616. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">385</puid>
+         <name>Microsoft Windows Cursor</name>
+         <summary>Offsets removed from variable byte sequence and updated description. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">386</puid>
+         <name>Microsoft Animated Cursor Format</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">389</puid>
+         <name>Log ASCII Standard 1.2</name>
+         <summary>Offset added to signature to accomodate header. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">395</puid>
+         <name>vCard</name>
+         <summary>Added vcard extension, updated description. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">427</puid>
+         <name>CorelDraw Drawing 12.0</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">428</puid>
+         <name>CorelDraw Drawing X3</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">431</puid>
+         <name>Corel R.A.V.E. 2</name>
+         <summary>Added priority over fmt/1886 and updated description. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">432</puid>
+         <name>Corel R.A.V.E. 3</name>
+         <summary>Added priority over fmt/1886 and updated description. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">464</puid>
+         <name>CorelDraw Drawing 5.0</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">465</puid>
+         <name>CorelDraw Drawing 4.0</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">468</puid>
+         <name>ISO 9660 Disk Image File</name>
+         <summary>Max-offset modified for BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">558</puid>
+         <name>Adobe Illustrator 9.0</name>
+         <summary>Updated signature and links. Added WikiQID and reference to submission. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">559</puid>
+         <name>Adobe Illustrator 10.0</name>
+         <summary>Updated signature, links and reference to submission. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">560</puid>
+         <name>Adobe Illustrator 11.0</name>
+         <summary>Updated signature, links and reference to submission. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">561</puid>
+         <name>Adobe Illustrator 12.0</name>
+         <summary>Updated signature, links and reference to submission. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">562</puid>
+         <name>Adobe Illustrator 13.0</name>
+         <summary>Updated signature, links and reference to submission. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">563</puid>
+         <name>Adobe Illustrator 14.0</name>
+         <summary>Updated signature, links and reference to submission. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">564</puid>
+         <name>Adobe Illustrator 15.0</name>
+         <summary>Updated signature, links and reference to submission. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">565</puid>
+         <name>Adobe Illustrator 16.0</name>
+         <summary>Updated signature, links and reference to submission. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">566</puid>
+         <name>WebP Lossy</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">567</puid>
+         <name>WebP Lossless</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">568</puid>
+         <name>WebP Extended</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">624</puid>
+         <name>RIFF Palette Format</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">649</puid>
+         <name>MPEG-2 Elementary Stream</name>
+         <summary>Added priority over fmt/640 MPEG-1 Elementary Stream. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">657</puid>
+         <name>Open XML Paper Specification</name>
+         <summary>Added extension oxps. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">819</puid>
+         <name>CD-ROM/XA (eXtended Architecture)</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">882</puid>
+         <name>Wordstar 2000</name>
+         <summary>Changed offset from 128 to 130. Submitted by National Library of New Zealand.</summary>
+      </format>
+      <format>
+         <puid type="fmt">923</puid>
+         <name>Microsoft xWMA</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">955</puid>
+         <name>Downloadable Sounds Audio</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">956</puid>
+         <name>RIFF-based MIDI</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">957</puid>
+         <name>DirectMusic Segment File Format</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">958</puid>
+         <name>DirectMusic Style File Format</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">962</puid>
+         <name>QCP Audio File Format</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1150</puid>
+         <name>4X Movie File</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1155</puid>
+         <name>Lightwright Show File (5)</name>
+         <summary>Offset modified for the EOF signature as null value causing max-offset to be ignored. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1210</puid>
+         <name>Wavefront OBJ File</name>
+         <summary>Modified BOF signature to increase two of the byte ranges. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1556</puid>
+         <name>Lightwright Show File (6)</name>
+         <summary>Offset modified for the EOF signature as null value causing max-offset to be ignored. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1739</puid>
+         <name>UDF-ISO 9660 Bridge Disc</name>
+         <summary>Max-offset modified for both BOF signatures to allow for more exact signature identification. Internally researched. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1776</puid>
+         <name>Extensible Markup Language 1.1</name>
+         <summary>Relationship with fmt/101 added and signature tightened to prevent clashes with fmt/92. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1778</puid>
+         <name>Gunpaint Image File</name>
+         <summary>Adjusted signature to include 'GUNPAINT' at an offset of 1002 from BOF. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1796</puid>
+         <name>Wireless Markup Language (WML) Document</name>
+         <summary>Offset and signature modified for the EOF byte sequence to remove floating curly brackets from the signature for consistency. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1850</puid>
+         <name>WordPerfect Macro File</name>
+         <summary>Priority added over x-fmt/393 (WordPerfect for MS-DOS Document 5.0). Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">29</puid>
+         <name>CorelDraw Drawing 6.0</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">33</puid>
+         <name>Corel R.A.V.E. 1</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">34</puid>
+         <name>Corel Presentation Exchange File 5.0</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">35</puid>
+         <name>Corel Presentation Exchange File 6 and Later</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">222</puid>
+         <name>CD Audio</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">291</puid>
+         <name>CorelDraw Drawing 7.0</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">292</puid>
+         <name>CorelDraw Drawing 8.0</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">374</puid>
+         <name>CorelDraw Drawing 9.0</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">375</puid>
+         <name>CorelDraw Drawing 10.0</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">378</puid>
+         <name>CorelDraw Drawing 11.0</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">379</puid>
+         <name>CorelDraw Drawing 3.0</name>
+         <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="New Signatures">
+      <format>
+         <puid type="fmt">1862</puid>
+         <name>Adobe Illustrator CC Artwork 17-23</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1863</puid>
+         <name>Adobe Illustrator CC 2020 Artwork 24.0-24.1</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1864</puid>
+         <name>Adobe Illustrator CC 2020 Artwork 24.2+</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1865</puid>
+         <name>SWiSH Movie File</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1866</puid>
+         <name>Microsoft Powerpoint for Macintosh v.2</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1867</puid>
+         <name>Microsoft Powerpoint for Macintosh v.3</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1868</puid>
+         <name>Leapfrog Geo 3D Scene Format</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1869</puid>
+         <name>SPSS PC File Format</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1870</puid>
+         <name>Yamaha PSR Disk Manager File</name>
+         <summary>Signature researched and samples provided by R. Guedj, Bibliothèque Cantonale Universitaire de Fribourg.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1871</puid>
+         <name>Common Interface File</name>
+         <summary>Signature researched and samples provided by Transport for London.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1872</puid>
+         <name>Guitar Pro File 1</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1873</puid>
+         <name>Guitar Pro File 2-5</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1874</puid>
+         <name>Esko ArtPro File</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1875</puid>
+         <name>Maptech BSB Documentation File</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1876</puid>
+         <name>HMM Packfile</name>
+         <summary>Signature researched and samples provided by Ross Spencer, Ravensburger AG.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1877</puid>
+         <name>GST Art File (1)</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1878</puid>
+         <name>GST Art File (2)</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1879</puid>
+         <name>vCard 2.1</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1880</puid>
+         <name>vCard 3</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1881</puid>
+         <name>vCard 4</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1882</puid>
+         <name>OPML File 1.*</name>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1883</puid>
+         <name>OPML File 2</name>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1884</puid>
+         <name>Encapsulated PostScript File Format 2.1</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1885</puid>
+         <name>CloudCompare Entity File</name>
+         <summary>Signature researched and samples provided by National Library of New Zealand.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1886</puid>
+         <name>Resource Interleaved File Format (RIFF)</name>
+         <summary>Signature researched and samples provided by New York Public Libraries.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1887</puid>
+         <name>Common Instrument File (CIF) 1</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1888</puid>
+         <name>Common Instrument File (CIF) 2</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1889</puid>
+         <name>Open Access III Document</name>
+         <summary>Signature researched and samples provided by National Library of New Zealand.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1890</puid>
+         <name>Memory Stick Voice File (MSV) ADPCM Codec</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1891</puid>
+         <name>Digital Voice File (DVF) TRC Codec</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1892</puid>
+         <name>Memory Stick Voice File (MSV)/Digital Voice File (DVF) LPEC Codec</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1893</puid>
+         <name>Microsoft Agent File</name>
+         <summary>Signature researched and samples provided by New York Public Libraries.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1894</puid>
+         <name>RagTime Document File 2-3</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1895</puid>
+         <name>RagTime Document File 4-6</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1896</puid>
+         <name>Nokia Picture Message</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1897</puid>
+         <name>Ptex File Format</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1898</puid>
+         <name>Perfect ZX Tape (PZX) Image Format</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1899</puid>
+         <name>RIS Citation</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1900</puid>
+         <name>Mass Spectrometry Markup Language</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+   </release_outline>
+</release_note>
+<release_note>
    <release_date>10th May 2023</release_date>
    <signature_filename>DROID_SignatureFile_V112.xml</signature_filename>
    <release_outline name="New Records">
@@ -17,7 +732,7 @@
       </format>
       <format>
          <puid type="fmt">1847</puid>
-         <name>Esri ArcMap Label file</name>
+         <name>Esri ArcMap Label File</name>
          <summary>Extension-only entry added. Submitted by Brigham Young University.</summary>
       </format>
       <format>
@@ -72,12 +787,12 @@
       </format>
       <format>
          <puid type="fmt">1858</puid>
-         <name>Microsoft Excel Workspace File</name>
+         <name>Microsoft Excel Workspace File 5/95</name>
          <summary>Full entry added. Submitted by The National Library of Australia.</summary>
       </format>
       <format>
          <puid type="fmt">1859</puid>
-         <name>Adobe Air</name>
+         <name>Adobe Air 2.5</name>
          <summary>Extension-only entry added. Submitted by The National Library of Australia.</summary>
       </format>
       <format>
@@ -104,7 +819,7 @@
       </format>
       <format>
          <puid type="fmt">177</puid>
-         <name>Microsoft Excel for Macintosh</name>
+         <name>Microsoft Excel for Macintosh 2004</name>
          <summary>PUID deprecated. Submitted by Brigham Young University.</summary>
       </format>
       <format>
@@ -134,7 +849,7 @@
       </format>
       <format>
          <puid type="fmt">964</puid>
-         <name>Final Draft Document v.5-7</name>
+         <name>Final Draft Document 5-7</name>
          <summary>Added relationship and developer. Submitted by Digital Preservation Department, The National Archives.</summary>
       </format>
       <format>
@@ -144,7 +859,7 @@
       </format>
       <format>
          <puid type="fmt">1213</puid>
-         <name>Zoner Callisto Metafile</name>
+         <name>Zoner Callisto Metafile 2</name>
          <summary>Extension changed from .f to .zmf. Submitted by Preservica.</summary>
       </format>
       <format>
@@ -154,8 +869,8 @@
       </format>
       <format>
          <puid type="fmt">1649</puid>
-         <name>AGS 4 Data Format</name>
-         <summary>Broadened main body of sig, and added BOF sequence. Submitted by Preservica and Digital Preservation Department, The National Archives.</summary>
+         <name>AGS 4 Data Format 4.0 4.1</name>
+         <summary>Broadened main body of signature and added BOF sequence. Submitted by Preservica and Digital Preservation Department, The National Archives.</summary>
       </format>
       <format>
          <puid type="fmt">1805</puid>
@@ -254,12 +969,12 @@
       </format>
       <format>
          <puid type="x-fmt">393</puid>
-         <name>WordPerfect for MS-DOS Document</name>
+         <name>WordPerfect for MS-DOS Document 5.0</name>
          <summary>Added .doc extension. Submitted by Digital Preservation Department, The National Archives.</summary>
       </format>
       <format>
          <puid type="x-fmt">394</puid>
-         <name>WordPerfect for MS-DOS/Windows Document</name>
+         <name>WordPerfect for MS-DOS/Windows Document 5.1</name>
          <summary>Added .doc extension. Submitted by Digital Preservation Department, The National Archives.</summary>
       </format>
       <format>
@@ -271,7 +986,7 @@
    <release_outline name="New Signatures">
       <format>
          <puid type="fmt">1845</puid>
-         <name>Final Draft Document v.8</name>
+         <name>Final Draft Document 8</name>
          <summary>Signature researched and samples provided by Stadtarchiv Hof (Municipal Archives of Hof, Free State of Bavaria, Germany).</summary>
       </format>
       <format>

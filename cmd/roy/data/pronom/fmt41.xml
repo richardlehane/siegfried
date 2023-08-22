@@ -22,9 +22,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>11 Mar 2005</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>20 Oct 2022</LastUpdatedDate>
+      <ProvenanceDescription>08/2023 (v.113) - Photoshop JPEG signature added 0 value to offset in EOF signature as null offset is causing max-offset to be ignored. Submitted by Preservica.</ProvenanceDescription>
+      <LastUpdatedDate>15 Aug 2023</LastUpdatedDate>
       <FormatNote>https://www.loc.gov/preservation/digital/formats/fdd/fdd000017.shtml#:~:text=The%20Library%20of%20Congress%20Recommended,specify%20a%20version%20of%20JPEG.
 
 https://web.archive.org/web/20220624201809/https://www.adobe.com/creativecloud/file-types/image/raster/jpeg-file.html
@@ -117,8 +116,7 @@ EOF: EOI marker (FF|D9) with a large offset due to the amount of photoshop metad
           <ByteSequenceID>868</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
@@ -130,8 +128,7 @@ EOF: EOI marker (FF|D9) with a large offset due to the amount of photoshop metad
         <ByteSequence>
           <ByteSequenceID>869</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
-          <Offset>
-          </Offset>
+          <Offset>0</Offset>
           <MaxOffset>16000</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>

@@ -20,9 +20,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <ProvenanceDescription>08/2023 (v.113) - Description of magic bytes for signature added. Researched internally.</ProvenanceDescription>
+      <LastUpdatedDate>15 Aug 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -89,7 +88,7 @@
       <InternalSignature>
         <SignatureID>173</SignatureID>
         <SignatureName>EPS 1.2</SignatureName>
-        <SignatureNote>Version comment</SignatureNote>
+        <SignatureNote>Absolute from beginning of file, magic bytes: %!PS-Adobe-2.0 EPSF-1.2(.|..)</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>205</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -108,7 +107,8 @@
       <InternalSignature>
         <SignatureID>174</SignatureID>
         <SignatureName>EPS 1.2 Preview</SignatureName>
-        <SignatureNote>Version comment</SignatureNote>
+        <SignatureNote>Absolute from beginning of file, magic bytes: ÅÐÓÆ
+Variable, magic bytes: %!PS-Adobe-2.0 EPSF-1.2(.|..)</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>206</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>

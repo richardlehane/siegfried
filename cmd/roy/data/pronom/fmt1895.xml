@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2751</FormatID>
+      <FormatName>RagTime Document File</FormatName>
+      <FormatVersion>4-6</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>RagTime is a business publishing software developed by RagTime.de Development GmbH. It brings together various features such as word processsing, spreadsheets, simple drawings, image editing, and chart creation into a single document. RagTime documents feature a frame-oriented design, where every piece of content is placed within its own frame on the page. In RagTime, all data types are stored in a single document, which can include multiple layouts such as spreadsheets, images, and text. Files are saved with .rtd extension for documents and .rtt for templates. While v1-v3 were developed in Pascal, since v4 the development has been coded in C++.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>299</ProvenanceSourceID>
+      <ProvenanceName>Brigham Young University / Brigham Young University</ProvenanceName>
+      <ProvenanceSourceDate>07 Aug 2023</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>07 Aug 2023</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/Ragtime
+
+https://en.wikipedia.org/wiki/RagTime
+
+
+https://www.garykessler.net/library/file_sigs.html</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1895</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3377</ExternalSignatureID>
+        <Signature>rtd</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3378</ExternalSignatureID>
+        <Signature>rtt</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2239</SignatureID>
+        <SignatureName>RagTime Document File v4-6</SignatureName>
+        <SignatureNote>BOF:'C#+D¤CM¥Hdr'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2596</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>43232B44A4434DA5486472</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

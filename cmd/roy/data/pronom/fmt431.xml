@@ -12,7 +12,7 @@
       <FormatTypes>Image (Vector)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Corel R.A.V.E. (Real Animated Vector Effects) is the vector-based animation application which comes bundled as part of the CorelDRAW Graphics Suite (starting in version 10).</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -24,9 +24,8 @@
       <ProvenanceSourceID>181</ProvenanceSourceID>
       <ProvenanceName>Museum of London / Museum of London</ProvenanceName>
       <ProvenanceSourceDate>11 Jun 2012</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>11 Jun 2012</LastUpdatedDate>
+      <ProvenanceDescription>08/2023 (v.113)- Added priority over fmt/1886 (Resource Interchange Format (RIFF)) and updated description. Submitted by New York Public Libraries and Preservica.</ProvenanceDescription>
+      <LastUpdatedDate>14 Aug 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -62,6 +61,13 @@
           <ByteSequenceValue>52494646{4}434152427672736E</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2741</RelatedFormatID>
+        <RelatedFormatName>Resource Interchange File Format (RIFF)</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

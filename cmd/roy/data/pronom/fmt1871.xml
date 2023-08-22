@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2725</FormatID>
+      <FormatName>Common Interface File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Dataset</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The Common Interface File (CIF) format is used to transfer train schedules from Network Rail's Integrated Train Planning System to computer systems requiring train data in electronic format. The files contains a set of train schedules and amendments. These files are automatically generated and disseminated every day after a ITPS publication run is completed. CIF files are text files containing one train schedule/amendment per row, of a fixed length of 80 bytes. The first two characters of a row/schedule identify the record type, ie if it is a new record, amendment or deletion etc. This signature is quite broad, due to the fact that it is possible to receive an empty file with no amendments, consisting of a header (HD) and a trailer (ZZ) only. Lastly, it should be noted that The Rail Delivery Group uses an .mca file extension for their .cif files, however they are identical in every other respect.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>314</ProvenanceSourceID>
+      <ProvenanceName>Transport for London / Transport for London</ProvenanceName>
+      <ProvenanceSourceDate>08 Jun 2023</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>08 Jun 2023</LastUpdatedDate>
+      <FormatNote>https://wiki.openraildata.com/index.php?title=CIF_File_Format 
+Specification: https://www.rspaccreditation.org/downloadPublic.php?DOCUMENT=RSPS5046+P-04-00+Timetable+Information+Data+Feed+Interface+Specification.pdf&amp;ID=1144</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1871</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>313</DeveloperID>
+        <DeveloperName>Assist</DeveloperName>
+        <OrganisationName>Assist</OrganisationName>
+        <DeveloperCompoundName>Assist / Assist</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>313</SupportID>
+        <SupportName>Assist</SupportName>
+        <OrganisationName>Assist</OrganisationName>
+        <SupportCompoundName>Assist / Assist</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3347</ExternalSignatureID>
+        <Signature>cif</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3348</ExternalSignatureID>
+        <Signature>mca</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2215</SignatureID>
+        <SignatureName>Common Interface File</SignatureName>
+        <SignatureNote>Absolute from beginning of file, magic bytes: HD{75-80}.{80-81}.
+EOF, offset 0-2: .ZZ,followed by 78 bytes of white space,{0-1}.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2572</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4844{75-80}0A{80-81}0A</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>2608</ByteSequenceID>
+          <PositionType>Absolute from EOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>2</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>5A5A202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020{0-1}0A</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

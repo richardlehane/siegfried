@@ -21,9 +21,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>11 Mar 2005</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <ProvenanceDescription>08/2023 (v.113) - Added priority over fmt/1886 (Resource Interchange Format (RIFF)) and simplified internal signature to reduce identification tool processing time. Submitted by Preservica and New York Public Libraries.</ProvenanceDescription>
+      <LastUpdatedDate>14 Aug 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -82,22 +81,28 @@
       <InternalSignature>
         <SignatureID>51</SignatureID>
         <SignatureName>AVI</SignatureName>
-        <SignatureNote>RIFF header, AVI ID, LIST hdrl chunk with avih sub-chunk + LIST movi chunk</SignatureNote>
+        <SignatureNote>BOF: 'RIFF' and after four bytes 'AVI'</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>155</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>52494646{4}41564920*4C495354{4}6864726C61766968*4C495354{4}6D6F7669</ByteSequenceValue>
+          <ByteSequenceValue>52494646{4}41564920</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2741</RelatedFormatID>
+        <RelatedFormatName>Resource Interchange File Format (RIFF)</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

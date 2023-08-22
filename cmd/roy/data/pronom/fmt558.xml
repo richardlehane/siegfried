@@ -26,11 +26,13 @@ Beginning with version 9, the Adobe Illustrated ai file format included both a p
       <ProvenanceSourceID>165</ProvenanceSourceID>
       <ProvenanceName>Georgia Tech Research Institute / Georgia Tech Research Institute</ProvenanceName>
       <ProvenanceSourceDate>19 Jul 2013</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>19 Jul 2013</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <ProvenanceDescription>Update submitted in v113 signture file by Brigham Young University as part of research - https://preservation.tylerthorsted.com/2023/04/07/adobe-illustrator-and-pdf/</ProvenanceDescription>
+      <LastUpdatedDate>24 May 2023</LastUpdatedDate>
+      <FormatNote>http://justsolve.archiveteam.org/wiki/Adobe_Illustrator_Artwork
+
+https://en.wikipedia.org/wiki/Adobe_Illustrator_Artwork
+
+https://www.adobe.com/creativecloud/file-types/image/vector/ai-file.html</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -46,6 +48,10 @@ Beginning with version 9, the Adobe Illustrated ai file format included both a p
       <FileFormatIdentifier>
         <Identifier>fmt/558</Identifier>
         <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>Q47498538</Identifier>
+        <IdentifierType>Wikidata QID Identifier</IdentifierType>
       </FileFormatIdentifier>
       <Developers>
         <DeveloperID>7</DeveloperID>
@@ -74,7 +80,7 @@ Beginning with version 9, the Adobe Illustrated ai file format included both a p
       <InternalSignature>
         <SignatureID>892</SignatureID>
         <SignatureName>Adobe Illustrator 9.0</SignatureName>
-        <SignatureNote>Header PDF-1.4 (or 1.3). Comment %!PS-Adobe-3.0 declares that the file contains a Postscript program. The comment “%AI5_FileFormat 5” indicates that this is a version 9.0 Adobe Illustrator file.</SignatureNote>
+        <SignatureNote>PDF header '%PDF-1.' either byte '4' or '3' then 'AIPrivateData%!PS-Adobe-3.0' followed by wildcard bytes, then '%AI5_FileFormat' and either bytes '4' or '5'</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1116</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -86,7 +92,7 @@ Beginning with version 9, the Adobe Illustrated ai file format included both a p
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>255044462D312E(33|34)</ByteSequenceValue>
+          <ByteSequenceValue>255044462D312E(33|34)*41495072697661746544617461*252150532D41646F62652D332E30*254149355F46696C65466F726D617420(34|35)</ByteSequenceValue>
         </ByteSequence>
         <ByteSequence>
           <ByteSequenceID>1226</ByteSequenceID>
@@ -113,6 +119,18 @@ Beginning with version 9, the Adobe Illustrated ai file format included both a p
         <RelatedFormatID>617</RelatedFormatID>
         <RelatedFormatName>Acrobat PDF 1.4 - Portable Document Format</RelatedFormatName>
         <RelatedFormatVersion>1.4</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>1347</RelatedFormatID>
+        <RelatedFormatName>Adobe Illustrator</RelatedFormatName>
+        <RelatedFormatVersion>10.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>1345</RelatedFormatID>
+        <RelatedFormatName>Adobe Illustrator</RelatedFormatName>
+        <RelatedFormatVersion>8.0</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>

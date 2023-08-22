@@ -25,9 +25,8 @@
       <ProvenanceSourceID>247</ProvenanceSourceID>
       <ProvenanceName>National Archives of Australia / National Archives of Australia</ProvenanceName>
       <ProvenanceSourceDate>24 Apr 2023</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>24 Apr 2023</LastUpdatedDate>
+      <ProvenanceDescription>08/2023 (v.113)- Priority added over x-fmt/393 (WordPerfect for MS-DOS Document 5.0). Researched internally.</ProvenanceDescription>
+      <LastUpdatedDate>15 Aug 2023</LastUpdatedDate>
       <FormatNote>http://justsolve.archiveteam.org/wiki/WordPerfect_macro</FormatNote>
       <FormatRisk>
       </FormatRisk>
@@ -97,6 +96,12 @@
           <ByteSequenceValue>FF575043{4}010A{0-4000}(77636D|57434D)*(61|41)70706C69636174696F6E{0-15}(64|44)656661756C74</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>736</RelatedFormatID>
+        <RelatedFormatName>WordPerfect for MS-DOS Document</RelatedFormatName>
+        <RelatedFormatVersion>5.0</RelatedFormatVersion>
+      </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>737</RelatedFormatID>

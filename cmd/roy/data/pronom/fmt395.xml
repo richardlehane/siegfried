@@ -26,11 +26,10 @@
       <ProvenanceSourceID>178</ProvenanceSourceID>
       <ProvenanceName>National Library of New Zealand / National Library of New Zealand</ProvenanceName>
       <ProvenanceSourceDate>16 Mar 2012</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>16 Mar 2012</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <ProvenanceDescription>08/2023 (v.113)- Extension vcard added and specification added to note field. Researched internally.</ProvenanceDescription>
+      <LastUpdatedDate>15 Aug 2023</LastUpdatedDate>
+      <FormatNote>Specification: https://tools.ietf.org/html/rfc6350
+http://en.wikipedia.org/wiki/Vcard</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -60,6 +59,11 @@
       <ExternalSignature>
         <ExternalSignatureID>1208</ExternalSignatureID>
         <Signature>vcf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3386</ExternalSignatureID>
+        <Signature>vcard</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <InternalSignature>
@@ -95,6 +99,24 @@ Internet standard: https://tools.ietf.org/html/rfc6350</SignatureNote>
           <ByteSequenceValue>454E443A5643415244</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2733</RelatedFormatID>
+        <RelatedFormatName>vCard</RelatedFormatName>
+        <RelatedFormatVersion>2.1</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2734</RelatedFormatID>
+        <RelatedFormatName>vCard</RelatedFormatName>
+        <RelatedFormatVersion>3</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2735</RelatedFormatID>
+        <RelatedFormatName>vCard</RelatedFormatName>
+        <RelatedFormatVersion>4</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

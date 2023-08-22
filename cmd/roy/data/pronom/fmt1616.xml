@@ -106,6 +106,13 @@
         <RelatedFormatName>PostScript</RelatedFormatName>
         <RelatedFormatVersion>2.0</RelatedFormatVersion>
       </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>924</RelatedFormatID>
+        <RelatedFormatName>MPEG-4 Media File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

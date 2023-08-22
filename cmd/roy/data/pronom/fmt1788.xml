@@ -25,9 +25,8 @@
       <ProvenanceSourceID>180</ProvenanceSourceID>
       <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
       <ProvenanceSourceDate>25 Oct 2022</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>25 Oct 2022</LastUpdatedDate>
+      <ProvenanceDescription>08/2023 (v.113): Adjusted signature to include GUNPAINT at an offset of 1002 from BOF. Submitted by National Archives and Records Administration.</ProvenanceDescription>
+      <LastUpdatedDate>15 Aug 2023</LastUpdatedDate>
       <FormatNote>http://fileformats.archiveteam.org/wiki/Gunpaint</FormatNote>
       <FormatRisk>
       </FormatRisk>
@@ -45,7 +44,7 @@
       <InternalSignature>
         <SignatureID>2128</SignatureID>
         <SignatureName>Gunpaint Image File</SignatureName>
-        <SignatureNote>BOF: 0x00 (Null) followed by '@'</SignatureNote>
+        <SignatureNote>BOF: 0x00 (Null) followed by '@' followed by a gap of 1000 bytes followed by 'GUNPAINT'</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>2467</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -57,7 +56,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>0040</ByteSequenceValue>
+          <ByteSequenceValue>0040{1000}47554E5041494E54</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>
