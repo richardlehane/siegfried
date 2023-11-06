@@ -233,6 +233,7 @@ func (d *droid) Infos() map[string]identifier.FormatInfo {
 			name:     strings.TrimSpace(v.Name),
 			version:  strings.TrimSpace(v.Version),
 			mimeType: strings.TrimSpace(v.MIMEType),
+			class:    strings.TrimSpace(v.FormatType),
 		}
 	}
 	return infos
