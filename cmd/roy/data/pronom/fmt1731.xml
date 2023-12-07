@@ -25,9 +25,8 @@
       <ProvenanceSourceID>180</ProvenanceSourceID>
       <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
       <ProvenanceSourceDate>19 Jul 2022</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>19 Jul 2022</LastUpdatedDate>
+      <ProvenanceDescription>11/2023: Max-offset modified for BOF signature to allow for more exact signature identification. Internally researched.</ProvenanceDescription>
+      <LastUpdatedDate>14 Nov 2023</LastUpdatedDate>
       <FormatNote>http://fileformats.archiveteam.org/wiki/PowerGraphics</FormatNote>
       <FormatRisk>
       </FormatRisk>
@@ -50,7 +49,7 @@
           <ByteSequenceID>2394</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>8</Offset>
-          <MaxOffset>8</MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

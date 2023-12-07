@@ -24,9 +24,8 @@
       <ProvenanceSourceID>220</ProvenanceSourceID>
       <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
       <ProvenanceSourceDate>25 Feb 2022</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>25 Feb 2022</LastUpdatedDate>
+      <ProvenanceDescription>11/2023 (v.115)- Max-offset modified for EOF signature to allow for more exact signature identification. Internally researched.</ProvenanceDescription>
+      <LastUpdatedDate>15 Nov 2023</LastUpdatedDate>
       <FormatNote>https://archive.org/details/roxio_label_creator/04_roxio_cd_label_creator.jpeg
 
 http://fileformats.archiveteam.org/wiki/JWL</FormatNote>
@@ -66,7 +65,7 @@ EOF; Offset: 109 - 120; Magic bytes; 'ÿþÿ.A.r.i.a.l'</SignatureNote>
           <ByteSequenceID>2307</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
           <Offset>109</Offset>
-          <MaxOffset>120</MaxOffset>
+          <MaxOffset>11</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

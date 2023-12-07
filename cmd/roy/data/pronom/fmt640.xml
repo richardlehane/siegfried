@@ -25,11 +25,9 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>31 Mar 2014</ProvenanceSourceDate>
-      <ProvenanceDescription>http://msdn.microsoft.com/en-us/library/ff632839.aspx
-08/2023 (v.113)- Added priority over fmt/640 (MPEG-1 Elementary Stream). Submitted by Preservica.</ProvenanceDescription>
+      <ProvenanceDescription>11/2023 (v.115)- Added priority over fmt/640 (MPEG-1 Elementary Stream). Submitted by Preservica.</ProvenanceDescription>
       <LastUpdatedDate>15 Aug 2023</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <FormatNote>http://msdn.microsoft.com/en-us/library/ff632839.aspx</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -75,6 +73,13 @@
         <RelationshipType>Can be contained by</RelationshipType>
         <RelatedFormatID>660</RelatedFormatID>
         <RelatedFormatName>MPEG-2 Program Stream</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>1448</RelatedFormatID>
+        <RelatedFormatName>MPEG-1 Elementary Stream</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

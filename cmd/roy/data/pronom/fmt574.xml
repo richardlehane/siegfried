@@ -25,9 +25,9 @@
       <ProvenanceSourceID>192</ProvenanceSourceID>
       <ProvenanceName>Tessella / Tessella</ProvenanceName>
       <ProvenanceSourceDate>28 Aug 2013</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>22 Jul 2022</LastUpdatedDate>
+      <ProvenanceDescription>09/2022- Amended signature to disregard first 127 bytes according to specification. Added links to specification and references, altered description. Submitted by University Medical Center Utrecht.
+11/2023 (v.115)- Max-offset modified for BOF signature to allow for more exact signature identification. Internally researched.</ProvenanceDescription>
+      <LastUpdatedDate>14 Nov 2023</LastUpdatedDate>
       <FormatNote>https://dicom.nema.org/medical/dicom/current/output/pdf/part10.pdf
 
 https://dicom.nema.org/medical/dicom/current/output/pdf/part12.pdf
@@ -60,7 +60,7 @@ Please see the specification attached with this entry, which states that any for
           <ByteSequenceID>1136</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>128</Offset>
-          <MaxOffset>128</MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

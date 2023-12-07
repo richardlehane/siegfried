@@ -11,7 +11,7 @@
       </FormatFamilies>
       <FormatTypes>Image (Raster)</FormatTypes>
       <FormatDisclosure>Full</FormatDisclosure>
-      <FormatDescription>JTIP is a multi-resolution format, created for image presentation with easy transfer and handling, based on SPIFF. It allows presentation of images in various sizes and resolutions from vignette (1/16 screen size, used for browsing) through imagette (1/4 screen, for image comparison), to full screen and higher resolution images. Each layer is divided into tiles so the user can zoom or pan easily. A file contains an internal ID for tiles, with each tile associated with a single file header and separated by markers. Under header there can be and optional table noting the tile offsets, or an external ID for separate files. JTIP is not widely used and is no longer supported.</FormatDescription>
+      <FormatDescription>JTIP is a multi-resolution format, created for image presentation with easy transfer and handling, based on SPIFF. It allows presentation of images in various sizes and resolutions from vignette (1/16 screen size, used for browsing) through imagette (1/4 screen, for image comparison), to full screen and higher resolution images. Each layer is divided into tiles so the user can if or pan easily. A file contains an internal ID for tiles, with each tile associated with a single file header and separated by markers. Under header there can be and optional table noting the tile offsets, or an external ID for separate files. JTIP is not widely used and is no longer supported.</FormatDescription>
       <BinaryFileFormat>Binary</BinaryFileFormat>
       <ByteOrders>Big-endian (Motorola)</ByteOrders>
       <ReleaseDate>

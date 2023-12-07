@@ -12,8 +12,7 @@
       <FormatTypes>Image (Vector)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>The documents (files) created by Adobe Illustrator are PostScript language
-documents. A PostScript language document description that minimally conforms to the Document Structuring Conventions has two main parts: a prolog and a script. The prolog encapsulates information needed by other programs to interpret the file. The script describes the graphic elements on the page.
+      <FormatDescription>The documents (files) created by Adobe Illustrator are PostScript language documents. A PostScript language document description that minimally conforms to the Document Structuring Conventions has two main parts: a prolog and a script. The prolog encapsulates information needed by other programs to interpret the file. The script describes the graphic elements on the page.
 Beginning with version 9, the Adobe Illustrated ai file format included both a pdf copy of the illustration and a postscript copy. Beginning with Adobe Illustrator 13.0. the PDF that Illustrator embeds in the file so that other apps can read the file is PDF 1.5.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
@@ -26,7 +25,7 @@ Beginning with version 9, the Adobe Illustrated ai file format included both a p
       <ProvenanceSourceID>165</ProvenanceSourceID>
       <ProvenanceName>Georgia Tech Research Institute / Georgia Tech Research Institute</ProvenanceName>
       <ProvenanceSourceDate>19 Jul 2013</ProvenanceSourceDate>
-      <ProvenanceDescription>Update submitted in v113 signture file by Brigham Young University as part of research - https://preservation.tylerthorsted.com/2023/04/07/adobe-illustrator-and-pdf/</ProvenanceDescription>
+      <ProvenanceDescription>08/2023 ( v113)- Signature file updated. Submitted by Brigham Young University as part of research to be found here: https://preservation.tylerthorsted.com/2023/04/07/adobe-illustrator-and-pdf</ProvenanceDescription>
       <LastUpdatedDate>24 May 2023</LastUpdatedDate>
       <FormatNote>http://justsolve.archiveteam.org/wiki/Adobe_Illustrator_Artwork
 

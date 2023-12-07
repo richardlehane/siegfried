@@ -378,7 +378,8 @@
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1192</RelatedFormatID>
         <RelatedFormatName>Audio Interchange File Format</RelatedFormatName>
-        <RelatedFormatVersion>1.2</RelatedFormatVersion>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
@@ -487,6 +488,13 @@
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>2719</RelatedFormatID>
         <RelatedFormatName>SWiSH Movie File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2762</RelatedFormatID>
+        <RelatedFormatName>VBM (VDC BitMap) File</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

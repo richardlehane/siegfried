@@ -75,8 +75,7 @@ Internet standard: https://tools.ietf.org/html/rfc6350</SignatureNote>
           <ByteSequenceID>783</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

@@ -25,9 +25,8 @@
       <ProvenanceSourceID>180</ProvenanceSourceID>
       <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
       <ProvenanceSourceDate>23 Nov 2021</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>23 Nov 2021</LastUpdatedDate>
+      <ProvenanceDescription>11/2023 (v.115)- modified values in internal signature  for Indirect Offset Location and Indirect Offset Length from 0 to null. Max-offset modified for BOF signature to allow for more exact signature identification. Internally researched.</ProvenanceDescription>
+      <LastUpdatedDate>14 Nov 2023</LastUpdatedDate>
       <FormatNote>http://fileformats.archiveteam.org/wiki/SIFF
 
 https://fileinfo.com/extension/son
@@ -54,9 +53,11 @@ https://wiki.multimedia.cx/index.php/SIFF</FormatNote>
           <ByteSequenceID>2201</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>3000</Offset>
-          <MaxOffset>3700</MaxOffset>
-          <IndirectOffsetLocation>0</IndirectOffsetLocation>
-          <IndirectOffsetLength>0</IndirectOffsetLength>
+          <MaxOffset>700</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
           <Endianness>
           </Endianness>
           <ByteSequenceValue>4336342F433132382053454C462045585452414354494E47204C4841524348495645</ByteSequenceValue>

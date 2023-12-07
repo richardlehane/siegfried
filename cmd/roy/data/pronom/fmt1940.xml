@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2801</FormatID>
+      <FormatName>EBU Subtitling Data Exchange Format</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>EBU STL was a format devised by the European Broadcasting Union, which enabled the display of subtitles. It has been superseded by EBU Timed Text.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>324</ProvenanceSourceID>
+      <ProvenanceName>Sylphide Consulting / Sylphide Consulting</ProvenanceName>
+      <ProvenanceSourceDate>02 Nov 2023</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>02 Nov 2023</LastUpdatedDate>
+      <FormatNote>Specification:  https://tech.ebu.ch/docs/tech/tech3264.pdf</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1940</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>104</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>European Broadcasting Union</OrganisationName>
+        <DeveloperCompoundName>European Broadcasting Union</DeveloperCompoundName>
+      </Developers>
+      <ExternalSignature>
+        <ExternalSignatureID>3444</ExternalSignatureID>
+        <Signature>stl</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2281</SignatureID>
+        <SignatureName>EBU Subtitling Data Exchange Format</SignatureName>
+        <SignatureNote>Absolute from beginning of file, offset 3: STL(24|25|30).01</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2656</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>3</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>53544C(3234|3235|3330)2E30</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

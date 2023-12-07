@@ -25,9 +25,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>17 Jun 2016</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>17 Jun 2016</LastUpdatedDate>
+      <ProvenanceDescription>11/2023 (v.116)- internal signature expanded. Submitted by Preservica.</ProvenanceDescription>
+      <LastUpdatedDate>16 Nov 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -59,7 +58,7 @@ https://github.com/lovasoa/ZIF/</SignatureNote>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>49492B0008000000</ByteSequenceValue>
+          <ByteSequenceValue>49492B00080000001000000000000000</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

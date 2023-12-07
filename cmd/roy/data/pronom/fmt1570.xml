@@ -24,9 +24,8 @@
       <ProvenanceSourceID>242</ProvenanceSourceID>
       <ProvenanceName>The National Archives of the Czech Republic / The National Archives of the Czech Republic</ProvenanceName>
       <ProvenanceSourceDate>07 Dec 2021</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>07 Dec 2021</LastUpdatedDate>
+      <ProvenanceDescription>11/2023 (v.115)- Max-offset modified for BOF signature to allow for more exact signature identification. Internally researched.</ProvenanceDescription>
+      <LastUpdatedDate>14 Nov 2023</LastUpdatedDate>
       <FormatNote>http://www.isdoc.org/
 
 http://www.isdoc.cz/fileadmin/isdoc/6.0/readme-en.html</FormatNote>
@@ -51,7 +50,7 @@ http://www.isdoc.cz/fileadmin/isdoc/6.0/readme-en.html</FormatNote>
           <ByteSequenceID>2210</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>16</Offset>
-          <MaxOffset>300</MaxOffset>
+          <MaxOffset>284</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
@@ -70,13 +69,13 @@ http://www.isdoc.cz/fileadmin/isdoc/6.0/readme-en.html</FormatNote>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>2392</RelatedFormatID>
-        <RelatedFormatName>ISDOC Information System Document (Generic)</RelatedFormatName>
+        <RelatedFormatName>ISDOC Information System Document</RelatedFormatName>
         <RelatedFormatVersion>5.x</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Is subsequent version of</RelationshipType>
         <RelatedFormatID>2392</RelatedFormatID>
-        <RelatedFormatName>ISDOC Information System Document (Generic)</RelatedFormatName>
+        <RelatedFormatName>ISDOC Information System Document</RelatedFormatName>
         <RelatedFormatVersion>5.x</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>

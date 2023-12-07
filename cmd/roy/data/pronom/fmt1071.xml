@@ -25,9 +25,8 @@
       <ProvenanceSourceID>224</ProvenanceSourceID>
       <ProvenanceName>Datable / Datable</ProvenanceName>
       <ProvenanceSourceDate>17 Jul 2017</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>19 Aug 2022</LastUpdatedDate>
+      <ProvenanceDescription>11/2023 (v.115)- Max-offset modified from null to 0. Internally researched.</ProvenanceDescription>
+      <LastUpdatedDate>14 Nov 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -73,8 +72,7 @@
           <ByteSequenceID>1707</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
           <Offset>500</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

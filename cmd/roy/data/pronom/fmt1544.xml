@@ -26,9 +26,8 @@
       <ProvenanceName>
       </ProvenanceName>
       <ProvenanceSourceDate>04 Nov 2021</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>04 Nov 2021</LastUpdatedDate>
+      <ProvenanceDescription>11/2023 (v.115)- Max-offset modified for BOF signature to allow for more exact signature identification. Internally researched</ProvenanceDescription>
+      <LastUpdatedDate>14 Nov 2023</LastUpdatedDate>
       <FormatNote>PFSX-Schema for Version 1.1 (2010): http://www.mpi.nl/tools/elan/Prefs_v1.1.xsd</FormatNote>
       <FormatRisk>
       </FormatRisk>
@@ -65,7 +64,7 @@
           <ByteSequenceID>2187</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>27</Offset>
-          <MaxOffset>57</MaxOffset>
+          <MaxOffset>30</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

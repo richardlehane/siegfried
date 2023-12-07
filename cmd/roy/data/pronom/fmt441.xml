@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>1228</FormatID>
-      <FormatName>Windows Media Video 9 Advanced Profile (WVC1)</FormatName>
+      <FormatName>Windows Media Video (WVC1)</FormatName>
       <FormatVersion>9 Advanced Profile (WVC1)</FormatVersion>
       <FormatAliases>
       </FormatAliases>
@@ -12,7 +12,7 @@
       <FormatTypes>Audio, Video</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Windows Media Video 9 Advanced Profile or WVC1 is a fuly compliant Advanced Profile of the VC-1 codec standard.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -24,9 +24,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>11 Jun 2012</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>11 Jun 2012</LastUpdatedDate>
+      <ProvenanceDescription>11/2023 (v.115)- Renamed to avoid repitition in version and name. Updated description and signature note field. Modified the offset values in the internal signature from null to 0 as part of a project to match PRONOM data with the xsd standard. Internally researched.</ProvenanceDescription>
+      <LastUpdatedDate>14 Nov 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -45,15 +44,12 @@
       <InternalSignature>
         <SignatureID>685</SignatureID>
         <SignatureName>Windows Media Video 9 Advanced Profile (WVC1)</SignatureName>
-        <SignatureNote>
-        </SignatureNote>
+        <SignatureNote>BOF; Offset: 0; 00x3026B2758E66CF11A6D900AA0062CE6C{12}0102 and variable signature of 00x9107DCB7B7A9CF118EE600C00C205365{8}00xC0EF19BC4D5BCF11A8FD00805F5C442B. Followed in 65 byte by string 'WVC1'</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>845</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
-          <Offset>
-          </Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

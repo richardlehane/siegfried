@@ -66,7 +66,7 @@ https://docs.microsoft.com/en-us/windows/win32/imapi/disc-formats</FormatNote>
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>2077</SignatureID>
-        <SignatureName>UDF-ISO 9660 Bridge Disc no.1</SignatureName>
+        <SignatureName>UDF-ISO 9660 Bridge Disc</SignatureName>
         <SignatureNote>BOF; Offset: 32768; Max Offset: 70468; Magic Bytes:  0x4344303031, then wildcard bytes between 1 to 16384, followed by 0xFF4344303031
 
 &amp; 

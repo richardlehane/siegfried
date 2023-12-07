@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>2392</FormatID>
-      <FormatName>ISDOC Information System Document (Generic)</FormatName>
+      <FormatName>ISDOC Information System Document</FormatName>
       <FormatVersion>5.x</FormatVersion>
       <FormatAliases>
       </FormatAliases>
@@ -24,9 +24,8 @@
       <ProvenanceSourceID>242</ProvenanceSourceID>
       <ProvenanceName>The National Archives of the Czech Republic / The National Archives of the Czech Republic</ProvenanceName>
       <ProvenanceSourceDate>06 Dec 2021</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>06 Dec 2021</LastUpdatedDate>
+      <ProvenanceDescription>11/2023 (v.115)- Max-offset modified for BOF signature to allow for more exact signature identification.  Removed '(Generic)' from file format name to reflect version number. Internally researched</ProvenanceDescription>
+      <LastUpdatedDate>14 Nov 2023</LastUpdatedDate>
       <FormatNote>http://www.isdoc.org/
 
 http://www.isdoc.cz/fileadmin/isdoc/6.0/readme-en.html</FormatNote>
@@ -45,13 +44,13 @@ http://www.isdoc.cz/fileadmin/isdoc/6.0/readme-en.html</FormatNote>
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>1909</SignatureID>
-        <SignatureName>ISDOC Information System Document (Generic)</SignatureName>
+        <SignatureName>ISDOC Information System Document 5.x</SignatureName>
         <SignatureNote>BOF; Offset: 16-300; Magic bytes: 'isdoc.cz'</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>2208</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>16</Offset>
-          <MaxOffset>300</MaxOffset>
+          <MaxOffset>284</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
@@ -64,7 +63,7 @@ http://www.isdoc.cz/fileadmin/isdoc/6.0/readme-en.html</FormatNote>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>2393</RelatedFormatID>
-        <RelatedFormatName>ISDOCX Information System Document (Generic)</RelatedFormatName>
+        <RelatedFormatName>ISDOCX Information System Document</RelatedFormatName>
         <RelatedFormatVersion>5.x</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
@@ -88,7 +87,7 @@ http://www.isdoc.cz/fileadmin/isdoc/6.0/readme-en.html</FormatNote>
       <RelatedFormat>
         <RelationshipType>Is subtype of</RelationshipType>
         <RelatedFormatID>2393</RelatedFormatID>
-        <RelatedFormatName>ISDOCX Information System Document (Generic)</RelatedFormatName>
+        <RelatedFormatName>ISDOCX Information System Document</RelatedFormatName>
         <RelatedFormatVersion>5.x</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>

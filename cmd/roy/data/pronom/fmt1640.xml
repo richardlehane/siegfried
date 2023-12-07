@@ -76,6 +76,12 @@
         <RelatedFormatVersion>Generic</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>2802</RelatedFormatID>
+        <RelatedFormatName>Adobe InDesign Document</RelatedFormatName>
+        <RelatedFormatVersion>CC 2023</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Is subsequent version of</RelationshipType>
         <RelatedFormatID>2465</RelatedFormatID>
         <RelatedFormatName>Adobe InDesign Document</RelatedFormatName>

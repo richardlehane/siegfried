@@ -24,8 +24,8 @@
       <ProvenanceSourceID>206</ProvenanceSourceID>
       <ProvenanceName>Swiss Federal Office of Topography / Federal Office of Topography</ProvenanceName>
       <ProvenanceSourceDate>14 Jul 2014</ProvenanceSourceDate>
-      <ProvenanceDescription>http://www.interlis.ch</ProvenanceDescription>
-      <LastUpdatedDate>14 Jul 2014</LastUpdatedDate>
+      <ProvenanceDescription>http://www.interlis.ch; 11/2023 (v.116)- Priority over fmt/101 Extensible Markup Language 1.0. Internally researched.</ProvenanceDescription>
+      <LastUpdatedDate>16 Nov 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -59,6 +59,12 @@
           <ByteSequenceValue>494E5445524C495320322E333B0D{1-1024}4D4F44454C{1-64}4154{1-64}56455253494F4E</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>638</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

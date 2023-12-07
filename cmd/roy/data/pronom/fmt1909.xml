@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2765</FormatID>
+      <FormatName>TibetDoc Word Document</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Word Processor</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>This format is created by the TibetDoc word-processing software for Windows. It was developed by the Padma Karpo Translation Committee, and was created specifically to support the Tibetan language and fonts within a word processor, but also supports multiple other languages and fonts, for example Sanskrit and English.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>321</ProvenanceSourceID>
+      <ProvenanceName>Buddhist Digital Resource Center / Buddhist Digital Resource Center</ProvenanceName>
+      <ProvenanceSourceDate>25 Aug 2023</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>25 Aug 2023</LastUpdatedDate>
+      <FormatNote>https://pktc.org/tibetan-software/tibetdoc-wordprocessor/</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1909</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3398</ExternalSignatureID>
+        <Signature>dct</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2255</SignatureID>
+        <SignatureName>TibetDoc</SignatureName>
+        <SignatureNote>BOF; Offset: 1; Magic Bytes: 'PKTC' with a 3 byte gap and then 'TibetDoc'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2626</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>1</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>504B5443{3}5469626574446F63</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

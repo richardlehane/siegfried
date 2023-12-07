@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2804</FormatID>
+      <FormatName>Digital Negative Format (DNG)</FormatName>
+      <FormatVersion>1.7</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Raster)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The Digital Negative (DNG) specification describes a non-proprietary file format for storing camera raw files that can be used by a wide range of hardware and software vendors. DNG is an extension of the TIFF format, and is compatible with the TIFF-EP standard. This version was published in May 2023.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>299</ProvenanceSourceID>
+      <ProvenanceName>Brigham Young University / Brigham Young University</ProvenanceName>
+      <ProvenanceSourceDate>07 Nov 2023</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>07 Nov 2023</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1943</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>image/dng</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3451</ExternalSignatureID>
+        <Signature>dng</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2286</SignatureID>
+        <SignatureName>DNG 1.7 (Little Endian, BOF)</SignatureName>
+        <SignatureNote>TIFF header plus DNGVersion tag near BOF</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2661</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>49492A00{0-4080}12C601000400000001070000</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>2287</SignatureID>
+        <SignatureName>DNG 1.7 (Big Endian, BOF)</SignatureName>
+        <SignatureNote>TIFF header plus DNGVersion tag near BOF</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2662</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4D4D002A{0-4080}C61200010000000401070000</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>2288</SignatureID>
+        <SignatureName>DNG 1.7 (Little Endian, BOF+EOF)</SignatureName>
+        <SignatureNote>TIFF header plus DNGVersion tag near EOF</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2663</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>49492A00</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>2664</ByteSequenceID>
+          <PositionType>Absolute from EOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>128000</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>12C601000400000001070000</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>2289</SignatureID>
+        <SignatureName>DNG 1.7 (Big Endian, BOF+EOF)</SignatureName>
+        <SignatureNote>TIFF header plus DNGVersion tag near EOF</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2665</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4D4D002A</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>2666</ByteSequenceID>
+          <PositionType>Absolute from EOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>128000</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>C61200010000000401070000</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>672</RelatedFormatID>
+        <RelatedFormatName>Exchangeable Image File Format (Uncompressed)</RelatedFormatName>
+        <RelatedFormatVersion>2.2</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>673</RelatedFormatID>
+        <RelatedFormatName>Exchangeable Image File Format (Uncompressed)</RelatedFormatName>
+        <RelatedFormatVersion>2.1</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>752</RelatedFormatID>
+        <RelatedFormatName>Exchangeable Image File Format (Uncompressed)</RelatedFormatName>
+        <RelatedFormatVersion>2.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>797</RelatedFormatID>
+        <RelatedFormatName>Tagged Image File Format for Electronic Photography (TIFF/EP)</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>1099</RelatedFormatID>
+        <RelatedFormatName>Tagged Image File Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>2694</RelatedFormatID>
+        <RelatedFormatName>Digital Negative Format (DNG)</RelatedFormatName>
+        <RelatedFormatVersion>1.6</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

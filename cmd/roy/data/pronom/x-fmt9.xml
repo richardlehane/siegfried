@@ -22,11 +22,11 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>10 Oct 2003</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>09 May 2023</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <ProvenanceDescription>11/2023 (v.115)- Links and specifications added to note field. Submitted by The National Library of Australia.</ProvenanceDescription>
+      <LastUpdatedDate>15 Nov 2023</LastUpdatedDate>
+      <FormatNote>http://www.dbase.com/help/Design_Tables/IDH_TABLEDES_FIELD_TYPES.htm;http://www.dbase.com/KnowledgeBase/int/db7_file_fmt.htm
+
+https://www.promotic.eu/en/pmdoc/Subsystems/Db/dBase/DbfFormat.htm</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>

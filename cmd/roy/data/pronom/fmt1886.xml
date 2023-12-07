@@ -265,6 +265,12 @@
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2783</RelatedFormatID>
+        <RelatedFormatName>CorelDraw Drawing</RelatedFormatName>
+        <RelatedFormatVersion>8 Bidi</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

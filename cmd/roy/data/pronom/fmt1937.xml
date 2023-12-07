@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2798</FormatID>
+      <FormatName>Amazon Kindle eBook File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Page Description</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Azw was a proprietary e-book file format, created by Amazon, which could be used on any device which had its kindle app, eg smartphones, tablets, computers and of course the Kindle. It is basically the mobi format (fmt/396), but can be distinguished from this by the presence of bytes 'kindle:'. It has been superseded by the EPUB format for Amazon Kindle use.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>178</ProvenanceSourceID>
+      <ProvenanceName>National Library of New Zealand / National Library of New Zealand</ProvenanceName>
+      <ProvenanceSourceDate>30 Oct 2023</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>30 Oct 2023</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1937</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>323</DeveloperID>
+        <DeveloperName>Amazon</DeveloperName>
+        <OrganisationName>Amazon</OrganisationName>
+        <DeveloperCompoundName>Amazon / Amazon</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>323</SupportID>
+        <SupportName>Amazon</SupportName>
+        <OrganisationName>Amazon</OrganisationName>
+        <SupportCompoundName>Amazon / Amazon</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3438</ExternalSignatureID>
+        <Signature>azw</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3439</ExternalSignatureID>
+        <Signature>azw3</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3440</ExternalSignatureID>
+        <Signature>mobi</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3441</ExternalSignatureID>
+        <Signature>amr</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2278</SignatureID>
+        <SignatureName>Amazon Kindle ebook File</SignatureName>
+        <SignatureNote>BOF, Offset 60: BOOKMOBI|TEXTREAD{450-15000}kindle:</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2653</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>60</Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>(424F4F4B4D4F4249|5445587452454164){450-15000}6B696E646C653A</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>1144</RelatedFormatID>
+        <RelatedFormatName>PocketMobi (Palm Resource) File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

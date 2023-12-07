@@ -25,9 +25,8 @@
       <ProvenanceSourceID>216</ProvenanceSourceID>
       <ProvenanceName>The Canadian Centre for Architecture / The Canadian Centre for Architecture</ProvenanceName>
       <ProvenanceSourceDate>05 Mar 2020</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>04 Mar 2022</LastUpdatedDate>
+      <ProvenanceDescription>11/2023 (v.115)- Max-offset modified for BOF signature to allow for more exact signature identification. Internally researched</ProvenanceDescription>
+      <LastUpdatedDate>14 Nov 2023</LastUpdatedDate>
       <FormatNote>https://www.bentley.com/en/products/product-line/modeling-and-visualization-software/microstation</FormatNote>
       <FormatRisk>
       </FormatRisk>
@@ -51,7 +50,7 @@
           <ByteSequenceID>2019</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>824</Offset>
-          <MaxOffset>3616</MaxOffset>
+          <MaxOffset>2792</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

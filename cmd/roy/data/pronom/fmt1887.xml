@@ -62,6 +62,12 @@
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
+        <RelationshipType>Equivalent to</RelationshipType>
+        <RelatedFormatID>2805</RelatedFormatID>
+        <RelatedFormatName>Common Loudspeaker Format (CLF)</RelatedFormatName>
+        <RelatedFormatVersion>1</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Is previous version of</RelationshipType>
         <RelatedFormatID>2744</RelatedFormatID>
         <RelatedFormatName>Common Instrument File (CIF)</RelatedFormatName>

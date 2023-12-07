@@ -25,9 +25,8 @@
       <ProvenanceSourceID>180</ProvenanceSourceID>
       <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
       <ProvenanceSourceDate>16 Mar 2022</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>16 Mar 2022</LastUpdatedDate>
+      <ProvenanceDescription>11/2023 (v.115)- Max-offset modified for BOF signature to allow for more exact signature identification. Internally researched.</ProvenanceDescription>
+      <LastUpdatedDate>15 Nov 2023</LastUpdatedDate>
       <FormatNote>http://fileformats.archiveteam.org/wiki/Palm_Database_ImageViewer
 
 http://cd.textfiles.com/pdasoftware/PILOT/</FormatNote>
@@ -52,7 +51,7 @@ http://cd.textfiles.com/pdasoftware/PILOT/</FormatNote>
           <ByteSequenceID>2312</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>60</Offset>
-          <MaxOffset>60</MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

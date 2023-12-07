@@ -72,7 +72,7 @@
           <ByteSequenceID>2343</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>6</Offset>
-          <MaxOffset>6</MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

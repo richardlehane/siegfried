@@ -25,9 +25,8 @@ This version, published May 2008, was based on experience and feedback from othe
       <ProvenanceName>
       </ProvenanceName>
       <ProvenanceSourceDate>11 Jun 2012</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>11 Jun 2012</LastUpdatedDate>
+      <ProvenanceDescription>11/2023 (v.116)- New MIME type identifier 'image/dng' added and max offset of EOF internal signatures increased to 128000. Submitted by Brigham Young University.</ProvenanceDescription>
+      <LastUpdatedDate>16 Nov 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -37,6 +36,10 @@ This version, published May 2008, was based on experience and feedback from othe
       <FileFormatIdentifier>
         <Identifier>fmt/437</Identifier>
         <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>image/dng</Identifier>
+        <IdentifierType>MIME</IdentifierType>
       </FileFormatIdentifier>
       <ExternalSignature>
         <ExternalSignatureID>1225</ExternalSignatureID>
@@ -51,8 +54,7 @@ This version, published May 2008, was based on experience and feedback from othe
           <ByteSequenceID>814</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
@@ -69,8 +71,7 @@ This version, published May 2008, was based on experience and feedback from othe
           <ByteSequenceID>815</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
@@ -82,7 +83,7 @@ This version, published May 2008, was based on experience and feedback from othe
           <ByteSequenceID>816</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>4084</MaxOffset>
+          <MaxOffset>128000</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
@@ -99,8 +100,7 @@ This version, published May 2008, was based on experience and feedback from othe
           <ByteSequenceID>817</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
@@ -117,8 +117,7 @@ This version, published May 2008, was based on experience and feedback from othe
           <ByteSequenceID>818</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
@@ -130,7 +129,7 @@ This version, published May 2008, was based on experience and feedback from othe
           <ByteSequenceID>819</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>4084</MaxOffset>
+          <MaxOffset>128000</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

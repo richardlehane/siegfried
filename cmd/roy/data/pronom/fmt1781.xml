@@ -42,6 +42,10 @@ https://www.loc.gov/preservation/digital/formats/fdd/fdd000241.shtml</FormatNote
         <Identifier>fmt/1781</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>image/dng</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
       <Developers>
         <DeveloperID>210</DeveloperID>
         <DeveloperName>Ricoh</DeveloperName>

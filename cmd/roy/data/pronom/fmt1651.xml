@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>2478</FormatID>
-      <FormatName>Garmin Flexible and Interoperable Data Transfer file</FormatName>
+      <FormatName>Garmin Flexible and Interoperable Data Transfer File</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
@@ -25,9 +25,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>15 Mar 2022</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>15 Mar 2022</LastUpdatedDate>
+      <ProvenanceDescription>11/2023 (v.115)- Max-offset modified for BOF signature to allow for more exact signature identification. Internally researched.</ProvenanceDescription>
+      <LastUpdatedDate>15 Nov 2023</LastUpdatedDate>
       <FormatNote>Specification: https://developer.garmin.com/fit/protocol/</FormatNote>
       <FormatRisk>
       </FormatRisk>
@@ -62,7 +61,7 @@
           <ByteSequenceID>2310</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>9</Offset>
-          <MaxOffset>9</MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

@@ -10,7 +10,8 @@
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatTypes>
+      </FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
       <FormatDescription>Adobe Design software such as Photoshop, Illustrator and InDesign use color swatches to assign specific color values to a design. These can be created using many different color spaces and can even use color libraries, such as Pantone. Adobe Swatch Exchange is a format used for storing, importing and exporting color samplers and pickers.</FormatDescription>
@@ -25,9 +26,8 @@
       <ProvenanceSourceID>220</ProvenanceSourceID>
       <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
       <ProvenanceSourceDate>02 Feb 2023</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>02 Feb 2023</LastUpdatedDate>
+      <ProvenanceDescription>11/2023 (v.115)- File format type removed. Submitted by The National Archives and Records Administration.</ProvenanceDescription>
+      <LastUpdatedDate>14 Nov 2023</LastUpdatedDate>
       <FormatNote>https://www.cyotek.com/blog/reading-adobe-swatch-exchange-ase-files-using-csharp</FormatNote>
       <FormatRisk>
       </FormatRisk>

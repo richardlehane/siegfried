@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>2393</FormatID>
-      <FormatName>ISDOCX Information System Document (Generic)</FormatName>
+      <FormatName>ISDOCX Information System Document</FormatName>
       <FormatVersion>5.x</FormatVersion>
       <FormatAliases>
       </FormatAliases>
@@ -26,9 +26,8 @@ ISDOC format is a type of Extensible Markup Language (XML) file format specific 
       <ProvenanceSourceID>242</ProvenanceSourceID>
       <ProvenanceName>The National Archives of the Czech Republic / The National Archives of the Czech Republic</ProvenanceName>
       <ProvenanceSourceDate>06 Dec 2021</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>30 Jun 2022</LastUpdatedDate>
+      <ProvenanceDescription>11/2023 (v.115)- Max-offset modified for BOF signature to allow for more exact signature identification.  Removed '(Generic)' from file format name to reflect version number. Internally researched.</ProvenanceDescription>
+      <LastUpdatedDate>14 Nov 2023</LastUpdatedDate>
       <FormatNote>http://www.isdoc.org/
 
 http://www.isdoc.cz/fileadmin/isdoc/6.0/readme-en.html</FormatNote>
@@ -47,13 +46,13 @@ http://www.isdoc.cz/fileadmin/isdoc/6.0/readme-en.html</FormatNote>
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>1910</SignatureID>
-        <SignatureName>ISDOCX Information System Document (Generic)</SignatureName>
+        <SignatureName>ISDOCX Information System Document 5.x</SignatureName>
         <SignatureNote>BOF; Offset:0; Magic bytes: 'PK' &amp; EOF; Offset:12-1000; Magic bytes: '.isdoc'</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>2209</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
           <Offset>12</Offset>
-          <MaxOffset>1000</MaxOffset>
+          <MaxOffset>988</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
@@ -98,13 +97,13 @@ http://www.isdoc.cz/fileadmin/isdoc/6.0/readme-en.html</FormatNote>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>2392</RelatedFormatID>
-        <RelatedFormatName>ISDOC Information System Document (Generic)</RelatedFormatName>
+        <RelatedFormatName>ISDOC Information System Document</RelatedFormatName>
         <RelatedFormatVersion>5.x</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Is supertype of</RelationshipType>
         <RelatedFormatID>2392</RelatedFormatID>
-        <RelatedFormatName>ISDOC Information System Document (Generic)</RelatedFormatName>
+        <RelatedFormatName>ISDOC Information System Document</RelatedFormatName>
         <RelatedFormatVersion>5.x</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>

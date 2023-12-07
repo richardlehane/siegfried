@@ -2,6 +2,892 @@
 <?xml-stylesheet type="text/xsl" href="release-note.xsl"?>
 <release_notes>
 <release_note>
+   <release_date>23 November 2023</release_date>
+   <signature_filename>DROID_SignatureFile_V116.xml</signature_filename>
+   <release_outline name="Updated Records">
+      <format>
+         <puid type="fmt">152</puid>
+         <name>Digital Negative Format (DNG) 1.1</name>
+         <summary>Max-offset increased to 128000 bytes for EOF signatures and MIME type of 'image/dng' added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">281</puid>
+         <name>LaTeX (Subdocument)</name>
+         <summary>Given priority over fmt/101, Extensible Markup Language 1.0. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">289</puid>
+         <name>WARC</name>
+         <summary>Given priority over fmt/101, Extensible Markup Language 1.0. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">436</puid>
+         <name>Digital Negative Format (DNG) 1.0</name>
+         <summary>Max-offset increased to 128000 bytes for EOF signatures and MIME type of 'image/dng' added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">437</puid>
+         <name>Digital Negative Format (DNG) 1.2</name>
+         <summary>Max-offset increased to 128000 bytes for EOF signatures and MIME type of 'image/dng' added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">438</puid>
+         <name>Digital Negative Format (DNG) 1.3</name>
+         <summary>Max-offset increased to 128000 bytes for EOF signatures and MIME type of 'image/dng' added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">654</puid>
+         <name>INTERLIS Model File 2.3</name>
+         <summary>Given priority over fmt/101, Extensible Markup Language 1.0. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">730</puid>
+         <name>Digital Negative Format (DNG) 1.4</name>
+         <summary>Max-offset increased to 128000 bytes for EOF signatures and MIME type of 'image/dng' added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">898</puid>
+         <name>Zoomify Image Format</name>
+         <summary>Signature strengthened to prevent clashes. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1157</puid>
+         <name>Folio Infobase File 2</name>
+         <summary>Given priority over fmt/101, Extensible Markup Language 1.0. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">1841</puid>
+         <name>Digital Negative Format (DNG) 1.5</name>
+         <summary>Max-offset increased to 128000 bytes for EOF signatures and MIME type of 'image/dng' added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1842</puid>
+         <name>Digital Negative Format (DNG) 1.6</name>
+         <summary>Max-offset increased to 128000 bytes for EOF signatures and MIME type of 'image/dng' added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1924</puid>
+         <name>CorelDraw Drawing 8 Bidi</name>
+         <summary>Given priority over fmt/1886 Resource Interchange File Format (RIFF). Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+   </release_outline>
+</release_note>
+<release_note>
+   <release_date>15 November 2023</release_date>
+   <signature_filename>DROID_SignatureFile_V115.xml</signature_filename>
+   <release_outline name="New Records">
+      <format>
+         <puid type="fmt">1901</puid>
+         <name>SGI Movie File</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1902</puid>
+         <name>Norton Change Directory Persistent Cache File</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1903</puid>
+         <name>Garmin Vehicle Images File</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1904</puid>
+         <name>Pasti Floppy Disk Image</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1905</puid>
+         <name>Universal Scene Description ASCII File</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1906</puid>
+         <name>VBM (VDC BitMap) File</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1907</puid>
+         <name>Micrografx Icon File</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1908</puid>
+         <name>Jupiter Tesselation (JT) File</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1909</puid>
+         <name>TibetDoc Word Document</name>
+         <summary>Full entry added. Submitted by Buddhist Digital Resource Center.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1910</puid>
+         <name>Acrobat PDF/A - Portable Document Format 4</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1911</puid>
+         <name>Acrobat PDF/A - Portable Document Format 4e</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1912</puid>
+         <name>Acrobat PDF/A - Portable Document Format 4f</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1913</puid>
+         <name>Graphisoft Archicad Project 17+</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1914</puid>
+         <name>Graphisoft BIMx Hyper-Model</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1915</puid>
+         <name>ActiveMime Object</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1916</puid>
+         <name>Autodesk Alias Wire Format 7</name>
+         <summary>Full entry added. Submitted by The Canadian Centre for Architecture.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1917</puid>
+         <name>BigTIFF</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1918</puid>
+         <name>MetaCard Stack</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1919</puid>
+         <name>Revolution Stack 2.7</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1920</puid>
+         <name>LiveCode Stack 5.5</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1921</puid>
+         <name>LiveCode Stack 7.0</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1922</puid>
+         <name>LiveCode Stack 8.0</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1923</puid>
+         <name>LiveCode Stack 8.1+</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1924</puid>
+         <name>CorelDraw Drawing 8 Bidi</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1925</puid>
+         <name>CorelDraw Drawing .X6</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1926</puid>
+         <name>CorelDraw Drawing .X7</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1927</puid>
+         <name>CorelDraw Drawing .X8</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1928</puid>
+         <name>CorelDraw Drawing 2017</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1929</puid>
+         <name>CorelDraw Drawing 2018</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1930</puid>
+         <name>CorelDraw Drawing 2019</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1931</puid>
+         <name>CorelDraw Drawing  2020</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1932</puid>
+         <name>CorelDraw Drawing 2021</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1933</puid>
+         <name>CorelDraw Drawing 2022</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1934</puid>
+         <name>CorelDraw Drawing 2023</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1935</puid>
+         <name>S-57 Electronic Navigation Chart</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1936</puid>
+         <name>PCRaster</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1937</puid>
+         <name>Amazon Kindle ebook File</name>
+         <summary>Full entry added. Submitted by National Library of New Zealand.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1938</puid>
+         <name>Lotus Screencam Data File</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1939</puid>
+         <name>Auto FX PhotoGraphic Edges Image File</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1940</puid>
+         <name>EBU Subtitling Data Exchange Format</name>
+         <summary>Full entry added. Submitted by Sylphide Consulting.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1941</puid>
+         <name>Adobe InDesign Document CC 2023</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1942</puid>
+         <name>Adobe InDesign Document CC 2024</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1943</puid>
+         <name>Digital Negative Format (DNG) 1.7</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1944</puid>
+         <name>Common Loudspeaker Format 1</name>
+         <summary>Extension-only entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1945</puid>
+         <name>Common Loudspeaker Format 2</name>
+         <summary>Extension-only entry added. Submitted by Brigham Young University.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="Updated Records">
+      <format>
+         <puid type="fmt">166</puid>
+         <name>Microsoft Works Spreadsheet 1-5</name>
+         <summary>Description updated and internal signature modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">414</puid>
+         <name>Audio Interchange File Format</name>
+         <summary>Removed version number and updated description accordingly. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">418</puid>
+         <name>Adobe Illustrator 3.0 /  3.2</name>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">425</puid>
+         <name>Video Object File (MPEG-2 subset)</name>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">426</puid>
+         <name>Harris Matrix</name>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">427</puid>
+         <name>CorelDraw Drawing 12.0</name>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">428</puid>
+         <name>CorelDraw Drawing X3</name>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">429</puid>
+         <name>CorelDraw Drawing X4</name>
+         <summary>Container signature added. Modified the offset values of the internal signature from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Brigham Young University and Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">430</puid>
+         <name>CorelDraw Drawing .X5</name>
+         <summary>Container signature added. Modified the offset values of the internal signature from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Brigham Young University and Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">431</puid>
+         <name>Corel R.A.V.E 2</name>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">432</puid>
+         <name>Corel R.A.V.E 3</name>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">434</puid>
+         <name>AutoCAD Drawing 2010/ 2011/ 2012</name>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">441</puid>
+         <name>Windows Media Video (WVC1) 9 Advanced Profile</name>
+         <summary>Name updated to Windows Media Video (WVC1) from Windows Media Video (WVC1) 9 Advanced Profile to avoid repitition with version. Description updated and internal signature note updated. Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">446</puid>
+         <name>Adobe Portable Document Catalog Index File 2.0</name>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">453</puid>
+         <name>Verity Collection Stop List</name>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">566</puid>
+         <name>WebP Lossy</name>
+         <summary>Added MIME type identifier webp/image. Submitted by Archives New Zealand.</summary>
+      </format>
+      <format>
+         <puid type="fmt">567</puid>
+         <name>WebP Lossless</name>
+         <summary>Added MIME type identifier webp/image. Submitted by Archives New Zealand.</summary>
+      </format>
+      <format>
+         <puid type="fmt">568</puid>
+         <name>WebP Extended</name>
+         <summary>Added MIME type identifier webp/image. Submitted by Archives New Zealand.</summary>
+      </format>
+      <format>
+         <puid type="fmt">574</puid>
+         <name>Digital Imaging and Communications in Medicine File Format</name>
+         <summary>Max-offset modified for BOF  signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">640</puid>
+         <name>MPEG-2 Elementary Stream</name>
+         <summary>Added priority over fmt/640 MPEG-1 Elementary Stream. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">649</puid>
+         <name>MPEG-1 Elementary Stream</name>
+         <summary>Modified internal signature offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">650</puid>
+         <name>QuarkXPress Report File</name>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">756</puid>
+         <name>Zope Export File</name>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">939</puid>
+         <name>Python Compiled File 2.7</name>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">940</puid>
+         <name>Python Compiled File 3.4</name>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">1057</puid>
+         <name>SNAP Archive Data File</name>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">1058</puid>
+         <name>SNAP Processed Data File</name>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">1071</puid>
+         <name>Apple Disk Image</name>
+         <summary>Max-offset of 0 bytes added for EOF signature. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1073</puid>
+         <name>Google Document Link File</name>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">1207</puid>
+         <name>Sony SFK File</name>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">1208</puid>
+         <name>Virtools File Format</name>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">1358</puid>
+         <name>MicroStation Base File</name>
+         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1390</puid>
+         <name>Drawing Interchange Format (Binary) 2007-2009</name>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">1495</puid>
+         <name>QuarkXPress 2021</name>
+         <summary>Max-offset modified for both BOF signatures to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1544</puid>
+         <name>ELAN Preference File</name>
+         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1558</puid>
+         <name>SelF-eXtracting LHA/LZH Compressed Files</name>
+         <summary>Modified values in Indirect Offset Location and Indirect Offset Length from 0 to null as part of a project to match PRONOM data with the xsd standard. Max-offset modified for BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">1567</puid>
+         <name>ISDOC Information System Document 5.x</name>
+         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Removed '(Generic)' from file format name to reflect version number. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1568</puid>
+         <name>ISDOCX Information System Document 5.x</name>
+         <summary>Max-offset modified for the EOF signature to allow for more exact signature identification. Removed '(Generic)' from file format name to reflect version number. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1569</puid>
+         <name>Bitstream Speedo Fonts</name>
+         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1570</puid>
+         <name>ISDOC Information System Document 6.0.1</name>
+         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1582</puid>
+         <name>Vim SWAP File </name>
+         <summary>Format Type removed. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1596</puid>
+         <name>ESRI ArcInfo Grid .nit File</name>
+         <summary>Max-offset modified for the BOF/EOF signature to allow for more exact signature identification. Format type modified to GIS. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1612</puid>
+         <name>XBIN (eXtended BIN) </name>
+         <summary>Removed format type and ammended description. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1616</puid>
+         <name>BibTeX Database File</name>
+         <summary>Refined signature, updated developer and support links. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1618</puid>
+         <name>SGML/XML Entity File</name>
+         <summary>Removal of signature as extension is more unique. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1628</puid>
+         <name>Adobe InDesign Document 1.0</name>
+         <summary>Max-offset modified for BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1629</puid>
+         <name>Adobe InDesign Document 1.5</name>
+         <summary>Max-offset modified for BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1646</puid>
+         <name>Roxio Label Creator Project File (8-11)</name>
+         <summary>Max-offset modified for the EOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1651</puid>
+         <name>Garmin Flexible and Interoperable Data Transfer file</name>
+         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1654</puid>
+         <name>Palm Database ImageViewer Format</name>
+         <summary>Max-offset modified for BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1669</puid>
+         <name>Roxio Data Project File (11)</name>
+         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1670</puid>
+         <name>Roxio Audio Project File (11)</name>
+         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1672</puid>
+         <name>Linux/i386 Binary Executable File ZMAGIC </name>
+         <summary>Removed format type and ammended description. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1686</puid>
+         <name>PageMaker Mac Document 4.0</name>
+         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1687</puid>
+         <name>PageMaker Mac Document 5.0</name>
+         <summary>Max-offset modified for both BOF signatures to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1731</puid>
+         <name>PowerGraphics Image File</name>
+         <summary>Max-offset modified for BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1738</puid>
+         <name>UDF Disc Image</name>
+         <summary>Max-offset modified for BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1784</puid>
+         <name>Animatic Film Format</name>
+         <summary>Max-offset modified for BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1816</puid>
+         <name>Adobe Swatch Exchange </name>
+         <summary>Format Type removed. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1875</puid>
+         <name>Maptech BSB Documentation FIle</name>
+         <summary>Variable signatures modified to be BOF with offset 0-700. Submitted by Preservica and The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">9</puid>
+         <name>dBASE Database III</name>
+         <summary>Links to documentation added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">24</puid>
+         <name>AutoCAD Block Attribute Template</name>
+         <summary>Two new internal signatures and updated description. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">33</puid>
+         <name>Corel R.A.V.E 1</name>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">106</puid>
+         <name>Microsoft Symbolic Link (SYLK) File</name>
+         <summary>Description updated, max offset values changed from null to 0 and EOF signature modified to accomodate for different operating systems. As part of PRONOM Research Week. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">127</puid>
+         <name>AutoCAD Xref Log</name>
+         <summary>Internal signature added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">265</puid>
+         <name>Tape Archive Format</name>
+         <summary>Amended bytes 107 and 115 from 00 to (00|20). Submitted by National Library of Norway.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">335</puid>
+         <name>Lotus Freelance Smartmaster Graphics</name>
+         <summary>Internal signature added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">436</puid>
+         <name>CATIA Model 4</name>
+         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="New Signatures">
+      <format>
+         <puid type="fmt">429</puid>
+         <name>CorelDraw Drawing X4</name>
+         <summary>Signature researched and samples provided by Brigham Young University and Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">430</puid>
+         <name>CorelDraw Drawing .X5</name>
+         <summary>Signature researched and samples provided by Brigham Young University and Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">1901</puid>
+         <name>SGI Movie File</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1902</puid>
+         <name>Norton Change Directory Persistent Cache File</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1903</puid>
+         <name>Garmin Vehicle Images File</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1904</puid>
+         <name>Pasti Floppy Disk Image</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1905</puid>
+         <name>Universal Scene Description ASCII File</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1906</puid>
+         <name>VBM (VDC BitMap) File</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1907</puid>
+         <name>Micrografx Icon File</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1908</puid>
+         <name>Jupiter Tesselation (JT) File</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1909</puid>
+         <name>TibetDoc Word Document</name>
+         <summary>Signature researched and samples provided by Buddhist Digital Resource Center.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1910</puid>
+         <name>Acrobat PDF/A - Portable Document Format 4</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1911</puid>
+         <name>Acrobat PDF/A - Portable Document Format 4e</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1912</puid>
+         <name>Acrobat PDF/A - Portable Document Format 4f</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1913</puid>
+         <name>Graphisoft Archicad Project 17+</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1914</puid>
+         <name>Graphisoft BIMx Hyper-Model</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1915</puid>
+         <name>ActiveMime Object</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1916</puid>
+         <name>Autodesk Alias Wire Format 7</name>
+         <summary>Signature researched and samples provided by The Canadian Centre for Architecture.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1917</puid>
+         <name>BigTIFF</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1918</puid>
+         <name>MetaCard Stack</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1919</puid>
+         <name>Revolution Stack 2.7</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1920</puid>
+         <name>LiveCode Stack 5.5</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1921</puid>
+         <name>LiveCode Stack 7.0</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1922</puid>
+         <name>LiveCode Stack 8.0</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1923</puid>
+         <name>LiveCode Stack 8.1+</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1924</puid>
+         <name>CorelDraw Drawing 8 Bidi</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1925</puid>
+         <name>CorelDraw Drawing .X6</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1926</puid>
+         <name>CorelDraw Drawing .X7</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1927</puid>
+         <name>CorelDraw Drawing .X8</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1928</puid>
+         <name>CorelDraw Drawing 2017</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1929</puid>
+         <name>CorelDraw Drawing 2018</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1930</puid>
+         <name>CorelDraw Drawing 2019</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1931</puid>
+         <name>CorelDraw Drawing  2020</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1932</puid>
+         <name>CorelDraw Drawing 2021</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1933</puid>
+         <name>CorelDraw Drawing 2022</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1934</puid>
+         <name>CorelDraw Drawing 2023</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1935</puid>
+         <name>S-57 Electronic Navigation Chart</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1936</puid>
+         <name>PCRaster</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1937</puid>
+         <name>Amazon Kindle ebook File</name>
+         <summary>Signature researched and samples provided by National Library of New Zealand.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1938</puid>
+         <name>Lotus Screencam Data File</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1939</puid>
+         <name>Auto FX PhotoGraphic Edges Image File</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1940</puid>
+         <name>EBU Subtitling Data Exchange Format</name>
+         <summary>Signature researched and samples provided by Sylphide Consulting.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1941</puid>
+         <name>Adobe InDesign Document CC 2023</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1942</puid>
+         <name>Adobe InDesign Document CC 2024</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1943</puid>
+         <name>Digital Negative Format (DNG) 1.7</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">24</puid>
+         <name>AutoCAD Block Attribute Template</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">127</puid>
+         <name>AutoCAD Xref Log</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">335</puid>
+         <name>Lotus Freelance Smartmaster Graphics</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+   </release_outline>
+</release_note>
+<release_note>
    <release_date>22nd August 2023</release_date>
    <signature_filename>DROID_SignatureFile_V114.xml</signature_filename>
    <release_outline name="New Records">
@@ -366,11 +1252,6 @@
          <puid type="fmt">624</puid>
          <name>RIFF Palette Format</name>
          <summary>Added priority over fmt/1886. Submitted by New York Public Libraries and Preservica.</summary>
-      </format>
-      <format>
-         <puid type="fmt">649</puid>
-         <name>MPEG-2 Elementary Stream</name>
-         <summary>Added priority over fmt/640 MPEG-1 Elementary Stream. Submitted by Preservica.</summary>
       </format>
       <format>
          <puid type="fmt">657</puid>
@@ -3396,7 +4277,7 @@
       </format>
       <format>
          <puid type="x-fmt">436</puid>
-         <name>CATIA Model v.4</name>
+         <name>CATIA Model 4</name>
          <summary>Updated description and magic bytes. Submitted by Digital Preservation Department, The National Archives.</summary>
       </format>
       <format>

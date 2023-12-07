@@ -25,9 +25,8 @@
       <ProvenanceSourceID>180</ProvenanceSourceID>
       <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
       <ProvenanceSourceDate>04 Jul 2023</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>04 Jul 2023</LastUpdatedDate>
+      <ProvenanceDescription>11/2023 (v.115)- Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard.</ProvenanceDescription>
+      <LastUpdatedDate>14 Nov 2023</LastUpdatedDate>
       <FormatNote>https://web.archive.org/web/20161021191749/http://www.iho.int:80/iho_pubs/standard/S-64/RNC_Test_Data_Sets/BSB_TDS/BSB_Test_Dataset_Instructions_for_RNC.pdf</FormatNote>
       <FormatRisk>
       </FormatRisk>
@@ -50,13 +49,12 @@
       <InternalSignature>
         <SignatureID>2217</SignatureID>
         <SignatureName>Maptech BSB Documentation File</SignatureName>
-        <SignatureNote>Three variable sequences for the following tags 'VER/' 'NTM/' 'CED/'</SignatureNote>
+        <SignatureNote>Three BOF sequences with an offset of 0-700 for the following tags 'VER/' 'NTM/' 'CED/'</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>2573</ByteSequenceID>
-          <PositionType>Variable</PositionType>
+          <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>700</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
@@ -67,10 +65,9 @@
         </ByteSequence>
         <ByteSequence>
           <ByteSequenceID>2610</ByteSequenceID>
-          <PositionType>Variable</PositionType>
+          <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>700</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
@@ -81,10 +78,9 @@
         </ByteSequence>
         <ByteSequence>
           <ByteSequenceID>2611</ByteSequenceID>
-          <PositionType>Variable</PositionType>
+          <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>700</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

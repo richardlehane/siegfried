@@ -24,8 +24,7 @@
       <ProvenanceSourceID>220</ProvenanceSourceID>
       <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
       <ProvenanceSourceDate>26 Jul 2018</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
+      <ProvenanceDescription>11/2023 (v.116)- Priority over fmt/101 Extensible Markup Language 1.0. Internally researched.</ProvenanceDescription>
       <LastUpdatedDate>26 Jul 2018</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
@@ -73,6 +72,12 @@
           <ByteSequenceValue>76323030</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>638</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

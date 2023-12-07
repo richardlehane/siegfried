@@ -14,7 +14,7 @@
       </FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>The SYLK (SYmbolic LinK) file format is a ASCII format used to exchange information between versions of Multiplan and spreadsheets such as Excel.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -25,11 +25,10 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>16 Mar 2012</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <ProvenanceDescription>11/2023 (v.115)- description updated, internal signature max offset values changed from null to 0 and EOF signature modified to accommodate for different operating systems. Submitted by Brigham Young University as part of PRONOM Research Week.</ProvenanceDescription>
+      <LastUpdatedDate>14 Nov 2023</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/SYLK
+http://netghost.narod.ru/gff/graphics/summary/micsylk.htm</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -51,8 +50,7 @@
           <ByteSequenceID>746</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
@@ -65,15 +63,14 @@
           <ByteSequenceID>747</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>0D0A(45|450A|450D0A)</ByteSequenceValue>
+          <ByteSequenceValue>(0D|0D0A|0A)45(0D|0D0A|0A)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

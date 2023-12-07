@@ -69,7 +69,7 @@ https://docs.microsoft.com/en-us/windows/win32/imapi/disc-formats</FormatNote>
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>730</SignatureID>
-        <SignatureName>ISO Disk Image File</SignatureName>
+        <SignatureName>k k Image File</SignatureName>
         <SignatureNote>BOF: CD001{1-16384}ÿCD001 with offset of (32700- 37700).
 Beginning at byte 32768, an ISO file will hold two-to-many volume descriptors, each of 2048 bytes and starting with '*CD001', where * represents the volume desciptor type as defined within the specification.</SignatureNote>
         <ByteSequence>

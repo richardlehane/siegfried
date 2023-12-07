@@ -28,8 +28,9 @@ Version 3 includes graph creation.</FormatDescription>
       <ProvenanceSourceDate>11 Jun 2012</ProvenanceSourceDate>
       <ProvenanceDescription>http://mercator.elte.hu/~saman/hu/okt/AI7FileFormat.pdf
 Adobe has classified Illustrator versions 3.0 and 3.2 as the same file format.
-Version 3 includes graph creation.</ProvenanceDescription>
-      <LastUpdatedDate>19 Jul 2013</LastUpdatedDate>
+Version 3 includes graph creation.
+11/2023 (v.115)- Modified the offset values in the internal signature from null to 0 as part of a project to match PRONOM data with the xsd standard. Internally researched.</ProvenanceDescription>
+      <LastUpdatedDate>14 Nov 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -146,10 +147,8 @@ Version 3 includes graph creation.</ProvenanceDescription>
         <ByteSequence>
           <ByteSequenceID>1693</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
-          <Offset>
-          </Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

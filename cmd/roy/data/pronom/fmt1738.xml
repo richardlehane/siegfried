@@ -25,9 +25,8 @@
       <ProvenanceSourceID>220</ProvenanceSourceID>
       <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
       <ProvenanceSourceDate>17 Aug 2022</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>17 Aug 2022</LastUpdatedDate>
+      <ProvenanceDescription>11/2023 (v.115)- Max-offset modified for the BOF signature to allow for more exact signature identification. Internally researched.</ProvenanceDescription>
+      <LastUpdatedDate>14 Nov 2023</LastUpdatedDate>
       <FormatNote>http://fileformats.archiveteam.org/wiki/Universal_Disk_Format
 
 https://www.loc.gov/preservation/digital/formats/fdd/fdd000348.shtml
@@ -71,7 +70,7 @@ https://docs.microsoft.com/en-us/windows/win32/imapi/disc-formats</FormatNote>
           <ByteSequenceID>2403</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>32768</Offset>
-          <MaxOffset>36864</MaxOffset>
+          <MaxOffset>4096</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

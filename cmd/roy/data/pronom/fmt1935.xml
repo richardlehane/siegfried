@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2796</FormatID>
+      <FormatName>S-57 Electronic Navigational Chart</FormatName>
+      <FormatVersion>3.1</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>GIS</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>S-57 is a file format for the exchange of hydrographic data developed by the International Hydrographic Organization. S-57 is based on the ISO/IEC 8211 "Specification for a data descriptive file for information interchange." S-57 Edition 3.1 was published in 2000 and supersedes the 1996 edition 3.0. Electronic Navigational Charts are vector data sets of all the objects (points, lines, and areas) represented on a chart in a digital database.
+ 
+The file extensions for S-57 are sequentially numbered from .000 upwards, with .000 representing the base data file and further files representing updated data to the base file. For brevity only extensions .000 to .005 are currently associated with this PRONOM entry, however this can be extended as needed.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>244</ProvenanceSourceID>
+      <ProvenanceName>Preservica / Preservica</ProvenanceName>
+      <ProvenanceSourceDate>19 Oct 2023</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>19 Oct 2023</LastUpdatedDate>
+      <FormatNote>A specification for S-57 Edition 3.1 can be found here: https://iho.int/uploads/user/pubs/standards/s-57/31Main.pdf</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1935</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3430</ExternalSignatureID>
+        <Signature>000</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3431</ExternalSignatureID>
+        <Signature>001</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3432</ExternalSignatureID>
+        <Signature>002</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3433</ExternalSignatureID>
+        <Signature>003</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3434</ExternalSignatureID>
+        <Signature>004</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3435</ExternalSignatureID>
+        <Signature>006</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2276</SignatureID>
+        <SignatureName>S-57 Electronic Navigational Chart 3.1</SignatureName>
+        <SignatureNote>BOF consists of a 'Leader' within which an 'ISO/IEC 8211 Record Identifier', 'Data Set Identification field' (DSID), and 'Data Set Structure information field' (DSSI) are found. This is followed by a 'DR Leader' containing values defined in the DSID, including the S-57 format 'Edition' value.
+For the purposes of an identification signature, we're seeking from offset 5 "3LE1 09" {0-2048} "ISO/IEC 8211 Record Identifier" {0-128} "Data set identification field" {0-512} "STED!" {0-4096} 0x1E {5} " D     " {16-256} "03.1"</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2651</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>5</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>334C4531203039{0-2048}49534F2F4945432038323131205265636F7264204964656E746966696572{0-128}4461746120736574206964656E74696669636174696F6E206669656C64{0-512}5354454421{0-4096}1E{5}20442020202020{16-256}30332E31</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>
