@@ -28,6 +28,7 @@ func OverlapR(p Pattern) int {
 }
 
 func aggregateOverlap(p Pattern, of overlapFunc) int {
+	var counter int // prevent combinatorial explosions
 	seqs := p.Sequences()
 	if len(seqs) < 1 {
 		return 1
@@ -35,6 +36,10 @@ func aggregateOverlap(p Pattern, of overlapFunc) int {
 	ret := len(seqs[0])
 	for _, v := range seqs {
 		for _, vv := range seqs {
+			counter++
+			if counter > 10000 {
+				return ret
+			}
 			if r := of(v, vv); r < ret {
 				ret = r
 			}

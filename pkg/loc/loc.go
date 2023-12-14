@@ -18,7 +18,7 @@ import (
 	"archive/zip"
 	"encoding/xml"
 	"errors"
-	"io/ioutil"
+	"io"
 	"path/filepath"
 	"strings"
 	"time"
@@ -51,16 +51,19 @@ func newLOC(path string) (identifier.Parseable, error) {
 			res := mappings.FDD{}
 			rdr, err := f.Open()
 			if err != nil {
-				return nil, err
+				return nil, errors.New("error opening LOC file: " + f.Name + " got " + err.Error())
 			}
-			buf, err := ioutil.ReadAll(rdr)
+			buf, err := io.ReadAll(rdr)
 			rdr.Close()
 			if err != nil {
-				return nil, err
+				return nil, errors.New("error reading LOC file: " + f.Name + " got " + err.Error())
+			}
+			if len(buf) == 0 {
+				continue
 			}
 			err = xml.Unmarshal(buf, &res)
 			if err != nil {
-				return nil, err
+				return nil, errors.New("error unmarshalling LOC xml: " + f.Name + " got " + err.Error())
 			}
 			fs = append(fs, res)
 		}
@@ -165,7 +168,7 @@ func (f fdds) Signatures() ([]frames.Signature, []string, error) {
 	for _, v := range f.f {
 		ss, e := magics(v.Magics)
 		if e != nil {
-			errs = append(errs, e)
+			errs = append(errs, errors.New(v.ID+": "+e.Error()))
 		}
 		for _, s := range ss {
 			sigs = append(sigs, s)
