@@ -37,7 +37,8 @@ func aggregateOverlap(p Pattern, of overlapFunc) int {
 	for _, v := range seqs {
 		for _, vv := range seqs {
 			counter++
-			if counter > 10000 {
+			if counter > 1000000 {
+				//panic("counter exploded!")
 				return ret
 			}
 			if r := of(v, vv); r < ret {
