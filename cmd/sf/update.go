@@ -22,8 +22,8 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"io/fs"
-	"io/ioutil"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -33,6 +33,8 @@ import (
 	"github.com/richardlehane/siegfried/internal/persist"
 	"github.com/richardlehane/siegfried/pkg/config"
 )
+
+type Updates []Update
 
 type Update struct {
 	Version [3]int `json:"sf"`
@@ -74,7 +76,7 @@ func same(buf []byte, usize int, uhash string) bool {
 }
 
 func uptodate(utime, uhash string, usize int) bool {
-	fbuf, err := ioutil.ReadFile(config.Signature())
+	fbuf, err := os.ReadFile(config.Signature())
 	if err != nil {
 		return false
 	}
@@ -98,21 +100,31 @@ func location(base, sig string, args []string) string {
 }
 
 func updateSigs(sig string, args []string) (bool, string, error) {
+	return updateSigsDo(sig, args, getHttp)
+}
+
+func updateSigsDo(sig string, args []string, gf getHttpFn) (bool, string, error) {
 	url, _, _ := config.UpdateOptions()
 	if url == "" {
 		return false, "Update is not available for this distribution of siegfried", nil
 	}
-	response, err := getHttp(location(url, sig, args))
+	response, err := gf(location(url, sig, args))
 	if err != nil {
 		return false, "", err
 	}
-	var u Update
-	if err := json.Unmarshal(response, &u); err != nil {
+	var us Updates
+	if err := json.Unmarshal(response, &us); err != nil {
 		return false, "", err
 	}
 	version := config.Version()
-	if version[0] < u.Version[0] || (version[0] == u.Version[0] && version[1] < u.Version[1]) || // if the version is out of date
-		u.Version == [3]int{0, 0, 0} || u.Created == "" || u.Size == 0 || u.Path == "" { // or if the unmarshalling hasn't worked and we have blank values
+	var u Update
+	for _, v := range us {
+		if version[0] == v.Version[0] && version[1] == v.Version[1] {
+			u = v
+			break
+		}
+	}
+	if u.Version == [3]int{0, 0, 0} { // we didn't find an eligible update
 		return false, "Your version of siegfried is out of date; please install latest from http://www.itforarchivists.com/siegfried before continuing.", nil
 	}
 	if uptodate(u.Created, u.Hash, u.Size) {
@@ -123,27 +135,29 @@ func updateSigs(sig string, args []string) (bool, string, error) {
 		if errors.Is(err, fs.ErrNotExist) {
 			err = os.MkdirAll(config.Home(), os.ModePerm)
 			if err != nil {
-				return false, "", fmt.Errorf("Siegfried: cannot create home directory %s, %v", config.Home(), err)
+				return false, "", fmt.Errorf("siegfried: cannot create home directory %s, %v", config.Home(), err)
 			}
 		} else {
-			return false, "", fmt.Errorf("Siegfried: error opening directory %s, %v", config.Home(), err)
+			return false, "", fmt.Errorf("siegfried: error opening directory %s, %v", config.Home(), err)
 		}
 	}
 	fmt.Println("... downloading latest signature file ...")
-	response, err = getHttp(u.Path)
+	response, err = gf(u.Path)
 	if err != nil {
-		return false, "", fmt.Errorf("Siegfried: error retrieving %s.\nThis may be a network or firewall issue. See https://github.com/richardlehane/siegfried/wiki/Getting-started for manual instructions.\nSystem error: %v", config.SignatureBase(), err)
+		return false, "", fmt.Errorf("siegfried: retrieving %s.\nThis may be a network or firewall issue. See https://github.com/richardlehane/siegfried/wiki/Getting-started for manual instructions.\nSystem error: %v", config.SignatureBase(), err)
 	}
 	if !same(response, u.Size, u.Hash) {
-		return false, "", fmt.Errorf("Siegfried: error retrieving %s; SHA256 hash of response doesn't match %s", config.SignatureBase(), u.Hash)
+		return false, "", fmt.Errorf("siegfried: retrieving %s; SHA256 hash of response doesn't match %s", config.SignatureBase(), u.Hash)
 	}
-	err = ioutil.WriteFile(config.Signature(), response, os.ModePerm)
+	err = os.WriteFile(config.Signature(), response, os.ModePerm)
 	if err != nil {
-		return false, "", fmt.Errorf("Siegfried: error writing to directory, %v", err)
+		return false, "", fmt.Errorf("siegfried: error writing to directory, %v", err)
 	}
 	fmt.Printf("... writing %s ...\n", config.Signature())
 	return true, "Your signature file has been updated", nil
 }
+
+type getHttpFn func(string) ([]byte, error)
 
 func getHttp(url string) ([]byte, error) {
 	req, err := http.NewRequest("GET", url, nil)
@@ -153,17 +167,14 @@ func getHttp(url string) ([]byte, error) {
 	_, timeout, transport := config.UpdateOptions()
 	req.Header.Add("User-Agent", config.UserAgent())
 	req.Header.Add("Cache-Control", "no-cache")
-	timer := time.AfterFunc(timeout, func() {
-		transport.CancelRequest(req)
-	})
-	defer timer.Stop()
 	client := http.Client{
 		Transport: transport,
+		Timeout:   timeout,
 	}
 	resp, err := client.Do(req)
 	if err != nil {
 		return nil, err
 	}
 	defer resp.Body.Close()
-	return ioutil.ReadAll(resp.Body)
+	return io.ReadAll(resp.Body)
 }

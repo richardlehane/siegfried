@@ -56,7 +56,7 @@ var siegfried = struct {
 	choices:         128,
 	cost:            25600000,
 	repetition:      4,
-	updateURL:       "https://www.itforarchivists.com/siegfried/update", // "http://localhost:8081/siegfried/update",
+	updateURL:       "https://www.itforarchivists.com/siegfried/update/v2", // "http://localhost:8081/siegfried/update",
 	updateTimeout:   30 * time.Second,
 	updateTransport: &http.Transport{Proxy: http.ProxyFromEnvironment},
 	fpr:             "/tmp/siegfried",
