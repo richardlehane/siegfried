@@ -9,7 +9,7 @@
 
 ### Version
 
-1.10.1
+1.11.1
 
 [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -97,6 +97,22 @@ Or, for the most recent updates, you can install from this fork:
     makepkg -si
 
 ## Changes
+### v1.11.1 (2023-12-16)
+### Added
+- glob-matching for container signatures; see [digital-preservation/pronom#10](https://github.com/digital-preservation/pronom/issues/10)
+- `sf -update` works for older versions of siegfried; see [#231](https://github.com/richardlehane/siegfried/issues/231)
+
+### Changed
+- default location for siegfried HOME now follows XDG Base Directory Specification; see [#216](https://github.com/richardlehane/siegfried/issues/216). Implemented by [Bernhard Hampel-Waffenthal](https://github.com/richardlehane/siegfried/pull/221)
+- siegfried prints version before erroring with failed signature load; requested by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/228)
+- update PRONOM to v116
+- update LOC to 2023-12-14
+- update tika-mimetypes to v3.0.0-BETA
+- update freedesktop.org to v2.4
+
+### Fixed
+- panic on malformed zip file during container matching; reported by [James Mooney](https://github.com/richardlehane/siegfried/issues/238)
+
 ### v1.10.1 (2023-04-24)
 ### Fixed
 - glob expansion now only on Windows & when no explicit path match. Implemented by [Bernhard Hampel-Waffenthal](https://github.com/richardlehane/siegfried/pull/229)
@@ -124,100 +140,11 @@ Or, for the most recent updates, you can install from this fork:
 - trailing slash for folder paths in URI field in droid output. Reported by Philipp Wittwer
 - crash when using `sf -replay` with droid output
 
-### v1.9.6 (2022-11-06)
-### Changed
-- update PRONOM to v109
-
-### v1.9.5 (2022-09-13)
-### Added
-- `roy inspect` now takes a `-droid` flag to allow easier inspection of old or custom DROID files
-- github action to update siegfried docker deployment [https://github.com/keeps/siegfried-docker]. Implemented by [Keep Solutions](https://github.com/richardlehane/siegfried/pull/201)
-
-### Changed
-- update PRONOM to v108
-- update tika-mimetype signatures to v2.4.1
-- update LOC signatures to 2022-09-01
-
-### Fixed
-- incorrect encoding of YAML strings containing line endings; [#202](https://github.com/richardlehane/siegfried/issues/202).
-- parse signatures with offsets and offsets in patterns e.g. fmt/1741; [#203](https://github.com/richardlehane/siegfried/issues/203)
-
-### v1.9.4 (2022-07-18)
-### Added
-- new pkg/static and static builds. This allows direct use of sf API and self-contained binaries without needing separate signature files. 
-
-### Changed
-- update PRONOM to v106
-
-### Fixed
-- inconsistent output for `roy inspect priorities`. Reported by [Dave Clipsham](https://github.com/richardlehane/siegfried/issues/192)
-
-### v1.9.3 (2022-05-23)
-### Added
-- JS/WASM build support contributed by [Andy Jackson](https://github.com/richardlehane/siegfried/pull/188)
-- wikidata signature added to `-update`. Contributed by [Ross Spencer](https://github.com/richardlehane/siegfried/pull/178)
-- `-nopronom` flag added to `roy inspect` subcommand. Contributed by [Ross Spencer](https://github.com/richardlehane/siegfried/pull/185)
-
-### Changed
-- update PRONOM to v104
-- update LOC signatures to 2022-05-09
-- update Wikidata to 2022-05-20
-- update tika-mimetypes signatures to v2.4.0
-- update freedesktop.org signatures to v2.2
-
-### Fixed
-- invalid JSON output for fmt/1472 due to tab in MIME field. Reported by [Robert Schultz](https://github.com/richardlehane/siegfried/issues/186)
-- panic on corrupt Zip containers. Reported by [A. Diamond](https://github.com/richardlehane/siegfried/issues/181)
-
-### v1.9.2 (2022-02-07)
-### Added
-- Wikidata definition file specification has been updated and now includes endpoint (users will need to harvest Wikidata again)
-- Custom Wikibase endpoint can now be specified for harvesting when paired with a custom SPARQL query and property mappings
-- Wikidata identifier includes permalinks in results
-- Wikidata revision history visible using `roy inspect`
-- roy inspect returns format ID with name
-
-### Changed
-- update PRONOM to v100
-- update LOC signatures to 2022-02-01
-- update tika-mimetypes signatures to v2.1
-- update freedesktop.org signatures to v2.2.1
-
-### Fixed
-- parse issues for container files where zero indexing used for Position. Spotted by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/175)
-- sf -droid output can't be read by sf (e.g. for comparing results). Reported by [ostnatalie](https://github.com/richardlehane/siegfried/issues/174)
-- panic when running in server mode due to race condition. Reported by [Miguel Guimarães](https://github.com/richardlehane/siegfried/issues/172)
-- panic when reading malformed MSCFB files. Reported by [Greg Lepore](https://github.com/richardlehane/siegfried/issues/171)
-- unescaped control characters in JSON output. Reported by [Sebastian Lange](https://github.com/richardlehane/siegfried/issues/165)
-- zip file names with null terminated strings prevent ID of Serif formats. Reported by [Tyler Thorsted](https://github.com/richardlehane/siegfried/issues/150)
-
-### v1.9.1 (2020-10-11)
-### Changed
-- update PRONOM to v97
-- zs flag now activates -z flag
-
-### Fixed
-- details text in PRONOM identifier
-- `roy` panic when building signatures with empty sequences. Reported by [Greg Lepore](https://github.com/richardlehane/siegfried/issues/149)
-
-### v1.9.0 (2020-09-22)
-### Added
-- a new Wikidata identifier, harvesting information from the Wikidata Query Service. Implemented by [Ross Spencer](https://github.com/richardlehane/siegfried/commit/dfb579b4ae46ae6daa814fc3fc74271d768f2f9c). 
-- select which archive types (zip, tar, gzip, warc, or arc) are unpacked using the -zs flag (sf -zs tar,zip). Implemented by [Ross Spencer](https://github.com/richardlehane/siegfried/commit/88dd43b55e5f83304705f6bcd439d502ef08cd38).
-
-### Changed
-- update LOC signatures to 2020-09-21
-- update tika-mimetypes signatures to v1.24
-- update freedesktop.org signatures to v2.0
-
-### Fixed
-- incorrect basis for some signatures with multiple patterns. Reported and fixed by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/142).
-
 See the [CHANGELOG](CHANGELOG.md) for the full history.
 
 ## Rights
 
-Copyright 2020 Richard Lehane, Ross Spencer 
+Copyright 2024 Richard Lehane, Ross Spencer 
 
 Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
 
