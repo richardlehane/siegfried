@@ -1,4 +1,4 @@
-// +build archivematica
+//go:build archivematica
 
 package config
 

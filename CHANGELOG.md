@@ -1,11 +1,26 @@
 # Change Log
+## v1.11.1 (2023-12-16)
+### Added
+- glob-matching for container signatures; see [digital-preservation/pronom#10](https://github.com/digital-preservation/pronom/issues/10)
+- `sf -update` requires less updating of siegfried; see [#231](https://github.com/richardlehane/siegfried/issues/231)
+
+### Changed
+- default location for siegfried HOME now follows XDG Base Directory Specification; see [#216](https://github.com/richardlehane/siegfried/issues/216). Implemented by [Bernhard Hampel-Waffenthal](https://github.com/richardlehane/siegfried/pull/221)
+- siegfried prints version before erroring with failed signature load; requested by [Ross Spencer](https://github.com/richardlehane/siegfried/issues/228)
+- update PRONOM to v116
+- update LOC to 2023-12-14
+- update tika-mimetypes to v3.0.0-BETA
+- update freedesktop.org to v2.4
+
+### Fixed
+- panic on malformed zip file during container matching; reported by [James Mooney](https://github.com/richardlehane/siegfried/issues/238)
+
 ## v1.10.2 (2023-12-17)
 ### Changed
 - update PRONOM to v116
 - update LOC to 2023-12-14
 - update tika-mimetypes to v3.0.0-BETA
 - update freedesktop.org to v2.4
-
 ## v1.10.1 (2023-04-24)
 ### Fixed
 - glob expansion now only on Windows & when no explicit path match. Implemented by [Bernhard Hampel-Waffenthal](https://github.com/richardlehane/siegfried/pull/229)

@@ -6,7 +6,7 @@ on:
   release:
     types: [released]
 jobs:
-  bench:
+  brew:
     runs-on: ubuntu-latest
     steps:
       - name: Get details of latest release

@@ -25,12 +25,13 @@ import (
 // The special thing about a siegreader.Reader is that you can have a bunch of them all reading independently from the one buffer.
 //
 // Example:
-//  buffers := siegreader.New()
-//  buffer := buffers.Get(underlying_io_reader)
-//  rdr := siegreader.ReaderFrom(buffer)
-//	second_rdr := siegreader.ReaderFrom(buffer)
-//  limit_rdr := siegreader.LimitedReaderFrom(buffer, 4096)
-//  reverse_rdr := siegreader.ReverseReaderFrom(buffer)
+//
+//	 buffers := siegreader.New()
+//	 buffer := buffers.Get(underlying_io_reader)
+//	 rdr := siegreader.ReaderFrom(buffer)
+//		second_rdr := siegreader.ReaderFrom(buffer)
+//	 limit_rdr := siegreader.LimitedReaderFrom(buffer, 4096)
+//	 reverse_rdr := siegreader.ReverseReaderFrom(buffer)
 type Reader struct {
 	i       int64
 	j       int
@@ -105,6 +106,9 @@ func (r *Reader) Read(b []byte) (int, error) {
 
 // ReadAt implements the io.ReaderAt interface.
 func (r *Reader) ReadAt(b []byte, off int64) (int, error) {
+	if off < 0 {
+		return 0, fmt.Errorf("siegreader: ReadAt with negative value, got %v", off)
+	}
 	var slc []byte
 	var err error
 	// if b is already covered by the scratch slice

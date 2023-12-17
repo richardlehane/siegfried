@@ -123,7 +123,7 @@ var pronomIDs = []pronomIdentificationTests{
 		"",
 		"video/x-msvideo",
 		"Audio, Video",
-		"extension match avi; byte match at [[0 12] [32 16] [68 12]]",
+		"extension match avi; byte match at 0, 12",
 		"",
 	},
 }

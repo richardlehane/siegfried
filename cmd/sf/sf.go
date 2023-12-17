@@ -360,13 +360,13 @@ func main() {
 	if !*replay || *version || *versionShort || *fprflag || *serve != "" {
 		s, err = load(config.Signature())
 	}
-	if err != nil {
-		log.Fatalf("[FATAL] error loading signature file, got: %v", err)
-	}
 	// handle -version
 	if *version || *versionShort {
 		version := config.Version()
 		fmt.Printf("siegfried %d.%d.%d\n", version[0], version[1], version[2])
+		if err != nil {
+			log.Fatalf("[FATAL] %v", err)
+		}
 		fmt.Printf("%s (%s)\nidentifiers: \n", config.Signature(), s.C.Format(time.RFC3339))
 		for _, id := range s.Identifiers() {
 			fmt.Printf("  - %s: %s\n", id[0], id[1])
@@ -379,6 +379,9 @@ func main() {
 			}
 		}
 		return
+	}
+	if err != nil {
+		log.Fatalf("[FATAL] %v", err)
 	}
 	// handle -z and -zs
 	if *archive || *selectArchives != "" {

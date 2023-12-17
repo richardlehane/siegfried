@@ -16,7 +16,7 @@ package config
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"os"
 	"path/filepath"
 )
 
@@ -49,7 +49,7 @@ func MIMEInfo() string {
 }
 
 func MIMEVersion() []string {
-	byt, err := ioutil.ReadFile(filepath.Join(siegfried.home, mimeinfo.versions))
+	byt, err := os.ReadFile(filepath.Join(siegfried.home, mimeinfo.versions))
 	m := make(map[string][]string)
 	if err == nil {
 		err = json.Unmarshal(byt, &m)

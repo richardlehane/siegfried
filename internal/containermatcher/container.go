@@ -18,6 +18,8 @@ import (
 	"encoding/binary"
 	"errors"
 	"fmt"
+	"path/filepath"
+	"strings"
 
 	"github.com/richardlehane/siegfried/internal/bytematcher"
 	"github.com/richardlehane/siegfried/internal/bytematcher/frames"
@@ -122,7 +124,14 @@ func (m Matcher) addSigs(i int, nameParts [][]string, sigParts [][]frames.Signat
 			return err
 		}
 	}
+	// commit all the ctests
 	for _, v := range m[i].nameCTest {
+		err = v.commit()
+		if err != nil {
+			return err
+		}
+	}
+	for _, v := range m[i].globCtests {
 		err = v.commit()
 		if err != nil {
 			return err
@@ -144,28 +153,42 @@ type ContainerMatcher struct {
 	ctype
 	startIndexes []int //  added to hits - these place all container matches in a single slice
 	conType      containerType
-	nameCTest    map[string]*cTest
-	parts        []int // corresponds with each signature: represents the number of CTests for each sig
+	nameCTest    map[string]*cTest // map of literal paths to ctests
+	globs        []string          // corresponds with globCtests
+	globCtests   []*cTest          //
+	parts        []int             // corresponds with each signature: represents the number of CTests for each sig
 	priorities   *priority.Set
 	extension    string
 	entryBufs    *siegreader.Buffers
 }
 
 func loadCM(ls *persist.LoadSaver) *ContainerMatcher {
-	return &ContainerMatcher{
+	ct := &ContainerMatcher{
 		startIndexes: ls.LoadInts(),
 		conType:      containerType(ls.LoadTinyUInt()),
 		nameCTest:    loadCTests(ls),
-		parts:        ls.LoadInts(),
-		priorities:   priority.Load(ls),
-		extension:    ls.LoadString(),
+		globs:        ls.LoadStrings(),
 	}
+	gcts := make([]*cTest, ls.LoadSmallInt())
+	for i := range gcts {
+		gcts[i] = loadCTest(ls)
+	}
+	ct.globCtests = gcts
+	ct.parts = ls.LoadInts()
+	ct.priorities = priority.Load(ls)
+	ct.extension = ls.LoadString()
+	return ct
 }
 
 func (c *ContainerMatcher) save(ls *persist.LoadSaver) {
 	ls.SaveInts(c.startIndexes)
 	ls.SaveTinyUInt(int(c.conType))
 	saveCTests(ls, c.nameCTest)
+	ls.SaveStrings(c.globs)
+	ls.SaveSmallInt(len(c.globCtests))
+	for _, v := range c.globCtests {
+		saveCTest(ls, v)
+	}
 	ls.SaveInts(c.parts)
 	c.priorities.Save(ls)
 	ls.SaveString(c.extension)
@@ -176,6 +199,7 @@ func (c *ContainerMatcher) String() string {
 	str += fmt.Sprintf("Type: %d\n", c.conType)
 	str += fmt.Sprintf("Priorities: %v\n", c.priorities)
 	str += fmt.Sprintf("Parts: %v\n", c.parts)
+	str += fmt.Sprintf("%d literal tests, %d glob tests\n", len(c.nameCTest), len(c.globCtests))
 	for k, v := range c.nameCTest {
 		str += "-----------\n"
 		str += fmt.Sprintf("Name: %v\n", k)
@@ -185,6 +209,17 @@ func (c *ContainerMatcher) String() string {
 			str += "Bytematcher: None\n"
 		} else {
 			str += "Bytematcher:\n" + v.bm.String()
+		}
+	}
+	for i, v := range c.globs {
+		str += "-----------\n"
+		str += fmt.Sprintf("Glob: %v\n", v)
+		str += fmt.Sprintf("Satisfied: %v\n", c.globCtests[i].satisfied)
+		str += fmt.Sprintf("Unsatisfied: %v\n", c.globCtests[i].unsatisfied)
+		if c.globCtests[i].bm == nil {
+			str += "Bytematcher: None\n"
+		} else {
+			str += "Bytematcher:\n" + c.globCtests[i].bm.String()
 		}
 	}
 	return str
@@ -240,7 +275,25 @@ func (c *ContainerMatcher) addSignature(nameParts []string, sigParts []frames.Si
 		return errors.New("container matcher: nameParts and sigParts must be equal")
 	}
 	c.parts = append(c.parts, len(nameParts))
+outer:
 	for i, nm := range nameParts {
+		if nm != "[Content_Types].xml" && strings.ContainsAny(nm, "*?[]") {
+			// is glob pattern is valid
+			if _, err := filepath.Match(nm, ""); err == nil {
+				// do we already have this glob?
+				for i, v := range c.globs {
+					if nm == v {
+						c.globCtests[i].add(sigParts[i], len(c.parts)-1)
+						continue outer
+					}
+				}
+				c.globs = append(c.globs, nm)
+				ct := &cTest{}
+				ct.add(sigParts[i], len(c.parts)-1)
+				c.globCtests = append(c.globCtests, ct)
+				continue
+			}
+		}
 		ct, ok := c.nameCTest[nm]
 		if !ok {
 			ct = &cTest{}
@@ -263,11 +316,7 @@ func loadCTests(ls *persist.LoadSaver) map[string]*cTest {
 	ret := make(map[string]*cTest)
 	l := ls.LoadSmallInt()
 	for i := 0; i < l; i++ {
-		ret[ls.LoadString()] = &cTest{
-			satisfied:   ls.LoadInts(),
-			unsatisfied: ls.LoadInts(),
-			bm:          bytematcher.Load(ls),
-		}
+		ret[ls.LoadString()] = loadCTest(ls)
 	}
 	return ret
 }
@@ -276,10 +325,22 @@ func saveCTests(ls *persist.LoadSaver, ct map[string]*cTest) {
 	ls.SaveSmallInt(len(ct))
 	for k, v := range ct {
 		ls.SaveString(k)
-		ls.SaveInts(v.satisfied)
-		ls.SaveInts(v.unsatisfied)
-		bytematcher.Save(v.bm, ls)
+		saveCTest(ls, v)
 	}
+}
+
+func loadCTest(ls *persist.LoadSaver) *cTest {
+	return &cTest{
+		satisfied:   ls.LoadInts(),
+		unsatisfied: ls.LoadInts(),
+		bm:          bytematcher.Load(ls),
+	}
+}
+
+func saveCTest(ls *persist.LoadSaver, ct *cTest) {
+	ls.SaveInts(ct.satisfied)
+	ls.SaveInts(ct.unsatisfied)
+	bytematcher.Save(ct.bm, ls)
 }
 
 func (ct *cTest) add(s frames.Signature, t int) {

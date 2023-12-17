@@ -1,4 +1,4 @@
-// +build !brew,!archivematica,!js
+//go:build !brew && !archivematica && !js
 
 // Copyright 2014 Richard Lehane. All rights reserved.
 //
@@ -17,16 +17,51 @@
 package config
 
 import (
+	"errors"
+	"io/fs"
 	"log"
-	"os/user"
+	"os"
 	"path/filepath"
+	"strings"
 )
 
-// the default Home location is a "siegfried" folder in the user's $HOME
+// the default Home location is a "siegfried" folder in the user's application data folder, which can be overridden by setting the SIEGFRIED_HOME environment variable
 func init() {
-	current, err := user.Current()
-	if err != nil {
-		log.Fatal(err)
+	if home, ok := os.LookupEnv("SIEGFRIED_HOME"); ok {
+		siegfried.home = home
+	} else {
+		home, err := os.UserHomeDir()
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		// if a home directory already exists in the legacy location continue using it, otherwise default to a XDG-aware OS-specific application data directory
+		siegfried.home = filepath.Join(home, "siegfried")
+		if _, err := os.Stat(siegfried.home); err != nil {
+			if errors.Is(err, fs.ErrNotExist) {
+				siegfried.home = filepath.Join(userDataDir(home), "siegfried")
+			} else {
+				log.Fatal(err)
+			}
+		}
 	}
-	siegfried.home = filepath.Join(current.HomeDir, "siegfried")
+}
+
+func xdgPath(home string, defaultPath string) string {
+	dataHome, found := os.LookupEnv("XDG_DATA_HOME")
+	if found && dataHome != "" {
+		if strings.HasPrefix(dataHome, "~") {
+			dataHome = filepath.Join(home, strings.TrimPrefix(dataHome, "~"))
+		}
+		// environment variable might contain variables like $HOME itself, let's expand
+		dataHome = os.ExpandEnv(dataHome)
+	}
+	// XDG Base Directory Specification demands relative paths to be ignored, fall back to default in that case
+	if filepath.IsAbs(dataHome) {
+		return dataHome
+	} else if filepath.IsAbs(defaultPath) {
+		return defaultPath
+	} else {
+		return filepath.Join(home, defaultPath)
+	}
 }

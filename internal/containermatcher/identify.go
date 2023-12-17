@@ -131,9 +131,22 @@ func (c *ContainerMatcher) identify(n string, rdr Reader, res chan core.Result, 
 	}
 	id := c.newIdentifier(len(c.parts), hints...)
 	var err error
+outer:
 	for err = rdr.Next(); err == nil; err = rdr.Next() {
 		ct, ok := c.nameCTest[rdr.Name()]
 		if !ok {
+			for i, glob := range c.globs {
+				if m, _ := filepath.Match(glob, rdr.Name()); m {
+					if config.Debug() {
+						fmt.Fprintf(config.Out(), "{Glob match (%s) - %s (container %d))}\n", glob, rdr.Name(), c.conType)
+					}
+					// process hits returns true if we can stop, otherwise possible other globs may match
+					// so we keep trying remaining globs
+					if c.processHits(c.globCtests[i].identify(c, id, rdr, rdr.Name()), id, c.globCtests[i], rdr.Name(), res) {
+						break outer
+					}
+				}
+			}
 			continue
 		}
 		if config.Debug() {

@@ -47,7 +47,7 @@ var siegfried = struct {
 	checkpoint int64
 	userAgent  string
 }{
-	version:         [3]int{1, 10, 2},
+	version:         [3]int{1, 11, 0},
 	signature:       "default.sig",
 	conf:            "sf.conf",
 	magic:           []byte{'s', 'f', 0x00, 0xFF},
@@ -56,7 +56,7 @@ var siegfried = struct {
 	choices:         128,
 	cost:            25600000,
 	repetition:      4,
-	updateURL:       "https://www.itforarchivists.com/siegfried/update", // "http://localhost:8081/siegfried/update",
+	updateURL:       "https://www.itforarchivists.com/siegfried/update/v2", // "http://localhost:8081/siegfried/update",
 	updateTimeout:   30 * time.Second,
 	updateTransport: &http.Transport{Proxy: http.ProxyFromEnvironment},
 	fpr:             "/tmp/siegfried",
