@@ -1,5 +1,5 @@
 # Change Log
-## v1.11.1 (2023-12-17)
+## v1.11.0 (2023-12-17)
 ### Added
 - glob-matching for container signatures; see [digital-preservation/pronom#10](https://github.com/digital-preservation/pronom/issues/10)
 - `sf -update` requires less updating of siegfried; see [#231](https://github.com/richardlehane/siegfried/issues/231)
