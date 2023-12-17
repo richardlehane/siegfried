@@ -10,7 +10,8 @@
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatTypes>
+      </FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
       <FormatDescription>Vim SWAP file is a temporary file created by the open source Vim text editor, when editing a file. The file's name typically begins with ".", and ends with ".swp". The file is normally deleted when editing is complete, but may be left behind in the event of a crash or other abnormal termination. Its main purpose is to periodically record unsaved changes made to the file. It also serves as a lock file. The file format is undocumented, and not necessarily portable.
@@ -27,9 +28,8 @@ Vim is free and open-source, screen-based text editor program for Unix, released
       <ProvenanceSourceID>180</ProvenanceSourceID>
       <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
       <ProvenanceSourceDate>04 Jan 2022</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>04 Jan 2022</LastUpdatedDate>
+      <ProvenanceDescription>11/2023 (v.115)- File format type removed. Submitted by The National Archives and Records Administration.</ProvenanceDescription>
+      <LastUpdatedDate>15 Nov 2023</LastUpdatedDate>
       <FormatNote>https://www.vim.org/
 
 https://vimhelp.org/recover.txt.html#swap-file

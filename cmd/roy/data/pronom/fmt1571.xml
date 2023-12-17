@@ -54,7 +54,7 @@ ISDOC format is a type of Extensible Markup Language (XML) file format specific 
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>2393</RelatedFormatID>
-        <RelatedFormatName>ISDOCX Information System Document (Generic)</RelatedFormatName>
+        <RelatedFormatName>ISDOCX Information System Document</RelatedFormatName>
         <RelatedFormatVersion>5.x</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>

@@ -58,6 +58,9 @@ func newLOC(path string) (identifier.Parseable, error) {
 			if err != nil {
 				return nil, err
 			}
+			if len(buf) == 0 {
+				continue
+			}
 			err = xml.Unmarshal(buf, &res)
 			if err != nil {
 				return nil, err

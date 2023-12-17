@@ -86,7 +86,8 @@
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1192</RelatedFormatID>
         <RelatedFormatName>Audio Interchange File Format</RelatedFormatName>
-        <RelatedFormatVersion>1.2</RelatedFormatVersion>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>

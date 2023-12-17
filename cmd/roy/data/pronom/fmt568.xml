@@ -24,9 +24,9 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>19 Jul 2013</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>19 Jul 2013</LastUpdatedDate>
+      <ProvenanceDescription>08/2023 (v.113) - Added priority over fmt/1886 (Resource Interchange Format (RIFF)). Submitted by New York Public Libraries and Preservica.
+11/2023 (v.115)- Added MIME identifier 'webp/image'. Submitted by Archives New Zealand.</ProvenanceDescription>
+      <LastUpdatedDate>14 Aug 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -36,6 +36,10 @@
       <FileFormatIdentifier>
         <Identifier>fmt/568</Identifier>
         <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>webp/image</Identifier>
+        <IdentifierType>MIME</IdentifierType>
       </FileFormatIdentifier>
       <Developers>
         <DeveloperID>141</DeveloperID>
@@ -74,6 +78,13 @@
           <ByteSequenceValue>52494646{4}5745425056503858</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2741</RelatedFormatID>
+        <RelatedFormatName>Resource Interchange File Format (RIFF)</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

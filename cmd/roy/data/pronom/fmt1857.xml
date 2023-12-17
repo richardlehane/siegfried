@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2711</FormatID>
+      <FormatName>Capture One Session File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Mark-up)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>COS files are XML CaptureOne Session files which contain metadata for each image within a CaptureOne session. Capture One is a software for RAW photo editing geared for photography.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>299</ProvenanceSourceID>
+      <ProvenanceName>Brigham Young University / Brigham Young University</ProvenanceName>
+      <ProvenanceSourceDate>25 Apr 2023</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>25 Apr 2023</LastUpdatedDate>
+      <FormatNote>https://www.captureone.com/blog/eip-file-format-enhanced-image-package
+
+https://support.captureone.com/hc/en-us/articles/360002478617-Enhanced-Image-Package-EIP-overview
+
+https://support.captureone.com/hc/en-us/articles/360002544898-Metadata-in-XMP-sidecar-files
+
+http://fileformats.archiveteam.org/wiki/Enhanced_Image_Package</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1857</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>289</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Capture One</OrganisationName>
+        <DeveloperCompoundName>Capture One</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>289</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Capture One</OrganisationName>
+        <SupportCompoundName>Capture One</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3327</ExternalSignatureID>
+        <Signature>cos</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2202</SignatureID>
+        <SignatureName>Capture One Session File</SignatureName>
+        <SignatureNote>BOF XML header.  Then BOF tags specific to Capture One software '&lt;IMG&gt;' gap between {0-256} then '&lt;E K=' either 0x22 or 0x27 followed by 'Author'.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2557</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C3F786D6C2076657273696F6E3D(22|27)312E30(22|27)</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>2558</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>22</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C494D473E{0-256}3C45204B3D(22|27)417574686F72(22|27)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>638</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2569</RelatedFormatID>
+        <RelatedFormatName>Capture One Settings File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

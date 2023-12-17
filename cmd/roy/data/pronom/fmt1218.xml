@@ -13,7 +13,7 @@
       <FormatTypes>Text (Structured)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>SubRip subtitle files contain formatted lines of plain text in groups separated by a blank line. Subtitles are numbered sequentially, starting at 1. The timecode format used is hours:minutes:seconds,milliseconds, with time units fixed to two zero-padded digits and fractions fixed to three zero-padded digits, e.g. '00:00:00,000'. Currently PRONOM is able to provide an extension-only entry for this format.</FormatDescription>
+      <FormatDescription>SubRip subtitle files contain formatted lines of plain text in groups separated by a blank line. Subtitles are numbered sequentially, starting at 1. The timecode format used is hours:minutes:seconds,milliseconds, with time units fixed to two zero-padded digits and fractions fixed to three zero-padded digits, e.g. '00:00:00,000'.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -27,9 +27,10 @@
       <ProvenanceSourceDate>07 Feb 2019</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>10 Mar 2023</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <LastUpdatedDate>09 May 2023</LastUpdatedDate>
+      <FormatNote>https://www.matroska.org/technical/subtitles.html#srt-subtitles
+
+https://en.wikipedia.org/wiki/SubRip</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>

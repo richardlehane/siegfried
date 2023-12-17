@@ -24,9 +24,8 @@ This initial version accompanied the launch of DNG and related products. It was 
       <ProvenanceName>
       </ProvenanceName>
       <ProvenanceSourceDate>11 Jun 2012</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>25 Oct 2012</LastUpdatedDate>
+      <ProvenanceDescription>11/2023 (v.116)- New MIME type identifier 'image/dng' added and max offset of EOF internal signatures increased to 128000. Submitted by Brigham Young University.</ProvenanceDescription>
+      <LastUpdatedDate>16 Nov 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -36,6 +35,10 @@ This initial version accompanied the launch of DNG and related products. It was 
       <FileFormatIdentifier>
         <Identifier>fmt/436</Identifier>
         <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>image/dng</Identifier>
+        <IdentifierType>MIME</IdentifierType>
       </FileFormatIdentifier>
       <FileFormatIdentifier>
         <Identifier>image/tiff</Identifier>
@@ -54,8 +57,7 @@ This initial version accompanied the launch of DNG and related products. It was 
           <ByteSequenceID>802</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
@@ -72,8 +74,7 @@ This initial version accompanied the launch of DNG and related products. It was 
           <ByteSequenceID>803</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
@@ -85,7 +86,7 @@ This initial version accompanied the launch of DNG and related products. It was 
           <ByteSequenceID>804</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>6000</MaxOffset>
+          <MaxOffset>128000</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
@@ -102,8 +103,7 @@ This initial version accompanied the launch of DNG and related products. It was 
           <ByteSequenceID>805</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
@@ -120,8 +120,7 @@ This initial version accompanied the launch of DNG and related products. It was 
           <ByteSequenceID>806</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
@@ -133,7 +132,7 @@ This initial version accompanied the launch of DNG and related products. It was 
           <ByteSequenceID>807</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>4084</MaxOffset>
+          <MaxOffset>128000</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2702</FormatID>
+      <FormatName>WordPerfect Macro File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Word Processor</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>WordPerfect is a Word Processing application currently owned by Corel Corporation. WordPerfect macro files have extensions wpm and wcm, and are a family of macro file formats used by Wordperfect and other Corel Products.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>247</ProvenanceSourceID>
+      <ProvenanceName>National Archives of Australia / National Archives of Australia</ProvenanceName>
+      <ProvenanceSourceDate>24 Apr 2023</ProvenanceSourceDate>
+      <ProvenanceDescription>08/2023 (v.113)- Priority added over x-fmt/393 (WordPerfect for MS-DOS Document 5.0). Researched internally.</ProvenanceDescription>
+      <LastUpdatedDate>15 Aug 2023</LastUpdatedDate>
+      <FormatNote>http://justsolve.archiveteam.org/wiki/WordPerfect_macro</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1850</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>35</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Corel Corporation</OrganisationName>
+        <DeveloperCompoundName>Corel Corporation</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>35</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Corel Corporation</OrganisationName>
+        <SupportCompoundName>Corel Corporation</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3319</ExternalSignatureID>
+        <Signature>wpm</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3320</ExternalSignatureID>
+        <Signature>wcm</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2194</SignatureID>
+        <SignatureName>WordPerfect Macro File - wpm extension</SignatureName>
+        <SignatureNote>Absolute from beginning of file, magic bytes: ÿWPC{4}..</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2544</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>FF575043{4}0101</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>2195</SignatureID>
+        <SignatureName>WordPerfect Macro File - wcm extension</SignatureName>
+        <SignatureNote>Absolute from beginning of file, magic bytes: ÿWPC{4}..{0-4000}(wcm|WCM)*(a|A)pplication{0-15}(d|D}efault</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2545</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>FF575043{4}010A{0-4000}(77636D|57434D)*(61|41)70706C69636174696F6E{0-15}(64|44)656661756C74</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>736</RelatedFormatID>
+        <RelatedFormatName>WordPerfect for MS-DOS Document</RelatedFormatName>
+        <RelatedFormatVersion>5.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>737</RelatedFormatID>
+        <RelatedFormatName>WordPerfect for MS-DOS/Windows Document</RelatedFormatName>
+        <RelatedFormatVersion>5.1</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

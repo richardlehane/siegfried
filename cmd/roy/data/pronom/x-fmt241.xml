@@ -24,7 +24,7 @@
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>17 Jan 2023</LastUpdatedDate>
+      <LastUpdatedDate>02 May 2023</LastUpdatedDate>
       <FormatNote>https://web.archive.org/web/20220711181532/http://fileformats.archiveteam.org/wiki/Access
 
 https://web.archive.org/web/20220901011824/https://en.wikipedia.org/wiki/Microsoft_Access
@@ -41,7 +41,7 @@ http://web.archive.org/web/20111115230803/http://support.microsoft.com/kb/178883
         <IdentifierType>Library of Congress Format Description Identifier</IdentifierType>
       </FileFormatIdentifier>
       <FileFormatIdentifier>
-        <Identifier>Q1931566</Identifier>
+        <Identifier>Q48021763</Identifier>
         <IdentifierType>Wikidata QID Identifier</IdentifierType>
       </FileFormatIdentifier>
       <FileFormatIdentifier>
@@ -97,6 +97,12 @@ http://web.archive.org/web/20111115230803/http://support.microsoft.com/kb/178883
           <ByteSequenceValue>410063006300650073007300560065007200730069006F006E{0-2048}300039002E00[30:39]00[30:39]</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>1015</RelatedFormatID>
+        <RelatedFormatName>Microsoft Access Database File</RelatedFormatName>
+        <RelatedFormatVersion>2007</RelatedFormatVersion>
+      </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Is subsequent version of</RelationshipType>
         <RelatedFormatID>352</RelatedFormatID>

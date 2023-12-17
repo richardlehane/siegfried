@@ -20,11 +20,9 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>26 Feb 2013</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <ProvenanceDescription>08/2023 (v.113) - Description of magic bytes for signature and specification added. Researched internally.</ProvenanceDescription>
+      <LastUpdatedDate>15 Aug 2023</LastUpdatedDate>
+      <FormatNote>Specification: http://www.opennet.ru/docs/formats/ps3.pdf</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -98,7 +96,7 @@
       <InternalSignature>
         <SignatureID>179</SignatureID>
         <SignatureName>EPS 3.0</SignatureName>
-        <SignatureNote>Version comment</SignatureNote>
+        <SignatureNote>Absolute from beginning of file, magic bytes: %!PS-Adobe-3.0 EPSF-3.0(.|..)</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>214</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -117,7 +115,8 @@
       <InternalSignature>
         <SignatureID>180</SignatureID>
         <SignatureName>EPS 3.0 Preview</SignatureName>
-        <SignatureNote>Version comment</SignatureNote>
+        <SignatureNote>Absolute from beginning of file, magic bytes: ÅÐÓÆ
+Variable, magic bytes: 	%!PS-Adobe-3.(30|31)EPSF-3.0(.|..)</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>215</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -257,6 +256,12 @@
         <RelatedFormatID>332</RelatedFormatID>
         <RelatedFormatName>Encapsulated PostScript File Format</RelatedFormatName>
         <RelatedFormatVersion>2.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>2740</RelatedFormatID>
+        <RelatedFormatName>Encapsulated PostScript File Format</RelatedFormatName>
+        <RelatedFormatVersion>2.1</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>

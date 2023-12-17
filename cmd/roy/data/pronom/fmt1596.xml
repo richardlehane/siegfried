@@ -10,7 +10,7 @@
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatTypes>GIS</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
       <FormatDescription>Files which comprise part of an ArcInfo Grid, a raster data model storing information in a matrix of cells, with values representing a coordinate, and sometimes linked to an attribute table. ArcInfo Grid models are generated using ArcGIS software, produced by Esri (https://www.esri.com/en-us/arcgis/about-arcgis/overview.) Nit files follow a consistent naming pattern: arcXXXX.nit, where XXXX is an incrementally increasing number starting from 0000, e.g, arc000.nit, arc0001.nit, arc0002.nit. Nit files are always stored in an /info/ directory at the root. They are associated with .dat and .adf files, and their function is to store file structure and field definition information of the grid.</FormatDescription>
@@ -25,9 +25,8 @@
       <ProvenanceSourceID>234</ProvenanceSourceID>
       <ProvenanceName>National Library of Australia / National Library of Australia</ProvenanceName>
       <ProvenanceSourceDate>18 Jan 2022</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>04 Mar 2022</LastUpdatedDate>
+      <ProvenanceDescription>11/2023 (v.115)- Format type changed to GIS and max-offset modified for BOF signature to allow for more exact signature identification. Internally researched</ProvenanceDescription>
+      <LastUpdatedDate>14 Nov 2023</LastUpdatedDate>
       <FormatNote>http://avce00.maptools.org/docs/v7_bin_cover.html#ARC.DAT
  
 http://webhelp.esri.com/arcgisdesktop/9.2/index.cfm?TopicName=How_coverages_are_stored 
@@ -56,7 +55,7 @@ https://www.loc.gov/preservation/digital/formats/fdd/fdd000281.shtml</FormatNote
           <ByteSequenceID>2240</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>16</Offset>
-          <MaxOffset>16</MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

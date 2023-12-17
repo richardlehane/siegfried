@@ -10,7 +10,7 @@
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Text (Unstructured)</FormatTypes>
+      <FormatTypes>Text (Structured)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
       <FormatDescription>ELAN is a professional software tool to manually and semi-automatically annotate and transcribe audio or video recordings. It was developed by the Max Planck Institute for Psycholinguistics in Nijmegen.  The .eaf file contains the annotations.</FormatDescription>
@@ -26,14 +26,17 @@
       <ProvenanceName>
       </ProvenanceName>
       <ProvenanceSourceDate>03 Nov 2021</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>03 Nov 2021</LastUpdatedDate>
+      <ProvenanceDescription>09/2023 (v.115)- MIME Type added 'application/eaf+xml' and modified file type to 'Text (Structured) submitted by the Max Plank Insitute of Phsycholinguisitcs and Monash University.</ProvenanceDescription>
+      <LastUpdatedDate>25 Aug 2023</LastUpdatedDate>
       <FormatNote>EAF Specification für Version 3.0 (2017): www.mpi.nl/tools/elan/EAF_Annotation_Format_3.0_and_ELAN.pdf</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
       </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/eaf+xml</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
       <FileFormatIdentifier>
         <Identifier>fmt/1543</Identifier>
         <IdentifierType>PUID</IdentifierType>

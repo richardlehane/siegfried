@@ -12,7 +12,7 @@
       <FormatTypes>Spreadsheet</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Microsoft Works is a discontinued office software suite developed by Microsoft and available from 1987-2009. It was often available bundled with Windows computers. This format was a forerunner to other spreadsheet editors with grid of cells arranged in rows and numbers. Versions 1-5 were binary files before the .xlr compound files were developed from version 6 onwards.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -23,11 +23,11 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>28 Sep 2009</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>28 Aug 2012</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <ProvenanceDescription>11/2023 (v.115)- Description updated. Modified the offset values in the internal signature from null to 0 as part of a project to match PRONOM data with the xsd standard. Internally researched.</ProvenanceDescription>
+      <LastUpdatedDate>14 Nov 2023</LastUpdatedDate>
+      <FormatNote>https://en.wikipedia.org/wiki/Microsoft_Works
+
+http://justsolve.archiveteam.org/wiki/Microsoft_Works_Spreadsheet</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -57,8 +57,7 @@ EOF: ....</SignatureNote>
           <ByteSequenceID>917</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
@@ -70,10 +69,8 @@ EOF: ....</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>918</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
-          <Offset>
-          </Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

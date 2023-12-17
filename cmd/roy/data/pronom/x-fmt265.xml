@@ -23,9 +23,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <ProvenanceDescription>11/2023 (v.115)- Signature ammended to allow whitespace options. Submitted by National Library of Norway.</ProvenanceDescription>
+      <LastUpdatedDate>15 Nov 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -57,14 +56,13 @@
           <ByteSequenceID>339</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>Little-endian</Endianness>
-          <ByteSequenceValue>[21:EF]{104}[30:37][20:37]00{5}[30:37][20:37]00{5}[30:37][20:37]00{10}[30:37](00|20){10}[30:37](00|20){5}[30:37][00:37](00|20)</ByteSequenceValue>
+          <ByteSequenceValue>[21:EF]{104}[30:37][20:37](00|20){5}[30:37][20:37](00|20){5}[30:37][20:37]00{10}[30:37](00|20){10}[30:37](00|20){5}[30:37][00:37](00|20)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

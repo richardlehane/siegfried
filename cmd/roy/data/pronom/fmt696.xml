@@ -28,7 +28,7 @@
       <ProvenanceSourceDate>11 Feb 2015</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>11 Feb 2015</LastUpdatedDate>
+      <LastUpdatedDate>09 May 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -47,7 +47,7 @@
       <InternalSignature>
         <SignatureID>1025</SignatureID>
         <SignatureName>Sibelius</SignatureName>
-        <SignatureNote>.SIBELIUS</SignatureNote>
+        <SignatureNote>Absolute from beginning of file, magic bytes: .SIBELIUS</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1267</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>

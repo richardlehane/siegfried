@@ -22,7 +22,7 @@
   <!-- a generic icon name as per the Icon Naming Specification, only required if computing
   it from the mime-type would not work, See "generic-icon" in the Shared Mime Specification -->
   <!ELEMENT generic-icon EMPTY>
-  <!ATTLIST generic-icon name (application-x-executable|audio-x-generic|folder|font-x-generic|image-x-generic|package-x-generic|text-html|text-x-generic|text-x-generic-template|text-x-script|video-x-generic|x-office-address-book|x-office-calendar|x-office-document|x-office-presentation|x-office-spreadsheet) #REQUIRED>
+  <!ATTLIST generic-icon name (application-x-executable|audio-x-generic|emblem-symbolic-link|folder|font-x-generic|image-x-generic|media-floppy|media-optical|package-x-generic|text-html|text-x-generic|text-x-generic-template|text-x-script|video-x-generic|x-office-address-book|x-office-calendar|x-office-document|x-office-presentation|x-office-spreadsheet) #REQUIRED>
 
   <!ELEMENT glob EMPTY>
   <!ATTLIST glob pattern CDATA #REQUIRED>
@@ -108,7 +108,7 @@ command to generate the output files.
     <glob pattern="*.ez"/>
   </mime-type>
   <mime-type type="application/epub+zip">
-    <comment>electronic book document</comment>
+    <comment>Electronic book document</comment>
     <sub-class-of type="application/zip"/>
     <generic-icon name="x-office-document"/>
     <magic priority="70">
@@ -136,10 +136,13 @@ command to generate the output files.
   </mime-type>
   <mime-type type="application/mac-binhex40">
     <comment>Macintosh BinHex-encoded file</comment>
+    <sub-class-of type="text/plain"/>
     <generic-icon name="package-x-generic"/>
     <magic>
-      <match type="string" value="must be converted with BinHex" offset="11"/>
+      <match type="string" value="(This file must be converted with BinHex 4.0)" offset="0"/>
+      <match type="string" value="(This file must be converted; you knew that already.)" offset="0"/>
     </magic>
+    <glob pattern="*.hqx"/>
   </mime-type>
   <mime-type type="application/mathematica">
     <comment>Mathematica Notebook file</comment>
@@ -166,7 +169,7 @@ command to generate the output files.
     <root-XML namespaceURI="http://www.w3.org/1998/Math/MathML" localName="math"/>
   </mime-type>
   <mime-type type="application/mbox">
-    <comment>mailbox file</comment>
+    <comment>Mailbox file</comment>
     <generic-icon name="text-x-generic"/>
     <sub-class-of type="text/plain"/>
     <magic priority="20">
@@ -193,7 +196,7 @@ command to generate the output files.
     <root-XML namespaceURI="urn:ietf:params:xml:ns:metalink" localName="metalink"/>
   </mime-type>
   <mime-type type="application/octet-stream">
-    <comment>unknown</comment>
+    <comment>Unknown</comment>
   </mime-type>
   <mime-type type="application/x-partial-download">
     <comment>Partially downloaded file</comment>
@@ -269,8 +272,6 @@ command to generate the output files.
   </mime-type>
   <mime-type type="application/pgp-encrypted">
     <comment>PGP/MIME-encrypted message header</comment>
-    <sub-class-of type="text/plain"/>
-    <generic-icon name="text-x-generic"/>
     <magic>
       <match type="string" value="-----BEGIN PGP MESSAGE-----" offset="0"/>
     </magic>
@@ -283,8 +284,6 @@ command to generate the output files.
     <comment>PGP keys</comment>
     <acronym>PGP</acronym>
     <expanded-acronym>Pretty Good Privacy</expanded-acronym>
-    <sub-class-of type="text/plain"/>
-    <generic-icon name="text-x-generic"/>
     <magic>
       <match type="string" value="-----BEGIN PGP PUBLIC KEY BLOCK-----" offset="0"/>
       <match type="string" value="-----BEGIN PGP PRIVATE KEY BLOCK-----" offset="0"/>
@@ -301,9 +300,7 @@ command to generate the output files.
     <glob pattern="*.key"/>
   </mime-type>
   <mime-type type="application/pgp-signature">
-    <comment>detached OpenPGP signature</comment>
-    <sub-class-of type="text/plain"/>
-    <generic-icon name="text-x-generic"/>
+    <comment>Detached OpenPGP signature</comment>
     <magic>
       <match type="string" value="-----BEGIN PGP SIGNATURE-----" offset="0"/>
     </magic>
@@ -322,7 +319,7 @@ command to generate the output files.
     <glob pattern="*.p7m"/>
   </mime-type>
   <mime-type type="application/pkcs7-signature">
-    <comment>detached S/MIME signature</comment>
+    <comment>Detached S/MIME signature</comment>
     <acronym>S/MIME</acronym>
     <expanded-acronym>Secure/Multipurpose Internet Mail Extensions</expanded-acronym>
     <sub-class-of type="text/plain"/>
@@ -357,7 +354,7 @@ command to generate the output files.
     <glob pattern="*.cer"/>
   </mime-type>
   <mime-type type="application/pkix-crl">
-    <comment>certificate revocation list</comment>
+    <comment>Certificate revocation list</comment>
     <magic>
       <match type="string" value="-----BEGIN X509 CRL-----" offset="0"/>
     </magic>
@@ -388,7 +385,7 @@ command to generate the output files.
     <comment>RAML document</comment>
     <acronym>RAML</acronym>
     <expanded-acronym>RESTful API Modeling Language</expanded-acronym>
-    <sub-class-of type="application/x-yaml"/>
+    <sub-class-of type="application/yaml"/>
     <magic>
       <match type="string" value="#%RAML " offset="0"/>
     </magic>
@@ -417,9 +414,9 @@ command to generate the output files.
   </mime-type>
   <mime-type type="application/sieve">
     <comment>Sieve mail filter script</comment>
-    <sub-class-of type="application/xml"/>
     <generic-icon name="text-x-script"/>
     <glob pattern="*.siv"/>
+    <glob pattern="*.sieve"/>
   </mime-type>
   <mime-type type="application/smil+xml">
     <comment>SMIL document</comment>
@@ -475,7 +472,7 @@ command to generate the output files.
     <glob pattern="*.spx" weight="40"/>
     <root-XML namespaceURI="http://www.apple.com/DTDs/PropertyList-1.0.dtd" localName="plist"/>
   </mime-type>
-  <mime-type type="application/x-gedcom">
+  <mime-type type="text/vnd.familysearch.gedcom">
     <comment>GEDCOM family history</comment>
     <acronym>GEDCOM</acronym>
     <expanded-acronym>GEnealogical Data COMmunication</expanded-acronym>
@@ -486,6 +483,7 @@ command to generate the output files.
     </magic>
     <glob pattern="*.ged"/>
     <glob pattern="*.gedcom"/>
+    <alias type="application/x-gedcom"/>
     <alias type="text/gedcom"/>
   </mime-type>
   <mime-type type="video/x-flv">
@@ -555,6 +553,18 @@ command to generate the output files.
     <sub-class-of type="text/plain"/>
     <glob pattern="*.gd"/>
   </mime-type>
+  <mime-type type="application/its+xml">
+    <comment>ITS translation file</comment>
+    <acronym>ITS</acronym>
+    <expanded-acronym>Internationalization Tag Set</expanded-acronym>
+    <sub-class-of type="application/xml"/>
+    <generic-icon name="text-x-generic"/>
+    <glob pattern="*.its"/>
+    <magic>
+      <match type="string" value="&lt;its" offset="0:256"/>
+    </magic>
+    <root-XML namespaceURI="http://www.w3.org/2005/11/its" localName="its"/>
+  </mime-type>
   <mime-type type="application/xliff+xml">
     <comment>XLIFF translation file</comment>
     <acronym>XLIFF</acronym>
@@ -577,7 +587,7 @@ command to generate the output files.
     <generic-icon name="text-x-generic"/>
     <glob pattern="*.toml"/>
   </mime-type>
-  <mime-type type="application/x-yaml">
+  <mime-type type="application/yaml">
     <comment>YAML document</comment>
     <acronym>YAML</acronym>
     <expanded-acronym>YAML Ain't Markup Language</expanded-acronym>
@@ -588,6 +598,7 @@ command to generate the output files.
     </magic>
     <glob pattern="*.yaml"/>
     <glob pattern="*.yml"/>
+    <alias type="application/x-yaml"/>
     <alias type="text/yaml"/>
     <alias type="text/x-yaml"/>
   </mime-type>
@@ -620,6 +631,14 @@ command to generate the output files.
     <generic-icon name="image-x-generic"/>
     <glob pattern="*.pcl"/>
   </mime-type>
+  <mime-type type="application/vnd.cups-ppd">
+    <comment>PostScript printer description</comment>
+    <sub-class-of type="text/plain"/>
+    <magic>
+      <match type="string" value="*PPD-Adobe:" offset="0"/>
+    </magic>
+    <glob pattern="*.ppd"/>
+  </mime-type>
   <mime-type type="application/vnd.lotus-1-2-3">
     <comment>Lotus 1-2-3 spreadsheet</comment>
     <generic-icon name="x-office-spreadsheet"/>
@@ -645,6 +664,17 @@ command to generate the output files.
     </magic>
     <glob pattern="*.lwp"/>
   </mime-type>
+  <mime-type type="application/x-lmdb">
+    <comment>LMDB database</comment>
+    <acronym>LMDB</acronym>
+    <expanded-acronym>Lightning Memory-Mapped Database</expanded-acronym>
+    <generic-icon name="x-office-document"/>
+    <magic>
+      <match offset="16" type="little32" value="0xBEEFC0DE" />
+    </magic>
+    <glob pattern="*.mdb" />
+    <glob pattern="*.lmdb" />
+  </mime-type>
   <mime-type type="application/vnd.ms-access">
     <comment>JET database</comment>
     <acronym>JET</acronym>
@@ -653,7 +683,7 @@ command to generate the output files.
     <magic>
       <match offset="0" type="string" value="\x00\x01\x00\x00Standard Jet DB" />
     </magic>
-    <glob pattern="*.mdb" />
+    <glob pattern="*.mdb" weight="60"/>
     <alias type="application/msaccess"/>
     <alias type="application/vnd.msaccess"/>
     <alias type="application/x-msaccess"/>
@@ -672,6 +702,7 @@ command to generate the output files.
   </mime-type>
   <mime-type type="application/vnd.ms-excel">
     <comment>Excel spreadsheet</comment>
+    <sub-class-of type="application/x-ole-storage"/>
     <generic-icon name="x-office-spreadsheet"/>
     <magic>
       <match type="string" value="Microsoft Excel 5.0 Worksheet" offset="2080"/>
@@ -714,6 +745,7 @@ command to generate the output files.
   </mime-type>
   <mime-type type="application/vnd.ms-powerpoint">
     <comment>PowerPoint presentation</comment>
+    <sub-class-of type="application/x-ole-storage"/>
     <generic-icon name="x-office-presentation"/>
     <glob pattern="*.ppz"/>
     <glob pattern="*.ppt"/>
@@ -931,7 +963,7 @@ command to generate the output files.
     <alias type="application/vnd.stardivision.writer-global"/>
   </mime-type>
   <mime-type type="application/vnd.sun.xml.calc">
-    <comment>OpenOffice Calc spreadsheet</comment>
+    <comment>LibreOffice Calc spreadsheet</comment>
     <sub-class-of type="application/zip"/>
     <generic-icon name="x-office-spreadsheet"/>
     <magic priority="70">
@@ -944,7 +976,7 @@ command to generate the output files.
     <glob pattern="*.sxc"/>
   </mime-type>
   <mime-type type="application/vnd.sun.xml.calc.template">
-    <comment>OpenOffice Calc template</comment>
+    <comment>LibreOffice Calc template</comment>
     <sub-class-of type="application/zip"/>
     <generic-icon name="x-office-spreadsheet"/>
     <magic priority="70">
@@ -957,7 +989,7 @@ command to generate the output files.
     <glob pattern="*.stc"/>
   </mime-type>
   <mime-type type="application/vnd.sun.xml.draw">
-    <comment>OpenOffice Draw drawing</comment>
+    <comment>LibreOffice Draw drawing</comment>
     <sub-class-of type="application/zip"/>
     <generic-icon name="image-x-generic"/>
     <magic priority="70">
@@ -970,7 +1002,7 @@ command to generate the output files.
     <glob pattern="*.sxd"/>
   </mime-type>
   <mime-type type="application/vnd.sun.xml.draw.template">
-    <comment>OpenOffice Draw template</comment>
+    <comment>LibreOffice Draw template</comment>
     <sub-class-of type="application/zip"/>
     <generic-icon name="image-x-generic"/>
     <magic priority="70">
@@ -983,7 +1015,7 @@ command to generate the output files.
     <glob pattern="*.std"/>
   </mime-type>
   <mime-type type="application/vnd.sun.xml.impress">
-    <comment>OpenOffice Impress presentation</comment>
+    <comment>LibreOffice Impress presentation</comment>
     <sub-class-of type="application/zip"/>
     <generic-icon name="x-office-presentation"/>
     <magic priority="70">
@@ -996,7 +1028,7 @@ command to generate the output files.
     <glob pattern="*.sxi"/>
   </mime-type>
   <mime-type type="application/vnd.sun.xml.impress.template">
-    <comment>OpenOffice Impress template</comment>
+    <comment>LibreOffice Impress template</comment>
     <sub-class-of type="application/zip"/>
     <generic-icon name="x-office-presentation"/>
     <magic priority="70">
@@ -1009,7 +1041,7 @@ command to generate the output files.
     <glob pattern="*.sti"/>
   </mime-type>
   <mime-type type="application/vnd.sun.xml.math">
-    <comment>OpenOffice Math formula</comment>
+    <comment>LibreOffice Math formula</comment>
     <sub-class-of type="application/zip"/>
     <generic-icon name="x-office-document"/>
     <magic priority="70">
@@ -1022,7 +1054,7 @@ command to generate the output files.
     <glob pattern="*.sxm"/>
   </mime-type>
   <mime-type type="application/vnd.sun.xml.writer">
-    <comment>OpenOffice Writer document</comment>
+    <comment>LibreOffice Writer document</comment>
     <sub-class-of type="application/zip"/>
     <generic-icon name="x-office-document"/>
     <magic priority="70">
@@ -1035,7 +1067,7 @@ command to generate the output files.
     <glob pattern="*.sxw"/>
   </mime-type>
   <mime-type type="application/vnd.sun.xml.writer.global">
-    <comment>OpenOffice Writer global document</comment>
+    <comment>LibreOffice Writer global document</comment>
     <sub-class-of type="application/zip"/>
     <generic-icon name="x-office-document"/>
     <magic priority="70">
@@ -1048,7 +1080,7 @@ command to generate the output files.
     <glob pattern="*.sxg"/>
   </mime-type>
   <mime-type type="application/vnd.sun.xml.writer.template">
-    <comment>OpenOffice Writer template</comment>
+    <comment>LibreOffice Writer template</comment>
     <sub-class-of type="application/zip"/>
     <generic-icon name="x-office-document"/>
     <magic priority="70">
@@ -1341,7 +1373,7 @@ command to generate the output files.
   </mime-type>
   <mime-type type="application/vnd.android.package-archive">
     <comment>Android package</comment>
-    <sub-class-of type="application/x-java-archive"/>
+    <sub-class-of type="application/java-archive"/>
     <glob pattern="*.apk"/>
   </mime-type>
   <mime-type type="application/vnd.symbian.install">
@@ -1365,7 +1397,7 @@ command to generate the output files.
     <glob pattern="*.sisx"/>
   </mime-type>
   <mime-type type="application/vnd.tcpdump.pcap">
-    <comment>network packet capture</comment>
+    <comment>Network packet capture</comment>
     <magic>
       <match type="host32" value="0xa1b2c3d4" offset="0"/>
       <match type="host32" value="0xd4c3b2a1" offset="0"/>
@@ -1392,9 +1424,13 @@ command to generate the output files.
     <glob pattern="*.wpd"/>
     <glob pattern="*.wpp"/>
   </mime-type>
-  <mime-type type="application/vnd.youtube.yt">
+  <mime-type type="video/vnd.youtube.yt">
     <comment>YouTube media archive</comment>
+    <alias type="application/vnd.youtube.yt"/>
     <generic-icon name="video-x-generic"/>
+    <magic>
+      <match type="string" value="ftypyt4 " offset="4"/>
+    </magic>
     <glob pattern="*.yt"/>
     <sub-class-of type="application/zip"/>
   </mime-type>
@@ -1472,8 +1508,18 @@ command to generate the output files.
       <match type="string" value="TEXtREAd" offset="60"/>
       <match type="string" value="TEXtTlDc" offset="60"/>
     </magic>
-    <glob pattern="*.pdb"/>
+    <glob pattern="*.pdb" weight="30"/>
     <glob pattern="*.pdc"/>
+  </mime-type>
+  <mime-type type="chemical/x-pdb">
+    <comment>Protein Data Bank file</comment>
+    <sub-class-of type="text/plain"/>
+    <generic-icon name="text-x-generic"/>
+    <magic priority="40">
+      <match type="string" value="HEADER " offset="0"/>
+    </magic>
+    <glob pattern="*.pdb"/>
+    <glob pattern="*.brk"/>
   </mime-type>
   <mime-type type="application/x-applix-spreadsheet">
     <comment>Applix Spreadsheets spreadsheet</comment>
@@ -1591,65 +1637,93 @@ command to generate the output files.
     </magic>
   </mime-type>
   <mime-type type="application/x-bzdvi">
-    <comment>TeX DVI document (bzip-compressed)</comment>
-    <sub-class-of type="application/x-bzip"/>
+    <comment>TeX DVI document (bzip2-compressed)</comment>
+    <sub-class-of type="application/x-bzip2"/>
     <generic-icon name="x-office-document"/>
     <glob pattern="*.dvi.bz2"/>
   </mime-type>
-  <mime-type type="application/x-bzip">
-    <comment>Bzip archive</comment>
+  <mime-type type="application/x-bzip1">
+    <comment>Bzip1 archive</comment>
+    <generic-icon name="package-x-generic"/>
+    <magic>
+      <match type="string" value="BZ0" offset="0"/>
+    </magic>
+    <glob pattern="*.bz"/>
+  </mime-type>
+  <mime-type type="application/x-bzip1-compressed-tar">
+    <comment>Tar archive (bzip1-compressed)</comment>
+    <generic-icon name="package-x-generic"/>
+    <sub-class-of type="application/x-bzip1"/>
+    <glob pattern="*.tar.bz"/>
+    <glob pattern="*.tbz"/>
+  </mime-type>
+  <mime-type type="application/x-bzip2">
+    <comment>Bzip2 archive</comment>
     <generic-icon name="package-x-generic"/>
     <magic>
       <match type="string" value="BZh" offset="0"/>
     </magic>
     <glob pattern="*.bz2"/>
-    <glob pattern="*.bz"/>
-    <alias type="application/x-bzip2"/>
     <alias type="application/bzip2"/>
+    <alias type="application/x-bzip"/>
   </mime-type>
-  <mime-type type="application/x-bzip-compressed-tar">
-    <comment>Tar archive (bzip-compressed)</comment>
+  <mime-type type="application/x-bzip2-compressed-tar">
+    <comment>Tar archive (bzip2-compressed)</comment>
     <generic-icon name="package-x-generic"/>
-    <sub-class-of type="application/x-bzip"/>
+    <sub-class-of type="application/x-bzip2"/>
     <glob pattern="*.tar.bz2"/>
-    <glob pattern="*.tar.bz"/>
     <glob pattern="*.tbz2"/>
-    <glob pattern="*.tbz"/>
     <glob pattern="*.tb2"/>
+    <alias type="application/x-bzip-compressed-tar"/>
+  </mime-type>
+  <mime-type type="application/x-bzip3">
+    <comment>Bzip3 archive</comment>
+    <generic-icon name="package-x-generic"/>
+    <magic>
+      <match type="string" value="BZ3v1" offset="0"/>
+    </magic>
+    <glob pattern="*.bz3"/>
+  </mime-type>
+  <mime-type type="application/x-bzip3-compressed-tar">
+    <comment>Tar archive (bzip3-compressed)</comment>
+    <generic-icon name="package-x-generic"/>
+    <sub-class-of type="application/x-bzip3"/>
+    <glob pattern="*.tar.bz3"/>
+    <glob pattern="*.tbz3"/>
   </mime-type>
   <mime-type type="application/x-bzpdf">
-    <comment>PDF document (bzip-compressed)</comment>
-    <sub-class-of type="application/x-bzip"/>
+    <comment>PDF document (bzip2-compressed)</comment>
+    <sub-class-of type="application/x-bzip2"/>
     <generic-icon name="x-office-document"/>
     <glob pattern="*.pdf.bz2"/>
   </mime-type>
   <mime-type type="application/x-bzpostscript">
-    <comment>PostScript document (bzip-compressed)</comment>
-    <sub-class-of type="application/x-bzip"/>
+    <comment>PostScript document (bzip2-compressed)</comment>
+    <sub-class-of type="application/x-bzip2"/>
     <generic-icon name="x-office-document"/>
     <glob pattern="*.ps.bz2"/>
   </mime-type>
   <mime-type type="application/vnd.comicbook-rar">
-    <comment>comic book archive (rar container)</comment>
+    <comment>Comic book archive (rar container)</comment>
     <sub-class-of type="application/vnd.rar"/>
     <generic-icon name="x-office-document"/>
     <glob pattern="*.cbr"/>
     <alias type="application/x-cbr"/>
   </mime-type>
   <mime-type type="application/x-cb7">
-    <comment>comic book archive (7z container)</comment>
+    <comment>Comic book archive (7z container)</comment>
     <sub-class-of type="application/x-7z-compressed"/>
     <generic-icon name="x-office-document"/>
     <glob pattern="*.cb7"/>
   </mime-type>
   <mime-type type="application/x-cbt">
-    <comment>comic book archive (tar container)</comment>
+    <comment>Comic book archive (tar container)</comment>
     <sub-class-of type="application/x-tar"/>
     <generic-icon name="x-office-document"/>
     <glob pattern="*.cbt"/>
   </mime-type>
   <mime-type type="application/vnd.comicbook+zip">
-    <comment>comic book archive (zip container)</comment>
+    <comment>Comic book archive (zip container)</comment>
     <sub-class-of type="application/zip"/>
     <generic-icon name="x-office-document"/>
     <glob pattern="*.cbz"/>
@@ -1676,14 +1750,16 @@ command to generate the output files.
     <comment>Apple disk image</comment>
     <glob pattern="*.dmg"/>
   </mime-type>
-  <mime-type type="application/x-raw-disk-image">
+  <mime-type type="application/vnd.efi.img">
     <comment>Raw disk image</comment>
+    <alias type="application/x-raw-disk-image"/>
     <glob pattern="*.raw-disk-image"/>
     <glob pattern="*.img"/>
   </mime-type>
   <mime-type type="application/x-raw-floppy-disk-image">
     <comment>Floppy disk image</comment>
-    <sub-class-of type="application/x-raw-disk-image"/>
+    <sub-class-of type="application/vnd.efi.img"/>
+    <generic-icon name="media-floppy"/>
     <alias type="application/x-fd-file"/>
     <glob pattern="*.fd"/>
     <glob pattern="*.qd"/>
@@ -1694,9 +1770,11 @@ command to generate the output files.
     <glob pattern="*.raw-disk-image.xz"/>
     <glob pattern="*.img.xz"/>
   </mime-type>
-  <mime-type type="application/x-cd-image">
-    <comment>raw CD image</comment>
-    <sub-class-of type="application/x-raw-disk-image"/>
+  <mime-type type="application/vnd.efi.iso">
+    <comment>Raw CD image</comment>
+    <sub-class-of type="application/vnd.efi.img"/>
+    <generic-icon name="media-optical"/>
+    <alias type="application/x-cd-image"/>
     <alias type="application/x-iso9660-image"/>
     <!-- No magic, see https://bugs.freedesktop.org/show_bug.cgi?id=10049 -->
     <glob pattern="*.iso" weight="80"/>
@@ -1704,6 +1782,7 @@ command to generate the output files.
   </mime-type>
   <mime-type type="application/x-compressed-iso">
     <comment>Compressed CD image</comment>
+    <generic-icon name="media-optical"/>
     <magic>
       <match value="CISO" type="string" offset="0"/>
     </magic>
@@ -1712,7 +1791,7 @@ command to generate the output files.
   <mime-type type="application/x-iso9660-appimage">
     <comment>AppImage application bundle</comment>
     <sub-class-of type="application/x-executable"/>
-    <sub-class-of type="application/x-cd-image"/>
+    <sub-class-of type="application/vnd.efi.iso"/>
     <generic-icon name="application-x-executable"/>
     <magic>
       <match value="ELF" type="string" offset="1" >
@@ -1752,6 +1831,7 @@ command to generate the output files.
   </mime-type>
   <mime-type type="application/x-discjuggler-cd-image">
     <comment>Padus DiscJuggler CD image</comment>
+    <generic-icon name="media-optical"/>
     <glob pattern="*.cdi"/>
   </mime-type>
   <mime-type type="application/vnd.chess-pgn">
@@ -1793,7 +1873,7 @@ command to generate the output files.
     <glob pattern="*.tgz"/>
   </mime-type>
   <mime-type type="application/x-core">
-    <comment>program crash data</comment>
+    <comment>Program crash data</comment>
     <magic>
       <match type="string" mask="0xffffffff000000000000000000000000ff" value="\177ELF            \004" offset="0"/>
       <match type="string" value="\177ELF" offset="0">
@@ -1828,6 +1908,13 @@ command to generate the output files.
     <generic-icon name="package-x-generic"/>
     <glob pattern="*.cpio.gz"/>
   </mime-type>
+  <mime-type type="application/x-perf-data">
+    <comment>Perf data</comment>
+    <glob pattern="perf.data" case-sensitive="true"/>
+    <magic priority="50">
+      <match type="string" value="PERFILE2" offset="0"/>
+    </magic>
+  </mime-type>
   <mime-type type="application/x-csh">
     <comment>C shell script</comment>
     <sub-class-of type="application/x-shellscript"/>
@@ -1841,19 +1928,19 @@ command to generate the output files.
     </magic>
     <glob pattern="*.csh"/>
   </mime-type>
-  <mime-type type="application/x-dbf">
+  <mime-type type="application/vnd.dbf">
     <comment>Xbase document</comment>
     <generic-icon name="x-office-document"/>
     <glob pattern="*.dbf"/>
-    <alias type="application/x-dbase"/>
-    <alias type="application/dbf"/>
     <alias type="application/dbase"/>
+    <alias type="application/dbf"/>
+    <alias type="application/x-dbase"/>
+    <alias type="application/x-dbf"/>
   </mime-type>
   <mime-type type="application/ecmascript">
     <comment>ECMAScript program</comment>
     <alias type="text/ecmascript"/>
-    <sub-class-of type='application/x-executable'/>
-    <sub-class-of type="text/plain"/>
+    <sub-class-of type="text/javascript"/>
     <generic-icon name="text-x-script"/>
     <glob pattern="*.es"/>
   </mime-type>
@@ -2024,7 +2111,7 @@ command to generate the output files.
   </mime-type>
   <mime-type type="text/x-kaitai-struct">
     <comment>Kaitai Struct definition file</comment>
-    <sub-class-of type="application/x-yaml"/>
+    <sub-class-of type="application/yaml"/>
     <glob pattern="*.ksy"/>
   </mime-type>
   <mime-type type="text/x-qml">
@@ -2044,7 +2131,7 @@ command to generate the output files.
     <glob pattern="*.qmlproject"/>
   </mime-type>
   <mime-type type="application/x-desktop">
-    <comment>desktop entry</comment>
+    <comment>Desktop entry</comment>
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-generic"/>
     <magic>
@@ -2119,7 +2206,7 @@ command to generate the output files.
     <glob pattern="*.egon"/>
   </mime-type>
   <mime-type type="application/x-executable">
-    <comment>executable</comment>
+    <comment>Executable</comment>
     <generic-icon name="application-x-executable"/>
     <magic priority="40">
       <match type="string" value="\177ELF" offset="0">
@@ -2276,6 +2363,18 @@ command to generate the output files.
       <match type="string" value="\x13\x7A\x2B" offset="8"/>
     </magic>
   </mime-type>
+  <mime-type type="application/font-tdpfr">
+    <comment>TDPFR font</comment>
+    <acronym>TDPFR</acronym>
+    <expanded-acronym>TrueDoc Portable Font Resource</expanded-acronym>
+    <generic-icon name="font-x-generic"/>
+    <magic>
+      <match type="big32" value="0x50465230" offset="0"/>
+      <match type="big32" value="0x50465231" offset="0"/>
+    </magic>
+    <glob pattern="*.pfr"/>
+    <alias type="application/vnd.truedoc"/>
+  </mime-type>
   <mime-type type="application/x-font-tex">
     <comment>TeX font</comment>
     <generic-icon name="font-x-generic"/>
@@ -2411,7 +2510,7 @@ command to generate the output files.
     <glob pattern="*.mdx"/>
   </mime-type>
   <mime-type type="application/x-gettext-translation">
-    <comment>translated messages (machine-readable)</comment>
+    <comment>Translated messages (machine-readable)</comment>
     <magic>
       <match type="string" value="\336\22\4\225" offset="0"/>
       <match type="string" value="\225\4\22\336" offset="0"/>
@@ -2529,12 +2628,12 @@ command to generate the output files.
       <match type="string" value="S T O P" offset="0"/>
     </magic>
   </mime-type>
-  <mime-type type="application/x-java-archive">
+  <mime-type type="application/java-archive">
     <comment>Java archive</comment>
     <sub-class-of type="application/zip"/>
     <generic-icon name="package-x-generic"/>
     <alias type="application/x-jar"/>
-    <alias type="application/java-archive"/>
+    <alias type="application/x-java-archive"/>
     <glob pattern="*.jar"/>
   </mime-type>
   <mime-type type="application/x-java">
@@ -2600,11 +2699,13 @@ command to generate the output files.
     </magic>
     <glob pattern="*.pack"/>
   </mime-type>
-  <mime-type type="application/javascript">
+  <mime-type type="text/javascript">
     <comment>JavaScript program</comment>
     <alias type="application/x-javascript"/>
-    <alias type="text/javascript"/>
-    <sub-class-of type="application/ecmascript"/>
+    <alias type="application/javascript"/>
+    <alias type="text/jscript"/>
+    <sub-class-of type="application/x-executable"/>
+    <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-script"/>
     <magic>
       <match type="string" value="#!/bin/gjs" offset="0"/>
@@ -2622,13 +2723,30 @@ command to generate the output files.
     <glob pattern="*.jsm"/>
     <glob pattern="*.mjs"/>
   </mime-type>
+  <mime-type type="text/jscript.encode">
+    <comment>Encoded JScript program</comment>
+    <sub-class-of type="application/x-executable"/>
+    <generic-icon name="text-x-script"/>
+    <magic>
+      <match type="string" value="#@~^" offset="0"/>
+    </magic>
+    <glob pattern="*.jse"/>
+  </mime-type>
   <mime-type type="application/json">
     <comment>JSON document</comment>
     <acronym>JSON</acronym>
     <expanded-acronym>JavaScript Object Notation</expanded-acronym>
-    <sub-class-of type="application/javascript"/>
+    <sub-class-of type="application/json5"/>
     <generic-icon name="text-x-script"/>
     <glob pattern="*.json"/>
+  </mime-type>
+  <mime-type type="application/json5">
+    <comment>JSON5 document</comment>
+    <acronym>JSON5</acronym>
+    <expanded-acronym>JavaScript Object Notation 5</expanded-acronym>
+    <sub-class-of type="text/javascript"/>
+    <generic-icon name="text-x-script"/>
+    <glob pattern="*.json5"/>
   </mime-type>
   <mime-type type="application/jrd+json">
     <comment>JRD document</comment>
@@ -2939,7 +3057,7 @@ command to generate the output files.
     <glob pattern="*.lhz"/>
   </mime-type>
   <mime-type type="text/vnd.trolltech.linguist">
-    <comment>message catalog</comment>
+    <comment>Message catalog</comment>
     <sub-class-of type="application/xml"/>
     <magic>
       <match type="string" value="&lt;TS " offset="0:256"/>
@@ -3163,17 +3281,109 @@ command to generate the output files.
     </magic>
     <alias type="application/x-netscape-bookmarks"/>
   </mime-type>
-  <mime-type type="application/x-ms-dos-executable">
-    <comment>DOS/Windows executable</comment>
+  <mime-type type="application/x-msdownload">
+    <comment>Windows or DOS program</comment>
+    <acronym>DOS</acronym>
+    <expanded-acronym>Disk Operating System</expanded-acronym>
+    <sub-class-of type="application/x-executable"/>
     <generic-icon name="application-x-executable"/>
     <magic>
       <match type="string" value="MZ" offset="0"/>
     </magic>
     <glob pattern="*.exe"/>
+    <glob pattern="*.dll"/>
+    <glob pattern="*.cpl"/>
+    <glob pattern="*.drv"/>
+    <glob pattern="*.scr"/>
+    <alias type="application/x-ms-dos-executable"/>
+  </mime-type>
+  <mime-type type="application/x-dosexec">
+    <comment>DOS executable</comment>
+    <acronym>DOS</acronym>
+    <expanded-acronym>Disk Operating System</expanded-acronym>
+    <sub-class-of type="application/x-msdownload"/>
+    <generic-icon name="application-x-executable"/>
+    <magic priority="60">
+      <match type="string" value="MZ" offset="0">
+        <match type="little16" mask="0xffc0" value="0" offset="24"/>
+      </match>
+    </magic>
+    <glob pattern="*.exe" weight="30"/>
+  </mime-type>
+  <mime-type type="application/x-ms-ne-executable">
+    <comment>16-bit Windows program</comment>
+    <sub-class-of type="application/x-msdownload"/>
+    <generic-icon name="application-x-executable"/>
+    <magic priority="70">
+      <match type="string" value="MZ" offset="0">
+        <match type="string" value="NE" offset="64:256"/>
+      </match>
+    </magic>
+    <glob pattern="*.exe" weight="20"/>
+    <glob pattern="*.dll" weight="20"/>
+    <glob pattern="*.cpl" weight="20"/>
+    <glob pattern="*.drv" weight="20"/>
+    <glob pattern="*.scr" weight="20"/>
+  </mime-type>
+  <mime-type type="application/vnd.microsoft.portable-executable">
+    <comment>Windows or EFI program</comment>
+    <acronym>EFI</acronym>
+    <expanded-acronym>Extensible Firmware Interface</expanded-acronym>
+    <sub-class-of type="application/x-msdownload"/>
+    <generic-icon name="application-x-executable"/>
+    <magic priority="80">
+      <match type="string" value="MZ" offset="0">
+        <match type="string" value="PE\0\0" offset="64:256"/>
+      </match>
+    </magic>
+    <glob pattern="*.exe" weight="40"/>
+    <glob pattern="*.dll" weight="40"/>
+    <glob pattern="*.cpl" weight="40"/>
+    <glob pattern="*.drv" weight="40"/>
+    <glob pattern="*.scr" weight="40"/>
+    <glob pattern="*.efi"/>
+    <glob pattern="*.ocx"/>
+    <glob pattern="*.sys"/>
+    <glob pattern="*.lib"/>
+  </mime-type>
+  <mime-type type="application/x-ms-pdb">
+    <comment>Windows program database</comment>
+    <magic>
+      <match type="string" value="Microsoft C/C++ MSF 7.00\r\n\x1aDS" offset="0"/>
+      <match type="string" value="Microsoft C/C++ program database 2.00\r\n\x1aJG" offset="0"/>
+    </magic>
+    <glob pattern="*.pdb"/>
+  </mime-type>
+  <mime-type type="application/x-bat">
+    <comment>DOS/Windows batch file</comment>
+    <sub-class-of type="text/plain"/>
+    <alias type="application/bat"/>
+    <generic-icon name="text-x-script"/>
+    <glob pattern="*.bat"/>
+  </mime-type>
+  <mime-type type="application/x-powershell">
+    <comment>PowerShell script</comment>
+    <sub-class-of type="text/plain"/>
+    <generic-icon name="text-x-script"/>
+    <magic>
+      <match type="string" value="#Requires -PSEdition Core" offset="0"/>
+      <match type="string" value="#Requires -PSEdition Desktop" offset="0"/>
+    </magic>
+    <glob pattern="*.ps1"/>
+  </mime-type>
+  <mime-type type="application/x-ms-shortcut">
+    <comment>Windows shortcut</comment>
+    <generic-icon name="emblem-symbolic-link"/>
+    <magic>
+      <match type="string" value="\x4c\x00\x00\x00\x01\x14\x02\x00\x00\x00\x00\x00\xc0\x00\x00\x00\x00\x00\x00\x46" offset="0"/>
+    </magic>
+    <glob pattern="*.lnk"/>
+    <alias type="application/x-win-lnk"/>
   </mime-type>
   <mime-type type="application/x-mswinurl">
     <comment>Internet shortcut</comment>
     <sub-class-of type="text/plain"/>
+    <generic-icon name="emblem-symbolic-link"/>
     <magic>
       <match type="string" value="InternetShortcut" offset="1"/>
       <match type="string" value="DEFAULT" offset="1">
@@ -3269,7 +3479,7 @@ command to generate the output files.
     <glob pattern="*.nzb"/>
   </mime-type>
   <mime-type type="application/x-object">
-    <comment>object code</comment>
+    <comment>Object code</comment>
     <generic-icon name="x-office-document"/>
     <magic>
       <match type="string" value="\177ELF" offset="0">
@@ -3444,6 +3654,18 @@ command to generate the output files.
       <match type="little32" value="0xe011cfd0" offset="0"/>
     </magic>
   </mime-type>
+  <mime-type type="application/vnd.microsoft.windows.thumbnail-cache">
+    <comment>Microsoft Windows Thumbnail Cache</comment>
+    <sub-class-of type="application/x-ole-storage"/>
+    <generic-icon name="image-x-generic"/>
+    <glob pattern="ehthumbs.db"/>
+    <glob pattern="ehthumbs_vista.db"/>
+    <glob pattern="image.db"/>
+    <glob pattern="musicthumbs.db"/>
+    <glob pattern="thumbs.db"/>
+    <glob pattern="tvthumb.db"/>
+    <glob pattern="video.db"/>
+  </mime-type>
   <mime-type type="application/vnd.ms-publisher">
     <comment>Microsoft Publisher document</comment>
     <sub-class-of type="application/x-ole-storage"/>
@@ -3452,7 +3674,41 @@ command to generate the output files.
   <mime-type type="application/x-msi">
     <comment>Windows Installer package</comment>
     <sub-class-of type="application/x-ole-storage"/>
+    <generic-icon name="package-x-generic"/>
     <glob pattern="*.msi"/>
+  </mime-type>
+  <mime-type type="application/appx">
+    <comment>Windows app store package</comment>
+    <sub-class-of type="application/zip"/>
+    <generic-icon name="package-x-generic"/>
+    <glob pattern="*.appx"/>
+  </mime-type>
+  <mime-type type="application/msix">
+    <comment>Windows app store package</comment>
+    <sub-class-of type="application/zip"/>
+    <generic-icon name="package-x-generic"/>
+    <glob pattern="*.msix"/>
+  </mime-type>
+  <mime-type type="application/appxbundle">
+    <comment>Windows app store bundle</comment>
+    <sub-class-of type="application/zip"/>
+    <generic-icon name="package-x-generic"/>
+    <glob pattern="*.appxbundle"/>
+  </mime-type>
+  <mime-type type="application/msixbundle">
+    <comment>Windows app store bundle</comment>
+    <sub-class-of type="application/zip"/>
+    <generic-icon name="package-x-generic"/>
+    <glob pattern="*.msixbundle"/>
+  </mime-type>
+  <mime-type type="application/appinstaller">
+    <comment>Windows app store installer</comment>
+    <sub-class-of type="application/xml"/>
+    <generic-icon name="package-x-generic"/>
+    <magic>
+      <match type="string" value="&lt;AppInstaller" offset="0:256"/>
+    </magic>
+    <glob pattern="*.appinstaller"/>
   </mime-type>
   <mime-type type="application/x-oleo">
     <comment>GNU Oleo spreadsheet</comment>
@@ -3465,15 +3721,12 @@ command to generate the output files.
   <mime-type type="application/x-pak">
     <comment>PAK archive</comment>
     <generic-icon name="package-x-generic"/>
-    <magic priority="80">
-      <match offset="0" type="string" value="PACK" />
-    </magic>
     <glob pattern="*.pak" />
   </mime-type>
   <mime-type type="application/vnd.palm">
     <comment>Palm OS database</comment>
     <glob pattern="*.prc"/>
-    <glob pattern="*.pdb"/>
+    <glob pattern="*.pdb" weight="40"/>
     <glob pattern="*.pqa"/>
     <glob pattern="*.oprc"/>
     <alias type="application/x-palm-database"/>
@@ -3569,7 +3822,7 @@ command to generate the output files.
     <glob pattern="*.psw"/>
   </mime-type>
   <mime-type type="application/x-profile">
-    <comment>profiler results</comment>
+    <comment>Profiler results</comment>
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-generic"/>
     <glob pattern="gmon.out"/>
@@ -3655,7 +3908,7 @@ command to generate the output files.
     <glob pattern="*.alz"/>
   </mime-type>
   <mime-type type="text/x-reject">
-    <comment>rejected patch</comment>
+    <comment>Rejected patch</comment>
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-generic"/>
     <alias type="application/x-reject"/>
@@ -3700,6 +3953,11 @@ command to generate the output files.
     <glob pattern="*.cr"/>
     <alias type="text/crystal"/>
   </mime-type>
+  <mime-type type="text/julia">
+    <comment>Julia source code</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.jl"/>
+  </mime-type>  
   <mime-type type="text/rust">
     <comment>Rust source code</comment>
     <sub-class-of type="text/plain"/>
@@ -3713,18 +3971,18 @@ command to generate the output files.
     </magic>
   </mime-type>
   <mime-type type="application/x-shar">
-    <comment>shell archive</comment>
+    <comment>Shell archive</comment>
     <generic-icon name="package-x-generic"/>
     <glob pattern="*.shar"/>
   </mime-type>
   <mime-type type="application/x-shared-library-la">
-    <comment>libtool shared library</comment>
+    <comment>Libtool shared library</comment>
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-script"/>
     <glob pattern="*.la"/>
   </mime-type>
   <mime-type type="application/x-sharedlib">
-    <comment>shared library</comment>
+    <comment>Shared library</comment>
     <magic>
       <match type="little16" value="0603" offset="0">
         <match type="little16" mask="030000" value="020000" offset="22"/>
@@ -3734,7 +3992,7 @@ command to generate the output files.
     <glob weight="60" pattern="*.so.[0-9]*"/>
   </mime-type>
   <mime-type type="application/x-shellscript">
-    <comment>shell script</comment>
+    <comment>Shell script</comment>
     <sub-class-of type="application/x-executable"/>
     <sub-class-of type="text/plain"/>
     <alias type="text/x-sh"/>
@@ -3753,6 +4011,28 @@ command to generate the output files.
       <match type="string" value="/bin/env ksh" offset="2:16"/>
     </magic>
     <glob pattern="*.sh"/>
+  </mime-type>
+  <mime-type type="application/x-fishscript">
+    <comment>Fish shell script</comment>
+    <sub-class-of type="application/x-executable"/>
+    <sub-class-of type="text/plain"/>
+    <alias type="text/x-fish"/>
+    <generic-icon name="text-x-script"/>
+    <magic>
+      <match type="string" value="/bin/env fish" offset="2:16"/>
+    </magic>
+    <glob pattern="*.fish"/>
+  </mime-type>
+  <mime-type type="application/x-nuscript">
+    <comment>Nu shell script</comment>
+    <sub-class-of type="application/x-executable"/>
+    <sub-class-of type="text/plain"/>
+    <alias type="text/x-nu"/>
+    <generic-icon name="text-x-script"/>
+    <magic>
+      <match type="string" value="/bin/env nu" offset="2:16"/>
+    </magic>
+    <glob pattern="*.nu"/>
   </mime-type>
   <mime-type type="application/vnd.adobe.flash.movie">
     <comment>Shockwave Flash file</comment>
@@ -3843,6 +4123,15 @@ command to generate the output files.
     </magic>
     <glob pattern="*.sit"/>
   </mime-type>
+  <mime-type type="application/x-stuffitx">
+    <comment>StuffIt X archive</comment>
+    <generic-icon name="package-x-generic"/>
+    <alias type="application/x-sitx"/>
+    <magic priority="60">
+      <match type="string" value="StuffIt!" offset="0"/>
+    </magic>
+    <glob pattern="*.sitx"/>
+  </mime-type>
   <mime-type type="application/x-subrip">
     <comment>SubRip subtitles</comment>
     <alias type="application/x-srt"/>
@@ -3889,7 +4178,7 @@ command to generate the output files.
     <glob pattern="*.sub"/>
   </mime-type>
   <mime-type type="text/x-mpl2">
-    <comment>MPlayer2 subtitles</comment>
+    <comment>MPL2 subtitles</comment>
     <sub-class-of type="text/plain"/>
     <magic>
       <match type="string" value="[1]" offset="0"/>
@@ -3899,11 +4188,9 @@ command to generate the output files.
     <glob pattern="*.mpl"/>
   </mime-type>
   <mime-type type="text/x-mpsub">
-    <comment>MPSub subtitles</comment>
-    <acronym>MPSub</acronym>
-    <expanded-acronym>MPlayer Subtitle</expanded-acronym>
+    <comment>MPlayer subtitles</comment>
     <sub-class-of type="text/plain"/>
-    <magic>
+    <magic priority="40">
       <match type="string" value="FORMAT=" offset="0:256"/>
     </magic>
     <glob pattern="*.sub"/>
@@ -4012,12 +4299,12 @@ command to generate the output files.
     <glob pattern="*.taz"/>
   </mime-type>
   <mime-type type="application/x-tex-gf">
-    <comment>generic font file</comment>
+    <comment>Generic font file</comment>
     <generic-icon name="font-x-generic"/>
     <glob pattern="*.gf"/>
   </mime-type>
   <mime-type type="application/x-tex-pk">
-    <comment>packed font file</comment>
+    <comment>Packed font file</comment>
     <generic-icon name="font-x-generic"/>
     <glob pattern="*.pk"/>
   </mime-type>
@@ -4030,7 +4317,7 @@ command to generate the output files.
     <glob pattern="*.obj"/>
   </mime-type>
   <mime-type type="application/x-theme">
-    <comment>theme</comment>
+    <comment>Theme</comment>
     <sub-class-of type="application/x-desktop"/>
     <generic-icon name="package-x-generic"/>
     <glob pattern="*.theme"/>
@@ -4040,7 +4327,7 @@ command to generate the output files.
     <generic-icon name="x-office-document"/>
   </mime-type>
   <mime-type type="application/x-trash">
-    <comment>backup file</comment>
+    <comment>Backup file</comment>
     <glob pattern="*~"/>
     <glob pattern="*%"/>
     <glob pattern="*.bak"/>
@@ -4094,6 +4381,14 @@ command to generate the output files.
     <generic-icon name="package-x-generic"/>
     <glob pattern="*.tar.xz"/>
     <glob pattern="*.txz"/>
+  </mime-type>
+  <mime-type type="application/x-zpaq">
+    <comment>Zpaq Archive</comment>
+    <generic-icon name="package-x-generic"/>
+    <magic>
+      <match type="string" value="7kSt" offset="0"/>
+    </magic>
+    <glob pattern="*.zpaq"/>
   </mime-type>
   <mime-type type="application/zstd">
     <comment>Zstandard archive</comment>
@@ -4155,7 +4450,7 @@ command to generate the output files.
     <glob pattern="*.pem"/>
   </mime-type>
   <mime-type type="application/x-zerosize">
-    <comment>empty document</comment>
+    <comment>Empty document</comment>
   </mime-type>
   <mime-type type="application/x-zoo">
     <comment>Zoo archive</comment>
@@ -4342,6 +4637,13 @@ command to generate the output files.
     </magic>
     <glob pattern="*.aax"/>
   </mime-type>
+  <mime-type type="audio/vnd.audible.aaxc">
+    <comment>Audible Enhanced audio</comment>
+    <magic priority="50">
+      <match type="string" value="ftypaaxc" offset="4"/>
+    </magic>
+    <glob pattern="*.aaxc"/>
+  </mime-type>
   <mime-type type="audio/x-dff">
     <comment>DSDIFF audio</comment>
     <acronym>DSDIFF</acronym>
@@ -4390,6 +4692,15 @@ command to generate the output files.
     <glob pattern="*.flac"/>
     <alias type="audio/x-flac"/>
   </mime-type>
+  <mime-type type="audio/x-tak">
+    <comment>TAK audio</comment>
+    <acronym>TAK</acronym>
+    <expanded-acronym>Tom's lossless Audio Kompressor</expanded-acronym>
+    <magic>
+      <match type="string" value="tBaK" offset="0"/>
+    </magic>
+    <glob pattern="*.tak"/>
+  </mime-type>
   <mime-type type="audio/x-wavpack">
     <comment>WavPack audio</comment>
     <magic>
@@ -4418,7 +4729,7 @@ command to generate the output files.
     <glob pattern="*.kar"/>
   </mime-type>
   <mime-type type="audio/x-mo3">
-    <comment>compressed Tracker audio</comment>
+    <comment>Compressed Tracker audio</comment>
     <magic>
       <match type="string" value="MO3" offset="0"/>
     </magic>
@@ -4772,10 +5083,11 @@ command to generate the output files.
     <comment>VOC audio</comment>
     <glob pattern="*.voc"/>
   </mime-type>
-  <mime-type type="audio/x-wav">
+  <mime-type type="audio/vnd.wave">
     <comment>WAV audio</comment>
     <alias type="audio/wav"/>
-    <alias type="audio/vnd.wave"/>
+    <alias type="audio/x-wav"/>
+    <sub-class-of type="application/x-riff"/>
     <magic>
       <match type="string" value="WAVE" offset="8"/>
       <match type="string" value="WAV " offset="8"/>
@@ -4783,7 +5095,7 @@ command to generate the output files.
     <glob pattern="*.wav"/>
   </mime-type>
   <mime-type type="audio/x-xi">
-    <comment>Scream Tracker instrument</comment>
+    <comment>FastTracker II instrument</comment>
     <magic>
       <match value="Extended Instrument:" type="string" offset="0"/>
     </magic>
@@ -4881,6 +5193,7 @@ command to generate the output files.
     <glob pattern="*.jpg"/>
     <glob pattern="*.jpeg"/>
     <glob pattern="*.jpe"/>
+    <glob pattern="*.jfif"/>
     <alias type="image/pjpeg"/>
   </mime-type>
   <mime-type type="video/x-mjpeg">
@@ -5017,7 +5330,7 @@ command to generate the output files.
     <glob pattern="*.ufraw"/>
   </mime-type>
   <mime-type type="image/x-dcraw">
-    <comment>digital raw image</comment>
+    <comment>Digital raw image</comment>
   </mime-type>
   <mime-type type="image/x-adobe-dng">
     <comment>Adobe DNG negative</comment>
@@ -5202,9 +5515,23 @@ command to generate the output files.
     <acronym>PNG</acronym>
     <expanded-acronym>Portable Network Graphics</expanded-acronym>
     <magic>
-      <match type="string" value="\x89PNG" offset="0"/>
+      <match type="string" value="\x89PNG\r\n\x1A\n" offset="0"/>
     </magic>
     <glob pattern="*.png"/>
+  </mime-type>
+  <mime-type type="image/apng">
+    <comment>Animated PNG image</comment>
+    <acronym>PNG</acronym>
+    <expanded-acronym>Portable Network Graphics</expanded-acronym>
+    <sub-class-of type="image/png"/>
+    <magic priority="60">
+      <match type="string" value="\x89PNG\r\n\x1A\n" offset="0">
+        <match type="string" value="acTL" offset="37"/>
+      </match>
+    </magic>
+    <glob pattern="*.apng"/>
+    <glob pattern="*.png" weight="40"/>
+    <alias type="image/vnd.mozilla.apng"/>
   </mime-type>
   <mime-type type="image/rle">
     <comment>RLE bitmap image</comment>
@@ -5231,7 +5558,7 @@ command to generate the output files.
     <root-XML namespaceURI="http://www.w3.org/2000/svg" localName="svg"/>
   </mime-type>
   <mime-type type="image/svg+xml-compressed">
-    <comment>compressed SVG image</comment>
+    <comment>Compressed SVG image</comment>
     <acronym>SVG</acronym>
     <expanded-acronym>Scalable Vector Graphics</expanded-acronym>
     <sub-class-of type="application/gzip"/>
@@ -5276,6 +5603,18 @@ command to generate the output files.
       <match type="string" value="\x45\x50\x2A\x00" offset="0"/>
     </magic>
   </mime-type>
+  <mime-type type="image/jxr">
+    <comment>JPEG XR image</comment>
+    <acronym>XR</acronym>
+    <expanded-acronym>Extended Range</expanded-acronym>
+    <glob pattern="*.jxr"/>
+    <glob pattern="*.hdp"/>
+    <glob pattern="*.wdp"/>
+    <magic>
+      <match type="string" value="II\xBC\x01" offset="0"/>
+    </magic>
+    <alias type="image/vnd.ms-photo"/>
+  </mime-type>
   <mime-type type="image/webp">
     <comment>WebP image</comment>
     <magic>
@@ -5302,8 +5641,8 @@ command to generate the output files.
     <glob pattern="*.ag"/>
   </mime-type>
   <mime-type type="image/x-bzeps">
-    <comment>EPS image (bzip-compressed)</comment>
-    <sub-class-of type="application/x-bzip"/>
+    <comment>EPS image (bzip2-compressed)</comment>
+    <sub-class-of type="application/x-bzip2"/>
     <glob pattern="*.eps.bz2"/>
     <glob pattern="*.epsi.bz2"/>
     <glob pattern="*.epsf.bz2"/>
@@ -5313,7 +5652,7 @@ command to generate the output files.
     <glob pattern="*.ras"/>
   </mime-type>
   <mime-type type="image/x-compressed-xcf">
-    <comment>compressed GIMP image</comment>
+    <comment>Compressed GIMP image</comment>
     <glob pattern="*.xcf.gz"/>
     <glob pattern="*.xcf.bz2"/>
   </mime-type>
@@ -5521,6 +5860,7 @@ command to generate the output files.
     <comment>PCD image</comment>
     <acronym>PCD</acronym>
     <expanded-acronym>PhotoCD</expanded-acronym>
+    <generic-icon name="media-optical"/>
     <glob pattern="*.pcd"/>
   </mime-type>
   <mime-type type="image/x-portable-anymap">
@@ -5767,41 +6107,41 @@ command to generate the output files.
     <glob pattern="*.xwd"/>
   </mime-type>
   <mime-type type="inode/blockdevice">
-    <comment>block device</comment>
+    <comment>Block device</comment>
   </mime-type>
   <mime-type type="inode/chardevice">
-    <comment>character device</comment>
+    <comment>Character device</comment>
   </mime-type>
   <mime-type type="inode/directory">
-    <comment>folder</comment>
+    <comment>Folder</comment>
     <generic-icon name="folder"/>
     <alias type="x-directory/normal"/>
   </mime-type>
   <mime-type type="inode/fifo">
-    <comment>pipe</comment>
+    <comment>Pipe</comment>
   </mime-type>
   <mime-type type="inode/mount-point">
-    <comment>mount point</comment>
+    <comment>Mount point</comment>
     <sub-class-of type="inode/directory"/>
   </mime-type>
   <mime-type type="inode/socket">
-    <comment>socket</comment>
+    <comment>Socket</comment>
   </mime-type>
   <mime-type type="inode/symlink">
-    <comment>symbolic link</comment>
+    <comment>Symbolic link</comment>
   </mime-type>
   <mime-type type="message/delivery-status">
-    <comment>mail delivery report</comment>
+    <comment>Mail delivery report</comment>
     <generic-icon name="text-x-generic"/>
     <sub-class-of type="text/plain"/>
   </mime-type>
   <mime-type type="message/disposition-notification">
-    <comment>mail disposition report</comment>
+    <comment>Mail disposition report</comment>
     <generic-icon name="text-x-generic"/>
     <sub-class-of type="text/plain"/>
   </mime-type>
   <mime-type type="message/external-body">
-    <comment>reference to remote file</comment>
+    <comment>Reference to remote file</comment>
     <generic-icon name="text-x-generic"/>
   </mime-type>
   <mime-type type="message/news">
@@ -5815,16 +6155,17 @@ command to generate the output files.
     </magic>
   </mime-type>
   <mime-type type="message/partial">
-    <comment>partial email message</comment>
+    <comment>Partial email message</comment>
     <generic-icon name="text-x-generic"/>
     <sub-class-of type="text/plain"/>
   </mime-type>
   <mime-type type="message/rfc822">
-    <comment>email message</comment>
+    <comment>Email message</comment>
     <generic-icon name="text-x-generic"/>
     <sub-class-of type="text/plain"/>
     <magic>
       <match type="string" value="#! rnews" offset="0"/>
+      <match type="string" value="Content-Type:" offset="0"/>
       <match type="string" value="Forward to" offset="0"/>
       <match type="string" value="From:" offset="0"/>
       <match type="string" value="N#! rnews" offset="0"/>
@@ -5834,6 +6175,7 @@ command to generate the output files.
       <match type="string" value="Return-Path:" offset="0"/>
       <match type="string" value="Return-path:" offset="0"/>
       <match type="string" value="Subject: " offset="0"/>
+      <match type="string" value="To:" offset="0"/>
     </magic>
     <glob pattern="*.eml"/>
   </mime-type>
@@ -5859,6 +6201,7 @@ command to generate the output files.
     <comment>glTF model</comment>
     <acronym>glTF</acronym>
     <expanded-acronym>GL Transmission Format</expanded-acronym>
+    <generic-icon name="image-x-generic"/>
     <magic>
       <match type="string" value="glTF" offset="0"/>
     </magic>
@@ -5868,6 +6211,7 @@ command to generate the output files.
     <comment>glTF model</comment>
     <acronym>glTF</acronym>
     <expanded-acronym>GL Transmission Format</expanded-acronym>
+    <generic-icon name="image-x-generic"/>
     <sub-class-of type="application/json"/>
     <glob pattern="*.gltf"/>
   </mime-type>
@@ -5887,6 +6231,7 @@ command to generate the output files.
   <mime-type type="model/obj">
     <comment>OBJ 3D model</comment>
     <sub-class-of type="text/plain"/>
+    <generic-icon name="image-x-generic"/>
     <magic>
       <match type="string" value=" OBJ File: '" offset="0:64"/>
       <match type="string" value="mtllib " offset="0:256"/>
@@ -5895,6 +6240,7 @@ command to generate the output files.
   </mime-type>
   <mime-type type="model/mtl">
     <comment>OBJ 3D model material library</comment>
+    <generic-icon name="image-x-generic"/>
     <sub-class-of type="text/plain"/>
     <magic>
       <match type="string" value="# Blender MTL File: '" offset="0"/>
@@ -5903,31 +6249,31 @@ command to generate the output files.
     <glob pattern="*.mtl"/>
   </mime-type>
   <mime-type type="multipart/alternative">
-    <comment>message in several formats</comment>
+    <comment>Message in several formats</comment>
   </mime-type>
   <mime-type type="multipart/appledouble">
     <comment>Macintosh AppleDouble-encoded file</comment>
   </mime-type>
   <mime-type type="multipart/digest">
-    <comment>message digest</comment>
+    <comment>Message digest</comment>
   </mime-type>
   <mime-type type="multipart/encrypted">
-    <comment>encrypted message</comment>
+    <comment>Encrypted message</comment>
   </mime-type>
   <mime-type type="multipart/mixed">
-    <comment>compound documents</comment>
+    <comment>Compound documents</comment>
   </mime-type>
   <mime-type type="multipart/related">
-    <comment>compound document</comment>
+    <comment>Compound document</comment>
   </mime-type>
   <mime-type type="multipart/report">
-    <comment>mail system report</comment>
+    <comment>Mail system report</comment>
   </mime-type>
   <mime-type type="multipart/signed">
-    <comment>signed message</comment>
+    <comment>Signed message</comment>
   </mime-type>
   <mime-type type="multipart/x-mixed-replace">
-    <comment>stream of data (server push)</comment>
+    <comment>Stream of data (server push)</comment>
   </mime-type>
   <mime-type type="text/calendar">
     <comment>VCS/ICS calendar</comment>
@@ -5951,7 +6297,7 @@ command to generate the output files.
     <glob pattern="*.css"/>
   </mime-type>
   <mime-type type="text/vcard">
-    <comment>electronic business card</comment>
+    <comment>Electronic business card</comment>
     <alias type="text/directory"/>
     <alias type="text/x-vcard"/>
     <sub-class-of type="text/plain"/>
@@ -6002,15 +6348,15 @@ command to generate the output files.
     <glob pattern="*.vhdl"/>
   </mime-type>
   <mime-type type="text/enriched">
-    <comment>enriched text document</comment>
+    <comment>Enriched text document</comment>
     <sub-class-of type="text/plain"/>
   </mime-type>
   <mime-type type="text/htmlh">
-    <comment>help page</comment>
+    <comment>Help page</comment>
     <sub-class-of type="text/plain"/>
   </mime-type>
   <mime-type type="text/plain">
-    <comment>plain text document</comment>
+    <comment>Plain text document</comment>
     <magic>
       <match type="string" value="This is TeX," offset="0"/>
       <match type="string" value="This is METAFONT," offset="0"/>
@@ -6031,7 +6377,7 @@ command to generate the output files.
     <root-XML namespaceURI="http://www.w3.org/1999/02/22-rdf-syntax-ns#" localName="RDF"/>
   </mime-type>
   <mime-type type="text/x-rst">
-    <comment>reStructuredText document</comment>
+    <comment>ReStructuredText document</comment>
     <sub-class-of type="text/plain"/>
     <glob pattern="*.rst"/>
   </mime-type>
@@ -6047,11 +6393,11 @@ command to generate the output files.
     <root-XML namespaceURI="http://www.w3.org/2002/07/owl#" localName="Ontology"/>
   </mime-type>
   <mime-type type="text/rfc822-headers">
-    <comment>email headers</comment>
+    <comment>Email headers</comment>
     <sub-class-of type="text/plain"/>
   </mime-type>
   <mime-type type="text/richtext">
-    <comment>rich text document</comment>
+    <comment>Rich text document</comment>
     <sub-class-of type="text/plain"/>
     <glob pattern="*.rtx"/>
   </mime-type>
@@ -6099,7 +6445,7 @@ command to generate the output files.
     <glob pattern="*.sgm"/>
   </mime-type>
   <mime-type type="text/spreadsheet">
-    <comment>spreadsheet interchange document</comment>
+    <comment>Spreadsheet interchange document</comment>
     <sub-class-of type="text/plain"/>
     <magic>
       <match type="string" value="ID;" offset="0"/>
@@ -6169,7 +6515,7 @@ command to generate the output files.
     <glob pattern="*.ads"/>
   </mime-type>
   <mime-type type="text/x-authors">
-    <comment>author list</comment>
+    <comment>Author list</comment>
     <sub-class-of type="text/plain"/>
     <glob pattern="AUTHORS"/>
   </mime-type>
@@ -6180,6 +6526,11 @@ command to generate the output files.
       <match type="string" value="% This file was created with JabRef" offset="0"/>
     </magic>
     <glob pattern="*.bib"/>
+  </mime-type>
+  <mime-type type="text/x-blueprint">
+    <comment>Blueprint source code</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.blp"/>
   </mime-type>
   <mime-type type="text/x-c++hdr">
     <comment>C++ header</comment>
@@ -6240,12 +6591,12 @@ command to generate the output files.
     <glob pattern="*.csvs"/>
   </mime-type>
   <mime-type type="text/x-copying">
-    <comment>license terms</comment>
+    <comment>License terms</comment>
     <sub-class-of type="text/plain"/>
     <glob pattern="COPYING"/>
   </mime-type>
   <mime-type type="text/x-credits">
-    <comment>author credits</comment>
+    <comment>Author credits</comment>
     <sub-class-of type="text/plain"/>
     <glob pattern="CREDITS"/>
   </mime-type>
@@ -6348,14 +6699,14 @@ command to generate the output files.
     <generic-icon name="text-x-generic"/>
   </mime-type>
   <mime-type type="text/x-gettext-translation">
-    <comment>translation file</comment>
+    <comment>Translation file</comment>
     <sub-class-of type="text/plain"/>
     <glob pattern="*.po"/>
     <alias type="text/x-po"/>
     <alias type="application/x-gettext"/>
   </mime-type>
   <mime-type type="text/x-gettext-translation-template">
-    <comment>translation template</comment>
+    <comment>Translation template</comment>
     <sub-class-of type="text/plain"/>
     <glob pattern="*.pot"/>
     <alias type="text/x-pot"/>
@@ -6397,6 +6748,15 @@ command to generate the output files.
     <glob pattern="*.html" weight="80"/>
     <glob pattern="*.htm" weight="80"/>
   </mime-type>
+  <mime-type type="text/x-component">
+    <comment>HTML component</comment>
+    <acronym>HTML</acronym>
+    <expanded-acronym>HyperText Markup Language</expanded-acronym>
+    <sub-class-of type="application/xml"/>
+    <generic-icon name="text-html"/>
+    <glob pattern="*.htc"/>
+    <root-XML namespaceURI="urn:HTMLComponent" localName="PUBLIC"/>
+  </mime-type>
   <mime-type type="text/cache-manifest">
     <comment>Web application cache file</comment>
     <sub-class-of type="text/plain"/>
@@ -6433,7 +6793,7 @@ command to generate the output files.
     <glob pattern="*.idl"/>
   </mime-type>
   <mime-type type="text/x-install">
-    <comment>installation instructions</comment>
+    <comment>Installation instructions</comment>
     <sub-class-of type="text/plain"/>
     <glob pattern="INSTALL"/>
   </mime-type>
@@ -6466,7 +6826,7 @@ command to generate the output files.
     <glob pattern="*.lhs"/>
   </mime-type>
   <mime-type type="text/x-log">
-    <comment>application log</comment>
+    <comment>Application log</comment>
     <sub-class-of type="text/plain"/>
     <glob pattern="*.log"/>
   </mime-type>
@@ -6486,6 +6846,7 @@ command to generate the output files.
   <mime-type type="text/markdown">
     <comment>Markdown document</comment>
     <sub-class-of type="text/plain"/>
+    <generic-icon name="x-office-document"/>
     <glob pattern="*.md"/>
     <glob pattern="*.mkd"/>
     <glob pattern="*.markdown"/>
@@ -6557,9 +6918,6 @@ command to generate the output files.
     <magic priority="10">
       <match type="string" value="%" offset="0"/>
     </magic>
-    <magic priority="10">
-      <match type="string" value="##" offset="0"/>
-    </magic>
     <magic>
       <match type="string" value="function" offset="0"/>
     </magic>
@@ -6599,7 +6957,7 @@ command to generate the output files.
     <glob pattern="*.pas"/>
   </mime-type>
   <mime-type type="text/x-patch">
-    <comment>differences between files</comment>
+    <comment>Differences between files</comment>
     <alias type="text/x-diff"/>
     <sub-class-of type="text/plain"/>
     <magic>
@@ -6617,10 +6975,22 @@ command to generate the output files.
     <glob pattern="*.diff"/>
     <glob pattern="*.patch"/>
   </mime-type>
-  <mime-type type="text/x-dart">
+  <mime-type type="application/vnd.dart">
     <comment>Dart source code</comment>
     <sub-class-of type="text/plain"/>
     <glob pattern="*.dart"/>
+    <alias type="text/x-dart"/>
+  </mime-type>
+  <mime-type type="text/x-nim">
+    <comment>Nim source code</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.nim"/>
+  </mime-type>
+  <mime-type type="text/x-nimscript">
+    <comment>Nimscript source code</comment>
+    <sub-class-of type="text/x-nim"/>
+    <glob pattern="*.nims"/>
+    <glob pattern="*.nimble"/>
   </mime-type>
   <mime-type type="text/x-go">
     <comment>Go source code</comment>
@@ -6700,6 +7070,15 @@ command to generate the output files.
     <comment>NFO document</comment>
     <sub-class-of type="text/x-readme"/>
     <glob pattern="*.nfo"/>
+  </mime-type>
+  <mime-type type="text/x-todo-txt">
+    <comment>Todo.txt file</comment>
+    <sub-class-of type="text/plain"/>
+    <magic priority="10">
+      <match type="string" value="(A) " offset="0"/>
+      <match type="string" value="x " offset="0"/>
+    </magic>
+    <glob weight="10" pattern="todo.txt"/>
   </mime-type>
   <mime-type type="text/x-rpm-spec">
     <comment>RPM spec file</comment>
@@ -6782,6 +7161,11 @@ command to generate the output files.
     <glob pattern="*.texi"/>
     <glob pattern="*.texinfo"/>
   </mime-type>
+  <mime-type type="text/x-typst">
+    <comment>Typst document</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.typ"/>
+  </mime-type>
   <mime-type type="text/x-troff-me">
     <comment>Troff ME input document</comment>
     <sub-class-of type="text/plain"/>
@@ -6809,7 +7193,7 @@ command to generate the output files.
     <glob pattern="*.uil"/>
   </mime-type>
   <mime-type type="text/x-uri">
-    <comment>resource location</comment>
+    <comment>Resource location</comment>
     <sub-class-of type="text/plain"/>
     <!-- Note: text/uri-list is reserved by the XDND protocol! -->
   </mime-type>
@@ -6822,12 +7206,38 @@ command to generate the output files.
     </magic>
     <alias type="zz-application/zz-winassoc-uu"/>
   </mime-type>
+  <mime-type type="text/x-basic">
+    <comment>BASIC program</comment>
+    <sub-class-of type="text/plain"/>
+    <generic-icon name="text-x-script"/>
+    <glob pattern="*.bas"/>
+  </mime-type>
+  <mime-type type="text/x-vb">
+    <comment>Visual Basic .NET source code</comment>
+    <sub-class-of type="text/plain"/>
+    <magic>
+      <match type="string" value="Imports" offset="0"/>
+      <match type="string" value="Module" offset="0"/>
+      <match type="string" value="REM" offset="0"/>
+    </magic>
+    <glob pattern="*.vb"/>
+  </mime-type>
   <mime-type type="text/vbscript">
     <comment>VBScript program</comment>
     <alias type="text/vbs"/>
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-script"/>
     <glob pattern="*.vbs"/>
+  </mime-type>
+  <mime-type type="text/vbscript.encode">
+    <comment>Encoded VBScript program</comment>
+    <sub-class-of type="application/x-executable"/>
+    <sub-class-of type="text/plain"/>
+    <generic-icon name="text-x-script"/>
+    <magic>
+      <match type="string" value="#@~^" offset="0"/>
+    </magic>
+    <glob pattern="*.vbe"/>
   </mime-type>
   <mime-type type="text/x-xmi">
     <comment>XMI file</comment>
@@ -6882,7 +7292,7 @@ command to generate the output files.
     <glob pattern="*.service"/>
   </mime-type>
   <mime-type type="text/x-systemd-unit">
-    <comment>systemd unit file</comment>
+    <comment>Systemd unit file</comment>
     <sub-class-of type="text/plain"/>
     <magic>
       <!-- Matches part-way through the file. -->
@@ -7181,7 +7591,7 @@ command to generate the output files.
     <sub-class-of type="application/vnd.ms-asf"/>
     <glob pattern="*.wmv"/>
   </mime-type>
-  <mime-type type="video/x-msvideo">
+  <mime-type type="video/vnd.avi">
     <comment>AVI video</comment>
     <acronym>AVI</acronym>
     <expanded-acronym>Audio Video Interleave</expanded-acronym>
@@ -7190,6 +7600,7 @@ command to generate the output files.
     <alias type="video/divx"/>
     <alias type="video/msvideo"/>
     <alias type="video/vnd.divx"/>
+    <alias type="video/x-msvideo"/>
     <magic>
       <match type="string" value="RIFF" offset="0">
         <match type="string" value="AVI " offset="8"/>
@@ -7343,6 +7754,12 @@ command to generate the output files.
     <sub-class-of type="application/zip"/>
     <generic-icon name="x-office-spreadsheet"/>
   </mime-type>
+  <mime-type type="application/vnd.ms-officetheme">
+    <comment>Microsoft Office 2007 theme</comment>
+    <glob pattern="*.thmx"/>
+    <sub-class-of type="application/zip"/>
+    <generic-icon name="text-x-generic-template"/>
+  </mime-type>
   <mime-type type="application/x-t602">
     <comment>T602 document</comment>
     <generic-icon name="x-office-document"/>
@@ -7401,7 +7818,7 @@ command to generate the output files.
     <alias type="zz-application/zz-winassoc-hlp" />
   </mime-type>
   <mime-type type="application/x-bsdiff">
-    <comment>binary differences between files</comment>
+    <comment>Binary differences between files</comment>
     <magic>
       <match type="string" value="BSDIFF40" offset="0"/>
       <match type="string" value="BSDIFN40" offset="0"/>
@@ -7412,7 +7829,7 @@ command to generate the output files.
   <!-- Tree content-types -->
   <mime-type type="x-content/image-dcf">
     <!-- http://en.wikipedia.org/wiki/Design_rule_for_Camera_File_system -->
-    <comment>digital photos</comment>
+    <comment>Digital photos</comment>
     <treemagic>
       <treematch path="dcim" type="directory" non-empty="true"/>
     </treemagic>
@@ -7440,7 +7857,7 @@ command to generate the output files.
 
   <mime-type type="x-content/video-dvd">
     <!-- http://en.wikipedia.org/wiki/DVD-Video -->
-    <comment>video DVD</comment>
+    <comment>Video DVD</comment>
     <treemagic>
       <treematch path="VIDEO_TS/VIDEO_TS.IFO" type="file" />
       <treematch path="VIDEO_TS/VIDEO_TS.IFO;1" type="file" />
@@ -7451,32 +7868,32 @@ command to generate the output files.
 
   <mime-type type="x-content/audio-cdda">
     <!-- http://en.wikipedia.org/wiki/Red_Book_(audio_CD_standard) -->
-    <comment>audio CD</comment>
+    <comment>Audio CD</comment>
   </mime-type>
 
   <mime-type type="x-content/blank-cd">
     <!-- http://en.wikipedia.org/wiki/Compact_Disc -->
-    <comment>blank CD disc</comment>
+    <comment>Blank CD disc</comment>
   </mime-type>
 
   <mime-type type="x-content/blank-dvd">
     <!-- http://en.wikipedia.org/wiki/DVD -->
-    <comment>blank DVD disc</comment>
+    <comment>Blank DVD disc</comment>
   </mime-type>
 
   <mime-type type="x-content/blank-bd">
     <!-- http://en.wikipedia.org/wiki/Blu-ray_Disc -->
-    <comment>blank Blu-ray disc</comment>
+    <comment>Blank Blu-ray disc</comment>
   </mime-type>
 
   <mime-type type="x-content/blank-hddvd">
     <!-- http://en.wikipedia.org/wiki/HD_DVD -->
-    <comment>blank HD DVD disc</comment>
+    <comment>Blank HD DVD disc</comment>
   </mime-type>
 
   <mime-type type="x-content/audio-dvd">
     <!-- http://en.wikipedia.org/wiki/DVD-Audio -->
-    <comment>audio DVD</comment>
+    <comment>Audio DVD</comment>
     <treemagic>
       <treematch path="AUDIO_TS/AUDIO_TS.IFO" type="file" />
       <treematch path="AUDIO_TS/AUDIO_TS.IFO;1" type="file" />
@@ -7506,7 +7923,7 @@ command to generate the output files.
 
   <mime-type type="x-content/ebook-reader">
     <!-- see fd.o hal spec -->
-    <comment>e-book reader</comment>
+    <comment>E-book reader</comment>
     <treemagic>
       <treematch path=".kobo" type="directory" non-empty="true"/>
       <treematch path="system/com.amazon.ebook.booklet.reader" non-empty="false"/>
@@ -7525,7 +7942,7 @@ command to generate the output files.
 
   <mime-type type="x-content/audio-player">
     <!-- see fd.o hal spec -->
-    <comment>portable audio player</comment>
+    <comment>Portable audio player</comment>
   </mime-type>
 
   <mime-type type="x-content/ostree-repository">
@@ -7541,7 +7958,7 @@ command to generate the output files.
   <mime-type type="x-content/software">
     <!-- http://standards.freedesktop.org/autostart-spec/autostart-spec-latest.html
          http://bugzilla.gnome.org/show_bug.cgi?id=509823#c3 -->
-    <comment>software</comment>
+    <comment>Software</comment>
   </mime-type>
 
   <mime-type type="x-content/unix-software">
@@ -7689,6 +8106,7 @@ command to generate the output files.
 
   <mime-type type="application/vnd.squashfs">
     <comment>Squashfs filesystem image</comment>
+    <sub-class-of type="application/vnd.efi.img"/>
     <magic>
       <match type="string" value="sqsh" offset="0"/>
       <match type="string" value="hsqs" offset="0"/>
@@ -7728,12 +8146,14 @@ command to generate the output files.
     <glob pattern="*.3mf"/>
     <alias type="application/vnd.ms-3mfdocument"/>
     <sub-class-of type="application/zip"/>
+    <generic-icon name="image-x-generic"/>
   </mime-type>
 
   <mime-type type="model/stl">
     <comment>STL 3D model</comment>
     <acronym>STL</acronym>
     <expanded-acronym>StereoLithography</expanded-acronym>
+    <generic-icon name="image-x-generic"/>
     <magic>
       <match type="string" value="solid" offset="0"/>
       <match type="string" value="SOLID" offset="0"/>
@@ -7773,7 +8193,7 @@ command to generate the output files.
     <acronym>OVF</acronym>
     <expanded-acronym>Open Virtualization Format</expanded-acronym>
     <glob pattern="*.ova"/>
-    <magic priority="60">
+    <magic priority="62">
       <match type="string" value=".ovf" offset="1:256">
         <match type="string" value="ustar\0" offset="257"/>
         <match type="string" value="ustar\040\040\0" offset="257"/>
@@ -7886,8 +8306,8 @@ command to generate the output files.
     <generic-icon name="x-office-spreadsheet"/>
   </mime-type>
   <mime-type type="application/x-pyspread-bz-spreadsheet">
-    <comment>Pyspread spreadsheet (bzip-compressed)</comment>
-    <sub-class-of type="application/x-bzip"/>
+    <comment>Pyspread spreadsheet (bzip2-compressed)</comment>
+    <sub-class-of type="application/x-bzip2"/>
     <glob pattern="*.pys"/>
     <generic-icon name="x-office-spreadsheet"/>
   </mime-type>
@@ -7896,6 +8316,38 @@ command to generate the output files.
     <comment>Kotlin source code</comment>
     <sub-class-of type="text/plain"/>
     <glob pattern="*.kt"/>
+  </mime-type>
+
+  <mime-type type="text/x-devicetree-source">
+    <comment>Devicetree source code</comment>
+    <acronym>DTS</acronym>
+    <expanded-acronym>Device Tree Source</expanded-acronym>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.dts"/>
+    <glob pattern="*.dtsi"/>
+    <magic>
+      <match type="string" mask="0x8080" value="\000\000" offset="0">
+        <match type="string" value="/dts-v1/" offset="0:4080"/>
+      </match>
+    </magic>
+    <magic priority="40">
+      <match type="string" mask="0x8080" value="\000\000" offset="0">
+        <match type="string" value="/ {" offset="0:4090"/>
+        <match type="string" value="include " offset="0:4080">
+          <match type="string" value=".dts" offset="10:4090"/>
+        </match>
+      </match>
+    </magic>
+  </mime-type>
+
+  <mime-type type="text/x-devicetree-binary">
+    <comment>Flattened Devicetree</comment>
+    <acronym>DTB</acronym>
+    <expanded-acronym>Device Tree Binary</expanded-acronym>
+    <glob pattern="*.dtb"/>
+    <magic>
+      <match type="big32" value="0xd00dfeed" offset="0"/>
+    </magic>
   </mime-type>
 
   <mime-type type="image/avif">
@@ -7914,6 +8366,14 @@ command to generate the output files.
     <glob pattern="*.avif"/>
     <glob pattern="*.avifs"/>
     <alias type="image/avif-sequence"/>
+  </mime-type>
+
+  <mime-type type="image/qoi">
+    <comment>Quite OK Image Format</comment>
+    <magic>
+      <match type="string" value="qoif" offset="0"/>
+    </magic>
+    <glob pattern="*.qoi"/>
   </mime-type>
 
   <mime-type type="video/vnd.radgamettools.bink">
@@ -7980,5 +8440,88 @@ command to generate the output files.
     <sub-class-of type="application/xml"/>
     <root-XML namespaceURI="http://www.w3.org/2005/sparql-results#" localName="sparql"/>
     <glob pattern="*.srx"/>
+  </mime-type>
+  <mime-type type="application/wasm">
+    <comment>WASM binary module</comment>
+    <acronym>WASM</acronym>
+    <expanded-acronym>Web Assembly</expanded-acronym>
+    <glob pattern="*.wasm"/>
+    <magic>
+      <match type="string" value="\000asm" offset="0"/>
+    </magic>
+  </mime-type>
+  <mime-type type="application/x-openvpn-profile">
+    <comment>OpenVPN profile</comment>
+    <sub-class-of type="text/plain"/>
+    <generic-icon name="text-x-generic"/>
+    <glob pattern="*.openvpn"/>
+    <glob pattern="*.ovpn"/>
+  </mime-type>
+  <mime-type type="application/x-modrinth-modpack+zip">
+    <comment>Modrinth Modpack</comment>
+    <sub-class-of type="application/zip"/>
+    <generic-icon name="package-x-generic"/>
+    <glob pattern="*.mrpack"/>
+  </mime-type>
+  <mime-type type="application/cbor">
+    <comment>CBOR Data</comment>
+    <acronym>CBOR</acronym>
+    <expanded-acronym>Concise Binary Object Representation</expanded-acronym>
+    <glob pattern="*.cbor"/>
+  </mime-type>
+  <mime-type type="application/x-eris-link+cbor">
+    <comment>ERIS Link</comment>
+    <acronym>ERIS</acronym>
+    <expanded-acronym>Encoding for Robust Immutable Storage</expanded-acronym>
+    <sub-class-of type="application/cbor"/>
+    <glob pattern="*.eris"/>
+    <magic priority="90">
+      <match type="string" value="\xD9\xD9\xF7\x84\xD9\x01\x14\x58\x42" offset="0"/>
+    </magic>
+  </mime-type>
+  <mime-type type="application/vnd.gerber">
+    <comment>Gerber file</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.gbr"/>
+    <!--Try to match with some common opening commands-->
+    <magic>
+      <!--A comment line-->
+      <match type="string" value="G04 " offset="0"/>
+      <!--Some setup macros-->
+      <match type="string" value="%FSLA" offset="0"/>
+      <match type="string" value="%MO" offset="0"/>
+      <match type="string" value="%TF." offset="0"/>
+      <!--Seems to be common with files exported from some programs-->
+      <match type="string" value="G75*" offset="0"/>
+    </magic>
+    <generic-icon name="text-x-generic"/>
+    <!--Already being used as the MIME identifier by some programs-->
+    <alias type="application/x-gerber"/>
+  </mime-type>
+  <mime-type type="application/x-gerber-job">
+    <comment>Gerber job file</comment>
+    <sub-class-of type="application/json"/>
+    <glob pattern="*.gbrjob"/>
+    <generic-icon name="text-x-generic"/>
+  </mime-type>
+  <mime-type type="application/x-excellon">
+    <comment>Excellon drill file</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.drl"/>
+    <magic>
+      <!--This is always the header for an excellon drill file-->
+      <match type="string" value="M48\n" offset="0"/>
+    </magic>
+    <generic-icon name="text-x-generic"/>
+  </mime-type>
+  <mime-type type="application/x-tiled-tmx">
+    <comment>Tiled map files</comment>
+    <sub-class-of type="application/xml"/>
+    <glob pattern="*.tmx"/>
+  </mime-type>
+  <mime-type type="application/x-tiled-tsx">
+    <comment>Tiled tileset files</comment>
+    <sub-class-of type="application/xml"/>
+    <glob pattern="*.tsx"/>
   </mime-type>
 </mime-info>

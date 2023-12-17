@@ -25,9 +25,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>25 Oct 2012</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>17 Aug 2022</LastUpdatedDate>
+      <ProvenanceDescription>08/2023 (v.113)- Max-offset modified for the BOF signature to allow for more exact signature identification. Internally researched.</ProvenanceDescription>
+      <LastUpdatedDate>15 Aug 2023</LastUpdatedDate>
       <FormatNote>http://fileformats.archiveteam.org/wiki/ISO_image
 
 https://www.loc.gov/preservation/digital/formats/fdd/fdd000348.shtml
@@ -70,7 +69,7 @@ https://docs.microsoft.com/en-us/windows/win32/imapi/disc-formats</FormatNote>
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>730</SignatureID>
-        <SignatureName>ISO Disk Image File</SignatureName>
+        <SignatureName>k k Image File</SignatureName>
         <SignatureNote>BOF: CD001{1-16384}ÿCD001 with offset of (32700- 37700).
 Beginning at byte 32768, an ISO file will hold two-to-many volume descriptors, each of 2048 bytes and starting with '*CD001', where * represents the volume desciptor type as defined within the specification.</SignatureNote>
         <ByteSequence>
@@ -87,6 +86,13 @@ Beginning at byte 32768, an ISO file will hold two-to-many volume descriptors, e
           <ByteSequenceValue>4344303031{1-16384}FF4344303031</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1603</RelatedFormatID>
+        <RelatedFormatName>Encase Image File/Expert Witness Compression File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>2585</RelatedFormatID>

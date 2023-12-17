@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2734</FormatID>
+      <FormatName>vCard</FormatName>
+      <FormatVersion>3</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>
+      </FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>vCard is a file format standard for electronic business cards, although much less frequently used at the time of writing. vCards are often attached to e-mail messages, but can be exchanged in other ways, such as on the internet or instant messaging.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>234</ProvenanceSourceID>
+      <ProvenanceName>National Library of Australia / National Library of Australia</ProvenanceName>
+      <ProvenanceSourceDate>05 Jul 2023</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>05 Jul 2023</LastUpdatedDate>
+      <FormatNote>Specification: https://datatracker.ietf.org/doc/html/rfc6350</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1880</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>text/vcard</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>106</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>World Wide Web Consortium</OrganisationName>
+        <DeveloperCompoundName>World Wide Web Consortium</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>106</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>World Wide Web Consortium</OrganisationName>
+        <SupportCompoundName>World Wide Web Consortium</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3360</ExternalSignatureID>
+        <Signature>vcf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3361</ExternalSignatureID>
+        <Signature>vcard</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2221</SignatureID>
+        <SignatureName>vCard v.3</SignatureName>
+        <SignatureNote>Absolute from beginning of file, magic bytes: (BEGIN:VCARD|begin:vcard)..(VERSION|version):3.0
+EOF, offset 0-4: (END:VCARD|end:vcard)</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2577</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>424547494E3A56434152440D0A56455253494F4E3A332E30</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>2613</ByteSequenceID>
+          <PositionType>Absolute from EOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>4</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>454E443A5643415244</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>1143</RelatedFormatID>
+        <RelatedFormatName>vCard</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

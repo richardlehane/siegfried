@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2741</FormatID>
+      <FormatName>Resource Interchange File Format (RIFF)</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Audio, Video</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>RIFF (Resource Interchange File Format) is a structured framework for multimedia files. Rather than being a precise file format, RIFF serves as a broader structure that encompasses specific file formats, including several subtypes. The fundamental component of a RIFF file is a chunk, identifiable by a unique four-character code. Applications such as viewers can bypass chunks with unfamiliar codes. A core RIFF chunk starts with a second distinctive four-character code identifying the specific RIFF variant or subtype. Applications rendering RIFF files can disregard chunks with unknown labels. Chunks can also be layered within each other. While the RIFF structure underpins several critical file formats, it has not been employed as the enclosing structure for any formats developed post the mid-1990s.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>231</ProvenanceSourceID>
+      <ProvenanceName>New York Public Library / New York Public Library</ProvenanceName>
+      <ProvenanceSourceDate>01 Aug 2023</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>01 Aug 2023</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fdd000025</Identifier>
+        <IdentifierType>Library of Congress Format Description Identifier</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1886</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <InternalSignature>
+        <SignatureID>2227</SignatureID>
+        <SignatureName>RIFF</SignatureName>
+        <SignatureNote>BOF:'RIFF'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2582</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>52494646</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>60</RelatedFormatID>
+        <RelatedFormatName>CorelDraw Drawing</RelatedFormatName>
+        <RelatedFormatVersion>6.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>64</RelatedFormatID>
+        <RelatedFormatName>Corel R.A.V.E.</RelatedFormatName>
+        <RelatedFormatVersion>1</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>65</RelatedFormatID>
+        <RelatedFormatName>Corel Presentation Exchange File</RelatedFormatName>
+        <RelatedFormatVersion>5.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>66</RelatedFormatID>
+        <RelatedFormatName>Corel Presentation Exchange File</RelatedFormatName>
+        <RelatedFormatVersion>6 and Later</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>314</RelatedFormatID>
+        <RelatedFormatName>CD Audio</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>444</RelatedFormatID>
+        <RelatedFormatName>CorelDraw Drawing</RelatedFormatName>
+        <RelatedFormatVersion>7.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>445</RelatedFormatID>
+        <RelatedFormatName>CorelDraw Drawing</RelatedFormatName>
+        <RelatedFormatVersion>8.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>552</RelatedFormatID>
+        <RelatedFormatName>CorelDraw Drawing</RelatedFormatName>
+        <RelatedFormatVersion>9.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>553</RelatedFormatID>
+        <RelatedFormatName>CorelDraw Drawing</RelatedFormatName>
+        <RelatedFormatVersion>10.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>556</RelatedFormatID>
+        <RelatedFormatName>CorelDraw Drawing</RelatedFormatName>
+        <RelatedFormatVersion>11.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>557</RelatedFormatID>
+        <RelatedFormatName>CorelDraw Drawing</RelatedFormatName>
+        <RelatedFormatVersion>3.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>654</RelatedFormatID>
+        <RelatedFormatName>Waveform Audio</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>655</RelatedFormatID>
+        <RelatedFormatName>Audio/Video Interleaved Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1134</RelatedFormatID>
+        <RelatedFormatName>Microsoft Animated Cursor Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1211</RelatedFormatID>
+        <RelatedFormatName>CorelDraw Drawing</RelatedFormatName>
+        <RelatedFormatVersion>12.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1213</RelatedFormatID>
+        <RelatedFormatName>CorelDraw Drawing</RelatedFormatName>
+        <RelatedFormatVersion>X3</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1217</RelatedFormatID>
+        <RelatedFormatName>Corel R.A.V.E.</RelatedFormatName>
+        <RelatedFormatVersion>2</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1218</RelatedFormatID>
+        <RelatedFormatName>Corel R.A.V.E.</RelatedFormatName>
+        <RelatedFormatVersion>3</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1251</RelatedFormatID>
+        <RelatedFormatName>CorelDraw Drawing</RelatedFormatName>
+        <RelatedFormatVersion>5.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1252</RelatedFormatID>
+        <RelatedFormatName>CorelDraw Drawing</RelatedFormatName>
+        <RelatedFormatVersion>4.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1354</RelatedFormatID>
+        <RelatedFormatName>WebP</RelatedFormatName>
+        <RelatedFormatVersion>Lossy</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1355</RelatedFormatID>
+        <RelatedFormatName>WebP</RelatedFormatName>
+        <RelatedFormatVersion>Lossless</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1356</RelatedFormatID>
+        <RelatedFormatName>WebP</RelatedFormatName>
+        <RelatedFormatVersion>Extended</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1420</RelatedFormatID>
+        <RelatedFormatName>RIFF Palette Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1619</RelatedFormatID>
+        <RelatedFormatName>CD-ROM/XA (eXtended Architecture)</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1728</RelatedFormatID>
+        <RelatedFormatName>Microsoft xWMA</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1760</RelatedFormatID>
+        <RelatedFormatName>Downloadable Sounds Audio</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1761</RelatedFormatID>
+        <RelatedFormatName>RIFF-based MIDI</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1762</RelatedFormatID>
+        <RelatedFormatName>DirectMusic Segment File Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1763</RelatedFormatID>
+        <RelatedFormatName>DirectMusic Style File Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1767</RelatedFormatID>
+        <RelatedFormatName>QCP Audio File Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1960</RelatedFormatID>
+        <RelatedFormatName>4X Movie File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2783</RelatedFormatID>
+        <RelatedFormatName>CorelDraw Drawing</RelatedFormatName>
+        <RelatedFormatVersion>8 Bidi</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

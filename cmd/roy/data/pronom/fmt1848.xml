@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2700</FormatID>
+      <FormatName>Trelby Document File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Word Processor</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Trelby is a free and open source program which provides an interface designed specifically for writing screenplays. It runs on both Windows and Linux and is written in Python. Trelby is a rebranding of an older programme called Byte. It launched in 2011, and the last stable release was version 2.2 in September 26, 2012.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>295</ProvenanceSourceID>
+      <ProvenanceName>Stadtarchiv Hof / Stadtarchiv Hof</ProvenanceName>
+      <ProvenanceSourceDate>28 Mar 2023</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>28 Mar 2023</LastUpdatedDate>
+      <FormatNote>Specification:  https://www.trelby.org/assets/manual.html</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1848</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>307</DeveloperID>
+        <DeveloperName>Trelby</DeveloperName>
+        <OrganisationName>Trelby</OrganisationName>
+        <DeveloperCompoundName>Trelby / Trelby</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>307</SupportID>
+        <SupportName>Trelby</SupportName>
+        <OrganisationName>Trelby</OrganisationName>
+        <SupportCompoundName>Trelby / Trelby</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3317</ExternalSignatureID>
+        <Signature>trelby</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2192</SignatureID>
+        <SignatureName>Trelby Document File</SignatureName>
+        <SignatureNote>BOF Absolute from beginning of file, magic bytes: ï»¿#Version</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2542</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>EFBBBF2356657273696F6E20</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

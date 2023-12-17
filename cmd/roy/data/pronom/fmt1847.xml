@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2699</FormatID>
+      <FormatName>Esri ArcMap Label file</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Unstructured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Files generated in ArcMap software during the creation of map templates, to specify label formatting in Python, VBScript or Jscript codings. These are plain text files, and as such can be opened with Notepad.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>299</ProvenanceSourceID>
+      <ProvenanceName>Brigham Young University / Brigham Young University</ProvenanceName>
+      <ProvenanceSourceDate>28 Mar 2023</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>28 Mar 2023</LastUpdatedDate>
+      <FormatNote>https://desktop.arcgis.com/en/arcmap/10.3/map/working-with-text/about-building-label-expressions.htm
+https://health.mo.gov/data/gis/pdf/Tip-LabelTipsandTricks.pdf</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1847</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>221</DeveloperID>
+        <DeveloperName>Esri</DeveloperName>
+        <OrganisationName>Esri</OrganisationName>
+        <DeveloperCompoundName>Esri / Esri</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>221</SupportID>
+        <SupportName>Esri</SupportName>
+        <OrganisationName>Esri</OrganisationName>
+        <SupportCompoundName>Esri / Esri</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3316</ExternalSignatureID>
+        <Signature>lxp</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

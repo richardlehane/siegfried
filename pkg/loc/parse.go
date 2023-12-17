@@ -95,6 +95,7 @@ func characterise(m []string) ([]string, []string, []int, []int, error) {
 			case "Hex (position 25)": // special case fdd000126
 				hx = append(hx, tokens[1])
 				hxx = append(hxx, 25)
+			case "EBCDIC": // special case fdd000468 (skip for now)
 			default:
 				return hx, ascii, hxx, asciix, fmt.Errorf("loc: can't characterise signature (value: %v), unexpected label %s", v, tokens[0])
 			}

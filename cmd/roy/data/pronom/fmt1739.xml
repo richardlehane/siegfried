@@ -25,9 +25,8 @@
       <ProvenanceSourceID>220</ProvenanceSourceID>
       <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
       <ProvenanceSourceDate>17 Aug 2022</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>17 Aug 2022</LastUpdatedDate>
+      <ProvenanceDescription>08/2023- Max-offset modified for both BOF signatures to allow for more exact signature identification. Internally researched.</ProvenanceDescription>
+      <LastUpdatedDate>15 Aug 2023</LastUpdatedDate>
       <FormatNote>http://fileformats.archiveteam.org/wiki/Universal_Disk_Format
 
 http://fileformats.archiveteam.org/wiki/ISO_9660
@@ -77,7 +76,7 @@ BOF; Offset: 32768; Max Offset: 70468; Magic Bytes:  0x00424541303101, then an e
           <ByteSequenceID>2404</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>32768</Offset>
-          <MaxOffset>70468</MaxOffset>
+          <MaxOffset>37700</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
@@ -90,7 +89,7 @@ BOF; Offset: 32768; Max Offset: 70468; Magic Bytes:  0x00424541303101, then an e
           <ByteSequenceID>2405</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>32768</Offset>
-          <MaxOffset>36864</MaxOffset>
+          <MaxOffset>37700</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

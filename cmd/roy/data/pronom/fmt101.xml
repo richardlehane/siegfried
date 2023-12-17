@@ -191,6 +191,20 @@
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1021</RelatedFormatID>
+        <RelatedFormatName>LaTeX (Subdocument)</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1029</RelatedFormatID>
+        <RelatedFormatName>WARC</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1078</RelatedFormatID>
         <RelatedFormatName>Chemical Markup Language</RelatedFormatName>
         <RelatedFormatVersion>
@@ -275,8 +289,21 @@
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1453</RelatedFormatID>
+        <RelatedFormatName>INTERLIS Model File</RelatedFormatName>
+        <RelatedFormatVersion>2.3</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1462</RelatedFormatID>
         <RelatedFormatName>Industry Foundation Classes XML</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1469</RelatedFormatID>
+        <RelatedFormatName>PKCS #7 Cryptographic Message File</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>
@@ -387,6 +414,12 @@
         <RelatedFormatID>1944</RelatedFormatID>
         <RelatedFormatName>GPS Exchange Format</RelatedFormatName>
         <RelatedFormatVersion>1.1</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1967</RelatedFormatID>
+        <RelatedFormatName>Folio Infobase File</RelatedFormatName>
+        <RelatedFormatVersion>2</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
@@ -549,7 +582,7 @@
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>2392</RelatedFormatID>
-        <RelatedFormatName>ISDOC Information System Document (Generic)</RelatedFormatName>
+        <RelatedFormatName>ISDOC Information System Document</RelatedFormatName>
         <RelatedFormatVersion>5.x</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
@@ -648,6 +681,12 @@
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2664</RelatedFormatID>
+        <RelatedFormatName>xdomea</RelatedFormatName>
+        <RelatedFormatVersion>3.0.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>2675</RelatedFormatID>
         <RelatedFormatName>Audacity Project File</RelatedFormatName>
         <RelatedFormatVersion>1.x</RelatedFormatVersion>
@@ -657,6 +696,45 @@
         <RelatedFormatID>2676</RelatedFormatID>
         <RelatedFormatName>Audacity Project File</RelatedFormatName>
         <RelatedFormatVersion>2.x</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2697</RelatedFormatID>
+        <RelatedFormatName>Final Draft Document</RelatedFormatName>
+        <RelatedFormatVersion>8</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2706</RelatedFormatID>
+        <RelatedFormatName>Camtasia Studio Project</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2711</RelatedFormatID>
+        <RelatedFormatName>Capture One Session File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2736</RelatedFormatID>
+        <RelatedFormatName>OPML File</RelatedFormatName>
+        <RelatedFormatVersion>1.*</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2738</RelatedFormatID>
+        <RelatedFormatName>OPML File</RelatedFormatName>
+        <RelatedFormatVersion>2</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2756</RelatedFormatID>
+        <RelatedFormatName>Mass Spectrometry Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
@@ -797,6 +875,18 @@
         <RelatedFormatID>2198</RelatedFormatID>
         <RelatedFormatName>xdomea</RelatedFormatName>
         <RelatedFormatVersion>2.4.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>2626</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.1</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>2697</RelatedFormatID>
+        <RelatedFormatName>Final Draft Document</RelatedFormatName>
+        <RelatedFormatVersion>8</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>

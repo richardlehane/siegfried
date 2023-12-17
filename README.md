@@ -9,7 +9,7 @@
 
 ### Version
 
-1.10.1
+1.10.2
 
 [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -97,6 +97,13 @@ Or, for the most recent updates, you can install from this fork:
     makepkg -si
 
 ## Changes
+### v1.10.2 (2023-12-17)
+### Changed
+- update PRONOM to v116
+- update LOC to 2023-12-14
+- update tika-mimetypes to v3.0.0-BETA
+- update freedesktop.org to v2.4
+
 ### v1.10.1 (2023-04-24)
 ### Fixed
 - glob expansion now only on Windows & when no explicit path match. Implemented by [Bernhard Hampel-Waffenthal](https://github.com/richardlehane/siegfried/pull/229)

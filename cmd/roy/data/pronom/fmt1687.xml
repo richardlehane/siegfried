@@ -24,9 +24,8 @@
       <ProvenanceSourceID>220</ProvenanceSourceID>
       <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
       <ProvenanceSourceDate>17 May 2022</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>17 May 2022</LastUpdatedDate>
+      <ProvenanceDescription>11/2023 (v.115)- max-offset modified for both BOF signatures to allow for more exact signature identification. Internally researched.</ProvenanceDescription>
+      <LastUpdatedDate>14 Nov 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -63,7 +62,7 @@
           <ByteSequenceID>2345</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>6</Offset>
-          <MaxOffset>6</MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

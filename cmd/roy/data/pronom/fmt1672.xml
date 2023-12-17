@@ -10,10 +10,11 @@
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatTypes>
+      </FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>ZMAGIC file format is a type of a.out (an abbreviated form of "assembler output") executible binary format used with Unix-like operating systems. The format was superseeded by ELF file format with System V Release 4 around 1898, due to some limitations of the format. The ZMAGIC was the default a.out file format before they switched to QMAGIC files. Both formats of executable have a 32 byte header at the start of the file, but with ZMAGIC the .text section starts at byte offset 1024, while with QMAGIC the .text section starts at the beginning of the file and includes the header.</FormatDescription>
+      <FormatDescription>ZMAGIC file format is a type of a.out (an abbreviated form of "assembler output") executable binary format used with Unix-like operating systems. The format was superseded by ELF file format with System V Release 4 around 1898, due to some limitations of the format. The ZMAGIC was the default a.out file format before they switched to QMAGIC files. Both formats of executable have a 32 byte header at the start of the file, but with ZMAGIC the .text section starts at byte offset 1024, while with QMAGIC the .text section starts at the beginning of the file and includes the header.</FormatDescription>
       <BinaryFileFormat>Binary</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -24,9 +25,8 @@
       <ProvenanceSourceID>180</ProvenanceSourceID>
       <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
       <ProvenanceSourceDate>22 Apr 2022</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>22 Apr 2022</LastUpdatedDate>
+      <ProvenanceDescription>11/2023 (v.115)- File format type removed and description amended. Submitted by the Natinoal Archives and Records Administration.</ProvenanceDescription>
+      <LastUpdatedDate>14 Nov 2023</LastUpdatedDate>
       <FormatNote>https://www.linuxjournal.com/article/1059
 
 https://www.linux.org/threads/types-of-executables.9206/

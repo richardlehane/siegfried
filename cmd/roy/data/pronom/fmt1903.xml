@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2759</FormatID>
+      <FormatName>Garmin Vehicle Images File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Vector)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Garmin Vehicle Images File, or SRF, is a raster graphics format associated with Garmin GPS devices. An SRF file contains images that comprise an avatar of a vehicle. An SRF file will often be distributed inside a ZIP file.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>180</ProvenanceSourceID>
+      <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
+      <ProvenanceSourceDate>18 Aug 2023</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>18 Aug 2023</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/SRF_(Garmin_vehicle)</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1903</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>279</DeveloperID>
+        <DeveloperName>Garmin</DeveloperName>
+        <OrganisationName>Garmin</OrganisationName>
+        <DeveloperCompoundName>Garmin / Garmin</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>279</SupportID>
+        <SupportName>Garmin</SupportName>
+        <OrganisationName>Garmin</OrganisationName>
+        <SupportCompoundName>Garmin / Garmin</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3392</ExternalSignatureID>
+        <Signature>srf</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2249</SignatureID>
+        <SignatureName>Garmin Vehicle Images File</SignatureName>
+        <SignatureNote>BOF:'GARMIN' followed by 0x20 (Space) followed by 'BITMAP' followed by 0x20 (Space) followed by '01'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2620</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4741524D494E204249544D4150203031</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

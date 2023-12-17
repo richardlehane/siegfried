@@ -22,9 +22,8 @@
       <ProvenanceSourceID>131</ProvenanceSourceID>
       <ProvenanceName>Digital Library Research Group / MIT Libraries</ProvenanceName>
       <ProvenanceSourceDate>06 Apr 2009</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>27 Jun 2022</LastUpdatedDate>
+      <ProvenanceDescription>11/2023 (v.115)- Max-offset modified for BOF signature to allow for more exact signature identification. Internally researched.</ProvenanceDescription>
+      <LastUpdatedDate>14 Nov 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -72,8 +71,7 @@
           <ByteSequenceID>441</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>80</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

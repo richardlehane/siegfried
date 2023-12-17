@@ -84,7 +84,7 @@
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>802</RelatedFormatID>
-        <RelatedFormatName>Java Compiled Object Code</RelatedFormatName>
+        <RelatedFormatName>Java Class File</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

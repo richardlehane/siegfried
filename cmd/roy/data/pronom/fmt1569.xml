@@ -25,9 +25,8 @@
       <ProvenanceSourceID>180</ProvenanceSourceID>
       <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
       <ProvenanceSourceDate>06 Dec 2021</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>08 Dec 2021</LastUpdatedDate>
+      <ProvenanceDescription>11/2023 (v.115)- Max-offset modified for BOF signature to allow for more exact signature identification. Internally researched.</ProvenanceDescription>
+      <LastUpdatedDate>14 Nov 2023</LastUpdatedDate>
       <FormatNote>https://en.wikipedia.org/wiki/Bitstream_Speedo_Fonts
 
 http://fileformats.archiveteam.org/wiki/Speedo
@@ -58,7 +57,7 @@ https://web.archive.org/web/20091108153822/http://www.bitstream.com/fonts/suppor
           <ByteSequenceID>2211</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>100</Offset>
-          <MaxOffset>300</MaxOffset>
+          <MaxOffset>200</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

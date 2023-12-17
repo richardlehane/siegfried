@@ -26,7 +26,7 @@
       <ProvenanceSourceDate>14 Mar 2022</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>14 Mar 2022</LastUpdatedDate>
+      <LastUpdatedDate>09 May 2023</LastUpdatedDate>
       <FormatNote>Official specification: https://www.ags.org.uk/content/uploads/2022/02/AGS4-v-4.1.1-2022.pdf
 Official website: https://www.ags.org.uk/data-format/</FormatNote>
       <FormatRisk>
@@ -51,21 +51,19 @@ Official website: https://www.ags.org.uk/data-format/</FormatNote>
       <InternalSignature>
         <SignatureID>1986</SignatureID>
         <SignatureName>AGS 4 Data Format</SignatureName>
-        <SignatureNote>Variable, magic bytes: “{0-1}PROJ_ID","{0-1}PROJ_NAME",”*“{0-1}ABBR_HDNG",”{0-1}ABBR_CODE","</SignatureNote>
+        <SignatureNote>Offset 0-4 from beginning of file, magic bytes: "(GROUP|**PROJ)"*“{0-1}PROJ_ID",{0-1}("PROJ_NAME",”|"PROJ_AGS",")*“{0-1}ABBR_HDNG",”{0-1}ABBR_CODE","</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>2309</ByteSequenceID>
-          <PositionType>Variable</PositionType>
-          <Offset>
-          </Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>4</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>22{0-1}50524F4A5F4944222C22{0-1}50524F4A5F4E414D45222C22*22{0-1}414242525F48444E47222C22{0-1}414242525F434F4445222C22</ByteSequenceValue>
+          <ByteSequenceValue>22(47524F5550|2A2A50524F4A)22**22{0-1}50524F4A5F4944222C22{0-1}(50524F4A5F4E414D45222C22|50524F4A5F41475322)*22{0-1}414242525F48444E47222C22{0-1}414242525F434F4445222C22</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

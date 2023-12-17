@@ -26,7 +26,7 @@ WARC format has been written by the members of the IIPC (http://www.netpreserve.
       <ProvenanceName>
       </ProvenanceName>
       <ProvenanceSourceDate>02 Nov 2010</ProvenanceSourceDate>
-      <ProvenanceDescription>Submitted by Bibliothèque nationale de France with supplementary description information attributed to ISO 28500-2009 standard.</ProvenanceDescription>
+      <ProvenanceDescription>Submitted by Bibliothèque nationale de France with supplementary description information attributed to ISO 28500-2009 standard. 11/2023 (v.116)- Priority over fmt/101 Extensible Markup Language 1.0. Internally researched.</ProvenanceDescription>
       <LastUpdatedDate>28 Sep 2020</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
@@ -88,6 +88,12 @@ WARC format has been written by the members of the IIPC (http://www.netpreserve.
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>2173</RelatedFormatID>
         <RelatedFormatName>WARC</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>638</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
         <RelatedFormatVersion>1.0</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>

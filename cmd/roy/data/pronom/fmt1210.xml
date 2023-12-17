@@ -25,9 +25,8 @@
       <ProvenanceSourceID>170</ProvenanceSourceID>
       <ProvenanceName>Archaeology Data Service / Archaeology Data Service</ProvenanceName>
       <ProvenanceSourceDate>17 Aug 2018</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>17 Aug 2018</LastUpdatedDate>
+      <ProvenanceDescription>08/2023- Modified BOF signature to increase two of the byte ranges. Submitted by Preservica.</ProvenanceDescription>
+      <LastUpdatedDate>15 Aug 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -62,7 +61,7 @@ f &lt;space&gt; 3+ integer values, can be negative, separated by space. Faces co
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>7620{0-8}[30:39]2E[30:39]{0-10}20{0-8}[30:39]2E[30:39]{0-10}20{0-8}[30:39]2E[30:39]{0-64}0A*6620{0-1}[31:39]{0-20}20{0-1}[31:39]{0-20}20{0-1}[31:39]{0-40}0A</ByteSequenceValue>
+          <ByteSequenceValue>7620{0-8}[30:39]2E[30:39]{0-32}20{0-8}[30:39]2E[30:39]{0-32}20{0-8}[30:39]2E[30:39]{0-64}0A*6620{0-1}[31:39]{0-20}20{0-1}[31:39]{0-20}20{0-1}[31:39]{0-40}0A</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

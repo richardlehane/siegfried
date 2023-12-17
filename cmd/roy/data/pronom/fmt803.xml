@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>1603</FormatID>
-      <FormatName>Encase Image File Format/Expert Witness Compression Format</FormatName>
+      <FormatName>Encase Image File/Expert Witness Compression File</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
@@ -29,7 +29,7 @@ The format is used to store media images for forensic purposes. They are a type 
       <ProvenanceSourceDate>27 Nov 2015</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>28 Sep 2020</LastUpdatedDate>
+      <LastUpdatedDate>09 May 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -67,6 +67,13 @@ The format is used to store media images for forensic purposes. They are a type 
           <ByteSequenceValue>455646090D0AFF00</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>1255</RelatedFormatID>
+        <RelatedFormatName>ISO 9660 Disk Image File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

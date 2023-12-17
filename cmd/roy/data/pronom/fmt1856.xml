@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2710</FormatID>
+      <FormatName>Enhanced Image Package</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Enhanced Image Package is a proprietry format from Capture One software, a RAW photo editor geared for photography. The format allows for original RAW files to be packed along with all necessary settings files including Lens Cast Calibration files and custom ICC profiles into one file, for use in transferring, sharing or archiving files in Capture One software. The files are packed alongside with any edits stored in XML files such as manifest.xml files containing adjustments and other metadata. A CaptureOne folder contains settings and other technical metadata for the RAW file.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>299</ProvenanceSourceID>
+      <ProvenanceName>Brigham Young University / Brigham Young University</ProvenanceName>
+      <ProvenanceSourceDate>25 Apr 2023</ProvenanceSourceDate>
+      <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
+      <LastUpdatedDate>25 Apr 2023</LastUpdatedDate>
+      <FormatNote>https://www.captureone.com/blog/eip-file-format-enhanced-image-package
+
+https://support.captureone.com/hc/en-us/articles/360002478617-Enhanced-Image-Package-EIP-overview
+
+https://support.captureone.com/hc/en-us/articles/360002544898-Metadata-in-XMP-sidecar-files
+
+http://fileformats.archiveteam.org/wiki/Enhanced_Image_Package</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1856</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>289</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Capture One</OrganisationName>
+        <DeveloperCompoundName>Capture One</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>289</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Capture One</OrganisationName>
+        <SupportCompoundName>Capture One</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3326</ExternalSignatureID>
+        <Signature>eip</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

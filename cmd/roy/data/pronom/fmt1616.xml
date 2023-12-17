@@ -25,10 +25,12 @@
       <ProvenanceSourceID>235</ProvenanceSourceID>
       <ProvenanceName>Technische Informationsbibliothek (TIB) Hannover / Technische Informationsbibliothek (TIB) Hannover</ProvenanceName>
       <ProvenanceSourceDate>03 Feb 2022</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>03 Feb 2022</LastUpdatedDate>
-      <FormatNote>https://en.wikipedia.org/wiki/BibTeX</FormatNote>
+      <ProvenanceDescription>07/22 (v.107)- added BOF sequence to improve DROID performance;11/23 (v.115)- tightened signature and updated support links in note field. Submitted by Brigham Young University.
+08/11/23 v.115. Tightened signature.</ProvenanceDescription>
+      <LastUpdatedDate>15 Nov 2023</LastUpdatedDate>
+      <FormatNote>https://en.wikipedia.org/wiki/BibTeX
+
+http://www.heinrichfleck.net/latex/Lamport%20.pdf (Appendix B)</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -57,47 +59,19 @@
       <InternalSignature>
         <SignatureID>1951</SignatureID>
         <SignatureName>BibTeX Database File</SignatureName>
-        <SignatureNote>@, followed by one of these required tags: Article, Book, Booklet, Conference, Inbook, Incollection, Inproceedings, Manual, Mastersthesis, Misc, Phdthesis, Proceedings, Techreport, Unpublished, in all uppercase, all lowercase, or standard capitalized formats.</SignatureNote>
+        <SignatureNote>@, followed by one of these required tags: Article, Book, Booklet, Conference, Inbook, Incollection, Inproceedings, Manual, Mastersthesis, Misc, Phdthesis, Proceedings, Techreport, Unpublished, in all uppercase, all lowercase, or standard capitalized formats, then 0-40 bytes, then }.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>2258</ByteSequenceID>
-          <PositionType>Variable</PositionType>
-          <Offset>
-          </Offset>
-          <MaxOffset>
-          </MaxOffset>
-          <IndirectOffsetLocation>
-          </IndirectOffsetLocation>
-          <IndirectOffsetLength>
-          </IndirectOffsetLength>
-          <Endianness>
-          </Endianness>
-          <ByteSequenceValue>40(61727469636C65|626F6F6B|626F6F6B6C6574|636F6E666572656E6365|696E626F6F6B|696E636F6C6C656374696F6E|696E70726F63656564696E6773|6D616E75616C|6D617374657273746865736973|6D697363|706864746865736973|70726F63656564696E6773|746563687265706F7274|756E7075626C6973686564|41727469636C65|426F6F6B|426F6F6B6C6574|436F6E666572656E6365|496E626F6F6B|496E636F6C6C656374696F6E|496E70726F63656564696E6773|4D616E75616C|4D617374657273746865736973|4D697363|506864746865736973|50726F63656564696E6773|546563687265706F7274|556E7075626C6973686564|41525449434C45|424F4F4B|424F4F4B4C4554|434F4E464552454E4345|494E424F4F4B|494E434F4C4C454354494F4E|494E50524F43454544494E4753|4D414E55414C|4D415354455253544845534953|4D495343|504844544845534953|50524F43454544494E4753|544543485245504F5254|554E5055424C4953484544)</ByteSequenceValue>
-        </ByteSequence>
-        <ByteSequence>
-          <ByteSequenceID>2263</ByteSequenceID>
-          <PositionType>Absolute from EOF</PositionType>
-          <Offset>0</Offset>
-          <MaxOffset>20000</MaxOffset>
-          <IndirectOffsetLocation>
-          </IndirectOffsetLocation>
-          <IndirectOffsetLength>
-          </IndirectOffsetLength>
-          <Endianness>
-          </Endianness>
-          <ByteSequenceValue>7B{1-600}7D</ByteSequenceValue>
-        </ByteSequence>
-        <ByteSequence>
-          <ByteSequenceID>2398</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>201</MaxOffset>
+          <MaxOffset>15000</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>40{4-60}7B{10-1300}7D</ByteSequenceValue>
+          <ByteSequenceValue>40(61727469636C65|626F6F6B|626F6F6B6C6574|636F6E666572656E6365|696E626F6F6B|696E636F6C6C656374696F6E|696E70726F63656564696E6773|6D616E75616C|6D617374657273746865736973|6D697363|706864746865736973|70726F63656564696E6773|746563687265706F7274|756E7075626C6973686564|41727469636C65|426F6F6B|426F6F6B6C6574|436F6E666572656E6365|496E626F6F6B|496E636F6C6C656374696F6E|496E70726F63656564696E6773|4D616E75616C|4D617374657273746865736973|4D697363|506864746865736973|50726F63656564696E6773|546563687265706F7274|556E7075626C6973686564|41525449434C45|424F4F4B|424F4F4B4C4554|434F4E464552454E4345|494E424F4F4B|494E434F4C4C454354494F4E|494E50524F43454544494E4753|4D414E55414C|4D415354455253544845534953|4D495343|504844544845534953|50524F43454544494E4753|544543485245504F5254|554E5055424C4953484544){0-40}7B</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
@@ -105,6 +79,13 @@
         <RelatedFormatID>771</RelatedFormatID>
         <RelatedFormatName>PostScript</RelatedFormatName>
         <RelatedFormatVersion>2.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>924</RelatedFormatID>
+        <RelatedFormatName>MPEG-4 Media File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>

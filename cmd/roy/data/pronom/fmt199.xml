@@ -24,9 +24,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>27 Oct 2009</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>23 Apr 2010</LastUpdatedDate>
+      <ProvenanceDescription>08/2023 (v.113) - Priority aded over fmt/1616 (BibTeX Database File). Internally researched.</ProvenanceDescription>
+      <LastUpdatedDate>15 Aug 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -112,6 +111,13 @@
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>658</RelatedFormatID>
         <RelatedFormatName>Quicktime</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2443</RelatedFormatID>
+        <RelatedFormatName>BibTeX Database File</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

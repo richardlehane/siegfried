@@ -24,9 +24,8 @@
       <ProvenanceSourceID>295</ProvenanceSourceID>
       <ProvenanceName>Stadtarchiv Hof / Stadtarchiv Hof</ProvenanceName>
       <ProvenanceSourceDate>22 Nov 2022</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>22 Nov 2022</LastUpdatedDate>
+      <ProvenanceDescription>08/2023 (v.113)- Offset and signature modified for the EOF byte sequence to remove floating curly brackets from the signature for consistency.</ProvenanceDescription>
+      <LastUpdatedDate>15 Aug 2023</LastUpdatedDate>
       <FormatNote>Specification: http://www.wapforum.org/what/technical.htmandhttp://www.wapforum.org/what/technical/wml-30-apr-98.pdf</FormatNote>
       <FormatRisk>
       </FormatRisk>
@@ -67,14 +66,14 @@ EOF, offset 0-6, magic bytes: &lt;/card&gt;{0-6}&lt;/wml&gt;{0-2}</SignatureNote
           <ByteSequenceID>2478</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>3</MaxOffset>
+          <MaxOffset>5</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>3C2F636172643E{0-6}3C2F776D6C3E{0-2}</ByteSequenceValue>
+          <ByteSequenceValue>3C2F636172643E{0-6}3C2F776D6C3E</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

@@ -179,12 +179,6 @@
         <RelatedFormatVersion>1.0</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
-        <RelationshipType>Has lower priority than</RelationshipType>
-        <RelatedFormatID>2664</RelatedFormatID>
-        <RelatedFormatName>xdomea</RelatedFormatName>
-        <RelatedFormatVersion>3.0.0</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>638</RelatedFormatID>
         <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
@@ -201,12 +195,6 @@
         <RelationshipType>Is previous version of</RelationshipType>
         <RelatedFormatID>644</RelatedFormatID>
         <RelatedFormatName>Extensible Hypertext Markup Language</RelatedFormatName>
-        <RelatedFormatVersion>1.1</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Is supertype of</RelationshipType>
-        <RelatedFormatID>2626</RelatedFormatID>
-        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
         <RelatedFormatVersion>1.1</RelatedFormatVersion>
       </RelatedFormat>
       <FormatProperties>

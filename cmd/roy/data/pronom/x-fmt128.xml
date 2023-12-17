@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>186</FormatID>
-      <FormatName>Microsoft Excel Workspace</FormatName>
+      <FormatName>Microsoft Excel Workspace File</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
@@ -13,7 +13,7 @@
       <FormatTypes>Spreadsheet</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>An XLW file is a workspace file created by Microsoft Excel. It contains the screen locations of one or more workbooks. XLW files are used to restore the layout when working simultaneously on multiple workbooks, and as such do not contain any actual spreadsheet data; their only function is to store the physical layout of workbook files. They were created when the user selected View&gt; Save Workspace in earlier versions of Excel. Versions of Excel 2013 onwards don’t generate Workspace files, but you can MLlw files from Excel 2010 and before.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -26,7 +26,7 @@
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <LastUpdatedDate>09 May 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -42,6 +42,12 @@
         <Signature>xlw</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2712</RelatedFormatID>
+        <RelatedFormatName>Microsoft Excel Workspace File</RelatedFormatName>
+        <RelatedFormatVersion>5/95</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

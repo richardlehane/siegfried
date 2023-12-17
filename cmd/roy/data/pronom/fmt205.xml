@@ -26,7 +26,7 @@
       <ProvenanceSourceDate>28 Oct 2009</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>16 Jun 2022</LastUpdatedDate>
+      <LastUpdatedDate>09 May 2023</LastUpdatedDate>
       <FormatNote>https://en.wikipedia.org/wiki/Synchronized_Multimedia_Integration_Language
 
 https://www.w3.org/TR/SMIL3/
@@ -53,7 +53,8 @@ http://www.telestream.net/pdfs/app-notes/app_Camera_Ingest.pdf</FormatNote>
       <InternalSignature>
         <SignatureID>2051</SignatureID>
         <SignatureName>Synchronized Multimedia Integration Language</SignatureName>
-        <SignatureNote>BOF:'&lt;?xml version=("OR')1.0("OR')' followed by a gap between 0-512 bytes followed by '&lt;smil xmlns='</SignatureNote>
+        <SignatureNote>BOF, offset 0-3, magic bytes:'&lt;?xml version=("|')1.0("|'){20-86}&lt;smil
+EOF, offset 0-3, magic bytes: &lt;/smil&gt;</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>2378</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -65,7 +66,20 @@ http://www.telestream.net/pdfs/app-notes/app_Camera_Ingest.pdf</FormatNote>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>3C3F786D6C2076657273696F6E3D(22|27)312E30(22|27){0-512}3C736D696C20786D6C6E733D</ByteSequenceValue>
+          <ByteSequenceValue>3C3F786D6C2076657273696F6E3D(22|27)312E30(22|27){20-86}3C736D696C</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>2562</ByteSequenceID>
+          <PositionType>Absolute from EOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>3</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C2F736D696C3E</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

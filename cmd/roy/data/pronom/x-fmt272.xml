@@ -25,7 +25,7 @@
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
       <ProvenanceDescription>
       </ProvenanceDescription>
-      <LastUpdatedDate>03 Aug 2015</LastUpdatedDate>
+      <LastUpdatedDate>09 May 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -36,6 +36,20 @@
         <Identifier>x-fmt/272</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>80</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>dBASE Inc.</OrganisationName>
+        <DeveloperCompoundName>dBASE Inc.</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>80</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>dBASE Inc.</OrganisationName>
+        <SupportCompoundName>dBASE Inc.</SupportCompoundName>
+      </Support>
       <ExternalSignature>
         <ExternalSignatureID>391</ExternalSignatureID>
         <Signature>dbf</Signature>

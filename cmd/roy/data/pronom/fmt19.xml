@@ -276,6 +276,18 @@
         <RelatedFormatVersion>16.0</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2716</RelatedFormatID>
+        <RelatedFormatName>Adobe Illustrator CC Artwork</RelatedFormatName>
+        <RelatedFormatVersion>17-23</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2717</RelatedFormatID>
+        <RelatedFormatName>Adobe Illustrator CC 2020 Artwork</RelatedFormatName>
+        <RelatedFormatVersion>24-24.1</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>687</RelatedFormatID>
         <RelatedFormatName>MPEG 1/2 Audio Layer 3</RelatedFormatName>

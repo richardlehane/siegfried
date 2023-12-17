@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2717</FormatID>
+      <FormatName>Adobe Illustrator CC 2020 Artwork</FormatName>
+      <FormatVersion>24-24.1</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Vector)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The documents (files) created by Adobe Illustrator are PostScript language documents. A PostScript language document description that minimally conforms to the Document Structuring Conventions has two main parts: a prolog and a script. The prolog encapsulates information needed by other programs to interpret the file. The script describes the graphic elements on the page. Beginning with version 9, the Adobe Illustrated ai file format included both a pdf copy of the illustration and a postscript copy. Beginning with Adobe Illustrator 13.0. the PDF that Illustrator embeds in the file so that other apps can read the file is PDF 1.5. The PDF 1.5 header is included in the file structure.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>299</ProvenanceSourceID>
+      <ProvenanceName>Brigham Young University / Brigham Young University</ProvenanceName>
+      <ProvenanceSourceDate>24 May 2023</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>24 May 2023</LastUpdatedDate>
+      <FormatNote>http://justsolve.archiveteam.org/wiki/Adobe_Illustrator_Artwork
+
+https://en.wikipedia.org/wiki/Adobe_Illustrator_Artwork
+
+https://www.adobe.com/creativecloud/file-types/image/vector/ai-file.html
+
+https://preservation.tylerthorsted.com/2023/04/07/adobe-illustrator-and-pdf/</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1863</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>7</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Adobe Systems Incorporated</OrganisationName>
+        <DeveloperCompoundName>Adobe Systems Incorporated</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>7</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Adobe Systems Incorporated</OrganisationName>
+        <SupportCompoundName>Adobe Systems Incorporated</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3338</ExternalSignatureID>
+        <Signature>ai</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3339</ExternalSignatureID>
+        <Signature>ait</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2207</SignatureID>
+        <SignatureName>Adobe Illustrator CC 2020 Artwork 24-24.1</SignatureName>
+        <SignatureNote>PDF header '%PDF-1.5&lt;illustrator:Type&gt;Document&lt;/illustrator:Type&gt;%!PS-Adobe-3.0' followed by wildcard bytes, then '%AI5_FileFormat 14'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2565</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>255044462D312E35*3C696C6C7573747261746F723A547970653E446F63756D656E743C2F696C6C7573747261746F723A547970653E*252150532D41646F62652D332E30*254149355F46696C65466F726D6174203134</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>618</RelatedFormatID>
+        <RelatedFormatName>Acrobat PDF 1.5 - Portable Document Format</RelatedFormatName>
+        <RelatedFormatVersion>1.5</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>2718</RelatedFormatID>
+        <RelatedFormatName>Adobe Illustrator CC 2020 Artwork</RelatedFormatName>
+        <RelatedFormatVersion>24.2+</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>2716</RelatedFormatID>
+        <RelatedFormatName>Adobe Illustrator CC Artwork</RelatedFormatName>
+        <RelatedFormatVersion>17-23</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

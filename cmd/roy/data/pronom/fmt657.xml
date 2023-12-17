@@ -26,11 +26,9 @@ language and a fixed-document format.</FormatDescription>
       <ProvenanceSourceID>207</ProvenanceSourceID>
       <ProvenanceName>Walker Art Center / Walker Art Center</ProvenanceName>
       <ProvenanceSourceDate>14 Jul 2014</ProvenanceSourceDate>
-      <ProvenanceDescription>http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-388.pdf
-This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
-      <LastUpdatedDate>14 Jul 2014</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures; 08/2023 (v.113)- Added extension oxps. Submitted by Preservica.</ProvenanceDescription>
+      <LastUpdatedDate>14 Aug 2023</LastUpdatedDate>
+      <FormatNote>http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-388.pdf</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -46,6 +44,11 @@ This format can be identified via a container signature in DROID version 6 or la
       <ExternalSignature>
         <ExternalSignatureID>1516</ExternalSignatureID>
         <Signature>xps</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3385</ExternalSignatureID>
+        <Signature>oxps</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <RelatedFormat>

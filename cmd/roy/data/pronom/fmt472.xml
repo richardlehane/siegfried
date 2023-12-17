@@ -67,6 +67,24 @@
           <ByteSequenceValue>4D535F564F4943450000005001020000534F4E5920434F52504F524154494F4E</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2746</RelatedFormatID>
+        <RelatedFormatName>Memory Stick Voice File (MSV)</RelatedFormatName>
+        <RelatedFormatVersion>ADPCM Codec</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2747</RelatedFormatID>
+        <RelatedFormatName>Digital Voice File (DVF)</RelatedFormatName>
+        <RelatedFormatVersion>TRC Codec</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2748</RelatedFormatID>
+        <RelatedFormatName>Memory Stick Voice File (MSV)/Digital Voice File (DVF)</RelatedFormatName>
+        <RelatedFormatVersion>LPEC Codec</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

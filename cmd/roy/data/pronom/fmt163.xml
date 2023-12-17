@@ -13,7 +13,7 @@
       <FormatTypes>Word Processor</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Microsoft Works Word Processor is a proprietory file of a word processor component of the Microsoft Works office suite. The format is a predecessor of Microsoft Office .doc file format. It support rich text, tables, and images, but lacks some of the more advanced formatting features supported with .doc file format. Microsoft Works is now discontinued productivity software suite developed by Microsoft and sold from 1987 to 2009. Its core functionality included a word processor, a spreadsheet and a database management system. To see the full list of versions please follow the links provided in the notes.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -24,11 +24,12 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>28 Sep 2009</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>18 Dec 2012</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <ProvenanceDescription>08/2023 (v.113) - Updated description to provide entry and added links to documentation. Signature updated with either or byte (Ð|Ä). Max-offset of 0 bytes added for BOF signature. Submitted by Zeitcon.</ProvenanceDescription>
+      <LastUpdatedDate>15 Aug 2023</LastUpdatedDate>
+      <FormatNote>https://web.archive.org/web/20230521201727/
+https://en.wikipedia.org/wiki/Microsoft_Works
+http://fileformats.archiveteam.org/wiki/Microsoft_Works_Word_Processor
+https://docs.fileformat.com/word-processing/wps/</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -58,15 +59,14 @@ There is no published specification. These bytes are common to Works Word Proces
           <ByteSequenceID>968</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>01FE{18}D002</ByteSequenceValue>
+          <ByteSequenceValue>01FE{18}(D0|C4)02</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>
