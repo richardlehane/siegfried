@@ -73,6 +73,9 @@ func Version() [3]int {
 
 // Home reports the siegfried HOME location (e.g. /usr/home/siegfried).
 func Home() string {
+	if siegfried.home == "" {
+		siegfried.home = defaultHome()
+	}
 	return siegfried.home
 }
 

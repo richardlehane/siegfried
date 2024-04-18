@@ -17,33 +17,24 @@
 package config
 
 import (
-	"errors"
-	"io/fs"
-	"log"
 	"os"
 	"path/filepath"
 	"strings"
 )
 
 // the default Home location is a "siegfried" folder in the user's application data folder, which can be overridden by setting the SIEGFRIED_HOME environment variable
-func init() {
+func defaultHome() string {
 	if home, ok := os.LookupEnv("SIEGFRIED_HOME"); ok {
-		siegfried.home = home
+		return home
 	} else {
-		home, err := os.UserHomeDir()
-		if err != nil {
-			log.Fatal(err)
+		base, _ := os.UserHomeDir()
+		// if a home directory already exists in the legacy location continue using it
+		home = filepath.Join(base, "siegfried")
+		if _, err := os.Stat(siegfried.home); err == nil {
+			return home
 		}
-
-		// if a home directory already exists in the legacy location continue using it, otherwise default to a XDG-aware OS-specific application data directory
-		siegfried.home = filepath.Join(home, "siegfried")
-		if _, err := os.Stat(siegfried.home); err != nil {
-			if errors.Is(err, fs.ErrNotExist) {
-				siegfried.home = filepath.Join(userDataDir(home), "siegfried")
-			} else {
-				log.Fatal(err)
-			}
-		}
+		// otherwise default to a XDG-aware OS-specific application data directory
+		return filepath.Join(userDataDir(home), "siegfried")
 	}
 }
 
