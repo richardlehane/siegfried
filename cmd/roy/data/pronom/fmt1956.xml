@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2821</FormatID>
+      <FormatName>Sandboxels Save File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Dataset</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Sbxls files are created when a player of the Sandboxels game saves their progress. Sandboxels is played in browser, and is a free-falling sand simulator, where the user can play with different substances such as sand, rock, snow and magma. In saving the game, an sbxls file is generated, which records the type of substances used, their placement and size, the environment's temperature, custom colours and custom settings.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>334</ProvenanceSourceID>
+      <ProvenanceName>R74n / R74n</ProvenanceName>
+      <ProvenanceSourceDate>11 Apr 2024</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>11 Apr 2024</LastUpdatedDate>
+      <FormatNote>https://sandboxels.r74n.com/</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1956</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>334</DeveloperID>
+        <DeveloperName>R74n</DeveloperName>
+        <OrganisationName>R74n</OrganisationName>
+        <DeveloperCompoundName>R74n / R74n</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>334</SupportID>
+        <SupportName>R74n</SupportName>
+        <OrganisationName>R74n</OrganisationName>
+        <SupportCompoundName>R74n / R74n</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3468</ExternalSignatureID>
+        <Signature>sbxl</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2309</SignatureID>
+        <SignatureName>Sandboxels Save File</SignatureName>
+        <SignatureNote>Absolute from beginning of file, magic bytes: {"meta":{"saveVersion":"sb(1|2}","gameVersion":"</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2690</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>7B226D657461223A7B227361766556657273696F6E223A227362(31|32)222C2267616D6556657273696F6E223A</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

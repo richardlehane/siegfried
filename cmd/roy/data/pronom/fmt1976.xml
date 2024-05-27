@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2843</FormatID>
+      <FormatName>ICC Profile</FormatName>
+      <FormatVersion>4</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Dataset</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>An ICC Profile is a data set designed for color management information. It is used to describe how a peripheral renders colours, according to standards created by the International Color Consortium (ICC). This can be used to convert image files from one colour space to another or correct the colours of your images dependent on device. The file can appear by itself or embedded in certain graphics file formats. Prior to 1995 the ICC was known as the InterColor Consortium and the format was known as InterColor Profile.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>162</ProvenanceSourceID>
+      <ProvenanceName>
+      </ProvenanceName>
+      <ProvenanceSourceDate>17 Apr 2024</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>17 Apr 2024</LastUpdatedDate>
+      <FormatNote>Specifications available at https://color.org/icc_specs2.xalter
+Examples available at https://www.color.org/profiles2.xalter</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/vnd.iccprofile</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1976</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>328</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>International Color Consortium</OrganisationName>
+        <DeveloperCompoundName>International Color Consortium</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>328</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>International Color Consortium</OrganisationName>
+        <SupportCompoundName>International Color Consortium</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3491</ExternalSignatureID>
+        <Signature>icc</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3492</ExternalSignatureID>
+        <Signature>icm</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2330</SignatureID>
+        <SignatureName>ICC Profile v4</SignatureName>
+        <SignatureNote>BOF; Offset: 8; Magic Bytes: Version number tag 0x04 followed 27 bytes later by 'acsp'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2709</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>8</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>04{27}61637370</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>2844</RelatedFormatID>
+        <RelatedFormatName>ICC Profile</RelatedFormatName>
+        <RelatedFormatVersion>iccMAX</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>2842</RelatedFormatID>
+        <RelatedFormatName>ICC Profile</RelatedFormatName>
+        <RelatedFormatVersion>2</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

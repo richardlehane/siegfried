@@ -23,16 +23,15 @@
       <ProvenanceSourceID>244</ProvenanceSourceID>
       <ProvenanceName>Preservica / Preservica</ProvenanceName>
       <ProvenanceSourceDate>25 Aug 2023</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>25 Aug 2023</LastUpdatedDate>
+      <ProvenanceDescription>04/2024 (v.117)- Spelling mistake corrected in MIME Type. Submitted by Archives New Zealand and Brigham Young University.</ProvenanceDescription>
+      <LastUpdatedDate>15 Apr 2024</LastUpdatedDate>
       <FormatNote>https://www.iso.org/standard/71832.html</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
-        <Identifier>appliction/pdf</Identifier>
+        <Identifier>application/pdf</Identifier>
         <IdentifierType>MIME</IdentifierType>
       </FileFormatIdentifier>
       <FileFormatIdentifier>

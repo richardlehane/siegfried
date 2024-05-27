@@ -12,7 +12,7 @@
       </FormatFamilies>
       <FormatTypes>Text (Structured)</FormatTypes>
       <FormatDisclosure>Full</FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>The Microsoft Internet Shortcut format (URL file format) is built upon a plain text file and adopts an "INI" or configuration file style 'section + key-pair' format, to provide machine-readable structure to describe a method of accessing a web page or website. The format enables the encapsulation of the information needed to connect to a website in a file-based object, which can be distributed or saved elsewhere on the user's hard-disk, for example, in enabling bookmarking of web-sites as a user's favorites. The Microsoft Internet Shortcut format included features such as hotkey instructions, allowing users to make use of a combination of keys on a keyboard to launch a website. The association of the '*.url' file-format extension with a web-browser application enabled double-clicking of the file object to launch a website.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -23,10 +23,9 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>06 Apr 2009</ProvenanceSourceDate>
-      <ProvenanceDescription>Digital preservation research. Contains URL of network resource. Specific to MS Windows operating environment. Although this kind of file is not useful as a preservation target, it is important to identify it so it can be characterized as ephemeral data.</ProvenanceDescription>
-      <LastUpdatedDate>22 Oct 2009</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <ProvenanceDescription>Digital preservation research. Contains URL of network resource. Specific to MS Windows operating environment. Although this kind of file is not useful as a preservation target, it is important to identify it so it can be characterized as ephemeral data.; 04/2024 (v.117): Description and links added as part of PRONOM Research Week 2023. Submitted by Ross Spencer.</ProvenanceDescription>
+      <LastUpdatedDate>17 Apr 2024</LastUpdatedDate>
+      <FormatNote>https://web.archive.org/web/20120906134656/http://www.fmtz.com/formats/url-file-format/article</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>

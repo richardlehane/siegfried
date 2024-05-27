@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2825</FormatID>
+      <FormatName>Disklavier E-Seq Music</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Audio</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>An E-Seq Music file is a proprietary format developed by Yamaha, for the Disklavier reproducing piano in 1987. The music was recorded and played back via 3.5 2DD floppy disks. The E-Seq format was superseded by the industry-standard file format MIDI Files.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>299</ProvenanceSourceID>
+      <ProvenanceName>Brigham Young University / Brigham Young University</ProvenanceName>
+      <ProvenanceSourceDate>23 Apr 2024</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>23 Apr 2024</LastUpdatedDate>
+      <FormatNote>https://github.com/digital-preservation/PRONOM_Research/tree/main/Submissions/Disklavier%20E-SEQ</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1960</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>312</DeveloperID>
+        <DeveloperName>Yamaha</DeveloperName>
+        <OrganisationName>Yamaha</OrganisationName>
+        <DeveloperCompoundName>Yamaha / Yamaha</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>312</SupportID>
+        <SupportName>Yamaha</SupportName>
+        <OrganisationName>Yamaha</OrganisationName>
+        <SupportCompoundName>Yamaha / Yamaha</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3472</ExternalSignatureID>
+        <Signature>fil</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

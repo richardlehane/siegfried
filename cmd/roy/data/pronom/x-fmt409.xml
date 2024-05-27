@@ -13,7 +13,7 @@
       </FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>An MS-DOS executable is synonymous with a program or application that can potentially be run on MS-DOS. An executable is a file-format object that is "compiled" from source code files written in languages such as C or C++. An MS-DOS executable is native to MS-DOS and early Windows versions, and like other executables or programs, provided a means of distributing applications that performed certain task(s). Executables are compiled to a certain register width, e.g. 8-bit, or 16-bit; which impacts the size of variables in memory, and may impact compatibilty on older or newer versions of an operating system respectively. Executables might require external libraries or configuration to function, and so the technical environment needed to run an executable should be documented and understood in order to preserve functionality over time and to protect future potential users of these files.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -24,9 +24,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>17 Feb 2006</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>17 Feb 2006</LastUpdatedDate>
+      <ProvenanceDescription>04/2024 (v.117): Description added as part of PRONOM Research Week 2023. Submitted by Ross Spencer.</ProvenanceDescription>
+      <LastUpdatedDate>17 Apr 2024</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>

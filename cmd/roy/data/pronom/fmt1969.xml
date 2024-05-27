@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2835</FormatID>
+      <FormatName>ETC Express/Expression Show File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Dataset</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>This file was created for ETC’s Express or Expression console, a device used for venue lighting. The file would be stored on a floppy disk for use in the console itself.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>220</ProvenanceSourceID>
+      <ProvenanceName>The Church of Jesus Christ of Latter-Day Saints / The Church of Jesus Christ of Latter-Day Saints</ProvenanceName>
+      <ProvenanceSourceDate>08 Apr 2024</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>08 Apr 2024</LastUpdatedDate>
+      <FormatNote>Expression Off-Line QuickGuide Version 3.1 https://web.archive.org/web/20051126055839/http://www.etcconnect.com/docs_downloads/manuals/Expression_Off-Line_v3.1_Quick_Guide.pdf
+Expression Console Technical Support https://www.etcconnect.com/Products/Legacy/Console/Others/Expression/Support-Articles.aspx
+Express Console Technical Support https://www.etcconnect.com/Products/Legacy/Console/Others/Express/Software.aspx
+File Format Wiki entry http://fileformats.archiveteam.org/wiki/ETC_Show_File</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1969</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3483</ExternalSignatureID>
+        <Signature>shw</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2319</SignatureID>
+        <SignatureName>ETC Express/Expression Show File</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 'ETC EXP' 0x20</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2700</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>4554432045585020</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

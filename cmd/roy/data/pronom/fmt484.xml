@@ -13,7 +13,7 @@
       <FormatTypes>Aggregate</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>An archive format associated with the 7-Zip application. Its default compression method is LZMA, but it supports other compression methods as well.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -25,11 +25,11 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>18 Dec 2012</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>18 Dec 2012</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <ProvenanceDescription>04/2024 (v.117): Description and links added as part of PRONOM Research Week 2023. The Church of Jesus Christ of Latter-day Saints.</ProvenanceDescription>
+      <LastUpdatedDate>17 Apr 2024</LastUpdatedDate>
+      <FormatNote>https://7-zip.org/7z.html
+https://filext.com/file-extension/7Z
+https://fileinfo.com/extension/7z</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>

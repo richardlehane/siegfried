@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2872</FormatID>
+      <FormatName>IMF Package Packing List</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Mark-up)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The Interoperable Master Format (IMF) is a file-based media format, and an IMF Package is a collection of media files with accompanying XML data describing the IMF Package structure. The Packing List (PKL) is an XML file that provides a manifest of general information about the files within an IMP, including file sizes and hash values. A PKL file should be found alongside the other IMP component files described within the file.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>244</ProvenanceSourceID>
+      <ProvenanceName>Preservica / Preservica</ProvenanceName>
+      <ProvenanceSourceDate>19 Apr 2024</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>19 Apr 2024</LastUpdatedDate>
+      <FormatNote>http://www.smpte-ra.org</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1998</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>331</DeveloperID>
+        <DeveloperName>SMPTE</DeveloperName>
+        <OrganisationName>Society of Motion Picture and Television Engineers</OrganisationName>
+        <DeveloperCompoundName>SMPTE / Society of Motion Picture and Television Engineers</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>331</SupportID>
+        <SupportName>SMPTE</SupportName>
+        <OrganisationName>Society of Motion Picture and Television Engineers</OrganisationName>
+        <SupportCompoundName>SMPTE / Society of Motion Picture and Television Engineers</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3519</ExternalSignatureID>
+        <Signature>xml</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2353</SignatureID>
+        <SignatureName>IMF Package Packing List</SignatureName>
+        <SignatureNote>XML declaration, followed by &lt;PackingList opening tag, shortly followed by a reference to http://www.smpte-ra.org, included here to avoid any incidental clashes with non-IMF formats using similar tags. Note that this signature doesn’t currently utilize any specific XML Namespace element for PKL, although this could be included if there is a requirement to distinguish between different schema compliance.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2730</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C3F786D6C2076657273696F6E3D(22|27)312E30(22|27){1-1024}3C5061636B696E674C697374{5-1024}687474703A2F2F7777772E736D7074652D72612E6F7267</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>638</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

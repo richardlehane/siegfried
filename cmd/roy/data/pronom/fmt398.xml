@@ -10,11 +10,10 @@
       </FormatAliases>
       <FormatFamilies>
       </FormatFamilies>
-      <FormatTypes>
-      </FormatTypes>
+      <FormatTypes>Text (Structured)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>An early version of Finale notation files in plain text format. They were used to transfer Finale documents between Windows and Mac. Finale was originally created for Coda Music Software, later sold to Net4Music which then became MakeMusic. Originally made for Macintosh in 1988 it was later made available for Microsoft Windows. The Enigma stands for 'Environment for Notation Intuitive Graphic Music Algorithms'.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -26,11 +25,12 @@
       <ProvenanceSourceID>178</ProvenanceSourceID>
       <ProvenanceName>National Library of New Zealand / National Library of New Zealand</ProvenanceName>
       <ProvenanceSourceDate>16 Mar 2012</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>16 Mar 2012</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <ProvenanceDescription>04/2024 (v.117)- Signature adjusted to allow for lower case and upper case text and simplified by removing later strings that are not always present, updated description, note field and added version number. Submitted by Brigham Young University.</ProvenanceDescription>
+      <LastUpdatedDate>16 Apr 2024</LastUpdatedDate>
+      <FormatNote>https://preservation.tylerthorsted.com/tag/font/
+https://web.archive.org/web/19990203113959/http://www.codamusic.com:80/down/finale/eeppd.txt
+https://en.wikipedia.org/wiki/Finale_(scorewriter)
+http://fileformats.archiveteam.org/wiki/Finale</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -47,20 +47,19 @@
       <InternalSignature>
         <SignatureID>630</SignatureID>
         <SignatureName>Enigma Transporter File (Finale)</SignatureName>
-        <SignatureNote>Header contains the strings ‘ENIGMA TRANSPORTABLE FILE’, ‘^header’ and ‘^01 '"Finale®' proceeded by version - there are multiple versions this is a generic signature for all.</SignatureNote>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: ‘ENIGMA' followed either by 'TRANSPORTABLE FILE’ or 'transportable file' and later proceeded by version - there are multiple versions this is a generic signature for all.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>779</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>454E49474D41205452414E53504F525441424C452046494C45{1-6}5E686561646572{1-4}5E3031202246696E616C65285229</ByteSequenceValue>
+          <ByteSequenceValue>454E49474D4120(5452414E53504F525441424C452046494C45|7472616E73706F727461626C652066696C65)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

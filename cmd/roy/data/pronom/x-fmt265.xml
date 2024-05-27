@@ -12,7 +12,7 @@
       <FormatTypes>Aggregate</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>An archive format originally intended to archive files on backup tapes without a file system of their own. TAR files are usually uncompressed.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -23,10 +23,11 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
-      <ProvenanceDescription>11/2023 (v.115)- Signature ammended to allow whitespace options. Submitted by National Library of Norway.</ProvenanceDescription>
-      <LastUpdatedDate>15 Nov 2023</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <ProvenanceDescription>11/2023 (v.115)- Signature ammended to allow whitespace options. Submitted by National Library of Norway; 04/2024 (v.117): Description and links added as part of PRONOM Research Week 2023. Submitted by The Church of Jesus Christ of Latter-day Saints.</ProvenanceDescription>
+      <LastUpdatedDate>17 Apr 2024</LastUpdatedDate>
+      <FormatNote>https://en.wikipedia.org/wiki/Tar_(computing)
+http://fileformats.archiveteam.org/wiki/Tape_Archive
+https://fileinfo.com/extension/tar</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>

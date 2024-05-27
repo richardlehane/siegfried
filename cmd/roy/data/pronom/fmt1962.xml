@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2827</FormatID>
+      <FormatName>SolidWorks Material Database File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>
+      </FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>SolidWorks is a CAD program that engineers and product designers use to prototype manufactured products, such as vehicle parts, tools, and other instruments. After creating a 3D representation of a part or product in SolidWorks, users can export a 2D drawing of that part or product. The drawing usually contains multiple 2D views of the part, as well as measurements, noted tolerances, and other annotations.
+The sldmat file stores material database used by SolidWorks.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>299</ProvenanceSourceID>
+      <ProvenanceName>Brigham Young University / Brigham Young University</ProvenanceName>
+      <ProvenanceSourceDate>15 Apr 2024</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>15 Apr 2024</LastUpdatedDate>
+      <FormatNote>https://www.file-extensions.org/sldmat-file-extension</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1962</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>135</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Dassault Systèms</OrganisationName>
+        <DeveloperCompoundName>Dassault Systèms</DeveloperCompoundName>
+      </Developers>
+      <ExternalSignature>
+        <ExternalSignatureID>3474</ExternalSignatureID>
+        <Signature>sldmat</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2361</SignatureID>
+        <SignatureName>SolidWorks Material Database File</SignatureName>
+        <SignatureNote>Absolute from BOF, offset 0-3 magic bytes: &lt;?xml version=("|')1.0("|'){3-24}&lt;mstns:materials xmlns:mstns=("|')http://www.solidworks.com/sldmaterials</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2737</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>3</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C3F786D6C2076657273696F6E3D(22|27)312E30(22|27){3-24}3C6D73746E733A6D6174657269616C7320786D6C6E733A6D73746E733D(22|27)687474703A2F2F7777772E736F6C6964776F726B732E636F6D2F736C646D6174657269616C73</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>638</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

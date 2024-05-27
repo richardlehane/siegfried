@@ -25,8 +25,8 @@
       <ProvenanceSourceID>170</ProvenanceSourceID>
       <ProvenanceName>Archaeology Data Service / Archaeology Data Service</ProvenanceName>
       <ProvenanceSourceDate>19 Aug 2011</ProvenanceSourceDate>
-      <ProvenanceDescription>Submitted by Archaeology Data Service. Format description information supplied by the Geospatial Multistate Access and Preservation Partnership (GeoMAPP), a grant funded collaboration sponsored by the National Digital Information Infrastructure Preservation Program (NDIIPP) of the Library of Congress, involving archives staff from North Carolina, Kentucky, Montana, and Utah state archives.</ProvenanceDescription>
-      <LastUpdatedDate>19 Aug 2011</LastUpdatedDate>
+      <ProvenanceDescription>Submitted by Archaeology Data Service. Format description information supplied by the Geospatial Multistate Access and Preservation Partnership (GeoMAPP), a grant funded collaboration sponsored by the National Digital Information Infrastructure Preservation Program (NDIIPP) of the Library of Congress, involving archives staff from North Carolina, Kentucky, Montana, and Utah state archives. 04/2024 (v.117)- Addition of extension sdw. Submitted by Preservica.</ProvenanceDescription>
+      <LastUpdatedDate>22 Apr 2024</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -85,6 +85,11 @@
       <ExternalSignature>
         <ExternalSignatureID>1146</ExternalSignatureID>
         <Signature>btw</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3484</ExternalSignatureID>
+        <Signature>sdw</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
     </FileFormat>

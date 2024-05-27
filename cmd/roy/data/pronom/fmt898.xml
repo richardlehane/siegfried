@@ -13,7 +13,7 @@
       <FormatTypes>Image (Raster)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>Zoomify offers the ability to zoom into high resolution images. It works by converting a high resolution image into a collection of JPEG tiles that are stored within a .zif file. This file can in turn be displayed within a web browser with the aid of a javascript library.</FormatDescription>
+      <FormatDescription>Zoomify offers the ability to pinto high resolution images. It works by converting a high resolution image into a collection of JPEG tiles that are stored within a .zif file. This file can in turn be displayed within a web browser with the aid of a javascript library.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>

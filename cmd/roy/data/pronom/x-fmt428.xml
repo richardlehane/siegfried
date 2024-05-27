@@ -14,7 +14,7 @@
       </FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Microsoft Windows Shortcut also Microsoft Shell Link (LNK file) provided a way of launching an executable file (program, or some other digital file) outside of the host folder of that file on the host operating system. For example, Microsoft Operating Systems that had the concept of a 'Desktop' space (or 'folder') may hold a number of shortcuts to a user's most used application programs, e.g. Internet Explorer, and the user's Office Productivity Suite; or that user's favorite files, e.g. family photographs. The specification for Microsoft Windows Shortcut runs up to 48 pages long and consists of other standards required for parsing is successfully. The structure of the Microsoft Windows Shortcut file needs to be able to contain information about the location to use when it "executes" (its context), the command-line arguments specific to how an application will open, e.g. affecting user defaults, or the default behavior of an application. It may contain optional parameters such as hotkeys for opening a shortcut quickly using the keyboard. The format embeds metadata of interest to forensics researchers such as 'FileAttributes', 'CreationTime' and 'AccessTime' as well as other metadata such as `FileSize`, externalizing this information, separately from the link target (the target file, or program). This means the format may keep a record about other files even when the target file or application has been deleted.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -25,10 +25,9 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>02 Feb 2007</ProvenanceSourceDate>
-      <ProvenanceDescription>Digital preservation research.</ProvenanceDescription>
+      <ProvenanceDescription>Digital preservation research. 04/2024 (v.117)- Description created and links added as part of PRONOM Research Week 2023. Submitted by Ross Spencer.</ProvenanceDescription>
       <LastUpdatedDate>22 Oct 2009</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <FormatNote>https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-shllink/16cb4ca1-9339-4d0c-a68d-bf1d6cc0f943?redirectedfrom=MSDN</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>

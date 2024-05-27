@@ -50,7 +50,9 @@
     "x-fmt/392 (JP2 (JPEG 2000 part 1))",
     "fmt/151 (JPX (JPEG 2000 part 2))",
     "fmt/337 (MJ2 (Motion JPEG 2000))",
-    "fmt/463 (JPM (JPEG 2000 part 6))"
+    "fmt/463 (JPM (JPEG 2000 part 6))",
+    "fmt/1794 (JPEG 2000 Codestream)",
+    "fmt/1964 (JPH (JPEG 2000 part 15))"
   ],
   "richTextFormat": [
     "fmt/45 (Rich Text Format 1.0-1.4)",

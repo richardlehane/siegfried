@@ -13,7 +13,7 @@
       <FormatTypes>Text (Structured)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>A Text Configuration file (INI) is an umbrella name for an 'initialization' (or configuration) file that provides users and software developers methods of dynamically configuring the state of an application program at startup and at various other points during the application's runtime. An INI file is characterized by sections, followed by key-value (property-value) pairs. There can be many sections in an INI file and many key-value pairs per section. Sections are denoted by a title in square brackets, e.g. '[section title]'. Key-value pairs have a case-insensitive name followed by an equals sign, and the value that the key is assigned e.g. 'key_1=value'. Comments can be used in an INI file to describe the functionality that a particular value impacts, or to provide further context about the file as a whole. INI files are based on the plain-text format and so are considered human readable and can be opened in a plain-text editor. That being said, an INI file may not make sense outside of its operating context, i.e. the application program it supports, and so the technical environment does need to be documented and preserved in order to understand what function a particular INI file was meant to enable at the time it was used. INI is not a single standard and while INI files conform to some basic principles, users attempting to read them with application programming libraries might want to look at what is supported by their particular implementation, e.g. per this Wikipedia article, https://en.wikipedia.org/w/index.php?title=INI_file&amp;oldid=1181798940#Comparison_of_INI_parsers but other implementation specific guidance may ultimately prove to be more useful.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -24,9 +24,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>02 Feb 2007</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>02 Feb 2007</LastUpdatedDate>
+      <ProvenanceDescription>04/2024 (v.117): Description added as part of PRONOM Research Week 2023. Submitted by Ross Spencer.</ProvenanceDescription>
+      <LastUpdatedDate>17 Apr 2024</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>

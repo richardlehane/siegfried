@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>1142</FormatID>
-      <FormatName>DS_store file (MAC)</FormatName>
+      <FormatName>DS_Store File (MAC)</FormatName>
       <FormatVersion>
       </FormatVersion>
       <FormatAliases>
@@ -14,7 +14,7 @@
       </FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>This format is native to MacOS where .DS_Store files are hidden files storing attributes of their containing folder. These can include view options, icon positions, and other visual information. They are created and maintained by the Finder application in every folder it accesses. Their functions are similar to those of desktop.ini files in Windows.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -26,11 +26,9 @@
       <ProvenanceSourceID>178</ProvenanceSourceID>
       <ProvenanceName>National Library of New Zealand / National Library of New Zealand</ProvenanceName>
       <ProvenanceSourceDate>16 Mar 2012</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>16 Mar 2012</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <ProvenanceDescription>04/2024 (v.117)- Description created. Submitted by Archives nationales (French National Archives) as part of PRONOM Research Week 2023.</ProvenanceDescription>
+      <LastUpdatedDate>16 Apr 2024</LastUpdatedDate>
+      <FormatNote>https://en.wikipedia.org/wiki/.DS_Store</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>

@@ -13,7 +13,7 @@
       <FormatTypes>Image (Raster)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>An image file format developed by Kodak for scanning film and delivering on CD. Combines multiple resolutions into a single file. Images are in the Photo YCC color encoding, and stored using in units called IMAGE PAC files.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -24,11 +24,9 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>28 Oct 2009</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>26 Feb 2013</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <ProvenanceDescription>04/2024 (v.117)- Description created and link added. Submitted by Brigham Young University as part of PRONOM Research Week 2023.</ProvenanceDescription>
+      <LastUpdatedDate>16 Apr 2024</LastUpdatedDate>
+      <FormatNote>http://justsolve.archiveteam.org/wiki/Photo_CD</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>

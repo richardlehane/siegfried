@@ -13,7 +13,7 @@
       <FormatTypes>Image (Raster)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Adobe PhotoDeluxe is the native format of files produced by PhotoDeluxe, a raster graphics editor line published by Adobe from 1996 to 2002. It is based on the Adobe Photoshop file format.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -24,9 +24,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>10 Oct 2003</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <ProvenanceDescription>04/2024 (v.117)- Description created. Submitted by Archives nationales (French National Archives) as part of PRONOM Research Week 2023.</ProvenanceDescription>
+      <LastUpdatedDate>16 Apr 2024</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>

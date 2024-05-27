@@ -13,7 +13,7 @@
       <FormatTypes>Presentation</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>PDF/E-1 is a subtype of PDF based on PDF 1.6 and meant for engineering and technical documentation. It was made available by Adobe in 2008 under the international standard ISO 24517-1:2008. It supports interactive media, animation and 3D engineering models, and allows mark-up.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -25,11 +25,9 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>18 Dec 2012</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>18 Dec 2012</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <ProvenanceDescription>04/2024 (v.117): Description and links added as part of PRONOM Research Week 2023. Submitted by Archives nationales (French National Archives).</ProvenanceDescription>
+      <LastUpdatedDate>17 Apr 2024</LastUpdatedDate>
+      <FormatNote>https://www.adobe.com/uk/acrobat/resources/document-files/pdf-types/pdf-e.html</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>

@@ -271,6 +271,12 @@
         <RelatedFormatName>CorelDraw Drawing</RelatedFormatName>
         <RelatedFormatVersion>8 Bidi</RelatedFormatVersion>
       </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2823</RelatedFormatID>
+        <RelatedFormatName>Melco OFM Project</RelatedFormatName>
+        <RelatedFormatVersion>11</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

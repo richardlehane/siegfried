@@ -26,8 +26,8 @@
       <ProvenanceName>
       </ProvenanceName>
       <ProvenanceSourceDate>03 Nov 2021</ProvenanceSourceDate>
-      <ProvenanceDescription>09/2023 (v.115)- MIME Type added 'application/eaf+xml' and modified file type to 'Text (Structured) submitted by the Max Plank Insitute of Phsycholinguisitcs and Monash University.</ProvenanceDescription>
-      <LastUpdatedDate>25 Aug 2023</LastUpdatedDate>
+      <ProvenanceDescription>09/2023 (v.115)- MIME Type added 'application/eaf+xml' and modified file type to 'Text (Structured) submitted by the Max Plank Insitute of Phsycholinguisitcs and Monash University. 04/2024 (v.117)- Signature updated to allow flexibility for byte length between tags. Submitted by Preservica based on samples provided by The Endanagered Languages Archive.</ProvenanceDescription>
+      <LastUpdatedDate>22 Apr 2024</LastUpdatedDate>
       <FormatNote>EAF Specification für Version 3.0 (2017): www.mpi.nl/tools/elan/EAF_Annotation_Format_3.0_and_ELAN.pdf</FormatNote>
       <FormatRisk>
       </FormatRisk>
@@ -63,19 +63,19 @@
       <InternalSignature>
         <SignatureID>1889</SignatureID>
         <SignatureName>ELAN Annotation File</SignatureName>
-        <SignatureNote>Magic bytes, BOF, min offset 27, max offset 57:  ANNOTATION_DOCUMENT AUTHOR= and EOF, offset 0: &lt;/ANNOTATION_DOCUMENT&gt;.</SignatureNote>
+        <SignatureNote>Magic bytes, BOF; Offset: 27-56; Magic Bytes: 'ANNOTATION_DOCUMENT' {0-256} 'AUTHOR='; EOF; Offset: 0; Magic Bytes: '&lt;/ANNOTATION_DOCUMENT&gt;' followed by either 0x0A, 0x0D, 0x0D0A</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>2185</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>27</Offset>
-          <MaxOffset>57</MaxOffset>
+          <MaxOffset>30</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>414E4E4F544154494F4E5F444F43554D454E5420415554484F523D</ByteSequenceValue>
+          <ByteSequenceValue>414E4E4F544154494F4E5F444F43554D454E5420{0-256}415554484F523D</ByteSequenceValue>
         </ByteSequence>
         <ByteSequence>
           <ByteSequenceID>2186</ByteSequenceID>
@@ -88,7 +88,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>3C2F414E4E4F544154494F4E5F444F43554D454E543E0A</ByteSequenceValue>
+          <ByteSequenceValue>3C2F414E4E4F544154494F4E5F444F43554D454E543E(0A|0D|0D0A)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

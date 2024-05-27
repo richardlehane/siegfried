@@ -110,6 +110,13 @@
         </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2831</RelatedFormatID>
+        <RelatedFormatName>Final Writer Document</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Is supertype of</RelationshipType>
         <RelatedFormatID>1083</RelatedFormatID>
         <RelatedFormatName>Interchange File Format Interleaved Bitmap</RelatedFormatName>

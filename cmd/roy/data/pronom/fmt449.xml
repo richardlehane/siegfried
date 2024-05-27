@@ -13,7 +13,7 @@
       </FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>Adobe Portable Document Catalog Index File (PDX) is the format of a file created when an index is built for a collection of PDF documents defined as a catalog in Adobe Acrobat Pro versions 2.0 and later, allowing users to search through the contents of the catalogue.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -28,11 +28,9 @@
       <ProvenanceDescription>PDX is Adobe Acrobat Catalog Index file, available in Adobe Acrobat versions 2 and later. 
 When created, a PDF Catalog Index will also create a number of dependent sub-files of specific filetypes. 
 The extensions for these filetypes within earlier versions of .pdx are .wld, .abt, .did, .ddd, .pdd, .plc, .cat, .trn. 
-In later versions only .idx files are created. 
-The Catalog Index creates a fully text-searchable relationship between the indexed pdf files.</ProvenanceDescription>
-      <LastUpdatedDate>28 Aug 2012</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+In later versions only .idx files are created.; The Catalog Index creates a fully text-searchable relationship between the indexed pdf files.; 04/2024 (v.117): Description and links added as part of PRONOM Research Week 2023. Submitted by Archives nationales (French National Archives).</ProvenanceDescription>
+      <LastUpdatedDate>17 Apr 2024</LastUpdatedDate>
+      <FormatNote>https://helpx.adobe.com/acrobat/using/creating-pdf-indexes.html</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>

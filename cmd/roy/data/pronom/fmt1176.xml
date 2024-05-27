@@ -25,9 +25,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>02 Aug 2018</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2018</LastUpdatedDate>
+      <ProvenanceDescription>04/2024 (v.117)- Signature named 'Nullsoft Video with optional header' updated to extend byte range between two strings. Submitted by Preservica.</ProvenanceDescription>
+      <LastUpdatedDate>18 Apr 2024</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -46,7 +45,7 @@
       <InternalSignature>
         <SignatureID>1557</SignatureID>
         <SignatureName>Nullsoft Video with optional header</SignatureName>
-        <SignatureNote>BOF: 'NSVf'{24-2048}'NSVs' (must have minimum 24 byte header but can include variable amount of metadata, Table of Contents)</SignatureNote>
+        <SignatureNote>BOF: 'NSVf'{24-16384}'NSVs' (must have minimum 24 byte header but can include variable amount of metadata, Table of Contents)</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1825</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -58,7 +57,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>4E535666{24-2048}4E535673</ByteSequenceValue>
+          <ByteSequenceValue>4E535666{24-16384}4E535673</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <InternalSignature>

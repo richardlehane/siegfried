@@ -2,6 +2,1011 @@
 <?xml-stylesheet type="text/xsl" href="release-note.xsl"?>
 <release_notes>
 <release_note>
+   <release_date>30th April 2024</release_date>
+   <signature_filename>DROID_SignatureFile_V118.xml</signature_filename>
+   <release_outline name="New Records">
+      <format>
+         <puid type="fmt">1946</puid>
+         <name>Draw.io Diagram (XML) File</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1947</puid>
+         <name>OpenWayback CDXJ File Format</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1948</puid>
+         <name>Common Data Format dotCDF 2.0-2.5</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1949</puid>
+         <name>Common Data Format dotCDF 2.6-2.7</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1950</puid>
+         <name>Common Data Format dotCDF 3.x</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1951</puid>
+         <name>Pro Tools Session File 5-9</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1952</puid>
+         <name>PechaMaker Format</name>
+         <summary>Full entry added. Submitted by Buddhist Digital Resource Center.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1953</puid>
+         <name>Zoom Project Settings H5</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1954</puid>
+         <name>Zoom Project Settings H6</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1955</puid>
+         <name>Graphisoft Archicad Project 6-9</name>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1956</puid>
+         <name>Sandboxels Save File</name>
+         <summary>Full entry added. Submitted by R74n.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1957</puid>
+         <name>Program Embroidery Stitch File (PES)</name>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1958</puid>
+         <name>Melco OFM Project v.11</name>
+         <summary>Extension-only entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1959</puid>
+         <name>Melco OFM Project pre v.11</name>
+         <summary>Extension-only entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1960</puid>
+         <name>Disklavier E-Seq Music</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1961</puid>
+         <name>Shorten (codec)</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1962</puid>
+         <name>SolidWorks Material Database File</name>
+         <summary>Extension-only entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1963</puid>
+         <name>NEC TH5100 Thermo Tracer Image FIle</name>
+         <summary>Full entry added. Submitted by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1964</puid>
+         <name>JPH (JPEG 2000 part 15)</name>
+         <summary>Full entry added. Submitted by Preservica, with reference to work published by Koninklijke Bibliotheek/Open Preservation Foundation for the Jpylyzer tool.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1965</puid>
+         <name>Papyrus Document</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1966</puid>
+         <name>Final Writer Document</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1967</puid>
+         <name>Solidworks Design Document Files 2015+</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1968</puid>
+         <name>Atrac Codec File</name>
+         <summary>Full entry added. Submitted by Bibliothèque Cantonale Universitaire de Fribourg.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1969</puid>
+         <name>ETC Express/Expression Show File</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1970</puid>
+         <name>MOXCEL</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1971</puid>
+         <name>Enigma Binary File (Finale) 1</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1972</puid>
+         <name>Enigma Binary File (Finale) 2</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1973</puid>
+         <name>Finale Performance Assessment</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1974</puid>
+         <name>Finale Notation File 2014+</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1975</puid>
+         <name>ICC Profile 2</name>
+         <summary>Full entry added. Submitted by Bibliothèque nationale de France.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1976</puid>
+         <name>ICC Profile 4</name>
+         <summary>Full entry added. Submitted by Bibliothèque nationale de France.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1977</puid>
+         <name>ICC Profile iccMAX</name>
+         <summary>Full entry added. Submitted by Bibliothèque nationale de France.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1978</puid>
+         <name>Sibelius Score 1.2</name>
+         <summary>Full entry added. Submitted by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1979</puid>
+         <name>Sibelius Score 2</name>
+         <summary>Full entry added. Submitted by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1980</puid>
+         <name>Sibelius Score 3</name>
+         <summary>Full entry added. Submitted by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1981</puid>
+         <name>Sibelius Score 4</name>
+         <summary>Full entry added. Submitted by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1982</puid>
+         <name>Sibelius Score 5</name>
+         <summary>Full entry added. Submitted by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1983</puid>
+         <name>Sibelius Score 6</name>
+         <summary>Full entry added. Submitted by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1984</puid>
+         <name>Sibelius Score 7</name>
+         <summary>Full entry added. Submitted by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1985</puid>
+         <name>Sibelius Score 7.5-8.0</name>
+         <summary>Full entry added. Submitted by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1986</puid>
+         <name>Sibelius Score 8.1-8.5</name>
+         <summary>Full entry added. Submitted by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1987</puid>
+         <name>Sibelius Score 8.6-2019.12</name>
+         <summary>Full entry added. Submitted by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1988</puid>
+         <name>Sibelius Score 2020.1</name>
+         <summary>Full entry added. Submitted by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1989</puid>
+         <name>Sibelius Score 2020.3-2022.5</name>
+         <summary>Full entry added. Submitted by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1990</puid>
+         <name>Sibelius Score 2022.7-2022.11</name>
+         <summary>Full entry added. Submitted by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1991</puid>
+         <name>Sibelius Score 2022.12-2023.3</name>
+         <summary>Full entry added. Submitted by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1992</puid>
+         <name>Sibelius Score 2023.5-2023.8</name>
+         <summary>Full entry added. Submitted by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1993</puid>
+         <name>Sibelius Score 2024</name>
+         <summary>Full entry added. Submitted by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1994</puid>
+         <name>Sibelius Scorch</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1995</puid>
+         <name>WinFax Fax Image</name>
+         <summary>Full entry added. Submitted by National Archives of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1996</puid>
+         <name>SPIR-V</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1997</puid>
+         <name>IMF Package Asset Map</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1998</puid>
+         <name>IMF Package Packing List</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1999</puid>
+         <name>IMF Package Composition Playlist</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2000</puid>
+         <name>Husqvarna Embroidery Stitch File</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2001</puid>
+         <name>Husqvarna/ Pfaff Embroidery Stitch File</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2002</puid>
+         <name>Husqvarna/ TruE Embroidery Stitch File</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2003</puid>
+         <name>Husqvarna/ Premier+ Embroidery Stitch File</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2004</puid>
+         <name>Husqvarna Viking Designer 1 Stitch File</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2005</puid>
+         <name>Compressed MusicXML 3.1+</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="Updated Records">
+      <format>
+         <puid type="fmt">155</puid>
+         <name>GeoTIFF</name>
+         <summary>Increased the max-offset for internal EOF signatures, updated the description, specification and LOC identifier. Submitted by Archives New Zealand.</summary>
+      </format>
+      <format>
+         <puid type="fmt">162</puid>
+         <name>Microsoft Multiplan</name>
+         <summary>Description created and links added as part of PRONOM Research Week 2023. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">199</puid>
+         <name>MPEG-4 Media File</name>
+         <summary>Description created as part of PRONOM Research Week 2023. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">209</puid>
+         <name>Sound Designer II Audio File</name>
+         <summary>Description created and documentation links added as part of PRONOM Research Week 2023. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">211</puid>
+         <name>Kodak Photo CD Image</name>
+         <summary>Description created as part of PRONOM Research Week 2023. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">230</puid>
+         <name>MIDI Audio</name>
+         <summary>Description created and documentation links added as part of PRONOM Research Week 2023. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">341</puid>
+         <name>Macintosh PICT Image 2.0</name>
+         <summary>Description created as part of PRONOM Research Week 2023. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">357</puid>
+         <name>3GPP Audio/Video File</name>
+         <summary>Description created and documentation links added as part of PRONOM Research Week 2023. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">367</puid>
+         <name>ESRI World File Format</name>
+         <summary>Added extension sdw. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">394</puid>
+         <name>DS_Store File (MAC)</name>
+         <summary>Description created as part of PRONOM Research Week 2023. Submitted by Archives nationales (French National Archives).</summary>
+      </format>
+      <format>
+         <puid type="fmt">397</puid>
+         <name>Enigma Binary File (Finale) 3+</name>
+         <summary>Updated description, note field and modified the signature by removing the string 'Final ®' as this can be replaced with the string 'PrintMusic®'. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">398</puid>
+         <name>Enigma Transportable File</name>
+         <summary>Signature adjusted to allow for lower case and upper case text and simplified by removing later strings that are not always present, updated description, note field and added version number. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">446</puid>
+         <name>Adobe Portable Document Catalog Index File 2.0</name>
+         <summary>Description created and documentation links added as part of PRONOM Research Week 2023. Submitted by Archives nationales (French National Archives).</summary>
+      </format>
+      <format>
+         <puid type="fmt">447</puid>
+         <name>Adobe Portable Document Catalog Index File 3.0</name>
+         <summary>Description created and documentation links added as part of PRONOM Research Week 2023. Submitted by Archives nationales (French National Archives).</summary>
+      </format>
+      <format>
+         <puid type="fmt">448</puid>
+         <name>Adobe Portable Document Catalog Index File 3.1</name>
+         <summary>Description created and documentation links added as part of PRONOM Research Week 2023. Submitted by Archives nationales (French National Archives).</summary>
+      </format>
+      <format>
+         <puid type="fmt">449</puid>
+         <name>Adobe Portable Document Catalog Index File 3.2</name>
+         <summary>Description created and documentation links added as part of PRONOM Research Week 2023. Submitted by Archives nationales (French National Archives).</summary>
+      </format>
+      <format>
+         <puid type="fmt">472</puid>
+         <name>Sony Digital Voice File/Sony Memory Stick Voice File</name>
+         <summary>Description created and documentation links added as part of PRONOM Research Week 2023. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">484</puid>
+         <name>7Zip format</name>
+         <summary>Description created and documentation links added as part of PRONOM Research Week 2023. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">493</puid>
+         <name>Acrobat PDF/E - Portable Document Format for Engineering PDF/E-1</name>
+         <summary>Description created and documentation links added as part of PRONOM Research Week 2023. Submitted by Archives nationales (French National Archives).</summary>
+      </format>
+      <format>
+         <puid type="fmt">566</puid>
+         <name>WebP Lossy</name>
+         <summary>Added MIME type identifier image/webp. Submitted by Archives New Zealand.</summary>
+      </format>
+      <format>
+         <puid type="fmt">567</puid>
+         <name>WebP Lossless</name>
+         <summary>Added MIME type identifier image/webp. Submitted by Archives New Zealand.</summary>
+      </format>
+      <format>
+         <puid type="fmt">568</puid>
+         <name>WebP Extended</name>
+         <summary>Added MIME type identifier image/webp. Submitted by Archives New Zealand.</summary>
+      </format>
+      <format>
+         <puid type="fmt">574</puid>
+         <name>Digital Imaging and Communications in Medicine File Format</name>
+         <summary>Alias 'DICOM' added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">664</puid>
+         <name>Gerber Format</name>
+         <summary>. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">899</puid>
+         <name>Windows Portable Executable 32 bit</name>
+         <summary>Description created as part of PRONOM Research Week 2023. Submitted by Ross Spencer.</summary>
+      </format>
+      <format>
+         <puid type="fmt">900</puid>
+         <name>Windows Portable Executable 64 bit</name>
+         <summary>Description created as part of PRONOM Research Week 2023. Submitted by Ross Spencer.</summary>
+      </format>
+      <format>
+         <puid type="fmt">950</puid>
+         <name>MIME Email 1.0</name>
+         <summary>Max offset of one BOF sequence increased to 20000. Submitted by Archives New Zealand.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1176</puid>
+         <name>Nullsoft Streaming Video</name>
+         <summary>Signature named 'Nullsoft Video with optional header' updated to extend byte range between two strings. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1451</puid>
+         <name>PDF Portfolio 1.7</name>
+         <summary>Signature modified to no longer search for '&lt;&lt;/Cl&lt;&lt;' block. Submitted by Archeological Data Service and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1543</puid>
+         <name>Elan Annotation File</name>
+         <summary>Signature updated to allow flexibility in number of bytes between tags. Submitted by Preservica based on format samples provided by The Endangered Languages Archive.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1671</puid>
+         <name>Z Compressed Data</name>
+         <summary>Name of developer corrected in description. Submitted by Igor Nechaev.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1714</puid>
+         <name>CATIA Model 3</name>
+         <summary>Signature updated to include a variable rather than a fixed byte sequence of 2026 bytes. Submitted by J. Paul Getty Trust.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1727</puid>
+         <name>Pro Tools Session File 10+</name>
+         <summary>Version number changed from 10 onwards to 10+ and signature name updated to include version number 10. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1794</puid>
+         <name>JPEG 2000 Codestream</name>
+         <summary>Added to the Added to the JPEG 2000 family. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1799</puid>
+         <name>FLExText Interlinear XML Format</name>
+         <summary>Offset from BOF changed from 0 to 0-3 to provide flexibility for the XML 1.0 declaration. Submitted by Preservica based on format samples provided by The Endangered Languages Archive.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1840</puid>
+         <name>WACZ</name>
+         <summary>Removed max-offset in container signature to scan full file for byte sequence. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1877</puid>
+         <name>GST Art File 1</name>
+         <summary>Priority over fmt/134 MPEG 1/2 Audio Layer 3. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1878</puid>
+         <name>GST Art File 2</name>
+         <summary>Update to container signature to allow for 'CONTENTS' and 'Contents' file paths and max-offset changed to 0 to allow for more precise identification. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1905</puid>
+         <name>Universal Scene Description ASCII File</name>
+         <summary>Correction of wikidata reference. Submitted by Yale University Library.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1911</puid>
+         <name>Acrobat PDF/A - Portable Document Format 4e</name>
+         <summary>Spelling mistake corrected in MIME Type. Submitted by Archives New Zealand and Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1938</puid>
+         <name>Lotus Screencam Data File</name>
+         <summary>Changed version name  from 3.0,3.1 to 3.0-3.1. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1943</puid>
+         <name>Digital Negative Format (DNG) 1.7</name>
+         <summary>Signature modified to identify both version 1.7.0 and 1.7.1. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">26</puid>
+         <name>AutoCAD Batch Plot File 1.0-R14</name>
+         <summary>Added internal signature and description. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">27</puid>
+         <name>AutoCAD Batch Plot File 2000-2005</name>
+         <summary>Added internal signature and description. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">38</puid>
+         <name>AutoCAD Custom Dictionary</name>
+         <summary>Added internal signature and description. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">39</puid>
+         <name>AutoCAD dbConnect Query Set</name>
+         <summary>Added internal signature and description. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">40</puid>
+         <name>AutoCAD dbConnect Template Set</name>
+         <summary>Added internal signature and description. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">80</puid>
+         <name>Macintosh PICT Image 1.0</name>
+         <summary>Description created and links added as part of PRONOM Research Week 2023. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">109</puid>
+         <name>Scalable Vector Graphics Compressed</name>
+         <summary>Description created as part of PRONOM Research Week 2023. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">111</puid>
+         <name>Plain Text File</name>
+         <summary>Description created and documentation links added as part of PRONOM Research Week 2023. Submitted by Ross Spencer.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">123</puid>
+         <name>Microsoft Excel Macro 4.0</name>
+         <summary>. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">138</puid>
+         <name>Active Server Page</name>
+         <summary>Description created and documentation links added as part of PRONOM Research Week 2023. Submitted by Archives nationales (French National Archives).</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">148</puid>
+         <name>IBM DisplayWrite DCA Text File</name>
+         <summary>Added internal signature and description. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">162</puid>
+         <name>Adobe FrameMaker Interchange Format</name>
+         <summary>Description created and documentation links added as part of PRONOM Research Week 2023. Submitted by Archives nationales (French National Archives).</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">167</puid>
+         <name>Adobe PhotoDeluxe</name>
+         <summary>Description created as part of PRONOM Research Week 2024. Submitted by Archives nationales (French National Archives).</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">169</puid>
+         <name>PHP Script Page</name>
+         <summary>Description created as part of PRONOM Research Week 2023. Submitted by Ross Spencer.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">217</puid>
+         <name>Adobe ACD</name>
+         <summary>Description created as part of PRONOM Research Week 2023. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">263</puid>
+         <name>Zip Format</name>
+         <summary>An additional internal signature, name updated for the original internal signature, description update, library of congress identifier, documentation links and vendor. Submitted by Institute of the History of Charles University and Archive of Charles University, Preservica,  Brigham Young University and The Church of Jesus Christ of Latter-Day Saints.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">265</puid>
+         <name>Tape Archive Format</name>
+         <summary>Description created and documentation links added as part of PRONOM Research Week 2023. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">266</puid>
+         <name>GZIP Format</name>
+         <summary>Description created and documentation links added as part of PRONOM Research Week 2023. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">279</puid>
+         <name>MPEG 1/2 Audio Layer 3 Streaming</name>
+         <summary>Description created and documentation links added as part of PRONOM Research Week 2023. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">347</puid>
+         <name>MultiMate Text File</name>
+         <summary>Added internal signature, description and extensions .fnx and .pat. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">409</puid>
+         <name>MS-DOS Executable</name>
+         <summary>Description created as part of PRONOM Research Week 2023. Submitted by Ross Spencer.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">411</puid>
+         <name>Windows Portable Executable</name>
+         <summary>Description created as part of PRONOM Research Week 2023. Submitted by Ross Spencer.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">412</puid>
+         <name>Java Archive Format</name>
+         <summary>Description created and documentation links added as part of PRONOM Research Week 2023. Submitted by Ross Spencer.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">413</puid>
+         <name>Batch File (Executable)</name>
+         <summary>Description created as part of PRONOM Research Week 2023. Submitted by Ross Spencer.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">416</puid>
+         <name>BinHex Binary Text</name>
+         <summary>Signature modified to increase max-offset by approximately 4000 bytes, beginning and ending colon added for conformance to specification. Description, notefield and MIME type updated.. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">421</puid>
+         <name>Text Configuration file</name>
+         <summary>Description created as part of PRONOM Research Week 2023. Submitted by Ross Spencer.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">423</puid>
+         <name>JavaScript file</name>
+         <summary>Description created and documentation links added as part of PRONOM Research Week 2023. Submitted by Ross Spencer.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">428</puid>
+         <name>Microsoft Windows Shortcut</name>
+         <summary>Description created and documentation links added as part of PRONOM Research Week 2023. Submitted by Ross Spencer.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">436</puid>
+         <name>CATIA Model 4</name>
+         <summary>Signature updated to include a variable rather than a fixed byte sequence of 2026 bytes. Submitted by J. Paul Getty Trust.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">454</puid>
+         <name>Microsoft Internet Shortcut</name>
+         <summary>Description created and documentation links added as part of PRONOM Research Week 2023. Submitted by Ross Spencer.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="New Signatures">
+      <format>
+         <puid type="fmt">664</puid>
+         <name>Gerber Format</name>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1946</puid>
+         <name>Draw.io Diagram (XML) File</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1947</puid>
+         <name>OpenWayback CDXJ File Format</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1948</puid>
+         <name>Common Data Format dotCDF 2.0-2.5</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1949</puid>
+         <name>Common Data Format dotCDF 2.6-2.7</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1950</puid>
+         <name>Common Data Format dotCDF 3.x</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1951</puid>
+         <name>Pro Tools Session File 5-9</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1952</puid>
+         <name>PechaMaker Format</name>
+         <summary>Signature researched and samples provided by Buddhist Digital Resource Center.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1953</puid>
+         <name>Zoom Project Settings H5</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1954</puid>
+         <name>Zoom Project Settings H6</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1955</puid>
+         <name>Graphisoft Archicad Project 6-9</name>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1956</puid>
+         <name>Sandboxels Save File</name>
+         <summary>Signature researched and samples provided by R74n.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1957</puid>
+         <name>Program Embroidery Stitch File (PES)</name>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1960</puid>
+         <name>Disklavier E-Seq Music</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1961</puid>
+         <name>Shorten (codec)</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1963</puid>
+         <name>NEC TH5100 Thermo Tracer Image FIle</name>
+         <summary>Signature researched and samples provided by The National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1964</puid>
+         <name>JPH (JPEG 2000 part 15)</name>
+         <summary>Signature researched and samples provided by Preservica, with reference to work published by Koninklijke Bibliotheek/Open Preservation Foundation for the Jpylyzer tool.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1965</puid>
+         <name>Papyrus Document</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1966</puid>
+         <name>Final Writer Document</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1967</puid>
+         <name>Solidworks Design Document Files 2015+</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1968</puid>
+         <name>Atrac Codec File</name>
+         <summary>Signature researched and samples provided by Bibliothèque Cantonale Universitaire de Fribourg.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1969</puid>
+         <name>ETC Express/Expression Show File</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1970</puid>
+         <name>MOXCEL</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1971</puid>
+         <name>Enigma Binary File (Finale) 1</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1972</puid>
+         <name>Enigma Binary File (Finale) 2</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1973</puid>
+         <name>Finale Performance Assessment</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1974</puid>
+         <name>Finale Notation File 2014+</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1975</puid>
+         <name>ICC Profile 2</name>
+         <summary>Signature researched and samples provided by Bibliothèque nationale de France.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1976</puid>
+         <name>ICC Profile 4</name>
+         <summary>Signature researched and samples provided by Bibliothèque nationale de France.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1977</puid>
+         <name>ICC Profile iccMAX</name>
+         <summary>Signature researched and samples provided by Bibliothèque nationale de France.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1978</puid>
+         <name>Sibelius Score 1.2</name>
+         <summary>Signature researched and samples provided by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1979</puid>
+         <name>Sibelius Score 2</name>
+         <summary>Signature researched and samples provided by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1980</puid>
+         <name>Sibelius Score 3</name>
+         <summary>Signature researched and samples provided by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1981</puid>
+         <name>Sibelius Score 4</name>
+         <summary>Signature researched and samples provided by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1982</puid>
+         <name>Sibelius Score 5</name>
+         <summary>Signature researched and samples provided by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1983</puid>
+         <name>Sibelius Score 6</name>
+         <summary>Signature researched and samples provided by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1984</puid>
+         <name>Sibelius Score 7</name>
+         <summary>Signature researched and samples provided by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1985</puid>
+         <name>Sibelius Score 7.5-8.0</name>
+         <summary>Signature researched and samples provided by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1986</puid>
+         <name>Sibelius Score 8.1-8.5</name>
+         <summary>Signature researched and samples provided by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1987</puid>
+         <name>Sibelius Score 8.6-2019.12</name>
+         <summary>Signature researched and samples provided by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1988</puid>
+         <name>Sibelius Score 2020.1</name>
+         <summary>Signature researched and samples provided by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1989</puid>
+         <name>Sibelius Score 2020.3-2022.5</name>
+         <summary>Signature researched and samples provided by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1990</puid>
+         <name>Sibelius Score 2022.7-2022.11</name>
+         <summary>Signature researched and samples provided by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1991</puid>
+         <name>Sibelius Score 2022.12-2023.3</name>
+         <summary>Signature researched and samples provided by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1992</puid>
+         <name>Sibelius Score 2023.5-2023.8</name>
+         <summary>Signature researched and samples provided by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1993</puid>
+         <name>Sibelius Score 2024</name>
+         <summary>Signature researched and samples provided by Brigham Young University and National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1994</puid>
+         <name>Sibelius Scorch</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1995</puid>
+         <name>WinFax Fax Image</name>
+         <summary>Signature researched and samples provided by National Archives of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1996</puid>
+         <name>SPIR-V</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1997</puid>
+         <name>IMF Package Asset Map</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1998</puid>
+         <name>IMF Package Packing List</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1999</puid>
+         <name>IMF Package Composition Playlist</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2000</puid>
+         <name>Husqvarna Embroidery Stitch File</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2001</puid>
+         <name>Husqvarna/ Pfaff Embroidery Stitch File</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2002</puid>
+         <name>Husqvarna/ TruE Embroidery Stitch File</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2003</puid>
+         <name>Husqvarna/ Premier+ Embroidery Stitch File</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2004</puid>
+         <name>Husqvarna Viking Designer 1 Stitch File</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2005</puid>
+         <name>Compressed MusicXML 3.1+</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">26</puid>
+         <name>AutoCAD Batch Plot File 1.0-R14</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">27</puid>
+         <name>AutoCAD Batch Plot File 2000-2005</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">38</puid>
+         <name>AutoCAD Custom Dictionary</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">39</puid>
+         <name>AutoCAD dbConnect Query Set</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">40</puid>
+         <name>AutoCAD dbConnect Template Set</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">123</puid>
+         <name>Microsoft Excel Macro 4.0</name>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">148</puid>
+         <name>IBM DisplayWrite DCA Text File</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">263</puid>
+         <name>Zip Format</name>
+         <summary>Signature researched and samples provided by Institute of the History of Charles University and Archive of Charles University, Preservica,  Brigham Young University and The Church of Jesus Christ of Latter-Day Saints.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">347</puid>
+         <name>MultiMate Text File</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+   </release_outline>
+</release_note>
+<release_note>
    <release_date>23 November 2023</release_date>
    <signature_filename>DROID_SignatureFile_V116.xml</signature_filename>
    <release_outline name="Updated Records">

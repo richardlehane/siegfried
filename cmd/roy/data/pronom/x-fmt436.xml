@@ -22,8 +22,8 @@
       <ProvenanceSourceID>131</ProvenanceSourceID>
       <ProvenanceName>Digital Library Research Group / MIT Libraries</ProvenanceName>
       <ProvenanceSourceDate>06 Apr 2009</ProvenanceSourceDate>
-      <ProvenanceDescription>11/2023 (v.115)- Max-offset modified for BOF signature to allow for more exact signature identification. Internally researched.</ProvenanceDescription>
-      <LastUpdatedDate>14 Nov 2023</LastUpdatedDate>
+      <ProvenanceDescription>11/2023 (v.115)- Max-offset modified for BOF signature to allow for more exact signature identification. Internally researched. 04/2024 (v.117) changed first range of bytes from {2024} to *. Submitted by the J. Paul Getty Trust.</ProvenanceDescription>
+      <LastUpdatedDate>22 Apr 2024</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -66,7 +66,7 @@
       <InternalSignature>
         <SignatureID>344</SignatureID>
         <SignatureName>CATIA Model V4</SignatureName>
-        <SignatureNote>BOF offset 80, magic bytes: CATIA followed by three spaces{2024}CATIA SOLUTIONS V4{6}RELEASE followed by one space</SignatureNote>
+        <SignatureNote>BOF offset 80, magic bytes: CATIA followed by three spaces*CATIA SOLUTIONS V4{6}RELEASE followed by one space</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>441</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -78,7 +78,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>4341544941202020{2024}434154494120534F4C5554494F4E53205634{6}52454C4541534520</ByteSequenceValue>
+          <ByteSequenceValue>4341544941202020*434154494120534F4C5554494F4E53205634{6}52454C4541534520</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

@@ -4,7 +4,7 @@
     <FileFormat>
       <FormatID>2799</FormatID>
       <FormatName>Lotus Screencam Data File</FormatName>
-      <FormatVersion>3.0, 3.1</FormatVersion>
+      <FormatVersion>3.0-3.1</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -24,9 +24,8 @@
       <ProvenanceSourceID>234</ProvenanceSourceID>
       <ProvenanceName>National Library of Australia / National Library of Australia</ProvenanceName>
       <ProvenanceSourceDate>31 Oct 2023</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>31 Oct 2023</LastUpdatedDate>
+      <ProvenanceDescription>04/2024 (v.117)- Changed version from 3.0,3.1 to 3.0-3.1. Submitted by Preservica.</ProvenanceDescription>
+      <LastUpdatedDate>22 Apr 2024</LastUpdatedDate>
       <FormatNote>https://en.wikipedia.org/wiki/Screencam 
 http://fileformats.archiveteam.org/wiki/Lotus_ScreenCam_movie</FormatNote>
       <FormatRisk>

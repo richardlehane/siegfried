@@ -13,7 +13,7 @@
       <FormatTypes>GIS, Image (Raster)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>GeoTIFF is a metadata standard, within the public domain, which allows georeferenceing information to be embedded within the TIFF file. GeoTIFF format can contain geospatial data such as aerial photography and satellite imagery which can be used in GIS applications. GeoTIFF files can be read by normal TIFF utilities, though they may unintentionally strip out the geospatial data in the process. GeoTIFF was originally created by Dr. Niles Ritter whilst working at NASA Jet Propulsion Laboratory, and published. In 2019 by the Open Geospatial Consortium publihsed the OGC GeoTIFF standard.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -24,15 +24,19 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>02 Feb 2007</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>11 Jun 2012</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <ProvenanceDescription>04/2024 (v.117)- Increased the max-offset for internal EOF signatures, updated the description, specification and LOC identifier.</ProvenanceDescription>
+      <LastUpdatedDate>22 Apr 2024</LastUpdatedDate>
+      <FormatNote>https://en.wikipedia.org/wiki/GeoTIFF
+http://www.remotesensing.org/geotiff/spec/geotiffhome.html
+http://justsolve.archiveteam.org/wiki/GeoTIFF</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
       </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fdd000279</Identifier>
+        <IdentifierType>Library of Congress Format Description Identifier</IdentifierType>
+      </FileFormatIdentifier>
       <FileFormatIdentifier>
         <Identifier>fmt/155</Identifier>
         <IdentifierType>PUID</IdentifierType>
@@ -88,7 +92,7 @@
           <ByteSequenceID>835</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
           <Offset>4</Offset>
-          <MaxOffset>4088</MaxOffset>
+          <MaxOffset>5000</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
@@ -134,7 +138,7 @@
           <ByteSequenceID>838</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
           <Offset>5</Offset>
-          <MaxOffset>4089</MaxOffset>
+          <MaxOffset>5000</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

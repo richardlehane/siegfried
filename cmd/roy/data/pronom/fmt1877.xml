@@ -24,9 +24,8 @@
       <ProvenanceSourceID>299</ProvenanceSourceID>
       <ProvenanceName>Brigham Young University / Brigham Young University</ProvenanceName>
       <ProvenanceSourceDate>04 Jul 2023</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>04 Jul 2023</LastUpdatedDate>
+      <ProvenanceDescription>04/2024 (v.117)- Priority over fmt/134 MPEG 1/2 Audio Layer 3. Submitted by Brigham Young University.</ProvenanceDescription>
+      <LastUpdatedDate>18 Apr 2024</LastUpdatedDate>
       <FormatNote>http://fileformats.archiveteam.org/wiki/GST_ART</FormatNote>
       <FormatRisk>
       </FormatRisk>
@@ -59,6 +58,19 @@
           <ByteSequenceValue>4753543A41525400</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>687</RelatedFormatID>
+        <RelatedFormatName>MPEG 1/2 Audio Layer 3</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>2732</RelatedFormatID>
+        <RelatedFormatName>GST Art File</RelatedFormatName>
+        <RelatedFormatVersion>2</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

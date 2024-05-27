@@ -12,7 +12,7 @@
       <FormatTypes>Image (Raster), Image (Vector)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>A graphics format native to Macintosh computers encapsulating the functionality of QuickDraw 1 which supports monochrome bitmaps up to 32k in size.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>Big-endian (Motorola)</ByteOrders>
       <ReleaseDate>
@@ -22,11 +22,9 @@
       <ProvenanceSourceID>165</ProvenanceSourceID>
       <ProvenanceName>Georgia Tech Research Institute / Georgia Tech Research Institute</ProvenanceName>
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>19 Jul 2013</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <ProvenanceDescription>04/2024 (v.117)- Description created and links added as part of PRONOM Research Week 2023. Submitted by Brigham Young University.</ProvenanceDescription>
+      <LastUpdatedDate>17 Apr 2024</LastUpdatedDate>
+      <FormatNote>http://justsolve.archiveteam.org/wiki/PICT</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>

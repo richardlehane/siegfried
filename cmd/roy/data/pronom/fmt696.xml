@@ -62,6 +62,168 @@
           <ByteSequenceValue>0F534942454C495553</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2848</RelatedFormatID>
+        <RelatedFormatName>Sibelius Score</RelatedFormatName>
+        <RelatedFormatVersion>1.2</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2849</RelatedFormatID>
+        <RelatedFormatName>Sibelius Score</RelatedFormatName>
+        <RelatedFormatVersion>2</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2851</RelatedFormatID>
+        <RelatedFormatName>Sibelius Score</RelatedFormatName>
+        <RelatedFormatVersion>3</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2852</RelatedFormatID>
+        <RelatedFormatName>Sibelius Score</RelatedFormatName>
+        <RelatedFormatVersion>4</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2854</RelatedFormatID>
+        <RelatedFormatName>Sibelius Score</RelatedFormatName>
+        <RelatedFormatVersion>5</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2855</RelatedFormatID>
+        <RelatedFormatName>Sibelius Score</RelatedFormatName>
+        <RelatedFormatVersion>6</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2856</RelatedFormatID>
+        <RelatedFormatName>Sibelius Score</RelatedFormatName>
+        <RelatedFormatVersion>7</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2857</RelatedFormatID>
+        <RelatedFormatName>Sibelius Score</RelatedFormatName>
+        <RelatedFormatVersion>7.5-8.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2859</RelatedFormatID>
+        <RelatedFormatName>Sibelius Score</RelatedFormatName>
+        <RelatedFormatVersion>8.1-8.5</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2860</RelatedFormatID>
+        <RelatedFormatName>Sibelius Score</RelatedFormatName>
+        <RelatedFormatVersion>8.6-2019.12</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2861</RelatedFormatID>
+        <RelatedFormatName>Sibelius Score</RelatedFormatName>
+        <RelatedFormatVersion>2020.1</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2862</RelatedFormatID>
+        <RelatedFormatName>Sibelius Score</RelatedFormatName>
+        <RelatedFormatVersion>2020.3-2022.5</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2863</RelatedFormatID>
+        <RelatedFormatName>Sibelius Score</RelatedFormatName>
+        <RelatedFormatVersion>2022.7-2022.11</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2864</RelatedFormatID>
+        <RelatedFormatName>Sibelius Score</RelatedFormatName>
+        <RelatedFormatVersion>2022.12-2023.3</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2865</RelatedFormatID>
+        <RelatedFormatName>Sibelius Score</RelatedFormatName>
+        <RelatedFormatVersion>2023.5-2023.8</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2866</RelatedFormatID>
+        <RelatedFormatName>Sibelius Score</RelatedFormatName>
+        <RelatedFormatVersion>2024</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>2848</RelatedFormatID>
+        <RelatedFormatName>Sibelius Score</RelatedFormatName>
+        <RelatedFormatVersion>1.2</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>2849</RelatedFormatID>
+        <RelatedFormatName>Sibelius Score</RelatedFormatName>
+        <RelatedFormatVersion>2</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>2851</RelatedFormatID>
+        <RelatedFormatName>Sibelius Score</RelatedFormatName>
+        <RelatedFormatVersion>3</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>2852</RelatedFormatID>
+        <RelatedFormatName>Sibelius Score</RelatedFormatName>
+        <RelatedFormatVersion>4</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>2854</RelatedFormatID>
+        <RelatedFormatName>Sibelius Score</RelatedFormatName>
+        <RelatedFormatVersion>5</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>2855</RelatedFormatID>
+        <RelatedFormatName>Sibelius Score</RelatedFormatName>
+        <RelatedFormatVersion>6</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>2856</RelatedFormatID>
+        <RelatedFormatName>Sibelius Score</RelatedFormatName>
+        <RelatedFormatVersion>7</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>2857</RelatedFormatID>
+        <RelatedFormatName>Sibelius Score</RelatedFormatName>
+        <RelatedFormatVersion>7.5-8.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>2859</RelatedFormatID>
+        <RelatedFormatName>Sibelius Score</RelatedFormatName>
+        <RelatedFormatVersion>8.1-8.5</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>2860</RelatedFormatID>
+        <RelatedFormatName>Sibelius Score</RelatedFormatName>
+        <RelatedFormatVersion>8.6-2019.12</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is supertype of</RelationshipType>
+        <RelatedFormatID>2861</RelatedFormatID>
+        <RelatedFormatName>Sibelius Score</RelatedFormatName>
+        <RelatedFormatVersion>2020.1</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

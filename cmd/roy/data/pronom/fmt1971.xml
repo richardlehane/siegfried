@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2837</FormatID>
+      <FormatName>Enigma Binary File (Finale)</FormatName>
+      <FormatVersion>1</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Dataset</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>A Finale (notation) document file used through Finale 2012. Enigma Binary File created for music notation software Finale. Finale was originally created for Coda Music Software, later sold to Net4Music which then became MakeMusic. Originally made for MacOS in 1988 it was later made available in Microsoft Windows. The Enigma stands for 'Environment for Notation Intuitive Graphic Music Algorithms'.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>299</ProvenanceSourceID>
+      <ProvenanceName>Brigham Young University / Brigham Young University</ProvenanceName>
+      <ProvenanceSourceDate>16 Apr 2024</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>16 Apr 2024</LastUpdatedDate>
+      <FormatNote>https://preservation.tylerthorsted.com/tag/font/
+https://web.archive.org/web/19990203113959/http://www.codamusic.com:80/down/finale/eeppd.txt
+https://en.wikipedia.org/wiki/Finale_(scorewriter)
+http://fileformats.archiveteam.org/wiki/Finale</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1971</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>3485</ExternalSignatureID>
+        <Signature>mus</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2326</SignatureID>
+        <SignatureName>Enigma Binary File (Finale) v.1</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 'Finale' followed by either 'ª' or '™' and then the version number ' 1'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2703</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>46696E616C65(AA|28544D29)2031</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>2839</RelatedFormatID>
+        <RelatedFormatName>Enigma Binary File (Finale)</RelatedFormatName>
+        <RelatedFormatVersion>2</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

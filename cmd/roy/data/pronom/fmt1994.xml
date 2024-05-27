@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2868</FormatID>
+      <FormatName>Sibelius Scorch</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Dataset</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>A scorch or .sco file is native to the Sibelius Scorch platform. If is a music notation format a digital representation of sheet music. With the Sibelius Scorch software users could view, play back, tranpose, edit and print from a browser. In 2017 Sibelius Scorch was replaced with Sibelius Cloud Publishing. Sibelius Cloud Publishing provides publihers with an API but uses much of the same technology as Scorch to address compatibility issues. Sibelius Scorch is part of a range of software from Sibelius that allows for the creation and editing of music scores, and for music typesetting. Founded in 1993 Sibelius Music was purchased by AVID in 2006. The software is commonly used by composers, arrangers, performers, music publishers, teachers and students, particularly for writing classical, jazz, band, vocal, film and television music.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>299</ProvenanceSourceID>
+      <ProvenanceName>Brigham Young University / Brigham Young University</ProvenanceName>
+      <ProvenanceSourceDate>18 Apr 2024</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>18 Apr 2024</LastUpdatedDate>
+      <FormatNote>https://preservation.tylerthorsted.com/2024/04/12/sibelius/
+https://wiki.dpconline.org/images/d/d9/Sibelius_Assessment_v1.0.pdf
+http://fileformats.archiveteam.org/wiki/Sibelius
+https://www.loc.gov/preservation/digital/formats/fdd/fdd000609.shtml</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1994</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>332</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Sibelius Music</OrganisationName>
+        <DeveloperCompoundName>Sibelius Music</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>291</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Avid</OrganisationName>
+        <SupportCompoundName>Avid</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3533</ExternalSignatureID>
+        <Signature>sco</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2328</SignatureID>
+        <SignatureName>Sibelius Scorch</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 0x0F followed by 'CCSCORCH'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2707</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>0F434353434F524348</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

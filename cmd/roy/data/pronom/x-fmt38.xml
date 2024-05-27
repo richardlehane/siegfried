@@ -14,7 +14,7 @@
       </FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>AutoCAD is 2D and 3D computer-aided design software used by professionals such as architects, engineers and city planners to prepare technical drawings. Developed by Autodesk. It was first released in 1982, and is now very widely used. AutoCAD comes with a main dictionary which is used for spell checking, but also one or more custom dictionaries can be installed. Words can be added to these by the user. The default custom dictionary is called SAMPLE.CUS, and is found in the in the ‘support’ folder of an AutoCAD installation.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -25,8 +25,7 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
+      <ProvenanceDescription>04/2024, v.117: Added internal signature</ProvenanceDescription>
       <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
@@ -43,6 +42,24 @@
         <Signature>cus</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2318</SignatureID>
+        <SignatureName>	AutoCAD Custom Dictionary</SignatureName>
+        <SignatureNote>Absolute from beginning of file, magic bytes: ACAD..ACIS..AutoCAD..AutoCDM..Autodesk..AutoEDM..AutoFlix..AutoLathe..AutoLISP..AutoShade..AutoSketch..AutoSolid..AutoSurf..AutoVision</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2699</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>414341440D0A414349530D0A4175746F4341440D0A4175746F43444D0D0A4175746F6465736B0D0A4175746F45444D0D0A4175746F466C69780D0A4175746F4C617468650D0A4175746F4C4953500D0A4175746F53686164650D0A4175746F536B657463680D0A4175746F536F6C69640D0A4175746F537572660D0A4175746F566973696F6E0D0A</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

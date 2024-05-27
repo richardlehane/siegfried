@@ -24,9 +24,8 @@
       <ProvenanceSourceID>241</ProvenanceSourceID>
       <ProvenanceName>J. Paul Getty Trust / J. Paul Getty Trust</ProvenanceName>
       <ProvenanceSourceDate>14 Jun 2022</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>14 Jun 2022</LastUpdatedDate>
+      <ProvenanceDescription>04/2024 (v.117)- Signature updated to include a variable rather than a fixed byte sequence of 2026 bytes. Submitted by J. Paul Getty Trust.</ProvenanceDescription>
+      <LastUpdatedDate>22 Apr 2024</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -58,8 +57,8 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>2046</SignatureID>
-        <SignatureName>CATIA Model file v.3</SignatureName>
-        <SignatureNote>BOF, offset 80, magic bytes: CATIA{2029}CATIA VERSION 3{11}RELEASE</SignatureNote>
+        <SignatureName>CATIA Model V.3</SignatureName>
+        <SignatureNote>BOF; Offset: 80; Magic Bytes: 'CATIA' * 'CATIA VERSION 3'{11}'RELEASE'</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>2373</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -71,7 +70,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>4341544941202020{2026}43415449412056455253494F4E2033{11}52454C4541534520</ByteSequenceValue>
+          <ByteSequenceValue>4341544941202020*43415449412056455253494F4E2033{11}52454C4541534520</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

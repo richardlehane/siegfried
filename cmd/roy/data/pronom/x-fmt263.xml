@@ -13,7 +13,7 @@
       <FormatTypes>Aggregate</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>A popular archive format supported by most modern operating systems. It can contain one or more files and can utilize any of a number of compression methods.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -24,11 +24,10 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
+      <ProvenanceDescription>04/2024 (v.117): An additional internal signature, name updated for the original internal signature, description update, library of congress identifier, documentation links and vendor. Submitted by Institute of the History of Charles University and Archive of Charles University, Preservica,  Brigham Young University and The Church of Jesus Christ of Latter-Day Saints.</ProvenanceDescription>
       <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/ZIP
+https://fileinfo.com/extension/zip</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -52,7 +51,7 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>200</SignatureID>
-        <SignatureName>ZIP format</SignatureName>
+        <SignatureName>ZIP Format Signature 1</SignatureName>
         <SignatureNote>Local file header at BOF (with maximum offset of 4 bytes) + central file header and end of central directory near EOF. NB. The signature byte sequence is currently massaged to steer around the known PRONOM bug in the area of right fragment matching when the longest fragment is not nearest EOF. The first fragment in the EOF byte sequence has been shortened by 1 byte to ensure that the subsequent fragment is the longest. This abbreviation does not reduce the overall signature strength too much and so will hopefully not result in any false pisitive identification. When the PRONOM bug has been fixed, the "504B01" at the start of the EOF byte sequence should be extended to "504B0102", and this note reduced.</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>258</ByteSequenceID>
@@ -79,6 +78,24 @@
           </IndirectOffsetLength>
           <Endianness>Little-endian</Endianness>
           <ByteSequenceValue>504B01{43-65531}504B0506{18-65531}</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>2311</SignatureID>
+        <SignatureName>ZIP Format Signature 2</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 'PK' followed by 0x05060000 denoting the end of the central directory</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2692</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>504B05060000</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

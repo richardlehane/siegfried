@@ -13,7 +13,7 @@
       <FormatTypes>Audio, Video</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>An audiovisual container typically associated with 3G mobile phones and is developed by the Third Generation Partnership Project. May contain video/audio or audio only.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -25,11 +25,12 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>21 Jun 2011</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>21 Jun 2011</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <ProvenanceDescription>04/2024 (v.117)- Description created and notes added. Submitted by The Church of Jesus Christ of Latter-Day Saints as part of PRONOM Research Week 2023.</ProvenanceDescription>
+      <LastUpdatedDate>16 Apr 2024</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/3GP
+https://fileinfo.com/extension/3gpp https://en.wikipedia.org/wiki/3GP_and_3G2
+http://3gpp.org/
+http://www.3gpp.org/ftp/Specs/html-info/26244.htm</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>

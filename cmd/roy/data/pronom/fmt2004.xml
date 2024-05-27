@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2879</FormatID>
+      <FormatName>Husqvarna-Viking Designer 1 Stitch File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Dataset</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>A Husqvarna-Viking Designer 1 Stitch File is an embroidery design file found on Floppy disk and USB thumb drives. Files with the extension shv, mhv and phv start with the ascii "Embroidery disk created using software licensed from Viking Sewing Machines AB, Sweden". The Husqvarna-Viking Designer 1 Embroidery machines are a type of floppy disk controlled sewing machine.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>299</ProvenanceSourceID>
+      <ProvenanceName>Brigham Young University / Brigham Young University</ProvenanceName>
+      <ProvenanceSourceDate>19 Apr 2024</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>19 Apr 2024</LastUpdatedDate>
+      <FormatNote>https://www.embroidery.com/machine-embroidery-formats
+http://fileformats.archiveteam.org/wiki/SHV
+https://embrilliance.com/Help/Essentials%20Mac%201106/index.html?turl=creatingadesigner1diskorstick.htm</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/2004</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>336</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Husqvarna-Viking</OrganisationName>
+        <DeveloperCompoundName>Husqvarna-Viking</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>336</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Husqvarna-Viking</OrganisationName>
+        <SupportCompoundName>Husqvarna-Viking</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3525</ExternalSignatureID>
+        <Signature>shv</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3528</ExternalSignatureID>
+        <Signature>mhv</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3529</ExternalSignatureID>
+        <Signature>phv</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2360</SignatureID>
+        <SignatureName>Husqvarna-Viking Designer 1 Stitch File</SignatureName>
+        <SignatureNote>BOF; Offset:0; Magic Bytes: 'Embroidery disk created using software licensed from Viking Sewing Machines AB, Sweden'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2736</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>456D62726F6964657279206469736B2063726561746564207573696E6720736F667477617265206C6963656E7365642066726F6D2056696B696E6720536577696E67204D616368696E65732041422C2053776564656E</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

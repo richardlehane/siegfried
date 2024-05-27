@@ -11,7 +11,7 @@
       <FormatTypes>Spreadsheet</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>All OpenOffice v1.0 documents (Calc, Draw, Impress, Writer) use the extensible Markup Language (XML) for representing the elements and attributes of each structural component of the document. As XML has no native support for binary objects, OpenOffice.org files use a standard Zip file to store the XML content together with its associated binary data. Information about the files contained in the Zip file is stored in an XML file called the manifest file. The manifest file is always stored at the pathname META-INF/manifest.xml. The manifest file contains a list of all the files in the Zip file, the media type of each file, and the information necessary to decrypt any encrypted files included in the Zip file.</FormatDescription>
+      <FormatDescription>All OpenOffice v1.0 documents (Calc, Draw, Impress, Writer) use the extenele Markup Language (XML) for representing the elements and attributes of each structural component of the document. As XML has no native support for binary objects, OpenOffice.org files use a standard Zip file to store the XML content together with its associated binary data. Information about the files contained in the Zip file is stored in an XML file called the manifest file. The manifest file is always stored at the pathname META-INF/manifest.xml. The manifest file contains a list of all the files in the Zip file, the media type of each file, and the information necessary to decrypt any encrypted files included in the Zip file.</FormatDescription>
       <BinaryFileFormat>Binary</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>

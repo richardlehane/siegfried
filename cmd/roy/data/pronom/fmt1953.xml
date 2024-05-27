@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2817</FormatID>
+      <FormatName>Zoom Project Settings</FormatName>
+      <FormatVersion>H5</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Audio</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>File made by the Zoom H5, a portable audio recorder which is in widespread use. The hprj file is outputted by the device, sitting alongside the audio files. The file holds metadata information including project title, recording date etc. The H5 records in 2GB chunks, and when that is exceeded splits the recording into smaller chunks. The metadata tells the H5 which files go together and their order.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>299</ProvenanceSourceID>
+      <ProvenanceName>Brigham Young University / Brigham Young University</ProvenanceName>
+      <ProvenanceSourceDate>11 Apr 2024</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>11 Apr 2024</LastUpdatedDate>
+      <FormatNote>https://www.zoom.co.jp/sites/default/files/products/downloads/pdfs/E_H6_0.pdf 
+https://www.reddit.com/r/videography/comments/alagpf/what_are_the_hprj_files_for_that_my_zoom_h6_is/ 
+https://zoomcorp.com/en/gb/handheld-recorders/handheld-recorders/h6-audio-recorder/</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1953</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>337</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Zoom</OrganisationName>
+        <DeveloperCompoundName>Zoom</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>337</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Zoom</OrganisationName>
+        <SupportCompoundName>Zoom</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>3464</ExternalSignatureID>
+        <Signature>hprj</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2304</SignatureID>
+        <SignatureName>Zoom Project Settings H5</SignatureName>
+        <SignatureNote>Absolute from beginning of file, magic bytes: ZOOM H5 prjectfile</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2685</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>5A4F4F4D2048352070726A65637466696C65</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>2819</RelatedFormatID>
+        <RelatedFormatName>Zoom Project Settings</RelatedFormatName>
+        <RelatedFormatVersion>H6</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

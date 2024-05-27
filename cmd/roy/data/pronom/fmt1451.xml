@@ -26,9 +26,8 @@ PDF Portfolio files can specify a "default view", which is a file in the collect
       <ProvenanceSourceID>244</ProvenanceSourceID>
       <ProvenanceName>Preservica / Preservica</ProvenanceName>
       <ProvenanceSourceDate>16 Oct 2021</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>16 Oct 2021</LastUpdatedDate>
+      <ProvenanceDescription>04/2024 (v.117)-Signature modified to no longer search for '&lt;&lt;/Cl&lt;&lt;' block. Submitted by the Archeological Data Service and Preservica.</ProvenanceDescription>
+      <LastUpdatedDate>22 Apr 2024</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -61,7 +60,7 @@ PDF Portfolio files can specify a "default view", which is a file in the collect
       <InternalSignature>
         <SignatureID>1814</SignatureID>
         <SignatureName>PDF Portfolio 1.7</SignatureName>
-        <SignatureNote>BOF: %PDF-1.7 followed by '/Collection ' and '&lt;&lt;/CI&lt;&lt;'. EOF (offset up to 1024 bytes): '%%EOFF(.|F.|F..|F..)'</SignatureNote>
+        <SignatureNote>BOF: %PDF-1.7 followed by '/Collection '. EOF (offset up to 1024 bytes): '%%EOFF(.|F.|F..|F..)'</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>2106</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -74,7 +73,7 @@ PDF Portfolio files can specify a "default view", which is a file in the collect
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>255044462D312E37*2F436F6C6C656374696F6E20*3C3C2F43493C3C</ByteSequenceValue>
+          <ByteSequenceValue>255044462D312E37*2F436F6C6C656374696F6E20</ByteSequenceValue>
         </ByteSequence>
         <ByteSequence>
           <ByteSequenceID>2107</ByteSequenceID>

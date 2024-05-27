@@ -13,7 +13,7 @@
       <FormatTypes>Aggregate</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>Z Compressed Data are files that have been compressed by Unix's shell compression program, compress. The compress software was developed by Spences Thomas in 1984 and uses LZW algorithm. The format has lossless data, it can be compressed and decompressed using the Unix and Linux operating systems.</FormatDescription>
+      <FormatDescription>Z Compressed Data are files that have been compressed by Unix's shell compression program, compress. The compress software was developed by Spencer Thomas in 1984 and uses LZW algorithm. The format has lossless data, it can be compressed and decompressed using the Unix and Linux operating systems.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>
@@ -25,9 +25,8 @@
       <ProvenanceSourceID>180</ProvenanceSourceID>
       <ProvenanceName>The National Archives and Records Administration / The National Archives and Records Administration</ProvenanceName>
       <ProvenanceSourceDate>22 Apr 2022</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>29 Jul 2022</LastUpdatedDate>
+      <ProvenanceDescription>04/2024 (v.117)- Name of developer corrected in description. Submitted by Igor Nechaev.</ProvenanceDescription>
+      <LastUpdatedDate>15 Apr 2024</LastUpdatedDate>
       <FormatNote>https://en.wikipedia.org/wiki/Compress
 
 https://docs.fileformat.com/compression/z/

@@ -25,8 +25,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>23 Sep 2014</ProvenanceSourceDate>
-      <ProvenanceDescription>http://www.artwork.com/gerber/274x/rs274x.htm</ProvenanceDescription>
-      <LastUpdatedDate>23 Sep 2014</LastUpdatedDate>
+      <ProvenanceDescription>http://www.artwork.com/gerber/274x/rs274x.htm; 04/2024 (v.117)- Signature added, internally researched.</ProvenanceDescription>
+      <LastUpdatedDate>23 Apr 2024</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -46,6 +46,24 @@
         <Signature>gbr</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>996</SignatureID>
+        <SignatureName>Gerber format</SignatureName>
+        <SignatureNote>BOF: %FSLA{512}</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>1234</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>512</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>2546534C41</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

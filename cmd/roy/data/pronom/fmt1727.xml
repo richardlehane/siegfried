@@ -4,7 +4,7 @@
     <FileFormat>
       <FormatID>2571</FormatID>
       <FormatName>Pro Tools Session File</FormatName>
-      <FormatVersion>10 onwards</FormatVersion>
+      <FormatVersion>10+</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -24,9 +24,8 @@
       <ProvenanceSourceID>178</ProvenanceSourceID>
       <ProvenanceName>National Library of New Zealand / National Library of New Zealand</ProvenanceName>
       <ProvenanceSourceDate>07 Jul 2022</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>07 Jul 2022</LastUpdatedDate>
+      <ProvenanceDescription>04/2024 (v.117)- Version number changed from 10 onwards to 10+ and signature name updated to include version number 10+. Submitted by Preservica.</ProvenanceDescription>
+      <LastUpdatedDate>08 Jan 2024</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -58,7 +57,7 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>2063</SignatureID>
-        <SignatureName>Pro Tools Session File</SignatureName>
+        <SignatureName>Pro Tools Session File 10+</SignatureName>
         <SignatureNote>BOF Absolute from beginning of file, magic bytes:.0010111100101011{3}Z…</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>2389</ByteSequenceID>

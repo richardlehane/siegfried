@@ -12,7 +12,7 @@
       <FormatTypes>Aggregate</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>JAR stands for Java ARchive. It's is based on the ZIP file format (x-fmt/26) and is used for aggregating many files into one, and reducing file size. One of the original purposes of JAR files was to bundle multiple Java applets and their requisite components (.class files, images and sounds) into a JAR file, which could then be downloaded to a browser in a single HTTP transaction; these could then be run over the web. JAR files can also be "executable" both on Linux, via a command such as `java -jar &lt;jar-name&gt;` and Windows, where the file-format extension '*.jar' may be associated with the Java Runtime Environment. As executable code can potentially be harmful, e.g. used in the distribution of malware, the JAR supports digital signing so that the source of the items in a JAR file can be verified. JAR consists of a zip archive, as defined by PKWARE, containing a manifest file and potentially signature files, as defined in the JAR.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -23,10 +23,11 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>17 Feb 2006</ProvenanceSourceDate>
-      <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
-      <LastUpdatedDate>19 Apr 2012</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.; 04/2024 (v.117): Description and links added as part of PRONOM Research Week 2023. Submitted by Ross Spencer.</ProvenanceDescription>
+      <LastUpdatedDate>17 Apr 2024</LastUpdatedDate>
+      <FormatNote>https://docs.oracle.com/javase/7/docs/technotes/guides/jar/jarGuide.html
+https://docs.oracle.com/javase/7/docs/technotes/guides/jar/index.html
+Specification: https://docs.oracle.com/javase/7/docs/technotes/guides/jar/jarGuide.html</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>

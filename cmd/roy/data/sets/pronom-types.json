@@ -113,7 +113,9 @@
     "fmt/1898 (Perfect ZX Tape (PZX) Image Format)",
     "fmt/1904 (Pasti Floppy Disk Image)",
     "fmt/1913 (Graphisoft Archicad Project 17+)",
-    "fmt/1914 (Graphisoft BIMx Hyper-Model)"
+    "fmt/1914 (Graphisoft BIMx Hyper-Model)",
+    "fmt/1955 (Graphisoft Archicad Project 6-9)",
+    "fmt/1967 (Solidworks Design Document Files 2015+)"
   ],
   "audio": [
     "x-fmt/135 (Audio Interchange File Format 1.3)",
@@ -243,7 +245,11 @@
     "fmt/1886 (Resource Interchange File Format (RIFF))",
     "fmt/1890 (Memory Stick Voice File (MSV) ADPCM Codec)",
     "fmt/1891 (Digital Voice File (DVF) TRC Codec)",
-    "fmt/1892 (Memory Stick Voice File (MSV)/Digital Voice File (DVF) LPEC Codec)"
+    "fmt/1892 (Memory Stick Voice File (MSV)/Digital Voice File (DVF) LPEC Codec)",
+    "fmt/1953 (Zoom Project Settings H5)",
+    "fmt/1954 (Zoom Project Settings H6)",
+    "fmt/1960 (Disklavier E-Seq Music)",
+    "fmt/1968 (Atrac Codec File v.1)"
   ],
   "database": [
     "x-fmt/6 (FoxPro Database 2.0)",
@@ -392,6 +398,7 @@
     "fmt/389 (Log ASCII Standard Format 1.2)",
     "fmt/390 (Log ASCII Standard Format 2.0)",
     "fmt/391 (Log ASCII Standard Format 3.0)",
+    "fmt/397 (Enigma Binary File (Finale) 3+)",
     "fmt/495 (ATCO-CIF)",
     "fmt/496 (TransXchange File Format)",
     "fmt/504 (Standard Flowgram Format)",
@@ -525,7 +532,38 @@
     "fmt/1902 (Norton Change Directory Persistent Cache File)",
     "fmt/1915 (ActiveMime Object)",
     "fmt/1944 (Common Loudspeaker Format (CLF) 1)",
-    "fmt/1945 (Common Loudspeaker Format (CLF) 2)"
+    "fmt/1945 (Common Loudspeaker Format (CLF) 2)",
+    "fmt/1948 (Common Data Format dotCDF 2.0-2.5)",
+    "fmt/1949 (Common Data Format dotCDF 2.6-2.7)",
+    "fmt/1950 (Common Data Format dotCDF 3.x)",
+    "fmt/1956 (Sandboxels Save File)",
+    "fmt/1969 (ETC Express/Expression Show File)",
+    "fmt/1971 (Enigma Binary File (Finale) 1)",
+    "fmt/1972 (Enigma Binary File (Finale) 2)",
+    "fmt/1973 (Finale Performance Assessment)",
+    "fmt/1974 (Finale Notation File 2014+)",
+    "fmt/1975 (ICC Profile 2)",
+    "fmt/1976 (ICC Profile 4)",
+    "fmt/1977 (ICC Profile iccMAX)",
+    "fmt/1978 (Sibelius Score 1.2)",
+    "fmt/1979 (Sibelius Score 2)",
+    "fmt/1980 (Sibelius Score 3)",
+    "fmt/1981 (Sibelius Score 4)",
+    "fmt/1982 (Sibelius Score 5)",
+    "fmt/1983 (Sibelius Score 6)",
+    "fmt/1984 (Sibelius Score 7)",
+    "fmt/1985 (Sibelius Score 7.5-8.0)",
+    "fmt/1986 (Sibelius Score 8.1-8.5)",
+    "fmt/1987 (Sibelius Score 8.6-2019.12)",
+    "fmt/1988 (Sibelius Score 2020.1)",
+    "fmt/1989 (Sibelius Score 2020.3-2022.5)",
+    "fmt/1990 (Sibelius Score 2022.7-2022.11)",
+    "fmt/1991 (Sibelius Score 2022.12-2023.3)",
+    "fmt/1992 (Sibelius Score 2023.5-2023.8)",
+    "fmt/1993 (Sibelius Score 2024)",
+    "fmt/1994 (Sibelius Scorch)",
+    "fmt/2000 (Husqvarna Embroidery Stitch File)",
+    "fmt/2004 (Husqvarna-Viking Designer 1 Stitch File)"
   ],
   "email": [
     "x-fmt/430 (Microsoft Outlook Email Message 97-2003)",
@@ -883,7 +921,11 @@
     "fmt/1917 (BigTIFF)",
     "fmt/1927 (CorelDraw Drawing X8)",
     "fmt/1939 (Auto FX PhotoGraphic Edges Image File)",
-    "fmt/1943 (Digital Negative Format (DNG) 1.7)"
+    "fmt/1943 (Digital Negative Format (DNG) 1.7)",
+    "fmt/1958 (Melco OFM Project 11)",
+    "fmt/1959 (Melco OFM Project pre v.11)",
+    "fmt/1964 (JPH (JPEG 2000 part 15))",
+    "fmt/1995 (WinFax Fax Image)"
   ],
   "imageVector": [
     "x-fmt/20 (Adobe Illustrator 1.0 / 1.1)",
@@ -1110,7 +1152,8 @@
     "fmt/1931 (CorelDraw Drawing 2020)",
     "fmt/1932 (CorelDraw Drawing 2021)",
     "fmt/1933 (CorelDraw Drawing 2022)",
-    "fmt/1934 (CorelDraw Drawing 2023)"
+    "fmt/1934 (CorelDraw Drawing 2023)",
+    "fmt/1946 (Draw.io Diagram (XML) File)"
   ],
   "model": [
     "x-fmt/19 (3D Studio)",
@@ -1292,7 +1335,8 @@
     "fmt/1910 (Acrobat PDF/A - Portable Document Format 4)",
     "fmt/1911 (Acrobat PDF/A - Portable Document Format 4e)",
     "fmt/1912 (Acrobat PDF/A - Portable Document Format 4f)",
-    "fmt/1937 (Amazon Kindle eBook File)"
+    "fmt/1937 (Amazon Kindle eBook File)",
+    "fmt/1952 (PechaMaker Format)"
   ],
   "presentation": [
     "x-fmt/32 (Harvard Graphics Chart 3.0)",
@@ -1546,7 +1590,8 @@
     "fmt/1755 (OpenDocument Spreadsheet 1.3)",
     "fmt/1828 (XLSX Strict OOXML Spreadsheet 2007 onwards)",
     "fmt/1858 (Microsoft Excel Workspace File 5/95)",
-    "fmt/1861 (Quicken 3 Database File 3)"
+    "fmt/1861 (Quicken 3 Database File 3)",
+    "fmt/1970 (MOXCEL)"
   ],
   "textMarkup": [
     "x-fmt/195 (Standard Generalized Markup Language)",
@@ -1648,7 +1693,10 @@
     "fmt/1857 (Capture One Session File)",
     "fmt/1882 (OPML File 1.*)",
     "fmt/1883 (OPML File 2)",
-    "fmt/1900 (Mass Spectrometry Markup Language)"
+    "fmt/1900 (Mass Spectrometry Markup Language)",
+    "fmt/1997 (IMF Package Asset Map)",
+    "fmt/1998 (IMF Package Packing List)",
+    "fmt/1999 (IMF Package Composition Playlist)"
   ],
   "textStructured": [
     "x-fmt/41 (Data Interchange Format)",
@@ -1690,6 +1738,7 @@
     "fmt/389 (Log ASCII Standard Format 1.2)",
     "fmt/390 (Log ASCII Standard Format 2.0)",
     "fmt/391 (Log ASCII Standard Format 3.0)",
+    "fmt/398 (Enigma Transportable File (Finale))",
     "fmt/482 (Apple iBook format)",
     "fmt/483 (ePub format)",
     "fmt/485 (Rocket Book eBook format)",
@@ -1788,7 +1837,7 @@
     "fmt/1699 (602 Graph/Chart File 1.51)",
     "fmt/1711 (Software602 Printer Configuration File 1.0)",
     "fmt/1726 (Geosoft Map Description File)",
-    "fmt/1727 (Pro Tools Session File 10 onwards)",
+    "fmt/1727 (Pro Tools Session File 10+)",
     "fmt/1765 (Media Hash List)",
     "fmt/1766 (Sony SML File)",
     "fmt/1770 (GenBank Flat File)",
@@ -1809,7 +1858,9 @@
     "fmt/1875 (Maptech BSB Documentation File)",
     "fmt/1899 (RIS Citation)",
     "fmt/1905 (Universal Scene Description ASCII File)",
-    "fmt/1940 (EBU Subtitling Data Exchange Format)"
+    "fmt/1940 (EBU Subtitling Data Exchange Format)",
+    "fmt/1947 (OpenWayback CDXJ File Format)",
+    "fmt/1951 (Pro Tools Session File 5-9)"
   ],
   "textUnstructured": [
     "x-fmt/14 (Macintosh Text File)",
@@ -1902,7 +1953,7 @@
     "fmt/1886 (Resource Interchange File Format (RIFF))",
     "fmt/1893 (Microsoft Agent File)",
     "fmt/1901 (SGI Movie File)",
-    "fmt/1938 (Lotus Screencam Data File 3.0, 3.1)"
+    "fmt/1938 (Lotus Screencam Data File 3.0-3.1)"
   ],
   "wordProcessor": [
     "x-fmt/1 (Microsoft Word for Macintosh Document 3.0)",
@@ -2088,6 +2139,8 @@
     "fmt/1848 (Trelby Document File)",
     "fmt/1850 (WordPerfect Macro File)",
     "fmt/1889 (Open Access III Document III)",
-    "fmt/1909 (TibetDoc Word Document)"
+    "fmt/1909 (TibetDoc Word Document)",
+    "fmt/1965 (Papyrus Document)",
+    "fmt/1966 (Final Writer Document)"
   ]
 }

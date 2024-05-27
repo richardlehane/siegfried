@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>2833</FormatID>
+      <FormatName>Solidworks Design Document Files</FormatName>
+      <FormatVersion>2015+</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>In SolidWorks, engineers and product designers create 3D models representing manufactured products, e.g.an automotive engineer might use SolidWorks to create a prototype of a new steering system. This signature identifies various types of file for the 2015+ version of Solidworks:
+
+.sldprt file: A 3D model. SolidWorks users combine these small componenets to create 3D assemblies, saved as .sldasm files. Users can create, import, and modify .sldprt files independent of the larger assemblies in which they are included. For example, a user can open an .sldprt file in its own window and modify its geometry. SolidWorks will then automatically apply the modifications to any assemblies that include that .sldprt file
+
+SolidWorks Assembly Document (.sldasm): The file format used by SolidWorks to store a collection of 3D parts. To create an assembly, SolidWorks users create or import parts, saved as .sldprt files, and then combine them.
+
+SolidWorks Drawing (.slddrw): The file format used in SolidWorks for 2D drawings. By default, SolidWorks saves drawings as slddrw files. These files contain a vector drawing of Solidworks Part documents (slddrw) or Solidworks Assembly files (sldasm) files.
+
+Solidworks Slide File (.sld): An image capture of a drawing, which can be used during design reviews.
+
+SolidWorks Library Feature Part (.sldlfp): Used in conjuntion with the SolidWorks Design library.
+
+.slddrt Solidworks Drawing Sheet: Contains the dimensions needed to load sheet files including orientation, border lines and table anchor points, so a user can create an appropriately-sized drawing file (.sldddrw). Slddrt files may also contain logos, guidelines, and fields used to show drawing properties.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>299</ProvenanceSourceID>
+      <ProvenanceName>Brigham Young University / Brigham Young University</ProvenanceName>
+      <ProvenanceSourceDate>28 Feb 2024</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>28 Feb 2024</LastUpdatedDate>
+      <FormatNote>https://www.reddit.com/r/SolidWorks/comments/14d995l/how_can_i_open_a_sldlfp_file/
+https://www.file-extension.org/extensions/sldlfp
+https://help.solidworks.com/2021/english/SolidWorks/sldworks/c_create_a_library_feature.html
+
+https://fileinfo.com/extension/slddrt</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/1967</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>135</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Dassault Systèms</OrganisationName>
+        <DeveloperCompoundName>Dassault Systèms</DeveloperCompoundName>
+      </Developers>
+      <ExternalSignature>
+        <ExternalSignatureID>3481</ExternalSignatureID>
+        <Signature>sldprt</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3495</ExternalSignatureID>
+        <Signature>slddrw</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3496</ExternalSignatureID>
+        <Signature>sldasm</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3530</ExternalSignatureID>
+        <Signature>sld</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3531</ExternalSignatureID>
+        <Signature>sldlfp</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3532</ExternalSignatureID>
+        <Signature>slddrt</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2315</SignatureID>
+        <SignatureName>Solidworks Design Document Files 2015+</SignatureName>
+        <SignatureNote>BOF offset 4, magic bytes: ....{0-2048}4öæGVæG7ò</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2696</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>4</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>00000004{0-2048}34F6E64756E64737F2</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

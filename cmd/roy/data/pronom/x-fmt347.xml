@@ -12,7 +12,7 @@
       <FormatTypes>Word Processor</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>This is an outline record only, and requires further details, research or authentication to provide information that will enable users to further understand the format and to assess digital preservation risks associated with it if appropriate. If you are able to help by supplying any additional information concerning this entry, please return to the main PRONOM page and select ‘Add an Entry’.</FormatDescription>
+      <FormatDescription>MultiMate was word processor software, originally created for internal use at an insurance company in the early 1980s, then released as a commercial software package mostly marketed to corporations rather than individuals. MultiMate was only released for PC/MS-DOS; since no Windows version was ever released, it faded out along with DOS.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -22,10 +22,9 @@
       </WithdrawnDate>
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
-      <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>02 Aug 2005</LastUpdatedDate>
+      <ProvenanceSourceDate>25 Apr 2024</ProvenanceSourceDate>
+      <ProvenanceDescription>01/2024 (v.117): Added internal sig, description and extensions .fnx and .pat.</ProvenanceDescription>
+      <LastUpdatedDate>25 Apr 2024</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -41,6 +40,34 @@
         <Signature>dox</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3534</ExternalSignatureID>
+        <Signature>fnx</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3535</ExternalSignatureID>
+        <Signature>pat</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2303</SignatureID>
+        <SignatureName>MultiMate Text File</SignatureName>
+        <SignatureNote>Offset 420 from BOF, magic bytes: .{59}.{1}.7{8}D$, followed by five spaces.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2684</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>420</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>07{59}2E{1}0037{8}44242020202020</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

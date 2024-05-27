@@ -493,6 +493,12 @@
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2731</RelatedFormatID>
+        <RelatedFormatName>GST Art File</RelatedFormatName>
+        <RelatedFormatVersion>1</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>2762</RelatedFormatID>
         <RelatedFormatName>VBM (VDC BitMap) File</RelatedFormatName>
         <RelatedFormatVersion>
