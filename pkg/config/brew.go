@@ -2,6 +2,6 @@
 
 package config
 
-func init() {
-	siegfried.home = "/usr/share/siegfried"
+func defaultHome() string {
+	return "/usr/share/siegfried"
 }
