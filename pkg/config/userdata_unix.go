@@ -1,4 +1,4 @@
-//go:build (aix || dragonfly || freebsd || nacl || linux || netbsd || openbsd || solaris) && !brew && !archivematica && !js
+//go:build aix || dragonfly || freebsd || nacl || linux || netbsd || openbsd || solaris
 
 // Copyright 2014 Richard Lehane. All rights reserved.
 //
