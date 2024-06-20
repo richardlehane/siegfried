@@ -53,7 +53,6 @@ func shortpath(long, short string) string {
 	return long[i:]
 }
 
-
 func tryStat(path string) error {
 	_, err := os.Lstat(path)
 	if err != nil {
@@ -116,7 +115,7 @@ func identify(ctxts chan *context, root, orig string, coerr, norecurse, droid bo
 			}
 			return nil
 		}
-		if !info.Mode().IsRegular() {
+		if (!info.Mode().IsRegular() && !(*sym && info.Mode()&os.ModeSymlink == os.ModeSymlink)) || info.Mode()&256 == 0 {
 			printFile(ctxts, gf(path, "", info.ModTime(), info.Size()), modeError(info.Mode()))
 			return nil
 		}

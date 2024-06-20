@@ -64,6 +64,7 @@ var (
 	throttlef      = flag.Duration("throttle", 0, "set a time to wait between scanning files e.g. 50ms")
 	utcf           = flag.Bool("utc", false, "report file modified times in UTC, rather than local, TZ")
 	coe            = flag.Bool("coe", false, "continue on fatal errors during directory walks (this may result in directories being skipped)")
+	sym            = flag.Bool("sym", false, "follow symbolic links")
 	replay         = flag.Bool("replay", false, "replay one (or more) results files to change output or logging e.g. sf -replay -csv results.yaml")
 	list           = flag.Bool("f", false, "scan one (or more) lists of filenames e.g. sf -f myfiles.txt")
 	name           = flag.String("name", "", "provide a filename when scanning a stream e.g. sf -name myfile.txt -")
