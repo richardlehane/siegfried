@@ -61,10 +61,10 @@ type Decompressor interface {
 	Dirs() []string
 }
 
-func New(arc config.Archive, buf *siegreader.Buffer, path string, sz int64) (Decompressor, error) {
+func New(arc config.Archive, buf *siegreader.Buffer, path string) (Decompressor, error) {
 	switch arc {
 	case config.Zip:
-		return newZip(siegreader.ReaderFrom(buf), path, sz)
+		return newZip(buf, path)
 	case config.Gzip:
 		return newGzip(buf, path)
 	case config.Tar:
@@ -85,8 +85,10 @@ type zipD struct {
 	written map[string]bool
 }
 
-func newZip(ra io.ReaderAt, path string, sz int64) (Decompressor, error) {
-	zr, err := zip.NewReader(ra, sz)
+func newZip(b *siegreader.Buffer, path string) (Decompressor, error) {
+	b.Quit = make(chan struct{}) // in case a stream with a closed quit channel, make a new one
+	sz := b.SizeNow()            // in case a stream, force full read
+	zr, err := zip.NewReader(siegreader.ReaderFrom(b), sz)
 	return &zipD{idx: -1, p: path, rdr: zr}, err
 }
 

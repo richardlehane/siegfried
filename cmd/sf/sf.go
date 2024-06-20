@@ -243,7 +243,7 @@ func identifyRdr(r io.Reader, ctx *context, ctxts chan *context, gf getFn) {
 		ctx.res <- results{err, cs, ids}
 		return
 	}
-	d, err := decompress.New(arc, b, ctx.path, ctx.sz)
+	d, err := decompress.New(arc, b, ctx.path)
 	if err != nil {
 		ctx.res <- results{fmt.Errorf("failed to decompress, got: %v", err), cs, ids}
 		return
