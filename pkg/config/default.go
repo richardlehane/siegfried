@@ -1,4 +1,4 @@
-//go:build !js
+//go:build !js && !brew
 
 // Copyright 2014 Richard Lehane. All rights reserved.
 //
