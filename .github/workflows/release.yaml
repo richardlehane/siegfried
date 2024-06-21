@@ -167,7 +167,7 @@ jobs:
             siegfried_${{ env.VERSION }}_wasm.zip   
   createRelease:
     runs-on: ubuntu-latest
-    needs: [buildMac, buildWin, buildWin7] 
+    needs: [buildMac, buildWin, buildWin7, buildWasm] 
     steps:
       - name: Set version
         run: echo "VERSION=$(echo "${{ github.ref }}" | cut -c12-)" >> $GITHUB_ENV 
