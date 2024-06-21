@@ -1,0 +1,79 @@
+<html>
+
+<head>
+    <script src="example.js"></script>
+    <script src="wasm_exec.js"></script>
+    <script>
+        const go = new window.Go();
+
+        WebAssembly.instantiateStreaming(
+            fetch("sf.wasm"),
+            go.importObject
+        ).then(
+            (obj) => {
+                go.run(obj.instance);
+            }
+        );
+    </script>
+</head>
+
+<body>
+    <h1>Siegfried WASM</h1>
+    <p>This page demonstrates how to use siegfried's wasm build. You can download the latest sf.wasm file from the <a
+            href="https://github.com/richardlehane/siegfried/releases">releases page</a>.</p>
+    <p>The wasm file attaches an "identify" function into your environment.</p>
+    <p>Call this function with:</p>
+    <p>
+    <pre>identify(FileSystemHandle, ...options)</pre>
+    </p>
+    <p>The return value is a <a
+            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>
+        that resolves to a string value (results formatted in either JSON, YAML, CSV or DROID CSV).</p>
+    <p>The first argument to identify() must be a <a
+            href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemHandle">FileSystemHandle</a> (file or
+        directory). If you provide a directory, the identify function will walk the directory, and all its
+        subdirectories, recursively, identifying
+        all files within it.</p>
+    <p>You can add the following additional arguments in any order:
+    <p>
+    <ul>
+        <li>the default output format is JSON but you can change that by giving "yaml", "csv", or
+            "droid" as arguments</li>
+        <li>to include checksums in your results, give either "md5", "sha1", "sha256", "sha512" or "crc" as
+            arguments</li>
+        <li>to decompress archive formats (zip, tar.gz, WARC, ARC), give "z" as an argument.</li>
+    </ul>
+    <p>For example:</p>
+    <p>
+    <pre>identify(FSH, "z", "yaml", "sha1")</pre>
+    </p>
+    <h4>Try it</h4>
+    <p>Format (format): <select name="format" id="format">
+            <option value="json">json</option>
+            <option value="yaml">yaml</option>
+            <option value="csv">csv</option>
+            <option value="droid">droid</option>
+        </select></p>
+    <p>Hash (hash): <select name="hash" id="hash">
+            <option value="none">none</option>
+            <option value="md5">md5</option>
+            <option value="sha1">sha1</option>
+            <option value="sha256">sha256</option>
+            <option value="sha512">sha512</option>
+            <option value="crc">crc</option>
+        </select></p>
+    <p>Scan within archives (z):
+        <input type="radio" name="z" value="true"> true <input type="radio" name="z" value="false" checked> false
+    </p>
+    <button id="butOpen" type="button">
+        Identify file
+    </button>
+    <button id="butDirectory" type="button">
+        Identify directory
+    </button>
+    <h4>Results:</h4>
+    <textarea id="results" name="results" rows="40" cols="60" readonly>
+     </textarea>
+</body>
+
+</html>
