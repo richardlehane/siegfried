@@ -22,8 +22,8 @@ jobs:
           go-version: 1.x
       - name: Make sf and roy binaries
         run: |
-          go install -tags brew github.com/richardlehane/siegfried/cmd/sf
-          go install -tags brew github.com/richardlehane/siegfried/cmd/roy
+          go install github.com/richardlehane/siegfried/cmd/sf
+          go install github.com/richardlehane/siegfried/cmd/roy
         env:
           CGO_ENABLED: 0
       - name: Set environment variables # trim refs/tags/v using 'cut -c12-'
@@ -38,7 +38,7 @@ jobs:
       - name: Zip executables
         run: zip -j siegfried_${{ env.VERS }}_linux64.zip ${{ env.BIN_PATH }}/sf ${{ env.BIN_PATH }}/roy
       - name: Make self-contained sf binary
-        run: go install -tags "brew static" github.com/richardlehane/siegfried/cmd/sf
+        run: go install -tags static github.com/richardlehane/siegfried/cmd/sf
         env: 
           CGO_ENABLED: 0
       - name: Zip self-contained executable
@@ -65,12 +65,12 @@ jobs:
           go-version: 1.x
       - name: Make sf and roy binaries
         run: |
-          go install -tags brew github.com/richardlehane/siegfried/cmd/sf
-          go install -tags brew github.com/richardlehane/siegfried/cmd/roy
+          go install github.com/richardlehane/siegfried/cmd/sf
+          go install github.com/richardlehane/siegfried/cmd/roy
       - name: Zip executables
         run: zip -j siegfried_${{ env.VERSION }}_mac64.zip $(go env GOPATH)/bin/sf $(go env GOPATH)/bin/roy
       - name: Make self-contained sf binary
-        run: go install -tags "brew static" github.com/richardlehane/siegfried/cmd/sf
+        run: go install -tags static github.com/richardlehane/siegfried/cmd/sf
       - name: Zip self-contained executable
         run: zip -j siegfried_${{ env.VERSION }}_mac64_static.zip $(go env GOPATH)/bin/sf
       - name: Upload artifacts
