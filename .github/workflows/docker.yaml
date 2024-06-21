@@ -12,7 +12,7 @@ jobs:
           VERSION=$(curl https://api.github.com/repos/richardlehane/siegfried/releases/latest | grep -Po '\"tag_name\": \"v\K[^\"]*')
           echo "VERSION=$VERSION" >> $GITHUB_ENV
       - name: Repository dispatch
-        uses: peter-evans/repository-dispatch@v2
+        uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.KEEPS_ACCESS_TOKEN }}
           repository: 'keeps/siegfried-docker'

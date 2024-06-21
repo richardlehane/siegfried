@@ -15,9 +15,9 @@ jobs:
       version: ${{ env.VERS }}
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install latest version of go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
           go-version: 1.x
       - name: Make sf and roy binaries
@@ -44,7 +44,7 @@ jobs:
       - name: Zip self-contained executable
         run: zip -j siegfried_${{ env.VERS }}_linux64_static.zip ${{ env.BIN_PATH }}/sf      
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: release-artifacts
           path: |
@@ -58,9 +58,9 @@ jobs:
       VERSION: ${{needs.buildDeb.outputs.version}}
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install latest version of go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
           go-version: 1.x
       - name: Make sf and roy binaries
@@ -87,9 +87,9 @@ jobs:
       VERSION: ${{needs.buildDeb.outputs.version}}
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install latest version of go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
           go-version: 1.x
       - name: Make sf and roy binaries
@@ -109,25 +109,51 @@ jobs:
         shell: pwsh
         run: 7z a siegfried_${{ env.VERSION }}_win64_static.zip ((go env GOPATH) + "\bin\sf.exe")
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: release-artifacts
           path: |
             siegfried_${{ env.VERSION }}_win64.zip
             siegfried_${{ env.VERSION }}_win64_static.zip
             data_${{ env.VERSION }}.zip      
+  buildWin7:
+    runs-on: windows-latest
+    needs: buildDeb
+    env: 
+      VERSION: ${{needs.buildDeb.outputs.version}}
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Install latest version of go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.20
+      - name: Make sf and roy binaries
+        run: |
+          go install github.com/richardlehane/siegfried/cmd/sf
+          go install github.com/richardlehane/siegfried/cmd/roy
+      - name: Zip binaries
+        shell: pwsh
+        run: |
+          7z a siegfried_${{ env.VERSION }}_win7.zip ((go env GOPATH) + "\bin\*.exe")
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-artifacts
+          path: |
+            siegfried_${{ env.VERSION }}_win7.zip     
   createRelease:
     runs-on: ubuntu-latest
-    needs: [buildMac, buildWin] 
+    needs: [buildMac, buildWin, buildWin7] 
     steps:
       - name: Set version
         run: echo "VERSION=$(echo "${{ github.ref }}" | cut -c12-)" >> $GITHUB_ENV 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: release-artifacts
           path: release-artifacts
       - name: Create release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           name: Version ${{ env.VERSION }}
           prerelease: ${{ contains(github.ref, 'rc') }}
