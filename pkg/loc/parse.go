@@ -67,6 +67,7 @@ func characterise(m []string) ([]string, []string, []int, []int, error) {
 	hx, ascii := []string{}, []string{}
 	hxx, asciix := []int{}, []int{}
 	for _, v := range m {
+		v = strings.Replace(v, " (ASCII: \"1↵00:\")", "", 1)
 		tokens := strings.SplitN(v, ": ", 2)
 		switch len(tokens) {
 		case 1:
@@ -96,6 +97,7 @@ func characterise(m []string) ([]string, []string, []int, []int, error) {
 				hx = append(hx, tokens[1])
 				hxx = append(hxx, 25)
 			case "EBCDIC": // special case fdd000468 (skip for now)
+			case "Byte 0": // skip fdd000585
 			default:
 				return hx, ascii, hxx, asciix, fmt.Errorf("loc: can't characterise signature (value: %v), unexpected label %s", v, tokens[0])
 			}
@@ -107,7 +109,7 @@ func characterise(m []string) ([]string, []string, []int, []int, error) {
 }
 
 func dehex(h string, off int) ([][]byte, []int, []bool, error) { // return bytes, offsets, and masks
-	repl := strings.NewReplacer("0x", "", " ", "", "\n", "", "\t", "", "\r", "", "{20 bytes of Hex 20}", "2020202020202020202020202020202020202020") // special case fdd000342 (nl tab within the hex)
+	repl := strings.NewReplacer("0x", "", " ", "", "\n", "", "\t", "", "\r", "", "{8}", "xxxxxxxxxxxxxxxx", "{20 bytes of Hex 20}", "2020202020202020202020202020202020202020") // special case fdd000245 {8}, fdd000342 (nl tab within the hex)
 	h = repl.Replace(h)
 	if len(h)%2 != 0 {
 		return nil, nil, nil, fmt.Errorf("loc: can't dehex %s", h)
