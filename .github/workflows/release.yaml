@@ -46,7 +46,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: release-artifacts
+          name: release-artifacts-ubuntu
           path: |
             ${{ env.SF_PATH }}.deb
             siegfried_${{ env.VERS }}_linux64.zip
@@ -76,7 +76,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: release-artifacts
+          name: release-artifacts-mac
           path: |
             siegfried_${{ env.VERSION }}_mac64.zip
             siegfried_${{ env.VERSION }}_mac64_static.zip
@@ -111,7 +111,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: release-artifacts
+          name: release-artifacts-win
           path: |
             siegfried_${{ env.VERSION }}_win64.zip
             siegfried_${{ env.VERSION }}_win64_static.zip
@@ -127,7 +127,7 @@ jobs:
       - name: Install latest version of go
         uses: actions/setup-go@v5
         with:
-          go-version: 1.20
+          go-version: '1.20'
       - name: Make sf and roy binaries
         run: |
           go install github.com/richardlehane/siegfried/cmd/sf
@@ -139,7 +139,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: release-artifacts
+          name: release-artifacts-win7
           path: |
             siegfried_${{ env.VERSION }}_win7.zip
   buildWasm:
@@ -162,7 +162,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: release-artifacts
+          name: release-artifacts-wasm
           path: |
             siegfried_${{ env.VERSION }}_wasm.zip   
   createRelease:
@@ -173,8 +173,9 @@ jobs:
         run: echo "VERSION=$(echo "${{ github.ref }}" | cut -c12-)" >> $GITHUB_ENV 
       - uses: actions/download-artifact@v4
         with:
-          name: release-artifacts
           path: release-artifacts
+          pattern: release-artifacts-*
+          merge-multiple: true
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
