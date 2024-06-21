@@ -74,7 +74,7 @@ jobs:
       - name: Zip self-contained executable
         run: zip -j siegfried_${{ env.VERSION }}_mac64_static.zip $(go env GOPATH)/bin/sf
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: release-artifacts-mac
           path: |
@@ -160,7 +160,7 @@ jobs:
       - name: Zip wasm
         run: zip -j siegfried_${{ env.VERSION }}_wasm.zip sf.wasm
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: release-artifacts-wasm
           path: |
