@@ -9,7 +9,7 @@
 
 ### Version
 
-1.11.0
+1.11.1
 
 [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -97,6 +97,21 @@ Or, for the most recent updates, you can install from this fork:
     makepkg -si
 
 ## Changes
+### v1.11.1 (2024-06-28)
+### Added
+- WASM build. See pkg/wasm/README.md for more details. Feature sponsored by Archives New Zealand. Inspired by [Andy Jackson](https://siegfried-js.glitch.me/)
+- `-sym` flag enables following symbolic links to files during scanning. Requested by [Max Moser](https://github.com/richardlehane/siegfried/issues/245) 
+
+### Changed
+- XDG_DATA_DIRS checked when determining siegfried home location. Requested by [Michał Górny](https://github.com/mgorny)
+- Windows 7 build on [releases page](https://github.com/richardlehane/siegfried/releases) (built with go 1.20). Requested by [Aleksandr Sergeev](https://github.com/richardlehane/siegfried/issues/240)
+- update PRONOM to v118
+- update LOC to 2024-06-14
+
+### Fixed
+- zips piped into STDIN are decompressed with `-z` flag. Reported by [Max Moser](https://github.com/richardlehane/siegfried/issues/244)
+- panics from OS calls in init functions. Reported by [Jürgen Enge](https://github.com/richardlehane/siegfried/issues/247)
+
 ### v1.11.1 (2023-12-17)
 ### Added
 - glob-matching for container signatures; see [digital-preservation/pronom#10](https://github.com/digital-preservation/pronom/issues/10)
