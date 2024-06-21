@@ -156,9 +156,9 @@ jobs:
           go-version: 1.x
       - name: Make sf.wasm
         run: |
-          GOOS=js GOARCH=wasm go build -o sf.wasm github.com/richardlehane/siegfried/wasm
+          GOOS=js GOARCH=wasm go build -o wasm/example/sf.wasm github.com/richardlehane/siegfried/wasm
       - name: Zip wasm
-        run: zip -j siegfried_${{ env.VERSION }}_wasm.zip sf.wasm
+        run: zip -r -j siegfried_${{ env.VERSION }}_wasm.zip sf.wasm wasm/example wasm/README.md
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
