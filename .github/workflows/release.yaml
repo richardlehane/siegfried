@@ -141,7 +141,30 @@ jobs:
         with:
           name: release-artifacts
           path: |
-            siegfried_${{ env.VERSION }}_win7.zip     
+            siegfried_${{ env.VERSION }}_win7.zip
+  buildWasm:
+    runs-on: ubuntu-latest
+    needs: buildDeb
+    env: 
+      VERSION: ${{needs.buildDeb.outputs.version}}
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Install latest version of go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.x
+      - name: Make sf.wasm
+        run: |
+          GOOS=js GOARCH=wasm go build -o sf.wasm github.com/richardlehane/siegfried/wasm
+      - name: Zip wasm
+        run: zip -j siegfried_${{ env.VERSION }}_wasm.zip sf.wasm
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: release-artifacts
+          path: |
+            siegfried_${{ env.VERSION }}_wasm.zip   
   createRelease:
     runs-on: ubuntu-latest
     needs: [buildMac, buildWin, buildWin7] 

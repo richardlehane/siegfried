@@ -32,7 +32,7 @@ To include in your own web page include the `wasm_exec.js` and `sf.wasm` files i
         );
     </script>
 
-Once loaded, the `identify` method is available to use. See the example (`example.js`) in this package.
+Once loaded, the `identify` method is available to use. See the example in this package.
 
 ## Building
 
@@ -44,7 +44,7 @@ Signatures are embedded in the `sf.wasm` file using the [static package](https:/
 
 ## Running the example
 
-The example in this package won't run locally in a browser just by opening the "index.html" file. It needs to be accessed via a server. Any server capable of serving a file directory locally will work. If you don't have one installed, this simple go script works:
+To run the example, download the latest `sf.wasm` file from the [releases page](https://github.com/richardlehane/siegfried/releases) and copy to the example folder. You can't run the example locally in a browser just by opening the "index.html" file. It needs to be accessed via a server. Any server capable of serving a file directory will work. If you don't have one installed, this simple go script can be used (copy to a `main.go` file and run `go build main.go`):
 
     package main
 
