@@ -105,6 +105,31 @@ func makeFreedesktop() error {
 	return writeSigFile("freedesktop.sig", m)
 }
 
+func makeArchivematica() error {
+	config.SetHome(*genhome)
+	p, err := pronom.New(
+		config.SetName("archivematica"),
+		config.SetExtend(sets.Expand("archivematica-fmt2.xml,archivematica-fmt3.xml,archivematica-fmt4.xml,archivematica-fmt5.xml")))
+	if err != nil {
+		return err
+	}
+	return writeSigFile("archivematica.sig", p)
+}
+
+func makeWikidata() error {
+	config.SetHome(*genhome)
+	wikidataOpts := []config.Option{
+		config.Clear(),
+		config.SetWikidataNamespace(),
+		config.SetWikidataNoPRONOM(),
+	}
+	w, err := wikidata.New(wikidataOpts...)
+	if err != nil {
+		return err
+	}
+	return writeSigFile("wikidata.sig", w)
+}
+
 func makeDeluxe() error {
 	config.SetHome(*genhome)
 	p, err := pronom.New(config.Clear())
@@ -132,17 +157,6 @@ func makeDeluxe() error {
 	return writeSigFile("deluxe.sig", p, m, f, l, w)
 }
 
-func makeArchivematica() error {
-	config.SetHome(*genhome)
-	p, err := pronom.New(
-		config.SetName("archivematica"),
-		config.SetExtend(sets.Expand("archivematica-fmt2.xml,archivematica-fmt3.xml,archivematica-fmt4.xml,archivematica-fmt5.xml")))
-	if err != nil {
-		return err
-	}
-	return writeSigFile("archivematica.sig", p)
-}
-
 func makeSets() error {
 	config.SetHome(*genhome)
 	releases, err := pronom.LoadReleases(config.Local("release-notes.xml"))
@@ -156,18 +170,4 @@ func makeSets() error {
 		err = pronom.ExtensionSet("pronom-extensions.json")
 	}
 	return err
-}
-
-func makeWikidata() error {
-	config.SetHome(*genhome)
-	wikidataOpts := []config.Option{
-		config.Clear(),
-		config.SetWikidataNamespace(),
-		config.SetWikidataNoPRONOM(),
-	}
-	w, err := wikidata.New(wikidataOpts...)
-	if err != nil {
-		return err
-	}
-	return writeSigFile("wikidata.sig", w)
 }
