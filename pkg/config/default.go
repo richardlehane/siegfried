@@ -36,7 +36,7 @@ func defaultHome() string {
 	}
 	// if a home directory already exists in the legacy location continue using it
 	legacy_home := filepath.Join(user_home, "siegfried")
-	if _, err := os.Stat(siegfried.home); err == nil {
+	if _, err := os.Stat(legacy_home); err == nil {
 		return legacy_home
 	}
 	// check if XDG_DATA_DIRS exist
