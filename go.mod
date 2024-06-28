@@ -9,7 +9,7 @@ require (
 	github.com/richardlehane/webarchive v1.0.3
 	github.com/richardlehane/xmldetect v1.0.2
 	github.com/ross-spencer/wikiprov v0.2.0
-	golang.org/x/image v0.17.0
+	golang.org/x/image v0.18.0
 	golang.org/x/sys v0.21.0
 )
 
