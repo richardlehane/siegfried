@@ -82,7 +82,7 @@ func Home() string {
 // Home makes a path local to Home() if it is relative
 func Local(base string) string {
 	if filepath.Dir(base) == "." {
-		return filepath.Join(siegfried.home, base)
+		return filepath.Join(Home(), base)
 	}
 	return base
 }
