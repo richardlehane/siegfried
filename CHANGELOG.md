@@ -1,7 +1,7 @@
 # Change Log
 ## v1.11.1 (2024-06-28)
 ### Added
-- WASM build. See pkg/wasm/README.md for more details. Feature sponsored by Archives New Zealand. Inspired by [Andy Jackson](https://siegfried-js.glitch.me/)
+- WASM build. See wasm/README.md for more details. Feature sponsored by Archives New Zealand. Inspired by [Andy Jackson](https://siegfried-js.glitch.me/)
 - `-sym` flag enables following symbolic links to files during scanning. Requested by [Max Moser](https://github.com/richardlehane/siegfried/issues/245) 
 
 ### Changed

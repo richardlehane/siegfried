@@ -112,7 +112,7 @@ Or, for the most recent updates, you can install from this fork:
 - zips piped into STDIN are decompressed with `-z` flag. Reported by [Max Moser](https://github.com/richardlehane/siegfried/issues/244)
 - panics from OS calls in init functions. Reported by [Jürgen Enge](https://github.com/richardlehane/siegfried/issues/247)
 
-### v1.11.1 (2023-12-17)
+### v1.11.0 (2023-12-17)
 ### Added
 - glob-matching for container signatures; see [digital-preservation/pronom#10](https://github.com/digital-preservation/pronom/issues/10)
 - `sf -update` works for older versions of siegfried; see [#231](https://github.com/richardlehane/siegfried/issues/231)
