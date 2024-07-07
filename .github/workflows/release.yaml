@@ -183,3 +183,4 @@ jobs:
           prerelease: ${{ contains(github.ref, 'rc') }}
           body: see CHANGELOG.md
           files: release-artifacts/*
+          token: ${{ secrets.PAT }}
