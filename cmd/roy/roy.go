@@ -163,6 +163,7 @@ var (
 	_, htimeout, _, _          = config.HarvestOptions()
 	timeout                    = harvest.Duration("timeout", htimeout, "set duration before timing-out harvesting requests e.g. 120s")
 	throttlef                  = harvest.Duration("throttle", 0, "set a time to wait HTTP requests e.g. 50ms")
+	harvestWikidataSigLen      = harvest.Int("siglen", config.WikidataSigLen(), "set minimum signature length for Wikidata, e.g. 6 chars == 3 bytes")
 	harvestWikidataSig         = harvest.Bool("wikidata", false, "harvest a static Wikidata report")
 	harvestWikidataLang        = harvest.String("lang", config.WikidataLang(), "two-letter language-code to download Wikidata strings, e.g. \"de\"")
 	harvestWikidataEndpoint    = harvest.String("wikidataendpoint", config.WikidataEndpoint(), "the endpoint to use to harvest Wikidata definitions from")
@@ -496,6 +497,9 @@ func setHarvestOptions() {
 	}
 	if *throttlef > 0 {
 		config.SetHarvestThrottle(*throttlef)
+	}
+	if *harvestWikidataSigLen != config.WikidataSigLen() {
+		config.SetWikidataSigLen(*harvestWikidataSigLen)
 	}
 	if *harvestWikidataLang != "" {
 		config.SetWikidataLang(*harvestWikidataLang)

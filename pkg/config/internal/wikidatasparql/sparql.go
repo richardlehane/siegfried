@@ -18,8 +18,16 @@ package wikidatasparql
 // the Wikidata identifier in Roy.
 
 import (
+	"strconv"
 	"strings"
 )
+
+// sigLenTemplate gives us a field which we can replace with a
+// min signature length value of our own choosing.
+const sigLenTemplate = "<<siglen>>"
+
+// Default signature length to return from Wikidata.
+var wikidataSigLen = 6
 
 // languateTemplate gives us a field which we can replace with a
 // language code of our own configuration.
@@ -41,6 +49,7 @@ SELECT DISTINCT ?uri ?uriLabel ?puid ?extension ?mimetype ?encoding ?referenceLa
   UNION
   { ?uri (wdt:P31/(wdt:P279*)) wd:Q26085352. }
   FILTER(EXISTS { ?uri (wdt:P2748|wdt:P1195|wdt:P1163|ps:P4152) _:b2. })
+  FILTER((STRLEN(?sig)) >= <<siglen>> )
   OPTIONAL { ?uri wdt:P2748 ?puid. }
   OPTIONAL { ?uri wdt:P1195 ?extension. }
   OPTIONAL { ?uri wdt:P1163 ?mimetype. }
@@ -67,7 +76,21 @@ ORDER BY (?uri)
 // signatures from Wikidata replacing various template values as we
 // go.
 func WikidataSPARQL() string {
-	return strings.Replace(sparql, languageTemplate, wikidataLang, numberReplacements)
+	wdSparql := strings.Replace(sparql, languageTemplate, wikidataLang, numberReplacements)
+	wdSparql = strings.Replace(wdSparql, sigLenTemplate, strconv.Itoa(wikidataSigLen), numberReplacements)
+	return wdSparql
+}
+
+// WikidataSigLen returns the minimum signature length we want the Wikidata
+// SPARQL query to return.
+func WikidataSigLen() int {
+	return wikidataSigLen
+}
+
+// SetWikidataSigLen sets the minimum signature length we want the Wikidata
+// SPARQL query to return.
+func SetWikidataSigLen(len int) {
+	wikidataSigLen = len
 }
 
 // WikidataLang will return to the caller the ISO language code

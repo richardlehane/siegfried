@@ -221,6 +221,18 @@ func WikidataSPARQL() string {
 	return wikidatasparql.WikidataSPARQL()
 }
 
+// WikidataSiglen returns the minimum signature length we want the Wikidata
+// SPARQL query to return.
+func WikidataSigLen() int {
+	return wikidatasparql.WikidataSigLen()
+}
+
+// SetWikidataLang sets the minimum signature length we want the Wikidata
+// SPARQL query to return.
+func SetWikidataSigLen(len int) {
+	wikidatasparql.SetWikidataSigLen(len)
+}
+
 // WikidataLang returns the language we want to return results in from
 // Wikidata.
 func WikidataLang() string {
@@ -262,7 +274,6 @@ func GetWikidataNoPRONOM() bool {
 // returned from Wikibase, e.g. for Wikidata this URL needs to be:
 //
 // e.g. https://www.wikidata.org/w/index.php
-//
 func SetWikibaseURL(baseURL string) (func() private, error) {
 	_, err := url.ParseRequestURI(baseURL)
 	if err != nil {
@@ -384,12 +395,11 @@ func SetCustomWikibaseQuery() error {
 //
 // Example:
 //
-//		{
-//		   "PronomProp": "http://wikibase.example.com/entity/Q2",
-//		   "BofProp": "http://wikibase.example.com/entity/Q3",
-//		   "EofProp": "http://wikibase.example.com/entity/Q4"
-//		}
-//
+//	{
+//	   "PronomProp": "http://wikibase.example.com/entity/Q2",
+//	   "BofProp": "http://wikibase.example.com/entity/Q3",
+//	   "EofProp": "http://wikibase.example.com/entity/Q4"
+//	}
 func WikibasePropsPath() string {
 	return filepath.Join(WikidataHome(), wikidata.wikibasePropsFile)
 }
