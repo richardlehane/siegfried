@@ -17,7 +17,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
 	"strings"
@@ -119,7 +118,7 @@ func harvestWikidata() error {
 	)
 
 	path := config.WikidataDefinitionsPath()
-	err = ioutil.WriteFile(
+	err = os.WriteFile(
 		path,
 		[]byte(fmt.Sprintf("%s", modifiedJSON)),
 		config.WikidataFileMode(),

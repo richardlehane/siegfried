@@ -18,8 +18,16 @@ package wikidatasparql
 // the Wikidata identifier in Roy.
 
 import (
+	"strconv"
 	"strings"
 )
+
+// sigLenTemplate gives us a field which we can replace with a
+// min signature length value of our own choosing.
+const sigLenTemplate = "<<siglen>>"
+
+// Default signature length to return from Wikidata.
+var wikidataSigLen = 6
 
 // languateTemplate gives us a field which we can replace with a
 // language code of our own configuration.
@@ -35,36 +43,54 @@ var wikidataLang = "en"
 // sparql represents the query required to pull all file format records
 // and signatures from the Wikidata query service.
 const sparql = `
-	# Return all file format records from Wikidata.
-	#
-	select distinct ?uri ?uriLabel ?puid ?extension ?mimetype ?encoding ?referenceLabel ?date ?relativity ?offset ?sig
-	where
-	{
-	  ?uri wdt:P31/wdt:P279* wd:Q235557.               # Return records of type File Format.
-	  optional { ?uri wdt:P2748 ?puid.      }          # PUID is used to map to PRONOM signatures proper.
-	  optional { ?uri wdt:P1195 ?extension. }
-	  optional { ?uri wdt:P1163 ?mimetype.  }
-	  optional { ?uri p:P4152 ?object;                 # Format identification pattern statement.
-	    optional { ?object pq:P3294 ?encoding.   }     # We don't always have an encoding.
-	    optional { ?object ps:P4152 ?sig.        }     # We always have a signature.
-	    optional { ?object pq:P2210 ?relativity. }     # Relativity to beginning or end of file.
-	    optional { ?object pq:P4153 ?offset.     }     # Offset relative to the relativity.
-	    optional { ?object prov:wasDerivedFrom ?provenance;
-	       optional { ?provenance pr:P248 ?reference;
-	                              pr:P813 ?date.
-	                }
-	    }
-	  }
-	  service wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE], <<lang>>". }
-	}
-	order by ?uri
- 	`
+# Return all file format records from Wikidata.
+SELECT DISTINCT ?uri ?uriLabel ?puid ?extension ?mimetype ?encoding ?referenceLabel ?date ?relativity ?offset ?sig WHERE {
+  { ?uri (wdt:P31/(wdt:P279*)) wd:Q235557. }
+  UNION
+  { ?uri (wdt:P31/(wdt:P279*)) wd:Q26085352. }
+  FILTER(EXISTS { ?uri (wdt:P2748|wdt:P1195|wdt:P1163|ps:P4152) _:b2. })
+  FILTER((STRLEN(?sig)) >= <<siglen>> )
+  OPTIONAL { ?uri wdt:P2748 ?puid. }
+  OPTIONAL { ?uri wdt:P1195 ?extension. }
+  OPTIONAL { ?uri wdt:P1163 ?mimetype. }
+  OPTIONAL {
+    ?uri p:P4152 ?object.
+    OPTIONAL { ?object pq:P3294 ?encoding. }
+    OPTIONAL { ?object ps:P4152 ?sig. }
+    OPTIONAL { ?object pq:P2210 ?relativity. }
+    OPTIONAL { ?object pq:P4153 ?offset. }
+    OPTIONAL {
+      ?object prov:wasDerivedFrom ?provenance.
+      OPTIONAL {
+        ?provenance pr:P248 ?reference;
+          pr:P813 ?date.
+      }
+    }
+  }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE], <<lang>>". }
+}
+ORDER BY (?uri)
+`
 
 // WikidataSPARQL returns the SPARQL query needed to pull file-format
 // signatures from Wikidata replacing various template values as we
 // go.
 func WikidataSPARQL() string {
-	return strings.Replace(sparql, languageTemplate, wikidataLang, numberReplacements)
+	wdSparql := strings.Replace(sparql, languageTemplate, wikidataLang, numberReplacements)
+	wdSparql = strings.Replace(wdSparql, sigLenTemplate, strconv.Itoa(wikidataSigLen), numberReplacements)
+	return wdSparql
+}
+
+// WikidataSigLen returns the minimum signature length we want the Wikidata
+// SPARQL query to return.
+func WikidataSigLen() int {
+	return wikidataSigLen
+}
+
+// SetWikidataSigLen sets the minimum signature length we want the Wikidata
+// SPARQL query to return.
+func SetWikidataSigLen(len int) {
+	wikidataSigLen = len
 }
 
 // WikidataLang will return to the caller the ISO language code
