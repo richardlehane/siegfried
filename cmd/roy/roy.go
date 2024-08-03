@@ -200,7 +200,7 @@ var (
 func savereps() error {
 	file, err := os.Open(config.Reports())
 	if err != nil {
-		err = os.Mkdir(config.Reports(), os.ModePerm)
+		err = os.MkdirAll(config.Reports(), os.ModePerm)
 		if err != nil {
 			return fmt.Errorf("roy: error making reports directory %s", err)
 		}
