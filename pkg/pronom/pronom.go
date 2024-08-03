@@ -20,6 +20,7 @@ import (
 	"encoding/xml"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -138,7 +139,7 @@ func (p *pronom) setParseables() error {
 func newDroid(path string) (*droid, error) {
 	d := &mappings.Droid{}
 	if err := openXML(path, d); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("%W: %s", err, path)
 	}
 	return &droid{d, identifier.Blank{}}, nil
 }
@@ -195,7 +196,12 @@ func (p *pronom) setContainers() error {
 // UTILS
 // Harvest fetches PRONOM reports listed in the DROID file
 func Harvest() []error {
-	d, err := newDroid(config.Droid())
+	droidXML := config.Droid()
+	if droidXML == "" {
+		return []error{fmt.Errorf("a DROID signature file needs to be downloaded to %s", config.Home())}
+	}
+	log.Println("roy: harvesting PRONOM reports for records listed in DROID XML:", droidXML)
+	d, err := newDroid(droidXML)
 	if err != nil {
 		return []error{err}
 	}
