@@ -31,6 +31,7 @@ import (
 
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/internal/checksum"
+	"github.com/richardlehane/siegfried/internal/logformatter"
 	"github.com/richardlehane/siegfried/internal/logger"
 	"github.com/richardlehane/siegfried/pkg/config"
 	"github.com/richardlehane/siegfried/pkg/core"
@@ -41,6 +42,18 @@ import (
 
 // defaults
 const maxMulti = 1024
+
+func setLogger(utc bool) {
+	lw := new(logformatter.LogWriter)
+	lw.Appname = "sf"
+	lw.UTC = utc
+	log.SetOutput(lw)
+}
+
+func init() {
+	// format the application logger before all other init.
+	setLogger(true)
+}
 
 // flags
 var (
