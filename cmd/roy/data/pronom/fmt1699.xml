@@ -58,7 +58,7 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>2032</SignatureID>
-        <SignatureName>602 Graph/Chart File</SignatureName>
+        <SignatureName>602 Graph/Chart File v.1.51</SignatureName>
         <SignatureNote>BOF Absolute from beginning of file, magic bytes: Software602 Calc602 v.1.51 Graf</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>2358</ByteSequenceID>

@@ -46,7 +46,7 @@ http://fileformats.archiveteam.org/wiki/Finale</FormatNote>
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>2327</SignatureID>
-        <SignatureName>Enigma Binary File  (Finale) v.2</SignatureName>
+        <SignatureName>Enigma Binary File (Finale) v.2</SignatureName>
         <SignatureNote>BOF; Offset: 0; Magic Bytes: 'Finale(TM) 2'</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>2705</ByteSequenceID>

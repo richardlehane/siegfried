@@ -22,7 +22,7 @@
       <ProvenanceSourceID>131</ProvenanceSourceID>
       <ProvenanceName>Digital Library Research Group / MIT Libraries</ProvenanceName>
       <ProvenanceSourceDate>06 Apr 2009</ProvenanceSourceDate>
-      <ProvenanceDescription>11/2023 (v.115)- Max-offset modified for BOF signature to allow for more exact signature identification. Internally researched. 04/2024 (v.117) changed first range of bytes from {2024} to *. Submitted by the J. Paul Getty Trust.</ProvenanceDescription>
+      <ProvenanceDescription>11/2023 (v.115)- Max-offset modified for BOF signature to allow for more exact signature identification. Internally researched. 04/2024 (v.118) changed first range of bytes from {2024} to *. Submitted by the J. Paul Getty Trust.</ProvenanceDescription>
       <LastUpdatedDate>22 Apr 2024</LastUpdatedDate>
       <FormatNote>
       </FormatNote>

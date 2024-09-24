@@ -25,7 +25,7 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>17 Jun 2016</ProvenanceSourceDate>
-      <ProvenanceDescription>11/2023 (v.116)- internal signature expanded. Submitted by Preservica.</ProvenanceDescription>
+      <ProvenanceDescription>11/2023 (v.116)- internal signature expanded. Submitted by Preservica; 07/2024 (v.119)- priority over fmt/1917 BigTIFF added. Submitted by Preservica.</ProvenanceDescription>
       <LastUpdatedDate>16 Nov 2023</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
@@ -61,6 +61,13 @@ https://github.com/lovasoa/ZIF/</SignatureNote>
           <ByteSequenceValue>49492B00080000001000000000000000</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2775</RelatedFormatID>
+        <RelatedFormatName>BigTIFF</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

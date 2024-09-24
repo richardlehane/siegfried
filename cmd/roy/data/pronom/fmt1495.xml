@@ -112,6 +112,12 @@
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>2881</RelatedFormatID>
+        <RelatedFormatName>QuarkXPress Project</RelatedFormatName>
+        <RelatedFormatVersion>18</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

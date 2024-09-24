@@ -112,7 +112,7 @@ BOF; Offset: 32768; Max Offset: 69632; Magic Bytes:  0x00424541303101, then an e
       </InternalSignature>
       <InternalSignature>
         <SignatureID>2095</SignatureID>
-        <SignatureName>Apple Partition Map - ISO 9660 - UDF Hybrid Disk Image sig.2udf</SignatureName>
+        <SignatureName>Apple Partition Map - ISO 9660 - UDF Hybrid Disk Image sig.2</SignatureName>
         <SignatureNote>BOF; Offset: 0; Magic Bytes: wildcard bytes between 0 to 16 bytes, followed by 0x45520800, an exact 2044 wildcard bytes followed by 0x504D
 
 BOF; Offset: 32768; Max Offset: 103236; Magic Bytes:  0x4344303031, then wildcard bytes between 1 to 16384, followed by 0xFF4344303031

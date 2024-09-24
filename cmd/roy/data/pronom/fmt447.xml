@@ -28,7 +28,7 @@
       <ProvenanceDescription>PDX is Adobe Acrobat Catalog Index file, available in Adobe Acrobat versions 2 and later. 
 When created, a PDF Catalog Index will also create a number of dependent sub-files of specific filetypes. 
 The extensions for these filetypes within earlier versions of .pdx are .wld, .abt, .did, .ddd, .pdd, .plc, .cat, .trn. 
-In later versions only .idx files are created.; The Catalog Index creates a fully text-searchable relationship between the indexed pdf files.; 04/2024 (v.117): Description and links added as part of PRONOM Research Week 2023. Archives nationales (French National Archives).</ProvenanceDescription>
+In later versions only .idx files are created.; The Catalog Index creates a fully text-searchable relationship between the indexed pdf files.; 04/2024 (v.118): Description and links added as part of PRONOM Research Week 2023. Archives nationales (French National Archives).</ProvenanceDescription>
       <LastUpdatedDate>17 Apr 2024</LastUpdatedDate>
       <FormatNote>https://helpx.adobe.com/acrobat/using/creating-pdf-indexes.html</FormatNote>
       <FormatRisk>

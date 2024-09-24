@@ -264,6 +264,24 @@ QCD - QuarkXPress Article</ProvenanceDescription>
         <RelatedFormatName>QuarkXPress Project</RelatedFormatName>
         <RelatedFormatVersion>2021</RelatedFormatVersion>
       </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2881</RelatedFormatID>
+        <RelatedFormatName>QuarkXPress Project</RelatedFormatName>
+        <RelatedFormatVersion>18</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2882</RelatedFormatID>
+        <RelatedFormatName>QuarkXPress Project</RelatedFormatName>
+        <RelatedFormatVersion>19</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>2883</RelatedFormatID>
+        <RelatedFormatName>QuarkXPress Project</RelatedFormatName>
+        <RelatedFormatVersion>20</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

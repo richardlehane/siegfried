@@ -54,6 +54,29 @@
         <Signature>fil</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>3537</ExternalSignatureID>
+        <Signature>esq</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2362</SignatureID>
+        <SignatureName>Disklavier E-Seq Music</SignatureName>
+        <SignatureNote>BOF, Offset: 7, Magic Bytes: 'COM-ESEQ'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2740</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>7</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>434F4D2D45534551</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

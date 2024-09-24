@@ -26,7 +26,7 @@
       <ProvenanceName>
       </ProvenanceName>
       <ProvenanceSourceDate>03 Nov 2021</ProvenanceSourceDate>
-      <ProvenanceDescription>09/2023 (v.115)- MIME Type added 'application/eaf+xml' and modified file type to 'Text (Structured) submitted by the Max Plank Insitute of Phsycholinguisitcs and Monash University. 04/2024 (v.117)- Signature updated to allow flexibility for byte length between tags. Submitted by Preservica based on samples provided by The Endanagered Languages Archive.</ProvenanceDescription>
+      <ProvenanceDescription>09/2023 (v.115)- MIME Type added 'application/eaf+xml' and modified file type to 'Text (Structured) submitted by the Max Plank Insitute of Phsycholinguisitcs and Monash University. 04/2024 (v.118)- Signature updated to allow flexibility for byte length between tags. Submitted by Preservica based on samples provided by The Endanagered Languages Archive.</ProvenanceDescription>
       <LastUpdatedDate>22 Apr 2024</LastUpdatedDate>
       <FormatNote>EAF Specification für Version 3.0 (2017): www.mpi.nl/tools/elan/EAF_Annotation_Format_3.0_and_ELAN.pdf</FormatNote>
       <FormatRisk>

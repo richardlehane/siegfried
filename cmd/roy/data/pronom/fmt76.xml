@@ -40,15 +40,15 @@
         <DeveloperID>18</DeveloperID>
         <DeveloperName>
         </DeveloperName>
-        <OrganisationName>Autodesk Corporation</OrganisationName>
-        <DeveloperCompoundName>Autodesk Corporation</DeveloperCompoundName>
+        <OrganisationName>Autodesk</OrganisationName>
+        <DeveloperCompoundName>Autodesk</DeveloperCompoundName>
       </Developers>
       <Support>
         <SupportID>18</SupportID>
         <SupportName>
         </SupportName>
-        <OrganisationName>Autodesk Corporation</OrganisationName>
-        <SupportCompoundName>Autodesk Corporation</SupportCompoundName>
+        <OrganisationName>Autodesk</OrganisationName>
+        <SupportCompoundName>Autodesk</SupportCompoundName>
       </Support>
       <Document>
         <DocumentID>36</DocumentID>
@@ -67,15 +67,15 @@
           <AuthorID>18</AuthorID>
           <AuthorName>
           </AuthorName>
-          <OrganisationName>Autodesk Corporation</OrganisationName>
-          <AuthorCompoundName>Autodesk Corporation</AuthorCompoundName>
+          <OrganisationName>Autodesk</OrganisationName>
+          <AuthorCompoundName>Autodesk</AuthorCompoundName>
         </Author>
         <Publisher>
           <PublisherID>18</PublisherID>
           <PublisherName>
           </PublisherName>
-          <OrganisationName>Autodesk Corporation</OrganisationName>
-          <PublisherCompoundName>Autodesk Corporation</PublisherCompoundName>
+          <OrganisationName>Autodesk</OrganisationName>
+          <PublisherCompoundName>Autodesk</PublisherCompoundName>
         </Publisher>
       </Document>
       <ExternalSignature>

@@ -25,7 +25,7 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
-      <ProvenanceDescription>01/2024 (v.117): Added internal Signature.</ProvenanceDescription>
+      <ProvenanceDescription>07/2024 (v.119): Added internal Signature. Submitted by the National Archives and Records Administration.</ProvenanceDescription>
       <LastUpdatedDate>25 Apr 2024</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
@@ -42,6 +42,24 @@
         <Signature>dbt</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>2301</SignatureID>
+        <SignatureName>AutoCAD dbConnect Template Set</SignatureName>
+        <SignatureNote>Absolute from beginning of file, magic bytes: ....DBCNC R15|....TMPLSET</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>2682</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>0A0000004442434E43205231357C0C000000544D50</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

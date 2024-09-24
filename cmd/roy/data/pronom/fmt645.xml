@@ -53,7 +53,7 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>973</SignatureID>
-        <SignatureName>EXIF Compressed Image 2.2.1 (big-endian)</SignatureName>
+        <SignatureName>EXIF Compressed Image 2.21 (big-endian)</SignatureName>
         <SignatureNote>SOI and APP1, EXIF IFD (EXIF ver=2.2.1), EOI marker</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1195</ByteSequenceID>
@@ -84,7 +84,7 @@
       </InternalSignature>
       <InternalSignature>
         <SignatureID>974</SignatureID>
-        <SignatureName>EXIF Compressed Image 2.2.1 (little-endian)</SignatureName>
+        <SignatureName>EXIF Compressed Image 2.21 (little-endian)</SignatureName>
         <SignatureNote>SOI and APP1, EXIF IFD (EXIF ver=2.2.1), EOI marker</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>1197</ByteSequenceID>

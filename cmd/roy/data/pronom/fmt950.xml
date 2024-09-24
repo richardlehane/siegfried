@@ -24,8 +24,8 @@
       <ProvenanceSourceID>178</ProvenanceSourceID>
       <ProvenanceName>National Library of New Zealand / National Library of New Zealand</ProvenanceName>
       <ProvenanceSourceDate>22 Jul 2016</ProvenanceSourceDate>
-      <ProvenanceDescription>04/2024 (v.117): Max offset of one BOF sequence increased to 20000. Submitted by Archives New Zealand.</ProvenanceDescription>
-      <LastUpdatedDate>15 Apr 2024</LastUpdatedDate>
+      <ProvenanceDescription>04/2024 (v.118): Max offset of one BOF sequence increased to 20000. Submitted by Archives New Zealand; 07/2024 (v.119): Internal signature BOF sequence modified to allow for t or T in 'Content-(t|T)ype:'. Submitted by the National Library of Australia.</ProvenanceDescription>
+      <LastUpdatedDate>08 Jul 2024</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -116,7 +116,7 @@ Content-(T|t)ype:</SignatureNote>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>436F6E74656E742D547970653A20</ByteSequenceValue>
+          <ByteSequenceValue>436F6E74656E742D(54|74)7970653A20</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

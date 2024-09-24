@@ -24,7 +24,7 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
-      <ProvenanceDescription>01/2024 (v.117) Added internal signature.</ProvenanceDescription>
+      <ProvenanceDescription>04/2024 (v.118)- added internal signature. Submitted by National Archives and Records Administration.</ProvenanceDescription>
       <LastUpdatedDate>17 Apr 2024</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
@@ -42,11 +42,11 @@
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <InternalSignature>
-        <SignatureID>2366</SignatureID>
-        <SignatureName>AutoCAD Batch Plot File 	2000-2005</SignatureName>
+        <SignatureID>2299</SignatureID>
+        <SignatureName>	AutoCAD Batch Plot File 	2000-2005</SignatureName>
         <SignatureNote>Absolute from beginning of file, magic bytes: AutoCAD 2000 Batch Plot List File</SignatureNote>
         <ByteSequence>
-          <ByteSequenceID>2744</ByteSequenceID>
+          <ByteSequenceID>2678</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
           <MaxOffset>0</MaxOffset>

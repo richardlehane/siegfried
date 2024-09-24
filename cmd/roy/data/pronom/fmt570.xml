@@ -25,9 +25,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>19 Jul 2013</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>19 Jul 2013</LastUpdatedDate>
+      <ProvenanceDescription>07/2024 (v.119)- Internal signature updated to allow for both double and single quotation marks. Submitted by the Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche numérique du Canada - Dépôt fédéré de données de recherche.</ProvenanceDescription>
+      <LastUpdatedDate>30 May 2024</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -72,7 +71,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>3C3F787061636B657420626567696E3D22EFBBBF222069643D2257354D304D7043656869487A7265537A4E54637A6B633964223F3E0A3C783A786D706D65746120786D6C6E733A783D2261646F62653A6E733A6D6574612F22</ByteSequenceValue>
+          <ByteSequenceValue>3C3F787061636B657420626567696E3D(22|27)EFBBBF(22|27)2069643D(22|27)57354D304D7043656869487A7265537A4E54637A6B633964(22|27)3F3E0A3C783A786D706D65746120786D6C6E733A783D(22|27)61646F62653A6E733A6D6574612F(22|27)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

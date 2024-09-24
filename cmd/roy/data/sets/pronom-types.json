@@ -1512,7 +1512,10 @@
     "fmt/1866 (Microsoft Powerpoint for Macintosh 2)",
     "fmt/1867 (Microsoft Powerpoint for Macintosh 3)",
     "fmt/1941 (Adobe InDesign Document CC 2023)",
-    "fmt/1942 (Adobe InDesign Document CC 2024)"
+    "fmt/1942 (Adobe InDesign Document CC 2024)",
+    "fmt/2006 (QuarkXPress Project 18)",
+    "fmt/2007 (QuarkXPress Project 19)",
+    "fmt/2008 (QuarkXPress Project 20)"
   ],
   "spreadsheet": [
     "x-fmt/17 (Microsoft Excel Template 97-2003)",
@@ -1860,7 +1863,8 @@
     "fmt/1905 (Universal Scene Description ASCII File)",
     "fmt/1940 (EBU Subtitling Data Exchange Format)",
     "fmt/1947 (OpenWayback CDXJ File Format)",
-    "fmt/1951 (Pro Tools Session File 5-9)"
+    "fmt/1951 (Pro Tools Session File 5-9)",
+    "fmt/2009 (Protein Data Bank File 3.3)"
   ],
   "textUnstructured": [
     "x-fmt/14 (Macintosh Text File)",

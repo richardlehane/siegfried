@@ -24,7 +24,7 @@
       <ProvenanceSourceID>192</ProvenanceSourceID>
       <ProvenanceName>Tessella / Tessella</ProvenanceName>
       <ProvenanceSourceDate>28 Aug 2013</ProvenanceSourceDate>
-      <ProvenanceDescription>09/2022- Amended signature to disregard first 127 bytes according to specification. Added links to specification and references, altered description. Submitted by University Medical Center Utrecht.11/2023 (v.115)- Max-offset modified for BOF signature to allow for more exact signature identification. Internally researched. 04/2024 (v.117)- Added alias of DICOM. Submitted by Preservica.</ProvenanceDescription>
+      <ProvenanceDescription>09/2022- Amended signature to disregard first 127 bytes according to specification. Added links to specification and references, altered description. Submitted by University Medical Center Utrecht.11/2023 (v.115)- Max-offset modified for BOF signature to allow for more exact signature identification. Internally researched. 04/2024 (v.118)- Added alias of DICOM. Submitted by Preservica.</ProvenanceDescription>
       <LastUpdatedDate>22 Apr 2024</LastUpdatedDate>
       <FormatNote>https://dicom.nema.org/medical/dicom/current/output/pdf/part10.pdf
 

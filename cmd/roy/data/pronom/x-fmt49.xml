@@ -71,8 +71,8 @@ A DWF package must meet the following requirements:
         <DeveloperID>18</DeveloperID>
         <DeveloperName>
         </DeveloperName>
-        <OrganisationName>Autodesk Corporation</OrganisationName>
-        <DeveloperCompoundName>Autodesk Corporation</DeveloperCompoundName>
+        <OrganisationName>Autodesk</OrganisationName>
+        <DeveloperCompoundName>Autodesk</DeveloperCompoundName>
       </Developers>
       <ExternalSignature>
         <ExternalSignatureID>74</ExternalSignatureID>

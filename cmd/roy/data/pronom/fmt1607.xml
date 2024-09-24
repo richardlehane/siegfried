@@ -57,7 +57,7 @@ https://en.wikipedia.org/wiki/Atari_Falcon</FormatNote>
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>1942</SignatureID>
-        <SignatureName>True Colour Picture [Spooky Sprites] (Atari Falcon</SignatureName>
+        <SignatureName>True Colour Picture [Spooky Sprites] (Atari Falcon)</SignatureName>
         <SignatureNote>BOF; Offset: 0; Magic Bytes: 'tru?'</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>2249</ByteSequenceID>

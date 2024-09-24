@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>3881</FormatID>
+      <FormatName>Protein Data Bank File</FormatName>
+      <FormatVersion>3.3</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The Protein Data Bank file format was developed as a human readable, standardised way to describe the 3D structures of molecules. The file is limited to 80 columns, which was based on the width of the computer punch cards that were previously used to exchange the coordinates. It was developed in 1972, and has gone through various versions, the last one being version 3.3 (defined here), which was released in 2012. The file was succeeded by the .mmCIF format in 2014.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>346</ProvenanceSourceID>
+      <ProvenanceName>
+      </ProvenanceName>
+      <ProvenanceSourceDate>27 Jun 2024</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>27 Jun 2024</LastUpdatedDate>
+      <FormatNote>Specification: https://www.wwpdb.org/documentation/file-format-content/format33/sect1.html
+https://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format) 
+https://pdb101.rcsb.org/learn/guide-to-understanding-pdb-data/dealing-with-coordinates 
+https://www.biostat.jhsph.edu/~iruczins/teaching/260.655/links/pdbformat.pdf</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/2009</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>342</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Worldwide Protein Data Bank</OrganisationName>
+        <DeveloperCompoundName>Worldwide Protein Data Bank</DeveloperCompoundName>
+      </Developers>
+      <ExternalSignature>
+        <ExternalSignatureID>4538</ExternalSignatureID>
+        <Signature>pdb</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>3370</SignatureID>
+        <SignatureName>Protein Data Bank File v.3.3</SignatureName>
+        <SignatureNote>Absolute from beginning of file, magic bytes: HEADER{74-80}TITLE{74-250}COMPND*SOURCE*KEYWDS*EXPDTA{74-76}AUTHOR*REVDAT*REMARK*CRYST1*ORIGX1*SCALE1</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>3747</ByteSequenceID>
+          <PositionType>Absolute from EOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>1</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>0A4D4153544552{74-75}0A454E44{77-78}0A</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>3748</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>1</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>484541444552{74-80}0A5449544C45{74-250}0A434F4D504E44*0A534F55524345*0A4B4559574453*0A455850445441{74-76}0A415554484F52*0A524556444154*0A52454D41524B*0A435259535431*0A4F5249475831*0A5343414C4531</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

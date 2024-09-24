@@ -24,7 +24,7 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>02 Feb 2007</ProvenanceSourceDate>
-      <ProvenanceDescription>04/2024 (v.117)- Increased the max-offset for internal EOF signatures, updated the description, specification and LOC identifier.</ProvenanceDescription>
+      <ProvenanceDescription>04/2024 (v.118)- Increased the max-offset for internal EOF signatures, updated the description, specification and LOC identifier.</ProvenanceDescription>
       <LastUpdatedDate>22 Apr 2024</LastUpdatedDate>
       <FormatNote>https://en.wikipedia.org/wiki/GeoTIFF
 http://www.remotesensing.org/geotiff/spec/geotiffhome.html

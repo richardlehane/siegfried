@@ -2,6 +2,101 @@
 <?xml-stylesheet type="text/xsl" href="release-note.xsl"?>
 <release_notes>
 <release_note>
+   <release_date>8th July 2024</release_date>
+   <signature_filename>DROID_SignatureFile_V119.xml</signature_filename>
+   <release_outline name="New Records">
+      <format>
+         <puid type="fmt">2006</puid>
+         <name>Quark XPress Project 18</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2007</puid>
+         <name>Quark XPress Project 19</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2008</puid>
+         <name>Quark XPress Project 20</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2009</puid>
+         <name>Protein Data Bank File v.3.3</name>
+         <summary>Full entry added. Submitted by ETH LIbrary.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="Updated Records">
+      <format>
+         <puid type="x-fmt">39</puid>
+         <name>AutoCAD dbConnect Query Set</name>
+         <summary>Format linked to mulitple signatures, these have been removed. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">40</puid>
+         <name>AutoCAD dbConnect Template Set</name>
+         <summary>New internal signature added. Submitted by National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">570</puid>
+         <name>Extensible Metadata Platform Packet</name>
+         <summary>Internal signature updated to allow for both double and single quotation marks. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+      <format>
+         <puid type="fmt">898</puid>
+         <name>Zoomify Image Format</name>
+         <summary>Given priority over fmt/1917 BigTIFF. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">950</puid>
+         <name>MIME Email</name>
+         <summary>BOF sequence modified to allow for t or T in 'Content-(t|T)ype:'. Submitted by National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1956</puid>
+         <name>Sandboxels Save File</name>
+         <summary>Added release date, corrected extension, corrected Actor link. Submitted by R74n.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1960</puid>
+         <name>Disklavier E-Seq</name>
+         <summary>. Submitted by Brigham Young University.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="New Signatures">
+      <format>
+         <puid type="x-fmt">40</puid>
+         <name>AutoCAD dbConnect Template Set</name>
+         <summary>Signature researched and samples provided by National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1960</puid>
+         <name>Disklavier E-Seq</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2006</puid>
+         <name>Quark XPress Project 18</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2007</puid>
+         <name>Quark XPress Project 19</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2008</puid>
+         <name>Quark XPress Project 20</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2009</puid>
+         <name>Protein Data Bank File v.3.3</name>
+         <summary>Signature researched and samples provided by ETH LIbrary.</summary>
+      </format>
+   </release_outline>
+</release_note>
+<release_note>
    <release_date>30th April 2024</release_date>
    <signature_filename>DROID_SignatureFile_V118.xml</signature_filename>
    <release_outline name="New Records">
@@ -540,7 +635,7 @@
       <format>
          <puid type="x-fmt">40</puid>
          <name>AutoCAD dbConnect Template Set</name>
-         <summary>Added internal signature and description. Submitted by The National Archives and Records Administration.</summary>
+         <summary>Added description. Submitted by The National Archives and Records Administration.</summary>
       </format>
       <format>
          <puid type="x-fmt">80</puid>
@@ -977,11 +1072,6 @@
       <format>
          <puid type="x-fmt">39</puid>
          <name>AutoCAD dbConnect Query Set</name>
-         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
-      </format>
-      <format>
-         <puid type="x-fmt">40</puid>
-         <name>AutoCAD dbConnect Template Set</name>
          <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
       </format>
       <format>

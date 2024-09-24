@@ -25,8 +25,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
-      <ProvenanceDescription>01/2024 (v.118): Added internal signature.</ProvenanceDescription>
-      <LastUpdatedDate>17 Apr 2024</LastUpdatedDate>
+      <ProvenanceDescription>04/2024 (v.118)- Added internal signature. Submitted by the National Archives and Records Administration; 07/2024 (v.119)- Format linked to wrong internal signature and error corrected. Submitted by Preservica.</ProvenanceDescription>
+      <LastUpdatedDate>08 Jul 2024</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -43,22 +43,21 @@
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <InternalSignature>
-        <SignatureID>546</SignatureID>
-        <SignatureName>dBASE Database IV SQL system files, no memo</SignatureName>
-        <SignatureNote>Header sequence: Version number, Date of last update MMDD, First upper or lowercase character of field name, field type (C, D, F, L, N).</SignatureNote>
+        <SignatureID>2300</SignatureID>
+        <SignatureName>AutoCAD dbConnect Query Set</SignatureName>
+        <SignatureNote>Absolute from beginning of file, magic bytes: ….DBCNC R15|….QUERYSET</SignatureNote>
         <ByteSequence>
-          <ByteSequenceID>677</ByteSequenceID>
+          <ByteSequenceID>2681</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>
-          </MaxOffset>
+          <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>63??[01:0C][01:1F]{28}([41:5A]|[61:7A]){10}(43|44|46|4C|4E)</ByteSequenceValue>
+          <ByteSequenceValue>0A0000004442434E43205231357C0D0000005155455259534554</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>
