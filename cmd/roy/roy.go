@@ -47,6 +47,7 @@ Usage:
    roy inspect -help
    roy sets -help
    roy compare -help
+   roy version
 `
 
 var inspectUsage = `
@@ -117,6 +118,10 @@ Additional flags:
 `
 
 var (
+	// GENERAL.
+	version = flag.NewFlagSet("version | add", flag.ExitOnError)
+	//versionShort = flag.Bool("v", false, "display version information")
+	//version      = flag.Bool("version", false, "display version information")
 	// BUILD, ADD flag sets
 	build         = flag.NewFlagSet("build | add", flag.ExitOnError)
 	home          = build.String("home", config.Home(), "override the default home directory")
@@ -529,6 +534,10 @@ func main() {
 	}
 
 	switch os.Args[1] {
+	case "version":
+		version := config.Version()
+		fmt.Printf("roy %d.%d.%d\n", version[0], version[1], version[2])
+		return
 	case "build":
 		err = build.Parse(os.Args[2:])
 		if err == nil {
