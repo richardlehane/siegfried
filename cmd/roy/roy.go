@@ -117,18 +117,6 @@ Additional flags:
       Use a different siegfried home directory.
 `
 
-func setLogger(utc bool) {
-	lw := new(logformatter.LogWriter)
-	lw.Appname = "roy"
-	lw.UTC = utc
-	log.SetOutput(lw)
-}
-
-func init() {
-	// format the application logger before all other init.
-	setLogger(true)
-}
-
 var (
 	// BUILD, ADD flag sets
 	build         = flag.NewFlagSet("build | add", flag.ExitOnError)
@@ -536,11 +524,11 @@ func setSetsOptions() {
 }
 
 func main() {
+	logformatter.Set("roy", true)
 	var err error
 	if len(os.Args) < 2 {
 		log.Fatal(usage)
 	}
-
 	switch os.Args[1] {
 	case "build":
 		err = build.Parse(os.Args[2:])

@@ -43,18 +43,6 @@ import (
 // defaults
 const maxMulti = 1024
 
-func setLogger(utc bool) {
-	lw := new(logformatter.LogWriter)
-	lw.Appname = "sf"
-	lw.UTC = utc
-	log.SetOutput(lw)
-}
-
-func init() {
-	// format the application logger before all other init.
-	setLogger(true)
-}
-
 // flags
 var (
 	updateShort    = flag.Bool("u", false, "update or install the default signature file")
@@ -323,6 +311,7 @@ func replayFile(path string, ctxts chan *context, w writer.Writer) error {
 
 func main() {
 	flag.Parse()
+	logformatter.Set("sf", true)
 	// configure home
 	if *home != config.Home() {
 		config.SetHome(*home)

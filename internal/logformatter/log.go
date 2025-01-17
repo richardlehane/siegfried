@@ -32,8 +32,10 @@ func (lw *LogWriter) Write(logString []byte) (int, error) {
 	)
 }
 
-func init() {
-	// Configure logging to use a custom log writer with sensible defaults.
+func Set(app string, utc bool) {
 	log.SetFlags(0 | log.Lshortfile | log.LUTC)
-	log.SetOutput(new(LogWriter))
+	lw := &LogWriter{}
+	lw.Appname = app
+	lw.UTC = utc
+	log.SetOutput(lw)
 }
