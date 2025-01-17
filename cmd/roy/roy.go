@@ -27,6 +27,7 @@ import (
 
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/internal/chart"
+	"github.com/richardlehane/siegfried/internal/logformatter"
 	"github.com/richardlehane/siegfried/pkg/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/loc"
@@ -116,11 +117,16 @@ Additional flags:
       Use a different siegfried home directory.
 `
 
-var discoveredDroidFile string
+func setLogger(utc bool) {
+	lw := new(logformatter.LogWriter)
+	lw.Appname = "roy"
+	lw.UTC = utc
+	log.SetOutput(lw)
+}
 
 func init() {
-	// Retrieve our dynamic defaults.
-	discoveredDroidFile = config.Droid()
+	// format the application logger before all other init.
+	setLogger(true)
 }
 
 var (
