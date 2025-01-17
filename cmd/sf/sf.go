@@ -367,9 +367,6 @@ func main() {
 	if *version || *versionShort {
 		version := config.Version()
 		fmt.Printf("siegfried %d.%d.%d\n", version[0], version[1], version[2])
-		if err != nil {
-			log.Fatalf("[FATAL] %v", err)
-		}
 		fmt.Printf("%s (%s)\nidentifiers: \n", config.Signature(), s.C.Format(time.RFC3339))
 		for _, id := range s.Identifiers() {
 			fmt.Printf("  - %s: %s\n", id[0], id[1])
