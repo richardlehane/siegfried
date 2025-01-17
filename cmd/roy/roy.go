@@ -27,6 +27,7 @@ import (
 
 	"github.com/richardlehane/siegfried"
 	"github.com/richardlehane/siegfried/internal/chart"
+	"github.com/richardlehane/siegfried/internal/logformatter"
 	"github.com/richardlehane/siegfried/pkg/config"
 	"github.com/richardlehane/siegfried/pkg/core"
 	"github.com/richardlehane/siegfried/pkg/loc"
@@ -115,6 +116,18 @@ Additional flags:
    -home
       Use a different siegfried home directory.
 `
+
+func setLogger(utc bool) {
+	lw := new(logformatter.LogWriter)
+	lw.Appname = "roy"
+	lw.UTC = utc
+	log.SetOutput(lw)
+}
+
+func init() {
+	// format the application logger before all other init.
+	setLogger(true)
+}
 
 var (
 	// BUILD, ADD flag sets
