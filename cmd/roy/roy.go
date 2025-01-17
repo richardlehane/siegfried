@@ -116,18 +116,11 @@ Additional flags:
       Use a different siegfried home directory.
 `
 
-var discoveredDroidFile string
-
-func init() {
-	// Retrieve our dynamic defaults.
-	discoveredDroidFile = config.Droid()
-}
-
 var (
 	// BUILD, ADD flag sets
 	build         = flag.NewFlagSet("build | add", flag.ExitOnError)
 	home          = build.String("home", config.Home(), "override the default home directory")
-	droid         = build.String("droid", discoveredDroidFile, "set name/path for DROID signature file")
+	droid         = build.String("droid", config.Droid(), "set name/path for DROID signature file")
 	mi            = build.String("mi", "", "set name/path for MIMEInfo signature file")
 	fdd           = build.String("fdd", "", "set name/path for LOC FDD signature file")
 	locfdd        = build.Bool("loc", false, "build a LOC FDD signature file")
@@ -165,7 +158,7 @@ var (
 	// HARVEST
 	harvest                    = flag.NewFlagSet("harvest", flag.ExitOnError)
 	harvestHome                = harvest.String("home", config.Home(), "override the default home directory")
-	harvestDroid               = harvest.String("droid", discoveredDroidFile, "set name/path for DROID signature file")
+	harvestDroid               = harvest.String("droid", config.Droid(), "set name/path for DROID signature file")
 	harvestChanges             = harvest.Bool("changes", false, "harvest the latest PRONOM release-notes.xml file")
 	_, htimeout, _, _          = config.HarvestOptions()
 	timeout                    = harvest.Duration("timeout", htimeout, "set duration before timing-out harvesting requests e.g. 120s")
@@ -179,7 +172,7 @@ var (
 	// INSPECT (roy inspect | roy inspect fmt/121 | roy inspect usr/local/mysig.sig | roy inspect 10)
 	inspect         = flag.NewFlagSet("inspect", flag.ExitOnError)
 	inspectHome     = inspect.String("home", config.Home(), "override the default home directory")
-	inspectDroid    = inspect.String("droid", discoveredDroidFile, "set name/path for DROID signature file")
+	inspectDroid    = inspect.String("droid", config.Droid(), "set name/path for DROID signature file")
 	inspectReports  = inspect.Bool("reports", false, "build signatures from PRONOM reports (rather than DROID xml)")
 	inspectExtend   = inspect.String("extend", "", "comma separated list of additional signatures")
 	inspectExtendc  = inspect.String("extendc", "", "comma separated list of additional container signatures")
@@ -196,7 +189,7 @@ var (
 	// SETS
 	setsf       = flag.NewFlagSet("sets", flag.ExitOnError)
 	setsHome    = setsf.String("home", config.Home(), "override the default home directory")
-	setsDroid   = setsf.String("droid", discoveredDroidFile, "set name/path for DROID signature file")
+	setsDroid   = setsf.String("droid", config.Droid(), "set name/path for DROID signature file")
 	setsChanges = setsf.Bool("changes", false, "create a pronom-changes.json sets file")
 	setsList    = setsf.String("list", "", "expand comma separated list of format sets")
 
@@ -340,7 +333,7 @@ func viewReleases() error {
 func getOptions() []config.Option {
 	opts := []config.Option{}
 	// build options
-	if *droid != discoveredDroidFile {
+	if *droid != config.Droid() {
 		opts = append(opts, config.SetDroid(*droid))
 	}
 	if *container != config.Container() {
@@ -450,7 +443,7 @@ the DROID signature file you should also include a regular signature extension
 		opts = append(opts, config.SetVerbose(!*quiet)) // do the opposite, because the flag is quiet and the setting is verbose!
 	}
 	// inspect options
-	if *inspectDroid != discoveredDroidFile {
+	if *inspectDroid != config.Droid() {
 		opts = append(opts, config.SetDroid(*inspectDroid))
 	}
 	if *inspectMI != "" {
@@ -493,7 +486,7 @@ the DROID signature file you should also include a regular signature extension
 }
 
 func setHarvestOptions() {
-	if *harvestDroid != discoveredDroidFile {
+	if *harvestDroid != config.Droid() {
 		config.SetDroid(*harvestDroid)()
 	}
 	if *harvestHome != config.Home() {
@@ -521,7 +514,7 @@ func setHarvestOptions() {
 }
 
 func setSetsOptions() {
-	if *setsDroid != discoveredDroidFile {
+	if *setsDroid != config.Droid() {
 		config.SetDroid(*setsDroid)()
 	}
 	if *setsHome != config.Home() {

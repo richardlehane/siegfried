@@ -237,7 +237,7 @@ func GetReleases(path string) error {
 	if err != nil {
 		return err
 	}
-	return ioutil.WriteFile(path, byts, os.ModePerm)
+	return os.WriteFile(path, byts, os.ModePerm)
 }
 
 func LoadReleases(path string) (*mappings.Releases, error) {
