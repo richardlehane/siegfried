@@ -531,7 +531,7 @@ func main() {
 		log.Fatal(usage)
 	}
 	switch os.Args[1] {
-	case "version", "v":
+	case "version", "-version", "v", "-v":
 		version := config.Version()
 		fmt.Printf("roy %d.%d.%d\n", version[0], version[1], version[2])
 		return
