@@ -161,9 +161,10 @@ func processDROID(puid string, s []mappings.ByteSeq) (frames.Signature, error) {
 	for _, b := range s {
 		var eof, vry bool
 		ref := b.Reference
-		if ref == droideof {
+		switch ref {
+		case droideof:
 			eof = true
-		} else if ref == "" {
+		case "Variable", "":
 			vry = true
 		}
 		var zeroIndexed bool // fmt/1190 bug in containers: https://github.com/richardlehane/siegfried/issues/175
