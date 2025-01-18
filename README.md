@@ -9,7 +9,7 @@
 
 ### Version
 
-1.11.1
+1.11.2
 
 [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -97,6 +97,8 @@ Or, for the most recent updates, you can install from this fork:
     makepkg -si
 
 ## Changes
+### v1.11.2 (2025-0x-xx)
+
 ### v1.11.1 (2024-06-28)
 ### Added
 - WASM build. See wasm/README.md for more details. Feature sponsored by Archives New Zealand. Inspired by [Andy Jackson](https://siegfried-js.glitch.me/)

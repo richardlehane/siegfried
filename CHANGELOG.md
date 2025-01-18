@@ -1,4 +1,16 @@
 # Change Log
+## v1.11.2 (2025-0x-xx)
+### Added
+- Filter introduced to improve Wikidata queries and `-harvestWikidataSigLen` flag sets minimum length of Wikidata signatures. Implemented by [Ross Spencer and Andy Jackson](https://github.com/richardlehane/siegfried/pull/253) 
+- version command for `roy`. Implemented by [Ross Spencer](https://github.com/richardlehane/siegfried/pull/265)
+
+### Changed
+- Wikidata definitions updated to 4.0.0. By [Ross Spencer](https://github.com/richardlehane/siegfried/pull/264)
+- Logged error messages have more context. Implemented by [Ross Spencer](https://github.com/richardlehane/siegfried/pull/256)
+
+### Fixed
+- Explicitly declared variable offsets are parsed e.g. fmt/1840. Implemented by [Rijnder Wever](https://github.com/richardlehane/siegfried/pull/267)
+
 ## v1.11.1 (2024-06-28)
 ### Added
 - WASM build. See wasm/README.md for more details. Feature sponsored by Archives New Zealand. Inspired by [Andy Jackson](https://siegfried-js.glitch.me/)
