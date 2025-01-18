@@ -56,11 +56,11 @@ func newWikidata() (identifier.Parseable, []string, error) {
 	}
 	if config.GetWikidataNoPRONOM() {
 		logln(
-			"Roy (Wikidata): Not building identifiers set from PRONOM",
+			"not building identifiers set from PRONOM",
 		)
 	} else {
 		logln(
-			"Roy (Wikidata): Building identifiers set from PRONOM",
+			"building identifiers set from PRONOM",
 		)
 		wikiParseable, err = pronom.NewPronom()
 		if err != nil {

@@ -61,10 +61,10 @@ func New(opts ...config.Option) (core.Identifier, error) {
 	for _, v := range opts {
 		v()
 	}
-	logln("Roy (Wikidata): Congratulations: doing something with the Wikidata identifier package!")
+	logln("congratulations: doing something with the Wikidata identifier package!")
 	wikidata, puids, err := newWikidata()
 	if err != nil {
-		return nil, fmt.Errorf("Error in Wikidata New(): %w", err)
+		return nil, fmt.Errorf("error in Wikidata New(): %w", err)
 	}
 	// Having retrieved our PUIDs from newWikidata, assign them to our
 	// provenance global to generate source information from Wikidata.

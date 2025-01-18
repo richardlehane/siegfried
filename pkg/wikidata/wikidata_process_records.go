@@ -43,7 +43,7 @@ func getProvenance(id string, provenance wikiProv) (string, string, error) {
 			return value.Permalink, fmt.Sprintf("%s", value), nil
 		}
 	}
-	return noValueFound, noValueFound, fmt.Errorf("Roy (Wikidata): Provenance not found for: %s", id)
+	return noValueFound, noValueFound, fmt.Errorf("provenance not found for: %s", id)
 }
 
 // newRecord creates a Wikidata record with the values received from
@@ -78,7 +78,9 @@ func newRecord(wikidataItem map[string]spargo.Item, provenance wikiProv, addSigs
 	}
 	perma, prov, err := getProvenance(wd.ID, provenance)
 	if err != nil {
-		logln("Roy (Wikidata):", err) // Q. (RL) Is it safe to ignore this error and just log it? Or should this func return an error?
+		// ideally convert this to a debug log in future as it
+		// can be verbose when logging is entirely off.
+		logln(err)
 	}
 	wd.Permalink, wd.RevisionHistory = perma, prov
 	return wd

@@ -72,18 +72,18 @@ func addEndpoint(repl string, endpoint string) string {
 func harvestWikidata() error {
 
 	log.Printf(
-		"Roy (Wikidata): Harvesting Wikidata definitions: lang '%s'",
+		"harvesting Wikidata definitions: lang '%s'",
 		config.WikidataLang(),
 	)
 	err := os.MkdirAll(config.WikidataHome(), os.ModePerm)
 	if err != nil {
 		return fmt.Errorf(
-			"Roy (Wikidata): Error harvesting Wikidata definitions: '%s'",
+			"error harvesting Wikidata definitions: '%s'",
 			err,
 		)
 	}
 	log.Printf(
-		"Roy (Wikidata): Harvesting definitions from: '%s'",
+		"harvesting definitions from: '%s'",
 		config.WikidataEndpoint(),
 	)
 
@@ -92,7 +92,7 @@ func harvestWikidata() error {
 	wikiprov.SetWikibaseURLs(config.WikidataWikibaseURL())
 
 	log.Printf(
-		"Roy (Wikidata): Harvesting revision history from: '%s'",
+		"harvesting revision history from: '%s'",
 		config.WikidataWikibaseURL(),
 	)
 
@@ -130,7 +130,7 @@ func harvestWikidata() error {
 		)
 	}
 	log.Printf(
-		"Roy (Wikidata): Harvesting Wikidata definitions '%s' complete",
+		"harvesting Wikidata definitions '%s' complete",
 		path,
 	)
 	return nil

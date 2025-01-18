@@ -141,7 +141,7 @@ func customEndpoint(jsonFile []byte) (bool, error) {
 // identifier to be consumed by Siegfried.
 func openWikidata() (wikiItemProv, error) {
 	path := config.WikidataDefinitionsPath()
-	logf("Roy (Wikidata): Opening Wikidata definitions: %s\n", path)
+	logf("opening Wikidata definitions: %s\n", path)
 	jsonFile, err := ioutil.ReadFile(path)
 	if err != nil {
 		return wikiItemProv{}, fmt.Errorf(
@@ -154,23 +154,23 @@ func openWikidata() (wikiItemProv, error) {
 		return wikiItemProv{}, err
 	}
 	if custom {
-		logln("Roy (Wikidata): Using a custom endpoint for results")
+		logln("using a custom endpoint for results")
 		err := setCustomWikibaseProperties()
 		if err != nil {
 			return wikiItemProv{}, fmt.Errorf("setting custom Wikibase properties: %w", err)
 		}
 		logf(
-			"Roy (Wikidata): Custom PRONOM encoding loaded; config: '%s' => local: '%s'",
+			"custom PRONOM encoding loaded; config: '%s' => local: '%s'",
 			config.WikibasePronom(),
 			converter.GetPronomEncoding(),
 		)
 		logf(
-			"Roy (Wikidata): Custom BOF loaded; config: '%s' => local: '%s'",
+			"custom BOF loaded; config: '%s' => local: '%s'",
 			config.WikibaseBOF(),
 			relativeBOF,
 		)
 		logf(
-			"Roy (Wikidata): Custom EOF loaded; config: '%s' => local: '%s'",
+			"custom EOF loaded; config: '%s' => local: '%s'",
 			config.WikibaseEOF(),
 			relativeEOF,
 		)
@@ -267,7 +267,7 @@ const (
 // setCustomWikibaseProperties sets the properties needed by Roy to
 // parse the results coming from a custom Wikibase endpoint.
 func setCustomWikibaseProperties() error {
-	logln("Roy (Wikidata): Looking for existence of wikibase.json in Siegfried home")
+	logln("looking for existence of wikibase.json in Siegfried home")
 	wikibasePropsPath := config.WikibasePropsPath()
 	propsFile, err := os.ReadFile(wikibasePropsPath)
 	if err != nil {
@@ -306,7 +306,7 @@ func setCustomWikibaseProperties() error {
 	GetPronomURIFromConfig()
 	GetBOFandEOFFromConfig()
 	logf(
-		"Roy (Wikidata): Properties set for PRONOM: '%s', BOF: '%s', EOF: '%s'",
+		"properties set for PRONOM: '%s', BOF: '%s', EOF: '%s'",
 		pronom,
 		bof,
 		eof,

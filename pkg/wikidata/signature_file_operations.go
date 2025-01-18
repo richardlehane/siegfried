@@ -144,7 +144,7 @@ func (f formatInfo) String() string {
 // formats that you'd like to talk about in an identifier.
 func (wdd wikidataDefinitions) Infos() parseableFormatInfo {
 	logf(
-		"Roy (Wikidata): In Infos()... length formats: '%d' no-pronom: '%t'\n",
+		"in Infos()... length formats: '%d' no-pronom: '%t'\n",
 		len(wdd.formats),
 		config.GetWikidataNoPRONOM(),
 	)
