@@ -128,12 +128,16 @@ func (f formatInfo) String() string {
 	if len(f.sources) > 0 {
 		sources = strings.Join(f.sources, " ")
 	}
+	var revisionHistory string = f.revisionHistory
+	if f.revisionHistory == "" {
+		revisionHistory = "not collected for this QID"
+	}
 	return fmt.Sprintf(
-		"Name: '%s'\nMIMEType: '%s'\nSources: '%s' \nRevision History: %s\n---",
+		"Name: '%s'\nMIMEType: '%s'\nSources: '%s' \nRevision History: %s",
 		f.name,
 		f.mime,
 		sources,
-		f.revisionHistory,
+		revisionHistory,
 	)
 }
 

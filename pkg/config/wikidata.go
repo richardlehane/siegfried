@@ -308,6 +308,12 @@ func GetWikidataRevisionHistoryLen() int {
 	return wikidata.revisionHistoryLen
 }
 
+// GetWikidataRevisionHistoryLen will return the length of the Wikibase
+// history to retrieve to the caller.
+func SetWikidataRevisionHistoryLen(len int) int {
+	return wikidata.revisionHistoryLen
+}
+
 // GetWikidataRevisionHistoryThreads will return the number of threads
 // to use to retrieve Wikibase history to the caller.
 func GetWikidataRevisionHistoryThreads() int {

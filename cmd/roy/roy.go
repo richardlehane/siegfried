@@ -170,6 +170,7 @@ var (
 	harvestWikidataLang        = harvest.String("lang", config.WikidataLang(), "two-letter language-code to download Wikidata strings, e.g. \"de\"")
 	harvestWikidataEndpoint    = harvest.String("wikidataendpoint", config.WikidataEndpoint(), "the endpoint to use to harvest Wikidata definitions from")
 	harvestWikidataWikibaseURL = harvest.String("wikibaseurl", config.WikidataWikibaseURL(), "the permalink baseURL for the Wikibase server")
+	wikidataRevisionHistory    = harvest.Bool("noprov", false, "turn Wikidata revision history off")
 
 	// INSPECT (roy inspect | roy inspect fmt/121 | roy inspect usr/local/mysig.sig | roy inspect 10)
 	inspect         = flag.NewFlagSet("inspect", flag.ExitOnError)
@@ -509,7 +510,7 @@ func setHarvestOptions() {
 	if *harvestWikidataEndpoint != config.WikidataEndpoint() {
 		// Configure Siegfried to connect to a custom Wikibase instance.
 		if err := configureCustomWikibase(); err != nil {
-			log.Printf("Roy (Wikibase): %s", err)
+			log.Printf("wikibase: %s", err)
 			os.Exit(1)
 		}
 	}
@@ -563,7 +564,9 @@ func main() {
 			if *harvestChanges {
 				err = pronom.GetReleases(config.Local("release-notes.xml"))
 			} else if *harvestWikidataSig {
-				err = harvestWikidata()
+				history := !*wikidataRevisionHistory
+				log.Printf("retrieving history for Wikidata: %t", history)
+				err = harvestWikidata(history)
 			} else {
 				err = savereps()
 			}

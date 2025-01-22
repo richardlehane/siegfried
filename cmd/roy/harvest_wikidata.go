@@ -69,7 +69,7 @@ func addEndpoint(repl string, endpoint string) string {
 
 // harvestWikidata will connect to the configured Wikidata query service
 // and save the results of the configured query to disk.
-func harvestWikidata() error {
+func harvestWikidata(provenance bool) error {
 
 	log.Printf(
 		"harvesting Wikidata definitions: lang '%s'",
@@ -91,16 +91,23 @@ func harvestWikidata() error {
 	// and api.php links for permalinks and revision history.
 	wikiprov.SetWikibaseURLs(config.WikidataWikibaseURL())
 
-	log.Printf(
-		"harvesting revision history from: '%s'",
-		config.WikidataWikibaseURL(),
-	)
+	if !*wikidataRevisionHistory {
+		log.Printf(
+			"harvesting revision history from: '%s'",
+			config.WikidataWikibaseURL(),
+		)
+	}
+
+	historyLength := config.GetWikidataRevisionHistoryLen()
+	if !provenance {
+		historyLength = 0
+	}
 
 	res, err := spargo.SPARQLWithProv(
 		config.WikidataEndpoint(),
 		config.WikidataSPARQL(),
 		config.WikidataSPARQLRevisionParam(),
-		config.GetWikidataRevisionHistoryLen(),
+		historyLength,
 		config.GetWikidataRevisionHistoryThreads(),
 	)
 
