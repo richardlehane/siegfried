@@ -35,7 +35,7 @@ import (
 // to match formats by that.
 func (wdd wikidataDefinitions) Globs() ([]string, []string) {
 	logln(
-		"Roy (Wikidata): Adding Glob signatures to identifier...",
+		"adding Glob signatures to identifier...",
 	)
 	globs, ids := make(
 		[]string, 0, len(wdd.formats)),
@@ -103,7 +103,7 @@ func processForPronom(bs byteSequences) []pronomSequence {
 // collected along the way.
 func processSIgnatures(wdd wikidataDefinitions) ([]frames.Signature, []string, error) {
 	logln(
-		"Roy (Wikidata): Adding Wikidata Byte signatures to identifier...",
+		"adding Wikidata byte signatures to identifier...",
 	)
 	var errs []error
 	var puidsIDs map[string][]string
@@ -170,7 +170,7 @@ func (wdd wikidataDefinitions) MSCFBs() ([][]string, [][]frames.Signature, []str
 // Wikidata container modeling is in-progress.
 func (wdd wikidataDefinitions) containers(typ string) ([][]string, [][]frames.Signature, []string, error) {
 	logln(
-		"Roy (Wikidata): Adding container signatures to identifier...",
+		"adding container signatures to identifier...",
 	)
 	if _, ok := wdd.parseable.(identifier.Blank); ok {
 		return nil, nil, nil, nil

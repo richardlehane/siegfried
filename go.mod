@@ -8,7 +8,7 @@ require (
 	github.com/richardlehane/mscfb v1.0.4
 	github.com/richardlehane/webarchive v1.0.3
 	github.com/richardlehane/xmldetect v1.0.2
-	github.com/ross-spencer/wikiprov v0.2.0
+	github.com/ross-spencer/wikiprov v1.0.0
 	golang.org/x/image v0.18.0
 	golang.org/x/sys v0.22.0
 )

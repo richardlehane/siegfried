@@ -69,21 +69,21 @@ func addEndpoint(repl string, endpoint string) string {
 
 // harvestWikidata will connect to the configured Wikidata query service
 // and save the results of the configured query to disk.
-func harvestWikidata() error {
+func harvestWikidata(provenance bool) error {
 
 	log.Printf(
-		"Roy (Wikidata): Harvesting Wikidata definitions: lang '%s'",
+		"harvesting Wikidata definitions: lang '%s'",
 		config.WikidataLang(),
 	)
 	err := os.MkdirAll(config.WikidataHome(), os.ModePerm)
 	if err != nil {
 		return fmt.Errorf(
-			"Roy (Wikidata): Error harvesting Wikidata definitions: '%s'",
+			"error harvesting Wikidata definitions: '%s'",
 			err,
 		)
 	}
 	log.Printf(
-		"Roy (Wikidata): Harvesting definitions from: '%s'",
+		"harvesting definitions from: '%s'",
 		config.WikidataEndpoint(),
 	)
 
@@ -91,16 +91,23 @@ func harvestWikidata() error {
 	// and api.php links for permalinks and revision history.
 	wikiprov.SetWikibaseURLs(config.WikidataWikibaseURL())
 
-	log.Printf(
-		"Roy (Wikidata): Harvesting revision history from: '%s'",
-		config.WikidataWikibaseURL(),
-	)
+	if !*wikidataRevisionHistory {
+		log.Printf(
+			"harvesting revision history from: '%s'",
+			config.WikidataWikibaseURL(),
+		)
+	}
+
+	historyLength := config.GetWikidataRevisionHistoryLen()
+	if !provenance {
+		historyLength = 0
+	}
 
 	res, err := spargo.SPARQLWithProv(
 		config.WikidataEndpoint(),
 		config.WikidataSPARQL(),
 		config.WikidataSPARQLRevisionParam(),
-		config.GetWikidataRevisionHistoryLen(),
+		historyLength,
 		config.GetWikidataRevisionHistoryThreads(),
 	)
 
@@ -130,7 +137,7 @@ func harvestWikidata() error {
 		)
 	}
 	log.Printf(
-		"Roy (Wikidata): Harvesting Wikidata definitions '%s' complete",
+		"harvesting Wikidata definitions '%s' complete",
 		path,
 	)
 	return nil
