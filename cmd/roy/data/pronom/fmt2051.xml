@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>3927</FormatID>
+      <FormatName>Cineon</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Raster)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Cineon is an image format created by Kodak designed to represent scanned film images. Individual Cineon files are raster images, however the typical use is for a sequence of Cineon images to represent frame-by-frame digital motion picture video. Digital Moving Picture Exchange Bitmap (DPX) is directly descended from Cineon.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>244</ProvenanceSourceID>
+      <ProvenanceName>Preservica / Preservica</ProvenanceName>
+      <ProvenanceSourceDate>21 Jul 2025</ProvenanceSourceDate>
+      <ProvenanceDescription>v.121: new PUID.</ProvenanceDescription>
+      <LastUpdatedDate>21 Jul 2025</LastUpdatedDate>
+      <FormatNote>https://web.archive.org/web/20040730172133/http://www.kodak.com/US/plugins/acrobat/en/motion/support/dlad/cineonfileformat4.5.pdf</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/2051</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>360</DeveloperID>
+        <DeveloperName>Kodak</DeveloperName>
+        <OrganisationName>Kodak</OrganisationName>
+        <DeveloperCompoundName>Kodak / Kodak</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>360</SupportID>
+        <SupportName>Kodak</SupportName>
+        <OrganisationName>Kodak</OrganisationName>
+        <SupportCompoundName>Kodak / Kodak</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>4584</ExternalSignatureID>
+        <Signature>cin</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>3416</SignatureID>
+        <SignatureName>Cineon</SignatureName>
+        <SignatureNote>Absolute from BOF, magic bytes: 0x802A5FD7</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>3797</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>802A5FD7</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

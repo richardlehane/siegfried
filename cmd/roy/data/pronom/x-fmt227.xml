@@ -78,6 +78,12 @@ Full specifications can be found at http://www.opengeospatial.org/standards/gml<
         <RelatedFormatVersion>3.2</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>3915</RelatedFormatID>
+        <RelatedFormatName>CityGML File</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>638</RelatedFormatID>
         <RelatedFormatName>Extensible Markup Language</RelatedFormatName>

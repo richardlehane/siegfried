@@ -25,8 +25,9 @@
       <ProvenanceSourceID>244</ProvenanceSourceID>
       <ProvenanceName>Preservica / Preservica</ProvenanceName>
       <ProvenanceSourceDate>23 Nov 2022</ProvenanceSourceDate>
-      <ProvenanceDescription>04/2024 (v.118)- Offset from BOF changed from 0 to 0-3 to provide flexibility for the XML 1.0 declaration. Submitted by Preservica based on samples provided by The Endanagered Languages Archive.</ProvenanceDescription>
-      <LastUpdatedDate>16 Apr 2024</LastUpdatedDate>
+      <ProvenanceDescription>v.118: Offset from BOF changed from 0 to 0-3 to provide flexibility for the XML 1.0 declaration. Submitted by Preservica based on samples provided by The Endanagered Languages Archive.
+V.121: Signature amended to allow for lower case 'utf'.</ProvenanceDescription>
+      <LastUpdatedDate>21 Jul 2025</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -57,7 +58,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>3C3F786D6C2076657273696F6E3D22312E302220656E636F64696E673D225554462D38223F3E{0-3}3C646F63756D656E74{1-256}3C696E7465726C696E6561722D74657874{1-1024}3C70617261677261706873</ByteSequenceValue>
+          <ByteSequenceValue>3C3F786D6C2076657273696F6E3D22312E302220656E636F64696E673D22(55|75)(54|74)(46|66)2D38223F3E{0-3}3C646F63756D656E74{1-256}3C696E7465726C696E6561722D74657874{1-1024}3C70617261677261706873</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

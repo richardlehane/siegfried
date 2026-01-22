@@ -26,9 +26,8 @@ APNG is backwards-compatible with PNG; any PNG decoder should be able to ignore 
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>11 Jul 2016</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>11 Jul 2016</LastUpdatedDate>
+      <ProvenanceDescription>v. 122- Updated MIME type according to IANA database, added LOC and wikidata identifiers. Signature updated to include a variable byte sequence to prevent clashing. Submitted by the Library of Congress and Preservica.</ProvenanceDescription>
+      <LastUpdatedDate>24 Nov 2025</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -36,12 +35,20 @@ APNG is backwards-compatible with PNG; any PNG decoder should be able to ignore 
       <TechnicalEnvironment>
       </TechnicalEnvironment>
       <FileFormatIdentifier>
+        <Identifier>fdd000649</Identifier>
+        <IdentifierType>Library of Congress Format Description Identifier</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
         <Identifier>fmt/935</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
       <FileFormatIdentifier>
-        <Identifier>image/vnd.mozilla.apng</Identifier>
+        <Identifier>image/apng</Identifier>
         <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>Q433224</Identifier>
+        <IdentifierType>Wikidata QID Identifier</IdentifierType>
       </FileFormatIdentifier>
       <ExternalSignature>
         <ExternalSignatureID>1890</ExternalSignatureID>
@@ -83,6 +90,21 @@ Specification: https://wiki.mozilla.org/APNG_Specification</SignatureNote>
           <Endianness>
           </Endianness>
           <ByteSequenceValue>0000000049454E44AE426082</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>3837</ByteSequenceID>
+          <PositionType>Variable</PositionType>
+          <Offset>
+          </Offset>
+          <MaxOffset>
+          </MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>6663544C00000000</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

@@ -120,6 +120,13 @@ Content-(T|t)ype:</SignatureNote>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>3930</RelatedFormatID>
+        <RelatedFormatName>Apple Mail EMLX Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>1018</RelatedFormatID>
         <RelatedFormatName>Internet Message Format</RelatedFormatName>

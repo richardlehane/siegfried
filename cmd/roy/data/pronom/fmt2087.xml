@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>3964</FormatID>
+      <FormatName>Final Cut Pro Project File</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Video</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Video editing project files, created with Apple Final Cut Pro or Final Cut Express. They include video and audio clips organized into tracks, and possibly visual effects, transitions, text overlays.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>363</ProvenanceSourceID>
+      <ProvenanceName>Marquette University / Marquette University</ProvenanceName>
+      <ProvenanceSourceDate>03 Dec 2025</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>03 Dec 2025</LastUpdatedDate>
+      <FormatNote>Note: https://fileinfo.com/extension/fcp
+https://www.apple.com/uk/final-cut-pro/resources/</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/2087</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>15</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Apple Computer, Inc.</OrganisationName>
+        <DeveloperCompoundName>Apple Computer, Inc.</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>15</SupportID>
+        <SupportName>
+        </SupportName>
+        <OrganisationName>Apple Computer, Inc.</OrganisationName>
+        <SupportCompoundName>Apple Computer, Inc.</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>4625</ExternalSignatureID>
+        <Signature>fcp</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>3450</SignatureID>
+        <SignatureName>Final Cut Pro Project File</SignatureName>
+        <SignatureNote>Absolute from beginning of file, magic bytes: ¢KeyG</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>3844</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>A24B657947</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

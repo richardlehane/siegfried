@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>3959</FormatID>
+      <FormatName>3DM 8</FormatName>
+      <FormatVersion>8</FormatVersion>
+      <FormatAliases>openNURBS (8), Rhino (8)</FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Model</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The 3DM (openNURBS) format is a 3D model representation based on non-uniform rational B-Splines (NURBS). The file format is defined by an open source C++ toolkit that reads and writes openNURBS models.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>244</ProvenanceSourceID>
+      <ProvenanceName>Preservica / Preservica</ProvenanceName>
+      <ProvenanceSourceDate>02 Dec 2025</ProvenanceSourceDate>
+      <ProvenanceDescription>v.122: new signature. Submitted by Preservica.</ProvenanceDescription>
+      <LastUpdatedDate>02 Dec 2025</LastUpdatedDate>
+      <FormatNote>
+      </FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/2084</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>4622</ExternalSignatureID>
+        <Signature>3dm</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>3447</SignatureID>
+        <SignatureName>3DM 8</SignatureName>
+        <SignatureNote>BOF: '3D Geometry File Format       8'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>3842</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>33442047656F6D657472792046696C6520466F726D61742020202020202038</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

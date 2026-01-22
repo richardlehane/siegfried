@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>3929</FormatID>
+      <FormatName>JSON Lines Text Format</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The JSON Lines text format, also called newline-delimited JSON. JSON Lines is used to store structured data that may be processed one record at a time, and is also a flexible format for passing messages between cooperating processes. It works well with unix-style text processing tools, shell pipelines and log files.
+There are three requirements to JSONL:
+UTF-8 Encoding
+Each Line is a Valid JSON Value
+Line Separator is '\n'</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>320</ProvenanceSourceID>
+      <ProvenanceName>Ross Spencer / Ravensburger AG</ProvenanceName>
+      <ProvenanceSourceDate>21 Jul 2025</ProvenanceSourceDate>
+      <ProvenanceDescription>v.121: new PUID.</ProvenanceDescription>
+      <LastUpdatedDate>21 Jul 2025</LastUpdatedDate>
+      <FormatNote>https://jsonlines.org/ 
+https://en.wikipedia.org/wiki/JSON_streaming#Newline-delimited_JSON
+https://github.com/digital-preservation/PRONOM_Research/issues/89</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/2054</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>361</DeveloperID>
+        <DeveloperName>Ian Ward</DeveloperName>
+        <OrganisationName>Ian Ward</OrganisationName>
+        <DeveloperCompoundName>Ian Ward / Ian Ward</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>361</SupportID>
+        <SupportName>Ian Ward</SupportName>
+        <OrganisationName>Ian Ward</OrganisationName>
+        <SupportCompoundName>Ian Ward / Ian Ward</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>4586</ExternalSignatureID>
+        <Signature>jsonl</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

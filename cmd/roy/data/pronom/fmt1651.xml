@@ -25,8 +25,9 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>15 Mar 2022</ProvenanceSourceDate>
-      <ProvenanceDescription>11/2023 (v.115)- Max-offset modified for BOF signature to allow for more exact signature identification. Internally researched.</ProvenanceDescription>
-      <LastUpdatedDate>15 Nov 2023</LastUpdatedDate>
+      <ProvenanceDescription>v.115: Max-offset modified for BOF signature to allow for more exact signature identification. Internally researched.
+v.121: Amended offset from 9 to 8 and changed signature from 464954 to 2E464954.</ProvenanceDescription>
+      <LastUpdatedDate>21 Jul 2025</LastUpdatedDate>
       <FormatNote>Specification: https://developer.garmin.com/fit/protocol/</FormatNote>
       <FormatRisk>
       </FormatRisk>
@@ -56,11 +57,11 @@
       <InternalSignature>
         <SignatureID>1987</SignatureID>
         <SignatureName>Garmin Flexible and Interoperable Data Transfer file</SignatureName>
-        <SignatureNote>BOF Absolute from beginning of file, magic bytes: FIT</SignatureNote>
+        <SignatureNote>BOF, offset 8, magic bytes: .FIT</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>2310</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
-          <Offset>9</Offset>
+          <Offset>8</Offset>
           <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
@@ -68,7 +69,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>464954</ByteSequenceValue>
+          <ByteSequenceValue>2E464954</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

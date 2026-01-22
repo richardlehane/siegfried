@@ -51,7 +51,7 @@ http://fileformats.archiveteam.org/wiki/Memory_Stick_Voice</FormatNote>
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>737</SignatureID>
-        <SignatureName>Sony Digital Voice File/Sony Memory Stick Voice File</SignatureName>
+        <SignatureName>Digital Voice File/Sony Memory Stick Voice File</SignatureName>
         <SignatureNote>MS_VOICE...P....SONY CORPORATION</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>926</ByteSequenceID>

@@ -3,9 +3,8 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>1851</FormatID>
-      <FormatName>Draco File Format</FormatName>
-      <FormatVersion>
-      </FormatVersion>
+      <FormatName>Draco</FormatName>
+      <FormatVersion>1</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -25,9 +24,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>10 May 2017</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>10 May 2017</LastUpdatedDate>
+      <ProvenanceDescription>v.121: added a version number of 1. Submitted by Preservica.</ProvenanceDescription>
+      <LastUpdatedDate>21 Jul 2025</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -59,7 +57,7 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>1406</SignatureID>
-        <SignatureName>Draco</SignatureName>
+        <SignatureName>Draco v.1</SignatureName>
         <SignatureNote>BOF: 'DRACO', major version 1
 Header defined in code: https://github.com/google/draco/blob/master/compression/config/compression_shared.h</SignatureNote>
         <ByteSequence>
@@ -76,6 +74,12 @@ Header defined in code: https://github.com/google/draco/blob/master/compression/
           <ByteSequenceValue>445241434F01</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>3944</RelatedFormatID>
+        <RelatedFormatName>Draco</RelatedFormatName>
+        <RelatedFormatVersion>2</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

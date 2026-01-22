@@ -24,8 +24,8 @@
       <ProvenanceSourceID>334</ProvenanceSourceID>
       <ProvenanceName>R74n / R74n</ProvenanceName>
       <ProvenanceSourceDate>11 Apr 2024</ProvenanceSourceDate>
-      <ProvenanceDescription>04/24 (v.118): Internal signature added. Submitted by R74N; 07/24 (v.119): Added release date, corrected extension. Submitted by R74N.</ProvenanceDescription>
-      <LastUpdatedDate>11 Apr 2024</LastUpdatedDate>
+      <ProvenanceDescription>v.118: Internal signature added. Submitted by R74N; v.119: Added release date, corrected extension. Submitted by R74N; v.121: signature amended to allow for versions 3 and 4. Submitted by R74N.</ProvenanceDescription>
+      <LastUpdatedDate>21 Jul 2025</LastUpdatedDate>
       <FormatNote>https://sandboxels.r74n.com/</FormatNote>
       <FormatRisk>
       </FormatRisk>
@@ -55,7 +55,7 @@
       <InternalSignature>
         <SignatureID>2309</SignatureID>
         <SignatureName>Sandboxels Save File</SignatureName>
-        <SignatureNote>Absolute from beginning of file, magic bytes: {"meta":{"saveVersion":"sb(1|2}","gameVersion":"</SignatureNote>
+        <SignatureNote>Absolute from beginning of file, magic bytes: {"meta":{"saveVersion":"sb(1|2|3|4}","gameVersion":"</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>2690</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -67,7 +67,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>7B226D657461223A7B227361766556657273696F6E223A227362(31|32)222C2267616D6556657273696F6E223A</ByteSequenceValue>
+          <ByteSequenceValue>7B226D657461223A7B227361766556657273696F6E223A227362(31|32|33|34)222C2267616D6556657273696F6E223A</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

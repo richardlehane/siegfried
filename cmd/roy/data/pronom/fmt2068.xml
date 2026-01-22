@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>3943</FormatID>
+      <FormatName>Macintosh File System</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Macintosh File System is the original Macintosh file system created for use on single sided 400K floppy disks and MacOS system 6 and before. It was released in January 1984 and effectively discontinued in September 1985 with the introduction of Hierarchical File System (fmt/1105).</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>299</ProvenanceSourceID>
+      <ProvenanceName>Brigham Young University / Brigham Young University</ProvenanceName>
+      <ProvenanceSourceDate>21 Jul 2025</ProvenanceSourceDate>
+      <ProvenanceDescription>v.121: new PUID.</ProvenanceDescription>
+      <LastUpdatedDate>21 Jul 2025</LastUpdatedDate>
+      <FormatNote>https://wiki.osdev.org/MFS</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/2068</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>15</DeveloperID>
+        <DeveloperName>
+        </DeveloperName>
+        <OrganisationName>Apple Computer, Inc.</OrganisationName>
+        <DeveloperCompoundName>Apple Computer, Inc.</DeveloperCompoundName>
+      </Developers>
+      <ExternalSignature>
+        <ExternalSignatureID>4600</ExternalSignatureID>
+        <Signature>mfs</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>4616</ExternalSignatureID>
+        <Signature>IMG</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>4617</ExternalSignatureID>
+        <Signature>DSK</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>3426</SignatureID>
+        <SignatureName>Macintosh File System</SignatureName>
+        <SignatureNote>BOF&lt; offset 1024, magic bytes: Ò×{12}..{6}[!&amp;.].</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>3813</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>1024</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>D2D7{12}0004{6}[!&amp;01]00</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is previous version of</RelationshipType>
+        <RelatedFormatID>1913</RelatedFormatID>
+        <RelatedFormatName>Hierarchical File System</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

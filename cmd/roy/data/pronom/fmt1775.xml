@@ -13,7 +13,7 @@
       <FormatTypes>Text (Unstructured)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>	Binary format used by spreadsheet programme Calc602 containing information about all currently open files, layout on the screen, macros loaded into memory etc.</FormatDescription>
+      <FormatDescription>Binary format used by spreadsheet programme Calc602 containing information about all currently open files, layout on the screen, macros loaded into memory etc.</FormatDescription>
       <BinaryFileFormat>
       </BinaryFileFormat>
       <ByteOrders>

@@ -61,8 +61,8 @@
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>684</RelatedFormatID>
-        <RelatedFormatName>Microsoft Excel 97 Workbook (xls)</RelatedFormatName>
-        <RelatedFormatVersion>8</RelatedFormatVersion>
+        <RelatedFormatName>Microsoft Excel 97-2003 Workbook (xls)</RelatedFormatName>
+        <RelatedFormatVersion>8 &amp; 8X</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>

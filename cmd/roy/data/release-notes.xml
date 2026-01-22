@@ -2,33 +2,748 @@
 <?xml-stylesheet type="text/xsl" href="release-note.xsl"?>
 <release_notes>
 <release_note>
+   <release_date>19th January 2026</release_date>
+   <signature_filename>DROID_SignatureFile_V122.xml</signature_filename>
+   <release_outline name="New Records">
+      <format>
+         <puid type="fmt">2069</puid>
+         <name>Draco 2</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2070</puid>
+         <name>Autodesk ReCap RCS Indexed Point Cloud Data</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2071</puid>
+         <name>SuperCard Pro Image File</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2072</puid>
+         <name>Weaving Information FIle (WIF)</name>
+         <summary>Full entry added. Submitted by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2073</puid>
+         <name>Tilt Brush</name>
+         <summary>Full entry added. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2074</puid>
+         <name>MRtrix File Format</name>
+         <summary>Full entry added. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2075</puid>
+         <name>ACE 1</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2076</puid>
+         <name>ACE 2</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2077</puid>
+         <name>Common Ground Digital Paper 1</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2078</puid>
+         <name>Common Ground Digital Paper 3</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2079</puid>
+         <name>Common Ground Digital Paper 4</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2080</puid>
+         <name>xdomea v.3.1.0</name>
+         <summary>Full entry added. Submitted by Landesarchiv Nordrhein-Westfalen.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2081</puid>
+         <name>xdomea v.4.0.0</name>
+         <summary>Full entry added. Submitted by Landesarchiv Nordrhein-Westfalen.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2082</puid>
+         <name>3DM (6)</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2083</puid>
+         <name>3DM (7)</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2084</puid>
+         <name>3DM (8)</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2085</puid>
+         <name>FieldWorks Language Explorer FWData XML</name>
+         <summary>Full entry added. Submitted by Preservica with data provided by the Endangered Language Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2086</puid>
+         <name>FieldWorks Language Explorer FWBackup</name>
+         <summary>Full entry added. Submitted by Preservica with data provided by the Endangered Language Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2087</puid>
+         <name>Final Cut Pro Project File</name>
+         <summary>Full entry added. Submitted by Marquette University, Department of Archival Collections and Institutional Repository.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2088</puid>
+         <name>Final Cut Pro XML Interchange Format</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2089</puid>
+         <name>FCPXML Interchange Format</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2090</puid>
+         <name>Kodak DCS RAW Image</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2091</puid>
+         <name>Kodak DCS RAW Image v.3</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="Updated Records">
+      <format>
+         <puid type="fmt">40</puid>
+         <name>Microsoft Word Document 97-2003</name>
+         <summary>. Submitted by Archives New Zealand.</summary>
+      </format>
+      <format>
+         <puid type="fmt">61</puid>
+         <name>Microsoft Excel 97-2003 Workbook (xls) 8 &amp; 8X</name>
+         <summary>Date range in name updated from 97 to 97-2003, version number updated to include 8X, binary signature removed and description updated accordingly. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">62</puid>
+         <name>Excel 2000-2003 8X</name>
+         <summary>PUID deprecated in favour of fmt/61. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">137</puid>
+         <name>OpenDocument Spreadsheet 1.1</name>
+         <summary>Corrected priority. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">280</puid>
+         <name>LaTex (Master Document)</name>
+         <summary>External signature of .tex added to entry. Submitted by Technische Informationsbibliothek (TIB).</summary>
+      </format>
+      <format>
+         <puid type="fmt">281</puid>
+         <name>LaTex (Subdocument)</name>
+         <summary>External signature of .tex added to entry. Submitted by Technische Informationsbibliothek (TIB).</summary>
+      </format>
+      <format>
+         <puid type="fmt">430</puid>
+         <name>Microsoft Outlook Email Message</name>
+         <summary>Added MIMEtype. Submitted by .</summary>
+      </format>
+      <format>
+         <puid type="fmt">930</puid>
+         <name>Magick Image File Format</name>
+         <summary>Broadened signature. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">935</puid>
+         <name>Animated Portable Network Graphics</name>
+         <summary>MIME type corrected, LOC and wikidata identifiers added. Signature updated to add a variable sequence of bytes to prevent clashing. Submitted by Library of Congress and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2042</puid>
+         <name>Android App Bundle File</name>
+         <summary>Binary signature removed. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2044</puid>
+         <name>OpenDocument Text File 1.4</name>
+         <summary>Added priority. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2045</puid>
+         <name>OpenDocument Spreadsheet File 1.4</name>
+         <summary>Added priority. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2047</puid>
+         <name>OpenDocument Database File  1.4</name>
+         <summary>Corrected priority. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2057</puid>
+         <name>A2R Disk Image File 2</name>
+         <summary>Wikidata/ Library of Congress identifiers modified. Submitted by Yale University Library.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2058</puid>
+         <name>A2R Disk Image File 3</name>
+         <summary>Wikidata/ Library of Congress identifiers modified. Submitted by Yale University Library.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2061</puid>
+         <name>MOOF Disk Image File 1</name>
+         <summary>Wikidata/ Library of Congress identifiers modified. Submitted by Yale University Library.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2065</puid>
+         <name>TOML</name>
+         <summary>Updated source links, MIME type, alternative names and description. Submitted by Ross Spencer.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2068</puid>
+         <name>Macintosh File System</name>
+         <summary>Added extensions IMG and DSK. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">416</puid>
+         <name>BinHex Binary Text</name>
+         <summary>. Submitted by Archives nationales de France and Brigham Young University.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="New Signatures">
+      <format>
+         <puid type="fmt">2069</puid>
+         <name>Draco 2</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2070</puid>
+         <name>Autodesk ReCap RCS Indexed Point Cloud Data</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2071</puid>
+         <name>SuperCard Pro Image File</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2072</puid>
+         <name>Weaving Information FIle (WIF)</name>
+         <summary>Signature researched and samples provided by The National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2073</puid>
+         <name>Tilt Brush</name>
+         <summary>Signature researched and samples provided by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2074</puid>
+         <name>MRtrix File Format</name>
+         <summary>Signature researched and samples provided by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2075</puid>
+         <name>ACE 1</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2076</puid>
+         <name>ACE 2</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2077</puid>
+         <name>Common Ground Digital Paper 1</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2078</puid>
+         <name>Common Ground Digital Paper 3</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2079</puid>
+         <name>Common Ground Digital Paper 4</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2080</puid>
+         <name>xdomea v.3.1.0</name>
+         <summary>Signature researched and samples provided by Landesarchiv Nordrhein-Westfalen.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2081</puid>
+         <name>xdomea v.4.0.0</name>
+         <summary>Signature researched and samples provided by Landesarchiv Nordrhein-Westfalen.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2082</puid>
+         <name>3DM (6)</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2083</puid>
+         <name>3DM (7)</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2084</puid>
+         <name>3DM (8)</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2085</puid>
+         <name>FieldWorks Language Explorer FWData XML</name>
+         <summary>Signature researched and samples provided by Preservica with data provided by the Endangered Language Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2086</puid>
+         <name>FieldWorks Language Explorer FWBackup</name>
+         <summary>Signature researched and samples provided by Preservica with data provided by the Endangered Language Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2087</puid>
+         <name>Final Cut Pro Project File</name>
+         <summary>Signature researched and samples provided by Marquette University, Department of Archival Collections and Institutional Repository.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2088</puid>
+         <name>Final Cut Pro XML Interchange Format</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2089</puid>
+         <name>FCPXML Interchange Format</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2090</puid>
+         <name>Kodak DCS RAW Image</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2091</puid>
+         <name>Kodak DCS RAW Image v.3</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+   </release_outline>
+</release_note>
+<release_note>
+   <release_date>24th September 2025</release_date>
+   <signature_filename>DROID_SignatureFile_V121.xml</signature_filename>
+   <release_outline name="New Records">
+      <format>
+         <puid type="fmt">2040</puid>
+         <name>CityGML 1.0</name>
+         <summary>Full entry added. Submitted by Landesarchiv Nordrhein-Westfalen.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2041</puid>
+         <name>Android Package File</name>
+         <summary>Extension-only entry added. Submitted by Biblioth&#xE8;que nationale de France and Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2042</puid>
+         <name>Android App Bundle File</name>
+         <summary>Full entry added. Submitted by Biblioth&#xE8;que nationale de France and Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2043</puid>
+         <name>Android Archive File</name>
+         <summary>Full entry added. Submitted by Biblioth&#xE8;que nationale de France and Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2044</puid>
+         <name>OpenDocument Text File v.1.4</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2045</puid>
+         <name>OpenDocument Spreadsheet File v.1.4</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2046</puid>
+         <name>OpenDocument Presentation File  v.1.4</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2047</puid>
+         <name>OpenDocument Database File  v.1.4</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2048</puid>
+         <name>OpenDocument Graphics File  v.1.4</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2049</puid>
+         <name>ArcGIS Pro Layer FIle</name>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2050</puid>
+         <name>PDF/UA-1</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2052</puid>
+         <name>PDF/UA-2</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2051</puid>
+         <name>Cineon</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2053</puid>
+         <name>Apache Arrow IPC Format</name>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2054</puid>
+         <name>JSON Lines Text Format</name>
+         <summary>Extension-only entry added. Submitted by Ross Spencer.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2055</puid>
+         <name>Apple Mail EMLX format</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2056</puid>
+         <name>Immersive Audio Model Format</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2057</puid>
+         <name>A2R Disk Image version 2</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2058</puid>
+         <name>A2R Disk Image version 3</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2059</puid>
+         <name>WOZ Disk Image version 1</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2060</puid>
+         <name>WOZ Disk Image version 2</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2061</puid>
+         <name>MOOF Disk Image version 1</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2062</puid>
+         <name>AV1 AV1 Image File Format</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2063</puid>
+         <name>Davinci Resolve Timeline File</name>
+         <summary>Extension-only entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2064</puid>
+         <name>Davinci Resolve Project FIle</name>
+         <summary>Extension-only entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2065</puid>
+         <name>TOML</name>
+         <summary>Extension-only entry added. Submitted by Preservica and Ross Spencer.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2066</puid>
+         <name>Rust Source File</name>
+         <summary>Extension-only entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2067</puid>
+         <name>XYZ Coordinate Data</name>
+         <summary>Extension-only entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2068</puid>
+         <name>Macintosh File System</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="Updated Records">
+      <format>
+         <puid type="x-fmt">18</puid>
+         <name>Comma Separated Values</name>
+         <summary>Removed extra word in Description. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">302</puid>
+         <name>Adobe FrameMaker Document</name>
+         <summary>Error with heading corrected. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1046</puid>
+         <name>Draco v.1</name>
+         <summary>Renamed format to Draco v.1. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1311</puid>
+         <name>Tweet JSON</name>
+         <summary>Added new signature variant called Tweet JSON (reversed order). Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1649</puid>
+         <name>AGS 4 Data Format 4.0, 4.1</name>
+         <summary>Removed comma from file format version field. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1651</puid>
+         <name>Garmin Flexible and Interoperable Data Transfer File</name>
+         <summary>Amended offset from 9 to 8 and changed signature from 464954 to 2E464954. Submitted by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1799</puid>
+         <name>FLExText Interlinear XML Format</name>
+         <summary>Signature amended to allow for lowercase utf. Submitted by Preservica with samples provided by the Endangered Language Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1956</puid>
+         <name>Sandboxels Save File</name>
+         <summary>Signature amended to allow for versions 3 and 4. Submitted by R74n.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1968</puid>
+         <name>Atrac Codec File v.1</name>
+         <summary>Amended internal signatures, added link to blog. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2015</puid>
+         <name>KryoFlux Stream</name>
+         <summary>Amended actor name to  University of Alberta Archives, added contact details. Submitted by University of Alberta Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2018</puid>
+         <name>Sony OpenMG Audio </name>
+         <summary>Amended internal signature 'Sont OpenMG Audio' and added a new internal signature 'Sony Open MG File'. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2024</puid>
+         <name>CD Architect Project File 4</name>
+         <summary>Added priority over Resource Interchange File Format (fmt/1886). Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2027</puid>
+         <name>Microsoft Project 1</name>
+         <summary>Removed whitespace from the file format heading. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">930</puid>
+         <name>Magick Image File Format</name>
+         <summary>Added miff extension, broadened signature. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1915</puid>
+         <name>ActiveMime Object</name>
+         <summary>End byte corrected from 0F to F0. Submitted by National Library of Australia.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1910</puid>
+         <name>Acrobat PDF/A - Portable Document Format v.4</name>
+         <summary>1 additional signature variant. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1911</puid>
+         <name>Acrobat PDF/A - Portable Document Format v.4e</name>
+         <summary>2 additional signature variants. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1912</puid>
+         <name>Acrobat PDF/A - Portable Document Format v.4f</name>
+         <summary>2 additional signature variants. Submitted by Preservica.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="New Signatures">
+      <format>
+         <puid type="fmt">1311</puid>
+         <name>Tweet JSON</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2018</puid>
+         <name>Sony OpenMG Audio </name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2040</puid>
+         <name>CityGML 1.0</name>
+         <summary>Signature researched and samples provided by Landesarchiv Nordrhein-Westfalen.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2042</puid>
+         <name>Android App Bundle File</name>
+         <summary>Signature researched and samples provided by Biblioth&#xE8;que nationale de France and Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2043</puid>
+         <name>Android Archive File</name>
+         <summary>Signature researched and samples provided by Biblioth&#xE8;que nationale de France and Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2044</puid>
+         <name>OpenDocument Text File v.1.4</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2045</puid>
+         <name>OpenDocument Spreadsheet File v.1.4</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2046</puid>
+         <name>OpenDocument Presentation File  v.1.4</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2047</puid>
+         <name>OpenDocument Database File  v.1.4</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2048</puid>
+         <name>OpenDocument Graphics File  v.1.4</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2049</puid>
+         <name>ArcGIS Pro Layer FIle</name>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2050</puid>
+         <name>PDF/UA-1</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2052</puid>
+         <name>PDF/UA-2</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2051</puid>
+         <name>Cineon</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2053</puid>
+         <name>Apache Arrow IPC Format</name>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2055</puid>
+         <name>Apple Mail EMLX format</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2056</puid>
+         <name>Immersive Audio Model Format</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2057</puid>
+         <name>A2R Disk Image version 2</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2058</puid>
+         <name>A2R Disk Image version 3</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2059</puid>
+         <name>WOZ Disk Image version 1</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2060</puid>
+         <name>WOZ Disk Image version 2</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2061</puid>
+         <name>MOOF Disk Image version 1</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2062</puid>
+         <name>AV1 AV1 Image File Format</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2068</puid>
+         <name>Macintosh File System</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1910</puid>
+         <name>Acrobat PDF/A - Portable Document Format v.4</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1911</puid>
+         <name>Acrobat PDF/A - Portable Document Format v.4e</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1912</puid>
+         <name>Acrobat PDF/A - Portable Document Format v.4f</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+   </release_outline>
+</release_note>
+<release_note>
    <release_date>25th February 2025</release_date>
    <signature_filename>DROID_SignatureFile_V120.xml</signature_filename>
    <release_outline name="New Records">
       <format>
          <puid type="fmt">2010</puid>
          <name>Visualization Toolkit 1.0</name>
-         <summary>Full entry added. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&amp;#xE9;rique du Canada - D&amp;#xE9;p&amp;#xF4;t f&amp;#xE9;d&amp;#xE9;r&amp;#xE9; de donn&amp;#xE9;es de recherche</summary>
+         <summary>Full entry added. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
       </format>
       <format>
          <puid type="fmt">2011</puid>
          <name>Visualization Toolkit 2.0</name>
-         <summary>Full entry added. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&amp;#xE9;rique du Canada - D&amp;#xE9;p&amp;#xF4;t f&amp;#xE9;d&amp;#xE9;r&amp;#xE9; de donn&amp;#xE9;es de recherche.</summary>
+         <summary>Full entry added. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
       </format>
       <format>
          <puid type="fmt">2012</puid>
          <name>Visualization Toolkit 4.2</name>
-         <summary>Full entry added. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&amp;#xE9;rique du Canada - D&amp;#xE9;p&amp;#xF4;t f&amp;#xE9;d&amp;#xE9;r&amp;#xE9; de donn&amp;#xE9;es de recherche.</summary>
+         <summary>Full entry added. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
       </format>
       <format>
          <puid type="fmt">2013</puid>
          <name>RawACF</name>
-         <summary>Full entry added. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&amp;#xE9;rique du Canada - D&amp;#xE9;p&amp;#xF4;t f&amp;#xE9;d&amp;#xE9;r&amp;#xE9; de donn&amp;#xE9;es de recherche.</summary>
+         <summary>Full entry added. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
       </format>
       <format>
          <puid type="fmt">2014</puid>
          <name>Axon Binary Format</name>
-         <summary>Full entry added. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&amp;#xE9;rique du Canada - D&amp;#xE9;p&amp;#xF4;t f&amp;#xE9;d&amp;#xE9;r&amp;#xE9; de donn&amp;#xE9;es de recherche.</summary>
+         <summary>Full entry added. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
       </format>
       <format>
          <puid type="fmt">2015</puid>
@@ -38,7 +753,7 @@
       <format>
          <puid type="fmt">2016</puid>
          <name>Binvox</name>
-         <summary>Full entry added. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&amp;#xE9;rique du Canada - D&amp;#xE9;p&amp;#xF4;t f&amp;#xE9;d&amp;#xE9;r&amp;#xE9; de donn&amp;#xE9;es de recherche.</summary>
+         <summary>Full entry added. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
       </format>
       <format>
          <puid type="fmt">2017</puid>
@@ -93,12 +808,12 @@
       <format>
          <puid type="fmt">2027</puid>
          <name>Microsoft Project v.1</name>
-         <summary>Full entry added. Submitted by National Library of Australia..</summary>
+         <summary>Full entry added. Submitted by National Library of Australia.</summary>
       </format>
       <format>
          <puid type="fmt">2028</puid>
          <name>Microsoft Project v.3</name>
-         <summary>Full entry added. Submitted by National Library of Australia..</summary>
+         <summary>Full entry added. Submitted by National Library of Australia.</summary>
       </format>
       <format>
          <puid type="fmt">2029</puid>
@@ -180,7 +895,7 @@
       <format>
          <puid type="fmt">155</puid>
          <name>Geographic Tagged Image File Format (GeoTIFF)</name>
-         <summary>Added extension cog. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&amp;#xE9;rique du Canada - D&amp;#xE9;p&amp;#xF4;t f&amp;#xE9;d&amp;#xE9;r&amp;#xE9; de donn&amp;#xE9;es de recherche</summary>
+         <summary>Added extension cog. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
       </format>
       <format>
          <puid type="x-fmt">185</puid>
@@ -230,7 +945,7 @@
       <format>
          <puid type="fmt">255</puid>
          <name>DjVu File Format</name>
-         <summary>New description added as part of PRONOM Research Week 2024. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&amp;#xE9;rique du Canada - D&amp;#xE9;p&amp;#xF4;t f&amp;#xE9;d&amp;#xE9;r&amp;#xE9; de donn&amp;#xE9;es de recherche</summary>
+         <summary>New description added as part of PRONOM Research Week 2024. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
       </format>
       <format>
          <puid type="x-fmt">279</puid>
@@ -250,7 +965,7 @@
       <format>
          <puid type="fmt">333</puid>
          <name>Chemical Markup Language</name>
-         <summary>New description added as part of PRONOM Research Week 2024. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&amp;#xE9;rique du Canada - D&amp;#xE9;p&amp;#xF4;t f&amp;#xE9;d&amp;#xE9;r&amp;#xE9; de donn&amp;#xE9;es de recherche</summary>
+         <summary>New description added as part of PRONOM Research Week 2024. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
       </format>
       <format>
          <puid type="fmt">337</puid>
@@ -322,27 +1037,27 @@
       <format>
          <puid type="fmt">2010</puid>
          <name>Visualization Toolkit 1.0</name>
-         <summary>Signature researched and samples provided by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&amp;#xE9;rique du Canada - D&amp;#xE9;p&amp;#xF4;t f&amp;#xE9;d&amp;#xE9;r&amp;#xE9; de donn&amp;#xE9;es de recherche.</summary>
+         <summary>Signature researched and samples provided by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
       </format>
       <format>
          <puid type="fmt">2011</puid>
          <name>Visualization Toolkit 2.0</name>
-         <summary>Signature researched and samples provided by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&amp;#xE9;rique du Canada - D&amp;#xE9;p&amp;#xF4;t f&amp;#xE9;d&amp;#xE9;r&amp;#xE9; de donn&amp;#xE9;es de recherche.</summary>
+         <summary>Signature researched and samples provided by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
       </format>
       <format>
          <puid type="fmt">2012</puid>
          <name>Visualization Toolkit 4.2</name>
-         <summary>Signature researched and samples provided by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&amp;#xE9;rique du Canada - D&amp;#xE9;p&amp;#xF4;t f&amp;#xE9;d&amp;#xE9;r&amp;#xE9; de donn&amp;#xE9;es de recherche.</summary>
+         <summary>Signature researched and samples provided by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
       </format>
       <format>
          <puid type="fmt">2013</puid>
          <name>RawACF</name>
-         <summary>Signature researched and samples provided by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&amp;#xE9;rique du Canada - D&amp;#xE9;p&amp;#xF4;t f&amp;#xE9;d&amp;#xE9;r&amp;#xE9; de donn&amp;#xE9;es de recherche.</summary>
+         <summary>Signature researched and samples provided by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
       </format>
       <format>
          <puid type="fmt">2014</puid>
          <name>Axon Binary Format</name>
-         <summary>Signature researched and samples provided by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&amp;#xE9;rique du Canada - D&amp;#xE9;p&amp;#xF4;t f&amp;#xE9;d&amp;#xE9;r&amp;#xE9; de donn&amp;#xE9;es de recherche.</summary>
+         <summary>Signature researched and samples provided by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
       </format>
       <format>
          <puid type="fmt">2015</puid>
@@ -352,7 +1067,7 @@
       <format>
          <puid type="fmt">2016</puid>
          <name>Binvox</name>
-         <summary>Signature researched and samples provided by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&amp;#xE9;rique du Canada - D&amp;#xE9;p&amp;#xF4;t f&amp;#xE9;d&amp;#xE9;r&amp;#xE9; de donn&amp;#xE9;es de recherche.</summary>
+         <summary>Signature researched and samples provided by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
       </format>
       <format>
          <puid type="fmt">2017</puid>
@@ -407,12 +1122,12 @@
       <format>
          <puid type="fmt">2027</puid>
          <name>Microsoft Project v.1</name>
-         <summary>Signature researched and samples provided by National Library of Australia..</summary>
+         <summary>Signature researched and samples provided by National Library of Australia.</summary>
       </format>
       <format>
          <puid type="fmt">2028</puid>
          <name>Microsoft Project v.3</name>
-         <summary>Signature researched and samples provided by National Library of Australia..</summary>
+         <summary>Signature researched and samples provided by National Library of Australia.</summary>
       </format>
       <format>
          <puid type="fmt">2029</puid>
@@ -510,7 +1225,7 @@
       <format>
          <puid type="fmt">570</puid>
          <name>Extensible Metadata Platform Packet</name>
-         <summary>Internal signature updated to allow for both double and single quotation marks. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&amp;#xE9;rique du Canada - D&amp;#xE9;p&amp;#xF4;t f&amp;#xE9;d&amp;#xE9;r&amp;#xE9; de donn&amp;#xE9;es de recherche.</summary>
+         <summary>Internal signature updated to allow for both double and single quotation marks. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
       </format>
       <format>
          <puid type="fmt">898</puid>
@@ -683,7 +1398,7 @@
       <format>
          <puid type="fmt">1968</puid>
          <name>Atrac Codec File</name>
-         <summary>Full entry added. Submitted by Bibliothèque Cantonale Universitaire de Fribourg.</summary>
+         <summary>Full entry added. Submitted by Biblioth&#xE8;que Cantonale Universitaire de Fribourg.</summary>
       </format>
       <format>
          <puid type="fmt">1969</puid>
@@ -718,17 +1433,17 @@
       <format>
          <puid type="fmt">1975</puid>
          <name>ICC Profile 2</name>
-         <summary>Full entry added. Submitted by Bibliothèque nationale de France.</summary>
+         <summary>Full entry added. Submitted by Biblioth&#xE8;que nationale de France.</summary>
       </format>
       <format>
          <puid type="fmt">1976</puid>
          <name>ICC Profile 4</name>
-         <summary>Full entry added. Submitted by Bibliothèque nationale de France.</summary>
+         <summary>Full entry added. Submitted by Biblioth&#xE8;que nationale de France.</summary>
       </format>
       <format>
          <puid type="fmt">1977</puid>
          <name>ICC Profile iccMAX</name>
-         <summary>Full entry added. Submitted by Bibliothèque nationale de France.</summary>
+         <summary>Full entry added. Submitted by Biblioth&#xE8;que nationale de France.</summary>
       </format>
       <format>
          <puid type="fmt">1978</puid>
@@ -1205,7 +1920,7 @@
       <format>
          <puid type="x-fmt">416</puid>
          <name>BinHex Binary Text</name>
-         <summary>Signature modified to increase max-offset by approximately 4000 bytes, beginning and ending colon added for conformance to specification. Description, notefield and MIME type updated.. Submitted by Brigham Young University.</summary>
+         <summary>Signature modified to increase max-offset by approximately 4000 bytes, beginning and ending colon added for conformance to specification. Description, notefield and MIME type updated by Brigham Young University.</summary>
       </format>
       <format>
          <puid type="x-fmt">421</puid>
@@ -1337,7 +2052,7 @@
       <format>
          <puid type="fmt">1968</puid>
          <name>Atrac Codec File</name>
-         <summary>Signature researched and samples provided by Bibliothèque Cantonale Universitaire de Fribourg.</summary>
+         <summary>Signature researched and samples provided by Biblioth&#xE8;que Cantonale Universitaire de Fribourg.</summary>
       </format>
       <format>
          <puid type="fmt">1969</puid>
@@ -1372,17 +2087,17 @@
       <format>
          <puid type="fmt">1975</puid>
          <name>ICC Profile 2</name>
-         <summary>Signature researched and samples provided by Bibliothèque nationale de France.</summary>
+         <summary>Signature researched and samples provided by Biblioth&#xE8;que nationale de France.</summary>
       </format>
       <format>
          <puid type="fmt">1976</puid>
          <name>ICC Profile 4</name>
-         <summary>Signature researched and samples provided by Bibliothèque nationale de France.</summary>
+         <summary>Signature researched and samples provided by Biblioth&#xE8;que nationale de France.</summary>
       </format>
       <format>
          <puid type="fmt">1977</puid>
          <name>ICC Profile iccMAX</name>
-         <summary>Signature researched and samples provided by Bibliothèque nationale de France.</summary>
+         <summary>Signature researched and samples provided by Biblioth&#xE8;que nationale de France.</summary>
       </format>
       <format>
          <puid type="fmt">1978</puid>
@@ -2499,7 +3214,7 @@
       <format>
          <puid type="fmt">1870</puid>
          <name>Yamaha PSR Disk Manager File</name>
-         <summary>Full entry added. Submitted by R. Guedj, Bibliothèque Cantonale Universitaire de Fribourg.</summary>
+         <summary>Full entry added. Submitted by R. Guedj, Biblioth&#xE8;que Cantonale Universitaire de Fribourg.</summary>
       </format>
       <format>
          <puid type="fmt">1871</puid>
@@ -3008,7 +3723,7 @@
       <format>
          <puid type="fmt">1870</puid>
          <name>Yamaha PSR Disk Manager File</name>
-         <summary>Signature researched and samples provided by R. Guedj, Bibliothèque Cantonale Universitaire de Fribourg.</summary>
+         <summary>Signature researched and samples provided by R. Guedj, Biblioth&#xE8;que Cantonale Universitaire de Fribourg.</summary>
       </format>
       <format>
          <puid type="fmt">1871</puid>
@@ -10930,12 +11645,12 @@
 	  <format>
 	   <puid type="fmt">896</puid>
 	   <name>MusicXML</name>
-	   <summary>Added new extension musicxml and new name from Music XML to MusicXML. Submitted by the Bibliothèque Cantonale et Universitaire – Lausanne.</summary>
+	   <summary>Added new extension musicxml and new name from Music XML to MusicXML. Submitted by the Biblioth&#xE8;que Cantonale et Universitaire – Lausanne.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">897</puid>
 	   <name>Compressed MusicXML</name>
-	   <summary>New name change from Compressed Music XML to Compressed MusicXML. Submitted by the Bibliothèque Cantonale et Universitaire – Lausanne.</summary>
+	   <summary>New name change from Compressed Music XML to Compressed MusicXML. Submitted by the Biblioth&#xE8;que Cantonale et Universitaire – Lausanne.</summary>
 	  </format>
 	  <format>
 	   <puid type="fmt">1104</puid>
@@ -27769,3 +28484,4 @@ Tagged Image File Format for Electronic Photography (TIFF/EP), Exchangeable Imag
     </release_outline>
   </release_note>
 </release_notes>
+

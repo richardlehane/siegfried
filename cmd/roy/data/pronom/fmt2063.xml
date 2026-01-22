@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>3938</FormatID>
+      <FormatName>DaVinci Resolve Timeline File</FormatName>
+      <FormatVersion>9+</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Files produced by the DaVinci Resolve software, which is used for video editing, colour correction and grading, visual effects and post production audio. Since version 9 the files have had the extension .drt. Timeline files are project files which contain only the timeline and its associated media, rather than the entire project. The software was developed by da Vinci Systems in 2004 and then purchased by BlackMagic Design in 2009.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>299</ProvenanceSourceID>
+      <ProvenanceName>Brigham Young University / Brigham Young University</ProvenanceName>
+      <ProvenanceSourceDate>21 Jul 2025</ProvenanceSourceDate>
+      <ProvenanceDescription>v.121: new PUID.
+This format can be identified via a container signature in DROID version 6 or later.</ProvenanceDescription>
+      <LastUpdatedDate>21 Jul 2025</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/DaVinci_Resolve
+Submission: https://github.com/thorsted/PRONOM_Research/tree/main/Submissions/Davinci</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/2063</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>4595</ExternalSignatureID>
+        <Signature>drt</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>3939</RelatedFormatID>
+        <RelatedFormatName>DaVinci Resolve Project File</RelatedFormatName>
+        <RelatedFormatVersion>9+</RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

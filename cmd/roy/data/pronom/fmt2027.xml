@@ -3,7 +3,7 @@
   <report_format_detail>
     <FileFormat>
       <FormatID>3901</FormatID>
-      <FormatName> Microsoft Project</FormatName>
+      <FormatName>Microsoft Project</FormatName>
       <FormatVersion>1</FormatVersion>
       <FormatAliases>
       </FormatAliases>
@@ -24,9 +24,8 @@
       <ProvenanceSourceID>234</ProvenanceSourceID>
       <ProvenanceName>National Library of Australia / National Library of Australia</ProvenanceName>
       <ProvenanceSourceDate>21 Jan 2025</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>21 Jan 2025</LastUpdatedDate>
+      <ProvenanceDescription>v.121: removed whitespace from file name. Preservica.</ProvenanceDescription>
+      <LastUpdatedDate>21 Jul 2025</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>

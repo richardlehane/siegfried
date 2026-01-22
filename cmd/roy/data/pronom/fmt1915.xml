@@ -25,9 +25,8 @@
       <ProvenanceSourceID>234</ProvenanceSourceID>
       <ProvenanceName>National Library of Australia / National Library of Australia</ProvenanceName>
       <ProvenanceSourceDate>25 Aug 2023</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>25 Aug 2023</LastUpdatedDate>
+      <ProvenanceDescription>v.121: end byte corrected from 0F to F0. Submitted by National Library of Australia.</ProvenanceDescription>
+      <LastUpdatedDate>22 Sep 2025</LastUpdatedDate>
       <FormatNote>https://github.com/idiom/activemime-format</FormatNote>
       <FormatRisk>
       </FormatRisk>
@@ -57,7 +56,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>4163746976654D696D65{2}010F</ByteSequenceValue>
+          <ByteSequenceValue>4163746976654D696D65{2}01F0</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

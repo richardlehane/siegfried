@@ -20,7 +20,7 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>11 Mar 2005</ProvenanceSourceDate>
-      <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
+      <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures; v.122- Version in name of signature changed from 97-2002 to 97-2003. Submitted by Archives New Zealand.</ProvenanceDescription>
       <LastUpdatedDate>19 Apr 2012</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
@@ -98,7 +98,7 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>182</SignatureID>
-        <SignatureName>Microsoft Word for Windows 97 - 2002</SignatureName>
+        <SignatureName>Microsoft Word for Windows 97 - 2003</SignatureName>
         <SignatureNote>Compound document header + WordDocument user stream + version number</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>222</ByteSequenceID>

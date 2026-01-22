@@ -81,7 +81,7 @@
       <RelatedFormat>
         <RelationshipType>Is subsequent version of</RelationshipType>
         <RelatedFormatID>456</RelatedFormatID>
-        <RelatedFormatName>Visualization Toolkit</RelatedFormatName>
+        <RelatedFormatName>Adobe Framemaker Document</RelatedFormatName>
         <RelatedFormatVersion>8.0</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>

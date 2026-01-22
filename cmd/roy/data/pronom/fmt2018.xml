@@ -25,11 +25,9 @@
       <ProvenanceSourceID>347</ProvenanceSourceID>
       <ProvenanceName>University of Melbourne / University of Melbourne</ProvenanceName>
       <ProvenanceSourceDate>04 Oct 2024</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>04 Oct 2024</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <ProvenanceDescription>v.121: Amended internal signature and added internal signature 'Sony OpenMG File Format'. Brigham Young University.</ProvenanceDescription>
+      <LastUpdatedDate>21 Jul 2025</LastUpdatedDate>
+      <FormatNote>Submission: https://github.com/thorsted/PRONOM_Research/tree/main/Submissions/ATRAC</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -55,8 +53,8 @@
       </ExternalSignature>
       <InternalSignature>
         <SignatureID>3380</SignatureID>
-        <SignatureName>Sony Open MG Audio</SignatureName>
-        <SignatureNote>BOF; Offset: 0; Magic Bytes 'ea3.' followed in 996-3996 bytes by 'EA3'{1}0x0060{2}00000000010F5000</SignatureNote>
+        <SignatureName>Sony OpenMG Audio</SignatureName>
+        <SignatureNote>BOF, offset 0, magic bytes: ea3{3069}EA3</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>3757</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -68,7 +66,25 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>65613303{996-3996}454133{1}0060{2}00000000010F5000</ByteSequenceValue>
+          <ByteSequenceValue>656133{3069}454133</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>3405</SignatureID>
+        <SignatureName>Sony OpenMG File</SignatureName>
+        <SignatureNote>BOF offset 7, magic bytes: openMG</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>3789</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>8</Offset>
+          <MaxOffset>8</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>6F70656E4D47</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

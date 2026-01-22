@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>3951</FormatID>
+      <FormatName>ACE</FormatName>
+      <FormatVersion>2</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Aggregate</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>ACE is a compressed archive format, originally developed by Marcel Lemke and later by e-merge GmbH. Some relevant software includes Ace (for DOS, OS/2 and Windows console, WinAce, Active ACE and ACE Compression. Version 2 of ACE introduced new compression schemes that are not supported by all ACE compression software.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>299</ProvenanceSourceID>
+      <ProvenanceName>Brigham Young University / Brigham Young University</ProvenanceName>
+      <ProvenanceSourceDate>27 Nov 2025</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>27 Nov 2025</LastUpdatedDate>
+      <FormatNote>http://fileformats.archiveteam.org/wiki/ACE</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/x-ace-compressed</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/2076</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>4612</ExternalSignatureID>
+        <Signature>ace</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>3439</SignatureID>
+        <SignatureName>ACE Archive 2</SignatureName>
+        <SignatureNote>BOF; Offset: 7; Magic Bytes: '**ACE**' followed by byte sequence of 0x1414</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>3833</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>7</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>2A2A4143452A2A1414</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

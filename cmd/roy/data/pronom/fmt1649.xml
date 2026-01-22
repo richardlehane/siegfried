@@ -4,7 +4,7 @@
     <FileFormat>
       <FormatID>2476</FormatID>
       <FormatName>AGS 4 Data Format</FormatName>
-      <FormatVersion>4.0, 4.1</FormatVersion>
+      <FormatVersion>4.0- 4.1</FormatVersion>
       <FormatAliases>
       </FormatAliases>
       <FormatFamilies>
@@ -24,8 +24,9 @@
       <ProvenanceSourceID>278</ProvenanceSourceID>
       <ProvenanceName>AGS / Association of Geotechnical and Geoenvironmental Specialists</ProvenanceName>
       <ProvenanceSourceDate>14 Mar 2022</ProvenanceSourceDate>
-      <ProvenanceDescription>v.120- Removed excess variable marker from signature, updated description and updated version number. Submitted by Ross Spencer as part of PRONOM Research Week</ProvenanceDescription>
-      <LastUpdatedDate>11 Nov 2024</LastUpdatedDate>
+      <ProvenanceDescription>v.120- Removed excess variable marker from signature, updated description and updated version number. Submitted by Ross Spencer as part of PRONOM Research Week
+v.121: removed comma from file format version field. Submitted by Preservica.</ProvenanceDescription>
+      <LastUpdatedDate>21 Jul 2025</LastUpdatedDate>
       <FormatNote>Official specification: https://www.ags.org.uk/content/uploads/2022/02/AGS4-v-4.1.1-2022.pdf
 Official website: https://www.ags.org.uk/data-format/</FormatNote>
       <FormatRisk>

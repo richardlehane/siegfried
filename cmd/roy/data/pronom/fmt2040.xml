@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>3915</FormatID>
+      <FormatName>CityGML File</FormatName>
+      <FormatVersion>1.0</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>GIS, Text (Mark-up)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>CityGML (City Geography Markup Language) defines a data model and XML-based exchange format for the representation of 3D city and landscape models. It is implemented as a GML application schema, a specialisation of the Geography Markup Language. CityGML was originally developed by the Special Interest Group 3D of the initiative Geodata Infrastructure North-Rhine Westphalia (GDI NRW).</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>232</ProvenanceSourceID>
+      <ProvenanceName>Landesarchiv Nordrhein-Westfalen / Landesarchiv Nordrhein-Westfalen</ProvenanceName>
+      <ProvenanceSourceDate>21 Jul 2025</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>21 Jul 2025</LastUpdatedDate>
+      <FormatNote>Specification:
+https://web.archive.org/web/20240524220835/https:/portal.ogc.org/files/?artifact_id=28802
+
+https://www.ogc.org/standards/citygml/ 
+
+Submission: https://github.com/digital-preservation/PRONOM_Research/issues/60</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/2040</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Support>
+        <SupportID>285</SupportID>
+        <SupportName>Open Geospatial Consortium</SupportName>
+        <OrganisationName>Open Geospatial Consortium</OrganisationName>
+        <SupportCompoundName>Open Geospatial Consortium / Open Geospatial Consortium</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>4571</ExternalSignatureID>
+        <Signature>gml</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>4572</ExternalSignatureID>
+        <Signature>xml</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>3406</SignatureID>
+        <SignatureName>CityGML File</SignatureName>
+        <SignatureNote>Absolute from beginning of file, magic bytes: &lt;?xml version=(“|’)1.0(“|’){0-320}(&lt;|:)CityModel{0-1024}xmlns{0-8}=(“|’) http://www.opengis.net/citygml/1.0(“|’)</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>3790</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>3C3F786D6C2076657273696F6E3D(22|27)312E30(22|27){0-320}(3C|3A)436974794D6F64656C{0-1024}786D6C6E73{0-8}3D(22|27)687474703A2F2F7777772E6F70656E6769732E6E65742F63697479676D6C2F312E30(22|27)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>319</RelatedFormatID>
+        <RelatedFormatName>Geography Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

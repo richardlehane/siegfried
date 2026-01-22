@@ -19,7 +19,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>22 Aug 2006</ProvenanceSourceDate>
-      <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.</ProvenanceDescription>
+      <ProvenanceDescription>This format can be identified via a container signature in DROID version 6 or later. The PRONOM database cannot currently represent container signatures.
+v.122: corrected priority (submitted by Preservica).</ProvenanceDescription>
       <LastUpdatedDate>19 Apr 2012</LastUpdatedDate>
       <FormatNote>
       </FormatNote>

@@ -43,6 +43,11 @@
         <Signature>mif</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>4601</ExternalSignatureID>
+        <Signature>miff</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
       <InternalSignature>
         <SignatureID>1274</SignatureID>
         <SignatureName>Magick Image File Format</SignatureName>
@@ -59,7 +64,7 @@ Specification: http://www.imagemagick.org/script/miff.php</SignatureNote>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>69643D496D6167654D616769636B{0-256}3A0A</ByteSequenceValue>
+          <ByteSequenceValue>69643D496D6167654D616769636B{0-1024}3A</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
     </FileFormat>

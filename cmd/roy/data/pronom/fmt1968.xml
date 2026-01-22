@@ -24,11 +24,12 @@
       <ProvenanceSourceID>311</ProvenanceSourceID>
       <ProvenanceName>Bibliotheque Cantonale Universitaire de Fribourg / Bibliotheque Cantonale Universitaire de Fribourg</ProvenanceName>
       <ProvenanceSourceDate>21 Mar 2024</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>21 Mar 2024</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+      <ProvenanceDescription>v.121: amended internal signature, added links to blogs. Brigham Young University.</ProvenanceDescription>
+      <LastUpdatedDate>21 Jul 2025</LastUpdatedDate>
+      <FormatNote>A useful blog on the format can be found here: https://preservation.tylerthorsted.com/2024/09/06/atrac/
+Submissions:
+https://github.com/digital-preservation/PRONOM_Research/issues/70
+https://github.com/thorsted/PRONOM_Research/tree/main/Submissions/ATRAC</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -51,11 +52,12 @@
       <InternalSignature>
         <SignatureID>2317</SignatureID>
         <SignatureName>Atrac Codec File v.1</SignatureName>
-        <SignatureNote>BOF, offset 2896, magic bytes: …………………………..¬</SignatureNote>
+        <SignatureNote>Absolute from BOF, magic bytes: ….{260}(.|.)
+EOF, offset 0-1024: ¬</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>2697</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
-          <Offset>2896</Offset>
+          <Offset>0</Offset>
           <MaxOffset>0</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
@@ -63,13 +65,13 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>AC</ByteSequenceValue>
+          <ByteSequenceValue>00080000{260}(01|02)</ByteSequenceValue>
         </ByteSequence>
         <ByteSequence>
           <ByteSequenceID>2698</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
           <Offset>0</Offset>
-          <MaxOffset>0</MaxOffset>
+          <MaxOffset>1024</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

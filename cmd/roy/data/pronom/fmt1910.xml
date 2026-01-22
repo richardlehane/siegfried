@@ -23,9 +23,8 @@
       <ProvenanceSourceID>244</ProvenanceSourceID>
       <ProvenanceName>Preservica / Preservica</ProvenanceName>
       <ProvenanceSourceDate>25 Aug 2023</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>25 Aug 2023</LastUpdatedDate>
+      <ProvenanceDescription>v.121: new internal signature (submitted by Preservica).</ProvenanceDescription>
+      <LastUpdatedDate>22 Sep 2025</LastUpdatedDate>
       <FormatNote>https://www.iso.org/standard/71832.html</FormatNote>
       <FormatRisk>
       </FormatRisk>
@@ -82,6 +81,37 @@
           <Endianness>
           </Endianness>
           <ByteSequenceValue>3C7064666169643A706172743E343C2F7064666169643A706172743E</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>3427</SignatureID>
+        <SignatureName>PDF/A-4 attribute variant</SignatureName>
+        <SignatureNote>Signature Desciption: BOF ‘%PDF-2.’[0-9], then variable `pdfaid:part="4"’</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>3814</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>255044462D322E[30:39]</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>3815</ByteSequenceID>
+          <PositionType>Variable</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>7064666169643A706172743D223422</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

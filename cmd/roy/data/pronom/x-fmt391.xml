@@ -11,7 +11,7 @@
       <FormatTypes>Image (Raster)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>Exchangeable image file format (Exif) is a standard that specifies the formats for images, sound, and ancillary tags used by digital cameras (including smartphones), scanners and other systems handling image and sound files recorded by digital cameras.</FormatDescription>
+      <FormatDescription>Exchangeable image file format (Exif) is a standard that specifies the formats for images, sound, and ancillary t4 dataused by digital cameras (including smartphones), scanners and other systems handling image and sound files recorded by digital cameras.</FormatDescription>
       <BinaryFileFormat>Binary</BinaryFileFormat>
       <ByteOrders>Little-endian (Intel) and Big-endian (Motorola)</ByteOrders>
       <ReleaseDate>

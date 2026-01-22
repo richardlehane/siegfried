@@ -75,6 +75,13 @@
           <ByteSequenceValue>4244{12}0003{6}[!&amp;01]00</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>3943</RelatedFormatID>
+        <RelatedFormatName>Macintosh File System</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

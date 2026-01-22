@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>3968</FormatID>
+      <FormatName>Kodak DCS RAW Image</FormatName>
+      <FormatVersion>3</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Raster)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>A Kodak DCS RAW image is a digital camera raw file from Kodak's Digital Camera System (DCS) series, saved in a proprietary format based on the Tagged Image File Format (TIFF). These files contain uncompressed, unprocessed image data.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>299</ProvenanceSourceID>
+      <ProvenanceName>Brigham Young University / Brigham Young University</ProvenanceName>
+      <ProvenanceSourceDate>04 Dec 2025</ProvenanceSourceDate>
+      <ProvenanceDescription>v.122: new signature. Submitted by Brigham Young University.</ProvenanceDescription>
+      <LastUpdatedDate>04 Dec 2025</LastUpdatedDate>
+      <FormatNote>https://github.com/thorsted/PRONOM_Research/tree/main/Submissions/DCS
+http://fileformats.archiveteam.org/wiki/Kodak
+https://preservation.tylerthorsted.com/2024/11/29/kodak-tiff/</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/2091</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <Developers>
+        <DeveloperID>360</DeveloperID>
+        <DeveloperName>Kodak</DeveloperName>
+        <OrganisationName>Kodak</OrganisationName>
+        <DeveloperCompoundName>Kodak / Kodak</DeveloperCompoundName>
+      </Developers>
+      <Support>
+        <SupportID>360</SupportID>
+        <SupportName>Kodak</SupportName>
+        <OrganisationName>Kodak</OrganisationName>
+        <SupportCompoundName>Kodak / Kodak</SupportCompoundName>
+      </Support>
+      <ExternalSignature>
+        <ExternalSignatureID>4629</ExternalSignatureID>
+        <Signature>tif</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>3454</SignatureID>
+        <SignatureName>Kodak DCS RAW Image v.3</SignatureName>
+        <SignatureNote>Absolute from beginning of file, magic bytes: II*.{12}KODAK{11}(DCS|EOSDCS)</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>3848</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>49492A00{12}4B4F44414B{11}(444353|454F53444353)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

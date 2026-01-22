@@ -27,8 +27,7 @@ In addition to the text content itself, a Tweet can have over 150 attributes ass
       <ProvenanceSourceID>244</ProvenanceSourceID>
       <ProvenanceName>Preservica / Preservica</ProvenanceName>
       <ProvenanceSourceDate>18 Jan 2020</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
+      <ProvenanceDescription>v.121: Added the Tweet JSON (reversed order) internal signature.</ProvenanceDescription>
       <LastUpdatedDate>18 Jan 2020</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
@@ -140,6 +139,37 @@ In addition to the text content itself, a Tweet can have over 150 attributes ass
           <Endianness>
           </Endianness>
           <ByteSequenceValue>7D0D0A</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>3404</SignatureID>
+        <SignatureName>Tweet JSON (reversed order)</SignatureName>
+        <SignatureNote>Absolute from beginning of file: The signature assumes a starting "{" character, a terminating "}" and the JSON keys "retweeted" and "id_str". This signature allows for any line ending combination to follow the terminating "}"</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>3787</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>7B*22726574776565746564223A*2269645F737472223A</ByteSequenceValue>
+        </ByteSequence>
+        <ByteSequence>
+          <ByteSequenceID>3788</ByteSequenceID>
+          <PositionType>Absolute from EOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>2</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>7D</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

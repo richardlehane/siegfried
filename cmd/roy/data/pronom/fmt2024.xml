@@ -24,9 +24,8 @@
       <ProvenanceSourceID>299</ProvenanceSourceID>
       <ProvenanceName>Brigham Young University / Brigham Young University</ProvenanceName>
       <ProvenanceSourceDate>10 Jan 2025</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>10 Jan 2025</LastUpdatedDate>
+      <ProvenanceDescription>v.121: Added priority over Resource Interchange File Format (fmt/1886). Submitted by Brigham Young University.</ProvenanceDescription>
+      <LastUpdatedDate>21 Jul 2025</LastUpdatedDate>
       <FormatNote>http://fileformats.archiveteam.org/wiki/CD_Architect</FormatNote>
       <FormatRisk>
       </FormatRisk>
@@ -59,6 +58,13 @@
           <ByteSequenceValue>52494646{4}5346504A</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>2741</RelatedFormatID>
+        <RelatedFormatName>Resource Interchange File Format (RIFF)</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Is previous version of</RelationshipType>
         <RelatedFormatID>3899</RelatedFormatID>

@@ -13,7 +13,7 @@
       <FormatTypes>Dataset</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>A comma-separated values (CSV) file file stores tabular data (numbers and text) in plain text. Plain text means that the file is interpreted a sequence of characters, so that it is human-readable with a standard text editor. Each line of the file is a data record.</FormatDescription>
+      <FormatDescription>A comma-separated values (CSV) file stores tabular data (numbers and text) in plain text. Plain text means that the file is interpreted a sequence of characters, so that it is human-readable with a standard text editor. Each line of the file is a data record.</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -24,9 +24,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>02 Aug 2005</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>03 Aug 2015</LastUpdatedDate>
+      <ProvenanceDescription>v.121: Removed extra word in description.</ProvenanceDescription>
+      <LastUpdatedDate>21 Jul 2025</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>

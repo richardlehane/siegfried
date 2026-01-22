@@ -269,6 +269,13 @@ https://fileinfo.com/extension/zip</FormatNote>
         <RelatedFormatName>EndNote Compressed Library</RelatedFormatName>
         <RelatedFormatVersion>20</RelatedFormatVersion>
       </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>3916</RelatedFormatID>
+        <RelatedFormatName>Android Package File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

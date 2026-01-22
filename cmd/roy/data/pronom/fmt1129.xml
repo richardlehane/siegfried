@@ -97,6 +97,12 @@ This signature cannot currently identify files that were incrementally saved to 
         <RelatedFormatName>Acrobat PDF/A - Portable Document Format</RelatedFormatName>
         <RelatedFormatVersion>4f</RelatedFormatVersion>
       </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>3926</RelatedFormatID>
+        <RelatedFormatName>PDF/UA Portable Document Format</RelatedFormatName>
+        <RelatedFormatVersion>2</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

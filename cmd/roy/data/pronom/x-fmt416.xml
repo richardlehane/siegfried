@@ -24,8 +24,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>02 Dec 2010</ProvenanceSourceDate>
-      <ProvenanceDescription>04/2024 (v.118)- Signature modified to increase max-offset by 4k, beginning and ending colon added for conformance to specification. Description, notefield and MIME type updated. Submitted by Brigham Young University.</ProvenanceDescription>
-      <LastUpdatedDate>15 Apr 2024</LastUpdatedDate>
+      <ProvenanceDescription>04/2024 (v.118)- Signature modified to increase max-offset by 4k, beginning and ending colon added for conformance to specification. Description, notefield and MIME type updated. Submitted by Brigham Young University. v.122- EOF sequence offset modified to include bytes 0-64. Submitted by Archives nationales de France and Brigham Young University.</ProvenanceDescription>
+      <LastUpdatedDate>25 Nov 2025</LastUpdatedDate>
       <FormatNote>http://fileformats.archiveteam.org/wiki/BinHex
 https://preservation.tylerthorsted.com/2023/09/29/binhex/</FormatNote>
       <FormatRisk>
@@ -48,7 +48,7 @@ https://preservation.tylerthorsted.com/2023/09/29/binhex/</FormatNote>
       <InternalSignature>
         <SignatureID>339</SignatureID>
         <SignatureName>BinHex Binary Text</SignatureName>
-        <SignatureNote>BOF; Offset:0-4084; Magic Bytes: '(This file must be converted with BinHex' and in 6-9 bytes 0x3A; EOF; Offset: 64; Magic Bytes: 0x3A</SignatureNote>
+        <SignatureNote>BOF; Offset:0-4084; Magic Bytes: '(This file must be converted with BinHex' and in 6-9 bytes 0x3A; EOF; Offset: 0-64; Magic Bytes: 0x3A</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>437</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>
@@ -65,8 +65,8 @@ https://preservation.tylerthorsted.com/2023/09/29/binhex/</FormatNote>
         <ByteSequence>
           <ByteSequenceID>2704</ByteSequenceID>
           <PositionType>Absolute from EOF</PositionType>
-          <Offset>64</Offset>
-          <MaxOffset>0</MaxOffset>
+          <Offset>0</Offset>
+          <MaxOffset>64</MaxOffset>
           <IndirectOffsetLocation>
           </IndirectOffsetLocation>
           <IndirectOffsetLength>

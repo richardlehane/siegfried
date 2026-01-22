@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>3940</FormatID>
+      <FormatName>TOML</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>TOML (Tom's Obvious Minimal Language), TOML (Tom's Own Markup Language)</FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Mark-up)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>TOML (Tom’s Obvious Minimal Language) was created by Tom Preston-Werner, in the github repository tom-lang. TOML is a minimal configuration file format that is designed with clear semantics so as to be easily human-readable. TOML is designed to map unambiguously to a hash table (synonymous with a dictionary or map) and so can be parsed and understood by a number of programming languages. Data structures represented by TOML can often be mapped into other languages as required such as JSON or YAML.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>320</ProvenanceSourceID>
+      <ProvenanceName>Ross Spencer / Ravensburger AG</ProvenanceName>
+      <ProvenanceSourceDate>21 Jul 2025</ProvenanceSourceDate>
+      <ProvenanceDescription>v.121: new PUID submitted by Preservica and Ross Spencer; v.122- updated description, notes, alternative names and MIME type submitted by Ross Spencer.</ProvenanceDescription>
+      <LastUpdatedDate>24 Nov 2025</LastUpdatedDate>
+      <FormatNote>https://toml.io/en/
+http://fileformats.archiveteam.org/wiki/TOML
+https://github.com/toml-lang/toml</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/toml</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/2065</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>4597</ExternalSignatureID>
+        <Signature>toml</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

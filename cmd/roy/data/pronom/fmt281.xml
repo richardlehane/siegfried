@@ -25,7 +25,7 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>01 Nov 2010</ProvenanceSourceDate>
-      <ProvenanceDescription>Following up external submission. Signature submitted by representative of KeepIt project at Southampton University.</ProvenanceDescription>
+      <ProvenanceDescription>Following up external submission. Signature submitted by representative of KeepIt project at Southampton University. v.122- External signature of .tex added to entry. Submitted by Technishe Informationsbibliothek.</ProvenanceDescription>
       <LastUpdatedDate>01 Nov 2010</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
@@ -37,6 +37,11 @@
         <Identifier>fmt/281</Identifier>
         <IdentifierType>PUID</IdentifierType>
       </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>4608</ExternalSignatureID>
+        <Signature>tex</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
       <InternalSignature>
         <SignatureID>297</SignatureID>
         <SignatureName>LaTeX (Subdocument)</SignatureName>
