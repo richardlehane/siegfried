@@ -206,9 +206,11 @@ func Join(a, b Parseable) joint {
 func (j joint) IDs() []string {
 	ids := make([]string, len(j.a.IDs()), len(j.a.IDs())+len(j.b.IDs()))
 	copy(ids, j.a.IDs())
-	for _, id := range j.b.IDs() {
+	bIDs := j.b.IDs()
+	aIDs := j.a.IDs()
+	for _, id := range bIDs {
 		var present bool
-		for _, ida := range j.a.IDs() {
+		for _, ida := range aIDs {
 			if id == ida {
 				present = true
 				break
@@ -384,10 +386,11 @@ func (f filtered) MIMEs() ([]string, []string) {
 
 // XMLs returns a signature set with corresponding IDs for the xmlmatcher.
 func (f filtered) XMLs() ([][2]string, []string) {
-	ret, retp := make([][2]string, 0, len(f.IDs())), make([]string, 0, len(f.IDs()))
+	fids := f.IDs()
+	ret, retp := make([][2]string, 0, len(fids)), make([]string, 0, len(fids))
 	e, p := f.p.XMLs()
 	for i, v := range p {
-		for _, w := range f.IDs() {
+		for _, w := range fids {
 			if v == w {
 				ret, retp = append(ret, e[i]), append(retp, v)
 				break
@@ -403,9 +406,10 @@ func (f filtered) Signatures() ([]frames.Signature, []string, error) {
 	if err != nil {
 		return nil, nil, err
 	}
-	ret, retp := make([]frames.Signature, 0, len(f.IDs())), make([]string, 0, len(f.IDs()))
+	fids := f.IDs()
+	ret, retp := make([]frames.Signature, 0, len(fids)), make([]string, 0, len(fids))
 	for i, v := range p {
-		for _, w := range f.IDs() {
+		for _, w := range fids {
 			if v == w {
 				ret, retp = append(ret, s[i]), append(retp, v)
 				break
@@ -420,9 +424,10 @@ func (f filtered) Zips() ([][]string, [][]frames.Signature, []string, error) {
 	if err != nil {
 		return nil, nil, nil, err
 	}
-	nret, sret, iret := make([][]string, 0, len(f.IDs())), make([][]frames.Signature, 0, len(f.IDs())), make([]string, 0, len(f.IDs()))
+	fids := f.IDs()
+	nret, sret, iret := make([][]string, 0, len(fids)), make([][]frames.Signature, 0, len(fids)), make([]string, 0, len(fids))
 	for idx, v := range i {
-		for _, w := range f.IDs() {
+		for _, w := range fids {
 			if v == w {
 				nret, sret, iret = append(nret, n[idx]), append(sret, s[idx]), append(iret, v)
 				break
@@ -437,9 +442,10 @@ func (f filtered) MSCFBs() ([][]string, [][]frames.Signature, []string, error) {
 	if err != nil {
 		return nil, nil, nil, err
 	}
-	nret, sret, iret := make([][]string, 0, len(f.IDs())), make([][]frames.Signature, 0, len(f.IDs())), make([]string, 0, len(f.IDs()))
+	fids := f.IDs()
+	nret, sret, iret := make([][]string, 0, len(fids)), make([][]frames.Signature, 0, len(fids)), make([]string, 0, len(fids))
 	for idx, v := range i {
-		for _, w := range f.IDs() {
+		for _, w := range fids {
 			if v == w {
 				nret, sret, iret = append(nret, n[idx]), append(sret, s[idx]), append(iret, v)
 				break
@@ -450,10 +456,11 @@ func (f filtered) MSCFBs() ([][]string, [][]frames.Signature, []string, error) {
 }
 
 func (f filtered) RIFFs() ([][4]byte, []string) {
-	ret, retp := make([][4]byte, 0, len(f.IDs())), make([]string, 0, len(f.IDs()))
+	fids := f.IDs()
+	ret, retp := make([][4]byte, 0, len(fids)), make([]string, 0, len(fids))
 	r, p := f.p.RIFFs()
 	for i, v := range p {
-		for _, w := range f.IDs() {
+		for _, w := range fids {
 			if v == w {
 				ret, retp = append(ret, r[i]), append(retp, v)
 				break
@@ -465,8 +472,9 @@ func (f filtered) RIFFs() ([][4]byte, []string) {
 
 func (f filtered) Texts() []string {
 	txts := make([]string, 0, len(f.p.Texts()))
+	fids := f.IDs()
 	for _, t := range f.p.Texts() {
-		for _, u := range f.IDs() {
+		for _, u := range fids {
 			if t == u {
 				txts = append(txts, t)
 				break
