@@ -31,7 +31,6 @@ const (
 	pronombof = "Absolute from BOF"
 	pronomeof = "Absolute from EOF"
 	pronomvry = "Variable"
-	droidbof  = "BOFoffset"
 	droideof  = "EOFoffset"
 )
 

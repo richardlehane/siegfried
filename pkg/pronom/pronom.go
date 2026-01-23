@@ -18,6 +18,7 @@ package pronom
 import (
 	"encoding/json"
 	"encoding/xml"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -164,7 +165,7 @@ func newReports(reps []string, idsPuids map[int]string) (*reports, error) {
 		for i, v := range errs {
 			strs[i] = v.Error()
 		}
-		return nil, fmt.Errorf(strings.Join(strs, "\n"))
+		return nil, errors.New(strings.Join(strs, "\n"))
 	}
 	return r, nil
 }
