@@ -1,4 +1,8 @@
 # Change Log
+## v1.11.4 (2026-01-23)
+### Changed 
+- update go version to 1.24.0
+
 ## v1.11.3 (2026-01-23)
 ### Added
 - Roy speed-up by avoiding function calls in loops. Fixes #148. Implemented by [Ross Spencer](https://github.com/richardlehane/siegfried/commit/12a2dd5cc3742e934222345ca5531336dd095965)
