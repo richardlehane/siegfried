@@ -17,9 +17,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
       - name: Install latest version of go
-        uses: actions/setup-go@v5
-        with:
-          go-version: 1.x
+        uses: actions/setup-go@v6
       - name: Make sf and roy binaries
         run: |
           go install github.com/richardlehane/siegfried/cmd/sf
@@ -60,9 +58,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
       - name: Install latest version of go
-        uses: actions/setup-go@v5
-        with:
-          go-version: 1.x
+        uses: actions/setup-go@v6
       - name: Make sf and roy binaries
         run: |
           go install github.com/richardlehane/siegfried/cmd/sf
@@ -89,9 +85,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
       - name: Install latest version of go
-        uses: actions/setup-go@v5
-        with:
-          go-version: 1.x
+        uses: actions/setup-go@v6
       - name: Make sf and roy binaries
         run: |
           go install github.com/richardlehane/siegfried/cmd/sf
@@ -125,9 +119,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
       - name: Install latest version of go
-        uses: actions/setup-go@v5
-        with:
-          go-version: '1.20'
+        uses: actions/setup-go@v6
       - name: Make sf and roy binaries
         run: |
           go install github.com/richardlehane/siegfried/cmd/sf
@@ -151,9 +143,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
       - name: Install latest version of go
-        uses: actions/setup-go@v5
-        with:
-          go-version: 1.x
+        uses: actions/setup-go@v6
       - name: Make sf.wasm
         run: |
           GOOS=js GOARCH=wasm go build -o wasm/example/sf.wasm github.com/richardlehane/siegfried/wasm

@@ -14,9 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install latest version of go
-        uses: actions/setup-go@v5
-        with:
-          go-version: 1.x
+        uses: actions/setup-go@v6
       - name: Check out repository code
         uses: actions/checkout@v4
         with:
