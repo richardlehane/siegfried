@@ -91,6 +91,9 @@ func characterise(m []string) ([]string, []string, []int, []int, error) {
 	hx, ascii := []string{}, []string{}
 	hxx, asciix := []int{}, []int{}
 	for _, v := range m {
+		if strings.Count(v, "(") > 1 { // special case fdd000648
+			continue
+		}
 		v = strings.Replace(v, " (ASCII: \"1↵00:\")", "", 1)
 		tokens := strings.SplitN(v, ": ", 2)
 		switch len(tokens) {

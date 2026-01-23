@@ -19,7 +19,7 @@ import (
 	"encoding/hex"
 	"encoding/xml"
 	"errors"
-	"io/ioutil"
+	"os"
 	"regexp"
 	"strconv"
 	"strings"
@@ -42,7 +42,7 @@ type mimeinfo struct {
 }
 
 func newMIMEInfo(path string) (identifier.Parseable, error) {
-	buf, err := ioutil.ReadFile(path)
+	buf, err := os.ReadFile(path)
 	if err != nil {
 		return nil, err
 	}
@@ -52,15 +52,23 @@ func newMIMEInfo(path string) (identifier.Parseable, error) {
 		return nil, err
 	}
 	index := make(map[string]int)
-	errs := []string{}
 	for i, v := range mi.MIMETypes {
 		if _, ok := index[v.MIME]; ok {
-			errs = append(errs, v.MIME)
+			continue // if there are duplicates, keep the first and ignore the second
 		}
 		index[v.MIME] = i
 	}
-	if len(errs) > 0 {
-		return nil, errors.New("Can't parse mimeinfo file, duplicated IDs: " + strings.Join(errs, ", "))
+	// prune any duplicates
+	if (len(index)) > len(mi.MIMETypes) {
+		n := make([]mappings.MIMEType, 0, len(index))
+		for _, v := range index {
+			n = append(n, mi.MIMETypes[v])
+		}
+		clear(index)
+		mi.MIMETypes = n
+		for i, v := range mi.MIMETypes {
+			index[v.MIME] = i
+		}
 	}
 	for i, v := range mi.MIMETypes {
 		if len(v.SuperiorClasses) == 1 && v.SuperiorClasses[0].SubClassOf != config.TextMIME() { // subclasses of text/plain shouldn't inherit text magic

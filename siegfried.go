@@ -37,6 +37,7 @@ package siegfried
 import (
 	"bytes"
 	"compress/flate"
+	"errors"
 	"fmt"
 	"io"
 	"os"
@@ -217,13 +218,13 @@ func LoadReader(r io.Reader) (*Siegfried, error) {
 		return nil, err
 	}
 	if len(fbuf) < len(config.Magic())+2 {
-		return nil, fmt.Errorf(errNotSig)
+		return nil, errors.New(errNotSig)
 	}
 	if string(fbuf[:len(config.Magic())]) != string(config.Magic()) {
-		return nil, fmt.Errorf(errNotSig)
+		return nil, errors.New(errNotSig)
 	}
 	if major, minor := fbuf[len(config.Magic())], fbuf[len(config.Magic())+1]; major < byte(config.Version()[0]) || (major == byte(config.Version()[0]) && minor < byte(config.Version()[1])) {
-		return nil, fmt.Errorf(errUpdateSig)
+		return nil, errors.New(errUpdateSig)
 	}
 	rb := bytes.NewBuffer(fbuf[len(config.Magic())+2:])
 	rc := flate.NewReader(rb)

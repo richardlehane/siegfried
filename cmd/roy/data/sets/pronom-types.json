@@ -116,7 +116,16 @@
     "fmt/1914 (Graphisoft BIMx Hyper-Model)",
     "fmt/1955 (Graphisoft Archicad Project 6-9)",
     "fmt/1967 (Solidworks Design Document Files 2015+)",
-    "fmt/2015 (KryoFlux Stream 3)"
+    "fmt/2015 (KryoFlux Stream 3)",
+    "fmt/2041 (Android Package File)",
+    "fmt/2042 (Android App Bundle File)",
+    "fmt/2043 (Android Archive File)",
+    "fmt/2063 (DaVinci Resolve Timeline File 9+)",
+    "fmt/2064 (DaVinci Resolve Project File 9+)",
+    "fmt/2068 (Macintosh File System)",
+    "fmt/2075 (ACE 1)",
+    "fmt/2076 (ACE 2)",
+    "fmt/2086 (FieldWorks Language Explorer FWBackup)"
   ],
   "audio": [
     "x-fmt/135 (Audio Interchange File Format 1.3)",
@@ -257,7 +266,8 @@
     "fmt/2034 (Daisy Talking Book Resource File 3)",
     "fmt/2035 (Plextalk Project File (imph))",
     "fmt/2036 (Plextalk Project File (imdn))",
-    "fmt/2037 (Plextalk Project File (imtt))"
+    "fmt/2037 (Plextalk Project File (imtt))",
+    "fmt/2056 (Immersive Audio Model Format)"
   ],
   "database": [
     "x-fmt/6 (FoxPro Database 2.0)",
@@ -395,7 +405,8 @@
     "fmt/2020 (askSam Document for Windows 1)",
     "fmt/2021 (askSam Document for Windows 2-3)",
     "fmt/2022 (askSam Document for Windows 4-7)",
-    "fmt/2024 (CD Architect Project File 4)"
+    "fmt/2024 (CD Architect Project File 4)",
+    "fmt/2047 (OpenDocument Database 1.4)"
   ],
   "dataset": [
     "x-fmt/13 (Tab-separated Values)",
@@ -579,7 +590,10 @@
     "fmt/2004 (Husqvarna-Viking Designer 1 Stitch File)",
     "fmt/2013 (RawACF)",
     "fmt/2014 (Axon Binary Format)",
-    "fmt/2025 (CD Architect Project File 5)"
+    "fmt/2025 (CD Architect Project File 5)",
+    "fmt/2067 (XYZ Coordinate Data)",
+    "fmt/2070 (Autodesk ReCap RCS Indexed Point Cloud Data)",
+    "fmt/2074 (MRtrix File Format)"
   ],
   "email": [
     "x-fmt/430 (Microsoft Outlook Email Message 97-2003)",
@@ -647,7 +661,10 @@
     "fmt/1771 (ESRI Persistent Auxiliary Metadata File)",
     "fmt/1868 (Leapfrog Geo 3D Scene Format)",
     "fmt/1935 (S-57 Electronic Navigational Chart 3.1)",
-    "fmt/1936 (PCRaster)"
+    "fmt/1936 (PCRaster)",
+    "fmt/2040 (CityGML File 1.0)",
+    "fmt/2049 (ArcGIS Pro Layer File)",
+    "fmt/2070 (Autodesk ReCap RCS Indexed Point Cloud Data)"
   ],
   "imageRaster": [
     "x-fmt/25 (OS/2 Bitmap 1.0)",
@@ -941,7 +958,11 @@
     "fmt/1958 (Melco OFM Project 11)",
     "fmt/1959 (Melco OFM Project pre v.11)",
     "fmt/1964 (JPH (JPEG 2000 part 15))",
-    "fmt/1995 (WinFax Fax Image)"
+    "fmt/1995 (WinFax Fax Image)",
+    "fmt/2051 (Cineon)",
+    "fmt/2062 (AV1 Image File Format)",
+    "fmt/2090 (Kodak DCS RAW Image)",
+    "fmt/2091 (Kodak DCS RAW Image 3)"
   ],
   "imageVector": [
     "x-fmt/20 (Adobe Illustrator 1.0 / 1.1)",
@@ -1169,7 +1190,8 @@
     "fmt/1932 (CorelDraw Drawing 2021)",
     "fmt/1933 (CorelDraw Drawing 2022)",
     "fmt/1934 (CorelDraw Drawing 2023)",
-    "fmt/1946 (Draw.io Diagram (XML) File)"
+    "fmt/1946 (Draw.io Diagram (XML) File)",
+    "fmt/2048 (OpenDocument Graphics 1.4)"
   ],
   "model": [
     "x-fmt/19 (3D Studio)",
@@ -1231,7 +1253,7 @@
     "fmt/989 (ESRI ArcGlobe Document)",
     "fmt/1009 (FBX (Filmbox) Binary)",
     "fmt/1010 (FBX (Filmbox) Text)",
-    "fmt/1046 (Draco File Format)",
+    "fmt/1046 (Draco 1)",
     "fmt/1049 (QuickDraw 3D Metafile (ASCII))",
     "fmt/1050 (QuickDraw 3D Metafile (Binary) 1)",
     "fmt/1093 (Alias Scene Description Language)",
@@ -1306,7 +1328,13 @@
     "fmt/2010 (Visualization Toolkit 1.0)",
     "fmt/2011 (Visualization Toolkit 2.0)",
     "fmt/2012 (Visualization Toolkit 4.2)",
-    "fmt/2016 (Binvox 1)"
+    "fmt/2016 (Binvox 1)",
+    "fmt/2069 (Draco 2)",
+    "fmt/2070 (Autodesk ReCap RCS Indexed Point Cloud Data)",
+    "fmt/2073 (Tilt Brush)",
+    "fmt/2082 (3DM 6 6)",
+    "fmt/2083 (3DM 7 7)",
+    "fmt/2084 (3DM 8 8)"
   ],
   "pageDescription": [
     "fmt/122 (Encapsulated PostScript File Format 1.2)",
@@ -1356,7 +1384,9 @@
     "fmt/1911 (Acrobat PDF/A - Portable Document Format 4e)",
     "fmt/1912 (Acrobat PDF/A - Portable Document Format 4f)",
     "fmt/1937 (Amazon Kindle eBook File)",
-    "fmt/1952 (PechaMaker Format)"
+    "fmt/1952 (PechaMaker Format)",
+    "fmt/2050 (PDF/UA Portable Document Format 1)",
+    "fmt/2052 (PDF/UA Portable Document Format 2)"
   ],
   "presentation": [
     "x-fmt/32 (Harvard Graphics Chart 3.0)",
@@ -1538,7 +1568,16 @@
     "fmt/2008 (QuarkXPress Project 20)",
     "fmt/2031 (HxC Floppy Emulator Disk Image)",
     "fmt/2038 (HxC Floppy Emulator Disk Image 3)",
-    "fmt/2039 (HxC Floppy Emulator Stream Image)"
+    "fmt/2039 (HxC Floppy Emulator Stream Image)",
+    "fmt/2046 (OpenDocument Presentation 1.4)",
+    "fmt/2057 (A2R Disk Image File 2)",
+    "fmt/2058 (A2R Disk Image File 3)",
+    "fmt/2059 (WOZ Disk Image File 1)",
+    "fmt/2060 (WOZ Disk Image File 2)",
+    "fmt/2061 (MOOF Disk Image File 1)",
+    "fmt/2077 (Common Ground Digital Paper 1)",
+    "fmt/2078 (Common Ground Digital Paper 3)",
+    "fmt/2079 (Common Ground Digital Paper 4)"
   ],
   "spreadsheet": [
     "x-fmt/17 (Microsoft Excel Template 97-2003)",
@@ -1566,7 +1605,7 @@
     "fmt/57 (Microsoft Excel 4.0 Worksheet (xls) 4S)",
     "fmt/58 (Microsoft Excel 4.0 Workbook (xls) 4W)",
     "fmt/59 (Microsoft Excel 5.0/95 Workbook (xls) 5/95)",
-    "fmt/61 (Microsoft Excel 97 Workbook (xls) 8)",
+    "fmt/61 (Microsoft Excel 97-2003 Workbook (xls) 8 \u0026 8X)",
     "fmt/62 (Microsoft Excel 2000-2003 Workbook (xls) 8X)",
     "fmt/129 (OpenOffice Calc 1.0)",
     "x-fmt/404 (StarOffice Calc 5.2)",
@@ -1617,7 +1656,8 @@
     "fmt/1828 (XLSX Strict OOXML Spreadsheet 2007 onwards)",
     "fmt/1858 (Microsoft Excel Workspace File 5/95)",
     "fmt/1861 (Quicken 3 Database File 3)",
-    "fmt/1970 (MOXCEL)"
+    "fmt/1970 (MOXCEL)",
+    "fmt/2045 (OpenDocument Spreadsheet 1.4)"
   ],
   "textMarkup": [
     "x-fmt/195 (Standard Generalized Markup Language)",
@@ -1723,7 +1763,14 @@
     "fmt/1997 (IMF Package Asset Map)",
     "fmt/1998 (IMF Package Packing List)",
     "fmt/1999 (IMF Package Composition Playlist)",
-    "fmt/2017 (GraphPad Prism 5-9)"
+    "fmt/2017 (GraphPad Prism 5-9)",
+    "fmt/2040 (CityGML File 1.0)",
+    "fmt/2065 (TOML)",
+    "fmt/2080 (xdomea 3.1.0)",
+    "fmt/2081 (xdomea 4.0.0)",
+    "fmt/2085 (FieldWorks Language Explorer FWData XML)",
+    "fmt/2088 (Final Cut Pro XML Interchange Format)",
+    "fmt/2089 (FCPXML Interchange Format)"
   ],
   "textStructured": [
     "x-fmt/41 (Data Interchange Format)",
@@ -1845,7 +1892,7 @@
     "fmt/1627 (Z Print Build File)",
     "fmt/1646 (Roxio Label Creator Project File 8-11)",
     "fmt/1647 (Inspiration Software File)",
-    "fmt/1649 (AGS 4 Data Format 4.0, 4.1)",
+    "fmt/1649 (AGS 4 Data Format 4.0- 4.1)",
     "fmt/1656 (Microsoft Help Contents File)",
     "fmt/1663 (YAODL (Yet Another Object Description Language) File)",
     "fmt/1665 (Easy CD Creator Layout | Roxio Easy CD Creator Layout 5-6)",
@@ -1893,7 +1940,12 @@
     "fmt/2026 (Codebook Exchange Format)",
     "fmt/2027 (Microsoft Project 1)",
     "fmt/2029 (Apache Avro)",
-    "fmt/2030 (Apache ORC V0 and V1)"
+    "fmt/2030 (Apache ORC V0 and V1)",
+    "fmt/2053 (Apache Arrow IPC Format)",
+    "fmt/2054 (JSON Lines Text Format)",
+    "fmt/2055 (Apple Mail EMLX Format)",
+    "fmt/2066 (Rust Source File)",
+    "fmt/2072 (Weaving Information File (WIF) 1.1)"
   ],
   "textUnstructured": [
     "x-fmt/14 (Macintosh Text File)",
@@ -1986,7 +2038,8 @@
     "fmt/1886 (Resource Interchange File Format (RIFF))",
     "fmt/1893 (Microsoft Agent File)",
     "fmt/1901 (SGI Movie File)",
-    "fmt/1938 (Lotus Screencam Data File 3.0-3.1)"
+    "fmt/1938 (Lotus Screencam Data File 3.0-3.1)",
+    "fmt/2087 (Final Cut Pro Project File)"
   ],
   "wordProcessor": [
     "x-fmt/1 (Microsoft Word for Macintosh Document 3.0)",
@@ -2028,7 +2081,7 @@
     "x-fmt/287 (DEC WPS Plus Document)",
     "x-fmt/288 (IBM DisplayWrite Document 2)",
     "x-fmt/289 (IBM DisplayWrite Document 3)",
-    "x-fmt/302 (Visualization Toolkit 8.0)",
+    "x-fmt/302 (Adobe Framemaker Document 8.0)",
     "x-fmt/309 (ChiWriter Document 3)",
     "x-fmt/329 (Interleaf Document)",
     "x-fmt/330 (JustWrite Text Document)",
@@ -2174,6 +2227,7 @@
     "fmt/1889 (Open Access III Document III)",
     "fmt/1909 (TibetDoc Word Document)",
     "fmt/1965 (Papyrus Document)",
-    "fmt/1966 (Final Writer Document)"
+    "fmt/1966 (Final Writer Document)",
+    "fmt/2044 (OpenDocument Text 1.4)"
   ]
 }

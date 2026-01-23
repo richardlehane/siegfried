@@ -9,7 +9,7 @@
 
 ### Version
 
-1.11.2
+1.11.3
 
 [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -97,6 +97,15 @@ Or, for the most recent updates, you can install from this fork:
     makepkg -si
 
 ## Changes
+### v1.11.3 (2026-01-23)
+### Added
+- Roy speed-up by avoiding function calls in loops. Fixes #148. Implemented by [Ross Spencer](https://github.com/richardlehane/siegfried/commit/12a2dd5cc3742e934222345ca5531336dd095965)
+
+### Changed
+- update PRONOM to v122
+- update LOC to 2025-12-09
+- update TIKA to v3.2.3
+
 ### v1.11.2 (2025-03-01)
 ### Added
 - Filter introduced to improve Wikidata queries and `-harvestWikidataSigLen` flag sets minimum length of Wikidata signatures. Implemented by [Ross Spencer and Andy Jackson](https://github.com/richardlehane/siegfried/pull/253) 
