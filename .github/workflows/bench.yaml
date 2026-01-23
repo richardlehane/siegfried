@@ -13,14 +13,14 @@ jobs:
   bench:
     runs-on: ubuntu-latest
     steps:
-      - name: Install latest version of go
-        uses: actions/setup-go@v6
-        with:
-          go-version-file: 'go.mod'
       - name: Check out repository code
         uses: actions/checkout@v4
         with:
           repository: richardlehane/provisioner
+      - name: Install latest version of go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: 'go.mod'
       - name: Install provisioner  
         run: go install github.com/richardlehane/provisioner
       - name: Provision develop
