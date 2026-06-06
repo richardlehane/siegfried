@@ -59,7 +59,7 @@ func newMIMEInfo(path string) (identifier.Parseable, error) {
 		index[v.MIME] = i
 	}
 	// prune any duplicates
-	if (len(index)) > len(mi.MIMETypes) {
+	if (len(index)) != len(mi.MIMETypes) {
 		n := make([]mappings.MIMEType, 0, len(index))
 		for _, v := range index {
 			n = append(n, mi.MIMETypes[v])
