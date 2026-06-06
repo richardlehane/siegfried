@@ -1,6 +1,6 @@
 module github.com/richardlehane/siegfried
 
-go 1.24.0
+go 1.25.0
 
 require (
 	github.com/richardlehane/characterize v1.0.0
@@ -9,12 +9,12 @@ require (
 	github.com/richardlehane/webarchive v1.0.3
 	github.com/richardlehane/xmldetect v1.0.2
 	github.com/ross-spencer/wikiprov v1.0.0
-	golang.org/x/image v0.35.0
-	golang.org/x/sys v0.40.0
+	golang.org/x/image v0.41.0
+	golang.org/x/sys v0.45.0
 )
 
 require (
 	github.com/richardlehane/msoleps v1.0.6 // indirect
 	github.com/ross-spencer/spargo v0.4.1 // indirect
-	golang.org/x/text v0.33.0 // indirect
+	golang.org/x/text v0.37.0 // indirect
 )
