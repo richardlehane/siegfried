@@ -15,7 +15,7 @@ jobs:
       version: ${{ env.VERS }}
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Install latest version of go
         uses: actions/setup-go@v6
         with:
@@ -58,7 +58,7 @@ jobs:
       VERSION: ${{needs.buildDeb.outputs.version}}
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Install latest version of go
         uses: actions/setup-go@v6
         with:
@@ -87,7 +87,7 @@ jobs:
       VERSION: ${{needs.buildDeb.outputs.version}}
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Install latest version of go
         uses: actions/setup-go@v6
         with:
@@ -123,7 +123,7 @@ jobs:
       VERSION: ${{needs.buildDeb.outputs.version}}
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Install latest version of go
         uses: actions/setup-go@v6
         with:
@@ -149,7 +149,7 @@ jobs:
       VERSION: ${{needs.buildDeb.outputs.version}}
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Install latest version of go
         uses: actions/setup-go@v6
         with:
@@ -177,7 +177,7 @@ jobs:
           pattern: release-artifacts-*
           merge-multiple: true
       - name: Create release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           name: Version ${{ env.VERSION }}
           prerelease: ${{ contains(github.ref, 'rc') }}

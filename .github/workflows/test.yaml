@@ -18,7 +18,7 @@ jobs:
         go: [ '1.x', '1.25']
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Install latest version of go
         uses: actions/setup-go@v6
         with:
