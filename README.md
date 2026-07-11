@@ -106,8 +106,8 @@ Or, for the most recent updates, you can install from this fork:
 - update go version to 1.25.0
 
 ### Fixed
-- bug with mimeinfo signature generation. Reported by Hugh Williams (#287)[https://github.com/richardlehane/siegfried/issues/287]
-- wasm_exec.js updated. Report by Trevor Munoz (#287)[https://github.com/richardlehane/siegfried/issues/286]
+- bug with mimeinfo signature generation. Reported by Hugh Williams [#287](https://github.com/richardlehane/siegfried/issues/287)
+- wasm_exec.js updated. Reported by Trevor Munoz [#287](https://github.com/richardlehane/siegfried/issues/286)
 
 ### v1.11.4 (2026-01-23)
 ### Changed 
