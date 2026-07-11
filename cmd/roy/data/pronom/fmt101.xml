@@ -316,6 +316,13 @@
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1679</RelatedFormatID>
+        <RelatedFormatName>RDF/XML</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1694</RelatedFormatID>
         <RelatedFormatName>AbiWord Document</RelatedFormatName>
         <RelatedFormatVersion>
@@ -800,6 +807,19 @@
         <RelatedFormatID>3955</RelatedFormatID>
         <RelatedFormatName>xdomea</RelatedFormatName>
         <RelatedFormatVersion>3.1.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>3956</RelatedFormatID>
+        <RelatedFormatName>xdomea</RelatedFormatName>
+        <RelatedFormatVersion>4.0.0</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>3960</RelatedFormatID>
+        <RelatedFormatName>FieldWorks Language Explorer FWData XML</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>

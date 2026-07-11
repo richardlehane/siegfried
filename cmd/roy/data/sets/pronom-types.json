@@ -267,7 +267,8 @@
     "fmt/2035 (Plextalk Project File (imph))",
     "fmt/2036 (Plextalk Project File (imdn))",
     "fmt/2037 (Plextalk Project File (imtt))",
-    "fmt/2056 (Immersive Audio Model Format)"
+    "fmt/2056 (Immersive Audio Model Format)",
+    "fmt/2094 (M4A Audio)"
   ],
   "database": [
     "x-fmt/6 (FoxPro Database 2.0)",
@@ -593,7 +594,13 @@
     "fmt/2025 (CD Architect Project File 5)",
     "fmt/2067 (XYZ Coordinate Data)",
     "fmt/2070 (Autodesk ReCap RCS Indexed Point Cloud Data)",
-    "fmt/2074 (MRtrix File Format)"
+    "fmt/2074 (MRtrix File Format)",
+    "fmt/2093 (ROS Bag Format 2.0)",
+    "fmt/2096 (GGML Universal File (GGUF) 1)",
+    "fmt/2097 (GGML Universal File (GGUF) 2)",
+    "fmt/2098 (GGML Universal File (GGUF) 3)",
+    "fmt/2101 (ChemStation Gas Chromatography/Mass Spectrum (GC/MS) Data File 2)",
+    "fmt/2102 (BioSemi Data Format)"
   ],
   "email": [
     "x-fmt/430 (Microsoft Outlook Email Message 97-2003)",
@@ -962,7 +969,8 @@
     "fmt/2051 (Cineon)",
     "fmt/2062 (AV1 Image File Format)",
     "fmt/2090 (Kodak DCS RAW Image)",
-    "fmt/2091 (Kodak DCS RAW Image 3)"
+    "fmt/2091 (Kodak DCS RAW Image 3)",
+    "fmt/2095 (Hasselblad FFF Raw Image)"
   ],
   "imageVector": [
     "x-fmt/20 (Adobe Illustrator 1.0 / 1.1)",
@@ -1334,7 +1342,8 @@
     "fmt/2073 (Tilt Brush)",
     "fmt/2082 (3DM 6 6)",
     "fmt/2083 (3DM 7 7)",
-    "fmt/2084 (3DM 8 8)"
+    "fmt/2084 (3DM 8 8)",
+    "fmt/2100 (Visualization Toolkit 4.0)"
   ],
   "pageDescription": [
     "fmt/122 (Encapsulated PostScript File Format 1.2)",
@@ -1770,7 +1779,8 @@
     "fmt/2081 (xdomea 4.0.0)",
     "fmt/2085 (FieldWorks Language Explorer FWData XML)",
     "fmt/2088 (Final Cut Pro XML Interchange Format)",
-    "fmt/2089 (FCPXML Interchange Format)"
+    "fmt/2089 (FCPXML Interchange Format)",
+    "fmt/2092 (Canadian Avalanche Association MarkUp Language 6.0.3)"
   ],
   "textStructured": [
     "x-fmt/41 (Data Interchange Format)",
@@ -1945,7 +1955,8 @@
     "fmt/2054 (JSON Lines Text Format)",
     "fmt/2055 (Apple Mail EMLX Format)",
     "fmt/2066 (Rust Source File)",
-    "fmt/2072 (Weaving Information File (WIF) 1.1)"
+    "fmt/2072 (Weaving Information File (WIF) 1.1)",
+    "fmt/2099 (iZotope RX Document)"
   ],
   "textUnstructured": [
     "x-fmt/14 (Macintosh Text File)",

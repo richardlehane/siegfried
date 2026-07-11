@@ -20,8 +20,7 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>11 Mar 2005</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
+      <ProvenanceDescription>v.123- New extension added of .xhtml. Submitted by the Digital Preservation Coalition.</ProvenanceDescription>
       <LastUpdatedDate>14 Sep 2018</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
@@ -84,6 +83,11 @@
       <ExternalSignature>
         <ExternalSignatureID>631</ExternalSignatureID>
         <Signature>html</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>4633</ExternalSignatureID>
+        <Signature>xhtml</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <InternalSignature>

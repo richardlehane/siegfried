@@ -61,6 +61,19 @@
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>3967</RelatedFormatID>
+        <RelatedFormatName>Kodak DCS RAW Image</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>3968</RelatedFormatID>
+        <RelatedFormatName>Kodak DCS RAW Image</RelatedFormatName>
+        <RelatedFormatVersion>3</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>1099</RelatedFormatID>
         <RelatedFormatName>Tagged Image File Format</RelatedFormatName>

@@ -2543,6 +2543,19 @@
     "fmt/2088 (Final Cut Pro XML Interchange Format)",
     "fmt/2089 (FCPXML Interchange Format)",
     "fmt/2090 (Kodak DCS RAW Image)",
-    "fmt/2091 (Kodak DCS RAW Image 3)"
+    "fmt/2091 (Kodak DCS RAW Image 3)",
+    "fmt/2092 (Canadian Avalanche Association MarkUp Language 6.0.3)",
+    "fmt/2093 (ROS Bag Format 2.0)",
+    "fmt/2094 (M4A Audio)",
+    "fmt/2095 (Hasselblad FFF Raw Image)",
+    "fmt/2096 (GGML Universal File (GGUF) 1)",
+    "fmt/2097 (GGML Universal File (GGUF) 2)",
+    "fmt/2098 (GGML Universal File (GGUF) 3)",
+    "fmt/2099 (iZotope RX Document)",
+    "fmt/2100 (Visualization Toolkit 4.0)",
+    "fmt/2101 (ChemStation Gas Chromatography/Mass Spectrum (GC/MS) Data File 2)",
+    "fmt/2102 (BioSemi Data Format)",
+    "fmt/2103 (Discus Project 2-3)",
+    "fmt/2104 (Discus Project File 4)"
   ]
 }

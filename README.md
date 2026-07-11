@@ -9,7 +9,7 @@
 
 ### Version
 
-1.11.4
+1.11.5
 
 [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -60,10 +60,13 @@ By default, siegfried uses the latest PRONOM signatures without buffer limits (i
 ## Install
 ### With go installed: 
 
-    go install github.com/richardlehane/siegfried/cmd/sf@latest
+If you haven't installed go, you can [follow these instructions](https://go.dev/doc/install).
+Make sure to complete the step that puts the go/bin folder into your PATH e.g. with `echo 'export PATH="$PATH:$(go env GOPATH)/bin"' >> ~/.bashrc && source ~/.bashrc`
 
-    sf -update
+Then:
 
+    go install github.com/richardlehane/siegfried/cmd/sf@latest // installs siegfried
+    sf -update // downloads latest signatures
 
 ### Or, without go installed:
 #### Win:
@@ -97,6 +100,15 @@ Or, for the most recent updates, you can install from this fork:
     makepkg -si
 
 ## Changes
+### v1.11.5 (2026-07-11)
+### Changed 
+- update PRONOM to v124
+- update go version to 1.25.0
+
+### Fixed
+- bug with mimeinfo signature generation. Reported by Hugh Williams (#287)[https://github.com/richardlehane/siegfried/issues/287]
+- wasm_exec.js updated. Report by Trevor Munoz (#287)[https://github.com/richardlehane/siegfried/issues/286]
+
 ### v1.11.4 (2026-01-23)
 ### Changed 
 - update go version to 1.24.0

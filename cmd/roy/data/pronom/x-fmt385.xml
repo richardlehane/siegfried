@@ -23,9 +23,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>11 Mar 2005</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>07 Jul 2014</LastUpdatedDate>
+      <ProvenanceDescription>v.123- Priority added over fmt/134 MPEG 1/2 Audio Layer 3. Submitted by Digital Preservation Department, The National Archives (UK)</ProvenanceDescription>
+      <LastUpdatedDate>09 Jun 2026</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -83,6 +82,13 @@
         <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>1207</RelatedFormatID>
         <RelatedFormatName>Video Object File (MPEG-2 subset)</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>687</RelatedFormatID>
+        <RelatedFormatName>MPEG 1/2 Audio Layer 3</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

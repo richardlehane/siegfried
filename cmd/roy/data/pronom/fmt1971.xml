@@ -24,9 +24,8 @@
       <ProvenanceSourceID>299</ProvenanceSourceID>
       <ProvenanceName>Brigham Young University / Brigham Young University</ProvenanceName>
       <ProvenanceSourceDate>16 Apr 2024</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>16 Apr 2024</LastUpdatedDate>
+      <ProvenanceDescription>v.123- Signature updated to allow for different PC versions. Submitted by Brigham Young University.</ProvenanceDescription>
+      <LastUpdatedDate>09 Jun 2026</LastUpdatedDate>
       <FormatNote>https://preservation.tylerthorsted.com/tag/font/
 https://web.archive.org/web/19990203113959/http://www.codamusic.com:80/down/finale/eeppd.txt
 https://en.wikipedia.org/wiki/Finale_(scorewriter)
@@ -59,7 +58,7 @@ http://fileformats.archiveteam.org/wiki/Finale</FormatNote>
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>46696E616C65(AA|28544D29)2031</ByteSequenceValue>
+          <ByteSequenceValue>46696E616C65(AA|28544D29)(20|20504320)31</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>

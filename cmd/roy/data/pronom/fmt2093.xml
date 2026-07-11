@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>3970</FormatID>
+      <FormatName>ROS Bag Format</FormatName>
+      <FormatVersion>2.0</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Dataset</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The ROS (Robotic Operating System) bag format stores timestamped ROS messages for visualization, offline analysis, and playback. The messages describe data values in a structured way to facilitate retrieval. The data is stored in a chunked structure and indexed.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>349</ProvenanceSourceID>
+      <ProvenanceName>Digital Research Alliance of Canada - FRDR / Alliance de recherche numérique du Canada – DFDR</ProvenanceName>
+      <ProvenanceSourceDate>12 Feb 2026</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>12 Feb 2026</LastUpdatedDate>
+      <FormatNote>https://www.openrobotics.org/
+https://wiki.ros.org/</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/2093</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>4636</ExternalSignatureID>
+        <Signature>bag</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>3458</SignatureID>
+        <SignatureName>ROS Bag v.2</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: #ROSBAG V2.0</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>3852</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>23524F534241472056322E30</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

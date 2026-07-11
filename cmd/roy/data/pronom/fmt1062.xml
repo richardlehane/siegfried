@@ -107,6 +107,13 @@ BOF; Offset: 1-2048; Magic Bytes: 0x000500040001</SignatureNote>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Is subsequent version of</RelationshipType>
+        <RelatedFormatID>3972</RelatedFormatID>
+        <RelatedFormatName>Hasselblad FFF Raw Image</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

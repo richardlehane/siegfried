@@ -87,6 +87,13 @@ EOF offset 0-16: &lt;/ncx&gt;</SignatureNote>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1388</RelatedFormatID>
+        <RelatedFormatName>Apple Lossless Audio Codec</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>638</RelatedFormatID>
         <RelatedFormatName>Extensible Markup Language</RelatedFormatName>

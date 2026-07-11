@@ -25,7 +25,7 @@
       <ProvenanceSourceID>244</ProvenanceSourceID>
       <ProvenanceName>Preservica / Preservica</ProvenanceName>
       <ProvenanceSourceDate>02 Dec 2025</ProvenanceSourceDate>
-      <ProvenanceDescription>v.122: new signature. Submitted by Preservica, with data provided by the Endangered Language Archives.</ProvenanceDescription>
+      <ProvenanceDescription>v.122: new signature. Submitted by Preservica, with data provided by the Endangered Language Archives; v.123: priority added over fmt/101 Extensible Markup Language 1.0. Submitted by Preservica.</ProvenanceDescription>
       <LastUpdatedDate>02 Dec 2025</LastUpdatedDate>
       <FormatNote>Source: https://software.sil.org/fieldworks/wp-content/uploads/sites/38/2016/10/FieldWorks-7-XML-model.pdf</FormatNote>
       <FormatRisk>
@@ -59,6 +59,12 @@
           <ByteSequenceValue>3C3F786D6C2076657273696F6E3D22312E302220656E636F64696E673D227574662D38223F3E(0D|0A|0D0A)3C6C616E677561676570726F6A6563742076657273696F6E3D</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>638</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

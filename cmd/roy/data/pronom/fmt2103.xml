@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>3980</FormatID>
+      <FormatName>Discus Project</FormatName>
+      <FormatVersion>2-3</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>
+      </FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>Discus was label software developed by Magic Mouse Productions. Development stopped after version 4 at the same time Aplle stopped supporting 32-bit software. Discus was releasedas standalone software with 1000's of label options.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>299</ProvenanceSourceID>
+      <ProvenanceName>Brigham Young University / Brigham Young University</ProvenanceName>
+      <ProvenanceSourceDate>09 Jun 2026</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>09 Jun 2026</LastUpdatedDate>
+      <FormatNote>http:/fileformats.archiveteam.org/wiki/Discus</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/2103</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>4647</ExternalSignatureID>
+        <Signature>cdl</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>3469</SignatureID>
+        <SignatureName>Discus Project 2-3</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 0xCDCD(00|20) followed by '.CANV'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>3863</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>CDCD(00|20)0743414E56</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

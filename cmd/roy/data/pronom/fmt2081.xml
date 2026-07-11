@@ -24,8 +24,8 @@
       <ProvenanceSourceID>232</ProvenanceSourceID>
       <ProvenanceName>Landesarchiv Nordrhein-Westfalen / Landesarchiv Nordrhein-Westfalen</ProvenanceName>
       <ProvenanceSourceDate>02 Dec 2025</ProvenanceSourceDate>
-      <ProvenanceDescription>v.122: new signature. Submitted by Landesarchiv Nordrhein-Westfalen.</ProvenanceDescription>
-      <LastUpdatedDate>02 Dec 2025</LastUpdatedDate>
+      <ProvenanceDescription>v.122: new signature. Submitted by Landesarchiv Nordrhein-Westfalen; v.123: Priority over field changed from fmt/102 Extensible Hypertext Markup Language 1.0 to fmt/101 Extensible markup Language 1.0. Submitted by Preservica.</ProvenanceDescription>
+      <LastUpdatedDate>09 Jun 2026</LastUpdatedDate>
       <FormatNote>Specification: https://www.xrepository.de/api/xrepository/urn:xoev-de:xdomea:kosit:standard:xdomea_4.0.0:dokument:Spezifikation_zu_xdomea_4.0.0
 Schema files: https://www.xrepository.de/api/xrepository/urn:xoev-de:xdomea:kosit:standard:xdomea_4.0.0:xmlschema
 Example file: https://github.com/lavnrw/xdomea-examples/blob/main/v4.0.0/518c7c31-d1a0-11ef-accb-005056871b7c_0503_1.xml
@@ -63,8 +63,8 @@ PRONOM submission: https://github.com/digital-preservation/PRONOM_Research/issue
       </InternalSignature>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
-        <RelatedFormatID>643</RelatedFormatID>
-        <RelatedFormatName>Extensible Hypertext Markup Language</RelatedFormatName>
+        <RelatedFormatID>638</RelatedFormatID>
+        <RelatedFormatName>Extensible Markup Language</RelatedFormatName>
         <RelatedFormatVersion>1.0</RelatedFormatVersion>
       </RelatedFormat>
     </FileFormat>

@@ -25,12 +25,11 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>12 Nov 2013</ProvenanceSourceDate>
-      <ProvenanceDescription>http://www.applelossless.com/
+      <ProvenanceDescription>v.123- Priority added over fmt/2094 M4A Audio. Submitted by Preservica.</ProvenanceDescription>
+      <LastUpdatedDate>09 Jun 2026</LastUpdatedDate>
+      <FormatNote>http://www.applelossless.com/
 http://alac.macosforge.org/trac/browser/trunk/ALACMagicCookieDescription.txt
-http://alac.macosforge.org/trac/browser/trunk/codec/ALACAudioTypes.h?rev=2#</ProvenanceDescription>
-      <LastUpdatedDate>12 Nov 2013</LastUpdatedDate>
-      <FormatNote>
-      </FormatNote>
+http://alac.macosforge.org/trac/browser/trunk/codec/ALACAudioTypes.h?rev=2#</FormatNote>
       <FormatRisk>
       </FormatRisk>
       <TechnicalEnvironment>
@@ -102,6 +101,19 @@ VAR: alac{0-72}alac</SignatureNote>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>924</RelatedFormatID>
         <RelatedFormatName>MPEG-4 Media File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>3907</RelatedFormatID>
+        <RelatedFormatName>Daisy Talking Book Navigation Control File</RelatedFormatName>
+        <RelatedFormatVersion>3</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>3971</RelatedFormatID>
+        <RelatedFormatName>M4A Audio</RelatedFormatName>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>

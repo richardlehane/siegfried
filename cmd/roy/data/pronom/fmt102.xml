@@ -20,9 +20,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>11 Mar 2005</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>14 Sep 2018</LastUpdatedDate>
+      <ProvenanceDescription>v.123- New extension added of .xhtml. Submitted by the Digital Preservation Coalition.</ProvenanceDescription>
+      <LastUpdatedDate>09 Jun 2026</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -84,6 +83,11 @@
       <ExternalSignature>
         <ExternalSignatureID>739</ExternalSignatureID>
         <Signature>htm</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>4632</ExternalSignatureID>
+        <Signature>xhtml</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
       <InternalSignature>
@@ -177,12 +181,6 @@
         <RelatedFormatID>2173</RelatedFormatID>
         <RelatedFormatName>WARC</RelatedFormatName>
         <RelatedFormatVersion>1.0</RelatedFormatVersion>
-      </RelatedFormat>
-      <RelatedFormat>
-        <RelationshipType>Has lower priority than</RelationshipType>
-        <RelatedFormatID>3956</RelatedFormatID>
-        <RelatedFormatName>xdomea</RelatedFormatName>
-        <RelatedFormatVersion>4.0.0</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>

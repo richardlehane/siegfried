@@ -1,4 +1,14 @@
 # Change Log
+## v1.11.5 (2026-07-11)
+### Changed 
+- update PRONOM to v124
+- update go version to 1.25.0
+
+### Fixed
+- bug with mimeinfo signature generation. Reported by Hugh Williams (#287)[https://github.com/richardlehane/siegfried/issues/287]
+- wasm_exec.js updated. Report by Trevor Munoz (#287)[https://github.com/richardlehane/siegfried/issues/286]
+
+# Change Log
 ## v1.11.4 (2026-01-23)
 ### Changed 
 - update go version to 1.24.0

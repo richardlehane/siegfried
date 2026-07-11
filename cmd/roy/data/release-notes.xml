@@ -2,6 +2,232 @@
 <?xml-stylesheet type="text/xsl" href="release-note.xsl"?>
 <release_notes>
 <release_note>
+   <release_date>9th June 2026</release_date>
+   <signature_filename>DROID_SignatureFile_V124.xml</signature_filename>
+   <release_outline name="Updated Records">
+      <format>
+         <puid type="fmt">875</puid>
+         <name>RDF/XML</name>
+         <summary>Priority added over fmt/101 Extensible Markup Language 1.0. Submitted by Preservica.</summary>
+      </format>
+   </release_outline>
+</release_note>   
+<release_note>
+   <release_date>9th June 2026</release_date>
+   <signature_filename>DROID_SignatureFile_V123.xml</signature_filename>
+   <release_outline name="New Records">
+      <format>
+         <puid type="fmt">2092</puid>
+         <name>Canadian Avalanche Association MarkUp Language 6.0.3</name>
+         <summary>Full entry added. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2093</puid>
+         <name>ROS Bag Format 2.0</name>
+         <summary>Full entry added. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2094</puid>
+         <name>M4A Audio</name>
+         <summary>Full entry added. Submitted by Preservica, Archives New Zealand and Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2095</puid>
+         <name>Hasselblad FFF Raw Image</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints and Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2096</puid>
+         <name>GGML Universal File (GGUF) 1</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2097</puid>
+         <name>GGML Universal File (GGUF) 2</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2098</puid>
+         <name>GGML Universal File (GGUF) 3</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2099</puid>
+         <name>iZotope RX Document</name>
+         <summary>Full entry added. Submitted by The Church of Jesus Christ of Latter-day Saints and Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2100</puid>
+         <name>Visualization Toolkit 4.0</name>
+         <summary>Full entry added. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2101</puid>
+         <name>ChemStation Gas Chromatography/ Mass Spectrum Data File</name>
+         <summary>Full entry added. Submitted by National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2102</puid>
+         <name>BioSemi Data Format</name>
+         <summary>Full entry added. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2103</puid>
+         <name>Discus Project 2-3</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2104</puid>
+         <name>Discus Project 4</name>
+         <summary>Full entry added. Submitted by Brigham Young University.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="Updated Records">
+      <format>
+         <puid type="fmt">102</puid>
+         <name>Extensible Hypertext Markup Language 1.0</name>
+         <summary>New extension added of .xhtml. Submitted by Digital Preservation Coalition.</summary>
+      </format>
+      <format>
+         <puid type="fmt">103</puid>
+         <name>Extensible Hypertext Markup Language 1.1</name>
+         <summary>New extension added of .xhtml. Submitted by Digital Preservation Coalition.</summary>
+      </format>
+      <format>
+         <puid type="fmt">199</puid>
+         <name>MPEG-4 Media File</name>
+         <summary>New extension added of .m4b. Submitted by Archives New Zealand.</summary>
+      </format>
+      <format>
+         <puid type="x-fmt">385</puid>
+         <name>MPEG-1 Program Stream</name>
+         <summary>Priority added over fmt/134 MPEG 1/2 Audio Layer 3. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+      </format>
+      <format>
+         <puid type="fmt">596</puid>
+         <name>Apple Lossless Audio Codec</name>
+         <summary>. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">720</puid>
+         <name>MBOX</name>
+         <summary>New binary signature created and priority added over fmt/950 MIME Email 1.0. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">875</puid>
+         <name>RDF/XML</name>
+         <summary>Two new internal signatures added, one with an XML declaration and another without. Submitted by Stuart Yeates and Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2081</puid>
+         <name>xdomea 4.0.0</name>
+         <summary>Priority over changed from fmt/102 Extensible Hypertext Markup Language 1.0 to fmt/101 Extensible Markup Language 1.0. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2085</puid>
+         <name>FieldWorks Language Explorer FWData XML</name>
+         <summary>Priority added over fmt/101 Extensible Markup Language 1.0. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2090</puid>
+         <name>Kodak DCS RAW Image</name>
+         <summary>New extension added of .tiff and priority over fmt/192 Kodak Digital Camera Raw Image File. Submitted by Richard Lehane and Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2091</puid>
+         <name>Kodak DCS RAW Image 3</name>
+         <summary>New extension added of .tiff and priority over fmt/192 Kodak Digital Camera Raw Image File. Submitted by Richard Lehane and Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1971</puid>
+         <name>Enigma Binary File (Finale) 1</name>
+         <summary>Signature updated to allow for different PC versions. Submitted by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">1972</puid>
+         <name>Enigma Binary File (Finale) 2</name>
+         <summary>Signature updated to allow for different PC versions. Submitted by Brigham Young University.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="New Signatures">
+      <format>
+         <puid type="fmt">720</puid>
+         <name>MBOX</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">875</puid>
+         <name>RDF/XML</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2092</puid>
+         <name>Canadian Avalanche Association MarkUp Language 6.0.3</name>
+         <summary>Signature researched and samples provided by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2093</puid>
+         <name>ROS Bag Format 2.0</name>
+         <summary>Signature researched and samples provided by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2094</puid>
+         <name>M4A Audio</name>
+         <summary>Signature researched and samples provided by Preservica, Archives New Zealand and Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2095</puid>
+         <name>Hasselblad FFF Raw Image</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints and Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2096</puid>
+         <name>GGML Universal File (GGUF) 1</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2097</puid>
+         <name>GGML Universal File (GGUF) 2</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2098</puid>
+         <name>GGML Universal File (GGUF) 3</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2099</puid>
+         <name>iZotope RX Document</name>
+         <summary>Signature researched and samples provided by The Church of Jesus Christ of Latter-day Saints and Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2100</puid>
+         <name>Visualization Toolkit 4.0</name>
+         <summary>Signature researched and samples provided by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2101</puid>
+         <name>ChemStation Gas Chromatography/ Mass Spectrum Data File</name>
+         <summary>Signature researched and samples provided by National Archives and Records Administration.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2102</puid>
+         <name>BioSemi Data Format</name>
+         <summary>Signature researched and samples provided by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2103</puid>
+         <name>Discus Project 2-3</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2104</puid>
+         <name>Discus Project 4</name>
+         <summary>Signature researched and samples provided by Brigham Young University.</summary>
+      </format>
+   </release_outline>
+</release_note>
+<release_note>
    <release_date>19th January 2026</release_date>
    <signature_filename>DROID_SignatureFile_V122.xml</signature_filename>
    <release_outline name="New Records">
@@ -153,7 +379,7 @@
          <summary>External signature of .tex added to entry. Submitted by Technische Informationsbibliothek (TIB).</summary>
       </format>
       <format>
-         <puid type="fmt">430</puid>
+         <puid type="x-fmt">430</puid>
          <name>Microsoft Outlook Email Message</name>
          <summary>Added MIMEtype. Submitted by .</summary>
       </format>
@@ -388,7 +614,7 @@
       <format>
          <puid type="fmt">2049</puid>
          <name>ArcGIS Pro Layer FIle</name>
-         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">2050</puid>
@@ -408,7 +634,7 @@
       <format>
          <puid type="fmt">2053</puid>
          <name>Apache Arrow IPC Format</name>
-         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">2054</puid>
@@ -490,7 +716,7 @@
       <format>
          <puid type="x-fmt">18</puid>
          <name>Comma Separated Values</name>
-         <summary>Removed extra word in Description. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Removed extra word in Description. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="x-fmt">302</puid>
@@ -515,7 +741,7 @@
       <format>
          <puid type="fmt">1651</puid>
          <name>Garmin Flexible and Interoperable Data Transfer File</name>
-         <summary>Amended offset from 9 to 8 and changed signature from 464954 to 2E464954. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Amended offset from 9 to 8 and changed signature from 464954 to 2E464954. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1799</puid>
@@ -632,7 +858,7 @@
       <format>
          <puid type="fmt">2049</puid>
          <name>ArcGIS Pro Layer FIle</name>
-         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">2050</puid>
@@ -652,7 +878,7 @@
       <format>
          <puid type="fmt">2053</puid>
          <name>Apache Arrow IPC Format</name>
-         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">2055</puid>
@@ -818,12 +1044,12 @@
       <format>
          <puid type="fmt">2029</puid>
          <name>Apache Avro</name>
-         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">2030</puid>
          <name>Apache ORC V0 and V1</name>
-         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">2031</puid>
@@ -1025,7 +1251,7 @@
       <format>
          <puid type="fmt">951</puid>
          <name>Sonic Foundry WAVE 64</name>
-         <summary>Given priority over CD Architect Project File 5. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Given priority over CD Architect Project File 5. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
    </release_outline>
    <release_outline name="New Signatures">
@@ -1132,12 +1358,12 @@
       <format>
          <puid type="fmt">2029</puid>
          <name>Apache Avro</name>
-         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">2030</puid>
          <name>Apache ORC V0 and V1</name>
-         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">2031</puid>
@@ -1333,7 +1559,7 @@
       <format>
          <puid type="fmt">1955</puid>
          <name>Graphisoft Archicad Project 6-9</name>
-         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1956</puid>
@@ -1343,7 +1569,7 @@
       <format>
          <puid type="fmt">1957</puid>
          <name>Program Embroidery Stitch File (PES)</name>
-         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1958</puid>
@@ -1705,7 +1931,7 @@
       <format>
          <puid type="fmt">664</puid>
          <name>Gerber Format</name>
-         <summary>. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">899</puid>
@@ -1840,7 +2066,7 @@
       <format>
          <puid type="x-fmt">123</puid>
          <name>Microsoft Excel Macro 4.0</name>
-         <summary>. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="x-fmt">138</puid>
@@ -1952,7 +2178,7 @@
       <format>
          <puid type="fmt">664</puid>
          <name>Gerber Format</name>
-         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1946</puid>
@@ -2002,7 +2228,7 @@
       <format>
          <puid type="fmt">1955</puid>
          <name>Graphisoft Archicad Project 6-9</name>
-         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1956</puid>
@@ -2012,7 +2238,7 @@
       <format>
          <puid type="fmt">1957</puid>
          <name>Program Embroidery Stitch File (PES)</name>
-         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1960</puid>
@@ -2262,7 +2488,7 @@
       <format>
          <puid type="x-fmt">123</puid>
          <name>Microsoft Excel Macro 4.0</name>
-         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="x-fmt">148</puid>
@@ -2293,12 +2519,12 @@
       <format>
          <puid type="fmt">281</puid>
          <name>LaTeX (Subdocument)</name>
-         <summary>Given priority over fmt/101, Extensible Markup Language 1.0. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Given priority over fmt/101, Extensible Markup Language 1.0. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">289</puid>
          <name>WARC</name>
-         <summary>Given priority over fmt/101, Extensible Markup Language 1.0. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Given priority over fmt/101, Extensible Markup Language 1.0. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">436</puid>
@@ -2318,7 +2544,7 @@
       <format>
          <puid type="fmt">654</puid>
          <name>INTERLIS Model File 2.3</name>
-         <summary>Given priority over fmt/101, Extensible Markup Language 1.0. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Given priority over fmt/101, Extensible Markup Language 1.0. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">730</puid>
@@ -2333,7 +2559,7 @@
       <format>
          <puid type="fmt">1157</puid>
          <name>Folio Infobase File 2</name>
-         <summary>Given priority over fmt/101, Extensible Markup Language 1.0. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Given priority over fmt/101, Extensible Markup Language 1.0. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1841</puid>
@@ -2348,7 +2574,7 @@
       <format>
          <puid type="fmt">1924</puid>
          <name>CorelDraw Drawing 8 Bidi</name>
-         <summary>Given priority over fmt/1886 Resource Interchange File Format (RIFF). Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Given priority over fmt/1886 Resource Interchange File Format (RIFF). Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
    </release_outline>
 </release_note>
@@ -2586,7 +2812,7 @@
       <format>
          <puid type="fmt">166</puid>
          <name>Microsoft Works Spreadsheet 1-5</name>
-         <summary>Description updated and internal signature modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Description updated and internal signature modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">414</puid>
@@ -2596,67 +2822,67 @@
       <format>
          <puid type="fmt">418</puid>
          <name>Adobe Illustrator 3.0 /  3.2</name>
-         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">425</puid>
          <name>Video Object File (MPEG-2 subset)</name>
-         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">426</puid>
          <name>Harris Matrix</name>
-         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">427</puid>
          <name>CorelDraw Drawing 12.0</name>
-         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">428</puid>
          <name>CorelDraw Drawing X3</name>
-         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">429</puid>
          <name>CorelDraw Drawing X4</name>
-         <summary>Container signature added. Modified the offset values of the internal signature from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Brigham Young University and Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Container signature added. Modified the offset values of the internal signature from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Brigham Young University and Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">430</puid>
          <name>CorelDraw Drawing .X5</name>
-         <summary>Container signature added. Modified the offset values of the internal signature from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Brigham Young University and Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Container signature added. Modified the offset values of the internal signature from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Brigham Young University and Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">431</puid>
          <name>Corel R.A.V.E 2</name>
-         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">432</puid>
          <name>Corel R.A.V.E 3</name>
-         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">434</puid>
          <name>AutoCAD Drawing 2010/ 2011/ 2012</name>
-         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">441</puid>
          <name>Windows Media Video (WVC1) 9 Advanced Profile</name>
-         <summary>Name updated to Windows Media Video (WVC1) from Windows Media Video (WVC1) 9 Advanced Profile to avoid repitition with version. Description updated and internal signature note updated. Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Name updated to Windows Media Video (WVC1) from Windows Media Video (WVC1) 9 Advanced Profile to avoid repitition with version. Description updated and internal signature note updated. Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">446</puid>
          <name>Adobe Portable Document Catalog Index File 2.0</name>
-         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">453</puid>
          <name>Verity Collection Stop List</name>
-         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">566</puid>
@@ -2676,7 +2902,7 @@
       <format>
          <puid type="fmt">574</puid>
          <name>Digital Imaging and Communications in Medicine File Format</name>
-         <summary>Max-offset modified for BOF  signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Max-offset modified for BOF  signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">640</puid>
@@ -2686,102 +2912,102 @@
       <format>
          <puid type="fmt">649</puid>
          <name>MPEG-1 Elementary Stream</name>
-         <summary>Modified internal signature offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Modified internal signature offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">650</puid>
          <name>QuarkXPress Report File</name>
-         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">756</puid>
          <name>Zope Export File</name>
-         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">939</puid>
          <name>Python Compiled File 2.7</name>
-         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">940</puid>
          <name>Python Compiled File 3.4</name>
-         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1057</puid>
          <name>SNAP Archive Data File</name>
-         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1058</puid>
          <name>SNAP Processed Data File</name>
-         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1071</puid>
          <name>Apple Disk Image</name>
-         <summary>Max-offset of 0 bytes added for EOF signature. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Max-offset of 0 bytes added for EOF signature. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1073</puid>
          <name>Google Document Link File</name>
-         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1207</puid>
          <name>Sony SFK File</name>
-         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1208</puid>
          <name>Virtools File Format</name>
-         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1358</puid>
          <name>MicroStation Base File</name>
-         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1390</puid>
          <name>Drawing Interchange Format (Binary) 2007-2009</name>
-         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1495</puid>
          <name>QuarkXPress 2021</name>
-         <summary>Max-offset modified for both BOF signatures to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Max-offset modified for both BOF signatures to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1544</puid>
          <name>ELAN Preference File</name>
-         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1558</puid>
          <name>SelF-eXtracting LHA/LZH Compressed Files</name>
-         <summary>Modified values in Indirect Offset Location and Indirect Offset Length from 0 to null as part of a project to match PRONOM data with the xsd standard. Max-offset modified for BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Modified values in Indirect Offset Location and Indirect Offset Length from 0 to null as part of a project to match PRONOM data with the xsd standard. Max-offset modified for BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1567</puid>
          <name>ISDOC Information System Document 5.x</name>
-         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Removed '(Generic)' from file format name to reflect version number. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Removed '(Generic)' from file format name to reflect version number. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1568</puid>
          <name>ISDOCX Information System Document 5.x</name>
-         <summary>Max-offset modified for the EOF signature to allow for more exact signature identification. Removed '(Generic)' from file format name to reflect version number. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Max-offset modified for the EOF signature to allow for more exact signature identification. Removed '(Generic)' from file format name to reflect version number. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1569</puid>
          <name>Bitstream Speedo Fonts</name>
-         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1570</puid>
          <name>ISDOC Information System Document 6.0.1</name>
-         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1582</puid>
@@ -2791,7 +3017,7 @@
       <format>
          <puid type="fmt">1596</puid>
          <name>ESRI ArcInfo Grid .nit File</name>
-         <summary>Max-offset modified for the BOF/EOF signature to allow for more exact signature identification. Format type modified to GIS. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Max-offset modified for the BOF/EOF signature to allow for more exact signature identification. Format type modified to GIS. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1612</puid>
@@ -2811,37 +3037,37 @@
       <format>
          <puid type="fmt">1628</puid>
          <name>Adobe InDesign Document 1.0</name>
-         <summary>Max-offset modified for BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Max-offset modified for BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1629</puid>
          <name>Adobe InDesign Document 1.5</name>
-         <summary>Max-offset modified for BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Max-offset modified for BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1646</puid>
          <name>Roxio Label Creator Project File (8-11)</name>
-         <summary>Max-offset modified for the EOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Max-offset modified for the EOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1651</puid>
          <name>Garmin Flexible and Interoperable Data Transfer file</name>
-         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1654</puid>
          <name>Palm Database ImageViewer Format</name>
-         <summary>Max-offset modified for BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Max-offset modified for BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1669</puid>
          <name>Roxio Data Project File (11)</name>
-         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1670</puid>
          <name>Roxio Audio Project File (11)</name>
-         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1672</puid>
@@ -2851,27 +3077,27 @@
       <format>
          <puid type="fmt">1686</puid>
          <name>PageMaker Mac Document 4.0</name>
-         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1687</puid>
          <name>PageMaker Mac Document 5.0</name>
-         <summary>Max-offset modified for both BOF signatures to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Max-offset modified for both BOF signatures to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1731</puid>
          <name>PowerGraphics Image File</name>
-         <summary>Max-offset modified for BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Max-offset modified for BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1738</puid>
          <name>UDF Disc Image</name>
-         <summary>Max-offset modified for BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Max-offset modified for BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1784</puid>
          <name>Animatic Film Format</name>
-         <summary>Max-offset modified for BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Max-offset modified for BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1816</puid>
@@ -2896,7 +3122,7 @@
       <format>
          <puid type="x-fmt">33</puid>
          <name>Corel R.A.V.E 1</name>
-         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Modified the offset values from null to 0 as part of a project to match PRONOM data with the xsd standard. Submitted by Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="x-fmt">106</puid>
@@ -2921,19 +3147,19 @@
       <format>
          <puid type="x-fmt">436</puid>
          <name>CATIA Model 4</name>
-         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Max-offset modified for the BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
    </release_outline>
    <release_outline name="New Signatures">
       <format>
          <puid type="fmt">429</puid>
          <name>CorelDraw Drawing X4</name>
-         <summary>Signature researched and samples provided by Brigham Young University and Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Signature researched and samples provided by Brigham Young University and Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">430</puid>
          <name>CorelDraw Drawing .X5</name>
-         <summary>Signature researched and samples provided by Brigham Young University and Digital Preservation Department, The National Archives (UK).</summary>
+         <summary>Signature researched and samples provided by Brigham Young University and Digital Preservation Department, The National Archives (UK) (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1901</puid>
@@ -3274,12 +3500,12 @@
       <format>
          <puid type="fmt">1882</puid>
          <name>OPML File 1.*</name>
-         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1883</puid>
          <name>OPML File 2</name>
-         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1884</puid>
@@ -3386,17 +3612,17 @@
       <format>
          <puid type="fmt">122</puid>
          <name>Encapsulated PostScript File Format 1.2</name>
-         <summary>Added description of magic bytes. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Added description of magic bytes. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">123</puid>
          <name>Encapsulated PostScript File Format 2.0</name>
-         <summary>Added description of magic bytes. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Added description of magic bytes. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">124</puid>
          <name>Encapsulated PostScript File Format 3</name>
-         <summary>Added description of magic bytes and specification. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Added description of magic bytes and specification. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">163</puid>
@@ -3406,17 +3632,17 @@
       <format>
          <puid type="fmt">179</puid>
          <name>Microsoft PowerPoint for Macintosh v.4.0</name>
-         <summary>Added description and MIME type. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Added description and MIME type. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">181</puid>
          <name>Microsoft PowerPoint for Macintosh 2001</name>
-         <summary>Added description and MIME type. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Added description and MIME type. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">199</puid>
          <name>MPEG-4 Media File</name>
-         <summary>Added priority over fmt/1616. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Added priority over fmt/1616. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">385</puid>
@@ -3436,7 +3662,7 @@
       <format>
          <puid type="fmt">395</puid>
          <name>vCard</name>
-         <summary>Added vcard extension, updated description. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Added vcard extension, updated description. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">427</puid>
@@ -3471,7 +3697,7 @@
       <format>
          <puid type="fmt">468</puid>
          <name>ISO 9660 Disk Image File</name>
-         <summary>Max-offset modified for BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Max-offset modified for BOF signature to allow for more exact signature identification. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">558</puid>
@@ -3601,7 +3827,7 @@
       <format>
          <puid type="fmt">1739</puid>
          <name>UDF-ISO 9660 Bridge Disc</name>
-         <summary>Max-offset modified for both BOF signatures to allow for more exact signature identification. Internally researched. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Max-offset modified for both BOF signatures to allow for more exact signature identification. Internally researched. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1776</puid>
@@ -3621,7 +3847,7 @@
       <format>
          <puid type="fmt">1850</puid>
          <name>WordPerfect Macro File</name>
-         <summary>Priority added over x-fmt/393 (WordPerfect for MS-DOS Document 5.0). Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Priority added over x-fmt/393 (WordPerfect for MS-DOS Document 5.0). Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="x-fmt">29</puid>
@@ -3783,12 +4009,12 @@
       <format>
          <puid type="fmt">1882</puid>
          <name>OPML File 1.*</name>
-         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1883</puid>
          <name>OPML File 2</name>
-         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1884</puid>
@@ -3996,7 +4222,7 @@
       <format>
          <puid type="fmt">696</puid>
          <name>Sibelius</name>
-         <summary>Updated signature description. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Updated signature description. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">803</puid>
@@ -4011,7 +4237,7 @@
       <format>
          <puid type="fmt">964</puid>
          <name>Final Draft Document 5-7</name>
-         <summary>Added relationship and developer. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Added relationship and developer. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1149</puid>
@@ -4026,12 +4252,12 @@
       <format>
          <puid type="fmt">1218</puid>
          <name>SubRip Subtitle File</name>
-         <summary>Updated description and added reference links. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Updated description and added reference links. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1649</puid>
          <name>AGS 4 Data Format 4.0 4.1</name>
-         <summary>Broadened main body of signature and added BOF sequence. Submitted by Preservica and Digital Preservation Department, The National Archives.</summary>
+         <summary>Broadened main body of signature and added BOF sequence. Submitted by Preservica and Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1805</puid>
@@ -4066,17 +4292,17 @@
       <format>
          <puid type="x-fmt">8</puid>
          <name>dBASE Database II</name>
-         <summary>Added developer. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Added developer. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="x-fmt">9</puid>
          <name>dBASE Database III</name>
-         <summary>Added developer. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Added developer. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="x-fmt">10</puid>
          <name>dBASE Database IV</name>
-         <summary>Added developer. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Added developer. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="x-fmt">13</puid>
@@ -4091,7 +4317,7 @@
       <format>
          <puid type="x-fmt">128</puid>
          <name>Microsoft Excel Workspace File</name>
-         <summary>Added description. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Added description. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="x-fmt">238</puid>
@@ -4116,27 +4342,27 @@
       <format>
          <puid type="x-fmt">271</puid>
          <name>dBASE Database III+</name>
-         <summary>Added developer. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Added developer. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="x-fmt">272</puid>
          <name>dBASE Database V</name>
-         <summary>Added developer. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Added developer. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="x-fmt">275</puid>
          <name>Microsoft Access Database File 2007</name>
-         <summary>Updated Wikidata QID, description, reference links and developer. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Updated Wikidata QID, description, reference links and developer. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="x-fmt">393</puid>
          <name>WordPerfect for MS-DOS Document 5.0</name>
-         <summary>Added .doc extension. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Added .doc extension. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="x-fmt">394</puid>
          <name>WordPerfect for MS-DOS/Windows Document 5.1</name>
-         <summary>Added .doc extension. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Added .doc extension. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="x-fmt">415</puid>
@@ -4225,7 +4451,7 @@
       <format>
          <puid type="fmt">1825</puid>
          <name>Audacity Project File 2.x</name>
-         <summary>Priority with fmt/101 updated. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Priority with fmt/101 updated. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
    </release_outline>
    <release_outline name="New Signatures"/>
@@ -4514,7 +4740,7 @@
       <format>
          <puid type="fmt">645</puid>
          <name>Exchangeable Image File Format (Compressed)</name>
-         <summary>Version corrected from 2.2.1 to 2.21. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Version corrected from 2.2.1 to 2.21. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">899</puid>
@@ -4589,7 +4815,7 @@
       <format>
          <puid type="fmt">1454</puid>
          <name>Web Video Text Tracks (WebVTT) Format</name>
-         <summary>Added links to documentation, expanded sig and des. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Added links to documentation, expanded sig and des. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1693</puid>
@@ -4604,7 +4830,7 @@
       <format>
          <puid type="x-fmt">44</puid>
          <name>WordPerfect for MS-DOS/Windows Document 6.x</name>
-         <summary>Changed version from 6.0 to 6.x as the signature was previously for v6.1 to chatch all variations of version 6. Updated signature and signature note. Added extensions w61 and w62. Submitted by Brigham Young University and Digital Preservation Department, The National Archives.</summary>
+         <summary>Changed version from 6.0 to 6.x as the signature was previously for v6.1 to chatch all variations of version 6. Updated signature and signature note. Added extensions w61 and w62. Submitted by Brigham Young University and Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="x-fmt">66</puid>
@@ -4634,27 +4860,27 @@
       <format>
          <puid type="x-fmt">238</puid>
          <name>Microsoft Access Database File 95</name>
-         <summary>Updated description and name, added extensions .mda, .mdt and .mde, added notes, identifiers and developer. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Updated description and name, added extensions .mda, .mdt and .mde, added notes, identifiers and developer. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="x-fmt">239</puid>
          <name>Microsoft Access Database File 97</name>
-         <summary>Updated description and name, added extensions .mda, .mdt and .mde, added notes, identifiers and developer. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Updated description and name, added extensions .mda, .mdt and .mde, added notes, identifiers and developer. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="x-fmt">240</puid>
          <name>Microsoft Access Database File 2000</name>
-         <summary>Updated description and name, added extension .mde, added notes, identifiers and developer. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Updated description and name, added extension .mde, added notes, identifiers and developer. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="x-fmt">241</puid>
          <name>Microsoft Access Database File 2002</name>
-         <summary>Updated description and name, added extension .mde, added notes, identifiers and developer. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Updated description and name, added extension .mde, added notes, identifiers and developer. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="x-fmt">394</puid>
          <name>WordPerfect for MS-DOS/Windows Document 5.1</name>
-         <summary>Added priority over fmt/1280 NCH Dictation Audio File. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Added priority over fmt/1280 NCH Dictation Audio File. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="x-fmt">411</puid>
@@ -4941,12 +5167,12 @@
       <format>
          <puid type="fmt">1454</puid>
          <name>Web Video Text Tracks (WebVTT) Format</name>
-         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="x-fmt">44</puid>
          <name>WordPerfect for MS-DOS/Windows Document 6.x</name>
-         <summary>Signature researched and samples provided by Brigham Young University and Digital Preservation Department, The National Archives.</summary>
+         <summary>Signature researched and samples provided by Brigham Young University and Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="x-fmt">66</puid>
@@ -5109,22 +5335,22 @@
       <format>
          <puid type="fmt">41</puid>
          <name>Raw JPEG Stream</name>
-         <summary>Updated description and reference links, added extensions jif; jfif; jfi, and LoC identifier. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Updated description and reference links, added extensions jif; jfif; jfi, and LoC identifier. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">42</puid>
          <name>JPEG File Interchange Format v1.00</name>
-         <summary>Updated reference links, added extensions jif; jfif; jfi. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Updated reference links, added extensions jif; jfif; jfi. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">43</puid>
          <name>JPEG File Interchange Format v1.01</name>
-         <summary>Updated reference links, added extensions jif; jfif; jfi. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Updated reference links, added extensions jif; jfif; jfi. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">44</puid>
          <name>JPEG File Interchange Format v1.02</name>
-         <summary>Updated reference links, added extensions jif; jfif; jfi, and LoC identifier. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Updated reference links, added extensions jif; jfif; jfi, and LoC identifier. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">123</puid>
@@ -5189,7 +5415,7 @@
       <format>
          <puid type="fmt">1739</puid>
          <name>UDF-ISO 9660 Bridge Disc</name>
-         <summary>Priority added over fmt/1738 due to copying error from previous release. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Priority added over fmt/1738 due to copying error from previous release. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="x-fmt">62</puid>
@@ -5347,7 +5573,7 @@
       <format>
          <puid type="fmt">1736</puid>
          <name>Creative Voice File</name>
-         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1737</puid>
@@ -5412,17 +5638,17 @@
       <format>
          <puid type="fmt">1749</puid>
          <name>Canon MIF File</name>
-         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1750</puid>
          <name>Canon CIF File</name>
-         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1751</puid>
          <name>Canon SIF File</name>
-         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1752</puid>
@@ -5487,17 +5713,17 @@
       <format>
          <puid type="fmt">1764</puid>
          <name>Sony SLV File</name>
-         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1765</puid>
          <name>Media Hash List</name>
-         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1766</puid>
          <name>Sony SML File</name>
-         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
    </release_outline>
    <release_outline name="Updated Records">
@@ -5664,7 +5890,7 @@
       <format>
          <puid type="fmt">1600</puid>
          <name>ESRI ArcInfo DAT File (Internal)</name>
-         <summary>Amended source. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Amended source. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1671</puid>
@@ -5679,7 +5905,7 @@
       <format>
          <puid type="fmt">1727</puid>
          <name>Pro Tools Session File</name>
-         <summary>Amended description of byte sequence to match bytes. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Amended description of byte sequence to match bytes. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1727</puid>
@@ -5689,7 +5915,7 @@
       <format>
          <puid type="fmt">1729</puid>
          <name>Esri Shapefile Geospatial Metadata File</name>
-         <summary>Amended description of byte sequence to match bytes. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Amended description of byte sequence to match bytes. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
    </release_outline>
    <release_outline name="New Signatures">
@@ -5721,7 +5947,7 @@
       <format>
          <puid type="fmt">1736</puid>
          <name>Creative Voice File</name>
-         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1737</puid>
@@ -5786,17 +6012,17 @@
       <format>
          <puid type="fmt">1749</puid>
          <name>Canon MIF File</name>
-         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1750</puid>
          <name>Canon CIF File</name>
-         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1751</puid>
          <name>Canon SIF File</name>
-         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1752</puid>
@@ -5851,17 +6077,17 @@
       <format>
          <puid type="fmt">1764</puid>
          <name>Sony SLV File</name>
-         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1765</puid>
          <name>Media Hash List</name>
-         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1766</puid>
          <name>Sony SML File</name>
-         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
    </release_outline>
 </release_note>
@@ -5872,7 +6098,7 @@
       <format>
          <puid type="fmt">1723</puid>
          <name>Wordcraft Chapter Files</name>
-         <summary>Extension-only entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Extension-only entry added. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1724</puid>
@@ -6023,34 +6249,34 @@
       <format>
          <puid type="fmt">90</puid>
          <name>PCX (5)</name>
-         <summary>Added priority over fmt/134. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Added priority over fmt/134. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">205</puid>
          <name>Synchronized Multimedia Integration Language (Generic)</name>
-         <summary>Added priority over fmt/101. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Added priority over fmt/101. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">473</puid>
          <name>Microsoft Office Owner File</name>
-         <summary>Five additional signatures identified in line with the patterns already shown but expanded to allow for a bigger hex range. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Five additional signatures identified in line with the patterns already shown but expanded to allow for a bigger hex range. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1601</puid>
          <name>Type Library Type 1</name>
-         <summary>Adjusted sequence. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Adjusted sequence. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1688</puid>
          <name>Microsoft Word for MS-DOS Document (v6)</name>
-         <summary>Adjusted sequence. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Adjusted sequence. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
    </release_outline>
    <release_outline name="New Signatures">
       <format>
          <puid type="fmt">473</puid>
          <name>Microsoft Office Owner File</name>
-         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
    </release_outline>
 </release_note>
@@ -6066,12 +6292,12 @@
       <format>
          <puid type="fmt">1650</puid>
          <name>Bayesian Interchange Format File</name>
-         <summary>Extension-only entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Extension-only entry added. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1651</puid>
          <name>Garmin Flexible and Interoperable Data Transfer file</name>
-         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1652</puid>
@@ -6136,7 +6362,7 @@
       <format>
          <puid type="fmt">1664</puid>
          <name>RED Thumbnail File</name>
-         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1665</puid>
@@ -6211,7 +6437,7 @@
       <format>
          <puid type="fmt">1679</puid>
          <name>Garmin track log file</name>
-         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1680</puid>
@@ -6221,7 +6447,7 @@
       <format>
          <puid type="fmt">1681</puid>
          <name>OBO Flat File Format</name>
-         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1682</puid>
@@ -6426,7 +6652,7 @@
       <format>
          <puid type="fmt">1722</puid>
          <name>BIM Metadata File</name>
-         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Full entry added. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
    </release_outline>
    <release_outline name="Updated Records">
@@ -6468,7 +6694,7 @@
       <format>
          <puid type="x-fmt">159</puid>
          <name>GEM Image</name>
-         <summary>Updated description and note field. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Updated description and note field. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">159</puid>
@@ -6493,7 +6719,7 @@
       <format>
          <puid type="fmt">205</puid>
          <name>Synchronized Multimedia Integration Language (Generic)</name>
-         <summary>Updated name, description and note field. Added new signature and created priority over fmt/101. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Updated name, description and note field. Added new signature and created priority over fmt/101. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="x-fmt">273</puid>
@@ -6518,7 +6744,7 @@
       <format>
          <puid type="x-fmt">279</puid>
          <name>MPEG 1/2 Audio Layer 3 Streaming</name>
-         <summary>Changed format type. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Changed format type. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">314</puid>
@@ -6553,17 +6779,17 @@
       <format>
          <puid type="x-fmt">406</puid>
          <name>PostScript 2.0</name>
-         <summary>Added priority over fmt/1616, description, notes and changed format type. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Added priority over fmt/1616, description, notes and changed format type. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="x-fmt">436</puid>
          <name>CATIA Model 4</name>
-         <summary>Updated description and magic bytes. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Updated description and magic bytes. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="x-fmt">438</puid>
          <name>CATIA Material Description</name>
-         <summary>Removed stray space character from the start of the name field. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Removed stray space character from the start of the name field. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">526</puid>
@@ -6588,12 +6814,12 @@
       <format>
          <puid type="fmt">1342</puid>
          <name>BDOC v2.x</name>
-         <summary>Added priority over fmt/1564 and format type. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Added priority over fmt/1564 and format type. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1463</puid>
          <name>Ableton Live Set</name>
-         <summary>Removed stray space character from the start of the name field. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Removed stray space character from the start of the name field. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1472</puid>
@@ -6603,7 +6829,7 @@
       <format>
          <puid type="fmt">1564</puid>
          <name>Associated Signature Container Extended (ASiC-E)</name>
-         <summary>Container signature added to improve identification from extension only. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Container signature added to improve identification from extension only. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1568</puid>
@@ -6618,12 +6844,12 @@
       <format>
          <puid type="fmt">1628</puid>
          <name>Adobe InDesign Document 1.0</name>
-         <summary>Removed priority over x-fmt/450. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Removed priority over x-fmt/450. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1635</puid>
          <name>Adobe InDesign Document CC 2017</name>
-         <summary>Added .ind and .indt file extensions. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Added .ind and .indt file extensions. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
    </release_outline>
    <release_outline name="New Signatures">
@@ -6670,7 +6896,7 @@
       <format>
          <puid type="fmt">205</puid>
          <name>Synchronized Multimedia Integration Language (Generic)</name>
-         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="x-fmt">352</puid>
@@ -6680,7 +6906,7 @@
       <format>
          <puid type="fmt">1564</puid>
          <name>Associated Signature Container Extended (ASiC-E)</name>
-         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt ">1649</puid>
@@ -6690,7 +6916,7 @@
       <format>
          <puid type="fmt ">1651</puid>
          <name>Garmin Flexible and Interoperable Data Transfer file</name>
-         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1653</puid>
@@ -6745,7 +6971,7 @@
       <format>
          <puid type="fmt">1664</puid>
          <name>RED Thumbnail File</name>
-         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1665</puid>
@@ -6815,7 +7041,7 @@
       <format>
          <puid type="fmt">1679</puid>
          <name>Garmin track log file</name>
-         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1680</puid>
@@ -6825,7 +7051,7 @@
       <format>
          <puid type="fmt">1681</puid>
          <name>OBO Flat File Format</name>
-         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1682</puid>
@@ -7020,7 +7246,7 @@
       <format>
          <puid type="fmt">1722</puid>
          <name>BIM Metadata File</name>
-         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives.</summary>
+         <summary>Signature researched and samples provided by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
    </release_outline>
 </release_note>
@@ -7031,7 +7257,7 @@
       <format>
          <puid type="fmt">1629</puid>
          <name>Adobe InDesign Document 1.5</name>
-         <summary>Corrected relationships by adding priority over Adobe InDesign Document 1.0 and removing priority over Adobe InDesign Document 1.0. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Corrected relationships by adding priority over Adobe InDesign Document 1.0 and removing priority over Adobe InDesign Document 1.0. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
    </release_outline>
 </release_note>
@@ -7254,12 +7480,12 @@
       <format>
          <puid type="fmt">1184</puid>
          <name>InDesign Markup Language Package</name>
-         <summary>Note field updated. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Note field updated. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1191</puid>
          <name>Adobe InDesign Book</name>
-         <summary>Note field updated. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Note field updated. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1192</puid>
@@ -7269,7 +7495,7 @@
       <format>
          <puid type="fmt">1358</puid>
          <name>MicroStation Base File</name>
-         <summary>Added byte sequence to signature. Added priority over Bentley Microstation Hidden Line File. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Added byte sequence to signature. Added priority over Bentley Microstation Hidden Line File. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
       <format>
          <puid type="fmt">1423</puid>
@@ -7279,7 +7505,7 @@
       <format>
          <puid type="fmt">1596</puid>
          <name>ESRI ArcInfo Grid .nit File</name>
-         <summary>Capitalised 'File' in file format name and signature. Amended BOF signature to allow for 02, 04 or 08 at byte 2. Removed EOF signature. Submitted by Digital Preservation Department, The National Archives.</summary>
+         <summary>Capitalised 'File' in file format name and signature. Amended BOF signature to allow for 02, 04 or 08 at byte 2. Removed EOF signature. Submitted by Digital Preservation Department, The National Archives (UK).</summary>
       </format>
    </release_outline>
    <release_outline name="New Signatures">

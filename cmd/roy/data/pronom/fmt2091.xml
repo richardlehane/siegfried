@@ -24,8 +24,8 @@
       <ProvenanceSourceID>299</ProvenanceSourceID>
       <ProvenanceName>Brigham Young University / Brigham Young University</ProvenanceName>
       <ProvenanceSourceDate>04 Dec 2025</ProvenanceSourceDate>
-      <ProvenanceDescription>v.122: new signature. Submitted by Brigham Young University.</ProvenanceDescription>
-      <LastUpdatedDate>04 Dec 2025</LastUpdatedDate>
+      <ProvenanceDescription>v.122: new signature. Submitted by Brigham Young University; v. 123: New extension added of .tiff and priority over fmt/192 Kodak Digital Camera Raw Image File. Submitted by Richard Lehane and Brigham Young University.</ProvenanceDescription>
+      <LastUpdatedDate>12 Feb 2026</LastUpdatedDate>
       <FormatNote>https://github.com/thorsted/PRONOM_Research/tree/main/Submissions/DCS
 http://fileformats.archiveteam.org/wiki/Kodak
 https://preservation.tylerthorsted.com/2024/11/29/kodak-tiff/</FormatNote>
@@ -54,6 +54,11 @@ https://preservation.tylerthorsted.com/2024/11/29/kodak-tiff/</FormatNote>
         <Signature>tif</Signature>
         <SignatureType>File extension</SignatureType>
       </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>4631</ExternalSignatureID>
+        <Signature>tiff</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
       <InternalSignature>
         <SignatureID>3454</SignatureID>
         <SignatureName>Kodak DCS RAW Image v.3</SignatureName>
@@ -72,6 +77,13 @@ https://preservation.tylerthorsted.com/2024/11/29/kodak-tiff/</FormatNote>
           <ByteSequenceValue>49492A00{12}4B4F44414B{11}(444353|454F53444353)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>917</RelatedFormatID>
+        <RelatedFormatName>Kodak Digital Camera Raw Image File</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>
