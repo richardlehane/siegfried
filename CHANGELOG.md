@@ -1,7 +1,7 @@
 # Change Log
-## Unreleased
+## v1.11.6 (2026-07-12)
 ### Changed
-- build releases with Go 1.26.5; minimum Go version for library users is still 1.25.0
+- update toolchain and worflows to build releases with Go 1.26.5; minimum Go version for library users is still 1.25.0. Implemented by [Jesús García Crespo](https://github.com/richardlehane/siegfried/pull/290)
 
 ## v1.11.5 (2026-07-11)
 ### Changed 

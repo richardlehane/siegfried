@@ -9,7 +9,7 @@
 
 ### Version
 
-1.11.5
+1.11.6
 
 [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -100,6 +100,10 @@ Or, for the most recent updates, you can install from this fork:
     makepkg -si
 
 ## Changes
+## v1.11.6 (2026-07-12)
+### Changed
+- update toolchain and worflows to build releases with Go 1.26.5; minimum Go version for library users is still 1.25.0. Implemented by [Jesús García Crespo](https://github.com/richardlehane/siegfried/pull/290)
+
 ### v1.11.5 (2026-07-11)
 ### Changed 
 - update PRONOM to v124
