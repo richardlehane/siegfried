@@ -12,14 +12,18 @@ on:
 jobs:
   test:
     runs-on: ${{ matrix.os }}
+    env:
+      # Test the matrix-selected toolchain instead of switching to the
+      # preferred toolchain from go.mod.
+      GOTOOLCHAIN: local
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        go: [ '1.x', '1.25']
+        go: [stable, oldstable]
     steps:
       - name: Check out repository code
         uses: actions/checkout@v7
-      - name: Install latest version of go
+      - name: Install matrix Go toolchain
         uses: actions/setup-go@v6
         with:
           go-version: ${{ matrix.go }}

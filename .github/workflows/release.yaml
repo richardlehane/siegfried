@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v7
-      - name: Install latest version of go
+      - name: Install preferred Go toolchain
         uses: actions/setup-go@v6
         with:
           go-version-file: 'go.mod'
@@ -59,7 +59,7 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v7
-      - name: Install latest version of go
+      - name: Install preferred Go toolchain
         uses: actions/setup-go@v6
         with:
           go-version-file: 'go.mod'
@@ -88,7 +88,7 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v7
-      - name: Install latest version of go
+      - name: Install preferred Go toolchain
         uses: actions/setup-go@v6
         with:
           go-version-file: 'go.mod'
@@ -124,7 +124,7 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v7
-      - name: Install latest version of go
+      - name: Install preferred Go toolchain
         uses: actions/setup-go@v6
         with:
           go-version-file: 'go.mod'
@@ -150,7 +150,7 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v7
-      - name: Install latest version of go
+      - name: Install preferred Go toolchain
         uses: actions/setup-go@v6
         with:
           go-version-file: 'go.mod'

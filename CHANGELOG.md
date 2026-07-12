@@ -1,4 +1,8 @@
 # Change Log
+## Unreleased
+### Changed
+- build releases with Go 1.26.5; minimum Go version for library users is still 1.25.0
+
 ## v1.11.5 (2026-07-11)
 ### Changed 
 - update PRONOM to v124

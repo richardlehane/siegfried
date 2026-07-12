@@ -2,6 +2,8 @@ module github.com/richardlehane/siegfried
 
 go 1.25.0
 
+toolchain go1.26.5
+
 require (
 	github.com/richardlehane/characterize v1.0.0
 	github.com/richardlehane/match v1.0.5
