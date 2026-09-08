@@ -50,7 +50,7 @@ var pronom = struct {
 	name:             "pronom",
 	reports:          "pronom",
 	changesURL:       "http://www.nationalarchives.gov.uk/aboutapps/pronom/release-notes.xml",
-	harvestURL:       "http://www.nationalarchives.gov.uk/pronom/",
+	harvestURL:       "https://pronom.nationalarchives.gov.uk/",
 	harvestTimeout:   120 * time.Second,
 	harvestTransport: &http.Transport{Proxy: http.ProxyFromEnvironment},
 	zip:              "x-fmt/263",
