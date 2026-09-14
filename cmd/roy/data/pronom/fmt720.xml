@@ -31,8 +31,8 @@ Due to the variety of MBOX structures, it is not currently possible to produce a
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>12 Feb 2015</ProvenanceSourceDate>
-      <ProvenanceDescription>v.123- New signature created and priority added over fmt/950 MIME Email 1.0. Submitted by Preservica.</ProvenanceDescription>
-      <LastUpdatedDate>09 Jun 2026</LastUpdatedDate>
+      <ProvenanceDescription>v.123- New signature created. Submitted by Preservica; v.125- Priority over fmt/950 MIME Email 1.0 added. Submitted by Preservica.</ProvenanceDescription>
+      <LastUpdatedDate>25 Aug 2026</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -70,6 +70,12 @@ Due to the variety of MBOX structures, it is not currently possible to produce a
           <ByteSequenceValue>46726F6D20{1-255}(4D6F6E|547565|576564|546875|467269|536174|53756E)20{0-2}(4A616E|466562|4D6172|417072|4D6179|4A756E|4A756C|417567|536570|4F6374|4E6F76|446563)20{0-2}[30:39]20[30:32][30:39]3A[30:35][30:39]3A[30:35][30:39]</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>1755</RelatedFormatID>
+        <RelatedFormatName>MIME Email</RelatedFormatName>
+        <RelatedFormatVersion>1.0</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

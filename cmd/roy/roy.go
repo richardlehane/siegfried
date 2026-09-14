@@ -158,11 +158,13 @@ var (
 	quiet         = build.Bool("quiet", false, "lower verbosity level of logging output when building signatures")
 
 	// HARVEST
-	harvest                    = flag.NewFlagSet("harvest", flag.ExitOnError)
-	harvestHome                = harvest.String("home", config.Home(), "override the default home directory")
+	harvest     = flag.NewFlagSet("harvest", flag.ExitOnError)
+	harvestHome = harvest.String("home", config.Home(), "override the default home directory")
+
 	harvestDroid               = harvest.String("droid", config.Droid(), "set name/path for DROID signature file")
 	harvestChanges             = harvest.Bool("changes", false, "harvest the latest PRONOM release-notes.xml file")
-	_, htimeout, _, _          = config.HarvestOptions()
+	hURL, htimeout, _, _       = config.HarvestOptions()
+	harvestURL                 = harvest.String("pronomURL", hURL, "set the URL for PRONOM harvesting")
 	timeout                    = harvest.Duration("timeout", htimeout, "set duration before timing-out harvesting requests e.g. 120s")
 	throttlef                  = harvest.Duration("throttle", 0, "set a time to wait HTTP requests e.g. 50ms")
 	harvestWikidataSigLen      = harvest.Int("siglen", config.WikidataSigLen(), "set minimum signature length for Wikidata, e.g. 6 chars == 3 bytes")
@@ -494,6 +496,9 @@ func setHarvestOptions() {
 	}
 	if *harvestHome != config.Home() {
 		config.SetHome(*harvestHome)
+	}
+	if *harvestURL != hURL {
+		config.SetHarvestURL(*harvestURL)
 	}
 	if *timeout != htimeout {
 		config.SetHarvestTimeout(*timeout)

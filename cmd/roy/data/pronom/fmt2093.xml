@@ -45,7 +45,7 @@ https://wiki.ros.org/</FormatNote>
       <InternalSignature>
         <SignatureID>3458</SignatureID>
         <SignatureName>ROS Bag v.2</SignatureName>
-        <SignatureNote>BOF; Offset: 0; Magic Bytes: #ROSBAG V2.0</SignatureNote>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: '#ROSBAG V2.0'</SignatureNote>
         <ByteSequence>
           <ByteSequenceID>3852</ByteSequenceID>
           <PositionType>Absolute from BOF</PositionType>

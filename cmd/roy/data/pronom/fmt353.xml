@@ -417,6 +417,19 @@ http://www.alternatiff.com/resources/TIFFphotoshop.pd</FormatNote>
         <RelatedFormatVersion>1.7</RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>3967</RelatedFormatID>
+        <RelatedFormatName>Kodak DCS RAW Image</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>3968</RelatedFormatID>
+        <RelatedFormatName>Kodak DCS RAW Image</RelatedFormatName>
+        <RelatedFormatVersion>3</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>687</RelatedFormatID>
         <RelatedFormatName>MPEG 1/2 Audio Layer 3</RelatedFormatName>

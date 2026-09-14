@@ -2556,6 +2556,20 @@
     "fmt/2101 (ChemStation Gas Chromatography/Mass Spectrum (GC/MS) Data File 2)",
     "fmt/2102 (BioSemi Data Format)",
     "fmt/2103 (Discus Project 2-3)",
-    "fmt/2104 (Discus Project File 4)"
+    "fmt/2104 (Discus Project File 4)",
+    "fmt/2105 (ForTheRecord TRM Audio)",
+    "fmt/2106 (FictionBook eBook 2)",
+    "fmt/2107 (Aseprite Sprite)",
+    "fmt/2108 (FAB2 Book Container 0.2)",
+    "fmt/2109 (Clock RINEX File Format 2.0)",
+    "fmt/2110 (Clock RINEX File Format 3.0)",
+    "fmt/2111 (LABView Virtual Instrument 3.0)",
+    "fmt/2112 (NumPy Format)",
+    "fmt/2113 (TIGER/Line ASCII 1989-2006)",
+    "fmt/2114 (TIGER/Line Shapefile 2007 onwards)",
+    "fmt/2115 (HALO Photonics Doppler LiDAR File Format)",
+    "fmt/2116 (Hugin Project File 2.0)",
+    "fmt/2117 (Address Event DATa Format)",
+    "fmt/2118 (FASTQ)"
   ]
 }

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>4994</FormatID>
+      <FormatName>FASTQ</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>FASTQ is a text based format for storing biological sequences (nucleotide and amino), but differs from the FASTA format by also storing corresponding quality scores alongside the sequences. Both the sequence letter and quality score are encoded with a single ASCII character.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>299</ProvenanceSourceID>
+      <ProvenanceName>Brigham Young University / Brigham Young University</ProvenanceName>
+      <ProvenanceSourceDate>02 Sep 2026</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>02 Sep 2026</LastUpdatedDate>
+      <FormatNote>https://en/wikipedia.org/wiki/FASTQ</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/2118</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>5668</ExternalSignatureID>
+        <Signature>fastq</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>5669</ExternalSignatureID>
+        <Signature>fq</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>4482</SignatureID>
+        <SignatureName>FASTQ</SignatureName>
+        <SignatureNote>BOF; Magic Bytes: Searching for repeated sequencing data</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>4878</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>40{0-65536}(0A|0D|0D0A)(41|43|47|4E|54)(41|43|47|4E|54)(41|43|47|4E|54)(41|43|47|4E|54)(41|43|47|4E|54)(41|43|47|4E|54)(41|43|47|4E|54)(41|43|47|4E|54)(41|43|47|4E|54)(41|43|47|4E|54)(41|43|47|4E|54)(41|43|47|4E|54)(41|43|47|4E|54)(41|43|47|4E|54)(41|43|47|4E|54)(41|43|47|4E|54)(41|43|47|4E|54)(41|43|47|4E|54)(41|43|47|4E|54)(41|43|47|4E|54){0-2048}(0A|0D|0D0A)2B</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

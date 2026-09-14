@@ -276,6 +276,18 @@ https://fileinfo.com/extension/zip</FormatNote>
         <RelatedFormatVersion>
         </RelatedFormatVersion>
       </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>4989</RelatedFormatID>
+        <RelatedFormatName>TIGER/Line ASCII</RelatedFormatName>
+        <RelatedFormatVersion>1989-2006</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>4990</RelatedFormatID>
+        <RelatedFormatName>TIGER/Line Shapefile</RelatedFormatName>
+        <RelatedFormatVersion>2007 onwards</RelatedFormatVersion>
+      </RelatedFormat>
     </FileFormat>
     <SearchCriteria>Criteria</SearchCriteria>
   </report_format_detail>

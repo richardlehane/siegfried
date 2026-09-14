@@ -268,7 +268,8 @@
     "fmt/2036 (Plextalk Project File (imdn))",
     "fmt/2037 (Plextalk Project File (imtt))",
     "fmt/2056 (Immersive Audio Model Format)",
-    "fmt/2094 (M4A Audio)"
+    "fmt/2094 (M4A Audio)",
+    "fmt/2105 (ForTheRecord TRM Audio)"
   ],
   "database": [
     "x-fmt/6 (FoxPro Database 2.0)",
@@ -600,7 +601,11 @@
     "fmt/2097 (GGML Universal File (GGUF) 2)",
     "fmt/2098 (GGML Universal File (GGUF) 3)",
     "fmt/2101 (ChemStation Gas Chromatography/Mass Spectrum (GC/MS) Data File 2)",
-    "fmt/2102 (BioSemi Data Format)"
+    "fmt/2102 (BioSemi Data Format)",
+    "fmt/2112 (NumPy Format)",
+    "fmt/2113 (TIGER/Line ASCII 1989-2006)",
+    "fmt/2114 (TIGER/Line Shapefile 2007 onwards)",
+    "fmt/2117 (Address Event DATa Format)"
   ],
   "email": [
     "x-fmt/430 (Microsoft Outlook Email Message 97-2003)",
@@ -671,7 +676,9 @@
     "fmt/1936 (PCRaster)",
     "fmt/2040 (CityGML File 1.0)",
     "fmt/2049 (ArcGIS Pro Layer File)",
-    "fmt/2070 (Autodesk ReCap RCS Indexed Point Cloud Data)"
+    "fmt/2070 (Autodesk ReCap RCS Indexed Point Cloud Data)",
+    "fmt/2113 (TIGER/Line ASCII 1989-2006)",
+    "fmt/2114 (TIGER/Line Shapefile 2007 onwards)"
   ],
   "imageRaster": [
     "x-fmt/25 (OS/2 Bitmap 1.0)",
@@ -970,7 +977,8 @@
     "fmt/2062 (AV1 Image File Format)",
     "fmt/2090 (Kodak DCS RAW Image)",
     "fmt/2091 (Kodak DCS RAW Image 3)",
-    "fmt/2095 (Hasselblad FFF Raw Image)"
+    "fmt/2095 (Hasselblad FFF Raw Image)",
+    "fmt/2107 (Aseprite Sprite)"
   ],
   "imageVector": [
     "x-fmt/20 (Adobe Illustrator 1.0 / 1.1)",
@@ -1395,7 +1403,8 @@
     "fmt/1937 (Amazon Kindle eBook File)",
     "fmt/1952 (PechaMaker Format)",
     "fmt/2050 (PDF/UA Portable Document Format 1)",
-    "fmt/2052 (PDF/UA Portable Document Format 2)"
+    "fmt/2052 (PDF/UA Portable Document Format 2)",
+    "fmt/2108 (FAB2 Book Container 0.2)"
   ],
   "presentation": [
     "x-fmt/32 (Harvard Graphics Chart 3.0)",
@@ -1956,7 +1965,13 @@
     "fmt/2055 (Apple Mail EMLX Format)",
     "fmt/2066 (Rust Source File)",
     "fmt/2072 (Weaving Information File (WIF) 1.1)",
-    "fmt/2099 (iZotope RX Document)"
+    "fmt/2099 (iZotope RX Document)",
+    "fmt/2106 (FictionBook eBook 2)",
+    "fmt/2109 (Clock RINEX File Format 2.0)",
+    "fmt/2110 (Clock RINEX File Format 3.0)",
+    "fmt/2115 (HALO Photonics Doppler LiDAR File Format)",
+    "fmt/2116 (Hugin Project File 2.0)",
+    "fmt/2118 (FASTQ)"
   ],
   "textUnstructured": [
     "x-fmt/14 (Macintosh Text File)",
@@ -2239,6 +2254,7 @@
     "fmt/1909 (TibetDoc Word Document)",
     "fmt/1965 (Papyrus Document)",
     "fmt/1966 (Final Writer Document)",
-    "fmt/2044 (OpenDocument Text 1.4)"
+    "fmt/2044 (OpenDocument Text 1.4)",
+    "fmt/2108 (FAB2 Book Container 0.2)"
   ]
 }

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>4983</FormatID>
+      <FormatName>Aseprite Sprite</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Image (Raster)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>The native format of Aseprite, a graphics package primarily targeted at the creation of pixel art. Aseprite sprites can be static (technically single-framed), or animated.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>244</ProvenanceSourceID>
+      <ProvenanceName>Preservica / Preservica</ProvenanceName>
+      <ProvenanceSourceDate>01 Sep 2026</ProvenanceSourceDate>
+      <ProvenanceDescription>v.125: new PUID.</ProvenanceDescription>
+      <LastUpdatedDate>01 Sep 2026</LastUpdatedDate>
+      <FormatNote>https://github.com/aseprite/aseprite/blob/main/docs/ase-file-specs.md
+https://www.aseprite.org/</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/2107</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>5650</ExternalSignatureID>
+        <Signature>aseprite</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <ExternalSignature>
+        <ExternalSignatureID>5651</ExternalSignatureID>
+        <Signature>ase</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>4472</SignatureID>
+        <SignatureName>Aseprite Sprite</SignatureName>
+        <SignatureNote>BOF; Offset: 4; Magic Bytes: 0xE0A5 followed by 126 bytes and then 0xFAF1</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>4866</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>4</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>E0A5{126}FAF1</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

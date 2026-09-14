@@ -97,6 +97,13 @@
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>3982</RelatedFormatID>
+        <RelatedFormatName>ForTheRecord TRM Audio</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>2741</RelatedFormatID>
         <RelatedFormatName>Resource Interchange File Format (RIFF)</RelatedFormatName>

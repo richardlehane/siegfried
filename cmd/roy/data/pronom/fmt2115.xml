@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>4991</FormatID>
+      <FormatName>HALO Photonics Doppler LiDAR File Format</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>HALO Photonics Doppler LiDAR File Format is a proprietary, text-based format that contains header information and time-series data for atmospheric measurements. It is designed for continuous remote sensing specifically to log atmospheric backscatter and line-of-sight wind velocity.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>349</ProvenanceSourceID>
+      <ProvenanceName>Digital Research Alliance of Canada - FRDR / Alliance de recherche numérique du Canada – DFDR</ProvenanceName>
+      <ProvenanceSourceDate>01 Sep 2026</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>01 Sep 2026</LastUpdatedDate>
+      <FormatNote>Vendor: HALO Photonics: https://halo-photonics.com/\nDocumentation: https://aidaho-edu.uni-hohenheim.de/gitlab/lafe_test/lafi-data-management/-/wikis/home/HPL-Doppler-LiDAR-File-Format-Documentation</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/2115</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>5661</ExternalSignatureID>
+        <Signature>hpl</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>4483</SignatureID>
+        <SignatureName>HALO Photonics Doppler LiDAR File Format</SignatureName>
+        <SignatureNote>BOF; Offset: 288-400;  Magic Bytes: Azimuth</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>4879</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>288</Offset>
+          <MaxOffset>112</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>417A696D757468</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

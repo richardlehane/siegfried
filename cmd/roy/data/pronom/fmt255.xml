@@ -13,7 +13,7 @@
       <FormatTypes>Image (Raster)</FormatTypes>
       <FormatDisclosure>
       </FormatDisclosure>
-      <FormatDescription>The Digital Video file format was developed as a videocassette format in the 1990s by a consortium of consumer video companies and is described in the IEC 61834 series of standards. DV video content utilizes Discrete Cosine Transform compression, but allows for higher quality than formats that use similar compression schemes. DV files can be "raw" with the .dv file extension or wrapped into video container formats.</FormatDescription>
+      <FormatDescription>The DjVu file format is an image file format used primarily for storing scanned documents. The format, developed by AT&amp;T Labs, is based on the Interchange File format. There are three elements that comprise a DjVu encoded image file: the mask which is encoded using the JB2 algorithm; the background encoded using the wavelet-based compression IW44; and the foreground, containing the colour of the text and the line drawings, also encoding using IW44. The background and foreground are usually lower resolution (100 dpi) colour images with the mask at a higher level resolution (e.g. 300 dpi).</FormatDescription>
       <BinaryFileFormat>Text</BinaryFileFormat>
       <ByteOrders>
       </ByteOrders>
@@ -24,7 +24,7 @@
       <ProvenanceSourceID>149</ProvenanceSourceID>
       <ProvenanceName>National Library of Singapore / National Library Board Singapore</ProvenanceName>
       <ProvenanceSourceDate>08 Jan 2010</ProvenanceSourceDate>
-      <ProvenanceDescription>v.120- Updated description as part of PRONOM Research Week 2024. Submitted by the Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche numérique du Canada - Dépôt fédéré de données de recherche.</ProvenanceDescription>
+      <ProvenanceDescription>v.120- Updated description as part of PRONOM Research Week 2024. Submitted by the Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche numérique du Canada - Dépôt fédéré de données de recherche;  v.125- Updated description to correct definition due to previous mistake. Submitted by the Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche numérique du Canada - Dépôt fédéré de données de recherche</ProvenanceDescription>
       <LastUpdatedDate>02 Jan 2025</LastUpdatedDate>
       <FormatNote>
       </FormatNote>

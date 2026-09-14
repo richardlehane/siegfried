@@ -258,6 +258,11 @@ func SetExtendC(l []string) func() private {
 
 // unlike other setters, these are only relevant in the roy tool so can't be converted to the Option type
 
+// SetHarvestURL sets the URL target for PRONOM harvesting
+func SetHarvestURL(u string) {
+	pronom.harvestURL = u
+}
+
 // SetHarvestTimeout sets a time limit on PRONOM harvesting.
 func SetHarvestTimeout(d time.Duration) {
 	pronom.harvestTimeout = d

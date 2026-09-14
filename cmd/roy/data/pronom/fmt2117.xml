@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>4993</FormatID>
+      <FormatName>Address Event DATa Format</FormatName>
+      <FormatVersion>
+      </FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Dataset</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>aedat4 files are associated with the DV (Dynamic Vision) framework and have been in use since 2019. The format captures IMU data and time and event based data. The format is binary and uses Google Flatbuffer for data serialization. It is the output of DV/jAer IniVitation event based cameras.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>349</ProvenanceSourceID>
+      <ProvenanceName>Digital Research Alliance of Canada - FRDR / Alliance de recherche numérique du Canada – DFDR</ProvenanceName>
+      <ProvenanceSourceDate>01 Sep 2026</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>01 Sep 2026</LastUpdatedDate>
+      <FormatNote>Inivation- AEDAT 4.0 - https://docs.inivation.com/software/software-advanced-usage/file-formats/aedat-4.0.html</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/2117</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>5663</ExternalSignatureID>
+        <Signature>aedat4</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>4481</SignatureID>
+        <SignatureName>Address Event DATa Format 4.0</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: #!AER-DAT4.0</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>4877</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>23214145523D444154342E30</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

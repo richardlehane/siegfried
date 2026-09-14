@@ -121,6 +121,13 @@ Content-(T|t)ype:</SignatureNote>
       </InternalSignature>
       <RelatedFormat>
         <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>1519</RelatedFormatID>
+        <RelatedFormatName>MBOX</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
         <RelatedFormatID>3930</RelatedFormatID>
         <RelatedFormatName>Apple Mail EMLX Format</RelatedFormatName>
         <RelatedFormatVersion>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>4990</FormatID>
+      <FormatName>TIGER/Line Shapefile</FormatName>
+      <FormatVersion>2007 onwards</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>GIS, Dataset</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>In the original 2007 specification, internal files had the structure:
+
+fe_2007_&lt;extent&gt;_&lt;layer&gt;.&lt;extension&gt;
+
+However, from 2008 the naming convention changed to:
+
+tl_YYYY_&lt;extent&gt;_&lt;layer&gt;.&lt;extension&gt;
+
+Further, TIGER/Line files related to Congressional Districts and Redistricting Data may follow the naming convention:
+
+tl_rdYY_&lt;extent&gt;_&lt;layer&gt;.&lt;extension&gt;
+
+‘YYYY’ or ‘YY’ represents the year the data was produced. ‘Extent’ is a 2-5 digit value representing a geographical area. ‘Layer’ specifies the type of geography or feature that the file contains. ‘Extension’ refers to the specific file type, usually .shp, .dbf, .cpg, .shx, or .prj.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>244</ProvenanceSourceID>
+      <ProvenanceName>Preservica / Preservica</ProvenanceName>
+      <ProvenanceSourceDate>01 Sep 2026</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>01 Sep 2026</LastUpdatedDate>
+      <FormatNote>Specifications for TIGER/Line can be found on the US Census Bureau website: https://www.census.gov/programs-surveys/geography/technical-documentation/complete-technical-documentation/tiger-geo-line.html</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/2114</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>5660</ExternalSignatureID>
+        <Signature>zip</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>4479</SignatureID>
+        <SignatureName>TIGER/Line Shapefile 2007</SignatureName>
+        <SignatureNote>Identification relies on two elements: the ‘PK’ 0x0304 ZIP declaration, following by the first record in the file listing following the naming convention: 'fe_2007_' {2-5} '_' {2-16} '.'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>4875</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>504B0304{26}66655F323030375F{2-5}5F{2-16}2E</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <InternalSignature>
+        <SignatureID>4480</SignatureID>
+        <SignatureName>TIGER/Line Shapefile 2008 onwards</SignatureName>
+        <SignatureNote>Identification relies on two elements: the ‘PK’ 0x0304 ZIP declaration, following by the first record in the file listing following the naming convention: tl_&lt;YYYY&gt;_&lt;extent&gt;_&lt;layer&gt;.&lt;extension&gt;.</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>4876</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>504B0304{26}746C5F(3230|7264)[30:39][30:39]5F{2-5}5F{2-16}2E(637067|646266|70726A|736870|736878)</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+      <RelatedFormat>
+        <RelationshipType>Has priority over</RelationshipType>
+        <RelatedFormatID>382</RelatedFormatID>
+        <RelatedFormatName>ZIP Format</RelatedFormatName>
+        <RelatedFormatVersion>
+        </RelatedFormatVersion>
+      </RelatedFormat>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

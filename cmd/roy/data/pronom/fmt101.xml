@@ -836,6 +836,12 @@
         </RelatedFormatVersion>
       </RelatedFormat>
       <RelatedFormat>
+        <RelationshipType>Has lower priority than</RelationshipType>
+        <RelatedFormatID>4982</RelatedFormatID>
+        <RelatedFormatName>FictionBook eBook</RelatedFormatName>
+        <RelatedFormatVersion>2</RelatedFormatVersion>
+      </RelatedFormat>
+      <RelatedFormat>
         <RelationshipType>Has priority over</RelationshipType>
         <RelatedFormatID>639</RelatedFormatID>
         <RelatedFormatName>Hypertext Markup Language</RelatedFormatName>

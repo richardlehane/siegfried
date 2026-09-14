@@ -2,6 +2,181 @@
 <?xml-stylesheet type="text/xsl" href="release-note.xsl"?>
 <release_notes>
 <release_note>
+   <release_date>2nd September 2026</release_date>
+   <signature_filename>DROID_SignatureFile_V125.xml</signature_filename>
+   <release_outline name="New Records">f
+      <format>
+         <puid type="fmt">2105</puid>
+         <name>ForTheRecord TRM Audio</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2106</puid>
+         <name>Fictionbook ebook v.2</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2107</puid>
+         <name>Aseprite Sprite</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2108</puid>
+         <name>FAB2 Book Container 0.2</name>
+         <summary>Full entry added. Submitted by Fabylon.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2109</puid>
+         <name>Clock RINEX File Format 2.0</name>
+         <summary>Full entry added. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2110</puid>
+         <name>Clock RINEX File Format 3.0</name>
+         <summary>Full entry added. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2111</puid>
+         <name>LabVIEW Virtual Instrument File Format 3.0</name>
+         <summary>Full entry added. Submitted by Technische Informationsbibliothek (TIB).</summary>
+      </format>
+      <format>
+         <puid type="fmt">2112</puid>
+         <name>NumPy Format</name>
+         <summary>Full entry added. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2113</puid>
+         <name>TIGER/Line ASCII1989-2006</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2114</puid>
+         <name>TIGER/Line Shapefile 2007 onwards</name>
+         <summary>Full entry added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2115</puid>
+         <name>HALO Photonics Doppler LiDAR File Format</name>
+         <summary>Full entry added. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2116</puid>
+         <name>Hugin Project File</name>
+         <summary>Full entry added. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2117</puid>
+         <name>Address Event DATa Format 4.0</name>
+         <summary>Full entry added. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2118</puid>
+         <name>FASTAQ</name>
+         <summary>Full entry added. Submitted by Brigham Young University and Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="Updated Records">
+      <format>
+         <puid type="fmt">45</puid>
+         <name>Rich Text Format</name>
+         <summary>Updated signature to allow for whitespace as per specification. Submitted by Archives nationales de France.</summary>
+      </format>
+      <format>
+         <puid type="fmt">255</puid>
+         <name>DjVu File Format</name>
+         <summary>Description correctly updated. Submitted by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+      <format>
+         <puid type="fmt ">720</puid>
+         <name>MBOX</name>
+         <summary>Priority over fmt/950 MIME Email added. Submitted by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2090</puid>
+         <name>Kodak DCS RAW Image  </name>
+         <summary>Added priority over fmt/353 Tagged Image File Format. Submitted by Richard Lehane, Preservica and Brigham Young University.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2091</puid>
+         <name>Kodak DCS RAW Image 3</name>
+         <summary>Added priority over fmt/353 Tagged Image File Format. Submitted by Richard Lehane, Preservica and Brigham Young University.</summary>
+      </format>
+   </release_outline>
+   <release_outline name="New Signatures">
+      <format>
+         <puid type="fmt">2105</puid>
+         <name>ForTheRecord TRM Audio</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2106</puid>
+         <name>Fictionbook ebook v.2</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2107</puid>
+         <name>Aseprite Sprite</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2108</puid>
+         <name>FAB2 Book Container 0.2</name>
+         <summary>Signature researched and samples provided by Fabylon.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2109</puid>
+         <name>Clock RINEX File Format 2.0</name>
+         <summary>Signature researched and samples provided by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2110</puid>
+         <name>Clock RINEX File Format 3.0</name>
+         <summary>Signature researched and samples provided by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2111</puid>
+         <name>LabVIEW Virtual Instrument File Format 3.0</name>
+         <summary>Signature researched and samples provided by Technische Informationsbibliothek (TIB).</summary>
+      </format>
+      <format>
+         <puid type="fmt">2112</puid>
+         <name>NumPy Format</name>
+         <summary>Signature researched and samples provided by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2113</puid>
+         <name>TIGER/Line ASCII1989-2006</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2114</puid>
+         <name>TIGER/Line Shapefile 2007 onwards</name>
+         <summary>Signature researched and samples provided by Preservica.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2115</puid>
+         <name>HALO Photonics Doppler LiDAR File Format</name>
+         <summary>Signature researched and samples provided by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2116</puid>
+         <name>Hugin Project File</name>
+         <summary>Signature researched and samples provided by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2117</puid>
+         <name>Address Event DATa Format 4.0</name>
+         <summary>Signature researched and samples provided by Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+      <format>
+         <puid type="fmt">2118</puid>
+         <name>FASTAQ</name>
+         <summary>Signature researched and samples provided by Brigham Young University and Digital Research Alliance of Canada - Federated Research Data Repository / Alliance de recherche num&#xE9;rique du Canada - D&#xE9;p&#xF4;t f&#xE9;d&#xE9;r&#xE9; de donn&#xE9;es de recherche.</summary>
+      </format>
+   </release_outline>
+</release_note>
+<release_note>
    <release_date>9th June 2026</release_date>
    <signature_filename>DROID_SignatureFile_V124.xml</signature_filename>
    <release_outline name="Updated Records">

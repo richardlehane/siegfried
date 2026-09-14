@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>4984</FormatID>
+      <FormatName>FAB2 Book Container</FormatName>
+      <FormatVersion>0.2</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Page Description, Word Processor</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>A container for digital books that stores the book as typographic data, unlike other alternatives that store books as web documents inside an archive. The container has no scripting and no executable content.
+Page records carry resolved line geometry, so line breaks and optical margins are decided once when the book is typeset rather than recomputed on the reading device.
+The signature contains an initial 16 byte magic byte header, after which it holds two little-endian unsigned 32-bit lengths, a Zstandard-compressed JSON manifest, and a chunk arena containing one compressed page block and the book's assets.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>364</ProvenanceSourceID>
+      <ProvenanceName>Fabylon / Fabylon</ProvenanceName>
+      <ProvenanceSourceDate>01 Sep 2026</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>01 Sep 2026</LastUpdatedDate>
+      <FormatNote>Specification: https://www.google.com/url?q=https://fabylon.net/fab/specification/&amp;source=gmail&amp;ust=1787034048114000&amp;sa=E
+
+Related software: Fabylon Bookmaker — writes .fab — https://www.google.com/url?q=https://www.martijnbenders.nl/bookmaker/&amp;source=gmail&amp;ust=1787034048114000&amp;sa=E
+Fabylon Reader — reads .fab — https://www.google.com/url?q=https://fabylon.net/fabreader/&amp;source=gmail&amp;ust=1787034048114000&amp;sa=E</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>application/vnd.fabylon.book</Identifier>
+        <IdentifierType>MIME</IdentifierType>
+      </FileFormatIdentifier>
+      <FileFormatIdentifier>
+        <Identifier>fmt/2108</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>5652</ExternalSignatureID>
+        <Signature>fab</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>4473</SignatureID>
+        <SignatureName>FAB2 Book Container</SignatureName>
+        <SignatureNote>BOF; Offset: 0; Magic Bytes: 'ASCII FABYLON_BOOK_02!'</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>4869</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>0</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>464142594C4F4E5F424F4F4B5F303221</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

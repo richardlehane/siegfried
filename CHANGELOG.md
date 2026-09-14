@@ -1,4 +1,12 @@
 # Change Log
+## v1.11.7 (2026-09-14)
+### Added
+- pronomURL flag added to options for the roy harvest subcommand
+
+### Changed 
+- update PRONOM to v125
+- default PRONOM URL for harvesting changed to https://pronom.nationalarchives.gov.uk
+
 ## v1.11.6 (2026-07-12)
 ### Changed
 - update toolchain and worflows to build releases with Go 1.26.5; minimum Go version for library users is still 1.25.0. Implemented by [Jesús García Crespo](https://github.com/richardlehane/siegfried/pull/290)

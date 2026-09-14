@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRONOM-Report xmlns="http://pronom.nationalarchives.gov.uk">
+  <report_format_detail>
+    <FileFormat>
+      <FormatID>4985</FormatID>
+      <FormatName>Clock RINEX File Format</FormatName>
+      <FormatVersion>2.0</FormatVersion>
+      <FormatAliases>
+      </FormatAliases>
+      <FormatFamilies>
+      </FormatFamilies>
+      <FormatTypes>Text (Structured)</FormatTypes>
+      <FormatDisclosure>
+      </FormatDisclosure>
+      <FormatDescription>A Clock RINEX (Receiver Independent Exchange) Format holds high precision time information for ground base receivers and GNSS (Global Navigation Satellite System) satellites. The files allow for the exchange of precise timing information.</FormatDescription>
+      <BinaryFileFormat>
+      </BinaryFileFormat>
+      <ByteOrders>
+      </ByteOrders>
+      <ReleaseDate>
+      </ReleaseDate>
+      <WithdrawnDate>
+      </WithdrawnDate>
+      <ProvenanceSourceID>349</ProvenanceSourceID>
+      <ProvenanceName>Digital Research Alliance of Canada - FRDR / Alliance de recherche numérique du Canada – DFDR</ProvenanceName>
+      <ProvenanceSourceDate>01 Sep 2026</ProvenanceSourceDate>
+      <ProvenanceDescription>
+      </ProvenanceDescription>
+      <LastUpdatedDate>01 Sep 2026</LastUpdatedDate>
+      <FormatNote>RINEX Extensions to Handle Clock Information - https://files.igs.org/pub/data/format/rinex_clock304.txt
+
+Clock RINEX - https://gssc.esa.int/education/library/standards-and-data-formats/file-formats/clock-rinex/</FormatNote>
+      <FormatRisk>
+      </FormatRisk>
+      <TechnicalEnvironment>
+      </TechnicalEnvironment>
+      <FileFormatIdentifier>
+        <Identifier>fmt/2109</Identifier>
+        <IdentifierType>PUID</IdentifierType>
+      </FileFormatIdentifier>
+      <ExternalSignature>
+        <ExternalSignatureID>5653</ExternalSignatureID>
+        <Signature>clk</Signature>
+        <SignatureType>File extension</SignatureType>
+      </ExternalSignature>
+      <InternalSignature>
+        <SignatureID>4474</SignatureID>
+        <SignatureName>Clock RINEX File Format 2.0</SignatureName>
+        <SignatureNote>BOF; Offset: 5; Magic Bytes: 2.00{11}C{39}RINEX</SignatureNote>
+        <ByteSequence>
+          <ByteSequenceID>4870</ByteSequenceID>
+          <PositionType>Absolute from BOF</PositionType>
+          <Offset>5</Offset>
+          <MaxOffset>0</MaxOffset>
+          <IndirectOffsetLocation>
+          </IndirectOffsetLocation>
+          <IndirectOffsetLength>
+          </IndirectOffsetLength>
+          <Endianness>
+          </Endianness>
+          <ByteSequenceValue>322E3030{11}43{39}52494E4558</ByteSequenceValue>
+        </ByteSequence>
+      </InternalSignature>
+    </FileFormat>
+    <SearchCriteria>Criteria</SearchCriteria>
+  </report_format_detail>
+</PRONOM-Report>

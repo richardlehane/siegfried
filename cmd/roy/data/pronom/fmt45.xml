@@ -20,9 +20,8 @@
       <ProvenanceSourceID>1</ProvenanceSourceID>
       <ProvenanceName>Digital Preservation Department / The National Archives</ProvenanceName>
       <ProvenanceSourceDate>11 Mar 2005</ProvenanceSourceDate>
-      <ProvenanceDescription>
-      </ProvenanceDescription>
-      <LastUpdatedDate>25 Oct 2012</LastUpdatedDate>
+      <ProvenanceDescription>v.125: Updated signature to allow for whitespace as per specification. Submitted by the Archives nationales de France.</ProvenanceDescription>
+      <LastUpdatedDate>02 Sep 2026</LastUpdatedDate>
       <FormatNote>
       </FormatNote>
       <FormatRisk>
@@ -94,7 +93,7 @@
           </IndirectOffsetLength>
           <Endianness>
           </Endianness>
-          <ByteSequenceValue>7B5C7274(66|6631)5C(616E7369|6D6163|7063|706361)</ByteSequenceValue>
+          <ByteSequenceValue>7B5C7274(66|6631)(205C|5C)(616E7369|6D6163|7063|706361)</ByteSequenceValue>
         </ByteSequence>
       </InternalSignature>
       <RelatedFormat>
