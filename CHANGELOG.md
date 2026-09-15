@@ -1,4 +1,8 @@
 # Change Log
+## v1.11.8 (2026-09-15)
+### Changed
+- update go version, tool chain and dependencies to address CVEs in std lib. Reported by [Axel Barbosa](https://github.com/richardlehane/siegfried/discussions/295)
+
 ## v1.11.7 (2026-09-14)
 ### Added
 - pronomURL flag added to options for the roy harvest subcommand
