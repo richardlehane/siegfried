@@ -4,9 +4,11 @@ package main
 
 import (
 	"bytes"
+	_ "embed"
 	"fmt"
 	"hash"
 	"io"
+	"log"
 	"path/filepath"
 	"syscall/js"
 	"time"
@@ -15,7 +17,7 @@ import (
 	"github.com/richardlehane/siegfried/internal/checksum"
 	"github.com/richardlehane/siegfried/pkg/config"
 	"github.com/richardlehane/siegfried/pkg/decompress"
-	"github.com/richardlehane/siegfried/pkg/static"
+	"github.com/richardlehane/siegfried/pkg/pronom"
 	"github.com/richardlehane/siegfried/pkg/writer"
 )
 
@@ -27,6 +29,18 @@ const (
 	csvOut
 	droidOut
 )
+
+//go:embed signature_files/droid_signature_file.xml
+var droid string
+
+//go:embed  signature_files/droid_container_signature_file.xml
+var container string
+
+const signatureDetails string = "WASM Embedded Defaults"
+const signatureFileVersion string = "v120"
+const containerFileVersion string = "2024-07-15"
+
+var sf *siegfried.Siegfried
 
 func opts(args []js.Value) (output, checksum.HashTyp, bool) {
 	var out output
@@ -187,7 +201,7 @@ func identifyFiles(
 //
 //	     md5, sha1, sha256, sha512, crc,
 //		 z
-func sfWrapper(sf *siegfried.Siegfried) js.Func {
+func sfWrapper() js.Func {
 	return js.FuncOf(func(this js.Value, args []js.Value) any {
 		if len(args) < 1 {
 			panic("SF WASM error: provide a FileSystemHandle as first argument")
@@ -212,7 +226,8 @@ func sfWrapper(sf *siegfried.Siegfried) js.Func {
 					w = writer.JSON(out)
 				}
 				w.Head(config.SignatureBase(), time.Now(), sf.C, config.Version(), sf.Identifiers(), sf.Fields(), ht.String())
-				err := identifyFiles(sf, r, args[0], w, h, z, o == droidOut, nil)
+				fsh := args[0]
+				err := identifyFiles(sf, r, fsh, w, h, z, o == droidOut, nil)
 				w.Tail()
 				if err != nil {
 					reject.Invoke(err.Error())
@@ -228,8 +243,101 @@ func sfWrapper(sf *siegfried.Siegfried) js.Func {
 	})
 }
 
+func makeSig(extension []byte, fname string) (*siegfried.Siegfried, error) {
+	opts := []config.Option{}
+	if fname != "" {
+		opts = append(opts,
+			config.SetDetails(
+				fmt.Sprintf("%s; %s; Container: %s; Extension: %s",
+					signatureDetails,
+					signatureFileVersion,
+					containerFileVersion,
+					fname,
+				),
+			),
+		)
+	} else {
+		opts = append(opts,
+			config.SetDetails(
+				fmt.Sprintf("%s; %s; Container: %s",
+					signatureDetails,
+					signatureFileVersion,
+					containerFileVersion,
+				),
+			),
+		)
+	}
+
+	id, err := pronom.NewFromByteArray([]byte(container), []byte(droid), extension, opts...)
+	if err != nil {
+		return nil, err
+	}
+	s := siegfried.New()
+	err = s.Add(id)
+	if err != nil {
+		return nil, err
+	}
+	return s, nil
+}
+
+func royWrapper() js.Func {
+	return js.FuncOf(func(this js.Value, args []js.Value) any {
+		promiseHandler := js.FuncOf(func(v js.Value, x []js.Value) interface{} {
+			// x is a slice containing two functions resolve() and reject()
+			// which are called below when providing a response to the webapp.
+			//
+			// v is not invoked by royWrapper.
+			//
+			if len(args) < 1 {
+				panic("provide a FileSystemHandle as first argument")
+			}
+			resolve := x[0]
+			reject := x[1]
+			go func() {
+				out := &bytes.Buffer{}
+				out.Write([]byte("Successfully loaded new signature file")) // written to the resolve function...
+				var err error
+
+				fsh := args[0]
+				kind := fsh.Get("kind").String()
+
+				if kind != "file" {
+					panic("must provide a file to extend Siegfried's signatures")
+				}
+
+				path := []string{}
+				name := filepath.Join(append(path, fsh.Get("name").String())...)
+				log.Println("signature file:", name)
+
+				r := newReader()
+				promise := fsh.Call("getFile")
+				val, err := await(promise)
+				if err != nil {
+					panic("unable to read signature file to extend Siegfried's signatures")
+				}
+
+				r.reset(val)
+				log.Println("extension signature file size:", len(r.buf))
+				extension, _ := r.Slice(0, int(r.sz))
+
+				sf, err = makeSig(extension, name)
+				if err != nil {
+					reject.Invoke(err.Error())
+				} else {
+					resolve.Invoke(out.String())
+				}
+			}()
+			return nil
+		})
+		// Create and return the Promise object
+		promise := js.Global().Get("Promise")
+		return promise.New(promiseHandler)
+	})
+}
+
 func main() {
-	sf := static.New()
-	js.Global().Set("identify", sfWrapper(sf))
+	sf, _ = makeSig([]byte{}, "")
+	js.Global().Set("identify", sfWrapper())
+	js.Global().Set("sigload", royWrapper())
 	<-make(chan bool)
 }
