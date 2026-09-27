@@ -2,6 +2,7 @@ package siegfried
 
 import (
 	"bytes"
+	"errors"
 	"testing"
 
 	"github.com/richardlehane/siegfried/internal/persist"
@@ -37,6 +38,18 @@ func TestIdentify(t *testing.T) {
 	i := c[0]
 	if i.String() != "fmt/3" {
 		t.Error("expecting fmt/3")
+	}
+}
+
+func TestIdentifyEmpty(t *testing.T) {
+	s := New()
+	s.nm = testEMatcher{}
+	s.bm = testBMatcher{}
+	s.cm = nil
+	s.ids = append(s.ids, testIdentifier{})
+	_, err := s.Identify(new(bytes.Buffer), "test.doc", "")
+	if !errors.Is(err, ErrEmptySource) {
+		t.Errorf("expecting \"error: empty source\", got %q", err)
 	}
 }
 
