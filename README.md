@@ -9,7 +9,7 @@
 
 ### Version
 
-1.11.8
+1.11.9
 
 [![GoDoc](https://godoc.org/github.com/richardlehane/siegfried?status.svg)](https://godoc.org/github.com/richardlehane/siegfried) [![Go Report Card](https://goreportcard.com/badge/github.com/richardlehane/siegfried)](https://goreportcard.com/report/github.com/richardlehane/siegfried)
 
@@ -100,6 +100,10 @@ Or, for the most recent updates, you can install from this fork:
     makepkg -si
 
 ## Changes
+### v1.11.9 (2026-09-27)
+### Changed
+- expose ErrEmpty error type for API users. Implemented by [David Juhasz](https://github.com/richardlehane/siegfried/pull/297)
+
 ### v1.11.8 (2026-09-15)
 ### Changed
 - update go version, tool chain and dependencies to address CVEs in std lib. Reported by [Axel Barbosa](https://github.com/richardlehane/siegfried/discussions/295)
