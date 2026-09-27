@@ -7,7 +7,7 @@ toolchain go1.27.1
 require (
 	github.com/richardlehane/characterize v1.0.0
 	github.com/richardlehane/match v1.0.5
-	github.com/richardlehane/mscfb v1.0.8
+	github.com/richardlehane/mscfb v1.0.9
 	github.com/richardlehane/webarchive v1.0.3
 	github.com/richardlehane/xmldetect v1.0.2
 	github.com/ross-spencer/wikiprov v1.0.0

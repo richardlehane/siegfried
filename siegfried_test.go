@@ -48,7 +48,7 @@ func TestIdentifyEmpty(t *testing.T) {
 	s.cm = nil
 	s.ids = append(s.ids, testIdentifier{})
 	_, err := s.Identify(new(bytes.Buffer), "test.doc", "")
-	if !errors.Is(err, ErrEmptySource) {
+	if !errors.Is(err, ErrEmpty) {
 		t.Errorf("expecting \"error: empty source\", got %q", err)
 	}
 }

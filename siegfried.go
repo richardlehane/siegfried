@@ -72,7 +72,7 @@ var ( // for side effect - register their patterns/ signature loaders
 	_ = wikidata.Identifier{}
 )
 
-var ErrEmptySource = errors.New("empty source")
+var ErrEmpty = errors.New("empty source")
 
 // Siegfried structs are persisent objects that can be serialised to disk and
 // used to identify file formats.
@@ -286,7 +286,7 @@ func (s *Siegfried) Buffer(r io.Reader) (*siegreader.Buffer, error) {
 		err = nil
 	}
 	if errors.Is(err, siegreader.ErrEmpty) {
-		err = ErrEmptySource
+		err = ErrEmpty
 	}
 	return buffer, err
 }
@@ -323,7 +323,7 @@ func satisfied(mt core.MatcherType, recs []core.Recorder) (bool, []core.Hint) {
 
 // IdentifyBuffer identifies a siegreader buffer. Supply the error from Get as the second argument.
 func (s *Siegfried) IdentifyBuffer(buffer *siegreader.Buffer, err error, name, mime string) ([]core.Identification, error) {
-	if err != nil && !errors.Is(err, ErrEmptySource) {
+	if err != nil && !errors.Is(err, ErrEmpty) {
 		return nil, fmt.Errorf("siegfried: error reading file; got %v", err)
 	}
 	recs := make([]core.Recorder, len(s.ids))
