@@ -47,10 +47,24 @@
     <p>
     <pre>identify(FSH, "z", "yaml", "sha1")</pre>
     </p>
-    <h4>Try it</h4>
+    <h2>Roy</h2>
+    <p>
+    Roy is packaged in this WASM application to demonstrate how to extend a
+    signature file.
+    </p>
+    <p>
+    The default signature created is built using a command equivalent to that
+    on the command line of:
+    </p>
+    <pre>./roy build --noreports</pre>
+    <p>
+    The DROID signature files (standard and container) are embedded in the
+    WASM binary from the corresponding files in the WASM directory.
+    </p>
+    <h2>Try it</h2>
     <p>Format (format): <select name="format" id="format">
-            <option value="json">json</option>
             <option value="yaml">yaml</option>
+            <option value="json">json</option>
             <option value="csv">csv</option>
             <option value="droid">droid</option>
         </select></p>
@@ -71,8 +85,11 @@
     <button id="butDirectory" type="button">
         Identify directory
     </button>
-    <h4>Results:</h4>
-    <textarea id="results" name="results" rows="40" cols="60" readonly>
+    <button id="butRoy" type="button">
+        Load signature
+    </button>
+    <h3>Results</h3>
+    <textarea id="results" name="results" rows="40" cols="80" readonly>
      </textarea>
 </body>
 

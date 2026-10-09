@@ -10,3 +10,4 @@ cmd/roy/roy
 cmd/sf/sf
 roy.exe
 sf.exe
+sf.wasm
