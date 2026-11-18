@@ -28,10 +28,11 @@ import (
 // This code produces siegfried bytematcher signatures from the relevant parts of PRONOM, Droid and Container XML signature files
 
 const (
-	pronombof = "Absolute from BOF"
-	pronomeof = "Absolute from EOF"
-	pronomvry = "Variable"
-	droideof  = "EOFoffset"
+	pronomBOF      = "Absolute from BOF"
+	pronomEOF      = "Absolute from EOF"
+	pronomVariable = "Variable"
+	droidEOF       = "EOFoffset"
+	droidBOF       = "BOFoffset"
 )
 
 // helper
@@ -48,10 +49,10 @@ func decodeNum(num string) (int, error) {
 type PROCompatSequence = mappings.ByteSequence
 
 // BeginningOfFile provides access to PRONOM's BOF const.
-const BeginningOfFile = pronombof
+const BeginningOfFile = pronomBOF
 
 // EndOfFile provides access to PRONOM's EOF const.
-const EndOfFile = pronomeof
+const EndOfFile = pronomEOF
 
 // FormatPRONOM is an external helper function for enabling the
 // processing of a significant number of signature types compatible with
@@ -82,7 +83,7 @@ func processPRONOM(puid string, s mappings.Signature) (frames.Signature, error) 
 			max = max + min // the max offset in a PRONOM report is relative to the "offset" value, not to the BOF/EOF
 		}
 		var eof bool
-		if bs.Position == pronomeof {
+		if bs.Position == pronomEOF {
 			eof = true
 		}
 		// parse the hexstring
@@ -92,13 +93,13 @@ func processPRONOM(puid string, s mappings.Signature) (frames.Signature, error) 
 		}
 		// check position and add patterns to signature
 		switch bs.Position {
-		case pronombof:
+		case pronomBOF:
 			if seg[0].Min != 0 || seg[0].Max != 0 {
 				// some signatures may begin with offsets e.g. {0-8} see e.g. fmt/1741
 				min, max = seg[0].Min+min, seg[0].Max+max
 			}
 			seg[0] = frames.NewFrame(frames.BOF, seg[0].Pattern, min, max)
-		case pronomvry:
+		case pronomVariable:
 			if max == 0 {
 				max = -1
 			}
@@ -110,7 +111,7 @@ func processPRONOM(puid string, s mappings.Signature) (frames.Signature, error) 
 				max = -1
 			}
 			seg[0] = frames.NewFrame(frames.BOF, seg[0].Pattern, min, max)
-		case pronomeof:
+		case pronomEOF:
 			if len(seg) > 1 {
 				for i, f := range seg[:len(seg)-1] {
 					seg[i] = frames.NewFrame(frames.SUCC, f.Pattern, seg[i+1].Min, seg[i+1].Max)
@@ -122,7 +123,7 @@ func processPRONOM(puid string, s mappings.Signature) (frames.Signature, error) 
 			}
 			seg[len(seg)-1] = frames.NewFrame(frames.EOF, seg[len(seg)-1].Pattern, min, max)
 		default:
-			return nil, errors.New("Pronom parse error: invalid ByteSequence position " + bs.Position)
+			return nil, errors.New("Pronom parse error: invalid ByteSequence position '" + bs.Position + "'")
 		}
 		// add the segment to the complete signature
 		sig = appendSig(sig, seg, bs.Position)
@@ -136,7 +137,7 @@ func appendSig(s1, s2 frames.Signature, pos string) frames.Signature {
 		return s2
 	}
 	// if s2 is an EOF - just append it
-	if pos == pronomeof || pos == droideof {
+	if pos == pronomEOF || pos == droidEOF {
 		return append(s1, s2...)
 	}
 	// if s1 has an EOF segment, and s2 is a BOF or Var, prepend that s2 segment before it, but after any preceding segments
@@ -154,31 +155,92 @@ func appendSig(s1, s2 frames.Signature, pos string) frames.Signature {
 	return append(s1, s2...)
 }
 
+// processLegacyDROID processes legacy DROID signature files and
+// all of they Boyer–Moore–Horspool goodness including sub-sequences
+// shift bytes and the rest.
+func processLegacyDROID(
+	puid string,
+	ref string,
+	eof bool,
+	vry bool,
+	subSequences []mappings.SubSequence,
+	sig frames.Signature,
+) (frames.Signature, error) {
+	var zeroIndexed bool // fmt/1190 bug in containers: https://github.com/richardlehane/siegfried/issues/175
+	for _, ss := range subSequences {
+		if ss.Position == 0 {
+			zeroIndexed = true
+		}
+		if zeroIndexed {
+			ss.Position += 1
+		}
+		ns, err := processSubSequence(puid, ss, eof, vry)
+		if err != nil {
+			return nil, err
+		}
+		sig = appendSig(sig, ns, ref)
+	}
+	return sig, nil
+}
+
+// processNewDROID processes a simplified DROID signature file
+// that sees byte sequences reduced to their more plain form with
+// hex sequences and syntax in a singular sequence attribute, and
+// 1..* ByteSequences used per signature.
+func processNewDROID(
+	puid string,
+	ref string,
+	eof bool,
+	vry bool,
+	b mappings.ByteSeq,
+	sig frames.Signature,
+) (frames.Signature, error) {
+	bs := mappings.ByteSequence{}
+	switch b.Reference {
+	case droidBOF:
+		bs.Position = pronomBOF
+	case droidEOF:
+		bs.Position = pronomEOF
+	case pronomVariable, "":
+		bs.Position = pronomVariable
+	default:
+		panic(b.Reference)
+	}
+	bs.Hex = b.Sequence
+	bs.Offset = b.MinOffset
+	bs.MaxOffset = b.MaxOffset
+	ns, err := FormatPRONOM(puid, []mappings.ByteSequence{bs})
+	if err != nil {
+		return nil, err
+	}
+	sig = appendSig(sig, ns, ref)
+	return sig, nil
+}
+
 // DROID & Container
 func processDROID(puid string, s []mappings.ByteSeq) (frames.Signature, error) {
 	var sig frames.Signature
 	for _, b := range s {
-		var eof, vry bool
+		var eof, variable bool
 		ref := b.Reference
 		switch ref {
-		case droideof:
+		case droidEOF:
 			eof = true
-		case "Variable", "":
-			vry = true
+		case pronomVariable, "":
+			variable = true
 		}
-		var zeroIndexed bool // fmt/1190 bug in containers: https://github.com/richardlehane/siegfried/issues/175
-		for _, ss := range b.SubSequences {
-			if ss.Position == 0 {
-				zeroIndexed = true
-			}
-			if zeroIndexed {
-				ss.Position += 1
-			}
-			ns, err := processSubSequence(puid, ss, eof, vry)
+		var err error
+		if len(b.SubSequences) != 0 {
+			var err error
+			sig, err = processLegacyDROID(puid, ref, eof, variable, b.SubSequences, sig)
 			if err != nil {
 				return nil, err
 			}
-			sig = appendSig(sig, ns, ref)
+			continue
+		}
+		sig, err = processNewDROID(puid, ref, eof, variable, b, sig)
+		if err != nil {
+			return nil, err
 		}
 	}
 	return sig, nil
