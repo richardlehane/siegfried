@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<FFSignatureFile
+	xmlns="http://www.nationalarchives.gov.uk/pronom/SignatureFile" Version="1" DateCreated="2026-01-17T16:12:39Z">
+	<InternalSignatureCollection>
+		<InternalSignature ID="1" Specificity="Specific">
+			<ByteSequence Reference="BOFoffset" Sequence="ACDC" MinOffset="0" MaxOffset="4095"/>
+			<ByteSequence Sequence="BA5E" MinOffset="" MaxOffset=""/>
+			<ByteSequence Reference="EOFoffset" Sequence="FFFF" MinOffset="0" MaxOffset="4095"/>
+		</InternalSignature>
+		<InternalSignature ID="170" Specificity="Specific">
+			<ByteSequence Reference="BOFoffset" Sequence="D0CF11E0A1B11AE1{20}FEFF"/>
+		</InternalSignature>
+		<InternalSignature ID="200" Specificity="Specific">
+			<ByteSequence Reference="BOFoffset" Sequence="{0-4}504B0304"/>
+			<ByteSequence Endianness="Little-endian" Reference="EOFoffset" Sequence="504B01{43-65531}504B0506{18-65531}"/>
+		</InternalSignature>
+		<InternalSignature ID="258" Specificity="Specific">
+			<ByteSequence Endianness="Little-endian" Reference="BOFoffset" Sequence="504B0304{26}5B436F6E74656E745F54797065735D2E786D6C20A2*504B0102*504B0506"/>
+		</InternalSignature>
+		<InternalSignature ID="2311" Specificity="Specific">
+			<ByteSequence Reference="BOFoffset" Sequence="504B05060000"/>
+		</InternalSignature>
+	</InternalSignatureCollection>
+	<FileFormatCollection>
+		<FileFormat ID="1" Name="SimplifiedDROIDSkeleton" PUID="skel/1" Version="1.0" MIMEType="x-application/skeleton" FormatType="structured hex">
+			<InternalSignatureID>1</InternalSignatureID>
+			<Extension>skel</Extension>
+		</FileFormat>
+		<FileFormat ID="2" Name="SimplifiedZipContainer" PUID="skel/2" Version="1.0" MIMEType="x-application/skeleton">
+			<Extension>skelc</Extension>
+		</FileFormat>
+		<FileFormat ID="382" MIMEType="application/zip" Name="ZIP Format" PUID="x-fmt/263">
+			<InternalSignatureID>200</InternalSignatureID>
+			<InternalSignatureID>2311</InternalSignatureID>
+			<Extension>zip</Extension>
+		</FileFormat>
+		<FileFormat ID="910" Name="Microsoft Office Open XML" PUID="fmt/189" Version="2007 onwards">
+			<InternalSignatureID>258</InternalSignatureID>
+			<HasPriorityOverFileFormatID>382</HasPriorityOverFileFormatID>
+		</FileFormat>
+		<FileFormat ID="767" Name="OLE2 Compound Document Format" PUID="fmt/111">
+			<InternalSignatureID>170</InternalSignatureID>
+		</FileFormat>
+	</FileFormatCollection>
+</FFSignatureFile>
