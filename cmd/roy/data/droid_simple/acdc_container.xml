@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><ContainerSignatureMapping SchemaVersion="1.0" SignatureVersion="1">
+ <ContainerSignatures>
+  <ContainerSignature ContainerType="ZIP" Id="1">
+   <Description>Container description</Description>
+   <Files>
+    <File>
+     <Path>simple_container/simple_file</Path>
+     <BinarySignatures>
+      <InternalSignatureCollection>
+       <InternalSignature ID="1">
+        <ByteSequence Reference="BOFoffset" Sequence="ACDC"/>
+        <ByteSequence Sequence="BA5E"/>
+        <ByteSequence Reference="EOFoffset" Sequence="FFFF"/>
+       </InternalSignature>
+      </InternalSignatureCollection>
+     </BinarySignatures>
+    </File>
+   </Files>
+  </ContainerSignature>
+ </ContainerSignatures>
+ <FileFormatMappings>
+  <FileFormatMapping Puid="skel/2" signatureId="1"/>
+ </FileFormatMappings>
+ <TriggerPuids>
+  <TriggerPuid ContainerType="OLE2" Puid="fmt/111"/>
+  <TriggerPuid ContainerType="ZIP" Puid="fmt/189"/>
+  <TriggerPuid ContainerType="ZIP" Puid="x-fmt/263"/>
+ </TriggerPuids>
+</ContainerSignatureMapping>
