@@ -30,6 +30,8 @@ func setup(opts ...config.Option) error {
 	var err error
 	s = siegfried.New()
 	config.SetHome(*testhome)
+	opts = append(opts, config.SetDroid(""))
+	opts = append(opts, config.SetContainer(""))
 	opts = append(opts, config.SetDoubleUp())
 	p, err := pronom.New(opts...)
 	if err != nil {

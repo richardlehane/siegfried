@@ -61,6 +61,9 @@ func setupWikidata(pronom bool) (*siegfried.Siegfried, error) {
 	if pronom != true {
 		opts = append(opts, config.SetWikidataNoPRONOM())
 	} else {
+		// Ensure state is reset.
+		opts = append(opts, config.SetDroid(""))
+		opts = append(opts, config.SetContainer(""))
 		opts = append(opts, config.SetWikidataPRONOM())
 	}
 	identifier, err := wikidata.New(opts...)
