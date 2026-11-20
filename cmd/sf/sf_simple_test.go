@@ -62,7 +62,6 @@ type simpleDROIDTest struct {
 	byteMatch      bool
 	containerMatch bool
 	error          bool
-	hasExt         bool
 }
 
 var simpleDROIDTestsOK = []simpleDROIDTest{
@@ -75,7 +74,6 @@ var simpleDROIDTestsOK = []simpleDROIDTest{
 		byteMatch:      true,
 		containerMatch: false,
 		error:          false,
-		hasExt:         true,
 	},
 	// Container file.
 	simpleDROIDTest{
@@ -86,7 +84,6 @@ var simpleDROIDTestsOK = []simpleDROIDTest{
 		byteMatch:      true,
 		containerMatch: false,
 		error:          false,
-		hasExt:         true,
 	},
 }
 
@@ -100,7 +97,6 @@ var simpleDROIDTestsNegative = []simpleDROIDTest{
 		byteMatch:      false,
 		containerMatch: false,
 		error:          false,
-		hasExt:         true,
 	},
 	// No middle.
 	simpleDROIDTest{
@@ -111,7 +107,6 @@ var simpleDROIDTestsNegative = []simpleDROIDTest{
 		byteMatch:      false,
 		containerMatch: false,
 		error:          false,
-		hasExt:         true,
 	},
 	// No end.
 	simpleDROIDTest{
@@ -122,7 +117,6 @@ var simpleDROIDTestsNegative = []simpleDROIDTest{
 		byteMatch:      false,
 		containerMatch: false,
 		error:          false,
-		hasExt:         true,
 	},
 	// Text file.
 	simpleDROIDTest{
@@ -133,7 +127,6 @@ var simpleDROIDTestsNegative = []simpleDROIDTest{
 		byteMatch:      false,
 		containerMatch: false,
 		error:          false,
-		hasExt:         true,
 	},
 	// Zip file.
 	simpleDROIDTest{
@@ -144,7 +137,49 @@ var simpleDROIDTestsNegative = []simpleDROIDTest{
 		byteMatch:      true,
 		containerMatch: false,
 		error:          false,
-		hasExt:         true,
+	},
+}
+
+var simpleDROIDTestsExtendedOffsets = []simpleDROIDTest{
+	// BOF is extended slightly but not within sig limits.
+	simpleDROIDTest{
+		fname:          filepath.Join(simpleDROIDtestData, "no_id_bof.skel"),
+		label:          "",
+		puid:           "UNKNOWN",
+		extMatch:       false,
+		byteMatch:      false,
+		containerMatch: false,
+		error:          false,
+	},
+	// EOF is extended slightly but not within sig limits.
+	simpleDROIDTest{
+		fname:          filepath.Join(simpleDROIDtestData, "no_id_eof.skel"),
+		label:          "",
+		puid:           "UNKNOWN",
+		extMatch:       false,
+		byteMatch:      false,
+		containerMatch: false,
+		error:          false,
+	},
+	// EOF matches sig limits.
+	simpleDROIDTest{
+		fname:          filepath.Join(simpleDROIDtestData, "extended_eof.skel"),
+		label:          "",
+		puid:           "skel/4",
+		extMatch:       true,
+		byteMatch:      true,
+		containerMatch: false,
+		error:          false,
+	},
+	// BOF matches sig limits.
+	simpleDROIDTest{
+		fname:          filepath.Join(simpleDROIDtestData, "extended_bof.skel"),
+		label:          "",
+		puid:           "skel/3",
+		extMatch:       true,
+		byteMatch:      true,
+		containerMatch: false,
+		error:          false,
 	},
 }
 
@@ -158,6 +193,9 @@ func TestSimpleBasic(t *testing.T) {
 		simpleDROIDRunner(sf, test, t)
 	}
 	for _, test := range simpleDROIDTestsNegative {
+		simpleDROIDRunner(sf, test, t)
+	}
+	for _, test := range simpleDROIDTestsExtendedOffsets {
 		simpleDROIDRunner(sf, test, t)
 	}
 }
@@ -183,13 +221,15 @@ func simpleDROIDRunner(wdSiegfried *siegfried.Siegfried, test simpleDROIDTest, t
 		)
 	}
 
+	// Assign results to vars.
 	id := res[0].Values()[1]
 	_ = res[0].Values()[2] // label
 	basis := res[0].Values()[5]
 
+	// Evaluate the outcome of the results against the tests.
 	if id != test.puid {
 		t.Errorf(
-			"QID match different than anticipated: '%s' expected '%s'",
+			"PUID match different than anticipated: '%s' expected '%s'",
 			id,
 			test.puid,
 		)
@@ -212,5 +252,4 @@ func simpleDROIDRunner(wdSiegfried *siegfried.Siegfried, test simpleDROIDTest, t
 			basis,
 		)
 	}
-
 }

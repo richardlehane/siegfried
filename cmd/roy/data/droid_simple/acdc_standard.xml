@@ -3,10 +3,23 @@
 	xmlns="http://www.nationalarchives.gov.uk/pronom/SignatureFile" Version="1" DateCreated="2026-01-17T16:12:39Z">
 	<InternalSignatureCollection>
 		<InternalSignature ID="1" Specificity="Specific">
-			<ByteSequence Reference="BOFoffset" Sequence="ACDC" MinOffset="0" MaxOffset="4095"/>
+			<ByteSequence Reference="BOFoffset" Sequence="ACDC" MinOffset="0" MaxOffset="0"/>
 			<ByteSequence Sequence="BA5E" MinOffset="" MaxOffset=""/>
-			<ByteSequence Reference="EOFoffset" Sequence="FFFF" MinOffset="0" MaxOffset="4095"/>
+			<ByteSequence Reference="EOFoffset" Sequence="FFFF" MinOffset="0" MaxOffset="0"/>
 		</InternalSignature>
+        // Include a BOF offset.
+		<InternalSignature ID="2" Specificity="Specific">
+			<ByteSequence Reference="BOFoffset" Sequence="ACDC" MinOffset="8" MaxOffset="0"/>
+			<ByteSequence Sequence="BA5E" MinOffset="" MaxOffset=""/>
+			<ByteSequence Reference="EOFoffset" Sequence="FFFF" MinOffset="0" MaxOffset="0"/>
+		</InternalSignature>
+        // Include a EOF offset.
+		<InternalSignature ID="3" Specificity="Specific">
+			<ByteSequence Reference="BOFoffset" Sequence="ACDC" MinOffset="0" MaxOffset="0"/>
+			<ByteSequence Sequence="BA5E" MinOffset="" MaxOffset=""/>
+			<ByteSequence Reference="EOFoffset" Sequence="FFFF" MinOffset="8" MaxOffset="0"/>
+		</InternalSignature>
+        // Container related signatures.
 		<InternalSignature ID="170" Specificity="Specific">
 			<ByteSequence Reference="BOFoffset" Sequence="D0CF11E0A1B11AE1{20}FEFF"/>
 		</InternalSignature>
@@ -28,6 +41,14 @@
 		</FileFormat>
 		<FileFormat ID="2" Name="SimplifiedZipContainer" PUID="skel/2" Version="1.0" MIMEType="x-application/skeleton">
 			<Extension>skelc</Extension>
+		</FileFormat>
+		<FileFormat ID="3" Name="SimplifiedDROIDSkeleton" PUID="skel/3" Version="1.0" MIMEType="x-application/skeleton" FormatType="structured hex">
+			<InternalSignatureID>2</InternalSignatureID>
+			<Extension>skel</Extension>
+		</FileFormat>
+		<FileFormat ID="4" Name="SimplifiedDROIDSkeleton" PUID="skel/4" Version="1.0" MIMEType="x-application/skeleton" FormatType="structured hex">
+			<InternalSignatureID>3</InternalSignatureID>
+			<Extension>skel</Extension>
 		</FileFormat>
 		<FileFormat ID="382" MIMEType="application/zip" Name="ZIP Format" PUID="x-fmt/263">
 			<InternalSignatureID>200</InternalSignatureID>
