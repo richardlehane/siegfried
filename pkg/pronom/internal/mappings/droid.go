@@ -34,6 +34,13 @@ type InternalSignature struct {
 type ByteSeq struct {
 	Reference    string        `xml:"Reference,attr"`
 	SubSequences []SubSequence `xml:"SubSequence"`
+	// IF NOT SubSequences we have a modern "simplified" DROID syntax
+	// supported since DROID 5.0.0. Simplified syntax removes all
+	// elements after SubSequence and places plain-hex style PRONOM
+	// syntax in the Sequence attribute.
+	Sequence  string `xml:"Sequence,attr"`
+	MinOffset string `xml:"MinOffset,attr"`
+	MaxOffset string `xml:"MaxOffset,attr"`
 }
 
 type SubSequence struct {
