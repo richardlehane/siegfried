@@ -183,6 +183,39 @@ var simpleDROIDTestsExtendedOffsets = []simpleDROIDTest{
 	},
 }
 
+var simpleDROIDSimpleSyntax = []simpleDROIDTest{
+	// OR.
+	simpleDROIDTest{
+		fname:          filepath.Join(simpleDROIDtestData, "simple_or.skel"),
+		label:          "",
+		puid:           "skel/5",
+		extMatch:       true,
+		byteMatch:      true,
+		containerMatch: false,
+		error:          false,
+	},
+	// Curly brackets.
+	simpleDROIDTest{
+		fname:          filepath.Join(simpleDROIDtestData, "simple_cb.skel"),
+		label:          "",
+		puid:           "skel/6",
+		extMatch:       true,
+		byteMatch:      true,
+		containerMatch: false,
+		error:          false,
+	},
+	// Question mark.
+	simpleDROIDTest{
+		fname:          filepath.Join(simpleDROIDtestData, "simple_qq.skel"),
+		label:          "",
+		puid:           "skel/7",
+		extMatch:       true,
+		byteMatch:      true,
+		containerMatch: false,
+		error:          false,
+	},
+}
+
 // Run the simple DROID tests.
 func TestSimpleBasic(t *testing.T) {
 	sf, err := setupSimpleDROIDTests()
@@ -196,6 +229,9 @@ func TestSimpleBasic(t *testing.T) {
 		simpleDROIDRunner(sf, test, t)
 	}
 	for _, test := range simpleDROIDTestsExtendedOffsets {
+		simpleDROIDRunner(sf, test, t)
+	}
+	for _, test := range simpleDROIDSimpleSyntax {
 		simpleDROIDRunner(sf, test, t)
 	}
 }

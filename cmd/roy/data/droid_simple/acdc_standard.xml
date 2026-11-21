@@ -19,6 +19,20 @@
 			<ByteSequence Sequence="BA5E" MinOffset="" MaxOffset=""/>
 			<ByteSequence Reference="EOFoffset" Sequence="FFFF" MinOffset="8" MaxOffset="0"/>
 		</InternalSignature>
+        // Rudimentary tests of syntax.
+        //
+        // OR: skel/5.
+		<InternalSignature ID="4" Specificity="Specific">
+			<ByteSequence Reference="BOFoffset" Sequence="00(FF|FE)00" MinOffset="4" MaxOffset="0"/>
+		</InternalSignature>
+        // Curly bracket: skel/6.
+		<InternalSignature ID="5" Specificity="Specific">
+			<ByteSequence Reference="BOFoffset" Sequence="00{1}4200" MinOffset="4" MaxOffset="0"/>
+		</InternalSignature>
+        // Question marks: skel/7.
+		<InternalSignature ID="6" Specificity="Specific">
+			<ByteSequence Reference="BOFoffset" Sequence="00??5100" MinOffset="4" MaxOffset="0"/>
+		</InternalSignature>
         // Container related signatures.
 		<InternalSignature ID="170" Specificity="Specific">
 			<ByteSequence Reference="BOFoffset" Sequence="D0CF11E0A1B11AE1{20}FEFF"/>
@@ -50,6 +64,19 @@
 			<InternalSignatureID>3</InternalSignatureID>
 			<Extension>skel</Extension>
 		</FileFormat>
+		<FileFormat ID="5" Name="SimplifiedDROIDSkeleton" PUID="skel/5" Version="1.0" MIMEType="x-application/skeleton" FormatType="structured hex">
+			<InternalSignatureID>4</InternalSignatureID>
+			<Extension>skel</Extension>
+		</FileFormat>
+		<FileFormat ID="6" Name="SimplifiedDROIDSkeleton" PUID="skel/6" Version="1.0" MIMEType="x-application/skeleton" FormatType="structured hex">
+			<InternalSignatureID>5</InternalSignatureID>
+			<Extension>skel</Extension>
+		</FileFormat>
+		<FileFormat ID="7" Name="SimplifiedDROIDSkeleton" PUID="skel/7" Version="1.0" MIMEType="x-application/skeleton" FormatType="structured hex">
+			<InternalSignatureID>6</InternalSignatureID>
+			<Extension>skel</Extension>
+		</FileFormat>
+        // Container related metadata and linkages.
 		<FileFormat ID="382" MIMEType="application/zip" Name="ZIP Format" PUID="x-fmt/263">
 			<InternalSignatureID>200</InternalSignatureID>
 			<InternalSignatureID>2311</InternalSignatureID>
