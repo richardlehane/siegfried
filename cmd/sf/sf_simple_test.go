@@ -18,8 +18,8 @@ import (
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
-var simpleDROIDTests = filepath.Join("..", "roy", "data", "droid_simple")
-var simpleDROIDtestData = filepath.Join("..", "roy", "data", "droid_simple", "sample_files")
+var simpleDROIDTests = filepath.Join(".", "testdata", "droid-simple")
+var simpleDROIDtestData = filepath.Join(simpleDROIDTests, "simple-skeletons")
 
 // const simpleTestDefinitions = "simple-test-definitions"
 const simpleDefinitionsBaseDir = "simpleDefinitionsBaseDir"
