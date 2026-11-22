@@ -73,6 +73,7 @@ func contains(ss []string, str string) bool {
 }
 
 func New(opts ...config.Option) (core.Identifier, error) {
+	config.SetName("")()
 	for _, v := range opts {
 		v()
 	}

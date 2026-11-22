@@ -24,7 +24,7 @@ import (
 
 // TestDefaultLang the simplest test to make sure that 'some' default
 // language is set.
-func TestDefaultLang(t *testing.T) {
+func TestDefaultLangXX(t *testing.T) {
 	expected := "en"
 	if wikidataLang != "en" {
 		t.Errorf(
@@ -68,4 +68,10 @@ func TestReturnWDSparql(t *testing.T) {
 			res,
 		)
 	}
+	// Reset state.
+	//
+	// NB. there should be a better way to handle this with a
+	// manually called init-like function that sets these values
+	// rather than relying on them as variables.
+	SetWikidataLang("en")
 }

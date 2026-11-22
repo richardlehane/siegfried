@@ -134,7 +134,11 @@ var pronomIDs = []pronomIdentificationTests{
 func TestPronom(t *testing.T) {
 	sf := siegfried.New()
 	config.SetHome(DataPath)
-	identifier, err := pronom.New(config.SetLimit(minimalPronom))
+	opts := []config.Option{
+		config.SetName("pronom"),
+		config.SetLimit(minimalPronom),
+	}
+	identifier, err := pronom.New(opts...)
 	if err != nil {
 		t.Errorf("Error creating new PRONOM identifier: %s", err)
 	}
