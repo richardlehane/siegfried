@@ -58,6 +58,7 @@ var sourcePuids []string
 // info. It will enable signature extensions to be added by the utility, and
 // enables configuration to be applied as well.
 func New(opts ...config.Option) (core.Identifier, error) {
+	config.Clear()()
 	for _, v := range opts {
 		v()
 	}

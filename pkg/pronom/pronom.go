@@ -20,7 +20,7 @@ import (
 	"encoding/xml"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -320,7 +320,7 @@ func ReleaseSet(path string, releases *mappings.Releases) error {
 	if err != nil {
 		return err
 	}
-	return ioutil.WriteFile(filepath.Join(config.Local("sets"), path), out, 0666)
+	return os.WriteFile(filepath.Join(config.Local("sets"), path), out, 0666)
 }
 
 // TypeSets writes three sets files based on PRONOM reports:
@@ -340,21 +340,21 @@ func TypeSets(p1, p2, p3 string) error {
 	if err != nil {
 		return err
 	}
-	if err := ioutil.WriteFile(filepath.Join(config.Local("sets"), p1), out, 0666); err != nil {
+	if err := os.WriteFile(filepath.Join(config.Local("sets"), p1), out, 0666); err != nil {
 		return err
 	}
 	out, err = json.MarshalIndent(families, "", "  ")
 	if err != nil {
 		return err
 	}
-	if err := ioutil.WriteFile(filepath.Join(config.Local("sets"), p2), out, 0666); err != nil {
+	if err := os.WriteFile(filepath.Join(config.Local("sets"), p2), out, 0666); err != nil {
 		return err
 	}
 	out, err = json.MarshalIndent(types, "", "  ")
 	if err != nil {
 		return err
 	}
-	return ioutil.WriteFile(filepath.Join(config.Local("sets"), p3), out, 0666)
+	return os.WriteFile(filepath.Join(config.Local("sets"), p3), out, 0666)
 }
 
 // Extension set writes a sets file that links extensions to IDs.
@@ -379,11 +379,11 @@ func ExtensionSet(path string) error {
 	if err != nil {
 		return err
 	}
-	return ioutil.WriteFile(filepath.Join(config.Local("sets"), path), out, 0666)
+	return os.WriteFile(filepath.Join(config.Local("sets"), path), out, 0666)
 }
 
 func openXML(path string, els interface{}) error {
-	buf, err := ioutil.ReadFile(path)
+	buf, err := os.ReadFile(path)
 	if err != nil {
 		return err
 	}
@@ -442,7 +442,7 @@ func getHttp(url string) ([]byte, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
-	return ioutil.ReadAll(resp.Body)
+	return io.ReadAll(resp.Body)
 }
 
 func save(puid, url, path string) error {
@@ -450,5 +450,5 @@ func save(puid, url, path string) error {
 	if err != nil {
 		return err
 	}
-	return ioutil.WriteFile(filepath.Join(path, strings.Replace(puid, "/", "", 1)+".xml"), b, os.ModePerm)
+	return os.WriteFile(filepath.Join(path, strings.Replace(puid, "/", "", 1)+".xml"), b, os.ModePerm)
 }

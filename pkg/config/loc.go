@@ -16,6 +16,8 @@ package config
 
 import "path/filepath"
 
+const locDefinitions = "fddXML.zip"
+
 var loc = struct {
 	fdd      string
 	def      string // default
@@ -28,7 +30,7 @@ var loc = struct {
 	warc     string
 	text     string // n/a
 }{
-	def:  "fddXML.zip",
+	def:  locDefinitions,
 	name: "loc",
 	zip:  "fdd000354",
 	arc:  "fdd000235",

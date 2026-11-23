@@ -313,7 +313,8 @@ func IsArchive(id string) Archive {
 
 // SETTERS
 
-// Clear clears loc and mimeinfo details to avoid pollution when creating multiple identifiers in same session
+// Clear clears different identfier details to avoid pollution when
+// creating multiple identifiers in same session.
 func Clear() func() private {
 	return func() private {
 		identifier.name = ""
@@ -321,8 +322,13 @@ func Clear() func() private {
 		identifier.limit = nil
 		identifier.exclude = nil
 		identifier.multi = Conclusive
-		loc.fdd = ""
+		loc.fdd = locDefinitions
 		mimeinfo.mi = ""
+		pronom.droid = ""
+		pronom.container = ""
+		pronom.reports = "pronom"
+		pronom.noclass = false
+		wikidata.namespace = ""
 		return private{}
 	}
 }

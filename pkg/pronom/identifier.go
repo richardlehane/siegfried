@@ -105,6 +105,7 @@ func Load(ls *persist.LoadSaver) core.Identifier {
 
 // New creates a new PRONOM Identifier
 func New(opts ...config.Option) (core.Identifier, error) {
+	config.Clear()()
 	for _, v := range opts {
 		v()
 	}

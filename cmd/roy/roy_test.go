@@ -130,7 +130,10 @@ func TestWikibase(t *testing.T) {
 func TestPronomTikaLoc(t *testing.T) {
 	s := siegfried.New()
 	config.SetHome(*testhome)
-	p, err := pronom.New(config.Clear())
+	opts := []config.Option{
+		config.SetName("pronom"),
+	}
+	p, err := pronom.New(opts...)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -138,7 +141,11 @@ func TestPronomTikaLoc(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	m, err := mimeinfo.New(config.SetMIMEInfo("tika"))
+	opts = []config.Option{
+		config.SetName("tika"),
+		config.SetMIMEInfo("tika"),
+	}
+	m, err := mimeinfo.New(opts...)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -146,7 +153,11 @@ func TestPronomTikaLoc(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	l, err := loc.New(config.SetLOC(""))
+	opts = []config.Option{
+		config.SetName("loc"),
+		config.SetLOC(""),
+	}
+	l, err := loc.New(opts...)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -159,7 +170,10 @@ func TestPronomTikaLoc(t *testing.T) {
 func TestDeluxe(t *testing.T) {
 	s := siegfried.New()
 	config.SetHome(*testhome)
-	p, err := pronom.New(config.Clear())
+	opts := []config.Option{
+		config.SetName("pronom"),
+	}
+	p, err := pronom.New(opts...)
 	if err != nil {
 		t.Fatal(err)
 	}
