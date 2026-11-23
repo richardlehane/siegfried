@@ -18,6 +18,8 @@ import (
 	"github.com/richardlehane/siegfried/pkg/pronom"
 )
 
+const identifierName = "droid-simple"
+
 var simpleDROIDTests = filepath.Join(".", "testdata", "droid-simple")
 var simpleDROIDtestData = filepath.Join(simpleDROIDTests, "simple-skeletons")
 
@@ -41,6 +43,7 @@ func setupSimpleDROIDTests() (*siegfried.Siegfried, error) {
 	config.SetHome(*simpleDefinitions)
 	opts := []config.Option{
 		config.SetNoReports(),
+		config.SetName(identifierName),
 		config.SetDroid("acdc_standard.xml"),
 		config.SetContainer("acdc_container.xml"),
 	}
@@ -251,9 +254,9 @@ func simpleDROIDRunner(wdSiegfried *siegfried.Siegfried, test simpleDROIDTest, t
 		t.Errorf("Match length greater than one: '%d'", len(res))
 	}
 	namespace := res[0].Values()[0]
-	if namespace != "pronom" {
+	if namespace != identifierName {
 		t.Errorf("Namespace error, expected: '%s' received: '%s'",
-			wikidataNamespace, namespace,
+			identifierName, namespace,
 		)
 	}
 
