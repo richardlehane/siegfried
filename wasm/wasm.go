@@ -10,6 +10,7 @@ import (
 	"io"
 	"log"
 	"path/filepath"
+	"strings"
 	"syscall/js"
 	"time"
 
@@ -37,8 +38,8 @@ var droid string
 var container string
 
 const signatureDetails string = "WASM Embedded Defaults"
-const signatureFileVersion string = "v120"
-const containerFileVersion string = "2024-07-15"
+const signatureFileVersion string = "v125"
+const containerFileVersion string = "2026-10-27"
 
 var sf *siegfried.Siegfried
 
@@ -243,7 +244,15 @@ func sfWrapper() js.Func {
 	})
 }
 
-func makeSig(extension []byte, fname string) (*siegfried.Siegfried, error) {
+type extension struct {
+	extData []byte
+	fname   string
+}
+
+func makeSig(extension []extension) (*siegfried.Siegfried, error) {
+
+	fname := fmt.Sprintf("temp filename: %d", len(extension))
+
 	opts := []config.Option{}
 	if fname != "" {
 		opts = append(opts,
@@ -268,7 +277,19 @@ func makeSig(extension []byte, fname string) (*siegfried.Siegfried, error) {
 		)
 	}
 
-	id, err := pronom.NewFromByteArray([]byte(container), []byte(droid), extension, opts...)
+	exts := []pronom.Exts{}
+
+	for _, ext := range extension {
+		newExt := pronom.Exts{}
+		newExt.ExtData = ext.extData
+		if strings.Contains(string(ext.extData), "<ContainerSignatureMapping") {
+			newExt.Container = true
+		}
+		exts = append(exts, newExt)
+
+	}
+
+	id, err := pronom.NewFromByteArray([]byte(container), []byte(droid), exts, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -297,30 +318,37 @@ func royWrapper() js.Func {
 				out := &bytes.Buffer{}
 				out.Write([]byte("Successfully loaded new signature file")) // written to the resolve function...
 				var err error
-
-				fsh := args[0]
-				kind := fsh.Get("kind").String()
-
+				// Even pluralized, use the first arg as a canary.
+				fshx := args[0]
+				kind := fshx.Get("kind").String()
 				if kind != "file" {
 					panic("must provide a file to extend Siegfried's signatures")
 				}
-
-				path := []string{}
-				name := filepath.Join(append(path, fsh.Get("name").String())...)
-				log.Println("signature file:", name)
-
-				r := newReader()
-				promise := fsh.Call("getFile")
-				val, err := await(promise)
-				if err != nil {
-					panic("unable to read signature file to extend Siegfried's signatures")
+				exts := []extension{}
+				for _, val := range args {
+					if val.Type() == js.TypeString || val.Type() == js.TypeUndefined {
+						// else... we have an object, which we assume to be a file.
+						// this assumption might be challenged...
+						continue
+					}
+					path := []string{}
+					name := filepath.Join(append(path, val.Get("name").String())...)
+					log.Println("signature file:", name)
+					r := newReader()
+					promise := val.Call("getFile")
+					val, err := await(promise)
+					if err != nil {
+						panic("unable to read signature file to extend Siegfried's signatures")
+					}
+					r.reset(val)
+					log.Println("extension signature file size:", len(r.buf))
+					extensionx, _ := r.Slice(0, int(r.sz))
+					ext := new(extension)
+					ext.extData = extensionx
+					ext.fname = name
+					exts = append(exts, *ext)
 				}
-
-				r.reset(val)
-				log.Println("extension signature file size:", len(r.buf))
-				extension, _ := r.Slice(0, int(r.sz))
-
-				sf, err = makeSig(extension, name)
+				sf, err = makeSig(exts)
 				if err != nil {
 					reject.Invoke(err.Error())
 				} else {
@@ -336,7 +364,8 @@ func royWrapper() js.Func {
 }
 
 func main() {
-	sf, _ = makeSig([]byte{}, "")
+	x := make([]extension, 2)
+	sf, _ = makeSig(x)
 	js.Global().Set("identify", sfWrapper())
 	js.Global().Set("sigload", royWrapper())
 	<-make(chan bool)

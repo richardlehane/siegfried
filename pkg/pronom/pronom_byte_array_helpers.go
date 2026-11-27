@@ -13,9 +13,18 @@ import (
 	"github.com/richardlehane/siegfried/pkg/pronom/internal/mappings"
 )
 
+type exts struct {
+	ExtData   []byte
+	Container bool
+}
+
+type Exts = exts
+
 // NewFromByteArray is a helpder method designed to simplify creation
 // of a new identifier with in memory data.
-func NewFromByteArray(c []byte, d []byte, e []byte, opts ...config.Option) (core.Identifier, error) {
+//
+// NB. e is an array of arrays...
+func NewFromByteArray(c []byte, d []byte, e []exts, opts ...config.Option) (core.Identifier, error) {
 	for _, v := range opts {
 		v()
 	}
@@ -41,7 +50,7 @@ func NewFromByteArray(c []byte, d []byte, e []byte, opts ...config.Option) (core
 
 // rawFromByteArray allows us to create a new PRONOM parseavle
 // (identifier).
-func rawFromByteArray(c []byte, d []byte, e []byte) (identifier.Parseable, error) {
+func rawFromByteArray(c []byte, d []byte, exts []exts) (identifier.Parseable, error) {
 	p := &pronom{
 		c: identifier.Blank{},
 	}
@@ -51,8 +60,19 @@ func rawFromByteArray(c []byte, d []byte, e []byte) (identifier.Parseable, error
 			err.Error(),
 		)
 	}
-	if err := p.setParseablesFromByteArray(d, e); err != nil {
-		return nil, err
+	for _, ext := range exts {
+		if ext.Container {
+			if err := p.setContainersFromByteArray(ext.ExtData); err != nil {
+				return nil, fmt.Errorf(
+					"pronom: error loading containers; got %s\nUnless you have set `-nocontainer` you need to download a container signature file",
+					err.Error(),
+				)
+			}
+			continue
+		}
+		if err := p.setParseablesFromByteArray(d, ext.ExtData); err != nil {
+			return nil, err
+		}
 	}
 	return p, nil
 }
