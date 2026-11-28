@@ -60,6 +60,7 @@ func rawFromByteArray(c []byte, d []byte, exts []exts) (identifier.Parseable, er
 			err.Error(),
 		)
 	}
+
 	for _, ext := range exts {
 		if ext.Container {
 			if err := p.setContainersFromByteArray(ext.ExtData); err != nil {
@@ -68,7 +69,6 @@ func rawFromByteArray(c []byte, d []byte, exts []exts) (identifier.Parseable, er
 					err.Error(),
 				)
 			}
-			continue
 		}
 		if err := p.setParseablesFromByteArray(d, ext.ExtData); err != nil {
 			return nil, err

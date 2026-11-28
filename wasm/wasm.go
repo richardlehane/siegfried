@@ -10,7 +10,6 @@ import (
 	"io"
 	"log"
 	"path/filepath"
-	"strings"
 	"syscall/js"
 	"time"
 
@@ -42,6 +41,12 @@ const signatureFileVersion string = "v125"
 const containerFileVersion string = "2026-10-27"
 
 var sf *siegfried.Siegfried
+
+type extension struct {
+	extData   []byte
+	fname     string
+	container bool
+}
 
 func opts(args []js.Value) (output, checksum.HashTyp, bool) {
 	var out output
@@ -244,51 +249,61 @@ func sfWrapper() js.Func {
 	})
 }
 
-type extension struct {
-	extData []byte
-	fname   string
+func makeFname(userExts []extension) string {
+	if len(userExts) < 1 {
+		return ""
+	}
+	fname := ""
+	for _, val := range userExts {
+		if fname == "" {
+			fname = val.fname
+			continue
+		}
+		fname = fmt.Sprintf("%s; %s", fname, val.fname)
+	}
+	return fname
 }
 
-func makeSig(extension []extension) (*siegfried.Siegfried, error) {
-
-	fname := fmt.Sprintf("temp filename: %d", len(extension))
-
-	opts := []config.Option{}
-	if fname != "" {
-		opts = append(opts,
-			config.SetDetails(
-				fmt.Sprintf("%s; %s; Container: %s; Extension: %s",
-					signatureDetails,
-					signatureFileVersion,
-					containerFileVersion,
-					fname,
-				),
-			),
-		)
-	} else {
-		opts = append(opts,
-			config.SetDetails(
-				fmt.Sprintf("%s; %s; Container: %s",
-					signatureDetails,
-					signatureFileVersion,
-					containerFileVersion,
-				),
-			),
-		)
+// guardSigs checks our inputs to ensure they are signature files.
+// This allows us to provide the user with more feedback than if
+// they just throw any old objects at this utility.
+func guardSigs(userExts []extension) []extension {
+	if len(userExts) == 0 {
+		return nil
 	}
-
-	exts := []pronom.Exts{}
-
-	for _, ext := range extension {
-		newExt := pronom.Exts{}
-		newExt.ExtData = ext.extData
-		if strings.Contains(string(ext.extData), "<ContainerSignatureMapping") {
-			newExt.Container = true
+	validExts := []extension{}
+	for idx, val := range userExts {
+		if val.extData == nil && val.fname == "" {
+			// empty struct.
+			continue
 		}
-		exts = append(exts, newExt)
-
+		checkSig := false
+		if bytes.Contains(val.extData, []byte("<ContainerSignatureMapping")) {
+			userExts[idx].container = true
+			checkSig = true
+		}
+		if bytes.Contains(val.extData, []byte("<FFSignatureFile")) {
+			checkSig = true
+		}
+		if !checkSig {
+			log.Printf("not a signature file, unable to load: %s", val.fname)
+			continue
+		}
+		validExts = append(validExts, val)
 	}
+	return validExts
+}
 
+func newSF(
+	container []byte,
+	droid []byte,
+	exts []pronom.Exts,
+	opts []config.Option,
+) (*siegfried.Siegfried, error) {
+	if exts == nil {
+		// guard against a nil pointer in SF.
+		exts = make([]pronom.Exts, 1)
+	}
 	id, err := pronom.NewFromByteArray([]byte(container), []byte(droid), exts, opts...)
 	if err != nil {
 		return nil, err
@@ -299,6 +314,56 @@ func makeSig(extension []extension) (*siegfried.Siegfried, error) {
 		return nil, err
 	}
 	return s, nil
+}
+
+func makeSig(userExts []extension) (*siegfried.Siegfried, error) {
+
+	// Guard against a nil slice.
+	if userExts == nil {
+		userExts = make([]extension, 1)
+	}
+
+	validExts := guardSigs(userExts)
+
+	opts := []config.Option{}
+	if validExts == nil || len(validExts) == 0 {
+		log.Println("no valid extension provided, loading roy defaults")
+		opts = append(opts,
+			config.SetDetails(
+				fmt.Sprintf("%s; %s; Container: %s",
+					signatureDetails,
+					signatureFileVersion,
+					containerFileVersion,
+				),
+			),
+		)
+		return newSF([]byte(container), []byte(droid), nil, opts)
+	}
+
+	opts = append(opts,
+		config.SetDetails(
+			fmt.Sprintf("%s; %s; Container: %s; Extension: %s",
+				signatureDetails,
+				signatureFileVersion,
+				containerFileVersion,
+				makeFname(userExts),
+			),
+		),
+	)
+
+	// Combine userExts into a new slice for processing by Roy.
+	exts := []pronom.Exts{}
+	for _, ext := range userExts {
+		newExt := pronom.Exts{}
+		newExt.ExtData = ext.extData
+		if ext.container {
+			newExt.Container = true
+		}
+		exts = append(exts, newExt)
+	}
+
+	return newSF([]byte(container), []byte(droid), exts, opts)
+
 }
 
 func royWrapper() js.Func {
@@ -316,7 +381,7 @@ func royWrapper() js.Func {
 			reject := x[1]
 			go func() {
 				out := &bytes.Buffer{}
-				out.Write([]byte("Successfully loaded new signature file")) // written to the resolve function...
+				out.Write([]byte("successfully loaded new signature file")) // written to the resolve function...
 				var err error
 				// Even pluralized, use the first arg as a canary.
 				fshx := args[0]
@@ -333,7 +398,7 @@ func royWrapper() js.Func {
 					}
 					path := []string{}
 					name := filepath.Join(append(path, val.Get("name").String())...)
-					log.Println("signature file:", name)
+					log.Println("loading signature file:", name)
 					r := newReader()
 					promise := val.Call("getFile")
 					val, err := await(promise)
@@ -364,8 +429,8 @@ func royWrapper() js.Func {
 }
 
 func main() {
-	x := make([]extension, 2)
-	sf, _ = makeSig(x)
+	var initExt []extension
+	sf, _ = makeSig(initExt)
 	js.Global().Set("identify", sfWrapper())
 	js.Global().Set("sigload", royWrapper())
 	<-make(chan bool)
