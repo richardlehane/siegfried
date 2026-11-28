@@ -268,7 +268,7 @@ func makeFname(userExts []extension) string {
 // This allows us to provide the user with more feedback than if
 // they just throw any old objects at this utility.
 func guardSigs(userExts []extension) []extension {
-	if len(userExts) == 0 {
+	if userExts == nil || len(userExts) == 0 {
 		return nil
 	}
 	validExts := []extension{}
@@ -317,11 +317,6 @@ func newSF(
 }
 
 func makeSig(userExts []extension) (*siegfried.Siegfried, error) {
-
-	// Guard against a nil slice.
-	if userExts == nil {
-		userExts = make([]extension, 1)
-	}
 
 	validExts := guardSigs(userExts)
 
