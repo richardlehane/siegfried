@@ -43,6 +43,21 @@ window.onload = () => {
         }
         );
     });
+    document.getElementById('butRoy').addEventListener('click', () => {
+        window.showOpenFilePicker( { multiple: true } ).then(handles => {
+            const args = getArgs();
+            // handles must exist... undedined if not selected...
+            // can only pick two...
+            args.unshift(handles[1]);
+            args.unshift(handles[0]);
+            sigload.apply(null, args).then(result => {
+                document.getElementById('results').value = result;
+            }).catch((err) => {
+                document.getElementById('results').value = err;
+            });
+        }
+        );
+    });
 }
 
 
